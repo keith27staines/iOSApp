@@ -1,0 +1,93 @@
+//
+//  F4S.xcconfig
+//  f4s-workexperience
+//
+//  Created by Timea Tivadar on 11/14/16.
+//  Copyright © 2016 Chelsea Apps Factory. All rights reserved.
+//
+
+
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
+IPHONEOS_DEPLOYMENT_TARGET = 9.0
+SDKROOT = iphoneos
+VALID_ARCHS = arm64 armv7 armv7s
+
+ONLY_ACTIVE_ARCH_DebugFreshbyte = NO
+ONLY_ACTIVE_ARCH_ReleaseFreshbyte = NO
+ONLY_ACTIVE_ARCH_DebugCAF = NO
+ONLY_ACTIVE_ARCH_ReleaseCAF = NO
+ONLY_ACTIVE_ARCH_DebugF4SLive = NO
+ONLY_ACTIVE_ARCH_ReleaseF4SLive = NO
+ONLY_ACTIVE_ARCH_DebugF4S = NO
+ONLY_ACTIVE_ARCH_ReleaseF4S = NO
+ONLY_ACTIVE_ARCH = $(ONLY_ACTIVE_ARCH_$(CONFIGURATION))
+
+OTHER_SWIFT_FLAGS_DebugFreshbyte = -DSTAGING $(inherited)
+OTHER_SWIFT_FLAGS_ReleaseFreshbyte = -DSTAGING $(inherited)
+OTHER_SWIFT_FLAGS_DebugCAF = -DSTAGING $(inherited)
+OTHER_SWIFT_FLAGS_ReleaseCAF = -DSTAGING $(inherited)
+OTHER_SWIFT_FLAGS_DebugF4Live = -DPRODUCTION $(inherited)
+OTHER_SWIFT_FLAGS_ReleaseF4SLive = -DPRODUCTION $(inherited)
+OTHER_SWIFT_FLAGS_DebugF4S = -DSTAGING $(inherited)
+OTHER_SWIFT_FLAGS_ReleaseF4S = -DSTAGING $(inherited)
+OTHER_SWIFT_FLAGS = $(OTHER_SWIFT_FLAGS_$(CONFIGURATION))
+
+CODE_SIGN_ENTITLEMENTS_DebugFreshbyte = f4s-workexperience/Config/F4SDevelopment.entitlements
+CODE_SIGN_ENTITLEMENTS_ReleaseFreshbyte = f4s-workexperience/Config/F4SDistribution.entitlements
+CODE_SIGN_ENTITLEMENTS_DebugCAF = f4s-workexperience/Config/F4SDevelopment.entitlements
+CODE_SIGN_ENTITLEMENTS_ReleaseCAF = f4s-workexperience/Config/F4SDistribution.entitlements
+CODE_SIGN_ENTITLEMENTS_DebugF4SLive = f4s-workexperience/Config/F4SDevelopment.entitlements
+CODE_SIGN_ENTITLEMENTS_ReleaseF4SLive = f4s-workexperience/Config/F4SDistribution.entitlements
+CODE_SIGN_ENTITLEMENTS_DebugF4S = f4s-workexperience/Config/F4SDevelopment.entitlements
+CODE_SIGN_ENTITLEMENTS_ReleaseF4S = f4s-workexperience/Config/F4SDistribution.entitlements
+CODE_SIGN_ENTITLEMENTS = $(CODE_SIGN_ENTITLEMENTS_$(CONFIGURATION))
+
+PRODUCT_BUNDLE_IDENTIFIER_DebugFreshbyte = com.f4s.workexperience
+PRODUCT_BUNDLE_IDENTIFIER_ReleaseFreshbyte = com.f4s.workexperience
+PRODUCT_BUNDLE_IDENTIFIER_DebugCAF = com.f4s.workexperience.caf
+PRODUCT_BUNDLE_IDENTIFIER_ReleaseCAF = com.f4s.workexperience.caf
+PRODUCT_BUNDLE_IDENTIFIER_DebugF4SLive = com.f4s.workexperience.f4s
+PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4SLive = com.f4s.workexperience.f4s
+PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s
+PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s
+PRODUCT_BUNDLE_IDENTIFIER = $(PRODUCT_BUNDLE_IDENTIFIER_$(CONFIGURATION))
+
+PROVISIONING_PROFILE_SPECIFIER_DebugFreshbyte = WorkExperience Dev
+PROVISIONING_PROFILE_SPECIFIER_ReleaseFreshbyte = WorkExperience AdHoc
+PROVISIONING_PROFILE_SPECIFIER_DebugCAF = F4S Workexperience
+PROVISIONING_PROFILE_SPECIFIER_ReleaseCAF = F4S Workexperience Ad-Hoc
+PROVISIONING_PROFILE_SPECIFIER_DebugF4SLive = Workfinder Dev
+PROVISIONING_PROFILE_SPECIFIER_ReleaseF4SLive = Workfinder AdHoc
+PROVISIONING_PROFILE_SPECIFIER_DebugF4S = Workfinder Dev
+PROVISIONING_PROFILE_SPECIFIER_ReleaseF4S = Workfinder AdHoc
+PROVISIONING_PROFILE_SPECIFIER = $(PROVISIONING_PROFILE_SPECIFIER_$(CONFIGURATION))
+
+DEVELOPMENT_TEAM_DebugFreshbyte = 7EDR5VNNKN
+DEVELOPMENT_TEAM_ReleaseFreshbyte = 7EDR5VNNKN
+DEVELOPMENT_TEAM_DebugCAF = BUJWHE7PHV
+DEVELOPMENT_TEAM_ReleaseCAF = BUJWHE7PHV
+DEVELOPMENT_TEAM_DebugF4SLive = 2ZEM5L3JJT
+DEVELOPMENT_TEAM_ReleaseF4SLive = 2ZEM5L3JJT
+DEVELOPMENT_TEAM_DebugF4S = 2ZEM5L3JJT
+DEVELOPMENT_TEAM_ReleaseF4S = 2ZEM5L3JJT
+DEVELOPMENT_TEAM = $(DEVELOPMENT_TEAM_$(CONFIGURATION))
+
+CODE_SIGN_IDENTITY_DebugFreshbyte = iPhone Developer
+CODE_SIGN_IDENTITY_ReleaseFreshbyte = iPhone Distribution
+CODE_SIGN_IDENTITY_DebugCAF = iPhone Developer
+CODE_SIGN_IDENTITY_ReleaseCAF = iPhone Distribution
+CODE_SIGN_IDENTITY_DebugF4SLive = iPhone Developer
+CODE_SIGN_IDENTITY_ReleaseF4SLive = iPhone Distribution
+CODE_SIGN_IDENTITY_DebugF4S = iPhone Developer
+CODE_SIGN_IDENTITY_ReleaseF4S = iPhone Distribution
+CODE_SIGN_IDENTITY = $(CODE_SIGN_IDENTITY_$(CONFIGURATION))
+
+PRODUCT_BUNDLE_IDENTIFIER_DebugFreshbyte = com.f4s.workexperience
+PRODUCT_BUNDLE_IDENTIFIER_ReleaseFreshbyte = com.f4s.workexperience
+PRODUCT_BUNDLE_IDENTIFIER_DebugCAF = com.f4s.workexperience.caf
+PRODUCT_BUNDLE_IDENTIFIER_ReleaseCAF = com.f4s.workexperience.caf
+PRODUCT_BUNDLE_IDENTIFIER_DebugF4SLive = com.f4s.workexperience.f4s
+PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4SLive = com.f4s.workexperience.f4s
+PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s
+PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s
+PRODUCT_BUNDLE_IDENTIFIER = $(PRODUCT_BUNDLE_IDENTIFIER_$(CONFIGURATION))

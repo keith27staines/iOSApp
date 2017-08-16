@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "0820"
+   version = "1.3">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "40E78E121DD31A86000A3776"
+               BuildableName = "f4s-workexperience.app"
+               BlueprintName = "f4s-workexperience"
+               ReferencedContainer = "container:f4s-workexperience.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "DebugFreshbyte"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "40E78E261DD31A86000A3776"
+               BuildableName = "f4s-workexperienceTests.xctest"
+               BlueprintName = "f4s-workexperienceTests"
+               ReferencedContainer = "container:f4s-workexperience.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "40E78E311DD31A86000A3776"
+               BuildableName = "f4s-workexperienceUITests.xctest"
+               BlueprintName = "f4s-workexperienceUITests"
+               ReferencedContainer = "container:f4s-workexperience.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "40E78E121DD31A86000A3776"
+            BuildableName = "f4s-workexperience.app"
+            BlueprintName = "f4s-workexperience"
+            ReferencedContainer = "container:f4s-workexperience.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+      <AdditionalOptions>
+      </AdditionalOptions>
+   </TestAction>
+   <LaunchAction
+      buildConfiguration = "DebugFreshbyte"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
+      allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "40E78E121DD31A86000A3776"
+            BuildableName = "f4s-workexperience.app"
+            BlueprintName = "f4s-workexperience"
+            ReferencedContainer = "container:f4s-workexperience.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+      <AdditionalOptions>
+      </AdditionalOptions>
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration = "DebugFreshbyte"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "40E78E121DD31A86000A3776"
+            BuildableName = "f4s-workexperience.app"
+            BlueprintName = "f4s-workexperience"
+            ReferencedContainer = "container:f4s-workexperience.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "DebugFreshbyte">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "DebugFreshbyte"
+      revealArchiveInOrganizer = "YES">
+   </ArchiveAction>
+</Scheme>

@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  f4s-workexperience
+
+  Created by iOS FRB on 11/11/16.
+  Copyright © 2016 Chelsea Apps Factory. All rights reserved.
+*/
+
+"Helping you find work" = "Aider à trouver du travail";
+"Enable location to find opportunities" = "Activer l'emplacement pour trouver des opportunités";
+"Enter location manually" = "Entrez l'emplacement manuellement";

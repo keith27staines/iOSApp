@@ -1,0 +1,44 @@
+/* 
+  Localizable.strings
+  f4s-workexperience
+
+  Created by iOS FRB on 11/11/16.
+  Copyright © 2016 Chelsea Apps Factory. All rights reserved.
+*/
+
+//Onboarding
+"Helping you find work" = "Helping you find work";
+"Enable location to find opportunities" = "Enable location to find opportunities";
+"Enter location manually" = "Enter location manually";
+
+//CoverLetter
+"Edit Cover Letter" = "Edit Cover Letter";
+"Personal attributes" = "Personal attributes";
+"Job role" = "Job role";
+"Available from" = "Available from";
+"Available until" = "Available until";
+"Employment skills" = "Employment skills";
+"Update Cover Letter" = "Update Cover Letter";
+"Edit Cover Letter" = "Edit Cover Letter";
+
+"See accounts" = "See accounts";
+"See contacts" = "See contacts";
+"Apply" = "Apply";
+"Applied" = "Applied";
+>>>>>>> origin/dev
+//MapView
+"We cannot find the location you entered. Please try again" = "We cannot find the location you entered. Please try again";
+"Search" = "Search";
+"Location Not Found" = "Location Not Found";
+"Please enable location services." = "Please enable location services.";
+"Settings" = "Settings";
+"Cancel" = "Cancel";
+"You appear to be offline at the moment. Please try again later when you have a working internet connection." = "You appear to be offline at the moment. Please try again later when you have a working internet connection.";
+"No data connectivity" = "No data connectivity";
+
+"Edit Cover Letter" = "Edit Cover Letter";
+
+//Custom Menu
+"About" = "About";
+"FAQs" = "FAQs";
+"Ts & Cs + Privacy Policy";

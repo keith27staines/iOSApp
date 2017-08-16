@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Rate Placement View Controller-->
+        <scene sceneID="eox-DB-Nrx">
+            <objects>
+                <viewController storyboardIdentifier="RatePlacementCtrl" useStoryboardIdentifierAsRestorationIdentifier="YES" id="m9b-GB-AIF" customClass="RatePlacementViewController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jLH-KK-Nrw"/>
+                        <viewControllerLayoutGuide type="bottom" id="3WL-lD-lW5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nbZ-SH-WNF">
+                        <rect key="frame" x="0.0" y="0.0" width="335" height="406"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yellowQuestionMark" translatesAutoresizingMaskIntoConstraints="NO" id="tP8-3w-yVb">
+                                <rect key="frame" x="122.5" y="23" width="90" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="D1P-5f-ENM"/>
+                                    <constraint firstAttribute="width" constant="90" id="cw6-yf-Jj7"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="How was your work experience at Raspberry Pi?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rjo-dr-3M4">
+                                <rect key="frame" x="35" y="148" width="265" height="43"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nbe-sp-8Ly">
+                                <rect key="frame" x="30" y="300" width="275" height="60"/>
+                                <color key="backgroundColor" red="0.21176470589999999" green="0.64313725489999995" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="AEL-Uu-OnH"/>
+                                </constraints>
+                                <state key="normal" title="Submit">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="submitButtonTouched:" destination="m9b-GB-AIF" eventType="touchUpInside" id="BHv-dt-EtB"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="esA-BJ-UlS" customClass="RatingControl" customModule="f4s_workexperience" customModuleProvider="target">
+                                <rect key="frame" x="38" y="216" width="260" height="44"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="starCount">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="starSize">
+                                        <size key="value" width="44" height="44"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Rjo-dr-3M4" secondAttribute="trailing" constant="35" id="026-Sa-ti9"/>
+                            <constraint firstItem="nbe-sp-8Ly" firstAttribute="top" secondItem="esA-BJ-UlS" secondAttribute="bottom" constant="40" id="31Z-F8-lSa"/>
+                            <constraint firstItem="esA-BJ-UlS" firstAttribute="top" secondItem="Rjo-dr-3M4" secondAttribute="bottom" constant="25" id="9ed-uP-kPW"/>
+                            <constraint firstItem="Rjo-dr-3M4" firstAttribute="leading" secondItem="nbZ-SH-WNF" secondAttribute="leading" constant="35" id="9fP-uC-Wl0"/>
+                            <constraint firstAttribute="trailing" secondItem="nbe-sp-8Ly" secondAttribute="trailing" constant="30" id="Hvw-WI-ai6"/>
+                            <constraint firstItem="tP8-3w-yVb" firstAttribute="top" secondItem="jLH-KK-Nrw" secondAttribute="bottom" constant="23" id="RUj-sf-VOf"/>
+                            <constraint firstItem="Rjo-dr-3M4" firstAttribute="top" secondItem="tP8-3w-yVb" secondAttribute="bottom" constant="35" id="RyO-Cd-587"/>
+                            <constraint firstItem="tP8-3w-yVb" firstAttribute="centerX" secondItem="nbZ-SH-WNF" secondAttribute="centerX" id="hQD-0t-QJC"/>
+                            <constraint firstItem="esA-BJ-UlS" firstAttribute="centerX" secondItem="Rjo-dr-3M4" secondAttribute="centerX" id="iDW-28-329"/>
+                            <constraint firstItem="nbe-sp-8Ly" firstAttribute="leading" secondItem="nbZ-SH-WNF" secondAttribute="leading" constant="30" id="lkh-fn-jeU"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="335" height="406"/>
+                    <connections>
+                        <outlet property="questionImageViewTopConstraint" destination="RUj-sf-VOf" id="p7m-I3-xPW"/>
+                        <outlet property="questionLabel" destination="Rjo-dr-3M4" id="kPj-vQ-JyN"/>
+                        <outlet property="questionLabelTopConstraint" destination="RyO-Cd-587" id="L1W-Uo-Dfh"/>
+                        <outlet property="ratinControlStackViewTopConstraint" destination="9ed-uP-kPW" id="G8S-07-lQq"/>
+                        <outlet property="ratingControlStackView" destination="esA-BJ-UlS" id="hjT-sj-ESd"/>
+                        <outlet property="submitButton" destination="nbe-sp-8Ly" id="GVm-01-cFA"/>
+                        <outlet property="submitButtonTopConstraint" destination="31Z-F8-lSa" id="6Dm-aS-ohk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AFi-L8-gT6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="132" y="88.15592203898052"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="yellowQuestionMark" width="90" height="90"/>
+    </resources>
+</document>

@@ -1,0 +1,64 @@
+PODS:
+  - Alamofire (4.0.1)
+  - GoogleMaps (2.1.1):
+    - GoogleMaps/Maps (= 2.1.1)
+  - GoogleMaps/Base (2.1.1)
+  - GoogleMaps/Maps (2.1.1):
+    - GoogleMaps/Base
+  - GooglePlaces (2.1.1):
+    - GoogleMaps/Base (= 2.1.1)
+  - GRMustache.swift (2.0.0)
+  - JSQMessagesViewController (7.3.4)
+  - KeychainSwift (7.0.0)
+  - ReachabilitySwift (3)
+  - SQLite.swift (0.11.0):
+    - SQLite.swift/standard (= 0.11.0)
+  - SQLite.swift/standard (0.11.0)
+  - SwiftyJSON (2.3.2)
+  - XCGLogger (4.0.0):
+    - XCGLogger/Core (= 4.0.0)
+  - XCGLogger/Core (4.0.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - GoogleMaps
+  - GooglePlaces
+  - GRMustache.swift
+  - JSQMessagesViewController (from `https://github.com/jessesquires/JSQMessagesViewController.git`, branch `develop`)
+  - KeychainSwift (~> 7.0)
+  - ReachabilitySwift (~> 3)
+  - SQLite.swift
+  - SwiftyJSON (from `https://github.com/BaiduHiDeviOS/SwiftyJSON.git`, branch `swift3`)
+  - XCGLogger (~> 4.0.0)
+
+EXTERNAL SOURCES:
+  JSQMessagesViewController:
+    :branch: develop
+    :git: https://github.com/jessesquires/JSQMessagesViewController.git
+  SwiftyJSON:
+    :branch: swift3
+    :git: https://github.com/BaiduHiDeviOS/SwiftyJSON.git
+
+CHECKOUT OPTIONS:
+  JSQMessagesViewController:
+    :commit: ccc50c6fa1d10ab2ad32a446f878d0b98507981c
+    :git: https://github.com/jessesquires/JSQMessagesViewController.git
+  SwiftyJSON:
+    :commit: de5dc3b1b421805769590d331178551bbb0e5733
+    :git: https://github.com/BaiduHiDeviOS/SwiftyJSON.git
+
+SPEC CHECKSUMS:
+  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  GoogleMaps: a5b5bbe47734e2443bde781a6aa64e69fdb6d785
+  GooglePlaces: 35636d86e5020cba3856eb988c09a5491de0a65a
+  GRMustache.swift: 8a547c12bea16052071b2b540af83d770075f0eb
+  JSQMessagesViewController: c11b9e77372ab72c45c67311f6da7342e32df1e8
+  KeychainSwift: b6947435dd78cc442c64a84ae648dd0e871cf448
+  ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
+  SQLite.swift: 9a26273607d3077a2e5a8d33486e9989f8404c7d
+  SwiftyJSON: 6118fb49d7519c4d31a0c1f3d5af936e9047b556
+  XCGLogger: 38063ea89b4c8b23232d18efd2e12eb0005f3ea4
+
+PODFILE CHECKSUM: a8bd4c85d37552920de0cf987476ae0a8212bc13
+
+COCOAPODS: 1.1.1
