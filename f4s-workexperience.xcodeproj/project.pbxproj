@@ -149,6 +149,7 @@
 		D54E10071E044BC100A51560 /* ProcessedMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54E10061E044BC100A51560 /* ProcessedMessagesViewController.swift */; };
 		D5E9EBE81DD60AB300BD796E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5E9EBEA1DD60AB300BD796E /* Localizable.strings */; };
 		D5E9EC021DDD9F9000BD796E /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E9EC011DDD9F9000BD796E /* GradientView.swift */; };
+		FCC5EBB61F449C310085CE15 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FCC5EBB51F449C310085CE15 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -381,6 +382,7 @@
 		D94A1EA172718BD684E3952E /* Pods-f4s-workexperienceTests.debugf4slive.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperienceTests.debugf4slive.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperienceTests/Pods-f4s-workexperienceTests.debugf4slive.xcconfig"; sourceTree = "<group>"; };
 		EAB349053815D2C67FF647D4 /* Pods-f4s-workexperience.releasef4sstaging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperience.releasef4sstaging.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperience/Pods-f4s-workexperience.releasef4sstaging.xcconfig"; sourceTree = "<group>"; };
 		FA2A009238BF747D22E97060 /* Pods-f4s-workexperienceTests.releasef4sstaging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperienceTests.releasef4sstaging.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperienceTests/Pods-f4s-workexperienceTests.releasef4sstaging.xcconfig"; sourceTree = "<group>"; };
+		FCC5EBB51F449C310085CE15 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -622,6 +624,7 @@
 		40E78E0A1DD31A86000A3776 = {
 			isa = PBXGroup;
 			children = (
+				FCC5EBB51F449C310085CE15 /* README.md */,
 				40E78E151DD31A86000A3776 /* f4s-workexperience */,
 				40E78E2A1DD31A86000A3776 /* f4s-workexperienceTests */,
 				40E78E351DD31A86000A3776 /* f4s-workexperienceUITests */,
@@ -1104,7 +1107,7 @@
 				TargetAttributes = {
 					40E78E121DD31A86000A3776 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 2ZEM5L3JJT;
+						DevelopmentTeam = BUJWHE7PHV;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -1117,13 +1120,13 @@
 					};
 					40E78E261DD31A86000A3776 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 2ZEM5L3JJT;
+						DevelopmentTeam = BUJWHE7PHV;
 						ProvisioningStyle = Manual;
 						TestTargetID = 40E78E121DD31A86000A3776;
 					};
 					40E78E311DD31A86000A3776 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 7EDR5VNNKN;
+						DevelopmentTeam = BUJWHE7PHV;
 						ProvisioningStyle = Manual;
 						TestTargetID = 40E78E121DD31A86000A3776;
 					};
@@ -1164,6 +1167,7 @@
 				401634C81E0A9F73000161FA /* NotificationView.storyboard in Resources */,
 				40E78E211DD31A86000A3776 /* LaunchScreen.storyboard in Resources */,
 				40A28CB71E1F96A60077D490 /* RatePlacement.storyboard in Resources */,
+				FCC5EBB61F449C310085CE15 /* README.md in Resources */,
 				204C89651DF5F03F00D8493A /* EditFooter.xib in Resources */,
 				204C89641DF5F03F00D8493A /* EditCoverLetter.storyboard in Resources */,
 				2037B0B41DEC87F200A9DE3E /* CoverLetter.storyboard in Resources */,
