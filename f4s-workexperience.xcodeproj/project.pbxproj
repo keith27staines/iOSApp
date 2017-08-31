@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -1081,9 +1081,10 @@
 		40E78E0B1DD31A86000A3776 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = F4S;
 				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0820;
-				ORGANIZATIONNAME = freshbyte;
+				ORGANIZATIONNAME = Founders4Schools;
 				TargetAttributes = {
 					40E78E121DD31A86000A3776 = {
 						CreatedOnToolsVersion = 8.1;
@@ -1113,7 +1114,7 @@
 				};
 			};
 			buildConfigurationList = 40E78E0E1DD31A86000A3776 /* Build configuration list for PBXProject "f4s-workexperience" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
