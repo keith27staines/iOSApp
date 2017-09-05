@@ -26,34 +26,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
 
-        if UserDefaults.standard.object(forKey: UserDefaultsKeys.userHasAccount) == nil || !UserDefaults.standard.bool(forKey: UserDefaultsKeys.userHasAccount) {
+        if UserService.sharedInstance.hasAccount() {
+            onUserConfirmedToExist(application: application)
+        } else {
             // create new user if just installed
-            UserService.sharedInstance.handleUserCreation(completed: { succedeed in
-                if succedeed {
-                    // download latest database
-                    DatabaseService.sharedInstance.getLatestDatabase()
+            UserService.sharedInstance.createUser(completed: { succeeded in
+                if succeeded {
+                    self.onUserConfirmedToExist(application: application)
                 } else {
                     log.debug("Couldn't create a user")
                 }
             })
-        } else {
-            // download latest database
-            DatabaseService.sharedInstance.getLatestDatabase()
-        }
-
-        if application.isRegisteredForRemoteNotifications || (application.currentUserNotificationSettings?.types.contains(.alert))! {
-            application.registerForRemoteNotifications()
-        } else {
-            UserService.sharedInstance.enablePushNotificationForUser(withDeviceToken: "false", putCompleted: { _, result in
-                print(result)
-            })
-        }
-
-        if let window = self.window {
-            CustomNavigationHelper.sharedInstance.moveToMainCtrl(window: window)
         }
 
         return true
+    }
+    
+    func onUserConfirmedToExist(application: UIApplication) {
+        registerApplicationForRemoteNotifications(application)
+        DatabaseService.sharedInstance.getLatestDatabase()
+        if let window = self.window {
+            CustomNavigationHelper.sharedInstance.moveToMainCtrl(window: window)
+        }
     }
 
     func applicationWillResignActive(_: UIApplication) {
@@ -68,13 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-        if application.isRegisteredForRemoteNotifications || (application.currentUserNotificationSettings?.types.contains(.alert))! {
-            application.registerForRemoteNotifications()
-        } else {
-            UserService.sharedInstance.enablePushNotificationForUser(withDeviceToken: "false", putCompleted: { _, result in
-                print(result)
-            })
-        }
+        registerApplicationForRemoteNotifications(application)
         if let window = self.window {
             NotificationHelper.sharedInstance.updateToolbarButton(window: window)
         }
@@ -193,6 +181,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
                 abort()
             }
+        }
+    }
+}
+
+// Helpers
+extension AppDelegate {
+    func registerApplicationForRemoteNotifications(_ application: UIApplication) {
+        if application.isRegisteredForRemoteNotifications || (application.currentUserNotificationSettings?.types.contains(.alert))! {
+            application.registerForRemoteNotifications()
+        } else {
+            UserService.sharedInstance.enablePushNotificationForUser(withDeviceToken: "false", putCompleted: { _, result in
+                print(result)
+            })
         }
     }
 }

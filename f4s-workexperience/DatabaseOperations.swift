@@ -252,23 +252,31 @@ class DatabaseOperations {
             var companyList: [Company] = []
             let selectCompaniesNearCenterQuery: String = "SELECT *, ((((longitude + 9) - (\(longitude) + 9)) * ((longitude + 9) - (\(longitude) + 9))) + ((latitude - \(latitude)) * (latitude - \(latitude)))) AS distance FROM businesses_company WHERE latitude NOTNULL AND longitude NOTNULL AND longitude between (\(longitude) - 0.072463) AND (\(longitude) + 0.072463) AND latitude between (\(latitude) - 0.026315789) AND (\(latitude) + 0.026315789) GROUP BY latitude, longitude ORDER BY distance ASC limit 30"
 
-            var selectCompaniesWithTheSameCoordinates: String = "SELECT * from businesses_company where latitude NOTNULL AND longitude NOTNULL AND ("
-
-            var index: Int = 0
-
             let stmt = try db.prepare(selectCompaniesNearCenterQuery)
+            
+            // There is a possibility that we have missed some companies within the required area if they are located at the same coordinates as companies returned in the first 30 list. We add those on here
+            var selectCompaniesWithTheSameCoordinates: String? = nil
+            var index: Int = 0
+            
             for row in stmt {
                 let comp = DatabaseOperations.sharedInstance.getCompanyFromRowAndStatement(row: row, statement: stmt)
                 if index != 0 {
-                    selectCompaniesWithTheSameCoordinates.append("OR")
+                    selectCompaniesWithTheSameCoordinates!.append("OR")
                 } else {
+                    selectCompaniesWithTheSameCoordinates = "SELECT * from businesses_company where latitude NOTNULL AND longitude NOTNULL AND ("
                     index += 1
                 }
-                selectCompaniesWithTheSameCoordinates.append("(latitude = \(comp.latitude) AND longitude = \(comp.longitude))")
+                selectCompaniesWithTheSameCoordinates!.append("(latitude = \(comp.latitude) AND longitude = \(comp.longitude))")
             }
-            selectCompaniesWithTheSameCoordinates.append(")")
+            
+            guard selectCompaniesWithTheSameCoordinates != nil else {
+                completed([])
+                return
+            }
+            
+            selectCompaniesWithTheSameCoordinates!.append(")")
 
-            let allCompaniesStmt = try db.prepare(selectCompaniesWithTheSameCoordinates)
+            let allCompaniesStmt = try db.prepare(selectCompaniesWithTheSameCoordinates!)
 
             for row in allCompaniesStmt {
                 let comp = DatabaseOperations.sharedInstance.getCompanyFromRowAndStatement(row: row, statement: stmt)

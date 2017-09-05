@@ -28,7 +28,7 @@ class DatabaseService: ApiBaseService {
 
     func getLatestDatabase() {
         DispatchQueue.global().async {
-            self.getDatabase {
+            self.getDatabaseMetadata {
                 _, msg in
                 switch msg
                 {
@@ -64,7 +64,7 @@ class DatabaseService: ApiBaseService {
         }
     }
 
-    func getDatabase(completed: @escaping (_ succeeded: Bool, _ msg: Result<CompanyDatabaseMeta>) -> Void) {
+    func getDatabaseMetadata(completed: @escaping (_ succeeded: Bool, _ msg: Result<CompanyDatabaseMeta>) -> Void) {
         let url = ApiConstants.companyDatabaseUrl
         get(url) {
             (_: Bool, msg: Result<JSON>) in

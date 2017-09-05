@@ -20,9 +20,16 @@ class UserService: ApiBaseService {
     }
 
     // MARK: - calls
-    func createUser(userId: String = "1", postCompleted: @escaping (_ succeeded: Bool, _ msg: Result<String>) -> Void) {
+    
+    func hasAccount() -> Bool {
+        return UserDefaults.standard.object(forKey: UserDefaultsKeys.userHasAccount) != nil && UserDefaults.standard.bool(forKey: UserDefaultsKeys.userHasAccount)
+    }
+    
+    var vendorID: String { return UIDevice.current.identifierForVendor!.uuidString }
+    
+    func createUserOnServer(postCompleted: @escaping (_ succeeded: Bool, _ msg: Result<String>) -> Void) {
         let url = ApiConstants.userProfileUrl
-        let params: Parameters = ["vendor_uuid": userId] as [String: Any]
+        let params: Parameters = ["vendor_uuid": vendorID] as [String: Any]
         post(params, url: url) {
             _, msg in
             switch msg
@@ -104,39 +111,41 @@ class UserService: ApiBaseService {
 
     // MARK: - operations
 
-    func handleUserCreation(retryCount: Int = 0, completed: @escaping (_ succeeded: Bool) -> Void) {
-        if UserDefaults.standard.object(forKey: UserDefaultsKeys.userHasAccount) == nil || !UserDefaults.standard.bool(forKey: UserDefaultsKeys.userHasAccount) {
+    func createUser(retryCount: Int = 0, completed: @escaping (_ succeeded: Bool) -> Void) {
+        if !UserService.sharedInstance.hasAccount() {
             // create new user
-            let randomUuid = UserService.sharedInstance.generateRandomUuid()
             DispatchQueue.global().async {
-                UserService.sharedInstance.createUser(userId: randomUuid, postCompleted: {
+                UserService.sharedInstance.createUserOnServer(postCompleted: {
                     _, result in
                     switch result
                     {
                     case let .value(boxedValue):
-                        log.debug("profile uuid: \(boxedValue.value)")
+                        log.debug("user created ok. Profile uuid from wex is: \(boxedValue.value)")
                         let keychain = KeychainSwift()
                         keychain.set(boxedValue.value, forKey: UserDefaultsKeys.userUuid)
-                        keychain.set(randomUuid, forKey: UserDefaultsKeys.vendorUuid)
                         UserDefaults.standard.set(true, forKey: UserDefaultsKeys.userHasAccount)
                         completed(true)
                         break
                     case let .error(error):
-                        log.debug(error)
                         if retryCount < 2 {
-                            UserService.sharedInstance.handleUserCreation(retryCount: retryCount + 1, completed: {
+                            log.debug("Failed to create user on retry \(retryCount).\n Error was: \(error)")
+                            UserService.sharedInstance.createUser(retryCount: retryCount + 1, completed: {
                                 _ in
                                 completed(false)
                             })
+                        } else {
+                            log.debug("Failed to create user after all allowed retries. Error was: \(error)")
                         }
                         break
                     case let .deffinedError(error):
-                        log.debug(error)
                         if retryCount < 2 {
-                            UserService.sharedInstance.handleUserCreation(retryCount: retryCount + 1, completed: {
+                            log.debug("Failed to create user on retry \(retryCount).\n Error was: \(error)")
+                            UserService.sharedInstance.createUser(retryCount: retryCount + 1, completed: {
                                 _ in
                                 completed(false)
                             })
+                        } else {
+                            log.debug("Failed to create user after all allowed retries. Error was: \(error)")
                         }
                         break
                     }

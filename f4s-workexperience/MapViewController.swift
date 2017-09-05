@@ -574,7 +574,7 @@ extension MapViewController {
     
     func getCompaniesInLocationWithInterests(coordinates_start: CLLocationCoordinate2D, coordinates_end: CLLocationCoordinate2D, isNearLocation: Bool, shouldReposition: Bool = true, isNearMyLocation: Bool = false) {
         let interestList = InterestDBOperations.sharedInstance.getInterestForCurrentUser()
-        
+        print("Calling getCompaniesInLocationWithInterests")
         if interestList.count > 0 {
             if isNearLocation {
                 DatabaseOperations.sharedInstance.getCompaniesNearLocationFirstThenFilter(longitude: coordinates_start.longitude, latitude: coordinates_start.latitude, interests: interestList, completed: { companies in
@@ -867,6 +867,12 @@ extension MapViewController: CLLocationManagerDelegate {
         if !didGetCompaniesNearUser {
             getCompaniesInLocationWithInterests(coordinates_start: myLocation.coordinate, coordinates_end: myLocation.coordinate, isNearLocation: false, isNearMyLocation: true)
         }
+    }
+}
+
+extension CLLocation {
+    func hasSameCoordinates(_ location: CLLocation) -> Bool {
+        return location.coordinate.latitude == self.coordinate.latitude && location.coordinate.longitude == location.coordinate.longitude
     }
 }
 
