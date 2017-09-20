@@ -258,7 +258,7 @@ extension MapViewController {
                 strongSelf.placesClient?.autocompleteQuery(text, bounds: nil, filter: strongSelf.autoCompleteFilter, callback: { results, error in
                     guard error == nil,
                         let strongResults = results else {
-                            print("Autocomplete error \(error)")
+                            print("Autocomplete error \(error!)")
                             return
                     }
                     

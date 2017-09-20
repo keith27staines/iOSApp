@@ -21,7 +21,7 @@ class TemplateChoiceDB: NSManagedObject {
     }
 
     func getValueList() -> [String] {
-        guard let data = self.value as? Data, let stringData = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String] else {
+        guard let data = self.value as Data?, let stringData = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String] else {
             return []
         }
         return stringData

@@ -244,7 +244,6 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         let placement = self.userPlacements[indexPath.row]
-        print("selected company: \(self.companies.filter({ $0.uuid == placement.companyUuid.replacingOccurrences(of: "-", with: "") }).first?.name)")
         if let company = self.companies.filter({ $0.uuid == placement.companyUuid.replacingOccurrences(of: "-", with: "") }).first, !placement.threadUuid.isEmpty {
             CustomNavigationHelper.sharedInstance.moveToMessageController(parentCtrl: self, threadUuid: placement.threadUuid, company: company, placements: self.userPlacements, companies: self.companies)
         }

@@ -76,19 +76,19 @@ public struct DrawerVisualState {
             var maxDrawerWidth: CGFloat = 0.0
             var xOffset: CGFloat
             var angle: CGFloat = 0.0
-
+            let piBy2 = CGFloat.pi / 2.0
             if drawerSide == .left {
                 sideDrawerViewController = drawerController.leftDrawerViewController
                 anchorPoint = CGPoint(x: 1.0, y: 0.5)
                 maxDrawerWidth = max(drawerController.maximumLeftDrawerWidth, drawerController.visibleLeftDrawerWidth)
                 xOffset = -(maxDrawerWidth / 2) + maxDrawerWidth * percentVisible
-                angle = -CGFloat(M_PI_2) + percentVisible * CGFloat(M_PI_2)
+                angle = -piBy2 + percentVisible * piBy2
             } else {
                 sideDrawerViewController = drawerController.rightDrawerViewController
                 anchorPoint = CGPoint(x: 0.0, y: 0.5)
                 maxDrawerWidth = max(drawerController.maximumRightDrawerWidth, drawerController.visibleRightDrawerWidth)
                 xOffset = (maxDrawerWidth / 2) - maxDrawerWidth * percentVisible
-                angle = CGFloat(M_PI_2) - percentVisible * CGFloat(M_PI_2)
+                angle = piBy2 - percentVisible * piBy2
             }
 
             sideDrawerViewController?.view.layer.anchorPoint = anchorPoint

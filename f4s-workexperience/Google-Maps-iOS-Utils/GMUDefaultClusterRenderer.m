@@ -254,6 +254,8 @@ static const double kGMUAnimationDuration = 0.5;  // seconds.
           [self overlappingClusterForCluster:cluster itemMap:_itemToOldClusterMap];
       animated = fromCluster != nil;
       fromPosition = fromCluster.position;
+    } else {
+        fromPosition = cluster.position;
     }
 
     UIImage *icon = [_clusterIconGenerator iconForSize:cluster.count];
@@ -273,6 +275,8 @@ static const double kGMUAnimationDuration = 0.5;  // seconds.
         id<GMUCluster> fromCluster = [_itemToOldClusterMap objectForKey:key];
         shouldAnimate = fromCluster != nil;
         fromPosition = fromCluster.position;
+      } else {
+          fromPosition = item.position;
       }
 
       GMSMarker *marker = [self markerWithPosition:item.position
