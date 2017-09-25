@@ -112,59 +112,54 @@ class UserService: ApiBaseService {
     // MARK: - operations
 
     func createUser(retryCount: Int = 0, completed: @escaping (_ succeeded: Bool) -> Void) {
-        if !UserService.sharedInstance.hasAccount() {
-            // create new user
-            DispatchQueue.global().async {
-                UserService.sharedInstance.createUserOnServer(postCompleted: {
-                    _, result in
-                    switch result
-                    {
-                    case let .value(boxedValue):
-                        log.debug("user created ok. Profile uuid from wex is: \(boxedValue.value)")
-                        let keychain = KeychainSwift()
-                        keychain.set(boxedValue.value, forKey: UserDefaultsKeys.userUuid)
-                        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.userHasAccount)
-                        completed(true)
-                        break
-                    case let .error(error):
-                        if retryCount < 2 {
-                            log.debug("Failed to create user on retry \(retryCount).\n Error was: \(error)")
-                            UserService.sharedInstance.createUser(retryCount: retryCount + 1, completed: {
-                                _ in
-                                completed(false)
-                            })
-                        } else {
-                            log.debug("Failed to create user after all allowed retries. Error was: \(error)")
-                        }
-                        break
-                    case let .deffinedError(error):
-                        if retryCount < 2 {
-                            log.debug("Failed to create user on retry \(retryCount).\n Error was: \(error)")
-                            UserService.sharedInstance.createUser(retryCount: retryCount + 1, completed: {
-                                _ in
-                                completed(false)
-                            })
-                        } else {
-                            log.debug("Failed to create user after all allowed retries. Error was: \(error)")
-                        }
-                        break
+        guard !UserService.sharedInstance.hasAccount() else {
+            // user has already been created
+            return
+        }
+        // create new user
+        DispatchQueue.global().async {
+            UserService.sharedInstance.createUserOnServer(postCompleted: {
+                _, result in
+                switch result
+                {
+                case let .value(boxedValue):
+                    log.debug("user created ok. Profile uuid from wex is: \(boxedValue.value)")
+                    let keychain = KeychainSwift()
+                    keychain.set(boxedValue.value, forKey: UserDefaultsKeys.userUuid)
+                    UserDefaults.standard.set(true, forKey: UserDefaultsKeys.userHasAccount)
+                    completed(true)
+                    break
+                case let .error(error):
+                    if retryCount < 2 {
+                        log.debug("Failed to create user on retry \(retryCount).\n Error was: \(error)")
+                        UserService.sharedInstance.createUser(retryCount: retryCount + 1, completed: {
+                            _ in
+                            completed(false)
+                        })
+                    } else {
+                        log.debug("Failed to create user after all allowed retries. Error was: \(error)")
                     }
-                })
-            }
+                    break
+                case let .deffinedError(error):
+                    if retryCount < 2 {
+                        log.debug("Failed to create user on retry \(retryCount).\n Error was: \(error)")
+                        UserService.sharedInstance.createUser(retryCount: retryCount + 1, completed: {
+                            _ in
+                            completed(false)
+                        })
+                    } else {
+                        log.debug("Failed to create user after all allowed retries. Error was: \(error)")
+                    }
+                    break
+                }
+            })
         }
     }
 
     func enablePushNotificationForUser(withDeviceToken: String, putCompleted: @escaping (_ succeeded: Bool, _ msg: Result<String>) -> Void) {
 
-        let keychain = KeychainSwift()
-        var currentUserUuid: String = ""
-
-        if let vendorUuid = keychain.get(UserDefaultsKeys.vendorUuid) {
-            currentUserUuid = vendorUuid
-        }
-
-        let url = ApiConstants.userProfileUrl + "/" + currentUserUuid
-
+        let vendorId: String = UserService.sharedInstance.vendorID
+        let url = ApiConstants.userProfileUrl + "/" + vendorId
         let params: Parameters = ["push_token": withDeviceToken] as [String: Any]
 
         put(params, url: url) {
