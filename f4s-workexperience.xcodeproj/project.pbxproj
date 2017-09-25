@@ -129,7 +129,6 @@
 		40E78E811DD32BF4000A3776 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E7D1DD32BF4000A3776 /* TableViewCell.swift */; };
 		40E78E831DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E821DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift */; };
 		40E78E891DD32C3C000A3776 /* ExtensionsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E841DD32C3C000A3776 /* ExtensionsHelper.swift */; };
-		40E78E8B1DD32C3C000A3776 /* KeyboardNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E861DD32C3C000A3776 /* KeyboardNotifications.swift */; };
 		40E78E8C1DD32C3C000A3776 /* LoadingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E871DD32C3C000A3776 /* LoadingOverlay.swift */; };
 		40E78E8D1DD32C3C000A3776 /* MessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E881DD32C3C000A3776 /* MessageHandler.swift */; };
 		40E78E8F1DD32C4E000A3776 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E8E1DD32C4E000A3776 /* Settings.bundle */; };
@@ -151,6 +150,7 @@
 		D5E9EC021DDD9F9000BD796E /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E9EC011DDD9F9000BD796E /* GradientView.swift */; };
 		FC681C001F57473D0077BECA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFE1F57473D0077BECA /* Podfile */; };
 		FC681C011F57473D0077BECA /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFF1F57473D0077BECA /* Podfile.lock */; };
+		FCB6D9361F75056100B8C268 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCB6D9351F75056000B8C268 /* Branding.plist */; };
 		FCC5EBB61F449C310085CE15 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FCC5EBB51F449C310085CE15 /* README.md */; };
 /* End PBXBuildFile section */
 
@@ -331,7 +331,6 @@
 		40E78E7D1DD32BF4000A3776 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewCell.swift; path = Menu/MenuTableViewHelpers/TableViewCell.swift; sourceTree = "<group>"; };
 		40E78E821DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExampleDrawerVisualStateManager.swift; path = Menu/VisualStateManager/ExampleDrawerVisualStateManager.swift; sourceTree = "<group>"; };
 		40E78E841DD32C3C000A3776 /* ExtensionsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsHelper.swift; sourceTree = "<group>"; };
-		40E78E861DD32C3C000A3776 /* KeyboardNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardNotifications.swift; sourceTree = "<group>"; };
 		40E78E871DD32C3C000A3776 /* LoadingOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingOverlay.swift; sourceTree = "<group>"; };
 		40E78E881DD32C3C000A3776 /* MessageHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageHandler.swift; sourceTree = "<group>"; };
 		40E78E8E1DD32C4E000A3776 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -370,8 +369,9 @@
 		EC68C46BEC140D8D307D851A /* Pods-f4s-workexperienceTests.releasecaf.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperienceTests.releasecaf.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperienceTests/Pods-f4s-workexperienceTests.releasecaf.xcconfig"; sourceTree = "<group>"; };
 		EF342E9F354D697386AFC80D /* Pods_f4s_workexperienceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_f4s_workexperienceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F099185A6CFD493B891494B1 /* Pods-f4s-workexperienceUITests.releasef4s.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperienceUITests.releasef4s.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperienceUITests/Pods-f4s-workexperienceUITests.releasef4s.xcconfig"; sourceTree = "<group>"; };
-		FC681BFE1F57473D0077BECA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		FC681BFE1F57473D0077BECA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		FC681BFF1F57473D0077BECA /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
+		FCB6D9351F75056000B8C268 /* Branding.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
 		FCC5EBB51F449C310085CE15 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FDE6CAD61FAB3CA16090531A /* Pods-f4s-workexperienceUITests.debugf4s.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperienceUITests.debugf4s.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperienceUITests/Pods-f4s-workexperienceUITests.debugf4s.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -561,6 +561,7 @@
 		40E78E0A1DD31A86000A3776 = {
 			isa = PBXGroup;
 			children = (
+				FCB6D9351F75056000B8C268 /* Branding.plist */,
 				FC681BFE1F57473D0077BECA /* Podfile */,
 				FC681BFF1F57473D0077BECA /* Podfile.lock */,
 				FCC5EBB51F449C310085CE15 /* README.md */,
@@ -759,7 +760,6 @@
 				40C1A4F61DDF5A65000F80AA /* GoogleMapsUtils */,
 				40E78E841DD32C3C000A3776 /* ExtensionsHelper.swift */,
 				206F8F891E1E48120024937B /* OptionLabel.swift */,
-				40E78E861DD32C3C000A3776 /* KeyboardNotifications.swift */,
 				40E78E871DD32C3C000A3776 /* LoadingOverlay.swift */,
 				40E78E881DD32C3C000A3776 /* MessageHandler.swift */,
 				20FABFEB1DDDA63600D583E2 /* FileHelper.swift */,
@@ -1144,6 +1144,7 @@
 				40A28CC21E24ED0D0077D490 /* SuccessExtraInfo.storyboard in Resources */,
 				40E78E8F1DD32C4E000A3776 /* Settings.bundle in Resources */,
 				D5E9EBE81DD60AB300BD796E /* Localizable.strings in Resources */,
+				FCB6D9361F75056100B8C268 /* Branding.plist in Resources */,
 				405974061DFD44670002DB3A /* ExtraInfo.storyboard in Resources */,
 				401634C81E0A9F73000161FA /* NotificationView.storyboard in Resources */,
 				40E78E211DD31A86000A3776 /* LaunchScreen.storyboard in Resources */,
@@ -1361,7 +1362,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				401634C41E0A9F16000161FA /* NotificationViewController.swift in Sources */,
-				40E78E8B1DD32C3C000A3776 /* KeyboardNotifications.swift in Sources */,
 				40E78E4B1DD32862000A3776 /* f4s-workexperience.xcdatamodeld in Sources */,
 				D5E9EC021DDD9F9000BD796E /* GradientView.swift in Sources */,
 				204203F71E4B7966007C7409 /* FavouriteViewController.swift in Sources */,
@@ -1907,204 +1907,6 @@
 			};
 			name = ReleaseF4S;
 		};
-		20B128251DDAFB5400CE3F1F /* DebugCAF */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 20B1281F1DDA1D5B00CE3F1F /* f4s-workexperience.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = DebugCAF;
-		};
-		20B128261DDAFB5400CE3F1F /* DebugCAF */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C126E1135EFF3F36804B609 /* Pods-f4s-workexperience.debugcaf.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
-				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/f4s-workexperience/f4s-workexperience-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = DebugCAF;
-		};
-		20B128271DDAFB5400CE3F1F /* DebugCAF */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8467D26E80293F2462958D72 /* Pods-f4s-workexperienceTests.debugcaf.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
-				INFOPLIST_FILE = "f4s-workexperienceTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.f4s-workexperienceTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s-workexperience.app/f4s-workexperience";
-			};
-			name = DebugCAF;
-		};
-		20B128281DDAFB5400CE3F1F /* DebugCAF */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F9ED6AE3FDE158712A936D0 /* Pods-f4s-workexperienceUITests.debugcaf.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
-				INFOPLIST_FILE = "f4s-workexperienceUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.f4s-workexperienceUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = "f4s-workexperience";
-			};
-			name = DebugCAF;
-		};
-		20B128291DDAFB6500CE3F1F /* ReleaseCAF */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 20B1281F1DDA1D5B00CE3F1F /* f4s-workexperience.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				ONLY_ACTIVE_ARCH = NO;
-				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = ReleaseCAF;
-		};
-		20B1282A1DDAFB6500CE3F1F /* ReleaseCAF */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E5272C8BCDFA58637C1EA3C4 /* Pods-f4s-workexperience.releasecaf.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
-				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/f4s-workexperience/f4s-workexperience-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = ReleaseCAF;
-		};
-		20B1282B1DDAFB6500CE3F1F /* ReleaseCAF */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EC68C46BEC140D8D307D851A /* Pods-f4s-workexperienceTests.releasecaf.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
-				INFOPLIST_FILE = "f4s-workexperienceTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.f4s-workexperienceTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s-workexperience.app/f4s-workexperience";
-			};
-			name = ReleaseCAF;
-		};
-		20B1282C1DDAFB6500CE3F1F /* ReleaseCAF */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D2AAC222A524E81F25122360 /* Pods-f4s-workexperienceUITests.releasecaf.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
-				INFOPLIST_FILE = "f4s-workexperienceUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.f4s-workexperienceUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = "f4s-workexperience";
-			};
-			name = ReleaseCAF;
-		};
 		40D53C841E30EA2900D7AA32 /* DebugF4SLive */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 20B1281F1DDA1D5B00CE3F1F /* f4s-workexperience.xcconfig */;
@@ -2510,11 +2312,9 @@
 				40E78E391DD31A86000A3776 /* DebugFreshbyte */,
 				40D53C841E30EA2900D7AA32 /* DebugF4SLive */,
 				201458B71E1BA9B900DBC9BD /* DebugF4S */,
-				20B128251DDAFB5400CE3F1F /* DebugCAF */,
 				40E78E3A1DD31A86000A3776 /* ReleaseFreshbyte */,
 				40D53C881E30EA6E00D7AA32 /* ReleaseF4SLive */,
 				201458BB1E1BA9C400DBC9BD /* ReleaseF4S */,
-				20B128291DDAFB6500CE3F1F /* ReleaseCAF */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = ReleaseFreshbyte;
@@ -2525,11 +2325,9 @@
 				40E78E3C1DD31A86000A3776 /* DebugFreshbyte */,
 				40D53C851E30EA2900D7AA32 /* DebugF4SLive */,
 				201458B81E1BA9B900DBC9BD /* DebugF4S */,
-				20B128261DDAFB5400CE3F1F /* DebugCAF */,
 				40E78E3D1DD31A86000A3776 /* ReleaseFreshbyte */,
 				40D53C891E30EA6E00D7AA32 /* ReleaseF4SLive */,
 				201458BC1E1BA9C400DBC9BD /* ReleaseF4S */,
-				20B1282A1DDAFB6500CE3F1F /* ReleaseCAF */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = ReleaseFreshbyte;
@@ -2540,11 +2338,9 @@
 				40E78E3F1DD31A86000A3776 /* DebugFreshbyte */,
 				40D53C861E30EA2900D7AA32 /* DebugF4SLive */,
 				201458B91E1BA9B900DBC9BD /* DebugF4S */,
-				20B128271DDAFB5400CE3F1F /* DebugCAF */,
 				40E78E401DD31A86000A3776 /* ReleaseFreshbyte */,
 				40D53C8A1E30EA6E00D7AA32 /* ReleaseF4SLive */,
 				201458BD1E1BA9C400DBC9BD /* ReleaseF4S */,
-				20B1282B1DDAFB6500CE3F1F /* ReleaseCAF */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = ReleaseFreshbyte;
@@ -2555,11 +2351,9 @@
 				40E78E421DD31A86000A3776 /* DebugFreshbyte */,
 				40D53C871E30EA2900D7AA32 /* DebugF4SLive */,
 				201458BA1E1BA9B900DBC9BD /* DebugF4S */,
-				20B128281DDAFB5400CE3F1F /* DebugCAF */,
 				40E78E431DD31A86000A3776 /* ReleaseFreshbyte */,
 				40D53C8B1E30EA6E00D7AA32 /* ReleaseF4SLive */,
 				201458BE1E1BA9C400DBC9BD /* ReleaseF4S */,
-				20B1282C1DDAFB6500CE3F1F /* ReleaseCAF */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = ReleaseFreshbyte;

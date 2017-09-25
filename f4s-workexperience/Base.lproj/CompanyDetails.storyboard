@@ -85,7 +85,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="335" height="31"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jk8-ue-mnk" id="bX1-Nv-aBG">
-                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="31"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="30.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ri6-cZ-Ing">
@@ -112,7 +112,7 @@
                                                 <rect key="frame" x="0.0" y="59" width="335" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hVd-jZ-hGz" id="nq9-Li-beS">
-                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bhq-aF-1K4">
@@ -190,7 +190,7 @@
                                                 <rect key="frame" x="0.0" y="103" width="335" height="70"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tf0-yd-kHy" id="ve7-pn-Nlb">
-                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="70"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="69.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x88-Q8-qLJ">

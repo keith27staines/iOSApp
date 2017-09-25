@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina5_5" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -24,7 +24,7 @@
                                 <rect key="frame" x="0.0" y="20" width="414" height="980"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hz8-hB-HzJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="787.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="788"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yellowQuestionMark" translatesAutoresizingMaskIntoConstraints="NO" id="S8V-te-S2l">
                                                 <rect key="frame" x="162" y="60" width="90" height="90"/>
@@ -50,20 +50,20 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VbZ-62-oPU">
-                                                <rect key="frame" x="30" y="241.00000000000003" width="354" height="46.666666666666714"/>
+                                                <rect key="frame" x="30" y="241" width="354" height="47"/>
                                                 <string key="text">We need to check your age to see if legally you need consent from your  parent, guardian, or teacher to accept the work placement offer.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="74" translatesAutoresizingMaskIntoConstraints="NO" id="NrJ-np-QPp">
-                                                <rect key="frame" x="30" y="336.66666666666663" width="354" height="430.66666666666663"/>
+                                                <rect key="frame" x="30" y="337" width="354" height="431"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZwU-Av-rFq">
-                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="296.66666666666669"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="297"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="49" translatesAutoresizingMaskIntoConstraints="NO" id="DIV-QA-nEC">
-                                                                <rect key="frame" x="0.0" y="0.0" width="354" height="270.99999999999994"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="354" height="271"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="7iB-P1-4An">
                                                                         <rect key="frame" x="0.0" y="0.0" width="354" height="31"/>
@@ -117,7 +117,7 @@
                                                                         </constraints>
                                                                     </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="Qyl-qa-3YB">
-                                                                        <rect key="frame" x="0.0" y="159.99999999999994" width="354" height="31"/>
+                                                                        <rect key="frame" x="0.0" y="160" width="354" height="31"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Parent's, teacher's or guardian's email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bZu-FP-r1u" customClass="NextResponderTextField" customModule="f4s_workexperience" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="21"/>
@@ -142,7 +142,7 @@
                                                                         </constraints>
                                                                     </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="fjS-KP-AS4">
-                                                                        <rect key="frame" x="0.0" y="239.99999999999994" width="354" height="31"/>
+                                                                        <rect key="frame" x="0.0" y="240" width="354" height="31"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Voucher Code" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g1i-QR-DUi" customClass="NextResponderTextField" customModule="f4s_workexperience" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="21"/>
@@ -169,7 +169,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you don’t have a voucher code tap here" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KnY-Nh-iSQ">
-                                                                <rect key="frame" x="0.0" y="280.99999999999994" width="354" height="15.666666666666742"/>
+                                                                <rect key="frame" x="0.0" y="281" width="354" height="16"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -177,7 +177,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W6l-9J-xry">
-                                                        <rect key="frame" x="0.0" y="370.66666666666669" width="354" height="60"/>
+                                                        <rect key="frame" x="0.0" y="371" width="354" height="60"/>
                                                         <color key="backgroundColor" red="0.21176470589999999" green="0.64313725489999995" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="60" id="7nq-3O-hkG"/>

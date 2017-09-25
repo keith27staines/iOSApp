@@ -95,8 +95,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.set(true, forKey: UserDefaultsKeys.shouldDisableRemoteNotifications)
     }
 
-    func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError _: Error) {
-        print("failed to reg")
+    func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("failed to register for remote notification with error: \(error)")
     }
 
     func application(_: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {

@@ -42,23 +42,54 @@ class ExtraInfoViewController: UIViewController {
 
     var currentCompany: Company?
     var datePicker = UIDatePicker()
-    var keyboardNotification: KeyboardNotfifications!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         adjustAppearence()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardNotification(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         adjustNavigationBar()
-        self.keyboardNotification = KeyboardNotfifications(scrollView: self.scrollView, textField: self.emailTextField, view: self.contentView)
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.keyboardNotification.removeObserver()
+}
+
+// MARK: - Handle keyboard
+extension ExtraInfoViewController {
+    
+    /// Handles changes to keyboard size and position
+    @objc func keyboardNotification(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            let endFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+            let duration:TimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+            let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
+            let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
+            let animationCurve:UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
+            if (endFrame?.origin.y)! >= UIScreen.main.bounds.size.height {
+                let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+                scrollView.contentInset = contentInset
+                scrollView.scrollIndicatorInsets = contentInset
+            } else {
+                if let keyboardSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                    let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height + 20, right: 0)
+                    scrollView.contentInset = contentInsets
+                    scrollView.scrollIndicatorInsets = contentInsets
+                }
+            }
+            UIView.animate(withDuration: duration,
+                           delay: TimeInterval(0),
+                           options: animationCurve,
+                           animations: { self.view.layoutIfNeeded() },
+                           completion: nil)
+        }
     }
+    
 }
 
 // MARK: - UI Setup

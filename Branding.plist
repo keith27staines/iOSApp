@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Branding Partner</key>
+	<dict>
+		<key>None</key>
+		<dict>
+			<key>ImageNames</key>
+			<array/>
+			<key>Subtitles</key>
+			<array/>
+			<key>Titles</key>
+			<array/>
+		</dict>
+		<key>NCS</key>
+		<dict>
+			<key>ImageNames</key>
+			<array/>
+			<key>Subtitles</key>
+			<array/>
+			<key>Titles</key>
+			<array/>
+		</dict>
+	</dict>
+</dict>
+</plist>
