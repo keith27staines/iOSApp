@@ -152,6 +152,7 @@
 		FC681C011F57473D0077BECA /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFF1F57473D0077BECA /* Podfile.lock */; };
 		FCB6D9361F75056100B8C268 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCB6D9351F75056000B8C268 /* Branding.plist */; };
 		FCC5EBB61F449C310085CE15 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FCC5EBB51F449C310085CE15 /* README.md */; };
+		FCC753EE1F80F26200E9ECD6 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC753ED1F80F26200E9ECD6 /* MapModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,6 +169,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 40E78E121DD31A86000A3776;
 			remoteInfo = "f4s-workexperience";
+		};
+		FCC753F41F8148A900E9ECD6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCC753EF1F8148A900E9ECD6 /* F4SDataStructures.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FCBAE5FF1F7A841900B0810C;
+			remoteInfo = F4SDataStructures;
+		};
+		FCC753F61F8148A900E9ECD6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCC753EF1F8148A900E9ECD6 /* F4SDataStructures.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FCBAE6081F7A841900B0810C;
+			remoteInfo = F4SDataStructuresTests;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -373,6 +388,8 @@
 		FC681BFF1F57473D0077BECA /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		FCB6D9351F75056000B8C268 /* Branding.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
 		FCC5EBB51F449C310085CE15 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		FCC753ED1F80F26200E9ECD6 /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
+		FCC753EF1F8148A900E9ECD6 /* F4SDataStructures.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = F4SDataStructures.xcodeproj; path = ../../F4SDataStructures/F4SDataStructures.xcodeproj; sourceTree = "<group>"; };
 		FDE6CAD61FAB3CA16090531A /* Pods-f4s-workexperienceUITests.debugf4s.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperienceUITests.debugf4s.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperienceUITests/Pods-f4s-workexperienceUITests.debugf4s.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -857,6 +874,7 @@
 				40A5CF381DED6F8D000007AB /* InterestsView.storyboard */,
 				40E78E931DD391F3000A3776 /* MapView.storyboard */,
 				40C1A4F11DDEF2F6000F80AA /* AutoCompleteTableViewCell.xib */,
+				FCC753ED1F80F26200E9ECD6 /* MapModel.swift */,
 			);
 			name = Map;
 			sourceTree = "<group>";
@@ -885,6 +903,7 @@
 		74E1A74324CAFF4EF516E014 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCC753EF1F8148A900E9ECD6 /* F4SDataStructures.xcodeproj */,
 				6DBDC6E5F710813F9107483D /* Pods_f4s_workexperience.framework */,
 				407A5D7DED3055034D7EAC15 /* Pods_f4s_workexperienceTests.framework */,
 				EF342E9F354D697386AFC80D /* Pods_f4s_workexperienceUITests.framework */,
@@ -1010,6 +1029,15 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		FCC753F01F8148A900E9ECD6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FCC753F51F8148A900E9ECD6 /* F4SDataStructures.framework */,
+				FCC753F71F8148A900E9ECD6 /* F4SDataStructuresTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1123,6 +1151,12 @@
 			mainGroup = 40E78E0A1DD31A86000A3776;
 			productRefGroup = 40E78E141DD31A86000A3776 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = FCC753F01F8148A900E9ECD6 /* Products */;
+					ProjectRef = FCC753EF1F8148A900E9ECD6 /* F4SDataStructures.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				40E78E121DD31A86000A3776 /* f4s-workexperience */,
@@ -1131,6 +1165,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		FCC753F51F8148A900E9ECD6 /* F4SDataStructures.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = F4SDataStructures.framework;
+			remoteRef = FCC753F41F8148A900E9ECD6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FCC753F71F8148A900E9ECD6 /* F4SDataStructuresTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = F4SDataStructuresTests.xctest;
+			remoteRef = FCC753F61F8148A900E9ECD6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		40E78E111DD31A86000A3776 /* Resources */ = {
@@ -1366,6 +1417,7 @@
 				204203F71E4B7966007C7409 /* FavouriteViewController.swift in Sources */,
 				20B128181DDA1A3900CE3F1F /* Config.swift in Sources */,
 				40A28CBF1E24ECE90077D490 /* SuccessExtraInfoViewController.swift in Sources */,
+				FCC753EE1F80F26200E9ECD6 /* MapModel.swift in Sources */,
 				40C1A5191DDF5ACE000F80AA /* GMUClusterManager.m in Sources */,
 				204203F01E4B1E3D007C7409 /* ShortlistService.swift in Sources */,
 				20D51BE41E27710C003A8358 /* NotificationHelper.swift in Sources */,

@@ -13,8 +13,9 @@ class InterestsViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var refineSearchButton: UIButton!
 
+    var mapModel: MapModel = MapModel()
+    
     fileprivate let reuseId = "interestsCell"
-    var mapController: MapViewController?
     var interests: [Interest] = []
     var selectedInterests: [Interest] = [] {
         didSet {
@@ -32,7 +33,14 @@ class InterestsViewController: UIViewController, UIScrollViewDelegate {
     }
 
     var initialSelectedInterests: [Interest] = []
-    var currentBounds: GMSCoordinateBounds?
+    var currentBounds: GMSCoordinateBounds? {
+        set {
+            mapModel.currentBounds = currentBounds
+        }
+        get {
+            return mapModel.currentBounds
+        }
+    }
 
     let uiIndicatorBusy = UIActivityIndicatorView(activityIndicatorStyle: .white)
     var allCompaniesCount: Int?
@@ -93,17 +101,9 @@ extension InterestsViewController {
     }
 
     func getInterests() {
+        guard let _ = mapModel.currentBounds else { return }
         self.startAnimating()
-
-        guard let southWestLongitude = self.currentBounds?.southWest.longitude,
-            let southWestLatitude = self.currentBounds?.southWest.latitude,
-            let northEastLongitude = self.currentBounds?.northEast.longitude,
-            let northEastLatitude = self.currentBounds?.northEast.latitude else {
-            return
-        }
-
-        DatabaseOperations.sharedInstance.getInterestsFromArea(startLongitude: southWestLongitude, startLatitude: southWestLatitude, endLongitude: northEastLongitude, endLatitude: northEastLatitude, completed: { interests in
-
+        mapModel.getInterestsInCurrentBounds { (interests) in
             if interests.count > 0 {
                 let selectedInterestsForUser = InterestDBOperations.sharedInstance.getInterestForCurrentUser()
                 self.interests = interests.filter({ $0.interestCount != 0 })
@@ -115,7 +115,7 @@ extension InterestsViewController {
                 self.selectedInterests = selectedInterestsForUser
                 self.initialSelectedInterests = selectedInterestsForUser
             }
-        })
+        }
 
         if self.selectedInterests.count > 0 {
             DispatchQueue.global(qos: .userInitiated).async {

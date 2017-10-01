@@ -28,28 +28,29 @@ struct User {
     }
 }
 
-struct Company {
-    var id: Int64
-    var created: Date
-    var modified: Date
-    var isRemoved: Bool
-    var uuid: String
-    var name: String
-    var logoUrl: String
-    var industry: String
-    var latitude: Double
-    var longitude: Double
-    var summary: String
-    var employeeCount: Int64
-    var turnover: Double
-    var turnoverGrowth: Double
-    var rating: Double
-    var ratingCount: Double
-    var sourceId: String
-    var hashtag: String
-    var companyUrl: String
+public struct Company {
+    public var id: Int64
+    public var created: Date
+    public var modified: Date
+    public var isRemoved: Bool
+    public var uuid: String
+    public var name: String
+    public var logoUrl: String
+    public var industry: String
+    public var latitude: Double
+    public var longitude: Double
+    public var summary: String
+    public var employeeCount: Int64
+    public var turnover: Double
+    public var turnoverGrowth: Double
+    public var rating: Double
+    public var ratingCount: Double
+    public var sourceId: String
+    public var hashtag: String
+    public var companyUrl: String
+    public var interestIds: Set<UInt64> = Set<UInt64>()
 
-    init(id: Int64 = 0, created: Date = Date(), modified: Date = Date(), isRemoved: Bool = false, uuid: String = "", name: String = "", logoUrl: String = "", industry: String = "", latitude: Double = 0, longitude: Double = 0, summary: String = "", employeeCount: Int64 = 0, turnover: Double = 0, turnoverGrowth: Double = 0, rating: Double = 0, ratingCount: Double = 0, sourceId: String = "", hashtag: String = "", companyUrl: String = "") {
+    public init(id: Int64 = 0, created: Date = Date(), modified: Date = Date(), isRemoved: Bool = false, uuid: String = "", name: String = "", logoUrl: String = "", industry: String = "", latitude: Double = 0, longitude: Double = 0, summary: String = "", employeeCount: Int64 = 0, turnover: Double = 0, turnoverGrowth: Double = 0, rating: Double = 0, ratingCount: Double = 0, sourceId: String = "", hashtag: String = "", companyUrl: String = "") {
         self.id = id
         self.created = created
         self.modified = modified
@@ -86,13 +87,13 @@ struct Placement {
     }
 }
 
-struct Interest {
-    var id: Int64
-    var uuid: String
-    var name: String
-    var interestCount: Int64
+public struct Interest {
+    public var id: Int64
+    public var uuid: String
+    public var name: String
+    public var interestCount: Int64
 
-    init(id: Int64 = 0, uuid: String = "", name: String = "", interestCount: Int64 = 0) {
+    public init(id: Int64 = 0, uuid: String = "", name: String = "", interestCount: Int64 = 0) {
         self.id = id
         self.uuid = uuid
         self.name = name

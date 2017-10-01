@@ -31,10 +31,14 @@ class MapViewController: UIViewController {
     var shouldRequestAuthorization: Bool?
     var userLocation: CLLocation?
     var currentBounds: GMSCoordinateBounds? {
-        didSet {
-            print("new current bounds")
+        set {
+            mapModel.currentBounds = newValue
+        }
+        get {
+            return mapModel.currentBounds
         }
     }
+    var mapModel: MapModel = MapModel()
     
     var reachability: Reachability?
     var downloadIsInProgress: Bool = true
@@ -92,14 +96,9 @@ extension MapViewController: DatabaseDownloadProtocol {
         if UserDefaults.standard.object(forKey: UserDefaultsKeys.companyDatabaseCreatedDate) != nil {
             self.downloadIsInProgress = false
             MessageHandler.sharedInstance.hideLoadingOverlay()
-            if let location = mapView.myLocation {
+            if let location = mapView.myLocation ?? self.userLocation {
                 self.shouldLimitDisplayedCompanies = true
                 getCompaniesInLocationWithInterests(coordinates_start: location.coordinate, coordinates_end: location.coordinate, isNearLocation: true)
-            } else {
-                if let userTypedLocation = self.userLocation {
-                    self.shouldLimitDisplayedCompanies = true
-                    getCompaniesInLocationWithInterests(coordinates_start: userTypedLocation.coordinate, coordinates_end: userTypedLocation.coordinate, isNearLocation: true)
-                }
             }
         }
     }
@@ -562,16 +561,6 @@ extension MapViewController {
         return visibleRegionForPoints
     }
     
-    func getBoundingBoxForCurrentMarkers() {
-        if self.companies.count > 0 {
-            var boundsFromMarkers = GMSCoordinateBounds(coordinate: (markers.first?.position)!, coordinate: (markers.first?.position)!)
-            for marker in self.markers {
-                boundsFromMarkers = boundsFromMarkers.includingCoordinate(marker.position)
-            }
-            self.currentBounds = boundsFromMarkers
-        }
-    }
-    
     func getCompaniesInLocationWithInterests(coordinates_start: CLLocationCoordinate2D, coordinates_end: CLLocationCoordinate2D, isNearLocation: Bool, shouldReposition: Bool = true, isNearMyLocation: Bool = false) {
         let interestList = InterestDBOperations.sharedInstance.getInterestForCurrentUser()
         print("Calling getCompaniesInLocationWithInterests")
@@ -894,6 +883,7 @@ extension MapViewController {
             self.currentBounds = GMSCoordinateBounds(region: getVisibleRegion())
         }
         interestsCtrl.currentBounds = currentBounds
+        interestsCtrl.mapModel = mapModel
         interestsCtrl.mapController = self
         let interestsCtrlNav = RotationAwareNavigationController(rootViewController: interestsCtrl)
         hideRefineSearchLabelAnimated()
