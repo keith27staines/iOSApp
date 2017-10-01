@@ -32,10 +32,10 @@ class MapViewController: UIViewController {
     var userLocation: CLLocation?
     var currentBounds: GMSCoordinateBounds? {
         set {
-            mapModel.currentBounds = newValue
+            mapModel.visibleBounds = newValue
         }
         get {
-            return mapModel.currentBounds
+            return mapModel.visibleBounds
         }
     }
     var mapModel: MapModel = MapModel()

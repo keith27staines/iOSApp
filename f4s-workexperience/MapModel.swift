@@ -15,10 +15,46 @@ public typealias LatLonRect = CGRect
 public struct MapModel {
     
     /// The current bounds of the visible portion of the map
-    public var currentBounds: GMSCoordinateBounds? = nil
+    public var visibleBounds: GMSCoordinateBounds? = nil
     
     /// The interests are used to filter the companies to be shown on the map
     public var selectedInterestsIds: Set<UInt64>? = nil
+    
+    /// Initializes a new instance of `MapModel`
+    ///
+    /// - parameter visibleBounds: The area that can be seen on the map
+    /// - parameter selectedInterestsIds: The ids of interests the user currently has selected
+    /// - parameter allCompanies: All companies that might ever need to be presented on the map
+    public init(visibleBounds: GMSCoordinateBounds, selectedInterestsIds: Set<UInt64>? = nil, allCompanies:[Company]) {
+        self.visibleBounds = visibleBounds
+        self.allCompanies = allCompanies
+        self.selectedInterestsIds = selectedInterestsIds
+    }
+    
+    /// Underlying spatial partitioning datastructure
+    lazy var quadTree: F4SPointQuadTree = {
+        let worldBounds = CGRect(x: -180.0, y: -90.0, width: 360.0, height: 180.0)
+        let qt = F4SPointQuadTree(bounds: worldBounds)
+        for company in self.allCompanies {
+            let p = CGPoint(x: CGFloat(company.latitude), y: CGFloat(company.longitude))
+            let item = F4SQuadtreeItem(point: p, object: company)
+            try! qt.insert(item: item)
+        }
+        return qt
+    }()
+
+    /// All companies that can ever be shown
+    private var allCompanies: [Company] = [Company]()
+}
+
+extension Company : Hashable {
+    public var hashValue: Int {
+        return latitude.hashValue ^ longitude.hashValue ^ uuid.hashValue
+    }
+    
+    public static func ==(lhs: Company, rhs: Company) -> Bool {
+        return lhs.longitude == rhs.longitude && lhs.latitude == rhs.latitude && lhs.uuid == rhs.uuid
+    }
 }
 
 // MARK:- public API for getting companies
@@ -79,7 +115,7 @@ public extension MapModel {
     ///
     /// - parameter completion: Called to return the companies within bounds
     public func getCompaniesInsideCurrentBounds(completion: ([Company]) -> Void) {
-        guard let currentBounds = currentBounds else {
+        guard let currentBounds = visibleBounds else {
             // As there are no current bounds we return an empty collection
             completion([])
             return
@@ -103,7 +139,7 @@ public extension MapModel {
     ///
     /// - parameter completion: Called to return the interests within bounds
     public func getInterestsInsideCurrentBounds(completion: ([Interest]) -> Void) {
-        guard let currentBounds = currentBounds else {
+        guard let currentBounds = visibleBounds else {
             completion([])
             return
         }

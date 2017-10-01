@@ -13,7 +13,7 @@ class InterestsViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var refineSearchButton: UIButton!
 
-    var mapModel: MapModel = MapModel()
+    var mapModel: MapModel!
     
     fileprivate let reuseId = "interestsCell"
     var interests: [Interest] = []
@@ -35,10 +35,10 @@ class InterestsViewController: UIViewController, UIScrollViewDelegate {
     var initialSelectedInterests: [Interest] = []
     var currentBounds: GMSCoordinateBounds? {
         set {
-            mapModel.currentBounds = currentBounds
+            mapModel.visibleBounds = currentBounds
         }
         get {
-            return mapModel.currentBounds
+            return mapModel.visibleBounds
         }
     }
 
@@ -101,7 +101,7 @@ extension InterestsViewController {
     }
 
     func getInterests() {
-        guard let _ = mapModel.currentBounds else { return }
+        guard let _ = mapModel.visibleBounds else { return }
         self.startAnimating()
         mapModel.getInterestsInCurrentBounds { (interests) in
             if interests.count > 0 {
