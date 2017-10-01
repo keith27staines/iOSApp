@@ -11,6 +11,8 @@ import SQLite
 
 /// Downloaded database operations handler
 class DatabaseOperations {
+    
+    let maxCompanies: Int = 30
 
     /// Shared instance of the DatabaseOperations class
     class var sharedInstance: DatabaseOperations {
@@ -181,7 +183,7 @@ class DatabaseOperations {
         return company
     }
 
-    /// Get first 30 companies in 5 miles radius with interests
+    /// Get maxCompanies companies in 5 miles radius with interests
     ///
     /// - Parameters:
     ///   - longitude: current location longitude
@@ -203,7 +205,7 @@ class DatabaseOperations {
             }
             let interestsStr = companyIds.flatMap({ String($0) }).joined(separator: ", ")
 
-            let selectCompaniesNearCenterQuery: String = "SELECT *, ((((longitude + 9) - (\(longitude) + 9)) * ((longitude + 9) - (\(longitude) + 9))) + ((latitude - \(latitude)) * (latitude - \(latitude)))) AS distance FROM businesses_company WHERE latitude NOTNULL AND longitude NOTNULL AND longitude between (\(longitude) - 0.072463) AND (\(longitude) + 0.072463) AND latitude between (\(latitude) - 0.026315789) AND (\(latitude) + 0.026315789) GROUP BY latitude, longitude ORDER BY distance ASC limit 30"
+            let selectCompaniesNearCenterQuery: String = "SELECT *, ((((longitude + 9) - (\(longitude) + 9)) * ((longitude + 9) - (\(longitude) + 9))) + ((latitude - \(latitude)) * (latitude - \(latitude)))) AS distance FROM businesses_company WHERE latitude NOTNULL AND longitude NOTNULL AND longitude between (\(longitude) - 0.072463) AND (\(longitude) + 0.072463) AND latitude between (\(latitude) - 0.026315789) AND (\(latitude) + 0.026315789) GROUP BY latitude, longitude ORDER BY distance ASC limit \(maxCompanies)"
 
             var selectCompaniesWithTheSameCoordinates: String = "SELECT businesses_company.*, COUNT(businesses_company_interests.interest_id) AS interest_count FROM businesses_company_interests JOIN businesses_company ON (businesses_company_interests.company_id = businesses_company.id AND (businesses_company.latitude NOTNULL AND businesses_company.longitude NOTNULL AND ("
 
@@ -236,7 +238,7 @@ class DatabaseOperations {
         }
     }
 
-    /// Get first 30 companies in 5 miles radius
+    /// Get maxCompanies companies in 5 miles radius
     ///
     /// - Parameters:
     ///   - longitude: current location longitude
@@ -250,11 +252,11 @@ class DatabaseOperations {
         }
         do {
             var companyList: [Company] = []
-            let selectCompaniesNearCenterQuery: String = "SELECT *, ((((longitude + 9) - (\(longitude) + 9)) * ((longitude + 9) - (\(longitude) + 9))) + ((latitude - \(latitude)) * (latitude - \(latitude)))) AS distance FROM businesses_company WHERE latitude NOTNULL AND longitude NOTNULL AND longitude between (\(longitude) - 0.072463) AND (\(longitude) + 0.072463) AND latitude between (\(latitude) - 0.026315789) AND (\(latitude) + 0.026315789) GROUP BY latitude, longitude ORDER BY distance ASC limit 30"
+            let selectCompaniesNearCenterQuery: String = "SELECT *, ((((longitude + 9) - (\(longitude) + 9)) * ((longitude + 9) - (\(longitude) + 9))) + ((latitude - \(latitude)) * (latitude - \(latitude)))) AS distance FROM businesses_company WHERE latitude NOTNULL AND longitude NOTNULL AND longitude between (\(longitude) - 0.072463) AND (\(longitude) + 0.072463) AND latitude between (\(latitude) - 0.026315789) AND (\(latitude) + 0.026315789) GROUP BY latitude, longitude ORDER BY distance ASC limit \(maxCompanies)"
 
             let stmt = try db.prepare(selectCompaniesNearCenterQuery)
             
-            // There is a possibility that we have missed some companies within the required area if they are located at the same coordinates as companies returned in the first 30 list. We add those on here
+            // There is a possibility that we have missed some companies within the required area if they are located at the same coordinates as companies returned in the maxCompanies list. We add those on here
             var selectCompaniesWithTheSameCoordinates: String? = nil
             var index: Int = 0
             
@@ -291,7 +293,7 @@ class DatabaseOperations {
         }
     }
 
-    /// Get first 30 companies that has the coordinates between 2 coordinates
+    /// Get maxCompanies companies that has the coordinates between 2 coordinates
     ///
     /// - Parameters:
     ///   - startLongitude: start coordinate longitude
@@ -307,7 +309,7 @@ class DatabaseOperations {
         }
         do {
             var companyList: [Company] = []
-            let selectCompaniesInLocation: String = "SELECT * FROM businesses_company WHERE latitude NOTNULL AND longitude NOTNULL AND longitude between \(startLongitude) AND \(endLongitude) AND latitude between \(startLatitude) AND \(endLatitude) ORDER BY turnover DESC, turnover_growth DESC limit 30"
+            let selectCompaniesInLocation: String = "SELECT * FROM businesses_company WHERE latitude NOTNULL AND longitude NOTNULL AND longitude between \(startLongitude) AND \(endLongitude) AND latitude between \(startLatitude) AND \(endLatitude) ORDER BY turnover DESC, turnover_growth DESC limit \(maxCompanies)"
 
             let stmt = try db.prepare(selectCompaniesInLocation)
 
@@ -506,7 +508,7 @@ class DatabaseOperations {
         }
     }
 
-    /// Get first 30 companies between 2 coordinates that has the interests
+    /// Get first maxCompanies companies between 2 coordinates that has the interests
     ///
     /// - Parameters:
     ///   - startLongitude: start coordinate longitude
@@ -528,7 +530,7 @@ class DatabaseOperations {
                 companyIds.append(interest.id)
             }
             let interestsStr = companyIds.flatMap({ String($0) }).joined(separator: ", ")
-            let selectCompaniesWithInterests: String = "SELECT businesses_company.*, COUNT(businesses_company_interests.interest_id) AS interest_count FROM businesses_company_interests JOIN businesses_company ON (businesses_company_interests.company_id = businesses_company.id AND (businesses_company.latitude >= \(startLatitude) AND businesses_company.latitude <= \(endLatitude) AND businesses_company.longitude >= \(startLongitude) AND businesses_company.longitude <= \(endLongitude))) WHERE businesses_company_interests.interest_id IN (\(interestsStr)) GROUP BY businesses_company_interests.company_id HAVING interest_count = \(interests.count) ORDER BY turnover DESC, turnover_growth DESC limit 30"
+            let selectCompaniesWithInterests: String = "SELECT businesses_company.*, COUNT(businesses_company_interests.interest_id) AS interest_count FROM businesses_company_interests JOIN businesses_company ON (businesses_company_interests.company_id = businesses_company.id AND (businesses_company.latitude >= \(startLatitude) AND businesses_company.latitude <= \(endLatitude) AND businesses_company.longitude >= \(startLongitude) AND businesses_company.longitude <= \(endLongitude))) WHERE businesses_company_interests.interest_id IN (\(interestsStr)) GROUP BY businesses_company_interests.company_id HAVING interest_count = \(interests.count) ORDER BY turnover DESC, turnover_growth DESC limit \(maxCompanies)"
 
             let stmt = try db.prepare(selectCompaniesWithInterests)
 

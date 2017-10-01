@@ -576,7 +576,7 @@ extension MapViewController {
         let interestList = InterestDBOperations.sharedInstance.getInterestForCurrentUser()
         print("Calling getCompaniesInLocationWithInterests")
         if interestList.count > 0 {
-            if isNearLocation {
+            if isNearLocation || isNearMyLocation {
                 DatabaseOperations.sharedInstance.getCompaniesNearLocationFirstThenFilter(longitude: coordinates_start.longitude, latitude: coordinates_start.latitude, interests: interestList, completed: { companies in
                     self.companies = companies
                     if shouldReposition && companies.count > 1 {
@@ -585,16 +585,6 @@ extension MapViewController {
                         self.moveCameraToCoordinates(coordinates_start)
                     }
                 })
-            } else if isNearMyLocation {
-                DatabaseOperations.sharedInstance.getCompaniesNearLocationFirstThenFilter(longitude: coordinates_start.longitude, latitude: coordinates_start.latitude, interests: interestList, completed: { companies in
-                    self.companies = companies
-                    if shouldReposition && companies.count > 1 {
-                        self.moveCameraWithDinamicZoom()
-                    } else {
-                        self.moveCameraToCoordinates(coordinates_start)
-                    }
-                })
-                
             } else {
                 DatabaseOperations.sharedInstance.getCompaniesInLocationWithFilters(startLongitude: coordinates_start.longitude, startLatitude: coordinates_start.latitude, endLongitude: coordinates_end.longitude, endLatitude: coordinates_end.latitude, interests: interestList, completed: {
                     companies in
