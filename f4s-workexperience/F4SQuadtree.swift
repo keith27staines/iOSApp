@@ -28,28 +28,30 @@ public enum F4SQuadtreeQuadrant {
 
 // MARK:-
 public protocol F4SQuadtreeElement {
-    var point: CGPoint { get }
+    var position: CGPoint { get }
     var object: AnyHashable { get }
 }
 
 public struct F4SQuadtreeItem : F4SQuadtreeElement {
     public static func ==(lhs: F4SQuadtreeItem, rhs: F4SQuadtreeItem) -> Bool {
-        return lhs.point == rhs.point && lhs.object == rhs.object
+        return lhs.position == rhs.position && lhs.object == rhs.object
     }
     
     public var hashValue: Int { return
-        self.point.x.hashValue ^ self.point.y.hashValue ^ object.hashValue
+        self.position.x.hashValue ^ self.position.y.hashValue ^ object.hashValue
     }
-    public var point: CGPoint
+    public var position: LatLon
     public var object: AnyHashable
     public init(point: CGPoint, object: AnyHashable) {
-        self.point = point
+        self.position = point
         self.object = object
     }
 }
 
 // MARK:-
-public protocol F4SPointQuadtreeProtocol {
+public protocol F4SPointQuadTreeProtocol : class {
+    /// The quadtree which is parent to this one
+    weak var parent: F4SPointQuadTreeProtocol? { get }
     /// The maximum number of items that the current instance can hold without splitting (assuming the maximum depth has not been reached)
     var maxItems: Int { get }
     /// The nesting depth for the current instance. If the max depth is reached, the subtree will not split
@@ -60,10 +62,12 @@ public protocol F4SPointQuadtreeProtocol {
     var items: [F4SQuadtreeElement] { get }
     /// Clears the current instance and all substrees
     func clear()
+    /// Returns the total number of elements contained within the current instance and its subtrees
+    func count() -> Int
     /// Returns the quadrant of an item.
     func quadrant(for item: F4SQuadtreeElement) -> F4SQuadtreeQuadrant
     /// Returns the subtrees within the current instance
-    var subtreeDictionary : [F4SQuadtreeQuadrant : F4SPointQuadtreeProtocol]? { get }
+    var subtreeDictionary : [F4SQuadtreeQuadrant : F4SPointQuadTreeProtocol]? { get }
     /// Inserts a new point into the subtree
     func insert(item: F4SQuadtreeElement) throws
     /// Inserts points into the subtree
@@ -72,27 +76,35 @@ public protocol F4SPointQuadtreeProtocol {
     func retrieveAll() -> [F4SQuadtreeElement]
     /// Retrieve all items in the tree that lie within the specified rect
     func retrieveWithinRect(_ rect: CGRect) -> [F4SQuadtreeElement]
+    /// Returns the smallest subtree with bounds containing the locagtion of the specified element
+    func smallestSubtreeToContain(element: F4SQuadtreeElement) -> F4SPointQuadTreeProtocol?
+    /// Returns the smallest subtree with bounds containing the location of the specified elements
+    func smallestSubtreeToContain(elements: [F4SQuadtreeElement]) -> F4SPointQuadTreeProtocol?
+    /// Tests whether the current instance or any of its subtrees could contain the location of the specified element (i.e, its position lies within the current instance's bounds
+    func couldContain(elements: [F4SQuadtreeElement]) -> Bool
+
 }
 
 // MARK:-
-public class F4SPointQuadTree : F4SPointQuadtreeProtocol {
+public class F4SPointQuadTree : F4SPointQuadTreeProtocol {
     
     public var items: [F4SQuadtreeElement]
     public let maxItems: Int
     public let depth: Int
-    public var subtreeDictionary: [F4SQuadtreeQuadrant:F4SPointQuadtreeProtocol]? = nil
+    public var subtreeDictionary: [F4SQuadtreeQuadrant:F4SPointQuadTreeProtocol]? = nil
     public let bounds: CGRect
+    public private (set) weak var parent: F4SPointQuadTreeProtocol?
     
-    ///
-    public convenience init(bounds: CGRect, depth: Int = 30, maxItems: Int = 30) {
+    public convenience init(bounds: CGRect, depth: Int = 30, maxItems: Int = 30, parent: F4SPointQuadTreeProtocol? = nil) {
         try! self.init(bounds: bounds, items: nil, depth: depth, maxItems: maxItems)
     }
     
-    public init(bounds: CGRect, items: [F4SQuadtreeElement]?, depth: Int = 30, maxItems: Int = 30) throws {
+    public init(bounds: CGRect, items: [F4SQuadtreeElement]?, depth: Int = 30, maxItems: Int = 30, parent: F4SPointQuadTreeProtocol? = nil) throws {
         precondition(bounds.size != CGSize.zero, "Bounds cannot be zero")
         self.bounds = bounds
         self.maxItems = maxItems
         self.depth = depth
+        self.parent = parent
         self.items = [F4SQuadtreeElement]()
         guard let items = items else {
             return
@@ -103,6 +115,16 @@ public class F4SPointQuadTree : F4SPointQuadtreeProtocol {
     public func clear() {
         items.removeAll()
         subtreeDictionary = nil
+    }
+    
+    public func count() -> Int {
+        let startCount = items.count
+        guard let trees = subtreeDictionary?.values else {
+            return startCount
+        }
+        return trees.reduce(startCount) { (n, tree) -> Int in
+            return n + tree.count()
+        }
     }
     
     public func insert(items: [F4SQuadtreeElement]) throws {
@@ -117,7 +139,7 @@ public class F4SPointQuadTree : F4SPointQuadtreeProtocol {
         }
         let items = retrieveAll()
         let itemsInside = items.filter { (item) -> Bool in
-            return rect.contains(item.point)
+            return rect.contains(item.position)
         }
         return itemsInside
     }
@@ -183,7 +205,7 @@ public class F4SPointQuadTree : F4SPointQuadtreeProtocol {
     }
     
     /// Returns a dictionary containing new sub-quadtrees for the current instance
-    func createSubtreeDictionary() -> [F4SQuadtreeQuadrant : F4SPointQuadtreeProtocol] {
+    func createSubtreeDictionary() -> [F4SQuadtreeQuadrant : F4SPointQuadTreeProtocol] {
         let rects = bounds.quadrantRects()
         var subtrees = [F4SQuadtreeQuadrant:F4SPointQuadTree]()
         subtrees[.topLeft] = try! F4SPointQuadTree(bounds: rects[.topLeft]!, items: nil, depth: depth - 1, maxItems: maxItems)
@@ -195,7 +217,7 @@ public class F4SPointQuadTree : F4SPointQuadtreeProtocol {
     
     /// Returns the quadrant in which the item lies
     public func quadrant(for item: F4SQuadtreeElement) -> F4SQuadtreeQuadrant {
-        let point = item.point
+        let point = item.position
         if !bounds.isPointInsideBounds(point){
             return .none // point is outside our bounds or on our boundary which counts as outside
         }
@@ -210,6 +232,46 @@ public class F4SPointQuadTree : F4SPointQuadtreeProtocol {
             return point.y < bounds.midY ? .topRight : .bottomRight
         }
     }
+    
+    public func smallestSubtreeToContain(elements: [F4SQuadtreeElement]) -> F4SPointQuadTreeProtocol? {
+        guard let first = elements.first else {
+            return nil
+        }
+        guard var smallest = smallestSubtreeToContain(element: first) else {
+            return nil
+        }
+        while !smallest.couldContain(elements: elements) {
+            guard let parent = smallest.parent else {
+                return nil
+            }
+            smallest = parent
+        }
+        return smallest
+    }
+    
+    public func couldContain(elements: [F4SQuadtreeElement]) -> Bool {
+        guard !elements.isEmpty else { return false }
+        for element in elements {
+            if quadrant(for: element) == .none {
+                return false
+            }
+        }
+        return true
+    }
+    
+    public func smallestSubtreeToContain(element: F4SQuadtreeElement) -> F4SPointQuadTreeProtocol? {
+        let quadrant = self.quadrant(for: element)
+        switch quadrant {
+        case .useOwnBounds:
+            return self
+        case .none:
+            return nil
+        default:
+            let subtree = subtreeDictionary![quadrant]
+            return subtree?.smallestSubtreeToContain(element: element) ?? nil
+        }
+    }
+
 }
 
 

@@ -103,7 +103,8 @@ extension InterestsViewController {
     func getInterests() {
         guard let _ = mapModel.visibleBounds else { return }
         self.startAnimating()
-        mapModel.getInterestsInCurrentBounds { (interests) in
+        
+        mapModel.getInterestsInsideCurrentBounds { (interests) in
             if interests.count > 0 {
                 let selectedInterestsForUser = InterestDBOperations.sharedInstance.getInterestForCurrentUser()
                 self.interests = interests.filter({ $0.interestCount != 0 })

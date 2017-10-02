@@ -48,7 +48,7 @@ public struct Company {
     public var sourceId: String
     public var hashtag: String
     public var companyUrl: String
-    public var interestIds: Set<UInt64> = Set<UInt64>()
+    public var interestIds: Set<Int64> = Set<Int64>()
 
     public init(id: Int64 = 0, created: Date = Date(), modified: Date = Date(), isRemoved: Bool = false, uuid: String = "", name: String = "", logoUrl: String = "", industry: String = "", latitude: Double = 0, longitude: Double = 0, summary: String = "", employeeCount: Int64 = 0, turnover: Double = 0, turnoverGrowth: Double = 0, rating: Double = 0, ratingCount: Double = 0, sourceId: String = "", hashtag: String = "", companyUrl: String = "") {
         self.id = id

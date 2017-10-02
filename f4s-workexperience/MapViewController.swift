@@ -32,18 +32,17 @@ class MapViewController: UIViewController {
     var userLocation: CLLocation?
     var currentBounds: GMSCoordinateBounds? {
         set {
-            mapModel.visibleBounds = newValue
+            mapModel?.visibleBounds = newValue
         }
         get {
-            return mapModel.visibleBounds
+            return mapModel?.visibleBounds
         }
     }
-    var mapModel: MapModel = MapModel()
+    var mapModel: MapModel?
     
     var reachability: Reachability?
     var downloadIsInProgress: Bool = true
     var didGetCompaniesNearUser: Bool = false
-    var shouldLimitDisplayedCompanies: Bool = true
     
     var markers: [POIItem] = []
     var companies: [Company] = [] {
@@ -96,10 +95,14 @@ extension MapViewController: DatabaseDownloadProtocol {
         if UserDefaults.standard.object(forKey: UserDefaultsKeys.companyDatabaseCreatedDate) != nil {
             self.downloadIsInProgress = false
             MessageHandler.sharedInstance.hideLoadingOverlay()
-            if let location = mapView.myLocation ?? self.userLocation {
-                self.shouldLimitDisplayedCompanies = true
-                getCompaniesInLocationWithInterests(coordinates_start: location.coordinate, coordinates_end: location.coordinate, isNearLocation: true)
-            }
+            DatabaseOperations.sharedInstance.getAllCompanies(completed: { [weak self] (companies) in
+                if let bounds = self?.currentBounds {
+                    self?.mapModel = MapModel(visibleBounds: bounds, allCompanies: companies)
+                }
+                if let location = self?.mapView.myLocation ?? self?.userLocation {
+                    self?.getCompaniesInLocationWithInterests(coordinates_start: location.coordinate, coordinates_end: location.coordinate, isNearLocation: true)
+                }
+            })
         }
     }
 }
@@ -492,7 +495,6 @@ extension MapViewController {
     }
     
     func moveCameraToAddress(_ address: String, placeId: String?) {
-        self.shouldLimitDisplayedCompanies = true
         
         let coordinates = address.components(separatedBy: ",")
         let lat = Double(coordinates[0])
@@ -718,7 +720,6 @@ extension MapViewController: GMSMapViewDelegate {
     func mapView(_: GMSMapView, willMove gesture: Bool) {
         if gesture {
             hideRefineSearchLabelAnimated()
-            self.shouldLimitDisplayedCompanies = false
         }
     }
     
@@ -742,11 +743,9 @@ extension MapViewController: GMSMapViewDelegate {
         } else {
             self.numberOfActions = 1
         }
-        if !self.shouldLimitDisplayedCompanies {
-            self.currentBounds = GMSCoordinateBounds(region: getVisibleRegion())
-            if let northEast = currentBounds?.northEast, let southWest = currentBounds?.southWest {
-                getCompaniesInLocationWithInterests(coordinates_start: southWest, coordinates_end: northEast, isNearLocation: false)
-            }
+        self.currentBounds = GMSCoordinateBounds(region: getVisibleRegion())
+        if let northEast = currentBounds?.northEast, let southWest = currentBounds?.southWest {
+            getCompaniesInLocationWithInterests(coordinates_start: southWest, coordinates_end: northEast, isNearLocation: false)
         }
     }
     
@@ -755,7 +754,6 @@ extension MapViewController: GMSMapViewDelegate {
             return nil
         }
         let company = self.companies[Int(index)]
-        self.shouldLimitDisplayedCompanies = true
         if self.numberOfActions == -1 {
             self.numberOfActions = 0
         } else if self.numberOfActions == 4 {
@@ -865,7 +863,6 @@ extension MapViewController {
             searchLocationTextField.resignFirstResponder()
         }
         if let location = mapView.myLocation {
-            self.shouldLimitDisplayedCompanies = true
             getCompaniesInLocationWithInterests(coordinates_start: location.coordinate, coordinates_end: location.coordinate, isNearLocation: false, isNearMyLocation: true)
         } else {
             if CLLocationManager.authorizationStatus() == .denied || CLLocationManager.authorizationStatus() == .restricted {
@@ -884,7 +881,6 @@ extension MapViewController {
         }
         interestsCtrl.currentBounds = currentBounds
         interestsCtrl.mapModel = mapModel
-        interestsCtrl.mapController = self
         let interestsCtrlNav = RotationAwareNavigationController(rootViewController: interestsCtrl)
         hideRefineSearchLabelAnimated()
         self.navigationController?.present(interestsCtrlNav, animated: true, completion: nil)
