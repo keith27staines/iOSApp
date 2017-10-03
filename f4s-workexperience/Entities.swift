@@ -87,7 +87,13 @@ struct Placement {
     }
 }
 
-public struct Interest {
+public struct Interest : Hashable {
+    public var hashValue: Int { return uuid.hashValue }
+    
+    public static func ==(lhs: Interest, rhs: Interest) -> Bool {
+        return lhs.uuid == rhs.uuid
+    }
+    
     public var id: Int64
     public var uuid: String
     public var name: String

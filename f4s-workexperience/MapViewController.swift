@@ -25,6 +25,16 @@ class MapViewController: UIViewController {
     fileprivate var locationManager: CLLocationManager?
     fileprivate var lastAuthorizationStatus: CLAuthorizationStatus?
     
+    /// When auto-zooming, try to zoom out until this number of companies are displayed
+    let minCompaniesForAutoZoom: Int = 30
+    
+    /// The default location if the user hasn't allowed myLocation and hasn't entered a location yet (roughly the centroid of GB)
+    let defaultLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 54.0, longitude: -2.5)
+    
+    var location: CLLocationCoordinate2D {
+        return (self.mapView.myLocation?.coordinate ?? userLocation?.coordinate) ?? defaultLocation
+    }
+    
     var autoCompleteFilter: GMSAutocompleteFilter?
     var placesClient: GMSPlacesClient?
     var backgroundView = UIView()
@@ -45,7 +55,7 @@ class MapViewController: UIViewController {
     var didGetCompaniesNearUser: Bool = false
     
     var markers: [POIItem] = []
-    var companies: [Company] = [] {
+    var companies: F4SCompanyPinSet = [] {
         didSet {
             updateMarkers()
         }
@@ -96,12 +106,14 @@ extension MapViewController: DatabaseDownloadProtocol {
             self.downloadIsInProgress = false
             MessageHandler.sharedInstance.hideLoadingOverlay()
             DatabaseOperations.sharedInstance.getAllCompanies(completed: { [weak self] (companies) in
-                if let bounds = self?.currentBounds {
-                    self?.mapModel = MapModel(visibleBounds: bounds, allCompanies: companies)
+                guard let strongSelf = self else { return }
+                let mapModel = MapModel(allCompanies: companies)
+                mapModel.getCompanies(
+                    atLeast: strongSelf.minCompaniesForAutoZoom,
+                    from: mapModel,
+                    near: strongSelf.location) { companies in
                 }
-                if let location = self?.mapView.myLocation ?? self?.userLocation {
-                    self?.getCompaniesInLocationWithInterests(coordinates_start: location.coordinate, coordinates_end: location.coordinate, isNearLocation: true)
-                }
+                strongSelf.mapModel = mapModel
             })
         }
     }
@@ -133,15 +145,15 @@ extension MapViewController {
         var view = UIView()
         
         for (i, company) in companies.enumerated() {
-            if shouldBeFavouritePin(company: company) {
+            if shouldBeFavouritePin(companyPin: company) {
                 view = favouriteView
             } else {
                 view = unfavouriteView
             }
-            let position = CLLocationCoordinate2D(latitude: company.latitude, longitude: company.longitude)
+            let position = company.location
             let index = CInt(i)
             if let selectedComp = self.selectedCompany {
-                if selectedComp.id == company.id {
+                if selectedComp.uuid == company.uuid {
                     // shouldShowView -> true
                     if let item = POIItem(position: position, name: view, index: index, shouldShowView: true) { // name - custom view for marker
                         self.markers.append(item)
@@ -158,11 +170,11 @@ extension MapViewController {
         clusterManager.cluster()
     }
     
-    func shouldBeFavouritePin(company: Company) -> Bool {
-        if let _ = self.favouriteList.filter({ $0.companyUuid == company.uuid.replacingOccurrences(of: "-", with: "") }).first {
+    func shouldBeFavouritePin(companyPin: F4SCompanyPin) -> Bool {
+        if let _ = self.favouriteList.filter({ $0.companyUuid == companyPin.uuid.replacingOccurrences(of: "-", with: "") }).first {
             return true
         }
-        let companyList = self.companies.filter({$0.latitude == company.latitude && $0.longitude == company.longitude})
+        let companyList = self.companies.filter({$0.location == companyPin.location})
         if companyList.count > 1 {
             for comp in companyList {
                 if let _ = self.favouriteList.filter({ $0.companyUuid == comp.uuid.replacingOccurrences(of: "-", with: "") }).first {
@@ -436,11 +448,11 @@ extension MapViewController {
     }
     
     func displayRefineSearchLabelAnimated() {
-        if self.refineSearchLabel.isHidden && InterestDBOperations.sharedInstance.getInterestForCurrentUser().count == 0 {
-            self.refineLabelContainerView.isHidden = false
-            self.setupSlideInAnimation(transitionType.slideIn, completionDelegate: self)
-            self.refineSearchLabel.isHidden = false
-        }
+//        if self.refineSearchLabel.isHidden && InterestDBOperations.sharedInstance.getInterestForCurrentUser().count == 0 {
+//            self.refineLabelContainerView.isHidden = false
+//            self.setupSlideInAnimation(transitionType.slideIn, completionDelegate: self)
+//            self.refineSearchLabel.isHidden = false
+//        }
     }
     
     func hideRefineSearchLabelAnimated() {
@@ -509,7 +521,7 @@ extension MapViewController {
                 case .value(let coordinates):
                     self.userLocation = CLLocation(latitude: coordinates.value.latitude, longitude: coordinates.value.longitude)
                     self.moveCameraToCoordinates(coordinates.value)
-                    self.getCompaniesInLocationWithInterests(coordinates_start: coordinates.value, coordinates_end: coordinates.value, isNearLocation: true)
+                    self.getCompaniesInLocationWithInterests(isNearLocation: true)
                 case .error(let err):
                     if err == "NoConnectivity" {
                         let title = NSLocalizedString("No data connectivity", comment: "")
@@ -535,7 +547,12 @@ extension MapViewController {
         self.mapView.animate(to: camera)
     }
     
-    func moveCameraWithDinamicZoom() {
+    func moveCameraDynamicallyToShow(companies: [Company]) {
+        guard !companies.isEmpty else { return }
+        
+    }
+    
+    func moveCameraWithDynamicZoom() {
         if self.companies.count > 0 {
             var boundsFromMarkers = GMSCoordinateBounds(coordinate: (markers.first?.position)!, coordinate: (markers.first?.position)!)
             for marker in self.markers {
@@ -563,74 +580,42 @@ extension MapViewController {
         return visibleRegionForPoints
     }
     
-    func getCompaniesInLocationWithInterests(coordinates_start: CLLocationCoordinate2D, coordinates_end: CLLocationCoordinate2D, isNearLocation: Bool, shouldReposition: Bool = true, isNearMyLocation: Bool = false) {
-        let interestList = InterestDBOperations.sharedInstance.getInterestForCurrentUser()
-        print("Calling getCompaniesInLocationWithInterests")
-        if interestList.count > 0 {
-            if isNearLocation || isNearMyLocation {
-                DatabaseOperations.sharedInstance.getCompaniesNearLocationFirstThenFilter(longitude: coordinates_start.longitude, latitude: coordinates_start.latitude, interests: interestList, completed: { companies in
-                    self.companies = companies
-                    if shouldReposition && companies.count > 1 {
-                        self.moveCameraWithDinamicZoom()
-                    } else {
-                        self.moveCameraToCoordinates(coordinates_start)
-                    }
-                })
-            } else {
-                DatabaseOperations.sharedInstance.getCompaniesInLocationWithFilters(startLongitude: coordinates_start.longitude, startLatitude: coordinates_start.latitude, endLongitude: coordinates_end.longitude, endLatitude: coordinates_end.latitude, interests: interestList, completed: {
-                    companies in
-                    if self.shouldAddSelectedCompany(startLongitude: coordinates_start.longitude, startLatitude: coordinates_start.latitude, endLongitude: coordinates_end.longitude, endLatitude: coordinates_end.latitude) {
-                        if companies.contains(where: { (company) -> Bool in
-                            if company.id == self.selectedCompany?.id {
-                                return true
-                            }
-                            return false
-                        }) {
-                            self.companies = companies
-                        } else {
-                            var companyList = companies
-                            companyList.append(self.selectedCompany!)
-                            self.companies = companyList
-                        }
-                    } else {
-                        self.companies = companies
-                    }
-                })
-            }
-            
-        } else {
-            if isNearLocation || isNearMyLocation {
-                DatabaseOperations.sharedInstance.getCompaniesNearLocation(longitude: coordinates_start.longitude, latitude: coordinates_start.latitude, completed: {
-                    companies in
-                    self.companies = companies
-                    if shouldReposition && companies.count > 1 {
-                        self.moveCameraWithDinamicZoom()
-                    } else {
-                        self.moveCameraToCoordinates(coordinates_start)
-                    }
-                })
-            } else {
-                DatabaseOperations.sharedInstance.getCompaniesInLocation(startLongitude: coordinates_start.longitude, startLatitude: coordinates_start.latitude, endLongitude: coordinates_end.longitude, endLatitude: coordinates_end.latitude, completed: {
-                    companies in
-                    if self.shouldAddSelectedCompany(startLongitude: coordinates_start.longitude, startLatitude: coordinates_start.latitude, endLongitude: coordinates_end.longitude, endLatitude: coordinates_end.latitude) {
-                        if companies.contains(where: { (company) -> Bool in
-                            if company.id == self.selectedCompany?.id {
-                                return true
-                            }
-                            return false
-                        }) {
-                            self.companies = companies
-                        } else {
-                            var companyList = companies
-                            companyList.append(self.selectedCompany!)
-                            self.companies = companyList
-                        }
-                    } else {
-                        self.companies = companies
-                    }
-                })
-            }
-        }
+    func getCompaniesInLocationWithInterests(
+        isNearLocation: Bool,
+        shouldReposition: Bool = true,
+        isNearMyLocation: Bool = false) {
+//
+//        if isNearLocation || isNearMyLocation {
+//            mapModel?.getCompaniesInsideCurrentBounds { [weak self] companies in
+//                guard let strongSelf = self else { return }
+//                strongSelf.companies = companies
+//                if shouldReposition && companies.count > 1 {
+//                    strongSelf.moveCameraWithDynamicZoom()
+//                } else {
+//                    strongSelf.moveCameraToCoordinates(coordinates_start)
+//                }
+//            }
+//        } else {
+//            DatabaseOperations.sharedInstance.getCompaniesInLocationWithFilters(startLongitude: coordinates_start.longitude, startLatitude: coordinates_start.latitude, endLongitude: coordinates_end.longitude, endLatitude: coordinates_end.latitude, interests: interestList, completed: {
+//                companies in
+//                if self.shouldAddSelectedCompany(startLongitude: coordinates_start.longitude, startLatitude: coordinates_start.latitude, endLongitude: coordinates_end.longitude, endLatitude: coordinates_end.latitude) {
+//                    if companies.contains(where: { (company) -> Bool in
+//                        if company.id == self.selectedCompany?.id {
+//                            return true
+//                        }
+//                        return false
+//                    }) {
+//                        self.companies = companies
+//                    } else {
+//                        var companyList = companies
+//                        companyList.append(self.selectedCompany!)
+//                        self.companies = companyList
+//                    }
+//                } else {
+//                    self.companies = companies
+//                }
+//            })
+//        }
     }
     
     func shouldAddSelectedCompany(startLongitude: Double, startLatitude: Double, endLongitude: Double, endLatitude: Double) -> Bool {
@@ -874,16 +859,16 @@ extension MapViewController {
     }
     
     @IBAction func filtersButtonTouched(_: UIButton) {
-        let interestsStoryboard = UIStoryboard(name: "InterestsView", bundle: nil)
-        let interestsCtrl = interestsStoryboard.instantiateViewController(withIdentifier: "interestsCtrl") as! InterestsViewController
-        if currentBounds == nil {
-            self.currentBounds = GMSCoordinateBounds(region: getVisibleRegion())
-        }
-        interestsCtrl.currentBounds = currentBounds
-        interestsCtrl.mapModel = mapModel
-        let interestsCtrlNav = RotationAwareNavigationController(rootViewController: interestsCtrl)
-        hideRefineSearchLabelAnimated()
-        self.navigationController?.present(interestsCtrlNav, animated: true, completion: nil)
+//        let interestsStoryboard = UIStoryboard(name: "InterestsView", bundle: nil)
+//        let interestsCtrl = interestsStoryboard.instantiateViewController(withIdentifier: "interestsCtrl") as! InterestsViewController
+//        if currentBounds == nil {
+//            self.currentBounds = GMSCoordinateBounds(region: getVisibleRegion())
+//        }
+//        interestsCtrl.currentBounds = currentBounds
+//        interestsCtrl.mapModel = mapModel
+//        let interestsCtrlNav = RotationAwareNavigationController(rootViewController: interestsCtrl)
+//        hideRefineSearchLabelAnimated()
+//        self.navigationController?.present(interestsCtrlNav, animated: true, completion: nil)
     }
 }
 

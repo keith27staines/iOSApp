@@ -377,50 +377,50 @@ extension CoverLetterViewController {
 
     func updatePlacement() {
 
-        if !self.isValidCoverLetter() {
-            return
-        }
-
-        if let reachability = Reachability() {
-            if !reachability.isReachable {
-                MessageHandler.sharedInstance.display("No Internet Connection.", parentCtrl: self)
-                return
-            }
-        }
-
-        guard let currentCompanyUuid = currentCompany?.uuid,
-            var placement = PlacementDBOperations.sharedInstance.getPlacementsForCurrentUserAndCompany(companyUuid: currentCompanyUuid),
-            let currentTemplateUuid = currentTemplate?.uuid else {
-            return
-        }
-
-        MessageHandler.sharedInstance.showLoadingOverlay(self.view)
-        let templateToUpdate = TemplateEntity(uuid: currentTemplateUuid, blank: self.selectedTemplateChoices)
-        placement.interestsList = InterestDBOperations.sharedInstance.getInterestForCurrentUser()
-        PlacementService.sharedInstance.updatePlacement(placement: placement, template: templateToUpdate) {
-            [weak self]
-            _, result in
-            guard let strongSelf = self else {
-                MessageHandler.sharedInstance.hideLoadingOverlay()
-                return
-            }
-            MessageHandler.sharedInstance.hideLoadingOverlay()
-            switch result
-            {
-            case .value:
-                // succes + go to next page
-                if let navCtrl = strongSelf.navigationController, let company = strongSelf.currentCompany {
-                    CustomNavigationHelper.sharedInstance.moveToProcessedMessages(navCtrl, currentCompany: company)
-                }
-                break
-            case let .error(error):
-                MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
-                break
-            case let .deffinedError(error):
-                MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
-                break
-            }
-        }
+//        if !self.isValidCoverLetter() {
+//            return
+//        }
+//
+//        if let reachability = Reachability() {
+//            if !reachability.isReachable {
+//                MessageHandler.sharedInstance.display("No Internet Connection.", parentCtrl: self)
+//                return
+//            }
+//        }
+//
+//        guard let currentCompanyUuid = currentCompany?.uuid,
+//            var placement = PlacementDBOperations.sharedInstance.getPlacementsForCurrentUserAndCompany(companyUuid: currentCompanyUuid),
+//            let currentTemplateUuid = currentTemplate?.uuid else {
+//            return
+//        }
+//
+//        MessageHandler.sharedInstance.showLoadingOverlay(self.view)
+//        let templateToUpdate = TemplateEntity(uuid: currentTemplateUuid, blank: self.selectedTemplateChoices)
+//        placement.interestsList = InterestDBOperations.sharedInstance.getInterestForCurrentUser()
+//        PlacementService.sharedInstance.updatePlacement(placement: placement, template: templateToUpdate) {
+//            [weak self]
+//            _, result in
+//            guard let strongSelf = self else {
+//                MessageHandler.sharedInstance.hideLoadingOverlay()
+//                return
+//            }
+//            MessageHandler.sharedInstance.hideLoadingOverlay()
+//            switch result
+//            {
+//            case .value:
+//                // succes + go to next page
+//                if let navCtrl = strongSelf.navigationController, let company = strongSelf.currentCompany {
+//                    CustomNavigationHelper.sharedInstance.moveToProcessedMessages(navCtrl, currentCompany: company)
+//                }
+//                break
+//            case let .error(error):
+//                MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
+//                break
+//            case let .deffinedError(error):
+//                MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
+//                break
+//            }
+//        }
     }
 
     func validateCoverLetterDataOnLoad() {

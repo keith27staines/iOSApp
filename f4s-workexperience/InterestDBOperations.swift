@@ -24,7 +24,7 @@ class InterestDBOperations {
         }
     }
 
-    func getInterestForCurrentUser() -> [Interest] {
+    func interestsForCurrentUser() -> [Interest] {
         let keychain = KeychainSwift()
         guard let userUuid = keychain.get(UserDefaultsKeys.userUuid) else {
             return []

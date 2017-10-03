@@ -14,7 +14,15 @@ public typealias LatLon = CGPoint
 /// A rectangular area defined by an origin, width and height (all in decimal degrees latitude or longitude)
 public typealias LatLonRect = CGRect
 
-public extension CLLocationCoordinate2D {
+extension CLLocationCoordinate2D : Hashable {
+    public var hashValue: Int {
+        return latitude.hashValue ^ longitude.hashValue
+    }
+    
+    public static func ==(lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
+        return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
+    }
+    
     public init(latLon: LatLon) {
         self.init(latitude: CLLocationDegrees(latLon.latitude), longitude: CLLocationDegrees(latLon.longitude))
     }

@@ -32,15 +32,7 @@ class InterestsViewController: UIViewController, UIScrollViewDelegate {
         }
     }
 
-    var initialSelectedInterests: [Interest] = []
-    var currentBounds: GMSCoordinateBounds? {
-        set {
-            mapModel.visibleBounds = currentBounds
-        }
-        get {
-            return mapModel.visibleBounds
-        }
-    }
+    var initialSelectedInterests: F4SInterestIdsSet = F4SInterestIdsSet()
 
     let uiIndicatorBusy = UIActivityIndicatorView(activityIndicatorStyle: .white)
     var allCompaniesCount: Int?
@@ -49,7 +41,13 @@ class InterestsViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         adjustAppearance()
         self.adjustNavigationBar()
-        getInterests()
+        self.startAnimating()
+//        getInterests(userInterestSet: userInterestSet, completion: { count in
+//            DispatchQueue.main.async { [weak self] in
+//                self?.uiIndicatorBusy.stopAnimating()
+//                self?.updateResultsLabel(count: count)
+//            }
+//        })
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -100,47 +98,7 @@ extension InterestsViewController {
         navigationItem.setLeftBarButton(closeButton, animated: false)
     }
 
-    func getInterests() {
-        guard let _ = mapModel.visibleBounds else { return }
-        self.startAnimating()
-        
-        mapModel.getInterestsInsideCurrentBounds { (interests) in
-            if interests.count > 0 {
-                let selectedInterestsForUser = InterestDBOperations.sharedInstance.getInterestForCurrentUser()
-                self.interests = interests.filter({ $0.interestCount != 0 })
-                for selectedinterest in selectedInterestsForUser {
-                    if !self.interests.contains(where: { $0.uuid == selectedinterest.uuid }) {
-                        self.interests.append(selectedinterest)
-                    }
-                }
-                self.selectedInterests = selectedInterestsForUser
-                self.initialSelectedInterests = selectedInterestsForUser
-            }
-        }
-
-        if self.selectedInterests.count > 0 {
-            DispatchQueue.global(qos: .userInitiated).async {
-                DatabaseOperations.sharedInstance.getCompanyCountFromArea(startLongitude: southWestLongitude, startLatitude: southWestLatitude, endLongitude: northEastLongitude, endLatitude: northEastLatitude, interestList: self.selectedInterests, completed: {
-                    count, interests in
-                    DispatchQueue.main.async {
-                        self.uiIndicatorBusy.stopAnimating()
-                        if self.areEquals(array1: self.selectedInterests, array2: interests) {
-                            self.updateResultsLabel(count: count)
-                        }
-                    }
-                })
-            }
-        } else {
-            DispatchQueue.global(qos: .userInitiated).async {
-                DatabaseOperations.sharedInstance.getCompaniesInLocationNoLimit(startLongitude: southWestLongitude, startLatitude: southWestLatitude, endLongitude: northEastLongitude, endLatitude: northEastLatitude, completed: {
-                    companies in
-                    DispatchQueue.main.async {
-                        self.uiIndicatorBusy.stopAnimating()
-                        self.updateResultsLabel(count: companies.count)
-                    }
-                })
-            }
-        }
+    func getInterests(completion: @escaping (Int) -> Void ) {
     }
 
     func updateResultsLabel(count: Int) {
@@ -237,70 +195,9 @@ extension InterestsViewController: UICollectionViewDelegate {
     }
 
     func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedInterest = self.interests[indexPath.row]
-        self.selectedInterests.append(selectedInterest)
-        self.startAnimating()
-
-        guard let southWestLongitude = self.currentBounds?.southWest.longitude,
-            let southWestLatitude = self.currentBounds?.southWest.latitude,
-            let northEastLongitude = self.currentBounds?.northEast.longitude,
-            let northEastLatitude = self.currentBounds?.northEast.latitude else {
-            return
-        }
-
-        DispatchQueue.global(qos: .userInitiated).async {
-            DatabaseOperations.sharedInstance.getCompanyCountFromArea(startLongitude: southWestLongitude, startLatitude: southWestLatitude, endLongitude: northEastLongitude, endLatitude: northEastLatitude, interestList: self.selectedInterests, completed: {
-                count, interests in
-                DispatchQueue.main.async {
-                    self.uiIndicatorBusy.stopAnimating()
-                    if self.areEquals(array1: self.selectedInterests, array2: interests) {
-                        self.updateResultsLabel(count: count)
-                    }
-                }
-            })
-        }
     }
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? InterestsCollectionViewCell {
-            if let text = cell.interestNameLabel.text {
-                if let index = self.selectedInterests.index(where: { $0.name == text }) {
-                    self.selectedInterests.remove(at: index)
-                }
-            }
-        }
-        self.startAnimating()
-
-        guard let southWestLongitude = self.currentBounds?.southWest.longitude,
-            let southWestLatitude = self.currentBounds?.southWest.latitude,
-            let northEastLongitude = self.currentBounds?.northEast.longitude,
-            let northEastLatitude = self.currentBounds?.northEast.latitude else {
-            return
-        }
-
-        if selectedInterests.count > 0 {
-            DispatchQueue.global(qos: .userInitiated).async {
-                DatabaseOperations.sharedInstance.getCompanyCountFromArea(startLongitude: southWestLongitude, startLatitude: southWestLatitude, endLongitude: northEastLongitude, endLatitude: northEastLatitude, interestList: self.selectedInterests, completed: {
-                    count, interests in
-                    DispatchQueue.main.async {
-                        self.uiIndicatorBusy.stopAnimating()
-                        if self.areEquals(array1: self.selectedInterests, array2: interests) {
-                            self.updateResultsLabel(count: count)
-                        }
-                    }
-                })
-            }
-        } else {
-            DispatchQueue.global(qos: .userInitiated).async {
-                DatabaseOperations.sharedInstance.getCompaniesInLocationNoLimit(startLongitude: southWestLongitude, startLatitude: southWestLatitude, endLongitude: northEastLongitude, endLatitude: northEastLatitude, completed: {
-                    companies in
-                    DispatchQueue.main.async {
-                        self.uiIndicatorBusy.stopAnimating()
-                        self.updateResultsLabel(count: companies.count)
-                    }
-                })
-            }
-        }
     }
 }
 
@@ -334,18 +231,6 @@ extension InterestsViewController: UICollectionViewDelegateFlowLayout {
 extension InterestsViewController {
 
     @IBAction func refineSearchButtonTouched(_: UIButton) {
-        for initialSelectedInterest in initialSelectedInterests {
-            InterestDBOperations.sharedInstance.removeInterestWithId(interestUuid: initialSelectedInterest.uuid)
-        }
-
-        for selectedInterest in selectedInterests {
-            InterestDBOperations.sharedInstance.saveInterest(interest: selectedInterest)
-        }
-        if let southWestCoordinate = self.currentBounds?.southWest, let northEastCoordinate = self.currentBounds?.northEast {
-            self.mapController?.getCompaniesInLocationWithInterests(coordinates_start: southWestCoordinate, coordinates_end:
-                northEastCoordinate, isNearLocation: false, shouldReposition: false)
-        }
-        self.dismiss(animated: true, completion: nil)
     }
 
     func dismissInterestView(_: UIBarButtonItem) {
