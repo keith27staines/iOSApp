@@ -195,6 +195,26 @@ class DatabaseOperations {
             completed([])
         }
     }
+    
+    /// Returns the company with the specified uuid
+    public func companyWithUuid(_ uuid: String) -> Company? {
+        guard let db = database else {
+            log.debug("Can't find company with specified uuid because the database isn't loaded")
+            return nil
+        }
+        let selectString: String = "SELECT * FROM businesses_company WHERE uuid = \(uuid) LIMIT 1"
+        
+        guard let stmt = try? db.prepare(selectString) else {
+            // Company just wasn't found
+            return nil
+        }
+        
+        for row in stmt {
+            let company = DatabaseOperations.sharedInstance.getCompanyFromRowAndStatement(row: row, statement: stmt)
+            return company
+        }
+        return nil
+    }
 
     /// Get companies with the uuid specified
     ///

@@ -148,6 +148,7 @@
 		D54E10071E044BC100A51560 /* ProcessedMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54E10061E044BC100A51560 /* ProcessedMessagesViewController.swift */; };
 		D5E9EBE81DD60AB300BD796E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5E9EBEA1DD60AB300BD796E /* Localizable.strings */; };
 		D5E9EC021DDD9F9000BD796E /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E9EC011DDD9F9000BD796E /* GradientView.swift */; };
+		FC25A05F1F850DF4002F51A9 /* F4SCompanyPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */; };
 		FC59B1901F81549B0068EC9C /* CGRect+MethodsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18E1F81549A0068EC9C /* CGRect+MethodsTests.swift */; };
 		FC59B1911F81549B0068EC9C /* F4SQuadtreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18F1F81549A0068EC9C /* F4SQuadtreeTests.swift */; };
 		FC59B1921F8155480068EC9C /* F4SQuadtree.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18C1F81546C0068EC9C /* F4SQuadtree.swift */; };
@@ -388,6 +389,7 @@
 		EC68C46BEC140D8D307D851A /* Pods-f4s-workexperienceTests.releasecaf.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperienceTests.releasecaf.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperienceTests/Pods-f4s-workexperienceTests.releasecaf.xcconfig"; sourceTree = "<group>"; };
 		EF342E9F354D697386AFC80D /* Pods_f4s_workexperienceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_f4s_workexperienceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F099185A6CFD493B891494B1 /* Pods-f4s-workexperienceUITests.releasef4s.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperienceUITests.releasef4s.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperienceUITests/Pods-f4s-workexperienceUITests.releasef4s.xcconfig"; sourceTree = "<group>"; };
+		FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyPin.swift; sourceTree = "<group>"; };
 		FC59B18C1F81546C0068EC9C /* F4SQuadtree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SQuadtree.swift; sourceTree = "<group>"; };
 		FC59B18D1F81546C0068EC9C /* CGRect+Methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Methods.swift"; sourceTree = "<group>"; };
 		FC59B18E1F81549A0068EC9C /* CGRect+MethodsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+MethodsTests.swift"; sourceTree = "<group>"; };
@@ -885,8 +887,6 @@
 				40A5CF381DED6F8D000007AB /* InterestsView.storyboard */,
 				40E78E931DD391F3000A3776 /* MapView.storyboard */,
 				40C1A4F11DDEF2F6000F80AA /* AutoCompleteTableViewCell.xib */,
-				FCC753ED1F80F26200E9ECD6 /* MapModel.swift */,
-				FC99B7E21F826D1400E2D5F0 /* LatLon.swift */,
 			);
 			name = Map;
 			sourceTree = "<group>";
@@ -894,8 +894,9 @@
 		40E78E961DD39253000A3776 /* Map */ = {
 			isa = PBXGroup;
 			children = (
-				40A5CF3B1DED6FA1000007AB /* InterestsViewController.swift */,
 				40E78E971DD39275000A3776 /* MapViewController.swift */,
+				FC25A05D1F850DAC002F51A9 /* MapModel */,
+				40A5CF3B1DED6FA1000007AB /* InterestsViewController.swift */,
 				40C1A4F41DDEF3DD000F80AA /* AutoCompleteTableViewCell.swift */,
 				40C1A52A1DE82060000F80AA /* InfoWindowView.swift */,
 				40A5CF3D1DED72E8000007AB /* InterestsCollectionViewCell.swift */,
@@ -1038,6 +1039,16 @@
 			);
 			name = CoverLetter;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		FC25A05D1F850DAC002F51A9 /* MapModel */ = {
+			isa = PBXGroup;
+			children = (
+				FCC753ED1F80F26200E9ECD6 /* MapModel.swift */,
+				FC99B7E21F826D1400E2D5F0 /* LatLon.swift */,
+				FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */,
+			);
+			name = MapModel;
 			sourceTree = "<group>";
 		};
 		FC59B18B1F8154350068EC9C /* F4SDataStructures */ = {
@@ -1497,6 +1508,7 @@
 				405974081DFD449C0002DB3A /* ExtraInfoViewController.swift in Sources */,
 				206F8F8C1E1E48120024937B /* MessageOptionCollectionViewCell.swift in Sources */,
 				20FEBDDA1DE5AD3400EBDCBF /* ImageService.swift in Sources */,
+				FC25A05F1F850DF4002F51A9 /* F4SCompanyPin.swift in Sources */,
 				40C6DDF21E03F401000F8806 /* UserInfoCoreDataManager.swift in Sources */,
 				40E78E8D1DD32C3C000A3776 /* MessageHandler.swift in Sources */,
 				40E78E781DD32BE7000A3776 /* DrawerController.swift in Sources */,
