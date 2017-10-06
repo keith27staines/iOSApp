@@ -103,7 +103,7 @@ class MapViewController: UIViewController {
         setupMap()
         setupReachability(nil, useClosures: true)
         startNotifier()
-        
+        createMapModel()
     }
     
     deinit {

@@ -23,6 +23,7 @@
 
 #import "GMUClusterIconGenerator.h"
 #import "GMUWrappingDictionaryKey.h"
+#import "f4s_workexperience-Swift.h"
 
 // Clusters smaller than this threshold will be expanded.
 static const NSUInteger kGMUMinClusterSize = 2;
@@ -328,10 +329,9 @@ static const double kGMUAnimationDuration = 0.5;  // seconds.
 }
 
 - (UIView *)getCustomIconViewForItem:(id)userData {
-    POIItem *item = userData;
-    return item.name;
+    F4SCompanyPin *pin = userData;
+    return pin.customMarkerView;
 }
-
 
 // Returns clusters which should be rendered and is inside the camera visible region.
 - (NSArray<id<GMUCluster>> *)visibleClustersFromClusters:(NSArray<id<GMUCluster>> *)clusters {

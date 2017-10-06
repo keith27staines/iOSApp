@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             })
         }
-
+        print(UIDevice.current.identifierForVendor!.uuidString)
         return true
     }
     

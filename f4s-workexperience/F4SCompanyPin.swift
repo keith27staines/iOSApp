@@ -16,6 +16,14 @@ public class F4SCompanyPin : NSObject, GMUClusterItem {
     public var interestIds: F4SInterestIdsSet
     public var isFavourite: Bool
     
+    /// Returns a
+    func customMarkerView() -> UIView {
+        let imageName = isFavourite ? "markerFavouriteIcon" : "markerIcon"
+        let image = UIImage(named: imageName)
+        let view = UIImageView(image: image)
+        return view
+    }
+    
     // MARK:- Hashable conformance
     override public var hashValue: Int {
         return position.latitude.hashValue ^ position.longitude.hashValue ^ uuid.hashValue

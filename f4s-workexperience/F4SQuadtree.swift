@@ -267,11 +267,14 @@ public class F4SPointQuadTree : F4SPointQuadTreeProtocol {
         case .none:
             return nil
         default:
-            let subtree = subtreeDictionary![quadrant]
-            return subtree?.smallestSubtreeToContain(element: element) ?? nil
+            if let subtreeDictionary = self.subtreeDictionary {
+                let subtree = subtreeDictionary[quadrant]
+                return subtree?.smallestSubtreeToContain(element: element) ?? self
+            } else {
+                return self
+            }
         }
     }
-
 }
 
 
