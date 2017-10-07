@@ -799,7 +799,6 @@ extension MapViewController {
             searchLocationTextField.resignFirstResponder()
         }
         if let location = mapView.myLocation?.coordinate {
-            // mapView.animate(toLocation: location)
             moveAndZoomCamera(to: location)
         } else {
             if CLLocationManager.authorizationStatus() == .denied || CLLocationManager.authorizationStatus() == .restricted {
