@@ -51,12 +51,12 @@ public extension LatLonRect {
     
     /// Returns the north east point of the rectangle
     public var northEast: LatLon {
-        return LatLon(latitude: maxX, longitude: maxX)
+        return LatLon(latitude: maxY, longitude: maxX)
     }
     
     /// Returns the center of the rectangle
     public var center: LatLon {
-        return LatLon(latitude: self.midY, longitude: self.midY)
+        return LatLon(latitude: self.midY, longitude: self.midX)
     }
     
     /// Initialize a new instance from a GMSCoordinateBounds

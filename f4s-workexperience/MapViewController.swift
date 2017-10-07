@@ -150,7 +150,7 @@ extension MapViewController: DatabaseDownloadProtocol {
 
 // MARK:- Managing pins on map
 extension MapViewController {
-    /// Clears the map and associated data structures including
+    /// Clears the map and associated data structures including:
     /// 1. mapView
     /// 2. emplacedCompanyPins
     /// 3. clusterManager
@@ -177,15 +177,18 @@ extension MapViewController {
     /// 1. clusterManager
     /// 2. emplacedCompanyPins
     func addPinsToMap(pins: F4SCompanyPinSet) {
-        for pin in pins {
-            addPinToMap(pin: pin)
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            for pin in pins {
+                strongSelf.addPinToMap(pin: pin)
+            }
         }
     }
     
     /// Adds the specified pin to the map and its associated data structures:
     /// 1. clusterManager
     /// 2. emplacedCompanyPins
-    func addPinToMap(pin: F4SCompanyPin) {
+    private func addPinToMap(pin: F4SCompanyPin) {
         if !emplacedCompanyPins.contains(pin) {
             clusterManager.add(pin)
             emplacedCompanyPins.insert(pin)
@@ -498,7 +501,6 @@ extension MapViewController {
 extension MapViewController  {
     
     /// Moves and zooms the camera to display pins around the specified location.
-    /// - note: The
     func moveAndZoomCamera(to location: CLLocationCoordinate2D) {
         guard let mapModel = mapModel else {
             // Without a model all we can do is move the camera to the specified location
