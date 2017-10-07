@@ -21,7 +21,7 @@ public class MapModel {
     fileprivate let quadTree: F4SPointQuadTree
     
     /// All company pins that can ever be obtained from this model
-    private let allCompanyPins: F4SCompanyPinSet = F4SCompanyPinSet()
+    public let allCompanyPins: F4SCompanyPinSet = F4SCompanyPinSet()
 
     /// Initializes a new instance
     ///
@@ -53,8 +53,8 @@ public extension MapModel {
     /// - parameter completion: Callback to return a set of company pins
     public func getCompanyPinSet(for bounds: GMSCoordinateBounds, completion:@escaping (F4SCompanyPinSet) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            let companies = self?.companyPinSetInsideBounds(bounds) ?? F4SCompanyPinSet()
-            completion(companies)
+            let companyPins = self?.companyPinSetInsideBounds(bounds) ?? F4SCompanyPinSet()
+            completion(companyPins)
         }
     }
 
@@ -124,7 +124,9 @@ extension MapModel {
         guard let tree = quadTree.smallestSubtreeToContain(element: element) else {
             return nil
         }
-        return GMSCoordinateBounds(rect: tree.bounds)
+        let smallestBounds = GMSCoordinateBounds(rect: tree.bounds)
+        let grownBounds = growBoundsToContainSpecifiedNumberOfCompanyPins(bounds: smallestBounds, target: count, maxScalings: maxScalings, factor: factor)
+        return grownBounds
     }
 
     /// Returns the set of company pins within the specified bounds

@@ -41,11 +41,11 @@ class MapViewController: UIViewController {
     let targetCompaniesCountForAutoZoom: Int = 30
     
     /// The default location if the user hasn't allowed myLocation and hasn't entered a location yet (roughly the centroid of GB)
-    let ukCenterLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 54.0, longitude: -2.5)
+    let centerUkCoord = CLLocationCoordinate2DMake(52.533505, -1.445217)
     
     /// A guarenteed location that will be the user's actual location (i.e, `myLocation`) if available, or if not then the location last manually specified by the user, or failing that the approximate centroid of the UK
     var location: CLLocationCoordinate2D {
-        return (self.mapView.myLocation?.coordinate ?? userLocation?.coordinate) ?? ukCenterLocation
+        return (self.mapView.myLocation?.coordinate ?? userLocation?.coordinate) ?? centerUkCoord
     }
     
     var autoCompleteFilter: GMSAutocompleteFilter?
@@ -124,12 +124,19 @@ class MapViewController: UIViewController {
     
     /// Creates the map model
     func createMapModel() {
-        DatabaseOperations.sharedInstance.getAllCompanies(completed: { [weak self] (companies) in
-            guard let strongSelf = self else { return }
-            strongSelf.mapModel = MapModel(allCompanies: companies)
-            strongSelf.clearMap()
-            strongSelf.moveAndZoomCamera(to: strongSelf.location)
-        })
+        DispatchQueue.global(qos: .userInitiated).async {
+            DatabaseOperations.sharedInstance.getAllCompanies(completed: { [weak self] (companies) in
+                guard let strongSelf = self else { return }
+                let mapModel = MapModel(allCompanies: companies)
+                strongSelf.mapModel = mapModel
+                strongSelf.clearMap()
+                let centerUK = strongSelf.centerUkCoord
+                let camera = GMSCameraPosition(target: centerUK, zoom: 6, bearing: 0, viewingAngle: 0)
+                strongSelf.mapView.camera = camera
+                strongSelf.addPinsFromVisibleBoundsToMap()
+                strongSelf.moveAndZoomCamera(to: strongSelf.location)
+            })
+        }
     }
 }
 
@@ -160,7 +167,6 @@ extension MapViewController {
             strongSelf.mapView.clear()
             strongSelf.emplacedCompanyPins.removeAll()
             strongSelf.clusterManager.clearItems()
-            strongSelf.addPinsFromVisibleBoundsToMap()
         }
     }
 
@@ -480,9 +486,6 @@ extension MapViewController {
         }
         
         mapView.settings.myLocationButton = false
-        let centerUkCoord = CLLocationCoordinate2DMake(52.533505, -1.445217)
-        let camera = GMSCameraPosition(target: centerUkCoord, zoom: 6, bearing: 0, viewingAngle: 0)
-        mapView.camera = camera
     }
     
     fileprivate func iconGeneratorWithImages() -> GMUClusterIconGenerator {
@@ -690,7 +693,6 @@ extension MapViewController: GMSMapViewDelegate {
         } else {
             self.numberOfActions = 1
         }
-        addPinsFromVisibleBoundsToMap()
     }
     
     func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
@@ -797,7 +799,8 @@ extension MapViewController {
             searchLocationTextField.resignFirstResponder()
         }
         if let location = mapView.myLocation?.coordinate {
-            mapView.animate(toLocation: location)
+            // mapView.animate(toLocation: location)
+            moveAndZoomCamera(to: location)
         } else {
             if CLLocationManager.authorizationStatus() == .denied || CLLocationManager.authorizationStatus() == .restricted {
                 MessageHandler.sharedInstance.presentEnableLocationInfo(parentCtrl: self)

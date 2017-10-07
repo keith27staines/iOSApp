@@ -84,7 +84,8 @@ class DatabaseService: ApiBaseService {
                     completed(true, .value(Box(boxed.value)))
                 }
             case .error:
-                completed(false, .deffinedError(Errors.GeneralCallErrors.GeneralError))
+               
+               completed(false, .deffinedError(Errors.GeneralCallErrors.GeneralError))
 
             case let .deffinedError(error):
                 completed(false, .deffinedError(error))
