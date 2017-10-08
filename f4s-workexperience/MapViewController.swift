@@ -89,8 +89,6 @@ class MapViewController: UIViewController {
     var selectedCompany: Company?
     
     var infoWindowView: UIView?
-    var numberOfActions: Int = 0
-    var didTappedMarker: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -536,7 +534,6 @@ extension MapViewController  {
         mapModel.getCompanyPins(
             target : targetCompaniesCountForAutoZoom,
             near: location) { [weak self] pins in
-                self?.addPinsToMap(pins: pins)
                 self?.mapModel = mapModel
                 self?.moveCamera(to: location, zoomToShow: pins)
         }
@@ -694,43 +691,32 @@ extension MapViewController: GMSMapViewDelegate {
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        self.selectedCompany = nil
+        self.selectedCompany = companyFromMarker(marker: marker)
+        self.mapView.selectedMarker = marker
         var point: CGPoint = mapView.projection.point(for: marker.position)
         point.y -= 50
         let camera: GMSCameraUpdate = GMSCameraUpdate.setTarget(mapView.projection.coordinate(for: point))
         marker.appearAnimation = kGMSMarkerAnimationPop
         marker.tracksInfoWindowChanges = true
-        self.mapView.selectedMarker = marker
-        self.didTappedMarker = true
+        
         mapView.animate(with: camera)
         return true
     }
     
     func mapView(_: GMSMapView, idleAt _: GMSCameraPosition) {
-        if self.didTappedMarker {
-            self.didTappedMarker = false
-            self.numberOfActions = 0
-        } else {
-            self.numberOfActions = 1
-        }
+        
     }
     
     func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
-        guard let company = companyFromMarker(marker: marker) else { return nil }
-
-        if self.numberOfActions == -1 {
-            self.numberOfActions = 0
-        } else if self.numberOfActions == 4 {
-            self.numberOfActions = 0
-        } else {
-            self.numberOfActions += 1
+        guard let selectedCompany = self.selectedCompany else {
+            return nil
         }
-        if self.selectedCompany != nil {
-            if let infoWindow = self.infoWindowView {
-                return infoWindow
-            }
+        guard let company = companyFromMarker(marker: marker) else {
+            return nil
         }
-        self.selectedCompany = company
+        guard company.uuid == selectedCompany.uuid else {
+            return nil
+        }
         self.infoWindowView = setupInfoWindow(company: company)
         return infoWindowView
     }
@@ -743,13 +729,9 @@ extension MapViewController: GMSMapViewDelegate {
     }
     
     func mapView(_: GMSMapView, didCloseInfoWindowOf _: GMSMarker) {
-        self.numberOfActions += 1
-        if self.numberOfActions == 1 {
-            // close
-            self.selectedCompany = nil
-            self.numberOfActions = -1
-        }
+        
     }
+
 }
 
 // MARK: - GMUClusterManager Delegate
@@ -799,13 +781,6 @@ extension MapViewController: CLLocationManagerDelegate {
     
     func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locationManager!.stopUpdatingLocation()
-        guard let movedToLocation = locations.first?.coordinate else {
-            return
-        }
-        mapModel?.getCompanyPins(target : targetCompaniesCountForAutoZoom, near: movedToLocation) { [weak self] companyPins in
-                self?.addPinsToMap(pins: companyPins)
-            
-        }
     }
 }
 
