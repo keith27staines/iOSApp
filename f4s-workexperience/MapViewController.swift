@@ -41,11 +41,14 @@ class MapViewController: UIViewController {
     let targetCompaniesCountForAutoZoom: Int = 30
     
     /// The default location if the user hasn't allowed myLocation and hasn't entered a location yet (roughly the centroid of GB)
-    let centerUkCoord = CLLocationCoordinate2DMake(52.533505, -1.445217)
+    static let centerUkCoord = CLLocationCoordinate2DMake(52.533505, -1.445217)
+    
+    /// The minimum zoom level 
+    static let zoomMinimum: Float = 6.0
     
     /// A guarenteed location that will be the user's actual location (i.e, `myLocation`) if available, or if not then the location last manually specified by the user, or failing that the approximate centroid of the UK
     var location: CLLocationCoordinate2D {
-        return (self.mapView.myLocation?.coordinate ?? userLocation?.coordinate) ?? centerUkCoord
+        return (self.mapView.myLocation?.coordinate ?? userLocation?.coordinate) ?? MapViewController.centerUkCoord
     }
     
     var autoCompleteFilter: GMSAutocompleteFilter?
@@ -130,11 +133,18 @@ class MapViewController: UIViewController {
                 let mapModel = MapModel(allCompanies: companies)
                 strongSelf.mapModel = mapModel
                 strongSelf.clearMap()
-                let centerUK = strongSelf.centerUkCoord
-                let camera = GMSCameraPosition(target: centerUK, zoom: 6, bearing: 0, viewingAngle: 0)
+                let centerUK = MapViewController.centerUkCoord
+                let camera = GMSCameraPosition(target: centerUK,
+                                               zoom: 6,
+                                               bearing: 0,
+                                               viewingAngle: 0)
                 strongSelf.mapView.camera = camera
                 strongSelf.addPinsFromVisibleBoundsToMap()
-                strongSelf.moveAndZoomCamera(to: strongSelf.location)
+                if let target = strongSelf.mapView.myLocation ?? strongSelf.userLocation {
+                    strongSelf.moveAndZoomCamera(to: target.coordinate)
+                } else {
+                    strongSelf.moveCamera()
+                }
             })
         }
     }
@@ -203,13 +213,13 @@ extension MapViewController {
     
     /// Returns true if the specified pin's company has been favourited, otherwise returns false
     func shouldBeFavouritePin(companyPin: F4SCompanyPin) -> Bool {
-        if let _ = self.favouriteList.filter({ $0.companyUuid == companyPin.uuid.replacingOccurrences(of: "-", with: "") }).first {
+        if let _ = self.favouriteList.filter({ $0.companyUuid == companyPin.companyUuid.replacingOccurrences(of: "-", with: "") }).first {
             return true
         }
         let companyList = self.emplacedCompanyPins.filter({$0.position == companyPin.position})
         if companyList.count > 1 {
             for comp in companyList {
-                if let _ = self.favouriteList.filter({ $0.companyUuid == comp.uuid.replacingOccurrences(of: "-", with: "") }).first {
+                if let _ = self.favouriteList.filter({ $0.companyUuid == comp.companyUuid.replacingOccurrences(of: "-", with: "") }).first {
                     return true
                 }
             }
@@ -502,8 +512,18 @@ extension MapViewController {
 
 // MARK:- Camera position management
 extension MapViewController  {
+    /// Moves the camera to the specified location and sets the zoom to the specified value. If the location is omitted, then the centreUKLocation will be used. If the zoom is omitted, then the minimum zoom will be used
+    func moveCamera(to location: CLLocationCoordinate2D? = MapViewController.centerUkCoord,
+                    zoom: Float = MapViewController.zoomMinimum) {
+        let cameraPosition = GMSCameraPosition(target: location!,
+                                               zoom: zoom,
+                                               bearing: 0,
+                                               viewingAngle: 0)
+        mapView.animate(to: cameraPosition)
+        
+    }
     
-    /// Moves and zooms the camera to display pins around the specified location.
+    /// Moves and zooms the camera to display a reasonable number of pins around the specified location.
     func moveAndZoomCamera(to location: CLLocationCoordinate2D) {
         guard let mapModel = mapModel else {
             // Without a model all we can do is move the camera to the specified location
@@ -884,7 +904,7 @@ extension MapViewController {
         guard let pin = marker.userData as? F4SCompanyPin else {
             return nil
         }
-        return companyWithUuid(pin.uuid)
+        return companyWithUuid(pin.companyUuid)
     }
     
     /// Returns the Company with the specified UUID
