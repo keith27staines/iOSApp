@@ -9,6 +9,7 @@
 import Foundation
 
 public typealias F4SCompanyPinSet = Set<F4SCompanyPin>
+public typealias F4SInterestSet = Set<Interest>
 public typealias F4SInterestIdsSet = Set<Int64>
 
 /// Interest UUIDs are strings
@@ -16,32 +17,48 @@ public typealias F4SUUID = String
 
 // MARK:-
 public class MapModel {
+    
+    /// All company pins that can ever be obtained from this model
+    public let allCompanyPins: F4SCompanyPinSet
+    
+    /// The superset of all interests
+    public let allInterests: F4SInterestSet
+
+    /// Factory method to asynchronously create a map model
+    public static func createMapModel(completion: @ escaping (MapModel) -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let dbOps = DatabaseOperations.sharedInstance
+            dbOps.getAllCompanies(completed: { companies in
+                dbOps.getAllInterests(completed: { (interests) in
+                    let mapModel = MapModel(allCompanies: companies, allInterests:interests)
+                    completion(mapModel)
+                })
+            })
+        }
+    }
 
     /// Underlying spatial partitioning datastructure
     fileprivate let quadTree: F4SPointQuadTree
     
-    /// All company pins that can ever be obtained from this model
-    public let allCompanyPins: F4SCompanyPinSet = F4SCompanyPinSet()
-
     /// Initializes a new instance
     ///
     /// - parameter allCompanies: All companies that might ever need to be presented on the map represented by this map model
-    public init(allCompanies:[Company]) {
+    public init(allCompanies:[Company], allInterests: [Interest]) {
         let companyPinsList = allCompanies.map { (company) -> F4SCompanyPin in
             return F4SCompanyPin(company: company)
         }
-        let companyPinsSet = F4SCompanyPinSet(companyPinsList)
-        self.quadTree = MapModel.createQuadtree(companyPinsSet)
+        allCompanyPins = F4SCompanyPinSet(companyPinsList)
+        for pin in allCompanyPins {
+            let interestIds = pin.interestIds
+        }
+        self.allInterests = F4SInterestSet(allInterests)
+        self.quadTree = MapModel.createQuadtree(allCompanyPins)
     }
 }
 
 // MARK:- public API for getting interests
 public extension MapModel {
-    public func getInterests(within bounds:GMSCoordinateBounds, completion: @escaping ([Interest]) -> Void) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            completion([Interest]())
-        }
-    }
+    
 }
 
 // MARK:- public API for getting companies

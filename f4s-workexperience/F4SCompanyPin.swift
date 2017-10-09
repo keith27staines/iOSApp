@@ -19,7 +19,10 @@ public class F4SCompanyPin : NSObject, GMUClusterItem {
     /// The uuid of the company
     public let companyUuid: F4SUUID
     /// Interests of the company
-    public var interestIds: F4SInterestIdsSet
+    lazy public var interestIds: F4SInterestIdsSet = {
+        let interestIdList = DatabaseOperations.sharedInstance.interestIdsFor(companyId: self.companyId)
+        return F4SInterestIdsSet(interestIdList)
+    }()
     /// True if the user has favourited the company
     public var isFavourite: Bool
     
@@ -53,7 +56,6 @@ public class F4SCompanyPin : NSObject, GMUClusterItem {
         self.companyId = company.id
         self.companyUuid = company.uuid
         self.isFavourite = false
-        self.interestIds = F4SInterestIdsSet()
         self.shouldShowView = true
     }
 }

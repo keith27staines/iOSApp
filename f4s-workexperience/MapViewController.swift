@@ -104,7 +104,7 @@ class MapViewController: UIViewController {
         setupMap()
         setupReachability(nil, useClosures: true)
         startNotifier()
-        createMapModel()
+        reloadMapFromDatabase()
     }
     
     deinit {
@@ -124,26 +124,23 @@ class MapViewController: UIViewController {
     }
     
     /// Creates the map model
-    func createMapModel() {
-        DispatchQueue.global(qos: .userInitiated).async {
-            DatabaseOperations.sharedInstance.getAllCompanies(completed: { [weak self] (companies) in
-                guard let strongSelf = self else { return }
-                let mapModel = MapModel(allCompanies: companies)
-                strongSelf.mapModel = mapModel
-                strongSelf.clearMap()
-                let centerUK = MapViewController.centerUkCoord
-                let camera = GMSCameraPosition(target: centerUK,
-                                               zoom: 6,
-                                               bearing: 0,
-                                               viewingAngle: 0)
-                strongSelf.mapView.camera = camera
-                strongSelf.addPinsFromVisibleBoundsToMap()
-                if let target = strongSelf.mapView.myLocation ?? strongSelf.userLocation {
-                    strongSelf.moveAndZoomCamera(to: target.coordinate)
-                } else {
-                    strongSelf.moveCamera()
-                }
-            })
+    func reloadMapFromDatabase() {
+        MapModel.createMapModel { [weak self] mapModel in
+            guard let strongSelf = self else { return }
+            strongSelf.mapModel = mapModel
+            strongSelf.clearMap()
+            let centerUK = MapViewController.centerUkCoord
+            let camera = GMSCameraPosition(target: centerUK,
+                                           zoom: MapViewController.zoomMinimum,
+                                           bearing: 0,
+                                           viewingAngle: 0)
+            strongSelf.mapView.camera = camera
+            strongSelf.addPinsFromVisibleBoundsToMap()
+            if let target = strongSelf.mapView.myLocation ?? strongSelf.userLocation {
+                strongSelf.moveAndZoomCamera(to: target.coordinate)
+            } else {
+                strongSelf.moveCamera()
+            }
         }
     }
 }
@@ -158,7 +155,7 @@ extension MapViewController: DatabaseDownloadProtocol {
         if UserDefaults.standard.object(forKey: UserDefaultsKeys.companyDatabaseCreatedDate) != nil {
             self.downloadIsInProgress = false
             MessageHandler.sharedInstance.hideLoadingOverlay()
-            createMapModel()
+            reloadMapFromDatabase()
         }
     }
 }

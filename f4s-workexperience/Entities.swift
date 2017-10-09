@@ -87,6 +87,27 @@ struct Placement {
     }
 }
 
+public struct BusinessCompanyInterest : Hashable {
+    public static func ==(lhs: BusinessCompanyInterest, rhs: BusinessCompanyInterest) -> Bool {
+        if lhs.interestId == rhs.interestId && lhs.companyId == lhs.companyId {
+            return true
+        }
+        return false
+    }
+    
+    public var hashValue: Int {
+        return companyId.hashValue ^ interestId.hashValue
+    }
+    public var id: Int64
+    public var interestId: Int64
+    public var companyId: Int64
+    public init(id: Int64 = 0, interestId: Int64 = 0, companyId: Int64 = 0) {
+        self.id = id
+        self.interestId = interestId
+        self.companyId = companyId
+    }
+}
+
 public struct Interest : Hashable {
     public var hashValue: Int { return uuid.hashValue }
     
