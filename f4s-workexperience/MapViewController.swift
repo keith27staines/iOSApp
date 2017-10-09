@@ -879,12 +879,7 @@ extension MapViewController {
         guard let pin = marker.userData as? F4SCompanyPin else {
             return nil
         }
-        return companyWithUuid(pin.companyUuid)
-    }
-    
-    /// Returns the Company with the specified UUID
-    func companyWithUuid(_ uuid: String) -> Company? {
-        return DatabaseOperations.sharedInstance.companyWithUuid(uuid)
+        return DatabaseOperations.sharedInstance.companyWithId(pin.companyId)
     }
     
     /// Sets the userLocation by transforming a place id (or the address string if the place is not provided, or does not correspond to a google places id) into a location
