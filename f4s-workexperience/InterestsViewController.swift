@@ -252,6 +252,15 @@ extension InterestsViewController: UICollectionViewDelegateFlowLayout {
 extension InterestsViewController {
 
     @IBAction func refineSearchButtonTouched(_: UIButton) {
+        let interestsToSave = selectedInterests.subtracting(originallySelectedInterests)
+        let interestsToRemove = originallySelectedInterests.subtracting(selectedInterests)
+        for interest in interestsToRemove {
+            InterestDBOperations.sharedInstance.removeInterestWithUuid(interest.uuid)
+        }
+        for interest in interestsToSave {
+            InterestDBOperations.sharedInstance.saveInterest(interest)
+        }
+        self.dismiss(animated: true, completion: nil)
     }
 
     func dismissInterestView(_: UIBarButtonItem) {

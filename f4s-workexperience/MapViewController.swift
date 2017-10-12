@@ -501,7 +501,7 @@ extension MapViewController {
     
     fileprivate func makeLocationManager() -> CLLocationManager {
         let manager = CLLocationManager()
-        manager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        manager.desiredAccuracy = kCLLocationAccuracyKilometer
         manager.delegate = self
         return manager
     }
