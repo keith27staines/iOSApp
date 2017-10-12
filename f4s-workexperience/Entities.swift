@@ -28,7 +28,18 @@ struct User {
     }
 }
 
-public struct Company {
+public struct Company : Hashable {
+    public var hashValue: Int {
+        return uuid.hashValue ^ latitude.hashValue ^ longitude.hashValue
+    }
+    
+    public static func ==(lhs: Company, rhs: Company) -> Bool {
+        if lhs.uuid == rhs.uuid && lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude {
+            return true
+        }
+        return false
+    }
+    
     public var id: Int64
     public var created: Date
     public var modified: Date
@@ -118,13 +129,11 @@ public struct Interest : Hashable {
     public var id: Int64
     public var uuid: String
     public var name: String
-    public var interestCount: Int64
 
-    public init(id: Int64 = 0, uuid: String = "", name: String = "", interestCount: Int64 = 0) {
+    public init(id: Int64 = 0, uuid: String = "", name: String = "") {
         self.id = id
         self.uuid = uuid
         self.name = name
-        self.interestCount = interestCount
     }
 }
 

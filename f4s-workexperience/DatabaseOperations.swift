@@ -228,28 +228,28 @@ extension DatabaseOperations {
     }
 
     
-    /// Get all interests from the database
-    public func getAllInterests( completed: @escaping (_ interests: [Interest]) -> Void) {
+    /// Get all interests from the database as a dictionary keyed by id
+    public func getAllInterests( completed: @escaping (_ interests: [Int64:Interest]) -> Void) {
         guard let db = database else {
             log.debug("`getAllInterests` failed because the database connection is nil")
-            completed([])
+            completed([:])
             return
         }
         do {
-            var allInterests: [Interest] = []
+            var allInterests: [Int64:Interest] = [:]
             let selectStatement: String = "SELECT id, uuid, name FROM businesses_interest"
             let stmt = try db.prepare(selectStatement)
             
             for row in stmt {
-                let comp = DatabaseOperations.sharedInstance.getInterestFromRowAndStatement(row: row, statement: stmt)
-                allInterests.append(comp)
+                let interest = DatabaseOperations.sharedInstance.getInterestFromRowAndStatement(row: row, statement: stmt)
+                allInterests[interest.id] = interest
             }
             completed(allInterests)
             return
         } catch {
             let nsError = error as NSError
             log.debug(nsError.localizedDescription)
-            completed([])
+            completed([:])
         }
     }
 
@@ -283,8 +283,8 @@ extension DatabaseOperations {
             log.debug("Can't find company with specified uuid because the database isn't loaded")
             return nil
         }
-        let selectString: String = "SELECT * FROM businesses_company WHERE id = '\(id)'"
-        
+//        let selectString: String = "SELECT * FROM businesses_company WHERE id = '\(id)'"
+        let selectString: String = "SELECT * FROM businesses_company WHERE id = \(id)"
         guard let stmt = try? db.prepare(selectString) else {
             // Company just wasn't found
             return nil
@@ -438,9 +438,6 @@ extension DatabaseOperations {
                 }
                 if name == BusinessesInterest.nameColumnName, let name = value as? String {
                     interest.name = name
-                }
-                if name == BusinessesInterest.interestCountColumnName, let interestCount = value as? Int64 {
-                    interest.interestCount = interestCount
                 }
             }
         }

@@ -127,19 +127,21 @@ class MapViewController: UIViewController {
     func reloadMapFromDatabase() {
         MapModel.createMapModel { [weak self] mapModel in
             guard let strongSelf = self else { return }
-            strongSelf.mapModel = mapModel
-            strongSelf.clearMap()
-            let centerUK = MapViewController.centerUkCoord
-            let camera = GMSCameraPosition(target: centerUK,
-                                           zoom: MapViewController.zoomMinimum,
-                                           bearing: 0,
-                                           viewingAngle: 0)
-            strongSelf.mapView.camera = camera
-            strongSelf.addPinsFromVisibleBoundsToMap()
-            if let target = strongSelf.mapView.myLocation ?? strongSelf.userLocation {
-                strongSelf.moveAndZoomCamera(to: target.coordinate)
-            } else {
-                strongSelf.moveCamera()
+            DispatchQueue.main.async {
+                strongSelf.mapModel = mapModel
+                strongSelf.clearMap()
+                let centerUK = MapViewController.centerUkCoord
+                let camera = GMSCameraPosition(target: centerUK,
+                                               zoom: MapViewController.zoomMinimum,
+                                               bearing: 0,
+                                               viewingAngle: 0)
+                strongSelf.mapView.camera = camera
+                strongSelf.addPinsFromVisibleBoundsToMap()
+                if let target = strongSelf.mapView.myLocation ?? strongSelf.userLocation {
+                    strongSelf.moveAndZoomCamera(to: target.coordinate)
+                } else {
+                    strongSelf.moveCamera()
+                }
             }
         }
     }
@@ -499,7 +501,7 @@ extension MapViewController {
     
     fileprivate func makeLocationManager() -> CLLocationManager {
         let manager = CLLocationManager()
-        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         manager.delegate = self
         return manager
     }
@@ -802,16 +804,13 @@ extension MapViewController {
     }
     
     @IBAction func filtersButtonTouched(_: UIButton) {
-//        let interestsStoryboard = UIStoryboard(name: "InterestsView", bundle: nil)
-//        let interestsCtrl = interestsStoryboard.instantiateViewController(withIdentifier: "interestsCtrl") as! InterestsViewController
-//        if currentBounds == nil {
-//            self.currentBounds = GMSCoordinateBounds(region: getVisibleRegion())
-//        }
-//        interestsCtrl.currentBounds = currentBounds
-//        interestsCtrl.mapModel = mapModel
-//        let interestsCtrlNav = RotationAwareNavigationController(rootViewController: interestsCtrl)
-//        hideRefineSearchLabelAnimated()
-//        self.navigationController?.present(interestsCtrlNav, animated: true, completion: nil)
+        let interestsStoryboard = UIStoryboard(name: "InterestsView", bundle: nil)
+        let interestsCtrl = interestsStoryboard.instantiateViewController(withIdentifier: "interestsCtrl") as! InterestsViewController
+        interestsCtrl.visibleBounds = self.visibleMapBounds
+        interestsCtrl.mapModel = mapModel
+        let interestsCtrlNav = RotationAwareNavigationController(rootViewController: interestsCtrl)
+        hideRefineSearchLabelAnimated()
+        self.navigationController?.present(interestsCtrlNav, animated: true, completion: nil)
     }
 }
 

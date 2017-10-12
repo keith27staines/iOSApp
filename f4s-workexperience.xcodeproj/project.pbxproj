@@ -155,6 +155,8 @@
 		FC59B1931F81554F0068EC9C /* CGRect+Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18D1F81546C0068EC9C /* CGRect+Methods.swift */; };
 		FC681C001F57473D0077BECA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFE1F57473D0077BECA /* Podfile */; };
 		FC681C011F57473D0077BECA /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFF1F57473D0077BECA /* Podfile.lock */; };
+		FC9256791F8DF75900FF9841 /* camdencompanies.txt in Resources */ = {isa = PBXBuildFile; fileRef = FC9256781F8DF46E00FF9841 /* camdencompanies.txt */; };
+		FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC92567A1F8F70D100FF9841 /* InterestsModel.swift */; };
 		FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99B7E21F826D1400E2D5F0 /* LatLon.swift */; };
 		FCB6D9361F75056100B8C268 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCB6D9351F75056000B8C268 /* Branding.plist */; };
 		FCC5EBB61F449C310085CE15 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FCC5EBB51F449C310085CE15 /* README.md */; };
@@ -396,6 +398,8 @@
 		FC59B18F1F81549A0068EC9C /* F4SQuadtreeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SQuadtreeTests.swift; sourceTree = "<group>"; };
 		FC681BFE1F57473D0077BECA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		FC681BFF1F57473D0077BECA /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
+		FC9256781F8DF46E00FF9841 /* camdencompanies.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = camdencompanies.txt; sourceTree = "<group>"; };
+		FC92567A1F8F70D100FF9841 /* InterestsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsModel.swift; sourceTree = "<group>"; };
 		FC99B7E21F826D1400E2D5F0 /* LatLon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatLon.swift; sourceTree = "<group>"; };
 		FCB6D9351F75056000B8C268 /* Branding.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
 		FCC5EBB51F449C310085CE15 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -614,6 +618,7 @@
 		40E78E151DD31A86000A3776 /* f4s-workexperience */ = {
 			isa = PBXGroup;
 			children = (
+				FC9256781F8DF46E00FF9841 /* camdencompanies.txt */,
 				FC59B18B1F8154350068EC9C /* F4SDataStructures */,
 				40E78E481DD32848000A3776 /* AppDelegate */,
 				40E78E471DD32840000A3776 /* Data */,
@@ -1047,6 +1052,7 @@
 				FCC753ED1F80F26200E9ECD6 /* MapModel.swift */,
 				FC99B7E21F826D1400E2D5F0 /* LatLon.swift */,
 				FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */,
+				FC92567A1F8F70D100FF9841 /* InterestsModel.swift */,
 			);
 			name = MapModel;
 			sourceTree = "<group>";
@@ -1196,6 +1202,7 @@
 				D5E9EBE81DD60AB300BD796E /* Localizable.strings in Resources */,
 				FCB6D9361F75056100B8C268 /* Branding.plist in Resources */,
 				405974061DFD44670002DB3A /* ExtraInfo.storyboard in Resources */,
+				FC9256791F8DF75900FF9841 /* camdencompanies.txt in Resources */,
 				401634C81E0A9F73000161FA /* NotificationView.storyboard in Resources */,
 				40E78E211DD31A86000A3776 /* LaunchScreen.storyboard in Resources */,
 				40A28CB71E1F96A60077D490 /* RatePlacement.storyboard in Resources */,
@@ -1511,6 +1518,7 @@
 				FC25A05F1F850DF4002F51A9 /* F4SCompanyPin.swift in Sources */,
 				40C6DDF21E03F401000F8806 /* UserInfoCoreDataManager.swift in Sources */,
 				40E78E8D1DD32C3C000A3776 /* MessageHandler.swift in Sources */,
+				FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */,
 				40E78E781DD32BE7000A3776 /* DrawerController.swift in Sources */,
 				40E78E7E1DD32BF4000A3776 /* CenterTableViewCell.swift in Sources */,
 				204C89571DF5A44100D8493A /* TemplateChoiceCoreDataManager.swift in Sources */,

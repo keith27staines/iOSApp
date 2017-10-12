@@ -44,7 +44,6 @@ class MessageHandler {
             break
         }
     }
-
     func display(_ errorMessage: CallError, parentCtrl: UIViewController) {
         MessageHandler.alert.title = errorMessage.appErrorMessageTitle
         MessageHandler.alert.message = errorMessage.appErrorMessage

@@ -10,7 +10,7 @@ import Foundation
 
 public typealias F4SCompanyPinSet = Set<F4SCompanyPin>
 public typealias F4SInterestSet = Set<Interest>
-public typealias F4SInterestIdsSet = Set<Int64>
+public typealias F4SInterestIdSet = Set<Int64>
 
 /// Interest UUIDs are strings
 public typealias F4SUUID = String
@@ -21,16 +21,23 @@ public class MapModel {
     /// All company pins that can ever be obtained from this model
     public let allCompanyPins: F4SCompanyPinSet
     
-    /// The superset of all interests
-    public let allInterests: F4SInterestSet
+    /// Company pins that represent companies having interests matching one or more of the selected interests
+    public let filteredCompanyPinSet: F4SCompanyPinSet
+    
+    /// The dictionary of all interests keyed by id
+    public let interestsModel: InterestsModel
+    
+    /// The subset of interests selected by the user
+    public let selectedInterestIdSet: F4SInterestIdSet?
 
     /// Factory method to asynchronously create a map model
     public static func createMapModel(completion: @ escaping (MapModel) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             let dbOps = DatabaseOperations.sharedInstance
             dbOps.getAllCompanies(completed: { companies in
+                let userInterestList = InterestDBOperations.sharedInstance.interestsForCurrentUser()
                 dbOps.getAllInterests(completed: { (interests) in
-                    let mapModel = MapModel(allCompanies: companies, allInterests:interests)
+                    let mapModel = MapModel(allCompanies: companies, allInterests:interests, selectedInterests: userInterestList)
                     completion(mapModel)
                 })
             })
@@ -43,22 +50,49 @@ public class MapModel {
     /// Initializes a new instance
     ///
     /// - parameter allCompanies: All companies that might ever need to be presented on the map represented by this map model
-    public init(allCompanies:[Company], allInterests: [Interest]) {
+    public init(allCompanies:[Company],
+                allInterests: [Int64:Interest],
+                selectedInterests: F4SInterestSet?) {
         let companyPinsList = allCompanies.map { (company) -> F4SCompanyPin in
             return F4SCompanyPin(company: company)
         }
-        allCompanyPins = F4SCompanyPinSet(companyPinsList)
-        for pin in allCompanyPins {
-            let interestIds = pin.interestIds
+        let companyPinSet = F4SCompanyPinSet(companyPinsList)
+        let filteredCompanyPinList: [F4SCompanyPin]
+        var selectedInterestIdSet: F4SInterestIdSet? = nil
+        if let selectedInterests = selectedInterests, !selectedInterests.isEmpty {
+            let selectedInterestIdList = selectedInterests.map({ interest -> Int64 in
+                return interest.id
+            })
+            selectedInterestIdSet = F4SInterestIdSet(selectedInterestIdList)
+            filteredCompanyPinList = companyPinsList.filter({ pin -> Bool in
+                let companyIds = Set(pin.interestIds)
+                let intersection = companyIds.intersection(selectedInterestIdSet!)
+                return !intersection.isEmpty
+            })
+        } else {
+            filteredCompanyPinList = companyPinsList
         }
-        self.allInterests = F4SInterestSet(allInterests)
-        self.quadTree = MapModel.createQuadtree(allCompanyPins)
+        allCompanyPins = companyPinSet
+        self.filteredCompanyPinSet = F4SCompanyPinSet(filteredCompanyPinList)
+        self.interestsModel = InterestsModel(allInterests: allInterests)
+        self.selectedInterestIdSet = selectedInterestIdSet
+        self.quadTree = MapModel.createQuadtree(filteredCompanyPinSet)
+        //testCampdenCompanies(allCompanies: allCompanies)
     }
 }
 
 // MARK:- public API for getting interests
 public extension MapModel {
-    
+    public func getInterestsInBounds(_ bounds: GMSCoordinateBounds, completion: @escaping (F4SInterestSet) -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let strongSelf = self else { return }
+            var interestSet = F4SInterestSet()
+            for companyPin in strongSelf.companyPinSetInsideBounds(bounds) {
+                interestSet = interestSet.union(strongSelf.interests(from: companyPin.interestIds))
+            }
+            completion(interestSet)
+        }
+    }
 }
 
 // MARK:- public API for getting companies
@@ -194,6 +228,25 @@ extension MapModel {
         }
         return qt
     }
+    
+    /// Returns a set of interests from the specified list of interest ids
+    func interests(from ids: [Int64]) -> F4SInterestSet {
+        var interestSet = F4SInterestSet()
+        for id in ids {
+            guard let interest = interestsModel.allInterests[id] else { continue }
+            interestSet.insert(interest)
+        }
+        return interestSet
+    }
+    /// Returns a set of interests from the specified set of interest ids
+    func interests(from ids: Set<Int64>) -> F4SInterestSet {
+        var interestSet = F4SInterestSet()
+        for id in ids {
+            guard let interest = interestsModel.allInterests[id] else { continue }
+            interestSet.insert(interest)
+        }
+        return interestSet
+    }
 }
 
 // MARK:- helper extension to facilitate transforming company pins into quadtree items
@@ -202,4 +255,73 @@ extension F4SQuadtreeItem {
         let pt = CGPoint(location: companyPin.position)
         self.init(point: pt, object: companyPin)
     }
+}
+
+// MARK:- testing functions
+extension MapModel {
+    func testCampdenCompanies(allCompanies:[Company]) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let url = Bundle.main.url(forResource: "camdencompanies", withExtension: "txt")!
+            let s = try! NSString(contentsOf: url, encoding: 0)
+            let companyNamesList: [String] = s.components(separatedBy: "\n")
+            var companyNamesSet : Set<String> = Set<String>(companyNamesList)
+            companyNamesSet = Set<String>(companyNamesSet.map({ string -> String in
+                return string.lowercased()
+            }))
+            var potentialCampdenCompanies = Set<Company>()
+            for company in allCompanies {
+                guard let fullCompany = DatabaseOperations.sharedInstance.companyWithId(company.id) else { continue }
+                let companyName = fullCompany.name.lowercased()
+                if companyNamesSet.contains(companyName) {
+                    potentialCampdenCompanies.insert(fullCompany)
+                }
+            }
+            var output = String()
+            let fm = NumberFormatter()
+            fm.maximumIntegerDigits = 2
+            fm.minimumIntegerDigits = 2
+            fm.maximumFractionDigits = 4
+            fm.minimumFractionDigits = 4
+            fm.plusSign = "+"
+            var i = 0
+            for company in potentialCampdenCompanies.sorted(by: { (company1, company2) -> Bool in
+                company1.name.lowercased() < company2.name.lowercased()
+            }) {
+                i += 1
+                let lat = fm.string(from: NSNumber(value: company.latitude))!
+                let lon = fm.string(from: NSNumber(value: company.longitude))!
+                
+                let d = distanceFromCamden(company: company)
+                output += "\(i)  lat = \(lat), lon = \(lon), dist = \(d) \(company.name.lowercased())\n"
+            }
+            print("Done")
+        }
+        
+        func distanceFromCamden(company: Company) -> String {
+            let nf = NumberFormatter()
+            nf.maximumFractionDigits = 1
+            nf.minimumFractionDigits = 1
+            nf.maximumIntegerDigits = 5
+            nf.minimumIntegerDigits = 1
+            let toRads = Double.pi / 180.0
+            // 51.548833, -0.153083
+            let camdenLat = 51.548833 //
+            let camdenLon = -0.153083
+            let r = 6371.0; // km
+            let φ1 = camdenLat * toRads
+            let φ2 = company.latitude * toRads
+            let Δφ = (camdenLat-company.latitude) * toRads;
+            let Δλ = (camdenLon-company.longitude) * toRads;
+            
+            let a = sin(Δφ/2) * sin(Δφ/2) +
+                cos(φ1) * cos(φ2) *
+                sin(Δλ/2) * sin(Δλ/2)
+            let c = 2 * atan2(sqrt(a), sqrt(1-a))
+            
+            let d = abs(r * c);
+            return nf.string(from: NSNumber(value: d))! + " km"
+        }
+        
+    }
+    
 }

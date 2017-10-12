@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import F4SDataStructures
+@testable import f4s_workexperience
 
 class F4SQuadtreeTests: XCTestCase {
     func testQuadrantForItemFarOutside() {

@@ -12,44 +12,72 @@ class InterestsViewController: UIViewController, UIScrollViewDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var refineSearchButton: UIButton!
-
+    var visibleBounds: GMSCoordinateBounds!
+    
+    /// The map model containing all companies, unfiltered by any interests
     var mapModel: MapModel!
     
     fileprivate let reuseId = "interestsCell"
-    var interests: [Interest] = []
-    var selectedInterests: [Interest] = [] {
+    
+    /// The list of interests the user can select from, which includes interests they have selected previously plus any of the interests of companies within visibleBounds
+    private (set) var interestsToDisplay: [Interest] = [Interest]() {
         didSet {
-            if selectedInterests.count > 0 {
-                refineSearchButton.isEnabled = true
-            } else {
-                if self.initialSelectedInterests.count > 0 {
-                    refineSearchButton.isEnabled = true
+            collectionView.reloadData()
+        }
+    }
+    
+    var interestsCount: F4SInterestCounts = F4SInterestCounts()
 
-                } else {
-                    refineSearchButton.isEnabled = false
-                }
-            }
+    /// The union of all interests of all companies within visible bounds
+    var interestsInBounds: F4SInterestSet!
+    
+    /// Interests that the user originally had selected to use as filters on view load
+    var originallySelectedInterests: F4SInterestSet = F4SInterestSet()
+    
+    
+    /// Interests that the user currently has actively selected to use as filters
+    var selectedInterests: F4SInterestSet! {
+        didSet {
+            refineSearchButton.isEnabled = (selectedInterests == originallySelectedInterests) ? false : true
         }
     }
 
-    var initialSelectedInterests: F4SInterestIdsSet = F4SInterestIdsSet()
-
     let uiIndicatorBusy = UIActivityIndicatorView(activityIndicatorStyle: .white)
-    var allCompaniesCount: Int?
 
+    var interestsModel: InterestsModel {
+        return mapModel.interestsModel
+    }
+    typealias InterestCountResults = (Int,F4SInterestCounts)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         adjustAppearance()
-        self.adjustNavigationBar()
-        self.startAnimating()
-//        getInterests(userInterestSet: userInterestSet, completion: { count in
-//            DispatchQueue.main.async { [weak self] in
-//                self?.uiIndicatorBusy.stopAnimating()
-//                self?.updateResultsLabel(count: count)
-//            }
-//        })
+        adjustNavigationBar()
+        startAnimating()
+        originallySelectedInterests = InterestDBOperations.sharedInstance.interestsForCurrentUser()
+        selectedInterests = originallySelectedInterests
+        mapModel.getInterestsInBounds(visibleBounds) { (interestsInBounds) in
+            DispatchQueue.main.async { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.interestsInBounds = interestsInBounds
+                strongSelf.interestsToDisplay = strongSelf.combineInterestsAsSortedList(interestSubsets: interestsInBounds,strongSelf.selectedInterests)
+                    strongSelf.updateUIWithLatestCounts()
+            }
+        }
     }
-
+    
+    func updateUIWithLatestCounts() {
+        getUpdatedCounts() { [weak self] counts in
+            DispatchQueue.main.async {
+                guard let strongSelf = self else { return }
+                strongSelf.updateResultsLabel(count: counts.0)
+                strongSelf.interestsCount = counts.1
+                strongSelf.collectionView.reloadData()
+                strongSelf.uiIndicatorBusy.stopAnimating()
+            }
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -98,9 +126,6 @@ extension InterestsViewController {
         navigationItem.setLeftBarButton(closeButton, animated: false)
     }
 
-    func getInterests(completion: @escaping (Int) -> Void ) {
-    }
-
     func updateResultsLabel(count: Int) {
         let label = UILabel()
         let resultsString = count == 1 ? " Result" : " Results"
@@ -132,18 +157,6 @@ extension InterestsViewController {
             self.navigationItem.setRightBarButtonItems([customBarBtn, UIBarButtonItem(customView: self.uiIndicatorBusy)], animated: false)
         }
     }
-
-    func areEquals(array1: [Interest], array2: [Interest]) -> Bool {
-        if array1.count != array2.count {
-            return false
-        }
-        for i in 0 ... array2.count - 1 {
-            if array1[i].uuid != array2[i].uuid {
-                return false
-            }
-        }
-        return true
-    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -154,7 +167,7 @@ extension InterestsViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
-        return interests.count
+        return interestsToDisplay.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -166,10 +179,10 @@ extension InterestsViewController: UICollectionViewDataSource {
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor(netHex: Colors.pinkishGrey).cgColor
         cell.layer.cornerRadius = 5
-        let currentInterest = interests[indexPath.row]
-
+        let currentInterest = interestsToDisplay[indexPath.row]
+        let count = interestsCount[currentInterest] ?? 0
         cell.interestNameLabel.text = currentInterest.name
-        cell.interestFrequencyLabel.text = " (\(String(currentInterest.interestCount)))"
+        cell.interestFrequencyLabel.text = " (\(String(count)))"
 
         if !cell.isSelected && self.selectedInterests.contains(where: { $0.uuid == currentInterest.uuid }) {
             cell.isSelected = true
@@ -195,9 +208,15 @@ extension InterestsViewController: UICollectionViewDelegate {
     }
 
     func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let interest = interestsToDisplay[indexPath.row]
+        selectedInterests.insert(interest)
+        updateUIWithLatestCounts()
     }
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let interest = interestsToDisplay[indexPath.row]
+        selectedInterests.remove(interest)
+        updateUIWithLatestCounts()
     }
 }
 
@@ -212,7 +231,9 @@ extension InterestsViewController: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let interestStr = interests[indexPath.row].name + " (\(interests[indexPath.row].interestCount))"
+        let interest = interestsToDisplay[indexPath.row]
+        let count = interestsCount[interest] ?? 0
+        let interestStr = interest.name + " (\(count))"
         var sizeForText = getTextSize(interestStr, font: UIFont.systemFont(ofSize: 13, weight: UIFontWeightRegular), maxWidth: collectionView.bounds.width)
         sizeForText.height = 40
         return sizeForText
@@ -235,5 +256,40 @@ extension InterestsViewController {
 
     func dismissInterestView(_: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK:- helpers
+extension InterestsViewController {
+    
+    /// Gets the count of companies having at least one of the selected interests, and the count of companies for each interest individually
+    func getUpdatedCounts(completion: @escaping (InterestCountResults) -> Void) {
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            let visibleBounds = strongSelf.visibleBounds!
+            let selectedInterests = strongSelf.selectedInterests!
+            let allInterests = F4SInterestSet(strongSelf.interestsToDisplay)
+            let interests = selectedInterests.isEmpty ? allInterests : selectedInterests
+            strongSelf.mapModel.getCompanyPinSet(for: visibleBounds) { pins in
+                let countsResults = strongSelf.interestsModel.interestCounts(interests: interests, companyPins: pins)
+                DispatchQueue.main.async {
+                    completion(countsResults)
+                }
+            }
+        }
+    }
+
+    
+    /// Returns an array formed from the union of the specified sets of interests. The returned array is ordered ascending by interest name
+    func combineInterestsAsSortedList(interestSubsets: F4SInterestSet...) -> [Interest] {
+        var combinedSet: F4SInterestSet = F4SInterestSet()
+        for interestSubset in interestSubsets {
+            combinedSet = combinedSet.union(interestSubset)
+        }
+        let combinedInterestsList = [Interest](combinedSet)
+        let orderedList = combinedInterestsList.sorted { interest1, interest2 in
+            interest1.name < interest2.name
+        }
+        return orderedList
     }
 }

@@ -11,6 +11,11 @@ import CoreData
 import UIKit
 
 class CoreDataBaseManager {
+    
+    public init() {
+        
+    }
+    
     lazy var managedObjectContext: NSManagedObjectContext? = {
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         let managedObjectContext = appDelegate?.managedObjectContext
