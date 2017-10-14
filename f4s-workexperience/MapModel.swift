@@ -16,7 +16,7 @@ public typealias F4SInterestIdSet = Set<Int64>
 public typealias F4SUUID = String
 
 // MARK:-
-public class MapModel {
+public struct MapModel {
     
     /// All company pins that can ever be obtained from this model
     public let allCompanyPins: F4SCompanyPinSet
@@ -26,26 +26,30 @@ public class MapModel {
     
     /// The dictionary of all interests keyed by id
     public let interestsModel: InterestsModel
-    
-    /// The subset of interests selected by the user
-    public let selectedInterestIdSet: F4SInterestIdSet?
-
-    /// Factory method to asynchronously create a map model
-    public static func createMapModel(completion: @ escaping (MapModel) -> Void) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            let dbOps = DatabaseOperations.sharedInstance
-            dbOps.getAllCompanies(completed: { companies in
-                let userInterestList = InterestDBOperations.sharedInstance.interestsForCurrentUser()
-                dbOps.getAllInterests(completed: { (interests) in
-                    let mapModel = MapModel(allCompanies: companies, allInterests:interests, selectedInterests: userInterestList)
-                    completion(mapModel)
-                })
-            })
-        }
-    }
 
     /// Underlying spatial partitioning datastructure
     fileprivate let quadTree: F4SPointQuadTree
+    
+    public init(allCompanyPinsSet: F4SCompanyPinSet,
+                allInterests: [Int64: Interest],
+                filtereredBy interestsSet: F4SInterestSet) {
+        self.allCompanyPins = allCompanyPinsSet
+
+        let filteredCompanyPinList: [F4SCompanyPin]
+        var selectedInterestIdSet: F4SInterestIdSet = InterestsModel.interestIdSet(from: interestsSet)
+        if !interestsSet.isEmpty {
+            filteredCompanyPinList = allCompanyPinsSet.filter({ pin -> Bool in
+                let pinInterestIdsSet = Set(pin.interestIds)
+                let intersection = pinInterestIdsSet.intersection(selectedInterestIdSet)
+                return !intersection.isEmpty
+            })
+            filteredCompanyPinSet = F4SCompanyPinSet(filteredCompanyPinList)
+        } else {
+            filteredCompanyPinSet = allCompanyPinsSet
+        }
+        self.interestsModel = InterestsModel(allInterests: allInterests)
+        self.quadTree = MapModel.createQuadtree(filteredCompanyPinSet)
+    }
     
     /// Initializes a new instance
     ///
@@ -75,20 +79,17 @@ public class MapModel {
         allCompanyPins = companyPinSet
         self.filteredCompanyPinSet = F4SCompanyPinSet(filteredCompanyPinList)
         self.interestsModel = InterestsModel(allInterests: allInterests)
-        self.selectedInterestIdSet = selectedInterestIdSet
         self.quadTree = MapModel.createQuadtree(filteredCompanyPinSet)
-        //testCampdenCompanies(allCompanies: allCompanies)
     }
 }
 
 // MARK:- public API for getting interests
 public extension MapModel {
     public func getInterestsInBounds(_ bounds: GMSCoordinateBounds, completion: @escaping (F4SInterestSet) -> Void) {
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            guard let strongSelf = self else { return }
+        DispatchQueue.global(qos: .userInitiated).async {
             var interestSet = F4SInterestSet()
-            for companyPin in strongSelf.companyPinSetInsideBounds(bounds) {
-                interestSet = interestSet.union(strongSelf.interests(from: companyPin.interestIds))
+            for companyPin in self.companyPinSetInsideBounds(bounds) {
+                interestSet = interestSet.union(self.interests(from: companyPin.interestIds))
             }
             completion(interestSet)
         }
@@ -103,8 +104,8 @@ public extension MapModel {
     /// - parameter bounds: The area to be searched for pins
     /// - parameter completion: Callback to return a set of company pins
     public func getCompanyPinSet(for bounds: GMSCoordinateBounds, completion:@escaping (F4SCompanyPinSet) -> Void) {
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            let companyPins = self?.companyPinSetInsideBounds(bounds) ?? F4SCompanyPinSet()
+        DispatchQueue.global(qos: .userInitiated).async {
+            let companyPins = self.companyPinSetInsideBounds(bounds) ?? F4SCompanyPinSet()
             completion(companyPins)
         }
     }
@@ -121,12 +122,12 @@ public extension MapModel {
         
         getBoundsEnclosing(
             target: count,
-            near: location) { [weak self] bounds in
-                guard let bounds = bounds, let strongSelf = self else {
+            near: location) { bounds in
+                guard let bounds = bounds else {
                     completion([])
                     return
                 }
-                strongSelf.getCompanyPinSet(for: bounds) { companies in
+                self.getCompanyPinSet(for: bounds) { companies in
                     completion(companies)
                 }
         }
@@ -145,8 +146,8 @@ public extension MapModel {
         maxScalings: Int = 30,
         factor: Double = 1.2,
         completion: @escaping (GMSCoordinateBounds?) -> Void ) {
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            let bounds = self?.boundsEnclosing(
+        DispatchQueue.global(qos: .userInitiated).async {
+            let bounds = self.boundsEnclosing(
                 target: count,
                 near: location,
                 maxScalings: maxScalings,

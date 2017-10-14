@@ -34,6 +34,7 @@ class MapViewController: UIViewController {
     
     /// Manages location updates from the device
     fileprivate var locationManager: CLLocationManager?
+    
     /// Last authorization status reported by `locationManager`
     fileprivate var lastAuthorizationStatus: CLAuthorizationStatus?
     
@@ -45,11 +46,6 @@ class MapViewController: UIViewController {
     
     /// The minimum zoom level 
     static let zoomMinimum: Float = 6.0
-    
-    /// A guarenteed location that will be the user's actual location (i.e, `myLocation`) if available, or if not then the location last manually specified by the user, or failing that the approximate centroid of the UK
-    var location: CLLocationCoordinate2D {
-        return (self.mapView.myLocation?.coordinate ?? userLocation?.coordinate) ?? MapViewController.centerUkCoord
-    }
     
     var autoCompleteFilter: GMSAutocompleteFilter?
     var placesClient: GMSPlacesClient?
@@ -70,8 +66,11 @@ class MapViewController: UIViewController {
         return GMSCoordinateBounds(region: getVisibleRegion())
     }
     
-    /// Manages searches for businesses
-    var mapModel: MapModel?
+    /// Map model of all companies (unfiltered by interest)
+    var unfilteredMapModel: MapModel?
+    
+    /// Map model for companies satisfying the interest filters
+    var filteredMapModel: MapModel?
     
     /// Used to determine whether there is internet connectivity
     var reachability: Reachability?
@@ -104,7 +103,9 @@ class MapViewController: UIViewController {
         setupMap()
         setupReachability(nil, useClosures: true)
         startNotifier()
-        reloadMapFromDatabase()
+        reloadMapFromDatabase { [weak self] in
+            self?.moveCameraToBestPosition()
+        }
     }
     
     deinit {
@@ -122,27 +123,18 @@ class MapViewController: UIViewController {
         super.viewDidLayoutSubviews()
         setupFramesAndSizes()
     }
-    
-    /// Creates the map model
-    func reloadMapFromDatabase() {
-        MapModel.createMapModel { [weak self] mapModel in
-            guard let strongSelf = self else { return }
-            DispatchQueue.main.async {
-                strongSelf.mapModel = mapModel
-                strongSelf.clearMap()
-                let centerUK = MapViewController.centerUkCoord
-                let camera = GMSCameraPosition(target: centerUK,
-                                               zoom: MapViewController.zoomMinimum,
-                                               bearing: 0,
-                                               viewingAngle: 0)
-                strongSelf.mapView.camera = camera
-                strongSelf.addPinsFromVisibleBoundsToMap()
-                if let target = strongSelf.mapView.myLocation ?? strongSelf.userLocation {
-                    strongSelf.moveAndZoomCamera(to: target.coordinate)
-                } else {
-                    strongSelf.moveCamera()
-                }
-            }
+}
+
+// MARK:- Conform to InterestsViewControllerDelegate
+extension MapViewController : InterestsViewControllerDelegate {
+    func interestsViewController(_ vc: InterestsViewController, didChangeSelectedInterests interestFilterSet: F4SInterestSet) {
+        guard let unfilteredMapModel = self.unfilteredMapModel else { return }
+        createFilteredMapModel(
+            unfilteredModel: unfilteredMapModel,
+            interestFilterSet: interestFilterSet) { [weak self] (filteredModel) in
+                self?.filteredMapModel = filteredModel
+                self?.reloadMapFromModel(mapModel: filteredModel, completed: {
+            })
         }
     }
 }
@@ -152,56 +144,26 @@ protocol DatabaseDownloadProtocol: class {
     func finishDownloadProtocol()
 }
 
+// MARK:- Conform to DatabaseDownloadProtocol
 extension MapViewController: DatabaseDownloadProtocol {
     internal func finishDownloadProtocol() {
         if UserDefaults.standard.object(forKey: UserDefaultsKeys.companyDatabaseCreatedDate) != nil {
             self.downloadIsInProgress = false
             MessageHandler.sharedInstance.hideLoadingOverlay()
-            reloadMapFromDatabase()
+            reloadMapFromDatabase { [weak self] in
+                self?.moveCameraToBestPosition()
+            }
         }
     }
 }
 
-// MARK:- Managing pins on map
+// MARK:- Manage pins on map
 extension MapViewController {
-    /// Clears the map and associated data structures including:
-    /// 1. mapView
-    /// 2. emplacedCompanyPins
-    /// 3. clusterManager
-    func clearMap() {
-        DispatchQueue.main.async { [weak self] in
-            guard let strongSelf = self else { return }
-            strongSelf.mapView.clear()
-            strongSelf.emplacedCompanyPins.removeAll()
-            strongSelf.clusterManager.clearItems()
-        }
-    }
-
-    /// Gets the pins in the currently visible area and adds them to the map
-    func addPinsFromVisibleBoundsToMap(completion: ((F4SCompanyPinSet) -> Void)? = nil) {
-        guard let bounds = visibleMapBounds else { return }
-        mapModel?.getCompanyPinSet(for: bounds) { [weak self] companyPins in
-            self?.addPinsToMap(pins: companyPins)
-            completion?(companyPins)
-        }
-    }
-    
-    /// Adds pins to the Map and its associated data structures:
-    /// 1. clusterManager
-    /// 2. emplacedCompanyPins
-    func addPinsToMap(pins: F4SCompanyPinSet) {
-        DispatchQueue.main.async { [weak self] in
-            guard let strongSelf = self else { return }
-            for pin in pins {
-                strongSelf.addPinToMap(pin: pin)
-            }
-        }
-    }
     
     /// Adds the specified pin to the map and its associated data structures:
     /// 1. clusterManager
     /// 2. emplacedCompanyPins
-    private func addPinToMap(pin: F4SCompanyPin) {
+    fileprivate func addPinToMap(pin: F4SCompanyPin) {
         if !emplacedCompanyPins.contains(pin) {
             clusterManager.add(pin)
             emplacedCompanyPins.insert(pin)
@@ -336,70 +298,15 @@ extension MapViewController {
             infoWindow.logoImageView.image = UIImage(named: "DefaultLogo")
         }
         
-        if company.rating == 0 {
+        if company.rating < 0.5 {
             infoWindow.ratingStackView.removeFromSuperview()
         } else {
-            let roundedRating = company.rating.round()
-            if roundedRating == 0 {
-                infoWindow.ratingStackView.removeFromSuperview()
-            } else {
-                infoWindow.ratingLabel.attributedText = NSAttributedString(string: String(format: "%.1f", company.rating),
-                                                                           attributes: [
-                                                                            NSFontAttributeName: UIFont.systemFont(ofSize: Style.biggerVerySmallTextSize,
-                                                                                                                   weight: UIFontWeightSemibold),
-                                                                            NSForegroundColorAttributeName: UIColor.black,
-                                                                            ])
-                if roundedRating == 0.5 {
-                    infoWindow.firstStarImageView.image = UIImage(named: "HalfStar")
-                }
-                if roundedRating == 1 {
-                    infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-                }
-                if roundedRating == 1.5 {
-                    infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.secondStarImageView.image = UIImage(named: "HalfStar")
-                }
-                if roundedRating == 2 {
-                    infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
-                }
-                if roundedRating == 2.5 {
-                    infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.thirdStarImageView.image = UIImage(named: "HalfStar")
-                }
-                if roundedRating == 3 {
-                    infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.thirdStarImageView.image = UIImage(named: "FilledStar")
-                }
-                if roundedRating == 3.5 {
-                    infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.thirdStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.fourthStarImageView.image = UIImage(named: "HalfStar")
-                }
-                if roundedRating == 4 {
-                    infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.thirdStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.fourthStarImageView.image = UIImage(named: "FilledStar")
-                }
-                if roundedRating == 4.5 {
-                    infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.thirdStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.fourthStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.fifthStarImageView.image = UIImage(named: "HalfStar")
-                }
-                if roundedRating == 5 {
-                    infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.thirdStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.fourthStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.fifthStarImageView.image = UIImage(named: "FilledStar")
-                }
-            }
+            setInfoWindowStars(infoWindow: infoWindow, unroundedRating: company.rating)
+            
+            infoWindow.ratingLabel.attributedText = NSAttributedString(
+                string: String(format: "%.1f", company.rating),
+                attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: Style.biggerVerySmallTextSize, weight: UIFontWeightSemibold),
+                             NSForegroundColorAttributeName: UIColor.black])
         }
         
         let height = infoWindow.backgroundView.bounds.height
@@ -414,6 +321,60 @@ extension MapViewController {
         infoWindow.backgroundView.layer.cornerRadius = 10
         
         return infoWindow
+    }
+    
+    func setInfoWindowStars(infoWindow: InfoWindowView, unroundedRating: Double) {
+        let roundedRating = unroundedRating.round()
+        if roundedRating == 0.5 {
+            infoWindow.firstStarImageView.image = UIImage(named: "HalfStar")
+        }
+        if roundedRating == 1 {
+            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
+        }
+        if roundedRating == 1.5 {
+            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.secondStarImageView.image = UIImage(named: "HalfStar")
+        }
+        if roundedRating == 2 {
+            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
+        }
+        if roundedRating == 2.5 {
+            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.thirdStarImageView.image = UIImage(named: "HalfStar")
+        }
+        if roundedRating == 3 {
+            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.thirdStarImageView.image = UIImage(named: "FilledStar")
+        }
+        if roundedRating == 3.5 {
+            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.thirdStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.fourthStarImageView.image = UIImage(named: "HalfStar")
+        }
+        if roundedRating == 4 {
+            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.thirdStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.fourthStarImageView.image = UIImage(named: "FilledStar")
+        }
+        if roundedRating == 4.5 {
+            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.thirdStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.fourthStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.fifthStarImageView.image = UIImage(named: "HalfStar")
+        }
+        if roundedRating == 5 {
+            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.thirdStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.fourthStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.fifthStarImageView.image = UIImage(named: "FilledStar")
+        }
     }
     
     enum transitionType {
@@ -451,11 +412,11 @@ extension MapViewController {
     }
     
     func displayRefineSearchLabelAnimated() {
-//        if self.refineSearchLabel.isHidden && InterestDBOperations.sharedInstance.getInterestForCurrentUser().count == 0 {
-//            self.refineLabelContainerView.isHidden = false
-//            self.setupSlideInAnimation(transitionType.slideIn, completionDelegate: self)
-//            self.refineSearchLabel.isHidden = false
-//        }
+        if self.refineSearchLabel.isHidden && InterestDBOperations.sharedInstance.interestsForCurrentUser().count == 0 {
+            self.refineLabelContainerView.isHidden = false
+            self.setupSlideInAnimation(transitionType.slideIn, completionDelegate: self)
+            self.refineSearchLabel.isHidden = false
+        }
     }
     
     func hideRefineSearchLabelAnimated() {
@@ -509,10 +470,21 @@ extension MapViewController {
 
 // MARK:- Camera position management
 extension MapViewController  {
-    /// Moves the camera to the specified location and sets the zoom to the specified value. If the location is omitted, then the centreUKLocation will be used. If the zoom is omitted, then the minimum zoom will be used
-    func moveCamera(to location: CLLocationCoordinate2D? = MapViewController.centerUkCoord,
-                    zoom: Float = MapViewController.zoomMinimum) {
-        let cameraPosition = GMSCameraPosition(target: location!,
+    /// Moves the camera to its last idle position if available, else to my location or user selected location with dynamic zoom to ensure a reasonable number of company pins on map, or failing all of that, show the entire UK
+    func moveCameraToBestPosition() {
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            if let target = strongSelf.mapView.myLocation ?? strongSelf.userLocation {
+                strongSelf.moveAndZoomCamera(to: target.coordinate)
+            } else {
+                strongSelf.moveCamera(to: MapViewController.centerUkCoord, zoom: MapViewController.zoomMinimum)
+            }
+        }
+    }
+    
+    /// Moves the camera to the specified location and sets the zoom to the specified value
+    func moveCamera(to location: CLLocationCoordinate2D, zoom: Float) {
+        let cameraPosition = GMSCameraPosition(target: location,
                                                zoom: zoom,
                                                bearing: 0,
                                                viewingAngle: 0)
@@ -522,7 +494,7 @@ extension MapViewController  {
     
     /// Moves and zooms the camera to display a reasonable number of pins around the specified location.
     func moveAndZoomCamera(to location: CLLocationCoordinate2D) {
-        guard let mapModel = mapModel else {
+        guard let mapModel = unfilteredMapModel else {
             // Without a model all we can do is move the camera to the specified location
             DispatchQueue.main.async { [weak self] in
                 self?.mapView.animate(toLocation: location)
@@ -533,7 +505,7 @@ extension MapViewController  {
         mapModel.getCompanyPins(
             target : targetCompaniesCountForAutoZoom,
             near: location) { [weak self] pins in
-                self?.mapModel = mapModel
+                self?.unfilteredMapModel = mapModel
                 self?.moveCamera(to: location, zoomToShow: pins)
         }
     }
@@ -702,8 +674,8 @@ extension MapViewController: GMSMapViewDelegate {
         return true
     }
     
-    func mapView(_: GMSMapView, idleAt _: GMSCameraPosition) {
-        
+    func mapView(_: GMSMapView, idleAt pos: GMSCameraPosition) {
+
     }
     
     func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
@@ -807,7 +779,8 @@ extension MapViewController {
         let interestsStoryboard = UIStoryboard(name: "InterestsView", bundle: nil)
         let interestsCtrl = interestsStoryboard.instantiateViewController(withIdentifier: "interestsCtrl") as! InterestsViewController
         interestsCtrl.visibleBounds = self.visibleMapBounds
-        interestsCtrl.mapModel = mapModel
+        interestsCtrl.mapModel = unfilteredMapModel
+        interestsCtrl.delegate = self
         let interestsCtrlNav = RotationAwareNavigationController(rootViewController: interestsCtrl)
         hideRefineSearchLabelAnimated()
         self.navigationController?.present(interestsCtrlNav, animated: true, completion: nil)
@@ -911,6 +884,91 @@ extension MapViewController {
         }
         
     }
+}
 
+extension MapViewController {
+    /// Asynchronously clears the map and associated data structures including:
+    /// 1. mapView
+    /// 2. emplacedCompanyPins
+    /// 3. clusterManager
+    ///
+    /// - parameter completed: Calls back when the map and its datastructures are cleared
+    func clearMap(completed: @escaping () -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.mapView.clear()
+            strongSelf.emplacedCompanyPins.removeAll()
+            strongSelf.clusterManager.clearItems()
+            completed()
+        }
+    }
     
+    /// Asynchronously creates a filtered map from a less filtered one
+    ///
+    /// - parameter unfilterdModel: The starting MapModel whose content is to be filtered into a new MapModel
+    /// - parameter interestFilterSet: The set of interests to filter companies by. A company must have at least one interest in the interestFilterSet to qualify
+    /// - parameter completed: Calls back with the filtered MapModel
+    func createFilteredMapModel(unfilteredModel: MapModel,
+                                interestFilterSet: F4SInterestSet,
+                                completed: @escaping (MapModel) -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let filteredModel = MapModel(allCompanyPinsSet: unfilteredModel.allCompanyPins,
+                                         allInterests: unfilteredModel.interestsModel.allInterests,
+                                         filtereredBy: interestFilterSet)
+            completed(filteredModel)
+        }
+    }
+    
+    /// Asynchronously creates an unfiltered map model by reading directly from the databas
+    ///
+    /// - parameter completion: Calls back with the newly created MapModel
+    func createUnfilteredMapModelFromDatabase(completion: @escaping (MapModel) -> Void ) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let dbOps = DatabaseOperations.sharedInstance
+            dbOps.getAllCompanies(completed: { companies in
+                dbOps.getAllInterests(completed: { (interests) in
+                    let mapModel = MapModel(
+                        allCompanies: companies,
+                        allInterests:interests,
+                        selectedInterests: nil)
+                    DispatchQueue.main.async {
+                        completion(mapModel)
+                    }
+                })
+            })
+        }
+    }
+
+    /// Asynchronously reloads the map from the specified mapmodel
+    ///
+    /// - parameter completed: Calls back when the reload is complete
+    func reloadMapFromModel(mapModel: MapModel, completed: @escaping () -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.clearMap() { [weak self] in
+                guard let strongSelf = self else { return }
+                for pin in mapModel.filteredCompanyPinSet {
+                    strongSelf.addPinToMap(pin: pin)
+                }
+                completed()
+            }
+        }
+    }
+    
+    /// Asynchronously reloads the map from datastructures read from the database
+    ///
+    /// - parameter completion: Call back when the reload is complete
+    func reloadMapFromDatabase(completion: @escaping () -> Void ) {
+        self.createUnfilteredMapModelFromDatabase { [weak self] unfilteredMapModel in
+            guard let strongSelf = self else { return }
+            strongSelf.unfilteredMapModel = unfilteredMapModel
+            let interestFilterSet = InterestDBOperations.sharedInstance.interestsForCurrentUser()
+            strongSelf.createFilteredMapModel(unfilteredModel: unfilteredMapModel, interestFilterSet: interestFilterSet, completed: { (filteredMapModel) in
+                strongSelf.filteredMapModel = filteredMapModel
+                strongSelf.reloadMapFromModel(mapModel: filteredMapModel, completed: {
+                    completion()
+                })
+            })
+        }
+    }
 }

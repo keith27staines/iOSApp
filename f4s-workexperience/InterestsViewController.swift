@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol InterestsViewControllerDelegate {
+    func interestsViewController(_ vc: InterestsViewController, didChangeSelectedInterests: F4SInterestSet)
+}
+
 class InterestsViewController: UIViewController, UIScrollViewDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -25,6 +29,8 @@ class InterestsViewController: UIViewController, UIScrollViewDelegate {
             collectionView.reloadData()
         }
     }
+    
+    var delegate: InterestsViewControllerDelegate!
     
     var interestsCount: F4SInterestCounts = F4SInterestCounts()
 
@@ -260,6 +266,7 @@ extension InterestsViewController {
         for interest in interestsToSave {
             InterestDBOperations.sharedInstance.saveInterest(interest)
         }
+        delegate?.interestsViewController(self, didChangeSelectedInterests: selectedInterests)
         self.dismiss(animated: true, completion: nil)
     }
 
@@ -280,7 +287,10 @@ extension InterestsViewController {
             let allInterests = F4SInterestSet(strongSelf.interestsToDisplay)
             let interests = selectedInterests.isEmpty ? allInterests : selectedInterests
             strongSelf.mapModel.getCompanyPinSet(for: visibleBounds) { pins in
-                let countsResults = strongSelf.interestsModel.interestCounts(interests: interests, companyPins: pins)
+                let countsResults = strongSelf.interestsModel.interestCounts(
+                    displayedInterests: interests,
+                    selectedInterests: selectedInterests,
+                    companyPins: pins)
                 DispatchQueue.main.async {
                     completion(countsResults)
                 }

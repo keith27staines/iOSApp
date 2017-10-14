@@ -899,8 +899,8 @@
 		40E78E961DD39253000A3776 /* Map */ = {
 			isa = PBXGroup;
 			children = (
-				40E78E971DD39275000A3776 /* MapViewController.swift */,
 				FC25A05D1F850DAC002F51A9 /* MapModel */,
+				40E78E971DD39275000A3776 /* MapViewController.swift */,
 				40A5CF3B1DED6FA1000007AB /* InterestsViewController.swift */,
 				40C1A4F41DDEF3DD000F80AA /* AutoCompleteTableViewCell.swift */,
 				40C1A52A1DE82060000F80AA /* InfoWindowView.swift */,
