@@ -21,6 +21,26 @@ public struct MapModel {
     /// All company pins that can ever be obtained from this model
     public let allCompanyPins: F4SCompanyPinSet
     
+    /// Returns a dictionary of company pins keyed by company id
+    public lazy var allPinsByCompanyId: [Int64:F4SCompanyPin] = {
+        var allPins = [Int64:F4SCompanyPin]()
+        for pin in self.allCompanyPins {
+            let id = pin.companyId
+            allPins[id] = pin
+        }
+        return allPins
+    }()
+
+    /// Returns a dictionary of company pins keyed by company uuid
+    public lazy var allPinsByCompanyUuid: [F4SUUID:F4SCompanyPin] = {
+        var allPins = [F4SUUID:F4SCompanyPin]()
+        for pin in self.allCompanyPins {
+            let uuid = pin.companyUuid
+            allPins[uuid] = pin
+        }
+        return allPins
+    }()
+
     /// Company pins that represent companies having interests matching one or more of the selected interests
     public let filteredCompanyPinSet: F4SCompanyPinSet
     

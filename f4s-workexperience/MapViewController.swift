@@ -82,7 +82,37 @@ class MapViewController: UIViewController {
     var emplacedCompanyPins: F4SCompanyPinSet = []
     
     /// The list of currently favourited companies
-    var favouriteList: [Shortlist] = []
+    var favouriteList: [Shortlist] = [] {
+        didSet {
+            let companyUuids = favouriteList.map { (shortlist) -> F4SUUID in
+                return shortlist.companyUuid
+            }
+            var newFavourites = F4SCompanyPinSet()
+            for uuid in companyUuids {
+                if let pin = unfilteredMapModel?.allPinsByCompanyUuid[uuid] {
+                    newFavourites.insert(pin)
+                }
+            }
+            favouriteSet = newFavourites
+        }
+    }
+    
+    /// The favourites last known to this view
+    var previousFavouriteSet: F4SCompanyPinSet?
+    
+    /// Updated set of favourites
+    var favouriteSet: Set<F4SCompanyPin> = Set<F4SCompanyPin>() {
+        didSet {
+            guard let previousFavouriteSet = previousFavouriteSet else {
+                self.previousFavouriteSet = favouriteSet
+                return
+            }
+            if previousFavouriteSet != favouriteSet {
+                self.previousFavouriteSet = favouriteSet
+                self.reloadMapFromModel(mapModel: unfilteredMapModel!, completed: {})
+            }
+        }
+    }
     
     /// The company currently selected by the user (if any)
     var selectedCompany: Company?
@@ -104,6 +134,7 @@ class MapViewController: UIViewController {
         setupReachability(nil, useClosures: true)
         startNotifier()
         reloadMapFromDatabase { [weak self] in
+            self?.favouriteList = ShortlistDBOperations.sharedInstance.getShortlistForCurrentUser()
             self?.moveCameraToBestPosition()
         }
     }
@@ -165,25 +196,10 @@ extension MapViewController {
     /// 2. emplacedCompanyPins
     fileprivate func addPinToMap(pin: F4SCompanyPin) {
         if !emplacedCompanyPins.contains(pin) {
+            pin.isFavourite = favouriteSet.contains(pin)
             clusterManager.add(pin)
             emplacedCompanyPins.insert(pin)
         }
-    }
-    
-    /// Returns true if the specified pin's company has been favourited, otherwise returns false
-    func shouldBeFavouritePin(companyPin: F4SCompanyPin) -> Bool {
-        if let _ = self.favouriteList.filter({ $0.companyUuid == companyPin.companyUuid.replacingOccurrences(of: "-", with: "") }).first {
-            return true
-        }
-        let companyList = self.emplacedCompanyPins.filter({$0.position == companyPin.position})
-        if companyList.count > 1 {
-            for comp in companyList {
-                if let _ = self.favouriteList.filter({ $0.companyUuid == comp.companyUuid.replacingOccurrences(of: "-", with: "") }).first {
-                    return true
-                }
-            }
-        }
-        return false
     }
 }
 
@@ -648,12 +664,15 @@ extension MapViewController: UITextFieldDelegate {
             }
         }
     }
-
-    
 }
 
 // MARK: - GMSMapViewDelegate
 extension MapViewController: GMSMapViewDelegate {
+    
+    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+        self.selectedCompany = nil
+        self.mapView.selectedMarker = nil
+    }
     
     func mapView(_: GMSMapView, willMove gesture: Bool) {
         if gesture {
@@ -700,7 +719,7 @@ extension MapViewController: GMSMapViewDelegate {
     }
     
     func mapView(_: GMSMapView, didCloseInfoWindowOf _: GMSMarker) {
-        
+
     }
 
 }

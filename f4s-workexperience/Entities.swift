@@ -245,7 +245,15 @@ struct UserStatus {
     }
 }
 
-struct Shortlist {
+struct Shortlist : Hashable {
+    var hashValue: Int {
+        return companyUuid.hashValue
+    }
+    
+    static func ==(lhs: Shortlist, rhs: Shortlist) -> Bool {
+        return lhs.companyUuid == rhs.companyUuid
+    }
+    
     var companyUuid: String
     var uuid: String
     var date: Date
