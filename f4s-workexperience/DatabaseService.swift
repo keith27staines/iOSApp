@@ -109,9 +109,7 @@ class DatabaseService: ApiBaseService {
         }
 
         if companyDbCreatedDate.isLessThanDate(dateToCompare: newCreateDate) {
-            // TODO: Return true and handle the download properly
-            return false
-            //return true
+            return true
         }
 
         return false

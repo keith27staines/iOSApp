@@ -59,6 +59,10 @@ class LoadingOverlay: UIView {
     }
 
     func hideOverlay() {
+        guard superview != nil else {
+            // Not shown, therefore there is nothing to do
+            return
+        }
         UIView.animate(withDuration: 0.5, animations: {
             self.alpha = 0
             self.removeFromSuperview()
