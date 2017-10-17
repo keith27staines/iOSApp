@@ -189,7 +189,7 @@ extension MapModel {
     func boundsEnclosing(
         target count: Int,
         near location: CLLocationCoordinate2D,
-        maxScalings: Int = 30,
+        maxScalings: Int = 60,
         factor: Double = 1.2) -> GMSCoordinateBounds? {
         let pt = LatLon(location: location)
         let element = F4SQuadtreeItem(point: pt, object: 0)
@@ -230,7 +230,7 @@ extension MapModel {
         var companiesInside = companyPinSetInsideBounds(grownBounds)
         var scalings = 0
         while companiesInside.count < count {
-            grownBounds = bounds.scaledBy(fraction: 1.2)
+            grownBounds = grownBounds.scaledBy(fraction: 1.2)
             companiesInside = companyPinSetInsideBounds(grownBounds)
             scalings += 1
             if scalings >= maxScalings { break }

@@ -11,7 +11,7 @@ import SQLite
 
 /// Downloaded database operations handler
 class DatabaseOperations {
-
+    
     /// Shared instance of the DatabaseOperations class
     class var sharedInstance: DatabaseOperations {
         struct Static {
@@ -28,8 +28,18 @@ class DatabaseOperations {
     func reloadConection() {
         self.loadConnection()
     }
+    
+    var isConnected: Bool {
+        return _database == nil ? false : true
+    }
 
-    fileprivate var database: Connection?
+    fileprivate var database: Connection? {
+        if _database == nil {
+            loadConnection()
+        }
+        return _database
+    }
+    fileprivate var _database: Connection?
     
     fileprivate struct BusinessesCompany {
         static let tableName = "businesses_company"
@@ -490,10 +500,10 @@ extension DatabaseOperations {
     fileprivate func loadConnection() {
         do {
             let directoryURL: String = FileHelper.fileInDocumentsDirectory(filename: AppConstants.databaseFileName)
-            database = try Connection(directoryURL)
+            _database = try Connection(directoryURL)
         } catch {
-            database = nil
-            log.debug("error to connect to db")
+            _database = nil
+            log.debug("error connecting to db")
         }
     }
 }

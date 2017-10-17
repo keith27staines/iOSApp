@@ -26,8 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
         
-        
-        
         if UserService.sharedInstance.hasAccount() {
             onUserConfirmedToExist(application: application)
         } else {
@@ -46,7 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func onUserConfirmedToExist(application: UIApplication) {
        printDebugUserInfo()
-        
         registerApplicationForRemoteNotifications(application)
         DatabaseService.sharedInstance.getLatestDatabase()
         if let window = self.window {

@@ -75,9 +75,6 @@ class MapViewController: UIViewController {
     /// Used to determine whether there is internet connectivity
     var reachability: Reachability?
     
-    /// Indicates whether the company database is currently downloading
-    var downloadIsInProgress: Bool = true
-    
     /// The set of all pins currently added to the map
     var emplacedCompanyPins: F4SCompanyPinSet = []
     
@@ -121,21 +118,23 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if UserDefaults.standard.object(forKey: UserDefaultsKeys.companyDatabaseCreatedDate) == nil {
-            self.downloadIsInProgress = true
-            if let view = self.navigationController?.tabBarController?.view {
-                MessageHandler.sharedInstance.showLoadingOverlay(view)
-            }
-            DatabaseService.sharedInstance.setDatabaseDownloadProtocol(viewCtrl: self)
-        }
+        let dbService = DatabaseService.sharedInstance
+        dbService.setDatabaseDownloadProtocol(viewCtrl: self)
         adjustAppeareance()
         handleTextFieldInterfaces()
         setupMap()
         setupReachability(nil, useClosures: true)
         startNotifier()
-        reloadMapFromDatabase { [weak self] in
-            self?.favouriteList = ShortlistDBOperations.sharedInstance.getShortlistForCurrentUser()
-            self?.moveCameraToBestPosition()
+        
+        if dbService.isDownloadInProgress {
+            if let view = self.navigationController?.tabBarController?.view {
+                MessageHandler.sharedInstance.showLoadingOverlay(view)
+            }
+        } else {
+            reloadMapFromDatabase { [weak self] in
+                self?.moveCameraToBestPosition()
+                MessageHandler.sharedInstance.hideLoadingOverlay()
+            }
         }
     }
     
@@ -178,12 +177,9 @@ protocol DatabaseDownloadProtocol: class {
 // MARK:- Conform to DatabaseDownloadProtocol
 extension MapViewController: DatabaseDownloadProtocol {
     internal func finishDownloadProtocol() {
-        if UserDefaults.standard.object(forKey: UserDefaultsKeys.companyDatabaseCreatedDate) != nil {
-            self.downloadIsInProgress = false
+        reloadMapFromDatabase { [weak self] in
+            self?.moveCameraToBestPosition()
             MessageHandler.sharedInstance.hideLoadingOverlay()
-            reloadMapFromDatabase { [weak self] in
-                self?.moveCameraToBestPosition()
-            }
         }
     }
 }
@@ -834,22 +830,21 @@ extension MapViewController {
     
     func reachabilityChanged(_ note: Notification) {
         let reachability = note.object as! Reachability
-        
         if reachability.isReachable {
             debugPrint("network is reachable")
-            if UserDefaults.standard.object(forKey: UserDefaultsKeys.companyDatabaseCreatedDate) == nil && !self.downloadIsInProgress {
-                self.downloadIsInProgress = true
+            let dbService = DatabaseService.sharedInstance
+            if !dbService.isLocalDatabaseAvailable() && !dbService.isDownloadInProgress {
+                dbService.getLatestDatabase()
                 DispatchQueue.main.async {
                     if let view = self.navigationController?.tabBarController?.view {
+                        DatabaseService.sharedInstance.getLatestDatabase()
                         MessageHandler.sharedInstance.showLoadingOverlay(view)
                     }
                 }
-                DatabaseService.sharedInstance.getLatestDatabase()
             }
         } else {
             debugPrint("network not reachable")
             if UserDefaults.standard.object(forKey: UserDefaultsKeys.companyDatabaseCreatedDate) == nil {
-                self.downloadIsInProgress = false
                 DispatchQueue.main.async {
                     MessageHandler.sharedInstance.hideLoadingOverlay()
                     MessageHandler.sharedInstance.display("No Internet Connection.", parentCtrl: self)
@@ -913,7 +908,7 @@ extension MapViewController {
     ///
     /// - parameter completed: Calls back when the map and its datastructures are cleared
     func clearMap(completed: @escaping () -> Void) {
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+        DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.mapView.clear()
             strongSelf.emplacedCompanyPins.removeAll()
@@ -978,6 +973,12 @@ extension MapViewController {
     ///
     /// - parameter completion: Call back when the reload is complete
     func reloadMapFromDatabase(completion: @escaping () -> Void ) {
+        if !(DatabaseService.isLocalDatabaseAvailable() && DatabaseOperations
+            .sharedInstance.isConnected) {
+            completion()
+            return
+        }
+        self.favouriteList = ShortlistDBOperations.sharedInstance.getShortlistForCurrentUser()
         self.createUnfilteredMapModelFromDatabase { [weak self] unfilteredMapModel in
             guard let strongSelf = self else { return }
             strongSelf.unfilteredMapModel = unfilteredMapModel
