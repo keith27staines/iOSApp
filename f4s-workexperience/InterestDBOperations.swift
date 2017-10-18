@@ -17,23 +17,23 @@ class InterestDBOperations {
         return Static.instance
     }
 
-    func saveInterest(interest: Interest) {
+    func saveInterest(_ interest: Interest) {
         let keychain = KeychainSwift()
         if let userUuid = keychain.get(UserDefaultsKeys.userUuid) {
             InterestCoreDataManager.sharedInstance.saveInterestToContext(interest, userUuid: userUuid)
         }
     }
 
-    func getInterestForCurrentUser() -> [Interest] {
+    func interestsForCurrentUser() -> F4SInterestSet {
         let keychain = KeychainSwift()
         guard let userUuid = keychain.get(UserDefaultsKeys.userUuid) else {
             return []
         }
         let interestDBData = InterestCoreDataManager.sharedInstance.getInterestsForUser(userUuid: userUuid)
-        var interests: [Interest] = []
+        var interests = F4SInterestSet()
         for interestDB in interestDBData {
             let interest = InterestDBOperations.sharedInstance.getInterestFromInterestDB(interestDB: interestDB)
-            interests.append(interest)
+            interests.insert(interest)
         }
         return interests
     }
@@ -48,7 +48,7 @@ class InterestDBOperations {
         return interests
     }
 
-    func removeInterestWithId(interestUuid: String) {
+    func removeInterestWithUuid(_ interestUuid: String) {
         let keychain = KeychainSwift()
         guard let userUuid = keychain.get(UserDefaultsKeys.userUuid) else {
             return

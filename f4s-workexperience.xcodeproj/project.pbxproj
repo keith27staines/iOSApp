@@ -148,10 +148,19 @@
 		D54E10071E044BC100A51560 /* ProcessedMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54E10061E044BC100A51560 /* ProcessedMessagesViewController.swift */; };
 		D5E9EBE81DD60AB300BD796E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5E9EBEA1DD60AB300BD796E /* Localizable.strings */; };
 		D5E9EC021DDD9F9000BD796E /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E9EC011DDD9F9000BD796E /* GradientView.swift */; };
+		FC25A05F1F850DF4002F51A9 /* F4SCompanyPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */; };
+		FC59B1901F81549B0068EC9C /* CGRect+MethodsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18E1F81549A0068EC9C /* CGRect+MethodsTests.swift */; };
+		FC59B1911F81549B0068EC9C /* F4SQuadtreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18F1F81549A0068EC9C /* F4SQuadtreeTests.swift */; };
+		FC59B1921F8155480068EC9C /* F4SQuadtree.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18C1F81546C0068EC9C /* F4SQuadtree.swift */; };
+		FC59B1931F81554F0068EC9C /* CGRect+Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18D1F81546C0068EC9C /* CGRect+Methods.swift */; };
 		FC681C001F57473D0077BECA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFE1F57473D0077BECA /* Podfile */; };
 		FC681C011F57473D0077BECA /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFF1F57473D0077BECA /* Podfile.lock */; };
+		FC9256791F8DF75900FF9841 /* camdencompanies.txt in Resources */ = {isa = PBXBuildFile; fileRef = FC9256781F8DF46E00FF9841 /* camdencompanies.txt */; };
+		FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC92567A1F8F70D100FF9841 /* InterestsModel.swift */; };
+		FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99B7E21F826D1400E2D5F0 /* LatLon.swift */; };
 		FCB6D9361F75056100B8C268 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCB6D9351F75056000B8C268 /* Branding.plist */; };
 		FCC5EBB61F449C310085CE15 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FCC5EBB51F449C310085CE15 /* README.md */; };
+		FCC753EE1F80F26200E9ECD6 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC753ED1F80F26200E9ECD6 /* MapModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -170,6 +179,19 @@
 			remoteInfo = "f4s-workexperience";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FC59B1811F8150050068EC9C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0022DD3F6308590A19CBCF7B /* Pods-f4s-workexperienceTests.releasef4slive.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperienceTests.releasef4slive.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperienceTests/Pods-f4s-workexperienceTests.releasef4slive.xcconfig"; sourceTree = "<group>"; };
@@ -369,10 +391,19 @@
 		EC68C46BEC140D8D307D851A /* Pods-f4s-workexperienceTests.releasecaf.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperienceTests.releasecaf.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperienceTests/Pods-f4s-workexperienceTests.releasecaf.xcconfig"; sourceTree = "<group>"; };
 		EF342E9F354D697386AFC80D /* Pods_f4s_workexperienceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_f4s_workexperienceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F099185A6CFD493B891494B1 /* Pods-f4s-workexperienceUITests.releasef4s.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperienceUITests.releasef4s.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperienceUITests/Pods-f4s-workexperienceUITests.releasef4s.xcconfig"; sourceTree = "<group>"; };
+		FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyPin.swift; sourceTree = "<group>"; };
+		FC59B18C1F81546C0068EC9C /* F4SQuadtree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SQuadtree.swift; sourceTree = "<group>"; };
+		FC59B18D1F81546C0068EC9C /* CGRect+Methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Methods.swift"; sourceTree = "<group>"; };
+		FC59B18E1F81549A0068EC9C /* CGRect+MethodsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+MethodsTests.swift"; sourceTree = "<group>"; };
+		FC59B18F1F81549A0068EC9C /* F4SQuadtreeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SQuadtreeTests.swift; sourceTree = "<group>"; };
 		FC681BFE1F57473D0077BECA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		FC681BFF1F57473D0077BECA /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
+		FC9256781F8DF46E00FF9841 /* camdencompanies.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = camdencompanies.txt; sourceTree = "<group>"; };
+		FC92567A1F8F70D100FF9841 /* InterestsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsModel.swift; sourceTree = "<group>"; };
+		FC99B7E21F826D1400E2D5F0 /* LatLon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatLon.swift; sourceTree = "<group>"; };
 		FCB6D9351F75056000B8C268 /* Branding.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
 		FCC5EBB51F449C310085CE15 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		FCC753ED1F80F26200E9ECD6 /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
 		FDE6CAD61FAB3CA16090531A /* Pods-f4s-workexperienceUITests.debugf4s.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperienceUITests.debugf4s.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperienceUITests/Pods-f4s-workexperienceUITests.debugf4s.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -587,6 +618,8 @@
 		40E78E151DD31A86000A3776 /* f4s-workexperience */ = {
 			isa = PBXGroup;
 			children = (
+				FC9256781F8DF46E00FF9841 /* camdencompanies.txt */,
+				FC59B18B1F8154350068EC9C /* F4SDataStructures */,
 				40E78E481DD32848000A3776 /* AppDelegate */,
 				40E78E471DD32840000A3776 /* Data */,
 				40E78E461DD32836000A3776 /* Business */,
@@ -600,6 +633,8 @@
 		40E78E2A1DD31A86000A3776 /* f4s-workexperienceTests */ = {
 			isa = PBXGroup;
 			children = (
+				FC59B18E1F81549A0068EC9C /* CGRect+MethodsTests.swift */,
+				FC59B18F1F81549A0068EC9C /* F4SQuadtreeTests.swift */,
 				40E78E2B1DD31A86000A3776 /* f4s_workexperienceTests.swift */,
 				40E78E2D1DD31A86000A3776 /* Info.plist */,
 			);
@@ -864,8 +899,9 @@
 		40E78E961DD39253000A3776 /* Map */ = {
 			isa = PBXGroup;
 			children = (
-				40A5CF3B1DED6FA1000007AB /* InterestsViewController.swift */,
+				FC25A05D1F850DAC002F51A9 /* MapModel */,
 				40E78E971DD39275000A3776 /* MapViewController.swift */,
+				40A5CF3B1DED6FA1000007AB /* InterestsViewController.swift */,
 				40C1A4F41DDEF3DD000F80AA /* AutoCompleteTableViewCell.swift */,
 				40C1A52A1DE82060000F80AA /* InfoWindowView.swift */,
 				40A5CF3D1DED72E8000007AB /* InterestsCollectionViewCell.swift */,
@@ -1010,6 +1046,26 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		FC25A05D1F850DAC002F51A9 /* MapModel */ = {
+			isa = PBXGroup;
+			children = (
+				FCC753ED1F80F26200E9ECD6 /* MapModel.swift */,
+				FC99B7E21F826D1400E2D5F0 /* LatLon.swift */,
+				FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */,
+				FC92567A1F8F70D100FF9841 /* InterestsModel.swift */,
+			);
+			name = MapModel;
+			sourceTree = "<group>";
+		};
+		FC59B18B1F8154350068EC9C /* F4SDataStructures */ = {
+			isa = PBXGroup;
+			children = (
+				FC59B18D1F81546C0068EC9C /* CGRect+Methods.swift */,
+				FC59B18C1F81546C0068EC9C /* F4SQuadtree.swift */,
+			);
+			name = F4SDataStructures;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1023,6 +1079,7 @@
 				40E78E111DD31A86000A3776 /* Resources */,
 				55F8DBD1DF6661334AF6927A /* [CP] Embed Pods Frameworks */,
 				BCFD99BC03E281DE9C7E7546 /* [CP] Copy Pods Resources */,
+				FC59B1811F8150050068EC9C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1145,6 +1202,7 @@
 				D5E9EBE81DD60AB300BD796E /* Localizable.strings in Resources */,
 				FCB6D9361F75056100B8C268 /* Branding.plist in Resources */,
 				405974061DFD44670002DB3A /* ExtraInfo.storyboard in Resources */,
+				FC9256791F8DF75900FF9841 /* camdencompanies.txt in Resources */,
 				401634C81E0A9F73000161FA /* NotificationView.storyboard in Resources */,
 				40E78E211DD31A86000A3776 /* LaunchScreen.storyboard in Resources */,
 				40A28CB71E1F96A60077D490 /* RatePlacement.storyboard in Resources */,
@@ -1366,6 +1424,7 @@
 				204203F71E4B7966007C7409 /* FavouriteViewController.swift in Sources */,
 				20B128181DDA1A3900CE3F1F /* Config.swift in Sources */,
 				40A28CBF1E24ECE90077D490 /* SuccessExtraInfoViewController.swift in Sources */,
+				FCC753EE1F80F26200E9ECD6 /* MapModel.swift in Sources */,
 				40C1A5191DDF5ACE000F80AA /* GMUClusterManager.m in Sources */,
 				204203F01E4B1E3D007C7409 /* ShortlistService.swift in Sources */,
 				20D51BE41E27710C003A8358 /* NotificationHelper.swift in Sources */,
@@ -1381,7 +1440,9 @@
 				204C896E1DF5F08500D8493A /* IndustryTableViewCell.swift in Sources */,
 				204C89591DF5A54600D8493A /* TemplateChoiceDBOperations.swift in Sources */,
 				40C1A5211DDF5ACE000F80AA /* GQTPointQuadTree.m in Sources */,
+				FC59B1931F81554F0068EC9C /* CGRect+Methods.swift in Sources */,
 				2002A5681E4CAAD5000825BC /* FavouritesPopupViewController.swift in Sources */,
+				FC59B1921F8155480068EC9C /* F4SQuadtree.swift in Sources */,
 				40E78E801DD32BF4000A3776 /* SideDrawerTableViewCell.swift in Sources */,
 				40C1A5271DE58EED000F80AA /* CutomClusterIconGenerator.swift in Sources */,
 				40C6DDF41E03F445000F8806 /* UserInfoDB.swift in Sources */,
@@ -1454,8 +1515,10 @@
 				405974081DFD449C0002DB3A /* ExtraInfoViewController.swift in Sources */,
 				206F8F8C1E1E48120024937B /* MessageOptionCollectionViewCell.swift in Sources */,
 				20FEBDDA1DE5AD3400EBDCBF /* ImageService.swift in Sources */,
+				FC25A05F1F850DF4002F51A9 /* F4SCompanyPin.swift in Sources */,
 				40C6DDF21E03F401000F8806 /* UserInfoCoreDataManager.swift in Sources */,
 				40E78E8D1DD32C3C000A3776 /* MessageHandler.swift in Sources */,
+				FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */,
 				40E78E781DD32BE7000A3776 /* DrawerController.swift in Sources */,
 				40E78E7E1DD32BF4000A3776 /* CenterTableViewCell.swift in Sources */,
 				204C89571DF5A44100D8493A /* TemplateChoiceCoreDataManager.swift in Sources */,
@@ -1465,6 +1528,7 @@
 				204203F91E4B81AB007C7409 /* FavouriteTableViewCell.swift in Sources */,
 				40E78E581DD32964000A3776 /* Constants.swift in Sources */,
 				40C1A51C1DDF5ACE000F80AA /* GMUGridBasedClusterAlgorithm.m in Sources */,
+				FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */,
 				207364611E52091900786F4C /* MessageContainerViewController.swift in Sources */,
 				40E78E811DD32BF4000A3776 /* TableViewCell.swift in Sources */,
 				201458C71E1CFD7400DBC9BD /* MessageViewController.swift in Sources */,
@@ -1476,7 +1540,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC59B1901F81549B0068EC9C /* CGRect+MethodsTests.swift in Sources */,
 				40E78E2C1DD31A86000A3776 /* f4s_workexperienceTests.swift in Sources */,
+				FC59B1911F81549B0068EC9C /* F4SQuadtreeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1774,6 +1840,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1877,6 +1944,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1986,6 +2054,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2089,6 +2158,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2250,6 +2320,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2270,6 +2341,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

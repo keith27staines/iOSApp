@@ -28,28 +28,40 @@ struct User {
     }
 }
 
-struct Company {
-    var id: Int64
-    var created: Date
-    var modified: Date
-    var isRemoved: Bool
-    var uuid: String
-    var name: String
-    var logoUrl: String
-    var industry: String
-    var latitude: Double
-    var longitude: Double
-    var summary: String
-    var employeeCount: Int64
-    var turnover: Double
-    var turnoverGrowth: Double
-    var rating: Double
-    var ratingCount: Double
-    var sourceId: String
-    var hashtag: String
-    var companyUrl: String
+public struct Company : Hashable {
+    public var hashValue: Int {
+        return uuid.hashValue ^ latitude.hashValue ^ longitude.hashValue
+    }
+    
+    public static func ==(lhs: Company, rhs: Company) -> Bool {
+        if lhs.uuid == rhs.uuid && lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude {
+            return true
+        }
+        return false
+    }
+    
+    public var id: Int64
+    public var created: Date
+    public var modified: Date
+    public var isRemoved: Bool
+    public var uuid: String
+    public var name: String
+    public var logoUrl: String
+    public var industry: String
+    public var latitude: Double
+    public var longitude: Double
+    public var summary: String
+    public var employeeCount: Int64
+    public var turnover: Double
+    public var turnoverGrowth: Double
+    public var rating: Double
+    public var ratingCount: Double
+    public var sourceId: String
+    public var hashtag: String
+    public var companyUrl: String
+    public var interestIds: Set<Int64> = Set<Int64>()
 
-    init(id: Int64 = 0, created: Date = Date(), modified: Date = Date(), isRemoved: Bool = false, uuid: String = "", name: String = "", logoUrl: String = "", industry: String = "", latitude: Double = 0, longitude: Double = 0, summary: String = "", employeeCount: Int64 = 0, turnover: Double = 0, turnoverGrowth: Double = 0, rating: Double = 0, ratingCount: Double = 0, sourceId: String = "", hashtag: String = "", companyUrl: String = "") {
+    public init(id: Int64 = 0, created: Date = Date(), modified: Date = Date(), isRemoved: Bool = false, uuid: String = "", name: String = "", logoUrl: String = "", industry: String = "", latitude: Double = 0, longitude: Double = 0, summary: String = "", employeeCount: Int64 = 0, turnover: Double = 0, turnoverGrowth: Double = 0, rating: Double = 0, ratingCount: Double = 0, sourceId: String = "", hashtag: String = "", companyUrl: String = "") {
         self.id = id
         self.created = created
         self.modified = modified
@@ -86,17 +98,42 @@ struct Placement {
     }
 }
 
-struct Interest {
-    var id: Int64
-    var uuid: String
-    var name: String
-    var interestCount: Int64
+public struct BusinessCompanyInterest : Hashable {
+    public static func ==(lhs: BusinessCompanyInterest, rhs: BusinessCompanyInterest) -> Bool {
+        if lhs.interestId == rhs.interestId && lhs.companyId == lhs.companyId {
+            return true
+        }
+        return false
+    }
+    
+    public var hashValue: Int {
+        return companyId.hashValue ^ interestId.hashValue
+    }
+    public var id: Int64
+    public var interestId: Int64
+    public var companyId: Int64
+    public init(id: Int64 = 0, interestId: Int64 = 0, companyId: Int64 = 0) {
+        self.id = id
+        self.interestId = interestId
+        self.companyId = companyId
+    }
+}
 
-    init(id: Int64 = 0, uuid: String = "", name: String = "", interestCount: Int64 = 0) {
+public struct Interest : Hashable {
+    public var hashValue: Int { return uuid.hashValue }
+    
+    public static func ==(lhs: Interest, rhs: Interest) -> Bool {
+        return lhs.uuid == rhs.uuid
+    }
+    
+    public var id: Int64
+    public var uuid: String
+    public var name: String
+
+    public init(id: Int64 = 0, uuid: String = "", name: String = "") {
         self.id = id
         self.uuid = uuid
         self.name = name
-        self.interestCount = interestCount
     }
 }
 
@@ -208,7 +245,15 @@ struct UserStatus {
     }
 }
 
-struct Shortlist {
+struct Shortlist : Hashable {
+    var hashValue: Int {
+        return companyUuid.hashValue
+    }
+    
+    static func ==(lhs: Shortlist, rhs: Shortlist) -> Bool {
+        return lhs.companyUuid == rhs.companyUuid
+    }
+    
     var companyUuid: String
     var uuid: String
     var date: Date

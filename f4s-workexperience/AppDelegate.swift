@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
-
+        
         if UserService.sharedInstance.hasAccount() {
             onUserConfirmedToExist(application: application)
         } else {
@@ -38,16 +38,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             })
         }
-
+        print(UIDevice.current.identifierForVendor!.uuidString)
         return true
     }
     
     func onUserConfirmedToExist(application: UIApplication) {
+       printDebugUserInfo()
         registerApplicationForRemoteNotifications(application)
         DatabaseService.sharedInstance.getLatestDatabase()
         if let window = self.window {
             CustomNavigationHelper.sharedInstance.moveToMainCtrl(window: window)
         }
+    }
+    
+    func printDebugUserInfo() {
+        print("********************************************************")
+        print("Vendor id = \(UIDevice.current.identifierForVendor!)")
+        let userIdKey = UserDefaultsKeys.userUuid
+        let k = KeychainSwift()
+        let userID = k.get(userIdKey)!
+        print("User id = \(userID)")
+        print("********************************************************")
     }
 
     func applicationWillResignActive(_: UIApplication) {

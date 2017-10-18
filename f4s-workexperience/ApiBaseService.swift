@@ -88,13 +88,20 @@ class ApiBaseService {
         if let userUuid = keychain.get(UserDefaultsKeys.userUuid) {
             header?["wex.user.uuid"] = userUuid
         }
-
+        Alamofire.SessionManager.default.session.configuration.timeoutIntervalForRequest = 10
         Alamofire.request(url, method: .get, headers: header)
             .responseJSON { response in
                 switch response.result {
                 case .failure(let error):
                     log.error(error)
-                    if response.response != nil {
+                    if response.response == nil {
+                        if error._code == NSURLErrorTimedOut {
+                            getCompleted(false, .error("Request timed out"))
+                            return
+                        } else {
+                            getCompleted(false, .error("No Internet Connection."))
+                        }
+                    } else {
                         switch response.response!.statusCode {
                         case 401:
                             getCompleted(false, .error("Credentials not provided or incorrect"))
@@ -116,8 +123,6 @@ class ApiBaseService {
                             return
                         }
                     }
-
-                    getCompleted(false, .error("No Internet Connection."))
 
                 case .success(let responseObject):
                     let json = JSON(responseObject)

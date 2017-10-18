@@ -12,8 +12,6 @@ import SQLite
 /// Downloaded database operations handler
 class DatabaseOperations {
     
-    let maxCompanies: Int = 30
-
     /// Shared instance of the DatabaseOperations class
     class var sharedInstance: DatabaseOperations {
         struct Static {
@@ -30,9 +28,20 @@ class DatabaseOperations {
     func reloadConection() {
         self.loadConnection()
     }
+    
+    var isConnected: Bool {
+        return _database == nil ? false : true
+    }
 
-    private var database: Connection?
-    private struct BusinessesCompany {
+    fileprivate var database: Connection? {
+        if _database == nil {
+            loadConnection()
+        }
+        return _database
+    }
+    fileprivate var _database: Connection?
+    
+    fileprivate struct BusinessesCompany {
         static let tableName = "businesses_company"
         static let id: Expression<Int64?> = Expression<Int64?>(BusinessesCompany.idColumnName)
         static let created: Expression<String?> = Expression<String?>(BusinessesCompany.createdColumnName)
@@ -75,7 +84,18 @@ class DatabaseOperations {
         static let companyUrlColumnName: String = "webview_url"
     }
 
-    private struct BusinessesInterest {
+    // Row definition for business company interests table
+    fileprivate struct BusinessesCompanyInterestRD {
+        static let tableName = "businesses_company_interests"
+        static let id: Expression<Int64?> = Expression<Int64?>(BusinessesCompanyInterestRD.idColumnName)
+        static let businessId: Expression<Int64?> = Expression<Int64?>(BusinessesCompanyInterestRD.businessIdColumnName)
+        static let interestId: Expression<Int64?> = Expression<Int64?>(BusinessesCompanyInterestRD.interestIdColumnName)
+        static let idColumnName: String = "id"
+        static let businessIdColumnName: String = "business_id"
+        static let interestIdColumnName: String = "interest_id"
+    }
+    
+    fileprivate struct BusinessesInterest {
         static let tableName = "businesses_interest"
         static let id: Expression<Int64?> = Expression<Int64?>(BusinessesInterest.idColumnName)
         static let created: Expression<String?> = Expression<String?>(BusinessesInterest.createdColumnName)
@@ -94,7 +114,7 @@ class DatabaseOperations {
         static let interestCountColumnName: String = "interest_count"
     }
 
-    private struct BusinessesSocialShareTemplate {
+    fileprivate struct BusinessesSocialShareTemplate {
         static let tableName = "businesses_socialsharetemplate"
         static let id: Expression<Int64?> = Expression<Int64?>(BusinessesSocialShareTemplate.idColumnName)
         static let created: Expression<String?> = Expression<String?>(BusinessesSocialShareTemplate.createdColumnName)
@@ -114,205 +134,22 @@ class DatabaseOperations {
         static let textColumnName: String = "text"
         static let subjectLineColumnName: String = "subject_line"
     }
+}
 
-    /// Transform a row from the database to a Company object
-    ///
-    /// - Parameter row: Row to transform
-    /// - Returns: Company object transformed
-    private func getCompanyFromRow(row: Row) -> Company {
-        var company = Company()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
-        if let id = row[BusinessesCompany.id] {
-            company.id = id
-        }
-        if let created = row[BusinessesCompany.created], let createdDate = formatter.date(from: created) {
-            company.created = createdDate
-        }
-        if let modified = row[BusinessesCompany.modified], let modifiedDate = formatter.date(from: modified) {
-            company.modified = modifiedDate
-        }
-        if let isRemoved = row[BusinessesCompany.isRemoved] {
-            company.isRemoved = isRemoved
-        }
-        if let uuid = row[BusinessesCompany.uuid] {
-            company.uuid = uuid
-        }
-        if let name = row[BusinessesCompany.name] {
-            company.name = name
-        }
-        if let logoUrl = row[BusinessesCompany.logoUrl] {
-            company.logoUrl = logoUrl
-        }
-        if let industry = row[BusinessesCompany.industry] {
-            company.industry = industry
-        }
-        if let latitude = row[BusinessesCompany.latitude] {
-            company.latitude = latitude
-        }
-        if let longitude = row[BusinessesCompany.longitude] {
-            company.longitude = longitude
-        }
-        if let summary = row[BusinessesCompany.summary] {
-            company.summary = summary
-        }
-        if let employeeCount = row[BusinessesCompany.employeeCount] {
-            company.employeeCount = employeeCount
-        }
-        if let turnover = row[BusinessesCompany.turnover] {
-            company.turnover = turnover
-        }
-        if let turnoverGrowth = row[BusinessesCompany.turnoverGrowth] {
-            company.turnoverGrowth = turnoverGrowth
-        }
-        if let rating = row[BusinessesCompany.rating] {
-            company.rating = rating
-        }
-        if let ratingCount = row[BusinessesCompany.ratingCount] {
-            company.ratingCount = ratingCount
-        }
-        if let sourceId = row[BusinessesCompany.sourceId] {
-            company.sourceId = sourceId
-        }
-        if let hashtag = row[BusinessesCompany.hashtag] {
-            company.hashtag = hashtag
-        }
-        if let companyUrl = row[BusinessesCompany.companyUrl] {
-            company.companyUrl = companyUrl
-        }
-        return company
-    }
-
-    /// Get maxCompanies companies in 5 miles radius with interests
-    ///
-    /// - Parameters:
-    ///   - longitude: current location longitude
-    ///   - latitude: current location latitude
-    ///   - interests: list of interest selected
-    ///   - completed: return list of companies
-    func getCompaniesNearLocationFirstThenFilter(longitude: Double, latitude: Double, interests: [Interest], completed: @escaping (_ companies: [Company]) -> Void) {
+extension DatabaseOperations {
+    /// Get all companies from the company database
+    public func getAllCompanies( completed: @escaping (_ companies: [Company]) -> Void) {
         guard let db = database else {
-            log.debug("Can't load database")
+            log.debug("`getAllCompanies` failed because the database connection is nil")
             completed([])
             return
         }
         do {
             var companyList: [Company] = []
-
-            var companyIds: [Int64] = []
-            for interest in interests {
-                companyIds.append(interest.id)
-            }
-            let interestsStr = companyIds.flatMap({ String($0) }).joined(separator: ", ")
-
-            let selectCompaniesNearCenterQuery: String = "SELECT *, ((((longitude + 9) - (\(longitude) + 9)) * ((longitude + 9) - (\(longitude) + 9))) + ((latitude - \(latitude)) * (latitude - \(latitude)))) AS distance FROM businesses_company WHERE latitude NOTNULL AND longitude NOTNULL AND longitude between (\(longitude) - 0.072463) AND (\(longitude) + 0.072463) AND latitude between (\(latitude) - 0.026315789) AND (\(latitude) + 0.026315789) GROUP BY latitude, longitude ORDER BY distance ASC limit \(maxCompanies)"
-
-            var selectCompaniesWithTheSameCoordinates: String = "SELECT businesses_company.*, COUNT(businesses_company_interests.interest_id) AS interest_count FROM businesses_company_interests JOIN businesses_company ON (businesses_company_interests.company_id = businesses_company.id AND (businesses_company.latitude NOTNULL AND businesses_company.longitude NOTNULL AND ("
-
-            var index: Int = 0
-
-            let stmt = try db.prepare(selectCompaniesNearCenterQuery)
-            for row in stmt {
-                let comp = DatabaseOperations.sharedInstance.getCompanyFromRowAndStatement(row: row, statement: stmt)
-                if index != 0 {
-                    selectCompaniesWithTheSameCoordinates.append("OR")
-                } else {
-                    index += 1
-                }
-                selectCompaniesWithTheSameCoordinates.append("(businesses_company.latitude = \(comp.latitude) AND businesses_company.longitude = \(comp.longitude))")
-            }
-            selectCompaniesWithTheSameCoordinates.append("))) WHERE businesses_company_interests.interest_id IN (\(interestsStr)) GROUP BY businesses_company_interests.company_id HAVING interest_count = \(interests.count)")
-
-            let allCompaniesStmt = try db.prepare(selectCompaniesWithTheSameCoordinates)
-
-            for row in allCompaniesStmt {
-                let comp = DatabaseOperations.sharedInstance.getCompanyFromRowAndStatement(row: row, statement: stmt)
-                companyList.append(comp)
-            }
-            completed(companyList)
-            return
-        } catch {
-            let nsError = error as NSError
-            log.debug(nsError.localizedDescription)
-            completed([])
-        }
-    }
-
-    /// Get maxCompanies companies in 5 miles radius
-    ///
-    /// - Parameters:
-    ///   - longitude: current location longitude
-    ///   - latitude: current location latitude
-    ///   - completed: returns the company list
-    func getCompaniesNearLocation(longitude: Double, latitude: Double, completed: @escaping (_ companies: [Company]) -> Void) {
-        guard let db = database else {
-            log.debug("Can't load database")
-            completed([])
-            return
-        }
-        do {
-            var companyList: [Company] = []
-            let selectCompaniesNearCenterQuery: String = "SELECT *, ((((longitude + 9) - (\(longitude) + 9)) * ((longitude + 9) - (\(longitude) + 9))) + ((latitude - \(latitude)) * (latitude - \(latitude)))) AS distance FROM businesses_company WHERE latitude NOTNULL AND longitude NOTNULL AND longitude between (\(longitude) - 0.072463) AND (\(longitude) + 0.072463) AND latitude between (\(latitude) - 0.026315789) AND (\(latitude) + 0.026315789) GROUP BY latitude, longitude ORDER BY distance ASC limit \(maxCompanies)"
-
-            let stmt = try db.prepare(selectCompaniesNearCenterQuery)
+            let selectStatement: String = "SELECT id, uuid, latitude, longitude FROM businesses_company WHERE latitude NOTNULL AND longitude NOTNULL"
             
-            // There is a possibility that we have missed some companies within the required area if they are located at the same coordinates as companies returned in the maxCompanies list. We add those on here
-            var selectCompaniesWithTheSameCoordinates: String? = nil
-            var index: Int = 0
+            let stmt = try db.prepare(selectStatement)
             
-            for row in stmt {
-                let comp = DatabaseOperations.sharedInstance.getCompanyFromRowAndStatement(row: row, statement: stmt)
-                if index != 0 {
-                    selectCompaniesWithTheSameCoordinates!.append("OR")
-                } else {
-                    selectCompaniesWithTheSameCoordinates = "SELECT * from businesses_company where latitude NOTNULL AND longitude NOTNULL AND ("
-                    index += 1
-                }
-                selectCompaniesWithTheSameCoordinates!.append("(latitude = \(comp.latitude) AND longitude = \(comp.longitude))")
-            }
-            
-            guard selectCompaniesWithTheSameCoordinates != nil else {
-                completed([])
-                return
-            }
-            
-            selectCompaniesWithTheSameCoordinates!.append(")")
-
-            let allCompaniesStmt = try db.prepare(selectCompaniesWithTheSameCoordinates!)
-
-            for row in allCompaniesStmt {
-                let comp = DatabaseOperations.sharedInstance.getCompanyFromRowAndStatement(row: row, statement: stmt)
-                companyList.append(comp)
-            }
-            completed(companyList)
-            return
-        } catch {
-            let nsError = error as NSError
-            log.debug(nsError.localizedDescription)
-            completed([])
-        }
-    }
-
-    /// Get maxCompanies companies that has the coordinates between 2 coordinates
-    ///
-    /// - Parameters:
-    ///   - startLongitude: start coordinate longitude
-    ///   - startLatitude: start coodindate latitude
-    ///   - endLongitude: end coordinate longitude
-    ///   - endLatitude: end coordinate latitude
-    ///   - completed: return the list of companies between coordinates
-    func getCompaniesInLocation(startLongitude: Double, startLatitude: Double, endLongitude: Double, endLatitude: Double, completed: @escaping (_ companies: [Company]) -> Void) {
-        guard let db = database else {
-            log.debug("Can't load database")
-            completed([])
-            return
-        }
-        do {
-            var companyList: [Company] = []
-            let selectCompaniesInLocation: String = "SELECT * FROM businesses_company WHERE latitude NOTNULL AND longitude NOTNULL AND longitude between \(startLongitude) AND \(endLongitude) AND latitude between \(startLatitude) AND \(endLatitude) ORDER BY turnover DESC, turnover_growth DESC limit \(maxCompanies)"
-
-            let stmt = try db.prepare(selectCompaniesInLocation)
-
             for row in stmt {
                 let comp = DatabaseOperations.sharedInstance.getCompanyFromRowAndStatement(row: row, statement: stmt)
                 companyList.append(comp)
@@ -325,47 +162,14 @@ class DatabaseOperations {
             completed([])
         }
     }
-
-    /// Get companies that has the coordinates between 2 coordinates
-    ///
-    /// - Parameters:
-    ///   - startLongitude: start coordinate longitude
-    ///   - startLatitude: start coodindate latitude
-    ///   - endLongitude: end coordinate longitude
-    ///   - endLatitude: end coordinate latitude
-    ///   - completed: return the list of companies between coordinates
-    func getCompaniesInLocationNoLimit(startLongitude: Double, startLatitude: Double, endLongitude: Double, endLatitude: Double, completed: @escaping (_ companies: [Company]) -> Void) {
-        guard let db = database else {
-            log.debug("Can't load database")
-            completed([])
-            return
-        }
-        do {
-            var companyList: [Company] = []
-            let selectCompaniesInLocation: String = "SELECT * FROM businesses_company WHERE latitude NOTNULL AND longitude NOTNULL AND longitude between \(startLongitude) AND \(endLongitude) AND latitude between \(startLatitude) AND \(endLatitude) ORDER BY turnover DESC, turnover_growth DESC"
-
-            let stmt = try db.prepare(selectCompaniesInLocation)
-
-            for row in stmt {
-                let comp = DatabaseOperations.sharedInstance.getCompanyFromRowAndStatement(row: row, statement: stmt)
-                companyList.append(comp)
-            }
-            completed(companyList)
-            return
-        } catch {
-            let nsError = error as NSError
-            log.debug(nsError.localizedDescription)
-            completed([])
-        }
-    }
-
+    
     /// Transform row from database in Company object
     ///
     /// - Parameters:
     ///   - row: row from database
     ///   - statement: statement of the database
     /// - Returns: Company object from row
-    private func getCompanyFromRowAndStatement(row: Statement.Element, statement: Statement) -> Company {
+    fileprivate func getCompanyFromRowAndStatement(row: Statement.Element, statement: Statement) -> Company {
         var company = Company()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
@@ -433,118 +237,74 @@ class DatabaseOperations {
         return company
     }
 
-    /// Return interest list of companies between 2 coordinates
-    ///
-    /// - Parameters:
-    ///   - startLongitude: start coordinate longitude
-    ///   - startLatitude: start coordinate latitude
-    ///   - endLongitude: end coordinate longitude
-    ///   - endLatitude: end coordinate latitude
-    ///   - completed: return interest list
-    func getInterestsFromArea(startLongitude: Double, startLatitude: Double, endLongitude: Double, endLatitude: Double, completed: @escaping (_ interests: [Interest]) -> Void) {
+    
+    /// Get all interests from the database as a dictionary keyed by id
+    public func getAllInterests( completed: @escaping (_ interests: [Int64:Interest]) -> Void) {
         guard let db = database else {
-            log.debug("Can't load database")
-            completed([])
+            log.debug("`getAllInterests` failed because the database connection is nil")
+            completed([:])
             return
         }
         do {
-            var interestsList: [Interest] = []
-            let selectInterestsInLocation: String = "SELECT businesses_interest.*, SUM(CASE WHEN (businesses_company.latitude >= \(startLatitude) AND businesses_company.latitude <= \(endLatitude) AND businesses_company.longitude >= \(startLongitude) AND businesses_company.longitude <= \(endLongitude)) THEN 1 ELSE 0 END) AS interest_count FROM businesses_interest JOIN businesses_company_interests ON businesses_interest.id = businesses_company_interests.interest_id JOIN businesses_company ON (businesses_company_interests.company_id = businesses_company.id) GROUP BY businesses_interest.id ORDER BY interest_count DESC"
-            let stmt = try db.prepare(selectInterestsInLocation)
-
+            var allInterests: [Int64:Interest] = [:]
+            let selectStatement: String = "SELECT id, uuid, name FROM businesses_interest"
+            let stmt = try db.prepare(selectStatement)
+            
             for row in stmt {
-                let comp = DatabaseOperations.sharedInstance.getInterestFromRowAndStatement(row: row, statement: stmt)
-                interestsList.append(comp)
+                let interest = DatabaseOperations.sharedInstance.getInterestFromRowAndStatement(row: row, statement: stmt)
+                allInterests[interest.id] = interest
             }
-            completed(interestsList)
+            completed(allInterests)
             return
         } catch {
             let nsError = error as NSError
             log.debug(nsError.localizedDescription)
-            completed([])
+            completed([:])
         }
     }
 
-    /// Get number of companies in an area with interest list
+    /// Return interest Ids for the specified company
     ///
     /// - Parameters:
-    ///   - startLongitude: start coordinate longitude
-    ///   - startLatitude: start coordinate latitude
-    ///   - endLongitude: end coordinate longitude
-    ///   - endLatitude: end coordinate latitude
-    ///   - interestList: list of interest selected
-    ///   - completed: return number of companies and interest list
-    func getCompanyCountFromArea(startLongitude: Double, startLatitude: Double, endLongitude: Double, endLatitude: Double, interestList: [Interest], completed: @escaping (_ count: Int, _ initialInterests: [Interest]) -> Void) {
+    ///   - companyId: The company for which interests are required
+    ///   - returns: list of ids of interests of the company
+    public func interestIdsFor(companyId: Int64) -> [Int64] {
         guard let db = database else {
-            log.debug("Can't load database")
-            completed(0, interestList)
-            return
+            log.debug("Can't get interests for company because the database isn't loaded")
+            return []
         }
-        do {
-            var countCompaniesInLocation: String = "SELECT businesses_company.*, COUNT(businesses_company_interests.interest_id) AS interest_count FROM businesses_company_interests JOIN businesses_company ON (businesses_company_interests.company_id = businesses_company.id AND (businesses_company.latitude >= \(startLatitude) AND businesses_company.latitude <= \(endLatitude) AND businesses_company.longitude >= \(startLongitude) AND businesses_company.longitude <= \(endLongitude))) WHERE businesses_company_interests.interest_id IN ("
-            var count: Int = 0
-            for interest in interestList {
-                if count == 0 {
-                    count += 1
-                    countCompaniesInLocation.append(String(format: "%d", interest.id))
-                } else {
-                    countCompaniesInLocation.append(String(format: ", %d", interest.id))
-                }
-            }
-            countCompaniesInLocation.append(")")
-            countCompaniesInLocation.append("GROUP BY businesses_company_interests.company_id HAVING interest_count = \(interestList.count)")
-
-            let stmt = try db.prepare(countCompaniesInLocation)
-            var companyCount = 0
-            for _ in stmt {
-                companyCount += 1
-            }
-            completed(companyCount, interestList)
-            return
-        } catch {
-            let nsError = error as NSError
-            log.debug(nsError.localizedDescription)
-            completed(0, interestList)
+   
+        var interestIdList: [Int64] = []
+        let selectInterestsInLocation: String = "SELECT interest_id FROM businesses_company_interests WHERE company_id == \(companyId)"
+        guard let stmt = try? db.prepare(selectInterestsInLocation) else {
+            return []
         }
+        
+        for row in stmt {
+            let businessCompanyInterest = DatabaseOperations.sharedInstance.getBusinessesCompanyInterestFromRowAndStatement(row: row, statement: stmt)
+            interestIdList.append(businessCompanyInterest.interestId)
+        }
+        return interestIdList
     }
-
-    /// Get first maxCompanies companies between 2 coordinates that has the interests
-    ///
-    /// - Parameters:
-    ///   - startLongitude: start coordinate longitude
-    ///   - startLatitude: start coordinate latitude
-    ///   - endLongitude: end coordinate longitude
-    ///   - endLatitude: end coordinate latitude
-    ///   - interests: interest list
-    ///   - completed: return list of companies
-    func getCompaniesInLocationWithFilters(startLongitude: Double, startLatitude: Double, endLongitude: Double, endLatitude: Double, interests: [Interest], completed: @escaping (_ companies: [Company]) -> Void) {
+    
+    /// Returns the company with the specified uuid
+    public func companyWithId(_ id: Int64) -> Company? {
         guard let db = database else {
-            log.debug("Can't load database")
-            completed([])
-            return
+            log.debug("Can't find company with specified uuid because the database isn't loaded")
+            return nil
         }
-        do {
-            var companyList: [Company] = []
-            var companyIds: [Int64] = []
-            for interest in interests {
-                companyIds.append(interest.id)
-            }
-            let interestsStr = companyIds.flatMap({ String($0) }).joined(separator: ", ")
-            let selectCompaniesWithInterests: String = "SELECT businesses_company.*, COUNT(businesses_company_interests.interest_id) AS interest_count FROM businesses_company_interests JOIN businesses_company ON (businesses_company_interests.company_id = businesses_company.id AND (businesses_company.latitude >= \(startLatitude) AND businesses_company.latitude <= \(endLatitude) AND businesses_company.longitude >= \(startLongitude) AND businesses_company.longitude <= \(endLongitude))) WHERE businesses_company_interests.interest_id IN (\(interestsStr)) GROUP BY businesses_company_interests.company_id HAVING interest_count = \(interests.count) ORDER BY turnover DESC, turnover_growth DESC limit \(maxCompanies)"
-
-            let stmt = try db.prepare(selectCompaniesWithInterests)
-
-            for row in stmt {
-                let comp = DatabaseOperations.sharedInstance.getCompanyFromRowAndStatement(row: row, statement: stmt)
-                companyList.append(comp)
-            }
-            completed(companyList)
-            return
-        } catch {
-            let nsError = error as NSError
-            log.debug(nsError.localizedDescription)
-            completed([])
+//        let selectString: String = "SELECT * FROM businesses_company WHERE id = '\(id)'"
+        let selectString: String = "SELECT * FROM businesses_company WHERE id = \(id)"
+        guard let stmt = try? db.prepare(selectString) else {
+            // Company just wasn't found
+            return nil
         }
+        
+        for row in stmt {
+            let company = DatabaseOperations.sharedInstance.getCompanyFromRowAndStatement(row: row, statement: stmt)
+            return company
+        }
+        return nil
     }
 
     /// Get companies with the uuid specified
@@ -552,7 +312,7 @@ class DatabaseOperations {
     /// - Parameters:
     ///   - withUuid: uuid of the company
     ///   - completed: return list of companies with that list
-    func getCompanies(withUuid: [String], completed: @escaping (_ companies: [Company]) -> Void) {
+    public func getCompanies(withUuid: [String], completed: @escaping (_ companies: [Company]) -> Void) {
         guard let db = database else {
             log.debug("Can't load database")
             completed([])
@@ -584,7 +344,7 @@ class DatabaseOperations {
     ///
     /// - Parameter type: social share type
     /// - Returns: template string
-    func getBusinessesSocialShareTemplateOfType(type: SocialShare) -> String {
+    public func getBusinessesSocialShareTemplateOfType(type: SocialShare) -> String {
         guard let db = database else {
             log.debug("Can't load database")
             return ""
@@ -609,7 +369,7 @@ class DatabaseOperations {
     ///
     /// - Parameter type: social share type
     /// - Returns: subject to share
-    func getBusinessesSocialShareSubjectTemplateOfType(type: SocialShare) -> String {
+    public func getBusinessesSocialShareSubjectTemplateOfType(type: SocialShare) -> String {
         guard let db = database else {
             log.debug("Can't load database")
             return ""
@@ -649,6 +409,26 @@ class DatabaseOperations {
         }
         return interest
     }
+    
+    private func getBusinessesCompanyInterestFromRowAndStatement(
+        row: Statement.Element,
+        statement: Statement) -> BusinessCompanyInterest {
+        var businessCompanyInterest = BusinessCompanyInterest()
+        for (index, name) in statement.columnNames.enumerated() {
+            if index < row.count, let value = row[index] {
+                if name == BusinessesCompanyInterestRD.idColumnName, let id = value as? Int64 {
+                    businessCompanyInterest.id = id
+                }
+                if name == BusinessesCompanyInterestRD.businessIdColumnName, let companyId = value as? Int64 {
+                    businessCompanyInterest.companyId = companyId
+                }
+                if name == BusinessesCompanyInterestRD.interestIdColumnName, let interestId = value as? Int64 {
+                    businessCompanyInterest.interestId = interestId
+                }
+            }
+        }
+        return businessCompanyInterest
+    }
 
     /// Transforms row and statment in Interest object
     ///
@@ -668,9 +448,6 @@ class DatabaseOperations {
                 }
                 if name == BusinessesInterest.nameColumnName, let name = value as? String {
                     interest.name = name
-                }
-                if name == BusinessesInterest.interestCountColumnName, let interestCount = value as? Int64 {
-                    interest.interestCount = interestCount
                 }
             }
         }
@@ -714,15 +491,19 @@ class DatabaseOperations {
         }
         return ""
     }
+}
 
+// MARK:- Helpers
+extension DatabaseOperations {
+    
     /// Connect to database
-    private func loadConnection() {
+    fileprivate func loadConnection() {
         do {
             let directoryURL: String = FileHelper.fileInDocumentsDirectory(filename: AppConstants.databaseFileName)
-            database = try Connection(directoryURL)
+            _database = try Connection(directoryURL)
         } catch {
-            database = nil
-            log.debug("error to connect to db")
+            _database = nil
+            log.debug("error connecting to db")
         }
     }
 }

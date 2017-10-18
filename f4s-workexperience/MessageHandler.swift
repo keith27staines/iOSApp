@@ -3,6 +3,7 @@ import Foundation
 import UIKit
 
 class MessageHandler {
+    private var count: Int = 0
     static let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
     static var loadingOverlay: LoadingOverlay = LoadingOverlay()
 
@@ -44,7 +45,6 @@ class MessageHandler {
             break
         }
     }
-
     func display(_ errorMessage: CallError, parentCtrl: UIViewController) {
         MessageHandler.alert.title = errorMessage.appErrorMessageTitle
         MessageHandler.alert.message = errorMessage.appErrorMessage
@@ -76,21 +76,29 @@ class MessageHandler {
         parentCtrl.present(alert, animated: true, completion: nil)
     }
 
-    func showLoadingOverlay(_ view: UIView) {
-        MessageHandler.loadingOverlay = LoadingOverlay()
-        view.addSubview(MessageHandler.loadingOverlay)
-        MessageHandler.loadingOverlay.frame = view.frame
-        MessageHandler.loadingOverlay.showOverlay()
+    func showLoadingOverlay(_ view: UIView, useLightOverlay: Bool = false) {
+        DispatchQueue.main.async { [weak self] in
+            if (self?.count ?? 0) > 0 { return }
+            MessageHandler.loadingOverlay = LoadingOverlay()
+            view.addSubview(MessageHandler.loadingOverlay)
+            MessageHandler.loadingOverlay.frame = view.frame
+            self?.count += 1
+            if useLightOverlay {
+                MessageHandler.loadingOverlay.showLightOverlay()
+            } else {
+                MessageHandler.loadingOverlay.showOverlay()
+            }
+        }
     }
 
     func showLightLoadingOverlay(_ view: UIView) {
-        MessageHandler.loadingOverlay = LoadingOverlay()
-        view.addSubview(MessageHandler.loadingOverlay)
-        MessageHandler.loadingOverlay.frame = view.frame
-        MessageHandler.loadingOverlay.showLightOverlay()
+        showLoadingOverlay(view, useLightOverlay: true)
     }
 
     func hideLoadingOverlay() {
-        MessageHandler.loadingOverlay.hideOverlay()
+        DispatchQueue.main.async { [weak self] in
+            self?.count -= 1
+            MessageHandler.loadingOverlay.hideOverlay()
+        }
     }
 }

@@ -208,7 +208,8 @@ extension CompanyDetailsViewController {
             }
         }
 
-        let interestList = InterestDBOperations.sharedInstance.getAllInterests()
+        let interestSet = InterestDBOperations.sharedInstance.interestsForCurrentUser()
+        let interestList = [Interest](interestSet)
         if self.placement != nil {
             // placement is already created
             // placement in progress

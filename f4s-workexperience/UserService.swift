@@ -218,13 +218,4 @@ class UserService: ApiBaseService {
             }
         }
     }
-
-    private func generateRandomUuid() -> String {
-        let currentTimestamp = Date().timeIntervalSince1970
-        let randomString = String.randomString(length: 20)
-        let randomUuid = "\(currentTimestamp)\(randomString)"
-        let encryptedRandomUuid = randomUuid.sha1()
-        print(encryptedRandomUuid)
-        return encryptedRandomUuid
-    }
 }

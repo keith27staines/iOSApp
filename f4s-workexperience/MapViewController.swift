@@ -12,62 +12,130 @@ import GooglePlaces
 import ReachabilitySwift
 
 class MapViewController: UIViewController {
-    
+    /// Displays the map
     @IBOutlet var mapView: GMSMapView!
+    
+    var mapEdgeInsets: UIEdgeInsets {
+        return UIEdgeInsets(top: searchView.bounds.height + 60, left: 60, bottom: 60, right: 60)
+    }
+    
+    /// Container view for the search text box and closely associated controls
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var myLocationButton: UIButton!
     @IBOutlet weak var searchLocationTextField: AutoCompleteTextField!
+    
+    /// Container view for the filter button and associated controls
+    @IBOutlet weak var refineLabelContainerView: UIView!
     @IBOutlet weak var filtersButton: UIButton!
     @IBOutlet weak var refineSearchLabel: UILabel!
-    @IBOutlet weak var refineLabelContainerView: UIView!
     
+    /// Manages clustering of the pins on the map
     fileprivate var clusterManager: GMUClusterManager!
+    
+    /// Manages location updates from the device
     fileprivate var locationManager: CLLocationManager?
+    
+    /// Last authorization status reported by `locationManager`
     fileprivate var lastAuthorizationStatus: CLAuthorizationStatus?
+    
+    /// When auto-zooming out from a point location, zoom out until this number of companies are displayed (target only, exact number might be different)
+    let targetCompaniesCountForAutoZoom: Int = 30
+    
+    /// The default location if the user hasn't allowed myLocation and hasn't entered a location yet (roughly the centroid of GB)
+    static let centerUkCoord = CLLocationCoordinate2DMake(52.533505, -1.445217)
+    
+    /// The minimum zoom level 
+    static let zoomMinimum: Float = 6.0
     
     var autoCompleteFilter: GMSAutocompleteFilter?
     var placesClient: GMSPlacesClient?
     var backgroundView = UIView()
     var shouldRequestAuthorization: Bool?
-    var userLocation: CLLocation?
-    var currentBounds: GMSCoordinateBounds? {
+    
+    /// User locations are entered manually through the search box
+    var userLocation: CLLocation? {
         didSet {
-            print("new current bounds")
+            if let location = userLocation?.coordinate {
+                self.moveAndZoomCamera(to: location)
+            }
         }
     }
     
+    ///Bounds representing the visible portion of the map
+    var visibleMapBounds: GMSCoordinateBounds? {
+        return GMSCoordinateBounds(region: getVisibleRegion())
+    }
+    
+    /// Map model of all companies (unfiltered by interest)
+    var unfilteredMapModel: MapModel?
+    
+    /// Map model for companies satisfying the interest filters
+    var filteredMapModel: MapModel?
+    
+    /// Used to determine whether there is internet connectivity
     var reachability: Reachability?
-    var downloadIsInProgress: Bool = true
-    var didGetCompaniesNearUser: Bool = false
-    var shouldLimitDisplayedCompanies: Bool = true
     
-    var markers: [POIItem] = []
-    var companies: [Company] = [] {
+    /// The set of all pins currently added to the map
+    var emplacedCompanyPins: F4SCompanyPinSet = []
+    
+    /// The list of currently favourited companies
+    var favouriteList: [Shortlist] = [] {
         didSet {
-            updateMarkers()
+            let companyUuids = favouriteList.map { (shortlist) -> F4SUUID in
+                return shortlist.companyUuid
+            }
+            var newFavourites = F4SCompanyPinSet()
+            for uuid in companyUuids {
+                if let pin = unfilteredMapModel?.allPinsByCompanyUuid[uuid] {
+                    newFavourites.insert(pin)
+                }
+            }
+            favouriteSet = newFavourites
         }
     }
-    var favouriteList: [Shortlist] = []
     
+    /// The favourites last known to this view
+    var previousFavouriteSet: F4SCompanyPinSet?
+    
+    /// Updated set of favourites
+    var favouriteSet: Set<F4SCompanyPin> = Set<F4SCompanyPin>() {
+        didSet {
+            guard let previousFavouriteSet = previousFavouriteSet else {
+                self.previousFavouriteSet = favouriteSet
+                return
+            }
+            if previousFavouriteSet != favouriteSet {
+                self.previousFavouriteSet = favouriteSet
+                self.reloadMapFromModel(mapModel: unfilteredMapModel!, completed: {})
+            }
+        }
+    }
+    
+    /// The company currently selected by the user (if any)
     var selectedCompany: Company?
+    
     var infoWindowView: UIView?
-    var numberOfActions: Int = 0
-    var didTappedMarker: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if UserDefaults.standard.object(forKey: UserDefaultsKeys.companyDatabaseCreatedDate) == nil {
-            self.downloadIsInProgress = true
-            if let view = self.navigationController?.tabBarController?.view {
-                MessageHandler.sharedInstance.showLoadingOverlay(view)
-            }
-            DatabaseService.sharedInstance.setDatabaseDownloadProtocol(viewCtrl: self)
-        }
+        let dbService = DatabaseService.sharedInstance
+        dbService.setDatabaseDownloadProtocol(viewCtrl: self)
         adjustAppeareance()
         handleTextFieldInterfaces()
         setupMap()
         setupReachability(nil, useClosures: true)
         startNotifier()
+        
+        if dbService.isDownloadInProgress {
+            if let view = self.navigationController?.tabBarController?.view {
+                MessageHandler.sharedInstance.showLoadingOverlay(view)
+            }
+        } else {
+            reloadMapFromDatabase { [weak self] in
+                self?.moveCameraToBestPosition()
+                MessageHandler.sharedInstance.hideLoadingOverlay()
+            }
+        }
     }
     
     deinit {
@@ -87,89 +155,52 @@ class MapViewController: UIViewController {
     }
 }
 
-extension MapViewController: DatabaseDownloadProtocol {
-    internal func finishDownloadProtocol() {
-        if UserDefaults.standard.object(forKey: UserDefaultsKeys.companyDatabaseCreatedDate) != nil {
-            self.downloadIsInProgress = false
-            MessageHandler.sharedInstance.hideLoadingOverlay()
-            if let location = mapView.myLocation {
-                self.shouldLimitDisplayedCompanies = true
-                getCompaniesInLocationWithInterests(coordinates_start: location.coordinate, coordinates_end: location.coordinate, isNearLocation: true)
-            } else {
-                if let userTypedLocation = self.userLocation {
-                    self.shouldLimitDisplayedCompanies = true
-                    getCompaniesInLocationWithInterests(coordinates_start: userTypedLocation.coordinate, coordinates_end: userTypedLocation.coordinate, isNearLocation: true)
-                }
-            }
+// MARK:- Conform to InterestsViewControllerDelegate
+extension MapViewController : InterestsViewControllerDelegate {
+    func interestsViewController(_ vc: InterestsViewController, didChangeSelectedInterests interestFilterSet: F4SInterestSet) {
+        guard let unfilteredMapModel = self.unfilteredMapModel else { return }
+        createFilteredMapModel(
+            unfilteredModel: unfilteredMapModel,
+            interestFilterSet: interestFilterSet) { [weak self] (filteredModel) in
+                self?.filteredMapModel = filteredModel
+                self?.reloadMapFromModel(mapModel: filteredModel, completed: {
+            })
         }
     }
 }
 
+//MARK:- Handle download of company database
 protocol DatabaseDownloadProtocol: class {
     func finishDownloadProtocol()
 }
 
-// MARK: - UI Setup
+// MARK:- Conform to DatabaseDownloadProtocol
+extension MapViewController: DatabaseDownloadProtocol {
+    internal func finishDownloadProtocol() {
+        reloadMapFromDatabase { [weak self] in
+            self?.moveCameraToBestPosition()
+            MessageHandler.sharedInstance.hideLoadingOverlay()
+        }
+    }
+}
+
+// MARK:- Manage pins on map
 extension MapViewController {
     
-    func updateMarkers() {
-        mapView.clear()
-        clusterManager.clearItems()
-        self.markers = []
-        let unfavouriteView = UIView()
-        unfavouriteView.frame = CGRect(x: 0, y: 0, width: 19, height: 28)
-        let unfavouriteMarkerIcon = UIImage(named: "markerIcon")
-        let unfavouriteMarkerImageView = UIImageView(image: unfavouriteMarkerIcon)
-        unfavouriteView.addSubview(unfavouriteMarkerImageView)
-        
-        let favouriteView = UIView()
-        favouriteView.frame = CGRect(x: 0, y: 0, width: 19, height: 28)
-        let markerFavouriteIcon = UIImage(named: "markerFavouriteIcon")
-        let markerFavouriteImageView = UIImageView(image: markerFavouriteIcon)
-        favouriteView.addSubview(markerFavouriteImageView)
-        
-        var view = UIView()
-        
-        for (i, company) in companies.enumerated() {
-            if shouldBeFavouritePin(company: company) {
-                view = favouriteView
-            } else {
-                view = unfavouriteView
-            }
-            let position = CLLocationCoordinate2D(latitude: company.latitude, longitude: company.longitude)
-            let index = CInt(i)
-            if let selectedComp = self.selectedCompany {
-                if selectedComp.id == company.id {
-                    // shouldShowView -> true
-                    if let item = POIItem(position: position, name: view, index: index, shouldShowView: true) { // name - custom view for marker
-                        self.markers.append(item)
-                        clusterManager.add(item)
-                        continue
-                    }
-                }
-            }
-            if let item = POIItem(position: position, name: view, index: index, shouldShowView: false) { // name - custom view for marker
-                self.markers.append(item)
-                clusterManager.add(item)
-            }
+    /// Adds the specified pin to the map and its associated data structures:
+    /// 1. clusterManager
+    /// 2. emplacedCompanyPins
+    fileprivate func addPinToMap(pin: F4SCompanyPin) {
+        if !emplacedCompanyPins.contains(pin) {
+            pin.isFavourite = favouriteSet.contains(pin)
+            clusterManager.add(pin)
+            emplacedCompanyPins.insert(pin)
         }
-        clusterManager.cluster()
     }
-    
-    func shouldBeFavouritePin(company: Company) -> Bool {
-        if let _ = self.favouriteList.filter({ $0.companyUuid == company.uuid.replacingOccurrences(of: "-", with: "") }).first {
-            return true
-        }
-        let companyList = self.companies.filter({$0.latitude == company.latitude && $0.longitude == company.longitude})
-        if companyList.count > 1 {
-            for comp in companyList {
-                if let _ = self.favouriteList.filter({ $0.companyUuid == comp.uuid.replacingOccurrences(of: "-", with: "") }).first {
-                    return true
-                }
-            }
-        }
-        return false
-    }
+}
+
+// MARK: - UI Setup
+extension MapViewController {
     
     fileprivate func adjustAppeareance() {
         searchView.layer.cornerRadius = 10
@@ -247,46 +278,6 @@ extension MapViewController {
         self.refineSearchLabel.layer.masksToBounds = true
     }
     
-    fileprivate func handleTextFieldInterfaces() {
-        searchLocationTextField!.onTextChange = { [weak self] text in
-            if !text.isEmpty {
-                var places: [String] = []
-                var placesIds: [String] = []
-                guard let strongSelf = self else {
-                    return
-                }
-                strongSelf.placesClient?.autocompleteQuery(text, bounds: nil, filter: strongSelf.autoCompleteFilter, callback: { results, error in
-                    guard error == nil,
-                        let strongResults = results else {
-                            print("Autocomplete error \(error!)")
-                            return
-                    }
-                    
-                    for result in strongResults {
-                        if let placeId = result.placeID {
-                            placesIds.append(placeId)
-                        }
-                        places.append(result.attributedFullText.string)
-                    }
-                    strongSelf.searchLocationTextField.autoCompletePlacesIds = placesIds
-                    strongSelf.searchLocationTextField!.autoCompleteStrings = places
-                })
-            }
-        }
-        
-        searchLocationTextField!.onSelect = { [weak self] text, _ in
-            self?.searchLocationTextField.resignFirstResponder()
-            self?.searchLocationTextField.text = text
-            let indexOfString = self?.searchLocationTextField.autoCompleteStrings?.index(of: text)
-            if let index = indexOfString {
-                let placeId = self?.searchLocationTextField.autoCompletePlacesIds?[index]
-                self?.moveCameraToAddress(text, placeId: placeId)
-            } else {
-                self?.moveCameraToAddress(text, placeId: nil)
-            }
-        }
-    }
-    
     func setupInfoWindow(company: Company) -> UIView {
         guard let infoWindow = Bundle.main.loadNibNamed("InfoWindowView", owner: self, options: nil)?.first as? InfoWindowView else {
             return UIView()
@@ -319,70 +310,15 @@ extension MapViewController {
             infoWindow.logoImageView.image = UIImage(named: "DefaultLogo")
         }
         
-        if company.rating == 0 {
+        if company.rating < 0.5 {
             infoWindow.ratingStackView.removeFromSuperview()
         } else {
-            let roundedRating = company.rating.round()
-            if roundedRating == 0 {
-                infoWindow.ratingStackView.removeFromSuperview()
-            } else {
-                infoWindow.ratingLabel.attributedText = NSAttributedString(string: String(format: "%.1f", company.rating),
-                                                                           attributes: [
-                                                                            NSFontAttributeName: UIFont.systemFont(ofSize: Style.biggerVerySmallTextSize,
-                                                                                                                   weight: UIFontWeightSemibold),
-                                                                            NSForegroundColorAttributeName: UIColor.black,
-                                                                            ])
-                if roundedRating == 0.5 {
-                    infoWindow.firstStarImageView.image = UIImage(named: "HalfStar")
-                }
-                if roundedRating == 1 {
-                    infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-                }
-                if roundedRating == 1.5 {
-                    infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.secondStarImageView.image = UIImage(named: "HalfStar")
-                }
-                if roundedRating == 2 {
-                    infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
-                }
-                if roundedRating == 2.5 {
-                    infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.thirdStarImageView.image = UIImage(named: "HalfStar")
-                }
-                if roundedRating == 3 {
-                    infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.thirdStarImageView.image = UIImage(named: "FilledStar")
-                }
-                if roundedRating == 3.5 {
-                    infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.thirdStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.fourthStarImageView.image = UIImage(named: "HalfStar")
-                }
-                if roundedRating == 4 {
-                    infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.thirdStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.fourthStarImageView.image = UIImage(named: "FilledStar")
-                }
-                if roundedRating == 4.5 {
-                    infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.thirdStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.fourthStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.fifthStarImageView.image = UIImage(named: "HalfStar")
-                }
-                if roundedRating == 5 {
-                    infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.thirdStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.fourthStarImageView.image = UIImage(named: "FilledStar")
-                    infoWindow.fifthStarImageView.image = UIImage(named: "FilledStar")
-                }
-            }
+            setInfoWindowStars(infoWindow: infoWindow, unroundedRating: company.rating)
+            
+            infoWindow.ratingLabel.attributedText = NSAttributedString(
+                string: String(format: "%.1f", company.rating),
+                attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: Style.biggerVerySmallTextSize, weight: UIFontWeightSemibold),
+                             NSForegroundColorAttributeName: UIColor.black])
         }
         
         let height = infoWindow.backgroundView.bounds.height
@@ -397,6 +333,60 @@ extension MapViewController {
         infoWindow.backgroundView.layer.cornerRadius = 10
         
         return infoWindow
+    }
+    
+    func setInfoWindowStars(infoWindow: InfoWindowView, unroundedRating: Double) {
+        let roundedRating = unroundedRating.round()
+        if roundedRating == 0.5 {
+            infoWindow.firstStarImageView.image = UIImage(named: "HalfStar")
+        }
+        if roundedRating == 1 {
+            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
+        }
+        if roundedRating == 1.5 {
+            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.secondStarImageView.image = UIImage(named: "HalfStar")
+        }
+        if roundedRating == 2 {
+            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
+        }
+        if roundedRating == 2.5 {
+            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.thirdStarImageView.image = UIImage(named: "HalfStar")
+        }
+        if roundedRating == 3 {
+            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.thirdStarImageView.image = UIImage(named: "FilledStar")
+        }
+        if roundedRating == 3.5 {
+            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.thirdStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.fourthStarImageView.image = UIImage(named: "HalfStar")
+        }
+        if roundedRating == 4 {
+            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.thirdStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.fourthStarImageView.image = UIImage(named: "FilledStar")
+        }
+        if roundedRating == 4.5 {
+            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.thirdStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.fourthStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.fifthStarImageView.image = UIImage(named: "HalfStar")
+        }
+        if roundedRating == 5 {
+            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.thirdStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.fourthStarImageView.image = UIImage(named: "FilledStar")
+            infoWindow.fifthStarImageView.image = UIImage(named: "FilledStar")
+        }
     }
     
     enum transitionType {
@@ -434,7 +424,7 @@ extension MapViewController {
     }
     
     func displayRefineSearchLabelAnimated() {
-        if self.refineSearchLabel.isHidden && InterestDBOperations.sharedInstance.getInterestForCurrentUser().count == 0 {
+        if self.refineSearchLabel.isHidden && InterestDBOperations.sharedInstance.interestsForCurrentUser().count == 0 {
             self.refineLabelContainerView.isHidden = false
             self.setupSlideInAnimation(transitionType.slideIn, completionDelegate: self)
             self.refineSearchLabel.isHidden = false
@@ -476,9 +466,6 @@ extension MapViewController {
         }
         
         mapView.settings.myLocationButton = false
-        let centerUkCoord = CLLocationCoordinate2DMake(52.533505, -1.445217)
-        let camera = GMSCameraPosition(target: centerUkCoord, zoom: 6, bearing: 0, viewingAngle: 0)
-        mapView.camera = camera
     }
     
     fileprivate func iconGeneratorWithImages() -> GMUClusterIconGenerator {
@@ -487,65 +474,69 @@ extension MapViewController {
     
     fileprivate func makeLocationManager() -> CLLocationManager {
         let manager = CLLocationManager()
-        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.desiredAccuracy = kCLLocationAccuracyKilometer
         manager.delegate = self
         return manager
     }
+}
+
+// MARK:- Camera position management
+extension MapViewController  {
+    /// Moves the camera to its last idle position if available, else to my location or user selected location with dynamic zoom to ensure a reasonable number of company pins on map, or failing all of that, show the entire UK
+    func moveCameraToBestPosition() {
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            if let target = strongSelf.mapView.myLocation ?? strongSelf.userLocation {
+                strongSelf.moveAndZoomCamera(to: target.coordinate)
+            } else {
+                strongSelf.moveCamera(to: MapViewController.centerUkCoord, zoom: MapViewController.zoomMinimum)
+            }
+        }
+    }
     
-    func moveCameraToAddress(_ address: String, placeId: String?) {
-        self.shouldLimitDisplayedCompanies = true
+    /// Moves the camera to the specified location and sets the zoom to the specified value
+    func moveCamera(to location: CLLocationCoordinate2D, zoom: Float) {
+        let cameraPosition = GMSCameraPosition(target: location,
+                                               zoom: zoom,
+                                               bearing: 0,
+                                               viewingAngle: 0)
+        mapView.animate(to: cameraPosition)
         
-        let coordinates = address.components(separatedBy: ",")
-        let lat = Double(coordinates[0])
-        if coordinates.count < 3 && lat != nil {
-            if let lng = Double(coordinates[1]) {
-                let coord = CLLocationCoordinate2DMake(lat!, lng)
-                self.moveCameraToCoordinates(coord)
+    }
+    
+    /// Moves and zooms the camera to display a reasonable number of pins around the specified location.
+    func moveAndZoomCamera(to location: CLLocationCoordinate2D) {
+        guard let mapModel = unfilteredMapModel else {
+            // Without a model all we can do is move the camera to the specified location
+            DispatchQueue.main.async { [weak self] in
+                self?.mapView.animate(toLocation: location)
             }
-        } else {
-            LocationHelper.sharedInstance.googleGeocodeAddressString(address, placeId) { _, coordinates in
-                switch coordinates {
-                case .value(let coordinates):
-                    self.userLocation = CLLocation(latitude: coordinates.value.latitude, longitude: coordinates.value.longitude)
-                    self.moveCameraToCoordinates(coordinates.value)
-                    self.getCompaniesInLocationWithInterests(coordinates_start: coordinates.value, coordinates_end: coordinates.value, isNearLocation: true)
-                case .error(let err):
-                    if err == "NoConnectivity" {
-                        let title = NSLocalizedString("No data connectivity", comment: "")
-                        let errorMsg = NSLocalizedString("You appear to be offline at the moment. Please try again later when you have a working internet connection.",
-                                                         comment: "")
-                        MessageHandler.sharedInstance.displayWithTitle(title, errorMsg, parentCtrl: self)
-                        debugPrint(err)
-                    } else {
-                        let title = NSLocalizedString("Location Not Found", comment: "")
-                        let errorMsg = NSLocalizedString("We cannot find the location you entered. Please try again", comment: "")
-                        MessageHandler.sharedInstance.displayWithTitle(title, errorMsg, parentCtrl: self)
-                        debugPrint(err)
-                    }
-                case let .deffinedError(error):
-                    log.debug(error)
-                }
-            }
+            return
+        }
+        // Get the target number of company pins near the specified location and zoom in on bounds that enclose them
+        mapModel.getCompanyPins(
+            target : targetCompaniesCountForAutoZoom,
+            near: location) { [weak self] pins in
+                self?.unfilteredMapModel = mapModel
+                self?.moveCamera(to: location, zoomToShow: pins)
         }
     }
     
-    func moveCameraToCoordinates(_ coordinates: CLLocationCoordinate2D) {
-        let camera = GMSCameraPosition.camera(withTarget: coordinates, zoom: 16)
-        self.mapView.animate(to: camera)
-    }
-    
-    func moveCameraWithDinamicZoom() {
-        if self.companies.count > 0 {
-            var boundsFromMarkers = GMSCoordinateBounds(coordinate: (markers.first?.position)!, coordinate: (markers.first?.position)!)
-            for marker in self.markers {
-                boundsFromMarkers = boundsFromMarkers.includingCoordinate(marker.position)
+    /// Moves the camera to the specified location and zooms out enough to show an area of the map that includes the locations of all the pins in the specified set
+    func moveCamera(to location: CLLocationCoordinate2D, zoomToShow pins: F4SCompanyPinSet) {
+        var bounds = GMSCoordinateBounds(coordinate: location, coordinate: location)
+        for pin in pins {
+            bounds = bounds.includingCoordinate(pin.position)
+        }
+        DispatchQueue.main.async { [weak self] in
+            guard let mapView = self?.mapView, let mapEdgeInsets = self?.mapEdgeInsets else {
+                return
             }
-            self.currentBounds = boundsFromMarkers
-            
-            mapView.animate(with: GMSCameraUpdate.fit(boundsFromMarkers, with: UIEdgeInsets(top: searchView.bounds.height + 60, left: 60, bottom: 60, right: 60)))
+            mapView.animate(with: GMSCameraUpdate.fit(bounds, with: mapEdgeInsets))
         }
     }
     
+    /// Returns the bounds of the visible portion of the map
     func getVisibleRegion() -> GMSVisibleRegion {
         let topLeftPoint = CGPoint(x: self.searchView.frame.minX, y: self.searchView.frame.maxY)
         let bottomRightPoint = CGPoint(x: self.searchView.frame.maxX, y: mapView.bounds.height)
@@ -560,98 +551,6 @@ extension MapViewController {
         let visibleRegionForPoints = GMSVisibleRegion(nearLeft: bottomLeftLocation, nearRight: bottomRightLocation, farLeft: topLeftLocation, farRight: topRightLocation)
         
         return visibleRegionForPoints
-    }
-    
-    func getBoundingBoxForCurrentMarkers() {
-        if self.companies.count > 0 {
-            var boundsFromMarkers = GMSCoordinateBounds(coordinate: (markers.first?.position)!, coordinate: (markers.first?.position)!)
-            for marker in self.markers {
-                boundsFromMarkers = boundsFromMarkers.includingCoordinate(marker.position)
-            }
-            self.currentBounds = boundsFromMarkers
-        }
-    }
-    
-    func getCompaniesInLocationWithInterests(coordinates_start: CLLocationCoordinate2D, coordinates_end: CLLocationCoordinate2D, isNearLocation: Bool, shouldReposition: Bool = true, isNearMyLocation: Bool = false) {
-        let interestList = InterestDBOperations.sharedInstance.getInterestForCurrentUser()
-        print("Calling getCompaniesInLocationWithInterests")
-        if interestList.count > 0 {
-            if isNearLocation || isNearMyLocation {
-                DatabaseOperations.sharedInstance.getCompaniesNearLocationFirstThenFilter(longitude: coordinates_start.longitude, latitude: coordinates_start.latitude, interests: interestList, completed: { companies in
-                    self.companies = companies
-                    if shouldReposition && companies.count > 1 {
-                        self.moveCameraWithDinamicZoom()
-                    } else {
-                        self.moveCameraToCoordinates(coordinates_start)
-                    }
-                })
-            } else {
-                DatabaseOperations.sharedInstance.getCompaniesInLocationWithFilters(startLongitude: coordinates_start.longitude, startLatitude: coordinates_start.latitude, endLongitude: coordinates_end.longitude, endLatitude: coordinates_end.latitude, interests: interestList, completed: {
-                    companies in
-                    if self.shouldAddSelectedCompany(startLongitude: coordinates_start.longitude, startLatitude: coordinates_start.latitude, endLongitude: coordinates_end.longitude, endLatitude: coordinates_end.latitude) {
-                        if companies.contains(where: { (company) -> Bool in
-                            if company.id == self.selectedCompany?.id {
-                                return true
-                            }
-                            return false
-                        }) {
-                            self.companies = companies
-                        } else {
-                            var companyList = companies
-                            companyList.append(self.selectedCompany!)
-                            self.companies = companyList
-                        }
-                    } else {
-                        self.companies = companies
-                    }
-                })
-            }
-            
-        } else {
-            if isNearLocation || isNearMyLocation {
-                DatabaseOperations.sharedInstance.getCompaniesNearLocation(longitude: coordinates_start.longitude, latitude: coordinates_start.latitude, completed: {
-                    companies in
-                    self.companies = companies
-                    if shouldReposition && companies.count > 1 {
-                        self.moveCameraWithDinamicZoom()
-                    } else {
-                        self.moveCameraToCoordinates(coordinates_start)
-                    }
-                })
-            } else {
-                DatabaseOperations.sharedInstance.getCompaniesInLocation(startLongitude: coordinates_start.longitude, startLatitude: coordinates_start.latitude, endLongitude: coordinates_end.longitude, endLatitude: coordinates_end.latitude, completed: {
-                    companies in
-                    if self.shouldAddSelectedCompany(startLongitude: coordinates_start.longitude, startLatitude: coordinates_start.latitude, endLongitude: coordinates_end.longitude, endLatitude: coordinates_end.latitude) {
-                        if companies.contains(where: { (company) -> Bool in
-                            if company.id == self.selectedCompany?.id {
-                                return true
-                            }
-                            return false
-                        }) {
-                            self.companies = companies
-                        } else {
-                            var companyList = companies
-                            companyList.append(self.selectedCompany!)
-                            self.companies = companyList
-                        }
-                    } else {
-                        self.companies = companies
-                    }
-                })
-            }
-        }
-    }
-    
-    func shouldAddSelectedCompany(startLongitude: Double, startLatitude: Double, endLongitude: Double, endLatitude: Double) -> Bool {
-        guard let company = self.selectedCompany else {
-            return false
-        }
-        let longitude = company.longitude
-        let latitude = company.latitude
-        if ((longitude >= startLongitude && longitude <= endLongitude) || (longitude <= startLongitude && longitude >= endLongitude)) && ((latitude >= startLatitude && latitude <= endLatitude) || (latitude <= startLatitude && latitude >= endLatitude)) {
-            return true
-        }
-        return false
     }
 }
 
@@ -677,9 +576,9 @@ extension MapViewController: UITextFieldDelegate {
             if (mapSearchLocation.isEmpty) == false {
                 
                 if let autoCompletePlaceIds = (textField as! AutoCompleteTextField).autoCompletePlacesIds {
-                    self.moveCameraToAddress(mapSearchLocation, placeId: autoCompletePlaceIds.first)
+                    self.setUserLocation(from: mapSearchLocation, placeId: autoCompletePlaceIds.first)
                 } else {
-                    self.moveCameraToAddress(mapSearchLocation, placeId: nil)
+                    self.setUserLocation(from: mapSearchLocation, placeId: nil)
                 }
             }
         }
@@ -721,84 +620,104 @@ extension MapViewController: UITextFieldDelegate {
     func endSearch(_: UITapGestureRecognizer) {
         self.searchLocationTextField.resignFirstResponder()
     }
+    
+    fileprivate func handleTextFieldInterfaces() {
+        searchLocationTextField!.onTextChange = { [weak self] text in
+            if !text.isEmpty {
+                var places: [String] = []
+                var placesIds: [String] = []
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.placesClient?.autocompleteQuery(text, bounds: nil, filter: strongSelf.autoCompleteFilter, callback: { results, error in
+                    guard error == nil,
+                        let strongResults = results else {
+                            print("Autocomplete error \(error!)")
+                            return
+                    }
+                    
+                    for result in strongResults {
+                        if let placeId = result.placeID {
+                            placesIds.append(placeId)
+                        }
+                        places.append(result.attributedFullText.string)
+                    }
+                    strongSelf.searchLocationTextField.autoCompletePlacesIds = placesIds
+                    strongSelf.searchLocationTextField!.autoCompleteStrings = places
+                })
+            }
+        }
+        
+        searchLocationTextField!.onSelect = { [weak self] text, _ in
+            self?.searchLocationTextField.resignFirstResponder()
+            self?.searchLocationTextField.text = text
+            let indexOfString = self?.searchLocationTextField.autoCompleteStrings?.index(of: text)
+            if let index = indexOfString {
+                let placeId = self?.searchLocationTextField.autoCompletePlacesIds?[index]
+                self?.setUserLocation(from: text, placeId: placeId)
+            } else {
+                self?.setUserLocation(from: text, placeId: nil)
+            }
+        }
+    }
 }
 
 // MARK: - GMSMapViewDelegate
 extension MapViewController: GMSMapViewDelegate {
     
+    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+        self.selectedCompany = nil
+        self.mapView.selectedMarker = nil
+    }
+    
     func mapView(_: GMSMapView, willMove gesture: Bool) {
         if gesture {
             hideRefineSearchLabelAnimated()
-            self.shouldLimitDisplayedCompanies = false
         }
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        self.selectedCompany = nil
+        self.selectedCompany = companyFromMarker(marker: marker)
+        self.mapView.selectedMarker = marker
         var point: CGPoint = mapView.projection.point(for: marker.position)
         point.y -= 50
         let camera: GMSCameraUpdate = GMSCameraUpdate.setTarget(mapView.projection.coordinate(for: point))
         marker.appearAnimation = kGMSMarkerAnimationPop
         marker.tracksInfoWindowChanges = true
-        self.mapView.selectedMarker = marker
-        self.didTappedMarker = true
+        
         mapView.animate(with: camera)
         return true
     }
     
-    func mapView(_: GMSMapView, idleAt _: GMSCameraPosition) {
-        if self.didTappedMarker {
-            self.didTappedMarker = false
-            self.numberOfActions = 0
-        } else {
-            self.numberOfActions = 1
-        }
-        if !self.shouldLimitDisplayedCompanies {
-            self.currentBounds = GMSCoordinateBounds(region: getVisibleRegion())
-            if let northEast = currentBounds?.northEast, let southWest = currentBounds?.southWest {
-                getCompaniesInLocationWithInterests(coordinates_start: southWest, coordinates_end: northEast, isNearLocation: false)
-            }
-        }
+    func mapView(_: GMSMapView, idleAt pos: GMSCameraPosition) {
+
     }
     
     func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
-        guard let index = (marker.userData as? POIItem)?.index else {
+        guard let selectedCompany = self.selectedCompany else {
             return nil
         }
-        let company = self.companies[Int(index)]
-        self.shouldLimitDisplayedCompanies = true
-        if self.numberOfActions == -1 {
-            self.numberOfActions = 0
-        } else if self.numberOfActions == 4 {
-            self.numberOfActions = 0
-        } else {
-            self.numberOfActions += 1
+        guard let company = companyFromMarker(marker: marker) else {
+            return nil
         }
-        if self.selectedCompany != nil {
-            if let infoWindow = self.infoWindowView {
-                return infoWindow
-            }
+        guard company.uuid == selectedCompany.uuid else {
+            return nil
         }
-        self.selectedCompany = company
         self.infoWindowView = setupInfoWindow(company: company)
         return infoWindowView
     }
     
     func mapView(_: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
-        if let index = (marker.userData as? POIItem)?.index {
-            let company = self.companies[Int(index)]
-            CustomNavigationHelper.sharedInstance.showCompanyDetailsPopover(parentCtrl: self, company: company)
+        guard let company = companyFromMarker(marker: marker) else {
+            return
         }
+        CustomNavigationHelper.sharedInstance.showCompanyDetailsPopover(parentCtrl: self, company: company)
     }
     
     func mapView(_: GMSMapView, didCloseInfoWindowOf _: GMSMarker) {
-        self.numberOfActions += 1
-        if self.numberOfActions == 1 {
-            // close
-            self.selectedCompany = nil
-            self.numberOfActions = -1
-        }
+
     }
+
 }
 
 // MARK: - GMUClusterManager Delegate
@@ -808,7 +727,6 @@ extension MapViewController: GMUClusterManagerDelegate {
         let newCamera = GMSCameraPosition.camera(withTarget: cluster.position, zoom: mapView.camera.zoom + 1)
         let update = GMSCameraUpdate.setCamera(newCamera)
         mapView.animate(with: update)
-        self.currentBounds = GMSCoordinateBounds(region: getVisibleRegion())
     }
 }
 
@@ -816,11 +734,11 @@ extension MapViewController: GMUClusterManagerDelegate {
 extension MapViewController: CLLocationManagerDelegate {
     
     func locationManager(_: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+
         switch status {
             
         case .authorizedWhenInUse:
             locationManager!.startUpdatingLocation()
-            self.didGetCompaniesNearUser = false
             mapView.isMyLocationEnabled = true
             
         case .denied:
@@ -831,7 +749,6 @@ extension MapViewController: CLLocationManagerDelegate {
             
         case .authorizedAlways:
             locationManager!.startUpdatingLocation()
-            self.didGetCompaniesNearUser = false
             mapView.isMyLocationEnabled = true
             
         case .restricted:
@@ -850,19 +767,6 @@ extension MapViewController: CLLocationManagerDelegate {
     
     func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locationManager!.stopUpdatingLocation()
-        guard let myLocation = locations.first else {
-            return
-        }
-        self.userLocation = myLocation
-        if !didGetCompaniesNearUser {
-            getCompaniesInLocationWithInterests(coordinates_start: myLocation.coordinate, coordinates_end: myLocation.coordinate, isNearLocation: false, isNearMyLocation: true)
-        }
-    }
-}
-
-extension CLLocation {
-    func hasSameCoordinates(_ location: CLLocation) -> Bool {
-        return location.coordinate.latitude == self.coordinate.latitude && location.coordinate.longitude == location.coordinate.longitude
     }
 }
 
@@ -875,9 +779,8 @@ extension MapViewController {
         if searchLocationTextField.isFirstResponder {
             searchLocationTextField.resignFirstResponder()
         }
-        if let location = mapView.myLocation {
-            self.shouldLimitDisplayedCompanies = true
-            getCompaniesInLocationWithInterests(coordinates_start: location.coordinate, coordinates_end: location.coordinate, isNearLocation: false, isNearMyLocation: true)
+        if let location = mapView.myLocation?.coordinate {
+            moveAndZoomCamera(to: location)
         } else {
             if CLLocationManager.authorizationStatus() == .denied || CLLocationManager.authorizationStatus() == .restricted {
                 MessageHandler.sharedInstance.presentEnableLocationInfo(parentCtrl: self)
@@ -890,11 +793,9 @@ extension MapViewController {
     @IBAction func filtersButtonTouched(_: UIButton) {
         let interestsStoryboard = UIStoryboard(name: "InterestsView", bundle: nil)
         let interestsCtrl = interestsStoryboard.instantiateViewController(withIdentifier: "interestsCtrl") as! InterestsViewController
-        if currentBounds == nil {
-            self.currentBounds = GMSCoordinateBounds(region: getVisibleRegion())
-        }
-        interestsCtrl.currentBounds = currentBounds
-        interestsCtrl.mapController = self
+        interestsCtrl.visibleBounds = self.visibleMapBounds
+        interestsCtrl.mapModel = unfilteredMapModel
+        interestsCtrl.delegate = self
         let interestsCtrlNav = RotationAwareNavigationController(rootViewController: interestsCtrl)
         hideRefineSearchLabelAnimated()
         self.navigationController?.present(interestsCtrlNav, animated: true, completion: nil)
@@ -929,27 +830,165 @@ extension MapViewController {
     
     func reachabilityChanged(_ note: Notification) {
         let reachability = note.object as! Reachability
-        
         if reachability.isReachable {
             debugPrint("network is reachable")
-            if UserDefaults.standard.object(forKey: UserDefaultsKeys.companyDatabaseCreatedDate) == nil && !self.downloadIsInProgress {
-                self.downloadIsInProgress = true
+            let dbService = DatabaseService.sharedInstance
+            if !dbService.isLocalDatabaseAvailable() && !dbService.isDownloadInProgress {
+                dbService.getLatestDatabase()
                 DispatchQueue.main.async {
                     if let view = self.navigationController?.tabBarController?.view {
+                        DatabaseService.sharedInstance.getLatestDatabase()
                         MessageHandler.sharedInstance.showLoadingOverlay(view)
                     }
                 }
-                DatabaseService.sharedInstance.getLatestDatabase()
             }
         } else {
             debugPrint("network not reachable")
             if UserDefaults.standard.object(forKey: UserDefaultsKeys.companyDatabaseCreatedDate) == nil {
-                self.downloadIsInProgress = false
                 DispatchQueue.main.async {
                     MessageHandler.sharedInstance.hideLoadingOverlay()
                     MessageHandler.sharedInstance.display("No Internet Connection.", parentCtrl: self)
                 }
             }
+        }
+    }
+}
+
+// MARK:- helpers
+extension MapViewController {
+    
+    /// Returns the Company corresponding to the specified marker
+    func companyFromMarker(marker: GMSMarker) -> Company? {
+        guard let pin = marker.userData as? F4SCompanyPin else {
+            return nil
+        }
+        return DatabaseOperations.sharedInstance.companyWithId(pin.companyId)
+    }
+    
+    /// Sets the userLocation by transforming a place id (or the address string if the place is not provided, or does not correspond to a google places id) into a location
+    func setUserLocation(from address: String, placeId: String?) {
+        let coordinates = address.components(separatedBy: ",")
+        let lat = Double(coordinates[0])
+        if coordinates.count < 3 && lat != nil {
+            if let lng = Double(coordinates[1]) {
+                self.userLocation = CLLocation(latitude: lat!, longitude: lng)
+            }
+        } else {
+            LocationHelper.sharedInstance.googleGeocodeAddressString(address, placeId) { _, coordinates in
+                switch coordinates {
+                case .value(let coordinates):
+                    self.userLocation = CLLocation(latitude: coordinates.value.latitude, longitude: coordinates.value.longitude)
+                case .error(let err):
+                    if err == "NoConnectivity" {
+                        let title = NSLocalizedString("No data connectivity", comment: "")
+                        let errorMsg = NSLocalizedString("You appear to be offline at the moment. Please try again later when you have a working internet connection.",
+                                                         comment: "")
+                        MessageHandler.sharedInstance.displayWithTitle(title, errorMsg, parentCtrl: self)
+                        debugPrint(err)
+                    } else {
+                        let title = NSLocalizedString("Location Not Found", comment: "")
+                        let errorMsg = NSLocalizedString("We cannot find the location you entered. Please try again", comment: "")
+                        MessageHandler.sharedInstance.displayWithTitle(title, errorMsg, parentCtrl: self)
+                        debugPrint(err)
+                    }
+                case let .deffinedError(error):
+                    log.debug(error)
+                }
+            }
+        }
+        
+    }
+}
+
+extension MapViewController {
+    /// Asynchronously clears the map and associated data structures including:
+    /// 1. mapView
+    /// 2. emplacedCompanyPins
+    /// 3. clusterManager
+    ///
+    /// - parameter completed: Calls back when the map and its datastructures are cleared
+    func clearMap(completed: @escaping () -> Void) {
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.mapView.clear()
+            strongSelf.emplacedCompanyPins.removeAll()
+            strongSelf.clusterManager.clearItems()
+            completed()
+        }
+    }
+    
+    /// Asynchronously creates a filtered map from a less filtered one
+    ///
+    /// - parameter unfilterdModel: The starting MapModel whose content is to be filtered into a new MapModel
+    /// - parameter interestFilterSet: The set of interests to filter companies by. A company must have at least one interest in the interestFilterSet to qualify
+    /// - parameter completed: Calls back with the filtered MapModel
+    func createFilteredMapModel(unfilteredModel: MapModel,
+                                interestFilterSet: F4SInterestSet,
+                                completed: @escaping (MapModel) -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let filteredModel = MapModel(allCompanyPinsSet: unfilteredModel.allCompanyPins,
+                                         allInterests: unfilteredModel.interestsModel.allInterests,
+                                         filtereredBy: interestFilterSet)
+            completed(filteredModel)
+        }
+    }
+    
+    /// Asynchronously creates an unfiltered map model by reading directly from the databas
+    ///
+    /// - parameter completion: Calls back with the newly created MapModel
+    func createUnfilteredMapModelFromDatabase(completion: @escaping (MapModel) -> Void ) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let dbOps = DatabaseOperations.sharedInstance
+            dbOps.getAllCompanies(completed: { companies in
+                dbOps.getAllInterests(completed: { (interests) in
+                    let mapModel = MapModel(
+                        allCompanies: companies,
+                        allInterests:interests,
+                        selectedInterests: nil)
+                    DispatchQueue.main.async {
+                        completion(mapModel)
+                    }
+                })
+            })
+        }
+    }
+
+    /// Asynchronously reloads the map from the specified mapmodel
+    ///
+    /// - parameter completed: Calls back when the reload is complete
+    func reloadMapFromModel(mapModel: MapModel, completed: @escaping () -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.clearMap() { [weak self] in
+                guard let strongSelf = self else { return }
+                for pin in mapModel.filteredCompanyPinSet {
+                    strongSelf.addPinToMap(pin: pin)
+                }
+                completed()
+            }
+        }
+    }
+    
+    /// Asynchronously reloads the map from datastructures read from the database
+    ///
+    /// - parameter completion: Call back when the reload is complete
+    func reloadMapFromDatabase(completion: @escaping () -> Void ) {
+        if !(DatabaseService.isLocalDatabaseAvailable() && DatabaseOperations
+            .sharedInstance.isConnected) {
+            completion()
+            return
+        }
+        self.favouriteList = ShortlistDBOperations.sharedInstance.getShortlistForCurrentUser()
+        self.createUnfilteredMapModelFromDatabase { [weak self] unfilteredMapModel in
+            guard let strongSelf = self else { return }
+            strongSelf.unfilteredMapModel = unfilteredMapModel
+            let interestFilterSet = InterestDBOperations.sharedInstance.interestsForCurrentUser()
+            strongSelf.createFilteredMapModel(unfilteredModel: unfilteredMapModel, interestFilterSet: interestFilterSet, completed: { (filteredMapModel) in
+                strongSelf.filteredMapModel = filteredMapModel
+                strongSelf.reloadMapFromModel(mapModel: filteredMapModel, completed: {
+                    completion()
+                })
+            })
         }
     }
 }

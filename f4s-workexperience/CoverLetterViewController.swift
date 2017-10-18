@@ -396,7 +396,7 @@ extension CoverLetterViewController {
 
         MessageHandler.sharedInstance.showLoadingOverlay(self.view)
         let templateToUpdate = TemplateEntity(uuid: currentTemplateUuid, blank: self.selectedTemplateChoices)
-        placement.interestsList = InterestDBOperations.sharedInstance.getInterestForCurrentUser()
+//        placement.interestsList = InterestDBOperations.sharedInstance.getInterestForCurrentUser()
         PlacementService.sharedInstance.updatePlacement(placement: placement, template: templateToUpdate) {
             [weak self]
             _, result in

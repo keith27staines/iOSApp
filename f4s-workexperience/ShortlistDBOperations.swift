@@ -38,16 +38,6 @@ class ShortlistDBOperations {
         return shortlists
     }
 
-    func getAllShortlists() -> [Shortlist] {
-        let shortlistDBData = ShortlistCoreDataManager.sharedInstance.getAllShortlists()
-        var shortlists: [Shortlist] = []
-        for shortlistDB in shortlistDBData {
-            let shortlist = ShortlistDBOperations.sharedInstance.getShortlistFromShortlistDB(shortlistDB: shortlistDB)
-            shortlists.append(shortlist)
-        }
-        return shortlists
-    }
-
     func removeShortlistWithId(shortlistUuid: String) {
         let keychain = KeychainSwift()
         guard let userUuid = keychain.get(UserDefaultsKeys.userUuid) else {
