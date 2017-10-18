@@ -56,7 +56,7 @@ public struct MapModel {
         self.allCompanyPins = allCompanyPinsSet
 
         let filteredCompanyPinList: [F4SCompanyPin]
-        var selectedInterestIdSet: F4SInterestIdSet = InterestsModel.interestIdSet(from: interestsSet)
+        let selectedInterestIdSet: F4SInterestIdSet = InterestsModel.interestIdSet(from: interestsSet)
         if !interestsSet.isEmpty {
             filteredCompanyPinList = allCompanyPinsSet.filter({ pin -> Bool in
                 let pinInterestIdsSet = Set(pin.interestIds)
@@ -125,7 +125,7 @@ public extension MapModel {
     /// - parameter completion: Callback to return a set of company pins
     public func getCompanyPinSet(for bounds: GMSCoordinateBounds, completion:@escaping (F4SCompanyPinSet) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
-            let companyPins = self.companyPinSetInsideBounds(bounds) ?? F4SCompanyPinSet()
+            let companyPins = self.companyPinSetInsideBounds(bounds)
             completion(companyPins)
         }
     }
@@ -276,73 +276,4 @@ extension F4SQuadtreeItem {
         let pt = CGPoint(location: companyPin.position)
         self.init(point: pt, object: companyPin)
     }
-}
-
-// MARK:- testing functions
-extension MapModel {
-    func testCampdenCompanies(allCompanies:[Company]) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            let url = Bundle.main.url(forResource: "camdencompanies", withExtension: "txt")!
-            let s = try! NSString(contentsOf: url, encoding: 0)
-            let companyNamesList: [String] = s.components(separatedBy: "\n")
-            var companyNamesSet : Set<String> = Set<String>(companyNamesList)
-            companyNamesSet = Set<String>(companyNamesSet.map({ string -> String in
-                return string.lowercased()
-            }))
-            var potentialCampdenCompanies = Set<Company>()
-            for company in allCompanies {
-                guard let fullCompany = DatabaseOperations.sharedInstance.companyWithId(company.id) else { continue }
-                let companyName = fullCompany.name.lowercased()
-                if companyNamesSet.contains(companyName) {
-                    potentialCampdenCompanies.insert(fullCompany)
-                }
-            }
-            var output = String()
-            let fm = NumberFormatter()
-            fm.maximumIntegerDigits = 2
-            fm.minimumIntegerDigits = 2
-            fm.maximumFractionDigits = 4
-            fm.minimumFractionDigits = 4
-            fm.plusSign = "+"
-            var i = 0
-            for company in potentialCampdenCompanies.sorted(by: { (company1, company2) -> Bool in
-                company1.name.lowercased() < company2.name.lowercased()
-            }) {
-                i += 1
-                let lat = fm.string(from: NSNumber(value: company.latitude))!
-                let lon = fm.string(from: NSNumber(value: company.longitude))!
-                
-                let d = distanceFromCamden(company: company)
-                output += "\(i)  lat = \(lat), lon = \(lon), dist = \(d) \(company.name.lowercased())\n"
-            }
-            print("Done")
-        }
-        
-        func distanceFromCamden(company: Company) -> String {
-            let nf = NumberFormatter()
-            nf.maximumFractionDigits = 1
-            nf.minimumFractionDigits = 1
-            nf.maximumIntegerDigits = 5
-            nf.minimumIntegerDigits = 1
-            let toRads = Double.pi / 180.0
-            // 51.548833, -0.153083
-            let camdenLat = 51.548833 //
-            let camdenLon = -0.153083
-            let r = 6371.0; // km
-            let φ1 = camdenLat * toRads
-            let φ2 = company.latitude * toRads
-            let Δφ = (camdenLat-company.latitude) * toRads;
-            let Δλ = (camdenLon-company.longitude) * toRads;
-            
-            let a = sin(Δφ/2) * sin(Δφ/2) +
-                cos(φ1) * cos(φ2) *
-                sin(Δλ/2) * sin(Δλ/2)
-            let c = 2 * atan2(sqrt(a), sqrt(1-a))
-            
-            let d = abs(r * c);
-            return nf.string(from: NSNumber(value: d))! + " km"
-        }
-        
-    }
-    
 }

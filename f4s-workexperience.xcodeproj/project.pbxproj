@@ -108,7 +108,6 @@
 		40E78E1E1DD31A86000A3776 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E1D1DD31A86000A3776 /* Assets.xcassets */; };
 		40E78E211DD31A86000A3776 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E1F1DD31A86000A3776 /* LaunchScreen.storyboard */; };
 		40E78E2C1DD31A86000A3776 /* f4s_workexperienceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E2B1DD31A86000A3776 /* f4s_workexperienceTests.swift */; };
-		40E78E371DD31A86000A3776 /* f4s_workexperienceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E361DD31A86000A3776 /* f4s_workexperienceUITests.swift */; };
 		40E78E4B1DD32862000A3776 /* f4s-workexperience.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E491DD32862000A3776 /* f4s-workexperience.xcdatamodeld */; };
 		40E78E581DD32964000A3776 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E541DD32964000A3776 /* Constants.swift */; };
 		40E78E591DD32964000A3776 /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E551DD32964000A3776 /* Entities.swift */; };
@@ -139,7 +138,6 @@
 		40E78EA01DD5E208000A3776 /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E9F1DD5E208000A3776 /* LocationHelper.swift */; };
 		73E8696846461A62EA7C1A2F /* Pods_f4s_workexperienceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 407A5D7DED3055034D7EAC15 /* Pods_f4s_workexperienceTests.framework */; };
 		C9C7302B49E1B7EF625802B5 /* Pods_f4s_workexperience.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DBDC6E5F710813F9107483D /* Pods_f4s_workexperience.framework */; };
-		D12D2CCB120C0AECCE58D34C /* Pods_f4s_workexperienceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF342E9F354D697386AFC80D /* Pods_f4s_workexperienceUITests.framework */; };
 		D51EE9391DFAAA84008A8A4F /* ContentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51EE9381DFAAA84008A8A4F /* ContentService.swift */; };
 		D54E0FFD1E044B0400A51560 /* InfoWindowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D54E0FFB1E044B0400A51560 /* InfoWindowView.xib */; };
 		D54E0FFF1E044B1800A51560 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54E0FFE1E044B1800A51560 /* ContentViewController.swift */; };
@@ -165,13 +163,6 @@
 
 /* Begin PBXContainerItemProxy section */
 		40E78E281DD31A86000A3776 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 40E78E0B1DD31A86000A3776 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 40E78E121DD31A86000A3776;
-			remoteInfo = "f4s-workexperience";
-		};
-		40E78E331DD31A86000A3776 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 40E78E0B1DD31A86000A3776 /* Project object */;
 			proxyType = 1;
@@ -330,7 +321,6 @@
 		40E78E271DD31A86000A3776 /* f4s-workexperienceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "f4s-workexperienceTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		40E78E2B1DD31A86000A3776 /* f4s_workexperienceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = f4s_workexperienceTests.swift; sourceTree = "<group>"; };
 		40E78E2D1DD31A86000A3776 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		40E78E321DD31A86000A3776 /* f4s-workexperienceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "f4s-workexperienceUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		40E78E361DD31A86000A3776 /* f4s_workexperienceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = f4s_workexperienceUITests.swift; sourceTree = "<group>"; };
 		40E78E381DD31A86000A3776 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40E78E4A1DD32862000A3776 /* f4s-workexperience.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "f4s-workexperience.xcdatamodel"; sourceTree = "<group>"; };
@@ -421,14 +411,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				73E8696846461A62EA7C1A2F /* Pods_f4s_workexperienceTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		40E78E2F1DD31A86000A3776 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D12D2CCB120C0AECCE58D34C /* Pods_f4s_workexperienceUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -610,7 +592,6 @@
 			children = (
 				40E78E131DD31A86000A3776 /* f4s-workexperience.app */,
 				40E78E271DD31A86000A3776 /* f4s-workexperienceTests.xctest */,
-				40E78E321DD31A86000A3776 /* f4s-workexperienceUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1111,27 +1092,6 @@
 			productReference = 40E78E271DD31A86000A3776 /* f4s-workexperienceTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		40E78E311DD31A86000A3776 /* f4s-workexperienceUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 40E78E411DD31A86000A3776 /* Build configuration list for PBXNativeTarget "f4s-workexperienceUITests" */;
-			buildPhases = (
-				BEC8979F3C3A932EC053C8EC /* [CP] Check Pods Manifest.lock */,
-				40E78E2E1DD31A86000A3776 /* Sources */,
-				40E78E2F1DD31A86000A3776 /* Frameworks */,
-				40E78E301DD31A86000A3776 /* Resources */,
-				F338A8D820D8797A371084D2 /* [CP] Embed Pods Frameworks */,
-				58B2AFC7BD59438F39D45D16 /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				40E78E341DD31A86000A3776 /* PBXTargetDependency */,
-			);
-			name = "f4s-workexperienceUITests";
-			productName = "f4s-workexperienceUITests";
-			productReference = 40E78E321DD31A86000A3776 /* f4s-workexperienceUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1157,14 +1117,7 @@
 					};
 					40E78E261DD31A86000A3776 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 7EDR5VNNKN;
-						ProvisioningStyle = Manual;
-						TestTargetID = 40E78E121DD31A86000A3776;
-					};
-					40E78E311DD31A86000A3776 = {
-						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 7EDR5VNNKN;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 40E78E121DD31A86000A3776;
 					};
 				};
@@ -1184,7 +1137,6 @@
 			targets = (
 				40E78E121DD31A86000A3776 /* f4s-workexperience */,
 				40E78E261DD31A86000A3776 /* f4s-workexperienceTests */,
-				40E78E311DD31A86000A3776 /* f4s-workexperienceUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1236,13 +1188,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		40E78E301DD31A86000A3776 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -1276,21 +1221,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-f4s-workexperience/Pods-f4s-workexperience-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		58B2AFC7BD59438F39D45D16 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-f4s-workexperienceUITests/Pods-f4s-workexperienceUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5978830586A0F2676DF2F56A /* [CP] Embed Pods Frameworks */ = {
@@ -1363,24 +1293,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-f4s-workexperience/Pods-f4s-workexperience-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BEC8979F3C3A932EC053C8EC /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-f4s-workexperienceUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		DCBA04A542FFAB269912B4CD /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1394,21 +1306,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-f4s-workexperienceTests/Pods-f4s-workexperienceTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F338A8D820D8797A371084D2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-f4s-workexperienceUITests/Pods-f4s-workexperienceUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1546,14 +1443,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		40E78E2E1DD31A86000A3776 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				40E78E371DD31A86000A3776 /* f4s_workexperienceUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1561,11 +1450,6 @@
 			isa = PBXTargetDependency;
 			target = 40E78E121DD31A86000A3776 /* f4s-workexperience */;
 			targetProxy = 40E78E281DD31A86000A3776 /* PBXContainerItemProxy */;
-		};
-		40E78E341DD31A86000A3776 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 40E78E121DD31A86000A3776 /* f4s-workexperience */;
-			targetProxy = 40E78E331DD31A86000A3776 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1859,28 +1743,16 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperienceTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.f4s-workexperienceTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s-workexperience.app/f4s-workexperience";
-			};
-			name = DebugF4S;
-		};
-		201458BA1E1BA9B900DBC9BD /* DebugF4S */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = FDE6CAD61FAB3CA16090531A /* Pods-f4s-workexperienceUITests.debugf4s.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
-				INFOPLIST_FILE = "f4s-workexperienceUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.f4s-workexperienceUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = "f4s-workexperience";
 			};
 			name = DebugF4S;
 		};
@@ -1963,28 +1835,16 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperienceTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.f4s-workexperienceTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s-workexperience.app/f4s-workexperience";
-			};
-			name = ReleaseF4S;
-		};
-		201458BE1E1BA9C400DBC9BD /* ReleaseF4S */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F099185A6CFD493B891494B1 /* Pods-f4s-workexperienceUITests.releasef4s.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
-				INFOPLIST_FILE = "f4s-workexperienceUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.f4s-workexperienceUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = "f4s-workexperience";
 			};
 			name = ReleaseF4S;
 		};
@@ -2073,28 +1933,16 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperienceTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.f4s-workexperienceTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s-workexperience.app/f4s-workexperience";
-			};
-			name = DebugF4SLive;
-		};
-		40D53C871E30EA2900D7AA32 /* DebugF4SLive */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 67A1269D82C8C1CF762DF8B2 /* Pods-f4s-workexperienceUITests.debugf4slive.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
-				INFOPLIST_FILE = "f4s-workexperienceUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.f4s-workexperienceUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = "f4s-workexperience";
 			};
 			name = DebugF4SLive;
 		};
@@ -2177,28 +2025,16 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperienceTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.f4s-workexperienceTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s-workexperience.app/f4s-workexperience";
-			};
-			name = ReleaseF4SLive;
-		};
-		40D53C8B1E30EA6E00D7AA32 /* ReleaseF4SLive */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92D4E4212884A5D6CFEB84C5 /* Pods-f4s-workexperienceUITests.releasef4slive.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
-				INFOPLIST_FILE = "f4s-workexperienceUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.f4s-workexperienceUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = "f4s-workexperience";
 			};
 			name = ReleaseF4SLive;
 		};
@@ -2360,11 +2196,14 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperienceTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.f4s-workexperienceTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s-workexperience.app/f4s-workexperience";
 			};
@@ -2376,43 +2215,16 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperienceTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.f4s-workexperienceTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s-workexperience.app/f4s-workexperience";
-			};
-			name = ReleaseFreshbyte;
-		};
-		40E78E421DD31A86000A3776 /* DebugFreshbyte */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A2F222954B6B2F8A2B6ACEB3 /* Pods-f4s-workexperienceUITests.debugfreshbyte.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
-				INFOPLIST_FILE = "f4s-workexperienceUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.f4s-workexperienceUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = "f4s-workexperience";
-			};
-			name = DebugFreshbyte;
-		};
-		40E78E431DD31A86000A3776 /* ReleaseFreshbyte */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E480AD5D9D8CB6F2B74F58D5 /* Pods-f4s-workexperienceUITests.releasefreshbyte.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
-				INFOPLIST_FILE = "f4s-workexperienceUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.f4s-workexperienceUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = "f4s-workexperience";
 			};
 			name = ReleaseFreshbyte;
 		};
@@ -2454,19 +2266,6 @@
 				40E78E401DD31A86000A3776 /* ReleaseFreshbyte */,
 				40D53C8A1E30EA6E00D7AA32 /* ReleaseF4SLive */,
 				201458BD1E1BA9C400DBC9BD /* ReleaseF4S */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = ReleaseFreshbyte;
-		};
-		40E78E411DD31A86000A3776 /* Build configuration list for PBXNativeTarget "f4s-workexperienceUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				40E78E421DD31A86000A3776 /* DebugFreshbyte */,
-				40D53C871E30EA2900D7AA32 /* DebugF4SLive */,
-				201458BA1E1BA9B900DBC9BD /* DebugF4S */,
-				40E78E431DD31A86000A3776 /* ReleaseFreshbyte */,
-				40D53C8B1E30EA6E00D7AA32 /* ReleaseF4SLive */,
-				201458BE1E1BA9C400DBC9BD /* ReleaseF4S */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = ReleaseFreshbyte;

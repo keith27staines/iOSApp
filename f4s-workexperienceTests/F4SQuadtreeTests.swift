@@ -89,7 +89,7 @@ class F4SQuadtreeTests: XCTestCase {
     }
     func testInitQuadTreeSettingMaxItemsAndDepth() {
         let rect = CGRect(x: 0, y: 0, width: 2, height: 2)
-        let qt = try! F4SPointQuadtree(bounds: rect, items: nil, depth: 27, maxItems: 72)
+        let qt = try! F4SPointQuadTree(bounds: rect, items: nil, depth: 27, maxItems: 72)
         XCTAssertEqual(qt.depth, 27)
         XCTAssertEqual(qt.maxItems, 72)
     }
@@ -97,7 +97,7 @@ class F4SQuadtreeTests: XCTestCase {
         let rect = CGRect(x: 0, y: 0, width: 2, height: 2)
         let exteriorPoint = CGPoint(x: -1, y: 0)
         let item = F4SQuadtreeItem(point: exteriorPoint, object: 1)
-        XCTAssertThrowsError(try F4SPointQuadtree(bounds: rect, items: [item]))
+        XCTAssertThrowsError(try F4SPointQuadTree(bounds: rect, items: [item]))
     }
     func testInsertItemOutsideOfBoundsThrows() {
         let qt = F4SQuadtreeTests.createEmptyTree()
@@ -118,7 +118,7 @@ class F4SQuadtreeTests: XCTestCase {
         try! qt.insert(item: item)
         XCTAssertNil(qt.subtreeDictionary)
         XCTAssertEqual(qt.items.count, 1)
-        XCTAssertEqual(qt.items[0].point, point)
+        XCTAssertEqual(qt.items[0].position, point)
     }
     func testInsertMaximumItemsBeforeSplitting() {
         let qt = F4SQuadtreeTests.createEmptyTree()
@@ -132,7 +132,7 @@ class F4SQuadtreeTests: XCTestCase {
     }
     func testInsertOneMoreThanMaximumItemsDoesntCauseSplitIfAtDepth0() {
         let rect = CGRect(x: 0, y: 0, width: 2, height: 2)
-        let qt = try! F4SPointQuadtree(bounds: rect, items: nil, depth: 0, maxItems: 2)
+        let qt = try! F4SPointQuadTree(bounds: rect, items: nil, depth: 0, maxItems: 2)
         F4SQuadtreeTests.addOneMoreThanMaxItems(qt: qt)
         XCTAssertNil(qt.subtreeDictionary)
         XCTAssertEqual(qt.items.count, 3)
@@ -209,15 +209,15 @@ class F4SQuadtreeTests: XCTestCase {
 // MARK: helpers
 extension F4SQuadtreeTests {
     /// Creates an empty tree with depth = 2, maxItems = 2, bounds = CGRect(0,0,2,2)
-    static func createEmptyTree() -> F4SPointQuadtreeProtocol {
+    static func createEmptyTree() -> F4SPointQuadTreeProtocol {
         let rect = CGRect(x: 0, y: 0, width: 2, height: 2)
-        let qt = try! F4SPointQuadtree(bounds: rect, items: nil, depth: 2, maxItems: 2)
+        let qt = try! F4SPointQuadTree(bounds: rect, items: nil, depth: 2, maxItems: 2)
         XCTAssertNil(qt.subtreeDictionary)
         return qt
     }
     
     /// Creates a quadtree with depth of 2, maxItems = 2 with sufficient items to create a split
-    static func createSplitSubtree() -> F4SPointQuadtreeProtocol {
+    static func createSplitSubtree() -> F4SPointQuadTreeProtocol {
         let qt = createEmptyTree()
         addOneMoreThanMaxItems(qt: qt)
         XCTAssertNotNil(qt.subtreeDictionary)
@@ -225,7 +225,7 @@ extension F4SQuadtreeTests {
     }
     
     /// Adds sufficient items to cause a split
-    static func addOneMoreThanMaxItems(qt:F4SPointQuadtreeProtocol) {
+    static func addOneMoreThanMaxItems(qt:F4SPointQuadTreeProtocol) {
         let point = CGPoint(x: qt.bounds.width/4.0, y: qt.bounds.height/4.0)
         for i in 0...qt.maxItems {
             let item = F4SQuadtreeItem(point: point, object: i)
