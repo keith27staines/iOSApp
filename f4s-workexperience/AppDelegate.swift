@@ -60,6 +60,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("User id = \(userID)")
         print("********************************************************")
     }
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        guard let webpageUrl = userActivity.webpageURL else {
+            return false
+        }
+        // Handle being invoked from a universal link in safari running on the current device
+        UserDefaults.standard.set(webpageUrl, forKey: "invokingURL")
+        print("Invoked with universal link:  \(webpageUrl.absoluteString)")
+        return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        // Handle being invoked from a smart banner somewhere out there on the web
+        print("Invoked with smart banner: \(url)")
+        UserDefaults.standard.set(url, forKey: "invokingURL")
+        return true
+    }
 
     func applicationWillResignActive(_: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
