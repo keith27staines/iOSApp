@@ -62,19 +62,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-        guard let webpageUrl = userActivity.webpageURL else {
+        guard let url = userActivity.webpageURL else {
             return false
         }
         // Handle being invoked from a universal link in safari running on the current device
-        UserDefaults.standard.set(webpageUrl, forKey: "invokingURL")
-        print("Invoked with universal link:  \(webpageUrl.absoluteString)")
+        setInvokingUrl(url)
         return true
+    }
+    
+    func setInvokingUrl(_ url: URL) {
+        let key = UserDefaultsKeys.invokingUrl
+        UserDefaults.standard.set(url, forKey: key)
+        print("Invoked from url: \(url.absoluteString)")
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         // Handle being invoked from a smart banner somewhere out there on the web
-        print("Invoked with smart banner: \(url)")
-        UserDefaults.standard.set(url, forKey: "invokingURL")
+        setInvokingUrl(url)
         return true
     }
 
