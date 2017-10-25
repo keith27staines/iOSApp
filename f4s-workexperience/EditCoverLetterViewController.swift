@@ -355,20 +355,21 @@ extension EditCoverLetterViewController {
     }
 
     func setStartDatePicker(cell: EditCoverLetterTableViewCell) {
+        let now = Date()
         startDatePicker.frame.size.width = self.view.frame.size.width
         startDatePicker.frame.size.height = datePickerSize
         startDatePicker.backgroundColor = UIColor.white
 
         startDatePicker.datePickerMode = .date
-        startDatePicker.minimumDate = Date()
+        let earliestStartDate = WorkAvailabilityWindow.earliestStartDate(submission: now)
+        startDatePicker.minimumDate = earliestStartDate
 
         let startDate = self.getValueForAttribute(attribute: .StartDate)
         if !startDate.isEmpty, let startD = Date.dateFromRfc3339(string: startDate) {
-            startDatePicker.date = startD
+            startDatePicker.date = startD > earliestStartDate ? startD : earliestStartDate
         }
-
-        endDatePicker.minimumDate = Date()
         cell.contentView.addSubview(startDatePicker)
+        startDatePickerChanged(sender: startDatePicker)
     }
 
     func startDatePickerChanged(sender: UIDatePicker) {
@@ -376,12 +377,13 @@ extension EditCoverLetterViewController {
             return
         }
         self.saveDataForAttribute(data: startDate, attribute: .StartDate)
-        endDatePicker.minimumDate = sender.date
+        let earliestEndDate = WorkAvailabilityWindow.earliestEndDate(start: sender.date, submission: Date())
+        endDatePicker.minimumDate = earliestEndDate
 
         let endDateString = self.getValueForAttribute(attribute: .EndDate)
         if !endDateString.isEmpty, let endDate = Date.dateFromRfc3339(string: endDateString) {
-            if endDate.isLessThanDate(dateToCompare: sender.date) {
-                self.saveDataForAttribute(data: startDate, attribute: .EndDate)
+            if endDate < earliestEndDate {
+                self.saveDataForAttribute(data: earliestEndDate.dateToStringRfc3339()!, attribute: .EndDate)
                 coverLetterTableView.reloadRows(at: [NSIndexPath(row: 2, section: 2) as IndexPath], with: .none)
             }
         }
@@ -394,21 +396,26 @@ extension EditCoverLetterViewController {
         endDatePicker.frame.size.width = self.view.frame.size.width
         endDatePicker.frame.size.height = datePickerSize
         endDatePicker.backgroundColor = UIColor.white
-
-        let startDate = self.getValueForAttribute(attribute: .StartDate)
-        if !startDate.isEmpty {
-            endDatePicker.minimumDate = Date.dateFromRfc3339(string: startDate)
-        } else {
-            endDatePicker.minimumDate = Date()
+        let now = Date()
+        let startDateString = self.getValueForAttribute(attribute: .StartDate)
+        var startDate: Date! = nil
+        if !startDateString.isEmpty {
+            startDate = Date.dateFromRfc3339(string: startDateString)!
         }
-
+        if startDate == nil {
+            startDate = WorkAvailabilityWindow.earliestStartDate(submission: now)
+        }
+        let earliestEndDate = WorkAvailabilityWindow.earliestEndDate(start: startDate, submission: now)
+        endDatePicker.minimumDate = earliestEndDate
+    
         let endDateString = self.getValueForAttribute(attribute: .EndDate)
         if !endDateString.isEmpty, let endDate = Date.dateFromRfc3339(string: endDateString) {
-            endDatePicker.date = endDate
+            endDatePicker.date = endDate > earliestEndDate ? endDate : earliestEndDate
         }
 
         endDatePicker.datePickerMode = .date
         cell.contentView.addSubview(endDatePicker)
+        endDatePickerChanged(sender: endDatePicker)
     }
 
     func endDatePickerChanged(sender: UIDatePicker) {

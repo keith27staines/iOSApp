@@ -50,6 +50,7 @@ struct Style {
 }
 
 struct UserDefaultsKeys {
+    static let invokingUrl = "invokingUrl"
     static let userUuid = "userUuid"
     static let userHasAccount = "userHasAccount"
     static let companyDatabaseCreatedDate = "companyDatabaseCreatedDate"

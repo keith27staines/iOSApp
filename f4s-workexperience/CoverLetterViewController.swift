@@ -133,7 +133,7 @@ extension CoverLetterViewController {
 // MARK: - template helper
 extension CoverLetterViewController {
     func loadTemplate() {
-        self.validateCoverLetterDataOnLoad()
+        self.removeInvalidDateFields()
         guard let currentTemplate = self.currentTemplate else {
             return
         }
@@ -376,8 +376,10 @@ extension CoverLetterViewController {
     }
 
     func updatePlacement() {
-
-        if !self.isValidCoverLetter() {
+        let availabilityWindow = getWorkAvailabilityWindowFromSelectedTemplate()
+        
+        guard availabilityWindow.status == .valid else {
+            promptUserWithCorrectiveActionForAvailabilityWindow(availabilityWindow)
             return
         }
 
@@ -396,7 +398,7 @@ extension CoverLetterViewController {
 
         MessageHandler.sharedInstance.showLoadingOverlay(self.view)
         let templateToUpdate = TemplateEntity(uuid: currentTemplateUuid, blank: self.selectedTemplateChoices)
-//        placement.interestsList = InterestDBOperations.sharedInstance.getInterestForCurrentUser()
+        placement.interestsList = [Interest](InterestDBOperations.sharedInstance.interestsForCurrentUser())
         PlacementService.sharedInstance.updatePlacement(placement: placement, template: templateToUpdate) {
             [weak self]
             _, result in
@@ -423,60 +425,73 @@ extension CoverLetterViewController {
         }
     }
 
-    func validateCoverLetterDataOnLoad() {
-        let (isValidStartDate, indexOfStartDate) = isAttributeValide(attribute: ChooseAttributes.StartDate)
-        if !isValidStartDate {
-            TemplateChoiceDBOperations.sharedInstance.removeTemplateWithName(name: selectedTemplateChoices[indexOfStartDate].name)
-            self.selectedTemplateChoices.remove(at: indexOfStartDate)
+    func removeStartDate() {
+        if let index = indexForAttribute(ChooseAttributes.StartDate) {
+            TemplateChoiceDBOperations.sharedInstance.removeTemplateWithName(name: selectedTemplateChoices[index].name)
+            self.selectedTemplateChoices.remove(at: index)
         }
-        let (isValidEndDate, indexOfEndDate) = isAttributeValide(attribute: ChooseAttributes.EndDate)
-        if (!isValidStartDate && indexOfEndDate != -1) || !isValidEndDate {
-            TemplateChoiceDBOperations.sharedInstance.removeTemplateWithName(name: selectedTemplateChoices[indexOfEndDate].name)
-            self.selectedTemplateChoices.remove(at: indexOfEndDate)
+    }
+    
+    func removeEndDate() {
+        if let index = indexForAttribute(ChooseAttributes.EndDate) {
+            TemplateChoiceDBOperations.sharedInstance.removeTemplateWithName(name: selectedTemplateChoices[index].name)
+            self.selectedTemplateChoices.remove(at: index)
+        }
+    }
+    
+    func removeInvalidDateFields() {
+        let availability = getWorkAvailabilityWindowFromSelectedTemplate()
+        if availability.status != .valid {
+            removeStartDate()
+            removeEndDate()
         }
     }
 
-    func isValidCoverLetter() -> Bool {
-        let (isValidStarDate, _) = isAttributeValide(attribute: ChooseAttributes.StartDate)
-        if !isValidStarDate {
-            let message = NSLocalizedString("Please enter a valid start date.", comment: "")
-            MessageHandler.sharedInstance.display(message, parentCtrl: self)
-            return false
+    func promptUserWithCorrectiveActionForAvailabilityWindow(_ availabilityWindow: WorkAvailabilityWindow) {
+        var message: String = ""
+        switch availabilityWindow.status {
+        case .valid:
+            break;
+        case .invalidStartDateMissing, .invalidStartsTooEarly:
+            message = NSLocalizedString("Please enter a valid start date.", comment: "")
+        case .invalidEndDateMissing, .invalidEndsTooEarly:
+            message = NSLocalizedString("Please enter a valid end date.", comment: "")
         }
-        let (isValidEndDate, _) = isAttributeValide(attribute: ChooseAttributes.StartDate)
-        if !isValidEndDate {
-            let message = NSLocalizedString("Please enter a valid end date.", comment: "")
-            MessageHandler.sharedInstance.display(message, parentCtrl: self)
-            return false
-        }
-        return true
+        MessageHandler.sharedInstance.display(message, parentCtrl: self)
+    }
+    
+    func getWorkAvailabilityWindowFromSelectedTemplate() -> WorkAvailabilityWindow {
+        let startDate: Date? = getStartDateFromTemplate()
+        let endDate: Date? = getEndDateFromTemplate()
+        let now = Date()
+        return WorkAvailabilityWindow(
+            startDay: startDate,
+            endDay: endDate,
+            submission: now)
     }
 
-    func isAttributeValide(attribute: ChooseAttributes) -> (Bool, Int) {
-        if let indexOfAttribute = self.selectedTemplateChoices.index(where: { $0.name == attribute.rawValue }) {
-            if let choice = self.selectedTemplateChoices[indexOfAttribute].choices.first {
-                if let date = Date.dateFromRfc3339(string: choice.uuid) {
-                    let currentDate = Date()
-                    let order = NSCalendar.current.compare(date, to: currentDate, toGranularity: .day)
-
-                    switch order
-                    {
-                    case .orderedDescending:
-                        // date is in the future
-                        break
-                    case .orderedAscending:
-                        print("ASCENDING")
-                        // date is in the past
-                        // delete date
-                        return (false, indexOfAttribute)
-                    case .orderedSame:
-                        // same day
-                        break
-                    }
-                }
-            }
-            return (true, indexOfAttribute)
+    func getStartDateFromTemplate() -> Date? {
+        guard let index = indexForAttribute(ChooseAttributes.StartDate) else {
+            return nil
         }
-        return (true, -1)
+        guard let choice = self.selectedTemplateChoices[index].choices.first else {
+            return nil
+        }
+        return Date.dateFromRfc3339(string: choice.uuid)
     }
+    
+    func getEndDateFromTemplate() -> Date? {
+        guard let index = indexForAttribute(ChooseAttributes.EndDate) else {
+            return nil
+        }
+        guard let choice = self.selectedTemplateChoices[index].choices.first else {
+            return nil
+        }
+        return Date.dateFromRfc3339(string: choice.uuid)
+    }
+    
+    func indexForAttribute(_ attribute: ChooseAttributes) -> Int? {
+        return self.selectedTemplateChoices.index(where: { $0.name == attribute.rawValue })
+    }
+    
 }

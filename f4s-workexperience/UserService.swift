@@ -79,7 +79,7 @@ class UserService: ApiBaseService {
         }
 
         if user.requiresConsent {
-            params["consenter_email"] = user.consenterEmail
+            params["parent_email"] = user.consenterEmail
         }
 
         put(params, url: url) {
