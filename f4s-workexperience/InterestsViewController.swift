@@ -293,11 +293,10 @@ extension InterestsViewController {
             guard let strongSelf = self else { return }
             let visibleBounds = strongSelf.visibleBounds!
             let selectedInterests = strongSelf.selectedInterests!
-            let allInterests = F4SInterestSet(strongSelf.interestsToDisplay)
-            let interests = selectedInterests.isEmpty ? allInterests : selectedInterests
+            let interestsToDisplay = F4SInterestSet(strongSelf.interestsToDisplay)
             strongSelf.mapModel.getCompanyPinSet(for: visibleBounds) { pins in
                 let countsResults = strongSelf.interestsModel.interestCounts(
-                    displayedInterests: interests,
+                    displayedInterests: interestsToDisplay,
                     selectedInterests: selectedInterests,
                     companyPins: pins)
                 DispatchQueue.main.async {
