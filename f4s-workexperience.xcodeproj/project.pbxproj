@@ -155,6 +155,7 @@
 		FC681C011F57473D0077BECA /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFF1F57473D0077BECA /* Podfile.lock */; };
 		FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC92567A1F8F70D100FF9841 /* InterestsModel.swift */; };
 		FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99B7E21F826D1400E2D5F0 /* LatLon.swift */; };
+		FCA24C111F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA24C101F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift */; };
 		FCB6D9361F75056100B8C268 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCB6D9351F75056000B8C268 /* Branding.plist */; };
 		FCC5EBB61F449C310085CE15 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FCC5EBB51F449C310085CE15 /* README.md */; };
 		FCC753EE1F80F26200E9ECD6 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC753ED1F80F26200E9ECD6 /* MapModel.swift */; };
@@ -389,6 +390,7 @@
 		FC681BFF1F57473D0077BECA /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		FC92567A1F8F70D100FF9841 /* InterestsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsModel.swift; sourceTree = "<group>"; };
 		FC99B7E21F826D1400E2D5F0 /* LatLon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatLon.swift; sourceTree = "<group>"; };
+		FCA24C101F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkAvailabilityWindow.swift; sourceTree = "<group>"; };
 		FCB6D9351F75056000B8C268 /* Branding.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
 		FCC5EBB51F449C310085CE15 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FCC753ED1F80F26200E9ECD6 /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
@@ -1019,6 +1021,7 @@
 				204C89701DF5F0A100D8493A /* EditCoverLetterTableViewCell.swift */,
 				204C89711DF5F0A100D8493A /* EditCoverLetterViewController.swift */,
 				204C89721DF5F0A100D8493A /* EditFooterView.swift */,
+				FCA24C101F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift */,
 			);
 			name = CoverLetter;
 			path = ..;
@@ -1372,6 +1375,7 @@
 				40C1A51E1DDF5ACE000F80AA /* GMUSimpleClusterAlgorithm.m in Sources */,
 				40A5CF3C1DED6FA2000007AB /* InterestsViewController.swift in Sources */,
 				40E78E701DD32BD4000A3776 /* MenuHelper.swift in Sources */,
+				FCA24C111F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift in Sources */,
 				2037B0A71DEC3C3B00A9DE3E /* InterestCoreDataManager.swift in Sources */,
 				204C89551DF5A36100D8493A /* TemplateChoiceDB.swift in Sources */,
 				204C89781DF5F0B200D8493A /* ChooseAttributesTableViewCell.swift in Sources */,
