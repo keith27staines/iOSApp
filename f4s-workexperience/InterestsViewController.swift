@@ -66,8 +66,17 @@ class InterestsViewController: UIViewController, UIScrollViewDelegate {
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else { return }
                 strongSelf.interestsInBounds = interestsInBounds
-                strongSelf.interestsToDisplay = strongSelf.combineInterestsAsSortedList(interestSubsets: interestsInBounds,strongSelf.selectedInterests)
-                    strongSelf.updateUIWithLatestCounts()
+                let interests = strongSelf.combineInterestsAsSortedList(interestSubsets: interestsInBounds,strongSelf.selectedInterests)
+                strongSelf.interestsToDisplay = interests.sorted(by: { (interest1, interest2) -> Bool in
+                    if strongSelf.selectedInterests.contains(interest1) && !strongSelf.selectedInterests.contains(interest2) {
+                        return true
+                    }
+                    if strongSelf.selectedInterests.contains(interest2) && !strongSelf.selectedInterests.contains(interest1) {
+                        return false
+                    }
+                    return interest1.name.lowercased() < interest2.name.lowercased()
+                })
+                strongSelf.updateUIWithLatestCounts()
             }
         }
     }
