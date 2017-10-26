@@ -153,6 +153,18 @@ class MapViewController: UIViewController {
         super.viewDidLayoutSubviews()
         setupFramesAndSizes()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if PartnersModel.partnerUuid == nil {
+            obtainPartnerID()
+        }
+    }
+    
+    func obtainPartnerID() {
+        if let vc = UIStoryboard(name: "SelectPartner", bundle: Bundle.main).instantiateInitialViewController() {
+            present(vc, animated: true, completion: nil)
+        }
+    }
 }
 
 // MARK:- Conform to InterestsViewControllerDelegate
