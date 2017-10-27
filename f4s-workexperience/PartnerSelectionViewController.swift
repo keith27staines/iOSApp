@@ -39,6 +39,25 @@ class PartnerSelectionViewController: UIViewController {
         self.referrerTextBox.delegate = self
         self.doneButton.isEnabled = false
         self.partnerLogoRightConstraint.constant = -200
+        let cerulean: UIColor = UIColor.init(red: 0.0/255.0, green: 160.0/255.0, blue: 220.0/255.0, alpha: 1.0)
+        let regalBlue = UIColor.init(red: 0.0/255.0, green: 68.0/255.0, blue: 113.0/255.0, alpha: 1.0)
+        let ecstasy = UIColor.init(red: 244.0/255.0, green: 123.0/255.0, blue: 22.0/255.0, alpha: 1.0)
+        let peach = UIColor.init(red: 255.0/255.0, green: 231.0/255.0, blue: 187.0/255.0, alpha: 1.0)
+        let seagull = UIColor.init(red: 104.0/255.0, green: 199.0/255.0, blue: 236.0/255.0, alpha: 1.0)
+        let sail = UIColor.init(red: 207.0/255.0, green: 237.0/255.0, blue: 251.0/255.0, alpha: 1.0)
+        let backgroundColor: UIColor = cerulean
+        let enabledButtonBackground = ecstasy
+        let disabledButtonBackground = seagull
+        let enabledButtonTextColor = UIColor.white
+        let disabledButtonTextColor = sail
+        
+        self.view.backgroundColor = backgroundColor
+        self.doneButton.setBackgroundColor(color: enabledButtonBackground, forUIControlState: .normal)
+        self.doneButton.setBackgroundColor(color: disabledButtonBackground, forUIControlState: .disabled)
+        self.doneButton.setTitleColor(enabledButtonTextColor, for: .normal)
+        self.doneButton.setTitleColor(disabledButtonTextColor, for: .disabled)
+
+    
     }
     
     lazy var partnersModel: PartnersModel = {
@@ -80,7 +99,7 @@ extension PartnerSelectionViewController : UITableViewDataSource, UITableViewDel
         let partner = partnersModel.partnerForIndexPath(indexPath)
         view.textLabel?.text = partner.name
         view.detailTextLabel?.text = partner.description
-        view.imageView?.image = partner.image
+        //view.imageView?.image = partner.image
         return view
     }
     
