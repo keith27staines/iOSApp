@@ -10,11 +10,61 @@ import UIKit
 
 class PartnerSelectionViewController: UIViewController {
 
+    var isTableDropped: Bool = false
+    var selectedPartner: Partner? = nil
+    
+    @IBOutlet weak var instructionText: UILabel!
+    
+    @IBOutlet weak var referrerTextBox: UITextField!
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var doneButton: UIButton!
+
+    @IBOutlet weak var partnerLogoRightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var partnerLogoImageView: UIImageView!
+    
+    @IBAction func doneButtonPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewDidLoad() {
+        tableView.dataSource = self
+        tableView.delegate = self
+
+        tableHeightConstraint.constant = 0.0
+        isTableDropped = false
+        self.referrerTextBox.text = nil
+        self.referrerTextBox.delegate = self
+        self.doneButton.isEnabled = false
+        self.partnerLogoRightConstraint.constant = -200
+    }
+    
     lazy var partnersModel: PartnersModel = {
        return PartnersModel()
     }()
 }
 
+// MARK: UITextFieldDelegate conformance
+extension PartnerSelectionViewController : UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if !isTableDropped {
+            animateDropDownTable(delay: 0.0)
+            animatePartnerOut()
+            doneButton.isEnabled = false
+        } else {
+            if let _ = selectedPartner {
+                animatePullUpTable()
+                animatePartnerIn()
+                doneButton.isEnabled = true
+            }
+        }
+        return false
+    }
+}
+
+// MARK: UITableViewDatasource and delegate conformance
 extension PartnerSelectionViewController : UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -29,7 +79,78 @@ extension PartnerSelectionViewController : UITableViewDataSource, UITableViewDel
         let view = tableView.dequeueReusableCell(withIdentifier: "partnerCell")!
         let partner = partnersModel.partnerForIndexPath(indexPath)
         view.textLabel?.text = partner.name
+        view.detailTextLabel?.text = partner.description
+        view.imageView?.image = partner.image
         return view
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return rowHeight()
+    }
+
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedPartner = partnersModel.partnerForIndexPath(indexPath)
+        referrerTextBox.text = selectedPartner?.name ?? ""
+        partnerLogoImageView.image = selectedPartner?.image
+        animatePullUpTable()
+        
+        if let _ = selectedPartner?.image {
+            animatePartnerIn()
+        }
+    }
+}
+
+// MARK:- Helper functions
+extension PartnerSelectionViewController {
+    
+    func rowHeight() -> CGFloat {
+        let view = tableView.dequeueReusableCell(withIdentifier: "partnerCell")
+        let height = view?.intrinsicContentSize.height ?? 50
+        return height > 0 ? height : 50.0
+    }
+}
+
+// MARK:- Animations
+extension PartnerSelectionViewController {
+
+    func animateDropDownTable(delay: Double) {
+        if isTableDropped { return }
+        isTableDropped = true
+        UIView.animate(withDuration: 0.2, delay: delay, options: .curveEaseInOut, animations: { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.tableHeightConstraint.constant = strongSelf.rowHeight() * 5.5
+            self?.view.layoutIfNeeded()
+            }, completion: nil)
+    }
+    
+    func animatePullUpTable() {
+        if !isTableDropped { return }
+        isTableDropped = false
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.tableHeightConstraint.constant = 0
+            self?.view.layoutIfNeeded()
+            }, completion: { [weak self] completed in
+                self?.doneButton.isEnabled = true
+        })
+    }
+    
+    func animatePartnerIn() {
+    
+        UIView.animate(withDuration: 0.5) { [weak self] in
+            self?.partnerLogoRightConstraint.constant = 20
+            self?.view.layoutIfNeeded()
+        }
+    }
+    func animatePartnerOut() {
+        UIView.animate(withDuration: 0.5) { [weak self] in
+            self?.partnerLogoRightConstraint.constant = -200
+            self?.view.layoutIfNeeded()
+        }
+    }
 }

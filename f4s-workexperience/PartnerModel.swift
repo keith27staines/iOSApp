@@ -9,11 +9,12 @@
 import Foundation
 public enum PartnerUUID: F4SUUID {
     public typealias RawValue = String
-    case parent
-    case teacher
-    case other
-    case none
     case ncs
+    case parent
+    case school
+    case friend
+    case princesTrust
+    case later
 }
 
 public struct PartnersModel {
@@ -23,11 +24,12 @@ public struct PartnersModel {
     public init() {
         partners = [PartnerUUID:Partner]()
         partnersArray = [Partner]()
-        partnersArray.append(Partner(uuid: .parent, name: "Parent or guardian"))
-        partnersArray.append(Partner(uuid: .teacher, name: "Teacher"))
-        partnersArray.append(Partner(uuid: .other, name: "Other"))
-        partnersArray.append(Partner(uuid: .none, name: "None"))
-        partnersArray.append(Partner(uuid: .ncs, name: "National Citizen Service", acronym: "NCS"))
+        partnersArray.append(Partner(uuid: .ncs, acronym: "NCS", name: "NCS", description: "National Citizen Service", imageName: "partnerLogoNCS"))
+        partnersArray.append(Partner(uuid: .parent, name: "My parent", description: "Your parent or guardian"))
+        partnersArray.append(Partner(uuid: .school, name: "My teacher"))
+        partnersArray.append(Partner(uuid: .friend, name: "My friend"))
+        partnersArray.append(Partner(uuid: .princesTrust, name: "Prince's Trust"))
+        partnersArray.append(Partner(uuid: .later, name: "I will do this later"))
         for partner in self.partnersArray {
             addPartner(partner)
         }
