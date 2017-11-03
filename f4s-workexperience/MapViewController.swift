@@ -52,6 +52,14 @@ class MapViewController: UIViewController {
     var backgroundView = UIView()
     var shouldRequestAuthorization: Bool?
     
+    lazy var partnersModel: PartnersModel = {
+        let p = PartnersModel.sharedInstance
+        p.getPartners(completed: { (_) in
+            return
+        })
+        return p
+    }()
+    
     /// User locations are entered manually through the search box
     var userLocation: CLLocation? {
         didSet {
@@ -125,7 +133,7 @@ class MapViewController: UIViewController {
         setupMap()
         setupReachability(nil, useClosures: true)
         startNotifier()
-        
+        partnersModel.showWillProvidePartnerLater = true
         if dbService.isDownloadInProgress {
             if let view = self.navigationController?.tabBarController?.view {
                 MessageHandler.sharedInstance.showLoadingOverlay(view)
@@ -155,15 +163,21 @@ class MapViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if PartnersModel.partnerUuid == nil {
-            obtainPartnerID()
-        }
+        selectPartner()
+//        guard let _ = partnersModel.selectedPartner else {
+//            selectPartner()
+//            return
+//        }
+        applyBranding()
     }
     
-    func obtainPartnerID() {
-        if let vc = UIStoryboard(name: "SelectPartner", bundle: Bundle.main).instantiateInitialViewController() {
-            present(vc, animated: true, completion: nil)
-        }
+    func applyBranding() {
+        
+    }
+    
+    func selectPartner() {
+        let vc = UIStoryboard(name: "SelectPartner", bundle: Bundle.main).instantiateInitialViewController()!
+        present(vc, animated: true, completion: nil)
     }
 }
 

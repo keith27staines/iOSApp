@@ -51,6 +51,8 @@ struct Style {
 
 struct UserDefaultsKeys {
     static let invokingUrl = "invokingUrl"
+    static let partnerID = "partnerID"
+    static let hasParnerIDBeenSentToServer = "hasParnerIDBeenSentToServer"
     static let userUuid = "userUuid"
     static let userHasAccount = "userHasAccount"
     static let companyDatabaseCreatedDate = "companyDatabaseCreatedDate"
@@ -70,6 +72,7 @@ struct GoogleApiKeys {
 
 struct ApiConstants {
     static let baseUrl: String = Config.BASE_URL
+    static let baseUrl2: String = Config.BASE_URL2
     static let userProfileUrl: String = "\(baseUrl)/device"
     static let updateUserProfileUrl: String = "\(baseUrl)/user/"
     static let companyDatabaseUrl: String = "\(baseUrl)/company/dump/full"
@@ -86,6 +89,7 @@ struct ApiConstants {
     static let ratingUrl: String = "\(baseUrl)/rating"
     static let shortlistCompanyUrl: String = "\(baseUrl)/favourite"
     static let unshortlistCompanyUrl: String = "\(baseUrl)/favourite"
+    static let allPartnersUrl: String = "\(baseUrl2)/partner"
 
     static let apiKey: String = "eTo0oeh4Yeen1oy7iDuv"
 }

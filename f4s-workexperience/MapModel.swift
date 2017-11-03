@@ -14,6 +14,9 @@ public typealias F4SInterestIdSet = Set<Int64>
 
 /// Interest UUIDs are strings
 public typealias F4SUUID = String
+public enum SystemF4SUUID : F4SUUID {
+    case willProvideLater = "willProvideLater"
+}
 
 // MARK:-
 public struct MapModel {

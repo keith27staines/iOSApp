@@ -220,6 +220,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 // Helpers
 extension AppDelegate {
     func registerApplicationForRemoteNotifications(_ application: UIApplication) {
+        
+//        let notificationTypes: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.badge, UIUserNotificationType.sound]
+//        let pushNotificationSettings = UIUserNotificationSettings(types: notificationTypes, categories: nil)
+//
+//        
+//        application.registerUserNotificationSettings(pushNotificationSettings)
+//        application.registerForRemoteNotifications()
+        
+        
         if application.isRegisteredForRemoteNotifications || (application.currentUserNotificationSettings?.types.contains(.alert))! {
             application.registerForRemoteNotifications()
         } else {

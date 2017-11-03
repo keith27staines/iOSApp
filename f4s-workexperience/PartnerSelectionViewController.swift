@@ -26,6 +26,7 @@ class PartnerSelectionViewController: UIViewController {
     @IBOutlet weak var partnerLogoImageView: UIImageView!
     
     @IBAction func doneButtonPressed(_ sender: Any) {
+        partnersModel.selectedPartner = selectedPartner
         dismiss(animated: true, completion: nil)
     }
     
@@ -61,7 +62,7 @@ class PartnerSelectionViewController: UIViewController {
     }
     
     lazy var partnersModel: PartnersModel = {
-       return PartnersModel()
+       return PartnersModel.sharedInstance
     }()
 }
 
@@ -110,6 +111,7 @@ extension PartnerSelectionViewController : UITableViewDataSource, UITableViewDel
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedPartner = partnersModel.partnerForIndexPath(indexPath)
+        partnersModel.selectedPartner = selectedPartner
         referrerTextBox.text = selectedPartner?.name ?? ""
         partnerLogoImageView.image = selectedPartner?.image
         animatePullUpTable()
