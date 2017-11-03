@@ -110,7 +110,6 @@ class UserService: ApiBaseService {
     }
 
     // MARK: - operations
-
     func createUser(retryCount: Int = 0, completed: @escaping (_ succeeded: Bool) -> Void) {
         guard !UserService.sharedInstance.hasAccount() else {
             // user has already been created
