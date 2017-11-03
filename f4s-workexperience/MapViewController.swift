@@ -163,11 +163,10 @@ class MapViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        selectPartner()
-//        guard let _ = partnersModel.selectedPartner else {
-//            selectPartner()
-//            return
-//        }
+        guard partnersModel.hasSelectedPartner else {
+            selectPartner()
+            return
+        }
         applyBranding()
     }
     

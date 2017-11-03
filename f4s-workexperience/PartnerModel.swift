@@ -109,23 +109,34 @@ public class PartnersModel {
     
     /// Returns the partner with the specified id, if such a partner exists.
     func partnerForUuid(_ uuid:F4SUUID) -> Partner? {
-        for partner in partnersArray {
-            if partner.uuid == uuid {
-                return partner
-            }
+        if let partner = self.partners[uuid] { return partner }
+        var partner: Partner
+        switch uuid {
+        case "15e5a0a6-02cc-4e98-8edb-c3bfc0cb8b7d":
+            partner = Partner(uuid: "15e5a0a6-02cc-4e98-8edb-c3bfc0cb8b7d", name: "NCS")
+        default:
+            partner = Partner(uuid: "other", name: "other")
         }
-        return nil
+        addOrReplacePartner(partner)
+        return partner
+    }
+    
+    /// Tests whether the user has selected a partner
+    var hasSelectedPartner: Bool {
+        return selectedPartnerUUID == nil ? false : true
+    }
+    
+    /// Returns the uuid of the selected partner
+    var selectedPartnerUUID: F4SUUID? {
+        let key = UserDefaultsKeys.partnerID
+        return UserDefaults.standard.object(forKey: key) as? F4SUUID
     }
     
     /// Gets and sets the currently selected partner
     public var selectedPartner: Partner? {
         get {
-            let key = UserDefaultsKeys.partnerID
-            if let id = UserDefaults.standard.object(forKey: key) as? Int {
-                return partnersArray[id]
-            } else {
-                return nil
-            }
+            guard let selectedPartnerUUID = selectedPartnerUUID else { return nil }
+            return partnerForUuid(selectedPartnerUUID)
         }
         set {
             guard let partner = newValue else {
