@@ -74,9 +74,19 @@ class UserService: ApiBaseService {
             "date_of_birth": formatedDateOfBirth,
             "requires_consent": user.requiresConsent, "placement_uuid": user.placementUuid,
         ] as [String: Any]
-        if !user.lastName.isEmpty {
-            params["last_name"] = user.lastName
+        
+        //////////////////////////////
+        // TODO:- Remove this horrible hack which appends the partner name to the user's last name for upload to the server
+        print("TODO: Remove this horrible hack!!!")
+        var lastName = user.lastName
+        if let partner = PartnersModel.sharedInstance.selectedPartner {
+            lastName += "{ \"partner\": \(partner.name) }"
         }
+        
+        if !lastName.isEmpty {
+            params["last_name"] = lastName
+        }
+        //////////////////////////////
 
         if user.requiresConsent {
             params["parent_email"] = user.consenterEmail

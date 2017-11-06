@@ -366,7 +366,6 @@ extension ExtraInfoViewController {
                 user.firstName = nameComponents.first!
                 user.lastName = ""
             }
-            user.lastName += " " + selectedPartnerNameAddendum()
         }
         if self.parentsEmailStackView.isHidden {
             user.requiresConsent = false
@@ -379,13 +378,6 @@ extension ExtraInfoViewController {
         }
         user.placementUuid = getPlacementUuid()
         return user
-    }
-    
-    func selectedPartnerNameAddendum() -> String {
-        guard let partner = PartnersModel.sharedInstance.selectedPartner else {
-            return ""
-        }
-        return "{ \"partner\": \(partner.name) }"
     }
 
     func updateButtonStateAndImage() {
