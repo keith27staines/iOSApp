@@ -11,7 +11,7 @@ target 'f4s-workexperience' do
   pod 'Alamofire'
   pod 'SwiftyJSON', git: 'https://github.com/BaiduHiDeviOS/SwiftyJSON.git', branch: 'swift3'
   pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :branch => 'develop'
-  pod 'KeychainSwift', '~> 7.0'
+  pod 'KeychainSwift'
   
   pod 'GoogleMaps'
   pod 'GooglePlaces'
