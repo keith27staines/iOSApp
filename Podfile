@@ -10,14 +10,14 @@ target 'f4s-workexperience' do
   pod 'XCGLogger', '~> 5.0'
   pod 'Alamofire'
   pod 'SwiftyJSON'
-  pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :branch => 'develop'
   pod 'KeychainSwift'
-  
-  pod 'GoogleMaps'
-  pod 'GooglePlaces'
-  
   pod 'SQLite.swift'
   pod 'GRMustache.swift'
+
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
+
+  pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :branch => 'develop'
 end
   
 target 'f4s-workexperienceTests' do
