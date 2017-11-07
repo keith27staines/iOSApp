@@ -16,8 +16,8 @@ target 'f4s-workexperience' do
 
   pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :branch => 'develop'
 
-  pod 'GoogleMaps'
-  pod 'GooglePlaces'
+  pod 'GoogleMaps', '~> 2.5.0'
+  pod 'GooglePlaces', '~> 2.5.0'
 end
   
 target 'f4s-workexperienceTests' do

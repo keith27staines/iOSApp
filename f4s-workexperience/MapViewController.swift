@@ -707,7 +707,7 @@ extension MapViewController: GMSMapViewDelegate {
         var point: CGPoint = mapView.projection.point(for: marker.position)
         point.y -= 50
         let camera: GMSCameraUpdate = GMSCameraUpdate.setTarget(mapView.projection.coordinate(for: point))
-        marker.appearAnimation = kGMSMarkerAnimationPop
+        marker.appearAnimation = GMSMarkerAnimation.pop
         marker.tracksInfoWindowChanges = true
         
         mapView.animate(with: camera)
