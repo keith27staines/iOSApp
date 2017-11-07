@@ -14,10 +14,10 @@ target 'f4s-workexperience' do
   pod 'SQLite.swift'
   pod 'GRMustache.swift'
 
+  pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :branch => 'develop'
+
   pod 'GoogleMaps'
   pod 'GooglePlaces'
-
-  pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :branch => 'develop'
 end
   
 target 'f4s-workexperienceTests' do
