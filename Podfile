@@ -7,9 +7,9 @@ target 'f4s-workexperience' do
 
   # Pods for f4s-workexperience
   pod 'ReachabilitySwift'
-  pod 'XCGLogger', '~> 4.0.0'
+  pod 'XCGLogger', '~> 5.0'
   pod 'Alamofire'
-  pod 'SwiftyJSON', git: 'https://github.com/BaiduHiDeviOS/SwiftyJSON.git', branch: 'swift3'
+  pod 'SwiftyJSON'
   pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :branch => 'develop'
   pod 'KeychainSwift'
   
