@@ -23,6 +23,3 @@ end
 target 'f4s-workexperienceTests' do
 end
 
-target 'f4s-workexperienceUITests' do
-end
-
