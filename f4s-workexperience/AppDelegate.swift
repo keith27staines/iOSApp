@@ -82,16 +82,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func applicationWillResignActive(_: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-    }
-
-    func applicationDidEnterBackground(_: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    }
-
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
         registerApplicationForRemoteNotifications(application)
@@ -108,49 +98,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
-    }
-
-    func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
-        if notificationSettings.types != [] {
-            application.registerForRemoteNotifications()
-        }
-        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.didDeclineRemoteNotifications)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ApplicationDidRegisterForRemoteNotificationsNotification"), object: self)
-    }
-
-    func application(_: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        let deviceTokenString = deviceToken.reduce("", { $0 + String(format: "%02X", $1) })
-        UserService.sharedInstance.enablePushNotificationForUser(withDeviceToken: deviceTokenString, putCompleted: { _, result in
-            print(result)
-
-        })
-        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.shouldDisableRemoteNotifications)
-    }
-
-    func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("failed to register for remote notification with error: \(error)")
-    }
-
-    func application(_: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        let appState = UIApplication.shared.applicationState
-        if appState == .active {
-            if let window = self.window {
-                NotificationHelper.sharedInstance.handleRemoteNotification(userInfo: userInfo, window: window, isAppActive: true)
-                NotificationHelper.sharedInstance.updateToolbarButton(window: window)
-            }
-        } else {
-            if let window = self.window {
-                NotificationHelper.sharedInstance.handleRemoteNotification(userInfo: userInfo, window: window, isAppActive: false)
-            }
-        }
-
-        completionHandler(UIBackgroundFetchResult.newData)
-    }
-
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-        self.application(application, didReceiveRemoteNotification: userInfo) {
-            _ in
-        }
     }
 
     // MARK: - Core Data stack
@@ -217,24 +164,61 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
-// Helpers
+// MARK:- Notification
 extension AppDelegate {
+    
+    func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
+        if !notificationSettings.types.isEmpty {
+            application.registerForRemoteNotifications()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ApplicationDidRegisterForRemoteNotificationsNotification"), object: self)
+        } else {
+            UserDefaults.standard.set(true, forKey: UserDefaultsKeys.didDeclineRemoteNotifications)
+        }
+    }
+    
+    func application(_: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let tokenParts = deviceToken.map { data -> String in
+            return String(format: "%02.2hhx", data)
+        }
+        let token = tokenParts.joined()
+        UserService.sharedInstance.enablePushNotificationForUser(withDeviceToken: token, putCompleted: { success, result in
+            if success {
+                print("enabled push notifications on Workfinder server \(result)")
+            } else {
+                print("failed to enable push notifications on Workfinder server \(result)")
+            }
+        })
+    }
+    
+    func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("failed to register for remote notification with error: \(error)")
+    }
+    
+    func application(_: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        let appState = UIApplication.shared.applicationState
+        if appState == .active {
+            if let window = self.window {
+                NotificationHelper.sharedInstance.handleRemoteNotification(userInfo: userInfo, window: window, isAppActive: true)
+                NotificationHelper.sharedInstance.updateToolbarButton(window: window)
+            }
+        } else {
+            if let window = self.window {
+                NotificationHelper.sharedInstance.handleRemoteNotification(userInfo: userInfo, window: window, isAppActive: false)
+            }
+        }
+        
+        completionHandler(UIBackgroundFetchResult.newData)
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+        self.application(application, didReceiveRemoteNotification: userInfo) {
+            _ in
+        }
+    }
+    
     func registerApplicationForRemoteNotifications(_ application: UIApplication) {
-        
-//        let notificationTypes: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.badge, UIUserNotificationType.sound]
-//        let pushNotificationSettings = UIUserNotificationSettings(types: notificationTypes, categories: nil)
-//
-//        
-//        application.registerUserNotificationSettings(pushNotificationSettings)
-//        application.registerForRemoteNotifications()
-        
-        
         if application.isRegisteredForRemoteNotifications || (application.currentUserNotificationSettings?.types.contains(.alert))! {
             application.registerForRemoteNotifications()
-        } else {
-            UserService.sharedInstance.enablePushNotificationForUser(withDeviceToken: "false", putCompleted: { _, result in
-                print(result)
-            })
         }
     }
 }
