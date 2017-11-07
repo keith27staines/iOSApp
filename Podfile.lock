@@ -10,7 +10,7 @@ PODS:
   - GRMustache.swift (2.0.0)
   - JSQMessagesViewController (7.3.4)
   - KeychainSwift (7.0.0)
-  - ReachabilitySwift (3)
+  - ReachabilitySwift (4.1.0)
   - SQLite.swift (0.11.0):
     - SQLite.swift/standard (= 0.11.0)
   - SQLite.swift/standard (0.11.0)
@@ -26,7 +26,7 @@ DEPENDENCIES:
   - GRMustache.swift
   - JSQMessagesViewController (from `https://github.com/jessesquires/JSQMessagesViewController.git`, branch `develop`)
   - KeychainSwift (~> 7.0)
-  - ReachabilitySwift (~> 3)
+  - ReachabilitySwift
   - SQLite.swift
   - SwiftyJSON (from `https://github.com/BaiduHiDeviOS/SwiftyJSON.git`, branch `swift3`)
   - XCGLogger (~> 4.0.0)
@@ -54,11 +54,11 @@ SPEC CHECKSUMS:
   GRMustache.swift: 8a547c12bea16052071b2b540af83d770075f0eb
   JSQMessagesViewController: c11b9e77372ab72c45c67311f6da7342e32df1e8
   KeychainSwift: b6947435dd78cc442c64a84ae648dd0e871cf448
-  ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
+  ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   SQLite.swift: 9a26273607d3077a2e5a8d33486e9989f8404c7d
   SwiftyJSON: 6118fb49d7519c4d31a0c1f3d5af936e9047b556
   XCGLogger: 38063ea89b4c8b23232d18efd2e12eb0005f3ea4
 
-PODFILE CHECKSUM: a8bd4c85d37552920de0cf987476ae0a8212bc13
+PODFILE CHECKSUM: 213556b57ce6d4c93ee4c4703b7f9e04688ed95f
 
 COCOAPODS: 1.3.1

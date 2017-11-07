@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import ReachabilitySwift
+import Reachability
 
 class CustomTabBarViewController: UITabBarController {
 
@@ -77,7 +77,7 @@ extension CustomTabBarViewController {
         let reachability = Reachability()
         self.reachability = reachability
 
-        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(_:)), name: ReachabilityChangedNotification, object: reachability)
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(_:)), name: Notification.Name.reachabilityChanged, object: reachability)
     }
 
     func startNotifier() {
@@ -92,7 +92,7 @@ extension CustomTabBarViewController {
     func stopNotifier() {
         print("--- stop notifier")
         reachability?.stopNotifier()
-        NotificationCenter.default.removeObserver(self, name: ReachabilityChangedNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.reachabilityChanged, object: nil)
         reachability = nil
     }
 

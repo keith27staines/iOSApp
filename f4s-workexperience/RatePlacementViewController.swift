@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import ReachabilitySwift
+import Reachability
 
 protocol RatingControlDelegate {
     func didUpdateRatingValue(ratingControll: RatingControl, rating: Int)
