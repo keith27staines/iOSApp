@@ -6,7 +6,7 @@ use_frameworks!
 target 'f4s-workexperience' do
 
   # Pods for f4s-workexperience
-  pod 'ReachabilitySwift' , '~> 3'
+  pod 'ReachabilitySwift'
   pod 'XCGLogger', '~> 4.0.0'
   pod 'Alamofire'
   pod 'SwiftyJSON', git: 'https://github.com/BaiduHiDeviOS/SwiftyJSON.git', branch: 'swift3'

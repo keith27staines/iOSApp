@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 import Alamofire
-import ReachabilitySwift
+import Reachability
 import KeychainSwift
 
 class ApiBaseService {

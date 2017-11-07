@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import JSQMessagesViewController
 import KeychainSwift
-import ReachabilitySwift
+import Reachability
 
 class MessageViewController: JSQMessagesViewController {
     let incomingBubble = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImage(with: UIColor(netHex: Colors.messageIncoming))

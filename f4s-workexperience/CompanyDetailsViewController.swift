@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import ReachabilitySwift
+import Reachability
 
 class CompanyDetailsViewController: UIViewController {
     @IBOutlet weak var seeAcountsButton: UIButton!

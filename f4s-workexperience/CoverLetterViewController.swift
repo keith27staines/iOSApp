@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import Mustache
-import ReachabilitySwift
+import Reachability
 
 class CoverLetterViewController: UIViewController {
     @IBOutlet weak var templateTextView: UITextView!

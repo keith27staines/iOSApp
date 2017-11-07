@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
-import ReachabilitySwift
+import Reachability
 
 class MapViewController: UIViewController {
     /// Displays the map
@@ -834,7 +834,7 @@ extension MapViewController {
         let reachability = Reachability()
         self.reachability = reachability
         
-        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(_:)), name: ReachabilityChangedNotification, object: reachability)
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(_:)), name: Notification.Name.reachabilityChanged, object: reachability)
     }
     
     func startNotifier() {
@@ -849,7 +849,7 @@ extension MapViewController {
     func stopNotifier() {
         print("--- stop notifier")
         reachability?.stopNotifier()
-        NotificationCenter.default.removeObserver(self, name: ReachabilityChangedNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.reachabilityChanged, object: nil)
         reachability = nil
     }
     

@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import ReachabilitySwift
+import Reachability
 import KeychainSwift
 
 class MessageContainerViewController: UIViewController {

@@ -11,7 +11,7 @@ import Alamofire
 import CoreLocation
 import SwiftyJSON
 import GoogleMaps
-import ReachabilitySwift
+import Reachability
 
 class LocationHelper {
 
