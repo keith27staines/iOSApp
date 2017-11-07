@@ -62,7 +62,7 @@ class ApiBaseService {
 
                 case .success(let responseObject):
                     let json = JSON(responseObject)
-                    if json != nil {
+                    if json != JSON.null {
                         postCompleted(true, .value(Box(json)))
                         return
                     } else {
@@ -126,7 +126,7 @@ class ApiBaseService {
 
                 case .success(let responseObject):
                     let json = JSON(responseObject)
-                    if json != nil {
+                    if json != JSON.null {
                         getCompleted(true, .value(Box(json)))
                         return
                     } else {
@@ -186,7 +186,7 @@ class ApiBaseService {
                 case .success(let responseObject):
                     let json = JSON(responseObject)
                     print(json)
-                    if json != nil {
+                    if json != JSON.null {
                         putCompleted(true, .value(Box(json)))
                         return
                     } else {
@@ -245,7 +245,7 @@ class ApiBaseService {
 
                 case .success(let responseObject):
                     let json = JSON(responseObject)
-                    if json != nil {
+                    if json != JSON.null {
                         optionsCompleted(true, .value(Box(json)))
                         return
                     } else {
@@ -304,7 +304,7 @@ class ApiBaseService {
 
                 case .success(let responseObject):
                     let json = JSON(responseObject)
-                    if json != nil {
+                    if json != JSON.null {
                         deleteCompleted(true, .value(Box(json)))
                         return
                     } else {
