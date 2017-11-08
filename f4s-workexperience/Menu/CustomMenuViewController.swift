@@ -210,7 +210,7 @@ extension CustomMenuViewController {
         default:
             break
         }
-        let attributedText: NSMutableAttributedString = NSMutableAttributedString(string: text, attributes: [NSForegroundColorAttributeName: UIColor(netHex: Colors.white), NSFontAttributeName: UIFont.systemFont(ofSize: CGFloat(Style.biggerLargeTextSize), weight: UIFontWeightRegular)])
+        let attributedText: NSMutableAttributedString = NSMutableAttributedString(string: text, attributes: [NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.white), NSAttributedStringKey.font: UIFont.systemFont(ofSize: CGFloat(Style.biggerLargeTextSize), weight: UIFont.Weight.regular)])
 
         return attributedText
     }

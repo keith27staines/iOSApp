@@ -27,7 +27,7 @@ public class F4SCompanyPin : NSObject, GMUClusterItem {
     public var isFavourite: Bool
     
     /// Returns a view for use as the pin on the map
-    func customMarkerView() -> UIView {
+    @objc func customMarkerView() -> UIView {
         let imageName = isFavourite ? "markerFavouriteIcon" : "markerIcon"
         let image = UIImage(named: imageName)
         let view = UIImageView(image: image)

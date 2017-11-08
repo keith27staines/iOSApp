@@ -224,11 +224,9 @@ extension MessageOptionsView: UICollectionViewDelegateFlowLayout, UICollectionVi
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MessageOptionCollectionViewCellIdentifier, for: indexPath) as? MessageOptionCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.answerLabel.attributedText = NSAttributedString(string: self.optionsToLoad[indexPath.row].value,
-                                                             attributes: [
-                                                                 NSAttributedStringKey.foregroundColor: UIColor.white,
-                                                                 NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular.rawValue),
-        ])
+        cell.answerLabel.attributedText = NSAttributedString(
+            string: self.optionsToLoad[indexPath.row].value,
+            attributes: [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular)])
         cell.answerLabel.backgroundColor = UIColor(netHex: Colors.mediumGreen)
         cell.answerLabel.layer.cornerRadius = 10
         cell.answerLabel.layer.masksToBounds = true

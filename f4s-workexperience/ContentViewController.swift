@@ -70,7 +70,7 @@ extension ContentViewController {
 extension ContentViewController {
     func getContent() {
         if let reachability = Reachability() {
-            if !reachability.isReachable {
+            if !reachability.isReachableByAnyMeans {
                 MessageHandler.sharedInstance.display("No Internet Connection.", parentCtrl: self)
                 return
             }

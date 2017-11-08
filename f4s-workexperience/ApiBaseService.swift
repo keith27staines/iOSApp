@@ -17,7 +17,7 @@ class ApiBaseService {
     func post(_ params: Parameters?, array _: Array<AnyObject>? = nil, url: String, postCompleted: @escaping (_ succeeded: Bool, _ msg: Result<JSON>) -> Void) {
 
         if let reachability = Reachability() {
-            if !reachability.isReachable {
+            if !reachability.isReachableByAnyMeans {
                 postCompleted(false, .error("No Internet Connection."))
                 return
             }
@@ -76,7 +76,7 @@ class ApiBaseService {
     func get(_ url: String, getCompleted: @escaping (_ succeeded: Bool, _ msg: Result<JSON>) -> Void) {
 
         if let reachability = Reachability() {
-            if !reachability.isReachable {
+            if !reachability.isReachableByAnyMeans {
                 getCompleted(false, .error("No Internet Connection."))
                 return
             }
@@ -140,7 +140,7 @@ class ApiBaseService {
     func put(_ params: Parameters?, array _: Array<AnyObject>? = nil, url: String, putCompleted: @escaping (_ succeeded: Bool, _ msg: Result<JSON>) -> Void) {
 
         if let reachability = Reachability() {
-            if !reachability.isReachable {
+            if !reachability.isReachableByAnyMeans {
                 putCompleted(false, .error("No Internet Connection."))
                 return
             }
@@ -200,7 +200,7 @@ class ApiBaseService {
     func options(url: String, optionsCompleted: @escaping (_ succeeded: Bool, _ msg: Result<JSON>) -> Void) {
 
         if let reachability = Reachability() {
-            if !reachability.isReachable {
+            if !reachability.isReachableByAnyMeans {
                 optionsCompleted(false, .error("No Internet Connection."))
                 return
             }
@@ -259,7 +259,7 @@ class ApiBaseService {
     func delete(url: String, deleteCompleted: @escaping (_ succeeded: Bool, _ msg: Result<JSON>) -> Void) {
 
         if let reachability = Reachability() {
-            if !reachability.isReachable {
+            if !reachability.isReachableByAnyMeans {
                 deleteCompleted(false, .error("No Internet Connection."))
                 return
             }
@@ -318,7 +318,7 @@ class ApiBaseService {
     func download(_ url: String, localUrlToSave: URL, completed: @escaping (_ succeeded: Bool, _ msg: Result<String>) -> Void) {
 
         if let reachability = Reachability() {
-            if !reachability.isReachable {
+            if !reachability.isReachableByAnyMeans {
                 completed(false, .error("No Internet Connection."))
                 return
             }

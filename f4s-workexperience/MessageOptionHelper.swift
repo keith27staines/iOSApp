@@ -21,7 +21,7 @@ class MessageOptionHelper {
     let horizontalSpacing: CGFloat = 20
     let multipleQuestionAnswerCellHeight: CGFloat = 44
 
-    func getCellSize(options: [MessageOption], index: Int, font: UIFont = UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular.rawValue)) -> CGSize {
+    func getCellSize(options: [MessageOption], index: Int, font: UIFont = UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular)) -> CGSize {
         let screenWidth: CGFloat = UIScreen.main.bounds.width - 40
         let cellWidth: CGFloat = (screenWidth - 5) / 2
         let labelWidth: CGFloat = cellWidth - horizontalSpacing
@@ -56,7 +56,7 @@ class MessageOptionHelper {
         }
     }
 
-    func getFooterSize(options: [MessageOption], font _: UIFont = UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular.rawValue)) -> CGSize {
+    func getFooterSize(options: [MessageOption], font _: UIFont = UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular)) -> CGSize {
         var footerHeight: CGFloat = 0
         var index: Int = 0
         while index < options.count {

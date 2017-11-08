@@ -68,7 +68,7 @@ class MessageContainerViewController: UIViewController {
 extension MessageContainerViewController {
     func getMessages() {
         if let reachability = Reachability() {
-            if !reachability.isReachable {
+            if !reachability.isReachableByAnyMeans {
                 MessageHandler.sharedInstance.display("No Internet Connection.", parentCtrl: self)
                 return
             }
@@ -224,10 +224,10 @@ extension MessageContainerViewController {
         let showCompanyButton = UIBarButtonItem(image: UIImage(named: "information"), style: UIBarButtonItemStyle.done, target: self, action: #selector(showCompanyDetailsView))
         navigationItem.rightBarButtonItem = showCompanyButton
         navigationItem.title = self.company?.name
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
     }
     
-    func backButtonTouched() {
+    @objc func backButtonTouched() {
         if let viewCtrls = self.navigationController?.viewControllers {
             for viewCtrl in viewCtrls {
                 if viewCtrl is TimelineViewController {
@@ -238,7 +238,7 @@ extension MessageContainerViewController {
         }
     }
     
-    func showCompanyDetailsView() {
+    @objc func showCompanyDetailsView() {
         if let companyUrl = self.company?.companyUrl, let navigCtrl = self.navigationController {
             CustomNavigationHelper.sharedInstance.moveToContentViewController(navCtrl: navigCtrl, contentType: ContentType.company, url: companyUrl)
         }

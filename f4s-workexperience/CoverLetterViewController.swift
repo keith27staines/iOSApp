@@ -70,7 +70,7 @@ extension CoverLetterViewController {
         navigationItem.leftBarButtonItem = backButton
 
         let editCoverLetterTitle = NSLocalizedString("Edit Cover Letter", comment: "")
-        let editCoverLetterFont: UIFont = UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular.rawValue)
+        let editCoverLetterFont: UIFont = UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular)
         editCoverLetterButton = UIButton(frame: CGRect(x: 0, y: 0, width: 150, height: 40))
         editCoverLetterButton?.layer.cornerRadius = 10
         editCoverLetterButton?.layer.masksToBounds = true
@@ -97,15 +97,15 @@ extension CoverLetterViewController {
 
         applyButton.layer.cornerRadius = 10
         applyButton.layer.masksToBounds = true
-        applyButton.setAttributedTitle(NSAttributedString(string: applyText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor.white]), for: .normal)
+        applyButton.setAttributedTitle(NSAttributedString(string: applyText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.white]), for: .normal)
     }
 
     func setBottomView() {
         let termsAndConditionsApplyText = NSLocalizedString("By applying you are agreeing to our ", comment: "")
         let termsAndConditionsText = NSLocalizedString("Terms and Conditions & Privacy Policy", comment: "")
         let formattedString = NSMutableAttributedString()
-        formattedString.append(NSAttributedString(string: termsAndConditionsApplyText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.warmGrey)]))
-        formattedString.append(NSAttributedString(string: termsAndConditionsText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.semibold.rawValue), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.warmGrey)]))
+        formattedString.append(NSAttributedString(string: termsAndConditionsApplyText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.warmGrey)]))
+        formattedString.append(NSAttributedString(string: termsAndConditionsText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.warmGrey)]))
         self.termsAndConditionsButton.setAttributedTitle(formattedString, for: .normal)
         self.termsAndConditionsButton.titleLabel?.textAlignment = .center
     }
@@ -180,7 +180,7 @@ extension CoverLetterViewController {
 
     func getAttributedStringForTemplate(template: String) -> NSMutableAttributedString {
         // normal font
-        var customMutableAttributedString: [([String: Any], NSRange)] = []
+        var customMutableAttributedString: [([NSAttributedStringKey: Any], NSRange)] = []
 
         var intermediateTemplateString: String = template.replacingOccurrences(of: "\r", with: "")
         // find first selection
@@ -234,7 +234,7 @@ extension CoverLetterViewController {
                     intermediateTemplateString = temp
 
                     // apply attributed text for that range
-                    customMutableAttributedString.append(([NSAttributedStringKey.font.rawValue: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold.rawValue), NSAttributedStringKey.foregroundColor.rawValue: UIColor(netHex: Colors.mediumGreen)], range: NSRange(location: smalestIndex, length: endSelected - smalestIndex)))
+                    customMutableAttributedString.append(([NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.mediumGreen)], range: NSRange(location: smalestIndex, length: endSelected - smalestIndex)))
                 }
                 break
             case .startPlaceholder:
@@ -247,7 +247,7 @@ extension CoverLetterViewController {
                     intermediateTemplateString = temp
 
                     // apply attributed text for that range
-                    customMutableAttributedString.append(([NSAttributedStringKey.font.rawValue: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold.rawValue), NSAttributedStringKey.foregroundColor.rawValue: UIColor(netHex: Colors.orangeNormal)], range: NSRange(location: smalestIndex, length: endPlaceholder - smalestIndex)))
+                    customMutableAttributedString.append(([NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.orangeNormal)], range: NSRange(location: smalestIndex, length: endPlaceholder - smalestIndex)))
                 }
                 break
             case .startBold:
@@ -260,7 +260,7 @@ extension CoverLetterViewController {
                     intermediateTemplateString = temp
 
                     // apply attributed text for that range
-                    customMutableAttributedString.append(([NSAttributedStringKey.font.rawValue: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold.rawValue), NSAttributedStringKey.foregroundColor.rawValue: UIColor.black], range: NSRange(location: smalestIndex, length: endBold - smalestIndex)))
+                    customMutableAttributedString.append(([NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor.black], range: NSRange(location: smalestIndex, length: endBold - smalestIndex)))
                 }
                 break
             default:
@@ -270,8 +270,8 @@ extension CoverLetterViewController {
         }
 
         let style = NSMutableParagraphStyle()
-        style.lineSpacing = 34 - UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular.rawValue).lineHeight
-        let mutableAttributedString: NSMutableAttributedString = NSMutableAttributedString(string: intermediateTemplateString, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor.black])
+        style.lineSpacing = 34 - UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular).lineHeight
+        let mutableAttributedString: NSMutableAttributedString = NSMutableAttributedString(string: intermediateTemplateString, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.black])
         for attrString in customMutableAttributedString {
             mutableAttributedString.addAttributes(attrString.0, range: attrString.1)
         }
@@ -342,7 +342,7 @@ extension CoverLetterViewController: UIGestureRecognizerDelegate {
 extension CoverLetterViewController {
     func getLatestTemplate() {
         if let reachability = Reachability() {
-            if !reachability.isReachable {
+            if !reachability.isReachableByAnyMeans {
                 MessageHandler.sharedInstance.display("No Internet Connection.", parentCtrl: self)
                 return
             }
@@ -384,7 +384,7 @@ extension CoverLetterViewController {
         }
 
         if let reachability = Reachability() {
-            if !reachability.isReachable {
+            if !reachability.isReachableByAnyMeans {
                 MessageHandler.sharedInstance.display("No Internet Connection.", parentCtrl: self)
                 return
             }

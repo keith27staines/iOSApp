@@ -253,7 +253,7 @@ extension MapViewController {
         
         self.refineSearchLabel.attributedText = NSAttributedString(
             string: refineStr,
-            attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.paragraphStyle: paragraph])
+            attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.paragraphStyle: paragraph])
     }
     
     fileprivate func setupFramesAndSizes() {
@@ -846,7 +846,7 @@ extension MapViewController {
     
     @objc func reachabilityChanged(_ note: Notification) {
         let reachability = note.object as! Reachability
-        if reachability.connection != .none {
+        if reachability.isReachableByAnyMeans {
             debugPrint("network is reachable")
             let dbService = DatabaseService.sharedInstance
             if !dbService.isLocalDatabaseAvailable() && !dbService.isDownloadInProgress {

@@ -51,7 +51,7 @@ extension RatePlacementViewController {
 
         let titleAtrString = NSAttributedString(
             string: NSLocalizedString("Submit", comment: ""),
-            attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor.white,
+            attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.white,
         ])
         self.submitButton.setAttributedTitle(titleAtrString, for: .normal)
 
@@ -68,11 +68,11 @@ extension RatePlacementViewController {
 
         let questionAttrStr = NSMutableAttributedString(
             string: questionStr,
-            attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor.black,])
+            attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.black,])
         if let companyName = self.company?.name {
             let companyNameAttrStr = NSMutableAttributedString(
                 string: companyName,
-                attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize,weight: UIFont.Weight.semibold.rawValue),NSAttributedStringKey.foregroundColor: UIColor.black])
+                attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize,weight: UIFont.Weight.semibold),NSAttributedStringKey.foregroundColor: UIColor.black])
             questionAttrStr.insert(companyNameAttrStr, at: questionStr.characters.count - 1)
         }
         self.questionLabel.attributedText = questionAttrStr
@@ -128,7 +128,7 @@ extension RatePlacementViewController {
     @IBAction func submitButtonTouched(_: UIButton) {
 
         if let reachability = Reachability() {
-            if reachability.connection == .none {
+            if !reachability.isReachableByAnyMeans {
                 MessageHandler.sharedInstance.display("No Internet Connection.", parentCtrl: self)
                 debugPrint("No internet connection")
                 return

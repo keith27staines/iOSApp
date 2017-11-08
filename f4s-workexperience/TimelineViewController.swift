@@ -57,7 +57,7 @@ extension TimelineViewController {
 
     func getAllPlacementsForUser() {
         if let reachability = Reachability() {
-            if reachability.connection == .none {
+            if !reachability.isReachableByAnyMeans {
                 MessageHandler.sharedInstance.display("No Internet Connection.", parentCtrl: self)
                 return
             }
@@ -156,11 +156,11 @@ extension TimelineViewController {
 
         self.noPlacementsTitleLabel.attributedText = NSAttributedString(string: titleStr, attributes: [
             NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.pinkishGrey),
-            NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold.rawValue),
+            NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold),
         ])
         self.noPlacementsInfoLabel.attributedText = NSAttributedString(string: infoStr, attributes: [
             NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.pinkishGrey),
-            NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.mediumTextSize, weight: UIFont.Weight.regular.rawValue),
+            NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.mediumTextSize, weight: UIFont.Weight.regular),
         ])
         self.noPlacementsBackgroundView.isHidden = true
     }
@@ -184,7 +184,7 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
         let placement = self.userPlacements[indexPath.row]
         if let company = self.companies.filter({ $0.uuid == placement.companyUuid.replacingOccurrences(of: "-", with: "") }).first {
             cell.companyImageView.image = UIImage(named: "DefaultLogo")
-            cell.companyTitleLabel.attributedText = NSAttributedString(string: company.name, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize,weight: UIFont.Weight.medium.rawValue),NSAttributedStringKey.foregroundColor: UIColor.black,])
+            cell.companyTitleLabel.attributedText = NSAttributedString(string: company.name, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize,weight: UIFont.Weight.medium),NSAttributedStringKey.foregroundColor: UIColor.black,])
             cell.companyImageView.layer.cornerRadius = cell.companyImageView.bounds.height / 2
             cell.companyImageView.image = UIImage(named: "DefaultLogo")
             if !company.logoUrl.isEmpty, let url = NSURL(string: company.logoUrl) {
@@ -205,20 +205,20 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.unreadMessageDotView.isHidden = true
                 cell.latestMessageLabel.attributedText = NSAttributedString(
                     string: placement.latestMessage.content,
-                    attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize,weight: UIFont.Weight.light.rawValue),NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.warmGrey)])
+                    attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize,weight: UIFont.Weight.light),NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.warmGrey)])
 
                 cell.dateTimeLatestMessageLabel.attributedText = NSAttributedString(
                     string: placement.latestMessage.relativeDateTime,
-                    attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize,weight: UIFont.Weight.light.rawValue),NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
+                    attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize,weight: UIFont.Weight.light),NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
             } else {
                 cell.unreadMessageDotView.isHidden = false
                 cell.latestMessageLabel.attributedText = NSAttributedString(
                     string: placement.latestMessage.content,
-                    attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize,                                                                          weight: UIFont.Weight.semibold.rawValue),NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
+                    attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize,                                                                          weight: UIFont.Weight.semibold),NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
 
                 cell.dateTimeLatestMessageLabel.attributedText = NSAttributedString(
                     string: placement.latestMessage.relativeDateTime,
-                    attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize, weight: UIFont.Weight.semibold.rawValue), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.orangeYellow)])
+                    attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.orangeYellow)])
             }
         }
 

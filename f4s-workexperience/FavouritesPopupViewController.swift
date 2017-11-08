@@ -57,7 +57,7 @@ extension FavouritesPopupViewController {
     func setupButtons() {
         okButton.layer.masksToBounds = true
         okButton.layer.cornerRadius = 10
-        okButton.setAttributedTitle(NSAttributedString(string: NSLocalizedString("Ok", comment: ""), attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.white)]), for: .normal)
+        okButton.setAttributedTitle(NSAttributedString(string: NSLocalizedString("Ok", comment: ""), attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.white)]), for: .normal)
         okButton.setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)
         okButton.setBackgroundColor(color: UIColor(netHex: Colors.mediumGreen), forUIControlState: .normal)
         okButton.setTitleColor(UIColor.white, for: .normal)
@@ -66,15 +66,15 @@ extension FavouritesPopupViewController {
         cancelButton.layer.cornerRadius = 10
         cancelButton.layer.borderColor = UIColor(netHex: Colors.mediumGreen).cgColor
         cancelButton.layer.borderWidth = 0.5
-        cancelButton.setAttributedTitle(NSAttributedString(string: NSLocalizedString("Cancel", comment: ""), attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)]), for: .normal)
+        cancelButton.setAttributedTitle(NSAttributedString(string: NSLocalizedString("Cancel", comment: ""), attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)]), for: .normal)
     }
     
     func setupLabels() {
         let titleText = NSLocalizedString("Maximum of \(AppConstants.maximumNumberOfShortlists) favourites", comment: "")
-        titleLabel.attributedText = NSAttributedString(string: titleText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold.rawValue), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
+        titleLabel.attributedText = NSAttributedString(string: titleText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
         
         let contentText = NSLocalizedString("Please remove a company from your favourites, in order to add a new company.", comment: "")
-        contentLabel.attributedText = NSAttributedString(string: contentText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
+        contentLabel.attributedText = NSAttributedString(string: contentText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
         contentLabel.sizeToFit()
     }
 }
