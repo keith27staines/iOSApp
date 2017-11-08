@@ -130,7 +130,7 @@ extension InterestsViewController {
 
     func adjustNavigationBar() {
         self.navigationItem.title = NSLocalizedString("Interests", comment: "")
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         UIApplication.shared.statusBarStyle = .lightContent
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.navigationBar.barTintColor = UIColor(netHex: Colors.azure)
@@ -144,11 +144,8 @@ extension InterestsViewController {
     func updateResultsLabel(count: Int) {
         let label = UILabel()
         let resultsString = count == 1 ? " Result" : " Results"
-        label.attributedText = NSAttributedString(string: "\(count)" + resultsString, attributes: [
-            NSFontAttributeName: UIFont.systemFont(ofSize: Style.smallTextSize,
-                                                   weight: UIFontWeightRegular),
-            NSForegroundColorAttributeName: UIColor.white,
-        ])
+        label.attributedText = NSAttributedString(string: "\(count)" + resultsString, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: Style.smallTextSize,weight: UIFont.Weight.regular),
+            NSAttributedStringKey.foregroundColor: UIColor.white])
         label.sizeToFit()
         let customBarBtn = UIBarButtonItem(customView: label)
         self.navigationItem.setRightBarButton(customBarBtn, animated: true)
@@ -161,11 +158,9 @@ extension InterestsViewController {
 
             let label = UILabel()
             let resultsString = "Results"
-            label.attributedText = NSAttributedString(string: resultsString, attributes: [
-                NSFontAttributeName: UIFont.systemFont(ofSize: Style.smallTextSize,
-                                                       weight: UIFontWeightRegular),
-                NSForegroundColorAttributeName: UIColor.white,
-            ])
+            label.attributedText = NSAttributedString(
+                string: resultsString,
+                attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: Style.smallTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.white])
             label.sizeToFit()
             let customBarBtn = UIBarButtonItem(customView: label)
 
@@ -249,7 +244,7 @@ extension InterestsViewController: UICollectionViewDelegateFlowLayout {
         let interest = interestsToDisplay[indexPath.row]
         let count = interestsCount[interest] ?? 0
         let interestStr = interest.name + " (\(count))"
-        var sizeForText = getTextSize(interestStr, font: UIFont.systemFont(ofSize: 13, weight: UIFontWeightRegular), maxWidth: collectionView.bounds.width)
+        var sizeForText = getTextSize(interestStr, font: UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.regular), maxWidth: collectionView.bounds.width)
         sizeForText.height = 40
         return sizeForText
     }
@@ -257,7 +252,7 @@ extension InterestsViewController: UICollectionViewDelegateFlowLayout {
     func getTextSize(_ text: String, font: UIFont, maxWidth: CGFloat) -> CGSize {
         let textString = text as NSString
 
-        let attributes = [NSFontAttributeName: font]
+        let attributes = [NSAttributedStringKey.font: font]
         let rect = textString.boundingRect(with: CGSize(width: maxWidth, height: 40), options: .truncatesLastVisibleLine, attributes: attributes, context: nil)
 
         return CGSize(width: rect.width + 20, height: rect.height)
@@ -279,7 +274,7 @@ extension InterestsViewController {
         self.dismiss(animated: true, completion: nil)
     }
 
-    func dismissInterestView(_: UIBarButtonItem) {
+    @objc func dismissInterestView(_: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
 }

@@ -305,7 +305,7 @@ public protocol ViewControllerContainer {
 
 extension UIViewController: ViewControllerContainer {
 
-    public var topMostViewController: UIViewController? {
+    @objc public var topMostViewController: UIViewController? {
 
         if let presentedView = presentedViewController {
 

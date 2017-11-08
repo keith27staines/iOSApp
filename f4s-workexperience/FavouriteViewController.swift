@@ -57,7 +57,7 @@ extension FavouriteViewController {
         self.navigationItem.leftBarButtonItem = menuButton
         
         self.navigationItem.title = NSLocalizedString("Favourite", comment: "")
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         UIApplication.shared.statusBarStyle = .lightContent
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.navigationController?.navigationBar.barTintColor = UIColor(netHex: Colors.azure)
@@ -71,12 +71,12 @@ extension FavouriteViewController {
         let infoStr = NSLocalizedString("Once you have favourited a company it will appear here.", comment: "")
         
         noFavouritesTitleLabel.attributedText = NSAttributedString(string: titleStr, attributes: [
-            NSForegroundColorAttributeName: UIColor(netHex: Colors.pinkishGrey),
-            NSFontAttributeName: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFontWeightSemibold),
+            NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.pinkishGrey),
+            NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold.rawValue),
             ])
         noFavouritesMessageLabel.attributedText = NSAttributedString(string: infoStr, attributes: [
-            NSForegroundColorAttributeName: UIColor(netHex: Colors.pinkishGrey),
-            NSFontAttributeName: UIFont.f4sSystemFont(size: Style.mediumTextSize, weight: UIFontWeightRegular),
+            NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.pinkishGrey),
+            NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.mediumTextSize, weight: UIFont.Weight.regular.rawValue),
             ])
         noFavouritesBackgroundView.isHidden = true
     }
@@ -87,7 +87,7 @@ extension FavouriteViewController {
     
     func loadData() {
         favouriteList = ShortlistDBOperations.sharedInstance.getShortlistForCurrentUser()
-        favouriteList.sort(by: { $0.0.date > $0.1.date })
+        favouriteList.sort(by: { $0.date > $1.date })
         placementList = PlacementDBOperations.sharedInstance.getPlacementsForCurrentUser()
         let companyUuids = favouriteList.map({ $0.companyUuid })
         getCompaniesWithUuids(uuid: companyUuids)
@@ -128,12 +128,9 @@ extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
         let favourite = favouriteList[indexPath.row]
         if let company = self.companies.filter({ $0.uuid == favourite.companyUuid.replacingOccurrences(of: "-", with: "") }).first {
             cell.companyImageView.image = UIImage(named: "DefaultLogo")
-            cell.companyTitleLabel.attributedText = NSAttributedString(string: company.name,
-                                                                       attributes: [
-                                                                        NSFontAttributeName: UIFont.f4sSystemFont(size: Style.largeTextSize,
-                                                                                                                  weight: UIFontWeightMedium),
-                                                                        NSForegroundColorAttributeName: UIColor.black,
-                                                                        ])
+            cell.companyTitleLabel.attributedText = NSAttributedString(
+                string: company.name,
+                attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize,weight: UIFont.Weight.medium.rawValue),NSAttributedStringKey.foregroundColor: UIColor.black])
             cell.companyImageView.layer.cornerRadius = cell.companyImageView.bounds.height / 2
             cell.companyImageView.image = UIImage(named: "DefaultLogo")
             if !company.logoUrl.isEmpty, let url = NSURL(string: company.logoUrl) {
@@ -146,21 +143,15 @@ extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                 })
             }
-            cell.companyIndustryLabel.attributedText = NSAttributedString(string: company.industry,
-                                                                          attributes: [
-                                                                            NSFontAttributeName: UIFont.f4sSystemFont(size: Style.smallTextSize,
-                                                                                                                      weight: UIFontWeightLight),
-                                                                            NSForegroundColorAttributeName: UIColor(netHex: Colors.black),
-                                                                            ])
+            cell.companyIndustryLabel.attributedText = NSAttributedString(
+                string: company.industry,
+                attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize,weight: UIFont.Weight.light.rawValue), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
         }
         if let placement = placementList.filter({ $0.companyUuid == favourite.companyUuid.replacingOccurrences(of: "-", with: "") }).first, placement.status == .applied {
             cell.companyStatusLabel.isHidden = false
-            cell.companyStatusLabel.attributedText = NSAttributedString(string: NSLocalizedString("Applied", comment: ""),
-                                                                        attributes: [
-                                                                            NSFontAttributeName: UIFont.f4sSystemFont(size: Style.biggerVerySmallTextSize,
-                                                                                                                      weight: UIFontWeightRegular),
-                                                                            NSForegroundColorAttributeName: UIColor(netHex: Colors.white),
-                                                                            ])
+            cell.companyStatusLabel.attributedText = NSAttributedString(
+                string: NSLocalizedString("Applied", comment: ""),
+                attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerVerySmallTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.white)])
             cell.companyStatusLabel.backgroundColor = UIColor(netHex: Colors.mediumGreen)
             cell.companyStatusLabel.layer.cornerRadius = 5
             cell.companyStatusLabel.layer.masksToBounds = true
@@ -194,12 +185,9 @@ extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
         label.numberOfLines = 0
         label.textAlignment = .center
         let text = NSLocalizedString("You can favourite a maximum of \(AppConstants.maximumNumberOfShortlists) companies.", comment: "")
-        label.attributedText = NSAttributedString(string: text,
-                                                  attributes: [
-                                                    NSFontAttributeName: UIFont.f4sSystemFont(size: Style.mediumTextSize,
-                                                                                              weight: UIFontWeightRegular),
-                                                    NSForegroundColorAttributeName: UIColor(netHex: Colors.pinkishGrey),
-                                                    ])
+        label.attributedText = NSAttributedString(
+            string: text,
+            attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.mediumTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.pinkishGrey)])
         label.sizeToFit()
         return label
     }
@@ -207,7 +195,7 @@ extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: - user interaction
 extension FavouriteViewController {
-    func menuButtonTapped() {
+    @objc func menuButtonTapped() {
         if let navCtrl = self.navigationController {
             MenuHelper(navigationController: navCtrl).openMenuButton()
         }

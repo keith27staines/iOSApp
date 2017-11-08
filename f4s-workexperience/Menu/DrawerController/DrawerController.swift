@@ -1090,7 +1090,7 @@ open class DrawerController: UIViewController, UIGestureRecognizerDelegate {
 
     // MARK: - Gesture Handlers
 
-    func tapGestureCallback(_ tapGesture: UITapGestureRecognizer) {
+    @objc func tapGestureCallback(_ tapGesture: UITapGestureRecognizer) {
         if self.openSide != .none && self.animatingDrawer == false {
             self.closeDrawer(animated: true, completion: { _ in
                 if self.gestureCompletionBlock != nil {
@@ -1100,7 +1100,7 @@ open class DrawerController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
 
-    func panGestureCallback(_ panGesture: UIPanGestureRecognizer) {
+    @objc func panGestureCallback(_ panGesture: UIPanGestureRecognizer) {
         switch panGesture.state {
         case .began:
             if self.animatingDrawer {

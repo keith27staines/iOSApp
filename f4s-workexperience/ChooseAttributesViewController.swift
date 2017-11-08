@@ -46,7 +46,7 @@ extension ChooseAttributesViewController {
         for bank in template.blank {
             if bank.name == self.currentAttributeType?.rawValue {
                 self.currentTemplateBank = bank
-                self.currentTemplateBank?.choices.sort(by: { $0.0.value < $0.1.value })
+                self.currentTemplateBank?.choices.sort(by: { $0.value < $1.value })
                 self.selectedTemplateChoices = TemplateChoiceDBOperations.sharedInstance.getTemplateChoicesForCurrentUserWithName(name: bank.name)
             }
         }
@@ -159,7 +159,7 @@ extension ChooseAttributesViewController: UITableViewDelegate, UITableViewDataSo
 
 // MARK: - user interaction
 extension ChooseAttributesViewController {
-    func popViewController(_: UIBarButtonItem) {
+    @objc func popViewController(_: UIBarButtonItem) {
         if let navCtrl = self.navigationController {
             navCtrl.popViewController(animated: true)
         }

@@ -92,7 +92,7 @@ extension NotificationViewController {
         rightButton.backgroundColor = UIColor(netHex: Colors.mediumGreen)
         rightButton.layer.cornerRadius = 10
         rightButton.layer.masksToBounds = true
-        rightButton.setAttributedTitle(NSAttributedString(string: rightButtonText, attributes: [NSFontAttributeName: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFontWeightRegular), NSForegroundColorAttributeName: UIColor(netHex: Colors.white)]), for: .normal)
+        rightButton.setAttributedTitle(NSAttributedString(string: rightButtonText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.white)]), for: .normal)
         
         rightButton.setBackgroundColor(color: UIColor(netHex: Colors.mediumGreen), forUIControlState: .normal)
         rightButton.setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)
@@ -102,17 +102,17 @@ extension NotificationViewController {
         leftButton.layer.cornerRadius = 10
         leftButton.layer.borderColor = UIColor(netHex: Colors.mediumGreen).cgColor
         leftButton.layer.borderWidth = 0.5
-        leftButton.setAttributedTitle(NSAttributedString(string: leftButtonText, attributes: [NSFontAttributeName: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFontWeightRegular), NSForegroundColorAttributeName: UIColor(netHex: Colors.black)]), for: .normal)
+        leftButton.setAttributedTitle(NSAttributedString(string: leftButtonText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)]), for: .normal)
     }
 
     func setupLabels(titleText: String, contentText: String) {
-        titleLabel.attributedText = NSAttributedString(string: titleText, attributes: [NSFontAttributeName: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFontWeightSemibold), NSForegroundColorAttributeName: UIColor(netHex: Colors.black)])
+        titleLabel.attributedText = NSAttributedString(string: titleText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold.rawValue), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
 
-        let font = UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFontWeightRegular)
+        let font = UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular.rawValue)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = lineHeight - font.lineHeight
 
-        contentLabel.attributedText = NSAttributedString(string: contentText, attributes: [NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor(netHex: Colors.black), NSParagraphStyleAttributeName: paragraphStyle])
+        contentLabel.attributedText = NSAttributedString(string: contentText, attributes: [NSAttributedStringKey.font: font, NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black), NSAttributedStringKey.paragraphStyle: paragraphStyle])
         contentLabel.frame.size.width = self.view.frame.size.width - 100
 
         contentLabel.numberOfLines = 0

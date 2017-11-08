@@ -61,7 +61,7 @@ extension ContentViewController {
 
 // MARK: - user interaction
 extension ContentViewController {
-    func dismissPage() {
+    @objc func dismissPage() {
         self.dismiss(animated: true, completion: nil)
     }
 }

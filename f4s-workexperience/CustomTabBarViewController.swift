@@ -96,15 +96,15 @@ extension CustomTabBarViewController {
         reachability = nil
     }
 
-    func reachabilityChanged(_ note: Notification) {
+    @objc func reachabilityChanged(_ note: Notification) {
         guard let reachability = note.object as? Reachability else {
             return
         }
-        if reachability.isReachable {
+        if reachability.connection == .none {
+            debugPrint("network not reachable")
+        } else {
             debugPrint("network is reachable")
             self.checkForUnreadMessages()
-        } else {
-            debugPrint("network not reachable")
         }
     }
 }

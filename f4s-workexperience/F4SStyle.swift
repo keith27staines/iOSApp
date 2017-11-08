@@ -82,7 +82,7 @@ public struct F4SStyling {
         /// caption2 is 11 point at standard size
         var caption2 = UIFont.preferredFont(forTextStyle: .caption2)
         /// Returns a font with monospaced digits useful for vertically aligning numbers
-        func monospacedDigitFont(ofSize size: CGFloat, weight: UIFontWeight) -> UIFont {
+        func monospacedDigitFont(ofSize size: CGFloat, weight: UIFont.Weight) -> UIFont {
             return UIFont.monospacedDigitSystemFont(ofSize: size, weight: weight)
         }
     }

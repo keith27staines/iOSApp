@@ -46,12 +46,12 @@ extension SuccessExtraInfoViewController {
         let mapStr = NSLocalizedString("Map", comment: "")
 
         let infoAttr = [
-            NSForegroundColorAttributeName: UIColor(netHex: Colors.black),
-            NSFontAttributeName: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFontWeightRegular),
+            NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black),
+            NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular.rawValue),
         ]
         let boldedInfoAttr = [
-            NSForegroundColorAttributeName: UIColor(netHex: Colors.black),
-            NSFontAttributeName: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFontWeightBold),
+            NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black),
+            NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.bold.rawValue),
         ]
 
         let infoNsStr = NSString(string: infoStr)
@@ -73,7 +73,7 @@ extension SuccessExtraInfoViewController {
 
         self.timelineButton.layer.masksToBounds = true
         self.timelineButton.layer.cornerRadius = 10
-        self.timelineButton.setAttributedTitle(NSAttributedString(string: timelineStr, attributes: [NSFontAttributeName: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFontWeightRegular), NSForegroundColorAttributeName: UIColor(netHex: Colors.white)]), for: .normal)
+        self.timelineButton.setAttributedTitle(NSAttributedString(string: timelineStr, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.white)]), for: .normal)
         self.timelineButton.setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)
         self.timelineButton.setBackgroundColor(color: UIColor(netHex: Colors.whiteGreen), forUIControlState: .disabled)
         self.timelineButton.setBackgroundColor(color: UIColor(netHex: Colors.mediumGreen), forUIControlState: .normal)
@@ -82,7 +82,7 @@ extension SuccessExtraInfoViewController {
 
         self.viewMapButton.layer.masksToBounds = true
         self.viewMapButton.layer.cornerRadius = 10
-        self.viewMapButton.setAttributedTitle(NSAttributedString(string: mapStr, attributes: [NSFontAttributeName: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFontWeightRegular), NSForegroundColorAttributeName: UIColor(netHex: Colors.white)]), for: .normal)
+        self.viewMapButton.setAttributedTitle(NSAttributedString(string: mapStr, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.white)]), for: .normal)
 
         self.viewMapButton.setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)
         self.viewMapButton.setBackgroundColor(color: UIColor(netHex: Colors.whiteGreen), forUIControlState: .disabled)

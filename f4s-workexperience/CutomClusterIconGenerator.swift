@@ -17,8 +17,8 @@ class CustomClusterIconGenerator: NSObject, GMUClusterIconGenerator {
 
         let text = String(size)
         let attributedString = NSAttributedString(string: text, attributes: [
-            NSFontAttributeName: font,
-            NSForegroundColorAttributeName: UIColor.white,
+            NSAttributedStringKey.font: font,
+            NSAttributedStringKey.foregroundColor: UIColor.white,
         ])
         let textSize = attributedString.size()
         let rect = CGRect(x: 0, y: 0, width: 60, height: 60)

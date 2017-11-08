@@ -58,7 +58,7 @@ class CompanyDetailsViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
-    func applicationDidRegisterForRemoteNotificationsNotification(_: NSNotification) {
+    @objc func applicationDidRegisterForRemoteNotificationsNotification(_: NSNotification) {
         if let comp = self.company {
             CustomNavigationHelper.sharedInstance.presentCoverLetterController(parentCtrl: self, currentCompany: comp)
         }
@@ -246,7 +246,7 @@ extension CompanyDetailsViewController {
                         strongSelf.applyButton.setBackgroundColor(color: UIColor(netHex: Colors.orangeNormal), forUIControlState: .normal)
                         strongSelf.applyButton.setBackgroundColor(color: UIColor(netHex: Colors.orangeActive), forUIControlState: .highlighted)
 
-                        strongSelf.applyButton.setAttributedTitle(NSAttributedString(string: applyText, attributes: [NSFontAttributeName: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFontWeightRegular), NSForegroundColorAttributeName: UIColor.white]), for: .normal)
+                        strongSelf.applyButton.setAttributedTitle(NSAttributedString(string: applyText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor.white]), for: .normal)
                     }
 
                     if UIApplication.shared.isRegisteredForRemoteNotifications {
@@ -318,14 +318,14 @@ extension CompanyDetailsViewController {
             applyButton.setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)
         }
         applyButton.layer.cornerRadius = 10
-        applyButton.setAttributedTitle(NSAttributedString(string: applyText, attributes: [NSFontAttributeName: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFontWeightRegular), NSForegroundColorAttributeName: UIColor.white]), for: .normal)
+        applyButton.setAttributedTitle(NSAttributedString(string: applyText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor.white]), for: .normal)
         applyButton.setTitleColor(UIColor.white, for: .normal)
         applyButton.setTitleColor(UIColor.white, for: .highlighted)
 
         seeAcountsButton.layer.cornerRadius = 10
         seeAcountsButton.backgroundColor = UIColor(netHex: Colors.normalGray)
         let accountsText = NSLocalizedString("See accounts and who you know", comment: "")
-        seeAcountsButton.setAttributedTitle(NSAttributedString(string: accountsText, attributes: [NSFontAttributeName: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFontWeightRegular), NSForegroundColorAttributeName: UIColor.black]), for: .normal)
+        seeAcountsButton.setAttributedTitle(NSAttributedString(string: accountsText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor.black]), for: .normal)
 
         closeButton.setImage(UIImage(named: "closeButton"), for: .normal)
         shareButton.setImage(UIImage(named: "shareButton"), for: .normal)
@@ -360,7 +360,7 @@ extension CompanyDetailsViewController {
             return
         }
 
-        firmNameLabel.attributedText = NSAttributedString(string: company.name, attributes: [NSFontAttributeName: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFontWeightSemibold), NSForegroundColorAttributeName: UIColor.black])
+        firmNameLabel.attributedText = NSAttributedString(string: company.name, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold.rawValue), NSAttributedStringKey.foregroundColor: UIColor.black])
     }
 
     func setupTextView() {
@@ -368,7 +368,7 @@ extension CompanyDetailsViewController {
             return
         }
 
-        firmDescriptionTextView.attributedText = NSAttributedString(string: company.summary, attributes: [NSFontAttributeName: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFontWeightRegular), NSForegroundColorAttributeName: UIColor.black])
+        firmDescriptionTextView.attributedText = NSAttributedString(string: company.summary, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor.black])
         firmDescriptionTextView.scrollRectToVisible(CGRect(x: 0, y: 0, width: 0, height: 0), animated: false)
         firmDescriptionTextView.isEditable = false
     }
@@ -409,7 +409,7 @@ extension CompanyDetailsViewController {
         let sizeOfText = getSizeOfText(text: popupText)
         popupView.frame = CGRect(x: 10, y: shortlistButton.frame.origin.y - (sizeOfText.height + 30), width: sizeOfText.width + 10, height: 37)
         let textLabel = UILabel(frame: CGRect(x: 5, y: (30 - (sizeOfText.height + 10)) / 2, width: sizeOfText.width, height: sizeOfText.height + 10))
-        textLabel.attributedText = NSAttributedString(string: popupText, attributes: [NSFontAttributeName: UIFont.f4sSystemFont(size: Style.smallerTextSize, weight: UIFontWeightSemibold), NSForegroundColorAttributeName: UIColor.white])
+        textLabel.attributedText = NSAttributedString(string: popupText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerTextSize, weight: UIFont.Weight.semibold.rawValue), NSAttributedStringKey.foregroundColor: UIColor.white])
         textLabel.textAlignment = .center
         
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: sizeOfText.width + 10 , height: 37))
@@ -440,7 +440,7 @@ extension CompanyDetailsViewController {
     
     func getSizeOfText(text: String) -> CGSize {
         let textString = text as NSString
-        let attributes = [NSFontAttributeName: UIFont.f4sSystemFont(size: Style.smallerTextSize, weight: UIFontWeightSemibold)]
+        let attributes = [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerTextSize, weight: UIFont.Weight.semibold.rawValue)]
         let rect = textString.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude), options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
         
         return CGSize(width: rect.width, height: round(rect.height))
@@ -542,7 +542,7 @@ extension CompanyDetailsViewController {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: IndustryCellIdentifier, for: indexPath) as? IndustryTableViewCell else {
                     return UITableViewCell()
                 }
-                cell.industryLabel.attributedText = NSAttributedString(string: company.industry, attributes: [NSFontAttributeName: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFontWeightLight), NSForegroundColorAttributeName: UIColor.black])
+                cell.industryLabel.attributedText = NSAttributedString(string: company.industry, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.light.rawValue), NSAttributedStringKey.foregroundColor: UIColor.black])
                 return cell
             } else if company.rating != 0 && company.rating.round() != 0 {
                 // rating cell
@@ -550,7 +550,7 @@ extension CompanyDetailsViewController {
                     return UITableViewCell()
                 }
                 cell.setupStars(rating: company.rating)
-                cell.starsLabel.attributedText = NSAttributedString(string: String(company.rating), attributes: [NSFontAttributeName: UIFont.f4sSystemFont(size: Style.biggerVerySmallTextSize, weight: UIFontWeightSemibold), NSForegroundColorAttributeName: UIColor(netHex: Colors.black)])
+                cell.starsLabel.attributedText = NSAttributedString(string: String(company.rating), attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerVerySmallTextSize, weight: UIFont.Weight.semibold.rawValue), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
                 return cell
             } else if company.employeeCount != 0 || company.turnover != 0 || company.turnoverGrowth != 0 {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: OtherCellIdentifier, for: indexPath) as? CompanyOtherTableViewCell else {
@@ -567,7 +567,7 @@ extension CompanyDetailsViewController {
                     return UITableViewCell()
                 }
                 cell.setupStars(rating: company.rating)
-                cell.starsLabel.attributedText = NSAttributedString(string: String(company.rating), attributes: [NSFontAttributeName: UIFont.f4sSystemFont(size: Style.biggerVerySmallTextSize, weight: UIFontWeightSemibold), NSForegroundColorAttributeName: UIColor(netHex: Colors.black)])
+                cell.starsLabel.attributedText = NSAttributedString(string: String(company.rating), attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerVerySmallTextSize, weight: UIFont.Weight.semibold.rawValue), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
                 return cell
             } else if company.employeeCount != 0 || company.turnover != 0 || company.turnoverGrowth != 0 {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: OtherCellIdentifier, for: indexPath as IndexPath) as? CompanyOtherTableViewCell else {

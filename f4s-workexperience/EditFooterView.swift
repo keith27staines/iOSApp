@@ -26,7 +26,7 @@ class EditFooterView: UIView {
             view.backgroundColor = UIColor(netHex: Colors.lightGray)
             view.frame = frame
 
-            let string1 = NSAttributedString(string: EditFooterView.footerString, attributes: [NSFontAttributeName: UIFont.f4sSystemFont(size: Style.smallTextSize, weight: UIFontWeightRegular), NSForegroundColorAttributeName: UIColor(netHex: Colors.gray)])
+            let string1 = NSAttributedString(string: EditFooterView.footerString, attributes: [NSFontAttributeName: UIFont.f4sSystemFont(size: Style.smallTextSize, weight: UIFontWeightRegular.rawValue), NSForegroundColorAttributeName: UIColor(netHex: Colors.gray)])
             footerLabel.numberOfLines = 3
             footerLabel.attributedText = string1
             self.addSubview(view)

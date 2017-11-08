@@ -21,7 +21,7 @@ class MessageOptionHelper {
     let horizontalSpacing: CGFloat = 20
     let multipleQuestionAnswerCellHeight: CGFloat = 44
 
-    func getCellSize(options: [MessageOption], index: Int, font: UIFont = UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFontWeightRegular)) -> CGSize {
+    func getCellSize(options: [MessageOption], index: Int, font: UIFont = UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular.rawValue)) -> CGSize {
         let screenWidth: CGFloat = UIScreen.main.bounds.width - 40
         let cellWidth: CGFloat = (screenWidth - 5) / 2
         let labelWidth: CGFloat = cellWidth - horizontalSpacing
@@ -56,7 +56,7 @@ class MessageOptionHelper {
         }
     }
 
-    func getFooterSize(options: [MessageOption], font _: UIFont = UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFontWeightRegular)) -> CGSize {
+    func getFooterSize(options: [MessageOption], font _: UIFont = UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular.rawValue)) -> CGSize {
         var footerHeight: CGFloat = 0
         var index: Int = 0
         while index < options.count {
@@ -70,7 +70,7 @@ class MessageOptionHelper {
     func getTextSize(_ text: String, font: UIFont, maxWidth: CGFloat) -> CGSize {
         let textString = text as NSString
 
-        let attributes = [NSFontAttributeName: font]
+        let attributes = [NSAttributedStringKey.font: font]
         let rect = textString.boundingRect(with: CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude), options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
 
         return CGSize(width: rect.width, height: round(rect.height))

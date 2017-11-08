@@ -117,9 +117,9 @@ extension CompanyOtherTableViewCell {
                 guard let cell = customCollectionView.dequeueReusableCell(withReuseIdentifier: CompanyCollectionIdentifier, for: indexPath) as? CompanyCollectionViewCell else {
                     return UICollectionViewCell()
                 }
-                cell.numberLabel.attributedText = NSAttributedString(string: self.getEmployeeString(), attributes: [NSFontAttributeName: UIFont.f4sSystemFont(size: Style.extraLargeTextSize, weight: UIFontWeightRegular), NSForegroundColorAttributeName: UIColor(netHex: Colors.gray)])
+                cell.numberLabel.attributedText = NSAttributedString(string: self.getEmployeeString(), attributes: [NSFontAttributeName: UIFont.f4sSystemFont(size: Style.extraLargeTextSize, weight: UIFontWeightRegular.rawValue), NSForegroundColorAttributeName: UIColor(netHex: Colors.gray)])
                 let text = NSLocalizedString("Employees", comment: "")
-                cell.textLabel.attributedText = NSAttributedString(string: text, attributes: [NSFontAttributeName: UIFont.f4sSystemFont(size: Style.verySmallTextSize, weight: UIFontWeightRegular), NSForegroundColorAttributeName: UIColor(netHex: Colors.gray).withAlphaComponent(0.5)])
+                cell.textLabel.attributedText = NSAttributedString(string: text, attributes: [NSFontAttributeName: UIFont.f4sSystemFont(size: Style.verySmallTextSize, weight: UIFontWeightRegular.rawValue), NSForegroundColorAttributeName: UIColor(netHex: Colors.gray).withAlphaComponent(0.5)])
                 return cell
             } else if company.turnover != 0 {
                 guard let cell = customCollectionView.dequeueReusableCell(withReuseIdentifier: CompanyCollectionIdentifier, for: indexPath) as? CompanyCollectionViewCell else {

@@ -22,7 +22,7 @@ class MessageOptionsView: UICollectionReusableView {
     var optionCollectionFlowLayout: MessageOptionsCollectionFlowLayout?
     weak var messageOptionFlowProtocol: MessageOptionFlowProtocol?
     let lock = NSLock()
-    var removeAnswerCompleted: () -> Void = { _ in }
+    var removeAnswerCompleted: () -> Void = {  }
     let animationTime: TimeInterval = 0.2
 
     override func awakeFromNib() {
@@ -96,7 +96,7 @@ class MessageOptionsView: UICollectionReusableView {
         }
     }
 
-    func deleteCells() {
+    @objc func deleteCells() {
         if self.optionsToLoad.count > 0 {
             self.messageOptionFlowProtocol?.shouldAnimateCells(true)
             let lastCellIndexPath = IndexPath(item: self.optionsToLoad.count - 1, section: 0)
@@ -114,7 +114,7 @@ class MessageOptionsView: UICollectionReusableView {
         }
     }
 
-    func insertCells() {
+    @objc func insertCells() {
         let currentIndex = self.optionsToLoad.count
         self.messageOptionFlowProtocol?.shouldAnimateCells(true)
         if currentIndex < self.optionList.count {
@@ -226,8 +226,8 @@ extension MessageOptionsView: UICollectionViewDelegateFlowLayout, UICollectionVi
         }
         cell.answerLabel.attributedText = NSAttributedString(string: self.optionsToLoad[indexPath.row].value,
                                                              attributes: [
-                                                                 NSForegroundColorAttributeName: UIColor.white,
-                                                                 NSFontAttributeName: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFontWeightRegular),
+                                                                 NSAttributedStringKey.foregroundColor: UIColor.white,
+                                                                 NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular.rawValue),
         ])
         cell.answerLabel.backgroundColor = UIColor(netHex: Colors.mediumGreen)
         cell.answerLabel.layer.cornerRadius = 10

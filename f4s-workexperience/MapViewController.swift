@@ -251,12 +251,9 @@ extension MapViewController {
         paragraph.alignment = .center
         paragraph.tailIndent = 163
         
-        self.refineSearchLabel.attributedText = NSAttributedString(string: refineStr, attributes: [
-            NSFontAttributeName: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize,
-                                                      weight: UIFontWeightRegular),
-            NSForegroundColorAttributeName: UIColor.black,
-            NSParagraphStyleAttributeName: paragraph,
-            ])
+        self.refineSearchLabel.attributedText = NSAttributedString(
+            string: refineStr,
+            attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.paragraphStyle: paragraph])
     }
     
     fileprivate func setupFramesAndSizes() {
@@ -290,9 +287,9 @@ extension MapViewController {
         searchLocationTextField!.hidesWhenSelected = true
         searchLocationTextField!.hidesWhenEmpty = true
         searchLocationTextField!.enableAttributedText = true
-        var attributes = [String: AnyObject]()
-        attributes[NSForegroundColorAttributeName] = UIColor.black
-        attributes[NSFontAttributeName] = UIFont(name: "HelveticaNeue-Bold", size: 15.0)
+        var attributes = [NSAttributedStringKey: AnyObject]()
+        attributes[NSAttributedStringKey.foregroundColor] = UIColor.black
+        attributes[NSAttributedStringKey.font] = UIFont(name: "HelveticaNeue-Bold", size: 15.0)
         searchLocationTextField!.autoCompleteAttributes = attributes
         
         searchLocationTextField.returnKeyType = .search
@@ -307,18 +304,12 @@ extension MapViewController {
         guard let infoWindow = Bundle.main.loadNibNamed("InfoWindowView", owner: self, options: nil)?.first as? InfoWindowView else {
             return UIView()
         }
-        infoWindow.companyNameLabel.attributedText = NSAttributedString(string: company.name,
-                                                                        attributes: [
-                                                                            NSFontAttributeName: UIFont.systemFont(ofSize: Style.largeTextSize,
-                                                                                                                   weight: UIFontWeightSemibold),
-                                                                            NSForegroundColorAttributeName: UIColor.black,
-                                                                            ])
-        infoWindow.industryNameLabel.attributedText = NSAttributedString(string: company.industry,
-                                                                         attributes: [
-                                                                            NSFontAttributeName: UIFont.systemFont(ofSize: Style.smallerMediumTextSize,
-                                                                                                                   weight: UIFontWeightLight),
-                                                                            NSForegroundColorAttributeName: UIColor.black,
-                                                                            ])
+        
+        infoWindow.companyNameLabel.attributedText = NSAttributedString(
+            string: company.name, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: Style.largeTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor.black])
+        
+        infoWindow.industryNameLabel.attributedText = NSAttributedString(
+            string: company.industry, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: Style.smallerMediumTextSize, weight: UIFont.Weight.light), NSAttributedStringKey.foregroundColor: UIColor.black])
         
         if !company.logoUrl.isEmpty, let url = NSURL(string: company.logoUrl) {
             ImageService.sharedInstance.getImage(url: url, completed: {
@@ -342,8 +333,8 @@ extension MapViewController {
             
             infoWindow.ratingLabel.attributedText = NSAttributedString(
                 string: String(format: "%.1f", company.rating),
-                attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: Style.biggerVerySmallTextSize, weight: UIFontWeightSemibold),
-                             NSForegroundColorAttributeName: UIColor.black])
+                attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: Style.biggerVerySmallTextSize, weight: UIFont.Weight.semibold),
+                             NSAttributedStringKey.foregroundColor: UIColor.black])
         }
         
         let height = infoWindow.backgroundView.bounds.height
@@ -642,7 +633,7 @@ extension MapViewController: UITextFieldDelegate {
         self.searchLocationTextField.becomeFirstResponder()
     }
     
-    func endSearch(_: UITapGestureRecognizer) {
+    @objc func endSearch(_: UITapGestureRecognizer) {
         self.searchLocationTextField.resignFirstResponder()
     }
     
@@ -853,9 +844,9 @@ extension MapViewController {
         reachability = nil
     }
     
-    func reachabilityChanged(_ note: Notification) {
+    @objc func reachabilityChanged(_ note: Notification) {
         let reachability = note.object as! Reachability
-        if reachability.isReachable {
+        if reachability.connection != .none {
             debugPrint("network is reachable")
             let dbService = DatabaseService.sharedInstance
             if !dbService.isLocalDatabaseAvailable() && !dbService.isDownloadInProgress {
