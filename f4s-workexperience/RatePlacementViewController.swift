@@ -49,11 +49,9 @@ extension RatePlacementViewController {
         self.submitButton.layer.masksToBounds = true
         self.submitButton.adjustsImageWhenHighlighted = false
 
-        let titleAtrString = NSAttributedString(string: NSLocalizedString("Submit", comment: ""),
-                                                attributes: [
-                                                    NSFontAttributeName: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize,
-                                                                                              weight: UIFontWeightRegular),
-                                                    NSForegroundColorAttributeName: UIColor.white,
+        let titleAtrString = NSAttributedString(
+            string: NSLocalizedString("Submit", comment: ""),
+            attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor.white,
         ])
         self.submitButton.setAttributedTitle(titleAtrString, for: .normal)
 
@@ -68,22 +66,15 @@ extension RatePlacementViewController {
     func setupLabels() {
         let questionStr = NSLocalizedString("How was your work experience at ?", comment: "")
 
-        let questionAttrStr = NSMutableAttributedString(string: questionStr,
-                                                        attributes: [
-                                                            NSFontAttributeName: UIFont.f4sSystemFont(size: Style.largeTextSize,
-                                                                                                      weight: UIFontWeightRegular),
-                                                            NSForegroundColorAttributeName: UIColor.black,
-        ])
+        let questionAttrStr = NSMutableAttributedString(
+            string: questionStr,
+            attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor.black,])
         if let companyName = self.company?.name {
-            let companyNameAttrStr = NSMutableAttributedString(string: companyName,
-                                                               attributes: [
-                                                                   NSFontAttributeName: UIFont.f4sSystemFont(size: Style.largeTextSize,
-                                                                                                             weight: UIFontWeightSemibold),
-                                                                   NSForegroundColorAttributeName: UIColor.black,
-            ])
+            let companyNameAttrStr = NSMutableAttributedString(
+                string: companyName,
+                attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize,weight: UIFont.Weight.semibold.rawValue),NSAttributedStringKey.foregroundColor: UIColor.black])
             questionAttrStr.insert(companyNameAttrStr, at: questionStr.characters.count - 1)
         }
-
         self.questionLabel.attributedText = questionAttrStr
     }
 
@@ -137,7 +128,7 @@ extension RatePlacementViewController {
     @IBAction func submitButtonTouched(_: UIButton) {
 
         if let reachability = Reachability() {
-            if !reachability.isReachable {
+            if reachability.connection == .none {
                 MessageHandler.sharedInstance.display("No Internet Connection.", parentCtrl: self)
                 debugPrint("No internet connection")
                 return

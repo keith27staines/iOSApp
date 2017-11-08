@@ -29,7 +29,7 @@ class MenuHelper: NSObject {
 
     // MARK: - Button Handlers
 
-    func leftDrawerButtonPress(sender _: AnyObject?) {
+    @objc func leftDrawerButtonPress(sender _: AnyObject?) {
         self.navigationController?.evo_drawerController?.toggleDrawerSide(.left, animated: true, completion: nil)
     }
 

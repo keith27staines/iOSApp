@@ -59,7 +59,7 @@ open class AutoCompleteTextField: UITextField {
     /// Shows autocomplete text with formatting
     open var enableAttributedText = false
     /// User Defined Attributes
-    open var autoCompleteAttributes: [String: AnyObject]?
+    open var autoCompleteAttributes: [NSAttributedStringKey: AnyObject]?
     /// Hides autocomplete tableview after selecting a suggestion
     open var hidesWhenSelected = true
     /// Hides autocomplete tableview when the textfield is empty
@@ -108,8 +108,8 @@ open class AutoCompleteTextField: UITextField {
 
     fileprivate func commonInit() {
         hidesWhenEmpty = true
-        autoCompleteAttributes = [NSForegroundColorAttributeName: UIColor.black]
-        autoCompleteAttributes![NSFontAttributeName] = UIFont.boldSystemFont(ofSize: 12)
+        autoCompleteAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black]
+        autoCompleteAttributes![NSAttributedStringKey.font] = UIFont.boldSystemFont(ofSize: 12)
         self.clearButtonMode = .whileEditing
         self.addTarget(self, action: #selector(AutoCompleteTextField.textFieldDidChange), for: .editingChanged)
         self.addTarget(self, action: #selector(AutoCompleteTextField.textFieldDidEndEditing), for: .editingDidEnd)
@@ -204,7 +204,7 @@ open class AutoCompleteTextField: UITextField {
         }
 
         if enableAttributedText {
-            let attrs = [NSForegroundColorAttributeName: autoCompleteTextColor, NSFontAttributeName: autoCompleteTextFont] as [String: Any]
+            let attrs = [NSAttributedStringKey.foregroundColor: autoCompleteTextColor, NSAttributedStringKey.font: autoCompleteTextFont] as [NSAttributedStringKey: Any]
 
             if attributedAutoCompleteStrings.count > 0 {
                 attributedAutoCompleteStrings.removeAll(keepingCapacity: false)
@@ -231,7 +231,7 @@ open class AutoCompleteTextField: UITextField {
         }
     }
 
-    func textFieldDidChange() {
+    @objc func textFieldDidChange() {
         guard let _ = text else {
             return
         }
@@ -240,7 +240,7 @@ open class AutoCompleteTextField: UITextField {
         if text!.isEmpty { autoCompleteStrings = nil }
     }
 
-    func textFieldDidEndEditing() {
+    @objc func textFieldDidEndEditing() {
         debugPrint("textfielddidendediting")
         self.autoCompleteTableView?.isHidden = true
         DispatchQueue.main.async(execute: { () in
