@@ -751,7 +751,10 @@ open class DrawerController: UIViewController, UIGestureRecognizerDelegate {
      - parameter completion: The block called when the animation is finished.
 
      */
-    open func setMaximumRightDrawerWidth(_ width: CGFloat, animated: Bool, completion: ((Bool) -> Void)?) {
+    open func setMaximumRightDrawerWidth(
+        _ width: CGFloat,
+        animated: Bool,
+        completion: ((Bool) -> Void)?) {
         self.setMaximumDrawerWidth(width, forSide: .right, animated: animated, completion: completion)
     }
 
@@ -903,10 +906,10 @@ open class DrawerController: UIViewController, UIGestureRecognizerDelegate {
     /**
      Sets the new `centerViewController`.
 
-     This sets the view controller and will automatically adjust the frame based on the current state of the drawer controller. If `closeAnimated` is YES, it will immediately change the center view controller, and close the drawer from its current position.
+     This sets the view controller and will automatically adjust the frame based on the current state of the drawer controller. If `animated` is YES, it will immediately change the center view controller, and close the drawer from its current position.
 
-     - parameter centerViewController: The new `centerViewController`.
-     - parameter closeAnimated: Determines whether the drawer should be closed with an animation.
+     - parameter newCenterViewController: The new `centerViewController`.
+     - parameter animated: Determines whether the drawer should be closed with an animation.
      - parameter completion: The block called when the animation is finsihed.
 
      */
@@ -947,7 +950,7 @@ open class DrawerController: UIViewController, UIGestureRecognizerDelegate {
      This sets the view controller and will automatically adjust the frame based on the current state of the drawer controller. If `closeFullAnimated` is YES, the current center view controller will animate off the screen, the new center view controller will then be set, followed by the drawer closing across the full width of the screen.
 
      - parameter newCenterViewController: The new `centerViewController`.
-     - parameter fullCloseAnimated: Determines whether the drawer should be closed with an animation.
+     - parameter animated: Determines whether the drawer should be closed with an animation.
      - parameter completion: The block called when the animation is finsihed.
 
      */
