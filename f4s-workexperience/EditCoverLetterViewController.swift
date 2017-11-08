@@ -96,7 +96,7 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
             return UITableViewCell()
         }
         cell.backgroundColor = UIColor.white
-        cell.editTextLabel.attributedText = NSAttributedString(string: arrayTextEdit[indexPath.row], attributes: [NSFontAttributeName: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFontWeightRegular), NSForegroundColorAttributeName: UIColor.black])
+        cell.editTextLabel.attributedText = NSAttributedString(string: arrayTextEdit[indexPath.row], attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.black])
 
         cell.arrowImageView.isHidden = false
         cell.arrowImageView.image = UIImage(named: "rightArrow")
@@ -171,7 +171,7 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
             cell.editTextLabel.text = arrayTextEdit[0]
         }
 
-        cell.editValueLabel.attributedText = NSAttributedString(string: cell.editValueLabel.text!, attributes: [NSFontAttributeName: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFontWeightRegular), NSForegroundColorAttributeName: UIColor(netHex: Colors.mediumGray)])
+        cell.editValueLabel.attributedText = NSAttributedString(string: cell.editValueLabel.text!, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.mediumGray)])
 
         return cell
     }
@@ -293,7 +293,7 @@ extension EditCoverLetterViewController {
         }
     }
 
-    func popViewController(_: UIBarButtonItem) {
+    @objc func popViewController(_: UIBarButtonItem) {
         if let navCtrl = self.navigationController {
             navCtrl.popViewController(animated: true)
         }
@@ -322,7 +322,7 @@ extension EditCoverLetterViewController {
     func setupButtons() {
         updateButton.layer.cornerRadius = 10
         let buttonText = NSLocalizedString("Update Cover Letter", comment: "")
-        let string = NSAttributedString(string: buttonText, attributes: [NSFontAttributeName: UIFont.f4sSystemFont(size: Style.mediumTextSize, weight: UIFontWeightRegular), NSForegroundColorAttributeName: UIColor.white])
+        let string = NSAttributedString(string: buttonText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.mediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.white])
         updateButton.setAttributedTitle(string, for: .normal)
         updateButton.setBackgroundColor(color: UIColor(netHex: Colors.mediumGreen), forUIControlState: .normal)
         updateButton.setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)
@@ -371,8 +371,8 @@ extension EditCoverLetterViewController {
         cell.contentView.addSubview(startDatePicker)
         startDatePickerChanged(sender: startDatePicker)
     }
-
-    func startDatePickerChanged(sender: UIDatePicker) {
+    
+    @objc func startDatePickerChanged(sender: UIDatePicker) {
         guard let startDate = sender.date.dateToStringRfc3339() else {
             return
         }
@@ -418,7 +418,7 @@ extension EditCoverLetterViewController {
         endDatePickerChanged(sender: endDatePicker)
     }
 
-    func endDatePickerChanged(sender: UIDatePicker) {
+    @objc func endDatePickerChanged(sender: UIDatePicker) {
         guard let endDate = sender.date.dateToStringRfc3339() else {
             return
         }

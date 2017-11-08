@@ -124,13 +124,12 @@ extension ExtraInfoViewController {
         let voucherString = NSLocalizedString("Voucher code (Optional)", comment: "")
 
         let placeHolderAttributes = [
-            NSForegroundColorAttributeName: UIColor(netHex: Colors.pinkishGrey),
-            NSFontAttributeName: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFontWeightRegular),
+            NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.pinkishGrey),
+            NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular),
         ]
-        let inputStringAttributes = [
-            NSForegroundColorAttributeName: UIColor(netHex: Colors.black),
-            NSFontAttributeName: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFontWeightRegular),
-        ]
+        let inputStringAttributes: [String: Any] = [
+            NSAttributedStringKey.foregroundColor.rawValue: UIColor(netHex: Colors.black),
+            NSAttributedStringKey.font.rawValue: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular)]
 
         dobTextField.attributedPlaceholder = NSAttributedString(string: dobString, attributes: placeHolderAttributes)
         firstAndLastNameTextField.attributedPlaceholder = NSAttributedString(string: nameString, attributes: placeHolderAttributes)
@@ -157,12 +156,12 @@ extension ExtraInfoViewController {
         let voucherString2 = NSLocalizedString("tap here", comment: "")
 
         let infoAttributes = [
-            NSForegroundColorAttributeName: UIColor(netHex: Colors.warmGrey),
-            NSFontAttributeName: UIFont.f4sSystemFont(size: Style.smallTextSize, weight: UIFontWeightRegular),
+            NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.warmGrey),
+            NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize, weight: UIFont.Weight.regular),
         ]
         let semiBoldInfoAttributes = [
-            NSForegroundColorAttributeName: UIColor(netHex: Colors.warmGrey),
-            NSFontAttributeName: UIFont.f4sSystemFont(size: Style.smallTextSize, weight: UIFontWeightSemibold),
+            NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.warmGrey),
+            NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize, weight: UIFont.Weight.semibold),
         ]
 
         let dobInfoString1Attr = NSAttributedString(string: dobInfoString1,
@@ -469,7 +468,7 @@ extension ExtraInfoViewController {
 // MARK: - User Interaction
 extension ExtraInfoViewController {
 
-    func doneButtonTouched() {
+    @objc func doneButtonTouched() {
         let dateFormatter1 = DateFormatter()
         dateFormatter1.dateFormat = "d MMMM yyyy"
 
@@ -492,11 +491,11 @@ extension ExtraInfoViewController {
         })
     }
 
-    func cancelButtonTouched() {
+    @objc func cancelButtonTouched() {
         dobTextField.resignFirstResponder()
     }
 
-    func didTapDobInfoLabel(recognizer: UITapGestureRecognizer) {
+    @objc func didTapDobInfoLabel(recognizer: UITapGestureRecognizer) {
         guard let string = dobInfoLabel.attributedText else {
             return
         }
@@ -528,7 +527,7 @@ extension ExtraInfoViewController {
         }
     }
 
-    func didTapNoVoucherInfoLabel(recognizer: UITapGestureRecognizer) {
+    @objc func didTapNoVoucherInfoLabel(recognizer: UITapGestureRecognizer) {
         guard let string = noVoucherInfoLabel.attributedText else {
             return
         }
@@ -617,7 +616,7 @@ extension ExtraInfoViewController {
     @IBAction func completeInfoButtonTouched(_: UIButton) {
         self.view.endEditing(true)
         if let reachability = Reachability() {
-            if !reachability.isReachable {
+            if !reachability.isReachableByAnyMeans {
                 MessageHandler.sharedInstance.display("No Internet Connection.", parentCtrl: self)
                 return
             }

@@ -48,8 +48,8 @@ extension OnboardingViewController {
         let enableLocationText = NSLocalizedString("Enable location to find opportunities", comment: "")
         let enterLocationText = NSLocalizedString("Enter location manually", comment: "")
 
-        enableLocationButton.setAttributedTitle(NSAttributedString(string: enableLocationText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.mediumTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor.black]), for: .normal)
-        enterLocationButton.setAttributedTitle(NSAttributedString(string: enterLocationText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.mediumTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor.white]), for: .normal)
+        enableLocationButton.setAttributedTitle(NSAttributedString(string: enableLocationText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.mediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.black]), for: .normal)
+        enterLocationButton.setAttributedTitle(NSAttributedString(string: enterLocationText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.mediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.white]), for: .normal)
 
         enableLocationButton.backgroundColor = UIColor.white
         enterLocationButton.backgroundColor = UIColor.clear
@@ -63,7 +63,7 @@ extension OnboardingViewController {
 
     func setupLabels() {
         let descriptionText = NSLocalizedString("Helping you find work", comment: "")
-        descriptionLabel.attributedText = NSAttributedString(string: descriptionText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.hugeTextSize, weight: UIFont.Weight.thin.rawValue), NSAttributedStringKey.foregroundColor: UIColor.white])
+        descriptionLabel.attributedText = NSAttributedString(string: descriptionText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.hugeTextSize, weight: UIFont.Weight.thin), NSAttributedStringKey.foregroundColor: UIColor.white])
     }
 
     func setupAppearance() {

@@ -30,7 +30,7 @@ class MessageViewController: JSQMessagesViewController {
         self.collectionView?.register(StatusCollectionViewCell.self, forCellWithReuseIdentifier: StatusCollectionViewCellIdentifier)
         self.collectionView?.collectionViewLayout.incomingAvatarViewSize = CGSize(width: 14, height: 0)
         self.collectionView?.collectionViewLayout.outgoingAvatarViewSize = CGSize(width: 14, height: 0)
-        self.collectionView?.collectionViewLayout.messageBubbleFont = UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFontWeightRegular)
+        self.collectionView?.collectionViewLayout.messageBubbleFont = UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular)
         self.collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         self.collectionView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         self.view.layoutIfNeeded()
@@ -79,7 +79,7 @@ extension MessageViewController {
                 return UICollectionViewCell()
             }
             statusCell.statusLabel.textColor = UIColor(netHex: Colors.black)
-            statusCell.statusLabel.font = UIFont.f4sSystemFont(size: Style.smallTextSize, weight: UIFontWeightRegular)
+            statusCell.statusLabel.font = UIFont.f4sSystemFont(size: Style.smallTextSize, weight: UIFont.Weight.regular)
             statusCell.statusLabel.text = self.chatMessages[indexPath.row].text
             return statusCell
         }
@@ -91,12 +91,12 @@ extension MessageViewController {
         {
         case self.currentUserUuid:
             cell.textView?.textColor = UIColor(netHex: Colors.white)
-            cell.textView?.linkTextAttributes = [NSForegroundColorAttributeName: UIColor(netHex: Colors.white), NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
+            cell.textView?.linkTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: UIColor(netHex: Colors.white), NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue]
         default:
             cell.textView?.textColor = UIColor(netHex: Colors.black)
-            cell.textView?.linkTextAttributes = [NSForegroundColorAttributeName: UIColor(netHex: Colors.black), NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
+            cell.textView?.linkTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: UIColor(netHex: Colors.black), NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue]
         }
-        cell.textView?.font = UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFontWeightRegular)
+        cell.textView?.font = UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular)
 
         if self.selectedIndex >= 0 && indexPath.row == self.selectedIndex {
             switch chatMessages[indexPath.row].senderId

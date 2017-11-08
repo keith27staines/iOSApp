@@ -53,16 +53,16 @@ extension ProcessedMessagesViewController {
         
         addInfoButton.layer.masksToBounds = true
         addInfoButton.layer.cornerRadius = 10
-        addInfoButton.setAttributedTitle(NSAttributedString(string: addInfoText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor.white]), for: .normal)
+        addInfoButton.setAttributedTitle(NSAttributedString(string: addInfoText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.white]), for: .normal)
     }
 
     func setupLabels() {
         let receivedLabelText = NSLocalizedString("Thanks, we've received your application for work experience at ", comment: "")
 
         let formattedString = NSMutableAttributedString()
-        formattedString.append(NSAttributedString(string: receivedLabelText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)]))
+        formattedString.append(NSAttributedString(string: receivedLabelText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)]))
         if let currentCompanyName = currentCompany?.name {
-            formattedString.append(NSAttributedString(string: currentCompanyName, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold.rawValue), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)]))
+            formattedString.append(NSAttributedString(string: currentCompanyName, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)]))
         }
         self.receivedLabel.attributedText = formattedString
 
@@ -71,7 +71,7 @@ extension ProcessedMessagesViewController {
         self.receivedLabel.textAlignment = .center
 
         let extraInformationText = NSLocalizedString("To complete your application we need a couple more bits of information", comment: "")
-        self.extraInformationLabel.attributedText = NSAttributedString(string: extraInformationText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
+        self.extraInformationLabel.attributedText = NSAttributedString(string: extraInformationText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
 
         self.extraInformationLabel.numberOfLines = 0
         self.extraInformationLabel.sizeToFit()

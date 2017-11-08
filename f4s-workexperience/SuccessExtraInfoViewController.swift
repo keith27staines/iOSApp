@@ -47,11 +47,11 @@ extension SuccessExtraInfoViewController {
 
         let infoAttr = [
             NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black),
-            NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular.rawValue),
+            NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular),
         ]
         let boldedInfoAttr = [
             NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black),
-            NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.bold.rawValue),
+            NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.bold),
         ]
 
         let infoNsStr = NSString(string: infoStr)
@@ -73,7 +73,7 @@ extension SuccessExtraInfoViewController {
 
         self.timelineButton.layer.masksToBounds = true
         self.timelineButton.layer.cornerRadius = 10
-        self.timelineButton.setAttributedTitle(NSAttributedString(string: timelineStr, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.white)]), for: .normal)
+        self.timelineButton.setAttributedTitle(NSAttributedString(string: timelineStr, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.white)]), for: .normal)
         self.timelineButton.setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)
         self.timelineButton.setBackgroundColor(color: UIColor(netHex: Colors.whiteGreen), forUIControlState: .disabled)
         self.timelineButton.setBackgroundColor(color: UIColor(netHex: Colors.mediumGreen), forUIControlState: .normal)
@@ -82,7 +82,7 @@ extension SuccessExtraInfoViewController {
 
         self.viewMapButton.layer.masksToBounds = true
         self.viewMapButton.layer.cornerRadius = 10
-        self.viewMapButton.setAttributedTitle(NSAttributedString(string: mapStr, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular.rawValue), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.white)]), for: .normal)
+        self.viewMapButton.setAttributedTitle(NSAttributedString(string: mapStr, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.white)]), for: .normal)
 
         self.viewMapButton.setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)
         self.viewMapButton.setBackgroundColor(color: UIColor(netHex: Colors.whiteGreen), forUIControlState: .disabled)

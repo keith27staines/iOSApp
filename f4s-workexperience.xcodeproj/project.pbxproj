@@ -146,6 +146,7 @@
 		D54E10071E044BC100A51560 /* ProcessedMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54E10061E044BC100A51560 /* ProcessedMessagesViewController.swift */; };
 		D5E9EBE81DD60AB300BD796E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5E9EBEA1DD60AB300BD796E /* Localizable.strings */; };
 		D5E9EC021DDD9F9000BD796E /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E9EC011DDD9F9000BD796E /* GradientView.swift */; };
+		FC11006A1FB36A230055EB9A /* ReachabilityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */; };
 		FC25A05F1F850DF4002F51A9 /* F4SCompanyPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */; };
 		FC4BB6031FA20EF700173864 /* PartnerSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BB6021FA20EF700173864 /* PartnerSelectionViewController.swift */; };
 		FC4BB6051FA20F4100173864 /* Partner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BB6041FA20F4100173864 /* Partner.swift */; };
@@ -388,6 +389,7 @@
 		EC68C46BEC140D8D307D851A /* Pods-f4s-workexperienceTests.releasecaf.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperienceTests.releasecaf.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperienceTests/Pods-f4s-workexperienceTests.releasecaf.xcconfig"; sourceTree = "<group>"; };
 		EF342E9F354D697386AFC80D /* Pods_f4s_workexperienceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_f4s_workexperienceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F099185A6CFD493B891494B1 /* Pods-f4s-workexperienceUITests.releasef4s.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperienceUITests.releasef4s.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperienceUITests/Pods-f4s-workexperienceUITests.releasef4s.xcconfig"; sourceTree = "<group>"; };
+		FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityExtension.swift; sourceTree = "<group>"; };
 		FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyPin.swift; sourceTree = "<group>"; };
 		FC4BB6021FA20EF700173864 /* PartnerSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerSelectionViewController.swift; sourceTree = "<group>"; };
 		FC4BB6041FA20F4100173864 /* Partner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Partner.swift; sourceTree = "<group>"; };
@@ -708,6 +710,7 @@
 			isa = PBXGroup;
 			children = (
 				40E78E9F1DD5E208000A3776 /* LocationHelper.swift */,
+				FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */,
 			);
 			name = Utiles;
 			sourceTree = "<group>";
@@ -1473,6 +1476,7 @@
 				40C1A4F51DDEF3DD000F80AA /* AutoCompleteTableViewCell.swift in Sources */,
 				40E78E6E1DD32BD4000A3776 /* BaseMenuViewController.swift in Sources */,
 				40E78E711DD32BD4000A3776 /* SideMenuViewController.swift in Sources */,
+				FC11006A1FB36A230055EB9A /* ReachabilityExtension.swift in Sources */,
 				204203F91E4B81AB007C7409 /* FavouriteTableViewCell.swift in Sources */,
 				40E78E581DD32964000A3776 /* Constants.swift in Sources */,
 				40C1A51C1DDF5ACE000F80AA /* GMUGridBasedClusterAlgorithm.m in Sources */,
@@ -1783,7 +1787,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/f4s-workexperience/f4s-workexperience-Bridging-Header.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1803,7 +1807,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.f4s-workexperienceTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s-workexperience.app/f4s-workexperience";
 			};
@@ -1877,7 +1881,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/f4s-workexperience/f4s-workexperience-Bridging-Header.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1897,7 +1901,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.f4s-workexperienceTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s-workexperience.app/f4s-workexperience";
 			};
@@ -1977,7 +1981,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/f4s-workexperience/f4s-workexperience-Bridging-Header.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1997,7 +2001,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.f4s-workexperienceTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s-workexperience.app/f4s-workexperience";
 			};
@@ -2071,7 +2075,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/f4s-workexperience/f4s-workexperience-Bridging-Header.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -2091,7 +2095,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.f4s-workexperienceTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s-workexperience.app/f4s-workexperience";
 			};

@@ -13,7 +13,7 @@ import Mustache
 class SocialShareItemSource: NSObject, UIActivityItemSource {
     var company: Company?
 
-    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType) -> Any? {
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
         if activityType == UIActivityType.message {
             return self.getTextForType(socialShareType: .sms)
         } else if activityType == UIActivityType.mail {
