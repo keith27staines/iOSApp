@@ -218,11 +218,22 @@ extension CustomMenuViewController {
     func setupLabels() {
         let label = UILabel()
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-            label.text = "v" + version
+            let versionString = "v" + version
+            let environmentString: String
+            switch Config.ENVIRONMENT {
+            case "DEV":
+                environmentString = "(STAGING)"
+            case "PROD":
+                environmentString = ""
+            default:
+                environmentString = "(UNKNOWN ENVIRONMENT)"
+            }
+            label.text = versionString + " " + environmentString
         }
         label.frame = CGRect(x: 30, y: self.view.frame.size.height - 55, width: 31, height: 14)
         label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 12)
+        label.sizeToFit()
         self.view.addSubview(label)
     }
 }
