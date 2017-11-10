@@ -9,6 +9,9 @@
 import Foundation
 
 public class PartnersModel {
+    
+    let ncsUID = "15e5a0a6-02cc-4e98-8edb-c3bfc0cb8b7d"
+    
     public var showWillProvidePartnerLater: Bool = false {
         didSet {
             if showWillProvidePartnerLater {
@@ -33,7 +36,7 @@ public class PartnersModel {
     
     public init() {
         partners = [F4SUUID:Partner]()
-        partnersArray = [Partner.partnerProvidedLater]
+        partnersArray = []
     }
     
     public func getPartners(completed: @escaping (_ success:Bool) -> Void) {
@@ -41,21 +44,33 @@ public class PartnersModel {
             completed(true)
             return
         }
-        PartnerService.sharedInstance.getAllPartners { [weak self] (success, partnerResult) in
-            guard let strongSelf = self else { return }
-            switch partnerResult {
-            case .value(let boxedPartners):
-                let unboxedPartners = boxedPartners.value
-                for partner in unboxedPartners {
-                    strongSelf.addOrReplacePartner(partner)
-                }
-                strongSelf.isReady = true
-            case .error:
-                completed(false)
-            case .deffinedError:
-                completed(false)
-            }
-        }
+        getHardCodedPartners()
+        completed(true)
+//        PartnerService.sharedInstance.getAllPartners { [weak self] (success, partnerResult) in
+//            guard let strongSelf = self else { return }
+//            switch partnerResult {
+//            case .value(let boxedPartners):
+//                let unboxedPartners = boxedPartners.value
+//                for partner in unboxedPartners {
+//                    strongSelf.addOrReplacePartner(partner)
+//                }
+//                strongSelf.isReady = true
+//            case .error:
+//                completed(false)
+//            case .deffinedError:
+//                completed(false)
+//            }
+//        }
+    }
+    
+    private func getHardCodedPartners() {
+        var ncsPartner = Partner(uuid: ncsUID, name: "National Citizen Service")
+        ncsPartner.imageName = "partnerLogoNCS"
+        addOrReplacePartner(ncsPartner)
+        addOrReplacePartner(Partner(uuid: "2c4a2c39-eac7-4573-aa14-51c17810e7a1", name: "Parent (includes guardian)"))
+        addOrReplacePartner(Partner(uuid: "96638617-13df-489e-bb10-e02a3dc3391b", name: "My School"))
+        addOrReplacePartner(Partner(uuid: "1c72eb94-538c-4a39-b0db-20a9f8269d35", name: "My Friend"))
+        addOrReplacePartner(Partner.partnerProvidedLater)
     }
     
     /// Adds the specified partner to the local model if it exists in the model
@@ -109,16 +124,7 @@ public class PartnersModel {
     
     /// Returns the partner with the specified id, if such a partner exists.
     func partnerForUuid(_ uuid:F4SUUID) -> Partner? {
-        if let partner = self.partners[uuid] { return partner }
-        var partner: Partner
-        switch uuid {
-        case "15e5a0a6-02cc-4e98-8edb-c3bfc0cb8b7d":
-            partner = Partner(uuid: "15e5a0a6-02cc-4e98-8edb-c3bfc0cb8b7d", name: "NCS")
-        default:
-            partner = Partner(uuid: "other", name: "other")
-        }
-        addOrReplacePartner(partner)
-        return partner
+        return self.partners[uuid]
     }
     
     /// Tests whether the user has selected a partner
