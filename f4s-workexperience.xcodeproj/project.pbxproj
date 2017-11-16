@@ -167,6 +167,10 @@
 		FCB6D9361F75056100B8C268 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCB6D9351F75056000B8C268 /* Branding.plist */; };
 		FCC5EBB61F449C310085CE15 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FCC5EBB51F449C310085CE15 /* README.md */; };
 		FCC753EE1F80F26200E9ECD6 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC753ED1F80F26200E9ECD6 /* MapModel.swift */; };
+		FCCD6AE71FBB42A90088D7C7 /* PopupCompanyList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCCD6AE61FBB42A90088D7C7 /* PopupCompanyList.storyboard */; };
+		FCCD6AE91FBB44CF0088D7C7 /* PopupCompanyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCD6AE81FBB44CF0088D7C7 /* PopupCompanyListViewController.swift */; };
+		FCCD6AEB1FBB4B8A0088D7C7 /* CompanyInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCD6AEA1FBB4B8A0088D7C7 /* CompanyInfoTableViewCell.swift */; };
+		FCF0D16C1FBC244800F2AF1D /* PopupAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -410,6 +414,10 @@
 		FCB6D9351F75056000B8C268 /* Branding.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
 		FCC5EBB51F449C310085CE15 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FCC753ED1F80F26200E9ECD6 /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
+		FCCD6AE61FBB42A90088D7C7 /* PopupCompanyList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PopupCompanyList.storyboard; sourceTree = "<group>"; };
+		FCCD6AE81FBB44CF0088D7C7 /* PopupCompanyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupCompanyListViewController.swift; sourceTree = "<group>"; };
+		FCCD6AEA1FBB4B8A0088D7C7 /* CompanyInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyInfoTableViewCell.swift; sourceTree = "<group>"; };
+		FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupAnimator.swift; sourceTree = "<group>"; };
 		FDE6CAD61FAB3CA16090531A /* Pods-f4s-workexperienceUITests.debugf4s.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperienceUITests.debugf4s.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperienceUITests/Pods-f4s-workexperienceUITests.debugf4s.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -892,6 +900,7 @@
 				40A5CF381DED6F8D000007AB /* InterestsView.storyboard */,
 				40E78E931DD391F3000A3776 /* MapView.storyboard */,
 				40C1A4F11DDEF2F6000F80AA /* AutoCompleteTableViewCell.xib */,
+				FCF0D16A1FBC213400F2AF1D /* Company info popup */,
 			);
 			name = Map;
 			sourceTree = "<group>";
@@ -1087,6 +1096,17 @@
 			name = "Branding and styling";
 			sourceTree = "<group>";
 		};
+		FCF0D16A1FBC213400F2AF1D /* Company info popup */ = {
+			isa = PBXGroup;
+			children = (
+				FCCD6AE61FBB42A90088D7C7 /* PopupCompanyList.storyboard */,
+				FCCD6AE81FBB44CF0088D7C7 /* PopupCompanyListViewController.swift */,
+				FCCD6AEA1FBB4B8A0088D7C7 /* CompanyInfoTableViewCell.swift */,
+				FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */,
+			);
+			name = "Company info popup";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1216,6 +1236,7 @@
 				D54E10051E044BA000A51560 /* ProcessedMessages.storyboard in Resources */,
 				40E78E951DD391F3000A3776 /* MapView.storyboard in Resources */,
 				2002A5661E4CAAB4000825BC /* FavouritesPopup.storyboard in Resources */,
+				FCCD6AE71FBB42A90088D7C7 /* PopupCompanyList.storyboard in Resources */,
 				204C895F1DF5F03200D8493A /* ChooseAttributes.storyboard in Resources */,
 				206F8F981E1E590A0024937B /* MessageOptionsView.xib in Resources */,
 				FC681C001F57473D0077BECA /* Podfile in Resources */,
@@ -1419,6 +1440,7 @@
 				205EB20B1DDB161D00034424 /* DatabaseOperations.swift in Sources */,
 				40E78E8C1DD32C3C000A3776 /* LoadingOverlay.swift in Sources */,
 				200F640F1DF19995002F5F36 /* Errors.swift in Sources */,
+				FCCD6AEB1FBB4B8A0088D7C7 /* CompanyInfoTableViewCell.swift in Sources */,
 				40C1A51E1DDF5ACE000F80AA /* GMUSimpleClusterAlgorithm.m in Sources */,
 				40A5CF3C1DED6FA2000007AB /* InterestsViewController.swift in Sources */,
 				40E78E701DD32BD4000A3776 /* MenuHelper.swift in Sources */,
@@ -1428,6 +1450,7 @@
 				204C89781DF5F0B200D8493A /* ChooseAttributesTableViewCell.swift in Sources */,
 				FCA6D2941FA741590037962B /* F4SStyle.swift in Sources */,
 				FC4BB6051FA20F4100173864 /* Partner.swift in Sources */,
+				FCCD6AE91FBB44CF0088D7C7 /* PopupCompanyListViewController.swift in Sources */,
 				20B127DF1DD99E5700CE3F1F /* UserService.swift in Sources */,
 				204203EC1E4B160C007C7409 /* ShortlistCoreDataManager.swift in Sources */,
 				202091AC1DF84BCF003F5B48 /* SocialShareItemSource.swift in Sources */,
@@ -1467,6 +1490,7 @@
 				20FEBDDA1DE5AD3400EBDCBF /* ImageService.swift in Sources */,
 				FCA6D2961FA75DE40037962B /* Styler.swift in Sources */,
 				FC25A05F1F850DF4002F51A9 /* F4SCompanyPin.swift in Sources */,
+				FCF0D16C1FBC244800F2AF1D /* PopupAnimator.swift in Sources */,
 				40C6DDF21E03F401000F8806 /* UserInfoCoreDataManager.swift in Sources */,
 				40E78E8D1DD32C3C000A3776 /* MessageHandler.swift in Sources */,
 				FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */,

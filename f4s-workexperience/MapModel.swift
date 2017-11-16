@@ -104,6 +104,19 @@ public struct MapModel {
         self.interestsModel = InterestsModel(allInterests: allInterests)
         self.quadTree = MapModel.createQuadtree(filteredCompanyPinSet)
     }
+    
+    /// Returns the company pins in a square centred on the specified point
+    ///
+    /// - parameter pos: the position on which the rectangle is centred
+    /// - parameter width: the length of a side of the square in meters
+    public func pinsNear(_ pos: CLLocationCoordinate2D, side: Double) -> F4SCompanyPinSet {
+        let delta = side / 2.0 / 6370_000.0 * 180.0 / Double.pi
+        let southWest = CLLocationCoordinate2D(latitude:pos.latitude-delta, longitude: pos.longitude-delta)
+        let northEast = CLLocationCoordinate2D(latitude: CLLocationDegrees(pos.latitude+delta), longitude: CLLocationDegrees(pos.longitude+delta))
+        let bounds = GMSCoordinateBounds(coordinate: southWest, coordinate: northEast)
+        let pins = companyPinSetInsideBounds(bounds)
+        return pins
+    }
 }
 
 // MARK:- public API for getting interests
