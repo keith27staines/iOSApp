@@ -79,7 +79,7 @@
                                 </prototypes>
                             </tableView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="240" verticalCompressionResistancePriority="240" image="downDisclosureTriangle" translatesAutoresizingMaskIntoConstraints="NO" id="lWb-ba-2Dk">
-                                <rect key="frame" x="305" y="219" width="50" height="50"/>
+                                <rect key="frame" x="305" y="211" width="50" height="50"/>
                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="lWb-ba-2Dk" secondAttribute="height" multiplier="1:1" id="0ln-jn-dfq"/>
@@ -104,10 +104,10 @@
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="lWb-ba-2Dk" firstAttribute="trailing" secondItem="Rq8-DK-bNZ" secondAttribute="trailing" id="0rF-YD-viP"/>
-                            <constraint firstItem="lWb-ba-2Dk" firstAttribute="bottom" secondItem="Rq8-DK-bNZ" secondAttribute="bottom" id="1JL-07-AmP"/>
                             <constraint firstItem="aHG-UM-LX1" firstAttribute="top" secondItem="FHO-9Y-m8f" secondAttribute="top" id="20W-k9-qpn"/>
                             <constraint firstItem="2Pp-hS-zBE" firstAttribute="leading" secondItem="k9D-3n-hdQ" secondAttribute="leading" constant="20" id="2ad-ET-jTk"/>
                             <constraint firstItem="k9D-3n-hdQ" firstAttribute="trailing" secondItem="aHG-UM-LX1" secondAttribute="trailing" constant="10" id="3Bh-jY-D5O"/>
+                            <constraint firstItem="lWb-ba-2Dk" firstAttribute="height" secondItem="Rq8-DK-bNZ" secondAttribute="height" id="4n7-tj-1Ab"/>
                             <constraint firstItem="k9D-3n-hdQ" firstAttribute="trailing" secondItem="2Pp-hS-zBE" secondAttribute="trailing" constant="20" id="7Cq-Xj-Enz"/>
                             <constraint firstItem="FHO-9Y-m8f" firstAttribute="top" secondItem="k9D-3n-hdQ" secondAttribute="top" constant="10" id="8t2-jz-qIF"/>
                             <constraint firstItem="aHG-UM-LX1" firstAttribute="height" secondItem="FHO-9Y-m8f" secondAttribute="height" id="DNU-CL-TBL"/>
@@ -122,7 +122,7 @@
                             <constraint firstItem="W07-FX-wkL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="yaW-m0-o4J" secondAttribute="bottom" constant="40" id="oBq-B7-zHA"/>
                             <constraint firstItem="k9D-3n-hdQ" firstAttribute="trailing" secondItem="W07-FX-wkL" secondAttribute="trailing" constant="20" id="rDv-Hs-sxI"/>
                             <constraint firstItem="Rq8-DK-bNZ" firstAttribute="top" secondItem="2Pp-hS-zBE" secondAttribute="bottom" constant="20" id="tGF-5P-bku"/>
-                            <constraint firstItem="lWb-ba-2Dk" firstAttribute="top" secondItem="Rq8-DK-bNZ" secondAttribute="top" id="udu-nh-js3"/>
+                            <constraint firstItem="lWb-ba-2Dk" firstAttribute="top" secondItem="Rq8-DK-bNZ" secondAttribute="top" constant="-8" id="udu-nh-js3"/>
                             <constraint firstItem="k9D-3n-hdQ" firstAttribute="trailing" secondItem="yaW-m0-o4J" secondAttribute="trailing" constant="20" id="uqJ-5v-2LJ"/>
                             <constraint firstItem="FHO-9Y-m8f" firstAttribute="leading" secondItem="k9D-3n-hdQ" secondAttribute="leading" constant="10" id="ygd-N9-4gi"/>
                         </constraints>
