@@ -9,7 +9,10 @@
 import UIKit
 
 class GradientView: UIView {
-
+    override public class var layerClass: Swift.AnyClass {
+        return CAGradientLayer.self
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initializeGradient()
@@ -23,11 +26,8 @@ class GradientView: UIView {
     func initializeGradient() {
         let colorTop = UIColor(netHex: Colors.blueGradientTop).cgColor
         let colorBottom = UIColor(netHex: Colors.BlueGradientBottom).cgColor
-        let gradientLayer = CAGradientLayer()
+        let gradientLayer = layer as! CAGradientLayer
         gradientLayer.colors = [colorTop, colorBottom]
-        gradientLayer.locations = [0.0, 1.0]
-        gradientLayer.frame.size = self.frame.size
-
-        self.layer.addSublayer(gradientLayer)
     }
+
 }

@@ -55,7 +55,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A7Q-nn-dEQ">
-                                <rect key="frame" x="16" y="498.5" width="343" height="67"/>
+                                <rect key="frame" x="16" y="499" width="343" height="66.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Enable location to find opportunities">
@@ -65,10 +65,10 @@
                                     <action selector="enableLocationButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bJd-bq-IN7"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PiK-1m-Nwy">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PiK-1m-Nwy" userLabel="UpperSpacingView">
                                 <rect key="frame" x="67" y="0.0" width="240" height="72"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IHG-3h-2nq">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IHG-3h-2nq" userLabel="LowerSpacingView">
                                 <rect key="frame" x="67" y="208" width="241" height="71.5"/>
                             </view>
                         </subviews>
@@ -78,13 +78,14 @@
                             <constraint firstItem="PiK-1m-Nwy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3aw-1t-Plm"/>
                             <constraint firstItem="A7Q-nn-dEQ" firstAttribute="height" secondItem="Z5T-pH-WH3" secondAttribute="height" id="4tv-Aj-e05"/>
                             <constraint firstAttribute="trailing" secondItem="BGh-Il-Lfg" secondAttribute="trailing" id="55v-8W-Uxe"/>
+                            <constraint firstItem="BGh-Il-Lfg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7oK-GO-Lkl"/>
                             <constraint firstItem="IHG-3h-2nq" firstAttribute="height" secondItem="PiK-1m-Nwy" secondAttribute="height" id="9ug-Ov-jfE"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="PiK-1m-Nwy" secondAttribute="trailing" constant="52" id="Eto-Fb-CXj"/>
                             <constraint firstItem="lQB-tZ-QZi" firstAttribute="top" secondItem="PiK-1m-Nwy" secondAttribute="bottom" id="HV8-k0-gwO"/>
                             <constraint firstItem="IHG-3h-2nq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="HjI-Hd-7R4"/>
                             <constraint firstItem="IHG-3h-2nq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="51" id="Iab-9m-PZd"/>
                             <constraint firstItem="lQB-tZ-QZi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Kvg-Lj-qPD"/>
                             <constraint firstItem="b61-9y-s8U" firstAttribute="top" secondItem="IHG-3h-2nq" secondAttribute="bottom" id="MTC-Hy-pJk"/>
+                            <constraint firstAttribute="trailing" secondItem="BGh-Il-Lfg" secondAttribute="trailing" id="Nh6-eo-t73"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Z5T-pH-WH3" secondAttribute="bottom" constant="20" id="Nnk-TF-tNI"/>
                             <constraint firstItem="BGh-Il-Lfg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Q4I-Lg-8Ba"/>
                             <constraint firstItem="Z5T-pH-WH3" firstAttribute="top" secondItem="A7Q-nn-dEQ" secondAttribute="bottom" constant="15" id="Wyh-60-hk1"/>
