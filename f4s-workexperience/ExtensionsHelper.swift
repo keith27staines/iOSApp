@@ -34,7 +34,7 @@ extension String {
         } catch _ as NSError {
             regex = nil
         }
-        return regex?.firstMatch(in: self, options: [], range: NSMakeRange(0, self.characters.count)) != nil
+        return regex?.firstMatch(in: self, options: [], range: NSMakeRange(0, self.count)) != nil
     }
 
     func isValidName() -> Bool {
@@ -44,7 +44,7 @@ extension String {
         } catch _ as NSError {
             regexSymbols = nil
         }
-        if (regexSymbols?.numberOfMatches(in: self, options: [], range: NSMakeRange(0, self.characters.count)))! > 0 {
+        if (regexSymbols?.numberOfMatches(in: self, options: [], range: NSMakeRange(0, self.count)))! > 0 {
             return false
         }
         return true
@@ -57,7 +57,7 @@ extension String {
         } catch _ as NSError {
             regexSymbols = nil
         }
-        if (regexSymbols?.numberOfMatches(in: self, options: [], range: NSMakeRange(0, self.characters.count)))! > 0 || self.characters.contains(" ") {
+        if (regexSymbols?.numberOfMatches(in: self, options: [], range: NSMakeRange(0, self.count)))! > 0 || self.contains(" ") {
             return false
         }
         return true

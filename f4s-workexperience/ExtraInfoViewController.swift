@@ -593,13 +593,13 @@ extension ExtraInfoViewController {
 
     @IBAction func voucherCodeTextFieldDidChange(_ sender: NextResponderTextField) {
         if let senderText = sender.text {
-            if senderText.isVoucherCode() && senderText.characters.count == 6 {
+            if senderText.isVoucherCode() && senderText.count == 6 {
                 self.voucherCodeUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
             }
-            if senderText.characters.count != 6 {
+            if senderText.count != 6 {
                 self.voucherCodeUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
             }
-            if senderText.characters.count == 0 {
+            if senderText.count == 0 {
                 self.voucherCodeUnderlineView.backgroundColor = UIColor(netHex: Colors.warmGrey)
             }
         }
