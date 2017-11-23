@@ -162,3 +162,28 @@ extension CustomTabBarViewController: RatePlacementProtocol {
 protocol RatePlacementProtocol: class {
     func dismissRateController()
 }
+
+extension CustomTabBarViewController {
+    static func rewindToDrawerAndSelectTab(vc: UIViewController, index: Int) {
+        recursiveRewindToDrawer(from: vc, completion: { drawerController in
+            guard let centerController = drawerController?.centerViewController else { return }
+            guard let tabBarCtrl = centerController as? CustomTabBarViewController else { return }
+            tabBarCtrl.selectedIndex = index
+        })
+    }
+    
+    static func recursiveRewindToDrawer(from vc: UIViewController?, completion: @escaping (DrawerController?) -> Void) {
+        guard let vc = vc else {
+            completion(nil)
+            return
+        }
+        if let drawerController = vc as? DrawerController {
+            completion(drawerController)
+            return
+        }
+        let presentingViewController = vc.presentingViewController
+        vc.dismiss(animated: false, completion: {
+            return recursiveRewindToDrawer(from: presentingViewController, completion: completion)
+        })
+    }
+}

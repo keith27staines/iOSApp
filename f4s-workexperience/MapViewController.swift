@@ -12,6 +12,9 @@ import GooglePlaces
 import Reachability
 
 class MapViewController: UIViewController {
+    
+    static let hideAllPopupsNotificationName = Notification.Name(rawValue:"hideAllPopups")
+    
     /// Displays the map
     @IBOutlet var mapView: GMSMapView!
     
@@ -188,7 +191,7 @@ class MapViewController: UIViewController {
     }
     
     func configureMap() {
-        mapView.setMinZoom(6.0, maxZoom: 15.0)
+        mapView.setMinZoom(6.0, maxZoom: 16.0)
         mapView.settings.tiltGestures = false
         mapView.settings.rotateGestures = false
     }
@@ -602,7 +605,7 @@ extension MapViewController  {
     // Moves the camera to show the specified bounds
     func moveCamera(toShow bounds: GMSCoordinateBounds) {
         DispatchQueue.main.async { [weak self] in
-            guard let mapView = self?.mapView, let mapEdgeInsets = self?.mapEdgeInsets else {
+            guard let mapView = self?.mapView else {
                 return
             }
             mapView.animate(with: GMSCameraUpdate.fit(bounds))
@@ -828,7 +831,7 @@ extension MapViewController: GMUClusterManagerDelegate {
         if !canZoomIn() {
             return false
         }
-        guard let explodedBounds = boundsForExplodedClusterContent(cluster), let visibleBounds = self.visibleMapBounds else {
+        guard let explodedBounds = boundsForExplodedClusterContent(cluster), let _ = self.visibleMapBounds else {
             return false
         }
         if cluster.items.count < 11 || explodedBounds.diagonalDistance() < 200 {

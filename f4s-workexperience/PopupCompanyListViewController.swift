@@ -15,6 +15,11 @@ class PopupCompanyListViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var doneButton: UIBarButtonItem!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        registerForNotifications()
+    }
+    
     @IBAction func doneButtonPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -37,5 +42,26 @@ extension PopupCompanyListViewController : UITableViewDelegate, UITableViewDataS
         cell.company = company
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let company = companies[indexPath.row]
+        CustomNavigationHelper.sharedInstance.showCompanyDetailsPopover(parentCtrl: self, company: company)
+    }
+}
 
+// MARK:- Notifictions
+extension PopupCompanyListViewController {
+    func registerForNotifications() {
+        let nc = NotificationCenter.default
+        nc.addObserver(forName:MapViewController.hideAllPopupsNotificationName, object:nil, queue:nil, using:catchNotification)
+    }
+    
+    func catchNotification(notification:Notification) -> Void {
+        switch notification.name {
+        case MapViewController.hideAllPopupsNotificationName:
+            dismiss(animated: true, completion: nil)
+        default:
+            break
+        }
+    }
 }

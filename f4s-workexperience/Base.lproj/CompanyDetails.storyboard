@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0Q6-Bd-LZR">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Company Details View Controller-->
+        <!--Company Info-->
         <scene sceneID="Pjw-5O-imX">
             <objects>
                 <viewController storyboardIdentifier="CompanyDetailsCtrl" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0Q6-Bd-LZR" customClass="CompanyDetailsViewController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
@@ -66,10 +67,13 @@
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BEY-Ws-Uht">
                                         <rect key="frame" x="138.5" y="587" width="216.5" height="60"/>
+                                        <color key="backgroundColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="Ppq-bb-Zm1"/>
                                         </constraints>
-                                        <state key="normal" title="Button"/>
+                                        <state key="normal" title="Apply button">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="applyButton:" destination="0Q6-Bd-LZR" eventType="touchUpInside" id="0aJ-Il-rb9"/>
                                         </connections>
@@ -164,17 +168,18 @@
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8tJ-uX-efi">
-                                                            <rect key="frame" x="235" y="-3" width="42" height="21"/>
+                                                            <rect key="frame" x="236" y="-3" width="42" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8tJ-uX-efi" secondAttribute="trailing" priority="999" constant="8" id="1hM-Ip-TRA"/>
                                                         <constraint firstItem="bhq-aF-1K4" firstAttribute="centerX" secondItem="nq9-Li-beS" secondAttribute="centerX" id="OaS-g3-axl"/>
                                                         <constraint firstItem="bhq-aF-1K4" firstAttribute="top" secondItem="nq9-Li-beS" secondAttribute="top" id="Qz2-86-Ee7"/>
                                                         <constraint firstItem="8tJ-uX-efi" firstAttribute="centerY" secondItem="bhq-aF-1K4" secondAttribute="centerY" id="fc8-bO-zn3"/>
-                                                        <constraint firstItem="bhq-aF-1K4" firstAttribute="trailing" secondItem="8tJ-uX-efi" secondAttribute="leading" constant="-10" id="g9m-Ee-8YI"/>
+                                                        <constraint firstItem="8tJ-uX-efi" firstAttribute="leading" secondItem="amJ-yC-ddA" secondAttribute="trailing" constant="11" id="uQg-3g-qpv"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
@@ -201,7 +206,7 @@
                                                             </constraints>
                                                         </view>
                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="e1V-UD-4LR">
-                                                            <rect key="frame" x="0.0" y="1" width="335" height="60"/>
+                                                            <rect key="frame" x="0.0" y="1" width="335" height="58"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="eVA-vK-NkI">
                                                                 <size key="itemSize" width="100" height="70"/>
@@ -254,7 +259,7 @@
                                                             </cells>
                                                         </collectionView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SSA-w1-9Ni">
-                                                            <rect key="frame" x="0.0" y="60" width="335" height="1"/>
+                                                            <rect key="frame" x="0.0" y="58" width="335" height="1"/>
                                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="sQx-8A-edz"/>
@@ -287,7 +292,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="pUT-93-xhv"/>
                                         </constraints>
-                                        <state key="normal" title="Button"/>
+                                        <state key="normal" title="company info button"/>
                                         <connections>
                                             <action selector="seeAccountsButton:" destination="0Q6-Bd-LZR" eventType="touchUpInside" id="kVV-UZ-FCG"/>
                                         </connections>
@@ -324,7 +329,6 @@
                                     <constraint firstItem="AVo-K5-djM" firstAttribute="centerY" secondItem="Ymj-Fv-9DS" secondAttribute="centerY" id="fmm-Tw-mst"/>
                                     <constraint firstItem="Ymj-Fv-9DS" firstAttribute="leading" secondItem="iCq-ty-4y3" secondAttribute="leading" constant="15" id="ifl-ir-6mC"/>
                                     <constraint firstItem="DAT-9E-MNk" firstAttribute="top" secondItem="iCq-ty-4y3" secondAttribute="top" constant="46" id="jTw-EU-31N"/>
-                                    <constraint firstItem="gbG-dB-pG4" firstAttribute="leading" secondItem="iCq-ty-4y3" secondAttribute="leading" constant="20" id="k9b-xr-TBU"/>
                                     <constraint firstItem="Ayf-CV-tRe" firstAttribute="leading" secondItem="5eL-48-lLW" secondAttribute="leading" id="kl8-3e-Dhy"/>
                                     <constraint firstItem="AVo-K5-djM" firstAttribute="height" secondItem="Ymj-Fv-9DS" secondAttribute="height" id="npB-7m-5us"/>
                                     <constraint firstItem="Ymj-Fv-9DS" firstAttribute="top" secondItem="iCq-ty-4y3" secondAttribute="top" constant="15" id="qcs-QT-wNn"/>
@@ -342,6 +346,7 @@
                             <constraint firstItem="iCq-ty-4y3" firstAttribute="leading" secondItem="Yoz-om-wTk" secondAttribute="leading" id="ooi-pf-fj7"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Company Info" id="Y4z-h0-qqV"/>
                     <connections>
                         <outlet property="applyButton" destination="BEY-Ws-Uht" id="Pkl-zw-ZqC"/>
                         <outlet property="closeButton" destination="Ymj-Fv-9DS" id="tUz-IX-If3"/>
@@ -358,7 +363,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="idW-V1-D1o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="93.599999999999994" y="127.28635682158921"/>
+            <point key="canvasLocation" x="432.80000000000001" y="127.28635682158921"/>
         </scene>
     </scenes>
     <resources>

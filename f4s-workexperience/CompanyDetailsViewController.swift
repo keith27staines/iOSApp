@@ -10,6 +10,7 @@ import UIKit
 import Reachability
 
 class CompanyDetailsViewController: UIViewController {
+    
     @IBOutlet weak var seeAcountsButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var applyButton: UIButton!
@@ -227,11 +228,10 @@ extension CompanyDetailsViewController {
             PlacementService.sharedInstance.createPlacement(placement: placement, postCompleted: {
                 [weak self]
                 _, result in
+                MessageHandler.sharedInstance.hideLoadingOverlay()
                 guard let strongSelf = self else {
-                    MessageHandler.sharedInstance.hideLoadingOverlay()
                     return
                 }
-                MessageHandler.sharedInstance.hideLoadingOverlay()
                 switch result
                 {
                 case let .value(boxed):
