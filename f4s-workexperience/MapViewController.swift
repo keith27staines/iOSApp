@@ -11,7 +11,25 @@ import GoogleMaps
 import GooglePlaces
 import Reachability
 
+enum CamerWillMoveAction {
+    case explodeCluster(GMUCluster)
+    case other
+    case none
+}
+
 class MapViewController: UIViewController {
+    
+    var cameraWillMoveAction: CamerWillMoveAction = .none {
+        didSet {
+            switch cameraWillMoveAction {
+            case .none:
+                oldVisibleMapBounds = nil
+            default:
+                oldVisibleMapBounds = visibleMapBounds
+            }
+        }
+    }
+    var oldVisibleMapBounds : GMSCoordinateBounds? = nil
     
     static let hideAllPopupsNotificationName = Notification.Name(rawValue:"hideAllPopups")
     
@@ -143,7 +161,6 @@ class MapViewController: UIViewController {
         setupReachability(nil, useClosures: true)
         startNotifier()
         partnersModel.showWillProvidePartnerLater = true
-        configureMap()
 
         if dbService.isDownloadInProgress {
             if let view = self.navigationController?.tabBarController?.view {
@@ -155,6 +172,8 @@ class MapViewController: UIViewController {
                 MessageHandler.sharedInstance.hideLoadingOverlay()
             }
         }
+        
+        moveCameraToBestPosition()
     }
     
     func companiesFromMarker(_ marker: GMSMarker) -> [Company] {
@@ -190,12 +209,6 @@ class MapViewController: UIViewController {
         present(vc, animated: true, completion: nil)
     }
     
-    func configureMap() {
-        mapView.setMinZoom(6.0, maxZoom: 16.0)
-        mapView.settings.tiltGestures = false
-        mapView.settings.rotateGestures = false
-    }
-    
     deinit {
         stopNotifier()
     }
@@ -212,12 +225,18 @@ class MapViewController: UIViewController {
         setupFramesAndSizes()
     }
     
+    
+    var hasMovedToBestPosition: Bool = false
     override func viewDidAppear(_ animated: Bool) {
-        guard partnersModel.hasSelectedPartner else {
+        super.viewDidAppear(animated)
+        if !partnersModel.hasSelectedPartner {
             selectPartner()
-            return
         }
         applyBranding()
+        if !hasMovedToBestPosition {
+            moveCameraToBestPosition()
+            hasMovedToBestPosition = true
+        }
     }
     
     func applyBranding() {
@@ -532,6 +551,9 @@ extension MapViewController {
         }
         
         mapView.settings.myLocationButton = false
+        mapView.setMinZoom(6.0, maxZoom: 16.0)
+        mapView.settings.tiltGestures = false
+        mapView.settings.rotateGestures = false
     }
     
     fileprivate func iconGeneratorWithImages() -> GMUClusterIconGenerator {
@@ -772,7 +794,15 @@ extension MapViewController: GMSMapViewDelegate {
     }
     
     func mapView(_: GMSMapView, idleAt pos: GMSCameraPosition) {
-
+        switch cameraWillMoveAction {
+        case .explodeCluster(let cluster):
+            if oldVisibleMapBounds == visibleMapBounds {
+                presentCompaniesPopup(for: cluster)
+            }
+        default:
+            break
+        }
+        cameraWillMoveAction = .none
     }
     
     func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
@@ -813,6 +843,7 @@ extension MapViewController: GMUClusterManagerDelegate {
             return
         }
         if shouldExplodeCluster(cluster) {
+            cameraWillMoveAction = .explodeCluster(cluster)
             moveCamera(toShow: explodedBounds)
         } else {
             presentCompaniesPopup(for: cluster)
@@ -866,6 +897,7 @@ extension MapViewController: CLLocationManagerDelegate {
         case .authorizedWhenInUse:
             locationManager!.startUpdatingLocation()
             mapView.isMyLocationEnabled = true
+            moveCameraToBestPosition()
             
         case .denied:
             mapView.isMyLocationEnabled = false

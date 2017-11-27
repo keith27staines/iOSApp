@@ -23,34 +23,38 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="companyInfoView" rowHeight="123" id="8H3-9Q-F52" customClass="CompanyInfoTableViewCell" customModule="f4s_workexperience" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="companyInfoView" rowHeight="123" id="8H3-9Q-F52" customClass="CompanyInfoTableViewCell" customModule="f4s_workexperience" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="123"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8H3-9Q-F52" id="TUQ-3U-356">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="122.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="122.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="lF4-rz-fKh">
-                                                    <rect key="frame" x="4" y="4" width="334" height="114.5"/>
+                                                    <rect key="frame" x="4" y="8" width="367" height="106.5"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XpE-yq-GfS">
-                                                            <rect key="frame" x="0.0" y="32.5" width="50" height="50"/>
+                                                            <rect key="frame" x="0.0" y="28.5" width="50" height="50"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="XpE-yq-GfS" secondAttribute="height" id="BgW-pz-k1H"/>
                                                                 <constraint firstAttribute="height" constant="50" id="RHF-me-Ice"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="hJm-jR-C7n">
-                                                            <rect key="frame" x="58" y="35" width="276" height="45"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hJm-jR-C7n">
+                                                            <rect key="frame" x="58" y="14.5" width="309" height="77.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="company name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xOm-Sd-fUJ">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="276" height="20.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="309" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
+                                                                <view contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Nbb-8e-JRO" userLabel="Star rating" customClass="StarRatingView" customModule="f4s_workexperience" customModuleProvider="target">
+                                                                    <rect key="frame" x="0.0" y="28.5" width="309" height="20.5"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </view>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="industry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QOZ-ME-z9v">
-                                                                    <rect key="frame" x="0.0" y="24.5" width="276" height="20.5"/>
+                                                                    <rect key="frame" x="0.0" y="57" width="309" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -62,8 +66,8 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="lF4-rz-fKh" secondAttribute="trailing" constant="4" id="BPD-44-rgE"/>
-                                                <constraint firstItem="lF4-rz-fKh" firstAttribute="top" secondItem="TUQ-3U-356" secondAttribute="top" constant="4" id="MST-6p-UX4"/>
-                                                <constraint firstAttribute="bottom" secondItem="lF4-rz-fKh" secondAttribute="bottom" constant="4" id="Xbx-ab-WI5"/>
+                                                <constraint firstItem="lF4-rz-fKh" firstAttribute="top" secondItem="TUQ-3U-356" secondAttribute="top" constant="8" id="MST-6p-UX4"/>
+                                                <constraint firstAttribute="bottom" secondItem="lF4-rz-fKh" secondAttribute="bottom" constant="8" id="Xbx-ab-WI5"/>
                                                 <constraint firstItem="lF4-rz-fKh" firstAttribute="leading" secondItem="TUQ-3U-356" secondAttribute="leading" constant="4" id="muO-GA-GgG"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -71,6 +75,7 @@
                                             <outlet property="companyNameLabel" destination="xOm-Sd-fUJ" id="ql1-ej-89G"/>
                                             <outlet property="industryLabel" destination="QOZ-ME-z9v" id="QGo-DX-wHp"/>
                                             <outlet property="logo" destination="XpE-yq-GfS" id="010-Tv-dHg"/>
+                                            <outlet property="starRating" destination="Nbb-8e-JRO" id="joh-Wb-9FG"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -122,6 +127,7 @@
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="doneButton" destination="4bK-64-2ce" id="0fj-Dg-UEa"/>
                         <outlet property="tableView" destination="OAS-Oe-a0N" id="mPf-cA-ino"/>
                     </connections>
                 </viewController>

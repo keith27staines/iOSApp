@@ -13,11 +13,12 @@ class CompanyInfoTableViewCell: UITableViewCell {
     var company: Company! {
         didSet {
             self.companyNameLabel.attributedText = NSAttributedString(
-                string: company.name, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: Style.largeTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor.black])
+                string: company.name, attributes: [NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: .title3), NSAttributedStringKey.foregroundColor: UIColor.black])
             
             self.industryLabel.attributedText = NSAttributedString(
-                string: company.industry, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: Style.smallerMediumTextSize, weight: UIFont.Weight.light), NSAttributedStringKey.foregroundColor: UIColor.black])
-            
+                string: company.industry, attributes: [NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: .caption1), NSAttributedStringKey.foregroundColor: UIColor.darkGray])
+            self.starRating.rating = Float(company.rating)
+            self.starRating.isHidden = (company.rating == 0) ? true : false
             if !company.logoUrl.isEmpty, let url = NSURL(string: company.logoUrl) {
                 ImageService.sharedInstance.getImage(url: url, completed: {
                     succeeded, image in
@@ -38,6 +39,7 @@ class CompanyInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var industryLabel: UILabel!
     @IBOutlet weak var companyNameLabel: UILabel!
     @IBOutlet weak var logo: UIImageView!
+    @IBOutlet weak var starRating: StarRatingView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
