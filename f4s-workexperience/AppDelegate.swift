@@ -181,7 +181,9 @@ extension AppDelegate {
             return String(format: "%02.2hhx", data)
         }
         let token = tokenParts.joined()
+
         print("Registered for remote notification with dev token \(token)")
+
         UserService.sharedInstance.enablePushNotificationForUser(withDeviceToken: token, putCompleted: { success, result in
             if success {
                 print("enabled push notifications on Workfinder server \(result)")
