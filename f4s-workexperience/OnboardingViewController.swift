@@ -17,12 +17,15 @@ class OnboardingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupAppearance()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         adjustNavigationBar()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        setupAppearance()
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,7 +71,8 @@ extension OnboardingViewController {
 
     func setupAppearance() {
         UIApplication.shared.statusBarStyle = .lightContent
-        gradientView = UIView.gradient(view: gradientView, colorTop: UIColor(netHex: Colors.blueGradientTop).cgColor, colorBottom: UIColor(netHex: Colors.BlueGradientBottom).cgColor)
+        _ = UIView.gradient(view: gradientView, colorTop: UIColor(netHex: Colors.blueGradientTop).cgColor, colorBottom: UIColor(netHex: Colors.BlueGradientBottom).cgColor)
+        view.layoutSubviews()
         setUpButtons()
         setupLabels()
     }

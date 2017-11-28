@@ -39,16 +39,6 @@
                ReferencedContainer = "container:f4s-workexperience.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "40E78E311DD31A86000A3776"
-               BuildableName = "f4s-workexperienceUITests.xctest"
-               BlueprintName = "f4s-workexperienceUITests"
-               ReferencedContainer = "container:f4s-workexperience.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
@@ -107,7 +97,7 @@
       buildConfiguration = "DebugF4SLive">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "DebugF4SLive"
+      buildConfiguration = "ReleaseF4SLive"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

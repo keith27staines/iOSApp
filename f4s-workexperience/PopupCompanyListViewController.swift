@@ -1,0 +1,53 @@
+//
+//  PopupCompanyListViewController.swift
+//  f4s-workexperience
+//
+//  Created by Keith Dev on 14/11/2017.
+//  Copyright © 2017 Founders4Schools. All rights reserved.
+//
+
+import UIKit
+
+class PopupCompanyListViewController: UIViewController {
+    
+    var companies: [Company]!
+
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var doneButton: UIButton!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    @IBAction func doneButtonPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: - Table view data source
+extension PopupCompanyListViewController : UITableViewDelegate, UITableViewDataSource {
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return companies.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "companyInfoView", for: indexPath) as! CompanyInfoTableViewCell
+        let company = companies[indexPath.row]
+        cell.company = company
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        showCompanyInfo(indexPath: indexPath)
+    }
+    
+    func showCompanyInfo(indexPath: IndexPath) {
+        let company = companies[indexPath.row]
+        CustomNavigationHelper.sharedInstance.showCompanyDetailsPopover(parentCtrl: self, company: company)
+    }
+}

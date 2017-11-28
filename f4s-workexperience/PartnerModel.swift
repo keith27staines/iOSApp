@@ -66,7 +66,10 @@ public class PartnersModel {
     private func getHardCodedPartners() {
         var ncsPartner = Partner(uuid: ncsUID, name: "National Citizen Service")
         ncsPartner.imageName = "partnerLogoNCS"
+        var nominetPartner = Partner(uuid: "-1", name: "Nominet Trust")
+        nominetPartner.imageName = "partnerLogoNominet"
         addOrReplacePartner(ncsPartner)
+        addOrReplacePartner(nominetPartner)
         addOrReplacePartner(Partner(uuid: "2c4a2c39-eac7-4573-aa14-51c17810e7a1", name: "Parent (includes guardian)"))
         addOrReplacePartner(Partner(uuid: "96638617-13df-489e-bb10-e02a3dc3391b", name: "My School"))
         addOrReplacePartner(Partner(uuid: "1c72eb94-538c-4a39-b0db-20a9f8269d35", name: "My Friend"))

@@ -11,9 +11,33 @@ import GoogleMaps
 import GooglePlaces
 import Reachability
 
+enum CamerWillMoveAction {
+    case explodeCluster(GMUCluster)
+    case other
+    case none
+}
+
 class MapViewController: UIViewController {
+    
+    var cameraWillMoveAction: CamerWillMoveAction = .none {
+        didSet {
+            switch cameraWillMoveAction {
+            case .none:
+                oldVisibleMapBounds = nil
+            default:
+                oldVisibleMapBounds = visibleMapBounds
+            }
+        }
+    }
+    var oldVisibleMapBounds : GMSCoordinateBounds? = nil
+    
+    static let hideAllPopupsNotificationName = Notification.Name(rawValue:"hideAllPopups")
+    
     /// Displays the map
     @IBOutlet var mapView: GMSMapView!
+    
+    var popupAnimator = PopupAnimator()
+    var companyListPopupViewController: PopupCompanyListViewController?
     
     var mapEdgeInsets: UIEdgeInsets {
         return UIEdgeInsets(top: searchView.bounds.height + 60, left: 60, bottom: 60, right: 60)
@@ -46,11 +70,13 @@ class MapViewController: UIViewController {
     
     /// The minimum zoom level 
     static let zoomMinimum: Float = 6.0
+    static let zoomMaximum: Float = 15.0
     
     var autoCompleteFilter: GMSAutocompleteFilter?
     var placesClient: GMSPlacesClient?
     var backgroundView = UIView()
     var shouldRequestAuthorization: Bool?
+    var pressedPinOrCluster: UIView?
     
     lazy var partnersModel: PartnersModel = {
         let p = PartnersModel.sharedInstance
@@ -71,7 +97,8 @@ class MapViewController: UIViewController {
     
     ///Bounds representing the visible portion of the map
     var visibleMapBounds: GMSCoordinateBounds? {
-        return GMSCoordinateBounds(region: getVisibleRegion())
+        let visibleRegion = mapView.projection.visibleRegion()
+        return GMSCoordinateBounds(region: visibleRegion)
     }
     
     /// Map model of all companies (unfiltered by interest)
@@ -134,6 +161,7 @@ class MapViewController: UIViewController {
         setupReachability(nil, useClosures: true)
         startNotifier()
         partnersModel.showWillProvidePartnerLater = true
+
         if dbService.isDownloadInProgress {
             if let view = self.navigationController?.tabBarController?.view {
                 MessageHandler.sharedInstance.showLoadingOverlay(view)
@@ -144,6 +172,41 @@ class MapViewController: UIViewController {
                 MessageHandler.sharedInstance.hideLoadingOverlay()
             }
         }
+        
+        moveCameraToBestPosition()
+    }
+    
+    func companiesFromMarker(_ marker: GMSMarker) -> [Company] {
+        guard let mapModel = filteredMapModel else { return [Company]() }
+        let companySet = mapModel.pinsNear(marker.position, side: 10.0)
+        let companyPins = [F4SCompanyPin](companySet)
+        let companies = companyPins.map { pin -> Company in
+            return companyFromPin(pin: pin)!
+        }
+        return companies
+    }
+    
+    func presentCompaniesPopup(for cluster: GMUCluster) {
+        let companies = companiesFromCluster(cluster)
+        let origin = mapView.projection.point(for: cluster.position)
+        presentCompaniesPopup(for: companies, origin: origin)
+    }
+
+    func presentCompaniesPopup(for companies: [Company], origin: CGPoint) {
+        let originatingRect = CGRect(x: origin.x-20, y: origin.y-20, width: 40, height: 40)
+        if pressedPinOrCluster?.superview == nil {
+            pressedPinOrCluster = UIView(frame: originatingRect)
+        } else {
+            pressedPinOrCluster?.frame = originatingRect
+        }
+        pressedPinOrCluster?.backgroundColor = UIColor.clear
+        mapView.addSubview(pressedPinOrCluster!)
+        
+        let vc = UIStoryboard(name: "PopupCompanyList", bundle: nil).instantiateViewController(withIdentifier: "PopupListViewController") as! PopupCompanyListViewController
+        
+        vc.companies = companies
+        vc.transitioningDelegate = self
+        present(vc, animated: true, completion: nil)
     }
     
     deinit {
@@ -162,12 +225,18 @@ class MapViewController: UIViewController {
         setupFramesAndSizes()
     }
     
+    
+    var hasMovedToBestPosition: Bool = false
     override func viewDidAppear(_ animated: Bool) {
-        guard partnersModel.hasSelectedPartner else {
+        super.viewDidAppear(animated)
+        if !partnersModel.hasSelectedPartner {
             selectPartner()
-            return
         }
         applyBranding()
+        if !hasMovedToBestPosition {
+            moveCameraToBestPosition()
+            hasMovedToBestPosition = true
+        }
     }
     
     func applyBranding() {
@@ -482,6 +551,9 @@ extension MapViewController {
         }
         
         mapView.settings.myLocationButton = false
+        mapView.setMinZoom(6.0, maxZoom: 16.0)
+        mapView.settings.tiltGestures = false
+        mapView.settings.rotateGestures = false
     }
     
     fileprivate func iconGeneratorWithImages() -> GMUClusterIconGenerator {
@@ -552,20 +624,30 @@ extension MapViewController  {
         }
     }
     
+    // Moves the camera to show the specified bounds
+    func moveCamera(toShow bounds: GMSCoordinateBounds) {
+        DispatchQueue.main.async { [weak self] in
+            guard let mapView = self?.mapView else {
+                return
+            }
+            mapView.animate(with: GMSCameraUpdate.fit(bounds))
+        }
+    }
+    
     /// Returns the bounds of the visible portion of the map
     func getVisibleRegion() -> GMSVisibleRegion {
         let topLeftPoint = CGPoint(x: self.searchView.frame.minX, y: self.searchView.frame.maxY)
         let bottomRightPoint = CGPoint(x: self.searchView.frame.maxX, y: mapView.bounds.height)
         let topRightPoint = CGPoint(x: self.searchView.frame.maxX, y: self.searchView.frame.maxY)
         let bottomLeftPoint = CGPoint(x: self.searchView.frame.minX, y: mapView.bounds.height)
-        
+
         let topLeftLocation = mapView.projection.coordinate(for: topLeftPoint)
         let bottomRightLocation = mapView.projection.coordinate(for: bottomRightPoint)
         let topRightLocation = mapView.projection.coordinate(for: topRightPoint)
         let bottomLeftLocation = mapView.projection.coordinate(for: bottomLeftPoint)
-        
+
         let visibleRegionForPoints = GMSVisibleRegion(nearLeft: bottomLeftLocation, nearRight: bottomRightLocation, farLeft: topLeftLocation, farRight: topRightLocation)
-        
+
         return visibleRegionForPoints
     }
 }
@@ -693,20 +775,34 @@ extension MapViewController: GMSMapViewDelegate {
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        self.selectedCompany = companyFromMarker(marker: marker)
-        self.mapView.selectedMarker = marker
-        var point: CGPoint = mapView.projection.point(for: marker.position)
-        point.y -= 50
-        let camera: GMSCameraUpdate = GMSCameraUpdate.setTarget(mapView.projection.coordinate(for: point))
-        marker.appearAnimation = GMSMarkerAnimation.pop
-        marker.tracksInfoWindowChanges = true
-        
-        mapView.animate(with: camera)
-        return true
+        let origin = mapView.projection.point(for: marker.position)
+        let companies = companiesFromMarker(marker)
+        if companies.count > 1 {
+            presentCompaniesPopup(for: companies, origin: origin)
+            return true
+        } else {
+            self.selectedCompany = companyFromMarker(marker: marker)
+            self.mapView.selectedMarker = marker
+            var point: CGPoint = mapView.projection.point(for: marker.position)
+            point.y -= 50
+            let camera: GMSCameraUpdate = GMSCameraUpdate.setTarget(mapView.projection.coordinate(for: point))
+            marker.appearAnimation = GMSMarkerAnimation.pop
+            marker.tracksInfoWindowChanges = true
+            mapView.animate(with: camera)
+            return true
+        }
     }
     
     func mapView(_: GMSMapView, idleAt pos: GMSCameraPosition) {
-
+        switch cameraWillMoveAction {
+        case .explodeCluster(let cluster):
+            if oldVisibleMapBounds == visibleMapBounds {
+                presentCompaniesPopup(for: cluster)
+            }
+        default:
+            break
+        }
+        cameraWillMoveAction = .none
     }
     
     func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
@@ -740,9 +836,54 @@ extension MapViewController: GMSMapViewDelegate {
 extension MapViewController: GMUClusterManagerDelegate {
     
     func clusterManager(_: GMUClusterManager, didTap cluster: GMUCluster) {
-        let newCamera = GMSCameraPosition.camera(withTarget: cluster.position, zoom: mapView.camera.zoom + 1)
-        let update = GMSCameraUpdate.setCamera(newCamera)
-        mapView.animate(with: update)
+        guard let explodedBounds = boundsForExplodedClusterContent(cluster) else {
+            let newCamera = GMSCameraPosition.camera(withTarget: cluster.position, zoom: mapView.camera.zoom + 1)
+            let update = GMSCameraUpdate.setCamera(newCamera)
+            mapView.animate(with: update)
+            return
+        }
+        if shouldExplodeCluster(cluster) {
+            cameraWillMoveAction = .explodeCluster(cluster)
+            moveCamera(toShow: explodedBounds)
+        } else {
+            presentCompaniesPopup(for: cluster)
+        }
+    }
+    
+    func canZoomIn() -> Bool {
+        return mapView.camera.zoom < mapView.maxZoom
+    }
+    
+    func canZoomOut() -> Bool {
+        return mapView.camera.zoom > mapView.minZoom
+    }
+    
+    func shouldExplodeCluster(_ cluster: GMUCluster) -> Bool {
+        if !canZoomIn() {
+            return false
+        }
+        guard let explodedBounds = boundsForExplodedClusterContent(cluster), let _ = self.visibleMapBounds else {
+            return false
+        }
+        if cluster.items.count < 11 || explodedBounds.diagonalDistance() < 200 {
+            return false
+        }
+        return true
+    }
+}
+
+// MARK:- Clusters helpers
+extension MapViewController {
+    
+    func boundsForExplodedClusterContent(_ cluster: GMUCluster) -> GMSCoordinateBounds? {
+        guard let firstPosition = cluster.items.first?.position else {
+            return nil
+        }
+        var bounds = GMSCoordinateBounds(coordinate: firstPosition, coordinate: firstPosition)
+        for item in cluster.items {
+            bounds = bounds.includingCoordinate(item.position)
+        }
+        return bounds
     }
 }
 
@@ -756,6 +897,7 @@ extension MapViewController: CLLocationManagerDelegate {
         case .authorizedWhenInUse:
             locationManager!.startUpdatingLocation()
             mapView.isMyLocationEnabled = true
+            moveCameraToBestPosition()
             
         case .denied:
             mapView.isMyLocationEnabled = false
@@ -873,11 +1015,28 @@ extension MapViewController {
 // MARK:- helpers
 extension MapViewController {
     
+    /// Returns the companies corresponding to the specified cluster
+    func companiesFromCluster(_ cluster: GMUCluster) -> [Company] {
+        let companyPins = cluster.items as! [F4SCompanyPin]
+        var companies = [Company]()
+        for pin in companyPins {
+            if let company = companyFromPin(pin: pin) {
+                companies.append(company)
+            }
+        }
+        return companies
+    }
+    
     /// Returns the Company corresponding to the specified marker
     func companyFromMarker(marker: GMSMarker) -> Company? {
         guard let pin = marker.userData as? F4SCompanyPin else {
             return nil
         }
+        return companyFromPin(pin: pin)
+    }
+    
+    /// Returns the Company corresponding to the specified pin
+    func companyFromPin(pin: F4SCompanyPin) -> Company? {
         return DatabaseOperations.sharedInstance.companyWithId(pin.companyId)
     }
     
@@ -1006,5 +1165,28 @@ extension MapViewController {
                 })
             })
         }
+    }
+}
+
+// MARK:- Conform to UIViewControllerTransitioningDelegate
+extension MapViewController : UIViewControllerTransitioningDelegate {
+    
+    func animationController(
+        forPresented presented: UIViewController,
+        presenting: UIViewController,
+        source: UIViewController
+        ) -> UIViewControllerAnimatedTransitioning? {
+        popupAnimator.popupAnimatorDidDismiss = { [weak self] _ in
+            self?.pressedPinOrCluster?.removeFromSuperview()
+        }
+        popupAnimator.originFrame = pressedPinOrCluster!.superview!.convert(pressedPinOrCluster!.frame, to: nil)
+        
+        popupAnimator.presenting = true
+        return popupAnimator
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        popupAnimator.presenting = false
+        return popupAnimator
     }
 }

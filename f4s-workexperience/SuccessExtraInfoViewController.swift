@@ -25,6 +25,7 @@ class SuccessExtraInfoViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         backgroundPopoverView.removeFromSuperview()
         super.viewWillDisappear(animated)
+        //NotificationCenter.default.post(name: MapViewController.hideAllPopupsNotificationName, object: self)
     }
 
     override func didReceiveMemoryWarning() {
@@ -113,49 +114,13 @@ extension SuccessExtraInfoViewController: UIPopoverPresentationControllerDelegat
 extension SuccessExtraInfoViewController {
 
     @IBAction func timelineButtonTouched(_: UIButton) {
-        let presentingCtrl = self.presentingViewController
-        self.navigationController?.dismiss(animated: false, completion: {
-            let presentingCtrl2 = presentingCtrl?.presentingViewController
-            presentingCtrl?.dismiss(animated: false, completion: {
-                let presentingCtrl3 = presentingCtrl2?.presentingViewController
-                presentingCtrl2?.dismiss(animated: false, completion: {
-                    let presentingCtrl4 = presentingCtrl3?.presentingViewController
-                    if let drawerCtrl = presentingCtrl4 as? DrawerController {
-                        if let centerCtrl = drawerCtrl.centerViewController {
-                            // centerCtrl is customTabBarCtrl - see setupDrawerController
-                            if let tabBarCtrl = centerCtrl as? CustomTabBarViewController {
-                                tabBarCtrl.selectedIndex = 0
-                            }
-                        }
-                    }
-                    presentingCtrl3?.dismiss(animated: false, completion: nil)
-                })
-            })
-        })
+        CustomTabBarViewController.rewindToDrawerAndSelectTab(vc: self, index: 0)
     }
-
+    
     @IBAction func viewMapButtonTouched(_: UIButton) {
         if let window = view.window {
             NotificationHelper.sharedInstance.updateToolbarButton(window: window)
         }
-        let presentingCtrl = self.presentingViewController
-        self.navigationController?.dismiss(animated: false, completion: {
-            let presentingCtrl2 = presentingCtrl?.presentingViewController
-            presentingCtrl?.dismiss(animated: false, completion: {
-                let presentingCtrl3 = presentingCtrl2?.presentingViewController
-                presentingCtrl2?.dismiss(animated: false, completion: {
-                    let presentingCtrl4 = presentingCtrl3?.presentingViewController
-                    if let drawerCtrl = presentingCtrl4 as? DrawerController {
-                        if let centerCtrl = drawerCtrl.centerViewController {
-                            // centerCtrl is customTabBarCtrl - see setupDrawerController
-                            if let tabBarCtrl = centerCtrl as? CustomTabBarViewController {
-                                tabBarCtrl.selectedIndex = 2
-                            }
-                        }
-                    }
-                    presentingCtrl3?.dismiss(animated: false, completion: nil)
-                })
-            })
-        })
+        CustomTabBarViewController.rewindToDrawerAndSelectTab(vc: self, index: 2)
     }
 }

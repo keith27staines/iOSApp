@@ -185,7 +185,7 @@ extension CoverLetterViewController {
         var intermediateTemplateString: String = template.replacingOccurrences(of: "\r", with: "")
         // find first selection
         while true {
-            var smalestIndex: Int = intermediateTemplateString.characters.count
+            var smalestIndex: Int = intermediateTemplateString.count
             var customParse: TemplateCustomParse?
             if let placeholder = intermediateTemplateString.index(of: TemplateCustomParse.startPlaceholder.rawValue) as Int? {
                 if placeholder < smalestIndex {
@@ -209,7 +209,7 @@ extension CoverLetterViewController {
                 }
             }
 
-            if smalestIndex == intermediateTemplateString.characters.count {
+            if smalestIndex == intermediateTemplateString.count {
                 // no more data to set
                 break
             }

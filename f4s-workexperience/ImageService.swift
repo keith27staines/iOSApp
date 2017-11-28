@@ -35,7 +35,7 @@ class ImageService {
                 return
             }
 
-            let imageName = path.characters.split { $0 == "/" }.map(String.init)
+            let imageName = path.split { $0 == "/" }.map(String.init)
             let localPath: URL = FileHelper.fileInDocumentsDirectory(filename: imageName.last!)
             if FileHelper.existFileAtPath(path: localPath.path) {
                 completed(true, self.getImageAtPath(path: localPath as NSURL))

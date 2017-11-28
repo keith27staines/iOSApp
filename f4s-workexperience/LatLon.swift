@@ -11,6 +11,32 @@ import Foundation
 /// A point containing a latitude and a longitude in decimal degrees
 public typealias LatLon = CGPoint
 
+public extension LatLon {
+    
+    // Calculates the greate circle distance between the current instance and `other` in meters
+    public func greatCircleDistance(_ other: LatLon) -> Double {
+        return LatLon.greatCircleDistance(p1:self,p2:other)
+    }
+    
+    // Calculates the greate circle distance between two LatLons
+    public static func greatCircleDistance(p1: LatLon, p2: LatLon) -> Double {
+        let degreesToRadians = Double.pi / 360.0
+        let r = 6371e3; // metres
+        let φ1 = Double(p1.latitude) * degreesToRadians
+        let φ2 = Double(p2.latitude) * degreesToRadians
+        let λ1 =  Double(p1.longitude) * degreesToRadians
+        let λ2 =  Double(p2.longitude) * degreesToRadians
+        let Δφ = (φ2 - φ1)
+        let Δλ = (λ2 - λ1)
+        let a = sin(Δφ/2) * sin(Δφ/2) +
+            cos(φ1) * cos(φ2) *
+            sin(Δλ/2) * sin(Δλ/2)
+        let c = 2 * atan2(sqrt(a), sqrt(1.0 - a))
+        let d = r * c
+        return d
+    }
+}
+
 /// A rectangular area defined by an origin, width and height (all in decimal degrees latitude or longitude)
 public typealias LatLonRect = CGRect
 
@@ -26,6 +52,13 @@ extension CLLocationCoordinate2D : Hashable {
     public init(latLon: LatLon) {
         self.init(latitude: CLLocationDegrees(latLon.latitude), longitude: CLLocationDegrees(latLon.longitude))
     }
+    
+    /// Returns the great circle distance between the current instance and `'other` in meters
+    public func greateCircleDistance(_ other: CLLocationCoordinate2D) -> Double {
+        let p1 = LatLon(location: self)
+        let p2 = LatLon(location: other)
+        return p1.greatCircleDistance(p2)
+    }
 }
 
 public extension GMSCoordinateBounds {
@@ -39,6 +72,22 @@ public extension GMSCoordinateBounds {
         let rect = LatLonRect(bounds: self)
         let scaled = rect.scaledBy(fraction: CGFloat(f))
         return GMSCoordinateBounds(rect: scaled)
+    }
+    
+    /// Returns the diagonal distance of bounds rectangle in meters
+    public func diagonalDistance() -> Double {
+        return southWest.greateCircleDistance(northEast)
+    }
+    
+    /// Returns true if the current instance is fully inside the other bounds. That is, every point of the current instance is inside the boundary of other.
+    public func isFullyInside(other bounds: GMSCoordinateBounds) -> Bool {
+        if !bounds.contains(self.southWest) || !bounds.contains(self.northEast) {
+            return false
+        }
+        if self.southWest == bounds.southWest || self.northEast == bounds.northEast {
+            return false
+        }
+        return true
     }
 }
 
