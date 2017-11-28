@@ -1,0 +1,6 @@
+framework module Pods_f4s_workexperienceTests {
+  umbrella header "Pods-f4s-workexperienceTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
