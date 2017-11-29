@@ -67,42 +67,62 @@ class InterestsViewController: UIViewController, UIScrollViewDelegate {
                 guard let strongSelf = self else { return }
                 strongSelf.interestsInBounds = interestsInBounds
                 let interests = strongSelf.combineInterestsAsSortedList(interestSubsets: interestsInBounds,strongSelf.selectedInterests)
-                strongSelf.interestsToDisplay = interests.sorted(by: { (interest1, interest2) -> Bool in
-                    if strongSelf.selectedInterests.contains(interest1) && !strongSelf.selectedInterests.contains(interest2) {
-                        return true
+                strongSelf.interestsToDisplay = interests
+                strongSelf.getUpdatedCounts(completion: { (counts) in
+                    DispatchQueue.main.async {
+                        strongSelf.interestsCount = counts.1
+                        strongSelf.updateUIWithCounts(counts: counts, completion: nil)
+                        strongSelf.updateUITotals(counts: counts, completion: nil)
+                        strongSelf.uiIndicatorBusy.stopAnimating()
                     }
-                    if strongSelf.selectedInterests.contains(interest2) && !strongSelf.selectedInterests.contains(interest1) {
-                        return false
-                    }
-                    return interest1.name.lowercased() < interest2.name.lowercased()
                 })
-                strongSelf.updateUIWithLatestCounts()
             }
         }
     }
     
-    func updateUIWithLatestCounts() {
+    func updateUITotals(completion: (() -> Void)?) {
         getUpdatedCounts() { [weak self] counts in
-            DispatchQueue.main.async {
-                guard let strongSelf = self else { return }
-                strongSelf.updateResultsLabel(count: counts.0)
-                strongSelf.interestsCount = counts.1
-                strongSelf.collectionView.reloadData()
-                strongSelf.uiIndicatorBusy.stopAnimating()
-            }
+            self?.updateUITotals(counts: counts, completion: completion)
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    func updateUITotals(counts: InterestCountResults, completion: (() -> Void)?) {
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.updateResultsLabel(count: counts.0)
+            completion?()
+        }
     }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    
+    func updateUIWithLatestCounts(completion: (() -> Void)?) {
+        getUpdatedCounts() { [weak self] counts in
+            self?.updateUIWithCounts(counts: counts, completion: completion)
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    
+    func updateUIWithCounts(counts: InterestCountResults, completion: (() -> Void)?) {
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.interestsToDisplay.sort(by: { (interest1, interest2) -> Bool in
+                if strongSelf.selectedInterests.contains(interest1) && !strongSelf.selectedInterests.contains(interest2) {
+                    return true
+                }
+                if strongSelf.selectedInterests.contains(interest2) && !strongSelf.selectedInterests.contains(interest1) {
+                    return false
+                }
+                let count1 = strongSelf.interestsCount[interest1] ?? 0
+                let count2 = strongSelf.interestsCount[interest2] ?? 0
+                if count1 > count2 {
+                    return true
+                }
+                if count1 < count2 {
+                    return false
+                }
+                return interest1.name.lowercased() < interest2.name.lowercased()
+            })
+            strongSelf.collectionView.reloadData()
+            completion?()
+        }
     }
 
     func scrollViewShouldScrollToTop(_: UIScrollView) -> Bool {
@@ -220,13 +240,13 @@ extension InterestsViewController: UICollectionViewDelegate {
     func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let interest = interestsToDisplay[indexPath.row]
         selectedInterests.insert(interest)
-        updateUIWithLatestCounts()
+        updateUITotals(completion: nil)
     }
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let interest = interestsToDisplay[indexPath.row]
         selectedInterests.remove(interest)
-        updateUIWithLatestCounts()
+        updateUITotals(completion: nil)
     }
 }
 
@@ -302,16 +322,12 @@ extension InterestsViewController {
     }
 
     
-    /// Returns an array formed from the union of the specified sets of interests. The returned array is ordered ascending by interest name
+    /// Returns an array formed from the union of the specified sets of interests.
     func combineInterestsAsSortedList(interestSubsets: F4SInterestSet...) -> [Interest] {
         var combinedSet: F4SInterestSet = F4SInterestSet()
         for interestSubset in interestSubsets {
             combinedSet = combinedSet.union(interestSubset)
         }
-        let combinedInterestsList = [Interest](combinedSet)
-        let orderedList = combinedInterestsList.sorted { interest1, interest2 in
-            interest1.name < interest2.name
-        }
-        return orderedList
+        return [Interest](combinedSet)
     }
 }

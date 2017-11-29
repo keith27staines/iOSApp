@@ -204,7 +204,8 @@ class MapViewController: UIViewController {
         
         let vc = UIStoryboard(name: "PopupCompanyList", bundle: nil).instantiateViewController(withIdentifier: "PopupListViewController") as! PopupCompanyListViewController
         
-        vc.companies = companies
+        vc.setCompanies(companies)
+        
         vc.transitioningDelegate = self
         present(vc, animated: true, completion: nil)
     }

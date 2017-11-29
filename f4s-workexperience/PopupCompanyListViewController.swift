@@ -10,14 +10,16 @@ import UIKit
 
 class PopupCompanyListViewController: UIViewController {
     
-    var companies: [Company]!
+    public func setCompanies(_ companies: [Company]) {
+        self.companies = companies.sorted(by: { (company1, company2) -> Bool in
+            return company1.rating >= company2.rating
+        })
+    }
+    
+    private var companies: [Company]!
 
     @IBOutlet var tableView: UITableView!
     @IBOutlet var doneButton: UIButton!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     @IBAction func doneButtonPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
