@@ -8,5 +8,5 @@ The iOS app was originally developed by ChelseaApps prior to being brought in-ho
 ## Requirements
 
 - iOS 9.0+
-- Xcode 8.3.3+
-- Swift 3.1
+- Xcode 9.1
+- Swift 4
