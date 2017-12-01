@@ -161,7 +161,6 @@
 		FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC92567A1F8F70D100FF9841 /* InterestsModel.swift */; };
 		FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99B7E21F826D1400E2D5F0 /* LatLon.swift */; };
 		FCA24C111F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA24C101F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift */; };
-		FCA268C81FD14E0400537EB1 /* ContinuousIntegrationTestChanges in Resources */ = {isa = PBXBuildFile; fileRef = FCA268C71FD14E0400537EB1 /* ContinuousIntegrationTestChanges */; };
 		FCA268CA1FD1557000537EB1 /* circle.yml in Resources */ = {isa = PBXBuildFile; fileRef = FCA268C91FD1557000537EB1 /* circle.yml */; };
 		FCA6D2941FA741590037962B /* F4SStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6D2931FA741590037962B /* F4SStyle.swift */; };
 		FCA6D2961FA75DE40037962B /* Styler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6D2951FA75DE40037962B /* Styler.swift */; };
@@ -411,7 +410,6 @@
 		FC92567A1F8F70D100FF9841 /* InterestsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsModel.swift; sourceTree = "<group>"; };
 		FC99B7E21F826D1400E2D5F0 /* LatLon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatLon.swift; sourceTree = "<group>"; };
 		FCA24C101F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkAvailabilityWindow.swift; sourceTree = "<group>"; };
-		FCA268C71FD14E0400537EB1 /* ContinuousIntegrationTestChanges */ = {isa = PBXFileReference; lastKnownFileType = text; path = ContinuousIntegrationTestChanges; sourceTree = "<group>"; };
 		FCA268C91FD1557000537EB1 /* circle.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = circle.yml; sourceTree = "<group>"; };
 		FCA6D2931FA741590037962B /* F4SStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SStyle.swift; sourceTree = "<group>"; };
 		FCA6D2951FA75DE40037962B /* Styler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styler.swift; sourceTree = "<group>"; };
@@ -605,7 +603,6 @@
 			isa = PBXGroup;
 			children = (
 				FCA268C91FD1557000537EB1 /* circle.yml */,
-				FCA268C71FD14E0400537EB1 /* ContinuousIntegrationTestChanges */,
 				FCB6D9351F75056000B8C268 /* Branding.plist */,
 				FC681BFE1F57473D0077BECA /* Podfile */,
 				FC681BFF1F57473D0077BECA /* Podfile.lock */,
@@ -1220,7 +1217,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FCA268C81FD14E0400537EB1 /* ContinuousIntegrationTestChanges in Resources */,
 				203658811E1F808100D87DC4 /* StatusCollectionViewCell.xib in Resources */,
 				40C1A4EB1DDB36DC000F80AA /* TimelineView.storyboard in Resources */,
 				204203F51E4B793F007C7409 /* Favourite.storyboard in Resources */,
