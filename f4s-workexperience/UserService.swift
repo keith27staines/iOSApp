@@ -56,7 +56,7 @@ class UserService: ApiBaseService {
             }
         }
     }
-
+    
     func updateUser(user: User, putCompleted: @escaping (_ succeeded: Bool, _ msg: Result<String>) -> Void) {
         let keychain = KeychainSwift()
         var currentUserUuid: String = ""
@@ -74,20 +74,16 @@ class UserService: ApiBaseService {
             "date_of_birth": formatedDateOfBirth,
             "requires_consent": user.requiresConsent, "placement_uuid": user.placementUuid,
         ] as [String: Any]
-        
-        //////////////////////////////
-        // TODO:- Remove this horrible hack which appends the partner name to the user's last name for upload to the server
-        print("TODO: Remove this horrible hack!!!")
-        var lastName = user.lastName
-        if let partner = PartnersModel.sharedInstance.selectedPartner {
-            lastName += "{ \"partner\": \(partner.name) }"
+        if !user.lastName.isEmpty {
+            params["last_name"] = user.lastName
         }
-        
-        if !lastName.isEmpty {
-            params["last_name"] = lastName
-        }
-        //////////////////////////////
 
+        if var partner = PartnersModel.sharedInstance.selectedPartner {
+            partner = partner.updatingWithServerSideUUID()
+            let partnerDictionary = ["uuid" : partner.uuid]
+            params["partners"] = [partnerDictionary]
+        }
+        
         if user.requiresConsent {
             params["parent_email"] = user.consenterEmail
         }

@@ -46,6 +46,20 @@ public struct Partner {
         self.imageName = imageName
     }
     
+    public func updatingWithServerSideUUID() -> Partner {
+        var partner = self
+        guard let serverSidePartners = PartnersModel.sharedInstance.serversidePartners else {
+            return partner
+        }
+        for serverPartner in serverSidePartners.values {
+            if partner.name == serverPartner.name {
+                partner.uuid = serverPartner.uuid
+                return partner
+            }
+        }
+        return partner
+    }
+    
     /// A placeholder partner used while waiting for the user to
     static var partnerProvidedLater: Partner {
         let name = NSLocalizedString("I will provide this later", comment: "Inform the user that they can skip providing this information now, but it might be requested again later")

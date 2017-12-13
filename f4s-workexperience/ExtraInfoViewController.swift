@@ -447,7 +447,6 @@ extension ExtraInfoViewController {
             MessageHandler.sharedInstance.hideLoadingOverlay()
             switch result {
             case .value:
-                print("userInfo updated")
                 UserInfoDBOperations.sharedInstance.saveUserInfo(userInfo: updatedUser)
                 strongSelf.updatePlacement()
                 CustomNavigationHelper.sharedInstance.showSuccessExtraInfoPopover(parentCtrl: strongSelf)
@@ -625,6 +624,8 @@ extension ExtraInfoViewController {
         if self.voucherCodeUnderlineView.backgroundColor == UIColor(netHex: Colors.mediumGreen), let voucherCodeTextFieldText = voucherCodeTextField.text {
             voucherCode = voucherCodeTextFieldText
         }
-        updateUserProfile(voucherCode: voucherCode)
+        PartnersModel.sharedInstance.getPartnersFromServer { [weak self] (success) in
+            self?.updateUserProfile(voucherCode: voucherCode)
+        }
     }
 }

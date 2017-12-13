@@ -9,7 +9,7 @@
 import Foundation
 
 public class PartnersModel {
-    
+   
     let ncsUID = "15e5a0a6-02cc-4e98-8edb-c3bfc0cb8b7d"
     
     public var showWillProvidePartnerLater: Bool = false {
@@ -21,8 +21,10 @@ public class PartnersModel {
             }
         }
     }
+    
     fileprivate var partners: [F4SUUID:Partner]
     fileprivate var partnersArray: [Partner]
+    public fileprivate (set) var serversidePartners: [String : Partner]?
     private (set) var isReady: Bool = false
     
     /// Returns the shared instance
@@ -30,7 +32,6 @@ public class PartnersModel {
         struct Static {
             static let instance: PartnersModel = PartnersModel()
         }
-        
         return Static.instance
     }
     
@@ -46,21 +47,27 @@ public class PartnersModel {
         }
         getHardCodedPartners()
         completed(true)
-//        PartnerService.sharedInstance.getAllPartners { [weak self] (success, partnerResult) in
-//            guard let strongSelf = self else { return }
-//            switch partnerResult {
-//            case .value(let boxedPartners):
-//                let unboxedPartners = boxedPartners.value
-//                for partner in unboxedPartners {
-//                    strongSelf.addOrReplacePartner(partner)
-//                }
-//                strongSelf.isReady = true
-//            case .error:
-//                completed(false)
-//            case .deffinedError:
-//                completed(false)
-//            }
-//        }
+    }
+    
+    public func getPartnersFromServer(completed: ((Bool) -> Void)? = nil) {
+        PartnerService.sharedInstance.getAllPartners { [weak self] (success, partnerResult) in
+            guard let strongSelf = self else { return }
+            guard success == true else { return }
+            strongSelf.serversidePartners = [:]
+            switch partnerResult {
+            case .value(let boxedPartners):
+                let unboxedPartners = boxedPartners.value
+                for partner in unboxedPartners {
+                    strongSelf.serversidePartners![partner.name] = partner
+                }
+                strongSelf.isReady = true
+                completed?(true)
+            case .error:
+                completed?(false)
+            case .deffinedError:
+                completed?(false)
+            }
+        }
     }
     
     private func getHardCodedPartners() {

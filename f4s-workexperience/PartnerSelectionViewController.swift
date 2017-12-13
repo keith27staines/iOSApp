@@ -60,7 +60,8 @@ class PartnerSelectionViewController: UIViewController {
     }
     
     lazy var partnersModel: PartnersModel = {
-       return PartnersModel.sharedInstance
+        let model = PartnersModel.sharedInstance
+        return model
     }()
 }
 
