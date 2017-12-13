@@ -70,8 +70,10 @@ struct GoogleApiKeys {
 }
 
 struct ApiConstants {
+    static let base: String = Config.BASE
     static let baseUrl: String = Config.BASE_URL
     static let baseUrl2: String = Config.BASE_URL2
+    static let versionUrl: String = "\(base)/validation/ios-version/"
     static let userProfileUrl: String = "\(baseUrl)/device"
     static let updateUserProfileUrl: String = "\(baseUrl)/user/"
     static let companyDatabaseUrl: String = "\(baseUrl)/company/dump/full"

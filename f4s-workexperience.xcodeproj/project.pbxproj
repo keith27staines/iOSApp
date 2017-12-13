@@ -162,6 +162,9 @@
 		FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99B7E21F826D1400E2D5F0 /* LatLon.swift */; };
 		FCA24C111F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA24C101F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift */; };
 		FCA268CA1FD1557000537EB1 /* circle.yml in Resources */ = {isa = PBXBuildFile; fileRef = FCA268C91FD1557000537EB1 /* circle.yml */; };
+		FCA53B921FE00CB5009F6DB0 /* Versioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA53B911FE00CB5009F6DB0 /* Versioning.swift */; };
+		FCA53B961FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA53B941FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift */; };
+		FCA53B971FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */; };
 		FCA6D2941FA741590037962B /* F4SStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6D2931FA741590037962B /* F4SStyle.swift */; };
 		FCA6D2961FA75DE40037962B /* Styler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6D2951FA75DE40037962B /* Styler.swift */; };
 		FCA6D2B61FA88CE10037962B /* PartnerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6D2B51FA88CE00037962B /* PartnerService.swift */; };
@@ -411,6 +414,9 @@
 		FC99B7E21F826D1400E2D5F0 /* LatLon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatLon.swift; sourceTree = "<group>"; };
 		FCA24C101F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkAvailabilityWindow.swift; sourceTree = "<group>"; };
 		FCA268C91FD1557000537EB1 /* circle.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = circle.yml; sourceTree = "<group>"; };
+		FCA53B911FE00CB5009F6DB0 /* Versioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Versioning.swift; sourceTree = "<group>"; };
+		FCA53B941FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SForceAppUpdateViewController.swift; sourceTree = "<group>"; };
+		FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = F4SForceAppUpdateViewController.xib; sourceTree = "<group>"; };
 		FCA6D2931FA741590037962B /* F4SStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SStyle.swift; sourceTree = "<group>"; };
 		FCA6D2951FA75DE40037962B /* Styler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styler.swift; sourceTree = "<group>"; };
 		FCA6D2B51FA88CE00037962B /* PartnerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerService.swift; sourceTree = "<group>"; };
@@ -724,6 +730,7 @@
 			children = (
 				40E78E9F1DD5E208000A3776 /* LocationHelper.swift */,
 				FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */,
+				FCA53B911FE00CB5009F6DB0 /* Versioning.swift */,
 			);
 			name = Utiles;
 			sourceTree = "<group>";
@@ -786,6 +793,7 @@
 		40E78E501DD328E0000A3776 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				FCA53B931FE115E1009F6DB0 /* Force app update */,
 				FC4BB6011FA20E6A00173864 /* Partner selection */,
 				204203F21E4B78BB007C7409 /* Favourite */,
 				201458C11E1CFCC300DBC9BD /* Message */,
@@ -1093,6 +1101,15 @@
 			name = F4SDataStructures;
 			sourceTree = "<group>";
 		};
+		FCA53B931FE115E1009F6DB0 /* Force app update */ = {
+			isa = PBXGroup;
+			children = (
+				FCA53B941FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift */,
+				FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */,
+			);
+			name = "Force app update";
+			sourceTree = "<group>";
+		};
 		FCA6D2921FA740EC0037962B /* Branding and styling */ = {
 			isa = PBXGroup;
 			children = (
@@ -1251,6 +1268,7 @@
 				204C895C1DF5F01E00D8493A /* CompanyDetails.storyboard in Resources */,
 				40E78E1C1DD31A86000A3776 /* Main.storyboard in Resources */,
 				D54E10021E044B6B00A51560 /* Content.storyboard in Resources */,
+				FCA53B971FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1405,6 +1423,7 @@
 				2037B0A31DEC2DB600A9DE3E /* InterestDB.swift in Sources */,
 				40C1A4ED1DDB36FA000F80AA /* TimelineViewController.swift in Sources */,
 				40C1A4E61DDB356B000F80AA /* CustomTabBarViewController.swift in Sources */,
+				FCA53B921FE00CB5009F6DB0 /* Versioning.swift in Sources */,
 				D54E10071E044BC100A51560 /* ProcessedMessagesViewController.swift in Sources */,
 				40A28CB21E1D1D200077D490 /* TimelineEntryTableViewCell.swift in Sources */,
 				2037B0AF1DEC592900A9DE3E /* PlacementDBOperations.swift in Sources */,
@@ -1429,6 +1448,7 @@
 				40E78E771DD32BE7000A3776 /* DrawerBarButtonItem.swift in Sources */,
 				40E78E9A1DD392B5000A3776 /* OnboardingViewController.swift in Sources */,
 				D51EE9391DFAAA84008A8A4F /* ContentService.swift in Sources */,
+				FCA53B961FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift in Sources */,
 				40E78E9C1DD5DB6D000A3776 /* AutoCompleteTextField.swift in Sources */,
 				40C1A51D1DDF5ACE000F80AA /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				40C1A51F1DDF5ACE000F80AA /* GMUStaticCluster.m in Sources */,

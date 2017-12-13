@@ -19,10 +19,32 @@ let log = XCGLogger.default
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    func continueIfVersionCheckPasses(application: UIApplication, continueWith: ((UIApplication) -> Void)? = nil) {
+        VersioningService.sharedInstance.getIsVersionValid { [weak self] (_, result) in
+            switch result {
+            case .value(let boxedBool):
+                if boxedBool.value {
+                   continueWith?(application)
+                } else {
+                    let rootVC = self?.window?.rootViewController
+                    let forceUpdateVC = F4SForceAppUpdateViewController()
+                    rootVC?.present(forceUpdateVC, animated: true, completion: nil)
+                }
+            default:
+                continueWith?(application)
+            }
+        }
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
+        continueIfVersionCheckPasses(application: application, continueWith: versionAuthorizedToContinue)
+        return true
+    }
+    
+    func versionAuthorizedToContinue(_ application: UIApplication) {
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
         
@@ -30,16 +52,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             onUserConfirmedToExist(application: application)
         } else {
             // create new user if just installed
-            UserService.sharedInstance.createUser(completed: { succeeded in
+            UserService.sharedInstance.createUser(completed: { [weak self] succeeded in
                 if succeeded {
-                    self.onUserConfirmedToExist(application: application)
+                    self?.onUserConfirmedToExist(application: application)
                 } else {
                     log.debug("Couldn't create a user")
                 }
             })
         }
-        print(UIDevice.current.identifierForVendor!.uuidString)
-        return true
     }
     
     func onUserConfirmedToExist(application: UIApplication) {
@@ -90,8 +110,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    func applicationDidBecomeActive(_: UIApplication) {
+    func applicationDidBecomeActive(_ appliction: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        continueIfVersionCheckPasses(application: appliction, continueWith: nil)
     }
 
     func applicationWillTerminate(_: UIApplication) {

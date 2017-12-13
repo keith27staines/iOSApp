@@ -8,6 +8,7 @@ struct Config {
         // Development & testing config
 
         static let ENVIRONMENT = "DEV"
+        static let BASE = "https://staging.workfinder.com/api"
         static let BASE_URL = "https://staging.workfinder.com/api/v1"
         static let BASE_URL2 = "https://staging.workfinder.com/api/v2"
         static let ACTIVATION_CODE = "0000"
@@ -19,6 +20,7 @@ struct Config {
         // Default to production (live) config
 
         static let ENVIRONMENT = "PROD"
+        static let BASE = "https://www.workfinder.com/api"
         static let BASE_URL = "https://www.workfinder.com/api/v1"
         static let BASE_URL2 = "https://www.workfinder.com/api/v2"
         static let ACTIVATION_CODE = "0000"

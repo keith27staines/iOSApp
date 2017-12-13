@@ -469,6 +469,13 @@ class DeserializationManager {
         return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
     }
     
+    func parseBoolean(jsonOptional: JSON) -> Result<Bool> {
+        guard let boolValue = jsonOptional.bool else {
+            return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
+        }
+        return .value(Box(boolValue))
+    }
+    
     func parsePartner(jsonOptional: JSON) -> Result<[Partner]> {
         guard let partnerJsonList = jsonOptional.array else {
             return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
