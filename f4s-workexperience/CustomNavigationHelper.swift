@@ -35,12 +35,10 @@ class CustomNavigationHelper {
                 return
             }
         }
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let ctrl = mainStoryboard.instantiateViewController(withIdentifier: "OnboardingCtrl") as? OnboardingViewController else {
+        guard let ctrl = window.rootViewController?.topMostViewController as? OnboardingViewController else {
             return
         }
-        let navigationController = RotationAwareNavigationController(rootViewController: ctrl)
-        window.rootViewController = navigationController
+        ctrl.hideOnboardingControls = false
     }
 
     func moveToMapCtrl(window: UIWindow, shouldRequestAuthorization: Bool) {

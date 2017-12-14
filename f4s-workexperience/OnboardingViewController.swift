@@ -10,6 +10,14 @@ import UIKit
 
 class OnboardingViewController: UIViewController {
 
+    var hideOnboardingControls: Bool = true {
+        didSet {
+            descriptionLabel.isHidden = hideOnboardingControls
+            enterLocationButton.isHidden = hideOnboardingControls
+            enableLocationButton.isHidden = hideOnboardingControls
+        }
+    }
+    
     @IBOutlet weak var gradientView: UIView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var enterLocationButton: UIButton!
@@ -17,6 +25,9 @@ class OnboardingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        descriptionLabel.isHidden = true
+        enterLocationButton.isHidden = true
+        enableLocationButton.isHidden = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -50,7 +61,9 @@ extension OnboardingViewController {
 
         let enableLocationText = NSLocalizedString("Enable location to find opportunities", comment: "")
         let enterLocationText = NSLocalizedString("Enter location manually", comment: "")
-
+        enableLocationButton.isHidden = hideOnboardingControls
+        enterLocationButton.isHidden = hideOnboardingControls
+        
         enableLocationButton.setAttributedTitle(NSAttributedString(string: enableLocationText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.mediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.black]), for: .normal)
         enterLocationButton.setAttributedTitle(NSAttributedString(string: enterLocationText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.mediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.white]), for: .normal)
 
