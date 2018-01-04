@@ -210,6 +210,14 @@ class CustomNavigationHelper {
         let coverLetterNavigationController = RotationAwareNavigationController(rootViewController: coverLetterCtrl)
         parentCtrl.present(coverLetterNavigationController, animated: true, completion: nil)
     }
+    
+    func moveToRecommendationsController(navCtrl: UINavigationController) {
+        let recommendationsStoryboard = UIStoryboard(name: "Recommendations", bundle: nil)
+        guard let recommendationsNavController = recommendationsStoryboard.instantiateInitialViewController() else {
+            return
+        }
+        navCtrl.present(recommendationsNavController, animated: true, completion: nil)
+    }
 
     func moveToContentViewController(navCtrl: UINavigationController, contentType: ContentType) {
         let contentStoryboard = UIStoryboard(name: "Content", bundle: nil)

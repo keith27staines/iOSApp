@@ -40,23 +40,12 @@ class PartnerSelectionViewController: UIViewController {
         self.referrerTextBox.delegate = self
         self.doneButton.isEnabled = false
         self.partnerLogoRightConstraint.constant = -200
-        let cerulean: UIColor = UIColor.init(red: 0.0/255.0, green: 160.0/255.0, blue: 220.0/255.0, alpha: 1.0)
-        let ecstasy = UIColor.init(red: 244.0/255.0, green: 123.0/255.0, blue: 22.0/255.0, alpha: 1.0)
-        let seagull = UIColor.init(red: 104.0/255.0, green: 199.0/255.0, blue: 236.0/255.0, alpha: 1.0)
-        let sail = UIColor.init(red: 207.0/255.0, green: 237.0/255.0, blue: 251.0/255.0, alpha: 1.0)
-        let backgroundColor: UIColor = cerulean
-        let enabledButtonBackground = ecstasy
-        let disabledButtonBackground = seagull
-        let enabledButtonTextColor = UIColor.white
-        let disabledButtonTextColor = sail
-        
-        self.view.backgroundColor = backgroundColor
-        self.doneButton.setBackgroundColor(color: enabledButtonBackground, forUIControlState: .normal)
-        self.doneButton.setBackgroundColor(color: disabledButtonBackground, forUIControlState: .disabled)
-        self.doneButton.setTitleColor(enabledButtonTextColor, for: .normal)
-        self.doneButton.setTitleColor(disabledButtonTextColor, for: .disabled)
-
+        self.applyStyle()
+    }
     
+    func applyStyle() {
+        F4SButtonStyler.apply(style: .primary, button: self.doneButton)
+        F4SBackgroundViewStyler.apply(style: .standardPageBackground, backgroundView: self.view)
     }
     
     lazy var partnersModel: PartnersModel = {

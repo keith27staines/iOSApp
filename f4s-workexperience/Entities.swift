@@ -267,6 +267,7 @@ struct Shortlist : Hashable {
 
 enum ContentType: String {
     case about = "about-workfinder"
+    case recommendations
     case faq
     case terms
     case voucher

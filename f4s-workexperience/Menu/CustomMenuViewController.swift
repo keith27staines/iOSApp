@@ -24,7 +24,6 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         let frame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y + UIApplication.shared.statusBarFrame.height, width: self.view.bounds.width, height: self.view.bounds.height - UIApplication.shared.statusBarFrame.size.height)
         self.tableView = UITableView(frame: frame, style: .plain)
         self.tableView.delegate = self
@@ -38,7 +37,7 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
         self.edgesForExtendedLayout = []
         self.extendedLayoutIncludesOpaqueBars = true
         tableView.register(UINib(nibName: "MenuHeaderCell", bundle: nil), forCellReuseIdentifier: "MenuHeaderCell")
-        self.view.backgroundColor = UIColor(netHex: Colors.azure)
+        self.view.backgroundColor = UIColor(red: 72.0/255.0, green: 38.0/255.0, blue: 127.0/255.0, alpha: 1.0)
         setupLabels()
     }
 
@@ -68,7 +67,7 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
         case DrawerSection.WelcomeSection.rawValue:
             return 1
         case DrawerSection.NavigationSection.rawValue:
-            return 5
+            return 7
 
         default:
             return 0
@@ -104,22 +103,16 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
             case 0:
                 cell.textLabel?.attributedText = setNavigationSection(index: indexPath.row)
             case 1:
-                if secondLoad {
-                    let lineImage = UIImageView()
-                    lineImage.frame = CGRect(x: 30, y: cell.bounds.minY, width: cell.frame.size.width, height: cell.frame.size.height)
-                    lineImage.backgroundColor = UIColor.white.withAlphaComponent(0.3)
-                    cell.addSubview(lineImage)
-                }
+                addLineImage(cell: cell)
             case 2:
                 cell.textLabel?.attributedText = setNavigationSection(index: indexPath.row)
             case 3:
-                if secondLoad {
-                    let lineImage = UIImageView()
-                    lineImage.frame = CGRect(x: 30, y: cell.bounds.maxY, width: cell.frame.size.width, height: cell.frame.size.height)
-                    lineImage.backgroundColor = UIColor.white.withAlphaComponent(0.3)
-                    cell.addSubview(lineImage)
-                }
+                addLineImage(cell: cell)
             case 4:
+                cell.textLabel?.attributedText = setNavigationSection(index: indexPath.row)
+            case 5:
+                addLineImage(cell: cell)
+            case 6:
                 cell.textLabel?.attributedText = setNavigationSection(index: indexPath.row)
             default:
                 break
@@ -130,43 +123,50 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
         }
         return cell
     }
+    
+    func addLineImage(cell: SideDrawerTableViewCell) {
+        guard secondLoad != false else {
+            return
+        }
+        let lineImage = UIImageView()
+        lineImage.frame = CGRect(x: 30, y: cell.bounds.maxY, width: cell.frame.size.width, height: cell.frame.size.height)
+        lineImage.backgroundColor = UIColor.white.withAlphaComponent(0.3)
+        cell.addSubview(lineImage)
+    }
 
+    // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return nil
     }
-
+    
     func tableView(_: UITableView, heightForHeaderInSection _: Int) -> CGFloat {
         return 0
     }
-
+    
     func tableView(_: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case DrawerSection.WelcomeSection.rawValue:
             return welcomeCellHeight
         case DrawerSection.NavigationSection.rawValue:
             switch indexPath.row {
-            case 1:
-                return smallCellHeight
-            case 3:
+            case 1,3,5:
                 return smallCellHeight
             default:
                 return normalCellHeight
             }
-
+            
         case DrawerSection.LogoutSection.rawValue:
             return normalCellHeight
-
+            
         default:
             return 0
         }
     }
-
+    
     func tableView(_: UITableView, heightForFooterInSection _: Int) -> CGFloat {
         return 0
     }
-
-    // MARK: - UITableViewDelegate
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         switch indexPath.section {
@@ -179,8 +179,10 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
                 case 0:
                     CustomNavigationHelper.sharedInstance.moveToContentViewController(navCtrl: navigCtrl, contentType: ContentType.about)
                 case 2:
-                    CustomNavigationHelper.sharedInstance.moveToContentViewController(navCtrl: navigCtrl, contentType: ContentType.faq)
+                    CustomNavigationHelper.sharedInstance.moveToRecommendationsController(navCtrl: navigCtrl)
                 case 4:
+                    CustomNavigationHelper.sharedInstance.moveToContentViewController(navCtrl: navigCtrl, contentType: ContentType.faq)
+                case 6:
                     CustomNavigationHelper.sharedInstance.moveToContentViewController(navCtrl: navigCtrl, contentType: ContentType.terms)
                 default:
                     break
@@ -202,11 +204,13 @@ extension CustomMenuViewController {
         switch index
         {
         case 0:
-            text = NSLocalizedString("About", comment: "")
+            text = NSLocalizedString("About", comment: "Menu item providing information about Workfinder")
         case 2:
-            text = NSLocalizedString("FAQs", comment: "")
+            text = NSLocalizedString("Your recommendations", comment: "Menu item offering the user recommendations")
         case 4:
-            text = NSLocalizedString("T&Cs + Privacy Policy", comment: "")
+            text = NSLocalizedString("FAQs", comment: "Menu item providing access to frequently asked questions")
+        case 6:
+            text = NSLocalizedString("T&Cs + Privacy Policy", comment: "Menu item providing access to terms and conditions")
         default:
             break
         }

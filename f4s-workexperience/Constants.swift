@@ -91,6 +91,7 @@ struct ApiConstants {
     static let shortlistCompanyUrl: String = "\(baseUrl)/favourite"
     static let unshortlistCompanyUrl: String = "\(baseUrl)/favourite"
     static let allPartnersUrl: String = "\(baseUrl2)/partner"
+    static let recommendationURL: String = "\(baseUrl)/recommend"
 
     static let apiKey: String = "eTo0oeh4Yeen1oy7iDuv"
 }

@@ -15,82 +15,28 @@ class SuccessExtraInfoViewController: UIViewController {
     @IBOutlet weak var viewMapButton: UIButton!
     @IBOutlet weak var successLabel: UILabel!
 
+    @IBOutlet weak var recommendationsButton: UIButton!
+    
     let backgroundPopoverView = UIView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        adjustAppearence()
+        applyStyle()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         backgroundPopoverView.removeFromSuperview()
         super.viewWillDisappear(animated)
-        //NotificationCenter.default.post(name: MapViewController.hideAllPopupsNotificationName, object: self)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
 }
 
 // MARK: - UI Setup
 extension SuccessExtraInfoViewController {
-
-    func adjustAppearence() {
-        setupButtons()
-        setupLabels()
-    }
-
-    func setupLabels() {
-        let infoStr = NSLocalizedString("Click Timeline to view application progress and Map to see more opportunities.", comment: "")
-        let timelineStr = NSLocalizedString("Timeline", comment: "")
-        let mapStr = NSLocalizedString("Map", comment: "")
-
-        let infoAttr = [
-            NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black),
-            NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular),
-        ]
-        let boldedInfoAttr = [
-            NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black),
-            NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.bold),
-        ]
-
-        let infoNsStr = NSString(string: infoStr)
-
-        let timelineStrRange = infoNsStr.range(of: timelineStr)
-        let mapStrRange = infoNsStr.range(of: mapStr)
-
-        let attrStr = NSMutableAttributedString(string: infoStr, attributes: infoAttr)
-
-        attrStr.setAttributes(boldedInfoAttr, range: timelineStrRange)
-        attrStr.setAttributes(boldedInfoAttr, range: mapStrRange)
-
-        self.infoLabel.attributedText = attrStr
-    }
-
-    func setupButtons() {
-        let timelineStr = NSLocalizedString("Timeline", comment: "")
-        let mapStr = NSLocalizedString("Map", comment: "")
-
-        self.timelineButton.layer.masksToBounds = true
-        self.timelineButton.layer.cornerRadius = 10
-        self.timelineButton.setAttributedTitle(NSAttributedString(string: timelineStr, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.white)]), for: .normal)
-        self.timelineButton.setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)
-        self.timelineButton.setBackgroundColor(color: UIColor(netHex: Colors.whiteGreen), forUIControlState: .disabled)
-        self.timelineButton.setBackgroundColor(color: UIColor(netHex: Colors.mediumGreen), forUIControlState: .normal)
-        self.timelineButton.setTitleColor(UIColor.white, for: .normal)
-        self.timelineButton.setTitleColor(UIColor.white, for: .highlighted)
-
-        self.viewMapButton.layer.masksToBounds = true
-        self.viewMapButton.layer.cornerRadius = 10
-        self.viewMapButton.setAttributedTitle(NSAttributedString(string: mapStr, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.white)]), for: .normal)
-
-        self.viewMapButton.setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)
-        self.viewMapButton.setBackgroundColor(color: UIColor(netHex: Colors.whiteGreen), forUIControlState: .disabled)
-        self.viewMapButton.setBackgroundColor(color: UIColor(netHex: Colors.mediumGreen), forUIControlState: .normal)
-        self.viewMapButton.setTitleColor(UIColor.white, for: .normal)
-        self.viewMapButton.setTitleColor(UIColor.white, for: .highlighted)
-
+    
+    func applyStyle() {
+        F4SButtonStyler.apply(style: .primary, button: self.timelineButton)
+        F4SButtonStyler.apply(style: .primary, button: self.viewMapButton)
+        F4SButtonStyler.apply(style: .secondary, button: self.recommendationsButton)
     }
 
     func getHeight() -> CGFloat {
