@@ -375,7 +375,7 @@ class ApiBaseService {
     }
 }
 
-final class Box<A> {
+public final class Box<A> {
     let value: A
 
     init(_ value: A) {

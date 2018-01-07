@@ -17,14 +17,25 @@ public class RecommendationsModel {
         return recommendations.count
     }
     
+    lazy var recommedationService: F4SRecommendationService = {
+        return F4SRecommendationService()
+    }()
+    
     public func reload(completion: @escaping () -> ()) {
-        RecommendationService.sharedInstance.getAllRecommendations { [weak self] (success, result) in
+        recommedationService.fetch { [weak self] (result) in
             guard let `self` = self else { return }
-            self.recommendations = [Recommendation]()
-            self.recommendations.append(Recommendation(companyName: "GigaCorp"))
-            completion()
+            switch result {
+            case .success(var recommendations):
+                recommendations = recommendations.sorted() { return $0.index < $1.index }
+                DispatchQueue.main.async {
+                    self.recommendations = recommendations
+                    completion()
+                }
+            case .error(let error):
+                print("error refreshing recommendations \n\(error)")
+                completion()
+            }
         }
-
     }
     
     public func recommendationForIndexPath(_ indexPath: IndexPath) -> Recommendation {
@@ -35,13 +46,15 @@ public class RecommendationsModel {
 }
 
 public struct Recommendation : Decodable {
+    public let index: Int
+    public let companyUUID: F4SUUID!
     
-    public var companyName: String
-    public var imageURL: URL?
-    public var explanation: String? = nil
-    
-    public init(companyName: String) {
-        self.companyName = companyName
-        self.explanation = "Because you applied to MegaCorp"
+    public init(companyUUID: F4SUUID, sortIndex: Int) {
+        self.index = sortIndex
+        self.companyUUID = companyUUID
     }
+
+    lazy var company: Company? = {
+        return DatabaseOperations.sharedInstance.companyWithUUID(companyUUID)
+    }()
 }

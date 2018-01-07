@@ -11,45 +11,42 @@ import SwiftyJSON
 import Alamofire
 import KeychainSwift
 
-class RecommendationService: ApiBaseService {
-    class var sharedInstance: RecommendationService {
-        struct Static {
-            static let instance: RecommendationService = RecommendationService()
-        }
-        return Static.instance
+public class F4SRecommendationService : F4SDataTaskService {
+    
+    public typealias SuccessType = [Recommendation]
+    
+    public init() {
+        super.init(baseURLString: Config.BASE_URL, apiName: "recommend", objectType: SuccessType.self)
+    }
+
+    public func fetch(completion: @escaping (F4SNetworkResult<SuccessType>) -> ()) {
+        super.get(completion: completion)
+    }
+}
+
+public class F4SDataTaskService : F4SApiService {
+    
+    private var task: URLSessionDataTask?
+    public let session: URLSession
+    public let baseUrl: URL
+    public let apiName: String
+    
+    public var url : URL {
+        return URL(string: apiName, relativeTo: baseUrl)!
     }
     
-    func getAllRecommendations(getCompleted: @escaping (_ succeeded: Bool, _ result: Result<[Recommendation]>) -> Void) {
-        let url = ApiConstants.recommendationURL
-        
-        get(url) {
-            _, msg in
-            switch msg
-            {
-            case let .value(boxedJson):
-                print(boxedJson.value)
-                let d = boxedJson.value.rawString()
-            
-//                let result = DeserializationManager.sharedInstance.parsePartner(jsonOptional: boxedJson.value)
-//                switch result
-//                {
-//                case .error:
-//                    getCompleted(false, .deffinedError(Errors.GeneralCallErrors.GeneralError))
-//                    
-//                case let .deffinedError(error):
-//                    getCompleted(false, .deffinedError(error))
-//                    
-//                case let .value(boxed):
-//                    getCompleted(true, .value(Box(boxed.value)))
-//                }
-                
-            case .error:
-                getCompleted(false, .deffinedError(Errors.GeneralCallErrors.GeneralError))
-                
-            case let .deffinedError(error):
-                getCompleted(false, .deffinedError(error))
-            }
-        }
+    public init(baseURLString: String, apiName: String, objectType: Decodable.Type) {
+        self.apiName = apiName
+        self.baseUrl = URL(string: baseURLString)!
+        session = URLSession(configuration: F4SRecommendationService.defaultConfiguration)
+    }
+    
+    internal func get<A>(completion: @escaping (F4SNetworkResult<A>) -> ()) {
+        task?.cancel()
+        task = dataTask(attempting: "Get recommendations", completion: { (result) in
+            completion(result)
+        })
+        task?.resume()
     }
 }
 

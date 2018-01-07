@@ -161,6 +161,7 @@
 		FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC92567A1F8F70D100FF9841 /* InterestsModel.swift */; };
 		FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99B7E21F826D1400E2D5F0 /* LatLon.swift */; };
 		FC99F3D41FFE533000E3AC5A /* RecommendationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99F3D31FFE533000E3AC5A /* RecommendationService.swift */; };
+		FC99F3D72000BE4900E3AC5A /* F4SService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99F3D62000BE4900E3AC5A /* F4SService.swift */; };
 		FCA24C111F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA24C101F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift */; };
 		FCA268CA1FD1557000537EB1 /* circle.yml in Resources */ = {isa = PBXBuildFile; fileRef = FCA268C91FD1557000537EB1 /* circle.yml */; };
 		FCA53B921FE00CB5009F6DB0 /* Versioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA53B911FE00CB5009F6DB0 /* Versioning.swift */; };
@@ -176,6 +177,7 @@
 		FCCD6AE71FBB42A90088D7C7 /* PopupCompanyList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCCD6AE61FBB42A90088D7C7 /* PopupCompanyList.storyboard */; };
 		FCCD6AE91FBB44CF0088D7C7 /* PopupCompanyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCD6AE81FBB44CF0088D7C7 /* PopupCompanyListViewController.swift */; };
 		FCCD6AEB1FBB4B8A0088D7C7 /* CompanyInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCD6AEA1FBB4B8A0088D7C7 /* CompanyInfoTableViewCell.swift */; };
+		FCD348552002340F00DC1316 /* F4SNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD348542002340F00DC1316 /* F4SNetwork.swift */; };
 		FCD884F91FFBC0CC00F05B08 /* Recommendations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCD884F81FFBC0CC00F05B08 /* Recommendations.storyboard */; };
 		FCD884FB1FFBE04F00F05B08 /* RecommendationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD884FA1FFBE04F00F05B08 /* RecommendationsViewController.swift */; };
 		FCD884FD1FFCCB4A00F05B08 /* RecommendationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD884FC1FFCCB4A00F05B08 /* RecommendationsModel.swift */; };
@@ -417,6 +419,7 @@
 		FC92567A1F8F70D100FF9841 /* InterestsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsModel.swift; sourceTree = "<group>"; };
 		FC99B7E21F826D1400E2D5F0 /* LatLon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatLon.swift; sourceTree = "<group>"; };
 		FC99F3D31FFE533000E3AC5A /* RecommendationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationService.swift; sourceTree = "<group>"; };
+		FC99F3D62000BE4900E3AC5A /* F4SService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SService.swift; sourceTree = "<group>"; };
 		FCA24C101F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkAvailabilityWindow.swift; sourceTree = "<group>"; };
 		FCA268C91FD1557000537EB1 /* circle.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = circle.yml; sourceTree = "<group>"; };
 		FCA53B911FE00CB5009F6DB0 /* Versioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Versioning.swift; sourceTree = "<group>"; };
@@ -432,6 +435,7 @@
 		FCCD6AE61FBB42A90088D7C7 /* PopupCompanyList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PopupCompanyList.storyboard; sourceTree = "<group>"; };
 		FCCD6AE81FBB44CF0088D7C7 /* PopupCompanyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupCompanyListViewController.swift; sourceTree = "<group>"; };
 		FCCD6AEA1FBB4B8A0088D7C7 /* CompanyInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyInfoTableViewCell.swift; sourceTree = "<group>"; };
+		FCD348542002340F00DC1316 /* F4SNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SNetwork.swift; sourceTree = "<group>"; };
 		FCD884F81FFBC0CC00F05B08 /* Recommendations.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Recommendations.storyboard; sourceTree = "<group>"; };
 		FCD884FA1FFBE04F00F05B08 /* RecommendationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsViewController.swift; sourceTree = "<group>"; };
 		FCD884FC1FFCCB4A00F05B08 /* RecommendationsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsModel.swift; sourceTree = "<group>"; };
@@ -1110,12 +1114,14 @@
 			name = F4SDataStructures;
 			sourceTree = "<group>";
 		};
-		FC99F3D51FFE604000E3AC5A /* F4SServices */ = {
+		FC99F3D51FFE604000E3AC5A /* F4SNetworkServices */ = {
 			isa = PBXGroup;
 			children = (
 				FC99F3D31FFE533000E3AC5A /* RecommendationService.swift */,
+				FC99F3D62000BE4900E3AC5A /* F4SService.swift */,
+				FCD348542002340F00DC1316 /* F4SNetwork.swift */,
 			);
-			name = F4SServices;
+			name = F4SNetworkServices;
 			sourceTree = "<group>";
 		};
 		FCA53B931FE115E1009F6DB0 /* Force app update */ = {
@@ -1142,7 +1148,7 @@
 				FCD884F81FFBC0CC00F05B08 /* Recommendations.storyboard */,
 				FCD884FA1FFBE04F00F05B08 /* RecommendationsViewController.swift */,
 				FCD884FC1FFCCB4A00F05B08 /* RecommendationsModel.swift */,
-				FC99F3D51FFE604000E3AC5A /* F4SServices */,
+				FC99F3D51FFE604000E3AC5A /* F4SNetworkServices */,
 			);
 			name = Recommendations;
 			sourceTree = "<group>";
@@ -1500,6 +1506,7 @@
 				40E78E8C1DD32C3C000A3776 /* LoadingOverlay.swift in Sources */,
 				200F640F1DF19995002F5F36 /* Errors.swift in Sources */,
 				FCCD6AEB1FBB4B8A0088D7C7 /* CompanyInfoTableViewCell.swift in Sources */,
+				FCD348552002340F00DC1316 /* F4SNetwork.swift in Sources */,
 				40C1A51E1DDF5ACE000F80AA /* GMUSimpleClusterAlgorithm.m in Sources */,
 				40A5CF3C1DED6FA2000007AB /* InterestsViewController.swift in Sources */,
 				40E78E701DD32BD4000A3776 /* MenuHelper.swift in Sources */,
@@ -1507,6 +1514,7 @@
 				2037B0A71DEC3C3B00A9DE3E /* InterestCoreDataManager.swift in Sources */,
 				204C89551DF5A36100D8493A /* TemplateChoiceDB.swift in Sources */,
 				204C89781DF5F0B200D8493A /* ChooseAttributesTableViewCell.swift in Sources */,
+				FC99F3D72000BE4900E3AC5A /* F4SService.swift in Sources */,
 				FCA6D2941FA741590037962B /* F4SStyle.swift in Sources */,
 				FC4BB6051FA20F4100173864 /* Partner.swift in Sources */,
 				FCCD6AE91FBB44CF0088D7C7 /* PopupCompanyListViewController.swift in Sources */,

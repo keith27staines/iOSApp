@@ -287,14 +287,32 @@ extension DatabaseOperations {
         return interestIdList
     }
     
-    /// Returns the company with the specified uuid
+    /// Returns the company with the specified id
     public func companyWithId(_ id: Int64) -> Company? {
         guard let db = database else {
             log.debug("Can't find company with specified uuid because the database isn't loaded")
             return nil
         }
-//        let selectString: String = "SELECT * FROM businesses_company WHERE id = '\(id)'"
         let selectString: String = "SELECT * FROM businesses_company WHERE id = \(id)"
+        guard let stmt = try? db.prepare(selectString) else {
+            // Company just wasn't found
+            return nil
+        }
+        
+        for row in stmt {
+            let company = DatabaseOperations.sharedInstance.getCompanyFromRowAndStatement(row: row, statement: stmt)
+            return company
+        }
+        return nil
+    }
+    
+    /// Returns the company with the specified uuid
+    public func companyWithUUID(_ uuid: F4SUUID) -> Company? {
+        guard let db = database else {
+            log.debug("Can't find company with specified uuid because the database isn't loaded")
+            return nil
+        }
+        let selectString: String = "SELECT * FROM businesses_company WHERE uuid = \(uuid)"
         guard let stmt = try? db.prepare(selectString) else {
             // Company just wasn't found
             return nil

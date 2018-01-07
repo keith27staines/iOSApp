@@ -130,6 +130,9 @@
                                         <state key="normal" title="Recommendations">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="recommendationsButtonPressed:" destination="z0G-7p-alZ" eventType="touchUpInside" id="mA5-6a-bGd"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>

@@ -132,6 +132,7 @@ class CustomNavigationHelper {
         window.rootViewController = setUpDrawerController(navigationController: tabBar)
     }
     
+    
     func moveToFavouriteCtrl(window: UIWindow) {
         let mapStoryboard = UIStoryboard(name: "MapView", bundle: nil)
         guard let mapCtrl = mapStoryboard.instantiateViewController(withIdentifier: "MapViewCtrl") as? MapViewController else {
@@ -175,7 +176,6 @@ class CustomNavigationHelper {
         
         window.rootViewController = setUpDrawerController(navigationController: tabBar)
     }
-
 
     func setUpDrawerController(navigationController: UIViewController) -> DrawerController {
         navigationController.restorationIdentifier = "ExampleCenterNavigationControllerRestorationKey"

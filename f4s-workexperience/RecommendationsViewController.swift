@@ -21,11 +21,6 @@ class RecommendationsViewController: UIViewController {
         super.viewDidLoad()
         reloadModel()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     func reloadModel() {
         model = RecommendationsModel()
@@ -50,9 +45,25 @@ extension RecommendationsViewController : UITableViewDataSource, UITableViewDele
     }
     
     func configure(cell: UITableViewCell, recommendation: Recommendation) {
-        //cell.imageView?.image = recommendation.image
-        cell.textLabel?.text = recommendation.companyName
+        var recommendation = recommendation
+        cell.textLabel?.text = ""
+        cell.imageView?.image = UIImage(named: "DefaultLogo")
         cell.detailTextLabel?.text = ""
-        //cell.detailTextLabel?.text = recommendation.explanation
+        guard let company = recommendation.company else {
+            return
+        }
+        cell.textLabel?.text = company.name
+        company.getLogo { (image) in
+            DispatchQueue.main.async {
+                cell.imageView?.image = image ?? UIImage(named: "DefaultLogo")
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let recommendation = model.recommendationForIndexPath(indexPath)
+        guard let company = recommendation.companyUUID else {
+            return
+        }
     }
 }

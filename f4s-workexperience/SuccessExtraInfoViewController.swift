@@ -17,6 +17,7 @@ class SuccessExtraInfoViewController: UIViewController {
 
     @IBOutlet weak var recommendationsButton: UIButton!
     
+
     let backgroundPopoverView = UIView()
 
     override func viewDidLoad() {
@@ -59,14 +60,19 @@ extension SuccessExtraInfoViewController: UIPopoverPresentationControllerDelegat
 // MARK: - User Interaction
 extension SuccessExtraInfoViewController {
 
+    @IBAction func recommendationsButtonPressed(_ sender: UIButton) {
+        CustomTabBarViewController.rewindToDrawerAndSelectTab(vc: self, tab: .map)
+    
+    }
+    
     @IBAction func timelineButtonTouched(_: UIButton) {
-        CustomTabBarViewController.rewindToDrawerAndSelectTab(vc: self, index: 0)
+        CustomTabBarViewController.rewindToDrawerAndSelectTab(vc: self, tab: .timeline)
     }
     
     @IBAction func viewMapButtonTouched(_: UIButton) {
         if let window = view.window {
             NotificationHelper.sharedInstance.updateToolbarButton(window: window)
         }
-        CustomTabBarViewController.rewindToDrawerAndSelectTab(vc: self, index: 2)
+        CustomTabBarViewController.rewindToDrawerAndSelectTab(vc: self, tab: .map)
     }
 }

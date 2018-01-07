@@ -163,12 +163,20 @@ protocol RatePlacementProtocol: class {
     func dismissRateController()
 }
 
+
+enum TabIndex : Int {
+    case timeline = 0
+    case favourites = 1
+    case map = 2
+}
 extension CustomTabBarViewController {
-    static func rewindToDrawerAndSelectTab(vc: UIViewController, index: Int) {
+    
+    
+    static func rewindToDrawerAndSelectTab(vc: UIViewController, tab: TabIndex) {
         recursiveRewindToDrawer(from: vc, completion: { drawerController in
             guard let centerController = drawerController?.centerViewController else { return }
             guard let tabBarCtrl = centerController as? CustomTabBarViewController else { return }
-            tabBarCtrl.selectedIndex = index
+            tabBarCtrl.selectedIndex = tab.rawValue
         })
     }
     

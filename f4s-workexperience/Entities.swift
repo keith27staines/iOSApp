@@ -82,6 +82,14 @@ public struct Company : Hashable {
         self.hashtag = hashtag
         self.companyUrl = companyUrl
     }
+    
+    func getLogo(completion: @escaping (UIImage?) -> ()) {
+        if logoUrl.isEmpty { return }
+        guard let url = URL(string: logoUrl) as NSURL? else { return }
+        ImageService.sharedInstance.getImage(url: url, completed: { succeeded, image in
+            completion(image)
+        })
+    }
 }
 
 struct Placement {
