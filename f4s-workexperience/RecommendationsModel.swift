@@ -32,8 +32,10 @@ public class RecommendationsModel {
                     completion()
                 }
             case .error(let error):
-                print("error refreshing recommendations \n\(error)")
-                completion()
+                DispatchQueue.main.async {
+                    print("error refreshing recommendations \n\(error)")
+                    completion()
+                }
             }
         }
     }

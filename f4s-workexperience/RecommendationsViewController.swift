@@ -47,23 +47,24 @@ extension RecommendationsViewController : UITableViewDataSource, UITableViewDele
     func configure(cell: UITableViewCell, recommendation: Recommendation) {
         var recommendation = recommendation
         cell.textLabel?.text = ""
-        cell.imageView?.image = UIImage(named: "DefaultLogo")
+        cell.imageView?.image = Company.defaultLogo
         cell.detailTextLabel?.text = ""
         guard let company = recommendation.company else {
             return
         }
         cell.textLabel?.text = company.name
-        company.getLogo { (image) in
+        company.getLogo(defaultLogo: Company.defaultLogo) { (image) in
             DispatchQueue.main.async {
-                cell.imageView?.image = image ?? UIImage(named: "DefaultLogo")
+                cell.imageView?.image = image
             }
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let recommendation = model.recommendationForIndexPath(indexPath)
-        guard let company = recommendation.companyUUID else {
+        var recommendation = model.recommendationForIndexPath(indexPath)
+        guard let company = recommendation.company else {
             return
         }
+        CustomNavigationHelper.sharedInstance.showCompanyDetailsPopover(parentCtrl: self, company: company)
     }
 }

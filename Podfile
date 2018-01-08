@@ -6,6 +6,7 @@ use_frameworks!
 target 'f4s-workexperience' do
 
   # Pods for f4s-workexperience
+  pod 'Auth0'
   pod 'ReachabilitySwift'
   pod 'XCGLogger', '~> 5.0'
   pod 'Alamofire'

@@ -24,29 +24,5 @@ public class F4SRecommendationService : F4SDataTaskService {
     }
 }
 
-public class F4SDataTaskService : F4SApiService {
-    
-    private var task: URLSessionDataTask?
-    public let session: URLSession
-    public let baseUrl: URL
-    public let apiName: String
-    
-    public var url : URL {
-        return URL(string: apiName, relativeTo: baseUrl)!
-    }
-    
-    public init(baseURLString: String, apiName: String, objectType: Decodable.Type) {
-        self.apiName = apiName
-        self.baseUrl = URL(string: baseURLString)!
-        session = URLSession(configuration: F4SRecommendationService.defaultConfiguration)
-    }
-    
-    internal func get<A>(completion: @escaping (F4SNetworkResult<A>) -> ()) {
-        task?.cancel()
-        task = dataTask(attempting: "Get recommendations", completion: { (result) in
-            completion(result)
-        })
-        task?.resume()
-    }
-}
+
 

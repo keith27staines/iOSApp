@@ -178,6 +178,14 @@
 		FCCD6AE91FBB44CF0088D7C7 /* PopupCompanyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCD6AE81FBB44CF0088D7C7 /* PopupCompanyListViewController.swift */; };
 		FCCD6AEB1FBB4B8A0088D7C7 /* CompanyInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCD6AEA1FBB4B8A0088D7C7 /* CompanyInfoTableViewCell.swift */; };
 		FCD348552002340F00DC1316 /* F4SNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD348542002340F00DC1316 /* F4SNetwork.swift */; };
+		FCD3485820038B8700DC1316 /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCD3485720038B8700DC1316 /* Auth0.plist */; };
+		FCD3485A20038BF200DC1316 /* F4SEmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3485920038BF200DC1316 /* F4SEmailVerificationViewController.swift */; };
+		FCD3486320038C3100DC1316 /* MagicLinkInterpreterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3485D20038C3100DC1316 /* MagicLinkInterpreterTests.swift */; };
+		FCD3486420038C3100DC1316 /* F4SAuth0MagicLinkInterpreterer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3485E20038C3100DC1316 /* F4SAuth0MagicLinkInterpreterer.swift */; };
+		FCD3486520038C3100DC1316 /* LocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3485F20038C3100DC1316 /* LocalizedStrings.swift */; };
+		FCD3486620038C3100DC1316 /* F4SEmailVerificationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3486020038C3100DC1316 /* F4SEmailVerificationState.swift */; };
+		FCD3486720038C3100DC1316 /* F4SEmailVerificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3486120038C3100DC1316 /* F4SEmailVerificationModel.swift */; };
+		FCD3486820038C3100DC1316 /* F4SEmailVerificationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3486220038C3100DC1316 /* F4SEmailVerificationError.swift */; };
 		FCD884F91FFBC0CC00F05B08 /* Recommendations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCD884F81FFBC0CC00F05B08 /* Recommendations.storyboard */; };
 		FCD884FB1FFBE04F00F05B08 /* RecommendationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD884FA1FFBE04F00F05B08 /* RecommendationsViewController.swift */; };
 		FCD884FD1FFCCB4A00F05B08 /* RecommendationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD884FC1FFCCB4A00F05B08 /* RecommendationsModel.swift */; };
@@ -436,6 +444,14 @@
 		FCCD6AE81FBB44CF0088D7C7 /* PopupCompanyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupCompanyListViewController.swift; sourceTree = "<group>"; };
 		FCCD6AEA1FBB4B8A0088D7C7 /* CompanyInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyInfoTableViewCell.swift; sourceTree = "<group>"; };
 		FCD348542002340F00DC1316 /* F4SNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SNetwork.swift; sourceTree = "<group>"; };
+		FCD3485720038B8700DC1316 /* Auth0.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
+		FCD3485920038BF200DC1316 /* F4SEmailVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SEmailVerificationViewController.swift; sourceTree = "<group>"; };
+		FCD3485D20038C3100DC1316 /* MagicLinkInterpreterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagicLinkInterpreterTests.swift; sourceTree = "<group>"; };
+		FCD3485E20038C3100DC1316 /* F4SAuth0MagicLinkInterpreterer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SAuth0MagicLinkInterpreterer.swift; sourceTree = "<group>"; };
+		FCD3485F20038C3100DC1316 /* LocalizedStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedStrings.swift; sourceTree = "<group>"; };
+		FCD3486020038C3100DC1316 /* F4SEmailVerificationState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SEmailVerificationState.swift; sourceTree = "<group>"; };
+		FCD3486120038C3100DC1316 /* F4SEmailVerificationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SEmailVerificationModel.swift; sourceTree = "<group>"; };
+		FCD3486220038C3100DC1316 /* F4SEmailVerificationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SEmailVerificationError.swift; sourceTree = "<group>"; };
 		FCD884F81FFBC0CC00F05B08 /* Recommendations.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Recommendations.storyboard; sourceTree = "<group>"; };
 		FCD884FA1FFBE04F00F05B08 /* RecommendationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsViewController.swift; sourceTree = "<group>"; };
 		FCD884FC1FFCCB4A00F05B08 /* RecommendationsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsModel.swift; sourceTree = "<group>"; };
@@ -805,6 +821,7 @@
 		40E78E501DD328E0000A3776 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				FCD3485620038B6B00DC1316 /* Authentication */,
 				FCD884F71FFBC0A000F05B08 /* Recommendations */,
 				FCA53B931FE115E1009F6DB0 /* Force app update */,
 				FC4BB6011FA20E6A00173864 /* Partner selection */,
@@ -1142,6 +1159,37 @@
 			name = "Branding and styling";
 			sourceTree = "<group>";
 		};
+		FCD3485620038B6B00DC1316 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				FCD3485720038B8700DC1316 /* Auth0.plist */,
+				FCD3485920038BF200DC1316 /* F4SEmailVerificationViewController.swift */,
+				FCD3485B20038C3100DC1316 /* Models */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		FCD3485B20038C3100DC1316 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FCD3485C20038C3100DC1316 /* Unit tests */,
+				FCD3485E20038C3100DC1316 /* F4SAuth0MagicLinkInterpreterer.swift */,
+				FCD3485F20038C3100DC1316 /* LocalizedStrings.swift */,
+				FCD3486020038C3100DC1316 /* F4SEmailVerificationState.swift */,
+				FCD3486120038C3100DC1316 /* F4SEmailVerificationModel.swift */,
+				FCD3486220038C3100DC1316 /* F4SEmailVerificationError.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FCD3485C20038C3100DC1316 /* Unit tests */ = {
+			isa = PBXGroup;
+			children = (
+				FCD3485D20038C3100DC1316 /* MagicLinkInterpreterTests.swift */,
+			);
+			path = "Unit tests";
+			sourceTree = "<group>";
+		};
 		FCD884F71FFBC0A000F05B08 /* Recommendations */ = {
 			isa = PBXGroup;
 			children = (
@@ -1286,6 +1334,7 @@
 				204C89651DF5F03F00D8493A /* EditFooter.xib in Resources */,
 				FC681C011F57473D0077BECA /* Podfile.lock in Resources */,
 				204C89641DF5F03F00D8493A /* EditCoverLetter.storyboard in Resources */,
+				FCD3485820038B8700DC1316 /* Auth0.plist in Resources */,
 				2037B0B41DEC87F200A9DE3E /* CoverLetter.storyboard in Resources */,
 				40C1A4F31DDEF2F6000F80AA /* AutoCompleteTableViewCell.xib in Resources */,
 				40E78E1E1DD31A86000A3776 /* Assets.xcassets in Resources */,
@@ -1449,6 +1498,7 @@
 				204203F71E4B7966007C7409 /* FavouriteViewController.swift in Sources */,
 				20B128181DDA1A3900CE3F1F /* Config.swift in Sources */,
 				40A28CBF1E24ECE90077D490 /* SuccessExtraInfoViewController.swift in Sources */,
+				FCD3486420038C3100DC1316 /* F4SAuth0MagicLinkInterpreterer.swift in Sources */,
 				FCC753EE1F80F26200E9ECD6 /* MapModel.swift in Sources */,
 				40C1A5191DDF5ACE000F80AA /* GMUClusterManager.m in Sources */,
 				204203F01E4B1E3D007C7409 /* ShortlistService.swift in Sources */,
@@ -1467,6 +1517,7 @@
 				204C896E1DF5F08500D8493A /* IndustryTableViewCell.swift in Sources */,
 				204C89591DF5A54600D8493A /* TemplateChoiceDBOperations.swift in Sources */,
 				40C1A5211DDF5ACE000F80AA /* GQTPointQuadTree.m in Sources */,
+				FCD3486320038C3100DC1316 /* MagicLinkInterpreterTests.swift in Sources */,
 				FC59B1931F81554F0068EC9C /* CGRect+Methods.swift in Sources */,
 				2002A5681E4CAAD5000825BC /* FavouritesPopupViewController.swift in Sources */,
 				FC59B1921F8155480068EC9C /* F4SQuadtree.swift in Sources */,
@@ -1517,6 +1568,7 @@
 				FC99F3D72000BE4900E3AC5A /* F4SService.swift in Sources */,
 				FCA6D2941FA741590037962B /* F4SStyle.swift in Sources */,
 				FC4BB6051FA20F4100173864 /* Partner.swift in Sources */,
+				FCD3486520038C3100DC1316 /* LocalizedStrings.swift in Sources */,
 				FCCD6AE91FBB44CF0088D7C7 /* PopupCompanyListViewController.swift in Sources */,
 				20B127DF1DD99E5700CE3F1F /* UserService.swift in Sources */,
 				204203EC1E4B160C007C7409 /* ShortlistCoreDataManager.swift in Sources */,
@@ -1537,6 +1589,7 @@
 				20FABFEC1DDDA63600D583E2 /* FileHelper.swift in Sources */,
 				40E78E891DD32C3C000A3776 /* ExtensionsHelper.swift in Sources */,
 				40A5CF3E1DED72E8000007AB /* InterestsCollectionViewCell.swift in Sources */,
+				FCD3485A20038BF200DC1316 /* F4SEmailVerificationViewController.swift in Sources */,
 				40C1A51A1DDF5ACE000F80AA /* GMUDefaultClusterIconGenerator.m in Sources */,
 				40E78E661DD32B94000A3776 /* CustomNavigationHelper.swift in Sources */,
 				204C896B1DF5F08500D8493A /* CompanyCollectionViewCell.swift in Sources */,
@@ -1562,9 +1615,11 @@
 				40C6DDF21E03F401000F8806 /* UserInfoCoreDataManager.swift in Sources */,
 				40E78E8D1DD32C3C000A3776 /* MessageHandler.swift in Sources */,
 				FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */,
+				FCD3486720038C3100DC1316 /* F4SEmailVerificationModel.swift in Sources */,
 				40E78E781DD32BE7000A3776 /* DrawerController.swift in Sources */,
 				40E78E7E1DD32BF4000A3776 /* CenterTableViewCell.swift in Sources */,
 				204C89571DF5A44100D8493A /* TemplateChoiceCoreDataManager.swift in Sources */,
+				FCD3486820038C3100DC1316 /* F4SEmailVerificationError.swift in Sources */,
 				40C1A4F51DDEF3DD000F80AA /* AutoCompleteTableViewCell.swift in Sources */,
 				40E78E6E1DD32BD4000A3776 /* BaseMenuViewController.swift in Sources */,
 				40E78E711DD32BD4000A3776 /* SideMenuViewController.swift in Sources */,
@@ -1572,6 +1627,7 @@
 				204203F91E4B81AB007C7409 /* FavouriteTableViewCell.swift in Sources */,
 				40E78E581DD32964000A3776 /* Constants.swift in Sources */,
 				40C1A51C1DDF5ACE000F80AA /* GMUGridBasedClusterAlgorithm.m in Sources */,
+				FCD3486620038C3100DC1316 /* F4SEmailVerificationState.swift in Sources */,
 				FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */,
 				207364611E52091900786F4C /* MessageContainerViewController.swift in Sources */,
 				40E78E811DD32BF4000A3776 /* TableViewCell.swift in Sources */,

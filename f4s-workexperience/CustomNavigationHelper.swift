@@ -197,7 +197,7 @@ class CustomNavigationHelper {
             let block = ExampleDrawerVisualStateManager.sharedManager.drawerVisualStateBlockForDrawerSide(drawerSide: drawerSide)
             block?(drawerController, drawerSide, percentVisible)
         }
-
+        
         return drawerController!
     }
 

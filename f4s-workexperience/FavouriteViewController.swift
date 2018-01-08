@@ -125,22 +125,14 @@ extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
         
         let favourite = favouriteList[indexPath.row]
         if let company = self.companies.filter({ $0.uuid == favourite.companyUuid.replacingOccurrences(of: "-", with: "") }).first {
-            cell.companyImageView.image = UIImage(named: "DefaultLogo")
             cell.companyTitleLabel.attributedText = NSAttributedString(
                 string: company.name,
                 attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize,weight: UIFont.Weight.medium),NSAttributedStringKey.foregroundColor: UIColor.black])
             cell.companyImageView.layer.cornerRadius = cell.companyImageView.bounds.height / 2
-            cell.companyImageView.image = UIImage(named: "DefaultLogo")
-            if !company.logoUrl.isEmpty, let url = NSURL(string: company.logoUrl) {
-                ImageService.sharedInstance.getImage(url: url, completed: {
-                    succeeded, image in
-                    DispatchQueue.main.async {
-                        if succeeded && image != nil {
-                            cell.companyImageView.image = image!
-                        }
-                    }
-                })
-            }
+            cell.companyImageView.image = Company.defaultLogo
+            company.getLogo(defaultLogo: Company.defaultLogo, completion: { (image) in
+                cell.companyImageView.image = image
+            })
             cell.companyIndustryLabel.attributedText = NSAttributedString(
                 string: company.industry,
                 attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize,weight: UIFont.Weight.light), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])

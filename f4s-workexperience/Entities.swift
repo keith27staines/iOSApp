@@ -29,6 +29,9 @@ struct User {
 }
 
 public struct Company : Hashable {
+    
+    public static let defaultLogo = UIImage(named: "DefaultLogo")
+    
     public var hashValue: Int {
         return uuid.hashValue ^ latitude.hashValue ^ longitude.hashValue
     }
@@ -83,11 +86,16 @@ public struct Company : Hashable {
         self.companyUrl = companyUrl
     }
     
-    func getLogo(completion: @escaping (UIImage?) -> ()) {
+    /// Asynchronously obtains the logo for the current instance or the specified default logo if the current instance has no specified logo. This method is intended for direct use by the UI and therefore the completion handler is guarenteed to run on the main queue.
+    /// - parameter defaultLogo: The image to use if the company hasn't specified a logo
+    /// - parameter completion: To receive the logo (or the specified default image)
+    func getLogo(defaultLogo: UIImage?, completion: @escaping (UIImage?) -> () ) {
         if logoUrl.isEmpty { return }
         guard let url = URL(string: logoUrl) as NSURL? else { return }
         ImageService.sharedInstance.getImage(url: url, completed: { succeeded, image in
-            completion(image)
+            DispatchQueue.main.async {
+                completion(image ?? defaultLogo)
+            }
         })
     }
 }
