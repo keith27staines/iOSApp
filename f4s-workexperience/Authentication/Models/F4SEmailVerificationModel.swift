@@ -24,6 +24,12 @@ public class F4SEmailVerificationModel {
         passwordlessType = .iOSLink
         addNotificationHandlers()
         emailVerificationState = F4SEmailVerificationModel.verificationState()
+        switch emailVerificationState {
+        case .error(_):
+            lastNonErrorState = .start
+        default:
+            lastNonErrorState = emailVerificationState
+        }
     }
     
     /// Determines the verification state from data held on local store
@@ -95,7 +101,6 @@ public class F4SEmailVerificationModel {
                     completion()
                 }
         }
-    
     }
     
     /// A callback to notify the owner of a state change
@@ -144,6 +149,7 @@ public class F4SEmailVerificationModel {
             UserDefaults.standard.set(newValue, forKey: emailSentForVerificationKey)
         }
     }
+    
     public private (set) var emailSentForVerification: String? {
         get {
             return F4SEmailVerificationModel.emailSentForVerification
@@ -162,6 +168,7 @@ public class F4SEmailVerificationModel {
             UserDefaults.standard.set(newValue, forKey: verifiedEmailKey)
         }
     }
+    
     public private (set) var verifiedEmail: String? {
         get {
             return F4SEmailVerificationModel.verifiedEmail

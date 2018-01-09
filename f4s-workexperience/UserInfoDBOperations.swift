@@ -31,7 +31,9 @@ class UserInfoDBOperations {
             let userInfoDB = UserInfoCoreDataManager.sharedInstance.getUserInfo(userUuid: userUuid) else {
             return nil
         }
-        return UserInfoDBOperations.sharedInstance.getUserFromUserInfoDB(userInfoDB: userInfoDB)
+        var info = UserInfoDBOperations.sharedInstance.getUserFromUserInfoDB(userInfoDB: userInfoDB)
+        info.email = F4SEmailVerificationModel.verifiedEmail!
+        return info
     }
 
     fileprivate func getUserFromUserInfoDB(userInfoDB: UserInfoDB) -> User {

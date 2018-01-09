@@ -1,5 +1,7 @@
 PODS:
   - Alamofire (4.5.1)
+  - Auth0 (1.9.2):
+    - SimpleKeychain
   - GoogleMaps (2.5.0):
     - GoogleMaps/Maps (= 2.5.0)
   - GoogleMaps/Base (2.5.0)
@@ -14,6 +16,7 @@ PODS:
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - ReachabilitySwift (4.1.0)
+  - SimpleKeychain (0.8.0)
   - SQLite.swift (0.11.4):
     - SQLite.swift/standard (= 0.11.4)
   - SQLite.swift/standard (0.11.4)
@@ -25,6 +28,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - Auth0
   - GoogleMaps (~> 2.5.0)
   - GooglePlaces (~> 2.5.0)
   - GRMustache.swift
@@ -47,6 +51,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  Auth0: 9eceebf97b6b3482eaed82193e090b50c3bd8ad6
   GoogleMaps: c087b8e5dfe87ca6ebf59adb9b4894a4146bec4f
   GooglePlaces: dd70d9d71ea1c7944846afe67de3712c99b30a77
   GRMustache.swift: 8a547c12bea16052071b2b540af83d770075f0eb
@@ -54,10 +59,11 @@ SPEC CHECKSUMS:
   KeychainSwift: f9f7910449a0c0fd2cabc889121530dd2c477c33
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
+  SimpleKeychain: 84c748463eec601dfee5e7990f55cc82edc5488d
   SQLite.swift: 3e3bee21da701b5b9f87c4a672cb54f233505692
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   XCGLogger: 49bceee6dc0c738eae5d6454fdbf800d62256b74
 
-PODFILE CHECKSUM: 0b3dd1dac59a40233f2a981727d32aedf9a52995
+PODFILE CHECKSUM: 3de2eebd01e57bf4747dfcf055329f1661e823a3
 
 COCOAPODS: 1.3.1

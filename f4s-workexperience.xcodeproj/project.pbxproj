@@ -180,12 +180,13 @@
 		FCD348552002340F00DC1316 /* F4SNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD348542002340F00DC1316 /* F4SNetwork.swift */; };
 		FCD3485820038B8700DC1316 /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCD3485720038B8700DC1316 /* Auth0.plist */; };
 		FCD3485A20038BF200DC1316 /* F4SEmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3485920038BF200DC1316 /* F4SEmailVerificationViewController.swift */; };
-		FCD3486320038C3100DC1316 /* MagicLinkInterpreterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3485D20038C3100DC1316 /* MagicLinkInterpreterTests.swift */; };
 		FCD3486420038C3100DC1316 /* F4SAuth0MagicLinkInterpreterer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3485E20038C3100DC1316 /* F4SAuth0MagicLinkInterpreterer.swift */; };
 		FCD3486520038C3100DC1316 /* LocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3485F20038C3100DC1316 /* LocalizedStrings.swift */; };
 		FCD3486620038C3100DC1316 /* F4SEmailVerificationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3486020038C3100DC1316 /* F4SEmailVerificationState.swift */; };
 		FCD3486720038C3100DC1316 /* F4SEmailVerificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3486120038C3100DC1316 /* F4SEmailVerificationModel.swift */; };
 		FCD3486820038C3100DC1316 /* F4SEmailVerificationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3486220038C3100DC1316 /* F4SEmailVerificationError.swift */; };
+		FCD348692003A1B500DC1316 /* MagicLinkInterpreterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3485D20038C3100DC1316 /* MagicLinkInterpreterTests.swift */; };
+		FCD3486B20049DFB00DC1316 /* F4SEmailVerification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCD3486A20049DFA00DC1316 /* F4SEmailVerification.storyboard */; };
 		FCD884F91FFBC0CC00F05B08 /* Recommendations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCD884F81FFBC0CC00F05B08 /* Recommendations.storyboard */; };
 		FCD884FB1FFBE04F00F05B08 /* RecommendationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD884FA1FFBE04F00F05B08 /* RecommendationsViewController.swift */; };
 		FCD884FD1FFCCB4A00F05B08 /* RecommendationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD884FC1FFCCB4A00F05B08 /* RecommendationsModel.swift */; };
@@ -452,6 +453,7 @@
 		FCD3486020038C3100DC1316 /* F4SEmailVerificationState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SEmailVerificationState.swift; sourceTree = "<group>"; };
 		FCD3486120038C3100DC1316 /* F4SEmailVerificationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SEmailVerificationModel.swift; sourceTree = "<group>"; };
 		FCD3486220038C3100DC1316 /* F4SEmailVerificationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SEmailVerificationError.swift; sourceTree = "<group>"; };
+		FCD3486A20049DFA00DC1316 /* F4SEmailVerification.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SEmailVerification.storyboard; sourceTree = "<group>"; };
 		FCD884F81FFBC0CC00F05B08 /* Recommendations.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Recommendations.storyboard; sourceTree = "<group>"; };
 		FCD884FA1FFBE04F00F05B08 /* RecommendationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsViewController.swift; sourceTree = "<group>"; };
 		FCD884FC1FFCCB4A00F05B08 /* RecommendationsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsModel.swift; sourceTree = "<group>"; };
@@ -1163,6 +1165,7 @@
 			isa = PBXGroup;
 			children = (
 				FCD3485720038B8700DC1316 /* Auth0.plist */,
+				FCD3486A20049DFA00DC1316 /* F4SEmailVerification.storyboard */,
 				FCD3485920038BF200DC1316 /* F4SEmailVerificationViewController.swift */,
 				FCD3485B20038C3100DC1316 /* Models */,
 			);
@@ -1340,6 +1343,7 @@
 				40E78E1E1DD31A86000A3776 /* Assets.xcassets in Resources */,
 				D54E0FFD1E044B0400A51560 /* InfoWindowView.xib in Resources */,
 				40A5CF3A1DED6F8D000007AB /* InterestsView.storyboard in Resources */,
+				FCD3486B20049DFB00DC1316 /* F4SEmailVerification.storyboard in Resources */,
 				201458C51E1CFCE500DBC9BD /* Message.storyboard in Resources */,
 				D54E10051E044BA000A51560 /* ProcessedMessages.storyboard in Resources */,
 				40E78E951DD391F3000A3776 /* MapView.storyboard in Resources */,
@@ -1374,24 +1378,28 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-f4s-workexperience/Pods-f4s-workexperience-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Auth0/Auth0.framework",
 				"${BUILT_PRODUCTS_DIR}/GRMustache.swift/Mustache.framework",
 				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
+				"${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Auth0.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mustache.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleKeychain.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
 			);
@@ -1517,7 +1525,6 @@
 				204C896E1DF5F08500D8493A /* IndustryTableViewCell.swift in Sources */,
 				204C89591DF5A54600D8493A /* TemplateChoiceDBOperations.swift in Sources */,
 				40C1A5211DDF5ACE000F80AA /* GQTPointQuadTree.m in Sources */,
-				FCD3486320038C3100DC1316 /* MagicLinkInterpreterTests.swift in Sources */,
 				FC59B1931F81554F0068EC9C /* CGRect+Methods.swift in Sources */,
 				2002A5681E4CAAD5000825BC /* FavouritesPopupViewController.swift in Sources */,
 				FC59B1921F8155480068EC9C /* F4SQuadtree.swift in Sources */,
@@ -1640,6 +1647,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCD348692003A1B500DC1316 /* MagicLinkInterpreterTests.swift in Sources */,
 				FC59B1901F81549B0068EC9C /* CGRect+MethodsTests.swift in Sources */,
 				40E78E2C1DD31A86000A3776 /* f4s_workexperienceTests.swift in Sources */,
 				FC59B1911F81549B0068EC9C /* F4SQuadtreeTests.swift in Sources */,

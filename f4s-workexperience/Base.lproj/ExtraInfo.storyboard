@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -24,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="20" width="414" height="980"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hz8-hB-HzJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="788"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="708"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yellowQuestionMark" translatesAutoresizingMaskIntoConstraints="NO" id="S8V-te-S2l">
                                                 <rect key="frame" x="162" y="60" width="90" height="90"/>
@@ -57,42 +58,16 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="74" translatesAutoresizingMaskIntoConstraints="NO" id="NrJ-np-QPp">
-                                                <rect key="frame" x="30" y="337" width="354" height="431"/>
+                                                <rect key="frame" x="30" y="337" width="354" height="351"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZwU-Av-rFq">
-                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="297"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="217"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="49" translatesAutoresizingMaskIntoConstraints="NO" id="DIV-QA-nEC">
-                                                                <rect key="frame" x="0.0" y="0.0" width="354" height="271"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="354" height="191"/>
                                                                 <subviews>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="7iB-P1-4An">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="31"/>
-                                                                        <subviews>
-                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ay3-HG-rFT" customClass="NextResponderTextField" customModule="f4s_workexperience" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="354" height="21"/>
-                                                                                <nil key="textColor"/>
-                                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
-                                                                                <connections>
-                                                                                    <action selector="emailTextFieldDidChange:" destination="6fi-A3-veq" eventType="editingChanged" id="QaN-6B-AXn"/>
-                                                                                    <outlet property="delegate" destination="6fi-A3-veq" id="Xfh-Np-oyz"/>
-                                                                                    <outlet property="nextResponderField" destination="Tuk-dL-J6F" id="k2L-Li-Okv"/>
-                                                                                </connections>
-                                                                            </textField>
-                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kej-Eg-p9x">
-                                                                                <rect key="frame" x="0.0" y="30" width="354" height="1"/>
-                                                                                <color key="backgroundColor" red="0.86666666670000003" green="0.52941176469999995" blue="0.031372549020000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                                                <constraints>
-                                                                                    <constraint firstAttribute="height" constant="1" id="eZR-LN-0o5"/>
-                                                                                </constraints>
-                                                                            </view>
-                                                                        </subviews>
-                                                                        <constraints>
-                                                                            <constraint firstItem="Ay3-HG-rFT" firstAttribute="width" secondItem="Kej-Eg-p9x" secondAttribute="width" id="vqH-cH-9Qh"/>
-                                                                        </constraints>
-                                                                    </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="SDq-DG-ayv">
-                                                                        <rect key="frame" x="0.0" y="80" width="354" height="31"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="31"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First and Last Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tuk-dL-J6F" customClass="NextResponderTextField" customModule="f4s_workexperience" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="21"/>
@@ -117,7 +92,7 @@
                                                                         </constraints>
                                                                     </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="Qyl-qa-3YB">
-                                                                        <rect key="frame" x="0.0" y="160" width="354" height="31"/>
+                                                                        <rect key="frame" x="0.0" y="80" width="354" height="31"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Parent's, teacher's or guardian's email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bZu-FP-r1u" customClass="NextResponderTextField" customModule="f4s_workexperience" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="21"/>
@@ -142,7 +117,7 @@
                                                                         </constraints>
                                                                     </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="fjS-KP-AS4">
-                                                                        <rect key="frame" x="0.0" y="240" width="354" height="31"/>
+                                                                        <rect key="frame" x="0.0" y="160" width="354" height="31"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Voucher Code" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g1i-QR-DUi" customClass="NextResponderTextField" customModule="f4s_workexperience" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="21"/>
@@ -169,7 +144,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you don’t have a voucher code tap here" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KnY-Nh-iSQ">
-                                                                <rect key="frame" x="0.0" y="281" width="354" height="16"/>
+                                                                <rect key="frame" x="0.0" y="201" width="354" height="16"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -177,7 +152,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W6l-9J-xry">
-                                                        <rect key="frame" x="0.0" y="371" width="354" height="60"/>
+                                                        <rect key="frame" x="0.0" y="291" width="354" height="60"/>
                                                         <color key="backgroundColor" red="0.21176470589999999" green="0.64313725489999995" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="60" id="7nq-3O-hkG"/>
@@ -238,9 +213,6 @@
                         <outlet property="dobInfoLabel" destination="VbZ-62-oPU" id="DC0-1j-7gb"/>
                         <outlet property="dobTextField" destination="VA6-BR-IJV" id="iA1-HG-7MU"/>
                         <outlet property="dobUnderlineView" destination="SnL-sW-mx6" id="emd-i9-pFU"/>
-                        <outlet property="emailStackView" destination="7iB-P1-4An" id="Ujh-xn-hgd"/>
-                        <outlet property="emailTextField" destination="Ay3-HG-rFT" id="M8B-QX-txn"/>
-                        <outlet property="emailUnderlineView" destination="Kej-Eg-p9x" id="KmP-TT-4Jv"/>
                         <outlet property="firstAndLastNameStackView" destination="SDq-DG-ayv" id="tOE-nC-MBI"/>
                         <outlet property="firstAndLastNameTextField" destination="Tuk-dL-J6F" id="KaY-L9-HBx"/>
                         <outlet property="firstAndLastNameUnderlineView" destination="jO5-dM-A01" id="3JI-UR-49e"/>

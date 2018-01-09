@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import AuthTest
+@testable import f4s_workexperience
 
 class F4SAuth0MagicLinkInterpreterTests: XCTestCase {
 

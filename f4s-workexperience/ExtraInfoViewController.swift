@@ -20,10 +20,6 @@ class ExtraInfoViewController: UIViewController {
     @IBOutlet weak var completeExtraInfoButton: UIButton!
     @IBOutlet weak var userInfoStackView: UIStackView!
 
-    @IBOutlet weak var emailTextField: NextResponderTextField!
-    @IBOutlet weak var emailUnderlineView: UIView!
-    @IBOutlet weak var emailStackView: UIStackView!
-
     @IBOutlet weak var firstAndLastNameTextField: NextResponderTextField!
     @IBOutlet weak var firstAndLastNameUnderlineView: UIView!
     @IBOutlet weak var firstAndLastNameStackView: UIStackView!
@@ -143,7 +139,6 @@ extension ExtraInfoViewController {
         dobTextField.inputView = datePicker
 
         self.dobUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
-        self.emailUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
         self.firstAndLastNameUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
         self.parentsEmailUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
         self.voucherCodeUnderlineView.backgroundColor = UIColor(netHex: Colors.warmGrey)
@@ -240,7 +235,6 @@ extension ExtraInfoViewController {
             self.noVoucherInfoLabel.isHidden = false
             scrollView.isScrollEnabled = true
             self.dobTextField.text = user.dateOfBirth
-            self.emailTextField.text = user.email
             self.firstAndLastNameTextField.text = user.firstName + " " + user.lastName
             if user.requiresConsent {
                 self.parentsEmailTextField.text = user.consenterEmail
@@ -250,7 +244,6 @@ extension ExtraInfoViewController {
                 displayExtraInfoForUser(withAge: 20)
             }
 
-            self.emailUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
             self.firstAndLastNameUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
 
             if checkIfAllFieldsAreValid() {
@@ -304,12 +297,9 @@ extension ExtraInfoViewController {
         }
 
         let validColor = UIColor(netHex: Colors.mediumGreen)
-
         switch self.parentsEmailStackView.isHidden {
-
         case true:
-            if self.emailUnderlineView.backgroundColor == validColor &&
-                self.firstAndLastNameUnderlineView.backgroundColor == validColor {
+            if self.firstAndLastNameUnderlineView.backgroundColor == validColor {
                 if voucherCodeTextFieldText.isEmpty {
                     return true
                 } else {
@@ -318,8 +308,7 @@ extension ExtraInfoViewController {
             } else { return false }
 
         case false:
-            if self.emailUnderlineView.backgroundColor == validColor &&
-                self.firstAndLastNameUnderlineView.backgroundColor == validColor &&
+            if self.firstAndLastNameUnderlineView.backgroundColor == validColor &&
                 self.parentsEmailUnderlineView.backgroundColor == validColor {
                 if voucherCodeTextFieldText.isEmpty {
                     return true
@@ -353,9 +342,9 @@ extension ExtraInfoViewController {
         if let dateOfBirthText = dobTextField.text {
             user.dateOfBirth = dateOfBirthText
         }
-        if let email = emailTextField.text {
-            user.email = email
-        }
+        
+        user.email = F4SEmailVerificationModel.verifiedEmail!
+        
         if let firstAndLastNameText = firstAndLastNameTextField.text {
             let nameComponents = firstAndLastNameText.components(separatedBy: " ")
             if nameComponents.count > 1 {
@@ -555,17 +544,6 @@ extension ExtraInfoViewController {
         } else {
             print("tapped noVoucherInfoLabel")
         }
-    }
-
-    @IBAction func emailTextFieldDidChange(_ sender: NextResponderTextField) {
-        if let senderText = sender.text {
-            if senderText.isEmail() && !senderText.isEmpty {
-                self.emailUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
-            } else {
-                self.emailUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
-            }
-        }
-        updateButtonStateAndImage()
     }
 
     @IBAction func firstNameAndLastNameTextFieldDidChange(_ sender: NextResponderTextField) {

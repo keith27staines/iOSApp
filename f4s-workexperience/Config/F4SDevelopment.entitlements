@@ -7,6 +7,7 @@
 	<key>com.apple.developer.associated-domains</key>
 	<array>
 		<string>applinks:staging.student.workfinder.com</string>
+		<string>applinks:founders4schools.eu.auth0.com</string>
 	</array>
 </dict>
 </plist>

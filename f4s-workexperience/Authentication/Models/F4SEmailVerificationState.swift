@@ -52,17 +52,17 @@ public extension F4SEmailVerificationState {
     var isSecondaryButtonVisible: Bool {
         switch self {
         case .start:
-            return true
+            return false
         case .emailSent(_):
             return true
         case .linkReceived:
-            return true
+            return false
         case .verified(_):
-            return true
+            return false
         case .previouslyVerified:
             return true
         case .error(_):
-            return true
+            return false
         }
     }
     
@@ -72,7 +72,7 @@ public extension F4SEmailVerificationState {
         case .start:
             return LocalizedStrings.ButtonTitles.requestVerificationLink
         case .emailSent(_):
-            return LocalizedStrings.ButtonTitles.editEmail
+            return LocalizedStrings.ButtonTitles.resendLink
         case .linkReceived:
             return LocalizedStrings.ButtonTitles.processLink
         case .verified(_):
@@ -85,7 +85,7 @@ public extension F4SEmailVerificationState {
     }
     
     var titleForSecondary: String {
-        return ""
+        return "Use a different email"
     }
 }
 

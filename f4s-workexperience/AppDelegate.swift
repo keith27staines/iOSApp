@@ -15,6 +15,12 @@ import KeychainSwift
 
 let log = XCGLogger.default
 
+extension Notification.Name {
+    
+    static let verificationCodeRecieved = Notification.Name("verificationCodeRecieved")
+    
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -91,9 +97,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setInvokingUrl(_ url: URL) {
-        let key = UserDefaultsKeys.invokingUrl
-        UserDefaults.standard.set(url, forKey: key)
         print("Invoked from url: \(url.absoluteString)")
+        if F4SAuth0MagicLinkInterpreter.isPasswordlessURL(url: url) {
+            let userInfo: [AnyHashable: Any] = ["url" : url]
+            let notification = Notification(
+                name: .verificationCodeRecieved,
+                object: self,
+                userInfo: userInfo)
+            NotificationCenter.default.post(notification)
+        } else {
+            let key = UserDefaultsKeys.invokingUrl
+            UserDefaults.standard.set(url, forKey: key)
+        }
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -246,3 +261,4 @@ extension AppDelegate {
         }
     }
 }
+

@@ -15,12 +15,9 @@ class F4SEmailVerificationViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var feedbackLabel: UILabel!
     @IBOutlet weak var primaryActionButton: UIButton!
-    
-    /// Set this closure to close this and proceed to the next view controller
-    var proceedToNextClosure: (() -> Void) = { print("ProceedToNextNotSet") }
 
     /// A callback to inform the presenter that the email was verified
-    var emailWasVerified: ((F4SCredentials) -> Void)? = nil
+    var emailWasVerified: (() -> Void)? = nil
 
     /// The finite state machine that serves as the model for this view
     var model: F4SEmailVerificationModel!
@@ -39,16 +36,22 @@ class F4SEmailVerificationViewController: UIViewController {
         activitySpinner.isHidden = true
         activityCount = 0
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         configure(for: model.emailVerificationState)
+        applyStyle()
+    }
+    
+    func applyStyle() {
+        F4SButtonStyler.apply(style: .primary, button: primaryActionButton)
+        F4SButtonStyler.apply(style: .secondary, button: secondaryActionButton)
+        F4SBackgroundViewStyler.apply(style: .standardPageBackground, backgroundView: self.view)
     }
     
     func handleStateChange(oldState: F4SEmailVerificationState, newState: F4SEmailVerificationState) {
         configure(for: newState)
         if case F4SEmailVerificationState.verified(let credentials) = newState {
-            emailWasVerified?(credentials)
-            dismiss(animated: true, completion: nil)
+            emailWasVerified?()
         }
     }
 }
@@ -72,7 +75,7 @@ extension F4SEmailVerificationViewController {
             }
         case  .previouslyVerified:
             // Primary button is used to tell us to continue with the currently verified email
-            proceedToNextClosure()
+            emailWasVerified?()
         default:
             assertionFailure("Shouldn't happen. Was the primary button left enabled when it shouldn't have been?")
             break
@@ -86,6 +89,7 @@ extension F4SEmailVerificationViewController {
         case .emailSent(_):
             model.restart()
         default:
+            assertionFailure("Shouldn't happen. Was the secondary button left enabled when it shouldn't have been?")
             break
         }
     }
@@ -151,7 +155,7 @@ extension F4SEmailVerificationViewController {
         feedbackLabel.text = state.feedbackString
         configure(emailTextField, visible: state.isEMailFieldVisible, enabled: state.isEmailFieldEnabled)
         configure(primaryActionButton, visible: state.isPrimaryButtonVisible, enabled: state.isPrimaryButtonEnabled)
-        configure(secondaryActionButton, visible: state.isSecondaryButtonVisible, enabled: state.isPrimaryButtonEnabled)
+        configure(secondaryActionButton, visible: state.isSecondaryButtonVisible, enabled: state.isSecondaryButtonEnabled)
         primaryActionButton.setTitle(state.titleForPrimary, for: .normal)
         secondaryActionButton.setTitle(state.titleForSecondary, for: .normal)
         

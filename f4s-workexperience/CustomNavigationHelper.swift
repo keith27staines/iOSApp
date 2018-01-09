@@ -332,15 +332,24 @@ class CustomNavigationHelper {
 
         parentCtrl.navigationController?.present(popoverNavigationController, animated: true, completion: nil)
     }
+    
+    func moveToEmailVerification(navigCtrl: UINavigationController, company: Company) {
+        let emailStoryboard = UIStoryboard(name: "F4SEmailVerification", bundle: nil)
+        guard let emailController = emailStoryboard.instantiateViewController(withIdentifier: "EmailVerification") as? F4SEmailVerificationViewController else {
+            return
+        }
+        emailController.emailWasVerified = {
+            self.moveToExtraInfoViewController(navigCtrl: navigCtrl, company: company)
+        }
+        navigCtrl.pushViewController(emailController, animated: true)
+    }
 
     func moveToExtraInfoViewController(navigCtrl: UINavigationController, company: Company) {
         let extraInfoStoryboard = UIStoryboard(name: "ExtraInfo", bundle: nil)
         guard let extraInfoCtrl = extraInfoStoryboard.instantiateViewController(withIdentifier: "ExtraInfoCtrl") as? ExtraInfoViewController else {
             return
         }
-        let extraInfoCtrlNav = RotationAwareNavigationController(rootViewController: extraInfoCtrl)
-        extraInfoCtrl.currentCompany = company
-        navigCtrl.present(extraInfoCtrlNav, animated: true, completion: nil)
+        navigCtrl.pushViewController(extraInfoCtrl, animated: true)
     }
 
     func moveToMessageController(parentCtrl: UIViewController, threadUuid: String, company: Company, placements: [TimelinePlacement], companies: [Company]) {
