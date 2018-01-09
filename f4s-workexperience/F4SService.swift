@@ -82,9 +82,9 @@ public class F4SDataTaskService : F4SApiService {
         session = URLSession(configuration: F4SRecommendationService.defaultConfiguration)
     }
     
-    internal func get<A>(completion: @escaping (F4SNetworkResult<A>) -> ()) {
+    internal func get<A>(attempting: String, completion: @escaping (F4SNetworkResult<A>) -> ()) {
         task?.cancel()
-        task = dataTask(attempting: "Get recommendations", completion: { (result) in
+        task = dataTask(attempting: attempting, completion: { (result) in
             completion(result)
         })
         task?.resume()

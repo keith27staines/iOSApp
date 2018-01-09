@@ -349,6 +349,7 @@ class CustomNavigationHelper {
         guard let extraInfoCtrl = extraInfoStoryboard.instantiateViewController(withIdentifier: "ExtraInfoCtrl") as? ExtraInfoViewController else {
             return
         }
+        extraInfoCtrl.currentCompany = company
         navigCtrl.pushViewController(extraInfoCtrl, animated: true)
     }
 

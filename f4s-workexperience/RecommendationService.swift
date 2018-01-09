@@ -20,7 +20,7 @@ public class F4SRecommendationService : F4SDataTaskService {
     }
 
     public func fetch(completion: @escaping (F4SNetworkResult<SuccessType>) -> ()) {
-        super.get(completion: completion)
+        super.get(attempting: "Get recommendations",completion: completion)
     }
 }
 

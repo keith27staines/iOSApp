@@ -103,6 +103,8 @@ class UserService: ApiBaseService {
                     putCompleted(false, .deffinedError(error))
 
                 case let .value(boxed):
+                    let userUuid = boxed.value
+                    keychain.set(userUuid, forKey: UserDefaultsKeys.userUuid)
                     putCompleted(true, .value(Box(boxed.value)))
                 }
 
