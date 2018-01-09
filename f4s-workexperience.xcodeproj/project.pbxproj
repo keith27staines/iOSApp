@@ -107,7 +107,6 @@
 		40E78E1C1DD31A86000A3776 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E1A1DD31A86000A3776 /* Main.storyboard */; };
 		40E78E1E1DD31A86000A3776 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E1D1DD31A86000A3776 /* Assets.xcassets */; };
 		40E78E211DD31A86000A3776 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E1F1DD31A86000A3776 /* LaunchScreen.storyboard */; };
-		40E78E2C1DD31A86000A3776 /* f4s_workexperienceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E2B1DD31A86000A3776 /* f4s_workexperienceTests.swift */; };
 		40E78E4B1DD32862000A3776 /* f4s-workexperience.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E491DD32862000A3776 /* f4s-workexperience.xcdatamodeld */; };
 		40E78E581DD32964000A3776 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E541DD32964000A3776 /* Constants.swift */; };
 		40E78E591DD32964000A3776 /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E551DD32964000A3776 /* Entities.swift */; };
@@ -351,7 +350,6 @@
 		40E78E201DD31A86000A3776 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40E78E221DD31A86000A3776 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40E78E271DD31A86000A3776 /* f4s-workexperienceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "f4s-workexperienceTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		40E78E2B1DD31A86000A3776 /* f4s_workexperienceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = f4s_workexperienceTests.swift; sourceTree = "<group>"; };
 		40E78E2D1DD31A86000A3776 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40E78E361DD31A86000A3776 /* f4s_workexperienceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = f4s_workexperienceUITests.swift; sourceTree = "<group>"; };
 		40E78E381DD31A86000A3776 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -681,7 +679,6 @@
 			children = (
 				FC59B18E1F81549A0068EC9C /* CGRect+MethodsTests.swift */,
 				FC59B18F1F81549A0068EC9C /* F4SQuadtreeTests.swift */,
-				40E78E2B1DD31A86000A3776 /* f4s_workexperienceTests.swift */,
 				40E78E2D1DD31A86000A3776 /* Info.plist */,
 			);
 			path = "f4s-workexperienceTests";
@@ -1649,7 +1646,6 @@
 			files = (
 				FCD348692003A1B500DC1316 /* MagicLinkInterpreterTests.swift in Sources */,
 				FC59B1901F81549B0068EC9C /* CGRect+MethodsTests.swift in Sources */,
-				40E78E2C1DD31A86000A3776 /* f4s_workexperienceTests.swift in Sources */,
 				FC59B1911F81549B0068EC9C /* F4SQuadtreeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1958,7 +1954,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperienceTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.f4s-workexperienceTests";
@@ -2053,7 +2049,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperienceTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.f4s-workexperienceTests";
@@ -2154,7 +2150,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperienceTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.f4s-workexperienceTests";
@@ -2249,7 +2245,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperienceTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.f4s-workexperienceTests";

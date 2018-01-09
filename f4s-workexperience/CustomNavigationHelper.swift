@@ -338,8 +338,8 @@ class CustomNavigationHelper {
         guard let emailController = emailStoryboard.instantiateViewController(withIdentifier: "EmailVerification") as? F4SEmailVerificationViewController else {
             return
         }
-        emailController.emailWasVerified = {
-            self.moveToExtraInfoViewController(navigCtrl: navigCtrl, company: company)
+        emailController.emailWasVerified = { [weak self] in
+            self?.moveToExtraInfoViewController(navigCtrl: navigCtrl, company: company)
         }
         navigCtrl.pushViewController(emailController, animated: true)
     }

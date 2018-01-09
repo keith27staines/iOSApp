@@ -50,9 +50,6 @@ class F4SEmailVerificationViewController: UIViewController {
     
     func handleStateChange(oldState: F4SEmailVerificationState, newState: F4SEmailVerificationState) {
         configure(for: newState)
-        if case F4SEmailVerificationState.verified(let credentials) = newState {
-            emailWasVerified?()
-        }
     }
 }
 
@@ -73,9 +70,11 @@ extension F4SEmailVerificationViewController {
             model.submitEmailForVerification(email) { [weak self] in
                 self?.finishActivity()
             }
-        case  .previouslyVerified:
+        case  .verified, .previouslyVerified:
             // Primary button is used to tell us to continue with the currently verified email
             emailWasVerified?()
+        case .error(_):
+            model.restart()
         default:
             assertionFailure("Shouldn't happen. Was the primary button left enabled when it shouldn't have been?")
             break

@@ -59,7 +59,7 @@ public struct LocalizedStrings {
         static let emailSent = NSLocalizedString("We have sent you a link so that we can verify your email address", comment: "Advise the user that we have sent them an email verification link")
         static let linkReceived = NSLocalizedString("Processing link", comment: "Advise the user that we are processing the link")
         static let verified = NSLocalizedString("Email verified", comment: "Advise the user that we have verified their email address")
-        static let  previouslyVerified = NSLocalizedString("Use this verified email address?", comment: "Ask the user if they want to continue with their verified email address")
+        static let  previouslyVerified = NSLocalizedString("This is the verified email address we currently hold for you", comment: "Remind the user of their verified email address")
     }
     
     public struct FeedbackStrings {
@@ -74,11 +74,11 @@ public struct LocalizedStrings {
             comment: "Advise the user that an internet connection is required to complete the process of verifying their email address")
         
         static let verified = NSLocalizedString(
-            "We have verified your email\n\nThank you",
+            "We have verified your email address\n\nThank you!",
             comment: "Advise the user that we have verified their email address")
         
         static let  previouslyVerified = NSLocalizedString(
-            "This is the verified email address we currently hold for you\n\nYou can change to a differnt one now if you want to",
+            "You can change to a different one now if you want to but we will need to verify it again",
             comment: "Ask the user if they want to change their email address")
     }
     

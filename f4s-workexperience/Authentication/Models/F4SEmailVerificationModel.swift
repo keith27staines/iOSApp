@@ -11,6 +11,7 @@ import Auth0
 
 /// A state machine that controls the verification process for emails
 public class F4SEmailVerificationModel {
+    
     /// The last non-error state before transitioning to the current state
     public private (set) var lastNonErrorState: F4SEmailVerificationState
     

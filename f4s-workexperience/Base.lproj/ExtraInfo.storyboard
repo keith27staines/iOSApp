@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -22,10 +22,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Sm-Vm-OPb">
-                                <rect key="frame" x="0.0" y="20" width="414" height="980"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="888"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hz8-hB-HzJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="708"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="574"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yellowQuestionMark" translatesAutoresizingMaskIntoConstraints="NO" id="S8V-te-S2l">
                                                 <rect key="frame" x="162" y="60" width="90" height="90"/>
@@ -58,7 +58,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="74" translatesAutoresizingMaskIntoConstraints="NO" id="NrJ-np-QPp">
-                                                <rect key="frame" x="30" y="337" width="354" height="351"/>
+                                                <rect key="frame" x="30" y="337" width="354" height="217"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZwU-Av-rFq">
                                                         <rect key="frame" x="0.0" y="0.0" width="354" height="217"/>
@@ -151,19 +151,6 @@
                                                             </label>
                                                         </subviews>
                                                     </stackView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W6l-9J-xry">
-                                                        <rect key="frame" x="0.0" y="291" width="354" height="60"/>
-                                                        <color key="backgroundColor" red="0.21176470589999999" green="0.64313725489999995" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="60" id="7nq-3O-hkG"/>
-                                                        </constraints>
-                                                        <state key="normal" title="Complete Information">
-                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="completeInfoButtonTouched:" destination="6fi-A3-veq" eventType="touchUpInside" id="YUH-nu-OeA"/>
-                                                        </connections>
-                                                    </button>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -194,14 +181,30 @@
                                     <constraint firstItem="hz8-hB-HzJ" firstAttribute="leading" secondItem="5Sm-Vm-OPb" secondAttribute="leading" id="rxz-pC-7ia"/>
                                 </constraints>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W6l-9J-xry">
+                                <rect key="frame" x="30" y="924" width="354" height="60"/>
+                                <color key="backgroundColor" red="0.21176470589999999" green="0.64313725489999995" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="7nq-3O-hkG"/>
+                                </constraints>
+                                <state key="normal" title="Complete Information">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="completeInfoButtonTouched:" destination="6fi-A3-veq" eventType="touchUpInside" id="YUH-nu-OeA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="W6l-9J-xry" firstAttribute="centerX" secondItem="f6C-Vn-WOF" secondAttribute="centerX" id="2EH-B5-0xX"/>
                             <constraint firstAttribute="trailing" secondItem="5Sm-Vm-OPb" secondAttribute="trailing" id="3ML-pr-Awb"/>
-                            <constraint firstItem="iFc-6k-L1j" firstAttribute="top" secondItem="5Sm-Vm-OPb" secondAttribute="bottom" id="NDW-5k-PQb"/>
+                            <constraint firstItem="W6l-9J-xry" firstAttribute="leading" secondItem="f6C-Vn-WOF" secondAttribute="leading" constant="30" id="Qz4-CS-Jhk"/>
                             <constraint firstItem="5Sm-Vm-OPb" firstAttribute="top" secondItem="rVA-dq-XbI" secondAttribute="bottom" id="TnY-iT-gVb"/>
                             <constraint firstItem="hz8-hB-HzJ" firstAttribute="width" secondItem="f6C-Vn-WOF" secondAttribute="width" id="WBB-w2-yCR"/>
                             <constraint firstItem="5Sm-Vm-OPb" firstAttribute="leading" secondItem="f6C-Vn-WOF" secondAttribute="leading" id="ilr-lk-Cgu"/>
+                            <constraint firstItem="iFc-6k-L1j" firstAttribute="top" secondItem="W6l-9J-xry" secondAttribute="bottom" constant="16" id="t3d-Yt-UoP"/>
+                            <constraint firstItem="W6l-9J-xry" firstAttribute="top" secondItem="5Sm-Vm-OPb" secondAttribute="bottom" constant="16" id="yUs-gu-0WN"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -230,7 +233,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xCS-GH-ncR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-237.68115942028987" y="114.94565217391305"/>
+            <point key="canvasLocation" x="-238.125" y="114.08450704225352"/>
         </scene>
     </scenes>
     <resources>
