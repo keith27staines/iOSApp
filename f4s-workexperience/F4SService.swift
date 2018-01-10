@@ -20,6 +20,9 @@ public protocol F4SApiService {
 
 extension F4SApiService {
     
+    /// Returns a URLSessionDatatask configued to perform a get against the workfinder api
+    /// - parameter attempting: A high level description of the task being performed
+    /// - parameter completion: The callback to return the result of the operation
     public func dataTask<A>(attempting: String, completion: @escaping (F4SNetworkResult<A>) -> ()) -> URLSessionDataTask {
         let task = session.dataTask(with: self.url) { (data, response, error) in
             if let error = error as NSError? {
@@ -54,6 +57,7 @@ extension F4SApiService {
         return task
     }
     
+    /// Returns a dictionary of headers configured for use with the workfinder api
     public static var defaultHeaders : [String:String] {
         var header: [String : String] = ["wex.api.key": ApiConstants.apiKey]
         let keychain = KeychainSwift()
@@ -63,6 +67,7 @@ extension F4SApiService {
         return header
     }
     
+    /// Returns a URLSessionConfiguration configured with appropriate parameters
     public static var defaultConfiguration : URLSessionConfiguration {
         let session = URLSessionConfiguration.default
         session.allowsCellularAccess = true
@@ -83,6 +88,10 @@ public class F4SDataTaskService : F4SApiService {
         return URL(string: baseUrl.absoluteString + "/" + apiName)!
     }
     
+    /// Initialize a new instance
+    /// - parameter baseURLString: The base url
+    /// - parameter apiName: The name of the api being called
+    /// - parameter objectType: The type of the object that is to be instantiated from the response
     public init(baseURLString: String, apiName: String, objectType: Decodable.Type) {
         self.apiName = apiName
         self.baseUrl = URL(string: baseURLString)!
