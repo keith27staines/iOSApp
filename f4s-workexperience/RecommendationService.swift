@@ -19,9 +19,17 @@ public class F4SRecommendationService : F4SDataTaskService {
     }
 
     public func fetch(completion: @escaping (F4SNetworkResult<SuccessType>) -> ()) {
-        super.get(attempting: "Get recommendations", completion: completion)
+        let rec = Recommendation(companyUUID: "3ba32ef4d8864b27a306dd42898d6306", sortIndex: 0)
+        let res = F4SNetworkResult.success([rec])
+        completion(res)
+        //super.get(attempting: "Get recommendations", completion: completion)
     }
 }
+
+public struct JsonRecommedations : Decodable {
+    public var data: [Recommendation]
+}
+
 
 
 

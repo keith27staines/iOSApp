@@ -91,7 +91,12 @@ public struct Company : Hashable {
     /// - parameter completion: To receive the logo (or the specified default image)
     func getLogo(defaultLogo: UIImage?, completion: @escaping (UIImage?) -> () ) {
         if logoUrl.isEmpty { return }
-        guard let url = URL(string: logoUrl) as NSURL? else { return }
+        guard let url = URL(string: logoUrl) as NSURL? else {
+            DispatchQueue.main.async {
+                completion(defaultLogo)
+            }
+            return
+        }
         ImageService.sharedInstance.getImage(url: url, completed: { succeeded, image in
             DispatchQueue.main.async {
                 completion(image ?? defaultLogo)

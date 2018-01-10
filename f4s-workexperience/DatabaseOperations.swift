@@ -312,7 +312,8 @@ extension DatabaseOperations {
             log.debug("Can't find company with specified uuid because the database isn't loaded")
             return nil
         }
-        let selectString: String = "SELECT * FROM businesses_company WHERE uuid = \(uuid)"
+        let uuid = uuid.replacingOccurrences(of: "-", with: "")
+        let selectString: String = "SELECT * FROM businesses_company WHERE uuid = '\(uuid)'"
         guard let stmt = try? db.prepare(selectString) else {
             // Company just wasn't found
             return nil

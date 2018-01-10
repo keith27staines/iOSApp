@@ -172,13 +172,16 @@ enum TabIndex : Int {
 extension CustomTabBarViewController {
     
     static func rewindToDrawerAndPresentRecommendations(vc: UIViewController) {
-//        recursiveRewindToDrawer(from: vc) { (drawerController) in
-//            guard let centerController = drawerController?.centerViewController else { return }
-//            guard let tabBarCtrl = centerController as? CustomTabBarViewController else { return }
-//            tabBarCtrl.selectedIndex = 0
-//            tabBarCtrl.selectedViewController?.present(<#T##viewControllerToPresent: UIViewController##UIViewController#>, animated: <#T##Bool#>, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
-//            CustomNavigationHelper.sharedInstance.moveToRecommendationsController(navCtrl: navCtrl)
-//        }
+        recursiveRewindToDrawer(from: vc) { (drawerController) in
+            guard let centerController = drawerController?.centerViewController else { return }
+            guard let tabBarCtrl = centerController as? CustomTabBarViewController else { return }
+            let recommendationsStoryboard = UIStoryboard(name: "Recommendations", bundle: nil)
+            guard let recommendationsNavController = recommendationsStoryboard.instantiateInitialViewController() else {
+                return
+            }
+            tabBarCtrl.selectedIndex = 0
+            tabBarCtrl.selectedViewController?.present(recommendationsNavController, animated: true, completion: nil)
+        }
     }
     
     static func rewindToDrawerAndSelectTab(vc: UIViewController, tab: TabIndex) {

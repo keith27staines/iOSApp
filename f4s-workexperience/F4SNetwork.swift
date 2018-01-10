@@ -61,6 +61,9 @@ public struct F4SNetworkError : Error {
     public var httpStatusCode:  HTTPStatusCode? {
         return self.response?.statusCode
     }
+    public var code: String {
+        return String(self.nsError.code)
+    }
     public var localizedFailureReason: String? {
         return nsError.localizedFailureReason
     }
@@ -96,10 +99,20 @@ public struct F4SNetworkError : Error {
     /// Writes a description to the debug log (currently the Xcode console)
     private func writeToLog() {
         if let attempting = attempting {
-            print("F4SNetworkError attempting \(attempting) \n\(self)")
+            print("F4SNetworkError: attempting \(attempting) \n \(self)")
         } else {
             print("F4SNetworkError \(self)")
         }
+        var msg = "F4SNetworkingError"
+        if let attempting = attempting {
+            msg += " attempting to: \(attempting)"
+        }
+        msg += "\ncode = code"
+        msg += "\ndomain = \(domainType.rawValue)"
+        if let reason = nsError.localizedFailureReason {
+            msg += "\nreason = \(reason)"
+        }
+        msg += "\nuserInfo = \(nsError.userInfo)"
     }
     
     /// Initializes a new instance
