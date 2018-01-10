@@ -23,7 +23,7 @@ extension F4SApiService {
     public func dataTask<A>(attempting: String, completion: @escaping (F4SNetworkResult<A>) -> ()) -> URLSessionDataTask {
         let task = session.dataTask(with: self.url) { (data, response, error) in
             if let error = error as NSError? {
-                let result = F4SNetworkResult<A>.error(F4SNetworkError(error: error))
+                let result = F4SNetworkResult<A>.error(F4SNetworkError(error: error, attempting: attempting))
                 completion(result)
                 return
             }
@@ -33,15 +33,21 @@ extension F4SApiService {
                 completion(result)
                 return
             }
+            guard let data = data else {
+                assertionFailure("No data to decode")
+                let f4sError = F4SNetworkDataErrorType.noData.dataError(attempting: attempting)
+                completion(F4SNetworkResult.error(f4sError))
+                return
+            }
             let decoder = JSONDecoder()
             do {
-                let value = try decoder.decode(A.self, from: data!)
+                let value = try decoder.decode(A.self, from: data)
                 let result = F4SNetworkResult.success(value)
                 completion(result)
                 return
             } catch (let error) {
-                let result = F4SNetworkResult<A>.error(F4SNetworkError(error: error))
-                completion(result)
+                let f4sError = F4SNetworkDataErrorType.undecodableData(data).dataError(attempting: attempting + error.localizedDescription)
+                completion(F4SNetworkResult.error(f4sError))
                 return
             }
         }
@@ -66,8 +72,9 @@ extension F4SApiService {
 }
 
 public class F4SDataTaskService : F4SApiService {
-    
+    /// The dataTask currently being performed by this service (only one task can be in progress. Starting a second task will cancel the first)
     private var task: URLSessionDataTask?
+    
     public let session: URLSession
     public let baseUrl: URL
     public let apiName: String
@@ -82,6 +89,9 @@ public class F4SDataTaskService : F4SApiService {
         session = URLSession(configuration: F4SRecommendationService.defaultConfiguration)
     }
     
+    /// Performs an HTTP get request
+    /// - parameter attempting: A short high level description of the reason the operation is being performed
+    /// - parameter completion: Returns a result containing either the http response data or error information
     internal func get<A>(attempting: String, completion: @escaping (F4SNetworkResult<A>) -> ()) {
         task?.cancel()
         task = dataTask(attempting: attempting, completion: { (result) in

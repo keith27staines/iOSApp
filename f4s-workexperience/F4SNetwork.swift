@@ -20,8 +20,34 @@ public enum F4SNetworkErrorDomainType : String {
     case server
 }
 
-public struct F4SNetworkError : Error {
+public enum F4SNetworkDataErrorType {
+    case noData
+    case emptyData
+    case undecodableData(Data)
+    case unknownError(Any?)
+    
+    public func dataError(attempting: String, logError: Bool = true) -> F4SNetworkError {
+        let nsError: NSError
+        let code: Int
+        var userInfo: [String : Any] = [:]
+        switch self {
+        case .noData, .emptyData:
+            code = -1001
+        case .undecodableData(let data):
+            code = -1002
+            userInfo["data"] = data
+            userInfo["string"] = String(data: data, encoding: .utf8)
+        case .unknownError(let info):
+            code = -1003
+            userInfo["info"] = info
+        }
+        nsError = NSError(domain: F4SNetworkErrorDomainType.client.rawValue, code: code, userInfo: userInfo)
+        return F4SNetworkError(error: nsError, attempting: attempting, logError: logError)
+    }
+}
 
+public struct F4SNetworkError : Error {
+    
     public private (set) var domainType: F4SNetworkErrorDomainType
     
     public var localizedDescription: String {
@@ -41,31 +67,51 @@ public struct F4SNetworkError : Error {
     public var localizedRecoveryOptions: [String]? {
         return nsError.localizedRecoveryOptions
     }
-    public var localized: String? {
+    public var localizedRecoverySuggestion: String? {
         return nsError.localizedRecoverySuggestion
     }
     
+    public private (set) var attempting: String?
+    
     public private (set) var retry: Bool = false
     
-    public init(error: Error) {
+    /// Initializes a new instance
+    /// - parameter error: the immediate error this instance will wrap]
+    /// - parameter attempting: A short description of the context of the error (this might just be the operation name or a higher level description of it)
+    /// - parameter logError: If true, the error will be written to the debug log
+    public init(error: Error, attempting: String, logError: Bool = true) {
         nsError = error as NSError
         let code = nsError.code
         domainType = .client
+        self.attempting = attempting
         switch code {
         case NSURLErrorNetworkConnectionLost, NSURLErrorNotConnectedToInternet:
             retry = true
         default:
             retry = false
         }
+        if logError { writeToLog() }
     }
     
-    ///
-    public init?(response: HTTPURLResponse, attempting: String) {
+    /// Writes a description to the debug log (currently the Xcode console)
+    private func writeToLog() {
+        if let attempting = attempting {
+            print("F4SNetworkError attempting \(attempting) \n\(self)")
+        } else {
+            print("F4SNetworkError \(self)")
+        }
+    }
+    
+    /// Initializes a new instance
+    /// - parameter response: the http resonse this instance will wrap, unless the response code is a success in which case this initializer will fail
+    /// - parameter attempting: A short description of the context of the error (this might just be the operation name or a higher level description of it)
+    /// - parameter logError: If truem the error will be written to the debug log
+    public init?(response: HTTPURLResponse, attempting: String, logError: Bool = true) {
         var retry = false
-        var userInfo : [String : Any] = ["response": response, "attempting": attempting]
+        var userInfo : [String : Any] = ["response": response]
         switch response.statusCode {
-        case 200:
-            return nil
+        case 200...299:
+            return nil // These are success codes
         case 401:
             userInfo[NSLocalizedFailureReasonErrorKey] = "The user's credentials were not provided or are incorrect"
         case 403:
@@ -76,13 +122,14 @@ public struct F4SNetworkError : Error {
             userInfo[NSLocalizedFailureReasonErrorKey] = "The server refused this request because it has received too many requests from this client"
             retry = true
         case 500:
-            userInfo[NSLocalizedFailureReasonErrorKey] = "The request was badly formed (somme parameters were incorrect or missing)"
+            userInfo[NSLocalizedFailureReasonErrorKey] = "The request was badly formed (some parameters were incorrect or missing)"
         default:
             userInfo[NSLocalizedFailureReasonErrorKey] = "Unknown reason"
         }
         let nsError = NSError(domain: "HTTP", code: response.statusCode, userInfo: userInfo)
-        self.init(error: nsError)
+        self.init(error: nsError, attempting: attempting, logError: false)
         domainType = .server
         self.retry = retry
+        if logError { writeToLog() }
     }
 }
