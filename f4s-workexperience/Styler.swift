@@ -30,18 +30,22 @@ public struct F4SBackgroundViewStyler {
 public struct F4SButtonStyler {
     public static func apply(style: F4SButtonStyle, button: UIButton) {
         button.layer.masksToBounds = true
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = 8
+        
+        let wfPurple = UIColor(red: 72, green: 38, blue: 127)
+        let wfPurpleDisabled = UIColor(red: 141, green: 122, blue: 173)
+        
         switch style {
         case .primary:
-            button.setBackgroundColor(color: UIColor(red: 67, green: 40, blue: 122), forUIControlState: .normal)
+            button.setBackgroundColor(color: wfPurple, forUIControlState: .normal)
             button.setTitleColor(UIColor.white, for: .normal)
-            button.setBackgroundColor(color: UIColor(red: 122, green: 131, blue: 93), forUIControlState: .disabled)
+            button.setBackgroundColor(color: wfPurpleDisabled, forUIControlState: .disabled)
             button.setTitleColor(UIColor.white, for: .disabled)
             button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title2)
         case .secondary:
-            button.setBackgroundColor(color: UIColor(red: 207, green: 48, blue: 82), forUIControlState: .normal)
+            button.setBackgroundColor(color: UIColor(red:226, green:16, blue: 79), forUIControlState: .normal)
             button.setTitleColor(UIColor.white, for: .normal)
-            button.setBackgroundColor(color: UIColor(red: 122, green: 131, blue: 93), forUIControlState: .disabled)
+            button.setBackgroundColor(color: UIColor(red: 230, green: 95, blue:  136), forUIControlState: .disabled)
             button.setTitleColor(UIColor.white, for: .disabled)
             button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title2)
         case .minor:

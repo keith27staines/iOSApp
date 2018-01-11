@@ -34,18 +34,6 @@ public enum F4SStyleName {
     }
 }
 
-//let backgroundColor: UIColor = cerulean
-//let enabledButtonBackground = ecstasy
-//let disabledButtonBackground = seagull
-//let enabledButtonTextColor = UIColor.white
-//let disabledButtonTextColor = sail
-//
-//self.view.backgroundColor = backgroundColor
-//self.doneButton.setBackgroundColor(color: enabledButtonBackground, forUIControlState: .normal)
-//self.doneButton.setBackgroundColor(color: disabledButtonBackground, forUIControlState: .disabled)
-//self.doneButton.setTitleColor(enabledButtonTextColor, for: .normal)
-//self.doneButton.setTitleColor(disabledButtonTextColor, for: .disabled)
-
 public struct F4SStyling {
     // MARK:- Color scheme - colors defined by purpose
     var colorScheme: ColorScheme = ColorScheme()
