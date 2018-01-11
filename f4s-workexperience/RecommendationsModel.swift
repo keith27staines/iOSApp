@@ -47,16 +47,18 @@ public class RecommendationsModel {
     public init() {}
 }
 
-public struct Recommendation : Decodable {
+public struct Recommendation : Codable {
+    /// Required sort index
     public let index: Int
-    public let companyUUID: F4SUUID!
+    /// the company uuid
+    public let uuid: F4SUUID!
     
     public init(companyUUID: F4SUUID, sortIndex: Int) {
         self.index = sortIndex
-        self.companyUUID = companyUUID
+        self.uuid = companyUUID
     }
 
     lazy var company: Company? = {
-        return DatabaseOperations.sharedInstance.companyWithUUID(companyUUID)
+        return DatabaseOperations.sharedInstance.companyWithUUID(uuid)
     }()
 }

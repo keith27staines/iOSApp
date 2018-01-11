@@ -10,6 +10,29 @@ import UIKit
 import Reachability
 
 class CompanyDetailsViewController: UIViewController {
+    @IBOutlet weak var mapButton: UIButton!
+    
+    @IBOutlet weak var mapView: MKMapView!
+    
+    @IBOutlet weak var mapViewHeightConstraint: NSLayoutConstraint!
+    
+    @IBAction func toggleMapButtonPressed(_ sender: Any) {
+        if mapView.isHidden {
+            mapView.isHidden = false
+            let height = firmDescriptionTextView.frame.origin.y + firmDescriptionTextView.frame.height - tableView.frame.origin.y
+            self.mapViewHeightConstraint.constant = height
+            UIView.animate(withDuration: 0.5, animations: { [weak self] in
+                self?.view.layoutIfNeeded()
+                }, completion: nil)
+        } else {
+            self.mapViewHeightConstraint.constant = 2
+            UIView.animate(withDuration: 0.5, animations: { [weak self] in
+                self?.view.layoutIfNeeded()
+            }, completion: { [weak self] (complete) in
+                self?.mapView.isHidden = true
+            })
+        }
+    }
     
     @IBOutlet weak var seeAcountsButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -22,9 +45,9 @@ class CompanyDetailsViewController: UIViewController {
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var companyDetailsView: UIView!
     @IBOutlet weak var shortlistButton: UIButton!
-
+    
     let backgroundPopoverView = UIView()
-    var company: Company?
+    var company: Company!
     var placement: Placement?
     var shortlist: [Shortlist] = []
     fileprivate let IndustryCellIdentifier: String = "industryIdentifier"
@@ -36,6 +59,7 @@ class CompanyDetailsViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         setupAppearance()
+        setupMap()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -80,7 +104,7 @@ extension CompanyDetailsViewController: UIPopoverPresentationControllerDelegate 
 
 // MARK: - user interraction
 extension CompanyDetailsViewController {
-
+    
     @IBAction func shortlistButtonTouched(_: Any) {
         guard let company = company else {
             return
@@ -201,6 +225,8 @@ extension CompanyDetailsViewController {
         self.navigationController?.present(activityViewController, animated: true, completion: nil)
     }
 
+    
+    
     @IBAction func applyButton(_: AnyObject) {
         if let reachability = Reachability() {
             if !reachability.isReachableByAnyMeans {
@@ -588,3 +614,32 @@ extension CompanyDetailsViewController {
         }
     }
 }
+
+extension CompanyDetailsViewController : MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let view = MKAnnotationView()
+        view.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        view.image = UIImage(named: "markerIcon")
+        return view
+    }
+    
+    func setupMap() {
+        let location = CLLocationCoordinate2D(latitude: company.latitude, longitude: company.longitude)
+        tableView.topAnchor.constraint(equalTo: mapView.topAnchor).isActive = true
+        tableView.leftAnchor.constraint(equalTo: mapView.leftAnchor).isActive = true
+        tableView.widthAnchor.constraint(equalTo: mapView.widthAnchor).isActive = true
+        mapView.centerCoordinate = location
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = location
+        annotation.title = company.name
+        mapView.addAnnotation(annotation)
+        
+        let region = MKCoordinateRegionMakeWithDistance(location, 1000, 1000)
+        let adjustedRegion = mapView.regionThatFits(region)
+        mapView.setRegion(adjustedRegion, animated: false)
+        self.mapView.showsUserLocation = true
+        mapView.delegate = self
+    }
+}
+
+

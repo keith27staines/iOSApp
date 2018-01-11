@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0Q6-Bd-LZR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0Q6-Bd-LZR">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -304,17 +304,34 @@
                                             <action selector="shortlistButtonTouched:" destination="0Q6-Bd-LZR" eventType="touchUpInside" id="Fy8-hR-LMh"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1sF-ph-Y5I">
+                                        <rect key="frame" x="256" y="15" width="44" height="44"/>
+                                        <state key="normal" image="markerFavouriteIcon"/>
+                                        <connections>
+                                            <action selector="toggleMapButtonPressed:" destination="0Q6-Bd-LZR" eventType="touchUpInside" id="TSh-qt-ORp"/>
+                                        </connections>
+                                    </button>
+                                    <mapView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" rotateEnabled="NO" pitchEnabled="NO" showsUserLocation="YES" showsPointsOfInterest="NO" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TbL-nA-A6m">
+                                        <rect key="frame" x="20" y="52" width="100" height="76"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" placeholder="YES" id="hVj-BG-Rbe"/>
+                                            <constraint firstAttribute="height" constant="76" id="ry8-qb-Yfg"/>
+                                        </constraints>
+                                    </mapView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="AVo-K5-djM" firstAttribute="top" secondItem="1sF-ph-Y5I" secondAttribute="top" id="0K7-mP-7mm"/>
                                     <constraint firstItem="BEY-Ws-Uht" firstAttribute="leading" secondItem="Ayf-CV-tRe" secondAttribute="trailing" constant="10" id="0VE-tx-bjf"/>
                                     <constraint firstItem="Ayf-CV-tRe" firstAttribute="height" secondItem="BEY-Ws-Uht" secondAttribute="height" id="0ih-uR-Slm"/>
                                     <constraint firstItem="TR1-9I-afE" firstAttribute="top" secondItem="UTb-CI-en7" secondAttribute="bottom" id="1UM-Ej-g0B"/>
                                     <constraint firstItem="UTb-CI-en7" firstAttribute="top" secondItem="gbG-dB-pG4" secondAttribute="bottom" constant="10" id="459-aa-eWr"/>
+                                    <constraint firstItem="AVo-K5-djM" firstAttribute="width" secondItem="1sF-ph-Y5I" secondAttribute="width" id="4R7-mv-DTw"/>
                                     <constraint firstAttribute="bottom" secondItem="BEY-Ws-Uht" secondAttribute="bottom" constant="20" id="6Xn-ZG-XlG"/>
                                     <constraint firstAttribute="trailing" secondItem="gbG-dB-pG4" secondAttribute="trailing" constant="20" id="7sj-il-g3a"/>
                                     <constraint firstItem="5eL-48-lLW" firstAttribute="trailing" secondItem="BEY-Ws-Uht" secondAttribute="trailing" id="B5B-AZ-3jd"/>
                                     <constraint firstItem="BEY-Ws-Uht" firstAttribute="width" secondItem="Ayf-CV-tRe" secondAttribute="width" multiplier="2:1" id="EPo-ep-wH6"/>
+                                    <constraint firstItem="TbL-nA-A6m" firstAttribute="top" secondItem="iCq-ty-4y3" secondAttribute="top" constant="52" placeholder="YES" id="FlU-Rz-LLj"/>
                                     <constraint firstItem="UTb-CI-en7" firstAttribute="centerX" secondItem="iCq-ty-4y3" secondAttribute="centerX" id="GMd-4z-DAu"/>
                                     <constraint firstItem="Ayf-CV-tRe" firstAttribute="centerY" secondItem="BEY-Ws-Uht" secondAttribute="centerY" id="IuF-56-UXD"/>
                                     <constraint firstAttribute="trailing" secondItem="AVo-K5-djM" secondAttribute="trailing" constant="15" id="MNk-wl-Bhk"/>
@@ -327,11 +344,14 @@
                                     <constraint firstItem="5eL-48-lLW" firstAttribute="top" secondItem="TR1-9I-afE" secondAttribute="bottom" constant="20" id="cIz-w6-gzv"/>
                                     <constraint firstItem="gbG-dB-pG4" firstAttribute="centerX" secondItem="iCq-ty-4y3" secondAttribute="centerX" id="eIN-gF-9fK"/>
                                     <constraint firstItem="AVo-K5-djM" firstAttribute="centerY" secondItem="Ymj-Fv-9DS" secondAttribute="centerY" id="fmm-Tw-mst"/>
+                                    <constraint firstItem="UTb-CI-en7" firstAttribute="leading" secondItem="TbL-nA-A6m" secondAttribute="leading" id="hb7-IH-JNx"/>
                                     <constraint firstItem="Ymj-Fv-9DS" firstAttribute="leading" secondItem="iCq-ty-4y3" secondAttribute="leading" constant="15" id="ifl-ir-6mC"/>
                                     <constraint firstItem="DAT-9E-MNk" firstAttribute="top" secondItem="iCq-ty-4y3" secondAttribute="top" constant="46" id="jTw-EU-31N"/>
                                     <constraint firstItem="Ayf-CV-tRe" firstAttribute="leading" secondItem="5eL-48-lLW" secondAttribute="leading" id="kl8-3e-Dhy"/>
                                     <constraint firstItem="AVo-K5-djM" firstAttribute="height" secondItem="Ymj-Fv-9DS" secondAttribute="height" id="npB-7m-5us"/>
                                     <constraint firstItem="Ymj-Fv-9DS" firstAttribute="top" secondItem="iCq-ty-4y3" secondAttribute="top" constant="15" id="qcs-QT-wNn"/>
+                                    <constraint firstItem="AVo-K5-djM" firstAttribute="leading" secondItem="1sF-ph-Y5I" secondAttribute="trailing" constant="16" id="rEY-e8-6gr"/>
+                                    <constraint firstItem="AVo-K5-djM" firstAttribute="height" secondItem="1sF-ph-Y5I" secondAttribute="height" id="t6f-P0-es7"/>
                                     <constraint firstItem="UTb-CI-en7" firstAttribute="leading" secondItem="iCq-ty-4y3" secondAttribute="leading" constant="20" id="u49-9c-brh"/>
                                     <constraint firstItem="AVo-K5-djM" firstAttribute="width" secondItem="Ymj-Fv-9DS" secondAttribute="width" id="woe-Ui-ahn"/>
                                     <constraint firstItem="BEY-Ws-Uht" firstAttribute="top" secondItem="5eL-48-lLW" secondAttribute="bottom" constant="20" id="zrO-0G-G5H"/>
@@ -354,6 +374,9 @@
                         <outlet property="firmDescriptionTextView" destination="TR1-9I-afE" id="G2G-l0-Wdw"/>
                         <outlet property="firmLogoImage" destination="DAT-9E-MNk" id="Ycx-iE-bVq"/>
                         <outlet property="firmNameLabel" destination="gbG-dB-pG4" id="v0D-1m-LUE"/>
+                        <outlet property="mapButton" destination="1sF-ph-Y5I" id="NrQ-zZ-Jv0"/>
+                        <outlet property="mapView" destination="TbL-nA-A6m" id="W6L-ct-0Xt"/>
+                        <outlet property="mapViewHeightConstraint" destination="ry8-qb-Yfg" id="3gp-Zs-vG1"/>
                         <outlet property="seeAcountsButton" destination="5eL-48-lLW" id="DyB-T7-RWx"/>
                         <outlet property="shareButton" destination="AVo-K5-djM" id="Dg3-Pa-EHO"/>
                         <outlet property="shortlistButton" destination="Ayf-CV-tRe" id="aX9-hw-iJP"/>
@@ -369,6 +392,7 @@
     <resources>
         <image name="DefaultLogo" width="60" height="60"/>
         <image name="UnfilledStar" width="15" height="15"/>
+        <image name="markerFavouriteIcon" width="21" height="29"/>
         <image name="unshortlist" width="32" height="28"/>
     </resources>
 </document>
