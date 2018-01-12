@@ -179,6 +179,11 @@ extension CustomTabBarViewController {
             guard let recommendationsNavController = recommendationsStoryboard.instantiateInitialViewController() else {
                 return
             }
+            guard let recommendationsController = recommendationsNavController.topMostViewController as? RecommendationsViewController else {
+                return
+            }
+            let noRecommendationsText = "No recommendations yet\n\nWe have no companies to recommend based on your recent application(s).  The more you apply, the more great companies we can recommend to you.\n\nKeep going, the world's your oyster!"
+            recommendationsController.emptyRecomendationsListText = noRecommendationsText
             tabBarCtrl.selectedIndex = 0
             tabBarCtrl.selectedViewController?.present(recommendationsNavController, animated: true, completion: nil)
         }

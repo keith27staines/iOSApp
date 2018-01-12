@@ -15,6 +15,8 @@ class RecommendationsViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    var emptyRecomendationsListText: String? = nil
+    
     var model: RecommendationsModel!
     
     override func viewDidLoad() {
@@ -25,6 +27,45 @@ class RecommendationsViewController: UIViewController {
     func reloadModel() {
         model = RecommendationsModel()
         model.reload(completion: tableView.reloadData)
+        configureNoRecomendationsOverlay()
+    }
+    
+    lazy var emptyRecommendationsView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(view)
+        view.topAnchor.constraint(equalTo: tableView.topAnchor).isActive = true
+        view.leftAnchor.constraint(equalTo: tableView.leftAnchor).isActive = true
+        view.rightAnchor.constraint(equalTo: tableView.rightAnchor).isActive = true
+        view.bottomAnchor.constraint(equalTo: tableView.bottomAnchor).isActive = true
+        view.backgroundColor = UIColor.white
+        let label = emptyRecommendationsLabel
+        view.addSubview(label)
+        label.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        label.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        label.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        return view
+    }()
+    
+    lazy var emptyRecommendationsLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = UIColor.lightGray
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.textAlignment = NSTextAlignment.center
+        return label
+    }()
+    
+    func configureNoRecomendationsOverlay() {
+        let defaultText = "No recommendations for you yet"
+        if !model.recommendationsExist {
+            emptyRecommendationsLabel.text = emptyRecomendationsListText ?? defaultText
+            emptyRecommendationsView.isHidden = false
+        } else {
+            emptyRecommendationsLabel.isHidden = true
+        }
     }
 }
 

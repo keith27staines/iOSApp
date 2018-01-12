@@ -212,10 +212,15 @@ class CustomNavigationHelper {
     }
     
     func moveToRecommendationsController(navCtrl: UINavigationController) {
-        let recommendationsStoryboard = UIStoryboard(name: "Recommendations", bundle: nil)
-        guard let recommendationsNavController = recommendationsStoryboard.instantiateInitialViewController() else {
+        let recommendationsStoryboard = UIStoryboard(name: "Recommendations", bundle: nil) 
+        guard let recommendationsNavController = recommendationsStoryboard.instantiateInitialViewController() as? UINavigationController else {
             return
         }
+        guard let recommendationsController = recommendationsNavController.topMostViewController as? RecommendationsViewController else {
+            return
+        }
+        let noRecommendationsText = "No recommendations yet\n\nAfter you start applying to companies, we will recommend other great companies you may like\n\nGet cracking today!"
+        recommendationsController.emptyRecomendationsListText = noRecommendationsText
         navCtrl.present(recommendationsNavController, animated: true, completion: nil)
     }
 

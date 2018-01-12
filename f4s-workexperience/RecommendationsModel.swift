@@ -13,8 +13,12 @@ public class RecommendationsModel {
     public var numberOfSections: Int { return 1 }
     private var recommendations: [Recommendation] = [Recommendation]()
     
+    public var recommendationsExist: Bool {
+        return (numberOfRowsInSection(0) > 0) ? true : false
+    }
+    
     public func numberOfRowsInSection(_ section: Int) -> Int {
-        return recommendations.count
+        return 0 //return recommendations.count
     }
     
     lazy var recommedationService: F4SRecommendationService = {
