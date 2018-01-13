@@ -70,10 +70,13 @@ class UserService: ApiBaseService {
         dateFormatter.dateFormat = "d MMMM yyyy"
         let formatedDateOfBirth = dateFormatter.date(from: user.dateOfBirth)!.rfc3339UtcDate
         var params: Parameters = [
-            "first_name": user.firstName, "email": user.email,
+            "first_name": user.firstName,
+            "email": user.email,
             "date_of_birth": formatedDateOfBirth,
-            "requires_consent": user.requiresConsent, "placement_uuid": user.placementUuid,
+            "requires_consent": user.requiresConsent,
+            "placement_uuid": user.placementUuid,
         ] as [String: Any]
+        
         if !user.lastName.isEmpty {
             params["last_name"] = user.lastName
         }
@@ -82,10 +85,6 @@ class UserService: ApiBaseService {
             partner = partner.updatingWithServerSideUUID()
             let partnerDictionary = ["uuid" : partner.uuid]
             params["partners"] = [partnerDictionary]
-        }
-        
-        if user.requiresConsent {
-            params["parent_email"] = user.consenterEmail
         }
 
         put(params, url: url) {
