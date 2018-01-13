@@ -30,7 +30,8 @@ class ProcessedMessagesViewController: UIViewController {
 extension ProcessedMessagesViewController {
     @IBAction func addInfoButton(_: Any) {
         if let navigCtrl = self.navigationController, let company = self.currentCompany {
-            CustomNavigationHelper.sharedInstance.moveToEmailVerification(navigCtrl: navigCtrl, company: company)
+//            CustomNavigationHelper.sharedInstance.moveToEmailVerification(navigCtrl: navigCtrl, company: company)
+            CustomNavigationHelper.sharedInstance.moveToExtraInfoViewController(navigCtrl: navigCtrl, company: company)
         }
     }
 }
