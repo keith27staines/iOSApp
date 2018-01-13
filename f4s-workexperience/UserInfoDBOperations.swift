@@ -32,7 +32,8 @@ class UserInfoDBOperations {
             return nil
         }
         var info = UserInfoDBOperations.sharedInstance.getUserFromUserInfoDB(userInfoDB: userInfoDB)
-        info.email = F4SEmailVerificationModel.verifiedEmail!
+        // Route around email verification
+        //info.email = F4SEmailVerificationModel.verifiedEmail!
         return info
     }
 
