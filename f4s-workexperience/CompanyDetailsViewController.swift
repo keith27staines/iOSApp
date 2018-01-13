@@ -10,6 +10,7 @@ import UIKit
 import Reachability
 
 class CompanyDetailsViewController: UIViewController {
+    
     @IBOutlet weak var mapButton: UIButton!
     
     @IBOutlet weak var mapView: MKMapView!

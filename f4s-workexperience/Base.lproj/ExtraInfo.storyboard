@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_0" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,10 +23,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Sm-Vm-OPb">
-                                <rect key="frame" x="0.0" y="20" width="414" height="888"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="829"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hz8-hB-HzJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="574"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="759.5"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yellowQuestionMark" translatesAutoresizingMaskIntoConstraints="NO" id="S8V-te-S2l">
                                                 <rect key="frame" x="162" y="60" width="90" height="90"/>
@@ -58,16 +59,63 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="74" translatesAutoresizingMaskIntoConstraints="NO" id="NrJ-np-QPp">
-                                                <rect key="frame" x="30" y="337" width="354" height="217"/>
+                                                <rect key="frame" x="30" y="337" width="354" height="402.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZwU-Av-rFq">
-                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="217"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="402.5"/>
                                                         <subviews>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="49" translatesAutoresizingMaskIntoConstraints="NO" id="DIV-QA-nEC">
-                                                                <rect key="frame" x="0.0" y="0.0" width="354" height="191"/>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ocK-RI-4cq">
+                                                                <rect key="frame" x="0.0" y="0.0" width="354" height="175.5"/>
                                                                 <subviews>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="SDq-DG-ayv">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F3c-Y7-Bog">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="125.5"/>
+                                                                        <string key="text">We're very sorry, you need to be over 13 years old to use Workfinder.
+
+However, we suggest you ask your teacher or parent to  invite a business person to give a talk in your school class. Tell them to go to www.founders4schools.org.uk</string>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mmt-pu-8QK">
+                                                                        <rect key="frame" x="0.0" y="145.5" width="354" height="30"/>
+                                                                        <state key="normal" title="Explore more companies"/>
+                                                                        <connections>
+                                                                            <action selector="exploreMoreCompanies:" destination="6fi-A3-veq" eventType="touchUpInside" id="UQe-QU-tpY"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="49" translatesAutoresizingMaskIntoConstraints="NO" id="DIV-QA-nEC">
+                                                                <rect key="frame" x="0.0" y="185.5" width="354" height="191"/>
+                                                                <subviews>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="7iB-P1-4An">
                                                                         <rect key="frame" x="0.0" y="0.0" width="354" height="31"/>
+                                                                        <subviews>
+                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ay3-HG-rFT" customClass="NextResponderTextField" customModule="f4s_workexperience" customModuleProvider="target">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="354" height="21"/>
+                                                                                <nil key="textColor"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                                                                <connections>
+                                                                                    <action selector="emailTextFieldDidChange:" destination="6fi-A3-veq" eventType="editingChanged" id="QaN-6B-AXn"/>
+                                                                                    <outlet property="delegate" destination="6fi-A3-veq" id="Xfh-Np-oyz"/>
+                                                                                    <outlet property="nextResponderField" destination="Tuk-dL-J6F" id="k2L-Li-Okv"/>
+                                                                                </connections>
+                                                                            </textField>
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kej-Eg-p9x">
+                                                                                <rect key="frame" x="0.0" y="30" width="354" height="1"/>
+                                                                                <color key="backgroundColor" red="0.86666666670000003" green="0.52941176469999995" blue="0.031372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="1" id="eZR-LN-0o5"/>
+                                                                                </constraints>
+                                                                            </view>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="Ay3-HG-rFT" firstAttribute="width" secondItem="Kej-Eg-p9x" secondAttribute="width" id="vqH-cH-9Qh"/>
+                                                                        </constraints>
+                                                                    </stackView>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="SDq-DG-ayv">
+                                                                        <rect key="frame" x="0.0" y="80" width="354" height="31"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First and Last Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tuk-dL-J6F" customClass="NextResponderTextField" customModule="f4s_workexperience" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="21"/>
@@ -89,31 +137,6 @@
                                                                         </subviews>
                                                                         <constraints>
                                                                             <constraint firstItem="Tuk-dL-J6F" firstAttribute="width" secondItem="jO5-dM-A01" secondAttribute="width" id="Ztg-i4-tP0"/>
-                                                                        </constraints>
-                                                                    </stackView>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="Qyl-qa-3YB">
-                                                                        <rect key="frame" x="0.0" y="80" width="354" height="31"/>
-                                                                        <subviews>
-                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Parent's, teacher's or guardian's email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bZu-FP-r1u" customClass="NextResponderTextField" customModule="f4s_workexperience" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="354" height="21"/>
-                                                                                <nil key="textColor"/>
-                                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="yes" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
-                                                                                <connections>
-                                                                                    <action selector="parentsEmailTextFieldDidChange:" destination="6fi-A3-veq" eventType="editingChanged" id="ho7-OF-N1v"/>
-                                                                                    <outlet property="delegate" destination="6fi-A3-veq" id="iiE-eu-gVK"/>
-                                                                                </connections>
-                                                                            </textField>
-                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tky-An-4Yu">
-                                                                                <rect key="frame" x="0.0" y="30" width="354" height="1"/>
-                                                                                <color key="backgroundColor" red="0.86666666670000003" green="0.52941176469999995" blue="0.031372549020000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                                                <constraints>
-                                                                                    <constraint firstAttribute="height" constant="1" id="j5O-s2-CV8"/>
-                                                                                </constraints>
-                                                                            </view>
-                                                                        </subviews>
-                                                                        <constraints>
-                                                                            <constraint firstItem="bZu-FP-r1u" firstAttribute="width" secondItem="Tky-An-4Yu" secondAttribute="width" id="Zu5-NJ-7fb"/>
                                                                         </constraints>
                                                                     </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="fjS-KP-AS4">
@@ -144,7 +167,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you don’t have a voucher code tap here" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KnY-Nh-iSQ">
-                                                                <rect key="frame" x="0.0" y="201" width="354" height="16"/>
+                                                                <rect key="frame" x="0.0" y="386.5" width="354" height="16"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -182,7 +205,7 @@
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W6l-9J-xry">
-                                <rect key="frame" x="30" y="924" width="354" height="60"/>
+                                <rect key="frame" x="30" y="920" width="354" height="60"/>
                                 <color key="backgroundColor" red="0.21176470589999999" green="0.64313725489999995" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="7nq-3O-hkG"/>
@@ -194,37 +217,77 @@
                                     <action selector="completeInfoButtonTouched:" destination="6fi-A3-veq" eventType="touchUpInside" id="YUH-nu-OeA"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="JXa-8e-osG">
+                                <rect key="frame" x="30" y="869" width="354" height="31"/>
+                                <subviews>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gW3-Fg-VK0">
+                                        <rect key="frame" x="0.0" y="0.0" width="62.5" height="31"/>
+                                        <connections>
+                                            <action selector="consentGivenChanged:" destination="6fi-A3-veq" eventType="valueChanged" id="HW8-5K-td3"/>
+                                            <action selector="consentGivenChanged:" destination="LPc-8h-Lzp" eventType="valueChanged" id="MYv-R2-Q0H"/>
+                                            <action selector="consentGivenSwitch:" destination="LPc-8h-Lzp" eventType="valueChanged" id="h89-Cz-csY"/>
+                                        </connections>
+                                    </switch>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="flE-fk-fZP">
+                                        <rect key="frame" x="73.5" y="0.0" width="280.5" height="31"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" text="I accept Worfinder's" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjG-7a-8DT">
+                                                <rect key="frame" x="0.0" y="0.0" width="122" height="31"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FYS-a0-aoA">
+                                                <rect key="frame" x="126" y="0.0" width="154.5" height="31"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <state key="normal" title="terms of service"/>
+                                                <connections>
+                                                    <action selector="termsOfServiceLinkButton:" destination="6fi-A3-veq" eventType="touchUpInside" id="s3t-OP-gFg"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="W6l-9J-xry" firstAttribute="centerX" secondItem="f6C-Vn-WOF" secondAttribute="centerX" id="2EH-B5-0xX"/>
                             <constraint firstAttribute="trailing" secondItem="5Sm-Vm-OPb" secondAttribute="trailing" id="3ML-pr-Awb"/>
-                            <constraint firstItem="W6l-9J-xry" firstAttribute="leading" secondItem="f6C-Vn-WOF" secondAttribute="leading" constant="30" id="Qz4-CS-Jhk"/>
+                            <constraint firstItem="JXa-8e-osG" firstAttribute="top" secondItem="5Sm-Vm-OPb" secondAttribute="bottom" constant="20" id="4Ha-bo-W79"/>
+                            <constraint firstItem="W6l-9J-xry" firstAttribute="leading" secondItem="f6C-Vn-WOF" secondAttribute="leadingMargin" constant="10" id="7Oe-vB-78a"/>
+                            <constraint firstItem="W6l-9J-xry" firstAttribute="top" secondItem="JXa-8e-osG" secondAttribute="bottom" constant="20" id="F9J-xn-WjM"/>
+                            <constraint firstItem="W6l-9J-xry" firstAttribute="trailing" secondItem="JXa-8e-osG" secondAttribute="trailing" id="MjC-05-pXw"/>
                             <constraint firstItem="5Sm-Vm-OPb" firstAttribute="top" secondItem="rVA-dq-XbI" secondAttribute="bottom" id="TnY-iT-gVb"/>
                             <constraint firstItem="hz8-hB-HzJ" firstAttribute="width" secondItem="f6C-Vn-WOF" secondAttribute="width" id="WBB-w2-yCR"/>
+                            <constraint firstItem="W6l-9J-xry" firstAttribute="leading" secondItem="JXa-8e-osG" secondAttribute="leading" id="WQZ-5n-kNu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="W6l-9J-xry" secondAttribute="trailing" constant="10" id="cXi-Dc-UcN"/>
                             <constraint firstItem="5Sm-Vm-OPb" firstAttribute="leading" secondItem="f6C-Vn-WOF" secondAttribute="leading" id="ilr-lk-Cgu"/>
-                            <constraint firstItem="iFc-6k-L1j" firstAttribute="top" secondItem="W6l-9J-xry" secondAttribute="bottom" constant="16" id="t3d-Yt-UoP"/>
-                            <constraint firstItem="W6l-9J-xry" firstAttribute="top" secondItem="5Sm-Vm-OPb" secondAttribute="bottom" constant="16" id="yUs-gu-0WN"/>
+                            <constraint firstItem="iFc-6k-L1j" firstAttribute="top" secondItem="W6l-9J-xry" secondAttribute="bottom" constant="20" id="rhe-pz-Yst"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="414" height="1000"/>
                     <connections>
+                        <outlet property="acceptConditionsStackView" destination="JXa-8e-osG" id="QVa-m7-Sns"/>
                         <outlet property="completeExtraInfoButton" destination="W6l-9J-xry" id="Rj2-dh-PfB"/>
                         <outlet property="completionImageView" destination="S8V-te-S2l" id="vhp-7C-8nL"/>
+                        <outlet property="consentGivenLinkButton" destination="FYS-a0-aoA" id="8b9-yY-k4q"/>
+                        <outlet property="consentGiventSwitch" destination="gW3-Fg-VK0" id="p4T-WW-WfZ"/>
                         <outlet property="contentView" destination="hz8-hB-HzJ" id="gUh-JL-UJo"/>
                         <outlet property="dobInfoLabel" destination="VbZ-62-oPU" id="DC0-1j-7gb"/>
                         <outlet property="dobTextField" destination="VA6-BR-IJV" id="iA1-HG-7MU"/>
                         <outlet property="dobUnderlineView" destination="SnL-sW-mx6" id="emd-i9-pFU"/>
+                        <outlet property="emailStackView" destination="7iB-P1-4An" id="Ujh-xn-hgd"/>
+                        <outlet property="emailTextField" destination="Ay3-HG-rFT" id="M8B-QX-txn"/>
+                        <outlet property="emailUnderlineView" destination="Kej-Eg-p9x" id="KmP-TT-4Jv"/>
+                        <outlet property="exploreMapButton" destination="Mmt-pu-8QK" id="JZ6-JU-p4t"/>
                         <outlet property="firstAndLastNameStackView" destination="SDq-DG-ayv" id="tOE-nC-MBI"/>
                         <outlet property="firstAndLastNameTextField" destination="Tuk-dL-J6F" id="KaY-L9-HBx"/>
                         <outlet property="firstAndLastNameUnderlineView" destination="jO5-dM-A01" id="3JI-UR-49e"/>
                         <outlet property="infoStackViewTopConstraint" destination="Jmn-8L-pmJ" id="7mj-fr-NeA"/>
                         <outlet property="noVoucherInfoLabel" destination="KnY-Nh-iSQ" id="Ptb-8Y-6Lj"/>
-                        <outlet property="parentsEmailStackView" destination="Qyl-qa-3YB" id="Rqc-T4-tIU"/>
-                        <outlet property="parentsEmailTextField" destination="bZu-FP-r1u" id="TYd-Kl-zKb"/>
-                        <outlet property="parentsEmailUnderlineView" destination="Tky-An-4Yu" id="GMf-et-amC"/>
                         <outlet property="scrollView" destination="5Sm-Vm-OPb" id="EhW-LL-t1T"/>
+                        <outlet property="toYoungStackView" destination="ocK-RI-4cq" id="XFz-yv-WHU"/>
                         <outlet property="userInfoStackView" destination="DIV-QA-nEC" id="3J1-c7-6ce"/>
                         <outlet property="voucherCodeStackView" destination="fjS-KP-AS4" id="wgM-2A-tzw"/>
                         <outlet property="voucherCodeTextField" destination="g1i-QR-DUi" id="GYY-sa-Ick"/>
@@ -232,8 +295,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xCS-GH-ncR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="LPc-8h-Lzp" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-238.125" y="114.08450704225352"/>
+            <point key="canvasLocation" x="-238.40000000000001" y="114.24287856071965"/>
         </scene>
     </scenes>
     <resources>

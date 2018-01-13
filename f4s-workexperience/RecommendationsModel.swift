@@ -18,7 +18,7 @@ public class RecommendationsModel {
     }
     
     public func numberOfRowsInSection(_ section: Int) -> Int {
-        return 0 //return recommendations.count
+        return recommendations.count
     }
     
     lazy var recommedationService: F4SRecommendationService = {

@@ -23,7 +23,7 @@ struct User {
         self.lastName = lastName
         self.consenterEmail = consenterEmail
         self.dateOfBirth = dateOfBirth
-        self.requiresConsent = requiresConsent
+        self.requiresConsent = false
         self.placementUuid = placementUuid
     }
 }
