@@ -26,8 +26,10 @@ class RecommendationsViewController: UIViewController {
     
     func reloadModel() {
         model = RecommendationsModel()
-        model.reload(completion: tableView.reloadData)
-        configureNoRecomendationsOverlay()
+        model.reload() { [weak self] in
+            self?.tableView.reloadData()
+            self?.configureNoRecomendationsOverlay()
+        }
     }
     
     lazy var emptyRecommendationsView: UIView = {
