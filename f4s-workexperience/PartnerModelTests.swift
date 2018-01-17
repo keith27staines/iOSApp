@@ -51,13 +51,13 @@ class PartnerModelTests: XCTestCase {
     func testUpdateUUIDFromServerUUID() {
         let partnerWithBadUuid = Partner(uuid: "x", name: "Guarenteed To Exist")
         let correctedPartner = model.partnerByUpdatingUUID(partner: partnerWithBadUuid)
-        XCTAssertEqual("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", correctedPartner.uuid)
+        XCTAssertEqual("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", correctedPartner?.uuid)
     }
     
     func testUUIDCorrectionIsCaseInsensitive() {
         let partnerWithBadUuid = Partner(uuid: "x", name: "guarenteed To Exist")
         let correctedPartner = model.partnerByUpdatingUUID(partner: partnerWithBadUuid)
-        XCTAssertEqual("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", correctedPartner.uuid)
+        XCTAssertEqual("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", correctedPartner?.uuid)
     }
     
     func testUUIDSubstitution() {
