@@ -81,10 +81,12 @@ class UserService: ApiBaseService {
             params["last_name"] = user.lastName
         }
 
-        if var partner = PartnersModel.sharedInstance.selectedPartner {
-            partner = partner.updatingWithServerSideUUID()
-            let partnerDictionary = ["uuid" : partner.uuid]
-            params["partners"] = [partnerDictionary]
+        let partnersModel = PartnersModel.sharedInstance
+        if let selectedPartner = partnersModel.selectedPartner, selectedPartner.isPlaceholder == false  {
+            if let partner = partnersModel.partnerByUpdatingUUID(partner: selectedPartner) {
+                let partnerDictionary = ["uuid" : partner.uuid]
+                params["partners"] = [partnerDictionary]
+            }
         }
 
         put(params, url: url) {

@@ -24,7 +24,7 @@ public class PartnersModel {
     
     fileprivate var partners: [F4SUUID:Partner]
     fileprivate var partnersArray: [Partner]
-    public fileprivate (set) var serversidePartners: [String : Partner]?
+    public internal (set) var serversidePartners: [String : Partner]?
     private (set) var isReady: Bool = false
     
     /// Returns the shared instance
@@ -49,6 +49,23 @@ public class PartnersModel {
         completed(true)
     }
     
+    public func partnerByUpdatingUUID(partner: Partner) -> Partner? {
+        guard let serverSidePartners = serversidePartners else {
+            return nil
+        }
+        for serverPartner in serverSidePartners.values {
+            if partner.name.lowercased() == serverPartner.name.lowercased() {
+                return Partner(uuid: serverPartner.uuid,
+                               sortingIndex: serverPartner.sortingIndex,
+                               acronym: serverPartner.acronym,
+                               name: serverPartner.name,
+                               description: serverPartner.description,
+                               imageName: serverPartner.imageName)
+            }
+        }
+        return nil
+    }
+    
     public func getPartnersFromServer(completed: ((Bool) -> Void)? = nil) {
         PartnerService.sharedInstance.getAllPartners { [weak self] (success, partnerResult) in
             guard let strongSelf = self else { return }
@@ -71,15 +88,16 @@ public class PartnersModel {
     }
     
     private func getHardCodedPartners() {
-        var ncsPartner = Partner(uuid: ncsUID, name: "National Citizen Service")
-        ncsPartner.imageName = "partnerLogoNCS"
-        var nominetPartner = Partner(uuid: "-1", name: "Nominet Trust")
-        nominetPartner.imageName = "partnerLogoNominet"
-        addOrReplacePartner(ncsPartner)
-        addOrReplacePartner(nominetPartner)
-        addOrReplacePartner(Partner(uuid: "2c4a2c39-eac7-4573-aa14-51c17810e7a1", name: "Parent (includes guardian)"))
-        addOrReplacePartner(Partner(uuid: "96638617-13df-489e-bb10-e02a3dc3391b", name: "My School"))
-        addOrReplacePartner(Partner(uuid: "1c72eb94-538c-4a39-b0db-20a9f8269d35", name: "My Friend"))
+        let parent = Partner(uuid: "2c4a2c39-eac7-4573-aa14-51c17810e7a1", name: "Parent (includes guardian)")
+        let school = Partner(uuid: "96638617-13df-489e-bb10-e02a3dc3391b", name: "My School")
+        let friend = Partner(uuid: "1c72eb94-538c-4a39-b0db-20a9f8269d35", name: "My Friend")
+        var nominet = Partner(uuid: "13639d44-5111-45c4-ac21-014bedac20da", name: "Nominet Trust")
+        nominet.imageName = "partnerLogoNominet"
+        
+        addOrReplacePartner(nominet)
+        addOrReplacePartner(parent)
+        addOrReplacePartner(school)
+        addOrReplacePartner(friend)
         addOrReplacePartner(Partner.partnerProvidedLater)
     }
     

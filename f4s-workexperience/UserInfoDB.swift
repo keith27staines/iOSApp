@@ -48,6 +48,7 @@ class UserInfoDB: NSManagedObject {
         } else {
             fetchResult[0].firstName = userInfo.firstName
             fetchResult[0].lastName = userInfo.lastName
+            fetchResult[0].email = userInfo.email
             fetchResult[0].consenterEmail = userInfo.consenterEmail
             fetchResult[0].dateOfBirth = userInfo.dateOfBirth
             fetchResult[0].requiresConsent = userInfo.requiresConsent

@@ -28,6 +28,9 @@ public struct Partner {
         guard let imageName = self.imageName else { return nil }
         return UIImage(named: imageName)
     }
+    
+    public private (set) var isPlaceholder: Bool = false
+    
     public init() {
         self.init(uuid: "", name: "")
     }
@@ -46,25 +49,12 @@ public struct Partner {
         self.imageName = imageName
     }
     
-    public func updatingWithServerSideUUID() -> Partner {
-        var partner = self
-        guard let serverSidePartners = PartnersModel.sharedInstance.serversidePartners else {
-            return partner
-        }
-        for serverPartner in serverSidePartners.values {
-            if partner.name == serverPartner.name {
-                partner.uuid = serverPartner.uuid
-                return partner
-            }
-        }
-        return partner
-    }
-    
-    /// A placeholder partner used while waiting for the user to
+    /// A placeholder partner used while waiting for the user to provide one
     static var partnerProvidedLater: Partner {
         let name = NSLocalizedString("I will provide this later", comment: "Inform the user that they can skip providing this information now, but it might be requested again later")
         var p = Partner(uuid: SystemF4SUUID.willProvideLater.rawValue, name: name)
         p.sortingIndex = Int.max
+        p.isPlaceholder = true
         return p
     }
 }
