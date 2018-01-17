@@ -59,17 +59,4 @@ class PartnerModelTests: XCTestCase {
         let correctedPartner = model.partnerByUpdatingUUID(partner: partnerWithBadUuid)
         XCTAssertEqual("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", correctedPartner?.uuid)
     }
-    
-    func testUUIDSubstitution() {
-        let promise = XCTestExpectation(description: "stuff")
-        let model = PartnersModel()
-        model.getPartnersFromServer { (success) in
-            for entry in model.serversidePartners! {
-                let partner = entry.value
-                print("\(partner.uuid): \(partner.name)")
-                promise.fulfill()
-            }
-        }
-        wait(for: [promise], timeout: 5)
-    }
 }
