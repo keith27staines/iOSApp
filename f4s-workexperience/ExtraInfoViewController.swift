@@ -60,7 +60,17 @@ class ExtraInfoViewController: UIViewController {
 
     var currentCompany: Company?
     var datePicker = UIDatePicker()
-
+    lazy var emailVerificationController: F4SEmailVerificationViewController = {
+        let emailStoryboard = UIStoryboard(name: "F4SEmailVerification", bundle: nil)
+        let emailController = emailStoryboard.instantiateViewController(withIdentifier: "EmailVerification") as! F4SEmailVerificationViewController
+        emailController.emailWasVerified = { [weak self] in
+            emailController.dismiss(animated: true, completion: {
+                self?.gotoSucess()
+            })
+        }
+        return emailController
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         adjustAppearence()
@@ -574,11 +584,21 @@ extension ExtraInfoViewController {
         UserService.sharedInstance.updateUser(user: user, putCompleted: { [weak self] (success, result) in
             guard let strongSelf = self else { return }
             if let _ = strongSelf.continueWithResult(result: result) {
-                strongSelf.updatePlacement()
-                UserDefaults.standard.set(true, forKey: strongSelf.consentPreviouslyGivenKey)
-                CustomNavigationHelper.sharedInstance.showSuccessExtraInfoPopover(parentCtrl: strongSelf)
+                let emailController = strongSelf.emailVerificationController
+                let emailModel = emailController.model
+                if emailModel?.emailVerificationState == .previouslyVerified {
+                    strongSelf.gotoSucess()
+                } else {
+                    strongSelf.navigationController!.pushViewController(emailController, animated: true)
+                }
             }
         })
+    }
+    
+    func gotoSucess() {
+        updatePlacement()
+        UserDefaults.standard.set(true, forKey: consentPreviouslyGivenKey)
+        CustomNavigationHelper.sharedInstance.showSuccessExtraInfoPopover(parentCtrl: self)
     }
     
     func continueWithResult(result: Result<String>?) -> Result<String>? {
