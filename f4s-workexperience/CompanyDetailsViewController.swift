@@ -266,7 +266,7 @@ extension CompanyDetailsViewController {
                     // create new placement in progress
                     placement.placementUuid = boxed.value
                     strongSelf.placement = placement
-                    PlacementDBOperations.sharedInstance.savePlacemnt(placement: placement)
+                    PlacementDBOperations.sharedInstance.savePlacement(placement: placement)
                     DispatchQueue.main.async {
                         strongSelf.applyButton.setTitle(NSLocalizedString("Finish Application", comment: ""), for: .normal)
                         let applyText = NSLocalizedString("Finish Application", comment: "")

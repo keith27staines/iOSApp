@@ -324,7 +324,7 @@ extension ExtraInfoViewController {
         }
         var updatedPlacement = placement
         updatedPlacement.status = .applied
-        PlacementDBOperations.sharedInstance.savePlacemnt(placement: updatedPlacement)
+        PlacementDBOperations.sharedInstance.savePlacement(placement: updatedPlacement)
     }
 
     func buildUserInfo() -> User {
@@ -390,61 +390,16 @@ extension ExtraInfoViewController: UITextFieldDelegate {
 // MARK: - Calls
 extension ExtraInfoViewController {
 
-    func updateUserProfile(voucherCode: String?) {
-        MessageHandler.sharedInstance.showLoadingOverlay(self.view)
-
+    func saveUserDetailsLocally() -> User {
         let updatedUser = self.buildUserInfo()
-        guard let currentVoucherCode = voucherCode else {
-            updateUser(updatedUser: updatedUser)
-            return
-        }
-
-        VoucherService.sharedInstance.validateVoucher(voucherCode: currentVoucherCode, placementUuid: updatedUser.placementUuid, putCompleted: {
-            [weak self]
-            _, result in
-            guard let strongSelf = self else {
-                return
-            }
-            switch result {
-            case .value:
-                print("Voucher code validated")
-                strongSelf.updateUser(updatedUser: updatedUser)
-
-            case .deffinedError(let definedError):
-                MessageHandler.sharedInstance.hideLoadingOverlay()
-                MessageHandler.sharedInstance.display(definedError, parentCtrl: strongSelf)
-
-            case .error(let error):
-                MessageHandler.sharedInstance.hideLoadingOverlay()
-                MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
-                break
-            }
-        })
+        UserInfoDBOperations.sharedInstance.saveUserInfo(userInfo: updatedUser)
+        return updatedUser
     }
-
-    func updateUser(updatedUser: User) {
-        UserService.sharedInstance.updateUser(user: updatedUser, putCompleted: {
-            [weak self]
-            _, result in
-            guard let strongSelf = self else {
-                return
-            }
-            MessageHandler.sharedInstance.hideLoadingOverlay()
-            switch result {
-            case .value:
-                UserInfoDBOperations.sharedInstance.saveUserInfo(userInfo: updatedUser)
-                strongSelf.updatePlacement()
-                CustomNavigationHelper.sharedInstance.showSuccessExtraInfoPopover(parentCtrl: strongSelf)
-                break
-
-            case .deffinedError(let definedError):
-                MessageHandler.sharedInstance.display(definedError, parentCtrl: strongSelf)
-                break
-
-            case .error(let error):
-                MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
-                break
-            }
+    
+    func updateVoucher(voucherCode: String, user: User, completion: @escaping (Result<String>) -> ()) {
+        MessageHandler.sharedInstance.showLoadingOverlay(self.view)
+        VoucherService.sharedInstance.validateVoucher(voucherCode: voucherCode, placementUuid: user.placementUuid, putCompleted: { success, result  in
+            completion(result)
         })
     }
 }
@@ -462,7 +417,13 @@ extension ExtraInfoViewController {
         self.infoStackViewTopConstraint.constant = 49
         self.updateButtonStateAndImage()
         UIView.animate(withDuration: 0.5, animations: { [weak self] in
-            self?.view.layoutIfNeeded()
+            guard let strongSelf = self else { return }
+            if strongSelf.getUserAge() < 13 {
+                strongSelf.dobUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
+            } else {
+                strongSelf.dobUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
+            }
+            strongSelf.view.layoutIfNeeded()
         })
     }
 
@@ -579,19 +540,63 @@ extension ExtraInfoViewController {
 
     @IBAction func completeInfoButtonTouched(_: UIButton) {
         self.view.endEditing(true)
+        let user = saveUserDetailsLocally()
+
         if let reachability = Reachability() {
             if !reachability.isReachableByAnyMeans {
                 MessageHandler.sharedInstance.display("No Internet Connection.", parentCtrl: self)
                 return
             }
         }
-        var voucherCode: String?
-        if self.voucherCodeUnderlineView.backgroundColor == UIColor(netHex: Colors.mediumGreen), let voucherCodeTextFieldText = voucherCodeTextField.text {
-            voucherCode = voucherCodeTextFieldText
+        
+        if let voucher = voucherCodeTextField.text, voucher.isEmpty == false {
+            updateVoucher(voucherCode: voucher, user: user) { [weak self] result in
+                self?.afterVoucherUpdate(result: result, user: user)
+            }
+        } else {
+            getPartnersFromServer(user: user)
         }
+    }
+    
+    func afterVoucherUpdate(result: Result<String>, user: User) {
+        if let _ = continueWithResult(result: result) {
+            getPartnersFromServer(user: user)
+        }
+    }
+    
+    func getPartnersFromServer(user: User) {
         PartnersModel.sharedInstance.getPartnersFromServer { [weak self] (success) in
-            self?.updateUserProfile(voucherCode: voucherCode)
+            self?.afterGetPartners(success: success, user: user)
         }
-        UserDefaults.standard.set(true, forKey: consentPreviouslyGivenKey)
+    }
+    
+    func afterGetPartners(success: Bool, user: User) {
+        UserService.sharedInstance.updateUser(user: user, putCompleted: { [weak self] (success, result) in
+            guard let strongSelf = self else { return }
+            if let _ = strongSelf.continueWithResult(result: result) {
+                strongSelf.updatePlacement()
+                UserDefaults.standard.set(true, forKey: strongSelf.consentPreviouslyGivenKey)
+                CustomNavigationHelper.sharedInstance.showSuccessExtraInfoPopover(parentCtrl: strongSelf)
+            }
+        })
+    }
+    
+    func continueWithResult(result: Result<String>?) -> Result<String>? {
+        guard let result = result else {
+            MessageHandler.sharedInstance.hideLoadingOverlay()
+            return nil
+        }
+        switch result {
+        case .value:
+            return result
+        case .deffinedError(let definedError):
+            MessageHandler.sharedInstance.hideLoadingOverlay()
+            MessageHandler.sharedInstance.display(definedError, parentCtrl: self)
+            
+        case .error(let error):
+            MessageHandler.sharedInstance.hideLoadingOverlay()
+            MessageHandler.sharedInstance.display(error, parentCtrl: self)
+        }
+        return nil
     }
 }
