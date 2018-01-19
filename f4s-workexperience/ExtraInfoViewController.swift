@@ -60,14 +60,10 @@ class ExtraInfoViewController: UIViewController {
 
     var currentCompany: Company?
     var datePicker = UIDatePicker()
-    lazy var emailVerificationController: F4SEmailVerificationViewController = {
+    
+    lazy var emailController: F4SEmailVerificationViewController = {
         let emailStoryboard = UIStoryboard(name: "F4SEmailVerification", bundle: nil)
         let emailController = emailStoryboard.instantiateViewController(withIdentifier: "EmailVerification") as! F4SEmailVerificationViewController
-        emailController.emailWasVerified = { [weak self] in
-            emailController.dismiss(animated: true, completion: {
-                self?.gotoSucess()
-            })
-        }
         return emailController
     }()
     
@@ -327,13 +323,13 @@ extension ExtraInfoViewController {
         return placement.placementUuid
     }
 
-    func updatePlacement() {
+    func savePlacementLocally(status: PlacementStatus ) {
         guard let currentCompany = self.currentCompany,
             let placement = PlacementDBOperations.sharedInstance.getPlacementsForCurrentUserAndCompany(companyUuid: currentCompany.uuid) else {
             return
         }
         var updatedPlacement = placement
-        updatedPlacement.status = .applied
+        updatedPlacement.status = status
         PlacementDBOperations.sharedInstance.savePlacement(placement: updatedPlacement)
     }
 
@@ -581,24 +577,37 @@ extension ExtraInfoViewController {
     }
     
     func afterGetPartners(success: Bool, user: User) {
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            let emailController = strongSelf.emailController
+            let emailModel = emailController.model
+            if emailModel.isEmailAddressVerified(email: user.email) {
+                strongSelf.gotoSucess(user: user)
+            } else {
+                strongSelf.emailController.model.restart()
+                strongSelf.emailController.emailToVerify = user.email
+                strongSelf.emailController.emailWasVerified = {
+                    strongSelf.emailTextField.text = emailController.model.verifiedEmail
+                    _ = strongSelf.saveUserDetailsLocally()
+                    strongSelf.navigationController?.popToViewController(strongSelf, animated: true)
+                    strongSelf.gotoSucess(user: user)
+                }
+                strongSelf.navigationController!.pushViewController(emailController, animated: true)
+            }
+        }
+    }
+    
+    func gotoSucess(user: User) {
         UserService.sharedInstance.updateUser(user: user, putCompleted: { [weak self] (success, result) in
             guard let strongSelf = self else { return }
-            if let _ = strongSelf.continueWithResult(result: result) {
-                let emailController = strongSelf.emailVerificationController
-                let emailModel = emailController.model
-                if emailModel?.emailVerificationState == .previouslyVerified {
-                    strongSelf.gotoSucess()
-                } else {
-                    strongSelf.navigationController!.pushViewController(emailController, animated: true)
+            DispatchQueue.main.async {
+                strongSelf.savePlacementLocally(status: .applied)
+                UserDefaults.standard.set(true, forKey: strongSelf.consentPreviouslyGivenKey)
+                if let _ = strongSelf.continueWithResult(result: result) {
+                    CustomNavigationHelper.sharedInstance.showSuccessExtraInfoPopover(parentCtrl: strongSelf)
                 }
             }
         })
-    }
-    
-    func gotoSucess() {
-        updatePlacement()
-        UserDefaults.standard.set(true, forKey: consentPreviouslyGivenKey)
-        CustomNavigationHelper.sharedInstance.showSuccessExtraInfoPopover(parentCtrl: self)
     }
     
     func continueWithResult(result: Result<String>?) -> Result<String>? {
