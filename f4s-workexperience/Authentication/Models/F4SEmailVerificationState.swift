@@ -104,7 +104,7 @@ public extension F4SEmailVerificationState {
         case .previouslyVerified:
             return LocalizedStrings.IntroductionStrings.previouslyVerified
         case .error(_):
-            return nil
+            return LocalizedStrings.IntroductionStrings.error
         }
     }
     

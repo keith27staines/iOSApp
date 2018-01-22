@@ -16,22 +16,26 @@ class CustomNavigationHelper {
         }
         return Static.instance
     }
-
+    
+    var tabBar: CustomTabBarViewController!
+    var mapNavigationController: RotationAwareNavigationController!
+    var favouriteNavigationController: RotationAwareNavigationController!
+    var timelineNavigationController: RotationAwareNavigationController!
     var drawerController: DrawerController?
 
     init() {
     }
 
-    func moveToMainCtrl(window: UIWindow) {
+    func createTabBarControllers(window: UIWindow) {
         if let isFirstLaunch = UserDefaults.standard.value(forKey: UserDefaultsKeys.isFirstLaunch) {
             if !(isFirstLaunch as! Bool) {
                 if let shouldLoadTimeline = UserDefaults.standard.value(forKey: UserDefaultsKeys.shouldLoadTimeline) {
                     if shouldLoadTimeline as! Bool {
-                        moveToTimelineCtrl(window: window)
+                        createTabBarControllersAndMoveToTimeline(window: window)
                         return
                     }
                 }
-                moveToMapCtrl(window: window, shouldRequestAuthorization: false)
+                createTabBarControllersAndMoveToMap(window: window, shouldRequestAuthorization: false)
                 return
             }
         }
@@ -41,140 +45,59 @@ class CustomNavigationHelper {
         ctrl.hideOnboardingControls = false
     }
 
-    func moveToMapCtrl(window: UIWindow, shouldRequestAuthorization: Bool) {
+    func createTabBarControllersAndMoveToMap(window: UIWindow, shouldRequestAuthorization: Bool) {
+        createTabBar(window: window, selectedIndex: 2, shouldRequestAuthorization: shouldRequestAuthorization, threadUuid: nil)
+    }
+
+    func createTabBarControllersAndMoveToTimeline(window: UIWindow, threadUuid: String = "") {
+        createTabBar(window: window, selectedIndex: 0, shouldRequestAuthorization: false, threadUuid: threadUuid)
+    }
+    
+    func createTabBarControllersAndMoveToFavourites(window: UIWindow) {
+        createTabBar(window: window, selectedIndex: 1, shouldRequestAuthorization: false, threadUuid: nil)
+    }
+    
+    func createTabBar(window: UIWindow, selectedIndex: Int, shouldRequestAuthorization: Bool, threadUuid: String?) {
+        createMapViewController(shouldRequestAuthorization: false)
+        createFavouritesNavigationController()
+        createTimelineNavigationController(threadUUID: threadUuid)
+        tabBar = CustomTabBarViewController()
+        tabBar.viewControllers = [timelineNavigationController, favouriteNavigationController, mapNavigationController]
+        tabBar.selectedIndex = selectedIndex
+        window.rootViewController = setUpDrawerController(navigationController: tabBar)
+    }
+    
+    func createTimelineNavigationController(threadUUID: String?) {
+        let timelineStoryboard = UIStoryboard(name: "TimelineView", bundle: nil)
+        let timelineCtrl = timelineStoryboard.instantiateViewController(withIdentifier: "timelineViewCtrl") as! TimelineViewController
+        timelineCtrl.threadUuid = threadUUID
+        var timelineBarItem = UITabBarItem(title: "", image: UIImage(named: "timelineIconUnselected")?.withRenderingMode(.alwaysOriginal),
+                                           selectedImage: UIImage(named: "timelineIcon")?.withRenderingMode(.alwaysOriginal))
+        timelineBarItem = timelineBarItem.tabBarItemShowingOnlyImage()
+        timelineNavigationController = RotationAwareNavigationController(rootViewController: timelineCtrl)
+        timelineNavigationController.tabBarItem = timelineBarItem
+    }
+    
+    func createFavouritesNavigationController() {
+        let favouriteStoryboard = UIStoryboard(name: "Favourite", bundle: nil)
+        let favouriteCtrl = favouriteStoryboard.instantiateViewController(withIdentifier: "FavouriteViewCtrl") as! FavouriteViewController
+        var favouriteBarItem = UITabBarItem(title: "", image: UIImage(named: "favouriteIconUnselected")?.withRenderingMode(.alwaysOriginal),
+                                            selectedImage: UIImage(named: "favouriteIcon")?.withRenderingMode(.alwaysOriginal))
+        favouriteBarItem = favouriteBarItem.tabBarItemShowingOnlyImage()
+        favouriteNavigationController = RotationAwareNavigationController(rootViewController: favouriteCtrl)
+        favouriteNavigationController.tabBarItem = favouriteBarItem
+    }
+    
+    func createMapViewController(shouldRequestAuthorization: Bool) {
         let mapStoryboard = UIStoryboard(name: "MapView", bundle: nil)
-        guard let mapCtrl = mapStoryboard.instantiateViewController(withIdentifier: "MapViewCtrl") as? MapViewController else {
-            return
-        }
-        let mapNavigationController = RotationAwareNavigationController(rootViewController: mapCtrl)
+        let mapCtrl = mapStoryboard.instantiateViewController(withIdentifier: "MapViewCtrl") as! MapViewController
+        mapNavigationController = RotationAwareNavigationController(rootViewController: mapCtrl)
         mapNavigationController.evo_drawerController?.openDrawerGestureModeMask = .init(rawValue: 0)
         mapCtrl.shouldRequestAuthorization = shouldRequestAuthorization
-        
-        let favouriteStoryboard = UIStoryboard(name: "Favourite", bundle: nil)
-        guard let favouriteCtrl = favouriteStoryboard.instantiateViewController(withIdentifier: "FavouriteViewCtrl") as? FavouriteViewController else {
-            return
-        }
-        let favouriteNavigationController = RotationAwareNavigationController(rootViewController: favouriteCtrl)
-
-        let timelineStoryboard = UIStoryboard(name: "TimelineView", bundle: nil)
-        guard let timelineCtrl = timelineStoryboard.instantiateViewController(withIdentifier: "timelineViewCtrl") as? TimelineViewController else {
-            return
-        }
-        let timelineNavigationController = RotationAwareNavigationController(rootViewController: timelineCtrl)
-
         var mapBarItem = UITabBarItem(title: "", image: UIImage(named: "mapIconUnselected")?.withRenderingMode(.alwaysOriginal),
                                       selectedImage: UIImage(named: "mapIcon")?.withRenderingMode(.alwaysOriginal))
         mapBarItem = mapBarItem.tabBarItemShowingOnlyImage()
-        
-        var favouriteBarItem = UITabBarItem(title: "", image: UIImage(named: "favouriteIconUnselected")?.withRenderingMode(.alwaysOriginal),
-                                      selectedImage: UIImage(named: "favouriteIcon")?.withRenderingMode(.alwaysOriginal))
-        favouriteBarItem = favouriteBarItem.tabBarItemShowingOnlyImage()
-
-        var timelineBarItem = UITabBarItem(title: "", image: UIImage(named: "timelineIconUnselected")?.withRenderingMode(.alwaysOriginal),
-                                           selectedImage: UIImage(named: "timelineIcon")?.withRenderingMode(.alwaysOriginal))
-        timelineBarItem = timelineBarItem.tabBarItemShowingOnlyImage()
-
         mapNavigationController.tabBarItem = mapBarItem
-        favouriteNavigationController.tabBarItem = favouriteBarItem
-        timelineNavigationController.tabBarItem = timelineBarItem
-        let tabBar = CustomTabBarViewController()
-        tabBar.viewControllers = [timelineNavigationController, favouriteNavigationController, mapNavigationController]
-
-        tabBar.selectedIndex = 2
-
-        window.rootViewController = setUpDrawerController(navigationController: tabBar)
-    }
-
-    func moveToTimelineCtrl(window: UIWindow, threadUuid: String = "") {
-        let mapStoryboard = UIStoryboard(name: "MapView", bundle: nil)
-        guard let mapCtrl = mapStoryboard.instantiateViewController(withIdentifier: "MapViewCtrl") as? MapViewController else {
-            return
-        }
-        let mapNavigationController = RotationAwareNavigationController(rootViewController: mapCtrl)
-        mapNavigationController.evo_drawerController?.openDrawerGestureModeMask = .init(rawValue: 0)
-        mapCtrl.shouldRequestAuthorization = false
-        
-        let favouriteStoryboard = UIStoryboard(name: "Favourite", bundle: nil)
-        guard let favouriteCtrl = favouriteStoryboard.instantiateViewController(withIdentifier: "FavouriteViewCtrl") as? FavouriteViewController else {
-            return
-        }
-        let favouriteNavigationController = RotationAwareNavigationController(rootViewController: favouriteCtrl)
-
-        let timelineStoryboard = UIStoryboard(name: "TimelineView", bundle: nil)
-        guard let timelineCtrl = timelineStoryboard.instantiateViewController(withIdentifier: "timelineViewCtrl") as? TimelineViewController else {
-            return
-        }
-        if !threadUuid.isEmpty {
-            timelineCtrl.threadUuid = threadUuid
-        }
-        let timelineNavigationController = RotationAwareNavigationController(rootViewController: timelineCtrl)
-
-        var mapBarItem = UITabBarItem(title: "", image: UIImage(named: "mapIconUnselected")?.withRenderingMode(.alwaysOriginal),
-                                      selectedImage: UIImage(named: "mapIcon")?.withRenderingMode(.alwaysOriginal))
-        mapBarItem = mapBarItem.tabBarItemShowingOnlyImage()
-        
-        var favouriteBarItem = UITabBarItem(title: "", image: UIImage(named: "favouriteIconUnselected")?.withRenderingMode(.alwaysOriginal),
-                                            selectedImage: UIImage(named: "favouriteIcon")?.withRenderingMode(.alwaysOriginal))
-        favouriteBarItem = favouriteBarItem.tabBarItemShowingOnlyImage()
-
-        var timelineBarItem = UITabBarItem(title: "", image: UIImage(named: "timelineIconUnselected")?.withRenderingMode(.alwaysOriginal),
-                                           selectedImage: UIImage(named: "timelineIcon")?.withRenderingMode(.alwaysOriginal))
-        timelineBarItem = timelineBarItem.tabBarItemShowingOnlyImage()
-
-        mapNavigationController.tabBarItem = mapBarItem
-        favouriteNavigationController.tabBarItem = favouriteBarItem
-        timelineNavigationController.tabBarItem = timelineBarItem
-        let tabBar = CustomTabBarViewController()
-        tabBar.viewControllers = [timelineNavigationController, favouriteNavigationController, mapNavigationController]
-
-        tabBar.selectedIndex = 0
-
-        window.rootViewController = setUpDrawerController(navigationController: tabBar)
-    }
-    
-    
-    func moveToFavouriteCtrl(window: UIWindow) {
-        let mapStoryboard = UIStoryboard(name: "MapView", bundle: nil)
-        guard let mapCtrl = mapStoryboard.instantiateViewController(withIdentifier: "MapViewCtrl") as? MapViewController else {
-            return
-        }
-        let mapNavigationController = RotationAwareNavigationController(rootViewController: mapCtrl)
-        mapNavigationController.evo_drawerController?.openDrawerGestureModeMask = .init(rawValue: 0)
-        mapCtrl.shouldRequestAuthorization = false
-        
-        let favouriteStoryboard = UIStoryboard(name: "Favourite", bundle: nil)
-        guard let favouriteCtrl = favouriteStoryboard.instantiateViewController(withIdentifier: "FavouriteViewCtrl") as? FavouriteViewController else {
-            return
-        }
-        let favouriteNavigationController = RotationAwareNavigationController(rootViewController: favouriteCtrl)
-        
-        let timelineStoryboard = UIStoryboard(name: "TimelineView", bundle: nil)
-        guard let timelineCtrl = timelineStoryboard.instantiateViewController(withIdentifier: "timelineViewCtrl") as? TimelineViewController else {
-            return
-        }
-        let timelineNavigationController = RotationAwareNavigationController(rootViewController: timelineCtrl)
-        
-        var mapBarItem = UITabBarItem(title: "", image: UIImage(named: "mapIconUnselected")?.withRenderingMode(.alwaysOriginal),
-                                      selectedImage: UIImage(named: "mapIcon")?.withRenderingMode(.alwaysOriginal))
-        mapBarItem = mapBarItem.tabBarItemShowingOnlyImage()
-        
-        var favouriteBarItem = UITabBarItem(title: "", image: UIImage(named: "favouriteIconUnselected")?.withRenderingMode(.alwaysOriginal),
-                                            selectedImage: UIImage(named: "favouriteIcon")?.withRenderingMode(.alwaysOriginal))
-        favouriteBarItem = favouriteBarItem.tabBarItemShowingOnlyImage()
-        
-        var timelineBarItem = UITabBarItem(title: "", image: UIImage(named: "timelineIconUnselected")?.withRenderingMode(.alwaysOriginal),
-                                           selectedImage: UIImage(named: "timelineIcon")?.withRenderingMode(.alwaysOriginal))
-        timelineBarItem = timelineBarItem.tabBarItemShowingOnlyImage()
-        
-        mapNavigationController.tabBarItem = mapBarItem
-        favouriteNavigationController.tabBarItem = favouriteBarItem
-        timelineNavigationController.tabBarItem = timelineBarItem
-        let tabBar = CustomTabBarViewController()
-        tabBar.viewControllers = [timelineNavigationController, favouriteNavigationController, mapNavigationController]
-        
-        tabBar.selectedIndex = 1
-        
-        window.rootViewController = setUpDrawerController(navigationController: tabBar)
     }
 
     func setUpDrawerController(navigationController: UIViewController) -> DrawerController {
@@ -211,7 +134,7 @@ class CustomNavigationHelper {
         parentCtrl.present(coverLetterNavigationController, animated: true, completion: nil)
     }
     
-    func moveToRecommendationsController(navCtrl: UINavigationController) {
+    func presentRecommendationsController(navCtrl: UINavigationController) {
         let recommendationsStoryboard = UIStoryboard(name: "Recommendations", bundle: nil) 
         guard let recommendationsNavController = recommendationsStoryboard.instantiateInitialViewController() as? UINavigationController else {
             return
@@ -224,7 +147,7 @@ class CustomNavigationHelper {
         navCtrl.present(recommendationsNavController, animated: true, completion: nil)
     }
 
-    func moveToContentViewController(navCtrl: UINavigationController, contentType: ContentType) {
+    func presentContentViewController(navCtrl: UINavigationController, contentType: ContentType) {
         let contentStoryboard = UIStoryboard(name: "Content", bundle: nil)
         guard let contentViewController = contentStoryboard.instantiateViewController(withIdentifier: "ContentViewCtrl") as? ContentViewController else {
             return
@@ -235,7 +158,7 @@ class CustomNavigationHelper {
         navCtrl.present(navigationCtrl, animated: true, completion: nil)
     }
 
-    func moveToContentViewController(navCtrl: UINavigationController, contentType: ContentType, url: String) {
+    func presentContentViewController(navCtrl: UINavigationController, contentType: ContentType, url: String) {
         let contentStoryboard = UIStoryboard(name: "Content", bundle: nil)
         guard let contentViewController = contentStoryboard.instantiateViewController(withIdentifier: "ContentViewCtrl") as? ContentViewController else {
             return
@@ -247,7 +170,7 @@ class CustomNavigationHelper {
         navCtrl.present(navigationCtrl, animated: true, completion: nil)
     }
 
-    func moveToEditCoverLetter(_ navCtrl: UINavigationController, currentTemplate: TemplateEntity) {
+    func pushEditCoverLetter(_ navCtrl: UINavigationController, currentTemplate: TemplateEntity) {
         let coverLetterStoryboard = UIStoryboard(name: "EditCoverLetter", bundle: nil)
         guard let ctrl = coverLetterStoryboard.instantiateViewController(withIdentifier: "EditCoverLetterCtrl") as? EditCoverLetterViewController else {
             return
@@ -256,7 +179,7 @@ class CustomNavigationHelper {
         navCtrl.pushViewController(ctrl, animated: true)
     }
 
-    func moveToChooseAttributes(_ navController: UINavigationController, currentTemplate: TemplateEntity, attribute: ChooseAttributes) {
+    func pushChooseAttributes(_ navController: UINavigationController, currentTemplate: TemplateEntity, attribute: ChooseAttributes) {
         let chooseAttributesStoryboard = UIStoryboard(name: "ChooseAttributes", bundle: nil)
         guard let ctrl = chooseAttributesStoryboard.instantiateViewController(withIdentifier: "ChooseAttributesCtrl") as? ChooseAttributesViewController else {
             return
@@ -266,7 +189,7 @@ class CustomNavigationHelper {
         navController.pushViewController(ctrl, animated: true)
     }
 
-    func moveToProcessedMessages(_ navController: UINavigationController, currentCompany: Company) {
+    func pushProcessedMessages(_ navController: UINavigationController, currentCompany: Company) {
         let processedMessagesStoryboard = UIStoryboard(name: "ProcessedMessages", bundle: nil)
         guard let ctrl = processedMessagesStoryboard.instantiateViewController(withIdentifier: "ProcessedMessagesCtrl") as? ProcessedMessagesViewController else {
             return
@@ -275,7 +198,7 @@ class CustomNavigationHelper {
         navController.pushViewController(ctrl, animated: true)
     }
 
-    func showCompanyDetailsPopover(parentCtrl: UIViewController, company: Company) {
+    func presentCompanyDetailsPopover(parentCtrl: UIViewController, company: Company) {
         guard let popOverVC = UIStoryboard(name: "CompanyDetails", bundle: nil).instantiateViewController(withIdentifier: "CompanyDetailsCtrl") as? CompanyDetailsViewController else {
             return
         }
@@ -285,7 +208,7 @@ class CustomNavigationHelper {
         parentCtrl.present(popOverVCWithNavCtrl, animated: true, completion: nil)
     }
 
-    func showNotificationPopover(parentCtrl: UIViewController, currentCompany: Company) {
+    func presentNotificationPopover(parentCtrl: UIViewController, currentCompany: Company) {
         guard let popOverVC = UIStoryboard(name: "NotificationView", bundle: nil).instantiateViewController(withIdentifier: "NotificationCtrl") as? NotificationViewController else {
             return
         }
@@ -312,7 +235,7 @@ class CustomNavigationHelper {
         parentCtrl.navigationController?.present(popoverNavigationController, animated: true, completion: nil)
     }
 
-    func showSuccessExtraInfoPopover(parentCtrl: UIViewController) {
+    func presentSuccessExtraInfoPopover(parentCtrl: UIViewController) {
         guard let popOverVC = UIStoryboard(name: "SuccessExtraInfo", bundle: nil).instantiateViewController(withIdentifier: "SuccessExtraInfoCtrl") as? SuccessExtraInfoViewController else {
             return
         }
@@ -338,18 +261,18 @@ class CustomNavigationHelper {
         parentCtrl.navigationController?.present(popoverNavigationController, animated: true, completion: nil)
     }
     
-    func moveToEmailVerification(navigCtrl: UINavigationController, company: Company) {
+    func pushEmailVerification(navigCtrl: UINavigationController, company: Company) {
         let emailStoryboard = UIStoryboard(name: "F4SEmailVerification", bundle: nil)
         guard let emailController = emailStoryboard.instantiateViewController(withIdentifier: "EmailVerification") as? F4SEmailVerificationViewController else {
             return
         }
         emailController.emailWasVerified = { [weak self] in
-            self?.moveToExtraInfoViewController(navigCtrl: navigCtrl, company: company)
+            self?.pushExtraInfoViewController(navigCtrl: navigCtrl, company: company)
         }
         navigCtrl.pushViewController(emailController, animated: true)
     }
 
-    func moveToExtraInfoViewController(navigCtrl: UINavigationController, company: Company) {
+    func pushExtraInfoViewController(navigCtrl: UINavigationController, company: Company) {
         let extraInfoStoryboard = UIStoryboard(name: "ExtraInfo", bundle: nil)
         guard let extraInfoCtrl = extraInfoStoryboard.instantiateViewController(withIdentifier: "ExtraInfoCtrl") as? ExtraInfoViewController else {
             return
@@ -358,7 +281,7 @@ class CustomNavigationHelper {
         navigCtrl.pushViewController(extraInfoCtrl, animated: true)
     }
 
-    func moveToMessageController(parentCtrl: UIViewController, threadUuid: String, company: Company, placements: [TimelinePlacement], companies: [Company]) {
+    func pushMessageController(parentCtrl: UIViewController, threadUuid: String, company: Company, placements: [TimelinePlacement], companies: [Company]) {
         let messageStoryboard = UIStoryboard(name: "Message", bundle: nil)
         guard let messageController = messageStoryboard.instantiateViewController(withIdentifier: "MessageContainerViewCtrl") as? MessageContainerViewController else {
             return
@@ -370,7 +293,7 @@ class CustomNavigationHelper {
         parentCtrl.navigationController?.pushViewController(messageController, animated: true)
     }
 
-    func showRatePlacementPopover(parentCtrl: UIViewController, placementUuid: String, ratePlacementProtocol: CustomTabBarViewController? = nil) {
+    func presentRatePlacementPopover(parentCtrl: UIViewController, placementUuid: String, ratePlacementProtocol: CustomTabBarViewController? = nil) {
         guard let popOverCtrl = UIStoryboard(name: "RatePlacement", bundle: nil).instantiateViewController(withIdentifier: "RatePlacementCtrl") as? RatePlacementViewController else {
             return
         }
@@ -413,7 +336,7 @@ class CustomNavigationHelper {
         }
     }
     
-    func showFavouriteMaximumPopover(parentCtrl: UIViewController) {
+    func presentFavouriteMaximumPopover(parentCtrl: UIViewController) {
         guard let popOverVC = UIStoryboard(name: "FavouritesPopup", bundle: nil).instantiateViewController(withIdentifier: "FavouritesPopupViewCtrl") as? FavouritesPopupViewController else {
             return
         }

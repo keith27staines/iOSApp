@@ -26,7 +26,7 @@ class ExtraInfoViewController: UIViewController {
     
     @IBAction func termsOfServiceLinkButton(_ sender: UIButton) {
         if let navigCtrl = self.navigationController {
-            CustomNavigationHelper.sharedInstance.moveToContentViewController(navCtrl: navigCtrl, contentType: ContentType.terms)
+            CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: ContentType.terms)
         }
     }
     
@@ -159,7 +159,7 @@ extension ExtraInfoViewController {
 
         dobTextField.inputView = datePicker
 
-        self.dobUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
+        updateDOBValidityUnderlining()
         self.emailUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
         self.firstAndLastNameUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
         self.voucherCodeUnderlineView.backgroundColor = UIColor(netHex: Colors.warmGrey)
@@ -271,6 +271,7 @@ extension ExtraInfoViewController {
 
             self.emailUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
             self.firstAndLastNameUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
+            updateDOBValidityUnderlining()
             updateButtonStateAndImage()
         } else {
             self.userInfoStackView.isHidden = true
@@ -424,13 +425,21 @@ extension ExtraInfoViewController {
         self.updateButtonStateAndImage()
         UIView.animate(withDuration: 0.5, animations: { [weak self] in
             guard let strongSelf = self else { return }
-            if strongSelf.getUserAge() < 13 {
-                strongSelf.dobUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
-            } else {
-                strongSelf.dobUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
-            }
+            strongSelf.updateDOBValidityUnderlining()
             strongSelf.view.layoutIfNeeded()
         })
+    }
+    
+    func updateDOBValidityUnderlining() {
+        guard let dobText = dobTextField.text, !dobText.isEmpty else {
+            dobUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
+            return
+        }
+        if getUserAge() < 13 {
+            dobUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
+        } else {
+            dobUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
+        }
     }
 
     @objc func cancelButtonTouched() {
@@ -462,7 +471,7 @@ extension ExtraInfoViewController {
         let tapPoint = recognizer.location(in: self.dobInfoLabel)
         if glyphRect.contains(tapPoint) || glyphRect2.contains(tapPoint) {
             if let navigCtrl = self.navigationController {
-                CustomNavigationHelper.sharedInstance.moveToContentViewController(navCtrl: navigCtrl, contentType: ContentType.consent)
+                CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: ContentType.consent)
             }
         } else {
             print("tapped dobInfoLabel")
@@ -493,7 +502,7 @@ extension ExtraInfoViewController {
         let tapPoint = recognizer.location(in: self.noVoucherInfoLabel)
         if glyphRect.contains(tapPoint) {
             if let navigCtrl = self.navigationController {
-                CustomNavigationHelper.sharedInstance.moveToContentViewController(navCtrl: navigCtrl, contentType: ContentType.voucher)
+                CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: ContentType.voucher)
             }
         } else {
             print("tapped noVoucherInfoLabel")
@@ -604,7 +613,7 @@ extension ExtraInfoViewController {
                 strongSelf.savePlacementLocally(status: .applied)
                 UserDefaults.standard.set(true, forKey: strongSelf.consentPreviouslyGivenKey)
                 if let _ = strongSelf.continueWithResult(result: result) {
-                    CustomNavigationHelper.sharedInstance.showSuccessExtraInfoPopover(parentCtrl: strongSelf)
+                    CustomNavigationHelper.sharedInstance.presentSuccessExtraInfoPopover(parentCtrl: strongSelf)
                 }
             }
         })

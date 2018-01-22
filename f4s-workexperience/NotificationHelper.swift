@@ -61,7 +61,7 @@ class NotificationHelper {
         case NotificationType.message:
             if !isAppActive {
                 // need to move to message screen
-                CustomNavigationHelper.sharedInstance.moveToTimelineCtrl(window: window, threadUuid: threadUuid)
+                CustomNavigationHelper.sharedInstance.createTabBarControllersAndMoveToTimeline(window: window, threadUuid: threadUuid)
             } else {
                 if let topViewCtrl = window.rootViewController?.topMostViewController {
                     if let sideMenuViewCtrl = topViewCtrl as? SideMenuViewController {
@@ -102,7 +102,7 @@ class NotificationHelper {
                             }
                         }
                     }
-                    CustomNavigationHelper.sharedInstance.moveToTimelineCtrl(window: window, threadUuid: threadUuid)
+                    CustomNavigationHelper.sharedInstance.createTabBarControllersAndMoveToTimeline(window: window, threadUuid: threadUuid)
                 }
                 let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default) { _ in
                     log.debug("user received notif and pressed cancel")
@@ -125,16 +125,16 @@ class NotificationHelper {
             if let topViewCtrl = window.rootViewController?.topMostViewController {
                 if let drawerCtrl = topViewCtrl as? DrawerController {
                     if let centerCtrl = drawerCtrl.centerViewController {
-                        CustomNavigationHelper.sharedInstance.showRatePlacementPopover(parentCtrl: centerCtrl, placementUuid: placementUuid)
+                        CustomNavigationHelper.sharedInstance.presentRatePlacementPopover(parentCtrl: centerCtrl, placementUuid: placementUuid)
                     }
                 } else if let sideMenuViewCtrl = topViewCtrl as? SideMenuViewController {
                     if let centerCtrl = sideMenuViewCtrl.evo_drawerController?.centerViewController as? CustomTabBarViewController {
                         if let currentTabCtrl = centerCtrl.selectedViewController {
-                            CustomNavigationHelper.sharedInstance.showRatePlacementPopover(parentCtrl: currentTabCtrl, placementUuid: placementUuid)
+                            CustomNavigationHelper.sharedInstance.presentRatePlacementPopover(parentCtrl: currentTabCtrl, placementUuid: placementUuid)
                         }
                     }
                 } else {
-                    CustomNavigationHelper.sharedInstance.showRatePlacementPopover(parentCtrl: topViewCtrl, placementUuid: placementUuid)
+                    CustomNavigationHelper.sharedInstance.presentRatePlacementPopover(parentCtrl: topViewCtrl, placementUuid: placementUuid)
                 }
             }
             break
@@ -169,12 +169,12 @@ class NotificationHelper {
         switch type
         {
         case NotificationType.message:
-            CustomNavigationHelper.sharedInstance.moveToTimelineCtrl(window: window, threadUuid: threadUuid)
+            CustomNavigationHelper.sharedInstance.createTabBarControllersAndMoveToTimeline(window: window, threadUuid: threadUuid)
             break
         case NotificationType.rating:
-            CustomNavigationHelper.sharedInstance.moveToMainCtrl(window: window)
+            CustomNavigationHelper.sharedInstance.createTabBarControllers(window: window)
             if let viewCtrl = window.rootViewController?.topMostViewController {
-                CustomNavigationHelper.sharedInstance.showRatePlacementPopover(parentCtrl: viewCtrl, placementUuid: placementUuid)
+                CustomNavigationHelper.sharedInstance.presentRatePlacementPopover(parentCtrl: viewCtrl, placementUuid: placementUuid)
             }
             break
         }

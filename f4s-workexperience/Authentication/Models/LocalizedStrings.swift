@@ -12,11 +12,11 @@ public struct LocalizedStrings {
     
     public struct ErrorDescriptions {
         static let networkErrorSubmittingEmail = NSLocalizedString(
-            "No network connection",
+            "No network connection. We were unable to submit your email for verification",
             comment:"Describes the lack of network availability")
 
         static let networkErrorProcessingLink = NSLocalizedString(
-            "No network connection",
+            "No network connection. We have been unable to verify your email account",
             comment:"Describes the lack of network availability")
 
         static let emailFormatError = NSLocalizedString(
@@ -24,8 +24,8 @@ public struct LocalizedStrings {
             comment:"Reports a format problem with an email address")
         
         static let emailCodeCombinationInvalid = NSLocalizedString(
-            "Invalid email address or link",
-            comment:"Reports that the email address/link combination was rejected")
+            "We were unable to verify your email address\nThis might be because the link has expired or it is the wrong link",
+            comment:"Report that the email address and link combination was rejected")
         
         static let unknownError = NSLocalizedString(
             "An unexpected error has occurred",
@@ -34,19 +34,19 @@ public struct LocalizedStrings {
     
     public struct ErrorCorrectiveActions {
         static let networkErrorSubmittingEmail = NSLocalizedString(
-        "We were unable to submit your email for verification due to a network error\n\nPlease make sure you have a good internet connection and try again",
+        "Please make sure you have a good internet connection and try again",
         comment: "Give the user the corrective action for a bad internet connection when submitting their email address for verification")
         
         static let emailFormatError = NSLocalizedString(
-            "Your email address seems to be incorrectly formatted\n\nPlease try again",
+            "Please re-enter your address and try again",
             comment: "Ask the user to correct their email address")
         
         static let networkErrorProcessingLink = NSLocalizedString(
-            "We were unable to process the link do to a network error\nPlease make sure you have a good internet connection and try again",
+            "Please make sure you have a good internet connection and request a new link",
             comment: "Give the user the corrective action for a bad internet connection when attempting to submit their linke for verification")
         
         static let codeEmailCombinationInvalid = NSLocalizedString(
-            "We were unable to verify your email\nThis might be because there is an error in your email address or the link might have expired\nPlease ensure your email address is correct and try again",
+            "Request a new link and try again",
             comment: "Give the user the corrective action for a failed verification attempt")
         
         static let unknownError = NSLocalizedString(
@@ -60,6 +60,7 @@ public struct LocalizedStrings {
         static let linkReceived = NSLocalizedString("Processing link", comment: "Advise the user that we are processing the link")
         static let verified = NSLocalizedString("Email verified", comment: "Advise the user that we have verified their email address")
         static let  previouslyVerified = NSLocalizedString("This is the verified email address we currently hold for you", comment: "Remind the user of their verified email address")
+        static let error = NSLocalizedString("Something went wrong", comment: "generic note to user that there was a problem")
     }
     
     public struct FeedbackStrings {

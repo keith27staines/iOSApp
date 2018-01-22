@@ -186,7 +186,7 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
             } else {
                 if let navCtrl = self.navigationController, let template = currentTemplate {
                     // go to personal attributes page
-                    CustomNavigationHelper.sharedInstance.moveToChooseAttributes(navCtrl, currentTemplate: template, attribute: .PersonalAttributes)
+                    CustomNavigationHelper.sharedInstance.pushChooseAttributes(navCtrl, currentTemplate: template, attribute: .PersonalAttributes)
                 }
             }
             coverLetterTableView.reloadData()
@@ -198,7 +198,7 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
             } else {
                 if let navCtrl = self.navigationController, let template = currentTemplate {
                     // go to job role page
-                    CustomNavigationHelper.sharedInstance.moveToChooseAttributes(navCtrl, currentTemplate: template, attribute: .JobRole)
+                    CustomNavigationHelper.sharedInstance.pushChooseAttributes(navCtrl, currentTemplate: template, attribute: .JobRole)
                 }
             }
             coverLetterTableView.reloadData()
@@ -232,7 +232,7 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
             } else {
                 if let navCtrl = self.navigationController, let template = currentTemplate {
                     // go to employment skills
-                    CustomNavigationHelper.sharedInstance.moveToChooseAttributes(navCtrl, currentTemplate: template, attribute: .EmploymentSkills)
+                    CustomNavigationHelper.sharedInstance.pushChooseAttributes(navCtrl, currentTemplate: template, attribute: .EmploymentSkills)
                 }
             }
             coverLetterTableView.reloadData()

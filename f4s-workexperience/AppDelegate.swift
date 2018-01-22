@@ -73,7 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         registerApplicationForRemoteNotifications(application)
         DatabaseService.sharedInstance.getLatestDatabase()
         if let window = self.window {
-            CustomNavigationHelper.sharedInstance.moveToMainCtrl(window: window)
+            CustomNavigationHelper.sharedInstance.createTabBarControllers(window: window)
         }
     }
     
@@ -98,16 +98,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func setInvokingUrl(_ url: URL) {
         print("Invoked from url: \(url.absoluteString)")
-        if F4SAuth0MagicLinkInterpreter.isPasswordlessURL(url: url) {
+        guard let universalLink = UniversalLink(url: url) else {
+            return
+        }
+        switch universalLink {
+        case .recommendCompany(let company):
+            
+            break
+        case .passwordless(let passcode):
             let userInfo: [AnyHashable: Any] = ["url" : url]
             let notification = Notification(
                 name: .verificationCodeRecieved,
                 object: self,
                 userInfo: userInfo)
             NotificationCenter.default.post(notification)
-        } else {
-            let key = UserDefaultsKeys.invokingUrl
-            UserDefaults.standard.set(url, forKey: key)
         }
     }
     

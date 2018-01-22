@@ -108,6 +108,6 @@ extension RecommendationsViewController : UITableViewDataSource, UITableViewDele
         guard let company = recommendation.company else {
             return
         }
-        CustomNavigationHelper.sharedInstance.showCompanyDetailsPopover(parentCtrl: self, company: company)
+        CustomNavigationHelper.sharedInstance.presentCompanyDetailsPopover(parentCtrl: self, company: company)
     }
 }

@@ -824,7 +824,7 @@ extension MapViewController: GMSMapViewDelegate {
         guard let company = companyFromMarker(marker: marker) else {
             return
         }
-        CustomNavigationHelper.sharedInstance.showCompanyDetailsPopover(parentCtrl: self, company: company)
+        CustomNavigationHelper.sharedInstance.presentCompanyDetailsPopover(parentCtrl: self, company: company)
     }
     
     func mapView(_: GMSMapView, didCloseInfoWindowOf _: GMSMarker) {

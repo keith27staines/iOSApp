@@ -89,7 +89,7 @@ extension FavouritesPopupViewController {
         self.backgroundPopoverView.removeFromSuperview()
         
         if let window = self.view.window {
-            CustomNavigationHelper.sharedInstance.moveToFavouriteCtrl(window: window)
+            CustomNavigationHelper.sharedInstance.createTabBarControllersAndMoveToFavourites(window: window)
         }
     }
 }

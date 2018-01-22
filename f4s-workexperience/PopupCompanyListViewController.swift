@@ -50,6 +50,6 @@ extension PopupCompanyListViewController : UITableViewDelegate, UITableViewDataS
     
     func showCompanyInfo(indexPath: IndexPath) {
         let company = companies[indexPath.row]
-        CustomNavigationHelper.sharedInstance.showCompanyDetailsPopover(parentCtrl: self, company: company)
+        CustomNavigationHelper.sharedInstance.presentCompanyDetailsPopover(parentCtrl: self, company: company)
     }
 }
