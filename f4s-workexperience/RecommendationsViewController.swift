@@ -16,6 +16,7 @@ class RecommendationsViewController: UIViewController {
     }
     
     var emptyRecomendationsListText: String? = nil
+    var selectCompany: Company?
     
     var model: RecommendationsModel!
     

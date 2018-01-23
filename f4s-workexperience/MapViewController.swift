@@ -78,14 +78,6 @@ class MapViewController: UIViewController {
     var shouldRequestAuthorization: Bool?
     var pressedPinOrCluster: UIView?
     
-    lazy var partnersModel: PartnersModel = {
-        let p = PartnersModel.sharedInstance
-        p.getPartners(completed: { (_) in
-            return
-        })
-        return p
-    }()
-    
     /// User locations are entered manually through the search box
     var userLocation: CLLocation? {
         didSet {
@@ -160,7 +152,6 @@ class MapViewController: UIViewController {
         setupMap()
         setupReachability(nil, useClosures: true)
         startNotifier()
-        partnersModel.showWillProvidePartnerLater = true
 
         if dbService.isDownloadInProgress {
             if let view = self.navigationController?.tabBarController?.view {
@@ -230,9 +221,6 @@ class MapViewController: UIViewController {
     var hasMovedToBestPosition: Bool = false
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if !partnersModel.hasSelectedPartner {
-            selectPartner()
-        }
         applyBranding()
         if !hasMovedToBestPosition {
             moveCameraToBestPosition()
@@ -242,11 +230,6 @@ class MapViewController: UIViewController {
     
     func applyBranding() {
         
-    }
-    
-    func selectPartner() {
-        let vc = UIStoryboard(name: "SelectPartner", bundle: Bundle.main).instantiateInitialViewController()!
-        present(vc, animated: true, completion: nil)
     }
 }
 
@@ -529,7 +512,6 @@ extension MapViewController {
 extension MapViewController {
     
     fileprivate func setupMap() {
-        UserDefaults.standard.set(false, forKey: UserDefaultsKeys.isFirstLaunch)
         mapView.delegate = self
         
         // cluster algorithm setup

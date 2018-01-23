@@ -186,8 +186,6 @@ extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - user interaction
 extension FavouriteViewController {
     @objc func menuButtonTapped() {
-        if let navCtrl = self.navigationController {
-            MenuHelper(navigationController: navCtrl).openMenuButton()
-        }
+        CustomNavigationHelper.sharedInstance.toggleMenu()
     }
 }

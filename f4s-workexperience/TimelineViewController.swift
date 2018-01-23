@@ -244,9 +244,7 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
 // MARK: - user interaction
 extension TimelineViewController {
     @objc func menuButtonTapped() {
-        if let navCtrl = self.navigationController {
-            MenuHelper(navigationController: navCtrl).openMenuButton()
-        }
+        CustomNavigationHelper.sharedInstance.toggleMenu()
     }
 
     func goToMessageViewCtrl() {

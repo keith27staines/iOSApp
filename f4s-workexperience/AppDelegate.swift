@@ -72,8 +72,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        printDebugUserInfo()
         registerApplicationForRemoteNotifications(application)
         DatabaseService.sharedInstance.getLatestDatabase()
-        if let window = self.window {
-            CustomNavigationHelper.sharedInstance.createTabBarControllers(window: window)
+        guard let window = window else { return }
+        let isFirstLaunch = UserDefaults.standard.value(forKey: UserDefaultsKeys.isFirstLaunch) as? Bool ?? true
+        if isFirstLaunch {
+            guard let ctrl = window.rootViewController?.topMostViewController as? OnboardingViewController else {
+                return
+            }
+            ctrl.hideOnboardingControls = false
+        } else {
+            let navigationHelper = CustomNavigationHelper.sharedInstance
+            if let shouldLoadTimeline = UserDefaults.standard.value(forKey: UserDefaultsKeys.shouldLoadTimeline) as? Bool {
+                if shouldLoadTimeline {
+                    navigationHelper.navigateToTimeline(threadUuid: nil)
+                }
+            } else {
+                navigationHelper.navigateToMap()
+                navigationHelper.mapViewController.shouldRequestAuthorization = false
+            }
         }
     }
     
@@ -103,7 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         switch universalLink {
         case .recommendCompany(let company):
-            
+            CustomNavigationHelper.sharedInstance.presentRecommendationsController(company: company)
             break
         case .passwordless(let passcode):
             let userInfo: [AnyHashable: Any] = ["url" : url]
