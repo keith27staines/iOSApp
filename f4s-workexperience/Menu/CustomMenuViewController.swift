@@ -179,7 +179,7 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
                 case 0:
                     CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: ContentType.about)
                 case 2:
-                    CustomNavigationHelper.sharedInstance.presentRecommendationsController(navCtrl: navigCtrl)
+                    CustomNavigationHelper.sharedInstance.navigateToRecommendations(company: nil)
                 case 4:
                     CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: ContentType.faq)
                 case 6:

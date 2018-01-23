@@ -36,39 +36,55 @@ class CustomNavigationHelper {
         window.rootViewController = setUpDrawerController(navigationController: tabBar)
     }
     
-    public func navigateToTimeline(threadUuid: F4SUUID?) {
-//        if let topViewCtrl = window.rootViewController?.topMostViewController {
-//            if let sideMenuViewCtrl = topViewCtrl as? SideMenuViewController {
-//                if let centerCtrl = sideMenuViewCtrl.evo_drawerController?.centerViewController as? CustomTabBarViewController {
-//                    if let currentTabCtrl = centerCtrl.selectedViewController as? TimelineViewController {
-//                        // go to message screen
-//                        currentTabCtrl.threadUuid = threadUuid
-//                        currentTabCtrl.goToMessageViewCtrl()
-//                        return
-//                    }
-//                    if let currentTabCtrl = centerCtrl.selectedViewController as? UINavigationController {
-//                        if let timelineCtrl = currentTabCtrl.topMostViewController as? TimelineViewController {
-//                            // go to message screen
-//                            timelineCtrl.threadUuid = threadUuid
-//                            timelineCtrl.goToMessageViewCtrl()
-//                            return
-//                        }
-//                    }
-//                }
-//            }
-//        }
+    public func rewindAndNavigateToTimeline(from viewController: UIViewController, show threadUuid: F4SUUID?) {
+        rewindToTabBar(from: viewController) { [weak self] in
+            self?.navigateToTimeline(threadUuid: threadUuid)
+        }
+    }
+    
+    public func navigateToTimeline(threadUuid: F4SUUID? = nil) {
+        closeMenu { [weak self] (success) in
+            self?.tabBar.selectedIndex = TabIndex.timeline.rawValue
+            self?.timelineViewController.threadUuid = threadUuid
+            self?.timelineViewController.goToMessageViewCtrl()
+        }
+    }
+    
+    public func rewindAndNavigateToMap(from viewController: UIViewController) {
+        rewindToTabBar(from: viewController) { [weak self] in
+            self?.navigateToMap()
+        }
     }
     
     public func navigateToMap() {
-        
+        closeMenu { [weak self] (success) in
+            self?.tabBar.selectedIndex = TabIndex.map.rawValue
+        }
     }
 
+    public func rewindAndNavigateToFavourites(from viewController: UIViewController) {
+        rewindToTabBar(from: viewController) { [weak self] in
+            self?.navigateToFavourites()
+        }
+    }
     public func navigateToFavourites() {
-        
+        closeMenu { [weak self] (success) in
+            self?.tabBar.selectedIndex = TabIndex.favourites.rawValue
+        }
     }
     
-    public func navigateToRecommendations(company: Company) {
-        
+    public func rewindAndNavigateToRecommendations(from viewController: UIViewController, show company: Company?) {
+        rewindToTabBar(from: viewController) { [weak self] in
+            self?.navigateToRecommendations(company: company)
+        }
+    }
+    
+    public func navigateToRecommendations(company: Company? = nil) {
+        closeMenu { [weak self] (success) in
+            guard let strongSelf = self else { return }
+            strongSelf.navigateToMap()
+            CustomNavigationHelper.sharedInstance.presentRecommendationsController(from: strongSelf.mapNavigationController, company: company)
+        }
     }
     
     public func openMenu(completion: ((Bool) -> ())? = nil) {
@@ -92,7 +108,7 @@ class CustomNavigationHelper {
     }
     
     public func isMenuVisible() -> Bool {
-        if (drawerController?.evo_drawerController?.visibleLeftDrawerWidth)! > CGFloat(0) {
+        if (drawerController?.visibleLeftDrawerWidth)! > CGFloat(0) {
             return true
         }
         return false
@@ -197,11 +213,10 @@ class CustomNavigationHelper {
     }
     
     func presentRecommendationsController(company: Company? = nil) {
-        let navCtrl = tabBar.navigationController!
-        presentRecommendationsController(navCtrl: navCtrl, company: company)
+        presentRecommendationsController(from: mapNavigationController, company: company)
     }
     
-    func presentRecommendationsController(navCtrl: UINavigationController, company: Company? = nil) {
+    func presentRecommendationsController(from navCtrl: UINavigationController, company: Company? = nil) {
         let recommendationsStoryboard = UIStoryboard(name: "Recommendations", bundle: nil) 
         guard let recommendationsNavController = recommendationsStoryboard.instantiateInitialViewController() as? UINavigationController else {
             return
@@ -215,6 +230,23 @@ class CustomNavigationHelper {
         navCtrl.present(recommendationsNavController, animated: true, completion: nil)
     }
 
+    func rewindToTabBar(from vc: UIViewController?, completion: @escaping () -> Void) {
+        guard let vc = vc else {
+            completion()
+            return
+        }
+        
+        if drawerController == vc {
+            completion()
+            return
+        }
+        
+        let presentingViewController = vc.presentingViewController
+        vc.dismiss(animated: false, completion: { [weak self] in
+            self?.rewindToTabBar(from: presentingViewController, completion: completion)
+        })
+    }
+    
     func presentContentViewController(navCtrl: UINavigationController, contentType: ContentType) {
         let contentStoryboard = UIStoryboard(name: "Content", bundle: nil)
         guard let contentViewController = contentStoryboard.instantiateViewController(withIdentifier: "ContentViewCtrl") as? ContentViewController else {

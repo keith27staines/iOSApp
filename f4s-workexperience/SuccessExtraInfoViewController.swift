@@ -61,17 +61,14 @@ extension SuccessExtraInfoViewController: UIPopoverPresentationControllerDelegat
 extension SuccessExtraInfoViewController {
 
     @IBAction func recommendationsButtonPressed(_ sender: UIButton) {
-        CustomTabBarViewController.rewindToDrawerAndPresentRecommendations(vc: self)
+        CustomNavigationHelper.sharedInstance.rewindAndNavigateToRecommendations(from: self, show: nil)
     }
     
     @IBAction func timelineButtonTouched(_: UIButton) {
-        CustomTabBarViewController.rewindToDrawerAndSelectTab(vc: self, tab: .timeline)
+        CustomNavigationHelper.sharedInstance.rewindAndNavigateToTimeline(from: self, show: nil)
     }
     
     @IBAction func viewMapButtonTouched(_: UIButton) {
-        if let window = view.window {
-            NotificationHelper.sharedInstance.updateToolbarButton(window: window)
-        }
-        CustomTabBarViewController.rewindToDrawerAndSelectTab(vc: self, tab: .map)
+        CustomNavigationHelper.sharedInstance.rewindAndNavigateToMap(from: self)
     }
 }
