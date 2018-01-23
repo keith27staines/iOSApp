@@ -85,11 +85,9 @@ extension FavouritesPopupViewController {
         self.backgroundPopoverView.removeFromSuperview()
         self.dismiss(animated: true, completion: nil)
     }
+    
     @IBAction func okButtonTouched(_ sender: Any) {
         self.backgroundPopoverView.removeFromSuperview()
-        
-        if let window = self.view.window {
-            CustomNavigationHelper.sharedInstance.navigateToFavourites()
-        }
+        CustomNavigationHelper.sharedInstance.navigateToFavourites()
     }
 }

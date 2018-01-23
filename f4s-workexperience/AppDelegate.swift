@@ -120,7 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case .recommendCompany(let company):
             CustomNavigationHelper.sharedInstance.presentRecommendationsController(company: company)
             break
-        case .passwordless(let passcode):
+        case .passwordless( _):
             let userInfo: [AnyHashable: Any] = ["url" : url]
             let notification = Notification(
                 name: .verificationCodeRecieved,
