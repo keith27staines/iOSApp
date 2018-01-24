@@ -23,6 +23,7 @@ class SuccessExtraInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         applyStyle()
+        recommendationsButton.isHidden = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {
