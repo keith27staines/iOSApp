@@ -28,6 +28,7 @@ class PartnerSelectionViewController: UIViewController {
     @IBAction func doneButtonPressed(_ sender: Any) {
         partnersModel.selectedPartner = selectedPartner
         dismiss(animated: true, completion: nil)
+        CustomNavigationHelper.sharedInstance.navigateToMap()
     }
     
     override func viewDidLoad() {

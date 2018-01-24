@@ -118,7 +118,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         switch universalLink {
         case .recommendCompany(let company):
-            CustomNavigationHelper.sharedInstance.presentRecommendationsController(company: company)
+            //CustomNavigationHelper.sharedInstance.presentRecommendationsController(company: company)
+            CustomNavigationHelper.sharedInstance.rewindAndNavigateToRecommendations(from: nil, show: company)
             break
         case .passwordless( _):
             let userInfo: [AnyHashable: Any] = ["url" : url]
@@ -236,13 +237,8 @@ extension AppDelegate {
             return String(format: "%02.2hhx", data)
         }
         let token = tokenParts.joined()
-
-        print("Registered for remote notification with dev token \(token)")
-        
         UserService.sharedInstance.enablePushNotificationForUser(withDeviceToken: token, putCompleted: { success, result in
-            if success {
-                print("enabled push notifications on Workfinder server \(result)")
-            } else {
+            if !success {
                 print("failed to enable push notifications on Workfinder server \(result)")
             }
         })
@@ -271,6 +267,7 @@ extension AppDelegate {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         self.application(application, didReceiveRemoteNotification: userInfo) {
             _ in
+            print("Recieved remote notification")
         }
     }
     

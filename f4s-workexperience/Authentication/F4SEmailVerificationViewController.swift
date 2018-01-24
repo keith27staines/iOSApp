@@ -69,6 +69,7 @@ extension F4SEmailVerificationViewController {
         case  .verified, .previouslyVerified:
             emailWasVerified?()
         case .error(_):
+            emailToVerify = emailTextField.text
             model.restart()
         default:
             assertionFailure("Shouldn't happen. Was the primary button left enabled when it shouldn't have been?")

@@ -885,12 +885,12 @@ extension MapViewController: CLLocationManagerDelegate {
         case .denied:
             mapView.isMyLocationEnabled = false
             print("location services denied")
-            
             displayDefaultSearch()
             
         case .authorizedAlways:
             locationManager!.startUpdatingLocation()
             mapView.isMyLocationEnabled = true
+            moveCameraToBestPosition()
             
         case .restricted:
             mapView.isMyLocationEnabled = false

@@ -22,8 +22,13 @@ public enum F4SEmailVerificationError : Error {
             return f4s
         }
         if let authError = error as? AuthenticationError {
-            if authError.statusCode == 400 {
+            switch authError.statusCode {
+            case 400:
                 return .serversideEmailFormatCheckFailed
+            case 401:
+                return .codeEmailCombinationNotValid
+            default:
+                return .unknownError
             }
         }
         return .unknownError

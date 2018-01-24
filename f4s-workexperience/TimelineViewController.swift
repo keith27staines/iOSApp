@@ -38,7 +38,6 @@ class TimelineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackgroundView()
-        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.shouldLoadTimeline)
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,6 +48,7 @@ class TimelineViewController: UIViewController {
         super.viewWillAppear(true)
         adjustNavigationBar()
         getAllPlacementsForUser()
+        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.shouldLoadTimeline)
     }
 }
 

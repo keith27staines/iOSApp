@@ -67,7 +67,6 @@ public extension F4SEmailVerificationState {
     }
     
     var titleForPrimary: String {
-
         switch self {
         case .start:
             return LocalizedStrings.ButtonTitles.requestVerificationLink
@@ -121,7 +120,7 @@ public extension F4SEmailVerificationState {
         case .previouslyVerified:
             return LocalizedStrings.FeedbackStrings.previouslyVerified
         case .error(let error):
-            return "\(error.description) \n\(error.correctiveAction)"
+            return "\(error.description) \n\n\(error.correctiveAction)"
         }
     }
 }

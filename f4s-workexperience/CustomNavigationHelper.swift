@@ -73,10 +73,18 @@ class CustomNavigationHelper {
         }
     }
     
-    public func rewindAndNavigateToRecommendations(from viewController: UIViewController, show company: Company?) {
-        rewindToTabBar(from: viewController) { [weak self] in
+    public func rewindAndNavigateToRecommendations(from viewController: UIViewController?, show company: Company?) {
+        guard let vc = viewController ?? topMostViewController() else {
+            return
+        }
+        rewindToTabBar(from: vc) { [weak self] in
             self?.navigateToRecommendations(company: company)
         }
+    }
+    
+    public func topMostViewController() -> UIViewController? {
+        let vc = drawerController?.topMostViewController
+        return vc
     }
     
     public func navigateToRecommendations(company: Company? = nil) {
@@ -241,7 +249,10 @@ class CustomNavigationHelper {
             return
         }
         
-        let presentingViewController = vc.presentingViewController
+        guard let presentingViewController = vc.presentingViewController else {
+            completion()
+            return
+        }
         vc.dismiss(animated: false, completion: { [weak self] in
             self?.rewindToTabBar(from: presentingViewController, completion: completion)
         })
