@@ -15,19 +15,23 @@ class F4SEmailVerificationViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var feedbackLabel: UILabel!
     @IBOutlet weak var primaryActionButton: UIButton!
+    
+    public var emailToVerify: String? = nil
 
     /// A callback to inform the presenter that the email was verified
     var emailWasVerified: (() -> Void)? = nil
 
     /// The finite state machine that serves as the model for this view
-    var model: F4SEmailVerificationModel!
+    lazy var model: F4SEmailVerificationModel = {
+        return F4SEmailVerificationModel()
+    }()
     
     /// Maintains a count of the number of asynchronous activities in progress
     private var activityCount: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        emailTextField.text = "" // Clear out example text in storyboard
+        emailTextField.text = emailToVerify ?? ""
         model = F4SEmailVerificationModel()
         model.didChangeState = handleStateChange(oldState:newState:)
         emailTextField.delegate = self
@@ -38,6 +42,9 @@ class F4SEmailVerificationViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        if emailToVerify != nil {
+            startVerifying()
+        }
         configure(for: model.emailVerificationState)
         applyStyle()
     }
@@ -58,26 +65,31 @@ extension F4SEmailVerificationViewController {
     @IBAction func primaryActionButtonPressed(_ sender: Any) {
         switch model.emailVerificationState {
         case .start, .emailSent(_):
-            // Primary button is used to tell us to submit email address to receive link
-            guard var email = emailTextField.text else {
-                return
-            }
-            email = email.trimmingCharacters(in: .whitespacesAndNewlines)
-            emailTextField.text = email
-            emailTextField.resignFirstResponder()
-            emailTextField.isEnabled = false
-            startActivity()
-            model.submitEmailForVerification(email) { [weak self] in
-                self?.finishActivity()
-            }
+            startVerifying()
         case  .verified, .previouslyVerified:
-            // Primary button is used to tell us to continue with the currently verified email
             emailWasVerified?()
         case .error(_):
+            emailToVerify = emailTextField.text
             model.restart()
         default:
             assertionFailure("Shouldn't happen. Was the primary button left enabled when it shouldn't have been?")
             break
+        }
+    }
+    
+    public func startVerifying() {
+        // Primary button is used to tell us to submit email address to receive link
+        guard let email = emailTextField.text else {
+            return
+        }
+        emailToVerify = email.trimmingCharacters(in: .whitespacesAndNewlines)
+        emailTextField.text = emailToVerify
+        emailToVerify = nil
+        emailTextField.resignFirstResponder()
+        emailTextField.isEnabled = false
+        startActivity()
+        model.submitEmailForVerification(email) { [weak self] in
+            self?.finishActivity()
         }
     }
 
@@ -160,6 +172,7 @@ extension F4SEmailVerificationViewController {
         
         switch state {
         case .start:
+            emailTextField.text = emailToVerify ?? ""
             configurePrimaryActionButtonForStartStateWithEmail(email: emailTextField.text)
         case .emailSent:
             emailTextField.text = model.emailSentForVerification

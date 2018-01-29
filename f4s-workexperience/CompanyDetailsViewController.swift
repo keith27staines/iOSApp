@@ -156,7 +156,7 @@ extension CompanyDetailsViewController {
             
             if shortlist.count >= AppConstants.maximumNumberOfShortlists {
                 // reached the maximum number of shortlists
-                CustomNavigationHelper.sharedInstance.showFavouriteMaximumPopover(parentCtrl: self)
+                CustomNavigationHelper.sharedInstance.presentFavouriteMaximumPopover(parentCtrl: self)
                 return
             }
 
@@ -194,7 +194,7 @@ extension CompanyDetailsViewController {
     @IBAction func seeAccountsButton(_: AnyObject) {
         // will open web view
         if let url = self.company?.companyUrl, let navCtrl = self.navigationController {
-            CustomNavigationHelper.sharedInstance.moveToContentViewController(navCtrl: navCtrl, contentType: ContentType.company, url: url)
+            CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navCtrl, contentType: ContentType.company, url: url)
         }
     }
 
@@ -266,7 +266,7 @@ extension CompanyDetailsViewController {
                     // create new placement in progress
                     placement.placementUuid = boxed.value
                     strongSelf.placement = placement
-                    PlacementDBOperations.sharedInstance.savePlacemnt(placement: placement)
+                    PlacementDBOperations.sharedInstance.savePlacement(placement: placement)
                     DispatchQueue.main.async {
                         strongSelf.applyButton.setTitle(NSLocalizedString("Finish Application", comment: ""), for: .normal)
                         let applyText = NSLocalizedString("Finish Application", comment: "")
@@ -278,7 +278,7 @@ extension CompanyDetailsViewController {
                     if UIApplication.shared.isRegisteredForRemoteNotifications {
                         CustomNavigationHelper.sharedInstance.presentCoverLetterController(parentCtrl: strongSelf, currentCompany: company)
                     } else {
-                        CustomNavigationHelper.sharedInstance.showNotificationPopover(parentCtrl: strongSelf, currentCompany: company)
+                        CustomNavigationHelper.sharedInstance.presentNotificationPopover(parentCtrl: strongSelf, currentCompany: company)
                     }
                     break
                 case let .error(error):

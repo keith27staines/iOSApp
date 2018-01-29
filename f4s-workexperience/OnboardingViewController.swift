@@ -94,14 +94,10 @@ extension OnboardingViewController {
 // MARK: - user interraction
 extension OnboardingViewController {
     @IBAction func enterLocationButton(_: AnyObject) {
-        if let window = self.view.window {
-            CustomNavigationHelper.sharedInstance.moveToMapCtrl(window: window, shouldRequestAuthorization: false)
-        }
+        CustomNavigationHelper.sharedInstance.completeOnboarding(mapShouldRequestLocation: false)
     }
 
     @IBAction func enableLocationButton(_: AnyObject) {
-        if let window = self.view.window {
-            CustomNavigationHelper.sharedInstance.moveToMapCtrl(window: window, shouldRequestAuthorization: true)
-        }
+        CustomNavigationHelper.sharedInstance.completeOnboarding(mapShouldRequestLocation: true)
     }
 }

@@ -38,6 +38,9 @@ public class PartnersModel {
     public init() {
         partners = [F4SUUID:Partner]()
         partnersArray = []
+        getPartners { (_) in
+            //
+        }
     }
     
     public func getPartners(completed: @escaping (_ success:Bool) -> Void) {

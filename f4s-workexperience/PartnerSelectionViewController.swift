@@ -28,12 +28,15 @@ class PartnerSelectionViewController: UIViewController {
     @IBAction func doneButtonPressed(_ sender: Any) {
         partnersModel.selectedPartner = selectedPartner
         dismiss(animated: true, completion: nil)
+        CustomNavigationHelper.sharedInstance.navigateToMap()
     }
     
     override func viewDidLoad() {
         tableView.dataSource = self
         tableView.delegate = self
-
+        partnersModel.getPartnersFromServer { [weak self] _ in
+            self?.tableView.reloadData()
+        }
         tableHeightConstraint.constant = 0.0
         isTableDropped = false
         self.referrerTextBox.text = nil
@@ -96,7 +99,6 @@ extension PartnerSelectionViewController : UITableViewDataSource, UITableViewDel
         return rowHeight()
     }
 
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedPartner = partnersModel.partnerForIndexPath(indexPath)
         partnersModel.selectedPartner = selectedPartner

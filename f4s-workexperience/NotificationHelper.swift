@@ -18,13 +18,12 @@ class NotificationHelper {
     func handleRemoteNotification(userInfo: [AnyHashable: Any], window: UIWindow, isAppActive: Bool) {
         log.debug(userInfo)
         UIApplication.shared.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber - 1
-
+        
         var title: String = ""
         var body: String = ""
-        var type: NotificationType = NotificationType.message
         var threadUuid: String = ""
         var placementUuid: String = ""
-
+        
         if let aps = userInfo["aps"] as? [AnyHashable: Any] {
             if let alert = aps["alert"] as? [AnyHashable: Any] {
                 if let t = alert["title"] as? String {
@@ -35,148 +34,67 @@ class NotificationHelper {
                 }
             }
         }
-        if let t = userInfo["type"] as? String {
-            switch t
-            {
-            case NotificationType.message.rawValue:
-                type = NotificationType.message
-                break
-            case NotificationType.rating.rawValue:
-                type = NotificationType.rating
-                break
-            default:
-                type = NotificationType.message
-                break
-            }
+        
+        guard let type = extractNotificationType(userInfo: userInfo) else {
+            return
         }
+        
         if let threadId = userInfo["thread_uuid"] as? String {
             threadUuid = threadId
         }
         if let placementId = userInfo["placement_uuid"] as? String {
             placementUuid = placementId
         }
-
-        switch type
-        {
-        case NotificationType.message:
-            if !isAppActive {
-                // need to move to message screen
-                CustomNavigationHelper.sharedInstance.moveToTimelineCtrl(window: window, threadUuid: threadUuid)
-            } else {
-                if let topViewCtrl = window.rootViewController?.topMostViewController {
-                    if let sideMenuViewCtrl = topViewCtrl as? SideMenuViewController {
-                        if let centerCtrl = sideMenuViewCtrl.evo_drawerController?.centerViewController as? CustomTabBarViewController {
-                            if let currentTabCtrl = centerCtrl.selectedViewController as? TimelineViewController {
-                                // go to message screen
-                                currentTabCtrl.threadUuid = threadUuid
-                                currentTabCtrl.goToMessageViewCtrl()
-                                return
-                            }
-                            if let currentTabCtrl = centerCtrl.selectedViewController as? UINavigationController {
-                                if let timelineCtrl = currentTabCtrl.topMostViewController as? TimelineViewController {
-                                    // go to message screen
-                                    timelineCtrl.threadUuid = threadUuid
-                                    timelineCtrl.goToMessageViewCtrl()
-                                    return
-                                }
-                            }
-                        }
-                    }
-                }
-                let alert = UIAlertController(title: title, message: body, preferredStyle: .alert)
-                let show = UIAlertAction(title: NSLocalizedString("Show", comment: ""), style: .default) { _ in
-                    log.debug("user received notif and pressed show")
-                    if let topViewCtrl = window.rootViewController as? DrawerController {
-                        if let centerCtrl = topViewCtrl.centerViewController as? CustomTabBarViewController {
-                            if let currentTabCtrl = centerCtrl.selectedViewController as? MessageContainerViewController {
-                                // go to message screen
-                                currentTabCtrl.showMessageWithThread(threadUuid: threadUuid)
-                                return
-                            }
-                            if let currentTabCtrl = centerCtrl.selectedViewController as? UINavigationController {
-                                if let messageCtrl = currentTabCtrl.topMostViewController as? MessageContainerViewController {
-                                    // go to message screen
-                                    messageCtrl.showMessageWithThread(threadUuid: threadUuid)
-                                    return
-                                }
-                            }
-                        }
-                    }
-                    CustomNavigationHelper.sharedInstance.moveToTimelineCtrl(window: window, threadUuid: threadUuid)
-                }
-                let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default) { _ in
-                    log.debug("user received notif and pressed cancel")
-                }
-                alert.addAction(show)
-                alert.addAction(cancel)
-                if let window = UIApplication.shared.delegate?.window {
-                    if let rootViewCtrl = window?.rootViewController {
-                        if let topViewController = rootViewCtrl.topMostViewController {
-                            topViewController.present(alert, animated: true) {}
-                        } else {
-                            rootViewCtrl.present(alert, animated: true) {}
-                        }
-                    }
-                }
-            }
-            break
-        case NotificationType.rating:
-            // show rating popover
-            if let topViewCtrl = window.rootViewController?.topMostViewController {
-                if let drawerCtrl = topViewCtrl as? DrawerController {
-                    if let centerCtrl = drawerCtrl.centerViewController {
-                        CustomNavigationHelper.sharedInstance.showRatePlacementPopover(parentCtrl: centerCtrl, placementUuid: placementUuid)
-                    }
-                } else if let sideMenuViewCtrl = topViewCtrl as? SideMenuViewController {
-                    if let centerCtrl = sideMenuViewCtrl.evo_drawerController?.centerViewController as? CustomTabBarViewController {
-                        if let currentTabCtrl = centerCtrl.selectedViewController {
-                            CustomNavigationHelper.sharedInstance.showRatePlacementPopover(parentCtrl: currentTabCtrl, placementUuid: placementUuid)
-                        }
-                    }
+        
+        let alert = UIAlertController(title: title, message: body, preferredStyle: .alert)
+        let show = UIAlertAction(title: NSLocalizedString("Show", comment: ""), style: .default) { [weak self] _ in
+            self?.dispatchTobestDestination(for: type, threadUuid: threadUuid, placementUuid: placementUuid)
+            CustomNavigationHelper.sharedInstance.navigateToTimeline(threadUuid: threadUuid)
+        }
+        let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default) { _ in
+            log.debug("user received notif and pressed cancel")
+        }
+        alert.addAction(show)
+        alert.addAction(cancel)
+        if let window = UIApplication.shared.delegate?.window {
+            if let rootViewCtrl = window?.rootViewController {
+                if let topViewController = rootViewCtrl.topMostViewController {
+                    topViewController.present(alert, animated: true) {}
                 } else {
-                    CustomNavigationHelper.sharedInstance.showRatePlacementPopover(parentCtrl: topViewCtrl, placementUuid: placementUuid)
+                    rootViewCtrl.present(alert, animated: true) {}
                 }
             }
-            break
         }
     }
-
-    func handleNotificationAtLaunch(userInfo: [AnyHashable: Any], window: UIWindow) {
-        UIApplication.shared.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber - 1
-        var type: NotificationType = NotificationType.message
-        var threadUuid: String = ""
-        var placementUuid: String = ""
-        if let t = userInfo["type"] as? String {
-            switch t
-            {
-            case NotificationType.message.rawValue:
-                type = NotificationType.message
-                break
-            case NotificationType.rating.rawValue:
-                type = NotificationType.rating
-                break
-            default:
-                type = NotificationType.message
-                break
-            }
-        }
-        if let threadId = userInfo["thread_uuid"] as? String {
-            threadUuid = threadId
-        }
-        if let placementId = userInfo["placement_uuid"] as? String {
-            placementUuid = placementId
-        }
+    
+    func dispatchTobestDestination(for type: NotificationType, threadUuid: F4SUUID?, placementUuid: F4SUUID?) {
         switch type
         {
         case NotificationType.message:
-            CustomNavigationHelper.sharedInstance.moveToTimelineCtrl(window: window, threadUuid: threadUuid)
-            break
+            CustomNavigationHelper.sharedInstance.navigateToTimeline(threadUuid: threadUuid)
+            
         case NotificationType.rating:
-            CustomNavigationHelper.sharedInstance.moveToMainCtrl(window: window)
-            if let viewCtrl = window.rootViewController?.topMostViewController {
-                CustomNavigationHelper.sharedInstance.showRatePlacementPopover(parentCtrl: viewCtrl, placementUuid: placementUuid)
+            if let topViewCtrl = CustomNavigationHelper.sharedInstance.topMostViewController() {
+                CustomNavigationHelper.sharedInstance.presentRatePlacementPopover(parentCtrl: topViewCtrl, placementUuid: placementUuid!)
             }
-            break
+        case NotificationType.recommendation:
+            CustomNavigationHelper.sharedInstance.rewindAndNavigateToRecommendations(from: nil, show: nil)
+        }
+    }
+    
+    func extractNotificationType(userInfo:[AnyHashable: Any]) -> NotificationType? {
+        guard let typeString = userInfo["type"] as? String else { return nil }
+        switch typeString
+        {
+        case NotificationType.message.rawValue:
+            return NotificationType.message
+        case NotificationType.rating.rawValue:
+            return NotificationType.rating
+        case NotificationType.recommendation.rawValue:
+            return NotificationType.recommendation
+        default:
+            assert(false, "Unexpected or missing type string: \(typeString)")
+            return nil
         }
     }
 

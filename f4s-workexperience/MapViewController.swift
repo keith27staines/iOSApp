@@ -77,14 +77,7 @@ class MapViewController: UIViewController {
     var backgroundView = UIView()
     var shouldRequestAuthorization: Bool?
     var pressedPinOrCluster: UIView?
-    
-    lazy var partnersModel: PartnersModel = {
-        let p = PartnersModel.sharedInstance
-        p.getPartners(completed: { (_) in
-            return
-        })
-        return p
-    }()
+    var allowLocationUpdate: Bool = false
     
     /// User locations are entered manually through the search box
     var userLocation: CLLocation? {
@@ -160,7 +153,6 @@ class MapViewController: UIViewController {
         setupMap()
         setupReachability(nil, useClosures: true)
         startNotifier()
-        partnersModel.showWillProvidePartnerLater = true
 
         if dbService.isDownloadInProgress {
             if let view = self.navigationController?.tabBarController?.view {
@@ -230,9 +222,6 @@ class MapViewController: UIViewController {
     var hasMovedToBestPosition: Bool = false
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if !partnersModel.hasSelectedPartner {
-            selectPartner()
-        }
         applyBranding()
         if !hasMovedToBestPosition {
             moveCameraToBestPosition()
@@ -242,11 +231,6 @@ class MapViewController: UIViewController {
     
     func applyBranding() {
         
-    }
-    
-    func selectPartner() {
-        let vc = UIStoryboard(name: "SelectPartner", bundle: Bundle.main).instantiateInitialViewController()!
-        present(vc, animated: true, completion: nil)
     }
 }
 
@@ -529,7 +513,6 @@ extension MapViewController {
 extension MapViewController {
     
     fileprivate func setupMap() {
-        UserDefaults.standard.set(false, forKey: UserDefaultsKeys.isFirstLaunch)
         mapView.delegate = self
         
         // cluster algorithm setup
@@ -548,6 +531,7 @@ extension MapViewController {
         if let shouldRequestAuthorization = self.shouldRequestAuthorization {
             if shouldRequestAuthorization {
                 locationManager?.requestWhenInUseAuthorization()
+                allowLocationUpdate = true
             }
         }
         
@@ -824,7 +808,7 @@ extension MapViewController: GMSMapViewDelegate {
         guard let company = companyFromMarker(marker: marker) else {
             return
         }
-        CustomNavigationHelper.sharedInstance.showCompanyDetailsPopover(parentCtrl: self, company: company)
+        CustomNavigationHelper.sharedInstance.presentCompanyDetailsPopover(parentCtrl: self, company: company)
     }
     
     func mapView(_: GMSMapView, didCloseInfoWindowOf _: GMSMarker) {
@@ -898,25 +882,26 @@ extension MapViewController: CLLocationManagerDelegate {
         case .authorizedWhenInUse:
             locationManager!.startUpdatingLocation()
             mapView.isMyLocationEnabled = true
-            moveCameraToBestPosition()
+            print("location manager is in state 'authorized when in use'")
+            allowLocationUpdate = true
             
         case .denied:
             mapView.isMyLocationEnabled = false
-            print("location services denied")
-            
+            print("location manager is in state 'denied'")
             displayDefaultSearch()
             
         case .authorizedAlways:
             locationManager!.startUpdatingLocation()
             mapView.isMyLocationEnabled = true
+            allowLocationUpdate = true
             
         case .restricted:
             mapView.isMyLocationEnabled = false
-            print("location services restricted")
+            print("location manager is in state 'restricted'")
             displayDefaultSearch()
             
         case .notDetermined:
-            print("not determined")
+            print("location manager is in state 'not determined'")
             if !self.shouldRequestAuthorization! {
                 displayDefaultSearch()
             }
@@ -925,7 +910,13 @@ extension MapViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.first else { return }
         locationManager!.stopUpdatingLocation()
+        if allowLocationUpdate {
+            allowLocationUpdate = false
+            userLocation = location
+            moveCameraToBestPosition()
+        }
     }
 }
 

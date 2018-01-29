@@ -177,13 +177,13 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
                 switch indexPath.row
                 {
                 case 0:
-                    CustomNavigationHelper.sharedInstance.moveToContentViewController(navCtrl: navigCtrl, contentType: ContentType.about)
+                    CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: ContentType.about)
                 case 2:
-                    CustomNavigationHelper.sharedInstance.moveToRecommendationsController(navCtrl: navigCtrl)
+                    CustomNavigationHelper.sharedInstance.navigateToRecommendations(company: nil)
                 case 4:
-                    CustomNavigationHelper.sharedInstance.moveToContentViewController(navCtrl: navigCtrl, contentType: ContentType.faq)
+                    CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: ContentType.faq)
                 case 6:
-                    CustomNavigationHelper.sharedInstance.moveToContentViewController(navCtrl: navigCtrl, contentType: ContentType.terms)
+                    CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: ContentType.terms)
                 default:
                     break
                 }

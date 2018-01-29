@@ -38,7 +38,6 @@ class TimelineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackgroundView()
-        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.shouldLoadTimeline)
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,6 +48,7 @@ class TimelineViewController: UIViewController {
         super.viewWillAppear(true)
         adjustNavigationBar()
         getAllPlacementsForUser()
+        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.shouldLoadTimeline)
     }
 }
 
@@ -120,7 +120,7 @@ extension TimelineViewController {
             if let threadUuid = strongSelf.threadUuid, let placement = strongSelf.userPlacements.filter({ $0.threadUuid == threadUuid }).first {
                 if let company = strongSelf.companies.filter({ $0.uuid == placement.companyUuid.replacingOccurrences(of: "-", with: "") }).first {
                     strongSelf.threadUuid = nil
-                    CustomNavigationHelper.sharedInstance.moveToMessageController(parentCtrl: strongSelf, threadUuid: threadUuid, company: company, placements: strongSelf.userPlacements, companies: strongSelf.companies)
+                    CustomNavigationHelper.sharedInstance.pushMessageController(parentCtrl: strongSelf, threadUuid: threadUuid, company: company, placements: strongSelf.userPlacements, companies: strongSelf.companies)
                 }
             }
         })
@@ -228,7 +228,7 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         let placement = self.userPlacements[indexPath.row]
         if let company = self.companies.filter({ $0.uuid == placement.companyUuid.replacingOccurrences(of: "-", with: "") }).first, !placement.threadUuid.isEmpty {
-            CustomNavigationHelper.sharedInstance.moveToMessageController(parentCtrl: self, threadUuid: placement.threadUuid, company: company, placements: self.userPlacements, companies: self.companies)
+            CustomNavigationHelper.sharedInstance.pushMessageController(parentCtrl: self, threadUuid: placement.threadUuid, company: company, placements: self.userPlacements, companies: self.companies)
         }
     }
 
@@ -244,9 +244,7 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
 // MARK: - user interaction
 extension TimelineViewController {
     @objc func menuButtonTapped() {
-        if let navCtrl = self.navigationController {
-            MenuHelper(navigationController: navCtrl).openMenuButton()
-        }
+        CustomNavigationHelper.sharedInstance.toggleMenu()
     }
 
     func goToMessageViewCtrl() {
@@ -254,7 +252,7 @@ extension TimelineViewController {
         if let placement = self.userPlacements.filter({ $0.threadUuid == threadUuid }).first {
             if let company = self.companies.filter({ $0.uuid == placement.companyUuid.replacingOccurrences(of: "-", with: "") }).first {
                 self.threadUuid = nil
-                CustomNavigationHelper.sharedInstance.moveToMessageController(parentCtrl: self, threadUuid: placement.threadUuid, company: company, placements: self.userPlacements, companies: self.companies)
+                CustomNavigationHelper.sharedInstance.pushMessageController(parentCtrl: self, threadUuid: placement.threadUuid, company: company, placements: self.userPlacements, companies: self.companies)
             }
         }
     }

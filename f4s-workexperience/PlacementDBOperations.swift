@@ -17,7 +17,7 @@ class PlacementDBOperations {
         return Static.instance
     }
 
-    func savePlacemnt(placement: Placement) {
+    func savePlacement(placement: Placement) {
         let keychain = KeychainSwift()
         guard let userUuid = keychain.get(UserDefaultsKeys.userUuid) else {
             return

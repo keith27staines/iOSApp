@@ -26,7 +26,7 @@ class ExtraInfoViewController: UIViewController {
     
     @IBAction func termsOfServiceLinkButton(_ sender: UIButton) {
         if let navigCtrl = self.navigationController {
-            CustomNavigationHelper.sharedInstance.moveToContentViewController(navCtrl: navigCtrl, contentType: ContentType.terms)
+            CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: ContentType.terms)
         }
     }
     
@@ -60,7 +60,13 @@ class ExtraInfoViewController: UIViewController {
 
     var currentCompany: Company?
     var datePicker = UIDatePicker()
-
+    
+    lazy var emailController: F4SEmailVerificationViewController = {
+        let emailStoryboard = UIStoryboard(name: "F4SEmailVerification", bundle: nil)
+        let emailController = emailStoryboard.instantiateViewController(withIdentifier: "EmailVerification") as! F4SEmailVerificationViewController
+        return emailController
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         adjustAppearence()
@@ -153,7 +159,7 @@ extension ExtraInfoViewController {
 
         dobTextField.inputView = datePicker
 
-        self.dobUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
+        updateDOBValidityUnderlining()
         self.emailUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
         self.firstAndLastNameUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
         self.voucherCodeUnderlineView.backgroundColor = UIColor(netHex: Colors.warmGrey)
@@ -265,6 +271,7 @@ extension ExtraInfoViewController {
 
             self.emailUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
             self.firstAndLastNameUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
+            updateDOBValidityUnderlining()
             updateButtonStateAndImage()
         } else {
             self.userInfoStackView.isHidden = true
@@ -317,14 +324,14 @@ extension ExtraInfoViewController {
         return placement.placementUuid
     }
 
-    func updatePlacement() {
+    func savePlacementLocally(status: PlacementStatus ) {
         guard let currentCompany = self.currentCompany,
             let placement = PlacementDBOperations.sharedInstance.getPlacementsForCurrentUserAndCompany(companyUuid: currentCompany.uuid) else {
             return
         }
         var updatedPlacement = placement
-        updatedPlacement.status = .applied
-        PlacementDBOperations.sharedInstance.savePlacemnt(placement: updatedPlacement)
+        updatedPlacement.status = status
+        PlacementDBOperations.sharedInstance.savePlacement(placement: updatedPlacement)
     }
 
     func buildUserInfo() -> User {
@@ -390,61 +397,16 @@ extension ExtraInfoViewController: UITextFieldDelegate {
 // MARK: - Calls
 extension ExtraInfoViewController {
 
-    func updateUserProfile(voucherCode: String?) {
-        MessageHandler.sharedInstance.showLoadingOverlay(self.view)
-
+    func saveUserDetailsLocally() -> User {
         let updatedUser = self.buildUserInfo()
-        guard let currentVoucherCode = voucherCode else {
-            updateUser(updatedUser: updatedUser)
-            return
-        }
-
-        VoucherService.sharedInstance.validateVoucher(voucherCode: currentVoucherCode, placementUuid: updatedUser.placementUuid, putCompleted: {
-            [weak self]
-            _, result in
-            guard let strongSelf = self else {
-                return
-            }
-            switch result {
-            case .value:
-                print("Voucher code validated")
-                strongSelf.updateUser(updatedUser: updatedUser)
-
-            case .deffinedError(let definedError):
-                MessageHandler.sharedInstance.hideLoadingOverlay()
-                MessageHandler.sharedInstance.display(definedError, parentCtrl: strongSelf)
-
-            case .error(let error):
-                MessageHandler.sharedInstance.hideLoadingOverlay()
-                MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
-                break
-            }
-        })
+        UserInfoDBOperations.sharedInstance.saveUserInfo(userInfo: updatedUser)
+        return updatedUser
     }
-
-    func updateUser(updatedUser: User) {
-        UserService.sharedInstance.updateUser(user: updatedUser, putCompleted: {
-            [weak self]
-            _, result in
-            guard let strongSelf = self else {
-                return
-            }
-            MessageHandler.sharedInstance.hideLoadingOverlay()
-            switch result {
-            case .value:
-                UserInfoDBOperations.sharedInstance.saveUserInfo(userInfo: updatedUser)
-                strongSelf.updatePlacement()
-                CustomNavigationHelper.sharedInstance.showSuccessExtraInfoPopover(parentCtrl: strongSelf)
-                break
-
-            case .deffinedError(let definedError):
-                MessageHandler.sharedInstance.display(definedError, parentCtrl: strongSelf)
-                break
-
-            case .error(let error):
-                MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
-                break
-            }
+    
+    func updateVoucher(voucherCode: String, user: User, completion: @escaping (Result<String>) -> ()) {
+        MessageHandler.sharedInstance.showLoadingOverlay(self.view)
+        VoucherService.sharedInstance.validateVoucher(voucherCode: voucherCode, placementUuid: user.placementUuid, putCompleted: { success, result  in
+            completion(result)
         })
     }
 }
@@ -462,8 +424,22 @@ extension ExtraInfoViewController {
         self.infoStackViewTopConstraint.constant = 49
         self.updateButtonStateAndImage()
         UIView.animate(withDuration: 0.5, animations: { [weak self] in
-            self?.view.layoutIfNeeded()
+            guard let strongSelf = self else { return }
+            strongSelf.updateDOBValidityUnderlining()
+            strongSelf.view.layoutIfNeeded()
         })
+    }
+    
+    func updateDOBValidityUnderlining() {
+        guard let dobText = dobTextField.text, !dobText.isEmpty else {
+            dobUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
+            return
+        }
+        if getUserAge() < 13 {
+            dobUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
+        } else {
+            dobUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
+        }
     }
 
     @objc func cancelButtonTouched() {
@@ -495,7 +471,7 @@ extension ExtraInfoViewController {
         let tapPoint = recognizer.location(in: self.dobInfoLabel)
         if glyphRect.contains(tapPoint) || glyphRect2.contains(tapPoint) {
             if let navigCtrl = self.navigationController {
-                CustomNavigationHelper.sharedInstance.moveToContentViewController(navCtrl: navigCtrl, contentType: ContentType.consent)
+                CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: ContentType.consent)
             }
         } else {
             print("tapped dobInfoLabel")
@@ -526,7 +502,7 @@ extension ExtraInfoViewController {
         let tapPoint = recognizer.location(in: self.noVoucherInfoLabel)
         if glyphRect.contains(tapPoint) {
             if let navigCtrl = self.navigationController {
-                CustomNavigationHelper.sharedInstance.moveToContentViewController(navCtrl: navigCtrl, contentType: ContentType.voucher)
+                CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: ContentType.voucher)
             }
         } else {
             print("tapped noVoucherInfoLabel")
@@ -579,19 +555,86 @@ extension ExtraInfoViewController {
 
     @IBAction func completeInfoButtonTouched(_: UIButton) {
         self.view.endEditing(true)
+        let user = saveUserDetailsLocally()
+
         if let reachability = Reachability() {
             if !reachability.isReachableByAnyMeans {
                 MessageHandler.sharedInstance.display("No Internet Connection.", parentCtrl: self)
                 return
             }
         }
-        var voucherCode: String?
-        if self.voucherCodeUnderlineView.backgroundColor == UIColor(netHex: Colors.mediumGreen), let voucherCodeTextFieldText = voucherCodeTextField.text {
-            voucherCode = voucherCodeTextFieldText
+        
+        if let voucher = voucherCodeTextField.text, voucher.isEmpty == false {
+            updateVoucher(voucherCode: voucher, user: user) { [weak self] result in
+                self?.afterVoucherUpdate(result: result, user: user)
+            }
+        } else {
+            getPartnersFromServer(user: user)
         }
+    }
+    
+    func afterVoucherUpdate(result: Result<String>, user: User) {
+        if let _ = continueWithResult(result: result) {
+            getPartnersFromServer(user: user)
+        }
+    }
+    
+    func getPartnersFromServer(user: User) {
         PartnersModel.sharedInstance.getPartnersFromServer { [weak self] (success) in
-            self?.updateUserProfile(voucherCode: voucherCode)
+            self?.afterGetPartners(success: success, user: user)
         }
-        UserDefaults.standard.set(true, forKey: consentPreviouslyGivenKey)
+    }
+    
+    func afterGetPartners(success: Bool, user: User) {
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            let emailController = strongSelf.emailController
+            let emailModel = emailController.model
+            if emailModel.isEmailAddressVerified(email: user.email) {
+                strongSelf.gotoSucess(user: user)
+            } else {
+                strongSelf.emailController.model.restart()
+                strongSelf.emailController.emailToVerify = user.email
+                strongSelf.emailController.emailWasVerified = {
+                    strongSelf.emailTextField.text = emailController.model.verifiedEmail
+                    _ = strongSelf.saveUserDetailsLocally()
+                    strongSelf.navigationController?.popToViewController(strongSelf, animated: true)
+                    strongSelf.gotoSucess(user: user)
+                }
+                strongSelf.navigationController!.pushViewController(emailController, animated: true)
+            }
+        }
+    }
+    
+    func gotoSucess(user: User) {
+        UserService.sharedInstance.updateUser(user: user, putCompleted: { [weak self] (success, result) in
+            guard let strongSelf = self else { return }
+            DispatchQueue.main.async {
+                strongSelf.savePlacementLocally(status: .applied)
+                UserDefaults.standard.set(true, forKey: strongSelf.consentPreviouslyGivenKey)
+                if let _ = strongSelf.continueWithResult(result: result) {
+                    CustomNavigationHelper.sharedInstance.presentSuccessExtraInfoPopover(parentCtrl: strongSelf)
+                }
+            }
+        })
+    }
+    
+    func continueWithResult(result: Result<String>?) -> Result<String>? {
+        guard let result = result else {
+            MessageHandler.sharedInstance.hideLoadingOverlay()
+            return nil
+        }
+        switch result {
+        case .value:
+            return result
+        case .deffinedError(let definedError):
+            MessageHandler.sharedInstance.hideLoadingOverlay()
+            MessageHandler.sharedInstance.display(definedError, parentCtrl: self)
+            
+        case .error(let error):
+            MessageHandler.sharedInstance.hideLoadingOverlay()
+            MessageHandler.sharedInstance.display(error, parentCtrl: self)
+        }
+        return nil
     }
 }

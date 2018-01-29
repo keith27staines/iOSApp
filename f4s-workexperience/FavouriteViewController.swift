@@ -158,7 +158,7 @@ extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let favourite = favouriteList[indexPath.row]
         if let company = self.companies.filter({ $0.uuid == favourite.companyUuid.replacingOccurrences(of: "-", with: "") }).first {
-            CustomNavigationHelper.sharedInstance.showCompanyDetailsPopover(parentCtrl: self, company: company)
+            CustomNavigationHelper.sharedInstance.presentCompanyDetailsPopover(parentCtrl: self, company: company)
         }
     }
     
@@ -186,8 +186,6 @@ extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - user interaction
 extension FavouriteViewController {
     @objc func menuButtonTapped() {
-        if let navCtrl = self.navigationController {
-            MenuHelper(navigationController: navCtrl).openMenuButton()
-        }
+        CustomNavigationHelper.sharedInstance.toggleMenu()
     }
 }

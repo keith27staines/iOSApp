@@ -4,5 +4,13 @@
 <dict>
 	<key>aps-environment</key>
 	<string>development</string>
+    <key>com.apple.developer.associated-domains</key>
+    <array>
+        <string>applinks:founders4schools.eu.auth0.com</string>
+        <string>applinks:*.workfinder.com</string>
+        <string>applinks:workfinder.com</string>
+        <string>applinks:*.student.workfinder.com</string>
+        <string>applinks:student.workfinder.com</string>
+    </array>
 </dict>
 </plist>

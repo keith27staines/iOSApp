@@ -12,6 +12,14 @@ import Reachability
 class CustomTabBarViewController: UITabBarController {
 
     var reachability: Reachability?
+    
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,11 +141,11 @@ extension CustomTabBarViewController {
                         if topViewCtrl is TimelineViewController || topViewCtrl is MessageViewController || topViewCtrl is MessageContainerViewController || topViewCtrl is MapViewController {
                             if let centerCtrl = self.evo_drawerController?.centerViewController as? CustomTabBarViewController {
                                 if let currentTabCtrl = centerCtrl.selectedViewController {
-                                    CustomNavigationHelper.sharedInstance.showRatePlacementPopover(parentCtrl: currentTabCtrl, placementUuid: placementUuid, ratePlacementProtocol: self)
+                                    CustomNavigationHelper.sharedInstance.presentRatePlacementPopover(parentCtrl: currentTabCtrl, placementUuid: placementUuid, ratePlacementProtocol: self)
                                 }
                             }
                         } else {
-                            CustomNavigationHelper.sharedInstance.showRatePlacementPopover(parentCtrl: topViewCtrl, placementUuid: placementUuid, ratePlacementProtocol: self)
+                            CustomNavigationHelper.sharedInstance.presentRatePlacementPopover(parentCtrl: topViewCtrl, placementUuid: placementUuid, ratePlacementProtocol: self)
                         }
                     }
                 }

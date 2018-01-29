@@ -72,8 +72,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        printDebugUserInfo()
         registerApplicationForRemoteNotifications(application)
         DatabaseService.sharedInstance.getLatestDatabase()
-        if let window = self.window {
-            CustomNavigationHelper.sharedInstance.moveToMainCtrl(window: window)
+        guard let window = window else { return }
+        let isFirstLaunch = UserDefaults.standard.value(forKey: UserDefaultsKeys.isFirstLaunch) as? Bool ?? true
+        if isFirstLaunch {
+            guard let ctrl = window.rootViewController?.topMostViewController as? OnboardingViewController else {
+                return
+            }
+            ctrl.hideOnboardingControls = false
+        } else {
+            let navigationHelper = CustomNavigationHelper.sharedInstance
+            if let shouldLoadTimeline = UserDefaults.standard.value(forKey: UserDefaultsKeys.shouldLoadTimeline) as? Bool {
+                if shouldLoadTimeline {
+                    navigationHelper.navigateToTimeline(threadUuid: nil)
+                }
+            } else {
+                navigationHelper.navigateToMap()
+                navigationHelper.mapViewController.shouldRequestAuthorization = false
+            }
         }
     }
     
@@ -98,16 +113,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func setInvokingUrl(_ url: URL) {
         print("Invoked from url: \(url.absoluteString)")
-        if F4SAuth0MagicLinkInterpreter.isPasswordlessURL(url: url) {
+        guard let universalLink = UniversalLink(url: url) else {
+            return
+        }
+        switch universalLink {
+        case .recommendCompany(let company):
+            //CustomNavigationHelper.sharedInstance.presentRecommendationsController(company: company)
+            CustomNavigationHelper.sharedInstance.rewindAndNavigateToRecommendations(from: nil, show: company)
+            break
+        case .passwordless( _):
             let userInfo: [AnyHashable: Any] = ["url" : url]
             let notification = Notification(
                 name: .verificationCodeRecieved,
                 object: self,
                 userInfo: userInfo)
             NotificationCenter.default.post(notification)
-        } else {
-            let key = UserDefaultsKeys.invokingUrl
-            UserDefaults.standard.set(url, forKey: key)
         }
     }
     
@@ -217,13 +237,8 @@ extension AppDelegate {
             return String(format: "%02.2hhx", data)
         }
         let token = tokenParts.joined()
-
-        print("Registered for remote notification with dev token \(token)")
-        
         UserService.sharedInstance.enablePushNotificationForUser(withDeviceToken: token, putCompleted: { success, result in
-            if success {
-                print("enabled push notifications on Workfinder server \(result)")
-            } else {
+            if !success {
                 print("failed to enable push notifications on Workfinder server \(result)")
             }
         })
@@ -252,6 +267,7 @@ extension AppDelegate {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         self.application(application, didReceiveRemoteNotification: userInfo) {
             _ in
+            print("Recieved remote notification")
         }
     }
     

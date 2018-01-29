@@ -346,4 +346,5 @@ enum SocialShare: String {
 enum NotificationType: String {
     case message
     case rating
+    case recommendation
 }

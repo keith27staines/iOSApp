@@ -203,7 +203,7 @@ extension MessageContainerViewController {
     
     func showMessageWithThread(threadUuid: String) {
         if let placement = self.placements.filter({ $0.threadUuid == threadUuid }).first, let company = self.companies.filter({ $0.uuid == placement.companyUuid.replacingOccurrences(of: "-", with: "") }).first {
-            CustomNavigationHelper.sharedInstance.moveToMessageController(parentCtrl: self, threadUuid: threadUuid, company: company, placements: self.placements, companies: self.companies)
+            CustomNavigationHelper.sharedInstance.pushMessageController(parentCtrl: self, threadUuid: threadUuid, company: company, placements: self.placements, companies: self.companies)
         }
     }
 }
@@ -240,7 +240,7 @@ extension MessageContainerViewController {
     
     @objc func showCompanyDetailsView() {
         if let companyUrl = self.company?.companyUrl, let navigCtrl = self.navigationController {
-            CustomNavigationHelper.sharedInstance.moveToContentViewController(navCtrl: navigCtrl, contentType: ContentType.company, url: companyUrl)
+            CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: ContentType.company, url: companyUrl)
         }
     }
 }

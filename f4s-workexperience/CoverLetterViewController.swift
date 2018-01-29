@@ -310,7 +310,7 @@ extension CoverLetterViewController {
 
     @objc func editCoverLetterButtonTouched() {
         if let navCtrl = self.navigationController, let currentTemplate = currentTemplate {
-            CustomNavigationHelper.sharedInstance.moveToEditCoverLetter(navCtrl, currentTemplate: currentTemplate)
+            CustomNavigationHelper.sharedInstance.pushEditCoverLetter(navCtrl, currentTemplate: currentTemplate)
         }
     }
 
@@ -320,13 +320,13 @@ extension CoverLetterViewController {
 
     @IBAction func termsAndConditionsButtonTouched(_: Any) {
         if let navCtrl = self.navigationController {
-            CustomNavigationHelper.sharedInstance.moveToContentViewController(navCtrl: navCtrl, contentType: ContentType.terms)
+            CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navCtrl, contentType: ContentType.terms)
         }
     }
 
     @objc func textViewTouched() {
         if let navCtrl = self.navigationController, let currentTemplate = currentTemplate {
-            CustomNavigationHelper.sharedInstance.moveToEditCoverLetter(navCtrl, currentTemplate: currentTemplate)
+            CustomNavigationHelper.sharedInstance.pushEditCoverLetter(navCtrl, currentTemplate: currentTemplate)
         }
     }
 }
@@ -412,7 +412,7 @@ extension CoverLetterViewController {
             case .value:
                 // succes + go to next page
                 if let navCtrl = strongSelf.navigationController, let company = strongSelf.currentCompany {
-                    CustomNavigationHelper.sharedInstance.moveToProcessedMessages(navCtrl, currentCompany: company)
+                    CustomNavigationHelper.sharedInstance.pushProcessedMessages(navCtrl, currentCompany: company)
                 }
                 break
             case let .error(error):
