@@ -31,7 +31,7 @@ class UserInfoDBOperations {
             let userInfoDB = UserInfoCoreDataManager.sharedInstance.getUserInfo(userUuid: userUuid) else {
             return nil
         }
-        var info = UserInfoDBOperations.sharedInstance.getUserFromUserInfoDB(userInfoDB: userInfoDB)
+        let info = UserInfoDBOperations.sharedInstance.getUserFromUserInfoDB(userInfoDB: userInfoDB)
         // Route around email verification
         //info.email = F4SEmailVerificationModel.verifiedEmail!
         return info

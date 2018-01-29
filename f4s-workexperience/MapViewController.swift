@@ -77,6 +77,7 @@ class MapViewController: UIViewController {
     var backgroundView = UIView()
     var shouldRequestAuthorization: Bool?
     var pressedPinOrCluster: UIView?
+    var allowLocationUpdate: Bool = false
     
     /// User locations are entered manually through the search box
     var userLocation: CLLocation? {
@@ -530,6 +531,7 @@ extension MapViewController {
         if let shouldRequestAuthorization = self.shouldRequestAuthorization {
             if shouldRequestAuthorization {
                 locationManager?.requestWhenInUseAuthorization()
+                allowLocationUpdate = true
             }
         }
         
@@ -880,25 +882,26 @@ extension MapViewController: CLLocationManagerDelegate {
         case .authorizedWhenInUse:
             locationManager!.startUpdatingLocation()
             mapView.isMyLocationEnabled = true
-            moveCameraToBestPosition()
+            print("location manager is in state 'authorized when in use'")
+            allowLocationUpdate = true
             
         case .denied:
             mapView.isMyLocationEnabled = false
-            print("location services denied")
+            print("location manager is in state 'denied'")
             displayDefaultSearch()
             
         case .authorizedAlways:
             locationManager!.startUpdatingLocation()
             mapView.isMyLocationEnabled = true
-            moveCameraToBestPosition()
+            allowLocationUpdate = true
             
         case .restricted:
             mapView.isMyLocationEnabled = false
-            print("location services restricted")
+            print("location manager is in state 'restricted'")
             displayDefaultSearch()
             
         case .notDetermined:
-            print("not determined")
+            print("location manager is in state 'not determined'")
             if !self.shouldRequestAuthorization! {
                 displayDefaultSearch()
             }
@@ -907,7 +910,13 @@ extension MapViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.first else { return }
         locationManager!.stopUpdatingLocation()
+        if allowLocationUpdate {
+            allowLocationUpdate = false
+            userLocation = location
+            moveCameraToBestPosition()
+        }
     }
 }
 
