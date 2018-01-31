@@ -1277,7 +1277,7 @@
 					40E78E121DD31A86000A3776 = {
 						CreatedOnToolsVersion = 8.1;
 						LastSwiftMigration = 0900;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1938,7 +1938,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
@@ -1946,8 +1946,8 @@
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9934064f-423c-46e6-bd88-c2642aec5011";
-				PROVISIONING_PROFILE_SPECIFIER = WorkfinderDevelopmentProfile;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/f4s-workexperience/f4s-workexperience-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
@@ -2033,8 +2033,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
@@ -2042,8 +2042,8 @@
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "97cfabe9-551d-480f-b439-3c15742a026f";
-				PROVISIONING_PROFILE_SPECIFIER = WorkfinderAppStoreProfile;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/f4s-workexperience/f4s-workexperience-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
@@ -2136,7 +2136,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
@@ -2144,8 +2144,8 @@
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9934064f-423c-46e6-bd88-c2642aec5011";
-				PROVISIONING_PROFILE_SPECIFIER = WorkfinderDevelopmentProfile;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/f4s-workexperience/f4s-workexperience-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
@@ -2231,8 +2231,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
@@ -2240,8 +2240,8 @@
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "97cfabe9-551d-480f-b439-3c15742a026f";
-				PROVISIONING_PROFILE_SPECIFIER = WorkfinderAppStoreProfile;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/f4s-workexperience/f4s-workexperience-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
