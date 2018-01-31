@@ -27,9 +27,13 @@ class UserService: ApiBaseService {
     
     var vendorID: String { return UIDevice.current.identifierForVendor!.uuidString }
     
-    func createUserOnServer(postCompleted: @escaping (_ succeeded: Bool, _ msg: Result<String>) -> Void) {
+    func registerAnonymousUserOnServer(postCompleted: @escaping (_ succeeded: Bool, _ msg: Result<String>) -> Void) {
         let url = ApiConstants.userProfileUrl
-        let params: Parameters = ["vendor_uuid": vendorID] as [String: Any]
+        var params: Parameters = [:]
+        params["vendor_uuid"] = vendorID
+        params["type"] = "ios"
+        params["env"] = Config.apnsEnv
+
         post(params, url: url) {
             _, msg in
             switch msg
@@ -119,15 +123,12 @@ class UserService: ApiBaseService {
     }
 
     // MARK: - operations
-    func createUser(retryCount: Int = 0, completed: @escaping (_ succeeded: Bool) -> Void) {
-        guard !UserService.sharedInstance.hasAccount() else {
-            // user has already been created
-            return
-        }
+    func registerUser(retryCount: Int = 0, completed: @escaping (_ succeeded: Bool) -> Void) {
         // create new user
-        DispatchQueue.global().async {
-            UserService.sharedInstance.createUserOnServer(postCompleted: {
+        DispatchQueue.global().async { [weak self] in
+            UserService.sharedInstance.registerAnonymousUserOnServer(postCompleted: {
                 _, result in
+                guard let strongSelf = self else { return }
                 switch result
                 {
                 case let .value(boxedValue):
@@ -138,9 +139,13 @@ class UserService: ApiBaseService {
                     completed(true)
                     break
                 case let .error(error):
+                    if strongSelf.hasAccount() {
+                        completed(true)
+                        return
+                    }
                     if retryCount < 2 {
                         log.debug("Failed to create user on retry \(retryCount).\n Error was: \(error)")
-                        UserService.sharedInstance.createUser(retryCount: retryCount + 1, completed: {
+                        UserService.sharedInstance.registerUser(retryCount: retryCount + 1, completed: {
                             _ in
                             completed(false)
                         })
@@ -149,9 +154,13 @@ class UserService: ApiBaseService {
                     }
                     break
                 case let .deffinedError(error):
+                    if strongSelf.hasAccount() {
+                        completed(true)
+                        return
+                    }
                     if retryCount < 2 {
                         log.debug("Failed to create user on retry \(retryCount).\n Error was: \(error)")
-                        UserService.sharedInstance.createUser(retryCount: retryCount + 1, completed: {
+                        UserService.sharedInstance.registerUser(retryCount: retryCount + 1, completed: {
                             _ in
                             completed(false)
                         })

@@ -54,18 +54,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
         
-        if UserService.sharedInstance.hasAccount() {
-            onUserConfirmedToExist(application: application)
-        } else {
-            // create new user if just installed
-            UserService.sharedInstance.createUser(completed: { [weak self] succeeded in
-                if succeeded {
-                    self?.onUserConfirmedToExist(application: application)
-                } else {
-                    log.debug("Couldn't create a user")
-                }
-            })
-        }
+        // create or re-register user
+        UserService.sharedInstance.registerUser(completed: { [weak self] succeeded in
+            if succeeded {
+                self?.onUserConfirmedToExist(application: application)
+            } else {
+                log.debug("Couldn't create a user")
+            }
+        })
     }
     
     func onUserConfirmedToExist(application: UIApplication) {
@@ -118,7 +114,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         switch universalLink {
         case .recommendCompany(let company):
-            //CustomNavigationHelper.sharedInstance.presentRecommendationsController(company: company)
             CustomNavigationHelper.sharedInstance.rewindAndNavigateToRecommendations(from: nil, show: company)
             break
         case .passwordless( _):

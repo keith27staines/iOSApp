@@ -222,17 +222,21 @@ extension CustomMenuViewController {
     func setupLabels() {
         let label = UILabel()
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-            let versionString = "v" + version
+            var versionString = version
+            if let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+                versionString = versionString + " build \(build)"
+            }
             let environmentString: String
             switch Config.ENVIRONMENT {
-            case "DEV":
-                environmentString = "(STAGING)"
-            case "PROD":
+            case "STAGING":
+                environmentString = "STAGING"
+            case "PRODUCTION":
                 environmentString = ""
             default:
-                environmentString = "(UNKNOWN ENVIRONMENT)"
+                assertionFailure("Unexpected environment target")
+                environmentString = "ENV ?"
             }
-            label.text = versionString + " " + environmentString
+            label.text = "version " + versionString + " " + environmentString + " " + Config.apns
         }
         label.frame = CGRect(x: 30, y: self.view.frame.size.height - 55, width: 31, height: 14)
         label.textColor = UIColor.white
