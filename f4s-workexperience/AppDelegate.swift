@@ -25,6 +25,7 @@ extension Notification.Name {
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var deviceToken: String?
     
     func continueIfVersionCheckPasses(application: UIApplication, continueWith: ((UIApplication) -> Void)? = nil) {
         VersioningService.sharedInstance.getIsVersionValid { [weak self] (_, result) in
@@ -233,14 +234,20 @@ extension AppDelegate {
         }
         let token = tokenParts.joined()
         UserService.sharedInstance.enablePushNotificationForUser(withDeviceToken: token, putCompleted: { success, result in
+            self.deviceToken = token
             if !success {
-                print("failed to enable push notifications on Workfinder server \(result)")
+                var alert = UIAlertController(title: "Failed to enable push notification", message: "Server call failed", preferredStyle: UIAlertControllerStyle.actionSheet)
+                
+                CustomNavigationHelper.sharedInstance.topMostViewController()?.present(alert, animated: true, completion: nil)
+                
             }
         })
     }
     
     func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("failed to register for remote notification with error: \(error)")
+        var alert = UIAlertController(title: "Failed to Register for push notifications", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        CustomNavigationHelper.sharedInstance.topMostViewController()?.present(alert, animated: true, completion: nil)
     }
     
     func application(_: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {

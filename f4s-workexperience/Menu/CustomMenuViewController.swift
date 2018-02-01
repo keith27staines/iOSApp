@@ -21,6 +21,7 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
     let smallCellHeight: CGFloat = 0.5
     let welcomeCellHeight: CGFloat = 150
     var secondLoad = false
+    var textField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,12 +41,15 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
         self.view.backgroundColor = UIColor(red: 72.0/255.0, green: 38.0/255.0, blue: 127.0/255.0, alpha: 1.0)
         setupLabels()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         secondLoad = true
         self.tableView.reloadData()
-
+        textField?.text = (UIApplication.shared.delegate as? AppDelegate)?.deviceToken ?? ""
+        textField?.frame.size.height = 20
+        let pb = UIPasteboard.general
+        pb.string = textField?.text
         UIApplication.shared.statusBarStyle = .lightContent
     }
 
@@ -226,7 +230,7 @@ extension CustomMenuViewController {
             if let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
                 versionString = versionString + " build \(build)"
             }
-            let environmentString: String
+            var environmentString: String
             switch Config.ENVIRONMENT {
             case "STAGING":
                 environmentString = "STAGING"
@@ -236,12 +240,25 @@ extension CustomMenuViewController {
                 assertionFailure("Unexpected environment target")
                 environmentString = "ENV ?"
             }
-            label.text = "version " + versionString + " " + environmentString + " " + Config.apns
+            label.text = "version " + versionString + " " + environmentString.lowercased() + " | apns =" + Config.apns
         }
-        label.frame = CGRect(x: 30, y: self.view.frame.size.height - 55, width: 31, height: 14)
+        label.frame = CGRect(x: 5, y: self.view.frame.size.height - 55, width: 31, height: 14)
         label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 12)
         label.sizeToFit()
+        textField = UITextField()
+        textField.textColor = UIColor.black
+        textField.backgroundColor = UIColor.white
+        textField.font = UIFont.systemFont(ofSize: 14)
+        textField.isEnabled = true
+        textField.frame = CGRect(x: 5, y: self.view.frame.size.height - 100, width: 300, height: 30)
+        textField.delegate = self
         self.view.addSubview(label)
+        self.view.addSubview(textField)
+    }
+}
+extension CustomMenuViewController : UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        return false
     }
 }
