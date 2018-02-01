@@ -21,7 +21,6 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
     let smallCellHeight: CGFloat = 0.5
     let welcomeCellHeight: CGFloat = 150
     var secondLoad = false
-    var textField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,10 +45,6 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
         super.viewWillAppear(animated)
         secondLoad = true
         self.tableView.reloadData()
-        textField?.text = (UIApplication.shared.delegate as? AppDelegate)?.deviceToken ?? ""
-        textField?.frame.size.height = 20
-        let pb = UIPasteboard.general
-        pb.string = textField?.text
         UIApplication.shared.statusBarStyle = .lightContent
     }
 
@@ -246,15 +241,7 @@ extension CustomMenuViewController {
         label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 12)
         label.sizeToFit()
-        textField = UITextField()
-        textField.textColor = UIColor.black
-        textField.backgroundColor = UIColor.white
-        textField.font = UIFont.systemFont(ofSize: 14)
-        textField.isEnabled = true
-        textField.frame = CGRect(x: 5, y: self.view.frame.size.height - 100, width: 300, height: 30)
-        textField.delegate = self
         self.view.addSubview(label)
-        self.view.addSubview(textField)
     }
 }
 extension CustomMenuViewController : UITextFieldDelegate {
