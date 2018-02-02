@@ -2,15 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>aps-environment</key>
-	<string>development</string>
-	<key>com.apple.developer.associated-domains</key>
-	<array>
+    <key>aps-environment</key>
+    <string>development</string>
+    <key>com.apple.developer.associated-domains</key>
+    <array>
         <string>applinks:founders4schools.eu.auth0.com</string>
         <string>applinks:*.workfinder.com</string>
         <string>applinks:workfinder.com</string>
         <string>applinks:*.student.workfinder.com</string>
         <string>applinks:student.workfinder.com</string>
-	</array>
+    </array>
 </dict>
 </plist>
