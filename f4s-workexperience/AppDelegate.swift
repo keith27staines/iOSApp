@@ -25,6 +25,7 @@ extension Notification.Name {
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var deviceToken: String?
     
     func continueIfVersionCheckPasses(application: UIApplication, continueWith: ((UIApplication) -> Void)? = nil) {
         VersioningService.sharedInstance.getIsVersionValid { [weak self] (_, result) in
@@ -44,28 +45,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
+        GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
         log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
         continueIfVersionCheckPasses(application: application, continueWith: versionAuthorizedToContinue)
         return true
     }
     
     func versionAuthorizedToContinue(_ application: UIApplication) {
-        GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
-        GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
-        
-        if UserService.sharedInstance.hasAccount() {
-            onUserConfirmedToExist(application: application)
-        } else {
-            // create new user if just installed
-            UserService.sharedInstance.createUser(completed: { [weak self] succeeded in
-                if succeeded {
-                    self?.onUserConfirmedToExist(application: application)
-                } else {
-                    log.debug("Couldn't create a user")
-                }
-            })
-        }
+        // create or re-register user
+        UserService.sharedInstance.registerUser(completed: { [weak self] succeeded in
+            if succeeded {
+                self?.onUserConfirmedToExist(application: application)
+            } else {
+                log.debug("Couldn't create a user")
+            }
+        })
     }
     
     func onUserConfirmedToExist(application: UIApplication) {
@@ -118,7 +113,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         switch universalLink {
         case .recommendCompany(let company):
-            //CustomNavigationHelper.sharedInstance.presentRecommendationsController(company: company)
             CustomNavigationHelper.sharedInstance.rewindAndNavigateToRecommendations(from: nil, show: company)
             break
         case .passwordless( _):
@@ -238,14 +232,20 @@ extension AppDelegate {
         }
         let token = tokenParts.joined()
         UserService.sharedInstance.enablePushNotificationForUser(withDeviceToken: token, putCompleted: { success, result in
+            self.deviceToken = token
             if !success {
-                print("failed to enable push notifications on Workfinder server \(result)")
+                var alert = UIAlertController(title: "Failed to enable push notification", message: "Server call failed", preferredStyle: UIAlertControllerStyle.actionSheet)
+                
+                CustomNavigationHelper.sharedInstance.topMostViewController()?.present(alert, animated: true, completion: nil)
+                
             }
         })
     }
     
     func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("failed to register for remote notification with error: \(error)")
+        var alert = UIAlertController(title: "Failed to Register for push notifications", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        CustomNavigationHelper.sharedInstance.topMostViewController()?.present(alert, animated: true, completion: nil)
     }
     
     func application(_: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {

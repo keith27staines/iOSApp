@@ -46,28 +46,32 @@ class NotificationHelper {
             placementUuid = placementId
         }
         
-        let alert = UIAlertController(title: title, message: body, preferredStyle: .alert)
-        let show = UIAlertAction(title: NSLocalizedString("Show", comment: ""), style: .default) { [weak self] _ in
-            self?.dispatchTobestDestination(for: type, threadUuid: threadUuid, placementUuid: placementUuid)
-            CustomNavigationHelper.sharedInstance.navigateToTimeline(threadUuid: threadUuid)
-        }
-        let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default) { _ in
-            log.debug("user received notif and pressed cancel")
-        }
-        alert.addAction(show)
-        alert.addAction(cancel)
-        if let window = UIApplication.shared.delegate?.window {
-            if let rootViewCtrl = window?.rootViewController {
-                if let topViewController = rootViewCtrl.topMostViewController {
-                    topViewController.present(alert, animated: true) {}
-                } else {
-                    rootViewCtrl.present(alert, animated: true) {}
+        if isAppActive {
+            let alert = UIAlertController(title: title, message: body, preferredStyle: .alert)
+            let show = UIAlertAction(title: NSLocalizedString("Show", comment: ""), style: .default) { [weak self] _ in
+                self?.dispatchToBestDestination(for: type, threadUuid: threadUuid, placementUuid: placementUuid)
+            }
+            let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default) { _ in
+                log.debug("user received notif and pressed cancel")
+            }
+            alert.addAction(show)
+            alert.addAction(cancel)
+            if let window = UIApplication.shared.delegate?.window {
+                if let rootViewCtrl = window?.rootViewController {
+                    if let topViewController = rootViewCtrl.topMostViewController {
+                        topViewController.present(alert, animated: true) {}
+                    } else {
+                        rootViewCtrl.present(alert, animated: true) {}
+                    }
                 }
             }
+        } else {
+            dispatchToBestDestination(for: type, threadUuid: threadUuid, placementUuid: placementUuid)
         }
+
     }
     
-    func dispatchTobestDestination(for type: NotificationType, threadUuid: F4SUUID?, placementUuid: F4SUUID?) {
+    func dispatchToBestDestination(for type: NotificationType, threadUuid: F4SUUID?, placementUuid: F4SUUID?) {
         switch type
         {
         case NotificationType.message:

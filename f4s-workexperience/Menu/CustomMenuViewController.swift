@@ -40,12 +40,11 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
         self.view.backgroundColor = UIColor(red: 72.0/255.0, green: 38.0/255.0, blue: 127.0/255.0, alpha: 1.0)
         setupLabels()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         secondLoad = true
         self.tableView.reloadData()
-
         UIApplication.shared.statusBarStyle = .lightContent
     }
 
@@ -222,22 +221,31 @@ extension CustomMenuViewController {
     func setupLabels() {
         let label = UILabel()
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-            let versionString = "v" + version
-            let environmentString: String
+            var versionString = version
+            if let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+                versionString = versionString + " build \(build)"
+            }
+            var environmentString: String
             switch Config.ENVIRONMENT {
-            case "DEV":
-                environmentString = "(STAGING)"
-            case "PROD":
+            case "STAGING":
+                environmentString = "STAGING"
+            case "PRODUCTION":
                 environmentString = ""
             default:
-                environmentString = "(UNKNOWN ENVIRONMENT)"
+                assertionFailure("Unexpected environment target")
+                environmentString = "ENV ?"
             }
-            label.text = versionString + " " + environmentString
+            label.text = "version " + versionString + " " + environmentString.lowercased() + " | apns =" + Config.apns
         }
-        label.frame = CGRect(x: 30, y: self.view.frame.size.height - 55, width: 31, height: 14)
+        label.frame = CGRect(x: 5, y: self.view.frame.size.height - 55, width: 31, height: 14)
         label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 12)
         label.sizeToFit()
         self.view.addSubview(label)
+    }
+}
+extension CustomMenuViewController : UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        return false
     }
 }
