@@ -158,6 +158,8 @@
 		FC59B1931F81554F0068EC9C /* CGRect+Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18D1F81546C0068EC9C /* CGRect+Methods.swift */; };
 		FC681C001F57473D0077BECA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFE1F57473D0077BECA /* Podfile */; };
 		FC681C011F57473D0077BECA /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFF1F57473D0077BECA /* Podfile.lock */; };
+		FC6C11BA202870D6002C8EA5 /* F4SGrammar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6C11B9202870D6002C8EA5 /* F4SGrammar.swift */; };
+		FC6C11BC20287378002C8EA5 /* F4SGrammarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6C11BB20287378002C8EA5 /* F4SGrammarTests.swift */; };
 		FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC92567A1F8F70D100FF9841 /* InterestsModel.swift */; };
 		FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99B7E21F826D1400E2D5F0 /* LatLon.swift */; };
 		FC99F3D41FFE533000E3AC5A /* RecommendationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99F3D31FFE533000E3AC5A /* RecommendationService.swift */; };
@@ -425,6 +427,8 @@
 		FC59B18F1F81549A0068EC9C /* F4SQuadtreeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SQuadtreeTests.swift; sourceTree = "<group>"; };
 		FC681BFE1F57473D0077BECA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		FC681BFF1F57473D0077BECA /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
+		FC6C11B9202870D6002C8EA5 /* F4SGrammar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SGrammar.swift; sourceTree = "<group>"; };
+		FC6C11BB20287378002C8EA5 /* F4SGrammarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SGrammarTests.swift; sourceTree = "<group>"; };
 		FC79314720226D440034D201 /* F4SDistribution.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = F4SDistribution.entitlements; path = Config/F4SDistribution.entitlements; sourceTree = "<group>"; };
 		FC92567A1F8F70D100FF9841 /* InterestsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsModel.swift; sourceTree = "<group>"; };
 		FC99B7E21F826D1400E2D5F0 /* LatLon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatLon.swift; sourceTree = "<group>"; };
@@ -684,6 +688,7 @@
 				FC59B18E1F81549A0068EC9C /* CGRect+MethodsTests.swift */,
 				FC59B18F1F81549A0068EC9C /* F4SQuadtreeTests.swift */,
 				40E78E2D1DD31A86000A3776 /* Info.plist */,
+				FC6C11BB20287378002C8EA5 /* F4SGrammarTests.swift */,
 			);
 			path = "f4s-workexperienceTests";
 			sourceTree = "<group>";
@@ -854,6 +859,7 @@
 				40E78E881DD32C3C000A3776 /* MessageHandler.swift */,
 				20FABFEB1DDDA63600D583E2 /* FileHelper.swift */,
 				20D51BE31E27710C003A8358 /* NotificationHelper.swift */,
+				FC6C11B9202870D6002C8EA5 /* F4SGrammar.swift */,
 			);
 			name = Utiles;
 			sourceTree = "<group>";
@@ -1523,6 +1529,7 @@
 				FCA53B921FE00CB5009F6DB0 /* Versioning.swift in Sources */,
 				D54E10071E044BC100A51560 /* ProcessedMessagesViewController.swift in Sources */,
 				40A28CB21E1D1D200077D490 /* TimelineEntryTableViewCell.swift in Sources */,
+				FC6C11BA202870D6002C8EA5 /* F4SGrammar.swift in Sources */,
 				2037B0AF1DEC592900A9DE3E /* PlacementDBOperations.swift in Sources */,
 				40A28CBB1E1F9BCF0077D490 /* RatingControl.swift in Sources */,
 				204C896F1DF5F08500D8493A /* RatingTableViewCell.swift in Sources */,
@@ -1655,6 +1662,7 @@
 				FC59B1901F81549B0068EC9C /* CGRect+MethodsTests.swift in Sources */,
 				FC32E3D9200F322800D7C36A /* PartnerModelTests.swift in Sources */,
 				FC59B1911F81549B0068EC9C /* F4SQuadtreeTests.swift in Sources */,
+				FC6C11BC20287378002C8EA5 /* F4SGrammarTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
