@@ -48,7 +48,6 @@ class TimelineViewController: UIViewController {
         super.viewWillAppear(true)
         adjustNavigationBar()
         getAllPlacementsForUser()
-        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.shouldLoadTimeline)
     }
 }
 
@@ -84,11 +83,13 @@ extension TimelineViewController {
                     return false
                 }) == nil {
                     DispatchQueue.main.async {
+                        UserDefaults.standard.set(false, forKey: UserDefaultsKeys.shouldLoadTimeline)
                         strongSelf.navigationController?.tabBarItem.image = UIImage(named: "timelineIconUnselected")?.withRenderingMode(.alwaysOriginal)
                         strongSelf.navigationController?.tabBarItem.selectedImage = UIImage(named: "timelineIcon")?.withRenderingMode(.alwaysOriginal)
                     }
                 } else {
                     DispatchQueue.main.async {
+                        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.shouldLoadTimeline)
                         strongSelf.navigationController?.tabBarItem.image = UIImage(named: "timelineIconUnreadUnselected")?.withRenderingMode(.alwaysOriginal)
                         strongSelf.navigationController?.tabBarItem.selectedImage = UIImage(named: "timelineIconUnread")?.withRenderingMode(.alwaysOriginal)
                     }
