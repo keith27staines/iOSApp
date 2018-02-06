@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func versionAuthorizedToContinue(_ application: UIApplication) {
         // create or re-register user
         UserService.sharedInstance.registerUser(completed: { [weak self] succeeded in
-            if succeeded {
+            if succeeded || UserService.sharedInstance.hasAccount() {
                 self?.onUserConfirmedToExist(application: application)
             } else {
                 log.debug("Couldn't create a user")
