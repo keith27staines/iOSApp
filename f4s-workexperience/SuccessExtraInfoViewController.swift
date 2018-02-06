@@ -25,6 +25,10 @@ class SuccessExtraInfoViewController: UIViewController {
         applyStyle()
         recommendationsButton.isHidden = true
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        CustomNavigationHelper.sharedInstance.tabBar.checkForUnreadMessages()
+    }
 
     override func viewWillDisappear(_ animated: Bool) {
         backgroundPopoverView.removeFromSuperview()

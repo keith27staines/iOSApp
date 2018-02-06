@@ -131,6 +131,7 @@ extension CustomTabBarViewController {
                             DispatchQueue.main.async {
                                 timelineNavViewCtrl.tabBarItem.image = UIImage(named: "timelineIconUnreadUnselected")?.withRenderingMode(.alwaysOriginal)
                                 timelineNavViewCtrl.tabBarItem.selectedImage = UIImage(named: "timelineIconUnread")?.withRenderingMode(.alwaysOriginal)
+                                UserDefaults.standard.set(true, forKey: UserDefaultsKeys.shouldLoadTimeline)
                             }
                         }
                     }

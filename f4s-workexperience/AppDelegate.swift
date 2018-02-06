@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func versionAuthorizedToContinue(_ application: UIApplication) {
         // create or re-register user
         UserService.sharedInstance.registerUser(completed: { [weak self] succeeded in
-            if succeeded {
+            if succeeded || UserService.sharedInstance.hasAccount() {
                 self?.onUserConfirmedToExist(application: application)
             } else {
                 log.debug("Couldn't create a user")
@@ -75,11 +75,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             ctrl.hideOnboardingControls = false
         } else {
+            let shouldLoadTimelineValue = UserDefaults.standard.value(forKey: UserDefaultsKeys.shouldLoadTimeline)
+            var shouldLoadTimeline: Bool = false
+            if let value = shouldLoadTimelineValue {
+                shouldLoadTimeline = value as? Bool ?? false
+            }
             let navigationHelper = CustomNavigationHelper.sharedInstance
-            if let shouldLoadTimeline = UserDefaults.standard.value(forKey: UserDefaultsKeys.shouldLoadTimeline) as? Bool {
-                if shouldLoadTimeline {
-                    navigationHelper.navigateToTimeline(threadUuid: nil)
-                }
+            if shouldLoadTimeline {
+                navigationHelper.navigateToTimeline(threadUuid: nil)
             } else {
                 navigationHelper.navigateToMap()
                 navigationHelper.mapViewController.shouldRequestAuthorization = false
