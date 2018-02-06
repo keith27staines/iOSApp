@@ -140,26 +140,26 @@ extension CoverLetterViewController {
         do {
             let templateToLoad = try Template(string: currentTemplate.template)
             var data: [String: Any] = [:]
-            for templateBlank in currentTemplate.blank {
-                if let indexOfSelectedBlank = self.selectedTemplateChoices.index(where: { (tempBank) -> Bool in
-                    if templateBlank.name == tempBank.name {
+            for blank in currentTemplate.blank {
+                if let indexOfSelectedBlank = self.selectedTemplateChoices.index(where: { (otherBlank) -> Bool in
+                    if blank.name == otherBlank.name {
                         return true
                     }
                     return false
                 })
                 
                 {
-                    let currentBlank = self.selectedTemplateChoices[indexOfSelectedBlank]
-                    let fillStrings = getFillStrings(for: currentBlank.choices, matching: templateBlank.choices)
+                    let selectedBlank = self.selectedTemplateChoices[indexOfSelectedBlank]
+                    let fillStrings = getFillStrings(selectedChoices: selectedBlank.choices, availableChoices: blank.choices)
 
                     if let grammaticalString = F4SGrammar.list(fillStrings) {
-                        data[templateBlank.name] = populatedField(with: grammaticalString)
+                        data[blank.name] = populatedField(with: grammaticalString)
                     } else {
-                        data[templateBlank.name] = populatedField(with: templateBlank.placeholder)
+                        data[blank.name] = populatedField(with: blank.placeholder)
                     }
 
                 } else {
-                    data[templateBlank.name] = String(format: "%@(%@)%@", TemplateCustomParse.startPlaceholder.rawValue, templateBlank.placeholder, TemplateCustomParse.endPlaceholder.rawValue)
+                    data[blank.name] = String(format: "%@(%@)%@", TemplateCustomParse.startPlaceholder.rawValue, blank.placeholder, TemplateCustomParse.endPlaceholder.rawValue)
                 }
             }
             if let company = self.currentCompany {
@@ -174,7 +174,7 @@ extension CoverLetterViewController {
         }
     }
     
-    func getFillStrings(for selectedChoices: [Choice], matching availableChoices: [Choice]) -> [String] {
+    func getFillStrings(selectedChoices: [Choice], availableChoices: [Choice]) -> [String] {
         var fillStrings = [String]()
         for selectedChoice in selectedChoices {
             if let indexOfChoice = availableChoices.index(where: { $0.uuid == selectedChoice.uuid }) {

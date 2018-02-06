@@ -51,6 +51,25 @@ class EditCoverLetterViewController: UIViewController {
         self.selectedTemplateChoices = TemplateChoiceDBOperations.sharedInstance.getTemplateChoicesForCurrentUser()
         setUpdateButtonState()
     }
+    
+    func mergedBlanks(currentTemplate: TemplateEntity, selectedBlanks: [TemplateBlank]) -> [TemplateBlank] {
+        var blanks = [TemplateBlank]()
+        for selectedBlank in selectedBlanks {
+            let currentTemplateBlanks = currentTemplate.blank // Resolves horrible name confusion
+            guard let blankIndex = currentTemplateBlanks.index(where: { (otherBlank) -> Bool in
+                otherBlank.name == selectedBlank.name
+            }) else { continue }
+            let currentTemplateBlank = currentTemplateBlanks[blankIndex]
+            for choice in currentTemplateBlank.choices {
+                
+                
+            }
+            
+        }
+        return blanks
+    }
+    
+    
 }
 
 // MARK: -UITableViewDelegate,UITableViewDataSource
