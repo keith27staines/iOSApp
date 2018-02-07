@@ -31,7 +31,7 @@ class CoverLetterViewController: UIViewController {
         super.viewWillAppear(true)
         self.templateTextView.isScrollEnabled = false
 
-        self.selectedTemplateChoices = TemplateChoiceDBOperations.sharedInstance.getTemplateChoicesForCurrentUser()
+        self.selectedTemplateChoices = TemplateChoiceDBOperations.sharedInstance.getSelectedTemplateBlanks()
         setButtonStates()
         loadTemplate()
     }
@@ -112,7 +112,7 @@ extension CoverLetterViewController {
 
     func setButtonStates() {
         if let currentTemplate = self.currentTemplate {
-            if self.selectedTemplateChoices.count == currentTemplate.blank.count {
+            if self.selectedTemplateChoices.count == currentTemplate.blanks.count {
                 // all data is setted
                 self.applyButton.isEnabled = true
                 if let rightBarButton = self.editCoverLetterButton {
@@ -140,30 +140,26 @@ extension CoverLetterViewController {
         do {
             let templateToLoad = try Template(string: currentTemplate.template)
             var data: [String: Any] = [:]
-            for bank in currentTemplate.blank {
-                if let indexOfSetedBank = self.selectedTemplateChoices.index(where: { (tempBank) -> Bool in
-                    if bank.name == tempBank.name {
+            for blank in currentTemplate.blanks {
+                if let indexOfSelectedBlank = self.selectedTemplateChoices.index(where: { (otherBlank) -> Bool in
+                    if blank.name == otherBlank.name {
                         return true
                     }
                     return false
-                }) {
-                    let currentChoice = self.selectedTemplateChoices[indexOfSetedBank]
-                    if currentChoice.choices.count == 1 {
-                        data[bank.name] = String(format: "%@%@%@", TemplateCustomParse.startSelected.rawValue, getValueForUuid(choices: bank.choices, uuid: (currentChoice.choices.first?.uuid)!), TemplateCustomParse.endSelected.rawValue)
-                    } else if currentChoice.choices.count == 2 {
-                        let choiceString: String = String(format: "%@%@%@ and %@%@%@", TemplateCustomParse.startSelected.rawValue, getValueForUuid(choices: bank.choices, uuid: (currentChoice.choices.first?.uuid)!), TemplateCustomParse.endSelected.rawValue, TemplateCustomParse.startSelected.rawValue, getValueForUuid(choices: bank.choices, uuid: (currentChoice.choices[1].uuid)), TemplateCustomParse.endSelected.rawValue)
+                })
+                
+                {
+                    let selectedBlank = self.selectedTemplateChoices[indexOfSelectedBlank]
+                    let fillStrings = getFillStrings(selectedChoices: selectedBlank.choices, availableChoices: blank.choices)
 
-                        data[bank.name] = choiceString
+                    if let grammaticalString = F4SGrammar.list(fillStrings) {
+                        data[blank.name] = populatedField(with: grammaticalString)
                     } else {
-                        var choiceString: String = ""
-                        for index in 0 ... currentChoice.choices.count - 3 {
-                            choiceString.append(String(format: "%@%@%@, ", TemplateCustomParse.startSelected.rawValue, getValueForUuid(choices: bank.choices, uuid: (currentChoice.choices[index].uuid)), TemplateCustomParse.endSelected.rawValue))
-                        }
-                        choiceString.append(String(format: "%@%@%@ and %@%@%@", TemplateCustomParse.startSelected.rawValue, getValueForUuid(choices: bank.choices, uuid: currentChoice.choices[currentChoice.choices.count - 2].uuid), TemplateCustomParse.endSelected.rawValue, TemplateCustomParse.startSelected.rawValue, getValueForUuid(choices: bank.choices, uuid: (currentChoice.choices.last?.uuid)!), TemplateCustomParse.endSelected.rawValue))
-                        data[bank.name] = choiceString
+                        data[blank.name] = populatedField(with: blank.placeholder)
                     }
+
                 } else {
-                    data[bank.name] = String(format: "%@(%@)%@", TemplateCustomParse.startPlaceholder.rawValue, bank.placeholder, TemplateCustomParse.endPlaceholder.rawValue)
+                    data[blank.name] = String(format: "%@(%@)%@", TemplateCustomParse.startPlaceholder.rawValue, blank.placeholder, TemplateCustomParse.endPlaceholder.rawValue)
                 }
             }
             if let company = self.currentCompany {
@@ -177,7 +173,24 @@ extension CoverLetterViewController {
             log.debug("error on parsing template")
         }
     }
-
+    
+    func getFillStrings(selectedChoices: [Choice], availableChoices: [Choice]) -> [String] {
+        var fillStrings = [String]()
+        for selectedChoice in selectedChoices {
+            if let indexOfChoice = availableChoices.index(where: { $0.uuid == selectedChoice.uuid }) {
+                fillStrings.append(availableChoices[indexOfChoice].value)
+            } else {
+                let dateFormatter = DateFormatter()
+                dateFormatter.timeStyle = .none
+                dateFormatter.dateFormat = "dd MMM yyyy"
+                if let date = Date.dateFromRfc3339(string: selectedChoice.uuid) {
+                    fillStrings.append(dateFormatter.string(from: date))
+                }
+            }
+        }
+        return fillStrings
+    }
+    
     func getAttributedStringForTemplate(template: String) -> NSMutableAttributedString {
         // normal font
         var customMutableAttributedString: [([NSAttributedStringKey: Any], NSRange)] = []
@@ -290,6 +303,10 @@ extension CoverLetterViewController {
             return dateFormatter.string(from: date)
         }
         return uuid
+    }
+    
+    public func populatedField(with string: String) -> String {
+        return TemplateCustomParse.startSelected.rawValue + string + TemplateCustomParse.endSelected.rawValue
     }
 
     enum TemplateCustomParse: String {

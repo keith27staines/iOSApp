@@ -43,7 +43,7 @@ extension ChooseAttributesViewController {
             return
         }
 
-        for bank in template.blank {
+        for bank in template.blanks {
             if bank.name == self.currentAttributeType?.rawValue {
                 self.currentTemplateBank = bank
                 self.currentTemplateBank?.choices.sort(by: { $0.value < $1.value })

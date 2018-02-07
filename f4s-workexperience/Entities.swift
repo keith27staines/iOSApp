@@ -161,12 +161,12 @@ public struct Interest : Hashable {
 struct TemplateEntity {
     var uuid: String
     var template: String
-    var blank: [TemplateBlank]
+    var blanks: [TemplateBlank]
 
     init(uuid: String = "", template: String = "", blank: [TemplateBlank] = []) {
         self.uuid = uuid
         self.template = template
-        self.blank = blank
+        self.blanks = blank
     }
 }
 
