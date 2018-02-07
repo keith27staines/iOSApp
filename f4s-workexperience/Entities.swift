@@ -196,6 +196,10 @@ struct Choice {
         self.uuid = uuid
         self.value = value
     }
+    
+    var uuidIsDate: Bool {
+        return Date.dateFromRfc3339(string: uuid) == nil ? false : true
+    }
 }
 
 struct ContentEntity {

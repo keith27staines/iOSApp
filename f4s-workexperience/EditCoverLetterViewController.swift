@@ -72,19 +72,25 @@ class EditCoverLetterViewController: UIViewController {
             guard let blankIndex = templateBlanks.index(where: { (templateBlank) -> Bool in
                 templateBlank.name == selectedBlank.name
             }) else {
-                continue /* do nothing */
+                filteredBlanks.append(filteredBlank)
+                continue
             }
             let templateBlank = templateBlanks[blankIndex]
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeStyle = .none
+            dateFormatter.dateFormat = "dd MMM yyyy"
             
-            // if choices in the filtered blank don't have a match in the template blank, then
-            // remove them
-            for (index,choice) in filteredBlank.choices.enumerated() {
-                if !templateBlank.choices.contains(where: { (templateChoice) -> Bool in
+            // if choices in the selectedBlank don't have a match in the templateBlank, then
+            // filter out those choices
+            filteredBlank.choices = selectedBlank.choices.filter({ (choice) -> Bool in
+                if templateBlank.choices.contains(where: { (templateChoice) -> Bool in
                     templateChoice.uuid == choice.uuid
                 }) {
-                    filteredBlank.choices.remove(at: index)
+                    return true
+                } else {
+                    return choice.uuidIsDate
                 }
-            }
+            })
             filteredBlanks.append(filteredBlank)
         }
         return filteredBlanks
