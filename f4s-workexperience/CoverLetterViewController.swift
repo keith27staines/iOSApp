@@ -31,7 +31,7 @@ class CoverLetterViewController: UIViewController {
         super.viewWillAppear(true)
         self.templateTextView.isScrollEnabled = false
 
-        self.selectedTemplateChoices = TemplateChoiceDBOperations.sharedInstance.getTemplateChoicesForCurrentUser()
+        self.selectedTemplateChoices = TemplateChoiceDBOperations.sharedInstance.getSelectedTemplateBlanks()
         setButtonStates()
         loadTemplate()
     }
@@ -112,7 +112,7 @@ extension CoverLetterViewController {
 
     func setButtonStates() {
         if let currentTemplate = self.currentTemplate {
-            if self.selectedTemplateChoices.count == currentTemplate.blank.count {
+            if self.selectedTemplateChoices.count == currentTemplate.blanks.count {
                 // all data is setted
                 self.applyButton.isEnabled = true
                 if let rightBarButton = self.editCoverLetterButton {
@@ -140,7 +140,7 @@ extension CoverLetterViewController {
         do {
             let templateToLoad = try Template(string: currentTemplate.template)
             var data: [String: Any] = [:]
-            for blank in currentTemplate.blank {
+            for blank in currentTemplate.blanks {
                 if let indexOfSelectedBlank = self.selectedTemplateChoices.index(where: { (otherBlank) -> Bool in
                     if blank.name == otherBlank.name {
                         return true

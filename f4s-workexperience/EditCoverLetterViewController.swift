@@ -27,8 +27,8 @@ class EditCoverLetterViewController: UIViewController {
     let startDatePicker: UIDatePicker = UIDatePicker()
     let endDatePicker: UIDatePicker = UIDatePicker()
 
-    var currentTemplate: TemplateEntity?
-    var selectedTemplateChoices: [TemplateBlank] = []
+    var currentTemplate: TemplateEntity!
+    var selectedTemplateBlanks: [TemplateBlank] = []
     var dateFormatter: DateFormatter?
 
     override func viewDidLoad() {
@@ -48,28 +48,47 @@ class EditCoverLetterViewController: UIViewController {
         self.navigationItem.backBarButtonItem?.isEnabled = true
 
         coverLetterTableView.reloadData()
-        self.selectedTemplateChoices = TemplateChoiceDBOperations.sharedInstance.getTemplateChoicesForCurrentUser()
+        let previouslySelectedBlanks = TemplateChoiceDBOperations.sharedInstance.getSelectedTemplateBlanks()
+        let templateBlanks = currentTemplate.blanks
+        self.selectedTemplateBlanks = removeDeletedChoices(templateBlanks: templateBlanks, selectedBlanks: previouslySelectedBlanks)
+        
+        for blank in selectedTemplateBlanks {
+            var choiceList = [String]()
+            for choice in blank.choices {
+                choiceList.append(choice.uuid)
+            }
+            TemplateChoiceDBOperations.sharedInstance.saveTemplateChoice(name: blank.name, choiceList: choiceList)
+        }
         setUpdateButtonState()
     }
     
-    func mergedBlanks(currentTemplate: TemplateEntity, selectedBlanks: [TemplateBlank]) -> [TemplateBlank] {
-        var blanks = [TemplateBlank]()
+    func removeDeletedChoices(templateBlanks: [TemplateBlank], selectedBlanks: [TemplateBlank]) -> [TemplateBlank] {
+        var filteredBlanks = [TemplateBlank]()
+        
         for selectedBlank in selectedBlanks {
-            let currentTemplateBlanks = currentTemplate.blank // Resolves horrible name confusion
-            guard let blankIndex = currentTemplateBlanks.index(where: { (otherBlank) -> Bool in
-                otherBlank.name == selectedBlank.name
-            }) else { continue }
-            let currentTemplateBlank = currentTemplateBlanks[blankIndex]
-            for choice in currentTemplateBlank.choices {
-                
-                
-            }
+            var filteredBlank = selectedBlank
             
+            // Ensure that this blank exists in the template, otherwise we need to nothing
+            guard let blankIndex = templateBlanks.index(where: { (templateBlank) -> Bool in
+                templateBlank.name == selectedBlank.name
+            }) else {
+                continue /* do nothing */
+            }
+            let templateBlank = templateBlanks[blankIndex]
+            
+            // if choices in the filtered blank don't have a match in the template blank, then
+            // remove them
+            for (index,choice) in filteredBlank.choices.enumerated() {
+                if !templateBlank.choices.contains(where: { (templateChoice) -> Bool in
+                    templateChoice.uuid == choice.uuid
+                }) {
+                    filteredBlank.choices.remove(at: index)
+                }
+            }
+            filteredBlanks.append(filteredBlank)
         }
-        return blanks
+        return filteredBlanks
     }
-    
-    
 }
 
 // MARK: -UITableViewDelegate,UITableViewDataSource
@@ -453,17 +472,17 @@ extension EditCoverLetterViewController {
     }
 
     func getValueForAttribute(attribute: ChooseAttributes) -> String {
-        if let indexOfAttribute = self.selectedTemplateChoices.index(where: { $0.name == attribute.rawValue }) {
-            let templateBank = self.selectedTemplateChoices[indexOfAttribute]
+        if let indexOfAttribute = self.selectedTemplateBlanks.index(where: { $0.name == attribute.rawValue }) {
+            let templateBank = self.selectedTemplateBlanks[indexOfAttribute]
             switch attribute
             {
             case .PersonalAttributes:
                 return templateBank.choices.count != 0 ? String(templateBank.choices.count) : ""
             case .JobRole:
                 if let jobRole = templateBank.choices.first {
-                    if let indexOfJobRole = self.currentTemplate?.blank.index(where: { $0.name == attribute.rawValue }) {
-                        if let indexOfJobRoleValue = self.currentTemplate?.blank[indexOfJobRole].choices.index(where: { $0.uuid == jobRole.uuid }) {
-                            if let value = self.currentTemplate?.blank[indexOfJobRole].choices[indexOfJobRoleValue].value {
+                    if let indexOfJobRole = self.currentTemplate?.blanks.index(where: { $0.name == attribute.rawValue }) {
+                        if let indexOfJobRoleValue = self.currentTemplate?.blanks[indexOfJobRole].choices.index(where: { $0.uuid == jobRole.uuid }) {
+                            if let value = self.currentTemplate?.blanks[indexOfJobRole].choices[indexOfJobRoleValue].value {
                                 return value.capitalizingFirstLetter()
                             }
                         }
@@ -489,8 +508,8 @@ extension EditCoverLetterViewController {
     }
 
     func getMaximumNumberOfChoicesForAttribute(attribute: ChooseAttributes) -> Int {
-        if let indexOfAttribute = self.currentTemplate?.blank.index(where: { $0.name == attribute.rawValue }) {
-            guard let templateBank = self.currentTemplate?.blank[indexOfAttribute] else {
+        if let indexOfAttribute = self.currentTemplate?.blanks.index(where: { $0.name == attribute.rawValue }) {
+            guard let templateBank = self.currentTemplate?.blanks[indexOfAttribute] else {
                 return 0
             }
             switch attribute
@@ -507,16 +526,16 @@ extension EditCoverLetterViewController {
     }
 
     func saveDataForAttribute(data: String, attribute: ChooseAttributes) {
-        if let indexOfAttribute = self.selectedTemplateChoices.index(where: { $0.name == attribute.rawValue }) {
+        if let indexOfAttribute = self.selectedTemplateBlanks.index(where: { $0.name == attribute.rawValue }) {
             switch attribute
             {
             case .StartDate:
-                self.selectedTemplateChoices[indexOfAttribute].choices = [Choice(uuid: data)]
-                TemplateChoiceDBOperations.sharedInstance.saveTemplateChoice(name: self.selectedTemplateChoices[indexOfAttribute].name, choiceList: [data])
+                self.selectedTemplateBlanks[indexOfAttribute].choices = [Choice(uuid: data)]
+                TemplateChoiceDBOperations.sharedInstance.saveTemplateChoice(name: self.selectedTemplateBlanks[indexOfAttribute].name, choiceList: [data])
                 break
             case .EndDate:
-                self.selectedTemplateChoices[indexOfAttribute].choices = [Choice(uuid: data)]
-                TemplateChoiceDBOperations.sharedInstance.saveTemplateChoice(name: self.selectedTemplateChoices[indexOfAttribute].name, choiceList: [data])
+                self.selectedTemplateBlanks[indexOfAttribute].choices = [Choice(uuid: data)]
+                TemplateChoiceDBOperations.sharedInstance.saveTemplateChoice(name: self.selectedTemplateBlanks[indexOfAttribute].name, choiceList: [data])
                 break
             default:
                 break
@@ -526,12 +545,12 @@ extension EditCoverLetterViewController {
             {
             case .StartDate:
                 let newBank = TemplateBlank(name: attribute.rawValue, choices: [Choice(uuid: data)])
-                self.selectedTemplateChoices.append(newBank)
+                self.selectedTemplateBlanks.append(newBank)
                 TemplateChoiceDBOperations.sharedInstance.saveTemplateChoice(name: attribute.rawValue, choiceList: [data])
                 break
             case .EndDate:
                 let newBank = TemplateBlank(name: attribute.rawValue, choices: [Choice(uuid: data)])
-                self.selectedTemplateChoices.append(newBank)
+                self.selectedTemplateBlanks.append(newBank)
                 TemplateChoiceDBOperations.sharedInstance.saveTemplateChoice(name: attribute.rawValue, choiceList: [data])
                 break
             default:
@@ -541,7 +560,7 @@ extension EditCoverLetterViewController {
     }
 
     func setUpdateButtonState() {
-        if self.selectedTemplateChoices.count > 0 {
+        if self.selectedTemplateBlanks.count > 0 {
             // all data is setted
             updateButton.setBackgroundColor(color: UIColor(netHex: Colors.mediumGreen), forUIControlState: .normal)
             updateButton.setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)

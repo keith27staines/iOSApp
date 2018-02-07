@@ -25,7 +25,7 @@ class TemplateChoiceDBOperations {
         TemplateChoiceCoreDataManager.sharedInstance.saveTemplateChoiceToContext(name: name, userUuid: userUuid, choiceList: choiceList)
     }
 
-    func getTemplateChoicesForCurrentUser() -> [TemplateBlank] {
+    func getSelectedTemplateBlanks() -> [TemplateBlank] {
         let keychain = KeychainSwift()
         guard let userUuid = keychain.get(UserDefaultsKeys.userUuid) else {
             return []

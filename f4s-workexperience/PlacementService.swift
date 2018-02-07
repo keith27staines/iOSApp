@@ -95,7 +95,7 @@ class PlacementService: ApiBaseService {
         }
 
         var coverLetterObjects: [Any] = []
-        for bank in template.blank {
+        for bank in template.blanks {
             let choices = self.getChoiceList(choices: bank.choices)
             let dict: NSMutableDictionary = NSMutableDictionary()
             if bank.name == ChooseAttributes.EndDate.rawValue || bank.name == ChooseAttributes.StartDate.rawValue || bank.name == ChooseAttributes.JobRole.rawValue {

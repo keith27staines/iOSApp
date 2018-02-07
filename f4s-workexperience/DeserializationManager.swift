@@ -225,7 +225,7 @@ class DeserializationManager {
                         }
                         blankList.append(currentBlank)
                     }
-                    template.blank = blankList
+                    template.blanks = blankList
                 }
                 templateList.append(template)
             }
