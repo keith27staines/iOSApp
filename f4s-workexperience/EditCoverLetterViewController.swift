@@ -50,7 +50,7 @@ class EditCoverLetterViewController: UIViewController {
         coverLetterTableView.reloadData()
         let previouslySelectedBlanks = TemplateChoiceDBOperations.sharedInstance.getSelectedTemplateBlanks()
         let templateBlanks = currentTemplate.blanks
-        self.selectedTemplateBlanks = removeDeletedChoices(templateBlanks: templateBlanks, selectedBlanks: previouslySelectedBlanks)
+        self.selectedTemplateBlanks = TemplateHelper.removeUnavailableChoices(from: previouslySelectedBlanks, templateBlanks: templateBlanks)
         
         for blank in selectedTemplateBlanks {
             var choiceList = [String]()
@@ -62,39 +62,7 @@ class EditCoverLetterViewController: UIViewController {
         setUpdateButtonState()
     }
     
-    func removeDeletedChoices(templateBlanks: [TemplateBlank], selectedBlanks: [TemplateBlank]) -> [TemplateBlank] {
-        var filteredBlanks = [TemplateBlank]()
-        
-        for selectedBlank in selectedBlanks {
-            var filteredBlank = selectedBlank
-            
-            // Ensure that this blank exists in the template, otherwise we need to nothing
-            guard let blankIndex = templateBlanks.index(where: { (templateBlank) -> Bool in
-                templateBlank.name == selectedBlank.name
-            }) else {
-                filteredBlanks.append(filteredBlank)
-                continue
-            }
-            let templateBlank = templateBlanks[blankIndex]
-            let dateFormatter = DateFormatter()
-            dateFormatter.timeStyle = .none
-            dateFormatter.dateFormat = "dd MMM yyyy"
-            
-            // if choices in the selectedBlank don't have a match in the templateBlank, then
-            // filter out those choices
-            filteredBlank.choices = selectedBlank.choices.filter({ (choice) -> Bool in
-                if templateBlank.choices.contains(where: { (templateChoice) -> Bool in
-                    templateChoice.uuid == choice.uuid
-                }) {
-                    return true
-                } else {
-                    return choice.uuidIsDate
-                }
-            })
-            filteredBlanks.append(filteredBlank)
-        }
-        return filteredBlanks
-    }
+
 }
 
 // MARK: -UITableViewDelegate,UITableViewDataSource
