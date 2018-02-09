@@ -59,3 +59,4 @@ public struct TemplateHelper {
         return filteredBlank
     }
 }
+

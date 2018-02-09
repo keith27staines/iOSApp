@@ -153,7 +153,8 @@ extension CoverLetterViewController {
                     let fillStrings = getFillStrings(selectedChoices: selectedBlank.choices, availableChoices: blank.choices)
 
                     if let grammaticalString = F4SGrammar.list(fillStrings) {
-                        data[blank.name] = populatedField(with: grammaticalString)
+                        let htmlDecodedString = grammaticalString.htmlDecode()
+                        data[blank.name] = populatedField(with: htmlDecodedString)
                     } else {
                         data[blank.name] = populatedField(with: blank.placeholder)
                     }
@@ -165,9 +166,8 @@ extension CoverLetterViewController {
             if let company = self.currentCompany {
                 data["company_name"] = String(format: "%@%@%@", TemplateCustomParse.startBold.rawValue, company.name, TemplateCustomParse.endBold.rawValue)
             }
-
             let renderingTemplate = try templateToLoad.render(data)
-            self.templateTextView.attributedText = self.getAttributedStringForTemplate(template: renderingTemplate)
+            self.templateTextView.attributedText = self.getAttributedStringForTemplate(template: renderingTemplate.htmlDecode())
             self.templateTextView.isEditable = false
         } catch {
             log.debug("error on parsing template")

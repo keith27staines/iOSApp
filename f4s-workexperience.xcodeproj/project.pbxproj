@@ -148,6 +148,8 @@
 		FC11006A1FB36A230055EB9A /* ReachabilityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */; };
 		FC25A05F1F850DF4002F51A9 /* F4SCompanyPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */; };
 		FC32E3D9200F322800D7C36A /* PartnerModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32E3D8200F322800D7C36A /* PartnerModelTests.swift */; };
+		FC4336CA202DB953001D0569 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4336C9202DB953001D0569 /* StringExtensions.swift */; };
+		FC4336CC202DB999001D0569 /* F4SStringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4336CB202DB999001D0569 /* F4SStringExtensionTests.swift */; };
 		FC4BB6031FA20EF700173864 /* PartnerSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BB6021FA20EF700173864 /* PartnerSelectionViewController.swift */; };
 		FC4BB6051FA20F4100173864 /* Partner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BB6041FA20F4100173864 /* Partner.swift */; };
 		FC4BB6071FA20F5100173864 /* PartnerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BB6061FA20F5100173864 /* PartnerModel.swift */; };
@@ -420,6 +422,8 @@
 		FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityExtension.swift; sourceTree = "<group>"; };
 		FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyPin.swift; sourceTree = "<group>"; };
 		FC32E3D8200F322800D7C36A /* PartnerModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerModelTests.swift; sourceTree = "<group>"; };
+		FC4336C9202DB953001D0569 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		FC4336CB202DB999001D0569 /* F4SStringExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SStringExtensionTests.swift; sourceTree = "<group>"; };
 		FC4BB6021FA20EF700173864 /* PartnerSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerSelectionViewController.swift; sourceTree = "<group>"; };
 		FC4BB6041FA20F4100173864 /* Partner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Partner.swift; sourceTree = "<group>"; };
 		FC4BB6061FA20F5100173864 /* PartnerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerModel.swift; sourceTree = "<group>"; };
@@ -697,6 +701,7 @@
 				FC6C11BB20287378002C8EA5 /* F4SGrammarTests.swift */,
 				FC6C11BD202C402E002C8EA5 /* F4STemplateTests.swift */,
 				FC6C11C1202C4EE5002C8EA5 /* F4STemplateHelperTests.swift */,
+				FC4336CB202DB999001D0569 /* F4SStringExtensionTests.swift */,
 			);
 			path = "f4s-workexperienceTests";
 			sourceTree = "<group>";
@@ -1062,6 +1067,7 @@
 				204C89771DF5F0B200D8493A /* ChooseAttributesViewController.swift */,
 				204C89761DF5F0B200D8493A /* ChooseAttributesTableViewCell.swift */,
 				FC6C11BF202C4974002C8EA5 /* TemplateHelper.swift */,
+				FC4336C9202DB953001D0569 /* StringExtensions.swift */,
 			);
 			name = ChooseAttributes;
 			sourceTree = "<group>";
@@ -1638,6 +1644,7 @@
 				206F8F8C1E1E48120024937B /* MessageOptionCollectionViewCell.swift in Sources */,
 				20FEBDDA1DE5AD3400EBDCBF /* ImageService.swift in Sources */,
 				FCA6D2961FA75DE40037962B /* Styler.swift in Sources */,
+				FC4336CA202DB953001D0569 /* StringExtensions.swift in Sources */,
 				FC25A05F1F850DF4002F51A9 /* F4SCompanyPin.swift in Sources */,
 				FCF0D16C1FBC244800F2AF1D /* PopupAnimator.swift in Sources */,
 				40C6DDF21E03F401000F8806 /* UserInfoCoreDataManager.swift in Sources */,
@@ -1672,6 +1679,7 @@
 				FC59B1901F81549B0068EC9C /* CGRect+MethodsTests.swift in Sources */,
 				FC32E3D9200F322800D7C36A /* PartnerModelTests.swift in Sources */,
 				FC6C11BE202C402E002C8EA5 /* F4STemplateTests.swift in Sources */,
+				FC4336CC202DB999001D0569 /* F4SStringExtensionTests.swift in Sources */,
 				FC6C11C2202C4EE5002C8EA5 /* F4STemplateHelperTests.swift in Sources */,
 				FC59B1911F81549B0068EC9C /* F4SQuadtreeTests.swift in Sources */,
 				FC6C11BC20287378002C8EA5 /* F4SGrammarTests.swift in Sources */,
