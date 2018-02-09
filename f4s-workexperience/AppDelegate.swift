@@ -237,7 +237,7 @@ extension AppDelegate {
         UserService.sharedInstance.enablePushNotificationForUser(withDeviceToken: token, putCompleted: { success, result in
             self.deviceToken = token
             if !success {
-                var alert = UIAlertController(title: "Failed to enable push notification", message: "Server call failed", preferredStyle: UIAlertControllerStyle.actionSheet)
+                let alert = UIAlertController(title: "Failed to enable push notification", message: "Server call failed", preferredStyle: UIAlertControllerStyle.actionSheet)
                 
                 CustomNavigationHelper.sharedInstance.topMostViewController()?.present(alert, animated: true, completion: nil)
                 
@@ -246,7 +246,7 @@ extension AppDelegate {
     }
     
     func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        var alert = UIAlertController(title: "Failed to Register for push notifications", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let alert = UIAlertController(title: "Failed to Register for push notifications", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.actionSheet)
         
         CustomNavigationHelper.sharedInstance.topMostViewController()?.present(alert, animated: true, completion: nil)
     }
