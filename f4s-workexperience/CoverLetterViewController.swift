@@ -32,7 +32,6 @@ class CoverLetterViewController: UIViewController {
         self.templateTextView.isScrollEnabled = false
 
         self.selectedTemplateChoices = TemplateChoiceDBOperations.sharedInstance.getSelectedTemplateBlanks()
-        setButtonStates()
         loadTemplate()
     }
 
@@ -110,21 +109,19 @@ extension CoverLetterViewController {
         self.termsAndConditionsButton.titleLabel?.textAlignment = .center
     }
 
-    func setButtonStates() {
-        if let currentTemplate = self.currentTemplate {
-            if self.selectedTemplateChoices.count == currentTemplate.blanks.count {
-                // all data is setted
-                self.applyButton.isEnabled = true
-                if let rightBarButton = self.editCoverLetterButton {
-                    rightBarButton.setBackgroundColor(color: UIColor(netHex: Colors.mediumGreen), forUIControlState: .normal)
-                    rightBarButton.setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)
-                }
-            } else {
-                self.applyButton.isEnabled = false
-                if let rightBarButton = self.editCoverLetterButton {
-                    rightBarButton.setBackgroundColor(color: UIColor(netHex: Colors.orangeNormal), forUIControlState: .normal)
-                    rightBarButton.setBackgroundColor(color: UIColor(netHex: Colors.orangeActive), forUIControlState: .highlighted)
-                }
+    func setButtonStates(enableApply: Bool) {
+        if enableApply {
+            // all data is setted
+            self.applyButton.isEnabled = true
+            if let rightBarButton = self.editCoverLetterButton {
+                rightBarButton.setBackgroundColor(color: UIColor(netHex: Colors.mediumGreen), forUIControlState: .normal)
+                rightBarButton.setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)
+            }
+        } else {
+            self.applyButton.isEnabled = false
+            if let rightBarButton = self.editCoverLetterButton {
+                rightBarButton.setBackgroundColor(color: UIColor(netHex: Colors.orangeNormal), forUIControlState: .normal)
+                rightBarButton.setBackgroundColor(color: UIColor(netHex: Colors.orangeActive), forUIControlState: .highlighted)
             }
         }
     }
@@ -133,11 +130,13 @@ extension CoverLetterViewController {
 // MARK: - template helper
 extension CoverLetterViewController {
     func loadTemplate() {
+        setButtonStates(enableApply: false)
         self.removeInvalidDateFields()
         guard let currentTemplate = self.currentTemplate else {
             return
         }
         do {
+            var allowApply = true;
             let templateToLoad = try Template(string: currentTemplate.template)
             var data: [String: Any] = [:]
             for blank in currentTemplate.blanks {
@@ -156,19 +155,23 @@ extension CoverLetterViewController {
                         let htmlDecodedString = grammaticalString.htmlDecode()
                         data[blank.name] = populatedField(with: htmlDecodedString)
                     } else {
-                        data[blank.name] = populatedField(with: blank.placeholder)
+                        data[blank.name] = String(format: "%@(%@)%@", TemplateCustomParse.startPlaceholder.rawValue, blank.placeholder, TemplateCustomParse.endPlaceholder.rawValue)
+                        allowApply = false
                     }
 
                 } else {
                     data[blank.name] = String(format: "%@(%@)%@", TemplateCustomParse.startPlaceholder.rawValue, blank.placeholder, TemplateCustomParse.endPlaceholder.rawValue)
+                    allowApply = false
                 }
             }
+            
             if let company = self.currentCompany {
                 data["company_name"] = String(format: "%@%@%@", TemplateCustomParse.startBold.rawValue, company.name, TemplateCustomParse.endBold.rawValue)
             }
             let renderingTemplate = try templateToLoad.render(data)
             self.templateTextView.attributedText = self.getAttributedStringForTemplate(template: renderingTemplate.htmlDecode())
             self.templateTextView.isEditable = false
+            setButtonStates(enableApply: allowApply)
         } catch {
             log.debug("error on parsing template")
         }
@@ -379,7 +382,6 @@ extension CoverLetterViewController {
                 DispatchQueue.main.async {
                     strongSelf.currentTemplate = boxedValue.value.first
                     strongSelf.loadTemplate()
-                    strongSelf.setButtonStates()
                 }
                 break
             case let .error(error):
