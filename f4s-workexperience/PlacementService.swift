@@ -57,6 +57,7 @@ class PlacementService: ApiBaseService {
         if let userUuid = keychain.get(UserDefaultsKeys.userUuid) {
             params["user_uuid"] = userUuid
         }
+        params["device"] = UserService.sharedInstance.vendorID
 
         post(params, url: url) {
             _, msg in
