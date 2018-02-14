@@ -38,11 +38,19 @@ class CustomTabBarViewController: UITabBarController {
 
     // MARK: - UI Setup
     fileprivate func configureTabBar() {
-        self.tabBar.barTintColor = UIColor(netHex: Colors.azure)
+        
 
         self.tabBar.isTranslucent = false
         self.tabBar.backgroundColor = UIColor.white
-        self.tabBar.tintColor = UIColor(red: 108 / 255, green: 181 / 255, blue: 246 / 255, alpha: 1)
+        switch Config.environment {
+        case .staging:
+            self.tabBar.barTintColor = WorkfinderColor.stagingGold
+            self.tabBar.tintColor = UIColor(red: 125 / 255, green: 125 / 255, blue: 125 / 255, alpha: 1)
+        case .production:
+            self.tabBar.barTintColor = UIColor(netHex: Colors.azure)
+            self.tabBar.tintColor = UIColor(red: 108 / 255, green: 181 / 255, blue: 246 / 255, alpha: 1)
+        }
+
     }
 
     override func viewWillAppear(_ animation: Bool) {

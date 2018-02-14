@@ -37,7 +37,13 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
         self.edgesForExtendedLayout = []
         self.extendedLayoutIncludesOpaqueBars = true
         tableView.register(UINib(nibName: "MenuHeaderCell", bundle: nil), forCellReuseIdentifier: "MenuHeaderCell")
-        self.view.backgroundColor = UIColor(red: 72.0/255.0, green: 38.0/255.0, blue: 127.0/255.0, alpha: 1.0)
+        switch Config.environment {
+        case .staging:
+            self.view.backgroundColor = WorkfinderColor.stagingGold
+        case .production:
+            self.view.backgroundColor = UIColor(red: 72.0/255.0, green: 38.0/255.0, blue: 127.0/255.0, alpha: 1.0)
+        }
+
         setupLabels()
     }
     

@@ -47,6 +47,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
+        
+        let bn = Bundle.main.bundleIdentifier
+        print("bundle name: \(bn)")
+        
         log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
         continueIfVersionCheckPasses(application: application, continueWith: versionAuthorizedToContinue)
         return true

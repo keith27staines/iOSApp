@@ -48,11 +48,22 @@ public class F4SEmailVerificationModel {
     public func restart() {
         emailVerificationState = .start
     }
-
+    
     /// Verification is performed by sending an email to the specified address. The email contains a code or link which will, in turn, need to be submitted for final verification
     public func submitEmailForVerification(_ email: String, completion: @escaping (()->Void)) {
+        let clientId: String
+        let domain: String
+        switch Config.environment {
+        case .staging:
+            clientId = "GP0piRmEoPLyKQJETNVjKdjhosvPGTw0"
+            domain = "founders4schools.eu.auth0.com"
+        case .production:
+            clientId = "2LfjThv1qvdIZn7L09v5OwxhsW87k4Hf"
+            domain = "founders4schools.eu.auth0.com"
+        }
+        
         Auth0
-            .authentication()
+            .authentication(clientId: clientId, domain: domain, session: .shared)
             .startPasswordless(
                 email: email,
                 type: passwordlessType,

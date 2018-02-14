@@ -403,7 +403,6 @@
 		D54E10061E044BC100A51560 /* ProcessedMessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProcessedMessagesViewController.swift; path = "f4s-workexperience/ProcessedMessagesViewController.swift"; sourceTree = "<group>"; };
 		D5E9EBE91DD60AB300BD796E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D5E9EC011DDD9F9000BD796E /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
-		EF342E9F354D697386AFC80D /* Pods_f4s_workexperienceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_f4s_workexperienceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityExtension.swift; sourceTree = "<group>"; };
 		FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyPin.swift; sourceTree = "<group>"; };
 		FC32E3D8200F322800D7C36A /* PartnerModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerModelTests.swift; sourceTree = "<group>"; };
@@ -983,7 +982,6 @@
 			children = (
 				6DBDC6E5F710813F9107483D /* Pods_f4s_workexperience.framework */,
 				407A5D7DED3055034D7EAC15 /* Pods_f4s_workexperienceTests.framework */,
-				EF342E9F354D697386AFC80D /* Pods_f4s_workexperienceUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1919,7 +1917,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
+				NAME_FOR_ENVIRONMENT = F4S.Staging;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s.staging;
+				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s.staging;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1932,15 +1933,17 @@
 			baseConfigurationReference = C244124FAD6DA2320378A05F /* Pods-f4s-workexperience.debugf4s.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
+				BUNDLE_ID_SUFFIX = .staging;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
+				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
+				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2015,7 +2018,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				NAME_FOR_ENVIRONMENT = F4S.Staging;
 				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s.staging;
+				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s.staging;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2028,15 +2034,17 @@
 			baseConfigurationReference = 698B16C1DEA4421DE6C2C9D6 /* Pods-f4s-workexperience.releasef4s.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
+				BUNDLE_ID_SUFFIX = .staging;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
+				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
+				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2117,7 +2125,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
+				NAME_FOR_ENVIRONMENT = Workfinder;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s.staging;
+				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s.staging;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2130,15 +2141,16 @@
 			baseConfigurationReference = 9C8235BD4A169F7DD6BA6996 /* Pods-f4s-workexperience.debugf4slive.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
+				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
+				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2213,7 +2225,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				NAME_FOR_ENVIRONMENT = Workfinder;
 				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s.staging;
+				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s.staging;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2226,15 +2241,17 @@
 			baseConfigurationReference = 590A4AE101882A503C247BC5 /* Pods-f4s-workexperience.releasef4slive.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
+				BUNDLE_ID_SUFFIX = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
+				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
+				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -80,11 +80,23 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="YFN-fH-Spb">
                                 <rect key="frame" x="318" y="28" width="37" height="37"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SxN-hq-RNX">
+                                <rect key="frame" x="10" y="617" width="355" height="30"/>
+                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Staging only - bypass verification">
+                                    <color key="titleColor" red="0.45138680930000002" green="0.99309605359999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="bypassButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xwD-rC-KZo"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="SxN-hq-RNX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="2Da-Ne-YPL"/>
                             <constraint firstItem="Abi-uO-h0M" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="42f-uY-Ckc"/>
                             <constraint firstItem="MCP-5P-Dy9" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" priority="999" id="9L0-t7-nL2"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SxN-hq-RNX" secondAttribute="trailing" constant="10" id="BIc-f0-7K5"/>
                             <constraint firstItem="MCP-5P-Dy9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="DMw-s7-Eoa"/>
                             <constraint firstItem="aEY-k0-OoH" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Abi-uO-h0M" secondAttribute="bottom" constant="20" id="EbD-Ie-RGl"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Abi-uO-h0M" secondAttribute="trailing" constant="16" id="GhE-qm-WRJ"/>
@@ -92,6 +104,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="aEY-k0-OoH" secondAttribute="trailing" constant="16" id="J9r-2F-zEp"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YFN-fH-Spb" secondAttribute="trailing" constant="20" id="Pip-UR-3fv"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Abi-uO-h0M" secondAttribute="trailing" constant="16" id="QcN-Nq-8x5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SxN-hq-RNX" secondAttribute="bottom" constant="20" id="Uy5-2G-SU1"/>
                             <constraint firstItem="Abi-uO-h0M" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Wbj-wC-Lge"/>
                             <constraint firstItem="aEY-k0-OoH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="g7d-gn-J3F"/>
                             <constraint firstItem="aEY-k0-OoH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="140" id="ife-Kj-BeY"/>
@@ -103,6 +116,7 @@
                     </view>
                     <connections>
                         <outlet property="activitySpinner" destination="YFN-fH-Spb" id="dpD-T3-Z4V"/>
+                        <outlet property="bypassButton" destination="SxN-hq-RNX" id="a7t-7I-JXh"/>
                         <outlet property="emailTextField" destination="3w7-qg-JXT" id="EN0-9e-eV1"/>
                         <outlet property="feedbackLabel" destination="MCP-5P-Dy9" id="jtp-bp-bga"/>
                         <outlet property="introductionLabel" destination="Abi-uO-h0M" id="rCI-LU-eZ9"/>
