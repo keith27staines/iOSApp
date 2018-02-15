@@ -84,7 +84,13 @@ extension OnboardingViewController {
 
     func setupAppearance() {
         UIApplication.shared.statusBarStyle = .lightContent
-        _ = UIView.gradient(view: gradientView, colorTop: UIColor(netHex: Colors.blueGradientTop).cgColor, colorBottom: UIColor(netHex: Colors.BlueGradientBottom).cgColor)
+        switch Config.environment {
+        case .staging:
+            view.backgroundColor = WorkfinderColor.stagingGold
+        case .production:
+            _ = UIView.gradient(view: gradientView, colorTop: UIColor(netHex: Colors.blueGradientTop).cgColor, colorBottom: UIColor(netHex: Colors.BlueGradientBottom).cgColor)
+        }
+
         view.layoutSubviews()
         setUpButtons()
         setupLabels()

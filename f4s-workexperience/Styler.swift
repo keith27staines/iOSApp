@@ -33,6 +33,7 @@ public struct WorkfinderColor {
     public static let purpleDisabled = UIColor(red: 141, green: 122, blue: 173)
     public static let pink = UIColor(red:226, green:16, blue: 79)
     public static let pinkDisabled = UIColor(red: 230, green: 95, blue:  136)
+    public static let stagingGold = UIColor(red: 255, green: 212, blue: 76)
 }
 
 public struct F4SButtonStyler {

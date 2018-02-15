@@ -3,6 +3,23 @@
 //
 
 struct Config {
+    
+    enum EnvironmentType {
+        case staging
+        case production
+    }
+    
+    static var environment: EnvironmentType {
+        switch ENVIRONMENT {
+        case "STAGING":
+            return EnvironmentType.staging
+        case "PRODUCTION":
+            return EnvironmentType.production
+        default:
+            return EnvironmentType.production
+        }
+    }
+    
     #if STAGING
 
         // Development & testing config

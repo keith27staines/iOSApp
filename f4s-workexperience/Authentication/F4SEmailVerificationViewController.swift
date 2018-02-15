@@ -9,6 +9,7 @@ import UIKit
 
 class F4SEmailVerificationViewController: UIViewController {
     
+    @IBOutlet weak var bypassButton: UIButton!
     @IBOutlet weak var activitySpinner: UIActivityIndicatorView!
     @IBOutlet weak var introductionLabel: UILabel!
     @IBOutlet weak var secondaryActionButton: UIButton!
@@ -39,6 +40,11 @@ class F4SEmailVerificationViewController: UIViewController {
         activitySpinner.hidesWhenStopped = true
         activitySpinner.isHidden = true
         activityCount = 0
+        bypassButton.isHidden = (Config.environment != .staging)
+    }
+    
+    @IBAction func bypassButtonTapped(_ sender: UIButton) {
+        emailWasVerified?()
     }
     
     override func viewWillAppear(_ animated: Bool) {
