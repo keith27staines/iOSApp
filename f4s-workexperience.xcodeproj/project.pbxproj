@@ -198,6 +198,11 @@
 		FCD884F91FFBC0CC00F05B08 /* Recommendations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCD884F81FFBC0CC00F05B08 /* Recommendations.storyboard */; };
 		FCD884FB1FFBE04F00F05B08 /* RecommendationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD884FA1FFBE04F00F05B08 /* RecommendationsViewController.swift */; };
 		FCD884FD1FFCCB4A00F05B08 /* RecommendationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD884FC1FFCCB4A00F05B08 /* RecommendationsModel.swift */; };
+		FCE20CBF203C12F300CA821D /* DocumentUrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE20CBB203C12F200CA821D /* DocumentUrlViewController.swift */; };
+		FCE20CC0203C12F300CA821D /* URLTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE20CBC203C12F300CA821D /* URLTableViewController.swift */; };
+		FCE20CC1203C12F300CA821D /* F4SDocumentUrlModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE20CBD203C12F300CA821D /* F4SDocumentUrlModel.swift */; };
+		FCE20CC2203C12F300CA821D /* UrlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE20CBE203C12F300CA821D /* UrlTableViewCell.swift */; };
+		FCE20CC4203C141B00CA821D /* DocumentUrl.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCE20CC3203C141B00CA821D /* DocumentUrl.storyboard */; };
 		FCF0D16C1FBC244800F2AF1D /* PopupAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */; };
 /* End PBXBuildFile section */
 
@@ -457,6 +462,11 @@
 		FCD884F81FFBC0CC00F05B08 /* Recommendations.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Recommendations.storyboard; sourceTree = "<group>"; };
 		FCD884FA1FFBE04F00F05B08 /* RecommendationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsViewController.swift; sourceTree = "<group>"; };
 		FCD884FC1FFCCB4A00F05B08 /* RecommendationsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsModel.swift; sourceTree = "<group>"; };
+		FCE20CBB203C12F200CA821D /* DocumentUrlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentUrlViewController.swift; sourceTree = "<group>"; };
+		FCE20CBC203C12F300CA821D /* URLTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLTableViewController.swift; sourceTree = "<group>"; };
+		FCE20CBD203C12F300CA821D /* F4SDocumentUrlModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDocumentUrlModel.swift; sourceTree = "<group>"; };
+		FCE20CBE203C12F300CA821D /* UrlTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlTableViewCell.swift; sourceTree = "<group>"; };
+		FCE20CC3203C141B00CA821D /* DocumentUrl.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DocumentUrl.storyboard; sourceTree = "<group>"; };
 		FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupAnimator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -826,6 +836,7 @@
 		40E78E501DD328E0000A3776 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				FCE20CBA203C12A300CA821D /* Document upload */,
 				FCD3485620038B6B00DC1316 /* Authentication */,
 				FCD884F71FFBC0A000F05B08 /* Recommendations */,
 				FCA53B931FE115E1009F6DB0 /* Force app update */,
@@ -1194,6 +1205,18 @@
 			name = Recommendations;
 			sourceTree = "<group>";
 		};
+		FCE20CBA203C12A300CA821D /* Document upload */ = {
+			isa = PBXGroup;
+			children = (
+				FCE20CC3203C141B00CA821D /* DocumentUrl.storyboard */,
+				FCE20CBB203C12F200CA821D /* DocumentUrlViewController.swift */,
+				FCE20CBD203C12F300CA821D /* F4SDocumentUrlModel.swift */,
+				FCE20CBE203C12F300CA821D /* UrlTableViewCell.swift */,
+				FCE20CBC203C12F300CA821D /* URLTableViewController.swift */,
+			);
+			path = "Document upload";
+			sourceTree = "<group>";
+		};
 		FCF0D16A1FBC213400F2AF1D /* Company info popup */ = {
 			isa = PBXGroup;
 			children = (
@@ -1329,6 +1352,7 @@
 				204C89641DF5F03F00D8493A /* EditCoverLetter.storyboard in Resources */,
 				FCD3485820038B8700DC1316 /* Auth0.plist in Resources */,
 				2037B0B41DEC87F200A9DE3E /* CoverLetter.storyboard in Resources */,
+				FCE20CC4203C141B00CA821D /* DocumentUrl.storyboard in Resources */,
 				40C1A4F31DDEF2F6000F80AA /* AutoCompleteTableViewCell.xib in Resources */,
 				40E78E1E1DD31A86000A3776 /* Assets.xcassets in Resources */,
 				D54E0FFD1E044B0400A51560 /* InfoWindowView.xib in Resources */,
@@ -1561,6 +1585,7 @@
 				40C1A51E1DDF5ACE000F80AA /* GMUSimpleClusterAlgorithm.m in Sources */,
 				40A5CF3C1DED6FA2000007AB /* InterestsViewController.swift in Sources */,
 				40E78E701DD32BD4000A3776 /* MenuHelper.swift in Sources */,
+				FCE20CC2203C12F300CA821D /* UrlTableViewCell.swift in Sources */,
 				FCA24C111F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift in Sources */,
 				2037B0A71DEC3C3B00A9DE3E /* InterestCoreDataManager.swift in Sources */,
 				204C89551DF5A36100D8493A /* TemplateChoiceDB.swift in Sources */,
@@ -1579,6 +1604,7 @@
 				2037B0A11DE84EEF00A9DE3E /* PlacementService.swift in Sources */,
 				2037B0B81DEC8A2400A9DE3E /* TemplateService.swift in Sources */,
 				40E78E761DD32BE7000A3776 /* AnimatedMenuButton.swift in Sources */,
+				FCE20CBF203C12F300CA821D /* DocumentUrlViewController.swift in Sources */,
 				40E78E171DD31A86000A3776 /* AppDelegate.swift in Sources */,
 				206F8F911E1E552F0024937B /* MessageOptionsView.swift in Sources */,
 				206F8F8B1E1E48120024937B /* OptionLabel.swift in Sources */,
@@ -1626,6 +1652,8 @@
 				40E78E711DD32BD4000A3776 /* SideMenuViewController.swift in Sources */,
 				FC11006A1FB36A230055EB9A /* ReachabilityExtension.swift in Sources */,
 				204203F91E4B81AB007C7409 /* FavouriteTableViewCell.swift in Sources */,
+				FCE20CC0203C12F300CA821D /* URLTableViewController.swift in Sources */,
+				FCE20CC1203C12F300CA821D /* F4SDocumentUrlModel.swift in Sources */,
 				40E78E581DD32964000A3776 /* Constants.swift in Sources */,
 				40C1A51C1DDF5ACE000F80AA /* GMUGridBasedClusterAlgorithm.m in Sources */,
 				FCD3486620038C3100DC1316 /* F4SEmailVerificationState.swift in Sources */,

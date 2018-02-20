@@ -61,6 +61,11 @@ class ExtraInfoViewController: UIViewController {
     var currentCompany: Company?
     var datePicker = UIDatePicker()
     
+    lazy var documentUploadController: DocumentUrlViewController = {
+        let storyboard = UIStoryboard(name: "DocumentUrl", bundle: nil)
+        return storyboard.instantiateInitialViewController() as! DocumentUrlViewController
+    }()
+    
     lazy var emailController: F4SEmailVerificationViewController = {
         let emailStoryboard = UIStoryboard(name: "F4SEmailVerification", bundle: nil)
         let emailController = emailStoryboard.instantiateViewController(withIdentifier: "EmailVerification") as! F4SEmailVerificationViewController
@@ -591,29 +596,41 @@ extension ExtraInfoViewController {
             let emailController = strongSelf.emailController
             let emailModel = emailController.model
             if emailModel.isEmailAddressVerified(email: user.email) {
-                strongSelf.gotoSucess(user: user)
+                strongSelf.gotoDocumentUpload(user: user)
             } else {
                 strongSelf.emailController.model.restart()
                 strongSelf.emailController.emailToVerify = user.email
                 strongSelf.emailController.emailWasVerified = {
                     strongSelf.emailTextField.text = emailController.model.verifiedEmail
                     _ = strongSelf.saveUserDetailsLocally()
-                    strongSelf.navigationController?.popToViewController(strongSelf, animated: true)
-                    strongSelf.gotoSucess(user: user)
+                    //strongSelf.navigationController?.popToViewController(strongSelf, animated: true)
+                    strongSelf.gotoDocumentUpload(user: user)
                 }
                 strongSelf.navigationController!.pushViewController(emailController, animated: true)
             }
         }
     }
     
-    func gotoSucess(user: User) {
+    func gotoDocumentUpload(user: User) {
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            let uploadController = strongSelf.documentUploadController
+            uploadController.user = user
+            uploadController.completion = { user in
+                strongSelf.gotoSucess(user: user, parent: uploadController)
+            }
+            strongSelf.navigationController?.pushViewController(uploadController, animated: true)
+        }
+    }
+    
+    func gotoSucess(user: User, parent: UIViewController) {
         UserService.sharedInstance.updateUser(user: user, putCompleted: { [weak self] (success, result) in
             guard let strongSelf = self else { return }
             DispatchQueue.main.async {
                 strongSelf.savePlacementLocally(status: .applied)
                 UserDefaults.standard.set(true, forKey: strongSelf.consentPreviouslyGivenKey)
                 if let _ = strongSelf.continueWithResult(result: result) {
-                    CustomNavigationHelper.sharedInstance.presentSuccessExtraInfoPopover(parentCtrl: strongSelf)
+                    CustomNavigationHelper.sharedInstance.presentSuccessExtraInfoPopover(parentCtrl: parent)
                 }
             }
         })
