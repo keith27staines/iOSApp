@@ -9,11 +9,33 @@
 import Foundation
 import UIKit
 
+public struct F4SDocumentUrl : Codable {
+    
+    /// sort index
+    public let index: Int
+    /// url uuid
+    public let uuid: F4SUUID!
+    
+    /// the url of the document
+    public let urlString: String
+    
+    /// Initializes a new instance
+    /// - parameter uuid: The uuid of the url
+    /// - parameter sortIndex: The index used to sort this url in an array of urls
+    /// - parameter urlString: The absolute string representation of the url
+    public init(uuid: F4SUUID, sortIndex: Int, urlString: String) {
+        self.index = sortIndex
+        self.uuid = uuid
+        self.urlString = urlString
+    }
+}
+
 public struct F4SDocumentUrlDescriptor {
     public var id: Int
     public var name: String
     public var urlString : String
     public var includeInApplication: Bool = false
+    public var isExpanded: Bool = false
     public var isValidUrl: Bool {
         return URL(string: urlString) == nil ? false : true
     }
@@ -24,36 +46,81 @@ public struct F4SDocumentUrlDescriptor {
 
 public protocol F4SDocumentUrlModelDelegate {
     func documentUrlModel(_ model: F4SDocumentUrlModel, deleted: F4SDocumentUrlDescriptor)
+    func documentUrlModel(_ model: F4SDocumentUrlModel, updated: F4SDocumentUrlDescriptor)
+    func documentUrlModel(_ model: F4SDocumentUrlModel, created: F4SDocumentUrlDescriptor)
+    func documentUrlModel(_ model: F4SDocumentUrlModel, changedExpandedState: [IndexPath])
 }
 
 public class F4SDocumentUrlModel {
     
-    public var delegate: F4SDocumentUrlModelDelegate?
+    private var delegate: F4SDocumentUrlModelDelegate?
     
-    public private (set) var urlDescriptors : [F4SDocumentUrlDescriptor]
+    public var expandedIndexPath: IndexPath? {
+        for i in 0..<urlDescriptors.count {
+            if urlDescriptors[i].isExpanded {
+                return IndexPath(row: i, section: 0)
+            }
+        }
+        return nil
+    }
     
-    public init(urlStrings: [String]) {
+    private var urlDescriptors : [F4SDocumentUrlDescriptor]
+    
+    public func urlDescriptor(_ indexPath: IndexPath) -> F4SDocumentUrlDescriptor {
+        return urlDescriptors[indexPath.row]
+    }
+    
+    public init(urlStrings: [String], delegate: F4SDocumentUrlModelDelegate) {
+        self.delegate = delegate
         self.urlDescriptors = []
         for string in urlStrings {
-            _ = createNewLink(string: string, includeInApplication: true)
+            _ = createDescriptor(string: string, includeInApplication: true)
         }
     }
     
-    func setDescriptor(_ descriptor: F4SDocumentUrlDescriptor, at index: Int) {
-        urlDescriptors[index] = descriptor
+    func canAddLink() -> Bool {
+        if urlDescriptors.count == 3 { return false }
+        for descriptor in urlDescriptors {
+            if !descriptor.isValidUrl {
+                return false
+            }
+        }
+        return true
     }
     
-    func deleteDescriptor(index: Int) {
-        let removed = urlDescriptors[index]
-        urlDescriptors.remove(at: index)
+    func setDescriptor(_ descriptor: F4SDocumentUrlDescriptor, at indexPath: IndexPath) {
+        urlDescriptors[indexPath.row] = descriptor
+        delegate?.documentUrlModel(self, updated: descriptor)
+    }
+    
+    func expandDescriptor(at indexPath: IndexPath) {
+        collapseAllRows()
+        var descriptor = urlDescriptors[indexPath.row]
+        descriptor.isExpanded = true
+        urlDescriptors[indexPath.row] = descriptor
+    }
+    
+    private func collapseAllRows() {
+        for (index,descriptor) in urlDescriptors.enumerated() {
+            var descr = descriptor
+            descr.isExpanded = false
+            urlDescriptors[index] = descr
+        }
+    }
+    
+    func deleteDescriptor(indexPath: IndexPath) {
+        let removed = urlDescriptors[indexPath.row]
+        urlDescriptors.remove(at: indexPath.row)
         delegate?.documentUrlModel(self, deleted: removed)
     }
     
-    func createNewLink(string: String = "", includeInApplication: Bool) -> F4SDocumentUrlDescriptor {
+    func createDescriptor(string: String = "", includeInApplication: Bool) -> F4SDocumentUrlDescriptor? {
+        if !canAddLink() { return nil }
         let index = urlDescriptors.count
-        let newLink = F4SDocumentUrlDescriptor(id: index, name: String(index), urlString: string, includeInApplication: includeInApplication)
-        urlDescriptors.append(newLink)
-        return newLink
+        let newDescriptor = F4SDocumentUrlDescriptor(id: index, name: String(index), urlString: string, includeInApplication: includeInApplication, isExpanded: false)
+        urlDescriptors.append(newDescriptor)
+        delegate?.documentUrlModel(self, created: newDescriptor)
+        return newDescriptor
     }
 }
 

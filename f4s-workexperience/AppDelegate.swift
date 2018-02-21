@@ -48,8 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
         
-        let bn = Bundle.main.bundleIdentifier
-        print("bundle name: \(bn)")
+        print("bundle name: \(Bundle.main.bundleIdentifier ?? "No bundle")")
         
         log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
         continueIfVersionCheckPasses(application: application, continueWith: versionAuthorizedToContinue)

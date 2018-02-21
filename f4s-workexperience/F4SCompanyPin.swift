@@ -38,6 +38,7 @@ public class F4SCompanyPin : NSObject, GMUClusterItem {
     override public var hashValue: Int {
         return position.latitude.hashValue ^ position.longitude.hashValue ^ companyUuid.hashValue
     }
+    
     public static func ==(lhs: F4SCompanyPin, rhs: F4SCompanyPin) -> Bool {
         return
             lhs.position.latitude == rhs.position.latitude &&

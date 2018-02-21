@@ -10,7 +10,10 @@ import UIKit
 
 class DocumentUrlViewController: UIViewController {
     var urlTableViewController: URLTableViewController?
-    var documentUrlModel: F4SDocumentUrlModel = F4SDocumentUrlModel(urlStrings: [])
+    lazy var documentUrlModel: F4SDocumentUrlModel = {
+        return F4SDocumentUrlModel(urlStrings: [], delegate: self)
+    }()
+    
     var user: User!
     var completion: ((User) -> Void)?
     
@@ -33,7 +36,6 @@ class DocumentUrlViewController: UIViewController {
         plusButton.isUserInteractionEnabled = true
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(addLinkButtonTapped))
         plusButton.addGestureRecognizer(tapRecognizer)
-        documentUrlModel.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,14 +59,12 @@ class DocumentUrlViewController: UIViewController {
         if !isSetupForDisplayingUrls {
             transitionToDisplayUrls()
         }
-        if documentUrlModel.numberOfRows(for: 0) == 3 {
-            return
-        }
         urlTableViewController?.createNewLink()
-        if documentUrlModel.numberOfRows(for: 0) == 3 {
-            plusButton.image = #imageLiteral(resourceName: "greyPlus")
-            return
-        }
+    }
+    
+    func updateEnabledStateOfAddButton() {
+        plusButton.image = documentUrlModel.canAddLink() ? #imageLiteral(resourceName: "redPlusSmall") : #imageLiteral(resourceName: "greyPlus")
+        plusButton.sizeToFit()
     }
     
     @objc func transitionToDisplayUrls() {
@@ -104,7 +104,6 @@ class DocumentUrlViewController: UIViewController {
         addAnother.alpha = 1.0
     }
 
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "embedUrlDisplay" {
             urlTableViewController = (segue.destination as! URLTableViewController)
@@ -114,8 +113,18 @@ class DocumentUrlViewController: UIViewController {
 }
 
 extension DocumentUrlViewController : F4SDocumentUrlModelDelegate {
+    func documentUrlModel(_ model: F4SDocumentUrlModel, changedExpandedState: [IndexPath]) {
+        
+    }
+    
     func documentUrlModel(_ model: F4SDocumentUrlModel, deleted: F4SDocumentUrlDescriptor) {
-        plusButton.image = #imageLiteral(resourceName: "redPlusSmall") // small version
+        updateEnabledStateOfAddButton()
+    }
+    func documentUrlModel(_ model: F4SDocumentUrlModel, updated: F4SDocumentUrlDescriptor) {
+        updateEnabledStateOfAddButton()
+    }
+    func documentUrlModel(_ model: F4SDocumentUrlModel, created: F4SDocumentUrlDescriptor) {
+        updateEnabledStateOfAddButton()
     }
 }
 
