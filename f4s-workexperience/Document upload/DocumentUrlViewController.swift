@@ -18,7 +18,7 @@ class DocumentUrlViewController: UIViewController {
     var completion: ((User) -> Void)?
     
     @IBOutlet weak var topImageHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var plusButtonCenterConstraint: NSLayoutConstraint!
+    @IBOutlet var plusButtonCenterConstraint: NSLayoutConstraint!
     @IBOutlet weak var plusButtonHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var plusButtonLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var plusButton: UIImageView!
@@ -61,16 +61,42 @@ class DocumentUrlViewController: UIViewController {
         }
         urlTableViewController?.createNewLink()
     }
-    
+    @IBAction func showCVGuide(_ sender: Any) {
+        let url = URL(string:"https://interactive.barclayslifeskills.com/staticmodules/downloads/cv-tips.pdf")!
+        UIApplication.shared.openURL(url)
+    }
     func updateEnabledStateOfAddButton() {
-        plusButton.image = documentUrlModel.canAddLink() ? #imageLiteral(resourceName: "redPlusSmall") : #imageLiteral(resourceName: "greyPlus")
-        plusButton.sizeToFit()
+        let numberShown = documentUrlModel.numberOfRows(for: 0)
+        if numberShown > 0 {
+            if documentUrlModel.canAddLink() {
+                plusButton.image = #imageLiteral(resourceName: "redPlusSmall")
+                addAnother.alpha = 1
+            } else {
+                plusButton.image = #imageLiteral(resourceName: "greyPlus")
+                addAnother.alpha = 0
+            }
+        } else {
+            transitionToBigPlusButton()
+        }
+    }
+    
+    func transitionToBigPlusButton() {
+        guard isSetupForDisplayingUrls else { return }
+        setupForCentralPlusButton()
+        let containerView = self.containerView!
+        UIView.animate(withDuration: 0.2, animations: { [weak self] in
+            self?.view.layoutIfNeeded()
+            containerView.alpha = 0
+        }) { (success) in
+            containerView.isHidden = true
+        }
     }
     
     @objc func transitionToDisplayUrls() {
         guard !isSetupForDisplayingUrls else { return }
         let view = self.view!
         let containerView = self.containerView!
+        containerView.isHidden = false
         setupForDisplayingUrls()
         UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseInOut, animations: {
             view.layoutIfNeeded()
@@ -93,7 +119,6 @@ class DocumentUrlViewController: UIViewController {
     }
 
     func setupForDisplayingUrls() {
-        containerView.isHidden = false
         isSetupForDisplayingUrls = true
         plusButtonCenterConstraint.isActive = false
         plusButtonHeightConstraint.constant = 35
@@ -113,9 +138,6 @@ class DocumentUrlViewController: UIViewController {
 }
 
 extension DocumentUrlViewController : F4SDocumentUrlModelDelegate {
-    func documentUrlModel(_ model: F4SDocumentUrlModel, changedExpandedState: [IndexPath]) {
-        
-    }
     
     func documentUrlModel(_ model: F4SDocumentUrlModel, deleted: F4SDocumentUrlDescriptor) {
         updateEnabledStateOfAddButton()

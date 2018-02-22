@@ -204,6 +204,7 @@
 		FCE20CC2203C12F300CA821D /* UrlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE20CBE203C12F300CA821D /* UrlTableViewCell.swift */; };
 		FCE20CC4203C141B00CA821D /* DocumentUrl.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCE20CC3203C141B00CA821D /* DocumentUrl.storyboard */; };
 		FCE20CC6203D5CE400CA821D /* DocumentsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE20CC5203D5CE400CA821D /* DocumentsService.swift */; };
+		FCE20CC8203EEA3B00CA821D /* CVGuideViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE20CC7203EEA3B00CA821D /* CVGuideViewerViewController.swift */; };
 		FCF0D16C1FBC244800F2AF1D /* PopupAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */; };
 /* End PBXBuildFile section */
 
@@ -469,6 +470,7 @@
 		FCE20CBE203C12F300CA821D /* UrlTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlTableViewCell.swift; sourceTree = "<group>"; };
 		FCE20CC3203C141B00CA821D /* DocumentUrl.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DocumentUrl.storyboard; sourceTree = "<group>"; };
 		FCE20CC5203D5CE400CA821D /* DocumentsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsService.swift; sourceTree = "<group>"; };
+		FCE20CC7203EEA3B00CA821D /* CVGuideViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVGuideViewerViewController.swift; sourceTree = "<group>"; };
 		FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupAnimator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1216,6 +1218,7 @@
 				FCE20CBE203C12F300CA821D /* UrlTableViewCell.swift */,
 				FCE20CBC203C12F300CA821D /* URLTableViewController.swift */,
 				FCE20CC5203D5CE400CA821D /* DocumentsService.swift */,
+				FCE20CC7203EEA3B00CA821D /* CVGuideViewerViewController.swift */,
 			);
 			path = "Document upload";
 			sourceTree = "<group>";
@@ -1517,6 +1520,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCE20CC8203EEA3B00CA821D /* CVGuideViewerViewController.swift in Sources */,
 				401634C41E0A9F16000161FA /* NotificationViewController.swift in Sources */,
 				40E78E4B1DD32862000A3776 /* f4s-workexperience.xcdatamodeld in Sources */,
 				FC9BEE082015FF6000347437 /* UniversalLinkParser.swift in Sources */,

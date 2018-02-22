@@ -48,11 +48,11 @@ public protocol F4SDocumentUrlModelDelegate {
     func documentUrlModel(_ model: F4SDocumentUrlModel, deleted: F4SDocumentUrlDescriptor)
     func documentUrlModel(_ model: F4SDocumentUrlModel, updated: F4SDocumentUrlDescriptor)
     func documentUrlModel(_ model: F4SDocumentUrlModel, created: F4SDocumentUrlDescriptor)
-    func documentUrlModel(_ model: F4SDocumentUrlModel, changedExpandedState: [IndexPath])
 }
 
 public class F4SDocumentUrlModel {
     
+    public let maxUrls : Int = 3
     private var delegate: F4SDocumentUrlModelDelegate?
     
     public var expandedIndexPath: IndexPath? {
@@ -79,7 +79,7 @@ public class F4SDocumentUrlModel {
     }
     
     func canAddLink() -> Bool {
-        if urlDescriptors.count == 3 { return false }
+        if urlDescriptors.count >= maxUrls { return false }
         for descriptor in urlDescriptors {
             if !descriptor.isValidUrl {
                 return false
