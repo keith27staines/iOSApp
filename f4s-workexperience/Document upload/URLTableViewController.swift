@@ -25,8 +25,9 @@ class URLTableViewController: UIViewController {
         guard let _ = documentUrlModel.createDescriptor(includeInApplication: false) else {
             return
         }
-        let indexPath = IndexPath(row: documentUrlModel.numberOfRows(for: 0) - 1, section: 0)
-        tableView.insertRows(at: [indexPath], with: .automatic)
+        let indexPath = IndexPath(row: 0, section: 0)
+        tableView.insertRows(at: [indexPath], with: .top)
+        collapseExpandedRow()
     }
     
     func deleteUrlForCell(cell: UrlTableViewCell) {
@@ -68,22 +69,44 @@ extension URLTableViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
         guard let cell = tableView.cellForRow(at: indexPath) as? UrlTableViewCell else { return }
         var urlDescriptor = documentUrlModel.urlDescriptor(indexPath)
         guard !urlDescriptor.isValidUrl else {
-            // contains a valid url so just expand the row
-            expandRowAtIndexPath(indexPath: indexPath)
+            // contains a valid url so just toggle the expansion of the row
+            toggleExpansionAtIndexPath(indexPath: indexPath)
             return
         }
         
         // doesn't contain a valid url
         let pasteText = UIPasteboard.general.string ?? ""
-        guard URL(string: pasteText) != nil else { return }
+        guard let url = URL(string: pasteText), UIApplication.shared.canOpenURL(url) else {
+            collapseExpandedRow()
+            let alert = UIAlertController(title: "Not a valid link", message: "Please copy a valid link to paste in", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Got it", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        guard !documentUrlModel.contains(url: url) else {
+            let alert = UIAlertController(title: "You have already added this link", message: "The link you are trying to paste now is already here! Please use a different one", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Got it", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
         
         urlDescriptor.urlString = pasteText
         documentUrlModel.setDescriptor(urlDescriptor, at: indexPath)
         cell.documentUrlDescriptor = urlDescriptor
         expandRowAtIndexPath(indexPath: indexPath)
+    }
+    
+    func toggleExpansionAtIndexPath(indexPath: IndexPath) {
+        if indexPath == documentUrlModel.expandedIndexPath {
+            collapseExpandedRow()
+        } else {
+            expandRowAtIndexPath(indexPath: indexPath)
+        }
     }
     
     func expandRowAtIndexPath(indexPath: IndexPath) {
@@ -98,6 +121,14 @@ extension URLTableViewController : UITableViewDelegate, UITableViewDataSource {
         }
         documentUrlModel.expandDescriptor(at: indexPath)
         tableView.reloadRows(at: affectedIndexPaths, with: .automatic)
+    }
+    
+    func collapseExpandedRow() {
+        guard let explandedIndexPath = documentUrlModel.expandedIndexPath else {
+            return
+        }
+        documentUrlModel.collapseAllRows()
+        tableView.reloadRows(at: [explandedIndexPath], with: .automatic)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

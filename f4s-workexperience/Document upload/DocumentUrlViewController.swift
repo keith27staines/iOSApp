@@ -60,6 +60,10 @@ class DocumentUrlViewController: UIViewController {
             transitionToDisplayUrls()
         }
         urlTableViewController?.createNewLink()
+        let maxUrls = documentUrlModel.maxUrls
+        if documentUrlModel.numberOfRows(for: 0) == maxUrls {
+            addAnother.text = "You cannot add more than \(maxUrls) links"
+        }
     }
     
     @IBAction func showCVGuide(_ sender: Any) {
@@ -70,11 +74,31 @@ class DocumentUrlViewController: UIViewController {
         let numberShown = documentUrlModel.numberOfRows(for: 0)
         if numberShown > 0 {
             if documentUrlModel.canAddLink() {
-                plusButton.image = #imageLiteral(resourceName: "redPlusSmall")
+                addAnother.fadeTransition(0.4)
+                addAnother.text = "Add another?"
                 addAnother.alpha = 1
+                let plusButton = self.plusButton!
+                UIView.transition(with: plusButton,
+                                  duration: 0.3,
+                                  options: .transitionCrossDissolve,
+                                  animations: { plusButton.image = #imageLiteral(resourceName: "redPlusSmall") },
+                                  completion: nil)
+                
             } else {
-                plusButton.image = #imageLiteral(resourceName: "greyPlus")
-                addAnother.alpha = 0
+                let plusButton = self.plusButton!
+                UIView.transition(with: plusButton,
+                                  duration: 0.3,
+                                  options: .transitionCrossDissolve,
+                                  animations: { plusButton.image = #imageLiteral(resourceName: "greyPlus")},
+                                  completion: nil)
+                let maxUrls = documentUrlModel.maxUrls
+                if numberShown >= maxUrls {
+                    addAnother.fadeTransition(0.4)
+                    addAnother.text = "You have added the maximum \(maxUrls) number allowed"
+                } else {
+                    addAnother.fadeTransition(0.4)
+                    addAnother.text = "Tap below to paste your link"
+                }
             }
         } else {
             transitionToBigPlusButton()
@@ -148,6 +172,16 @@ extension DocumentUrlViewController : F4SDocumentUrlModelDelegate {
     }
     func documentUrlModel(_ model: F4SDocumentUrlModel, created: F4SDocumentUrlDescriptor) {
         updateEnabledStateOfAddButton()
+    }
+}
+extension UIView {
+    func fadeTransition(_ duration:CFTimeInterval) {
+        let animation = CATransition()
+        animation.timingFunction = CAMediaTimingFunction(name:
+            kCAMediaTimingFunctionEaseInEaseOut)
+        animation.type = kCATransitionFade
+        animation.duration = duration
+        layer.add(animation, forKey: kCATransitionFade)
     }
 }
 

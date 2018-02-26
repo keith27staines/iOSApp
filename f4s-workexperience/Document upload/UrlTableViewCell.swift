@@ -24,13 +24,13 @@ class UrlTableViewCell: UITableViewCell {
     
     var documentUrlDescriptor : F4SDocumentUrlDescriptor? {
         didSet {
-            self.label.text = displayText(urlString: defaultText)
+            self.label.text = defaultText
             self.label.textColor = UIColor.lightGray
             self.label.numberOfLines = 10
             self.leftImage.image = #imageLiteral(resourceName: "greyLinkURL")
             self.accessoryType = .none
-            self.underliningView.backgroundColor = UIColor.lightGray
-            self.deleteButton.isHidden = true
+            self.underliningView.backgroundColor = UIColor.orange
+            self.deleteButton.isHidden = false
             if let documentUrlDescriptor = documentUrlDescriptor {
                 if !documentUrlDescriptor.urlString.isEmpty {
                     self.label.text = displayText(urlString: documentUrlDescriptor.urlString)

@@ -37,7 +37,10 @@ public struct F4SDocumentUrlDescriptor {
     public var includeInApplication: Bool = false
     public var isExpanded: Bool = false
     public var isValidUrl: Bool {
-        return URL(string: urlString) == nil ? false : true
+        guard let url = self.url else {
+            return false
+        }
+        return UIApplication.shared.canOpenURL(url)
     }
     public var url: URL? {
         return URL(string: urlString)
@@ -70,6 +73,15 @@ public class F4SDocumentUrlModel {
         return urlDescriptors[indexPath.row]
     }
     
+    public func contains(url: URL) -> Bool {
+        for descriptor in urlDescriptors {
+            if descriptor.url?.absoluteString == url.absoluteString {
+                return true
+            }
+        }
+        return false
+    }
+    
     public init(urlStrings: [String], delegate: F4SDocumentUrlModelDelegate) {
         self.delegate = delegate
         self.urlDescriptors = []
@@ -100,7 +112,7 @@ public class F4SDocumentUrlModel {
         urlDescriptors[indexPath.row] = descriptor
     }
     
-    private func collapseAllRows() {
+    public func collapseAllRows() {
         for (index,descriptor) in urlDescriptors.enumerated() {
             var descr = descriptor
             descr.isExpanded = false
@@ -118,7 +130,7 @@ public class F4SDocumentUrlModel {
         if !canAddLink() { return nil }
         let index = urlDescriptors.count
         let newDescriptor = F4SDocumentUrlDescriptor(id: index, name: String(index), urlString: string, includeInApplication: includeInApplication, isExpanded: false)
-        urlDescriptors.append(newDescriptor)
+        urlDescriptors.insert(newDescriptor, at: 0)
         delegate?.documentUrlModel(self, created: newDescriptor)
         return newDescriptor
     }

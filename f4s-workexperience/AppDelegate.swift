@@ -238,13 +238,6 @@ extension AppDelegate {
         }
         let token = tokenParts.joined()
         UserService.sharedInstance.enablePushNotificationForUser(withDeviceToken: token, putCompleted: { success, result in
-            self.deviceToken = token
-            if !success {
-                let alert = UIAlertController(title: "Failed to enable push notification", message: "Server call failed", preferredStyle: UIAlertControllerStyle.actionSheet)
-                
-                CustomNavigationHelper.sharedInstance.topMostViewController()?.present(alert, animated: true, completion: nil)
-                
-            }
         })
     }
     
