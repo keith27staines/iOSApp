@@ -61,6 +61,7 @@ class DocumentUrlViewController: UIViewController {
         }
         urlTableViewController?.createNewLink()
     }
+    
     @IBAction func showCVGuide(_ sender: Any) {
         let url = URL(string:"https://interactive.barclayslifeskills.com/staticmodules/downloads/cv-tips.pdf")!
         UIApplication.shared.openURL(url)
