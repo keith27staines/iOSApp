@@ -60,10 +60,6 @@ class DocumentUrlViewController: UIViewController {
             transitionToDisplayUrls()
         }
         urlTableViewController?.createNewLink()
-        let maxUrls = documentUrlModel.maxUrls
-        if documentUrlModel.numberOfRows(for: 0) == maxUrls {
-            addAnother.text = "You cannot add more than \(maxUrls) links"
-        }
     }
     
     @IBAction func showCVGuide(_ sender: Any) {
@@ -71,38 +67,36 @@ class DocumentUrlViewController: UIViewController {
         UIApplication.shared.openURL(url)
     }
     func updateEnabledStateOfAddButton() {
-        let numberShown = documentUrlModel.numberOfRows(for: 0)
-        if numberShown > 0 {
-            if documentUrlModel.canAddLink() {
-                addAnother.fadeTransition(0.4)
-                addAnother.text = "Add another?"
-                addAnother.alpha = 1
-                let plusButton = self.plusButton!
-                UIView.transition(with: plusButton,
-                                  duration: 0.3,
-                                  options: .transitionCrossDissolve,
-                                  animations: { plusButton.image = #imageLiteral(resourceName: "redPlusSmall") },
-                                  completion: nil)
-                
-            } else {
-                let plusButton = self.plusButton!
-                UIView.transition(with: plusButton,
-                                  duration: 0.3,
-                                  options: .transitionCrossDissolve,
-                                  animations: { plusButton.image = #imageLiteral(resourceName: "greyPlus")},
-                                  completion: nil)
-                let maxUrls = documentUrlModel.maxUrls
-                if numberShown >= maxUrls {
-                    addAnother.fadeTransition(0.4)
-                    addAnother.text = "You have added the maximum \(maxUrls) number allowed"
+        DispatchQueue.main.async { [weak self] in
+            guard let `self` = self else { return }
+            let numberShown = self.documentUrlModel.numberOfRows(for: 0)
+            if numberShown > 0 {
+                if self.documentUrlModel.doAllDescriptorsContainValidLinks() {
+                    if self.documentUrlModel.canAddPlaceholder() {
+                        self.transitionSmallPlusButton(toRed: true, text: "Add another")
+                    } else {
+                        let maxUrls = self.documentUrlModel.maxUrls
+                        self.transitionSmallPlusButton(toRed: false, text: "You have added the maximum of \(maxUrls) links")
+                    }
                 } else {
-                    addAnother.fadeTransition(0.4)
-                    addAnother.text = "Tap below to paste your link"
+                    self.transitionSmallPlusButton(toRed: false, text: "Tap below to paste your link")
                 }
+            } else {
+                self.transitionToBigPlusButton()
             }
-        } else {
-            transitionToBigPlusButton()
         }
+    }
+    
+    func transitionSmallPlusButton(toRed: Bool, text:String) {
+        self.addAnother.fadeTransition(0.4)
+        self.addAnother.text = text
+        guard let plusButton = self.plusButton else { return }
+        let image = toRed ? #imageLiteral(resourceName: "redPlusSmall") : #imageLiteral(resourceName: "greyPlus")
+        UIView.transition(with: plusButton,
+                          duration: 0.4,
+                          options: .transitionCrossDissolve,
+                          animations: { plusButton.image = image },
+                          completion: nil)
     }
     
     func transitionToBigPlusButton() {

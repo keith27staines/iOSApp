@@ -90,8 +90,11 @@ public class F4SDocumentUrlModel {
         }
     }
     
-    func canAddLink() -> Bool {
-        if urlDescriptors.count >= maxUrls { return false }
+    func canAddPlaceholder() -> Bool {
+        return urlDescriptors.count < maxUrls ? true : false
+    }
+    
+    func doAllDescriptorsContainValidLinks() -> Bool {
         for descriptor in urlDescriptors {
             if !descriptor.isValidUrl {
                 return false
@@ -127,7 +130,7 @@ public class F4SDocumentUrlModel {
     }
     
     func createDescriptor(string: String = "", includeInApplication: Bool) -> F4SDocumentUrlDescriptor? {
-        if !canAddLink() { return nil }
+        if !canAddPlaceholder() { return nil }
         let index = urlDescriptors.count
         let newDescriptor = F4SDocumentUrlDescriptor(id: index, name: String(index), urlString: string, includeInApplication: includeInApplication, isExpanded: false)
         urlDescriptors.insert(newDescriptor, at: 0)

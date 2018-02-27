@@ -93,13 +93,13 @@ extension CompanyOtherTableViewCell {
         }
 
         var numberOfCell: Int = 0
-        if company.employeeCount != 0 {
+        if company.employeeCount > 0 {
             numberOfCell += 1
         }
-        if company.turnover != 0 {
+        if company.turnover > 0 {
             numberOfCell += 1
         }
-        if company.turnoverGrowth != 0 {
+        if company.turnoverGrowth > 0 {
             numberOfCell += 1
         }
         return numberOfCell
@@ -113,7 +113,7 @@ extension CompanyOtherTableViewCell {
         switch indexPath.row
         {
         case 0:
-            if company.employeeCount != 0 {
+            if company.employeeCount > 0 {
                 guard let cell = customCollectionView.dequeueReusableCell(withReuseIdentifier: CompanyCollectionIdentifier, for: indexPath) as? CompanyCollectionViewCell else {
                     return UICollectionViewCell()
                 }
@@ -121,7 +121,7 @@ extension CompanyOtherTableViewCell {
                 let text = NSLocalizedString("Employees", comment: "")
                 cell.textLabel.attributedText = NSAttributedString(string: text, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.verySmallTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.gray).withAlphaComponent(0.5)])
                 return cell
-            } else if company.turnover != 0 {
+            } else if company.turnover > 0 {
                 guard let cell = customCollectionView.dequeueReusableCell(withReuseIdentifier: CompanyCollectionIdentifier, for: indexPath) as? CompanyCollectionViewCell else {
                     return UICollectionViewCell()
                 }
@@ -129,7 +129,7 @@ extension CompanyOtherTableViewCell {
                 let text = NSLocalizedString("Annual revenue", comment: "")
                 cell.textLabel.attributedText = NSAttributedString(string: text, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.verySmallTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.gray).withAlphaComponent(0.5)])
                 return cell
-            } else if company.turnoverGrowth != 0 {
+            } else if company.turnoverGrowth > 0 {
                 guard let cell = customCollectionView.dequeueReusableCell(withReuseIdentifier: CompanyCollectionIdentifier, for: indexPath) as? CompanyCollectionViewCell else {
                     return UICollectionViewCell()
                 }
@@ -140,7 +140,7 @@ extension CompanyOtherTableViewCell {
             }
             return UICollectionViewCell()
         case 1:
-            if company.turnover != 0 && company.employeeCount != 0 {
+            if company.turnover > 0 && company.employeeCount > 0 {
                 guard let cell = customCollectionView.dequeueReusableCell(withReuseIdentifier: CompanyCollectionIdentifier, for: indexPath) as? CompanyCollectionViewCell else {
                     return UICollectionViewCell()
                 }
@@ -148,7 +148,7 @@ extension CompanyOtherTableViewCell {
                 let text = NSLocalizedString("Annual revenue", comment: "")
                 cell.textLabel.attributedText = NSAttributedString(string: text, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.verySmallTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.gray).withAlphaComponent(0.5)])
                 return cell
-            } else if company.turnoverGrowth != 0 {
+            } else if company.turnoverGrowth > 0 {
                 guard let cell = customCollectionView.dequeueReusableCell(withReuseIdentifier: CompanyCollectionIdentifier, for: indexPath) as? CompanyCollectionViewCell else {
                     return UICollectionViewCell()
                 }
@@ -159,7 +159,7 @@ extension CompanyOtherTableViewCell {
             }
             return UICollectionViewCell()
         default:
-            if company.turnoverGrowth != 0 && company.turnover != 0 && company.employeeCount != 0 {
+            if company.turnoverGrowth > 0 && company.turnover > 0 && company.employeeCount > 0 {
                 guard let cell = customCollectionView.dequeueReusableCell(withReuseIdentifier: CompanyCollectionIdentifier, for: indexPath) as? CompanyCollectionViewCell else {
                     return UICollectionViewCell()
                 }

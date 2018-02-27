@@ -285,7 +285,8 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
             return bigFooterView
 
         case 3:
-            let string = NSLocalizedString("Choose up to \(self.getMaximumNumberOfChoicesForAttribute(attribute: .EmploymentSkills)) employment skills to let prospective employers understand how others describe you.", comment: "")
+            // Choose up to three employment skills that you are hoping to acquire through this Work Experience Placement
+            let string = NSLocalizedString("Choose up to \(self.getMaximumNumberOfChoicesForAttribute(attribute: .EmploymentSkills)) employment skills that you are hoping to acquire through this Work Experience Placement", comment: "")
             EditFooterView.footerString = string
             bigFooterView = EditFooterView(frame: CGRect(x: 0, y: 0, width: self.coverLetterTableView.frame.size.width, height: bigFooterSize))
 
