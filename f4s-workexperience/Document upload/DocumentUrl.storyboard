@@ -147,6 +147,7 @@
                         <outlet property="plusButtonLeftConstraint" destination="HGv-Cd-9R6" id="ss9-er-Wmw"/>
                         <outlet property="plusButtonTopConstraint" destination="5WF-du-cCx" id="fg1-OI-Sjx"/>
                         <outlet property="topImageHeightConstraint" destination="dad-Ui-LKT" id="qio-l5-rex"/>
+                        <segue destination="ujj-ft-ewo" kind="show" identifier="showCVTips" id="UsP-kn-RG8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QvI-7G-2pg" userLabel="First Responder" sceneMemberID="firstResponder"/>
