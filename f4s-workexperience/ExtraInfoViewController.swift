@@ -58,7 +58,7 @@ class ExtraInfoViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
 
-    var currentCompany: Company?
+    var applicationContext: ApplicationContext?
     var datePicker = UIDatePicker()
     
     lazy var documentUploadController: DocumentUrlViewController = {
@@ -322,7 +322,7 @@ extension ExtraInfoViewController {
     }
 
     func getPlacementUuid() -> String {
-        guard let currentCompany = self.currentCompany,
+        guard let currentCompany = self.applicationContext?.company,
             let placement = PlacementDBOperations.sharedInstance.getPlacementsForCurrentUserAndCompany(companyUuid: currentCompany.uuid) else {
             return ""
         }
@@ -330,12 +330,13 @@ extension ExtraInfoViewController {
     }
 
     func savePlacementLocally(status: PlacementStatus ) {
-        guard let currentCompany = self.currentCompany,
+        guard let currentCompany = self.applicationContext?.company,
             let placement = PlacementDBOperations.sharedInstance.getPlacementsForCurrentUserAndCompany(companyUuid: currentCompany.uuid) else {
             return
         }
         var updatedPlacement = placement
         updatedPlacement.status = status
+        applicationContext?.placement = placement
         PlacementDBOperations.sharedInstance.savePlacement(placement: updatedPlacement)
     }
 
@@ -358,6 +359,7 @@ extension ExtraInfoViewController {
             }
         }
         user.placementUuid = getPlacementUuid()
+        applicationContext?.user = user
         return user
     }
 
@@ -405,6 +407,7 @@ extension ExtraInfoViewController {
     func saveUserDetailsLocally() -> User {
         let updatedUser = self.buildUserInfo()
         UserInfoDBOperations.sharedInstance.saveUserInfo(userInfo: updatedUser)
+        applicationContext?.user = updatedUser
         return updatedUser
     }
     
@@ -561,7 +564,7 @@ extension ExtraInfoViewController {
     @IBAction func completeInfoButtonTouched(_: UIButton) {
         self.view.endEditing(true)
         let user = saveUserDetailsLocally()
-
+        applicationContext?.user = user
         if let reachability = Reachability() {
             if !reachability.isReachableByAnyMeans {
                 MessageHandler.sharedInstance.display("No Internet Connection.", parentCtrl: self)
@@ -596,35 +599,34 @@ extension ExtraInfoViewController {
             let emailController = strongSelf.emailController
             let emailModel = emailController.model
             if emailModel.isEmailAddressVerified(email: user.email) {
-                strongSelf.gotoDocumentUpload(user: user)
+                strongSelf.gotoDocumentUpload()
             } else {
                 strongSelf.emailController.model.restart()
                 strongSelf.emailController.emailToVerify = user.email
                 strongSelf.emailController.emailWasVerified = {
                     strongSelf.emailTextField.text = emailController.model.verifiedEmail
                     _ = strongSelf.saveUserDetailsLocally()
-                    //strongSelf.navigationController?.popToViewController(strongSelf, animated: true)
-                    strongSelf.gotoDocumentUpload(user: user)
+                    strongSelf.gotoDocumentUpload()
                 }
                 strongSelf.navigationController!.pushViewController(emailController, animated: true)
             }
         }
     }
     
-    func gotoDocumentUpload(user: User) {
+    func gotoDocumentUpload() {
         DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else { return }
             let uploadController = strongSelf.documentUploadController
-            uploadController.user = user
-            uploadController.completion = { user in
-                strongSelf.gotoSucess(user: user, parent: uploadController)
+            uploadController.applicationContext = self?.applicationContext
+            uploadController.completion = { applicationContext in
+                strongSelf.gotoSucess(applicationContext: applicationContext, parent: uploadController)
             }
             strongSelf.navigationController?.pushViewController(uploadController, animated: true)
         }
     }
     
-    func gotoSucess(user: User, parent: UIViewController) {
-        UserService.sharedInstance.updateUser(user: user, putCompleted: { [weak self] (success, result) in
+    func gotoSucess(applicationContext: ApplicationContext, parent: UIViewController) {
+        UserService.sharedInstance.updateUser(user: applicationContext.user!, putCompleted: { [weak self] (success, result) in
             guard let strongSelf = self else { return }
             DispatchQueue.main.async {
                 strongSelf.savePlacementLocally(status: .applied)

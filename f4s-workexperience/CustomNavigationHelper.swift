@@ -215,7 +215,8 @@ class CustomNavigationHelper {
         guard let coverLetterCtrl = coverLetterStoryboard.instantiateViewController(withIdentifier: "CoverLetterViewCtrl") as? CoverLetterViewController else {
             return
         }
-        coverLetterCtrl.currentCompany = currentCompany
+        var applicationContext = ApplicationContext(user: nil, company: currentCompany, placement: nil)
+        coverLetterCtrl.applicationContext = applicationContext
         let coverLetterNavigationController = RotationAwareNavigationController(rootViewController: coverLetterCtrl)
         parentCtrl.present(coverLetterNavigationController, animated: true, completion: nil)
     }
@@ -300,12 +301,12 @@ class CustomNavigationHelper {
         navController.pushViewController(ctrl, animated: true)
     }
 
-    func pushProcessedMessages(_ navController: UINavigationController, currentCompany: Company) {
+    func pushProcessedMessages(_ navController: UINavigationController, applicationContext: ApplicationContext) {
         let processedMessagesStoryboard = UIStoryboard(name: "ProcessedMessages", bundle: nil)
         guard let ctrl = processedMessagesStoryboard.instantiateViewController(withIdentifier: "ProcessedMessagesCtrl") as? ProcessedMessagesViewController else {
             return
         }
-        ctrl.currentCompany = currentCompany
+        ctrl.applicationContext = applicationContext
         navController.pushViewController(ctrl, animated: true)
     }
 
@@ -372,23 +373,23 @@ class CustomNavigationHelper {
         parentCtrl.navigationController?.present(popoverNavigationController, animated: true, completion: nil)
     }
     
-    func pushEmailVerification(navigCtrl: UINavigationController, company: Company) {
+    func pushEmailVerification(navigCtrl: UINavigationController, applicationContext: ApplicationContext) {
         let emailStoryboard = UIStoryboard(name: "F4SEmailVerification", bundle: nil)
         guard let emailController = emailStoryboard.instantiateViewController(withIdentifier: "EmailVerification") as? F4SEmailVerificationViewController else {
             return
         }
         emailController.emailWasVerified = { [weak self] in
-            self?.pushExtraInfoViewController(navigCtrl: navigCtrl, company: company)
+            self?.pushExtraInfoViewController(navigCtrl: navigCtrl, applicationContext: applicationContext)
         }
         navigCtrl.pushViewController(emailController, animated: true)
     }
 
-    func pushExtraInfoViewController(navigCtrl: UINavigationController, company: Company) {
+    func pushExtraInfoViewController(navigCtrl: UINavigationController, applicationContext: ApplicationContext) {
         let extraInfoStoryboard = UIStoryboard(name: "ExtraInfo", bundle: nil)
         guard let extraInfoCtrl = extraInfoStoryboard.instantiateViewController(withIdentifier: "ExtraInfoCtrl") as? ExtraInfoViewController else {
             return
         }
-        extraInfoCtrl.currentCompany = company
+        extraInfoCtrl.applicationContext = applicationContext
         navigCtrl.pushViewController(extraInfoCtrl, animated: true)
     }
 

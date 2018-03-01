@@ -130,7 +130,7 @@ extension NotificationViewController {
             debugPrint("Can't present cover letter")
             return
         }
-
+        
         CustomNavigationHelper.sharedInstance.presentCoverLetterController(parentCtrl: viewCtrl, currentCompany: company)
     }
 

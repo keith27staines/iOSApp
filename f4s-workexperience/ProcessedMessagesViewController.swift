@@ -14,7 +14,7 @@ class ProcessedMessagesViewController: UIViewController {
     @IBOutlet weak var receivedLabel: UILabel!
     @IBOutlet weak var extraInformationLabel: UILabel!
 
-    var currentCompany: Company?
+    var applicationContext: ApplicationContext?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +29,8 @@ class ProcessedMessagesViewController: UIViewController {
 // MARK: - user interaction
 extension ProcessedMessagesViewController {
     @IBAction func addInfoButton(_: Any) {
-        if let navigCtrl = self.navigationController, let company = self.currentCompany {
-//            CustomNavigationHelper.sharedInstance.moveToEmailVerification(navigCtrl: navigCtrl, company: company)
-            CustomNavigationHelper.sharedInstance.pushExtraInfoViewController(navigCtrl: navigCtrl, company: company)
+        if let navigCtrl = self.navigationController, let _ = self.applicationContext?.company {
+            CustomNavigationHelper.sharedInstance.pushExtraInfoViewController(navigCtrl: navigCtrl, applicationContext: applicationContext!)
         }
     }
 }
@@ -62,7 +61,7 @@ extension ProcessedMessagesViewController {
 
         let formattedString = NSMutableAttributedString()
         formattedString.append(NSAttributedString(string: receivedLabelText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)]))
-        if let currentCompanyName = currentCompany?.name {
+        if let currentCompanyName = applicationContext?.company?.name {
             formattedString.append(NSAttributedString(string: currentCompanyName, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)]))
         }
         self.receivedLabel.attributedText = formattedString

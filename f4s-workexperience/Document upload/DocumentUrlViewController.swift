@@ -11,11 +11,11 @@ import UIKit
 class DocumentUrlViewController: UIViewController {
     var urlTableViewController: URLTableViewController?
     lazy var documentUrlModel: F4SDocumentUrlModel = {
-        return F4SDocumentUrlModel(urlStrings: [], delegate: self)
+        return F4SDocumentUrlModel(delegate: self, placementUuid: self.applicationContext.placement!.placementUuid)
     }()
     
-    var user: User!
-    var completion: ((User) -> Void)?
+    var applicationContext: ApplicationContext!
+    var completion: ((ApplicationContext) -> Void)?
     
     @IBOutlet weak var topImageHeightConstraint: NSLayoutConstraint!
     @IBOutlet var plusButtonCenterConstraint: NSLayoutConstraint!
@@ -39,12 +39,18 @@ class DocumentUrlViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if documentUrlModel.numberOfRows(for: 0) > 0 {
-            setupForDisplayingUrls()
-        } else {
-            setupForCentralPlusButton()
-        }
+        setupForCentralPlusButton()
         applyStyle()
+    }
+    
+    func setupForFetchedData() {
+        guard documentUrlModel.numberOfRows(for: 0) > 0 else {
+            setupForCentralPlusButton()
+            return
+        }
+        transitionToDisplayUrls()
+        urlTableViewController?.tableView.reloadData()
+        updateEnabledStateOfAddButton()
     }
     
     func applyStyle() {
@@ -52,7 +58,12 @@ class DocumentUrlViewController: UIViewController {
     }
     
     @IBAction func continueButtonTapped(_ sender: Any) {
-        completion?(user)
+        documentUrlModel.putDocumentsUrls { [weak self] (success) in
+            guard let strongSelf = self else { return }
+            if success {
+                strongSelf.completion?(strongSelf.applicationContext)
+            }
+        }
     }
     
     @objc func addLinkButtonTapped() {
@@ -157,7 +168,11 @@ class DocumentUrlViewController: UIViewController {
 }
 
 extension DocumentUrlViewController : F4SDocumentUrlModelDelegate {
-    
+    func documentUrlModelFetchedDocuments(_ model: F4SDocumentUrlModel) {
+        DispatchQueue.main.async { [weak self] in
+            self?.setupForFetchedData()
+        }
+    }
     func documentUrlModel(_ model: F4SDocumentUrlModel, deleted: F4SDocumentUrlDescriptor) {
         updateEnabledStateOfAddButton()
     }

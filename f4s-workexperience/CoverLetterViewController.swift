@@ -19,7 +19,7 @@ class CoverLetterViewController: UIViewController {
 
     var currentTemplate: TemplateEntity?
     var selectedTemplateChoices: [TemplateBlank] = []
-    var currentCompany: Company?
+    var applicationContext: ApplicationContext!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -165,7 +165,7 @@ extension CoverLetterViewController {
                 }
             }
             
-            if let company = self.currentCompany {
+            if let company = self.applicationContext.company {
                 data["company_name"] = String(format: "%@%@%@", TemplateCustomParse.startBold.rawValue, company.name, TemplateCustomParse.endBold.rawValue)
             }
             let renderingTemplate = try templateToLoad.render(data)
@@ -409,7 +409,7 @@ extension CoverLetterViewController {
             }
         }
 
-        guard let currentCompanyUuid = currentCompany?.uuid,
+        guard let currentCompanyUuid = applicationContext.company?.uuid,
             var placement = PlacementDBOperations.sharedInstance.getPlacementsForCurrentUserAndCompany(companyUuid: currentCompanyUuid),
             let currentTemplateUuid = currentTemplate?.uuid else {
             return
@@ -430,8 +430,9 @@ extension CoverLetterViewController {
             {
             case .value:
                 // succes + go to next page
-                if let navCtrl = strongSelf.navigationController, let company = strongSelf.currentCompany {
-                    CustomNavigationHelper.sharedInstance.pushProcessedMessages(navCtrl, currentCompany: company)
+                strongSelf.applicationContext.placement = placement
+                if let navCtrl = strongSelf.navigationController, let _ = strongSelf.applicationContext.company {
+                    CustomNavigationHelper.sharedInstance.pushProcessedMessages(navCtrl, applicationContext: strongSelf.applicationContext)
                 }
                 break
             case let .error(error):
