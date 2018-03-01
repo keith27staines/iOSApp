@@ -215,7 +215,7 @@ class CustomNavigationHelper {
         guard let coverLetterCtrl = coverLetterStoryboard.instantiateViewController(withIdentifier: "CoverLetterViewCtrl") as? CoverLetterViewController else {
             return
         }
-        var applicationContext = ApplicationContext(user: nil, company: currentCompany, placement: nil)
+        let applicationContext = ApplicationContext(user: nil, company: currentCompany, placement: nil)
         coverLetterCtrl.applicationContext = applicationContext
         let coverLetterNavigationController = RotationAwareNavigationController(rootViewController: coverLetterCtrl)
         parentCtrl.present(coverLetterNavigationController, animated: true, completion: nil)
