@@ -40,12 +40,14 @@ class DocumentUrlViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         setupForCentralPlusButton()
+        plusButton.isUserInteractionEnabled = false
         applyStyle()
     }
     
     func setupForFetchedData() {
         guard documentUrlModel.numberOfRows(for: 0) > 0 else {
             setupForCentralPlusButton()
+            updateEnabledStateOfAddButton()
             return
         }
         transitionToDisplayUrls()
@@ -58,10 +60,19 @@ class DocumentUrlViewController: UIViewController {
     }
     
     @IBAction func continueButtonTapped(_ sender: Any) {
-        documentUrlModel.putDocumentsUrls { [weak self] (success) in
+        continueAsyncWorker()
+    }
+    
+    func continueAsyncWorker() {
+        DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else { return }
-            if success {
-                strongSelf.completion?(strongSelf.applicationContext)
+            strongSelf.continueButton.isEnabled = false
+            strongSelf.documentUrlModel.putDocumentsUrls { [weak self] (success) in
+                if success {
+                    strongSelf.completion?(strongSelf.applicationContext)
+                } else {
+                    self?.displayTryAgain(completion: strongSelf.continueAsyncWorker)
+                }
             }
         }
     }
@@ -103,6 +114,7 @@ class DocumentUrlViewController: UIViewController {
         self.addAnother.text = text
         guard let plusButton = self.plusButton else { return }
         let image = toRed ? #imageLiteral(resourceName: "redPlusSmall") : #imageLiteral(resourceName: "greyPlus")
+        plusButton.isUserInteractionEnabled = toRed
         UIView.transition(with: plusButton,
                           duration: 0.4,
                           options: .transitionCrossDissolve,
@@ -111,7 +123,10 @@ class DocumentUrlViewController: UIViewController {
     }
     
     func transitionToBigPlusButton() {
-        guard isSetupForDisplayingUrls else { return }
+        guard isSetupForDisplayingUrls else {
+            plusButton.isUserInteractionEnabled = true
+            return
+        }
         setupForCentralPlusButton()
         let containerView = self.containerView!
         UIView.animate(withDuration: 0.2, animations: { [weak self] in
@@ -120,6 +135,7 @@ class DocumentUrlViewController: UIViewController {
         }) { (success) in
             containerView.isHidden = true
         }
+        plusButton.isUserInteractionEnabled = true
     }
     
     @objc func transitionToDisplayUrls() {
@@ -168,6 +184,22 @@ class DocumentUrlViewController: UIViewController {
 }
 
 extension DocumentUrlViewController : F4SDocumentUrlModelDelegate {
+    func documentUrlModelFailedToFetchDocuments(_ model: F4SDocumentUrlModel, error: Error) {
+        displayTryAgain { [weak self] in
+            self?.documentUrlModel.fetchDocumentsForUrl()
+        }
+    }
+    
+    func displayTryAgain(completion: @escaping ()->()) {
+        DispatchQueue.main.async { [weak self] in
+            let alert = UIAlertController(title: "No internet connection", message: "Please make sure you have an internet connection and try again", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Try again", style: .default, handler: { (action) in
+                completion()
+            }))
+            self?.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     func documentUrlModelFetchedDocuments(_ model: F4SDocumentUrlModel) {
         DispatchQueue.main.async { [weak self] in
             self?.setupForFetchedData()

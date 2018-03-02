@@ -98,6 +98,7 @@ public protocol F4SDocumentUrlModelDelegate {
     func documentUrlModel(_ model: F4SDocumentUrlModel, updated: F4SDocumentUrlDescriptor)
     func documentUrlModel(_ model: F4SDocumentUrlModel, created: F4SDocumentUrlDescriptor)
     func documentUrlModelFetchedDocuments(_ model: F4SDocumentUrlModel)
+    func documentUrlModelFailedToFetchDocuments(_ model: F4SDocumentUrlModel, error: Error)
 }
 
 public class F4SDocumentUrlModel {
@@ -146,6 +147,11 @@ public class F4SDocumentUrlModel {
         }
         self.delegate = delegate
         self.urlDescriptors = []
+        fetchDocumentsForUrl()
+    }
+    
+    public func fetchDocumentsForUrl() {
+        self.urlDescriptors = []
         self.documentService?.getDocumentsForPlacement(completion: documentsFetched)
     }
     
@@ -159,11 +165,11 @@ public class F4SDocumentUrlModel {
         let putJson = F4SPutDocumentsUrlJson(documents: documentUrls)
         documentService?.putDocumentsForPlacement(documentDescriptors: putJson, completion: { (result) in
             switch result {
-            case .success(let msg):
-                print(msg)
+            case .success(_):
                 completion(true)
             case .error(let error):
                 print(error)
+                completion(false)
                 break
             }
         })
@@ -171,8 +177,8 @@ public class F4SDocumentUrlModel {
     
     func documentsFetched(networkResult: F4SNetworkResult<F4SGetDocumentUrlJson>) {
         switch networkResult {
-        case .error(_):
-            break
+        case .error(let error):
+            delegate?.documentUrlModelFailedToFetchDocuments(self, error: error)
         case .success(let documentDownload):
             urlDescriptors = []
             if let documentUrls = documentDownload.documents {
