@@ -7,9 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
-import Alamofire
-import KeychainSwift
 
 public class F4SRecommendationService : F4SDataTaskService {
     public static let apiName = "recommend"
@@ -19,9 +16,6 @@ public class F4SRecommendationService : F4SDataTaskService {
     }
 
     public func fetch(completion: @escaping (F4SNetworkResult<SuccessType>) -> ()) {
-//        let rec = Recommendation(companyUUID: "3ba32ef4d8864b27a306dd42898d6306", sortIndex: 0)
-//        let res = F4SNetworkResult.success([rec])
-//        completion(res)
         super.get(attempting: "Get recommendations", completion: completion)
     }
 }

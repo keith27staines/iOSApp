@@ -20,10 +20,44 @@ public protocol F4SApiService {
 
 extension F4SApiService {
     
+    public func putDataTask<A:Codable>(putObject:A, attempting: String, completion: @escaping (F4SNetworkResult<String>) -> ()) -> URLSessionDataTask {
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        do {
+            let encoder = JSONEncoder()
+            request.httpBody = try encoder.encode(putObject)
+   
+            
+        } catch {
+            let networkError = F4SNetworkError(error: error, attempting: attempting)
+            completion(F4SNetworkResult.error(networkError))
+        }
+        
+        let task = session.dataTask(with: request, completionHandler: {data, response, error -> Void in
+            if let error = error as NSError? {
+                let result = F4SNetworkResult<String>.error(F4SNetworkError(error: error, attempting: attempting))
+                completion(result)
+                return
+            }
+            let httpResponse = response as! HTTPURLResponse
+            if let error = F4SNetworkError(response: httpResponse, attempting: attempting) {
+                let result = F4SNetworkResult<String>.error(error)
+                completion(result)
+                return
+            }
+            completion(F4SNetworkResult.success("OK"))
+        })
+        return task
+    }
+    
     /// Returns a URLSessionDatatask configued to perform a get against the workfinder api
     /// - parameter attempting: A high level description of the task being performed
     /// - parameter completion: The callback to return the result of the operation
-    public func dataTask<A>(attempting: String, completion: @escaping (F4SNetworkResult<A>) -> ()) -> URLSessionDataTask {
+    public func getDataTask<A>(attempting: String, completion: @escaping (F4SNetworkResult<A>) -> ()) -> URLSessionDataTask {
         let task = session.dataTask(with: self.url) { (data, response, error) in
             if let error = error as NSError? {
                 let result = F4SNetworkResult<A>.error(F4SNetworkError(error: error, attempting: attempting))
@@ -82,8 +116,8 @@ public class F4SDataTaskService : F4SApiService {
     
     public let session: URLSession
     public let baseUrl: URL
-    public let apiName: String
-    
+    public var apiName: String { return self._apiName }
+    private let _apiName: String
     public var url : URL {
         return URL(string: baseUrl.absoluteString + "/" + apiName)!
     }
@@ -93,7 +127,7 @@ public class F4SDataTaskService : F4SApiService {
     /// - parameter apiName: The name of the api being called
     /// - parameter objectType: The type of the object that is to be instantiated from the response
     public init(baseURLString: String, apiName: String, objectType: Decodable.Type) {
-        self.apiName = apiName
+        self._apiName = apiName
         self.baseUrl = URL(string: baseURLString)!
         session = URLSession(configuration: F4SRecommendationService.defaultConfiguration)
     }
@@ -103,7 +137,19 @@ public class F4SDataTaskService : F4SApiService {
     /// - parameter completion: Returns a result containing either the http response data or error information
     internal func get<A>(attempting: String, completion: @escaping (F4SNetworkResult<A>) -> ()) {
         task?.cancel()
-        task = dataTask(attempting: attempting, completion: { (result) in
+        task = getDataTask(attempting: attempting, completion: { (result) in
+            completion(result)
+        })
+        task?.resume()
+    }
+    
+    /// Performs an HTTP post request
+    /// - parameter putObject: The codable (json encodable) object to be posted
+    /// - parameter attempting: A short high level description of the reason the operation is being performed
+    /// - parameter completion: Returns a result containing either the http response data or error information
+    internal func put<A: Codable>(putObject: A, attempting: String, completion: @escaping (F4SNetworkResult<String>) -> ()) {
+        task?.cancel()
+        task = putDataTask(putObject: putObject, attempting: attempting, completion: { (result) in
             completion(result)
         })
         task?.resume()

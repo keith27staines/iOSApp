@@ -48,8 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
         
-        let bn = Bundle.main.bundleIdentifier
-        print("bundle name: \(bn)")
+        print("bundle name: \(Bundle.main.bundleIdentifier ?? "No bundle")")
         
         log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
         continueIfVersionCheckPasses(application: application, continueWith: versionAuthorizedToContinue)
@@ -239,13 +238,6 @@ extension AppDelegate {
         }
         let token = tokenParts.joined()
         UserService.sharedInstance.enablePushNotificationForUser(withDeviceToken: token, putCompleted: { success, result in
-            self.deviceToken = token
-            if !success {
-                let alert = UIAlertController(title: "Failed to enable push notification", message: "Server call failed", preferredStyle: UIAlertControllerStyle.actionSheet)
-                
-                CustomNavigationHelper.sharedInstance.topMostViewController()?.present(alert, animated: true, completion: nil)
-                
-            }
         })
     }
     

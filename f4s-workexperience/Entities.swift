@@ -8,6 +8,12 @@
 
 import UIKit
 
+struct ApplicationContext {
+    var user: User?
+    var company: Company?
+    var placement: Placement?
+}
+
 struct User {
     var email: String
     var firstName: String
