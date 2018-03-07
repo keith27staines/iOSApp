@@ -209,6 +209,14 @@ class CustomNavigationHelper {
         
         return drawerController!
     }
+    
+    func presentHiddenDebugController(parentCtrl: UIViewController) {
+        let debugStoryboard = UIStoryboard(name: "Debug", bundle: nil)
+        guard let navigationController = debugStoryboard.instantiateInitialViewController() else {
+            return
+        }
+        parentCtrl.present(navigationController, animated: true, completion: nil)
+    }
 
     func presentCoverLetterController(parentCtrl: UIViewController, currentCompany: Company) {
         let coverLetterStoryboard = UIStoryboard(name: "CoverLetter", bundle: nil)

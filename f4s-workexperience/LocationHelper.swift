@@ -40,7 +40,6 @@ class LocationHelper {
                 case .success(let data):
                     let json = JSON(data)
                     let status = json["status"].string
-                    print(json)
                     if status == "OK" {
                         var results = json["results"].array
 
@@ -59,7 +58,6 @@ class LocationHelper {
                                 case .success(let data):
                                     let json = JSON(data)
                                     let status = json["status"].string
-                                    print(json)
                                     if status == "OK" {
                                         var results = json["results"].array
 
@@ -72,19 +70,19 @@ class LocationHelper {
                                     }
                                 case .failure(let error):
                                     completion(false, .error("Location not found."))
-                                    debugPrint(error)
+                                    log.error(error)
                                 }
                             }
                         }
                     }
                 case .failure(let error):
                     completion(false, .error("Location not found."))
-                    debugPrint(error)
+                    log.error(error)
                 }
             }
         } else {
             completion(false, .error("An error occurred."))
-            debugPrint("invalid encoded string in googleGeocodeAddressString")
+            log.error("invalid encoded string in googleGeocodeAddressString")
         }
     }
 
@@ -119,18 +117,18 @@ class LocationHelper {
                         completion(false, .error("Address was not found"))
                     }
                 } else if status == "ZERO_RESULTS" {
-                    debugPrint("address not found")
+                    log.debug("address not found")
                     completion(false, .error("Address was not found"))
                 }
 
             case .failure(let error):
                 completion(false, .error("Error"))
-                debugPrint(error)
+                log.debug(error)
             }
             }
         } else {
             completion(false, .error("Error"))
-            debugPrint("invalid encoded string in googleGeocodeAddressString")
+            log.debug("invalid encoded string in googleGeocodeAddressString")
         }
     }
 
@@ -161,7 +159,7 @@ class LocationHelper {
         let geoCoder = CLGeocoder()
         geoCoder.reverseGeocodeLocation(location, completionHandler: { placemarks, error in
             if let err = error {
-                print("Error Reverse Geocoding Location: \(err.localizedDescription)")
+                log.debug("Error Reverse Geocoding Location: \(err.localizedDescription)")
                 completion(nil, error as NSError?)
                 return
             }

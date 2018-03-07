@@ -1,0 +1,42 @@
+//
+//  F4SLogViewController.swift
+//  f4s-workexperience
+//
+//  Created by Keith Dev on 07/03/2018.
+//  Copyright © 2018 Founders4Schools. All rights reserved.
+//
+
+import UIKit
+
+class F4SLogViewController: UIViewController {
+
+    @IBOutlet weak var logTextView: UITextView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        logTextView.text = F4SDebug.shared?.textCombiningHistoryAndSessionLog() ?? "Log unavailable because of a configuration error"
+    }
+
+    @IBAction func shareButtonPressed(_ sender: Any) {
+        guard let text = logTextView.text, text.isEmpty == false else {
+            return
+        }
+        
+        // set up activity view controller
+        let textToShare = [ text ]
+        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        
+        // exclude some activity types from the list (optional)
+        activityViewController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
+        
+        // present the view controller
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+
+}

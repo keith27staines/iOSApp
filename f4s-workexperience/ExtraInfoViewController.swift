@@ -481,8 +481,6 @@ extension ExtraInfoViewController {
             if let navigCtrl = self.navigationController {
                 CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: ContentType.consent)
             }
-        } else {
-            print("tapped dobInfoLabel")
         }
     }
 
@@ -512,8 +510,6 @@ extension ExtraInfoViewController {
             if let navigCtrl = self.navigationController {
                 CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: ContentType.voucher)
             }
-        } else {
-            print("tapped noVoucherInfoLabel")
         }
     }
 

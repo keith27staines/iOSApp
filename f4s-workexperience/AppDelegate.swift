@@ -45,12 +45,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        do {
+            let f4sDebug = try F4SDebug()
+            F4SDebug.shared = f4sDebug
+        } catch (let error) {
+            assertionFailure("Failed to initialize logger: \(error)")
+        }
+        log.debug("\n\n\n**************")
+        log.debug("Workfinder launched in environement \(Config.ENVIRONMENT)")
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
-        
-        print("bundle name: \(Bundle.main.bundleIdentifier ?? "No bundle")")
-        
-        log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
         continueIfVersionCheckPasses(application: application, continueWith: versionAuthorizedToContinue)
         return true
     }
@@ -61,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if succeeded || UserService.sharedInstance.hasAccount() {
                 self?.onUserConfirmedToExist(application: application)
             } else {
-                log.debug("Couldn't create a user")
+                log.debug("Couldn't register user")
             }
         })
     }
@@ -94,13 +98,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func printDebugUserInfo() {
-        print("********************************************************")
-        print("Vendor id = \(UIDevice.current.identifierForVendor!)")
+        log.debug("***************")
+        log.debug("Vendor id = \(UIDevice.current.identifierForVendor!)")
         let userIdKey = UserDefaultsKeys.userUuid
         let k = KeychainSwift()
         let userID = k.get(userIdKey)!
-        print("User id = \(userID)")
-        print("********************************************************")
+        log.debug("User id = \(userID)")
+        log.debug("***************")
     }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
@@ -113,7 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setInvokingUrl(_ url: URL) {
-        print("Invoked from url: \(url.absoluteString)")
+        log.debug("Invoked from url: \(url.absoluteString)")
         guard let universalLink = UniversalLink(url: url) else {
             return
         }
@@ -153,6 +157,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
+        F4SDebug.shared?.updateHistory()
         self.saveContext()
     }
 
@@ -228,6 +233,7 @@ extension AppDelegate {
             application.registerForRemoteNotifications()
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ApplicationDidRegisterForRemoteNotificationsNotification"), object: self)
         } else {
+            log.debug("User declined remote notifications")
             UserDefaults.standard.set(true, forKey: UserDefaultsKeys.didDeclineRemoteNotifications)
         }
     }
@@ -242,9 +248,7 @@ extension AppDelegate {
     }
     
     func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        let alert = UIAlertController(title: "Failed to Register for push notifications", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.actionSheet)
-        
-        CustomNavigationHelper.sharedInstance.topMostViewController()?.present(alert, animated: true, completion: nil)
+        log.error("Failed to register with error \(error)")
     }
     
     func application(_: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
@@ -266,7 +270,7 @@ extension AppDelegate {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         self.application(application, didReceiveRemoteNotification: userInfo) {
             _ in
-            print("Recieved remote notification")
+            log.debug("Recieved remote notification with userInfo: \(userInfo)")
         }
     }
     

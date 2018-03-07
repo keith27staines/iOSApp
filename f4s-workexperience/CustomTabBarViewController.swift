@@ -97,7 +97,6 @@ extension CustomTabBarViewController {
     }
 
     func startNotifier() {
-        print("--- start notifier")
         do {
             try reachability?.startNotifier()
         } catch {
@@ -106,7 +105,6 @@ extension CustomTabBarViewController {
     }
 
     func stopNotifier() {
-        print("--- stop notifier")
         reachability?.stopNotifier()
         NotificationCenter.default.removeObserver(self, name: Notification.Name.reachabilityChanged, object: nil)
         reachability = nil
@@ -117,10 +115,7 @@ extension CustomTabBarViewController {
             return
         }
         if reachability.isReachableByAnyMeans {
-            debugPrint("network is reachable")
             self.checkForUnreadMessages()
-        } else {
-            debugPrint("network not reachable")
         }
     }
 }
@@ -160,10 +155,10 @@ extension CustomTabBarViewController {
                 }
                 break
             case .error(let err):
-                debugPrint(err)
+                log.error(err)
                 break
             case .deffinedError(let err):
-                debugPrint(err)
+                log.error(err)
                 break
             }
         }

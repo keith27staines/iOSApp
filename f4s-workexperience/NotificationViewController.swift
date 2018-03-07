@@ -127,7 +127,7 @@ extension NotificationViewController {
         self.dismiss(animated: true, completion: nil)
         guard let viewCtrl = self.presentingViewController,
             let company = self.currentCompany else {
-            debugPrint("Can't present cover letter")
+            log.error("Can't present cover letter")
             return
         }
         
@@ -144,7 +144,7 @@ extension NotificationViewController {
 
             guard let viewCtrl = self.presentingViewController,
                 let company = self.currentCompany else {
-                debugPrint("Can't present cover letter")
+                log.error("Can't present cover letter")
                 return
             }
             CustomNavigationHelper.sharedInstance.presentCoverLetterController(parentCtrl: viewCtrl, currentCompany: company)
