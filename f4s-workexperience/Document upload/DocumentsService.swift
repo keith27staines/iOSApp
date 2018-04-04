@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import Alamofire
-import KeychainSwift
 
 public protocol F4SDocumentServiceProtocol {
     var apiName: String { get }
@@ -19,14 +17,11 @@ public protocol F4SDocumentServiceProtocol {
 public class F4SPlacementDocumentsService : F4SDataTaskService {
     public typealias SuccessType = [F4SDocumentUrl]
     
-    override public var apiName: String {
-        return "placement/\(self.placementUuid)/documents"
-    }
-    
     public let placementUuid: String
     
     public init(placementUuid: F4SUUID) {
         self.placementUuid = placementUuid
+        let apiName = "placement/\(placementUuid)/documents"
         super.init(baseURLString: Config.BASE_URL, apiName: apiName, objectType: SuccessType.self)
     }
 }

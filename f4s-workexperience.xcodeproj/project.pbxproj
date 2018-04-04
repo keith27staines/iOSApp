@@ -182,6 +182,10 @@
 		FCA6D2B61FA88CE10037962B /* PartnerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6D2B51FA88CE00037962B /* PartnerService.swift */; };
 		FCB46F00204E7DCC00F0779F /* F4SDebugModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46EFF204E7DCC00F0779F /* F4SDebugModel.swift */; };
 		FCB46F02204FD86D00F0779F /* F4SLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46F01204FD86D00F0779F /* F4SLogViewController.swift */; };
+		FCB46F042051365400F0779F /* F4SFeatureSwitchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46F032051365400F0779F /* F4SFeatureSwitchesViewController.swift */; };
+		FCB46F0820513D0100F0779F /* F4SFeatureSwitchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46F0720513D0100F0779F /* F4SFeatureSwitchModel.swift */; };
+		FCB46F0A20516FD200F0779F /* F4SFeatureSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46F0920516FD200F0779F /* F4SFeatureSwitchTableViewCell.swift */; };
+		FCB46F0C20518EE900F0779F /* F4SFeatureSwitchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46F0B20518EE900F0779F /* F4SFeatureSwitchService.swift */; };
 		FCB6D9361F75056100B8C268 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCB6D9351F75056000B8C268 /* Branding.plist */; };
 		FCC5EBB61F449C310085CE15 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FCC5EBB51F449C310085CE15 /* README.md */; };
 		FCC753EE1F80F26200E9ECD6 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC753ED1F80F26200E9ECD6 /* MapModel.swift */; };
@@ -452,6 +456,10 @@
 		FCA6D2B51FA88CE00037962B /* PartnerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerService.swift; sourceTree = "<group>"; };
 		FCB46EFF204E7DCC00F0779F /* F4SDebugModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDebugModel.swift; sourceTree = "<group>"; };
 		FCB46F01204FD86D00F0779F /* F4SLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SLogViewController.swift; sourceTree = "<group>"; };
+		FCB46F032051365400F0779F /* F4SFeatureSwitchesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SFeatureSwitchesViewController.swift; sourceTree = "<group>"; };
+		FCB46F0720513D0100F0779F /* F4SFeatureSwitchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SFeatureSwitchModel.swift; sourceTree = "<group>"; };
+		FCB46F0920516FD200F0779F /* F4SFeatureSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SFeatureSwitchTableViewCell.swift; sourceTree = "<group>"; };
+		FCB46F0B20518EE900F0779F /* F4SFeatureSwitchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SFeatureSwitchService.swift; sourceTree = "<group>"; };
 		FCB6D9351F75056000B8C268 /* Branding.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
 		FCC5EBB51F449C310085CE15 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FCC753ED1F80F26200E9ECD6 /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
@@ -1133,6 +1141,10 @@
 				FCB46EFF204E7DCC00F0779F /* F4SDebugModel.swift */,
 				FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */,
 				FCB46F01204FD86D00F0779F /* F4SLogViewController.swift */,
+				FCB46F032051365400F0779F /* F4SFeatureSwitchesViewController.swift */,
+				FCB46F0720513D0100F0779F /* F4SFeatureSwitchModel.swift */,
+				FCB46F0920516FD200F0779F /* F4SFeatureSwitchTableViewCell.swift */,
+				FCB46F0B20518EE900F0779F /* F4SFeatureSwitchService.swift */,
 			);
 			path = HiddenDebugScreen;
 			sourceTree = "<group>";
@@ -1307,7 +1319,7 @@
 			attributes = {
 				CLASSPREFIX = F4S;
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = Founders4Schools;
 				TargetAttributes = {
 					40E78E121DD31A86000A3776 = {
@@ -1561,6 +1573,7 @@
 				40C1A4E61DDB356B000F80AA /* CustomTabBarViewController.swift in Sources */,
 				FCA53B921FE00CB5009F6DB0 /* Versioning.swift in Sources */,
 				D54E10071E044BC100A51560 /* ProcessedMessagesViewController.swift in Sources */,
+				FCB46F0A20516FD200F0779F /* F4SFeatureSwitchTableViewCell.swift in Sources */,
 				FC6C11C0202C4974002C8EA5 /* TemplateHelper.swift in Sources */,
 				40A28CB21E1D1D200077D490 /* TimelineEntryTableViewCell.swift in Sources */,
 				FC6C11BA202870D6002C8EA5 /* F4SGrammar.swift in Sources */,
@@ -1604,6 +1617,7 @@
 				40E78EA01DD5E208000A3776 /* LocationHelper.swift in Sources */,
 				40C1A5231DDF5ACE000F80AA /* POIItem.m in Sources */,
 				206F8F761E1D29740024937B /* MessageService.swift in Sources */,
+				FCB46F042051365400F0779F /* F4SFeatureSwitchesViewController.swift in Sources */,
 				40C1A52D1DE84410000F80AA /* TriangleView.swift in Sources */,
 				205EB20B1DDB161D00034424 /* DatabaseOperations.swift in Sources */,
 				40E78E8C1DD32C3C000A3776 /* LoadingOverlay.swift in Sources */,
@@ -1615,6 +1629,7 @@
 				40E78E701DD32BD4000A3776 /* MenuHelper.swift in Sources */,
 				FCE20CC2203C12F300CA821D /* UrlTableViewCell.swift in Sources */,
 				FCA24C111F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift in Sources */,
+				FCB46F0820513D0100F0779F /* F4SFeatureSwitchModel.swift in Sources */,
 				2037B0A71DEC3C3B00A9DE3E /* InterestCoreDataManager.swift in Sources */,
 				FCB46F00204E7DCC00F0779F /* F4SDebugModel.swift in Sources */,
 				204C89551DF5A36100D8493A /* TemplateChoiceDB.swift in Sources */,
@@ -1629,6 +1644,7 @@
 				202091AC1DF84BCF003F5B48 /* SocialShareItemSource.swift in Sources */,
 				40E78E981DD39275000A3776 /* MapViewController.swift in Sources */,
 				204C896D1DF5F08500D8493A /* CompanyOtherTableViewCell.swift in Sources */,
+				FCB46F0C20518EE900F0779F /* F4SFeatureSwitchService.swift in Sources */,
 				204C89751DF5F0A100D8493A /* EditFooterView.swift in Sources */,
 				2037B0A11DE84EEF00A9DE3E /* PlacementService.swift in Sources */,
 				2037B0B81DEC8A2400A9DE3E /* TemplateService.swift in Sources */,
@@ -1942,6 +1958,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1949,6 +1966,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -2049,6 +2067,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -2056,6 +2075,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -2150,6 +2170,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -2157,6 +2178,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -2256,6 +2278,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -2263,6 +2286,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

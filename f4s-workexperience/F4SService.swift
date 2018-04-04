@@ -84,6 +84,7 @@ extension F4SApiService {
                 return
             } catch (let error) {
                 let f4sError = F4SNetworkDataErrorType.undecodableData(data).dataError(attempting: attempting + error.localizedDescription)
+                log.debug("error attempting \(attempting), \n\(f4sError)")
                 completion(F4SNetworkResult.error(f4sError))
                 return
             }

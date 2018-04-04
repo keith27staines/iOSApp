@@ -14,6 +14,9 @@ class F4SDebugViewController: UIViewController {
     
     @IBOutlet weak var viewLogButton: UIButton!
     
+    @IBOutlet weak var featureSwitchesButton: UIButton!
+    @IBAction func featureSwitchesButtonPressed(_ sender: Any) {
+    }
     @IBOutlet weak var returnToWorkfinder: UIButton!
     
     @IBAction func returnToWorkfinderButtonPressed(_ sender: Any) {
@@ -27,6 +30,8 @@ class F4SDebugViewController: UIViewController {
     func applyStyle() {
         F4SButtonStyler.apply(style: .primary, button: viewLogButton)
         F4SButtonStyler.apply(style: .secondary, button: returnToWorkfinder)
+        F4SButtonStyler.apply(style: .secondary, button: featureSwitchesButton)
+        
         F4SBackgroundViewStyler.apply(style: .standardPageBackground, backgroundView: self.view)
     }
 }
