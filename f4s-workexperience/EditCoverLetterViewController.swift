@@ -14,18 +14,15 @@ class EditCoverLetterViewController: UIViewController {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var coverLetterTableView: UITableView!
 
-    fileprivate var arrayTextEdit = [String]()
     fileprivate let coverLetterCellIdentifier = "CoverLetterIdentifier"
     fileprivate let datePickerCellIdentifier = "DatePickerCellIdentifier"
     fileprivate let bigFooterSize = CGFloat(56)
     fileprivate let smallFooterSize = CGFloat(21)
-    fileprivate var numberOfRowsInSection2 = 4
+    fileprivate var numberOfRowsInSection2 = 2
     fileprivate let datePickerSize: CGFloat = 200
 
     var isVisibleStartDatePicker = false
     var isVisibleEndDatePicker = false
-    let startDatePicker: UIDatePicker = UIDatePicker()
-    let endDatePicker: UIDatePicker = UIDatePicker()
 
     var currentTemplate: TemplateEntity!
     var selectedTemplateBlanks: [TemplateBlank] = []
@@ -40,12 +37,14 @@ class EditCoverLetterViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupNavigationBar()
+    }
+    
     override func viewWillAppear(_: Bool) {
         super.viewWillAppear(true)
-
-        self.navigationController?.navigationBar.barTintColor = UIColor(netHex: Colors.white)
-        self.navigationController?.isNavigationBarHidden = false
-        self.navigationItem.backBarButtonItem?.isEnabled = true
+        setupNavigationBar()
 
         coverLetterTableView.reloadData()
         let previouslySelectedBlanks = TemplateChoiceDBOperations.sharedInstance.getSelectedTemplateBlanks()
@@ -61,45 +60,36 @@ class EditCoverLetterViewController: UIViewController {
         }
         setUpdateButtonState()
     }
-    
+}
 
+extension EditCoverLetterViewController :  F4SCalendarCollectionViewControllerDelegate {
+    func calendarDidChangeRange(_ calendar: F4SCalendarCollectionViewController, firstDay: F4SCalendarDay?, lastDay: F4SCalendarDay?) {
+        guard let firstDay = firstDay, let lastDay = lastDay else {
+            self.saveDataForAttribute(data: "", attribute: .StartDate)
+            self.saveDataForAttribute(data: "", attribute: .EndDate)
+            return
+        }
+        let startDate = firstDay.interval.start
+        let endDate = lastDay.interval.end
+        self.saveDataForAttribute(data: startDate.dateToStringRfc3339()!, attribute: .StartDate)
+        self.saveDataForAttribute(data: endDate.dateToStringRfc3339()!, attribute: .EndDate)
+        coverLetterTableView.reloadRows(at: [NSIndexPath(row: 0, section: 2) as IndexPath], with: .none)
+        setUpdateButtonState()
+    }
 }
 
 // MARK: -UITableViewDelegate,UITableViewDataSource
 extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in _: UITableView) -> Int {
-        return 4
+        return 5
     }
 
     func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 2 {
-            return numberOfRowsInSection2
-        } else {
-            return 1
-        }
+        guard let _ = EditableSection(rawValue: section) else { return 0 }
+        return 1
     }
 
     func tableView(_: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 2 {
-            if indexPath.row == 0 || indexPath.row == 2 {
-                return CGFloat(44)
-            }
-            if indexPath.row == 1 {
-                if isVisibleStartDatePicker {
-                    return datePickerSize
-                } else {
-                    return CGFloat(0)
-                }
-            }
-            if indexPath.row == 3 {
-                if isVisibleEndDatePicker {
-                    return datePickerSize
-                } else {
-                    return CGFloat(0)
-                }
-            }
-        }
-
         return CGFloat(44)
     }
 
@@ -108,20 +98,18 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
             return UITableViewCell()
         }
         cell.backgroundColor = UIColor.white
-        cell.editTextLabel.attributedText = NSAttributedString(string: arrayTextEdit[indexPath.row], attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.black])
-
         cell.arrowImageView.isHidden = false
         cell.arrowImageView.image = UIImage(named: "rightArrow")
 
         cell.editTextLabel.isHidden = false
         cell.editValueLabel.isHidden = false
         cell.arrowImageView.isHidden = false
-
-        switch indexPath.section
+        
+        guard let editableSection = EditableSection(rawValue: indexPath.section) else { return cell }
+        switch editableSection
         {
-        case 0:
-
-            cell.editTextLabel.text = arrayTextEdit[0]
+        case .personalAttributes:
+            cell.editTextLabel.text = NSLocalizedString("Personal attributes", comment: "")
             let attributeValue = self.getValueForAttribute(attribute: .PersonalAttributes)
             if attributeValue.isEmpty {
                 cell.editValueLabel.isHidden = true
@@ -130,9 +118,9 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
                 cell.editValueLabel.text = "\(attributeValue) chosen"
             }
 
-        case 1:
+        case .jobRole:
 
-            cell.editTextLabel.text = arrayTextEdit[1]
+            cell.editTextLabel.text = NSLocalizedString("Job role", comment: "")
             let attributeValue = self.getValueForAttribute(attribute: .JobRole)
             if attributeValue.isEmpty {
                 cell.editValueLabel.isHidden = true
@@ -141,36 +129,19 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
                 cell.editValueLabel.text = attributeValue
             }
 
-        case 2:
-            cell.arrowImageView.isHidden = true
-            if indexPath.row == 0 {
-                cell.editTextLabel.text = arrayTextEdit[2]
-                let startDateString = self.getValueForAttribute(attribute: .StartDate)
-                if !startDateString.isEmpty, let startDate = Date.dateFromRfc3339(string: startDateString) {
-                    cell.editValueLabel.text = self.dateFormatter?.string(from: startDate)
-                } else {
-                    cell.editValueLabel.text = ""
-                }
-            } else if indexPath.row == 1 {
-                cell.editTextLabel.isHidden = true
-                cell.editValueLabel.isHidden = true
-                setStartDatePicker(cell: cell)
-            } else if indexPath.row == 2 {
-                cell.editTextLabel.text = arrayTextEdit[3]
-                let endDateString = self.getValueForAttribute(attribute: .EndDate)
-                if !endDateString.isEmpty, let endDate = Date.dateFromRfc3339(string: endDateString) {
-                    cell.editValueLabel.text = self.dateFormatter?.string(from: endDate)
-                } else {
-                    cell.editValueLabel.text = ""
-                }
-            } else {
-                cell.editTextLabel.isHidden = true
-                cell.editValueLabel.isHidden = true
-                setEndDatePicker(cell: cell)
-            }
-        case 3:
+        case .availabilityCalendar:
+            cell.editTextLabel.text = NSLocalizedString("Availability dates", comment: "")
+            let startDate = getStartDate()
+            let endDate = getEndDate()
+            cell.editValueLabel.text = descriptorForDates(start: startDate, end: endDate)
+            
+        case .availabilityHours:
+            cell.editTextLabel.text = NSLocalizedString("Availability days/hours", comment: "")
+            cell.editValueLabel.text = "(optional) Choose"
 
-            cell.editTextLabel.text = arrayTextEdit[4]
+        case .skills:
+
+            cell.editTextLabel.text = NSLocalizedString("Employment skills", comment: "")
             let attributeValue = self.getValueForAttribute(attribute: .EmploymentSkills)
             if attributeValue.isEmpty {
                 cell.editValueLabel.isHidden = true
@@ -178,95 +149,103 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
                 cell.editValueLabel.isHidden = false
                 cell.editValueLabel.text = "\(attributeValue) chosen"
             }
-
-        default:
-            cell.editTextLabel.text = arrayTextEdit[0]
         }
 
         cell.editValueLabel.attributedText = NSAttributedString(string: cell.editValueLabel.text!, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.mediumGray)])
 
         return cell
     }
+    
+    func descriptorForDates(start: Date?, end: Date?) -> String {
+        guard let start = start, let end = end else {
+            return "Choose"
+        }
+        let txtStart = dateFormatter!.string(from: start)
+        let txtEnd = dateFormatter!.string(from: end.addingTimeInterval(-1))
+        if txtStart == txtEnd {
+            return txtStart
+        } else {
+            return txtStart + " | " + txtEnd
+        }
+    }
+    
+    func getStartDate() -> Date? {
+        let startDateString = self.getValueForAttribute(attribute: .StartDate)
+        if !startDateString.isEmpty, let startDate = Date.dateFromRfc3339(string: startDateString) {
+            return startDate
+        }
+        return nil
+    }
+    
+    func getEndDate() -> Date? {
+        let endDateString = self.getValueForAttribute(attribute: .EndDate)
+        if !endDateString.isEmpty, let endDate = Date.dateFromRfc3339(string: endDateString) {
+            return endDate
+        }
+        return nil
+    }
+    
+    enum EditableSection: Int {
+        case personalAttributes = 0
+        case jobRole = 1
+        case availabilityCalendar = 2
+        case availabilityHours = 3
+        case skills = 4
+    }
 
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case 0:
-            if isVisibleStartDatePicker {
-                isVisibleStartDatePicker = false
-            } else if isVisibleEndDatePicker {
-                isVisibleEndDatePicker = false
-            } else {
-                if let navCtrl = self.navigationController, let template = currentTemplate {
-                    // go to personal attributes page
-                    CustomNavigationHelper.sharedInstance.pushChooseAttributes(navCtrl, currentTemplate: template, attribute: .PersonalAttributes)
-                }
-            }
-            coverLetterTableView.reloadData()
-        case 1:
-            if isVisibleStartDatePicker {
-                isVisibleStartDatePicker = false
-            } else if isVisibleEndDatePicker {
-                isVisibleEndDatePicker = false
-            } else {
-                if let navCtrl = self.navigationController, let template = currentTemplate {
-                    // go to job role page
-                    CustomNavigationHelper.sharedInstance.pushChooseAttributes(navCtrl, currentTemplate: template, attribute: .JobRole)
-                }
-            }
-            coverLetterTableView.reloadData()
-        case 2:
-            if indexPath.row == 0 {
-                if isVisibleStartDatePicker {
-                    isVisibleStartDatePicker = false
-                } else if isVisibleEndDatePicker {
-                    isVisibleEndDatePicker = false
-                    isVisibleStartDatePicker = true
-                } else {
-                    isVisibleStartDatePicker = true
-                }
-            } else if indexPath.row == 2 {
-                if isVisibleStartDatePicker {
-                    isVisibleStartDatePicker = false
-                    isVisibleEndDatePicker = true
-                } else if isVisibleEndDatePicker {
-                    isVisibleEndDatePicker = false
-                } else {
-                    isVisibleEndDatePicker = true
-                }
-            }
-            coverLetterTableView.reloadData()
-
-        case 3:
-            if isVisibleStartDatePicker {
-                isVisibleStartDatePicker = false
-            } else if isVisibleEndDatePicker {
-                isVisibleEndDatePicker = false
-            } else {
-                if let navCtrl = self.navigationController, let template = currentTemplate {
-                    // go to employment skills
-                    CustomNavigationHelper.sharedInstance.pushChooseAttributes(navCtrl, currentTemplate: template, attribute: .EmploymentSkills)
-                }
-            }
-            coverLetterTableView.reloadData()
-
-        default: break
+        guard let editableSection = EditableSection(rawValue: indexPath.section) else { return }
+        guard let navCtrl = self.navigationController, let template = currentTemplate else { return }
+        switch editableSection {
+        case .personalAttributes:
+            CustomNavigationHelper.sharedInstance.pushChooseAttributes(navCtrl, currentTemplate: template, attribute: .PersonalAttributes)
+        case .jobRole:
+            CustomNavigationHelper.sharedInstance.pushChooseAttributes(navCtrl, currentTemplate: template, attribute: .JobRole)
+            
+        case .availabilityCalendar:
+            pushCalendar(navigationController: navCtrl)
+            
+        case .availabilityHours:
+            pushDaysAndHours(navigationController: navCtrl)
+            
+        case .skills:
+            CustomNavigationHelper.sharedInstance.pushChooseAttributes(navCtrl, currentTemplate: template, attribute: .EmploymentSkills)
         }
+        coverLetterTableView.reloadData()
     }
 
     func tableView(_: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        switch section
+        guard let editableSection = EditableSection(rawValue: section) else { return 0 }
+        switch editableSection
         {
-        case 0:
+        case .personalAttributes:
             return bigFooterSize
-        case 1:
+        case .jobRole:
             return smallFooterSize
-        case 2:
-            return smallFooterSize
-        case 3:
+        case .availabilityCalendar:
             return bigFooterSize
-        default:
-            return CGFloat(0)
+        case .availabilityHours:
+            return bigFooterSize
+        case .skills:
+            return bigFooterSize
         }
+    }
+    
+    func pushDaysAndHours(navigationController: UINavigationController) {
+        let storyboard = UIStoryboard(name: "F4SDaysAndHours", bundle: nil)
+        guard let vc = storyboard.instantiateInitialViewController() as? F4SDaysAndHoursViewController else {
+            return
+        }
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func pushCalendar(navigationController: UINavigationController) {
+        let storyboard = UIStoryboard(name: "F4SCalendar", bundle: nil)
+        guard let vc = storyboard.instantiateInitialViewController() as? F4SCalendarContainerViewController else {
+            return
+        }
+        vc.delegate = self
+        navigationController.pushViewController(vc, animated: true)
     }
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -275,25 +254,38 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
 
         EditFooterView.footerString = ""
         smallFooterView = EditFooterView(frame: CGRect(x: 0, y: 0, width: self.coverLetterTableView.frame.size.width, height: smallFooterSize))
-
-        switch section {
-        case 0:
+        
+        guard let editableSection = EditableSection(rawValue: section) else { return smallFooterView }
+        
+        switch editableSection {
+        case .personalAttributes:
             let string = NSLocalizedString("Choose up to \(self.getMaximumNumberOfChoicesForAttribute(attribute: .PersonalAttributes)) personal attributes to tell prospective employers about yourself.", comment: "")
             EditFooterView.footerString = string
             bigFooterView = EditFooterView(frame: CGRect(x: 0, y: 0, width: self.coverLetterTableView.frame.size.width, height: bigFooterSize))
 
             return bigFooterView
+        
+        case .jobRole:
+            return smallFooterView
+        
+        case .availabilityCalendar:
+            let string = NSLocalizedString("Choose your preferred start and end dates", comment: "")
+            EditFooterView.footerString = string
+            bigFooterView = EditFooterView(frame: CGRect(x: 0, y: 0, width: self.coverLetterTableView.frame.size.width, height: bigFooterSize))
+            return bigFooterView
+            
+        case .availabilityHours:
+            let string = NSLocalizedString("(optional) Choose your preferred work placement hours", comment: "")
+            EditFooterView.footerString = string
+            bigFooterView = EditFooterView(frame: CGRect(x: 0, y: 0, width: self.coverLetterTableView.frame.size.width, height: bigFooterSize))
+            return bigFooterView
 
-        case 3:
+        case .skills:
             // Choose up to three employment skills that you are hoping to acquire through this Work Experience Placement
             let string = NSLocalizedString("Choose up to \(self.getMaximumNumberOfChoicesForAttribute(attribute: .EmploymentSkills)) employment skills that you are hoping to acquire through this Work Experience Placement", comment: "")
             EditFooterView.footerString = string
             bigFooterView = EditFooterView(frame: CGRect(x: 0, y: 0, width: self.coverLetterTableView.frame.size.width, height: bigFooterSize))
-
             return bigFooterView
-
-        default:
-            return smallFooterView
         }
     }
 }
@@ -316,20 +308,12 @@ extension EditCoverLetterViewController {
 // MARK: - setup appereance
 extension EditCoverLetterViewController {
     func setupNavigationBar() {
-        self.navigationItem.title = NSLocalizedString("Edit Cover Letter", comment: "")
-        var image = UIImage(named: "backArrow")
-        image = image?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.plain, target: self, action: #selector(popViewController(_:)))
+        self.title = NSLocalizedString("Edit Letter", comment: "")
+        styleNavigationController(titleColor: UIColor.black, backgroundColor: UIColor.white, tintColor: UIColor.black, useLightStatusBar: false)
     }
-
-    func setupTexts() {
-        let personalAttributesTitle = NSLocalizedString("Personal attributes", comment: "")
-        let jobRoleTitle = NSLocalizedString("Job role", comment: "")
-        let availableFrom = NSLocalizedString("Available from", comment: "")
-        let availableUntil = NSLocalizedString("Available until", comment: "")
-        let employmentSkillsTitle = NSLocalizedString("Employment skills", comment: "")
-
-        arrayTextEdit = [personalAttributesTitle, jobRoleTitle, availableFrom, availableUntil, employmentSkillsTitle]
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return  UIStatusBarStyle.default
     }
 
     func setupButtons() {
@@ -346,89 +330,16 @@ extension EditCoverLetterViewController {
 
     func setupAppereance() {
         setDateFormatter()
-        setupTexts()
         setupButtons()
         setupNavigationBar()
-
         coverLetterTableView.backgroundColor = UIColor(netHex: Colors.lightGray)
         contentView.backgroundColor = UIColor(netHex: Colors.lightGray)
-
-        startDatePicker.addTarget(self, action: #selector(startDatePickerChanged(sender:)), for: .valueChanged)
-        endDatePicker.datePickerMode = .date
-
-        endDatePicker.addTarget(self, action: #selector(endDatePickerChanged(sender:)), for: .valueChanged)
-        endDatePicker.datePickerMode = .date
-
         setupTableView()
     }
 
     func setupTableView() {
         coverLetterTableView.delegate = self
         coverLetterTableView.dataSource = self
-    }
-
-    func setStartDatePicker(cell: EditCoverLetterTableViewCell) {
-        let now = Date()
-        startDatePicker.frame.size.width = self.view.frame.size.width
-        startDatePicker.frame.size.height = datePickerSize
-        startDatePicker.backgroundColor = UIColor.white
-
-        startDatePicker.datePickerMode = .date
-        let earliestStartDate = WorkAvailabilityWindow.earliestStartDate(submission: now)
-        startDatePicker.minimumDate = earliestStartDate
-
-        let startDate = self.getValueForAttribute(attribute: .StartDate)
-        if !startDate.isEmpty, let startD = Date.dateFromRfc3339(string: startDate) {
-            startDatePicker.date = startD > earliestStartDate ? startD : earliestStartDate
-        }
-        cell.contentView.addSubview(startDatePicker)
-        startDatePickerChanged(sender: startDatePicker)
-    }
-    
-    @objc func startDatePickerChanged(sender: UIDatePicker) {
-        guard let startDate = sender.date.dateToStringRfc3339() else {
-            return
-        }
-        self.saveDataForAttribute(data: startDate, attribute: .StartDate)
-        let earliestEndDate = WorkAvailabilityWindow.earliestEndDate(start: sender.date, submission: Date())
-        endDatePicker.minimumDate = earliestEndDate
-
-        let endDateString = self.getValueForAttribute(attribute: .EndDate)
-        if !endDateString.isEmpty, let endDate = Date.dateFromRfc3339(string: endDateString) {
-            if endDate < earliestEndDate {
-                self.saveDataForAttribute(data: earliestEndDate.dateToStringRfc3339()!, attribute: .EndDate)
-                coverLetterTableView.reloadRows(at: [NSIndexPath(row: 2, section: 2) as IndexPath], with: .none)
-            }
-        }
-
-        coverLetterTableView.reloadRows(at: [NSIndexPath(row: 0, section: 2) as IndexPath], with: .none)
-        setUpdateButtonState()
-    }
-
-    func setEndDatePicker(cell: EditCoverLetterTableViewCell) {
-        endDatePicker.frame.size.width = self.view.frame.size.width
-        endDatePicker.frame.size.height = datePickerSize
-        endDatePicker.backgroundColor = UIColor.white
-        let now = Date()
-        let startDateString = self.getValueForAttribute(attribute: .StartDate)
-        var startDate: Date! = nil
-        if !startDateString.isEmpty {
-            startDate = Date.dateFromRfc3339(string: startDateString)!
-        }
-        if startDate == nil {
-            startDate = WorkAvailabilityWindow.earliestStartDate(submission: now)
-        }
-        let earliestEndDate = WorkAvailabilityWindow.earliestEndDate(start: startDate, submission: now)
-        endDatePicker.minimumDate = earliestEndDate
-    
-        let endDateString = self.getValueForAttribute(attribute: .EndDate)
-        if !endDateString.isEmpty, let endDate = Date.dateFromRfc3339(string: endDateString) {
-            endDatePicker.date = endDate > earliestEndDate ? endDate : earliestEndDate
-        }
-
-        endDatePicker.datePickerMode = .date
-        cell.contentView.addSubview(endDatePicker)
-        endDatePickerChanged(sender: endDatePicker)
     }
 
     @objc func endDatePickerChanged(sender: UIDatePicker) {
@@ -536,7 +447,7 @@ extension EditCoverLetterViewController {
 
     func setUpdateButtonState() {
         if self.selectedTemplateBlanks.count > 0 {
-            // all data is setted
+            // all data is set
             updateButton.setBackgroundColor(color: UIColor(netHex: Colors.mediumGreen), forUIControlState: .normal)
             updateButton.setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)
             self.updateButton.isUserInteractionEnabled = true

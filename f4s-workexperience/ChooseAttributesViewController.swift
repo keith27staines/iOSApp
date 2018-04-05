@@ -53,9 +53,9 @@ extension ChooseAttributesViewController {
     }
 
     func setupNavigationBar() {
-        var image = UIImage(named: "backArrow")
-        image = image?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.plain, target: self, action: #selector(popViewController(_:)))
+//        var image = UIImage(named: "backArrow")
+//        image = image?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.plain, target: self, action: #selector(popViewController(_:)))
 
         if let currentAttribute = self.currentAttributeType {
             switch currentAttribute

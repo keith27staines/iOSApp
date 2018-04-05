@@ -29,6 +29,7 @@ class CoverLetterViewController: UIViewController {
 
     override func viewWillAppear(_: Bool) {
         super.viewWillAppear(true)
+        adjustNavigationBar()
         self.templateTextView.isScrollEnabled = false
 
         self.selectedTemplateChoices = TemplateChoiceDBOperations.sharedInstance.getSelectedTemplateBlanks()
@@ -58,15 +59,9 @@ extension CoverLetterViewController {
 
     func adjustNavigationBar() {
         navigationController?.setNavigationBarHidden(false, animated: false)
-        navigationController?.navigationBar.barTintColor = UIColor(netHex: Colors.white)
-        navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-
-        let backButton = UIBarButtonItem(image: UIImage(named: "Back"), style: UIBarButtonItemStyle.done, target: self, action: #selector(backButtonTouched))
-        backButton.tintColor = UIColor.black
-        navigationItem.leftBarButtonItem = backButton
+        let leftButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(backButtonTouched))
+//        let leftButton = UIBarButtonItem(image: UIImage(named: "Back"), style: UIBarButtonItemStyle.done, target: self, action: #selector(backButtonTouched))
+        navigationItem.leftBarButtonItem = leftButton
 
         let editCoverLetterTitle = NSLocalizedString("Edit Cover Letter", comment: "")
         let editCoverLetterFont: UIFont = UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular)
@@ -84,6 +79,8 @@ extension CoverLetterViewController {
                                                                          NSAttributedStringKey.font: editCoverLetterFont,
         ]), for: UIControlState.normal)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: editCoverLetterButton!)
+        
+        styleNavigationController(titleColor: UIColor.black, backgroundColor: UIColor.white, tintColor: UIColor.black, useLightStatusBar: false)
     }
 
     func setApplyButton() {
@@ -111,7 +108,7 @@ extension CoverLetterViewController {
 
     func setButtonStates(enableApply: Bool) {
         if enableApply {
-            // all data is setted
+            // all data is set
             self.applyButton.isEnabled = true
             if let rightBarButton = self.editCoverLetterButton {
                 rightBarButton.setBackgroundColor(color: UIColor(netHex: Colors.mediumGreen), forUIControlState: .normal)
