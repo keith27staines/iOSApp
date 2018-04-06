@@ -19,11 +19,12 @@ class F4SCalendarCollectionViewController: UICollectionViewController {
     
     var delegate: F4SCalendarCollectionViewControllerDelegate?
     
-    private var cal: F4SCalendar!
+    private var cal: F4SCalendar = {
+        return F4SCalendar()
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        cal = F4SCalendar()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -49,8 +50,10 @@ class F4SCalendarCollectionViewController: UICollectionViewController {
         self.collectionView?.reloadData()
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return  UIStatusBarStyle.lightContent
+    func setSelection(firstDate: Date, lastDate: Date) {
+        let firstDay = F4SCalendarDay(cal: cal, date: firstDate)
+        let lastDay = F4SCalendarDay(cal: cal, date: lastDate)
+        cal.setSelection(firstDay: firstDay, lastDay: lastDay)
     }
 
     // MARK: UICollectionViewDataSource

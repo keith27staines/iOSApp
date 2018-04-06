@@ -40,6 +40,11 @@ public class F4SCalendar {
     var firstDay: F4SCalendarDay? = nil
     var lastDay: F4SCalendarDay? = nil
     
+    /// The tree tap waltz is basically first tap selects start of period,
+    /// second tap sets end of period (and selecte days between)
+    /// third tap clears the selection
+    /// There are some exceptions - first tap on an unavailable day does nothing
+    /// second tapping on top of the first tap just clears the firs tap
     public func threeTapWaltz(day: F4SCalendarDay) {
         
         let tappedDate = day.midday
@@ -64,6 +69,14 @@ public class F4SCalendar {
             tap = Tap.clear
         case .clear:
             clearAllSelections()
+        }
+    }
+    
+    func setSelection(firstDay: F4SCalendarDay, lastDay: F4SCalendarDay) {
+        clearAllSelections()
+        threeTapWaltz(day: firstDay)
+        if lastDay > firstDay {
+            threeTapWaltz(day: lastDay)
         }
     }
     

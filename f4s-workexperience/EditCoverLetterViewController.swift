@@ -45,7 +45,6 @@ class EditCoverLetterViewController: UIViewController {
     override func viewWillAppear(_: Bool) {
         super.viewWillAppear(true)
         setupNavigationBar()
-
         coverLetterTableView.reloadData()
         let previouslySelectedBlanks = TemplateChoiceDBOperations.sharedInstance.getSelectedTemplateBlanks()
         let templateBlanks = currentTemplate.blanks
@@ -70,7 +69,7 @@ extension EditCoverLetterViewController :  F4SCalendarCollectionViewControllerDe
             return
         }
         let startDate = firstDay.interval.start
-        let endDate = lastDay.interval.end
+        let endDate = lastDay.interval.start
         self.saveDataForAttribute(data: startDate.dateToStringRfc3339()!, attribute: .StartDate)
         self.saveDataForAttribute(data: endDate.dateToStringRfc3339()!, attribute: .EndDate)
         coverLetterTableView.reloadRows(at: [NSIndexPath(row: 0, section: 2) as IndexPath], with: .none)
@@ -161,7 +160,7 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
             return "Choose"
         }
         let txtStart = dateFormatter!.string(from: start)
-        let txtEnd = dateFormatter!.string(from: end.addingTimeInterval(-1))
+        let txtEnd = dateFormatter!.string(from: end)
         if txtStart == txtEnd {
             return txtStart
         } else {
@@ -244,6 +243,10 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
         guard let vc = storyboard.instantiateInitialViewController() as? F4SCalendarContainerViewController else {
             return
         }
+        if let firstDate = getStartDate(), let lastDate = getEndDate() {
+            vc.setSelection(firstDate: firstDate, lastDate: lastDate)
+        }
+        
         vc.delegate = self
         navigationController.pushViewController(vc, animated: true)
     }
@@ -310,10 +313,6 @@ extension EditCoverLetterViewController {
     func setupNavigationBar() {
         self.title = NSLocalizedString("Edit Letter", comment: "")
         styleNavigationController(titleColor: UIColor.black, backgroundColor: UIColor.white, tintColor: UIColor.black, useLightStatusBar: false)
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return  UIStatusBarStyle.default
     }
 
     func setupButtons() {

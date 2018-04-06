@@ -224,7 +224,6 @@ extension UIViewController {
         navigationController.navigationBar.isTranslucent = false
         navigationController.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:titleColor]
         navigationController.navigationBar.barStyle =  useLightStatusBar ? .black : .default
-        
         navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController.navigationBar.shadowImage = UIImage()
         navigationController.isNavigationBarHidden = false

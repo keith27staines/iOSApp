@@ -23,6 +23,19 @@ class F4SCalendarContainerViewController: UIViewController {
         super.viewWillAppear(animated)
         styleNavigationController(titleColor: UIColor.white, backgroundColor: splashColor, tintColor: UIColor.white, useLightStatusBar: true)
     }
+
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        styleNavigationController(titleColor: UIColor.white, backgroundColor: splashColor, tintColor: UIColor.white, useLightStatusBar: true)
+//    }
+    
+    var firstDate: Date?
+    var lastDate: Date?
+    
+    func setSelection(firstDate: Date, lastDate: Date) {
+        self.firstDate = firstDate
+        self.lastDate = lastDate
+    }
     
     func applyStyle() {
         pageHeaderView.splashColor = splashColor
@@ -36,6 +49,9 @@ class F4SCalendarContainerViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let vc = segue.destination as? F4SCalendarCollectionViewController else {
             return
+        }
+        if let firstDate = firstDate, let lastDate = lastDate {
+            vc.setSelection(firstDate: firstDate, lastDate: lastDate)
         }
         vc.delegate = delegate
     }
