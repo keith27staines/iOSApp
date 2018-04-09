@@ -44,6 +44,8 @@ class F4SCalendarCollectionViewController: UICollectionViewController {
         flowLayout.minimumLineSpacing = -0.5
         let frameWidth = view.frame.width / 7.0
         flowLayout.itemSize = CGSize(width: frameWidth, height: frameWidth)
+        flowLayout.sectionFootersPinToVisibleBounds = true
+        flowLayout.sectionHeadersPinToVisibleBounds = true
     }
     
     func reload() {
@@ -92,9 +94,9 @@ class F4SCalendarCollectionViewController: UICollectionViewController {
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "monthHeaderViewCell", for: indexPath) as! F4SMonthHeaderView
             let displayMonth = cal.displayableMonth(index: indexPath.section)
             headerView.label.text = displayMonth.month.monthSymbol + " " + String(describing: displayMonth.month.year)
+            headerView.backgroundColor = UIColor.white
             return headerView
         default:
-            //4
             assert(false, "Unexpected element kind")
         }
     }

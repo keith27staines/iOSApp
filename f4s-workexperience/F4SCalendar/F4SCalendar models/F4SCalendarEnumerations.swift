@@ -119,6 +119,25 @@ public enum F4SDayOfWeek {
         }
     }
     
+    public var twoLetterSymbol: String {
+        switch self {
+        case .monday:
+            return "MO"
+        case .tuesday:
+            return "TU"
+        case .wednesday:
+            return "WE"
+        case .thursday:
+            return "TH"
+        case .friday:
+            return "FR"
+        case .saturday:
+            return "SA"
+        case .sunday:
+            return "SU"
+        }
+    }
+    
     public static func allDaysZeroBased() -> [F4SDayOfWeek] {
         var days = [F4SDayOfWeek]()
         for i in 0..<7 {
