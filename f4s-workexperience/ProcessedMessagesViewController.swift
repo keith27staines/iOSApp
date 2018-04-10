@@ -14,7 +14,7 @@ class ProcessedMessagesViewController: UIViewController {
     @IBOutlet weak var receivedLabel: UILabel!
     @IBOutlet weak var extraInformationLabel: UILabel!
 
-    var applicationContext: ApplicationContext?
+    var applicationContext: F4SApplicationContext?
 
     override func viewDidLoad() {
         super.viewDidLoad()

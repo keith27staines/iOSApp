@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol EditCoverLetterViewControllerDelegate {
+    func editCoverLetterDidUpdate(applicationContext: F4SApplicationContext)
+}
+
 class EditCoverLetterViewController: UIViewController {
 
     @IBOutlet weak var updateButton: UIButton!
@@ -20,6 +24,9 @@ class EditCoverLetterViewController: UIViewController {
     fileprivate let smallFooterSize = CGFloat(21)
     fileprivate var numberOfRowsInSection2 = 2
     fileprivate let datePickerSize: CGFloat = 200
+    
+    var delegate: EditCoverLetterViewControllerDelegate!
+    var applicationContext: F4SApplicationContext!
 
     var isVisibleStartDatePicker = false
     var isVisibleEndDatePicker = false
@@ -46,6 +53,11 @@ class EditCoverLetterViewController: UIViewController {
         super.viewWillAppear(true)
         setupNavigationBar()
         coverLetterTableView.reloadData()
+        configureTemplate()
+        setUpdateButtonState()
+    }
+    
+    func configureTemplate() {
         let previouslySelectedBlanks = TemplateChoiceDBOperations.sharedInstance.getSelectedTemplateBlanks()
         let templateBlanks = currentTemplate.blanks
         self.selectedTemplateBlanks = TemplateHelper.removeUnavailableChoices(from: previouslySelectedBlanks, templateBlanks: templateBlanks)
@@ -57,7 +69,15 @@ class EditCoverLetterViewController: UIViewController {
             }
             TemplateChoiceDBOperations.sharedInstance.saveTemplateChoice(name: blank.name, choiceList: choiceList)
         }
-        setUpdateButtonState()
+    }
+}
+
+extension EditCoverLetterViewController : F4SDaysAndHoursViewControllerDelegate {
+    func didUpdateDaysAndHours(model: F4SDaysAndHoursModel) {
+        var availabilityPeriod: F4SAvailabilityPeriod = applicationContext.availabilityPeriod ?? F4SAvailabilityPeriod(firstDay: nil, lastDay: nil, daysAndHours: nil)
+        availabilityPeriod.daysAndHours = model
+        applicationContext.availabilityPeriod = availabilityPeriod
+        self.delegate.editCoverLetterDidUpdate(applicationContext: applicationContext)
     }
 }
 
@@ -68,11 +88,18 @@ extension EditCoverLetterViewController :  F4SCalendarCollectionViewControllerDe
             self.saveDataForAttribute(data: "", attribute: .EndDate)
             return
         }
+        if applicationContext.availabilityPeriod == nil {
+            applicationContext.availabilityPeriod = F4SAvailabilityPeriod(firstDay: firstDay, lastDay: lastDay, daysAndHours: nil)
+        }
+        applicationContext.availabilityPeriod?.firstDay = firstDay
+        applicationContext.availabilityPeriod?.lastDay = lastDay
+        
         let startDate = firstDay.interval.start
         let endDate = lastDay.interval.start
         self.saveDataForAttribute(data: startDate.dateToStringRfc3339()!, attribute: .StartDate)
         self.saveDataForAttribute(data: endDate.dateToStringRfc3339()!, attribute: .EndDate)
         coverLetterTableView.reloadRows(at: [NSIndexPath(row: 0, section: 2) as IndexPath], with: .none)
+        self.delegate.editCoverLetterDidUpdate(applicationContext: applicationContext)
         setUpdateButtonState()
     }
 }
@@ -235,6 +262,7 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
         guard let vc = storyboard.instantiateInitialViewController() as? F4SDaysAndHoursViewController else {
             return
         }
+        vc.delegate = self
         navigationController.pushViewController(vc, animated: true)
     }
     
@@ -272,13 +300,13 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
             return smallFooterView
         
         case .availabilityCalendar:
-            let string = NSLocalizedString("Choose your preferred start and end dates", comment: "")
+            let string = NSLocalizedString("Tell us when you are available", comment: "")
             EditFooterView.footerString = string
             bigFooterView = EditFooterView(frame: CGRect(x: 0, y: 0, width: self.coverLetterTableView.frame.size.width, height: bigFooterSize))
             return bigFooterView
             
         case .availabilityHours:
-            let string = NSLocalizedString("(optional) Choose your preferred work placement hours", comment: "")
+            let string = NSLocalizedString("Choose your available working hours", comment: "")
             EditFooterView.footerString = string
             bigFooterView = EditFooterView(frame: CGRect(x: 0, y: 0, width: self.coverLetterTableView.frame.size.width, height: bigFooterSize))
             return bigFooterView
@@ -296,6 +324,7 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
 // MARK: -user interraction
 extension EditCoverLetterViewController {
     @IBAction func updateButton(_: AnyObject) {
+        delegate.editCoverLetterDidUpdate(applicationContext: applicationContext)
         if let navCtrl = self.navigationController {
             navCtrl.popViewController(animated: true)
         }

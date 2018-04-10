@@ -19,7 +19,7 @@ class CoverLetterViewController: UIViewController {
 
     var currentTemplate: TemplateEntity?
     var selectedTemplateChoices: [TemplateBlank] = []
-    var applicationContext: ApplicationContext!
+    var applicationContext: F4SApplicationContext!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +39,12 @@ class CoverLetterViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.templateTextView.isScrollEnabled = true
+    }
+}
+
+extension CoverLetterViewController: EditCoverLetterViewControllerDelegate {
+    func editCoverLetterDidUpdate(applicationContext: F4SApplicationContext) {
+        self.applicationContext = applicationContext
     }
 }
 
@@ -169,6 +175,17 @@ extension CoverLetterViewController {
             self.templateTextView.attributedText = self.getAttributedStringForTemplate(template: renderingTemplate.htmlDecode())
             self.templateTextView.isEditable = false
             setButtonStates(enableApply: allowApply)
+            if allowApply {
+                let editor = editCoverLetterViewController()!
+                editor.configureTemplate()
+                let firstDate = editor.getStartDate()!
+                let lastDate = editor.getEndDate()!
+                let calendar = F4SCalendar()
+                let firstDay = F4SCalendarDay(cal:calendar, date: firstDate)
+                let lastDay = F4SCalendarDay(cal: calendar, date: lastDate)
+                
+                applicationContext.availabilityPeriod = F4SAvailabilityPeriod(firstDay: firstDay, lastDay: lastDay, daysAndHours: nil)
+            }
         } catch {
             log.debug("error on parsing template")
         }
@@ -326,9 +343,19 @@ extension CoverLetterViewController {
     }
 
     @objc func editCoverLetterButtonTouched() {
-        if let navCtrl = self.navigationController, let currentTemplate = currentTemplate {
-            CustomNavigationHelper.sharedInstance.pushEditCoverLetter(navCtrl, currentTemplate: currentTemplate)
+        if let navCtrl = self.navigationController {
+            guard let ctrl = editCoverLetterViewController() else { return }
+            ctrl.delegate = self
+            navCtrl.pushViewController(ctrl, animated: true)
         }
+    }
+    
+    func editCoverLetterViewController() -> EditCoverLetterViewController? {
+        let coverLetterStoryboard = UIStoryboard(name: "EditCoverLetter", bundle: nil)
+        guard let editor = coverLetterStoryboard.instantiateViewController(withIdentifier: "EditCoverLetterCtrl") as? EditCoverLetterViewController else { return nil }
+        editor.currentTemplate = currentTemplate
+        editor.applicationContext = applicationContext
+        return editor
     }
 
     @IBAction func applyButtonTouched(_: Any) {
@@ -342,9 +369,7 @@ extension CoverLetterViewController {
     }
 
     @objc func textViewTouched() {
-        if let navCtrl = self.navigationController, let currentTemplate = currentTemplate {
-            CustomNavigationHelper.sharedInstance.pushEditCoverLetter(navCtrl, currentTemplate: currentTemplate)
-        }
+        editCoverLetterButtonTouched()
     }
 }
 
@@ -428,8 +453,22 @@ extension CoverLetterViewController {
             case .value:
                 // succes + go to next page
                 strongSelf.applicationContext.placement = placement
-                if let navCtrl = strongSelf.navigationController, let _ = strongSelf.applicationContext.company {
-                    CustomNavigationHelper.sharedInstance.pushProcessedMessages(navCtrl, applicationContext: strongSelf.applicationContext)
+                if let navCtrl = strongSelf.navigationController, let applicationContext = strongSelf.applicationContext, let availabilityPeriod = applicationContext.availabilityPeriod  {
+                    let calendarService = F4SPCalendarService(placementUuid: placement.placementUuid)
+                    let availabilityJson = availabilityPeriod.availabilityJson!
+                    let data = try! JSONEncoder().encode(availabilityJson)
+                    let jsonString = String(data: data, encoding: .utf8)!
+                    print(jsonString)
+                    calendarService.patchAvailabilityForPlacement(availabilityPeriods: availabilityJson, completion: { (result) in
+                        DispatchQueue.main.async {
+                                switch result {
+                                case .success(_):
+                                    CustomNavigationHelper.sharedInstance.pushProcessedMessages(navCtrl, applicationContext: applicationContext)
+                                case .error(let networkError):
+                                    strongSelf.handleF4SNetworkError(networkError: networkError)
+                            }
+                        }
+                    })
                 }
                 break
             case let .error(error):
@@ -439,6 +478,24 @@ extension CoverLetterViewController {
                 MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
                 break
             }
+        }
+    }
+    
+    func handleF4SNetworkError(networkError: F4SNetworkError) {
+        MessageHandler.sharedInstance.display(networkError, parentCtrl: self)
+    }
+    
+    func handleAlamoFireServiceErrorResult(result: Result<String>) {
+        switch result
+        {
+        case .value:
+            break
+        case let .error(error):
+            MessageHandler.sharedInstance.display(error, parentCtrl: self)
+            break
+        case let .deffinedError(error):
+            MessageHandler.sharedInstance.display(error, parentCtrl: self)
+            break
         }
     }
 

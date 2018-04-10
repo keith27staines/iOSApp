@@ -8,12 +8,17 @@
 
 import UIKit
 
+protocol F4SDaysAndHoursViewControllerDelegate {
+    func didUpdateDaysAndHours(model: F4SDaysAndHoursModel)
+}
+
 class F4SDaysAndHoursViewController: UIViewController {
     @IBOutlet weak var headerIcon: UIImageView!
     
     var model: F4SDaysAndHoursModel!
     let weekDayButtonTitle = "WEEKDAYS"
     let weekendButtonTitle = "WEEKENDS"
+    var delegate: F4SDaysAndHoursViewControllerDelegate!
     
     @IBOutlet weak var pageHeaderView: F4SPageHeaderView!
     
@@ -53,8 +58,9 @@ class F4SDaysAndHoursViewController: UIViewController {
     lazy var infoController: F4SDisplayInformationViewController = {
         let storyboard = UIStoryboard(name: "F4SDisplayInformationViewController", bundle: nil)
         let vc = storyboard.instantiateInitialViewController() as! F4SDisplayInformationViewController
+        vc.helpContext = F4SHelpContext.daysAndHoursViewController
         vc.delegate = self
-        vc.type = F4SDisplayInformationType.daysAndHoursViewController
+        vc.helpContext = F4SHelpContext.daysAndHoursViewController
         return vc
     }()
     
@@ -69,11 +75,10 @@ class F4SDaysAndHoursViewController: UIViewController {
     
     var pickerWidthConstraint: NSLayoutConstraint?
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         model = (model != nil) ? model : F4SDaysAndHoursModel()
-        applyStype()
+        applyStyle()
         configureControls()
         reloadDataViews()
     }
@@ -81,6 +86,14 @@ class F4SDaysAndHoursViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         styleNavigationController(titleColor: UIColor.white, backgroundColor: splashColor, tintColor: UIColor.white, useLightStatusBar: true)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if F4SHelpContext.calendarController.shouldShowAutomatically {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+1.0) { [weak self] in
+                self?.mainInfoTapped()
+            }
+        }
     }
 }
 
@@ -183,7 +196,8 @@ extension F4SDaysAndHoursViewController {
     func configureControls() {
         tableView.estimatedRowHeight = UITableViewAutomaticDimension
         let item = UIBarButtonItem()
-        item.title = "Info"
+        item.title = ""
+        item.image = UIImage(named: "information")
         item.target = self
         item.action = #selector(mainInfoTapped)
         item.style = .plain
@@ -193,7 +207,7 @@ extension F4SDaysAndHoursViewController {
 
 // MARK:- Styling
 extension F4SDaysAndHoursViewController {
-    func applyStype() {
+    func applyStyle() {
         pageHeaderView.splashColor = splashColor
     }
     
@@ -205,8 +219,6 @@ extension F4SDaysAndHoursViewController {
         button.setTitleColor(titleColor, for: .normal)
         button.layer.backgroundColor = solid ? splashColor.cgColor : UIColor.white.cgColor
     }
-    
-
 }
 
 extension UIViewController {
@@ -241,6 +253,7 @@ extension F4SDaysAndHoursViewController : F4SHoursPickerDelegate {
         let cell = tableView.cellForRow(at: indexPath) as! F4SSelectDayTableViewCell
         tiePickerToLabel(label: cell.hoursDropdownLabel)
         hidePickerView()
+        self.delegate.didUpdateDaysAndHours(model: model)
     }
 }
 
@@ -283,10 +296,13 @@ extension F4SDaysAndHoursViewController: F4SDisplayInformationViewControllerDele
         infoView.alpha = 0.0
         infoView.centerXAnchor.constraint(equalTo: mainView.centerXAnchor).isActive = true
         infoView.centerYAnchor.constraint(equalTo: mainView.centerYAnchor).isActive = true
-        UIView.animate(withDuration: 0.2) {
+        infoView.leftAnchor.constraint(equalTo: mainView.leftAnchor, constant: 40).isActive = true
+        infoView.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 100).isActive = true
+        
+        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
             infoView.alpha = 1.0
             mainView.layoutIfNeeded()
-        }
+        }, completion: nil)
     }
 }
 
@@ -308,6 +324,7 @@ extension F4SDaysAndHoursViewController {
             return !day.dayOfWeek.isWeekend
         })
         reloadDataViews()
+        self.delegate.didUpdateDaysAndHours(model: model)
     }
     
     @IBAction func toggleWeekends(sender: UIButton) {
@@ -317,6 +334,7 @@ extension F4SDaysAndHoursViewController {
             return day.dayOfWeek.isWeekend
         })
         reloadDataViews()
+        self.delegate.didUpdateDaysAndHours(model: model)
     }
 }
 
@@ -351,6 +369,7 @@ extension F4SDaysAndHoursViewController : F4SSelectDayTableViewCellDelegate {
             day.dayOfWeek == cell.dayHourSelection.dayOfWeek
         }
         reloadDataViews()
+        self.delegate.didUpdateDaysAndHours(model: model)
     }
     
     func areWeekDaysFullySelected() -> Bool {

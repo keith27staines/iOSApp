@@ -13,15 +13,16 @@ public enum F4SHoursType {
     case pm
     case allDay
     case custom
+    
     public var description : String {
         switch self {
 
         case .am:
-            return "AM"
+            return "am"
         case .pm:
-            return "PM"
+            return "pm"
         case .allDay:
-            return "All day"
+            return "all"
         case .custom:
             return "custom"
         }

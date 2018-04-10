@@ -160,6 +160,9 @@
 		FC59B1911F81549B0068EC9C /* F4SQuadtreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18F1F81549A0068EC9C /* F4SQuadtreeTests.swift */; };
 		FC59B1921F8155480068EC9C /* F4SQuadtree.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18C1F81546C0068EC9C /* F4SQuadtree.swift */; };
 		FC59B1931F81554F0068EC9C /* CGRect+Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18D1F81546C0068EC9C /* CGRect+Methods.swift */; };
+		FC67E60A207B70CE006F07FE /* F4SCalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC67E609207B70CE006F07FE /* F4SCalendarService.swift */; };
+		FC67E60D207B73CE006F07FE /* F4SCalendarServiceJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC67E60C207B73CE006F07FE /* F4SCalendarServiceJson.swift */; };
+		FC67E60F207BA80A006F07FE /* F4SAvailabilityPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC67E60E207BA80A006F07FE /* F4SAvailabilityPeriod.swift */; };
 		FC681C001F57473D0077BECA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFE1F57473D0077BECA /* Podfile */; };
 		FC681C011F57473D0077BECA /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFF1F57473D0077BECA /* Podfile.lock */; };
 		FC6C11BA202870D6002C8EA5 /* F4SGrammar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6C11B9202870D6002C8EA5 /* F4SGrammar.swift */; };
@@ -461,6 +464,9 @@
 		FC59B18D1F81546C0068EC9C /* CGRect+Methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Methods.swift"; sourceTree = "<group>"; };
 		FC59B18E1F81549A0068EC9C /* CGRect+MethodsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+MethodsTests.swift"; sourceTree = "<group>"; };
 		FC59B18F1F81549A0068EC9C /* F4SQuadtreeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SQuadtreeTests.swift; sourceTree = "<group>"; };
+		FC67E609207B70CE006F07FE /* F4SCalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCalendarService.swift; sourceTree = "<group>"; };
+		FC67E60C207B73CE006F07FE /* F4SCalendarServiceJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCalendarServiceJson.swift; sourceTree = "<group>"; };
+		FC67E60E207BA80A006F07FE /* F4SAvailabilityPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SAvailabilityPeriod.swift; sourceTree = "<group>"; };
 		FC681BFE1F57473D0077BECA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		FC681BFF1F57473D0077BECA /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		FC6C11B9202870D6002C8EA5 /* F4SGrammar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SGrammar.swift; sourceTree = "<group>"; };
@@ -1227,6 +1233,25 @@
 			name = F4SDataStructures;
 			sourceTree = "<group>";
 		};
+		FC67E608207B6F95006F07FE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FCB6B8C42074C58E0042C725 /* F4SDayAndHoursSelection.swift */,
+				FCB6B8C62074C58E0042C725 /* F4SDaysAndHoursModel.swift */,
+				FC67E60E207BA80A006F07FE /* F4SAvailabilityPeriod.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FC67E60B207B73A4006F07FE /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FC67E609207B70CE006F07FE /* F4SCalendarService.swift */,
+				FC67E60C207B73CE006F07FE /* F4SCalendarServiceJson.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		FC99F3D51FFE604000E3AC5A /* F4SNetworkServices */ = {
 			isa = PBXGroup;
 			children = (
@@ -1262,6 +1287,7 @@
 				FCB6B8D02074C59C0042C725 /* F4SCalendar */,
 				FCB6B8F02074C5EC0042C725 /* Calendar tests */,
 				FCB6B8B92074C5750042C725 /* DayHourPicker.xcassets */,
+				FC67E60B207B73A4006F07FE /* Services */,
 			);
 			name = "Calendar and diary";
 			sourceTree = "<group>";
@@ -1269,15 +1295,14 @@
 		FCB6B8BB2074C58E0042C725 /* F4SDaysAndHours */ = {
 			isa = PBXGroup;
 			children = (
+				FCB6B8C52074C58E0042C725 /* F4SSelectDayTableViewCell.swift */,
 				FCB6B8C12074C58E0042C725 /* F4SDaysAndHours.storyboard */,
 				FCB6B8BC2074C58E0042C725 /* F4SPageHeaderView.swift */,
 				FCB6B8BD2074C58E0042C725 /* F4SDaysAndHoursViewController.swift */,
 				FCB6B8BE2074C58E0042C725 /* F4SHoursPickerViewController.swift */,
 				FCB6B8BF2074C58E0042C725 /* F4SDisplayInformationViewController.storyboard */,
 				FCB6B8C32074C58E0042C725 /* F4SDisplayInformationViewController.swift */,
-				FCB6B8C42074C58E0042C725 /* F4SDayAndHoursSelection.swift */,
-				FCB6B8C52074C58E0042C725 /* F4SSelectDayTableViewCell.swift */,
-				FCB6B8C62074C58E0042C725 /* F4SDaysAndHoursModel.swift */,
+				FC67E608207B6F95006F07FE /* Models */,
 			);
 			path = F4SDaysAndHours;
 			sourceTree = "<group>";
@@ -1811,7 +1836,9 @@
 				205EB2111DDB551800034424 /* DatabaseService.swift in Sources */,
 				204203EA1E4B110A007C7409 /* ShortlistDB.swift in Sources */,
 				203658831E1F809E00D87DC4 /* StatusCollectionViewCell.swift in Sources */,
+				FC67E60F207BA80A006F07FE /* F4SAvailabilityPeriod.swift in Sources */,
 				2037B0A51DEC3C2000A9DE3E /* CoreDataBaseManager.swift in Sources */,
+				FC67E60D207B73CE006F07FE /* F4SCalendarServiceJson.swift in Sources */,
 				204C896C1DF5F08500D8493A /* CompanyDetailsViewController.swift in Sources */,
 				40E78E6F1DD32BD4000A3776 /* CustomMenuViewController.swift in Sources */,
 				40E78E7F1DD32BF4000A3776 /* SideDrawerSectionHeaderView.swift in Sources */,
@@ -1846,6 +1873,7 @@
 				204203F91E4B81AB007C7409 /* FavouriteTableViewCell.swift in Sources */,
 				FC31F095204D54C6009DD526 /* F4SDebugViewController.swift in Sources */,
 				FCB6B8E32074C59C0042C725 /* F4SMonthHeaderView.swift in Sources */,
+				FC67E60A207B70CE006F07FE /* F4SCalendarService.swift in Sources */,
 				FCE20CC0203C12F300CA821D /* URLTableViewController.swift in Sources */,
 				FCE20CC1203C12F300CA821D /* F4SDocumentUrlModel.swift in Sources */,
 				40E78E581DD32964000A3776 /* Constants.swift in Sources */,

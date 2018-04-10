@@ -14,8 +14,8 @@ class DocumentUrlViewController: UIViewController {
         return F4SDocumentUrlModel(delegate: self, placementUuid: self.applicationContext.placement!.placementUuid)
     }()
     
-    var applicationContext: ApplicationContext!
-    var completion: ((ApplicationContext) -> Void)?
+    var applicationContext: F4SApplicationContext!
+    var completion: ((F4SApplicationContext) -> Void)?
     
     @IBOutlet weak var topImageHeightConstraint: NSLayoutConstraint!
     @IBOutlet var plusButtonCenterConstraint: NSLayoutConstraint!

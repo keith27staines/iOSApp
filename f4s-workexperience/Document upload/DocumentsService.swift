@@ -12,6 +12,7 @@ public protocol F4SDocumentServiceProtocol {
     var apiName: String { get }
     var placementUuid: String { get }
     func getDocumentsForPlacement(completion: @escaping (F4SNetworkResult<F4SGetDocumentUrlJson>) -> ())
+    func putDocumentsForPlacement(documentDescriptors: F4SPutDocumentsUrlJson, completion: @escaping ((F4SNetworkResult<String>) -> Void ))
 }
 
 public class F4SPlacementDocumentsService : F4SDataTaskService {
@@ -33,7 +34,7 @@ extension F4SPlacementDocumentsService : F4SDocumentServiceProtocol {
     }
     
     public func putDocumentsForPlacement(documentDescriptors: F4SPutDocumentsUrlJson, completion: @escaping ((F4SNetworkResult<String>) -> Void )) {
-        super.put(putObject: documentDescriptors, attempting: "Post supporting document urls for this placement", completion: completion)
+        super.put(object: documentDescriptors, attempting: "Post supporting document urls for this placement", completion: completion)
     }
 }
 

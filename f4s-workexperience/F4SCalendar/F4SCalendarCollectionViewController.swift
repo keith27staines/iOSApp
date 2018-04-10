@@ -52,6 +52,14 @@ class F4SCalendarCollectionViewController: UICollectionViewController {
         self.collectionView?.reloadData()
     }
     
+    var firstDay: F4SCalendarDay? {
+        return cal.firstDay
+    }
+    
+    var lastDay: F4SCalendarDay? {
+        return cal.lastDay
+    }
+    
     func setSelection(firstDate: Date, lastDate: Date) {
         let firstDay = F4SCalendarDay(cal: cal, date: firstDate)
         let lastDay = F4SCalendarDay(cal: cal, date: lastDate)
@@ -78,7 +86,8 @@ class F4SCalendarCollectionViewController: UICollectionViewController {
         cell.selectionState = F4SExtendibleSelectionState(rawValue: cal.selectionStates[day.midday]!)!
         cell.notifyDidTap = { [weak self] sender in
             guard let strongSelf = self else { return }
-            //strongSelf.cal.toggleSelection(day: sender.day)
+            // There is detailed logic in the threeTapWaltz, but basically the first tap starts a selection,
+            // the second tap extends the selection, and the third tap removes the selection
             strongSelf.cal.threeTapWaltz(day: sender.day)
             collectionView.reloadData()
             strongSelf.delegate?.calendarDidChangeRange(strongSelf, firstDay: strongSelf.cal.firstDay, lastDay: strongSelf.cal.lastDay)

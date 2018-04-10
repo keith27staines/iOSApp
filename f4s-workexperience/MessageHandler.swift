@@ -45,6 +45,13 @@ class MessageHandler {
             break
         }
     }
+    
+    func display(_ networkError: F4SNetworkError, parentCtrl: UIViewController) {
+        MessageHandler.alert.title = networkError.code
+        MessageHandler.alert.message = networkError.localizedDescription + "\n" + (networkError.attempting ?? "")
+        parentCtrl.present(MessageHandler.alert, animated: true) {}
+    }
+    
     func display(_ errorMessage: CallError, parentCtrl: UIViewController) {
         MessageHandler.alert.title = errorMessage.appErrorMessageTitle
         MessageHandler.alert.message = errorMessage.appErrorMessage

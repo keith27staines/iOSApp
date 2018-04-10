@@ -223,7 +223,7 @@ class CustomNavigationHelper {
         guard let coverLetterCtrl = coverLetterStoryboard.instantiateViewController(withIdentifier: "CoverLetterViewCtrl") as? CoverLetterViewController else {
             return
         }
-        let applicationContext = ApplicationContext(user: nil, company: currentCompany, placement: nil)
+        let applicationContext = F4SApplicationContext(user: nil, company: currentCompany, placement: nil)
         coverLetterCtrl.applicationContext = applicationContext
         let coverLetterNavigationController = RotationAwareNavigationController(rootViewController: coverLetterCtrl)
         parentCtrl.present(coverLetterNavigationController, animated: true, completion: nil)
@@ -290,14 +290,16 @@ class CustomNavigationHelper {
         navCtrl.present(navigationCtrl, animated: true, completion: nil)
     }
 
-    func pushEditCoverLetter(_ navCtrl: UINavigationController, currentTemplate: TemplateEntity) {
-        let coverLetterStoryboard = UIStoryboard(name: "EditCoverLetter", bundle: nil)
-        guard let ctrl = coverLetterStoryboard.instantiateViewController(withIdentifier: "EditCoverLetterCtrl") as? EditCoverLetterViewController else {
-            return
-        }
-        ctrl.currentTemplate = currentTemplate
-        navCtrl.pushViewController(ctrl, animated: true)
-    }
+//    func pushEditCoverLetter(_ navCtrl: UINavigationController, currentTemplate: TemplateEntity, applicationContext: F4SApplicationContext) {
+//        let coverLetterStoryboard = UIStoryboard(name: "EditCoverLetter", bundle: nil)
+//        guard let ctrl = coverLetterStoryboard.instantiateViewController(withIdentifier: "EditCoverLetterCtrl") as? EditCoverLetterViewController else {
+//            return
+//        }
+//        ctrl.currentTemplate = currentTemplate
+//        ctrl.applicationContext = applicationContext
+//        
+//        navCtrl.pushViewController(ctrl, animated: true)
+//    }
 
     func pushChooseAttributes(_ navController: UINavigationController, currentTemplate: TemplateEntity, attribute: ChooseAttributes) {
         let chooseAttributesStoryboard = UIStoryboard(name: "ChooseAttributes", bundle: nil)
@@ -309,7 +311,7 @@ class CustomNavigationHelper {
         navController.pushViewController(ctrl, animated: true)
     }
 
-    func pushProcessedMessages(_ navController: UINavigationController, applicationContext: ApplicationContext) {
+    func pushProcessedMessages(_ navController: UINavigationController, applicationContext: F4SApplicationContext) {
         let processedMessagesStoryboard = UIStoryboard(name: "ProcessedMessages", bundle: nil)
         guard let ctrl = processedMessagesStoryboard.instantiateViewController(withIdentifier: "ProcessedMessagesCtrl") as? ProcessedMessagesViewController else {
             return
@@ -381,7 +383,7 @@ class CustomNavigationHelper {
         parentCtrl.navigationController?.present(popoverNavigationController, animated: true, completion: nil)
     }
     
-    func pushEmailVerification(navigCtrl: UINavigationController, applicationContext: ApplicationContext) {
+    func pushEmailVerification(navigCtrl: UINavigationController, applicationContext: F4SApplicationContext) {
         let emailStoryboard = UIStoryboard(name: "F4SEmailVerification", bundle: nil)
         guard let emailController = emailStoryboard.instantiateViewController(withIdentifier: "EmailVerification") as? F4SEmailVerificationViewController else {
             return
@@ -392,7 +394,7 @@ class CustomNavigationHelper {
         navigCtrl.pushViewController(emailController, animated: true)
     }
 
-    func pushExtraInfoViewController(navigCtrl: UINavigationController, applicationContext: ApplicationContext) {
+    func pushExtraInfoViewController(navigCtrl: UINavigationController, applicationContext: F4SApplicationContext) {
         let extraInfoStoryboard = UIStoryboard(name: "ExtraInfo", bundle: nil)
         guard let extraInfoCtrl = extraInfoStoryboard.instantiateViewController(withIdentifier: "ExtraInfoCtrl") as? ExtraInfoViewController else {
             return

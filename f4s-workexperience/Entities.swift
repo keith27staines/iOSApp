@@ -8,10 +8,18 @@
 
 import UIKit
 
-struct ApplicationContext {
+struct F4SApplicationContext {
     var user: User?
     var company: Company?
     var placement: Placement?
+    var availabilityPeriod: F4SAvailabilityPeriod?
+    
+    public init(user: User? = nil, company: Company? = nil, placement: Placement? = nil, availabilityPeriod: F4SAvailabilityPeriod? = nil) {
+        self.user = user
+        self.company = company
+        self.placement = placement
+        self.availabilityPeriod = availabilityPeriod
+    }
 }
 
 struct User {

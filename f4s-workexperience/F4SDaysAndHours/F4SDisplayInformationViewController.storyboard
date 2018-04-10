@@ -13,70 +13,60 @@
         <!--Display Information View Controller-->
         <scene sceneID="XJX-KT-GbB">
             <objects>
-                <viewController storyboardIdentifier="F4SDisplayInformationViewController" id="Z9f-PN-yrm" customClass="F4SDisplayInformationViewController" customModule="HoursPicker2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="F4SDisplayInformationViewController" id="Z9f-PN-yrm" customClass="F4SDisplayInformationViewController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Pb7-pf-WVT">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1HN-Gy-OAV">
-                                <rect key="frame" x="8" y="247" width="80" height="33"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="ZbX-uj-Gxk"/>
-                                </constraints>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="AMO-6z-yol">
+                                <rect key="frame" x="225" y="248" width="51" height="31"/>
+                                <connections>
+                                    <action selector="showNextTimeSwitchChanged:" destination="Z9f-PN-yrm" eventType="valueChanged" id="Ihp-d9-jwo"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" text="show next time?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sey-Ap-YLc">
+                                <rect key="frame" x="207" y="278" width="85" height="14"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Screen info" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OV9-B0-yZU">
+                                <rect key="frame" x="0.0" y="8" width="300" height="20.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="This is some text describing what the user can do on this screen" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="EDV-DN-ku4">
+                                <rect key="frame" x="8" y="36.5" width="284" height="202.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1HN-Gy-OAV">
+                                <rect key="frame" x="27" y="247" width="100" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Got it!"/>
                                 <connections>
                                     <action selector="doneButtonTapped:" destination="Z9f-PN-yrm" eventType="touchUpInside" id="nOe-93-b9c"/>
                                 </connections>
                             </button>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AMO-6z-yol">
-                                <rect key="frame" x="221" y="248.5" width="51" height="31"/>
-                                <connections>
-                                    <action selector="showNextTimeSwitchChanged:" destination="Z9f-PN-yrm" eventType="valueChanged" id="Ihp-d9-jwo"/>
-                                </connections>
-                            </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="show next time?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sey-Ap-YLc">
-                                <rect key="frame" x="120" y="258" width="89" height="14"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Screen info" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OV9-B0-yZU">
-                                <rect key="frame" x="0.0" y="20" width="300" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" editable="NO" text="This is some text describing what the user can do on this screen" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="EDV-DN-ku4">
-                                <rect key="frame" x="30" y="73.5" width="240" height="153.5"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="300" id="1dq-G3-LI2"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="AMO-6z-yol" firstAttribute="leading" secondItem="Sey-Ap-YLc" secondAttribute="trailing" constant="12" id="3YX-7h-eVC"/>
-                            <constraint firstItem="EDV-DN-ku4" firstAttribute="leading" secondItem="fQq-0f-dN9" secondAttribute="leading" constant="30" id="5PO-P9-oD6"/>
-                            <constraint firstItem="OV9-B0-yZU" firstAttribute="top" secondItem="fQq-0f-dN9" secondAttribute="top" constant="20" id="60W-gF-WmL"/>
-                            <constraint firstItem="Sey-Ap-YLc" firstAttribute="centerY" secondItem="AMO-6z-yol" secondAttribute="centerY" id="81b-DM-KTH"/>
-                            <constraint firstItem="1HN-Gy-OAV" firstAttribute="top" relation="greaterThanOrEqual" secondItem="EDV-DN-ku4" secondAttribute="bottom" constant="20" id="I0Q-D0-7hs"/>
-                            <constraint firstAttribute="bottom" secondItem="1HN-Gy-OAV" secondAttribute="bottom" constant="20" id="KC8-Hh-NHm"/>
-                            <constraint firstItem="fQq-0f-dN9" firstAttribute="trailing" secondItem="OV9-B0-yZU" secondAttribute="trailing" id="KWv-lm-o8Y"/>
-                            <constraint firstItem="EDV-DN-ku4" firstAttribute="top" secondItem="OV9-B0-yZU" secondAttribute="bottom" priority="750" constant="20" id="MOo-7d-h91"/>
-                            <constraint firstItem="OV9-B0-yZU" firstAttribute="leading" secondItem="fQq-0f-dN9" secondAttribute="leading" id="SXg-jN-aVp"/>
-                            <constraint firstItem="AMO-6z-yol" firstAttribute="trailing" secondItem="EDV-DN-ku4" secondAttribute="trailing" id="akp-rA-fjA"/>
-                            <constraint firstItem="1HN-Gy-OAV" firstAttribute="leading" secondItem="fQq-0f-dN9" secondAttribute="leading" constant="8" id="ccC-0c-rSs"/>
-                            <constraint firstItem="AMO-6z-yol" firstAttribute="centerY" secondItem="1HN-Gy-OAV" secondAttribute="centerY" id="dwQ-bS-NjB"/>
-                            <constraint firstItem="Sey-Ap-YLc" firstAttribute="leading" secondItem="1HN-Gy-OAV" secondAttribute="trailing" priority="999" constant="40" id="gXm-5S-mQp"/>
-                            <constraint firstItem="1HN-Gy-OAV" firstAttribute="top" relation="greaterThanOrEqual" secondItem="OV9-B0-yZU" secondAttribute="bottom" constant="200" id="iye-vt-2D2"/>
-                            <constraint firstItem="EDV-DN-ku4" firstAttribute="centerY" secondItem="Pb7-pf-WVT" secondAttribute="centerY" id="kCA-XU-1Nn"/>
-                            <constraint firstItem="EDV-DN-ku4" firstAttribute="top" relation="greaterThanOrEqual" secondItem="OV9-B0-yZU" secondAttribute="bottom" constant="20" id="qIi-gY-RiF"/>
-                            <constraint firstItem="EDV-DN-ku4" firstAttribute="centerX" secondItem="Pb7-pf-WVT" secondAttribute="centerX" id="u65-ws-nYW"/>
-                            <constraint firstItem="Sey-Ap-YLc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1HN-Gy-OAV" secondAttribute="trailing" constant="12" id="vDa-dJ-RoZ"/>
+                            <constraint firstItem="Sey-Ap-YLc" firstAttribute="centerX" secondItem="AMO-6z-yol" secondAttribute="centerX" id="7j8-iI-e0A"/>
+                            <constraint firstItem="1HN-Gy-OAV" firstAttribute="leading" secondItem="fQq-0f-dN9" secondAttribute="leading" constant="27" id="HDi-wL-XNA"/>
+                            <constraint firstItem="OV9-B0-yZU" firstAttribute="trailing" secondItem="fQq-0f-dN9" secondAttribute="trailing" id="Ib3-m9-ft2"/>
+                            <constraint firstItem="OV9-B0-yZU" firstAttribute="leading" secondItem="fQq-0f-dN9" secondAttribute="leading" id="OdQ-iK-ImK"/>
+                            <constraint firstItem="fQq-0f-dN9" firstAttribute="trailing" secondItem="Sey-Ap-YLc" secondAttribute="trailing" constant="8" id="VA1-HR-dpv"/>
+                            <constraint firstItem="EDV-DN-ku4" firstAttribute="leading" secondItem="fQq-0f-dN9" secondAttribute="leading" constant="8" id="Yho-pA-IpD"/>
+                            <constraint firstItem="OV9-B0-yZU" firstAttribute="top" secondItem="fQq-0f-dN9" secondAttribute="top" constant="8" id="ZAN-2N-Y8y"/>
+                            <constraint firstItem="Sey-Ap-YLc" firstAttribute="top" secondItem="AMO-6z-yol" secondAttribute="bottom" constant="-1" id="ZLT-pN-TFM"/>
+                            <constraint firstItem="1HN-Gy-OAV" firstAttribute="top" secondItem="EDV-DN-ku4" secondAttribute="bottom" constant="8" id="a5N-GT-TFr"/>
+                            <constraint firstItem="AMO-6z-yol" firstAttribute="centerY" secondItem="1HN-Gy-OAV" secondAttribute="centerY" id="f26-T1-GJK"/>
+                            <constraint firstItem="fQq-0f-dN9" firstAttribute="trailing" secondItem="EDV-DN-ku4" secondAttribute="trailing" constant="8" id="fza-6c-yud"/>
+                            <constraint firstItem="fQq-0f-dN9" firstAttribute="bottom" secondItem="Sey-Ap-YLc" secondAttribute="bottom" constant="8" id="otp-dh-jfh"/>
+                            <constraint firstItem="AMO-6z-yol" firstAttribute="leading" secondItem="1HN-Gy-OAV" secondAttribute="trailing" priority="750" constant="98" id="qpR-hF-hP4"/>
+                            <constraint firstItem="EDV-DN-ku4" firstAttribute="top" secondItem="OV9-B0-yZU" secondAttribute="bottom" constant="8" id="uFM-Vu-6ja"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fQq-0f-dN9"/>
                     </view>
