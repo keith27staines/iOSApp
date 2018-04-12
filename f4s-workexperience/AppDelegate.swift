@@ -12,6 +12,7 @@ import XCGLogger
 import GoogleMaps
 import GooglePlaces
 import KeychainSwift
+import UserNotifications
 
 let log = XCGLogger.default
 
