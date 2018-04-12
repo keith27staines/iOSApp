@@ -22,7 +22,7 @@ public class F4SHoursPickerViewController: UIViewController {
     
     var delegate: F4SHoursPickerDelegate? = nil
     
-    public var selectedHoursType: F4SHoursType = .allDay {
+    public var selectedHoursType: F4SHoursType = .all {
         didSet {
             amButton.isSelected = false
             pmButton.isSelected = false
@@ -33,7 +33,7 @@ public class F4SHoursPickerViewController: UIViewController {
                 amButton.isSelected = true
             case .pm:
                 pmButton.isSelected = true
-            case .allDay:
+            case .all:
                 ampmButton.isSelected = true
             case .custom:
                 return
@@ -50,8 +50,8 @@ public class F4SHoursPickerViewController: UIViewController {
         delegate?.hoursPicker(self, hoursType: .pm)
     }
     @IBAction func ampmButtonTapped(_ sender: Any) {
-        selectedHoursType = .allDay
-        delegate?.hoursPicker(self, hoursType: .allDay)
+        selectedHoursType = .all
+        delegate?.hoursPicker(self, hoursType: .all)
     }
     
     public override func viewDidLoad() {

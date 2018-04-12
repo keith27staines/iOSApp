@@ -164,7 +164,7 @@ public class F4SCalendarMonthViewDayCell: UICollectionViewCell {
             }
             return
         }
-        if day.isInPast {
+        if !day.isSixWeeksIntoFuture {
             if selectionState == .none {
                 self.backgroundColor = F4SCalendarColor.unselectable.backgroundColor
                 self.dateLabel.textColor = F4SCalendarColor.unselectable.textColor

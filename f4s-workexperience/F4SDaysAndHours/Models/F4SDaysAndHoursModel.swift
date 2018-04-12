@@ -20,7 +20,7 @@ public class F4SDaysAndHoursModel {
     private func loadData() {
         allDays = [F4SDayAndHourSelection]()
         for dayOfWeek in F4SDayOfWeek.allDaysZeroBased() {
-            let day = F4SDayAndHourSelection(dayIsSelected: false, dayOfWeek: dayOfWeek, hoursType: .allDay, contiguousPeriods: nil)
+            let day = F4SDayAndHourSelection(dayIsSelected: false, dayOfWeek: dayOfWeek, hoursType: .all, contiguousPeriods: nil)
             allDays.append(day)
         }
         selectDays(value: true, include: { (day) -> Bool in

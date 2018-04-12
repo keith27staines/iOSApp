@@ -36,8 +36,10 @@ class F4SCalendarContainerViewController: UIViewController {
 
 
     override func viewDidAppear(_ animated: Bool) {
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+1.0) { [weak self] in
-            self?.mainInfoTapped()
+        if F4SHelpContext.calendarController.shouldShowAutomatically {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+1.0) { [weak self] in
+                self?.mainInfoTapped()
+            }
         }
     }
     

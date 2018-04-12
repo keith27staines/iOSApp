@@ -8,25 +8,11 @@
 
 import Foundation
 
-public enum F4SHoursType {
+public enum F4SHoursType : String {
     case am
     case pm
-    case allDay
+    case all
     case custom
-    
-    public var description : String {
-        switch self {
-
-        case .am:
-            return "am"
-        case .pm:
-            return "pm"
-        case .allDay:
-            return "all"
-        case .custom:
-            return "custom"
-        }
-    }
 }
 
 /// A zero based enumeration with Monday as 0

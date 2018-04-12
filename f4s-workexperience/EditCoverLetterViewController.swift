@@ -263,6 +263,9 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
             return
         }
         vc.delegate = self
+        if let model = applicationContext.availabilityPeriod?.daysAndHours {
+            vc.model = model
+        }
         navigationController.pushViewController(vc, animated: true)
     }
     

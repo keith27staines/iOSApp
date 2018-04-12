@@ -50,6 +50,26 @@ public struct F4SCalendarDay : Equatable, Comparable {
         return F4SCalendarDay(cal: cal, date: previousMidday)
     }
     
+    public func addingDays(_ number: Int) -> F4SCalendarDay {
+        var day = self
+        var daysLeftToAdd = abs(number)
+        while daysLeftToAdd != 0 {
+            daysLeftToAdd -= 1
+            day = day.nextDay
+        }
+        return day
+    }
+    
+    public func subtractingDays(_ number: Int) -> F4SCalendarDay {
+        var day = self
+        var daysLeftToSubtract = abs(number)
+        while daysLeftToSubtract != 0 {
+            daysLeftToSubtract -= 1
+            day = day.previousDay
+        }
+        return day
+    }
+    
     /// Returns the year number that contains the current instance
     public var year: Int {
         return cal.yearNumber(date: midday)
@@ -70,10 +90,17 @@ public struct F4SCalendarDay : Equatable, Comparable {
         return self == today
     }
     
+    public var isSixWeeksIntoFuture: Bool {
+        let today = F4SCalendarDay(cal: cal, date: Date())
+        let cutoff = today.addingDays(6 * 7)
+        return self >= cutoff
+    }
+    
     public var isInPast: Bool {
         let today = F4SCalendarDay(cal: cal, date: Date())
         return self < today
     }
+    
     public var isInFuture: Bool {
         let today = F4SCalendarDay(cal: cal, date: Date())
         return self > today

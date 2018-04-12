@@ -31,8 +31,8 @@ class CoverLetterViewController: UIViewController {
         super.viewWillAppear(true)
         adjustNavigationBar()
         self.templateTextView.isScrollEnabled = false
-
         self.selectedTemplateChoices = TemplateChoiceDBOperations.sharedInstance.getSelectedTemplateBlanks()
+        applicationContext.availabilityPeriod = F4SAvailabilityPeriod.fromUserDefaults()
         loadTemplate()
     }
 
@@ -45,6 +45,7 @@ class CoverLetterViewController: UIViewController {
 extension CoverLetterViewController: EditCoverLetterViewControllerDelegate {
     func editCoverLetterDidUpdate(applicationContext: F4SApplicationContext) {
         self.applicationContext = applicationContext
+        self.applicationContext.availabilityPeriod?.saveToUserDefaults()
     }
 }
 
@@ -175,17 +176,17 @@ extension CoverLetterViewController {
             self.templateTextView.attributedText = self.getAttributedStringForTemplate(template: renderingTemplate.htmlDecode())
             self.templateTextView.isEditable = false
             setButtonStates(enableApply: allowApply)
-            if allowApply {
-                let editor = editCoverLetterViewController()!
-                editor.configureTemplate()
-                let firstDate = editor.getStartDate()!
-                let lastDate = editor.getEndDate()!
-                let calendar = F4SCalendar()
-                let firstDay = F4SCalendarDay(cal:calendar, date: firstDate)
-                let lastDay = F4SCalendarDay(cal: calendar, date: lastDate)
-                
-                applicationContext.availabilityPeriod = F4SAvailabilityPeriod(firstDay: firstDay, lastDay: lastDay, daysAndHours: nil)
-            }
+
+            let editor = editCoverLetterViewController()!
+            editor.configureTemplate()
+            let firstDate = editor.getStartDate()
+            let lastDate = editor.getEndDate()
+            let calendar = F4SCalendar()
+            let firstDay = firstDate != nil ? F4SCalendarDay(cal:calendar, date: firstDate!) : nil
+            let lastDay = lastDate != nil ? F4SCalendarDay(cal: calendar, date: lastDate!) : nil
+            let previousDaysHoursModel = applicationContext.availabilityPeriod?.daysAndHours
+            applicationContext.availabilityPeriod = F4SAvailabilityPeriod(firstDay: firstDay, lastDay: lastDay, daysAndHours: previousDaysHoursModel)
+            
         } catch {
             log.debug("error on parsing template")
         }
@@ -436,7 +437,7 @@ extension CoverLetterViewController {
             let currentTemplateUuid = currentTemplate?.uuid else {
             return
         }
-
+        applicationContext.availabilityPeriod?.saveToUserDefaults()
         MessageHandler.sharedInstance.showLoadingOverlay(self.view)
         let templateToUpdate = TemplateEntity(uuid: currentTemplateUuid, blank: self.selectedTemplateChoices)
         placement.interestsList = [Interest](InterestDBOperations.sharedInstance.interestsForCurrentUser())

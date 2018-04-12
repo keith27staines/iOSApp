@@ -12,17 +12,24 @@ public protocol F4SDisplayInformationViewControllerDelegate {
     func dismissDisplayInformation()
 }
 
-public enum F4SHelpContext {
+public enum F4SHelpContext : String {
     case daysAndHoursViewController
     case calendarController
     
     public var shouldShowAutomatically: Bool {
         get {
-            return true
+            return self.retrieveAutoDisplaySetting() ?? true
         }
         set {
-            
+            userDefaults.set(newValue, forKey: self.rawValue)
         }
+    }
+    var userDefaults: UserDefaults {
+        return UserDefaults.standard
+    }
+    
+    func retrieveAutoDisplaySetting() -> Bool? {
+        return userDefaults.value(forKey: self.rawValue) as? Bool
     }
     
     public var title: String {
@@ -60,8 +67,9 @@ class F4SDisplayInformationViewController: UIViewController {
     @IBOutlet weak var showNextTimeLabel: UILabel!
     
     @IBOutlet weak var textView: UITextView!
+    
     @IBAction func showNextTimeSwitchChanged(_ sender: Any) {
-        
+        helpContext.shouldShowAutomatically = showNextTimeSwitch.isOn
     }
     
     @IBAction func doneButtonTapped(_ sender: Any) {
@@ -71,6 +79,7 @@ class F4SDisplayInformationViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.view.alpha = 0.8
         textView.scrollRangeToVisible(NSRange(location:0, length:0))
+        applyStyle()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -79,8 +88,18 @@ class F4SDisplayInformationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let storedSetting = self.helpContext.retrieveAutoDisplaySetting() {
+            showNextTimeSwitch.isOn = storedSetting
+        } else {
+            showNextTimeSwitch.isOn = false
+            helpContext.shouldShowAutomatically = false
+        }
         titleLabel.text = helpContext.title
         textView.text = helpContext.helpText
+    }
+    
+    func applyStyle() {
+        F4SButtonStyler.apply(style: .primary, button: doneButton)
     }
 
 }

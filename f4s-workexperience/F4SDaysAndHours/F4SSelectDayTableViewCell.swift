@@ -23,7 +23,7 @@ public class F4SSelectDayTableViewCell: UITableViewCell {
         didSet {
             dayNameLabel.text = dayHourSelection.dayOfWeek.longSymbol
             tickImage.image = dayHourSelection.dayIsSelected ? #imageLiteral(resourceName: "roundedCheckboxPink") : #imageLiteral(resourceName: "roundedCheckboxGREY")
-            hoursDropdownLabel.text = dayHourSelection.hoursType.description
+            hoursDropdownLabel.text = dayHourSelection.hoursType.rawValue
             enable(dayHourSelection.dayIsSelected)
         }
     }
