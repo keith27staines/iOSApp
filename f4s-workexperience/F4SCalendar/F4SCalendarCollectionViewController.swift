@@ -99,14 +99,13 @@ class F4SCalendarCollectionViewController: UICollectionViewController {
                                  viewForSupplementaryElementOfKind kind: String,
                                  at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
-        case UICollectionElementKindSectionHeader:
+        default:
+            assert(kind == UICollectionElementKindSectionHeader, "Unexpected kind")
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "monthHeaderViewCell", for: indexPath) as! F4SMonthHeaderView
             let displayMonth = cal.displayableMonth(index: indexPath.section)
             headerView.label.text = displayMonth.month.monthSymbol + " " + String(describing: displayMonth.month.year)
             headerView.backgroundColor = UIColor.white
             return headerView
-        default:
-            assert(false, "Unexpected element kind")
         }
     }
 

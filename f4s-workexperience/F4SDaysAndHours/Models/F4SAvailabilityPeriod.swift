@@ -61,6 +61,9 @@ public struct F4SAvailabilityPeriod {
 
             let hoursType = F4SHoursType(rawValue: jsonDay.time)
             daysHoursModel.setHoursForDay(hoursType: hoursType!, day: dayHourSelection)
+            daysHoursModel.selectDays(value: true) { (dh) -> Bool in
+                dh.dayOfWeek == dayHourSelection.dayOfWeek
+            }
         }
         
         let cal = F4SCalendar()
