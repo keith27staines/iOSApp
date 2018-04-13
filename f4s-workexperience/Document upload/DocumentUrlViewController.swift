@@ -14,8 +14,8 @@ class DocumentUrlViewController: UIViewController {
         return F4SDocumentUrlModel(delegate: self, placementUuid: self.applicationContext.placement!.placementUuid)
     }()
     
-    var applicationContext: ApplicationContext!
-    var completion: ((ApplicationContext) -> Void)?
+    var applicationContext: F4SApplicationContext!
+    var completion: ((F4SApplicationContext) -> Void)?
     
     @IBOutlet weak var topImageHeightConstraint: NSLayoutConstraint!
     @IBOutlet var plusButtonCenterConstraint: NSLayoutConstraint!
@@ -86,7 +86,11 @@ class DocumentUrlViewController: UIViewController {
     
     @IBAction func showCVGuide(_ sender: Any) {
         let url = URL(string:"https://interactive.barclayslifeskills.com/staticmodules/downloads/cv-tips.pdf")!
-        UIApplication.shared.openURL(url)
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
     }
     func updateEnabledStateOfAddButton() {
         DispatchQueue.main.async { [weak self] in

@@ -18,18 +18,34 @@ public protocol F4SApiService {
     var url: URL { get }
 }
 
+public enum F4SHttpRequestVerb {
+    case get
+    case put
+    case patch
+    var name: String {
+        switch self {
+        case .get:
+            return "GET"
+        case .put:
+            return "PUT"
+        case .patch:
+            return "PATCH"
+        }
+    }
+}
+
 extension F4SApiService {
     
-    public func putDataTask<A:Codable>(putObject:A, attempting: String, completion: @escaping (F4SNetworkResult<String>) -> ()) -> URLSessionDataTask {
+    public func putDataTask<A:Codable>(verb:F4SHttpRequestVerb, object:A, attempting: String, completion: @escaping (F4SNetworkResult<String>) -> ()) -> URLSessionDataTask {
         
         var request = URLRequest(url: url)
-        request.httpMethod = "PUT"
+        request.httpMethod = verb.name
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         
         do {
             let encoder = JSONEncoder()
-            request.httpBody = try encoder.encode(putObject)
+            request.httpBody = try encoder.encode(object)
    
             
         } catch {
@@ -84,6 +100,7 @@ extension F4SApiService {
                 return
             } catch (let error) {
                 let f4sError = F4SNetworkDataErrorType.undecodableData(data).dataError(attempting: attempting + error.localizedDescription)
+                log.debug("error attempting \(attempting), \n\(f4sError)")
                 completion(F4SNetworkResult.error(f4sError))
                 return
             }
@@ -144,14 +161,28 @@ public class F4SDataTaskService : F4SApiService {
     }
     
     /// Performs an HTTP post request
-    /// - parameter putObject: The codable (json encodable) object to be posted
+    /// - parameter object: The codable (json encodable) object to be posted to the server
     /// - parameter attempting: A short high level description of the reason the operation is being performed
     /// - parameter completion: Returns a result containing either the http response data or error information
-    internal func put<A: Codable>(putObject: A, attempting: String, completion: @escaping (F4SNetworkResult<String>) -> ()) {
+    internal func put<A: Codable>(object: A, attempting: String, completion: @escaping (F4SNetworkResult<String>) -> ()) {
         task?.cancel()
-        task = putDataTask(putObject: putObject, attempting: attempting, completion: { (result) in
+        task = putDataTask(verb: .put, object: object, attempting: attempting, completion: { (result) in
             completion(result)
         })
+        task?.resume()
+    }
+    
+    
+    /// Performs an HTTP patch request
+    /// - parameter object: The codable (json encodable) object to be patched to the server
+    /// - parameter attempting: A short high level description of the reason the operation is being performed
+    /// - parameter completion: Returns a result containing either the http response data or error information
+    internal func patch<A: Codable>(object: A, attempting: String, completion: @escaping (F4SNetworkResult<String>) -> ()) {
+        task?.cancel()
+        task = putDataTask(verb: .patch, object: object, attempting: attempting, completion: { (result) in
+            completion(result)
+        })
+        
         task?.resume()
     }
 }

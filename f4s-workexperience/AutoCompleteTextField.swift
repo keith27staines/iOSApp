@@ -140,7 +140,6 @@ open class AutoCompleteTextField: UITextField {
         autoCompleteTableView = tableView
         tableView.register(UINib(nibName: "AutoCompleteTableViewCell", bundle: nil), forCellReuseIdentifier: self.cellIdentifier)
         tableView.separatorStyle = .none
-        print("setup autocompletetable called")
     }
 
     // MARK: - Private Methods
@@ -187,9 +186,7 @@ open class AutoCompleteTextField: UITextField {
             var newFrame = autoCompleteTableView.frame
             newFrame.size.height = autoCompleteTableHeight
             newFrame.size.width = autoCompleteTableWidth
-            print(newFrame)
             autoCompleteTableView.frame = newFrame
-            print(autoCompleteTableView.frame)
             self.autoCompleteTableView?.superview?.bringSubview(toFront: autoCompleteTableView)
         }
     }
@@ -241,7 +238,6 @@ open class AutoCompleteTextField: UITextField {
     }
 
     @objc func textFieldDidEndEditing() {
-        debugPrint("textfielddidendediting")
         self.autoCompleteTableView?.isHidden = true
         DispatchQueue.main.async(execute: { () in
             self.autoCompleteTableView?.isHidden = true

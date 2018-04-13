@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Z9f-PN-yrm">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Display Information View Controller-->
+        <scene sceneID="XJX-KT-GbB">
+            <objects>
+                <viewController storyboardIdentifier="F4SDisplayInformationViewController" id="Z9f-PN-yrm" customClass="F4SDisplayInformationViewController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Pb7-pf-WVT">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1HN-Gy-OAV">
+                                <rect key="frame" x="8" y="252" width="284" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="g0J-C3-wvl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Got it!"/>
+                                <connections>
+                                    <action selector="doneButtonTapped:" destination="Z9f-PN-yrm" eventType="touchUpInside" id="nOe-93-b9c"/>
+                                </connections>
+                            </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="AMO-6z-yol">
+                                <rect key="frame" x="8" y="209" width="51" height="31"/>
+                                <connections>
+                                    <action selector="showNextTimeSwitchChanged:" destination="Z9f-PN-yrm" eventType="valueChanged" id="Ihp-d9-jwo"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Screen info" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OV9-B0-yZU">
+                                <rect key="frame" x="0.0" y="8" width="300" height="20.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="This is some text describing what the user can do on this screen" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="EDV-DN-ku4">
+                                <rect key="frame" x="8" y="37" width="284" height="160"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" text="show next time?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sey-Ap-YLc">
+                                <rect key="frame" x="69" y="217" width="85" height="14"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="AMO-6z-yol" firstAttribute="centerY" secondItem="Sey-Ap-YLc" secondAttribute="centerY" id="3E4-Ht-nbA"/>
+                            <constraint firstItem="Sey-Ap-YLc" firstAttribute="leading" secondItem="AMO-6z-yol" secondAttribute="trailing" constant="12" id="BRA-PA-XmK"/>
+                            <constraint firstItem="OV9-B0-yZU" firstAttribute="trailing" secondItem="fQq-0f-dN9" secondAttribute="trailing" id="Ib3-m9-ft2"/>
+                            <constraint firstItem="1HN-Gy-OAV" firstAttribute="top" secondItem="AMO-6z-yol" secondAttribute="bottom" constant="12" id="Nmj-FY-Sa7"/>
+                            <constraint firstItem="OV9-B0-yZU" firstAttribute="leading" secondItem="fQq-0f-dN9" secondAttribute="leading" id="OdQ-iK-ImK"/>
+                            <constraint firstItem="EDV-DN-ku4" firstAttribute="leading" secondItem="fQq-0f-dN9" secondAttribute="leading" constant="8" id="Yho-pA-IpD"/>
+                            <constraint firstItem="OV9-B0-yZU" firstAttribute="top" secondItem="fQq-0f-dN9" secondAttribute="top" constant="8" id="ZAN-2N-Y8y"/>
+                            <constraint firstItem="AMO-6z-yol" firstAttribute="top" secondItem="EDV-DN-ku4" secondAttribute="bottom" constant="12" id="ewl-w0-uQy"/>
+                            <constraint firstItem="1HN-Gy-OAV" firstAttribute="centerX" secondItem="Pb7-pf-WVT" secondAttribute="centerX" id="f5Z-CY-hgM"/>
+                            <constraint firstItem="fQq-0f-dN9" firstAttribute="trailing" secondItem="EDV-DN-ku4" secondAttribute="trailing" constant="8" id="fza-6c-yud"/>
+                            <constraint firstItem="AMO-6z-yol" firstAttribute="leading" secondItem="fQq-0f-dN9" secondAttribute="leading" constant="8" id="iy5-jX-4EP"/>
+                            <constraint firstItem="1HN-Gy-OAV" firstAttribute="leading" secondItem="fQq-0f-dN9" secondAttribute="leading" constant="8" id="tge-xA-goQ"/>
+                            <constraint firstItem="fQq-0f-dN9" firstAttribute="bottom" secondItem="1HN-Gy-OAV" secondAttribute="bottom" constant="8" id="uBq-Je-uPC"/>
+                            <constraint firstItem="EDV-DN-ku4" firstAttribute="top" secondItem="OV9-B0-yZU" secondAttribute="bottom" constant="8" id="uFM-Vu-6ja"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="fQq-0f-dN9"/>
+                    </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <size key="freeformSize" width="300" height="300"/>
+                    <connections>
+                        <outlet property="doneButton" destination="1HN-Gy-OAV" id="XO7-ud-zgq"/>
+                        <outlet property="showNextTimeLabel" destination="Sey-Ap-YLc" id="Xs8-u2-OUF"/>
+                        <outlet property="showNextTimeSwitch" destination="AMO-6z-yol" id="0Bb-f7-sul"/>
+                        <outlet property="textView" destination="EDV-DN-ku4" id="cd4-yB-m8P"/>
+                        <outlet property="titleLabel" destination="OV9-B0-yZU" id="tNg-Ml-3dk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IQy-AV-8sj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-321.60000000000002" y="259.97001499250376"/>
+        </scene>
+    </scenes>
+</document>

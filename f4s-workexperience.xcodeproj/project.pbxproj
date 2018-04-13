@@ -147,6 +147,8 @@
 		D5E9EC021DDD9F9000BD796E /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E9EC011DDD9F9000BD796E /* GradientView.swift */; };
 		FC11006A1FB36A230055EB9A /* ReachabilityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */; };
 		FC25A05F1F850DF4002F51A9 /* F4SCompanyPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */; };
+		FC31F095204D54C6009DD526 /* F4SDebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */; };
+		FC31F097204D54E3009DD526 /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC31F096204D54E3009DD526 /* Debug.storyboard */; };
 		FC32E3D9200F322800D7C36A /* PartnerModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32E3D8200F322800D7C36A /* PartnerModelTests.swift */; };
 		FC4336CA202DB953001D0569 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4336C9202DB953001D0569 /* StringExtensions.swift */; };
 		FC4336CC202DB999001D0569 /* F4SStringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4336CB202DB999001D0569 /* F4SStringExtensionTests.swift */; };
@@ -158,6 +160,9 @@
 		FC59B1911F81549B0068EC9C /* F4SQuadtreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18F1F81549A0068EC9C /* F4SQuadtreeTests.swift */; };
 		FC59B1921F8155480068EC9C /* F4SQuadtree.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18C1F81546C0068EC9C /* F4SQuadtree.swift */; };
 		FC59B1931F81554F0068EC9C /* CGRect+Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18D1F81546C0068EC9C /* CGRect+Methods.swift */; };
+		FC67E60A207B70CE006F07FE /* F4SCalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC67E609207B70CE006F07FE /* F4SCalendarService.swift */; };
+		FC67E60D207B73CE006F07FE /* F4SCalendarServiceJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC67E60C207B73CE006F07FE /* F4SCalendarServiceJson.swift */; };
+		FC67E60F207BA80A006F07FE /* F4SAvailabilityPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC67E60E207BA80A006F07FE /* F4SAvailabilityPeriod.swift */; };
 		FC681C001F57473D0077BECA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFE1F57473D0077BECA /* Podfile */; };
 		FC681C011F57473D0077BECA /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFF1F57473D0077BECA /* Podfile.lock */; };
 		FC6C11BA202870D6002C8EA5 /* F4SGrammar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6C11B9202870D6002C8EA5 /* F4SGrammar.swift */; };
@@ -178,6 +183,40 @@
 		FCA6D2941FA741590037962B /* F4SStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6D2931FA741590037962B /* F4SStyle.swift */; };
 		FCA6D2961FA75DE40037962B /* Styler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6D2951FA75DE40037962B /* Styler.swift */; };
 		FCA6D2B61FA88CE10037962B /* PartnerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6D2B51FA88CE00037962B /* PartnerService.swift */; };
+		FCB46F00204E7DCC00F0779F /* F4SDebugModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46EFF204E7DCC00F0779F /* F4SDebugModel.swift */; };
+		FCB46F02204FD86D00F0779F /* F4SLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46F01204FD86D00F0779F /* F4SLogViewController.swift */; };
+		FCB46F042051365400F0779F /* F4SFeatureSwitchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46F032051365400F0779F /* F4SFeatureSwitchesViewController.swift */; };
+		FCB46F0820513D0100F0779F /* F4SFeatureSwitchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46F0720513D0100F0779F /* F4SFeatureSwitchModel.swift */; };
+		FCB46F0A20516FD200F0779F /* F4SFeatureSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46F0920516FD200F0779F /* F4SFeatureSwitchTableViewCell.swift */; };
+		FCB46F0C20518EE900F0779F /* F4SFeatureSwitchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46F0B20518EE900F0779F /* F4SFeatureSwitchService.swift */; };
+		FCB6B8BA2074C5750042C725 /* DayHourPicker.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCB6B8B92074C5750042C725 /* DayHourPicker.xcassets */; };
+		FCB6B8C72074C58F0042C725 /* F4SPageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8BC2074C58E0042C725 /* F4SPageHeaderView.swift */; };
+		FCB6B8C82074C58F0042C725 /* F4SDaysAndHoursViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8BD2074C58E0042C725 /* F4SDaysAndHoursViewController.swift */; };
+		FCB6B8C92074C58F0042C725 /* F4SHoursPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8BE2074C58E0042C725 /* F4SHoursPickerViewController.swift */; };
+		FCB6B8CA2074C58F0042C725 /* F4SDisplayInformationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCB6B8BF2074C58E0042C725 /* F4SDisplayInformationViewController.storyboard */; };
+		FCB6B8CB2074C58F0042C725 /* F4SDaysAndHours.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCB6B8C12074C58E0042C725 /* F4SDaysAndHours.storyboard */; };
+		FCB6B8CC2074C58F0042C725 /* F4SDisplayInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8C32074C58E0042C725 /* F4SDisplayInformationViewController.swift */; };
+		FCB6B8CD2074C58F0042C725 /* F4SDayAndHoursSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8C42074C58E0042C725 /* F4SDayAndHoursSelection.swift */; };
+		FCB6B8CE2074C58F0042C725 /* F4SSelectDayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8C52074C58E0042C725 /* F4SSelectDayTableViewCell.swift */; };
+		FCB6B8CF2074C58F0042C725 /* F4SDaysAndHoursModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8C62074C58E0042C725 /* F4SDaysAndHoursModel.swift */; };
+		FCB6B8E12074C59C0042C725 /* F4SCalendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCB6B8D12074C59C0042C725 /* F4SCalendar.storyboard */; };
+		FCB6B8E22074C59C0042C725 /* F4SDayCalendarViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8D22074C59C0042C725 /* F4SDayCalendarViewCell.swift */; };
+		FCB6B8E32074C59C0042C725 /* F4SMonthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8D32074C59C0042C725 /* F4SMonthHeaderView.swift */; };
+		FCB6B8E42074C59C0042C725 /* F4SCalendarColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8D52074C59C0042C725 /* F4SCalendarColors.swift */; };
+		FCB6B8E52074C59C0042C725 /* F4SCalendarCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8D62074C59C0042C725 /* F4SCalendarCollectionViewController.swift */; };
+		FCB6B8E62074C59C0042C725 /* F4SCalendarWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8D82074C59C0042C725 /* F4SCalendarWeek.swift */; };
+		FCB6B8E72074C59C0042C725 /* F4SCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8D92074C59C0042C725 /* F4SCalendar.swift */; };
+		FCB6B8E82074C59C0042C725 /* F4SCalendarMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8DA2074C59C0042C725 /* F4SCalendarMonth.swift */; };
+		FCB6B8E92074C59C0042C725 /* F4SCalendarDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8DB2074C59C0042C725 /* F4SCalendarDay.swift */; };
+		FCB6B8EA2074C59C0042C725 /* F4SDisplayableMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8DC2074C59C0042C725 /* F4SDisplayableMonth.swift */; };
+		FCB6B8EB2074C59C0042C725 /* F4SCalendarEnumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8DD2074C59C0042C725 /* F4SCalendarEnumerations.swift */; };
+		FCB6B8EC2074C59C0042C725 /* F4SAvailabilitySequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8DE2074C59C0042C725 /* F4SAvailabilitySequence.swift */; };
+		FCB6B8ED2074C59C0042C725 /* F4SCalendarContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8DF2074C59C0042C725 /* F4SCalendarContainerViewController.swift */; };
+		FCB6B8F62074C5ED0042C725 /* F4SCalendarMonthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8F12074C5EC0042C725 /* F4SCalendarMonthTests.swift */; };
+		FCB6B8F72074C5ED0042C725 /* F4SCalendarWeekTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8F22074C5EC0042C725 /* F4SCalendarWeekTests.swift */; };
+		FCB6B8F82074C5ED0042C725 /* F4SCalendarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8F32074C5EC0042C725 /* F4SCalendarTests.swift */; };
+		FCB6B8F92074C5ED0042C725 /* F4SCalendarDayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8F42074C5EC0042C725 /* F4SCalendarDayTests.swift */; };
+		FCB6B8FA2074C5ED0042C725 /* F4SDisplayableMonthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8F52074C5EC0042C725 /* F4SDisplayableMonthTests.swift */; };
 		FCB6D9361F75056100B8C268 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCB6D9351F75056000B8C268 /* Branding.plist */; };
 		FCC5EBB61F449C310085CE15 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FCC5EBB51F449C310085CE15 /* README.md */; };
 		FCC753EE1F80F26200E9ECD6 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC753ED1F80F26200E9ECD6 /* MapModel.swift */; };
@@ -412,6 +451,8 @@
 		D5E9EC011DDD9F9000BD796E /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityExtension.swift; sourceTree = "<group>"; };
 		FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyPin.swift; sourceTree = "<group>"; };
+		FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDebugViewController.swift; sourceTree = "<group>"; };
+		FC31F096204D54E3009DD526 /* Debug.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
 		FC32E3D8200F322800D7C36A /* PartnerModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerModelTests.swift; sourceTree = "<group>"; };
 		FC4336C9202DB953001D0569 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		FC4336CB202DB999001D0569 /* F4SStringExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SStringExtensionTests.swift; sourceTree = "<group>"; };
@@ -423,6 +464,9 @@
 		FC59B18D1F81546C0068EC9C /* CGRect+Methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Methods.swift"; sourceTree = "<group>"; };
 		FC59B18E1F81549A0068EC9C /* CGRect+MethodsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+MethodsTests.swift"; sourceTree = "<group>"; };
 		FC59B18F1F81549A0068EC9C /* F4SQuadtreeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SQuadtreeTests.swift; sourceTree = "<group>"; };
+		FC67E609207B70CE006F07FE /* F4SCalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCalendarService.swift; sourceTree = "<group>"; };
+		FC67E60C207B73CE006F07FE /* F4SCalendarServiceJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCalendarServiceJson.swift; sourceTree = "<group>"; };
+		FC67E60E207BA80A006F07FE /* F4SAvailabilityPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SAvailabilityPeriod.swift; sourceTree = "<group>"; };
 		FC681BFE1F57473D0077BECA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		FC681BFF1F57473D0077BECA /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		FC6C11B9202870D6002C8EA5 /* F4SGrammar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SGrammar.swift; sourceTree = "<group>"; };
@@ -444,6 +488,40 @@
 		FCA6D2931FA741590037962B /* F4SStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SStyle.swift; sourceTree = "<group>"; };
 		FCA6D2951FA75DE40037962B /* Styler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styler.swift; sourceTree = "<group>"; };
 		FCA6D2B51FA88CE00037962B /* PartnerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerService.swift; sourceTree = "<group>"; };
+		FCB46EFF204E7DCC00F0779F /* F4SDebugModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDebugModel.swift; sourceTree = "<group>"; };
+		FCB46F01204FD86D00F0779F /* F4SLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SLogViewController.swift; sourceTree = "<group>"; };
+		FCB46F032051365400F0779F /* F4SFeatureSwitchesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SFeatureSwitchesViewController.swift; sourceTree = "<group>"; };
+		FCB46F0720513D0100F0779F /* F4SFeatureSwitchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SFeatureSwitchModel.swift; sourceTree = "<group>"; };
+		FCB46F0920516FD200F0779F /* F4SFeatureSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SFeatureSwitchTableViewCell.swift; sourceTree = "<group>"; };
+		FCB46F0B20518EE900F0779F /* F4SFeatureSwitchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SFeatureSwitchService.swift; sourceTree = "<group>"; };
+		FCB6B8B92074C5750042C725 /* DayHourPicker.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = DayHourPicker.xcassets; sourceTree = "<group>"; };
+		FCB6B8BC2074C58E0042C725 /* F4SPageHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SPageHeaderView.swift; sourceTree = "<group>"; };
+		FCB6B8BD2074C58E0042C725 /* F4SDaysAndHoursViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDaysAndHoursViewController.swift; sourceTree = "<group>"; };
+		FCB6B8BE2074C58E0042C725 /* F4SHoursPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SHoursPickerViewController.swift; sourceTree = "<group>"; };
+		FCB6B8BF2074C58E0042C725 /* F4SDisplayInformationViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SDisplayInformationViewController.storyboard; sourceTree = "<group>"; };
+		FCB6B8C22074C58E0042C725 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/F4SDaysAndHours.storyboard; sourceTree = "<group>"; };
+		FCB6B8C32074C58E0042C725 /* F4SDisplayInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDisplayInformationViewController.swift; sourceTree = "<group>"; };
+		FCB6B8C42074C58E0042C725 /* F4SDayAndHoursSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDayAndHoursSelection.swift; sourceTree = "<group>"; };
+		FCB6B8C52074C58E0042C725 /* F4SSelectDayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SSelectDayTableViewCell.swift; sourceTree = "<group>"; };
+		FCB6B8C62074C58E0042C725 /* F4SDaysAndHoursModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDaysAndHoursModel.swift; sourceTree = "<group>"; };
+		FCB6B8D12074C59C0042C725 /* F4SCalendar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SCalendar.storyboard; sourceTree = "<group>"; };
+		FCB6B8D22074C59C0042C725 /* F4SDayCalendarViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDayCalendarViewCell.swift; sourceTree = "<group>"; };
+		FCB6B8D32074C59C0042C725 /* F4SMonthHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SMonthHeaderView.swift; sourceTree = "<group>"; };
+		FCB6B8D52074C59C0042C725 /* F4SCalendarColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarColors.swift; sourceTree = "<group>"; };
+		FCB6B8D62074C59C0042C725 /* F4SCalendarCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarCollectionViewController.swift; sourceTree = "<group>"; };
+		FCB6B8D82074C59C0042C725 /* F4SCalendarWeek.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarWeek.swift; sourceTree = "<group>"; };
+		FCB6B8D92074C59C0042C725 /* F4SCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendar.swift; sourceTree = "<group>"; };
+		FCB6B8DA2074C59C0042C725 /* F4SCalendarMonth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarMonth.swift; sourceTree = "<group>"; };
+		FCB6B8DB2074C59C0042C725 /* F4SCalendarDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarDay.swift; sourceTree = "<group>"; };
+		FCB6B8DC2074C59C0042C725 /* F4SDisplayableMonth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDisplayableMonth.swift; sourceTree = "<group>"; };
+		FCB6B8DD2074C59C0042C725 /* F4SCalendarEnumerations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarEnumerations.swift; sourceTree = "<group>"; };
+		FCB6B8DE2074C59C0042C725 /* F4SAvailabilitySequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SAvailabilitySequence.swift; sourceTree = "<group>"; };
+		FCB6B8DF2074C59C0042C725 /* F4SCalendarContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarContainerViewController.swift; sourceTree = "<group>"; };
+		FCB6B8F12074C5EC0042C725 /* F4SCalendarMonthTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarMonthTests.swift; sourceTree = "<group>"; };
+		FCB6B8F22074C5EC0042C725 /* F4SCalendarWeekTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarWeekTests.swift; sourceTree = "<group>"; };
+		FCB6B8F32074C5EC0042C725 /* F4SCalendarTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarTests.swift; sourceTree = "<group>"; };
+		FCB6B8F42074C5EC0042C725 /* F4SCalendarDayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarDayTests.swift; sourceTree = "<group>"; };
+		FCB6B8F52074C5EC0042C725 /* F4SDisplayableMonthTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDisplayableMonthTests.swift; sourceTree = "<group>"; };
 		FCB6D9351F75056000B8C268 /* Branding.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
 		FCC5EBB51F449C310085CE15 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FCC753ED1F80F26200E9ECD6 /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
@@ -840,6 +918,8 @@
 		40E78E501DD328E0000A3776 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				FCB6B8B82074C51B0042C725 /* Calendar and diary */,
+				FC31F093204D547E009DD526 /* HiddenDebugScreen */,
 				FCE20CBA203C12A300CA821D /* Document upload */,
 				FCD3485620038B6B00DC1316 /* Authentication */,
 				FCD884F71FFBC0A000F05B08 /* Recommendations */,
@@ -1117,6 +1197,21 @@
 			name = MapModel;
 			sourceTree = "<group>";
 		};
+		FC31F093204D547E009DD526 /* HiddenDebugScreen */ = {
+			isa = PBXGroup;
+			children = (
+				FC31F096204D54E3009DD526 /* Debug.storyboard */,
+				FCB46EFF204E7DCC00F0779F /* F4SDebugModel.swift */,
+				FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */,
+				FCB46F01204FD86D00F0779F /* F4SLogViewController.swift */,
+				FCB46F032051365400F0779F /* F4SFeatureSwitchesViewController.swift */,
+				FCB46F0720513D0100F0779F /* F4SFeatureSwitchModel.swift */,
+				FCB46F0920516FD200F0779F /* F4SFeatureSwitchTableViewCell.swift */,
+				FCB46F0B20518EE900F0779F /* F4SFeatureSwitchService.swift */,
+			);
+			path = HiddenDebugScreen;
+			sourceTree = "<group>";
+		};
 		FC4BB6011FA20E6A00173864 /* Partner selection */ = {
 			isa = PBXGroup;
 			children = (
@@ -1136,6 +1231,25 @@
 				FC59B18C1F81546C0068EC9C /* F4SQuadtree.swift */,
 			);
 			name = F4SDataStructures;
+			sourceTree = "<group>";
+		};
+		FC67E608207B6F95006F07FE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FCB6B8C42074C58E0042C725 /* F4SDayAndHoursSelection.swift */,
+				FCB6B8C62074C58E0042C725 /* F4SDaysAndHoursModel.swift */,
+				FC67E60E207BA80A006F07FE /* F4SAvailabilityPeriod.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FC67E60B207B73A4006F07FE /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FC67E609207B70CE006F07FE /* F4SCalendarService.swift */,
+				FC67E60C207B73CE006F07FE /* F4SCalendarServiceJson.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		FC99F3D51FFE604000E3AC5A /* F4SNetworkServices */ = {
@@ -1164,6 +1278,73 @@
 				FCA6D2951FA75DE40037962B /* Styler.swift */,
 			);
 			name = "Branding and styling";
+			sourceTree = "<group>";
+		};
+		FCB6B8B82074C51B0042C725 /* Calendar and diary */ = {
+			isa = PBXGroup;
+			children = (
+				FCB6B8BB2074C58E0042C725 /* F4SDaysAndHours */,
+				FCB6B8D02074C59C0042C725 /* F4SCalendar */,
+				FCB6B8F02074C5EC0042C725 /* Calendar tests */,
+				FCB6B8B92074C5750042C725 /* DayHourPicker.xcassets */,
+				FC67E60B207B73A4006F07FE /* Services */,
+			);
+			name = "Calendar and diary";
+			sourceTree = "<group>";
+		};
+		FCB6B8BB2074C58E0042C725 /* F4SDaysAndHours */ = {
+			isa = PBXGroup;
+			children = (
+				FCB6B8C52074C58E0042C725 /* F4SSelectDayTableViewCell.swift */,
+				FCB6B8C12074C58E0042C725 /* F4SDaysAndHours.storyboard */,
+				FCB6B8BC2074C58E0042C725 /* F4SPageHeaderView.swift */,
+				FCB6B8BD2074C58E0042C725 /* F4SDaysAndHoursViewController.swift */,
+				FCB6B8BE2074C58E0042C725 /* F4SHoursPickerViewController.swift */,
+				FCB6B8BF2074C58E0042C725 /* F4SDisplayInformationViewController.storyboard */,
+				FCB6B8C32074C58E0042C725 /* F4SDisplayInformationViewController.swift */,
+				FC67E608207B6F95006F07FE /* Models */,
+			);
+			path = F4SDaysAndHours;
+			sourceTree = "<group>";
+		};
+		FCB6B8D02074C59C0042C725 /* F4SCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				FCB6B8D12074C59C0042C725 /* F4SCalendar.storyboard */,
+				FCB6B8DF2074C59C0042C725 /* F4SCalendarContainerViewController.swift */,
+				FCB6B8D62074C59C0042C725 /* F4SCalendarCollectionViewController.swift */,
+				FCB6B8D22074C59C0042C725 /* F4SDayCalendarViewCell.swift */,
+				FCB6B8D32074C59C0042C725 /* F4SMonthHeaderView.swift */,
+				FCB6B8D52074C59C0042C725 /* F4SCalendarColors.swift */,
+				FCB6B8D72074C59C0042C725 /* F4SCalendar models */,
+			);
+			path = F4SCalendar;
+			sourceTree = "<group>";
+		};
+		FCB6B8D72074C59C0042C725 /* F4SCalendar models */ = {
+			isa = PBXGroup;
+			children = (
+				FCB6B8D82074C59C0042C725 /* F4SCalendarWeek.swift */,
+				FCB6B8D92074C59C0042C725 /* F4SCalendar.swift */,
+				FCB6B8DA2074C59C0042C725 /* F4SCalendarMonth.swift */,
+				FCB6B8DB2074C59C0042C725 /* F4SCalendarDay.swift */,
+				FCB6B8DC2074C59C0042C725 /* F4SDisplayableMonth.swift */,
+				FCB6B8DD2074C59C0042C725 /* F4SCalendarEnumerations.swift */,
+				FCB6B8DE2074C59C0042C725 /* F4SAvailabilitySequence.swift */,
+			);
+			path = "F4SCalendar models";
+			sourceTree = "<group>";
+		};
+		FCB6B8F02074C5EC0042C725 /* Calendar tests */ = {
+			isa = PBXGroup;
+			children = (
+				FCB6B8F12074C5EC0042C725 /* F4SCalendarMonthTests.swift */,
+				FCB6B8F22074C5EC0042C725 /* F4SCalendarWeekTests.swift */,
+				FCB6B8F32074C5EC0042C725 /* F4SCalendarTests.swift */,
+				FCB6B8F42074C5EC0042C725 /* F4SCalendarDayTests.swift */,
+				FCB6B8F52074C5EC0042C725 /* F4SDisplayableMonthTests.swift */,
+			);
+			path = "Calendar tests";
 			sourceTree = "<group>";
 		};
 		FCD3485620038B6B00DC1316 /* Authentication */ = {
@@ -1287,7 +1468,7 @@
 			attributes = {
 				CLASSPREFIX = F4S;
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = Founders4Schools;
 				TargetAttributes = {
 					40E78E121DD31A86000A3776 = {
@@ -1303,6 +1484,9 @@
 							};
 							com.apple.SafariKeychain = {
 								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 0;
 							};
 						};
 					};
@@ -1344,6 +1528,9 @@
 				204203F51E4B793F007C7409 /* Favourite.storyboard in Resources */,
 				40A28CC21E24ED0D0077D490 /* SuccessExtraInfo.storyboard in Resources */,
 				40E78E8F1DD32C4E000A3776 /* Settings.bundle in Resources */,
+				FC31F097204D54E3009DD526 /* Debug.storyboard in Resources */,
+				FCB6B8CB2074C58F0042C725 /* F4SDaysAndHours.storyboard in Resources */,
+				FCB6B8E12074C59C0042C725 /* F4SCalendar.storyboard in Resources */,
 				D5E9EBE81DD60AB300BD796E /* Localizable.strings in Resources */,
 				FCA268CA1FD1557000537EB1 /* circle.yml in Resources */,
 				FCB6D9361F75056100B8C268 /* Branding.plist in Resources */,
@@ -1355,6 +1542,7 @@
 				FCC5EBB61F449C310085CE15 /* README.md in Resources */,
 				204C89651DF5F03F00D8493A /* EditFooter.xib in Resources */,
 				FC681C011F57473D0077BECA /* Podfile.lock in Resources */,
+				FCB6B8BA2074C5750042C725 /* DayHourPicker.xcassets in Resources */,
 				204C89641DF5F03F00D8493A /* EditCoverLetter.storyboard in Resources */,
 				FCD3485820038B8700DC1316 /* Auth0.plist in Resources */,
 				2037B0B41DEC87F200A9DE3E /* CoverLetter.storyboard in Resources */,
@@ -1363,6 +1551,7 @@
 				40E78E1E1DD31A86000A3776 /* Assets.xcassets in Resources */,
 				D54E0FFD1E044B0400A51560 /* InfoWindowView.xib in Resources */,
 				40A5CF3A1DED6F8D000007AB /* InterestsView.storyboard in Resources */,
+				FCB6B8CA2074C58F0042C725 /* F4SDisplayInformationViewController.storyboard in Resources */,
 				FCD3486B20049DFB00DC1316 /* F4SEmailVerification.storyboard in Resources */,
 				201458C51E1CFCE500DBC9BD /* Message.storyboard in Resources */,
 				D54E10051E044BA000A51560 /* ProcessedMessages.storyboard in Resources */,
@@ -1527,6 +1716,7 @@
 				D5E9EC021DDD9F9000BD796E /* GradientView.swift in Sources */,
 				204203F71E4B7966007C7409 /* FavouriteViewController.swift in Sources */,
 				20B128181DDA1A3900CE3F1F /* Config.swift in Sources */,
+				FCB6B8C82074C58F0042C725 /* F4SDaysAndHoursViewController.swift in Sources */,
 				40A28CBF1E24ECE90077D490 /* SuccessExtraInfoViewController.swift in Sources */,
 				FCD3486420038C3100DC1316 /* F4SAuth0MagicLinkInterpreterer.swift in Sources */,
 				FCC753EE1F80F26200E9ECD6 /* MapModel.swift in Sources */,
@@ -1540,13 +1730,17 @@
 				40C1A4E61DDB356B000F80AA /* CustomTabBarViewController.swift in Sources */,
 				FCA53B921FE00CB5009F6DB0 /* Versioning.swift in Sources */,
 				D54E10071E044BC100A51560 /* ProcessedMessagesViewController.swift in Sources */,
+				FCB46F0A20516FD200F0779F /* F4SFeatureSwitchTableViewCell.swift in Sources */,
+				FCB6B8E52074C59C0042C725 /* F4SCalendarCollectionViewController.swift in Sources */,
 				FC6C11C0202C4974002C8EA5 /* TemplateHelper.swift in Sources */,
 				40A28CB21E1D1D200077D490 /* TimelineEntryTableViewCell.swift in Sources */,
 				FC6C11BA202870D6002C8EA5 /* F4SGrammar.swift in Sources */,
 				2037B0AF1DEC592900A9DE3E /* PlacementDBOperations.swift in Sources */,
 				40A28CBB1E1F9BCF0077D490 /* RatingControl.swift in Sources */,
+				FCB6B8E82074C59C0042C725 /* F4SCalendarMonth.swift in Sources */,
 				204C896F1DF5F08500D8493A /* RatingTableViewCell.swift in Sources */,
 				204C896E1DF5F08500D8493A /* IndustryTableViewCell.swift in Sources */,
+				FCB6B8E62074C59C0042C725 /* F4SCalendarWeek.swift in Sources */,
 				204C89591DF5A54600D8493A /* TemplateChoiceDBOperations.swift in Sources */,
 				40C1A5211DDF5ACE000F80AA /* GQTPointQuadTree.m in Sources */,
 				FC59B1931F81554F0068EC9C /* CGRect+Methods.swift in Sources */,
@@ -1555,17 +1749,21 @@
 				40E78E801DD32BF4000A3776 /* SideDrawerTableViewCell.swift in Sources */,
 				40C1A5271DE58EED000F80AA /* CutomClusterIconGenerator.swift in Sources */,
 				FCC9D13D1FC82B010081F7B5 /* StarRatingView.swift in Sources */,
+				FCB6B8E22074C59C0042C725 /* F4SDayCalendarViewCell.swift in Sources */,
 				40C6DDF41E03F445000F8806 /* UserInfoDB.swift in Sources */,
 				40E78E791DD32BE7000A3776 /* DrawerVisualState.swift in Sources */,
 				204C89791DF5F0B200D8493A /* ChooseAttributesViewController.swift in Sources */,
+				FCB6B8ED2074C59C0042C725 /* F4SCalendarContainerViewController.swift in Sources */,
 				40C1A5201DDF5ACE000F80AA /* GMUWrappingDictionaryKey.m in Sources */,
 				4059740C1E014E760002DB3A /* VoucherService.swift in Sources */,
 				40A28CB91E1F96C20077D490 /* RatePlacementViewController.swift in Sources */,
 				40A5CF401DED81F7000007AB /* CustomViewFlowLayout.swift in Sources */,
+				FCB6B8CE2074C58F0042C725 /* F4SSelectDayTableViewCell.swift in Sources */,
 				40E78E771DD32BE7000A3776 /* DrawerBarButtonItem.swift in Sources */,
 				40E78E9A1DD392B5000A3776 /* OnboardingViewController.swift in Sources */,
 				D51EE9391DFAAA84008A8A4F /* ContentService.swift in Sources */,
 				FCA53B961FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift in Sources */,
+				FCB6B8CC2074C58F0042C725 /* F4SDisplayInformationViewController.swift in Sources */,
 				40E78E9C1DD5DB6D000A3776 /* AutoCompleteTextField.swift in Sources */,
 				40C1A51D1DDF5ACE000F80AA /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				40C1A51F1DDF5ACE000F80AA /* GMUStaticCluster.m in Sources */,
@@ -1583,10 +1781,12 @@
 				40E78EA01DD5E208000A3776 /* LocationHelper.swift in Sources */,
 				40C1A5231DDF5ACE000F80AA /* POIItem.m in Sources */,
 				206F8F761E1D29740024937B /* MessageService.swift in Sources */,
+				FCB46F042051365400F0779F /* F4SFeatureSwitchesViewController.swift in Sources */,
 				40C1A52D1DE84410000F80AA /* TriangleView.swift in Sources */,
 				205EB20B1DDB161D00034424 /* DatabaseOperations.swift in Sources */,
 				40E78E8C1DD32C3C000A3776 /* LoadingOverlay.swift in Sources */,
 				200F640F1DF19995002F5F36 /* Errors.swift in Sources */,
+				FCB6B8EA2074C59C0042C725 /* F4SDisplayableMonth.swift in Sources */,
 				FCCD6AEB1FBB4B8A0088D7C7 /* CompanyInfoTableViewCell.swift in Sources */,
 				FCD348552002340F00DC1316 /* F4SNetwork.swift in Sources */,
 				40C1A51E1DDF5ACE000F80AA /* GMUSimpleClusterAlgorithm.m in Sources */,
@@ -1594,9 +1794,12 @@
 				40E78E701DD32BD4000A3776 /* MenuHelper.swift in Sources */,
 				FCE20CC2203C12F300CA821D /* UrlTableViewCell.swift in Sources */,
 				FCA24C111F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift in Sources */,
+				FCB46F0820513D0100F0779F /* F4SFeatureSwitchModel.swift in Sources */,
 				2037B0A71DEC3C3B00A9DE3E /* InterestCoreDataManager.swift in Sources */,
+				FCB46F00204E7DCC00F0779F /* F4SDebugModel.swift in Sources */,
 				204C89551DF5A36100D8493A /* TemplateChoiceDB.swift in Sources */,
 				204C89781DF5F0B200D8493A /* ChooseAttributesTableViewCell.swift in Sources */,
+				FCB6B8E92074C59C0042C725 /* F4SCalendarDay.swift in Sources */,
 				FC99F3D72000BE4900E3AC5A /* F4SService.swift in Sources */,
 				FCA6D2941FA741590037962B /* F4SStyle.swift in Sources */,
 				FC4BB6051FA20F4100173864 /* Partner.swift in Sources */,
@@ -1607,6 +1810,8 @@
 				202091AC1DF84BCF003F5B48 /* SocialShareItemSource.swift in Sources */,
 				40E78E981DD39275000A3776 /* MapViewController.swift in Sources */,
 				204C896D1DF5F08500D8493A /* CompanyOtherTableViewCell.swift in Sources */,
+				FCB6B8EC2074C59C0042C725 /* F4SAvailabilitySequence.swift in Sources */,
+				FCB46F0C20518EE900F0779F /* F4SFeatureSwitchService.swift in Sources */,
 				204C89751DF5F0A100D8493A /* EditFooterView.swift in Sources */,
 				2037B0A11DE84EEF00A9DE3E /* PlacementService.swift in Sources */,
 				2037B0B81DEC8A2400A9DE3E /* TemplateService.swift in Sources */,
@@ -1619,18 +1824,24 @@
 				2037B0AD1DEC560700A9DE3E /* PlacementCoreDataManager.swift in Sources */,
 				2037B0A91DEC3D3400A9DE3E /* InterestDBOperations.swift in Sources */,
 				FCD884FD1FFCCB4A00F05B08 /* RecommendationsModel.swift in Sources */,
+				FCB6B8E42074C59C0042C725 /* F4SCalendarColors.swift in Sources */,
 				20FABFEC1DDDA63600D583E2 /* FileHelper.swift in Sources */,
 				40E78E891DD32C3C000A3776 /* ExtensionsHelper.swift in Sources */,
 				40A5CF3E1DED72E8000007AB /* InterestsCollectionViewCell.swift in Sources */,
 				FCD3485A20038BF200DC1316 /* F4SEmailVerificationViewController.swift in Sources */,
 				40C1A51A1DDF5ACE000F80AA /* GMUDefaultClusterIconGenerator.m in Sources */,
+				FCB6B8CF2074C58F0042C725 /* F4SDaysAndHoursModel.swift in Sources */,
 				40E78E661DD32B94000A3776 /* CustomNavigationHelper.swift in Sources */,
+				FCB6B8EB2074C59C0042C725 /* F4SCalendarEnumerations.swift in Sources */,
 				204C896B1DF5F08500D8493A /* CompanyCollectionViewCell.swift in Sources */,
 				40E78E591DD32964000A3776 /* Entities.swift in Sources */,
+				FCB6B8C72074C58F0042C725 /* F4SPageHeaderView.swift in Sources */,
 				205EB2111DDB551800034424 /* DatabaseService.swift in Sources */,
 				204203EA1E4B110A007C7409 /* ShortlistDB.swift in Sources */,
 				203658831E1F809E00D87DC4 /* StatusCollectionViewCell.swift in Sources */,
+				FC67E60F207BA80A006F07FE /* F4SAvailabilityPeriod.swift in Sources */,
 				2037B0A51DEC3C2000A9DE3E /* CoreDataBaseManager.swift in Sources */,
+				FC67E60D207B73CE006F07FE /* F4SCalendarServiceJson.swift in Sources */,
 				204C896C1DF5F08500D8493A /* CompanyDetailsViewController.swift in Sources */,
 				40E78E6F1DD32BD4000A3776 /* CustomMenuViewController.swift in Sources */,
 				40E78E7F1DD32BF4000A3776 /* SideDrawerSectionHeaderView.swift in Sources */,
@@ -1638,6 +1849,7 @@
 				FC4BB6031FA20EF700173864 /* PartnerSelectionViewController.swift in Sources */,
 				D54E0FFF1E044B1800A51560 /* ContentViewController.swift in Sources */,
 				204C89741DF5F0A100D8493A /* EditCoverLetterViewController.swift in Sources */,
+				FCB46F02204FD86D00F0779F /* F4SLogViewController.swift in Sources */,
 				2037B0B61DEC881500A9DE3E /* CoverLetterViewController.swift in Sources */,
 				405974081DFD449C0002DB3A /* ExtraInfoViewController.swift in Sources */,
 				206F8F8C1E1E48120024937B /* MessageOptionCollectionViewCell.swift in Sources */,
@@ -1646,6 +1858,8 @@
 				FC4336CA202DB953001D0569 /* StringExtensions.swift in Sources */,
 				FC25A05F1F850DF4002F51A9 /* F4SCompanyPin.swift in Sources */,
 				FCF0D16C1FBC244800F2AF1D /* PopupAnimator.swift in Sources */,
+				FCB6B8E72074C59C0042C725 /* F4SCalendar.swift in Sources */,
+				FCB6B8CD2074C58F0042C725 /* F4SDayAndHoursSelection.swift in Sources */,
 				40C6DDF21E03F401000F8806 /* UserInfoCoreDataManager.swift in Sources */,
 				40E78E8D1DD32C3C000A3776 /* MessageHandler.swift in Sources */,
 				FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */,
@@ -1660,9 +1874,13 @@
 				40E78E711DD32BD4000A3776 /* SideMenuViewController.swift in Sources */,
 				FC11006A1FB36A230055EB9A /* ReachabilityExtension.swift in Sources */,
 				204203F91E4B81AB007C7409 /* FavouriteTableViewCell.swift in Sources */,
+				FC31F095204D54C6009DD526 /* F4SDebugViewController.swift in Sources */,
+				FCB6B8E32074C59C0042C725 /* F4SMonthHeaderView.swift in Sources */,
+				FC67E60A207B70CE006F07FE /* F4SCalendarService.swift in Sources */,
 				FCE20CC0203C12F300CA821D /* URLTableViewController.swift in Sources */,
 				FCE20CC1203C12F300CA821D /* F4SDocumentUrlModel.swift in Sources */,
 				40E78E581DD32964000A3776 /* Constants.swift in Sources */,
+				FCB6B8C92074C58F0042C725 /* F4SHoursPickerViewController.swift in Sources */,
 				40C1A51C1DDF5ACE000F80AA /* GMUGridBasedClusterAlgorithm.m in Sources */,
 				FCD3486620038C3100DC1316 /* F4SEmailVerificationState.swift in Sources */,
 				FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */,
@@ -1678,11 +1896,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCD348692003A1B500DC1316 /* MagicLinkInterpreterTests.swift in Sources */,
+				FCB6B8FA2074C5ED0042C725 /* F4SDisplayableMonthTests.swift in Sources */,
 				FC59B1901F81549B0068EC9C /* CGRect+MethodsTests.swift in Sources */,
 				FC32E3D9200F322800D7C36A /* PartnerModelTests.swift in Sources */,
 				FC6C11BE202C402E002C8EA5 /* F4STemplateTests.swift in Sources */,
+				FCB6B8F92074C5ED0042C725 /* F4SCalendarDayTests.swift in Sources */,
 				FC4336CC202DB999001D0569 /* F4SStringExtensionTests.swift in Sources */,
+				FCB6B8F72074C5ED0042C725 /* F4SCalendarWeekTests.swift in Sources */,
+				FCB6B8F82074C5ED0042C725 /* F4SCalendarTests.swift in Sources */,
 				FC6C11C2202C4EE5002C8EA5 /* F4STemplateHelperTests.swift in Sources */,
+				FCB6B8F62074C5ED0042C725 /* F4SCalendarMonthTests.swift in Sources */,
 				FC59B1911F81549B0068EC9C /* F4SQuadtreeTests.swift in Sources */,
 				FC6C11BC20287378002C8EA5 /* F4SGrammarTests.swift in Sources */,
 			);
@@ -1900,6 +2123,14 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
+		FCB6B8C12074C58E0042C725 /* F4SDaysAndHours.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FCB6B8C22074C58E0042C725 /* Base */,
+			);
+			name = F4SDaysAndHours.storyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -1918,6 +2149,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1925,6 +2157,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1951,7 +2184,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				NAME_FOR_ENVIRONMENT = F4S.Staging;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1971,13 +2204,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
 				BUNDLE_ID_SUFFIX = .staging;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
+				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s.staging;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2025,6 +2259,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -2032,6 +2267,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -2052,7 +2288,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				NAME_FOR_ENVIRONMENT = F4S.Staging;
 				ONLY_ACTIVE_ARCH = NO;
@@ -2072,13 +2308,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
 				BUNDLE_ID_SUFFIX = .staging;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
+				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s.staging;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2126,6 +2363,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -2133,6 +2371,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -2159,7 +2398,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				NAME_FOR_ENVIRONMENT = Workfinder;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2178,6 +2417,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -2232,6 +2472,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -2239,6 +2480,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -2259,7 +2501,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				NAME_FOR_ENVIRONMENT = Workfinder;
 				ONLY_ACTIVE_ARCH = NO;
@@ -2279,6 +2521,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
 				BUNDLE_ID_SUFFIX = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;

@@ -339,8 +339,9 @@ extension DatabaseOperations {
         }
         do {
             var companyList: [Company] = []
-
-            let uuidsString = withUuid.flatMap({ $0.replacingOccurrences(of: "-", with: "") }).joined(separator: "\",\"")
+            // flatmap with optional is deprecated in favour of compact map, but I can't see why flatmap is required anyway so replacing with map
+            let uuidsString = withUuid.map({ $0.replacingOccurrences(of: "-", with: "") }).joined(separator: "\",\"")
+            //let uuidsString = withUuid.flatMap({ $0.replacingOccurrences(of: "-", with: "") }).joined(separator: "\",\"")
 
             let selectCompaniesWithUuid: String = "SELECT * FROM businesses_company WHERE uuid IN (\"\(uuidsString)\")"
 

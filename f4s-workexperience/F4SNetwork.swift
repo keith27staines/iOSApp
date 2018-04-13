@@ -98,11 +98,6 @@ public struct F4SNetworkError : Error {
     
     /// Writes a description to the debug log (currently the Xcode console)
     private func writeToLog() {
-        if let attempting = attempting {
-            print("F4SNetworkError: attempting \(attempting) \n \(self)")
-        } else {
-            print("F4SNetworkError \(self)")
-        }
         var msg = "F4SNetworkingError"
         if let attempting = attempting {
             msg += " attempting to: \(attempting)"
@@ -113,6 +108,7 @@ public struct F4SNetworkError : Error {
             msg += "\nreason = \(reason)"
         }
         msg += "\nuserInfo = \(nsError.userInfo)"
+        log.error(msg)
     }
     
     /// Initializes a new instance

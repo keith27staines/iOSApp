@@ -168,6 +168,15 @@ class MapViewController: UIViewController {
         moveCameraToBestPosition()
     }
     
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        if motion == .motionShake && (F4SDebug.shared?.userCanAccessDebugMenu() ?? false) {
+            CustomNavigationHelper.sharedInstance.presentHiddenDebugController(parentCtrl: self)
+        }
+    }
+    
     func companiesFromMarker(_ marker: GMSMarker) -> [Company] {
         guard let mapModel = filteredMapModel else { return [Company]() }
         let companySet = mapModel.pinsNear(marker.position, side: 10.0)
@@ -223,6 +232,7 @@ class MapViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         applyBranding()
+        self.becomeFirstResponder()
         if !hasMovedToBestPosition {
             moveCameraToBestPosition()
             hasMovedToBestPosition = true
@@ -715,7 +725,7 @@ extension MapViewController: UITextFieldDelegate {
                 strongSelf.placesClient?.autocompleteQuery(text, bounds: nil, filter: strongSelf.autoCompleteFilter, callback: { results, error in
                     guard error == nil,
                         let strongResults = results else {
-                            print("Autocomplete error \(error!)")
+                            log.error("Autocomplete error \(error!)")
                             return
                     }
                     
@@ -882,12 +892,12 @@ extension MapViewController: CLLocationManagerDelegate {
         case .authorizedWhenInUse:
             locationManager!.startUpdatingLocation()
             mapView.isMyLocationEnabled = true
-            print("location manager is in state 'authorized when in use'")
+            log.debug("location manager is in state 'authorized when in use'")
             allowLocationUpdate = true
             
         case .denied:
             mapView.isMyLocationEnabled = false
-            print("location manager is in state 'denied'")
+            log.debug("location manager is in state 'denied'")
             displayDefaultSearch()
             
         case .authorizedAlways:
@@ -897,11 +907,11 @@ extension MapViewController: CLLocationManagerDelegate {
             
         case .restricted:
             mapView.isMyLocationEnabled = false
-            print("location manager is in state 'restricted'")
+            log.debug("location manager is in state 'restricted'")
             displayDefaultSearch()
             
         case .notDetermined:
-            print("location manager is in state 'not determined'")
+            log.debug("location manager is in state 'not determined'")
             if !self.shouldRequestAuthorization! {
                 displayDefaultSearch()
             }
@@ -924,7 +934,6 @@ extension MapViewController: CLLocationManagerDelegate {
 extension MapViewController {
     
     @IBAction func myLocationButtonTouched(_: UIButton) {
-        print("tapped mylocationbtn")
         
         if searchLocationTextField.isFirstResponder {
             searchLocationTextField.resignFirstResponder()
@@ -963,25 +972,25 @@ extension MapViewController {
     }
     
     func startNotifier() {
-        print("--- start notifier")
         do {
             try reachability?.startNotifier()
+            log.debug("Started reachability notifier")
         } catch {
             return
         }
     }
     
     func stopNotifier() {
-        print("--- stop notifier")
         reachability?.stopNotifier()
         NotificationCenter.default.removeObserver(self, name: Notification.Name.reachabilityChanged, object: nil)
         reachability = nil
+        log.debug("Stopped reachability notifier")
     }
     
     @objc func reachabilityChanged(_ note: Notification) {
         let reachability = note.object as! Reachability
         if reachability.isReachableByAnyMeans {
-            debugPrint("network is reachable")
+            log.debug("Network is reached")
             let dbService = DatabaseService.sharedInstance
             if !dbService.isLocalDatabaseAvailable() && !dbService.isDownloadInProgress {
                 dbService.getLatestDatabase()
@@ -993,7 +1002,7 @@ extension MapViewController {
                 }
             }
         } else {
-            debugPrint("network not reachable")
+            log.debug("network not reachable")
             if UserDefaults.standard.object(forKey: UserDefaultsKeys.companyDatabaseCreatedDate) == nil {
                 DispatchQueue.main.async {
                     MessageHandler.sharedInstance.hideLoadingOverlay()
@@ -1051,12 +1060,12 @@ extension MapViewController {
                         let errorMsg = NSLocalizedString("You appear to be offline at the moment. Please try again later when you have a working internet connection.",
                                                          comment: "")
                         MessageHandler.sharedInstance.displayWithTitle(title, errorMsg, parentCtrl: self)
-                        debugPrint(err)
+                        log.debug(err)
                     } else {
                         let title = NSLocalizedString("Location Not Found", comment: "")
                         let errorMsg = NSLocalizedString("We cannot find the location you entered. Please try again", comment: "")
                         MessageHandler.sharedInstance.displayWithTitle(title, errorMsg, parentCtrl: self)
-                        debugPrint(err)
+                        log.debug(err)
                     }
                 case let .deffinedError(error):
                     log.debug(error)

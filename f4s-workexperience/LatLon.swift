@@ -161,6 +161,7 @@ extension LatLon {
     
     /// Initialize a new LatLon from a latitude and longitude expressed in decimal degrees
     public init(latitude: CGFloat, longitude: CGFloat) {
+        self.init()
         x = longitude
         y = latitude
     }

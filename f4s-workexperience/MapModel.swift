@@ -83,6 +83,7 @@ public struct MapModel {
         let companyPinsList = allCompanies.map { (company) -> F4SCompanyPin in
             return F4SCompanyPin(company: company)
         }
+        
         let companyPinSet = F4SCompanyPinSet(companyPinsList)
         let filteredCompanyPinList: [F4SCompanyPin]
         var selectedInterestIdSet: F4SInterestIdSet? = nil

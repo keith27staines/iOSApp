@@ -21,23 +21,20 @@ class SideMenuViewController: CustomMenuViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // println("Left will appear")
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        print("Left menu did appear")
+        log.debug("Left menu did appear")
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        // println("Left will disappear")
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        print("Left menu did disappear")
+        log.debug("Left menu did disappear")
     }
 
     override func viewDidLoad() {

@@ -58,7 +58,7 @@ class ExtraInfoViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
 
-    var applicationContext: ApplicationContext?
+    var applicationContext: F4SApplicationContext?
     var datePicker = UIDatePicker()
     
     lazy var documentUploadController: DocumentUrlViewController = {
@@ -481,8 +481,6 @@ extension ExtraInfoViewController {
             if let navigCtrl = self.navigationController {
                 CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: ContentType.consent)
             }
-        } else {
-            print("tapped dobInfoLabel")
         }
     }
 
@@ -512,8 +510,6 @@ extension ExtraInfoViewController {
             if let navigCtrl = self.navigationController {
                 CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: ContentType.voucher)
             }
-        } else {
-            print("tapped noVoucherInfoLabel")
         }
     }
 
@@ -625,7 +621,7 @@ extension ExtraInfoViewController {
         }
     }
     
-    func gotoSucess(applicationContext: ApplicationContext, parent: UIViewController) {
+    func gotoSucess(applicationContext: F4SApplicationContext, parent: UIViewController) {
         UserService.sharedInstance.updateUser(user: applicationContext.user!, putCompleted: { [weak self] (success, result) in
             guard let strongSelf = self else { return }
             DispatchQueue.main.async {

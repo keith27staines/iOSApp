@@ -124,7 +124,7 @@ extension ContentViewController: UIWebViewDelegate {
     }
 
     func webView(_: UIWebView, didFailLoadWithError error: Error) {
-        print(error)
+        log.error(error)
         MessageHandler.sharedInstance.hideLoadingOverlay()
     }
 }

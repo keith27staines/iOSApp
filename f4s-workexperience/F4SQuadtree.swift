@@ -51,7 +51,7 @@ public struct F4SQuadtreeItem : F4SQuadtreeElement {
 // MARK:-
 public protocol F4SPointQuadTreeProtocol : class {
     /// The quadtree which is parent to this one
-    weak var parent: F4SPointQuadTreeProtocol? { get }
+    var parent: F4SPointQuadTreeProtocol? { get }
     /// The maximum number of items that the current instance can hold without splitting (assuming the maximum depth has not been reached)
     var maxItems: Int { get }
     /// The nesting depth for the current instance. If the max depth is reached, the subtree will not split

@@ -19,7 +19,7 @@ class CoverLetterViewController: UIViewController {
 
     var currentTemplate: TemplateEntity?
     var selectedTemplateChoices: [TemplateBlank] = []
-    var applicationContext: ApplicationContext!
+    var applicationContext: F4SApplicationContext!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,15 +29,23 @@ class CoverLetterViewController: UIViewController {
 
     override func viewWillAppear(_: Bool) {
         super.viewWillAppear(true)
+        adjustNavigationBar()
         self.templateTextView.isScrollEnabled = false
-
         self.selectedTemplateChoices = TemplateChoiceDBOperations.sharedInstance.getSelectedTemplateBlanks()
+        applicationContext.availabilityPeriod = F4SAvailabilityPeriod.fromUserDefaults()
         loadTemplate()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.templateTextView.isScrollEnabled = true
+    }
+}
+
+extension CoverLetterViewController: EditCoverLetterViewControllerDelegate {
+    func editCoverLetterDidUpdate(applicationContext: F4SApplicationContext) {
+        self.applicationContext = applicationContext
+        self.applicationContext.availabilityPeriod?.saveToUserDefaults()
     }
 }
 
@@ -58,15 +66,9 @@ extension CoverLetterViewController {
 
     func adjustNavigationBar() {
         navigationController?.setNavigationBarHidden(false, animated: false)
-        navigationController?.navigationBar.barTintColor = UIColor(netHex: Colors.white)
-        navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-
-        let backButton = UIBarButtonItem(image: UIImage(named: "Back"), style: UIBarButtonItemStyle.done, target: self, action: #selector(backButtonTouched))
-        backButton.tintColor = UIColor.black
-        navigationItem.leftBarButtonItem = backButton
+        let leftButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(backButtonTouched))
+//        let leftButton = UIBarButtonItem(image: UIImage(named: "Back"), style: UIBarButtonItemStyle.done, target: self, action: #selector(backButtonTouched))
+        navigationItem.leftBarButtonItem = leftButton
 
         let editCoverLetterTitle = NSLocalizedString("Edit Cover Letter", comment: "")
         let editCoverLetterFont: UIFont = UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular)
@@ -84,6 +86,8 @@ extension CoverLetterViewController {
                                                                          NSAttributedStringKey.font: editCoverLetterFont,
         ]), for: UIControlState.normal)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: editCoverLetterButton!)
+        
+        styleNavigationController(titleColor: UIColor.black, backgroundColor: UIColor.white, tintColor: UIColor.black, useLightStatusBar: false)
     }
 
     func setApplyButton() {
@@ -111,7 +115,7 @@ extension CoverLetterViewController {
 
     func setButtonStates(enableApply: Bool) {
         if enableApply {
-            // all data is setted
+            // all data is set
             self.applyButton.isEnabled = true
             if let rightBarButton = self.editCoverLetterButton {
                 rightBarButton.setBackgroundColor(color: UIColor(netHex: Colors.mediumGreen), forUIControlState: .normal)
@@ -172,6 +176,17 @@ extension CoverLetterViewController {
             self.templateTextView.attributedText = self.getAttributedStringForTemplate(template: renderingTemplate.htmlDecode())
             self.templateTextView.isEditable = false
             setButtonStates(enableApply: allowApply)
+
+            let editor = editCoverLetterViewController()!
+            editor.configureTemplate()
+            let firstDate = editor.getStartDate()
+            let lastDate = editor.getEndDate()
+            let calendar = F4SCalendar()
+            let firstDay = firstDate != nil ? F4SCalendarDay(cal:calendar, date: firstDate!) : nil
+            let lastDay = lastDate != nil ? F4SCalendarDay(cal: calendar, date: lastDate!) : nil
+            let previousDaysHoursModel = applicationContext.availabilityPeriod?.daysAndHours
+            applicationContext.availabilityPeriod = F4SAvailabilityPeriod(firstDay: firstDay, lastDay: lastDay, daysAndHours: previousDaysHoursModel)
+            
         } catch {
             log.debug("error on parsing template")
         }
@@ -329,9 +344,19 @@ extension CoverLetterViewController {
     }
 
     @objc func editCoverLetterButtonTouched() {
-        if let navCtrl = self.navigationController, let currentTemplate = currentTemplate {
-            CustomNavigationHelper.sharedInstance.pushEditCoverLetter(navCtrl, currentTemplate: currentTemplate)
+        if let navCtrl = self.navigationController {
+            guard let ctrl = editCoverLetterViewController() else { return }
+            ctrl.delegate = self
+            navCtrl.pushViewController(ctrl, animated: true)
         }
+    }
+    
+    func editCoverLetterViewController() -> EditCoverLetterViewController? {
+        let coverLetterStoryboard = UIStoryboard(name: "EditCoverLetter", bundle: nil)
+        guard let editor = coverLetterStoryboard.instantiateViewController(withIdentifier: "EditCoverLetterCtrl") as? EditCoverLetterViewController else { return nil }
+        editor.currentTemplate = currentTemplate
+        editor.applicationContext = applicationContext
+        return editor
     }
 
     @IBAction func applyButtonTouched(_: Any) {
@@ -345,9 +370,7 @@ extension CoverLetterViewController {
     }
 
     @objc func textViewTouched() {
-        if let navCtrl = self.navigationController, let currentTemplate = currentTemplate {
-            CustomNavigationHelper.sharedInstance.pushEditCoverLetter(navCtrl, currentTemplate: currentTemplate)
-        }
+        editCoverLetterButtonTouched()
     }
 }
 
@@ -414,7 +437,7 @@ extension CoverLetterViewController {
             let currentTemplateUuid = currentTemplate?.uuid else {
             return
         }
-
+        applicationContext.availabilityPeriod?.saveToUserDefaults()
         MessageHandler.sharedInstance.showLoadingOverlay(self.view)
         let templateToUpdate = TemplateEntity(uuid: currentTemplateUuid, blank: self.selectedTemplateChoices)
         placement.interestsList = [Interest](InterestDBOperations.sharedInstance.interestsForCurrentUser())
@@ -431,8 +454,22 @@ extension CoverLetterViewController {
             case .value:
                 // succes + go to next page
                 strongSelf.applicationContext.placement = placement
-                if let navCtrl = strongSelf.navigationController, let _ = strongSelf.applicationContext.company {
-                    CustomNavigationHelper.sharedInstance.pushProcessedMessages(navCtrl, applicationContext: strongSelf.applicationContext)
+                if let navCtrl = strongSelf.navigationController, let applicationContext = strongSelf.applicationContext, let availabilityPeriod = applicationContext.availabilityPeriod  {
+                    let calendarService = F4SPCalendarService(placementUuid: placement.placementUuid)
+                    let availabilityJson = availabilityPeriod.availabilityJson!
+                    let data = try! JSONEncoder().encode(availabilityJson)
+                    let jsonString = String(data: data, encoding: .utf8)!
+                    print(jsonString)
+                    calendarService.patchAvailabilityForPlacement(availabilityPeriods: availabilityJson, completion: { (result) in
+                        DispatchQueue.main.async {
+                                switch result {
+                                case .success(_):
+                                    CustomNavigationHelper.sharedInstance.pushProcessedMessages(navCtrl, applicationContext: applicationContext)
+                                case .error(let networkError):
+                                    strongSelf.handleF4SNetworkError(networkError: networkError)
+                            }
+                        }
+                    })
                 }
                 break
             case let .error(error):
@@ -442,6 +479,24 @@ extension CoverLetterViewController {
                 MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
                 break
             }
+        }
+    }
+    
+    func handleF4SNetworkError(networkError: F4SNetworkError) {
+        MessageHandler.sharedInstance.display(networkError, parentCtrl: self)
+    }
+    
+    func handleAlamoFireServiceErrorResult(result: Result<String>) {
+        switch result
+        {
+        case .value:
+            break
+        case let .error(error):
+            MessageHandler.sharedInstance.display(error, parentCtrl: self)
+            break
+        case let .deffinedError(error):
+            MessageHandler.sharedInstance.display(error, parentCtrl: self)
+            break
         }
     }
 

@@ -168,7 +168,7 @@ public class F4SDocumentUrlModel {
             case .success(_):
                 completion(true)
             case .error(let error):
-                print(error)
+                log.debug(error)
                 completion(false)
                 break
             }

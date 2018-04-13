@@ -168,9 +168,9 @@ extension Date {
         static var rfc3339UtcDateFormatter: DateFormatter {
             if _rfc3339UtcDateFormatter == .none {
                 _rfc3339UtcDateFormatter = DateFormatter()
-                _rfc3339UtcDateFormatter?.locale = NSLocale(localeIdentifier: "en_GB") as Locale!
+                _rfc3339UtcDateFormatter?.locale = NSLocale(localeIdentifier: "en_GB") as Locale?
                 _rfc3339UtcDateFormatter?.dateFormat = "yyyy'-'MM'-'dd"
-                _rfc3339UtcDateFormatter?.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone!
+                _rfc3339UtcDateFormatter?.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone?
             }
 
             return _rfc3339UtcDateFormatter!
@@ -179,9 +179,9 @@ extension Date {
         static var rfc3339UtcDateTimeFormatter: DateFormatter {
             if _rfc3339UtcDateTimeFormatter == .none {
                 _rfc3339UtcDateTimeFormatter = DateFormatter()
-                _rfc3339UtcDateTimeFormatter?.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale!
+                _rfc3339UtcDateTimeFormatter?.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale?
                 _rfc3339UtcDateTimeFormatter?.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ssXXXXX"
-                _rfc3339UtcDateTimeFormatter?.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone!
+                _rfc3339UtcDateTimeFormatter?.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone?
             }
 
             return _rfc3339UtcDateTimeFormatter!
@@ -190,9 +190,9 @@ extension Date {
         static var rfc3339UtcDateTimeSubsecondFormatter: DateFormatter {
             if _rfc3339UtcDateTimeSubsecondFormatter == .none {
                 _rfc3339UtcDateTimeSubsecondFormatter = DateFormatter()
-                _rfc3339UtcDateTimeSubsecondFormatter?.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale!
+                _rfc3339UtcDateTimeSubsecondFormatter?.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale?
                 _rfc3339UtcDateTimeSubsecondFormatter?.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSSSSSXXXXX"
-                _rfc3339UtcDateTimeSubsecondFormatter?.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone!
+                _rfc3339UtcDateTimeSubsecondFormatter?.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone?
             }
 
             return _rfc3339UtcDateTimeSubsecondFormatter!

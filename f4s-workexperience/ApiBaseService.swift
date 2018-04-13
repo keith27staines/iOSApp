@@ -185,7 +185,6 @@ class ApiBaseService {
 
                 case .success(let responseObject):
                     let json = JSON(responseObject)
-                    print(json)
                     if json != JSON.null {
                         putCompleted(true, .value(Box(json)))
                         return
