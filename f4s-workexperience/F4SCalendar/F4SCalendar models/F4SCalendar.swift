@@ -51,7 +51,7 @@ public class F4SCalendar {
         
         switch tap {
         case .select:
-            guard day.isSixWeeksIntoFuture else { return }
+            guard !day.isInPast else { return }
             firstDay = day
             lastDay = day
             selectionStates[tappedDate] = F4SExtendibleSelectionState.terminal.rawValue

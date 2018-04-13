@@ -47,7 +47,7 @@ public struct WorkAvailabilityWindow {
     /// - parameter submission: The date of submission
     public static func earliestStartDate(submission:Date) -> Date {
         var components = DateComponents()
-        components.day = 6 * 7
+        components.day = 0
         let nextDay = Calendar.current.date(byAdding: components, to: submission)!
         return nextDay.startOfDay
     }
