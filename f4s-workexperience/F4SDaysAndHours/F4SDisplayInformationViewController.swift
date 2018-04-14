@@ -48,7 +48,7 @@ public enum F4SHelpContext : String {
             return NSLocalizedString("Select which day(s) of the week you are available for work experience. For each day, you can also adjust the times to be morning, afternoon or the full working day.", comment: "")
             
         case .calendarController:
-            return NSLocalizedString("You can select any length of time for your availability, such as the whole summer holidays!\n\nYour availability should start at least six weeks from today to give you a better chance of being accepted!", comment: "")
+            return NSLocalizedString("You can select any length of time for your availability, such as the whole summer holidays!", comment: "")
         }
     }
 }
