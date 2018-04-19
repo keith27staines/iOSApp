@@ -43,8 +43,6 @@ class MessageViewController: JSQMessagesViewController {
     }
 }
 
-
-
 // MARK: - data source
 extension MessageViewController {
     override func collectionView(_: UICollectionView, numberOfItemsInSection section: Int) -> Int {

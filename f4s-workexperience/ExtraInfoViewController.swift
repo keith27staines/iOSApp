@@ -61,6 +61,10 @@ class ExtraInfoViewController: UIViewController {
     var applicationContext: F4SApplicationContext?
     var datePicker = UIDatePicker()
     
+    var blnEmailOkay = false
+    var blnNameOkay = false
+    var blnVoucherOkay = true
+    
     lazy var documentUploadController: DocumentUrlViewController = {
         let storyboard = UIStoryboard(name: "DocumentUrl", bundle: nil)
         return storyboard.instantiateInitialViewController() as! DocumentUrlViewController
@@ -126,7 +130,6 @@ extension ExtraInfoViewController {
                            completion: nil)
         }
     }
-    
 }
 
 // MARK: - UI Setup
@@ -304,21 +307,7 @@ extension ExtraInfoViewController {
         guard getUserAge() >= 13 else {
             return false
         }
-        guard let voucherCodeTextFieldText = voucherCodeTextField.text else {
-            return false
-        }
-
-        let validColor = UIColor(netHex: Colors.mediumGreen)
-
-        if self.emailUnderlineView.backgroundColor == validColor &&
-            self.firstAndLastNameUnderlineView.backgroundColor == validColor {
-            if voucherCodeTextFieldText.isEmpty {
-                return true
-            } else {
-                if voucherCodeUnderlineView.backgroundColor == validColor { return true } else { return false }
-            }
-        }
-        return false
+        return blnEmailOkay && blnNameOkay && blnVoucherOkay
     }
 
     func getPlacementUuid() -> String {
@@ -512,13 +501,16 @@ extension ExtraInfoViewController {
             }
         }
     }
+    
 
     @IBAction func emailTextFieldDidChange(_ sender: NextResponderTextField) {
         if let senderText = sender.text {
             if senderText.isEmail() && !senderText.isEmpty {
                 self.emailUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
+                blnEmailOkay = true
             } else {
                 self.emailUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
+                blnEmailOkay = false
             }
         }
         updateButtonStateAndImage()
@@ -528,8 +520,10 @@ extension ExtraInfoViewController {
         if let senderText = sender.text {
             if senderText.isValidName() && !senderText.isEmpty {
                 self.firstAndLastNameUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
+                blnNameOkay = true
             } else {
                 self.firstAndLastNameUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
+                blnEmailOkay = false
             }
         }
         updateButtonStateAndImage()
@@ -539,12 +533,15 @@ extension ExtraInfoViewController {
         if let senderText = sender.text {
             if senderText.isVoucherCode() && senderText.count == 6 {
                 self.voucherCodeUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
+                blnVoucherOkay = true
             }
             if senderText.count != 6 {
                 self.voucherCodeUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
+                blnVoucherOkay = false
             }
             if senderText.count == 0 {
                 self.voucherCodeUnderlineView.backgroundColor = UIColor(netHex: Colors.warmGrey)
+                blnVoucherOkay = true
             }
         }
         if checkIfAllFieldsAreValid() {
