@@ -234,6 +234,8 @@
 		FCD3486820038C3100DC1316 /* F4SEmailVerificationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3486220038C3100DC1316 /* F4SEmailVerificationError.swift */; };
 		FCD348692003A1B500DC1316 /* MagicLinkInterpreterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3485D20038C3100DC1316 /* MagicLinkInterpreterTests.swift */; };
 		FCD3486B20049DFB00DC1316 /* F4SEmailVerification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCD3486A20049DFA00DC1316 /* F4SEmailVerification.storyboard */; };
+		FCD388DF2088C00300FC73C5 /* F4SCompanyDocumentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD388DE2088C00300FC73C5 /* F4SCompanyDocumentsTableViewController.swift */; };
+		FCD388E12088D76300FC73C5 /* F4SDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD388E02088D76300FC73C5 /* F4SDocumentViewController.swift */; };
 		FCD884F91FFBC0CC00F05B08 /* Recommendations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCD884F81FFBC0CC00F05B08 /* Recommendations.storyboard */; };
 		FCD884FB1FFBE04F00F05B08 /* RecommendationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD884FA1FFBE04F00F05B08 /* RecommendationsViewController.swift */; };
 		FCD884FD1FFCCB4A00F05B08 /* RecommendationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD884FC1FFCCB4A00F05B08 /* RecommendationsModel.swift */; };
@@ -539,6 +541,8 @@
 		FCD3486120038C3100DC1316 /* F4SEmailVerificationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SEmailVerificationModel.swift; sourceTree = "<group>"; };
 		FCD3486220038C3100DC1316 /* F4SEmailVerificationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SEmailVerificationError.swift; sourceTree = "<group>"; };
 		FCD3486A20049DFA00DC1316 /* F4SEmailVerification.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SEmailVerification.storyboard; sourceTree = "<group>"; };
+		FCD388DE2088C00300FC73C5 /* F4SCompanyDocumentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyDocumentsTableViewController.swift; sourceTree = "<group>"; };
+		FCD388E02088D76300FC73C5 /* F4SDocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDocumentViewController.swift; sourceTree = "<group>"; };
 		FCD884F81FFBC0CC00F05B08 /* Recommendations.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Recommendations.storyboard; sourceTree = "<group>"; };
 		FCD884FA1FFBE04F00F05B08 /* RecommendationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsViewController.swift; sourceTree = "<group>"; };
 		FCD884FC1FFCCB4A00F05B08 /* RecommendationsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsModel.swift; sourceTree = "<group>"; };
@@ -1138,6 +1142,8 @@
 			children = (
 				2002A5641E4CAAB4000825BC /* FavouritesPopup.storyboard */,
 				204C895A1DF5F01E00D8493A /* CompanyDetails.storyboard */,
+				FCD388DE2088C00300FC73C5 /* F4SCompanyDocumentsTableViewController.swift */,
+				FCD388E02088D76300FC73C5 /* F4SDocumentViewController.swift */,
 			);
 			name = CompanyDetails;
 			path = ..;
@@ -1750,6 +1756,7 @@
 				40C1A5271DE58EED000F80AA /* CutomClusterIconGenerator.swift in Sources */,
 				FCC9D13D1FC82B010081F7B5 /* StarRatingView.swift in Sources */,
 				FCB6B8E22074C59C0042C725 /* F4SDayCalendarViewCell.swift in Sources */,
+				FCD388E12088D76300FC73C5 /* F4SDocumentViewController.swift in Sources */,
 				40C6DDF41E03F445000F8806 /* UserInfoDB.swift in Sources */,
 				40E78E791DD32BE7000A3776 /* DrawerVisualState.swift in Sources */,
 				204C89791DF5F0B200D8493A /* ChooseAttributesViewController.swift in Sources */,
@@ -1825,6 +1832,7 @@
 				2037B0A91DEC3D3400A9DE3E /* InterestDBOperations.swift in Sources */,
 				FCD884FD1FFCCB4A00F05B08 /* RecommendationsModel.swift in Sources */,
 				FCB6B8E42074C59C0042C725 /* F4SCalendarColors.swift in Sources */,
+				FCD388DF2088C00300FC73C5 /* F4SCompanyDocumentsTableViewController.swift in Sources */,
 				20FABFEC1DDDA63600D583E2 /* FileHelper.swift in Sources */,
 				40E78E891DD32C3C000A3776 /* ExtensionsHelper.swift in Sources */,
 				40A5CF3E1DED72E8000007AB /* InterestsCollectionViewCell.swift in Sources */,

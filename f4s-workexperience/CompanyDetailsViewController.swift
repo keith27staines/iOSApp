@@ -17,6 +17,11 @@ class CompanyDetailsViewController: UIViewController {
     
     @IBOutlet weak var mapViewHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var companyDocumentsContainer: UIView!
+    
+    @IBOutlet weak var companyDocumentsHeightConstraint: NSLayoutConstraint!
+    
+    
     @IBAction func toggleMapButtonPressed(_ sender: Any) {
         if mapView.isHidden {
             mapView.isHidden = false
@@ -89,6 +94,24 @@ class CompanyDetailsViewController: UIViewController {
             CustomNavigationHelper.sharedInstance.presentCoverLetterController(parentCtrl: self, currentCompany: comp)
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "" {
+            guard let destination = segue.destination as? F4SCompanyDocumentsTableViewController else {
+                return
+            }
+            destination.delegate = self
+        }
+    }
+}
+
+// MARK:-
+extension CompanyDetailsViewController : F4SCompanyDocumentsTableViewControllerDelegate {
+    func receivedTap(_ controller: F4SCompanyDocumentsTableViewController) {
+        
+    }
+    
+    
 }
 
 // MARK: - UIPopoverPresentationControllerDelegate
