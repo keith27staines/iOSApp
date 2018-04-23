@@ -11,16 +11,12 @@ import Reachability
 
 class CompanyDetailsViewController: UIViewController {
     
-    @IBOutlet weak var mapButton: UIButton!
-    
+    @IBOutlet weak var mapButton: UIBarButtonItem!
+    @IBOutlet weak var closeButton: UIBarButtonItem!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
     
     @IBOutlet weak var mapViewHeightConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var companyDocumentsContainer: UIView!
-    
-    @IBOutlet weak var companyDocumentsHeightConstraint: NSLayoutConstraint!
-    
     
     @IBAction func toggleMapButtonPressed(_ sender: Any) {
         if mapView.isHidden {
@@ -46,8 +42,6 @@ class CompanyDetailsViewController: UIViewController {
     @IBOutlet weak var firmDescriptionTextView: UITextView!
     @IBOutlet weak var firmNameLabel: UILabel!
     @IBOutlet weak var firmLogoImage: UIImageView!
-    @IBOutlet weak var shareButton: UIButton!
-    @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var companyDetailsView: UIView!
     @IBOutlet weak var shortlistButton: UIButton!
@@ -73,6 +67,7 @@ class CompanyDetailsViewController: UIViewController {
         self.firmDescriptionTextView.isScrollEnabled = false
         navigationController?.setNavigationBarHidden(true, animated: false)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidRegisterForRemoteNotificationsNotification(_:)), name: NSNotification.Name(rawValue: "ApplicationDidRegisterForRemoteNotificationsNotification"), object: nil)
+        styleNavigationController(titleColor: UIColor.black, backgroundColor: UIColor.white, tintColor: UIColor.black, useLightStatusBar: false)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -94,24 +89,6 @@ class CompanyDetailsViewController: UIViewController {
             CustomNavigationHelper.sharedInstance.presentCoverLetterController(parentCtrl: self, currentCompany: comp)
         }
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "" {
-            guard let destination = segue.destination as? F4SCompanyDocumentsTableViewController else {
-                return
-            }
-            destination.delegate = self
-        }
-    }
-}
-
-// MARK:-
-extension CompanyDetailsViewController : F4SCompanyDocumentsTableViewControllerDelegate {
-    func receivedTap(_ controller: F4SCompanyDocumentsTableViewController) {
-        
-    }
-    
-    
 }
 
 // MARK: - UIPopoverPresentationControllerDelegate
@@ -376,11 +353,10 @@ extension CompanyDetailsViewController {
         let accountsText = NSLocalizedString("See accounts and who you know", comment: "")
         seeAcountsButton.setAttributedTitle(NSAttributedString(string: accountsText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.black]), for: .normal)
 
-        closeButton.setImage(UIImage(named: "closeButton"), for: .normal)
-        shareButton.setImage(UIImage(named: "shareButton"), for: .normal)
 
         closeButton.tintColor = UIColor.black
         shareButton.tintColor = UIColor.black
+        mapButton.tintColor = UIColor.red
 
         // shortlist
         shortlistButton.backgroundColor = UIColor(netHex: Colors.normalGray)
