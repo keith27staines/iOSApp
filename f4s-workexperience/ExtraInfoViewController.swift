@@ -61,9 +61,25 @@ class ExtraInfoViewController: UIViewController {
     var applicationContext: F4SApplicationContext?
     var datePicker = UIDatePicker()
     
-    var blnEmailOkay = false
-    var blnNameOkay = false
-    var blnVoucherOkay = true
+    var isEmailOkay: Bool {
+        guard let emailAddress = emailTextField.text else {
+            return false
+        }
+        return emailAddress.isEmail() && !emailAddress.isEmpty
+    }
+    
+    var isNameOkay: Bool {
+        guard let fullName = firstAndLastNameTextField.text else {
+            return false
+        }
+        return fullName.isValidName() && !fullName.isEmpty
+    }
+    var isVoucherOkay: Bool {
+        guard let voucherText = voucherCodeTextField.text else {
+            return true
+        }
+        return voucherText.isEmpty || (voucherText.isVoucherCode() && voucherText.count == 6)
+    }
     
     lazy var documentUploadController: DocumentUrlViewController = {
         let storyboard = UIStoryboard(name: "DocumentUrl", bundle: nil)
@@ -78,7 +94,11 @@ class ExtraInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        adjustAppearence()
+        setupControls()
+        displayUserInfoIfExists()
+        updateDOBValidityUnderlining()
+        updateButtonStateAndImage()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardNotification(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
     
@@ -135,13 +155,11 @@ extension ExtraInfoViewController {
 // MARK: - UI Setup
 extension ExtraInfoViewController {
 
-    func adjustAppearence() {
+    func setupControls() {
         setupDatePicker()
         setupTextFields()
         setupLabels()
-
         self.userInfoStackView.translatesAutoresizingMaskIntoConstraints = false
-        displayUserInfoIfExists()
     }
 
     func setupTextFields() {
@@ -279,8 +297,6 @@ extension ExtraInfoViewController {
 
             self.emailUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
             self.firstAndLastNameUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
-            updateDOBValidityUnderlining()
-            updateButtonStateAndImage()
         } else {
             self.userInfoStackView.isHidden = true
             self.noVoucherInfoLabel.isHidden = true
@@ -307,7 +323,7 @@ extension ExtraInfoViewController {
         guard getUserAge() >= 13 else {
             return false
         }
-        return blnEmailOkay && blnNameOkay && blnVoucherOkay
+        return isEmailOkay && isNameOkay && isVoucherOkay
     }
 
     func getPlacementUuid() -> String {
@@ -360,6 +376,13 @@ extension ExtraInfoViewController {
             self.toYoungStackView.isHidden = true
             self.userInfoStackView.isHidden = false
         }
+        
+        emailUnderlineView.backgroundColor = isEmailOkay ? UIColor(netHex: Colors.mediumGreen) : UIColor(netHex: Colors.orangeYellow)
+        
+        firstAndLastNameUnderlineView.backgroundColor = isNameOkay ? UIColor(netHex: Colors.mediumGreen) : UIColor(netHex: Colors.orangeYellow)
+        
+        voucherCodeUnderlineView.backgroundColor = isVoucherOkay  ? UIColor(netHex: Colors.mediumGreen) : UIColor(netHex: Colors.orangeYellow)
+        
         if checkIfAllFieldsAreValid()  {
             if consentPreviouslyGiven() {
                 completionImageView.image = UIImage(named: "checkMark")
@@ -504,53 +527,14 @@ extension ExtraInfoViewController {
     
 
     @IBAction func emailTextFieldDidChange(_ sender: NextResponderTextField) {
-        if let senderText = sender.text {
-            if senderText.isEmail() && !senderText.isEmpty {
-                self.emailUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
-                blnEmailOkay = true
-            } else {
-                self.emailUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
-                blnEmailOkay = false
-            }
-        }
         updateButtonStateAndImage()
     }
 
     @IBAction func firstNameAndLastNameTextFieldDidChange(_ sender: NextResponderTextField) {
-        if let senderText = sender.text {
-            if senderText.isValidName() && !senderText.isEmpty {
-                self.firstAndLastNameUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
-                blnNameOkay = true
-            } else {
-                self.firstAndLastNameUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
-                blnEmailOkay = false
-            }
-        }
         updateButtonStateAndImage()
     }
 
     @IBAction func voucherCodeTextFieldDidChange(_ sender: NextResponderTextField) {
-        if let senderText = sender.text {
-            if senderText.isVoucherCode() && senderText.count == 6 {
-                self.voucherCodeUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
-                blnVoucherOkay = true
-            }
-            if senderText.count != 6 {
-                self.voucherCodeUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
-                blnVoucherOkay = false
-            }
-            if senderText.count == 0 {
-                self.voucherCodeUnderlineView.backgroundColor = UIColor(netHex: Colors.warmGrey)
-                blnVoucherOkay = true
-            }
-        }
-        if checkIfAllFieldsAreValid() {
-            completionImageView.image = UIImage(named: "checkMark")
-            completeExtraInfoButton.isEnabled = true
-        } else {
-            completionImageView.image = UIImage(named: "yellowQuestionMark")
-            completeExtraInfoButton.isEnabled = false
-        }
         updateButtonStateAndImage()
     }
 
