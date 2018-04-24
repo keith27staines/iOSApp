@@ -238,6 +238,7 @@
 		FCD388E12088D76300FC73C5 /* F4SDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD388E02088D76300FC73C5 /* F4SDocumentViewController.swift */; };
 		FCD388E3208DB8A600FC73C5 /* F4SCompanyDocumentsContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD388E2208DB8A600FC73C5 /* F4SCompanyDocumentsContainerViewController.swift */; };
 		FCD388E5208DEFE100FC73C5 /* F4SCompanyDocumentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD388E4208DEFE100FC73C5 /* F4SCompanyDocumentsModel.swift */; };
+		FCD388E7208E27E500FC73C5 /* F4SCompanyDocumentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD388E6208E27E500FC73C5 /* F4SCompanyDocumentService.swift */; };
 		FCD884F91FFBC0CC00F05B08 /* Recommendations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCD884F81FFBC0CC00F05B08 /* Recommendations.storyboard */; };
 		FCD884FB1FFBE04F00F05B08 /* RecommendationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD884FA1FFBE04F00F05B08 /* RecommendationsViewController.swift */; };
 		FCD884FD1FFCCB4A00F05B08 /* RecommendationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD884FC1FFCCB4A00F05B08 /* RecommendationsModel.swift */; };
@@ -547,6 +548,7 @@
 		FCD388E02088D76300FC73C5 /* F4SDocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDocumentViewController.swift; sourceTree = "<group>"; };
 		FCD388E2208DB8A600FC73C5 /* F4SCompanyDocumentsContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyDocumentsContainerViewController.swift; sourceTree = "<group>"; };
 		FCD388E4208DEFE100FC73C5 /* F4SCompanyDocumentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyDocumentsModel.swift; sourceTree = "<group>"; };
+		FCD388E6208E27E500FC73C5 /* F4SCompanyDocumentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyDocumentService.swift; sourceTree = "<group>"; };
 		FCD884F81FFBC0CC00F05B08 /* Recommendations.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Recommendations.storyboard; sourceTree = "<group>"; };
 		FCD884FA1FFBE04F00F05B08 /* RecommendationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsViewController.swift; sourceTree = "<group>"; };
 		FCD884FC1FFCCB4A00F05B08 /* RecommendationsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsModel.swift; sourceTree = "<group>"; };
@@ -1150,6 +1152,7 @@
 				FCD388E02088D76300FC73C5 /* F4SDocumentViewController.swift */,
 				FCD388E2208DB8A600FC73C5 /* F4SCompanyDocumentsContainerViewController.swift */,
 				FCD388E4208DEFE100FC73C5 /* F4SCompanyDocumentsModel.swift */,
+				FCD388E6208E27E500FC73C5 /* F4SCompanyDocumentService.swift */,
 			);
 			name = CompanyDetails;
 			path = ..;
@@ -1823,6 +1826,7 @@
 				204203EC1E4B160C007C7409 /* ShortlistCoreDataManager.swift in Sources */,
 				202091AC1DF84BCF003F5B48 /* SocialShareItemSource.swift in Sources */,
 				40E78E981DD39275000A3776 /* MapViewController.swift in Sources */,
+				FCD388E7208E27E500FC73C5 /* F4SCompanyDocumentService.swift in Sources */,
 				204C896D1DF5F08500D8493A /* CompanyOtherTableViewCell.swift in Sources */,
 				FCB6B8EC2074C59C0042C725 /* F4SAvailabilitySequence.swift in Sources */,
 				FCD388E5208DEFE100FC73C5 /* F4SCompanyDocumentsModel.swift in Sources */,

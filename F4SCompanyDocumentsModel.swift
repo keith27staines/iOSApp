@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct CompanyDocument : Encodable, Decodable {
+public struct CompanyDocument : Codable {
     var name: String
     var url: URL {
         return URL(string: "https://www.raspberrypi.org")!
@@ -25,34 +25,19 @@ public class F4SCompanyDocumentsModel {
     
     public private (set) var documents: CompanyDocuments? = nil
     public let companyUuid: F4SUUID
+    private var service: F4SCompanyDocumentService? = nil
     
     public init(companyUuid: F4SUUID) {
         self.companyUuid = companyUuid
-    }
-    
-    private var loaderQueue: DispatchQueue {
-        return DispatchQueue(label: "loadDocuments", qos: .default, attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil)
     }
     
     public func document(_ indexPath: IndexPath) -> CompanyDocument {
         return documents![indexPath.row]
     }
     
-    public func loadDocuments(completion: @escaping (F4SNetworkResult<CompanyDocuments>)->()) {
-        loaderQueue.async { [weak self] in
-            sleep(1)
-            
-            DispatchQueue.main.async {
-                // self?.documents = CompanyDocuments()
-                self?.documents = [
-                    CompanyDocument(name: "Employer's Liability Insurance"),
-                    CompanyDocument(name: "Safe Guarding Certificate"),
-                    CompanyDocument(name: "Other document 1"),
-                    CompanyDocument(name: "Other document 2"),
-                    CompanyDocument(name: "Other document 3")]
-
-                completion(F4SNetworkResult.success(self!.documents!))
-            }
-        }
+    public func getDocuments(completion: @escaping (F4SNetworkResult<CompanyDocuments>)->()) {
+        let service = F4SCompanyDocumentService()
+        service.getDocuments(companyUuid: companyUuid, completion: completion)
+        self.service = service
     }
 }
