@@ -45,7 +45,7 @@ class F4SCompanyDocumentsContainerViewController: UIViewController {
             return
         }
         MessageHandler.sharedInstance.showLightLoadingOverlay(self.view)
-        companyDocumentsModel.loadDocuments { [weak self] (result) in
+        companyDocumentsModel.getDocuments { [weak self] (result) in
             self?.onDocumentsLoaded(result)
         }
     }
