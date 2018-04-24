@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="252-qr-zlJ">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="82" width="375" height="501"/>
                                 <connections>
                                     <segue destination="ULJ-o2-xqB" kind="embed" identifier="toMessage" id="eUm-5R-VK8"/>
                                 </connections>
@@ -34,19 +35,47 @@
                                     <constraint firstAttribute="height" id="Pzj-va-0tJ"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gvr-9t-7Tl">
+                                <rect key="frame" x="97" y="44" width="181" height="30"/>
+                                <state key="normal" title="Add upload docs message"/>
+                                <connections>
+                                    <action selector="addTestMessage:" destination="sWr-Ud-We1" eventType="touchUpInside" id="MWE-Gx-5mB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dzi-VS-viS">
+                                <rect key="frame" x="16" y="595" width="343" height="60"/>
+                                <color key="backgroundColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="s1a-Vi-YO1"/>
+                                </constraints>
+                                <state key="normal" title="Action Button">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="actionButtonTapped:" destination="sWr-Ud-We1" eventType="touchUpInside" id="KSy-fE-VQC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="aFI-gC-t8a" firstAttribute="trailing" secondItem="252-qr-zlJ" secondAttribute="trailing" id="0Hg-du-bFD"/>
+                            <constraint firstItem="dzi-VS-viS" firstAttribute="leading" secondItem="Grz-P4-uti" secondAttribute="leadingMargin" id="10H-vi-yJq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dzi-VS-viS" secondAttribute="trailing" id="1Ck-jt-2Xc"/>
+                            <constraint firstItem="dzi-VS-viS" firstAttribute="top" secondItem="252-qr-zlJ" secondAttribute="bottom" constant="12" id="24U-EP-Zd5"/>
+                            <constraint firstItem="252-qr-zlJ" firstAttribute="top" secondItem="Gvr-9t-7Tl" secondAttribute="bottom" constant="8" id="443-86-ajl"/>
+                            <constraint firstItem="aFI-gC-t8a" firstAttribute="top" secondItem="dzi-VS-viS" secondAttribute="bottom" constant="12" id="DL4-gZ-c6I"/>
                             <constraint firstItem="252-qr-zlJ" firstAttribute="leading" secondItem="Grz-P4-uti" secondAttribute="leading" id="Dhm-yG-02V"/>
                             <constraint firstItem="oVP-so-bpy" firstAttribute="top" secondItem="aFI-gC-t8a" secondAttribute="bottom" id="Fd0-de-5ay"/>
                             <constraint firstAttribute="trailing" secondItem="252-qr-zlJ" secondAttribute="trailing" id="HA6-ay-h7s"/>
-                            <constraint firstItem="252-qr-zlJ" firstAttribute="top" secondItem="sdb-jO-yOt" secondAttribute="bottom" id="NUO-ed-bCs"/>
                             <constraint firstItem="aFI-gC-t8a" firstAttribute="leading" secondItem="252-qr-zlJ" secondAttribute="leading" id="Sqb-X1-cof"/>
-                            <constraint firstItem="aFI-gC-t8a" firstAttribute="top" secondItem="252-qr-zlJ" secondAttribute="bottom" id="XEq-OQ-Q3G"/>
+                            <constraint firstItem="Gvr-9t-7Tl" firstAttribute="centerX" secondItem="Grz-P4-uti" secondAttribute="centerX" id="WkP-L9-spg"/>
+                            <constraint firstItem="Gvr-9t-7Tl" firstAttribute="top" secondItem="sdb-jO-yOt" secondAttribute="bottom" constant="24" id="h6P-XH-tFh"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="actionButton" destination="dzi-VS-viS" id="spK-nn-Faa"/>
+                        <outlet property="actionButtonHeightConstraint" destination="s1a-Vi-YO1" id="Gqq-EG-CHW"/>
+                        <outlet property="addMessageButton" destination="Gvr-9t-7Tl" id="7Rz-zd-yYd"/>
                         <outlet property="answersHeight" destination="Pzj-va-0tJ" id="uIK-qa-wod"/>
                         <outlet property="answersView" destination="aFI-gC-t8a" id="1K2-Bb-MCD"/>
                         <outlet property="containerView" destination="252-qr-zlJ" id="U0a-XJ-wFD"/>
@@ -54,7 +83,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CUt-ux-7Oe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-926" y="164"/>
+            <point key="canvasLocation" x="-927.20000000000005" y="163.26836581709148"/>
         </scene>
         <!--Message View Controller-->
         <scene sceneID="aVN-Pw-9Pe">
@@ -65,7 +94,7 @@
                         <viewControllerLayoutGuide type="bottom" id="3bt-3k-P0C"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="fcK-Sf-bdh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="501"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

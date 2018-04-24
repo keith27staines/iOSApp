@@ -13,6 +13,12 @@ import KeychainSwift
 
 class MessageContainerViewController: UIViewController {
     
+    @IBOutlet weak var addMessageButton: UIButton!
+    
+    @IBOutlet weak var actionButton: UIButton!
+    
+    @IBOutlet weak var actionButtonHeightConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var answersView: UIView!
     @IBOutlet weak var answersHeight: NSLayoutConstraint!
@@ -34,6 +40,8 @@ class MessageContainerViewController: UIViewController {
         if let userUuid = keychain.get(UserDefaultsKeys.userUuid) {
             self.currentUserUuid = userUuid
         }
+        actionButtonHeightConstraint.constant = 0.0
+        actionButton.isEnabled = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,6 +63,30 @@ class MessageContainerViewController: UIViewController {
         self.tabBarController?.tabBar.isTranslucent = false
         self.tabBarController?.tabBar.isHidden = false
     }
+    
+    
+    @IBAction func addTestMessage(_ sender: Any) {
+        let testMessage = Message(uuid: "testButton", dateTime: Date(), relativeDateTime: "", content: "A Business leader has requested to see your cv. If you don't already have a CV, please create one as soon as possible, save it as a PDF to a location such as Dropbox or GoogleDrive, and create a shareable link URL. When you have the link ready, tap the action button below and Workfinder will help you upload the link to the business leader", sender: "Test Button")
+        messageList.append(testMessage)
+        messageController?.loadChatData(messageList: messageList)
+        actionButtonHeightConstraint.constant = 60
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: { [weak self] in
+            self?.view.layoutIfNeeded()
+        }) { [weak self] (success) in
+            self?.actionButton.isEnabled = true
+        }
+    }
+    
+    @IBAction func actionButtonTapped(_ sender: Any) {
+        actionButtonHeightConstraint.constant = 0
+        actionButton.isEnabled = false
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: { [weak self] in
+            self?.view.layoutIfNeeded()
+        }) { (success) in
+            
+        }
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let segueName: String = segue.identifier!
