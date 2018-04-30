@@ -183,6 +183,7 @@
 		FCA6D2941FA741590037962B /* F4SStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6D2931FA741590037962B /* F4SStyle.swift */; };
 		FCA6D2961FA75DE40037962B /* Styler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6D2951FA75DE40037962B /* Styler.swift */; };
 		FCA6D2B61FA88CE10037962B /* PartnerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6D2B51FA88CE00037962B /* PartnerService.swift */; };
+		FCB16481209765BB0045B9CA /* F4SRequestCompanyDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB16480209765BB0045B9CA /* F4SRequestCompanyDocumentViewController.swift */; };
 		FCB46F00204E7DCC00F0779F /* F4SDebugModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46EFF204E7DCC00F0779F /* F4SDebugModel.swift */; };
 		FCB46F02204FD86D00F0779F /* F4SLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46F01204FD86D00F0779F /* F4SLogViewController.swift */; };
 		FCB46F042051365400F0779F /* F4SFeatureSwitchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46F032051365400F0779F /* F4SFeatureSwitchesViewController.swift */; };
@@ -493,6 +494,7 @@
 		FCA6D2931FA741590037962B /* F4SStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SStyle.swift; sourceTree = "<group>"; };
 		FCA6D2951FA75DE40037962B /* Styler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styler.swift; sourceTree = "<group>"; };
 		FCA6D2B51FA88CE00037962B /* PartnerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerService.swift; sourceTree = "<group>"; };
+		FCB16480209765BB0045B9CA /* F4SRequestCompanyDocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRequestCompanyDocumentViewController.swift; sourceTree = "<group>"; };
 		FCB46EFF204E7DCC00F0779F /* F4SDebugModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDebugModel.swift; sourceTree = "<group>"; };
 		FCB46F01204FD86D00F0779F /* F4SLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SLogViewController.swift; sourceTree = "<group>"; };
 		FCB46F032051365400F0779F /* F4SFeatureSwitchesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SFeatureSwitchesViewController.swift; sourceTree = "<group>"; };
@@ -1153,6 +1155,7 @@
 				FCD388E2208DB8A600FC73C5 /* F4SCompanyDocumentsContainerViewController.swift */,
 				FCD388E4208DEFE100FC73C5 /* F4SCompanyDocumentsModel.swift */,
 				FCD388E6208E27E500FC73C5 /* F4SCompanyDocumentService.swift */,
+				FCB16480209765BB0045B9CA /* F4SRequestCompanyDocumentViewController.swift */,
 			);
 			name = CompanyDetails;
 			path = ..;
@@ -1824,6 +1827,7 @@
 				FCCD6AE91FBB44CF0088D7C7 /* PopupCompanyListViewController.swift in Sources */,
 				20B127DF1DD99E5700CE3F1F /* UserService.swift in Sources */,
 				204203EC1E4B160C007C7409 /* ShortlistCoreDataManager.swift in Sources */,
+				FCB16481209765BB0045B9CA /* F4SRequestCompanyDocumentViewController.swift in Sources */,
 				202091AC1DF84BCF003F5B48 /* SocialShareItemSource.swift in Sources */,
 				40E78E981DD39275000A3776 /* MapViewController.swift in Sources */,
 				FCD388E7208E27E500FC73C5 /* F4SCompanyDocumentService.swift in Sources */,

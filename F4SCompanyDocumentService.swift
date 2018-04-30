@@ -20,8 +20,8 @@ public class F4SCompanyDocumentService {
             sleep(1)
             DispatchQueue.main.async {
                 let documents = [
-                    CompanyDocument(name: "Employer's Liability Insurance"),
-                    CompanyDocument(name: "Safe Guarding Certificate"),
+                    CompanyDocument(name: "Employer's Liability Insurance Certificate"),
+                    //CompanyDocument(name: "Safe Guarding Certificate"),
                     CompanyDocument(name: "Other document 1"),
                     CompanyDocument(name: "Other document 2"),
                     CompanyDocument(name: "Other document 3")]
