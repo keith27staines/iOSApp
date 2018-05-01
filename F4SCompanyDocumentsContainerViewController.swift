@@ -39,7 +39,7 @@ class F4SCompanyDocumentsContainerViewController: UIViewController {
     }
     
     func loadDocumentsIfNecessary() {
-        if companyDocumentsModel.documents != nil { return }
+        if companyDocumentsModel.availableDocuments != nil { return }
         guard internetAvailable else {
             MessageHandler.sharedInstance.display("No Internet Connection.", parentCtrl: self)
             return
