@@ -79,11 +79,30 @@
                         <outlet property="answersHeight" destination="Pzj-va-0tJ" id="uIK-qa-wod"/>
                         <outlet property="answersView" destination="aFI-gC-t8a" id="1K2-Bb-MCD"/>
                         <outlet property="containerView" destination="252-qr-zlJ" id="U0a-XJ-wFD"/>
+                        <segue destination="aqF-CP-cd4" kind="show" identifier="documentUpload" id="XOJ-HH-pvW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CUt-ux-7Oe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-927.20000000000005" y="163.26836581709148"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="EDv-Fp-HcS">
+            <objects>
+                <viewController id="aqF-CP-cd4" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="WHY-0g-Fr9"/>
+                        <viewControllerLayoutGuide type="bottom" id="Yfh-tX-4aJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KCg-36-bYe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7aL-ne-aeV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-510" y="935"/>
         </scene>
         <!--Message View Controller-->
         <scene sceneID="aVN-Pw-9Pe">
@@ -101,7 +120,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NtM-2x-RNk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="353" y="103"/>
+            <point key="canvasLocation" x="39" y="163"/>
         </scene>
     </scenes>
 </document>

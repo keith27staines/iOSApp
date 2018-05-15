@@ -28,20 +28,29 @@ class MessageContainerViewController: UIViewController {
     var placements: [TimelinePlacement] = []
     var companies: [Company] = []
     var messageList: [Message] = []
-    var messageOptionList: [MessageOption] = []
+    var cannedResponses: F4SCannedResponses? = nil
+    var action: F4SAction? = nil
     var currentUserUuid: String = ""
     var messageOptionsView: MessageOptionsView?
     var shouldLoadOptions: Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getMessages()
         let keychain = KeychainSwift()
         if let userUuid = keychain.get(UserDefaultsKeys.userUuid) {
             self.currentUserUuid = userUuid
         }
         actionButtonHeightConstraint.constant = 0.0
         actionButton.isEnabled = false
+        getMessages(completion: { [weak self] error in
+            DispatchQueue.main.async {
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.loadChatData()
+                MessageHandler.sharedInstance.hideLoadingOverlay()
+            }
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,27 +75,29 @@ class MessageContainerViewController: UIViewController {
     
     
     @IBAction func addTestMessage(_ sender: Any) {
-        let testMessage = Message(uuid: "testButton", dateTime: Date(), relativeDateTime: "", content: "A Business leader has requested to see your cv. If you don't already have a CV, please create one as soon as possible, save it as a PDF to a location such as Dropbox or GoogleDrive, and create a shareable link URL. When you have the link ready, tap the action button below and Workfinder will help you upload the link to the business leader", sender: "Test Button")
+        let testMessage = Message(uuid: "testButton", dateTime: Date(), relativeDateTime: "", content: "Please submit your CV and Barclay's life skills certificate", sender: "Test Button")
         messageList.append(testMessage)
+        cannedResponses = nil
+        action = F4SAction(originatingMessageUuid: "AAAA",
+                                 actionType: F4SActionType.upload_documents,
+                                 arguments: [F4SActionArgument(argumentName: F4SActionArgumentName.documentType, value: ["cv"]),
+                                             F4SActionArgument(argumentName: F4SActionArgumentName.placementUuid, value: ["abcdef"])])
+        loadChatData()
         messageController?.loadChatData(messageList: messageList)
-        actionButtonHeightConstraint.constant = 60
-        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: { [weak self] in
-            self?.view.layoutIfNeeded()
-        }) { [weak self] (success) in
-            self?.actionButton.isEnabled = true
-        }
     }
     
     @IBAction func actionButtonTapped(_ sender: Any) {
+        guard let action = action else { return }
         actionButtonHeightConstraint.constant = 0
         actionButton.isEnabled = false
-        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: { [weak self] in
-            self?.view.layoutIfNeeded()
-        }) { (success) in
-            
+        do {
+            try F4SActionValidator.validate(action: action)
+            performSegue(withIdentifier: "documentUpload", sender: self)
+        } catch {
+            // Handle exception
+            print(error)
         }
     }
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let segueName: String = segue.identifier!
@@ -98,7 +109,25 @@ class MessageContainerViewController: UIViewController {
 }
 
 extension MessageContainerViewController {
-    func getMessages() {
+    func getMessageAction(threadUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SAction?>) -> ()) {
+        let actionService = F4SMessageActionService(threadUuid: threadUuid)
+        actionService.getMessageAction { result in
+            completion(result)
+        }
+    }
+    
+    func getCannedResponses(threadUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SCannedResponses>) -> ()) {
+        let cannedResponseService = F4SCannedMessageResponsesService(threadUuid: threadUuid)
+        cannedResponseService.getPermittedResponses { result in
+            completion(result)
+        }
+    }
+}
+
+extension MessageContainerViewController {
+    func getMessages(completion: @escaping (Error?) -> ()) {
+        guard let threadUuid = self.threadUuid else { return }
+        
         if let reachability = Reachability() {
             if !reachability.isReachableByAnyMeans {
                 MessageHandler.sharedInstance.display("No Internet Connection.", parentCtrl: self)
@@ -106,76 +135,75 @@ extension MessageContainerViewController {
             }
         }
         
-        if let uuid = self.threadUuid {
-            var count = 0
-            MessageHandler.sharedInstance.showLoadingOverlay(self.view)
-            MessageService.sharedInstance.getMessagesInThread(threadUuid: uuid, getCompleted: {
-                [weak self]
-                _, result in
-                guard let strongSelf = self else {
-                    return
-                }
-                count += 1
-                switch result
-                {
-                case let .error(error):
-                    log.debug(error)
-                    break
-                case let .deffinedError(error):
-                    log.debug(error)
-                    break
-                case let .value(boxed):
-                    strongSelf.messageList = boxed.value
-                    break
-                }
-                if count == 2 {
-                    strongSelf.loadChatData()
-                    MessageHandler.sharedInstance.hideLoadingOverlay()
-                }
-            })
+        MessageHandler.sharedInstance.showLoadingOverlay(self.view)
+        MessageService.sharedInstance.getMessagesInThread(threadUuid: threadUuid, getCompleted: {
+            [weak self] _, result in
             
-            MessageService.sharedInstance.getOptionsForThread(threadUuid: uuid, getOptionsCompleted: {
-                [weak self]
-                _, result in
-                guard let strongSelf = self else {
-                    return
+            guard let strongSelf = self else {
+                return
+            }
+
+            switch result
+            {
+            case let .error(error):
+                log.debug(error)
+                break
+            case let .deffinedError(error):
+                log.debug(error)
+                break
+            case let .value(boxed):
+                strongSelf.messageList = boxed.value
+                break
+            }
+            
+        })
+        
+        getMessageAction(threadUuid: threadUuid, completion: { [weak self] actionResult in
+            switch actionResult {
+            case .error(let error):
+                completion(error)
+            case .success(let action):
+                if let action = action {
+                    self?.action = action
+                } else {
+                    self?.getCannedResponses(threadUuid: threadUuid, completion: { cannedResponsesResult in
+                        switch cannedResponsesResult {
+                        case .error(let error):
+                            completion(error)
+                        case .success(let cannedResponses):
+                            self?.cannedResponses = cannedResponses
+                        }
+                    })
                 }
-                count += 1
-                switch result
-                {
-                case let .error(error):
-                    log.debug(error)
-                    break
-                case let .deffinedError(error):
-                    log.debug(error)
-                    break
-                case let .value(boxed):
-                    strongSelf.messageOptionList = boxed.value
-                    break
-                }
-                if count == 2 {
-                    strongSelf.loadChatData()
-                    MessageHandler.sharedInstance.hideLoadingOverlay()
-                }
-            })
-        }
+            }
+        })
+        
     }
     
     func loadChatData() {
+        if action != nil {
+            actionButtonHeightConstraint.constant = 60
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: { [weak self] in
+                self?.view.layoutIfNeeded()
+            }) { [weak self] (success) in
+                self?.actionButton.isEnabled = true
+            }
+            self.messageController?.loadChatData(messageList: self.messageList)
+            return
+        }
         
         guard let meesageOptionFooter = self.messageOptionsView else {
             return
         }
-        
-        if self.messageOptionList.count > 0 {
-            meesageOptionFooter.loadMessageOptions(options: self.messageOptionList, parentController: self)
-            self.answersHeight.constant = MessageOptionHelper.sharedInstance.getFooterSize(options: self.messageOptionList).height
+        if let cannedResponses = self.cannedResponses, cannedResponses.options.count > 0 {
+            meesageOptionFooter.loadMessageOptions(options: cannedResponses.options, parentController: self)
+            self.answersHeight.constant = MessageOptionHelper.sharedInstance.getFooterSize(options: cannedResponses.options).height
             self.view.layoutIfNeeded()
+            return
         } else {
             self.answersHeight.constant = 0
             self.view.layoutIfNeeded()
         }
-        
         self.messageController?.loadChatData(messageList: self.messageList)
     }
     
@@ -185,22 +213,18 @@ extension MessageContainerViewController {
     }
     
     func didSelectAnswer(index: Int) {
-        guard let uuid = self.threadUuid else {
+        guard let threadUuid = self.threadUuid, let response = cannedResponses?.options[index] else {
             return
         }
         var isDoneRemove: Bool = false
         var isDoneGet: Bool = false
-        let messageToSend = messageOptionList[index]
-        let message = Message(uuid: messageToSend.uuid, content: self.messageOptionList[index].value, sender: self.currentUserUuid)
+        let message = Message(uuid: response.uuid, content: response.value, sender: self.currentUserUuid)
         self.messageController?.didAnswer(message: message)
-        self.messageOptionList = []
         
-        MessageService.sharedInstance.sendMessageForThread(responseUuid: messageToSend.uuid, threadUuid: uuid, putCompleted: {
-            [weak self]
-            _, result in
-            guard let strongSelf = self else {
-                return
-            }
+        MessageService.sharedInstance.sendMessageForThread(responseUuid: response.uuid,
+                                                           threadUuid: threadUuid,
+                                                           putCompleted: { [weak self] _, result in
+            guard let strongSelf = self else { return }
             switch result
             {
             case .error:
@@ -215,9 +239,9 @@ extension MessageContainerViewController {
                         strongSelf.messageController?.addMessage(message: lastMessage)
                     }
                     if isDoneRemove && isDoneGet {
-                        self?.messageOptionList = []
-                        self?.answersHeight.constant = 0
-                        self?.view.layoutIfNeeded()
+                        strongSelf.cannedResponses = nil
+                        strongSelf.answersHeight.constant = 0
+                        strongSelf.view.layoutIfNeeded()
                     }
                 }
             }
@@ -226,7 +250,7 @@ extension MessageContainerViewController {
         self.messageOptionsView?.removeOptions(completed: {
             isDoneRemove = true
             if isDoneRemove && isDoneGet {
-                self.messageOptionList = []
+                self.cannedResponses = nil
                 self.answersHeight.constant = 0
                 self.view.layoutIfNeeded()
             }

@@ -244,16 +244,6 @@ struct Message {
     }
 }
 
-struct MessageOption {
-    var uuid: String
-    var value: String
-
-    init(uuid: String = "", value: String = "") {
-        self.uuid = uuid
-        self.value = value
-    }
-}
-
 struct TimelinePlacement {
     var placementUuid: String
     var userUuid: String

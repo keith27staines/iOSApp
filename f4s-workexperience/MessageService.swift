@@ -48,35 +48,6 @@ class MessageService: ApiBaseService {
         }
     }
 
-    func getOptionsForThread(threadUuid: String, getOptionsCompleted: @escaping (_ succeeded: Bool, _ msg: Result<[MessageOption]>) -> Void) {
-        let url = String(format: "%@%@", ApiConstants.optionsForThreadUrl, threadUuid)
-        options(url: url) {
-            _, msg in
-            switch msg
-            {
-            case let .value(boxedJson):
-                let result = DeserializationManager.sharedInstance.parseMessageOptions(jsonOptional: boxedJson.value)
-                switch result
-                {
-                case .error:
-                    getOptionsCompleted(false, .deffinedError(Errors.GeneralCallErrors.GeneralError))
-
-                case let .deffinedError(error):
-                    getOptionsCompleted(false, .deffinedError(error))
-
-                case let .value(boxed):
-                    getOptionsCompleted(true, .value(Box(boxed.value)))
-                }
-
-            case .error:
-                getOptionsCompleted(false, .deffinedError(Errors.GeneralCallErrors.GeneralError))
-
-            case let .deffinedError(error):
-                getOptionsCompleted(false, .deffinedError(error))
-            }
-        }
-    }
-
     func sendMessageForThread(responseUuid: String, threadUuid: String, putCompleted: @escaping (_ succeeded: Bool, _ msg: Result<[Message]>) -> Void) {
         let url = String(format: "%@%@", ApiConstants.sendMessageForThreadUrl, threadUuid)
         let params: Parameters = ["response_uuid": responseUuid] as [String: Any]
