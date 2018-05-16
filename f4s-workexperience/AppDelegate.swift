@@ -57,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
         continueIfVersionCheckPasses(application: application, continueWith: versionAuthorizedToContinue)
+        F4SUserStatusService.shared.beginStatusUpdate()
         return true
     }
     
@@ -145,9 +146,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
         registerApplicationForRemoteNotifications(application)
-        if let window = self.window {
-            NotificationHelper.sharedInstance.updateToolbarButton(window: window)
-        }
+        F4SUserStatusService.shared.beginStatusUpdate()
     }
 
     func applicationDidBecomeActive(_ appliction: UIApplication) {
@@ -257,7 +256,6 @@ extension AppDelegate {
         if appState == .active {
             if let window = self.window {
                 NotificationHelper.sharedInstance.handleRemoteNotification(userInfo: userInfo, window: window, isAppActive: true)
-                NotificationHelper.sharedInstance.updateToolbarButton(window: window)
             }
         } else {
             if let window = self.window {

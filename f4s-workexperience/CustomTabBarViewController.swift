@@ -26,10 +26,56 @@ class CustomTabBarViewController: UITabBarController {
         configureTabBar()
         setupReachability(nil, useClosures: true)
         startNotifier()
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self,
+                                       selector: #selector(catchUserStatusUpdatedNotification),
+                                       name: .f4sUserStatusUpdated,
+                                       object: nil)
+        if let status = F4SUserStatusService.shared.userStatus {
+            processUserStatusUpdate(status)
+        }
+    }
+    
+    @objc func catchUserStatusUpdatedNotification(notification: Notification) {
+        guard let status = notification.object as? F4SUserStatus else {
+            return
+        }
+        processUserStatusUpdate(status)
+    }
+    
+    func processUserStatusUpdate(_ status: F4SUserStatus) {
+        setTimelineTabBarImageFrom(status: status)
+        displayRatingPopover(unratedPlacements: status.unratedPlacements)
+    }
+    
+    func setTimelineTabBarImageFrom(status: F4SUserStatus) {
+        guard let timelineNavViewCtrl = self.viewControllers?.first as? RotationAwareNavigationController else { return }
+        let unselectedName = status.unreadMessageCount == 0 ? "timelineIconUnselected" : "timelineIconUnreadUnselected"
+        let selectedName = status.unreadMessageCount == 0 ? "timelineIcon" : "timelineIconUnread"
+        DispatchQueue.main.async {
+            timelineNavViewCtrl.tabBarItem.image = UIImage(named: unselectedName)?.withRenderingMode(.alwaysOriginal)
+            timelineNavViewCtrl.tabBarItem.selectedImage = UIImage(named: selectedName)?.withRenderingMode(.alwaysOriginal)
+            UserDefaults.standard.set(true, forKey: UserDefaultsKeys.shouldLoadTimeline)
+        }
+    }
+    
+    func displayRatingPopover(unratedPlacements: [F4SUUID]) {
+        guard let placementUuid = unratedPlacements.first, let topViewCtrl = self.topMostViewController else { return }
+
+        if topViewCtrl is TimelineViewController || topViewCtrl is MessageViewController || topViewCtrl is MessageContainerViewController || topViewCtrl is MapViewController {
+            if let centerCtrl = self.evo_drawerController?.centerViewController as? CustomTabBarViewController {
+                if let currentTabCtrl = centerCtrl.selectedViewController {
+                    CustomNavigationHelper.sharedInstance.presentRatePlacementPopover(parentCtrl: currentTabCtrl, placementUuid: placementUuid, ratePlacementProtocol: self)
+                }
+            }
+        } else {
+            CustomNavigationHelper.sharedInstance.presentRatePlacementPopover(parentCtrl: topViewCtrl, placementUuid: placementUuid, ratePlacementProtocol: self)
+        }
     }
 
     deinit {
         stopNotifier()
+        NotificationCenter.default.removeObserver(self)
     }
 
     override func didReceiveMemoryWarning() {
@@ -115,61 +161,15 @@ extension CustomTabBarViewController {
             return
         }
         if reachability.isReachableByAnyMeans {
-            self.checkForUnreadMessages()
+            F4SUserStatusService.shared.beginStatusUpdate()
         }
     }
 }
 
 // MARK: - Api Calls
-extension CustomTabBarViewController {
-
-    func checkForUnreadMessages() {
-        UserService.sharedInstance.getUnreadMessagesCount { _, result in
-            switch result {
-            case .value(let boxed):
-                let unreadCount = boxed.value.unreadCount
-                UIApplication.shared.applicationIconBadgeNumber = max(unreadCount, 0)
-                if unreadCount > 0 {
-                    if let viewCtrls = self.viewControllers {
-                        if let timelineNavViewCtrl = viewCtrls.first as? RotationAwareNavigationController {
-                            DispatchQueue.main.async {
-                                timelineNavViewCtrl.tabBarItem.image = UIImage(named: "timelineIconUnreadUnselected")?.withRenderingMode(.alwaysOriginal)
-                                timelineNavViewCtrl.tabBarItem.selectedImage = UIImage(named: "timelineIconUnread")?.withRenderingMode(.alwaysOriginal)
-                                UserDefaults.standard.set(true, forKey: UserDefaultsKeys.shouldLoadTimeline)
-                            }
-                        }
-                    }
-                }
-                if boxed.value.unratedPlacements.count > 0 {
-                    // show rating popover
-                    if let topViewCtrl = self.topMostViewController, let placementUuid = boxed.value.unratedPlacements.first {
-                        if topViewCtrl is TimelineViewController || topViewCtrl is MessageViewController || topViewCtrl is MessageContainerViewController || topViewCtrl is MapViewController {
-                            if let centerCtrl = self.evo_drawerController?.centerViewController as? CustomTabBarViewController {
-                                if let currentTabCtrl = centerCtrl.selectedViewController {
-                                    CustomNavigationHelper.sharedInstance.presentRatePlacementPopover(parentCtrl: currentTabCtrl, placementUuid: placementUuid, ratePlacementProtocol: self)
-                                }
-                            }
-                        } else {
-                            CustomNavigationHelper.sharedInstance.presentRatePlacementPopover(parentCtrl: topViewCtrl, placementUuid: placementUuid, ratePlacementProtocol: self)
-                        }
-                    }
-                }
-                break
-            case .error(let err):
-                log.error(err)
-                break
-            case .deffinedError(let err):
-                log.error(err)
-                break
-            }
-        }
-    }
-}
 
 extension CustomTabBarViewController: RatePlacementProtocol {
-    internal func dismissRateController() {
-        checkForUnreadMessages()
-    }
+    internal func dismissRateController() { }
 }
 
 protocol RatePlacementProtocol: class {

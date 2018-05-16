@@ -27,7 +27,7 @@ class SuccessExtraInfoViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        CustomNavigationHelper.sharedInstance.tabBar.checkForUnreadMessages()
+        F4SUserStatusService.shared.beginStatusUpdate()
     }
 
     override func viewWillDisappear(_ animated: Bool) {

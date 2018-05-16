@@ -10,21 +10,30 @@ import Foundation
 
 public struct F4SUserStatus : Codable {
     var unreadMessageCount: Int
-    var unrated: Int
+    var unratedPlacements: [F4SUUID]
 }
 
 private extension F4SUserStatus {
-    
+    private enum CodingKeys : String, CodingKey {
+        case unreadMessageCount = "unread_count"
+        case unratedPlacements = "unrated"
+    }
 }
 
-public protocol F4SBadgeNumberServiceProtocol {
-    var apiName: String { get }
+public protocol F4SUserStatusServiceProtocol {
+    var userStatus: F4SUserStatus? { get }
+    func beginStatusUpdate()
     func getUserStatus(completion: @escaping (F4SNetworkResult<F4SUserStatus>) -> ())
 }
 
-public class F4SBadgeNumberService : F4SDataTaskService {
+public extension Notification.Name {
+    static let f4sUserStatusUpdated = Notification.Name(
+        rawValue: "f4sUserStatusUpdated")
+}
+
+public class F4SUserStatusService : F4SDataTaskService {
     
-    public static let shared: F4SBadgeNumberService = F4SBadgeNumberService()
+    public static let shared: F4SUserStatusService = F4SUserStatusService()
     
     public typealias SuccessType = F4SUserStatus
     
@@ -41,22 +50,23 @@ public class F4SBadgeNumberService : F4SDataTaskService {
         super.init(baseURLString: Config.BASE_URL, apiName: apiName, objectType: SuccessType.self)
     }
     
-    public func updateBadgeNumber() {
-        updateBadgeNumber(maxRetries: 3)
+    public func beginStatusUpdate() {
+        beginStatusUpdate(maxRetries: 3)
     }
     
-    private func updateBadgeNumber(maxRetries: Int) {
+    private func beginStatusUpdate(maxRetries: Int) {
         getUserStatus { [weak self] (result) in
             DispatchQueue.main.async {
                 switch result {
                 case .error(let error):
                     if error.retry && maxRetries > 0 {
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5, execute: {
-                            self?.updateBadgeNumber(maxRetries: maxRetries - 1)
+                            self?.beginStatusUpdate(maxRetries: maxRetries - 1)
                         })
                     }
                 case .success(let status):
                     self?.userStatus = status
+                    NotificationCenter.default.post(name: .f4sUserStatusUpdated, object: status)
                 }
             }
         }
@@ -64,7 +74,7 @@ public class F4SBadgeNumberService : F4SDataTaskService {
 }
 
 // MARK:- F4SDocumentServiceProtocol conformance
-extension F4SBadgeNumberService : F4SBadgeNumberServiceProtocol {
+extension F4SUserStatusService : F4SUserStatusServiceProtocol {
     public func getUserStatus(completion: @escaping (F4SNetworkResult<F4SUserStatus>) -> ()) {
         super.get(attempting: "Get status for current user", completion: completion)
     }
