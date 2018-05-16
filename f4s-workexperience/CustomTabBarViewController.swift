@@ -128,6 +128,7 @@ extension CustomTabBarViewController {
             switch result {
             case .value(let boxed):
                 let unreadCount = boxed.value.unreadCount
+                UIApplication.shared.applicationIconBadgeNumber = max(unreadCount, 0)
                 if unreadCount > 0 {
                     if let viewCtrls = self.viewControllers {
                         if let timelineNavViewCtrl = viewCtrls.first as? RotationAwareNavigationController {

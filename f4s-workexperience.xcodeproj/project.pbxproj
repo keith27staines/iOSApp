@@ -170,6 +170,7 @@
 		FC6C11BE202C402E002C8EA5 /* F4STemplateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6C11BD202C402E002C8EA5 /* F4STemplateTests.swift */; };
 		FC6C11C0202C4974002C8EA5 /* TemplateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6C11BF202C4974002C8EA5 /* TemplateHelper.swift */; };
 		FC6C11C2202C4EE5002C8EA5 /* F4STemplateHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6C11C1202C4EE5002C8EA5 /* F4STemplateHelperTests.swift */; };
+		FC6DE52020AC3AD900F9BB71 /* F4SBadgeNumberService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6DE51F20AC3AD900F9BB71 /* F4SBadgeNumberService.swift */; };
 		FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC92567A1F8F70D100FF9841 /* InterestsModel.swift */; };
 		FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99B7E21F826D1400E2D5F0 /* LatLon.swift */; };
 		FC99F3D41FFE533000E3AC5A /* RecommendationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99F3D31FFE533000E3AC5A /* RecommendationService.swift */; };
@@ -481,6 +482,7 @@
 		FC6C11BD202C402E002C8EA5 /* F4STemplateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateTests.swift; sourceTree = "<group>"; };
 		FC6C11BF202C4974002C8EA5 /* TemplateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateHelper.swift; sourceTree = "<group>"; };
 		FC6C11C1202C4EE5002C8EA5 /* F4STemplateHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateHelperTests.swift; sourceTree = "<group>"; };
+		FC6DE51F20AC3AD900F9BB71 /* F4SBadgeNumberService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SBadgeNumberService.swift; sourceTree = "<group>"; };
 		FC79314720226D440034D201 /* F4SDistribution.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = F4SDistribution.entitlements; path = Config/F4SDistribution.entitlements; sourceTree = "<group>"; };
 		FC92567A1F8F70D100FF9841 /* InterestsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsModel.swift; sourceTree = "<group>"; };
 		FC99B7E21F826D1400E2D5F0 /* LatLon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatLon.swift; sourceTree = "<group>"; };
@@ -777,6 +779,7 @@
 				40E78E451DD32829000A3776 /* Presentation */,
 				40E78E441DD32100000A3776 /* SupportingFiles */,
 				20B128121DDA1A2900CE3F1F /* Config */,
+				FC6DE51F20AC3AD900F9BB71 /* F4SBadgeNumberService.swift */,
 			);
 			path = "f4s-workexperience";
 			sourceTree = "<group>";
@@ -1858,6 +1861,7 @@
 				FCD3485A20038BF200DC1316 /* F4SEmailVerificationViewController.swift in Sources */,
 				40C1A51A1DDF5ACE000F80AA /* GMUDefaultClusterIconGenerator.m in Sources */,
 				FCB6B8CF2074C58F0042C725 /* F4SDaysAndHoursModel.swift in Sources */,
+				FC6DE52020AC3AD900F9BB71 /* F4SBadgeNumberService.swift in Sources */,
 				40E78E661DD32B94000A3776 /* CustomNavigationHelper.swift in Sources */,
 				FCB6B8EB2074C59C0042C725 /* F4SCalendarEnumerations.swift in Sources */,
 				204C896B1DF5F08500D8493A /* CompanyCollectionViewCell.swift in Sources */,
