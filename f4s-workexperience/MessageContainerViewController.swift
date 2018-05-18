@@ -83,6 +83,7 @@ extension MessageContainerViewController {
                 guard let strongSelf = self else {
                     return
                 }
+                F4SUserStatusService.shared.beginStatusUpdate()
                 count += 1
                 switch result
                 {

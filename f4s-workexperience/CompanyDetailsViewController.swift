@@ -18,6 +18,7 @@ class CompanyDetailsViewController: UIViewController {
     
     @IBOutlet weak var mapViewHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var documentsContainerView: UIView!
     @IBAction func toggleMapButtonPressed(_ sender: Any) {
         if mapView.isHidden {
             mapView.isHidden = false
@@ -60,6 +61,7 @@ class CompanyDetailsViewController: UIViewController {
         setupTableView()
         setupAppearance()
         setupMap()
+        documentsContainerView.isHidden = true
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -37,13 +37,7 @@ public class F4SUserStatusService : F4SDataTaskService {
     
     public typealias SuccessType = F4SUserStatus
     
-    public var userStatus: F4SUserStatus? {
-        didSet {
-            if let badgeNumber = userStatus?.unreadMessageCount {
-                UIApplication.shared.applicationIconBadgeNumber = badgeNumber
-            }
-        }
-    }
+    public var userStatus: F4SUserStatus?
     
     public init() {
         let apiName = "user/status"
@@ -66,6 +60,9 @@ public class F4SUserStatusService : F4SDataTaskService {
                     }
                 case .success(let status):
                     self?.userStatus = status
+                    let badgeNumber = status.unreadMessageCount
+                    UIApplication.shared.applicationIconBadgeNumber = max(badgeNumber,0)
+                    print("BADGE NUMBER = \(badgeNumber)")
                     NotificationCenter.default.post(name: .f4sUserStatusUpdated, object: status)
                 }
             }

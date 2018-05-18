@@ -153,12 +153,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         continueIfVersionCheckPasses(application: appliction, continueWith: nil)
     }
+    
+    
 
     func applicationWillTerminate(_: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         F4SDebug.shared?.updateHistory()
         self.saveContext()
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        F4SUserStatusService.shared.beginStatusUpdate()
     }
 
     // MARK: - Core Data stack
