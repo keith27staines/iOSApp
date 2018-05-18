@@ -569,25 +569,6 @@ class DeserializationManager {
         return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
     }
 
-    func parseUnreadMessagesCount(jsonOptional: JSON) -> Result<UserStatus> {
-        var userStatus: UserStatus = UserStatus()
-        if let count = jsonOptional["unread_count"].int {
-            userStatus.unreadCount = count
-        }
-
-        if let unratedPlacements = jsonOptional["unrated"].array {
-            var placementList: [String] = []
-            for placement in unratedPlacements {
-                if let placementString = placement.string {
-                    placementList.append(placementString)
-                }
-            }
-            userStatus.unratedPlacements = placementList
-        }
-
-        return .value(Box(userStatus))
-    }
-
     func parseRatePlacement(jsonOptional: JSON) -> Result<String> {
 
         if let _ = jsonOptional["value"].int {

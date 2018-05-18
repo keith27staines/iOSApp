@@ -17,7 +17,7 @@ class NotificationHelper {
 
     func handleRemoteNotification(userInfo: [AnyHashable: Any], window: UIWindow, isAppActive: Bool) {
         log.debug(userInfo)
-        UIApplication.shared.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber - 1
+        F4SUserStatusService.shared.beginStatusUpdate()
         
         var title: String = ""
         var body: String = ""
@@ -99,14 +99,6 @@ class NotificationHelper {
         default:
             assert(false, "Unexpected or missing type string: \(typeString)")
             return nil
-        }
-    }
-
-    func updateToolbarButton(window: UIWindow) {
-        if let topViewCtrl = window.rootViewController as? DrawerController {
-            if let centerCtrl = topViewCtrl.centerViewController as? CustomTabBarViewController {
-                centerCtrl.checkForUnreadMessages()
-            }
         }
     }
 }

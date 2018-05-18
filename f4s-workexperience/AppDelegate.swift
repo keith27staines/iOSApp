@@ -57,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
         continueIfVersionCheckPasses(application: application, continueWith: versionAuthorizedToContinue)
+        F4SUserStatusService.shared.beginStatusUpdate()
         return true
     }
     
@@ -145,21 +146,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
         registerApplicationForRemoteNotifications(application)
-        if let window = self.window {
-            NotificationHelper.sharedInstance.updateToolbarButton(window: window)
-        }
+        F4SUserStatusService.shared.beginStatusUpdate()
     }
 
     func applicationDidBecomeActive(_ appliction: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         continueIfVersionCheckPasses(application: appliction, continueWith: nil)
     }
+    
+    
 
     func applicationWillTerminate(_: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         F4SDebug.shared?.updateHistory()
         self.saveContext()
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        F4SUserStatusService.shared.beginStatusUpdate()
     }
 
     // MARK: - Core Data stack
@@ -257,7 +262,6 @@ extension AppDelegate {
         if appState == .active {
             if let window = self.window {
                 NotificationHelper.sharedInstance.handleRemoteNotification(userInfo: userInfo, window: window, isAppActive: true)
-                NotificationHelper.sharedInstance.updateToolbarButton(window: window)
             }
         } else {
             if let window = self.window {
