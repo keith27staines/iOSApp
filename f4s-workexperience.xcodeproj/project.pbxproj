@@ -616,7 +616,7 @@
 		201458C21E1CFCC900DBC9BD /* Message */ = {
 			isa = PBXGroup;
 			children = (
-				FC4C5F2820B2D6A1001FA83C /* Document upload as message response */,
+				FC4C5F2820B2D6A1001FA83C /* Upload requested documents */,
 				201458C61E1CFD7400DBC9BD /* MessageViewController.swift */,
 				206F8F8E1E1E552F0024937B /* MessageOptionsView.swift */,
 				206F8F8A1E1E48120024937B /* MessageOptionCollectionViewCell.swift */,
@@ -1266,7 +1266,7 @@
 			name = "Partner selection";
 			sourceTree = "<group>";
 		};
-		FC4C5F2820B2D6A1001FA83C /* Document upload as message response */ = {
+		FC4C5F2820B2D6A1001FA83C /* Upload requested documents */ = {
 			isa = PBXGroup;
 			children = (
 				FC4C5F2620B2BDE8001FA83C /* DocumentUploadBLRequest.storyboard */,
@@ -1274,7 +1274,7 @@
 				FC4C5F2B20B404CF001FA83C /* F4SUploadTableViewController.swift */,
 				FC86A5FA20B44E6B002BAD74 /* F4SUrlDescriptorTableViewCell.swift */,
 			);
-			path = "Document upload as message response";
+			path = "Upload requested documents";
 			sourceTree = "<group>";
 		};
 		FC59B18B1F8154350068EC9C /* F4SDataStructures */ = {
