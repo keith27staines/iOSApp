@@ -39,6 +39,9 @@ class MessageContainerViewController: UIViewController {
     var currentUserUuid: String = ""
     var messageOptionsView: MessageOptionsView?
     var shouldLoadOptions: Bool = true
+    
+    @IBOutlet weak var subjectLabel: UILabel!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +51,21 @@ class MessageContainerViewController: UIViewController {
         }
         actionButtonHeightConstraint.constant = 0.0
         actionButton.isEnabled = false
+
+        F4SButtonStyler.apply(style: .primary, button: actionButton)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addAnswersView()
+        setNavigationBar()
+        subjectLabel.text = company?.name ?? "Workfinder"
+        
+        UIApplication.shared.statusBarStyle = .lightContent
+        self.evo_drawerController?.openDrawerGestureModeMask = .init(rawValue: 0)
+        
+        self.tabBarController?.tabBar.isTranslucent = true
+        self.tabBarController?.tabBar.isHidden = true
         getMessages(completion: { [weak self] error in
             DispatchQueue.main.async {
                 guard let strongSelf = self else {
@@ -57,19 +75,6 @@ class MessageContainerViewController: UIViewController {
                 MessageHandler.sharedInstance.hideLoadingOverlay()
             }
         })
-        F4SButtonStyler.apply(style: .primary, button: actionButton)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        addAnswersView()
-        setNavigationBar()
-        
-        UIApplication.shared.statusBarStyle = .lightContent
-        self.evo_drawerController?.openDrawerGestureModeMask = .init(rawValue: 0)
-        
-        self.tabBarController?.tabBar.isTranslucent = true
-        self.tabBarController?.tabBar.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -279,14 +284,13 @@ extension MessageContainerViewController {
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        
         let backButton = UIBarButtonItem(image: UIImage(named: "Back"), style: UIBarButtonItemStyle.done, target: self, action: #selector(backButtonTouched))
         backButton.tintColor = UIColor.white
         navigationItem.leftBarButtonItem = backButton
         
         let showCompanyButton = UIBarButtonItem(image: UIImage(named: "information"), style: UIBarButtonItemStyle.done, target: self, action: #selector(showCompanyDetailsView))
         navigationItem.rightBarButtonItem = showCompanyButton
-        navigationItem.title = self.company?.name
+        navigationItem.title = "Messages"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
     }
     

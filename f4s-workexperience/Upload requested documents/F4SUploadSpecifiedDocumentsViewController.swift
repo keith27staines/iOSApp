@@ -39,7 +39,7 @@ class F4SUploadSpecifiedDocumentsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         F4SButtonStyler.apply(style: .primary, button: uploadButton)
-        
+        navigationItem.title = "Provide info"
     }
     
     override func viewWillAppear(_ animated: Bool) {
