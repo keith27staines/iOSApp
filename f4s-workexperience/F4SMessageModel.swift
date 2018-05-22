@@ -43,8 +43,17 @@ extension F4SAction {
 }
 
 public enum F4SActionType : String, Codable {
-    case upload_documents
+    
+    case uploadDocuments = "upload_documents"
+    
+    var actionTitle: String {
+        switch self {
+        case .uploadDocuments:
+            return NSLocalizedString("Add documents", comment: "Action request from business leader asking young person to upload certain documents (which are specified elsewhere)")
+        }
+    }
 }
+
 
 public enum F4SActionArgumentName: String, Codable {
     case placementUuid = "placement_uuid"

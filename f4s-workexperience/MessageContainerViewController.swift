@@ -13,8 +13,6 @@ import KeychainSwift
 
 class MessageContainerViewController: UIViewController {
     
-    @IBOutlet weak var addMessageButton: UIButton!
-    
     @IBOutlet weak var actionButton: UIButton!
     
     @IBOutlet weak var actionButtonHeightConstraint: NSLayoutConstraint!
@@ -29,7 +27,15 @@ class MessageContainerViewController: UIViewController {
     var companies: [Company] = []
     var messageList: [Message] = []
     var cannedResponses: F4SCannedResponses? = nil
-    var action: F4SAction? = nil
+    var action: F4SAction? = nil {
+        didSet {
+            loadChatData()
+            guard let action = self.action else {
+                return
+            }
+            actionButton.setTitle(action.actionType.actionTitle, for: .normal)
+        }
+    }
     var currentUserUuid: String = ""
     var messageOptionsView: MessageOptionsView?
     var shouldLoadOptions: Bool = true
@@ -51,6 +57,7 @@ class MessageContainerViewController: UIViewController {
                 MessageHandler.sharedInstance.hideLoadingOverlay()
             }
         })
+        F4SButtonStyler.apply(style: .primary, button: actionButton)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,26 +80,17 @@ class MessageContainerViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    
-    @IBAction func addTestMessage(_ sender: Any) {
-        let testMessage = Message(uuid: "testButton", dateTime: Date(), relativeDateTime: "", content: "Please submit your CV and Barclay's life skills certificate", sender: "Test Button")
-        messageList.append(testMessage)
-        cannedResponses = nil
-        action = F4SAction(originatingMessageUuid: "AAAA",
-                                 actionType: F4SActionType.upload_documents,
-                                 arguments: [F4SActionArgument(argumentName: F4SActionArgumentName.documentType, value: ["cv"]),
-                                             F4SActionArgument(argumentName: F4SActionArgumentName.placementUuid, value: ["abcdef"])])
-        loadChatData()
-        messageController?.loadChatData(messageList: messageList)
-    }
-    
     @IBAction func actionButtonTapped(_ sender: Any) {
         guard let action = action else { return }
         actionButtonHeightConstraint.constant = 0
         actionButton.isEnabled = false
         do {
             try F4SActionValidator.validate(action: action)
-            performSegue(withIdentifier: "documentUpload", sender: self)
+            switch action.actionType {
+            case .uploadDocuments:
+                performSegue(withIdentifier: "uploadDocumentsBLRequest", sender: self)
+            }
+            
         } catch {
             // Handle exception
             print(error)
@@ -101,9 +99,14 @@ class MessageContainerViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let segueName: String = segue.identifier!
-        if segueName == "toMessage"
-        {
+        if segueName == "toMessage" {
             self.messageController = segue.destination as? MessageViewController
+            return
+        }
+        if segueName == "uploadDocumentsBLRequest" {
+            guard let vc = segue.destination as? F4SUploadSpecifiedDocumentsViewController else { return }
+            vc.action = action
+            return
         }
     }
 }
@@ -159,21 +162,25 @@ extension MessageContainerViewController {
         })
         
         getMessageAction(threadUuid: threadUuid, completion: { [weak self] actionResult in
-            switch actionResult {
-            case .error(let error):
-                completion(error)
-            case .success(let action):
-                if let action = action {
-                    self?.action = action
-                } else {
-                    self?.getCannedResponses(threadUuid: threadUuid, completion: { cannedResponsesResult in
-                        switch cannedResponsesResult {
-                        case .error(let error):
-                            completion(error)
-                        case .success(let cannedResponses):
-                            self?.cannedResponses = cannedResponses
-                        }
-                    })
+            guard let strongSelf = self else { return }
+            DispatchQueue.main.async {
+                switch actionResult {
+                case .error(let error):
+                    completion(error)
+                case .success(let action):
+                    if let action = action {
+                        self?.action = action
+                        completion(nil)
+                    } else {
+                        strongSelf.getCannedResponses(threadUuid: threadUuid, completion: { cannedResponsesResult in
+                            switch cannedResponsesResult {
+                            case .error(let error):
+                                completion(error)
+                            case .success(let cannedResponses):
+                                strongSelf.cannedResponses = cannedResponses
+                            }
+                        })
+                    }
                 }
             }
         })

@@ -19,7 +19,7 @@ public struct F4SActionValidator {
     public static func validate(action: F4SAction) throws {
         
         switch action.actionType {
-        case .upload_documents:
+        case .uploadDocuments:
             guard let _ = action.argument(name: .placementUuid),
                 let _ = action.argument(name: .documentType) else {
                 throw F4SActionValidatorError.argumentMissing
