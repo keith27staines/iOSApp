@@ -91,7 +91,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="DocumentUploadBLRequest" storyboardName="DocumentUploadBLRequest" id="D0p-eC-Ds8" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J4u-XZ-YKe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-692" y="-343"/>
+            <point key="canvasLocation" x="-642" y="-319"/>
         </scene>
         <!--Message View Controller-->
         <scene sceneID="aVN-Pw-9Pe">
@@ -109,7 +109,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NtM-2x-RNk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-358" y="161"/>
+            <point key="canvasLocation" x="-1311" y="821"/>
         </scene>
     </scenes>
 </document>
