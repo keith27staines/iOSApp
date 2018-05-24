@@ -14,7 +14,7 @@ class F4SUrlDescriptorTableViewCell: UITableViewCell {
     @ IBOutlet var label: UILabel!
     @IBOutlet var underliningView: UIView!
     @IBOutlet weak var deleteButton: UIButton!
-    let defaultText = "Tap to add link to your "
+    let defaultText = "Tap to add "
     
     var deleteButtonWasPressed : ((F4SUrlDescriptorTableViewCell) -> Void)? = nil
     
@@ -26,12 +26,13 @@ class F4SUrlDescriptorTableViewCell: UITableViewCell {
         didSet {
             self.label.text = defaultText
             self.label.textColor = UIColor.lightGray
-            self.label.numberOfLines = 10
+            self.label.numberOfLines = 1
             self.leftImage.image = #imageLiteral(resourceName: "greyLinkURL")
             self.accessoryType = .none
             self.underliningView.backgroundColor = UIColor.orange
             self.deleteButton.isHidden = false
             if let descriptor = documentUrlDescriptor {
+                label.numberOfLines = descriptor.isExpanded ? 0 : 1
                 label.text = displayText(descriptor: descriptor)
                 self.deleteButton.isHidden = (descriptor.url == nil)
                 if !descriptor.urlString.isEmpty {
@@ -53,15 +54,6 @@ class F4SUrlDescriptorTableViewCell: UITableViewCell {
         }
         return defaultText + descriptor.docType.title
         
-    }
-    
-    func requiredHeight(numberOfLines: Int) -> CGFloat {
-        let padding = numberOfLines == 0 ? CGFloat(10) : CGFloat(20)
-        let oldNumber = label.numberOfLines
-        label.numberOfLines = numberOfLines
-        let size = label.sizeThatFits(label.bounds.size)
-        label.numberOfLines = oldNumber
-        return max(ceil(size.height)+padding,40)
     }
     
 }

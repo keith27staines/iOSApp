@@ -110,6 +110,7 @@ class MessageContainerViewController: UIViewController {
         }
         if segueName == "uploadDocumentsBLRequest" {
             guard let vc = segue.destination as? F4SUploadSpecifiedDocumentsViewController else { return }
+            vc.companyName = company?.name ?? "this company"
             vc.action = action
             return
         }

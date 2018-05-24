@@ -177,6 +177,7 @@
 		FC85FA8220A3436600059EFB /* F4SMessageServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85FA8120A3436600059EFB /* F4SMessageServices.swift */; };
 		FC860D82209C37F2007945E6 /* MessageDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC860D81209C37F2007945E6 /* MessageDispatcher.swift */; };
 		FC86A5FB20B44E6B002BAD74 /* F4SUrlDescriptorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC86A5FA20B44E6B002BAD74 /* F4SUrlDescriptorTableViewCell.swift */; };
+		FC86A5FD20B6E93B002BAD74 /* F4SUploadRequestedDocumentsTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC86A5FC20B6E93B002BAD74 /* F4SUploadRequestedDocumentsTableViewModel.swift */; };
 		FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC92567A1F8F70D100FF9841 /* InterestsModel.swift */; };
 		FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99B7E21F826D1400E2D5F0 /* LatLon.swift */; };
 		FC99F3D41FFE533000E3AC5A /* RecommendationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99F3D31FFE533000E3AC5A /* RecommendationService.swift */; };
@@ -497,6 +498,7 @@
 		FC85FA8120A3436600059EFB /* F4SMessageServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SMessageServices.swift; sourceTree = "<group>"; };
 		FC860D81209C37F2007945E6 /* MessageDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDispatcher.swift; sourceTree = "<group>"; };
 		FC86A5FA20B44E6B002BAD74 /* F4SUrlDescriptorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUrlDescriptorTableViewCell.swift; sourceTree = "<group>"; };
+		FC86A5FC20B6E93B002BAD74 /* F4SUploadRequestedDocumentsTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUploadRequestedDocumentsTableViewModel.swift; sourceTree = "<group>"; };
 		FC92567A1F8F70D100FF9841 /* InterestsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsModel.swift; sourceTree = "<group>"; };
 		FC99B7E21F826D1400E2D5F0 /* LatLon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatLon.swift; sourceTree = "<group>"; };
 		FC99F3D31FFE533000E3AC5A /* RecommendationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationService.swift; sourceTree = "<group>"; };
@@ -1273,6 +1275,7 @@
 				FC4C5F2920B2D7CD001FA83C /* F4SUploadSpecifiedDocumentsViewController.swift */,
 				FC4C5F2B20B404CF001FA83C /* F4SUploadTableViewController.swift */,
 				FC86A5FA20B44E6B002BAD74 /* F4SUrlDescriptorTableViewCell.swift */,
+				FC86A5FC20B6E93B002BAD74 /* F4SUploadRequestedDocumentsTableViewModel.swift */,
 			);
 			path = "Upload requested documents";
 			sourceTree = "<group>";
@@ -1957,6 +1960,7 @@
 				40E78E581DD32964000A3776 /* Constants.swift in Sources */,
 				FCB6B8C92074C58F0042C725 /* F4SHoursPickerViewController.swift in Sources */,
 				40C1A51C1DDF5ACE000F80AA /* GMUGridBasedClusterAlgorithm.m in Sources */,
+				FC86A5FD20B6E93B002BAD74 /* F4SUploadRequestedDocumentsTableViewModel.swift in Sources */,
 				FCD3486620038C3100DC1316 /* F4SEmailVerificationState.swift in Sources */,
 				FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */,
 				FC85FA8220A3436600059EFB /* F4SMessageServices.swift in Sources */,
