@@ -90,6 +90,18 @@ class F4SUploadSpecifiedDocumentsViewController: UIViewController {
     }
     
     @IBAction func uploadDocumentUrls(_ sender: UIButton) {
+        guard model.canSubmitToServer() else { return }
+        MessageHandler.sharedInstance.showLightLoadingOverlay(self.view)
+        model.submitToServer { [weak self] result in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .error(let error):
+                MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
+            case .success( _ ):
+                strongSelf.dismiss(animated: true, completion: nil)
+            }
+            MessageHandler.sharedInstance.hideLoadingOverlay()
+        }
     }
     
 }

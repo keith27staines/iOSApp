@@ -17,16 +17,18 @@ extension Notification.Name {
 public class F4SUploadRequestedDocumentsTableViewModel {
     
     public private (set) var expandedIndexPath: IndexPath?
-    public private (set) var placementUuid: F4SUUID?
+    public private (set) var placementUuid: F4SUUID
     
     public convenience init?(action: F4SAction) {
-        guard action.actionType == .uploadDocuments else { return nil }
+        guard action.actionType == .uploadDocuments, let placementUuid = action.argument(name: F4SActionArgumentName.placementUuid)?.value.first else {
+            return nil
+        }
         let documentTypeNames = action.argument(name: F4SActionArgumentName.documentType)?.value ?? []
-        let placementUuid = action.argument(name: F4SActionArgumentName.placementUuid)?.value.first
         self.init(placementUuid: placementUuid, documentTypeNames: documentTypeNames)
     }
     
-    public init(placementUuid: F4SUUID?, documentTypeNames: [String]) {
+    public init(placementUuid: F4SUUID, documentTypeNames: [String]) {
+        self.placementUuid = placementUuid
         documentUrlDescriptors = documentTypeNames.map({ (docTypeName) -> F4SDocumentUrlDescriptor in
             let docType = F4SUploadableDocumentType(rawValue: docTypeName) ?? F4SUploadableDocumentType.other
             return F4SDocumentUrlDescriptor(title: "", docType: docType, urlString: "", includeInApplication: true, isExpanded: false)
@@ -34,7 +36,6 @@ public class F4SUploadRequestedDocumentsTableViewModel {
             expandedIndexPath = nil
             return descriptor1.docType != .lifeskills
         })
-        self.placementUuid = placementUuid
     }
     
     private var documentUrlDescriptors: [F4SDocumentUrlDescriptor] = []
@@ -134,7 +135,16 @@ public class F4SUploadRequestedDocumentsTableViewModel {
         return true
     }
     
-    public func submitToServer(completion: ()->() ) {
+    public func submitToServer(completion: @escaping (F4SNetworkResult<String>)->() ) {
+        let service = F4SPlacementDocumentsService(placementUuid: placementUuid)
+        var documentUrls = [F4SDocumentUrl]()
+        for descriptor in documentUrlDescriptors {
+            documentUrls.append(descriptor.documentUrl)
+        }
+        let putJson = F4SPutDocumentsUrlJson(documents: documentUrls)
+        service.putDocumentsForPlacement(documentDescriptors: putJson) { (result) in
+            completion(result)
+        }
         
     }
 }
