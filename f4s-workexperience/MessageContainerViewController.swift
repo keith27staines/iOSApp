@@ -115,6 +115,10 @@ class MessageContainerViewController: UIViewController {
             return
         }
     }
+    
+    func dismissToMessages(sender: Any?) {
+        
+    }
 }
 
 extension MessageContainerViewController {

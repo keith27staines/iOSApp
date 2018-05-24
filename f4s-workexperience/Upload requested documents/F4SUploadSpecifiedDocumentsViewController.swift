@@ -94,16 +94,18 @@ class F4SUploadSpecifiedDocumentsViewController: UIViewController {
         MessageHandler.sharedInstance.showLightLoadingOverlay(self.view)
         model.submitToServer { [weak self] result in
             guard let strongSelf = self else { return }
-            switch result {
-            case .error(let error):
-                MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
-            case .success( _ ):
-                strongSelf.dismiss(animated: true, completion: nil)
+            DispatchQueue.main.async {
+                switch result {
+                case .error(let error):
+                    MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
+                    MessageHandler.sharedInstance.hideLoadingOverlay()
+                case .success( _ ):
+                    MessageHandler.sharedInstance.hideLoadingOverlay()
+                    strongSelf.navigationController?.popViewController(animated: true)
+                }
             }
-            MessageHandler.sharedInstance.hideLoadingOverlay()
         }
     }
-    
 }
 
 
