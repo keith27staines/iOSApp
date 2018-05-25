@@ -31,7 +31,7 @@ public class F4SUploadRequestedDocumentsTableViewModel {
         self.placementUuid = placementUuid
         documentUrlDescriptors = documentTypeNames.map({ (docTypeName) -> F4SDocumentUrlDescriptor in
             let docType = F4SUploadableDocumentType(rawValue: docTypeName) ?? F4SUploadableDocumentType.other
-            return F4SDocumentUrlDescriptor(title: "", docType: docType, urlString: "", includeInApplication: true, isExpanded: false)
+            return F4SDocumentUrlDescriptor(docType: docType, urlString: "", includeInApplication: true, isExpanded: false)
         }).sorted(by: {(descriptor1, decriptor2) -> Bool in
             expandedIndexPath = nil
             return descriptor1.docType != .lifeskills

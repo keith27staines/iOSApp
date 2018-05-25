@@ -72,7 +72,7 @@ class F4SUploadTableViewController: UITableViewController {
             self.present(alert, animated: true, completion: nil)
             return
         }
-        let _ = model.setDescriptorForIndexPath(indexPath, title: "", type: descriptor.docType, urlString: pasteText, includeInApplication: true, isExpanded: false)
+        let _ = model.setDescriptorForIndexPath(indexPath, title: descriptor.docType.rawValue, type: descriptor.docType, urlString: pasteText, includeInApplication: true, isExpanded: false)
         expandRowAtIndexPath(indexPath: indexPath)
     }
     

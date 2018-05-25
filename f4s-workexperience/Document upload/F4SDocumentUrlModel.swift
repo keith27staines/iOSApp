@@ -77,7 +77,8 @@ public enum F4SUploadableDocumentType : String {
 }
 
 public struct F4SDocumentUrlDescriptor {
-    public var title: String = "untitled"
+    static public let defaultTitle = "untitled"
+    public var title: String = F4SDocumentUrlDescriptor.defaultTitle
     public var docType: F4SUploadableDocumentType = F4SUploadableDocumentType.other
     public var urlString : String
     public var includeInApplication: Bool = false
@@ -99,7 +100,7 @@ public struct F4SDocumentUrlDescriptor {
         return URL(string: urlString)
     }
     
-    public init(title: String = "untitled", docType: F4SUploadableDocumentType = .other, urlString: String, includeInApplication: Bool = false, isExpanded: Bool = false) {
+    public init(title: String, docType: F4SUploadableDocumentType = .other, urlString: String, includeInApplication: Bool = false, isExpanded: Bool = false) {
         self.title = title
         self.docType = docType
         self.urlString = urlString
@@ -108,8 +109,12 @@ public struct F4SDocumentUrlDescriptor {
         self.uuid = nil
     }
     
+    public init(docType: F4SUploadableDocumentType = .other, urlString: String, includeInApplication: Bool = false, isExpanded: Bool = false) {
+        self.init(title: docType.rawValue, docType: docType, urlString: urlString, includeInApplication: includeInApplication, isExpanded: isExpanded)
+    }
+    
     public init(documentUrl: F4SDocumentUrl) {
-        self.title = documentUrl.title ?? "untitled"
+        self.title = documentUrl.title ?? F4SDocumentUrlDescriptor.defaultTitle
         self.docType = F4SUploadableDocumentType(rawValue: documentUrl.docType) ?? .other
         self.urlString = documentUrl.url
         self.includeInApplication = true
