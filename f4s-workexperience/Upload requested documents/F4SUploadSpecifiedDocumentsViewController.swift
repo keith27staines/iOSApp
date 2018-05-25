@@ -100,8 +100,13 @@ class F4SUploadSpecifiedDocumentsViewController: UIViewController {
                     MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
                     MessageHandler.sharedInstance.hideLoadingOverlay()
                 case .success( _ ):
-                    MessageHandler.sharedInstance.hideLoadingOverlay()
-                    strongSelf.navigationController?.popViewController(animated: true)
+                    let alert = UIAlertController(title: "Uploaded!", message: "We will pass on these links to \(strongSelf.companyName)\n\nThank you!", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "Close", style: .default, handler: { (_) in
+                        MessageHandler.sharedInstance.hideLoadingOverlay()
+                        strongSelf.navigationController?.popViewController(animated: true)
+                    })
+                    alert.addAction(action)
+                    strongSelf.present(alert, animated: true)
                 }
             }
         }

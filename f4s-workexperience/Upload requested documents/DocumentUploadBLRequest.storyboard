@@ -50,14 +50,14 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="lUs-83-JP0">
                                         <rect key="frame" x="0.0" y="281.5" width="355" height="37"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I have a Life Skills Certificate" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5F-vS-mRX">
-                                                <rect key="frame" x="0.0" y="8.5" width="273.5" height="20.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" text="I have a Life Skills Certificate" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5F-vS-mRX">
+                                                <rect key="frame" x="0.0" y="8.5" width="218.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IRv-fB-FeI">
-                                                <rect key="frame" x="289.5" y="3" width="67.5" height="31"/>
+                                                <rect key="frame" x="234.5" y="3" width="122.5" height="31"/>
                                                 <connections>
                                                     <action selector="lifeSkillsSwitchChanged:" destination="8uP-Kw-sBA" eventType="valueChanged" id="bB4-Js-Esd"/>
                                                 </connections>

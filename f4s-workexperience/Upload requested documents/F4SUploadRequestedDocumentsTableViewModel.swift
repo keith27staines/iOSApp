@@ -86,7 +86,7 @@ public class F4SUploadRequestedDocumentsTableViewModel {
         return displayUrlDescriptors.count
     }
     
-    public var userHasLifeskillsCertificate: Bool = false {
+    public var userHasLifeskillsCertificate: Bool = true {
         didSet {
             postSubmitStateNotification()
         }

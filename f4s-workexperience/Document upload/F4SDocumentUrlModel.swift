@@ -40,7 +40,7 @@ public struct F4SDocumentUrl : Codable {
         self.uuid = uuid
         self.url = urlString
         self.docType = doc_type
-        self.title = title
+        self.title = title ?? doc_type
         self.document = nil
     }
 }
