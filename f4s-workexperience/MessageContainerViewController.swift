@@ -25,7 +25,7 @@ class MessageContainerViewController: UIViewController {
     var company: Company?
     var placements: [TimelinePlacement] = []
     var companies: [Company] = []
-    var messageList: [Message] = []
+    var messageList: [F4SMessage] = []
     var cannedResponses: F4SCannedResponses? = nil
     var action: F4SAction? = nil {
         didSet {
@@ -149,27 +149,17 @@ extension MessageContainerViewController {
         }
         
         MessageHandler.sharedInstance.showLoadingOverlay(self.view)
-        MessageService.sharedInstance.getMessagesInThread(threadUuid: threadUuid, getCompleted: {
-            [weak self] _, result in
-            
-            guard let strongSelf = self else {
-                return
+        F4SMessageService(threadUuid: threadUuid).getMessages { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case .error(let error):
+                        break;
+                case .success(let messages):
+                    strongSelf.messageList = messages
+                }
             }
-
-            switch result
-            {
-            case let .error(error):
-                log.debug(error)
-                break
-            case let .deffinedError(error):
-                log.debug(error)
-                break
-            case let .value(boxed):
-                strongSelf.messageList = boxed.value
-                break
-            }
-            
-        })
+        }
         
         getMessageAction(threadUuid: threadUuid, completion: { [weak self] actionResult in
             guard let strongSelf = self else { return }
@@ -235,7 +225,7 @@ extension MessageContainerViewController {
         }
         var isDoneRemove: Bool = false
         var isDoneGet: Bool = false
-        let message = Message(uuid: response.uuid, content: response.value, sender: self.currentUserUuid)
+        let message = F4SMessage(uuid: response.uuid, content: response.value, sender: self.currentUserUuid)
         self.messageController?.didAnswer(message: message)
         
         MessageService.sharedInstance.sendMessageForThread(responseUuid: response.uuid,

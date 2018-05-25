@@ -8,10 +8,34 @@
 
 import Foundation
 
+// MARK:- F4SMessage
 public struct F4SMessage : Codable {
+    public var uuid: F4SUUID
+    public var dateTime: Date
+    public var relativeDateTime: String
+    public var content: String
+    public var sender: String
     
+    public init(uuid: String = "", dateTime: Date = Date(), relativeDateTime: String = "", content: String = "", sender: String = "") {
+        self.uuid = uuid
+        self.dateTime = dateTime
+        self.relativeDateTime = relativeDateTime
+        self.content = content
+        self.sender = sender
+    }
 }
 
+extension F4SMessage {
+    private enum CodingKeys : String, CodingKey {
+        case uuid
+        case dateTime = "date_time"
+        case relativeDateTime = "relative_date_time"
+        case content
+        case sender
+    }
+}
+
+// MARK:- F4SCannedResponse
 public struct F4SCannedResponses : Codable {
     public var uuid: String
     public var options: [F4SCannedResponse]
@@ -22,6 +46,7 @@ public struct F4SCannedResponse : Codable {
     public var value: String
 }
 
+// MARK:- F4SAction
 public struct F4SAction : Codable {
     public var originatingMessageUuid: F4SUUID
     public var actionType: F4SActionType
@@ -54,12 +79,7 @@ public enum F4SActionType : String, Codable {
     }
 }
 
-
-public enum F4SActionArgumentName: String, Codable {
-    case placementUuid = "placement_uuid"
-    case documentType = "doc_type"
-}
-
+// MARK:- F4SActionArgument
 public struct F4SActionArgument : Codable {
     public var argumentName: F4SActionArgumentName
     public var value: [String]
@@ -71,6 +91,11 @@ extension F4SActionArgument {
         case argumentName = "arg_name"
         case value = "value"
     }
+}
+
+public enum F4SActionArgumentName: String, Codable {
+    case placementUuid = "placement_uuid"
+    case documentType = "doc_type"
 }
 
 

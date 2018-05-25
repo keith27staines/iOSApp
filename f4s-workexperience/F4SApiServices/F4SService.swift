@@ -35,8 +35,12 @@ public enum F4SHttpRequestVerb {
 }
 
 extension F4SApiService {
-    
-    public func putDataTask<A:Codable>(verb:F4SHttpRequestVerb, object:A, attempting: String, completion: @escaping (F4SNetworkResult<String>) -> ()) -> URLSessionDataTask {
+    /// Returns a URLSessionDatatask configued to perform a put against the workfinder api
+    /// - parameter verb: Put or Patch Http verb
+    /// - parameter object: The Codable object being sent to the server
+    /// - parameter attempting: A high level description of the task being performed
+    /// - parameter completion: The callback to return the result of the operation
+    public func putDataTask<A:Codable,B:Codable>(verb:F4SHttpRequestVerb, object:A, attempting: String, completion: @escaping (F4SNetworkResult<B>) -> ()) -> URLSessionDataTask {
         
         var request = URLRequest(url: url)
         request.httpMethod = verb.name
@@ -46,8 +50,6 @@ extension F4SApiService {
         do {
             let encoder = JSONEncoder()
             request.httpBody = try encoder.encode(object)
-   
-            
         } catch {
             let networkError = F4SNetworkError(error: error, attempting: attempting)
             completion(F4SNetworkResult.error(networkError))
@@ -55,17 +57,34 @@ extension F4SApiService {
         
         let task = session.dataTask(with: request, completionHandler: {data, response, error -> Void in
             if let error = error as NSError? {
-                let result = F4SNetworkResult<String>.error(F4SNetworkError(error: error, attempting: attempting))
+                let result = F4SNetworkResult<B>.error(F4SNetworkError(error: error, attempting: attempting))
                 completion(result)
                 return
             }
             let httpResponse = response as! HTTPURLResponse
             if let error = F4SNetworkError(response: httpResponse, attempting: attempting) {
-                let result = F4SNetworkResult<String>.error(error)
+                let result = F4SNetworkResult<B>.error(error)
                 completion(result)
                 return
             }
-            completion(F4SNetworkResult.success("OK"))
+            guard let data = data else {
+                assertionFailure("No data to decode")
+                let f4sError = F4SNetworkDataErrorType.noData.dataError(attempting: attempting)
+                completion(F4SNetworkResult.error(f4sError))
+                return
+            }
+            let decoder = JSONDecoder()
+            do {
+                let value = try decoder.decode(B.self, from: data)
+                let result = F4SNetworkResult.success(value)
+                completion(result)
+                return
+            } catch (let error) {
+                let f4sError = F4SNetworkDataErrorType.undecodableData(data).dataError(attempting: attempting + error.localizedDescription)
+                log.debug("error attempting \(attempting), \n\(f4sError)")
+                completion(F4SNetworkResult.error(f4sError))
+                return
+            }
         })
         return task
     }
@@ -164,7 +183,7 @@ public class F4SDataTaskService : F4SApiService {
     /// - parameter object: The codable (json encodable) object to be posted to the server
     /// - parameter attempting: A short high level description of the reason the operation is being performed
     /// - parameter completion: Returns a result containing either the http response data or error information
-    internal func put<A: Codable>(object: A, attempting: String, completion: @escaping (F4SNetworkResult<String>) -> ()) {
+    internal func put<A: Codable>(object: A, attempting: String, completion: @escaping (F4SNetworkResult<A>) -> ()) {
         task?.cancel()
         task = putDataTask(verb: .put, object: object, attempting: attempting, completion: { (result) in
             completion(result)
