@@ -13,7 +13,7 @@ public protocol F4SMessageServiceProtocol {
     var apiName: String { get }
     var threadUuid: String { get }
     func getMessages(completion: @escaping (F4SNetworkResult<[F4SMessage]>) -> ())
-    func sendMessage(responseUuid: F4SUUID, threadUuid: F4SUUID, completion: @escaping (F4SNetworkResult<[F4SMessage]>) -> Void)
+    func sendMessage(responseUuid: F4SUUID, completion: @escaping (F4SNetworkResult<[F4SMessage]>) -> Void)
 }
 
 public class F4SMessageService : F4SDataTaskService {
@@ -34,9 +34,9 @@ extension F4SMessageService : F4SMessageServiceProtocol {
         super.get(attempting: "Get messages for thread", completion: completion)
     }
     
-    public func sendMessage(responseUuid: F4SUUID, threadUuid: F4SUUID, completion: @escaping (F4SNetworkResult<[F4SMessage]>) -> Void) {
+    public func sendMessage(responseUuid: F4SUUID, completion: @escaping (F4SNetworkResult<[F4SMessage]>) -> Void) {
         let attempting = "Send message to thread"
-        super.send(object: responseUuid, attempting: attempting, completion: {
+        super.send(verb: .put, object: responseUuid, attempting: attempting, completion: {
             result in
             switch result {
             case .error(let error):

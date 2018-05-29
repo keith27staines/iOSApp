@@ -188,25 +188,16 @@ public class F4SDataTaskService : F4SApiServiceProtocol {
         task?.resume()
     }
     
-    internal func send<A: Codable>(object: A, attempting: String, completion: @escaping (F4SNetworkDataResult) -> ()) {
-        task?.cancel()
-        task = sendDataTask(verb: .put, objectToSend: object, attempting: attempting, completion: { (result) in
-            completion(result)
-        })
-        task?.resume()
-    }
-    
-    
-    /// Performs an HTTP patch request
+    /// Performs an HTTP request with a "send" very (e.g, put, patch, etc")
+    /// - parameter verb: Http request verb
     /// - parameter object: The codable (json encodable) object to be patched to the server
     /// - parameter attempting: A short high level description of the reason the operation is being performed
     /// - parameter completion: Returns a result containing either the http response data or error information
-    internal func patch<A: Codable>(object: A, attempting: String, completion: @escaping (F4SNetworkDataResult) -> ()) {
+    internal func send<A: Codable>(verb: F4SHttpSendRequestVerb, object: A, attempting: String, completion: @escaping (F4SNetworkDataResult) -> ()) {
         task?.cancel()
-        task = sendDataTask(verb: .patch, objectToSend: object, attempting: attempting, completion: { (result) in
+        task = sendDataTask(verb: verb, objectToSend: object, attempting: attempting, completion: { (result) in
             completion(result)
         })
-        
         task?.resume()
     }
 }

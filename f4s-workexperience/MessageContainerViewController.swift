@@ -228,8 +228,7 @@ extension MessageContainerViewController {
         let message = F4SMessage(uuid: response.uuid, content: response.value, sender: self.currentUserUuid)
         self.messageController?.didAnswer(message: message)
         
-        
-        F4SMessageService(threadUuid: threadUuid).sendMessage(responseUuid: response.uuid, threadUuid: threadUuid) { (result) in
+        F4SMessageService(threadUuid: threadUuid).sendMessage(responseUuid: response.uuid) { (result) in
             switch result {
                 
             case .error(_):
