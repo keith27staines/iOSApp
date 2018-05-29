@@ -30,7 +30,7 @@ extension F4SPCalendarService : F4SPCalendarServiceProtocol {
         super.get(attempting: "Get availability periods for this placement", completion: completion)
     }
     
-    public func patchAvailabilityForPlacement(availabilityPeriods: F4SAvailabilityPeriodsJson, completion: @escaping ((F4SNetworkResult<String>) -> Void )) {
+    public func patchAvailabilityForPlacement(availabilityPeriods: F4SAvailabilityPeriodsJson, completion: @escaping ((F4SNetworkDataResult) -> Void )) {
         super.patch(object: availabilityPeriods, attempting: "Patch availability periods for this placement", completion: completion)
     }
 }

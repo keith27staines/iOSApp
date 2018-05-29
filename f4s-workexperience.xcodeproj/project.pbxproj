@@ -52,7 +52,6 @@
 		204C89791DF5F0B200D8493A /* ChooseAttributesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204C89771DF5F0B200D8493A /* ChooseAttributesViewController.swift */; };
 		205EB20B1DDB161D00034424 /* DatabaseOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205EB20A1DDB161D00034424 /* DatabaseOperations.swift */; };
 		205EB2111DDB551800034424 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205EB2101DDB551800034424 /* DatabaseService.swift */; };
-		206F8F761E1D29740024937B /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206F8F751E1D29740024937B /* MessageService.swift */; };
 		206F8F8B1E1E48120024937B /* OptionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206F8F891E1E48120024937B /* OptionLabel.swift */; };
 		206F8F8C1E1E48120024937B /* MessageOptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206F8F8A1E1E48120024937B /* MessageOptionCollectionViewCell.swift */; };
 		206F8F911E1E552F0024937B /* MessageOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206F8F8E1E1E552F0024937B /* MessageOptionsView.swift */; };
@@ -333,7 +332,6 @@
 		204C89771DF5F0B200D8493A /* ChooseAttributesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChooseAttributesViewController.swift; path = "f4s-workexperience/ChooseAttributesViewController.swift"; sourceTree = "<group>"; };
 		205EB20A1DDB161D00034424 /* DatabaseOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseOperations.swift; sourceTree = "<group>"; };
 		205EB2101DDB551800034424 /* DatabaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
-		206F8F751E1D29740024937B /* MessageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
 		206F8F891E1E48120024937B /* OptionLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionLabel.swift; sourceTree = "<group>"; };
 		206F8F8A1E1E48120024937B /* MessageOptionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageOptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		206F8F8E1E1E552F0024937B /* MessageOptionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageOptionsView.swift; sourceTree = "<group>"; };
@@ -913,7 +911,6 @@
 				204C89581DF5A54600D8493A /* TemplateChoiceDBOperations.swift */,
 				4059740B1E014E760002DB3A /* VoucherService.swift */,
 				40C6DDF51E03F93C000F8806 /* UserInfoDBOperations.swift */,
-				206F8F751E1D29740024937B /* MessageService.swift */,
 				204203ED1E4B16D7007C7409 /* ShortlistDBOperations.swift */,
 				204203EF1E4B1E3D007C7409 /* ShortlistService.swift */,
 				FCA6D2B51FA88CE00037962B /* PartnerService.swift */,
@@ -1848,7 +1845,6 @@
 				40E78E5F1DD3297D000A3776 /* ApiBaseService.swift in Sources */,
 				40E78EA01DD5E208000A3776 /* LocationHelper.swift in Sources */,
 				40C1A5231DDF5ACE000F80AA /* POIItem.m in Sources */,
-				206F8F761E1D29740024937B /* MessageService.swift in Sources */,
 				FCB46F042051365400F0779F /* F4SFeatureSwitchesViewController.swift in Sources */,
 				40C1A52D1DE84410000F80AA /* TriangleView.swift in Sources */,
 				205EB20B1DDB161D00034424 /* DatabaseOperations.swift in Sources */,

@@ -228,20 +228,17 @@ extension MessageContainerViewController {
         let message = F4SMessage(uuid: response.uuid, content: response.value, sender: self.currentUserUuid)
         self.messageController?.didAnswer(message: message)
         
-        MessageService.sharedInstance.sendMessageForThread(responseUuid: response.uuid,
-                                                           threadUuid: threadUuid,
-                                                           putCompleted: { [weak self] _, result in
-            guard let strongSelf = self else { return }
-            switch result
-            {
-            case .error:
+        
+        F4SMessageService(threadUuid: threadUuid).sendMessage(responseUuid: response.uuid, threadUuid: threadUuid) { (result) in
+            switch result {
+                
+            case .error(_):
                 break
-            case .deffinedError:
-                break
-            case let .value(boxed):
-                DispatchQueue.main.async {
+            case .success(let messages):
+                DispatchQueue.main.async { [weak self] in
+                    guard let strongSelf = self else { return }
                     isDoneGet = true
-                    if let lastMessage = boxed.value.last {
+                    if let lastMessage = messages.last {
                         strongSelf.messageList.append(lastMessage)
                         strongSelf.messageController?.addMessage(message: lastMessage)
                     }
@@ -252,7 +249,7 @@ extension MessageContainerViewController {
                     }
                 }
             }
-        })
+        }
         
         self.messageOptionsView?.removeOptions(completed: {
             isDoneRemove = true

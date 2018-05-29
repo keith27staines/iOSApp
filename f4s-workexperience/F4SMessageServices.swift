@@ -29,12 +29,32 @@ public class F4SMessageService : F4SDataTaskService {
 }
 
 extension F4SMessageService : F4SMessageServiceProtocol {
+    
     public func getMessages(completion: @escaping (F4SNetworkResult<[F4SMessage]>) -> ()) {
         super.get(attempting: "Get messages for thread", completion: completion)
     }
+    
     public func sendMessage(responseUuid: F4SUUID, threadUuid: F4SUUID, completion: @escaping (F4SNetworkResult<[F4SMessage]>) -> Void) {
-        super.put(object: responseUuid, attempting: "Send", completion: completion)
-        
+        let attempting = "Send message to thread"
+        super.send(object: responseUuid, attempting: attempting, completion: {
+            result in
+            switch result {
+            case .error(let error):
+                completion(F4SNetworkResult.error(error))
+            case .success(let data):
+                guard let data = data else {
+                    completion(F4SNetworkResult.success([F4SMessage]()))
+                    return
+                }
+                let decoder = JSONDecoder()
+                do {
+                    let messages = try decoder.decode([F4SMessage].self, from: data)
+                    completion(F4SNetworkResult.success(messages))
+                } catch {
+                    completion(F4SNetworkResult.error(F4SNetworkError(error: error, attempting: attempting)))
+                }
+            }
+        })
     }
 }
 
