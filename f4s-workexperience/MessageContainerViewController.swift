@@ -66,15 +66,37 @@ class MessageContainerViewController: UIViewController {
         
         self.tabBarController?.tabBar.isTranslucent = true
         self.tabBarController?.tabBar.isHidden = true
-        getMessages(completion: { [weak self] error in
+        guard let threadUuid = self.threadUuid else { return }
+        loadModel(threadUuid: threadUuid)
+    }
+    
+    func loadModel(threadUuid: F4SUUID) {
+        MessageHandler.sharedInstance.showLoadingOverlay(self.view)
+        let messagesModel = F4SMessagesModel(threadUuid: threadUuid)
+        messagesModel.build(threadUuid: threadUuid) { [weak self] (result) in
             DispatchQueue.main.async {
-                guard let strongSelf = self else {
-                    return
+                guard let strongSelf = self else { return }
+                switch result {
+                case .error(let error):
+                    strongSelf.networkErrorHandler(error: error)
+                case .success(let messagesModel):
+                    strongSelf.messageList = messagesModel.messages ?? []
+                    strongSelf.action = messagesModel.action
+                    strongSelf.cannedResponses = messagesModel.cannedResponses
                 }
                 strongSelf.loadChatData()
                 MessageHandler.sharedInstance.hideLoadingOverlay()
             }
-        })
+        }
+    }
+    
+    func networkErrorHandler(error: F4SNetworkError) {
+        guard error.retry else {
+            let nsError: NSError = error as NSError
+            log.error(userInfo: nsError.userInfo)
+            return
+        }
+        MessageHandler.sharedInstance.display(error, parentCtrl: self)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -116,77 +138,13 @@ class MessageContainerViewController: UIViewController {
         }
     }
     
-    func dismissToMessages(sender: Any?) {
-        
-    }
+//    func dismissToMessages(sender: Any?) {
+//        
+//    }
 }
 
 extension MessageContainerViewController {
-    func getMessageAction(threadUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SAction?>) -> ()) {
-        let actionService = F4SMessageActionService(threadUuid: threadUuid)
-        actionService.getMessageAction { result in
-            completion(result)
-        }
-    }
-    
-    func getCannedResponses(threadUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SCannedResponses>) -> ()) {
-        let cannedResponseService = F4SCannedMessageResponsesService(threadUuid: threadUuid)
-        cannedResponseService.getPermittedResponses { result in
-            completion(result)
-        }
-    }
-}
 
-extension MessageContainerViewController {
-    func getMessages(completion: @escaping (Error?) -> ()) {
-        guard let threadUuid = self.threadUuid else { return }
-        
-        if let reachability = Reachability() {
-            if !reachability.isReachableByAnyMeans {
-                MessageHandler.sharedInstance.display("No Internet Connection.", parentCtrl: self)
-                return
-            }
-        }
-        
-        MessageHandler.sharedInstance.showLoadingOverlay(self.view)
-        F4SMessageService(threadUuid: threadUuid).getMessages { [weak self] (result) in
-            guard let strongSelf = self else { return }
-            DispatchQueue.main.async {
-                switch result {
-                case .error(let error):
-                        break;
-                case .success(let messages):
-                    strongSelf.messageList = messages
-                }
-            }
-        }
-        
-        getMessageAction(threadUuid: threadUuid, completion: { [weak self] actionResult in
-            guard let strongSelf = self else { return }
-            DispatchQueue.main.async {
-                switch actionResult {
-                case .error(let error):
-                    completion(error)
-                case .success(let action):
-                    if let action = action {
-                        self?.action = action
-                        completion(nil)
-                    } else {
-                        strongSelf.getCannedResponses(threadUuid: threadUuid, completion: { cannedResponsesResult in
-                            switch cannedResponsesResult {
-                            case .error(let error):
-                                completion(error)
-                            case .success(let cannedResponses):
-                                strongSelf.cannedResponses = cannedResponses
-                            }
-                        })
-                    }
-                }
-            }
-        })
-        
-    }
-    
     func loadChatData() {
         if action != nil {
             actionButtonHeightConstraint.constant = 60
