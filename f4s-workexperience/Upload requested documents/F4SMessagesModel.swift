@@ -45,7 +45,7 @@ public struct F4SMessagesModel : Codable {
                 case .error(let error):
                     completion(F4SMessagesModelResult.error(error))
                 case .success(let result):
-                    model.messages = result
+                    model.messages = result.messages
                     completion(F4SMessagesModelResult.success(model))
                 }
             }

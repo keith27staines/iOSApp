@@ -12,8 +12,8 @@ import Foundation
 public protocol F4SMessageServiceProtocol {
     var apiName: String { get }
     var threadUuid: String { get }
-    func getMessages(completion: @escaping (F4SNetworkResult<[F4SMessage]>) -> ())
-    func sendMessage(responseUuid: F4SUUID, completion: @escaping (F4SNetworkResult<[F4SMessage]>) -> Void)
+    func getMessages(completion: @escaping (F4SNetworkResult<F4SMessagesList>) -> ())
+    func sendMessage(responseUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SMessagesList>) -> Void)
 }
 
 public class F4SMessageService : F4SDataTaskService {
@@ -23,32 +23,32 @@ public class F4SMessageService : F4SDataTaskService {
     
     public init(threadUuid: F4SUUID) {
         self.threadUuid = threadUuid
-        let apiName = "messaging/\(threadUuid)/"
+        let apiName = "messaging/\(threadUuid)"
         super.init(baseURLString: Config.BASE_URL2, apiName: apiName, objectType: SuccessType.self)
     }
 }
 
 extension F4SMessageService : F4SMessageServiceProtocol {
     
-    public func getMessages(completion: @escaping (F4SNetworkResult<[F4SMessage]>) -> ()) {
+    public func getMessages(completion: @escaping (F4SNetworkResult<F4SMessagesList>) -> ()) {
         super.get(attempting: "Get messages for thread", completion: completion)
     }
     
-    public func sendMessage(responseUuid: F4SUUID, completion: @escaping (F4SNetworkResult<[F4SMessage]>) -> Void) {
+    public func sendMessage(responseUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SMessagesList>) -> Void) {
         let attempting = "Send message to thread"
-        super.send(verb: .put, object: responseUuid, attempting: attempting, completion: {
+        super.send(verb: .put, objectToSend: responseUuid, attempting: attempting, completion: {
             result in
             switch result {
             case .error(let error):
                 completion(F4SNetworkResult.error(error))
             case .success(let data):
                 guard let data = data else {
-                    completion(F4SNetworkResult.success([F4SMessage]()))
+                    completion(F4SNetworkResult.success(F4SMessagesList()))
                     return
                 }
                 let decoder = JSONDecoder()
                 do {
-                    let messages = try decoder.decode([F4SMessage].self, from: data)
+                    let messages = try decoder.decode(F4SMessagesList.self, from: data)
                     completion(F4SNetworkResult.success(messages))
                 } catch {
                     completion(F4SNetworkResult.error(F4SNetworkError(error: error, attempting: attempting)))

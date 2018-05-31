@@ -31,6 +31,6 @@ extension F4SPCalendarService : F4SPCalendarServiceProtocol {
     }
     
     public func patchAvailabilityForPlacement(availabilityPeriods: F4SAvailabilityPeriodsJson, completion: @escaping ((F4SNetworkDataResult) -> Void )) {
-        send(verb: .patch, object: availabilityPeriods, attempting: "Patch availability periods for this placement", completion: completion)
+        send(verb: .patch, objectToSend: availabilityPeriods, attempting: "Patch availability periods for this placement", completion: completion)
     }
 }

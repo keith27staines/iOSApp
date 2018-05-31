@@ -19,12 +19,8 @@ class F4SForceAppUpdateViewController: UIViewController {
          open it on the device. */
         if let url = URL(string: appStoreLink), UIApplication.shared.canOpenURL(url) {
             // Attempt to open the URL.
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(url)
-            } else {
-                // Fallback on earlier versions
-                UIApplication.shared.openURL(url)
-            }
+            UIApplication.shared.open(url)
+
         }
     }
     

@@ -86,11 +86,7 @@ class DocumentUrlViewController: UIViewController {
     
     @IBAction func showCVGuide(_ sender: Any) {
         let url = URL(string:"https://interactive.barclayslifeskills.com/staticmodules/downloads/cv-tips.pdf")!
-        if #available(iOS 10.0, *) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        } else {
-            UIApplication.shared.openURL(url)
-        }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     func updateEnabledStateOfAddButton() {
         DispatchQueue.main.async { [weak self] in

@@ -191,11 +191,11 @@ extension MessageContainerViewController {
                 
             case .error(_):
                 break
-            case .success(let messages):
+            case .success(let messageList):
                 DispatchQueue.main.async { [weak self] in
                     guard let strongSelf = self else { return }
                     isDoneGet = true
-                    if let lastMessage = messages.last {
+                    if let lastMessage = messageList.messages.last {
                         strongSelf.messageList.append(lastMessage)
                         strongSelf.messageController?.addMessage(message: lastMessage)
                     }

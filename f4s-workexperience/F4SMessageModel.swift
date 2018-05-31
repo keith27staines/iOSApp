@@ -28,10 +28,20 @@ public struct F4SMessage : Codable {
 extension F4SMessage {
     private enum CodingKeys : String, CodingKey {
         case uuid
-        case dateTime = "date_time"
-        case relativeDateTime = "relative_date_time"
+        case dateTime = "datetime"
+        case relativeDateTime = "datetime_rel"
         case content
         case sender
+    }
+}
+
+public struct F4SMessagesList : Codable {
+    public var count: Int
+    public var messages: [F4SMessage]
+    
+    public init() {
+        count = 0
+        messages = [F4SMessage]()
     }
 }
 
