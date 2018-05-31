@@ -154,7 +154,7 @@ extension ExtraInfoViewController {
 
 // MARK: - UI Setup
 extension ExtraInfoViewController {
-    
+
     func setupControls() {
         setupDatePicker()
         setupTextFields()
