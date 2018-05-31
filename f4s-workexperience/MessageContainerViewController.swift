@@ -25,7 +25,7 @@ class MessageContainerViewController: UIViewController {
     var company: Company?
     var placements: [TimelinePlacement] = []
     var companies: [Company] = []
-    var messageList: [Message] = []
+    var messageList: [F4SMessage] = []
     var cannedResponses: F4SCannedResponses? = nil
     var action: F4SAction? = nil {
         didSet {
@@ -66,15 +66,36 @@ class MessageContainerViewController: UIViewController {
         
         self.tabBarController?.tabBar.isTranslucent = true
         self.tabBarController?.tabBar.isHidden = true
-        getMessages(completion: { [weak self] error in
+        guard let threadUuid = self.threadUuid else { return }
+        loadModel(threadUuid: threadUuid)
+    }
+    
+    func loadModel(threadUuid: F4SUUID) {
+        MessageHandler.sharedInstance.showLoadingOverlay(self.view)
+        let messagesModel = F4SMessagesModel(threadUuid: threadUuid)
+        messagesModel.build(threadUuid: threadUuid) { [weak self] (result) in
             DispatchQueue.main.async {
-                guard let strongSelf = self else {
-                    return
+                guard let strongSelf = self else { return }
+                switch result {
+                case .error(let error):
+                    strongSelf.networkErrorHandler(error: error, retryHandler: {
+                        strongSelf.loadModel(threadUuid: threadUuid)
+                    })
+                case .success(let messagesModel):
+                    strongSelf.messageList = messagesModel.messages ?? []
+                    strongSelf.action = messagesModel.action
+                    strongSelf.cannedResponses = messagesModel.cannedResponses
                 }
                 strongSelf.loadChatData()
                 MessageHandler.sharedInstance.hideLoadingOverlay()
             }
-        })
+        }
+    }
+    
+    func networkErrorHandler(error: F4SNetworkError, retryHandler: @escaping ()->()) {
+        MessageHandler.sharedInstance.display(error, parentCtrl: self, cancelHandler: {
+            
+        }, retryHandler: retryHandler)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -116,87 +137,13 @@ class MessageContainerViewController: UIViewController {
         }
     }
     
-    func dismissToMessages(sender: Any?) {
-        
-    }
+//    func dismissToMessages(sender: Any?) {
+//        
+//    }
 }
 
 extension MessageContainerViewController {
-    func getMessageAction(threadUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SAction?>) -> ()) {
-        let actionService = F4SMessageActionService(threadUuid: threadUuid)
-        actionService.getMessageAction { result in
-            completion(result)
-        }
-    }
-    
-    func getCannedResponses(threadUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SCannedResponses>) -> ()) {
-        let cannedResponseService = F4SCannedMessageResponsesService(threadUuid: threadUuid)
-        cannedResponseService.getPermittedResponses { result in
-            completion(result)
-        }
-    }
-}
 
-extension MessageContainerViewController {
-    func getMessages(completion: @escaping (Error?) -> ()) {
-        guard let threadUuid = self.threadUuid else { return }
-        
-        if let reachability = Reachability() {
-            if !reachability.isReachableByAnyMeans {
-                MessageHandler.sharedInstance.display("No Internet Connection.", parentCtrl: self)
-                return
-            }
-        }
-        
-        MessageHandler.sharedInstance.showLoadingOverlay(self.view)
-        MessageService.sharedInstance.getMessagesInThread(threadUuid: threadUuid, getCompleted: {
-            [weak self] _, result in
-            
-            guard let strongSelf = self else {
-                return
-            }
-
-            switch result
-            {
-            case let .error(error):
-                log.debug(error)
-                break
-            case let .deffinedError(error):
-                log.debug(error)
-                break
-            case let .value(boxed):
-                strongSelf.messageList = boxed.value
-                break
-            }
-            
-        })
-        
-        getMessageAction(threadUuid: threadUuid, completion: { [weak self] actionResult in
-            guard let strongSelf = self else { return }
-            DispatchQueue.main.async {
-                switch actionResult {
-                case .error(let error):
-                    completion(error)
-                case .success(let action):
-                    if let action = action {
-                        self?.action = action
-                        completion(nil)
-                    } else {
-                        strongSelf.getCannedResponses(threadUuid: threadUuid, completion: { cannedResponsesResult in
-                            switch cannedResponsesResult {
-                            case .error(let error):
-                                completion(error)
-                            case .success(let cannedResponses):
-                                strongSelf.cannedResponses = cannedResponses
-                            }
-                        })
-                    }
-                }
-            }
-        })
-        
-    }
-    
     func loadChatData() {
         if action != nil {
             actionButtonHeightConstraint.constant = 60
@@ -235,23 +182,19 @@ extension MessageContainerViewController {
         }
         var isDoneRemove: Bool = false
         var isDoneGet: Bool = false
-        let message = Message(uuid: response.uuid, content: response.value, sender: self.currentUserUuid)
+        let message = F4SMessage(uuid: response.uuid, content: response.value, sender: self.currentUserUuid)
         self.messageController?.didAnswer(message: message)
         
-        MessageService.sharedInstance.sendMessageForThread(responseUuid: response.uuid,
-                                                           threadUuid: threadUuid,
-                                                           putCompleted: { [weak self] _, result in
-            guard let strongSelf = self else { return }
-            switch result
-            {
-            case .error:
+        F4SMessageService(threadUuid: threadUuid).sendMessage(responseUuid: response.uuid) { (result) in
+            switch result {
+                
+            case .error(_):
                 break
-            case .deffinedError:
-                break
-            case let .value(boxed):
-                DispatchQueue.main.async {
+            case .success(let messageList):
+                DispatchQueue.main.async { [weak self] in
+                    guard let strongSelf = self else { return }
                     isDoneGet = true
-                    if let lastMessage = boxed.value.last {
+                    if let lastMessage = messageList.messages.last {
                         strongSelf.messageList.append(lastMessage)
                         strongSelf.messageController?.addMessage(message: lastMessage)
                     }
@@ -262,7 +205,7 @@ extension MessageContainerViewController {
                     }
                 }
             }
-        })
+        }
         
         self.messageOptionsView?.removeOptions(completed: {
             isDoneRemove = true

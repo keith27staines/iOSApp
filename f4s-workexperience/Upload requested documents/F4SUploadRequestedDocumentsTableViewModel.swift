@@ -135,7 +135,7 @@ public class F4SUploadRequestedDocumentsTableViewModel {
         return true
     }
     
-    public func submitToServer(completion: @escaping (F4SNetworkResult<String>)->() ) {
+    public func submitToServer(completion: @escaping (F4SNetworkDataResult)->() ) {
         let service = F4SPlacementDocumentsService(placementUuid: placementUuid)
         var documentUrls = [F4SDocumentUrl]()
         for descriptor in documentUrlDescriptors {

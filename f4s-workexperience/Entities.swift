@@ -228,32 +228,16 @@ struct ContentEntity {
     }
 }
 
-struct Message {
-    var uuid: String
-    var dateTime: Date
-    var relativeDateTime: String
-    var content: String
-    var sender: String
-
-    init(uuid: String = "", dateTime: Date = Date(), relativeDateTime: String = "", content: String = "", sender: String = "") {
-        self.uuid = uuid
-        self.dateTime = dateTime
-        self.relativeDateTime = relativeDateTime
-        self.content = content
-        self.sender = sender
-    }
-}
-
 struct TimelinePlacement {
     var placementUuid: String
     var userUuid: String
     var companyUuid: String
     var threadUuid: String
     var status: PlacementStatus
-    var latestMessage: Message
+    var latestMessage: F4SMessage
     var isRead: Bool
 
-    init(placementUuid: String = "", userUuid: String = "", companyUuid: String = "", threadUuid: String = "", status: PlacementStatus = .inProgress, latestMessage: Message = Message(), isRead: Bool = true) {
+    init(placementUuid: String = "", userUuid: String = "", companyUuid: String = "", threadUuid: String = "", status: PlacementStatus = .inProgress, latestMessage: F4SMessage = F4SMessage(), isRead: Bool = true) {
         self.placementUuid = placementUuid
         self.companyUuid = companyUuid
         self.userUuid = userUuid

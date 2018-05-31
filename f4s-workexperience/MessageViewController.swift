@@ -16,7 +16,7 @@ class MessageViewController: JSQMessagesViewController {
     let incomingBubble = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImage(with: UIColor(netHex: Colors.messageIncoming))
     let outgoingBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImage(with: UIColor(netHex: Colors.messageOutgoing))
     var chatMessages: [JSQMessage] = []
-    var messageList: [Message] = []
+    var messageList: [F4SMessage] = []
     var currentUserUuid: String = ""
     var selectedIndex: Int = 0
 
@@ -158,7 +158,7 @@ extension MessageViewController {
 // MARK: - calls
 extension MessageViewController {
 
-    func loadChatData(messageList: [Message]) {
+    func loadChatData(messageList: [F4SMessage]) {
         self.chatMessages.removeAll()
         self.messageList = messageList
         self.selectedIndex = self.messageList.count - 1
@@ -169,13 +169,13 @@ extension MessageViewController {
         self.scrollToBottom(animated: true)
     }
     
-    func didAnswer(message: Message) {
+    func didAnswer(message: F4SMessage) {
         self.chatMessages.append(JSQMessage(senderId: message.sender, displayName: message.sender, text: message.content))
         self.finishSendingMessage()
         self.scrollToBottom(animated: true)
     }
     
-    func addMessage(message: Message) {
+    func addMessage(message: F4SMessage) {
         self.messageList.append(message)
     }
 }
