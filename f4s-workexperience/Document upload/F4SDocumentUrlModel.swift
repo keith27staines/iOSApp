@@ -26,7 +26,7 @@ public struct F4SDocumentUrl : Codable {
     /// the url of the document
     public let url: String
     
-    public let doc_type: String
+    public let docType: String
     public let title: String?
     public let document: String?
     
@@ -39,21 +39,47 @@ public struct F4SDocumentUrl : Codable {
     public init(uuid: F4SUUID?, urlString: String, doc_type: String = "other", title: String? = nil) {
         self.uuid = uuid
         self.url = urlString
-        self.doc_type = doc_type
-        self.title = title
+        self.docType = doc_type
+        self.title = title ?? doc_type
         self.document = nil
     }
 }
 
-public enum DocType : String {
+extension F4SDocumentUrl {
+    private enum CodingKeys: String, CodingKey {
+        case uuid = "uuid"
+        case url = "url"
+        case docType = "doc_type"
+        case title = "title"
+        case document = "document"
+    }
+}
+
+public enum F4SUploadableDocumentType : String {
     case cv
+    case lifeskills
     case certificate
     case other
+    
+    var title: String {
+        switch self {
+
+        case .cv:
+            return "CV"
+        case .certificate:
+            return "LifeSkills certificate"
+        case .lifeskills:
+            return "Life Skills Certificate"
+        case .other:
+            return "other information"
+        }
+    }
 }
 
 public struct F4SDocumentUrlDescriptor {
-    public var title: String = "untitled"
-    public var docType: DocType = DocType.other
+    static public let defaultTitle = "untitled"
+    public var title: String = F4SDocumentUrlDescriptor.defaultTitle
+    public var docType: F4SUploadableDocumentType = F4SUploadableDocumentType.other
     public var urlString : String
     public var includeInApplication: Bool = false
     public var isExpanded: Bool = false
@@ -74,7 +100,7 @@ public struct F4SDocumentUrlDescriptor {
         return URL(string: urlString)
     }
     
-    public init(title: String = "untitled", docType: DocType = .other, urlString: String, includeInApplication: Bool = false, isExpanded: Bool = false) {
+    public init(title: String, docType: F4SUploadableDocumentType = .other, urlString: String, includeInApplication: Bool = false, isExpanded: Bool = false) {
         self.title = title
         self.docType = docType
         self.urlString = urlString
@@ -83,9 +109,13 @@ public struct F4SDocumentUrlDescriptor {
         self.uuid = nil
     }
     
+    public init(docType: F4SUploadableDocumentType = .other, urlString: String, includeInApplication: Bool = false, isExpanded: Bool = false) {
+        self.init(title: docType.rawValue, docType: docType, urlString: urlString, includeInApplication: includeInApplication, isExpanded: isExpanded)
+    }
+    
     public init(documentUrl: F4SDocumentUrl) {
-        self.title = documentUrl.title ?? "untitled"
-        self.docType = DocType(rawValue: documentUrl.doc_type) ?? .other
+        self.title = documentUrl.title ?? F4SDocumentUrlDescriptor.defaultTitle
+        self.docType = F4SUploadableDocumentType(rawValue: documentUrl.docType) ?? .other
         self.urlString = documentUrl.url
         self.includeInApplication = true
         self.isExpanded = false
@@ -239,7 +269,7 @@ public class F4SDocumentUrlModel {
     
     func createDescriptor(urlString: String = "", includeInApplication: Bool) -> F4SDocumentUrlDescriptor? {
         if !canAddPlaceholder() { return nil }
-        let newDescriptor = F4SDocumentUrlDescriptor(title: "untitled", docType: DocType.other, urlString: urlString, includeInApplication: includeInApplication, isExpanded: false)
+        let newDescriptor = F4SDocumentUrlDescriptor(title: "untitled", docType: F4SUploadableDocumentType.other, urlString: urlString, includeInApplication: includeInApplication, isExpanded: false)
         urlDescriptors.insert(newDescriptor, at: 0)
         delegate?.documentUrlModel(self, created: newDescriptor)
         return newDescriptor

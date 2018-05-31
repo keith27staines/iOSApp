@@ -449,25 +449,6 @@ class DeserializationManager {
 
         return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
     }
-
-    func parseMessageOptions(jsonOptional: JSON) -> Result<[MessageOption]> {
-        if let options = jsonOptional["options"].array {
-            var optionsList: [MessageOption] = []
-            for option in options {
-                var opt = MessageOption()
-                if let uuid = option["uuid"].string {
-                    opt.uuid = uuid
-                }
-                if let value = option["value"].string {
-                    opt.value = value
-                }
-                optionsList.append(opt)
-            }
-            return .value(Box(optionsList))
-        }
-
-        return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
-    }
     
     func parseBoolean(jsonOptional: JSON) -> Result<Bool> {
         guard let boolValue = jsonOptional.bool else {

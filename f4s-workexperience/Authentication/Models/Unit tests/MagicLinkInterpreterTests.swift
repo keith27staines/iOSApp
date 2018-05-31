@@ -26,10 +26,6 @@ class F4SAuth0MagicLinkInterpreterTests: XCTestCase {
         XCTAssertFalse(F4SAuth0MagicLinkInterpreter.doesPathOfURL(url, contain: "founders4schools.eu.auth0.com"))
     }
     
-    func testIsPasswordlessURL() {
-        XCTAssertTrue(F4SAuth0MagicLinkInterpreter.isPasswordlessURL(url: url))
-    }
-    
     func testPasscode() {
         let passCode = F4SAuth0MagicLinkInterpreter.passcode(from: url)
         XCTAssertEqual(passCode, "163141")

@@ -11,8 +11,8 @@ import UIKit
 class MessageOptionsView: UICollectionReusableView {
     @IBOutlet weak var optionCollectionView: UICollectionView!
     let MessageOptionCollectionViewCellIdentifier: String = "MessageOptionCollectionViewCellIdentifier"
-    var optionList: [MessageOption] = []
-    var optionsToLoad: [MessageOption] = []
+    var optionList: [F4SCannedResponse] = []
+    var optionsToLoad: [F4SCannedResponse] = []
     var parentController: MessageContainerViewController?
     var loadTimer = Timer()
     var deleteTimer = Timer()
@@ -53,7 +53,7 @@ class MessageOptionsView: UICollectionReusableView {
         self.autoresizingMask = [UIViewAutoresizing.flexibleHeight, UIViewAutoresizing.flexibleWidth]
     }
 
-    func loadMessageOptions(options: [MessageOption], parentController: UIViewController) {
+    func loadMessageOptions(options: [F4SCannedResponse], parentController: UIViewController) {
         self.optionList = options
         self.parentController = parentController as? MessageContainerViewController
 
@@ -145,7 +145,7 @@ class MessageOptionsView: UICollectionReusableView {
 
 class MessageOptionsCollectionFlowLayout: UICollectionViewFlowLayout, MessageOptionFlowProtocol {
     fileprivate var optionsCollectionView: UICollectionView?
-    fileprivate var optionList: [MessageOption]?
+    fileprivate var optionList: [F4SCannedResponse]?
     fileprivate var shouldAnimateCells: Bool = true
 
     init(optionsCollectionView: UICollectionView) {
@@ -157,7 +157,7 @@ class MessageOptionsCollectionFlowLayout: UICollectionViewFlowLayout, MessageOpt
         super.init(coder: aDecoder)
     }
 
-    func setCurrentOptionList(options: [MessageOption]) {
+    func setCurrentOptionList(options: [F4SCannedResponse]) {
         self.optionList = options
     }
 
