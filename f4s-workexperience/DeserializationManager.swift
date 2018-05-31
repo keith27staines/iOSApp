@@ -420,35 +420,6 @@ class DeserializationManager {
 
         return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
     }
-
-    func parseMessagesInThread(jsonOptional: JSON) -> Result<[Message]> {
-        if let messages = jsonOptional["messages"].array {
-            var messageList: [Message] = []
-            for message in messages {
-                var mess = Message()
-                if let uuid = message["uuid"].string {
-                    mess.uuid = uuid
-                }
-                if let dateTime = message["datetime"].string, let date = Date.dateFromRfc3339(string: dateTime) {
-                    mess.dateTime = date
-                }
-                if let relativeDateTime = message["datetime_rel"].string {
-                    mess.relativeDateTime = relativeDateTime
-                }
-                if let content = message["content"].string {
-                    mess.content = content
-                }
-                if let sender = message["sender"].string {
-                    mess.sender = sender
-                }
-                messageList.append(mess)
-            }
-
-            return .value(Box(messageList))
-        }
-
-        return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
-    }
     
     func parseBoolean(jsonOptional: JSON) -> Result<Bool> {
         guard let boolValue = jsonOptional.bool else {
@@ -544,7 +515,7 @@ class DeserializationManager {
                     }
                 }
                 if let _ = placementJson["latest_message"].dictionary {
-                    var latestMessage = Message()
+                    var latestMessage = F4SMessage()
                     if let messageUuid = placementJson["latest_message"]["uuid"].string {
                         latestMessage.uuid = messageUuid
                     }

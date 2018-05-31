@@ -138,7 +138,7 @@ extension NotificationViewController {
         self.backgroundPopoverView.removeFromSuperview()
         if !flag {
             if let url = URL(string: UIApplicationOpenSettingsURLString), UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.openURL(url)
+                UIApplication.shared.open(url)
             }
             self.dismiss(animated: true, completion: nil)
 

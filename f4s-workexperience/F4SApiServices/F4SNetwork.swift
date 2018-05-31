@@ -15,6 +15,11 @@ public enum F4SNetworkResult<A:Decodable> {
     case success(A)
 }
 
+public enum F4SNetworkDataResult {
+    case error(F4SNetworkError)
+    case success(Data?)
+}
+
 public enum F4SNetworkErrorDomainType : String {
     case client
     case server
@@ -114,7 +119,7 @@ public struct F4SNetworkError : Error {
     /// Initializes a new instance
     /// - parameter response: the http resonse this instance will wrap, unless the response code is a success in which case this initializer will fail
     /// - parameter attempting: A short description of the context of the error (this might just be the operation name or a higher level description of it)
-    /// - parameter logError: If truem the error will be written to the debug log
+    /// - parameter logError: If true the error will be written to the debug log
     public init?(response: HTTPURLResponse, attempting: String, logError: Bool = true) {
         var retry = false
         var userInfo : [String : Any] = ["response": response]
