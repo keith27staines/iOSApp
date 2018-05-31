@@ -46,10 +46,47 @@ class MessageHandler {
         }
     }
     
-    func display(_ networkError: F4SNetworkError, parentCtrl: UIViewController) {
-        MessageHandler.alert.title = networkError.code
-        MessageHandler.alert.message = networkError.localizedDescription + "\n" + (networkError.attempting ?? "")
-        parentCtrl.present(MessageHandler.alert, animated: true) {}
+    func display(_ networkError: F4SNetworkError, parentCtrl: UIViewController, cancelHandler: (()->())? = nil, retryHandler: (() -> ())? = nil) {
+        var title: String = ""
+        var message: String = ""
+        if networkError.retry {
+            if Config.environment == .staging {
+                title = networkError.code + " error"
+                message = networkError.localizedDescription
+            } else {
+                title = "Workfinder was unable to complete the operation"
+                message = networkError.localizedDescription
+            }
+            
+        } else {
+            if Config.environment == .staging {
+                title = networkError.code + " error"
+                if let action = networkError.attempting {
+                    message = "action: \"\(action)\""
+                }
+                message = message + "\n\n\(networkError.localizedDescription)"
+            } else {
+                title = "Workfinder was unable to complete the operation"
+                message = "Sorry, an unexpected error occured"
+            }
+        }
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert)
+        if let cancelHandler = cancelHandler {
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+                cancelHandler()
+            }
+            alert.addAction(cancelAction)
+        }
+        if let retryHandler = retryHandler {
+            let retryAction = UIAlertAction(title: "Retry", style: .default) { (_) in
+                retryHandler()
+            }
+            alert.addAction(retryAction)
+        }
+        parentCtrl.present(alert, animated: true) {}
     }
     
     func display(_ errorMessage: CallError, parentCtrl: UIViewController) {

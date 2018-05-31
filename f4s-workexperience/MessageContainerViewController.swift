@@ -78,7 +78,9 @@ class MessageContainerViewController: UIViewController {
                 guard let strongSelf = self else { return }
                 switch result {
                 case .error(let error):
-                    strongSelf.networkErrorHandler(error: error)
+                    strongSelf.networkErrorHandler(error: error, retryHandler: {
+                        strongSelf.loadModel(threadUuid: threadUuid)
+                    })
                 case .success(let messagesModel):
                     strongSelf.messageList = messagesModel.messages ?? []
                     strongSelf.action = messagesModel.action
@@ -90,13 +92,10 @@ class MessageContainerViewController: UIViewController {
         }
     }
     
-    func networkErrorHandler(error: F4SNetworkError) {
-        guard error.retry else {
-            let nsError: NSError = error as NSError
-            log.error(userInfo: nsError.userInfo)
-            return
-        }
-        MessageHandler.sharedInstance.display(error, parentCtrl: self)
+    func networkErrorHandler(error: F4SNetworkError, retryHandler: @escaping ()->()) {
+        MessageHandler.sharedInstance.display(error, parentCtrl: self, cancelHandler: {
+            
+        }, retryHandler: retryHandler)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
