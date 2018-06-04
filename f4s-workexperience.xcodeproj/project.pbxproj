@@ -628,6 +628,7 @@
 				FC860D81209C37F2007945E6 /* MessageDispatcher.swift */,
 				FC85FA8120A3436600059EFB /* F4SMessageServices.swift */,
 				FCFF609720A424DE00D69A48 /* F4SMessageModel.swift */,
+				FCA333A420BEA938002AA790 /* F4SMessagesModel.swift */,
 			);
 			name = Message;
 			sourceTree = "<group>";
@@ -1275,7 +1276,6 @@
 				FC4C5F2B20B404CF001FA83C /* F4SUploadTableViewController.swift */,
 				FC86A5FA20B44E6B002BAD74 /* F4SUrlDescriptorTableViewCell.swift */,
 				FC86A5FC20B6E93B002BAD74 /* F4SUploadRequestedDocumentsTableViewModel.swift */,
-				FCA333A420BEA938002AA790 /* F4SMessagesModel.swift */,
 			);
 			path = "Upload requested documents";
 			sourceTree = "<group>";

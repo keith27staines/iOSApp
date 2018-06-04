@@ -30,10 +30,10 @@ class MessageContainerViewController: UIViewController {
     var action: F4SAction? = nil {
         didSet {
             loadChatData()
-            guard let action = self.action else {
+            guard let title = self.action?.actionType?.actionTitle else {
                 return
             }
-            actionButton.setTitle(action.actionType.actionTitle, for: .normal)
+            actionButton.setTitle(title, for: .normal)
         }
     }
     var currentUserUuid: String = ""
@@ -41,7 +41,6 @@ class MessageContainerViewController: UIViewController {
     var shouldLoadOptions: Bool = true
     
     @IBOutlet weak var subjectLabel: UILabel!
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +50,6 @@ class MessageContainerViewController: UIViewController {
         }
         actionButtonHeightConstraint.constant = 0.0
         actionButton.isEnabled = false
-
         F4SButtonStyler.apply(style: .primary, button: actionButton)
     }
     
@@ -112,14 +110,13 @@ class MessageContainerViewController: UIViewController {
         actionButton.isEnabled = false
         do {
             try F4SActionValidator.validate(action: action)
-            switch action.actionType {
+            let actionType = action.actionType!
+            switch action.actionType! {
             case .uploadDocuments:
-                performSegue(withIdentifier: "uploadDocumentsBLRequest", sender: self)
+                performSegue(withIdentifier: actionType.rawValue, sender: self)
             }
-            
         } catch {
-            // Handle exception
-            print(error)
+            log.error(error)
         }
     }
     
@@ -129,23 +126,20 @@ class MessageContainerViewController: UIViewController {
             self.messageController = segue.destination as? MessageViewController
             return
         }
-        if segueName == "uploadDocumentsBLRequest" {
+        if segueName == "upload_documents" {
             guard let vc = segue.destination as? F4SUploadSpecifiedDocumentsViewController else { return }
             vc.companyName = company?.name ?? "this company"
             vc.action = action
             return
         }
     }
-    
-//    func dismissToMessages(sender: Any?) {
-//        
-//    }
 }
 
 extension MessageContainerViewController {
 
     func loadChatData() {
-        if action != nil {
+        // Note that following != nil check is not directly against action but against actionType. This is because the api returns an action structure with all fields set to null when there is no data
+        if action?.actionType != nil {
             actionButtonHeightConstraint.constant = 60
             UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: { [weak self] in
                 self?.view.layoutIfNeeded()
