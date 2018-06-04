@@ -36,7 +36,8 @@ extension F4SMessageService : F4SMessageServiceProtocol {
     
     public func sendMessage(responseUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SMessagesList>) -> Void) {
         let attempting = "Send message to thread"
-        super.send(verb: .put, objectToSend: responseUuid, attempting: attempting, completion: {
+        let sendDictionary = ["response_uuid": responseUuid]
+        super.send(verb: .put, objectToSend: sendDictionary, attempting: attempting, completion: {
             result in
             switch result {
             case .error(let error):
@@ -46,7 +47,7 @@ extension F4SMessageService : F4SMessageServiceProtocol {
                     completion(F4SNetworkResult.success(F4SMessagesList()))
                     return
                 }
-                let decoder = JSONDecoder()
+                let decoder = self.jsonDecoder
                 do {
                     let messages = try decoder.decode(F4SMessagesList.self, from: data)
                     completion(F4SNetworkResult.success(messages))
