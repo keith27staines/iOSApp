@@ -10,13 +10,12 @@ import Foundation
 
 public class F4SRecommendationService : F4SDataTaskService {
     public static let apiName = "recommend"
-    public typealias SuccessType = [Recommendation]
     public init() {
-        super.init(baseURLString: Config.BASE_URL, apiName: F4SRecommendationService.apiName, objectType: SuccessType.self)
+        super.init(baseURLString: Config.BASE_URL, apiName: F4SRecommendationService.apiName)
     }
 
-    public func fetch(completion: @escaping (F4SNetworkResult<SuccessType>) -> ()) {
-        super.get(attempting: "Get recommendations", completion: completion)
+    public func fetch(completion: @escaping (F4SNetworkResult<[Recommendation]>) -> ()) {
+        super.beginGetJson(attempting: "Get recommendations", completion: completion)
     }
 }
 

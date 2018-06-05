@@ -85,7 +85,7 @@ class UserService: ApiBaseService {
             params["last_name"] = user.lastName
         }
 
-        let partnersModel = PartnersModel.sharedInstance
+        let partnersModel = F4SPartnersModel.sharedInstance
         if let selectedPartner = partnersModel.selectedPartner, selectedPartner.isPlaceholder == false  {
             if let partner = partnersModel.partnerByUpdatingUUID(partner: selectedPartner) {
                 let partnerDictionary = ["uuid" : partner.uuid]

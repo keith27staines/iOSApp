@@ -127,8 +127,8 @@ class CustomNavigationHelper {
         mapViewController.shouldRequestAuthorization = mapShouldRequestLocation
         presentPartnerSelection()
     }
-    lazy var partnersModel: PartnersModel = {
-        let p = PartnersModel.sharedInstance
+    lazy var partnersModel: F4SPartnersModel = {
+        let p = F4SPartnersModel.sharedInstance
         p.showWillProvidePartnerLater = true
         p.getPartners(completed: { (_) in
             return

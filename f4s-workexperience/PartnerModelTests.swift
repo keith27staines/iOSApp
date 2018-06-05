@@ -24,18 +24,18 @@ import XCTest
 
 class PartnerModelTests: XCTestCase {
     
-    var model: PartnersModel!
+    var model: F4SPartnersModel!
     
-    func createFakeServerSidePartners() -> [String:Partner] {
-        var partners = [F4SUUID: Partner]()
-        partners["aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"] = Partner(uuid: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", name: "Guarenteed To Exist")
-        partners["bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"] = Partner(uuid: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb", name: "Another partner")
-        partners["cccccccc-cccc-cccc-cccc-cccccccccccc"] = Partner(uuid: "cccccccc-cccc-cccc-cccc-cccccccccccc", name: "Yet another partner")
+    func createFakeServerSidePartners() -> [String:F4SPartner] {
+        var partners = [F4SUUID: F4SPartner]()
+        partners["aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"] = F4SPartner(uuid: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", name: "Guarenteed To Exist")
+        partners["bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"] = F4SPartner(uuid: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb", name: "Another partner")
+        partners["cccccccc-cccc-cccc-cccc-cccccccccccc"] = F4SPartner(uuid: "cccccccc-cccc-cccc-cccc-cccccccccccc", name: "Yet another partner")
         return partners
     }
     
     override func setUp() {
-        model = PartnersModel()
+        model = F4SPartnersModel()
         model.serversidePartners = createFakeServerSidePartners()
     }
     

@@ -16,25 +16,23 @@ public protocol F4SDocumentServiceProtocol {
 }
 
 public class F4SPlacementDocumentsService : F4SDataTaskService {
-    public typealias SuccessType = [F4SDocumentUrl]
-    
     public let placementUuid: String
     
     public init(placementUuid: F4SUUID) {
         self.placementUuid = placementUuid
         let apiName = "placement/\(placementUuid)/documents"
-        super.init(baseURLString: Config.BASE_URL, apiName: apiName, objectType: SuccessType.self)
+        super.init(baseURLString: Config.BASE_URL, apiName: apiName)
     }
 }
 
 // MARK:- F4SDocumentServiceProtocol conformance
 extension F4SPlacementDocumentsService : F4SDocumentServiceProtocol {
     public func getDocumentsForPlacement(completion: @escaping (F4SNetworkResult<F4SGetDocumentUrlJson>) -> ()) {
-        super.get(attempting: "Get supporting document urls for this placement", completion: completion)
+        super.beginGetJson(attempting: "Get supporting document urls for this placement", completion: completion)
     }
     
     public func putDocumentsForPlacement(documentDescriptors: F4SPutDocumentsUrlJson, completion: @escaping ((F4SNetworkDataResult) -> Void )) {
-        super.send(verb: .put, objectToSend: documentDescriptors, attempting: "Put supporting document urls for this placement", completion: completion)
+        super.beginSendJson(verb: .put, objectToSend: documentDescriptors, attempting: "Put supporting document urls for this placement", completion: completion)
     }
 }
 

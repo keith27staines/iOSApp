@@ -421,37 +421,6 @@ class DeserializationManager {
         return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
     }
     
-    func parseBoolean(jsonOptional: JSON) -> Result<Bool> {
-        guard let boolValue = jsonOptional.bool else {
-            return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
-        }
-        return .value(Box(boolValue))
-    }
-    
-    func parsePartner(jsonOptional: JSON) -> Result<[Partner]> {
-        guard let partnerJsonList = jsonOptional.array else {
-            return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
-        }
-        var partners = [Partner]()
-        for partnerJson in partnerJsonList {
-            var partner = Partner()
-            partner.uuid = partnerJson["uuid"].string ?? ""
-            partner.name = partnerJson["name"].string ?? ""
-            partner.description = partnerJson["description"].string ?? ""
-            partner.imageUrlString = partnerJson["logo"].string ?? nil
-            partner.sortingIndex = 1
-            if partner.uuid == "15e5a0a6-02cc-4e98-8edb-c3bfc0cb8b7d" {
-                partner.sortingIndex = 0
-                if partner.imageUrlString == nil {
-                    // partner is NCS and the NCS logo url not available from the database
-                    partner.imageName = "partnerLogoNCS"
-                }
-            }
-            partners.append(partner)
-        }
-        return .value(Box(partners))
-    }
-
     func parseTimelinePlacement(jsonOptional: JSON) -> Result<[TimelinePlacement]> {
 
         if let placementsJsonList = jsonOptional.array {

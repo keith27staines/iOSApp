@@ -565,7 +565,7 @@ extension ExtraInfoViewController {
     }
     
     func getPartnersFromServer(user: User) {
-        PartnersModel.sharedInstance.getPartnersFromServer { [weak self] (success) in
+        F4SPartnersModel.sharedInstance.getPartnersFromServer { [weak self] (success) in
             self?.afterGetPartners(success: success, user: user)
         }
     }
