@@ -13,7 +13,7 @@ public protocol F4SPartnerServiceProtocol {
 
 public class F4SPartnerService : F4SDataTaskService {
     public init() {
-        super.init(baseURLString: Config.BASE_URL, apiName: "partner")
+        super.init(baseURLString: Config.BASE_URL2, apiName: "partner")
     }
 }
 

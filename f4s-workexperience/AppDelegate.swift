@@ -29,25 +29,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var deviceToken: String?
     
     func presentForceUpdate() {
-        let rootVC = self.window?.rootViewController
+        let rootVC = self.window?.rootViewController?.topMostViewController
         let forceUpdateVC = F4SForceAppUpdateViewController()
         rootVC?.present(forceUpdateVC, animated: true, completion: nil)
     }
     
     func presentNoNetworkMustRetry(application: UIApplication, retryOperation: @escaping (UIApplication) -> ()) {
-        let rootVC = self.window?.rootViewController
+        let rootVC = self.window?.rootViewController?.topMostViewController
         let alert = UIAlertController(
-            title: NSLocalizedString("Network unavailable", comment: ""),
-            message: NSLocalizedString("Please ensure you have a good network connection and retry", comment: ""),
+            title: NSLocalizedString("No Network", comment: ""),
+            message: NSLocalizedString("Please ensure you have a good network connection while we set things up for you", comment: ""),
             preferredStyle: .alert)
         let retry = UIAlertAction(
             title: NSLocalizedString("Retry", comment: ""),
             style: .default) { (_) in
                 alert.dismiss(animated: false, completion: nil)
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1, execute: {
-                    retryOperation(application)
-                })
-                
+                retryOperation(application)
         }
         alert.addAction(retry)
         rootVC?.present(alert, animated: true, completion: nil)
@@ -102,8 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch (let error) {
             assertionFailure("Failed to initialize logger: \(error)")
         }
-        log.debug("\n\n\n**************")
-        log.debug("Workfinder launched in environement \(Config.ENVIRONMENT)")
+        log.debug("\n\n\n**************\nWorkfinder launched in environement \(Config.ENVIRONMENT)\n**************")
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
         continueIfVersionCheckPasses(application: application)
@@ -114,15 +110,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         F4SUserStatusService.shared.beginStatusUpdate()
         UserService.sharedInstance.registerUser(completed: { [weak self] succeeded in
             if succeeded || UserService.sharedInstance.hasAccount() {
-                self?.onUserConfirmedToExist(application: application)
+                self?.onUserAccountConfirmedToExist(application: application)
             } else {
                 log.debug("Couldn't register user")
             }
         })
     }
     
-    func onUserConfirmedToExist(application: UIApplication) {
-       printDebugUserInfo()
+    func onUserAccountConfirmedToExist(application: UIApplication) {
+        printDebugUserInfo()
         registerApplicationForRemoteNotifications(application)
         DatabaseService.sharedInstance.getLatestDatabase()
         guard let window = window else { return }
