@@ -44,18 +44,18 @@ class PartnerModelTests: XCTestCase {
     }
     
     func testPartnerProvidedLater() {
-        let placeholder = Partner.partnerProvidedLater
-        XCTAssertTrue(placeholder.isPlaceholder)
+        let placeholder = F4SPartner.partnerProvidedLater
+        XCTAssertEqual(placeholder.isPlaceholder,true)
     }
     
     func testUpdateUUIDFromServerUUID() {
-        let partnerWithBadUuid = Partner(uuid: "x", name: "Guarenteed To Exist")
+        let partnerWithBadUuid = F4SPartner(uuid: "x", name: "Guarenteed To Exist")
         let correctedPartner = model.partnerByUpdatingUUID(partner: partnerWithBadUuid)
         XCTAssertEqual("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", correctedPartner?.uuid)
     }
     
     func testUUIDCorrectionIsCaseInsensitive() {
-        let partnerWithBadUuid = Partner(uuid: "x", name: "guarenteed To Exist")
+        let partnerWithBadUuid = F4SPartner(uuid: "x", name: "guarenteed To Exist")
         let correctedPartner = model.partnerByUpdatingUUID(partner: partnerWithBadUuid)
         XCTAssertEqual("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", correctedPartner?.uuid)
     }
