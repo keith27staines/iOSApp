@@ -31,7 +31,7 @@ public enum F4SNetworkDataErrorType {
     case undecodableData(Data)
     case unknownError(Any?)
     
-    public func dataError(attempting: String, logError: Bool = true) -> F4SNetworkError {
+    public func error(attempting: String, logError: Bool = true) -> F4SNetworkError {
         let nsError: NSError
         let code: Int
         var userInfo: [String : Any] = [:]

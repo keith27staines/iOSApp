@@ -196,7 +196,7 @@ extension CompanyDetailsViewController {
     @IBAction func seeAccountsButton(_: AnyObject) {
         // will open web view
         if let url = self.company?.companyUrl, let navCtrl = self.navigationController {
-            CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navCtrl, contentType: ContentType.company, url: url)
+            CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navCtrl, contentType: F4SContentType.company, url: url)
         }
     }
 

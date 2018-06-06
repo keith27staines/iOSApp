@@ -249,7 +249,7 @@ extension MessageContainerViewController {
     
     @objc func showCompanyDetailsView() {
         if let companyUrl = self.company?.companyUrl, let navigCtrl = self.navigationController {
-            CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: ContentType.company, url: companyUrl)
+            CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.company, url: companyUrl)
         }
     }
 }

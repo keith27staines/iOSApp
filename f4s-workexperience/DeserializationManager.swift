@@ -329,51 +329,6 @@ class DeserializationManager {
         return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
     }
 
-    func parseContent(jsonOptional: JSON) -> Result<[ContentEntity]> {
-        if let contentJsonList = jsonOptional.array {
-            var contentList: [ContentEntity] = []
-            for contentJson in contentJsonList {
-                var content: ContentEntity = ContentEntity()
-                if let title = contentJson["title"].string {
-                    content.title = title
-                }
-                if let url = contentJson["url"].string {
-                    content.url = url
-                }
-                if let slug = contentJson["slug"].string {
-                    switch slug
-                    {
-                    case ContentType.terms.rawValue:
-                        content.slug = .terms
-                        break
-                    case ContentType.faq.rawValue:
-                        content.slug = .faq
-                        break
-                    case ContentType.about.rawValue:
-                        content.slug = .about
-                        break
-                    case ContentType.voucher.rawValue:
-                        content.slug = .voucher
-                        break
-                    case ContentType.consent.rawValue:
-                        content.slug = .consent
-                        break
-                    case ContentType.about.rawValue:
-                        content.slug = .about
-                        break
-                    default:
-                        content.slug = .company
-                        break
-                    }
-
-                    contentList.append(content)
-                }
-            }
-            return .value(Box(contentList))
-        }
-        return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
-    }
-
     func parseVoucher(jsonOptional: JSON) -> Result<String> {
 
         if let voucherStatus = jsonOptional["status"].string {

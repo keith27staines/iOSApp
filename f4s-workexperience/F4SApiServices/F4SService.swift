@@ -143,7 +143,7 @@ public class F4SDataTaskService : F4SApiServiceProtocol {
             case .success(let data):
                 guard let data = data else {
                     assertionFailure("No data")
-                    let error = F4SNetworkDataErrorType.noData.dataError(attempting: attempting)
+                    let error = F4SNetworkDataErrorType.noData.error(attempting: attempting)
                     let result = F4SNetworkResult<A>.error(error)
                     completion(result)
                     return
@@ -156,7 +156,7 @@ public class F4SDataTaskService : F4SApiServiceProtocol {
                     return
                     
                 } catch (let error) {
-                    let f4sError = F4SNetworkDataErrorType.undecodableData(data).dataError(attempting: attempting + error.localizedDescription)
+                    let f4sError = F4SNetworkDataErrorType.undecodableData(data).error(attempting: attempting + error.localizedDescription)
                     log.debug("error attempting \(attempting), \n\(f4sError)")
                     completion(F4SNetworkResult.error(f4sError))
                     return

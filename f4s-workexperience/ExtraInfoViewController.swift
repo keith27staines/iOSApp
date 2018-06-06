@@ -26,7 +26,7 @@ class ExtraInfoViewController: UIViewController {
     
     @IBAction func termsOfServiceLinkButton(_ sender: UIButton) {
         if let navigCtrl = self.navigationController {
-            CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: ContentType.terms)
+            CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.terms)
         }
     }
     
@@ -423,7 +423,7 @@ extension ExtraInfoViewController {
         return updatedUser
     }
     
-    func updateVoucher(voucherCode: String, user: User, completion: @escaping (Result<String>) -> ()) {
+    func validateVoucher(voucherCode: String, user: User, completion: @escaping (Result<String>) -> ()) {
         MessageHandler.sharedInstance.showLoadingOverlay(self.view)
         VoucherService.sharedInstance.validateVoucher(voucherCode: voucherCode, placementUuid: user.placementUuid, putCompleted: { success, result  in
             completion(result)
@@ -491,7 +491,7 @@ extension ExtraInfoViewController {
         let tapPoint = recognizer.location(in: self.dobInfoLabel)
         if glyphRect.contains(tapPoint) || glyphRect2.contains(tapPoint) {
             if let navigCtrl = self.navigationController {
-                CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: ContentType.consent)
+                CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.consent)
             }
         }
     }
@@ -520,7 +520,7 @@ extension ExtraInfoViewController {
         let tapPoint = recognizer.location(in: self.noVoucherInfoLabel)
         if glyphRect.contains(tapPoint) {
             if let navigCtrl = self.navigationController {
-                CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: ContentType.voucher)
+                CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.voucher)
             }
         }
     }
@@ -550,7 +550,7 @@ extension ExtraInfoViewController {
         }
         
         if let voucher = voucherCodeTextField.text, voucher.isEmpty == false {
-            updateVoucher(voucherCode: voucher, user: user) { [weak self] result in
+            validateVoucher(voucherCode: voucher, user: user) { [weak self] result in
                 self?.afterVoucherUpdate(result: result, user: user)
             }
         } else {
