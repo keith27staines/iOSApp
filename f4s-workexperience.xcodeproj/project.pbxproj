@@ -69,7 +69,6 @@
 		405974061DFD44670002DB3A /* ExtraInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 405974041DFD44660002DB3A /* ExtraInfo.storyboard */; };
 		405974081DFD449C0002DB3A /* ExtraInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405974071DFD449C0002DB3A /* ExtraInfoViewController.swift */; };
 		4059740A1E00115C0002DB3A /* NextResponderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405974091E00115B0002DB3A /* NextResponderTextField.swift */; };
-		4059740C1E014E760002DB3A /* VoucherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4059740B1E014E760002DB3A /* VoucherService.swift */; };
 		40A28CB21E1D1D200077D490 /* TimelineEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A28CB11E1D1D200077D490 /* TimelineEntryTableViewCell.swift */; };
 		40A28CB71E1F96A60077D490 /* RatePlacement.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40A28CB51E1F96A60077D490 /* RatePlacement.storyboard */; };
 		40A28CB91E1F96C20077D490 /* RatePlacementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A28CB81E1F96C20077D490 /* RatePlacementViewController.swift */; };
@@ -354,7 +353,6 @@
 		405974051DFD44660002DB3A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ExtraInfo.storyboard; sourceTree = "<group>"; };
 		405974071DFD449C0002DB3A /* ExtraInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtraInfoViewController.swift; sourceTree = "<group>"; };
 		405974091E00115B0002DB3A /* NextResponderTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextResponderTextField.swift; sourceTree = "<group>"; };
-		4059740B1E014E760002DB3A /* VoucherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoucherService.swift; sourceTree = "<group>"; };
 		407A5D7DED3055034D7EAC15 /* Pods_f4s_workexperienceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_f4s_workexperienceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		40A28CB11E1D1D200077D490 /* TimelineEntryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineEntryTableViewCell.swift; sourceTree = "<group>"; };
 		40A28CB61E1F96A60077D490 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/RatePlacement.storyboard; sourceTree = "<group>"; };
@@ -903,14 +901,13 @@
 		40E78E4D1DD3289B000A3776 /* Workflow */ = {
 			isa = PBXGroup;
 			children = (
-				FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */,
-				4059740B1E014E760002DB3A /* VoucherService.swift */,
-				2037B0B71DEC8A2400A9DE3E /* TemplateService.swift */,
+				40E78E5D1DD3297D000A3776 /* DeserializationManager.swift */,
 				204203EF1E4B1E3D007C7409 /* ShortlistService.swift */,
+				2037B0B71DEC8A2400A9DE3E /* TemplateService.swift */,
+				FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */,
 				FCACBF4320C7EB9F00EABAE8 /* F4SContentService.swift */,
 				20FEBDD91DE5AD3400EBDCBF /* ImageService.swift */,
 				40E78E5C1DD3297D000A3776 /* ApiBaseService.swift */,
-				40E78E5D1DD3297D000A3776 /* DeserializationManager.swift */,
 				205EB2101DDB551800034424 /* DatabaseService.swift */,
 				20B127DE1DD99E5700CE3F1F /* UserService.swift */,
 				2037B0A01DE84EEF00A9DE3E /* PlacementService.swift */,
@@ -1834,7 +1831,6 @@
 				204C89791DF5F0B200D8493A /* ChooseAttributesViewController.swift in Sources */,
 				FCB6B8ED2074C59C0042C725 /* F4SCalendarContainerViewController.swift in Sources */,
 				40C1A5201DDF5ACE000F80AA /* GMUWrappingDictionaryKey.m in Sources */,
-				4059740C1E014E760002DB3A /* VoucherService.swift in Sources */,
 				40A28CB91E1F96C20077D490 /* RatePlacementViewController.swift in Sources */,
 				40A5CF401DED81F7000007AB /* CustomViewFlowLayout.swift in Sources */,
 				FCB6B8CE2074C58F0042C725 /* F4SSelectDayTableViewCell.swift in Sources */,

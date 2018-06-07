@@ -329,38 +329,6 @@ class DeserializationManager {
         return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
     }
 
-    func parseVoucher(jsonOptional: JSON) -> Result<String> {
-
-        if let voucherStatus = jsonOptional["status"].string {
-            return .value(Box(voucherStatus))
-        }
-
-        if let _ = jsonOptional["errors"].dictionary {
-
-            if let voucherErrors = jsonOptional["errors"]["status"].string {
-
-                if voucherErrors == Errors.VoucherCallErrors.VoucherExpired.serverErrorMessage {
-                    return .deffinedError(Errors.VoucherCallErrors.VoucherExpired)
-                }
-                if voucherErrors == Errors.VoucherCallErrors.VoucherInvalid.serverErrorMessage {
-                    return .deffinedError(Errors.VoucherCallErrors.VoucherInvalid)
-                }
-                if voucherErrors == Errors.VoucherCallErrors.VoucherWasUsed.serverErrorMessage {
-                    return .deffinedError(Errors.VoucherCallErrors.VoucherWasUsed)
-                }
-            }
-
-            if let voucherError = jsonOptional["errors"]["non_field_errors"].string {
-                if voucherError == Errors.VoucherCallErrors.VoucherNotFound.serverErrorMessage {
-                    return .deffinedError(Errors.VoucherCallErrors.VoucherNotFound)
-                }
-
-                return .deffinedError(Errors.GeneralCallErrors.GeneralError)
-            }
-        }
-        return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
-    }
-
     func parseEnablePushNotification(jsonOptional: JSON) -> Result<String> {
 
         if let notificationsStatus = jsonOptional["enabled"].bool {
