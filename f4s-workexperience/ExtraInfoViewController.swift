@@ -60,6 +60,7 @@ class ExtraInfoViewController: UIViewController {
     
     var applicationContext: F4SApplicationContext?
     var datePicker = UIDatePicker()
+    var voucherVerificationService: F4SVoucherVerificationServiceProtocol?
     
     var isEmailOkay: Bool {
         guard let emailAddress = emailTextField.text else {
@@ -422,13 +423,6 @@ extension ExtraInfoViewController {
         applicationContext?.user = updatedUser
         return updatedUser
     }
-    
-    func validateVoucher(voucherCode: String, user: User, completion: @escaping (Result<String>) -> ()) {
-        MessageHandler.sharedInstance.showLoadingOverlay(self.view)
-        VoucherService.sharedInstance.validateVoucher(voucherCode: voucherCode, placementUuid: user.placementUuid, putCompleted: { success, result  in
-            completion(result)
-        })
-    }
 }
 
 // MARK: - User Interaction
@@ -525,7 +519,6 @@ extension ExtraInfoViewController {
         }
     }
     
-    
     @IBAction func emailTextFieldDidChange(_ sender: NextResponderTextField) {
         updateButtonStateAndImage()
     }
@@ -541,97 +534,184 @@ extension ExtraInfoViewController {
     @IBAction func completeInfoButtonTouched(_: UIButton) {
         self.view.endEditing(true)
         let user = saveUserDetailsLocally()
-        applicationContext?.user = user
-        if let reachability = Reachability() {
-            if !reachability.isReachableByAnyMeans {
-                MessageHandler.sharedInstance.display("No Internet Connection.", parentCtrl: self)
-                return
-            }
-        }
-        
-        if let voucher = voucherCodeTextField.text, voucher.isEmpty == false {
-            validateVoucher(voucherCode: voucher, user: user) { [weak self] result in
-                self?.afterVoucherUpdate(result: result, user: user)
-            }
-        } else {
-            getPartnersFromServer(user: user)
-        }
+        guard var applicationContext = applicationContext else { return }
+        applicationContext.user = user
+//        if let reachability = Reachability() {
+//            if !reachability.isReachableByAnyMeans {
+//                MessageHandler.sharedInstance.display("No Internet Connection.", parentCtrl: self)
+//                return
+//            }
+//        }
+        verifyVoucher(applicationContext: applicationContext)
     }
     
-    func afterVoucherUpdate(result: Result<String>, user: User) {
-        if let _ = continueWithResult(result: result) {
-            getPartnersFromServer(user: user)
+    func verifyVoucher(applicationContext: F4SApplicationContext) {
+        guard let voucherCode = voucherCodeTextField.text, voucherCode.isEmpty == false  else {
+            afterVoucherValidation(applicationContext: applicationContext)
+            return
         }
-    }
-    
-    func getPartnersFromServer(user: User) {
-        F4SPartnersModel.sharedInstance.getPartnersFromServer { [weak self] (success) in
-            self?.afterGetPartners(success: success, user: user)
+        if voucherVerificationService == nil {
+            let placementUuid = applicationContext.user!.placementUuid
+            voucherVerificationService = F4SVoucherVerificationService(placementUuid: placementUuid, voucherCode: voucherCode)
         }
-    }
-    
-    func afterGetPartners(success: Bool, user: User) {
-        DispatchQueue.main.async { [weak self] in
-            guard let strongSelf = self else { return }
-            let emailController = strongSelf.emailController
-            let emailModel = emailController.model
-            if emailModel.isEmailAddressVerified(email: user.email) {
-                strongSelf.gotoDocumentUpload()
-            } else {
-                strongSelf.emailController.model.restart()
-                strongSelf.emailController.emailToVerify = user.email
-                strongSelf.emailController.emailWasVerified = {
-                    strongSelf.emailTextField.text = emailController.model.verifiedEmail
-                    _ = strongSelf.saveUserDetailsLocally()
-                    strongSelf.gotoDocumentUpload()
-                }
-                strongSelf.navigationController!.pushViewController(emailController, animated: true)
-            }
-        }
-    }
-    
-    func gotoDocumentUpload() {
-        DispatchQueue.main.async { [weak self] in
-            guard let strongSelf = self else { return }
-            let uploadController = strongSelf.documentUploadController
-            uploadController.applicationContext = self?.applicationContext
-            uploadController.completion = { applicationContext in
-                strongSelf.gotoSucess(applicationContext: applicationContext, parent: uploadController)
-            }
-            strongSelf.navigationController?.pushViewController(uploadController, animated: true)
-        }
-    }
-    
-    func gotoSucess(applicationContext: F4SApplicationContext, parent: UIViewController) {
-        UserService.sharedInstance.updateUser(user: applicationContext.user!, putCompleted: { [weak self] (success, result) in
+        showLoadingOverlay()
+        voucherVerificationService?.verify(completion: { [weak self] (result) in
             guard let strongSelf = self else { return }
             DispatchQueue.main.async {
-                strongSelf.savePlacementLocally(status: .applied)
-                UserDefaults.standard.set(true, forKey: strongSelf.consentPreviouslyGivenKey)
-                if let _ = strongSelf.continueWithResult(result: result) {
-                    CustomNavigationHelper.sharedInstance.presentSuccessExtraInfoPopover(parentCtrl: parent)
+                strongSelf.hideLoadingOverlay()
+                switch result {
+                case .error(let error):
+                    if error.retry {
+                        strongSelf.handleRetryForNetworkError(error, retry: {
+                            strongSelf.verifyVoucher(applicationContext: applicationContext)
+                        })
+                    } else {
+                        strongSelf.handleUnrecoverableError(error)
+                    }
+                case .success(let voucherVerification):
+                    if voucherVerification.status == "issued" {
+                        strongSelf.afterVoucherValidation(applicationContext: applicationContext)
+                    } else {
+                        let reason = voucherVerification.errors?.status ?? NSLocalizedString("Please check your voucher code has been entered correctly", comment: "")
+                        strongSelf.presentInvalidVoucherAlert(reason: reason)
+                    }
+                }
+                strongSelf.voucherVerificationService = nil
+            }
+        })
+    }
+    
+    func afterVoucherValidation(applicationContext: F4SApplicationContext) {
+        getPartnersFromServer(applicationContext: applicationContext)
+    }
+    
+    func afterVoucherUpdate(applicationContext: F4SApplicationContext) {
+        getPartnersFromServer(applicationContext: applicationContext)
+    }
+    
+    func getPartnersFromServer(applicationContext: F4SApplicationContext) {
+        showLoadingOverlay()
+        F4SPartnersModel.sharedInstance.getPartnersFromServer { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            DispatchQueue.main.async {
+                strongSelf.hideLoadingOverlay()
+                switch result {
+                case .error(let error):
+                    if error.retry {
+                        strongSelf.handleRetryForNetworkError(error, retry: {
+                            strongSelf.getPartnersFromServer(applicationContext: applicationContext)
+                        })
+                    }
+                case .success(_):
+                    strongSelf.afterGetPartners(applicationContext: applicationContext)
+                }
+            }
+        }
+    }
+    
+    func afterGetPartners(applicationContext: F4SApplicationContext) {
+        verifyEmail(applicationContext: applicationContext)
+    }
+    
+    func verifyEmail(applicationContext: F4SApplicationContext) {
+        let emailController = self.emailController
+        let emailModel = emailController.model
+        let user = applicationContext.user!
+        
+        if emailModel.isEmailAddressVerified(email: user.email) {
+            afterEmailVerfied(applicationContext: applicationContext)
+        } else {
+            emailController.model.restart()
+            emailController.emailToVerify = user.email
+            emailController.emailWasVerified = { [weak self] in
+                guard let strongSelf = self else { return }
+                DispatchQueue.main.async {
+                    strongSelf.emailTextField.text = emailController.model.verifiedEmail
+                    _ = strongSelf.saveUserDetailsLocally()
+                    strongSelf.afterEmailVerfied(applicationContext: applicationContext)
+                }
+            }
+            self.navigationController!.pushViewController(emailController, animated: true)
+        }
+    }
+    
+    func afterEmailVerfied(applicationContext: F4SApplicationContext) {
+        performDocumentUpload(applicationContext: applicationContext)
+    }
+    
+    func performDocumentUpload(applicationContext: F4SApplicationContext) {
+        let uploadController = documentUploadController
+        uploadController.applicationContext = self.applicationContext
+        uploadController.completion = { [weak self] applicationContext in
+            DispatchQueue.main.async {
+                self?.afterDocumentUpload(applicationContext: applicationContext)
+            }
+        }
+        self.navigationController?.pushViewController(uploadController, animated: true)
+    }
+    
+    func afterDocumentUpload(applicationContext: F4SApplicationContext) {
+        submitApplication(applicationContext: applicationContext)
+    }
+    
+    func submitApplication(applicationContext: F4SApplicationContext) {
+        showLoadingOverlay()
+        let user = applicationContext.user!
+        UserService.sharedInstance.updateUser(user: user, putCompleted: { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            DispatchQueue.main.async {
+                strongSelf.hideLoadingOverlay()
+                switch result {
+                case .value(_):
+                    strongSelf.savePlacementLocally(status: .applied)
+                    UserDefaults.standard.set(true, forKey: strongSelf.consentPreviouslyGivenKey)
+                    strongSelf.afterSubmitApplication(applicationContext: applicationContext)
+                default:
+                    let e = F4SNetworkDataErrorType.genericErrorWithRetry.error(attempting: "Submit application")
+                    strongSelf.handleRetryForNetworkError(e, retry: {
+                        strongSelf.submitApplication(applicationContext: applicationContext)
+                    })
                 }
             }
         })
     }
     
-    func continueWithResult(result: Result<String>?) -> Result<String>? {
-        guard let result = result else {
-            MessageHandler.sharedInstance.hideLoadingOverlay()
-            return nil
-        }
-        switch result {
-        case .value:
-            return result
-        case .deffinedError(let definedError):
-            MessageHandler.sharedInstance.hideLoadingOverlay()
-            MessageHandler.sharedInstance.display(definedError, parentCtrl: self)
-            
-        case .error(let error):
-            MessageHandler.sharedInstance.hideLoadingOverlay()
-            MessageHandler.sharedInstance.display(error, parentCtrl: self)
-        }
-        return nil
+    func afterSubmitApplication(applicationContext: F4SApplicationContext) {
+        CustomNavigationHelper.sharedInstance.presentSuccessExtraInfoPopover(
+            parentCtrl: documentUploadController)
     }
 }
 
+
+extension ExtraInfoViewController {
+    
+    func showLoadingOverlay() {
+        MessageHandler.sharedInstance.showLoadingOverlay(self.view)
+    }
+    func hideLoadingOverlay() {
+        MessageHandler.sharedInstance.hideLoadingOverlay()
+    }
+    
+    func presentInvalidVoucherAlert(reason: String) {
+        let alert = UIAlertController(
+            title: NSLocalizedString("Voucher is not valid", comment: ""),
+            message: reason,
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: NSLocalizedString("OK", comment: ""),
+            style: .default, handler: nil)
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func handleRetryForNetworkError(_ error: F4SNetworkError, retry: @escaping () -> () ) {
+        MessageHandler.sharedInstance.display(error, parentCtrl: self, cancelHandler: nil) {
+            retry()
+        }
+    }
+    
+    func handleUnrecoverableError(_ error: Error) {
+        MessageHandler.sharedInstance.hideLoadingOverlay()
+        MessageHandler.sharedInstance.display(error.localizedDescription, parentCtrl: self)
+    }
+}

@@ -12,6 +12,10 @@ public class F4SPartnersModel {
    
     let ncsUID = "15e5a0a6-02cc-4e98-8edb-c3bfc0cb8b7d"
     
+    lazy var partnerService: F4SPartnerServiceProtocol = {
+        return F4SPartnerService()
+    }()
+    
     public var showWillProvidePartnerLater: Bool = false {
         didSet {
             if showWillProvidePartnerLater {
@@ -68,8 +72,7 @@ public class F4SPartnersModel {
         return nil
     }
     
-    public func getPartnersFromServer(completed: ((Bool) -> Void)? = nil) {
-        let partnerService = F4SPartnerService()
+    public func getPartnersFromServer(completed: ((F4SNetworkResult<[F4SPartner]>) -> Void)? = nil) {
         partnerService.getPartners { [weak self] (result) in
             guard let strongSelf = self else { return }
             strongSelf.serversidePartners = [:]
@@ -79,9 +82,9 @@ public class F4SPartnersModel {
                     strongSelf.serversidePartners![partner.name] = partner
                 }
                 strongSelf.isReady = true
-                completed?(true)
+                completed?(result)
             case .error(_):
-                completed?(false)
+                completed?(result)
             }
         }
     }

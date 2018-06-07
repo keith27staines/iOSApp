@@ -45,11 +45,14 @@ class PartnerSelectionViewController: UIViewController {
     }
     
     func loadPartersFromServer() {
-        partnersModel.getPartnersFromServer { [weak self] success in
+        partnersModel.getPartnersFromServer { [weak self] result in
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
-                if !success {
+                switch result {
+                case .error(_):
                     self?.showNeedConnectionAlert()
+                case .success(_):
+                    break
                 }
             }
         }
