@@ -29,6 +29,7 @@ public enum F4SNetworkDataErrorType {
     case noData
     case emptyData
     case undecodableData(Data)
+    case serialization(Encodable)
     case unknownError(Any?)
     case genericErrorWithRetry
     
@@ -38,16 +39,18 @@ public enum F4SNetworkDataErrorType {
         var userInfo: [String : Any] = [:]
         switch self {
         case .noData, .emptyData:
-            code = -1001
+            code = -1000
         case .undecodableData(let data):
-            code = -1002
-            userInfo["data"] = data
-            userInfo["string"] = String(data: data, encoding: .utf8)
+            code = -1100
+            userInfo["dataToDeserialize"] = data
+        case .serialization(let encodable):
+            code = -1200
+            userInfo["objectToSerialize"] = encodable
         case .unknownError(let info):
-            code = -1003
+            code = -1300
             userInfo["info"] = info
         case .genericErrorWithRetry:
-            code = -1004
+            code = -1400
             let description = NSLocalizedString("Unknown error", comment: "")
             return F4SNetworkError(localizedDescription: description, attempting: attempting, retry: true)
             

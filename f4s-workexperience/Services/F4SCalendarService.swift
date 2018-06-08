@@ -26,10 +26,10 @@ public class F4SPCalendarService : F4SDataTaskService {
 // MARK:- F4SDocumentServiceProtocol conformance
 extension F4SPCalendarService : F4SPCalendarServiceProtocol {
     public func getAvailabilityForPlacement(completion: @escaping (F4SNetworkResult<[F4SAvailabilityPeriodJson]>) -> ()) {
-        super.beginGetJson(attempting: "Get availability periods for this placement", completion: completion)
+        super.beginGetRequest(attempting: "Get availability periods for this placement", completion: completion)
     }
     
     public func patchAvailabilityForPlacement(availabilityPeriods: F4SAvailabilityPeriodsJson, completion: @escaping ((F4SNetworkDataResult) -> Void )) {
-        beginSendJson(verb: .patch, objectToSend: availabilityPeriods, attempting: "Patch availability periods for this placement", completion: completion)
+        beginSendRequest(verb: .patch, objectToSend: availabilityPeriods, attempting: "Patch availability periods for this placement", completion: completion)
     }
 }

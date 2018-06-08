@@ -28,11 +28,11 @@ public class F4SPlacementDocumentsService : F4SDataTaskService {
 // MARK:- F4SDocumentServiceProtocol conformance
 extension F4SPlacementDocumentsService : F4SDocumentServiceProtocol {
     public func getDocumentsForPlacement(completion: @escaping (F4SNetworkResult<F4SGetDocumentUrlJson>) -> ()) {
-        super.beginGetJson(attempting: "Get supporting document urls for this placement", completion: completion)
+        super.beginGetRequest(attempting: "Get supporting document urls for this placement", completion: completion)
     }
     
     public func putDocumentsForPlacement(documentDescriptors: F4SPutDocumentsUrlJson, completion: @escaping ((F4SNetworkDataResult) -> Void )) {
-        super.beginSendJson(verb: .put, objectToSend: documentDescriptors, attempting: "Put supporting document urls for this placement", completion: completion)
+        super.beginSendRequest(verb: .put, objectToSend: documentDescriptors, attempting: "Put supporting document urls for this placement", completion: completion)
     }
 }
 

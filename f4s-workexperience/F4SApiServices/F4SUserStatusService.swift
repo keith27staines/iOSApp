@@ -71,6 +71,6 @@ public class F4SUserStatusService : F4SDataTaskService {
 // MARK:- F4SDocumentServiceProtocol conformance
 extension F4SUserStatusService : F4SUserStatusServiceProtocol {
     public func getUserStatus(completion: @escaping (F4SNetworkResult<F4SUserStatus>) -> ()) {
-        super.beginGetJson(attempting: "Get status for current user", completion: completion)
+        super.beginGetRequest(attempting: "Get status for current user", completion: completion)
     }
 }

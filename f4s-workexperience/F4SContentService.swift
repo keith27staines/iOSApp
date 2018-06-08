@@ -44,6 +44,6 @@ public class F4SContentService : F4SDataTaskService {
 // MARK:- F4SContentServiceProtocol conformance
 extension F4SContentService : F4SContentServiceProtocol {
     public func getContent(completion: @escaping (F4SNetworkResult<[F4SContentDescriptor]>) -> ()) {
-        super.beginGetJson(attempting: "Get content", completion: completion)
+        super.beginGetRequest(attempting: "Get content", completion: completion)
     }
 }
