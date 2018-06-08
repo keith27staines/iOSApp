@@ -127,8 +127,8 @@ class CustomNavigationHelper {
         mapViewController.shouldRequestAuthorization = mapShouldRequestLocation
         presentPartnerSelection()
     }
-    lazy var partnersModel: PartnersModel = {
-        let p = PartnersModel.sharedInstance
+    lazy var partnersModel: F4SPartnersModel = {
+        let p = F4SPartnersModel.sharedInstance
         p.showWillProvidePartnerLater = true
         p.getPartners(completed: { (_) in
             return
@@ -267,7 +267,7 @@ class CustomNavigationHelper {
         })
     }
     
-    func presentContentViewController(navCtrl: UINavigationController, contentType: ContentType) {
+    func presentContentViewController(navCtrl: UINavigationController, contentType: F4SContentType) {
         let contentStoryboard = UIStoryboard(name: "Content", bundle: nil)
         guard let contentViewController = contentStoryboard.instantiateViewController(withIdentifier: "ContentViewCtrl") as? ContentViewController else {
             return
@@ -278,7 +278,7 @@ class CustomNavigationHelper {
         navCtrl.present(navigationCtrl, animated: true, completion: nil)
     }
 
-    func presentContentViewController(navCtrl: UINavigationController, contentType: ContentType, url: String) {
+    func presentContentViewController(navCtrl: UINavigationController, contentType: F4SContentType, url: String) {
         let contentStoryboard = UIStoryboard(name: "Content", bundle: nil)
         guard let contentViewController = contentStoryboard.instantiateViewController(withIdentifier: "ContentViewCtrl") as? ContentViewController else {
             return

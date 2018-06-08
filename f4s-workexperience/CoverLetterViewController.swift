@@ -365,7 +365,7 @@ extension CoverLetterViewController {
 
     @IBAction func termsAndConditionsButtonTouched(_: Any) {
         if let navCtrl = self.navigationController {
-            CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navCtrl, contentType: ContentType.terms)
+            CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navCtrl, contentType: F4SContentType.terms)
         }
     }
 

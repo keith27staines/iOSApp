@@ -8,35 +8,39 @@
 
 import Foundation
 
-public class PartnersModel {
+public class F4SPartnersModel {
    
     let ncsUID = "15e5a0a6-02cc-4e98-8edb-c3bfc0cb8b7d"
+    
+    lazy var partnerService: F4SPartnerServiceProtocol = {
+        return F4SPartnerService()
+    }()
     
     public var showWillProvidePartnerLater: Bool = false {
         didSet {
             if showWillProvidePartnerLater {
-                addOrReplacePartner(Partner.partnerProvidedLater)
+                addOrReplacePartner(F4SPartner.partnerProvidedLater)
             } else {
-                removePartner(Partner.partnerProvidedLater)
+                removePartner(F4SPartner.partnerProvidedLater)
             }
         }
     }
     
-    fileprivate var partners: [F4SUUID:Partner]
-    fileprivate var partnersArray: [Partner]
-    public internal (set) var serversidePartners: [String : Partner]?
+    fileprivate var partners: [F4SUUID:F4SPartner]
+    fileprivate var partnersArray: [F4SPartner]
+    public internal (set) var serversidePartners: [String : F4SPartner]?
     private (set) var isReady: Bool = false
     
     /// Returns the shared instance
-    class var sharedInstance: PartnersModel {
+    class var sharedInstance: F4SPartnersModel {
         struct Static {
-            static let instance: PartnersModel = PartnersModel()
+            static let instance: F4SPartnersModel = F4SPartnersModel()
         }
         return Static.instance
     }
     
     public init() {
-        partners = [F4SUUID:Partner]()
+        partners = [F4SUUID:F4SPartner]()
         partnersArray = []
         getPartners { (_) in
             //
@@ -52,15 +56,14 @@ public class PartnersModel {
         completed(true)
     }
     
-    public func partnerByUpdatingUUID(partner: Partner) -> Partner? {
+    public func partnerByUpdatingUUID(partner: F4SPartner) -> F4SPartner? {
         guard let serverSidePartners = serversidePartners else {
             return nil
         }
         for serverPartner in serverSidePartners.values {
             if partner.name.lowercased() == serverPartner.name.lowercased() {
-                return Partner(uuid: serverPartner.uuid,
+                return F4SPartner(uuid: serverPartner.uuid,
                                sortingIndex: serverPartner.sortingIndex,
-                               acronym: serverPartner.acronym,
                                name: serverPartner.name,
                                description: serverPartner.description,
                                imageName: serverPartner.imageName)
@@ -69,56 +72,52 @@ public class PartnersModel {
         return nil
     }
     
-    public func getPartnersFromServer(completed: ((Bool) -> Void)? = nil) {
-        PartnerService.sharedInstance.getAllPartners { [weak self] (success, partnerResult) in
+    public func getPartnersFromServer(completed: ((F4SNetworkResult<[F4SPartner]>) -> Void)? = nil) {
+        partnerService.getPartners { [weak self] (result) in
             guard let strongSelf = self else { return }
-            guard success == true else { return }
             strongSelf.serversidePartners = [:]
-            switch partnerResult {
-            case .value(let boxedPartners):
-                let unboxedPartners = boxedPartners.value
-                for partner in unboxedPartners {
+            switch result {
+            case .success(let serverPartners):
+                for partner in serverPartners {
                     strongSelf.serversidePartners![partner.name] = partner
                 }
                 strongSelf.isReady = true
-                completed?(true)
-            case .error:
-                completed?(false)
-            case .deffinedError:
-                completed?(false)
+                completed?(result)
+            case .error(_):
+                completed?(result)
             }
         }
     }
     
     private func getHardCodedPartners() {
-        let parent = Partner(uuid: "2c4a2c39-eac7-4573-aa14-51c17810e7a1", name: "Parent (includes guardian)")
-        let school = Partner(uuid: "96638617-13df-489e-bb10-e02a3dc3391b", name: "My School")
-        let friend = Partner(uuid: "1c72eb94-538c-4a39-b0db-20a9f8269d35", name: "My Friend")
-        var nominet = Partner(uuid: "13639d44-5111-45c4-ac21-014bedac20da", name: "Nominet Trust")
+        let parent = F4SPartner(uuid: "2c4a2c39-eac7-4573-aa14-51c17810e7a1", name: "Parent (includes guardian)")
+        let school = F4SPartner(uuid: "96638617-13df-489e-bb10-e02a3dc3391b", name: "My School")
+        let friend = F4SPartner(uuid: "1c72eb94-538c-4a39-b0db-20a9f8269d35", name: "My Friend")
+        var nominet = F4SPartner(uuid: "13639d44-5111-45c4-ac21-014bedac20da", name: "Nominet Trust")
         nominet.imageName = "partnerLogoNominet"
         
         addOrReplacePartner(nominet)
         addOrReplacePartner(parent)
         addOrReplacePartner(school)
         addOrReplacePartner(friend)
-        addOrReplacePartner(Partner.partnerProvidedLater)
+        addOrReplacePartner(F4SPartner.partnerProvidedLater)
     }
     
     /// Adds the specified partner to the local model if it exists in the model
-    private func addOrReplacePartner(_ partner: Partner) {
+    private func addOrReplacePartner(_ partner: F4SPartner) {
         removePartner(partner)
         addPartner(partner)
     }
     
     /// Remove the specified partner from the local model if it exists in the model
-    private func removePartner(_ partner: Partner) {
+    private func removePartner(_ partner: F4SPartner) {
         guard let existingPartner = partners[partner.uuid] else { return }
         partners[existingPartner.uuid] = nil
         let indexPath = indexPathFor(existingPartner)!
         partnersArray.remove(at: indexPath.row)
     }
     
-    private func addPartner(_ partner: Partner) {
+    private func addPartner(_ partner: F4SPartner) {
         partners[partner.uuid] = partner
         partnersArray.append(partner)
         partnersArray.sort { (p1, p2) -> Bool in
@@ -139,12 +138,12 @@ public class PartnersModel {
     }
     
     /// Returns the parter with the specified index path
-    func partnerForIndexPath(_ indexPath: IndexPath) -> Partner {
+    func partnerForIndexPath(_ indexPath: IndexPath) -> F4SPartner {
         return partnersArray[indexPath.row]
     }
     
     /// Returns the indexpath for the specified partner if the specified partner exists in the model, otherwise returns nil
-    func indexPathFor(_ partner: Partner) -> IndexPath? {
+    func indexPathFor(_ partner: F4SPartner) -> IndexPath? {
         for (row,p) in partnersArray.enumerated() {
             if p.uuid == partner.uuid {
                 return IndexPath(row: row, section: 0)
@@ -154,7 +153,7 @@ public class PartnersModel {
     }
     
     /// Returns the partner with the specified id, if such a partner exists.
-    func partnerForUuid(_ uuid:F4SUUID) -> Partner? {
+    func partnerForUuid(_ uuid:F4SUUID) -> F4SPartner? {
         return self.partners[uuid]
     }
     
@@ -170,7 +169,7 @@ public class PartnersModel {
     }
     
     /// Gets and sets the currently selected partner
-    public var selectedPartner: Partner? {
+    public var selectedPartner: F4SPartner? {
         get {
             guard let selectedPartnerUUID = selectedPartnerUUID else { return nil }
             return partnerForUuid(selectedPartnerUUID)

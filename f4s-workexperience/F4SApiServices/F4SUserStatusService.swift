@@ -35,13 +35,11 @@ public class F4SUserStatusService : F4SDataTaskService {
     
     public static let shared: F4SUserStatusService = F4SUserStatusService()
     
-    public typealias SuccessType = F4SUserStatus
-    
     public var userStatus: F4SUserStatus?
     
     public init() {
         let apiName = "user/status"
-        super.init(baseURLString: Config.BASE_URL, apiName: apiName, objectType: SuccessType.self)
+        super.init(baseURLString: Config.BASE_URL, apiName: apiName)
     }
     
     public func beginStatusUpdate() {
@@ -73,6 +71,6 @@ public class F4SUserStatusService : F4SDataTaskService {
 // MARK:- F4SDocumentServiceProtocol conformance
 extension F4SUserStatusService : F4SUserStatusServiceProtocol {
     public func getUserStatus(completion: @escaping (F4SNetworkResult<F4SUserStatus>) -> ()) {
-        super.get(attempting: "Get status for current user", completion: completion)
+        super.beginGetJson(attempting: "Get status for current user", completion: completion)
     }
 }

@@ -13,8 +13,13 @@ class ContentViewController: UIViewController {
 
     @IBOutlet weak var webView: UIWebView!
 
-    var contentType: ContentType?
+    var contentType: F4SContentType?
     var url: String?
+    
+    lazy var contentService: F4SContentServiceProtocol = {
+        let service = F4SContentService()
+        return service
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,10 +30,6 @@ class ContentViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .default
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
 }
 
@@ -84,31 +85,19 @@ extension ContentViewController {
             }
         }
         MessageHandler.sharedInstance.showLightLoadingOverlay(self.webView)
-        ContentService.sharedInstance.getContent {
-            [weak self]
-            _, result in
-            guard let strongSelf = self else {
-                return
-            }
-            switch result
-            {
-            case let .value(boxedValue):
-                DispatchQueue.main.async {
-                    if let index = boxedValue.value.index(where: { $0.slug == strongSelf.contentType }) {
-                        if let contentUrl = boxedValue.value[index].url {
-                            strongSelf.loadURL(url: contentUrl)
-                        }
-                    }
+        contentService.getContent { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            DispatchQueue.main.async {
+                guard let contentType = strongSelf.contentType else { return }
+                switch result {
+                case .error(let error):
+                    MessageHandler.sharedInstance.hideLoadingOverlay()
+                    MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
+                case .success(let contentDescriptors):
+                    guard let index = contentDescriptors.index(where: { (descriptor) -> Bool in descriptor.slug == contentType }) else { return }
+                    guard let contentUrl = contentDescriptors[index].url else { return }
+                    strongSelf.loadURL(url: contentUrl)
                 }
-                break
-            case let .error(error):
-                MessageHandler.sharedInstance.hideLoadingOverlay()
-                MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
-                break
-            case let .deffinedError(error):
-                MessageHandler.sharedInstance.hideLoadingOverlay()
-                MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
-                break
             }
         }
     }

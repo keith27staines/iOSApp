@@ -11,18 +11,21 @@ import UIKit
 
 
 public enum F4SActionValidatorError : Error {
-    case argumentMissing
+    case missingActionType
+    case missingArgument
 }
 
 public struct F4SActionValidator {
     
     public static func validate(action: F4SAction) throws {
-        
-        switch action.actionType {
+        guard let actionType = action.actionType else {
+            throw F4SActionValidatorError.missingActionType
+        }
+        switch actionType {
         case .uploadDocuments:
             guard let _ = action.argument(name: .placementUuid),
                 let _ = action.argument(name: .documentType) else {
-                throw F4SActionValidatorError.argumentMissing
+                throw F4SActionValidatorError.missingArgument
             }
         }
     }

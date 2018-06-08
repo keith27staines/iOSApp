@@ -11,7 +11,7 @@ import UIKit
 class PartnerSelectionViewController: UIViewController {
 
     var isTableDropped: Bool = false
-    var selectedPartner: Partner? = nil
+    var selectedPartner: F4SPartner? = nil
     
     @IBOutlet weak var instructionText: UILabel!
     
@@ -34,9 +34,7 @@ class PartnerSelectionViewController: UIViewController {
     override func viewDidLoad() {
         tableView.dataSource = self
         tableView.delegate = self
-        partnersModel.getPartnersFromServer { [weak self] _ in
-            self?.tableView.reloadData()
-        }
+        loadPartersFromServer()
         tableHeightConstraint.constant = 0.0
         isTableDropped = false
         self.referrerTextBox.text = nil
@@ -46,13 +44,40 @@ class PartnerSelectionViewController: UIViewController {
         self.applyStyle()
     }
     
+    func loadPartersFromServer() {
+        partnersModel.getPartnersFromServer { [weak self] result in
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+                switch result {
+                case .error(_):
+                    self?.showNeedConnectionAlert()
+                case .success(_):
+                    break
+                }
+            }
+        }
+    }
+    
+    func showNeedConnectionAlert() {
+        let title = NSLocalizedString("Workfinder needs an internet connection", comment: "")
+        let message = NSLocalizedString("In order for us to set things up for you, please ensure that you have a good internet connection.", comment: "")
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let retryAction = UIAlertAction(
+            title: NSLocalizedString("Retry", comment: ""),
+            style: .default) { [weak self] (_) in
+            self?.loadPartersFromServer()
+        }
+        alert.addAction(retryAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func applyStyle() {
         F4SButtonStyler.apply(style: .primary, button: self.doneButton)
         F4SBackgroundViewStyler.apply(style: .standardPageBackground, backgroundView: self.view)
     }
     
-    lazy var partnersModel: PartnersModel = {
-        let model = PartnersModel.sharedInstance
+    lazy var partnersModel: F4SPartnersModel = {
+        let model = F4SPartnersModel.sharedInstance
         return model
     }()
 }

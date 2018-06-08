@@ -69,7 +69,6 @@
 		405974061DFD44670002DB3A /* ExtraInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 405974041DFD44660002DB3A /* ExtraInfo.storyboard */; };
 		405974081DFD449C0002DB3A /* ExtraInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405974071DFD449C0002DB3A /* ExtraInfoViewController.swift */; };
 		4059740A1E00115C0002DB3A /* NextResponderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405974091E00115B0002DB3A /* NextResponderTextField.swift */; };
-		4059740C1E014E760002DB3A /* VoucherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4059740B1E014E760002DB3A /* VoucherService.swift */; };
 		40A28CB21E1D1D200077D490 /* TimelineEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A28CB11E1D1D200077D490 /* TimelineEntryTableViewCell.swift */; };
 		40A28CB71E1F96A60077D490 /* RatePlacement.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40A28CB51E1F96A60077D490 /* RatePlacement.storyboard */; };
 		40A28CB91E1F96C20077D490 /* RatePlacementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A28CB81E1F96C20077D490 /* RatePlacementViewController.swift */; };
@@ -136,7 +135,6 @@
 		40E78EA01DD5E208000A3776 /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E9F1DD5E208000A3776 /* LocationHelper.swift */; };
 		73E8696846461A62EA7C1A2F /* Pods_f4s_workexperienceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 407A5D7DED3055034D7EAC15 /* Pods_f4s_workexperienceTests.framework */; };
 		C9C7302B49E1B7EF625802B5 /* Pods_f4s_workexperience.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DBDC6E5F710813F9107483D /* Pods_f4s_workexperience.framework */; };
-		D51EE9391DFAAA84008A8A4F /* ContentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51EE9381DFAAA84008A8A4F /* ContentService.swift */; };
 		D54E0FFD1E044B0400A51560 /* InfoWindowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D54E0FFB1E044B0400A51560 /* InfoWindowView.xib */; };
 		D54E0FFF1E044B1800A51560 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54E0FFE1E044B1800A51560 /* ContentViewController.swift */; };
 		D54E10021E044B6B00A51560 /* Content.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D54E10001E044B6B00A51560 /* Content.storyboard */; };
@@ -152,8 +150,8 @@
 		FC4336CA202DB953001D0569 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4336C9202DB953001D0569 /* StringExtensions.swift */; };
 		FC4336CC202DB999001D0569 /* F4SStringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4336CB202DB999001D0569 /* F4SStringExtensionTests.swift */; };
 		FC4BB6031FA20EF700173864 /* PartnerSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BB6021FA20EF700173864 /* PartnerSelectionViewController.swift */; };
-		FC4BB6051FA20F4100173864 /* Partner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BB6041FA20F4100173864 /* Partner.swift */; };
-		FC4BB6071FA20F5100173864 /* PartnerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BB6061FA20F5100173864 /* PartnerModel.swift */; };
+		FC4BB6051FA20F4100173864 /* F4SPartner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BB6041FA20F4100173864 /* F4SPartner.swift */; };
+		FC4BB6071FA20F5100173864 /* F4SPartnersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BB6061FA20F5100173864 /* F4SPartnersModel.swift */; };
 		FC4BB6091FA21BA400173864 /* SelectPartner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC4BB6081FA21BA400173864 /* SelectPartner.storyboard */; };
 		FC4C5F2720B2BDE9001FA83C /* DocumentUploadBLRequest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC4C5F2620B2BDE8001FA83C /* DocumentUploadBLRequest.storyboard */; };
 		FC4C5F2A20B2D7CD001FA83C /* F4SUploadSpecifiedDocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C5F2920B2D7CD001FA83C /* F4SUploadSpecifiedDocumentsViewController.swift */; };
@@ -190,7 +188,9 @@
 		FCA53B971FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */; };
 		FCA6D2941FA741590037962B /* F4SStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6D2931FA741590037962B /* F4SStyle.swift */; };
 		FCA6D2961FA75DE40037962B /* Styler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6D2951FA75DE40037962B /* Styler.swift */; };
-		FCA6D2B61FA88CE10037962B /* PartnerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6D2B51FA88CE00037962B /* PartnerService.swift */; };
+		FCA6D2B61FA88CE10037962B /* F4SPartnerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6D2B51FA88CE00037962B /* F4SPartnerService.swift */; };
+		FCACBF4420C7EB9F00EABAE8 /* F4SContentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCACBF4320C7EB9F00EABAE8 /* F4SContentService.swift */; };
+		FCACBF4620C8085900EABAE8 /* F4SVoucherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */; };
 		FCB16481209765BB0045B9CA /* F4SRequestCompanyDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB16480209765BB0045B9CA /* F4SRequestCompanyDocumentViewController.swift */; };
 		FCB1648320986E810045B9CA /* F4SRequestCompanyDocumentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB1648220986E810045B9CA /* F4SRequestCompanyDocumentTableViewCell.swift */; };
 		FCB46F00204E7DCC00F0779F /* F4SDebugModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46EFF204E7DCC00F0779F /* F4SDebugModel.swift */; };
@@ -353,7 +353,6 @@
 		405974051DFD44660002DB3A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ExtraInfo.storyboard; sourceTree = "<group>"; };
 		405974071DFD449C0002DB3A /* ExtraInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtraInfoViewController.swift; sourceTree = "<group>"; };
 		405974091E00115B0002DB3A /* NextResponderTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextResponderTextField.swift; sourceTree = "<group>"; };
-		4059740B1E014E760002DB3A /* VoucherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoucherService.swift; sourceTree = "<group>"; };
 		407A5D7DED3055034D7EAC15 /* Pods_f4s_workexperienceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_f4s_workexperienceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		40A28CB11E1D1D200077D490 /* TimelineEntryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineEntryTableViewCell.swift; sourceTree = "<group>"; };
 		40A28CB61E1F96A60077D490 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/RatePlacement.storyboard; sourceTree = "<group>"; };
@@ -456,7 +455,6 @@
 		A8C2B2FDB72FFFD854511B24 /* Pods-f4s-workexperienceTests.debugf4slive.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperienceTests.debugf4slive.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperienceTests/Pods-f4s-workexperienceTests.debugf4slive.xcconfig"; sourceTree = "<group>"; };
 		C244124FAD6DA2320378A05F /* Pods-f4s-workexperience.debugf4s.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperience.debugf4s.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperience/Pods-f4s-workexperience.debugf4s.xcconfig"; sourceTree = "<group>"; };
 		D01AFAF1CC1AF1F3203880BF /* Pods-f4s-workexperienceTests.releasef4s.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperienceTests.releasef4s.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperienceTests/Pods-f4s-workexperienceTests.releasef4s.xcconfig"; sourceTree = "<group>"; };
-		D51EE9381DFAAA84008A8A4F /* ContentService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentService.swift; sourceTree = "<group>"; };
 		D54E0FFC1E044B0400A51560 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/InfoWindowView.xib; sourceTree = "<group>"; };
 		D54E0FFE1E044B1800A51560 /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentViewController.swift; path = "f4s-workexperience/ContentViewController.swift"; sourceTree = "<group>"; };
 		D54E10011E044B6B00A51560 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "f4s-workexperience/Base.lproj/Content.storyboard"; sourceTree = "<group>"; };
@@ -472,8 +470,8 @@
 		FC4336C9202DB953001D0569 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		FC4336CB202DB999001D0569 /* F4SStringExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SStringExtensionTests.swift; sourceTree = "<group>"; };
 		FC4BB6021FA20EF700173864 /* PartnerSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerSelectionViewController.swift; sourceTree = "<group>"; };
-		FC4BB6041FA20F4100173864 /* Partner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Partner.swift; sourceTree = "<group>"; };
-		FC4BB6061FA20F5100173864 /* PartnerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerModel.swift; sourceTree = "<group>"; };
+		FC4BB6041FA20F4100173864 /* F4SPartner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPartner.swift; sourceTree = "<group>"; };
+		FC4BB6061FA20F5100173864 /* F4SPartnersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPartnersModel.swift; sourceTree = "<group>"; };
 		FC4BB6081FA21BA400173864 /* SelectPartner.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectPartner.storyboard; sourceTree = "<group>"; };
 		FC4C5F2620B2BDE8001FA83C /* DocumentUploadBLRequest.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DocumentUploadBLRequest.storyboard; sourceTree = "<group>"; };
 		FC4C5F2920B2D7CD001FA83C /* F4SUploadSpecifiedDocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUploadSpecifiedDocumentsViewController.swift; sourceTree = "<group>"; };
@@ -511,7 +509,9 @@
 		FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = F4SForceAppUpdateViewController.xib; sourceTree = "<group>"; };
 		FCA6D2931FA741590037962B /* F4SStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SStyle.swift; sourceTree = "<group>"; };
 		FCA6D2951FA75DE40037962B /* Styler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styler.swift; sourceTree = "<group>"; };
-		FCA6D2B51FA88CE00037962B /* PartnerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerService.swift; sourceTree = "<group>"; };
+		FCA6D2B51FA88CE00037962B /* F4SPartnerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPartnerService.swift; sourceTree = "<group>"; };
+		FCACBF4320C7EB9F00EABAE8 /* F4SContentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SContentService.swift; sourceTree = "<group>"; };
+		FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SVoucherService.swift; sourceTree = "<group>"; };
 		FCB16480209765BB0045B9CA /* F4SRequestCompanyDocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRequestCompanyDocumentViewController.swift; sourceTree = "<group>"; };
 		FCB1648220986E810045B9CA /* F4SRequestCompanyDocumentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRequestCompanyDocumentTableViewCell.swift; sourceTree = "<group>"; };
 		FCB46EFF204E7DCC00F0779F /* F4SDebugModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDebugModel.swift; sourceTree = "<group>"; };
@@ -628,6 +628,7 @@
 				FC860D81209C37F2007945E6 /* MessageDispatcher.swift */,
 				FC85FA8120A3436600059EFB /* F4SMessageServices.swift */,
 				FCFF609720A424DE00D69A48 /* F4SMessageModel.swift */,
+				FCA333A420BEA938002AA790 /* F4SMessagesModel.swift */,
 			);
 			name = Message;
 			sourceTree = "<group>";
@@ -900,22 +901,21 @@
 		40E78E4D1DD3289B000A3776 /* Workflow */ = {
 			isa = PBXGroup;
 			children = (
-				D51EE9381DFAAA84008A8A4F /* ContentService.swift */,
+				40E78E5D1DD3297D000A3776 /* DeserializationManager.swift */,
+				204203EF1E4B1E3D007C7409 /* ShortlistService.swift */,
+				2037B0B71DEC8A2400A9DE3E /* TemplateService.swift */,
+				FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */,
+				FCACBF4320C7EB9F00EABAE8 /* F4SContentService.swift */,
 				20FEBDD91DE5AD3400EBDCBF /* ImageService.swift */,
 				40E78E5C1DD3297D000A3776 /* ApiBaseService.swift */,
-				40E78E5D1DD3297D000A3776 /* DeserializationManager.swift */,
 				205EB2101DDB551800034424 /* DatabaseService.swift */,
 				20B127DE1DD99E5700CE3F1F /* UserService.swift */,
 				2037B0A01DE84EEF00A9DE3E /* PlacementService.swift */,
 				2037B0A81DEC3D3400A9DE3E /* InterestDBOperations.swift */,
 				2037B0AE1DEC592900A9DE3E /* PlacementDBOperations.swift */,
-				2037B0B71DEC8A2400A9DE3E /* TemplateService.swift */,
 				204C89581DF5A54600D8493A /* TemplateChoiceDBOperations.swift */,
-				4059740B1E014E760002DB3A /* VoucherService.swift */,
 				40C6DDF51E03F93C000F8806 /* UserInfoDBOperations.swift */,
 				204203ED1E4B16D7007C7409 /* ShortlistDBOperations.swift */,
-				204203EF1E4B1E3D007C7409 /* ShortlistService.swift */,
-				FCA6D2B51FA88CE00037962B /* PartnerService.swift */,
 			);
 			name = Workflow;
 			sourceTree = "<group>";
@@ -1258,11 +1258,9 @@
 		FC4BB6011FA20E6A00173864 /* Partner selection */ = {
 			isa = PBXGroup;
 			children = (
-				FC4BB6021FA20EF700173864 /* PartnerSelectionViewController.swift */,
-				FC4BB6041FA20F4100173864 /* Partner.swift */,
-				FC4BB6061FA20F5100173864 /* PartnerModel.swift */,
 				FC4BB6081FA21BA400173864 /* SelectPartner.storyboard */,
-				FC32E3D8200F322800D7C36A /* PartnerModelTests.swift */,
+				FC4BB6021FA20EF700173864 /* PartnerSelectionViewController.swift */,
+				FCACBF4220C7E95700EABAE8 /* Models and services */,
 			);
 			name = "Partner selection";
 			sourceTree = "<group>";
@@ -1275,7 +1273,6 @@
 				FC4C5F2B20B404CF001FA83C /* F4SUploadTableViewController.swift */,
 				FC86A5FA20B44E6B002BAD74 /* F4SUrlDescriptorTableViewCell.swift */,
 				FC86A5FC20B6E93B002BAD74 /* F4SUploadRequestedDocumentsTableViewModel.swift */,
-				FCA333A420BEA938002AA790 /* F4SMessagesModel.swift */,
 			);
 			path = "Upload requested documents";
 			sourceTree = "<group>";
@@ -1342,6 +1339,17 @@
 				FCA6D2951FA75DE40037962B /* Styler.swift */,
 			);
 			name = "Branding and styling";
+			sourceTree = "<group>";
+		};
+		FCACBF4220C7E95700EABAE8 /* Models and services */ = {
+			isa = PBXGroup;
+			children = (
+				FCA6D2B51FA88CE00037962B /* F4SPartnerService.swift */,
+				FC4BB6041FA20F4100173864 /* F4SPartner.swift */,
+				FC4BB6061FA20F5100173864 /* F4SPartnersModel.swift */,
+				FC32E3D8200F322800D7C36A /* PartnerModelTests.swift */,
+			);
+			name = "Models and services";
 			sourceTree = "<group>";
 		};
 		FCB6B8B82074C51B0042C725 /* Calendar and diary */ = {
@@ -1787,7 +1795,7 @@
 				FCC753EE1F80F26200E9ECD6 /* MapModel.swift in Sources */,
 				40C1A5191DDF5ACE000F80AA /* GMUClusterManager.m in Sources */,
 				204203F01E4B1E3D007C7409 /* ShortlistService.swift in Sources */,
-				FC4BB6071FA20F5100173864 /* PartnerModel.swift in Sources */,
+				FC4BB6071FA20F5100173864 /* F4SPartnersModel.swift in Sources */,
 				20D51BE41E27710C003A8358 /* NotificationHelper.swift in Sources */,
 				40C1A51B1DDF5ACE000F80AA /* GMUDefaultClusterRenderer.m in Sources */,
 				2037B0A31DEC2DB600A9DE3E /* InterestDB.swift in Sources */,
@@ -1823,20 +1831,18 @@
 				204C89791DF5F0B200D8493A /* ChooseAttributesViewController.swift in Sources */,
 				FCB6B8ED2074C59C0042C725 /* F4SCalendarContainerViewController.swift in Sources */,
 				40C1A5201DDF5ACE000F80AA /* GMUWrappingDictionaryKey.m in Sources */,
-				4059740C1E014E760002DB3A /* VoucherService.swift in Sources */,
 				40A28CB91E1F96C20077D490 /* RatePlacementViewController.swift in Sources */,
 				40A5CF401DED81F7000007AB /* CustomViewFlowLayout.swift in Sources */,
 				FCB6B8CE2074C58F0042C725 /* F4SSelectDayTableViewCell.swift in Sources */,
 				40E78E771DD32BE7000A3776 /* DrawerBarButtonItem.swift in Sources */,
 				40E78E9A1DD392B5000A3776 /* OnboardingViewController.swift in Sources */,
-				D51EE9391DFAAA84008A8A4F /* ContentService.swift in Sources */,
 				FCA53B961FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift in Sources */,
 				FCB6B8CC2074C58F0042C725 /* F4SDisplayInformationViewController.swift in Sources */,
 				40E78E9C1DD5DB6D000A3776 /* AutoCompleteTextField.swift in Sources */,
 				40C1A51D1DDF5ACE000F80AA /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				40C1A51F1DDF5ACE000F80AA /* GMUStaticCluster.m in Sources */,
 				40E78E601DD3297D000A3776 /* DeserializationManager.swift in Sources */,
-				FCA6D2B61FA88CE10037962B /* PartnerService.swift in Sources */,
+				FCA6D2B61FA88CE10037962B /* F4SPartnerService.swift in Sources */,
 				204203EE1E4B16D7007C7409 /* ShortlistDBOperations.swift in Sources */,
 				FC4C5F2A20B2D7CD001FA83C /* F4SUploadSpecifiedDocumentsViewController.swift in Sources */,
 				204C89731DF5F0A100D8493A /* EditCoverLetterTableViewCell.swift in Sources */,
@@ -1870,7 +1876,7 @@
 				FCB6B8E92074C59C0042C725 /* F4SCalendarDay.swift in Sources */,
 				FC99F3D72000BE4900E3AC5A /* F4SService.swift in Sources */,
 				FCA6D2941FA741590037962B /* F4SStyle.swift in Sources */,
-				FC4BB6051FA20F4100173864 /* Partner.swift in Sources */,
+				FC4BB6051FA20F4100173864 /* F4SPartner.swift in Sources */,
 				FCD3486520038C3100DC1316 /* LocalizedStrings.swift in Sources */,
 				FCCD6AE91FBB44CF0088D7C7 /* PopupCompanyListViewController.swift in Sources */,
 				20B127DF1DD99E5700CE3F1F /* UserService.swift in Sources */,
@@ -1881,6 +1887,7 @@
 				FCD388E7208E27E500FC73C5 /* F4SCompanyDocumentService.swift in Sources */,
 				204C896D1DF5F08500D8493A /* CompanyOtherTableViewCell.swift in Sources */,
 				FCB6B8EC2074C59C0042C725 /* F4SAvailabilitySequence.swift in Sources */,
+				FCACBF4420C7EB9F00EABAE8 /* F4SContentService.swift in Sources */,
 				FCD388E5208DEFE100FC73C5 /* F4SCompanyDocumentsModel.swift in Sources */,
 				FCB46F0C20518EE900F0779F /* F4SFeatureSwitchService.swift in Sources */,
 				204C89751DF5F0A100D8493A /* EditFooterView.swift in Sources */,
@@ -1918,6 +1925,7 @@
 				FC67E60D207B73CE006F07FE /* F4SCalendarServiceJson.swift in Sources */,
 				FC86A5FB20B44E6B002BAD74 /* F4SUrlDescriptorTableViewCell.swift in Sources */,
 				204C896C1DF5F08500D8493A /* CompanyDetailsViewController.swift in Sources */,
+				FCACBF4620C8085900EABAE8 /* F4SVoucherService.swift in Sources */,
 				40E78E6F1DD32BD4000A3776 /* CustomMenuViewController.swift in Sources */,
 				40E78E7F1DD32BF4000A3776 /* SideDrawerSectionHeaderView.swift in Sources */,
 				40E78E831DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift in Sources */,

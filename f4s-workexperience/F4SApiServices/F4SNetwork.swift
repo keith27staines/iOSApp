@@ -30,8 +30,9 @@ public enum F4SNetworkDataErrorType {
     case emptyData
     case undecodableData(Data)
     case unknownError(Any?)
+    case genericErrorWithRetry
     
-    public func dataError(attempting: String, logError: Bool = true) -> F4SNetworkError {
+    public func error(attempting: String, logError: Bool = true) -> F4SNetworkError {
         let nsError: NSError
         let code: Int
         var userInfo: [String : Any] = [:]
@@ -45,6 +46,11 @@ public enum F4SNetworkDataErrorType {
         case .unknownError(let info):
             code = -1003
             userInfo["info"] = info
+        case .genericErrorWithRetry:
+            code = -1004
+            let description = NSLocalizedString("Unknown error", comment: "")
+            return F4SNetworkError(localizedDescription: description, attempting: attempting, retry: true)
+            
         }
         nsError = NSError(domain: F4SNetworkErrorDomainType.client.rawValue, code: code, userInfo: userInfo)
         return F4SNetworkError(error: nsError, attempting: attempting, logError: logError)
@@ -81,7 +87,7 @@ public struct F4SNetworkError : Error {
     
     public private (set) var attempting: String?
     
-    public private (set) var retry: Bool = false
+    public fileprivate (set) var retry: Bool = false
     
     /// Initializes a new instance
     /// - parameter error: the immediate error this instance will wrap]
@@ -100,6 +106,15 @@ public struct F4SNetworkError : Error {
         }
         if logError { writeToLog() }
     }
+    
+    /// Initialize a generic error with optional retry 
+    public init(localizedDescription: String, attempting: String, retry: Bool, logError: Bool = true) {
+        let nsError = NSError(domain: "com.f4s", code: 0, userInfo: nil)
+        self.init(error: nsError, attempting: attempting, logError: logError)
+        self.retry = retry
+    }
+    
+    
     
     /// Writes a description to the debug log (currently the Xcode console)
     private func writeToLog() {

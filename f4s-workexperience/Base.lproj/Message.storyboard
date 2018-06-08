@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sWr-Ud-We1">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sWr-Ud-We1">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,24 +15,24 @@
                         <viewControllerLayoutGuide type="bottom" id="oVP-so-bpy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Grz-P4-uti">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="252-qr-zlJ">
-                                <rect key="frame" x="0.0" y="66" width="375" height="517"/>
+                                <rect key="frame" x="0.0" y="66" width="600" height="450"/>
                                 <connections>
                                     <segue destination="ULJ-o2-xqB" kind="embed" identifier="toMessage" id="eUm-5R-VK8"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aFI-gC-t8a">
-                                <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
+                                <rect key="frame" x="0.0" y="600" width="600" height="0.0"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="Pzj-va-0tJ"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dzi-VS-viS">
-                                <rect key="frame" x="16" y="595" width="343" height="60"/>
+                                <rect key="frame" x="20" y="528" width="560" height="60"/>
                                 <color key="backgroundColor" red="0.26411449910000001" green="0.155295819" blue="0.47808134559999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="s1a-Vi-YO1"/>
@@ -49,7 +45,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="boZ-j2-BHK">
-                                <rect key="frame" x="16" y="40" width="37.5" height="18"/>
+                                <rect key="frame" x="20" y="40" width="37.5" height="18"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -78,7 +74,7 @@
                         <outlet property="answersView" destination="aFI-gC-t8a" id="1K2-Bb-MCD"/>
                         <outlet property="containerView" destination="252-qr-zlJ" id="U0a-XJ-wFD"/>
                         <outlet property="subjectLabel" destination="boZ-j2-BHK" id="WZj-EK-XD7"/>
-                        <segue destination="D0p-eC-Ds8" kind="show" identifier="uploadDocumentsBLRequest" id="ev5-9E-l0P"/>
+                        <segue destination="D0p-eC-Ds8" kind="show" identifier="upload_documents" id="ev5-9E-l0P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CUt-ux-7Oe" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -24,18 +24,18 @@ import XCTest
 
 class PartnerModelTests: XCTestCase {
     
-    var model: PartnersModel!
+    var model: F4SPartnersModel!
     
-    func createFakeServerSidePartners() -> [String:Partner] {
-        var partners = [F4SUUID: Partner]()
-        partners["aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"] = Partner(uuid: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", name: "Guarenteed To Exist")
-        partners["bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"] = Partner(uuid: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb", name: "Another partner")
-        partners["cccccccc-cccc-cccc-cccc-cccccccccccc"] = Partner(uuid: "cccccccc-cccc-cccc-cccc-cccccccccccc", name: "Yet another partner")
+    func createFakeServerSidePartners() -> [String:F4SPartner] {
+        var partners = [F4SUUID: F4SPartner]()
+        partners["aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"] = F4SPartner(uuid: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", name: "Guarenteed To Exist")
+        partners["bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"] = F4SPartner(uuid: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb", name: "Another partner")
+        partners["cccccccc-cccc-cccc-cccc-cccccccccccc"] = F4SPartner(uuid: "cccccccc-cccc-cccc-cccc-cccccccccccc", name: "Yet another partner")
         return partners
     }
     
     override func setUp() {
-        model = PartnersModel()
+        model = F4SPartnersModel()
         model.serversidePartners = createFakeServerSidePartners()
     }
     
@@ -44,18 +44,18 @@ class PartnerModelTests: XCTestCase {
     }
     
     func testPartnerProvidedLater() {
-        let placeholder = Partner.partnerProvidedLater
-        XCTAssertTrue(placeholder.isPlaceholder)
+        let placeholder = F4SPartner.partnerProvidedLater
+        XCTAssertEqual(placeholder.isPlaceholder,true)
     }
     
     func testUpdateUUIDFromServerUUID() {
-        let partnerWithBadUuid = Partner(uuid: "x", name: "Guarenteed To Exist")
+        let partnerWithBadUuid = F4SPartner(uuid: "x", name: "Guarenteed To Exist")
         let correctedPartner = model.partnerByUpdatingUUID(partner: partnerWithBadUuid)
         XCTAssertEqual("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", correctedPartner?.uuid)
     }
     
     func testUUIDCorrectionIsCaseInsensitive() {
-        let partnerWithBadUuid = Partner(uuid: "x", name: "guarenteed To Exist")
+        let partnerWithBadUuid = F4SPartner(uuid: "x", name: "guarenteed To Exist")
         let correctedPartner = model.partnerByUpdatingUUID(partner: partnerWithBadUuid)
         XCTAssertEqual("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", correctedPartner?.uuid)
     }

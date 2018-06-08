@@ -28,21 +28,68 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var deviceToken: String?
     
-    func continueIfVersionCheckPasses(application: UIApplication, continueWith: ((UIApplication) -> Void)? = nil) {
-        VersioningService.sharedInstance.getIsVersionValid { [weak self] (_, result) in
-            switch result {
-            case .value(let boxedBool):
-                if boxedBool.value {
-                   continueWith?(application)
-                } else {
-                    let rootVC = self?.window?.rootViewController
-                    let forceUpdateVC = F4SForceAppUpdateViewController()
-                    rootVC?.present(forceUpdateVC, animated: true, completion: nil)
+    func presentForceUpdate() {
+        let rootVC = self.window?.rootViewController?.topMostViewController
+        let forceUpdateVC = F4SForceAppUpdateViewController()
+        rootVC?.present(forceUpdateVC, animated: true, completion: nil)
+    }
+    
+    func presentNoNetworkMustRetry(application: UIApplication, retryOperation: @escaping (UIApplication) -> ()) {
+        let rootVC = self.window?.rootViewController?.topMostViewController
+        let alert = UIAlertController(
+            title: NSLocalizedString("No Network", comment: ""),
+            message: NSLocalizedString("Please ensure you have a good network connection while we set things up for you", comment: ""),
+            preferredStyle: .alert)
+        let retry = UIAlertAction(
+            title: NSLocalizedString("Retry", comment: ""),
+            style: .default) { (_) in
+                alert.dismiss(animated: false, completion: nil)
+                retryOperation(application)
+        }
+        alert.addAction(retry)
+        rootVC?.present(alert, animated: true, completion: nil)
+    }
+    
+    func continueIfVersionCheckPasses(application: UIApplication) {
+        let versionService: F4SWorkfinderVersioningServiceProtocol = F4SWorkfinderVersioningService()
+        versionService.getIsVersionValid { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case .error(let error):
+                    if error.retry {
+                        strongSelf.presentNoNetworkMustRetry(application: application, retryOperation: {application in
+                            strongSelf.continueIfVersionCheckPasses(application: application)
+                        })
+                        return
+                    } else {
+                        strongSelf.handleFatalError(error: error)
+                    }
+                case .success(let isValid):
+                    guard isValid else {
+                        strongSelf.presentForceUpdate()
+                        return
+                    }
+                    strongSelf.versionAuthorizedToContinue(application)
                 }
-            default:
-                continueWith?(application)
             }
         }
+    }
+
+
+    func handleFatalError(error: Error) {
+        let rootVC = self.window?.rootViewController
+        let alert = UIAlertController(
+            title: NSLocalizedString("Workfinder cannot continue", comment: ""),
+            message: NSLocalizedString("We are very sorry, this should not have happened but Workfinder has encountered an error it cannot recover from", comment: ""),
+            preferredStyle: .alert)
+        let retry = UIAlertAction(
+            title: NSLocalizedString("Close Workfinder", comment: ""),
+            style: .default) { (_) in
+                fatalError()
+        }
+        alert.addAction(retry)
+        rootVC?.present(alert, animated: true, completion: nil)
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -52,28 +99,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch (let error) {
             assertionFailure("Failed to initialize logger: \(error)")
         }
-        log.debug("\n\n\n**************")
-        log.debug("Workfinder launched in environement \(Config.ENVIRONMENT)")
+        log.debug("\n\n\n**************\nWorkfinder launched in environement \(Config.ENVIRONMENT)\n**************")
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
-        continueIfVersionCheckPasses(application: application, continueWith: versionAuthorizedToContinue)
-        F4SUserStatusService.shared.beginStatusUpdate()
+        continueIfVersionCheckPasses(application: application)
         return true
     }
     
     func versionAuthorizedToContinue(_ application: UIApplication) {
-        // create or re-register user
+        F4SUserStatusService.shared.beginStatusUpdate()
         UserService.sharedInstance.registerUser(completed: { [weak self] succeeded in
             if succeeded || UserService.sharedInstance.hasAccount() {
-                self?.onUserConfirmedToExist(application: application)
+                self?.onUserAccountConfirmedToExist(application: application)
             } else {
                 log.debug("Couldn't register user")
             }
         })
     }
     
-    func onUserConfirmedToExist(application: UIApplication) {
-       printDebugUserInfo()
+    func onUserAccountConfirmedToExist(application: UIApplication) {
+        printDebugUserInfo()
         registerApplicationForRemoteNotifications(application)
         DatabaseService.sharedInstance.getLatestDatabase()
         guard let window = window else { return }
@@ -151,7 +196,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ appliction: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        continueIfVersionCheckPasses(application: appliction, continueWith: nil)
     }
     
     

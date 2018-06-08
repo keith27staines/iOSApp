@@ -58,11 +58,12 @@ public struct F4SCannedResponse : Codable {
 
 // MARK:- F4SAction
 public struct F4SAction : Codable {
-    public var originatingMessageUuid: F4SUUID
-    public var actionType: F4SActionType
-    public var arguments: [F4SActionArgument]
+    public var originatingMessageUuid: F4SUUID?
+    public var actionType: F4SActionType?
+    public var arguments: [F4SActionArgument]?
     
     public func argument(name: F4SActionArgumentName) -> F4SActionArgument? {
+        guard let arguments = arguments else { return nil }
         return arguments.filter({ (arg) -> Bool in
             return arg.argumentName == name
         }).first

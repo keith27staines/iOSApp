@@ -29,17 +29,16 @@ public class F4SFeatureSwitchServiceFake : F4SFeatureSwitchServiceProtocol {
 }
 
 public class F4SFeatureSwitchService : F4SDataTaskService {
-    public typealias SuccessType = [F4SFeature]
     
     public init() {
         let apiName = "feature-flag"
-        super.init(baseURLString: Config.BASE_URL, apiName: apiName, objectType: SuccessType.self)
+        super.init(baseURLString: Config.BASE_URL, apiName: apiName)
     }
 }
 
 // MARK:- F4SFeatureSwitchServiceProtocol conformance
 extension F4SFeatureSwitchService : F4SFeatureSwitchServiceProtocol {
     public func getFeatureSwitches(completion: @escaping (F4SNetworkResult<[F4SFeature]>) -> ()) {
-        super.get(attempting: "Get iOS feature switches", completion: completion)
+        super.beginGetJson(attempting: "Get iOS feature switches", completion: completion)
     }
 }

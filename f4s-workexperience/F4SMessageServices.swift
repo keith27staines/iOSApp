@@ -17,26 +17,26 @@ public protocol F4SMessageServiceProtocol {
 }
 
 public class F4SMessageService : F4SDataTaskService {
-    public typealias SuccessType = F4SAction
     
     public let threadUuid: String
     
     public init(threadUuid: F4SUUID) {
         self.threadUuid = threadUuid
         let apiName = "messaging/\(threadUuid)"
-        super.init(baseURLString: Config.BASE_URL2, apiName: apiName, objectType: SuccessType.self)
+        super.init(baseURLString: Config.BASE_URL2, apiName: apiName)
     }
 }
 
 extension F4SMessageService : F4SMessageServiceProtocol {
     
     public func getMessages(completion: @escaping (F4SNetworkResult<F4SMessagesList>) -> ()) {
-        super.get(attempting: "Get messages for thread", completion: completion)
+        super.beginGetJson(attempting: "Get messages for thread", completion: completion)
     }
     
     public func sendMessage(responseUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SMessagesList>) -> Void) {
         let attempting = "Send message to thread"
-        super.send(verb: .put, objectToSend: responseUuid, attempting: attempting, completion: {
+        let sendDictionary = ["response_uuid": responseUuid]
+        super.beginSendJson(verb: .put, objectToSend: sendDictionary, attempting: attempting, completion: {
             result in
             switch result {
             case .error(let error):
@@ -46,12 +46,13 @@ extension F4SMessageService : F4SMessageServiceProtocol {
                     completion(F4SNetworkResult.success(F4SMessagesList()))
                     return
                 }
-                let decoder = JSONDecoder()
+                let decoder = self.jsonDecoder
                 do {
                     let messages = try decoder.decode(F4SMessagesList.self, from: data)
                     completion(F4SNetworkResult.success(messages))
                 } catch {
-                    completion(F4SNetworkResult.error(F4SNetworkError(error: error, attempting: attempting)))
+                    let error = F4SNetworkDataErrorType.undecodableData(data).error(attempting: attempting)
+                    completion(F4SNetworkResult.error(error))
                 }
             }
         })
@@ -66,14 +67,13 @@ public protocol F4SMessageActionServiceProtocol {
 }
 
 public class F4SMessageActionService : F4SDataTaskService {
-    public typealias SuccessType = F4SAction
     
     public let threadUuid: String
     
     public init(threadUuid: F4SUUID) {
         self.threadUuid = threadUuid
         let apiName = "messaging/\(threadUuid)/user_action"
-        super.init(baseURLString: Config.BASE_URL2, apiName: apiName, objectType: SuccessType.self)
+        super.init(baseURLString: Config.BASE_URL2, apiName: apiName)
     }
 }
 
@@ -81,7 +81,7 @@ public class F4SMessageActionService : F4SDataTaskService {
 extension F4SMessageActionService : F4SMessageActionServiceProtocol {
     
     public func getMessageAction(completion: @escaping (F4SNetworkResult<F4SAction?>) -> ()) {
-        super.get(attempting: "Get action for thread", completion: completion)
+        super.beginGetJson(attempting: "Get action for thread", completion: completion)
     }
     
 }
@@ -95,21 +95,20 @@ public protocol F4SCannedMessageResponsesServiceProtocol {
 }
 
 public class F4SCannedMessageResponsesService : F4SDataTaskService {
-    public typealias SuccessType = F4SCannedResponses
     
     public let threadUuid: String
     
     public init(threadUuid: F4SUUID) {
         self.threadUuid = threadUuid
         let apiName = "messaging/\(threadUuid)/possible_responses"
-        super.init(baseURLString: Config.BASE_URL2, apiName: apiName, objectType: SuccessType.self)
+        super.init(baseURLString: Config.BASE_URL2, apiName: apiName)
     }
 }
 
 extension F4SCannedMessageResponsesService : F4SCannedMessageResponsesServiceProtocol {
     
     public func getPermittedResponses(completion: @escaping (F4SNetworkResult<F4SCannedResponses>) -> ()) {
-        super.get(attempting: "Get message options for thread", completion: completion)
+        super.beginGetJson(attempting: "Get message options for thread", completion: completion)
     }
 }
 

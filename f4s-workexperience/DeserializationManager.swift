@@ -329,83 +329,6 @@ class DeserializationManager {
         return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
     }
 
-    func parseContent(jsonOptional: JSON) -> Result<[ContentEntity]> {
-        if let contentJsonList = jsonOptional.array {
-            var contentList: [ContentEntity] = []
-            for contentJson in contentJsonList {
-                var content: ContentEntity = ContentEntity()
-                if let title = contentJson["title"].string {
-                    content.title = title
-                }
-                if let url = contentJson["url"].string {
-                    content.url = url
-                }
-                if let slug = contentJson["slug"].string {
-                    switch slug
-                    {
-                    case ContentType.terms.rawValue:
-                        content.slug = .terms
-                        break
-                    case ContentType.faq.rawValue:
-                        content.slug = .faq
-                        break
-                    case ContentType.about.rawValue:
-                        content.slug = .about
-                        break
-                    case ContentType.voucher.rawValue:
-                        content.slug = .voucher
-                        break
-                    case ContentType.consent.rawValue:
-                        content.slug = .consent
-                        break
-                    case ContentType.about.rawValue:
-                        content.slug = .about
-                        break
-                    default:
-                        content.slug = .company
-                        break
-                    }
-
-                    contentList.append(content)
-                }
-            }
-            return .value(Box(contentList))
-        }
-        return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
-    }
-
-    func parseVoucher(jsonOptional: JSON) -> Result<String> {
-
-        if let voucherStatus = jsonOptional["status"].string {
-            return .value(Box(voucherStatus))
-        }
-
-        if let _ = jsonOptional["errors"].dictionary {
-
-            if let voucherErrors = jsonOptional["errors"]["status"].string {
-
-                if voucherErrors == Errors.VoucherCallErrors.VoucherExpired.serverErrorMessage {
-                    return .deffinedError(Errors.VoucherCallErrors.VoucherExpired)
-                }
-                if voucherErrors == Errors.VoucherCallErrors.VoucherInvalid.serverErrorMessage {
-                    return .deffinedError(Errors.VoucherCallErrors.VoucherInvalid)
-                }
-                if voucherErrors == Errors.VoucherCallErrors.VoucherWasUsed.serverErrorMessage {
-                    return .deffinedError(Errors.VoucherCallErrors.VoucherWasUsed)
-                }
-            }
-
-            if let voucherError = jsonOptional["errors"]["non_field_errors"].string {
-                if voucherError == Errors.VoucherCallErrors.VoucherNotFound.serverErrorMessage {
-                    return .deffinedError(Errors.VoucherCallErrors.VoucherNotFound)
-                }
-
-                return .deffinedError(Errors.GeneralCallErrors.GeneralError)
-            }
-        }
-        return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
-    }
-
     func parseEnablePushNotification(jsonOptional: JSON) -> Result<String> {
 
         if let notificationsStatus = jsonOptional["enabled"].bool {
@@ -421,37 +344,6 @@ class DeserializationManager {
         return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
     }
     
-    func parseBoolean(jsonOptional: JSON) -> Result<Bool> {
-        guard let boolValue = jsonOptional.bool else {
-            return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
-        }
-        return .value(Box(boolValue))
-    }
-    
-    func parsePartner(jsonOptional: JSON) -> Result<[Partner]> {
-        guard let partnerJsonList = jsonOptional.array else {
-            return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
-        }
-        var partners = [Partner]()
-        for partnerJson in partnerJsonList {
-            var partner = Partner()
-            partner.uuid = partnerJson["uuid"].string ?? ""
-            partner.name = partnerJson["name"].string ?? ""
-            partner.description = partnerJson["description"].string ?? ""
-            partner.imageUrlString = partnerJson["logo"].string ?? nil
-            partner.sortingIndex = 1
-            if partner.uuid == "15e5a0a6-02cc-4e98-8edb-c3bfc0cb8b7d" {
-                partner.sortingIndex = 0
-                if partner.imageUrlString == nil {
-                    // partner is NCS and the NCS logo url not available from the database
-                    partner.imageName = "partnerLogoNCS"
-                }
-            }
-            partners.append(partner)
-        }
-        return .value(Box(partners))
-    }
-
     func parseTimelinePlacement(jsonOptional: JSON) -> Result<[TimelinePlacement]> {
 
         if let placementsJsonList = jsonOptional.array {

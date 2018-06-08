@@ -61,7 +61,7 @@ class UserService: ApiBaseService {
         }
     }
     
-    func updateUser(user: User, putCompleted: @escaping (_ succeeded: Bool, _ msg: Result<String>) -> Void) {
+    func updateUser(user: User, putCompleted: @escaping (_ result: Result<String>) -> Void) {
         let keychain = KeychainSwift()
         var currentUserUuid: String = ""
 
@@ -85,7 +85,7 @@ class UserService: ApiBaseService {
             params["last_name"] = user.lastName
         }
 
-        let partnersModel = PartnersModel.sharedInstance
+        let partnersModel = F4SPartnersModel.sharedInstance
         if let selectedPartner = partnersModel.selectedPartner, selectedPartner.isPlaceholder == false  {
             if let partner = partnersModel.partnerByUpdatingUUID(partner: selectedPartner) {
                 let partnerDictionary = ["uuid" : partner.uuid]
@@ -102,22 +102,22 @@ class UserService: ApiBaseService {
                 switch result
                 {
                 case .error:
-                    putCompleted(false, .deffinedError(Errors.GeneralCallErrors.GeneralError))
+                    putCompleted(.deffinedError(Errors.GeneralCallErrors.GeneralError))
 
                 case let .deffinedError(error):
-                    putCompleted(false, .deffinedError(error))
+                    putCompleted(.deffinedError(error))
 
                 case let .value(boxed):
                     let userUuid = boxed.value
                     keychain.set(userUuid, forKey: UserDefaultsKeys.userUuid)
-                    putCompleted(true, .value(Box(boxed.value)))
+                    putCompleted(.value(Box(boxed.value)))
                 }
 
             case .error:
-                putCompleted(false, .deffinedError(Errors.GeneralCallErrors.GeneralError))
+                putCompleted(.deffinedError(Errors.GeneralCallErrors.GeneralError))
 
             case let .deffinedError(error):
-                putCompleted(false, .deffinedError(error))
+                putCompleted(.deffinedError(error))
             }
         }
     }
