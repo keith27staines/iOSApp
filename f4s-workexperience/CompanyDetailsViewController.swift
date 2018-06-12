@@ -11,6 +11,9 @@ import Reachability
 
 class CompanyDetailsViewController: UIViewController {
     
+    var createShortlistService: F4SCreateShortlistItemServiceProtocol? = nil
+    var removeShortlistService: F4SRemoveShortlistItemServiceProtocol? = nil
+    
     @IBOutlet weak var mapButton: UIBarButtonItem!
     @IBOutlet weak var closeButton: UIBarButtonItem!
     @IBOutlet weak var mapView: MKMapView!
@@ -119,78 +122,80 @@ extension CompanyDetailsViewController {
                 return
             }
         }
-
-        if shortlist.contains(where: { $0.companyUuid == company.uuid }) {
-            // company is shortlisted
-            // remove company from shortlist + remove locally
-            MessageHandler.sharedInstance.showLightLoadingOverlay(self.view)
-            if let indexOfShortlist = shortlist.index(where: { $0.companyUuid == company.uuid }) {
-                ShortlistService.sharedInstance.unshortlistCompany(favoriteUuid: shortlist[indexOfShortlist].uuid, deleteCompleted: {
-                    [weak self]
-                    _, result in
-                    guard let strongSelf = self else {
-                        MessageHandler.sharedInstance.hideLoadingOverlay()
-                        return
-                    }
-                    MessageHandler.sharedInstance.hideLoadingOverlay()
-                    switch result
-                    {
-                    case .value:
-                        ShortlistDBOperations.sharedInstance.removeShortlistWithId(shortlistUuid: strongSelf.shortlist[indexOfShortlist].uuid)
-                        DispatchQueue.main.async {
-                            strongSelf.setShortlistButton()
-                            strongSelf.showFavouriteView(isAddedToFavourites: false)
-                        }
-                        break
-                    case let .error(error):
-                        MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
-                        break
-                    case let .deffinedError(error):
-                        MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
-                        break
-                    }
-                })
-            }
+        
+        // remove company from shortlist if it is already there or add it if it isn't
+        if let shortlist = findShortListItemForCompany(company: company) {
+            removeCompanyFromShortlist(shortlist)
         } else {
-
-            // company isn't shortlisted
-            // shortlist company + save locally
-            
-            if shortlist.count >= AppConstants.maximumNumberOfShortlists {
-                // reached the maximum number of shortlists
-                CustomNavigationHelper.sharedInstance.presentFavouriteMaximumPopover(parentCtrl: self)
-                return
-            }
-
-            MessageHandler.sharedInstance.showLightLoadingOverlay(self.view)
-            ShortlistService.sharedInstance.shortlistCompany(companyUuid: company.uuid, postCompleted: {
-                [weak self]
-                _, result in
+            addCompanyToShortlist(company)
+        }
+    }
+    
+    func removeCompanyFromShortlist(_ shortlist: Shortlist) {
+        MessageHandler.sharedInstance.showLightLoadingOverlay(self.view)
+        removeShortlistService = removeShortlistService ?? F4SRemoveShortlistItemService(shortlistUuid: shortlist.uuid)
+        removeShortlistService?.removeShortlistItem { (result) in
+            DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else {
                     MessageHandler.sharedInstance.hideLoadingOverlay()
                     return
                 }
                 MessageHandler.sharedInstance.hideLoadingOverlay()
-                switch result
-                {
-                case let .value(boxed):
-                    var shortlist = boxed.value
-                    shortlist.companyUuid = company.uuid
-                    ShortlistDBOperations.sharedInstance.saveShortlist(shortlist: shortlist)
-                    DispatchQueue.main.async {
-                        strongSelf.setShortlistButton()
-                        strongSelf.showFavouriteView(isAddedToFavourites: true)
-                    }
-                    break
-                case let .error(error):
-                    MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
-                    break
-                case let .deffinedError(error):
-                    MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
-                    break
+                switch result {
+                case .error(let error):
+                    MessageHandler.sharedInstance.hideLoadingOverlay()
+                    MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf, cancelHandler: {
+                        
+                    }, retryHandler: {
+                        strongSelf.removeCompanyFromShortlist(shortlist)
+                    })
+                case .success(_):
+                    ShortlistDBOperations.sharedInstance.removeShortlistWithId(shortlistUuid: shortlist.uuid)
+                    strongSelf.setShortlistButton()
+                    strongSelf.showFavouriteView(isAddedToFavourites: false)
                 }
-            })
+            }
         }
+    }
+    
+    func addCompanyToShortlist(_ company: Company) {
+        if shortlist.count >= AppConstants.maximumNumberOfShortlists {
+            CustomNavigationHelper.sharedInstance.presentFavouriteMaximumPopover(parentCtrl: self)
+            return
+        }
+        
+        MessageHandler.sharedInstance.showLightLoadingOverlay(self.view)
+        createShortlistService = createShortlistService ?? F4SCreateShortlistItemService()
+        createShortlistService?.createShortlistItemForCompany(companyUuid: company.uuid) { [weak self] (result) in
+            DispatchQueue.main.async {
+                guard let strongSelf = self else {
+                    MessageHandler.sharedInstance.hideLoadingOverlay()
+                    return
+                }
+                MessageHandler.sharedInstance.hideLoadingOverlay()
+                switch result {
+                case .error(let error):
+                    MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf, cancelHandler: {
+                        
+                    }, retryHandler: {
+                        strongSelf.addCompanyToShortlist(company)
+                    })
+                case .success(let shortlistItem):
+                    let shortlistUuid = shortlistItem.uuid!
+                    let shortlistedCompany = Shortlist(companyUuid: company.uuid, uuid: shortlistUuid, date: Date())
+                    ShortlistDBOperations.sharedInstance.saveShortlist(shortlist: shortlistedCompany)
+                    strongSelf.setShortlistButton()
+                    strongSelf.showFavouriteView(isAddedToFavourites: true)
+                }
+            }
+        }
+    }
+    
+    func findShortListItemForCompany(company: Company) -> Shortlist? {
+        guard let index = shortlist.index(where: { (item) -> Bool in return item.companyUuid == company.uuid }) else {
+            return nil
+        }
+        return shortlist[index]
     }
 
     @IBAction func seeAccountsButton(_: AnyObject) {

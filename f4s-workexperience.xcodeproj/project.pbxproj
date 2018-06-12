@@ -29,7 +29,6 @@
 		204203EA1E4B110A007C7409 /* ShortlistDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204203E91E4B110A007C7409 /* ShortlistDB.swift */; };
 		204203EC1E4B160C007C7409 /* ShortlistCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204203EB1E4B160C007C7409 /* ShortlistCoreDataManager.swift */; };
 		204203EE1E4B16D7007C7409 /* ShortlistDBOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204203ED1E4B16D7007C7409 /* ShortlistDBOperations.swift */; };
-		204203F01E4B1E3D007C7409 /* ShortlistService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204203EF1E4B1E3D007C7409 /* ShortlistService.swift */; };
 		204203F51E4B793F007C7409 /* Favourite.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 204203F31E4B793F007C7409 /* Favourite.storyboard */; };
 		204203F71E4B7966007C7409 /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204203F61E4B7966007C7409 /* FavouriteViewController.swift */; };
 		204203F91E4B81AB007C7409 /* FavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204203F81E4B81AB007C7409 /* FavouriteTableViewCell.swift */; };
@@ -179,6 +178,7 @@
 		FC86A5FD20B6E93B002BAD74 /* F4SUploadRequestedDocumentsTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC86A5FC20B6E93B002BAD74 /* F4SUploadRequestedDocumentsTableViewModel.swift */; };
 		FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC92567A1F8F70D100FF9841 /* InterestsModel.swift */; };
 		FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99B7E21F826D1400E2D5F0 /* LatLon.swift */; };
+		FC99BDC520CFAFD400278DDE /* F4SRemoveShortlistItemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99BDC420CFAFD400278DDE /* F4SRemoveShortlistItemService.swift */; };
 		FC99F3D41FFE533000E3AC5A /* RecommendationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99F3D31FFE533000E3AC5A /* RecommendationService.swift */; };
 		FC99F3D72000BE4900E3AC5A /* F4SService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99F3D62000BE4900E3AC5A /* F4SService.swift */; };
 		FC9BEE082015FF6000347437 /* UniversalLinkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9BEE072015FF6000347437 /* UniversalLinkParser.swift */; };
@@ -312,7 +312,6 @@
 		204203E91E4B110A007C7409 /* ShortlistDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortlistDB.swift; sourceTree = "<group>"; };
 		204203EB1E4B160C007C7409 /* ShortlistCoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortlistCoreDataManager.swift; sourceTree = "<group>"; };
 		204203ED1E4B16D7007C7409 /* ShortlistDBOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortlistDBOperations.swift; sourceTree = "<group>"; };
-		204203EF1E4B1E3D007C7409 /* ShortlistService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortlistService.swift; sourceTree = "<group>"; };
 		204203F41E4B793F007C7409 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Favourite.storyboard; sourceTree = "<group>"; };
 		204203F61E4B7966007C7409 /* FavouriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouriteViewController.swift; sourceTree = "<group>"; };
 		204203F81E4B81AB007C7409 /* FavouriteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewCell.swift; sourceTree = "<group>"; };
@@ -502,6 +501,7 @@
 		FC86A5FC20B6E93B002BAD74 /* F4SUploadRequestedDocumentsTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUploadRequestedDocumentsTableViewModel.swift; sourceTree = "<group>"; };
 		FC92567A1F8F70D100FF9841 /* InterestsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsModel.swift; sourceTree = "<group>"; };
 		FC99B7E21F826D1400E2D5F0 /* LatLon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatLon.swift; sourceTree = "<group>"; };
+		FC99BDC420CFAFD400278DDE /* F4SRemoveShortlistItemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRemoveShortlistItemService.swift; sourceTree = "<group>"; };
 		FC99F3D31FFE533000E3AC5A /* RecommendationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationService.swift; sourceTree = "<group>"; };
 		FC99F3D62000BE4900E3AC5A /* F4SService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SService.swift; sourceTree = "<group>"; };
 		FC9BEE072015FF6000347437 /* UniversalLinkParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalLinkParser.swift; sourceTree = "<group>"; };
@@ -907,7 +907,6 @@
 			children = (
 				FC09CD5220CA6D4500A79240 /* F4SJsonDecoding.swift */,
 				FC09CD5020CA62D700A79240 /* F4SShortlistService.swift */,
-				204203EF1E4B1E3D007C7409 /* ShortlistService.swift */,
 				40E78E5D1DD3297D000A3776 /* DeserializationManager.swift */,
 				2037B0B71DEC8A2400A9DE3E /* TemplateService.swift */,
 				20FEBDD91DE5AD3400EBDCBF /* ImageService.swift */,
@@ -922,6 +921,7 @@
 				204203ED1E4B16D7007C7409 /* ShortlistDBOperations.swift */,
 				FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */,
 				FCACBF4320C7EB9F00EABAE8 /* F4SContentService.swift */,
+				FC99BDC420CFAFD400278DDE /* F4SRemoveShortlistItemService.swift */,
 			);
 			name = Workflow;
 			sourceTree = "<group>";
@@ -1800,7 +1800,6 @@
 				FCD3486420038C3100DC1316 /* F4SAuth0MagicLinkInterpreterer.swift in Sources */,
 				FCC753EE1F80F26200E9ECD6 /* MapModel.swift in Sources */,
 				40C1A5191DDF5ACE000F80AA /* GMUClusterManager.m in Sources */,
-				204203F01E4B1E3D007C7409 /* ShortlistService.swift in Sources */,
 				FC4BB6071FA20F5100173864 /* F4SPartnersModel.swift in Sources */,
 				20D51BE41E27710C003A8358 /* NotificationHelper.swift in Sources */,
 				40C1A51B1DDF5ACE000F80AA /* GMUDefaultClusterRenderer.m in Sources */,
@@ -1830,6 +1829,7 @@
 				40C1A5271DE58EED000F80AA /* CutomClusterIconGenerator.swift in Sources */,
 				FCC9D13D1FC82B010081F7B5 /* StarRatingView.swift in Sources */,
 				FCB6B8E22074C59C0042C725 /* F4SDayCalendarViewCell.swift in Sources */,
+				FC99BDC520CFAFD400278DDE /* F4SRemoveShortlistItemService.swift in Sources */,
 				FCD388E3208DB8A600FC73C5 /* F4SCompanyDocumentsContainerViewController.swift in Sources */,
 				FCD388E12088D76300FC73C5 /* F4SDocumentViewController.swift in Sources */,
 				40C6DDF41E03F445000F8806 /* UserInfoDB.swift in Sources */,

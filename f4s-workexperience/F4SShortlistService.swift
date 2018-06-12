@@ -9,32 +9,29 @@
 import Foundation
 
 public struct F4SShortlistJson : Decodable {
-    public var companyUuid: F4SUUID
-    public var errors: F4SServerErrors
+    public var uuid: F4SUUID?
+    public var companyUuid: F4SUUID?
+    public var errors: F4SServerErrors?
 }
 
 public struct F4SServerErrors : Decodable {
     public var errors: JSONValue
 }
 
-public protocol F4SShortlistServiceProtocol {
+public protocol F4SCreateShortlistItemServiceProtocol {
     var apiName: String { get }
-    func addCompany(companyUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SShortlistJson>) -> ())
-    func removeCompany(companyUuid: F4SUUID, completion: @escaping (F4SNetworkResult<[F4SContentDescriptor]>) -> ())
+    func createShortlistItemForCompany(companyUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SShortlistJson>) -> ())
+    
 }
 
-public class F4SShortlistService : F4SDataTaskService {
+public class F4SCreateShortlistItemService : F4SDataTaskService, F4SCreateShortlistItemServiceProtocol {
     public init() {
         super.init(baseURLString: Config.BASE_URL, apiName: "favourite")
     }
-}
-
-// MARK:- F4SShortlistServiceProtocol conformance
-extension F4SShortlistService : F4SShortlistServiceProtocol {
-    
-    public func addCompany(companyUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SShortlistJson>) -> ()) {
+ 
+    public func createShortlistItemForCompany(companyUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SShortlistJson>) -> ()) {
         let params = ["company_uuid": companyUuid]
-        let attempting = "Add company to shortist"
+        let attempting = "Create shortist item for company"
         super.beginSendRequest(verb: .post, objectToSend: params, attempting: attempting) { [weak self] (result) in
             guard let strongSelf = self else { return }
             switch result {
@@ -45,14 +42,10 @@ extension F4SShortlistService : F4SShortlistServiceProtocol {
             }
         }
     }
-    
-    public func removeCompany(companyUuid: F4SUUID, completion: @escaping (F4SNetworkResult<[F4SContentDescriptor]>) -> ()) {
-        super.beginGetRequest(attempting: "Remove company from shortlist", completion: completion)
-    }
 }
 
 // MARK:- helper methods
-extension F4SShortlistService {
+extension F4SCreateShortlistItemService {
     func decodeAddedCompanyData(_ data: Data?, attempting: String) -> F4SNetworkResult<F4SShortlistJson> {
         guard let data = data else {
             let error = F4SNetworkDataErrorType.noData.error(attempting: attempting)

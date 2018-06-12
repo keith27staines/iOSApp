@@ -444,31 +444,4 @@ class DeserializationManager {
 
         return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
     }
-
-    func parseShortlistCompany(jsonOptional: JSON) -> Result<Shortlist> {
-
-        if let favoriteUuid = jsonOptional["uuid"].string {
-            let shortlist = Shortlist(uuid: favoriteUuid)
-            return .value(Box(shortlist))
-        }
-
-        if let nonFieldErrors = jsonOptional["errors"]["non_field_errors"].array {
-            if nonFieldErrors[0].string == Errors.ShortlistCallErrors.TooManyCompanies.serverErrorMessage {
-                return .deffinedError(Errors.ShortlistCallErrors.TooManyCompanies)
-            }
-        }
-
-        return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
-    }
-
-    func parseUnshortlistCompany(jsonOptional: JSON) -> Result<Bool> {
-
-        if let nonFieldErrors = jsonOptional["errors"]["non_field_errors"].array {
-            if nonFieldErrors[0].string == Errors.ShortlistCallErrors.NotFoundFavorite.serverErrorMessage {
-                return .deffinedError(Errors.ShortlistCallErrors.NotFoundFavorite)
-            }
-        }
-
-        return .value(Box(true))
-    }
 }
