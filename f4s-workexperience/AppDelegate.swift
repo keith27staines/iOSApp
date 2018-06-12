@@ -22,11 +22,14 @@ extension Notification.Name {
     
 }
 
+typealias BackgroundCompletionHandler = () -> Void
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var deviceToken: String?
+    var backgroundCompletionHandlers = [String:BackgroundCompletionHandler]()
     
     func presentForceUpdate() {
         let rootVC = self.window?.rootViewController?.topMostViewController
@@ -327,6 +330,12 @@ extension AppDelegate {
         if application.isRegisteredForRemoteNotifications || (application.currentUserNotificationSettings?.types.contains(.alert))! {
             application.registerForRemoteNotifications()
         }
+    }
+    
+    func application(_ application: UIApplication,
+                     handleEventsForBackgroundURLSession identifier: String,
+                     completionHandler: @escaping () -> Void) {
+        backgroundCompletionHandlers[identifier] = completionHandler
     }
 }
 
