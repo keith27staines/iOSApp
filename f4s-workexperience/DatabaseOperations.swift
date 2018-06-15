@@ -527,8 +527,29 @@ extension DatabaseOperations {
         }
     }
     
+    func promoteStagedDatabase() {
+        guard FileHelper.fileExists(path: stagedDatabaseUrl.path) else {
+            return
+        }
+        disconnectDatabase()
+        FileHelper.moveFile(fromUrl: stagedDatabaseUrl, toUrl: workingDatabaseUrl)
+        reloadConection()
+    }
+    
     /// Disconnect from database
     func disconnectDatabase() {
         _database = nil
+    }
+    
+    var stagedDatabaseUrl: URL {
+        let stagedName = AppConstants.stagedDatabaseFileName
+        let stagedUrl: URL = FileHelper.fileInDocumentsDirectory(filename: stagedName)
+        return stagedUrl
+    }
+    
+    var workingDatabaseUrl: URL {
+        let workingName = AppConstants.databaseFileName
+        let workingUrl: URL = FileHelper.fileInDocumentsDirectory(filename: workingName)
+        return workingUrl
     }
 }

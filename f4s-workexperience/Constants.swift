@@ -98,5 +98,6 @@ struct ApiConstants {
 
 struct AppConstants {
     static let databaseFileName = "company_database.db"
+    static let stagedDatabaseFileName = "company_database.tmp"
     static let maximumNumberOfShortlists = 20
 }

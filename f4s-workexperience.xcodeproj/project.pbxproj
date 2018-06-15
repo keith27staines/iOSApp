@@ -50,7 +50,6 @@
 		204C89781DF5F0B200D8493A /* ChooseAttributesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204C89761DF5F0B200D8493A /* ChooseAttributesTableViewCell.swift */; };
 		204C89791DF5F0B200D8493A /* ChooseAttributesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204C89771DF5F0B200D8493A /* ChooseAttributesViewController.swift */; };
 		205EB20B1DDB161D00034424 /* DatabaseOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205EB20A1DDB161D00034424 /* DatabaseOperations.swift */; };
-		205EB2111DDB551800034424 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205EB2101DDB551800034424 /* DatabaseService.swift */; };
 		206F8F8B1E1E48120024937B /* OptionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206F8F891E1E48120024937B /* OptionLabel.swift */; };
 		206F8F8C1E1E48120024937B /* MessageOptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206F8F8A1E1E48120024937B /* MessageOptionCollectionViewCell.swift */; };
 		206F8F911E1E552F0024937B /* MessageOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206F8F8E1E1E552F0024937B /* MessageOptionsView.swift */; };
@@ -336,7 +335,6 @@
 		204C89761DF5F0B200D8493A /* ChooseAttributesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChooseAttributesTableViewCell.swift; path = "f4s-workexperience/ChooseAttributesTableViewCell.swift"; sourceTree = "<group>"; };
 		204C89771DF5F0B200D8493A /* ChooseAttributesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChooseAttributesViewController.swift; path = "f4s-workexperience/ChooseAttributesViewController.swift"; sourceTree = "<group>"; };
 		205EB20A1DDB161D00034424 /* DatabaseOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseOperations.swift; sourceTree = "<group>"; };
-		205EB2101DDB551800034424 /* DatabaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		206F8F891E1E48120024937B /* OptionLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionLabel.swift; sourceTree = "<group>"; };
 		206F8F8A1E1E48120024937B /* MessageOptionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageOptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		206F8F8E1E1E552F0024937B /* MessageOptionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageOptionsView.swift; sourceTree = "<group>"; };
@@ -911,7 +909,6 @@
 		40E78E4D1DD3289B000A3776 /* Workflow */ = {
 			isa = PBXGroup;
 			children = (
-				205EB2101DDB551800034424 /* DatabaseService.swift */,
 				FC99BDCB20D172B600278DDE /* F4SCompanyDatabaseMetadataService.swift */,
 				FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */,
 				FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */,
@@ -1944,7 +1941,6 @@
 				204C896B1DF5F08500D8493A /* CompanyCollectionViewCell.swift in Sources */,
 				40E78E591DD32964000A3776 /* Entities.swift in Sources */,
 				FCB6B8C72074C58F0042C725 /* F4SPageHeaderView.swift in Sources */,
-				205EB2111DDB551800034424 /* DatabaseService.swift in Sources */,
 				204203EA1E4B110A007C7409 /* ShortlistDB.swift in Sources */,
 				203658831E1F809E00D87DC4 /* StatusCollectionViewCell.swift in Sources */,
 				FC67E60F207BA80A006F07FE /* F4SAvailabilityPeriod.swift in Sources */,

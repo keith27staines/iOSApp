@@ -13,6 +13,13 @@ public typealias BackgroundSessionCompletionHandler = () -> Void
 
 public class F4SDatabaseDownloadManager  : NSObject {
     
+    private struct BoxedObserver {
+        weak var observed: NSObject?
+        public init(object: NSObject) {
+            observed = object
+        }
+    }
+    
     public let successInterval: TimeInterval = 3600.0
     public let failedInterval: TimeInterval = 30.0
     
@@ -22,7 +29,12 @@ public class F4SDatabaseDownloadManager  : NSObject {
         databaseAvailabilityObservers.append(observer)
     }
     public func removeObserver(_ observer: F4SCompanyDatabaseAvailabilityObserving) {
-        print("TODO!!!")
+        guard let index = databaseAvailabilityObservers.index(where: { (otherObserver) -> Bool in
+            return observer === otherObserver
+        }) else {
+            return
+        }
+        databaseAvailabilityObservers.remove(at: index)
     }
     
     private var databaseDownloadService: F4SDownloadService? = nil
@@ -34,8 +46,8 @@ public class F4SDatabaseDownloadManager  : NSObject {
     }
     
     public var localDatabaseDatestamp: Date? {
-        
-        return nil // UserDefaultsKeys.companyDatabaseCreatedDate
+        let date = UserDefaults.standard.value(forKey: UserDefaultsKeys.companyDatabaseCreatedDate) as! Date?
+        return date
     }
     
     lazy var metadataService: F4SCompanyDatabaseMetadataServiceProtocol = {
@@ -136,40 +148,29 @@ extension F4SDatabaseDownloadManager : F4SDownloadServiceDelegate {
     }
     
     public func downloadService(_ service: F4SDownloadService, didFinishDownloadingToUrl tempUrl: URL) {
- 
-        let dbName = AppConstants.databaseFileName
-        let localDBUrl: URL = FileHelper.fileInDocumentsDirectory(filename: dbName)
         let filemanager = FileManager.default
-        guard filemanager.fileExists(atPath: localDBUrl.path) else {
+        guard filemanager.fileExists(atPath: tempUrl.path) else {
             return
         }
         
         do {
-            // Close database, notifying observers before and after that the database is being replaced
-            databaseAvailabilityObservers.forEach({ (observer) in
-                observer.databaseWillBecomeUnavailable()
-            })
-            DatabaseOperations.sharedInstance.disconnectDatabase()
-            databaseAvailabilityObservers.forEach({ (observer) in
-                observer.databaseDidBecomeUnavailable()
-            })
+            // Get the url that the database must be staged to
+            let stagedUrl = DatabaseOperations.sharedInstance.stagedDatabaseUrl
+        
+            // Delete existing staged database if one exists
+            if filemanager.fileExists(atPath: stagedUrl.path) {
+                try filemanager.removeItem(at: stagedUrl)
+            }
             
-            // Delete current database
-            try filemanager.removeItem(at: localDBUrl)
-            
-            // Move new database from its temporary location to standard local position
-            try FileManager.default.moveItem(at: tempUrl, to: localDBUrl)
+            // Move newly downloaded database from its temporary download location to the staging position
+            try FileManager.default.moveItem(at: tempUrl, to: stagedUrl)
             
             // Write downloadedDate to user defaults
             UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.companyDatabaseCreatedDate)
             
-            // Reopen database connection
+            // Advise observers that a new database is available at the staging location
             databaseAvailabilityObservers.forEach({ (observer) in
-                observer.databaseWillBecomeAvailable()
-            })
-            DatabaseOperations.sharedInstance.reloadConection()
-            databaseAvailabilityObservers.forEach({ (observer) in
-                observer.databaseDidBecomeUnavailable()
+                observer.newStagedDatabaseIsAvailable(url: stagedUrl)
             })
             
             // Schedule next update
@@ -181,14 +182,14 @@ extension F4SDatabaseDownloadManager : F4SDownloadServiceDelegate {
     }
     
     public func downloadServiceProgressed(_ service: F4SDownloadService, fractionComplete: Double) {
-
         // print("download fraction complete: \(fractionComplete)")
+        databaseAvailabilityObservers.forEach({ (observer) in
+            observer.newDatabaseIsDownloading(progress: fractionComplete)
+        })
     }
 }
 
-public protocol F4SCompanyDatabaseAvailabilityObserving {
-    func databaseWillBecomeUnavailable()
-    func databaseDidBecomeUnavailable()
-    func databaseWillBecomeAvailable()
-    func databaseDidBecomeAvailable()
+public protocol F4SCompanyDatabaseAvailabilityObserving : class {
+    func newStagedDatabaseIsAvailable(url: URL)
+    func newDatabaseIsDownloading(progress: Double)
 }

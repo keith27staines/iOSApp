@@ -149,19 +149,24 @@ class MapViewController: UIViewController {
         if let dbManager = (UIApplication.shared.delegate as? AppDelegate)?.databaseDownloadManager {
             dbManager.registerObserver(self)
         }
+        
         adjustAppeareance()
         handleTextFieldInterfaces()
         setupMap()
         setupReachability(nil, useClosures: true)
         startNotifier()
-
-        MessageHandler.sharedInstance.showLoadingOverlay(view)
-        reloadMapFromDatabase { [weak self] in
-            self?.moveCameraToBestPosition()
-            MessageHandler.sharedInstance.hideLoadingOverlay()
+        if !(UIApplication.shared.delegate as! AppDelegate).databaseDownloadManager!.isLocalDatabaseAvailable() {
+            MessageHandler.sharedInstance.showLoadingOverlay(self.view)
+        } else {
+            reloadMap()
         }
-        
-        //moveCameraToBestPosition()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if let dbManager = (UIApplication.shared.delegate as? AppDelegate)?.databaseDownloadManager {
+            dbManager.removeObserver(self)
+        }
+        super.viewWillDisappear(animated)
     }
     
     override var canBecomeFirstResponder: Bool {
@@ -974,7 +979,7 @@ extension MapViewController {
             log.debug("Network is reached")
             if let appDelegate = UIApplication.shared.delegate as? AppDelegate, let dbManager = appDelegate.databaseDownloadManager {
                 if !dbManager.isLocalDatabaseAvailable() {
-                    dbManager.start()
+                    //dbManager.start()
                     MessageHandler.sharedInstance.showLoadingOverlay(view)
                 }
             }
@@ -1122,6 +1127,21 @@ extension MapViewController {
         }
     }
     
+    func reloadMap() {
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            MessageHandler.sharedInstance.showLoadingOverlay(strongSelf.view)
+            MessageHandler.sharedInstance.updateOverlayCaption("Updating map...")
+            DatabaseOperations.sharedInstance.promoteStagedDatabase()
+            strongSelf.reloadMapFromDatabase {
+                DispatchQueue.main.async {
+                    strongSelf.moveCameraToBestPosition()
+                    MessageHandler.sharedInstance.hideLoadingOverlay()
+                }
+            }
+        }
+    }
+    
     /// Asynchronously reloads the map from datastructures read from the database
     ///
     /// - parameter completion: Call back when the reload is complete
@@ -1165,23 +1185,19 @@ extension MapViewController : UIViewControllerTransitioningDelegate {
 }
 
 extension MapViewController : F4SCompanyDatabaseAvailabilityObserving {
-    func databaseWillBecomeUnavailable() {
-    
+    func newStagedDatabaseIsAvailable(url: URL) {
+        guard FileHelper.fileExists(path: url.path) else {
+            return
+        }
+        reloadMap()
     }
     
-    func databaseDidBecomeUnavailable() {
-        
-    }
-    
-    func databaseWillBecomeAvailable() {
-        
-    }
-    
-    func databaseDidBecomeAvailable() {
-        MessageHandler.sharedInstance.showLoadingOverlay(view)
-        reloadMapFromDatabase { [weak self] in
-                self?.moveCameraToBestPosition()
-                MessageHandler.sharedInstance.hideLoadingOverlay()
+    func newDatabaseIsDownloading(progress: Double) {
+        DispatchQueue.main.async {
+            let formatter = NumberFormatter()
+            formatter.maximumFractionDigits = 0
+            let text = formatter.string(for: progress * 100.0)! + "%"
+            MessageHandler.sharedInstance.updateOverlayCaption("loading..." + text)
         }
     }
 }

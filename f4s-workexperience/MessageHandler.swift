@@ -145,4 +145,8 @@ class MessageHandler {
             MessageHandler.loadingOverlay.hideOverlay()
         }
     }
+    
+    func updateOverlayCaption(_ text: String) {
+        MessageHandler.loadingOverlay.caption = text
+    }
 }

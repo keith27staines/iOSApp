@@ -27,13 +27,19 @@ class FileHelper {
 
     static func deleteFile(path: String) {
         do {
-            if FileHelper.existFileAtPath(path: path) {
+            if FileHelper.fileExists(path: path) {
                 try! FileManager.default.removeItem(atPath: path)
             }
         }
     }
+    
+    static func moveFile(fromUrl: URL, toUrl: URL) {
+        deleteFile(path: toUrl.path)
+        try! FileManager.default.moveItem(at: fromUrl, to: toUrl)
+        deleteFile(path: fromUrl.path)
+    }
 
-    static func existFileAtPath(path: String) -> Bool {
+    static func fileExists(path: String) -> Bool {
         if FileManager.default.fileExists(atPath: path) {
             return true
         }
