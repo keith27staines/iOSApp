@@ -526,4 +526,9 @@ extension DatabaseOperations {
             log.debug("error connecting to db")
         }
     }
+    
+    /// Disconnect from database
+    func disconnectDatabase() {
+        _database = nil
+    }
 }

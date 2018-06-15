@@ -15,7 +15,7 @@ public struct F4SShortlistJson : Decodable {
 }
 
 public struct F4SServerErrors : Decodable {
-    public var errors: JSONValue
+    public var errors: F4SJSONValue
 }
 
 public protocol F4SCreateShortlistItemServiceProtocol {

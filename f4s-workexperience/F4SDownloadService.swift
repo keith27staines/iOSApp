@@ -8,92 +8,95 @@
 
 import Foundation
 
-
-public protocol F4SDownloadServiceProtocol {
-    func resume()
-    func pause()
-    func cancel()
-}
-
 public protocol F4SDownloadServiceDelegate  {
-    func downloadService(_ service: F4SDownloadService, didFinishDownloadingToLocation toUrl: URL)
+    func downloadService(_ service: F4SDownloadService, didFinishDownloadingToUrl: URL)
+    func downloadService(_ service: F4SDownloadService, didFailToDownloadWithError: F4SNetworkError)
     func downloadServiceProgressed(_ service: F4SDownloadService, fractionComplete: Double)
 }
 
-public class F4SDownloadService : NSObject, F4SDownloadServiceProtocol {
-  
-    private var downloadTask: URLSessionDownloadTask? = nil
-    private var session: URLSession? = nil
-    private var resumeData: Data? = nil
-    private var delegate: F4SDownloadServiceDelegate
+public protocol F4SDownloadServiceProtocol {
     
-    public init(from url: URL, to localUrl: URL, delegate: F4SDownloadServiceDelegate) {
-        self.delegate = delegate
-        super.init()
-        downloadTask = F4SDownloadService.downloadTask(from: url, to: localUrl, delegate: self)
-    }
+    var sessionIdentifier: String { get }
     
-    public func pause() {
-        downloadTask?.suspend()
-    }
-    
-    public func cancel() {
-        downloadTask?.cancel(byProducingResumeData: { [weak self] (data) in
-            self?.resumeData = data
-        })
-    }
-    
-    public func resume() {
-        downloadTask?.resume()
-    }
-    
-    deinit {
-        session?.invalidateAndCancel()
-    }
+    func startDownload(from url: URL)
+    func cancel()
 }
 
-extension F4SDownloadService {
+public class F4SDownloadService : NSObject, F4SDownloadServiceProtocol {
     
-    public static func downloadTask(from url: URL, to localUrl: URL, delegate: URLSessionDownloadDelegate) -> URLSessionDownloadTask? {
-        let configuration = baseConfiguration()
+    public private (set) var isDownloading: Bool
+    
+    private var downloadTask: URLSessionDownloadTask? = nil
+    private var delegate: F4SDownloadServiceDelegate
+    private let sessionName: String
+    
+    private lazy var configuration: URLSessionConfiguration = {
+        let configuration = URLSessionConfiguration.background(withIdentifier: sessionName)
+        configuration.httpAdditionalHeaders = F4SDataTaskService.defaultHeaders
         configuration.allowsCellularAccess = false
+        configuration.sessionSendsLaunchEvents = true
         if #available(iOS 11.0, *) {
             configuration.waitsForConnectivity = true
         }
-        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60)
-        let session = URLSession(configuration: configuration, delegate: delegate, delegateQueue: OperationQueue.main)
-        let task = session.downloadTask(with: request)
-        return task
+        return configuration
+    }()
+    
+    private lazy var downloadsSession: URLSession = {
+        let configuration = URLSessionConfiguration.default
+        return URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
+    }()
+    
+    
+    public var sessionIdentifier: String {
+        return "F4SBackgroundDownloadSession.\(sessionName)"
     }
     
-    public static func baseConfiguration() -> URLSessionConfiguration {
-        let config = URLSessionConfiguration.background(withIdentifier: "background")
-        config.httpAdditionalHeaders = F4SDataTaskService.defaultHeaders
-        return config
+    public init(sessionName: String, delegate: F4SDownloadServiceDelegate) {
+        self.sessionName = sessionName
+        self.delegate = delegate
+        self.isDownloading = false
+        super.init()
     }
     
-
+    public func startDownload(from url: URL) {
+        cancel()
+        let task = downloadsSession.downloadTask(with: url)
+        downloadTask = task
+        task.resume()
+        isDownloading = true
+    }
+    
+    public func cancel() {
+        defer { isDownloading = false }
+        guard let task = downloadTask else { return }
+        task.cancel()
+    }
 }
 
+// MARK:- URLSessionDownloadDelegate
 extension F4SDownloadService : URLSessionDownloadDelegate {
     
     public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        defer {
+            self.downloadTask = nil
+        }
+        
+        let attempting = "Background download"
+        let successCodes = 200...299
+        
         guard let httpResponse = downloadTask.response as? HTTPURLResponse else {
-            let error = F4SNetworkDataErrorType.noData
-            log.error(error)
+            let error = F4SNetworkDataErrorType.noData.error(attempting: attempting)
+            delegate.downloadService(self, didFailToDownloadWithError: error)
             return
         }
-        guard (200...299).contains(httpResponse.statusCode) else {
-            let error = F4SNetworkError(response: httpResponse, attempting: "Background download", logError: false)
-            log.error(error)
+        
+        guard successCodes.contains(httpResponse.statusCode) else {
+            let error = F4SNetworkError(response: httpResponse, attempting: attempting) ?? F4SNetworkDataErrorType.unknownError(nil).error(attempting: attempting)
+            delegate.downloadService(self, didFailToDownloadWithError: error)
             return
         }
-        do {
-            try FileManager.default.moveItem(at: location, to: location)
-            delegate.downloadService(self, didFinishDownloadingToLocation: location)
-        } catch {
-            log.error(error)
-        }
+        
+        delegate.downloadService(self, didFinishDownloadingToUrl: location)
     }
     
     public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64)
@@ -101,5 +104,4 @@ extension F4SDownloadService : URLSessionDownloadDelegate {
         let fractionComplete = Double(totalBytesWritten) / Double(totalBytesExpectedToWrite)
         delegate.downloadServiceProgressed(self, fractionComplete: fractionComplete)
     }
-    
 }

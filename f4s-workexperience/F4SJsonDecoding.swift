@@ -8,13 +8,13 @@
 
 import Foundation
 
-public enum JSONValue: Decodable {
+public enum F4SJSONValue: Decodable {
     case string(String)
     case int(Int)
     case double(Double)
     case bool(Bool)
-    case object([String: JSONValue])
-    case array([JSONValue])
+    case object([String: F4SJSONValue])
+    case array([F4SJSONValue])
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
@@ -26,12 +26,12 @@ public enum JSONValue: Decodable {
             self = .double(value)
         } else if let value = try? container.decode(Bool.self) {
             self = .bool(value)
-        } else if let value = try? container.decode([String: JSONValue].self) {
+        } else if let value = try? container.decode([String: F4SJSONValue].self) {
             self = .object(value)
-        } else if let value = try? container.decode([JSONValue].self) {
+        } else if let value = try? container.decode([F4SJSONValue].self) {
             self = .array(value)
         } else {
-            throw DecodingError.typeMismatch(JSONValue.self, DecodingError.Context(codingPath: container.codingPath, debugDescription: "Not a JSON"))
+            throw DecodingError.typeMismatch(F4SJSONValue.self, DecodingError.Context(codingPath: container.codingPath, debugDescription: "Not a JSON"))
         }
     }
 }

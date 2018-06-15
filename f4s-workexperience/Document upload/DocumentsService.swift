@@ -28,7 +28,7 @@ public class F4SPlacementDocumentsService : F4SDataTaskService {
 // MARK:- F4SDocumentServiceProtocol conformance
 extension F4SPlacementDocumentsService : F4SDocumentServiceProtocol {
     public func getDocumentsForPlacement(completion: @escaping (F4SNetworkResult<F4SGetDocumentUrlJson>) -> ()) {
-        super.beginGetRequest(attempting: "Get supporting document urls for this placement", completion: completion)
+        beginGetRequest(attempting: "Get supporting document urls for this placement", completion: completion)
     }
     
     public func putDocumentsForPlacement(documentDescriptors: F4SPutDocumentsUrlJson, completion: @escaping ((F4SNetworkDataResult) -> Void )) {

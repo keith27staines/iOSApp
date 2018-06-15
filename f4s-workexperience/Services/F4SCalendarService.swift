@@ -26,7 +26,7 @@ public class F4SPCalendarService : F4SDataTaskService {
 // MARK:- F4SDocumentServiceProtocol conformance
 extension F4SPCalendarService : F4SPCalendarServiceProtocol {
     public func getAvailabilityForPlacement(completion: @escaping (F4SNetworkResult<[F4SAvailabilityPeriodJson]>) -> ()) {
-        super.beginGetRequest(attempting: "Get availability periods for this placement", completion: completion)
+        beginGetRequest(attempting: "Get availability periods for this placement", completion: completion)
     }
     
     public func patchAvailabilityForPlacement(availabilityPeriods: F4SAvailabilityPeriodsJson, completion: @escaping ((F4SNetworkDataResult) -> Void )) {
