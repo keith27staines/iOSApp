@@ -1,7 +1,6 @@
 
 import Foundation
 import UIKit
-import Alamofire
 
 public class F4SImageService {
 
@@ -15,7 +14,7 @@ public class F4SImageService {
                 completed(false, nil)
                 return
             }
-
+            let attempting = "Download image"
             let imageName = path.split { $0 == "/" }.map(String.init)
             let localPath: URL = FileHelper.fileInDocumentsDirectory(filename: imageName.last!)
             if FileHelper.fileExists(path: localPath.path) {
@@ -23,31 +22,30 @@ public class F4SImageService {
             } else {
                 let url = url as URL
                 let session = F4SNetworkSessionManager.shared.interactiveSession
-                do {
-                    let request = try URLRequest(url: url, method: HTTPMethod.get)
-                    let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
-                    })
-                    task.resume()
-                } catch {
+                let request = F4SDataTaskService.urlRequest(verb: .get, url: url, dataToSend: nil)
+                let dataTask = F4SDataTaskService.dataTask(with: request, session: session, attempting: attempting, completion: { (result) in
                     
-                }
-                
-                
-                Alamofire.request(url.absoluteString!, method: .get, headers: [:]).responseData { response in
-                    switch response.result {
-                    case .failure(let error):
-                        log.error(error.localizedDescription)
+                    switch result {
+                        
+                    case .error(_):
                         completed(false, nil)
-
-                    case .success:
-                        self.saveLocally(localPath: localPath, data: response.data! as NSData)
+                        
+                    case .success(let data):
+                        
+                        guard let data = data else {
+                            _ = F4SNetworkDataErrorType.noData.error(attempting: attempting)
+                            completed(false, nil)
+                            return
+                        }
+                        self.saveLocally(localPath: localPath, data: data as NSData)
                         if FileHelper.fileExists(path: localPath.path) {
                             completed(true, self.getImageAtPath(path: localPath as NSURL))
                         } else {
-                            completed(true, UIImage(data: response.data!))
+                            completed(true, UIImage(data: data))
                         }
                     }
-                }
+                })
+                dataTask.resume()
             }
         }
     }
