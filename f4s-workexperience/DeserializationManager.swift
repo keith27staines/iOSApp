@@ -8,6 +8,8 @@
 import SwiftyJSON
 
 class DeserializationManager {
+    
+    // MARK:- singleton
     class var sharedInstance: DeserializationManager {
         struct Static {
             static let instance: DeserializationManager = DeserializationManager()
@@ -15,6 +17,7 @@ class DeserializationManager {
         return Static.instance
     }
 
+    // MARK:- user profile
     func parseCreateProfile(jsonOptional: JSON) -> Result<String> {
         if let userUuid = jsonOptional["uuid"].string {
             return .value(Box(userUuid))
@@ -103,30 +106,7 @@ class DeserializationManager {
         return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
     }
 
-    func parseLatestDatabaseVersion(jsonOptional: JSON) -> Result<CompanyDatabaseMeta> {
-        if let created = jsonOptional["created"].string {
-            var companyDatabaseMeta = CompanyDatabaseMeta()
-            companyDatabaseMeta.created = created
-
-            if let url = jsonOptional["url"].string {
-                companyDatabaseMeta.url = url
-            }
-
-            return .value(Box(companyDatabaseMeta))
-        }
-
-        if let _ = jsonOptional["errors"].dictionary {
-            if let _ = jsonOptional["errors"]["created"].array {
-                return .error("created error")
-            }
-            if let _ = jsonOptional["errors"]["url"].array {
-                return .error("url error")
-            }
-        }
-
-        return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
-    }
-
+    // MARK:- placement
     func parseCreatePlacement(jsonOptional: JSON) -> Result<String> {
         if let placementUuid = jsonOptional["uuid"].string {
             return .value(Box(placementUuid))
@@ -168,72 +148,6 @@ class DeserializationManager {
         return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
     }
 
-    func parseTemplate(jsonOptional: JSON) -> Result<[TemplateEntity]> {
-        if let templateJsonList = jsonOptional.array {
-            var templateList: [TemplateEntity] = []
-            for templateJson in templateJsonList {
-                var template: TemplateEntity = TemplateEntity()
-                if let uuid = templateJson["uuid"].string {
-                    template.uuid = uuid
-                }
-                if let temp = templateJson["template"].string {
-                    template.template = temp
-                }
-                if let blanks = templateJson["blanks"].array {
-                    var blankList: [TemplateBlank] = []
-                    for blank in blanks {
-                        var currentBlank: TemplateBlank = TemplateBlank()
-                        if let name = blank["name"].string {
-                            currentBlank.name = name
-                        }
-                        if let placeholder = blank["placeholder"].string {
-                            currentBlank.placeholder = placeholder
-                        }
-                        if let optionType = blank["option_type"].string {
-                            switch optionType
-                            {
-                            case "multiselect":
-                                currentBlank.optionType = .multiSelect
-                                break
-                            case "select":
-                                currentBlank.optionType = .select
-                                break
-                            default:
-                                currentBlank.optionType = .date
-                                break
-                            }
-                        }
-                        if let maxChoice = blank["max_choice"].int {
-                            currentBlank.maxChoice = maxChoice
-                        }
-                        if let initial = blank["initial"].string {
-                            currentBlank.initial = initial
-                        }
-                        if let optionsJsonList = blank["option_choices"].array {
-                            var optionsList: [Choice] = []
-                            for option in optionsJsonList {
-                                var currentOption: Choice = Choice()
-                                if let uuid = option["uuid"].string {
-                                    currentOption.uuid = uuid
-                                }
-                                if let value = option["value"].string {
-                                    currentOption.value = value
-                                }
-                                optionsList.append(currentOption)
-                            }
-                            currentBlank.choices = optionsList
-                        }
-                        blankList.append(currentBlank)
-                    }
-                    template.blanks = blankList
-                }
-                templateList.append(template)
-            }
-            return .value(Box(templateList))
-        }
-
-        return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
-    }
 
     func parseUpdatePlacement(jsonOptional: JSON) -> Result<String> {
         if let _ = jsonOptional["company_uuid"].string {
@@ -328,19 +242,103 @@ class DeserializationManager {
         }
         return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
     }
+    
+    
+    func parseRatePlacement(jsonOptional: JSON) -> Result<String> {
+        
+        if let _ = jsonOptional["value"].int {
+            return .value(Box("succeeded"))
+        }
+        
+        if let _ = jsonOptional["errors"].array {
+            return .deffinedError(Errors.GeneralCallErrors.GeneralError)
+        }
+        
+        return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
+    }
+    
+    // MARK:- template
+    func parseTemplate(jsonOptional: JSON) -> Result<[TemplateEntity]> {
+        if let templateJsonList = jsonOptional.array {
+            var templateList: [TemplateEntity] = []
+            for templateJson in templateJsonList {
+                var template: TemplateEntity = TemplateEntity()
+                if let uuid = templateJson["uuid"].string {
+                    template.uuid = uuid
+                }
+                if let temp = templateJson["template"].string {
+                    template.template = temp
+                }
+                if let blanks = templateJson["blanks"].array {
+                    var blankList: [TemplateBlank] = []
+                    for blank in blanks {
+                        var currentBlank: TemplateBlank = TemplateBlank()
+                        if let name = blank["name"].string {
+                            currentBlank.name = name
+                        }
+                        if let placeholder = blank["placeholder"].string {
+                            currentBlank.placeholder = placeholder
+                        }
+                        if let optionType = blank["option_type"].string {
+                            switch optionType
+                            {
+                            case "multiselect":
+                                currentBlank.optionType = .multiSelect
+                                break
+                            case "select":
+                                currentBlank.optionType = .select
+                                break
+                            default:
+                                currentBlank.optionType = .date
+                                break
+                            }
+                        }
+                        if let maxChoice = blank["max_choice"].int {
+                            currentBlank.maxChoice = maxChoice
+                        }
+                        if let initial = blank["initial"].string {
+                            currentBlank.initial = initial
+                        }
+                        if let optionsJsonList = blank["option_choices"].array {
+                            var optionsList: [Choice] = []
+                            for option in optionsJsonList {
+                                var currentOption: Choice = Choice()
+                                if let uuid = option["uuid"].string {
+                                    currentOption.uuid = uuid
+                                }
+                                if let value = option["value"].string {
+                                    currentOption.value = value
+                                }
+                                optionsList.append(currentOption)
+                            }
+                            currentBlank.choices = optionsList
+                        }
+                        blankList.append(currentBlank)
+                    }
+                    template.blanks = blankList
+                }
+                templateList.append(template)
+            }
+            return .value(Box(templateList))
+        }
+        
+        return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
+    }
 
+    
+    // MARK:- push notifications
     func parseEnablePushNotification(jsonOptional: JSON) -> Result<String> {
-
+        
         if let notificationsStatus = jsonOptional["enabled"].bool {
             return .value(Box(String(notificationsStatus)))
         }
-
+        
         if let notificationsError = jsonOptional["errors"]["non_field_errors"].string {
             if notificationsError == Errors.PushNotificationsCallErrors.DeviceUnregistered.serverErrorMessage {
                 return .deffinedError(Errors.PushNotificationsCallErrors.DeviceUnregistered)
             }
         }
-
+        
         return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
     }
     
@@ -430,45 +428,5 @@ class DeserializationManager {
             return .value(Box(timelinePlacementsList))
         }
         return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
-    }
-
-    func parseRatePlacement(jsonOptional: JSON) -> Result<String> {
-
-        if let _ = jsonOptional["value"].int {
-            return .value(Box("succeeded"))
-        }
-
-        if let _ = jsonOptional["errors"].array {
-            return .deffinedError(Errors.GeneralCallErrors.GeneralError)
-        }
-
-        return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
-    }
-
-    func parseShortlistCompany(jsonOptional: JSON) -> Result<Shortlist> {
-
-        if let favoriteUuid = jsonOptional["uuid"].string {
-            let shortlist = Shortlist(uuid: favoriteUuid)
-            return .value(Box(shortlist))
-        }
-
-        if let nonFieldErrors = jsonOptional["errors"]["non_field_errors"].array {
-            if nonFieldErrors[0].string == Errors.ShortlistCallErrors.TooManyCompanies.serverErrorMessage {
-                return .deffinedError(Errors.ShortlistCallErrors.TooManyCompanies)
-            }
-        }
-
-        return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
-    }
-
-    func parseUnshortlistCompany(jsonOptional: JSON) -> Result<Bool> {
-
-        if let nonFieldErrors = jsonOptional["errors"]["non_field_errors"].array {
-            if nonFieldErrors[0].string == Errors.ShortlistCallErrors.NotFoundFavorite.serverErrorMessage {
-                return .deffinedError(Errors.ShortlistCallErrors.NotFoundFavorite)
-            }
-        }
-
-        return .value(Box(true))
     }
 }

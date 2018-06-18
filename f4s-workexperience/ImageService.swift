@@ -37,7 +37,7 @@ class ImageService {
 
             let imageName = path.split { $0 == "/" }.map(String.init)
             let localPath: URL = FileHelper.fileInDocumentsDirectory(filename: imageName.last!)
-            if FileHelper.existFileAtPath(path: localPath.path) {
+            if FileHelper.fileExists(path: localPath.path) {
                 completed(true, self.getImageAtPath(path: localPath as NSURL))
             } else {
                 Alamofire.request(url.absoluteString!, method: .get, headers: [:]).responseData { response in
@@ -48,7 +48,7 @@ class ImageService {
 
                     case .success:
                         self.saveLocally(localPath: localPath, data: response.data! as NSData)
-                        if FileHelper.existFileAtPath(path: localPath.path) {
+                        if FileHelper.fileExists(path: localPath.path) {
                             completed(true, self.getImageAtPath(path: localPath as NSURL))
                         } else {
                             completed(true, UIImage(data: response.data!))

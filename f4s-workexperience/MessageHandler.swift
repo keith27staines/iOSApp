@@ -145,4 +145,10 @@ class MessageHandler {
             MessageHandler.loadingOverlay.hideOverlay()
         }
     }
+    
+    func updateOverlayCaption(_ text: String) {
+        DispatchQueue.main.async {
+            MessageHandler.loadingOverlay.caption = text
+        }
+    }
 }

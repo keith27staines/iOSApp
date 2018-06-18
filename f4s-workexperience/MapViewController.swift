@@ -146,26 +146,27 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let dbService = DatabaseService.sharedInstance
-        dbService.setDatabaseDownloadProtocol(viewCtrl: self)
+        if let dbManager = (UIApplication.shared.delegate as? AppDelegate)?.databaseDownloadManager {
+            dbManager.registerObserver(self)
+        }
+        
         adjustAppeareance()
         handleTextFieldInterfaces()
         setupMap()
         setupReachability(nil, useClosures: true)
         startNotifier()
-
-        if dbService.isDownloadInProgress {
-            if let view = self.navigationController?.tabBarController?.view {
-                MessageHandler.sharedInstance.showLoadingOverlay(view)
-            }
+        if !(UIApplication.shared.delegate as! AppDelegate).databaseDownloadManager!.isLocalDatabaseAvailable() {
+            MessageHandler.sharedInstance.showLoadingOverlay(self.view)
         } else {
-            reloadMapFromDatabase { [weak self] in
-                self?.moveCameraToBestPosition()
-                MessageHandler.sharedInstance.hideLoadingOverlay()
-            }
+            reloadMap()
         }
-        
-        moveCameraToBestPosition()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if let dbManager = (UIApplication.shared.delegate as? AppDelegate)?.databaseDownloadManager {
+            dbManager.removeObserver(self)
+        }
+        super.viewWillDisappear(animated)
     }
     
     override var canBecomeFirstResponder: Bool {
@@ -254,21 +255,6 @@ extension MapViewController : InterestsViewControllerDelegate {
                 self?.filteredMapModel = filteredModel
                 self?.reloadMapFromModel(mapModel: filteredModel, completed: {
             })
-        }
-    }
-}
-
-//MARK:- Handle download of company database
-protocol DatabaseDownloadProtocol: class {
-    func finishDownloadProtocol()
-}
-
-// MARK:- Conform to DatabaseDownloadProtocol
-extension MapViewController: DatabaseDownloadProtocol {
-    internal func finishDownloadProtocol() {
-        reloadMapFromDatabase { [weak self] in
-            self?.moveCameraToBestPosition()
-            MessageHandler.sharedInstance.hideLoadingOverlay()
         }
     }
 }
@@ -991,14 +977,10 @@ extension MapViewController {
         let reachability = note.object as! Reachability
         if reachability.isReachableByAnyMeans {
             log.debug("Network is reached")
-            let dbService = DatabaseService.sharedInstance
-            if !dbService.isLocalDatabaseAvailable() && !dbService.isDownloadInProgress {
-                dbService.getLatestDatabase()
-                DispatchQueue.main.async {
-                    if let view = self.navigationController?.tabBarController?.view {
-                        DatabaseService.sharedInstance.getLatestDatabase()
-                        MessageHandler.sharedInstance.showLoadingOverlay(view)
-                    }
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate, let dbManager = appDelegate.databaseDownloadManager {
+                if !dbManager.isLocalDatabaseAvailable() {
+                    dbManager.start()
+                    MessageHandler.sharedInstance.showLoadingOverlay(view)
                 }
             }
         } else {
@@ -1095,7 +1077,7 @@ extension MapViewController {
     
     /// Asynchronously creates a filtered map from a less filtered one
     ///
-    /// - parameter unfilterdModel: The starting MapModel whose content is to be filtered into a new MapModel
+    /// - parameter unfilteredModel: The starting MapModel whose content is to be filtered into a new MapModel
     /// - parameter interestFilterSet: The set of interests to filter companies by. A company must have at least one interest in the interestFilterSet to qualify
     /// - parameter completed: Calls back with the filtered MapModel
     func createFilteredMapModel(unfilteredModel: MapModel,
@@ -1145,15 +1127,25 @@ extension MapViewController {
         }
     }
     
+    func reloadMap() {
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            MessageHandler.sharedInstance.showLoadingOverlay(strongSelf.view)
+            MessageHandler.sharedInstance.updateOverlayCaption("Updating map...")
+            DatabaseOperations.sharedInstance.promoteStagedDatabase()
+            strongSelf.reloadMapFromDatabase {
+                DispatchQueue.main.async {
+                    strongSelf.moveCameraToBestPosition()
+                    MessageHandler.sharedInstance.hideLoadingOverlay()
+                }
+            }
+        }
+    }
+    
     /// Asynchronously reloads the map from datastructures read from the database
     ///
     /// - parameter completion: Call back when the reload is complete
     func reloadMapFromDatabase(completion: @escaping () -> Void ) {
-        if !(DatabaseService.isLocalDatabaseAvailable() && DatabaseOperations
-            .sharedInstance.isConnected) {
-            completion()
-            return
-        }
         self.favouriteList = ShortlistDBOperations.sharedInstance.getShortlistForCurrentUser()
         self.createUnfilteredMapModelFromDatabase { [weak self] unfilteredMapModel in
             guard let strongSelf = self else { return }
@@ -1189,5 +1181,23 @@ extension MapViewController : UIViewControllerTransitioningDelegate {
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         popupAnimator.presenting = false
         return popupAnimator
+    }
+}
+
+extension MapViewController : F4SCompanyDatabaseAvailabilityObserving {
+    func newStagedDatabaseIsAvailable(url: URL) {
+        guard FileHelper.fileExists(path: url.path) else {
+            return
+        }
+        reloadMap()
+    }
+    
+    func newDatabaseIsDownloading(progress: Double) {
+        DispatchQueue.main.async {
+            let formatter = NumberFormatter()
+            formatter.maximumFractionDigits = 0
+            let text = formatter.string(for: progress * 100.0)! + "%"
+            MessageHandler.sharedInstance.updateOverlayCaption("loading..." + text)
+        }
     }
 }

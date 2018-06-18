@@ -20,6 +20,6 @@ public class F4SPartnerService : F4SDataTaskService {
 // MARK:- F4SDocumentServiceProtocol conformance
 extension F4SPartnerService : F4SPartnerServiceProtocol {
     public func getPartners(completion: @escaping (F4SNetworkResult<[F4SPartner]>) -> ()) {
-        super.beginGetJson(attempting: "Get partners", completion: completion)
+        beginGetRequest(attempting: "Get partners", completion: completion)
     }
 }

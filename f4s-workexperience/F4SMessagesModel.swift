@@ -10,26 +10,44 @@ import Foundation
 
 public typealias F4SMessagesModelResult = F4SNetworkResult<F4SMessagesModel>
 
-public struct F4SMessagesModel : Codable {
-    public var threadUuid: F4SUUID?
-    public var messages: [F4SMessage]?
-    public var cannedResponses: F4SCannedResponses?
-    public var action: F4SAction?
+public class F4SMessageModelBuilder {
     
-    public init(threadUuid: F4SUUID? = nil, messages: [F4SMessage]? = nil, cannedResponses: F4SCannedResponses? = nil, action: F4SAction? = nil) {
+    private let threadUuid: F4SUUID
+    
+    private lazy var messageService = {
+        return F4SMessageService(threadUuid: threadUuid)
+    }()
+    
+    private lazy var messageActionService = {
+        return F4SMessageActionService(threadUuid: threadUuid)
+    }()
+    
+    private lazy var messageCannedResponseService = {
+        return F4SCannedMessageResponsesService(threadUuid: threadUuid)
+    }()
+    
+    public init(threadUuid: F4SUUID) {
         self.threadUuid = threadUuid
-        self.messages = messages
-        self.cannedResponses = cannedResponses
-        self.action = action
     }
     
     public func build(threadUuid: F4SUUID, completion: @escaping (F4SMessagesModelResult) -> Void) {
         let messagesModel = F4SMessagesModel(threadUuid: threadUuid)
         let result = F4SMessagesModelResult.success(messagesModel)
-        addMessages(threadUuid: threadUuid, messagesResult: result) { (result) in
-            self.addAction(threadUuid: threadUuid, messagesResult: result) { (result) in
-                self.addCannedResponses(threadUuid: threadUuid, messagesResult: result) { (result) in
-                    completion(result)
+        addMessages(threadUuid: threadUuid, messagesResult: result) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .error(let error):
+                completion(F4SMessagesModelResult.error(error))
+            case .success(_):
+                strongSelf.addCannedResponses(threadUuid: threadUuid, messagesResult: result) { (result) in
+                    switch result {
+                    case .error(let error):
+                        completion(F4SMessagesModelResult.error(error))
+                    case .success(_):
+                        strongSelf.addAction(threadUuid: threadUuid, messagesResult: result) { (result) in
+                            completion(result)
+                        }
+                    }
                 }
             }
         }
@@ -40,7 +58,7 @@ public struct F4SMessagesModel : Codable {
         case .error(_):
             completion(messagesResult)
         case .success(var model):
-            F4SMessageService(threadUuid: threadUuid).getMessages { result in
+            messageService.getMessages { result in
                 switch result {
                 case .error(let error):
                     completion(F4SMessagesModelResult.error(error))
@@ -57,7 +75,7 @@ public struct F4SMessagesModel : Codable {
         case .error(_):
             completion(messagesResult)
         case .success(var model):
-            F4SMessageActionService(threadUuid: threadUuid).getMessageAction { result in
+            messageActionService.getMessageAction { result in
                 switch result {
                 case .error(let error):
                     completion(F4SMessagesModelResult.error(error))
@@ -79,7 +97,7 @@ public struct F4SMessagesModel : Codable {
                 completion(messagesResult)
                 return
             }
-            F4SCannedMessageResponsesService(threadUuid: threadUuid).getPermittedResponses { result in
+            messageCannedResponseService.getPermittedResponses { result in
                 switch result {
                 case .error(let error):
                     completion(F4SMessagesModelResult.error(error))
@@ -90,4 +108,33 @@ public struct F4SMessagesModel : Codable {
             }
         }
     }
+    
 }
+
+public struct F4SMessagesModel : Codable {
+    public var threadUuid: F4SUUID?
+    public var messages: [F4SMessage]?
+    public var cannedResponses: F4SCannedResponses?
+    public var action: F4SAction?
+    
+    public init(threadUuid: F4SUUID? = nil, messages: [F4SMessage]? = nil, cannedResponses: F4SCannedResponses? = nil, action: F4SAction? = nil) {
+        self.threadUuid = threadUuid
+        self.messages = messages
+        self.cannedResponses = cannedResponses
+        self.action = action
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

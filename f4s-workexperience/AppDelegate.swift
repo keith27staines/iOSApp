@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var deviceToken: String?
+
+    public private (set) var databaseDownloadManager: F4SDatabaseDownloadManager?
     
     func presentForceUpdate() {
         let rootVC = self.window?.rootViewController?.topMostViewController
@@ -76,7 +78,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-
     func handleFatalError(error: Error) {
         let rootVC = self.window?.rootViewController
         let alert = UIAlertController(
@@ -102,6 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         log.debug("\n\n\n**************\nWorkfinder launched in environement \(Config.ENVIRONMENT)\n**************")
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
+        databaseDownloadManager = databaseDownloadManager ?? F4SDatabaseDownloadManager()
         continueIfVersionCheckPasses(application: application)
         return true
     }
@@ -120,7 +122,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func onUserAccountConfirmedToExist(application: UIApplication) {
         printDebugUserInfo()
         registerApplicationForRemoteNotifications(application)
-        DatabaseService.sharedInstance.getLatestDatabase()
+        databaseDownloadManager?.start()
         guard let window = window else { return }
         let isFirstLaunch = UserDefaults.standard.value(forKey: UserDefaultsKeys.isFirstLaunch) as? Bool ?? true
         if isFirstLaunch {
@@ -197,8 +199,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ appliction: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
-    
-    
 
     func applicationWillTerminate(_: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
@@ -327,6 +327,17 @@ extension AppDelegate {
         if application.isRegisteredForRemoteNotifications || (application.currentUserNotificationSettings?.types.contains(.alert))! {
             application.registerForRemoteNotifications()
         }
+    }
+}
+
+// MARK:- Handle restoration of background session
+extension AppDelegate {
+    
+    func application(_ application: UIApplication,
+                     handleEventsForBackgroundURLSession identifier: String,
+                     completionHandler: @escaping () -> Void) {
+        databaseDownloadManager = F4SDatabaseDownloadManager(backgroundSessionCompletionHandler: completionHandler)
+        databaseDownloadManager?.start()
     }
 }
 

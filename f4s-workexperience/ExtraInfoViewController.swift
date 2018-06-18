@@ -190,6 +190,7 @@ extension ExtraInfoViewController {
         self.emailUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
         self.firstAndLastNameUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
         self.voucherCodeUnderlineView.backgroundColor = UIColor(netHex: Colors.warmGrey)
+        self.voucherCodeStackView.isHidden = true
     }
     
     func setupLabels() {
