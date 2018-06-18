@@ -24,7 +24,6 @@ public class F4SImageService {
                 let url = url as URL
                 let session = F4SNetworkSessionManager.shared.interactiveSession
                 do {
-                    let r = URLRequest(
                     let request = try URLRequest(url: url, method: HTTPMethod.get)
                     let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
                     })
