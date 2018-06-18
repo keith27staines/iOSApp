@@ -1077,7 +1077,7 @@ extension MapViewController {
     
     /// Asynchronously creates a filtered map from a less filtered one
     ///
-    /// - parameter unfilterdModel: The starting MapModel whose content is to be filtered into a new MapModel
+    /// - parameter unfilteredModel: The starting MapModel whose content is to be filtered into a new MapModel
     /// - parameter interestFilterSet: The set of interests to filter companies by. A company must have at least one interest in the interestFilterSet to qualify
     /// - parameter completed: Calls back with the filtered MapModel
     func createFilteredMapModel(unfilteredModel: MapModel,
