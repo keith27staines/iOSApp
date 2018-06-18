@@ -111,7 +111,7 @@ public struct Company : Hashable {
             }
             return
         }
-        ImageService.sharedInstance.getImage(url: url, completed: { succeeded, image in
+        F4SImageService.sharedInstance.getImage(url: url, completed: { succeeded, image in
             DispatchQueue.main.async {
                 completion(image ?? defaultLogo)
             }

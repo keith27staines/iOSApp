@@ -1,32 +1,13 @@
-//
-//  ImageService.swift
-//  ChiriiEvenimente
-//
-//  Created by Timea Tivadar on 5/17/16.
-//  Copyright © 2016 Chelsea Apps Factory. All rights reserved.
-//
 
 import Foundation
 import UIKit
 import Alamofire
-import SwiftyJSON
-import Photos
-import KeychainSwift
 
-class ImageService {
-    // progress bytes
-    var totalBytes: Double = 0.0
-    var totalBytesWrite: Double = 0.0
-    var countImagesUploading = 0
+public class F4SImageService {
 
+    public static var sharedInstance = F4SImageService()
+    
     let imageUrl = "images"
-
-    class var sharedInstance: ImageService {
-        struct Static {
-            static let instance: ImageService = ImageService()
-        }
-        return Static.instance
-    }
 
     func getImage(url: NSURL, completed: @escaping (_ succeeded: Bool, _ image: UIImage?) -> Void) {
         DispatchQueue.main.async {
@@ -40,6 +21,19 @@ class ImageService {
             if FileHelper.fileExists(path: localPath.path) {
                 completed(true, self.getImageAtPath(path: localPath as NSURL))
             } else {
+                let url = url as URL
+                let session = F4SNetworkSessionManager.shared.interactiveSession
+                do {
+                    let r = URLRequest(
+                    let request = try URLRequest(url: url, method: HTTPMethod.get)
+                    let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
+                    })
+                    task.resume()
+                } catch {
+                    
+                }
+                
+                
                 Alamofire.request(url.absoluteString!, method: .get, headers: [:]).responseData { response in
                     switch response.result {
                     case .failure(let error):
@@ -65,34 +59,11 @@ class ImageService {
         }
         return image
     }
-
-    func getReduceNsData(image: UIImage) -> NSData {
-        let originalNsData: NSData = UIImageJPEGRepresentation(image, 1)! as NSData
-        let imageSize: Float = Float(originalNsData.length) / 1024 / 1024
-        var compressionQuality: CGFloat = 1
-        if imageSize > 0 && imageSize < 2 {
-            compressionQuality = 0.9
-        }
-        if imageSize > 2 && imageSize < 4 {
-            compressionQuality = 0.7
-        }
-        if imageSize > 4 && imageSize < 6 {
-            compressionQuality = 0.5
-        }
-        if imageSize > 6 {
-            compressionQuality = 0.3
-        }
-        return UIImageJPEGRepresentation(image, compressionQuality)! as NSData
-    }
 }
 
 // MARK: - local operations
-extension ImageService {
+extension F4SImageService {
     func saveLocally(localPath: URL, data: NSData) {
         FileHelper.saveData(data: data, path: localPath)
-    }
-
-    func deleteLocally(localPath: URL) {
-        FileHelper.deleteFile(path: localPath.path)
     }
 }
