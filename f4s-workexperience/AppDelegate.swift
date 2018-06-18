@@ -103,7 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         log.debug("\n\n\n**************\nWorkfinder launched in environement \(Config.ENVIRONMENT)\n**************")
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
-        databaseDownloadManager = F4SDatabaseDownloadManager()
+        databaseDownloadManager = databaseDownloadManager ?? F4SDatabaseDownloadManager()
         continueIfVersionCheckPasses(application: application)
         return true
     }

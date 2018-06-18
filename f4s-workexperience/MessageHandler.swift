@@ -147,6 +147,8 @@ class MessageHandler {
     }
     
     func updateOverlayCaption(_ text: String) {
-        MessageHandler.loadingOverlay.caption = text
+        DispatchQueue.main.async {
+            MessageHandler.loadingOverlay.caption = text
+        }
     }
 }

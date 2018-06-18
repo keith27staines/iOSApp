@@ -12,12 +12,11 @@ public protocol F4SDownloadServiceDelegate  {
     func downloadService(_ service: F4SDownloadService, didFinishDownloadingToUrl: URL)
     func downloadService(_ service: F4SDownloadService, didFailToDownloadWithError: F4SNetworkError)
     func downloadServiceProgressed(_ service: F4SDownloadService, fractionComplete: Double)
+    func downloadServiceFinishedBackgroundSession(_ service: F4SDownloadService)
 }
 
 public protocol F4SDownloadServiceProtocol {
-    
     var sessionIdentifier: String { get }
-    
     func startDownload(from url: URL)
     func cancel()
 }
@@ -28,34 +27,37 @@ public class F4SDownloadService : NSObject, F4SDownloadServiceProtocol {
     
     private var downloadTask: URLSessionDownloadTask? = nil
     private var delegate: F4SDownloadServiceDelegate
-    private let sessionName: String
     
     private lazy var configuration: URLSessionConfiguration = {
-        let configuration = URLSessionConfiguration.background(withIdentifier: sessionName)
+        let configuration = URLSessionConfiguration.background(withIdentifier: F4SDownloadService.sessionIdentifier)
         configuration.httpAdditionalHeaders = F4SDataTaskService.defaultHeaders
-        configuration.allowsCellularAccess = false
+        configuration.allowsCellularAccess = true
         configuration.sessionSendsLaunchEvents = true
         if #available(iOS 11.0, *) {
             configuration.waitsForConnectivity = true
+            configuration.multipathServiceType = .handover
         }
         return configuration
     }()
     
-    private lazy var downloadsSession: URLSession = {
-        let configuration = URLSessionConfiguration.default
-        return URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
-    }()
-    
-    
-    public var sessionIdentifier: String {
-        return "F4SBackgroundDownloadSession.\(sessionName)"
+    public static var sessionIdentifier: String {
+        return "F4SBackgroundDownloadSession.companyDatabase"
     }
     
-    public init(sessionName: String, delegate: F4SDownloadServiceDelegate) {
-        self.sessionName = sessionName
+    public var sessionIdentifier: String {
+        return F4SDownloadService.sessionIdentifier
+    }
+    
+    private lazy var downloadsSession: URLSession = {
+        let session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
+        return session
+    }()
+    
+    public init(delegate: F4SDownloadServiceDelegate) {
         self.delegate = delegate
         self.isDownloading = false
         super.init()
+        _ = downloadsSession
     }
     
     public func startDownload(from url: URL) {
@@ -103,5 +105,9 @@ extension F4SDownloadService : URLSessionDownloadDelegate {
     {
         let fractionComplete = Double(totalBytesWritten) / Double(totalBytesExpectedToWrite)
         delegate.downloadServiceProgressed(self, fractionComplete: fractionComplete)
+    }
+    
+    public func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
+        delegate.downloadServiceFinishedBackgroundSession(self)
     }
 }

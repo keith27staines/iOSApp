@@ -160,6 +160,8 @@
 		FC59B1911F81549B0068EC9C /* F4SQuadtreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18F1F81549A0068EC9C /* F4SQuadtreeTests.swift */; };
 		FC59B1921F8155480068EC9C /* F4SQuadtree.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18C1F81546C0068EC9C /* F4SQuadtree.swift */; };
 		FC59B1931F81554F0068EC9C /* CGRect+Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18D1F81546C0068EC9C /* CGRect+Methods.swift */; };
+		FC631CB620D64BD100199507 /* F4SAsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC631CB520D64BD100199507 /* F4SAsynchronousOperation.swift */; };
+		FC631CB820D679AC00199507 /* F4SNetworkSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC631CB720D679AC00199507 /* F4SNetworkSessionManager.swift */; };
 		FC67E60A207B70CE006F07FE /* F4SCalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC67E609207B70CE006F07FE /* F4SCalendarService.swift */; };
 		FC67E60D207B73CE006F07FE /* F4SCalendarServiceJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC67E60C207B73CE006F07FE /* F4SCalendarServiceJson.swift */; };
 		FC67E60F207BA80A006F07FE /* F4SAvailabilityPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC67E60E207BA80A006F07FE /* F4SAvailabilityPeriod.swift */; };
@@ -484,6 +486,8 @@
 		FC59B18D1F81546C0068EC9C /* CGRect+Methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Methods.swift"; sourceTree = "<group>"; };
 		FC59B18E1F81549A0068EC9C /* CGRect+MethodsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+MethodsTests.swift"; sourceTree = "<group>"; };
 		FC59B18F1F81549A0068EC9C /* F4SQuadtreeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SQuadtreeTests.swift; sourceTree = "<group>"; };
+		FC631CB520D64BD100199507 /* F4SAsynchronousOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SAsynchronousOperation.swift; sourceTree = "<group>"; };
+		FC631CB720D679AC00199507 /* F4SNetworkSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SNetworkSessionManager.swift; sourceTree = "<group>"; };
 		FC67E609207B70CE006F07FE /* F4SCalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCalendarService.swift; sourceTree = "<group>"; };
 		FC67E60C207B73CE006F07FE /* F4SCalendarServiceJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCalendarServiceJson.swift; sourceTree = "<group>"; };
 		FC67E60E207BA80A006F07FE /* F4SAvailabilityPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SAvailabilityPeriod.swift; sourceTree = "<group>"; };
@@ -909,6 +913,8 @@
 		40E78E4D1DD3289B000A3776 /* Workflow */ = {
 			isa = PBXGroup;
 			children = (
+				FC631CB720D679AC00199507 /* F4SNetworkSessionManager.swift */,
+				FC631CB520D64BD100199507 /* F4SAsynchronousOperation.swift */,
 				FC99BDCB20D172B600278DDE /* F4SCompanyDatabaseMetadataService.swift */,
 				FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */,
 				FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */,
@@ -1571,6 +1577,9 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.Multipath = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -1941,6 +1950,7 @@
 				204C896B1DF5F08500D8493A /* CompanyCollectionViewCell.swift in Sources */,
 				40E78E591DD32964000A3776 /* Entities.swift in Sources */,
 				FCB6B8C72074C58F0042C725 /* F4SPageHeaderView.swift in Sources */,
+				FC631CB620D64BD100199507 /* F4SAsynchronousOperation.swift in Sources */,
 				204203EA1E4B110A007C7409 /* ShortlistDB.swift in Sources */,
 				203658831E1F809E00D87DC4 /* StatusCollectionViewCell.swift in Sources */,
 				FC67E60F207BA80A006F07FE /* F4SAvailabilityPeriod.swift in Sources */,
@@ -1960,6 +1970,7 @@
 				2037B0B61DEC881500A9DE3E /* CoverLetterViewController.swift in Sources */,
 				405974081DFD449C0002DB3A /* ExtraInfoViewController.swift in Sources */,
 				206F8F8C1E1E48120024937B /* MessageOptionCollectionViewCell.swift in Sources */,
+				FC631CB820D679AC00199507 /* F4SNetworkSessionManager.swift in Sources */,
 				20FEBDDA1DE5AD3400EBDCBF /* ImageService.swift in Sources */,
 				FCA6D2961FA75DE40037962B /* Styler.swift in Sources */,
 				FC4336CA202DB953001D0569 /* StringExtensions.swift in Sources */,

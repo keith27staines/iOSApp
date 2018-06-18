@@ -13,24 +13,27 @@ public typealias BackgroundSessionCompletionHandler = () -> Void
 
 public class F4SDatabaseDownloadManager  : NSObject {
     
-    private struct BoxedObserver {
-        weak var observed: NSObject?
-        public init(object: NSObject) {
-            observed = object
+    struct BoxedObserver {
+        weak var observer: F4SCompanyDatabaseAvailabilityObserving?
+        public init(object: F4SCompanyDatabaseAvailabilityObserving) {
+            observer = object
         }
     }
     
     public let successInterval: TimeInterval = 3600.0
-    public let failedInterval: TimeInterval = 30.0
+    public let failedInterval: TimeInterval = 5.0
     
-    private var databaseAvailabilityObservers = [F4SCompanyDatabaseAvailabilityObserving]()
+    private var databaseAvailabilityObservers = [BoxedObserver]()
+    
+    private var backgroundSessionCompletionHandler: BackgroundSessionCompletionHandler? = nil
     
     public func registerObserver(_ observer: F4SCompanyDatabaseAvailabilityObserving) {
-        databaseAvailabilityObservers.append(observer)
+        let boxedObserver = BoxedObserver(object: observer)
+        databaseAvailabilityObservers.append(boxedObserver)
     }
     public func removeObserver(_ observer: F4SCompanyDatabaseAvailabilityObserving) {
-        guard let index = databaseAvailabilityObservers.index(where: { (otherObserver) -> Bool in
-            return observer === otherObserver
+        guard let index = databaseAvailabilityObservers.index(where: { (boxedObserver) -> Bool in
+            return observer === boxedObserver.observer
         }) else {
             return
         }
@@ -38,8 +41,6 @@ public class F4SDatabaseDownloadManager  : NSObject {
     }
     
     private var databaseDownloadService: F4SDownloadService? = nil
-    
-    public private (set) var backgroundSessionCompletionHandler: BackgroundSessionCompletionHandler?
     
     public func isLocalDatabaseAvailable() -> Bool {
         return localDatabaseDatestamp != nil
@@ -63,11 +64,17 @@ public class F4SDatabaseDownloadManager  : NSObject {
     var workerQueue = DispatchQueue(label: "F4SDatabaseDownloadManager.worker")
     
     public init(backgroundSessionCompletionHandler: BackgroundSessionCompletionHandler? = nil) {
-        self.backgroundSessionCompletionHandler = backgroundSessionCompletionHandler
         super.init()
-        self.databaseDownloadService = F4SDownloadService(sessionName: "F4SCompanyDatabase", delegate: self)
-        
+        print("initializing with background session")
+        self.backgroundSessionCompletionHandler = backgroundSessionCompletionHandler
     }
+    
+    public override init() {
+        super.init()
+        print("initializing without background session")
+        self.databaseDownloadService = F4SDownloadService(delegate: self)
+    }
+    
     
     public func start() {
         beginUpdateLocalCompanyDatabaseIfNecessary()
@@ -129,21 +136,20 @@ public class F4SDatabaseDownloadManager  : NSObject {
     }
 }
 
-extension F4SDatabaseDownloadManager: URLSessionDelegate {
-    public func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
+extension F4SDatabaseDownloadManager : F4SDownloadServiceDelegate {
+    public func downloadServiceFinishedBackgroundSession(_ service: F4SDownloadService) {
         DispatchQueue.main.async { [weak self] in
-            if let completionHandler = self?.backgroundSessionCompletionHandler {
-                self?.backgroundSessionCompletionHandler = nil
-                completionHandler()
+            guard let handler = self?.backgroundSessionCompletionHandler else {
+                return
             }
+            // according to Apple's documentation, this completion handler MUST be called on the main thread
+            handler()
         }
     }
-}
-
-extension F4SDatabaseDownloadManager : F4SDownloadServiceDelegate {
+    
     
     public func downloadService(_ service: F4SDownloadService, didFailToDownloadWithError error: F4SNetworkError) {
-        print("download failed! \(error)")
+        print("company database download failed! \(error)")
         scheduleNextCheckAfter(delay: failedInterval)
     }
     
@@ -169,8 +175,8 @@ extension F4SDatabaseDownloadManager : F4SDownloadServiceDelegate {
             UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.companyDatabaseCreatedDate)
             
             // Advise observers that a new database is available at the staging location
-            databaseAvailabilityObservers.forEach({ (observer) in
-                observer.newStagedDatabaseIsAvailable(url: stagedUrl)
+            databaseAvailabilityObservers.forEach({ (boxedObserver) in
+                boxedObserver.observer?.newStagedDatabaseIsAvailable(url: stagedUrl)
             })
             
             // Schedule next update
@@ -182,9 +188,8 @@ extension F4SDatabaseDownloadManager : F4SDownloadServiceDelegate {
     }
     
     public func downloadServiceProgressed(_ service: F4SDownloadService, fractionComplete: Double) {
-        // print("download fraction complete: \(fractionComplete)")
-        databaseAvailabilityObservers.forEach({ (observer) in
-            observer.newDatabaseIsDownloading(progress: fractionComplete)
+        databaseAvailabilityObservers.forEach({ (boxedObserver) in
+            boxedObserver.observer?.newDatabaseIsDownloading(progress: fractionComplete)
         })
     }
 }
