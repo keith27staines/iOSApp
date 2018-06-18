@@ -979,7 +979,7 @@ extension MapViewController {
             log.debug("Network is reached")
             if let appDelegate = UIApplication.shared.delegate as? AppDelegate, let dbManager = appDelegate.databaseDownloadManager {
                 if !dbManager.isLocalDatabaseAvailable() {
-                    //dbManager.start()
+                    dbManager.start()
                     MessageHandler.sharedInstance.showLoadingOverlay(view)
                 }
             }

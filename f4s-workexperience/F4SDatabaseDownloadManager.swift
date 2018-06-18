@@ -104,6 +104,7 @@ public class F4SDatabaseDownloadManager  : NSObject {
                     return
                 }
                 if localDate < serverDate {
+                    // No need to schedule another check in this golden route case because the download handler with do it for us
                     strongSelf.beginDatabaseDownloadWithMetadata(metadata)
                 }
             }
@@ -154,6 +155,9 @@ extension F4SDatabaseDownloadManager : F4SDownloadServiceDelegate {
     }
     
     public func downloadService(_ service: F4SDownloadService, didFinishDownloadingToUrl tempUrl: URL) {
+        
+        defer { scheduleNextCheckAfter(delay: successInterval) }
+        
         let filemanager = FileManager.default
         guard filemanager.fileExists(atPath: tempUrl.path) else {
             return
@@ -178,9 +182,6 @@ extension F4SDatabaseDownloadManager : F4SDownloadServiceDelegate {
             databaseAvailabilityObservers.forEach({ (boxedObserver) in
                 boxedObserver.observer?.newStagedDatabaseIsAvailable(url: stagedUrl)
             })
-            
-            // Schedule next update
-            scheduleNextCheckAfter(delay: successInterval)
             
         } catch {
             log.error(error)

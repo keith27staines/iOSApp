@@ -337,6 +337,7 @@ extension AppDelegate {
                      handleEventsForBackgroundURLSession identifier: String,
                      completionHandler: @escaping () -> Void) {
         databaseDownloadManager = F4SDatabaseDownloadManager(backgroundSessionCompletionHandler: completionHandler)
+        databaseDownloadManager?.start()
     }
 }
 
