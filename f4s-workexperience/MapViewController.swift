@@ -362,7 +362,7 @@ extension MapViewController {
             string: company.industry, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: Style.smallerMediumTextSize, weight: UIFont.Weight.light), NSAttributedStringKey.foregroundColor: UIColor.black])
         
         if !company.logoUrl.isEmpty, let url = NSURL(string: company.logoUrl) {
-            ImageService.sharedInstance.getImage(url: url, completed: {
+            F4SImageService.sharedInstance.getImage(url: url, completed: {
                 succeeded, image in
                 DispatchQueue.main.async {
                     if succeeded && image != nil {

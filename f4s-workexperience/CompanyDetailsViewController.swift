@@ -411,7 +411,7 @@ extension CompanyDetailsViewController {
         }
         self.firmLogoImage.image = UIImage(named: "DefaultLogo")
         if !company.logoUrl.isEmpty, let url = NSURL(string: company.logoUrl) {
-            ImageService.sharedInstance.getImage(url: url, completed: {
+            F4SImageService.sharedInstance.getImage(url: url, completed: {
                 [weak self]
                 succeeded, image in
                 DispatchQueue.main.async {

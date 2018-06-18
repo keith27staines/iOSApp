@@ -61,7 +61,7 @@
 		20B128181DDA1A3900CE3F1F /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B128131DDA1A3900CE3F1F /* Config.swift */; };
 		20D51BE41E27710C003A8358 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D51BE31E27710C003A8358 /* NotificationHelper.swift */; };
 		20FABFEC1DDDA63600D583E2 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FABFEB1DDDA63600D583E2 /* FileHelper.swift */; };
-		20FEBDDA1DE5AD3400EBDCBF /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FEBDD91DE5AD3400EBDCBF /* ImageService.swift */; };
+		20FEBDDA1DE5AD3400EBDCBF /* F4SImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FEBDD91DE5AD3400EBDCBF /* F4SImageService.swift */; };
 		401634C41E0A9F16000161FA /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401634C31E0A9F16000161FA /* NotificationViewController.swift */; };
 		401634C81E0A9F73000161FA /* NotificationView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 401634C61E0A9F73000161FA /* NotificationView.storyboard */; };
 		405974061DFD44670002DB3A /* ExtraInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 405974041DFD44660002DB3A /* ExtraInfo.storyboard */; };
@@ -351,7 +351,7 @@
 		20B1281F1DDA1D5B00CE3F1F /* f4s-workexperience.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "f4s-workexperience.xcconfig"; sourceTree = "<group>"; };
 		20D51BE31E27710C003A8358 /* NotificationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
 		20FABFEB1DDDA63600D583E2 /* FileHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
-		20FEBDD91DE5AD3400EBDCBF /* ImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		20FEBDD91DE5AD3400EBDCBF /* F4SImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SImageService.swift; sourceTree = "<group>"; };
 		401634C31E0A9F16000161FA /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationViewController.swift; path = "f4s-workexperience/NotificationViewController.swift"; sourceTree = SOURCE_ROOT; };
 		401634C71E0A9F73000161FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/NotificationView.storyboard; sourceTree = "<group>"; };
 		405974051DFD44660002DB3A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ExtraInfo.storyboard; sourceTree = "<group>"; };
@@ -913,15 +913,10 @@
 		40E78E4D1DD3289B000A3776 /* Workflow */ = {
 			isa = PBXGroup;
 			children = (
-				FC631CB720D679AC00199507 /* F4SNetworkSessionManager.swift */,
-				FC631CB520D64BD100199507 /* F4SAsynchronousOperation.swift */,
-				FC99BDCB20D172B600278DDE /* F4SCompanyDatabaseMetadataService.swift */,
-				FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */,
-				FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */,
 				40E78E5C1DD3297D000A3776 /* ApiBaseService.swift */,
 				40E78E5D1DD3297D000A3776 /* DeserializationManager.swift */,
 				2037B0B71DEC8A2400A9DE3E /* TemplateService.swift */,
-				20FEBDD91DE5AD3400EBDCBF /* ImageService.swift */,
+				20FEBDD91DE5AD3400EBDCBF /* F4SImageService.swift */,
 				20B127DE1DD99E5700CE3F1F /* UserService.swift */,
 				2037B0A01DE84EEF00A9DE3E /* PlacementService.swift */,
 				FC99BDC620CFD2C300278DDE /* Coredata services */,
@@ -930,6 +925,11 @@
 				FC09CD5020CA62D700A79240 /* F4SShortlistService.swift */,
 				FC09CD5220CA6D4500A79240 /* F4SJsonDecoding.swift */,
 				FCACBF4320C7EB9F00EABAE8 /* F4SContentService.swift */,
+				FC631CB720D679AC00199507 /* F4SNetworkSessionManager.swift */,
+				FC631CB520D64BD100199507 /* F4SAsynchronousOperation.swift */,
+				FC99BDCB20D172B600278DDE /* F4SCompanyDatabaseMetadataService.swift */,
+				FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */,
+				FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */,
 			);
 			name = Workflow;
 			sourceTree = "<group>";
@@ -1971,7 +1971,7 @@
 				405974081DFD449C0002DB3A /* ExtraInfoViewController.swift in Sources */,
 				206F8F8C1E1E48120024937B /* MessageOptionCollectionViewCell.swift in Sources */,
 				FC631CB820D679AC00199507 /* F4SNetworkSessionManager.swift in Sources */,
-				20FEBDDA1DE5AD3400EBDCBF /* ImageService.swift in Sources */,
+				20FEBDDA1DE5AD3400EBDCBF /* F4SImageService.swift in Sources */,
 				FCA6D2961FA75DE40037962B /* Styler.swift in Sources */,
 				FC4336CA202DB953001D0569 /* StringExtensions.swift in Sources */,
 				FC25A05F1F850DF4002F51A9 /* F4SCompanyPin.swift in Sources */,
