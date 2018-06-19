@@ -108,7 +108,7 @@ public class F4SDataTaskService {
                     return
                 }
                 guard let jsonObject = try? strongSelf.jsonDecoder.decode(A.self, from: data) else {
-                    let error = F4SNetworkDataErrorType.undecodableData(data).error(attempting: attempting)
+                    let error = F4SNetworkDataErrorType.deserialization(data).error(attempting: attempting)
                     completion(F4SNetworkResult.error(error))
                     return
                 }

@@ -12,12 +12,12 @@ import XCTest
 class F4STemplateTests: XCTestCase {
     
     func test_Choice_uuidNotDate() {
-        let choice = Choice(uuid: "abc", value: "fhkds")
+        let choice = F4SChoice(uuid: "abc", value: "fhkds")
         XCTAssertFalse(choice.uuidIsDate)
     }
     
     func test_Choice_uuidIsDate() {
-        let choice = Choice(uuid: "2018-02-09T00:00:00Z", value: "fhkds")
+        let choice = F4SChoice(uuid: "2018-02-09T00:00:00Z", value: "fhkds")
         XCTAssertTrue(choice.uuidIsDate)
     }
     

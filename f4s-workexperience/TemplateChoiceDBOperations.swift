@@ -25,13 +25,13 @@ class TemplateChoiceDBOperations {
         TemplateChoiceCoreDataManager.sharedInstance.saveTemplateChoiceToContext(name: name, userUuid: userUuid, choiceList: choiceList)
     }
 
-    func getSelectedTemplateBlanks() -> [TemplateBlank] {
+    func getSelectedTemplateBlanks() -> [F4STemplateBlank] {
         let keychain = KeychainSwift()
         guard let userUuid = keychain.get(UserDefaultsKeys.userUuid) else {
             return []
         }
         let templateChoiceDBData = TemplateChoiceCoreDataManager.sharedInstance.getTemplateChoicesForUser(userUuid: userUuid)
-        var templates: [TemplateBlank] = []
+        var templates: [F4STemplateBlank] = []
         for template in templateChoiceDBData {
             let temp = TemplateChoiceDBOperations.sharedInstance.getTemplateChoiceFromInterestDB(templateChoiceDB: template)
             templates.append(temp)
@@ -39,18 +39,18 @@ class TemplateChoiceDBOperations {
         return templates
     }
 
-    func getTemplateChoicesForCurrentUserWithName(name: String) -> TemplateBlank {
+    func getTemplateChoicesForCurrentUserWithName(name: String) -> F4STemplateBlank {
         let keychain = KeychainSwift()
         guard let userUuid = keychain.get(UserDefaultsKeys.userUuid),
             let templateChoiceDBData = TemplateChoiceCoreDataManager.sharedInstance.getTemplateChoicesForUserWithName(userUuid: userUuid, name: name) else {
-            return TemplateBlank()
+            return F4STemplateBlank()
         }
         return TemplateChoiceDBOperations.sharedInstance.getTemplateChoiceFromInterestDB(templateChoiceDB: templateChoiceDBData)
     }
 
-    func getAllTemplateChoices() -> [TemplateBlank] {
+    func getAllTemplateChoices() -> [F4STemplateBlank] {
         let templateChoiceDBData = TemplateChoiceCoreDataManager.sharedInstance.getAllTemplateChoices()
-        var templates: [TemplateBlank] = []
+        var templates: [F4STemplateBlank] = []
         for template in templateChoiceDBData {
             let temp = TemplateChoiceDBOperations.sharedInstance.getTemplateChoiceFromInterestDB(templateChoiceDB: template)
             templates.append(temp)
@@ -66,16 +66,16 @@ class TemplateChoiceDBOperations {
         TemplateChoiceCoreDataManager.sharedInstance.removeTemplateChoiceWithName(name: name, userUuid: userUuid)
     }
 
-    fileprivate func getTemplateChoiceFromInterestDB(templateChoiceDB: TemplateChoiceDB) -> TemplateBlank {
-        var temp: TemplateBlank = TemplateBlank()
+    fileprivate func getTemplateChoiceFromInterestDB(templateChoiceDB: TemplateChoiceDB) -> F4STemplateBlank {
+        var templateBlank: F4STemplateBlank = F4STemplateBlank()
         if let name = templateChoiceDB.name {
-            temp.name = name
+            templateBlank.name = name
         }
-        var choices: [Choice] = []
+        var choices: [F4SChoice] = []
         for t in templateChoiceDB.getValueList() {
-            choices.append(Choice(uuid: t))
+            choices.append(F4SChoice(uuid: t))
         }
-        temp.choices = choices
-        return temp
+        templateBlank.choices = choices
+        return templateBlank
     }
 }

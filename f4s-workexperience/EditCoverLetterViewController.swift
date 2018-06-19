@@ -31,8 +31,8 @@ class EditCoverLetterViewController: UIViewController {
     var isVisibleStartDatePicker = false
     var isVisibleEndDatePicker = false
 
-    var currentTemplate: TemplateEntity!
-    var selectedTemplateBlanks: [TemplateBlank] = []
+    var currentTemplate: F4STemplate!
+    var selectedTemplateBlanks: [F4STemplateBlank] = []
     var dateFormatter: DateFormatter?
 
     override func viewDidLoad() {
@@ -432,9 +432,9 @@ extension EditCoverLetterViewController {
             switch attribute
             {
             case .PersonalAttributes:
-                return templateBank.maxChoice
+                return templateBank.maxChoices
             case .EmploymentSkills:
-                return templateBank.maxChoice
+                return templateBank.maxChoices
             default:
                 return 0
             }
@@ -447,11 +447,11 @@ extension EditCoverLetterViewController {
             switch attribute
             {
             case .StartDate:
-                self.selectedTemplateBlanks[indexOfAttribute].choices = [Choice(uuid: data)]
+                self.selectedTemplateBlanks[indexOfAttribute].choices = [F4SChoice(uuid: data)]
                 TemplateChoiceDBOperations.sharedInstance.saveTemplateChoice(name: self.selectedTemplateBlanks[indexOfAttribute].name, choiceList: [data])
                 break
             case .EndDate:
-                self.selectedTemplateBlanks[indexOfAttribute].choices = [Choice(uuid: data)]
+                self.selectedTemplateBlanks[indexOfAttribute].choices = [F4SChoice(uuid: data)]
                 TemplateChoiceDBOperations.sharedInstance.saveTemplateChoice(name: self.selectedTemplateBlanks[indexOfAttribute].name, choiceList: [data])
                 break
             default:
@@ -461,13 +461,13 @@ extension EditCoverLetterViewController {
             switch attribute
             {
             case .StartDate:
-                let newBank = TemplateBlank(name: attribute.rawValue, choices: [Choice(uuid: data)])
-                self.selectedTemplateBlanks.append(newBank)
+                let newBlank = F4STemplateBlank(name: attribute.rawValue, choices: [F4SChoice(uuid: data)])
+                self.selectedTemplateBlanks.append(newBlank)
                 TemplateChoiceDBOperations.sharedInstance.saveTemplateChoice(name: attribute.rawValue, choiceList: [data])
                 break
             case .EndDate:
-                let newBank = TemplateBlank(name: attribute.rawValue, choices: [Choice(uuid: data)])
-                self.selectedTemplateBlanks.append(newBank)
+                let newBlank = F4STemplateBlank(name: attribute.rawValue, choices: [F4SChoice(uuid: data)])
+                self.selectedTemplateBlanks.append(newBlank)
                 TemplateChoiceDBOperations.sharedInstance.saveTemplateChoice(name: attribute.rawValue, choiceList: [data])
                 break
             default:

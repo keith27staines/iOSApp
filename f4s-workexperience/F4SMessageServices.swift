@@ -51,7 +51,7 @@ extension F4SMessageService : F4SMessageServiceProtocol {
                     let messages = try decoder.decode(F4SMessagesList.self, from: data)
                     completion(F4SNetworkResult.success(messages))
                 } catch {
-                    let error = F4SNetworkDataErrorType.undecodableData(data).error(attempting: attempting)
+                    let error = F4SNetworkDataErrorType.deserialization(data).error(attempting: attempting)
                     completion(F4SNetworkResult.error(error))
                 }
             }

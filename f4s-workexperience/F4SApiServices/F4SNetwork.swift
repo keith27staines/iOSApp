@@ -28,7 +28,7 @@ public enum F4SNetworkErrorDomainType : String {
 public enum F4SNetworkDataErrorType {
     case noData
     case emptyData
-    case undecodableData(Data)
+    case deserialization(Data)
     case serialization(Encodable)
     case unknownError(Any?)
     case genericErrorWithRetry
@@ -40,7 +40,7 @@ public enum F4SNetworkDataErrorType {
         switch self {
         case .noData, .emptyData:
             code = -1000
-        case .undecodableData(let data):
+        case .deserialization(let data):
             code = -1100
             userInfo["dataToDeserialize"] = data
         case .serialization(let encodable):

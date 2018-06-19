@@ -13,11 +13,11 @@ class ChooseAttributesViewController: UIViewController {
 
     fileprivate let chooseAttributesCellIdentifier = "ChooseAttributesIdentifier"
 
-    var currentTemplate: TemplateEntity?
+    var currentTemplate: F4STemplate?
     var currentAttributeType: ChooseAttributes?
-    var currentTemplateBank: TemplateBlank?
+    var currentTemplateBank: F4STemplateBlank?
 
-    var selectedTemplateChoices: TemplateBlank?
+    var selectedTemplateChoices: F4STemplateBlank?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,11 +43,11 @@ extension ChooseAttributesViewController {
             return
         }
 
-        for bank in template.blanks {
-            if bank.name == self.currentAttributeType?.rawValue {
-                self.currentTemplateBank = bank
+        for blank in template.blanks {
+            if blank.name == self.currentAttributeType?.rawValue {
+                self.currentTemplateBank = blank
                 self.currentTemplateBank?.choices.sort(by: { $0.value < $1.value })
-                self.selectedTemplateChoices = TemplateChoiceDBOperations.sharedInstance.getTemplateChoicesForCurrentUserWithName(name: bank.name)
+                self.selectedTemplateChoices = TemplateChoiceDBOperations.sharedInstance.getTemplateChoicesForCurrentUserWithName(name: blank.name)
             }
         }
     }
@@ -127,7 +127,7 @@ extension ChooseAttributesViewController: UITableViewDelegate, UITableViewDataSo
             }
         } else {
             // add attribute
-            if selectedTemplateChoices?.choices != nil && (selectedTemplateChoices?.choices.count)! < templateBank.maxChoice {
+            if selectedTemplateChoices?.choices != nil && (selectedTemplateChoices?.choices.count)! < templateBank.maxChoices {
                 self.selectedTemplateChoices?.choices.append(templateBank.choices[indexPath.row])
             } else if self.currentAttributeType == ChooseAttributes.JobRole {
                 // remove the previous

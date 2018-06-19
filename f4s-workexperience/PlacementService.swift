@@ -86,7 +86,7 @@ class PlacementService: ApiBaseService {
         }
     }
 
-    func updatePlacement(placement: Placement, template: TemplateEntity, postCompleted: @escaping (_ succeeded: Bool, _ msg: Result<String>) -> Void) {
+    func updatePlacement(placement: Placement, template: F4STemplate, postCompleted: @escaping (_ succeeded: Bool, _ msg: Result<String>) -> Void) {
         let url = ApiConstants.updatePlacementUrl + "/\(placement.placementUuid)"
         var params: Parameters = ["company_uuid": placement.companyUuid as Any, "interests": PlacementService.sharedInstance.getInterestList(interests: placement.interestsList), "coverletter_uuid": template.uuid as Any, "uuid": placement.placementUuid as Any] as [String: Any]
 
@@ -177,7 +177,7 @@ class PlacementService: ApiBaseService {
         return interestList
     }
 
-    private func getChoiceList(choices: [Choice]) -> [String] {
+    private func getChoiceList(choices: [F4SChoice]) -> [String] {
         var choicesList: [String] = []
         for choice in choices {
             choicesList.append(choice.uuid)
