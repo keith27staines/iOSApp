@@ -1,0 +1,77 @@
+[
+   {\"uuid\":\"91793ca1-4245-44d5-a824-fd94f2169942\",
+    \"template\":\"Dear Sir / Madam,\\r\\n\\r\\nAs a young, {{ attributes }} individual, I am interested in being offered a {{ job_role }} at {{ company_name }} between these dates: {{ start_date }} and {{ end_date }}.\\r\\n\\r\\nThe skills I\'m looking to acquire through a placement with you are {{ skills }}.\\r\\n\\r\\nMy motivation for applying is so that I can better prepare for the type of work offered by companies like yours.\\r\\n\\r\\nThank you in advance for your time.\",
+    \"blanks\":
+        [
+          {
+             \"name\":\"start_date\",
+             \"placeholder\":\"select start date\",
+             \"option_type\":\"date\",
+             \"max_choice\":1,
+             \"option_choices\":[],
+             \"initial\":\"2018-06-19T10:56:28.413456+01:00\"
+          }
+          {
+             \"name\":\"end_date\",
+             \"placeholder\":\"select end date\",
+             \"option_type\":\"date\",
+             \"max_choice\":1,
+             \"option_choices\":[],
+             \"initial\":\"2018-06-19T10:56:28.447127+01:00\"},
+          {
+             \"name\":\"job_role\",
+             \"placeholder\":\"select job role\",
+             \"option_type\":\"select\",
+             \"max_choice\":1,
+             \"option_choices\":
+                [
+                   {
+                      \"uuid\":\"ef43bccb-3888-47f8-babd-1e6715ec644d\",
+                      \"value\":\"customer facing role\"
+                   },
+                   {
+                      \"uuid\":\"2a7c4bca-03b6-4f1c-8b42-ff2917ce138f\",
+                      \"value\":\"engineering role\"
+                   },
+                   {
+                      \"uuid\":\"8b02a75d-c348-41a8-968f-da5bbe053add\",
+                      \"value\":\"finance role\"
+                   },
+                   {
+                      \"uuid\":\"a3e133c3-a9bf-46ec-a690-8621445bfc20\",
+                      \"value\":\"marketing role\"
+                   },
+                   {
+                      \"uuid\":\"e3b9a2c6-4868-4af1-b7a4-10502fc3dc28\",
+                      \"value\":\"industrial placement\"
+                   },
+                   {
+                      \"uuid\":\"a970e51f-ab3d-459b-ba1d-4a41f230376b\",
+                      \"value\":\"sales role\"
+                   },
+                   {
+                      \"uuid\":\"18748f0d-1960-4e2a-91d7-b05cdfd9398f\",
+                      \"value\":\"shadowing role\"
+                   },
+                   {
+                      \"uuid\":\"f00e646a-13f3-46ac-b094-421eb366d018\",
+                      \"value\":\"taster week (marketing)\"
+                   },
+                   {
+                      \"uuid\":\"badab370-0197-4f12-826b-3a9b58b56c3d\",
+                      \"value\":\"taster week (finance)\"
+                   },
+                   {
+                      \"uuid\":\"95adb374-1682-4f34-9cd2-34fd071d6eba\",
+                      \"value\":\"taster project\"
+                   },
+                   {
+                      \"uuid\":\"d810c276-2a05-4997-b004-d015678a2ac6\",
+                      \"value\":\"internship (1 week)\"
+                   }
+                ],
+             \"initial\":null
+          },
+       ]
+   }
+]

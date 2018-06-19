@@ -111,7 +111,7 @@ public struct Company : Hashable {
             }
             return
         }
-        ImageService.sharedInstance.getImage(url: url, completed: { succeeded, image in
+        F4SImageService.sharedInstance.getImage(url: url, completed: { succeeded, image in
             DispatchQueue.main.async {
                 completion(image ?? defaultLogo)
             }
@@ -169,50 +169,6 @@ public struct Interest : Hashable {
         self.id = id
         self.uuid = uuid
         self.name = name
-    }
-}
-
-struct TemplateEntity {
-    var uuid: String
-    var template: String
-    var blanks: [TemplateBlank]
-
-    init(uuid: String = "", template: String = "", blank: [TemplateBlank] = []) {
-        self.uuid = uuid
-        self.template = template
-        self.blanks = blank
-    }
-}
-
-struct TemplateBlank {
-    var name: String
-    var placeholder: String
-    var optionType: TemplateOptionType
-    var maxChoice: Int
-    var choices: [Choice]
-    var initial: String
-
-    init(name: String = "", placeholder: String = "", optionType: TemplateOptionType = .select, maxChoice: Int = 0, choices: [Choice] = [], initial: String = "") {
-        self.name = name
-        self.placeholder = placeholder
-        self.optionType = optionType
-        self.maxChoice = maxChoice
-        self.choices = choices
-        self.initial = initial
-    }
-}
-
-struct Choice {
-    var uuid: String
-    var value: String
-
-    init(uuid: String = "", value: String = "") {
-        self.uuid = uuid
-        self.value = value
-    }
-    
-    var uuidIsDate: Bool {
-        return Date.dateFromRfc3339(string: uuid) == nil ? false : true
     }
 }
 

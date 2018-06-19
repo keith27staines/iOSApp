@@ -17,9 +17,13 @@ class CoverLetterViewController: UIViewController {
     @IBOutlet weak var termsAndConditionsButton: UIButton!
     var editCoverLetterButton: UIButton?
 
-    var currentTemplate: TemplateEntity?
-    var selectedTemplateChoices: [TemplateBlank] = []
+    var currentTemplate: F4STemplate?
+    var selectedTemplateChoices: [F4STemplateBlank] = []
     var applicationContext: F4SApplicationContext!
+    
+    var templateService: F4STemplateServiceProtocol = {
+        return F4STemplateService()
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -192,7 +196,7 @@ extension CoverLetterViewController {
         }
     }
     
-    func getFillStrings(selectedChoices: [Choice], availableChoices: [Choice]) -> [String] {
+    func getFillStrings(selectedChoices: [F4SChoice], availableChoices: [F4SChoice]) -> [String] {
         var fillStrings = [String]()
         for selectedChoice in selectedChoices {
             if let indexOfChoice = availableChoices.index(where: { $0.uuid == selectedChoice.uuid }) {
@@ -310,7 +314,7 @@ extension CoverLetterViewController {
         return mutableAttributedString
     }
 
-    func getValueForUuid(choices: [Choice], uuid: String) -> String {
+    func getValueForUuid(choices: [F4SChoice], uuid: String) -> String {
         if let indexOfChoice = choices.index(where: { $0.uuid == uuid }) {
             return choices[indexOfChoice].value
         }
@@ -390,29 +394,27 @@ extension CoverLetterViewController {
                 return
             }
         }
-
         MessageHandler.sharedInstance.showLoadingOverlay(self.view)
-        TemplateService.sharedInstance.getTemplate {
-            [weak self]
-            _, result in
-            guard let strongSelf = self else {
-                return
-            }
-            MessageHandler.sharedInstance.hideLoadingOverlay()
-            switch result
-            {
-            case let .value(boxedValue):
-                DispatchQueue.main.async {
-                    strongSelf.currentTemplate = boxedValue.value.first
-                    strongSelf.loadTemplate()
+        templateService.getTemplates { result in
+            DispatchQueue.main.async { [weak self] in
+                guard let strongSelf = self else { return }
+                MessageHandler.sharedInstance.hideLoadingOverlay()
+                switch result
+                {
+                case .success(let templates):
+                    DispatchQueue.main.async {
+                        strongSelf.currentTemplate = templates.first
+                        strongSelf.loadTemplate()
+                    }
+                    break
+                case let .error(error):
+                    MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf, cancelHandler: {
+                        
+                    }, retryHandler: {
+                        strongSelf.getLatestTemplate()
+                    })
+                    break
                 }
-                break
-            case let .error(error):
-                MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
-                break
-            case let .deffinedError(error):
-                MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
-                break
             }
         }
     }
@@ -439,7 +441,7 @@ extension CoverLetterViewController {
         }
         applicationContext.availabilityPeriod?.saveToUserDefaults()
         MessageHandler.sharedInstance.showLoadingOverlay(self.view)
-        let templateToUpdate = TemplateEntity(uuid: currentTemplateUuid, blank: self.selectedTemplateChoices)
+        let templateToUpdate = F4STemplate(uuid: currentTemplateUuid, blanks: self.selectedTemplateChoices)
         placement.interestsList = [Interest](InterestDBOperations.sharedInstance.interestsForCurrentUser())
         PlacementService.sharedInstance.updatePlacement(placement: placement, template: templateToUpdate) {
             [weak self]

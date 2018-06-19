@@ -25,7 +25,7 @@
 		2037B0AF1DEC592900A9DE3E /* PlacementDBOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037B0AE1DEC592900A9DE3E /* PlacementDBOperations.swift */; };
 		2037B0B41DEC87F200A9DE3E /* CoverLetter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2037B0B21DEC87F200A9DE3E /* CoverLetter.storyboard */; };
 		2037B0B61DEC881500A9DE3E /* CoverLetterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037B0B51DEC881500A9DE3E /* CoverLetterViewController.swift */; };
-		2037B0B81DEC8A2400A9DE3E /* TemplateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037B0B71DEC8A2400A9DE3E /* TemplateService.swift */; };
+		2037B0B81DEC8A2400A9DE3E /* F4STemplateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037B0B71DEC8A2400A9DE3E /* F4STemplateService.swift */; };
 		204203EA1E4B110A007C7409 /* ShortlistDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204203E91E4B110A007C7409 /* ShortlistDB.swift */; };
 		204203EC1E4B160C007C7409 /* ShortlistCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204203EB1E4B160C007C7409 /* ShortlistCoreDataManager.swift */; };
 		204203EE1E4B16D7007C7409 /* ShortlistDBOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204203ED1E4B16D7007C7409 /* ShortlistDBOperations.swift */; };
@@ -61,7 +61,7 @@
 		20B128181DDA1A3900CE3F1F /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B128131DDA1A3900CE3F1F /* Config.swift */; };
 		20D51BE41E27710C003A8358 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D51BE31E27710C003A8358 /* NotificationHelper.swift */; };
 		20FABFEC1DDDA63600D583E2 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FABFEB1DDDA63600D583E2 /* FileHelper.swift */; };
-		20FEBDDA1DE5AD3400EBDCBF /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FEBDD91DE5AD3400EBDCBF /* ImageService.swift */; };
+		20FEBDDA1DE5AD3400EBDCBF /* F4SImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FEBDD91DE5AD3400EBDCBF /* F4SImageService.swift */; };
 		401634C41E0A9F16000161FA /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401634C31E0A9F16000161FA /* NotificationViewController.swift */; };
 		401634C81E0A9F73000161FA /* NotificationView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 401634C61E0A9F73000161FA /* NotificationView.storyboard */; };
 		405974061DFD44670002DB3A /* ExtraInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 405974041DFD44660002DB3A /* ExtraInfo.storyboard */; };
@@ -143,6 +143,9 @@
 		FC09CD5120CA62D700A79240 /* F4SShortlistService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC09CD5020CA62D700A79240 /* F4SShortlistService.swift */; };
 		FC09CD5320CA6D4500A79240 /* F4SJsonDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC09CD5220CA6D4500A79240 /* F4SJsonDecoding.swift */; };
 		FC11006A1FB36A230055EB9A /* ReachabilityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */; };
+		FC1D6B7C20D906D100D0C9AF /* F4STemplateModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D6B7B20D906D100D0C9AF /* F4STemplateModels.swift */; };
+		FC1D6B7E20D90BA000D0C9AF /* json in Resources */ = {isa = PBXBuildFile; fileRef = FC1D6B7D20D90BA000D0C9AF /* json */; };
+		FC1D6B8020D92C8900D0C9AF /* F4STemplateModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D6B7F20D92C8900D0C9AF /* F4STemplateModelTests.swift */; };
 		FC25A05F1F850DF4002F51A9 /* F4SCompanyPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */; };
 		FC31F095204D54C6009DD526 /* F4SDebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */; };
 		FC31F097204D54E3009DD526 /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC31F096204D54E3009DD526 /* Debug.storyboard */; };
@@ -312,7 +315,7 @@
 		2037B0AE1DEC592900A9DE3E /* PlacementDBOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacementDBOperations.swift; sourceTree = "<group>"; };
 		2037B0B31DEC87F200A9DE3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/CoverLetter.storyboard; sourceTree = "<group>"; };
 		2037B0B51DEC881500A9DE3E /* CoverLetterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoverLetterViewController.swift; path = "f4s-workexperience/CoverLetterViewController.swift"; sourceTree = "<group>"; };
-		2037B0B71DEC8A2400A9DE3E /* TemplateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateService.swift; sourceTree = "<group>"; };
+		2037B0B71DEC8A2400A9DE3E /* F4STemplateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4STemplateService.swift; sourceTree = "<group>"; };
 		204203E91E4B110A007C7409 /* ShortlistDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortlistDB.swift; sourceTree = "<group>"; };
 		204203EB1E4B160C007C7409 /* ShortlistCoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortlistCoreDataManager.swift; sourceTree = "<group>"; };
 		204203ED1E4B16D7007C7409 /* ShortlistDBOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortlistDBOperations.swift; sourceTree = "<group>"; };
@@ -351,7 +354,7 @@
 		20B1281F1DDA1D5B00CE3F1F /* f4s-workexperience.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "f4s-workexperience.xcconfig"; sourceTree = "<group>"; };
 		20D51BE31E27710C003A8358 /* NotificationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
 		20FABFEB1DDDA63600D583E2 /* FileHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
-		20FEBDD91DE5AD3400EBDCBF /* ImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		20FEBDD91DE5AD3400EBDCBF /* F4SImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SImageService.swift; sourceTree = "<group>"; };
 		401634C31E0A9F16000161FA /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationViewController.swift; path = "f4s-workexperience/NotificationViewController.swift"; sourceTree = SOURCE_ROOT; };
 		401634C71E0A9F73000161FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/NotificationView.storyboard; sourceTree = "<group>"; };
 		405974051DFD44660002DB3A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ExtraInfo.storyboard; sourceTree = "<group>"; };
@@ -469,6 +472,9 @@
 		FC09CD5020CA62D700A79240 /* F4SShortlistService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SShortlistService.swift; sourceTree = "<group>"; };
 		FC09CD5220CA6D4500A79240 /* F4SJsonDecoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SJsonDecoding.swift; sourceTree = "<group>"; };
 		FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityExtension.swift; sourceTree = "<group>"; };
+		FC1D6B7B20D906D100D0C9AF /* F4STemplateModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateModels.swift; sourceTree = "<group>"; };
+		FC1D6B7D20D90BA000D0C9AF /* json */ = {isa = PBXFileReference; lastKnownFileType = text; path = json; sourceTree = "<group>"; };
+		FC1D6B7F20D92C8900D0C9AF /* F4STemplateModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateModelTests.swift; sourceTree = "<group>"; };
 		FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyPin.swift; sourceTree = "<group>"; };
 		FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDebugViewController.swift; sourceTree = "<group>"; };
 		FC31F096204D54E3009DD526 /* Debug.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
@@ -913,23 +919,26 @@
 		40E78E4D1DD3289B000A3776 /* Workflow */ = {
 			isa = PBXGroup;
 			children = (
-				FC631CB720D679AC00199507 /* F4SNetworkSessionManager.swift */,
-				FC631CB520D64BD100199507 /* F4SAsynchronousOperation.swift */,
-				FC99BDCB20D172B600278DDE /* F4SCompanyDatabaseMetadataService.swift */,
-				FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */,
-				FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */,
+				2037B0B71DEC8A2400A9DE3E /* F4STemplateService.swift */,
+				FC1D6B7D20D90BA000D0C9AF /* json */,
+				FC1D6B7B20D906D100D0C9AF /* F4STemplateModels.swift */,
 				40E78E5C1DD3297D000A3776 /* ApiBaseService.swift */,
 				40E78E5D1DD3297D000A3776 /* DeserializationManager.swift */,
-				2037B0B71DEC8A2400A9DE3E /* TemplateService.swift */,
-				20FEBDD91DE5AD3400EBDCBF /* ImageService.swift */,
 				20B127DE1DD99E5700CE3F1F /* UserService.swift */,
 				2037B0A01DE84EEF00A9DE3E /* PlacementService.swift */,
+				20FEBDD91DE5AD3400EBDCBF /* F4SImageService.swift */,
 				FC99BDC620CFD2C300278DDE /* Coredata services */,
 				FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */,
 				FC99BDC420CFAFD400278DDE /* F4SRemoveShortlistItemService.swift */,
 				FC09CD5020CA62D700A79240 /* F4SShortlistService.swift */,
 				FC09CD5220CA6D4500A79240 /* F4SJsonDecoding.swift */,
 				FCACBF4320C7EB9F00EABAE8 /* F4SContentService.swift */,
+				FC631CB720D679AC00199507 /* F4SNetworkSessionManager.swift */,
+				FC631CB520D64BD100199507 /* F4SAsynchronousOperation.swift */,
+				FC99BDCB20D172B600278DDE /* F4SCompanyDatabaseMetadataService.swift */,
+				FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */,
+				FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */,
+				FC1D6B7F20D92C8900D0C9AF /* F4STemplateModelTests.swift */,
 			);
 			name = Workflow;
 			sourceTree = "<group>";
@@ -1649,6 +1658,7 @@
 				2037B0B41DEC87F200A9DE3E /* CoverLetter.storyboard in Resources */,
 				FCE20CC4203C141B00CA821D /* DocumentUrl.storyboard in Resources */,
 				40C1A4F31DDEF2F6000F80AA /* AutoCompleteTableViewCell.xib in Resources */,
+				FC1D6B7E20D90BA000D0C9AF /* json in Resources */,
 				40E78E1E1DD31A86000A3776 /* Assets.xcassets in Resources */,
 				D54E0FFD1E044B0400A51560 /* InfoWindowView.xib in Resources */,
 				40A5CF3A1DED6F8D000007AB /* InterestsView.storyboard in Resources */,
@@ -1925,7 +1935,7 @@
 				FCB46F0C20518EE900F0779F /* F4SFeatureSwitchService.swift in Sources */,
 				204C89751DF5F0A100D8493A /* EditFooterView.swift in Sources */,
 				2037B0A11DE84EEF00A9DE3E /* PlacementService.swift in Sources */,
-				2037B0B81DEC8A2400A9DE3E /* TemplateService.swift in Sources */,
+				2037B0B81DEC8A2400A9DE3E /* F4STemplateService.swift in Sources */,
 				40E78E761DD32BE7000A3776 /* AnimatedMenuButton.swift in Sources */,
 				FCE20CBF203C12F300CA821D /* DocumentUrlViewController.swift in Sources */,
 				40E78E171DD31A86000A3776 /* AppDelegate.swift in Sources */,
@@ -1961,6 +1971,7 @@
 				FCACBF4620C8085900EABAE8 /* F4SVoucherService.swift in Sources */,
 				40E78E6F1DD32BD4000A3776 /* CustomMenuViewController.swift in Sources */,
 				40E78E7F1DD32BF4000A3776 /* SideDrawerSectionHeaderView.swift in Sources */,
+				FC1D6B7C20D906D100D0C9AF /* F4STemplateModels.swift in Sources */,
 				40E78E831DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift in Sources */,
 				FC4BB6031FA20EF700173864 /* PartnerSelectionViewController.swift in Sources */,
 				FCB1648320986E810045B9CA /* F4SRequestCompanyDocumentTableViewCell.swift in Sources */,
@@ -1971,7 +1982,7 @@
 				405974081DFD449C0002DB3A /* ExtraInfoViewController.swift in Sources */,
 				206F8F8C1E1E48120024937B /* MessageOptionCollectionViewCell.swift in Sources */,
 				FC631CB820D679AC00199507 /* F4SNetworkSessionManager.swift in Sources */,
-				20FEBDDA1DE5AD3400EBDCBF /* ImageService.swift in Sources */,
+				20FEBDDA1DE5AD3400EBDCBF /* F4SImageService.swift in Sources */,
 				FCA6D2961FA75DE40037962B /* Styler.swift in Sources */,
 				FC4336CA202DB953001D0569 /* StringExtensions.swift in Sources */,
 				FC25A05F1F850DF4002F51A9 /* F4SCompanyPin.swift in Sources */,
@@ -2027,6 +2038,7 @@
 				FC4336CC202DB999001D0569 /* F4SStringExtensionTests.swift in Sources */,
 				FCB6B8F72074C5ED0042C725 /* F4SCalendarWeekTests.swift in Sources */,
 				FCB6B8F82074C5ED0042C725 /* F4SCalendarTests.swift in Sources */,
+				FC1D6B8020D92C8900D0C9AF /* F4STemplateModelTests.swift in Sources */,
 				FC6C11C2202C4EE5002C8EA5 /* F4STemplateHelperTests.swift in Sources */,
 				FCB6B8F62074C5ED0042C725 /* F4SCalendarMonthTests.swift in Sources */,
 				FC59B1911F81549B0068EC9C /* F4SQuadtreeTests.swift in Sources */,

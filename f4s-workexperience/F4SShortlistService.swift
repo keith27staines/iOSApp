@@ -55,7 +55,7 @@ extension F4SCreateShortlistItemService {
             let shortlisted = try jsonDecoder.decode(F4SShortlistJson.self, from: data)
             return F4SNetworkResult.success(shortlisted)
         } catch {
-            let error = F4SNetworkDataErrorType.undecodableData(data).error(attempting: attempting)
+            let error = F4SNetworkDataErrorType.deserialization(data).error(attempting: attempting)
             return F4SNetworkResult.error(error)
         }
     }

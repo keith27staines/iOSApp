@@ -301,7 +301,7 @@ class CustomNavigationHelper {
 //        navCtrl.pushViewController(ctrl, animated: true)
 //    }
 
-    func pushChooseAttributes(_ navController: UINavigationController, currentTemplate: TemplateEntity, attribute: ChooseAttributes) {
+    func pushChooseAttributes(_ navController: UINavigationController, currentTemplate: F4STemplate, attribute: ChooseAttributes) {
         let chooseAttributesStoryboard = UIStoryboard(name: "ChooseAttributes", bundle: nil)
         guard let ctrl = chooseAttributesStoryboard.instantiateViewController(withIdentifier: "ChooseAttributesCtrl") as? ChooseAttributesViewController else {
             return

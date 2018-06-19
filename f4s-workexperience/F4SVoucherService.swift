@@ -54,7 +54,7 @@ extension F4SVoucherVerificationService : F4SVoucherVerificationServiceProtocol 
                     let voucherValidation = try decoder.decode(F4SVoucherValidation.self, from: data)
                     completion(F4SNetworkResult.success(voucherValidation))
                 } catch {
-                    let error = F4SNetworkDataErrorType.undecodableData(data).error(attempting: attempting)
+                    let error = F4SNetworkDataErrorType.deserialization(data).error(attempting: attempting)
                     completion(F4SNetworkResult.error(error))
                 }
             }

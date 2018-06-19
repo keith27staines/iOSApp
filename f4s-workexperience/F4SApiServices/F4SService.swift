@@ -52,6 +52,29 @@ public class F4SDataTaskService {
         return URL(string: baseUrl.absoluteString + "/" + apiName)!
     }
     
+    public typealias DataTaskReturn = (data:Data?, response:URLResponse?, error:Error?)
+    
+    public static func networkDataResultFrom(data: Data?, response: URLResponse?, error: Error?, attempting: String) -> F4SNetworkDataResult {
+        let dataReturned = DataTaskReturn(data: data, response: response, error: error)
+        return networkDataResultFrom(returned: dataReturned, attempting: attempting)
+    }
+    
+    public static func networkDataResultFrom(returned: DataTaskReturn, attempting: String) -> F4SNetworkDataResult {
+        if let error = returned.error as NSError? {
+            let result = F4SNetworkDataResult.error(F4SNetworkError(error: error, attempting: attempting))
+            return result
+        }
+        
+        let httpResponse = returned.response as! HTTPURLResponse
+        
+        if let error = F4SNetworkError(response: httpResponse, attempting: attempting) {
+            let result = F4SNetworkDataResult.error(error)
+            return result
+        }
+        let result = F4SNetworkDataResult.success(returned.data)
+        return result
+    }
+    
     /// Initialize a new instance
     /// - parameter baseURLString: The base url
     /// - parameter apiName: The name of the api being called
@@ -85,7 +108,7 @@ public class F4SDataTaskService {
                     return
                 }
                 guard let jsonObject = try? strongSelf.jsonDecoder.decode(A.self, from: data) else {
-                    let error = F4SNetworkDataErrorType.undecodableData(data).error(attempting: attempting)
+                    let error = F4SNetworkDataErrorType.deserialization(data).error(attempting: attempting)
                     completion(F4SNetworkResult.error(error))
                     return
                 }
@@ -138,6 +161,10 @@ public class F4SDataTaskService {
     }()
     
     internal func urlRequest(verb: F4SHttpRequestVerb, url: URL, dataToSend: Data?) -> URLRequest {
+        return F4SDataTaskService.urlRequest(verb:verb, url: url, dataToSend: dataToSend)
+    }
+    
+    static internal func urlRequest(verb: F4SHttpRequestVerb, url: URL, dataToSend: Data?) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = verb.name
         request.httpBody = dataToSend
@@ -146,7 +173,7 @@ public class F4SDataTaskService {
         return request
     }
     
-    internal func dataTask(with request: URLRequest, attempting: String, completion: @escaping (F4SNetworkDataResult) -> ()) -> URLSessionDataTask {
+    static internal func dataTask(with request: URLRequest, session: URLSession, attempting: String, completion: @escaping (F4SNetworkDataResult) -> ()) -> URLSessionDataTask {
         let task = session.dataTask(with: request, completionHandler: {data, response, error -> Void in
             if let error = error as NSError? {
                 let result = F4SNetworkDataResult.error(F4SNetworkError(error: error, attempting: attempting))
@@ -162,6 +189,10 @@ public class F4SDataTaskService {
             completion(F4SNetworkDataResult.success(data))
         })
         return task
+    }
+    
+    internal func dataTask(with request: URLRequest, attempting: String, completion: @escaping (F4SNetworkDataResult) -> ()) -> URLSessionDataTask {
+        return F4SDataTaskService.dataTask(with: request, session: session, attempting: attempting, completion: completion)
     }
 }
 
