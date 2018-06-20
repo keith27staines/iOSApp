@@ -47,7 +47,7 @@ public class F4SDatabaseDownloadManager  : NSObject {
     }
     
     public var localDatabaseDatestamp: Date? {
-        let date = UserDefaults.standard.value(forKey: UserDefaultsKeys.companyDatabaseCreatedDate) as! Date?
+        let date = UserDefaults.standard.value(forKey: UserDefaultsKeys.companyDatabaseCreatedDate) as? Date
         return date
     }
     
