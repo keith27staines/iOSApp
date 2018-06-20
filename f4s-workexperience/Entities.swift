@@ -22,16 +22,16 @@ struct F4SApplicationContext {
     }
 }
 
-struct User {
-    var email: String
-    var firstName: String
-    var lastName: String
-    var consenterEmail: String
-    var dateOfBirth: String
-    var requiresConsent: Bool
-    var placementUuid: String
+public struct User {
+    public var email: String
+    public var firstName: String
+    public var lastName: String
+    public var consenterEmail: String
+    public var dateOfBirth: String
+    public var requiresConsent: Bool
+    public var placementUuid: String
 
-    init(email: String = "", firstName: String = "", lastName: String = "", consenterEmail: String = "", dateOfBirth: String = "", requiresConsent: Bool = false, placementUuid: String = "") {
+    public init(email: String = "", firstName: String = "", lastName: String = "", consenterEmail: String = "", dateOfBirth: String = "", requiresConsent: Bool = false, placementUuid: String = "") {
         self.email = email
         self.firstName = firstName
         self.lastName = lastName

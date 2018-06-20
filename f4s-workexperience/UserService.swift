@@ -27,39 +27,39 @@ class UserService: ApiBaseService {
     
     var vendorID: String { return UIDevice.current.identifierForVendor!.uuidString }
     
-    func registerAnonymousUserOnServer(postCompleted: @escaping (_ succeeded: Bool, _ msg: Result<String>) -> Void) {
-        let url = ApiConstants.userProfileUrl
-        var params: Parameters = [:]
-        params["vendor_uuid"] = vendorID
-        params["type"] = "ios"
-        params["env"] = Config.apnsEnv
-
-        post(params, url: url) {
-            _, msg in
-            switch msg
-            {
-            case let .value(boxedJson):
-                let result = DeserializationManager.sharedInstance.parseCreateProfile(jsonOptional: boxedJson.value)
-                switch result
-                {
-                case .error:
-                    postCompleted(false, .deffinedError(Errors.GeneralCallErrors.GeneralError))
-
-                case let .deffinedError(error):
-                    postCompleted(false, .deffinedError(error))
-
-                case let .value(boxed):
-                    postCompleted(true, .value(Box(boxed.value)))
-                }
-
-            case .error:
-                postCompleted(false, .deffinedError(Errors.GeneralCallErrors.GeneralError))
-
-            case let .deffinedError(error):
-                postCompleted(false, .deffinedError(error))
-            }
-        }
-    }
+//    func registerAnonymousUserOnServer(postCompleted: @escaping (_ succeeded: Bool, _ msg: Result<String>) -> Void) {
+//        let url = ApiConstants.userProfileUrl
+//        var params: Parameters = [:]
+//        params["vendor_uuid"] = vendorID
+//        params["type"] = "ios"
+//        params["env"] = Config.apnsEnv
+//
+//        post(params, url: url) {
+//            _, msg in
+//            switch msg
+//            {
+//            case let .value(boxedJson):
+//                let result = DeserializationManager.sharedInstance.parseCreateProfile(jsonOptional: boxedJson.value)
+//                switch result
+//                {
+//                case .error:
+//                    postCompleted(false, .deffinedError(Errors.GeneralCallErrors.GeneralError))
+//
+//                case let .deffinedError(error):
+//                    postCompleted(false, .deffinedError(error))
+//
+//                case let .value(boxed):
+//                    postCompleted(true, .value(Box(boxed.value)))
+//                }
+//
+//            case .error:
+//                postCompleted(false, .deffinedError(Errors.GeneralCallErrors.GeneralError))
+//
+//            case let .deffinedError(error):
+//                postCompleted(false, .deffinedError(error))
+//            }
+//        }
+//    }
     
     func updateUser(user: User, putCompleted: @escaping (_ result: Result<String>) -> Void) {
         let keychain = KeychainSwift()

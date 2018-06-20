@@ -8,6 +8,33 @@
 
 import Foundation
 
+public extension JSONDecoder {
+    
+    public func decode<A:Decodable>(dataResult: F4SNetworkDataResult, intoType: A.Type, attempting: String, completion: (F4SNetworkResult<A>) -> ()) {
+        switch dataResult {
+        case .error(let error):
+            completion(F4SNetworkResult.error(error))
+        case .success(let data):
+            self.decode(data: data, intoType: intoType, attempting: attempting, completion: completion)
+        }
+    }
+    
+    public func decode<A:Decodable>(data: Data?, intoType: A.Type, attempting: String, completion: (F4SNetworkResult<A>) -> ()) {
+        guard let data = data else {
+            let noDataError = F4SNetworkDataErrorType.noData.error(attempting: attempting)
+            completion(F4SNetworkResult.error(noDataError))
+            return
+        }
+        do {
+            let decoded = try self.decode(intoType, from: data)
+            completion(F4SNetworkResult.success(decoded))
+        } catch {
+            let deserializationError = F4SNetworkDataErrorType.deserialization(data).error(attempting: attempting)
+            completion(F4SNetworkResult.error(deserializationError))
+        }
+    }
+}
+
 public enum F4SJSONValue: Decodable {
     case string(String)
     case int(Int)

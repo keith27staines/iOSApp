@@ -108,8 +108,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    lazy var userService: F4SUserServiceProtocol = {
+        return F4SUserService()
+    }()
+    
     func versionAuthorizedToContinue(_ application: UIApplication) {
         F4SUserStatusService.shared.beginStatusUpdate()
+        userService.registerAnonymousUserOnServer { (result) in
+            <#code#>
+        }
         UserService.sharedInstance.registerUser(completed: { [weak self] succeeded in
             if succeeded || UserService.sharedInstance.hasAccount() {
                 self?.onUserAccountConfirmedToExist(application: application)
