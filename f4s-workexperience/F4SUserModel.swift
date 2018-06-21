@@ -8,6 +8,21 @@
 
 import Foundation
 
+public struct F4SPushNotificationStatus : Decodable {
+    public var enabled: Bool?
+    public var errors: F4SJSONValue?
+}
+
+public struct F4SPushToken: Encodable {
+    public var pushToken: String
+}
+
+extension F4SPushToken {
+    private enum CodingKeys : String, CodingKey {
+        case pushToken = "push_token"
+    }
+}
+
 public struct F4SPartnerJson : Codable {
     public var uuid: F4SUUID
 }
@@ -61,8 +76,16 @@ extension F4SUserUpdateJson {
 
 public struct F4SAnonymousUser : Codable {
     public var vendorUuid: String
-    public var type: String
-    public var env: String
+    public var clientType: String
+    public var apnsEnvironment: String
+}
+
+extension F4SAnonymousUser {
+    private enum CodingKeys : String, CodingKey {
+        case vendorUuid = "vendor_uuid"
+        case  clientType = "type"
+        case apnsEnvironment = "env"
+    }
 }
 
 public struct F4SUser : Codable {

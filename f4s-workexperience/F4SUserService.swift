@@ -14,7 +14,7 @@ public protocol F4SUserServiceProtocol {
     func hasAccount() -> Bool
     func registerAnonymousUserOnServer(completion: @escaping (F4SUUID?) -> Void)
     func updateUser(user: F4SUser, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> Void)
-    func enablePushNotificationForUser(withDeviceToken: String, completion: @escaping (_ result: F4SNetworkResult<F4SJSONValue>) -> Void)
+    func enablePushNotificationForUser(withDeviceToken: String, completion: @escaping (_ result: F4SNetworkResult<F4SPushNotificationStatus>) -> Void)
 }
 
 public class F4SUserService : F4SUserServiceProtocol {
@@ -25,7 +25,7 @@ public class F4SUserService : F4SUserServiceProtocol {
         return UserDefaults.standard.object(forKey: UserDefaultsKeys.userHasAccount) != nil && UserDefaults.standard.bool(forKey: UserDefaultsKeys.userHasAccount)
     }
     
-    public func updateUser(user: F4SUser, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> Void) {
+    public func updateUser(user: F4SUser, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ()) {
         let attempting = "Update user"
         let keychain = KeychainSwift()
         var currentUserUuid: String = ""
@@ -40,24 +40,10 @@ public class F4SUserService : F4SUserServiceProtocol {
             let encoder = JSONEncoder()
             let data = try encoder.encode(user)
             let urlRequest = F4SDataTaskService.urlRequest(verb: .put, url: url, dataToSend: data)
-            let dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { (result) in
-                let decoder = JSONDecoder()
-                decoder.decode(dataResult: result, intoType: F4SUserModel.self, attempting: attempting, completion: { result in
-                    switch result {
-                    case .error(let error):
-                        completion(F4SNetworkResult.error(error))
-                    case .success(let userModel):
-                        guard let userUuid = userModel.uuid else {
-                            log.debug("Failed to update user")
-                            let unknownError = F4SNetworkDataErrorType.unknownError(userModel).error(attempting: attempting)
-                            completion(F4SNetworkResult.error(unknownError))
-                            return
-                        }
-                        let keychain = KeychainSwift()
-                        keychain.set(userUuid, forKey: UserDefaultsKeys.userUuid)
-                        completion(F4SNetworkResult.success(userModel))
-                    }
-                })
+            let dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { [weak self] (result) in
+                
+                self?.handleUpdateUserTaskResult(attempting: attempting, result: result, completion: completion)
+            
             }
             dataTask.resume()
         } catch {
@@ -66,11 +52,34 @@ public class F4SUserService : F4SUserServiceProtocol {
         }
     }
     
+    private func handleUpdateUserTaskResult(attempting: String, result: F4SNetworkDataResult, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ()) {
+        DispatchQueue.main.async {
+            let decoder = JSONDecoder()
+            decoder.decode(dataResult: result, intoType: F4SUserModel.self, attempting: attempting, completion: { result in
+                switch result {
+                case .error(let error):
+                    completion(F4SNetworkResult.error(error))
+                case .success(let userModel):
+                    guard let userUuid = userModel.uuid else {
+                        log.debug("Failed to update user")
+                        let unknownError = F4SNetworkDataErrorType.unknownError(userModel).error(attempting: attempting)
+                        completion(F4SNetworkResult.error(unknownError))
+                        return
+                    }
+                    let keychain = KeychainSwift()
+                    keychain.set(userUuid, forKey: UserDefaultsKeys.userUuid)
+                    completion(F4SNetworkResult.success(userModel))
+                }
+            })
+        }
+
+    }
+    
     public func registerAnonymousUserOnServer(completion: @escaping (F4SUUID?) -> Void) {
         let attempting = "Register anonymous user on server"
         let url = URL(string: ApiConstants.userProfileUrl)!
         let session = F4SNetworkSessionManager.shared.interactiveSession
-        let anonymousUser = F4SAnonymousUser(vendorUuid: vendorID, type: "ios", env: Config.apnsEnv)
+        let anonymousUser = F4SAnonymousUser(vendorUuid: vendorID, clientType: "ios", apnsEnvironment: Config.apnsEnv)
         let encoder = JSONEncoder()
         let data: Data
         do {
@@ -81,7 +90,14 @@ public class F4SUserService : F4SUserServiceProtocol {
         }
         
         let urlRequest = F4SDataTaskService.urlRequest(verb: .post, url: url, dataToSend: data)
-        let dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { (result) in
+        let dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { [weak self] (result) in
+            self?.handleRegisterAnonymousUserTaskResult(attempting: attempting, result: result, completion: completion)
+        }
+        dataTask.resume()
+    }
+    
+    private func handleRegisterAnonymousUserTaskResult(attempting: String, result: F4SNetworkDataResult, completion: @escaping (F4SUUID?) -> ()) {
+        DispatchQueue.main.async {
             switch result {
             case .error(_):
                 completion(nil)
@@ -107,12 +123,54 @@ public class F4SUserService : F4SUserServiceProtocol {
                 })
             }
         }
+    }
+    
+    public func enablePushNotificationForUser(withDeviceToken: String, completion: @escaping (F4SNetworkResult<F4SPushNotificationStatus>) -> Void) {
+        let attempting = "Enable push notification on server"
+        let url = URL(string: ApiConstants.userProfileUrl + "/\(vendorID)")!
+        let session = F4SNetworkSessionManager.shared.interactiveSession
+        let pushToken = F4SPushToken(pushToken: withDeviceToken)
+        let encoder = JSONEncoder()
+        let data: Data
+        do {
+            data = try encoder.encode(pushToken)
+        } catch {
+            let serializationError = F4SNetworkDataErrorType.serialization(pushToken).error(attempting: attempting)
+            completion(F4SNetworkResult.error(serializationError))
+            return
+        }
+        
+        let urlRequest = F4SDataTaskService.urlRequest(verb: .put, url: url, dataToSend: data)
+        let dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { [weak self] (result) in
+            self?.handleEnableNotificatioTaskResult(attempting: attempting, result: result, completion: completion)
+        }
         dataTask.resume()
     }
     
-    public func enablePushNotificationForUser(withDeviceToken: String, completion: @escaping (F4SNetworkResult<F4SJSONValue>) -> Void) {
-        
+    private func handleEnableNotificatioTaskResult(attempting: String, result: F4SNetworkDataResult, completion: @escaping (F4SNetworkResult<F4SPushNotificationStatus>) -> ()) {
+        DispatchQueue.main.async {
+            switch result {
+            case .error(let error):
+                completion(F4SNetworkResult.error(error))
+            case .success(_):
+                let decoder = JSONDecoder()
+                decoder.decode(dataResult: result, intoType: F4SPushNotificationStatus.self, attempting: attempting, completion: { result in
+                    switch result {
+                    case .error(let error):
+                        completion(F4SNetworkResult.error(error))
+                    case .success(let pushStatus):
+                        guard let isEnabled = pushStatus.enabled else {
+                            let serverError = F4SNetworkDataErrorType.unknownError(pushStatus).error(attempting: attempting)
+                            completion(F4SNetworkResult.error(serverError))
+                            return
+                        }
+                        completion(F4SNetworkResult.success(pushStatus))
+                    }
+                })
+            }
+        }
     }
+    
     
     
 }

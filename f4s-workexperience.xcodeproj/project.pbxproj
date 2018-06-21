@@ -57,7 +57,6 @@
 		206F8F971E1E590A0024937B /* MessageOptionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 206F8F931E1E590A0024937B /* MessageOptionCollectionViewCell.xib */; };
 		206F8F981E1E590A0024937B /* MessageOptionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 206F8F951E1E590A0024937B /* MessageOptionsView.xib */; };
 		207364611E52091900786F4C /* MessageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207364601E52091900786F4C /* MessageContainerViewController.swift */; };
-		20B127DF1DD99E5700CE3F1F /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B127DE1DD99E5700CE3F1F /* UserService.swift */; };
 		20B128181DDA1A3900CE3F1F /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B128131DDA1A3900CE3F1F /* Config.swift */; };
 		20D51BE41E27710C003A8358 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D51BE31E27710C003A8358 /* NotificationHelper.swift */; };
 		20FABFEC1DDDA63600D583E2 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FABFEB1DDDA63600D583E2 /* FileHelper.swift */; };
@@ -349,7 +348,6 @@
 		206F8F961E1E590A0024937B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MessageOptionsView.xib; sourceTree = "<group>"; };
 		207364601E52091900786F4C /* MessageContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageContainerViewController.swift; sourceTree = "<group>"; };
 		20A2F1C11DDC8F040079DDBC /* f4s-workexperience-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "f4s-workexperience-Bridging-Header.h"; sourceTree = "<group>"; };
-		20B127DE1DD99E5700CE3F1F /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		20B128131DDA1A3900CE3F1F /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Config.swift; path = Config/Config.swift; sourceTree = "<group>"; };
 		20B128141DDA1A3900CE3F1F /* F4SDevelopment.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = F4SDevelopment.entitlements; path = Config/F4SDevelopment.entitlements; sourceTree = "<group>"; };
 		20B1281F1DDA1D5B00CE3F1F /* f4s-workexperience.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "f4s-workexperience.xcconfig"; sourceTree = "<group>"; };
@@ -925,7 +923,6 @@
 				40E78E5D1DD3297D000A3776 /* DeserializationManager.swift */,
 				FC5F3D4F20D93C070002F41B /* F4SUserModel.swift */,
 				FC5F3D4D20D938E90002F41B /* F4SUserService.swift */,
-				20B127DE1DD99E5700CE3F1F /* UserService.swift */,
 				2037B0A01DE84EEF00A9DE3E /* PlacementService.swift */,
 				FC99BDC620CFD2C300278DDE /* Coredata services */,
 				FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */,
@@ -1924,7 +1921,6 @@
 				FC4BB6051FA20F4100173864 /* F4SPartner.swift in Sources */,
 				FCD3486520038C3100DC1316 /* LocalizedStrings.swift in Sources */,
 				FCCD6AE91FBB44CF0088D7C7 /* PopupCompanyListViewController.swift in Sources */,
-				20B127DF1DD99E5700CE3F1F /* UserService.swift in Sources */,
 				204203EC1E4B160C007C7409 /* ShortlistCoreDataManager.swift in Sources */,
 				FC09CD5320CA6D4500A79240 /* F4SJsonDecoding.swift in Sources */,
 				FCB16481209765BB0045B9CA /* F4SRequestCompanyDocumentViewController.swift in Sources */,

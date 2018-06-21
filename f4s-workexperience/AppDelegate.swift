@@ -299,8 +299,9 @@ extension AppDelegate {
             return String(format: "%02.2hhx", data)
         }
         let token = tokenParts.joined()
-        UserService.sharedInstance.enablePushNotificationForUser(withDeviceToken: token, putCompleted: { success, result in
-        })
+        userService.enablePushNotificationForUser(withDeviceToken: token) { (result) in
+            
+        }
     }
     
     func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
