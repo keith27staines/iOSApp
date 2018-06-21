@@ -17,95 +17,6 @@ class DeserializationManager {
         return Static.instance
     }
 
-    // MARK:- user profile
-    func parseCreateProfile(jsonOptional: JSON) -> Result<String> {
-        if let userUuid = jsonOptional["uuid"].string {
-            return .value(Box(userUuid))
-        }
-
-        if let _ = jsonOptional["errors"].dictionary {
-            if let vendorUuidErrors = jsonOptional["errors"]["vendor_uuid"].array {
-                if vendorUuidErrors.count > 0 {
-                    if vendorUuidErrors[0].string == Errors.CreateProfileCallErrors.VendorUuidRequired.serverErrorMessage {
-                        return .deffinedError(Errors.CreateProfileCallErrors.VendorUuidRequired)
-                    }
-                    if vendorUuidErrors[0].string == Errors.CreateProfileCallErrors.VendorUuiAlreadyExist.serverErrorMessage {
-                        return .deffinedError(Errors.CreateProfileCallErrors.VendorUuiAlreadyExist)
-                    }
-                }
-            }
-            if let userUuidErrors = jsonOptional["errors"]["uuid"].array {
-                if userUuidErrors.count > 0 {
-                    return .deffinedError(Errors.GeneralCallErrors.GeneralError)
-                }
-            }
-        }
-
-        return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
-    }
-
-    func parseUpdateUserProfile(jsonOptional: JSON) -> Result<String> {
-
-        if let userUuid = jsonOptional["uuid"].string {
-            return .value(Box(userUuid))
-        }
-
-        if let _ = jsonOptional["errors"].dictionary {
-            if let emailError = jsonOptional["errors"]["email"].array {
-                if emailError.count > 0 {
-                    if emailError[0].string == Errors.UpdateProfileCallErrors.EmailRequired.serverErrorMessage {
-                        return .deffinedError(Errors.UpdateProfileCallErrors.EmailRequired)
-                    }
-                    if emailError[0].string == Errors.UpdateProfileCallErrors.EmailNotValid.serverErrorMessage {
-                        return .deffinedError(Errors.UpdateProfileCallErrors.EmailNotValid)
-                    }
-                }
-            }
-
-            if let dateOfBirthError = jsonOptional["errors"]["date_of_birth"].array {
-                if dateOfBirthError.count > 0 {
-                    if dateOfBirthError[0].string == Errors.UpdateProfileCallErrors.DateOfBirthRequired.serverErrorMessage {
-                        return .deffinedError(Errors.UpdateProfileCallErrors.DateOfBirthRequired)
-                    }
-                }
-            }
-
-            if let consentorError = jsonOptional["errors"]["consenter_email"].array {
-                if consentorError.count > 0 {
-                    if consentorError[0].string == Errors.UpdateProfileCallErrors.ConsentorEmailRequired.serverErrorMessage {
-                        return .deffinedError(Errors.UpdateProfileCallErrors.ConsentorEmailRequired)
-                    }
-                    if consentorError[0].string == Errors.UpdateProfileCallErrors.ConsentorEmailNotValid.serverErrorMessage {
-                        return .deffinedError(Errors.UpdateProfileCallErrors.ConsentorEmailNotValid)
-                    }
-                }
-            }
-
-            if let lastNameError = jsonOptional["errors"]["last_name"].array {
-                if lastNameError.count > 0 {
-                    if lastNameError[0].string == Errors.UpdateProfileCallErrors.LastNameRequired.serverErrorMessage {
-                        return .deffinedError(Errors.UpdateProfileCallErrors.LastNameRequired)
-                    }
-                }
-            }
-
-            if let nonFieldErrors = jsonOptional["errors"]["non_field_errors"].array {
-                if nonFieldErrors[0].string == Errors.UpdateProfileCallErrors.ConsentorEmailRequired.serverErrorMessage {
-                    return .deffinedError(Errors.UpdateProfileCallErrors.ConsentorEmailRequired)
-                }
-
-                if nonFieldErrors[0].string == Errors.UpdateProfileCallErrors.VendorUuidNotExist.serverErrorMessage {
-                    return .deffinedError(Errors.UpdateProfileCallErrors.VendorUuidNotExist)
-                }
-
-                if nonFieldErrors[0].string == Errors.UpdateProfileCallErrors.PlacementNotAssociated.serverErrorMessage {
-                    return .deffinedError(Errors.UpdateProfileCallErrors.PlacementNotAssociated)
-                }
-            }
-        }
-        return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
-    }
-
     // MARK:- placement
     func parseCreatePlacement(jsonOptional: JSON) -> Result<String> {
         if let placementUuid = jsonOptional["uuid"].string {
@@ -252,22 +163,6 @@ class DeserializationManager {
         
         if let _ = jsonOptional["errors"].array {
             return .deffinedError(Errors.GeneralCallErrors.GeneralError)
-        }
-        
-        return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
-    }
-    
-    // MARK:- push notifications
-    func parseEnablePushNotification(jsonOptional: JSON) -> Result<String> {
-        
-        if let notificationsStatus = jsonOptional["enabled"].bool {
-            return .value(Box(String(notificationsStatus)))
-        }
-        
-        if let notificationsError = jsonOptional["errors"]["non_field_errors"].string {
-            if notificationsError == Errors.PushNotificationsCallErrors.DeviceUnregistered.serverErrorMessage {
-                return .deffinedError(Errors.PushNotificationsCallErrors.DeviceUnregistered)
-            }
         }
         
         return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
