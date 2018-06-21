@@ -17,7 +17,7 @@ class UserInfoCoreDataManager: CoreDataBaseManager {
         return Static.instance
     }
 
-    func saveUserInfoToContext(_ userInfo: User, userUuid: String) {
+    func saveUserInfoToContext(_ userInfo: F4SUser, userUuid: String) {
         guard let managedObjectCont = self.managedObjectContext else {
             return
         }

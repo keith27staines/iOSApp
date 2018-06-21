@@ -17,7 +17,7 @@ class UserInfoDBOperations {
         return Static.instance
     }
 
-    func saveUserInfo(userInfo: User) {
+    func saveUserInfo(userInfo: F4SUser) {
         let keychain = KeychainSwift()
         guard let userUuid = keychain.get(UserDefaultsKeys.userUuid) else {
             return
@@ -25,7 +25,7 @@ class UserInfoDBOperations {
         UserInfoCoreDataManager.sharedInstance.saveUserInfoToContext(userInfo, userUuid: userUuid)
     }
 
-    func getUserInfo() -> User? {
+    func getUserInfo() -> F4SUser? {
         let keychain = KeychainSwift()
         guard let userUuid = keychain.get(UserDefaultsKeys.userUuid),
             let userInfoDB = UserInfoCoreDataManager.sharedInstance.getUserInfo(userUuid: userUuid) else {
@@ -37,8 +37,8 @@ class UserInfoDBOperations {
         return info
     }
 
-    fileprivate func getUserFromUserInfoDB(userInfoDB: UserInfoDB) -> User {
-        var user: User = User(requiresConsent: userInfoDB.requiresConsent)
+    fileprivate func getUserFromUserInfoDB(userInfoDB: UserInfoDB) -> F4SUser {
+        var user: F4SUser = F4SUser(requiresConsent: userInfoDB.requiresConsent)
         if let email = userInfoDB.email {
             user.email = email
         }
@@ -57,7 +57,6 @@ class UserInfoDBOperations {
         if let placementUuid = userInfoDB.placementUuid {
             user.placementUuid = placementUuid
         }
-
         return user
     }
 }

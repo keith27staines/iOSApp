@@ -22,7 +22,7 @@ class UserInfoDB: NSManagedObject {
     @NSManaged var dateOfBirth: String?
 
     @discardableResult
-    class func createInManagedObjectContext(_ moc: NSManagedObjectContext, userInfo: User, userUuid: String) -> UserInfoDB? {
+    class func createInManagedObjectContext(_ moc: NSManagedObjectContext, userInfo: F4SUser, userUuid: String) -> UserInfoDB? {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
 
         let predicate = NSPredicate(format: "userUuid == %@", userUuid)

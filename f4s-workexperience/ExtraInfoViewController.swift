@@ -62,6 +62,10 @@ class ExtraInfoViewController: UIViewController {
     var datePicker = UIDatePicker()
     var voucherVerificationService: F4SVoucherVerificationServiceProtocol?
     
+    lazy var userService: F4SUserService = {
+        return F4SUserService()
+    }()
+    
     var isEmailOkay: Bool {
         guard let emailAddress = emailTextField.text else {
             return false
@@ -347,8 +351,8 @@ extension ExtraInfoViewController {
         PlacementDBOperations.sharedInstance.savePlacement(placement: updatedPlacement)
     }
     
-    func buildUserInfo() -> User {
-        var user = User()
+    func buildUserInfo() -> F4SUser {
+        var user = F4SUser()
         if let dateOfBirthText = dobTextField.text {
             user.dateOfBirth = dateOfBirthText
         }
@@ -418,7 +422,7 @@ extension ExtraInfoViewController: UITextFieldDelegate {
 // MARK: - Calls
 extension ExtraInfoViewController {
     
-    func saveUserDetailsLocally() -> User {
+    func saveUserDetailsLocally() -> F4SUser {
         let updatedUser = self.buildUserInfo()
         UserInfoDBOperations.sharedInstance.saveUserInfo(userInfo: updatedUser)
         applicationContext?.user = updatedUser
@@ -658,23 +662,22 @@ extension ExtraInfoViewController {
     func submitApplication(applicationContext: F4SApplicationContext) {
         showLoadingOverlay()
         let user = applicationContext.user!
-        UserService.sharedInstance.updateUser(user: user, putCompleted: { [weak self] (result) in
+        userService.updateUser(user: user) { [weak self] (result) in
             guard let strongSelf = self else { return }
             DispatchQueue.main.async {
                 strongSelf.hideLoadingOverlay()
                 switch result {
-                case .value(_):
+                case .success(_):
                     strongSelf.savePlacementLocally(status: .applied)
                     UserDefaults.standard.set(true, forKey: strongSelf.consentPreviouslyGivenKey)
                     strongSelf.afterSubmitApplication(applicationContext: applicationContext)
-                default:
-                    let e = F4SNetworkDataErrorType.genericErrorWithRetry.error(attempting: "Submit application")
-                    strongSelf.handleRetryForNetworkError(e, retry: {
+                case .error(let error):
+                    strongSelf.handleRetryForNetworkError(error, retry: {
                         strongSelf.submitApplication(applicationContext: applicationContext)
                     })
                 }
             }
-        })
+        }
     }
     
     func afterSubmitApplication(applicationContext: F4SApplicationContext) {
@@ -682,7 +685,6 @@ extension ExtraInfoViewController {
             parentCtrl: documentUploadController)
     }
 }
-
 
 extension ExtraInfoViewController {
     

@@ -931,6 +931,7 @@
 				FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */,
 				2037B0B71DEC8A2400A9DE3E /* F4STemplateService.swift */,
 				FC1D6B7B20D906D100D0C9AF /* F4STemplateModels.swift */,
+				FC1D6B7F20D92C8900D0C9AF /* F4STemplateModelTests.swift */,
 				20FEBDD91DE5AD3400EBDCBF /* F4SImageService.swift */,
 				FC99BDC420CFAFD400278DDE /* F4SRemoveShortlistItemService.swift */,
 				FC09CD5020CA62D700A79240 /* F4SShortlistService.swift */,
@@ -941,7 +942,6 @@
 				FC99BDCB20D172B600278DDE /* F4SCompanyDatabaseMetadataService.swift */,
 				FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */,
 				FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */,
-				FC1D6B7F20D92C8900D0C9AF /* F4STemplateModelTests.swift */,
 			);
 			name = Workflow;
 			sourceTree = "<group>";

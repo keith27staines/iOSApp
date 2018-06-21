@@ -114,16 +114,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func versionAuthorizedToContinue(_ application: UIApplication) {
         F4SUserStatusService.shared.beginStatusUpdate()
-        userService.registerAnonymousUserOnServer { (result) in
-            <#code#>
-        }
-        UserService.sharedInstance.registerUser(completed: { [weak self] succeeded in
-            if succeeded || UserService.sharedInstance.hasAccount() {
-                self?.onUserAccountConfirmedToExist(application: application)
-            } else {
-                log.debug("Couldn't register user")
+        userService.registerAnonymousUserOnServer { [weak self] uuid in
+            guard let _ = uuid else {
+                self?.presentNoNetworkMustRetry(application: application, retryOperation: { (application) in
+                    self?.versionAuthorizedToContinue(application)
+                })
+                return
             }
-        })
+            self?.onUserAccountConfirmedToExist(application: application)
+        }
     }
     
     func onUserAccountConfirmedToExist(application: UIApplication) {
