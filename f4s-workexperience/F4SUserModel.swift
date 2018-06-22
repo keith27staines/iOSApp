@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import KeychainSwift
 
 public struct F4SPushNotificationStatus : Decodable {
     public var enabled: Bool?
@@ -21,6 +22,11 @@ extension F4SPushToken {
     private enum CodingKeys : String, CodingKey {
         case pushToken = "push_token"
     }
+}
+
+public struct F4SRegisterResult : Codable {
+    public var uuid: F4SUUID?
+    public var errors: F4SJSONValue?
 }
 
 public struct F4SPartnerJson : Codable {
@@ -107,5 +113,11 @@ public struct F4SUser : Codable {
         self.dateOfBirth = dateOfBirth
         self.requiresConsent = false
         self.placementUuid = placementUuid
+    }
+    
+    public mutating func updateUuidAndPersistToLocalStorage(uuid: F4SUUID) {
+        self.uuid = uuid
+        let keychain = KeychainSwift()
+        keychain.set(uuid, forKey: UserDefaultsKeys.userUuid)
     }
 }

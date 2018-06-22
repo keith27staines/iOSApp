@@ -661,16 +661,23 @@ extension ExtraInfoViewController {
     
     func submitApplication(applicationContext: F4SApplicationContext) {
         showLoadingOverlay()
-        let user = applicationContext.user!
+        var user = applicationContext.user!
         userService.updateUser(user: user) { [weak self] (result) in
             guard let strongSelf = self else { return }
             DispatchQueue.main.async {
                 strongSelf.hideLoadingOverlay()
                 switch result {
-                case .success(_):
+                case .success(let userModel):
+                    guard let uuid = userModel.uuid else {
+                        MessageHandler.sharedInstance.displayWithTitle("Oops something went wrong", "Workfinder cannot complete this operation", parentCtrl: strongSelf)
+                        return
+                    }
+                    user.updateUuidAndPersistToLocalStorage(uuid: uuid)
+                    var updatedContext = applicationContext
+                    updatedContext.user = user
                     strongSelf.savePlacementLocally(status: .applied)
                     UserDefaults.standard.set(true, forKey: strongSelf.consentPreviouslyGivenKey)
-                    strongSelf.afterSubmitApplication(applicationContext: applicationContext)
+                    strongSelf.afterSubmitApplication(applicationContext: updatedContext)
                 case .error(let error):
                     strongSelf.handleRetryForNetworkError(error, retry: {
                         strongSelf.submitApplication(applicationContext: applicationContext)

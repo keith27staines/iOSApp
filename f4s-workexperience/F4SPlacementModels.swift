@@ -8,6 +8,8 @@
 
 import Foundation
 
+// MARK: - Placment
+/// The state machine for a placement
 public enum F4SPlacementStatus : String, Codable {
     case inProgress
     case applied
@@ -20,38 +22,6 @@ public enum F4SPlacementStatus : String, Codable {
     case noVoucher
     case noParentalConsent
     case unsuccessful
-}
-
-public struct F4STimeline : Codable {
-    public var placementUuid: String?
-    public var userUuid: String
-    public var companyUuid: String
-    public var threadUuid: String
-    public var placementStatus: F4SPlacementStatus?
-    public var latestMessage: F4SMessage
-    public var isRead: Bool
-    
-    public init(placementUuid: String? = nil, userUuid: String = "", companyUuid: String = "", threadUuid: String = "", placementStatus: F4SPlacementStatus? = .inProgress, latestMessage: F4SMessage = F4SMessage(), isRead: Bool = true) {
-        self.placementUuid = placementUuid
-        self.companyUuid = companyUuid
-        self.userUuid = userUuid
-        self.threadUuid = threadUuid
-        self.placementStatus = placementStatus
-        self.latestMessage = latestMessage
-        self.isRead = isRead
-    }
-}
-
-extension F4SUserUpdateJson {
-    private enum CodingKeys : String, CodingKey {
-        case placementUuid = "placement_uuid"
-        case userUuid = "user_uuid"
-        case companyUuid = "company_uuid"
-        case threadUuid = "thread_uuid"
-        case placementStatus = "placement_status"
-        case latestMessage = "latest_message"
-        case isRead = "is_Read"
-    }
 }
 
 public struct F4SPlacement : Codable {
@@ -77,6 +47,53 @@ extension F4SPlacement {
     }
 }
 
+/// The json object returned from the create placement api
+public struct F4SPlacementCreateResult : Decodable {
+    public var placementUuid: F4SUUID?
+    public var errors: F4SJSONValue?
+}
+
+extension F4SPlacementCreateResult {
+    private enum CodingKeys : String, CodingKey {
+        case placementUuid = "uuid"
+        case errors
+    }
+}
+
+// MARK:- Timeline
+public struct F4STimeline : Codable {
+    public var placementUuid: String?
+    public var userUuid: String
+    public var companyUuid: String
+    public var threadUuid: String
+    public var placementStatus: F4SPlacementStatus?
+    public var latestMessage: F4SMessage
+    public var isRead: Bool
+    
+    public init(placementUuid: String? = nil, userUuid: String = "", companyUuid: String = "", threadUuid: String = "", placementStatus: F4SPlacementStatus? = .inProgress, latestMessage: F4SMessage = F4SMessage(), isRead: Bool = true) {
+        self.placementUuid = placementUuid
+        self.companyUuid = companyUuid
+        self.userUuid = userUuid
+        self.threadUuid = threadUuid
+        self.placementStatus = placementStatus
+        self.latestMessage = latestMessage
+        self.isRead = isRead
+    }
+}
+
+extension F4STimeline {
+    private enum CodingKeys : String, CodingKey {
+        case placementUuid = "placement_uuid"
+        case userUuid = "user_uuid"
+        case companyUuid = "company_uuid"
+        case threadUuid = "thread_uuid"
+        case placementStatus = "placement_status"
+        case latestMessage = "latest_message"
+        case isRead = "is_Read"
+    }
+}
+
+// MARK:- The user's interests
 public struct F4SInterest : Codable {
     public static func ==(lhs: F4SInterest, rhs: F4SInterest) -> Bool {
         return lhs.uuid == rhs.uuid

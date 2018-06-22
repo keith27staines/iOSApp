@@ -57,7 +57,7 @@ class PlacementService: ApiBaseService {
         if let userUuid = keychain.get(UserDefaultsKeys.userUuid) {
             params["user_uuid"] = userUuid
         }
-        params["vendor_uuid"] = F4SUserService().vendorID
+        params["vendor_uuid"] = F4SUserService.vendorID
 
         post(params, url: url) {
             _, msg in
