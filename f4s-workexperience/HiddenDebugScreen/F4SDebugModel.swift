@@ -79,17 +79,22 @@ public class F4SDebug {
     }()
     
     public func userCanAccessDebugMenu() -> Bool {
-        if Config.ENVIRONMENT == "STAGING" {
+        #if DEBUG
             return true
-        }
-        guard let lowercasedEmail = UserInfoDBOperations.sharedInstance.getUserInfo()?.email.lowercased() else {
-            return false
-        }
-        guard lowercasedEmail.contains("founders4schools.org.uk") ||
-              lowercasedEmail.contains("workfinder.com") else {
-            return false
-        }
-        return true
+        #else
+            if Config.ENVIRONMENT == "STAGING" {
+                return true
+            }
+            guard let lowercasedEmail = UserInfoDBOperations.sharedInstance.getUserInfo()?.email.lowercased() else {
+                return false
+            }
+            guard lowercasedEmail.contains("founders4schools.org.uk") ||
+                lowercasedEmail.contains("workfinder.com") else {
+                    return false
+            }
+            return true
+        #endif
+        
     }
     
     func setupLogfile() throws {

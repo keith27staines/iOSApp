@@ -64,6 +64,5 @@ struct Config {
         #else
             return "production"
         #endif
-        
     }
 }
