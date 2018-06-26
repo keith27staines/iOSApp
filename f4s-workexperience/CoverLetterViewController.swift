@@ -21,7 +21,7 @@ class CoverLetterViewController: UIViewController {
     var selectedTemplateChoices: [F4STemplateBlank] = []
     var applicationContext: F4SApplicationContext!
     
-    var templateService: F4STemplateServiceProtocol = {
+    lazy var templateService: F4STemplateServiceProtocol = {
         return F4STemplateService()
     }()
 
@@ -192,6 +192,7 @@ extension CoverLetterViewController {
             applicationContext.availabilityPeriod = F4SAvailabilityPeriod(firstDay: firstDay, lastDay: lastDay, daysAndHours: previousDaysHoursModel)
             
         } catch {
+            MessageHandler.sharedInstance.display(error.localizedDescription, parentCtrl: self)
             log.debug("error on parsing template")
         }
     }
@@ -388,32 +389,33 @@ extension CoverLetterViewController: UIGestureRecognizerDelegate {
 // MARK: - calls
 extension CoverLetterViewController {
     func getLatestTemplate() {
+        log.debug("Entered getLatestTemplate")
         if let reachability = Reachability() {
             if !reachability.isReachableByAnyMeans {
                 MessageHandler.sharedInstance.display("No Internet Connection.", parentCtrl: self)
                 return
             }
         }
+        editCoverLetterButton?.isEnabled = false
         MessageHandler.sharedInstance.showLoadingOverlay(self.view)
         templateService.getTemplates { result in
             DispatchQueue.main.async { [weak self] in
-                guard let strongSelf = self else { return }
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.editCoverLetterButton?.isEnabled = true
                 MessageHandler.sharedInstance.hideLoadingOverlay()
                 switch result
                 {
                 case .success(let templates):
-                    DispatchQueue.main.async {
-                        strongSelf.currentTemplate = templates.first
-                        strongSelf.loadTemplate()
-                    }
-                    break
+                    strongSelf.currentTemplate = templates.first
+                    strongSelf.loadTemplate()
                 case let .error(error):
                     MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf, cancelHandler: {
                         
                     }, retryHandler: {
                         strongSelf.getLatestTemplate()
                     })
-                    break
                 }
             }
         }

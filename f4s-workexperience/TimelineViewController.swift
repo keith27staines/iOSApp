@@ -189,12 +189,10 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
             cell.companyImageView.layer.cornerRadius = cell.companyImageView.bounds.height / 2
             cell.companyImageView.image = UIImage(named: "DefaultLogo")
             if !company.logoUrl.isEmpty, let url = NSURL(string: company.logoUrl) {
-                F4SImageService.sharedInstance.getImage(url: url, completed: {
-                    succeeded, image in
-                    DispatchQueue.main.async {
-                        if succeeded && image != nil {
-                            cell.companyImageView.image = image!
-                        }
+                F4SImageService.sharedInstance.getImage(url: url, completion: {
+                    image in
+                    if image != nil {
+                        cell.companyImageView.image = image!
                     }
                 })
             }

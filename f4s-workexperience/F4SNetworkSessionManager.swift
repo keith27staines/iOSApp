@@ -12,10 +12,16 @@ import KeychainSwift
 public class F4SNetworkSessionManager {
     public static let shared = F4SNetworkSessionManager()
     
+    internal init() {}
+    
     public internal (set) lazy var interactiveSession: URLSession = {
         return URLSession(configuration: interactiveConfiguration)
     }()
     
+    public internal (set) lazy var smallImageSession: URLSession = {
+        return URLSession(configuration: smallImageConfiguration)
+        
+    }()
     
     // MARK:- Internal properties
     internal lazy var defaultHeaders : [String:String] = {
@@ -23,29 +29,31 @@ public class F4SNetworkSessionManager {
         let keychain = KeychainSwift()
         if let userUuid = keychain.get(UserDefaultsKeys.userUuid) {
             header["wex.user.uuid"] = userUuid
+        } else {
+            log.debug("Default headers called but user.uuid is not available")
+            assertionFailure("This method should only be called if a userUuid exists")
         }
         return header
     }()
     
     internal lazy var interactiveConfiguration: URLSessionConfiguration = {
-        return setupCommonConfiguration(URLSessionConfiguration.default)
-    }()
-
-}
-
-extension F4SNetworkSessionManager {
-
-    
-    func setupCommonConfiguration(_ configuration: URLSessionConfiguration) -> URLSessionConfiguration {
+        let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = defaultHeaders
         configuration.allowsCellularAccess = true
-        configuration.sessionSendsLaunchEvents = true
-        if #available(iOS 11.0, *) {
-            configuration.waitsForConnectivity = true
-            configuration.multipathServiceType = .handover
-        }
         return configuration
-    }
+    }()
+    
+    internal lazy var smallImageConfiguration: URLSessionConfiguration = {
+        let configuration = URLSessionConfiguration.default
+        configuration.allowsCellularAccess = true
+        let memory = 5 * 1024 * 1024
+        let disk = 10 * memory
+        let name = "smallImageCache"
+        let cache = URLCache(memoryCapacity: memory, diskCapacity: disk, diskPath: name)
+        configuration.urlCache = cache
+        configuration.requestCachePolicy = .useProtocolCachePolicy
+        return configuration
+    }()
 }
 
 

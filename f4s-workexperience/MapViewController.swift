@@ -361,19 +361,16 @@ extension MapViewController {
         infoWindow.industryNameLabel.attributedText = NSAttributedString(
             string: company.industry, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: Style.smallerMediumTextSize, weight: UIFont.Weight.light), NSAttributedStringKey.foregroundColor: UIColor.black])
         
+        infoWindow.logoImageView.image = UIImage(named: "DefaultLogo")
         if !company.logoUrl.isEmpty, let url = NSURL(string: company.logoUrl) {
-            F4SImageService.sharedInstance.getImage(url: url, completed: {
-                succeeded, image in
-                DispatchQueue.main.async {
-                    if succeeded && image != nil {
+            F4SImageService.sharedInstance.getImage(url: url, completion: {
+                image in
+                    if image != nil {
                         infoWindow.logoImageView.image = image!
                     } else {
                         infoWindow.logoImageView.image = UIImage(named: "DefaultLogo")
                     }
-                }
             })
-        } else {
-            infoWindow.logoImageView.image = UIImage(named: "DefaultLogo")
         }
         
         if company.rating < 0.5 {

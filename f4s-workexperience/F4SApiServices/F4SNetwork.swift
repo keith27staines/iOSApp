@@ -40,17 +40,22 @@ public enum F4SNetworkDataErrorType {
         switch self {
         case .noData, .emptyData:
             code = -1000
+            userInfo["Type"] = "No data"
         case .deserialization(let data):
             code = -1100
+            userInfo["Type"] = "Deserialization error"
             userInfo["dataToDeserialize"] = data
         case .serialization(let encodable):
             code = -1200
+            userInfo["Type"] = "Serialization error"
             userInfo["objectToSerialize"] = encodable
         case .unknownError(let info):
             code = -1300
+            userInfo["Type"] = "Unknown error"
             userInfo["info"] = info
         case .genericErrorWithRetry:
             code = -1400
+            userInfo["Type"] = "Generic error with retry"
             let description = NSLocalizedString("Unknown error", comment: "")
             return F4SNetworkError(localizedDescription: description, attempting: attempting, retry: true)
             
@@ -125,7 +130,7 @@ public struct F4SNetworkError : Error {
         if let attempting = attempting {
             msg += " attempting to: \(attempting)"
         }
-        msg += "\ncode = code"
+        msg += "\ncode = \(code)"
         msg += "\ndomain = \(domainType.rawValue)"
         if let reason = nsError.localizedFailureReason {
             msg += "\nreason = \(reason)"

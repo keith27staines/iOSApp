@@ -19,19 +19,16 @@ class CompanyInfoTableViewCell: UITableViewCell {
                 string: company.industry, attributes: [NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: .caption1), NSAttributedStringKey.foregroundColor: UIColor.darkGray])
             self.starRating.rating = Float(company.rating)
             self.starRating.isHidden = (company.rating == 0) ? true : false
+            self.logo.image = UIImage(named: "DefaultLogo")
             if !company.logoUrl.isEmpty, let url = NSURL(string: company.logoUrl) {
-                F4SImageService.sharedInstance.getImage(url: url, completed: {
-                    succeeded, image in
-                    DispatchQueue.main.async { [weak self] in
-                        if succeeded && image != nil {
-                            self?.logo.image = image!
-                        } else {
-                            self?.logo.image = UIImage(named: "DefaultLogo")
-                        }
+                F4SImageService.sharedInstance.getImage(url: url, completion: { [weak self]
+                    image in
+                    if image != nil {
+                        self?.logo.image = image!
+                    } else {
+                        self?.logo.image = UIImage(named: "DefaultLogo")
                     }
                 })
-            } else {
-                self.logo.image = UIImage(named: "DefaultLogo")
             }
         }
     }
