@@ -85,48 +85,55 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return F4SUserService()
     }()
     
-    func versionAuthorizedToContinue(_ application: UIApplication) {
-        F4SUserStatusService.shared.beginStatusUpdate()
-        userService.registerAnonymousUserOnServer { [weak self] uuid in
-            guard let _ = uuid else {
-                self?.presentNoNetworkMustRetry(application: application, retryOperation: { (application) in
-                    self?.versionAuthorizedToContinue(application)
-                })
-                return
+    func registerUser(application: UIApplication) {
+        userService.registerAnonymousUserOnServer { [weak self] (result) in
+            DispatchQueue.main.async {
+                guard let strongSelf = self else { return }
+                switch result {
+                case .error(_):
+                    if strongSelf.userService.hasAccount() {
+                        // couldn't register user but user has registered before so ok to continue
+                        strongSelf.onUserAccountConfirmedToExist(application: application)
+                    } else {
+                        log.debug("Couldn't register user, offering retry")
+                        strongSelf.presentNoNetworkMustRetry(application: application, retryOperation: { [weak self] (application) in
+                            self?.registerUser(application: application)
+                        })
+                    }
+                case .success(_):
+                    strongSelf.onUserAccountConfirmedToExist(application: application)
+                }
             }
-            self?.onUserAccountConfirmedToExist(application: application)
         }
     }
     
     func onUserAccountConfirmedToExist(application: UIApplication) {
-        DispatchQueue.main.async { [weak self] in
-            guard let strongSelf = self else { return }
-            strongSelf.printDebugUserInfo()
-            _ = F4SNetworkSessionManager.shared
-            F4SUserStatusService.shared.beginStatusUpdate()
-            strongSelf.databaseDownloadManager = strongSelf.databaseDownloadManager ?? F4SDatabaseDownloadManager()
-            strongSelf.registerApplicationForRemoteNotifications(application)
-            strongSelf.databaseDownloadManager?.start()
-            guard let window = strongSelf.window else { return }
-            let isFirstLaunch = UserDefaults.standard.value(forKey: UserDefaultsKeys.isFirstLaunch) as? Bool ?? true
-            if isFirstLaunch {
-                guard let ctrl = window.rootViewController?.topMostViewController as? OnboardingViewController else {
-                    return
-                }
-                ctrl.hideOnboardingControls = false
+        printDebugUserInfo()
+        _ = F4SNetworkSessionManager.shared
+        F4SUserStatusService.shared.beginStatusUpdate()
+        if databaseDownloadManager == nil {
+            databaseDownloadManager = F4SDatabaseDownloadManager()
+        }
+        registerApplicationForRemoteNotifications(application)
+        databaseDownloadManager?.start()
+        let isFirstLaunch = UserDefaults.standard.value(forKey: UserDefaultsKeys.isFirstLaunch) as? Bool ?? true
+        if isFirstLaunch {
+            guard let ctrl = window?.rootViewController?.topMostViewController as? OnboardingViewController else {
+                return
+            }
+            ctrl.hideOnboardingControls = false
+        } else {
+            let shouldLoadTimelineValue = UserDefaults.standard.value(forKey: UserDefaultsKeys.shouldLoadTimeline)
+            var shouldLoadTimeline: Bool = false
+            if let value = shouldLoadTimelineValue {
+                shouldLoadTimeline = value as? Bool ?? false
+            }
+            let navigationHelper = CustomNavigationHelper.sharedInstance
+            if shouldLoadTimeline {
+                navigationHelper.navigateToTimeline(threadUuid: nil)
             } else {
-                let shouldLoadTimelineValue = UserDefaults.standard.value(forKey: UserDefaultsKeys.shouldLoadTimeline)
-                var shouldLoadTimeline: Bool = false
-                if let value = shouldLoadTimelineValue {
-                    shouldLoadTimeline = value as? Bool ?? false
-                }
-                let navigationHelper = CustomNavigationHelper.sharedInstance
-                if shouldLoadTimeline {
-                    navigationHelper.navigateToTimeline(threadUuid: nil)
-                } else {
-                    navigationHelper.navigateToMap()
-                    navigationHelper.mapViewController.shouldRequestAuthorization = false
-                }
+                navigationHelper.navigateToMap()
+                navigationHelper.mapViewController.shouldRequestAuthorization = false
             }
         }
     }

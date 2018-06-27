@@ -18,6 +18,7 @@ public protocol F4SUserServiceProtocol {
 }
 
 public class F4SUserService : F4SUserServiceProtocol {
+    
     public static var vendorID: String { return UIDevice.current.identifierForVendor!.uuidString }
     public var vendorID: String { return F4SUserService.vendorID }
     
@@ -85,7 +86,6 @@ public class F4SUserService : F4SUserServiceProtocol {
         DispatchQueue.main.async {
             let decoder = JSONDecoder()
             decoder.decode(dataResult: result, intoType: F4SRegisterResult.self, attempting: attempting, completion: completion)
-            }
         }
     }
     
@@ -134,7 +134,4 @@ public class F4SUserService : F4SUserServiceProtocol {
             }
         }
     }
-    
-    
-    
 }

@@ -24,7 +24,7 @@ extension F4SPushToken {
     }
 }
 
-public struct F4SRegisterResult : Codable {
+public struct F4SRegisterResult : Decodable {
     public var uuid: F4SUUID?
     public var errors: F4SJSONValue?
 }
