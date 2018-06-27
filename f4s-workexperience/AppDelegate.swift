@@ -51,32 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         alert.addAction(retry)
         rootVC?.present(alert, animated: true, completion: nil)
     }
-    
-    func continueIfVersionCheckPasses(application: UIApplication) {
-        let versionService: F4SWorkfinderVersioningServiceProtocol = F4SWorkfinderVersioningService()
-        versionService.getIsVersionValid { [weak self] (result) in
-            guard let strongSelf = self else { return }
-            DispatchQueue.main.async {
-                switch result {
-                case .error(let error):
-                    if error.retry {
-                        strongSelf.presentNoNetworkMustRetry(application: application, retryOperation: {application in
-                            strongSelf.continueIfVersionCheckPasses(application: application)
-                        })
-                        return
-                    } else {
-                        strongSelf.handleFatalError(error: error)
-                    }
-                case .success(let isValid):
-                    guard isValid else {
-                        strongSelf.presentForceUpdate()
-                        return
-                    }
-                    strongSelf.versionAuthorizedToContinue(application)
-                }
-            }
-        }
-    }
 
     func handleFatalError(error: Error) {
         let rootVC = self.window?.rootViewController
@@ -103,8 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         log.debug("\n\n\n**************\nWorkfinder launched in environement \(Config.ENVIRONMENT)\n**************")
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
-        databaseDownloadManager = databaseDownloadManager ?? F4SDatabaseDownloadManager()
-        continueIfVersionCheckPasses(application: application)
+        registerUser(application: application)
         return true
     }
     
@@ -126,28 +99,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func onUserAccountConfirmedToExist(application: UIApplication) {
-        printDebugUserInfo()
-        registerApplicationForRemoteNotifications(application)
-        databaseDownloadManager?.start()
-        guard let window = window else { return }
-        let isFirstLaunch = UserDefaults.standard.value(forKey: UserDefaultsKeys.isFirstLaunch) as? Bool ?? true
-        if isFirstLaunch {
-            guard let ctrl = window.rootViewController?.topMostViewController as? OnboardingViewController else {
-                return
-            }
-            ctrl.hideOnboardingControls = false
-        } else {
-            let shouldLoadTimelineValue = UserDefaults.standard.value(forKey: UserDefaultsKeys.shouldLoadTimeline)
-            var shouldLoadTimeline: Bool = false
-            if let value = shouldLoadTimelineValue {
-                shouldLoadTimeline = value as? Bool ?? false
-            }
-            let navigationHelper = CustomNavigationHelper.sharedInstance
-            if shouldLoadTimeline {
-                navigationHelper.navigateToTimeline(threadUuid: nil)
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.printDebugUserInfo()
+            _ = F4SNetworkSessionManager.shared
+            F4SUserStatusService.shared.beginStatusUpdate()
+            strongSelf.databaseDownloadManager = strongSelf.databaseDownloadManager ?? F4SDatabaseDownloadManager()
+            strongSelf.registerApplicationForRemoteNotifications(application)
+            strongSelf.databaseDownloadManager?.start()
+            guard let window = strongSelf.window else { return }
+            let isFirstLaunch = UserDefaults.standard.value(forKey: UserDefaultsKeys.isFirstLaunch) as? Bool ?? true
+            if isFirstLaunch {
+                guard let ctrl = window.rootViewController?.topMostViewController as? OnboardingViewController else {
+                    return
+                }
+                ctrl.hideOnboardingControls = false
             } else {
-                navigationHelper.navigateToMap()
-                navigationHelper.mapViewController.shouldRequestAuthorization = false
+                let shouldLoadTimelineValue = UserDefaults.standard.value(forKey: UserDefaultsKeys.shouldLoadTimeline)
+                var shouldLoadTimeline: Bool = false
+                if let value = shouldLoadTimelineValue {
+                    shouldLoadTimeline = value as? Bool ?? false
+                }
+                let navigationHelper = CustomNavigationHelper.sharedInstance
+                if shouldLoadTimeline {
+                    navigationHelper.navigateToTimeline(threadUuid: nil)
+                } else {
+                    navigationHelper.navigateToMap()
+                    navigationHelper.mapViewController.shouldRequestAuthorization = false
+                }
             }
         }
     }
@@ -167,6 +146,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return false
         }
         // Handle being invoked from a universal link in safari running on the current device
+        if databaseDownloadManager == nil {
+            databaseDownloadManager = F4SDatabaseDownloadManager()
+        }
+        
         setInvokingUrl(url)
         return true
     }
@@ -198,8 +181,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-        registerApplicationForRemoteNotifications(application)
         F4SUserStatusService.shared.beginStatusUpdate()
+        registerApplicationForRemoteNotifications(application)
     }
 
     func applicationDidBecomeActive(_ appliction: UIApplication) {

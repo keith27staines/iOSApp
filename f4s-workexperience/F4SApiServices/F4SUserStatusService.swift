@@ -43,19 +43,11 @@ public class F4SUserStatusService : F4SDataTaskService {
     }
     
     public func beginStatusUpdate() {
-        beginStatusUpdate(maxRetries: 3)
-    }
-    
-    private func beginStatusUpdate(maxRetries: Int) {
         getUserStatus { [weak self] (result) in
             DispatchQueue.main.async {
                 switch result {
-                case .error(let error):
-                    if error.retry && maxRetries > 0 {
-                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5, execute: {
-                            self?.beginStatusUpdate(maxRetries: maxRetries - 1)
-                        })
-                    }
+                case .error(_):
+                    break
                 case .success(let status):
                     self?.userStatus = status
                     let badgeNumber = status.unreadMessageCount
