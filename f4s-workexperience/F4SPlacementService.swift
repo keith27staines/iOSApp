@@ -20,10 +20,18 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
         let attempting = "Create placement"
         let url = URL(string: ApiConstants.createPlacementUrl)!
         let session = F4SNetworkSessionManager.shared.interactiveSession
+        let params: [String: Any] = [
+            "company_uuid" : placement.companyUuid!,
+            "interests" : placement.interestList
+        ]
         do {
-            let encoder = JSONEncoder()
-            let data = try encoder.encode(placement)
-            let urlRequest = F4SDataTaskService.urlRequest(verb: .post, url: url, dataToSend: data)
+            //let encoder = JSONEncoder()
+            //let data = try encoder.encode(p)
+            let data: Data? = nil
+            var urlRequest = F4SDataTaskService.urlRequest(verb: .post, url: url, dataToSend: data)
+            params.forEach { (key,value) in
+                urlRequest.setValue(<#T##value: String?##String?#>, forHTTPHeaderField: <#T##String#>)
+            }
             let dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { [weak self] (result) in
                 
                 self?.handleCreateplacementTaskResult(attempting: attempting, dataResult: result, completion: completion)
