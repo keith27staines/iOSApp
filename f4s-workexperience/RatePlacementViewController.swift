@@ -91,7 +91,7 @@ extension RatePlacementViewController {
             return
         }
 
-        DatabaseOperations.sharedInstance.getCompanies(withUuid: [placement.companyUuid], completed: {
+        DatabaseOperations.sharedInstance.getCompanies(withUuid: [placement.companyUuid!], completed: {
             companies in
             self.company = companies.first
             self.setupLabels()

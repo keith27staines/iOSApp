@@ -21,7 +21,7 @@ class PlacementDB: NSManagedObject {
     class func createInManagedObjectContext(_ moc: NSManagedObjectContext, placement: F4SPlacement, userUuid: String) -> PlacementDB? {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest<NSFetchRequestResult>(entityName: "Placement")
 
-        let predicate = NSPredicate(format: "userUuid == %@ && companyUuid == %@", userUuid, placement.companyUuid)
+        let predicate = NSPredicate(format: "userUuid == %@ && companyUuid == %@", userUuid, placement.companyUuid!)
         fetchRequest.predicate = predicate
         guard let fetchResult = (try? moc.fetch(fetchRequest)) as? [PlacementDB] else {
             return nil
@@ -35,7 +35,7 @@ class PlacementDB: NSManagedObject {
             newItem.placementUuid = placement.placementUuid
             newItem.userUuid = userUuid
 
-            switch placement.status
+            switch placement.status!
             {
             case .inProgress:
                 newItem.status = "inProgress"
@@ -52,7 +52,7 @@ class PlacementDB: NSManagedObject {
             fetchResult[0].placementUuid = placement.placementUuid
             fetchResult[0].userUuid = userUuid
 
-            switch placement.status
+            switch placement.status!
             {
             case .inProgress:
                 fetchResult[0].status = "inProgress"

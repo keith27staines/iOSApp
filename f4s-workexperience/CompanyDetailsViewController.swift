@@ -318,7 +318,7 @@ extension CompanyDetailsViewController {
         if let placement = PlacementDBOperations.sharedInstance.getPlacementsForCurrentUserAndCompany(companyUuid: company.uuid) {
             self.placement = placement
             // placement is created
-            switch placement.status
+            switch placement.status!
             {
             case .inProgress:
                 applyText = NSLocalizedString("Finish Application", comment: "")

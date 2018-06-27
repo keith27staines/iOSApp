@@ -25,12 +25,12 @@ public enum F4SPlacementStatus : String, Codable {
 }
 
 public struct F4SPlacement : Codable {
-    public var companyUuid: F4SUUID
+    public var companyUuid: F4SUUID?
     public var interestList: [F4SInterest]
-    public var status: F4SPlacementStatus
+    public var status: F4SPlacementStatus?
     public var placementUuid: F4SUUID?
     
-    public init(companyUuid: F4SUUID = "", interestList: [F4SInterest] = [], status: F4SPlacementStatus = .inProgress, placementUuid: F4SUUID? = nil) {
+    public init(companyUuid: F4SUUID? = nil, interestList: [F4SInterest] = [], status: F4SPlacementStatus? = nil, placementUuid: F4SUUID? = nil) {
         self.companyUuid = companyUuid
         self.interestList = interestList
         self.status = status
