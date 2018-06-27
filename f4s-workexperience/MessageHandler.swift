@@ -47,39 +47,30 @@ class MessageHandler {
     }
     
     func display(_ networkError: F4SNetworkError, parentCtrl: UIViewController, cancelHandler: (()->())? = nil, retryHandler: (() -> ())? = nil) {
-        var title: String = ""
-        var message: String = ""
+        
+        let title: String
+        let message: String
+        
         if networkError.retry {
-            if Config.environment == .staging {
-                title = networkError.code + " error"
-                message = networkError.localizedDescription
-            } else {
-                title = "Workfinder was unable to complete the operation"
-                message = networkError.localizedDescription
-            }
-            
+            title =  "Workfinder needs a network connection"
+            message = "Please make sure you have a good network connection and try again"
         } else {
-            if Config.environment == .staging {
-                title = networkError.code + " error"
-                if let action = networkError.attempting {
-                    message = "action: \"\(action)\""
-                }
-                message = message + "\n\n\(networkError.localizedDescription)"
-            } else {
-                title = "Workfinder was unable to complete the operation"
-                message = "Sorry, an unexpected error occured"
-            }
+            title = "Workfinder could not complete an operation"
+            message = "\(networkError.code): \(networkError.localizedDescription) attempting \(networkError.attempting ?? "")"
         }
+
         let alert = UIAlertController(
             title: title,
             message: message,
             preferredStyle: .alert)
+        
         if let cancelHandler = cancelHandler {
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
                 cancelHandler()
             }
             alert.addAction(cancelAction)
         }
+        
         if let retryHandler = retryHandler {
             let retryAction = UIAlertAction(title: "Retry", style: .default) { (_) in
                 retryHandler()

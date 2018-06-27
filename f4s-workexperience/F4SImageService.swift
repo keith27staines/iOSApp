@@ -26,7 +26,6 @@ public class F4SImageService {
                     let data = data,
                     let image = UIImage(data: data)
                     else {
-                        _ = F4SNetworkDataErrorType.emptyData.error(attempting: attempting)
                         completion(nil)
                         return
                 }

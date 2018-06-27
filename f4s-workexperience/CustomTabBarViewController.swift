@@ -161,7 +161,7 @@ extension CustomTabBarViewController {
             return
         }
         if reachability.isReachableByAnyMeans {
-            F4SUserStatusService.shared.beginStatusUpdate()
+            //F4SUserStatusService.shared.beginStatusUpdate()
         }
     }
 }
