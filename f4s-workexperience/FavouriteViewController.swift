@@ -25,7 +25,7 @@ class FavouriteViewController: UIViewController {
             }
         }
     }
-    var placementList: [Placement] = []
+    var placementList: [F4SPlacement] = []
     var companies: [Company] = [] {
         didSet {
             self.tableView.reloadData()

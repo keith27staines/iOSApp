@@ -444,7 +444,7 @@ extension CoverLetterViewController {
         applicationContext.availabilityPeriod?.saveToUserDefaults()
         MessageHandler.sharedInstance.showLoadingOverlay(self.view)
         let templateToUpdate = F4STemplate(uuid: currentTemplateUuid, blanks: self.selectedTemplateChoices)
-        placement.interestsList = [Interest](InterestDBOperations.sharedInstance.interestsForCurrentUser())
+        placement.interestList = [F4SInterest](InterestDBOperations.sharedInstance.interestsForCurrentUser())
         PlacementService.sharedInstance.updatePlacement(placement: placement, template: templateToUpdate) {
             [weak self]
             _, result in
@@ -459,7 +459,7 @@ extension CoverLetterViewController {
                 // succes + go to next page
                 strongSelf.applicationContext.placement = placement
                 if let navCtrl = strongSelf.navigationController, let applicationContext = strongSelf.applicationContext, let availabilityPeriod = applicationContext.availabilityPeriod  {
-                    let calendarService = F4SPCalendarService(placementUuid: placement.placementUuid)
+                    let calendarService = F4SPCalendarService(placementUuid: placement.placementUuid!)
                     let availabilityJson = availabilityPeriod.availabilityJson!
                     let data = try! JSONEncoder().encode(availabilityJson)
                     let jsonString = String(data: data, encoding: .utf8)!

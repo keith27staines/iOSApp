@@ -337,10 +337,10 @@ extension ExtraInfoViewController {
             let placement = PlacementDBOperations.sharedInstance.getPlacementsForCurrentUserAndCompany(companyUuid: currentCompany.uuid) else {
                 return ""
         }
-        return placement.placementUuid
+        return placement.placementUuid ?? ""
     }
     
-    func savePlacementLocally(status: PlacementStatus ) {
+    func savePlacementLocally(status: F4SPlacementStatus ) {
         guard let currentCompany = self.applicationContext?.company,
             let placement = PlacementDBOperations.sharedInstance.getPlacementsForCurrentUserAndCompany(companyUuid: currentCompany.uuid) else {
                 return

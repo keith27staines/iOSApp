@@ -24,7 +24,7 @@ class InterestsViewController: UIViewController, UIScrollViewDelegate {
     fileprivate let reuseId = "interestsCell"
     
     /// The list of interests the user can select from, which includes interests they have selected previously plus any of the interests of companies within visibleBounds
-    private (set) var interestsToDisplay: [Interest] = [Interest]() {
+    private (set) var interestsToDisplay: [F4SInterest] = [F4SInterest]() {
         didSet {
             collectionView.reloadData()
         }
@@ -323,11 +323,11 @@ extension InterestsViewController {
 
     
     /// Returns an array formed from the union of the specified sets of interests.
-    func combineInterestsAsSortedList(interestSubsets: F4SInterestSet...) -> [Interest] {
+    func combineInterestsAsSortedList(interestSubsets: F4SInterestSet...) -> [F4SInterest] {
         var combinedSet: F4SInterestSet = F4SInterestSet()
         for interestSubset in interestSubsets {
             combinedSet = combinedSet.union(interestSubset)
         }
-        return [Interest](combinedSet)
+        return [F4SInterest](combinedSet)
     }
 }

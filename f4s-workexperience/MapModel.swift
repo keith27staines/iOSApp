@@ -9,7 +9,7 @@
 import Foundation
 
 public typealias F4SCompanyPinSet = Set<F4SCompanyPin>
-public typealias F4SInterestSet = Set<Interest>
+public typealias F4SInterestSet = Set<F4SInterest>
 public typealias F4SInterestIdSet = Set<Int64>
 
 /// Interest UUIDs are strings
@@ -54,7 +54,7 @@ public struct MapModel {
     fileprivate let quadTree: F4SPointQuadTree
     
     public init(allCompanyPinsSet: F4SCompanyPinSet,
-                allInterests: [Int64: Interest],
+                allInterests: [Int64: F4SInterest],
                 filtereredBy interestsSet: F4SInterestSet) {
         self.allCompanyPins = allCompanyPinsSet
 
@@ -78,7 +78,7 @@ public struct MapModel {
     ///
     /// - parameter allCompanies: All companies that might ever need to be presented on the map represented by this map model
     public init(allCompanies:[Company],
-                allInterests: [Int64:Interest],
+                allInterests: [Int64:F4SInterest],
                 selectedInterests: F4SInterestSet?) {
         let companyPinsList = allCompanies.map { (company) -> F4SCompanyPin in
             return F4SCompanyPin(company: company)
@@ -89,7 +89,7 @@ public struct MapModel {
         var selectedInterestIdSet: F4SInterestIdSet? = nil
         if let selectedInterests = selectedInterests, !selectedInterests.isEmpty {
             let selectedInterestIdList = selectedInterests.map({ interest -> Int64 in
-                return interest.id
+                return Int64(interest.id)
             })
             selectedInterestIdSet = F4SInterestIdSet(selectedInterestIdList)
             filteredCompanyPinList = companyPinsList.filter({ pin -> Bool in

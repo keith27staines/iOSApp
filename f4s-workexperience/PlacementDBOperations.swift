@@ -17,7 +17,7 @@ class PlacementDBOperations {
         return Static.instance
     }
 
-    func savePlacement(placement: Placement) {
+    func savePlacement(placement: F4SPlacement) {
         let keychain = KeychainSwift()
         guard let userUuid = keychain.get(UserDefaultsKeys.userUuid) else {
             return
@@ -25,13 +25,13 @@ class PlacementDBOperations {
         PlacementCoreDataManager.sharedInstance.savePlacementToContext(placement, userUuid: userUuid)
     }
 
-    func getPlacementsForCurrentUser() -> [Placement] {
+    func getPlacementsForCurrentUser() -> [F4SPlacement] {
         let keychain = KeychainSwift()
         guard let userUuid = keychain.get(UserDefaultsKeys.userUuid) else {
             return []
         }
         let placementDBData = PlacementCoreDataManager.sharedInstance.getPlacementsForUser(userUuid: userUuid)
-        var placements: [Placement] = []
+        var placements: [F4SPlacement] = []
         for placementDB in placementDBData {
             let placement = PlacementDBOperations.sharedInstance.getPlacementFromPlacementDB(placementDB: placementDB)
             placements.append(placement)
@@ -39,7 +39,7 @@ class PlacementDBOperations {
         return placements
     }
 
-    func getPlacementsForCurrentUserAndCompany(companyUuid: String) -> Placement? {
+    func getPlacementsForCurrentUserAndCompany(companyUuid: String) -> F4SPlacement? {
         let keychain = KeychainSwift()
         guard let userUuid = keychain.get(UserDefaultsKeys.userUuid),
             let placementDB = PlacementCoreDataManager.sharedInstance.getPlacementsForUserAndCompany(userUuid: userUuid, companyUuid: companyUuid) else {
@@ -48,9 +48,9 @@ class PlacementDBOperations {
         return PlacementDBOperations.sharedInstance.getPlacementFromPlacementDB(placementDB: placementDB)
     }
 
-    func getAllPlacements() -> [Placement] {
+    func getAllPlacements() -> [F4SPlacement] {
         let placementDBData = PlacementCoreDataManager.sharedInstance.getAllPlacements()
-        var placements: [Placement] = []
+        var placements: [F4SPlacement] = []
         for placementDB in placementDBData {
             let placement = PlacementDBOperations.sharedInstance.getPlacementFromPlacementDB(placementDB: placementDB)
             placements.append(placement)
@@ -58,7 +58,7 @@ class PlacementDBOperations {
         return placements
     }
 
-    func getInProgressPlacementsForCurrentUser() -> Placement? {
+    func getInProgressPlacementsForCurrentUser() -> F4SPlacement? {
         let keychain = KeychainSwift()
         guard let userUuid = keychain.get(UserDefaultsKeys.userUuid),
             let placementDB = PlacementCoreDataManager.sharedInstance.getInProgressPlacementsForUser(userUuid: userUuid) else {
@@ -74,7 +74,7 @@ class PlacementDBOperations {
         }
     }
 
-    func getPlacementWithUuid(placementUuid: String) -> Placement? {
+    func getPlacementWithUuid(placementUuid: String) -> F4SPlacement? {
         let keychain = KeychainSwift()
         guard let userUuid = keychain.get(UserDefaultsKeys.userUuid),
             let placementDB = PlacementCoreDataManager.sharedInstance.getPlacementForUserAndPlacementUuid(userUuid: userUuid, placementUuid: placementUuid) else {
@@ -83,8 +83,8 @@ class PlacementDBOperations {
         return PlacementDBOperations.sharedInstance.getPlacementFromPlacementDB(placementDB: placementDB)
     }
 
-    fileprivate func getPlacementFromPlacementDB(placementDB: PlacementDB) -> Placement {
-        var placement: Placement = Placement()
+    fileprivate func getPlacementFromPlacementDB(placementDB: PlacementDB) -> F4SPlacement {
+        var placement: F4SPlacement = F4SPlacement()
         if let placementUuid = placementDB.placementUuid {
             placement.placementUuid = placementUuid
         }

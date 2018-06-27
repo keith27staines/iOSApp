@@ -11,10 +11,10 @@ import UIKit
 struct F4SApplicationContext {
     var user: F4SUser?
     var company: Company?
-    var placement: Placement?
+    var placement: F4SPlacement?
     var availabilityPeriod: F4SAvailabilityPeriod?
     
-    public init(user: F4SUser? = nil, company: Company? = nil, placement: Placement? = nil, availabilityPeriod: F4SAvailabilityPeriod? = nil) {
+    public init(user: F4SUser? = nil, company: Company? = nil, placement: F4SPlacement? = nil, availabilityPeriod: F4SAvailabilityPeriod? = nil) {
         self.user = user
         self.company = company
         self.placement = placement
@@ -99,11 +99,11 @@ public struct Company : Hashable {
 
 struct Placement {
     var companyUuid: String
-    var interestsList: [Interest]
+    var interestsList: [F4SInterest]
     var status: PlacementStatus
     var placementUuid: String
 
-    init(companyUuid: String = "", interestsList: [Interest] = [], status: PlacementStatus = .inProgress, placementUuid: String = "") {
+    init(companyUuid: String = "", interestsList: [F4SInterest] = [], status: PlacementStatus = .inProgress, placementUuid: String = "") {
         self.companyUuid = companyUuid
         self.interestsList = interestsList
         self.status = status
@@ -132,23 +132,23 @@ public struct BusinessCompanyInterest : Hashable {
     }
 }
 
-public struct Interest : Hashable {
-    public var hashValue: Int { return uuid.hashValue }
-    
-    public static func ==(lhs: Interest, rhs: Interest) -> Bool {
-        return lhs.uuid == rhs.uuid
-    }
-    
-    public var id: Int64
-    public var uuid: String
-    public var name: String
-
-    public init(id: Int64 = 0, uuid: String = "", name: String = "") {
-        self.id = id
-        self.uuid = uuid
-        self.name = name
-    }
-}
+//public struct Interest : Hashable {
+//    public var hashValue: Int { return uuid.hashValue }
+//
+//    public static func ==(lhs: Interest, rhs: Interest) -> Bool {
+//        return lhs.uuid == rhs.uuid
+//    }
+//
+//    public var id: Int64
+//    public var uuid: String
+//    public var name: String
+//
+//    public init(id: Int64 = 0, uuid: String = "", name: String = "") {
+//        self.id = id
+//        self.uuid = uuid
+//        self.name = name
+//    }
+//}
 
 struct ContentEntity {
     var title: String

@@ -17,7 +17,7 @@ class InterestDBOperations {
         return Static.instance
     }
 
-    func saveInterest(_ interest: Interest) {
+    func saveInterest(_ interest: F4SInterest) {
         let keychain = KeychainSwift()
         if let userUuid = keychain.get(UserDefaultsKeys.userUuid) {
             InterestCoreDataManager.sharedInstance.saveInterestToContext(interest, userUuid: userUuid)
@@ -38,9 +38,9 @@ class InterestDBOperations {
         return interests
     }
 
-    func getAllInterests() -> [Interest] {
+    func getAllInterests() -> [F4SInterest] {
         let interestDBData = InterestCoreDataManager.sharedInstance.getAllInterests()
-        var interests: [Interest] = []
+        var interests: [F4SInterest] = []
         for interestDB in interestDBData {
             let interest = InterestDBOperations.sharedInstance.getInterestFromInterestDB(interestDB: interestDB)
             interests.append(interest)
@@ -56,8 +56,8 @@ class InterestDBOperations {
         InterestCoreDataManager.sharedInstance.removeInterestWithId(interestUuid: interestUuid, userUuid: userUuid)
     }
 
-    fileprivate func getInterestFromInterestDB(interestDB: InterestDB) -> Interest {
-        var interest: Interest = Interest(id: interestDB.id)
+    fileprivate func getInterestFromInterestDB(interestDB: InterestDB) -> F4SInterest {
+        var interest = F4SInterest(id: Int(interestDB.id))
         if let uuid = interestDB.uuid {
             interest.uuid = uuid
         }

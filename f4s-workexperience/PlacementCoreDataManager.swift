@@ -17,7 +17,7 @@ class PlacementCoreDataManager: CoreDataBaseManager {
         return Static.instance
     }
 
-    func savePlacementToContext(_ placement: Placement, userUuid: String) {
+    func savePlacementToContext(_ placement: F4SPlacement, userUuid: String) {
         guard let managedObjectCont = self.managedObjectContext else {
             return
         }

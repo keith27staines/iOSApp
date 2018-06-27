@@ -46,7 +46,7 @@ extension F4SWorkfinderVersioningService : F4SWorkfinderVersioningServiceProtoco
         guard
             let info = Bundle.main.infoDictionary,
             let currentVersion = info["CFBundleShortVersionString"] as? String,
-            let identifier = info["CFBundleIdentifier"] as? String,
+            let _ = info["CFBundleIdentifier"] as? String,
             let url = URL(string: "http://itunes.apple.com/lookup?bundleId=\(id)"),
             let data = try? Data(contentsOf: url),
             let json = try? JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as! [String: Any],

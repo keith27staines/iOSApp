@@ -18,7 +18,7 @@ class InterestDB: NSManagedObject {
     @NSManaged var userUuid: String?
 
     @discardableResult
-    class func createInManagedObjectContext(_ moc: NSManagedObjectContext, interest: Interest, userUuid: String) -> InterestDB? {
+    class func createInManagedObjectContext(_ moc: NSManagedObjectContext, interest: F4SInterest, userUuid: String) -> InterestDB? {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest<NSFetchRequestResult>(entityName: "Interest")
 
         let predicate = NSPredicate(format: "userUuid == %@ && uuid == %@", userUuid, interest.uuid)
@@ -34,10 +34,10 @@ class InterestDB: NSManagedObject {
             newItem.uuid = interest.uuid
             newItem.name = interest.name
             newItem.userUuid = userUuid
-            newItem.id = interest.id
+            newItem.id = Int64(interest.id)
             return newItem
         } else {
-            fetchResult[0].id = interest.id
+            fetchResult[0].id = Int64(interest.id)
             fetchResult[0].uuid = interest.uuid
             fetchResult[0].name = interest.name
             fetchResult[0].userUuid = userUuid

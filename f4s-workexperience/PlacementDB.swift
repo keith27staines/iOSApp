@@ -18,7 +18,7 @@ class PlacementDB: NSManagedObject {
     @NSManaged var userUuid: String?
 
     @discardableResult
-    class func createInManagedObjectContext(_ moc: NSManagedObjectContext, placement: Placement, userUuid: String) -> PlacementDB? {
+    class func createInManagedObjectContext(_ moc: NSManagedObjectContext, placement: F4SPlacement, userUuid: String) -> PlacementDB? {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest<NSFetchRequestResult>(entityName: "Placement")
 
         let predicate = NSPredicate(format: "userUuid == %@ && companyUuid == %@", userUuid, placement.companyUuid)

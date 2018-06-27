@@ -17,7 +17,7 @@ class InterestCoreDataManager: CoreDataBaseManager {
         return Static.instance
     }
 
-    func saveInterestToContext(_ interest: Interest, userUuid: String) {
+    func saveInterestToContext(_ interest: F4SInterest, userUuid: String) {
         guard let managedObjectCont = self.managedObjectContext else {
             return
         }
