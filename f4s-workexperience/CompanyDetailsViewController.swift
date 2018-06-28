@@ -258,9 +258,11 @@ extension CompanyDetailsViewController {
             guard let company = self.company else {
                 return
             }
-            var placement = F4SPlacement(companyUuid: company.uuid, interestList: [], status: F4SPlacementStatus.inProgress, placementUuid: nil)
             MessageHandler.sharedInstance.showLoadingOverlay(self.view)
-            
+            var placement = F4SPlacement(
+                userUuid: F4SUser.userUuidFromKeychain(),
+                companyUuid: company.uuid,
+                interestList: [])
             placementService.createPlacement(placement: placement) { (result) in
                 DispatchQueue.main.async { [weak self] in
                     guard let strongSelf = self else { return }

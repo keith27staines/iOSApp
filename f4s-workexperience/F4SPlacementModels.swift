@@ -29,8 +29,10 @@ public struct F4SPlacement : Codable {
     public var interestList: [F4SInterest]
     public var status: F4SPlacementStatus?
     public var placementUuid: F4SUUID?
+    public var userUuid: F4SUUID?
     
-    public init(companyUuid: F4SUUID? = nil, interestList: [F4SInterest] = [], status: F4SPlacementStatus? = nil, placementUuid: F4SUUID? = nil) {
+    public init(userUuid: F4SUUID? = nil, companyUuid: F4SUUID? = nil, interestList: [F4SInterest] = [], status: F4SPlacementStatus? = nil, placementUuid: F4SUUID? = nil) {
+        self.userUuid = userUuid
         self.companyUuid = companyUuid
         self.interestList = interestList
         self.status = status
@@ -40,6 +42,7 @@ public struct F4SPlacement : Codable {
 
 extension F4SPlacement {
     private enum CodingKeys : String, CodingKey {
+        case userUuid = "user_uuid"
         case companyUuid = "company_uuid"
         case status
         case placementUuid = "placement_uuid"

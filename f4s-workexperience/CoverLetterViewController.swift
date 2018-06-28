@@ -24,6 +24,10 @@ class CoverLetterViewController: UIViewController {
     lazy var templateService: F4STemplateServiceProtocol = {
         return F4STemplateService()
     }()
+    
+    lazy var placementService: F4SPlacementServiceProtocol = {
+        return F4SPlacementService()
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -420,7 +424,7 @@ extension CoverLetterViewController {
             }
         }
     }
-
+    
     func updatePlacement() {
         let availabilityWindow = getWorkAvailabilityWindowFromSelectedTemplate()
         
@@ -445,17 +449,17 @@ extension CoverLetterViewController {
         MessageHandler.sharedInstance.showLoadingOverlay(self.view)
         let templateToUpdate = F4STemplate(uuid: currentTemplateUuid, blanks: self.selectedTemplateChoices)
         placement.interestList = [F4SInterest](InterestDBOperations.sharedInstance.interestsForCurrentUser())
-        PlacementService.sharedInstance.updatePlacement(placement: placement, template: templateToUpdate) {
-            [weak self]
-            _, result in
+        placementService.updatePlacement(placement: placement, template: templateToUpdate) { [weak self] (result) in
             guard let strongSelf = self else {
                 MessageHandler.sharedInstance.hideLoadingOverlay()
                 return
             }
             MessageHandler.sharedInstance.hideLoadingOverlay()
-            switch result
-            {
-            case .value:
+            switch result {
+                
+            case .error(let error):
+                MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf, cancelHandler: nil, retryHandler: strongSelf.updatePlacement)
+            case .success(_):
                 // succes + go to next page
                 strongSelf.applicationContext.placement = placement
                 if let navCtrl = strongSelf.navigationController, let applicationContext = strongSelf.applicationContext, let availabilityPeriod = applicationContext.availabilityPeriod  {
@@ -466,22 +470,15 @@ extension CoverLetterViewController {
                     print(jsonString)
                     calendarService.patchAvailabilityForPlacement(availabilityPeriods: availabilityJson, completion: { (result) in
                         DispatchQueue.main.async {
-                                switch result {
-                                case .success(_):
-                                    CustomNavigationHelper.sharedInstance.pushProcessedMessages(navCtrl, applicationContext: applicationContext)
-                                case .error(let networkError):
-                                    strongSelf.handleF4SNetworkError(networkError: networkError)
+                            switch result {
+                            case .success(_):
+                                CustomNavigationHelper.sharedInstance.pushProcessedMessages(navCtrl, applicationContext: applicationContext)
+                            case .error(let networkError):
+                                strongSelf.handleF4SNetworkError(networkError: networkError)
                             }
                         }
                     })
                 }
-                break
-            case let .error(error):
-                MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
-                break
-            case let .deffinedError(error):
-                MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
-                break
             }
         }
     }

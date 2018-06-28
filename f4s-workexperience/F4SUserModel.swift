@@ -120,4 +120,9 @@ public struct F4SUser : Codable {
         let keychain = KeychainSwift()
         keychain.set(uuid, forKey: UserDefaultsKeys.userUuid)
     }
+    
+    public static func userUuidFromKeychain() -> F4SUUID? {
+        let keychain = KeychainSwift()
+        return keychain.get(UserDefaultsKeys.userUuid)
+    }
 }

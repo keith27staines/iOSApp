@@ -62,3 +62,53 @@ public enum F4SJSONValue: Decodable {
         }
     }
 }
+
+extension F4SJSONValue: Encodable {
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .string(let string): try container.encode(string)
+        case .int(let int): try container.encode(int)
+        case .double(let double): try container.encode(double)
+        case .bool(let bool): try container.encode(bool)
+        case .object(let object): try container.encode(object)
+        case .array(let array): try container.encode(array)
+        }
+    }
+}
+
+extension F4SJSONValue: ExpressibleByStringLiteral {
+    public init(stringLiteral value: String) {
+        self = .string(value)
+    }
+}
+
+extension F4SJSONValue: ExpressibleByIntegerLiteral {
+    public init(integerLiteral value: Int) {
+        self = .int(value)
+    }
+}
+
+extension F4SJSONValue: ExpressibleByFloatLiteral {
+    public init(floatLiteral value: Double) {
+        self = .double(value)
+    }
+}
+
+extension F4SJSONValue: ExpressibleByBooleanLiteral {
+    public init(booleanLiteral value: Bool) {
+        self = .bool(value)
+    }
+}
+
+extension F4SJSONValue: ExpressibleByArrayLiteral {
+    public init(arrayLiteral elements: F4SJSONValue...) {
+        self = .array(elements)
+    }
+}
+
+extension F4SJSONValue: ExpressibleByDictionaryLiteral {
+    public init(dictionaryLiteral elements: (String, F4SJSONValue)...) {
+        self = .object([String: F4SJSONValue](uniqueKeysWithValues: elements))
+    }
+}

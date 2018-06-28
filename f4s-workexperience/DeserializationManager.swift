@@ -18,46 +18,6 @@ class DeserializationManager {
     }
 
     // MARK:- placement
-    func parseCreatePlacement(jsonOptional: JSON) -> Result<String> {
-        if let placementUuid = jsonOptional["uuid"].string {
-            return .value(Box(placementUuid))
-        }
-
-        if let _ = jsonOptional["errors"].dictionary {
-            if let vendorUuidErrors = jsonOptional["errors"]["user_uuid"].array {
-                if vendorUuidErrors.count > 0 {
-                    if vendorUuidErrors[0].string == Errors.CreatePlacementCallErrors.VendorUuidRequired.serverErrorMessage {
-                        return .deffinedError(Errors.CreatePlacementCallErrors.VendorUuidRequired)
-                    }
-                    return .deffinedError(Errors.CreatePlacementCallErrors.VendorUuidNotExist)
-                }
-            }
-
-            if let companyUuidErrors = jsonOptional["errors"]["company_uuid"].array {
-                if companyUuidErrors.count > 0 {
-                    if companyUuidErrors[0].string == Errors.CreatePlacementCallErrors.CompanyUuidRequired.serverErrorMessage {
-                        return .deffinedError(Errors.CreatePlacementCallErrors.CompanyUuidRequired)
-                    }
-                    if companyUuidErrors[0].string == Errors.CreatePlacementCallErrors.CompanyUuidNotExist.serverErrorMessage {
-                        return .deffinedError(Errors.CreatePlacementCallErrors.CompanyUuidNotExist)
-                    }
-                }
-            }
-            if let allError = jsonOptional["errors"]["non_field_errors"].string {
-                if allError == Errors.CreatePlacementCallErrors.PlacementAlreadyExist.serverErrorMessage {
-                    return .deffinedError(Errors.CreatePlacementCallErrors.PlacementAlreadyExist)
-                }
-                if allError == Errors.CreatePlacementCallErrors.CannotApplyToPlacement.serverErrorMessage {
-                    return .deffinedError(Errors.CreatePlacementCallErrors.CannotApplyToPlacement)
-                }
-                if allError == Errors.CreatePlacementCallErrors.TooManyPlacementInProgress.serverErrorMessage {
-                    return .deffinedError(Errors.CreatePlacementCallErrors.TooManyPlacementInProgress)
-                }
-            }
-        }
-
-        return .deffinedError(Errors.GeneralCallErrors.DeserializationError)
-    }
 
 
     func parseUpdatePlacement(jsonOptional: JSON) -> Result<String> {
