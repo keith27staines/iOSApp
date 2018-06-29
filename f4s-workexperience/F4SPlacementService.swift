@@ -52,14 +52,10 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
     }
     
     public func updatePlacement(placement: F4SPlacement, template: F4STemplate, completion: @escaping (F4SNetworkResult<Bool>) -> ()) {
-        let urlString = ApiConstants.updatePlacementUrl + "/\(placement.placementUuid!)"
-        let url = URL(string: urlString)!
-        let attempting = "Update placement"
-        let session = F4SNetworkSessionManager.shared.interactiveSession
         
         var coverletterJson = CoverLetterJson()
         coverletterJson.user_uuid = placement.userUuid!
-        coverletterJson.company_uuid = placement.companyUuid!
+        coverletterJson.company_uuid = F4SUser.userUuidFromKeychain()!
         coverletterJson.interests = placement.interestList.map { (interest) -> F4SUUID in
             return interest.uuid
         }
@@ -81,13 +77,24 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
             coverLetterObjects.append(object)
         }
         coverletterJson.coverletter_choices = coverLetterObjects
-        
+        let attempting = "Update placement"
         do {
+            let urlString = ApiConstants.updatePlacementUrl + "/\(placement.placementUuid!)"
+            let url = URL(string: urlString)!
+            let session = F4SNetworkSessionManager.shared.interactiveSession
             let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
             let data = try encoder.encode(coverletterJson)
-            let urlRequest = F4SDataTaskService.urlRequest(verb: .post, url: url, dataToSend: data)
+            print(String(data: data, encoding: .utf8)!)
+            
+            let urlRequest = F4SDataTaskService.urlRequest(verb: .put, url: url, dataToSend: data)
             let dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { result in
-                completion(F4SNetworkResult.success(true))
+                switch result {
+                case .error(let error):
+                    completion(F4SNetworkResult.error(error))
+                case .success(_):
+                    completion(F4SNetworkResult.success(true))
+                }
             }
             dataTask.resume()
         } catch {
@@ -115,7 +122,9 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
         let createPlacement = PlacementJson(user_uuid: userUuid, company_uuid: companyUuid, interests: interests, coverletter_choices: nil)
         do {
             let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
             let data = try encoder.encode(createPlacement)
+            print(String(data: data, encoding: .utf8)!)
             let urlRequest = F4SDataTaskService.urlRequest(verb: .post, url: url, dataToSend: data)
             let dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { [weak self] (result) in
                 self?.handleCreateplacementTaskResult(attempting: attempting, dataResult: result, completion: completion)

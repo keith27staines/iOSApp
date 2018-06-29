@@ -188,8 +188,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-        F4SUserStatusService.shared.beginStatusUpdate()
         registerApplicationForRemoteNotifications(application)
+        F4SUserStatusService.shared.beginStatusUpdate()
     }
 
     func applicationDidBecomeActive(_ appliction: UIApplication) {
@@ -204,7 +204,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        F4SUserStatusService.shared.beginStatusUpdate()
+        
     }
 
     // MARK: - Core Data stack

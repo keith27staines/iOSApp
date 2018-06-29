@@ -34,18 +34,19 @@ class PlacementDB: NSManagedObject {
             newItem.companyUuid = placement.companyUuid
             newItem.placementUuid = placement.placementUuid
             newItem.userUuid = userUuid
-
-            switch placement.status!
-            {
-            case .inProgress:
-                newItem.status = "inProgress"
-                break
-            default:
-                // applied
-                newItem.status = "applied"
-                break
+            newItem.status = ""
+            if let status = placement.status {
+                switch status
+                {
+                case .inProgress:
+                    newItem.status = "inProgress"
+                    break
+                default:
+                    // applied
+                    newItem.status = "applied"
+                    break
+                }
             }
-
             return newItem
         } else {
             fetchResult[0].companyUuid = placement.companyUuid

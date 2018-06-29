@@ -70,13 +70,19 @@ class MessageHandler {
             }
             alert.addAction(cancelAction)
         }
-        
-        if let retryHandler = retryHandler {
-            let retryAction = UIAlertAction(title: "Retry", style: .default) { (_) in
-                retryHandler()
+        if networkError.retry {
+            if let retryHandler = retryHandler {
+                let retryAction = UIAlertAction(title: "Retry", style: .default) { (_) in
+                    retryHandler()
+                }
+                alert.addAction(retryAction)
             }
-            alert.addAction(retryAction)
+        } else {
+            let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
+            }
+            alert.addAction(okAction)
         }
+
         parentCtrl.present(alert, animated: true) {}
     }
     

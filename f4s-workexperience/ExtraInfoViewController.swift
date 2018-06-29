@@ -340,17 +340,6 @@ extension ExtraInfoViewController {
         return placement.placementUuid ?? ""
     }
     
-    func savePlacementLocally(status: F4SPlacementStatus ) {
-        guard let currentCompany = self.applicationContext?.company,
-            let placement = PlacementDBOperations.sharedInstance.getPlacementsForCurrentUserAndCompany(companyUuid: currentCompany.uuid) else {
-                return
-        }
-        var updatedPlacement = placement
-        updatedPlacement.status = status
-        applicationContext?.placement = placement
-        PlacementDBOperations.sharedInstance.savePlacement(placement: updatedPlacement)
-    }
-    
     func buildUserInfo() -> F4SUser {
         var user = F4SUser()
         if let dateOfBirthText = dobTextField.text {
@@ -675,7 +664,11 @@ extension ExtraInfoViewController {
                     user.updateUuidAndPersistToLocalStorage(uuid: uuid)
                     var updatedContext = applicationContext
                     updatedContext.user = user
-                    strongSelf.savePlacementLocally(status: .applied)
+                    var updatedPlacement = applicationContext.placement!
+                    updatedPlacement.status = F4SPlacementStatus.applied
+                    updatedContext.placement = updatedPlacement
+                    strongSelf.applicationContext = updatedContext
+                    PlacementDBOperations.sharedInstance.savePlacement(placement: updatedPlacement)
                     UserDefaults.standard.set(true, forKey: strongSelf.consentPreviouslyGivenKey)
                     strongSelf.afterSubmitApplication(applicationContext: updatedContext)
                 case .error(let error):

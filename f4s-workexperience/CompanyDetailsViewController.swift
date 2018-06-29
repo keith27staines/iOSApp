@@ -267,10 +267,14 @@ extension CompanyDetailsViewController {
                 DispatchQueue.main.async { [weak self] in
                     guard let strongSelf = self else { return }
                     switch result {
-                    case .error(_):
-                        break
+                    case .error(let error):
+                        MessageHandler.sharedInstance.hideLoadingOverlay()
+                        MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf, cancelHandler: nil, retryHandler: {
+                            strongSelf.applyButton(strongSelf)
+                        })
                     case .success(let result):
                         placement.placementUuid = result.placementUuid
+                        placement.status = F4SPlacementStatus.inProgress
                         PlacementDBOperations.sharedInstance.savePlacement(placement: placement)
                         strongSelf.applyButton.setTitle(NSLocalizedString("Finish Application", comment: ""), for: .normal)
                         let applyText = NSLocalizedString("Finish Application", comment: "")
