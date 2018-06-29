@@ -32,8 +32,6 @@ class UserInfoDBOperations {
             return nil
         }
         let info = UserInfoDBOperations.sharedInstance.getUserFromUserInfoDB(userInfoDB: userInfoDB)
-        // Route around email verification
-        //info.email = F4SEmailVerificationModel.verifiedEmail!
         return info
     }
 
@@ -45,14 +43,14 @@ class UserInfoDBOperations {
         if let firstName = userInfoDB.firstName {
             user.firstName = firstName
         }
-        if let lastName = userInfoDB.lastName {
+        if let lastName = userInfoDB.lastName, lastName.isEmpty == false {
             user.lastName = lastName
         }
         if let consenterEmail = userInfoDB.consenterEmail {
             user.consenterEmail = consenterEmail
         }
         if let dateOfBirth = userInfoDB.dateOfBirth {
-            user.dateOfBirth = dateOfBirth
+            user.dateOfBirth =  Date.dateFromRfc3339(string: dateOfBirth)
         }
         if let placementUuid = userInfoDB.placementUuid {
             user.placementUuid = placementUuid

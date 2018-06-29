@@ -26,6 +26,12 @@ public class F4SUserService : F4SUserServiceProtocol {
         return UserDefaults.standard.object(forKey: UserDefaultsKeys.userHasAccount) != nil && UserDefaults.standard.bool(forKey: UserDefaultsKeys.userHasAccount)
     }
     
+    var dobFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.dateFormat = "yyyy'-'MM'-'dd"
+        return df
+    }()
+    
     public func updateUser(user: F4SUser, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ()) {
         let attempting = "Update user"
         let keychain = KeychainSwift()
@@ -39,7 +45,10 @@ public class F4SUserService : F4SUserServiceProtocol {
         let session = F4SNetworkSessionManager.shared.interactiveSession
         do {
             let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            encoder.dateEncodingStrategy = .formatted(dobFormatter)
             let data = try encoder.encode(user)
+            log.debug("updating user with json \n\(String(data: data, encoding: .utf8)!)")
             let urlRequest = F4SDataTaskService.urlRequest(verb: .put, url: url, dataToSend: data)
             let dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { [weak self] (result) in
                 

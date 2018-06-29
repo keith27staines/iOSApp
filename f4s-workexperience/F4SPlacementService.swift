@@ -15,6 +15,31 @@ public protocol F4SPlacementServiceProtocol {
     func ratePlacement(placementUuid: String, rating: Int, completion: @escaping ( F4SNetworkResult<Bool>) -> ())
 }
 
+internal struct CoverLetterJson : Encodable {
+    public var placementUuid: F4SUUID?
+    public var templateUuid: F4SUUID?
+    public var userUuid: F4SUUID?
+    public var companyUuid: F4SUUID?
+    public var interests: [F4SUUID]?
+    public var choices: [CoverLetterBlankJson]?
+}
+
+extension CoverLetterJson {
+    private enum CodingKeys : String, CodingKey {
+        case placementUuid = "uuid"
+        case templateUuid = "coverletter_uuid"
+        case userUuid = "user_uuid"
+        case companyUuid = "company_uuid"
+        case interests
+        case choices = "coverletter_choices"
+    }
+}
+
+internal struct CoverLetterBlankJson : Encodable {
+    public var name: String?
+    public var result: F4SJSONValue?
+}
+
 public class F4SPlacementService : F4SPlacementServiceProtocol {
     
     public func getAllPlacementsForUser(completion: @escaping (F4SNetworkResult<[F4STimeline]>) -> ()) {
@@ -39,23 +64,13 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
         dataTask.resume()
     }
     
-    public struct CoverLetterJson : Encodable {
-        public var user_uuid: F4SUUID?
-        public var company_uuid: F4SUUID?
-        public var interests: [F4SUUID]?
-        public var coverletter_choices: [CoverLetterBlankJson]?
-    }
-    
-    public struct CoverLetterBlankJson : Encodable {
-        public var name: String?
-        public var result: F4SJSONValue?
-    }
-    
     public func updatePlacement(placement: F4SPlacement, template: F4STemplate, completion: @escaping (F4SNetworkResult<Bool>) -> ()) {
         
         var coverletterJson = CoverLetterJson()
-        coverletterJson.user_uuid = placement.userUuid!
-        coverletterJson.company_uuid = F4SUser.userUuidFromKeychain()!
+        coverletterJson.placementUuid = placement.placementUuid
+        coverletterJson.templateUuid = template.uuid
+        coverletterJson.userUuid = F4SUser.userUuidFromKeychain()
+        coverletterJson.companyUuid =  placement.companyUuid
         coverletterJson.interests = placement.interestList.map { (interest) -> F4SUUID in
             return interest.uuid
         }
@@ -76,7 +91,7 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
             }
             coverLetterObjects.append(object)
         }
-        coverletterJson.coverletter_choices = coverLetterObjects
+        coverletterJson.choices = coverLetterObjects
         let attempting = "Update placement"
         do {
             let urlString = ApiConstants.updatePlacementUrl + "/\(placement.placementUuid!)"
@@ -85,7 +100,7 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
             let encoder = JSONEncoder()
             encoder.outputFormatting = .prettyPrinted
             let data = try encoder.encode(coverletterJson)
-            print(String(data: data, encoding: .utf8)!)
+            log.debug("updating placement with json \n\(String(data: data, encoding: .utf8)!)")
             
             let urlRequest = F4SDataTaskService.urlRequest(verb: .put, url: url, dataToSend: data)
             let dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { result in
@@ -124,7 +139,7 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
             let encoder = JSONEncoder()
             encoder.outputFormatting = .prettyPrinted
             let data = try encoder.encode(createPlacement)
-            print(String(data: data, encoding: .utf8)!)
+            log.debug("creating placement with json \n\(String(data: data, encoding: .utf8)!)")
             let urlRequest = F4SDataTaskService.urlRequest(verb: .post, url: url, dataToSend: data)
             let dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { [weak self] (result) in
                 self?.handleCreateplacementTaskResult(attempting: attempting, dataResult: result, completion: completion)

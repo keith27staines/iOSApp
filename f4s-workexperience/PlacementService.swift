@@ -48,20 +48,4 @@ class PlacementService: ApiBaseService {
             }
         }
     }
-
-    private func getInterestList(interests: [F4SInterest]) -> [String] {
-        var interestList: [String] = []
-        for interest in interests {
-            interestList.append(interest.uuid)
-        }
-        return interestList
-    }
-
-    private func getChoiceList(choices: [F4SChoice]) -> [String] {
-        var choicesList: [String] = []
-        for choice in choices {
-            choicesList.append(choice.uuid)
-        }
-        return choicesList
-    }
 }

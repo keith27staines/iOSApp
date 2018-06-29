@@ -66,6 +66,13 @@ class ExtraInfoViewController: UIViewController {
         return F4SUserService()
     }()
     
+    lazy var dateOfBirthFormatter: DateFormatter = {
+       let df = DateFormatter()
+        df.dateFormat = "dd' 'MM' 'yyyy" //"yyyy'-'MM'-'dd'"
+        df.dateStyle = .medium
+        return df
+    }()
+    
     var isEmailOkay: Bool {
         guard let emailAddress = emailTextField.text else {
             return false
@@ -297,9 +304,13 @@ extension ExtraInfoViewController {
             self.userInfoStackView.isHidden = false
             self.noVoucherInfoLabel.isHidden = false
             scrollView.isScrollEnabled = true
-            self.dobTextField.text = user.dateOfBirth
+            if let dob = user.dateOfBirth {
+                self.dobTextField.text = dateOfBirthFormatter.string(from: dob)
+            } else {
+                self.dobTextField.text = ""
+            }
             self.emailTextField.text = user.email
-            self.firstAndLastNameTextField.text = user.firstName + " " + user.lastName
+            self.firstAndLastNameTextField.text = user.firstName + " " + (user.lastName ?? "")
             
             self.emailUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
             self.firstAndLastNameUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
@@ -343,7 +354,7 @@ extension ExtraInfoViewController {
     func buildUserInfo() -> F4SUser {
         var user = F4SUser()
         if let dateOfBirthText = dobTextField.text {
-            user.dateOfBirth = dateOfBirthText
+            user.dateOfBirth = dateOfBirthFormatter.date(from: dateOfBirthText)
         }
         if let email = emailTextField.text {
             user.email = email
@@ -352,10 +363,13 @@ extension ExtraInfoViewController {
             let nameComponents = firstAndLastNameText.components(separatedBy: " ")
             if nameComponents.count > 1 {
                 user.firstName = nameComponents.first!
-                user.lastName = nameComponents.dropFirst().joined(separator: " ")
+                let lastname = nameComponents.dropFirst().joined(separator: " ")
+                if !lastname.isEmpty {
+                    user.lastName = nameComponents.dropFirst().joined(separator: " ")
+                }
             } else {
                 user.firstName = nameComponents.first!
-                user.lastName = ""
+                user.lastName = nil
             }
         }
         user.placementUuid = getPlacementUuid()
@@ -545,7 +559,7 @@ extension ExtraInfoViewController {
             return
         }
         if voucherVerificationService == nil {
-            let placementUuid = applicationContext.user!.placementUuid
+            let placementUuid = applicationContext.user!.placementUuid!
             voucherVerificationService = F4SVoucherVerificationService(placementUuid: placementUuid, voucherCode: voucherCode)
         }
         showLoadingOverlay()
