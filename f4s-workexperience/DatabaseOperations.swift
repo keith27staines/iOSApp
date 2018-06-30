@@ -312,7 +312,7 @@ extension DatabaseOperations {
             log.debug("Can't find company with specified uuid because the database isn't loaded")
             return nil
         }
-        let uuid = uuid.replacingOccurrences(of: "-", with: "")
+        let uuid = uuid.dehyphenated
         let selectString: String = "SELECT * FROM businesses_company WHERE uuid = '\(uuid)'"
         guard let stmt = try? db.prepare(selectString) else {
             // Company just wasn't found
@@ -339,9 +339,7 @@ extension DatabaseOperations {
         }
         do {
             var companyList: [Company] = []
-            // flatmap with optional is deprecated in favour of compact map, but I can't see why flatmap is required anyway so replacing with map
-            let uuidsString = withUuid.map({ $0.replacingOccurrences(of: "-", with: "") }).joined(separator: "\",\"")
-            //let uuidsString = withUuid.flatMap({ $0.replacingOccurrences(of: "-", with: "") }).joined(separator: "\",\"")
+            let uuidsString = withUuid.map({ $0.dehyphenated }).joined(separator: "\",\"")
 
             let selectCompaniesWithUuid: String = "SELECT * FROM businesses_company WHERE uuid IN (\"\(uuidsString)\")"
 

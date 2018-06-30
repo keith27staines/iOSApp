@@ -11,7 +11,7 @@ import Foundation
 public protocol F4SPlacementServiceProtocol {
     func createPlacement(placement: F4SPlacement, completion: @escaping (_ result: F4SNetworkResult<F4SPlacementCreateResult>) -> ())
     func updatePlacement(placement: F4SPlacement, template: F4STemplate, completion: @escaping (F4SNetworkResult<Bool>) -> ())
-    func getAllPlacementsForUser(completion: @escaping (_ result: F4SNetworkResult<[F4STimeline]>) -> ())
+    func getAllPlacementsForUser(completion: @escaping (_ result: F4SNetworkResult<[F4STimelinePlacement]>) -> ())
     func ratePlacement(placementUuid: String, rating: Int, completion: @escaping ( F4SNetworkResult<Bool>) -> ())
 }
 
@@ -42,8 +42,22 @@ internal struct CoverLetterBlankJson : Encodable {
 
 public class F4SPlacementService : F4SPlacementServiceProtocol {
     
-    public func getAllPlacementsForUser(completion: @escaping (F4SNetworkResult<[F4STimeline]>) -> ()) {
-        
+    public func getAllPlacementsForUser(completion: @escaping (F4SNetworkResult<[F4STimelinePlacement]>) -> ()) {
+        let attempting = "Get all placements"
+        let url = URL(string: ApiConstants.allPlacementsUrl)!
+        let session = F4SNetworkSessionManager.shared.interactiveSession
+        let urlRequest = F4SDataTaskService.urlRequest(verb: .get, url: url, dataToSend: nil)
+        let dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { (result) in
+            switch result {
+            case .error(let error):
+                completion(F4SNetworkResult.error(error))
+            case .success(let data):
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
+                decoder.decode(data: data, intoType: [F4STimelinePlacement].self, attempting: attempting, completion: completion)
+            }
+        }
+        dataTask.resume()
     }
     
     public func ratePlacement(placementUuid: String, rating: Int, completion: @escaping (F4SNetworkResult<Bool>) -> ()) {

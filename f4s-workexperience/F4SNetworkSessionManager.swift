@@ -20,7 +20,10 @@ public class F4SNetworkSessionManager {
     
     public internal (set) lazy var smallImageSession: URLSession = {
         return URLSession(configuration: smallImageConfiguration)
-        
+    }()
+    
+    public internal (set) lazy var firstRegistrationSession: URLSession = {
+        return URLSession(configuration: firstRegistrationConfiguration)
     }()
     
     // MARK:- Internal properties
@@ -34,6 +37,17 @@ public class F4SNetworkSessionManager {
             assertionFailure("This method should only be called if a userUuid exists")
         }
         return header
+    }()
+    
+    internal lazy var firstRegistrationHeaders : [String : String] = {
+        return ["wex.api.key": ApiConstants.apiKey]
+    }()
+    
+    internal lazy var firstRegistrationConfiguration: URLSessionConfiguration = {
+        let configuration = URLSessionConfiguration.default
+        configuration.httpAdditionalHeaders = firstRegistrationHeaders
+        configuration.allowsCellularAccess = true
+        return configuration
     }()
     
     internal lazy var interactiveConfiguration: URLSessionConfiguration = {

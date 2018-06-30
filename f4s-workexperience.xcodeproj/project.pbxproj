@@ -106,7 +106,6 @@
 		40E78E581DD32964000A3776 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E541DD32964000A3776 /* Constants.swift */; };
 		40E78E591DD32964000A3776 /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E551DD32964000A3776 /* Entities.swift */; };
 		40E78E5F1DD3297D000A3776 /* ApiBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E5C1DD3297D000A3776 /* ApiBaseService.swift */; };
-		40E78E601DD3297D000A3776 /* DeserializationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E5D1DD3297D000A3776 /* DeserializationManager.swift */; };
 		40E78E661DD32B94000A3776 /* CustomNavigationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E651DD32B94000A3776 /* CustomNavigationHelper.swift */; };
 		40E78E6E1DD32BD4000A3776 /* BaseMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E6A1DD32BD4000A3776 /* BaseMenuViewController.swift */; };
 		40E78E6F1DD32BD4000A3776 /* CustomMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E6B1DD32BD4000A3776 /* CustomMenuViewController.swift */; };
@@ -431,7 +430,6 @@
 		40E78E541DD32964000A3776 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		40E78E551DD32964000A3776 /* Entities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
 		40E78E5C1DD3297D000A3776 /* ApiBaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiBaseService.swift; sourceTree = "<group>"; };
-		40E78E5D1DD3297D000A3776 /* DeserializationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeserializationManager.swift; sourceTree = "<group>"; };
 		40E78E651DD32B94000A3776 /* CustomNavigationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNavigationHelper.swift; sourceTree = "<group>"; };
 		40E78E6A1DD32BD4000A3776 /* BaseMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseMenuViewController.swift; path = Menu/BaseMenuViewController.swift; sourceTree = "<group>"; };
 		40E78E6B1DD32BD4000A3776 /* CustomMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomMenuViewController.swift; path = Menu/CustomMenuViewController.swift; sourceTree = "<group>"; };
@@ -924,7 +922,6 @@
 			isa = PBXGroup;
 			children = (
 				40E78E5C1DD3297D000A3776 /* ApiBaseService.swift */,
-				40E78E5D1DD3297D000A3776 /* DeserializationManager.swift */,
 				FCF06EE420DBFE1B00FD990C /* F4SPlacementService.swift */,
 				FCF06EE620DBFEC100FD990C /* F4SPlacementModels.swift */,
 				2037B0A01DE84EEF00A9DE3E /* PlacementService.swift */,
@@ -1888,7 +1885,6 @@
 				40E78E9C1DD5DB6D000A3776 /* AutoCompleteTextField.swift in Sources */,
 				40C1A51D1DDF5ACE000F80AA /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				40C1A51F1DDF5ACE000F80AA /* GMUStaticCluster.m in Sources */,
-				40E78E601DD3297D000A3776 /* DeserializationManager.swift in Sources */,
 				FCA6D2B61FA88CE10037962B /* F4SPartnerService.swift in Sources */,
 				204203EE1E4B16D7007C7409 /* ShortlistDBOperations.swift in Sources */,
 				FC4C5F2A20B2D7CD001FA83C /* F4SUploadSpecifiedDocumentsViewController.swift in Sources */,

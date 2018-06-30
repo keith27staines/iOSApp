@@ -71,8 +71,9 @@ public class F4SUserService : F4SUserServiceProtocol {
     
     public func registerAnonymousUserOnServer(completion: @escaping (F4SNetworkResult<F4SRegisterResult>) -> Void) {
         let attempting = "Register anonymous user on server"
+        log.debug("Attempting to: \(attempting)")
         let url = URL(string: ApiConstants.userProfileUrl)!
-        let session = F4SNetworkSessionManager.shared.interactiveSession
+        let session = F4SNetworkSessionManager.shared.firstRegistrationSession
         let anonymousUser = F4SAnonymousUser(vendorUuid: vendorID, clientType: "ios", apnsEnvironment: Config.apnsEnv)
         let encoder = JSONEncoder()
         let data: Data

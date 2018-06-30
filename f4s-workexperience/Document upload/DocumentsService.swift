@@ -32,7 +32,7 @@ extension F4SPlacementDocumentsService : F4SDocumentServiceProtocol {
     }
     
     public func putDocumentsForPlacement(documentDescriptors: F4SPutDocumentsUrlJson, completion: @escaping ((F4SNetworkDataResult) -> Void )) {
-        super.beginSendRequest(verb: .put, objectToSend: documentDescriptors, attempting: "Put supporting document urls for this placement", completion: completion)
+        super.beginSendRequest(verb: .put, objectToSend: documentDescriptors, attempting: "Upload supporting document urls for this placement", completion: completion)
     }
 }
 

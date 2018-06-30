@@ -162,25 +162,25 @@ struct ContentEntity {
     }
 }
 
-struct TimelinePlacement {
-    var placementUuid: String
-    var userUuid: String
-    var companyUuid: String
-    var threadUuid: String
-    var status: PlacementStatus
-    var latestMessage: F4SMessage
-    var isRead: Bool
-
-    init(placementUuid: String = "", userUuid: String = "", companyUuid: String = "", threadUuid: String = "", status: PlacementStatus = .inProgress, latestMessage: F4SMessage = F4SMessage(), isRead: Bool = true) {
-        self.placementUuid = placementUuid
-        self.companyUuid = companyUuid
-        self.userUuid = userUuid
-        self.threadUuid = threadUuid
-        self.status = status
-        self.latestMessage = latestMessage
-        self.isRead = isRead
-    }
-}
+//struct TimelinePlacement {
+//    var placementUuid: String
+//    var userUuid: String
+//    var companyUuid: String
+//    var threadUuid: String
+//    var status: PlacementStatus
+//    var latestMessage: F4SMessage
+//    var isRead: Bool
+//
+//    init(placementUuid: String = "", userUuid: String = "", companyUuid: String = "", threadUuid: String = "", status: PlacementStatus = .inProgress, latestMessage: F4SMessage = F4SMessage(), isRead: Bool = true) {
+//        self.placementUuid = placementUuid
+//        self.companyUuid = companyUuid
+//        self.userUuid = userUuid
+//        self.threadUuid = threadUuid
+//        self.status = status
+//        self.latestMessage = latestMessage
+//        self.isRead = isRead
+//    }
+//}
 
 struct UserStatus {
     var unreadCount: Int

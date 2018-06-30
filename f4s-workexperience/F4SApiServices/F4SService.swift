@@ -130,6 +130,7 @@ public class F4SDataTaskService {
             completion(F4SNetworkDataResult.error(error))
             return
         }
+        print(String(data:data, encoding: .utf8)!)
         let request = urlRequest(verb: verb, url: url, dataToSend: data)
         task = dataTask(with: request, attempting: attempting, completion: completion)
         task?.resume()
@@ -157,6 +158,7 @@ public class F4SDataTaskService {
     internal lazy var jsonEncoder: JSONEncoder = {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .formatted(DateFormatter.iso8601Full)
+        encoder.outputFormatting = .prettyPrinted
         return encoder
     }()
     

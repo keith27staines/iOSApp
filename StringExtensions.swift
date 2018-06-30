@@ -9,6 +9,10 @@
 import Foundation
 
 extension String {
+    var dehyphenated: String {
+        return self.replacingOccurrences(of: "-", with: "")
+    }
+    
     func htmlDecode() -> String {
         return self
             .replacingOccurrences(of: "&amp;", with: "&")
