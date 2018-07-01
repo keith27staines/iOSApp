@@ -11,6 +11,10 @@ import Reachability
 
 class CompanyDetailsViewController: UIViewController {
     
+    lazy var placementService: F4SPlacementServiceProtocol = {
+        return F4SPlacementService()
+    }()
+    
     var createShortlistService: F4SCreateShortlistItemServiceProtocol? = nil
     var removeShortlistService: F4SRemoveShortlistItemServiceProtocol? = nil
     
@@ -52,7 +56,7 @@ class CompanyDetailsViewController: UIViewController {
     
     let backgroundPopoverView = UIView()
     var company: Company!
-    var placement: Placement?
+    var placement: F4SPlacement?
     var shortlist: [Shortlist] = []
     fileprivate let IndustryCellIdentifier: String = "industryIdentifier"
     fileprivate let RatingCellIdentifier: String = "ratingIdentifier"
@@ -232,8 +236,6 @@ extension CompanyDetailsViewController {
 
         self.navigationController?.present(activityViewController, animated: true, completion: nil)
     }
-
-    
     
     @IBAction func applyButton(_: AnyObject) {
         if let reachability = Reachability() {
@@ -244,7 +246,7 @@ extension CompanyDetailsViewController {
         }
 
         let interestSet = InterestDBOperations.sharedInstance.interestsForCurrentUser()
-        let interestList = [Interest](interestSet)
+        let interestList: [F4SInterest] = [F4SInterest](interestSet)
         if self.placement != nil {
             // placement is already created
             // placement in progress
@@ -256,46 +258,39 @@ extension CompanyDetailsViewController {
             guard let company = self.company else {
                 return
             }
-
-            var placement = Placement(companyUuid: company.uuid, interestsList: interestList, status: .inProgress)
             MessageHandler.sharedInstance.showLoadingOverlay(self.view)
-            PlacementService.sharedInstance.createPlacement(placement: placement, postCompleted: {
-                [weak self]
-                _, result in
-                MessageHandler.sharedInstance.hideLoadingOverlay()
-                guard let strongSelf = self else {
-                    return
-                }
-                switch result
-                {
-                case let .value(boxed):
-                    // update in db
-                    // create new placement in progress
-                    placement.placementUuid = boxed.value
-                    strongSelf.placement = placement
-                    PlacementDBOperations.sharedInstance.savePlacement(placement: placement)
-                    DispatchQueue.main.async {
+            var placement = F4SPlacement(
+                userUuid: F4SUser.userUuidFromKeychain(),
+                companyUuid: company.uuid,
+                interestList: [])
+            placementService.createPlacement(placement: placement) { (result) in
+                DispatchQueue.main.async { [weak self] in
+                    guard let strongSelf = self else { return }
+                    switch result {
+                    case .error(let error):
+                        MessageHandler.sharedInstance.hideLoadingOverlay()
+                        MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf, cancelHandler: nil, retryHandler: {
+                            strongSelf.applyButton(strongSelf)
+                        })
+                    case .success(let result):
+                        placement.placementUuid = result.placementUuid
+                        placement.status = F4SPlacementStatus.inProgress
+                        PlacementDBOperations.sharedInstance.savePlacement(placement: placement)
                         strongSelf.applyButton.setTitle(NSLocalizedString("Finish Application", comment: ""), for: .normal)
                         let applyText = NSLocalizedString("Finish Application", comment: "")
                         strongSelf.applyButton.setBackgroundColor(color: UIColor(netHex: Colors.orangeNormal), forUIControlState: .normal)
                         strongSelf.applyButton.setBackgroundColor(color: UIColor(netHex: Colors.orangeActive), forUIControlState: .highlighted)
                         strongSelf.applyButton.setAttributedTitle(NSAttributedString(string: applyText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.white]), for: .normal)
-                    }
+                        
+                        if UIApplication.shared.isRegisteredForRemoteNotifications {
+                            CustomNavigationHelper.sharedInstance.presentCoverLetterController(parentCtrl: strongSelf, currentCompany: company)
+                        } else {
+                            CustomNavigationHelper.sharedInstance.presentNotificationPopover(parentCtrl: strongSelf, currentCompany: company)
+                        }
 
-                    if UIApplication.shared.isRegisteredForRemoteNotifications {
-                        CustomNavigationHelper.sharedInstance.presentCoverLetterController(parentCtrl: strongSelf, currentCompany: company)
-                    } else {
-                        CustomNavigationHelper.sharedInstance.presentNotificationPopover(parentCtrl: strongSelf, currentCompany: company)
                     }
-                    break
-                case let .error(error):
-                    MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
-                    break
-                case let .deffinedError(error):
-                    MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
-                    break
                 }
-            })
+            }
         }
     }
 }
@@ -329,7 +324,7 @@ extension CompanyDetailsViewController {
         if let placement = PlacementDBOperations.sharedInstance.getPlacementsForCurrentUserAndCompany(companyUuid: company.uuid) {
             self.placement = placement
             // placement is created
-            switch placement.status
+            switch placement.status!
             {
             case .inProgress:
                 applyText = NSLocalizedString("Finish Application", comment: "")

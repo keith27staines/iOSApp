@@ -17,18 +17,12 @@ class UserInfoCoreDataManager: CoreDataBaseManager {
         return Static.instance
     }
 
-    func saveUserInfoToContext(_ userInfo: User, userUuid: String) {
-        guard let managedObjectCont = self.managedObjectContext else {
-            return
-        }
-        UserInfoDB.createInManagedObjectContext(managedObjectCont, userInfo: userInfo, userUuid: userUuid)
+    func saveUserInfoToContext(_ userInfo: F4SUser, userUuid: String) {
+        UserInfoDB.createInManagedObjectContext(managedObjectContext,  userInfo: userInfo, userUuid: userUuid)
         save()
     }
 
     func getUserInfo(userUuid: String) -> UserInfoDB? {
-        guard let managedObjectCont = self.managedObjectContext else {
-            return nil
-        }
-        return UserInfoDB.getUserInfo(managedObjectCont, userUuid: userUuid)
+        return UserInfoDB.getUserInfo(managedObjectContext,  userUuid: userUuid)
     }
 }

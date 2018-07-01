@@ -23,7 +23,7 @@ class MessageContainerViewController: UIViewController {
     var messageController: MessageViewController?
     var threadUuid: String?
     var company: Company?
-    var placements: [TimelinePlacement] = []
+    var placements: [F4STimelinePlacement] = []
     var companies: [Company] = []
     var messageList: [F4SMessage] = []
     var cannedResponses: F4SCannedResponses? = nil
@@ -215,7 +215,7 @@ extension MessageContainerViewController {
     }
     
     func showMessageWithThread(threadUuid: String) {
-        if let placement = self.placements.filter({ $0.threadUuid == threadUuid }).first, let company = self.companies.filter({ $0.uuid == placement.companyUuid.replacingOccurrences(of: "-", with: "") }).first {
+        if let placement = self.placements.filter({ $0.threadUuid == threadUuid }).first, let company = self.companies.filter({ $0.uuid == placement.companyUuid!.dehyphenated }).first {
             CustomNavigationHelper.sharedInstance.pushMessageController(parentCtrl: self, threadUuid: threadUuid, company: company, placements: self.placements, companies: self.companies)
         }
     }

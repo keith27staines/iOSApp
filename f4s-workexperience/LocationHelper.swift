@@ -13,6 +13,20 @@ import SwiftyJSON
 import GoogleMaps
 import Reachability
 
+public final class Box<A> {
+    let value: A
+    
+    init(_ value: A) {
+        self.value = value
+    }
+}
+
+enum Result<A> {
+    case error(String)
+    case deffinedError(CallError)
+    case value(Box<A>)
+}
+
 class LocationHelper {
 
     static let sharedInstance = LocationHelper()

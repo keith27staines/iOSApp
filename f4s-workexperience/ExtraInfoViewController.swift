@@ -62,6 +62,17 @@ class ExtraInfoViewController: UIViewController {
     var datePicker = UIDatePicker()
     var voucherVerificationService: F4SVoucherVerificationServiceProtocol?
     
+    lazy var userService: F4SUserService = {
+        return F4SUserService()
+    }()
+    
+    lazy var dateOfBirthFormatter: DateFormatter = {
+       let df = DateFormatter()
+        df.dateFormat = "dd' 'MM' 'yyyy" //"yyyy'-'MM'-'dd'"
+        df.dateStyle = .medium
+        return df
+    }()
+    
     var isEmailOkay: Bool {
         guard let emailAddress = emailTextField.text else {
             return false
@@ -293,9 +304,13 @@ extension ExtraInfoViewController {
             self.userInfoStackView.isHidden = false
             self.noVoucherInfoLabel.isHidden = false
             scrollView.isScrollEnabled = true
-            self.dobTextField.text = user.dateOfBirth
+            if let dob = user.dateOfBirth {
+                self.dobTextField.text = dateOfBirthFormatter.string(from: dob)
+            } else {
+                self.dobTextField.text = ""
+            }
             self.emailTextField.text = user.email
-            self.firstAndLastNameTextField.text = user.firstName + " " + user.lastName
+            self.firstAndLastNameTextField.text = user.firstName + " " + (user.lastName ?? "")
             
             self.emailUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
             self.firstAndLastNameUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
@@ -333,24 +348,13 @@ extension ExtraInfoViewController {
             let placement = PlacementDBOperations.sharedInstance.getPlacementsForCurrentUserAndCompany(companyUuid: currentCompany.uuid) else {
                 return ""
         }
-        return placement.placementUuid
+        return placement.placementUuid ?? ""
     }
     
-    func savePlacementLocally(status: PlacementStatus ) {
-        guard let currentCompany = self.applicationContext?.company,
-            let placement = PlacementDBOperations.sharedInstance.getPlacementsForCurrentUserAndCompany(companyUuid: currentCompany.uuid) else {
-                return
-        }
-        var updatedPlacement = placement
-        updatedPlacement.status = status
-        applicationContext?.placement = placement
-        PlacementDBOperations.sharedInstance.savePlacement(placement: updatedPlacement)
-    }
-    
-    func buildUserInfo() -> User {
-        var user = User()
+    func buildUserInfo() -> F4SUser {
+        var user = F4SUser()
         if let dateOfBirthText = dobTextField.text {
-            user.dateOfBirth = dateOfBirthText
+            user.dateOfBirth = dateOfBirthFormatter.date(from: dateOfBirthText)
         }
         if let email = emailTextField.text {
             user.email = email
@@ -359,10 +363,13 @@ extension ExtraInfoViewController {
             let nameComponents = firstAndLastNameText.components(separatedBy: " ")
             if nameComponents.count > 1 {
                 user.firstName = nameComponents.first!
-                user.lastName = nameComponents.dropFirst().joined(separator: " ")
+                let lastname = nameComponents.dropFirst().joined(separator: " ")
+                if !lastname.isEmpty {
+                    user.lastName = nameComponents.dropFirst().joined(separator: " ")
+                }
             } else {
                 user.firstName = nameComponents.first!
-                user.lastName = ""
+                user.lastName = nil
             }
         }
         user.placementUuid = getPlacementUuid()
@@ -418,7 +425,7 @@ extension ExtraInfoViewController: UITextFieldDelegate {
 // MARK: - Calls
 extension ExtraInfoViewController {
     
-    func saveUserDetailsLocally() -> User {
+    func saveUserDetailsLocally() -> F4SUser {
         let updatedUser = self.buildUserInfo()
         UserInfoDBOperations.sharedInstance.saveUserInfo(userInfo: updatedUser)
         applicationContext?.user = updatedUser
@@ -552,7 +559,7 @@ extension ExtraInfoViewController {
             return
         }
         if voucherVerificationService == nil {
-            let placementUuid = applicationContext.user!.placementUuid
+            let placementUuid = applicationContext.user!.placementUuid!
             voucherVerificationService = F4SVoucherVerificationService(placementUuid: placementUuid, voucherCode: voucherCode)
         }
         showLoadingOverlay()
@@ -657,24 +664,34 @@ extension ExtraInfoViewController {
     
     func submitApplication(applicationContext: F4SApplicationContext) {
         showLoadingOverlay()
-        let user = applicationContext.user!
-        UserService.sharedInstance.updateUser(user: user, putCompleted: { [weak self] (result) in
+        var user = applicationContext.user!
+        userService.updateUser(user: user) { [weak self] (result) in
             guard let strongSelf = self else { return }
             DispatchQueue.main.async {
                 strongSelf.hideLoadingOverlay()
                 switch result {
-                case .value(_):
-                    strongSelf.savePlacementLocally(status: .applied)
+                case .success(let userModel):
+                    guard let uuid = userModel.uuid else {
+                        MessageHandler.sharedInstance.displayWithTitle("Oops something went wrong", "Workfinder cannot complete this operation", parentCtrl: strongSelf)
+                        return
+                    }
+                    user.updateUuidAndPersistToLocalStorage(uuid: uuid)
+                    var updatedContext = applicationContext
+                    updatedContext.user = user
+                    var updatedPlacement = applicationContext.placement!
+                    updatedPlacement.status = F4SPlacementStatus.applied
+                    updatedContext.placement = updatedPlacement
+                    strongSelf.applicationContext = updatedContext
+                    PlacementDBOperations.sharedInstance.savePlacement(placement: updatedPlacement)
                     UserDefaults.standard.set(true, forKey: strongSelf.consentPreviouslyGivenKey)
-                    strongSelf.afterSubmitApplication(applicationContext: applicationContext)
-                default:
-                    let e = F4SNetworkDataErrorType.genericErrorWithRetry.error(attempting: "Submit application")
-                    strongSelf.handleRetryForNetworkError(e, retry: {
+                    strongSelf.afterSubmitApplication(applicationContext: updatedContext)
+                case .error(let error):
+                    strongSelf.handleRetryForNetworkError(error, retry: {
                         strongSelf.submitApplication(applicationContext: applicationContext)
                     })
                 }
             }
-        })
+        }
     }
     
     func afterSubmitApplication(applicationContext: F4SApplicationContext) {
@@ -682,7 +699,6 @@ extension ExtraInfoViewController {
             parentCtrl: documentUploadController)
     }
 }
-
 
 extension ExtraInfoViewController {
     

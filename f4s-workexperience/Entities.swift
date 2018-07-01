@@ -9,36 +9,16 @@
 import UIKit
 
 struct F4SApplicationContext {
-    var user: User?
+    var user: F4SUser?
     var company: Company?
-    var placement: Placement?
+    var placement: F4SPlacement?
     var availabilityPeriod: F4SAvailabilityPeriod?
     
-    public init(user: User? = nil, company: Company? = nil, placement: Placement? = nil, availabilityPeriod: F4SAvailabilityPeriod? = nil) {
+    public init(user: F4SUser? = nil, company: Company? = nil, placement: F4SPlacement? = nil, availabilityPeriod: F4SAvailabilityPeriod? = nil) {
         self.user = user
         self.company = company
         self.placement = placement
         self.availabilityPeriod = availabilityPeriod
-    }
-}
-
-struct User {
-    var email: String
-    var firstName: String
-    var lastName: String
-    var consenterEmail: String
-    var dateOfBirth: String
-    var requiresConsent: Bool
-    var placementUuid: String
-
-    init(email: String = "", firstName: String = "", lastName: String = "", consenterEmail: String = "", dateOfBirth: String = "", requiresConsent: Bool = false, placementUuid: String = "") {
-        self.email = email
-        self.firstName = firstName
-        self.lastName = lastName
-        self.consenterEmail = consenterEmail
-        self.dateOfBirth = dateOfBirth
-        self.requiresConsent = false
-        self.placementUuid = placementUuid
     }
 }
 
@@ -119,11 +99,11 @@ public struct Company : Hashable {
 
 struct Placement {
     var companyUuid: String
-    var interestsList: [Interest]
+    var interestsList: [F4SInterest]
     var status: PlacementStatus
     var placementUuid: String
 
-    init(companyUuid: String = "", interestsList: [Interest] = [], status: PlacementStatus = .inProgress, placementUuid: String = "") {
+    init(companyUuid: String = "", interestsList: [F4SInterest] = [], status: PlacementStatus = .inProgress, placementUuid: String = "") {
         self.companyUuid = companyUuid
         self.interestsList = interestsList
         self.status = status
@@ -152,23 +132,23 @@ public struct BusinessCompanyInterest : Hashable {
     }
 }
 
-public struct Interest : Hashable {
-    public var hashValue: Int { return uuid.hashValue }
-    
-    public static func ==(lhs: Interest, rhs: Interest) -> Bool {
-        return lhs.uuid == rhs.uuid
-    }
-    
-    public var id: Int64
-    public var uuid: String
-    public var name: String
-
-    public init(id: Int64 = 0, uuid: String = "", name: String = "") {
-        self.id = id
-        self.uuid = uuid
-        self.name = name
-    }
-}
+//public struct Interest : Hashable {
+//    public var hashValue: Int { return uuid.hashValue }
+//
+//    public static func ==(lhs: Interest, rhs: Interest) -> Bool {
+//        return lhs.uuid == rhs.uuid
+//    }
+//
+//    public var id: Int64
+//    public var uuid: String
+//    public var name: String
+//
+//    public init(id: Int64 = 0, uuid: String = "", name: String = "") {
+//        self.id = id
+//        self.uuid = uuid
+//        self.name = name
+//    }
+//}
 
 struct ContentEntity {
     var title: String
@@ -182,25 +162,25 @@ struct ContentEntity {
     }
 }
 
-struct TimelinePlacement {
-    var placementUuid: String
-    var userUuid: String
-    var companyUuid: String
-    var threadUuid: String
-    var status: PlacementStatus
-    var latestMessage: F4SMessage
-    var isRead: Bool
-
-    init(placementUuid: String = "", userUuid: String = "", companyUuid: String = "", threadUuid: String = "", status: PlacementStatus = .inProgress, latestMessage: F4SMessage = F4SMessage(), isRead: Bool = true) {
-        self.placementUuid = placementUuid
-        self.companyUuid = companyUuid
-        self.userUuid = userUuid
-        self.threadUuid = threadUuid
-        self.status = status
-        self.latestMessage = latestMessage
-        self.isRead = isRead
-    }
-}
+//struct TimelinePlacement {
+//    var placementUuid: String
+//    var userUuid: String
+//    var companyUuid: String
+//    var threadUuid: String
+//    var status: PlacementStatus
+//    var latestMessage: F4SMessage
+//    var isRead: Bool
+//
+//    init(placementUuid: String = "", userUuid: String = "", companyUuid: String = "", threadUuid: String = "", status: PlacementStatus = .inProgress, latestMessage: F4SMessage = F4SMessage(), isRead: Bool = true) {
+//        self.placementUuid = placementUuid
+//        self.companyUuid = companyUuid
+//        self.userUuid = userUuid
+//        self.threadUuid = threadUuid
+//        self.status = status
+//        self.latestMessage = latestMessage
+//        self.isRead = isRead
+//    }
+//}
 
 struct UserStatus {
     var unreadCount: Int

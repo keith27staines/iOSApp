@@ -16,7 +16,7 @@ class TimelineViewController: UIViewController {
     @IBOutlet weak var noPlacementsTitleLabel: UILabel!
     @IBOutlet weak var noPlacementsInfoLabel: UILabel!
 
-    var userPlacements: [TimelinePlacement] = [] {
+    var userPlacements: [F4STimelinePlacement] = [] {
         didSet {
             if userPlacements.count == 0 {
                 self.noPlacementsBackgroundView.isHidden = false
@@ -47,8 +47,17 @@ class TimelineViewController: UIViewController {
     override func viewWillAppear(_: Bool) {
         super.viewWillAppear(true)
         adjustNavigationBar()
-        getAllPlacementsForUser()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        getAllPlacementsForUser()
+        F4SUserStatusService.shared.beginStatusUpdate()
+    }
+    
+    lazy var placementService: F4SPlacementService = {
+        return F4SPlacementService()
+    }()
 }
 
 // MARK: - API Calls
@@ -63,44 +72,36 @@ extension TimelineViewController {
         }
 
         MessageHandler.sharedInstance.showLoadingOverlay(self.view)
-        PlacementService.sharedInstance.getAllPlacementsForUser {
-            [weak self]
-            _, result in
-            guard let strongSelf = self else {
-                return
-            }
-            MessageHandler.sharedInstance.hideLoadingOverlay()
-            switch result {
-            case let .value(boxed):
-
-                strongSelf.userPlacements = boxed.value.sorted(by: strongSelf.sortPlacementsByLatestMessage)
-                let companyUuids = strongSelf.userPlacements.map({ $0.companyUuid })
-                strongSelf.getCompaniesWithUuids(uuid: companyUuids)
-                if strongSelf.userPlacements.index(where: { (placement) -> Bool in
-                    if !placement.isRead {
-                        return true
-                    }
-                    return false
-                }) == nil {
-                    DispatchQueue.main.async {
-                        UserDefaults.standard.set(false, forKey: UserDefaultsKeys.shouldLoadTimeline)
-                        strongSelf.navigationController?.tabBarItem.image = UIImage(named: "timelineIconUnselected")?.withRenderingMode(.alwaysOriginal)
-                        strongSelf.navigationController?.tabBarItem.selectedImage = UIImage(named: "timelineIcon")?.withRenderingMode(.alwaysOriginal)
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.shouldLoadTimeline)
-                        strongSelf.navigationController?.tabBarItem.image = UIImage(named: "timelineIconUnreadUnselected")?.withRenderingMode(.alwaysOriginal)
-                        strongSelf.navigationController?.tabBarItem.selectedImage = UIImage(named: "timelineIconUnread")?.withRenderingMode(.alwaysOriginal)
+        placementService.getAllPlacementsForUser { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            DispatchQueue.main.async {
+                MessageHandler.sharedInstance.hideLoadingOverlay()
+                switch result {
+                case .error(let error):
+                    MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf, cancelHandler: nil, retryHandler: strongSelf.getAllPlacementsForUser)
+                case .success(let placements):
+                    strongSelf.userPlacements = placements.sorted(by: strongSelf.sortPlacementsByLatestMessage)
+                    let companyUuids = strongSelf.userPlacements.map({ $0.companyUuid })
+                    strongSelf.getCompaniesWithUuids(uuid: companyUuids)
+                    if strongSelf.userPlacements.index(where: { (placement) -> Bool in
+                        if placement.isRead == false {
+                            return true
+                        }
+                        return false
+                    }) == nil {
+                        DispatchQueue.main.async {
+                            UserDefaults.standard.set(false, forKey: UserDefaultsKeys.shouldLoadTimeline)
+                            strongSelf.navigationController?.tabBarItem.image = UIImage(named: "timelineIconUnselected")?.withRenderingMode(.alwaysOriginal)
+                            strongSelf.navigationController?.tabBarItem.selectedImage = UIImage(named: "timelineIcon")?.withRenderingMode(.alwaysOriginal)
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            UserDefaults.standard.set(true, forKey: UserDefaultsKeys.shouldLoadTimeline)
+                            strongSelf.navigationController?.tabBarItem.image = UIImage(named: "timelineIconUnreadUnselected")?.withRenderingMode(.alwaysOriginal)
+                            strongSelf.navigationController?.tabBarItem.selectedImage = UIImage(named: "timelineIconUnread")?.withRenderingMode(.alwaysOriginal)
+                        }
                     }
                 }
-                break
-            case let .error(error):
-                MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
-                break
-            case let .deffinedError(error):
-                MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
-                break
             }
         }
     }
@@ -119,7 +120,7 @@ extension TimelineViewController {
             strongSelf.companies = companies
             // open from notification -> open message ctrl with thread uuid
             if let threadUuid = strongSelf.threadUuid, let placement = strongSelf.userPlacements.filter({ $0.threadUuid == threadUuid }).first {
-                if let company = strongSelf.companies.filter({ $0.uuid == placement.companyUuid.replacingOccurrences(of: "-", with: "") }).first {
+                if let company = strongSelf.companies.filter({ $0.uuid == placement.companyUuid?.dehyphenated }).first {
                     strongSelf.threadUuid = nil
                     CustomNavigationHelper.sharedInstance.pushMessageController(parentCtrl: strongSelf, threadUuid: threadUuid, company: company, placements: strongSelf.userPlacements, companies: strongSelf.companies)
                 }
@@ -127,11 +128,15 @@ extension TimelineViewController {
         })
     }
 
-    func sortPlacementsByLatestMessage(placement1: TimelinePlacement, placement2: TimelinePlacement) -> Bool {
-        if !placement1.latestMessage.content.isEmpty && !placement2.latestMessage.content.isEmpty {
-            return placement1.latestMessage.dateTime > placement2.latestMessage.dateTime
+    func sortPlacementsByLatestMessage(placement1: F4STimelinePlacement, placement2: F4STimelinePlacement) -> Bool {
+        guard let message1 = placement1.latestMessage, let message2 = placement2.latestMessage else {
+            return placement2.latestMessage == nil ? true : false
         }
-        return false
+        let isRead1 = placement1.isRead ?? true
+        let isRead2 = placement2.isRead ?? true
+        if isRead1 && !isRead2 { return false }
+        if isRead2 && !isRead1 { return true }
+        return message1.dateTime > message2.dateTime
     }
 }
 
@@ -183,7 +188,7 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         let placement = self.userPlacements[indexPath.row]
-        if let company = self.companies.filter({ $0.uuid == placement.companyUuid.replacingOccurrences(of: "-", with: "") }).first {
+        if let company = self.companies.filter({ $0.uuid == placement.companyUuid?.dehyphenated }).first {
             cell.companyImageView.image = UIImage(named: "DefaultLogo")
             cell.companyTitleLabel.attributedText = NSAttributedString(string: company.name, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize,weight: UIFont.Weight.medium),NSAttributedStringKey.foregroundColor: UIColor.black,])
             cell.companyImageView.layer.cornerRadius = cell.companyImageView.bounds.height / 2
@@ -200,23 +205,28 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
             cell.unreadMessageDotView.layer.cornerRadius = cell.unreadMessageDotView.bounds.height / 2
             cell.unreadMessageDotView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
 
-            if placement.isRead || placement.latestMessage.content.isEmpty {
+            guard let latestMessage = placement.latestMessage else {
+                // TODO: Fill out with suitable null values
+                return cell
+            }
+            if placement.isRead == true || latestMessage.content.isEmpty == true {
+                
                 cell.unreadMessageDotView.isHidden = true
                 cell.latestMessageLabel.attributedText = NSAttributedString(
-                    string: placement.latestMessage.content,
+                    string: latestMessage.content,
                     attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize,weight: UIFont.Weight.light),NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.warmGrey)])
 
                 cell.dateTimeLatestMessageLabel.attributedText = NSAttributedString(
-                    string: placement.latestMessage.relativeDateTime,
+                    string: latestMessage.relativeDateTime,
                     attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize,weight: UIFont.Weight.light),NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
             } else {
                 cell.unreadMessageDotView.isHidden = false
                 cell.latestMessageLabel.attributedText = NSAttributedString(
-                    string: placement.latestMessage.content,
+                    string: latestMessage.content,
                     attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize,                                                                          weight: UIFont.Weight.semibold),NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
 
                 cell.dateTimeLatestMessageLabel.attributedText = NSAttributedString(
-                    string: placement.latestMessage.relativeDateTime,
+                    string: latestMessage.relativeDateTime,
                     attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.orangeYellow)])
             }
         }
@@ -226,7 +236,7 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         let placement = self.userPlacements[indexPath.row]
-        if let company = self.companies.filter({ $0.uuid == placement.companyUuid.replacingOccurrences(of: "-", with: "") }).first, !placement.threadUuid.isEmpty {
+        if let company = self.companies.filter({ $0.uuid == placement.companyUuid?.dehyphenated }).first {
             CustomNavigationHelper.sharedInstance.pushMessageController(parentCtrl: self, threadUuid: placement.threadUuid, company: company, placements: self.userPlacements, companies: self.companies)
         }
     }
@@ -249,9 +259,9 @@ extension TimelineViewController {
     func goToMessageViewCtrl() {
         // open from notification -> open message ctrl with thread uuid
         if let placement = self.userPlacements.filter({ $0.threadUuid == threadUuid }).first {
-            if let company = self.companies.filter({ $0.uuid == placement.companyUuid.replacingOccurrences(of: "-", with: "") }).first {
+            if let company = self.companies.filter({ $0.uuid == placement.companyUuid?.dehyphenated }).first {
                 self.threadUuid = nil
-                CustomNavigationHelper.sharedInstance.pushMessageController(parentCtrl: self, threadUuid: placement.threadUuid, company: company, placements: self.userPlacements, companies: self.companies)
+                CustomNavigationHelper.sharedInstance.pushMessageController(parentCtrl: self, threadUuid: placement.threadUuid!, company: company, placements: self.userPlacements, companies: self.companies)
             }
         }
     }

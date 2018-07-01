@@ -11,7 +11,7 @@ import UIKit
 class DocumentUrlViewController: UIViewController {
     var urlTableViewController: URLTableViewController?
     lazy var documentUrlModel: F4SDocumentUrlModel = {
-        return F4SDocumentUrlModel(delegate: self, placementUuid: self.applicationContext.placement!.placementUuid)
+        return F4SDocumentUrlModel(delegate: self, placementUuid: self.applicationContext.placement!.placementUuid!)
     }()
     
     var applicationContext: F4SApplicationContext!

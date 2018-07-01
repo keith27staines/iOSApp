@@ -24,6 +24,10 @@ class CoverLetterViewController: UIViewController {
     lazy var templateService: F4STemplateServiceProtocol = {
         return F4STemplateService()
     }()
+    
+    lazy var placementService: F4SPlacementServiceProtocol = {
+        return F4SPlacementService()
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -420,7 +424,7 @@ extension CoverLetterViewController {
             }
         }
     }
-
+    
     func updatePlacement() {
         let availabilityWindow = getWorkAvailabilityWindowFromSelectedTemplate()
         
@@ -444,44 +448,39 @@ extension CoverLetterViewController {
         applicationContext.availabilityPeriod?.saveToUserDefaults()
         MessageHandler.sharedInstance.showLoadingOverlay(self.view)
         let templateToUpdate = F4STemplate(uuid: currentTemplateUuid, blanks: self.selectedTemplateChoices)
-        placement.interestsList = [Interest](InterestDBOperations.sharedInstance.interestsForCurrentUser())
-        PlacementService.sharedInstance.updatePlacement(placement: placement, template: templateToUpdate) {
-            [weak self]
-            _, result in
+        placement.companyUuid = applicationContext.company?.uuid
+        placement.userUuid = F4SUser.userUuidFromKeychain()
+        placement.interestList = [F4SInterest](InterestDBOperations.sharedInstance.interestsForCurrentUser())
+        placementService.updatePlacement(placement: placement, template: templateToUpdate) { [weak self] (result) in
             guard let strongSelf = self else {
                 MessageHandler.sharedInstance.hideLoadingOverlay()
                 return
             }
             MessageHandler.sharedInstance.hideLoadingOverlay()
-            switch result
-            {
-            case .value:
+            switch result {
+                
+            case .error(let error):
+                MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf, cancelHandler: nil, retryHandler: strongSelf.updatePlacement)
+            case .success(_):
                 // succes + go to next page
                 strongSelf.applicationContext.placement = placement
                 if let navCtrl = strongSelf.navigationController, let applicationContext = strongSelf.applicationContext, let availabilityPeriod = applicationContext.availabilityPeriod  {
-                    let calendarService = F4SPCalendarService(placementUuid: placement.placementUuid)
+                    let calendarService = F4SPCalendarService(placementUuid: placement.placementUuid!)
                     let availabilityJson = availabilityPeriod.availabilityJson!
                     let data = try! JSONEncoder().encode(availabilityJson)
                     let jsonString = String(data: data, encoding: .utf8)!
                     print(jsonString)
                     calendarService.patchAvailabilityForPlacement(availabilityPeriods: availabilityJson, completion: { (result) in
                         DispatchQueue.main.async {
-                                switch result {
-                                case .success(_):
-                                    CustomNavigationHelper.sharedInstance.pushProcessedMessages(navCtrl, applicationContext: applicationContext)
-                                case .error(let networkError):
-                                    strongSelf.handleF4SNetworkError(networkError: networkError)
+                            switch result {
+                            case .success(_):
+                                CustomNavigationHelper.sharedInstance.pushProcessedMessages(navCtrl, applicationContext: applicationContext)
+                            case .error(let networkError):
+                                strongSelf.handleF4SNetworkError(networkError: networkError)
                             }
                         }
                     })
                 }
-                break
-            case let .error(error):
-                MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
-                break
-            case let .deffinedError(error):
-                MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
-                break
             }
         }
     }

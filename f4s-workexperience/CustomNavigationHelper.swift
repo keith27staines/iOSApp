@@ -403,7 +403,7 @@ class CustomNavigationHelper {
         navigCtrl.pushViewController(extraInfoCtrl, animated: true)
     }
 
-    func pushMessageController(parentCtrl: UIViewController, threadUuid: String, company: Company, placements: [TimelinePlacement], companies: [Company]) {
+    func pushMessageController(parentCtrl: UIViewController, threadUuid: String?, company: Company, placements: [F4STimelinePlacement], companies: [Company]) {
         let messageStoryboard = UIStoryboard(name: "Message", bundle: nil)
         guard let messageController = messageStoryboard.instantiateViewController(withIdentifier: "MessageContainerViewCtrl") as? MessageContainerViewController else {
             return

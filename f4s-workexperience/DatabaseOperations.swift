@@ -239,20 +239,20 @@ extension DatabaseOperations {
 
     
     /// Get all interests from the database as a dictionary keyed by id
-    public func getAllInterests( completed: @escaping (_ interests: [Int64:Interest]) -> Void) {
+    public func getAllInterests( completed: @escaping (_ interests: [Int64:F4SInterest]) -> Void) {
         guard let db = database else {
             log.debug("`getAllInterests` failed because the database connection is nil")
             completed([:])
             return
         }
         do {
-            var allInterests: [Int64:Interest] = [:]
+            var allInterests: [Int64:F4SInterest] = [:]
             let selectStatement: String = "SELECT id, uuid, name FROM businesses_interest"
             let stmt = try db.prepare(selectStatement)
             
             for row in stmt {
                 let interest = DatabaseOperations.sharedInstance.getInterestFromRowAndStatement(row: row, statement: stmt)
-                allInterests[interest.id] = interest
+                allInterests[Int64(interest.id)] = interest
             }
             completed(allInterests)
             return
@@ -312,7 +312,7 @@ extension DatabaseOperations {
             log.debug("Can't find company with specified uuid because the database isn't loaded")
             return nil
         }
-        let uuid = uuid.replacingOccurrences(of: "-", with: "")
+        let uuid = uuid.dehyphenated
         let selectString: String = "SELECT * FROM businesses_company WHERE uuid = '\(uuid)'"
         guard let stmt = try? db.prepare(selectString) else {
             // Company just wasn't found
@@ -339,9 +339,7 @@ extension DatabaseOperations {
         }
         do {
             var companyList: [Company] = []
-            // flatmap with optional is deprecated in favour of compact map, but I can't see why flatmap is required anyway so replacing with map
-            let uuidsString = withUuid.map({ $0.replacingOccurrences(of: "-", with: "") }).joined(separator: "\",\"")
-            //let uuidsString = withUuid.flatMap({ $0.replacingOccurrences(of: "-", with: "") }).joined(separator: "\",\"")
+            let uuidsString = withUuid.map({ $0.dehyphenated }).joined(separator: "\",\"")
 
             let selectCompaniesWithUuid: String = "SELECT * FROM businesses_company WHERE uuid IN (\"\(uuidsString)\")"
 
@@ -414,11 +412,11 @@ extension DatabaseOperations {
     ///
     /// - Parameter row: row from database
     /// - Returns: Interest object
-    private func getInterestFromRow(row: Row) -> Interest {
-        var interest = Interest()
+    private func getInterestFromRow(row: Row) -> F4SInterest {
+        var interest = F4SInterest()
 
         if let id = row[BusinessesInterest.id] {
-            interest.id = id
+            interest.id = Int(id)
         }
 
         if let uuid = row[BusinessesInterest.uuid] {
@@ -456,12 +454,12 @@ extension DatabaseOperations {
     ///   - row: row from database
     ///   - statement: statement from databse
     /// - Returns: Interest object
-    private func getInterestFromRowAndStatement(row: Statement.Element, statement: Statement) -> Interest {
-        var interest = Interest()
+    private func getInterestFromRowAndStatement(row: Statement.Element, statement: Statement) -> F4SInterest {
+        var interest = F4SInterest()
         for (index, name) in statement.columnNames.enumerated() {
             if index < row.count, let value = row[index] {
                 if name == BusinessesInterest.idColumnName, let id = value as? Int64 {
-                    interest.id = id
+                    interest.id = Int(id)
                 }
                 if name == BusinessesInterest.uuidColumnName, let uuid = value as? String {
                     interest.uuid = uuid

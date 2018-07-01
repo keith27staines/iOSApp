@@ -34,6 +34,10 @@ class RatePlacementViewController: UIViewController {
         setupAppearance()
         ratingControlStackView.delegate = self
     }
+    
+    lazy var placementService: F4SPlacementServiceProtocol = {
+        return F4SPlacementService()
+    }()
 }
 
 // MARK: - UI Setup
@@ -91,7 +95,7 @@ extension RatePlacementViewController {
             return
         }
 
-        DatabaseOperations.sharedInstance.getCompanies(withUuid: [placement.companyUuid], completed: {
+        DatabaseOperations.sharedInstance.getCompanies(withUuid: [placement.companyUuid!], completed: {
             companies in
             self.company = companies.first
             self.setupLabels()
@@ -141,26 +145,20 @@ extension RatePlacementViewController {
         }
 
         MessageHandler.sharedInstance.showLoadingOverlay(self.view)
-        PlacementService.sharedInstance.ratePlacement(uuid: placementUuid, value: self.ratingControlStackView.rating, postCompleted: {
-            [weak self]
-            _, msg in
-            guard let strongSelf = self else {
-                return
-            }
-            switch msg {
-            case .value(let boxed):
-                log.debug("rating submited\(boxed.value)")
-            case .error(let err):
-                log.error(err.description)
-
-            case .deffinedError(let err):
-                log.error(err.serverErrorMessage!)
+        let rating = self.ratingControlStackView.rating
+        placementService.ratePlacement(placementUuid: placementUuid, rating: rating) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .error(let error):
+                log.error(error)
+            case .success(_):
+                log.debug("rating of \(rating) submited for placement \(placementUuid)")
             }
             MessageHandler.sharedInstance.hideLoadingOverlay()
             strongSelf.backgroundPopoverView.removeFromSuperview()
             strongSelf.dismiss(animated: true, completion: {
                 strongSelf.ratePlacementProtocol?.dismissRateController()
             })
-        })
+        }
     }
 }

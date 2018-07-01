@@ -9,20 +9,20 @@
 import Foundation
 
 /// A dictionary mapping interests to the number of companies having that interest
-public typealias F4SInterestCounts = [Interest:Int]
+public typealias F4SInterestCounts = [F4SInterest:Int]
 
 public struct InterestsModel {
     
     static func interestIdSet(from interestSet: F4SInterestSet) -> F4SInterestIdSet {
         var interestIds = F4SInterestIdSet()
         for interest in interestSet {
-            interestIds.insert(interest.id)
+            interestIds.insert(Int64(interest.id))
         }
         return interestIds
     }
     
     /// A dictionary of all interests, keyed by their id
-    public let allInterests: [Int64: Interest]
+    public let allInterests: [Int64: F4SInterest]
     
     /// returns a set of interests corresponding to the set of interest ids
     public func interestSetFromIdSet(_ ids: Set<Int64>) -> F4SInterestSet {
@@ -44,8 +44,8 @@ public struct InterestsModel {
     ///     - a dictionary keyed by interest containing values representing the number of companies having that interest
     func interestCounts(displayedInterests:F4SInterestSet,
                         selectedInterests: F4SInterestSet,
-                        companyPins: F4SCompanyPinSet) -> (Int,[Interest:Int]) {
-        var interestCounts = [Interest:Int]()
+                        companyPins: F4SCompanyPinSet) -> (Int,[F4SInterest:Int]) {
+        var interestCounts = [F4SInterest:Int]()
         var totalPossibilities: Int = 0
         for pin in companyPins {
             let pinInterests = interestSetFromIdSet(pin.interestIds)

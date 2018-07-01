@@ -17,54 +17,33 @@ class PlacementCoreDataManager: CoreDataBaseManager {
         return Static.instance
     }
 
-    func savePlacementToContext(_ placement: Placement, userUuid: String) {
-        guard let managedObjectCont = self.managedObjectContext else {
-            return
-        }
-        PlacementDB.createInManagedObjectContext(managedObjectCont, placement: placement, userUuid: userUuid)
+    func savePlacementToContext(_ placement: F4SPlacement, userUuid: String) {
+        PlacementDB.createInManagedObjectContext(managedObjectContext,  placement: placement, userUuid: userUuid)
         save()
     }
 
     func getPlacementsForUser(userUuid: String) -> [PlacementDB] {
-        guard let managedObjectCont = self.managedObjectContext else {
-            return []
-        }
-        return PlacementDB.getPlacementsForUser(managedObjectCont, userUuid: userUuid)
+        return PlacementDB.getPlacementsForUser(managedObjectContext,  userUuid: userUuid)
     }
 
     func getPlacementsForUserAndCompany(userUuid: String, companyUuid: String) -> PlacementDB? {
-        guard let managedObjectCont = self.managedObjectContext else {
-            return nil
-        }
-        return PlacementDB.getPlacementsForUserAndCompany(managedObjectCont, userUuid: userUuid, companyUuid: companyUuid)
+        return PlacementDB.getPlacementsForUserAndCompany(managedObjectContext,  userUuid: userUuid, companyUuid: companyUuid)
     }
 
     func getAllPlacements() -> [PlacementDB] {
-        guard let managedObjectCont = self.managedObjectContext else {
-            return []
-        }
-        return PlacementDB.getAllPlacements(managedObjectCont)
+        return PlacementDB.getAllPlacements(managedObjectContext)
     }
 
     func getInProgressPlacementsForUser(userUuid: String) -> PlacementDB? {
-        guard let managedObjectCont = self.managedObjectContext else {
-            return nil
-        }
-        return PlacementDB.getInProgressPlacementsForUser(managedObjectCont, userUuid: userUuid)
+        return PlacementDB.getInProgressPlacementsForUser(managedObjectContext,  userUuid: userUuid)
     }
 
     func removePlacementWithId(placementUuid: String, userUuid: String) {
-        guard let managedObjectCont = self.managedObjectContext else {
-            return
-        }
-        PlacementDB.removePlacementWithIdForUser(managedObjectCont, placementUuid: placementUuid, userUuid: userUuid)
+        PlacementDB.removePlacementWithIdForUser(managedObjectContext,  placementUuid: placementUuid, userUuid: userUuid)
         save()
     }
 
     func getPlacementForUserAndPlacementUuid(userUuid: String, placementUuid: String) -> PlacementDB? {
-        guard let managedObjectCont = self.managedObjectContext else {
-            return nil
-        }
-        return PlacementDB.getPlacementsWithUuid(managedObjectCont, userUuid: userUuid, placementUuid: placementUuid)
+        return PlacementDB.getPlacementsWithUuid(managedObjectContext,  userUuid: userUuid, placementUuid: placementUuid)
     }
 }

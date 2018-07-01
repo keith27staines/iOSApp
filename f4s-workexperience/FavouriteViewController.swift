@@ -25,7 +25,7 @@ class FavouriteViewController: UIViewController {
             }
         }
     }
-    var placementList: [Placement] = []
+    var placementList: [F4SPlacement] = []
     var companies: [Company] = [] {
         didSet {
             self.tableView.reloadData()
@@ -124,7 +124,7 @@ extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let favourite = favouriteList[indexPath.row]
-        if let company = self.companies.filter({ $0.uuid == favourite.companyUuid.replacingOccurrences(of: "-", with: "") }).first {
+        if let company = self.companies.filter({ $0.uuid == favourite.companyUuid.dehyphenated }).first {
             cell.companyTitleLabel.attributedText = NSAttributedString(
                 string: company.name,
                 attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize,weight: UIFont.Weight.medium),NSAttributedStringKey.foregroundColor: UIColor.black])
@@ -137,7 +137,7 @@ extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
                 string: company.industry,
                 attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize,weight: UIFont.Weight.light), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
         }
-        if let placement = placementList.filter({ $0.companyUuid == favourite.companyUuid.replacingOccurrences(of: "-", with: "") }).first, placement.status == .applied {
+        if let placement = placementList.filter({ $0.companyUuid == favourite.companyUuid.dehyphenated }).first, placement.status == .applied {
             cell.companyStatusLabel.isHidden = false
             cell.companyStatusLabel.attributedText = NSAttributedString(
                 string: NSLocalizedString("Applied", comment: ""),
@@ -157,7 +157,7 @@ extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let favourite = favouriteList[indexPath.row]
-        if let company = self.companies.filter({ $0.uuid == favourite.companyUuid.replacingOccurrences(of: "-", with: "") }).first {
+        if let company = self.companies.filter({ $0.uuid == favourite.companyUuid.dehyphenated }).first {
             CustomNavigationHelper.sharedInstance.presentCompanyDetailsPopover(parentCtrl: self, company: company)
         }
     }
