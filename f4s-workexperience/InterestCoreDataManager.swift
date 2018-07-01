@@ -18,32 +18,20 @@ class InterestCoreDataManager: CoreDataBaseManager {
     }
 
     func saveInterestToContext(_ interest: F4SInterest, userUuid: String) {
-        guard let managedObjectCont = self.managedObjectContext else {
-            return
-        }
-        InterestDB.createInManagedObjectContext(managedObjectCont, interest: interest, userUuid: userUuid)
+        InterestDB.createInManagedObjectContext(managedObjectContext, interest: interest, userUuid: userUuid)
         save()
     }
 
     func getInterestsForUser(userUuid: String) -> [InterestDB] {
-        guard let managedObjectCont = self.managedObjectContext else {
-            return []
-        }
-        return InterestDB.getInterestsForUser(managedObjectCont, userUuid: userUuid)
+        return InterestDB.getInterestsForUser(managedObjectContext,  userUuid: userUuid)
     }
 
     func getAllInterests() -> [InterestDB] {
-        guard let managedObjectCont = self.managedObjectContext else {
-            return []
-        }
-        return InterestDB.getAllInterests(managedObjectCont)
+        return InterestDB.getAllInterests(managedObjectContext)
     }
 
     func removeInterestWithId(interestUuid: String, userUuid: String) {
-        guard let managedObjectCont = self.managedObjectContext else {
-            return
-        }
-        InterestDB.removeInterestWithIdForUser(managedObjectCont, interestUuid: interestUuid, userUuid: userUuid)
+        InterestDB.removeInterestWithIdForUser(managedObjectContext,  interestUuid: interestUuid, userUuid: userUuid)
         save()
     }
 }

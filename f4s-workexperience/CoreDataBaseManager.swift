@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 import UIKit
+import XCGLogger
 
 class CoreDataBaseManager {
     
@@ -16,16 +17,12 @@ class CoreDataBaseManager {
         
     }
     
-    lazy var managedObjectContext: NSManagedObjectContext? = {
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        let managedObjectContext = appDelegate?.managedObjectContext
-        return managedObjectContext
+    lazy var managedObjectContext: NSManagedObjectContext = {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        return appDelegate.persistentContainer.viewContext
     }()
 
     func save() {
-        do {
-            try managedObjectContext?.save()
-        } catch _ {
-        }
+        try? managedObjectContext.save()
     }
 }

@@ -18,32 +18,20 @@ class ShortlistCoreDataManager: CoreDataBaseManager {
     }
 
     func saveShortlistToContext(_ shortlist: Shortlist, userUuid: String) {
-        guard let managedObjectCont = self.managedObjectContext else {
-            return
-        }
-        ShortlistDB.createInManagedObjectContext(managedObjectCont, shortlist: shortlist, userUuid: userUuid)
+        ShortlistDB.createInManagedObjectContext(managedObjectContext,  shortlist: shortlist, userUuid: userUuid)
         save()
     }
 
     func getShortlistForUser(userUuid: String) -> [ShortlistDB] {
-        guard let managedObjectCont = self.managedObjectContext else {
-            return []
-        }
-        return ShortlistDB.getShortlistForUser(managedObjectCont, userUuid: userUuid)
+        return ShortlistDB.getShortlistForUser(managedObjectContext,  userUuid: userUuid)
     }
 
     func getAllShortlists() -> [ShortlistDB] {
-        guard let managedObjectCont = self.managedObjectContext else {
-            return []
-        }
-        return ShortlistDB.getAllShortlists(managedObjectCont)
+        return ShortlistDB.getAllShortlists(managedObjectContext)
     }
 
     func removeShortlistWithId(shortlistUuid: String, userUuid: String) {
-        guard let managedObjectCont = self.managedObjectContext else {
-            return
-        }
-        ShortlistDB.removeInterestWithIdForUser(managedObjectCont, uuid: shortlistUuid, userUuid: userUuid)
+        ShortlistDB.removeInterestWithIdForUser(managedObjectContext,  uuid: shortlistUuid, userUuid: userUuid)
         save()
     }
 }

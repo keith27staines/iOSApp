@@ -18,39 +18,24 @@ class TemplateChoiceCoreDataManager: CoreDataBaseManager {
     }
 
     func saveTemplateChoiceToContext(name: String, userUuid: String, choiceList: [String]) {
-        guard let managedObjectCont = self.managedObjectContext else {
-            return
-        }
-        TemplateChoiceDB.createInManagedObjectContext(managedObjectCont, name: name, userUuid: userUuid, listOfChoice: choiceList)
+        TemplateChoiceDB.createInManagedObjectContext(managedObjectContext, name: name, userUuid: userUuid, listOfChoice: choiceList)
         save()
     }
 
     func getTemplateChoicesForUserWithName(userUuid: String, name: String) -> TemplateChoiceDB? {
-        guard let managedObjectCont = self.managedObjectContext else {
-            return nil
-        }
-        return TemplateChoiceDB.getTemplatesForUserWithName(managedObjectCont, userUuid: userUuid, name: name)
+        return TemplateChoiceDB.getTemplatesForUserWithName(managedObjectContext, userUuid: userUuid, name: name)
     }
 
     func getTemplateChoicesForUser(userUuid: String) -> [TemplateChoiceDB] {
-        guard let managedObjectCont = self.managedObjectContext else {
-            return []
-        }
-        return TemplateChoiceDB.getTemplatesForUser(managedObjectCont, userUuid: userUuid)
+        return TemplateChoiceDB.getTemplatesForUser(managedObjectContext, userUuid: userUuid)
     }
 
     func getAllTemplateChoices() -> [TemplateChoiceDB] {
-        guard let managedObjectCont = self.managedObjectContext else {
-            return []
-        }
-        return TemplateChoiceDB.getAllTemplateChoices(managedObjectCont)
+        return TemplateChoiceDB.getAllTemplateChoices(managedObjectContext)
     }
 
     func removeTemplateChoiceWithName(name: String, userUuid: String) {
-        guard let managedObjectCont = self.managedObjectContext else {
-            return
-        }
-        TemplateChoiceDB.removeTemplateChoiceWithNameForUser(managedObjectCont, name: name, userUuid: userUuid)
+        TemplateChoiceDB.removeTemplateChoiceWithNameForUser(managedObjectContext, name: name, userUuid: userUuid)
         save()
     }
 }
