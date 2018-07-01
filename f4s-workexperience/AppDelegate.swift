@@ -68,6 +68,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        if ProcessInfo.processInfo.arguments.contains("isUnitTesting") {
+            print("Exiting didFinishLaunchingWithOptions early because `isUnitTesting` argument is set")
+            return true
+        }
         do {
             let f4sDebug = try F4SDebug()
             F4SDebug.shared = f4sDebug
