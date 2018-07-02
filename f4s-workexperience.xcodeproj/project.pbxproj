@@ -236,6 +236,7 @@
 		FCB6D9361F75056100B8C268 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCB6D9351F75056000B8C268 /* Branding.plist */; };
 		FCC5EBB61F449C310085CE15 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FCC5EBB51F449C310085CE15 /* README.md */; };
 		FCC753EE1F80F26200E9ECD6 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC753ED1F80F26200E9ECD6 /* MapModel.swift */; };
+		FCC85B2320EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC85B2220EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift */; };
 		FCC9D13D1FC82B010081F7B5 /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC9D13C1FC82AFF0081F7B5 /* StarRatingView.swift */; };
 		FCCD6AE71FBB42A90088D7C7 /* PopupCompanyList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCCD6AE61FBB42A90088D7C7 /* PopupCompanyList.storyboard */; };
 		FCCD6AE91FBB44CF0088D7C7 /* PopupCompanyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCD6AE81FBB44CF0088D7C7 /* PopupCompanyListViewController.swift */; };
@@ -565,6 +566,7 @@
 		FCB6D9351F75056000B8C268 /* Branding.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
 		FCC5EBB51F449C310085CE15 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FCC753ED1F80F26200E9ECD6 /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
+		FCC85B2220EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDatabaseDownloadManagerTests.swift; sourceTree = "<group>"; };
 		FCC9D13C1FC82AFF0081F7B5 /* StarRatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		FCCD6AE61FBB42A90088D7C7 /* PopupCompanyList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PopupCompanyList.storyboard; sourceTree = "<group>"; };
 		FCCD6AE81FBB44CF0088D7C7 /* PopupCompanyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupCompanyListViewController.swift; sourceTree = "<group>"; };
@@ -933,6 +935,7 @@
 				FC631CB520D64BD100199507 /* F4SAsynchronousOperation.swift */,
 				FC99BDCB20D172B600278DDE /* F4SCompanyDatabaseMetadataService.swift */,
 				FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */,
+				FCC85B2220EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift */,
 				FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */,
 				FC5F3D4D20D938E90002F41B /* F4SUserService.swift */,
 				FC5F3D4F20D93C070002F41B /* F4SUserModel.swift */,
@@ -2039,6 +2042,7 @@
 				FCB6B8F62074C5ED0042C725 /* F4SCalendarMonthTests.swift in Sources */,
 				FC59B1911F81549B0068EC9C /* F4SQuadtreeTests.swift in Sources */,
 				FC6C11BC20287378002C8EA5 /* F4SGrammarTests.swift in Sources */,
+				FCC85B2320EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

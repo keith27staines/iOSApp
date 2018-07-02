@@ -20,8 +20,24 @@ public class F4SDatabaseDownloadManager  : NSObject {
         }
     }
     
-    public let successInterval: TimeInterval = 3600.0
-    public let failedInterval: TimeInterval = 5.0
+    /// Returns the time to wait before polling the server again if the last poll was successful
+    public func successInterval() -> TimeInterval {
+        return 3600.0
+    }
+    
+    /// Returns the time to wait before polling based on the age of the current local database
+    public func failedInterval() -> TimeInterval {
+        let age = ageOfLocalDatabase()
+        return failedInterval(age: age)
+    }
+    
+    /// Returns the time to wait before polling based on a specified age of the current local database
+    internal func failedInterval(age: TimeInterval) -> TimeInterval {
+        let standardInterval = successInterval()
+        if age < 24 * 3600.0 { return  standardInterval }
+        if age < 7 * 24 * 3600 { return standardInterval / 100.0 }
+        return 1.0
+    }
     
     private var databaseAvailabilityObservers = [BoxedObserver]()
     
@@ -44,6 +60,14 @@ public class F4SDatabaseDownloadManager  : NSObject {
     
     public func isLocalDatabaseAvailable() -> Bool {
         return localDatabaseDatestamp != nil
+    }
+    
+    public func ageOfLocalDatabase() -> TimeInterval {
+        guard let timestamp = localDatabaseDatestamp else {
+            return TimeInterval.greatestFiniteMagnitude
+        }
+        let age = Date().timeIntervalSince(timestamp)
+        return age
     }
     
     public var localDatabaseDatestamp: Date? {
@@ -96,11 +120,11 @@ public class F4SDatabaseDownloadManager  : NSObject {
             guard let strongSelf = self else { return }
             switch metaDataResult {
             case .error(_):
-                strongSelf.scheduleNextCheckAfter(delay: strongSelf.failedInterval)
+                strongSelf.scheduleNextCheckAfter(delay: strongSelf.failedInterval())
                 break
             case .success(let metadata):
                 guard let serverDate = metadata.created else {
-                    strongSelf.scheduleNextCheckAfter(delay: strongSelf.failedInterval)
+                    strongSelf.scheduleNextCheckAfter(delay: strongSelf.failedInterval())
                     return
                 }
                 if localDate < serverDate {
@@ -151,12 +175,12 @@ extension F4SDatabaseDownloadManager : F4SDownloadServiceDelegate {
     
     public func downloadService(_ service: F4SDownloadService, didFailToDownloadWithError error: F4SNetworkError) {
         print("company database download failed! \(error)")
-        scheduleNextCheckAfter(delay: failedInterval)
+        scheduleNextCheckAfter(delay: failedInterval())
     }
     
     public func downloadService(_ service: F4SDownloadService, didFinishDownloadingToUrl tempUrl: URL) {
         
-        defer { scheduleNextCheckAfter(delay: successInterval) }
+        defer { scheduleNextCheckAfter(delay: successInterval()) }
         
         let filemanager = FileManager.default
         guard filemanager.fileExists(atPath: tempUrl.path) else {
