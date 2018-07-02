@@ -46,6 +46,19 @@ extension F4STimelinePlacement {
     }
 }
 
+extension F4STimelinePlacement : Equatable {
+    public static func ==(lhs: F4STimelinePlacement, rhs: F4STimelinePlacement) -> Bool {
+        return
+            lhs.companyUuid == rhs.companyUuid &&
+                lhs.isRead == rhs.isRead &&
+                lhs.latestMessage?.uuid == rhs.latestMessage?.uuid &&
+                lhs.placementUuid ==  rhs.placementUuid &&
+                lhs.state == rhs.state &&
+                lhs.threadUuid == rhs.threadUuid &&
+                lhs.userUuid == rhs.userUuid
+    }
+}
+
 // MARK: - Placment
 
 public struct F4SPlacement : Codable {

@@ -116,8 +116,12 @@ extension MessageViewController {
 
     override func collectionView(_ collectionView: JSQMessagesCollectionView, attributedTextForCellBottomLabelAt indexPath: IndexPath) -> NSAttributedString? {
         if self.selectedIndex >= 0 && indexPath.row == self.selectedIndex && self.messageList.count > indexPath.row {
-            let date = self.messageDateTimeFormatter.string(from: self.messageList[indexPath.row].dateTime)
-            return NSAttributedString(string: date)
+            if let messageDate = messageList[indexPath.row].dateTime {
+                return NSAttributedString(string: self.messageDateTimeFormatter.string(from:messageDate))
+            } else {
+                return NSAttributedString(string: "unknown date")
+            }
+
         }
         return NSAttributedString(string: "")
     }

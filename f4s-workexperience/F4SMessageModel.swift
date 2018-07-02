@@ -11,8 +11,8 @@ import Foundation
 // MARK:- F4SMessage
 public struct F4SMessage : Codable {
     public var uuid: F4SUUID
-    public var dateTime: Date
-    public var relativeDateTime: String
+    public var dateTime: Date?
+    public var relativeDateTime: String?
     public var content: String
     public var sender: String
     
