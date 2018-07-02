@@ -150,8 +150,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "f4s-workexperience")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+            if let nserror = error as NSError? {
+                log.severe(nserror)
+                assertionFailure("error loading coredata persistent store \(nserror)")
+                fatalError("Unrecoverable error \(nserror), \(nserror.userInfo)")
             }
         })
         return container
@@ -166,7 +168,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let nserror = error as NSError
                 log.error(nserror)
                 assertionFailure("error saving to coredata context \(nserror)")
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
     }
