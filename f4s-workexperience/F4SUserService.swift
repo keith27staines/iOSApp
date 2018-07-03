@@ -26,7 +26,7 @@ public class F4SUserService : F4SUserServiceProtocol {
         return UserDefaults.standard.object(forKey: UserDefaultsKeys.userHasAccount) != nil && UserDefaults.standard.bool(forKey: UserDefaultsKeys.userHasAccount)
     }
     
-    var dobFormatter: DateFormatter = {
+    lazy var dobFormatter: DateFormatter = {
         let df = DateFormatter()
         df.dateFormat = "yyyy'-'MM'-'dd"
         return df
@@ -76,9 +76,11 @@ public class F4SUserService : F4SUserServiceProtocol {
         let session = F4SNetworkSessionManager.shared.firstRegistrationSession
         let anonymousUser = F4SAnonymousUser(vendorUuid: vendorID, clientType: "ios", apnsEnvironment: Config.apnsEnv)
         let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
         let data: Data
         do {
             data = try encoder.encode(anonymousUser)
+            print(String(data:data,encoding:.utf8)!)
         } catch {
             let serializationError = F4SNetworkDataErrorType.serialization(anonymousUser).error(attempting: attempting)
             completion(F4SNetworkResult.error(serializationError))

@@ -74,7 +74,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
         registerApplicationForRemoteNotifications(application)
-        F4SUserStatusService.shared.beginStatusUpdate()
     }
     
     func applicationDidBecomeActive(_ appliction: UIApplication) {
@@ -225,7 +224,8 @@ extension AppDelegate {
             DispatchQueue.main.async {
                 guard let strongSelf = self else { return }
                 switch result {
-                case .error(_):
+                case .error(let error):
+                    print(error)
                     if strongSelf.userService.hasAccount() {
                         // couldn't register user but user has registered before so ok to continue
                         strongSelf.onUserAccountConfirmedToExist(application: application)
@@ -235,7 +235,16 @@ extension AppDelegate {
                             self?.registerUser(application: application)
                         })
                     }
-                case .success(_):
+                case .success(let result):
+                    let keychain = KeychainSwift()
+                    let currentUserUuid = keychain.get(UserDefaultsKeys.userUuid)
+                    let anonymousUserUuid = result.uuid
+                    if currentUserUuid == nil && anonymousUserUuid != nil {
+                        log.debug("Using anonymous user id")
+                        keychain.set(anonymousUserUuid!, forKey: UserDefaultsKeys.userUuid)
+                    } else {
+                        log.debug("Using user id from keychain")
+                    }
                     strongSelf.onUserAccountConfirmedToExist(application: application)
                 }
             }

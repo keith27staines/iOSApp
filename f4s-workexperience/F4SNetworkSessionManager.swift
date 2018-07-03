@@ -10,21 +10,35 @@ import Foundation
 import KeychainSwift
 
 public class F4SNetworkSessionManager {
+    
     public static let shared = F4SNetworkSessionManager()
+    
+    internal var _interactiveSession: URLSession?
+    internal var _smallImageSession: URLSession?
+    internal var _firstRegistrationSession: URLSession?
     
     internal init() {}
     
-    public internal (set) lazy var interactiveSession: URLSession = {
-        return URLSession(configuration: interactiveConfiguration)
-    }()
+    public var interactiveSession: URLSession {
+        if _interactiveSession == nil {
+            _interactiveSession = URLSession(configuration: interactiveConfiguration)
+        }
+        return _interactiveSession!
+    }
     
-    public internal (set) lazy var smallImageSession: URLSession = {
-        return URLSession(configuration: smallImageConfiguration)
-    }()
+    public var smallImageSession: URLSession {
+        if _smallImageSession == nil {
+            _smallImageSession = URLSession(configuration: smallImageConfiguration)
+        }
+        return _smallImageSession!
+    }
     
-    public internal (set) lazy var firstRegistrationSession: URLSession = {
-        return URLSession(configuration: firstRegistrationConfiguration)
-    }()
+    public var firstRegistrationSession: URLSession {
+        if _firstRegistrationSession == nil {
+            _firstRegistrationSession = URLSession(configuration: firstRegistrationConfiguration)
+        }
+        return _firstRegistrationSession!
+    }
     
     // MARK:- Internal properties
     internal lazy var defaultHeaders : [String:String] = {
@@ -38,6 +52,12 @@ public class F4SNetworkSessionManager {
         }
         return header
     }()
+    
+    public func rebuildSessions() {
+        _interactiveSession = nil
+        _smallImageSession = nil
+        _firstRegistrationSession = nil
+    }
     
     internal lazy var firstRegistrationHeaders : [String : String] = {
         return ["wex.api.key": ApiConstants.apiKey]

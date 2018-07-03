@@ -82,7 +82,13 @@ extension TimelineViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .error(let error):
-                    MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf, cancelHandler: nil, retryHandler: strongSelf.getAllPlacementsForUser)
+                    if error.retry && !strongSelf.userPlacements.isEmpty {
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+5.0, execute: {
+                            strongSelf.getAllPlacementsForUser()
+                        })
+                    } else {
+                         MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf, cancelHandler: nil, retryHandler: strongSelf.getAllPlacementsForUser)
+                    }
                 case .success(let placements):
                     strongSelf.updatePlacements(placements: placements)
                 }

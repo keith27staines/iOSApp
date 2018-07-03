@@ -676,6 +676,7 @@ extension ExtraInfoViewController {
                         return
                     }
                     user.updateUuidAndPersistToLocalStorage(uuid: uuid)
+                   // Ensure session manager is aware of the possible change if user uuid F4SNetworkSessionManager.shared.rebuildSessions()
                     var updatedContext = applicationContext
                     updatedContext.user = user
                     var updatedPlacement = applicationContext.placement!
