@@ -7,9 +7,7 @@
 //
 
 import Foundation
-import Alamofire
 import CoreLocation
-import SwiftyJSON
 import GoogleMaps
 import Reachability
 
@@ -30,119 +28,85 @@ enum Result<A> {
 class LocationHelper {
 
     static let sharedInstance = LocationHelper()
-
-    func googleGeocodeAddressString(_ address: String, _ placeId: String?, completion: @escaping (_ succeeded: Bool, _ coordinates: Result<CLLocationCoordinate2D>) -> Void) {
-
-        if let reachability = Reachability() {
-            if !reachability.isReachableByAnyMeans {
-                completion(false, .error("NoConnectivity"))
-                return
-            }
+    struct Location : Decodable {
+        var lat: Double?
+        var lng: Double?
+        var location_type: String?
+        func coordinates() -> CLLocationCoordinate2D? {
+            guard let lat = lat, let lng = lng else { return nil }
+            return CLLocationCoordinate2DMake(lat, lng)
         }
-
-        var geocodeUrl = ""
-        if let placeId = placeId {
-            geocodeUrl = GoogleApiKeys.geocodeUrl + "?place_id=\(placeId)&key=\(GoogleApiKeys.geocodeApiKey)"
-        } else {
-            geocodeUrl = GoogleApiKeys.geocodeUrl + "?address=\(address)&key=\(GoogleApiKeys.geocodeApiKey)"
-        }
-        var s = (CharacterSet.urlQueryAllowed as NSCharacterSet).mutableCopy() as! NSMutableCharacterSet
-        s.addCharacters(in: "+&")
-        if let encodedString = geocodeUrl.addingPercentEncoding(withAllowedCharacters: s as CharacterSet) {
-            Alamofire.request(encodedString, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (response: DataResponse<Any>) in
-                switch response.result {
-                case .success(let data):
-                    let json = JSON(data)
-                    let status = json["status"].string
-                    if status == "OK" {
-                        var results = json["results"].array
-
-                        let lat = results![0]["geometry"]["location"]["lat"]
-                        let lng = results![0]["geometry"]["location"]["lng"]
-                        let coordinates = CLLocationCoordinate2DMake(lat.doubleValue, lng.doubleValue)
-                        completion(true, .value(Box(coordinates)))
-                    } else {
-                        geocodeUrl = GoogleApiKeys.geocodeUrl + "?address=\(address)&key=\(GoogleApiKeys.geocodeApiKey)"
-
-                        s = (CharacterSet.urlQueryAllowed as NSCharacterSet).mutableCopy() as! NSMutableCharacterSet
-                        s.addCharacters(in: "+&")
-                        if let encodedString = geocodeUrl.addingPercentEncoding(withAllowedCharacters: s as CharacterSet) {
-                            Alamofire.request(encodedString, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (response: DataResponse<Any>) in
-                                switch response.result {
-                                case .success(let data):
-                                    let json = JSON(data)
-                                    let status = json["status"].string
-                                    if status == "OK" {
-                                        var results = json["results"].array
-
-                                        let lat = results![0]["geometry"]["location"]["lat"]
-                                        let lng = results![0]["geometry"]["location"]["lng"]
-                                        let coordinates = CLLocationCoordinate2DMake(lat.doubleValue, lng.doubleValue)
-                                        completion(true, .value(Box(coordinates)))
-                                    } else {
-                                        completion(false, .error("Location not found."))
-                                    }
-                                case .failure(let error):
-                                    completion(false, .error("Location not found."))
-                                    log.error(error)
-                                }
-                            }
-                        }
-                    }
-                case .failure(let error):
-                    completion(false, .error("Location not found."))
-                    log.error(error)
-                }
+    }
+    struct GeocodeResult: Decodable {
+        
+        struct Result : Decodable {
+            struct Geometry : Decodable {
+                var location : Location
             }
-        } else {
-            completion(false, .error("An error occurred."))
-            log.error("invalid encoded string in googleGeocodeAddressString")
+            var geometry: Geometry
+        }
+        var status: String?
+        var results: [Result]?
+        func coordinates() -> CLLocationCoordinate2D? {
+            return results?.first?.geometry.location.coordinates()
         }
     }
 
-    func googleGeocodeAddressToBounds(_ address: String, completion: @escaping (_ succeeded: Bool, _ coordinates: Result<Dictionary<String, CLLocationCoordinate2D>>) -> Void) {
-        let geocodeUrl = GoogleApiKeys.geocodeUrl + "?address=\(address)&region=ro&components=locality&key=\(GoogleApiKeys.geocodeApiKey)"
-        let s = (CharacterSet.urlQueryAllowed as NSCharacterSet).mutableCopy() as! NSMutableCharacterSet
-        s.addCharacters(in: "+&")
-        if let encodedString = geocodeUrl.addingPercentEncoding(withAllowedCharacters: s as CharacterSet) {
-            Alamofire.request(encodedString, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (response: DataResponse<Any>) in switch response.result {
-            case .success(let data):
-                let json = JSON(data)
-                let status = json["status"].string
-                if status == "OK" {
-                    var coordDict: [String: CLLocationCoordinate2D] = [:]
-                    var results = json["results"].array
-                    if results![0]["geometry"]["bounds"].exists() {
-                        if var bounds = results![0]["geometry"]["bounds"].dictionary {
-
-                            let NElat = bounds["northeast"]!["lat"]
-                            let NElng = bounds["northeast"]!["lng"]
-                            let NEcoordinates = CLLocationCoordinate2DMake(NElat.doubleValue, NElng.doubleValue)
-                            coordDict["northeast"] = NEcoordinates
-
-                            let SWlat = bounds["southwest"]!["lat"]
-                            let SWlng = bounds["southwest"]!["lng"]
-                            let SWcoordinates = CLLocationCoordinate2DMake(SWlat.doubleValue, SWlng.doubleValue)
-                            coordDict["southwest"] = SWcoordinates
-
-                            completion(true, .value(Box(coordDict)))
-                        }
-                    } else {
-                        completion(false, .error("Address was not found"))
-                    }
-                } else if status == "ZERO_RESULTS" {
-                    log.debug("address not found")
-                    completion(false, .error("Address was not found"))
+    func googleCoordinatesWithUrl(_ url: URL, completion: @escaping (_ coordinates: Result<CLLocationCoordinate2D>) -> ()) {
+        let dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            DispatchQueue.main.async {
+                guard let data = data else {
+                    completion(.error("Location not found."))
+                    return
                 }
-
-            case .failure(let error):
-                completion(false, .error("Error"))
-                log.debug(error)
+                print(String(data:data, encoding: .utf8)!)
+                let decoder = JSONDecoder()
+                guard let geocodeResult = try? decoder.decode(GeocodeResult.self, from: data),
+                    let coordinates = geocodeResult.coordinates() else {
+                        completion(.error("Location not found."))
+                        return
+                }
+                completion(.value(Box(coordinates)))
             }
+        }
+        dataTask.resume()
+    }
+    
+    func googleGeocodeAddressString(_ address: String, _ placeId: String?, completion: @escaping (_ coordinates: Result<CLLocationCoordinate2D>) -> Void) {
+        if let reachability = Reachability() {
+            if !reachability.isReachableByAnyMeans {
+                completion(.error("NoConnectivity"))
+                return
             }
+        }
+        let geocodeUrl = URL(string: GoogleApiKeys.geocodeUrl)!
+        let q1: URLQueryItem
+        let q2 = URLQueryItem(name: "key", value: GoogleApiKeys.geocodeApiKey)
+        if let placeId = placeId {
+            q1 = URLQueryItem(name: "place_id", value: placeId)
         } else {
-            completion(false, .error("Error"))
-            log.debug("invalid encoded string in googleGeocodeAddressString")
+            q1 = URLQueryItem(name: "address", value: address)
+        }
+  
+        var components = URLComponents(url: geocodeUrl, resolvingAgainstBaseURL: false)!
+        components.queryItems = [q1,q2]
+        struct Json : Decodable {
+            var status: String
+        }
+        guard let url = components.url else {
+            completion(.error("Location not found."))
+            return
+        }
+        
+        googleCoordinatesWithUrl(url) { (coordinateResult) in
+            switch coordinateResult {
+            case .value(_):
+                completion(coordinateResult)
+            case .error(let error):
+                completion(.error(error))
+            case .deffinedError(let error):
+                completion(.error(error.serverErrorMessage ?? "Location could not be found"))
+            }
         }
     }
 

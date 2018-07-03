@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
-import Alamofire
 import KeychainSwift
 
 public typealias F4SVersionValidity = Bool

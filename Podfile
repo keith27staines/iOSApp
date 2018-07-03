@@ -6,17 +6,13 @@ use_frameworks!
 target 'f4s-workexperience' do
 
   # Pods for f4s-workexperience
-  pod 'Auth0'
+  pod 'Auth0', '~> 1.9.2'
   pod 'ReachabilitySwift'
-  pod 'XCGLogger', '~> 5.0'
-  pod 'Alamofire'
-  pod 'SwiftyJSON'
+  pod 'XCGLogger'
   pod 'KeychainSwift'
   pod 'SQLite.swift'
   pod 'GRMustache.swift'
-  
-  pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :branch => 'develop'
-  
+  pod 'JSQMessagesViewController'
   pod 'GoogleMaps', '~> 2.5.0'
   pod 'GooglePlaces', '~> 2.5.0'
   

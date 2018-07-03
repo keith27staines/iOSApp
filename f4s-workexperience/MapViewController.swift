@@ -1029,7 +1029,7 @@ extension MapViewController {
                 self.userLocation = CLLocation(latitude: lat!, longitude: lng)
             }
         } else {
-            LocationHelper.sharedInstance.googleGeocodeAddressString(address, placeId) { _, coordinates in
+            LocationHelper.sharedInstance.googleGeocodeAddressString(address, placeId) { coordinates in
                 switch coordinates {
                 case .value(let coordinates):
                     self.userLocation = CLLocation(latitude: coordinates.value.latitude, longitude: coordinates.value.longitude)

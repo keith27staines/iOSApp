@@ -65,9 +65,9 @@ extension MessageViewController {
         switch chatMessages[indexPath.row].senderId
         {
         case self.currentUserUuid:
-            return self.outgoingBubble
+            return self.outgoingBubble!
         default:
-            return self.incomingBubble
+            return self.incomingBubble!
         }
     }
 
@@ -186,11 +186,11 @@ extension MessageViewController {
 
 // MARK: - helpers
 extension MessageViewController {
-    override func senderId() -> String {
+    func senderId() -> String {
         return self.currentUserUuid
     }
 
-    override func senderDisplayName() -> String {
+    func senderDisplayName() -> String {
         return self.currentUserUuid
     }
 }
