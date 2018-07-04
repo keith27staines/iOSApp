@@ -178,6 +178,10 @@ public class F4SDataTaskService {
     static internal func dataTask(with request: URLRequest, session: URLSession, attempting: String, completion: @escaping (F4SNetworkDataResult) -> ()) -> URLSessionDataTask {
         let task = session.dataTask(with: request, completionHandler: {data, response, error -> Void in
             if let error = error as NSError? {
+                if error.domain == "NSURLErrorDomain" && error.code == -999 {
+                    // The operation was cancelled
+                    return
+                }
                 let result = F4SNetworkDataResult.error(F4SNetworkError(error: error, attempting: attempting))
                 completion(result)
                 return

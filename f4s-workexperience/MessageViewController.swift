@@ -186,11 +186,11 @@ extension MessageViewController {
 
 // MARK: - helpers
 extension MessageViewController {
-    override func senderId() -> String {
+    func senderId() -> String {
         return self.currentUserUuid
     }
 
-    override func senderDisplayName() -> String {
+    func senderDisplayName() -> String {
         return self.currentUserUuid
     }
 }
