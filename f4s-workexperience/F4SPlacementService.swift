@@ -42,12 +42,15 @@ internal struct CoverLetterBlankJson : Encodable {
 
 public class F4SPlacementService : F4SPlacementServiceProtocol {
     
+    private var dataTask: URLSessionDataTask?
+    
     public func getAllPlacementsForUser(completion: @escaping (F4SNetworkResult<[F4STimelinePlacement]>) -> ()) {
         let attempting = "Get all placements"
         let url = URL(string: ApiConstants.allPlacementsUrl)!
         let session = F4SNetworkSessionManager.shared.interactiveSession
         let urlRequest = F4SDataTaskService.urlRequest(verb: .get, url: url, dataToSend: nil)
-        let dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { (result) in
+        dataTask?.cancel()
+        dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { (result) in
             switch result {
             case .error(let error):
                 completion(F4SNetworkResult.error(error))
@@ -57,7 +60,7 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
                 decoder.decode(data: data, intoType: [F4STimelinePlacement].self, attempting: attempting, completion: completion)
             }
         }
-        dataTask.resume()
+        dataTask?.resume()
     }
     
     public func ratePlacement(placementUuid: String, rating: Int, completion: @escaping (F4SNetworkResult<Bool>) -> ()) {
