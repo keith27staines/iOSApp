@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import KeychainSwift
 
 class F4SDebugViewController: UIViewController {
     
@@ -26,6 +27,33 @@ class F4SDebugViewController: UIViewController {
         super.viewDidLoad()
         applyStyle()
     }
+    
+   
+    @IBAction func removeSettings(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "Remove data and settings", message: "Remove all of Workfinder's data and settings from this device?", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (cancelAction) in
+            
+        }
+
+        let removeAction = UIAlertAction(title: "Remove", style: .destructive) { (removeAction) in
+            let keychain = KeychainSwift()
+            let userUuidKey = UserDefaultsKeys.userUuid
+            keychain.clear()
+            let domain = Bundle.main.bundleIdentifier!
+            UserDefaults.standard.removePersistentDomain(forName: domain)
+            UserDefaults.standard.synchronize()
+            let alert = UIAlertController(title: "Workfinder settings have been removed", message: "The app will now close. The next time you test it, the app should behave as if it were a first time install on a pristine device", preferredStyle: .alert)
+            self.present(alert, animated: true, completion: {
+                fatalError()
+            })
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(removeAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
     
     func applyStyle() {
         F4SButtonStyler.apply(style: .primary, button: viewLogButton)

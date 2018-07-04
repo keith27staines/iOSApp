@@ -43,10 +43,11 @@ class TimelineViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
     override func viewWillAppear(_: Bool) {
         super.viewWillAppear(true)
         adjustNavigationBar()
+        F4SUserStatusService.shared.beginStatusUpdate()
     }
     
     override func viewDidAppear(_ animated: Bool) {

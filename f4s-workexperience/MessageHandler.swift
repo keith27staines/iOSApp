@@ -54,14 +54,14 @@ class MessageHandler {
         if networkError.retry {
             if networkError.httpStatusCode == 429 {
                 title =  "The server is busy"
-                message = "Please wait a minute and try again"
+                message = "Please wait a minute or so and try again"
             } else {
                 title =  "Workfinder needs a network connection"
                 message = "Please make sure you have a good network connection and try again"
             }
         } else {
             title = "Workfinder could not complete an operation"
-            message = "\(networkError.code): \(networkError.localizedDescription) attempting \(networkError.attempting ?? "")"
+            message = "\(networkError.code): \(networkError.localizedDescription) attempting \(networkError.attempting ?? "the last action")"
         }
 
         let alert = UIAlertController(
