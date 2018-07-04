@@ -52,7 +52,6 @@ class TimelineViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         getAllPlacementsForUser()
-        F4SUserStatusService.shared.beginStatusUpdate()
     }
     
     lazy var placementService: F4SPlacementService = {
