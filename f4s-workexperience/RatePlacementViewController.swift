@@ -83,7 +83,14 @@ extension RatePlacementViewController {
     }
 
     func getHeight() -> CGFloat {
-        let sum = questionImageViewTopConstraint.constant + questionLabelTopConstraint.constant + ratinControlStackViewTopConstraint.constant + submitButtonTopConstraint.constant + submitButton.frame.size.height + questionLabel.frame.size.height + ratingControlStackView.frame.size.height + 140
+        var sum = questionImageViewTopConstraint.constant
+        sum += questionLabelTopConstraint.constant
+        sum += ratinControlStackViewTopConstraint.constant
+        sum += submitButtonTopConstraint.constant
+        sum += submitButton.frame.size.height
+        sum += questionLabel.frame.size.height
+        sum += ratingControlStackView.frame.size.height
+        sum += 140
         return sum
     }
 
