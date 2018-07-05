@@ -135,7 +135,7 @@ public class F4SUserService : F4SUserServiceProtocol {
                     case .error(let error):
                         completion(F4SNetworkResult.error(error))
                     case .success(let pushStatus):
-                        guard let isEnabled = pushStatus.enabled else {
+                        guard pushStatus.enabled != nil else {
                             let serverError = F4SNetworkDataErrorType.unknownError(pushStatus).error(attempting: attempting)
                             completion(F4SNetworkResult.error(serverError))
                             return
