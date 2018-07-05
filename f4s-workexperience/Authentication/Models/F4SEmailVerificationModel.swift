@@ -87,6 +87,7 @@ public class F4SEmailVerificationModel {
                     case .success:
                         strongSelf.submitEmailForVerificationRetryCount = 0
                         strongSelf.emailVerificationState = .emailSent(email)
+                        print("Email verification requested for \(email)")
                         completion()
                         return
                     }
@@ -110,11 +111,20 @@ public class F4SEmailVerificationModel {
                    parameters: [:])
             .start { result in
                 DispatchQueue.main.async { [weak self] in
+                    guard let strongSelf = self else { return }
                     switch result {
                     case .success(let credentials):
                         let f4sCredentials = F4SCredentials(auth0Credentials: credentials)
-                        self?.emailVerificationState = .verified(f4sCredentials)
+                        strongSelf.emailVerificationState = .verified(f4sCredentials)
+                        strongSelf.submitEmailForVerificationRetryCount = 0
                     case .failure(let error):
+                        strongSelf.submitEmailForVerificationRetryCount += 1
+                        if strongSelf.submitEmailForVerificationRetryCount < 5 {
+                            print("Verify code retry \(strongSelf.submitEmailForVerificationRetryCount)")
+                            strongSelf.submitVerificationCode(code, completion: completion)
+                            return
+                        }
+                        print("Failed to authenticate email \(emailSentForVerification) with error \(error)")
                         let f4sError = F4SEmailVerificationError.f4sError(for: error)
                         self?.emailVerificationState = .error(f4sError)
                     }
