@@ -40,11 +40,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ## GoogleMaps
 
-Copyright 2017 Google
+Copyright 2018 Google
 
 ## GooglePlaces
 
-Copyright 2017 Google
+Copyright 2018 Google
 
 ## JSQMessagesViewController
 

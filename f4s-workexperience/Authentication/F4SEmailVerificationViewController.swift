@@ -34,8 +34,6 @@ class F4SEmailVerificationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         emailTextField.text = emailToVerify ?? ""
-//        model = F4SEmailVerificationModel()
-//        model.didChangeState = handleStateChange(oldState:newState:)
         emailTextField.delegate = self
         emailTextField.enablesReturnKeyAutomatically = false
         activitySpinner.hidesWhenStopped = true

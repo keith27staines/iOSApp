@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
- platform :ios, '9.0'
+ platform :ios, '10.0'
 # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
 use_frameworks!
 
@@ -13,8 +13,8 @@ target 'f4s-workexperience' do
   pod 'SQLite.swift'
   pod 'GRMustache.swift'
   pod 'JSQMessagesViewController'
-  pod 'GoogleMaps', '~> 2.5.0'
-  pod 'GooglePlaces', '~> 2.5.0'
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
   
 end
   
