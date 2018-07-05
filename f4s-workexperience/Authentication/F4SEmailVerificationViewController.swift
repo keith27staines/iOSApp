@@ -23,7 +23,9 @@ class F4SEmailVerificationViewController: UIViewController {
 
     /// The finite state machine that serves as the model for this view
     lazy var model: F4SEmailVerificationModel = {
-        return F4SEmailVerificationModel()
+        let m = F4SEmailVerificationModel()
+        m.didChangeState = handleStateChange(oldState:newState:)
+        return m
     }()
     
     /// Maintains a count of the number of asynchronous activities in progress
@@ -32,8 +34,8 @@ class F4SEmailVerificationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         emailTextField.text = emailToVerify ?? ""
-        model = F4SEmailVerificationModel()
-        model.didChangeState = handleStateChange(oldState:newState:)
+//        model = F4SEmailVerificationModel()
+//        model.didChangeState = handleStateChange(oldState:newState:)
         emailTextField.delegate = self
         emailTextField.enablesReturnKeyAutomatically = false
         activitySpinner.hidesWhenStopped = true
@@ -166,6 +168,7 @@ extension F4SEmailVerificationViewController : UITextFieldDelegate {
 extension F4SEmailVerificationViewController {
     
     func configure(for state: F4SEmailVerificationState) {
+        _ = view
         introductionLabel.text = model.lastNonErrorState.introductionString
         feedbackLabel.text = state.feedbackString
         configure(emailTextField, visible: state.isEMailFieldVisible, enabled: state.isEmailFieldEnabled)

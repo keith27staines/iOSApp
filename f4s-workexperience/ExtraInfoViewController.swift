@@ -629,8 +629,8 @@ extension ExtraInfoViewController {
         if emailModel.isEmailAddressVerified(email: user.email) {
             afterEmailVerfied(applicationContext: applicationContext)
         } else {
-            emailController.model.restart()
             emailController.emailToVerify = user.email
+            emailController.model.restart()
             emailController.emailWasVerified = { [weak self] in
                 guard let strongSelf = self else { return }
                 DispatchQueue.main.async {

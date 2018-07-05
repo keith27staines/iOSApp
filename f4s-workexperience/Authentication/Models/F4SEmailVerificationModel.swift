@@ -49,6 +49,8 @@ public class F4SEmailVerificationModel {
         emailVerificationState = .start
     }
     
+    var submitEmailForVerificationRetryCount: Int = 0
+    
     /// Verification is performed by sending an email to the specified address. The email contains a code or link which will, in turn, need to be submitted for final verification
     public func submitEmailForVerification(_ email: String, completion: @escaping (()->Void)) {
         let clientId: String
@@ -73,11 +75,17 @@ public class F4SEmailVerificationModel {
                     guard let strongSelf = self else { return }
                     switch res {
                     case .failure(let error):
-                       let f4sError = F4SEmailVerificationError.f4sError(for: error)
+                        strongSelf.submitEmailForVerificationRetryCount += 1
+                        if strongSelf.submitEmailForVerificationRetryCount < 5 {
+                            strongSelf.submitEmailForVerification(email, completion: completion)
+                            return
+                        }
+                        let f4sError = F4SEmailVerificationError.f4sError(for: error)
                         strongSelf.emailVerificationState = .error(f4sError)
                         completion()
                         return
                     case .success:
+                        strongSelf.submitEmailForVerificationRetryCount = 0
                         strongSelf.emailVerificationState = .emailSent(email)
                         completion()
                         return
