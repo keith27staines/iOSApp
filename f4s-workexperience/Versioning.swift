@@ -22,7 +22,6 @@ public protocol F4SWorkfinderVersioningServiceProtocol {
 public class F4SWorkfinderVersioningService: F4SDataTaskService {
 
     public init() {
-        let additionalHeaders = ["version" : F4SWorkfinderVersioningService.releaseVersionNumber!]
         super.init(baseURLString: Config.BASE, apiName: "validation/ios-version")
     }
 }

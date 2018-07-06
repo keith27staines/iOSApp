@@ -38,7 +38,6 @@ class F4SDebugViewController: UIViewController {
 
         let removeAction = UIAlertAction(title: "Remove", style: .destructive) { (removeAction) in
             let keychain = KeychainSwift()
-            let userUuidKey = UserDefaultsKeys.userUuid
             keychain.clear()
             let domain = Bundle.main.bundleIdentifier!
             UserDefaults.standard.removePersistentDomain(forName: domain)
