@@ -160,6 +160,13 @@
 		FC59B1931F81554F0068EC9C /* CGRect+Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18D1F81546C0068EC9C /* CGRect+Methods.swift */; };
 		FC5F3D4E20D938E90002F41B /* F4SUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F3D4D20D938E90002F41B /* F4SUserService.swift */; };
 		FC5F3D5020D93C070002F41B /* F4SUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F3D4F20D93C070002F41B /* F4SUserModel.swift */; };
+		FC62FF9820EF75FE003E52C5 /* F4SApiUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62FF9720EF75FE003E52C5 /* F4SApiUrls.swift */; };
+		FC62FF9920EF770A003E52C5 /* MagicLinkInterpreterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3485D20038C3100DC1316 /* MagicLinkInterpreterTests.swift */; };
+		FC62FF9A20EF771C003E52C5 /* F4SCalendarDayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8F42074C5EC0042C725 /* F4SCalendarDayTests.swift */; };
+		FC62FF9B20EF7728003E52C5 /* F4SCalendarMonthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8F12074C5EC0042C725 /* F4SCalendarMonthTests.swift */; };
+		FC62FF9C20EF7736003E52C5 /* F4SCalendarWeekTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8F22074C5EC0042C725 /* F4SCalendarWeekTests.swift */; };
+		FC62FF9D20EF773E003E52C5 /* F4SDisplayableMonthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8F52074C5EC0042C725 /* F4SDisplayableMonthTests.swift */; };
+		FC62FF9E20EF7749003E52C5 /* F4SCalendarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8F32074C5EC0042C725 /* F4SCalendarTests.swift */; };
 		FC631CB620D64BD100199507 /* F4SAsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC631CB520D64BD100199507 /* F4SAsynchronousOperation.swift */; };
 		FC631CB820D679AC00199507 /* F4SNetworkSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC631CB720D679AC00199507 /* F4SNetworkSessionManager.swift */; };
 		FC67E60A207B70CE006F07FE /* F4SCalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC67E609207B70CE006F07FE /* F4SCalendarService.swift */; };
@@ -183,7 +190,7 @@
 		FC99BDC820CFD8E400278DDE /* F4SDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */; };
 		FC99BDCA20D170CA00278DDE /* F4SDatabaseDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */; };
 		FC99BDCC20D172B600278DDE /* F4SCompanyDatabaseMetadataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99BDCB20D172B600278DDE /* F4SCompanyDatabaseMetadataService.swift */; };
-		FC99F3D41FFE533000E3AC5A /* RecommendationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99F3D31FFE533000E3AC5A /* RecommendationService.swift */; };
+		FC99F3D41FFE533000E3AC5A /* F4SRecommendationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99F3D31FFE533000E3AC5A /* F4SRecommendationService.swift */; };
 		FC99F3D72000BE4900E3AC5A /* F4SService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99F3D62000BE4900E3AC5A /* F4SService.swift */; };
 		FC9BEE082015FF6000347437 /* UniversalLinkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9BEE072015FF6000347437 /* UniversalLinkParser.swift */; };
 		FCA24C111F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA24C101F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift */; };
@@ -228,11 +235,6 @@
 		FCB6B8EB2074C59C0042C725 /* F4SCalendarEnumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8DD2074C59C0042C725 /* F4SCalendarEnumerations.swift */; };
 		FCB6B8EC2074C59C0042C725 /* F4SAvailabilitySequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8DE2074C59C0042C725 /* F4SAvailabilitySequence.swift */; };
 		FCB6B8ED2074C59C0042C725 /* F4SCalendarContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8DF2074C59C0042C725 /* F4SCalendarContainerViewController.swift */; };
-		FCB6B8F62074C5ED0042C725 /* F4SCalendarMonthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8F12074C5EC0042C725 /* F4SCalendarMonthTests.swift */; };
-		FCB6B8F72074C5ED0042C725 /* F4SCalendarWeekTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8F22074C5EC0042C725 /* F4SCalendarWeekTests.swift */; };
-		FCB6B8F82074C5ED0042C725 /* F4SCalendarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8F32074C5EC0042C725 /* F4SCalendarTests.swift */; };
-		FCB6B8F92074C5ED0042C725 /* F4SCalendarDayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8F42074C5EC0042C725 /* F4SCalendarDayTests.swift */; };
-		FCB6B8FA2074C5ED0042C725 /* F4SDisplayableMonthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8F52074C5EC0042C725 /* F4SDisplayableMonthTests.swift */; };
 		FCB6D9361F75056100B8C268 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCB6D9351F75056000B8C268 /* Branding.plist */; };
 		FCC5EBB61F449C310085CE15 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FCC5EBB51F449C310085CE15 /* README.md */; };
 		FCC753EE1F80F26200E9ECD6 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC753ED1F80F26200E9ECD6 /* MapModel.swift */; };
@@ -249,7 +251,6 @@
 		FCD3486620038C3100DC1316 /* F4SEmailVerificationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3486020038C3100DC1316 /* F4SEmailVerificationState.swift */; };
 		FCD3486720038C3100DC1316 /* F4SEmailVerificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3486120038C3100DC1316 /* F4SEmailVerificationModel.swift */; };
 		FCD3486820038C3100DC1316 /* F4SEmailVerificationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3486220038C3100DC1316 /* F4SEmailVerificationError.swift */; };
-		FCD348692003A1B500DC1316 /* MagicLinkInterpreterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3485D20038C3100DC1316 /* MagicLinkInterpreterTests.swift */; };
 		FCD3486B20049DFB00DC1316 /* F4SEmailVerification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCD3486A20049DFA00DC1316 /* F4SEmailVerification.storyboard */; };
 		FCD388DF2088C00300FC73C5 /* F4SCompanyDocumentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD388DE2088C00300FC73C5 /* F4SCompanyDocumentsTableViewController.swift */; };
 		FCD388E12088D76300FC73C5 /* F4SDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD388E02088D76300FC73C5 /* F4SDocumentViewController.swift */; };
@@ -489,6 +490,7 @@
 		FC59B18F1F81549A0068EC9C /* F4SQuadtreeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SQuadtreeTests.swift; sourceTree = "<group>"; };
 		FC5F3D4D20D938E90002F41B /* F4SUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserService.swift; sourceTree = "<group>"; };
 		FC5F3D4F20D93C070002F41B /* F4SUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserModel.swift; sourceTree = "<group>"; };
+		FC62FF9720EF75FE003E52C5 /* F4SApiUrls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SApiUrls.swift; sourceTree = "<group>"; };
 		FC631CB520D64BD100199507 /* F4SAsynchronousOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SAsynchronousOperation.swift; sourceTree = "<group>"; };
 		FC631CB720D679AC00199507 /* F4SNetworkSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SNetworkSessionManager.swift; sourceTree = "<group>"; };
 		FC67E609207B70CE006F07FE /* F4SCalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCalendarService.swift; sourceTree = "<group>"; };
@@ -513,7 +515,7 @@
 		FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDownloadService.swift; sourceTree = "<group>"; };
 		FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDatabaseDownloadManager.swift; sourceTree = "<group>"; };
 		FC99BDCB20D172B600278DDE /* F4SCompanyDatabaseMetadataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyDatabaseMetadataService.swift; sourceTree = "<group>"; };
-		FC99F3D31FFE533000E3AC5A /* RecommendationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationService.swift; sourceTree = "<group>"; };
+		FC99F3D31FFE533000E3AC5A /* F4SRecommendationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRecommendationService.swift; sourceTree = "<group>"; };
 		FC99F3D62000BE4900E3AC5A /* F4SService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SService.swift; sourceTree = "<group>"; };
 		FC9BEE072015FF6000347437 /* UniversalLinkParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalLinkParser.swift; sourceTree = "<group>"; };
 		FCA24C101F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkAvailabilityWindow.swift; sourceTree = "<group>"; };
@@ -643,10 +645,6 @@
 				206F8F8F1E1E552F0024937B /* MessageOptionHelper.swift */,
 				203658821E1F809E00D87DC4 /* StatusCollectionViewCell.swift */,
 				207364601E52091900786F4C /* MessageContainerViewController.swift */,
-				FC860D81209C37F2007945E6 /* MessageDispatcher.swift */,
-				FC85FA8120A3436600059EFB /* F4SMessageServices.swift */,
-				FCFF609720A424DE00D69A48 /* F4SMessageModel.swift */,
-				FCA333A420BEA938002AA790 /* F4SMessagesModel.swift */,
 			);
 			name = Message;
 			sourceTree = "<group>";
@@ -810,11 +808,10 @@
 		40E78E151DD31A86000A3776 /* f4s-workexperience */ = {
 			isa = PBXGroup;
 			children = (
-				FC6DE52120AC4E7900F9BB71 /* F4SApiServices */,
+				40E78E4D1DD3289B000A3776 /* F4S models and services */,
 				FCA6D2921FA740EC0037962B /* Branding and styling */,
-				FC59B18B1F8154350068EC9C /* F4SDataStructures */,
 				40E78E481DD32848000A3776 /* AppDelegate */,
-				40E78E471DD32840000A3776 /* Data */,
+				FC62FF9620EF753A003E52C5 /* CoreData models and services */,
 				40E78E461DD32836000A3776 /* Business */,
 				40E78E451DD32829000A3776 /* Presentation */,
 				40E78E441DD32100000A3776 /* SupportingFiles */,
@@ -871,13 +868,12 @@
 			isa = PBXGroup;
 			children = (
 				40E78E4E1DD328A4000A3776 /* Components */,
-				40E78E4D1DD3289B000A3776 /* Workflow */,
 				40E78E4C1DD32893000A3776 /* Utiles */,
 			);
 			name = Business;
 			sourceTree = "<group>";
 		};
-		40E78E471DD32840000A3776 /* Data */ = {
+		40E78E471DD32840000A3776 /* CoreData models */ = {
 			isa = PBXGroup;
 			children = (
 				40E78E491DD32862000A3776 /* f4s-workexperience.xcdatamodeld */,
@@ -894,7 +890,7 @@
 				204203E91E4B110A007C7409 /* ShortlistDB.swift */,
 				204203EB1E4B160C007C7409 /* ShortlistCoreDataManager.swift */,
 			);
-			name = Data;
+			name = "CoreData models";
 			sourceTree = "<group>";
 		};
 		40E78E481DD32848000A3776 /* AppDelegate */ = {
@@ -916,31 +912,29 @@
 			name = Utiles;
 			sourceTree = "<group>";
 		};
-		40E78E4D1DD3289B000A3776 /* Workflow */ = {
+		40E78E4D1DD3289B000A3776 /* F4S models and services */ = {
 			isa = PBXGroup;
 			children = (
-				FCF06EE420DBFE1B00FD990C /* F4SPlacementService.swift */,
-				FCF06EE620DBFEC100FD990C /* F4SPlacementModels.swift */,
-				FC99BDC620CFD2C300278DDE /* Coredata services */,
-				FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */,
-				2037B0B71DEC8A2400A9DE3E /* F4STemplateService.swift */,
-				FC1D6B7B20D906D100D0C9AF /* F4STemplateModels.swift */,
-				FC1D6B7F20D92C8900D0C9AF /* F4STemplateModelTests.swift */,
-				20FEBDD91DE5AD3400EBDCBF /* F4SImageService.swift */,
-				FC99BDC420CFAFD400278DDE /* F4SRemoveShortlistItemService.swift */,
-				FC09CD5020CA62D700A79240 /* F4SShortlistService.swift */,
-				FC09CD5220CA6D4500A79240 /* F4SJsonDecoding.swift */,
-				FCACBF4320C7EB9F00EABAE8 /* F4SContentService.swift */,
-				FC631CB720D679AC00199507 /* F4SNetworkSessionManager.swift */,
-				FC631CB520D64BD100199507 /* F4SAsynchronousOperation.swift */,
-				FC99BDCB20D172B600278DDE /* F4SCompanyDatabaseMetadataService.swift */,
-				FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */,
-				FCC85B2220EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift */,
-				FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */,
-				FC5F3D4D20D938E90002F41B /* F4SUserService.swift */,
-				FC5F3D4F20D93C070002F41B /* F4SUserModel.swift */,
+				FC59B18B1F8154350068EC9C /* F4SDataStructures */,
+				FC62FF8320EF6CEF003E52C5 /* F4SCoreNetworking */,
+				FC25A05D1F850DAC002F51A9 /* F4SMap models and services */,
+				FC99F3D51FFE604000E3AC5A /* F4SRecommendations models and services */,
+				FC62FF9520EF7235003E52C5 /* F4SMessage models and services */,
+				FC62FF9420EF71A2003E52C5 /* F4SCompanyDocuments models and services */,
+				FCD3485B20038C3100DC1316 /* F4SEmailVerification models and services */,
+				FC62FF9220EF70F9003E52C5 /* F4SDocumentUpload models and services */,
+				FC62FF9120EF70AB003E52C5 /* F4SFeatureSwitch models and services */,
+				FC62FF9020EF7065003E52C5 /* F4SAvailability models and services */,
+				FCACBF4220C7E95700EABAE8 /* F4SPartner models and services */,
+				FC62FF8620EF6D98003E52C5 /* F4SPlacement models and services */,
+				FC62FF8920EF6EA8003E52C5 /* F4SVoucher models and services */,
+				FC62FF8720EF6E75003E52C5 /* F4STemplate models and services */,
+				FC62FF8820EF6E87003E52C5 /* F4SShortlist models and services */,
+				FC62FF8A20EF6EB8003E52C5 /* F4SContent models and services */,
+				FC62FF8420EF6D26003E52C5 /* F4SDatabaseDownload models and services */,
+				FC62FF8520EF6D51003E52C5 /* F4SUser models and services */,
 			);
-			name = Workflow;
+			name = "F4S models and services";
 			sourceTree = "<group>";
 		};
 		40E78E4E1DD328A4000A3776 /* Components */ = {
@@ -969,7 +963,7 @@
 				40E78E961DD39253000A3776 /* Map */,
 				40E78E531DD32938000A3776 /* CustomUIElements */,
 				40E78E521DD3292F000A3776 /* Navigation */,
-				40E78E511DD328FF000A3776 /* Utiles */,
+				40E78E511DD328FF000A3776 /* Utilities */,
 			);
 			name = UIProcessComponents;
 			sourceTree = "<group>";
@@ -999,7 +993,7 @@
 			name = UIComponents;
 			sourceTree = "<group>";
 		};
-		40E78E511DD328FF000A3776 /* Utiles */ = {
+		40E78E511DD328FF000A3776 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				40C1A4F61DDF5A65000F80AA /* GoogleMapsUtils */,
@@ -1011,7 +1005,7 @@
 				20D51BE31E27710C003A8358 /* NotificationHelper.swift */,
 				FC6C11B9202870D6002C8EA5 /* F4SGrammar.swift */,
 			);
-			name = Utiles;
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 		40E78E521DD3292F000A3776 /* Navigation */ = {
@@ -1112,7 +1106,6 @@
 		40E78E961DD39253000A3776 /* Map */ = {
 			isa = PBXGroup;
 			children = (
-				FC25A05D1F850DAC002F51A9 /* MapModel */,
 				40E78E971DD39275000A3776 /* MapViewController.swift */,
 				40A5CF3B1DED6FA1000007AB /* InterestsViewController.swift */,
 				40C1A4F41DDEF3DD000F80AA /* AutoCompleteTableViewCell.swift */,
@@ -1200,8 +1193,6 @@
 				FCD388DE2088C00300FC73C5 /* F4SCompanyDocumentsTableViewController.swift */,
 				FCD388E02088D76300FC73C5 /* F4SDocumentViewController.swift */,
 				FCD388E2208DB8A600FC73C5 /* F4SCompanyDocumentsContainerViewController.swift */,
-				FCD388E4208DEFE100FC73C5 /* F4SCompanyDocumentsModel.swift */,
-				FCD388E6208E27E500FC73C5 /* F4SCompanyDocumentService.swift */,
 				FCB16480209765BB0045B9CA /* F4SRequestCompanyDocumentViewController.swift */,
 				FCB1648220986E810045B9CA /* F4SRequestCompanyDocumentTableViewCell.swift */,
 			);
@@ -1246,13 +1237,12 @@
 				204C89701DF5F0A100D8493A /* EditCoverLetterTableViewCell.swift */,
 				204C89711DF5F0A100D8493A /* EditCoverLetterViewController.swift */,
 				204C89721DF5F0A100D8493A /* EditFooterView.swift */,
-				FCA24C101F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift */,
 			);
 			name = CoverLetter;
 			path = ..;
 			sourceTree = "<group>";
 		};
-		FC25A05D1F850DAC002F51A9 /* MapModel */ = {
+		FC25A05D1F850DAC002F51A9 /* F4SMap models and services */ = {
 			isa = PBXGroup;
 			children = (
 				FCC753ED1F80F26200E9ECD6 /* MapModel.swift */,
@@ -1260,7 +1250,7 @@
 				FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */,
 				FC92567A1F8F70D100FF9841 /* InterestsModel.swift */,
 			);
-			name = MapModel;
+			name = "F4SMap models and services";
 			sourceTree = "<group>";
 		};
 		FC31F093204D547E009DD526 /* HiddenDebugScreen */ = {
@@ -1271,9 +1261,7 @@
 				FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */,
 				FCB46F01204FD86D00F0779F /* F4SLogViewController.swift */,
 				FCB46F032051365400F0779F /* F4SFeatureSwitchesViewController.swift */,
-				FCB46F0720513D0100F0779F /* F4SFeatureSwitchModel.swift */,
 				FCB46F0920516FD200F0779F /* F4SFeatureSwitchTableViewCell.swift */,
-				FCB46F0B20518EE900F0779F /* F4SFeatureSwitchService.swift */,
 			);
 			path = HiddenDebugScreen;
 			sourceTree = "<group>";
@@ -1283,7 +1271,6 @@
 			children = (
 				FC4BB6081FA21BA400173864 /* SelectPartner.storyboard */,
 				FC4BB6021FA20EF700173864 /* PartnerSelectionViewController.swift */,
-				FCACBF4220C7E95700EABAE8 /* Models and services */,
 			);
 			name = "Partner selection";
 			sourceTree = "<group>";
@@ -1309,28 +1296,174 @@
 			name = F4SDataStructures;
 			sourceTree = "<group>";
 		};
-		FC67E608207B6F95006F07FE /* Models */ = {
+		FC62FF8320EF6CEF003E52C5 /* F4SCoreNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				FC6DE52120AC4E7900F9BB71 /* F4SApiServices */,
+				20FEBDD91DE5AD3400EBDCBF /* F4SImageService.swift */,
+				FC631CB520D64BD100199507 /* F4SAsynchronousOperation.swift */,
+				FC09CD5220CA6D4500A79240 /* F4SJsonDecoding.swift */,
+				FC631CB720D679AC00199507 /* F4SNetworkSessionManager.swift */,
+			);
+			path = F4SCoreNetworking;
+			sourceTree = "<group>";
+		};
+		FC62FF8420EF6D26003E52C5 /* F4SDatabaseDownload models and services */ = {
+			isa = PBXGroup;
+			children = (
+				FC99BDCB20D172B600278DDE /* F4SCompanyDatabaseMetadataService.swift */,
+				FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */,
+				FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */,
+				FCC85B2220EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift */,
+			);
+			name = "F4SDatabaseDownload models and services";
+			sourceTree = "<group>";
+		};
+		FC62FF8520EF6D51003E52C5 /* F4SUser models and services */ = {
+			isa = PBXGroup;
+			children = (
+				FC5F3D4D20D938E90002F41B /* F4SUserService.swift */,
+				FC5F3D4F20D93C070002F41B /* F4SUserModel.swift */,
+			);
+			name = "F4SUser models and services";
+			sourceTree = "<group>";
+		};
+		FC62FF8620EF6D98003E52C5 /* F4SPlacement models and services */ = {
+			isa = PBXGroup;
+			children = (
+				FCF06EE420DBFE1B00FD990C /* F4SPlacementService.swift */,
+				FCF06EE620DBFEC100FD990C /* F4SPlacementModels.swift */,
+			);
+			name = "F4SPlacement models and services";
+			sourceTree = "<group>";
+		};
+		FC62FF8720EF6E75003E52C5 /* F4STemplate models and services */ = {
+			isa = PBXGroup;
+			children = (
+				2037B0B71DEC8A2400A9DE3E /* F4STemplateService.swift */,
+				FC1D6B7B20D906D100D0C9AF /* F4STemplateModels.swift */,
+				FC1D6B7F20D92C8900D0C9AF /* F4STemplateModelTests.swift */,
+			);
+			name = "F4STemplate models and services";
+			sourceTree = "<group>";
+		};
+		FC62FF8820EF6E87003E52C5 /* F4SShortlist models and services */ = {
+			isa = PBXGroup;
+			children = (
+				FC99BDC420CFAFD400278DDE /* F4SRemoveShortlistItemService.swift */,
+				FC09CD5020CA62D700A79240 /* F4SShortlistService.swift */,
+			);
+			name = "F4SShortlist models and services";
+			sourceTree = "<group>";
+		};
+		FC62FF8920EF6EA8003E52C5 /* F4SVoucher models and services */ = {
+			isa = PBXGroup;
+			children = (
+				FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */,
+			);
+			name = "F4SVoucher models and services";
+			sourceTree = "<group>";
+		};
+		FC62FF8A20EF6EB8003E52C5 /* F4SContent models and services */ = {
+			isa = PBXGroup;
+			children = (
+				FCACBF4320C7EB9F00EABAE8 /* F4SContentService.swift */,
+			);
+			name = "F4SContent models and services";
+			sourceTree = "<group>";
+		};
+		FC62FF9020EF7065003E52C5 /* F4SAvailability models and services */ = {
+			isa = PBXGroup;
+			children = (
+				FCA24C101F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift */,
+				FC67E608207B6F95006F07FE /* F4SDayAndHours models and services */,
+				FC67E60B207B73A4006F07FE /* F4SCalendar models and services */,
+			);
+			name = "F4SAvailability models and services";
+			sourceTree = "<group>";
+		};
+		FC62FF9120EF70AB003E52C5 /* F4SFeatureSwitch models and services */ = {
+			isa = PBXGroup;
+			children = (
+				FCB46F0720513D0100F0779F /* F4SFeatureSwitchModel.swift */,
+				FCB46F0B20518EE900F0779F /* F4SFeatureSwitchService.swift */,
+			);
+			path = "F4SFeatureSwitch models and services";
+			sourceTree = "<group>";
+		};
+		FC62FF9220EF70F9003E52C5 /* F4SDocumentUpload models and services */ = {
+			isa = PBXGroup;
+			children = (
+				FCE20CBD203C12F300CA821D /* F4SDocumentUrlModel.swift */,
+				FCE20CC5203D5CE400CA821D /* DocumentsService.swift */,
+			);
+			path = "F4SDocumentUpload models and services";
+			sourceTree = "<group>";
+		};
+		FC62FF9420EF71A2003E52C5 /* F4SCompanyDocuments models and services */ = {
+			isa = PBXGroup;
+			children = (
+				FCD388E4208DEFE100FC73C5 /* F4SCompanyDocumentsModel.swift */,
+				FCD388E6208E27E500FC73C5 /* F4SCompanyDocumentService.swift */,
+			);
+			path = "F4SCompanyDocuments models and services";
+			sourceTree = "<group>";
+		};
+		FC62FF9520EF7235003E52C5 /* F4SMessage models and services */ = {
+			isa = PBXGroup;
+			children = (
+				FC860D81209C37F2007945E6 /* MessageDispatcher.swift */,
+				FC85FA8120A3436600059EFB /* F4SMessageServices.swift */,
+				FCFF609720A424DE00D69A48 /* F4SMessageModel.swift */,
+				FCA333A420BEA938002AA790 /* F4SMessagesModel.swift */,
+			);
+			path = "F4SMessage models and services";
+			sourceTree = "<group>";
+		};
+		FC62FF9620EF753A003E52C5 /* CoreData models and services */ = {
+			isa = PBXGroup;
+			children = (
+				FC99BDC620CFD2C300278DDE /* Coredata services */,
+				40E78E471DD32840000A3776 /* CoreData models */,
+			);
+			name = "CoreData models and services";
+			sourceTree = "<group>";
+		};
+		FC67E608207B6F95006F07FE /* F4SDayAndHours models and services */ = {
 			isa = PBXGroup;
 			children = (
 				FCB6B8C42074C58E0042C725 /* F4SDayAndHoursSelection.swift */,
 				FCB6B8C62074C58E0042C725 /* F4SDaysAndHoursModel.swift */,
 				FC67E60E207BA80A006F07FE /* F4SAvailabilityPeriod.swift */,
 			);
-			path = Models;
+			path = "F4SDayAndHours models and services";
 			sourceTree = "<group>";
 		};
-		FC67E60B207B73A4006F07FE /* Services */ = {
+		FC67E60B207B73A4006F07FE /* F4SCalendar models and services */ = {
 			isa = PBXGroup;
 			children = (
+				FCB6B8F12074C5EC0042C725 /* F4SCalendarMonthTests.swift */,
+				FCB6B8F22074C5EC0042C725 /* F4SCalendarWeekTests.swift */,
+				FCB6B8F32074C5EC0042C725 /* F4SCalendarTests.swift */,
+				FCB6B8F42074C5EC0042C725 /* F4SCalendarDayTests.swift */,
+				FCB6B8F52074C5EC0042C725 /* F4SDisplayableMonthTests.swift */,
+				FCB6B8D82074C59C0042C725 /* F4SCalendarWeek.swift */,
+				FCB6B8D92074C59C0042C725 /* F4SCalendar.swift */,
+				FCB6B8DA2074C59C0042C725 /* F4SCalendarMonth.swift */,
+				FCB6B8DB2074C59C0042C725 /* F4SCalendarDay.swift */,
+				FCB6B8DC2074C59C0042C725 /* F4SDisplayableMonth.swift */,
+				FCB6B8DD2074C59C0042C725 /* F4SCalendarEnumerations.swift */,
+				FCB6B8DE2074C59C0042C725 /* F4SAvailabilitySequence.swift */,
 				FC67E609207B70CE006F07FE /* F4SCalendarService.swift */,
 				FC67E60C207B73CE006F07FE /* F4SCalendarServiceJson.swift */,
 			);
-			path = Services;
+			path = "F4SCalendar models and services";
 			sourceTree = "<group>";
 		};
 		FC6DE52120AC4E7900F9BB71 /* F4SApiServices */ = {
 			isa = PBXGroup;
 			children = (
+				FC62FF9720EF75FE003E52C5 /* F4SApiUrls.swift */,
 				FC99F3D62000BE4900E3AC5A /* F4SService.swift */,
 				FCD348542002340F00DC1316 /* F4SNetwork.swift */,
 				FC6DE51F20AC3AD900F9BB71 /* F4SUserStatusService.swift */,
@@ -1350,12 +1483,13 @@
 			name = "Coredata services";
 			sourceTree = "<group>";
 		};
-		FC99F3D51FFE604000E3AC5A /* F4SNetworkServices */ = {
+		FC99F3D51FFE604000E3AC5A /* F4SRecommendations models and services */ = {
 			isa = PBXGroup;
 			children = (
-				FC99F3D31FFE533000E3AC5A /* RecommendationService.swift */,
+				FCD884FC1FFCCB4A00F05B08 /* RecommendationsModel.swift */,
+				FC99F3D31FFE533000E3AC5A /* F4SRecommendationService.swift */,
 			);
-			name = F4SNetworkServices;
+			name = "F4SRecommendations models and services";
 			sourceTree = "<group>";
 		};
 		FCA53B931FE115E1009F6DB0 /* Force app update */ = {
@@ -1376,7 +1510,7 @@
 			name = "Branding and styling";
 			sourceTree = "<group>";
 		};
-		FCACBF4220C7E95700EABAE8 /* Models and services */ = {
+		FCACBF4220C7E95700EABAE8 /* F4SPartner models and services */ = {
 			isa = PBXGroup;
 			children = (
 				FCA6D2B51FA88CE00037962B /* F4SPartnerService.swift */,
@@ -1384,7 +1518,7 @@
 				FC4BB6061FA20F5100173864 /* F4SPartnersModel.swift */,
 				FC32E3D8200F322800D7C36A /* PartnerModelTests.swift */,
 			);
-			name = "Models and services";
+			name = "F4SPartner models and services";
 			sourceTree = "<group>";
 		};
 		FCB6B8B82074C51B0042C725 /* Calendar and diary */ = {
@@ -1392,9 +1526,6 @@
 			children = (
 				FCB6B8BB2074C58E0042C725 /* F4SDaysAndHours */,
 				FCB6B8D02074C59C0042C725 /* F4SCalendar */,
-				FCB6B8F02074C5EC0042C725 /* Calendar tests */,
-				FCB6B8B92074C5750042C725 /* DayHourPicker.xcassets */,
-				FC67E60B207B73A4006F07FE /* Services */,
 			);
 			name = "Calendar and diary";
 			sourceTree = "<group>";
@@ -1409,7 +1540,6 @@
 				FCB6B8BE2074C58E0042C725 /* F4SHoursPickerViewController.swift */,
 				FCB6B8BF2074C58E0042C725 /* F4SDisplayInformationViewController.storyboard */,
 				FCB6B8C32074C58E0042C725 /* F4SDisplayInformationViewController.swift */,
-				FC67E608207B6F95006F07FE /* Models */,
 			);
 			path = F4SDaysAndHours;
 			sourceTree = "<group>";
@@ -1417,41 +1547,15 @@
 		FCB6B8D02074C59C0042C725 /* F4SCalendar */ = {
 			isa = PBXGroup;
 			children = (
+				FCB6B8B92074C5750042C725 /* DayHourPicker.xcassets */,
 				FCB6B8D12074C59C0042C725 /* F4SCalendar.storyboard */,
 				FCB6B8DF2074C59C0042C725 /* F4SCalendarContainerViewController.swift */,
 				FCB6B8D62074C59C0042C725 /* F4SCalendarCollectionViewController.swift */,
 				FCB6B8D22074C59C0042C725 /* F4SDayCalendarViewCell.swift */,
 				FCB6B8D32074C59C0042C725 /* F4SMonthHeaderView.swift */,
 				FCB6B8D52074C59C0042C725 /* F4SCalendarColors.swift */,
-				FCB6B8D72074C59C0042C725 /* F4SCalendar models */,
 			);
 			path = F4SCalendar;
-			sourceTree = "<group>";
-		};
-		FCB6B8D72074C59C0042C725 /* F4SCalendar models */ = {
-			isa = PBXGroup;
-			children = (
-				FCB6B8D82074C59C0042C725 /* F4SCalendarWeek.swift */,
-				FCB6B8D92074C59C0042C725 /* F4SCalendar.swift */,
-				FCB6B8DA2074C59C0042C725 /* F4SCalendarMonth.swift */,
-				FCB6B8DB2074C59C0042C725 /* F4SCalendarDay.swift */,
-				FCB6B8DC2074C59C0042C725 /* F4SDisplayableMonth.swift */,
-				FCB6B8DD2074C59C0042C725 /* F4SCalendarEnumerations.swift */,
-				FCB6B8DE2074C59C0042C725 /* F4SAvailabilitySequence.swift */,
-			);
-			path = "F4SCalendar models";
-			sourceTree = "<group>";
-		};
-		FCB6B8F02074C5EC0042C725 /* Calendar tests */ = {
-			isa = PBXGroup;
-			children = (
-				FCB6B8F12074C5EC0042C725 /* F4SCalendarMonthTests.swift */,
-				FCB6B8F22074C5EC0042C725 /* F4SCalendarWeekTests.swift */,
-				FCB6B8F32074C5EC0042C725 /* F4SCalendarTests.swift */,
-				FCB6B8F42074C5EC0042C725 /* F4SCalendarDayTests.swift */,
-				FCB6B8F52074C5EC0042C725 /* F4SDisplayableMonthTests.swift */,
-			);
-			path = "Calendar tests";
 			sourceTree = "<group>";
 		};
 		FCD3485620038B6B00DC1316 /* Authentication */ = {
@@ -1460,30 +1564,21 @@
 				FCD3485720038B8700DC1316 /* Auth0.plist */,
 				FCD3486A20049DFA00DC1316 /* F4SEmailVerification.storyboard */,
 				FCD3485920038BF200DC1316 /* F4SEmailVerificationViewController.swift */,
-				FCD3485B20038C3100DC1316 /* Models */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
 		};
-		FCD3485B20038C3100DC1316 /* Models */ = {
+		FCD3485B20038C3100DC1316 /* F4SEmailVerification models and services */ = {
 			isa = PBXGroup;
 			children = (
-				FCD3485C20038C3100DC1316 /* Unit tests */,
+				FCD3485D20038C3100DC1316 /* MagicLinkInterpreterTests.swift */,
 				FCD3485E20038C3100DC1316 /* F4SAuth0MagicLinkInterpreterer.swift */,
 				FCD3485F20038C3100DC1316 /* LocalizedStrings.swift */,
 				FCD3486020038C3100DC1316 /* F4SEmailVerificationState.swift */,
 				FCD3486120038C3100DC1316 /* F4SEmailVerificationModel.swift */,
 				FCD3486220038C3100DC1316 /* F4SEmailVerificationError.swift */,
 			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		FCD3485C20038C3100DC1316 /* Unit tests */ = {
-			isa = PBXGroup;
-			children = (
-				FCD3485D20038C3100DC1316 /* MagicLinkInterpreterTests.swift */,
-			);
-			path = "Unit tests";
+			path = "F4SEmailVerification models and services";
 			sourceTree = "<group>";
 		};
 		FCD884F71FFBC0A000F05B08 /* Recommendations */ = {
@@ -1491,8 +1586,6 @@
 			children = (
 				FCD884F81FFBC0CC00F05B08 /* Recommendations.storyboard */,
 				FCD884FA1FFBE04F00F05B08 /* RecommendationsViewController.swift */,
-				FCD884FC1FFCCB4A00F05B08 /* RecommendationsModel.swift */,
-				FC99F3D51FFE604000E3AC5A /* F4SNetworkServices */,
 			);
 			name = Recommendations;
 			sourceTree = "<group>";
@@ -1502,10 +1595,8 @@
 			children = (
 				FCE20CC3203C141B00CA821D /* DocumentUrl.storyboard */,
 				FCE20CBB203C12F200CA821D /* DocumentUrlViewController.swift */,
-				FCE20CBD203C12F300CA821D /* F4SDocumentUrlModel.swift */,
 				FCE20CBE203C12F300CA821D /* UrlTableViewCell.swift */,
 				FCE20CBC203C12F300CA821D /* URLTableViewController.swift */,
-				FCE20CC5203D5CE400CA821D /* DocumentsService.swift */,
 				FCE20CC7203EEA3B00CA821D /* CVGuideViewerViewController.swift */,
 			);
 			path = "Document upload";
@@ -1853,7 +1944,7 @@
 				204203EE1E4B16D7007C7409 /* ShortlistDBOperations.swift in Sources */,
 				FC4C5F2A20B2D7CD001FA83C /* F4SUploadSpecifiedDocumentsViewController.swift in Sources */,
 				204C89731DF5F0A100D8493A /* EditCoverLetterTableViewCell.swift in Sources */,
-				FC99F3D41FFE533000E3AC5A /* RecommendationService.swift in Sources */,
+				FC99F3D41FFE533000E3AC5A /* F4SRecommendationService.swift in Sources */,
 				4059740A1E00115C0002DB3A /* NextResponderTextField.swift in Sources */,
 				2037B0AB1DEC42F600A9DE3E /* PlacementDB.swift in Sources */,
 				40C1A52B1DE82060000F80AA /* InfoWindowView.swift in Sources */,
@@ -1981,6 +2072,7 @@
 				FC86A5FD20B6E93B002BAD74 /* F4SUploadRequestedDocumentsTableViewModel.swift in Sources */,
 				FCD3486620038C3100DC1316 /* F4SEmailVerificationState.swift in Sources */,
 				FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */,
+				FC62FF9820EF75FE003E52C5 /* F4SApiUrls.swift in Sources */,
 				FC99BDCA20D170CA00278DDE /* F4SDatabaseDownloadManager.swift in Sources */,
 				FC85FA8220A3436600059EFB /* F4SMessageServices.swift in Sources */,
 				207364611E52091900786F4C /* MessageContainerViewController.swift in Sources */,
@@ -1995,21 +2087,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FCD348692003A1B500DC1316 /* MagicLinkInterpreterTests.swift in Sources */,
-				FCB6B8FA2074C5ED0042C725 /* F4SDisplayableMonthTests.swift in Sources */,
 				FC59B1901F81549B0068EC9C /* CGRect+MethodsTests.swift in Sources */,
 				FC32E3D9200F322800D7C36A /* PartnerModelTests.swift in Sources */,
+				FC62FF9C20EF7736003E52C5 /* F4SCalendarWeekTests.swift in Sources */,
 				FC6C11BE202C402E002C8EA5 /* F4STemplateTests.swift in Sources */,
-				FCB6B8F92074C5ED0042C725 /* F4SCalendarDayTests.swift in Sources */,
 				FC4336CC202DB999001D0569 /* F4SStringExtensionTests.swift in Sources */,
-				FCB6B8F72074C5ED0042C725 /* F4SCalendarWeekTests.swift in Sources */,
-				FCB6B8F82074C5ED0042C725 /* F4SCalendarTests.swift in Sources */,
+				FC62FF9A20EF771C003E52C5 /* F4SCalendarDayTests.swift in Sources */,
+				FC62FF9920EF770A003E52C5 /* MagicLinkInterpreterTests.swift in Sources */,
+				FC62FF9B20EF7728003E52C5 /* F4SCalendarMonthTests.swift in Sources */,
 				FC1D6B8020D92C8900D0C9AF /* F4STemplateModelTests.swift in Sources */,
 				FC6C11C2202C4EE5002C8EA5 /* F4STemplateHelperTests.swift in Sources */,
-				FCB6B8F62074C5ED0042C725 /* F4SCalendarMonthTests.swift in Sources */,
 				FC59B1911F81549B0068EC9C /* F4SQuadtreeTests.swift in Sources */,
+				FC62FF9D20EF773E003E52C5 /* F4SDisplayableMonthTests.swift in Sources */,
 				FC6C11BC20287378002C8EA5 /* F4SGrammarTests.swift in Sources */,
 				FCC85B2320EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift in Sources */,
+				FC62FF9E20EF7749003E52C5 /* F4SCalendarTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

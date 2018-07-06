@@ -69,32 +69,6 @@ struct GoogleApiKeys {
     static let geocodeUrl = "https://maps.googleapis.com/maps/api/geocode/json"
 }
 
-struct ApiConstants {
-    static let base: String = Config.BASE
-    static let baseUrl: String = Config.BASE_URL
-    static let baseUrl2: String = Config.BASE_URL2
-    static let versionUrl: String = "\(base)/validation/ios-version/"
-    static let userProfileUrl: String = "\(baseUrl)/device"
-    static let updateUserProfileUrl: String = "\(baseUrl)/user/"
-    static let companyDatabaseUrl: String = "\(baseUrl)/company/dump/full"
-    static let templateUrl: String = "\(baseUrl)/cover-template"
-    static let createPlacementUrl: String = "\(baseUrl)/placement"
-    static let updatePlacementUrl: String = "\(baseUrl)/placement"
-    static let contentUrl: String = "\(baseUrl)/content"
-    static let voucherUrl: String = "\(baseUrl)/voucher/"
-    static let messagesInThreadUrl: String = "\(baseUrl)/messaging/"
-    static let optionsForThreadUrl: String = "\(baseUrl)/messaging/"
-    static let sendMessageForThreadUrl: String = "\(baseUrl)/messaging/"
-    static let allPlacementsUrl: String = "\(baseUrl)/placement"
-    static let unreadMessagesCountUrl: String = "\(baseUrl)/user/status"
-    static let ratingUrl: String = "\(baseUrl)/rating"
-    static let shortlistCompanyUrl: String = "\(baseUrl)/favourite"
-    static let unshortlistCompanyUrl: String = "\(baseUrl)/favourite"
-    static let allPartnersUrl: String = "\(baseUrl2)/partner"
-    static let recommendationURL: String = "\(baseUrl)/recommend"
-
-    static let apiKey: String = "eTo0oeh4Yeen1oy7iDuv"
-}
 
 struct AppConstants {
     static let databaseFileName = "company_database.db"

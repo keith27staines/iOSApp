@@ -35,7 +35,6 @@ public class F4SDownloadService : NSObject, F4SDownloadServiceProtocol {
         configuration.sessionSendsLaunchEvents = true
         if #available(iOS 11.0, *) {
             configuration.waitsForConnectivity = true
-            configuration.multipathServiceType = .handover
         }
         return configuration
     }()
