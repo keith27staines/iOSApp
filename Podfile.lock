@@ -1,4 +1,5 @@
 PODS:
+  - Analytics (3.6.9)
   - Auth0 (1.9.2):
     - SimpleKeychain
   - GoogleMaps (2.7.0):
@@ -27,6 +28,7 @@ PODS:
     - ObjcExceptionBridging
 
 DEPENDENCIES:
+  - Analytics
   - Auth0 (~> 1.9.2)
   - GoogleMaps
   - GooglePlaces
@@ -39,6 +41,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Analytics
     - Auth0
     - GoogleMaps
     - GooglePlaces
@@ -53,6 +56,7 @@ SPEC REPOS:
     - XCGLogger
 
 SPEC CHECKSUMS:
+  Analytics: 6541ce337e99d9f7a2240a8b3953940a7be5f998
   Auth0: 9eceebf97b6b3482eaed82193e090b50c3bd8ad6
   GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
   GooglePlaces: 3d06e6c99654545b4738ce49648745779c25f2ef
@@ -66,6 +70,6 @@ SPEC CHECKSUMS:
   SQLite.swift: 6e5356850bb1791459f8c16d6ee9195b28714a2e
   XCGLogger: 4fc1bc0bdd5828cb8dc8da7a843536cda1bea8f3
 
-PODFILE CHECKSUM: a61841d5248f084496ff273a4ccc1254ca4e1aab
+PODFILE CHECKSUM: 33824c81a35225df5dcde9244c3a7003e5a1d1c0
 
 COCOAPODS: 1.5.3

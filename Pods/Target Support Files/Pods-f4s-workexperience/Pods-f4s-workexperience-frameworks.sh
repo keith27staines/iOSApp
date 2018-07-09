@@ -143,6 +143,7 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "DebugF4SLive" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/Analytics/Analytics.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Auth0/Auth0.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/GRMustache.swift/Mustache.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework"
@@ -155,6 +156,7 @@ if [[ "$CONFIGURATION" == "DebugF4SLive" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework"
 fi
 if [[ "$CONFIGURATION" == "DebugF4S" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/Analytics/Analytics.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Auth0/Auth0.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/GRMustache.swift/Mustache.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework"
@@ -167,6 +169,7 @@ if [[ "$CONFIGURATION" == "DebugF4S" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework"
 fi
 if [[ "$CONFIGURATION" == "ReleaseF4SLive" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/Analytics/Analytics.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Auth0/Auth0.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/GRMustache.swift/Mustache.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework"
@@ -179,6 +182,7 @@ if [[ "$CONFIGURATION" == "ReleaseF4SLive" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework"
 fi
 if [[ "$CONFIGURATION" == "ReleaseF4S" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/Analytics/Analytics.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Auth0/Auth0.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/GRMustache.swift/Mustache.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework"
