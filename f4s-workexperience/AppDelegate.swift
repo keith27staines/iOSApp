@@ -13,6 +13,7 @@ import GoogleMaps
 import GooglePlaces
 import KeychainSwift
 import UserNotifications
+import Analytics
 
 let log = XCGLogger.default
 
