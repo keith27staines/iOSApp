@@ -8,6 +8,7 @@
 
 import Foundation
 import KeychainSwift
+import Analytics
 
 public struct F4SPushNotificationStatus : Decodable {
     public var enabled: Bool?
@@ -121,8 +122,11 @@ public struct F4SUser : Codable {
     
     public mutating func updateUuidAndPersistToLocalStorage(uuid: F4SUUID) {
         self.uuid = uuid
-        let keychain = KeychainSwift()
-        keychain.set(uuid, forKey: UserDefaultsKeys.userUuid)
+        if uuid != F4SUser.userUuidFromKeychain() {
+            let keychain = KeychainSwift()
+            keychain.set(uuid, forKey: UserDefaultsKeys.userUuid)
+            SEGAnalytics.shared().alias(uuid)
+        }
     }
     
     public static func userUuidFromKeychain() -> F4SUUID? {

@@ -283,6 +283,20 @@
 			remoteGlobalIDString = 40E78E121DD31A86000A3776;
 			remoteInfo = "f4s-workexperience";
 		};
+		FCB0D19420F39E97005D8729 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCB0D18F20F39E95005D8729 /* F4SCoreWorkfinder.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FCB0D17520F39E95005D8729;
+			remoteInfo = F4SCoreWorkfinder;
+		};
+		FCB0D19620F39E97005D8729 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCB0D18F20F39E95005D8729 /* F4SCoreWorkfinder.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FCB0D17E20F39E95005D8729;
+			remoteInfo = F4SCoreWorkfinderTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -533,6 +547,7 @@
 		FCA6D2B51FA88CE00037962B /* F4SPartnerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPartnerService.swift; sourceTree = "<group>"; };
 		FCACBF4320C7EB9F00EABAE8 /* F4SContentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SContentService.swift; sourceTree = "<group>"; };
 		FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SVoucherService.swift; sourceTree = "<group>"; };
+		FCB0D18F20F39E95005D8729 /* F4SCoreWorkfinder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = F4SCoreWorkfinder.xcodeproj; path = F4SCoreWorkfinder/F4SCoreWorkfinder.xcodeproj; sourceTree = "<group>"; };
 		FCB16480209765BB0045B9CA /* F4SRequestCompanyDocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRequestCompanyDocumentViewController.swift; sourceTree = "<group>"; };
 		FCB1648220986E810045B9CA /* F4SRequestCompanyDocumentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRequestCompanyDocumentTableViewCell.swift; sourceTree = "<group>"; };
 		FCB46EFF204E7DCC00F0779F /* F4SDebugModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDebugModel.swift; sourceTree = "<group>"; };
@@ -786,6 +801,7 @@
 		40E78E0A1DD31A86000A3776 = {
 			isa = PBXGroup;
 			children = (
+				FCB0D18F20F39E95005D8729 /* F4SCoreWorkfinder.xcodeproj */,
 				FCA268C91FD1557000537EB1 /* circle.yml */,
 				FCB6D9351F75056000B8C268 /* Branding.plist */,
 				FC681BFE1F57473D0077BECA /* Podfile */,
@@ -1535,6 +1551,15 @@
 			name = "F4SPartner models and services";
 			sourceTree = "<group>";
 		};
+		FCB0D19020F39E95005D8729 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FCB0D19520F39E97005D8729 /* F4SCoreWorkfinder.framework */,
+				FCB0D19720F39E97005D8729 /* F4SCoreWorkfinderTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		FCB6B8B82074C51B0042C725 /* Calendar and diary */ = {
 			isa = PBXGroup;
 			children = (
@@ -1722,6 +1747,12 @@
 			mainGroup = 40E78E0A1DD31A86000A3776;
 			productRefGroup = 40E78E141DD31A86000A3776 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = FCB0D19020F39E95005D8729 /* Products */;
+					ProjectRef = FCB0D18F20F39E95005D8729 /* F4SCoreWorkfinder.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				40E78E121DD31A86000A3776 /* f4s-workexperience */,
@@ -1729,6 +1760,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		FCB0D19520F39E97005D8729 /* F4SCoreWorkfinder.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = F4SCoreWorkfinder.framework;
+			remoteRef = FCB0D19420F39E97005D8729 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FCB0D19720F39E97005D8729 /* F4SCoreWorkfinderTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = F4SCoreWorkfinderTests.xctest;
+			remoteRef = FCB0D19620F39E97005D8729 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		40E78E111DD31A86000A3776 /* Resources */ = {

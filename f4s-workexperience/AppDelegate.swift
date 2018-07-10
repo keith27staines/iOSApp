@@ -49,6 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         log.debug("\n\n\n**************\nWorkfinder launched in environement \(Config.ENVIRONMENT)\n**************")
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
+        setupAnalytics()
         registerUser(application: application)
         return true
     }
@@ -243,6 +244,7 @@ extension AppDelegate {
                     if currentUserUuid == nil && anonymousUserUuid != nil {
                         log.debug("Using anonymous user id")
                         keychain.set(anonymousUserUuid!, forKey: UserDefaultsKeys.userUuid)
+                        SEGAnalytics.shared().identify(anonymousUserUuid!)
                     } else {
                         log.debug("Using user id from keychain")
                     }
@@ -254,6 +256,8 @@ extension AppDelegate {
     
     func onUserAccountConfirmedToExist(application: UIApplication) {
         printDebugUserInfo()
+        let userId = F4SUser.userUuidFromKeychain()
+        SEGAnalytics.shared().identify(userId!)
         _ = F4SNetworkSessionManager.shared
         F4SUserStatusService.shared.beginStatusUpdate()
         if databaseDownloadManager == nil {
@@ -310,6 +314,22 @@ extension AppDelegate {
                 userInfo: userInfo)
             NotificationCenter.default.post(notification)
         }
+    }
+}
+
+extension AppDelegate {
+    func setupAnalytics() {
+        let writeKey: String
+        switch Config.environment {
+        case .staging:
+            writeKey = "i6ZAvwf9RlqSzghak9Sg03MXyVeXo3kZ"
+        case .production:
+            writeKey = "G5DSK58YEvZDJx3KrnNAWvNg5xb5Uy51"
+        }
+        let config = SEGAnalyticsConfiguration(writeKey: writeKey)
+        config.trackApplicationLifecycleEvents = true
+        config.recordScreenViews = true
+        SEGAnalytics.setup(with: config)
     }
 }
 
