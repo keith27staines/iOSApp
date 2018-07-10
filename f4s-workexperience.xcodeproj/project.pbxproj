@@ -174,6 +174,8 @@
 		FC67E60F207BA80A006F07FE /* F4SAvailabilityPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC67E60E207BA80A006F07FE /* F4SAvailabilityPeriod.swift */; };
 		FC681C001F57473D0077BECA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFE1F57473D0077BECA /* Podfile */; };
 		FC681C011F57473D0077BECA /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFF1F57473D0077BECA /* Podfile.lock */; };
+		FC6A555420EF988D00D08662 /* F4SJsonDecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6A555120EF96D200D08662 /* F4SJsonDecodingTests.swift */; };
+		FC6A555620EFB97600D08662 /* F4SJsonValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6A555520EFB97600D08662 /* F4SJsonValue.swift */; };
 		FC6C11BA202870D6002C8EA5 /* F4SGrammar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6C11B9202870D6002C8EA5 /* F4SGrammar.swift */; };
 		FC6C11BC20287378002C8EA5 /* F4SGrammarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6C11BB20287378002C8EA5 /* F4SGrammarTests.swift */; };
 		FC6C11BE202C402E002C8EA5 /* F4STemplateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6C11BD202C402E002C8EA5 /* F4STemplateTests.swift */; };
@@ -498,6 +500,8 @@
 		FC67E60E207BA80A006F07FE /* F4SAvailabilityPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SAvailabilityPeriod.swift; sourceTree = "<group>"; };
 		FC681BFE1F57473D0077BECA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		FC681BFF1F57473D0077BECA /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
+		FC6A555120EF96D200D08662 /* F4SJsonDecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SJsonDecodingTests.swift; sourceTree = "<group>"; };
+		FC6A555520EFB97600D08662 /* F4SJsonValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SJsonValue.swift; sourceTree = "<group>"; };
 		FC6C11B9202870D6002C8EA5 /* F4SGrammar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SGrammar.swift; sourceTree = "<group>"; };
 		FC6C11BB20287378002C8EA5 /* F4SGrammarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SGrammarTests.swift; sourceTree = "<group>"; };
 		FC6C11BD202C402E002C8EA5 /* F4STemplateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateTests.swift; sourceTree = "<group>"; };
@@ -1299,11 +1303,9 @@
 		FC62FF8320EF6CEF003E52C5 /* F4SCoreNetworking */ = {
 			isa = PBXGroup;
 			children = (
-				FC6DE52120AC4E7900F9BB71 /* F4SApiServices */,
 				20FEBDD91DE5AD3400EBDCBF /* F4SImageService.swift */,
-				FC631CB520D64BD100199507 /* F4SAsynchronousOperation.swift */,
-				FC09CD5220CA6D4500A79240 /* F4SJsonDecoding.swift */,
-				FC631CB720D679AC00199507 /* F4SNetworkSessionManager.swift */,
+				FC6DE52120AC4E7900F9BB71 /* F4SApiServices */,
+				FC6A555720EFB9A200D08662 /* Seriealization services */,
 			);
 			path = F4SCoreNetworking;
 			sourceTree = "<group>";
@@ -1322,6 +1324,7 @@
 		FC62FF8520EF6D51003E52C5 /* F4SUser models and services */ = {
 			isa = PBXGroup;
 			children = (
+				FC6DE51F20AC3AD900F9BB71 /* F4SUserStatusService.swift */,
 				FC5F3D4D20D938E90002F41B /* F4SUserService.swift */,
 				FC5F3D4F20D93C070002F41B /* F4SUserModel.swift */,
 			);
@@ -1460,13 +1463,24 @@
 			path = "F4SCalendar models and services";
 			sourceTree = "<group>";
 		};
+		FC6A555720EFB9A200D08662 /* Seriealization services */ = {
+			isa = PBXGroup;
+			children = (
+				FC6A555520EFB97600D08662 /* F4SJsonValue.swift */,
+				FC09CD5220CA6D4500A79240 /* F4SJsonDecoding.swift */,
+				FC6A555120EF96D200D08662 /* F4SJsonDecodingTests.swift */,
+			);
+			path = "Seriealization services";
+			sourceTree = "<group>";
+		};
 		FC6DE52120AC4E7900F9BB71 /* F4SApiServices */ = {
 			isa = PBXGroup;
 			children = (
+				FC631CB520D64BD100199507 /* F4SAsynchronousOperation.swift */,
 				FC62FF9720EF75FE003E52C5 /* F4SApiUrls.swift */,
 				FC99F3D62000BE4900E3AC5A /* F4SService.swift */,
 				FCD348542002340F00DC1316 /* F4SNetwork.swift */,
-				FC6DE51F20AC3AD900F9BB71 /* F4SUserStatusService.swift */,
+				FC631CB720D679AC00199507 /* F4SNetworkSessionManager.swift */,
 			);
 			path = F4SApiServices;
 			sourceTree = "<group>";
@@ -2051,6 +2065,7 @@
 				FCD3486720038C3100DC1316 /* F4SEmailVerificationModel.swift in Sources */,
 				40E78E781DD32BE7000A3776 /* DrawerController.swift in Sources */,
 				40E78E7E1DD32BF4000A3776 /* CenterTableViewCell.swift in Sources */,
+				FC6A555620EFB97600D08662 /* F4SJsonValue.swift in Sources */,
 				204C89571DF5A44100D8493A /* TemplateChoiceCoreDataManager.swift in Sources */,
 				FCF06EE720DBFEC100FD990C /* F4SPlacementModels.swift in Sources */,
 				FCD3486820038C3100DC1316 /* F4SEmailVerificationError.swift in Sources */,
@@ -2099,6 +2114,7 @@
 				FC6C11C2202C4EE5002C8EA5 /* F4STemplateHelperTests.swift in Sources */,
 				FC59B1911F81549B0068EC9C /* F4SQuadtreeTests.swift in Sources */,
 				FC62FF9D20EF773E003E52C5 /* F4SDisplayableMonthTests.swift in Sources */,
+				FC6A555420EF988D00D08662 /* F4SJsonDecodingTests.swift in Sources */,
 				FC6C11BC20287378002C8EA5 /* F4SGrammarTests.swift in Sources */,
 				FCC85B2320EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift in Sources */,
 				FC62FF9E20EF7749003E52C5 /* F4SCalendarTests.swift in Sources */,
