@@ -14,7 +14,7 @@ public struct F4SMessage : Codable {
     public var dateTime: Date?
     public var relativeDateTime: String?
     public var content: String
-    public var sender: String
+    public var sender: String?
     
     public init(uuid: String = "", dateTime: Date = Date(), relativeDateTime: String = "", content: String = "", sender: String = "") {
         self.uuid = uuid

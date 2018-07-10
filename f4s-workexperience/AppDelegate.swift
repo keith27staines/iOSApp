@@ -13,6 +13,8 @@ import GoogleMaps
 import GooglePlaces
 import KeychainSwift
 import UserNotifications
+import Analytics
+import Segment_Bugsnag
 
 let log = XCGLogger.default
 
@@ -39,15 +41,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Exiting didFinishLaunchingWithOptions early because `isUnitTesting` argument is set")
             return true
         }
-        do {
-            let f4sDebug = try F4SDebug()
-            F4SDebug.shared = f4sDebug
-        } catch (let error) {
-            assertionFailure("Failed to initialize logger: \(error)")
-        }
+        f4sLog = F4SLog()
+
         log.debug("\n\n\n**************\nWorkfinder launched in environement \(Config.ENVIRONMENT)\n**************")
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
+        
         registerUser(application: application)
         return true
     }
@@ -84,7 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
-        F4SDebug.shared?.updateHistory()
+        debug?.updateHistory()
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -242,6 +241,7 @@ extension AppDelegate {
                     if currentUserUuid == nil && anonymousUserUuid != nil {
                         log.debug("Using anonymous user id")
                         keychain.set(anonymousUserUuid!, forKey: UserDefaultsKeys.userUuid)
+                        SEGAnalytics.shared().identify(anonymousUserUuid!)
                     } else {
                         log.debug("Using user id from keychain")
                     }
@@ -253,6 +253,8 @@ extension AppDelegate {
     
     func onUserAccountConfirmedToExist(application: UIApplication) {
         printDebugUserInfo()
+        let userId = F4SUser.userUuidFromKeychain()
+        SEGAnalytics.shared().identify(userId!)
         _ = F4SNetworkSessionManager.shared
         F4SUserStatusService.shared.beginStatusUpdate()
         if databaseDownloadManager == nil {

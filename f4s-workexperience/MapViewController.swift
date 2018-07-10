@@ -173,7 +173,7 @@ class MapViewController: UIViewController {
         return true
     }
     override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
-        if motion == .motionShake && (F4SDebug.shared?.userCanAccessDebugMenu() ?? false) {
+        if motion == .motionShake && (debug?.userCanAccessDebugMenu() ?? false) {
             CustomNavigationHelper.sharedInstance.presentHiddenDebugController(parentCtrl: self)
         }
     }

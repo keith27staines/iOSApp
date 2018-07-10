@@ -15,6 +15,8 @@ target 'f4s-workexperience' do
   pod 'JSQMessagesViewController'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+  pod 'Analytics'
+  pod 'Segment-Bugsnag'
   
 end
   
