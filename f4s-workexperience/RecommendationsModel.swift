@@ -55,7 +55,7 @@ public struct Recommendation : Codable {
     /// Required sort index
     public let index: Int
     /// the company uuid
-    public let uuid: F4SUUID!
+    public let uuid: F4SUUID?
     
     public init(companyUUID: F4SUUID, sortIndex: Int) {
         self.index = sortIndex
@@ -63,6 +63,9 @@ public struct Recommendation : Codable {
     }
 
     lazy var company: Company? = {
+        guard let uuid = uuid else {
+            return nil
+        }
         return DatabaseOperations.sharedInstance.companyWithUUID(uuid)
     }()
 }

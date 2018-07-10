@@ -186,6 +186,7 @@
 		FC860D82209C37F2007945E6 /* MessageDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC860D81209C37F2007945E6 /* MessageDispatcher.swift */; };
 		FC86A5FB20B44E6B002BAD74 /* F4SUrlDescriptorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC86A5FA20B44E6B002BAD74 /* F4SUrlDescriptorTableViewCell.swift */; };
 		FC86A5FD20B6E93B002BAD74 /* F4SUploadRequestedDocumentsTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC86A5FC20B6E93B002BAD74 /* F4SUploadRequestedDocumentsTableViewModel.swift */; };
+		FC8E303A20F4A60B006059DE /* F4SLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8E303920F4A60B006059DE /* F4SLogger.swift */; };
 		FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC92567A1F8F70D100FF9841 /* InterestsModel.swift */; };
 		FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99B7E21F826D1400E2D5F0 /* LatLon.swift */; };
 		FC99BDC520CFAFD400278DDE /* F4SRemoveShortlistItemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99BDC420CFAFD400278DDE /* F4SRemoveShortlistItemService.swift */; };
@@ -195,6 +196,7 @@
 		FC99F3D41FFE533000E3AC5A /* F4SRecommendationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99F3D31FFE533000E3AC5A /* F4SRecommendationService.swift */; };
 		FC99F3D72000BE4900E3AC5A /* F4SService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99F3D62000BE4900E3AC5A /* F4SService.swift */; };
 		FC9BEE082015FF6000347437 /* UniversalLinkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9BEE072015FF6000347437 /* UniversalLinkParser.swift */; };
+		FC9FECBA20F4C55800450B46 /* F4SPlacementModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9FECB620F4C52800450B46 /* F4SPlacementModelsTests.swift */; };
 		FCA24C111F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA24C101F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift */; };
 		FCA268CA1FD1557000537EB1 /* circle.yml in Resources */ = {isa = PBXBuildFile; fileRef = FCA268C91FD1557000537EB1 /* circle.yml */; };
 		FCA333A520BEA938002AA790 /* F4SMessagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA333A420BEA938002AA790 /* F4SMessagesModel.swift */; };
@@ -208,7 +210,6 @@
 		FCACBF4620C8085900EABAE8 /* F4SVoucherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */; };
 		FCB16481209765BB0045B9CA /* F4SRequestCompanyDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB16480209765BB0045B9CA /* F4SRequestCompanyDocumentViewController.swift */; };
 		FCB1648320986E810045B9CA /* F4SRequestCompanyDocumentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB1648220986E810045B9CA /* F4SRequestCompanyDocumentTableViewCell.swift */; };
-		FCB46F00204E7DCC00F0779F /* F4SDebugModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46EFF204E7DCC00F0779F /* F4SDebugModel.swift */; };
 		FCB46F02204FD86D00F0779F /* F4SLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46F01204FD86D00F0779F /* F4SLogViewController.swift */; };
 		FCB46F042051365400F0779F /* F4SFeatureSwitchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46F032051365400F0779F /* F4SFeatureSwitchesViewController.swift */; };
 		FCB46F0820513D0100F0779F /* F4SFeatureSwitchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46F0720513D0100F0779F /* F4SFeatureSwitchModel.swift */; };
@@ -527,6 +528,7 @@
 		FC860D81209C37F2007945E6 /* MessageDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDispatcher.swift; sourceTree = "<group>"; };
 		FC86A5FA20B44E6B002BAD74 /* F4SUrlDescriptorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUrlDescriptorTableViewCell.swift; sourceTree = "<group>"; };
 		FC86A5FC20B6E93B002BAD74 /* F4SUploadRequestedDocumentsTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUploadRequestedDocumentsTableViewModel.swift; sourceTree = "<group>"; };
+		FC8E303920F4A60B006059DE /* F4SLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SLogger.swift; sourceTree = "<group>"; };
 		FC92567A1F8F70D100FF9841 /* InterestsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsModel.swift; sourceTree = "<group>"; };
 		FC99B7E21F826D1400E2D5F0 /* LatLon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatLon.swift; sourceTree = "<group>"; };
 		FC99BDC420CFAFD400278DDE /* F4SRemoveShortlistItemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRemoveShortlistItemService.swift; sourceTree = "<group>"; };
@@ -536,6 +538,7 @@
 		FC99F3D31FFE533000E3AC5A /* F4SRecommendationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRecommendationService.swift; sourceTree = "<group>"; };
 		FC99F3D62000BE4900E3AC5A /* F4SService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SService.swift; sourceTree = "<group>"; };
 		FC9BEE072015FF6000347437 /* UniversalLinkParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalLinkParser.swift; sourceTree = "<group>"; };
+		FC9FECB620F4C52800450B46 /* F4SPlacementModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementModelsTests.swift; sourceTree = "<group>"; };
 		FCA24C101F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkAvailabilityWindow.swift; sourceTree = "<group>"; };
 		FCA268C91FD1557000537EB1 /* circle.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = circle.yml; sourceTree = "<group>"; };
 		FCA333A420BEA938002AA790 /* F4SMessagesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SMessagesModel.swift; sourceTree = "<group>"; };
@@ -550,7 +553,6 @@
 		FCB0D18F20F39E95005D8729 /* F4SCoreWorkfinder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = F4SCoreWorkfinder.xcodeproj; path = F4SCoreWorkfinder/F4SCoreWorkfinder.xcodeproj; sourceTree = "<group>"; };
 		FCB16480209765BB0045B9CA /* F4SRequestCompanyDocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRequestCompanyDocumentViewController.swift; sourceTree = "<group>"; };
 		FCB1648220986E810045B9CA /* F4SRequestCompanyDocumentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRequestCompanyDocumentTableViewCell.swift; sourceTree = "<group>"; };
-		FCB46EFF204E7DCC00F0779F /* F4SDebugModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDebugModel.swift; sourceTree = "<group>"; };
 		FCB46F01204FD86D00F0779F /* F4SLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SLogViewController.swift; sourceTree = "<group>"; };
 		FCB46F032051365400F0779F /* F4SFeatureSwitchesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SFeatureSwitchesViewController.swift; sourceTree = "<group>"; };
 		FCB46F0720513D0100F0779F /* F4SFeatureSwitchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SFeatureSwitchModel.swift; sourceTree = "<group>"; };
@@ -828,6 +830,7 @@
 		40E78E151DD31A86000A3776 /* f4s-workexperience */ = {
 			isa = PBXGroup;
 			children = (
+				FC8E303620F4A5DF006059DE /* F4SLogger */,
 				40E78E4D1DD3289B000A3776 /* F4S models and services */,
 				FCA6D2921FA740EC0037962B /* Branding and styling */,
 				40E78E481DD32848000A3776 /* AppDelegate */,
@@ -1277,7 +1280,6 @@
 			isa = PBXGroup;
 			children = (
 				FC31F096204D54E3009DD526 /* Debug.storyboard */,
-				FCB46EFF204E7DCC00F0779F /* F4SDebugModel.swift */,
 				FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */,
 				FCB46F01204FD86D00F0779F /* F4SLogViewController.swift */,
 				FCB46F032051365400F0779F /* F4SFeatureSwitchesViewController.swift */,
@@ -1352,6 +1354,7 @@
 			children = (
 				FCF06EE420DBFE1B00FD990C /* F4SPlacementService.swift */,
 				FCF06EE620DBFEC100FD990C /* F4SPlacementModels.swift */,
+				FC9FECB620F4C52800450B46 /* F4SPlacementModelsTests.swift */,
 			);
 			name = "F4SPlacement models and services";
 			sourceTree = "<group>";
@@ -1499,6 +1502,14 @@
 				FC631CB720D679AC00199507 /* F4SNetworkSessionManager.swift */,
 			);
 			path = F4SApiServices;
+			sourceTree = "<group>";
+		};
+		FC8E303620F4A5DF006059DE /* F4SLogger */ = {
+			isa = PBXGroup;
+			children = (
+				FC8E303920F4A60B006059DE /* F4SLogger.swift */,
+			);
+			path = F4SLogger;
 			sourceTree = "<group>";
 		};
 		FC99BDC620CFD2C300278DDE /* Coredata services */ = {
@@ -1850,6 +1861,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-f4s-workexperience/Pods-f4s-workexperience-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Analytics/Analytics.framework",
 				"${BUILT_PRODUCTS_DIR}/Auth0/Auth0.framework",
+				"${BUILT_PRODUCTS_DIR}/Bugsnag/Bugsnag.framework",
 				"${BUILT_PRODUCTS_DIR}/GRMustache.swift/Mustache.framework",
 				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
@@ -1857,6 +1869,7 @@
 				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
+				"${BUILT_PRODUCTS_DIR}/Segment-Bugsnag/Segment_Bugsnag.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework",
 				"${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework",
 			);
@@ -1864,6 +1877,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Analytics.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Auth0.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bugsnag.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mustache.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
@@ -1871,6 +1885,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Segment_Bugsnag.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleKeychain.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
 			);
@@ -2032,7 +2047,6 @@
 				FCA24C111F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift in Sources */,
 				FCB46F0820513D0100F0779F /* F4SFeatureSwitchModel.swift in Sources */,
 				2037B0A71DEC3C3B00A9DE3E /* InterestCoreDataManager.swift in Sources */,
-				FCB46F00204E7DCC00F0779F /* F4SDebugModel.swift in Sources */,
 				204C89551DF5A36100D8493A /* TemplateChoiceDB.swift in Sources */,
 				204C89781DF5F0B200D8493A /* ChooseAttributesTableViewCell.swift in Sources */,
 				FCB6B8E92074C59C0042C725 /* F4SCalendarDay.swift in Sources */,
@@ -2125,6 +2139,7 @@
 				40E78E711DD32BD4000A3776 /* SideMenuViewController.swift in Sources */,
 				FC11006A1FB36A230055EB9A /* ReachabilityExtension.swift in Sources */,
 				204203F91E4B81AB007C7409 /* FavouriteTableViewCell.swift in Sources */,
+				FC8E303A20F4A60B006059DE /* F4SLogger.swift in Sources */,
 				FC31F095204D54C6009DD526 /* F4SDebugViewController.swift in Sources */,
 				FCB6B8E32074C59C0042C725 /* F4SMonthHeaderView.swift in Sources */,
 				FC67E60A207B70CE006F07FE /* F4SCalendarService.swift in Sources */,
@@ -2162,6 +2177,7 @@
 				FC62FF9B20EF7728003E52C5 /* F4SCalendarMonthTests.swift in Sources */,
 				FC1D6B8020D92C8900D0C9AF /* F4STemplateModelTests.swift in Sources */,
 				FC6C11C2202C4EE5002C8EA5 /* F4STemplateHelperTests.swift in Sources */,
+				FC9FECBA20F4C55800450B46 /* F4SPlacementModelsTests.swift in Sources */,
 				FC59B1911F81549B0068EC9C /* F4SQuadtreeTests.swift in Sources */,
 				FC62FF9D20EF773E003E52C5 /* F4SDisplayableMonthTests.swift in Sources */,
 				FC6A555420EF988D00D08662 /* F4SJsonDecodingTests.swift in Sources */,

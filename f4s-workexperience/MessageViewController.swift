@@ -72,7 +72,9 @@ extension MessageViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if self.messageList.count > indexPath.row && self.messageList[indexPath.row].sender.isEmpty {
+        let sender = self.messageList[indexPath.row].sender
+        let senderIsMissingOrEmpty = sender == nil ? true : sender!.isEmpty ? true : false
+        if self.messageList.count > indexPath.row && senderIsMissingOrEmpty {
             guard let statusCell = collectionView.dequeueReusableCell(withReuseIdentifier: StatusCollectionViewCellIdentifier, for: indexPath) as? StatusCollectionViewCell else {
                 return UICollectionViewCell()
             }
