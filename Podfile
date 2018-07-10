@@ -16,6 +16,7 @@ target 'f4s-workexperience' do
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   pod 'Analytics'
+  pod 'Segment-Bugsnag'
   
 end
   

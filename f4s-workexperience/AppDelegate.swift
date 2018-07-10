@@ -14,6 +14,7 @@ import GooglePlaces
 import KeychainSwift
 import UserNotifications
 import Analytics
+import Segment_Bugsnag
 
 let log = XCGLogger.default
 
@@ -40,16 +41,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Exiting didFinishLaunchingWithOptions early because `isUnitTesting` argument is set")
             return true
         }
-        do {
-            let f4sDebug = try F4SDebug()
-            F4SDebug.shared = f4sDebug
-        } catch (let error) {
-            assertionFailure("Failed to initialize logger: \(error)")
-        }
+        f4sLog = F4SLog()
+
         log.debug("\n\n\n**************\nWorkfinder launched in environement \(Config.ENVIRONMENT)\n**************")
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
-        setupAnalytics()
+        
         registerUser(application: application)
         return true
     }
@@ -86,7 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
-        F4SDebug.shared?.updateHistory()
+        debug?.updateHistory()
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -314,22 +311,6 @@ extension AppDelegate {
                 userInfo: userInfo)
             NotificationCenter.default.post(notification)
         }
-    }
-}
-
-extension AppDelegate {
-    func setupAnalytics() {
-        let writeKey: String
-        switch Config.environment {
-        case .staging:
-            writeKey = "i6ZAvwf9RlqSzghak9Sg03MXyVeXo3kZ"
-        case .production:
-            writeKey = "G5DSK58YEvZDJx3KrnNAWvNg5xb5Uy51"
-        }
-        let config = SEGAnalyticsConfiguration(writeKey: writeKey)
-        config.trackApplicationLifecycleEvents = true
-        config.recordScreenViews = true
-        SEGAnalytics.setup(with: config)
     }
 }
 
