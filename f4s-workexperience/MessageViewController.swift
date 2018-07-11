@@ -90,11 +90,11 @@ extension MessageViewController {
         switch chatMessages[indexPath.row].senderId
         {
         case self.currentUserUuid:
-            cell.textView?.textColor = UIColor(netHex: Colors.white)
-            cell.textView?.linkTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: UIColor(netHex: Colors.white), NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue]
+            cell.textView?.textColor = UIColor(netHex: Colors.messageOutgoingText)
+            cell.textView?.linkTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: UIColor(netHex: Colors.messageOutgoingLink), NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue]
         default:
-            cell.textView?.textColor = UIColor(netHex: Colors.black)
-            cell.textView?.linkTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: UIColor(netHex: Colors.black), NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue]
+            cell.textView?.textColor = UIColor(netHex: Colors.messageIncomingText)
+            cell.textView?.linkTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: UIColor(netHex: Colors.messageIncomingLink), NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue]
         }
         cell.textView?.font = UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular)
 

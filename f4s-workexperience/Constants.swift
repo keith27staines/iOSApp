@@ -31,7 +31,11 @@ struct Colors {
     static let whiteGreen = 0xB2D9B6
     static let lightGreen = 0x45C658
     static let messageIncoming = 0xEAEAEA
-    static let messageOutgoing = 0x40AF50
+    static let messageOutgoing = 0xE1FFC7 // 0x40AF50
+    static let messageOutgoingText = 0x000000
+    static let messageIncomingText = 0x000000
+    static let messageIncomingLink = 0x4A90E2
+    static let messageOutgoingLink = 0x4A90E2
 }
 
 struct Style {
