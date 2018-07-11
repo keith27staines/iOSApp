@@ -39,6 +39,7 @@ class MessageViewController: JSQMessagesViewController {
         if let userUuid = keychain.get(UserDefaultsKeys.userUuid) {
             self.currentUserUuid = userUuid
         }
+        self.senderId = currentUserUuid
         self.messageDateTimeFormatter.dateFormat = "dd MMM yyyy HH:mm"
     }
 }
