@@ -243,7 +243,7 @@ extension AppDelegate {
                         keychain.set(anonymousUserUuid!, forKey: UserDefaultsKeys.userUuid)
                         SEGAnalytics.shared().identify(anonymousUserUuid!)
                     } else {
-                        log.debug("Using user id from keychain")
+                        log.debug("Using user id from keychain \(currentUserUuid!)")
                     }
                     strongSelf.onUserAccountConfirmedToExist(application: application)
                 }

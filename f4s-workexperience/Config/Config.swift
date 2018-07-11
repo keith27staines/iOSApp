@@ -59,10 +59,14 @@ struct Config {
     }
     
     static var apns: String {
-        #if DEBUG
-            return "sandbox"
-        #else
+        if ENVIRONMENT == "STAGING" {
+            #if DEBUG
+                return "sandbox"
+            #else
+                return "production"
+            #endif
+        } else {
             return "production"
-        #endif
+        }
     }
 }
