@@ -9,6 +9,7 @@
 import Foundation
 import Analytics
 import Segment_Bugsnag
+import Bugsnag
 
 public protocol F4SAnalyticsAndDebugging : F4SAnalytics & F4SDebugging {}
 
@@ -18,7 +19,8 @@ public protocol F4SAnalytics {
 }
 
 public protocol F4SDebugging {
-    func log()
+    func notifyError(_ error: Error)
+    func leaveBreadcrumb(with message: String)
     func updateHistory()
     func textCombiningHistoryAndSessionLog() -> String?
     func userCanAccessDebugMenu() -> Bool
@@ -75,9 +77,14 @@ extension F4SLog : F4SAnalytics {
 }
 
 extension F4SLog : F4SDebugging {
-    public func log() {
-        
+    public func notifyError(_ error: Error) {
+        Bugsnag.notifyError(error)
     }
+    
+    public func leaveBreadcrumb(with message: String) {
+        Bugsnag.leaveBreadcrumb(withMessage: message)
+    }
+    
     public func updateHistory() {
         f4sDebug?.updateHistory()
     }
