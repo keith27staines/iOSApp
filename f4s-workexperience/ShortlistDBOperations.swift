@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import KeychainSwift
 
 class ShortlistDBOperations {
     class var sharedInstance: ShortlistDBOperations {
@@ -18,15 +17,13 @@ class ShortlistDBOperations {
     }
 
     func saveShortlist(shortlist: Shortlist) {
-        let keychain = KeychainSwift()
-        if let userUuid = keychain.get(UserDefaultsKeys.userUuid) {
+        if let userUuid = F4SUser.userUuidFromKeychain {
             ShortlistCoreDataManager.sharedInstance.saveShortlistToContext(shortlist, userUuid: userUuid)
         }
     }
 
     func getShortlistForCurrentUser() -> [Shortlist] {
-        let keychain = KeychainSwift()
-        guard let userUuid = keychain.get(UserDefaultsKeys.userUuid) else {
+        guard let userUuid = F4SUser.userUuidFromKeychain else {
             return []
         }
         let shortlistDBData = ShortlistCoreDataManager.sharedInstance.getShortlistForUser(userUuid: userUuid)
@@ -39,8 +36,7 @@ class ShortlistDBOperations {
     }
 
     func removeShortlistWithId(shortlistUuid: String) {
-        let keychain = KeychainSwift()
-        guard let userUuid = keychain.get(UserDefaultsKeys.userUuid) else {
+        guard let userUuid = F4SUser.userUuidFromKeychain else {
             return
         }
         ShortlistCoreDataManager.sharedInstance.removeShortlistWithId(shortlistUuid: shortlistUuid, userUuid: userUuid)

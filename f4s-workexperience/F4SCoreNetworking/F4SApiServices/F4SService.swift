@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import KeychainSwift
 
 public enum F4SHttpRequestVerb {
     case get
@@ -206,8 +205,7 @@ extension F4SDataTaskService {
     /// Returns a dictionary of headers configured for use with the workfinder api
     public static var defaultHeaders : [String:String] {
         var header: [String : String] = ["wex.api.key": ApiConstants.apiKey]
-        let keychain = KeychainSwift()
-        if let userUuid = keychain.get(UserDefaultsKeys.userUuid) {
+        if let userUuid = F4SUser.userUuidFromKeychain {
             header["wex.user.uuid"] = userUuid
         }
         return header

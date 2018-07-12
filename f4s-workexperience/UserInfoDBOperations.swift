@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import KeychainSwift
 
 class UserInfoDBOperations {
     class var sharedInstance: UserInfoDBOperations {
@@ -18,16 +17,14 @@ class UserInfoDBOperations {
     }
 
     func saveUserInfo(userInfo: F4SUser) {
-        let keychain = KeychainSwift()
-        guard let userUuid = keychain.get(UserDefaultsKeys.userUuid) else {
+        guard let userUuid = F4SUser.userUuidFromKeychain else {
             return
         }
         UserInfoCoreDataManager.sharedInstance.saveUserInfoToContext(userInfo, userUuid: userUuid)
     }
 
     func getUserInfo() -> F4SUser? {
-        let keychain = KeychainSwift()
-        guard let userUuid = keychain.get(UserDefaultsKeys.userUuid),
+        guard let userUuid = F4SUser.userUuidFromKeychain,
             let userInfoDB = UserInfoCoreDataManager.sharedInstance.getUserInfo(userUuid: userUuid) else {
             return nil
         }

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import KeychainSwift
 
 public protocol F4SUserServiceProtocol {
     var vendorID: String { get }

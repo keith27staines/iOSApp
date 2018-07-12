@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import KeychainSwift
 
 class PlacementDBOperations {
     class var sharedInstance: PlacementDBOperations {
@@ -18,16 +17,14 @@ class PlacementDBOperations {
     }
 
     func savePlacement(placement: F4SPlacement) {
-        let keychain = KeychainSwift()
-        guard let userUuid = keychain.get(UserDefaultsKeys.userUuid) else {
+        guard let userUuid = F4SUser.userUuidFromKeychain else {
             return
         }
         PlacementCoreDataManager.sharedInstance.savePlacementToContext(placement, userUuid: userUuid)
     }
 
     func getPlacementsForCurrentUser() -> [F4SPlacement] {
-        let keychain = KeychainSwift()
-        guard let userUuid = keychain.get(UserDefaultsKeys.userUuid) else {
+        guard let userUuid = F4SUser.userUuidFromKeychain else {
             return []
         }
         let placementDBData = PlacementCoreDataManager.sharedInstance.getPlacementsForUser(userUuid: userUuid)
@@ -40,8 +37,7 @@ class PlacementDBOperations {
     }
 
     func getPlacementsForCurrentUserAndCompany(companyUuid: String) -> F4SPlacement? {
-        let keychain = KeychainSwift()
-        guard let userUuid = keychain.get(UserDefaultsKeys.userUuid),
+        guard let userUuid = F4SUser.userUuidFromKeychain,
             let placementDB = PlacementCoreDataManager.sharedInstance.getPlacementsForUserAndCompany(userUuid: userUuid, companyUuid: companyUuid) else {
             return nil
         }
@@ -59,8 +55,7 @@ class PlacementDBOperations {
     }
 
     func getInProgressPlacementsForCurrentUser() -> F4SPlacement? {
-        let keychain = KeychainSwift()
-        guard let userUuid = keychain.get(UserDefaultsKeys.userUuid),
+        guard let userUuid = F4SUser.userUuidFromKeychain,
             let placementDB = PlacementCoreDataManager.sharedInstance.getInProgressPlacementsForUser(userUuid: userUuid) else {
             return nil
         }
@@ -68,15 +63,13 @@ class PlacementDBOperations {
     }
 
     func removePlacementWithId(placementUuid: String) {
-        let keychain = KeychainSwift()
-        if let userUuid = keychain.get(UserDefaultsKeys.userUuid) {
+        if let userUuid = F4SUser.userUuidFromKeychain {
             PlacementCoreDataManager.sharedInstance.removePlacementWithId(placementUuid: placementUuid, userUuid: userUuid)
         }
     }
 
     func getPlacementWithUuid(placementUuid: String) -> F4SPlacement? {
-        let keychain = KeychainSwift()
-        guard let userUuid = keychain.get(UserDefaultsKeys.userUuid),
+        guard let userUuid = F4SUser.userUuidFromKeychain,
             let placementDB = PlacementCoreDataManager.sharedInstance.getPlacementForUserAndPlacementUuid(userUuid: userUuid, placementUuid: placementUuid) else {
             return nil
         }

@@ -122,6 +122,10 @@ public struct F4SUser : Codable {
     
     public mutating func updateUuidAndPersistToLocalStorage(uuid: F4SUUID) {
         self.uuid = uuid
+        F4SUser.setUserUuid(uuid)
+    }
+    
+    public static func setUserUuid(_ uuid: F4SUUID) {
         if uuid != F4SUser.userUuidFromKeychain {
             let keychain = KeychainSwift()
             keychain.set(uuid, forKey: UserDefaultsKeys.userUuid)
