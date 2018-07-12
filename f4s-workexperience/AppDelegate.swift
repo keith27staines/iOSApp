@@ -11,7 +11,6 @@ import CoreData
 import XCGLogger
 import GoogleMaps
 import GooglePlaces
-import KeychainSwift
 import UserNotifications
 import Analytics
 import Segment_Bugsnag
@@ -225,7 +224,7 @@ extension AppDelegate {
                 switch result {
                 case .error(let error):
                     print(error)
-                    if strongSelf.userService.hasAccount() {
+                    if F4SUser.userHasUuid {
                         // couldn't register user but user has registered before so ok to continue
                         strongSelf.onUserAccountConfirmedToExist(application: application)
                     } else {
@@ -235,12 +234,11 @@ extension AppDelegate {
                         })
                     }
                 case .success(let result):
-                    let keychain = KeychainSwift()
-                    let currentUserUuid = keychain.get(UserDefaultsKeys.userUuid)
+                    let currentUserUuid = F4SUser.userUuidFromKeychain
                     let anonymousUserUuid = result.uuid
                     if currentUserUuid == nil && anonymousUserUuid != nil {
                         log.debug("Using anonymous user id")
-                        keychain.set(anonymousUserUuid!, forKey: UserDefaultsKeys.userUuid)
+                        F4SUser.setUserUuid(anonymousUserUuid!)
                         SEGAnalytics.shared().identify(anonymousUserUuid!)
                     } else {
                         log.debug("Using user id from keychain \(currentUserUuid!)")
@@ -253,8 +251,8 @@ extension AppDelegate {
     
     func onUserAccountConfirmedToExist(application: UIApplication) {
         printDebugUserInfo()
-        let userId = F4SUser.userUuidFromKeychain()
-        SEGAnalytics.shared().identify(userId!)
+        let userId = F4SUser.userUuidFromKeychain!
+        SEGAnalytics.shared().identify(userId)
         _ = F4SNetworkSessionManager.shared
         F4SUserStatusService.shared.beginStatusUpdate()
         if databaseDownloadManager == nil {
@@ -287,9 +285,7 @@ extension AppDelegate {
     func printDebugUserInfo() {
         log.debug("***************")
         log.debug("Vendor id = \(UIDevice.current.identifierForVendor!)")
-        let userIdKey = UserDefaultsKeys.userUuid
-        let k = KeychainSwift()
-        let userID = k.get(userIdKey)!
+        let userID = F4SUser.userUuidFromKeychain ?? "nil user"
         log.debug("User id = \(userID)")
         log.debug("***************")
     }

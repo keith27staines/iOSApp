@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import KeychainSwift
 
 public typealias F4SVersionValidity = Bool
 

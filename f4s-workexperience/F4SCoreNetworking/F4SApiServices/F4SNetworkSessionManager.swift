@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import KeychainSwift
 
 public class F4SNetworkSessionManager {
     
@@ -43,8 +42,7 @@ public class F4SNetworkSessionManager {
     // MARK:- Internal properties
     internal lazy var defaultHeaders : [String:String] = {
         var header: [String : String] = ["wex.api.key": ApiConstants.apiKey]
-        let keychain = KeychainSwift()
-        if let userUuid = keychain.get(UserDefaultsKeys.userUuid) {
+        if let userUuid = F4SUser.userUuidFromKeychain {
             header["wex.user.uuid"] = userUuid
         } else {
             log.debug("Default headers called but user.uuid is not available")

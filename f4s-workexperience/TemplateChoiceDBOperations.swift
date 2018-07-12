@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import KeychainSwift
 
 class TemplateChoiceDBOperations {
     class var sharedInstance: TemplateChoiceDBOperations {
@@ -18,16 +17,14 @@ class TemplateChoiceDBOperations {
     }
 
     func saveTemplateChoice(name: String, choiceList: [String]) {
-        let keychain = KeychainSwift()
-        guard let userUuid = keychain.get(UserDefaultsKeys.userUuid) else {
+        guard let userUuid = F4SUser.userUuidFromKeychain else {
             return
         }
         TemplateChoiceCoreDataManager.sharedInstance.saveTemplateChoiceToContext(name: name, userUuid: userUuid, choiceList: choiceList)
     }
 
     func getSelectedTemplateBlanks() -> [F4STemplateBlank] {
-        let keychain = KeychainSwift()
-        guard let userUuid = keychain.get(UserDefaultsKeys.userUuid) else {
+        guard let userUuid = F4SUser.userUuidFromKeychain else {
             return []
         }
         let templateChoiceDBData = TemplateChoiceCoreDataManager.sharedInstance.getTemplateChoicesForUser(userUuid: userUuid)
@@ -40,8 +37,7 @@ class TemplateChoiceDBOperations {
     }
 
     func getTemplateChoicesForCurrentUserWithName(name: String) -> F4STemplateBlank {
-        let keychain = KeychainSwift()
-        guard let userUuid = keychain.get(UserDefaultsKeys.userUuid),
+        guard let userUuid = F4SUser.userUuidFromKeychain,
             let templateChoiceDBData = TemplateChoiceCoreDataManager.sharedInstance.getTemplateChoicesForUserWithName(userUuid: userUuid, name: name) else {
             return F4STemplateBlank()
         }
@@ -59,8 +55,7 @@ class TemplateChoiceDBOperations {
     }
 
     func removeTemplateWithName(name: String) {
-        let keychain = KeychainSwift()
-        guard let userUuid = keychain.get(UserDefaultsKeys.userUuid) else {
+        guard let userUuid = F4SUser.userUuidFromKeychain else {
             return
         }
         TemplateChoiceCoreDataManager.sharedInstance.removeTemplateChoiceWithName(name: name, userUuid: userUuid)

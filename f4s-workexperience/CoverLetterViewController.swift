@@ -449,7 +449,7 @@ extension CoverLetterViewController {
         MessageHandler.sharedInstance.showLoadingOverlay(self.view)
         let templateToUpdate = F4STemplate(uuid: currentTemplateUuid, blanks: self.selectedTemplateChoices)
         placement.companyUuid = applicationContext.company?.uuid
-        placement.userUuid = F4SUser.userUuidFromKeychain()
+        placement.userUuid = F4SUser.userUuidFromKeychain
         placement.interestList = [F4SInterest](InterestDBOperations.sharedInstance.interestsForCurrentUser())
         placementService.updatePlacement(placement: placement, template: templateToUpdate) { [weak self] (result) in
             guard let strongSelf = self else {

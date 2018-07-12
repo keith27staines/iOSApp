@@ -260,7 +260,7 @@ extension CompanyDetailsViewController {
             }
             MessageHandler.sharedInstance.showLoadingOverlay(self.view)
             var placement = F4SPlacement(
-                userUuid: F4SUser.userUuidFromKeychain(),
+                userUuid: F4SUser.userUuidFromKeychain,
                 companyUuid: company.uuid,
                 interestList: [])
             placementService.createPlacement(placement: placement) { (result) in

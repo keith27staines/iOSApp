@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import JSQMessagesViewController
-import KeychainSwift
 import Reachability
 
 class MessageViewController: JSQMessagesViewController {
@@ -35,8 +34,7 @@ class MessageViewController: JSQMessagesViewController {
         self.collectionView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         self.view.layoutIfNeeded()
 
-        let keychain = KeychainSwift()
-        if let userUuid = keychain.get(UserDefaultsKeys.userUuid) {
+        if let userUuid = F4SUser.userUuidFromKeychain {
             self.currentUserUuid = userUuid
         }
         self.senderId = currentUserUuid

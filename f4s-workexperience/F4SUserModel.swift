@@ -122,14 +122,25 @@ public struct F4SUser : Codable {
     
     public mutating func updateUuidAndPersistToLocalStorage(uuid: F4SUUID) {
         self.uuid = uuid
-        if uuid != F4SUser.userUuidFromKeychain() {
+        F4SUser.setUserUuid(uuid)
+    }
+    
+    public static func setUserUuid(_ uuid: F4SUUID) {
+        if uuid != F4SUser.userUuidFromKeychain {
             let keychain = KeychainSwift()
             keychain.set(uuid, forKey: UserDefaultsKeys.userUuid)
             SEGAnalytics.shared().alias(uuid)
         }
     }
     
-    public static func userUuidFromKeychain() -> F4SUUID? {
+    public static var userHasUuid: Bool {
+        guard let uuid = userUuidFromKeychain else {
+            return false
+        }
+        return !uuid.isEmpty
+    }
+    
+    public static var userUuidFromKeychain: F4SUUID? {
         let keychain = KeychainSwift()
         return keychain.get(UserDefaultsKeys.userUuid)
     }

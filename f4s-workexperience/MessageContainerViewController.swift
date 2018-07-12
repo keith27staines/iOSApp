@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import Reachability
-import KeychainSwift
 
 class MessageContainerViewController: UIViewController {
     
@@ -44,8 +43,7 @@ class MessageContainerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let keychain = KeychainSwift()
-        if let userUuid = keychain.get(UserDefaultsKeys.userUuid) {
+        if let userUuid = F4SUser.userUuidFromKeychain {
             self.currentUserUuid = userUuid
         }
         actionButtonHeightConstraint.constant = 0.0
