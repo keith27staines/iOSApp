@@ -86,7 +86,7 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
         var coverletterJson = CoverLetterJson()
         coverletterJson.placementUuid = placement.placementUuid
         coverletterJson.templateUuid = template.uuid
-        coverletterJson.userUuid = F4SUser.userUuidFromKeychain()
+        coverletterJson.userUuid = F4SUser.userUuidFromKeychain
         coverletterJson.companyUuid =  placement.companyUuid
         coverletterJson.interests = placement.interestList.map { (interest) -> F4SUUID in
             return interest.uuid

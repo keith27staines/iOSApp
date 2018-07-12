@@ -11,7 +11,6 @@ import KeychainSwift
 
 public protocol F4SUserServiceProtocol {
     var vendorID: String { get }
-    func hasAccount() -> Bool
     func registerAnonymousUserOnServer(completion: @escaping (F4SNetworkResult<F4SRegisterResult>) -> ())
     func updateUser(user: F4SUser, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ())
     func enablePushNotificationForUser(withDeviceToken: String, completion: @escaping (_ result: F4SNetworkResult<F4SPushNotificationStatus>) -> ())
@@ -22,10 +21,6 @@ public class F4SUserService : F4SUserServiceProtocol {
     public static var vendorID: String { return UIDevice.current.identifierForVendor!.uuidString }
     public var vendorID: String { return F4SUserService.vendorID }
     
-    public func hasAccount() -> Bool {
-        return UserDefaults.standard.object(forKey: UserDefaultsKeys.userHasAccount) != nil && UserDefaults.standard.bool(forKey: UserDefaultsKeys.userHasAccount)
-    }
-    
     lazy var dobFormatter: DateFormatter = {
         let df = DateFormatter()
         df.dateFormat = "yyyy'-'MM'-'dd"
@@ -34,9 +29,8 @@ public class F4SUserService : F4SUserServiceProtocol {
     
     public func updateUser(user: F4SUser, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ()) {
         let attempting = "Update user"
-        let keychain = KeychainSwift()
         var currentUserUuid: String = ""
-        if let userUuid = keychain.get(UserDefaultsKeys.userUuid) {
+        if let userUuid = F4SUser.userUuidFromKeychain {
             currentUserUuid = userUuid
         }
         

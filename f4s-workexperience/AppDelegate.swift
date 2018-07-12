@@ -225,7 +225,7 @@ extension AppDelegate {
                 switch result {
                 case .error(let error):
                     print(error)
-                    if strongSelf.userService.hasAccount() {
+                    if F4SUser.userHasUuid {
                         // couldn't register user but user has registered before so ok to continue
                         strongSelf.onUserAccountConfirmedToExist(application: application)
                     } else {
@@ -253,7 +253,7 @@ extension AppDelegate {
     
     func onUserAccountConfirmedToExist(application: UIApplication) {
         printDebugUserInfo()
-        let userId = F4SUser.userUuidFromKeychain()
+        let userId = F4SUser.userUuidFromKeychain
         SEGAnalytics.shared().identify(userId!)
         _ = F4SNetworkSessionManager.shared
         F4SUserStatusService.shared.beginStatusUpdate()
