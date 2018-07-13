@@ -40,7 +40,7 @@ public class F4SNetworkSessionManager {
     }
     
     // MARK:- Internal properties
-    internal lazy var defaultHeaders : [String:String] = {
+    internal var defaultHeaders : [String:String] {
         var header: [String : String] = ["wex.api.key": ApiConstants.apiKey]
         if let userUuid = F4SUser.userUuidFromKeychain {
             header["wex.user.uuid"] = userUuid
@@ -49,7 +49,7 @@ public class F4SNetworkSessionManager {
             assertionFailure("This method should only be called if a userUuid exists")
         }
         return header
-    }()
+    }
     
     public func rebuildSessions() {
         _interactiveSession = nil

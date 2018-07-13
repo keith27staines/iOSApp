@@ -41,12 +41,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         f4sLog = F4SLog()
-
-        log.debug("\n\n\n**************\nWorkfinder launched in environement \(Config.ENVIRONMENT)\n**************")
+        log.debug("\n\n\n********\nWorkfinder launched in environement \(Config.ENVIRONMENT)\n********")
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
-        
-        registerUser(application: application)
+        if let userUuid = F4SUser.userUuidFromKeychain  {
+            // Existing user
+            log.debug("\nUsing existing user uuid from keychain")
+            onUserConfirmedToHaveUuid(application: application, userUuid: userUuid)
+        } else {
+            // New user
+            log.debug("\nRegistering new user to obtain anonymous uuid")
+            registerNewUser(application: application, completion: { [weak self] userUuid in
+                self?.onUserConfirmedToHaveUuid(application: application, userUuid: userUuid)
+            })
+        }
         return true
     }
     
@@ -217,42 +225,35 @@ extension AppDelegate {
         rootVC?.present(alert, animated: true, completion: nil)
     }
     
-    func registerUser(application: UIApplication) {
+    func registerNewUser(application: UIApplication, completion: @escaping (F4SUUID)->()) {
         userService.registerAnonymousUserOnServer { [weak self] (result) in
             DispatchQueue.main.async {
                 guard let strongSelf = self else { return }
                 switch result {
                 case .error(let error):
-                    print(error)
-                    if F4SUser.userHasUuid {
-                        // couldn't register user but user has registered before so ok to continue
-                        strongSelf.onUserAccountConfirmedToExist(application: application)
-                    } else {
-                        log.debug("Couldn't register user, offering retry")
-                        strongSelf.presentNoNetworkMustRetry(application: application, retryOperation: { [weak self] (application) in
-                            self?.registerUser(application: application)
-                        })
-                    }
+                    log.debug("Couldn't register user, offering retry \(error)")
+                    strongSelf.presentNoNetworkMustRetry(application: application, retryOperation: { [weak self] (application) in
+                        self?.registerNewUser(application: application, completion: completion)
+                    })
                 case .success(let result):
-                    let currentUserUuid = F4SUser.userUuidFromKeychain
-                    let anonymousUserUuid = result.uuid
-                    if currentUserUuid == nil && anonymousUserUuid != nil {
-                        log.debug("Using anonymous user id")
-                        F4SUser.setUserUuid(anonymousUserUuid!)
-                        SEGAnalytics.shared().identify(anonymousUserUuid!)
-                    } else {
-                        log.debug("Using user id from keychain \(currentUserUuid!)")
+                    guard let anonymousUserUuid = result.uuid else {
+                        log.severe("anonyous user uuid is nil")
+                        return
                     }
-                    strongSelf.onUserAccountConfirmedToExist(application: application)
+                    log.debug("Using anonymous user id \(anonymousUserUuid)")
+                    SEGAnalytics.shared().identify(anonymousUserUuid)
+                    completion(anonymousUserUuid)
                 }
             }
         }
     }
     
-    func onUserAccountConfirmedToExist(application: UIApplication) {
+    func onUserConfirmedToHaveUuid(application: UIApplication, userUuid: F4SUUID) {
+        if userUuid != F4SUser.userUuidFromKeychain {
+            F4SUser.setUserUuid(userUuid)
+        }
         printDebugUserInfo()
-        let userId = F4SUser.userUuidFromKeychain!
-        SEGAnalytics.shared().identify(userId)
+        SEGAnalytics.shared().identify(userUuid)
         _ = F4SNetworkSessionManager.shared
         F4SUserStatusService.shared.beginStatusUpdate()
         if databaseDownloadManager == nil {
@@ -263,8 +264,10 @@ extension AppDelegate {
         let isFirstLaunch = UserDefaults.standard.value(forKey: UserDefaultsKeys.isFirstLaunch) as? Bool ?? true
         if isFirstLaunch {
             guard let ctrl = window?.rootViewController?.topMostViewController as? OnboardingViewController else {
+                assertionFailure("The root view controller is not an OnboardingViewController")
                 return
             }
+            _ = ctrl.view
             ctrl.hideOnboardingControls = false
         } else {
             let shouldLoadTimelineValue = UserDefaults.standard.value(forKey: UserDefaultsKeys.shouldLoadTimeline)
@@ -283,11 +286,13 @@ extension AppDelegate {
     }
     
     func printDebugUserInfo() {
-        log.debug("***************")
-        log.debug("Vendor id = \(UIDevice.current.identifierForVendor!)")
-        let userID = F4SUser.userUuidFromKeychain ?? "nil user"
-        log.debug("User id = \(userID)")
-        log.debug("***************")
+        let info = """
+                   ***************
+                   Vendor id = \(UIDevice.current.identifierForVendor?.uuidString ?? "nil")
+                   User id = \(F4SUser.userUuidFromKeychain ?? "nil user")
+                   ***************
+                   """
+        log.debug("\n\(info)")
     }
     
     func setInvokingUrl(_ url: URL) {
