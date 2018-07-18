@@ -1,0 +1,30 @@
+version: 2
+jobs:
+  test:
+    macos:
+      xcode: "9.4.0"
+    steps:
+      - checkout
+      - run: bundle exec fastlane scan --scheme "f4s-f4s_staging"
+    macos:
+      xcode: "9.4.0"
+  deploy:
+    macos:
+      xcode: "9.4.0"
+    steps:
+      - checkout
+      - deploy:
+        name: Deploy
+        command: fastlane release_appstore
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test
+#      - deploy:
+#        requires:
+#          test
+#        filters:
+#        branches:
+#          only: master
