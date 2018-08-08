@@ -15,7 +15,6 @@ class F4SHoorayViewController: UIViewController {
     @IBOutlet weak var hoorayLabel: UILabel!
     @IBOutlet weak var placementConfirmedLabel: UILabel!
     @IBOutlet weak var informationLabel: UILabel!
-
     
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var addToCalendarButton: UIButton!
@@ -30,21 +29,22 @@ class F4SHoorayViewController: UIViewController {
     var startDate: Date?
     var endDate: Date?
     
+    func isEventInformationComplete() -> Bool {
+        guard
+            let startDateString = accept.placement.duration?.start_date,
+            let startDate = F4SDateHelper.yyyyMMDD(string: startDateString),
+            let endDateString = accept.placement.duration?.end_date,
+            let endDate = F4SDateHelper.yyyyMMDD(string: endDateString) else {
+                insufficientDateInformation()
+                return false
+        }
+        self.startDate = startDate
+        self.endDate = endDate
+        return true
+    }
+    
     @IBAction func showCalendarChooser(_ sender: Any) {
-//        guard
-        if let startDateString = accept.placement.duration?.start_date {
-            startDate = F4SDateHelper.yyyyMMDD(string: startDateString)
-        }
-        
-        if let endDateString = accept.placement.duration?.end_date {
-            endDate = F4SDateHelper.yyyyMMDD(string: endDateString)
-        }
-            //else {
-//                insufficientDateInformation()
-//                return
-//        }
-        self.startDate = Date().addingTimeInterval(14*24*3600) // startDate
-        self.endDate = Date().addingTimeInterval(18*24*3600)//endDate
+        guard isEventInformationComplete() else { return }
         addToCalendarButton.isEnabled = false
         checkCalendarAuthorizationStatus(completion: { allowed in
             DispatchQueue.main.async { [weak self] in
@@ -82,6 +82,7 @@ class F4SHoorayViewController: UIViewController {
         F4SButtonStyler.apply(style: .secondary, button: addToCalendarButton)
         hoorayLabel.textColor = WorkfinderColor.purple
         placementConfirmedLabel.textColor = WorkfinderColor.purple
+        addToCalendarButton.isEnabled = isEventInformationComplete()
     }
 }
 
