@@ -27,6 +27,10 @@ public struct F4SActionValidator {
                 let _ = action.argument(name: .documentType) else {
                 throw F4SActionValidatorError.missingArgument
             }
+        case .viewOffer:
+            guard let _ = action.argument(name: .placementUuid) else {
+                    throw F4SActionValidatorError.missingArgument
+            }
         }
     }
     

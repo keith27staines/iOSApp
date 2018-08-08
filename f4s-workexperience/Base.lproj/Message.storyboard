@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sWr-Ud-We1">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,24 +19,24 @@
                         <viewControllerLayoutGuide type="bottom" id="oVP-so-bpy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Grz-P4-uti">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="252-qr-zlJ">
-                                <rect key="frame" x="0.0" y="66" width="600" height="450"/>
+                                <rect key="frame" x="0.0" y="66" width="375" height="517"/>
                                 <connections>
                                     <segue destination="ULJ-o2-xqB" kind="embed" identifier="toMessage" id="eUm-5R-VK8"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aFI-gC-t8a">
-                                <rect key="frame" x="0.0" y="600" width="600" height="0.0"/>
+                                <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="Pzj-va-0tJ"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dzi-VS-viS">
-                                <rect key="frame" x="20" y="528" width="560" height="60"/>
+                                <rect key="frame" x="16" y="595" width="343" height="60"/>
                                 <color key="backgroundColor" red="0.26411449910000001" green="0.155295819" blue="0.47808134559999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="s1a-Vi-YO1"/>
@@ -45,11 +49,18 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="boZ-j2-BHK">
-                                <rect key="frame" x="20" y="40" width="37.5" height="18"/>
+                                <rect key="frame" x="16" y="40" width="37.5" height="18"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hje-gl-8mF">
+                                <rect key="frame" x="296" y="34" width="49" height="30"/>
+                                <state key="normal" title="Accept"/>
+                                <connections>
+                                    <segue destination="SF5-bM-dYU" kind="show" identifier="view_offer" id="A9q-bD-qd8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -57,11 +68,13 @@
                             <constraint firstItem="dzi-VS-viS" firstAttribute="leading" secondItem="Grz-P4-uti" secondAttribute="leadingMargin" id="10H-vi-yJq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="dzi-VS-viS" secondAttribute="trailing" id="1Ck-jt-2Xc"/>
                             <constraint firstItem="dzi-VS-viS" firstAttribute="top" secondItem="252-qr-zlJ" secondAttribute="bottom" constant="12" id="24U-EP-Zd5"/>
+                            <constraint firstItem="Hje-gl-8mF" firstAttribute="baseline" secondItem="boZ-j2-BHK" secondAttribute="baseline" id="7oT-UF-FJI"/>
                             <constraint firstItem="boZ-j2-BHK" firstAttribute="top" secondItem="sdb-jO-yOt" secondAttribute="bottom" constant="20" id="9Ve-n9-aUr"/>
                             <constraint firstItem="aFI-gC-t8a" firstAttribute="top" secondItem="dzi-VS-viS" secondAttribute="bottom" constant="12" id="DL4-gZ-c6I"/>
                             <constraint firstItem="252-qr-zlJ" firstAttribute="leading" secondItem="Grz-P4-uti" secondAttribute="leading" id="Dhm-yG-02V"/>
                             <constraint firstItem="oVP-so-bpy" firstAttribute="top" secondItem="aFI-gC-t8a" secondAttribute="bottom" id="Fd0-de-5ay"/>
                             <constraint firstAttribute="trailing" secondItem="252-qr-zlJ" secondAttribute="trailing" id="HA6-ay-h7s"/>
+                            <constraint firstAttribute="trailing" secondItem="Hje-gl-8mF" secondAttribute="trailing" constant="30" id="LvX-YD-KFm"/>
                             <constraint firstItem="boZ-j2-BHK" firstAttribute="leading" secondItem="Grz-P4-uti" secondAttribute="leadingMargin" id="NXt-nH-eNt"/>
                             <constraint firstItem="252-qr-zlJ" firstAttribute="top" secondItem="boZ-j2-BHK" secondAttribute="bottom" constant="8" id="RZA-Do-hqu"/>
                             <constraint firstItem="aFI-gC-t8a" firstAttribute="leading" secondItem="252-qr-zlJ" secondAttribute="leading" id="Sqb-X1-cof"/>
@@ -87,7 +100,15 @@
                 <viewControllerPlaceholder storyboardIdentifier="DocumentUploadBLRequest" storyboardName="DocumentUploadBLRequest" id="D0p-eC-Ds8" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J4u-XZ-YKe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-642" y="-319"/>
+            <point key="canvasLocation" x="-461" y="237"/>
+        </scene>
+        <!--AcceptOffer-->
+        <scene sceneID="ZUm-IC-dI9">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="AcceptOffer" storyboardName="AcceptOffer" id="SF5-bM-dYU" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CJH-ht-tZG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-537" y="96"/>
         </scene>
         <!--Message View Controller-->
         <scene sceneID="aVN-Pw-9Pe">

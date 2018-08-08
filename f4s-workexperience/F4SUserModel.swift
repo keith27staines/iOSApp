@@ -97,6 +97,10 @@ extension F4SAnonymousUser {
 
 public struct F4SUser : Codable {
     public var uuid: F4SUUID?
+    public var consenterEmail: String?
+    public var dateOfBirth: Date?
+    public var requiresConsent: Bool
+    public var placementUuid: String?
     public var email: String
     public var firstName: String
     public var lastName: String? {
@@ -104,10 +108,18 @@ public struct F4SUser : Codable {
             assert(lastName == nil || lastName?.isEmpty == false)
         }
     }
-    public var consenterEmail: String?
-    public var dateOfBirth: Date?
-    public var requiresConsent: Bool
-    public var placementUuid: String?
+    
+    public static func loadFromLocalPermanentStore() -> F4SUser? {
+        return UserInfoDBOperations.sharedInstance.getUserInfo()
+    }
+    
+    public func age(on date: Date = Date()) -> Int? {
+        guard let userBirthday = dateOfBirth else { return nil }
+        let calendar = NSCalendar.current
+        let ageComponents = calendar.dateComponents([.year], from: userBirthday, to: date)
+        let age = ageComponents.year!
+        return age
+    }
     
     public init(uuid: String? = nil, email: String = "", firstName: String = "", lastName: String? = nil, consenterEmail: String? = nil, dateOfBirth: Date? = nil, requiresConsent: Bool = false, placementUuid: String? = nil) {
         self.uuid = uuid

@@ -32,6 +32,7 @@ public enum F4SNetworkDataErrorType {
     case serialization(Encodable)
     case unknownError(Any?)
     case genericErrorWithRetry
+    case badUrl(String)
     
     public func error(attempting: String, logError: Bool = true) -> F4SNetworkError {
         let nsError: NSError
@@ -58,7 +59,12 @@ public enum F4SNetworkDataErrorType {
             userInfo["Type"] = "Generic error with retry"
             let description = NSLocalizedString("Unknown error", comment: "")
             return F4SNetworkError(localizedDescription: description, attempting: attempting, retry: true)
-            
+        case .badUrl(let badUrlString):
+            code = -1500
+            userInfo["Type"] =  "Malformed url"
+            userInfo["bad url string"] = badUrlString
+            let description = NSLocalizedString("The requested url is invalid", comment: "")
+            return F4SNetworkError(localizedDescription: description, attempting: attempting, retry: false)
         }
         nsError = NSError(domain: F4SNetworkErrorDomainType.client.rawValue, code: code, userInfo: userInfo)
         return F4SNetworkError(error: nsError, attempting: attempting, logError: logError)

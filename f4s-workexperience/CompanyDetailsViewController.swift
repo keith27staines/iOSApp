@@ -25,12 +25,24 @@ class CompanyDetailsViewController: UIViewController {
     
     @IBOutlet weak var mapViewHeightConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var documentsContainerView: UIView!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var applyButton: UIButton!
+    @IBOutlet weak var firmNameLabel: UILabel!
+    @IBOutlet weak var firmLogoImage: UIImageView!
+    @IBOutlet weak var companyDetailsView: UIView!
+    @IBOutlet weak var shortlistButton: UIButton!
+    
+    let backgroundPopoverView = UIView()
+    var company: Company!
+    var placement: F4SPlacement?
+    var shortlist: [Shortlist] = []
+    fileprivate var popupView = UIView()
+    
+    
     @IBAction func toggleMapButtonPressed(_ sender: Any) {
         if mapView.isHidden {
             mapView.isHidden = false
-            let height = firmDescriptionTextView.frame.origin.y + firmDescriptionTextView.frame.height - tableView.frame.origin.y
-            self.mapViewHeightConstraint.constant = height
+            self.mapViewHeightConstraint.constant = view.bounds.size.width
             UIView.animate(withDuration: 0.5, animations: { [weak self] in
                 self?.view.layoutIfNeeded()
                 }, completion: nil)
@@ -44,44 +56,73 @@ class CompanyDetailsViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var seeAcountsButton: UIButton!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var applyButton: UIButton!
-    @IBOutlet weak var firmDescriptionTextView: UITextView!
-    @IBOutlet weak var firmNameLabel: UILabel!
-    @IBOutlet weak var firmLogoImage: UIImageView!
-    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var companyDetailsView: UIView!
-    @IBOutlet weak var shortlistButton: UIButton!
-    
-    let backgroundPopoverView = UIView()
-    var company: Company!
-    var placement: F4SPlacement?
-    var shortlist: [Shortlist] = []
-    fileprivate let IndustryCellIdentifier: String = "industryIdentifier"
-    fileprivate let RatingCellIdentifier: String = "ratingIdentifier"
-    fileprivate let OtherCellIdentifier: String = "otherIdentifier"
-    fileprivate var popupView = UIView()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         setupAppearance()
         setupMap()
-        documentsContainerView.isHidden = true
+        loadCompany()
+        loadDocuments()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.firmDescriptionTextView.isScrollEnabled = false
         navigationController?.setNavigationBarHidden(true, animated: false)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidRegisterForRemoteNotificationsNotification(_:)), name: NSNotification.Name(rawValue: "ApplicationDidRegisterForRemoteNotificationsNotification"), object: nil)
         styleNavigationController(titleColor: UIColor.black, backgroundColor: UIColor.white, tintColor: UIColor.black, useLightStatusBar: false)
     }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.firmDescriptionTextView.isScrollEnabled = true
+    
+    lazy var companyDocumentsModel: F4SCompanyDocumentsModel = {
+        return F4SCompanyDocumentsModel(companyUuid: company.uuid)
+    }()
+    
+    lazy var companyService: F4SCompanyServiceProtocol = {
+        return F4SCompanyService()
+    }()
+    
+    var companyJson: F4SCompanyJson? = nil
+    
+    func loadCompany() {
+        companyService.getCompany(uuid: company.uuid) { (result) in
+            DispatchQueue.main.async { [weak self] in
+                guard let strongSelf = self else { return }
+                switch result {
+                case .error(let error):
+                    if error.retry {
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+5, execute: {
+                            strongSelf.loadCompany()
+                        })
+                    }
+                case .success(let json):
+                    strongSelf.companyJson = json
+                    strongSelf.tableView.reloadRows(at: [IndexPath(row: CellIndex.buttonsCell.rawValue, section: 0)], with: .automatic)
+                }
+            }
+        }
+    }
+    
+    func loadDocuments() {
+        companyDocumentsModel.getDocuments(completion: { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case .error(let error):
+                    if error.retry {
+                        MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf, cancelHandler: nil, retryHandler: {
+                            strongSelf.loadDocuments()
+                        })
+                    } else {
+                        MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf, cancelHandler: nil, retryHandler: nil)
+                    }
+                case .success(_):
+                    strongSelf.tableView.beginUpdates()
+                    let indexPaths = [IndexPath(row: CellIndex.documentsCell1.rawValue, section: 0),
+                                      IndexPath(row: CellIndex.documentsCell2.rawValue, section: 0)]
+                    strongSelf.tableView.reloadRows(at: indexPaths, with: .automatic)
+                    strongSelf.tableView.endUpdates()
+                }
+            }
+        })
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -97,6 +138,33 @@ class CompanyDetailsViewController: UIViewController {
         if let comp = self.company {
             CustomNavigationHelper.sharedInstance.presentCoverLetterController(parentCtrl: self, currentCompany: comp)
         }
+    }
+    
+    enum CellIndex: Int {
+        case industryCell = 0
+        case ratingCell = 1
+        case otherCell = 2
+        case buttonsCell = 3
+        case companyInfoCell = 4
+        case documentsCell1 = 5
+        case documentsCell2 = 6
+        var identifier: String {
+            switch self {
+            case .industryCell:
+                return "industryCell"
+            case .ratingCell:
+                return "ratingCell"
+            case .otherCell:
+                return "otherCell"
+            case .buttonsCell:
+                return "buttonsCell"
+            case .companyInfoCell:
+                return "companyInfoCell"
+            case .documentsCell1, .documentsCell2:
+                return "documentsCell"
+            }
+        }
+        var count: Int { return 7 }
     }
 }
 
@@ -202,13 +270,6 @@ extension CompanyDetailsViewController {
         return shortlist[index]
     }
 
-    @IBAction func seeAccountsButton(_: AnyObject) {
-        // will open web view
-        if let url = self.company?.companyUrl, let navCtrl = self.navigationController {
-            CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navCtrl, contentType: F4SContentType.company, url: url)
-        }
-    }
-
     @IBAction func closeButton(_: AnyObject) {
         self.backgroundPopoverView.removeFromSuperview()
         self.dismiss(animated: true, completion: nil)
@@ -300,7 +361,6 @@ extension CompanyDetailsViewController {
     func setupAppearance() {
         setupButtons()
         setupLabels()
-        setupTextView()
         setupImageView()
         self.view.backgroundColor = UIColor.clear
     }
@@ -309,9 +369,7 @@ extension CompanyDetailsViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = UIColor.clear
-        tableView.isUserInteractionEnabled = false
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
-        self.tableViewHeight.constant = self.getTableViewHeight()
     }
 
     func setupButtons() {
@@ -350,12 +408,6 @@ extension CompanyDetailsViewController {
         applyButton.setTitleColor(UIColor.white, for: .normal)
         applyButton.setTitleColor(UIColor.white, for: .highlighted)
 
-        seeAcountsButton.layer.cornerRadius = 10
-        seeAcountsButton.backgroundColor = UIColor(netHex: Colors.normalGray)
-        let accountsText = NSLocalizedString("See accounts and who you know", comment: "")
-        seeAcountsButton.setAttributedTitle(NSAttributedString(string: accountsText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.black]), for: .normal)
-
-
         closeButton.tintColor = UIColor.black
         shareButton.tintColor = UIColor.black
         mapButton.tintColor = UIColor.red
@@ -388,16 +440,6 @@ extension CompanyDetailsViewController {
         }
 
         firmNameLabel.attributedText = NSAttributedString(string: company.name, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor.black])
-    }
-
-    func setupTextView() {
-        guard let company = self.company else {
-            return
-        }
-
-        firmDescriptionTextView.attributedText = NSAttributedString(string: company.summary, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.black])
-        firmDescriptionTextView.scrollRectToVisible(CGRect(x: 0, y: 0, width: 0, height: 0), animated: false)
-        firmDescriptionTextView.isEditable = false
     }
 
     func setupImageView() {
@@ -486,130 +528,171 @@ extension CompanyDetailsViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return self.getHeightOfRow(index: indexPath.row)
     }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        // Prevent the cell containing buttons from being selected because it interferes with the operation of the buttons
+        if indexPath.row == CellIndex.buttonsCell.rawValue {
+            return nil
+        }
+        return indexPath
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
 // MARK: - helpers
 extension CompanyDetailsViewController {
     func getNumberOfCells() -> Int {
-        guard let company = self.company else {
+        guard let _ = self.company else {
             return 0
         }
-        var numberOfCells: Int = 0
-        if !(company.industry.isEmpty) {
-            numberOfCells += 1
-        }
-        if company.rating != 0 && company.rating.round() != 0 {
-            numberOfCells += 1
-        }
-        if company.employeeCount != 0 || company.turnover != 0 || company.turnoverGrowth != 0 {
-            numberOfCells += 1
-        }
-        return numberOfCells
+        return 7
     }
 
     func getHeightOfRow(index: Int) -> CGFloat {
         guard let company = self.company else {
             return 0
         }
-        switch index
+        
+        let cellIndex = CellIndex(rawValue: index)!
+        switch cellIndex
         {
-        case 0:
-            if !company.industry.isEmpty {
-                // industry cell
-                return 30
-            } else if company.rating != 0 && company.rating.round() != 0 {
-                // rating cell
-                return 46
-            } else if company.employeeCount != 0 || company.turnover != 0 || company.turnoverGrowth != 0 {
-                return 80
-            }
-            return 0
-        case 1:
-            if company.rating != 0 && company.rating.round() != 0 && !company.industry.isEmpty {
-                // rating cell
-                return 30
-            } else if company.employeeCount != 0 || company.turnover != 0 || company.turnoverGrowth != 0 {
-                return 80
-            }
-            return 0
-        default:
-            if (company.employeeCount != 0 || company.turnover != 0 || company.turnoverGrowth != 0) && !company.industry.isEmpty && company.rating != 0 {
-                return 80
-            }
-            return 0
+        case .industryCell:
+            
+            return company.industry.isEmpty ? 0 : 30
+            
+        case .ratingCell:
+            
+            return company.rating.round() == 0 ? 0 : 30
+
+        case .otherCell:
+            
+            return showCompanyStatsCell() ? 80 : 0
+
+        case .buttonsCell: return UITableViewAutomaticDimension
+        case .companyInfoCell: return UITableViewAutomaticDimension
+        case .documentsCell1: return UITableViewAutomaticDimension
+        case .documentsCell2: return UITableViewAutomaticDimension
         }
     }
-
-    func getTableViewHeight() -> CGFloat {
-        let numberOfCells = self.getNumberOfCells()
-        if numberOfCells == 0 {
-            return 0
-        }
-        var tableViewHeight: CGFloat = 0
-        for nr in 0 ... numberOfCells - 1 {
-            tableViewHeight += self.getHeightOfRow(index: nr)
-        }
-        return tableViewHeight
+    
+    func documentforType(_ docType: String) -> F4SCompanyDocument? {
+        return companyDocumentsModel.documents.filter({ (document) -> Bool in
+            return document.docType == docType
+        }).first
+    }
+    
+    func hiddenCell() -> UITableViewCell {
+        let hiddenCell = UITableViewCell()
+        hiddenCell.isHidden = true
+        return hiddenCell
+    }
+    
+    func showCompanyStatsCell() -> Bool {
+        return !(company.employeeCount == 0 && company.turnover == 0 && company.turnoverGrowth == 0)
     }
 
     func getTableViewCell(indexPath: IndexPath) -> UITableViewCell {
-        guard let company = self.company else {
-            return UITableViewCell()
-        }
-        switch indexPath.row
-        {
-        case 0:
-            if !company.industry.isEmpty {
-                // industry cell
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: IndustryCellIdentifier, for: indexPath) as? IndustryTableViewCell else {
-                    return UITableViewCell()
-                }
-                cell.industryLabel.attributedText = NSAttributedString(string: company.industry, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.light), NSAttributedStringKey.foregroundColor: UIColor.black])
-                return cell
-            } else if company.rating != 0 && company.rating.round() != 0 {
-                // rating cell
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: RatingCellIdentifier, for: indexPath) as? RatingTableViewCell else {
-                    return UITableViewCell()
-                }
-                cell.setupStars(rating: company.rating)
-                cell.starsLabel.attributedText = NSAttributedString(string: String(company.rating), attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerVerySmallTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
-                return cell
-            } else if company.employeeCount != 0 || company.turnover != 0 || company.turnoverGrowth != 0 {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: OtherCellIdentifier, for: indexPath) as? CompanyOtherTableViewCell else {
-                    return UITableViewCell()
-                }
-                cell.company = self.company
-                return cell
+        guard let company = self.company else { return UITableViewCell() }
+        let cellIndex = CellIndex(rawValue: indexPath.row)!
+        switch cellIndex {
+        case .industryCell:
+            guard
+                !company.industry.isEmpty,
+                let cell = tableView.dequeueReusableCell(withIdentifier: cellIndex.identifier, for: indexPath) as? IndustryTableViewCell else {
+                    return hiddenCell()
             }
-            return UITableViewCell()
-        case 1:
-            if company.rating != 0 && company.rating.round() != 0 && !company.industry.isEmpty {
-                // rating cell
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: RatingCellIdentifier, for: indexPath) as? RatingTableViewCell else {
-                    return UITableViewCell()
-                }
-                cell.setupStars(rating: company.rating)
-                cell.starsLabel.attributedText = NSAttributedString(string: String(company.rating), attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerVerySmallTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
-                return cell
-            } else if company.employeeCount != 0 || company.turnover != 0 || company.turnoverGrowth != 0 {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: OtherCellIdentifier, for: indexPath as IndexPath) as? CompanyOtherTableViewCell else {
-                    return UITableViewCell()
-                }
-                cell.company = self.company
-                return cell
+
+            cell.industryLabel.attributedText = NSAttributedString(string: company.industry, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.light), NSAttributedStringKey.foregroundColor: UIColor.black])
+            return cell
+            
+        case .ratingCell:
+            guard
+                company.rating.round() != 0,
+                let cell = tableView.dequeueReusableCell(withIdentifier: cellIndex.identifier, for: indexPath) as? RatingTableViewCell  else {
+                return hiddenCell()
             }
-            return UITableViewCell()
-        default:
-            if (company.employeeCount != 0 || company.turnover != 0 || company.turnoverGrowth != 0) && !company.industry.isEmpty && company.rating != 0 {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: OtherCellIdentifier, for: indexPath as IndexPath) as? CompanyOtherTableViewCell else {
-                    return UITableViewCell()
-                }
-                cell.company = self.company
-                return cell
+            cell.setupStars(rating: company.rating)
+            cell.starsLabel.attributedText = NSAttributedString(string: String(company.rating), attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerVerySmallTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
+            return cell
+
+        case .otherCell:
+            guard
+                showCompanyStatsCell(),
+                let cell = tableView.dequeueReusableCell(withIdentifier: cellIndex.identifier, for: indexPath as IndexPath) as? CompanyOtherTableViewCell else {
+                return hiddenCell()
             }
-            return UITableViewCell()
+            cell.company = self.company
+            return cell
+
+        case .buttonsCell:
+            guard let buttonsCell = tableView.dequeueReusableCell(withIdentifier: cellIndex.identifier) as? F4SSeePeopleAndAccountsTableViewCell else {
+                return UITableViewCell()
+            }
+            buttonsCell.leftLink = companyJson?.linkedinUrl
+            buttonsCell.rightLink = companyJson?.duedilUrl
+            return buttonsCell
+            
+        case .companyInfoCell:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIndex.identifier) else {
+                return UITableViewCell()
+            }
+            cell.textLabel?.text = company.summary
+            cell.textLabel?.numberOfLines = 0
+            cell.textLabel?.lineBreakMode = .byWordWrapping
+            return cell
+            
+        case .documentsCell1:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIndex.identifier) as? CompanyDocumentTableViewCell else {
+                return UITableViewCell()
+            }
+            configureCell(cell: cell, for: "ELC")
+            return cell
+            
+        case .documentsCell2:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIndex.identifier) as? CompanyDocumentTableViewCell else {
+                return UITableViewCell()
+            }
+            configureCell(cell: cell, for: "SGC")
+            return cell
         }
     }
+    
+    func configureCell(cell: CompanyDocumentTableViewCell, for documentType: String) {
+        let document = documentforType(documentType)
+        if document != nil { cell.spinner.stopAnimating() }
+        cell.accessoryType = document?.state == .available ? .disclosureIndicator : .none
+        cell.icon.image = iconForDocument(document: document)
+        cell.documentName.text = textForDocument(document: document)
+    }
+    
+    func iconForDocument(document: F4SCompanyDocument?) -> UIImage? {
+        guard let document = document else { return nil }
+        switch document.state {
+        case .available:
+            return UIImage(named: "ui-company-upload-doc-off-icon")
+        case .requested, .unrequested:
+            return UIImage(named: "checkBlue")
+        case .unavailable:
+            return nil
+        }
+    }
+    func textForDocument(document: F4SCompanyDocument?) -> String {
+        guard let document = document else { return "" }
+        switch document.state {
+        case .available, .requested, .unrequested:
+            return document.name
+        case .unavailable:
+            return ""
+        }
+    }
+    
 }
 
 extension CompanyDetailsViewController : MKMapViewDelegate {

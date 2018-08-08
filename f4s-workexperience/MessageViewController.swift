@@ -175,7 +175,10 @@ extension MessageViewController {
     }
     
     func didAnswer(message: F4SMessage) {
-        self.chatMessages.append(JSQMessage(senderId: message.sender, displayName: message.sender, text: message.content))
+        guard let message = JSQMessage(senderId: message.sender, displayName: message.sender, text: message.content) else {
+            return
+        }
+        self.chatMessages.append(message)
         self.finishSendingMessage()
         self.scrollToBottom(animated: true)
     }

@@ -67,7 +67,6 @@ public struct F4SDayTimeInfoJson : Codable {
         self.day = day.twoLetterSymbol
         self.time = hourType.rawValue
     }
-    
 }
 
 

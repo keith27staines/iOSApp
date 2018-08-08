@@ -40,6 +40,32 @@ public enum F4SDayOfWeek {
         }
     }
     
+    /// Initialises an instance from the name or partial name of the day
+    ///
+    /// - parameter nameOfDay: A string containing at least the first two letters of the name of the day
+    public init?(nameOfDay: String) {
+        guard nameOfDay.count >= 2 else { return nil }
+        let twoCharacterDay = nameOfDay.prefix(2).uppercased()
+        switch twoCharacterDay {
+        case "MO":
+            self.init(zeroBasedDayNumber:0)
+        case "TU":
+            self.init(zeroBasedDayNumber:1)
+        case "WE":
+            self.init(zeroBasedDayNumber:2)
+        case "TH":
+            self.init(zeroBasedDayNumber:3)
+        case "FR":
+            self.init(zeroBasedDayNumber:4)
+        case "SA":
+            self.init(zeroBasedDayNumber:5)
+        case "SU":
+            self.init(zeroBasedDayNumber:6)
+        default:
+            return nil
+        }
+    }
+    
     public var isWeekend: Bool {
         switch self {
         case .sunday, .saturday:

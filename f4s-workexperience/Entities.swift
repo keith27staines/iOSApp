@@ -255,7 +255,7 @@ struct CompanyDatabaseMeta {
 
 enum ChooseAttributes: String {
     case PersonalAttributes = "attributes"
-    case JobRole = "job_role"
+    case JobRole = "role"
     case EmploymentSkills = "skills"
     case StartDate = "start_date"
     case EndDate = "end_date"

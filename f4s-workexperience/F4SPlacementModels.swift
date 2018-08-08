@@ -15,6 +15,7 @@ public enum F4SPlacementStatus : String, Codable {
     case accepted
     case rejected
     case confirmed
+    case declined
     case completed
     case draft
     case noAge =  "no_age"
@@ -22,6 +23,7 @@ public enum F4SPlacementStatus : String, Codable {
     case noParentalConsent = "no_parental_consent"
     case unsuccessful
     case moreInfoRequested = "more info requested"
+    case referredByEmployer = "referred by employer"
 }
 
 public struct F4STimelinePlacement : Codable {
@@ -30,8 +32,15 @@ public struct F4STimelinePlacement : Codable {
     public var companyUuid: F4SUUID?
     public var threadUuid: F4SUUID?
     public var isRead: Bool?
-    public var state: F4SPlacementStatus?
+    public var workflowState: F4SPlacementStatus?
     public var latestMessage: F4SMessage?
+    public var roleUuid: F4SUUID?
+    public var availabilityPeriods: [F4SAvailabilityPeriodJson]?
+    public var voucher: String?
+    public var totalHours: Double?
+    public var duration: F4SAvailabilityPeriodJson?
+    public var personResponsible: F4SPersonJson?
+    public var location: F4SLocationJson?
 }
 
 extension F4STimelinePlacement {
@@ -41,8 +50,15 @@ extension F4STimelinePlacement {
         case userUuid = "user_uuid"
         case companyUuid = "company_uuid"
         case isRead = "is_read"
-        case state
+        case workflowState = "workflow_state"
         case latestMessage = "latest_message"
+        case roleUuid = "role_uuid"
+        case availabilityPeriods = "availability_periods"
+        case voucher
+        case totalHours = "total_hours"
+        case duration
+        case personResponsible = "person_responsible"
+        case location
     }
 }
 
@@ -53,9 +69,61 @@ extension F4STimelinePlacement : Equatable {
                 lhs.isRead == rhs.isRead &&
                 lhs.latestMessage?.uuid == rhs.latestMessage?.uuid &&
                 lhs.placementUuid ==  rhs.placementUuid &&
-                lhs.state == rhs.state &&
+                lhs.workflowState == rhs.workflowState &&
                 lhs.threadUuid == rhs.threadUuid &&
                 lhs.userUuid == rhs.userUuid
+    }
+}
+
+public struct F4SPersonJson : Codable {
+    public var name: String?
+    public var linkedinProfile: String?
+    public var email: String?
+}
+
+extension F4SPersonJson {
+    private enum CodingKeys : String, CodingKey {
+        case name
+        case linkedinProfile = "linkedin_profile"
+        case email
+    }
+}
+
+public struct F4SLocationJson : Codable {
+    public var address: F4SAddressJson?
+    public var phoneNumber: String?
+    public var website: String?
+    public var point: F4SPointJson?
+}
+    
+extension F4SLocationJson {
+    private enum CodingKeys : String, CodingKey {
+        case address
+        case phoneNumber = "phone_number"
+        case website
+        case point
+    }
+}
+
+public struct F4SAddressJson : Codable {
+    public var building: String?
+    public var street: String?
+    public var address3: String?
+    public var town: String?
+    public var locality: String?
+    public var county: String?
+    public var postcode: String?
+}
+
+public struct F4SPointJson : Codable {
+    public var latitude: Double
+    public var longitude: Double
+}
+
+extension F4SPointJson {
+    private enum CodingKeys : String, CodingKey {
+        case latitude = "lat"
+        case longitude = "long"
     }
 }
 
@@ -99,39 +167,6 @@ extension F4SPlacementCreateResult {
         case errors
     }
 }
-
-//// MARK:- Timeline
-//public struct F4STimeline : Codable {
-//    public var placementUuid: String?
-//    public var userUuid: String
-//    public var companyUuid: String
-//    public var threadUuid: String
-//    public var placementStatus: F4SPlacementStatus?
-//    public var latestMessage: F4SMessage
-//    public var isRead: Bool
-//    
-//    public init(placementUuid: String? = nil, userUuid: String = "", companyUuid: String = "", threadUuid: String = "", placementStatus: F4SPlacementStatus? = .inProgress, latestMessage: F4SMessage = F4SMessage(), isRead: Bool = true) {
-//        self.placementUuid = placementUuid
-//        self.companyUuid = companyUuid
-//        self.userUuid = userUuid
-//        self.threadUuid = threadUuid
-//        self.placementStatus = placementStatus
-//        self.latestMessage = latestMessage
-//        self.isRead = isRead
-//    }
-//}
-//
-//extension F4STimeline {
-//    private enum CodingKeys : String, CodingKey {
-//        case placementUuid = "placement_uuid"
-//        case userUuid = "user_uuid"
-//        case companyUuid = "company_uuid"
-//        case threadUuid = "thread_uuid"
-//        case placementStatus = "placement_status"
-//        case latestMessage = "latest_message"
-//        case isRead = "is_Read"
-//    }
-//}
 
 // MARK:- The user's interests
 public struct F4SInterest : Codable {

@@ -14,9 +14,9 @@ class F4SRequestCompanyDocumentTableViewCell: UITableViewCell {
     @IBOutlet weak var buttonLabel: UILabel!
     @IBOutlet weak var activitySpinner: UIActivityIndicatorView!
     
-    var companyDocument: CompanyDocument? = nil {
+    var companyDocument: F4SCompanyDocument? = nil {
         didSet {
-            guard let document = companyDocument, let state = CompanyDocument.Status(rawValue: document.status) else {
+            guard let document = companyDocument, let state = companyDocument?.state else {
                 buttonLabel.text = ""
                 buttonBackgroundView.backgroundColor = UIColor.white
                 return

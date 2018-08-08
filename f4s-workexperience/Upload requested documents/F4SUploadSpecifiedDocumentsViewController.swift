@@ -16,16 +16,6 @@ class F4SUploadSpecifiedDocumentsViewController: UIViewController {
     
     @IBOutlet weak var introductionText: UILabel!
     
-    @IBOutlet weak var lifeskillsStack: UIStackView!
-    
-    @IBOutlet weak var lifeSkillsSwitch: UISwitch!
-    
-    
-    @IBAction func lifeSkillsSwitchChanged(_ sender: Any) {
-        model.userHasLifeskillsCertificate = lifeSkillsSwitch.isOn
-        updateFromModel()
-    }
-    
     var companyName: String = ""
     
     var action: F4SAction! {
@@ -84,8 +74,6 @@ class F4SUploadSpecifiedDocumentsViewController: UIViewController {
     }
 
     func updateFromModel() {
-        lifeskillsStack?.isHidden = !model.isLifeSkillsCertificateRequested
-        lifeSkillsSwitch?.isOn = model.userHasLifeskillsCertificate
         uploadTableController?.tableView.reloadData()
     }
     

@@ -81,11 +81,14 @@ extension F4SAction {
 public enum F4SActionType : String, Codable {
     
     case uploadDocuments = "upload_documents"
+    case viewOffer = "view_offer"
     
     var actionTitle: String {
         switch self {
         case .uploadDocuments:
             return NSLocalizedString("Add documents", comment: "Action request from business leader asking young person to upload certain documents (which are specified elsewhere)")
+        case .viewOffer:
+            return NSLocalizedString("View offer", comment: "Action request directing young person to view their offer")
         }
     }
 }

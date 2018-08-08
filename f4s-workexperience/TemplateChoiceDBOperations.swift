@@ -63,7 +63,10 @@ class TemplateChoiceDBOperations {
 
     fileprivate func getTemplateChoiceFromInterestDB(templateChoiceDB: TemplateChoiceDB) -> F4STemplateBlank {
         var templateBlank: F4STemplateBlank = F4STemplateBlank()
-        if let name = templateChoiceDB.name {
+        if var name = templateChoiceDB.name {
+            if name == "job_role" {
+                name = "role"
+            }
             templateBlank.name = name
         }
         var choices: [F4SChoice] = []

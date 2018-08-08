@@ -47,8 +47,12 @@ public class F4SDataTaskService {
     public let session: URLSession
     public let baseUrl: URL
     public var apiName: String { return self._apiName }
-    public var url : URL {
-        return URL(string: baseUrl.absoluteString + "/" + apiName)!
+    public var url : URL? {
+        return URL(string: urlString)
+    }
+    
+    private var urlString: String {
+        return baseUrl.absoluteString + "/" + apiName
     }
     
     public typealias DataTaskReturn = (data:Data?, response:URLResponse?, error:Error?)
@@ -89,11 +93,20 @@ public class F4SDataTaskService {
         session = URLSession(configuration: config)
     }
     
+    public func cancel() {
+        task?.cancel()
+    }
+    
     /// Performs an HTTP get request
     /// - parameter attempting: A short high level description of the reason the operation is being performed
     /// - parameter completion: Returns a result containing either the return object or error information
     public func beginGetRequest<A>(attempting: String, completion: @escaping (F4SNetworkResult<A>) -> ()) {
         task?.cancel()
+        guard let url = url else {
+            let error = F4SNetworkDataErrorType.badUrl(self.urlString).error(attempting: attempting)
+            completion(F4SNetworkResult.error(error))
+            return
+        }
         let request = urlRequest(verb: .get, url: url, dataToSend: nil)
         task = dataTask(with: request, attempting: attempting, completion: { [weak self] (result) in
             guard let strongSelf = self else { return }
@@ -124,6 +137,11 @@ public class F4SDataTaskService {
     /// - parameter completion: Returns a result containing either the http response data or error information
     public func beginSendRequest<A: Codable>(verb: F4SHttpRequestVerb, objectToSend: A, attempting: String, completion: @escaping (F4SNetworkDataResult) -> ()) {
         task?.cancel()
+        guard let url = url else {
+            let error = F4SNetworkDataErrorType.badUrl(urlString).error(attempting: attempting)
+            completion(F4SNetworkDataResult.error(error))
+            return
+        }
         guard let data = try? jsonEncoder.encode(objectToSend) else {
             let error = F4SNetworkDataErrorType.serialization(objectToSend).error(attempting: attempting)
             completion(F4SNetworkDataResult.error(error))
@@ -137,6 +155,11 @@ public class F4SDataTaskService {
     
     public func beginDelete(attempting: String, completion: @escaping (F4SNetworkDataResult) -> ()) {
         task?.cancel()
+        guard let url = url else {
+            let error = F4SNetworkDataErrorType.badUrl(urlString).error(attempting: attempting)
+            completion(F4SNetworkDataResult.error(error))
+            return
+        }
         let request = urlRequest(verb: .delete, url: url, dataToSend: nil)
         task = dataTask(with: request, attempting: attempting, completion: completion)
         task?.resume()

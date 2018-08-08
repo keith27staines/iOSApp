@@ -19,6 +19,10 @@ class MessageContainerViewController: UIViewController {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var answersView: UIView!
     @IBOutlet weak var answersHeight: NSLayoutConstraint!
+    
+    @IBAction func unwindToMessageContainer(segue: UIStoryboardSegue) {
+    }
+    
     var messageController: MessageViewController?
     var threadUuid: String?
     var company: Company?
@@ -38,6 +42,12 @@ class MessageContainerViewController: UIViewController {
     var currentUserUuid: String = ""
     var messageOptionsView: MessageOptionsView?
     var shouldLoadOptions: Bool = true
+
+    var placement: F4STimelinePlacement? {
+        return placements.first(where: { (placement) -> Bool in
+            placement.companyUuid?.dehyphenated == self.company?.uuid.dehyphenated && threadUuid?.dehyphenated == placement.threadUuid?.dehyphenated
+        })
+    }
     
     @IBOutlet weak var subjectLabel: UILabel!
 
@@ -107,19 +117,100 @@ class MessageContainerViewController: UIViewController {
     
     @IBAction func actionButtonTapped(_ sender: Any) {
         guard let action = action else { return }
-        actionButtonHeightConstraint.constant = 0
-        actionButton.isEnabled = false
         do {
             try F4SActionValidator.validate(action: action)
             let actionType = action.actionType!
             switch action.actionType! {
             case .uploadDocuments:
                 performSegue(withIdentifier: actionType.rawValue, sender: self)
+            case .viewOffer:
+                MessageHandler.sharedInstance.showLoadingOverlay(self.view)
+                prepareAcceptOffer { [weak self] (error, context) in
+                    guard let strongSelf = self else { return }
+                    if let error = error {
+                        MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf, cancelHandler: nil, retryHandler: nil)
+                        log.error(error)
+                    } else {
+                        MessageHandler.sharedInstance.hideLoadingOverlay()
+                        strongSelf.acceptContext = context
+                        strongSelf.performSegue(withIdentifier: actionType.rawValue, sender: self)
+                    }
+                }
             }
         } catch {
             log.error(error)
         }
     }
+    
+    func prepareAcceptOffer(completion: @escaping (F4SNetworkError?, AcceptOfferContext?) -> ()) {
+        guard let placementUuid = placement?.placementUuid else { return }
+        loadPlacementOffer(uuid: placementUuid) { [weak self] (networkResult) in
+            guard let strongSelf = self else { return }
+            DispatchQueue.main.async {
+                MessageHandler.sharedInstance.hideLoadingOverlay()
+                switch networkResult {
+                case .error(let error):
+                    if error.retry {
+                        MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf, cancelHandler: {
+                            return
+                        }, retryHandler: {
+                            strongSelf.prepareAcceptOffer(completion: completion)
+                        })
+                    } else {
+                        completion(error, nil)
+                    }
+                    
+                case .success(var placement):
+                    
+                    if placement.duration == nil {
+                        placement.duration = placement.availabilityPeriods?.first
+                    }
+                    
+                    let user = F4SUser.loadFromLocalPermanentStore()!
+                    if let url = NSURL(string: strongSelf.company?.logoUrl ?? "") {
+                        F4SImageService.sharedInstance.getImage(url: url, completion: { [weak self] image in
+                            guard let strongSelf = self else { return }
+                            if let roleUuid = placement.roleUuid {
+                                let companyService = F4SCompanyService()
+                                let roleService = F4SRoleService()
+                                let companyUuid = strongSelf.company!.uuid
+                                roleService.getRoleForCompany(companyUuid: companyUuid, roleUuid: roleUuid, completion: { (networkResult) in
+                                    DispatchQueue.main.async {
+                                        switch networkResult {
+                                        case .error(let error):
+                                            completion(error, nil)
+                                        case .success(let role):
+                                            companyService.getCompany(uuid: companyUuid, completion: { (result) in
+                                                DispatchQueue.main.async {
+                                                    switch result {
+                                                    case .error(let error):
+                                                        completion(error, nil)
+                                                    case .success(let companyJson):
+                                                        let context = AcceptOfferContext(user: user, company: strongSelf.company!, companyJson: companyJson, logo: image, placement: placement, role: role)
+                                                        completion(nil, context)
+                                                    }
+                                                }
+                                            })
+                                        }
+                                    }
+                                })
+                            }
+                            
+                        })
+                    }
+                }
+            }
+        }
+    }
+    
+    func loadPlacementOffer(uuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4STimelinePlacement>) -> () ) {
+        let service = F4SPlacementService()
+        service.getPlacementOffer(uuid: uuid) { (networkResult) in
+            completion(networkResult)
+        }
+    }
+    
+    internal var acceptContext: AcceptOfferContext? = nil
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let segueName: String = segue.identifier!
@@ -132,6 +223,12 @@ class MessageContainerViewController: UIViewController {
             vc.companyName = company?.name ?? "this company"
             vc.action = action
             return
+        }
+        if segueName == "view_offer" {
+            guard let vc = segue.destination as? AcceptOfferViewController else {
+                return
+            }
+            vc.accept = acceptContext
         }
     }
 }
@@ -177,8 +274,6 @@ extension MessageContainerViewController {
         }
         var isDoneRemove: Bool = false
         var isDoneGet: Bool = false
-        let message = F4SMessage(uuid: response.uuid, content: response.value, sender: self.currentUserUuid)
-        self.messageController?.didAnswer(message: message)
         
         F4SMessageService(threadUuid: threadUuid).sendMessage(responseUuid: response.uuid) { (result) in
             switch result {
@@ -190,6 +285,7 @@ extension MessageContainerViewController {
                     guard let strongSelf = self else { return }
                     isDoneGet = true
                     if let lastMessage = messageList.messages.last {
+                        strongSelf.messageController?.didAnswer(message: lastMessage)
                         strongSelf.messageList.append(lastMessage)
                         strongSelf.messageController?.addMessage(message: lastMessage)
                     }
@@ -227,25 +323,11 @@ extension MessageContainerViewController {
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        let backButton = UIBarButtonItem(image: UIImage(named: "Back"), style: UIBarButtonItemStyle.done, target: self, action: #selector(backButtonTouched))
-        backButton.tintColor = UIColor.white
-        navigationItem.leftBarButtonItem = backButton
         
         let showCompanyButton = UIBarButtonItem(image: UIImage(named: "information"), style: UIBarButtonItemStyle.done, target: self, action: #selector(showCompanyDetailsView))
         navigationItem.rightBarButtonItem = showCompanyButton
         navigationItem.title = "Messages"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-    }
-    
-    @objc func backButtonTouched() {
-        if let viewCtrls = self.navigationController?.viewControllers {
-            for viewCtrl in viewCtrls {
-                if viewCtrl is TimelineViewController {
-                    _ = self.navigationController?.popToViewController(viewCtrl, animated: true)
-                    break
-                }
-            }
-        }
     }
     
     @objc func showCompanyDetailsView() {

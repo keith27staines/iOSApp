@@ -92,8 +92,8 @@ public class F4SMessageModelBuilder {
         case .error(_):
             completion(messagesResult)
         case .success(var model):
-            guard let _ = model.action else {
-                // If the action is already set, canned responses are not expected and may error, so just return what we have already
+            guard model.action?.actionType == nil else {
+                // If the action is set, canned responses are not expected and may error, so just return what we have already
                 completion(messagesResult)
                 return
             }

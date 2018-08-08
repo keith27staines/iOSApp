@@ -57,7 +57,6 @@ extension F4SDocumentUrl {
 
 public enum F4SUploadableDocumentType : String {
     case cv
-    case lifeskills
     case certificate
     case other
     
@@ -68,8 +67,6 @@ public enum F4SUploadableDocumentType : String {
             return "CV"
         case .certificate:
             return "Life Skills certificate"
-        case .lifeskills:
-            return "Life Skills Certificate"
         case .other:
             return "other information"
         }

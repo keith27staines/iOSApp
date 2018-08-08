@@ -152,8 +152,9 @@ extension CoverLetterViewController {
             let templateToLoad = try Template(string: currentTemplate.template)
             var data: [String: Any] = [:]
             for blank in currentTemplate.blanks {
+                let name = blank.name
                 if let indexOfSelectedBlank = self.selectedTemplateChoices.index(where: { (otherBlank) -> Bool in
-                    if blank.name == otherBlank.name {
+                    if name == otherBlank.name {
                         return true
                     }
                     return false

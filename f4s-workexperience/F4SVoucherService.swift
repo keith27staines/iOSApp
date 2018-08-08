@@ -20,6 +20,7 @@ public struct F4SVoucherValidation : Codable {
 public protocol F4SVoucherVerificationServiceProtocol {
     var apiName: String { get }
     func verify(completion: @escaping (F4SNetworkResult<F4SVoucherValidation>) -> ())
+    func cancel()
 }
 
 public class F4SVoucherVerificationService : F4SDataTaskService {
@@ -36,6 +37,7 @@ public class F4SVoucherVerificationService : F4SDataTaskService {
 
 // MARK:- F4SVoucherVerificationServiceProtocol conformance
 extension F4SVoucherVerificationService : F4SVoucherVerificationServiceProtocol {
+    
     public func verify(completion: @escaping (F4SNetworkResult<F4SVoucherValidation>) -> ()) {
         let params = ["placement_uuid" : placementUuid]
         let attempting = "Validate voucher code"

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8uP-Kw-sBA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8uP-Kw-sBA">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -42,28 +42,11 @@
                                 <rect key="frame" x="10" y="253.5" width="355" height="393.5"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jww-Wp-bx8">
-                                        <rect key="frame" x="0.0" y="0.0" width="355" height="261.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="318.5"/>
                                         <connections>
                                             <segue destination="xhl-5c-eSU" kind="embed" identifier="embedTableView" id="FZj-Ha-HFh"/>
                                         </connections>
                                     </containerView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="lUs-83-JP0">
-                                        <rect key="frame" x="0.0" y="281.5" width="355" height="37"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" text="I have a Life Skills Certificate" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5F-vS-mRX">
-                                                <rect key="frame" x="0.0" y="8.5" width="218.5" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IRv-fB-FeI">
-                                                <rect key="frame" x="234.5" y="3" width="122.5" height="31"/>
-                                                <connections>
-                                                    <action selector="lifeSkillsSwitchChanged:" destination="8uP-Kw-sBA" eventType="valueChanged" id="bB4-Js-Esd"/>
-                                                </connections>
-                                            </switch>
-                                        </subviews>
-                                    </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2QO-Oh-rcO">
                                         <rect key="frame" x="0.0" y="338.5" width="355" height="55"/>
                                         <color key="backgroundColor" red="0.26411449910000001" green="0.155295819" blue="0.47808134559999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -79,6 +62,9 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="2QO-Oh-rcO" firstAttribute="top" secondItem="Jww-Wp-bx8" secondAttribute="bottom" constant="20" id="cCr-VL-Hgd"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -105,8 +91,6 @@
                     <connections>
                         <outlet property="containerView" destination="Jww-Wp-bx8" id="ZwX-8h-8aY"/>
                         <outlet property="introductionText" destination="bT8-aB-Gcb" id="mBB-ZE-QTE"/>
-                        <outlet property="lifeSkillsSwitch" destination="IRv-fB-FeI" id="gKW-1p-iN7"/>
-                        <outlet property="lifeskillsStack" destination="lUs-83-JP0" id="hdK-yI-ERY"/>
                         <outlet property="uploadButton" destination="2QO-Oh-rcO" id="D8K-H2-xm1"/>
                     </connections>
                 </viewController>
@@ -119,7 +103,7 @@
             <objects>
                 <tableViewController id="xhl-5c-eSU" customClass="F4SUploadTableViewController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fw8-31-qwd">
-                        <rect key="frame" x="0.0" y="0.0" width="355" height="261.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="355" height="318.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>

@@ -32,9 +32,6 @@ public class F4SUploadRequestedDocumentsTableViewModel {
         documentUrlDescriptors = documentTypeNames.map({ (docTypeName) -> F4SDocumentUrlDescriptor in
             let docType = F4SUploadableDocumentType(rawValue: docTypeName) ?? F4SUploadableDocumentType.other
             return F4SDocumentUrlDescriptor(docType: docType, urlString: "", includeInApplication: true, isExpanded: false)
-        }).sorted(by: {(descriptor1, decriptor2) -> Bool in
-            expandedIndexPath = nil
-            return descriptor1.docType != .lifeskills
         })
     }
     
@@ -71,13 +68,7 @@ public class F4SUploadRequestedDocumentsTableViewModel {
     }
     
     internal var displayUrlDescriptors: [F4SDocumentUrlDescriptor] {
-        if userHasLifeskillsCertificate {
-            return documentUrlDescriptors
-        } else {
-            return documentUrlDescriptors.filter({ (descriptor) -> Bool in
-                descriptor.docType != F4SUploadableDocumentType.lifeskills
-            })
-        }
+        return documentUrlDescriptors
     }
     
     public var numberOfSections: Int { return 1 }
@@ -86,21 +77,9 @@ public class F4SUploadRequestedDocumentsTableViewModel {
         return displayUrlDescriptors.count
     }
     
-    public var userHasLifeskillsCertificate: Bool = true {
-        didSet {
-            postSubmitStateNotification()
-        }
-    }
-    
     func postSubmitStateNotification() {
         let notification = Notification(name: .uploadRequestSubmitStateUpdated)
         NotificationCenter.default.post(notification)
-    }
-    
-    public var isLifeSkillsCertificateRequested: Bool {
-        return documentUrlDescriptors.contains(where: { (descriptor) -> Bool in
-            return descriptor.docType == F4SUploadableDocumentType.lifeskills
-        })
     }
     
     public func descriptorForIndexPath(_ indexPath: IndexPath) -> F4SDocumentUrlDescriptor {
