@@ -201,14 +201,14 @@ extension ExtraInfoViewController {
         self.emailUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
         self.firstAndLastNameUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
         self.voucherCodeUnderlineView.backgroundColor = UIColor(netHex: Colors.warmGrey)
-        self.voucherCodeStackView.isHidden = true
+        self.voucherCodeStackView.isHidden = false
     }
     
     func setupLabels() {
         let dobInfoString1 = NSLocalizedString("When were you born? And ", comment: "")
         let dobInfoString2 = NSLocalizedString("why do we need to know?", comment: "")
-        let voucherString1 = NSLocalizedString("If you don’t have a voucher code ", comment: "")
-        let voucherString2 = NSLocalizedString("tap here", comment: "")
+        let voucherString1 = "" //NSLocalizedString("If you don’t have a voucher code ", comment: "")
+        let voucherString2 = "" //NSLocalizedString("tap here", comment: "")
         
         let infoAttributes = [
             NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.warmGrey),
