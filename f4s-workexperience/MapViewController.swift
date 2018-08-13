@@ -312,7 +312,7 @@ extension MapViewController {
         workfinderLogoImageView.image = UIImage(named: "logo2")?.withRenderingMode(.alwaysTemplate)
         workfinderLogoImageView.tintColor = UIColor.gray
         partnerLogoImageView.image = partnerLogo.withRenderingMode(.alwaysTemplate)
-        workfinderLogoImageView.tintColor = UIColor.gray
+        partnerLogoImageView.tintColor = UIColor.gray
     }
     
     fileprivate func setupLabels() {
