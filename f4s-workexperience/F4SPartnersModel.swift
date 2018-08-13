@@ -94,9 +94,12 @@ public class F4SPartnersModel {
         let school = F4SPartner(uuid: "96638617-13df-489e-bb10-e02a3dc3391b", name: "My School")
         let friend = F4SPartner(uuid: "1c72eb94-538c-4a39-b0db-20a9f8269d35", name: "My Friend")
         var nominet = F4SPartner(uuid: "13639d44-5111-45c4-ac21-014bedac20da", name: "Nominet Trust")
+        var ncs = F4SPartner(uuid: ncsUID, name: "NCS")
         nominet.imageName = "partnerLogoNominet"
+        ncs.imageName = "partnerLogoNCS"
         
         addOrReplacePartner(nominet)
+        addOrReplacePartner(ncs)
         addOrReplacePartner(parent)
         addOrReplacePartner(school)
         addOrReplacePartner(friend)
