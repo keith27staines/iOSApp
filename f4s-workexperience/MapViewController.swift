@@ -19,6 +19,14 @@ enum CamerWillMoveAction {
 
 class MapViewController: UIViewController {
     
+    var clusterColor: UIColor {
+        return UIColor.blue
+    }
+    
+    @IBOutlet weak var logoStack: UIStackView!
+    @IBOutlet weak var partnerLogoImageView: UIImageView!
+    @IBOutlet weak var workfinderLogoImageView: UIImageView!
+    
     var cameraWillMoveAction: CamerWillMoveAction = .none {
         didSet {
             switch cameraWillMoveAction {
@@ -153,6 +161,7 @@ class MapViewController: UIViewController {
         adjustAppeareance()
         handleTextFieldInterfaces()
         setupMap()
+        setupLogos()
         setupReachability(nil, useClosures: true)
         startNotifier()
         if !(UIApplication.shared.delegate as! AppDelegate).databaseDownloadManager!.isLocalDatabaseAvailable() {
@@ -292,6 +301,18 @@ extension MapViewController {
         filtersButton.setBackgroundColor(color: UIColor(netHex: Colors.azure), forUIControlState: .highlighted)
         filtersButton.setImage(UIImage(named: "filtersIcon"), for: .normal)
         filtersButton.setImage(UIImage(named: "filtersIcon"), for: .highlighted)
+    }
+    
+    fileprivate func setupLogos() {
+        guard let partnerLogo = F4SPartnersModel.sharedInstance.selectedPartner?.image else {
+            logoStack.isHidden = true
+            return
+        }
+        logoStack.isHidden = false
+        workfinderLogoImageView.image = UIImage(named: "logo2")?.withRenderingMode(.alwaysTemplate)
+        workfinderLogoImageView.tintColor = UIColor.gray
+        partnerLogoImageView.image = partnerLogo.withRenderingMode(.alwaysTemplate)
+        workfinderLogoImageView.tintColor = UIColor.gray
     }
     
     fileprivate func setupLabels() {
@@ -535,7 +556,7 @@ extension MapViewController {
     }
     
     fileprivate func iconGeneratorWithImages() -> GMUClusterIconGenerator {
-        return CustomClusterIconGenerator()
+        return CustomClusterIconGenerator(color: clusterColor)
     }
     
     fileprivate func makeLocationManager() -> CLLocationManager {
@@ -1080,10 +1101,12 @@ extension MapViewController {
     func createFilteredMapModel(unfilteredModel: MapModel,
                                 interestFilterSet: F4SInterestSet,
                                 completed: @escaping (MapModel) -> Void) {
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let strongSelf = self else { return }
             let filteredModel = MapModel(allCompanyPinsSet: unfilteredModel.allCompanyPins,
                                          allInterests: unfilteredModel.interestsModel.allInterests,
-                                         filtereredBy: interestFilterSet)
+                                         filtereredBy: interestFilterSet,
+                                         clusterColor: strongSelf.clusterColor)
             completed(filteredModel)
         }
     }
@@ -1092,14 +1115,16 @@ extension MapViewController {
     ///
     /// - parameter completion: Calls back with the newly created MapModel
     func createUnfilteredMapModelFromDatabase(completion: @escaping (MapModel) -> Void ) {
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let strongSelf = self else { return }
             let dbOps = DatabaseOperations.sharedInstance
             dbOps.getAllCompanies(completed: { companies in
                 dbOps.getAllInterests(completed: { (interests) in
                     let mapModel = MapModel(
                         allCompanies: companies,
                         allInterests:interests,
-                        selectedInterests: nil)
+                        selectedInterests: nil,
+                        clusterColor: strongSelf.clusterColor)
                     DispatchQueue.main.async {
                         completion(mapModel)
                     }

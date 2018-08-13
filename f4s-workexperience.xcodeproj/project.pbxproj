@@ -1060,6 +1060,7 @@
 				FCA53B931FE115E1009F6DB0 /* Force app update */,
 				FC4BB6011FA20E6A00173864 /* Partner selection */,
 				204203F21E4B78BB007C7409 /* Favourite */,
+				40E78E921DD391B6000A3776 /* Map */,
 				201458C11E1CFCC300DBC9BD /* Message */,
 				40A28CB31E1F96810077D490 /* RatePlacement */,
 				57A1618D1DEDA8880004AC60 /* Notification */,
@@ -1069,7 +1070,6 @@
 				D5E9EBF31DDA164800BD796E /* CompanyDetails */,
 				40C1A4E81DDB36A4000F80AA /* Timeline */,
 				40E78E901DD38F6E000A3776 /* Onboarding */,
-				40E78E921DD391B6000A3776 /* Map */,
 			);
 			name = UIComponents;
 			sourceTree = "<group>";

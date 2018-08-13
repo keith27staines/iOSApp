@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -94,6 +95,21 @@
                                     <constraint firstItem="LQ6-vJ-i4v" firstAttribute="centerY" secondItem="Flp-FB-sKl" secondAttribute="centerY" id="p8n-KW-fjR"/>
                                 </constraints>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Lgj-RU-RS3" userLabel="logoStack">
+                                <rect key="frame" x="16" y="587" width="90" height="50"/>
+                                <subviews>
+                                    <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo2" translatesAutoresizingMaskIntoConstraints="NO" id="u6v-YJ-KBz">
+                                        <rect key="frame" x="0.0" y="0.0" width="43" height="50"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="partnerLogoNominet" translatesAutoresizingMaskIntoConstraints="NO" id="Djg-9L-mon">
+                                        <rect key="frame" x="47" y="0.0" width="43" height="50"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Org-st-oLv"/>
+                                    <constraint firstAttribute="width" constant="90" id="n88-O4-aiY"/>
+                                </constraints>
+                            </stackView>
                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8cG-OV-1mj">
                                 <rect key="frame" x="285" y="577" width="70" height="70"/>
                                 <color key="backgroundColor" red="0.31372549020000001" green="0.50196078430000002" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
@@ -113,6 +129,7 @@
                         <constraints>
                             <constraint firstItem="8cG-OV-1mj" firstAttribute="leading" secondItem="Flp-FB-sKl" secondAttribute="trailing" constant="-15" id="39J-K5-mm1"/>
                             <constraint firstItem="K4D-D8-746" firstAttribute="top" secondItem="j0e-ED-LBK" secondAttribute="bottom" id="6ba-1l-dJd"/>
+                            <constraint firstItem="Lgj-RU-RS3" firstAttribute="leading" secondItem="Jry-b3-21i" secondAttribute="leadingMargin" id="DPs-z6-Hd1"/>
                             <constraint firstAttribute="trailing" secondItem="D07-OV-PCy" secondAttribute="trailing" constant="10" id="Jt4-bW-POR"/>
                             <constraint firstAttribute="trailing" secondItem="j0e-ED-LBK" secondAttribute="trailing" id="VU5-0f-SZK"/>
                             <constraint firstItem="j0e-ED-LBK" firstAttribute="leading" secondItem="Jry-b3-21i" secondAttribute="leading" id="ZpF-dM-TLY"/>
@@ -121,17 +138,21 @@
                             <constraint firstItem="D07-OV-PCy" firstAttribute="top" secondItem="DdT-jA-TTu" secondAttribute="bottom" constant="10" id="gnI-NY-YPU"/>
                             <constraint firstItem="j0e-ED-LBK" firstAttribute="top" secondItem="Jry-b3-21i" secondAttribute="top" id="gyC-rS-p6I"/>
                             <constraint firstItem="K4D-D8-746" firstAttribute="top" secondItem="8cG-OV-1mj" secondAttribute="bottom" constant="20" id="jca-bJ-N1s"/>
+                            <constraint firstItem="8cG-OV-1mj" firstAttribute="centerY" secondItem="Lgj-RU-RS3" secondAttribute="centerY" id="yiB-ot-Q1Y"/>
                             <constraint firstItem="Flp-FB-sKl" firstAttribute="centerY" secondItem="8cG-OV-1mj" secondAttribute="centerY" id="zWq-5i-wpb"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="filtersButton" destination="8cG-OV-1mj" id="lg9-Tr-cXf"/>
+                        <outlet property="logoStack" destination="Lgj-RU-RS3" id="FZS-DQ-vFL"/>
                         <outlet property="mapView" destination="j0e-ED-LBK" id="l7r-Rb-jw2"/>
                         <outlet property="myLocationButton" destination="vB2-GM-gOM" id="RpY-dn-KPz"/>
+                        <outlet property="partnerLogoImageView" destination="Djg-9L-mon" id="5E7-wB-xYL"/>
                         <outlet property="refineLabelContainerView" destination="Flp-FB-sKl" id="8dx-Ob-Jph"/>
                         <outlet property="refineSearchLabel" destination="LQ6-vJ-i4v" id="naU-rt-Xxk"/>
                         <outlet property="searchLocationTextField" destination="XWf-o5-kyn" id="aWb-sJ-oM9"/>
                         <outlet property="searchView" destination="D07-OV-PCy" id="dbB-bg-yUD"/>
+                        <outlet property="workfinderLogoImageView" destination="u6v-YJ-KBz" id="AfA-GM-n9N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tci-cd-e4r" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -142,6 +163,8 @@
     <resources>
         <image name="directionArrowIcon" width="16" height="16"/>
         <image name="filtersIcon" width="23" height="27"/>
+        <image name="logo2" width="133" height="136"/>
+        <image name="partnerLogoNominet" width="229" height="240"/>
         <image name="searchIcon" width="16" height="16"/>
     </resources>
 </document>

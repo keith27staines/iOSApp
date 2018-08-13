@@ -94,10 +94,27 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
             switch indexPath.row
             {
             case 0:
+                let imageStack = UIStackView()
+                imageStack.axis = .horizontal
+                imageStack.spacing = 40
+                imageStack.distribution = .fillEqually
                 let image: UIImage = UIImage(named: "logo2")!
                 let imageView = UIImageView(image: image)
-                imageView.frame = CGRect(x: 30, y: 30, width: 90, height: 90)
-                cell.addSubview(imageView)
+                imageView.contentMode = .scaleAspectFit
+                imageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+                imageStack.addArrangedSubview(imageView)
+                if let partnerLogo = F4SPartnersModel.sharedInstance.selectedPartner?.image {
+                    let partnerImage = UIImageView(image: partnerLogo)
+                    partnerImage.contentMode = .scaleAspectFit
+                    imageStack.addArrangedSubview(partnerImage)
+                }
+                imageStack.frame = CGRect(x: 30, y: 30, width: 300, height: 60)
+                imageStack.translatesAutoresizingMaskIntoConstraints = false
+                cell.addSubview(imageStack)
+                imageStack.topAnchor.constraint(equalTo: cell.topAnchor, constant: 12).isActive = true
+                imageStack.bottomAnchor.constraint(equalTo: cell.bottomAnchor, constant: -12).isActive = true
+                imageStack.leftAnchor.constraint(equalTo: cell.leftAnchor, constant: 20).isActive = true
+                imageStack.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -20).isActive = true
                 cell.isUserInteractionEnabled = false
             default:
                 break
