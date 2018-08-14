@@ -65,7 +65,6 @@ extension FavouriteViewController {
         self.navigationController?.navigationBar.isTranslucent = false
     }
     
-    
     func setupBackgroundView() {
         let titleStr = NSLocalizedString("No favourites yet", comment: "")
         let infoStr = NSLocalizedString("Once you have favourited a company it will appear here.", comment: "")

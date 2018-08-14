@@ -333,4 +333,11 @@ extension UIViewController {
         }
     }
 }
+extension UIView {
+    var skin: Skin? {
+        get {
+            return ((UIApplication.shared.delegate) as! AppDelegate).skin
+        }
+    }
+}
 

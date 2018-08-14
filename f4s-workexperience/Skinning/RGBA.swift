@@ -35,6 +35,10 @@ public struct RGBA : Codable {
     public var uiColor : UIColor {
         return UIColor(red: red, green: green, blue: blue, alpha: alpha)
     }
+
+    public var disabledColor: RGBA {
+        return RGBA(red: red, green: green, blue: blue, alpha: 0.7)
+    }
     
     public var cgColor: CGColor {
         return uiColor.cgColor

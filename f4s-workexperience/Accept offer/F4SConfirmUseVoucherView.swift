@@ -94,14 +94,14 @@ class F4SConfirmUseVoucherView: UIView {
     lazy var yesButton: UIButton = {
         let button = makeButton(title: "Yes", backColor: UIColor.blue, titleColor: UIColor.white)
         button.addTarget(self, action: #selector(performYesAction), for: .touchUpInside)
-        F4SButtonStyler.apply(style: F4SButtonStyle.primary , button: button)
+        Skinner().apply(buttonSkin: skin?.primaryButtonSkin, to: button)
         return button
     }()
     
     lazy var noButton: UIButton = {
         let button = makeButton(title: "No", backColor: UIColor.red, titleColor: UIColor.white)
-        F4SButtonStyler.apply(style: F4SButtonStyle.secondary, button: button)
         button.addTarget(self, action: #selector(performNoAction), for: .touchUpInside)
+        Skinner().apply(buttonSkin: skin?.secondaryButtonSkin, to: button)
         return button
     }()
     

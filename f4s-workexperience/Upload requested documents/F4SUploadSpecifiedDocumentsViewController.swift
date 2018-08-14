@@ -43,10 +43,9 @@ class F4SUploadSpecifiedDocumentsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        F4SButtonStyler.apply(style: .primary, button: uploadButton)
+        applyStyle()
         navigationItem.title = "Provide info"
         introductionText.text = NSLocalizedString("Add links to the information requested by \(companyName) in their recent message to you", comment: "")
-        
         uploadButton.isEnabled = model.canSubmitToServer()
         
         NotificationCenter.default.addObserver(forName: Notification.Name.uploadRequestSubmitStateUpdated, object: nil, queue: nil) { [weak self] (notification) in
@@ -57,6 +56,10 @@ class F4SUploadSpecifiedDocumentsViewController: UIViewController {
             }
             
         }
+    }
+    
+    func applyStyle() {
+        Skinner().apply(buttonSkin: skin?.primaryButtonSkin, to: uploadButton)
     }
     
     deinit {

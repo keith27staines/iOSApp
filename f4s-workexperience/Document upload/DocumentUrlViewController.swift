@@ -56,7 +56,7 @@ class DocumentUrlViewController: UIViewController {
     }
     
     func applyStyle() {
-        F4SButtonStyler.apply(style: .primary, button: continueButton)
+        Skinner().apply(buttonSkin: skin?.primaryButtonSkin, to: continueButton)
     }
     
     @IBAction func continueButtonTapped(_ sender: Any) {

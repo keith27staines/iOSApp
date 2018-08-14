@@ -54,9 +54,10 @@ class F4SEmailVerificationViewController: UIViewController {
     }
     
     func applyStyle() {
-        F4SButtonStyler.apply(style: .primary, button: primaryActionButton)
-        F4SButtonStyler.apply(style: .secondary, button: secondaryActionButton)
-        F4SBackgroundViewStyler.apply(style: .standardPageBackground, backgroundView: self.view)
+        let skinner = Skinner()
+        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: primaryActionButton)
+        skinner.apply(buttonSkin: skin?.secondaryButtonSkin, to: secondaryActionButton)
+        self.view.backgroundColor = RGBA.workfinderGreen.uiColor
     }
     
     func handleStateChange(oldState: F4SEmailVerificationState, newState: F4SEmailVerificationState) {

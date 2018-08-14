@@ -112,8 +112,9 @@ extension AcceptOfferViewController : UITableViewDataSource {
     }
     
     func configureButtonCell(_ buttonsCell: F4SInviteButtonsTableViewCell, for state: F4SPlacementStatus) {
-        F4SButtonStyler.apply(style: .primary, button: buttonsCell.primaryButton)
-        F4SButtonStyler.apply(style: .secondary, button: buttonsCell.secondaryButton)
+        let skinner = Skinner()
+        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: buttonsCell.primaryButton)
+        skinner.apply(buttonSkin: skin?.secondaryButtonSkin, to: buttonsCell.secondaryButton)
         
         switch state {
         case .accepted:

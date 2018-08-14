@@ -58,7 +58,7 @@ class MessageContainerViewController: UIViewController {
         }
         actionButtonHeightConstraint.constant = 0.0
         actionButton.isEnabled = false
-        F4SButtonStyler.apply(style: .primary, button: actionButton)
+        Skinner().apply(buttonSkin: skin?.primaryButtonSkin, to: actionButton)
     }
     
     override func viewWillAppear(_ animated: Bool) {

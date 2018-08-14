@@ -72,8 +72,8 @@ class PartnerSelectionViewController: UIViewController {
     }
     
     func applyStyle() {
-        F4SButtonStyler.apply(style: .primary, button: self.doneButton)
-        F4SBackgroundViewStyler.apply(style: .standardPageBackground, backgroundView: self.view)
+        Skinner().apply(buttonSkin: skin?.primaryButtonSkin, to: doneButton)
+        self.view.backgroundColor = RGBA.workfinderGreen.uiColor
     }
     
     lazy var partnersModel: F4SPartnersModel = {

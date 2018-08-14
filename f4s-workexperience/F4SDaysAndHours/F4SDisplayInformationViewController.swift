@@ -99,7 +99,7 @@ class F4SDisplayInformationViewController: UIViewController {
     }
     
     func applyStyle() {
-        F4SButtonStyler.apply(style: .primary, button: doneButton)
+        Skinner().apply(buttonSkin: skin?.primaryButtonSkin, to: doneButton)
     }
 
 }

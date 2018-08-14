@@ -46,11 +46,16 @@ class RequestBLProvideDocuments: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        F4SButtonStyler.apply(style: .primary, button: skipButton)
-        F4SButtonStyler.apply(style: .secondary, button: requestButton)
+        applyStyle()
         self.tableVIew.dataSource = self
         self.tableVIew.delegate = self
         configureButtons()
+    }
+    
+    func applyStyle() {
+        let skinner = Skinner()
+        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: skipButton)
+        skinner.apply(buttonSkin: skin?.secondaryButtonSkin, to: skipButton)
     }
 
     func configureButtons() {

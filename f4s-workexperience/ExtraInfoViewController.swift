@@ -127,8 +127,9 @@ class ExtraInfoViewController: UIViewController {
     }
     
     func applyStyle() {
-        F4SButtonStyler.apply(style: .primary, button: self.exploreMapButton)
-        F4SButtonStyler.apply(style: .primary, button: self.completeExtraInfoButton)
+        let skinner = Skinner()
+        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: exploreMapButton)
+        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: completeExtraInfoButton)
     }
     
 }

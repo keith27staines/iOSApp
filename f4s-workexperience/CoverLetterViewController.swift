@@ -75,7 +75,6 @@ extension CoverLetterViewController {
     func adjustNavigationBar() {
         navigationController?.setNavigationBarHidden(false, animated: false)
         let leftButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(backButtonTouched))
-//        let leftButton = UIBarButtonItem(image: UIImage(named: "Back"), style: UIBarButtonItemStyle.done, target: self, action: #selector(backButtonTouched))
         navigationItem.leftBarButtonItem = leftButton
 
         let editCoverLetterTitle = NSLocalizedString("Edit Cover Letter", comment: "")
@@ -100,15 +99,8 @@ extension CoverLetterViewController {
 
     func setApplyButton() {
         let applyText = NSLocalizedString("Apply", comment: "")
-        applyButton.setBackgroundColor(color: UIColor(netHex: Colors.mediumGreen), forUIControlState: .normal)
-        applyButton.setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)
-        applyButton.setBackgroundColor(color: UIColor(netHex: Colors.whiteGreen), forUIControlState: .disabled)
-        applyButton.setTitleColor(UIColor.white, for: .normal)
-        applyButton.setTitleColor(UIColor.white, for: .highlighted)
-
-        applyButton.layer.cornerRadius = 10
-        applyButton.layer.masksToBounds = true
-        applyButton.setAttributedTitle(NSAttributedString(string: applyText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.white]), for: .normal)
+        Skinner().apply(buttonSkin: skin?.primaryButtonSkin, to: applyButton)
+        applyButton.setTitle(applyText, for: .normal)
     }
 
     func setBottomView() {

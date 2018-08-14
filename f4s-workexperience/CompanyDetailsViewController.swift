@@ -376,8 +376,7 @@ extension CompanyDetailsViewController {
         guard let company = self.company else {
             return
         }
-        applyButton.layer.masksToBounds = true
-
+        Skinner().apply(buttonSkin: skin?.primaryButtonSkin, to: applyButton)
         var applyText: String = ""
         if let placement = PlacementDBOperations.sharedInstance.getPlacementsForCurrentUserAndCompany(companyUuid: company.uuid) {
             self.placement = placement
@@ -386,35 +385,25 @@ extension CompanyDetailsViewController {
             {
             case .inProgress:
                 applyText = NSLocalizedString("Finish Application", comment: "")
-                applyButton.setBackgroundColor(color: UIColor(netHex: Colors.orangeNormal), forUIControlState: .normal)
-                applyButton.setBackgroundColor(color: UIColor(netHex: Colors.orangeActive), forUIControlState: .highlighted)
                 break
             default:
                 // applied
                 applyText = NSLocalizedString("Applied", comment: "")
-                applyButton.backgroundColor = UIColor(netHex: Colors.mediumGreen).withAlphaComponent(0.5)
-                applyButton.isUserInteractionEnabled = false
+                applyButton.isEnabled = false
                 break
             }
         } else {
             // no placement was create
             // show apply button
             applyText = NSLocalizedString("Apply", comment: "")
-            applyButton.setBackgroundColor(color: UIColor(netHex: Colors.mediumGreen), forUIControlState: .normal)
-            applyButton.setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)
         }
-        applyButton.layer.cornerRadius = 10
-        applyButton.setAttributedTitle(NSAttributedString(string: applyText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.white]), for: .normal)
-        applyButton.setTitleColor(UIColor.white, for: .normal)
-        applyButton.setTitleColor(UIColor.white, for: .highlighted)
-
+        applyButton.setTitle(applyText, for: .normal)
         closeButton.tintColor = UIColor.black
         shareButton.tintColor = UIColor.black
         mapButton.tintColor = UIColor.red
 
         // shortlist
-        shortlistButton.backgroundColor = UIColor(netHex: Colors.normalGray)
-        shortlistButton.layer.cornerRadius = 10
+        shortlistButton.backgroundColor = UIColor(netHex: Colors.white)
 
         setShortlistButton()
     }
@@ -427,11 +416,13 @@ extension CompanyDetailsViewController {
         shortlist = ShortlistDBOperations.sharedInstance.getShortlistForCurrentUser()
         if shortlist.contains(where: { $0.companyUuid == company.uuid }) {
             // the company is shortlisted
-            shortlistButton.setImage(UIImage(named: "shortlist"), for: .normal)
+            shortlistButton.setImage(UIImage(named: "shortlist")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            
         } else {
             // the comapny isn't shortlisted
-            shortlistButton.setImage(UIImage(named: "unshortlist"), for: .normal)
+            shortlistButton.setImage(UIImage(named: "unshortlist")?.withRenderingMode(.alwaysTemplate), for: .normal)
         }
+        shortlistButton.tintColor = RGBA.black.uiColor
     }
 
     func setupLabels() {
