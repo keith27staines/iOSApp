@@ -139,6 +139,10 @@
 		FC09CD5120CA62D700A79240 /* F4SShortlistService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC09CD5020CA62D700A79240 /* F4SShortlistService.swift */; };
 		FC09CD5320CA6D4500A79240 /* F4SJsonDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC09CD5220CA6D4500A79240 /* F4SJsonDecoding.swift */; };
 		FC11006A1FB36A230055EB9A /* ReachabilityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */; };
+		FC1334E62121BE10003435A6 /* FactorySkins.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1334E22121BE10003435A6 /* FactorySkins.swift */; };
+		FC1334E72121BE10003435A6 /* RGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1334E32121BE10003435A6 /* RGBA.swift */; };
+		FC1334E82121BE11003435A6 /* Skinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1334E42121BE10003435A6 /* Skinner.swift */; };
+		FC1334E92121BE11003435A6 /* Skin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1334E52121BE10003435A6 /* Skin.swift */; };
 		FC1D6B7C20D906D100D0C9AF /* F4STemplateModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D6B7B20D906D100D0C9AF /* F4STemplateModels.swift */; };
 		FC1D6B8020D92C8900D0C9AF /* F4STemplateModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D6B7F20D92C8900D0C9AF /* F4STemplateModelTests.swift */; };
 		FC2090802115E7EC001A0321 /* ViewDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC20907F2115E7EC001A0321 /* ViewDocumentViewController.swift */; };
@@ -513,6 +517,10 @@
 		FC09CD5020CA62D700A79240 /* F4SShortlistService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SShortlistService.swift; sourceTree = "<group>"; };
 		FC09CD5220CA6D4500A79240 /* F4SJsonDecoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SJsonDecoding.swift; sourceTree = "<group>"; };
 		FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityExtension.swift; sourceTree = "<group>"; };
+		FC1334E22121BE10003435A6 /* FactorySkins.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FactorySkins.swift; sourceTree = "<group>"; };
+		FC1334E32121BE10003435A6 /* RGBA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGBA.swift; sourceTree = "<group>"; };
+		FC1334E42121BE10003435A6 /* Skinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skinner.swift; sourceTree = "<group>"; };
+		FC1334E52121BE10003435A6 /* Skin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skin.swift; sourceTree = "<group>"; };
 		FC1D6B7B20D906D100D0C9AF /* F4STemplateModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateModels.swift; sourceTree = "<group>"; };
 		FC1D6B7F20D92C8900D0C9AF /* F4STemplateModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateModelTests.swift; sourceTree = "<group>"; };
 		FC20907F2115E7EC001A0321 /* ViewDocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDocumentViewController.swift; sourceTree = "<group>"; };
@@ -1323,6 +1331,17 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		FC1334EA2121BE1C003435A6 /* Skinning */ = {
+			isa = PBXGroup;
+			children = (
+				FC1334E32121BE10003435A6 /* RGBA.swift */,
+				FC1334E22121BE10003435A6 /* FactorySkins.swift */,
+				FC1334E52121BE10003435A6 /* Skin.swift */,
+				FC1334E42121BE10003435A6 /* Skinner.swift */,
+			);
+			path = Skinning;
+			sourceTree = "<group>";
+		};
 		FC25A05D1F850DAC002F51A9 /* F4SMap models and services */ = {
 			isa = PBXGroup;
 			children = (
@@ -1621,6 +1640,7 @@
 		FCA6D2921FA740EC0037962B /* Branding and styling */ = {
 			isa = PBXGroup;
 			children = (
+				FC1334EA2121BE1C003435A6 /* Skinning */,
 				FCA6D2931FA741590037962B /* F4SStyle.swift */,
 				FCA6D2951FA75DE40037962B /* Styler.swift */,
 			);
@@ -2159,6 +2179,7 @@
 				40C1A51F1DDF5ACE000F80AA /* GMUStaticCluster.m in Sources */,
 				FC5C5B952109FF48007DCB84 /* RequestBLProvideDocuments.swift in Sources */,
 				FCA6D2B61FA88CE10037962B /* F4SPartnerService.swift in Sources */,
+				FC1334E72121BE10003435A6 /* RGBA.swift in Sources */,
 				FCEF70B721087207001C229A /* F4SInviteDetailCell.swift in Sources */,
 				FCE11E572113407F00403789 /* F4SCalendarEventWriter.swift in Sources */,
 				204203EE1E4B16D7007C7409 /* ShortlistDBOperations.swift in Sources */,
@@ -2288,6 +2309,7 @@
 				204203F91E4B81AB007C7409 /* FavouriteTableViewCell.swift in Sources */,
 				FC8E303A20F4A60B006059DE /* F4SLogger.swift in Sources */,
 				FC31F095204D54C6009DD526 /* F4SDebugViewController.swift in Sources */,
+				FC1334E82121BE11003435A6 /* Skinner.swift in Sources */,
 				FCB6B8E32074C59C0042C725 /* F4SMonthHeaderView.swift in Sources */,
 				FC67E60A207B70CE006F07FE /* F4SCalendarService.swift in Sources */,
 				FCE20CC0203C12F300CA821D /* URLTableViewController.swift in Sources */,
@@ -2298,6 +2320,7 @@
 				40C1A51C1DDF5ACE000F80AA /* GMUGridBasedClusterAlgorithm.m in Sources */,
 				FC86A5FD20B6E93B002BAD74 /* F4SUploadRequestedDocumentsTableViewModel.swift in Sources */,
 				FCD3486620038C3100DC1316 /* F4SEmailVerificationState.swift in Sources */,
+				FC1334E62121BE10003435A6 /* FactorySkins.swift in Sources */,
 				FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */,
 				FC62FF9820EF75FE003E52C5 /* F4SApiUrls.swift in Sources */,
 				FC99BDCA20D170CA00278DDE /* F4SDatabaseDownloadManager.swift in Sources */,
@@ -2307,6 +2330,7 @@
 				40E78E811DD32BF4000A3776 /* TableViewCell.swift in Sources */,
 				201458C71E1CFD7400DBC9BD /* MessageViewController.swift in Sources */,
 				FCF06EE520DBFE1B00FD990C /* F4SPlacementService.swift in Sources */,
+				FC1334E92121BE11003435A6 /* Skin.swift in Sources */,
 				40C1A5221DDF5ACE000F80AA /* GQTPointQuadTreeChild.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -34,6 +34,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return F4SUserService()
     }()
     
+    lazy var skins: Skins = Skin.loadSkins()
+    
+    var skin: Skin? {
+        let workfinderSkin = skins["workfinder"]
+        guard let partner = F4SPartnersModel.sharedInstance.selectedPartner else {
+            return workfinderSkin
+        }
+        let partnerSkinKey = partner.name.lowercased()
+        return skins[partnerSkinKey] ?? workfinderSkin
+    }
+    
     // MARK:- Application events
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         if ProcessInfo.processInfo.arguments.contains("isUnitTesting") {
@@ -311,6 +322,14 @@ extension AppDelegate {
                 object: self,
                 userInfo: userInfo)
             NotificationCenter.default.post(notification)
+        }
+    }
+}
+
+extension UIViewController {
+    var skin: Skin? {
+        get {
+            return ((UIApplication.shared.delegate) as! AppDelegate).skin
         }
     }
 }
