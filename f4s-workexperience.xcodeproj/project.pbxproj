@@ -224,7 +224,6 @@
 		FCA6C8252107163B00A222FE /* F4SConfirmUseVoucherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6C8242107163B00A222FE /* F4SConfirmUseVoucherView.swift */; };
 		FCA6C829210760E000A222FE /* F4SHoorayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6C828210760E000A222FE /* F4SHoorayViewController.swift */; };
 		FCA6D2941FA741590037962B /* F4SStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6D2931FA741590037962B /* F4SStyle.swift */; };
-		FCA6D2961FA75DE40037962B /* Styler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6D2951FA75DE40037962B /* Styler.swift */; };
 		FCA6D2B61FA88CE10037962B /* F4SPartnerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6D2B51FA88CE00037962B /* F4SPartnerService.swift */; };
 		FCACBF4420C7EB9F00EABAE8 /* F4SContentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCACBF4320C7EB9F00EABAE8 /* F4SContentService.swift */; };
 		FCACBF4620C8085900EABAE8 /* F4SVoucherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */; };
@@ -597,7 +596,6 @@
 		FCA6C8242107163B00A222FE /* F4SConfirmUseVoucherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SConfirmUseVoucherView.swift; sourceTree = "<group>"; };
 		FCA6C828210760E000A222FE /* F4SHoorayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SHoorayViewController.swift; sourceTree = "<group>"; };
 		FCA6D2931FA741590037962B /* F4SStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SStyle.swift; sourceTree = "<group>"; };
-		FCA6D2951FA75DE40037962B /* Styler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styler.swift; sourceTree = "<group>"; };
 		FCA6D2B51FA88CE00037962B /* F4SPartnerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPartnerService.swift; sourceTree = "<group>"; };
 		FCACBF4320C7EB9F00EABAE8 /* F4SContentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SContentService.swift; sourceTree = "<group>"; };
 		FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SVoucherService.swift; sourceTree = "<group>"; };
@@ -1640,9 +1638,8 @@
 		FCA6D2921FA740EC0037962B /* Branding and styling */ = {
 			isa = PBXGroup;
 			children = (
-				FC1334EA2121BE1C003435A6 /* Skinning */,
 				FCA6D2931FA741590037962B /* F4SStyle.swift */,
-				FCA6D2951FA75DE40037962B /* Styler.swift */,
+				FC1334EA2121BE1C003435A6 /* Skinning */,
 			);
 			name = "Branding and styling";
 			sourceTree = "<group>";
@@ -2283,7 +2280,6 @@
 				206F8F8C1E1E48120024937B /* MessageOptionCollectionViewCell.swift in Sources */,
 				FC631CB820D679AC00199507 /* F4SNetworkSessionManager.swift in Sources */,
 				20FEBDDA1DE5AD3400EBDCBF /* F4SImageService.swift in Sources */,
-				FCA6D2961FA75DE40037962B /* Styler.swift in Sources */,
 				FC4336CA202DB953001D0569 /* StringExtensions.swift in Sources */,
 				FC25A05F1F850DF4002F51A9 /* F4SCompanyPin.swift in Sources */,
 				FCF0D16C1FBC244800F2AF1D /* PopupAnimator.swift in Sources */,

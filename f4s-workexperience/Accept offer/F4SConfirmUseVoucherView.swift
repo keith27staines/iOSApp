@@ -130,7 +130,7 @@ class F4SConfirmUseVoucherView: UIView {
         label.text = code
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
-        label.textColor = WorkfinderColor.purple
+        label.textColor = RGBA.workfinderPurple.uiColor
         label.setContentHuggingPriority(.defaultHigh, for: .vertical)
         return label
     }()

@@ -39,7 +39,7 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
         tableView.register(UINib(nibName: "MenuHeaderCell", bundle: nil), forCellReuseIdentifier: "MenuHeaderCell")
         switch Config.environment {
         case .staging:
-            self.view.backgroundColor = WorkfinderColor.stagingGold
+            self.view.backgroundColor = RGBA.workfinderStagingGold.uiColor
         case .production:
             self.view.backgroundColor = UIColor(red: 72.0/255.0, green: 38.0/255.0, blue: 127.0/255.0, alpha: 1.0)
         }

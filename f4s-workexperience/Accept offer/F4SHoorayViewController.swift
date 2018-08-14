@@ -80,8 +80,8 @@ class F4SHoorayViewController: UIViewController {
         companyHeaderView.icon = accept.companyLogo
         F4SButtonStyler.apply(style: .primary, button: doneButton)
         F4SButtonStyler.apply(style: .secondary, button: addToCalendarButton)
-        hoorayLabel.textColor = WorkfinderColor.purple
-        placementConfirmedLabel.textColor = WorkfinderColor.purple
+        hoorayLabel.textColor = RGBA.workfinderPurple.uiColor
+        placementConfirmedLabel.textColor = RGBA.workfinderPurple.uiColor
         addToCalendarButton.isEnabled = isEventInformationComplete()
     }
 }

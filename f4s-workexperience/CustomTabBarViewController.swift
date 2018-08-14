@@ -90,7 +90,7 @@ class CustomTabBarViewController: UITabBarController {
         self.tabBar.backgroundColor = UIColor.white
         switch Config.environment {
         case .staging:
-            self.tabBar.barTintColor = WorkfinderColor.stagingGold
+            self.tabBar.barTintColor = RGBA.workfinderStagingGold.uiColor
             self.tabBar.tintColor = UIColor(red: 125 / 255, green: 125 / 255, blue: 125 / 255, alpha: 1)
         case .production:
             self.tabBar.barTintColor = UIColor(netHex: Colors.azure)
