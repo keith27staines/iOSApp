@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Reachability
+import Analytics
 
 class MessageContainerViewController: UIViewController {
     
@@ -110,7 +111,6 @@ class MessageContainerViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.evo_drawerController?.openDrawerGestureModeMask = .all
-        
         self.tabBarController?.tabBar.isTranslucent = false
         self.tabBarController?.tabBar.isHidden = false
     }
@@ -135,6 +135,22 @@ class MessageContainerViewController: UIViewController {
                         strongSelf.acceptContext = context
                         strongSelf.performSegue(withIdentifier: actionType.rawValue, sender: self)
                     }
+                }
+            case .viewCompanyExternalApplication:
+                guard let urlString = action.argument(name: F4SActionArgumentName.externalWebsite)?.value.first, let url = URL(string: urlString) else {
+                    // Invalid url
+                    log.error("The action contained an invalid url to the company's external application page")
+                    return
+                }
+                UIApplication.shared.open(url, options: [:]) { [weak self] (success) in
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    // log visit to segment
+                    var event = F4SAnalyticsEvent(name: .viewCompanyExternalApplication)
+                    event.addProperty(name: "placement_uuid", value: strongSelf.acceptContext?.placement.placementUuid ?? "")
+                    event.addProperty(name: "company_name", value: strongSelf.acceptContext?.company.name ?? "")
+                    event.track()
                 }
             }
         } catch {
