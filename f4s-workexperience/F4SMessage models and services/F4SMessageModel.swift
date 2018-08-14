@@ -82,6 +82,7 @@ public enum F4SActionType : String, Codable {
     
     case uploadDocuments = "upload_documents"
     case viewOffer = "view_offer"
+    case viewCompanyExternalApplication = "view_company_ext_application"
     
     var actionTitle: String {
         switch self {
@@ -89,6 +90,8 @@ public enum F4SActionType : String, Codable {
             return NSLocalizedString("Add documents", comment: "Action request from business leader asking young person to upload certain documents (which are specified elsewhere)")
         case .viewOffer:
             return NSLocalizedString("View offer", comment: "Action request directing young person to view their offer")
+        case .viewCompanyExternalApplication:
+            return NSLocalizedString("Apply externally", comment: "Takes the user to a 3rd party website to apply there")
         }
     }
 }
@@ -110,6 +113,7 @@ extension F4SActionArgument {
 public enum F4SActionArgumentName: String, Codable {
     case placementUuid = "placement_uuid"
     case documentType = "doc_type"
+    case externalWebsite = "external_website"
 }
 
 

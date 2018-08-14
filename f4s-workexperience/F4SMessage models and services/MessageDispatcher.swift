@@ -31,6 +31,10 @@ public struct F4SActionValidator {
             guard let _ = action.argument(name: .placementUuid) else {
                     throw F4SActionValidatorError.missingArgument
             }
+        case .viewCompanyExternalApplication:
+            guard let _ = action.argument(name: .placementUuid) else {
+                throw F4SActionValidatorError.missingArgument
+            }
         }
     }
     
