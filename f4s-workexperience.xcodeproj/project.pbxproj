@@ -224,7 +224,6 @@
 		FCA53B971FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */; };
 		FCA6C8252107163B00A222FE /* F4SConfirmUseVoucherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6C8242107163B00A222FE /* F4SConfirmUseVoucherView.swift */; };
 		FCA6C829210760E000A222FE /* F4SHoorayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6C828210760E000A222FE /* F4SHoorayViewController.swift */; };
-		FCA6D2941FA741590037962B /* F4SStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6D2931FA741590037962B /* F4SStyle.swift */; };
 		FCA6D2B61FA88CE10037962B /* F4SPartnerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6D2B51FA88CE00037962B /* F4SPartnerService.swift */; };
 		FCACBF4420C7EB9F00EABAE8 /* F4SContentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCACBF4320C7EB9F00EABAE8 /* F4SContentService.swift */; };
 		FCACBF4620C8085900EABAE8 /* F4SVoucherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */; };
@@ -597,7 +596,6 @@
 		FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = F4SForceAppUpdateViewController.xib; sourceTree = "<group>"; };
 		FCA6C8242107163B00A222FE /* F4SConfirmUseVoucherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SConfirmUseVoucherView.swift; sourceTree = "<group>"; };
 		FCA6C828210760E000A222FE /* F4SHoorayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SHoorayViewController.swift; sourceTree = "<group>"; };
-		FCA6D2931FA741590037962B /* F4SStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SStyle.swift; sourceTree = "<group>"; };
 		FCA6D2B51FA88CE00037962B /* F4SPartnerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPartnerService.swift; sourceTree = "<group>"; };
 		FCACBF4320C7EB9F00EABAE8 /* F4SContentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SContentService.swift; sourceTree = "<group>"; };
 		FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SVoucherService.swift; sourceTree = "<group>"; };
@@ -1641,7 +1639,6 @@
 		FCA6D2921FA740EC0037962B /* Branding and styling */ = {
 			isa = PBXGroup;
 			children = (
-				FCA6D2931FA741590037962B /* F4SStyle.swift */,
 				FC1334EA2121BE1C003435A6 /* Skinning */,
 			);
 			name = "Branding and styling";
@@ -2215,7 +2212,6 @@
 				204C89781DF5F0B200D8493A /* ChooseAttributesTableViewCell.swift in Sources */,
 				FCB6B8E92074C59C0042C725 /* F4SCalendarDay.swift in Sources */,
 				FC99F3D72000BE4900E3AC5A /* F4SService.swift in Sources */,
-				FCA6D2941FA741590037962B /* F4SStyle.swift in Sources */,
 				FC4BB6051FA20F4100173864 /* F4SPartner.swift in Sources */,
 				FCA6C829210760E000A222FE /* F4SHoorayViewController.swift in Sources */,
 				FCD3486520038C3100DC1316 /* LocalizedStrings.swift in Sources */,

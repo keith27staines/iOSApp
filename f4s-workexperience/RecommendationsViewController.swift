@@ -23,6 +23,11 @@ class RecommendationsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         reloadModel()
+        applyStyle()
+    }
+    
+    func applyStyle() {
+        Skinner().apply(navigationBarSkin: skin?.navigationBarSkin, to: self)
     }
     
     func reloadModel() {

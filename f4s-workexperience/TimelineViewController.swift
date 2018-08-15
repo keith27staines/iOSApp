@@ -111,20 +111,13 @@ extension TimelineViewController {
         userPlacements = placements.sorted(by: sortPlacementsByLatestMessage)
         let companyUuids = userPlacements.map({ $0.companyUuid })
         getCompaniesWithUuids(uuid: companyUuids)
-        if userPlacements.index(where: { (placement) -> Bool in
+        let unreadCount = userPlacements.filter { (placement) -> Bool in
             if placement.isRead == false {
                 return true
             }
             return false
-        }) == nil {
-            UserDefaults.standard.set(false, forKey: UserDefaultsKeys.shouldLoadTimeline)
-            navigationController?.tabBarItem.image = UIImage(named: "timelineIconUnselected")?.withRenderingMode(.alwaysOriginal)
-            navigationController?.tabBarItem.selectedImage = UIImage(named: "timelineIcon")?.withRenderingMode(.alwaysOriginal)
-        } else {
-            UserDefaults.standard.set(true, forKey: UserDefaultsKeys.shouldLoadTimeline)
-            navigationController?.tabBarItem.image = UIImage(named: "timelineIconUnreadUnselected")?.withRenderingMode(.alwaysOriginal)
-            navigationController?.tabBarItem.selectedImage = UIImage(named: "timelineIconUnread")?.withRenderingMode(.alwaysOriginal)
-        }
+        }.count
+        (tabBarController as? CustomTabBarViewController)?.configureTimelineTabBarWithCount(count: unreadCount)
     }
 
     func getCompaniesWithUuids(uuid: [String?]) {
@@ -167,16 +160,10 @@ extension TimelineViewController {
 extension TimelineViewController {
 
     func adjustNavigationBar() {
-        let menuButton = UIBarButtonItem(image: UIImage(named: "MenuButton"), style: .done, target: self, action: #selector(TimelineViewController.menuButtonTapped))
+        let menuButton = UIBarButtonItem(image: UIImage(named: "MenuButton")?.withRenderingMode(.alwaysTemplate), style: .done, target: self, action: #selector(TimelineViewController.menuButtonTapped))
         self.navigationItem.leftBarButtonItem = menuButton
-
         self.navigationItem.title = NSLocalizedString("Timeline", comment: "")
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        UIApplication.shared.statusBarStyle = .lightContent
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
-        self.navigationController?.navigationBar.barTintColor = UIColor(netHex: Colors.azure)
-        self.navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationController?.navigationBar.isTranslucent = false
+        styleNavigationController()
     }
 
     func setupBackgroundView() {

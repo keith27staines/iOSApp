@@ -67,9 +67,8 @@ class CompanyDetailsViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: false)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidRegisterForRemoteNotificationsNotification(_:)), name: NSNotification.Name(rawValue: "ApplicationDidRegisterForRemoteNotificationsNotification"), object: nil)
-        styleNavigationController(titleColor: UIColor.black, backgroundColor: UIColor.white, tintColor: UIColor.black, useLightStatusBar: false)
+        Skinner().apply(navigationBarSkin: nil, to: self)
     }
     
     lazy var companyDocumentsModel: F4SCompanyDocumentsModel = {

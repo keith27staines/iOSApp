@@ -45,25 +45,12 @@ class FavouriteViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        adjustNavigationBar()
+        styleNavigationController()
         loadData()
     }
 }
 //MARK: - UI Setup
 extension FavouriteViewController {
-    
-    func adjustNavigationBar() {
-        let menuButton = UIBarButtonItem(image: UIImage(named: "MenuButton"), style: .done, target: self, action: #selector(menuButtonTapped))
-        self.navigationItem.leftBarButtonItem = menuButton
-        
-        self.navigationItem.title = NSLocalizedString("Favourite", comment: "")
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        UIApplication.shared.statusBarStyle = .lightContent
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
-        self.navigationController?.navigationBar.barTintColor = UIColor(netHex: Colors.azure)
-        self.navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationController?.navigationBar.isTranslucent = false
-    }
     
     func setupBackgroundView() {
         let titleStr = NSLocalizedString("No favourites yet", comment: "")

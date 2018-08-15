@@ -11,7 +11,6 @@ import UIKit
 class F4SCalendarContainerViewController: UIViewController {
     @IBOutlet weak var pageHeaderView: F4SPageHeaderView!
     
-    var splashColor = UIColor(red: 72/255, green: 38/255, blue: 127/255, alpha: 1.0)
     var delegate: F4SCalendarCollectionViewControllerDelegate?
     var maskView: UIView?
     
@@ -31,9 +30,8 @@ class F4SCalendarContainerViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        styleNavigationController(titleColor: UIColor.white, backgroundColor: splashColor, tintColor: UIColor.white, useLightStatusBar: true)
+        styleNavigationController()
     }
-
 
     override func viewDidAppear(_ animated: Bool) {
         if F4SHelpContext.calendarController.shouldShowAutomatically {

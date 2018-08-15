@@ -44,18 +44,18 @@ class CustomTabBarViewController: UITabBarController {
     }
     
     func processUserStatusUpdate(_ status: F4SUserStatus) {
-        setTimelineTabBarImageFrom(status: status)
+        configureTimelineTabBarWithCount(count: status.unreadMessageCount)
         displayRatingPopover(unratedPlacements: status.unratedPlacements)
     }
     
-    func setTimelineTabBarImageFrom(status: F4SUserStatus) {
-        guard let timelineNavViewCtrl = self.viewControllers?.first as? RotationAwareNavigationController else { return }
-        let unselectedName = status.unreadMessageCount == 0 ? "timelineIconUnselected" : "timelineIconUnreadUnselected"
-        let selectedName = status.unreadMessageCount == 0 ? "timelineIcon" : "timelineIconUnread"
+    func configureTimelineTabBarWithCount(count: Int? = 0) {
         DispatchQueue.main.async {
-            timelineNavViewCtrl.tabBarItem.image = UIImage(named: unselectedName)?.withRenderingMode(.alwaysOriginal)
-            timelineNavViewCtrl.tabBarItem.selectedImage = UIImage(named: selectedName)?.withRenderingMode(.alwaysOriginal)
-            UserDefaults.standard.set(true, forKey: UserDefaultsKeys.shouldLoadTimeline)
+            guard let timelineNavViewCtrl = self.viewControllers?.first as? RotationAwareNavigationController, let tabBarItem = timelineNavViewCtrl.tabBarItem  else { return }
+            if let count = count, count > 0 {
+                tabBarItem.badgeValue = String(count)
+            } else {
+                tabBarItem.badgeValue = nil
+            }
         }
     }
     
@@ -84,19 +84,7 @@ class CustomTabBarViewController: UITabBarController {
 
     // MARK: - UI Setup
     fileprivate func configureTabBar() {
-        
-
-        self.tabBar.isTranslucent = false
-        self.tabBar.backgroundColor = UIColor.white
-        switch Config.environment {
-        case .staging:
-            self.tabBar.barTintColor = RGBA.workfinderStagingGold.uiColor
-            self.tabBar.tintColor = UIColor(red: 125 / 255, green: 125 / 255, blue: 125 / 255, alpha: 1)
-        case .production:
-            self.tabBar.barTintColor = UIColor(netHex: Colors.azure)
-            self.tabBar.tintColor = UIColor(red: 108 / 255, green: 181 / 255, blue: 246 / 255, alpha: 1)
-        }
-
+        Skinner().apply(tabBarSkin: skin?.tabBarSkin, to: self)
     }
 
     override func viewWillAppear(_ animation: Bool) {

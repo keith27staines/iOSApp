@@ -20,7 +20,7 @@ class EnterVoucherViewController: UIViewController {
     @IBOutlet weak var validationLabel: UILabel!
     
     var accept: AcceptOfferContext!
-    var splashColor = UIColor(red: 66/255, green: 192/255, blue: 236/255, alpha: 1.0)
+
     var voucher: F4SVoucher!
 
     var confirmView: F4SConfirmUseVoucherView? = nil
@@ -136,7 +136,7 @@ class EnterVoucherViewController: UIViewController {
         self.tabBarController?.tabBar.isTranslucent = true
         self.tabBarController?.tabBar.isHidden = true
         print("placement \(accept.placement)")
-        styleNavigationController(titleColor: UIColor.white, backgroundColor: splashColor, tintColor: UIColor.white, useLightStatusBar: true)
+        styleNavigationController()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

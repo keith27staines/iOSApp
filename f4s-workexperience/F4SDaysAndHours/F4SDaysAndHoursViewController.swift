@@ -32,8 +32,6 @@ class F4SDaysAndHoursViewController: UIViewController {
     
     @IBOutlet weak var footerLabel: UILabel!
     
-    var splashColor = UIColor(red: 72/255, green: 38/255, blue: 127/255, alpha: 1.0)
-    
     lazy var hoursPicker: F4SHoursPickerViewController? = {
         guard let pickerVC = self.storyboard?.instantiateViewController(withIdentifier: "HoursPicker") as? F4SHoursPickerViewController else {
             return nil
@@ -85,7 +83,7 @@ class F4SDaysAndHoursViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        styleNavigationController(titleColor: UIColor.white, backgroundColor: splashColor, tintColor: UIColor.white, useLightStatusBar: true)
+        styleNavigationController()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -218,27 +216,6 @@ extension F4SDaysAndHoursViewController {
         let titleColor = solid ? UIColor.white : splashColor
         button.setTitleColor(titleColor, for: .normal)
         button.layer.backgroundColor = solid ? splashColor.cgColor : UIColor.white.cgColor
-    }
-}
-
-extension UIViewController {
-    /// Style the navigation bar
-    /// - parameter titleColor: The color for the title text
-    /// - Parameter splashColor: The background color
-    /// - Parameter tintColor: The tint color for the title and buttons
-    /// - Parameter useLightStatusBar: a hint to the system to use light status bar content
-    func styleNavigationController(titleColor: UIColor, backgroundColor: UIColor, tintColor: UIColor, useLightStatusBar: Bool) {
-        guard let navigationController = self.navigationController else {
-            return
-        }
-        navigationController.navigationBar.tintColor = tintColor
-        navigationController.navigationBar.barTintColor = backgroundColor
-        navigationController.navigationBar.isTranslucent = false
-        navigationController.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:titleColor]
-        navigationController.navigationBar.barStyle =  useLightStatusBar ? .black : .default
-        navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController.navigationBar.shadowImage = UIImage()
-        navigationController.isNavigationBarHidden = false
     }
 }
 

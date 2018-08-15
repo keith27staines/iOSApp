@@ -36,14 +36,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     lazy var skins: Skins = Skin.loadSkins()
     
-    var skin: Skin? {
+    lazy var skin: Skin? = {
         let workfinderSkin = skins["workfinder"]
         guard let partner = F4SPartnersModel.sharedInstance.selectedPartner else {
             return workfinderSkin
         }
         let partnerSkinKey = partner.name.lowercased()
         return skins[partnerSkinKey] ?? workfinderSkin
-    }
+    }()
     
     // MARK:- Application events
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -332,6 +332,14 @@ extension UIViewController {
             return ((UIApplication.shared.delegate) as! AppDelegate).skin
         }
     }
+    var splashColor: UIColor {
+        return skin?.navigationBarSkin.barTintColor.uiColor ?? UIColor.white
+    }
+
+    /// Style the navigation bar
+    func styleNavigationController() {
+        Skinner().apply(navigationBarSkin: skin?.navigationBarSkin, to: self)
+    }
 }
 extension UIView {
     var skin: Skin? {
@@ -340,4 +348,19 @@ extension UIView {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

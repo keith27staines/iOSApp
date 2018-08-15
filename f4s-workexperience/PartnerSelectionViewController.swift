@@ -13,6 +13,7 @@ class PartnerSelectionViewController: UIViewController {
     var isTableDropped: Bool = false
     var selectedPartner: F4SPartner? = nil
     
+    @IBOutlet weak var partnerText: UILabel!
     @IBOutlet weak var instructionText: UILabel!
     
     @IBOutlet weak var referrerTextBox: UITextField!
@@ -42,6 +43,7 @@ class PartnerSelectionViewController: UIViewController {
         self.doneButton.isEnabled = false
         self.partnerLogoRightConstraint.constant = -200
         self.applyStyle()
+        partnerText.isHidden = true
     }
     
     func loadPartersFromServer() {
@@ -73,7 +75,7 @@ class PartnerSelectionViewController: UIViewController {
     
     func applyStyle() {
         Skinner().apply(buttonSkin: skin?.primaryButtonSkin, to: doneButton)
-        self.view.backgroundColor = RGBA.workfinderGreen.uiColor
+        self.view.backgroundColor = splashColor
     }
     
     lazy var partnersModel: F4SPartnersModel = {
@@ -116,7 +118,6 @@ extension PartnerSelectionViewController : UITableViewDataSource, UITableViewDel
         let partner = partnersModel.partnerForIndexPath(indexPath)
         view.textLabel?.text = partner.name
         view.detailTextLabel?.text = partner.description
-        //view.imageView?.image = partner.image
         return view
     }
     
@@ -127,12 +128,33 @@ extension PartnerSelectionViewController : UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedPartner = partnersModel.partnerForIndexPath(indexPath)
         partnersModel.selectedPartner = selectedPartner
+        partnerText.isHidden = selectedPartner?.name.lowercased() == "ncs" ? false : true
+        let skin = skinForPartner(partner: selectedPartner)
+        makeSkinGlobal(skin: skin)
         referrerTextBox.text = selectedPartner?.name ?? ""
         partnerLogoImageView.image = selectedPartner?.image
         animatePullUpTable()
         
         if let _ = selectedPartner?.image {
             animatePartnerIn()
+        }
+        applyStyle()
+    }
+    
+    func makeSkinGlobal(skin: Skin?) {
+        (UIApplication.shared.delegate as? AppDelegate)?.skin = skin
+    }
+    
+    func skinForPartner(partner: F4SPartner?) -> Skin? {
+        let workfinder = (UIApplication.shared.delegate as? AppDelegate)?.skins["workfinder"]
+        guard let partner = partner else {
+            return workfinder
+        }
+        switch partner.name.lowercased() {
+        case "ncs":
+            return (UIApplication.shared.delegate as? AppDelegate)?.skins[partner.name.lowercased()]
+        default:
+            return workfinder
         }
     }
 }

@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "unselected.png",
+      "filename" : "ui-timeline-icon.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "unselected@2x.png",
+      "filename" : "ui-timeline-icon@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "unselected@3x.png",
+      "filename" : "ui-timeline-icon@3x.png",
       "scale" : "3x"
     }
   ],

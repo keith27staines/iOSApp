@@ -334,16 +334,10 @@ extension MessageContainerViewController {
 // MARK: - navigation
 extension MessageContainerViewController {
     func setNavigationBar() {
-        navigationController?.navigationBar.barTintColor = UIColor(netHex: Colors.azure)
-        navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        
-        let showCompanyButton = UIBarButtonItem(image: UIImage(named: "information"), style: UIBarButtonItemStyle.done, target: self, action: #selector(showCompanyDetailsView))
+        let showCompanyButton = UIBarButtonItem(image: UIImage(named: "information")?.withRenderingMode(.alwaysTemplate), style: UIBarButtonItemStyle.done, target: self, action: #selector(showCompanyDetailsView))
         navigationItem.rightBarButtonItem = showCompanyButton
         navigationItem.title = "Messages"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        styleNavigationController()
     }
     
     @objc func showCompanyDetailsView() {

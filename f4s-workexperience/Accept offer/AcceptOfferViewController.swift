@@ -16,7 +16,6 @@ class AcceptOfferViewController: UIViewController {
     @IBOutlet weak var companyNameLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    let splashColor = UIColor(red: 66/255, green: 192/255, blue: 236/255, alpha: 1.0)
     
     let initialHeaderHeight: CGFloat = 100.0
     
@@ -42,7 +41,7 @@ class AcceptOfferViewController: UIViewController {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isTranslucent = true
         self.tabBarController?.tabBar.isHidden = true
-        styleNavigationController(titleColor: UIColor.white, backgroundColor: splashColor, tintColor: UIColor.white, useLightStatusBar: true)
+        styleNavigationController()
         captureShareImage()
     }
     
@@ -70,7 +69,7 @@ extension AcceptOfferViewController {
     func applyStyle() {
         pageHeaderView.backgroundColor = UIColor.white
         navigationItem.title = ""
-        pageHeaderView.fillColor = splashColor
+        pageHeaderView.fillColor = navigationController?.navigationBar.barTintColor ?? UIColor.white
     }
 }
 

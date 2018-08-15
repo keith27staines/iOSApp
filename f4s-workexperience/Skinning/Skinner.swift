@@ -11,21 +11,29 @@ import UIKit
 public protocol Skinning  {
     func apply(skin: Skin?, to controller: UIViewController)
     func apply(buttonSkin: ButtonSkin?, to button: UIButton)
-    func apply(skin: NavigationBarSkin?, to controller: UIViewController)
-    func apply(skin: TabBarSkin?, to controller: UIViewController)
+    func apply(navigationBarSkin: NavigationBarSkin?, to controller: UIViewController)
+    func apply(tabBarSkin: TabBarSkin?, to controller: UIViewController)
 }
 
 public struct Skinner : Skinning {
     
     public func apply(skin: Skin?, to controller: UIViewController) {
         guard let skin = skin else { return }
-        apply(skin: skin.navigationBarSkin, to: controller)
-        apply(skin: skin.tabBarSkin, to: controller)
+        apply(navigationBarSkin: skin.navigationBarSkin, to: controller)
+        apply(tabBarSkin: skin.tabBarSkin, to: controller)
     }
     
-    public func apply(skin: NavigationBarSkin?, to controller: UIViewController) {
-        guard let skin = skin else { return }
+    public func apply(navigationBarSkin: NavigationBarSkin?, to controller: UIViewController) {
         guard let navigationBar =  controller.navigationController?.navigationBar else { return }
+        navigationBar.isHidden = false
+        guard let skin = navigationBarSkin else {
+            navigationBar.isTranslucent = true
+            navigationBar.barTintColor = RGBA.white.uiColor
+            navigationBar.tintColor = RGBA.black.uiColor
+            navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:RGBA.black.uiColor]
+            navigationBar.barStyle = .default
+            return
+        }
         navigationBar.isTranslucent = false
         navigationBar.barTintColor = skin.barTintColor.uiColor
         navigationBar.tintColor = skin.itemTintColor.uiColor
@@ -41,9 +49,10 @@ public struct Skinner : Skinning {
         }
     }
     
-    public func apply(skin: TabBarSkin?, to controller: UIViewController) {
-        guard let skin = skin else { return }
+    public func apply(tabBarSkin: TabBarSkin?, to controller: UIViewController) {
+        guard let skin = tabBarSkin else { return }
         guard let tabBar = controller.tabBarController?.tabBar else { return }
+        tabBar.isTranslucent = false
         tabBar.barTintColor = skin.barTintColor.uiColor
         tabBar.tintColor = skin.selectedItemTintColor.uiColor
         tabBar.unselectedItemTintColor = skin.itemTintColor.uiColor

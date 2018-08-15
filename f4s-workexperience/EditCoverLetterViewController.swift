@@ -344,7 +344,7 @@ extension EditCoverLetterViewController {
 extension EditCoverLetterViewController {
     func setupNavigationBar() {
         self.title = NSLocalizedString("Edit Letter", comment: "")
-        styleNavigationController(titleColor: UIColor.black, backgroundColor: UIColor.white, tintColor: UIColor.black, useLightStatusBar: false)
+        styleNavigationController()
     }
 
     func setupButtons() {

@@ -50,20 +50,22 @@ extension Skin {
 
 extension Skin {
     static func loadSkins() -> Skins {
-        var skins = Skin.readSkinsFromDocumentDirectory()
-        if skins == nil {
-            skins = Skin.readSkinsFromPlist()
-            if let skins = skins {
-                Skin.writeSkinsToDocumentDirectory(skins: skins)
-            }
-        }
-        if skins == nil {
-            skins = FactorySkins.skins
-            if let skins = skins {
-                Skin.writeSkinsToDocumentDirectory(skins: skins)
-            }
-        }
-        return skins ?? [:]
+        let skins = FactorySkins.skins
+        Skin.writeSkinsToDocumentDirectory(skins: skins)
+        return FactorySkins.skins
+        
+//        var skins = Skin.readSkinsFromPlist()
+//            if let skins = skins {
+//                Skin.writeSkinsToDocumentDirectory(skins: skins)
+//            }
+//        }
+//        if skins == nil {
+//            skins = FactorySkins.skins
+//            if let skins = skins {
+//                Skin.writeSkinsToDocumentDirectory(skins: skins)
+//            }
+//        }
+//        return skins ?? [:]
     }
     
     static func readSkinsFromPlist() -> Skins? {

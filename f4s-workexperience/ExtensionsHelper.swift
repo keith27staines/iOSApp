@@ -243,23 +243,8 @@ extension UIFont {
     class func f4sSystemFont(size: CGFloat, weight: UIFont.Weight) -> UIFont {
         return UIFont.systemFont(ofSize: size, weight:weight)
     }
-//    class func f4sSystemFont(size: CGFloat, weight: CGFloat) -> UIFont {
-//        let fontWeight = UIFont.Weight(rawValue: weight)
-//        return f4sSystemFont(size: size, weight: fontWeight)
-//    }
 }
 
-// MARK: helper for creating an image-only UITabBarItem
-extension UITabBarItem {
-
-    func tabBarItemShowingOnlyImage() -> UITabBarItem {
-        // offset to center
-        self.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
-        // displace to hide
-        //  self.setTitlePositionAdjustment(UIOffset(horizontal:0,vertical:30000))
-        return self
-    }
-}
 
 extension UIView {
     static func gradient(view: UIView, colorTop: CGColor, colorBottom: CGColor) -> UIView {

@@ -12,7 +12,7 @@ public struct FactorySkins {
     
     static func buildButtonSkin(backgroundColor: RGBA) -> ButtonSkin {
         var skin = ButtonSkin()
-        skin  = ButtonSkin(cornerRadius: 8, backgroundColor: backgroundColor, textColor: RGBA.white, borderColor: RGBA.black, borderWidth: 2.0)
+        skin  = ButtonSkin(cornerRadius: 8, backgroundColor: backgroundColor, textColor: RGBA.white, borderColor: RGBA.black, borderWidth: 0.0)
         return skin
     }
     
@@ -28,11 +28,14 @@ public struct FactorySkins {
     
     static var workfinderSkin: Skin = {
         let primaryButtonSkin = buildButtonSkin(backgroundColor: RGBA.workfinderPurple)
-        let secondaryButtonSkin = buildButtonSkin(backgroundColor: RGBA.workfinderPink)
+        var secondaryButtonSkin = buildButtonSkin(backgroundColor: RGBA.clear)
+        secondaryButtonSkin.borderColor = RGBA.workfinderPurple
+        secondaryButtonSkin.textColor = RGBA.workfinderPurple
+        secondaryButtonSkin.borderWidth = 2
         var ghostButtonSkin = buildButtonSkin(backgroundColor: RGBA.clear)
         ghostButtonSkin.textColor = RGBA.gray
         ghostButtonSkin.borderColor = RGBA.gray
-        let navigationBarSkin = NavigationBarSkin(statusbarMode: .dark, barTintColor: RGBA.workfinderPurple, itemTintColor: RGBA.white, titleTintColor: RGBA.white, hasDropShadow: false)
+        let navigationBarSkin = NavigationBarSkin(statusbarMode: .dark, barTintColor: RGBA.workfinderGreen, itemTintColor: RGBA.white, titleTintColor: RGBA.white, hasDropShadow: false)
         let tabBarSkin = TabBarSkin()
         let skin = Skin(
             name: "workfinder",
@@ -50,6 +53,10 @@ public struct FactorySkins {
     static var ncsSkin: Skin = {
         var skin = workfinderSkin
         skin.name = "ncs"
+        skin.navigationBarSkin.barTintColor = RGBA.darkGray
+        skin.primaryButtonSkin.backgroundColor = RGBA.workfinderPink
+        skin.secondaryButtonSkin.backgroundColor = RGBA.black
+        skin.secondaryButtonSkin.textColor = RGBA.white
         return skin
     }()
     

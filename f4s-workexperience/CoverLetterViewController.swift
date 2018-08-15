@@ -74,6 +74,7 @@ extension CoverLetterViewController {
 
     func adjustNavigationBar() {
         navigationController?.setNavigationBarHidden(false, animated: false)
+        Skinner().apply(navigationBarSkin: nil, to: self)
         let leftButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(backButtonTouched))
         navigationItem.leftBarButtonItem = leftButton
 
@@ -94,7 +95,6 @@ extension CoverLetterViewController {
         ]), for: UIControlState.normal)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: editCoverLetterButton!)
         
-        styleNavigationController(titleColor: UIColor.black, backgroundColor: UIColor.white, tintColor: UIColor.black, useLightStatusBar: false)
     }
 
     func setApplyButton() {

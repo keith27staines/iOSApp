@@ -32,6 +32,7 @@ class OnboardingViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        view.backgroundColor = splashColor
         adjustNavigationBar()
     }
     
@@ -52,9 +53,7 @@ class OnboardingViewController: UIViewController {
 // MARK: - adjust appereance
 extension OnboardingViewController {
     func adjustNavigationBar() {
-        UIApplication.shared.statusBarStyle = .lightContent
         navigationController?.setNavigationBarHidden(true, animated: false)
-        navigationController?.navigationBar.barTintColor = UIColor(netHex: Colors.black)
     }
 
     func setUpButtons() {
@@ -64,17 +63,11 @@ extension OnboardingViewController {
         enableLocationButton.isHidden = hideOnboardingControls
         enterLocationButton.isHidden = hideOnboardingControls
         
-        enableLocationButton.setAttributedTitle(NSAttributedString(string: enableLocationText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.mediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.black]), for: .normal)
-        enterLocationButton.setAttributedTitle(NSAttributedString(string: enterLocationText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.mediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.white]), for: .normal)
-
-        enableLocationButton.backgroundColor = UIColor.white
-        enterLocationButton.backgroundColor = UIColor.clear
-
-        enableLocationButton.layer.cornerRadius = 10
-        enterLocationButton.layer.cornerRadius = 10
-
-        enterLocationButton.layer.borderColor = UIColor.white.cgColor
-        enterLocationButton.layer.borderWidth = 0.5
+        enableLocationButton.setTitle(enableLocationText, for: .normal)
+        enterLocationButton.setTitle(enterLocationText, for: .normal)
+        let skinner = Skinner()
+        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: enableLocationButton)
+        skinner.apply(buttonSkin: skin?.secondaryButtonSkin, to: enterLocationButton)
     }
 
     func setupLabels() {
