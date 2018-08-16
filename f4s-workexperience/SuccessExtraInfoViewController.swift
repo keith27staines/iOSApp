@@ -43,7 +43,6 @@ extension SuccessExtraInfoViewController {
         let skinner = Skinner()
         skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: timelineButton)
         skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: viewMapButton)
-        skinner.apply(buttonSkin: skin?.secondaryButtonSkin, to: recommendationsButton)
     }
 
     func getHeight() -> CGFloat {

@@ -105,6 +105,7 @@ class F4SCalendarCollectionViewController: UICollectionViewController {
             let displayMonth = cal.displayableMonth(index: indexPath.section)
             headerView.label.text = displayMonth.month.monthSymbol + " " + String(describing: displayMonth.month.year)
             headerView.backgroundColor = UIColor.white
+            headerView.label.textColor = skin?.primaryButtonSkin.backgroundColor.uiColor
             return headerView
         }
     }

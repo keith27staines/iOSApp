@@ -71,7 +71,13 @@ extension OnboardingViewController {
     }
 
     func setupLabels() {
-        let descriptionText = NSLocalizedString("Helping you find work", comment: "")
+        let descriptionText: String
+        switch Config.environment {
+        case .staging:
+            descriptionText = NSLocalizedString("STAGING", comment: "")
+        case .production:
+            descriptionText = NSLocalizedString("Helping you find work", comment: "")
+        }
         descriptionLabel.attributedText = NSAttributedString(string: descriptionText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.hugeTextSize, weight: UIFont.Weight.thin), NSAttributedStringKey.foregroundColor: UIColor.white])
     }
 
@@ -81,9 +87,8 @@ extension OnboardingViewController {
         case .staging:
             view.backgroundColor = RGBA.workfinderStagingGold.uiColor
         case .production:
-            _ = UIView.gradient(view: gradientView, colorTop: UIColor(netHex: Colors.blueGradientTop).cgColor, colorBottom: UIColor(netHex: Colors.BlueGradientBottom).cgColor)
+            view.backgroundColor = RGBA.workfinderGreen.uiColor
         }
-
         view.layoutSubviews()
         setUpButtons()
         setupLabels()

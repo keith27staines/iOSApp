@@ -32,6 +32,10 @@ class F4SDaysAndHoursViewController: UIViewController {
     
     @IBOutlet weak var footerLabel: UILabel!
     
+    lazy var ghostColor: UIColor = {
+        return skin?.primaryButtonSkin.backgroundColor.uiColor ?? UIColor.blue
+    }()
+    
     lazy var hoursPicker: F4SHoursPickerViewController? = {
         guard let pickerVC = self.storyboard?.instantiateViewController(withIdentifier: "HoursPicker") as? F4SHoursPickerViewController else {
             return nil
@@ -210,12 +214,12 @@ extension F4SDaysAndHoursViewController {
     }
     
     func styleGhostButton(button: UIButton, solid: Bool) {
-        button.layer.borderColor = splashColor.cgColor
+        button.layer.borderColor = ghostColor.cgColor
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 8
-        let titleColor = solid ? UIColor.white : splashColor
+        let titleColor = solid ? UIColor.white : ghostColor
         button.setTitleColor(titleColor, for: .normal)
-        button.layer.backgroundColor = solid ? splashColor.cgColor : UIColor.white.cgColor
+        button.layer.backgroundColor = solid ? ghostColor.cgColor : UIColor.white.cgColor
     }
 }
 
@@ -274,7 +278,7 @@ extension F4SDaysAndHoursViewController: F4SDisplayInformationViewControllerDele
         infoView.centerXAnchor.constraint(equalTo: mainView.centerXAnchor).isActive = true
         infoView.centerYAnchor.constraint(equalTo: mainView.centerYAnchor).isActive = true
         infoView.leftAnchor.constraint(equalTo: mainView.leftAnchor, constant: 40).isActive = true
-        infoView.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 100).isActive = true
+        infoView.topAnchor.constraint(greaterThanOrEqualTo: mainView.topAnchor, constant: 60).isActive = true
         
         UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
             infoView.alpha = 1.0

@@ -32,8 +32,11 @@ public struct Skinner : Skinning {
             navigationBar.tintColor = RGBA.black.uiColor
             navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:RGBA.black.uiColor]
             navigationBar.barStyle = .default
+            navigationBar.setBackgroundImage(nil, for: .default)
+            navigationBar.shadowImage = nil
             return
         }
+        
         navigationBar.isTranslucent = false
         navigationBar.barTintColor = skin.barTintColor.uiColor
         navigationBar.tintColor = skin.itemTintColor.uiColor
@@ -65,7 +68,7 @@ public struct Skinner : Skinning {
         button.setBackgroundColor(color: skin.backgroundColor.uiColor, forUIControlState: .normal)
         button.setBackgroundColor(color: skin.backgroundColor.disabledColor.uiColor, forUIControlState: .disabled)
         button.setTitleColor(skin.textColor.uiColor, for: .normal)
-        button.layer.borderColor = skin.backgroundColor.cgColor
+        button.setTitleColor(skin.textColor.disabledColor.uiColor, for: .disabled)
         button.layer.borderColor = skin.borderColor.cgColor
         button.layer.borderWidth = skin.borderWidth
     }

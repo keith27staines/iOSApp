@@ -123,7 +123,7 @@ extension F4SCalendarContainerViewController : F4SDisplayInformationViewControll
         infoView.centerXAnchor.constraint(equalTo: mainView.centerXAnchor).isActive = true
         infoView.centerYAnchor.constraint(equalTo: mainView.centerYAnchor).isActive = true
         infoView.leftAnchor.constraint(equalTo: mainView.leftAnchor, constant: 40).isActive = true
-        infoView.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 100).isActive = true
+        infoView.topAnchor.constraint(greaterThanOrEqualTo: mainView.topAnchor, constant: 60).isActive = true
         
         UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseInOut, animations: {
             infoView.alpha = 1.0

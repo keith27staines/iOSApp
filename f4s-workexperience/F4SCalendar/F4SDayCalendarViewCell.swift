@@ -8,36 +8,28 @@
 
 import UIKit
 
-enum F4SCalendarColor {
-    case intermonthUnselected
-    case intermonthSelected
-    case unselectable
-    case unselected
-    case selected
-    case todayUnselected
-    case todaySelected
-    
-    var backgroundColor: UIColor {
-        switch self {
+extension Skin {
+    func calendarCellBackgroundColor(type: F4SCalendarDaySelectionType) -> UIColor {
+        switch type {
         case .intermonthUnselected:
             return midGrey
         case .intermonthSelected:
-            return paleCerise
+            return self.primaryButtonSkin.backgroundColor.disabledColor.uiColor
         case .unselectable:
             return pinkishGrey
         case .unselected:
             return pinkishGrey
         case .selected:
-            return cerise
+            return self.primaryButtonSkin.backgroundColor.uiColor
         case .todayUnselected:
-            return darkBlueSky
+            return self.navigationBarSkin.barTintColor.uiColor
         case .todaySelected:
-            return cerise
+            return self.primaryButtonSkin.backgroundColor.uiColor
         }
     }
     
-    var textColor: UIColor {
-        switch self {
+    func calendarCellTextColor(type: F4SCalendarDaySelectionType) -> UIColor {
+        switch type {
         case .intermonthUnselected:
             return textGrey
         case .intermonthSelected:
@@ -54,6 +46,16 @@ enum F4SCalendarColor {
             return UIColor.white
         }
     }
+}
+
+enum F4SCalendarDaySelectionType {
+    case intermonthUnselected
+    case intermonthSelected
+    case unselectable
+    case unselected
+    case selected
+    case todayUnselected
+    case todaySelected
 }
 
 public enum F4SExtendibleSelectionState : Int {
@@ -146,37 +148,37 @@ public class F4SCalendarMonthViewDayCell: UICollectionViewCell {
         extendRightView.alpha = 0.0
         if !isOnMonth {
             if selectionState == .none {
-                self.backgroundColor = F4SCalendarColor.intermonthUnselected.backgroundColor
-                self.dateLabel.textColor = F4SCalendarColor.intermonthUnselected.textColor
+                backgroundColor = skin?.calendarCellBackgroundColor(type: .intermonthUnselected)
+                dateLabel.textColor = skin?.calendarCellTextColor(type: .intermonthUnselected)
             } else {
-                self.backgroundColor = F4SCalendarColor.intermonthSelected.backgroundColor
-                self.dateLabel.textColor = F4SCalendarColor.intermonthSelected.textColor
+                backgroundColor = skin?.calendarCellBackgroundColor(type: .intermonthSelected)
+                dateLabel.textColor = skin?.calendarCellTextColor(type: .intermonthSelected)
             }
             return
         }
         if day.isToday {
             if selectionState == .none {
-                self.backgroundColor = F4SCalendarColor.todayUnselected.backgroundColor
-                self.dateLabel.textColor = F4SCalendarColor.todayUnselected.textColor
+                backgroundColor = skin?.calendarCellBackgroundColor(type: .todayUnselected)
+                dateLabel.textColor = skin?.calendarCellTextColor(type: .todayUnselected)
             } else {
-                self.backgroundColor = F4SCalendarColor.todaySelected.backgroundColor
-                self.dateLabel.textColor = F4SCalendarColor.todaySelected.textColor
+                backgroundColor = skin?.calendarCellBackgroundColor(type: .todaySelected)
+                dateLabel.textColor = skin?.calendarCellTextColor(type: .todaySelected)
             }
             return
         }
         if day.isInPast {
             if selectionState == .none {
-                self.backgroundColor = F4SCalendarColor.unselectable.backgroundColor
-                self.dateLabel.textColor = F4SCalendarColor.unselectable.textColor
+                backgroundColor = skin?.calendarCellBackgroundColor(type: .unselectable)
+                dateLabel.textColor = skin?.calendarCellTextColor(type: .unselectable)
             }
             return
         }
         if selectionState == .none {
-            self.backgroundColor = F4SCalendarColor.unselected.backgroundColor
-            self.dateLabel.textColor = F4SCalendarColor.unselected.textColor
+            backgroundColor = skin?.calendarCellBackgroundColor(type: .unselected)
+            dateLabel.textColor = skin?.calendarCellTextColor(type: .unselected)
         } else {
-            self.backgroundColor = F4SCalendarColor.selected.backgroundColor
-            self.dateLabel.textColor = F4SCalendarColor.selected.textColor
+            backgroundColor = skin?.calendarCellBackgroundColor(type: .selected)
+            dateLabel.textColor = skin?.calendarCellTextColor(type: .selected)
         }
         return
     }

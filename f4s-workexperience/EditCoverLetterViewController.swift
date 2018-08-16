@@ -54,7 +54,12 @@ class EditCoverLetterViewController: UIViewController {
         setupNavigationBar()
         coverLetterTableView.reloadData()
         configureTemplate()
+        applyStyle()
         setUpdateButtonState()
+    }
+    
+    func applyStyle() {
+        Skinner().apply(buttonSkin: skin?.primaryButtonSkin, to: updateButton)
     }
     
     func configureTemplate() {
@@ -348,15 +353,9 @@ extension EditCoverLetterViewController {
     }
 
     func setupButtons() {
-        updateButton.layer.cornerRadius = 10
         let buttonText = NSLocalizedString("Update Cover Letter", comment: "")
-        let string = NSAttributedString(string: buttonText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.mediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.white])
-        updateButton.setAttributedTitle(string, for: .normal)
-        updateButton.setBackgroundColor(color: UIColor(netHex: Colors.mediumGreen), forUIControlState: .normal)
-        updateButton.setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)
-        updateButton.setTitleColor(UIColor.white, for: .normal)
-        updateButton.setTitleColor(UIColor.white, for: .highlighted)
-        updateButton.layer.masksToBounds = true
+        updateButton.setTitle(buttonText, for: .normal)
+        Skinner().apply(buttonSkin: skin?.primaryButtonSkin, to: updateButton)
     }
 
     func setupAppereance() {
@@ -477,14 +476,6 @@ extension EditCoverLetterViewController {
     }
 
     func setUpdateButtonState() {
-        if self.selectedTemplateBlanks.count > 0 {
-            // all data is set
-            updateButton.setBackgroundColor(color: UIColor(netHex: Colors.mediumGreen), forUIControlState: .normal)
-            updateButton.setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)
-            self.updateButton.isUserInteractionEnabled = true
-        } else {
-            self.updateButton.backgroundColor = UIColor(netHex: Colors.mediumGreen).withAlphaComponent(0.5)
-            self.updateButton.isUserInteractionEnabled = false
-        }
+        updateButton.isEnabled = self.selectedTemplateBlanks.count > 0
     }
 }

@@ -325,19 +325,6 @@ public class F4SVoucher {
     }
 }
 
-extension String {
-    func stripCompanySuffix() -> String {
-        let companyEndings = [" limited", " ltd", "ltd.", " plc"]
-        var stripped = self
-        companyEndings.forEach { (ending) in
-            if hasSuffix(ending) || hasSuffix(ending.uppercased()){
-                stripped = String(dropLast(ending.count))
-            }
-        }
-        return stripped
-    }
-}
-
 extension F4SVoucher {
     static var allowedSymbols: CharacterSet {
         return CharacterSet.alphanumerics

@@ -20,7 +20,7 @@ enum CamerWillMoveAction {
 class MapViewController: UIViewController {
     
     lazy var clusterColor: UIColor = {
-        return splashColor
+        return skin?.primaryButtonSkin.backgroundColor.uiColor ?? UIColor.black
     }()
     
     @IBOutlet weak var logoStack: UIStackView!

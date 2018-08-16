@@ -38,8 +38,10 @@ public struct RGBA : Codable {
         return UIColor(red: red, green: green, blue: blue, alpha: alpha)
     }
 
+    public let alphaForDisabledState: CGFloat = 0.6
+    
     public var disabledColor: RGBA {
-        return RGBA(red: red, green: green, blue: blue, alpha: 0.7)
+        return RGBA(red: red, green: green, blue: blue, alpha: alphaForDisabledState)
     }
     
     public var cgColor: CGColor {
