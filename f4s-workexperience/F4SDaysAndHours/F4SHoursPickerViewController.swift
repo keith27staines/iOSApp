@@ -32,7 +32,7 @@ public class F4SHoursPickerViewController: UIViewController {
         let selectedBackgroundColor = skin?.primaryButtonSkin.backgroundColor.uiColor ?? UIColor.white
         let deselectedBackgroundColor = RGBA.white.uiColor
         let selectedText = RGBA.white.uiColor
-        let deselectedText = RGBA.lightGray.uiColor
+        let deselectedText = RGBA.gray.uiColor
         button.setBackgroundColor(color: selectedBackgroundColor, forUIControlState: .selected)
         button.setBackgroundColor(color: deselectedBackgroundColor, forUIControlState: .normal)
         button.setTitleColor(selectedText, for: .selected)
@@ -76,7 +76,7 @@ public class F4SHoursPickerViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.lightGray
         view.layer.borderColor = UIColor.black.cgColor
-        view.layer.borderWidth = 2
+        view.layer.borderWidth = 1
         view.layer.cornerRadius = 8
         view.clipsToBounds = true
     }

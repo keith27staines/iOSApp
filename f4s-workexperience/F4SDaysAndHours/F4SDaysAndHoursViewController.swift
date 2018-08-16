@@ -257,7 +257,7 @@ extension F4SDaysAndHoursViewController: F4SDisplayInformationViewControllerDele
         let mainView = self.view!
         let infoView = infoController.view!
         infoView.layer.borderColor = UIColor.darkGray.cgColor
-        infoView.layer.borderWidth = 1
+        infoView.layer.borderWidth = 1.0
         infoView.layer.cornerRadius = 8
         infoView.clipsToBounds = true
         maskView = UIView(frame: mainView.frame)
