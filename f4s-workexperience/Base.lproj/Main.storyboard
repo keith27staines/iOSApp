@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rvG-05-ZXf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rvG-05-ZXf">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,25 +23,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BGh-Il-Lfg">
-                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discover top companies near you offering work placements" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b61-9y-s8U">
-                                        <rect key="frame" x="47" y="297" width="280" height="108"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="280" id="LTh-EK-nOy"/>
-                                            <constraint firstAttribute="height" constant="108" id="sYA-Za-ErX"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="b61-9y-s8U" firstAttribute="centerX" secondItem="BGh-Il-Lfg" secondAttribute="centerX" id="e3P-DV-cOg"/>
-                                </constraints>
-                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="lQB-tZ-QZi">
                                 <rect key="frame" x="117.5" y="124" width="140" height="206"/>
                                 <constraints>
@@ -71,27 +52,32 @@
                                     <action selector="enableLocationButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bJd-bq-IN7"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discover top companies near you offering work placements" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b61-9y-s8U">
+                                <rect key="frame" x="47.5" y="346" width="280" height="108"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="LTh-EK-nOy"/>
+                                    <constraint firstAttribute="height" constant="108" id="sYA-Za-ErX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
+                        <color key="backgroundColor" red="0.63001638650000003" green="0.57562625410000001" blue="0.73700982329999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="BGh-Il-Lfg" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="A7Q-nn-dEQ" secondAttribute="trailing" constant="20" id="0Lg-GP-SCN"/>
                             <constraint firstItem="A7Q-nn-dEQ" firstAttribute="leading" secondItem="Z5T-pH-WH3" secondAttribute="leading" id="0fu-I3-x1u"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="BGh-Il-Lfg" secondAttribute="bottom" id="1Rq-qD-MmK"/>
                             <constraint firstItem="A7Q-nn-dEQ" firstAttribute="height" secondItem="Z5T-pH-WH3" secondAttribute="height" id="4tv-Aj-e05"/>
-                            <constraint firstAttribute="trailing" secondItem="BGh-Il-Lfg" secondAttribute="trailing" id="55v-8W-Uxe"/>
-                            <constraint firstItem="BGh-Il-Lfg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7oK-GO-Lkl"/>
+                            <constraint firstItem="b61-9y-s8U" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="F0Q-rc-tWa"/>
                             <constraint firstItem="lQB-tZ-QZi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Kvg-Lj-qPD"/>
-                            <constraint firstAttribute="trailing" secondItem="BGh-Il-Lfg" secondAttribute="trailing" id="Nh6-eo-t73"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Z5T-pH-WH3" secondAttribute="bottom" constant="20" id="Nnk-TF-tNI"/>
-                            <constraint firstItem="BGh-Il-Lfg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Q4I-Lg-8Ba"/>
                             <constraint firstItem="lQB-tZ-QZi" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="60" id="StV-gh-aKJ"/>
                             <constraint firstItem="Z5T-pH-WH3" firstAttribute="top" secondItem="A7Q-nn-dEQ" secondAttribute="bottom" constant="15" id="Wyh-60-hk1"/>
                             <constraint firstItem="Z5T-pH-WH3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hCR-WN-vUU"/>
+                            <constraint firstItem="b61-9y-s8U" firstAttribute="top" secondItem="lQB-tZ-QZi" secondAttribute="bottom" constant="16" id="kKD-oJ-QDF"/>
                             <constraint firstItem="Z5T-pH-WH3" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.1" id="kqn-CU-c8q"/>
-                            <constraint firstItem="b61-9y-s8U" firstAttribute="top" secondItem="lQB-tZ-QZi" secondAttribute="bottom" constant="11" id="nQh-i9-mBs"/>
                             <constraint firstItem="Z5T-pH-WH3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="pM0-Ud-bRI"/>
                             <constraint firstItem="A7Q-nn-dEQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pdq-kh-U1C"/>
                             <constraint firstItem="A7Q-nn-dEQ" firstAttribute="trailing" secondItem="Z5T-pH-WH3" secondAttribute="trailing" id="st0-wt-JrP"/>
-                            <constraint firstItem="BGh-Il-Lfg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="vKF-le-jAB"/>
                             <constraint firstItem="Z5T-pH-WH3" firstAttribute="width" secondItem="A7Q-nn-dEQ" secondAttribute="width" id="z09-h5-Egt"/>
                         </constraints>
                     </view>
@@ -100,7 +86,6 @@
                         <outlet property="descriptionLabel" destination="b61-9y-s8U" id="4Yz-Pq-JVq"/>
                         <outlet property="enableLocationButton" destination="A7Q-nn-dEQ" id="1LL-l8-tOR"/>
                         <outlet property="enterLocationButton" destination="Z5T-pH-WH3" id="iIE-7H-UiJ"/>
-                        <outlet property="gradientView" destination="BGh-Il-Lfg" id="lEI-Sx-sfH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

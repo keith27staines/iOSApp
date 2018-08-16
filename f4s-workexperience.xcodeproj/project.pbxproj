@@ -183,7 +183,6 @@
 		FC64A5932119EBE3006464A5 /* CalendarChooserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC64A5902119EBE3006464A5 /* CalendarChooserController.swift */; };
 		FC64A595211ACA39006464A5 /* F4SCompanyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC64A594211ACA39006464A5 /* F4SCompanyService.swift */; };
 		FC64A597211AECDE006464A5 /* F4SInviteDetailLinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC64A596211AECDE006464A5 /* F4SInviteDetailLinkCell.swift */; };
-		FC67711521259645000B0870 /* TickedCircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC67711421259645000B0870 /* TickedCircleImage.swift */; };
 		FC6771192125A590000B0870 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6771182125A590000B0870 /* UIColor+Extensions.swift */; };
 		FC67711B2125A812000B0870 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC67711A2125A812000B0870 /* String+Extensions.swift */; };
 		FC67E60A207B70CE006F07FE /* F4SCalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC67E609207B70CE006F07FE /* F4SCalendarService.swift */; };
@@ -557,7 +556,6 @@
 		FC64A5902119EBE3006464A5 /* CalendarChooserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarChooserController.swift; sourceTree = "<group>"; };
 		FC64A594211ACA39006464A5 /* F4SCompanyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyService.swift; sourceTree = "<group>"; };
 		FC64A596211AECDE006464A5 /* F4SInviteDetailLinkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInviteDetailLinkCell.swift; sourceTree = "<group>"; };
-		FC67711421259645000B0870 /* TickedCircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickedCircleImage.swift; sourceTree = "<group>"; };
 		FC6771182125A590000B0870 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		FC67711A2125A812000B0870 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		FC67E609207B70CE006F07FE /* F4SCalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCalendarService.swift; sourceTree = "<group>"; };
@@ -1745,7 +1743,6 @@
 				FCB6B8BE2074C58E0042C725 /* F4SHoursPickerViewController.swift */,
 				FCB6B8BF2074C58E0042C725 /* F4SDisplayInformationViewController.storyboard */,
 				FCB6B8C32074C58E0042C725 /* F4SDisplayInformationViewController.swift */,
-				FC67711421259645000B0870 /* TickedCircleImage.swift */,
 			);
 			path = F4SDaysAndHours;
 			sourceTree = "<group>";
@@ -2369,7 +2366,6 @@
 				40E78E811DD32BF4000A3776 /* TableViewCell.swift in Sources */,
 				201458C71E1CFD7400DBC9BD /* MessageViewController.swift in Sources */,
 				FCF06EE520DBFE1B00FD990C /* F4SPlacementService.swift in Sources */,
-				FC67711521259645000B0870 /* TickedCircleImage.swift in Sources */,
 				FC1334E92121BE11003435A6 /* Skin.swift in Sources */,
 				40C1A5221DDF5ACE000F80AA /* GQTPointQuadTreeChild.m in Sources */,
 			);
