@@ -41,7 +41,33 @@ public struct RGBA : Codable {
     public let alphaForDisabledState: CGFloat = 0.6
     
     public var disabledColor: RGBA {
-        return RGBA(red: red, green: green, blue: blue, alpha: alphaForDisabledState)
+        // return RGBA(red: red, green: green, blue: blue, alpha: alphaForDisabledState)
+        // return synthesizedDisabledColorBySaturation
+        return synthesizedDisabledColorByBrightness
+    }
+    
+    public var synthesizedDisabledColorByBrightness: RGBA {
+        let color = self.uiColor
+        var hue: CGFloat = 0.0
+        var saturation: CGFloat = 0.0
+        var brightness: CGFloat = 0.0
+        var alpha: CGFloat = 0.0
+        color.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+        if brightness > 0.5 {
+            let darkerColor = color.darker(by: 50.0)
+            return RGBA(color: darkerColor)
+        }
+        if brightness < 0.5 {
+            let lighterColor = color.lighter(by: 50.0)
+            return RGBA(color: lighterColor)
+        }
+        return self
+    }
+    
+    public var synthesizedDisabledColorBySaturation: RGBA {
+        let color = self.uiColor
+        let desaturatedColor = color.desaturated(by: 70.0)
+        return RGBA(color: desaturatedColor)
     }
     
     public var cgColor: CGColor {

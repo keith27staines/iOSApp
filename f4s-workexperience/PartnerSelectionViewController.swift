@@ -60,6 +60,10 @@ class PartnerSelectionViewController: UIViewController {
         }
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return skin?.navigationBarSkin.statusbarMode == .light ? .lightContent : .default
+    }
+    
     func showNeedConnectionAlert() {
         let title = NSLocalizedString("Workfinder needs an internet connection", comment: "")
         let message = NSLocalizedString("In order for us to set things up for you, please ensure that you have a good internet connection.", comment: "")
@@ -74,7 +78,9 @@ class PartnerSelectionViewController: UIViewController {
     }
     
     func applyStyle() {
-        Skinner().apply(buttonSkin: skin?.primaryButtonSkin, to: doneButton)
+        let skinner = Skinner()
+        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: doneButton)
+        skinner.apply(navigationBarSkin: skin?.navigationBarSkin, to: self)
         self.view.backgroundColor = splashColor
     }
     

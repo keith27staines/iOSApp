@@ -32,7 +32,6 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5T-pH-WH3">
                                 <rect key="frame" x="16" y="580.5" width="343" height="66.5"/>
-                                <color key="backgroundColor" red="0.10980392156862745" green="0.34901960784313724" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Enter location manually">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

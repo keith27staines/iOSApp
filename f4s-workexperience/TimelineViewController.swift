@@ -55,6 +55,10 @@ class TimelineViewController: UIViewController {
         getAllPlacementsForUser()
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return skin?.navigationBarSkin.statusbarMode == .light ? .lightContent : .default
+    }
+    
     lazy var placementService: F4SPlacementService = {
         return F4SPlacementService()
     }()

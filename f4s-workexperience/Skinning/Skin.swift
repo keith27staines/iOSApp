@@ -116,8 +116,8 @@ public struct NavigationBarSkin : Codable {
 
 public struct TabBarSkin : Codable {
     public var barTintColor: RGBA = RGBA(color: UIColor.white)
-    public var itemTintColor: RGBA = RGBA(color: UIColor.gray)
-    public var selectedItemTintColor: RGBA = RGBA(color: UIColor.blue)
+    public var itemTintColor: RGBA = RGBA(color: UIColor.lightGray)
+    public var selectedItemTintColor: RGBA = RGBA.black
 }
 
 

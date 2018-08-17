@@ -63,12 +63,13 @@ class CompanyDetailsViewController: UIViewController {
         setupMap()
         loadCompany()
         loadDocuments()
+        Skinner().apply(navigationBarSkin: nil, to: self)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidRegisterForRemoteNotificationsNotification(_:)), name: NSNotification.Name(rawValue: "ApplicationDidRegisterForRemoteNotificationsNotification"), object: nil)
-        Skinner().apply(navigationBarSkin: nil, to: self)
+        
     }
     
     lazy var companyDocumentsModel: F4SCompanyDocumentsModel = {

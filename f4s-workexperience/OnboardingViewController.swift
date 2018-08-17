@@ -67,7 +67,7 @@ extension OnboardingViewController {
         enterLocationButton.setTitle(enterLocationText, for: .normal)
         let skinner = Skinner()
         skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: enableLocationButton)
-        skinner.apply(buttonSkin: skin?.secondaryButtonSkin, to: enterLocationButton)
+        skinner.apply(buttonSkin: skin?.ghostButtonSkin, to: enterLocationButton)
     }
 
     func setupLabels() {
@@ -82,16 +82,22 @@ extension OnboardingViewController {
     }
 
     func setupAppearance() {
+        setNeedsStatusBarAppearanceUpdate()
         UIApplication.shared.statusBarStyle = .lightContent
-        switch Config.environment {
-        case .staging:
-            view.backgroundColor = RGBA.workfinderStagingGold.uiColor
-        case .production:
+        Skinner().apply(navigationBarSkin: skin?.navigationBarSkin, to: self)
+//        switch Config.environment {
+//        case .staging:
+//            view.backgroundColor = RGBA.workfinderStagingGold.uiColor
+//        case .production:
             view.backgroundColor = RGBA.workfinderGreen.uiColor
-        }
+//        }
         view.layoutSubviews()
         setUpButtons()
         setupLabels()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return skin?.navigationBarSkin.statusbarMode == .light ? .lightContent : .default
     }
 }
 

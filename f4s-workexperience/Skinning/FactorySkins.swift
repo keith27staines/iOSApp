@@ -27,17 +27,33 @@ public struct FactorySkins {
     }()
     
     static var workfinderSkin: Skin = {
-        let primaryButtonSkin = buildButtonSkin(backgroundColor: RGBA.workfinderPurple)
+        var primaryButtonSkin = buildButtonSkin(backgroundColor: RGBA.workfinderPurple)
+        primaryButtonSkin.backgroundColor = RGBA.workfinderPurple
+        primaryButtonSkin.borderColor = RGBA.clear
+        primaryButtonSkin.borderWidth = 0.0
+        primaryButtonSkin.textColor = RGBA.white
+        
         var secondaryButtonSkin = buildButtonSkin(backgroundColor: RGBA.clear)
+        secondaryButtonSkin.backgroundColor = RGBA.clear
         secondaryButtonSkin.borderColor = RGBA.workfinderPurple
         secondaryButtonSkin.textColor = RGBA.workfinderPurple
-        secondaryButtonSkin.borderWidth = 2
+        secondaryButtonSkin.borderWidth = 1
+        
         var ghostButtonSkin = buildButtonSkin(backgroundColor: RGBA.clear)
-        ghostButtonSkin.textColor = RGBA.gray
-        ghostButtonSkin.borderColor = RGBA.gray
-        let navigationBarSkin = NavigationBarSkin(statusbarMode: .dark, barTintColor: RGBA.workfinderGreen, itemTintColor: RGBA.white, titleTintColor: RGBA.white, hasDropShadow: false)
-        let tabBarSkin = TabBarSkin()
-        let skin = Skin(
+        ghostButtonSkin.backgroundColor = RGBA.clear
+        ghostButtonSkin.textColor = RGBA.white
+        ghostButtonSkin.borderColor = RGBA.white
+        ghostButtonSkin.borderWidth = 1
+        
+        var navigationBarSkin = NavigationBarSkin(statusbarMode: .dark, barTintColor: RGBA.workfinderGreen, itemTintColor: RGBA.white, titleTintColor: RGBA.white, hasDropShadow: false)
+        navigationBarSkin.statusbarMode = .light
+        
+        var tabBarSkin = TabBarSkin()
+        tabBarSkin.barTintColor = RGBA.white
+        tabBarSkin.itemTintColor = RGBA.lightGray
+        tabBarSkin.selectedItemTintColor = RGBA.black
+        
+        var skin = Skin(
             name: "workfinder",
             workfinderLogoName: "workfinderLogo",
             partnerLogoName: nil,

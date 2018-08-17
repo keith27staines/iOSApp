@@ -9,31 +9,25 @@
 import UIKit
 
 public protocol Skinning  {
-    func apply(skin: Skin?, to controller: UIViewController)
     func apply(buttonSkin: ButtonSkin?, to button: UIButton)
     func apply(navigationBarSkin: NavigationBarSkin?, to controller: UIViewController)
-    func apply(tabBarSkin: TabBarSkin?, to controller: UIViewController)
+    func apply(tabBarSkin: TabBarSkin?, to controller: UITabBarController)
 }
 
 public struct Skinner : Skinning {
     
-    public func apply(skin: Skin?, to controller: UIViewController) {
-        guard let skin = skin else { return }
-        apply(navigationBarSkin: skin.navigationBarSkin, to: controller)
-        apply(tabBarSkin: skin.tabBarSkin, to: controller)
-    }
-    
     public func apply(navigationBarSkin: NavigationBarSkin?, to controller: UIViewController) {
+        controller.setNeedsStatusBarAppearanceUpdate()
         guard let navigationBar =  controller.navigationController?.navigationBar else { return }
         navigationBar.isHidden = false
         guard let skin = navigationBarSkin else {
-            navigationBar.isTranslucent = true
+            navigationBar.isTranslucent = false
             navigationBar.barTintColor = RGBA.white.uiColor
             navigationBar.tintColor = RGBA.black.uiColor
             navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:RGBA.black.uiColor]
-            navigationBar.barStyle = .default
-            navigationBar.setBackgroundImage(nil, for: .default)
-            navigationBar.shadowImage = nil
+            let image = UIImage()
+            navigationBar.setBackgroundImage(image, for: .default)
+            navigationBar.shadowImage = image
             return
         }
         
@@ -41,8 +35,6 @@ public struct Skinner : Skinning {
         navigationBar.barTintColor = skin.barTintColor.uiColor
         navigationBar.tintColor = skin.itemTintColor.uiColor
         navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:skin.titleTintColor.uiColor]
-        
-        navigationBar.barStyle = skin.statusbarMode == .dark ? .black : .default
         if skin.hasDropShadow {
             navigationBar.setBackgroundImage(nil, for: .default)
             navigationBar.shadowImage = nil
@@ -52,9 +44,9 @@ public struct Skinner : Skinning {
         }
     }
     
-    public func apply(tabBarSkin: TabBarSkin?, to controller: UIViewController) {
+    public func apply(tabBarSkin: TabBarSkin?, to controller: UITabBarController) {
         guard let skin = tabBarSkin else { return }
-        guard let tabBar = controller.tabBarController?.tabBar else { return }
+        let tabBar = controller.tabBar
         tabBar.isTranslucent = false
         tabBar.barTintColor = skin.barTintColor.uiColor
         tabBar.tintColor = skin.selectedItemTintColor.uiColor
