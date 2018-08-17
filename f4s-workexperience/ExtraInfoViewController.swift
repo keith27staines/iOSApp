@@ -269,7 +269,7 @@ extension ExtraInfoViewController {
         let toolBar = UIToolbar()
         toolBar.barStyle = .default
         toolBar.isTranslucent = true
-        toolBar.tintColor = UIColor(netHex: Colors.mediumGreen)
+        toolBar.tintColor = skin?.primaryButtonSkin.backgroundColor.uiColor
         toolBar.sizeToFit()
         
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonTouched))

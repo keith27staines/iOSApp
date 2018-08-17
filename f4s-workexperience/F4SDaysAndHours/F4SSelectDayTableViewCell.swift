@@ -40,7 +40,7 @@ public class F4SSelectDayTableViewCell: UITableViewCell {
             } else {
                 tickImage.image = deselectedImage
             }
-            hoursDropdownLabel.text = dayHourSelection.hoursType.rawValue
+            hoursDropdownLabel.text = dayHourSelection.hoursType.titledDisplayText
             enable(dayHourSelection.dayIsSelected)
         }
     }

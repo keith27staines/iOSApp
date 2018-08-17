@@ -33,7 +33,9 @@ class F4SInviteButtonsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        let skinner = Skinner()
+        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: primaryButton)
+        skinner.apply(buttonSkin: skin?.secondaryButtonSkin, to: secondaryButton)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
