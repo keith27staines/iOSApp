@@ -518,6 +518,11 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="97Q-Kf-j80"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="leftDrop">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Company name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mp6-IE-RAk">
                                 <rect key="frame" x="92.5" y="182.5" width="190.5" height="31.5"/>
@@ -664,6 +669,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uOy-iP-aAH" customClass="F4SCompanyHeaderViewWithLogo" customModule="f4s_workexperience" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="212"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rightDrop">
+                                        <real key="value" value="0.29999999999999999"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="leftDrop">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="tbv-hu-0I5" userLabel="MainStack">
                                 <rect key="frame" x="0.0" y="222" width="375" height="409"/>
@@ -830,7 +843,7 @@
     <resources>
         <image name="hooray" width="375" height="212"/>
         <image name="questionMark" width="90" height="90"/>
-        <image name="ui-offershare-icon" width="47" height="47"/>
+        <image name="ui-offershare-icon" width="45" height="45"/>
         <image name="ui-pluscircle-icon" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>

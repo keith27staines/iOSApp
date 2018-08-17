@@ -78,8 +78,8 @@ class F4SHoorayViewController: UIViewController {
     func applyStyle() {
         companyHeaderView.fillTop = false
         companyHeaderView.fillColor = UIColor.white
-        companyHeaderView.leftDrop = 0.3
-        companyHeaderView.rightDrop = 1.0
+        companyHeaderView.leftDrop = 1.0
+        companyHeaderView.rightDrop = 0.3
         companyHeaderView.backgroundColor = UIColor.clear
         companyNameLabel.text = accept.company.name.stripCompanySuffix()
         companyHeaderView.icon = accept.companyLogo
