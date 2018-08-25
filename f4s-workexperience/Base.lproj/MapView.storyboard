@@ -45,12 +45,13 @@
                                             <constraint firstAttribute="height" constant="16" id="Uou-Az-uZS"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vB2-GM-gOM">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vB2-GM-gOM">
                                         <rect key="frame" x="310" y="3" width="44" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="3fc-9d-125"/>
                                             <constraint firstAttribute="width" constant="44" id="dgh-K7-ddM"/>
                                         </constraints>
+                                        <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" image="directionArrowIcon"/>
                                         <connections>
                                             <action selector="myLocationButtonTouched:" destination="vNn-21-OAE" eventType="touchUpInside" id="k7g-6d-3dK"/>
@@ -70,7 +71,7 @@
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Flp-FB-sKl">
-                                <rect key="frame" x="125" y="593" width="175" height="38"/>
+                                <rect key="frame" x="149" y="605" width="175" height="38"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQ6-vJ-i4v">
                                         <rect key="frame" x="0.0" y="0.0" width="175" height="38"/>
@@ -96,7 +97,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Lgj-RU-RS3" userLabel="logoStack">
-                                <rect key="frame" x="16" y="587" width="90" height="50"/>
+                                <rect key="frame" x="16" y="599" width="90" height="50"/>
                                 <subviews>
                                     <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo2" translatesAutoresizingMaskIntoConstraints="NO" id="u6v-YJ-KBz">
                                         <rect key="frame" x="0.0" y="0.0" width="43" height="50"/>
@@ -110,16 +111,15 @@
                                     <constraint firstAttribute="width" constant="90" id="n88-O4-aiY"/>
                                 </constraints>
                             </stackView>
-                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8cG-OV-1mj">
-                                <rect key="frame" x="285" y="577" width="70" height="70"/>
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8cG-OV-1mj">
+                                <rect key="frame" x="309" y="601" width="46" height="46"/>
                                 <color key="backgroundColor" red="0.31372549020000001" green="0.50196078430000002" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="9gw-5b-j6R"/>
-                                    <constraint firstAttribute="height" constant="70" id="nJ6-GK-0Ds"/>
+                                    <constraint firstAttribute="width" constant="46" id="9gw-5b-j6R"/>
+                                    <constraint firstAttribute="height" constant="46" id="nJ6-GK-0Ds"/>
                                 </constraints>
-                                <state key="normal" image="filtersIcon">
-                                    <color key="titleColor" red="0.90588235294117647" green="0.90588235294117647" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="filtersIcon"/>
                                 <connections>
                                     <action selector="filtersButtonTouched:" destination="vNn-21-OAE" eventType="touchUpInside" id="any-wE-FEy"/>
                                 </connections>

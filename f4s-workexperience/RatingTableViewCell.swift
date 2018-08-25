@@ -24,12 +24,19 @@ class RatingTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    
+    func halfStar() -> UIImage? {
+        return UIImage(named: "HalfStar")?.withRenderingMode(.alwaysTemplate)
+    }
+    func fullStar() -> UIImage? {
+        return UIImage(named: "FilledStar")?.withRenderingMode(.alwaysTemplate)
+    }
 
     func setupStars(rating: Double) {
         let roundedRating = rating.round()
 
         if roundedRating == 0.5 {
-            self.firstStarImageView.image = UIImage(named: "HalfStar")
+            self.firstStarImageView.image = #imageLiteral(resourceName: "HalfStar")
         }
         if roundedRating == 1 {
             self.firstStarImageView.image = UIImage(named: "FilledStar")
@@ -77,6 +84,10 @@ class RatingTableViewCell: UITableViewCell {
             self.thirdStarImageView.image = UIImage(named: "FilledStar")
             self.fourthStarImageView.image = UIImage(named: "FilledStar")
             self.fifthStarImageView.image = UIImage(named: "FilledStar")
+        }
+        
+        [firstStarImageView, secondStarImageView,thirdStarImageView,fourthStarImageView,fifthStarImageView].forEach { (view) in
+            view?.tintColor = UIColor.red
         }
     }
 }

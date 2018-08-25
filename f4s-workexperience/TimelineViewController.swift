@@ -217,7 +217,7 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
             }
 
             cell.unreadMessageDotView.layer.cornerRadius = cell.unreadMessageDotView.bounds.height / 2
-            cell.unreadMessageDotView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
+            cell.unreadMessageDotView.backgroundColor = RGBA.red.uiColor
 
             guard let latestMessage = placement.latestMessage else {
                 // TODO: Fill out with suitable null values

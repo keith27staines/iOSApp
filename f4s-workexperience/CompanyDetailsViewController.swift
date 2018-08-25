@@ -475,7 +475,6 @@ extension CompanyDetailsViewController {
         self.view.addSubview(popupView)
         popupView.bringSubview(toFront: self.tableView)
         popupView.alpha = 0.0
-        
         popupView.center = CGPoint(x: shortlistButton.center.x, y: popupView.center.y)
         
         UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {

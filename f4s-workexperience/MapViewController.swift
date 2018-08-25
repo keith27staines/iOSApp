@@ -297,10 +297,10 @@ extension MapViewController {
     fileprivate func setupButtons() {
         filtersButton.layer.cornerRadius = filtersButton.bounds.height / 2
         filtersButton.layer.masksToBounds = true
-        filtersButton.setBackgroundColor(color: UIColor(netHex: Colors.waterBlue), forUIControlState: .normal)
-        filtersButton.setBackgroundColor(color: UIColor(netHex: Colors.azure), forUIControlState: .highlighted)
+        filtersButton.setBackgroundColor(color: splashColor, forUIControlState: .normal)
         filtersButton.setImage(UIImage(named: "filtersIcon"), for: .normal)
         filtersButton.setImage(UIImage(named: "filtersIcon"), for: .highlighted)
+        myLocationButton.tintColor = splashColor
     }
     
     fileprivate func setupLogos() {
