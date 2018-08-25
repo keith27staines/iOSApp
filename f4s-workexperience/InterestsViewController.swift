@@ -59,6 +59,7 @@ class InterestsViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         adjustAppearance()
         adjustNavigationBar()
+        applyStyle()
         startAnimating()
         originallySelectedInterests = InterestDBOperations.sharedInstance.interestsForCurrentUser()
         selectedInterests = originallySelectedInterests
@@ -78,6 +79,12 @@ class InterestsViewController: UIViewController, UIScrollViewDelegate {
                 })
             }
         }
+    }
+    
+    func applyStyle() {
+        let skinner = Skinner()
+        skinner.apply(navigationBarSkin: skin?.navigationBarSkin, to: self)
+        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: refineSearchButton)
     }
     
     func updateUITotals(completion: (() -> Void)?) {
@@ -138,25 +145,10 @@ extension InterestsViewController {
         collectionView.collectionViewLayout = customLayout
         collectionView.allowsMultipleSelection = true
         collectionView.clipsToBounds = true
-        refineSearchButton.layer.cornerRadius = 10
-        refineSearchButton.layer.masksToBounds = true
-        refineSearchButton.adjustsImageWhenHighlighted = false
-        refineSearchButton.setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)
-        refineSearchButton.setBackgroundColor(color: UIColor(netHex: Colors.whiteGreen), forUIControlState: .disabled)
-        refineSearchButton.setBackgroundColor(color: UIColor(netHex: Colors.mediumGreen), forUIControlState: .normal)
-        refineSearchButton.setTitleColor(UIColor.white, for: .normal)
-        refineSearchButton.setTitleColor(UIColor.white, for: .highlighted)
     }
 
     func adjustNavigationBar() {
         self.navigationItem.title = NSLocalizedString("Interests", comment: "")
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        UIApplication.shared.statusBarStyle = .lightContent
-        navigationController?.setNavigationBarHidden(false, animated: false)
-        navigationController?.navigationBar.barTintColor = UIColor(netHex: Colors.azure)
-        navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationController?.navigationBar.isTranslucent = false
-
         let closeButton = UIBarButtonItem(image: UIImage(named: "closeButton-white"), style: .plain, target: self, action: #selector(dismissInterestView(_:)))
         navigationItem.setLeftBarButton(closeButton, animated: false)
     }

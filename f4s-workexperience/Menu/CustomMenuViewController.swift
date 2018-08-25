@@ -32,25 +32,23 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
         self.tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         self.navigationController?.navigationBar.isHidden = true
-        self.tableView.backgroundColor = UIColor.clear
         self.tableView.bounces = false
         self.edgesForExtendedLayout = []
         self.extendedLayoutIncludesOpaqueBars = true
         tableView.register(UINib(nibName: "MenuHeaderCell", bundle: nil), forCellReuseIdentifier: "MenuHeaderCell")
-        switch Config.environment {
-        case .staging:
-            self.view.backgroundColor = RGBA.workfinderStagingGold.uiColor
-        case .production:
-            self.view.backgroundColor = UIColor(red: 72.0/255.0, green: 38.0/255.0, blue: 127.0/255.0, alpha: 1.0)
-        }
-
         setupLabels()
+        applyStyle()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         secondLoad = true
-        self.tableView.reloadData()
+        tableView.backgroundColor = UIColor.clear
+        tableView.reloadData()
+    }
+    
+    func applyStyle() {
+        self.view.backgroundColor = skin?.navigationBarSkin.barTintColor.uiColor
         UIApplication.shared.statusBarStyle = .lightContent
     }
 

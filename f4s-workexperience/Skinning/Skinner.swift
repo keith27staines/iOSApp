@@ -17,8 +17,9 @@ public protocol Skinning  {
 public struct Skinner : Skinning {
     
     public func apply(navigationBarSkin: NavigationBarSkin?, to controller: UIViewController) {
-        controller.setNeedsStatusBarAppearanceUpdate()
-        guard let navigationBar =  controller.navigationController?.navigationBar else { return }
+        guard let navigationBar =  controller.navigationController?.navigationBar else {
+            return
+        }
         navigationBar.isHidden = false
         guard let skin = navigationBarSkin else {
             navigationBar.isTranslucent = false
@@ -42,6 +43,7 @@ public struct Skinner : Skinning {
             navigationBar.setBackgroundImage(UIImage(), for: .default)
             navigationBar.shadowImage = UIImage()
         }
+        navigationBar.barStyle = (skin.statusbarMode == .light) ? UIBarStyle.black : .default
     }
     
     public func apply(tabBarSkin: TabBarSkin?, to controller: UITabBarController) {
@@ -57,7 +59,11 @@ public struct Skinner : Skinning {
         guard let skin = buttonSkin else { return }
         button.layer.masksToBounds = true
         button.layer.cornerRadius = skin.cornerRadius
-        button.setBackgroundColor(color: skin.backgroundColor.uiColor, forUIControlState: .normal)
+        let backgroundColor = skin.backgroundColor.uiColor
+        button.setBackgroundColor(color: backgroundColor, forUIControlState: .normal)
+        button.setBackgroundColor(color: UIColor.red, forUIControlState: .selected)
+        button.setBackgroundColor(color: UIColor.clear, forUIControlState: .highlighted)
+        button.setBackgroundColor(color: UIColor.red, forUIControlState: .focused)
         button.setBackgroundColor(color: skin.backgroundColor.disabledColor.uiColor, forUIControlState: .disabled)
         button.setTitleColor(skin.textColor.uiColor, for: .normal)
         button.setTitleColor(skin.textColor.disabledColor.uiColor, for: .disabled)

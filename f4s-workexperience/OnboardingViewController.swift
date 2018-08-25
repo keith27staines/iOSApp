@@ -18,7 +18,6 @@ class OnboardingViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var gradientView: UIView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var enterLocationButton: UIButton!
     @IBOutlet weak var enableLocationButton: UIButton!
@@ -95,19 +94,23 @@ extension OnboardingViewController {
         setUpButtons()
         setupLabels()
     }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return skin?.navigationBarSkin.statusbarMode == .light ? .lightContent : .default
-    }
 }
 
 // MARK: - user interraction
 extension OnboardingViewController {
     @IBAction func enterLocationButton(_: AnyObject) {
-        CustomNavigationHelper.sharedInstance.completeOnboarding(mapShouldRequestLocation: false)
+        enterLocationButton.isEnabled = false
+        DispatchQueue.main.async {
+            CustomNavigationHelper.sharedInstance.completeOnboarding(mapShouldRequestLocation: false)
+        }
+
     }
 
     @IBAction func enableLocationButton(_: AnyObject) {
-        CustomNavigationHelper.sharedInstance.completeOnboarding(mapShouldRequestLocation: true)
+        enterLocationButton.isEnabled = false
+        DispatchQueue.main.async {
+            CustomNavigationHelper.sharedInstance.completeOnboarding(mapShouldRequestLocation: true)
+        }
+        
     }
 }

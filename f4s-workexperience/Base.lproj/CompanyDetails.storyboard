@@ -43,19 +43,6 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BEY-Ws-Uht">
-                                        <rect key="frame" x="120" y="1056" width="235" height="60"/>
-                                        <color key="backgroundColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="Ppq-bb-Zm1"/>
-                                        </constraints>
-                                        <state key="normal" title="Apply button">
-                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="applyButton:" destination="0Q6-Bd-LZR" eventType="touchUpInside" id="0aJ-Il-rb9"/>
-                                        </connections>
-                                    </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UTb-CI-en7">
                                         <rect key="frame" x="20" y="102" width="335" height="946"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -388,16 +375,34 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ayf-CV-tRe">
-                                        <rect key="frame" x="20" y="1056" width="60" height="60"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="aes-Oq-0hB">
+                                        <rect key="frame" x="20" y="1056" width="335" height="60"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ayf-CV-tRe">
+                                                <rect key="frame" x="0.0" y="0.0" width="68.5" height="60"/>
+                                                <state key="normal" image="unshortlist"/>
+                                                <connections>
+                                                    <action selector="shortlistButtonTouched:" destination="0Q6-Bd-LZR" eventType="touchUpInside" id="Fy8-hR-LMh"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BEY-Ws-Uht">
+                                                <rect key="frame" x="88.5" y="0.0" width="246.5" height="60"/>
+                                                <color key="backgroundColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="Ppq-bb-Zm1"/>
+                                                </constraints>
+                                                <state key="normal" title="Apply button">
+                                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="applyButton:" destination="0Q6-Bd-LZR" eventType="touchUpInside" id="0aJ-Il-rb9"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="60" id="bIW-Cs-IoU"/>
+                                            <constraint firstItem="Ayf-CV-tRe" firstAttribute="height" secondItem="BEY-Ws-Uht" secondAttribute="height" id="Sg9-uV-z8P"/>
                                         </constraints>
-                                        <state key="normal" image="unshortlist"/>
-                                        <connections>
-                                            <action selector="shortlistButtonTouched:" destination="0Q6-Bd-LZR" eventType="touchUpInside" id="Fy8-hR-LMh"/>
-                                        </connections>
-                                    </button>
+                                    </stackView>
                                     <mapView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" rotateEnabled="NO" pitchEnabled="NO" showsUserLocation="YES" showsPointsOfInterest="NO" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TbL-nA-A6m">
                                         <rect key="frame" x="20" y="0.0" width="100" height="76"/>
                                         <constraints>
@@ -408,23 +413,20 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="BEY-Ws-Uht" firstAttribute="leading" secondItem="Ayf-CV-tRe" secondAttribute="trailing" constant="40" id="0VE-tx-bjf"/>
-                                    <constraint firstItem="Ayf-CV-tRe" firstAttribute="height" secondItem="BEY-Ws-Uht" secondAttribute="height" id="0ih-uR-Slm"/>
                                     <constraint firstItem="UTb-CI-en7" firstAttribute="top" secondItem="gbG-dB-pG4" secondAttribute="bottom" constant="10" id="459-aa-eWr"/>
-                                    <constraint firstAttribute="bottom" secondItem="BEY-Ws-Uht" secondAttribute="bottom" constant="20" id="6Xn-ZG-XlG"/>
+                                    <constraint firstAttribute="trailing" secondItem="aes-Oq-0hB" secondAttribute="trailing" constant="20" id="7q0-4G-BoE"/>
                                     <constraint firstAttribute="trailing" secondItem="gbG-dB-pG4" secondAttribute="trailing" constant="20" id="7sj-il-g3a"/>
                                     <constraint firstAttribute="trailing" secondItem="UTb-CI-en7" secondAttribute="trailing" constant="20" id="8C5-U2-pM2"/>
                                     <constraint firstItem="TbL-nA-A6m" firstAttribute="top" secondItem="iCq-ty-4y3" secondAttribute="top" placeholder="YES" id="FlU-Rz-LLj"/>
-                                    <constraint firstItem="Ayf-CV-tRe" firstAttribute="centerY" secondItem="BEY-Ws-Uht" secondAttribute="centerY" id="IuF-56-UXD"/>
-                                    <constraint firstItem="BEY-Ws-Uht" firstAttribute="top" secondItem="UTb-CI-en7" secondAttribute="bottom" constant="8" symbolic="YES" id="M9K-AG-f29"/>
-                                    <constraint firstAttribute="trailing" secondItem="BEY-Ws-Uht" secondAttribute="trailing" constant="20" id="QFd-TZ-tBI"/>
+                                    <constraint firstAttribute="bottom" secondItem="aes-Oq-0hB" secondAttribute="bottom" constant="20" id="ITx-td-h6R"/>
                                     <constraint firstItem="gbG-dB-pG4" firstAttribute="top" secondItem="DAT-9E-MNk" secondAttribute="bottom" constant="12" id="RDl-Pu-Dxs"/>
                                     <constraint firstItem="DAT-9E-MNk" firstAttribute="centerX" secondItem="iCq-ty-4y3" secondAttribute="centerX" id="SRc-xC-Jm9"/>
+                                    <constraint firstItem="aes-Oq-0hB" firstAttribute="top" secondItem="UTb-CI-en7" secondAttribute="bottom" constant="8" id="TXj-0B-dU4"/>
                                     <constraint firstItem="gbG-dB-pG4" firstAttribute="centerX" secondItem="iCq-ty-4y3" secondAttribute="centerX" id="eIN-gF-9fK"/>
                                     <constraint firstItem="UTb-CI-en7" firstAttribute="leading" secondItem="TbL-nA-A6m" secondAttribute="leading" id="hb7-IH-JNx"/>
                                     <constraint firstItem="DAT-9E-MNk" firstAttribute="top" secondItem="iCq-ty-4y3" secondAttribute="top" id="jTw-EU-31N"/>
+                                    <constraint firstItem="aes-Oq-0hB" firstAttribute="leading" secondItem="iCq-ty-4y3" secondAttribute="leading" constant="20" id="mZn-D4-B46"/>
                                     <constraint firstItem="UTb-CI-en7" firstAttribute="leading" secondItem="iCq-ty-4y3" secondAttribute="leading" constant="20" id="u49-9c-brh"/>
-                                    <constraint firstItem="Ayf-CV-tRe" firstAttribute="leading" secondItem="iCq-ty-4y3" secondAttribute="leading" constant="20" id="wwN-rH-q1I"/>
                                 </constraints>
                             </view>
                         </subviews>

@@ -278,6 +278,7 @@ extension AppDelegate {
                 assertionFailure("The root view controller is not an OnboardingViewController")
                 return
             }
+            UserDefaults.standard.set(false, forKey: UserDefaultsKeys.shouldLoadTimeline)
             _ = ctrl.view
             ctrl.hideOnboardingControls = false
         } else {

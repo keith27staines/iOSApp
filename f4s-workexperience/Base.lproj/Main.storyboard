@@ -42,7 +42,6 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A7Q-nn-dEQ">
                                 <rect key="frame" x="16" y="499" width="343" height="66.5"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Enable location to find opportunities">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
