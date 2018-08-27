@@ -27,7 +27,7 @@ class RecommendationsViewController: UIViewController {
     }
     
     func applyStyle() {
-        Skinner().apply(navigationBarSkin: skin?.navigationBarSkin, to: self)
+        styleNavigationController()
     }
     
     func reloadModel() {

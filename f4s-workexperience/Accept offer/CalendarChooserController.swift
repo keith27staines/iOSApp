@@ -29,6 +29,11 @@ class CalendarChooserController: UITableViewController {
             })
         tableView.reloadData()
         doneButton.isEnabled = false
+        applyStyle()
+    }
+    
+    func applyStyle() {
+        styleNavigationController()
     }
     
     

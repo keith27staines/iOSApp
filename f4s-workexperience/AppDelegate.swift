@@ -282,18 +282,7 @@ extension AppDelegate {
             _ = ctrl.view
             ctrl.hideOnboardingControls = false
         } else {
-            let shouldLoadTimelineValue = UserDefaults.standard.value(forKey: UserDefaultsKeys.shouldLoadTimeline)
-            var shouldLoadTimeline: Bool = false
-            if let value = shouldLoadTimelineValue {
-                shouldLoadTimeline = value as? Bool ?? false
-            }
-            let navigationHelper = CustomNavigationHelper.sharedInstance
-            if shouldLoadTimeline {
-                navigationHelper.navigateToTimeline(threadUuid: nil)
-            } else {
-                navigationHelper.navigateToMap()
-                navigationHelper.mapViewController.shouldRequestAuthorization = false
-            }
+            CustomNavigationHelper.sharedInstance.navigateToMostAppropriateInitialTab()
         }
     }
     
@@ -323,29 +312,6 @@ extension AppDelegate {
                 object: self,
                 userInfo: userInfo)
             NotificationCenter.default.post(notification)
-        }
-    }
-}
-
-extension UIViewController {
-    var skin: Skin? {
-        get {
-            return ((UIApplication.shared.delegate) as! AppDelegate).skin
-        }
-    }
-    var splashColor: UIColor {
-        return skin?.navigationBarSkin.barTintColor.uiColor ?? UIColor.white
-    }
-
-    /// Style the navigation bar
-    func styleNavigationController() {
-        Skinner().apply(navigationBarSkin: skin?.navigationBarSkin, to: self)
-    }
-}
-extension UIView {
-    var skin: Skin? {
-        get {
-            return ((UIApplication.shared.delegate) as! AppDelegate).skin
         }
     }
 }

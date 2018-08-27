@@ -83,13 +83,8 @@ extension OnboardingViewController {
     func setupAppearance() {
         setNeedsStatusBarAppearanceUpdate()
         UIApplication.shared.statusBarStyle = .lightContent
-        Skinner().apply(navigationBarSkin: skin?.navigationBarSkin, to: self)
-//        switch Config.environment {
-//        case .staging:
-//            view.backgroundColor = RGBA.workfinderStagingGold.uiColor
-//        case .production:
-            view.backgroundColor = RGBA.workfinderGreen.uiColor
-//        }
+        styleNavigationController()
+        view.backgroundColor = RGBA.workfinderGreen.uiColor
         view.layoutSubviews()
         setUpButtons()
         setupLabels()

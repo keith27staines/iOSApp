@@ -201,6 +201,8 @@
 		FC72219F20FE248400F10953 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = FC72219B20FE248400F10953 /* Appfile */; };
 		FC7221A020FE248400F10953 /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = FC72219C20FE248400F10953 /* Fastfile */; };
 		FC73719B2101C7EF00C0032A /* AcceptOffer.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC73719A2101C7EF00C0032A /* AcceptOffer.xcassets */; };
+		FC789E5E2133E74200AED05D /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC789E5D2133E74200AED05D /* UIViewController+Extensions.swift */; };
+		FC789E622133E76100AED05D /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC789E612133E76100AED05D /* UIView+Extensions.swift */; };
 		FC85FA8220A3436600059EFB /* F4SMessageServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85FA8120A3436600059EFB /* F4SMessageServices.swift */; };
 		FC860D82209C37F2007945E6 /* MessageDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC860D81209C37F2007945E6 /* MessageDispatcher.swift */; };
 		FC86A5FB20B44E6B002BAD74 /* F4SUrlDescriptorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC86A5FA20B44E6B002BAD74 /* F4SUrlDescriptorTableViewCell.swift */; };
@@ -574,6 +576,8 @@
 		FC72219B20FE248400F10953 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
 		FC72219C20FE248400F10953 /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
 		FC73719A2101C7EF00C0032A /* AcceptOffer.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AcceptOffer.xcassets; sourceTree = "<group>"; };
+		FC789E5D2133E74200AED05D /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		FC789E612133E76100AED05D /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		FC79314720226D440034D201 /* F4SDistribution.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = F4SDistribution.entitlements; path = Config/F4SDistribution.entitlements; sourceTree = "<group>"; };
 		FC85FA8120A3436600059EFB /* F4SMessageServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SMessageServices.swift; sourceTree = "<group>"; };
 		FC860D81209C37F2007945E6 /* MessageDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDispatcher.swift; sourceTree = "<group>"; };
@@ -1555,6 +1559,8 @@
 			children = (
 				FC6771172125A56D000B0870 /* UIColor+Extensions */,
 				FC67711C2125A8C8000B0870 /* String+Extensions */,
+				FC789E632133E79600AED05D /* UIViewController+Extensions */,
+				FC789E642133E7AF00AED05D /* UIView+Extensions */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1635,6 +1641,22 @@
 				FC72219C20FE248400F10953 /* Fastfile */,
 			);
 			path = fastlane;
+			sourceTree = "<group>";
+		};
+		FC789E632133E79600AED05D /* UIViewController+Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FC789E5D2133E74200AED05D /* UIViewController+Extensions.swift */,
+			);
+			path = "UIViewController+Extensions";
+			sourceTree = "<group>";
+		};
+		FC789E642133E7AF00AED05D /* UIView+Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FC789E612133E76100AED05D /* UIView+Extensions.swift */,
+			);
+			path = "UIView+Extensions";
 			sourceTree = "<group>";
 		};
 		FC8E303620F4A5DF006059DE /* F4SLogger */ = {
@@ -2232,6 +2254,7 @@
 				40C1A5231DDF5ACE000F80AA /* POIItem.m in Sources */,
 				FCB46F042051365400F0779F /* F4SFeatureSwitchesViewController.swift in Sources */,
 				40C1A52D1DE84410000F80AA /* TriangleView.swift in Sources */,
+				FC789E5E2133E74200AED05D /* UIViewController+Extensions.swift in Sources */,
 				FC64A597211AECDE006464A5 /* F4SInviteDetailLinkCell.swift in Sources */,
 				205EB20B1DDB161D00034424 /* DatabaseOperations.swift in Sources */,
 				40E78E8C1DD32C3C000A3776 /* LoadingOverlay.swift in Sources */,
@@ -2247,6 +2270,7 @@
 				FCE20CC2203C12F300CA821D /* UrlTableViewCell.swift in Sources */,
 				FCA24C111F9F1CBF0074D2E1 /* WorkAvailabilityWindow.swift in Sources */,
 				FCB46F0820513D0100F0779F /* F4SFeatureSwitchModel.swift in Sources */,
+				FC789E622133E76100AED05D /* UIView+Extensions.swift in Sources */,
 				2037B0A71DEC3C3B00A9DE3E /* InterestCoreDataManager.swift in Sources */,
 				204C89551DF5A36100D8493A /* TemplateChoiceDB.swift in Sources */,
 				204C89781DF5F0B200D8493A /* ChooseAttributesTableViewCell.swift in Sources */,

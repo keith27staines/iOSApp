@@ -103,6 +103,11 @@ public struct ButtonSkin : Codable {
 
 
 public struct NavigationBarSkin : Codable {
+    public static var whiteBarBlackItems: NavigationBarSkin {
+         let barSkin = NavigationBarSkin(statusbarMode: .dark, barTintColor: RGBA.white, itemTintColor: RGBA.black, titleTintColor: RGBA.black, hasDropShadow: false)
+        return barSkin
+    }
+    
     public enum StatusbarMode : String, Codable {
         case dark = "dark"
         case light = "light"

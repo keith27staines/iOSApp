@@ -83,8 +83,8 @@ class InterestsViewController: UIViewController, UIScrollViewDelegate {
     
     func applyStyle() {
         let skinner = Skinner()
-        skinner.apply(navigationBarSkin: skin?.navigationBarSkin, to: self)
         skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: refineSearchButton)
+        styleNavigationController()
     }
     
     func updateUITotals(completion: (() -> Void)?) {

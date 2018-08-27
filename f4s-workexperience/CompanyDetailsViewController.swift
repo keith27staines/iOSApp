@@ -63,7 +63,11 @@ class CompanyDetailsViewController: UIViewController {
         setupMap()
         loadCompany()
         loadDocuments()
-        Skinner().apply(navigationBarSkin: nil, to: self)
+        applyStyle()
+    }
+    
+    func applyStyle() {
+        Skinner().apply(navigationBarSkin: NavigationBarSkin.whiteBarBlackItems, to: self)
     }
 
     override func viewWillAppear(_ animated: Bool) {

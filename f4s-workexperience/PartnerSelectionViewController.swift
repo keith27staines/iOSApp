@@ -80,7 +80,7 @@ class PartnerSelectionViewController: UIViewController {
     func applyStyle() {
         let skinner = Skinner()
         skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: doneButton)
-        skinner.apply(navigationBarSkin: skin?.navigationBarSkin, to: self)
+        styleNavigationController()
         self.view.backgroundColor = splashColor
     }
     

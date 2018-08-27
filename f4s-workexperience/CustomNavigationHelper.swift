@@ -42,6 +42,16 @@ class CustomNavigationHelper {
         }
     }
     
+    public func navigateToMostAppropriateInitialTab() {
+        let shouldLoadTimeline = UserDefaults.standard.value(forKey: UserDefaultsKeys.shouldLoadTimeline) as? Bool ?? false
+        if shouldLoadTimeline {
+            navigateToTimeline(threadUuid: nil)
+        } else {
+            navigateToMap()
+            mapViewController.shouldRequestAuthorization = false
+        }
+    }
+    
     public func navigateToTimeline(threadUuid: F4SUUID? = nil) {
         closeMenu { [weak self] (success) in
             self?.tabBar.selectedIndex = TabIndex.timeline.rawValue

@@ -46,6 +46,8 @@ class CustomTabBarViewController: UITabBarController {
     func processUserStatusUpdate(_ status: F4SUserStatus) {
         configureTimelineTabBarWithCount(count: status.unreadMessageCount)
         displayRatingPopover(unratedPlacements: status.unratedPlacements)
+        let shouldLoadTimeline = status.unreadMessageCount > 0
+        UserDefaults.standard.set(shouldLoadTimeline, forKey: UserDefaultsKeys.shouldLoadTimeline)
     }
     
     func configureTimelineTabBarWithCount(count: Int? = 0) {

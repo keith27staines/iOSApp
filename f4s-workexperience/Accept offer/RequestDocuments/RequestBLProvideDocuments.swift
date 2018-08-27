@@ -54,6 +54,7 @@ class RequestBLProvideDocuments: UIViewController {
     
     func applyStyle() {
         let skinner = Skinner()
+        skinner.apply(navigationBarSkin: NavigationBarSkin.whiteBarBlackItems, to: self)
         skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: skipButton)
         skinner.apply(buttonSkin: skin?.secondaryButtonSkin, to: skipButton)
     }
