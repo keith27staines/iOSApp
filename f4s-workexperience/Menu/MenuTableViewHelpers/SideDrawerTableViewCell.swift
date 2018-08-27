@@ -93,7 +93,4 @@ class SideDrawerTableViewCell: TableViewCell {
         self.lineImageView.backgroundColor = color.uiColor
     }
 
-    override func updateContentForNewContentSize() {
-        self.textLabel?.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
-    }
 }
