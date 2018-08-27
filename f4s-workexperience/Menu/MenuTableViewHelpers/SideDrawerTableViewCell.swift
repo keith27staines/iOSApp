@@ -85,7 +85,7 @@ class SideDrawerTableViewCell: TableViewCell {
         let selectionView = UIView()
         selectionView.backgroundColor = UIColor(netHex: Colors.waterBlue)
         self.selectedBackgroundView = selectionView
-        self.textLabel?.textColor = UIColor(netHex: Colors.white)
+        self.textLabel?.textColor = RGBA.white.uiColor
         self.textLabel?.font = UIFont.preferredFont(forTextStyle: .caption1, compatibleWith: nil)
         self.imageView?.bounds = CGRect(x: 0, y: 0, width: 40, height: 40)
         var color = RGBA.white

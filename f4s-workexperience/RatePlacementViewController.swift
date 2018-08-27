@@ -49,22 +49,8 @@ extension RatePlacementViewController {
     }
 
     func setupButtons() {
-        self.submitButton.layer.cornerRadius = 10
-        self.submitButton.layer.masksToBounds = true
-        self.submitButton.adjustsImageWhenHighlighted = false
-
-        let titleAtrString = NSAttributedString(
-            string: NSLocalizedString("Submit", comment: ""),
-            attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.white,
-        ])
-        self.submitButton.setAttributedTitle(titleAtrString, for: .normal)
-
-        self.submitButton.setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)
-        self.submitButton.setBackgroundColor(color: UIColor(netHex: Colors.whiteGreen), forUIControlState: .disabled)
-        self.submitButton.setBackgroundColor(color: UIColor(netHex: Colors.mediumGreen), forUIControlState: .normal)
-        self.submitButton.isEnabled = false
-        self.submitButton.setTitleColor(UIColor.white, for: .normal)
-        self.submitButton.setTitleColor(UIColor.white, for: .highlighted)
+        Skinner().apply(buttonSkin: skin?.primaryButtonSkin, to: submitButton)
+        self.submitButton.setTitle(NSLocalizedString("Submit", comment: ""), for: .normal)        
     }
 
     func setupLabels() {

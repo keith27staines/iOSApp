@@ -19,16 +19,14 @@ struct Colors {
     static let pinkishGrey = 0xBDBDBD
     static let darkGray = 0x4A4A4A
     static let normalGray = 0xEEEEEE
-    static let lightBlue = 0x64B5F6
-    static let blueGradientTop = 0x1089F5
-    static let BlueGradientBottom = 0x0C69CF
+
     static let mediumGray = 0x8F8E94
     static let lightGray = 0xEFEFF4
     static let gray = 0x6D6D72
+    
     static let orangeNormal = 0xF6A623
     static let orangeYellow = 0xF69D00
     static let orangeActive = 0xFFC35F
-    static let whiteGreen = 0xB2D9B6
     static let lightGreen = 0x45C658
     static let messageIncoming = 0xEAEAEA
     static let messageOutgoing = 0xE1FFC7 // 0x40AF50

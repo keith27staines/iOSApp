@@ -135,7 +135,6 @@
 		D54E10051E044BA000A51560 /* ProcessedMessages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D54E10031E044BA000A51560 /* ProcessedMessages.storyboard */; };
 		D54E10071E044BC100A51560 /* ProcessedMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54E10061E044BC100A51560 /* ProcessedMessagesViewController.swift */; };
 		D5E9EBE81DD60AB300BD796E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5E9EBEA1DD60AB300BD796E /* Localizable.strings */; };
-		D5E9EC021DDD9F9000BD796E /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E9EC011DDD9F9000BD796E /* GradientView.swift */; };
 		FC09CD5120CA62D700A79240 /* F4SShortlistService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC09CD5020CA62D700A79240 /* F4SShortlistService.swift */; };
 		FC09CD5320CA6D4500A79240 /* F4SJsonDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC09CD5220CA6D4500A79240 /* F4SJsonDecoding.swift */; };
 		FC0C87952122C05C007CF1F3 /* F4SAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C87942122C05C007CF1F3 /* F4SAnalyticsEvents.swift */; };
@@ -516,7 +515,6 @@
 		D54E10041E044BA000A51560 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "f4s-workexperience/Base.lproj/ProcessedMessages.storyboard"; sourceTree = "<group>"; };
 		D54E10061E044BC100A51560 /* ProcessedMessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProcessedMessagesViewController.swift; path = "f4s-workexperience/ProcessedMessagesViewController.swift"; sourceTree = "<group>"; };
 		D5E9EBE91DD60AB300BD796E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D5E9EC011DDD9F9000BD796E /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		FC09CD5020CA62D700A79240 /* F4SShortlistService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SShortlistService.swift; sourceTree = "<group>"; };
 		FC09CD5220CA6D4500A79240 /* F4SJsonDecoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SJsonDecoding.swift; sourceTree = "<group>"; };
 		FC0C87942122C05C007CF1F3 /* F4SAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SAnalyticsEvents.swift; sourceTree = "<group>"; };
@@ -1120,7 +1118,6 @@
 				FCC9D13C1FC82AFF0081F7B5 /* StarRatingView.swift */,
 				40E78E9B1DD5DB6D000A3776 /* AutoCompleteTextField.swift */,
 				40C1A4E51DDB356B000F80AA /* CustomTabBarViewController.swift */,
-				D5E9EC011DDD9F9000BD796E /* GradientView.swift */,
 				40C1A52C1DE8440F000F80AA /* TriangleView.swift */,
 				405974091E00115B0002DB3A /* NextResponderTextField.swift */,
 			);
@@ -2168,7 +2165,6 @@
 				40E78E4B1DD32862000A3776 /* f4s-workexperience.xcdatamodeld in Sources */,
 				FC9BEE082015FF6000347437 /* UniversalLinkParser.swift in Sources */,
 				FC209084211611CE001A0321 /* CompanyDocumentTableViewCell.swift in Sources */,
-				D5E9EC021DDD9F9000BD796E /* GradientView.swift in Sources */,
 				204203F71E4B7966007C7409 /* FavouriteViewController.swift in Sources */,
 				FCDE24772105AB9B008B4315 /* F4SCompanyHeaderViewWithLogo.swift in Sources */,
 				FC99BDC820CFD8E400278DDE /* F4SDownloadService.swift in Sources */,
