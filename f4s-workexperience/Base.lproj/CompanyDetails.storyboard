@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="uNs-pa-HII">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -254,11 +254,11 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="335" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="s6e-AQ-jrG">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="s6e-AQ-jrG">
                                                             <rect key="frame" x="4" y="4" width="327" height="35.5"/>
                                                             <subviews>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="I6M-VT-QzL">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="153.5" height="35.5"/>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="I6M-VT-QzL">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="169.5" height="35.5"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="1000" image="ui-linkedin-icon" translatesAutoresizingMaskIntoConstraints="NO" id="wLO-g1-MnU">
                                                                             <rect key="frame" x="0.0" y="0.0" width="35.5" height="35.5"/>
@@ -266,18 +266,20 @@
                                                                                 <constraint firstAttribute="width" secondItem="wLO-g1-MnU" secondAttribute="height" multiplier="1:1" id="7lA-Vr-m43"/>
                                                                             </constraints>
                                                                         </imageView>
-                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ll-1A-GIN">
-                                                                            <rect key="frame" x="35.5" y="0.0" width="118" height="35.5"/>
-                                                                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
-                                                                            <state key="normal" title="see who you know"/>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ll-1A-GIN">
+                                                                            <rect key="frame" x="41.5" y="0.0" width="128" height="35.5"/>
+                                                                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                                                            <state key="normal" title="See who you know">
+                                                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                            </state>
                                                                             <connections>
                                                                                 <action selector="leftButtonTapped:" destination="QyC-Ih-DmP" eventType="touchUpInside" id="oj2-25-A6l"/>
                                                                             </connections>
                                                                         </button>
                                                                     </subviews>
                                                                 </stackView>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cs0-Wd-JFH">
-                                                                    <rect key="frame" x="173.5" y="0.0" width="153.5" height="35.5"/>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Cs0-Wd-JFH">
+                                                                    <rect key="frame" x="183.5" y="0.0" width="143.5" height="35.5"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ui-duedil-icon" translatesAutoresizingMaskIntoConstraints="NO" id="pbi-Ib-STk">
                                                                             <rect key="frame" x="0.0" y="0.0" width="35.5" height="35.5"/>
@@ -285,10 +287,12 @@
                                                                                 <constraint firstAttribute="width" secondItem="pbi-Ib-STk" secondAttribute="height" multiplier="1:1" id="b0v-gn-tih"/>
                                                                             </constraints>
                                                                         </imageView>
-                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qFn-CR-biW">
-                                                                            <rect key="frame" x="35.5" y="0.0" width="118" height="35.5"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                                            <state key="normal" title="see accounts"/>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qFn-CR-biW">
+                                                                            <rect key="frame" x="41.5" y="0.0" width="102" height="35.5"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                            <state key="normal" title="See accounts">
+                                                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            </state>
                                                                             <connections>
                                                                                 <action selector="rightButtonTapped:" destination="QyC-Ih-DmP" eventType="touchUpInside" id="AxU-Oe-nnJ"/>
                                                                             </connections>
@@ -485,7 +489,7 @@
                         <viewControllerLayoutGuide type="bottom" id="XAz-el-zV0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gGk-sG-zJB">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fSB-dp-4WP">
@@ -508,7 +512,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uNs-pa-HII" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="YRE-EW-aHS">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

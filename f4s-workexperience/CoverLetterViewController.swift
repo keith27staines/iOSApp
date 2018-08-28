@@ -74,7 +74,7 @@ extension CoverLetterViewController {
 
     func adjustNavigationBar() {
         navigationController?.setNavigationBarHidden(false, animated: false)
-        styleNavigationController()
+        Skinner().apply(navigationBarSkin: NavigationBarSkin.whiteBarBlackItems, to: self)
         let leftButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(backButtonTouched))
         navigationItem.leftBarButtonItem = leftButton
 

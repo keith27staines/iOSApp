@@ -84,11 +84,16 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
         tableView.backgroundColor = UIColor.clear
         tableView.reloadData()
         applyStyle()
+        setNeedsStatusBarAppearanceUpdate()
     }
     
     func applyStyle() {
-        self.view.backgroundColor = RGBA.workfinderGreen.uiColor
+        self.view.backgroundColor = skin?.navigationBarSkin.barTintColor.uiColor
         UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
     }
 
     override func viewWillDisappear(_: Bool) {

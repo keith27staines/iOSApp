@@ -547,7 +547,7 @@
                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="acceptButtonTapped:" destination="Ffh-lH-QQL" eventType="touchUpInside" id="e9j-Y4-An4"/>
+                                            <action selector="acceptButtonTapped:" destination="Ffh-lH-QQL" eventType="touchUpInside" id="O3I-eU-V4V"/>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" borderStyle="roundedRect" placeholder="Voucher" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1EY-Qj-RO4">
