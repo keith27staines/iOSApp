@@ -241,7 +241,7 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
 
                 cell.dateTimeLatestMessageLabel.attributedText = NSAttributedString(
                     string: latestMessage.relativeDateTime ?? "",
-                    attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.orangeYellow)])
+                    attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: RGBA.red.uiColor])
             }
         }
 
