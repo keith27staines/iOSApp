@@ -61,12 +61,13 @@ public struct Skinner : Skinning {
         button.layer.cornerRadius = skin.cornerRadius
         let backgroundColor = skin.backgroundColor.uiColor
         button.setBackgroundColor(color: backgroundColor, forUIControlState: .normal)
-        button.setBackgroundColor(color: UIColor.red, forUIControlState: .selected)
-        button.setBackgroundColor(color: UIColor.clear, forUIControlState: .highlighted)
-        button.setBackgroundColor(color: UIColor.red, forUIControlState: .focused)
-        button.setBackgroundColor(color: skin.backgroundColor.disabledColor.uiColor, forUIControlState: .disabled)
+        button.setBackgroundColor(color: backgroundColor.lighter(), forUIControlState: .selected)
+        button.setBackgroundColor(color: backgroundColor.lighter().lighter(), forUIControlState: .highlighted)
+        button.setBackgroundColor(color: backgroundColor.lighter(), forUIControlState: .focused)
+        button.setBackgroundColor(color: RGBA.lightGray.uiColor, forUIControlState: .disabled)
         button.setTitleColor(skin.textColor.uiColor, for: .normal)
-        button.setTitleColor(skin.textColor.disabledColor.uiColor, for: .disabled)
+        button.setTitleColor(RGBA.gray.uiColor, for: .disabled)
+        button.setTitleColor(skin.textColor.disabledColor.uiColor, for: .highlighted)
         button.layer.borderColor = skin.borderColor.cgColor
         button.layer.borderWidth = skin.borderWidth
     }

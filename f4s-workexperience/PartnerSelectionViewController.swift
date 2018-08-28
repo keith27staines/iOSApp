@@ -33,6 +33,7 @@ class PartnerSelectionViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        self.applyStyle()
         tableView.dataSource = self
         tableView.delegate = self
         loadPartersFromServer()
@@ -42,7 +43,6 @@ class PartnerSelectionViewController: UIViewController {
         self.referrerTextBox.delegate = self
         self.doneButton.isEnabled = false
         self.partnerLogoRightConstraint.constant = -200
-        self.applyStyle()
         partnerText.isHidden = true
     }
     

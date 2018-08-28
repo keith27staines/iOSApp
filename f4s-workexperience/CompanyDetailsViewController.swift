@@ -119,6 +119,7 @@ class CompanyDetailsViewController: UIViewController {
                         MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf, cancelHandler: nil, retryHandler: nil)
                     }
                 case .success(_):
+                    // TODO: pay attention to the state of the documents returned by the api call
                     strongSelf.tableView.beginUpdates()
                     let indexPaths = [IndexPath(row: CellIndex.documentsCell1.rawValue, section: 0),
                                       IndexPath(row: CellIndex.documentsCell2.rawValue, section: 0)]
@@ -343,8 +344,6 @@ extension CompanyDetailsViewController {
                         PlacementDBOperations.sharedInstance.savePlacement(placement: placement)
                         strongSelf.applyButton.setTitle(NSLocalizedString("Finish Application", comment: ""), for: .normal)
                         let applyText = NSLocalizedString("Finish Application", comment: "")
-                        strongSelf.applyButton.setBackgroundColor(color: UIColor(netHex: Colors.orangeNormal), forUIControlState: .normal)
-                        strongSelf.applyButton.setBackgroundColor(color: UIColor(netHex: Colors.orangeActive), forUIControlState: .highlighted)
                         strongSelf.applyButton.setAttributedTitle(NSAttributedString(string: applyText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.white]), for: .normal)
                         
                         if UIApplication.shared.isRegisteredForRemoteNotifications {
@@ -578,7 +577,7 @@ extension CompanyDetailsViewController {
     
     func documentforType(_ docType: String) -> F4SCompanyDocument? {
         return companyDocumentsModel.documents.filter({ (document) -> Bool in
-            return document.docType == docType
+            return document.docType == docType && document.state == .available
         }).first
     }
     
@@ -660,7 +659,7 @@ extension CompanyDetailsViewController {
     
     func configureCell(cell: CompanyDocumentTableViewCell, for documentType: String) {
         let document = documentforType(documentType)
-        if document != nil { cell.spinner.stopAnimating() }
+        cell.spinner.stopAnimating()
         cell.accessoryType = document?.state == .available ? .disclosureIndicator : .none
         cell.icon.image = iconForDocument(document: document)
         cell.documentName.text = textForDocument(document: document)

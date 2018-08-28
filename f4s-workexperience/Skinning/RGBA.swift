@@ -41,9 +41,7 @@ public struct RGBA : Codable {
     public let alphaForDisabledState: CGFloat = 0.6
     
     public var disabledColor: RGBA {
-        // return RGBA(red: red, green: green, blue: blue, alpha: alphaForDisabledState)
-        // return synthesizedDisabledColorBySaturation
-        return synthesizedDisabledColorByBrightness
+        return RGBA.lightGray
     }
     
     public var synthesizedDisabledColorByBrightness: RGBA {

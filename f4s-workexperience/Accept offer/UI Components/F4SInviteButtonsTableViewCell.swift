@@ -31,8 +31,7 @@ class F4SInviteButtonsTableViewCell: UITableViewCell {
     var secondaryAction: (()->())?
     var shareOffer: (()->())?
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    func applyStyle() {
         let skinner = Skinner()
         skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: primaryButton)
         skinner.apply(buttonSkin: skin?.secondaryButtonSkin, to: secondaryButton)

@@ -41,7 +41,6 @@ class AcceptOfferViewController: UIViewController {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isTranslucent = true
         self.tabBarController?.tabBar.isHidden = true
-        styleNavigationController()
         captureShareImage()
     }
     
@@ -68,8 +67,11 @@ class AcceptOfferViewController: UIViewController {
 extension AcceptOfferViewController {
     func applyStyle() {
         pageHeaderView.backgroundColor = UIColor.white
+        pageHeaderView.leftDrop = 1.0
+        pageHeaderView.rightDrop = 0.3
         navigationItem.title = ""
-        pageHeaderView.fillColor = navigationController?.navigationBar.barTintColor ?? UIColor.white
+        pageHeaderView.fillColor = splashColor
+        styleNavigationController()
     }
 }
 
@@ -111,10 +113,7 @@ extension AcceptOfferViewController : UITableViewDataSource {
     }
     
     func configureButtonCell(_ buttonsCell: F4SInviteButtonsTableViewCell, for state: F4SPlacementStatus) {
-        let skinner = Skinner()
-        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: buttonsCell.primaryButton)
-        skinner.apply(buttonSkin: skin?.secondaryButtonSkin, to: buttonsCell.secondaryButton)
-        
+        buttonsCell.applyStyle()
         switch state {
         case .accepted:
             buttonsCell.introductoryText.text = NSLocalizedString("Please choose an option in order to proceed", comment: "")
