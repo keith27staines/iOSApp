@@ -18,7 +18,7 @@ public struct F4SCompanyDocument : Codable {
     }
     
     // Encodable properties
-    var uuid: F4SUUID
+    var uuid: F4SUUID?
     var name: String
     var state: State
     var docType: String?
@@ -36,6 +36,13 @@ public struct F4SCompanyDocument : Codable {
     
     var nameOrType: String {
         return name.isEmpty ? docType ?? "unknown" : name
+    }
+    public init(documentType: String) {
+        self.docType = documentType
+        self.state = .unrequested
+        self.name = ""
+        self.requestedCount = 0
+        self.urlString = nil
     }
     
     public init(uuid: F4SUUID, name: String, status: State, docType: String, requestedCount: Int? = 0, urlString: String? = nil) {
@@ -176,8 +183,24 @@ public class F4SCompanyDocumentsModel {
                 case .error(let error):
                     completion(F4SNetworkResult.error(error))
                 case .success( let getDocumentsStructure ):
-                    strongSelf.documents = getDocumentsStructure.documents ?? F4SCompanyDocuments()
-                    completion(F4SNetworkResult.success(strongSelf.documents))
+                    
+                    guard let documentTypes = getDocumentsStructure.possibleDocumentTypes else {
+                        strongSelf.documents = F4SCompanyDocuments()
+                        return
+                    }
+                    let placeholderDocuments: [F4SCompanyDocument] = documentTypes.map({ (docType) -> F4SCompanyDocument in
+                        return F4SCompanyDocument(documentType: docType)
+                    })
+                    var documents = [F4SCompanyDocument]()
+                    for doc in placeholderDocuments {
+                        if let matchingDocument = getDocumentsStructure.documents?.filter({ (possibleMatch) -> Bool in
+                            possibleMatch.docType == doc.docType
+                        }).first {
+                            documents.append(matchingDocument)
+                        }
+                    }
+                    strongSelf.documents = documents
+                    completion(F4SNetworkResult.success(documents))
                 }
             }
         }
