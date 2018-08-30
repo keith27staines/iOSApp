@@ -19,6 +19,7 @@ class SwitchTableViewCell: UITableViewCell {
     @IBAction func documentRequestStateChanged(_ sender: UISwitch) {
         delegate?.switchCellDidSwitch(self, didSwitch: sender.isOn)
     }
+    
     var document: F4SCompanyDocument? {
         didSet {
             self.onOrOff.isOn = document?.userIsRequesting ?? false

@@ -374,7 +374,6 @@
                                                     <outlet property="documentName" destination="PyC-jp-vgP" id="tq2-Ml-73P"/>
                                                     <outlet property="icon" destination="ijU-s9-lld" id="tnw-gb-HGc"/>
                                                     <outlet property="spinner" destination="Wjy-pv-NZE" id="qHS-jn-TEX"/>
-                                                    <segue destination="tck-Xb-zcn" kind="show" id="Gmd-8v-na9"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -479,32 +478,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="idW-V1-D1o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1301.5999999999999" y="125.93703148425789"/>
-        </scene>
-        <!--Title-->
-        <scene sceneID="rLB-zA-4n6">
-            <objects>
-                <viewController id="tck-Xb-zcn" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="bGT-fc-R35"/>
-                        <viewControllerLayoutGuide type="bottom" id="XAz-el-zV0"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="gGk-sG-zJB">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fSB-dp-4WP">
-                                <rect key="frame" x="67" y="187" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Title" id="5d6-J7-Ehl"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="I6C-aY-R1B" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2265" y="-114"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1Ar-xd-eyc">

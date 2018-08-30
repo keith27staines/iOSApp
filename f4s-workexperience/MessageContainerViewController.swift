@@ -341,8 +341,7 @@ extension MessageContainerViewController {
     }
     
     @objc func showCompanyDetailsView() {
-        if let companyUrl = self.company?.companyUrl, let navigCtrl = self.navigationController {
-            CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.company, url: companyUrl)
-        }
+        guard let company = self.company else { return }
+        CustomNavigationHelper.sharedInstance.presentCompanyDetailsPopover(parentCtrl: self, company: company)
     }
 }

@@ -119,7 +119,7 @@ class CompanyDetailsViewController: UIViewController {
                         MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf, cancelHandler: nil, retryHandler: nil)
                     }
                 case .success(_):
-                    // TODO: pay attention to the state of the documents returned by the api call
+                   
                     strongSelf.tableView.beginUpdates()
                     let indexPaths = [IndexPath(row: CellIndex.documentsCell1.rawValue, section: 0),
                                       IndexPath(row: CellIndex.documentsCell2.rawValue, section: 0)]
@@ -536,6 +536,15 @@ extension CompanyDetailsViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if
+            let documentCell = tableView.cellForRow(at: indexPath) as? CompanyDocumentTableViewCell,
+            let document = documentCell.document,
+            let _ = document.url {
+
+            let documentViewer = ViewCompanyDocumentViewController()
+            documentViewer.document = documentCell.document
+            navigationController?.pushViewController(documentViewer, animated: true)
+        }
     }
 }
 
@@ -577,7 +586,7 @@ extension CompanyDetailsViewController {
     
     func documentforType(_ docType: String) -> F4SCompanyDocument? {
         return companyDocumentsModel.documents.filter({ (document) -> Bool in
-            return document.docType == docType && document.state == .available
+            return document.docType == docType
         }).first
     }
     
@@ -645,47 +654,23 @@ extension CompanyDetailsViewController {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIndex.identifier) as? CompanyDocumentTableViewCell else {
                 return UITableViewCell()
             }
-            configureCell(cell: cell, for: "ELC")
+            configureDocumentCell(cell: cell, for: "ELC")
             return cell
             
         case .documentsCell2:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIndex.identifier) as? CompanyDocumentTableViewCell else {
                 return UITableViewCell()
             }
-            configureCell(cell: cell, for: "SGC")
+            configureDocumentCell(cell: cell, for: "SGC")
             return cell
         }
     }
     
-    func configureCell(cell: CompanyDocumentTableViewCell, for documentType: String) {
+    func configureDocumentCell(cell: CompanyDocumentTableViewCell, for documentType: String) {
         let document = documentforType(documentType)
-        cell.spinner.stopAnimating()
-        cell.accessoryType = document?.state == .available ? .disclosureIndicator : .none
-        cell.icon.image = iconForDocument(document: document)
-        cell.documentName.text = textForDocument(document: document)
+        cell.document = document
     }
-    
-    func iconForDocument(document: F4SCompanyDocument?) -> UIImage? {
-        guard let document = document else { return nil }
-        switch document.state {
-        case .available:
-            return UIImage(named: "ui-company-upload-doc-off-icon")
-        case .requested, .unrequested:
-            return UIImage(named: "checkBlue")
-        case .unavailable:
-            return nil
-        }
-    }
-    func textForDocument(document: F4SCompanyDocument?) -> String {
-        guard let document = document else { return "" }
-        switch document.state {
-        case .available, .requested, .unrequested:
-            return document.name
-        case .unavailable:
-            return ""
-        }
-    }
-    
+
 }
 
 extension CompanyDetailsViewController : MKMapViewDelegate {

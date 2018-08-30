@@ -258,6 +258,8 @@ extension EnterVoucherViewController {
         pageHeaderView.backgroundColor = UIColor.white
         navigationItem.title = ""
         pageHeaderView.fillColor = splashColor
+        pageHeaderView.leftDrop = 1.0
+        pageHeaderView.rightDrop = 0.1
         Skinner().apply(buttonSkin: skin?.primaryButtonSkin, to: acceptButton)
     }
 }

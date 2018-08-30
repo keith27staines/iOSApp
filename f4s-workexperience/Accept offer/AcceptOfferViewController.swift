@@ -68,7 +68,7 @@ extension AcceptOfferViewController {
     func applyStyle() {
         pageHeaderView.backgroundColor = UIColor.white
         pageHeaderView.leftDrop = 1.0
-        pageHeaderView.rightDrop = 0.3
+        pageHeaderView.rightDrop = 0.1
         navigationItem.title = ""
         pageHeaderView.fillColor = splashColor
         styleNavigationController()
@@ -94,6 +94,15 @@ extension AcceptOfferViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section < placementInviteModel.numberOfSections() {
             let inviteDetails = placementInviteModel.inviteDetailsForIndexPath(indexPath)
+            if inviteDetails.requiresButtonAction {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "detailWithLink", for: indexPath) as! F4SInviteDetailLinkCell
+                cell.buttonAction = { cell in
+                    guard let company = self.accept?.company else { return }
+                    CustomNavigationHelper.sharedInstance.presentCompanyDetailsPopover(parentCtrl: self, company: company)
+                }
+                cell.detail = inviteDetails
+                return cell
+            }
             if inviteDetails.isEmail || inviteDetails.linkUrl != nil {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "detailWithLink", for: indexPath) as! F4SInviteDetailLinkCell
                 cell.detail = inviteDetails
@@ -105,10 +114,18 @@ extension AcceptOfferViewController : UITableViewDataSource {
             }
 
         } else {
-            let buttonsCell = tableView.dequeueReusableCell(withIdentifier: "buttons") as! F4SInviteButtonsTableViewCell
+            guard let buttonsCell = tableView.dequeueReusableCell(withIdentifier: "buttons") as? F4SInviteButtonsTableViewCell else {
+                return UITableViewCell()
+            }
             let workflowState = accept.placement.workflowState
             configureButtonCell(buttonsCell, for: workflowState!)
             return buttonsCell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let cell = cell as? F4SInviteDetailLinkCell {
+            cell.buttonAction = nil
         }
     }
     
@@ -156,7 +173,6 @@ extension AcceptOfferViewController : UITableViewDataSource {
             buttonsCell.shareText.isHidden = true
             buttonsCell.primaryAction = nil
             buttonsCell.secondaryAction = nil
-            buttonsCell.shareText = nil
         }
     }
 }

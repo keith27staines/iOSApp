@@ -478,10 +478,10 @@
             </objects>
             <point key="canvasLocation" x="759" y="861"/>
         </scene>
-        <!--View Document View Controller-->
+        <!--View Company Document View Controller-->
         <scene sceneID="1Qh-Oe-cuM">
             <objects>
-                <viewController id="YZD-Eh-QKR" customClass="ViewDocumentViewController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="YZD-Eh-QKR" customClass="ViewCompanyDocumentViewController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9Mc-YC-ftW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -506,7 +506,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uot-lz-CzP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1730" y="862"/>
+            <point key="canvasLocation" x="1606" y="862"/>
         </scene>
         <!--Enter Voucher View Controller-->
         <scene sceneID="F9b-dD-5n4">
@@ -524,7 +524,10 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="leftDrop">
-                                        <real key="value" value="0.0"/>
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rightDrop">
+                                        <real key="value" value="0.10000000000000001"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
@@ -544,8 +547,11 @@
                                 <rect key="frame" x="0.0" y="234" width="375" height="380.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VNC-2H-4XU">
-                                        <rect key="frame" x="40" y="223.5" width="295" height="40"/>
+                                        <rect key="frame" x="40" y="223.5" width="295" height="50"/>
                                         <color key="backgroundColor" red="0.26411449910000001" green="0.155295819" blue="0.47808134559999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="UsH-sq-OXh"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <state key="normal" title="Accept placement">
                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -587,7 +593,6 @@
                                     <constraint firstItem="1EY-Qj-RO4" firstAttribute="bottom" secondItem="wuQ-rK-IoT" secondAttribute="bottom" constant="4" id="39X-qS-TPK"/>
                                     <constraint firstItem="1EY-Qj-RO4" firstAttribute="top" secondItem="7Is-KB-X0X" secondAttribute="bottom" constant="51" id="3YQ-SP-lyp"/>
                                     <constraint firstItem="VNC-2H-4XU" firstAttribute="trailing" secondItem="1EY-Qj-RO4" secondAttribute="trailing" id="5UI-dg-Nva"/>
-                                    <constraint firstItem="VNC-2H-4XU" firstAttribute="height" secondItem="1EY-Qj-RO4" secondAttribute="height" id="7Ci-O8-F1H"/>
                                     <constraint firstItem="dnx-Un-UG1" firstAttribute="trailing" secondItem="1EY-Qj-RO4" secondAttribute="trailing" id="Gj8-vn-6jV"/>
                                     <constraint firstItem="7Is-KB-X0X" firstAttribute="top" secondItem="Qq2-W5-quD" secondAttribute="top" constant="20" id="HkN-DY-k0k"/>
                                     <constraint firstAttribute="trailing" secondItem="7Is-KB-X0X" secondAttribute="trailing" constant="29" id="L7c-dH-JM2"/>
@@ -675,7 +680,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="rightDrop">
-                                        <real key="value" value="0.29999999999999999"/>
+                                        <real key="value" value="0.10000000000000001"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="leftDrop">
                                         <real key="value" value="1"/>

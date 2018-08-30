@@ -14,15 +14,42 @@ class CompanyDocumentTableViewCell: UITableViewCell {
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var documentName: UILabel!
     
+    var document: F4SCompanyDocument? {
+        didSet {
+            spinner.stopAnimating()
+            accessoryType = document?.state == .available ? .disclosureIndicator : .none
+            icon.image = iconForDocument(document: document)
+            documentName.text = textForDocument(document: document)
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    func iconForDocument(document: F4SCompanyDocument?) -> UIImage? {
+        guard let document = document else { return nil }
+        switch document.state {
+        case .available:
+            if document.url == nil {
+                return #imageLiteral(resourceName: "checkBlue")
+            } else {
+                return #imageLiteral(resourceName: "company_doc")
+            }
+            
+        case .requested, .unrequested, .unavailable:
+            return nil
+        }
+    }
+    func textForDocument(document: F4SCompanyDocument?) -> String {
+        guard let document = document else { return "" }
+        switch document.state {
+        case .available:
+            return document.nameOrType
+        case .unavailable, .requested, .unrequested:
+            return ""
+        }
     }
 
 }

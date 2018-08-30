@@ -18,6 +18,7 @@ public struct F4SCompanyDocument : Codable {
     }
     
     // Encodable properties
+    var uuid: F4SUUID
     var name: String
     var state: State
     var docType: String?
@@ -33,7 +34,12 @@ public struct F4SCompanyDocument : Codable {
         return URL(string: urlString)
     }
     
-    public init(name: String, status: State, docType: String, requestedCount: Int? = 0, urlString: String? = nil) {
+    var nameOrType: String {
+        return name.isEmpty ? docType ?? "unknown" : name
+    }
+    
+    public init(uuid: F4SUUID, name: String, status: State, docType: String, requestedCount: Int? = 0, urlString: String? = nil) {
+        self.uuid = uuid
         self.name = name
         self.state = status
         self.requestedCount = requestedCount
@@ -47,40 +53,19 @@ public struct F4SCompanyDocument : Codable {
 extension F4SCompanyDocument {
 
     private enum CodingKeys: String, CodingKey {
+        case uuid
         case name
         case state
-        case docType = "document_type"
-        case requestedCount = "requested_count"
+        case docType = "doc_type"
+        case requestedCount = "request_count"
         case urlString = "url"
     }
 }
 
 public struct F4SGetCompanyDocuments: Decodable {
     public var companyUuid: F4SUUID?
-    public var requestedDocuments: F4SCompanyDocuments?
+    public var documents: F4SCompanyDocuments?
     public var possibleDocumentTypes: [String]?
-    
-    public var documents: F4SCompanyDocuments {
-        var docs = F4SCompanyDocuments()
-        // Create placeholder documents for each of the possible document types
-        guard let docTypes = possibleDocumentTypes else { return docs }
-        for type in docTypes {
-            let defaultName = F4SGetCompanyDocuments.defaultNameForType(type: type)
-            let doc = F4SCompanyDocument(name: defaultName, status: .unrequested, docType: type)
-            docs.append(doc)
-        }
-        guard let requestedDocuments = self.requestedDocuments else { return docs }
-        
-        // update the placeholder documents with the information returned in requestedDocuments
-        for requestedDocument in requestedDocuments {
-            if let matchingIndex = docs.index(where: { (doc) -> Bool in
-                doc.docType == requestedDocument.docType
-            }) {
-                docs[matchingIndex] = requestedDocument
-            }
-        }
-        return docs
-    }
     
     static func defaultNameForType(type: String) -> String {
         switch type{
@@ -97,7 +82,7 @@ public struct F4SGetCompanyDocuments: Decodable {
 extension F4SGetCompanyDocuments {
     private enum CodingKeys: String, CodingKey {
         case companyUuid = "uuid"
-        case requestedDocuments = "requested_documents"
+        case documents = "requested_documents"
         case possibleDocumentTypes = "possible_doc_types"
     }
 }
@@ -191,7 +176,7 @@ public class F4SCompanyDocumentsModel {
                 case .error(let error):
                     completion(F4SNetworkResult.error(error))
                 case .success( let getDocumentsStructure ):
-                    strongSelf.documents = getDocumentsStructure.documents
+                    strongSelf.documents = getDocumentsStructure.documents ?? F4SCompanyDocuments()
                     completion(F4SNetworkResult.success(strongSelf.documents))
                 }
             }
