@@ -52,11 +52,15 @@ class RequestBLProvideDocuments: UIViewController {
         configureButtons()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        applyStyle()
+    }
+    
     func applyStyle() {
         let skinner = Skinner()
         skinner.apply(navigationBarSkin: NavigationBarSkin.whiteBarBlackItems, to: self)
         skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: skipButton)
-        skinner.apply(buttonSkin: skin?.secondaryButtonSkin, to: skipButton)
+        skinner.apply(buttonSkin: skin?.secondaryButtonSkin, to: requestButton)
     }
 
     func configureButtons() {

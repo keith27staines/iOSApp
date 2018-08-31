@@ -39,6 +39,7 @@ class AcceptOfferViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        applyStyle()
         self.tabBarController?.tabBar.isTranslucent = true
         self.tabBarController?.tabBar.isHidden = true
         captureShareImage()

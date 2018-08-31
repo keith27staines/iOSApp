@@ -75,6 +75,10 @@ class F4SHoorayViewController: UIViewController {
         addToCalendarButton.isEnabled = isEventInformationComplete()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        applyStyle()
+    }
+    
     func applyStyle() {
         companyHeaderView.fillTop = false
         companyHeaderView.fillColor = UIColor.white

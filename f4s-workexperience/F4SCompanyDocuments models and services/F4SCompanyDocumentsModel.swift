@@ -208,6 +208,8 @@ public class F4SCompanyDocumentsModel {
                 possibleMatch.docType == placeholder.docType
             }).first {
                 documents.append(matchingDocument)
+            } else {
+                documents.append(placeholder)
             }
         }
         // filter out SGC document if user is 18 or older
