@@ -212,7 +212,8 @@ extension AcceptOfferViewController {
         MessageHandler.sharedInstance.showLoadingOverlay(self.view)
         self.companyDocumentsModel = F4SCompanyDocumentsModel(companyUuid: accept.company.uuid)
         let companyDocumentsModel = self.companyDocumentsModel!
-        companyDocumentsModel.getDocuments { (result) in
+        let age = accept.user.age() ?? 0
+        companyDocumentsModel.getDocuments(age: age) { (result) in
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else { return }
                 MessageHandler.sharedInstance.hideLoadingOverlay()

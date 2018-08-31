@@ -106,7 +106,7 @@ class CompanyDetailsViewController: UIViewController {
     }
     
     func loadDocuments() {
-        companyDocumentsModel.getDocuments(completion: { [weak self] (result) in
+        companyDocumentsModel.getDocuments(age:0, completion: { [weak self] (result) in
             guard let strongSelf = self else { return }
             DispatchQueue.main.async {
                 switch result {

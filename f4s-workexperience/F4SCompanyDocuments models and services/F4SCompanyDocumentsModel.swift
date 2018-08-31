@@ -175,34 +175,47 @@ public class F4SCompanyDocumentsModel {
         return F4SCompanyDocumentService()
     }()
     
-    public func getDocuments(completion: @escaping (F4SNetworkResult<F4SCompanyDocuments>)->()) {
+    public func getDocuments(age: Int, completion: @escaping (F4SNetworkResult<F4SCompanyDocuments>)->()) {
         service.getDocuments(companyUuid: companyUuid) { [weak self] result in
             DispatchQueue.main.async {
-                guard let strongSelf = self else { return }
+                guard let this = self else { return }
                 switch result {
                 case .error(let error):
                     completion(F4SNetworkResult.error(error))
                 case .success( let getDocumentsStructure ):
-                    
-                    guard let documentTypes = getDocumentsStructure.possibleDocumentTypes else {
-                        strongSelf.documents = F4SCompanyDocuments()
-                        return
-                    }
-                    let placeholderDocuments: [F4SCompanyDocument] = documentTypes.map({ (docType) -> F4SCompanyDocument in
-                        return F4SCompanyDocument(documentType: docType)
-                    })
-                    var documents = [F4SCompanyDocument]()
-                    for doc in placeholderDocuments {
-                        if let matchingDocument = getDocumentsStructure.documents?.filter({ (possibleMatch) -> Bool in
-                            possibleMatch.docType == doc.docType
-                        }).first {
-                            documents.append(matchingDocument)
-                        }
-                    }
-                    strongSelf.documents = documents
+                    let documents = this.buildDocumentsFromGetDocumentsResult(age: age, result: getDocumentsStructure)
+                    this.documents = documents
                     completion(F4SNetworkResult.success(documents))
                 }
             }
         }
+    }
+    
+    private func buildDocumentsFromGetDocumentsResult(age: Int, result: F4SGetCompanyDocuments) -> F4SCompanyDocuments {
+        var documents = [F4SCompanyDocument]()
+        guard let documentTypes = result.possibleDocumentTypes else {
+            return documents
+        }
+        
+        // Create array of placeholder documents from the possible document types
+        let placeholderDocuments: [F4SCompanyDocument] = documentTypes.map({ (docType) -> F4SCompanyDocument in
+            return F4SCompanyDocument(documentType: docType)
+        })
+        
+        // Populate the placeholders with real documents that match the document type of the placeholder
+        for placeholder in placeholderDocuments {
+            if let matchingDocument = result.documents?.filter({ (possibleMatch) -> Bool in
+                possibleMatch.docType == placeholder.docType
+            }).first {
+                documents.append(matchingDocument)
+            }
+        }
+        // filter out SGC document if user is 18 or older
+        if age >= 18 {
+            documents = documents.filter({ (document) -> Bool in
+                return (document.docType != "SGC")
+            })
+        }
+        return documents
     }
 }

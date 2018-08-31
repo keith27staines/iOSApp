@@ -339,21 +339,23 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Udf-Fm-c3o">
                                 <rect key="frame" x="57" y="1123" width="261" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6g-0i-dbl">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6g-0i-dbl">
                                         <rect key="frame" x="0.0" y="0.0" width="120.5" height="50"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <state key="normal" title="Request"/>
+                                        <state key="normal" title="Request">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
                                         <connections>
                                             <action selector="requestButtonTapped:" destination="ba2-Ig-Xrb" eventType="touchUpInside" id="aGC-Bf-izq"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xEl-IH-PLM">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xEl-IH-PLM">
                                         <rect key="frame" x="140.5" y="0.0" width="120.5" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="UHY-HD-tnS"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <state key="normal" title="Skip"/>
+                                        <state key="normal" title="Skip">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="skipButtonTapped:" destination="ba2-Ig-Xrb" eventType="touchUpInside" id="ZHc-kR-asK"/>
                                         </connections>
@@ -854,6 +856,6 @@
         <image name="ui-pluscircle-icon" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="EH5-xE-Tut"/>
+        <segue reference="Tzk-rj-2xp"/>
     </inferredMetricsTieBreakers>
 </document>
