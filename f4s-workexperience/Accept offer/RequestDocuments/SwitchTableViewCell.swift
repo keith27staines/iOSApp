@@ -23,7 +23,7 @@ class SwitchTableViewCell: UITableViewCell {
     var document: F4SCompanyDocument? {
         didSet {
             self.onOrOff.isOn = document?.userIsRequesting ?? false
-            self.label.text = document?.name ?? ""
+            self.label.text = document?.nameOrType ?? "unknown document"
         }
     }
 
@@ -33,7 +33,7 @@ class SwitchTableViewCell: UITableViewCell {
 class ViewTableViewCell: UITableViewCell {
     var document: F4SCompanyDocument? {
         didSet {
-            self.label.text = document?.name ?? ""
+            self.label.text = document?.nameOrType ?? "unknown document"
             self.icon.image = UIImage(named: "checkBlue")
             self.accessoryType = .disclosureIndicator
         }

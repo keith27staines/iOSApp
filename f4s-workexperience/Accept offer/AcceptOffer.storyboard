@@ -299,6 +299,7 @@
                     <connections>
                         <outlet property="companyNameLabel" destination="cTH-cl-0Vz" id="BNc-0c-mqQ"/>
                         <outlet property="headerHeight" destination="81d-ri-aCr" id="DBT-Oq-0fK"/>
+                        <outlet property="introductionStack" destination="U2f-hE-sCv" id="k8y-5n-XW4"/>
                         <outlet property="offsetHeight" destination="qvN-L2-tCo" id="ZXL-E2-19v"/>
                         <outlet property="pageHeaderView" destination="Q51-MB-96S" id="mRH-eJ-lTs"/>
                         <outlet property="tableView" destination="hTu-zQ-JYD" id="Nya-wy-Fps"/>
@@ -386,6 +387,9 @@
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Request Employers Liability Certificate" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nq8-Cx-u9h">
                                                     <rect key="frame" x="102" y="19.5" width="228" height="41"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" priority="750" constant="228" id="70k-6a-0vj"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -422,6 +426,9 @@
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View Safeguarding Certificate" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="myv-pv-o50">
                                                     <rect key="frame" x="93" y="22" width="204" height="41"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" priority="750" constant="204" id="uGx-DT-1Bf"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -807,7 +814,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oLv-4M-IOZ">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="78.5" width="375" height="488.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="basicCell" textLabel="4nJ-ok-gEL" style="IBUITableViewCellStyleDefault" id="2Xd-wA-ZX9">
@@ -833,17 +840,52 @@
                                     <outlet property="delegate" destination="wcC-gj-wU2" id="irD-BY-6f4"/>
                                 </connections>
                             </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="lxz-ZK-s4U">
+                                <rect key="frame" x="20" y="587" width="335" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="88e-Tn-1rJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="147.5" height="60"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="cancelButtonTappedWithSender:" destination="wcC-gj-wU2" eventType="touchUpInside" id="ObL-MY-Ya4"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXv-WJ-dgM">
+                                        <rect key="frame" x="187.5" y="0.0" width="147.5" height="60"/>
+                                        <state key="normal" title="Done"/>
+                                        <connections>
+                                            <action selector="doneButtonTappedWithSender:" destination="wcC-gj-wU2" eventType="touchUpInside" id="bAO-Ka-rb4"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="5YF-sw-C3R"/>
+                                </constraints>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select calendar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jRf-31-bRa">
+                                <rect key="frame" x="128.5" y="36" width="118.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="3Pd-7q-OGD" firstAttribute="bottom" secondItem="oLv-4M-IOZ" secondAttribute="bottom" id="5Re-iN-sKn"/>
-                            <constraint firstItem="3Pd-7q-OGD" firstAttribute="trailing" secondItem="oLv-4M-IOZ" secondAttribute="trailing" id="9l3-vl-peL"/>
-                            <constraint firstItem="oLv-4M-IOZ" firstAttribute="leading" secondItem="3Pd-7q-OGD" secondAttribute="leading" id="GCC-aI-brK"/>
-                            <constraint firstItem="oLv-4M-IOZ" firstAttribute="top" secondItem="3Pd-7q-OGD" secondAttribute="top" id="wvI-ve-dzX"/>
+                            <constraint firstItem="jRf-31-bRa" firstAttribute="top" secondItem="3Pd-7q-OGD" secondAttribute="top" constant="16" id="418-zA-TC9"/>
+                            <constraint firstItem="lxz-ZK-s4U" firstAttribute="top" secondItem="oLv-4M-IOZ" secondAttribute="bottom" constant="20" id="5Wb-kk-iBI"/>
+                            <constraint firstItem="oLv-4M-IOZ" firstAttribute="leading" secondItem="3Pd-7q-OGD" secondAttribute="leading" id="7uT-2t-X5U"/>
+                            <constraint firstItem="oLv-4M-IOZ" firstAttribute="top" secondItem="jRf-31-bRa" secondAttribute="bottom" constant="22" id="ATa-BF-WeL"/>
+                            <constraint firstItem="lxz-ZK-s4U" firstAttribute="leading" secondItem="3Pd-7q-OGD" secondAttribute="leading" constant="20" id="EAV-Su-gtW"/>
+                            <constraint firstItem="oLv-4M-IOZ" firstAttribute="trailing" secondItem="3Pd-7q-OGD" secondAttribute="trailing" id="GgN-Oy-xiV"/>
+                            <constraint firstItem="jRf-31-bRa" firstAttribute="centerX" secondItem="fl4-hE-n52" secondAttribute="centerX" id="ccg-zl-L6z"/>
+                            <constraint firstItem="3Pd-7q-OGD" firstAttribute="trailing" secondItem="lxz-ZK-s4U" secondAttribute="trailing" constant="20" id="gJf-HS-An1"/>
+                            <constraint firstItem="3Pd-7q-OGD" firstAttribute="bottom" secondItem="lxz-ZK-s4U" secondAttribute="bottom" constant="20" id="h3N-fZ-YIA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3Pd-7q-OGD"/>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="88e-Tn-1rJ" id="zCo-VL-IoS"/>
+                        <outlet property="doneButton" destination="wXv-WJ-dgM" id="dA9-5b-WSK"/>
                         <outlet property="tableView" destination="oLv-4M-IOZ" id="cbV-02-rdR"/>
                     </connections>
                 </viewController>
@@ -859,6 +901,6 @@
         <image name="ui-pluscircle-icon" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Tzk-rj-2xp"/>
+        <segue reference="EH5-xE-Tut"/>
     </inferredMetricsTieBreakers>
 </document>

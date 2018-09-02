@@ -15,9 +15,9 @@ protocol CalendarChooserControllerDelegate : class {
 }
 
 class CalendarChooserController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    var doneButton: UIBarButtonItem!
-    var cancelButton: UIBarButtonItem!
 
+    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
     var delegate: CalendarChooserControllerDelegate? = nil
@@ -44,20 +44,20 @@ class CalendarChooserController: UIViewController, UITableViewDelegate, UITableV
     
     func adjustNavigationBar() {
         navigationController?.setNavigationBarHidden(false, animated: true)
-        cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(cancelButtonTapped(sender:)))
-        doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(doneButtonTapped(sender:)))
-        self.navigationItem.leftBarButtonItem = cancelButton
-        self.navigationItem.rightBarButtonItem = doneButton
         self.navigationItem.title = NSLocalizedString("Choose calendar", comment: "")
     }
     
     func applyStyle() {
         styleNavigationController()
+        let skinner = Skinner()
+        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: doneButton)
+        skinner.apply(buttonSkin: skin?.secondaryButtonSkin, to: cancelButton)
     }
     
     @IBAction func cancelButtonTapped(sender: Any) {
         selectedCalendar = nil
         delegate?.calendarChooserDidCancel(self)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func doneButtonTapped(sender: Any) {
@@ -65,6 +65,7 @@ class CalendarChooserController: UIViewController, UITableViewDelegate, UITableV
             return
         }
         delegate?.calendarChooserDidFinish(self, calendar: calendar)
+        dismiss(animated: true, completion: nil)
     }
 
 

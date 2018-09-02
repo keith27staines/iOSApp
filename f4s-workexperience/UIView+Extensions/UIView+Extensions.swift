@@ -15,3 +15,14 @@ extension UIView {
         }
     }
 }
+
+extension UIView {
+    func snapshotToImage() -> UIImage {
+        UIGraphicsBeginImageContext(bounds.size)
+        guard let context = UIGraphicsGetCurrentContext() else { return UIImage() }
+        layer.render(in: context)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image ?? UIImage()
+    }
+}

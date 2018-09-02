@@ -156,6 +156,7 @@ extension F4SHoorayViewController : CalendarChooserControllerDelegate {
     }
     
     func calendarChooserDidFinish(_ calendardChooser: CalendarChooserController, calendar: EKCalendar) {
+        navigationController?.popViewController(animated: true)
         let event = EKEvent(eventStore: eventStore)
         event.calendar = eventStore.calendar(withIdentifier: calendar.calendarIdentifier)
         event.title = "Workfinder placement at \(accept.company.name.stripCompanySuffix())"

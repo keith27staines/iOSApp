@@ -11,6 +11,7 @@ import UIKit
 class AcceptOfferViewController: UIViewController {
     @IBOutlet weak var offsetHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var introductionStack: UIStackView!
     @IBOutlet weak var headerHeight: NSLayoutConstraint!
 
     @IBOutlet weak var companyNameLabel: UILabel!
@@ -46,7 +47,21 @@ class AcceptOfferViewController: UIViewController {
     }
     
     func captureShareImage() {
-        UIGraphicsBeginImageContext(view.frame.size)
+        let headerImage = pageHeaderView.snapshotToImage()
+        let introImage = introductionStack.snapshotToImage()
+        let tableImage = tableView.renderAllContentToImage()
+        var totalHeight = headerImage.size.height
+        totalHeight += introImage.size.height
+        totalHeight += tableImage.size.height
+        
+        UIGraphicsBeginImageContext(CGSize(width: headerImage.size.width, height: totalHeight))
+        var height: CGFloat = 0.0
+        headerImage.draw(at: CGPoint(x: 0, y: height))
+        height += headerImage.size.height
+        introImage.draw(at: CGPoint(x: 0, y: height))
+        height += introImage.size.height
+        tableImage.draw(at: CGPoint(x: 0, y: height))
+        height += tableImage.size.height
         view.layer.render(in: UIGraphicsGetCurrentContext()!)
         accept.offerImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
