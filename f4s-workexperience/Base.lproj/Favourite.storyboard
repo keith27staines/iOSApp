@@ -108,13 +108,6 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Zz-Zw-goW">
-                                        <rect key="frame" x="125" y="438" width="124" height="30"/>
-                                        <state key="normal" title="Show Cal chooser"/>
-                                        <connections>
-                                            <segue destination="2Ue-FL-Wtf" kind="show" id="Ip0-N1-5AU"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -123,9 +116,7 @@
                                     <constraint firstItem="EsX-XX-8dR" firstAttribute="centerY" secondItem="uUe-Cu-0A1" secondAttribute="centerY" constant="-40" id="XIx-Uy-uuu"/>
                                     <constraint firstItem="eMj-y3-Ox5" firstAttribute="top" secondItem="EsX-XX-8dR" secondAttribute="bottom" constant="20" id="aWd-xz-vxZ"/>
                                     <constraint firstItem="EsX-XX-8dR" firstAttribute="leading" secondItem="uUe-Cu-0A1" secondAttribute="leading" constant="30" id="iuZ-ot-pgs"/>
-                                    <constraint firstItem="7Zz-Zw-goW" firstAttribute="centerX" secondItem="uUe-Cu-0A1" secondAttribute="centerX" id="jf0-iJ-iQ5"/>
                                     <constraint firstItem="eMj-y3-Ox5" firstAttribute="leading" secondItem="uUe-Cu-0A1" secondAttribute="leading" constant="20" id="mHM-Ap-uPI"/>
-                                    <constraint firstItem="7Zz-Zw-goW" firstAttribute="top" secondItem="eMj-y3-Ox5" secondAttribute="bottom" constant="103.5" id="mTg-fT-GKV"/>
                                 </constraints>
                             </view>
                         </subviews>

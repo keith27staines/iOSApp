@@ -92,17 +92,17 @@ public struct RGBA : Codable {
         self.green = max(0,green)
         self.blue = max(0, blue)
         self.alpha = max(0, alpha)
-        self.red = min(0, red)
+        self.red = min(1.0, red)
         self.green = min(1.0,green)
         self.blue = min(1.0, blue)
         self.alpha = min(1.0, alpha)
     }
-    public init(red: Int, green: Int, blue: Int, alpha: Int) {
+    public init(red: Int, green: Int, blue: Int, alpha: CGFloat) {
         self.init(
             red: CGFloat(red)/255.0,
             green: CGFloat(green)/255.0,
             blue: CGFloat(blue)/255.0,
-            alpha: CGFloat(alpha)/255.0)
+            alpha: alpha)
     }
     
     public init(hexString: String) {

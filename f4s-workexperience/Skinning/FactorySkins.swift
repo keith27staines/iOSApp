@@ -66,13 +66,20 @@ public struct FactorySkins {
         return skin
     }()
     
+    
+//    NCS colours are: primary navbar.background - #252a2e, rgb(37, 42, 46) + primary.cta.background  cta - #ea148c, rgb(234, 20, 140).
+//
+//    Secondary ghost dark = black
+    
     static var ncsSkin: Skin = {
         var skin = workfinderSkin
         skin.name = "ncs"
-        skin.navigationBarSkin.barTintColor = RGBA.darkGray
-        skin.primaryButtonSkin.backgroundColor = RGBA.workfinderPink
-        skin.secondaryButtonSkin.backgroundColor = RGBA.black
-        skin.secondaryButtonSkin.textColor = RGBA.white
+        skin.navigationBarSkin.barTintColor = RGBA(red: 37.0/255.0, green: 42.0/255.0, blue: 46.0/255.0, alpha: 1.0)
+        skin.primaryButtonSkin.backgroundColor = RGBA(red: 234.0/255.0, green: 20.0/255.0, blue: 140.0/255.0, alpha: 1.0)
+        skin.secondaryButtonSkin.backgroundColor = RGBA.clear
+        skin.secondaryButtonSkin.borderColor = RGBA.black
+        skin.secondaryButtonSkin.textColor = RGBA.black
+        skin.secondaryButtonSkin.borderWidth = 1
         return skin
     }()
     
