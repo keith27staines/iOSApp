@@ -97,7 +97,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Lgj-RU-RS3" userLabel="logoStack">
-                                <rect key="frame" x="16" y="599" width="90" height="50"/>
+                                <rect key="frame" x="6" y="589" width="90" height="50"/>
                                 <subviews>
                                     <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo2" translatesAutoresizingMaskIntoConstraints="NO" id="u6v-YJ-KBz">
                                         <rect key="frame" x="0.0" y="0.0" width="43" height="50"/>
@@ -129,7 +129,7 @@
                         <constraints>
                             <constraint firstItem="8cG-OV-1mj" firstAttribute="leading" secondItem="Flp-FB-sKl" secondAttribute="trailing" constant="-15" id="39J-K5-mm1"/>
                             <constraint firstItem="K4D-D8-746" firstAttribute="top" secondItem="j0e-ED-LBK" secondAttribute="bottom" id="6ba-1l-dJd"/>
-                            <constraint firstItem="Lgj-RU-RS3" firstAttribute="leading" secondItem="Jry-b3-21i" secondAttribute="leadingMargin" id="DPs-z6-Hd1"/>
+                            <constraint firstItem="Lgj-RU-RS3" firstAttribute="leading" secondItem="Jry-b3-21i" secondAttribute="leadingMargin" constant="-10" id="DPs-z6-Hd1"/>
                             <constraint firstAttribute="trailing" secondItem="D07-OV-PCy" secondAttribute="trailing" constant="10" id="Jt4-bW-POR"/>
                             <constraint firstAttribute="trailing" secondItem="j0e-ED-LBK" secondAttribute="trailing" id="VU5-0f-SZK"/>
                             <constraint firstItem="j0e-ED-LBK" firstAttribute="leading" secondItem="Jry-b3-21i" secondAttribute="leading" id="ZpF-dM-TLY"/>
@@ -138,7 +138,7 @@
                             <constraint firstItem="D07-OV-PCy" firstAttribute="top" secondItem="DdT-jA-TTu" secondAttribute="bottom" constant="10" id="gnI-NY-YPU"/>
                             <constraint firstItem="j0e-ED-LBK" firstAttribute="top" secondItem="Jry-b3-21i" secondAttribute="top" id="gyC-rS-p6I"/>
                             <constraint firstItem="K4D-D8-746" firstAttribute="top" secondItem="8cG-OV-1mj" secondAttribute="bottom" constant="20" id="jca-bJ-N1s"/>
-                            <constraint firstItem="8cG-OV-1mj" firstAttribute="centerY" secondItem="Lgj-RU-RS3" secondAttribute="centerY" id="yiB-ot-Q1Y"/>
+                            <constraint firstItem="8cG-OV-1mj" firstAttribute="centerY" secondItem="Lgj-RU-RS3" secondAttribute="centerY" constant="10" id="yiB-ot-Q1Y"/>
                             <constraint firstItem="Flp-FB-sKl" firstAttribute="centerY" secondItem="8cG-OV-1mj" secondAttribute="centerY" id="zWq-5i-wpb"/>
                         </constraints>
                     </view>
