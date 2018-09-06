@@ -541,8 +541,8 @@ extension CompanyDetailsViewController: UITableViewDelegate, UITableViewDataSour
             let document = documentCell.document,
             let _ = document.url {
 
-            let documentViewer = ViewCompanyDocumentViewController()
-            documentViewer.document = documentCell.document
+            let documentViewer = F4SDocumentViewer()
+            documentViewer.showCompanyDocument(documentCell.document)
             navigationController?.pushViewController(documentViewer, animated: true)
         }
     }
@@ -603,6 +603,7 @@ extension CompanyDetailsViewController {
     func getTableViewCell(indexPath: IndexPath) -> UITableViewCell {
         guard let company = self.company else { return UITableViewCell() }
         let cellIndex = CellIndex(rawValue: indexPath.row)!
+        
         switch cellIndex {
         case .industryCell:
             guard
@@ -610,7 +611,7 @@ extension CompanyDetailsViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellIndex.identifier, for: indexPath) as? IndustryTableViewCell else {
                     return hiddenCell()
             }
-
+            cell.selectionStyle = .none
             cell.industryLabel.attributedText = NSAttributedString(string: company.industry, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.light), NSAttributedStringKey.foregroundColor: UIColor.black])
             return cell
             
@@ -620,6 +621,7 @@ extension CompanyDetailsViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellIndex.identifier, for: indexPath) as? RatingTableViewCell  else {
                 return hiddenCell()
             }
+            cell.selectionStyle = .none
             cell.setupStars(rating: company.rating)
             cell.starsLabel.attributedText = NSAttributedString(string: String(company.rating), attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerVerySmallTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
             return cell
@@ -630,6 +632,7 @@ extension CompanyDetailsViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellIndex.identifier, for: indexPath as IndexPath) as? CompanyOtherTableViewCell else {
                 return hiddenCell()
             }
+            cell.selectionStyle = .none
             cell.company = self.company
             return cell
 
@@ -637,6 +640,7 @@ extension CompanyDetailsViewController {
             guard let buttonsCell = tableView.dequeueReusableCell(withIdentifier: cellIndex.identifier) as? F4SSeePeopleAndAccountsTableViewCell else {
                 return UITableViewCell()
             }
+            buttonsCell.selectionStyle = .blue
             buttonsCell.leftLink = companyJson?.linkedinUrl
             buttonsCell.rightLink = companyJson?.duedilUrl
             return buttonsCell
@@ -648,6 +652,7 @@ extension CompanyDetailsViewController {
             cell.textLabel?.text = company.summary
             cell.textLabel?.numberOfLines = 0
             cell.textLabel?.lineBreakMode = .byWordWrapping
+            cell.selectionStyle = .none
             return cell
             
         case .documentsCell1:

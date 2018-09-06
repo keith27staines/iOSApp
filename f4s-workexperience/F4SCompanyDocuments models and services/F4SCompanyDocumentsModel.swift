@@ -25,6 +25,15 @@ public struct F4SCompanyDocument : Codable {
     var requestedCount: Int?
     var urlString: String?
     
+    var isRequestable: Bool {
+        return state == F4SCompanyDocument.State.unrequested ||
+            state == F4SCompanyDocument.State.requested
+    }
+    
+    var isViewable: Bool {
+        return state == .available && url != nil
+    }
+    
     // Non-encodable properties
     var userIsRequesting: Bool = false
     var url: URL? {
@@ -34,15 +43,26 @@ public struct F4SCompanyDocument : Codable {
         return URL(string: urlString)
     }
     
-    var nameOrType: String {
-        return name.isEmpty ? docType ?? "unknown" : name
+    var providedNameOrDefaultName: String {
+        return name.isEmpty ? F4SCompanyDocument.defaultNameForType(type: docType) : name
     }
     public init(documentType: String) {
         self.docType = documentType
         self.state = .unrequested
-        self.name = ""
+        self.name = F4SCompanyDocument.defaultNameForType(type: documentType)
         self.requestedCount = 0
         self.urlString = nil
+    }
+    
+    static func defaultNameForType(type: String?) -> String {
+        switch type{
+        case "ELC":
+            return "Employer's liability certificate"
+        case "SGC":
+            return "Safeguarding certificate"
+        default:
+            return type ?? "unknown"
+        }
     }
     
     public init(uuid: F4SUUID, name: String, status: State, docType: String, requestedCount: Int? = 0, urlString: String? = nil) {
@@ -73,17 +93,6 @@ public struct F4SGetCompanyDocuments: Decodable {
     public var companyUuid: F4SUUID?
     public var documents: F4SCompanyDocuments?
     public var possibleDocumentTypes: [String]?
-    
-    static func defaultNameForType(type: String) -> String {
-        switch type{
-        case "ELC":
-            return "Employer's liability certificate"
-        case "SGC":
-            return "Safeguarding certificate"
-        default:
-            return type
-        }
-    }
 }
 
 extension F4SGetCompanyDocuments {

@@ -17,7 +17,8 @@ class CompanyDocumentTableViewCell: UITableViewCell {
     var document: F4SCompanyDocument? {
         didSet {
             spinner.stopAnimating()
-            accessoryType = document?.state == .available ? .disclosureIndicator : .none
+            accessoryType = document?.isViewable == true ? .disclosureIndicator : .none
+            selectionStyle = document?.isViewable == true ? .blue : .none
             icon.image = iconForDocument(document: document)
             documentName.text = textForDocument(document: document)
         }
@@ -46,7 +47,7 @@ class CompanyDocumentTableViewCell: UITableViewCell {
         guard let document = document else { return "" }
         switch document.state {
         case .available:
-            return document.nameOrType
+            return document.providedNameOrDefaultName
         case .unavailable, .requested, .unrequested:
             return ""
         }

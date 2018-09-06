@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We are proud to introduce the NCS Workfinder pilot service" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EzE-4c-RgY">
-                                <rect key="frame" x="20" y="423" width="335" height="48"/>
+                                <rect key="frame" x="20" y="413" width="335" height="48"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -43,16 +43,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="240" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select your referrer" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rq8-DK-bNZ" userLabel="referrerName">
-                                <rect key="frame" x="20" y="218" width="335" height="50"/>
+                                <rect key="frame" x="20" y="218" width="335" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="xqT-UP-bTh"/>
+                                    <constraint firstAttribute="height" constant="40" id="xqT-UP-bTh"/>
                                 </constraints>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yaW-m0-o4J" userLabel="referrersTable">
-                                <rect key="frame" x="20" y="270" width="335" height="100"/>
+                                <rect key="frame" x="20" y="260" width="335" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="750" constant="100" id="lAf-Y8-D9Z"/>
@@ -66,14 +66,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DmE-Wv-yV9">
-                                                    <rect key="frame" x="15" y="1" width="37.5" height="24"/>
+                                                    <rect key="frame" x="15" y="3" width="33.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lxM-Z9-7gJ">
-                                                    <rect key="frame" x="15" y="25" width="53" height="18"/>
+                                                    <rect key="frame" x="15" y="23.5" width="53" height="18"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -85,7 +85,7 @@
                                 </prototypes>
                             </tableView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="240" verticalCompressionResistancePriority="240" image="downDisclosureTriangle" translatesAutoresizingMaskIntoConstraints="NO" id="lWb-ba-2Dk">
-                                <rect key="frame" x="305" y="210" width="50" height="50"/>
+                                <rect key="frame" x="315" y="212" width="40" height="40"/>
                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="lWb-ba-2Dk" secondAttribute="height" multiplier="1:1" id="0ln-jn-dfq"/>
@@ -129,7 +129,7 @@
                             <constraint firstItem="EzE-4c-RgY" firstAttribute="leading" secondItem="Rq8-DK-bNZ" secondAttribute="leading" id="qK9-qc-YfD"/>
                             <constraint firstItem="k9D-3n-hdQ" firstAttribute="trailing" secondItem="W07-FX-wkL" secondAttribute="trailing" constant="20" id="rDv-Hs-sxI"/>
                             <constraint firstItem="Rq8-DK-bNZ" firstAttribute="top" secondItem="2Pp-hS-zBE" secondAttribute="bottom" constant="20" id="tGF-5P-bku"/>
-                            <constraint firstItem="lWb-ba-2Dk" firstAttribute="top" secondItem="Rq8-DK-bNZ" secondAttribute="top" constant="-8" id="udu-nh-js3"/>
+                            <constraint firstItem="lWb-ba-2Dk" firstAttribute="top" secondItem="Rq8-DK-bNZ" secondAttribute="top" constant="-6" id="udu-nh-js3"/>
                             <constraint firstItem="k9D-3n-hdQ" firstAttribute="trailing" secondItem="yaW-m0-o4J" secondAttribute="trailing" constant="20" id="uqJ-5v-2LJ"/>
                             <constraint firstItem="FHO-9Y-m8f" firstAttribute="leading" secondItem="k9D-3n-hdQ" secondAttribute="leading" constant="10" id="ygd-N9-4gi"/>
                         </constraints>

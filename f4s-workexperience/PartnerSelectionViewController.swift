@@ -171,7 +171,7 @@ extension PartnerSelectionViewController {
     func rowHeight() -> CGFloat {
         let view = tableView.dequeueReusableCell(withIdentifier: "partnerCell")
         let height = view?.intrinsicContentSize.height ?? 50
-        return height > 0 ? height : 50.0
+        return height > 0 ? height : 40.0
     }
 }
 
@@ -185,7 +185,8 @@ extension PartnerSelectionViewController {
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.tableHeightConstraint.constant = strongSelf.rowHeight() * 5.5
+            let rows = CGFloat(self?.partnersModel.numberOfRowsInSection(0) ?? 0)
+            strongSelf.tableHeightConstraint.constant = strongSelf.rowHeight() * rows
             self?.view.layoutIfNeeded()
             }, completion: nil)
     }

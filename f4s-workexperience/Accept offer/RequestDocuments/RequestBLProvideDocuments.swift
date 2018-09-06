@@ -78,8 +78,8 @@ class RequestBLProvideDocuments: UIViewController {
             enterVoucherViewController.accept = accept
             return
         }
-        if let viewDocumentViewController = segue.destination as? ViewCompanyDocumentViewController, let documentToDisplay = selectedDocument {
-            viewDocumentViewController.document = documentToDisplay
+        if let viewDocumentViewController = segue.destination as? F4SDocumentViewer, let documentToDisplay = selectedDocument {
+            viewDocumentViewController.showCompanyDocument(documentToDisplay)
             return
         }
     }

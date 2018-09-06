@@ -16,8 +16,8 @@ class F4SDaysAndHoursViewController: UIViewController {
     @IBOutlet weak var headerIcon: UIImageView!
     
     var model: F4SDaysAndHoursModel!
-    let weekDayButtonTitle = "WEEKDAYS"
-    let weekendButtonTitle = "WEEKENDS"
+    let weekDayButtonTitle = "Weekdays"
+    let weekendButtonTitle = "Weekends"
     var delegate: F4SDaysAndHoursViewControllerDelegate!
     
     @IBOutlet weak var pageHeaderView: F4SPageHeaderView!

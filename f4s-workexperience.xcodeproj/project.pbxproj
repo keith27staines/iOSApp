@@ -145,7 +145,7 @@
 		FC1334E92121BE11003435A6 /* Skin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1334E52121BE10003435A6 /* Skin.swift */; };
 		FC1D6B7C20D906D100D0C9AF /* F4STemplateModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D6B7B20D906D100D0C9AF /* F4STemplateModels.swift */; };
 		FC1D6B8020D92C8900D0C9AF /* F4STemplateModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D6B7F20D92C8900D0C9AF /* F4STemplateModelTests.swift */; };
-		FC2090802115E7EC001A0321 /* ViewCompanyDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC20907F2115E7EC001A0321 /* ViewCompanyDocumentViewController.swift */; };
+		FC2090802115E7EC001A0321 /* F4SDocumentViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC20907F2115E7EC001A0321 /* F4SDocumentViewer.swift */; };
 		FC209084211611CE001A0321 /* CompanyDocumentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC209083211611CE001A0321 /* CompanyDocumentTableViewCell.swift */; };
 		FC25A05F1F850DF4002F51A9 /* F4SCompanyPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */; };
 		FC31F095204D54C6009DD526 /* F4SDebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */; };
@@ -526,7 +526,7 @@
 		FC1334E52121BE10003435A6 /* Skin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skin.swift; sourceTree = "<group>"; };
 		FC1D6B7B20D906D100D0C9AF /* F4STemplateModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateModels.swift; sourceTree = "<group>"; };
 		FC1D6B7F20D92C8900D0C9AF /* F4STemplateModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateModelTests.swift; sourceTree = "<group>"; };
-		FC20907F2115E7EC001A0321 /* ViewCompanyDocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCompanyDocumentViewController.swift; sourceTree = "<group>"; };
+		FC20907F2115E7EC001A0321 /* F4SDocumentViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDocumentViewer.swift; sourceTree = "<group>"; };
 		FC209083211611CE001A0321 /* CompanyDocumentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDocumentTableViewCell.swift; sourceTree = "<group>"; };
 		FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyPin.swift; sourceTree = "<group>"; };
 		FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDebugViewController.swift; sourceTree = "<group>"; };
@@ -1841,7 +1841,7 @@
 			children = (
 				FC5C5B942109FF48007DCB84 /* RequestBLProvideDocuments.swift */,
 				FCE11E5B2115D26B00403789 /* SwitchTableViewCell.swift */,
-				FC20907F2115E7EC001A0321 /* ViewCompanyDocumentViewController.swift */,
+				FC20907F2115E7EC001A0321 /* F4SDocumentViewer.swift */,
 			);
 			path = RequestDocuments;
 			sourceTree = "<group>";
@@ -2358,7 +2358,7 @@
 				FCB6B8E72074C59C0042C725 /* F4SCalendar.swift in Sources */,
 				FCB6B8CD2074C58F0042C725 /* F4SDayAndHoursSelection.swift in Sources */,
 				40C6DDF21E03F401000F8806 /* UserInfoCoreDataManager.swift in Sources */,
-				FC2090802115E7EC001A0321 /* ViewCompanyDocumentViewController.swift in Sources */,
+				FC2090802115E7EC001A0321 /* F4SDocumentViewer.swift in Sources */,
 				40E78E8D1DD32C3C000A3776 /* MessageHandler.swift in Sources */,
 				FCFF609820A424DE00D69A48 /* F4SMessageModel.swift in Sources */,
 				FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */,
