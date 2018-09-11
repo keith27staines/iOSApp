@@ -8,17 +8,4 @@
 
 import Foundation
 
-extension String {
-    var dehyphenated: String {
-        return self.replacingOccurrences(of: "-", with: "")
-    }
-    
-    func htmlDecode() -> String {
-        return self
-            .replacingOccurrences(of: "&amp;", with: "&")
-            .replacingOccurrences(of: "&quot;", with: "\"")
-            .replacingOccurrences(of: "&apos;", with: "'")
-            .replacingOccurrences(of: "&lt;", with: "<")
-            .replacingOccurrences(of: "&gt;", with: ">")
-    }
-}
+

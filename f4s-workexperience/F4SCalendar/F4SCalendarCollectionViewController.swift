@@ -25,24 +25,23 @@ class F4SCalendarCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(F4SCalendarMonthViewDayCell.self, forCellWithReuseIdentifier: ReuseIdentifier.dayView.rawValue)
+        collectionView!.register(F4SCalendarMonthViewDayCell.self, forCellWithReuseIdentifier: ReuseIdentifier.dayView.rawValue)
 
         // Do any additional setup after loading the view.
         collectionView?.backgroundColor = UIColor.white
+        collectionView?.contentInset = UIEdgeInsets.zero
         configureFlowLayout()
         reload()
     }
     
     func configureFlowLayout() {
-        let flowLayout = collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
+        guard let collectionView = collectionView else { return }
+        let flowLayout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         flowLayout.minimumInteritemSpacing = 0
-        flowLayout.minimumLineSpacing = -0.5
-        let frameWidth = view.frame.width / 7.0
+        flowLayout.minimumLineSpacing = 0
+        let frameWidth = (collectionView.bounds.width) / 7.0
         flowLayout.itemSize = CGSize(width: frameWidth, height: frameWidth)
         flowLayout.sectionFootersPinToVisibleBounds = true
         flowLayout.sectionHeadersPinToVisibleBounds = true
@@ -105,6 +104,7 @@ class F4SCalendarCollectionViewController: UICollectionViewController {
             let displayMonth = cal.displayableMonth(index: indexPath.section)
             headerView.label.text = displayMonth.month.monthSymbol + " " + String(describing: displayMonth.month.year)
             headerView.backgroundColor = UIColor.white
+            headerView.label.textColor = skin?.primaryButtonSkin.backgroundColor.uiColor
             return headerView
         }
     }
@@ -140,11 +140,24 @@ class F4SCalendarCollectionViewController: UICollectionViewController {
 }
 
 extension F4SCalendarCollectionViewController : UICollectionViewDelegateFlowLayout {
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemWidth = collectionView.bounds.width/7
-        let itemHeight = itemWidth
-        return CGSize(width: itemWidth, height: itemHeight)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let inset: CGFloat = 0.0
+        let minimumInteritemSpacing: CGFloat = 0.0
+        let cellsPerRow: Int = 7
+        let marginsAndInsets: CGFloat
+        if #available(iOS 11.0, *) {
+            marginsAndInsets = inset * 2 + collectionView.safeAreaInsets.left + collectionView.safeAreaInsets.right + minimumInteritemSpacing * CGFloat(cellsPerRow - 1)
+        } else {
+            marginsAndInsets = inset * 2 + minimumInteritemSpacing * CGFloat(cellsPerRow - 1)
+        }
+        let itemWidth = ((collectionView.bounds.size.width - marginsAndInsets) / CGFloat(cellsPerRow)).rounded(.down)
+        return CGSize(width: itemWidth, height: itemWidth)
     }
+//    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let itemWidth = collectionView.bounds.width/7
+//        let itemHeight = itemWidth
+//        return CGSize(width: itemWidth, height: itemHeight)
+//    }
 }
 
 

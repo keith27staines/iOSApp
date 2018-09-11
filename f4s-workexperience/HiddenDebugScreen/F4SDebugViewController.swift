@@ -52,13 +52,11 @@ class F4SDebugViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    
-    
     func applyStyle() {
-        F4SButtonStyler.apply(style: .primary, button: viewLogButton)
-        F4SButtonStyler.apply(style: .secondary, button: returnToWorkfinder)
-        F4SButtonStyler.apply(style: .secondary, button: featureSwitchesButton)
-        
-        F4SBackgroundViewStyler.apply(style: .standardPageBackground, backgroundView: self.view)
+        let skinner = Skinner()
+        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: viewLogButton)
+        skinner.apply(buttonSkin: skin?.secondaryButtonSkin, to: returnToWorkfinder)
+        skinner.apply(buttonSkin: skin?.secondaryButtonSkin, to: featureSwitchesButton)
+        self.view.backgroundColor = RGBA.workfinderStagingGold.uiColor
     }
 }

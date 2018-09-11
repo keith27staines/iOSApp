@@ -71,18 +71,27 @@ class F4SHoorayViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        applyStyle()
+        addToCalendarButton.isEnabled = isEventInformationComplete()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        applyStyle()
+    }
+    
+    func applyStyle() {
         companyHeaderView.fillTop = false
         companyHeaderView.fillColor = UIColor.white
-        companyHeaderView.leftDrop = 0.3
-        companyHeaderView.rightDrop = 1.0
+        companyHeaderView.leftDrop = 1.0
+        companyHeaderView.rightDrop = 0.3
         companyHeaderView.backgroundColor = UIColor.clear
         companyNameLabel.text = accept.company.name.stripCompanySuffix()
         companyHeaderView.icon = accept.companyLogo
-        F4SButtonStyler.apply(style: .primary, button: doneButton)
-        F4SButtonStyler.apply(style: .secondary, button: addToCalendarButton)
-        hoorayLabel.textColor = WorkfinderColor.purple
-        placementConfirmedLabel.textColor = WorkfinderColor.purple
-        addToCalendarButton.isEnabled = isEventInformationComplete()
+        let skinner = Skinner()
+        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: doneButton)
+        skinner.apply(buttonSkin: skin?.secondaryButtonSkin, to: addToCalendarButton)
+        hoorayLabel.textColor = RGBA.workfinderPurple.uiColor
+        placementConfirmedLabel.textColor = RGBA.workfinderPurple.uiColor
     }
 }
 
@@ -147,6 +156,7 @@ extension F4SHoorayViewController : CalendarChooserControllerDelegate {
     }
     
     func calendarChooserDidFinish(_ calendardChooser: CalendarChooserController, calendar: EKCalendar) {
+        navigationController?.popViewController(animated: true)
         let event = EKEvent(eventStore: eventStore)
         event.calendar = eventStore.calendar(withIdentifier: calendar.calendarIdentifier)
         event.title = "Workfinder placement at \(accept.company.name.stripCompanySuffix())"

@@ -22,6 +22,24 @@ public class F4SHoursPickerViewController: UIViewController {
     
     var delegate: F4SHoursPickerDelegate? = nil
     
+    public override func viewWillAppear(_ animated: Bool) {
+        styleButton(button: amButton)
+        styleButton(button: pmButton)
+        styleButton(button: ampmButton)
+    }
+    
+    func styleButton(button: UIButton) {
+        let selectedBackgroundColor = skin?.primaryButtonSkin.backgroundColor.uiColor ?? UIColor.white
+        let deselectedBackgroundColor = RGBA.white.uiColor
+        let selectedText = RGBA.white.uiColor
+        let deselectedText = RGBA.gray.uiColor
+        button.setBackgroundColor(color: selectedBackgroundColor, forUIControlState: .selected)
+        button.setBackgroundColor(color: deselectedBackgroundColor, forUIControlState: .normal)
+        button.setTitleColor(selectedText, for: .selected)
+        button.setTitleColor(deselectedText, for: .normal)
+    }
+    
+    
     public var selectedHoursType: F4SHoursType = .all {
         didSet {
             amButton.isSelected = false
@@ -58,7 +76,7 @@ public class F4SHoursPickerViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.lightGray
         view.layer.borderColor = UIColor.black.cgColor
-        view.layer.borderWidth = 2
+        view.layer.borderWidth = 1
         view.layer.cornerRadius = 8
         view.clipsToBounds = true
     }

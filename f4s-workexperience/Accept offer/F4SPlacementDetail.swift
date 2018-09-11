@@ -9,7 +9,16 @@
 import UIKit
 
 public struct F4SPlacementInviteSectionDetails {
+    public var title: String?
+    public var icon: UIImage?
+    public var lines: [String]?
+    public var linkUrl: URL?
+    public var isEmail: Bool
+    
+    public var requiresButtonAction: Bool = false
+    
     public init(title: String? = nil, icon: UIImage? = nil, lines: [String]? = nil, linkUrl: URL? = nil, isEmail: Bool = false){
+        self.requiresButtonAction = false
         self.title = title
         self.icon = icon
         self.lines = lines
@@ -17,17 +26,14 @@ public struct F4SPlacementInviteSectionDetails {
         self.isEmail = isEmail
     }
     public init(title: String? = nil, icon: UIImage? = nil, lines: [String]? = nil, linkUrlString: String? = nil, isEmail: Bool = false){
+        self.requiresButtonAction = false
         self.title = title
         self.icon = icon
         self.lines = lines
         self.linkUrl = URL(string: linkUrlString ?? "")
         self.isEmail = isEmail
     }
-    public var title: String?
-    public var icon: UIImage?
-    public var lines: [String]?
-    public var linkUrl: URL?
-    public var isEmail: Bool
+
 }
 
 public struct F4SPlacementInviteHeading {
@@ -77,6 +83,7 @@ public class F4SPlacementInviteModel {
         var offerIsFromSection = F4SPlacementInviteSection(title: "Offer is from")
         lines = [context.company.name.stripCompanySuffix()]
         detail = F4SPlacementInviteSectionDetails(icon: UIImage(named: "ui-company-icon"), lines: lines, linkUrlString: nil)
+        detail.requiresButtonAction = true
         offerIsFromSection.inviteDetails.append(detail)
         
         lines = ["Company LinkedIn profile"]
@@ -159,15 +166,18 @@ public class F4SPlacementInviteModel {
         var result = [""] // value will be supplied later
         guard let duration = placement.duration else { return result }
         var fullTime = true
-        for dayInfo in duration.day_time_info {
-            guard let day = F4SDayOfWeek(nameOfDay: dayInfo.day) else {
-                continue
-            }
-            result.append(day.mediumSymbol + " " + dayInfo.time)
-            if dayInfo.time.lowercased() != "all" {
-                fullTime = false
+        if let dayTimeInfo = duration.day_time_info {
+            for dayInfo in dayTimeInfo {
+                guard let day = F4SDayOfWeek(nameOfDay: dayInfo.day) else {
+                    continue
+                }
+                result.append(day.mediumSymbol + " " + dayInfo.time)
+                if dayInfo.time.lowercased() != "all" {
+                    fullTime = false
+                }
             }
         }
+
         result[0] = fullTime == true ? "Full time:" : "Part time:"
         result.append("AM hours: 0900 - 1200")
         result.append("PM hours: 1200 - 1600")

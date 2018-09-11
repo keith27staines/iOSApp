@@ -23,6 +23,11 @@ class RecommendationsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         reloadModel()
+        applyStyle()
+    }
+    
+    func applyStyle() {
+        styleNavigationController()
     }
     
     func reloadModel() {

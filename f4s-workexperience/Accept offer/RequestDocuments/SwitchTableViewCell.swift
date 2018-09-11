@@ -19,24 +19,40 @@ class SwitchTableViewCell: UITableViewCell {
     @IBAction func documentRequestStateChanged(_ sender: UISwitch) {
         delegate?.switchCellDidSwitch(self, didSwitch: sender.isOn)
     }
+    
     var document: F4SCompanyDocument? {
         didSet {
             self.onOrOff.isOn = document?.userIsRequesting ?? false
-            self.label.text = document?.name ?? ""
+            self.label.text = document?.providedNameOrDefaultName ?? "unknown document"
         }
     }
 
 }
 
-
 class ViewTableViewCell: UITableViewCell {
-    var document: F4SCompanyDocument? {
-        didSet {
-            self.label.text = document?.name ?? ""
-            self.icon.image = UIImage(named: "checkBlue")
-            self.accessoryType = .disclosureIndicator
-        }
-    }
     @IBOutlet var icon: UIImageView!
     @IBOutlet var label: UILabel!
+    var document: F4SCompanyDocument? {
+        didSet {
+            guard let document = document else {
+                self.label.text = ""
+                self.icon.image = nil
+                self.accessoryType = .none
+                self.isUserInteractionEnabled = false
+                return
+            }
+            
+            self.label.text = document.providedNameOrDefaultName
+            
+            if document.isViewable {
+                self.accessoryType = .disclosureIndicator
+                self.isUserInteractionEnabled = true
+                self.icon.image = #imageLiteral(resourceName: "company_doc")  // UIImage(named: "comany_document")
+            } else {
+                self.icon.image = #imageLiteral(resourceName: "checkBlue")  // UIImage(named: "checkBlue")
+                self.accessoryType = .none
+                self.isUserInteractionEnabled = false
+            }
+        }
+    }
 }

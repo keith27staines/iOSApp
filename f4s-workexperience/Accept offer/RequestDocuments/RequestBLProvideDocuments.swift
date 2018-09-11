@@ -46,11 +46,21 @@ class RequestBLProvideDocuments: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        F4SButtonStyler.apply(style: .primary, button: skipButton)
-        F4SButtonStyler.apply(style: .secondary, button: requestButton)
+        applyStyle()
         self.tableVIew.dataSource = self
         self.tableVIew.delegate = self
         configureButtons()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        applyStyle()
+    }
+    
+    func applyStyle() {
+        let skinner = Skinner()
+        skinner.apply(navigationBarSkin: NavigationBarSkin.whiteBarBlackItems, to: self)
+        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: skipButton)
+        skinner.apply(buttonSkin: skin?.secondaryButtonSkin, to: requestButton)
     }
 
     func configureButtons() {
@@ -68,8 +78,8 @@ class RequestBLProvideDocuments: UIViewController {
             enterVoucherViewController.accept = accept
             return
         }
-        if let viewDocumentViewController = segue.destination as? ViewDocumentViewController, let documentToDisplay = selectedDocument {
-            viewDocumentViewController.document = documentToDisplay
+        if let viewDocumentViewController = segue.destination as? F4SDocumentViewer, let documentToDisplay = selectedDocument {
+            viewDocumentViewController.showCompanyDocument(documentToDisplay)
             return
         }
     }

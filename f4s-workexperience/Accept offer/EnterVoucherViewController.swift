@@ -20,7 +20,7 @@ class EnterVoucherViewController: UIViewController {
     @IBOutlet weak var validationLabel: UILabel!
     
     var accept: AcceptOfferContext!
-    var splashColor = UIColor(red: 66/255, green: 192/255, blue: 236/255, alpha: 1.0)
+
     var voucher: F4SVoucher!
 
     var confirmView: F4SConfirmUseVoucherView? = nil
@@ -136,7 +136,7 @@ class EnterVoucherViewController: UIViewController {
         self.tabBarController?.tabBar.isTranslucent = true
         self.tabBarController?.tabBar.isHidden = true
         print("placement \(accept.placement)")
-        styleNavigationController(titleColor: UIColor.white, backgroundColor: splashColor, tintColor: UIColor.white, useLightStatusBar: true)
+        styleNavigationController()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -258,7 +258,9 @@ extension EnterVoucherViewController {
         pageHeaderView.backgroundColor = UIColor.white
         navigationItem.title = ""
         pageHeaderView.fillColor = splashColor
-        F4SButtonStyler.apply(style: .primary, button: acceptButton)
+        pageHeaderView.leftDrop = 1.0
+        pageHeaderView.rightDrop = 0.1
+        Skinner().apply(buttonSkin: skin?.primaryButtonSkin, to: acceptButton)
     }
 }
 
@@ -322,19 +324,6 @@ public class F4SVoucher {
             }
         })
         self.service = service
-    }
-}
-
-extension String {
-    func stripCompanySuffix() -> String {
-        let companyEndings = [" limited", " ltd", "ltd.", " plc"]
-        var stripped = self
-        companyEndings.forEach { (ending) in
-            if hasSuffix(ending) || hasSuffix(ending.uppercased()){
-                stripped = String(dropLast(ending.count))
-            }
-        }
-        return stripped
     }
 }
 

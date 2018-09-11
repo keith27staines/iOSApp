@@ -17,9 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.0.1</string>
+	<string>2.1</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>6</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>ITSEncryptionExportComplianceCode</key>
@@ -74,10 +74,16 @@
 	</dict>
 	<key>NSCalendarsUsageDescription</key>
 	<string>Workfinder would like to help you by adding your work experience placements to your calendar</string>
+	<key>NSCameraUsageDescription</key>
+	<string>We need access to the camera to allow you to take photographs of your CV and other supporting documents</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Workfinder needs access to contacts to give you reminders</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Allowing access to your location enables you to see work opportunities around you.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Allowing access to your location enables you to see work opportunities around you.</string>
+	<key>NSRemindersUsageDescription</key>
+	<string>Workfinder would like to give you reminders of work placements</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

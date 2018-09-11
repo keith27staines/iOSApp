@@ -10,6 +10,13 @@ import Foundation
 import CoreGraphics
 
 class CustomClusterIconGenerator: NSObject, GMUClusterIconGenerator {
+    
+    var color: UIColor = UIColor.red
+    
+    convenience init(color: UIColor) {
+        self.init()
+        self.color = color
+    }
 
     func icon(forSize size: UInt) -> UIImage! {
 
@@ -26,8 +33,8 @@ class CustomClusterIconGenerator: NSObject, GMUClusterIconGenerator {
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
         let ctx = UIGraphicsGetCurrentContext()
         ctx?.saveGState()
-        let clusterColor = UIColor(netHex: 0x40AF50)
-        ctx?.setFillColor(clusterColor.cgColor)
+//        let clusterColor = UIColor(netHex: 0x40AF50)
+        ctx?.setFillColor(color.cgColor)
         ctx?.fillEllipse(in: rect)
         ctx?.restoreGState()
 

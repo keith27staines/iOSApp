@@ -11,12 +11,12 @@ import UIKit
 class AcceptOfferViewController: UIViewController {
     @IBOutlet weak var offsetHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var introductionStack: UIStackView!
     @IBOutlet weak var headerHeight: NSLayoutConstraint!
 
     @IBOutlet weak var companyNameLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    let splashColor = UIColor(red: 66/255, green: 192/255, blue: 236/255, alpha: 1.0)
     
     let initialHeaderHeight: CGFloat = 100.0
     
@@ -40,14 +40,28 @@ class AcceptOfferViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        applyStyle()
         self.tabBarController?.tabBar.isTranslucent = true
         self.tabBarController?.tabBar.isHidden = true
-        styleNavigationController(titleColor: UIColor.white, backgroundColor: splashColor, tintColor: UIColor.white, useLightStatusBar: true)
         captureShareImage()
     }
     
     func captureShareImage() {
-        UIGraphicsBeginImageContext(view.frame.size)
+        let headerImage = pageHeaderView.snapshotToImage()
+        let introImage = introductionStack.snapshotToImage()
+        let tableImage = tableView.renderAllContentToImage()
+        var totalHeight = headerImage.size.height
+        totalHeight += introImage.size.height
+        totalHeight += tableImage.size.height
+        
+        UIGraphicsBeginImageContext(CGSize(width: headerImage.size.width, height: totalHeight))
+        var height: CGFloat = 0.0
+        headerImage.draw(at: CGPoint(x: 0, y: height))
+        height += headerImage.size.height
+        introImage.draw(at: CGPoint(x: 0, y: height))
+        height += introImage.size.height
+        tableImage.draw(at: CGPoint(x: 0, y: height))
+        height += tableImage.size.height
         view.layer.render(in: UIGraphicsGetCurrentContext()!)
         accept.offerImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -69,8 +83,11 @@ class AcceptOfferViewController: UIViewController {
 extension AcceptOfferViewController {
     func applyStyle() {
         pageHeaderView.backgroundColor = UIColor.white
+        pageHeaderView.leftDrop = 1.0
+        pageHeaderView.rightDrop = 0.1
         navigationItem.title = ""
         pageHeaderView.fillColor = splashColor
+        styleNavigationController()
     }
 }
 
@@ -93,6 +110,15 @@ extension AcceptOfferViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section < placementInviteModel.numberOfSections() {
             let inviteDetails = placementInviteModel.inviteDetailsForIndexPath(indexPath)
+            if inviteDetails.requiresButtonAction {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "detailWithLink", for: indexPath) as! F4SInviteDetailLinkCell
+                cell.buttonAction = { cell in
+                    guard let company = self.accept?.company else { return }
+                    CustomNavigationHelper.sharedInstance.presentCompanyDetailsPopover(parentCtrl: self, company: company)
+                }
+                cell.detail = inviteDetails
+                return cell
+            }
             if inviteDetails.isEmail || inviteDetails.linkUrl != nil {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "detailWithLink", for: indexPath) as! F4SInviteDetailLinkCell
                 cell.detail = inviteDetails
@@ -104,17 +130,23 @@ extension AcceptOfferViewController : UITableViewDataSource {
             }
 
         } else {
-            let buttonsCell = tableView.dequeueReusableCell(withIdentifier: "buttons") as! F4SInviteButtonsTableViewCell
+            guard let buttonsCell = tableView.dequeueReusableCell(withIdentifier: "buttons") as? F4SInviteButtonsTableViewCell else {
+                return UITableViewCell()
+            }
             let workflowState = accept.placement.workflowState
             configureButtonCell(buttonsCell, for: workflowState!)
             return buttonsCell
         }
     }
     
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let cell = cell as? F4SInviteDetailLinkCell {
+            cell.buttonAction = nil
+        }
+    }
+    
     func configureButtonCell(_ buttonsCell: F4SInviteButtonsTableViewCell, for state: F4SPlacementStatus) {
-        F4SButtonStyler.apply(style: .primary, button: buttonsCell.primaryButton)
-        F4SButtonStyler.apply(style: .secondary, button: buttonsCell.secondaryButton)
-        
+        buttonsCell.applyStyle()
         switch state {
         case .accepted:
             buttonsCell.introductoryText.text = NSLocalizedString("Please choose an option in order to proceed", comment: "")
@@ -157,7 +189,6 @@ extension AcceptOfferViewController : UITableViewDataSource {
             buttonsCell.shareText.isHidden = true
             buttonsCell.primaryAction = nil
             buttonsCell.secondaryAction = nil
-            buttonsCell.shareText = nil
         }
     }
 }
@@ -197,7 +228,8 @@ extension AcceptOfferViewController {
         MessageHandler.sharedInstance.showLoadingOverlay(self.view)
         self.companyDocumentsModel = F4SCompanyDocumentsModel(companyUuid: accept.company.uuid)
         let companyDocumentsModel = self.companyDocumentsModel!
-        companyDocumentsModel.getDocuments { (result) in
+        let age = accept.user.age() ?? 0
+        companyDocumentsModel.getDocuments(age: age) { (result) in
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else { return }
                 MessageHandler.sharedInstance.hideLoadingOverlay()

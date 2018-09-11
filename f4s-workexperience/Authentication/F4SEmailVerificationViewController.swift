@@ -39,6 +39,18 @@ class F4SEmailVerificationViewController: UIViewController {
         activitySpinner.hidesWhenStopped = true
         activitySpinner.isHidden = true
         activityCount = 0
+        applyStyle()
+    }
+    
+    func applyStyle() {
+        let skinner = Skinner()
+        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: primaryActionButton)
+        skinner.apply(buttonSkin: skin?.secondaryButtonSkin, to: secondaryActionButton)
+        self.view.backgroundColor = RGBA.white.uiColor
+        emailTextField.layer.borderWidth = 2.0
+        emailTextField.layer.borderColor = RGBA.lightGray.cgColor
+        emailTextField.layer.cornerRadius = 10
+        emailTextField.layer.masksToBounds = true
     }
     
     @IBAction func bypassButtonTapped(_ sender: UIButton) {
@@ -51,12 +63,6 @@ class F4SEmailVerificationViewController: UIViewController {
         }
         configure(for: model.emailVerificationState)
         applyStyle()
-    }
-    
-    func applyStyle() {
-        F4SButtonStyler.apply(style: .primary, button: primaryActionButton)
-        F4SButtonStyler.apply(style: .secondary, button: secondaryActionButton)
-        F4SBackgroundViewStyler.apply(style: .standardPageBackground, backgroundView: self.view)
     }
     
     func handleStateChange(oldState: F4SEmailVerificationState, newState: F4SEmailVerificationState) {

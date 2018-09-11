@@ -13,6 +13,7 @@ class PartnerSelectionViewController: UIViewController {
     var isTableDropped: Bool = false
     var selectedPartner: F4SPartner? = nil
     
+    @IBOutlet weak var partnerText: UILabel!
     @IBOutlet weak var instructionText: UILabel!
     
     @IBOutlet weak var referrerTextBox: UITextField!
@@ -32,6 +33,7 @@ class PartnerSelectionViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        self.applyStyle()
         tableView.dataSource = self
         tableView.delegate = self
         loadPartersFromServer()
@@ -41,7 +43,7 @@ class PartnerSelectionViewController: UIViewController {
         self.referrerTextBox.delegate = self
         self.doneButton.isEnabled = false
         self.partnerLogoRightConstraint.constant = -200
-        self.applyStyle()
+        partnerText.isHidden = true
     }
     
     func loadPartersFromServer() {
@@ -58,6 +60,10 @@ class PartnerSelectionViewController: UIViewController {
         }
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return skin?.navigationBarSkin.statusbarMode == .light ? .lightContent : .default
+    }
+    
     func showNeedConnectionAlert() {
         let title = NSLocalizedString("Workfinder needs an internet connection", comment: "")
         let message = NSLocalizedString("In order for us to set things up for you, please ensure that you have a good internet connection.", comment: "")
@@ -72,8 +78,10 @@ class PartnerSelectionViewController: UIViewController {
     }
     
     func applyStyle() {
-        F4SButtonStyler.apply(style: .primary, button: self.doneButton)
-        F4SBackgroundViewStyler.apply(style: .standardPageBackground, backgroundView: self.view)
+        let skinner = Skinner()
+        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: doneButton)
+        styleNavigationController()
+        self.view.backgroundColor = splashColor
     }
     
     lazy var partnersModel: F4SPartnersModel = {
@@ -116,7 +124,6 @@ extension PartnerSelectionViewController : UITableViewDataSource, UITableViewDel
         let partner = partnersModel.partnerForIndexPath(indexPath)
         view.textLabel?.text = partner.name
         view.detailTextLabel?.text = partner.description
-        //view.imageView?.image = partner.image
         return view
     }
     
@@ -127,12 +134,33 @@ extension PartnerSelectionViewController : UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedPartner = partnersModel.partnerForIndexPath(indexPath)
         partnersModel.selectedPartner = selectedPartner
+        partnerText.isHidden = selectedPartner?.name.lowercased() == "ncs" ? false : true
+        let skin = skinForPartner(partner: selectedPartner)
+        makeSkinGlobal(skin: skin)
         referrerTextBox.text = selectedPartner?.name ?? ""
         partnerLogoImageView.image = selectedPartner?.image
         animatePullUpTable()
         
         if let _ = selectedPartner?.image {
             animatePartnerIn()
+        }
+        applyStyle()
+    }
+    
+    func makeSkinGlobal(skin: Skin?) {
+        (UIApplication.shared.delegate as? AppDelegate)?.skin = skin
+    }
+    
+    func skinForPartner(partner: F4SPartner?) -> Skin? {
+        let workfinder = (UIApplication.shared.delegate as? AppDelegate)?.skins["workfinder"]
+        guard let partner = partner else {
+            return workfinder
+        }
+        switch partner.name.lowercased() {
+        case "ncs":
+            return (UIApplication.shared.delegate as? AppDelegate)?.skins[partner.name.lowercased()]
+        default:
+            return workfinder
         }
     }
 }
@@ -143,7 +171,7 @@ extension PartnerSelectionViewController {
     func rowHeight() -> CGFloat {
         let view = tableView.dequeueReusableCell(withIdentifier: "partnerCell")
         let height = view?.intrinsicContentSize.height ?? 50
-        return height > 0 ? height : 50.0
+        return height > 0 ? height : 40.0
     }
 }
 
@@ -157,7 +185,8 @@ extension PartnerSelectionViewController {
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.tableHeightConstraint.constant = strongSelf.rowHeight() * 5.5
+            let rows = CGFloat(self?.partnersModel.numberOfRowsInSection(0) ?? 0)
+            strongSelf.tableHeightConstraint.constant = strongSelf.rowHeight() * rows
             self?.view.layoutIfNeeded()
             }, completion: nil)
     }

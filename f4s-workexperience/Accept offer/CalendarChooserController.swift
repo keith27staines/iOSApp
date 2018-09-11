@@ -14,7 +14,12 @@ protocol CalendarChooserControllerDelegate : class {
     func calendarChooserDidFinish(_ calendardChooser: CalendarChooserController, calendar: EKCalendar)
 }
 
-class CalendarChooserController: UITableViewController {
+class CalendarChooserController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var tableView: UITableView!
+    
     var delegate: CalendarChooserControllerDelegate? = nil
     var selectedCalendar: EKCalendar? = nil
     var calendars = [EKCalendar]()
@@ -22,21 +27,37 @@ class CalendarChooserController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        calendars = eventStore.calendars(for: EKEntityType.event).sorted() { (cal1, cal2) -> Bool in
-            return cal1.title < cal2.title
-            }.filter({ (cal) -> Bool in
-                return cal.allowsContentModifications
-            })
-        tableView.reloadData()
+        adjustNavigationBar()
+        applyStyle()
         doneButton.isEnabled = false
+        eventStore.requestAccess(to: .event) { (success, error) in
+            self.calendars = self.eventStore.calendars(for: EKEntityType.event).sorted() { (cal1, cal2) -> Bool in
+                return cal1.title < cal2.title
+                }.filter({ (cal) -> Bool in
+                    return cal.allowsContentModifications
+                })
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
     
+    func adjustNavigationBar() {
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationItem.title = NSLocalizedString("Choose calendar", comment: "")
+    }
     
-    @IBOutlet weak var doneButton: UIBarButtonItem!
+    func applyStyle() {
+        styleNavigationController()
+        let skinner = Skinner()
+        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: doneButton)
+        skinner.apply(buttonSkin: skin?.secondaryButtonSkin, to: cancelButton)
+    }
     
     @IBAction func cancelButtonTapped(sender: Any) {
         selectedCalendar = nil
         delegate?.calendarChooserDidCancel(self)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func doneButtonTapped(sender: Any) {
@@ -44,26 +65,27 @@ class CalendarChooserController: UITableViewController {
             return
         }
         delegate?.calendarChooserDidFinish(self, calendar: calendar)
+        dismiss(animated: true, completion: nil)
     }
 
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return calendars.count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "basicCell", for: indexPath)
         cell.textLabel?.text = calendars[indexPath.row].title
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         doneButton.isEnabled = true
         selectedCalendar = calendars[indexPath.row]
         tableView.deselectRow(at: indexPath, animated: true)
@@ -72,7 +94,7 @@ class CalendarChooserController: UITableViewController {
             cell?.accessoryType = .none
         }
         tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        
+        doneButtonTapped(sender: self)
     }
 
 }

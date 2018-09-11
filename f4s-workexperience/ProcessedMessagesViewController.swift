@@ -45,15 +45,8 @@ extension ProcessedMessagesViewController {
 
     func setupAddInfoButton() {
         let addInfoText = NSLocalizedString("Add info", comment: "")
-        addInfoButton.setBackgroundColor(color: UIColor(netHex: Colors.mediumGreen), forUIControlState: .normal)
-        addInfoButton.setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)
-        addInfoButton.setBackgroundColor(color: UIColor(netHex: Colors.whiteGreen), forUIControlState: .disabled)
-        addInfoButton.setTitleColor(UIColor.white, for: .normal)
-        addInfoButton.setTitleColor(UIColor.white, for: .highlighted)
-        
-        addInfoButton.layer.masksToBounds = true
-        addInfoButton.layer.cornerRadius = 10
-        addInfoButton.setAttributedTitle(NSAttributedString(string: addInfoText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.white]), for: .normal)
+        addInfoButton.setTitle(addInfoText, for: .normal)
+        Skinner().apply(buttonSkin: skin?.primaryButtonSkin, to: addInfoButton)
     }
 
     func setupLabels() {

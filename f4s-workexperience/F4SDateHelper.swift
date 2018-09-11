@@ -23,7 +23,7 @@ public struct F4SDateHelper {
     
     static public func yyyyMMDD(string: String) -> Date? {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-DD"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.date(from: string)
     }
 }
@@ -31,7 +31,7 @@ public struct F4SDateHelper {
 public extension Date {
     func asAcceptDateString() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "DD MMM yyyy"
+        dateFormatter.dateFormat = "dd MMM yyyy"
         return dateFormatter.string(from: self)
     }
 }

@@ -55,18 +55,11 @@ extension FavouritesPopupViewController {
     }
     
     func setupButtons() {
-        okButton.layer.masksToBounds = true
-        okButton.layer.cornerRadius = 10
-        okButton.setAttributedTitle(NSAttributedString(string: NSLocalizedString("Ok", comment: ""), attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.white)]), for: .normal)
-        okButton.setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)
-        okButton.setBackgroundColor(color: UIColor(netHex: Colors.mediumGreen), forUIControlState: .normal)
-        okButton.setTitleColor(UIColor.white, for: .normal)
-        okButton.setTitleColor(UIColor.white, for: .highlighted)
-        
-        cancelButton.layer.cornerRadius = 10
-        cancelButton.layer.borderColor = UIColor(netHex: Colors.mediumGreen).cgColor
-        cancelButton.layer.borderWidth = 0.5
-        cancelButton.setAttributedTitle(NSAttributedString(string: NSLocalizedString("Cancel", comment: ""), attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)]), for: .normal)
+        let skinner = Skinner()
+        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: okButton)
+        skinner.apply(buttonSkin: skin?.secondaryButtonSkin, to: cancelButton)
+        okButton.setTitle(NSLocalizedString("Ok", comment: ""), for: .normal)
+        cancelButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
     }
     
     func setupLabels() {

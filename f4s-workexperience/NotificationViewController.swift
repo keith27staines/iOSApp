@@ -89,20 +89,11 @@ extension NotificationViewController {
     }
 
     func setupButtons(leftButtonText: String, rightButtonText: String) {
-        rightButton.backgroundColor = UIColor(netHex: Colors.mediumGreen)
-        rightButton.layer.cornerRadius = 10
-        rightButton.layer.masksToBounds = true
-        rightButton.setAttributedTitle(NSAttributedString(string: rightButtonText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.white)]), for: .normal)
-        
-        rightButton.setBackgroundColor(color: UIColor(netHex: Colors.mediumGreen), forUIControlState: .normal)
-        rightButton.setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)
-        rightButton.setTitleColor(UIColor.white, for: .normal)
-        rightButton.setTitleColor(UIColor.white, for: .highlighted)
-
-        leftButton.layer.cornerRadius = 10
-        leftButton.layer.borderColor = UIColor(netHex: Colors.mediumGreen).cgColor
-        leftButton.layer.borderWidth = 0.5
-        leftButton.setAttributedTitle(NSAttributedString(string: leftButtonText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)]), for: .normal)
+        let skinner = Skinner()
+        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: rightButton)
+        skinner.apply(buttonSkin: skin?.secondaryButtonSkin, to: leftButton)
+        rightButton.setTitle(rightButtonText, for: .normal)
+        leftButton.setTitle(leftButtonText, for: .normal)
     }
 
     func setupLabels(titleText: String, contentText: String) {

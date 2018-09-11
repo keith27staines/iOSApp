@@ -8,50 +8,92 @@
 
 import UIKit
 
-enum DrawerSection: Int {
+fileprivate enum DrawerSection: Int {
     case WelcomeSection
     case NavigationSection
     case LogoutSection
 }
 
+fileprivate enum NavigationSectionRow : Int {
+    case about = 0
+    case recommendations = 1
+    case faq = 2
+    case terms = 3
+    static var allRows: [NavigationSectionRow] {
+        return [.about, .recommendations, .faq, .terms]
+    }
+    
+    var title: String {
+        switch self
+        {
+        case .about:
+            return NSLocalizedString("About", comment: "Menu item providing information about Workfinder")
+        case .recommendations:
+            return NSLocalizedString("Your recommendations", comment: "Menu item offering the user recommendations")
+        case .faq:
+            return NSLocalizedString("FAQs", comment: "Menu item providing access to frequently asked questions")
+        case .terms:
+            return NSLocalizedString("T&Cs + Privacy Policy", comment: "Menu item providing access to terms and conditions")
+        }
+    }
+}
+
 class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var tableView: UITableView!
-    let drawerWidths: [CGFloat] = [160, 200, 240, 280, 320]
-    let normalCellHeight: CGFloat = 83
-    let smallCellHeight: CGFloat = 0.5
-    let welcomeCellHeight: CGFloat = 150
+    let normalCellHeight: CGFloat = 60
+    let welcomeCellHeight: CGFloat = 100
     var secondLoad = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let frame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y + UIApplication.shared.statusBarFrame.height, width: self.view.bounds.width, height: self.view.bounds.height - UIApplication.shared.statusBarFrame.size.height)
-        self.tableView = UITableView(frame: frame, style: .plain)
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.view.addSubview(self.tableView)
-        self.tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         self.navigationController?.navigationBar.isHidden = true
-        self.tableView.backgroundColor = UIColor.clear
-        self.tableView.bounces = false
-        self.edgesForExtendedLayout = []
-        self.extendedLayoutIncludesOpaqueBars = true
-        tableView.register(UINib(nibName: "MenuHeaderCell", bundle: nil), forCellReuseIdentifier: "MenuHeaderCell")
-        switch Config.environment {
-        case .staging:
-            self.view.backgroundColor = WorkfinderColor.stagingGold
-        case .production:
-            self.view.backgroundColor = UIColor(red: 72.0/255.0, green: 38.0/255.0, blue: 127.0/255.0, alpha: 1.0)
-        }
-
+        setupTableView()
         setupLabels()
+        applyStyle()
     }
+    
+    func setupTableView() {
+        tableView = UITableView(frame: CGRect.zero, style: .plain)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        tableView.bounces = false
+        tableView.register(UINib(nibName: "MenuHeaderCell", bundle: nil), forCellReuseIdentifier: "MenuHeaderCell")
+        tableView.register(SideDrawerLogosTableviewCell.self, forCellReuseIdentifier: "SideDrawerLogosTableviewCell")
+        tableView.register(SideDrawerTableViewCell.self, forCellReuseIdentifier: "SideDrawerTableViewCell")
+        view.addSubview(self.tableView)
+        if #available(iOS 11.0, *) {
+            tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0).isActive = true
+            tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 0).isActive = true
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60).isActive = true
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+        } else {
+            tableView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor, constant: 0).isActive = true
+            tableView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor, constant: 0).isActive = true
+            tableView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 60).isActive = true
+            tableView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: 0).isActive = true
+        }
+        
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         secondLoad = true
-        self.tableView.reloadData()
+        tableView.backgroundColor = UIColor.clear
+        tableView.reloadData()
+        applyStyle()
+        setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    func applyStyle() {
+        self.view.backgroundColor = skin?.navigationBarSkin.barTintColor.uiColor
         UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
     }
 
     override func viewWillDisappear(_: Bool) {
@@ -68,75 +110,48 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
     }
 
     func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let section = DrawerSection(rawValue: section) else { return 0 }
         switch section {
-        case DrawerSection.WelcomeSection.rawValue:
+        case .WelcomeSection:
             return 1
-        case DrawerSection.NavigationSection.rawValue:
-            return 7
-
-        default:
+        case .NavigationSection:
+            return NavigationSectionRow.allRows.count
+        case .LogoutSection:
             return 0
         }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let CellIdentifier = "Cell"
-
-        var cell: SideDrawerTableViewCell! = tableView.dequeueReusableCell(withIdentifier: CellIdentifier) as? SideDrawerTableViewCell
-
-        if cell == nil {
-            cell = SideDrawerTableViewCell(style: .default, reuseIdentifier: CellIdentifier)
+        guard let section = DrawerSection(rawValue: indexPath.section) else {
+            return UITableViewCell()
         }
-
-        switch indexPath.section
-        {
-        case DrawerSection.WelcomeSection.rawValue:
-            switch indexPath.row
-            {
-            case 0:
-                let image: UIImage = UIImage(named: "logo2")!
-                let imageView = UIImageView(image: image)
-                imageView.frame = CGRect(x: 30, y: 30, width: 90, height: 90)
-                cell.addSubview(imageView)
-                cell.isUserInteractionEnabled = false
-            default:
-                break
-            }
-            break
-        case DrawerSection.NavigationSection.rawValue:
+        switch section {
+        case .WelcomeSection:
             switch indexPath.row {
             case 0:
-                cell.textLabel?.attributedText = setNavigationSection(index: indexPath.row)
-            case 1:
-                addLineImage(cell: cell)
-            case 2:
-                cell.textLabel?.attributedText = setNavigationSection(index: indexPath.row)
-            case 3:
-                addLineImage(cell: cell)
-            case 4:
-                cell.textLabel?.attributedText = setNavigationSection(index: indexPath.row)
-            case 5:
-                addLineImage(cell: cell)
-            case 6:
-                cell.textLabel?.attributedText = setNavigationSection(index: indexPath.row)
+                guard let logoCell = tableView.dequeueReusableCell(withIdentifier: "SideDrawerLogosTableviewCell") as? SideDrawerLogosTableviewCell else {
+                    return UITableViewCell()
+                }
+                let workfinderLogo = UIImage(named: "logo2")
+                let partnerLogo = F4SPartnersModel.sharedInstance.selectedPartner?.image
+                let logos: [UIImage?] = [workfinderLogo, partnerLogo]
+                logoCell.setLogos(logos)
+                logoCell.isUserInteractionEnabled = false
+                logoCell.lineImageView.isHidden = true
+                return logoCell
             default:
-                break
+                return UITableViewCell()
             }
-            break
-        default:
-            break
+
+        case .NavigationSection:
+            guard let row = NavigationSectionRow(rawValue: indexPath.row), let cell = tableView.dequeueReusableCell(withIdentifier: "SideDrawerTableViewCell") as? SideDrawerTableViewCell else {
+                return UITableViewCell()
+            }
+            cell.textLabel?.text = row.title
+            return cell
+        case .LogoutSection:
+            return UITableViewCell()
         }
-        return cell
-    }
-    
-    func addLineImage(cell: SideDrawerTableViewCell) {
-        guard secondLoad != false else {
-            return
-        }
-        let lineImage = UIImageView()
-        lineImage.frame = CGRect(x: 30, y: cell.bounds.maxY, width: cell.frame.size.width, height: cell.frame.size.height)
-        lineImage.backgroundColor = UIColor.white.withAlphaComponent(0.3)
-        cell.addSubview(lineImage)
     }
 
     // MARK: - UITableViewDelegate
@@ -149,51 +164,45 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
     }
     
     func tableView(_: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.section {
-        case DrawerSection.WelcomeSection.rawValue:
+        guard let section = DrawerSection(rawValue: indexPath.section) else { return normalCellHeight }
+        switch section {
+        case .WelcomeSection:
             return welcomeCellHeight
-        case DrawerSection.NavigationSection.rawValue:
-            switch indexPath.row {
-            case 1,3,5:
-                return smallCellHeight
-            default:
-                return normalCellHeight
-            }
-            
-        case DrawerSection.LogoutSection.rawValue:
+        case .NavigationSection:
             return normalCellHeight
-            
-        default:
-            return 0
+        case .LogoutSection:
+            return normalCellHeight
         }
     }
     
-    func tableView(_: UITableView, heightForFooterInSection _: Int) -> CGFloat {
-        return 0
+    func tableView(_: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return section == 0 ? 30 : 0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        switch indexPath.section {
-        case DrawerSection.WelcomeSection.rawValue:
+        guard let drawerSection = DrawerSection(rawValue: indexPath.section) else { return }
+        switch drawerSection {
+        case DrawerSection.WelcomeSection:
             break
-        case DrawerSection.NavigationSection.rawValue:
+        case DrawerSection.NavigationSection:
             if let navigCtrl = self.navigationController {
-                switch indexPath.row
+                guard let navigationRow = NavigationSectionRow(rawValue: indexPath.row) else {
+                    return
+                }
+                let navigationHelper = CustomNavigationHelper.sharedInstance
+                switch navigationRow
                 {
-                case 0:
-                    CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.about)
-                case 2:
-                    CustomNavigationHelper.sharedInstance.navigateToRecommendations(company: nil)
-                case 4:
-                    CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.faq)
-                case 6:
-                    CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.terms)
-                default:
-                    break
+                case .about:
+                    navigationHelper.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.about)
+                case .recommendations:
+                    navigationHelper.navigateToRecommendations(company: nil)
+                case .faq:
+                    navigationHelper.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.faq)
+                case .terms:
+                    navigationHelper.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.terms)
                 }
             }
-        default:
+        case .LogoutSection:
             break
         }
 
@@ -204,25 +213,6 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
 
 // adjust text appereance
 extension CustomMenuViewController {
-    func setNavigationSection(index: Int) -> NSMutableAttributedString {
-        var text: String = ""
-        switch index
-        {
-        case 0:
-            text = NSLocalizedString("About", comment: "Menu item providing information about Workfinder")
-        case 2:
-            text = NSLocalizedString("Your recommendations", comment: "Menu item offering the user recommendations")
-        case 4:
-            text = NSLocalizedString("FAQs", comment: "Menu item providing access to frequently asked questions")
-        case 6:
-            text = NSLocalizedString("T&Cs + Privacy Policy", comment: "Menu item providing access to terms and conditions")
-        default:
-            break
-        }
-        let attributedText: NSMutableAttributedString = NSMutableAttributedString(string: text, attributes: [NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.white), NSAttributedStringKey.font: UIFont.systemFont(ofSize: CGFloat(Style.biggerLargeTextSize), weight: UIFont.Weight.regular)])
-
-        return attributedText
-    }
 
     func setupLabels() {
         let label = UILabel()

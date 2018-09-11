@@ -19,11 +19,28 @@ public class F4SSelectDayTableViewCell: UITableViewCell {
     var delegate: F4SSelectDayTableViewCellDelegate?
     var tapRecognizer: UITapGestureRecognizer!
     
+    lazy var selectedColor = skin?.primaryButtonSkin.backgroundColor.uiColor ?? UIColor.red
+    
+    lazy var selectedTick: UIImage = {
+        let image = UIImage(named: "ui-tickcircleOn-icon")?.withRenderingMode(.alwaysTemplate) ?? UIImage()
+        return image
+    }()
+    
+    lazy var deselectedImage: UIImage = {
+        return UIImage(named: "ui-tickcircleOff-icon")  ?? UIImage()
+    }()
+    
     public var dayHourSelection: F4SDayAndHourSelection! {
         didSet {
             dayNameLabel.text = dayHourSelection.dayOfWeek.longSymbol
-            tickImage.image = dayHourSelection.dayIsSelected ? #imageLiteral(resourceName: "roundedCheckboxPink") : #imageLiteral(resourceName: "roundedCheckboxGREY")
-            hoursDropdownLabel.text = dayHourSelection.hoursType.rawValue
+            
+            if dayHourSelection.dayIsSelected {
+                tickImage.image = selectedTick
+                tickImage.tintColor =  selectedColor
+            } else {
+                tickImage.image = deselectedImage
+            }
+            hoursDropdownLabel.text = dayHourSelection.hoursType.titledDisplayText
             enable(dayHourSelection.dayIsSelected)
         }
     }

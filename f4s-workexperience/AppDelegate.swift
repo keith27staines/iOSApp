@@ -34,6 +34,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return F4SUserService()
     }()
     
+    lazy var skins: Skins = Skin.loadSkins()
+    
+    lazy var skin: Skin? = {
+        let workfinderSkin = skins["workfinder"]
+        guard let partner = F4SPartnersModel.sharedInstance.selectedPartner else {
+            return workfinderSkin
+        }
+        let partnerSkinKey = partner.name.lowercased()
+        return skins[partnerSkinKey] ?? workfinderSkin
+    }()
+    
     // MARK:- Application events
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         if ProcessInfo.processInfo.arguments.contains("isUnitTesting") {
@@ -267,21 +278,11 @@ extension AppDelegate {
                 assertionFailure("The root view controller is not an OnboardingViewController")
                 return
             }
+            UserDefaults.standard.set(false, forKey: UserDefaultsKeys.shouldLoadTimeline)
             _ = ctrl.view
             ctrl.hideOnboardingControls = false
         } else {
-            let shouldLoadTimelineValue = UserDefaults.standard.value(forKey: UserDefaultsKeys.shouldLoadTimeline)
-            var shouldLoadTimeline: Bool = false
-            if let value = shouldLoadTimelineValue {
-                shouldLoadTimeline = value as? Bool ?? false
-            }
-            let navigationHelper = CustomNavigationHelper.sharedInstance
-            if shouldLoadTimeline {
-                navigationHelper.navigateToTimeline(threadUuid: nil)
-            } else {
-                navigationHelper.navigateToMap()
-                navigationHelper.mapViewController.shouldRequestAuthorization = false
-            }
+            CustomNavigationHelper.sharedInstance.navigateToMostAppropriateInitialTab()
         }
     }
     
@@ -314,4 +315,19 @@ extension AppDelegate {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -18,11 +18,21 @@ public struct F4SCompanyDocument : Codable {
     }
     
     // Encodable properties
+    var uuid: F4SUUID?
     var name: String
     var state: State
     var docType: String?
     var requestedCount: Int?
     var urlString: String?
+    
+    var isRequestable: Bool {
+        return state == F4SCompanyDocument.State.unrequested ||
+            state == F4SCompanyDocument.State.requested
+    }
+    
+    var isViewable: Bool {
+        return state == .available && url != nil
+    }
     
     // Non-encodable properties
     var userIsRequesting: Bool = false
@@ -33,7 +43,30 @@ public struct F4SCompanyDocument : Codable {
         return URL(string: urlString)
     }
     
-    public init(name: String, status: State, docType: String, requestedCount: Int? = 0, urlString: String? = nil) {
+    var providedNameOrDefaultName: String {
+        return name.isEmpty ? F4SCompanyDocument.defaultNameForType(type: docType) : name
+    }
+    public init(documentType: String) {
+        self.docType = documentType
+        self.state = .unrequested
+        self.name = F4SCompanyDocument.defaultNameForType(type: documentType)
+        self.requestedCount = 0
+        self.urlString = nil
+    }
+    
+    static func defaultNameForType(type: String?) -> String {
+        switch type{
+        case "ELC":
+            return "Employer's liability certificate"
+        case "SGC":
+            return "Safeguarding certificate"
+        default:
+            return type ?? "unknown"
+        }
+    }
+    
+    public init(uuid: F4SUUID, name: String, status: State, docType: String, requestedCount: Int? = 0, urlString: String? = nil) {
+        self.uuid = uuid
         self.name = name
         self.state = status
         self.requestedCount = requestedCount
@@ -47,57 +80,25 @@ public struct F4SCompanyDocument : Codable {
 extension F4SCompanyDocument {
 
     private enum CodingKeys: String, CodingKey {
+        case uuid
         case name
         case state
-        case docType = "document_type"
-        case requestedCount = "requested_count"
+        case docType = "doc_type"
+        case requestedCount = "request_count"
         case urlString = "url"
     }
 }
 
 public struct F4SGetCompanyDocuments: Decodable {
     public var companyUuid: F4SUUID?
-    public var requestedDocuments: F4SCompanyDocuments?
+    public var documents: F4SCompanyDocuments?
     public var possibleDocumentTypes: [String]?
-    
-    public var documents: F4SCompanyDocuments {
-        var docs = F4SCompanyDocuments()
-        // Create placeholder documents for each of the possible document types
-        guard let docTypes = possibleDocumentTypes else { return docs }
-        for type in docTypes {
-            let defaultName = F4SGetCompanyDocuments.defaultNameForType(type: type)
-            let doc = F4SCompanyDocument(name: defaultName, status: .unrequested, docType: type)
-            docs.append(doc)
-        }
-        guard let requestedDocuments = self.requestedDocuments else { return docs }
-        
-        // update the placeholder documents with the information returned in requestedDocuments
-        for requestedDocument in requestedDocuments {
-            if let matchingIndex = docs.index(where: { (doc) -> Bool in
-                doc.docType == requestedDocument.docType
-            }) {
-                docs[matchingIndex] = requestedDocument
-            }
-        }
-        return docs
-    }
-    
-    static func defaultNameForType(type: String) -> String {
-        switch type{
-        case "ELC":
-            return "Employer's liability certificate"
-        case "SGC":
-            return "Safeguarding certificate"
-        default:
-            return type
-        }
-    }
 }
 
 extension F4SGetCompanyDocuments {
     private enum CodingKeys: String, CodingKey {
         case companyUuid = "uuid"
-        case requestedDocuments = "requested_documents"
+        case documents = "requested_documents"
         case possibleDocumentTypes = "possible_doc_types"
     }
 }
@@ -183,18 +184,49 @@ public class F4SCompanyDocumentsModel {
         return F4SCompanyDocumentService()
     }()
     
-    public func getDocuments(completion: @escaping (F4SNetworkResult<F4SCompanyDocuments>)->()) {
+    public func getDocuments(age: Int, completion: @escaping (F4SNetworkResult<F4SCompanyDocuments>)->()) {
         service.getDocuments(companyUuid: companyUuid) { [weak self] result in
             DispatchQueue.main.async {
-                guard let strongSelf = self else { return }
+                guard let this = self else { return }
                 switch result {
                 case .error(let error):
                     completion(F4SNetworkResult.error(error))
                 case .success( let getDocumentsStructure ):
-                    strongSelf.documents = getDocumentsStructure.documents
-                    completion(F4SNetworkResult.success(strongSelf.documents))
+                    let documents = this.buildDocumentsFromGetDocumentsResult(age: age, result: getDocumentsStructure)
+                    this.documents = documents
+                    completion(F4SNetworkResult.success(documents))
                 }
             }
         }
+    }
+    
+    private func buildDocumentsFromGetDocumentsResult(age: Int, result: F4SGetCompanyDocuments) -> F4SCompanyDocuments {
+        var documents = [F4SCompanyDocument]()
+        guard let documentTypes = result.possibleDocumentTypes else {
+            return documents
+        }
+        
+        // Create array of placeholder documents from the possible document types
+        let placeholderDocuments: [F4SCompanyDocument] = documentTypes.map({ (docType) -> F4SCompanyDocument in
+            return F4SCompanyDocument(documentType: docType)
+        })
+        
+        // Populate the placeholders with real documents that match the document type of the placeholder
+        for placeholder in placeholderDocuments {
+            if let matchingDocument = result.documents?.filter({ (possibleMatch) -> Bool in
+                possibleMatch.docType == placeholder.docType
+            }).first {
+                documents.append(matchingDocument)
+            } else {
+                documents.append(placeholder)
+            }
+        }
+        // filter out SGC document if user is 18 or older
+        if age >= 18 {
+            documents = documents.filter({ (document) -> Bool in
+                return (document.docType != "SGC")
+            })
+        }
+        return documents
     }
 }

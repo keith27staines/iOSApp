@@ -49,7 +49,7 @@ public struct F4SAvailabilityPeriod {
         // update model with persisted data
         for dayHourSelection in daysHoursModel.allDays {
             let symbol = dayHourSelection.dayOfWeek.twoLetterSymbol
-            guard let jsonDay = firstPeriod.day_time_info.filter({ (dayTime) -> Bool in
+            guard let jsonDay = firstPeriod.day_time_info?.filter({ (dayTime) -> Bool in
                 return dayTime.day == symbol
             }).first else {
                 daysHoursModel.selectDays(value: false) { (dh) -> Bool in

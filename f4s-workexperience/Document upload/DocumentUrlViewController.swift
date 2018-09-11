@@ -56,22 +56,23 @@ class DocumentUrlViewController: UIViewController {
     }
     
     func applyStyle() {
-        F4SButtonStyler.apply(style: .primary, button: continueButton)
+        Skinner().apply(buttonSkin: skin?.primaryButtonSkin, to: continueButton)
     }
     
     @IBAction func continueButtonTapped(_ sender: Any) {
+        continueButton.isEnabled = false
         continueAsyncWorker()
     }
     
     func continueAsyncWorker() {
-        DispatchQueue.main.async { [weak self] in
+        documentUrlModel.putDocumentsUrls { [weak self] (success) in
             guard let strongSelf = self else { return }
-            strongSelf.continueButton.isEnabled = false
-            strongSelf.documentUrlModel.putDocumentsUrls { [weak self] (success) in
+            DispatchQueue.main.async {
+                strongSelf.continueButton.isEnabled = true
                 if success {
                     strongSelf.completion?(strongSelf.applicationContext)
                 } else {
-                    self?.displayTryAgain(completion: strongSelf.continueAsyncWorker)
+                    strongSelf.displayTryAgain(completion: strongSelf.continueAsyncWorker)
                 }
             }
         }

@@ -21,6 +21,8 @@ public enum SystemF4SUUID : F4SUUID {
 // MARK:-
 public struct MapModel {
     
+    var clusterColor: UIColor
+    
     /// All company pins that can ever be obtained from this model
     public let allCompanyPins: F4SCompanyPinSet
     
@@ -55,9 +57,10 @@ public struct MapModel {
     
     public init(allCompanyPinsSet: F4SCompanyPinSet,
                 allInterests: [Int64: F4SInterest],
-                filtereredBy interestsSet: F4SInterestSet) {
+                filtereredBy interestsSet: F4SInterestSet,
+                clusterColor: UIColor) {
         self.allCompanyPins = allCompanyPinsSet
-
+        self.clusterColor = clusterColor
         let filteredCompanyPinList: [F4SCompanyPin]
         let selectedInterestIdSet: F4SInterestIdSet = InterestsModel.interestIdSet(from: interestsSet)
         if !interestsSet.isEmpty {
@@ -79,9 +82,11 @@ public struct MapModel {
     /// - parameter allCompanies: All companies that might ever need to be presented on the map represented by this map model
     public init(allCompanies:[Company],
                 allInterests: [Int64:F4SInterest],
-                selectedInterests: F4SInterestSet?) {
+                selectedInterests: F4SInterestSet?,
+                clusterColor: UIColor) {
+        self.clusterColor = clusterColor
         let companyPinsList = allCompanies.map { (company) -> F4SCompanyPin in
-            return F4SCompanyPin(company: company)
+            return F4SCompanyPin(company: company, tintColor: clusterColor)
         }
         
         let companyPinSet = F4SCompanyPinSet(companyPinsList)

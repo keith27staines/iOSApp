@@ -20,19 +20,58 @@
 
 import UIKit
 
+class SideDrawerLogosTableviewCell: SideDrawerTableViewCell {
+    
+    lazy var imageStack: UIStackView = {
+        let imageStack = UIStackView()
+        imageStack.axis = .horizontal
+        imageStack.spacing = 40
+        imageStack.distribution = .fillEqually
+        imageStack.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(imageStack)
+        imageStack.topAnchor.constraint(equalTo: topAnchor, constant: 12).isActive = true
+        imageStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12).isActive = true
+        imageStack.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
+        imageStack.rightAnchor.constraint(equalTo: rightAnchor, constant: -20).isActive = true
+        return imageStack
+    }()
+    
+    private var imageViews = [UIImageView]()
+    
+    func setLogos(_ images: [UIImage?]) {
+        imageViews.forEach { (imageView) in
+            imageView.removeFromSuperview()
+        }
+        imageViews.removeAll()
+        images.forEach { (image) in
+            if let image = image {
+                let imageView = UIImageView(image: image)
+                imageView.contentMode = .scaleAspectFit
+                imageViews.append(imageView)
+                imageStack.addArrangedSubview(imageView)
+            }
+        }
+    }
+}
+
 class SideDrawerTableViewCell: TableViewCell {
 
-    var lineImageView: UIImageView!
-    var currentItemImageView: UIImageView!
+    lazy var lineImageView: UIImageView = {
+        let lineImageView = UIImageView()
+        lineImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(lineImageView)
+        lineImageView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        let textLabelLeft = self.textLabel?.leftAnchor ?? self.leftAnchor
+        let textLabelRight = self.textLabel?.rightAnchor ?? self.rightAnchor
+        lineImageView.leftAnchor.constraint(equalTo: textLabelLeft, constant: 0).isActive = true
+        lineImageView.rightAnchor.constraint(equalTo: textLabelRight, constant: 0).isActive = true
+        lineImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
+        return lineImageView
+    }()
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.lineImageView = UIImageView()
-        self.addSubview(self.lineImageView)
-        self.currentItemImageView = UIImageView()
-        self.addSubview(self.currentItemImageView)
         self.lineImageView.bringSubview(toFront: self)
-        self.currentItemImageView.bringSubview(toFront: self)
         self.commonSetup()
     }
 
@@ -45,23 +84,13 @@ class SideDrawerTableViewCell: TableViewCell {
         self.backgroundColor = UIColor.clear
         let selectionView = UIView()
         selectionView.backgroundColor = UIColor(netHex: Colors.waterBlue)
-        selectionView.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: 82)
-        selectionView.center = self.center
         self.selectedBackgroundView = selectionView
-
-        self.textLabel?.textColor = UIColor(netHex: Colors.white)
+        self.textLabel?.textColor = RGBA.white.uiColor
+        self.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         self.imageView?.bounds = CGRect(x: 0, y: 0, width: 40, height: 40)
-
-        self.lineImageView.backgroundColor = UIColor.clear
+        var color = RGBA.white
+        color.alpha = 0.5
+        self.lineImageView.backgroundColor = color.uiColor
     }
 
-    override func updateContentForNewContentSize() {
-        self.textLabel?.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        self.selectedBackgroundView?.frame = CGRect(x: 0, y: 0.5, width: self.bounds.width, height: 82.5)
-    }
 }

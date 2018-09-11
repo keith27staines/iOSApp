@@ -18,7 +18,6 @@ class OnboardingViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var gradientView: UIView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var enterLocationButton: UIButton!
     @IBOutlet weak var enableLocationButton: UIButton!
@@ -32,6 +31,7 @@ class OnboardingViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        view.backgroundColor = splashColor
         adjustNavigationBar()
     }
     
@@ -52,9 +52,7 @@ class OnboardingViewController: UIViewController {
 // MARK: - adjust appereance
 extension OnboardingViewController {
     func adjustNavigationBar() {
-        UIApplication.shared.statusBarStyle = .lightContent
         navigationController?.setNavigationBarHidden(true, animated: false)
-        navigationController?.navigationBar.barTintColor = UIColor(netHex: Colors.black)
     }
 
     func setUpButtons() {
@@ -64,33 +62,29 @@ extension OnboardingViewController {
         enableLocationButton.isHidden = hideOnboardingControls
         enterLocationButton.isHidden = hideOnboardingControls
         
-        enableLocationButton.setAttributedTitle(NSAttributedString(string: enableLocationText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.mediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.black]), for: .normal)
-        enterLocationButton.setAttributedTitle(NSAttributedString(string: enterLocationText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.mediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.white]), for: .normal)
-
-        enableLocationButton.backgroundColor = UIColor.white
-        enterLocationButton.backgroundColor = UIColor.clear
-
-        enableLocationButton.layer.cornerRadius = 10
-        enterLocationButton.layer.cornerRadius = 10
-
-        enterLocationButton.layer.borderColor = UIColor.white.cgColor
-        enterLocationButton.layer.borderWidth = 0.5
+        enableLocationButton.setTitle(enableLocationText, for: .normal)
+        enterLocationButton.setTitle(enterLocationText, for: .normal)
+        let skinner = Skinner()
+        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: enableLocationButton)
+        skinner.apply(buttonSkin: skin?.ghostButtonSkin, to: enterLocationButton)
     }
 
     func setupLabels() {
-        let descriptionText = NSLocalizedString("Helping you find work", comment: "")
+        let descriptionText: String
+        switch Config.environment {
+        case .staging:
+            descriptionText = NSLocalizedString("STAGING", comment: "")
+        case .production:
+            descriptionText = NSLocalizedString("Helping you find work", comment: "")
+        }
         descriptionLabel.attributedText = NSAttributedString(string: descriptionText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.hugeTextSize, weight: UIFont.Weight.thin), NSAttributedStringKey.foregroundColor: UIColor.white])
     }
 
     func setupAppearance() {
+        setNeedsStatusBarAppearanceUpdate()
         UIApplication.shared.statusBarStyle = .lightContent
-        switch Config.environment {
-        case .staging:
-            view.backgroundColor = WorkfinderColor.stagingGold
-        case .production:
-            _ = UIView.gradient(view: gradientView, colorTop: UIColor(netHex: Colors.blueGradientTop).cgColor, colorBottom: UIColor(netHex: Colors.BlueGradientBottom).cgColor)
-        }
-
+        styleNavigationController()
+        view.backgroundColor = RGBA.workfinderGreen.uiColor
         view.layoutSubviews()
         setUpButtons()
         setupLabels()
@@ -100,10 +94,18 @@ extension OnboardingViewController {
 // MARK: - user interraction
 extension OnboardingViewController {
     @IBAction func enterLocationButton(_: AnyObject) {
-        CustomNavigationHelper.sharedInstance.completeOnboarding(mapShouldRequestLocation: false)
+        enterLocationButton.isEnabled = false
+        DispatchQueue.main.async {
+            CustomNavigationHelper.sharedInstance.completeOnboarding(mapShouldRequestLocation: false)
+        }
+
     }
 
     @IBAction func enableLocationButton(_: AnyObject) {
-        CustomNavigationHelper.sharedInstance.completeOnboarding(mapShouldRequestLocation: true)
+        enterLocationButton.isEnabled = false
+        DispatchQueue.main.async {
+            CustomNavigationHelper.sharedInstance.completeOnboarding(mapShouldRequestLocation: true)
+        }
+        
     }
 }

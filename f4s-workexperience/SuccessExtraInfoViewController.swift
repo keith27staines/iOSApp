@@ -40,9 +40,9 @@ class SuccessExtraInfoViewController: UIViewController {
 extension SuccessExtraInfoViewController {
     
     func applyStyle() {
-        F4SButtonStyler.apply(style: .primary, button: self.timelineButton)
-        F4SButtonStyler.apply(style: .primary, button: self.viewMapButton)
-        F4SButtonStyler.apply(style: .secondary, button: self.recommendationsButton)
+        let skinner = Skinner()
+        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: timelineButton)
+        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: viewMapButton)
     }
 
     func getHeight() -> CGFloat {

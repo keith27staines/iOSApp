@@ -127,8 +127,9 @@ class ExtraInfoViewController: UIViewController {
     }
     
     func applyStyle() {
-        F4SButtonStyler.apply(style: .primary, button: self.exploreMapButton)
-        F4SButtonStyler.apply(style: .primary, button: self.completeExtraInfoButton)
+        let skinner = Skinner()
+        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: exploreMapButton)
+        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: completeExtraInfoButton)
     }
     
 }
@@ -268,7 +269,7 @@ extension ExtraInfoViewController {
         let toolBar = UIToolbar()
         toolBar.barStyle = .default
         toolBar.isTranslucent = true
-        toolBar.tintColor = UIColor(netHex: Colors.mediumGreen)
+        toolBar.tintColor = skin?.primaryButtonSkin.backgroundColor.uiColor
         toolBar.sizeToFit()
         
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonTouched))

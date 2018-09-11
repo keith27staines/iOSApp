@@ -95,12 +95,18 @@ public class F4SPartnersModel {
         let friend = F4SPartner(uuid: "1c72eb94-538c-4a39-b0db-20a9f8269d35", name: "My Friend")
         var nominet = F4SPartner(uuid: "13639d44-5111-45c4-ac21-014bedac20da", name: "Nominet Trust")
         nominet.imageName = "partnerLogoNominet"
-        
         addOrReplacePartner(nominet)
+        // includeNCSPartner()
         addOrReplacePartner(parent)
         addOrReplacePartner(school)
         addOrReplacePartner(friend)
         addOrReplacePartner(F4SPartner.partnerProvidedLater)
+    }
+    
+    func includeNCSPartner() {
+        var ncs = F4SPartner(uuid: ncsUID, name: "NCS")
+        ncs.imageName = "partnerLogoNCS"
+        addOrReplacePartner(ncs)
     }
     
     /// Adds the specified partner to the local model if it exists in the model

@@ -42,6 +42,16 @@ class CustomNavigationHelper {
         }
     }
     
+    public func navigateToMostAppropriateInitialTab() {
+        let shouldLoadTimeline = UserDefaults.standard.value(forKey: UserDefaultsKeys.shouldLoadTimeline) as? Bool ?? false
+        if shouldLoadTimeline {
+            navigateToTimeline(threadUuid: nil)
+        } else {
+            navigateToMap()
+            mapViewController.shouldRequestAuthorization = false
+        }
+    }
+    
     public func navigateToTimeline(threadUuid: F4SUUID? = nil) {
         closeMenu { [weak self] (success) in
             self?.tabBar.selectedIndex = TabIndex.timeline.rawValue
@@ -157,9 +167,7 @@ class CustomNavigationHelper {
         let timelineStoryboard = UIStoryboard(name: "TimelineView", bundle: nil)
         timelineViewController = timelineStoryboard.instantiateViewController(withIdentifier: "timelineViewCtrl") as! TimelineViewController
         timelineViewController.threadUuid = threadUUID
-        var timelineBarItem = UITabBarItem(title: "", image: UIImage(named: "timelineIconUnselected")?.withRenderingMode(.alwaysOriginal),
-                                           selectedImage: UIImage(named: "timelineIcon")?.withRenderingMode(.alwaysOriginal))
-        timelineBarItem = timelineBarItem.tabBarItemShowingOnlyImage()
+        let timelineBarItem = UITabBarItem(title: "Timeline", image: UIImage(named: "ui-timeline-icon")?.withRenderingMode(.alwaysTemplate), selectedImage: nil)
         timelineNavigationController = RotationAwareNavigationController(rootViewController: timelineViewController)
         timelineNavigationController.tabBarItem = timelineBarItem
     }
@@ -167,9 +175,8 @@ class CustomNavigationHelper {
     private func createFavouritesNavigationController() {
         let favouriteStoryboard = UIStoryboard(name: "Favourite", bundle: nil)
         favouritesViewController = favouriteStoryboard.instantiateViewController(withIdentifier: "FavouriteViewCtrl") as! FavouriteViewController
-        var favouriteBarItem = UITabBarItem(title: "", image: UIImage(named: "favouriteIconUnselected")?.withRenderingMode(.alwaysOriginal),
-                                            selectedImage: UIImage(named: "favouriteIcon")?.withRenderingMode(.alwaysOriginal))
-        favouriteBarItem = favouriteBarItem.tabBarItemShowingOnlyImage()
+        let favouriteBarItem = UITabBarItem(title: "Favourites", image: UIImage(named: "favouriteIcon")?.withRenderingMode(.alwaysTemplate),
+                                            selectedImage: nil)
         favouriteNavigationController = RotationAwareNavigationController(rootViewController: favouritesViewController)
         favouriteNavigationController.tabBarItem = favouriteBarItem
     }
@@ -180,9 +187,8 @@ class CustomNavigationHelper {
         mapNavigationController = RotationAwareNavigationController(rootViewController: mapViewController)
         mapNavigationController.evo_drawerController?.openDrawerGestureModeMask = .init(rawValue: 0)
         mapViewController.shouldRequestAuthorization = shouldRequestAuthorization
-        var mapBarItem = UITabBarItem(title: "", image: UIImage(named: "mapIconUnselected")?.withRenderingMode(.alwaysOriginal),
-                                      selectedImage: UIImage(named: "mapIcon")?.withRenderingMode(.alwaysOriginal))
-        mapBarItem = mapBarItem.tabBarItemShowingOnlyImage()
+        let mapBarItem = UITabBarItem(title: "Map", image: UIImage(named: "mapIcon")?.withRenderingMode(.alwaysTemplate),
+                                      selectedImage: nil)
         mapNavigationController.tabBarItem = mapBarItem
     }
 

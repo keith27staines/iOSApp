@@ -59,7 +59,7 @@ class MessageContainerViewController: UIViewController {
         }
         actionButtonHeightConstraint.constant = 0.0
         actionButton.isEnabled = false
-        F4SButtonStyler.apply(style: .primary, button: actionButton)
+        Skinner().apply(buttonSkin: skin?.primaryButtonSkin, to: actionButton)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -334,21 +334,15 @@ extension MessageContainerViewController {
 // MARK: - navigation
 extension MessageContainerViewController {
     func setNavigationBar() {
-        navigationController?.navigationBar.barTintColor = UIColor(netHex: Colors.azure)
-        navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        
-        let showCompanyButton = UIBarButtonItem(image: UIImage(named: "information"), style: UIBarButtonItemStyle.done, target: self, action: #selector(showCompanyDetailsView))
+        let showCompanyButton = UIBarButtonItem(title: NSLocalizedString("Company", comment: "Title of a button that links to a company info page"), style: UIBarButtonItemStyle.done, target: self, action: #selector(showCompanyDetailsView))
+        //let showCompanyButton = UIBarButtonItem(image: UIImage(named: "information")?.withRenderingMode(.alwaysTemplate), style: UIBarButtonItemStyle.done, target: self, action: #selector(showCompanyDetailsView))
         navigationItem.rightBarButtonItem = showCompanyButton
         navigationItem.title = "Messages"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        styleNavigationController()
     }
     
     @objc func showCompanyDetailsView() {
-        if let companyUrl = self.company?.companyUrl, let navigCtrl = self.navigationController {
-            CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.company, url: companyUrl)
-        }
+        guard let company = self.company else { return }
+        CustomNavigationHelper.sharedInstance.presentCompanyDetailsPopover(parentCtrl: self, company: company)
     }
 }

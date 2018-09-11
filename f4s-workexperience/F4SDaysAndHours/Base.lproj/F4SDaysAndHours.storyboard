@@ -115,14 +115,14 @@
                                     <constraint firstItem="tmG-3x-NEU" firstAttribute="top" secondItem="Eef-MV-QbO" secondAttribute="top" priority="750" constant="8" id="mtD-Oq-rAT"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="54" translatesAutoresizingMaskIntoConstraints="NO" id="EZ5-PC-nQF">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="EZ5-PC-nQF">
                                 <rect key="frame" x="20" y="138" width="335" height="30"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="zhb-hr-K5C">
-                                        <rect key="frame" x="0.0" y="0.0" width="227.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="248.5" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VNW-SC-Hdm">
-                                                <rect key="frame" x="0.0" y="0.0" width="103.5" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="114.5" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title=" - Weekdays"/>
                                                 <connections>
@@ -130,7 +130,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="djA-Rl-sGK">
-                                                <rect key="frame" x="123.5" y="0.0" width="104" height="30"/>
+                                                <rect key="frame" x="134.5" y="0.0" width="114" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="+ Weekends"/>
                                                 <connections>
@@ -139,8 +139,8 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZVp-nk-LHR">
-                                        <rect key="frame" x="281.5" y="0.0" width="53.5" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZVp-nk-LHR">
+                                        <rect key="frame" x="278.5" y="0.0" width="56.5" height="30"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Clear"/>
                                         <connections>
@@ -249,7 +249,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u8O-Rz-BYh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1075.5" y="1330"/>
+            <point key="canvasLocation" x="1076" y="1257"/>
         </scene>
     </scenes>
     <resources>

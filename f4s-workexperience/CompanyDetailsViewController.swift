@@ -63,13 +63,17 @@ class CompanyDetailsViewController: UIViewController {
         setupMap()
         loadCompany()
         loadDocuments()
+        applyStyle()
+    }
+    
+    func applyStyle() {
+        Skinner().apply(navigationBarSkin: NavigationBarSkin.whiteBarBlackItems, to: self)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: false)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidRegisterForRemoteNotificationsNotification(_:)), name: NSNotification.Name(rawValue: "ApplicationDidRegisterForRemoteNotificationsNotification"), object: nil)
-        styleNavigationController(titleColor: UIColor.black, backgroundColor: UIColor.white, tintColor: UIColor.black, useLightStatusBar: false)
+        
     }
     
     lazy var companyDocumentsModel: F4SCompanyDocumentsModel = {
@@ -102,7 +106,7 @@ class CompanyDetailsViewController: UIViewController {
     }
     
     func loadDocuments() {
-        companyDocumentsModel.getDocuments(completion: { [weak self] (result) in
+        companyDocumentsModel.getDocuments(age:0, completion: { [weak self] (result) in
             guard let strongSelf = self else { return }
             DispatchQueue.main.async {
                 switch result {
@@ -115,6 +119,7 @@ class CompanyDetailsViewController: UIViewController {
                         MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf, cancelHandler: nil, retryHandler: nil)
                     }
                 case .success(_):
+                   
                     strongSelf.tableView.beginUpdates()
                     let indexPaths = [IndexPath(row: CellIndex.documentsCell1.rawValue, section: 0),
                                       IndexPath(row: CellIndex.documentsCell2.rawValue, section: 0)]
@@ -339,8 +344,6 @@ extension CompanyDetailsViewController {
                         PlacementDBOperations.sharedInstance.savePlacement(placement: placement)
                         strongSelf.applyButton.setTitle(NSLocalizedString("Finish Application", comment: ""), for: .normal)
                         let applyText = NSLocalizedString("Finish Application", comment: "")
-                        strongSelf.applyButton.setBackgroundColor(color: UIColor(netHex: Colors.orangeNormal), forUIControlState: .normal)
-                        strongSelf.applyButton.setBackgroundColor(color: UIColor(netHex: Colors.orangeActive), forUIControlState: .highlighted)
                         strongSelf.applyButton.setAttributedTitle(NSAttributedString(string: applyText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.white]), for: .normal)
                         
                         if UIApplication.shared.isRegisteredForRemoteNotifications {
@@ -376,8 +379,7 @@ extension CompanyDetailsViewController {
         guard let company = self.company else {
             return
         }
-        applyButton.layer.masksToBounds = true
-
+        Skinner().apply(buttonSkin: skin?.primaryButtonSkin, to: applyButton)
         var applyText: String = ""
         if let placement = PlacementDBOperations.sharedInstance.getPlacementsForCurrentUserAndCompany(companyUuid: company.uuid) {
             self.placement = placement
@@ -386,35 +388,25 @@ extension CompanyDetailsViewController {
             {
             case .inProgress:
                 applyText = NSLocalizedString("Finish Application", comment: "")
-                applyButton.setBackgroundColor(color: UIColor(netHex: Colors.orangeNormal), forUIControlState: .normal)
-                applyButton.setBackgroundColor(color: UIColor(netHex: Colors.orangeActive), forUIControlState: .highlighted)
                 break
             default:
                 // applied
                 applyText = NSLocalizedString("Applied", comment: "")
-                applyButton.backgroundColor = UIColor(netHex: Colors.mediumGreen).withAlphaComponent(0.5)
-                applyButton.isUserInteractionEnabled = false
+                applyButton.isEnabled = false
                 break
             }
         } else {
             // no placement was create
             // show apply button
             applyText = NSLocalizedString("Apply", comment: "")
-            applyButton.setBackgroundColor(color: UIColor(netHex: Colors.mediumGreen), forUIControlState: .normal)
-            applyButton.setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)
         }
-        applyButton.layer.cornerRadius = 10
-        applyButton.setAttributedTitle(NSAttributedString(string: applyText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.white]), for: .normal)
-        applyButton.setTitleColor(UIColor.white, for: .normal)
-        applyButton.setTitleColor(UIColor.white, for: .highlighted)
-
+        applyButton.setTitle(applyText, for: .normal)
         closeButton.tintColor = UIColor.black
         shareButton.tintColor = UIColor.black
         mapButton.tintColor = UIColor.red
 
         // shortlist
-        shortlistButton.backgroundColor = UIColor(netHex: Colors.normalGray)
-        shortlistButton.layer.cornerRadius = 10
+        shortlistButton.backgroundColor = UIColor(netHex: Colors.white)
 
         setShortlistButton()
     }
@@ -427,11 +419,13 @@ extension CompanyDetailsViewController {
         shortlist = ShortlistDBOperations.sharedInstance.getShortlistForCurrentUser()
         if shortlist.contains(where: { $0.companyUuid == company.uuid }) {
             // the company is shortlisted
-            shortlistButton.setImage(UIImage(named: "shortlist"), for: .normal)
+            shortlistButton.setImage(UIImage(named: "shortlist")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            
         } else {
             // the comapny isn't shortlisted
-            shortlistButton.setImage(UIImage(named: "unshortlist"), for: .normal)
+            shortlistButton.setImage(UIImage(named: "unshortlist")?.withRenderingMode(.alwaysTemplate), for: .normal)
         }
+        shortlistButton.tintColor = RGBA.black.uiColor
     }
 
     func setupLabels() {
@@ -484,7 +478,6 @@ extension CompanyDetailsViewController {
         self.view.addSubview(popupView)
         popupView.bringSubview(toFront: self.tableView)
         popupView.alpha = 0.0
-        
         popupView.center = CGPoint(x: shortlistButton.center.x, y: popupView.center.y)
         
         UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
@@ -543,6 +536,15 @@ extension CompanyDetailsViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if
+            let documentCell = tableView.cellForRow(at: indexPath) as? CompanyDocumentTableViewCell,
+            let document = documentCell.document,
+            let _ = document.url {
+
+            let documentViewer = F4SDocumentViewer()
+            documentViewer.showCompanyDocument(documentCell.document)
+            navigationController?.pushViewController(documentViewer, animated: true)
+        }
     }
 }
 
@@ -601,6 +603,7 @@ extension CompanyDetailsViewController {
     func getTableViewCell(indexPath: IndexPath) -> UITableViewCell {
         guard let company = self.company else { return UITableViewCell() }
         let cellIndex = CellIndex(rawValue: indexPath.row)!
+        
         switch cellIndex {
         case .industryCell:
             guard
@@ -608,7 +611,7 @@ extension CompanyDetailsViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellIndex.identifier, for: indexPath) as? IndustryTableViewCell else {
                     return hiddenCell()
             }
-
+            cell.selectionStyle = .none
             cell.industryLabel.attributedText = NSAttributedString(string: company.industry, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.light), NSAttributedStringKey.foregroundColor: UIColor.black])
             return cell
             
@@ -618,6 +621,7 @@ extension CompanyDetailsViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellIndex.identifier, for: indexPath) as? RatingTableViewCell  else {
                 return hiddenCell()
             }
+            cell.selectionStyle = .none
             cell.setupStars(rating: company.rating)
             cell.starsLabel.attributedText = NSAttributedString(string: String(company.rating), attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerVerySmallTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
             return cell
@@ -628,6 +632,7 @@ extension CompanyDetailsViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellIndex.identifier, for: indexPath as IndexPath) as? CompanyOtherTableViewCell else {
                 return hiddenCell()
             }
+            cell.selectionStyle = .none
             cell.company = self.company
             return cell
 
@@ -635,6 +640,7 @@ extension CompanyDetailsViewController {
             guard let buttonsCell = tableView.dequeueReusableCell(withIdentifier: cellIndex.identifier) as? F4SSeePeopleAndAccountsTableViewCell else {
                 return UITableViewCell()
             }
+            buttonsCell.selectionStyle = .blue
             buttonsCell.leftLink = companyJson?.linkedinUrl
             buttonsCell.rightLink = companyJson?.duedilUrl
             return buttonsCell
@@ -646,53 +652,30 @@ extension CompanyDetailsViewController {
             cell.textLabel?.text = company.summary
             cell.textLabel?.numberOfLines = 0
             cell.textLabel?.lineBreakMode = .byWordWrapping
+            cell.selectionStyle = .none
             return cell
             
         case .documentsCell1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIndex.identifier) as? CompanyDocumentTableViewCell else {
                 return UITableViewCell()
             }
-            configureCell(cell: cell, for: "ELC")
+            configureDocumentCell(cell: cell, for: "ELC")
             return cell
             
         case .documentsCell2:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIndex.identifier) as? CompanyDocumentTableViewCell else {
                 return UITableViewCell()
             }
-            configureCell(cell: cell, for: "SGC")
+            configureDocumentCell(cell: cell, for: "SGC")
             return cell
         }
     }
     
-    func configureCell(cell: CompanyDocumentTableViewCell, for documentType: String) {
+    func configureDocumentCell(cell: CompanyDocumentTableViewCell, for documentType: String) {
         let document = documentforType(documentType)
-        if document != nil { cell.spinner.stopAnimating() }
-        cell.accessoryType = document?.state == .available ? .disclosureIndicator : .none
-        cell.icon.image = iconForDocument(document: document)
-        cell.documentName.text = textForDocument(document: document)
+        cell.document = document
     }
-    
-    func iconForDocument(document: F4SCompanyDocument?) -> UIImage? {
-        guard let document = document else { return nil }
-        switch document.state {
-        case .available:
-            return UIImage(named: "ui-company-upload-doc-off-icon")
-        case .requested, .unrequested:
-            return UIImage(named: "checkBlue")
-        case .unavailable:
-            return nil
-        }
-    }
-    func textForDocument(document: F4SCompanyDocument?) -> String {
-        guard let document = document else { return "" }
-        switch document.state {
-        case .available, .requested, .unrequested:
-            return document.name
-        case .unavailable:
-            return ""
-        }
-    }
-    
+
 }
 
 extension CompanyDetailsViewController : MKMapViewDelegate {

@@ -29,8 +29,9 @@ public class F4SCompanyPin : NSObject, GMUClusterItem {
     /// Returns a view for use as the pin on the map
     @objc func customMarkerView() -> UIView {
         let imageName = isFavourite ? "markerFavouriteIcon" : "markerIcon"
-        let image = UIImage(named: imageName)
+        let image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
         let view = UIImageView(image: image)
+        view.tintColor = tintColor
         return view
     }
     
@@ -51,9 +52,12 @@ public class F4SCompanyPin : NSObject, GMUClusterItem {
         self.interestIds.formUnion(interests)
     }
     
+    var tintColor: UIColor
+    
     /// Initialises a new instance from a Company
-    public init(company: Company) {
+    public init(company: Company, tintColor: UIColor) {
         self.position = CLLocationCoordinate2D(latitude: company.latitude, longitude: company.longitude)
+        self.tintColor = tintColor
         self.companyId = company.id
         self.companyUuid = company.uuid
         self.isFavourite = false

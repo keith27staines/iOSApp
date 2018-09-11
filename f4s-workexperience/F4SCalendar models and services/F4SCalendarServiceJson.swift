@@ -42,7 +42,7 @@ public struct F4SAvailabilityPeriodsJson : Codable {
 public struct F4SAvailabilityPeriodJson : Codable {
     public var start_date: String?
     public var end_date: String?
-    public var day_time_info: [F4SDayTimeInfoJson]
+    public var day_time_info: [F4SDayTimeInfoJson]?
 }
 
 /// Represents the day and time info

@@ -16,8 +16,8 @@ class F4SDaysAndHoursViewController: UIViewController {
     @IBOutlet weak var headerIcon: UIImageView!
     
     var model: F4SDaysAndHoursModel!
-    let weekDayButtonTitle = "WEEKDAYS"
-    let weekendButtonTitle = "WEEKENDS"
+    let weekDayButtonTitle = "Weekdays"
+    let weekendButtonTitle = "Weekends"
     var delegate: F4SDaysAndHoursViewControllerDelegate!
     
     @IBOutlet weak var pageHeaderView: F4SPageHeaderView!
@@ -32,7 +32,9 @@ class F4SDaysAndHoursViewController: UIViewController {
     
     @IBOutlet weak var footerLabel: UILabel!
     
-    var splashColor = UIColor(red: 72/255, green: 38/255, blue: 127/255, alpha: 1.0)
+    lazy var ghostColor: UIColor = {
+        return skin?.primaryButtonSkin.backgroundColor.uiColor ?? UIColor.blue
+    }()
     
     lazy var hoursPicker: F4SHoursPickerViewController? = {
         guard let pickerVC = self.storyboard?.instantiateViewController(withIdentifier: "HoursPicker") as? F4SHoursPickerViewController else {
@@ -85,7 +87,7 @@ class F4SDaysAndHoursViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        styleNavigationController(titleColor: UIColor.white, backgroundColor: splashColor, tintColor: UIColor.white, useLightStatusBar: true)
+        styleNavigationController()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -212,33 +214,12 @@ extension F4SDaysAndHoursViewController {
     }
     
     func styleGhostButton(button: UIButton, solid: Bool) {
-        button.layer.borderColor = splashColor.cgColor
+        button.layer.borderColor = ghostColor.cgColor
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 8
-        let titleColor = solid ? UIColor.white : splashColor
+        let titleColor = solid ? UIColor.white : ghostColor
         button.setTitleColor(titleColor, for: .normal)
-        button.layer.backgroundColor = solid ? splashColor.cgColor : UIColor.white.cgColor
-    }
-}
-
-extension UIViewController {
-    /// Style the navigation bar
-    /// - parameter titleColor: The color for the title text
-    /// - Parameter splashColor: The background color
-    /// - Parameter tintColor: The tint color for the title and buttons
-    /// - Parameter useLightStatusBar: a hint to the system to use light status bar content
-    func styleNavigationController(titleColor: UIColor, backgroundColor: UIColor, tintColor: UIColor, useLightStatusBar: Bool) {
-        guard let navigationController = self.navigationController else {
-            return
-        }
-        navigationController.navigationBar.tintColor = tintColor
-        navigationController.navigationBar.barTintColor = backgroundColor
-        navigationController.navigationBar.isTranslucent = false
-        navigationController.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:titleColor]
-        navigationController.navigationBar.barStyle =  useLightStatusBar ? .black : .default
-        navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController.navigationBar.shadowImage = UIImage()
-        navigationController.isNavigationBarHidden = false
+        button.layer.backgroundColor = solid ? ghostColor.cgColor : UIColor.white.cgColor
     }
 }
 
@@ -276,7 +257,7 @@ extension F4SDaysAndHoursViewController: F4SDisplayInformationViewControllerDele
         let mainView = self.view!
         let infoView = infoController.view!
         infoView.layer.borderColor = UIColor.darkGray.cgColor
-        infoView.layer.borderWidth = 1
+        infoView.layer.borderWidth = 1.0
         infoView.layer.cornerRadius = 8
         infoView.clipsToBounds = true
         maskView = UIView(frame: mainView.frame)
@@ -297,7 +278,7 @@ extension F4SDaysAndHoursViewController: F4SDisplayInformationViewControllerDele
         infoView.centerXAnchor.constraint(equalTo: mainView.centerXAnchor).isActive = true
         infoView.centerYAnchor.constraint(equalTo: mainView.centerYAnchor).isActive = true
         infoView.leftAnchor.constraint(equalTo: mainView.leftAnchor, constant: 40).isActive = true
-        infoView.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 100).isActive = true
+        infoView.topAnchor.constraint(greaterThanOrEqualTo: mainView.topAnchor, constant: 60).isActive = true
         
         UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
             infoView.alpha = 1.0
