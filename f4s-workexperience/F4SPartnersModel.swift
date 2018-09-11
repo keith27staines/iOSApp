@@ -96,7 +96,7 @@ public class F4SPartnersModel {
         var nominet = F4SPartner(uuid: "13639d44-5111-45c4-ac21-014bedac20da", name: "Nominet Trust")
         nominet.imageName = "partnerLogoNominet"
         addOrReplacePartner(nominet)
-        includeNCSPartner()
+        // includeNCSPartner()
         addOrReplacePartner(parent)
         addOrReplacePartner(school)
         addOrReplacePartner(friend)
