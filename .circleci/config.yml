@@ -2,15 +2,15 @@ version: 2
 jobs:
   test:
     macos:
-      xcode: "9.4.0"
+      xcode: "10.0.0"
     steps:
       - checkout
       - run: bundle exec fastlane scan --scheme "f4s-f4s_staging"
     macos:
-      xcode: "9.4.0"
+      xcode: "10.0.0"
   deploy:
     macos:
-      xcode: "9.4.0"
+      xcode: "10.0.0"
     steps:
       - checkout
       - deploy:
