@@ -40,6 +40,27 @@ class F4SEmailVerificationViewController: UIViewController {
         activitySpinner.isHidden = true
         activityCount = 0
         applyStyle()
+        conditionallyAddStagingEmailVerificationBypass()
+    }
+    
+    func conditionallyAddStagingEmailVerificationBypass() {
+        guard Config.environment == .staging else { return }
+        let bypassButton = UIButton(type: .system)
+        bypassButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bypassButton)
+        bypassButton.setTitle("Staging bypass email verification", for: .normal)
+        bypassButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        bypassButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -20).isActive = true
+        bypassButton.addTarget(self, action: #selector(handleVerificationBypass), for: .touchUpInside)
+    }
+    
+    @objc func handleVerificationBypass() {
+        guard Config.environment == .staging, let email = emailTextField.text else {
+            return
+        }
+        emailToVerify = email.trimmingCharacters(in: .whitespacesAndNewlines)
+        model.stagingBypassSetVerifiedEmail(email: emailToVerify!)
+        emailWasVerified?()
     }
     
     func applyStyle() {

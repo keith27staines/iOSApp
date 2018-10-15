@@ -68,8 +68,8 @@ class ExtraInfoViewController: UIViewController {
     
     lazy var dateOfBirthFormatter: DateFormatter = {
        let df = DateFormatter()
-        df.dateFormat = "dd' 'MM' 'yyyy" //"yyyy'-'MM'-'dd'"
-        df.dateStyle = .medium
+        df.dateFormat = "d MMMM yyyy" // "dd' 'MM' 'yyyy" //"yyyy'-'MM'-'dd'"
+        //df.dateStyle = .medium
         return df
     }()
     
@@ -438,10 +438,7 @@ extension ExtraInfoViewController {
 extension ExtraInfoViewController {
     
     @objc func doneButtonTouched() {
-        let dateFormatter1 = DateFormatter()
-        dateFormatter1.dateFormat = "d MMMM yyyy"
-        
-        dobTextField.text = dateFormatter1.string(from: datePicker.date)
+        dobTextField.text = dateOfBirthFormatter.string(from: datePicker.date)
         dobTextField.resignFirstResponder()
         scrollView.isScrollEnabled = true
         self.infoStackViewTopConstraint.constant = 49

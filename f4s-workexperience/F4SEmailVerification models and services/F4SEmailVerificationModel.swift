@@ -194,6 +194,10 @@ public class F4SEmailVerificationModel {
         return email == verifiedEmail
     }
     
+    public func stagingBypassSetVerifiedEmail(email: String) {
+        verifiedEmail = email
+    }
+    
     static public private (set) var verifiedEmail: String? {
         get {
             return UserDefaults.standard.string(forKey: verifiedEmailKey)
@@ -252,7 +256,7 @@ extension F4SEmailVerificationModel {
         if strings[1].isEmpty { return false }
         let afterAtString = strings[1]
         let afterAtSubStrings = afterAtString.split(separator: ".")
-        if afterAtSubStrings.count != 2 { return false }
+        if afterAtSubStrings.count < 2 { return false }
         if afterAtSubStrings[0].isEmpty { return false }
         if afterAtSubStrings[1].isEmpty { return false }
         return true
