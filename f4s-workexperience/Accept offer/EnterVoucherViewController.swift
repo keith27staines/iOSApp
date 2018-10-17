@@ -94,7 +94,7 @@ class EnterVoucherViewController: UIViewController {
         voucher = F4SVoucher(placement: accept.placement.placementUuid!)
         voucherText.isEnabled = false
         voucherText.text = ""
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange), name: .UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         scrollView.isScrollEnabled = false
         companyNameLabel.text = accept.company.name.stripCompanySuffix()
         pageHeaderView.icon = accept.companyLogo
@@ -113,8 +113,8 @@ class EnterVoucherViewController: UIViewController {
     @objc func keyboardWillChange(notification: NSNotification) {
 //        let duration = notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! Double
 //        let curve = notification.userInfo![UIKeyboardAnimationCurveUserInfoKey] as! UInt
-        let curFrame = (notification.userInfo![UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-        let targetFrame = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let curFrame = (notification.userInfo![UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        let targetFrame = (notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         let deltaY = targetFrame.origin.y - curFrame.origin.y
         accododateKeyboardOffset(viewHeightDelta: deltaY)
     }

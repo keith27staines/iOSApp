@@ -341,7 +341,7 @@ class CustomNavigationHelper {
             return
         }
         popOverVC.currentCompany = currentCompany
-        parentCtrl.addChildViewController(popOverVC)
+        parentCtrl.addChild(popOverVC)
         popOverVC.backgroundPopoverView.frame = parentCtrl.view.frame
         popOverVC.backgroundPopoverView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         parentCtrl.view.addSubview(popOverVC.backgroundPopoverView)
@@ -367,7 +367,7 @@ class CustomNavigationHelper {
         guard let popOverVC = UIStoryboard(name: "SuccessExtraInfo", bundle: nil).instantiateViewController(withIdentifier: "SuccessExtraInfoCtrl") as? SuccessExtraInfoViewController else {
             return
         }
-        parentCtrl.addChildViewController(popOverVC)
+        parentCtrl.addChild(popOverVC)
         popOverVC.backgroundPopoverView.frame = parentCtrl.view.frame
         popOverVC.backgroundPopoverView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         parentCtrl.view.addSubview(popOverVC.backgroundPopoverView)
@@ -426,7 +426,7 @@ class CustomNavigationHelper {
             return
         }
         popOverCtrl.placementUuid = placementUuid
-        parentCtrl.addChildViewController(popOverCtrl)
+        parentCtrl.addChild(popOverCtrl)
         popOverCtrl.backgroundPopoverView.frame = CGRect(x: 0, y: 0, width: parentCtrl.view.frame.width, height: UIScreen.main.bounds.height)
         popOverCtrl.backgroundPopoverView.backgroundColor = UIColor.black
         popOverCtrl.backgroundPopoverView.alpha = 0.5
@@ -468,7 +468,7 @@ class CustomNavigationHelper {
         guard let popOverVC = UIStoryboard(name: "FavouritesPopup", bundle: nil).instantiateViewController(withIdentifier: "FavouritesPopupViewCtrl") as? FavouritesPopupViewController else {
             return
         }
-        parentCtrl.addChildViewController(popOverVC)
+        parentCtrl.addChild(popOverVC)
         popOverVC.backgroundPopoverView.frame = parentCtrl.view.frame
         popOverVC.backgroundPopoverView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         parentCtrl.view.addSubview(popOverVC.backgroundPopoverView)

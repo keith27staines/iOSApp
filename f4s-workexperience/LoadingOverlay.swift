@@ -14,7 +14,7 @@ class LoadingOverlay: UIView {
     lazy var activityIndicator: UIActivityIndicatorView = {
         let centerX = self.frame.width / 2
         let centerY = self.frame.height / 2
-        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+        let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
         activityIndicator.frame = CGRect(x: centerX - (activityIndicator.frame.width) / 2, y: centerY - (activityIndicator.frame.height) / 2, width: (activityIndicator.frame.width), height: (activityIndicator.frame.height))
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         return activityIndicator

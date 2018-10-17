@@ -12,12 +12,12 @@ class BaseMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NotificationCenter.default.addObserver(self, selector: Selector(("contentSizeDidChangeNotification:")), name: NSNotification.Name.UIContentSizeCategoryDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector(("contentSizeDidChangeNotification:")), name: UIContentSizeCategory.didChangeNotification, object: nil)
     }
 
     private func contentSizeDidChangeNotification(notification: NSNotification) {
         if let userInfo: NSDictionary = notification.userInfo as NSDictionary? {
-            self.contentSizeDidChange(size: userInfo[UIContentSizeCategoryNewValueKey] as! String)
+            self.contentSizeDidChange(size: userInfo[UIContentSizeCategory.newValueUserInfoKey] as! String)
         }
     }
 

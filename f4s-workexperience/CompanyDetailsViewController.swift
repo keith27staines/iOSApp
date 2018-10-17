@@ -286,17 +286,17 @@ extension CompanyDetailsViewController {
         socialShareData.company = self.company
         let activityViewController = UIActivityViewController(activityItems: [socialShareData], applicationActivities: nil)
         let excludeActivities = [
-            UIActivityType.postToWeibo,
-            UIActivityType.print,
-            UIActivityType.copyToPasteboard,
-            UIActivityType.assignToContact,
-            UIActivityType.saveToCameraRoll,
-            UIActivityType.addToReadingList,
-            UIActivityType.postToFlickr,
-            UIActivityType.postToVimeo,
-            UIActivityType.postToTencentWeibo,
-            UIActivityType.airDrop,
-            UIActivityType.openInIBooks,
+            UIActivity.ActivityType.postToWeibo,
+            UIActivity.ActivityType.print,
+            UIActivity.ActivityType.copyToPasteboard,
+            UIActivity.ActivityType.assignToContact,
+            UIActivity.ActivityType.saveToCameraRoll,
+            UIActivity.ActivityType.addToReadingList,
+            UIActivity.ActivityType.postToFlickr,
+            UIActivity.ActivityType.postToVimeo,
+            UIActivity.ActivityType.postToTencentWeibo,
+            UIActivity.ActivityType.airDrop,
+            UIActivity.ActivityType.openInIBooks,
         ]
         activityViewController.excludedActivityTypes = excludeActivities
 
@@ -335,16 +335,21 @@ extension CompanyDetailsViewController {
                     switch result {
                     case .error(let error):
                         MessageHandler.sharedInstance.hideLoadingOverlay()
-                        MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf, cancelHandler: nil, retryHandler: {
-                            strongSelf.applyButton(strongSelf)
-                        })
+                        if error.httpStatusCode == 409 {
+                            MessageHandler.sharedInstance.display("You have already applied to this company on another device", parentCtrl: strongSelf)
+                        } else {
+                            MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf, cancelHandler: nil, retryHandler: {
+                                strongSelf.applyButton(strongSelf)
+                            })
+                        }
+
                     case .success(let result):
                         placement.placementUuid = result.placementUuid
                         placement.status = F4SPlacementStatus.inProgress
                         PlacementDBOperations.sharedInstance.savePlacement(placement: placement)
                         strongSelf.applyButton.setTitle(NSLocalizedString("Finish Application", comment: ""), for: .normal)
                         let applyText = NSLocalizedString("Finish Application", comment: "")
-                        strongSelf.applyButton.setAttributedTitle(NSAttributedString(string: applyText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.white]), for: .normal)
+                        strongSelf.applyButton.setAttributedTitle(NSAttributedString(string: applyText, attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor.white]), for: .normal)
                         
                         if UIApplication.shared.isRegisteredForRemoteNotifications {
                             CustomNavigationHelper.sharedInstance.presentCoverLetterController(parentCtrl: strongSelf, currentCompany: company)
@@ -372,7 +377,7 @@ extension CompanyDetailsViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = UIColor.clear
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
     }
 
     func setupButtons() {
@@ -433,7 +438,7 @@ extension CompanyDetailsViewController {
             return
         }
 
-        firmNameLabel.attributedText = NSAttributedString(string: company.name, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor.black])
+        firmNameLabel.attributedText = NSAttributedString(string: company.name, attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold), NSAttributedString.Key.foregroundColor: UIColor.black])
     }
 
     func setupImageView() {
@@ -467,7 +472,7 @@ extension CompanyDetailsViewController {
         let sizeOfText = getSizeOfText(text: popupText)
         popupView.frame = CGRect(x: 10, y: shortlistButton.frame.origin.y - (sizeOfText.height + 30), width: sizeOfText.width + 10, height: 37)
         let textLabel = UILabel(frame: CGRect(x: 5, y: (30 - (sizeOfText.height + 10)) / 2, width: sizeOfText.width, height: sizeOfText.height + 10))
-        textLabel.attributedText = NSAttributedString(string: popupText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor.white])
+        textLabel.attributedText = NSAttributedString(string: popupText, attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallerTextSize, weight: UIFont.Weight.semibold), NSAttributedString.Key.foregroundColor: UIColor.white])
         textLabel.textAlignment = .center
         
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: sizeOfText.width + 10 , height: 37))
@@ -476,7 +481,7 @@ extension CompanyDetailsViewController {
         popupView.addSubview(imageView)
         popupView.addSubview(textLabel)
         self.view.addSubview(popupView)
-        popupView.bringSubview(toFront: self.tableView)
+        popupView.bringSubviewToFront(self.tableView)
         popupView.alpha = 0.0
         popupView.center = CGPoint(x: shortlistButton.center.x, y: popupView.center.y)
         
@@ -497,7 +502,7 @@ extension CompanyDetailsViewController {
     
     func getSizeOfText(text: String) -> CGSize {
         let textString = text as NSString
-        let attributes = [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerTextSize, weight: UIFont.Weight.semibold)]
+        let attributes = [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallerTextSize, weight: UIFont.Weight.semibold)]
         let rect = textString.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude), options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
         
         return CGSize(width: rect.width, height: round(rect.height))
@@ -523,7 +528,7 @@ extension CompanyDetailsViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
@@ -577,10 +582,10 @@ extension CompanyDetailsViewController {
             
             return showCompanyStatsCell() ? 80 : 0
 
-        case .buttonsCell: return UITableViewAutomaticDimension
-        case .companyInfoCell: return UITableViewAutomaticDimension
-        case .documentsCell1: return UITableViewAutomaticDimension
-        case .documentsCell2: return UITableViewAutomaticDimension
+        case .buttonsCell: return UITableView.automaticDimension
+        case .companyInfoCell: return UITableView.automaticDimension
+        case .documentsCell1: return UITableView.automaticDimension
+        case .documentsCell2: return UITableView.automaticDimension
         }
     }
     
@@ -612,7 +617,7 @@ extension CompanyDetailsViewController {
                     return hiddenCell()
             }
             cell.selectionStyle = .none
-            cell.industryLabel.attributedText = NSAttributedString(string: company.industry, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.light), NSAttributedStringKey.foregroundColor: UIColor.black])
+            cell.industryLabel.attributedText = NSAttributedString(string: company.industry, attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.light), NSAttributedString.Key.foregroundColor: UIColor.black])
             return cell
             
         case .ratingCell:
@@ -623,7 +628,7 @@ extension CompanyDetailsViewController {
             }
             cell.selectionStyle = .none
             cell.setupStars(rating: company.rating)
-            cell.starsLabel.attributedText = NSAttributedString(string: String(company.rating), attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerVerySmallTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
+            cell.starsLabel.attributedText = NSAttributedString(string: String(company.rating), attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.biggerVerySmallTextSize, weight: UIFont.Weight.semibold), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.black)])
             return cell
 
         case .otherCell:
@@ -697,7 +702,7 @@ extension CompanyDetailsViewController : MKMapViewDelegate {
         annotation.title = company.name
         mapView.addAnnotation(annotation)
         
-        let region = MKCoordinateRegionMakeWithDistance(location, 1000, 1000)
+        let region = MKCoordinateRegion.init(center: location, latitudinalMeters: 1000, longitudinalMeters: 1000)
         let adjustedRegion = mapView.regionThatFits(region)
         mapView.setRegion(adjustedRegion, animated: false)
         self.mapView.showsUserLocation = true

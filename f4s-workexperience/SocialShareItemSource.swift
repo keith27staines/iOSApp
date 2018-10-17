@@ -13,40 +13,40 @@ import Mustache
 class SocialShareItemSource: NSObject, UIActivityItemSource {
     var company: Company?
 
-    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
-        if activityType == UIActivityType.message {
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+        if activityType == UIActivity.ActivityType.message {
             return self.getTextForType(socialShareType: .sms)
-        } else if activityType == UIActivityType.mail {
+        } else if activityType == UIActivity.ActivityType.mail {
             return self.getTextForType(socialShareType: .email)
-        } else if activityType == UIActivityType.postToTwitter {
+        } else if activityType == UIActivity.ActivityType.postToTwitter {
             return self.getTextForType(socialShareType: .twitter)
-        } else if activityType == UIActivityType.postToFacebook {
+        } else if activityType == UIActivity.ActivityType.postToFacebook {
             return self.getTextForType(socialShareType: .facebook)
         }
         return self.getTextForType(socialShareType: .email)
     }
 
-    func activityViewController(_: UIActivityViewController, subjectForActivityType activityType: UIActivityType?) -> String {
-        if activityType == UIActivityType.message {
+    func activityViewController(_: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
+        if activityType == UIActivity.ActivityType.message {
             return ""
-        } else if activityType == UIActivityType.mail {
+        } else if activityType == UIActivity.ActivityType.mail {
             return self.getSubjectTextForType(socialShareType: .email)
-        } else if activityType == UIActivityType.postToTwitter {
+        } else if activityType == UIActivity.ActivityType.postToTwitter {
             return ""
-        } else if activityType == UIActivityType.postToFacebook {
+        } else if activityType == UIActivity.ActivityType.postToFacebook {
             return ""
         }
         return ""
     }
 
-    func activityViewController(_: UIActivityViewController, dataTypeIdentifierForActivityType activityType: UIActivityType?) -> String {
-        if activityType == UIActivityType.message {
+    func activityViewController(_: UIActivityViewController, dataTypeIdentifierForActivityType activityType: UIActivity.ActivityType?) -> String {
+        if activityType == UIActivity.ActivityType.message {
             return SocialShare.sms.rawValue
-        } else if activityType == UIActivityType.mail {
+        } else if activityType == UIActivity.ActivityType.mail {
             return SocialShare.email.rawValue
-        } else if activityType == UIActivityType.postToTwitter {
+        } else if activityType == UIActivity.ActivityType.postToTwitter {
             return SocialShare.twitter.rawValue
-        } else if activityType == UIActivityType.postToFacebook {
+        } else if activityType == UIActivity.ActivityType.postToFacebook {
             return SocialShare.facebook.rawValue
         }
         return ""

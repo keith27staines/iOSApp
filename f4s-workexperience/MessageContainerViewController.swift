@@ -334,7 +334,7 @@ extension MessageContainerViewController {
 // MARK: - navigation
 extension MessageContainerViewController {
     func setNavigationBar() {
-        let showCompanyButton = UIBarButtonItem(title: NSLocalizedString("Company", comment: "Title of a button that links to a company info page"), style: UIBarButtonItemStyle.done, target: self, action: #selector(showCompanyDetailsView))
+        let showCompanyButton = UIBarButtonItem(title: NSLocalizedString("Company", comment: "Title of a button that links to a company info page"), style: UIBarButtonItem.Style.done, target: self, action: #selector(showCompanyDetailsView))
         //let showCompanyButton = UIBarButtonItem(image: UIImage(named: "information")?.withRenderingMode(.alwaysTemplate), style: UIBarButtonItemStyle.done, target: self, action: #selector(showCompanyDetailsView))
         navigationItem.rightBarButtonItem = showCompanyButton
         navigationItem.title = "Messages"

@@ -2759,9 +2759,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 001A9888C7A270CC01BA9693AF7996E1 /* Build configuration list for PBXNativeTarget "Auth0" */;
 			buildPhases = (
+				7052E64B3ED69898EB7E60AF3B761AA3 /* Headers */,
 				09685DDAA5A575018B81B22C6DB7C01C /* Sources */,
 				2A4D8BDD9FAB39E1DEA9D170D10AE1F9 /* Frameworks */,
-				7052E64B3ED69898EB7E60AF3B761AA3 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -2886,7 +2886,27 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1000;
+				TargetAttributes = {
+					07B0C6CF1416A262752864A1538728B4 = {
+						LastSwiftMigration = 1000;
+					};
+					3B991730DA5ED56894EDC4C3662841DA = {
+						LastSwiftMigration = 1000;
+					};
+					6020FC190E66E4684DF3DEA9D5F23A77 = {
+						LastSwiftMigration = 1000;
+					};
+					86A1F6DD9CC2B405040438613B6F811F = {
+						LastSwiftMigration = 1000;
+					};
+					A0404A9E4196873DF07B84C8A456EC16 = {
+						LastSwiftMigration = 1000;
+					};
+					EFB8D168A1E48F8FB874D3BBECB9B34B = {
+						LastSwiftMigration = 1000;
+					};
+				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 9.3";
@@ -4627,6 +4647,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
@@ -5085,6 +5106,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = ReleaseF4S;
@@ -5614,6 +5636,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -5628,6 +5651,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
@@ -6088,6 +6112,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -6102,6 +6127,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
@@ -7018,6 +7044,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = ReleaseF4SLive;

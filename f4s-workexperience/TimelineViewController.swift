@@ -175,12 +175,12 @@ extension TimelineViewController {
         let infoStr = NSLocalizedString("You can use the map to find and apply for a placement. Once you have submitted your application, your messages with the company will appear here.", comment: "")
 
         self.noPlacementsTitleLabel.attributedText = NSAttributedString(string: titleStr, attributes: [
-            NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.pinkishGrey),
-            NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold),
+            NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.pinkishGrey),
+            NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold),
         ])
         self.noPlacementsInfoLabel.attributedText = NSAttributedString(string: infoStr, attributes: [
-            NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.pinkishGrey),
-            NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.mediumTextSize, weight: UIFont.Weight.regular),
+            NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.pinkishGrey),
+            NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.mediumTextSize, weight: UIFont.Weight.regular),
         ])
         self.noPlacementsBackgroundView.isHidden = true
     }
@@ -204,7 +204,7 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
         let placement = self.userPlacements[indexPath.row]
         if let company = self.companies.filter({ $0.uuid == placement.companyUuid?.dehyphenated }).first {
             cell.companyImageView.image = UIImage(named: "DefaultLogo")
-            cell.companyTitleLabel.attributedText = NSAttributedString(string: company.name, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize,weight: UIFont.Weight.medium),NSAttributedStringKey.foregroundColor: UIColor.black,])
+            cell.companyTitleLabel.attributedText = NSAttributedString(string: company.name, attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.largeTextSize,weight: UIFont.Weight.medium),NSAttributedString.Key.foregroundColor: UIColor.black,])
             cell.companyImageView.layer.cornerRadius = cell.companyImageView.bounds.height / 2
             cell.companyImageView.image = UIImage(named: "DefaultLogo")
             if !company.logoUrl.isEmpty, let url = NSURL(string: company.logoUrl) {
@@ -228,20 +228,20 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.unreadMessageDotView.isHidden = true
                 cell.latestMessageLabel.attributedText = NSAttributedString(
                     string: latestMessage.content,
-                    attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize,weight: UIFont.Weight.light),NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.warmGrey)])
+                    attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallTextSize,weight: UIFont.Weight.light),NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.warmGrey)])
 
                 cell.dateTimeLatestMessageLabel.attributedText = NSAttributedString(
                     string: latestMessage.relativeDateTime ?? "",
-                    attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize,weight: UIFont.Weight.light),NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
+                    attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallTextSize,weight: UIFont.Weight.light),NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.black)])
             } else {
                 cell.unreadMessageDotView.isHidden = false
                 cell.latestMessageLabel.attributedText = NSAttributedString(
                     string: latestMessage.content,
-                    attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize,                                                                          weight: UIFont.Weight.semibold),NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
+                    attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallTextSize,                                                                          weight: UIFont.Weight.semibold),NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.black)])
 
                 cell.dateTimeLatestMessageLabel.attributedText = NSAttributedString(
                     string: latestMessage.relativeDateTime ?? "",
-                    attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: RGBA.red.uiColor])
+                    attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallTextSize, weight: UIFont.Weight.semibold), NSAttributedString.Key.foregroundColor: RGBA.red.uiColor])
             }
         }
 

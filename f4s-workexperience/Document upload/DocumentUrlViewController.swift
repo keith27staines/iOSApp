@@ -15,7 +15,6 @@ class DocumentUrlViewController: UIViewController {
     }()
     
     var applicationContext: F4SApplicationContext!
-    var completion: ((F4SApplicationContext) -> Void)?
     
     @IBOutlet weak var topImageHeightConstraint: NSLayoutConstraint!
     @IBOutlet var plusButtonCenterConstraint: NSLayoutConstraint!
@@ -28,8 +27,12 @@ class DocumentUrlViewController: UIViewController {
     @IBOutlet weak var addAnother: UILabel!
     
     @IBOutlet weak var containerView: UIView!
-    
+    let consentPreviouslyGivenKey = "consentPreviouslyGivenKey"
     var isSetupForDisplayingUrls: Bool = false
+    
+    lazy var userService: F4SUserService = {
+        return F4SUserService()
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,17 +68,57 @@ class DocumentUrlViewController: UIViewController {
     }
     
     func continueAsyncWorker() {
-        documentUrlModel.putDocumentsUrls { [weak self] (success) in
-            guard let strongSelf = self else { return }
-            DispatchQueue.main.async {
+        MessageHandler.sharedInstance.showLoadingOverlay(view)
+        documentUrlModel.putDocumentsUrls { (success) in
+            DispatchQueue.main.async { [weak self] in
+                guard let strongSelf = self else { return }
                 strongSelf.continueButton.isEnabled = true
                 if success {
-                    strongSelf.completion?(strongSelf.applicationContext)
+                    strongSelf.submitApplication(applicationContext: strongSelf.applicationContext)
                 } else {
+                    MessageHandler.sharedInstance.hideLoadingOverlay()
                     strongSelf.displayTryAgain(completion: strongSelf.continueAsyncWorker)
                 }
             }
         }
+    }
+    
+    func submitApplication(applicationContext: F4SApplicationContext) {
+        var user = applicationContext.user!
+        userService.updateUser(user: user) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            DispatchQueue.main.async {
+                MessageHandler.sharedInstance.hideLoadingOverlay()
+                switch result {
+                case .success(let userModel):
+                    guard let uuid = userModel.uuid else {
+                        MessageHandler.sharedInstance.displayWithTitle("Oops something went wrong", "Workfinder cannot complete this operation", parentCtrl: strongSelf)
+                        return
+                    }
+                    user.updateUuidAndPersistToLocalStorage(uuid: uuid)
+                    F4SNetworkSessionManager.shared.rebuildSessions() // Ensure session manager is aware of the possible change of user uuid
+                    var updatedContext = applicationContext
+                    updatedContext.user = user
+                    var updatedPlacement = applicationContext.placement!
+                    updatedPlacement.status = F4SPlacementStatus.applied
+                    updatedContext.placement = updatedPlacement
+                    strongSelf.applicationContext = updatedContext
+                    PlacementDBOperations.sharedInstance.savePlacement(placement: updatedPlacement)
+                    UserDefaults.standard.set(true, forKey: strongSelf.consentPreviouslyGivenKey)
+                    strongSelf.afterSubmitApplication(applicationContext: updatedContext)
+                case .error(let error):
+                    MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf, cancelHandler: nil) {
+                        MessageHandler.sharedInstance.showLoadingOverlay(strongSelf.view)
+                        strongSelf.submitApplication(applicationContext: applicationContext)
+                    }
+                }
+            }
+        }
+    }
+    
+    func afterSubmitApplication(applicationContext: F4SApplicationContext) {
+        CustomNavigationHelper.sharedInstance.presentSuccessExtraInfoPopover(
+            parentCtrl: self)
     }
     
     @objc func addLinkButtonTapped() {
@@ -87,7 +130,7 @@ class DocumentUrlViewController: UIViewController {
     
     @IBAction func showCVGuide(_ sender: Any) {
         let url = URL(string:"https://interactive.barclayslifeskills.com/staticmodules/downloads/cv-tips.pdf")!
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
     }
     func updateEnabledStateOfAddButton() {
         DispatchQueue.main.async { [weak self] in
@@ -220,10 +263,10 @@ extension UIView {
     func fadeTransition(_ duration:CFTimeInterval) {
         let animation = CATransition()
         animation.timingFunction = CAMediaTimingFunction(name:
-            kCAMediaTimingFunctionEaseInEaseOut)
-        animation.type = kCATransitionFade
+            CAMediaTimingFunctionName.easeInEaseOut)
+        animation.type = CATransitionType.fade
         animation.duration = duration
-        layer.add(animation, forKey: kCATransitionFade)
+        layer.add(animation, forKey: convertFromCATransitionType(CATransitionType.fade))
     }
 }
 
@@ -239,3 +282,13 @@ extension UIView {
 
 
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromCATransitionType(_ input: CATransitionType) -> String {
+	return input.rawValue
+}

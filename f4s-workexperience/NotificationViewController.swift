@@ -97,13 +97,13 @@ extension NotificationViewController {
     }
 
     func setupLabels(titleText: String, contentText: String) {
-        titleLabel.attributedText = NSAttributedString(string: titleText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
+        titleLabel.attributedText = NSAttributedString(string: titleText, attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.black)])
 
         let font = UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = lineHeight - font.lineHeight
 
-        contentLabel.attributedText = NSAttributedString(string: contentText, attributes: [NSAttributedStringKey.font: font, NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black), NSAttributedStringKey.paragraphStyle: paragraphStyle])
+        contentLabel.attributedText = NSAttributedString(string: contentText, attributes: [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.black), NSAttributedString.Key.paragraphStyle: paragraphStyle])
         contentLabel.frame.size.width = self.view.frame.size.width - 100
 
         contentLabel.numberOfLines = 0
@@ -128,7 +128,7 @@ extension NotificationViewController {
     @IBAction func rightButton(_: Any) {
         self.backgroundPopoverView.removeFromSuperview()
         if !flag {
-            if let url = URL(string: UIApplicationOpenSettingsURLString), UIApplication.shared.canOpenURL(url) {
+            if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url)
             }
             self.dismiss(animated: true, completion: nil)

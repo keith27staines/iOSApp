@@ -87,12 +87,12 @@ extension CoverLetterViewController {
         editCoverLetterButton?.setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)
         editCoverLetterButton?.setTitleColor(UIColor.white, for: .normal)
         editCoverLetterButton?.setTitleColor(UIColor.white, for: .highlighted)
-        editCoverLetterButton?.addTarget(self, action: #selector(CoverLetterViewController.editCoverLetterButtonTouched), for: UIControlEvents.touchUpInside)
+        editCoverLetterButton?.addTarget(self, action: #selector(CoverLetterViewController.editCoverLetterButtonTouched), for: UIControl.Event.touchUpInside)
         editCoverLetterButton?.setAttributedTitle(NSAttributedString(string: editCoverLetterTitle,
                                                                      attributes: [
-                                                                         NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.white),
-                                                                         NSAttributedStringKey.font: editCoverLetterFont,
-        ]), for: UIControlState.normal)
+                                                                         NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.white),
+                                                                         NSAttributedString.Key.font: editCoverLetterFont,
+        ]), for: UIControl.State.normal)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: editCoverLetterButton!)
         
     }
@@ -107,8 +107,8 @@ extension CoverLetterViewController {
         let termsAndConditionsApplyText = NSLocalizedString("By applying you are agreeing to our ", comment: "")
         let termsAndConditionsText = NSLocalizedString("Terms and Conditions & Privacy Policy", comment: "")
         let formattedString = NSMutableAttributedString()
-        formattedString.append(NSAttributedString(string: termsAndConditionsApplyText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.warmGrey)]))
-        formattedString.append(NSAttributedString(string: termsAndConditionsText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.warmGrey)]))
+        formattedString.append(NSAttributedString(string: termsAndConditionsApplyText, attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.warmGrey)]))
+        formattedString.append(NSAttributedString(string: termsAndConditionsText, attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.semibold), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.warmGrey)]))
         self.termsAndConditionsButton.setAttributedTitle(formattedString, for: .normal)
         self.termsAndConditionsButton.titleLabel?.textAlignment = .center
     }
@@ -213,7 +213,7 @@ extension CoverLetterViewController {
     
     func getAttributedStringForTemplate(template: String) -> NSMutableAttributedString {
         // normal font
-        var customMutableAttributedString: [([NSAttributedStringKey: Any], NSRange)] = []
+        var customMutableAttributedString: [([NSAttributedString.Key: Any], NSRange)] = []
 
         var intermediateTemplateString: String = template.replacingOccurrences(of: "\r", with: "")
         // find first selection
@@ -267,7 +267,7 @@ extension CoverLetterViewController {
                     intermediateTemplateString = temp
 
                     // apply attributed text for that range
-                    customMutableAttributedString.append(([NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.mediumGreen)], range: NSRange(location: smalestIndex, length: endSelected - smalestIndex)))
+                    customMutableAttributedString.append(([NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.mediumGreen)], range: NSRange(location: smalestIndex, length: endSelected - smalestIndex)))
                 }
                 break
             case .startPlaceholder:
@@ -280,7 +280,7 @@ extension CoverLetterViewController {
                     intermediateTemplateString = temp
 
                     // apply attributed text for that range
-                    customMutableAttributedString.append(([NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.orangeNormal)], range: NSRange(location: smalestIndex, length: endPlaceholder - smalestIndex)))
+                    customMutableAttributedString.append(([NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.orangeNormal)], range: NSRange(location: smalestIndex, length: endPlaceholder - smalestIndex)))
                 }
                 break
             case .startBold:
@@ -293,7 +293,7 @@ extension CoverLetterViewController {
                     intermediateTemplateString = temp
 
                     // apply attributed text for that range
-                    customMutableAttributedString.append(([NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor.black], range: NSRange(location: smalestIndex, length: endBold - smalestIndex)))
+                    customMutableAttributedString.append(([NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold), NSAttributedString.Key.foregroundColor: UIColor.black], range: NSRange(location: smalestIndex, length: endBold - smalestIndex)))
                 }
                 break
             default:
@@ -304,7 +304,7 @@ extension CoverLetterViewController {
 
         let style = NSMutableParagraphStyle()
         style.lineSpacing = 34 - UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular).lineHeight
-        let mutableAttributedString: NSMutableAttributedString = NSMutableAttributedString(string: intermediateTemplateString, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.black])
+        let mutableAttributedString: NSMutableAttributedString = NSMutableAttributedString(string: intermediateTemplateString, attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor.black])
         for attrString in customMutableAttributedString {
             mutableAttributedString.addAttributes(attrString.0, range: attrString.1)
         }

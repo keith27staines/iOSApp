@@ -70,7 +70,7 @@ class MessageOptionHelper {
     func getTextSize(_ text: String, font: UIFont, maxWidth: CGFloat) -> CGSize {
         let textString = text as NSString
 
-        let attributes = [NSAttributedStringKey.font: font]
+        let attributes = [NSAttributedString.Key.font: font]
         let rect = textString.boundingRect(with: CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude), options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
 
         return CGSize(width: rect.width, height: round(rect.height))

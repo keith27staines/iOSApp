@@ -7,12 +7,25 @@
 
 import UIKit
 
+class EmailTextField: UITextField {
+    override var isEnabled: Bool {
+        set {
+            super.isEnabled = newValue
+            textColor = newValue ? UIColor.black : UIColor.lightGray
+        }
+        get {
+            return super.isEnabled
+        }
+        
+    }
+}
+
 class F4SEmailVerificationViewController: UIViewController {
     
     @IBOutlet weak var activitySpinner: UIActivityIndicatorView!
     @IBOutlet weak var introductionLabel: UILabel!
     @IBOutlet weak var secondaryActionButton: UIButton!
-    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var emailTextField: EmailTextField!
     @IBOutlet weak var feedbackLabel: UILabel!
     @IBOutlet weak var primaryActionButton: UIButton!
     
@@ -41,6 +54,7 @@ class F4SEmailVerificationViewController: UIViewController {
         activityCount = 0
         applyStyle()
         conditionallyAddStagingEmailVerificationBypass()
+        
     }
     
     func conditionallyAddStagingEmailVerificationBypass() {

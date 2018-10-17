@@ -64,10 +64,10 @@ extension FavouritesPopupViewController {
     
     func setupLabels() {
         let titleText = NSLocalizedString("Maximum of \(AppConstants.maximumNumberOfShortlists) favourites", comment: "")
-        titleLabel.attributedText = NSAttributedString(string: titleText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
+        titleLabel.attributedText = NSAttributedString(string: titleText, attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.black)])
         
         let contentText = NSLocalizedString("Please remove a company from your favourites, in order to add a new company.", comment: "")
-        contentLabel.attributedText = NSAttributedString(string: contentText, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
+        contentLabel.attributedText = NSAttributedString(string: contentText, attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.black)])
         contentLabel.sizeToFit()
     }
 }

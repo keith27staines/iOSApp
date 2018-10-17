@@ -59,7 +59,7 @@ open class AutoCompleteTextField: UITextField {
     /// Shows autocomplete text with formatting
     open var enableAttributedText = false
     /// User Defined Attributes
-    open var autoCompleteAttributes: [NSAttributedStringKey: AnyObject]?
+    open var autoCompleteAttributes: [NSAttributedString.Key: AnyObject]?
     /// Hides autocomplete tableview after selecting a suggestion
     open var hidesWhenSelected = true
     /// Hides autocomplete tableview when the textfield is empty
@@ -108,8 +108,8 @@ open class AutoCompleteTextField: UITextField {
 
     fileprivate func commonInit() {
         hidesWhenEmpty = true
-        autoCompleteAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black]
-        autoCompleteAttributes![NSAttributedStringKey.font] = UIFont.boldSystemFont(ofSize: 12)
+        autoCompleteAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        autoCompleteAttributes![NSAttributedString.Key.font] = UIFont.boldSystemFont(ofSize: 12)
         self.clearButtonMode = .whileEditing
         self.addTarget(self, action: #selector(AutoCompleteTextField.textFieldDidChange), for: .editingChanged)
         self.addTarget(self, action: #selector(AutoCompleteTextField.textFieldDidEndEditing), for: .editingDidEnd)
@@ -151,7 +151,7 @@ open class AutoCompleteTextField: UITextField {
                     if tintedClearImage == nil {
                         tintedClearImage = tintImage(uiImage, color: tintColor)
                     }
-                    button.setImage(tintedClearImage, for: UIControlState())
+                    button.setImage(tintedClearImage, for: UIControl.State())
                     button.setImage(tintedClearImage, for: .highlighted)
                 }
             }
@@ -187,7 +187,7 @@ open class AutoCompleteTextField: UITextField {
             newFrame.size.height = autoCompleteTableHeight
             newFrame.size.width = autoCompleteTableWidth
             autoCompleteTableView.frame = newFrame
-            self.autoCompleteTableView?.superview?.bringSubview(toFront: autoCompleteTableView)
+            self.autoCompleteTableView?.superview?.bringSubviewToFront(autoCompleteTableView)
         }
     }
 
@@ -201,7 +201,7 @@ open class AutoCompleteTextField: UITextField {
         }
 
         if enableAttributedText {
-            let attrs = [NSAttributedStringKey.foregroundColor: autoCompleteTextColor, NSAttributedStringKey.font: autoCompleteTextFont] as [NSAttributedStringKey: Any]
+            let attrs = [NSAttributedString.Key.foregroundColor: autoCompleteTextColor, NSAttributedString.Key.font: autoCompleteTextFont] as [NSAttributedString.Key: Any]
 
             if attributedAutoCompleteStrings.count > 0 {
                 attributedAutoCompleteStrings.removeAll(keepingCapacity: false)

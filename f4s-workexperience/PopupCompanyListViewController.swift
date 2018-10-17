@@ -21,6 +21,11 @@ class PopupCompanyListViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var doneButton: UIButton!
     
+    override func viewDidLoad() {
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = UITableView.automaticDimension
+    }
+    
     @IBAction func doneButtonPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }

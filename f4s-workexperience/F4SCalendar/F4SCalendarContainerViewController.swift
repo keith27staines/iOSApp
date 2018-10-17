@@ -116,8 +116,8 @@ extension F4SCalendarContainerViewController : F4SDisplayInformationViewControll
         maskView?.rightAnchor.constraint(equalTo: mainView.rightAnchor).isActive = true
         maskView?.topAnchor.constraint(equalTo: mainView.topAnchor).isActive = true
         maskView?.bottomAnchor.constraint(equalTo: mainView.bottomAnchor).isActive = true
-        if !self.childViewControllers.contains(infoController) {
-            self.addChildViewController(infoController)
+        if !self.children.contains(infoController) {
+            self.addChild(infoController)
         }
         infoView.alpha = 0.0
         infoView.centerXAnchor.constraint(equalTo: mainView.centerXAnchor).isActive = true

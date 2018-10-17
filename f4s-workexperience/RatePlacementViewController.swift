@@ -58,11 +58,11 @@ extension RatePlacementViewController {
 
         let questionAttrStr = NSMutableAttributedString(
             string: questionStr,
-            attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.black,])
+            attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor.black,])
         if let companyName = self.company?.name {
             let companyNameAttrStr = NSMutableAttributedString(
                 string: companyName,
-                attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize,weight: UIFont.Weight.semibold),NSAttributedStringKey.foregroundColor: UIColor.black])
+                attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.largeTextSize,weight: UIFont.Weight.semibold),NSAttributedString.Key.foregroundColor: UIColor.black])
             questionAttrStr.insert(companyNameAttrStr, at: questionStr.count - 1)
         }
         self.questionLabel.attributedText = questionAttrStr

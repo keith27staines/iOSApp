@@ -64,11 +64,11 @@ extension FavouriteViewController {
         let infoStr = NSLocalizedString("Once you have favourited a company it will appear here.", comment: "")
         
         noFavouritesTitleLabel.attributedText = NSAttributedString(string: titleStr, attributes: [
-            NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.pinkishGrey),
-            NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold)])
+            NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.pinkishGrey),
+            NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold)])
         noFavouritesMessageLabel.attributedText = NSAttributedString(string: infoStr, attributes: [
-            NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.pinkishGrey),
-            NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.mediumTextSize, weight: UIFont.Weight.regular)])
+            NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.pinkishGrey),
+            NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.mediumTextSize, weight: UIFont.Weight.regular)])
         noFavouritesBackgroundView.isHidden = true
     }
 }
@@ -120,7 +120,7 @@ extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
         if let company = self.companies.filter({ $0.uuid == favourite.companyUuid.dehyphenated }).first {
             cell.companyTitleLabel.attributedText = NSAttributedString(
                 string: company.name,
-                attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize,weight: UIFont.Weight.medium),NSAttributedStringKey.foregroundColor: UIColor.black])
+                attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.largeTextSize,weight: UIFont.Weight.medium),NSAttributedString.Key.foregroundColor: UIColor.black])
             cell.companyImageView.layer.cornerRadius = cell.companyImageView.bounds.height / 2
             cell.companyImageView.image = Company.defaultLogo
             company.getLogo(defaultLogo: Company.defaultLogo, completion: { (image) in
@@ -128,13 +128,13 @@ extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
             })
             cell.companyIndustryLabel.attributedText = NSAttributedString(
                 string: company.industry,
-                attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize,weight: UIFont.Weight.light), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.black)])
+                attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallTextSize,weight: UIFont.Weight.light), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.black)])
         }
         if let placement = placementList.filter({ $0.companyUuid == favourite.companyUuid.dehyphenated }).first, placement.status == .applied {
             cell.companyStatusLabel.isHidden = false
             cell.companyStatusLabel.attributedText = NSAttributedString(
                 string: NSLocalizedString("Applied", comment: ""),
-                attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerVerySmallTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.white)])
+                attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.biggerVerySmallTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.white)])
             cell.companyStatusLabel.backgroundColor = UIColor(netHex: Colors.mediumGreen)
             cell.companyStatusLabel.layer.cornerRadius = 5
             cell.companyStatusLabel.layer.masksToBounds = true
@@ -170,7 +170,7 @@ extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
         let text = NSLocalizedString("You can favourite a maximum of \(AppConstants.maximumNumberOfShortlists) companies.", comment: "")
         label.attributedText = NSAttributedString(
             string: text,
-            attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.mediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.pinkishGrey)])
+            attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.mediumTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.pinkishGrey)])
         label.sizeToFit()
         return label
     }

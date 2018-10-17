@@ -25,7 +25,7 @@ public struct Skinner : Skinning {
             navigationBar.isTranslucent = false
             navigationBar.barTintColor = RGBA.white.uiColor
             navigationBar.tintColor = RGBA.black.uiColor
-            navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:RGBA.black.uiColor]
+            navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:RGBA.black.uiColor]
             let image = UIImage()
             navigationBar.setBackgroundImage(image, for: .default)
             navigationBar.shadowImage = image
@@ -35,7 +35,7 @@ public struct Skinner : Skinning {
         navigationBar.isTranslucent = false
         navigationBar.barTintColor = skin.barTintColor.uiColor
         navigationBar.tintColor = skin.itemTintColor.uiColor
-        navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:skin.titleTintColor.uiColor]
+        navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:skin.titleTintColor.uiColor]
         if skin.hasDropShadow {
             navigationBar.setBackgroundImage(nil, for: .default)
             navigationBar.shadowImage = nil

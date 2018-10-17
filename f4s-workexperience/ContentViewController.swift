@@ -54,7 +54,7 @@ extension ContentViewController {
         self.webView.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
         self.webView.stringByEvaluatingJavaScript(from: "window.scroll(0,0)")
         self.webView.backgroundColor = UIColor.white
-        self.webView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        self.webView.scrollView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
         self.webView.delegate = self
         self.adjustNavigationBar()
     }
@@ -107,7 +107,7 @@ extension ContentViewController {
 extension ContentViewController: UIWebViewDelegate {
     func webViewDidFinishLoad(_: UIWebView) {
         self.webView.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-        self.webView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        self.webView.scrollView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
         self.webView.stringByEvaluatingJavaScript(from: "window.scroll(0,0)")
         MessageHandler.sharedInstance.hideLoadingOverlay()
     }

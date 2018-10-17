@@ -18,7 +18,7 @@ class StarRatingView: UIView {
     /// Name of image used to represent a full star
     public var fullStar: String = "ratingFilledStar"
     
-    @IBInspectable public var labelFont: UIFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+    @IBInspectable public var labelFont: UIFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
     
     /// The numerical value to display (0...5)
     @IBInspectable public var rating: Float {
@@ -168,10 +168,10 @@ extension StarRatingView {
     private func addAspectRatioConstraint(view: UIView) {
         let aspectRatioConstraint = NSLayoutConstraint(
             item: view,
-            attribute: NSLayoutAttribute.height,
-            relatedBy: NSLayoutRelation.equal,
+            attribute: NSLayoutConstraint.Attribute.height,
+            relatedBy: NSLayoutConstraint.Relation.equal,
             toItem: view,
-            attribute: NSLayoutAttribute.width,
+            attribute: NSLayoutConstraint.Attribute.width,
             multiplier: 1.0,
             constant: 0.0)
         aspectRatioConstraint.isActive = true

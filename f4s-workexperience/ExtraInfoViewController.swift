@@ -111,7 +111,7 @@ class ExtraInfoViewController: UIViewController {
         updateDOBValidityUnderlining()
         updateButtonStateAndImage()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardNotification(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardNotification(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
     deinit {
@@ -140,17 +140,17 @@ extension ExtraInfoViewController {
     /// Handles changes to keyboard size and position
     @objc func keyboardNotification(notification: NSNotification) {
         if let userInfo = notification.userInfo {
-            let endFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-            let duration:TimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
-            let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
-            let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
-            let animationCurve:UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
+            let endFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+            let duration:TimeInterval = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+            let animationCurveRawNSN = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
+            let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
+            let animationCurve:UIView.AnimationOptions = UIView.AnimationOptions(rawValue: animationCurveRaw)
             if (endFrame?.origin.y)! >= UIScreen.main.bounds.size.height {
                 let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
                 scrollView.contentInset = contentInset
                 scrollView.scrollIndicatorInsets = contentInset
             } else {
-                if let keyboardSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                if let keyboardSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
                     let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height + 20, right: 0)
                     scrollView.contentInset = contentInsets
                     scrollView.scrollIndicatorInsets = contentInsets
@@ -182,19 +182,19 @@ extension ExtraInfoViewController {
         let voucherString = NSLocalizedString("Voucher code (Optional)", comment: "")
         
         let placeHolderAttributes = [
-            NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.pinkishGrey),
-            NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular),
+            NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.pinkishGrey),
+            NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular),
             ]
         let inputStringAttributes: [String: Any] = [
-            NSAttributedStringKey.foregroundColor.rawValue: UIColor(netHex: Colors.black),
-            NSAttributedStringKey.font.rawValue: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular)]
+            NSAttributedString.Key.foregroundColor.rawValue: UIColor(netHex: Colors.black),
+            NSAttributedString.Key.font.rawValue: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular)]
         
         dobTextField.attributedPlaceholder = NSAttributedString(string: dobString, attributes: placeHolderAttributes)
         firstAndLastNameTextField.attributedPlaceholder = NSAttributedString(string: nameString, attributes: placeHolderAttributes)
         voucherCodeTextField.attributedPlaceholder = NSAttributedString(string: voucherString, attributes: placeHolderAttributes)
-        dobTextField.defaultTextAttributes = inputStringAttributes
-        firstAndLastNameTextField.defaultTextAttributes = inputStringAttributes
-        voucherCodeTextField.defaultTextAttributes = inputStringAttributes
+        dobTextField.defaultTextAttributes = convertToNSAttributedStringKeyDictionary(inputStringAttributes)
+        firstAndLastNameTextField.defaultTextAttributes = convertToNSAttributedStringKeyDictionary(inputStringAttributes)
+        voucherCodeTextField.defaultTextAttributes = convertToNSAttributedStringKeyDictionary(inputStringAttributes)
         
         dobTextField.inputView = datePicker
         
@@ -212,12 +212,12 @@ extension ExtraInfoViewController {
         let voucherString2 = "" //NSLocalizedString("tap here", comment: "")
         
         let infoAttributes = [
-            NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.warmGrey),
-            NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize, weight: UIFont.Weight.regular),
+            NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.warmGrey),
+            NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallTextSize, weight: UIFont.Weight.regular),
             ]
         let semiBoldInfoAttributes = [
-            NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.warmGrey),
-            NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallTextSize, weight: UIFont.Weight.semibold),
+            NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.warmGrey),
+            NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallTextSize, weight: UIFont.Weight.semibold),
             ]
         
         let dobInfoString1Attr = NSAttributedString(string: dobInfoString1,
@@ -648,54 +648,7 @@ extension ExtraInfoViewController {
     func performDocumentUpload(applicationContext: F4SApplicationContext) {
         let uploadController = documentUploadController
         uploadController.applicationContext = self.applicationContext
-        uploadController.completion = { [weak self] applicationContext in
-            DispatchQueue.main.async {
-                self?.afterDocumentUpload(applicationContext: applicationContext)
-            }
-        }
         self.navigationController?.pushViewController(uploadController, animated: true)
-    }
-    
-    func afterDocumentUpload(applicationContext: F4SApplicationContext) {
-        submitApplication(applicationContext: applicationContext)
-    }
-    
-    func submitApplication(applicationContext: F4SApplicationContext) {
-        showLoadingOverlay()
-        var user = applicationContext.user!
-        userService.updateUser(user: user) { [weak self] (result) in
-            guard let strongSelf = self else { return }
-            DispatchQueue.main.async {
-                strongSelf.hideLoadingOverlay()
-                switch result {
-                case .success(let userModel):
-                    guard let uuid = userModel.uuid else {
-                        MessageHandler.sharedInstance.displayWithTitle("Oops something went wrong", "Workfinder cannot complete this operation", parentCtrl: strongSelf)
-                        return
-                    }
-                    user.updateUuidAndPersistToLocalStorage(uuid: uuid)
-                    F4SNetworkSessionManager.shared.rebuildSessions() // Ensure session manager is aware of the possible change of user uuid
-                    var updatedContext = applicationContext
-                    updatedContext.user = user
-                    var updatedPlacement = applicationContext.placement!
-                    updatedPlacement.status = F4SPlacementStatus.applied
-                    updatedContext.placement = updatedPlacement
-                    strongSelf.applicationContext = updatedContext
-                    PlacementDBOperations.sharedInstance.savePlacement(placement: updatedPlacement)
-                    UserDefaults.standard.set(true, forKey: strongSelf.consentPreviouslyGivenKey)
-                    strongSelf.afterSubmitApplication(applicationContext: updatedContext)
-                case .error(let error):
-                    strongSelf.handleRetryForNetworkError(error, retry: {
-                        strongSelf.submitApplication(applicationContext: applicationContext)
-                    })
-                }
-            }
-        }
-    }
-    
-    func afterSubmitApplication(applicationContext: F4SApplicationContext) {
-        CustomNavigationHelper.sharedInstance.presentSuccessExtraInfoPopover(
-            parentCtrl: documentUploadController)
     }
 }
 
@@ -730,4 +683,9 @@ extension ExtraInfoViewController {
         MessageHandler.sharedInstance.hideLoadingOverlay()
         MessageHandler.sharedInstance.display(error.localizedDescription, parentCtrl: self)
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToNSAttributedStringKeyDictionary(_ input: [String: Any]) -> [NSAttributedString.Key: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
 }

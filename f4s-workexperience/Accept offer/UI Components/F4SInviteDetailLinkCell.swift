@@ -13,16 +13,16 @@ class F4SInviteDetailLinkCell: UITableViewCell {
     @IBOutlet weak var linkButton: UIButton!
     @IBOutlet weak var icon: UIImageView!
     
-    lazy var externalLinkTextAttributes: [NSAttributedStringKey: Any] = {
+    lazy var externalLinkTextAttributes: [NSAttributedString.Key: Any] = {
         var internalAttributes = internalLinkTextAttributes
-        internalAttributes[NSAttributedStringKey.underlineStyle] = NSUnderlineStyle.styleSingle.rawValue
+        internalAttributes[NSAttributedString.Key.underlineStyle] = NSUnderlineStyle.single.rawValue
         return internalAttributes
     }()
     
-    lazy var internalLinkTextAttributes: [NSAttributedStringKey: Any] = {
+    lazy var internalLinkTextAttributes: [NSAttributedString.Key: Any] = {
         return [
-            NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14),
-            NSAttributedStringKey.foregroundColor : UIColor.blue
+            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14),
+            NSAttributedString.Key.foregroundColor : UIColor.blue
         ]
     }()
     
@@ -68,7 +68,7 @@ class F4SInviteDetailLinkCell: UITableViewCell {
         }
     }
     
-    var textAttributes: [NSAttributedStringKey: Any] {
+    var textAttributes: [NSAttributedString.Key: Any] {
         return buttonAction == nil ? externalLinkTextAttributes : internalLinkTextAttributes
     }
     

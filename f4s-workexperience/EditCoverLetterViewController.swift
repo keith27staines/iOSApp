@@ -83,6 +83,7 @@ extension EditCoverLetterViewController : F4SDaysAndHoursViewControllerDelegate 
         availabilityPeriod.daysAndHours = model
         applicationContext.availabilityPeriod = availabilityPeriod
         self.delegate.editCoverLetterDidUpdate(applicationContext: applicationContext)
+        coverLetterTableView.reloadData()
     }
 }
 
@@ -168,7 +169,11 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
             
         case .availabilityHours:
             cell.editTextLabel.text = NSLocalizedString("Availability days/hours", comment: "")
-            cell.editValueLabel.text = "(optional) Choose"
+            if applicationContext.availabilityPeriod?.daysAndHours == nil {
+                cell.editValueLabel.text = "(optional) Choose"
+            } else {
+                cell.editValueLabel.text = "Selected"
+            }
 
         case .skills:
 
@@ -182,7 +187,7 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
             }
         }
 
-        cell.editValueLabel.attributedText = NSAttributedString(string: cell.editValueLabel.text!, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.mediumGray)])
+        cell.editValueLabel.attributedText = NSAttributedString(string: cell.editValueLabel.text!, attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.mediumGray)])
 
         return cell
     }

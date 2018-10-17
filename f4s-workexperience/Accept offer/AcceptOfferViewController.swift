@@ -29,8 +29,8 @@ class AcceptOfferViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         placementInviteModel = F4SPlacementInviteModel(context: accept)
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.delegate = self
         tableView.dataSource = self
         applyStyle()

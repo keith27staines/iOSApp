@@ -117,25 +117,25 @@ extension CompanyOtherTableViewCell {
                 guard let cell = customCollectionView.dequeueReusableCell(withReuseIdentifier: CompanyCollectionIdentifier, for: indexPath) as? CompanyCollectionViewCell else {
                     return UICollectionViewCell()
                 }
-                cell.numberLabel.attributedText = NSAttributedString(string: self.getEmployeeString(), attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.extraLargeTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.gray)])
+                cell.numberLabel.attributedText = NSAttributedString(string: self.getEmployeeString(), attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.extraLargeTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.gray)])
                 let text = NSLocalizedString("Employees", comment: "")
-                cell.textLabel.attributedText = NSAttributedString(string: text, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.verySmallTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.gray).withAlphaComponent(0.5)])
+                cell.textLabel.attributedText = NSAttributedString(string: text, attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.verySmallTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.gray).withAlphaComponent(0.5)])
                 return cell
             } else if company.turnover > 0 {
                 guard let cell = customCollectionView.dequeueReusableCell(withReuseIdentifier: CompanyCollectionIdentifier, for: indexPath) as? CompanyCollectionViewCell else {
                     return UICollectionViewCell()
                 }
-                cell.numberLabel.attributedText = NSAttributedString(string: self.getAnnualRevenueString(), attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.extraLargeTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.gray)])
+                cell.numberLabel.attributedText = NSAttributedString(string: self.getAnnualRevenueString(), attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.extraLargeTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.gray)])
                 let text = NSLocalizedString("Annual revenue", comment: "")
-                cell.textLabel.attributedText = NSAttributedString(string: text, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.verySmallTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.gray).withAlphaComponent(0.5)])
+                cell.textLabel.attributedText = NSAttributedString(string: text, attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.verySmallTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.gray).withAlphaComponent(0.5)])
                 return cell
             } else if company.turnoverGrowth > 0 {
                 guard let cell = customCollectionView.dequeueReusableCell(withReuseIdentifier: CompanyCollectionIdentifier, for: indexPath) as? CompanyCollectionViewCell else {
                     return UICollectionViewCell()
                 }
-                cell.numberLabel.attributedText = NSAttributedString(string: self.getAnnualGrowthString(), attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.extraLargeTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.gray)])
+                cell.numberLabel.attributedText = NSAttributedString(string: self.getAnnualGrowthString(), attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.extraLargeTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.gray)])
                 let text = NSLocalizedString("Annual growth", comment: "")
-                cell.textLabel.attributedText = NSAttributedString(string: text, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.verySmallTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.gray).withAlphaComponent(0.5)])
+                cell.textLabel.attributedText = NSAttributedString(string: text, attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.verySmallTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.gray).withAlphaComponent(0.5)])
                 return cell
             }
             return UICollectionViewCell()
@@ -144,17 +144,17 @@ extension CompanyOtherTableViewCell {
                 guard let cell = customCollectionView.dequeueReusableCell(withReuseIdentifier: CompanyCollectionIdentifier, for: indexPath) as? CompanyCollectionViewCell else {
                     return UICollectionViewCell()
                 }
-                cell.numberLabel.attributedText = NSAttributedString(string: self.getAnnualRevenueString(), attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.extraLargeTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.gray)])
+                cell.numberLabel.attributedText = NSAttributedString(string: self.getAnnualRevenueString(), attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.extraLargeTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.gray)])
                 let text = NSLocalizedString("Annual revenue", comment: "")
-                cell.textLabel.attributedText = NSAttributedString(string: text, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.verySmallTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.gray).withAlphaComponent(0.5)])
+                cell.textLabel.attributedText = NSAttributedString(string: text, attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.verySmallTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.gray).withAlphaComponent(0.5)])
                 return cell
             } else if company.turnoverGrowth > 0 {
                 guard let cell = customCollectionView.dequeueReusableCell(withReuseIdentifier: CompanyCollectionIdentifier, for: indexPath) as? CompanyCollectionViewCell else {
                     return UICollectionViewCell()
                 }
-                cell.numberLabel.attributedText = NSAttributedString(string: self.getAnnualGrowthString(), attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.extraLargeTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.gray)])
+                cell.numberLabel.attributedText = NSAttributedString(string: self.getAnnualGrowthString(), attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.extraLargeTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.gray)])
                 let text = NSLocalizedString("Annual growth", comment: "")
-                cell.textLabel.attributedText = NSAttributedString(string: text, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.verySmallTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.gray).withAlphaComponent(0.5)])
+                cell.textLabel.attributedText = NSAttributedString(string: text, attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.verySmallTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.gray).withAlphaComponent(0.5)])
                 return cell
             }
             return UICollectionViewCell()
@@ -163,9 +163,9 @@ extension CompanyOtherTableViewCell {
                 guard let cell = customCollectionView.dequeueReusableCell(withReuseIdentifier: CompanyCollectionIdentifier, for: indexPath) as? CompanyCollectionViewCell else {
                     return UICollectionViewCell()
                 }
-                cell.numberLabel.attributedText = NSAttributedString(string: self.getAnnualGrowthString(), attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.extraLargeTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.gray)])
+                cell.numberLabel.attributedText = NSAttributedString(string: self.getAnnualGrowthString(), attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.extraLargeTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.gray)])
                 let text = NSLocalizedString("Annual growth", comment: "")
-                cell.textLabel.attributedText = NSAttributedString(string: text, attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.verySmallTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor(netHex: Colors.gray).withAlphaComponent(0.5)])
+                cell.textLabel.attributedText = NSAttributedString(string: text, attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.verySmallTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.gray).withAlphaComponent(0.5)])
                 return cell
             }
             return UICollectionViewCell()

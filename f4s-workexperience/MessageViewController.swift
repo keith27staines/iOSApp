@@ -90,10 +90,10 @@ extension MessageViewController {
         {
         case self.currentUserUuid:
             cell.textView?.textColor = UIColor(netHex: Colors.messageOutgoingText)
-            cell.textView?.linkTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: UIColor(netHex: Colors.messageOutgoingLink), NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue]
+            cell.textView?.linkTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue: UIColor(netHex: Colors.messageOutgoingLink), NSAttributedString.Key.underlineStyle.rawValue: NSUnderlineStyle.single.rawValue])
         default:
             cell.textView?.textColor = UIColor(netHex: Colors.messageIncomingText)
-            cell.textView?.linkTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: UIColor(netHex: Colors.messageIncomingLink), NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue]
+            cell.textView?.linkTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue: UIColor(netHex: Colors.messageIncomingLink), NSAttributedString.Key.underlineStyle.rawValue: NSUnderlineStyle.single.rawValue])
         }
         cell.textView?.font = UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular)
 
@@ -102,15 +102,15 @@ extension MessageViewController {
             {
             case self.currentUserUuid:
                 // outgoing bubble -> right inset
-                cell.cellBottomLabel?.textInsets = UIEdgeInsetsMake(0, 0, 0, 24)
+                cell.cellBottomLabel?.textInsets = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 24)
                 break
             default:
                 // incomming bubble -> left inset
-                cell.cellBottomLabel?.textInsets = UIEdgeInsetsMake(0, 24, 0, 0)
+                cell.cellBottomLabel?.textInsets = UIEdgeInsets.init(top: 0, left: 24, bottom: 0, right: 0)
                 break
             }
         } else {
-            cell.cellBottomLabel?.textInsets = UIEdgeInsetsMake(0, 0, 0, 0)
+            cell.cellBottomLabel?.textInsets = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
         }
         return cell
     }
@@ -191,10 +191,17 @@ extension MessageViewController {
 // MARK: - helpers
 extension MessageViewController {
     override func senderId() -> String {
+        //super.senderId
         return self.currentUserUuid
     }
 
     override func senderDisplayName() -> String {
         return self.currentUserUuid
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
 }

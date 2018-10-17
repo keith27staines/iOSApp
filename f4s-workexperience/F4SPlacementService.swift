@@ -214,6 +214,7 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
         var company_uuid: F4SUUID
         var interests: [F4SUUID]
         var coverletter_choices: [String]?
+        var vendor_uuid: String?
     }
     
     public func createPlacement(placement: F4SPlacement, completion: @escaping (F4SNetworkResult<F4SPlacementCreateResult>) -> ()) {
@@ -225,7 +226,7 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
         }
         let userUuid = placement.userUuid!
         let companyUuid = placement.companyUuid!
-        let createPlacement = PlacementJson(user_uuid: userUuid, company_uuid: companyUuid, interests: interests, coverletter_choices: nil)
+        let createPlacement = PlacementJson(user_uuid: userUuid, company_uuid: companyUuid, interests: interests, coverletter_choices: nil, vendor_uuid: F4SUserService.vendorID)
         do {
             let encoder = JSONEncoder()
             encoder.outputFormatting = .prettyPrinted

@@ -48,7 +48,7 @@ class InterestsViewController: UIViewController, UIScrollViewDelegate {
         }
     }
 
-    let uiIndicatorBusy = UIActivityIndicatorView(activityIndicatorStyle: .white)
+    let uiIndicatorBusy = UIActivityIndicatorView(style: .white)
 
     var interestsModel: InterestsModel {
         return mapModel.interestsModel
@@ -156,8 +156,8 @@ extension InterestsViewController {
     func updateResultsLabel(count: Int) {
         let label = UILabel()
         let resultsString = count == 1 ? " Result" : " Results"
-        label.attributedText = NSAttributedString(string: "\(count)" + resultsString, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: Style.smallTextSize,weight: UIFont.Weight.regular),
-            NSAttributedStringKey.foregroundColor: UIColor.white])
+        label.attributedText = NSAttributedString(string: "\(count)" + resultsString, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: Style.smallTextSize,weight: UIFont.Weight.regular),
+            NSAttributedString.Key.foregroundColor: UIColor.white])
         label.sizeToFit()
         let customBarBtn = UIBarButtonItem(customView: label)
         self.navigationItem.setRightBarButton(customBarBtn, animated: true)
@@ -172,7 +172,7 @@ extension InterestsViewController {
             let resultsString = "Results"
             label.attributedText = NSAttributedString(
                 string: resultsString,
-                attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: Style.smallTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.white])
+                attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: Style.smallTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor.white])
             label.sizeToFit()
             let customBarBtn = UIBarButtonItem(customView: label)
 
@@ -208,7 +208,7 @@ extension InterestsViewController: UICollectionViewDataSource {
 
         if !cell.isSelected && self.selectedInterests.contains(where: { $0.uuid == currentInterest.uuid }) {
             cell.isSelected = true
-            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition())
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: UICollectionView.ScrollPosition())
         }
         return cell
     }
@@ -264,7 +264,7 @@ extension InterestsViewController: UICollectionViewDelegateFlowLayout {
     func getTextSize(_ text: String, font: UIFont, maxWidth: CGFloat) -> CGSize {
         let textString = text as NSString
 
-        let attributes = [NSAttributedStringKey.font: font]
+        let attributes = [NSAttributedString.Key.font: font]
         let rect = textString.boundingRect(with: CGSize(width: maxWidth, height: 40), options: .truncatesLastVisibleLine, attributes: attributes, context: nil)
 
         return CGSize(width: rect.width + 20, height: rect.height)

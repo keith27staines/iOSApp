@@ -69,9 +69,9 @@ class SideDrawerTableViewCell: TableViewCell {
         return lineImageView
     }()
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.lineImageView.bringSubview(toFront: self)
+        self.lineImageView.bringSubviewToFront(self)
         self.commonSetup()
     }
 

@@ -39,7 +39,7 @@ open class DrawerBarButtonItem: UIBarButtonItem {
 
     public convenience init(target: AnyObject?, action: Selector, menuIconColor: UIColor) {
         let menuButton = AnimatedMenuButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30), strokeColor: menuIconColor)
-        menuButton.addTarget(target, action: action, for: UIControlEvents.touchUpInside)
+        menuButton.addTarget(target, action: action, for: UIControl.Event.touchUpInside)
         self.init(customView: menuButton)
 
         self.menuButton = menuButton

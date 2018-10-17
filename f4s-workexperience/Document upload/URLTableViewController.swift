@@ -18,7 +18,7 @@ class URLTableViewController: UIViewController {
         super.viewDidLoad()
         tableView.allowsMultipleSelection = false
         tableView.estimatedRowHeight = 40.0
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
     }
     
     func createNewLink() {
@@ -142,7 +142,7 @@ extension URLTableViewController : UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             documentUrlModel.deleteDescriptor(indexPath: indexPath)
             tableView.deleteRows(at: [indexPath], with: .fade)

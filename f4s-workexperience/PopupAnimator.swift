@@ -52,7 +52,7 @@ class PopupAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         }
         
         containerView.addSubview(toView)
-        containerView.bringSubview(toFront: popupFrame)
+        containerView.bringSubviewToFront(popupFrame)
         
         UIView.animate(
             withDuration: duration,

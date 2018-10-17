@@ -13,7 +13,7 @@ public struct F4SAvailabilityPeriod {
     
     public var firstDay: F4SCalendarDay?
     public var lastDay: F4SCalendarDay?
-    public var daysAndHours: F4SDaysAndHoursModel
+    public var daysAndHours: F4SDaysAndHoursModel?
     
     public var availabilityJson: F4SAvailabilityPeriodsJson? {
         let start_date = F4SAvailabilityPeriod.formatYearString(day: self.firstDay)
@@ -33,7 +33,7 @@ public struct F4SAvailabilityPeriod {
         userDefaults.set(data(), forKey: "availability")
     }
     
-    public static func fromUserDefaults() -> F4SAvailabilityPeriod {
+    public static func fromUserDefaults() -> F4SAvailabilityPeriod? {
         let userDefaults = UserDefaults.standard
         guard let data = userDefaults.value(forKey: "availability") as? Data else {
             return F4SAvailabilityPeriod(firstDay: nil, lastDay: nil, daysAndHours: nil)
@@ -87,11 +87,12 @@ public struct F4SAvailabilityPeriod {
     public init(firstDay: F4SCalendarDay?, lastDay: F4SCalendarDay?, daysAndHours: F4SDaysAndHoursModel?) {
         self.firstDay = firstDay
         self.lastDay = lastDay
-        self.daysAndHours = daysAndHours ?? F4SDaysAndHoursModel()
+        self.daysAndHours = daysAndHours //?? F4SDaysAndHoursModel()
     }
     
-    private static func times(daysAndHours: F4SDaysAndHoursModel) -> [F4SDayTimeInfoJson] {
+    private static func times(daysAndHours: F4SDaysAndHoursModel?) -> [F4SDayTimeInfoJson] {
         var times = [F4SDayTimeInfoJson]()
+        guard let daysAndHours = daysAndHours else { return times }
         for dayHour in daysAndHours.allDays {
             guard dayHour.dayIsSelected else { continue }
             guard dayHour.hoursType != .custom else { continue }

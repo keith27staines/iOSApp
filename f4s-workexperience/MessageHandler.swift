@@ -108,13 +108,13 @@ class MessageHandler {
     }
 
     func presentEnableLocationInfo(parentCtrl: UIViewController) {
-        let alert = UIAlertController(title: "", message: NSLocalizedString("Please enable location services.", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Settings", comment: ""), style: UIAlertActionStyle.default) { _ in
-            if let url = URL(string: UIApplicationOpenSettingsURLString), UIApplication.shared.canOpenURL(url) {
+        let alert = UIAlertController(title: "", message: NSLocalizedString("Please enable location services.", comment: ""), preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Settings", comment: ""), style: UIAlertAction.Style.default) { _ in
+            if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url)
             }
         })
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.cancel) { _ in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.cancel) { _ in
             if parentCtrl is MapViewController {
                 (parentCtrl as! MapViewController).displayDefaultSearch()
             }

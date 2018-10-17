@@ -46,7 +46,7 @@ class F4SDaysAndHoursViewController: UIViewController {
         pickerView.translatesAutoresizingMaskIntoConstraints = false
         pickerView.isHidden = true
         self.view.addSubview(pickerView)
-        self.addChildViewController(pickerVC)
+        self.addChild(pickerVC)
         pickerVC.delegate = self
         return pickerVC
     }()
@@ -196,7 +196,7 @@ extension F4SDaysAndHoursViewController {
 // MARK:- Configure controls
 extension F4SDaysAndHoursViewController {
     func configureControls() {
-        tableView.estimatedRowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = UITableView.automaticDimension
         let item = UIBarButtonItem()
         item.title = ""
         item.image = UIImage(named: "information")
@@ -271,8 +271,8 @@ extension F4SDaysAndHoursViewController: F4SDisplayInformationViewControllerDele
         maskView?.rightAnchor.constraint(equalTo: mainView.rightAnchor).isActive = true
         maskView?.topAnchor.constraint(equalTo: mainView.topAnchor).isActive = true
         maskView?.bottomAnchor.constraint(equalTo: mainView.bottomAnchor).isActive = true
-        if !self.childViewControllers.contains(infoController) {
-            self.addChildViewController(infoController)
+        if !self.children.contains(infoController) {
+            self.addChild(infoController)
         }
         infoView.alpha = 0.0
         infoView.centerXAnchor.constraint(equalTo: mainView.centerXAnchor).isActive = true
@@ -315,6 +315,10 @@ extension F4SDaysAndHoursViewController {
             return day.dayOfWeek.isWeekend
         })
         reloadDataViews()
+        self.delegate.didUpdateDaysAndHours(model: model)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
         self.delegate.didUpdateDaysAndHours(model: model)
     }
 }

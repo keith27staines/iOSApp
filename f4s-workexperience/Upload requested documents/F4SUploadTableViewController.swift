@@ -16,7 +16,7 @@ class F4SUploadTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.allowsMultipleSelection = false
         tableView.estimatedRowHeight = 60.0
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
     }
 
     // MARK: - Table view data source

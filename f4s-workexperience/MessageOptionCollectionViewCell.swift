@@ -20,7 +20,7 @@ class MessageOptionCollectionViewCell: UICollectionViewCell {
             return
         }
         nibView.frame = self.bounds
-        nibView.autoresizingMask = [UIViewAutoresizing.flexibleHeight, UIViewAutoresizing.flexibleWidth]
+        nibView.autoresizingMask = [UIView.AutoresizingMask.flexibleHeight, UIView.AutoresizingMask.flexibleWidth]
         nibView.isUserInteractionEnabled = false
         self.addSubview(nibView)
     }

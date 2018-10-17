@@ -181,7 +181,7 @@ class MapViewController: UIViewController {
     override var canBecomeFirstResponder: Bool {
         return true
     }
-    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake && (debug?.userCanAccessDebugMenu() ?? false) {
             CustomNavigationHelper.sharedInstance.presentHiddenDebugController(parentCtrl: self)
         }
@@ -324,7 +324,7 @@ extension MapViewController {
         
         self.refineSearchLabel.attributedText = NSAttributedString(
             string: refineStr,
-            attributes: [NSAttributedStringKey.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.paragraphStyle: paragraph])
+            attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.paragraphStyle: paragraph])
     }
     
     fileprivate func setupFramesAndSizes() {
@@ -358,9 +358,9 @@ extension MapViewController {
         searchLocationTextField!.hidesWhenSelected = true
         searchLocationTextField!.hidesWhenEmpty = true
         searchLocationTextField!.enableAttributedText = true
-        var attributes = [NSAttributedStringKey: AnyObject]()
-        attributes[NSAttributedStringKey.foregroundColor] = UIColor.black
-        attributes[NSAttributedStringKey.font] = UIFont(name: "HelveticaNeue-Bold", size: 15.0)
+        var attributes = [NSAttributedString.Key: AnyObject]()
+        attributes[NSAttributedString.Key.foregroundColor] = UIColor.black
+        attributes[NSAttributedString.Key.font] = UIFont(name: "HelveticaNeue-Bold", size: 15.0)
         searchLocationTextField!.autoCompleteAttributes = attributes
         
         searchLocationTextField.returnKeyType = .search
@@ -377,10 +377,10 @@ extension MapViewController {
         }
         
         infoWindow.companyNameLabel.attributedText = NSAttributedString(
-            string: company.name, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: Style.largeTextSize, weight: UIFont.Weight.semibold), NSAttributedStringKey.foregroundColor: UIColor.black])
+            string: company.name, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: Style.largeTextSize, weight: UIFont.Weight.semibold), NSAttributedString.Key.foregroundColor: UIColor.black])
         
         infoWindow.industryNameLabel.attributedText = NSAttributedString(
-            string: company.industry, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: Style.smallerMediumTextSize, weight: UIFont.Weight.light), NSAttributedStringKey.foregroundColor: UIColor.black])
+            string: company.industry, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: Style.smallerMediumTextSize, weight: UIFont.Weight.light), NSAttributedString.Key.foregroundColor: UIColor.black])
         
         infoWindow.logoImageView.image = UIImage(named: "DefaultLogo")
         if !company.logoUrl.isEmpty, let url = NSURL(string: company.logoUrl) {
@@ -401,8 +401,8 @@ extension MapViewController {
             
             infoWindow.ratingLabel.attributedText = NSAttributedString(
                 string: String(format: "%.1f", company.rating),
-                attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: Style.biggerVerySmallTextSize, weight: UIFont.Weight.semibold),
-                             NSAttributedStringKey.foregroundColor: UIColor.black])
+                attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: Style.biggerVerySmallTextSize, weight: UIFont.Weight.semibold),
+                             NSAttributedString.Key.foregroundColor: UIColor.black])
         }
         
         let height = infoWindow.backgroundView.bounds.height
@@ -485,11 +485,11 @@ extension MapViewController {
             if let delegate: CAAnimationDelegate = completionDelegate {
                 slideInTransition.delegate = delegate
             }
-            slideInTransition.type = kCATransitionPush
-            slideInTransition.subtype = kCATransitionFromRight
+            slideInTransition.type = CATransitionType.push
+            slideInTransition.subtype = CATransitionSubtype.fromRight
             slideInTransition.duration = 1
-            slideInTransition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-            slideInTransition.fillMode = kCAFillModeRemoved
+            slideInTransition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+            slideInTransition.fillMode = CAMediaTimingFillMode.removed
             
             refineSearchLabel.layer.add(slideInTransition, forKey: "slideInFromRight")
         case .slideOut:
@@ -497,11 +497,11 @@ extension MapViewController {
             if let delegate: CAAnimationDelegate = completionDelegate {
                 slideOutTransition.delegate = delegate
             }
-            slideOutTransition.type = kCATransitionPush
-            slideOutTransition.subtype = kCATransitionFromLeft
+            slideOutTransition.type = CATransitionType.push
+            slideOutTransition.subtype = CATransitionSubtype.fromLeft
             slideOutTransition.duration = 1
-            slideOutTransition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-            slideOutTransition.fillMode = kCAFillModeRemoved
+            slideOutTransition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+            slideOutTransition.fillMode = CAMediaTimingFillMode.removed
             // slideOutTransition.delegate =
             refineSearchLabel.layer.add(slideOutTransition, forKey: "slideOutFromLeft")
         }
@@ -695,7 +695,7 @@ extension MapViewController: UITextFieldDelegate {
                 backgroundView.addGestureRecognizer(tapGesture)
             }
             self.view.addSubview(backgroundView)
-            self.view.bringSubview(toFront: searchView)
+            self.view.bringSubviewToFront(searchView)
         }
     }
     

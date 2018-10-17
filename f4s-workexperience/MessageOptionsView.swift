@@ -37,7 +37,7 @@ class MessageOptionsView: UICollectionReusableView {
         super.init(frame: frame)
         let nibView = Bundle.main.loadNibNamed("MessageOptionsView", owner: self, options: nil)?[0] as! UIView
         nibView.frame = self.bounds
-        nibView.autoresizingMask = [UIViewAutoresizing.flexibleHeight, UIViewAutoresizing.flexibleWidth]
+        nibView.autoresizingMask = [UIView.AutoresizingMask.flexibleHeight, UIView.AutoresizingMask.flexibleWidth]
         self.addSubview(nibView)
 
         self.backgroundColor = UIColor.white
@@ -50,7 +50,7 @@ class MessageOptionsView: UICollectionReusableView {
         self.optionCollectionView.delegate = self
         self.optionCollectionView.dataSource = self
 
-        self.autoresizingMask = [UIViewAutoresizing.flexibleHeight, UIViewAutoresizing.flexibleWidth]
+        self.autoresizingMask = [UIView.AutoresizingMask.flexibleHeight, UIView.AutoresizingMask.flexibleWidth]
     }
 
     func loadMessageOptions(options: [F4SCannedResponse], parentController: UIViewController) {

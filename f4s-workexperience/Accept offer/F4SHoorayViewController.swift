@@ -138,7 +138,7 @@ extension F4SHoorayViewController {
             self.addToCalendarButton.isEnabled = true
         }
         let settingsAction = UIAlertAction(title: "Settings", style: .default) { (action) in
-            let openSettingsUrl = URL(string: UIApplicationOpenSettingsURLString)
+            let openSettingsUrl = URL(string: UIApplication.openSettingsURLString)
             UIApplication.shared.open(openSettingsUrl!)
         }
         alert.addAction(cancelAction)
