@@ -48,14 +48,16 @@ class NotificationHelper {
         
         if isAppActive {
             let alert = UIAlertController(title: title, message: body, preferredStyle: .alert)
-            let show = UIAlertAction(title: NSLocalizedString("Show", comment: ""), style: .default) { [weak self] _ in
-                self?.dispatchToBestDestination(for: type, threadUuid: threadUuid, placementUuid: placementUuid)
-            }
-            let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default) { _ in
-                log.debug("user received notif and pressed cancel")
-            }
-            alert.addAction(show)
-            alert.addAction(cancel)
+            let ok = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default) //{}
+            alert.addAction(ok)
+//            let show = UIAlertAction(title: NSLocalizedString("Show", comment: ""), style: .default) { [weak self] _ in
+//                self?.dispatchToBestDestination(for: type, threadUuid: threadUuid, placementUuid: placementUuid)
+//            }
+//            let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default) { _ in
+//                log.debug("user received notif and pressed cancel")
+//            }
+//            alert.addAction(show)
+//            alert.addAction(cancel)
             if let window = UIApplication.shared.delegate?.window {
                 if let rootViewCtrl = window?.rootViewController {
                     if let topViewController = rootViewCtrl.topMostViewController {

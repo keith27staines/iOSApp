@@ -54,7 +54,7 @@ class F4SUploadSpecifiedDocumentsViewController: UIViewController {
                 let canSubmit = strongSelf.model.canSubmitToServer()
                 strongSelf.uploadButton.isEnabled = canSubmit
             }
-            
+
         }
     }
     
@@ -84,16 +84,16 @@ class F4SUploadSpecifiedDocumentsViewController: UIViewController {
         guard model.canSubmitToServer() else { return }
         MessageHandler.sharedInstance.showLightLoadingOverlay(self.view)
         model.submitToServer { [weak self] result in
-            guard let strongSelf = self else { return }
+            guard let strongSelf = self else {
+                return }
             DispatchQueue.main.async {
+                MessageHandler.sharedInstance.hideLoadingOverlay()
                 switch result {
                 case .error(let error):
                     MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
-                    MessageHandler.sharedInstance.hideLoadingOverlay()
                 case .success( _ ):
                     let alert = UIAlertController(title: "Uploaded!", message: "We will pass on these links to \(strongSelf.companyName)\n\nThank you!", preferredStyle: .alert)
                     let action = UIAlertAction(title: "Close", style: .default, handler: { (_) in
-                        MessageHandler.sharedInstance.hideLoadingOverlay()
                         strongSelf.navigationController?.popViewController(animated: true)
                     })
                     alert.addAction(action)

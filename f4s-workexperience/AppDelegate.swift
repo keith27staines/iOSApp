@@ -133,25 +133,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        let appState = UIApplication.shared.applicationState
-        if appState == .active {
-            if let window = self.window {
-                NotificationHelper.sharedInstance.handleRemoteNotification(userInfo: userInfo, window: window, isAppActive: true)
-            }
-        } else {
-            if let window = self.window {
-                NotificationHelper.sharedInstance.handleRemoteNotification(userInfo: userInfo, window: window, isAppActive: false)
+        DispatchQueue.main.async {
+            let appState = UIApplication.shared.applicationState
+            if appState == .active {
+                if let window = self.window {
+                    NotificationHelper.sharedInstance.handleRemoteNotification(userInfo: userInfo, window: window, isAppActive: true)
+                }
+            } else {
+                if let window = self.window {
+                    NotificationHelper.sharedInstance.handleRemoteNotification(userInfo: userInfo, window: window, isAppActive: false)
+                }
             }
         }
-        
         completionHandler(UIBackgroundFetchResult.newData)
-    }
-    
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-        self.application(application, didReceiveRemoteNotification: userInfo) {
-            _ in
-            log.debug("Recieved remote notification with userInfo: \(userInfo)")
-        }
     }
 
     // MARK:- Handle restoration of background session
