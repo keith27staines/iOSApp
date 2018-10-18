@@ -19,18 +19,23 @@ class F4SSeePeopleAndAccountsTableViewCell: UITableViewCell {
     var leftLink: URL? {
         didSet {
             leftButton.isEnabled = leftLink != nil
+            leftImageView.isUserInteractionEnabled = leftButton.isEnabled
         }
     }
     
     var rightLink: URL? {
         didSet {
             rightButton.isEnabled = rightLink != nil
+            rightImageView.isUserInteractionEnabled = rightButton.isEnabled
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        let tapLeft = UITapGestureRecognizer(target: self, action: #selector(leftButtonTapped))
+        leftImageView.addGestureRecognizer(tapLeft)
+        let tapRight = UITapGestureRecognizer(target: self, action: #selector(rightButtonTapped))
+        rightImageView.addGestureRecognizer(tapRight)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

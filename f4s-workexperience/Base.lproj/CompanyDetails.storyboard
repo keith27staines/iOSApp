@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="uNs-pa-HII">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="uNs-pa-HII">
     <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,10 +22,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iCq-ty-4y3">
-                                <rect key="frame" x="0.0" y="64" width="375" height="1136"/>
+                                <rect key="frame" x="0.0" y="70" width="375" height="1130"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultLogo" translatesAutoresizingMaskIntoConstraints="NO" id="DAT-9E-MNk">
-                                        <rect key="frame" x="163" y="0.0" width="50" height="60"/>
+                                        <rect key="frame" x="162.5" y="0.0" width="50" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="ZQv-b9-3q0"/>
                                             <constraint firstAttribute="height" constant="60" id="gAy-0p-Chd"/>
@@ -44,7 +41,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UTb-CI-en7">
-                                        <rect key="frame" x="10" y="102" width="355" height="946"/>
+                                        <rect key="frame" x="10" y="102" width="355" height="940"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="industryCell" rowHeight="31" id="Jk8-ue-mnk" customClass="IndustryTableViewCell" customModule="f4s_workexperience" customModuleProvider="target">
@@ -247,7 +244,7 @@
                                                     <outlet property="secondLineView" destination="SSA-w1-9Ni" id="xEA-dm-DpJ"/>
                                                 </connections>
                                             </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="buttonsCell" id="QyC-Ih-DmP" customClass="F4SSeePeopleAndAccountsTableViewCell" customModule="f4s_workexperience" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="buttonsCell" id="QyC-Ih-DmP" customClass="F4SSeePeopleAndAccountsTableViewCell" customModule="f4s_workexperience" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="173" width="355" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QyC-Ih-DmP" id="ze7-TB-7HG">
@@ -260,8 +257,9 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="I6M-VT-QzL">
                                                                     <rect key="frame" x="0.0" y="0.0" width="154" height="20"/>
                                                                     <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="1000" image="ui-linkedin-icon" translatesAutoresizingMaskIntoConstraints="NO" id="wLO-g1-MnU">
+                                                                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="1000" image="ui-linkedin-icon" translatesAutoresizingMaskIntoConstraints="NO" id="wLO-g1-MnU">
                                                                             <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                                                            <gestureRecognizers/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="wLO-g1-MnU" secondAttribute="height" multiplier="1:1" id="7lA-Vr-m43"/>
                                                                             </constraints>
@@ -281,8 +279,9 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Cs0-Wd-JFH">
                                                                     <rect key="frame" x="228" y="0.0" width="119" height="20"/>
                                                                     <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ui-duedil-icon" translatesAutoresizingMaskIntoConstraints="NO" id="pbi-Ib-STk">
+                                                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ui-duedil-icon" translatesAutoresizingMaskIntoConstraints="NO" id="pbi-Ib-STk">
                                                                             <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                                                            <gestureRecognizers/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="pbi-Ib-STk" secondAttribute="height" multiplier="1:1" id="b0v-gn-tih"/>
                                                                             </constraints>
@@ -348,13 +347,13 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PyC-jp-vgP">
-                                                            <rect key="frame" x="64" y="10" width="248" height="24"/>
+                                                            <rect key="frame" x="64" y="10" width="248" height="23.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Wjy-pv-NZE">
-                                                            <rect key="frame" x="151" y="11" width="20" height="20"/>
+                                                            <rect key="frame" x="151" y="12" width="20" height="20"/>
                                                         </activityIndicatorView>
                                                     </subviews>
                                                     <constraints>
@@ -379,7 +378,7 @@
                                         </prototypes>
                                     </tableView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="aes-Oq-0hB">
-                                        <rect key="frame" x="20" y="1056" width="335" height="60"/>
+                                        <rect key="frame" x="20" y="1050" width="335" height="60"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ayf-CV-tRe">
                                                 <rect key="frame" x="0.0" y="0.0" width="68.5" height="60"/>

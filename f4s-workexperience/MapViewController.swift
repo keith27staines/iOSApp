@@ -136,14 +136,7 @@ class MapViewController: UIViewController {
     /// Updated set of favourites
     var favouriteSet: Set<F4SCompanyPin> = Set<F4SCompanyPin>() {
         didSet {
-            guard let previousFavouriteSet = previousFavouriteSet else {
-                self.previousFavouriteSet = favouriteSet
-                return
-            }
-            if previousFavouriteSet != favouriteSet {
-                self.previousFavouriteSet = favouriteSet
-                self.reloadMapFromModel(mapModel: unfilteredMapModel!, completed: {})
-            }
+            self.previousFavouriteSet = favouriteSet
         }
     }
     
