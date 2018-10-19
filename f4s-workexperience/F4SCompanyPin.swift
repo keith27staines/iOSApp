@@ -36,8 +36,12 @@ public class F4SCompanyPin : NSObject, GMUClusterItem {
     }
     
     // MARK:- Hashable conformance
-    override public var hashValue: Int {
-        return position.latitude.hashValue ^ position.longitude.hashValue ^ companyUuid.hashValue
+    public override var hash: Int {
+        var hasher = Hasher()
+        hasher.combine(position.latitude.hashValue)
+        hasher.combine(position.longitude.hashValue)
+        hasher.combine(companyUuid.hashValue)
+        return hasher.finalize()
     }
     
     public static func ==(lhs: F4SCompanyPin, rhs: F4SCompanyPin) -> Bool {

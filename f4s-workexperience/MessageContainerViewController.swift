@@ -67,16 +67,16 @@ class MessageContainerViewController: UIViewController {
         addAnswersView()
         setNavigationBar()
         subjectLabel.text = company?.name ?? "Workfinder"
-        
-        UIApplication.shared.statusBarStyle = .lightContent
         self.evo_drawerController?.openDrawerGestureModeMask = .init(rawValue: 0)
-        
         self.tabBarController?.tabBar.isTranslucent = true
         self.tabBarController?.tabBar.isHidden = true
         guard let threadUuid = self.threadUuid else { return }
         loadModel(threadUuid: threadUuid)
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     var modelBuilder: F4SMessageModelBuilder? = nil
     

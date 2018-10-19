@@ -42,11 +42,6 @@ class OnboardingViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
-    }
 }
 
 // MARK: - adjust appereance
@@ -81,13 +76,16 @@ extension OnboardingViewController {
     }
 
     func setupAppearance() {
-        setNeedsStatusBarAppearanceUpdate()
-        UIApplication.shared.statusBarStyle = .lightContent
         styleNavigationController()
         view.backgroundColor = RGBA.workfinderGreen.uiColor
         view.layoutSubviews()
         setUpButtons()
         setupLabels()
+        setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
     }
 }
 

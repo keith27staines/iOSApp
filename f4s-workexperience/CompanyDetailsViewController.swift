@@ -311,8 +311,6 @@ extension CompanyDetailsViewController {
             }
         }
 
-        let interestSet = InterestDBOperations.sharedInstance.interestsForCurrentUser()
-        let interestList: [F4SInterest] = [F4SInterest](interestSet)
         if self.placement != nil {
             // placement is already created
             // placement in progress
@@ -324,6 +322,8 @@ extension CompanyDetailsViewController {
             guard let company = self.company else {
                 return
             }
+            //let interestSet = InterestDBOperations.sharedInstance.interestsForCurrentUser()
+            //let interestList: [F4SInterest] = [F4SInterest](interestSet)
             MessageHandler.sharedInstance.showLoadingOverlay(self.view)
             var placement = F4SPlacement(
                 userUuid: F4SUser.userUuidFromKeychain,

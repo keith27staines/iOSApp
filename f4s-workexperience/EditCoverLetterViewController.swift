@@ -62,6 +62,10 @@ class EditCoverLetterViewController: UIViewController {
         Skinner().apply(buttonSkin: skin?.primaryButtonSkin, to: updateButton)
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     func configureTemplate() {
         let previouslySelectedBlanks = TemplateChoiceDBOperations.sharedInstance.getSelectedTemplateBlanks()
         let templateBlanks = currentTemplate.blanks

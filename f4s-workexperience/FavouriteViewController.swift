@@ -48,6 +48,10 @@ class FavouriteViewController: UIViewController {
         adjustNavigationBar()
         loadData()
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
+    }
 }
 //MARK: - UI Setup
 extension FavouriteViewController {

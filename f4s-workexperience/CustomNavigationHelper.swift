@@ -165,7 +165,8 @@ class CustomNavigationHelper {
     
     private func createTimelineNavigationController(threadUUID: String?) {
         let timelineStoryboard = UIStoryboard(name: "TimelineView", bundle: nil)
-        timelineViewController = timelineStoryboard.instantiateViewController(withIdentifier: "timelineViewCtrl") as! TimelineViewController
+        guard let timelineViewController = timelineStoryboard.instantiateViewController(withIdentifier: "timelineViewCtrl") as? TimelineViewController else { return }
+        self.timelineViewController = timelineViewController
         timelineViewController.threadUuid = threadUUID
         let timelineBarItem = UITabBarItem(title: "Timeline", image: UIImage(named: "ui-timeline-icon")?.withRenderingMode(.alwaysTemplate), selectedImage: nil)
         timelineNavigationController = RotationAwareNavigationController(rootViewController: timelineViewController)
@@ -174,7 +175,8 @@ class CustomNavigationHelper {
     
     private func createFavouritesNavigationController() {
         let favouriteStoryboard = UIStoryboard(name: "Favourite", bundle: nil)
-        favouritesViewController = favouriteStoryboard.instantiateViewController(withIdentifier: "FavouriteViewCtrl") as! FavouriteViewController
+        guard let favouritesViewController = favouriteStoryboard.instantiateViewController(withIdentifier: "FavouriteViewCtrl") as? FavouriteViewController else { return }
+        self.favouritesViewController = favouritesViewController
         let favouriteBarItem = UITabBarItem(title: "Favourites", image: UIImage(named: "favouriteIcon")?.withRenderingMode(.alwaysTemplate),
                                             selectedImage: nil)
         favouriteNavigationController = RotationAwareNavigationController(rootViewController: favouritesViewController)
@@ -183,7 +185,8 @@ class CustomNavigationHelper {
     
     private func createMapViewController(shouldRequestAuthorization: Bool) {
         let mapStoryboard = UIStoryboard(name: "MapView", bundle: nil)
-        mapViewController = mapStoryboard.instantiateViewController(withIdentifier: "MapViewCtrl") as! MapViewController
+        guard let mapViewController = mapStoryboard.instantiateViewController(withIdentifier: "MapViewCtrl") as? MapViewController else { return }
+        self.mapViewController = mapViewController
         mapNavigationController = RotationAwareNavigationController(rootViewController: mapViewController)
         mapNavigationController.evo_drawerController?.openDrawerGestureModeMask = .init(rawValue: 0)
         mapViewController.shouldRequestAuthorization = shouldRequestAuthorization

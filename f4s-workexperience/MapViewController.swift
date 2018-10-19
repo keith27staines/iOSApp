@@ -327,11 +327,14 @@ extension MapViewController {
     }
     
     func adjustNavigationBar() {
-        UIApplication.shared.statusBarStyle = .default
         navigationController?.setNavigationBarHidden(true, animated: false)
         navigationController?.navigationBar.barTintColor = UIColor(netHex: Colors.black)
         navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.isTranslucent = false
+        setNeedsStatusBarAppearanceUpdate()
+    }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.default
     }
     
     fileprivate func configureTextField() {

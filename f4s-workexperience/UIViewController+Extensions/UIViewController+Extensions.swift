@@ -21,6 +21,7 @@ extension UIViewController {
     /// Style the navigation bar
     func styleNavigationController() {
         Skinner().apply(navigationBarSkin: skin?.navigationBarSkin, to: self)
+        setNeedsStatusBarAppearanceUpdate()
     }
 }
 

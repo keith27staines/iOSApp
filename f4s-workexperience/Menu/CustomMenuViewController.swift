@@ -84,20 +84,15 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
         tableView.backgroundColor = UIColor.clear
         tableView.reloadData()
         applyStyle()
-        setNeedsStatusBarAppearanceUpdate()
     }
-    
+
     func applyStyle() {
         self.view.backgroundColor = skin?.navigationBarSkin.barTintColor.uiColor
-        UIApplication.shared.statusBarStyle = .lightContent
+         setNeedsStatusBarAppearanceUpdate()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
-    }
-
-    override func viewWillDisappear(_: Bool) {
-        UIApplication.shared.statusBarStyle = .lightContent
     }
 
     override func contentSizeDidChange(size _: String) {
@@ -243,5 +238,11 @@ extension CustomMenuViewController {
 extension CustomMenuViewController : UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         return false
+    }
+}
+
+extension UINavigationController {
+    override open var childForStatusBarStyle: UIViewController? {
+        return topViewController
     }
 }
