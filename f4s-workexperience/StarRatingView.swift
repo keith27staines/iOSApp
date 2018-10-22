@@ -126,7 +126,7 @@ extension StarRatingView {
     private func createLabel() -> UILabel {
         let label = UILabel(frame: CGRect.zero)
         label.text = "0.0"
-        label.font = UIFont.preferredFont(forTextStyle: .caption1)
+        label.font = UIFont.systemFont(ofSize: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentCompressionResistancePriority(UILayoutPriority.required, for: .horizontal)
         return label

@@ -90,7 +90,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-        registerApplicationForRemoteNotifications(application)
     }
     
     func applicationDidBecomeActive(_ appliction: UIApplication) {
@@ -108,23 +107,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.saveContext()
     }
     
-    func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
-        if !notificationSettings.types.isEmpty {
-            application.registerForRemoteNotifications()
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ApplicationDidRegisterForRemoteNotificationsNotification"), object: self)
-        } else {
-            log.debug("User declined remote notifications")
-            UserDefaults.standard.set(true, forKey: UserDefaultsKeys.didDeclineRemoteNotifications)
-        }
-    }
-    
     func application(_: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let tokenParts = deviceToken.map { data -> String in
             return String(format: "%02.2hhx", data)
         }
         let token = tokenParts.joined()
         userService.enablePushNotificationForUser(withDeviceToken: token) { (result) in
-            
+            switch result {
+            case .error(let error):
+                log.error(error)
+            default: break
+            }
         }
     }
     
@@ -135,17 +128,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         DispatchQueue.main.async {
             let appState = UIApplication.shared.applicationState
-            if appState == .active {
-                if let window = self.window {
-                    NotificationHelper.sharedInstance.handleRemoteNotification(userInfo: userInfo, window: window, isAppActive: true)
-                }
-            } else {
-                if let window = self.window {
-                    NotificationHelper.sharedInstance.handleRemoteNotification(userInfo: userInfo, window: window, isAppActive: false)
-                }
+            if let window = self.window {
+                UNService.shared.handleRemoteNotification(userInfo: userInfo, window: window, isAppActive: appState == .active)
             }
+            completionHandler(UIBackgroundFetchResult.newData)
         }
-        completionHandler(UIBackgroundFetchResult.newData)
     }
 
     // MARK:- Handle restoration of background session
@@ -187,11 +174,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 // MARK: helpers
 extension AppDelegate {
     
-    func registerApplicationForRemoteNotifications(_ application: UIApplication) {
-        if application.isRegisteredForRemoteNotifications || (application.currentUserNotificationSettings?.types.contains(.alert))! {
-            application.registerForRemoteNotifications()
-        }
-    }
+//    func registerApplicationForRemoteNotifications(_ application: UIApplication) {
+//        UNService.shared.registerForRemoteNotifications()
+//    }
     
     func presentForceUpdate() {
         let rootVC = self.window?.rootViewController?.topMostViewController
@@ -264,7 +249,7 @@ extension AppDelegate {
         if databaseDownloadManager == nil {
             databaseDownloadManager = F4SDatabaseDownloadManager()
         }
-        registerApplicationForRemoteNotifications(application)
+        application.registerForRemoteNotifications()
         databaseDownloadManager?.start()
         let isFirstLaunch = UserDefaults.standard.value(forKey: UserDefaultsKeys.isFirstLaunch) as? Bool ?? true
         if isFirstLaunch {

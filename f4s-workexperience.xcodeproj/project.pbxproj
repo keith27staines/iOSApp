@@ -57,7 +57,7 @@
 		206F8F981E1E590A0024937B /* MessageOptionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 206F8F951E1E590A0024937B /* MessageOptionsView.xib */; };
 		207364611E52091900786F4C /* MessageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207364601E52091900786F4C /* MessageContainerViewController.swift */; };
 		20B128181DDA1A3900CE3F1F /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B128131DDA1A3900CE3F1F /* Config.swift */; };
-		20D51BE41E27710C003A8358 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D51BE31E27710C003A8358 /* NotificationHelper.swift */; };
+		20D51BE41E27710C003A8358 /* UNService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D51BE31E27710C003A8358 /* UNService.swift */; };
 		20FABFEC1DDDA63600D583E2 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FABFEB1DDDA63600D583E2 /* FileHelper.swift */; };
 		20FEBDDA1DE5AD3400EBDCBF /* F4SImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FEBDD91DE5AD3400EBDCBF /* F4SImageService.swift */; };
 		401634C41E0A9F16000161FA /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401634C31E0A9F16000161FA /* NotificationViewController.swift */; };
@@ -402,7 +402,7 @@
 		20B128131DDA1A3900CE3F1F /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Config.swift; path = Config/Config.swift; sourceTree = "<group>"; };
 		20B128141DDA1A3900CE3F1F /* F4SDevelopment.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = F4SDevelopment.entitlements; path = Config/F4SDevelopment.entitlements; sourceTree = "<group>"; };
 		20B1281F1DDA1D5B00CE3F1F /* f4s-workexperience.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "f4s-workexperience.xcconfig"; sourceTree = "<group>"; };
-		20D51BE31E27710C003A8358 /* NotificationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
+		20D51BE31E27710C003A8358 /* UNService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNService.swift; sourceTree = "<group>"; };
 		20FABFEB1DDDA63600D583E2 /* FileHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		20FEBDD91DE5AD3400EBDCBF /* F4SImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SImageService.swift; sourceTree = "<group>"; };
 		401634C31E0A9F16000161FA /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationViewController.swift; path = "f4s-workexperience/NotificationViewController.swift"; sourceTree = SOURCE_ROOT; };
@@ -1098,7 +1098,7 @@
 				40E78E871DD32C3C000A3776 /* LoadingOverlay.swift */,
 				40E78E881DD32C3C000A3776 /* MessageHandler.swift */,
 				20FABFEB1DDDA63600D583E2 /* FileHelper.swift */,
-				20D51BE31E27710C003A8358 /* NotificationHelper.swift */,
+				20D51BE31E27710C003A8358 /* UNService.swift */,
 				FC6C11B9202870D6002C8EA5 /* F4SGrammar.swift */,
 				FCE11E58211437B400403789 /* F4SDateHelper.swift */,
 			);
@@ -2179,7 +2179,7 @@
 				FCC753EE1F80F26200E9ECD6 /* MapModel.swift in Sources */,
 				40C1A5191DDF5ACE000F80AA /* GMUClusterManager.m in Sources */,
 				FC4BB6071FA20F5100173864 /* F4SPartnersModel.swift in Sources */,
-				20D51BE41E27710C003A8358 /* NotificationHelper.swift in Sources */,
+				20D51BE41E27710C003A8358 /* UNService.swift in Sources */,
 				40C1A51B1DDF5ACE000F80AA /* GMUDefaultClusterRenderer.m in Sources */,
 				FC6771192125A590000B0870 /* UIColor+Extensions.swift in Sources */,
 				2037B0A31DEC2DB600A9DE3E /* InterestDB.swift in Sources */,

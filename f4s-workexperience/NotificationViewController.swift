@@ -83,11 +83,6 @@ extension NotificationViewController {
         return sum
     }
 
-    func registerForPushNotifications() {
-        let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-        UIApplication.shared.registerUserNotificationSettings(settings)
-    }
-
     func setupButtons(leftButtonText: String, rightButtonText: String) {
         let skinner = Skinner()
         skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: rightButton)
@@ -140,7 +135,7 @@ extension NotificationViewController {
             }
             CustomNavigationHelper.sharedInstance.presentCoverLetterController(parentCtrl: viewCtrl, currentCompany: company)
         } else {
-            registerForPushNotifications()
+            UNService.shared.authorize()
             self.dismiss(animated: true, completion: nil)
         }
     }

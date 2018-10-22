@@ -12,6 +12,7 @@ class EmailTextField: UITextField {
         set {
             super.isEnabled = newValue
             textColor = newValue ? UIColor.black : UIColor.lightGray
+            backgroundColor =  newValue ? UIColor.white : UIColor(white: 0.4, alpha: 1.0)
         }
         get {
             return super.isEnabled

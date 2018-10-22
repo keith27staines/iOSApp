@@ -1,18 +1,23 @@
-//
-//  NotificationHelper.swift
-//  f4s-workexperience
-//
-//  Created by Timea Tivadar on 1/12/17.
-//  Copyright © 2017 freshbyte. All rights reserved.
-//
 
 import Foundation
-class NotificationHelper {
-    class var sharedInstance: NotificationHelper {
-        struct Static {
-            static let instance: NotificationHelper = NotificationHelper()
+import UserNotifications
+
+class UNService {
+    static let shared: UNService = UNService()
+    let center = UNUserNotificationCenter.current()
+    
+    func authorize() {
+        center.requestAuthorization(options: [.alert,.badge, .sound]) { (success, error) in
+            if let error = error {
+                log.error(error)
+            }
         }
-        return Static.instance
+    }
+    
+    func getNotificationSettings(completion: @escaping (UNNotificationSettings) -> Void) {
+        center.getNotificationSettings { settings in
+            completion(settings)
+        }
     }
 
     func handleRemoteNotification(userInfo: [AnyHashable: Any], window: UIWindow, isAppActive: Bool) {
@@ -50,14 +55,6 @@ class NotificationHelper {
             let alert = UIAlertController(title: title, message: body, preferredStyle: .alert)
             let ok = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default) //{}
             alert.addAction(ok)
-//            let show = UIAlertAction(title: NSLocalizedString("Show", comment: ""), style: .default) { [weak self] _ in
-//                self?.dispatchToBestDestination(for: type, threadUuid: threadUuid, placementUuid: placementUuid)
-//            }
-//            let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default) { _ in
-//                log.debug("user received notif and pressed cancel")
-//            }
-//            alert.addAction(show)
-//            alert.addAction(cancel)
             if let window = UIApplication.shared.delegate?.window {
                 if let rootViewCtrl = window?.rootViewController {
                     if let topViewController = rootViewCtrl.topMostViewController {
