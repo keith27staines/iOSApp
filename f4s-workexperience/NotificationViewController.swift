@@ -19,13 +19,11 @@ class NotificationViewController: UIViewController {
     @IBOutlet weak var buttonsTopConstraint: NSLayoutConstraint!
 
     fileprivate let lineHeight: CGFloat = 25
-    var flag = true
     var currentCompany: Company?
     let backgroundPopoverView = UIView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNotificationFlag()
         setupView()
     }
 
@@ -49,30 +47,21 @@ extension NotificationViewController: UIPopoverPresentationControllerDelegate {
 // MARK: - appearance
 extension NotificationViewController {
 
-    func setNotificationFlag() {
-        guard let didDeclineRemoteNotifications = UserDefaults.standard.value(forKey: UserDefaultsKeys.didDeclineRemoteNotifications) else {
-            return
-        }
-        if let didDeclineRemoteNotificationsBool = didDeclineRemoteNotifications as? Bool {
-            self.flag = !didDeclineRemoteNotificationsBool
-        }
-    }
-
     func setupView() {
         var rightButtonText = ""
         var leftButtonText = ""
         var titleText = ""
         var contentText = ""
-        if flag {
-            rightButtonText = NSLocalizedString("Enable", comment: "")
-            leftButtonText = NSLocalizedString("Skip", comment: "")
-            titleText = NSLocalizedString("Notifications", comment: "")
-            contentText = NSLocalizedString("In order for us to update you on progress and contact employers on your behalf, you need to enable notifications. \n \nYou only have to do this once!", comment: "")
-        } else {
+        if UNService.shared.userDidDeclineNotifications {
             rightButtonText = NSLocalizedString("Settings", comment: "")
             leftButtonText = NSLocalizedString("Skip", comment: "")
             titleText = NSLocalizedString("Notifications", comment: "")
             contentText = NSLocalizedString("In order for us to update you on progress and contact employers on your behalf, you need to go to settings to enable notifications for the Workfinder app.", comment: "")
+        } else {
+            rightButtonText = NSLocalizedString("Enable", comment: "")
+            leftButtonText = NSLocalizedString("Skip", comment: "")
+            titleText = NSLocalizedString("Notifications", comment: "")
+            contentText = NSLocalizedString("In order for us to update you on progress and contact employers on your behalf, you need to enable notifications. \n \nYou only have to do this once!", comment: "")
         }
         setupButtons(leftButtonText: leftButtonText, rightButtonText: rightButtonText)
         setupLabels(titleText: titleText, contentText: contentText)
@@ -122,7 +111,7 @@ extension NotificationViewController {
 
     @IBAction func rightButton(_: Any) {
         self.backgroundPopoverView.removeFromSuperview()
-        if !flag {
+        if UNService.shared.userDidDeclineNotifications {
             if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url)
             }

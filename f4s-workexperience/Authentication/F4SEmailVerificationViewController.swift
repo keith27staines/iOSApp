@@ -9,15 +9,23 @@ import UIKit
 
 class EmailTextField: UITextField {
     override var isEnabled: Bool {
+        
+        get { return super.isEnabled }
+        
         set {
             super.isEnabled = newValue
-            textColor = newValue ? UIColor.black : UIColor.lightGray
-            backgroundColor =  newValue ? UIColor.white : UIColor(white: 0.4, alpha: 1.0)
+            if newValue {
+                textColor = UIColor.black
+                backgroundColor = UIColor.white
+                layer.borderColor = UIColor.lightGray.cgColor
+                layer.borderWidth = 1
+            } else {
+                textColor = UIColor(red: 127, green: 127, blue: 127)
+                backgroundColor = UIColor(red: 226, green: 226, blue: 226)
+                layer.borderColor = UIColor.clear.cgColor
+                layer.borderWidth = 1
+            }
         }
-        get {
-            return super.isEnabled
-        }
-        
     }
 }
 

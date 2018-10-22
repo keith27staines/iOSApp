@@ -351,12 +351,11 @@ extension CompanyDetailsViewController {
                         let applyText = NSLocalizedString("Finish Application", comment: "")
                         strongSelf.applyButton.setAttributedTitle(NSAttributedString(string: applyText, attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor.white]), for: .normal)
                         
-                        if UIApplication.shared.isRegisteredForRemoteNotifications {
-                            CustomNavigationHelper.sharedInstance.presentCoverLetterController(parentCtrl: strongSelf, currentCompany: company)
-                        } else {
+                        if UNService.shared.userHasNotAgreedToNotifications {
                             CustomNavigationHelper.sharedInstance.presentNotificationPopover(parentCtrl: strongSelf, currentCompany: company)
+                        } else {
+                            CustomNavigationHelper.sharedInstance.presentCoverLetterController(parentCtrl: strongSelf, currentCompany: company)
                         }
-
                     }
                 }
             }

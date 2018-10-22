@@ -59,7 +59,6 @@ struct UserDefaultsKeys {
     static let userHasAccount = "userHasAccount"
     static let companyDatabaseCreatedDate = "companyDatabaseCreatedDate"
     static let isFirstLaunch = "isFirstLaunch"
-    static let didDeclineRemoteNotifications = "didDeclineRemoteNotifications"
     static let vendorUuid = "vendorUuid"
     static let shouldLoadTimeline = "shouldLoadTimeline"
 }

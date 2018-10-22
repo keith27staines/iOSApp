@@ -2,16 +2,42 @@
 import Foundation
 import UserNotifications
 
+
+enum NotificationType: String {
+    case message
+    case rating
+    case recommendation
+}
+
 class UNService {
+    
+    private let didDeclineKey: String = "didDeclineRemoteNotifications"
+    
     static let shared: UNService = UNService()
     let center = UNUserNotificationCenter.current()
     
     func authorize() {
-        center.requestAuthorization(options: [.alert,.badge, .sound]) { (success, error) in
+        center.requestAuthorization(options: [.alert,.badge, .sound]) { [weak self] (success, error) in
+            guard let this = self else { return }
             if let error = error {
                 log.error(error)
             }
+            this.userDefaults.setValue(!success, forKey: this.didDeclineKey)
         }
+    }
+    
+    var userDefaults: UserDefaults { return UserDefaults.standard }
+    
+    var userHasNotAgreedToNotifications: Bool {
+        return userHasNotBeenAskedToAllowNotifications || userDidDeclineNotifications
+    }
+    
+    var userHasNotBeenAskedToAllowNotifications: Bool {
+        return nil == userDefaults.value(forKey: didDeclineKey)
+    }
+    
+    var userDidDeclineNotifications: Bool {
+        return userDefaults.value(forKey: didDeclineKey) as? Bool ?? false
     }
     
     func getNotificationSettings(completion: @escaping (UNNotificationSettings) -> Void) {

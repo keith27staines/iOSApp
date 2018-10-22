@@ -268,9 +268,3 @@ enum SocialShare: String {
     case facebook
     case other
 }
-
-enum NotificationType: String {
-    case message
-    case rating
-    case recommendation
-}
