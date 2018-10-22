@@ -98,34 +98,28 @@ extension NotificationViewController {
 // MARK: - user interraction
 extension NotificationViewController {
     @IBAction func leftButton(_: Any) {
-        self.backgroundPopoverView.removeFromSuperview()
-        self.dismiss(animated: true, completion: nil)
-        guard let viewCtrl = self.presentingViewController,
-            let company = self.currentCompany else {
-            log.error("Can't present cover letter")
-            return
-        }
-        
-        CustomNavigationHelper.sharedInstance.presentCoverLetterController(parentCtrl: viewCtrl, currentCompany: company)
+        presentCoverletterController()
     }
 
     @IBAction func rightButton(_: Any) {
-        self.backgroundPopoverView.removeFromSuperview()
         if UNService.shared.userDidDeclineNotifications {
             if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url)
             }
-            self.dismiss(animated: true, completion: nil)
-
-            guard let viewCtrl = self.presentingViewController,
-                let company = self.currentCompany else {
-                log.error("Can't present cover letter")
-                return
-            }
-            CustomNavigationHelper.sharedInstance.presentCoverLetterController(parentCtrl: viewCtrl, currentCompany: company)
         } else {
             UNService.shared.authorize()
-            self.dismiss(animated: true, completion: nil)
         }
+        presentCoverletterController()
+    }
+    
+    func presentCoverletterController() {
+        self.backgroundPopoverView.removeFromSuperview()
+        self.dismiss(animated: true, completion: nil)
+        guard let viewCtrl = self.presentingViewController,
+            let company = self.currentCompany else {
+                log.error("Can't present cover letter")
+                return
+        }
+        CustomNavigationHelper.sharedInstance.presentCoverLetterController(parentCtrl: viewCtrl, currentCompany: company)
     }
 }
