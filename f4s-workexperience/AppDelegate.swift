@@ -116,7 +116,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             switch result {
             case .error(let error):
                 log.error(error)
-            default: break
+            case .success(_):
+                print("Notifications enabled on server with token \(token)")
             }
         }
     }
@@ -245,11 +246,13 @@ extension AppDelegate {
         printDebugUserInfo()
         SEGAnalytics.shared().identify(userUuid)
         _ = F4SNetworkSessionManager.shared
+        application.registerForRemoteNotifications()
+        UNService.shared.configure()
         F4SUserStatusService.shared.beginStatusUpdate()
         if databaseDownloadManager == nil {
             databaseDownloadManager = F4SDatabaseDownloadManager()
         }
-        application.registerForRemoteNotifications()
+        
         databaseDownloadManager?.start()
         let isFirstLaunch = UserDefaults.standard.value(forKey: UserDefaultsKeys.isFirstLaunch) as? Bool ?? true
         if isFirstLaunch {

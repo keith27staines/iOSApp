@@ -9,12 +9,16 @@ enum NotificationType: String {
     case recommendation
 }
 
-class UNService {
+class UNService : NSObject {
     
     private let didDeclineKey: String = "didDeclineRemoteNotifications"
     
     static let shared: UNService = UNService()
     let center = UNUserNotificationCenter.current()
+    
+    func configure() {
+        center.delegate = self
+    }
     
     func authorize() {
         center.requestAuthorization(options: [.alert,.badge, .sound]) { [weak self] (success, error) in
@@ -23,10 +27,11 @@ class UNService {
                 log.error(error)
             }
             this.userDefaults.setValue(!success, forKey: this.didDeclineKey)
+            this.configure()
         }
     }
     
-    var userDefaults: UserDefaults { return UserDefaults.standard }
+    private var userDefaults: UserDefaults { return UserDefaults.standard }
     
     var userHasNotAgreedToNotifications: Bool {
         return userHasNotBeenAskedToAllowNotifications || userDidDeclineNotifications
@@ -112,18 +117,38 @@ class UNService {
     }
     
     func extractNotificationType(userInfo:[AnyHashable: Any]) -> NotificationType? {
-        guard let typeString = userInfo["type"] as? String else { return nil }
-        switch typeString
-        {
-        case NotificationType.message.rawValue:
-            return NotificationType.message
-        case NotificationType.rating.rawValue:
-            return NotificationType.rating
-        case NotificationType.recommendation.rawValue:
-            return NotificationType.recommendation
-        default:
-            assert(false, "Unexpected or missing type string: \(typeString)")
-            return nil
-        }
+        guard let typeString = userInfo["type"] as? String,
+        let notificationType = NotificationType(rawValue: typeString) else { return nil }
+        return notificationType
+    }
+    
+    func processRemoteNotification(notification: UNNotification) {
+        let userInfo = notification.request.content.userInfo
+        guard let typeString = userInfo["type"] as? String,
+            let notificationType = NotificationType(rawValue: typeString) else { return }
+        let threadUuid: String = userInfo["thread_uuid"] as? String ?? ""
+        let placementUuid: String = userInfo["placement_uuid"] as? String ?? ""
+        dispatchToBestDestination(for: notificationType, threadUuid: threadUuid
+            , placementUuid: placementUuid)
+    }
+}
+
+extension UNService : UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, openSettingsFor notification: UNNotification?) {
+        
+    }
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let notification = response.notification
+        let userInfo = notification.request.content.userInfo
+        print("User responded to notification with userInfo \n\(userInfo)")
+        processRemoteNotification(notification: notification)
+        
+    }
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+        print("Notification received while in foreground with serInfo \n\(userInfo)")
+        let settings: UNNotificationPresentationOptions = .badge
+        F4SUserStatusService.shared.beginStatusUpdate()
+        completionHandler(settings)
     }
 }
