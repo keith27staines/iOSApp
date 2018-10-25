@@ -180,7 +180,11 @@ extension AcceptOfferViewController : UITableViewDataSource {
                 guard let strongSelf = self else { return }
                 strongSelf.cancelApplication(uuid: strongSelf.accept.placement.placementUuid!)
             }
-            buttonsCell.shareOffer = nil
+            buttonsCell.shareOffer = { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.accept.presentShare(from: strongSelf, sourceView: buttonsCell.shareButton)
+            }
+            
         default:
             buttonsCell.introductoryText.isHidden = true
             buttonsCell.primaryButton.isHidden = true
