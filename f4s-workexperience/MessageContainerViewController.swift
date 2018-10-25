@@ -253,6 +253,7 @@ extension MessageContainerViewController {
 
     func loadChatData() {
         // Note that following != nil check is not directly against action but against actionType. This is because the api returns an action structure with all fields set to null when there is no data
+        actionButtonHeightConstraint.constant = 0
         if action?.actionType != nil {
             actionButtonHeightConstraint.constant = 60
             UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: { [weak self] in
