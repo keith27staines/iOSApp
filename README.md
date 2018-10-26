@@ -122,8 +122,8 @@ When a feature branch is completed it is merged into *develop* and then deleted.
 19. In the popover, enter the version number as you want it to appear on the App Store and click "Create"
 20. Add some text in the "what's new" area. Choose your words carefully becasue they will appear on the App Store.
 21. Scroll down the page until you get to the Build section. Click the button to attach the production build you uploaded earlier to the release
-22. Scroll back to the top, then click Save.
-23. Click Submit
-24. You will be asked some questions about advertising identifiers. It is vital you answer these questions accurately, otherwise your build will be rejected out of hand. Say yes to all uses of advertising identifiers except in-app hosted advertising. 
+22. Scroll back to the top and click "Save".
+23. Click "Submit"
+24. You will be asked some questions about advertising identifiers. It is vital you answer these questions accurately, otherwise your build will be rejected out of hand. TICK "Does this app use the Advertising Identifier (IDFA)?", then leave "Serve advertisements within the app" UNTICKED, and TICK "Attribute this app installation to a previously served advertisement" and "Attribute an action taken within this app to a previously served advertisement".  These IDFA options are required and a consequence of the inclusion of the SEGMENT 3rd party framework within the app.
 25. Your build has now been submitted to for Apple review, and if it passes, it will go live on the AppStore. Good luck!
 
