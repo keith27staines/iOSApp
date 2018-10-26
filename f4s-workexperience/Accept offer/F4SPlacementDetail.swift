@@ -99,13 +99,13 @@ public class F4SPlacementInviteModel {
         let duration = placement.duration
         
         let formattedStartDateString = F4SDateHelper.unformattedAcceptDateStringToFormattedString(unformattedString: duration?.start_date)
-        lines = [formattedStartDateString]
-        detail = F4SPlacementInviteSectionDetails(title: "Start date", icon: UIImage(named: "ui-calendar-icon"), lines: lines, linkUrl: nil)
+        lines = [] //[formattedStartDateString]
+        detail = F4SPlacementInviteSectionDetails(title: "Start date: \(formattedStartDateString)\n ", icon: UIImage(named: "ui-calendar-icon"), lines: lines, linkUrl: nil)
         roleOfferedSection.inviteDetails.append(detail)
         
         let formattedEndDateString = F4SDateHelper.unformattedAcceptDateStringToFormattedString(unformattedString: duration?.end_date)
-        lines = [formattedEndDateString]
-        detail = F4SPlacementInviteSectionDetails(title: "End date", icon: UIImage(named: "ui-calendar-icon"), lines: lines, linkUrl: nil)
+        lines = [] //[formattedEndDateString]
+        detail = F4SPlacementInviteSectionDetails(title: "End date: \(formattedEndDateString)", icon: UIImage(named: "ui-calendar-icon"), lines: lines, linkUrl: nil)
         roleOfferedSection.inviteDetails.append(detail)
         
         lines = F4SPlacementInviteModel.totalHoursLines(placement: placement)

@@ -33,6 +33,7 @@ class AcceptOfferViewController: UIViewController {
         tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(F4SInviteDetailCell.self, forCellReuseIdentifier: "detail")
         applyStyle()
         companyNameLabel.text = accept.company.name.stripCompanySuffix()
         pageHeaderView.icon = accept.companyLogo
@@ -43,10 +44,14 @@ class AcceptOfferViewController: UIViewController {
         applyStyle()
         self.tabBarController?.tabBar.isTranslucent = true
         self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         captureShareImage()
     }
     
     func captureShareImage() {
+        guard accept.offerImage == nil else { return }
         let headerImage = pageHeaderView.snapshotToImage()
         let introImage = introductionStack.snapshotToImage()
         let tableImage = tableView.renderAllContentToImage()
