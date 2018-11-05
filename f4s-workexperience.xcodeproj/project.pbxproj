@@ -265,6 +265,28 @@
 		FCB6B8EC2074C59C0042C725 /* F4SAvailabilitySequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8DE2074C59C0042C725 /* F4SAvailabilitySequence.swift */; };
 		FCB6B8ED2074C59C0042C725 /* F4SCalendarContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8DF2074C59C0042C725 /* F4SCalendarContainerViewController.swift */; };
 		FCB6D9361F75056100B8C268 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCB6D9351F75056000B8C268 /* Branding.plist */; };
+		FCC212E9219077C000D8D5B7 /* F4SCameraCapture.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC212C9219077C000D8D5B7 /* F4SCameraCapture.storyboard */; };
+		FCC212EA219077C000D8D5B7 /* DocumentCapture.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC212CA219077C000D8D5B7 /* DocumentCapture.storyboard */; };
+		FCC212EB219077C000D8D5B7 /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC212CC219077C000D8D5B7 /* Camera.storyboard */; };
+		FCC212EC219077C000D8D5B7 /* F4SDCDocumentCaptureFileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212CE219077C000D8D5B7 /* F4SDCDocumentCaptureFileHelper.swift */; };
+		FCC212ED219077C000D8D5B7 /* F4SDCDocumentUploadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212CF219077C000D8D5B7 /* F4SDCDocumentUploadModel.swift */; };
+		FCC212EE219077C000D8D5B7 /* F4SDocumentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212D0219077C000D8D5B7 /* F4SDocumentModel.swift */; };
+		FCC212EF219077C000D8D5B7 /* String+F4SDCExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212D1219077C000D8D5B7 /* String+F4SDCExtensions.swift */; };
+		FCC212F0219077C000D8D5B7 /* DocumentCapture.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCC212D2219077C000D8D5B7 /* DocumentCapture.xcassets */; };
+		FCC212F1219077C000D8D5B7 /* F4SDocumentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212D5219077C000D8D5B7 /* F4SDocumentTableViewController.swift */; };
+		FCC212F2219077C000D8D5B7 /* F4SDCAddDocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212D6219077C000D8D5B7 /* F4SDCAddDocumentsViewController.swift */; };
+		FCC212F3219077C000D8D5B7 /* F4SDCAddDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212D8219077C000D8D5B7 /* F4SDCAddDocumentViewController.swift */; };
+		FCC212F4219077C000D8D5B7 /* F4SDCAddUrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212DA219077C000D8D5B7 /* F4SDCAddUrlViewController.swift */; };
+		FCC212F5219077C000D8D5B7 /* F4SDCDocumentTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212DC219077C000D8D5B7 /* F4SDCDocumentTypeViewController.swift */; };
+		FCC212F6219077C000D8D5B7 /* PickScenarioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212DD219077C000D8D5B7 /* PickScenarioViewController.swift */; };
+		FCC212F7219077C000D8D5B7 /* F4SArrangeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212DF219077C000D8D5B7 /* F4SArrangeTableViewController.swift */; };
+		FCC212F8219077C000D8D5B7 /* F4SCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212E0219077C000D8D5B7 /* F4SCameraViewController.swift */; };
+		FCC212F9219077C000D8D5B7 /* F4SDisplayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212E1219077C000D8D5B7 /* F4SDisplayTableViewCell.swift */; };
+		FCC212FA219077C000D8D5B7 /* F4SCameraPageManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212E2219077C000D8D5B7 /* F4SCameraPageManagerViewController.swift */; };
+		FCC212FB219077C000D8D5B7 /* F4SDisplayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212E3219077C000D8D5B7 /* F4SDisplayTableViewController.swift */; };
+		FCC212FC219077C000D8D5B7 /* F4SArrangeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212E4219077C000D8D5B7 /* F4SArrangeTableViewCell.swift */; };
+		FCC212FD219077C000D8D5B7 /* F4SDCDocumentViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212E6219077C000D8D5B7 /* F4SDCDocumentViewerController.swift */; };
+		FCC212FE219077C000D8D5B7 /* F4SDCPopupMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212E8219077C000D8D5B7 /* F4SDCPopupMenuView.swift */; };
 		FCC5EBB61F449C310085CE15 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FCC5EBB51F449C310085CE15 /* README.md */; };
 		FCC753EE1F80F26200E9ECD6 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC753ED1F80F26200E9ECD6 /* MapModel.swift */; };
 		FCC85B2320EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC85B2220EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift */; };
@@ -647,6 +669,28 @@
 		FCB6B8F42074C5EC0042C725 /* F4SCalendarDayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarDayTests.swift; sourceTree = "<group>"; };
 		FCB6B8F52074C5EC0042C725 /* F4SDisplayableMonthTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDisplayableMonthTests.swift; sourceTree = "<group>"; };
 		FCB6D9351F75056000B8C268 /* Branding.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
+		FCC212C9219077C000D8D5B7 /* F4SCameraCapture.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SCameraCapture.storyboard; sourceTree = "<group>"; };
+		FCC212CB219077C000D8D5B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/DocumentCapture.storyboard; sourceTree = "<group>"; };
+		FCC212CC219077C000D8D5B7 /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
+		FCC212CE219077C000D8D5B7 /* F4SDCDocumentCaptureFileHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDCDocumentCaptureFileHelper.swift; sourceTree = "<group>"; };
+		FCC212CF219077C000D8D5B7 /* F4SDCDocumentUploadModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDCDocumentUploadModel.swift; sourceTree = "<group>"; };
+		FCC212D0219077C000D8D5B7 /* F4SDocumentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDocumentModel.swift; sourceTree = "<group>"; };
+		FCC212D1219077C000D8D5B7 /* String+F4SDCExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+F4SDCExtensions.swift"; sourceTree = "<group>"; };
+		FCC212D2219077C000D8D5B7 /* DocumentCapture.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = DocumentCapture.xcassets; sourceTree = "<group>"; };
+		FCC212D5219077C000D8D5B7 /* F4SDocumentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDocumentTableViewController.swift; sourceTree = "<group>"; };
+		FCC212D6219077C000D8D5B7 /* F4SDCAddDocumentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDCAddDocumentsViewController.swift; sourceTree = "<group>"; };
+		FCC212D8219077C000D8D5B7 /* F4SDCAddDocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDCAddDocumentViewController.swift; sourceTree = "<group>"; };
+		FCC212DA219077C000D8D5B7 /* F4SDCAddUrlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDCAddUrlViewController.swift; sourceTree = "<group>"; };
+		FCC212DC219077C000D8D5B7 /* F4SDCDocumentTypeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDCDocumentTypeViewController.swift; sourceTree = "<group>"; };
+		FCC212DD219077C000D8D5B7 /* PickScenarioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickScenarioViewController.swift; sourceTree = "<group>"; };
+		FCC212DF219077C000D8D5B7 /* F4SArrangeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SArrangeTableViewController.swift; sourceTree = "<group>"; };
+		FCC212E0219077C000D8D5B7 /* F4SCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCameraViewController.swift; sourceTree = "<group>"; };
+		FCC212E1219077C000D8D5B7 /* F4SDisplayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDisplayTableViewCell.swift; sourceTree = "<group>"; };
+		FCC212E2219077C000D8D5B7 /* F4SCameraPageManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCameraPageManagerViewController.swift; sourceTree = "<group>"; };
+		FCC212E3219077C000D8D5B7 /* F4SDisplayTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDisplayTableViewController.swift; sourceTree = "<group>"; };
+		FCC212E4219077C000D8D5B7 /* F4SArrangeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SArrangeTableViewCell.swift; sourceTree = "<group>"; };
+		FCC212E6219077C000D8D5B7 /* F4SDCDocumentViewerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDCDocumentViewerController.swift; sourceTree = "<group>"; };
+		FCC212E8219077C000D8D5B7 /* F4SDCPopupMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDCPopupMenuView.swift; sourceTree = "<group>"; };
 		FCC5EBB51F449C310085CE15 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FCC753ED1F80F26200E9ECD6 /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
 		FCC85B2220EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDatabaseDownloadManagerTests.swift; sourceTree = "<group>"; };
@@ -1066,6 +1110,7 @@
 		40E78E501DD328E0000A3776 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				FCC212C7219077C000D8D5B7 /* F4S Document Capture */,
 				FCB3922820FF1C4B00792C0A /* Accept offer */,
 				FCB6B8B82074C51B0042C725 /* Calendar and diary */,
 				FC31F093204D547E009DD526 /* HiddenDebugScreen */,
@@ -1548,6 +1593,7 @@
 				FC73719A2101C7EF00C0032A /* AcceptOffer.xcassets */,
 				40E78E1D1DD31A86000A3776 /* Assets.xcassets */,
 				FCB6B8B92074C5750042C725 /* DayHourPicker.xcassets */,
+				FCC212D2219077C000D8D5B7 /* DocumentCapture.xcassets */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -1782,6 +1828,114 @@
 			path = F4SCalendar;
 			sourceTree = "<group>";
 		};
+		FCC212C7219077C000D8D5B7 /* F4S Document Capture */ = {
+			isa = PBXGroup;
+			children = (
+				FCC212C8219077C000D8D5B7 /* Storyboards */,
+				FCC212CD219077C000D8D5B7 /* Models */,
+				FCC212D3219077C000D8D5B7 /* Controllers */,
+			);
+			path = "F4S Document Capture";
+			sourceTree = "<group>";
+		};
+		FCC212C8219077C000D8D5B7 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				FCC212C9219077C000D8D5B7 /* F4SCameraCapture.storyboard */,
+				FCC212CA219077C000D8D5B7 /* DocumentCapture.storyboard */,
+				FCC212CC219077C000D8D5B7 /* Camera.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		FCC212CD219077C000D8D5B7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FCC212CE219077C000D8D5B7 /* F4SDCDocumentCaptureFileHelper.swift */,
+				FCC212CF219077C000D8D5B7 /* F4SDCDocumentUploadModel.swift */,
+				FCC212D0219077C000D8D5B7 /* F4SDocumentModel.swift */,
+				FCC212D1219077C000D8D5B7 /* String+F4SDCExtensions.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FCC212D3219077C000D8D5B7 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FCC212D4219077C000D8D5B7 /* Add documents */,
+				FCC212D9219077C000D8D5B7 /* Url */,
+				FCC212DB219077C000D8D5B7 /* Document type picker */,
+				FCC212DD219077C000D8D5B7 /* PickScenarioViewController.swift */,
+				FCC212DE219077C000D8D5B7 /* Camera  */,
+				FCC212E5219077C000D8D5B7 /* Document viewer */,
+				FCC212E7219077C000D8D5B7 /* Utility */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FCC212D4219077C000D8D5B7 /* Add documents */ = {
+			isa = PBXGroup;
+			children = (
+				FCC212D5219077C000D8D5B7 /* F4SDocumentTableViewController.swift */,
+				FCC212D6219077C000D8D5B7 /* F4SDCAddDocumentsViewController.swift */,
+				FCC212D7219077C000D8D5B7 /* Add document */,
+			);
+			path = "Add documents";
+			sourceTree = "<group>";
+		};
+		FCC212D7219077C000D8D5B7 /* Add document */ = {
+			isa = PBXGroup;
+			children = (
+				FCC212D8219077C000D8D5B7 /* F4SDCAddDocumentViewController.swift */,
+			);
+			path = "Add document";
+			sourceTree = "<group>";
+		};
+		FCC212D9219077C000D8D5B7 /* Url */ = {
+			isa = PBXGroup;
+			children = (
+				FCC212DA219077C000D8D5B7 /* F4SDCAddUrlViewController.swift */,
+			);
+			path = Url;
+			sourceTree = "<group>";
+		};
+		FCC212DB219077C000D8D5B7 /* Document type picker */ = {
+			isa = PBXGroup;
+			children = (
+				FCC212DC219077C000D8D5B7 /* F4SDCDocumentTypeViewController.swift */,
+			);
+			path = "Document type picker";
+			sourceTree = "<group>";
+		};
+		FCC212DE219077C000D8D5B7 /* Camera  */ = {
+			isa = PBXGroup;
+			children = (
+				FCC212DF219077C000D8D5B7 /* F4SArrangeTableViewController.swift */,
+				FCC212E0219077C000D8D5B7 /* F4SCameraViewController.swift */,
+				FCC212E1219077C000D8D5B7 /* F4SDisplayTableViewCell.swift */,
+				FCC212E2219077C000D8D5B7 /* F4SCameraPageManagerViewController.swift */,
+				FCC212E3219077C000D8D5B7 /* F4SDisplayTableViewController.swift */,
+				FCC212E4219077C000D8D5B7 /* F4SArrangeTableViewCell.swift */,
+			);
+			path = "Camera ";
+			sourceTree = "<group>";
+		};
+		FCC212E5219077C000D8D5B7 /* Document viewer */ = {
+			isa = PBXGroup;
+			children = (
+				FCC212E6219077C000D8D5B7 /* F4SDCDocumentViewerController.swift */,
+			);
+			path = "Document viewer";
+			sourceTree = "<group>";
+		};
+		FCC212E7219077C000D8D5B7 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				FCC212E8219077C000D8D5B7 /* F4SDCPopupMenuView.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		FCD3485620038B6B00DC1316 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -1998,7 +2152,10 @@
 				204203F51E4B793F007C7409 /* Favourite.storyboard in Resources */,
 				40A28CC21E24ED0D0077D490 /* SuccessExtraInfo.storyboard in Resources */,
 				40E78E8F1DD32C4E000A3776 /* Settings.bundle in Resources */,
+				FCC212E9219077C000D8D5B7 /* F4SCameraCapture.storyboard in Resources */,
+				FCC212EB219077C000D8D5B7 /* Camera.storyboard in Resources */,
 				FC7221A020FE248400F10953 /* Fastfile in Resources */,
+				FCC212EA219077C000D8D5B7 /* DocumentCapture.storyboard in Resources */,
 				FC31F097204D54E3009DD526 /* Debug.storyboard in Resources */,
 				FCB6B8CB2074C58F0042C725 /* F4SDaysAndHours.storyboard in Resources */,
 				FCB6B8E12074C59C0042C725 /* F4SCalendar.storyboard in Resources */,
@@ -2028,6 +2185,7 @@
 				D54E10051E044BA000A51560 /* ProcessedMessages.storyboard in Resources */,
 				40E78E951DD391F3000A3776 /* MapView.storyboard in Resources */,
 				2002A5661E4CAAB4000825BC /* FavouritesPopup.storyboard in Resources */,
+				FCC212F0219077C000D8D5B7 /* DocumentCapture.xcassets in Resources */,
 				FC72219F20FE248400F10953 /* Appfile in Resources */,
 				FCCD6AE71FBB42A90088D7C7 /* PopupCompanyList.storyboard in Resources */,
 				204C895F1DF5F03200D8493A /* ChooseAttributes.storyboard in Resources */,
@@ -2172,10 +2330,12 @@
 				FCDE24772105AB9B008B4315 /* F4SCompanyHeaderViewWithLogo.swift in Sources */,
 				FC99BDC820CFD8E400278DDE /* F4SDownloadService.swift in Sources */,
 				20B128181DDA1A3900CE3F1F /* Config.swift in Sources */,
+				FCC212F6219077C000D8D5B7 /* PickScenarioViewController.swift in Sources */,
 				FCB6B8C82074C58F0042C725 /* F4SDaysAndHoursViewController.swift in Sources */,
 				40A28CBF1E24ECE90077D490 /* SuccessExtraInfoViewController.swift in Sources */,
 				FC9EAD82210F5F64001C56CE /* F4SRoleService.swift in Sources */,
 				FCD3486420038C3100DC1316 /* F4SAuth0MagicLinkInterpreterer.swift in Sources */,
+				FCC212F5219077C000D8D5B7 /* F4SDCDocumentTypeViewController.swift in Sources */,
 				FCC753EE1F80F26200E9ECD6 /* MapModel.swift in Sources */,
 				40C1A5191DDF5ACE000F80AA /* GMUClusterManager.m in Sources */,
 				FC4BB6071FA20F5100173864 /* F4SPartnersModel.swift in Sources */,
@@ -2185,6 +2345,7 @@
 				2037B0A31DEC2DB600A9DE3E /* InterestDB.swift in Sources */,
 				40C1A4ED1DDB36FA000F80AA /* TimelineViewController.swift in Sources */,
 				40C1A4E61DDB356B000F80AA /* CustomTabBarViewController.swift in Sources */,
+				FCC212F4219077C000D8D5B7 /* F4SDCAddUrlViewController.swift in Sources */,
 				FCA53B921FE00CB5009F6DB0 /* Versioning.swift in Sources */,
 				D54E10071E044BC100A51560 /* ProcessedMessagesViewController.swift in Sources */,
 				FCB46F0A20516FD200F0779F /* F4SFeatureSwitchTableViewCell.swift in Sources */,
@@ -2227,6 +2388,7 @@
 				40A5CF401DED81F7000007AB /* CustomViewFlowLayout.swift in Sources */,
 				FCB6B8CE2074C58F0042C725 /* F4SSelectDayTableViewCell.swift in Sources */,
 				40E78E771DD32BE7000A3776 /* DrawerBarButtonItem.swift in Sources */,
+				FCC212F1219077C000D8D5B7 /* F4SDocumentTableViewController.swift in Sources */,
 				40E78E9A1DD392B5000A3776 /* OnboardingViewController.swift in Sources */,
 				FCA6C8252107163B00A222FE /* F4SConfirmUseVoucherView.swift in Sources */,
 				FCDE24792105ABA2008B4315 /* ViewController.swift in Sources */,
@@ -2234,6 +2396,7 @@
 				FCB6B8CC2074C58F0042C725 /* F4SDisplayInformationViewController.swift in Sources */,
 				40E78E9C1DD5DB6D000A3776 /* AutoCompleteTextField.swift in Sources */,
 				40C1A51D1DDF5ACE000F80AA /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
+				FCC212ED219077C000D8D5B7 /* F4SDCDocumentUploadModel.swift in Sources */,
 				40C1A51F1DDF5ACE000F80AA /* GMUStaticCluster.m in Sources */,
 				FC5C5B952109FF48007DCB84 /* RequestBLProvideDocuments.swift in Sources */,
 				FCA6D2B61FA88CE10037962B /* F4SPartnerService.swift in Sources */,
@@ -2246,18 +2409,23 @@
 				FC99F3D41FFE533000E3AC5A /* F4SRecommendationService.swift in Sources */,
 				4059740A1E00115C0002DB3A /* NextResponderTextField.swift in Sources */,
 				2037B0AB1DEC42F600A9DE3E /* PlacementDB.swift in Sources */,
+				FCC212F2219077C000D8D5B7 /* F4SDCAddDocumentsViewController.swift in Sources */,
 				40C1A52B1DE82060000F80AA /* InfoWindowView.swift in Sources */,
 				FCD884FB1FFBE04F00F05B08 /* RecommendationsViewController.swift in Sources */,
+				FCC212EF219077C000D8D5B7 /* String+F4SDCExtensions.swift in Sources */,
 				206F8F921E1E552F0024937B /* MessageOptionHelper.swift in Sources */,
+				FCC212EC219077C000D8D5B7 /* F4SDCDocumentCaptureFileHelper.swift in Sources */,
 				40E78EA01DD5E208000A3776 /* LocationHelper.swift in Sources */,
 				40C1A5231DDF5ACE000F80AA /* POIItem.m in Sources */,
 				FCB46F042051365400F0779F /* F4SFeatureSwitchesViewController.swift in Sources */,
+				FCC212EE219077C000D8D5B7 /* F4SDocumentModel.swift in Sources */,
 				40C1A52D1DE84410000F80AA /* TriangleView.swift in Sources */,
 				FC789E5E2133E74200AED05D /* UIViewController+Extensions.swift in Sources */,
 				FC64A597211AECDE006464A5 /* F4SInviteDetailLinkCell.swift in Sources */,
 				205EB20B1DDB161D00034424 /* DatabaseOperations.swift in Sources */,
 				40E78E8C1DD32C3C000A3776 /* LoadingOverlay.swift in Sources */,
 				200F640F1DF19995002F5F36 /* Errors.swift in Sources */,
+				FCC212F7219077C000D8D5B7 /* F4SArrangeTableViewController.swift in Sources */,
 				FCB3922C20FF1E3100792C0A /* AcceptOfferViewController.swift in Sources */,
 				FCB6B8EA2074C59C0042C725 /* F4SDisplayableMonth.swift in Sources */,
 				FCCD6AEB1FBB4B8A0088D7C7 /* CompanyInfoTableViewCell.swift in Sources */,
@@ -2297,7 +2465,10 @@
 				40E78E761DD32BE7000A3776 /* AnimatedMenuButton.swift in Sources */,
 				FCE20CBF203C12F300CA821D /* DocumentUrlViewController.swift in Sources */,
 				40E78E171DD31A86000A3776 /* AppDelegate.swift in Sources */,
+				FCC212F9219077C000D8D5B7 /* F4SDisplayTableViewCell.swift in Sources */,
+				FCC212FA219077C000D8D5B7 /* F4SCameraPageManagerViewController.swift in Sources */,
 				206F8F911E1E552F0024937B /* MessageOptionsView.swift in Sources */,
+				FCC212FB219077C000D8D5B7 /* F4SDisplayTableViewController.swift in Sources */,
 				206F8F8B1E1E48120024937B /* OptionLabel.swift in Sources */,
 				40C6DDF61E03F93C000F8806 /* UserInfoDBOperations.swift in Sources */,
 				2037B0AD1DEC560700A9DE3E /* PlacementCoreDataManager.swift in Sources */,
@@ -2310,6 +2481,7 @@
 				FCD3485A20038BF200DC1316 /* F4SEmailVerificationViewController.swift in Sources */,
 				40C1A51A1DDF5ACE000F80AA /* GMUDefaultClusterIconGenerator.m in Sources */,
 				FCB6B8CF2074C58F0042C725 /* F4SDaysAndHoursModel.swift in Sources */,
+				FCC212FE219077C000D8D5B7 /* F4SDCPopupMenuView.swift in Sources */,
 				FC6DE52020AC3AD900F9BB71 /* F4SUserStatusService.swift in Sources */,
 				40E78E661DD32B94000A3776 /* CustomNavigationHelper.swift in Sources */,
 				FC4C5F2C20B404CF001FA83C /* F4SUploadTableViewController.swift in Sources */,
@@ -2318,6 +2490,7 @@
 				40E78E591DD32964000A3776 /* Entities.swift in Sources */,
 				FCB6B8C72074C58F0042C725 /* F4SPageHeaderView.swift in Sources */,
 				FC631CB620D64BD100199507 /* F4SAsynchronousOperation.swift in Sources */,
+				FCC212FD219077C000D8D5B7 /* F4SDCDocumentViewerController.swift in Sources */,
 				204203EA1E4B110A007C7409 /* ShortlistDB.swift in Sources */,
 				203658831E1F809E00D87DC4 /* StatusCollectionViewCell.swift in Sources */,
 				FC67E60F207BA80A006F07FE /* F4SAvailabilityPeriod.swift in Sources */,
@@ -2335,9 +2508,11 @@
 				FCDE24752105AB94008B4315 /* F4SRoundIconView.swift in Sources */,
 				FCB1648320986E810045B9CA /* F4SRequestCompanyDocumentTableViewCell.swift in Sources */,
 				D54E0FFF1E044B1800A51560 /* ContentViewController.swift in Sources */,
+				FCC212F8219077C000D8D5B7 /* F4SCameraViewController.swift in Sources */,
 				204C89741DF5F0A100D8493A /* EditCoverLetterViewController.swift in Sources */,
 				FCB46F02204FD86D00F0779F /* F4SLogViewController.swift in Sources */,
 				2037B0B61DEC881500A9DE3E /* CoverLetterViewController.swift in Sources */,
+				FCC212FC219077C000D8D5B7 /* F4SArrangeTableViewCell.swift in Sources */,
 				FC9EAD8421106846001C56CE /* F4SAccepOfferContext.swift in Sources */,
 				FCE11E532111E3CD00403789 /* F4SSeePeopleAndAccountsTableViewCell.swift in Sources */,
 				405974081DFD449C0002DB3A /* ExtraInfoViewController.swift in Sources */,
@@ -2359,6 +2534,7 @@
 				40E78E7E1DD32BF4000A3776 /* CenterTableViewCell.swift in Sources */,
 				FC6A555620EFB97600D08662 /* F4SJsonValue.swift in Sources */,
 				204C89571DF5A44100D8493A /* TemplateChoiceCoreDataManager.swift in Sources */,
+				FCC212F3219077C000D8D5B7 /* F4SDCAddDocumentViewController.swift in Sources */,
 				FCF06EE720DBFEC100FD990C /* F4SPlacementModels.swift in Sources */,
 				FCD3486820038C3100DC1316 /* F4SEmailVerificationError.swift in Sources */,
 				FCE20CC6203D5CE400CA821D /* DocumentsService.swift in Sources */,
@@ -2637,6 +2813,14 @@
 				FCB6B8C22074C58E0042C725 /* Base */,
 			);
 			name = F4SDaysAndHours.storyboard;
+			sourceTree = "<group>";
+		};
+		FCC212CA219077C000D8D5B7 /* DocumentCapture.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FCC212CB219077C000D8D5B7 /* Base */,
+			);
+			name = DocumentCapture.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
