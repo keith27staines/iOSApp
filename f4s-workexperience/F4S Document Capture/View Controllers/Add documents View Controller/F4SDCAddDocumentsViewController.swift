@@ -9,7 +9,7 @@
 import UIKit
 
 class F4SDCAddDocumentsViewController: UIViewController {
-    
+    let consentPreviouslyGivenKey = "consentPreviouslyGivenKey"
     @IBOutlet weak var addButtonHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var addDocumentButton: UIButton!
     @IBOutlet weak var headingLabel: UILabel!
@@ -17,8 +17,21 @@ class F4SDCAddDocumentsViewController: UIViewController {
     @IBOutlet weak var subheadingLabel: UILabel!
     
     @IBOutlet var tableView: UITableView!
-    @IBAction func dismissToOrigin(sender:Any?) {}
+    
+
+    @IBOutlet weak var primaryActionButton: UIButton!
+    
     var documents: [F4SDCDocumentUpload] = [F4SDCDocumentUpload]()
+    
+    lazy var documentUrlModel: F4SDocumentUrlModel = {
+        return F4SDocumentUrlModel(delegate: self, placementUuid: self.applicationContext.placement!.placementUuid!)
+    }()
+    
+    lazy var userService: F4SUserService = {
+        return F4SUserService()
+    }()
+    
+    var applicationContext: F4SApplicationContext!
     
     @IBAction func addDocumentButtonTapped(_ sender: Any) {
         hidePopopMenu()
@@ -36,6 +49,19 @@ class F4SDCAddDocumentsViewController: UIViewController {
         popup.delegate = self
         return popup
     }()
+    
+    @IBAction func performPrimaryAction(_ sender: Any) {
+        switch mode {
+        case .applyWorkflow:
+            performPrimaryActionForApplyMode()
+        case .businessLeaderRequest:
+            break
+        }
+
+    }
+    
+    /// Provides a root point to dismiss to for the current navigation scheme
+    func popToHere() {}
     
     enum Mode {
         case applyWorkflow
@@ -77,6 +103,7 @@ class F4SDCAddDocumentsViewController: UIViewController {
             }
         }
     }
+    
     var mode: Mode = .applyWorkflow {
         didSet {
             _ = view
@@ -87,7 +114,7 @@ class F4SDCAddDocumentsViewController: UIViewController {
         }
     }
     
-    var documentTypes: [String]!
+    var documentTypes: [F4SUploadableDocumentType] = F4SUploadableDocumentType.allCases
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,6 +127,12 @@ class F4SDCAddDocumentsViewController: UIViewController {
             }
             tableView.reloadData()
         }
+        applySkin()
+    }
+    
+    func applySkin() {
+        let skinner = Skinner()
+        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: primaryActionButton)
     }
     
     var selectedDocument: F4SDCDocumentUpload? {
@@ -139,40 +172,25 @@ class F4SDCAddDocumentsViewController: UIViewController {
     }
 }
 
-extension F4SDCAddDocumentsViewController :  F4SDCAddDocumentViewControllerDelegate {
-    func didAddDocument(_ document: F4SDCDocumentUpload) {
-        popToHere()
-        let updatedDocument = document
-        if let data = updatedDocument.data {
-            let folderUrl = F4SDCDocumentCaptureFileHelper.createDirectory("uploads")
-            var url = folderUrl.appendingPathComponent(updatedDocument.name ?? "unnamed", isDirectory: false)
-            url = url.appendingPathExtension("pdf")
-            do {
-                try data.write(to: url, options: [.atomic])
-                updatedDocument.localUrlString = url.absoluteString
-            } catch {
-                print(error)
-            }
-        }
-        if let indexPath = selectedIndexPath {
-            documents[indexPath.row] = updatedDocument
-            tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
-        } else {
-            documents.append(updatedDocument)
-            let newIndexPath = IndexPath(row: documents.count-1, section: 0)
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
-            if documents.count == documentTypes.count {
-                addDocumentButton.isEnabled = false
-            }
-            self.selectedIndexPath = newIndexPath
-            tableView.selectRow(at: newIndexPath, animated: false, scrollPosition: .middle)
-        }
+extension F4SDCAddDocumentsViewController : F4SDocumentUrlModelDelegate {
+    func documentUrlModel(_ model: F4SDocumentUrlModel, deleted: F4SDocumentUrlDescriptor) {
+        
     }
     
-    func popToHere() {
-        if navigationController?.topViewController != self {
-            dismiss(animated: true)
-        }
+    func documentUrlModel(_ model: F4SDocumentUrlModel, updated: F4SDocumentUrlDescriptor) {
+        
+    }
+    
+    func documentUrlModel(_ model: F4SDocumentUrlModel, created: F4SDocumentUrlDescriptor) {
+        
+    }
+    
+    func documentUrlModelFetchedDocuments(_ model: F4SDocumentUrlModel) {
+        
+    }
+    
+    func documentUrlModelFailedToFetchDocuments(_ model: F4SDocumentUrlModel, error: Error) {
+        
     }
 }
     

@@ -147,7 +147,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2162" y="30"/>
+            <point key="canvasLocation" x="3100" y="29.23538230884558"/>
         </scene>
         <!--F4SCameraCapture-->
         <scene sceneID="nxS-LW-n24">
@@ -155,7 +155,7 @@
                 <viewControllerPlaceholder storyboardName="F4SCameraCapture" id="QHa-l9-ztF" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GvP-4I-m35" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3282" y="29"/>
+            <point key="canvasLocation" x="4220" y="28.785607196401802"/>
         </scene>
         <!--URL-->
         <scene sceneID="FWO-QV-KrP">
@@ -213,7 +213,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VI0-u8-TMx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3450" y="-498"/>
+            <point key="canvasLocation" x="4388" y="-498.80059970014997"/>
         </scene>
         <!--Add documents-->
         <scene sceneID="Y5M-u4-Kaj">
@@ -264,6 +264,9 @@
                                 <rect key="frame" x="22" y="623" width="331" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Skip"/>
+                                <connections>
+                                    <action selector="performPrimaryAction:" destination="VZL-kF-FTn" eventType="touchUpInside" id="gBB-Qu-VAF"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9dq-eJ-KAE">
                                 <rect key="frame" x="162.5" y="259" width="50" height="50"/>
@@ -319,6 +322,7 @@
                         <outlet property="addButtonHeightConstraint" destination="6Er-Ie-dDQ" id="8Ji-g6-hLj"/>
                         <outlet property="addDocumentButton" destination="9dq-eJ-KAE" id="OSo-pD-XH7"/>
                         <outlet property="headingLabel" destination="BnY-du-vow" id="Ukb-KA-Gt6"/>
+                        <outlet property="primaryActionButton" destination="zoP-Uf-T9p" id="xub-by-PGr"/>
                         <outlet property="subheadingLabel" destination="KbB-xW-Kbn" id="f93-cO-BY3"/>
                         <outlet property="tableView" destination="3Cf-bO-VGV" id="RL0-Fe-5OT"/>
                         <segue destination="Kmj-n9-hXG" kind="show" identifier="showDocument" id="Sao-zG-HqP"/>
@@ -328,7 +332,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IJh-Q2-7z7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1261.5999999999999" y="-58.020989505247378"/>
+            <point key="canvasLocation" x="2200.8000000000002" y="-58.020989505247378"/>
         </scene>
         <!--Document viewer-->
         <scene sceneID="RoQ-lx-Rbh">
@@ -359,7 +363,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bca-rb-Mc1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2161" y="-702"/>
+            <point key="canvasLocation" x="3100" y="-702.09895052473769"/>
         </scene>
         <!--Document Type View Controller-->
         <scene sceneID="Xfm-mT-ECn">
@@ -455,7 +459,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RU5-fn-o8l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3433" y="401"/>
+            <point key="canvasLocation" x="4372" y="400.29985007496254"/>
         </scene>
     </scenes>
     <resources>

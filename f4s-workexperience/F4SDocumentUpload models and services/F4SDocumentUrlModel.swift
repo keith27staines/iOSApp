@@ -55,20 +55,16 @@ extension F4SDocumentUrl {
     }
 }
 
-public enum F4SUploadableDocumentType : String {
+public enum F4SUploadableDocumentType : String, CaseIterable {
     case cv
-    case certificate
     case other
     
     var title: String {
         switch self {
-
         case .cv:
             return "CV"
-        case .certificate:
-            return "Life Skills certificate"
         case .other:
-            return "other information"
+            return "Other"
         }
     }
 }

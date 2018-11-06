@@ -22,7 +22,7 @@ class F4SDCAddDocumentViewController: UIViewController {
     @IBOutlet weak var dropDownHeightConstraint: NSLayoutConstraint!
     weak var delegate: F4SDCAddDocumentViewControllerDelegate?
     
-    var document: F4SDCDocumentUpload? = F4SDCDocumentUpload(type: "other") {
+    var document: F4SDCDocumentUpload? = F4SDCDocumentUpload(type: .other) {
         didSet {
             guard let type = document?.type else { return }
             setStateForDocumentType(type)
@@ -30,7 +30,7 @@ class F4SDCAddDocumentViewController: UIViewController {
     }
     var userDidEditName: Bool = false
     
-    var documentTypes: [String] = [String]() {
+    var documentTypes: [F4SUploadableDocumentType] = [F4SUploadableDocumentType]() {
         didSet {
             _ = view
             if documentTypes.count == 1 {
@@ -109,14 +109,17 @@ class F4SDCAddDocumentViewController: UIViewController {
         }
     }
     
-    func setStateForDocumentType(_ type:String) {
+    func setStateForDocumentType(_ type: F4SUploadableDocumentType) {
         document?.type = type
-        updateDocumentName(type: type)
-        if type.lowercased() == "other" {
-            nameField.text = ""
+        updateDocumentName(type: type.title)
+        
+        switch type {
+        case .cv:
+            nameField.text = "My CV"
             setAddButtonsEnabled(state: false)
             nameField.becomeFirstResponder()
-        } else {
+        case .other:
+            nameField.text = ""
             setAddButtonsEnabled(state: true)
             nameField.resignFirstResponder()
         }

@@ -93,9 +93,14 @@ class ExtraInfoViewController: UIViewController {
         return voucherText.isEmpty || (voucherText.isVoucherCode() && voucherText.count == 6)
     }
     
-    lazy var documentUploadController: DocumentUrlViewController = {
-        let storyboard = UIStoryboard(name: "DocumentUrl", bundle: nil)
-        return storyboard.instantiateInitialViewController() as! DocumentUrlViewController
+//    lazy var documentUploadController: DocumentUrlViewController = {
+//        let storyboard = UIStoryboard(name: "DocumentUrl", bundle: nil)
+//        return storyboard.instantiateInitialViewController() as! DocumentUrlViewController
+//    }()
+    
+    lazy var f4sDocumentUploadController: F4SDCAddDocumentsViewController = {
+        let storyboard = UIStoryboard(name: "DocumentCapture", bundle: nil)
+        return storyboard.instantiateInitialViewController() as! F4SDCAddDocumentsViewController
     }()
     
     lazy var emailController: F4SEmailVerificationViewController = {
@@ -546,12 +551,6 @@ extension ExtraInfoViewController {
         let user = saveUserDetailsLocally()
         guard var applicationContext = applicationContext else { return }
         applicationContext.user = user
-//        if let reachability = Reachability() {
-//            if !reachability.isReachableByAnyMeans {
-//                MessageHandler.sharedInstance.display("No Internet Connection.", parentCtrl: self)
-//                return
-//            }
-//        }
         verifyVoucher(applicationContext: applicationContext)
     }
     
@@ -650,9 +649,11 @@ extension ExtraInfoViewController {
     }
     
     func performDocumentUpload(applicationContext: F4SApplicationContext) {
-        let uploadController = documentUploadController
+        let uploadController = f4sDocumentUploadController
         uploadController.applicationContext = self.applicationContext
-        self.navigationController?.pushViewController(uploadController, animated: true)
+        uploadController.mode = .applyWorkflow
+        let navController = UINavigationController(rootViewController: uploadController)
+        self.present(navController, animated: true, completion: nil)
     }
 }
 

@@ -9,7 +9,7 @@
 import Foundation
 
 class F4SDCDocumentUpload {
-    var type: String
+    var type: F4SUploadableDocumentType
     var name: String?
     var data: Data?
     var localUrlString: String? = nil
@@ -30,7 +30,7 @@ class F4SDCDocumentUpload {
         data = nil
     }
     
-    public init(type: String, name: String? = nil, urlString: String? = nil, data: Data? = nil) {
+    public init(type: F4SUploadableDocumentType, name: String? = nil, urlString: String? = nil, data: Data? = nil) {
         self.type = type
         self.name = name
         self.localUrlString = urlString
