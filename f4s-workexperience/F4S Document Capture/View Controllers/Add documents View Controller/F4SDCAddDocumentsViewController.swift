@@ -173,25 +173,36 @@ class F4SDCAddDocumentsViewController: UIViewController {
 }
 
 extension F4SDCAddDocumentsViewController : F4SDocumentUrlModelDelegate {
-    func documentUrlModel(_ model: F4SDocumentUrlModel, deleted: F4SDocumentUrlDescriptor) {
-        
-    }
-    
-    func documentUrlModel(_ model: F4SDocumentUrlModel, updated: F4SDocumentUrlDescriptor) {
-        
-    }
-    
-    func documentUrlModel(_ model: F4SDocumentUrlModel, created: F4SDocumentUrlDescriptor) {
-        
+    func documentUrlModelFailedToFetchDocuments(_ model: F4SDocumentUrlModel, error: Error) {
+        displayTryAgain { [weak self] in
+            self?.documentUrlModel.fetchDocumentsForUrl()
+        }
     }
     
     func documentUrlModelFetchedDocuments(_ model: F4SDocumentUrlModel) {
+        DispatchQueue.main.async { [weak self] in
+            self?.reloadFromFetchedData()
+        }
+    }
+    
+    func documentUrlModel(_ model: F4SDocumentUrlModel, deleted: F4SDocumentUrlDescriptor) {
+        updateEnabledStateOfAddButton(model)
+    }
+    func documentUrlModel(_ model: F4SDocumentUrlModel, updated: F4SDocumentUrlDescriptor) {
+        updateEnabledStateOfAddButton(model)
+    }
+    func documentUrlModel(_ model: F4SDocumentUrlModel, created: F4SDocumentUrlDescriptor) {
+        updateEnabledStateOfAddButton(model)
+    }
+    
+    fileprivate func updateEnabledStateOfAddButton(_ model: F4SDocumentUrlModel) {
+        addDocumentButton.isEnabled = model.canAddPlaceholder()
+    }
+    
+    fileprivate func reloadFromFetchedData() {
         
     }
     
-    func documentUrlModelFailedToFetchDocuments(_ model: F4SDocumentUrlModel, error: Error) {
-        
-    }
 }
     
 extension F4SDCAddDocumentsViewController : UITableViewDataSource, UITableViewDelegate  {

@@ -127,7 +127,7 @@ public protocol F4SDocumentUrlModelDelegate {
 public class F4SDocumentUrlModel {
     
     public private (set) var documentService: F4SPlacementDocumentsService?
-    public let maxUrls : Int = 3
+    public let maxUrls : Int = 2
     private var delegate: F4SDocumentUrlModelDelegate?
     
     public var expandedIndexPath: IndexPath? {
