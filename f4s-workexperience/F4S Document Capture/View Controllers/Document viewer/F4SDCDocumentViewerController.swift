@@ -11,7 +11,7 @@ import UIKit
 class F4SDCDocumentViewerController: UIViewController {
     
     @IBOutlet weak var webview: UIWebView!
-    var document: F4SDCDocumentUpload!
+    var document: F4SDocument!
 
     override func viewDidLoad() {
         super.viewDidLoad()

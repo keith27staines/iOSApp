@@ -9,7 +9,7 @@
 import UIKit
 
 protocol F4SDCAddDocumentViewControllerDelegate : class {
-    func didAddDocument(_ document: F4SDCDocumentUpload)
+    func didAddDocument(_ document: F4SDocument)
 }
 
 
@@ -22,13 +22,12 @@ class F4SDCAddDocumentViewController: UIViewController {
     @IBOutlet weak var dropDownHeightConstraint: NSLayoutConstraint!
     weak var delegate: F4SDCAddDocumentViewControllerDelegate?
     
-    var document: F4SDCDocumentUpload? = F4SDCDocumentUpload(type: .other) {
+    var document: F4SDocument = F4SDocument(type: .other) {
         didSet {
-            guard let type = document?.type else { return }
-            setStateForDocumentType(type)
+            setStateForDocumentType(document.type)
         }
     }
-    var userDidEditName: Bool = false
+    var userHasEditedName: Bool = false
     
     var documentTypes: [F4SUploadableDocumentType] = [F4SUploadableDocumentType]() {
         didSet {
@@ -48,6 +47,18 @@ class F4SDCAddDocumentViewController: UIViewController {
         super.viewDidLoad()
         nameField.delegate = self
         setAddButtonsEnabled(state: false)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        applyStyle()
+    }
+    
+    func applyStyle() {
+        let skinner = Skinner()
+        addButtons.forEach { (button) in
+            skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: button)
+        }
     }
 
     @IBAction func cameraTapped(_ sender: UIButton) {
@@ -99,7 +110,7 @@ class F4SDCAddDocumentViewController: UIViewController {
                 vc.documentTypes = documentTypes
                 vc.onSelected = { index in
                     let type = vc.documentTypes[index]
-                    self.document?.type = type
+                    self.document.type = type
                     self.setStateForDocumentType(type)
                 }
                 documentTypeSelector = vc
@@ -110,26 +121,18 @@ class F4SDCAddDocumentViewController: UIViewController {
     }
     
     func setStateForDocumentType(_ type: F4SUploadableDocumentType) {
-        document?.type = type
-        updateDocumentName(type: type.title)
-        
-        switch type {
-        case .cv:
-            nameField.text = "My CV"
-            setAddButtonsEnabled(state: false)
-            nameField.becomeFirstResponder()
-        case .other:
-            nameField.text = ""
-            setAddButtonsEnabled(state: true)
-            nameField.resignFirstResponder()
-        }
+        document.type = type
+        documentTypeSelector?.labelView.text = type.name
+        updateDocumentName(type: type.name)
+        setAddButtonsEnabled(state: true)
+        nameField.becomeFirstResponder()
     }
     
     func updateDocumentName(type: String) {
-        if !userDidEditName {
-            nameField.text = document?.defaultName
+        if !userHasEditedName {
+            nameField.text = document.defaultName
         }
-        document?.name = nameField.text
+        document.name = nameField.text
     }
 }
 
@@ -145,26 +148,31 @@ extension F4SDCAddDocumentViewController {
 extension F4SDCAddDocumentViewController : UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         let name = textField.text ?? ""
-        document?.name = name 
+        document.name = name
         if !name.isEmpty {
             setAddButtonsEnabled(state: true)
         }
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        userDidEditName = true
+        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return false
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        userHasEditedName = true
+        return true
+    }
 }
 
 extension F4SDCAddDocumentViewController : F4SDCAddUrlViewControllerDelegate {
     func didCaptureUrl(_ url: URL) {
-        document?.remoteUrlString = url.absoluteString
-        delegate?.didAddDocument(document!)
+        document.remoteUrlString = url.absoluteString
+        delegate?.didAddDocument(document)
         navigationController?.popViewController(animated: false)
     }
 }
@@ -172,8 +180,8 @@ extension F4SDCAddDocumentViewController : F4SDCAddUrlViewControllerDelegate {
 extension F4SDCAddDocumentViewController : F4SCameraCaptureViewControllerDelegate {
     func didCaptureDocumentasPDFData(_ pdfData: Data) {
         dismiss(animated: true, completion: nil)
-        document?.data = pdfData
-        delegate?.didAddDocument(document!)
+        document.data = pdfData
+        delegate?.didAddDocument(document)
         navigationController?.popViewController(animated: true)
     }
 }
@@ -193,8 +201,8 @@ extension F4SDCAddDocumentViewController : UIDocumentPickerDelegate {
         var error:NSError? = nil
         coordinator.coordinate(readingItemAt: url, options: [], error: &error) { (url) -> Void in
             if let fileData = try? Data(contentsOf: url) {
-                document?.data = fileData
-                delegate?.didAddDocument(document!)
+                document.data = fileData
+                delegate?.didAddDocument(document)
                 navigationController?.popViewController(animated: true)
             } else {
                 print("No data!!")
@@ -215,13 +223,13 @@ extension F4SDCAddDocumentViewController : UINavigationControllerDelegate, UIIma
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-// Local variable inserted by Swift 4.2 migrator.
-let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+        // Local variable inserted by Swift 4.2 migrator.
+        let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 
         if let pickedImage = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
             let pdfData = pickedImage.generatePDF()
-            document?.data = pdfData
-            delegate?.didAddDocument(document!)
+            document.data = pdfData
+            delegate?.didAddDocument(document)
             navigationController?.popViewController(animated: true)
         }
     }

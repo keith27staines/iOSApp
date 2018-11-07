@@ -29,13 +29,13 @@ public class F4SUploadRequestedDocumentsTableViewModel {
     
     public init(placementUuid: F4SUUID, documentTypeNames: [String]) {
         self.placementUuid = placementUuid
-        documentUrlDescriptors = documentTypeNames.map({ (docTypeName) -> F4SDocumentUrlDescriptor in
+        documents = documentTypeNames.map({ (docTypeName) -> F4SDocument in
             let docType = F4SUploadableDocumentType(rawValue: docTypeName) ?? F4SUploadableDocumentType.other
-            return F4SDocumentUrlDescriptor(docType: docType, urlString: "", includeInApplication: true, isExpanded: false)
+            return F4SDocument(type: docType)
         })
     }
     
-    private var documentUrlDescriptors: [F4SDocumentUrlDescriptor] = []
+    private var documents: [F4SDocument] = []
     
     public func toggleExpansionAtIndexPath(indexPath: IndexPath) -> [IndexPath]? {
         if indexPath == expandedIndexPath {
@@ -52,23 +52,23 @@ public class F4SUploadRequestedDocumentsTableViewModel {
         var affectedIndexPaths : [IndexPath] = [indexPath]
         let currentExpanded = expandedIndexPath
         if currentExpanded != nil {
-            documentUrlDescriptors[currentExpanded!.row].isExpanded = false
+            documents[currentExpanded!.row].isExpanded = false
             affectedIndexPaths.append(currentExpanded!)
         }
-        documentUrlDescriptors[indexPath.row].isExpanded = true
+        documents[indexPath.row].isExpanded = true
         expandedIndexPath = indexPath
         return affectedIndexPaths
     }
     
     public func collapseExpanded() -> [IndexPath]? {
         guard let expandedIndexPath = expandedIndexPath else { return nil }
-        documentUrlDescriptors[expandedIndexPath.row].isExpanded = false
+        documents[expandedIndexPath.row].isExpanded = false
         self.expandedIndexPath = nil
         return [expandedIndexPath]
     }
     
-    internal var displayUrlDescriptors: [F4SDocumentUrlDescriptor] {
-        return documentUrlDescriptors
+    internal var displayUrlDescriptors: [F4SDocument] {
+        return documents
     }
     
     public var numberOfSections: Int { return 1 }
@@ -82,17 +82,17 @@ public class F4SUploadRequestedDocumentsTableViewModel {
         NotificationCenter.default.post(notification)
     }
     
-    public func descriptorForIndexPath(_ indexPath: IndexPath) -> F4SDocumentUrlDescriptor {
+    public func descriptorForIndexPath(_ indexPath: IndexPath) -> F4SDocument {
         return displayUrlDescriptors[indexPath.row]
     }
     
-    public func setDescriptorForIndexPath(_ indexPath: IndexPath, title: String = "", type: F4SUploadableDocumentType, urlString: String = "", includeInApplication: Bool = true, isExpanded: Bool = false) -> [IndexPath] {
-        let descriptor = F4SDocumentUrlDescriptor(title: title, docType: type, urlString: urlString, includeInApplication: includeInApplication, isExpanded: isExpanded)
-        return setDescriptorForIndexPath(indexPath, descriptor: descriptor)
+    public func setDocumentForIndexPath(_ indexPath: IndexPath, title: String = "", type: F4SUploadableDocumentType, urlString: String = "", includeInApplication: Bool = true, isExpanded: Bool = false) -> [IndexPath] {
+        let document = F4SDocument(uuid: nil, urlString: urlString, type: type, name: title, includeInApplication: includeInApplication, isExpanded: isExpanded)
+        return setDocumentForIndexPath(indexPath, document: document)
     }
     
-    public func setDescriptorForIndexPath(_ indexPath: IndexPath, descriptor: F4SDocumentUrlDescriptor) -> [IndexPath] {
-        documentUrlDescriptors[indexPath.row] = descriptor
+    public func setDocumentForIndexPath(_ indexPath: IndexPath, document: F4SDocument) -> [IndexPath] {
+        documents[indexPath.row] = document
         if indexPath == expandedIndexPath {
             return expandAtIndexPath(indexPath)
         }
@@ -101,27 +101,23 @@ public class F4SUploadRequestedDocumentsTableViewModel {
     }
     
     public func urlIsNew(url: URL) -> Bool {
-        for descriptor in documentUrlDescriptors {
-            if descriptor.url == url { return false }
+        for document in documents {
+            if document.remoteUrl == url { return false }
         }
         return true
     }
     
     public func canSubmitToServer() -> Bool {
         for descriptor in displayUrlDescriptors {
-            if !descriptor.isValidUrl { return false }
+            if !descriptor.hasValidRemoteUrl { return false }
         }
         return true
     }
     
     public func submitToServer(completion: @escaping (F4SNetworkDataResult)->() ) {
         let service = F4SPlacementDocumentsService(placementUuid: placementUuid)
-        var documentUrls = [F4SDocumentUrl]()
-        for descriptor in documentUrlDescriptors {
-            documentUrls.append(descriptor.documentUrl)
-        }
-        let putJson = F4SPutDocumentsUrlJson(documents: documentUrls)
-        service.putDocumentsForPlacement(documentDescriptors: putJson) { (result) in
+        let putJson = F4SPutDocumentsJson(documents: documents)
+        service.putDocumentsForPlacement(documents: putJson) { (result) in
             completion(result)
         }
         

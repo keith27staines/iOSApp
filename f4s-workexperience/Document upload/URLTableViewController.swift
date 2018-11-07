@@ -10,7 +10,7 @@ import UIKit
 
 class URLTableViewController: UIViewController {
     
-    var documentUrlModel: F4SDocumentUrlModel!
+    var documentUploadModel: F4SDocumentUploadModel!
     
     @IBOutlet var tableView: UITableView!
     
@@ -22,7 +22,7 @@ class URLTableViewController: UIViewController {
     }
     
     func createNewLink() {
-        guard let _ = documentUrlModel.createDescriptor(includeInApplication: false) else {
+        guard let _ = documentUploadModel.createDescriptor(includeInApplication: false) else {
             return
         }
         let indexPath = IndexPath(row: 0, section: 0)
@@ -34,27 +34,27 @@ class URLTableViewController: UIViewController {
         guard let indexPath = tableView.indexPath(for: cell) else {
             return
         }
-        var urlDescriptor = documentUrlModel.urlDescriptor(indexPath)
-        urlDescriptor.urlString = ""
-        documentUrlModel.deleteDescriptor(indexPath: indexPath)
+        var urlDescriptor = documentUploadModel.document(indexPath)
+        urlDescriptor.remoteUrlString = ""
+        documentUploadModel.deleteDocument(indexPath: indexPath)
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
 }
 
 extension URLTableViewController : UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return documentUrlModel.numberOfSections()
+        return documentUploadModel.numberOfSections()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return documentUrlModel.numberOfRows(for: section)
+        return documentUploadModel.numberOfRows(for: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! UrlTableViewCell
-        cell.documentUrlDescriptor = documentUrlModel.urlDescriptor(indexPath)
+        cell.document = documentUploadModel.document(indexPath)
         cell.deleteButtonWasPressed = deleteUrlForCell
-        if documentUrlModel.urlDescriptor(indexPath).isExpanded {
+        if documentUploadModel.document(indexPath).isExpanded {
             cell.label.numberOfLines = 0
             cell.label.lineBreakMode = .byCharWrapping
         } else {
@@ -71,8 +71,8 @@ extension URLTableViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         guard let cell = tableView.cellForRow(at: indexPath) as? UrlTableViewCell else { return }
-        var urlDescriptor = documentUrlModel.urlDescriptor(indexPath)
-        guard !urlDescriptor.isValidUrl else {
+        var urlDescriptor = documentUploadModel.document(indexPath)
+        guard !urlDescriptor.hasValidRemoteUrl else {
             // contains a valid url so just toggle the expansion of the row
             toggleExpansionAtIndexPath(indexPath: indexPath)
             return
@@ -88,21 +88,21 @@ extension URLTableViewController : UITableViewDelegate, UITableViewDataSource {
             return
         }
         
-        guard !documentUrlModel.contains(url: url) else {
+        guard !documentUploadModel.contains(url: url) else {
             let alert = UIAlertController(title: "You have already added this link", message: "The link you are trying to paste now is already here! Please use a different one", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Got it", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             return
         }
         
-        urlDescriptor.urlString = pasteText
-        documentUrlModel.setDescriptor(urlDescriptor, at: indexPath)
-        cell.documentUrlDescriptor = urlDescriptor
+        urlDescriptor.remoteUrlString = pasteText
+        documentUploadModel.setDocument(urlDescriptor, at: indexPath)
+        cell.document = urlDescriptor
         expandRowAtIndexPath(indexPath: indexPath)
     }
     
     func toggleExpansionAtIndexPath(indexPath: IndexPath) {
-        if indexPath == documentUrlModel.expandedIndexPath {
+        if indexPath == documentUploadModel.expandedIndexPath {
             collapseExpandedRow()
         } else {
             expandRowAtIndexPath(indexPath: indexPath)
@@ -110,24 +110,24 @@ extension URLTableViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func expandRowAtIndexPath(indexPath: IndexPath) {
-        if indexPath == documentUrlModel.expandedIndexPath {
+        if indexPath == documentUploadModel.expandedIndexPath {
             tableView.reloadRows(at: [indexPath], with: .automatic)
             return
         }
         var affectedIndexPaths : [IndexPath] = [indexPath]
-        let current = documentUrlModel.expandedIndexPath
+        let current = documentUploadModel.expandedIndexPath
         if current != nil {
             affectedIndexPaths.append(current!)
         }
-        documentUrlModel.expandDescriptor(at: indexPath)
+        documentUploadModel.expandDocument(at: indexPath)
         tableView.reloadRows(at: affectedIndexPaths, with: .automatic)
     }
     
     func collapseExpandedRow() {
-        guard let explandedIndexPath = documentUrlModel.expandedIndexPath else {
+        guard let explandedIndexPath = documentUploadModel.expandedIndexPath else {
             return
         }
-        documentUrlModel.collapseAllRows()
+        documentUploadModel.collapseAllRows()
         tableView.reloadRows(at: [explandedIndexPath], with: .automatic)
     }
     
@@ -135,7 +135,7 @@ extension URLTableViewController : UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.cellForRow(at: indexPath) as? UrlTableViewCell else {
             return 40.0
         }
-        if documentUrlModel.urlDescriptor(indexPath).isExpanded {
+        if documentUploadModel.document(indexPath).isExpanded {
             return cell.requiredHeight(numberOfLines: 0)
         } else {
             return cell.requiredHeight(numberOfLines: 1)
@@ -144,7 +144,7 @@ extension URLTableViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            documentUrlModel.deleteDescriptor(indexPath: indexPath)
+            documentUploadModel.deleteDocument(indexPath: indexPath)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view

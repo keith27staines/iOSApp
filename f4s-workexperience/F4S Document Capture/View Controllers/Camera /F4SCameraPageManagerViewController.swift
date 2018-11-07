@@ -72,8 +72,8 @@ class F4SCameraPageManagerViewController: UIViewController {
         }
     }
     
-    lazy var documentModel: F4SDocumentModel = {
-        return F4SDocumentModel()
+    lazy var documentModel: F4SMultiPageDocument = {
+        return F4SMultiPageDocument()
     }()
     
     override func viewDidLoad() {
@@ -149,12 +149,40 @@ extension F4SCameraPageManagerViewController : F4SCameraViewControllerDelegate {
         guard let image = image else {
             return
         }
-        let page = F4SDocumentPageModel(text: "")
+        let page = F4SDocumentPage(text: "")
         page.image = image
         documentModel.append(page)
     }
 }
 
+class F4SDocumentPage {
+    var image: UIImage
+    init(text: String) {
+        image = F4SDocumentPage.createImage(text: text)
+    }
+    
+    static func createImage(text: String) -> UIImage {
+        let width: CGFloat = 1000
+        let height:CGFloat = 1000 * 1.4142
+        let bounds = CGRect(x: 0, y: 0, width: width, height: height)
+        let renderer = UIGraphicsImageRenderer(bounds: bounds)
+        let image = renderer.image { (rendererContext) in
+            let context = rendererContext.cgContext
+            let rectangle = CGRect(x: 0, y: 0, width: width, height: height)
+            context.setFillColor(UIColor.lightGray.cgColor)
+            context.setStrokeColor(UIColor.black.cgColor)
+            context.setLineWidth(6)
+            context.addRect(rectangle)
+            context.drawPath(using: .fillStroke)
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = .left
+            let attrs = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 1000)!, NSAttributedString.Key.paragraphStyle: paragraphStyle]
+            context.setFillColor(UIColor.black.cgColor)
+            text.draw(with: CGRect(x: 10, y: 10, width: 980, height: 1380), options: .usesLineFragmentOrigin, attributes: attrs, context: nil)
+        }
+        return image
+    }
+}
 
 
 

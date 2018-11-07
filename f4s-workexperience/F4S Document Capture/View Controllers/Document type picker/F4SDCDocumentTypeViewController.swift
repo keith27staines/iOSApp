@@ -43,7 +43,7 @@ class F4SDCDocumentTypeViewController: UIViewController {
             dropDownButton.isHidden = documentTypes.count < 2
             selectedDocumentTypeLabel.textColor = documentTypes.count < 2 ?  UIColor.lightGray : UIColor.black
             labelContainerView.layer.borderColor = selectedDocumentTypeLabel.textColor.cgColor
-            labelView.text = selectedIndex == nil ? "" : documentTypes[selectedIndex!].title
+            labelView.text = selectedIndex == nil ? "" : documentTypes[selectedIndex!].name
         }
     }
     
@@ -93,14 +93,14 @@ extension F4SDCDocumentTypeViewController: UITableViewDelegate, UITableViewDataS
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {
             return UITableViewCell()
         }
-        cell.textLabel?.text = documentTypes[indexPath.row].title
+        cell.textLabel?.text = documentTypes[indexPath.row].name
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndex = indexPath.row
         dropHeight = dropHeightBaseValue
-        labelView.text = documentTypes[indexPath.row].title
+        labelView.text = documentTypes[indexPath.row].name
         onSelected?(selectedIndex!)
     }
 }

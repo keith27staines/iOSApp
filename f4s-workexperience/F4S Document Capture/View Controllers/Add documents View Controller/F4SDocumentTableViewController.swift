@@ -10,7 +10,7 @@ import UIKit
 
 class F4SDocumentTableViewController: UITableViewController {
     
-    var documentModel: F4SDocumentModel = F4SDocumentModel()
+    var documentModel: F4SMultiPageDocument = F4SMultiPageDocument()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,7 @@ class F4SDocumentTableViewController: UITableViewController {
     
     func registerForNotificationsFromModel() {
         let center = NotificationCenter.default
-        for name in F4SDocumentModel.notificationNames() {
+        for name in F4SMultiPageDocument.notificationNames() {
             center.addObserver(forName: name, object: nil, queue: nil) { [weak self]
                 (notification) in
                 guard
@@ -84,22 +84,12 @@ class F4SDocumentTableViewController: UITableViewController {
     }
     
     /// subclasses MUST override
-    func configure(_ cell: UITableViewCell, with page: F4SDocumentPageModel) {
+    func configure(_ cell: UITableViewCell, with page: F4SDocumentPage) {
         fatalError()
     }
     
 //    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        return UITableViewAutomaticDimension
 //    }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

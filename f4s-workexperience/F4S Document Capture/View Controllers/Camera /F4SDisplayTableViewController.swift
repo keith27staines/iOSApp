@@ -15,7 +15,7 @@ class F4SDisplayTableViewController: F4SDocumentTableViewController {
         tableView.separatorStyle = .none
     }
     
-    override func configure(_ cell: UITableViewCell, with page: F4SDocumentPageModel) {
+    override func configure(_ cell: UITableViewCell, with page: F4SDocumentPage) {
         guard let cell = cell as? F4SDisplayTableViewCell else { return }
         cell.page = page
         cell.delegate = self
@@ -47,11 +47,11 @@ class F4SDisplayTableViewController: F4SDocumentTableViewController {
 }
 
 extension F4SDisplayTableViewController : F4SDisplayTableViewCellDelegate {
-    func deletePage(_ page: F4SDocumentPageModel) {
+    func deletePage(_ page: F4SDocumentPage) {
         documentModel.remove(page)
     }
     
-    func retakePage(_ page: F4SDocumentPageModel) {
+    func retakePage(_ page: F4SDocumentPage) {
         
     }
 }

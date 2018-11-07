@@ -22,7 +22,7 @@ class F4SUrlDescriptorTableViewCell: UITableViewCell {
         deleteButtonWasPressed?(self)
     }
     
-    var documentUrlDescriptor : F4SDocumentUrlDescriptor? {
+    var documentUrlDescriptor : F4SDocument? {
         didSet {
             self.label.text = defaultText
             self.label.textColor = UIColor.lightGray
@@ -33,26 +33,26 @@ class F4SUrlDescriptorTableViewCell: UITableViewCell {
             self.deleteButton.isHidden = false
             if let descriptor = documentUrlDescriptor {
                 label.numberOfLines = descriptor.isExpanded ? 0 : 1
-                label.text = displayText(descriptor: descriptor)
-                self.deleteButton.isHidden = (descriptor.url == nil)
-                if !descriptor.urlString.isEmpty {
-                    self.label.textColor = UIColor.black
-                    self.leftImage.image = #imageLiteral(resourceName: "blackLinkURL")
-                    if descriptor.isValidUrl {
-                        underliningView.backgroundColor = UIColor.green
-                    } else {
-                        underliningView.backgroundColor = UIColor.orange
-                    }
+                label.text = displayText(document: descriptor)
+                self.deleteButton.isHidden = (descriptor.remoteUrl == nil)
+                guard let remoteUrlString = descriptor.remoteUrlString,
+                    remoteUrlString.isEmpty == false else { return }
+                self.label.textColor = UIColor.black
+                self.leftImage.image = #imageLiteral(resourceName: "blackLinkURL")
+                if descriptor.hasValidRemoteUrl {
+                    underliningView.backgroundColor = UIColor.green
+                } else {
+                    underliningView.backgroundColor = UIColor.orange
                 }
             }
         }
     }
     
-    func displayText(descriptor: F4SDocumentUrlDescriptor) -> String {
-        if descriptor.isValidUrl {
-            return descriptor.documentUrl.url
+    func displayText(document: F4SDocument) -> String {
+        if document.hasValidRemoteUrl {
+            return document.remoteUrlString!
         }
-        return defaultText + descriptor.docType.title
+        return defaultText + document.type.name
         
     }
     

@@ -22,7 +22,7 @@ class UrlTableViewCell: UITableViewCell {
         deleteButtonWasPressed?(self)
     }
     
-    var documentUrlDescriptor : F4SDocumentUrlDescriptor? {
+    var document : F4SDocument? {
         didSet {
             self.label.text = defaultText
             self.label.textColor = UIColor.lightGray
@@ -31,18 +31,18 @@ class UrlTableViewCell: UITableViewCell {
             self.accessoryType = .none
             self.underliningView.backgroundColor = UIColor.orange
             self.deleteButton.isHidden = false
-            if let documentUrlDescriptor = documentUrlDescriptor {
-                if !documentUrlDescriptor.urlString.isEmpty {
-                    self.label.text = displayText(urlString: documentUrlDescriptor.urlString)
-                    self.label.textColor = UIColor.black
-                    self.leftImage.image = #imageLiteral(resourceName: "blackLinkURL")
-                    if documentUrlDescriptor.isValidUrl {
-                        underliningView.backgroundColor = UIColor.green
-                    } else {
-                        underliningView.backgroundColor = UIColor.orange
-                    }
-                    self.deleteButton.isHidden = false
+            if let document = document {
+                guard let remoteUrlString = document.remoteUrlString,
+                    remoteUrlString.isEmpty == false else { return }
+                self.label.text = displayText(urlString: remoteUrlString)
+                self.label.textColor = UIColor.black
+                self.leftImage.image = #imageLiteral(resourceName: "blackLinkURL")
+                if document.hasValidRemoteUrl {
+                    underliningView.backgroundColor = UIColor.green
+                } else {
+                    underliningView.backgroundColor = UIColor.orange
                 }
+                self.deleteButton.isHidden = false
             }
         }
     }

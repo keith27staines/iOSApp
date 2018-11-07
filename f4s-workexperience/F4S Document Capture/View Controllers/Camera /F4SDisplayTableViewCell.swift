@@ -9,14 +9,14 @@
 import UIKit
 
 protocol F4SDisplayTableViewCellDelegate {
-    func deletePage(_ page: F4SDocumentPageModel)
-    func retakePage(_ page: F4SDocumentPageModel)
+    func deletePage(_ page: F4SDocumentPage)
+    func retakePage(_ page: F4SDocumentPage)
 }
 
 class F4SDisplayTableViewCell: UITableViewCell {
     var delegate: F4SDisplayTableViewCellDelegate?
     
-    var page: F4SDocumentPageModel! {
+    var page: F4SDocumentPage! {
         didSet {
             pageImageView.image = page?.image
         }

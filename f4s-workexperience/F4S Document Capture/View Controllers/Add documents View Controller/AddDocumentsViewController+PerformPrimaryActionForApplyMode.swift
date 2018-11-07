@@ -16,7 +16,7 @@ extension F4SDCAddDocumentsViewController {
     
     func continueAsyncWorker() {
         MessageHandler.sharedInstance.showLoadingOverlay(view)
-        documentUrlModel.putDocumentsUrls { (success) in
+        documentModel.putDocuments { (success) in
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else { return }
                 strongSelf.primaryActionButton.isEnabled = true

@@ -23,7 +23,7 @@ class F4SArrangeTableViewController: F4SDocumentTableViewController {
         tableView.isEditing = false
     }
     
-    override func configure(_ cell: UITableViewCell, with page: F4SDocumentPageModel) {
+    override func configure(_ cell: UITableViewCell, with page: F4SDocumentPage) {
         guard let cell = cell as? F4SArrangeTableViewCell else {
             return
         }

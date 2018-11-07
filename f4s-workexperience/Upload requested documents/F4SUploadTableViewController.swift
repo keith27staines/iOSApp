@@ -36,9 +36,9 @@ class F4SUploadTableViewController: UITableViewController {
             guard let strongSelf = self, let indexPath = strongSelf.tableView.indexPath(for: cell) else { return }
             strongSelf.collapseExpandedRow()
             var descriptor = strongSelf.model.descriptorForIndexPath(indexPath)
-            descriptor.urlString = ""
+            descriptor.remoteUrlString = ""
             descriptor.isExpanded = false
-            let affectedIndexPaths = strongSelf.model.setDescriptorForIndexPath(indexPath, descriptor: descriptor)
+            let affectedIndexPaths = strongSelf.model.setDocumentForIndexPath(indexPath, document: descriptor)
             tableView.reloadRows(at: affectedIndexPaths, with: .automatic)
         }
         return cell
@@ -48,7 +48,7 @@ class F4SUploadTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: false)
         guard let _ = tableView.cellForRow(at: indexPath) as? F4SUrlDescriptorTableViewCell else { return }
         let descriptor = model.descriptorForIndexPath(indexPath)
-        guard !descriptor.isValidUrl else {
+        guard !descriptor.hasValidRemoteUrl else {
             // contains a valid url so just toggle the expansion of the row
             if let affectedIndexPaths = model.toggleExpansionAtIndexPath(indexPath: indexPath) {
                 tableView.reloadRows(at: affectedIndexPaths, with: .automatic)
@@ -72,7 +72,7 @@ class F4SUploadTableViewController: UITableViewController {
             self.present(alert, animated: true, completion: nil)
             return
         }
-        let _ = model.setDescriptorForIndexPath(indexPath, title: descriptor.docType.rawValue, type: descriptor.docType, urlString: pasteText, includeInApplication: true, isExpanded: false)
+        let _ = model.setDocumentForIndexPath(indexPath, title: descriptor.type.rawValue, type: descriptor.type, urlString: pasteText, includeInApplication: true, isExpanded: false)
         expandRowAtIndexPath(indexPath: indexPath)
     }
     

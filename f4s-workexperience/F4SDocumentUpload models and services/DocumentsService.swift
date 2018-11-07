@@ -11,8 +11,8 @@ import Foundation
 public protocol F4SDocumentServiceProtocol {
     var apiName: String { get }
     var placementUuid: String { get }
-    func getDocumentsForPlacement(completion: @escaping (F4SNetworkResult<F4SGetDocumentUrlJson>) -> ())
-    func putDocumentsForPlacement(documentDescriptors: F4SPutDocumentsUrlJson, completion: @escaping ((F4SNetworkDataResult) -> Void ))
+    func getDocumentsForPlacement(completion: @escaping (F4SNetworkResult<F4SGetDocumentJson>) -> ())
+    func putDocumentsForPlacement(documents: F4SPutDocumentsJson, completion: @escaping ((F4SNetworkDataResult) -> Void ))
 }
 
 public class F4SPlacementDocumentsService : F4SDataTaskService {
@@ -27,12 +27,12 @@ public class F4SPlacementDocumentsService : F4SDataTaskService {
 
 // MARK:- F4SDocumentServiceProtocol conformance
 extension F4SPlacementDocumentsService : F4SDocumentServiceProtocol {
-    public func getDocumentsForPlacement(completion: @escaping (F4SNetworkResult<F4SGetDocumentUrlJson>) -> ()) {
+    public func getDocumentsForPlacement(completion: @escaping (F4SNetworkResult<F4SGetDocumentJson>) -> ()) {
         beginGetRequest(attempting: "Get supporting document urls for this placement", completion: completion)
     }
     
-    public func putDocumentsForPlacement(documentDescriptors: F4SPutDocumentsUrlJson, completion: @escaping ((F4SNetworkDataResult) -> Void )) {
-        super.beginSendRequest(verb: .put, objectToSend: documentDescriptors, attempting: "Upload supporting document urls for this placement", completion: completion)
+    public func putDocumentsForPlacement(documents: F4SPutDocumentsJson, completion: @escaping ((F4SNetworkDataResult) -> Void )) {
+        super.beginSendRequest(verb: .put, objectToSend: documents, attempting: "Upload supporting document urls for this placement", completion: completion)
     }
 }
 

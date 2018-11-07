@@ -9,28 +9,29 @@
 import UIKit
 
 extension F4SDCAddDocumentsViewController :  F4SDCAddDocumentViewControllerDelegate {
-    func didAddDocument(_ document: F4SDCDocumentUpload) {
+    func didAddDocument(_ document: F4SDocument) {
         popToHere()
-        let updatedDocument = document
-        if let data = updatedDocument.data {
+        if let data = document.data {
             let folderUrl = F4SDCDocumentCaptureFileHelper.createDirectory("uploads")
-            var url = folderUrl.appendingPathComponent(updatedDocument.name ?? "unnamed", isDirectory: false)
+            var url = folderUrl.appendingPathComponent(document.uuidForiOSFileSystem, isDirectory: false)
             url = url.appendingPathExtension("pdf")
+            print(url.path)
             do {
                 try data.write(to: url, options: [.atomic])
-                updatedDocument.localUrlString = url.absoluteString
+                document.localUrlString = url.absoluteString
             } catch {
                 print(error)
             }
         }
         if let indexPath = selectedIndexPath {
-            documents[indexPath.row] = updatedDocument
+            documentModel.setDocument(document, at: indexPath)
             tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
         } else {
-            documents.append(updatedDocument)
-            let newIndexPath = IndexPath(row: documents.count-1, section: 0)
+            documentModel.addDocument(document)
+            let documentCount = documentModel.numberOfRows(for: 0)
+            let newIndexPath = IndexPath(row: documentCount-1, section: 0)
             tableView.insertRows(at: [newIndexPath], with: .automatic)
-            if documents.count == documentTypes.count {
+            if documentCount == documentModel.maximumDocumentCount {
                 addDocumentButton.isEnabled = false
             }
             self.selectedIndexPath = newIndexPath

@@ -21,10 +21,8 @@ class F4SDCAddDocumentsViewController: UIViewController {
 
     @IBOutlet weak var primaryActionButton: UIButton!
     
-    var documents: [F4SDCDocumentUpload] = [F4SDCDocumentUpload]()
-    
-    lazy var documentUrlModel: F4SDocumentUrlModel = {
-        return F4SDocumentUrlModel(delegate: self, placementUuid: self.applicationContext.placement!.placementUuid!)
+    lazy var documentModel: F4SDocumentUploadModel = {
+        return F4SDocumentUploadModel(delegate: self, placementUuid: self.applicationContext.placement!.placementUuid!)
     }()
     
     lazy var userService: F4SUserService = {
@@ -60,8 +58,12 @@ class F4SDCAddDocumentsViewController: UIViewController {
 
     }
     
-    /// Provides a root point to dismiss to for the current navigation scheme
-    func popToHere() {}
+    
+    func popToHere() {
+        if navigationController?.topViewController != self {
+            dismiss(animated: true)
+        }
+    }
     
     enum Mode {
         case applyWorkflow
@@ -120,12 +122,8 @@ class F4SDCAddDocumentsViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        _ = documentTypes
         if mode == Mode.businessLeaderRequest {
-            documents = documentTypes.map { (type) -> F4SDCDocumentUpload in
-                return F4SDCDocumentUpload(type: type, name: nil, urlString: nil, data: nil)
-            }
-            tableView.reloadData()
+            documentModel.fetchDocumentsForPlacement()
         }
         applySkin()
     }
@@ -135,9 +133,9 @@ class F4SDCAddDocumentsViewController: UIViewController {
         skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: primaryActionButton)
     }
     
-    var selectedDocument: F4SDCDocumentUpload? {
+    var selectedDocument: F4SDocument? {
         guard let selectedIndexPath = selectedIndexPath else { return nil }
-        return documents[selectedIndexPath.row]
+        return documentModel.document(selectedIndexPath)
     }
     
     var selectedIndexPath: IndexPath? = nil
@@ -152,12 +150,14 @@ class F4SDCAddDocumentsViewController: UIViewController {
             if let vc = segue.destination as? F4SDCAddDocumentViewController {
                 vc.delegate = self
                 vc.documentTypes = documentTypes
+                vc.document = F4SDocument(type: .other)
             }
             
         case "showPickMethodForSelectedDocument":
-            if let vc = segue.destination as? F4SDCAddDocumentViewController, let documentType = selectedDocument?.type {
+            if let vc = segue.destination as? F4SDCAddDocumentViewController,
+                let selectedDocument = self.selectedDocument {
                 vc.delegate = self
-                vc.documentTypes = [documentType]
+                vc.documentTypes = [selectedDocument.type]
                 vc.document = selectedDocument
             }
             
@@ -166,58 +166,59 @@ class F4SDCAddDocumentsViewController: UIViewController {
             if let vc = segue.destination as? F4SDCDocumentViewerController {
                 vc.document = document
             }
+            
         default:
             break
         }
     }
 }
 
-extension F4SDCAddDocumentsViewController : F4SDocumentUrlModelDelegate {
-    func documentUrlModelFailedToFetchDocuments(_ model: F4SDocumentUrlModel, error: Error) {
+extension F4SDCAddDocumentsViewController : F4SDocumentUploadModelDelegate {
+    func documentUploadModelFailedToFetchDocuments(_ model: F4SDocumentUploadModel, error: Error) {
         displayTryAgain { [weak self] in
-            self?.documentUrlModel.fetchDocumentsForUrl()
+            self?.documentModel.fetchDocumentsForPlacement()
         }
     }
     
-    func documentUrlModelFetchedDocuments(_ model: F4SDocumentUrlModel) {
+    func documentUploadModelFetchedDocuments(_ model: F4SDocumentUploadModel) {
         DispatchQueue.main.async { [weak self] in
-            self?.reloadFromFetchedData()
+            self?.reloadFromModel()
         }
     }
     
-    func documentUrlModel(_ model: F4SDocumentUrlModel, deleted: F4SDocumentUrlDescriptor) {
+    func documentUploadModel(_ model: F4SDocumentUploadModel, deleted: F4SDocument) {
         updateEnabledStateOfAddButton(model)
     }
-    func documentUrlModel(_ model: F4SDocumentUrlModel, updated: F4SDocumentUrlDescriptor) {
+    func documentUploadModel(_ model: F4SDocumentUploadModel, updated: F4SDocument) {
         updateEnabledStateOfAddButton(model)
     }
-    func documentUrlModel(_ model: F4SDocumentUrlModel, created: F4SDocumentUrlDescriptor) {
+    func documentUploadModel(_ model: F4SDocumentUploadModel, created: F4SDocument) {
         updateEnabledStateOfAddButton(model)
     }
     
-    fileprivate func updateEnabledStateOfAddButton(_ model: F4SDocumentUrlModel) {
+    fileprivate func updateEnabledStateOfAddButton(_ model: F4SDocumentUploadModel) {
         addDocumentButton.isEnabled = model.canAddPlaceholder()
     }
     
-    fileprivate func reloadFromFetchedData() {
-        
+    fileprivate func reloadFromModel() {
+        tableView.reloadData()
+        addDocumentButton.isEnabled = documentModel.canAddPlaceholder()
     }
-    
 }
     
 extension F4SDCAddDocumentsViewController : UITableViewDataSource, UITableViewDelegate  {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return documents.count
+        return documentModel.numberOfRows(for: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
-        let document = documents[indexPath.row]
+        let document = documentModel.document(indexPath)
         configureCell(cell, with: document)
         return cell
     }
     
-    func configureCell(_ cell: UITableViewCell, with document: F4SDCDocumentUpload) {
+    func configureCell(_ cell: UITableViewCell, with document: F4SDocument) {
         cell.accessoryType = .none
         let dotImage = UIImage(named: "ui-submenudots-icon")
         let addImage = UIImage(named: "ui-photoplus-icon")
@@ -236,7 +237,7 @@ extension F4SDCAddDocumentsViewController : UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        documents.remove(at: indexPath.row)
+        documentModel.deleteDocument(indexPath: indexPath)
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
@@ -248,7 +249,6 @@ extension F4SDCAddDocumentsViewController : UITableViewDataSource, UITableViewDe
         selectedIndexPath = indexPath
         guard let cell = tableView.cellForRow(at: indexPath), let selectedDocument = selectedDocument else { return }
         if selectedDocument.isReadyForUpload {
-            //let popupCenter = CGPoint(x: cell.frame.origin.x + cell.frame.size.width - popupCellMenu.frame.size.width / 2.0 - 4, y: cell.center.y)
             let popupCenter = CGPoint(x: cell.frame.origin.x + cell.frame.size.width - popupCellMenu.frame.size.width / 2.0 - 4, y: 0)
             popupCellMenu.isHidden = true
             popupCellMenu.center = cell.convert(popupCenter, to: view)
@@ -277,11 +277,13 @@ extension F4SDCAddDocumentsViewController : F4SDCPopupMenuViewDelegate {
             hidePopopMenu()
             switch mode {
             case .applyWorkflow:
-                documents.remove(at: cellIndexPath.row)
+                documentModel.deleteDocument(indexPath: cellIndexPath)
                 tableView.deleteRows(at: [cellIndexPath], with: .automatic)
                 addDocumentButton.isEnabled = true
             case .businessLeaderRequest:
-                documents[cellIndexPath.row].clearAllDetailsExceptType()
+                let type = documentModel.document(cellIndexPath).type
+                let clearedPlaceholderDocument = F4SDocument(type: type)
+                documentModel.setDocument(clearedPlaceholderDocument, at: cellIndexPath)
                 tableView.reloadRows(at: [cellIndexPath], with: .automatic)
             }
 

@@ -10,8 +10,8 @@ import UIKit
 
 class DocumentUrlViewController: UIViewController {
     var urlTableViewController: URLTableViewController?
-    lazy var documentUrlModel: F4SDocumentUrlModel = {
-        return F4SDocumentUrlModel(delegate: self, placementUuid: self.applicationContext.placement!.placementUuid!)
+    lazy var documentUrlModel: F4SDocumentUploadModel = {
+        return F4SDocumentUploadModel(delegate: self, placementUuid: self.applicationContext.placement!.placementUuid!)
     }()
     
     var applicationContext: F4SApplicationContext!
@@ -69,7 +69,7 @@ class DocumentUrlViewController: UIViewController {
     
     func continueAsyncWorker() {
         MessageHandler.sharedInstance.showLoadingOverlay(view)
-        documentUrlModel.putDocumentsUrls { (success) in
+        documentUrlModel.putDocuments { (success) in
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else { return }
                 strongSelf.continueButton.isEnabled = true
@@ -141,7 +141,7 @@ class DocumentUrlViewController: UIViewController {
                     if self.documentUrlModel.canAddPlaceholder() {
                         self.transitionSmallPlusButton(toRed: true, text: "Add another")
                     } else {
-                        let maxUrls = self.documentUrlModel.maxUrls
+                        let maxUrls = self.documentUrlModel.maximumDocumentCount
                         self.transitionSmallPlusButton(toRed: false, text: "You have added the maximum of \(maxUrls) links")
                     }
                 } else {
@@ -222,15 +222,15 @@ class DocumentUrlViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "embedUrlDisplay" {
             urlTableViewController = (segue.destination as! URLTableViewController)
-            urlTableViewController?.documentUrlModel = documentUrlModel
+            urlTableViewController?.documentUploadModel = documentUrlModel
         }
     }
 }
 
-extension DocumentUrlViewController : F4SDocumentUrlModelDelegate {
-    func documentUrlModelFailedToFetchDocuments(_ model: F4SDocumentUrlModel, error: Error) {
+extension DocumentUrlViewController : F4SDocumentUploadModelDelegate {
+    func documentUploadModelFailedToFetchDocuments(_ model: F4SDocumentUploadModel, error: Error) {
         displayTryAgain { [weak self] in
-            self?.documentUrlModel.fetchDocumentsForUrl()
+            self?.documentUrlModel.fetchDocumentsForPlacement()
         }
     }
     
@@ -244,18 +244,18 @@ extension DocumentUrlViewController : F4SDocumentUrlModelDelegate {
         }
     }
     
-    func documentUrlModelFetchedDocuments(_ model: F4SDocumentUrlModel) {
+    func documentUploadModelFetchedDocuments(_ model: F4SDocumentUploadModel) {
         DispatchQueue.main.async { [weak self] in
             self?.setupForFetchedData()
         }
     }
-    func documentUrlModel(_ model: F4SDocumentUrlModel, deleted: F4SDocumentUrlDescriptor) {
+    func documentUploadModel(_ model: F4SDocumentUploadModel, deleted: F4SDocument) {
         updateEnabledStateOfAddButton()
     }
-    func documentUrlModel(_ model: F4SDocumentUrlModel, updated: F4SDocumentUrlDescriptor) {
+    func documentUploadModel(_ model: F4SDocumentUploadModel, updated: F4SDocument) {
         updateEnabledStateOfAddButton()
     }
-    func documentUrlModel(_ model: F4SDocumentUrlModel, created: F4SDocumentUrlDescriptor) {
+    func documentUploadModel(_ model: F4SDocumentUploadModel, created: F4SDocument) {
         updateEnabledStateOfAddButton()
     }
 }
