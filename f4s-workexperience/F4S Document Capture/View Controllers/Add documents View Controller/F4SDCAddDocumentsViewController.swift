@@ -58,6 +58,7 @@ class F4SDCAddDocumentsViewController: UIViewController {
 
     }
     
+    @IBAction func unwindToAddDocuments(segue: UIStoryboardSegue) {}
     
     func popToHere() {
         if navigationController?.topViewController != self {
@@ -122,10 +123,15 @@ class F4SDCAddDocumentsViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        if mode == Mode.businessLeaderRequest {
-            documentModel.fetchDocumentsForPlacement()
-        }
         applySkin()
+        switch mode {
+
+        case .applyWorkflow:
+            MessageHandler.sharedInstance.showLoadingOverlay(self.view)
+            documentModel.fetchDocumentsForPlacement()
+        case .businessLeaderRequest:
+            break
+        }
     }
     
     func applySkin() {
@@ -175,14 +181,19 @@ class F4SDCAddDocumentsViewController: UIViewController {
 
 extension F4SDCAddDocumentsViewController : F4SDocumentUploadModelDelegate {
     func documentUploadModelFailedToFetchDocuments(_ model: F4SDocumentUploadModel, error: Error) {
-        displayTryAgain { [weak self] in
-            self?.documentModel.fetchDocumentsForPlacement()
+        DispatchQueue.main.async { [unowned self] in
+            MessageHandler.sharedInstance.hideLoadingOverlay()
+            self.displayTryAgain {
+                MessageHandler.sharedInstance.showLoadingOverlay(self.view)
+                self.documentModel.fetchDocumentsForPlacement()
+            }
         }
     }
     
     func documentUploadModelFetchedDocuments(_ model: F4SDocumentUploadModel) {
         DispatchQueue.main.async { [weak self] in
             self?.reloadFromModel()
+            MessageHandler.sharedInstance.hideLoadingOverlay()
         }
     }
     

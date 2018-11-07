@@ -9,8 +9,8 @@
 import UIKit
 
 extension F4SDCAddDocumentsViewController :  F4SDCAddDocumentViewControllerDelegate {
-    func didAddDocument(_ document: F4SDocument) {
-        popToHere()
+    func didAddDocument(_ document: F4SDocument, popIsRequired: Bool) {
+        if popIsRequired { popToHere() }
         if let data = document.data {
             let folderUrl = F4SDCDocumentCaptureFileHelper.createDirectory("uploads")
             var url = folderUrl.appendingPathComponent(document.uuidForiOSFileSystem, isDirectory: false)

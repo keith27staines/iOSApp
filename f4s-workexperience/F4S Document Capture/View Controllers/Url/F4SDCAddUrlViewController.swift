@@ -22,7 +22,7 @@ class F4SDCAddUrlViewController: UIViewController {
     @IBAction func doneButtonTapped(_ sender: Any) {
         if let url = URL(string: urlField.text ?? "") {
             delegate?.didCaptureUrl(url)
-            navigationController?.popViewController(animated: true)
+            performSegue(withIdentifier: "unwindToAddDocuments", sender: self)
         }
     }
     

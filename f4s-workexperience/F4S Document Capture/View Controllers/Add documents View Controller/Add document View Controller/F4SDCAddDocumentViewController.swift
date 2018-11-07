@@ -9,9 +9,8 @@
 import UIKit
 
 protocol F4SDCAddDocumentViewControllerDelegate : class {
-    func didAddDocument(_ document: F4SDocument)
+    func didAddDocument(_ document: F4SDocument, popIsRequired: Bool)
 }
-
 
 class F4SDCAddDocumentViewController: UIViewController {
 
@@ -21,6 +20,8 @@ class F4SDCAddDocumentViewController: UIViewController {
     
     @IBOutlet weak var dropDownHeightConstraint: NSLayoutConstraint!
     weak var delegate: F4SDCAddDocumentViewControllerDelegate?
+    
+    internal private (set) var popIsRequired: Bool = false
     
     var document: F4SDocument = F4SDocument(type: .other) {
         didSet {
@@ -60,10 +61,6 @@ class F4SDCAddDocumentViewController: UIViewController {
             skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: button)
         }
     }
-
-    @IBAction func cameraTapped(_ sender: UIButton) {
-        performSegue(withIdentifier: "showCamera", sender: self)
-    }
     
     lazy var imagePickerViewController: UIImagePickerController = {
         let pickerViewController = UIImagePickerController()
@@ -73,8 +70,16 @@ class F4SDCAddDocumentViewController: UIViewController {
         return pickerViewController
     }()
     
+    @IBAction func cameraTapped(_ sender: UIButton) {
+        performSegue(withIdentifier: "showCamera", sender: self)
+    }
+    
     @IBAction func pickFromLibrary(_ sender: Any) {
         present(imagePickerViewController, animated: true, completion: nil)
+    }
+    
+    @IBAction func pickFromFilesystem(_ sender: Any) {
+        self.present(documentPicker, animated: true, completion: nil)
     }
     
     lazy var documentPicker: UIDocumentPickerViewController = {
@@ -85,13 +90,10 @@ class F4SDCAddDocumentViewController: UIViewController {
         return documentPicker
     }()
     
-    @IBAction func pickFromFilesystem(_ sender: Any) {
-        self.present(documentPicker, animated: true, completion: nil)
-    }
-    
     var documentTypeSelector: F4SDCDocumentTypeViewController?
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        popIsRequired = true
         switch segue.identifier {
         case "showCamera":
             if let navigationController = segue.destination as? UINavigationController,
@@ -102,6 +104,7 @@ class F4SDCAddDocumentViewController: UIViewController {
             }
         case "showURL":
             if let vc = segue.destination as? F4SDCAddUrlViewController {
+                popIsRequired = false
                 vc.delegate = self
             }
         case "embedDocumentTypePicker":
@@ -172,8 +175,7 @@ extension F4SDCAddDocumentViewController : UITextFieldDelegate {
 extension F4SDCAddDocumentViewController : F4SDCAddUrlViewControllerDelegate {
     func didCaptureUrl(_ url: URL) {
         document.remoteUrlString = url.absoluteString
-        delegate?.didAddDocument(document)
-        navigationController?.popViewController(animated: false)
+        delegate?.didAddDocument(document, popIsRequired: popIsRequired)
     }
 }
 
@@ -181,7 +183,7 @@ extension F4SDCAddDocumentViewController : F4SCameraCaptureViewControllerDelegat
     func didCaptureDocumentasPDFData(_ pdfData: Data) {
         dismiss(animated: true, completion: nil)
         document.data = pdfData
-        delegate?.didAddDocument(document)
+        delegate?.didAddDocument(document, popIsRequired: popIsRequired)
         navigationController?.popViewController(animated: true)
     }
 }
@@ -202,7 +204,7 @@ extension F4SDCAddDocumentViewController : UIDocumentPickerDelegate {
         coordinator.coordinate(readingItemAt: url, options: [], error: &error) { (url) -> Void in
             if let fileData = try? Data(contentsOf: url) {
                 document.data = fileData
-                delegate?.didAddDocument(document)
+                delegate?.didAddDocument(document, popIsRequired: popIsRequired)
                 navigationController?.popViewController(animated: true)
             } else {
                 print("No data!!")
@@ -229,7 +231,7 @@ extension F4SDCAddDocumentViewController : UINavigationControllerDelegate, UIIma
         if let pickedImage = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
             let pdfData = pickedImage.generatePDF()
             document.data = pdfData
-            delegate?.didAddDocument(document)
+            delegate?.didAddDocument(document, popIsRequired: popIsRequired)
             navigationController?.popViewController(animated: true)
         }
     }
