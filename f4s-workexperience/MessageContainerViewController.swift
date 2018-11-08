@@ -21,6 +21,16 @@ class MessageContainerViewController: UIViewController {
     @IBOutlet weak var answersView: UIView!
     @IBOutlet weak var answersHeight: NSLayoutConstraint!
     
+    @IBAction func generateBLRequest(_ sender: Any) {
+        var action = F4SAction()
+        action.actionType = F4SActionType.uploadDocuments
+        let placementArg = F4SActionArgument(argumentName: F4SActionArgumentName.placementUuid, value: [placement!.placementUuid!])
+        let dtArg = F4SActionArgument(argumentName: F4SActionArgumentName.documentType, value: ["cv","other"])
+        action.arguments = [placementArg,dtArg]
+        self.action = action
+        actionButtonTapped(self)
+    }
+    
     @IBAction func unwindToMessageContainer(segue: UIStoryboardSegue) {
     }
     
@@ -122,7 +132,10 @@ class MessageContainerViewController: UIViewController {
             let actionType = action.actionType!
             switch action.actionType! {
             case .uploadDocuments:
-                performSegue(withIdentifier: actionType.rawValue, sender: self)
+                guard let addDocumentsController = UIStoryboard(name: "DocumentCapture", bundle: nil).instantiateInitialViewController() as? F4SAddDocumentsViewController else { return }
+                addDocumentsController.mode = .businessLeaderRequest(placementUuid: placement!.placementUuid!,company: company!.name)
+                let navigationController = UINavigationController(rootViewController: addDocumentsController)
+                present(navigationController, animated: true, completion: nil)
             case .viewOffer:
                 MessageHandler.sharedInstance.showLoadingOverlay(self.view)
                 prepareAcceptOffer { [weak self] (error, context) in

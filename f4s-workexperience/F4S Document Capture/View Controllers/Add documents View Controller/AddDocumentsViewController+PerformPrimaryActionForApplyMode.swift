@@ -9,6 +9,9 @@
 import UIKit
 
 extension F4SAddDocumentsViewController {
+    func performPrimaryActionForBLRequestMode() {
+        dismiss(animated: true, completion: nil)
+    }
     func performPrimaryActionForApplyMode() {
         primaryActionButton.isEnabled = false
         continueAsyncWorker()

@@ -71,6 +71,7 @@ class F4SUploadSpecifiedDocumentsViewController: UIViewController {
         self.tabBarController?.tabBar.isTranslucent = true
         updateFromModel()
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
         self.tabBarController?.tabBar.isTranslucent = false

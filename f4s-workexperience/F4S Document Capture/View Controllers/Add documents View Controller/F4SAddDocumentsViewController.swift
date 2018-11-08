@@ -22,7 +22,12 @@ class F4SAddDocumentsViewController: UIViewController {
     @IBOutlet weak var primaryActionButton: UIButton!
     
     lazy var documentModel: F4SDocumentUploadModel = {
-        return F4SDocumentUploadModel(delegate: self, placementUuid: self.applicationContext.placement!.placementUuid!)
+        switch mode {
+        case .applyWorkflow:
+            return F4SDocumentUploadModel(delegate: self, placementUuid: self.applicationContext.placement!.placementUuid!)
+        case .businessLeaderRequest(let placementUuid, _):
+            return F4SDocumentUploadModel(delegate: self, placementUuid: placementUuid)
+        }
     }()
     
     lazy var userService: F4SUserService = {
@@ -53,7 +58,7 @@ class F4SAddDocumentsViewController: UIViewController {
         case .applyWorkflow:
             performPrimaryActionForApplyMode()
         case .businessLeaderRequest:
-            break
+            performPrimaryActionForBLRequestMode()
         }
 
     }
@@ -64,23 +69,23 @@ class F4SAddDocumentsViewController: UIViewController {
     
     enum Mode {
         case applyWorkflow
-        case businessLeaderRequest
+        case businessLeaderRequest(placementUuid:F4SUUID,company:String)
         
         var headingText: String {
             switch self {
             case .applyWorkflow:
                 return "Stand out from the crowd!"
             case .businessLeaderRequest:
-                return "Please add the information requested"
+                return "Add requested information"
             }
         }
         
         var subheadingText: String {
             switch self {
             case .applyWorkflow:
-                return "Make it easier for companies to choose you by adding your experience"
-            case .businessLeaderRequest:
-                return "" // Upload the information requested"
+                return "Add your CV or any supporting document to make it easier for companies to choose you"
+            case .businessLeaderRequest(_, let companyName):
+                return "Add the documents requested by \(companyName.stripCompanySuffix()) in their recent message to you"
             }
         }
         
@@ -96,9 +101,9 @@ class F4SAddDocumentsViewController: UIViewController {
         var bigPlusButtonHeightConstraintConstant: CGFloat {
             switch self {
             case .applyWorkflow:
-                return 50.0
+                return 60.0
             case .businessLeaderRequest:
-                return 0.0
+                return 60.0
             }
         }
     }

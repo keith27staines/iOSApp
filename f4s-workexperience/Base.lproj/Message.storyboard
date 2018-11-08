@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sWr-Ud-We1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sWr-Ud-We1">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -24,9 +23,6 @@
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="252-qr-zlJ">
                                 <rect key="frame" x="0.0" y="66" width="375" height="517"/>
-                                <connections>
-                                    <segue destination="ULJ-o2-xqB" kind="embed" identifier="toMessage" id="eUm-5R-VK8"/>
-                                </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aFI-gC-t8a">
                                 <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
@@ -54,6 +50,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BNk-Lu-0hl">
+                                <rect key="frame" x="202" y="28" width="142" height="30"/>
+                                <state key="normal" title="Generate BL request"/>
+                                <connections>
+                                    <action selector="generateBLRequest:" destination="sWr-Ud-We1" eventType="touchUpInside" id="1Wg-ur-rOo"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -67,8 +70,10 @@
                             <constraint firstItem="oVP-so-bpy" firstAttribute="top" secondItem="aFI-gC-t8a" secondAttribute="bottom" id="Fd0-de-5ay"/>
                             <constraint firstAttribute="trailing" secondItem="252-qr-zlJ" secondAttribute="trailing" id="HA6-ay-h7s"/>
                             <constraint firstItem="boZ-j2-BHK" firstAttribute="leading" secondItem="Grz-P4-uti" secondAttribute="leadingMargin" id="NXt-nH-eNt"/>
+                            <constraint firstItem="BNk-Lu-0hl" firstAttribute="top" secondItem="sdb-jO-yOt" secondAttribute="bottom" constant="8" id="PMw-12-9EI"/>
                             <constraint firstItem="252-qr-zlJ" firstAttribute="top" secondItem="boZ-j2-BHK" secondAttribute="bottom" constant="8" id="RZA-Do-hqu"/>
                             <constraint firstItem="aFI-gC-t8a" firstAttribute="leading" secondItem="252-qr-zlJ" secondAttribute="leading" id="Sqb-X1-cof"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="BNk-Lu-0hl" secondAttribute="trailing" constant="15" id="VLL-33-JGy"/>
                             <constraint firstAttribute="trailing" secondItem="boZ-j2-BHK" secondAttribute="trailing" constant="20" id="hqH-9d-dgR"/>
                         </constraints>
                     </view>
@@ -79,7 +84,6 @@
                         <outlet property="answersView" destination="aFI-gC-t8a" id="1K2-Bb-MCD"/>
                         <outlet property="containerView" destination="252-qr-zlJ" id="U0a-XJ-wFD"/>
                         <outlet property="subjectLabel" destination="boZ-j2-BHK" id="WZj-EK-XD7"/>
-                        <segue destination="D0p-eC-Ds8" kind="show" identifier="upload_documents" id="ev5-9E-l0P"/>
                         <segue destination="SF5-bM-dYU" kind="show" identifier="view_offer" id="Nl4-Jk-3Cs"/>
                     </connections>
                 </viewController>
@@ -87,13 +91,13 @@
             </objects>
             <point key="canvasLocation" x="-1311.2" y="161.46926536731635"/>
         </scene>
-        <!--DocumentUploadBLRequest-->
-        <scene sceneID="ZSo-tW-f35">
+        <!--DocumentCapture-->
+        <scene sceneID="Egy-SR-po1">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="DocumentUploadBLRequest" storyboardName="DocumentUploadBLRequest" id="D0p-eC-Ds8" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="J4u-XZ-YKe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="DocumentCapture" id="cQ4-4v-CRu" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pxI-Ve-W1p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-461" y="237"/>
+            <point key="canvasLocation" x="-567" y="236"/>
         </scene>
         <!--AcceptOffer-->
         <scene sceneID="ZUm-IC-dI9">
@@ -112,7 +116,7 @@
                         <viewControllerLayoutGuide type="bottom" id="3bt-3k-P0C"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="fcK-Sf-bdh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="517"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
