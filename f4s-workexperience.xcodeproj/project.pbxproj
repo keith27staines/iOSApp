@@ -316,7 +316,7 @@
 		FCE11E572113407F00403789 /* F4SCalendarEventWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE11E562113407F00403789 /* F4SCalendarEventWriter.swift */; };
 		FCE11E59211437B400403789 /* F4SDateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE11E58211437B400403789 /* F4SDateHelper.swift */; };
 		FCE11E5C2115D26B00403789 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE11E5B2115D26B00403789 /* SwitchTableViewCell.swift */; };
-		FCE20CC1203C12F300CA821D /* F4SDocumentUploadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE20CBD203C12F300CA821D /* F4SDocumentUploadModel.swift */; };
+		FCE20CC1203C12F300CA821D /* F4SDocumentUploadWhileApplyingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE20CBD203C12F300CA821D /* F4SDocumentUploadWhileApplyingModel.swift */; };
 		FCE20CC6203D5CE400CA821D /* DocumentsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE20CC5203D5CE400CA821D /* DocumentsService.swift */; };
 		FCE83ED6213BD72000D0953A /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE83ED5213BD72000D0953A /* UITableView+Extensions.swift */; };
 		FCEF70B721087207001C229A /* F4SInviteDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF70B621087207001C229A /* F4SInviteDetailCell.swift */; };
@@ -717,7 +717,7 @@
 		FCE11E562113407F00403789 /* F4SCalendarEventWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCalendarEventWriter.swift; sourceTree = "<group>"; };
 		FCE11E58211437B400403789 /* F4SDateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDateHelper.swift; sourceTree = "<group>"; };
 		FCE11E5B2115D26B00403789 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
-		FCE20CBD203C12F300CA821D /* F4SDocumentUploadModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDocumentUploadModel.swift; sourceTree = "<group>"; };
+		FCE20CBD203C12F300CA821D /* F4SDocumentUploadWhileApplyingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDocumentUploadWhileApplyingModel.swift; sourceTree = "<group>"; };
 		FCE20CC5203D5CE400CA821D /* DocumentsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsService.swift; sourceTree = "<group>"; };
 		FCE83ED5213BD72000D0953A /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		FCEF70B621087207001C229A /* F4SInviteDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInviteDetailCell.swift; sourceTree = "<group>"; };
@@ -1431,7 +1431,6 @@
 				FC4C5F2B20B404CF001FA83C /* F4SUploadTableViewController.swift */,
 				FC86A5FA20B44E6B002BAD74 /* F4SUrlDescriptorTableViewCell.swift */,
 				FC86A5FC20B6E93B002BAD74 /* F4SUploadRequestedDocumentsTableViewModel.swift */,
-				FC87387121945C8F00BF9743 /* F4SBusinessLeadersRequestModel.swift */,
 			);
 			path = "Upload requested documents";
 			sourceTree = "<group>";
@@ -1552,7 +1551,7 @@
 		FC62FF9220EF70F9003E52C5 /* F4SDocumentUpload models and services */ = {
 			isa = PBXGroup;
 			children = (
-				FCE20CBD203C12F300CA821D /* F4SDocumentUploadModel.swift */,
+				FCE20CBD203C12F300CA821D /* F4SDocumentUploadWhileApplyingModel.swift */,
 				FCE20CC5203D5CE400CA821D /* DocumentsService.swift */,
 			);
 			path = "F4SDocumentUpload models and services";
@@ -1852,6 +1851,7 @@
 		FCC212CD219077C000D8D5B7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FC87387121945C8F00BF9743 /* F4SBusinessLeadersRequestModel.swift */,
 				FCC212CE219077C000D8D5B7 /* F4SDCDocumentCaptureFileHelper.swift */,
 				FCC212D0219077C000D8D5B7 /* F4SMultiPageDocument.swift */,
 			);
@@ -2532,7 +2532,7 @@
 				FC1334E82121BE11003435A6 /* Skinner.swift in Sources */,
 				FCB6B8E32074C59C0042C725 /* F4SMonthHeaderView.swift in Sources */,
 				FC67E60A207B70CE006F07FE /* F4SCalendarService.swift in Sources */,
-				FCE20CC1203C12F300CA821D /* F4SDocumentUploadModel.swift in Sources */,
+				FCE20CC1203C12F300CA821D /* F4SDocumentUploadWhileApplyingModel.swift in Sources */,
 				FC860D82209C37F2007945E6 /* MessageDispatcher.swift in Sources */,
 				40E78E581DD32964000A3776 /* Constants.swift in Sources */,
 				FCB6B8C92074C58F0042C725 /* F4SHoursPickerViewController.swift in Sources */,

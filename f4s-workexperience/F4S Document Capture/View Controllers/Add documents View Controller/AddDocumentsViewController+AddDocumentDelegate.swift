@@ -25,7 +25,7 @@ extension F4SAddDocumentsViewController :  F4SDCAddDocumentViewControllerDelegat
         }
         if let indexPath = selectedIndexPath {
             documentModel.setDocument(document, at: indexPath)
-            tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+            tableView.reloadRows(at: [indexPath], with: .automatic)
         } else {
             documentModel.addDocument(document)
             let documentCount = documentModel.numberOfRows(for: 0)

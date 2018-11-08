@@ -97,13 +97,13 @@ public struct Company : Hashable {
     }
 }
 
-struct Placement {
-    var companyUuid: String
-    var interestsList: [F4SInterest]
-    var status: PlacementStatus
-    var placementUuid: String
+public struct Placement {
+    public var companyUuid: String
+    public var interestsList: [F4SInterest]
+    public var status: PlacementStatus
+    public var placementUuid: String
 
-    init(companyUuid: String = "", interestsList: [F4SInterest] = [], status: PlacementStatus = .inProgress, placementUuid: String = "") {
+    public init(companyUuid: String = "", interestsList: [F4SInterest] = [], status: PlacementStatus = .inProgress, placementUuid: String = "") {
         self.companyUuid = companyUuid
         self.interestsList = interestsList
         self.status = status
@@ -228,7 +228,7 @@ enum TemplateOptionType {
     case date
 }
 
-enum PlacementStatus {
+public enum PlacementStatus {
     case inProgress
     case applied
     case accepted

@@ -132,10 +132,14 @@ class MessageContainerViewController: UIViewController {
             let actionType = action.actionType!
             switch action.actionType! {
             case .uploadDocuments:
-                guard let addDocumentsController = UIStoryboard(name: "DocumentCapture", bundle: nil).instantiateInitialViewController() as? F4SAddDocumentsViewController else { return }
-                addDocumentsController.mode = .businessLeaderRequest(placementUuid: placement!.placementUuid!,company: company!.name)
+                guard
+                    let addDocumentsController = UIStoryboard(name: "DocumentCapture", bundle: nil).instantiateInitialViewController() as? F4SAddDocumentsViewController,
+                    let placement = placement, let company = company,
+                    let requestModel = F4SBusinessLeadersRequestModel(action: action, placement: placement, company: company) else { return }
+                addDocumentsController.mode = .businessLeaderRequest(requestModel)
                 let navigationController = UINavigationController(rootViewController: addDocumentsController)
                 present(navigationController, animated: true, completion: nil)
+                
             case .viewOffer:
                 MessageHandler.sharedInstance.showLoadingOverlay(self.view)
                 prepareAcceptOffer { [weak self] (error, context) in
@@ -149,6 +153,7 @@ class MessageContainerViewController: UIViewController {
                         strongSelf.performSegue(withIdentifier: actionType.rawValue, sender: self)
                     }
                 }
+                
             case .viewCompanyExternalApplication:
                 guard let urlString = action.argument(name: F4SActionArgumentName.externalWebsite)?.value.first, let url = URL(string: urlString) else {
                     // Invalid url

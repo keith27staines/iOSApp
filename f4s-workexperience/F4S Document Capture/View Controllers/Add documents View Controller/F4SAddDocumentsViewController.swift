@@ -18,23 +18,25 @@ class F4SAddDocumentsViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     
-
+    var applicationContext: F4SApplicationContext!
+    var blRequestModel: F4SBusinessLeadersRequestModel? = nil
+    
     @IBOutlet weak var primaryActionButton: UIButton!
     
-    lazy var documentModel: F4SDocumentUploadModel = {
+    lazy var documentModel: F4SDocumentUploadModelBase = {
         switch mode {
         case .applyWorkflow:
-            return F4SDocumentUploadModel(delegate: self, placementUuid: self.applicationContext.placement!.placementUuid!)
-        case .businessLeaderRequest(let placementUuid, _):
-            return F4SDocumentUploadModel(delegate: self, placementUuid: placementUuid)
+            return F4SDocumentUploadWhileApplyingModel(delegate: self, placementUuid: self.applicationContext.placement!.placementUuid!)
+        case .businessLeaderRequest(let requestModel):
+            let placementUuid = requestModel.placementUuid
+            let documents = requestModel.documents
+            return F4SDocumentUploadAtBLRequestModel(delegate: self, placementUuid: placementUuid, documents: documents)
         }
     }()
     
     lazy var userService: F4SUserService = {
         return F4SUserService()
     }()
-    
-    var applicationContext: F4SApplicationContext!
     
     @IBAction func addDocumentButtonTapped(_ sender: Any) {
         hidePopopMenu()
@@ -69,7 +71,7 @@ class F4SAddDocumentsViewController: UIViewController {
     
     enum Mode {
         case applyWorkflow
-        case businessLeaderRequest(placementUuid:F4SUUID,company:String)
+        case businessLeaderRequest(F4SBusinessLeadersRequestModel)
         
         var headingText: String {
             switch self {
@@ -84,8 +86,8 @@ class F4SAddDocumentsViewController: UIViewController {
             switch self {
             case .applyWorkflow:
                 return "Add your CV or any supporting document to make it easier for companies to choose you"
-            case .businessLeaderRequest(_, let companyName):
-                return "Add the documents requested by \(companyName.stripCompanySuffix()) in their recent message to you"
+            case .businessLeaderRequest(let requestModel):
+                return "Add the documents requested by \(requestModel.companyName) in their recent message to you"
             }
         }
         
@@ -181,7 +183,8 @@ class F4SAddDocumentsViewController: UIViewController {
 }
 
 extension F4SAddDocumentsViewController : F4SDocumentUploadModelDelegate {
-    func documentUploadModelFailedToFetchDocuments(_ model: F4SDocumentUploadModel, error: Error) {
+    
+    func documentUploadModelFailedToFetchDocuments(_ model: F4SDocumentUploadModelBase, error: Error) {
         DispatchQueue.main.async { [unowned self] in
             MessageHandler.sharedInstance.hideLoadingOverlay()
             self.displayTryAgain {
@@ -191,24 +194,24 @@ extension F4SAddDocumentsViewController : F4SDocumentUploadModelDelegate {
         }
     }
     
-    func documentUploadModelFetchedDocuments(_ model: F4SDocumentUploadModel) {
+    func documentUploadModelFetchedDocuments(_ model: F4SDocumentUploadModelBase) {
         DispatchQueue.main.async { [weak self] in
             self?.reloadFromModel()
             MessageHandler.sharedInstance.hideLoadingOverlay()
         }
     }
     
-    func documentUploadModel(_ model: F4SDocumentUploadModel, deleted: F4SDocument) {
+    func documentUploadModel(_ model: F4SDocumentUploadModelBase, deleted: F4SDocument) {
         updateEnabledStateOfAddButton(model)
     }
-    func documentUploadModel(_ model: F4SDocumentUploadModel, updated: F4SDocument) {
+    func documentUploadModel(_ model: F4SDocumentUploadModelBase, updated: F4SDocument) {
         updateEnabledStateOfAddButton(model)
     }
-    func documentUploadModel(_ model: F4SDocumentUploadModel, created: F4SDocument) {
+    func documentUploadModel(_ model: F4SDocumentUploadModelBase, created: F4SDocument) {
         updateEnabledStateOfAddButton(model)
     }
     
-    fileprivate func updateEnabledStateOfAddButton(_ model: F4SDocumentUploadModel) {
+    fileprivate func updateEnabledStateOfAddButton(_ model: F4SDocumentUploadModelBase) {
         addDocumentButton.isEnabled = model.canAddPlaceholder()
     }
     

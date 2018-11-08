@@ -91,14 +91,6 @@
             </objects>
             <point key="canvasLocation" x="-1311.2" y="161.46926536731635"/>
         </scene>
-        <!--DocumentCapture-->
-        <scene sceneID="Egy-SR-po1">
-            <objects>
-                <viewControllerPlaceholder storyboardName="DocumentCapture" id="cQ4-4v-CRu" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pxI-Ve-W1p" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-567" y="236"/>
-        </scene>
         <!--AcceptOffer-->
         <scene sceneID="ZUm-IC-dI9">
             <objects>

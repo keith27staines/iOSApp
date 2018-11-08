@@ -124,29 +124,19 @@ extension F4SDocument {
 }
 
 public protocol F4SDocumentUploadModelDelegate {
-    func documentUploadModel(_ model: F4SDocumentUploadModel, deleted: F4SDocument)
-    func documentUploadModel(_ model: F4SDocumentUploadModel, updated: F4SDocument)
-    func documentUploadModel(_ model: F4SDocumentUploadModel, created: F4SDocument)
-    func documentUploadModelFetchedDocuments(_ model: F4SDocumentUploadModel)
-    func documentUploadModelFailedToFetchDocuments(_ model: F4SDocumentUploadModel, error: Error)
+    func documentUploadModel(_ model: F4SDocumentUploadModelBase, deleted: F4SDocument)
+    func documentUploadModel(_ model: F4SDocumentUploadModelBase, updated: F4SDocument)
+    func documentUploadModel(_ model: F4SDocumentUploadModelBase, created: F4SDocument)
+    func documentUploadModelFetchedDocuments(_ model: F4SDocumentUploadModelBase)
+    func documentUploadModelFailedToFetchDocuments(_ model: F4SDocumentUploadModelBase, error: Error)
 }
 
-public class F4SDocumentUploadModel {
+public class F4SDocumentUploadModelBase {
+    public fileprivate (set) var documentService: F4SPlacementDocumentsService?
+    public var maximumDocumentCount : Int { return 2 }
     
-    public private (set) var documentService: F4SPlacementDocumentsService?
-    public let maximumDocumentCount : Int = 2
-    private var delegate: F4SDocumentUploadModelDelegate?
-    
-    public var expandedIndexPath: IndexPath? {
-        for i in 0..<documents.count {
-            if documents[i].isExpanded {
-                return IndexPath(row: i, section: 0)
-            }
-        }
-        return nil
-    }
-    
-    private var documents : [F4SDocument]
+    fileprivate var delegate: F4SDocumentUploadModelDelegate?
+    fileprivate var documents : [F4SDocument]
     
     public func document(_ indexPath: IndexPath) -> F4SDocument {
         return documents[indexPath.row]
@@ -161,30 +151,96 @@ public class F4SDocumentUploadModel {
         return false
     }
     
-    public init(urlStrings: [String], delegate: F4SDocumentUploadModelDelegate) {
-        self.delegate = delegate
-        self.documents = []
-        for string in urlStrings {
-            _ = createDescriptor(urlString: string, includeInApplication: true)
+    public func setDocument(_ document: F4SDocument, at indexPath: IndexPath) {
+        documents[indexPath.row] = document
+        delegate?.documentUploadModel(self, updated: document)
+    }
+    
+    public func canAddPlaceholder() -> Bool {
+        return documents.count <= maximumDocumentCount ? true : false
+    }
+    
+    /// Must override
+    public func putDocuments(completion: @escaping (Bool) -> Void ) { assertionFailure("Must be overridden") }
+    public func fetchDocumentsForPlacement() { assertionFailure("Must be overridden") }
+    
+    public func doAllDescriptorsContainValidLinks() -> Bool {
+        for descriptor in documents {
+            if !descriptor.hasValidRemoteUrl {
+                return false
+            }
         }
+        return true
     }
     
-    public init(delegate: F4SDocumentUploadModelDelegate, documentService: F4SPlacementDocumentsService? = nil, placementUuid: F4SUUID) {
-        if documentService != nil {
-            self.documentService = documentService
-        } else {
-            self.documentService = F4SPlacementDocumentsService(placementUuid: placementUuid)
-        }
+    public func deleteDocument(indexPath: IndexPath) {
+        let removed = documents[indexPath.row]
+        documents.remove(at: indexPath.row)
+        delegate?.documentUploadModel(self, deleted: removed)
+    }
+    
+    @discardableResult
+    public func addDocument(_ document: F4SDocument) -> F4SDocument? {
+        if !canAddPlaceholder() { return nil }
+        documents.append(document)
+        delegate?.documentUploadModel(self, created: document)
+        return document
+    }
+    
+    public init(delegate: F4SDocumentUploadModelDelegate, documentService: F4SPlacementDocumentsService) {
         self.delegate = delegate
+        self.documentService = documentService
         self.documents = []
     }
     
-    public func fetchDocumentsForPlacement() {
+    public init(delegate: F4SDocumentUploadModelDelegate, placementUuid: F4SUUID) {
+        let documentService = F4SPlacementDocumentsService(placementUuid: placementUuid)
+        self.delegate = delegate
+        self.documentService = documentService
         self.documents = []
-        self.documentService?.getDocumentsForPlacement(completion: documentsFetched)
     }
     
-    func putDocuments(completion: @escaping (Bool) -> Void ) {
+    public func numberOfSections() -> Int {
+        return 1
+    }
+    
+    public func numberOfRows(for section: Int) -> Int {
+        return documents.count
+    }
+}
+
+public class F4SDocumentUploadAtBLRequestModel : F4SDocumentUploadModelBase {
+    
+    public init(delegate: F4SDocumentUploadModelDelegate, placementUuid: F4SUUID, documents: [F4SDocument]) {
+        super.init(delegate: delegate, placementUuid: placementUuid)
+        self.documents = documents
+    }
+    
+    override public var maximumDocumentCount: Int { return documents.count }
+    override public func canAddPlaceholder() -> Bool { return false }
+    
+    override public func putDocuments(completion: @escaping (Bool) -> Void ) {
+    }
+    
+    @discardableResult
+    override public func addDocument(_ document: F4SDocument) -> F4SDocument? { return nil }
+    
+    override public func deleteDocument(indexPath: IndexPath) {
+        let type = document(indexPath).type
+        setDocument(F4SDocument(type: type), at: indexPath)
+    }
+    
+    override public func setDocument(_ document: F4SDocument, at indexPath: IndexPath) {
+        indexPathLastUpdated = indexPath
+        super.setDocument(document, at: indexPath)
+    }
+
+    public private (set) var indexPathLastUpdated: IndexPath? = nil
+}
+
+public class F4SDocumentUploadWhileApplyingModel : F4SDocumentUploadModelBase {
+    
+    override public func putDocuments(completion: @escaping (Bool) -> Void ) {
         let validDocuments = self.documents.filter { (document) -> Bool in
             return document.hasValidRemoteUrl
         }
@@ -201,7 +257,12 @@ public class F4SDocumentUploadModel {
         })
     }
     
-    func documentsFetched(networkResult: F4SNetworkResult<F4SGetDocumentJson>) {
+    override public func fetchDocumentsForPlacement() {
+        self.documents = []
+        self.documentService?.getDocumentsForPlacement(completion: documentsFetched)
+    }
+    
+    private func documentsFetched(networkResult: F4SNetworkResult<F4SGetDocumentJson>) {
         DispatchQueue.main.async { [weak self] in
             guard let this = self else { return }
             switch networkResult {
@@ -218,71 +279,5 @@ public class F4SDocumentUploadModel {
             }
         }
     }
-    
-    func canAddPlaceholder() -> Bool {
-        return documents.count <= maximumDocumentCount ? true : false
-    }
-    
-    func doAllDescriptorsContainValidLinks() -> Bool {
-        for descriptor in documents {
-            if !descriptor.hasValidRemoteUrl {
-                return false
-            }
-        }
-        return true
-    }
-    
-    func setDocument(_ document: F4SDocument, at indexPath: IndexPath) {
-        documents[indexPath.row] = document
-        delegate?.documentUploadModel(self, updated: document)
-    }
-    
-    func expandDocument(at indexPath: IndexPath) {
-        collapseAllRows()
-        var descriptor = documents[indexPath.row]
-        descriptor.isExpanded = true
-        documents[indexPath.row] = descriptor
-    }
-    
-    public func collapseAllRows() {
-        for (index,descriptor) in documents.enumerated() {
-            var descr = descriptor
-            descr.isExpanded = false
-            documents[index] = descr
-        }
-    }
-    
-    func deleteDocument(indexPath: IndexPath) {
-        let removed = documents[indexPath.row]
-        documents.remove(at: indexPath.row)
-        delegate?.documentUploadModel(self, deleted: removed)
-    }
-    
-    @discardableResult
-    func addDocument(_ document: F4SDocument) -> F4SDocument? {
-        if !canAddPlaceholder() { return nil }
-        documents.append(document)
-        delegate?.documentUploadModel(self, created: document)
-        return document
-    }
-    
-    func createDescriptor(urlString: String = "", includeInApplication: Bool) -> F4SDocument? {
-        if !canAddPlaceholder() { return nil }
-        
-        let newDocument = F4SDocument(uuid: nil, urlString: urlString, type: .other, name: "untitled", includeInApplication: includeInApplication, isExpanded: false)
-        documents.insert(newDocument, at: 0)
-        delegate?.documentUploadModel(self, created: newDocument)
-        return newDocument
-    }
-}
 
-extension F4SDocumentUploadModel {
-    
-    func numberOfSections() -> Int {
-        return 1
-    }
-    
-    func numberOfRows(for section: Int) -> Int {
-        return documents.count
-    }
 }
