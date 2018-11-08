@@ -276,7 +276,7 @@
 		FCC212F1219077C000D8D5B7 /* F4SDocumentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212D5219077C000D8D5B7 /* F4SDocumentTableViewController.swift */; };
 		FCC212F2219077C000D8D5B7 /* F4SDCAddDocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212D6219077C000D8D5B7 /* F4SDCAddDocumentsViewController.swift */; };
 		FCC212F3219077C000D8D5B7 /* F4SDCAddDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212D8219077C000D8D5B7 /* F4SDCAddDocumentViewController.swift */; };
-		FCC212F4219077C000D8D5B7 /* F4SDCAddUrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212DA219077C000D8D5B7 /* F4SDCAddUrlViewController.swift */; };
+		FCC212F4219077C000D8D5B7 /* F4SAddUrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212DA219077C000D8D5B7 /* F4SAddUrlViewController.swift */; };
 		FCC212F5219077C000D8D5B7 /* F4SDCDocumentTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212DC219077C000D8D5B7 /* F4SDCDocumentTypeViewController.swift */; };
 		FCC212F7219077C000D8D5B7 /* F4SArrangeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212DF219077C000D8D5B7 /* F4SArrangeTableViewController.swift */; };
 		FCC212F8219077C000D8D5B7 /* F4SCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212E0219077C000D8D5B7 /* F4SCameraViewController.swift */; };
@@ -680,7 +680,7 @@
 		FCC212D5219077C000D8D5B7 /* F4SDocumentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDocumentTableViewController.swift; sourceTree = "<group>"; };
 		FCC212D6219077C000D8D5B7 /* F4SDCAddDocumentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDCAddDocumentsViewController.swift; sourceTree = "<group>"; };
 		FCC212D8219077C000D8D5B7 /* F4SDCAddDocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDCAddDocumentViewController.swift; sourceTree = "<group>"; };
-		FCC212DA219077C000D8D5B7 /* F4SDCAddUrlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDCAddUrlViewController.swift; sourceTree = "<group>"; };
+		FCC212DA219077C000D8D5B7 /* F4SAddUrlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SAddUrlViewController.swift; sourceTree = "<group>"; };
 		FCC212DC219077C000D8D5B7 /* F4SDCDocumentTypeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDCDocumentTypeViewController.swift; sourceTree = "<group>"; };
 		FCC212DF219077C000D8D5B7 /* F4SArrangeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SArrangeTableViewController.swift; sourceTree = "<group>"; };
 		FCC212E0219077C000D8D5B7 /* F4SCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCameraViewController.swift; sourceTree = "<group>"; };
@@ -1902,7 +1902,7 @@
 		FCC212D9219077C000D8D5B7 /* Url */ = {
 			isa = PBXGroup;
 			children = (
-				FCC212DA219077C000D8D5B7 /* F4SDCAddUrlViewController.swift */,
+				FCC212DA219077C000D8D5B7 /* F4SAddUrlViewController.swift */,
 			);
 			path = Url;
 			sourceTree = "<group>";
@@ -2352,7 +2352,7 @@
 				2037B0A31DEC2DB600A9DE3E /* InterestDB.swift in Sources */,
 				40C1A4ED1DDB36FA000F80AA /* TimelineViewController.swift in Sources */,
 				40C1A4E61DDB356B000F80AA /* CustomTabBarViewController.swift in Sources */,
-				FCC212F4219077C000D8D5B7 /* F4SDCAddUrlViewController.swift in Sources */,
+				FCC212F4219077C000D8D5B7 /* F4SAddUrlViewController.swift in Sources */,
 				FCA53B921FE00CB5009F6DB0 /* Versioning.swift in Sources */,
 				D54E10071E044BC100A51560 /* ProcessedMessagesViewController.swift in Sources */,
 				FC85A5ED2191D87B004E877E /* AddDocumentsViewController+AddDocumentDelegate.swift in Sources */,

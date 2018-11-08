@@ -202,17 +202,20 @@ public class F4SDocumentUploadModel {
     }
     
     func documentsFetched(networkResult: F4SNetworkResult<F4SGetDocumentJson>) {
-        switch networkResult {
-        case .error(let error):
-            delegate?.documentUploadModelFailedToFetchDocuments(self, error: error)
-        case .success(let documentDownload):
-            documents = []
-            if let documents = documentDownload.documents {
-                for document in documents  {
-                    _ = addDocument(document)
+        DispatchQueue.main.async { [weak self] in
+            guard let this = self else { return }
+            switch networkResult {
+            case .error(let error):
+                this.delegate?.documentUploadModelFailedToFetchDocuments(this, error: error)
+            case .success(let documentDownload):
+                this.documents = []
+                if let documents = documentDownload.documents {
+                    for document in documents  {
+                        this.addDocument(document)
+                    }
                 }
+                this.delegate?.documentUploadModelFetchedDocuments(this)
             }
-            delegate?.documentUploadModelFetchedDocuments(self)
         }
     }
     

@@ -160,30 +160,34 @@
         <!--URL-->
         <scene sceneID="FWO-QV-KrP">
             <objects>
-                <viewController id="WlS-hd-tft" customClass="F4SDCAddUrlViewController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="WlS-hd-tft" customClass="F4SAddUrlViewController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="i2v-gM-75W">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1nP-Dp-H9i">
-                                <rect key="frame" x="16" y="208" width="343" height="30"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="1nP-Dp-H9i">
+                                <rect key="frame" x="36" y="178" width="303" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="SAQ-Td-yrO"/>
+                                    <constraint firstAttribute="height" constant="60" id="SAQ-Td-yrO"/>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="URL" textContentType="url"/>
+                                <connections>
+                                    <outlet property="delegate" destination="WlS-hd-tft" id="GJ1-Ca-VTE"/>
+                                </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap below to paste in your document's URL" textAlignment="center" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="skS-WI-vbr">
-                                <rect key="frame" x="16" y="79" width="343" height="102"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.58081901069999997" green="0.088427625600000004" blue="0.31863921880000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap below to paste in your document's URL" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="skS-WI-vbr">
+                                <rect key="frame" x="36" y="79" width="303" height="72"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1va-AX-2zT">
-                                <rect key="frame" x="164" y="274" width="47" height="36"/>
+                                <rect key="frame" x="137.5" y="274" width="100" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="O6f-kg-kxu"/>
+                                    <constraint firstAttribute="width" constant="100" id="SOW-9K-O9R"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Done"/>
@@ -196,9 +200,9 @@
                         <constraints>
                             <constraint firstItem="1nP-Dp-H9i" firstAttribute="centerX" secondItem="1va-AX-2zT" secondAttribute="centerX" id="Gak-JZ-f24"/>
                             <constraint firstItem="s2J-3Z-Fd0" firstAttribute="bottom" secondItem="1va-AX-2zT" secondAttribute="bottom" constant="313" id="I1S-zi-WiR"/>
-                            <constraint firstItem="skS-WI-vbr" firstAttribute="leading" secondItem="i2v-gM-75W" secondAttribute="leadingMargin" id="MPn-4U-xpo"/>
+                            <constraint firstItem="skS-WI-vbr" firstAttribute="leading" secondItem="i2v-gM-75W" secondAttribute="leadingMargin" constant="20" id="MPn-4U-xpo"/>
                             <constraint firstItem="skS-WI-vbr" firstAttribute="trailing" secondItem="1nP-Dp-H9i" secondAttribute="trailing" id="NQz-64-dyS"/>
-                            <constraint firstItem="skS-WI-vbr" firstAttribute="trailing" secondItem="i2v-gM-75W" secondAttribute="trailingMargin" id="NrA-FF-P7o"/>
+                            <constraint firstItem="skS-WI-vbr" firstAttribute="trailing" secondItem="i2v-gM-75W" secondAttribute="trailingMargin" constant="-20" id="NrA-FF-P7o"/>
                             <constraint firstItem="skS-WI-vbr" firstAttribute="top" secondItem="s2J-3Z-Fd0" secondAttribute="top" constant="59" id="mxa-7d-t9J"/>
                             <constraint firstItem="skS-WI-vbr" firstAttribute="leading" secondItem="1nP-Dp-H9i" secondAttribute="leading" id="ree-OH-NKl"/>
                             <constraint firstItem="1va-AX-2zT" firstAttribute="top" secondItem="1nP-Dp-H9i" secondAttribute="bottom" constant="36" id="vS4-Ja-FkC"/>
@@ -208,6 +212,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="URL" id="P5c-Dh-kLb"/>
                     <connections>
+                        <outlet property="doneButton" destination="1va-AX-2zT" id="iUt-ZV-yDz"/>
                         <outlet property="urlField" destination="1nP-Dp-H9i" id="apZ-ZM-PrJ"/>
                         <segue destination="Azh-xw-e0u" kind="unwind" identifier="unwindToAddDocuments" unwindAction="unwindToAddDocumentsWithSegue:" id="Loy-Nz-pcv"/>
                     </connections>
@@ -268,7 +273,7 @@
                                     <constraint firstAttribute="height" constant="60" id="Yzh-Gk-TqQ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Skip"/>
+                                <state key="normal" title="Continue"/>
                                 <connections>
                                     <action selector="performPrimaryAction:" destination="VZL-kF-FTn" eventType="touchUpInside" id="gBB-Qu-VAF"/>
                                 </connections>

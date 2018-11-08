@@ -103,7 +103,7 @@ class F4SDCAddDocumentViewController: UIViewController {
                     return
             }
         case "showURL":
-            if let vc = segue.destination as? F4SDCAddUrlViewController {
+            if let vc = segue.destination as? F4SAddUrlViewController {
                 popIsRequired = false
                 vc.delegate = self
             }
