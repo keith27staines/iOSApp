@@ -83,7 +83,7 @@ class F4SCameraPageManagerViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? F4SDocumentTableViewController {
-            vc.documentModel = documentModel
+            vc.multiPageModel = documentModel
             if let arranger = vc as? F4SArrangeTableViewController {
                 self.arranger = arranger
                 arranger.delegate = self

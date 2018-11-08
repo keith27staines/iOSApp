@@ -47,12 +47,6 @@ class F4SMultiPageDocument {
         sendNotification(changeType: .documentModelDidInsertPage, with: userInfo)
     }
     
-    func insert(_ page: F4SDocumentPage, index: Int) {
-        pages.append(page)
-        let userInfo = ["index": index]
-        sendNotification(changeType: .documentModelDidInsertPage, with: userInfo)
-    }
-    
     func replace(existing page: F4SDocumentPage, with newPage: F4SDocumentPage) {
         guard let index = indexForPage(page) else { return }
         pages[index] = newPage

@@ -10,7 +10,7 @@ import UIKit
 
 protocol F4SDisplayTableViewCellDelegate {
     func deletePage(_ page: F4SDocumentPage)
-    func retakePage(_ page: F4SDocumentPage)
+    //func retakePage(_ page: F4SDocumentPage)
 }
 
 class F4SDisplayTableViewCell: UITableViewCell {
@@ -26,21 +26,10 @@ class F4SDisplayTableViewCell: UITableViewCell {
         delegate?.deletePage(page)
     }
     
-    @IBAction func retakePage(_ sender: UIButton) {
-        delegate?.retakePage(page)
-    }
+//    @IBAction func retakePage(_ sender: UIButton) {
+//        delegate?.retakePage(page)
+//    }
     
     @IBOutlet weak var pageImageView: UIImageView!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
 
 }

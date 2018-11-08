@@ -39,7 +39,7 @@ class F4SArrangeTableViewController: F4SDocumentTableViewController {
         super.processModelNotification(changeType: changeType, userInfo: userInfo)
         DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else { return }
-            let count = strongSelf.documentModel.pageCount
+            let count = strongSelf.multiPageModel.pageCount
             strongSelf.tableView.separatorStyle = count == 0 ? .none : .singleLine
             strongSelf.delegate?.arrangerCountChanged(strongSelf, count: count)
         }
@@ -50,7 +50,7 @@ class F4SArrangeTableViewController: F4SDocumentTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        documentModel.rearrange(fromIndex: fromIndexPath.row, toIndex: to.row)
+        multiPageModel.rearrange(fromIndex: fromIndexPath.row, toIndex: to.row)
     }
     
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {

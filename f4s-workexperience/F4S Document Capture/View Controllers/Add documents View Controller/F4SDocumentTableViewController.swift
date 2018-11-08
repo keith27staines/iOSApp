@@ -10,7 +10,7 @@ import UIKit
 
 class F4SDocumentTableViewController: UITableViewController {
     
-    var documentModel: F4SMultiPageDocument = F4SMultiPageDocument()
+    var multiPageModel: F4SMultiPageDocument = F4SMultiPageDocument()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,28 +42,6 @@ class F4SDocumentTableViewController: UITableViewController {
     
     func processModelNotification(changeType: DocumentChange, userInfo: [AnyHashable:Any]) {
         tableView.reloadData()
-//        switch changeType {
-//        case .documentModelDidReplacePage:
-//            guard let row = userInfo["index"] as? Int else { return }
-//            let indexPath = IndexPath(row: row, section: 0)
-//            tableView.reloadRows(at: [indexPath], with: .automatic)
-//        case .documentModelDidRemovePage:
-//            guard let row = userInfo["index"] as? Int else { return }
-//            let indexPath = IndexPath(row: row, section: 0)
-//            tableView.deleteRows(at: [indexPath], with: .automatic)
-//        case .documentModelDidInsertPage:
-//            guard let row = userInfo["index"] as? Int else { return }
-//            let indexPath = IndexPath(row: row, section: 0)
-//            tableView.insertRows(at: [indexPath], with: .automatic)
-//        case .documentModelDidRearrangePages:
-//            guard
-//                let fromRow = userInfo["fromIndex"] as? Int,
-//                let toRow = userInfo["toIndex"] as? Int
-//                else { return }
-//            let fromPath = IndexPath(row: fromRow, section: 0)
-//            let toPath = IndexPath(row: toRow, section: 0)
-//            tableView.moveRow(at: fromPath, to: toPath)
-//        }
     }
     
     // MARK: - Table view data source
@@ -73,12 +51,12 @@ class F4SDocumentTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return documentModel.pageCount
+        return multiPageModel.pageCount
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let page = documentModel.pageAtIndex(indexPath.row)
+        let page = multiPageModel.pageAtIndex(indexPath.row)
         configure(cell, with: page)
         return cell
     }

@@ -13,13 +13,13 @@
         <!--Arrange Table View Controller-->
         <scene sceneID="IBF-wi-bo1">
             <objects>
-                <tableViewController id="hqm-Ke-gpy" customClass="F4SArrangeTableViewController" customModule="DocumentCapture" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="hqm-Ke-gpy" customClass="F4SArrangeTableViewController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ezf-jb-onM">
                         <rect key="frame" x="0.0" y="0.0" width="64" height="559"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell" rowHeight="108" id="wCi-V4-bWb" customClass="F4SArrangeTableViewCell" customModule="DocumentCapture" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell" rowHeight="108" id="wCi-V4-bWb" customClass="F4SArrangeTableViewCell" customModule="f4s_workexperience" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="64" height="108"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wCi-V4-bWb" id="OsZ-80-Nh4">
@@ -61,44 +61,35 @@
         <!--Display Table View Controller-->
         <scene sceneID="U5U-ug-xmF">
             <objects>
-                <tableViewController id="gNC-An-l9f" customClass="F4SDisplayTableViewController" customModule="DocumentCapture" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="gNC-An-l9f" customClass="F4SDisplayTableViewController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Oee-Pp-Zgw">
-                        <rect key="frame" x="0.0" y="0.0" width="536" height="492"/>
+                        <rect key="frame" x="0.0" y="0.0" width="311" height="559"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell" rowHeight="422" id="IzC-tg-gaM" customClass="F4SDisplayTableViewCell" customModule="DocumentCapture" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="536" height="422"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell" rowHeight="422" id="IzC-tg-gaM" customClass="F4SDisplayTableViewCell" customModule="f4s_workexperience" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="311" height="422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IzC-tg-gaM" id="JgG-Hp-qq5">
-                                    <rect key="frame" x="0.0" y="0.0" width="536" height="421.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="311" height="421.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M0T-cC-gMg" userLabel="displayImageView">
-                                            <rect key="frame" x="239.5" y="4" width="292.5" height="413.5"/>
+                                            <rect key="frame" x="14.5" y="4" width="292.5" height="413.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="M0T-cC-gMg" secondAttribute="height" multiplier="1000:1414" id="gT5-L8-0Ot"/>
                                             </constraints>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="YXY-9O-3Fb">
-                                            <rect key="frame" x="40" y="142" width="456" height="138"/>
+                                            <rect key="frame" x="36" y="333.5" width="239" height="44"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1kz-Dd-yFA">
-                                                    <rect key="frame" x="0.0" y="0.0" width="456" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="239" height="44"/>
                                                     <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.63658497431506844" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                     <state key="normal" title="Delete"/>
                                                     <connections>
                                                         <action selector="deletePage:" destination="IzC-tg-gaM" eventType="touchUpInside" id="jHG-pL-Pb7"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IyH-pF-tR0">
-                                                    <rect key="frame" x="0.0" y="94" width="456" height="44"/>
-                                                    <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.63658497431506844" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                                    <state key="normal" title="Retake"/>
-                                                    <connections>
-                                                        <action selector="retakePage:" destination="IzC-tg-gaM" eventType="touchUpInside" id="CpQ-lh-Ozf"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -109,11 +100,12 @@
                                         <constraint firstItem="M0T-cC-gMg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JgG-Hp-qq5" secondAttribute="leading" constant="4" id="HSy-PT-TFu"/>
                                         <constraint firstItem="M0T-cC-gMg" firstAttribute="top" secondItem="JgG-Hp-qq5" secondAttribute="top" constant="4" id="XCB-1z-jW8"/>
                                         <constraint firstItem="YXY-9O-3Fb" firstAttribute="centerX" secondItem="JgG-Hp-qq5" secondAttribute="centerX" id="Zlf-9U-CgG"/>
-                                        <constraint firstItem="YXY-9O-3Fb" firstAttribute="centerY" secondItem="JgG-Hp-qq5" secondAttribute="centerY" id="cZZ-jE-j1b"/>
+                                        <constraint firstItem="M0T-cC-gMg" firstAttribute="leading" secondItem="YXY-9O-3Fb" secondAttribute="trailing" constant="-260.5" id="gEv-6D-pFM"/>
+                                        <constraint firstItem="M0T-cC-gMg" firstAttribute="leading" secondItem="1kz-Dd-yFA" secondAttribute="trailing" constant="-260.5" id="lWl-fp-bkv"/>
                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="M0T-cC-gMg" secondAttribute="bottom" constant="4" id="oOf-LD-iwG"/>
                                         <constraint firstAttribute="bottom" secondItem="M0T-cC-gMg" secondAttribute="bottom" priority="750" constant="4" id="qIv-Aa-PtT"/>
                                         <constraint firstAttribute="trailing" secondItem="M0T-cC-gMg" secondAttribute="trailing" constant="4" id="sCu-a4-tpo"/>
-                                        <constraint firstItem="YXY-9O-3Fb" firstAttribute="leading" secondItem="JgG-Hp-qq5" secondAttribute="leadingMargin" constant="20" id="uK1-AT-r5k"/>
+                                        <constraint firstItem="YXY-9O-3Fb" firstAttribute="bottom" secondItem="M0T-cC-gMg" secondAttribute="bottom" constant="-40" id="uUp-4P-uM5"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -152,7 +144,7 @@
         <!--Camera Page Manager View Controller-->
         <scene sceneID="4Fj-c0-nOu">
             <objects>
-                <viewController id="pP1-tM-Oll" customClass="F4SCameraPageManagerViewController" customModule="DocumentCapture" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="pP1-tM-Oll" customClass="F4SCameraPageManagerViewController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yn1-Fe-dqC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

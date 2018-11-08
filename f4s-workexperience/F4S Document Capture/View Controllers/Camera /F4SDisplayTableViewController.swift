@@ -29,7 +29,7 @@ class F4SDisplayTableViewController: F4SDocumentTableViewController {
     
     override func processModelNotification(changeType: DocumentChange, userInfo: [AnyHashable : Any]) {
         
-        if documentModel.pageCount == 0 {
+        if multiPageModel.pageCount == 0 {
             tableView.separatorStyle = .none
         } else {
             tableView.separatorStyle = .singleLine
@@ -48,10 +48,10 @@ class F4SDisplayTableViewController: F4SDocumentTableViewController {
 
 extension F4SDisplayTableViewController : F4SDisplayTableViewCellDelegate {
     func deletePage(_ page: F4SDocumentPage) {
-        documentModel.remove(page)
+        multiPageModel.remove(page)
     }
     
-    func retakePage(_ page: F4SDocumentPage) {
-        
-    }
+//    func retakePage(_ page: F4SDocumentPage) {
+//
+//    }
 }
