@@ -19,7 +19,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>2.2</string>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>3</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>ITSEncryptionExportComplianceCode</key>
@@ -82,6 +82,8 @@
 	<string>Allowing access to your location enables you to see work opportunities around you.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Allowing access to your location enables you to see work opportunities around you.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>If you store a picture of your CV in your photolibrary, you can upload it to potential employers</string>
 	<key>NSRemindersUsageDescription</key>
 	<string>Workfinder would like to give you reminders of work placements</string>
 	<key>UIBackgroundModes</key>
