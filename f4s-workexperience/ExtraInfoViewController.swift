@@ -98,9 +98,9 @@ class ExtraInfoViewController: UIViewController {
 //        return storyboard.instantiateInitialViewController() as! DocumentUrlViewController
 //    }()
     
-    lazy var f4sDocumentUploadController: F4SDCAddDocumentsViewController = {
+    lazy var f4sDocumentUploadController: F4SAddDocumentsViewController = {
         let storyboard = UIStoryboard(name: "DocumentCapture", bundle: nil)
-        return storyboard.instantiateInitialViewController() as! F4SDCAddDocumentsViewController
+        return storyboard.instantiateInitialViewController() as! F4SAddDocumentsViewController
     }()
     
     lazy var emailController: F4SEmailVerificationViewController = {

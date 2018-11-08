@@ -1,5 +1,5 @@
 //
-//  AddThreeViewController.swift
+//  F4SAddDocumentsViewController.swift
 //  DocumentCapture
 //
 //  Created by Keith Dev on 29/07/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class F4SDCAddDocumentsViewController: UIViewController {
+class F4SAddDocumentsViewController: UIViewController {
     let consentPreviouslyGivenKey = "consentPreviouslyGivenKey"
     @IBOutlet weak var addButtonHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var addDocumentButton: UIButton!
@@ -58,12 +58,8 @@ class F4SDCAddDocumentsViewController: UIViewController {
 
     }
     
-    @IBAction func unwindToAddDocuments(segue: UIStoryboardSegue) {}
-    
     func popToHere() {
-        if navigationController?.topViewController != self {
-            dismiss(animated: true)
-        }
+        navigationController?.popToRootViewController(animated: true)
     }
     
     enum Mode {
@@ -156,7 +152,7 @@ class F4SDCAddDocumentsViewController: UIViewController {
             if let vc = segue.destination as? F4SDCAddDocumentViewController {
                 vc.delegate = self
                 vc.documentTypes = documentTypes
-                vc.document = F4SDocument(type: .other)
+                vc.document = F4SDocument(type: .cv)
             }
             
         case "showPickMethodForSelectedDocument":
@@ -179,7 +175,7 @@ class F4SDCAddDocumentsViewController: UIViewController {
     }
 }
 
-extension F4SDCAddDocumentsViewController : F4SDocumentUploadModelDelegate {
+extension F4SAddDocumentsViewController : F4SDocumentUploadModelDelegate {
     func documentUploadModelFailedToFetchDocuments(_ model: F4SDocumentUploadModel, error: Error) {
         DispatchQueue.main.async { [unowned self] in
             MessageHandler.sharedInstance.hideLoadingOverlay()
@@ -217,7 +213,7 @@ extension F4SDCAddDocumentsViewController : F4SDocumentUploadModelDelegate {
     }
 }
     
-extension F4SDCAddDocumentsViewController : UITableViewDataSource, UITableViewDelegate  {
+extension F4SAddDocumentsViewController : UITableViewDataSource, UITableViewDelegate  {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return documentModel.numberOfRows(for: section)
     }
@@ -271,7 +267,7 @@ extension F4SDCAddDocumentsViewController : UITableViewDataSource, UITableViewDe
     }
 }
 
-extension F4SDCAddDocumentsViewController : F4SDCPopupMenuViewDelegate {
+extension F4SAddDocumentsViewController : F4SDCPopupMenuViewDelegate {
     func popupMenu(_ menu: F4SDCPopupMenuView, didSelectRowAtIndex index: Int) {
         guard
             let cell = menu.context as? UITableViewCell,

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol F4SDCAddDocumentViewControllerDelegate : class {
-    func didAddDocument(_ document: F4SDocument, popIsRequired: Bool)
+    func didAddDocument(_ document: F4SDocument)
 }
 
 class F4SDCAddDocumentViewController: UIViewController {
@@ -20,8 +20,6 @@ class F4SDCAddDocumentViewController: UIViewController {
     
     @IBOutlet weak var dropDownHeightConstraint: NSLayoutConstraint!
     weak var delegate: F4SDCAddDocumentViewControllerDelegate?
-    
-    internal private (set) var popIsRequired: Bool = false
     
     var document: F4SDocument = F4SDocument(type: .other) {
         didSet {
@@ -93,7 +91,6 @@ class F4SDCAddDocumentViewController: UIViewController {
     var documentTypeSelector: F4SDCDocumentTypeViewController?
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        popIsRequired = true
         switch segue.identifier {
         case "showCamera":
             if let navigationController = segue.destination as? UINavigationController,
@@ -104,7 +101,6 @@ class F4SDCAddDocumentViewController: UIViewController {
             }
         case "showURL":
             if let vc = segue.destination as? F4SAddUrlViewController {
-                popIsRequired = false
                 vc.delegate = self
             }
         case "embedDocumentTypePicker":
@@ -128,7 +124,6 @@ class F4SDCAddDocumentViewController: UIViewController {
         documentTypeSelector?.labelView.text = type.name
         updateDocumentName(type: type.name)
         setAddButtonsEnabled(state: true)
-        nameField.becomeFirstResponder()
     }
     
     func updateDocumentName(type: String) {
@@ -175,7 +170,7 @@ extension F4SDCAddDocumentViewController : UITextFieldDelegate {
 extension F4SDCAddDocumentViewController : F4SDCAddUrlViewControllerDelegate {
     func didCaptureUrl(_ url: URL) {
         document.remoteUrlString = url.absoluteString
-        delegate?.didAddDocument(document, popIsRequired: popIsRequired)
+        delegate?.didAddDocument(document)
     }
 }
 
@@ -183,8 +178,7 @@ extension F4SDCAddDocumentViewController : F4SCameraCaptureViewControllerDelegat
     func didCaptureDocumentasPDFData(_ pdfData: Data) {
         dismiss(animated: true, completion: nil)
         document.data = pdfData
-        delegate?.didAddDocument(document, popIsRequired: popIsRequired)
-        navigationController?.popViewController(animated: true)
+        delegate?.didAddDocument(document)
     }
 }
 
@@ -204,7 +198,7 @@ extension F4SDCAddDocumentViewController : UIDocumentPickerDelegate {
         coordinator.coordinate(readingItemAt: url, options: [], error: &error) { (url) -> Void in
             if let fileData = try? Data(contentsOf: url) {
                 document.data = fileData
-                delegate?.didAddDocument(document, popIsRequired: popIsRequired)
+                delegate?.didAddDocument(document)
                 navigationController?.popViewController(animated: true)
             } else {
                 print("No data!!")
@@ -221,18 +215,19 @@ extension F4SDCAddDocumentViewController : UINavigationControllerDelegate, UIIma
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
-        //navigationController?.popViewController(animated: true)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         // Local variable inserted by Swift 4.2 migrator.
         let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
-
         if let pickedImage = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
             let pdfData = pickedImage.generatePDF()
             document.data = pdfData
-            delegate?.didAddDocument(document, popIsRequired: popIsRequired)
-            navigationController?.popViewController(animated: true)
+            picker.dismiss(animated: true) { [weak self] in
+                guard let this = self else { return }
+                this.delegate?.didAddDocument(this.document)
+                this.navigationController?.popViewController(animated: true)
+            }
         }
     }
 }

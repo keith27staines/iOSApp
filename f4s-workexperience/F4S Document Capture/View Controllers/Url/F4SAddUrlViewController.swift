@@ -23,7 +23,6 @@ class F4SAddUrlViewController: UIViewController {
     @IBAction func doneButtonTapped(_ sender: Any) {
         guard let url = validURL else { return }
         delegate?.didCaptureUrl(url)
-        performSegue(withIdentifier: "unwindToAddDocuments", sender: self)
     }
     
     override func viewDidLoad() {

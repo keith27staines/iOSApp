@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension F4SDCAddDocumentsViewController {
+extension F4SAddDocumentsViewController {
     func performPrimaryActionForApplyMode() {
         primaryActionButton.isEnabled = false
         continueAsyncWorker()

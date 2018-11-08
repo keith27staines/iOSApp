@@ -274,7 +274,7 @@
 		FCC212EE219077C000D8D5B7 /* F4SMultiPageDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212D0219077C000D8D5B7 /* F4SMultiPageDocument.swift */; };
 		FCC212F0219077C000D8D5B7 /* DocumentCapture.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCC212D2219077C000D8D5B7 /* DocumentCapture.xcassets */; };
 		FCC212F1219077C000D8D5B7 /* F4SDocumentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212D5219077C000D8D5B7 /* F4SDocumentTableViewController.swift */; };
-		FCC212F2219077C000D8D5B7 /* F4SDCAddDocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212D6219077C000D8D5B7 /* F4SDCAddDocumentsViewController.swift */; };
+		FCC212F2219077C000D8D5B7 /* F4SAddDocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212D6219077C000D8D5B7 /* F4SAddDocumentsViewController.swift */; };
 		FCC212F3219077C000D8D5B7 /* F4SDCAddDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212D8219077C000D8D5B7 /* F4SDCAddDocumentViewController.swift */; };
 		FCC212F4219077C000D8D5B7 /* F4SAddUrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212DA219077C000D8D5B7 /* F4SAddUrlViewController.swift */; };
 		FCC212F5219077C000D8D5B7 /* F4SDCDocumentTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC212DC219077C000D8D5B7 /* F4SDCDocumentTypeViewController.swift */; };
@@ -678,7 +678,7 @@
 		FCC212D0219077C000D8D5B7 /* F4SMultiPageDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SMultiPageDocument.swift; sourceTree = "<group>"; };
 		FCC212D2219077C000D8D5B7 /* DocumentCapture.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = DocumentCapture.xcassets; sourceTree = "<group>"; };
 		FCC212D5219077C000D8D5B7 /* F4SDocumentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDocumentTableViewController.swift; sourceTree = "<group>"; };
-		FCC212D6219077C000D8D5B7 /* F4SDCAddDocumentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDCAddDocumentsViewController.swift; sourceTree = "<group>"; };
+		FCC212D6219077C000D8D5B7 /* F4SAddDocumentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SAddDocumentsViewController.swift; sourceTree = "<group>"; };
 		FCC212D8219077C000D8D5B7 /* F4SDCAddDocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDCAddDocumentViewController.swift; sourceTree = "<group>"; };
 		FCC212DA219077C000D8D5B7 /* F4SAddUrlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SAddUrlViewController.swift; sourceTree = "<group>"; };
 		FCC212DC219077C000D8D5B7 /* F4SDCDocumentTypeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDCDocumentTypeViewController.swift; sourceTree = "<group>"; };
@@ -1882,7 +1882,7 @@
 		FCC212D4219077C000D8D5B7 /* Add documents View Controller */ = {
 			isa = PBXGroup;
 			children = (
-				FCC212D6219077C000D8D5B7 /* F4SDCAddDocumentsViewController.swift */,
+				FCC212D6219077C000D8D5B7 /* F4SAddDocumentsViewController.swift */,
 				FC85A5EC2191D87B004E877E /* AddDocumentsViewController+AddDocumentDelegate.swift */,
 				FC85A5EE2191D92E004E877E /* AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift */,
 				FCC212D5219077C000D8D5B7 /* F4SDocumentTableViewController.swift */,
@@ -2416,7 +2416,7 @@
 				FC99F3D41FFE533000E3AC5A /* F4SRecommendationService.swift in Sources */,
 				4059740A1E00115C0002DB3A /* NextResponderTextField.swift in Sources */,
 				2037B0AB1DEC42F600A9DE3E /* PlacementDB.swift in Sources */,
-				FCC212F2219077C000D8D5B7 /* F4SDCAddDocumentsViewController.swift in Sources */,
+				FCC212F2219077C000D8D5B7 /* F4SAddDocumentsViewController.swift in Sources */,
 				40C1A52B1DE82060000F80AA /* InfoWindowView.swift in Sources */,
 				FCD884FB1FFBE04F00F05B08 /* RecommendationsViewController.swift in Sources */,
 				206F8F921E1E552F0024937B /* MessageOptionHelper.swift in Sources */,

@@ -214,18 +214,16 @@
                     <connections>
                         <outlet property="doneButton" destination="1va-AX-2zT" id="iUt-ZV-yDz"/>
                         <outlet property="urlField" destination="1nP-Dp-H9i" id="apZ-ZM-PrJ"/>
-                        <segue destination="Azh-xw-e0u" kind="unwind" identifier="unwindToAddDocuments" unwindAction="unwindToAddDocumentsWithSegue:" id="Loy-Nz-pcv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VI0-u8-TMx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="Azh-xw-e0u" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4388" y="-498.80059970014997"/>
         </scene>
         <!--Add documents-->
         <scene sceneID="Y5M-u4-Kaj">
             <objects>
-                <viewController id="VZL-kF-FTn" customClass="F4SDCAddDocumentsViewController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="VZL-kF-FTn" customClass="F4SAddDocumentsViewController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Zb1-T0-o4i">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
