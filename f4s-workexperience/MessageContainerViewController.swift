@@ -252,12 +252,6 @@ class MessageContainerViewController: UIViewController {
             self.messageController = segue.destination as? MessageViewController
             return
         }
-        if segueName == "upload_documents" {
-            guard let vc = segue.destination as? F4SUploadSpecifiedDocumentsViewController else { return }
-            vc.companyName = company?.name ?? "this company"
-            vc.action = action
-            return
-        }
         if segueName == "view_offer" {
             guard let vc = segue.destination as? AcceptOfferViewController else {
                 return

@@ -46,10 +46,6 @@ class F4SDCAddDocumentViewController: UIViewController {
         super.viewDidLoad()
         nameField.delegate = self
         setAddButtonsEnabled(state: false)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         applyStyle()
     }
     

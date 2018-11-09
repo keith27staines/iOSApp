@@ -35,7 +35,8 @@ class F4SCameraViewController: UIViewController, UINavigationControllerDelegate,
 		if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
 			toolbarItems = self.toolbarItems?.filter { $0 != cameraButton }
 		}
-        showImagePicker(button: cameraButton!)
+        showImagePickerForCamera(cameraButton!)
+        //showImagePicker(button: cameraButton!)
     }
 
 	fileprivate func finishAndUpdate() {
