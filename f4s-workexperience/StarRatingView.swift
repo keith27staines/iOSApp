@@ -45,7 +45,6 @@ class StarRatingView: UIView {
     
     public override init(frame: CGRect) {
         rating = 3.5
-        starRatingStack = UIStackView(arrangedSubviews: starImageViews!)
         super.init(frame: frame)
         addSubviews()
         updateRatingDisplay()

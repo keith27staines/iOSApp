@@ -8,6 +8,92 @@
 
 import UIKit
 
+class CompanyCell : UITableViewCell {
+    
+    var company: Company! {
+        didSet {
+            self.companyNameLabel.attributedText = NSAttributedString(
+                string: company.name, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.black])
+            
+            self.industryLabel.attributedText = NSAttributedString(
+                string: company.industry, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+            self.starRating.rating = Float(company.rating)
+            self.starRating.isHidden = (company.rating == 0) ? true : false
+            self.logo.image = UIImage(named: "DefaultLogo")
+            if !company.logoUrl.isEmpty, let url = NSURL(string: company.logoUrl) {
+                F4SImageService.sharedInstance.getImage(url: url, completion: { [weak self]
+                    image in
+                    if image != nil {
+                        self?.logo.image = image!
+                    } else {
+                        self?.logo.image = UIImage(named: "DefaultLogo")
+                    }
+                })
+            }
+        }
+    }
+    
+    lazy var industryLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var companyNameLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var logo: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        imageView.layer.cornerRadius = 20
+        imageView.layer.masksToBounds = true
+        return imageView
+    }()
+    
+    lazy var starRating: StarRatingView = {
+        let ratingView = StarRatingView(frame: CGRect.zero)
+        ratingView.translatesAutoresizingMaskIntoConstraints = false
+        return ratingView
+    }()
+
+    lazy var stackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [companyNameLabel,starRating,industryLabel])
+        stack.axis = .vertical
+        stack.distribution = .fill
+        stack.alignment = UIStackView.Alignment.leading
+        stack.spacing = 8
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: UITableViewCell.CellStyle.default, reuseIdentifier: reuseIdentifier)
+        addSubview(logo)
+        addSubview(stackView)
+        logo.leftAnchor.constraint(equalTo: leftAnchor, constant: 4).isActive = true
+        logo.topAnchor.constraint(equalTo: topAnchor, constant: 4).isActive = true
+        stackView.leftAnchor.constraint(equalTo: logo.rightAnchor, constant: 12).isActive = true
+        stackView.topAnchor.constraint(equalTo: topAnchor, constant: 4).isActive = true
+        stackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -4).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4).isActive = true
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
 class RecommendationsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
@@ -22,6 +108,9 @@ class RecommendationsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.register(CompanyCell.self, forCellReuseIdentifier: "cell")
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = UITableView.automaticDimension
         reloadModel()
         applyStyle()
     }
@@ -87,26 +176,10 @@ extension RecommendationsViewController : UITableViewDataSource, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let recommendation = model.recommendationForIndexPath(indexPath)
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
-        configure(cell: cell, recommendation: recommendation)
+        var recommendation = model.recommendationForIndexPath(indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! CompanyCell
+        cell.company = recommendation.company
         return cell
-    }
-    
-    func configure(cell: UITableViewCell, recommendation: Recommendation) {
-        var recommendation = recommendation
-        cell.textLabel?.text = ""
-        cell.imageView?.image = Company.defaultLogo
-        cell.detailTextLabel?.text = ""
-        guard let company = recommendation.company else {
-            return
-        }
-        cell.textLabel?.text = company.name
-        company.getLogo(defaultLogo: Company.defaultLogo) { (image) in
-            DispatchQueue.main.async {
-                cell.imageView?.image = image
-            }
-        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

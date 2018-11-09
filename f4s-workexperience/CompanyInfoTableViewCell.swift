@@ -20,6 +20,9 @@ class CompanyInfoTableViewCell: UITableViewCell {
             self.starRating.rating = Float(company.rating)
             self.starRating.isHidden = (company.rating == 0) ? true : false
             self.logo.image = UIImage(named: "DefaultLogo")
+            self.logo.layer.cornerRadius = self.logo.frame.height/2.0
+            self.logo.layer.masksToBounds = true
+            self.logo.contentMode = .scaleAspectFill
             if !company.logoUrl.isEmpty, let url = NSURL(string: company.logoUrl) {
                 F4SImageService.sharedInstance.getImage(url: url, completion: { [weak self]
                     image in
@@ -40,7 +43,6 @@ class CompanyInfoTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
