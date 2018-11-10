@@ -127,14 +127,37 @@ class F4SAddDocumentsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         applySkin()
+        modeSpecificLoad()
+        configureNavigationItems()
+    }
+    
+    func modeSpecificLoad() {
         switch mode {
-
+            
         case .applyWorkflow:
             MessageHandler.sharedInstance.showLoadingOverlay(self.view)
             documentModel.fetchDocumentsForPlacement()
         case .businessLeaderRequest:
             break
         }
+    }
+    
+    func configureNavigationItems() {
+        let infoImage = #imageLiteral(resourceName: "infoIcon")
+        let infoItem = UIBarButtonItem(image: infoImage, style: .plain, target: self, action: #selector(handleInfoTap))
+        navigationItem.rightBarButtonItem = infoItem
+    }
+    
+    @objc func handleInfoTap() {
+        let alert = UIAlertController(title: "Need help writing your CV?", message: "Barclays have produced a detailed guide", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let goAction = UIAlertAction(title: "View Guide", style: .default) { (_) in
+            let barclaysUrl = URL(string: "https://barclayslifeskills.com/i-want-help-applying-for-jobs/school/cv-tips")!
+            UIApplication.shared.open(barclaysUrl, options: [:], completionHandler: nil)
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(goAction)
+        present(alert, animated: true, completion: nil)
     }
     
     func applySkin() {
@@ -222,6 +245,11 @@ extension F4SAddDocumentsViewController : F4SDocumentUploadModelDelegate {
 }
     
 extension F4SAddDocumentsViewController : UITableViewDataSource, UITableViewDelegate  {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return documentModel.numberOfRows(for: section)
     }
@@ -249,15 +277,6 @@ extension F4SAddDocumentsViewController : UITableViewDataSource, UITableViewDele
             accessoryImageView.image = document.isReadyForUpload ? dotImage : addImage
             cell.accessoryView = accessoryImageView
         }
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        documentModel.deleteDocument(indexPath: indexPath)
-        tableView.deleteRows(at: [indexPath], with: .automatic)
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
