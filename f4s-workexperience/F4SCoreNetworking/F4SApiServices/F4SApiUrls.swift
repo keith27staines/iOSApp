@@ -34,6 +34,9 @@ public struct ApiConstants {
     public static let roleUrl: String = "\(baseUrl2)/company"
     public static let offerUrl: String = "\(baseUrl2)/placement"
     
+    // Document upload
+    public static let postDocumentsUrl: String = "\(baseUrl2)/placement"
+    
     // Messages
     public static let messagesInThreadUrl: String = "\(baseUrl)/messaging/"
     public static let optionsForThreadUrl: String = "\(baseUrl)/messaging/"
