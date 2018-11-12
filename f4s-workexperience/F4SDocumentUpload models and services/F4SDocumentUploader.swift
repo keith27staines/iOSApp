@@ -79,6 +79,10 @@ public class F4SDocumentUploader : NSObject {
         task = session.uploadTask(with: request, from: data)
     }
     
+    func cancel() {
+        task?.cancel()
+    }
+    
     func resume() {
         switch state {
         case .waiting, .paused(_):

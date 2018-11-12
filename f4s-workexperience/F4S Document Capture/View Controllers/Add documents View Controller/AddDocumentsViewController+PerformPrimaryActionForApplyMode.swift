@@ -10,11 +10,13 @@ import UIKit
 
 extension F4SAddDocumentsViewController : PostDocumentsWithDataViewControllerDelegate {
     func postDocumentsControllerDidCancel(_ controller: PostDocumentsWithDataViewController) {
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
+        //dismiss(animated: true, completion: nil)
     }
     
     func postDocumentsControllerDidCompleteUpload(_ controller: PostDocumentsWithDataViewController) {
-        dismiss(animated: true, completion: nil)
+        //dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
         submitApplication(applicationContext: applicationContext)
     }
 }
@@ -38,7 +40,8 @@ extension F4SAddDocumentsViewController {
                 strongSelf.primaryActionButton.isEnabled = true
                 if success {
                     if !strongSelf.documentModel.documentsWithData().isEmpty {
-                         strongSelf.postDocumentsWithData()
+                        MessageHandler.sharedInstance.hideLoadingOverlay()
+                        strongSelf.postDocumentsWithData()
                     } else {
                         strongSelf.submitApplication(applicationContext: strongSelf.applicationContext)
                     }
@@ -54,7 +57,7 @@ extension F4SAddDocumentsViewController {
         let postDocumentsController = PostDocumentsWithDataViewController()
         postDocumentsController.delegate = self
         postDocumentsController.documentModel = documentModel
-        present(postDocumentsController, animated: true, completion: nil)
+        navigationController?.pushViewController(postDocumentsController, animated: true)
     }
     
     func displayTryAgain(completion: @escaping ()->()) {

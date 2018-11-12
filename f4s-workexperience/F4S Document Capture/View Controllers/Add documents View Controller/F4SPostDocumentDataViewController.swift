@@ -21,14 +21,6 @@ class PostDocumentsWithDataViewController : UIViewController {
     
     var cancelled: Bool = false
     
-    var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20)
-        label.text = "Uploading"
-        label.textAlignment = .center
-        return label
-    }()
-    
     var nameLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -50,7 +42,7 @@ class PostDocumentsWithDataViewController : UIViewController {
     }()
     
     lazy var stack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [titleLabel, nameLabel, progressBar, stateLabel])
+        let stack = UIStackView(arrangedSubviews: [nameLabel, progressBar, stateLabel])
         stack.alignment = .fill
         stack.spacing = 20
         stack.axis = .vertical
@@ -59,6 +51,7 @@ class PostDocumentsWithDataViewController : UIViewController {
     
     func cancel() {
         cancelled = true
+        currentUpload?.cancel()
     }
     
     override func viewDidLoad() {
@@ -74,12 +67,14 @@ class PostDocumentsWithDataViewController : UIViewController {
     }
     
     func configureViews() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancel))
+        navigationItem.title = "Document upload"
         view.addSubview(stack)
         stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-        stack.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
-        stack.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-        stack.bottomAnchor.constraint(lessThanOrEqualTo:view.bottomAnchor, constant: -100).isActive = true
+        stack.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor, constant: 20).isActive = true
+        stack.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 60).isActive = true
+        stack.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor, constant: -20).isActive = true
+        stack.bottomAnchor.constraint(lessThanOrEqualTo:view.layoutMarginsGuide.bottomAnchor, constant: -100).isActive = true
     }
     
     lazy var retryButton: UIButton = {
@@ -97,6 +92,11 @@ class PostDocumentsWithDataViewController : UIViewController {
     
     var currentUpload: F4SDocumentUploader? = nil
     
+    @objc func handleCancel() {
+        cancel()
+        delegate?.postDocumentsControllerDidCancel(self)
+    }
+    
     @objc func uploadNextDocument() {
         retryButton.isHidden = true
         guard cancelled == false else {
@@ -108,7 +108,7 @@ class PostDocumentsWithDataViewController : UIViewController {
             return
         }
         guard let uploader = F4SDocumentUploader(document: document) else { return }
-        nameLabel.text = document.name
+        nameLabel.text = "Uploading \"\(document.name ?? "...")\""
         uploader.delegate = self
         currentUpload = uploader
         uploader.resume()
