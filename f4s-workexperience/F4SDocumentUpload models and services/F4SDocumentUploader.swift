@@ -13,10 +13,12 @@ public protocol F4SDocumentUploaderDelegate : class {
 }
 
 public class F4SDocumentUploader : NSObject {
+    
     public var delegate : F4SDocumentUploaderDelegate?
     public static let sessionIdentifier = "F4SDocumentUploaderSession"
+    
     public static let sessionConfiguration: URLSessionConfiguration = {
-        var config = URLSessionConfiguration.background(withIdentifier: sessionIdentifier)
+        var config = URLSessionConfiguration.default
         return config
     }()
 
@@ -36,7 +38,7 @@ public class F4SDocumentUploader : NSObject {
     }
     
     public lazy var session: URLSession = {
-        var session = URLSession(configuration: F4SDocumentUploader.sessionConfiguration, delegate: self, delegateQueue: nil)
+        var session = URLSession(configuration: F4SDocumentUploader.sessionConfiguration, delegate: self, delegateQueue: OperationQueue.main)
         return session
     }()
     
@@ -57,7 +59,6 @@ public class F4SDocumentUploader : NSObject {
     public lazy var request: URLRequest = {
         var request = URLRequest(url: targetUrl)
         request.httpMethod = "POST"
-        request.timeoutInterval = 10
         return request
     }()
     
@@ -124,13 +125,16 @@ public class F4SDocumentUploader : NSObject {
 extension F4SDocumentUploader : URLSessionTaskDelegate, URLSessionDataDelegate {
     
     public func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
+        print("total bytes sent \(totalBytesSent)")
+        let percentComplete = Int(Float(totalBytesSent)/Float(totalBytesExpectedToSend)*100.0)
+        print("fraction complete = \(percentComplete)")
         state = .uploading(fraction: Float(totalBytesSent)/Float(totalBytesExpectedToSend))
     }
     
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
         guard let httpResponse = response as? HTTPURLResponse else { return }
         if let error = F4SNetworkError(response: httpResponse, attempting: "upload document") {
-            print(error)
+            state = .failed(error: error)
         }
         
     }

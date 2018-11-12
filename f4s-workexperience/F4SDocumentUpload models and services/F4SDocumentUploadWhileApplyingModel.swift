@@ -161,8 +161,30 @@ public class F4SDocumentUploadModelBase {
     }
     
     /// Must override
-    public func putDocuments(completion: @escaping (Bool) -> Void ) { assertionFailure("Must be overridden") }
     public func fetchDocumentsForPlacement() { assertionFailure("Must be overridden") }
+    
+    public func putDocumentsWithRemoteUrls(completion: @escaping (Bool) -> Void ) {
+        let documentsWithRemoteUrl = self.documents.filter { (document) -> Bool in
+            return document.hasValidRemoteUrl
+        }
+        let putJson = F4SPutDocumentsJson(documents: documentsWithRemoteUrl)
+        documentService?.putDocumentsForPlacement(documents: putJson, completion: { (result) in
+            switch result {
+            case .success(_):
+                completion(true)
+            case .error(let error):
+                log.debug(error)
+                completion(false)
+                break
+            }
+        })
+    }
+    
+    public func documentsWithData() -> [F4SDocument] {
+        return documents.filter({ (document) -> Bool in
+            return document.data != nil && document.uuid == nil
+        })
+    }
     
     public func doAllDescriptorsContainValidLinks() -> Bool {
         for descriptor in documents {
@@ -219,7 +241,7 @@ public class F4SDocumentUploadAtBLRequestModel : F4SDocumentUploadModelBase {
     override public var maximumDocumentCount: Int { return documents.count }
     override public func canAddPlaceholder() -> Bool { return false }
     
-    override public func putDocuments(completion: @escaping (Bool) -> Void ) {
+    override public func putDocumentsWithRemoteUrls(completion: @escaping (Bool) -> Void ) {
     }
     
     @discardableResult
@@ -239,23 +261,6 @@ public class F4SDocumentUploadAtBLRequestModel : F4SDocumentUploadModelBase {
 }
 
 public class F4SDocumentUploadWhileApplyingModel : F4SDocumentUploadModelBase {
-    
-    override public func putDocuments(completion: @escaping (Bool) -> Void ) {
-        let validDocuments = self.documents.filter { (document) -> Bool in
-            return document.hasValidRemoteUrl
-        }
-        let putJson = F4SPutDocumentsJson(documents: validDocuments)
-        documentService?.putDocumentsForPlacement(documents: putJson, completion: { (result) in
-            switch result {
-            case .success(_):
-                completion(true)
-            case .error(let error):
-                log.debug(error)
-                completion(false)
-                break
-            }
-        })
-    }
     
     override public func fetchDocumentsForPlacement() {
         self.documents = []

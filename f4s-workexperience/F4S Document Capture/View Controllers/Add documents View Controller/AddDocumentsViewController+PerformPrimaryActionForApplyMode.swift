@@ -8,6 +8,17 @@
 
 import UIKit
 
+extension F4SAddDocumentsViewController : PostDocumentsWithDataViewControllerDelegate {
+    func postDocumentsControllerDidCancel(_ controller: PostDocumentsWithDataViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func postDocumentsControllerDidCompleteUpload(_ controller: PostDocumentsWithDataViewController) {
+        dismiss(animated: true, completion: nil)
+        submitApplication(applicationContext: applicationContext)
+    }
+}
+
 extension F4SAddDocumentsViewController {
     
     func performPrimaryActionForBLRequestMode() {
@@ -16,23 +27,34 @@ extension F4SAddDocumentsViewController {
     
     func performPrimaryActionForApplyMode() {
         primaryActionButton.isEnabled = false
-        continueAsyncWorker()
+        putDocumentsWithUrls()
     }
     
-    func continueAsyncWorker() {
+    func putDocumentsWithUrls() {
         MessageHandler.sharedInstance.showLoadingOverlay(view)
-        documentModel.putDocuments { (success) in
+        documentModel.putDocumentsWithRemoteUrls { (success) in
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else { return }
                 strongSelf.primaryActionButton.isEnabled = true
                 if success {
-                    strongSelf.submitApplication(applicationContext: strongSelf.applicationContext)
+                    if !strongSelf.documentModel.documentsWithData().isEmpty {
+                         strongSelf.postDocumentsWithData()
+                    } else {
+                        strongSelf.submitApplication(applicationContext: strongSelf.applicationContext)
+                    }
                 } else {
                     MessageHandler.sharedInstance.hideLoadingOverlay()
-                    strongSelf.displayTryAgain(completion: strongSelf.continueAsyncWorker)
+                    strongSelf.displayTryAgain(completion: strongSelf.putDocumentsWithUrls)
                 }
             }
         }
+    }
+    
+    func postDocumentsWithData() {
+        let postDocumentsController = PostDocumentsWithDataViewController()
+        postDocumentsController.delegate = self
+        postDocumentsController.documentModel = documentModel
+        present(postDocumentsController, animated: true, completion: nil)
     }
     
     func displayTryAgain(completion: @escaping ()->()) {
