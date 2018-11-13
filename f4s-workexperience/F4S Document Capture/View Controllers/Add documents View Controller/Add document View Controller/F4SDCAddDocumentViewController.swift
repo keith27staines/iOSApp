@@ -89,12 +89,7 @@ class F4SDCAddDocumentViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "showCamera":
-            if let navigationController = segue.destination as? UINavigationController,
-                let vc = navigationController.viewControllers.first as? F4SCameraPageManagerViewController
-                {
-                    vc.delegate = self
-                    return
-            }
+            attemptToPresentCameraFromSegue(segue)
         case "showURL":
             if let vc = segue.destination as? F4SAddUrlViewController {
                 vc.delegate = self
@@ -127,6 +122,57 @@ class F4SDCAddDocumentViewController: UIViewController {
             nameField.text = document.defaultName
         }
         document.name = nameField.text
+    }
+}
+
+extension F4SDCAddDocumentViewController {
+    func attemptToPresentCameraFromSegue(_ segue: UIStoryboardSegue) {
+        let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
+        
+        if authStatus == AVAuthorizationStatus.denied {
+            // Denied access to camera, alert the user.
+            // The user has previously denied access. Remind the user that we need camera access to be useful.
+            let alert = UIAlertController(title: "Unable to access the Camera",
+                                          message: "To enable access, go to Settings and turn on Camera access for Workfinder",
+                                          preferredStyle: UIAlertController.Style.alert)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alert.addAction(cancelAction)
+            
+            let settingsAction = UIAlertAction(title: "Settings", style: .default, handler: { _ in
+                // Take the user to Settings app to possibly change permission.
+                guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
+                if UIApplication.shared.canOpenURL(settingsUrl) {
+                    UIApplication.shared.open(settingsUrl, completionHandler: nil)
+                }
+            })
+            alert.addAction(settingsAction)
+            
+            present(alert, animated: true, completion: nil)
+        }
+        else if (authStatus == AVAuthorizationStatus.notDetermined) {
+            
+            AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: {[weak self] granted in
+                if granted {
+                    self?.presentCameraFromSegue(segue)
+                }
+            })
+        } else {
+            // Camera access has been given
+            presentCameraFromSegue(segue)
+        }
+        
+    }
+    
+    func presentCameraFromSegue(_ segue: UIStoryboardSegue) {
+        DispatchQueue.main.async {
+            if let navigationController = segue.destination as? UINavigationController,
+                let vc = navigationController.viewControllers.first as? F4SCameraPageManagerViewController
+            {
+                vc.delegate = self
+                return
+            }
+        }
     }
 }
 
@@ -243,13 +289,6 @@ extension UIImage {
         return data as Data
     }
 }
-
-
-
-
-
-
-
 
 
 

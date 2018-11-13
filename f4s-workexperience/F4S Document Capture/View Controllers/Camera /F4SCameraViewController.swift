@@ -56,8 +56,7 @@ class F4SCameraViewController: UIViewController, UINavigationControllerDelegate,
 		let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
 		
 		if authStatus == AVAuthorizationStatus.denied {
-			// Denied access to camera, alert the user.
-			// The user has previously denied access. Remind the user that we need camera access to be useful.
+			// The user has previously denied access. Remind the user that we need camera access to be useful and give them a quick way to open settings.
 			let alert = UIAlertController(title: "Unable to access the Camera",
 										  message: "To enable access, go to Settings > Privacy > Camera and turn on Camera access for this app.",
 										  preferredStyle: UIAlertController.Style.alert)
