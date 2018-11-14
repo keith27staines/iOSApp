@@ -11,28 +11,45 @@ import UIKit
 extension F4SAddDocumentsViewController : PostDocumentsWithDataViewControllerDelegate {
     func postDocumentsControllerDidCancel(_ controller: PostDocumentsWithDataViewController) {
         navigationController?.popViewController(animated: true)
-        //dismiss(animated: true, completion: nil)
     }
     
     func postDocumentsControllerDidCompleteUpload(_ controller: PostDocumentsWithDataViewController) {
-        //dismiss(animated: true, completion: nil)
         navigationController?.popViewController(animated: true)
-        submitApplication(applicationContext: applicationContext)
+        switch mode {
+        case .applyWorkflow:
+            submitApplication(applicationContext: applicationContext)
+        case .businessLeaderRequest(_):
+            navigationController?.popViewController(animated: true)
+        }
     }
 }
 
 extension F4SAddDocumentsViewController {
     
     func performPrimaryActionForBLRequestMode() {
-        dismiss(animated: true, completion: nil)
+        primaryActionButton.isEnabled = false
+        MessageHandler.sharedInstance.showLoadingOverlay(view)
+        documentModel.putDocumentsWithRemoteUrls { (success) in
+            DispatchQueue.main.async { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.primaryActionButton.isEnabled = true
+                if success {
+                    MessageHandler.sharedInstance.hideLoadingOverlay()
+                    if !strongSelf.documentModel.documentsWithData().isEmpty {
+                        strongSelf.postDocumentsWithData()
+                    } else {
+                        strongSelf.dismiss(animated: true, completion: nil)
+                    }
+                } else {
+                    MessageHandler.sharedInstance.hideLoadingOverlay()
+                    strongSelf.displayTryAgain(completion: strongSelf.performPrimaryActionForBLRequestMode)
+                }
+            }
+        }
     }
     
     func performPrimaryActionForApplyMode() {
         primaryActionButton.isEnabled = false
-        putDocumentsWithUrls()
-    }
-    
-    func putDocumentsWithUrls() {
         MessageHandler.sharedInstance.showLoadingOverlay(view)
         documentModel.putDocumentsWithRemoteUrls { (success) in
             DispatchQueue.main.async { [weak self] in
@@ -47,7 +64,7 @@ extension F4SAddDocumentsViewController {
                     }
                 } else {
                     MessageHandler.sharedInstance.hideLoadingOverlay()
-                    strongSelf.displayTryAgain(completion: strongSelf.putDocumentsWithUrls)
+                    strongSelf.displayTryAgain(completion: strongSelf.performPrimaryActionForApplyMode)
                 }
             }
         }

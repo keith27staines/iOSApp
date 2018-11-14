@@ -241,9 +241,6 @@ public class F4SDocumentUploadAtBLRequestModel : F4SDocumentUploadModelBase {
     override public var maximumDocumentCount: Int { return documents.count }
     override public func canAddPlaceholder() -> Bool { return false }
     
-    override public func putDocumentsWithRemoteUrls(completion: @escaping (Bool) -> Void ) {
-    }
-    
     @discardableResult
     override public func addDocument(_ document: F4SDocument) -> F4SDocument? { return nil }
     

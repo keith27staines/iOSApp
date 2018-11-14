@@ -133,7 +133,6 @@ class F4SAddDocumentsViewController: UIViewController {
     
     func modeSpecificLoad() {
         switch mode {
-            
         case .applyWorkflow:
             MessageHandler.sharedInstance.showLoadingOverlay(self.view)
             documentModel.fetchDocumentsForPlacement()
