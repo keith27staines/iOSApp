@@ -136,8 +136,8 @@ class MessageContainerViewController: UIViewController {
                     let addDocumentsController = UIStoryboard(name: "DocumentCapture", bundle: nil).instantiateInitialViewController() as? F4SAddDocumentsViewController,
                     let placement = placement, let company = company,
                     let requestModel = F4SBusinessLeadersRequestModel(action: action, placement: placement, company: company) else { return }
-                addDocumentsController.mode = .businessLeaderRequest(requestModel)
                 let navigationController = UINavigationController(rootViewController: addDocumentsController)
+                addDocumentsController.mode = .businessLeaderRequest(requestModel)
                 present(navigationController, animated: true, completion: nil)
                 
             case .viewOffer:

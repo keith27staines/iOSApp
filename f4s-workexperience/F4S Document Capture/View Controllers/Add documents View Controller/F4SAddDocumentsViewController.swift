@@ -162,6 +162,14 @@ class F4SAddDocumentsViewController: UIViewController {
     func applySkin() {
         let skinner = Skinner()
         skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: primaryActionButton)
+        navigationController?.navigationBar.barTintColor = UIColor.white
+        navigationController?.navigationBar.tintColor = UIColor.black
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.shadowImage = UIImage()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
     }
     
     var selectedDocument: F4SDocument? {
