@@ -67,7 +67,6 @@ class PostDocumentsWithDataViewController : UIViewController {
     }
     
     func configureViews() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancel))
         navigationItem.title = "Document upload"
         view.addSubview(stack)
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -107,7 +106,9 @@ class PostDocumentsWithDataViewController : UIViewController {
             delegate?.postDocumentsControllerDidCompleteUpload(self)
             return
         }
-        guard let uploader = F4SDocumentUploader(document: document) else { return }
+        guard let placementUuid = documentModel?.documentService?.placementUuid,
+            let uploader = F4SDocumentUploader(document: document, placementUuid: placementUuid)
+            else { return }
         nameLabel.text = "Uploading \"\(document.name ?? "...")\""
         uploader.delegate = self
         currentUpload = uploader

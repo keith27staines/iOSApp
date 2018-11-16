@@ -78,6 +78,7 @@ public class F4SDocument : Codable {
     }
     
     var isReadyForUpload: Bool {
+        if isUploaded { return false }
         if let realData = data, realData.count > 0 { return true }
         guard let remoteUrlString = remoteUrlString,
             let url = URL(string: remoteUrlString),
@@ -86,6 +87,8 @@ public class F4SDocument : Codable {
         }
         return true
     }
+    
+    var isUploaded: Bool = false
     
     var defaultName: String {
         return "My \(type)"
@@ -182,7 +185,7 @@ public class F4SDocumentUploadModelBase {
     
     public func documentsWithData() -> [F4SDocument] {
         return documents.filter({ (document) -> Bool in
-            return document.data != nil && document.uuid == nil
+            return document.data != nil && document.uuid == nil && document.isUploaded == false
         })
     }
     

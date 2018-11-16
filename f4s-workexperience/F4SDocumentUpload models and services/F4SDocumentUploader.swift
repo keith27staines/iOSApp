@@ -49,9 +49,10 @@ public class F4SDocumentUploader : NSObject {
     public let documentType: F4SUploadableDocumentType
     public let localUrl: URL
     private var task: URLSessionDataTask?
+    public let placementUuid: F4SUUID
     
     public var targetUrl: URL {
-        let urlString = ApiConstants.postDocumentsUrl
+        let urlString = ApiConstants.postDocumentsUrl + "/\(placementUuid)/documents"
         let url = URL(string: urlString)
         return url!
     }
@@ -62,21 +63,43 @@ public class F4SDocumentUploader : NSObject {
         return request
     }()
     
-    public init?(document: F4SDocument) {
+    public init?(document: F4SDocument, placementUuid: F4SUUID) {
         guard
             let localUrlString = document.localUrlString,
             let localUrl = URL(string: localUrlString),
             let documentName = document.name
             else { return nil }
+        self.placementUuid = placementUuid
         self.document = document
         self.documentName = documentName
         self.documentType = document.type
         self.localUrl = localUrl
         self.state = .waiting
         super.init()
-        request.allHTTPHeaderFields = ["Content-Type": "multipart/form-data; boundary=\(boundary)"]
         guard let data = createMultipartData() else { return nil }
-        task = session.uploadTask(with: request, from: data)
+        var headers = F4SDataTaskService.defaultHeaders
+        headers["Content-Type"] = "multipart/form-data; boundary=\(boundary)"
+        headers["Content-Length"] = String(data.count)
+        request.allHTTPHeaderFields = headers
+        request.httpBody = data
+        task = session.dataTask(with: request) { [weak self] (data, response, error) in
+            DispatchQueue.main.async {
+                guard let this = self else { return }
+                if let error = error {
+                    this.state = .failed(error: error)
+                    return
+                }
+                guard let httpResponse = response as? HTTPURLResponse else { return }
+                if let error = F4SNetworkError(response: httpResponse, attempting: "upload document") {
+                    this.state = .failed(error: error)
+                    return
+                }
+                document.isUploaded = true
+                if let data = data {
+                    print("Response from document upload: " + String(data:data, encoding: .utf8)!)
+                }
+            }
+        }
     }
     
     func cancel() {
@@ -105,27 +128,27 @@ public class F4SDocumentUploader : NSObject {
         var dictionary = [String: String]()
         dictionary["doc_type"] = documentType.rawValue
         dictionary["title"] = documentName
-        dictionary["document"] = documentName + ".pdf"
         
         for (key,value) in dictionary {
-            bodyData.append("\(boundary)\r\n")
+            bodyData.append("--\(boundary)\r\n")
             bodyData.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
             bodyData.append("\(value)\r\n")
         }
         
-        bodyData.append("\(boundary)\r\n")
-        bodyData.append("Content-Disposition: form-data; name=\"file\"; filename=\"\(documentName).pdf\"\r\n")
+        bodyData.append("--\(boundary)\r\n")
+        bodyData.append("Content-Disposition: form-data; name=\"document\"; filename=\"\(documentName).pdf\"\r\n")
         bodyData.append("Content-Type: application/pdf\r\n\r\n")
         bodyData.append(fileData)
         bodyData.append("\r\n")
-        bodyData.append("\(boundary)--")
+        bodyData.append("--\(boundary)--")
         return bodyData
     }
     
     func generateBoundary() -> String {
-        return "----Boundary-\(NSUUID().uuidString)"
+        return "Boundary-\(NSUUID().uuidString)"
     }
 }
+
 extension F4SDocumentUploader : URLSessionTaskDelegate, URLSessionDataDelegate {
     
     public func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
