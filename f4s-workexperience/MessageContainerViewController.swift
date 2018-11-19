@@ -21,16 +21,6 @@ class MessageContainerViewController: UIViewController {
     @IBOutlet weak var answersView: UIView!
     @IBOutlet weak var answersHeight: NSLayoutConstraint!
     
-    @IBAction func generateBLRequest(_ sender: Any) {
-        var action = F4SAction()
-        action.actionType = F4SActionType.uploadDocuments
-        let placementArg = F4SActionArgument(argumentName: F4SActionArgumentName.placementUuid, value: [placement!.placementUuid!])
-        let dtArg = F4SActionArgument(argumentName: F4SActionArgumentName.documentType, value: ["cv","other"])
-        action.arguments = [placementArg,dtArg]
-        self.action = action
-        actionButtonTapped(self)
-    }
-    
     @IBAction func unwindToMessageContainer(segue: UIStoryboardSegue) {
     }
     

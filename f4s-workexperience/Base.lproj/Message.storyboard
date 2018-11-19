@@ -50,13 +50,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BNk-Lu-0hl">
-                                <rect key="frame" x="202" y="28" width="142" height="30"/>
-                                <state key="normal" title="Generate BL request"/>
-                                <connections>
-                                    <action selector="generateBLRequest:" destination="sWr-Ud-We1" eventType="touchUpInside" id="1Wg-ur-rOo"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -70,10 +63,8 @@
                             <constraint firstItem="oVP-so-bpy" firstAttribute="top" secondItem="aFI-gC-t8a" secondAttribute="bottom" id="Fd0-de-5ay"/>
                             <constraint firstAttribute="trailing" secondItem="252-qr-zlJ" secondAttribute="trailing" id="HA6-ay-h7s"/>
                             <constraint firstItem="boZ-j2-BHK" firstAttribute="leading" secondItem="Grz-P4-uti" secondAttribute="leadingMargin" id="NXt-nH-eNt"/>
-                            <constraint firstItem="BNk-Lu-0hl" firstAttribute="top" secondItem="sdb-jO-yOt" secondAttribute="bottom" constant="8" id="PMw-12-9EI"/>
                             <constraint firstItem="252-qr-zlJ" firstAttribute="top" secondItem="boZ-j2-BHK" secondAttribute="bottom" constant="8" id="RZA-Do-hqu"/>
                             <constraint firstItem="aFI-gC-t8a" firstAttribute="leading" secondItem="252-qr-zlJ" secondAttribute="leading" id="Sqb-X1-cof"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="BNk-Lu-0hl" secondAttribute="trailing" constant="15" id="VLL-33-JGy"/>
                             <constraint firstAttribute="trailing" secondItem="boZ-j2-BHK" secondAttribute="trailing" constant="20" id="hqH-9d-dgR"/>
                         </constraints>
                     </view>

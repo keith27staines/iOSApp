@@ -131,6 +131,10 @@ class F4SAddDocumentsViewController: UIViewController {
         configureNavigationItems()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        applySkin()
+    }
+    
     func modeSpecificLoad() {
         switch mode {
         case .applyWorkflow:
@@ -162,10 +166,13 @@ class F4SAddDocumentsViewController: UIViewController {
     func applySkin() {
         let skinner = Skinner()
         skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: primaryActionButton)
-        navigationController?.navigationBar.barTintColor = UIColor.white
-        navigationController?.navigationBar.tintColor = UIColor.black
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.shadowImage = UIImage()
+        if let navigationBar = navigationController?.navigationBar {
+            navigationBar.barTintColor = UIColor.white
+            navigationBar.tintColor = UIColor.black
+            navigationBar.isTranslucent = false
+            navigationBar.shadowImage = UIImage()
+        }
+
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
