@@ -84,7 +84,9 @@ public class F4SDocumentUploader : NSObject {
         request.httpBody = data
         task = session.dataTask(with: request) { [weak self] (data, response, error) in
             DispatchQueue.main.async {
-                guard let this = self else { return }
+                guard let this = self else {
+                    return
+                }
                 if let error = error {
                     this.state = .failed(error: error)
                     return
@@ -94,9 +96,11 @@ public class F4SDocumentUploader : NSObject {
                     this.state = .failed(error: error)
                     return
                 }
-                document.isUploaded = true
+
                 if let data = data {
-                    print("Response from document upload: " + String(data:data, encoding: .utf8)!)
+                    print("Document did upload: " + String(data:data, encoding: .utf8)!)
+                    document.isUploaded = true
+                    this.state = .completed
                 }
             }
         }
@@ -163,7 +167,6 @@ extension F4SDocumentUploader : URLSessionTaskDelegate, URLSessionDataDelegate {
         if let error = F4SNetworkError(response: httpResponse, attempting: "upload document") {
             state = .failed(error: error)
         }
-        
     }
     
     public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {

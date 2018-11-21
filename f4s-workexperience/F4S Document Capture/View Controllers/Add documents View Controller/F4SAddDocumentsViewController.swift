@@ -284,7 +284,7 @@ extension F4SAddDocumentsViewController : UITableViewDataSource, UITableViewDele
         switch mode {
         case .applyWorkflow:
             cell.textLabel?.text = document.defaultName
-            accessoryImageView.image = document.isReadyForUpload ? dotImage : nil
+            accessoryImageView.image = shouldDisplayMenuForDocument(document) ? dotImage : nil
             cell.accessoryView = accessoryImageView
         case .businessLeaderRequest:
             cell.textLabel?.text = document.defaultName
@@ -293,10 +293,14 @@ extension F4SAddDocumentsViewController : UITableViewDataSource, UITableViewDele
         }
     }
     
+    func shouldDisplayMenuForDocument(_ document: F4SDocument) -> Bool {
+        return document.data != nil || document.isViewableOnUrl
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndexPath = indexPath
         guard let cell = tableView.cellForRow(at: indexPath), let selectedDocument = selectedDocument else { return }
-        if selectedDocument.isReadyForUpload {
+        if shouldDisplayMenuForDocument(selectedDocument) {
             let popupCenter = CGPoint(x: cell.frame.origin.x + cell.frame.size.width - popupCellMenu.frame.size.width / 2.0 - 4, y: 0)
             popupCellMenu.isHidden = true
             popupCellMenu.center = cell.convert(popupCenter, to: view)

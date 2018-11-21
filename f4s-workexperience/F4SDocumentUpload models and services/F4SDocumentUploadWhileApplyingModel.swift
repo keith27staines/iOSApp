@@ -46,15 +46,34 @@ public class F4SDocument : Codable {
     /// the remote url of the document
     public var remoteUrlString: String?
     
-    /// The url string (can be remote or local) defining where the document can be viewed
-    var viewableUrlString: String? {
-        return remoteUrlString ?? localUrlString
+    public var documentServerUrlString: String?
+    
+    public var viewableUrlString: String? {
+        if isOptionalUrlStringOpenable(documentServerUrlString) { return documentServerUrlString}
+        if isOptionalUrlStringOpenable(remoteUrlString) { return remoteUrlString }
+        if isOptionalUrlStringOpenable(localUrlString) { return localUrlString }
+        return nil
     }
     
-    /// The url where the document can be viewed
+    
+    /// The url where the document can be viewed (might be local, might be remote)
     var viewableUrl: URL? {
         guard let urlString = viewableUrlString else { return nil }
         return URL(string: urlString)
+    }
+
+    private func isOptionalUrlStringOpenable(_ urlString: String?) -> Bool {
+        guard
+            let string = urlString,
+            string.isEmpty == false,
+            let url = URL(string: string),
+            UIApplication.shared.canOpenURL(url) else { return false }
+        return true
+    }
+
+    var isViewableOnUrl: Bool {
+        guard let url = viewableUrl, UIApplication.shared.canOpenURL(url) else { return false }
+        return true
     }
     
     public var type: F4SUploadableDocumentType = .other
@@ -120,6 +139,7 @@ public class F4SDocument : Codable {
 extension F4SDocument {
     private enum CodingKeys: String, CodingKey {
         case uuid = "uuid"
+        case documentServerUrlString = "document"
         case remoteUrlString = "url"
         case type = "doc_type"
         case name = "title"

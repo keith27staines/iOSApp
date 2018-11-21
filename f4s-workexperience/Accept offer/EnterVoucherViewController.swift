@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MessageUI
 
-class EnterVoucherViewController: UIViewController {
+class EnterVoucherViewController: UIViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var companyNameLabel: UILabel!
@@ -27,6 +28,28 @@ class EnterVoucherViewController: UIViewController {
     
     @IBAction func acceptButtonTapped(_ sender: Any) {
         addConfirmView()
+    }
+    
+    @IBAction func getVoucherTapped(_ sender: Any) {
+        let email: String = "community@workfinder.com"
+        guard MFMailComposeViewController.canSendMail() else {
+            let alert = UIAlertController(title: "Get voucher", message: "Please send an email requesting vouchers to", preferredStyle: .actionSheet)
+            let doneAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(doneAction)
+            return
+        }
+        let composeVC = MFMailComposeViewController()
+        composeVC.mailComposeDelegate = self
+        // Configure the fields of the interface.
+        composeVC.setToRecipients([email])
+        composeVC.setSubject("Voucher")
+        composeVC.setMessageBody("", isHTML: false)
+        // Present the view controller modally.
+        self.present(composeVC, animated: true, completion: nil)
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
     
     func addConfirmView() {
