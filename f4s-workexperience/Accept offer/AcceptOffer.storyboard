@@ -513,7 +513,7 @@
                                         <rect key="frame" x="40" y="140" width="295" height="40"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="alphabet" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In order to finalise this placement a voucher is needed" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Is-KB-X0X">
                                         <rect key="frame" x="20" y="20" width="335" height="69"/>
@@ -557,7 +557,7 @@
                                     <constraint firstAttribute="bottom" secondItem="VNC-2H-4XU" secondAttribute="bottom" priority="750" constant="113.5" id="zER-Xe-Ddl"/>
                                 </constraints>
                             </scrollView>
-                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="B0c-Aj-dZQ">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="B0c-Aj-dZQ">
                                 <rect key="frame" x="32" y="634.5" width="240" height="20.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Don't have a voucher?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="peZ-JF-T4O">
