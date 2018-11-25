@@ -23,6 +23,9 @@
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="252-qr-zlJ">
                                 <rect key="frame" x="0.0" y="66" width="375" height="517"/>
+                                <connections>
+                                    <segue destination="ULJ-o2-xqB" kind="embed" identifier="toMessage" id="1Sc-Yd-Snq"/>
+                                </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aFI-gC-t8a">
                                 <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
@@ -99,14 +102,14 @@
                         <viewControllerLayoutGuide type="bottom" id="3bt-3k-P0C"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="fcK-Sf-bdh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="517"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NtM-2x-RNk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1311" y="821"/>
+            <point key="canvasLocation" x="-1311" y="913"/>
         </scene>
     </scenes>
 </document>
