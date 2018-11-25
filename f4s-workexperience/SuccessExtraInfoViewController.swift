@@ -46,7 +46,14 @@ extension SuccessExtraInfoViewController {
     }
 
     func getHeight() -> CGFloat {
-        let sum = 30 + 90 + 35 + self.successLabel.bounds.height + 30 + self.infoLabel.bounds.height + 39 + self.timelineButton.bounds.height + 30 + 30
+        var sum: CGFloat = 30 + 90 + 35
+        sum += self.successLabel.bounds.height
+        sum += 30
+        sum += self.infoLabel.bounds.height
+        sum += 39
+        sum += self.timelineButton.bounds.height
+        sum += 30 + 30
+//        let sum = 30 + 90 + 35 + self.successLabel.bounds.height + 30 + self.infoLabel.bounds.height + 39 + self.timelineButton.bounds.height + 30 + 30
         return sum
     }
 }

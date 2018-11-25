@@ -35,6 +35,31 @@ extension F4SMessage {
     }
 }
 
+extension F4SMessage : MessageProtocol {
+    
+    public var senderId: String {
+        return sender ?? "unknown sender"
+    }
+    
+    public var sentDate: Date? {
+        return dateTime
+    }
+    
+    public var receivedDate: Date? {
+        return dateTime
+    }
+    
+    public var readDate: Date? {
+        return nil
+    }
+    
+    public var text: String? {
+        return content
+    }
+    
+    
+}
+
 public struct F4SMessagesList : Codable {
     public var count: Int
     public var messages: [F4SMessage]

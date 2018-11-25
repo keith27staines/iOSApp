@@ -8,6 +8,7 @@
 
 import UIKit
 import Reachability
+import MapKit
 
 class CompanyDetailsViewController: UIViewController {
     
@@ -17,7 +18,6 @@ class CompanyDetailsViewController: UIViewController {
     
     var createShortlistService: F4SCreateShortlistItemServiceProtocol? = nil
     var removeShortlistService: F4SRemoveShortlistItemServiceProtocol? = nil
-    
     @IBOutlet weak var mapButton: UIBarButtonItem!
     @IBOutlet weak var closeButton: UIBarButtonItem!
     @IBOutlet weak var mapView: MKMapView!
