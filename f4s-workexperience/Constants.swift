@@ -29,7 +29,7 @@ struct Colors {
     static let orangeActive = 0xFFC35F
     static let lightGreen = 0x45C658
     static let messageIncoming = 0xEAEAEA
-    static let messageOutgoing = 0xE1FFC7 // 0x40AF50
+    static let messageOutgoing = 0xE1FFC7
     static let messageOutgoingText = 0x000000
     static let messageIncomingText = 0x000000
     static let messageIncomingLink = 0x4A90E2

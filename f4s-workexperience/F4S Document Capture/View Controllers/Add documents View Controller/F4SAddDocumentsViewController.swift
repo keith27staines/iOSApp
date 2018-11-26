@@ -149,6 +149,12 @@ class F4SAddDocumentsViewController: UIViewController {
         let infoImage = #imageLiteral(resourceName: "infoIcon")
         let infoItem = UIBarButtonItem(image: infoImage, style: .plain, target: self, action: #selector(handleInfoTap))
         navigationItem.rightBarButtonItem = infoItem
+        let closeButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancelTap))
+        navigationItem.leftBarButtonItem = closeButton
+    }
+    
+    @objc func handleCancelTap() {
+        dismiss(animated: true, completion: nil)
     }
     
     @objc func handleInfoTap() {

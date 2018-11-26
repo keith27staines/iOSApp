@@ -239,7 +239,8 @@ class MessageContainerViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let segueName: String = segue.identifier!
         if segueName == "toMessage" {
-            self.messageController = segue.destination as? MessageViewController
+            messageController = segue.destination as! MessageViewController
+            configureMessageController()
             return
         }
         if segueName == "view_offer" {
@@ -248,6 +249,14 @@ class MessageContainerViewController: UIViewController {
             }
             vc.accept = acceptContext
         }
+    }
+    
+    func configureMessageController() {
+        messageController?.outgoingMessageTextColor = UIColor.blue
+        messageController?.outgoingMessageBackgroundColor = UIColor(netHex: Colors.messageOutgoing)
+        messageController?.outgoingMessageTextColor = UIColor(netHex:Colors.messageOutgoingText)
+        messageController?.incomingMessageBackgroundColor = UIColor(netHex:Colors.messageIncoming)
+        messageController?.incomingMessageTextColor = UIColor(netHex:Colors.messageIncomingText)
     }
 }
 
