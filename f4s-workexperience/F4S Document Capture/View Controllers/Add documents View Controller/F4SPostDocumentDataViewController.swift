@@ -57,8 +57,14 @@ class PostDocumentsWithDataViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViews()
-        uploadNextDocument()
         applyStyle()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        DispatchQueue.main.async { [weak self] in
+            self?.uploadNextDocument()
+        }
     }
     
     func applyStyle() {
@@ -123,10 +129,6 @@ class PostDocumentsWithDataViewController : UIViewController {
         uploader.delegate = self
         currentUpload = uploader
         uploader.resume()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
     }
     
     override func loadView() {

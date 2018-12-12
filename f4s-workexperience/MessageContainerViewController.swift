@@ -239,7 +239,7 @@ class MessageContainerViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let segueName: String = segue.identifier!
         if segueName == "toMessage" {
-            messageController = segue.destination as! MessageViewController
+            messageController = (segue.destination as! MessageViewController)
             configureMessageController()
             return
         }
