@@ -51,8 +51,7 @@ public class F4SDocument : Codable {
     public var viewableUrlString: String? {
         if isOptionalUrlStringOpenable(documentServerUrlString) { return documentServerUrlString}
         if isOptionalUrlStringOpenable(remoteUrlString) { return remoteUrlString }
-        if isOptionalUrlStringOpenable(localUrlString) { return localUrlString }
-        return nil
+        return localUrlString // local url will be viewable if it exists
     }
     
     

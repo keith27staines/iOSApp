@@ -96,6 +96,15 @@ class PostDocumentsWithDataViewController : UIViewController {
         delegate?.postDocumentsControllerDidCancel(self)
     }
     
+    lazy var numberToUpload: Int = {
+       return documentModel?.documentsWithData().count ?? 0
+    }()
+    var numberUploaded = 0
+    
+    func updateUploadCount() {
+        title = "Upload \(numberUploaded+1)/\(numberToUpload)"
+    }
+    
     @objc func uploadNextDocument() {
         retryButton.isHidden = true
         guard cancelled == false else {
@@ -109,6 +118,7 @@ class PostDocumentsWithDataViewController : UIViewController {
         guard let placementUuid = documentModel?.documentService?.placementUuid,
             let uploader = F4SDocumentUploader(document: document, placementUuid: placementUuid)
             else { return }
+        updateUploadCount()
         nameLabel.text = "Uploading \"\(document.name ?? "...")\""
         uploader.delegate = self
         currentUpload = uploader
@@ -127,7 +137,7 @@ class PostDocumentsWithDataViewController : UIViewController {
 
 extension PostDocumentsWithDataViewController : F4SDocumentUploaderDelegate {
     func documentUploader(_ uploader: F4SDocumentUploader, didChangeState state: F4SDocumentUploader.State) {
-        retryButton.isHidden = false
+        retryButton.isHidden = true
         switch uploader.state {
         case .waiting:
             stateLabel.text = "Waiting for connection"
@@ -136,6 +146,7 @@ extension PostDocumentsWithDataViewController : F4SDocumentUploaderDelegate {
             stateLabel.text = "\(Int(fraction * 100))%"
         case .completed:
             stateLabel.text = "Document uploaded"
+            numberUploaded += 1
             uploadNextDocument()
         case .cancelled:
             progressBar.progress = 0
