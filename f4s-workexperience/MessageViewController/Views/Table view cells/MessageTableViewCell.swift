@@ -64,7 +64,7 @@ class IncomingMessageTableViewCell: MessageTableViewCell {
             leading: contentView.leadingAnchor,
             bottom: contentView.bottomAnchor,
             trailing: nil,
-            padding: UIEdgeInsets(top: 20, left: 4, bottom: 0, right: 0),
+            padding: UIEdgeInsets(top: 20, left: 16, bottom: 0, right: 0),
             size: CGSize.zero)
         labelContainer.widthAnchor.constraint(
             lessThanOrEqualTo: contentView.widthAnchor,
@@ -88,7 +88,7 @@ class OutgoingMessageTableViewCell: MessageTableViewCell {
             top: contentView.topAnchor,
             leading: nil, bottom: contentView.bottomAnchor,
             trailing: contentView.trailingAnchor,
-            padding: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 4),
+            padding: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 16),
             size: CGSize.zero)
         labelContainer.widthAnchor.constraint(
             lessThanOrEqualTo: contentView.widthAnchor,
