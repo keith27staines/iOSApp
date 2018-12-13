@@ -16,6 +16,15 @@ class MessageTableViewCell: UITableViewCell {
         return label
     }()
     
+    fileprivate lazy var dateLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = UIColor.white
+        label.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "sent date"
+        return label
+    }()
+    
     fileprivate lazy var labelContainer: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 8
@@ -32,8 +41,16 @@ class MessageTableViewCell: UITableViewCell {
         return view
     }()
     
+    static var dateFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.dateStyle = .medium
+        df.timeStyle = .short
+        return df
+    }()
+    
     func configureWith(_ message: MessageProtocol) {
         label.text = message.text
+        dateLabel.text = MessageTableViewCell.dateFormatter.string(from: message.dateToOrderBy)
     }
     
     func configureWith(backgroundColor: UIColor, textColor: UIColor) {
@@ -45,6 +62,7 @@ class MessageTableViewCell: UITableViewCell {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         let contentView = self.contentView
         contentView.addSubview(labelContainer)
+        contentView.addSubview(dateLabel)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -62,7 +80,7 @@ class IncomingMessageTableViewCell: MessageTableViewCell {
         labelContainer.anchor(
             top: contentView.topAnchor,
             leading: contentView.leadingAnchor,
-            bottom: contentView.bottomAnchor,
+            bottom: dateLabel.topAnchor,
             trailing: nil,
             padding: UIEdgeInsets(top: 20, left: 16, bottom: 0, right: 0),
             size: CGSize.zero)
@@ -70,6 +88,8 @@ class IncomingMessageTableViewCell: MessageTableViewCell {
             lessThanOrEqualTo: contentView.widthAnchor,
             multiplier: 0.66)
             .isActive = true
+        dateLabel.anchor(top: nil, leading: labelContainer.leadingAnchor, bottom: contentView.bottomAnchor, trailing: nil)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -86,7 +106,8 @@ class OutgoingMessageTableViewCell: MessageTableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         labelContainer.anchor(
             top: contentView.topAnchor,
-            leading: nil, bottom: contentView.bottomAnchor,
+            leading: nil,
+            bottom: dateLabel.topAnchor,
             trailing: contentView.trailingAnchor,
             padding: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 16),
             size: CGSize.zero)
@@ -94,6 +115,7 @@ class OutgoingMessageTableViewCell: MessageTableViewCell {
             lessThanOrEqualTo: contentView.widthAnchor,
             multiplier: 0.66)
             .isActive = true
+        dateLabel.anchor(top: nil, leading: nil, bottom: contentView.bottomAnchor, trailing: labelContainer.trailingAnchor)
     }
     
     required init?(coder aDecoder: NSCoder) {
