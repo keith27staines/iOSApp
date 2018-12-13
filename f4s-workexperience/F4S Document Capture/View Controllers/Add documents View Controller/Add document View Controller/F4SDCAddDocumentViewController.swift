@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVKit
 
 protocol F4SDCAddDocumentViewControllerDelegate : class {
     func didAddDocument(_ document: F4SDocument)

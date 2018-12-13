@@ -149,6 +149,12 @@ class F4SAddDocumentsViewController: UIViewController {
         let infoImage = #imageLiteral(resourceName: "infoIcon")
         let infoItem = UIBarButtonItem(image: infoImage, style: .plain, target: self, action: #selector(handleInfoTap))
         navigationItem.rightBarButtonItem = infoItem
+        let closeButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancelTap))
+        navigationItem.leftBarButtonItem = closeButton
+    }
+    
+    @objc func handleCancelTap() {
+        dismiss(animated: true, completion: nil)
     }
     
     @objc func handleInfoTap() {
@@ -327,19 +333,25 @@ extension F4SAddDocumentsViewController : F4SDCPopupMenuViewDelegate {
         case 1:
             // delete
             hidePopopMenu()
-            switch mode {
-            case .applyWorkflow:
-                documentModel.deleteDocument(indexPath: cellIndexPath)
-                tableView.deleteRows(at: [cellIndexPath], with: .automatic)
-                addDocumentButton.isEnabled = true
-            case .businessLeaderRequest:
-                let type = documentModel.document(cellIndexPath).type
-                let clearedPlaceholderDocument = F4SDocument(type: type)
-                documentModel.setDocument(clearedPlaceholderDocument, at: cellIndexPath)
-                tableView.reloadRows(at: [cellIndexPath], with: .automatic)
+            let alert = UIAlertController(title: "Delete Document", message: "Are you sure you want to delete this document?", preferredStyle: .actionSheet)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [unowned self] (_) in
+                switch self.mode {
+                case .applyWorkflow:
+                    self.documentModel.deleteDocument(indexPath: cellIndexPath)
+                    self.tableView.deleteRows(at: [cellIndexPath], with: .automatic)
+                    self.addDocumentButton.isEnabled = true
+                case .businessLeaderRequest:
+                    let type = self.documentModel.document(cellIndexPath).type
+                    let clearedPlaceholderDocument = F4SDocument(type: type)
+                    self.documentModel.setDocument(clearedPlaceholderDocument, at: cellIndexPath)
+                    self.tableView.reloadRows(at: [cellIndexPath], with: .automatic)
+                }
             }
+            alert.addAction(cancelAction)
+            alert.addAction(deleteAction)
+            present(alert, animated: true, completion: nil)
 
-            break
         case 2:
             // Close menu
             hidePopopMenu()

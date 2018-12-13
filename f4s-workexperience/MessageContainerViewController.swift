@@ -239,7 +239,8 @@ class MessageContainerViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let segueName: String = segue.identifier!
         if segueName == "toMessage" {
-            self.messageController = segue.destination as? MessageViewController
+            messageController = (segue.destination as! MessageViewController)
+            configureMessageController()
             return
         }
         if segueName == "view_offer" {
@@ -249,13 +250,21 @@ class MessageContainerViewController: UIViewController {
             vc.accept = acceptContext
         }
     }
+    
+    func configureMessageController() {
+        messageController?.outgoingMessageTextColor = UIColor.blue
+        messageController?.outgoingMessageBackgroundColor = UIColor(netHex: Colors.messageOutgoing)
+        messageController?.outgoingMessageTextColor = UIColor(netHex:Colors.messageOutgoingText)
+        messageController?.incomingMessageBackgroundColor = UIColor(netHex:Colors.messageIncoming)
+        messageController?.incomingMessageTextColor = UIColor(netHex:Colors.messageIncomingText)
+    }
 }
 
 extension MessageContainerViewController {
 
     func loadChatData() {
-        // Note that following != nil check is not directly against action but against actionType. This is because the api returns an action structure with all fields set to null when there is no data
-        actionButtonHeightConstraint.constant = 0
+         actionButtonHeightConstraint.constant = 0
+        // Note that the following `action?.actionType != nil` check is not directly against action but against actionType for a good reason. The api returns an action structure with all fields set to null when there is no data
         if action?.actionType != nil {
             actionButtonHeightConstraint.constant = 60
             UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: { [weak self] in
@@ -263,7 +272,7 @@ extension MessageContainerViewController {
             }) { [weak self] (success) in
                 self?.actionButton.isEnabled = true
             }
-            self.messageController?.loadChatData(messageList: self.messageList)
+            self.messageController?.reloadWithMessages(outgoingSenderId: currentUserUuid, messages: self.messageList)
             return
         }
         
@@ -279,7 +288,7 @@ extension MessageContainerViewController {
             self.answersHeight.constant = 0
             self.view.layoutIfNeeded()
         }
-        self.messageController?.loadChatData(messageList: self.messageList)
+        self.messageController?.reloadWithMessages(outgoingSenderId: currentUserUuid, messages: self.messageList)
     }
     
     func addAnswersView() {
@@ -304,9 +313,8 @@ extension MessageContainerViewController {
                     guard let strongSelf = self else { return }
                     isDoneGet = true
                     if let lastMessage = messageList.messages.last {
-                        strongSelf.messageController?.didAnswer(message: lastMessage)
                         strongSelf.messageList.append(lastMessage)
-                        strongSelf.messageController?.addMessage(message: lastMessage)
+                        strongSelf.messageController?.insertMessage(lastMessage)
                     }
                     if isDoneRemove && isDoneGet {
                         strongSelf.cannedResponses = nil
@@ -338,7 +346,6 @@ extension MessageContainerViewController {
 extension MessageContainerViewController {
     func setNavigationBar() {
         let showCompanyButton = UIBarButtonItem(title: NSLocalizedString("Company", comment: "Title of a button that links to a company info page"), style: UIBarButtonItem.Style.done, target: self, action: #selector(showCompanyDetailsView))
-        //let showCompanyButton = UIBarButtonItem(image: UIImage(named: "information")?.withRenderingMode(.alwaysTemplate), style: UIBarButtonItemStyle.done, target: self, action: #selector(showCompanyDetailsView))
         navigationItem.rightBarButtonItem = showCompanyButton
         navigationItem.title = "Messages"
         styleNavigationController()
