@@ -36,25 +36,31 @@ class ExtraInfoViewController: UIViewController {
     @IBOutlet weak var infoStackViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var completionImageView: UIImageView!
     
+    @IBOutlet weak var userInfoStackView: UIStackView!
     @IBOutlet weak var dobTextField: UITextField!
     @IBOutlet weak var dobInfoLabel: UILabel!
     @IBOutlet weak var dobUnderlineView: UIView!
     @IBOutlet weak var completeExtraInfoButton: UIButton!
-    @IBOutlet weak var userInfoStackView: UIStackView!
+
     
+    @IBOutlet weak var parentEmailStackView: UIStackView!
+    @IBOutlet weak var parentEmailTextField: NextResponderTextField!
+    @IBOutlet weak var parentEmailUnderlineView: UIView!
+    
+    @IBOutlet weak var emailStackView: UIStackView!
     @IBOutlet weak var emailTextField: NextResponderTextField!
     @IBOutlet weak var emailUnderlineView: UIView!
-    @IBOutlet weak var emailStackView: UIStackView!
     
+    @IBOutlet weak var firstAndLastNameStackView: UIStackView!
     @IBOutlet weak var firstAndLastNameTextField: NextResponderTextField!
     @IBOutlet weak var firstAndLastNameUnderlineView: UIView!
-    @IBOutlet weak var firstAndLastNameStackView: UIStackView!
     
+    @IBOutlet weak var voucherCodeStackView: UIStackView!
     @IBOutlet weak var voucherCodeTextField: NextResponderTextField!
     @IBOutlet weak var voucherCodeUnderlineView: UIView!
-    @IBOutlet weak var voucherCodeStackView: UIStackView!
-    
     @IBOutlet weak var noVoucherInfoLabel: UILabel!
+    
+    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     
@@ -68,10 +74,16 @@ class ExtraInfoViewController: UIViewController {
     
     lazy var dateOfBirthFormatter: DateFormatter = {
        let df = DateFormatter()
-        df.dateFormat = "d MMMM yyyy" // "dd' 'MM' 'yyyy" //"yyyy'-'MM'-'dd'"
-        //df.dateStyle = .medium
+        df.dateFormat = "d MMMM yyyy"
         return df
     }()
+    
+    var isParentEmailOkay: Bool {
+        let age = getUserAge()
+        if age < 13 { return false }
+        if age >= 16 { return true }
+        return (parentEmailTextField.text ?? "").isEmail()
+    }
     
     var isEmailOkay: Bool {
         guard let emailAddress = emailTextField.text else {
@@ -92,11 +104,6 @@ class ExtraInfoViewController: UIViewController {
         }
         return voucherText.isEmpty || (voucherText.isVoucherCode() && voucherText.count == 6)
     }
-    
-//    lazy var documentUploadController: DocumentUrlViewController = {
-//        let storyboard = UIStoryboard(name: "DocumentUrl", bundle: nil)
-//        return storyboard.instantiateInitialViewController() as! DocumentUrlViewController
-//    }()
     
     lazy var f4sDocumentUploadController: F4SAddDocumentsViewController = {
         let storyboard = UIStoryboard(name: "DocumentCapture", bundle: nil)
@@ -205,6 +212,7 @@ extension ExtraInfoViewController {
         
         updateDOBValidityUnderlining()
         self.emailUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
+        parentEmailUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
         self.firstAndLastNameUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
         self.voucherCodeUnderlineView.backgroundColor = UIColor(netHex: Colors.warmGrey)
         self.voucherCodeStackView.isHidden = false
@@ -213,8 +221,8 @@ extension ExtraInfoViewController {
     func setupLabels() {
         let dobInfoString1 = NSLocalizedString("When were you born? And ", comment: "")
         let dobInfoString2 = NSLocalizedString("why do we need to know?", comment: "")
-        let voucherString1 = "" //NSLocalizedString("If you don’t have a voucher code ", comment: "")
-        let voucherString2 = "" //NSLocalizedString("tap here", comment: "")
+        let voucherString1 = ""
+        let voucherString2 = ""
         
         let infoAttributes = [
             NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.warmGrey),
@@ -310,24 +318,26 @@ extension ExtraInfoViewController {
     
     func displayUserInfoIfExists() {
         if let user = UserInfoDBOperations.sharedInstance.getUserInfo() {
-            self.infoStackViewTopConstraint.constant = 49
-            self.userInfoStackView.isHidden = false
-            self.noVoucherInfoLabel.isHidden = false
+            infoStackViewTopConstraint.constant = 49
+            userInfoStackView.isHidden = false
+            noVoucherInfoLabel.isHidden = false
             scrollView.isScrollEnabled = true
             if let dob = user.dateOfBirth {
-                self.dobTextField.text = dateOfBirthFormatter.string(from: dob)
+                dobTextField.text = dateOfBirthFormatter.string(from: dob)
             } else {
-                self.dobTextField.text = ""
+                dobTextField.text = ""
             }
-            self.emailTextField.text = user.email
-            self.firstAndLastNameTextField.text = user.firstName + " " + (user.lastName ?? "")
+            parentEmailTextField.text = user.consenterEmail
+        
+            emailTextField.text = user.email
+            firstAndLastNameTextField.text = user.firstName + " " + (user.lastName ?? "")
             
-            self.emailUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
-            self.firstAndLastNameUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
+            emailUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
+            firstAndLastNameUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
         } else {
-            self.userInfoStackView.isHidden = true
-            self.noVoucherInfoLabel.isHidden = true
-            self.scrollView.isScrollEnabled = false
+            userInfoStackView.isHidden = true
+            noVoucherInfoLabel.isHidden = true
+            scrollView.isScrollEnabled = false
             let screenHeight = self.view.bounds.height
             let infoLabelY = self.dobInfoLabel.frame.maxY
             let stackViewHeight = self.userInfoStackView.bounds.height
@@ -347,10 +357,7 @@ extension ExtraInfoViewController {
     }
     
     func checkIfAllFieldsAreValid() -> Bool {
-        guard getUserAge() >= 13 else {
-            return false
-        }
-        return isEmailOkay && isNameOkay && isVoucherOkay
+        return isParentEmailOkay && isEmailOkay && isNameOkay && isVoucherOkay
     }
     
     func getPlacementUuid() -> String {
@@ -382,20 +389,23 @@ extension ExtraInfoViewController {
                 user.lastName = nil
             }
         }
+        user.consenterEmail = parentEmailTextField.text
         user.placementUuid = getPlacementUuid()
         applicationContext?.user = user
         return user
     }
     
     func updateButtonStateAndImage() {
-        if self.getUserAge() < 13 {
+        let age = getUserAge()
+        if age < 13 {
             self.toYoungStackView.isHidden = false
             self.userInfoStackView.isHidden = true
         } else {
             self.toYoungStackView.isHidden = true
             self.userInfoStackView.isHidden = false
+            parentEmailStackView.isHidden = age >= 16
         }
-        
+        parentEmailUnderlineView.backgroundColor = isParentEmailOkay ? UIColor(netHex: Colors.mediumGreen) : UIColor(netHex: Colors.orangeYellow)
         emailUnderlineView.backgroundColor = isEmailOkay ? UIColor(netHex: Colors.mediumGreen) : UIColor(netHex: Colors.orangeYellow)
         
         firstAndLastNameUnderlineView.backgroundColor = isNameOkay ? UIColor(netHex: Colors.mediumGreen) : UIColor(netHex: Colors.orangeYellow)

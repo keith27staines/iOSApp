@@ -815,16 +815,9 @@
 			isa = PBXGroup;
 			children = (
 				405974041DFD44660002DB3A /* ExtraInfo.storyboard */,
-				40A28CC01E24ED0D0077D490 /* SuccessExtraInfo.storyboard */,
-			);
-			name = ExtraInfo;
-			sourceTree = "<group>";
-		};
-		405974031DFD44350002DB3A /* ExtraInfo */ = {
-			isa = PBXGroup;
-			children = (
 				405974071DFD449C0002DB3A /* ExtraInfoViewController.swift */,
 				40A28CBE1E24ECE90077D490 /* SuccessExtraInfoViewController.swift */,
+				40A28CC01E24ED0D0077D490 /* SuccessExtraInfo.storyboard */,
 			);
 			name = ExtraInfo;
 			sourceTree = "<group>";
@@ -1085,7 +1078,6 @@
 				204203F11E4B78AC007C7409 /* Favourite */,
 				40A28CB41E1F96940077D490 /* RatePlacement */,
 				401634C51E0A9F2C000161FA /* Notification */,
-				405974031DFD44350002DB3A /* ExtraInfo */,
 				D51EE9301DF99256008A8A4F /* ContentWebView */,
 				D5E9EC041DE488E000BD796E /* CoverLetter */,
 				D5E9EBF61DDA187700BD796E /* CompanyDetails */,
