@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -26,17 +25,17 @@
                                 <rect key="frame" x="0.0" y="20" width="414" height="829"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hz8-hB-HzJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="759.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="776.5"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yellowQuestionMark" translatesAutoresizingMaskIntoConstraints="NO" id="S8V-te-S2l">
-                                                <rect key="frame" x="162" y="60" width="90" height="90"/>
+                                                <rect key="frame" x="162" y="40" width="90" height="90"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="90" id="Uc8-MO-f2n"/>
                                                     <constraint firstAttribute="height" constant="90" id="ql7-IP-oWW"/>
                                                 </constraints>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Date of Birth" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VA6-BR-IJV">
-                                                <rect key="frame" x="30" y="200" width="354" height="21"/>
+                                                <rect key="frame" x="30" y="180" width="354" height="21"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -45,39 +44,40 @@
                                                 </connections>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SnL-sW-mx6">
-                                                <rect key="frame" x="30" y="230" width="354" height="1"/>
+                                                <rect key="frame" x="30" y="210" width="354" height="1"/>
                                                 <color key="backgroundColor" red="0.86666666670000003" green="0.52941176469999995" blue="0.031372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="hel-BI-zr3"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VbZ-62-oPU">
-                                                <rect key="frame" x="30" y="241" width="351" height="47"/>
+                                                <rect key="frame" x="30" y="221" width="351" height="47"/>
                                                 <string key="text">We need to check your age to see if legally you need consent from your  parent, guardian, or teacher to accept the work placement offer.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="74" translatesAutoresizingMaskIntoConstraints="NO" id="NrJ-np-QPp">
-                                                <rect key="frame" x="30" y="337" width="354" height="402.5"/>
+                                                <rect key="frame" x="30" y="317.5" width="354" height="439"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZwU-Av-rFq">
-                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="402.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="439"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ocK-RI-4cq">
-                                                                <rect key="frame" x="0.0" y="0.0" width="354" height="175.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="354" height="132"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F3c-Y7-Bog">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="125.5"/>
-                                                                        <string key="text">We're very sorry, you need to be over 13 years old to use Workfinder.
-
-However, we suggest you ask your teacher or parent to  invite a business person to give a talk in your school class. Tell them to go to www.founders4schools.org.uk</string>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="72"/>
+                                                                        <string key="text">We're very sorry, you need to be over 13 years old. We suggest you ask your teacher or parent to invite a business person to give a talk in your school class by visiting www.founders4schools.org.uk</string>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mmt-pu-8QK">
-                                                                        <rect key="frame" x="0.0" y="145.5" width="354" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="92" width="354" height="40"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" priority="750" constant="40" id="yZt-yi-JCf"/>
+                                                                        </constraints>
                                                                         <state key="normal" title="Explore more companies"/>
                                                                         <connections>
                                                                             <action selector="exploreMoreCompanies:" destination="6fi-A3-veq" eventType="touchUpInside" id="UQe-QU-tpY"/>
@@ -86,12 +86,38 @@ However, we suggest you ask your teacher or parent to  invite a business person 
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="49" translatesAutoresizingMaskIntoConstraints="NO" id="DIV-QA-nEC">
-                                                                <rect key="frame" x="0.0" y="185.5" width="354" height="191"/>
+                                                                <rect key="frame" x="0.0" y="142" width="354" height="271"/>
                                                                 <subviews>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="7iB-P1-4An">
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="y33-By-Vkx" userLabel="Parent email">
                                                                         <rect key="frame" x="0.0" y="0.0" width="354" height="31"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ay3-HG-rFT" customClass="NextResponderTextField" customModule="f4s_workexperience" customModuleProvider="target">
+                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Parent or guardian Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IZi-FU-235" customClass="NextResponderTextField" customModule="f4s_workexperience" customModuleProvider="target">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="354" height="21"/>
+                                                                                <nil key="textColor"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="username"/>
+                                                                                <connections>
+                                                                                    <action selector="emailTextFieldDidChange:" destination="6fi-A3-veq" eventType="editingChanged" id="7DL-MF-D0Y"/>
+                                                                                    <outlet property="delegate" destination="6fi-A3-veq" id="z9f-bD-g1H"/>
+                                                                                    <outlet property="nextResponderField" destination="Ay3-HG-rFT" id="Cxx-7v-Irq"/>
+                                                                                </connections>
+                                                                            </textField>
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GO6-le-PT5">
+                                                                                <rect key="frame" x="0.0" y="30" width="354" height="1"/>
+                                                                                <color key="backgroundColor" red="0.86666666670000003" green="0.52941176469999995" blue="0.031372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="1" id="1AK-Zc-r5J"/>
+                                                                                </constraints>
+                                                                            </view>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="IZi-FU-235" firstAttribute="width" secondItem="GO6-le-PT5" secondAttribute="width" id="vOs-Hh-IVk"/>
+                                                                        </constraints>
+                                                                    </stackView>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="7iB-P1-4An">
+                                                                        <rect key="frame" x="0.0" y="80" width="354" height="31"/>
+                                                                        <subviews>
+                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ay3-HG-rFT" customClass="NextResponderTextField" customModule="f4s_workexperience" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="21"/>
                                                                                 <nil key="textColor"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -115,7 +141,7 @@ However, we suggest you ask your teacher or parent to  invite a business person 
                                                                         </constraints>
                                                                     </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="SDq-DG-ayv">
-                                                                        <rect key="frame" x="0.0" y="80" width="354" height="31"/>
+                                                                        <rect key="frame" x="0.0" y="160" width="354" height="31"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First and Last Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tuk-dL-J6F" customClass="NextResponderTextField" customModule="f4s_workexperience" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="21"/>
@@ -140,7 +166,7 @@ However, we suggest you ask your teacher or parent to  invite a business person 
                                                                         </constraints>
                                                                     </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="fjS-KP-AS4">
-                                                                        <rect key="frame" x="0.0" y="160" width="354" height="31"/>
+                                                                        <rect key="frame" x="0.0" y="240" width="354" height="31"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Voucher Code" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g1i-QR-DUi" customClass="NextResponderTextField" customModule="f4s_workexperience" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="21"/>
@@ -167,7 +193,7 @@ However, we suggest you ask your teacher or parent to  invite a business person 
                                                                 </subviews>
                                                             </stackView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you don’t have a voucher code tap here" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KnY-Nh-iSQ">
-                                                                <rect key="frame" x="0.0" y="386.5" width="354" height="16"/>
+                                                                <rect key="frame" x="0.0" y="423" width="354" height="16"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -193,7 +219,7 @@ However, we suggest you ask your teacher or parent to  invite a business person 
                                             <constraint firstAttribute="bottom" secondItem="NrJ-np-QPp" secondAttribute="bottom" constant="20" id="hiq-he-NTZ"/>
                                             <constraint firstItem="VA6-BR-IJV" firstAttribute="top" secondItem="S8V-te-S2l" secondAttribute="bottom" constant="50" id="kag-yg-8l9"/>
                                             <constraint firstItem="SnL-sW-mx6" firstAttribute="leading" secondItem="VA6-BR-IJV" secondAttribute="leading" id="mhf-Lc-cfA"/>
-                                            <constraint firstItem="S8V-te-S2l" firstAttribute="top" secondItem="hz8-hB-HzJ" secondAttribute="top" constant="60" id="tSB-6t-bj7"/>
+                                            <constraint firstItem="S8V-te-S2l" firstAttribute="top" secondItem="hz8-hB-HzJ" secondAttribute="top" constant="40" id="tSB-6t-bj7"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -286,6 +312,9 @@ However, we suggest you ask your teacher or parent to  invite a business person 
                         <outlet property="firstAndLastNameUnderlineView" destination="jO5-dM-A01" id="3JI-UR-49e"/>
                         <outlet property="infoStackViewTopConstraint" destination="Jmn-8L-pmJ" id="7mj-fr-NeA"/>
                         <outlet property="noVoucherInfoLabel" destination="KnY-Nh-iSQ" id="Ptb-8Y-6Lj"/>
+                        <outlet property="parentEmailStackView" destination="y33-By-Vkx" id="GrH-YW-xO7"/>
+                        <outlet property="parentEmailTextField" destination="IZi-FU-235" id="d25-g4-pTe"/>
+                        <outlet property="parentEmailUnderlineView" destination="GO6-le-PT5" id="gQU-Ua-yaG"/>
                         <outlet property="scrollView" destination="5Sm-Vm-OPb" id="EhW-LL-t1T"/>
                         <outlet property="toYoungStackView" destination="ocK-RI-4cq" id="XFz-yv-WHU"/>
                         <outlet property="userInfoStackView" destination="DIV-QA-nEC" id="3J1-c7-6ce"/>
