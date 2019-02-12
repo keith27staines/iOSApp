@@ -85,14 +85,11 @@ class PlacementDBOperations {
             placement.companyUuid = companyUuid
         }
         if let placementStatus = placementDB.status {
-            switch placementStatus {
-            case "inProgress":
-                placement.status = .inProgress
-                break
-            default:
-                // applied
-                placement.status = .applied
-                break
+            placement.status = F4SPlacementStatus(rawValue: placementStatus)
+            if placement.status == nil {
+                if placementStatus == "inProgress" {
+                    placement.status = F4SPlacementStatus.inProgress
+                }
             }
         }
         return placement

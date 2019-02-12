@@ -115,9 +115,6 @@ class MessageHandler {
             }
         })
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.cancel) { _ in
-            if parentCtrl is MapViewController {
-                (parentCtrl as! MapViewController).displayDefaultSearch()
-            }
         })
         parentCtrl.present(alert, animated: true, completion: nil)
     }

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -27,50 +25,18 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D07-OV-PCy">
-                                <rect key="frame" x="10" y="30" width="355" height="50"/>
-                                <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XWf-o5-kyn" customClass="AutoCompleteTextField" customModule="f4s_workexperience" customModuleProvider="target">
-                                        <rect key="frame" x="46" y="10" width="249" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="vNn-21-OAE" id="bic-Ms-hTD"/>
-                                        </connections>
-                                    </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="searchIcon" translatesAutoresizingMaskIntoConstraints="NO" id="0TN-l1-fyD">
-                                        <rect key="frame" x="15" y="17" width="16" height="16"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="16" id="0bP-u5-tcr"/>
-                                            <constraint firstAttribute="height" constant="16" id="Uou-Az-uZS"/>
-                                        </constraints>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vB2-GM-gOM">
-                                        <rect key="frame" x="310" y="3" width="44" height="44"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="3fc-9d-125"/>
-                                            <constraint firstAttribute="width" constant="44" id="dgh-K7-ddM"/>
-                                        </constraints>
-                                        <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" image="directionArrowIcon"/>
-                                        <connections>
-                                            <action selector="myLocationButtonTouched:" destination="vNn-21-OAE" eventType="touchUpInside" id="k7g-6d-3dK"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vB2-GM-gOM">
+                                <rect key="frame" x="295" y="40" width="44" height="44"/>
                                 <constraints>
-                                    <constraint firstItem="0TN-l1-fyD" firstAttribute="centerY" secondItem="XWf-o5-kyn" secondAttribute="centerY" id="1vC-5z-br2"/>
-                                    <constraint firstItem="vB2-GM-gOM" firstAttribute="centerY" secondItem="XWf-o5-kyn" secondAttribute="centerY" id="2cF-K0-8kx"/>
-                                    <constraint firstItem="vB2-GM-gOM" firstAttribute="leading" secondItem="XWf-o5-kyn" secondAttribute="trailing" constant="15" id="8mF-N6-mej"/>
-                                    <constraint firstItem="XWf-o5-kyn" firstAttribute="centerY" secondItem="D07-OV-PCy" secondAttribute="centerY" id="DHW-qv-o1E"/>
-                                    <constraint firstItem="0TN-l1-fyD" firstAttribute="leading" secondItem="D07-OV-PCy" secondAttribute="leading" constant="15" id="V4i-Zc-cK7"/>
-                                    <constraint firstAttribute="trailing" secondItem="vB2-GM-gOM" secondAttribute="trailing" constant="1" id="VX4-AP-PQc"/>
-                                    <constraint firstItem="XWf-o5-kyn" firstAttribute="leading" secondItem="0TN-l1-fyD" secondAttribute="trailing" constant="15" id="jlR-K5-bsa"/>
-                                    <constraint firstAttribute="height" constant="50" id="pm3-jC-XsQ"/>
+                                    <constraint firstAttribute="height" constant="44" id="3fc-9d-125"/>
+                                    <constraint firstAttribute="width" constant="44" id="dgh-K7-ddM"/>
                                 </constraints>
-                            </view>
+                                <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="directionArrowIcon"/>
+                                <connections>
+                                    <action selector="myLocationButtonTouched:" destination="vNn-21-OAE" eventType="touchUpInside" id="k7g-6d-3dK"/>
+                                </connections>
+                            </button>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Flp-FB-sKl">
                                 <rect key="frame" x="135" y="588" width="175" height="38"/>
                                 <subviews>
@@ -131,14 +97,13 @@
                             <constraint firstItem="8cG-OV-1mj" firstAttribute="leading" secondItem="Flp-FB-sKl" secondAttribute="trailing" constant="-15" id="39J-K5-mm1"/>
                             <constraint firstItem="K4D-D8-746" firstAttribute="top" secondItem="j0e-ED-LBK" secondAttribute="bottom" id="6ba-1l-dJd"/>
                             <constraint firstItem="Lgj-RU-RS3" firstAttribute="leading" secondItem="Jry-b3-21i" secondAttribute="leadingMargin" constant="-10" id="DPs-z6-Hd1"/>
-                            <constraint firstAttribute="trailing" secondItem="D07-OV-PCy" secondAttribute="trailing" constant="10" id="Jt4-bW-POR"/>
                             <constraint firstAttribute="trailing" secondItem="j0e-ED-LBK" secondAttribute="trailing" id="VU5-0f-SZK"/>
                             <constraint firstItem="j0e-ED-LBK" firstAttribute="leading" secondItem="Jry-b3-21i" secondAttribute="leading" id="ZpF-dM-TLY"/>
-                            <constraint firstItem="D07-OV-PCy" firstAttribute="leading" secondItem="Jry-b3-21i" secondAttribute="leading" constant="10" id="cxs-Wj-odM"/>
                             <constraint firstAttribute="trailing" secondItem="8cG-OV-1mj" secondAttribute="trailing" constant="20" id="gg5-At-aTI"/>
-                            <constraint firstItem="D07-OV-PCy" firstAttribute="top" secondItem="DdT-jA-TTu" secondAttribute="bottom" constant="10" id="gnI-NY-YPU"/>
                             <constraint firstItem="j0e-ED-LBK" firstAttribute="top" secondItem="Jry-b3-21i" secondAttribute="top" id="gyC-rS-p6I"/>
                             <constraint firstItem="K4D-D8-746" firstAttribute="top" secondItem="8cG-OV-1mj" secondAttribute="bottom" constant="30" id="jca-bJ-N1s"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vB2-GM-gOM" secondAttribute="trailing" constant="20" id="kzg-KR-HXL"/>
+                            <constraint firstItem="vB2-GM-gOM" firstAttribute="top" secondItem="DdT-jA-TTu" secondAttribute="bottom" constant="20" id="x7q-hB-uFN"/>
                             <constraint firstItem="8cG-OV-1mj" firstAttribute="centerY" secondItem="Lgj-RU-RS3" secondAttribute="centerY" id="yiB-ot-Q1Y"/>
                             <constraint firstItem="Flp-FB-sKl" firstAttribute="centerY" secondItem="8cG-OV-1mj" secondAttribute="centerY" id="zWq-5i-wpb"/>
                         </constraints>
@@ -151,8 +116,6 @@
                         <outlet property="partnerLogoImageView" destination="Djg-9L-mon" id="5E7-wB-xYL"/>
                         <outlet property="refineLabelContainerView" destination="Flp-FB-sKl" id="8dx-Ob-Jph"/>
                         <outlet property="refineSearchLabel" destination="LQ6-vJ-i4v" id="naU-rt-Xxk"/>
-                        <outlet property="searchLocationTextField" destination="XWf-o5-kyn" id="aWb-sJ-oM9"/>
-                        <outlet property="searchView" destination="D07-OV-PCy" id="dbB-bg-yUD"/>
                         <outlet property="workfinderLogoImageView" destination="u6v-YJ-KBz" id="AfA-GM-n9N"/>
                     </connections>
                 </viewController>
@@ -165,7 +128,6 @@
         <image name="directionArrowIcon" width="16" height="16"/>
         <image name="filtersIcon" width="23" height="27"/>
         <image name="logo2" width="133" height="136"/>
-        <image name="partnerLogoNominet" width="229" height="240"/>
-        <image name="searchIcon" width="16" height="16"/>
+        <image name="partnerLogoNominet" width="458" height="480"/>
     </resources>
 </document>

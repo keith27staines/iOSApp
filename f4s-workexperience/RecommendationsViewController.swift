@@ -51,7 +51,7 @@ class CompanyCell : UITableViewCell {
     
     lazy var logo: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 40).isActive = true

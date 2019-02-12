@@ -48,7 +48,6 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
         let attempting = "Get placement"
         var url = URL(string: ApiConstants.offerUrl)!
         url.appendPathComponent(uuid)
-        //url.appendPathComponent("offer")
         let session = F4SNetworkSessionManager.shared.interactiveSession
         let urlRequest = F4SDataTaskService.urlRequest(verb: .get, url: url, dataToSend: nil)
         dataTask?.cancel()

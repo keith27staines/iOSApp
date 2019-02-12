@@ -36,34 +36,14 @@ class PlacementDB: NSManagedObject {
             newItem.userUuid = userUuid
             newItem.status = ""
             if let status = placement.status {
-                switch status
-                {
-                case .inProgress:
-                    newItem.status = "inProgress"
-                    break
-                default:
-                    // applied
-                    newItem.status = "applied"
-                    break
-                }
+                newItem.status = status.rawValue
             }
             return newItem
         } else {
             fetchResult[0].companyUuid = placement.companyUuid
             fetchResult[0].placementUuid = placement.placementUuid
             fetchResult[0].userUuid = userUuid
-
-            switch placement.status!
-            {
-            case .inProgress:
-                fetchResult[0].status = "inProgress"
-                break
-            default:
-                // applied
-                fetchResult[0].status = "applied"
-                break
-            }
-
+            fetchResult[0].status = placement.status!.rawValue
             return fetchResult[0]
         }
     }

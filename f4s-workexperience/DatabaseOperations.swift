@@ -146,7 +146,7 @@ extension DatabaseOperations {
         }
         do {
             var companyList: [Company] = []
-            let selectStatement: String = "SELECT id, uuid, latitude, longitude FROM businesses_company WHERE latitude NOTNULL AND longitude NOTNULL"
+            let selectStatement: String = "SELECT id, uuid, name, latitude, longitude FROM businesses_company WHERE latitude NOTNULL AND longitude NOTNULL"
             
             let stmt = try db.prepare(selectStatement)
             

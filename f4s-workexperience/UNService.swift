@@ -52,6 +52,7 @@ class UNService : NSObject {
     }
 
     func handleRemoteNotification(userInfo: [AnyHashable: Any], window: UIWindow, isAppActive: Bool) {
+        log.debug("Handliong remote notification with user info...")
         log.debug(userInfo)
         F4SUserStatusService.shared.beginStatusUpdate()
         
@@ -72,6 +73,7 @@ class UNService : NSObject {
         }
         
         guard let type = extractNotificationType(userInfo: userInfo) else {
+            log.debug("Notification type cannot be extracted from push notification")
             return
         }
         
@@ -83,35 +85,41 @@ class UNService : NSObject {
         }
         
         if isAppActive {
+            log.debug("Push notification cannot be processed because the app is active")
             let alert = UIAlertController(title: title, message: body, preferredStyle: .alert)
             let ok = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default) //{}
             alert.addAction(ok)
-            if let window = UIApplication.shared.delegate?.window {
-                if let rootViewCtrl = window?.rootViewController {
-                    if let topViewController = rootViewCtrl.topMostViewController {
-                        topViewController.present(alert, animated: true) {}
-                    } else {
-                        rootViewCtrl.present(alert, animated: true) {}
-                    }
-                }
+            guard let window = UIApplication.shared.delegate?.window, let rootViewCtrl = window?.rootViewController else {
+                log.debug("Can't handle notification because there is no window or no root view controller")
+                return
             }
+            
+            if let topViewController = rootViewCtrl.topMostViewController {
+                topViewController.present(alert, animated: true) {}
+            } else {
+                rootViewCtrl.present(alert, animated: true) {}
+            }
+            
         } else {
+            log.debug("navigating to best destination for notification")
             dispatchToBestDestination(for: type, threadUuid: threadUuid, placementUuid: placementUuid)
         }
-
     }
     
     func dispatchToBestDestination(for type: NotificationType, threadUuid: F4SUUID?, placementUuid: F4SUUID?) {
         switch type
         {
         case NotificationType.message:
+            log.debug("Responding to message push notification by navigating to Timeline")
             CustomNavigationHelper.sharedInstance.navigateToTimeline(threadUuid: threadUuid)
             
         case NotificationType.rating:
+            log.debug("Responding to rating push notification by presenting rating controller")
             if let topViewCtrl = CustomNavigationHelper.sharedInstance.topMostViewController() {
                 CustomNavigationHelper.sharedInstance.presentRatePlacementPopover(parentCtrl: topViewCtrl, placementUuid: placementUuid!)
             }
         case NotificationType.recommendation:
+            log.debug("Responding to recommendation push notification by navigating to Recommendations page")
             CustomNavigationHelper.sharedInstance.rewindAndNavigateToRecommendations(from: nil, show: nil)
         }
     }

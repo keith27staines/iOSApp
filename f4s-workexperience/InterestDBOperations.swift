@@ -45,7 +45,7 @@ class InterestDBOperations {
         return interests
     }
 
-    func removeInterestWithUuid(_ interestUuid: String) {
+    func removeUserInterestWithUuid(_ interestUuid: String) {
         guard let userUuid = F4SUser.userUuidFromKeychain else {
             return
         }

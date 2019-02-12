@@ -44,14 +44,14 @@ class StarRatingView: UIView {
     }()
     
     public override init(frame: CGRect) {
-        rating = 3.5
+        rating = 0.0
         super.init(frame: frame)
         addSubviews()
         updateRatingDisplay()
     }
     
     public required init?(coder aDecoder: NSCoder) {
-        rating = 3.5
+        rating = 0.0
         super.init(coder: aDecoder)
         addSubviews()
         updateRatingDisplay()

@@ -20,10 +20,10 @@ fileprivate struct Json : Codable {
     }
 }
 
-
 public class F4SCompanyDocumentService {
     
     private var dataTask: URLSessionDataTask?
+
     
     public func requestDocuments(companyUuid: F4SUUID, documents: F4SCompanyDocuments, completion: @escaping ((F4SNetworkResult<Bool>) -> ())) {
         let json = Json(documents: documents)

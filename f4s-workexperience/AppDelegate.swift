@@ -117,7 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             case .error(let error):
                 log.error(error)
             case .success(_):
-                print("Notifications enabled on server with token \(token)")
+                log.debug("Notifications enabled on server with token \(token)")
             }
         }
     }
@@ -126,12 +126,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         log.error("Failed to register with error \(error)")
     }
     
+    // This method handles notifications arriving whether the app was running already or the notification opened the app
     func application(_: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         DispatchQueue.main.async {
-            let appState = UIApplication.shared.applicationState
-            if let window = self.window {
-                UNService.shared.handleRemoteNotification(userInfo: userInfo, window: window, isAppActive: appState == .active)
+            guard let window = self.window else {
+                log.error("Push notification cannot be processed because the application does not have a window")
+                return
             }
+            log.debug("Received remote notification")
+            let appState = UIApplication.shared.applicationState
+            UNService.shared.handleRemoteNotification(userInfo: userInfo, window: window, isAppActive: appState == .active)
             completionHandler(UIBackgroundFetchResult.newData)
         }
     }
@@ -174,10 +178,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 // MARK: helpers
 extension AppDelegate {
-    
-//    func registerApplicationForRemoteNotifications(_ application: UIApplication) {
-//        UNService.shared.registerForRemoteNotifications()
-//    }
     
     func presentForceUpdate() {
         let rootVC = self.window?.rootViewController?.topMostViewController

@@ -277,7 +277,7 @@ extension InterestsViewController {
         let interestsToSave = selectedInterests.subtracting(originallySelectedInterests)
         let interestsToRemove = originallySelectedInterests.subtracting(selectedInterests)
         for interest in interestsToRemove {
-            InterestDBOperations.sharedInstance.removeInterestWithUuid(interest.uuid)
+            InterestDBOperations.sharedInstance.removeUserInterestWithUuid(interest.uuid)
         }
         for interest in interestsToSave {
             InterestDBOperations.sharedInstance.saveInterest(interest)

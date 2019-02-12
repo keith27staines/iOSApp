@@ -9,7 +9,17 @@
 import Foundation
 import UIKit
 
-class CustomNavigationHelper {
+class CustomNavigationHelper : Coordinating {
+    var parentCoordinator: Coordinating?
+    
+    var uuid: UUID = UUID()
+    
+    var rootViewController: UIViewController
+    
+    var childCoordinators: [UUID : Coordinating] = [:]
+    
+    func start() {}
+    
     class var sharedInstance: CustomNavigationHelper {
         struct Static {
             static let instance: CustomNavigationHelper = CustomNavigationHelper()
@@ -25,15 +35,16 @@ class CustomNavigationHelper {
     var timelineNavigationController: RotationAwareNavigationController!
     var timelineViewController: TimelineViewController!
     var drawerController: DrawerController?
-
+    
     init(window: UIWindow? = nil) {
         let optionalDelegateWindow = UIApplication.shared.delegate?.window!!
         guard let window = window ?? optionalDelegateWindow else {
-            assert(false, "No window")
-            return
+            fatalError("No window")
         }
+        rootViewController = UIViewController()
         createTabBar()
-        window.rootViewController = setUpDrawerController(navigationController: tabBar)
+        rootViewController = setUpDrawerController(navigationController: tabBar)
+        window.rootViewController = rootViewController
     }
     
     public func rewindAndNavigateToTimeline(from viewController: UIViewController, show threadUuid: F4SUUID?) {
@@ -329,16 +340,6 @@ class CustomNavigationHelper {
         navController.pushViewController(ctrl, animated: true)
     }
 
-    func presentCompanyDetailsPopover(parentCtrl: UIViewController, company: Company) {
-        guard let popOverVC = UIStoryboard(name: "CompanyDetails", bundle: nil).instantiateViewController(withIdentifier: "CompanyDetailsCtrl") as? CompanyDetailsViewController else {
-            return
-        }
-        popOverVC.company = company
-        let popOverVCWithNavCtrl = RotationAwareNavigationController(rootViewController: popOverVC)
-
-        parentCtrl.present(popOverVCWithNavCtrl, animated: true, completion: nil)
-    }
-
     func presentNotificationPopover(parentCtrl: UIViewController, currentCompany: Company) {
         guard let popOverVC = UIStoryboard(name: "NotificationView", bundle: nil).instantiateViewController(withIdentifier: "NotificationCtrl") as? NotificationViewController else {
             return
@@ -467,30 +468,11 @@ class CustomNavigationHelper {
         }
     }
     
-    func presentFavouriteMaximumPopover(parentCtrl: UIViewController) {
-        guard let popOverVC = UIStoryboard(name: "FavouritesPopup", bundle: nil).instantiateViewController(withIdentifier: "FavouritesPopupViewCtrl") as? FavouritesPopupViewController else {
-            return
-        }
-        parentCtrl.addChild(popOverVC)
-        popOverVC.backgroundPopoverView.frame = parentCtrl.view.frame
-        popOverVC.backgroundPopoverView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-        parentCtrl.view.addSubview(popOverVC.backgroundPopoverView)
+    func presentCompanyDetailsPopover(parentCtrl: UIViewController, company: Company) {
+        let companyCoordinator = CompanyCoordinator(rootViewController: parentCtrl, company: company)
         
-        let popoverNavigationController = UINavigationController(rootViewController: popOverVC)
-        popoverNavigationController.modalPresentationStyle = .popover
-        
-        let popover = popoverNavigationController.popoverPresentationController
-        popover?.canOverlapSourceViewRect = true
-        
-        popOverVC.navigationController?.isNavigationBarHidden = true
-        popOverVC.preferredContentSize = CGSize(width: popOverVC.view.frame.width - 40, height: popOverVC.contentLabel.frame.size.height + popOverVC.getHeight())
-        
-        popover?.sourceView = parentCtrl.view
-        popover?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
-        popover?.sourceRect = CGRect(x: parentCtrl.view.bounds.midX, y: parentCtrl.view.bounds.midY, width: 0, height: 0)
-        popover?.delegate = popOverVC as FavouritesPopupViewController
-        
-        parentCtrl.navigationController?.present(popoverNavigationController, animated: true, completion: nil)
+        addChildCoordinator(companyCoordinator)
+        companyCoordinator.start()
     }
 }
 

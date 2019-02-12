@@ -8,7 +8,6 @@
 
 import UIKit
 import GoogleMaps
-import GooglePlaces
 import Reachability
 
 enum CamerWillMoveAction {
@@ -18,6 +17,28 @@ enum CamerWillMoveAction {
 }
 
 class MapViewController: UIViewController {
+    
+    let peopleDataSource = PeopleSearchDataSource()
+    let companyDataSource = CompanySearchDataSource()
+    let placesDataSource = PlacesSearchDataSource()
+    
+    lazy var searchView: SearchView = {
+        let sideMargin: CGFloat = 20
+        let searchView = SearchView(expandedWidth: view.bounds.width - 2*sideMargin, frame: CGRect.zero)
+        searchView.delegate = self
+        searchView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(searchView)
+        searchView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 30, left: sideMargin, bottom: 0, right: 0))
+        let bottomConstraint: NSLayoutConstraint
+        if #available(iOS 11.0, *) {
+            bottomConstraint = searchView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80)
+        } else {
+            bottomConstraint = searchView.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -80)
+        }
+        bottomConstraint.priority = .required
+        bottomConstraint.isActive = true
+        return searchView
+    }()
     
     lazy var clusterColor: UIColor = {
         return skin?.primaryButtonSkin.backgroundColor.uiColor ?? UIColor.black
@@ -48,13 +69,11 @@ class MapViewController: UIViewController {
     var companyListPopupViewController: PopupCompanyListViewController?
     
     var mapEdgeInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: searchView.bounds.height + 60, left: 60, bottom: 60, right: 60)
+        return UIEdgeInsets(top: 60, left: 60, bottom: 60, right: 60)
     }
     
     /// Container view for the search text box and closely associated controls
-    @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var myLocationButton: UIButton!
-    @IBOutlet weak var searchLocationTextField: AutoCompleteTextField!
     
     /// Container view for the filter button and associated controls
     @IBOutlet weak var refineLabelContainerView: UIView!
@@ -80,8 +99,6 @@ class MapViewController: UIViewController {
     static let zoomMinimum: Float = 6.0
     static let zoomMaximum: Float = 15.0
     
-    var autoCompleteFilter: GMSAutocompleteFilter?
-    var placesClient: GMSPlacesClient?
     var backgroundView = UIView()
     var shouldRequestAuthorization: Bool?
     var pressedPinOrCluster: UIView?
@@ -147,12 +164,12 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        _ = searchView
         if let dbManager = (UIApplication.shared.delegate as? AppDelegate)?.databaseDownloadManager {
             dbManager.registerObserver(self)
         }
         
         adjustAppeareance()
-        handleTextFieldInterfaces()
         setupMap()
         setupLogos()
         setupReachability(nil, useClosures: true)
@@ -225,12 +242,6 @@ class MapViewController: UIViewController {
         favouriteList = ShortlistDBOperations.sharedInstance.getShortlistForCurrentUser()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        setupFramesAndSizes()
-    }
-    
-    
     var hasMovedToBestPosition: Bool = false
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -280,11 +291,9 @@ extension MapViewController {
 extension MapViewController {
     
     fileprivate func adjustAppeareance() {
-        searchView.layer.cornerRadius = 10
         setupButtons()
         setupLabels()
         self.view.layoutIfNeeded()
-        configureTextField()
     }
     
     fileprivate func setupButtons() {
@@ -320,12 +329,6 @@ extension MapViewController {
             attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.paragraphStyle: paragraph])
     }
     
-    fileprivate func setupFramesAndSizes() {
-        if self.searchView.frame.size.width != 1000 {
-            self.searchLocationTextField.autoCompleteTableWidth = self.searchView.bounds.width
-        }
-    }
-    
     func adjustNavigationBar() {
         navigationController?.setNavigationBarHidden(true, animated: false)
         navigationController?.navigationBar.barTintColor = UIColor(netHex: Colors.black)
@@ -335,36 +338,6 @@ extension MapViewController {
     }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.default
-    }
-    
-    fileprivate func configureTextField() {
-        searchLocationTextField.enablesReturnKeyAutomatically = true
-        searchLocationTextField!.setupAutocompleteTable(searchView, rootView: self.view)
-        searchLocationTextField.borderStyle = .none
-        searchLocationTextField.placeholder = NSLocalizedString("Search", comment: "")
-        searchLocationTextField.isMapView = true
-        searchLocationTextField.shouldTintClearButton = false
-        searchLocationTextField.tintColor = UIColor(netHex: Colors.azure)
-        
-        searchLocationTextField!.backgroundColor = UIColor.white
-        searchLocationTextField!.autoCompleteTextColor = UIColor(netHex: Colors.warmGrey)
-        searchLocationTextField!.autoCompleteTextFont = UIFont(name: "HelveticaNeue-Light", size: 15.0)!
-        searchLocationTextField!.autoCompleteCellHeight = 50
-        searchLocationTextField!.maximumAutoCompleteCount = 3
-        searchLocationTextField!.hidesWhenSelected = true
-        searchLocationTextField!.hidesWhenEmpty = true
-        searchLocationTextField!.enableAttributedText = true
-        var attributes = [NSAttributedString.Key: AnyObject]()
-        attributes[NSAttributedString.Key.foregroundColor] = UIColor.black
-        attributes[NSAttributedString.Key.font] = UIFont(name: "HelveticaNeue-Bold", size: 15.0)
-        searchLocationTextField!.autoCompleteAttributes = attributes
-        
-        searchLocationTextField.returnKeyType = .search
-        searchLocationTextField.autocorrectionType = .no
-        
-        self.refineSearchLabel.isHidden = true
-        self.refineSearchLabel.layer.cornerRadius = 10
-        self.refineSearchLabel.layer.masksToBounds = true
     }
     
     func setupInfoWindow(company: Company) -> UIView {
@@ -532,11 +505,6 @@ extension MapViewController {
         clusterManager = GMUClusterManager(map: mapView, algorithm: algorithm, renderer: renderer)
         clusterManager.setDelegate(self, mapDelegate: self)
         
-        // autocomplete places api setup
-        placesClient = GMSPlacesClient()
-        self.autoCompleteFilter = GMSAutocompleteFilter()
-        self.autoCompleteFilter?.country = "gb"
-        
         locationManager = makeLocationManager()
         if let shouldRequestAuthorization = self.shouldRequestAuthorization {
             if shouldRequestAuthorization {
@@ -631,10 +599,10 @@ extension MapViewController  {
     
     /// Returns the bounds of the visible portion of the map
     func getVisibleRegion() -> GMSVisibleRegion {
-        let topLeftPoint = CGPoint(x: self.searchView.frame.minX, y: self.searchView.frame.maxY)
-        let bottomRightPoint = CGPoint(x: self.searchView.frame.maxX, y: mapView.bounds.height)
-        let topRightPoint = CGPoint(x: self.searchView.frame.maxX, y: self.searchView.frame.maxY)
-        let bottomLeftPoint = CGPoint(x: self.searchView.frame.minX, y: mapView.bounds.height)
+        let topLeftPoint = CGPoint(x: mapView.bounds.minX, y: mapView.bounds.minY)
+        let bottomRightPoint = CGPoint(x: mapView.bounds.maxX, y: mapView.bounds.maxY)
+        let topRightPoint = CGPoint(x: mapView.bounds.maxX, y: mapView.bounds.minY)
+        let bottomLeftPoint = CGPoint(x: mapView.bounds.minX, y: mapView.bounds.maxY)
 
         let topLeftLocation = mapView.projection.coordinate(for: topLeftPoint)
         let bottomRightLocation = mapView.projection.coordinate(for: bottomRightPoint)
@@ -653,104 +621,6 @@ extension MapViewController: CAAnimationDelegate {
     func animationDidStop(_: CAAnimation, finished flag: Bool) {
         if flag && self.refineSearchLabel.isHidden {
             self.refineLabelContainerView.isHidden = true
-        }
-    }
-}
-
-// MARK: - UITextFieldDelegate + Search Methods
-extension MapViewController: UITextFieldDelegate {
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField is AutoCompleteTextField {
-            (textField as! AutoCompleteTextField).autoCompleteTableView?.isHidden = true
-            textField.resignFirstResponder()
-            let mapSearchLocation = textField.text ?? ""
-            
-            if (mapSearchLocation.isEmpty) == false {
-                
-                if let autoCompletePlaceIds = (textField as! AutoCompleteTextField).autoCompletePlacesIds {
-                    self.setUserLocation(from: mapSearchLocation, placeId: autoCompletePlaceIds.first)
-                } else {
-                    self.setUserLocation(from: mapSearchLocation, placeId: nil)
-                }
-            }
-        }
-        return true
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField is AutoCompleteTextField {
-            self.backgroundView.frame = self.view.frame
-            self.backgroundView.backgroundColor = UIColor(netHex: Colors.black).withAlphaComponent(0.0)
-            UIView.animate(withDuration: 0.3, animations: { () in
-                self.backgroundView.backgroundColor = UIColor(netHex: Colors.black).withAlphaComponent(0.5)
-            })
-            
-            if CLLocationManager.authorizationStatus() == .authorizedWhenInUse || CLLocationManager.authorizationStatus() == .authorizedAlways {
-                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(endSearch(_:)))
-                backgroundView.addGestureRecognizer(tapGesture)
-            }
-            self.view.addSubview(backgroundView)
-            self.view.bringSubviewToFront(searchView)
-        }
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField is AutoCompleteTextField {
-            (textField as! AutoCompleteTextField).autoCompleteTableView?.isHidden = true
-            UIView.animate(withDuration: 0.3, animations: { () in
-                self.backgroundView.backgroundColor = UIColor(netHex: Colors.black).withAlphaComponent(0.0)
-            }, completion: { _ in
-                self.backgroundView.removeFromSuperview()
-            })
-        }
-    }
-    
-    func displayDefaultSearch() {
-        self.searchLocationTextField.becomeFirstResponder()
-    }
-    
-    @objc func endSearch(_: UITapGestureRecognizer) {
-        self.searchLocationTextField.resignFirstResponder()
-    }
-    
-    fileprivate func handleTextFieldInterfaces() {
-        searchLocationTextField!.onTextChange = { [weak self] text in
-            if !text.isEmpty {
-                var places: [String] = []
-                var placesIds: [String] = []
-                guard let strongSelf = self else {
-                    return
-                }
-                strongSelf.placesClient?.autocompleteQuery(text, bounds: nil, filter: strongSelf.autoCompleteFilter, callback: { results, error in
-                    guard error == nil,
-                        let strongResults = results else {
-                            log.error("Autocomplete error \(error!)")
-                            return
-                    }
-                    
-                    for result in strongResults {
-                        if let placeId = result.placeID {
-                            placesIds.append(placeId)
-                        }
-                        places.append(result.attributedFullText.string)
-                    }
-                    strongSelf.searchLocationTextField.autoCompletePlacesIds = placesIds
-                    strongSelf.searchLocationTextField!.autoCompleteStrings = places
-                })
-            }
-        }
-        
-        searchLocationTextField!.onSelect = { [weak self] text, _ in
-            self?.searchLocationTextField.resignFirstResponder()
-            self?.searchLocationTextField.text = text
-            let indexOfString = self?.searchLocationTextField.autoCompleteStrings?.index(of: text)
-            if let index = indexOfString {
-                let placeId = self?.searchLocationTextField.autoCompletePlacesIds?[index]
-                self?.setUserLocation(from: text, placeId: placeId)
-            } else {
-                self?.setUserLocation(from: text, placeId: nil)
-            }
         }
     }
 }
@@ -898,7 +768,6 @@ extension MapViewController: CLLocationManagerDelegate {
         case .denied:
             mapView.isMyLocationEnabled = false
             log.debug("location manager is in state 'denied'")
-            displayDefaultSearch()
             
         case .authorizedAlways:
             locationManager!.startUpdatingLocation()
@@ -908,13 +777,9 @@ extension MapViewController: CLLocationManagerDelegate {
         case .restricted:
             mapView.isMyLocationEnabled = false
             log.debug("location manager is in state 'restricted'")
-            displayDefaultSearch()
             
         case .notDetermined:
             log.debug("location manager is in state 'not determined'")
-            if !self.shouldRequestAuthorization! {
-                displayDefaultSearch()
-            }
         }
         self.lastAuthorizationStatus = status
     }
@@ -934,10 +799,6 @@ extension MapViewController: CLLocationManagerDelegate {
 extension MapViewController {
     
     @IBAction func myLocationButtonTouched(_: UIButton) {
-        
-        if searchLocationTextField.isFirstResponder {
-            searchLocationTextField.resignFirstResponder()
-        }
         if let location = mapView.myLocation?.coordinate {
             moveAndZoomCamera(to: location)
         } else {
@@ -1216,6 +1077,46 @@ extension MapViewController : F4SCompanyDatabaseAvailabilityObserving {
             formatter.maximumFractionDigits = 0
             let text = formatter.string(for: progress * 100.0)! + "%"
             MessageHandler.sharedInstance.updateOverlayCaption("loading..." + text)
+        }
+    }
+}
+
+extension MapViewController : SearchViewDelegate {
+    func searchView(_ view: SearchViewProtocol, didSelectItem indexPath: IndexPath) {
+        guard let item = activeDatasource?.itemForIndexPath(indexPath) else { return }
+        switch view.state {
+        case .collapsed, .horizontallyExpanded:
+            return
+        case .searchingLocation:
+            setUserLocation(from: item.primaryText, placeId: item.uuidString)
+            
+        case .searchingPeople:
+            print("Display person: \(item.matchOnText)")
+        case .searchingCompany:
+            guard
+                let uuid = item.uuidString,
+                let company = DatabaseOperations.sharedInstance.companyWithUUID(uuid) else { return }
+            CustomNavigationHelper.sharedInstance.presentCompanyDetailsPopover(parentCtrl: self, company: company)
+        }
+        searchView.minimizeSearchUI()
+    }
+    
+    func searchView(_ view: SearchViewProtocol, didChangeText text: String) {
+        activeDatasource?.setSearchString(text, completion: { [weak self] in
+            self?.searchView.refreshFromDatasource()
+        })
+    }
+    
+    func searchView(_ view: SearchViewProtocol, didChangeState state: SearchViewStateMachine.State) {
+        searchView.dataSource = activeDatasource
+    }
+    
+    var activeDatasource: SearchDataSourcing? {
+        switch searchView.state {
+        case .collapsed, .horizontallyExpanded: return nil
+        case .searchingLocation: return placesDataSource
+        case .searchingPeople: return peopleDataSource
+        case .searchingCompany: return companyDataSource
         }
     }
 }

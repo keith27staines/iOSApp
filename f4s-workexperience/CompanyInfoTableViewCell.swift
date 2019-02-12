@@ -22,7 +22,7 @@ class CompanyInfoTableViewCell: UITableViewCell {
             self.logo.image = UIImage(named: "DefaultLogo")
             self.logo.layer.cornerRadius = self.logo.frame.height/2.0
             self.logo.layer.masksToBounds = true
-            self.logo.contentMode = .scaleAspectFill
+            self.logo.contentMode = .scaleAspectFit
             if !company.logoUrl.isEmpty, let url = NSURL(string: company.logoUrl) {
                 F4SImageService.sharedInstance.getImage(url: url, completion: { [weak self]
                     image in

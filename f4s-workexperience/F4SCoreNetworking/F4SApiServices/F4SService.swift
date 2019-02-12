@@ -47,13 +47,18 @@ public class F4SDataTaskService {
     public let session: URLSession
     public let baseUrl: URL
     public var apiName: String { return self._apiName }
+    
     public var url : URL? {
-        return URL(string: urlString)
+        let apiUrl = URL(string: urlString)!
+        guard let relativeUrlString = relativeUrlString else { return apiUrl }
+        return apiUrl.appendingPathComponent(relativeUrlString)
     }
     
     private var urlString: String {
         return baseUrl.absoluteString + "/" + apiName
     }
+    
+    var relativeUrlString: String?
     
     public typealias DataTaskReturn = (data:Data?, response:URLResponse?, error:Error?)
     

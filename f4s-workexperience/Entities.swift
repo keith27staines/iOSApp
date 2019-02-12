@@ -95,6 +95,10 @@ public struct Company : Hashable {
             completion(image ?? defaultLogo)
         })
     }
+    
+    var placement: F4SPlacement? {
+        return PlacementDBOperations.sharedInstance.getPlacementsForCurrentUserAndCompany(companyUuid: uuid)
+    }
 }
 
 public struct Placement {

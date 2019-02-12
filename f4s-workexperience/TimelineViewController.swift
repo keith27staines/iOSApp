@@ -212,6 +212,7 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
                     image in
                     if image != nil {
                         cell.companyImageView.image = image!
+                        cell.companyImageView.contentMode = .scaleAspectFit
                     }
                 })
             }
