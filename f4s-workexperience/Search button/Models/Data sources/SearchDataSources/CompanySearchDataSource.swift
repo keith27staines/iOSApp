@@ -103,9 +103,11 @@ class CompanySearchDataSource : NSObject, SearchDataSourcing {
 class CompanySearchTableViewCell : UITableViewCell {
     let numberFormatter: NumberFormatter = {
         let nf = NumberFormatter()
+        nf.minimumIntegerDigits = 1
         nf.maximumFractionDigits = 2
         return nf
     }()
+    
     init() {
         super.init(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "PeopleSearchTableViewCell")
     }
@@ -117,7 +119,7 @@ class CompanySearchTableViewCell : UITableViewCell {
             detailTextLabel?.text = ""
             return
         }
-        detailTextLabel?.text = "Distance \(distanceString) km"
+        detailTextLabel?.text = "Distance from you: \(distanceString) km"
     }
     
     required init?(coder aDecoder: NSCoder) {

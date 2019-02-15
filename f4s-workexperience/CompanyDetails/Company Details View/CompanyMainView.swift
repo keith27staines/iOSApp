@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-protocol CompanyMainViewDelegate : class, CompanyToolbarDelegate {
+protocol CompanyMainViewDelegate : CompanyToolbarDelegate {
     func companyMainView(_ view: CompanyMainView, didSelectPage: CompanyViewModel.PageIndex?)
     func companyMainViewDidTapApply(_ view: CompanyMainView)
     func companyMainViewDidTapDone(_ view: CompanyMainView)
@@ -17,14 +17,14 @@ protocol CompanyMainViewDelegate : class, CompanyToolbarDelegate {
 
 class CompanyMainView: UIView {
     
-    private unowned var delegate: CompanyMainViewDelegate
+    private weak var delegate: CompanyMainViewDelegate?
     var companyViewModel: CompanyViewModel
     
     lazy var mapView: CompanyMapView = {
-        let map = CompanyMapView(company: companyViewModel.company)
-        map.translatesAutoresizingMaskIntoConstraints = false
-        map.delegate = self
-        return map
+        let mapView = CompanyMapView(company: companyViewModel.company)
+        mapView.translatesAutoresizingMaskIntoConstraints = false
+        mapView.delegate = self
+        return mapView
     }()
     
     init(companyViewModel: CompanyViewModel, delegate: CompanyMainViewDelegate) {
@@ -33,6 +33,7 @@ class CompanyMainView: UIView {
         super.init(frame: CGRect.zero)
         backgroundColor = UIColor.white
         configureViews()
+        configureMapView()
         refresh()
     }
     
@@ -62,19 +63,18 @@ class CompanyMainView: UIView {
     
     func configureViews() {
         addSubview(segmentedControl)
-        addSubview(mapView)
         addSubview(headerView)
         addSubview(toolbarView)
         headerView.anchor(top: layoutMarginsGuide.topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 110))
         segmentedControl.anchor(top: headerView.bottomAnchor, leading: layoutMarginsGuide.leadingAnchor, bottom: nil, trailing: layoutMarginsGuide.trailingAnchor, padding: UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0))
         toolbarView.anchor(top: nil, leading: leadingAnchor, bottom: layoutMarginsGuide.bottomAnchor, trailing: trailingAnchor)
-        configureMapView()
     }
     
     var mapOffsetConstant: CGFloat = 2000 {
         didSet {
             mapTopConstraint?.constant = mapOffsetConstant
             mapBottomConstraint?.constant = mapOffsetConstant
+            toolbarView.mapApperance(shown: mapOffsetConstant <= 0)
         }
     }
     
@@ -82,21 +82,34 @@ class CompanyMainView: UIView {
     var mapBottomConstraint: NSLayoutConstraint?
     
     func animateMapIn() {
+        bringSubviewToFront(toolbarView)
         mapOffsetConstant = 0.0
         mapView.prepareForDisplay()
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 2, options: [], animations: { [weak self] in
+        UIView.animate(
+            withDuration: 0.6,
+            delay: 0,
+            usingSpringWithDamping: 0.7,
+            initialSpringVelocity: 2,
+            options: [],
+            animations: { [weak self] in
             self?.layoutSubviews()
         }, completion: nil)
     }
     
     func animateMapOut() {
+        bringSubviewToFront(toolbarView)
         mapOffsetConstant = frame.height
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [], animations: { [weak self] in
+        UIView.animate(
+            withDuration: 0.3,
+            delay: 0,
+            options: [UIView.AnimationOptions.curveEaseIn],
+            animations: { [weak self] in
             self?.layoutSubviews()
-            }, completion: nil)
+        })
     }
     
     func configureMapView() {
+        addSubview(mapView)
         mapView.anchor(top: nil, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor)
         mapTopConstraint = mapView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 0)
         mapBottomConstraint = mapView.bottomAnchor.constraint(equalTo: toolbarView.topAnchor, constant: 0)
@@ -113,7 +126,7 @@ class CompanyMainView: UIView {
     
     @objc func handleSegmentChanged(sender: UISegmentedControl) {
         let page = CompanyViewModel.PageIndex(rawValue: sender.selectedSegmentIndex)
-        delegate.companyMainView(self, didSelectPage: page)
+        delegate?.companyMainView(self, didSelectPage: page)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -123,16 +136,16 @@ class CompanyMainView: UIView {
 
 extension CompanyMainView : CompanyToolbarDelegate {
     func companyToolbar(_: CompanyToolbar, requestedAction: CompanyToolbar.ActionType) {
-        delegate.companyToolbar(toolbarView, requestedAction: requestedAction)
+        delegate?.companyToolbar(toolbarView, requestedAction: requestedAction)
     }
 }
 extension CompanyMainView : CompanyHeaderViewDelegate {
     func didTapApply() {
-        delegate.companyMainViewDidTapApply(self)
+        delegate?.companyMainViewDidTapApply(self)
     }
     
     func didTapDone() {
-        delegate.companyMainViewDidTapDone(self)
+        delegate?.companyMainViewDidTapDone(self)
     }
     
     

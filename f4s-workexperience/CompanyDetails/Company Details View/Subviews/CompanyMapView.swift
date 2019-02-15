@@ -14,6 +14,8 @@ class CompanyMapView: MKMapView {
         self.company = company
         super.init(frame: CGRect.zero)
         addAnnotation(F4SCompanyAnnotation(company: company))
+        showsScale = true
+        showsCompass = true
         showsUserLocation = true
     }
     

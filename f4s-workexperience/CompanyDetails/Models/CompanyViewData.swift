@@ -30,6 +30,7 @@ struct CompanyViewData {
     var industryIsHidden: Bool { return industry == nil }
     var duedilIsHiden: Bool { return duedilUrl == nil }
     var duedilUrl: String? = nil
+    var postcode: String? = nil
     
     private var company: Company
     

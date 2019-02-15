@@ -46,6 +46,8 @@ class CompanyHeaderView: UIView {
         let button = UIButton(type: UIButton.ButtonType.system)
         button.setImage(#imageLiteral(resourceName: "cross"), for: UIControl.State.normal)
         button.tintColor = UIColor.darkGray
+        button.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 44).isActive = true
         button.addTarget(self, action: #selector(handleDoneTap), for: .touchUpInside)
         return button
     }()

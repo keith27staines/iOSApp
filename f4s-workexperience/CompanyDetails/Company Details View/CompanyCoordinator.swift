@@ -11,35 +11,47 @@ import Reachability
 
 class CompanyCoordinator : BaseCoordinator {
     
+    var companyViewController: CompanyViewController!
     var navigationController: UINavigationController!
+    var companyViewModel: CompanyViewModel!
     let company: Company
-    var companyViewController: CompanyViewController?
     
     init(rootViewController: UIViewController, company: Company) {
         self.company = company
         super.init(rootViewController: rootViewController)
     }
     
-    lazy var companyViewModel: CompanyViewModel = {
-        return CompanyViewModel(coordinatingDelegate: self, company: company, people: [])
-    }()
     
-    lazy var placementService: F4SPlacementServiceProtocol = {
-        return F4SPlacementService()
-    }()
+    
+    var placementService: F4SPlacementServiceProtocol!
     
     override func start() {
+        super.start()
+        placementService = F4SPlacementService()
+        companyViewModel = CompanyViewModel(coordinatingDelegate: self, company: company, people: [])
         companyViewController = CompanyViewController(viewModel: companyViewModel)
         navigationController = UINavigationController(rootViewController: companyViewController!)
         rootViewController.present(navigationController, animated: true, completion: nil)
+    }
+    
+    func finish() {
+        placementService = nil
+        rootViewController.dismiss(animated: true, completion: nil)
+        navigationController = nil
+        companyViewController = nil
+        companyViewModel = nil
+        parentCoordinator?.childCoordinatorDidFinish(self)
+    }
+    
+    deinit {
+        print("*************** Company coordinator was deinitialized")
     }
 }
 
 extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
     
     func companyViewModelDidComplete(_ viewModel: CompanyViewModel) {
-        rootViewController.dismiss(animated: true, completion: nil)
-        parentCoordinator?.childCoordinatorDidFinish(self)
+        finish()
     }
     
     func companyViewModel(_ viewModel: CompanyViewModel, applyTo: CompanyViewData) {
@@ -51,7 +63,7 @@ extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
                 return
             }
         }
-    
+        //defer { finish() }
         guard company.placement == nil else {
             presentCoveringLetter(presentingViewController: companyViewController, company: company)
             return

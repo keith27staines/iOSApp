@@ -9,7 +9,7 @@
 import UIKit
 
 
-protocol CompanyToolbarDelegate {
+protocol CompanyToolbarDelegate : class {
     func companyToolbar(_ : CompanyToolbar, requestedAction: CompanyToolbar.ActionType)
 }
 
@@ -21,7 +21,7 @@ class CompanyToolbar: UIToolbar {
         case showMap
     }
     
-    var toolbarDelegate: CompanyToolbarDelegate?
+    weak var toolbarDelegate: CompanyToolbarDelegate?
     
     var shareButton: UIBarButtonItem = {
         let button = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(handleButtonTapped))
@@ -33,6 +33,11 @@ class CompanyToolbar: UIToolbar {
         let on = #imageLiteral(resourceName: "heartFilled")
         let off = #imageLiteral(resourceName: "heartUnfilled")
         heartButton.image = hearted ? on : off
+        heartButton.tintColor = hearted ? UIColor.red : UIColor.blue
+    }
+    
+    func mapApperance(shown: Bool) {
+        mapButton.tintColor = shown ? UIColor.red : UIColor.blue
     }
     
     var heartButton: UIBarButtonItem = {

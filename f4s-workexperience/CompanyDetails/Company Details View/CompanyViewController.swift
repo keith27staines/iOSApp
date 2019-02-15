@@ -16,7 +16,6 @@ class CompanyViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         viewModel.viewModelDelegate = self
-        refresh()
     }
     
     private var loadingInProgressCount: Int = 0
@@ -37,14 +36,19 @@ class CompanyViewController: UIViewController {
     lazy var companyMainPageView: CompanyMainView = view as! CompanyMainView
     
     override func loadView() {
-        let view = CompanyMainView(companyViewModel: viewModel, delegate: self)
-        self.view = view
+        view = CompanyMainView(companyViewModel: viewModel, delegate: self)
+    }
+    
+    override func viewDidLoad() {
         _ = pageViewController
         companyMainPageView.segmentedControl.selectedSegmentIndex = viewModel.selectedPersonIndex ?? 0
+        viewModel.userLocation = companyMainPageView.mapView.userLocation.location
+        refresh()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
+        refresh()
     }
     
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 protocol CompanyViewModelCoordinatingDelegate : class {
     func companyViewModelDidComplete(_ viewModel: CompanyViewModel)
@@ -60,6 +61,27 @@ class CompanyViewModel : NSObject {
         }
     }
     
+    var companyPostcode: String? {
+        didSet { viewModelDelegate?.companyViewModelDidRefresh(self) }
+    }
+    
+    var userLocation: CLLocation? {
+        didSet {
+            viewModelDelegate?.companyViewModelDidRefresh(self)
+        }
+    }
+    
+    var distanceFromUserToCompany: String? {
+        guard let userLocation = userLocation else { return nil }
+        let companyLocation = CLLocation(latitude: company.latitude, longitude: company.longitude)
+        let numberFormatter = NumberFormatter()
+        numberFormatter.maximumFractionDigits = 2
+        numberFormatter.minimumIntegerDigits = 1
+        let distance = NSNumber(value: userLocation.distance(from: companyLocation) / 1000.0)
+        guard let formattedDistance = numberFormatter.string(from: distance) else { return nil }
+        return "Distance from you: \(formattedDistance) km"
+    }
+    
     var selectedPersonIndexDidChange: ((Int?) -> ())?
     weak var coordinatingDelegate: CompanyViewModelCoordinatingDelegate?
     weak var viewModelDelegate: CompanyViewModelDelegate?
@@ -67,7 +89,7 @@ class CompanyViewModel : NSObject {
     lazy var placement = PlacementDBOperations.sharedInstance.getPlacementsForCurrentUserAndCompany(companyUuid: company.uuid)
     var addToshortlistService: CompanyFavouritingServiceProtocol?
     private (set) var company: Company
-    private (set) var companyViewData: CompanyViewData
+    var companyViewData: CompanyViewData
     let people: [PersonViewData]
     let companyService: F4SCompanyServiceProtocol
     var appliedState: AppliedState { return companyViewData.appliedState }
@@ -121,6 +143,10 @@ class CompanyViewModel : NSObject {
         viewControllers = [summaryViewController, dataViewController]
         loadCompany()
         loadDocuments()
+        company.getPostcode { [weak self] postcode in
+            self?.companyViewData.postcode = postcode
+            self?.summaryViewController.refresh()
+        }
     }
     
     func transitionDirectionForPage(_ pageIndex: PageIndex) ->  UIPageViewController.NavigationDirection? {
@@ -267,5 +293,15 @@ extension CompanyViewModel: UIPageViewControllerDataSource {
                 return nil
         }
         return controller.pageIndex
+    }
+}
+
+private extension Company {
+    func getPostcode( completion: @escaping (String?) -> Void ) {
+        let geocoder = CLGeocoder()
+        let location = CLLocation(latitude: latitude, longitude: longitude)
+        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+            completion(placemarks?.first?.postalCode)
+        }
     }
 }

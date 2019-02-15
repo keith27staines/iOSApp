@@ -470,7 +470,7 @@ class CustomNavigationHelper : Coordinating {
     
     func presentCompanyDetailsPopover(parentCtrl: UIViewController, company: Company) {
         let companyCoordinator = CompanyCoordinator(rootViewController: parentCtrl, company: company)
-        
+        companyCoordinator.parentCoordinator = self
         addChildCoordinator(companyCoordinator)
         companyCoordinator.start()
     }

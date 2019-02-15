@@ -186,6 +186,7 @@
 		FC39F45E21AAA618005B0A07 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC39F45621AAA617005B0A07 /* MessageTableViewCell.swift */; };
 		FC39F45F21AAA618005B0A07 /* MessageViewController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC39F45821AAA617005B0A07 /* MessageViewController+UITableView.swift */; };
 		FC39F46021AAA618005B0A07 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC39F45921AAA617005B0A07 /* MessageViewController.swift */; };
+		FC3CD1DA221566F200F91B50 /* Geocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CD1D9221566F200F91B50 /* Geocoding.swift */; };
 		FC40921E2101CDFF00453A54 /* EnterVoucherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC40921D2101CDFF00453A54 /* EnterVoucherViewController.swift */; };
 		FC4336CA202DB953001D0569 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4336C9202DB953001D0569 /* StringExtensions.swift */; };
 		FC4336CC202DB999001D0569 /* F4SStringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4336CB202DB999001D0569 /* F4SStringExtensionTests.swift */; };
@@ -626,6 +627,7 @@
 		FC39F45921AAA617005B0A07 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		FC39F46121AAA64B005B0A07 /* MessagesModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesModelTests.swift; sourceTree = "<group>"; };
 		FC39F46221AAA64B005B0A07 /* MessageProtocolTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageProtocolTests.swift; sourceTree = "<group>"; };
+		FC3CD1D9221566F200F91B50 /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
 		FC40921D2101CDFF00453A54 /* EnterVoucherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterVoucherViewController.swift; sourceTree = "<group>"; };
 		FC4336C9202DB953001D0569 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		FC4336CB202DB999001D0569 /* F4SStringExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SStringExtensionTests.swift; sourceTree = "<group>"; };
@@ -1196,6 +1198,7 @@
 				20D51BE31E27710C003A8358 /* UNService.swift */,
 				FC6C11B9202870D6002C8EA5 /* F4SGrammar.swift */,
 				FCE11E58211437B400403789 /* F4SDateHelper.swift */,
+				FC3CD1D9221566F200F91B50 /* Geocoding.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -2663,6 +2666,7 @@
 				FC99BDC520CFAFD400278DDE /* F4SCompanyFavouritingService.swift in Sources */,
 				FC8BCEFA213684CD00CF16EF /* UIView+ConstraintsExtensions.swift in Sources */,
 				40C6DDF41E03F445000F8806 /* UserInfoDB.swift in Sources */,
+				FC3CD1DA221566F200F91B50 /* Geocoding.swift in Sources */,
 				FCEF70BB2108A535001C229A /* F4SInviteButtonsTableViewCell.swift in Sources */,
 				40E78E791DD32BE7000A3776 /* DrawerVisualState.swift in Sources */,
 				204C89791DF5F0B200D8493A /* ChooseAttributesViewController.swift in Sources */,
