@@ -35,7 +35,7 @@ class TestSearchDataGetter : Searchable {
         return contents.split(separator: ",").compactMap({ (substring) -> SearchItem? in
             let removingLinebreaks = substring.replacingOccurrences(of: "\r\n", with: "")
             if removingLinebreaks.isEmpty { return nil }
-            return SearchItem(uuidString: nil, primaryText: removingLinebreaks, secondaryText: nil, matchOnText: removingLinebreaks)
+            return SearchItem(uuidString: nil, primaryText: removingLinebreaks, secondaryText: nil, matchOnText: removingLinebreaks, location: nil)
         })
     }
 }

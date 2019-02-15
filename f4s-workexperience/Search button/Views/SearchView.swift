@@ -34,6 +34,7 @@ class SearchView: UIView {
     
     func refreshFromDatasource() {
         tableView.reloadData()
+        finishActivity()
     }
     
     lazy private var stateMachine = SearchViewStateMachine(searchView: self)
@@ -61,6 +62,7 @@ class SearchView: UIView {
             UIView.animate(withDuration: 0.3, animations: {
                 self.horizontalStack.alpha = 1.0
                 self.horizontalStack.isUserInteractionEnabled = true
+                self.layoutIfNeeded()
             })
         })
     }
@@ -146,67 +148,44 @@ class SearchView: UIView {
         return imageView
     }()
     
-    @objc func handleSearchTapped() {
+    @objc func handleSearchTapped(_ sender: Any?) {
         endEditing(false)
         stateMachine.searchTapped()
     }
     
-    @objc func handlePersonTapped() {
+    @objc func handlePersonTapped(_ sender: Any?) {
         endEditing(false)
         stateMachine.personTapped()
     }
     
-    @objc func handleCompanyTapped() {
+    @objc func handleCompanyTapped(_ sender: Any?) {
         endEditing(false)
         stateMachine.companyTapped()
     }
     
-    @objc func handleLocationTapped() {
+    @objc func handleLocationTapped(_ sender: Any?) {
         endEditing(false)
         stateMachine.locationTapped()
     }
     
     lazy var horizontalStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [personIcon,companyIcon,mapIcon])
+        let stack = UIStackView(arrangedSubviews: [
+            personSelectorView,
+            companySelectorView,
+            mapSelectorView
+            ])
+        personSelectorView.isHidden = true
         stack.axis = .horizontal
         stack.distribution = .fillEqually
-        stack.spacing = spacing
+        stack.spacing = 2*spacing
         return stack
     }()
     
-    lazy var personIcon: UIImageView = {
-        let image = UIImage(named: "generic_person")!.withRenderingMode(.alwaysTemplate)
-        let imageView = UIImageView(image: image)
-        // Set isUserInteractionEnabled = true to re-enable button
-        // temporarily disabled as no person search
-        imageView.isUserInteractionEnabled = false
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(handlePersonTapped))
-        imageView.addGestureRecognizer(recognizer)
-        imageView.clipsToBounds = true
-        return imageView
-    }()
+    lazy var personSelectorView: UIView = { SearchModeSelectorView(imageName: "generic_person", text: "Person", tapped: handlePersonTapped)}()
     
-    lazy var companyIcon: UIImageView = {
-        let image = UIImage(named: "generic_company")!.withRenderingMode(.alwaysTemplate)
-        let imageView = UIImageView(image: image)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.isUserInteractionEnabled = true
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(handleCompanyTapped))
-        imageView.addGestureRecognizer(recognizer)
-        imageView.clipsToBounds = true
-        return imageView
-    }()
+    lazy var companySelectorView: UIView = { SearchModeSelectorView(imageName: "generic_company", text: "Company", tapped: handleCompanyTapped) }()
     
-    lazy var mapIcon: UIImageView = {
-        let image = UIImage(named: "map")!.withRenderingMode(.alwaysTemplate)
-        let imageView = UIImageView(image: image)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.isUserInteractionEnabled = true
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(handleLocationTapped))
-        imageView.addGestureRecognizer(recognizer)
-        imageView.clipsToBounds = true
-        return imageView
-    }()
+    lazy var mapSelectorView: UIView = { SearchModeSelectorView(imageName: "map", text: "Location", tapped: handleLocationTapped) }()
 
     lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -259,7 +238,7 @@ class SearchView: UIView {
         layer.cornerRadius = 8
         backgroundColor = UIColor.white
         searchIcon.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: spacing, left: spacing, bottom: 0, right: 0))
-        horizontalStack.anchor(top: searchIcon.topAnchor, leading: searchIcon.trailingAnchor, bottom: searchIcon.bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: spacing), size: CGSize(width: 2 * spacing + 3 * iconSize.width, height: 0))
+        horizontalStack.anchor(top: searchIcon.topAnchor, leading: searchIcon.trailingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 0, left: 2 * spacing + iconSize.width, bottom: 0, right: spacing))
         horizontalStack.alpha = 0.0
         searchBar.alpha = 0.0
         heightConstraint = heightAnchor.constraint(equalToConstant: collapsedSize.height)
@@ -282,6 +261,25 @@ class SearchView: UIView {
         guard tableView.superview == nil else { return }
         addSubview(tableView)
         tableView.anchor(top: searchBar.bottomAnchor, leading: searchBar.leadingAnchor, bottom: bottomAnchor, trailing: searchBar.trailingAnchor, padding: UIEdgeInsets(top: 8, left: 0, bottom: collapsedSize.height/2, right: 0))
+         addSubview(activityIndicator)
+         activityIndicator.anchor(top: tableView.topAnchor, leading: nil, bottom: nil, trailing: nil)
+         activityIndicator.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
+    }
+    
+    private let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+    private var activityCount = 0
+    func startActivity() {
+        activityCount += 1
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+    }
+    func finishActivity() {
+        activityCount -= 1
+        if activityCount < 0 { activityCount = 0 }
+        if activityCount == 0 {
+            activityIndicator.stopAnimating()
+            activityIndicator.isHidden = true
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -292,8 +290,24 @@ class SearchView: UIView {
 extension SearchView : SearchViewProtocol {}
 
 extension SearchView : UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    
+    @objc func processTextChange() {
+        startActivity()
+        let searchText = searchBar.text ?? ""
+        stateMachine.searchTextChanged(searchText)
         delegate?.searchView(self, didChangeText: searchText)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        finishActivity()
+        NSObject.cancelPreviousPerformRequests(
+            withTarget: self,
+            selector: #selector(processTextChange),
+            object: searchBar)
+        self.perform(
+            #selector(processTextChange),
+            with: searchBar,
+            afterDelay: 0.2)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

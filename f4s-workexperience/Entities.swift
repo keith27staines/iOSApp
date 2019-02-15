@@ -42,7 +42,9 @@ public struct Company : Hashable {
     public var modified: Date
     public var isRemoved: Bool
     public var uuid: String
-    public var name: String
+    public var name: String {
+        didSet { self.sortingName = name.stripCompanySuffix().lowercased() }
+    }
     public var logoUrl: String
     public var industry: String
     public var latitude: Double
@@ -78,7 +80,11 @@ public struct Company : Hashable {
         self.sourceId = sourceId
         self.hashtag = hashtag
         self.companyUrl = companyUrl
+        self.sortingName = name.stripCompanySuffix().lowercased()
     }
+    
+    /// The name after having been stripped of company suffixes (LTD, etc) and lowercased. Intended for use in searching scenarios, this is not a computed property.
+    var sortingName: String
     
     /// Asynchronously obtains the logo for the current instance or the specified default logo if the current instance has no specified logo. This method is intended for direct use by the UI and therefore the completion handler is guarenteed to run on the main queue.
     /// - parameter defaultLogo: The image to use if the company hasn't specified a logo

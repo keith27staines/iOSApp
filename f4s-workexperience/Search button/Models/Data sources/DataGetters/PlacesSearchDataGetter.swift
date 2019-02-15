@@ -10,6 +10,8 @@ import Foundation
 import GooglePlaces
 
 extension GMSAutocompletePrediction : SearchItemProtocol {
+    var location: CLLocationCoordinate2D? { return nil }
+    
     var uuidString: String? {
         return placeID
     }

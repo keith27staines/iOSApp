@@ -28,7 +28,7 @@ class MapViewController: UIViewController {
         searchView.delegate = self
         searchView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(searchView)
-        searchView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 30, left: sideMargin, bottom: 0, right: 0))
+        searchView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 40, left: sideMargin, bottom: 0, right: 0))
         let bottomConstraint: NSLayoutConstraint
         if #available(iOS 11.0, *) {
             bottomConstraint = searchView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80)
@@ -791,6 +791,7 @@ extension MapViewController: CLLocationManagerDelegate {
             allowLocationUpdate = false
             userLocation = location
             moveCameraToBestPosition()
+            companyDataSource.userLocation = userLocation?.coordinate
         }
     }
 }
@@ -1116,7 +1117,10 @@ extension MapViewController : SearchViewDelegate {
         case .collapsed, .horizontallyExpanded: return nil
         case .searchingLocation: return placesDataSource
         case .searchingPeople: return peopleDataSource
-        case .searchingCompany: return companyDataSource
+        case .searchingCompany:
+            companyDataSource.userLocation = userLocation?.coordinate
+            return companyDataSource
+            
         }
     }
 }

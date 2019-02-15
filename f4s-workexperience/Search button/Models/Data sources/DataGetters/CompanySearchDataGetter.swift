@@ -9,6 +9,10 @@
 import Foundation
 
 extension Company : SearchItemProtocol {
+    var location: CLLocationCoordinate2D? {
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
+    
     var uuidString: String? {
         return uuid
     }
@@ -22,7 +26,7 @@ extension Company : SearchItemProtocol {
         return nil
     }
     
-    var matchOnText: String { return name.lowercased() }
+    var matchOnText: String { return sortingName }
 }
 
 class CompanySearchDataGetter : Searchable {
@@ -34,15 +38,13 @@ class CompanySearchDataGetter : Searchable {
             completion(unfiltered)
             return
         }
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async { [weak self] in
             guard let strongSelf = self else { return }
             
             let dbOps = DatabaseOperations.sharedInstance
             dbOps.getAllCompanies { companies in
-                DispatchQueue.main.async {
-                    strongSelf.unfiltered = companies
-                    completion(companies)
-                }
+                strongSelf.unfiltered = companies
+                completion(companies)
             }
         }
     }

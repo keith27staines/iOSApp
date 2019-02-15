@@ -29,6 +29,12 @@ class SearchViewStateMachine {
     private var animateCollapseHorizontally: (() -> Void)?
     private var animateRevealSearchResults: (() -> Void)?
     
+    private (set) var lastSearchText = [State: String]()
+    
+    func searchTextChanged(_ text: String) {
+        lastSearchText[value] = text
+    }
+    
     weak private var searchView: SearchViewProtocol!
     
     enum State {
@@ -55,9 +61,10 @@ class SearchViewStateMachine {
         view.searchBar.autocapitalizationType = searchBarAutocapitalizationType
         view.searchBar.returnKeyType = searchBarReturnKeyType
         view.searchBar.textContentType = searchBarTextContentType
-        view.personIcon.tintColor = personIconTintColor
-        view.mapIcon.tintColor = mapIconTintColor
-        view.companyIcon.tintColor = companyIconTintColor
+        view.searchBar.text = lastSearchText[value]
+        view.personSelectorView.tintColor = personIconTintColor
+        view.mapSelectorView.tintColor = mapIconTintColor
+        view.companySelectorView.tintColor = companyIconTintColor
         view.delegate?.searchView(view, didChangeState: value)
     }
     
@@ -71,10 +78,10 @@ class SearchViewStateMachine {
             case .collapsed: animateCollapseHorizontally?()
             case .horizontallyExpanded: animateExpandHorizontally?()
             case .searchingLocation:
-                searchBarPlaceholder = "Postcode"
+                searchBarPlaceholder = "Town or postcode"
                 searchBarReturnKeyType = .go
                 searchBarAutocapitalizationType = .allCharacters
-                searchBarTextContentType = UITextContentType.postalCode
+                searchBarTextContentType = UITextContentType.location
                 mapIconTintColor = activeColor
                 if oldValue != .searchingLocation { changedSearchType() }
             case .searchingPeople:
@@ -108,6 +115,7 @@ extension SearchViewStateMachine {
         switch value {
         case .collapsed:
             value = .horizontallyExpanded
+            companyTapped()
         default:
             value = .collapsed
         }
