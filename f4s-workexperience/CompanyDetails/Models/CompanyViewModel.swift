@@ -13,6 +13,7 @@ protocol CompanyViewModelCoordinatingDelegate : class {
     func companyViewModelDidComplete(_ viewModel: CompanyViewModel)
     func companyViewModel(_ viewModel: CompanyViewModel, applyTo: CompanyViewData)
     func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn person: PersonViewData)
+    func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn company: CompanyViewData)
     func companyViewModel(_ viewModel: CompanyViewModel, requestedShowDuedil company: CompanyViewData)
     func companyViewModel(_ viewModel: CompanyViewModel, showShare company: CompanyViewData)
 }
@@ -103,6 +104,7 @@ class CompanyViewModel : NSObject {
     var companyJson: F4SCompanyJson? = nil {
         didSet {
             companyViewData.duedilUrl = companyJson?.duedilUrlString
+            companyViewData.linkedinUrl = companyJson?.linkedInUrlString
             viewModelDelegate?.companyViewModelDidRefresh(self)
         }
     }
@@ -179,6 +181,10 @@ class CompanyViewModel : NSObject {
     
     func didTapLinkedIn(for person: PersonViewData) {
         coordinatingDelegate?.companyViewModel(self, requestsShowLinkedIn: person)
+    }
+    
+    func didTapLinkedIn(for company: CompanyViewData) {
+        coordinatingDelegate?.companyViewModel(self, requestsShowLinkedIn: company)
     }
     
     func didTapDuedil(for company: CompanyViewData) {

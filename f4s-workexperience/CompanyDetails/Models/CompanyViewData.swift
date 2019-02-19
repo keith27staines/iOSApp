@@ -28,8 +28,14 @@ struct CompanyViewData {
     var growth: Double? = nil
     var employees: Int? = nil
     var industryIsHidden: Bool { return industry == nil }
-    var duedilIsHiden: Bool { return duedilUrl == nil }
+    var duedilIsHiden: Bool {
+        return duedilUrl == nil || duedilUrl!.isEmpty
+    }
+    var linkedinIsHidden: Bool {
+        return linkedinUrl == nil || linkedinUrl!.isEmpty
+    }
     var duedilUrl: String? = nil
+    var linkedinUrl: String? = nil
     var postcode: String? = nil
     
     private var company: Company

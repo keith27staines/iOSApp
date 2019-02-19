@@ -49,7 +49,7 @@ class CompanyCoordinator : BaseCoordinator {
 }
 
 extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
-    
+
     func companyViewModelDidComplete(_ viewModel: CompanyViewModel) {
         finish()
     }
@@ -133,6 +133,10 @@ extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
     
     func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn person: PersonViewData) {
         print("Show linkedIn profile for \(person.fullName)")
+    }
+    
+    func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn company: CompanyViewData) {
+        openUrl(company.linkedinUrl)
     }
     
     func companyViewModel(_ viewModel: CompanyViewModel, requestedShowDuedil company: CompanyViewData) {

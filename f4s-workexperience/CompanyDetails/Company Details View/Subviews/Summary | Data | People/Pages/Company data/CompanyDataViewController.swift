@@ -23,6 +23,7 @@ class CompanyDataViewController: CompanySubViewController {
     
     func configureViews() {
         view.addSubview(duedilButton)
+        view.addSubview(linkedinButton)
         view.addSubview(revenueLabel)
         view.addSubview(growthLabel)
         view.addSubview(employeesLabel)
@@ -31,10 +32,12 @@ class CompanyDataViewController: CompanySubViewController {
         growthLabel.anchor(top: revenueLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 8, left: 8, bottom: 0, right: 0))
         employeesLabel.anchor(top: growthLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 8, left: 8, bottom: 0, right: 0))
         duedilButton.anchor(top: employeesLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 12, left: 8, bottom: 0, right: 0))
+        linkedinButton.anchor(top: duedilButton.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 12, left: 8, bottom: 0, right: 0))
     }
     
     override func refresh() {
         duedilButton.isHidden = company.duedilIsHiden
+        linkedinButton.isHidden = company.linkedinIsHidden
         revenueLabel.text = company.revenueString
         revenueLabel.isHidden = company.revenueIsHidden
         growthLabel.text = company.growthString
@@ -51,6 +54,7 @@ class CompanyDataViewController: CompanySubViewController {
     
     var duedilButton: UIButton = {
         let button = UIButton(type: UIButton.ButtonType.system)
+        button.isHidden = true
         button.setImage(#imageLiteral(resourceName: "Duedil"), for: .normal)
         button.setTitle("See more on Duedil", for: .normal)
         button.addTarget(self, action: #selector(handleDuedilTapped), for: .touchUpInside)
@@ -58,7 +62,20 @@ class CompanyDataViewController: CompanySubViewController {
         return button
     }()
     
+    var linkedinButton: UIButton = {
+        let button = UIButton(type: UIButton.ButtonType.system)
+        button.isHidden = true
+        button.setImage(#imageLiteral(resourceName: "ui-linkedin-icon"), for: .normal)
+        button.setTitle("See more on LinkedIn", for: .normal)
+        button.addTarget(self, action: #selector(handleLinkedinTapped), for: .touchUpInside)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
+        return button
+    }()
+    
     @objc func handleDuedilTapped() {
         viewModel.didTapDuedil(for: company)
+    }
+    @objc func handleLinkedinTapped() {
+        viewModel.didTapLinkedIn(for: company)
     }
 }
