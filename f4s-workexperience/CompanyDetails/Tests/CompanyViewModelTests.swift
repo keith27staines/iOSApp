@@ -33,6 +33,7 @@ class CompanyViewModelTests: XCTestCase {
 }
 
 class CoordinatingDelegate: CompanyViewModelCoordinatingDelegate {
+    
     func companyViewModelDidRefresh(_ viewModel: CompanyViewModel) {
         refreshedModelCount += 1
     }
@@ -41,6 +42,7 @@ class CoordinatingDelegate: CompanyViewModelCoordinatingDelegate {
     var didComplete = false
     var applyToCompany: CompanyViewData? = nil
     var showLinkedInForPerson: PersonViewData? = nil
+    var showLinkedInForCompany: CompanyViewData? = nil
     var showDuedilForCompany: CompanyViewData? = nil
     var showLocationForCompany: CompanyViewData? = nil
     var showShareForCompany: CompanyViewData? = nil
@@ -55,6 +57,10 @@ class CoordinatingDelegate: CompanyViewModelCoordinatingDelegate {
     
     func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn person: PersonViewData) {
         showLinkedInForPerson = person
+    }
+    
+    func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn company: CompanyViewData) {
+        showLinkedInForCompany = company
     }
     
     func companyViewModel(_ viewModel: CompanyViewModel, requestedShowDuedil company: CompanyViewData) {
