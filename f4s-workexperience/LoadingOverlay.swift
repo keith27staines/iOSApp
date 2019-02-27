@@ -66,10 +66,9 @@ class LoadingOverlay: UIView {
         self.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
-        let superview = self.superview
-        if let superview = superview as? UITableView {
-            anchorSize(to: superview)
-        }
+        guard let superview = superview else { return }
+        guard !(superview is UITableView) else { return }
+        fillSuperview()
     }
 
     func showLightOverlay() {

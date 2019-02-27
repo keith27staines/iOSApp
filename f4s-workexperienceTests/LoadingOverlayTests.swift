@@ -54,7 +54,8 @@ class LoadingOverlayTests : XCTestCase {
         let superview = UIView(frame: frame)
         superview.addSubview(sut)
         sut.showOverlay()
-        XCTAssertEqual(sut.frame, frame)
+        superview.layoutIfNeeded()
+        XCTAssertEqual(sut.frame, superview.frame)
     }
     
 }
