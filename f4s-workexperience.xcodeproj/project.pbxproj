@@ -132,6 +132,7 @@
 		FC1334E72121BE10003435A6 /* RGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1334E32121BE10003435A6 /* RGBA.swift */; };
 		FC1334E82121BE11003435A6 /* Skinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1334E42121BE10003435A6 /* Skinner.swift */; };
 		FC1334E92121BE11003435A6 /* Skin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1334E52121BE10003435A6 /* Skin.swift */; };
+		FC1B354522267F54001F9818 /* LoadingOverlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1B354422267F54001F9818 /* LoadingOverlayTests.swift */; };
 		FC1D6B7C20D906D100D0C9AF /* F4STemplateModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D6B7B20D906D100D0C9AF /* F4STemplateModels.swift */; };
 		FC1D6B8020D92C8900D0C9AF /* F4STemplateModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D6B7F20D92C8900D0C9AF /* F4STemplateModelTests.swift */; };
 		FC1DC06221FE137A009ABC60 /* ScaledNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1DC06121FE137A009ABC60 /* ScaledNumber.swift */; };
@@ -571,6 +572,7 @@
 		FC1334E32121BE10003435A6 /* RGBA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGBA.swift; sourceTree = "<group>"; };
 		FC1334E42121BE10003435A6 /* Skinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skinner.swift; sourceTree = "<group>"; };
 		FC1334E52121BE10003435A6 /* Skin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skin.swift; sourceTree = "<group>"; };
+		FC1B354422267F54001F9818 /* LoadingOverlayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingOverlayTests.swift; sourceTree = "<group>"; };
 		FC1D6B7B20D906D100D0C9AF /* F4STemplateModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateModels.swift; sourceTree = "<group>"; };
 		FC1D6B7F20D92C8900D0C9AF /* F4STemplateModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateModelTests.swift; sourceTree = "<group>"; };
 		FC1DC06121FE137A009ABC60 /* ScaledNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaledNumber.swift; sourceTree = "<group>"; };
@@ -1025,6 +1027,7 @@
 				FC6C11BD202C402E002C8EA5 /* F4STemplateTests.swift */,
 				FC6C11C1202C4EE5002C8EA5 /* F4STemplateHelperTests.swift */,
 				FC4336CB202DB999001D0569 /* F4SStringExtensionTests.swift */,
+				FC1B354422267F54001F9818 /* LoadingOverlayTests.swift */,
 			);
 			path = "f4s-workexperienceTests";
 			sourceTree = "<group>";
@@ -2902,6 +2905,7 @@
 				FC62FF9B20EF7728003E52C5 /* F4SCalendarMonthTests.swift in Sources */,
 				FC1D6B8020D92C8900D0C9AF /* F4STemplateModelTests.swift in Sources */,
 				FC1DC0AA21FE158E009ABC60 /* PersonViewDataTests.swift in Sources */,
+				FC1B354522267F54001F9818 /* LoadingOverlayTests.swift in Sources */,
 				FCD7FF8721AAE2DF00E6221B /* MessagesModelTests.swift in Sources */,
 				FCD7FF8621AAE2DA00E6221B /* MessageProtocolTests.swift in Sources */,
 				FC6C11C2202C4EE5002C8EA5 /* F4STemplateHelperTests.swift in Sources */,

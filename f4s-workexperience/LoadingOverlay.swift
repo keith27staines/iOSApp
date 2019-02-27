@@ -12,17 +12,14 @@ import UIKit
 class LoadingOverlay: UIView {
     
     lazy var activityIndicator: UIActivityIndicatorView = {
-        let centerX = self.frame.width / 2
-        let centerY = self.frame.height / 2
         let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
-        activityIndicator.frame = CGRect(x: centerX - (activityIndicator.frame.width) / 2, y: centerY - (activityIndicator.frame.height) / 2, width: (activityIndicator.frame.width), height: (activityIndicator.frame.height))
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         return activityIndicator
     }()
     
     var caption: String = "" {
         didSet {
             captionLabel.text = caption
+            captionLabel.isHidden = caption.isEmpty
         }
     }
     
@@ -34,29 +31,44 @@ class LoadingOverlay: UIView {
         label.layer.borderWidth = 2
         label.layer.backgroundColor = UIColor.white.cgColor
         label.layer.cornerRadius = 10.0
-        label.topAnchor.constraint(equalTo: activityIndicator.bottomAnchor, constant: 20).isActive = true
-        label.centerXAnchor.constraint(equalTo: activityIndicator.centerXAnchor, constant: 0).isActive = true
-        label.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        label.widthAnchor.constraint(equalToConstant: 200).isActive = true
         label.textAlignment = .center
-
         label.alpha = 0.9
+        label.isHidden = true
         return label
     }()
-
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configure()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        configure()
+    }
+    
+    private func configure() {
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        captionLabel.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(activityIndicator)
+        addSubview(captionLabel)
+        activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        captionLabel.topAnchor.constraint(equalTo: activityIndicator.bottomAnchor, constant: 20).isActive = true
+        captionLabel.centerXAnchor.constraint(equalTo: activityIndicator.centerXAnchor, constant: 0).isActive = true
+        captionLabel.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        captionLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
+    }
+    
     func showOverlay() {
         self.backgroundColor = UIColor(netHex: Colors.black)
         self.alpha = 0.75
-
         self.translatesAutoresizingMaskIntoConstraints = false
-
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
         let superview = self.superview
-        if let _ = superview as? UITableView {
-            return
-        } else {
-            addSubview(activityIndicator)
-            setConstraints()
-            activityIndicator.startAnimating()
+        if let superview = superview as? UITableView {
+            anchorSize(to: superview)
         }
     }
 
@@ -67,31 +79,10 @@ class LoadingOverlay: UIView {
     }
 
     func hideOverlay() {
-        guard superview != nil else {
-            // Not shown, therefore there is nothing to do
-            return
-        }
-        UIView.animate(withDuration: 0.5, animations: {
-            self.alpha = 0
-            self.removeFromSuperview()
+        guard superview != nil else { return }
+        UIView.animate(withDuration: 0.5, animations: { [weak self] in
+            self?.alpha = 0
+            self?.removeFromSuperview()
         })
-    }
-
-    func setConstraints() {
-        // Loading View
-
-        let leadingConstraintCharView = NSLayoutConstraint(item: self, attribute: .leading, relatedBy: .equal, toItem: superview, attribute: .leading, multiplier: 1, constant: 0)
-        let topConstraintCharView = NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: superview, attribute: .top, multiplier: 1, constant: 0)
-        let trailingConstraintCharView = NSLayoutConstraint(item: self, attribute: .trailing, relatedBy: .equal, toItem: superview, attribute: .trailing, multiplier: 1, constant: 0)
-        let bottomConstraintCharView = NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: superview, attribute: .bottom, multiplier: 1, constant: 0)
-
-        self.superview?.addConstraints([leadingConstraintCharView, topConstraintCharView, trailingConstraintCharView, bottomConstraintCharView])
-
-        // activityIndicator view constraints
-
-        let centerYConstraintCharView = NSLayoutConstraint(item: activityIndicator, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0)
-        let centerXConstraintCharView = NSLayoutConstraint(item: activityIndicator, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0)
-
-        self.superview?.addConstraints([centerYConstraintCharView, centerXConstraintCharView])
     }
 }
