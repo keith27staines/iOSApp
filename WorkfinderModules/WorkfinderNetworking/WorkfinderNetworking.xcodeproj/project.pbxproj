@@ -10,6 +10,7 @@
 		FC2AC5E922351E2C00FF4E47 /* WorkfinderSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2AC5E822351E2C00FF4E47 /* WorkfinderSessionManager.swift */; };
 		FC2AC5EB2235281A00FF4E47 /* WorkfinderSessionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2AC5EA2235281A00FF4E47 /* WorkfinderSessionManagerTests.swift */; };
 		FC2AC5F12235516A00FF4E47 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2AC5F02235516A00FF4E47 /* Helpers.swift */; };
+		FC85F96C22365FA0002F84DF /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC85F96822365F75002F84DF /* WorkfinderCommon.framework */; };
 		FCA91E3C2233FF20007ED308 /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91E322233FF20007ED308 /* WorkfinderNetworking.framework */; };
 		FCA91E412233FF20007ED308 /* WorkfinderNetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91E402233FF20007ED308 /* WorkfinderNetworkingTests.swift */; };
 		FCA91E432233FF20007ED308 /* WorkfinderNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA91E352233FF20007ED308 /* WorkfinderNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -17,6 +18,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+
+		FC85F96722365F75002F84DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FC85F96222365F75002F84DF /* WorkfinderCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FCA91E6B2234043D007ED308;
+			remoteInfo = WorkfinderCommon;
+		};
+		FC85F96922365F75002F84DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FC85F96222365F75002F84DF /* WorkfinderCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FCA91E742234043D007ED308;
+			remoteInfo = WorkfinderCommonTests;
+		};
 		FCA91E3D2233FF20007ED308 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FCA91E292233FF20007ED308 /* Project object */;
@@ -30,6 +46,7 @@
 		FC2AC5E822351E2C00FF4E47 /* WorkfinderSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderSessionManager.swift; sourceTree = "<group>"; };
 		FC2AC5EA2235281A00FF4E47 /* WorkfinderSessionManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderSessionManagerTests.swift; sourceTree = "<group>"; };
 		FC2AC5F02235516A00FF4E47 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		FC85F96222365F75002F84DF /* WorkfinderCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WorkfinderCommon.xcodeproj; path = ../WorkfinderCommon/WorkfinderCommon.xcodeproj; sourceTree = "<group>"; };
 		FCA91E322233FF20007ED308 /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA91E352233FF20007ED308 /* WorkfinderNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderNetworking.h; sourceTree = "<group>"; };
 		FCA91E362233FF20007ED308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -44,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC85F96C22365FA0002F84DF /* WorkfinderCommon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,12 +76,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC85F96322365F75002F84DF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FC85F96822365F75002F84DF /* WorkfinderCommon.framework */,
+				FC85F96A22365F75002F84DF /* WorkfinderCommonTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FC85F96B22365FA0002F84DF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FCA91E282233FF20007ED308 = {
 			isa = PBXGroup;
 			children = (
+				FC85F96222365F75002F84DF /* WorkfinderCommon.xcodeproj */,
 				FCA91E342233FF20007ED308 /* WorkfinderNetworking */,
 				FCA91E3F2233FF20007ED308 /* WorkfinderNetworkingTests */,
 				FCA91E332233FF20007ED308 /* Products */,
+				FC85F96B22365FA0002F84DF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -193,6 +229,12 @@
 			mainGroup = FCA91E282233FF20007ED308;
 			productRefGroup = FCA91E332233FF20007ED308 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = FC85F96322365F75002F84DF /* Products */;
+					ProjectRef = FC85F96222365F75002F84DF /* WorkfinderCommon.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				FCA91E312233FF20007ED308 /* WorkfinderNetworking */,
@@ -200,6 +242,24 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		FC85F96822365F75002F84DF /* WorkfinderCommon.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = WorkfinderCommon.framework;
+			remoteRef = FC85F96722365F75002F84DF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FC85F96A22365F75002F84DF /* WorkfinderCommonTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = WorkfinderCommonTests.xctest;
+			remoteRef = FC85F96922365F75002F84DF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 
 /* Begin PBXResourcesBuildPhase section */
 		FCA91E302233FF20007ED308 /* Resources */ = {
