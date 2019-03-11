@@ -16,6 +16,8 @@ class PopupCompanyListViewController: UIViewController {
         })
     }
     
+    var didSelectCompany: ((Company) -> Void)?
+    
     private var companies: [Company]!
 
     @IBOutlet var tableView: UITableView!
@@ -55,6 +57,6 @@ extension PopupCompanyListViewController : UITableViewDelegate, UITableViewDataS
     
     func showCompanyInfo(indexPath: IndexPath) {
         let company = companies[indexPath.row]
-        CustomNavigationHelper.sharedInstance.presentCompanyDetailsPopover(parentCtrl: self, company: company)
+        didSelectCompany?(company)
     }
 }

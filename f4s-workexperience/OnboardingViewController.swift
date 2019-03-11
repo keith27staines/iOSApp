@@ -12,11 +12,14 @@ class OnboardingViewController: UIViewController {
 
     var hideOnboardingControls: Bool = true {
         didSet {
+            _ = view
             descriptionLabel.isHidden = hideOnboardingControls
             enterLocationButton.isHidden = hideOnboardingControls
             enableLocationButton.isHidden = hideOnboardingControls
         }
     }
+    
+    var shouldEnableLocation: ((Bool) -> Void)?
     
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var enterLocationButton: UIButton!
@@ -37,10 +40,6 @@ class OnboardingViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         setupAppearance()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
 }
 
@@ -93,17 +92,11 @@ extension OnboardingViewController {
 extension OnboardingViewController {
     @IBAction func enterLocationButton(_: AnyObject) {
         enterLocationButton.isEnabled = false
-        DispatchQueue.main.async {
-            CustomNavigationHelper.sharedInstance.completeOnboarding(mapShouldRequestLocation: false)
-        }
-
+        shouldEnableLocation?(false)
     }
 
     @IBAction func enableLocationButton(_: AnyObject) {
         enterLocationButton.isEnabled = false
-        DispatchQueue.main.async {
-            CustomNavigationHelper.sharedInstance.completeOnboarding(mapShouldRequestLocation: true)
-        }
-        
+        shouldEnableLocation?(true)
     }
 }

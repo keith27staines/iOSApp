@@ -41,7 +41,7 @@ class CompanyDocumentsViewController : UIViewController {
     }
     
     func displayDocument(_ document: F4SCompanyDocument) {
-         BaseCoordinator.openUrl(document.url)
+         NavigationCoordinator.openUrl(document.url)
     }
     
     func explainDocumentNotVisible(_ document: F4SCompanyDocument) {

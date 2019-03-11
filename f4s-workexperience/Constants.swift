@@ -51,18 +51,6 @@ struct Style {
     static let hugeTextSize: CGFloat = 45
 }
 
-struct UserDefaultsKeys {
-    static let invokingUrl = "invokingUrl"
-    static let partnerID = "partnerID"
-    static let hasParnerIDBeenSentToServer = "hasParnerIDBeenSentToServer"
-    static let userUuid = "userUuid"
-    static let userHasAccount = "userHasAccount"
-    static let companyDatabaseCreatedDate = "companyDatabaseCreatedDate"
-    static let isFirstLaunch = "isFirstLaunch"
-    static let vendorUuid = "vendorUuid"
-    static let shouldLoadTimeline = "shouldLoadTimeline"
-}
-
 struct GoogleApiKeys {
     static let googleApiKey = "AIzaSyAEph2YRDNaWwgHhrU0Qnd6izMoDQudeNs"
     static let geocodeApiKey = "AIzaSyAEph2YRDNaWwgHhrU0Qnd6izMoDQudeNs"

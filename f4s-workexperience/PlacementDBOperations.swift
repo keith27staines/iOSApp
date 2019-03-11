@@ -17,14 +17,14 @@ class PlacementDBOperations {
     }
 
     func savePlacement(placement: F4SPlacement) {
-        guard let userUuid = F4SUser.userUuidFromKeychain else {
+        guard let userUuid = F4SUser().uuid else {
             return
         }
         PlacementCoreDataManager.sharedInstance.savePlacementToContext(placement, userUuid: userUuid)
     }
 
     func getPlacementsForCurrentUser() -> [F4SPlacement] {
-        guard let userUuid = F4SUser.userUuidFromKeychain else {
+        guard let userUuid = F4SUser().uuid else {
             return []
         }
         let placementDBData = PlacementCoreDataManager.sharedInstance.getPlacementsForUser(userUuid: userUuid)
@@ -37,7 +37,7 @@ class PlacementDBOperations {
     }
 
     func getPlacementsForCurrentUserAndCompany(companyUuid: String) -> F4SPlacement? {
-        guard let userUuid = F4SUser.userUuidFromKeychain,
+        guard let userUuid = F4SUser().uuid,
             let placementDB = PlacementCoreDataManager.sharedInstance.getPlacementsForUserAndCompany(userUuid: userUuid, companyUuid: companyUuid) else {
             return nil
         }
@@ -55,7 +55,7 @@ class PlacementDBOperations {
     }
 
     func getInProgressPlacementsForCurrentUser() -> F4SPlacement? {
-        guard let userUuid = F4SUser.userUuidFromKeychain,
+        guard let userUuid = F4SUser().uuid,
             let placementDB = PlacementCoreDataManager.sharedInstance.getInProgressPlacementsForUser(userUuid: userUuid) else {
             return nil
         }
@@ -63,13 +63,13 @@ class PlacementDBOperations {
     }
 
     func removePlacementWithId(placementUuid: String) {
-        if let userUuid = F4SUser.userUuidFromKeychain {
+        if let userUuid = F4SUser().uuid {
             PlacementCoreDataManager.sharedInstance.removePlacementWithId(placementUuid: placementUuid, userUuid: userUuid)
         }
     }
 
     func getPlacementWithUuid(placementUuid: String) -> F4SPlacement? {
-        guard let userUuid = F4SUser.userUuidFromKeychain,
+        guard let userUuid = F4SUser().uuid,
             let placementDB = PlacementCoreDataManager.sharedInstance.getPlacementForUserAndPlacementUuid(userUuid: userUuid, placementUuid: placementUuid) else {
             return nil
         }

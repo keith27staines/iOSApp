@@ -12,25 +12,23 @@ import XCGLogger
 import GoogleMaps
 import GooglePlaces
 import UserNotifications
-import Analytics
-import Segment_Bugsnag
 
-let log = XCGLogger.default
+let apiKey: String = "eTo0oeh4Yeen1oy7iDuv"
+let globalLog = XCGLogger.default
 
 extension Notification.Name {
-    
     static let verificationCodeRecieved = Notification.Name("verificationCodeRecieved")
-    
 }
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    var appCoordinator: AppCoordinatorProtocol!
     var window: UIWindow?
     var deviceToken: String?
 
-    public private (set) var databaseDownloadManager: F4SDatabaseDownloadManager?
-    lazy var userService: F4SUserServiceProtocol = {
+    public private (set) var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol?
+    
+    var userService: F4SUserServiceProtocol = {
         return F4SUserService()
     }()
     
@@ -47,25 +45,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK:- Application events
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        WorkfinderModules().assert()
+        GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
+        GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
         if ProcessInfo.processInfo.arguments.contains("isUnitTesting") {
             print("Exiting didFinishLaunchingWithOptions early because `isUnitTesting` argument is set")
             return true
         }
+        runDataFixes()
         f4sLog = F4SLog()
-        log.debug("\n\n\n********\nWorkfinder launched in environement \(Config.ENVIRONMENT)\n********")
-        GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
-        GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
-        if let userUuid = F4SUser.userUuidFromKeychain  {
-            // Existing user
-            log.debug("\nUsing existing user uuid from keychain")
-            onUserConfirmedToHaveUuid(application: application, userUuid: userUuid)
-        } else {
-            // New user
-            log.debug("\nRegistering new user to obtain anonymous uuid")
-            registerNewUser(application: application, completion: { [weak self] userUuid in
-                self?.onUserConfirmedToHaveUuid(application: application, userUuid: userUuid)
-            })
-        }
+        globalLog.debug("\n\n\n********\nWorkfinder launched in environement \(Config.ENVIRONMENT)\n********")
+        databaseDownloadManager = F4SDatabaseDownloadManager()
+        
+        let appCoordinatorFactory = AppCoordinatoryFactory()
+        appCoordinator = appCoordinatorFactory.makeAppCoordinator(
+            registrar: application,
+            launchOptions: launchOptions,
+            databaseDownloadManager: databaseDownloadManager!,
+            f4sLog: f4sLog!)
+        
+        window = appCoordinator.window
+        appCoordinator.start()
         return true
     }
     
@@ -100,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
-        debug?.updateHistory()
+        f4sLog.updateHistory()
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -115,25 +115,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         userService.enablePushNotificationForUser(withDeviceToken: token) { (result) in
             switch result {
             case .error(let error):
-                log.error(error)
+                globalLog.error(error)
             case .success(_):
-                log.debug("Notifications enabled on server with token \(token)")
+                globalLog.debug("Notifications enabled on server with token \(token)")
             }
         }
     }
     
     func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        log.error("Failed to register with error \(error)")
+        globalLog.error("Failed to register with error \(error)")
     }
     
     // This method handles notifications arriving whether the app was running already or the notification opened the app
     func application(_: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         DispatchQueue.main.async {
             guard let window = self.window else {
-                log.error("Push notification cannot be processed because the application does not have a window")
+                globalLog.error("Push notification cannot be processed because the application does not have a window")
                 return
             }
-            log.debug("Received remote notification")
+            globalLog.debug("Received remote notification")
             let appState = UIApplication.shared.applicationState
             UNService.shared.handleRemoteNotification(userInfo: userInfo, window: window, isAppActive: appState == .active)
             completionHandler(UIBackgroundFetchResult.newData)
@@ -153,7 +153,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let container = NSPersistentContainer(name: "f4s-workexperience")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let nserror = error as NSError? {
-                log.severe(nserror)
+                globalLog.severe(nserror)
                 assertionFailure("error loading coredata persistent store \(nserror)")
                 fatalError("Unrecoverable error \(nserror), \(nserror.userInfo)")
             }
@@ -168,124 +168,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 try context.save()
             } catch {
                 let nserror = error as NSError
-                log.error(nserror)
+                globalLog.error(nserror)
                 assertionFailure("error saving to coredata context \(nserror)")
             }
         }
     }
 }
 
-
 // MARK: helpers
 extension AppDelegate {
     
-    func presentForceUpdate() {
-        let rootVC = self.window?.rootViewController?.topMostViewController
-        let forceUpdateVC = F4SForceAppUpdateViewController()
-        rootVC?.present(forceUpdateVC, animated: true, completion: nil)
-    }
-    
-    func presentNoNetworkMustRetry(application: UIApplication, retryOperation: @escaping (UIApplication) -> ()) {
-        let rootVC = self.window?.rootViewController?.topMostViewController
-        let alert = UIAlertController(
-            title: NSLocalizedString("No Network", comment: ""),
-            message: NSLocalizedString("Please ensure you have a good network connection while we set things up for you", comment: ""),
-            preferredStyle: .alert)
-        let retry = UIAlertAction(
-            title: NSLocalizedString("Retry", comment: ""),
-            style: .default) { (_) in
-                alert.dismiss(animated: false, completion: nil)
-                retryOperation(application)
-        }
-        alert.addAction(retry)
-        rootVC?.present(alert, animated: true, completion: nil)
-    }
-
-    func handleFatalError(error: Error) {
-        let rootVC = self.window?.rootViewController
-        let alert = UIAlertController(
-            title: NSLocalizedString("Workfinder cannot continue", comment: ""),
-            message: NSLocalizedString("We are very sorry, this should not have happened but Workfinder has encountered an error it cannot recover from", comment: ""),
-            preferredStyle: .alert)
-        let retry = UIAlertAction(
-            title: NSLocalizedString("Close Workfinder", comment: ""),
-            style: .default) { (_) in
-                fatalError()
-        }
-        alert.addAction(retry)
-        rootVC?.present(alert, animated: true, completion: nil)
-    }
-    
-    func registerNewUser(application: UIApplication, completion: @escaping (F4SUUID)->()) {
-        userService.registerAnonymousUserOnServer { [weak self] (result) in
-            DispatchQueue.main.async {
-                guard let strongSelf = self else { return }
-                switch result {
-                case .error(let error):
-                    log.debug("Couldn't register user, offering retry \(error)")
-                    strongSelf.presentNoNetworkMustRetry(application: application, retryOperation: { [weak self] (application) in
-                        self?.registerNewUser(application: application, completion: completion)
-                    })
-                case .success(let result):
-                    guard let anonymousUserUuid = result.uuid else {
-                        log.severe("anonyous user uuid is nil")
-                        return
-                    }
-                    log.debug("Using anonymous user id \(anonymousUserUuid)")
-                    SEGAnalytics.shared().identify(anonymousUserUuid)
-                    completion(anonymousUserUuid)
-                }
-            }
-        }
-    }
-    
-    func onUserConfirmedToHaveUuid(application: UIApplication, userUuid: F4SUUID) {
-        if userUuid != F4SUser.userUuidFromKeychain {
-            F4SUser.setUserUuid(userUuid)
-        }
-        printDebugUserInfo()
-        SEGAnalytics.shared().identify(userUuid)
-        _ = F4SNetworkSessionManager.shared
-        application.registerForRemoteNotifications()
-        UNService.shared.configure()
-        F4SUserStatusService.shared.beginStatusUpdate()
-        if databaseDownloadManager == nil {
-            databaseDownloadManager = F4SDatabaseDownloadManager()
-        }
-        
-        databaseDownloadManager?.start()
-        let isFirstLaunch = UserDefaults.standard.value(forKey: UserDefaultsKeys.isFirstLaunch) as? Bool ?? true
-        if isFirstLaunch {
-            guard let ctrl = window?.rootViewController?.topMostViewController as? OnboardingViewController else {
-                assertionFailure("The root view controller is not an OnboardingViewController")
-                return
-            }
-            UserDefaults.standard.set(false, forKey: UserDefaultsKeys.shouldLoadTimeline)
-            _ = ctrl.view
-            ctrl.hideOnboardingControls = false
-        } else {
-            CustomNavigationHelper.sharedInstance.navigateToMostAppropriateInitialTab()
-        }
-    }
-    
-    func printDebugUserInfo() {
-        let info = """
-                   ***************
-                   Vendor id = \(UIDevice.current.identifierForVendor?.uuidString ?? "nil")
-                   User id = \(F4SUser.userUuidFromKeychain ?? "nil user")
-                   ***************
-                   """
-        log.debug("\n\(info)")
-    }
-    
     func setInvokingUrl(_ url: URL) {
-        log.debug("Invoked from url: \(url.absoluteString)")
+        globalLog.debug("Invoked from url: \(url.absoluteString)")
         guard let universalLink = UniversalLink(url: url) else {
             return
         }
         switch universalLink {
         case .recommendCompany(let company):
-            CustomNavigationHelper.sharedInstance.rewindAndNavigateToRecommendations(from: nil, show: company)
+            TabBarCoordinator.sharedInstance.rewindAndNavigateToRecommendations(from: nil, show: company)
             break
         case .passwordless( _):
             let userInfo: [AnyHashable: Any] = ["url" : url]
@@ -296,7 +196,16 @@ extension AppDelegate {
             NotificationCenter.default.post(notification)
         }
     }
+    
+
 }
+
+extension AppDelegate {
+    private func runDataFixes() {
+        F4SUser.dataFixMoveUUIDFromKeychainToUserDefaults()
+    }
+}
+
 
 
 

@@ -17,14 +17,14 @@ class UserInfoDBOperations {
     }
 
     func saveUserInfo(userInfo: F4SUser) {
-        guard let userUuid = F4SUser.userUuidFromKeychain else {
+        guard let userUuid = F4SUser().uuid else {
             return
         }
         UserInfoCoreDataManager.sharedInstance.saveUserInfoToContext(userInfo, userUuid: userUuid)
     }
 
     func getUserInfo() -> F4SUser? {
-        guard let userUuid = F4SUser.userUuidFromKeychain,
+        guard let userUuid = F4SUser().uuid,
             let userInfoDB = UserInfoCoreDataManager.sharedInstance.getUserInfo(userUuid: userUuid) else {
             return nil
         }
@@ -33,25 +33,6 @@ class UserInfoDBOperations {
     }
 
     fileprivate func getUserFromUserInfoDB(userInfoDB: UserInfoDB) -> F4SUser {
-        var user: F4SUser = F4SUser(requiresConsent: userInfoDB.requiresConsent)
-        if let email = userInfoDB.email {
-            user.email = email
-        }
-        if let firstName = userInfoDB.firstName {
-            user.firstName = firstName
-        }
-        if let lastName = userInfoDB.lastName, lastName.isEmpty == false {
-            user.lastName = lastName
-        }
-        if let consenterEmail = userInfoDB.consenterEmail {
-            user.consenterEmail = consenterEmail
-        }
-        if let dateOfBirth = userInfoDB.dateOfBirth {
-            user.dateOfBirth =  Date.dateFromRfc3339(string: dateOfBirth)
-        }
-        if let placementUuid = userInfoDB.placementUuid {
-            user.placementUuid = placementUuid
-        }
-        return user
+        return F4SUser(userData: userInfoDB)
     }
 }

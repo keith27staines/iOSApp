@@ -17,13 +17,13 @@ class ShortlistDBOperations {
     }
 
     func saveShortlist(shortlist: Shortlist) {
-        if let userUuid = F4SUser.userUuidFromKeychain {
+        if let userUuid = F4SUser().uuid {
             ShortlistCoreDataManager.sharedInstance.saveShortlistToContext(shortlist, userUuid: userUuid)
         }
     }
 
     func getShortlistForCurrentUser() -> [Shortlist] {
-        guard let userUuid = F4SUser.userUuidFromKeychain else {
+        guard let userUuid = F4SUser().uuid else {
             return []
         }
         let shortlistDBData = ShortlistCoreDataManager.sharedInstance.getShortlistForUser(userUuid: userUuid)
@@ -36,7 +36,7 @@ class ShortlistDBOperations {
     }
 
     func removeShortlistWithId(shortlistUuid: String) {
-        guard let userUuid = F4SUser.userUuidFromKeychain else {
+        guard let userUuid = F4SUser().uuid else {
             return
         }
         ShortlistCoreDataManager.sharedInstance.removeShortlistWithId(shortlistUuid: shortlistUuid, userUuid: userUuid)

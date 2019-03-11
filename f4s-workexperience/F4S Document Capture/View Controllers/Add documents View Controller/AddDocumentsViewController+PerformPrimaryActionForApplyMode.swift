@@ -99,7 +99,7 @@ extension F4SAddDocumentsViewController {
                         MessageHandler.sharedInstance.displayWithTitle("Oops something went wrong", "Workfinder cannot complete this operation", parentCtrl: strongSelf)
                         return
                     }
-                    user.updateUuidAndPersistToLocalStorage(uuid: uuid)
+                    user.updateUuid(uuid: uuid)
                     F4SNetworkSessionManager.shared.rebuildSessions() // Ensure session manager is aware of the possible change of user uuid
                     var updatedContext = applicationContext
                     updatedContext.user = user
@@ -121,7 +121,7 @@ extension F4SAddDocumentsViewController {
     }
     
     func afterSubmitApplication(applicationContext: F4SApplicationContext) {
-        CustomNavigationHelper.sharedInstance.presentSuccessExtraInfoPopover(
+        TabBarCoordinator.sharedInstance.presentSuccessExtraInfoPopover(
             parentCtrl: self)
     }
 }

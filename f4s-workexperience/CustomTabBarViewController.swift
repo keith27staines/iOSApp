@@ -9,7 +9,7 @@
 import UIKit
 import Reachability
 
-class CustomTabBarViewController: UITabBarController {
+class TabBarViewController: UITabBarController {
 
     var reachability: Reachability?
     
@@ -34,6 +34,7 @@ class CustomTabBarViewController: UITabBarController {
         if let status = F4SUserStatusService.shared.userStatus {
             processUserStatusUpdate(status)
         }
+        
     }
     
     @objc func catchUserStatusUpdatedNotification(notification: Notification) {
@@ -65,13 +66,13 @@ class CustomTabBarViewController: UITabBarController {
         guard let placementUuid = unratedPlacements.first, let topViewCtrl = self.topMostViewController else { return }
 
         if topViewCtrl is TimelineViewController || topViewCtrl is MessageViewController || topViewCtrl is MessageContainerViewController || topViewCtrl is MapViewController {
-            if let centerCtrl = self.evo_drawerController?.centerViewController as? CustomTabBarViewController {
+            if let centerCtrl = self.evo_drawerController?.centerViewController as? TabBarViewController {
                 if let currentTabCtrl = centerCtrl.selectedViewController {
-                    CustomNavigationHelper.sharedInstance.presentRatePlacementPopover(parentCtrl: currentTabCtrl, placementUuid: placementUuid, ratePlacementProtocol: self)
+                    TabBarCoordinator.sharedInstance.presentRatePlacementPopover(parentCtrl: currentTabCtrl, placementUuid: placementUuid, ratePlacementProtocol: self)
                 }
             }
         } else {
-            CustomNavigationHelper.sharedInstance.presentRatePlacementPopover(parentCtrl: topViewCtrl, placementUuid: placementUuid, ratePlacementProtocol: self)
+            TabBarCoordinator.sharedInstance.presentRatePlacementPopover(parentCtrl: topViewCtrl, placementUuid: placementUuid, ratePlacementProtocol: self)
         }
     }
 
@@ -87,6 +88,8 @@ class CustomTabBarViewController: UITabBarController {
     // MARK: - UI Setup
     fileprivate func configureTabBar() {
         Skinner().apply(tabBarSkin: skin?.tabBarSkin, to: self)
+        tabBar.unselectedItemTintColor = UIColor.darkGray
+        tabBar.tintColor = UIColor.init(red: 0.0, green: 0, blue: 0.7, alpha: 1)
     }
 
     override func viewWillAppear(_ animation: Bool) {
@@ -101,7 +104,7 @@ class CustomTabBarViewController: UITabBarController {
 }
 
 // MARK: - menu actions
-extension CustomTabBarViewController {
+extension TabBarViewController {
     func addMenuCustomGesture() {
         self.evo_drawerController?.gestureShouldRecognizeTouchBlock = menuGestureShouldRecognizeTouch
     }
@@ -123,7 +126,7 @@ extension CustomTabBarViewController {
 }
 
 // MARK: - Reachability Setup
-extension CustomTabBarViewController {
+extension TabBarViewController {
 
     func setupReachability(_: String?, useClosures _: Bool) {
         let reachability = Reachability()
@@ -158,7 +161,7 @@ extension CustomTabBarViewController {
 
 // MARK: - Api Calls
 
-extension CustomTabBarViewController: RatePlacementProtocol {
+extension TabBarViewController: RatePlacementProtocol {
     internal func dismissRateController() { }
 }
 
@@ -166,18 +169,20 @@ protocol RatePlacementProtocol: class {
     func dismissRateController()
 }
 
-
 enum TabIndex : Int {
-    case timeline = 0
-    case favourites = 1
-    case map = 2
+    //case home
+    case timeline
+    case recommendations
+    case favourites
+    case map
 }
-extension CustomTabBarViewController {
+
+extension TabBarViewController {
     
     static func rewindToDrawerAndPresentRecommendations(vc: UIViewController) {
         recursiveRewindToDrawer(from: vc) { (drawerController) in
             guard let centerController = drawerController?.centerViewController else { return }
-            guard let tabBarCtrl = centerController as? CustomTabBarViewController else { return }
+            guard let tabBarCtrl = centerController as? TabBarViewController else { return }
             let recommendationsStoryboard = UIStoryboard(name: "Recommendations", bundle: nil)
             guard let recommendationsNavController = recommendationsStoryboard.instantiateInitialViewController() else {
                 return
@@ -195,7 +200,7 @@ extension CustomTabBarViewController {
     static func rewindToDrawerAndSelectTab(vc: UIViewController, tab: TabIndex) {
         recursiveRewindToDrawer(from: vc, completion: { drawerController in
             guard let centerController = drawerController?.centerViewController else { return }
-            guard let tabBarCtrl = centerController as? CustomTabBarViewController else { return }
+            guard let tabBarCtrl = centerController as? TabBarViewController else { return }
             tabBarCtrl.selectedIndex = tab.rawValue
         })
     }

@@ -26,10 +26,11 @@ class PartnerSelectionViewController: UIViewController {
     
     @IBOutlet weak var partnerLogoImageView: UIImageView!
     
+    var doneButtonTapped: (() -> ())?
+    
     @IBAction func doneButtonPressed(_ sender: Any) {
         partnersModel.selectedPartner = selectedPartner
-        dismiss(animated: true, completion: nil)
-        CustomNavigationHelper.sharedInstance.navigateToMap()
+        doneButtonTapped?()
     }
     
     override func viewDidLoad() {

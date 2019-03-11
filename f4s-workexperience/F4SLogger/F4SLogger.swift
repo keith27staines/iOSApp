@@ -10,6 +10,7 @@ import Foundation
 import Analytics
 import Segment_Bugsnag
 import Bugsnag
+import XCGLogger
 
 public protocol F4SAnalyticsAndDebugging : F4SAnalytics & F4SDebugging {}
 
@@ -24,17 +25,20 @@ public protocol F4SDebugging {
     func updateHistory()
     func textCombiningHistoryAndSessionLog() -> String?
     func userCanAccessDebugMenu() -> Bool
+    func error(message: String)
+    func error(_ error: Error)
+    func debug(message: String)
 }
 
-public var f4sLog: F4SAnalyticsAndDebugging?
+public var f4sLog: F4SAnalyticsAndDebugging!
 
-public var analytics: F4SAnalytics? {
-    return f4sLog
-}
+//public var analytics: F4SAnalytics? {
+//    return f4sLog
+//}
 
-public var debug: F4SDebugging? {
-    return f4sLog
-}
+//public var debug: F4SDebugging? {
+//    return f4sLog
+//}
 
 public class F4SLog : F4SAnalyticsAndDebugging {
     
@@ -77,11 +81,25 @@ extension F4SLog : F4SAnalytics {
 }
 
 extension F4SLog : F4SDebugging {
+    public func error(message: String) {
+        XCGLogger.default.error(message)
+    }
+    
+    public func error(_ error: Error) {
+        XCGLogger.default.error(error)
+    }
+    
+    public func debug(message: String) {
+        XCGLogger.default.debug(message)
+    }
+    
     public func notifyError(_ error: Error) {
+        XCGLogger.default.error(error)
         Bugsnag.notifyError(error)
     }
     
     public func leaveBreadcrumb(with message: String) {
+        XCGLogger.default.debug(message)
         Bugsnag.leaveBreadcrumb(withMessage: message)
     }
     
@@ -127,15 +145,15 @@ class F4SDebug {
     init(directory: URL? = nil) throws {
         let directory = directory ?? F4SDebug.logDefaultDirectory
         guard directory.hasDirectoryPath else {
-            log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
+            globalLog.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
             throw F4SDebugError.invalidDirectoryForLogfile
         }
         self.directory = directory
         do {
             try setupLogfile()
-            log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: loggerUrl.path, fileLevel: .debug)
+            globalLog.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: loggerUrl.path, fileLevel: .debug)
         } catch (let error) {
-            log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
+            globalLog.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
             throw error
         }
     }

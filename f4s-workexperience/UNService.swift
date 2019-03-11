@@ -24,7 +24,7 @@ class UNService : NSObject {
         center.requestAuthorization(options: [.alert,.badge, .sound]) { [weak self] (success, error) in
             guard let this = self else { return }
             if let error = error {
-                log.error(error)
+                globalLog.error(error)
             }
             this.userDefaults.setValue(!success, forKey: this.didDeclineKey)
             this.configure()
@@ -52,8 +52,8 @@ class UNService : NSObject {
     }
 
     func handleRemoteNotification(userInfo: [AnyHashable: Any], window: UIWindow, isAppActive: Bool) {
-        log.debug("Handliong remote notification with user info...")
-        log.debug(userInfo)
+        globalLog.debug("Handliong remote notification with user info...")
+        globalLog.debug(userInfo)
         F4SUserStatusService.shared.beginStatusUpdate()
         
         var title: String = ""
@@ -73,7 +73,7 @@ class UNService : NSObject {
         }
         
         guard let type = extractNotificationType(userInfo: userInfo) else {
-            log.debug("Notification type cannot be extracted from push notification")
+            globalLog.debug("Notification type cannot be extracted from push notification")
             return
         }
         
@@ -85,12 +85,12 @@ class UNService : NSObject {
         }
         
         if isAppActive {
-            log.debug("Push notification cannot be processed because the app is active")
+            globalLog.debug("Push notification cannot be processed because the app is active")
             let alert = UIAlertController(title: title, message: body, preferredStyle: .alert)
             let ok = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default) //{}
             alert.addAction(ok)
             guard let window = UIApplication.shared.delegate?.window, let rootViewCtrl = window?.rootViewController else {
-                log.debug("Can't handle notification because there is no window or no root view controller")
+                globalLog.debug("Can't handle notification because there is no window or no root view controller")
                 return
             }
             
@@ -101,7 +101,7 @@ class UNService : NSObject {
             }
             
         } else {
-            log.debug("navigating to best destination for notification")
+            globalLog.debug("navigating to best destination for notification")
             dispatchToBestDestination(for: type, threadUuid: threadUuid, placementUuid: placementUuid)
         }
     }
@@ -110,17 +110,17 @@ class UNService : NSObject {
         switch type
         {
         case NotificationType.message:
-            log.debug("Responding to message push notification by navigating to Timeline")
-            CustomNavigationHelper.sharedInstance.navigateToTimeline(threadUuid: threadUuid)
+            globalLog.debug("Responding to message push notification by navigating to Timeline")
+            TabBarCoordinator.sharedInstance.navigateToTimeline(threadUuid: threadUuid)
             
         case NotificationType.rating:
-            log.debug("Responding to rating push notification by presenting rating controller")
-            if let topViewCtrl = CustomNavigationHelper.sharedInstance.topMostViewController() {
-                CustomNavigationHelper.sharedInstance.presentRatePlacementPopover(parentCtrl: topViewCtrl, placementUuid: placementUuid!)
+            globalLog.debug("Responding to rating push notification by presenting rating controller")
+            if let topViewCtrl = TabBarCoordinator.sharedInstance.topMostViewController() {
+                TabBarCoordinator.sharedInstance.presentRatePlacementPopover(parentCtrl: topViewCtrl, placementUuid: placementUuid!)
             }
         case NotificationType.recommendation:
-            log.debug("Responding to recommendation push notification by navigating to Recommendations page")
-            CustomNavigationHelper.sharedInstance.rewindAndNavigateToRecommendations(from: nil, show: nil)
+            globalLog.debug("Responding to recommendation push notification by navigating to Recommendations page")
+            TabBarCoordinator.sharedInstance.rewindAndNavigateToRecommendations(from: nil, show: nil)
         }
     }
     

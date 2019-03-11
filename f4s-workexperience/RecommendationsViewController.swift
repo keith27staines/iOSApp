@@ -86,6 +86,7 @@ class CompanyCell : UITableViewCell {
         stackView.topAnchor.constraint(equalTo: topAnchor, constant: 4).isActive = true
         stackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -4).isActive = true
         stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4).isActive = true
+        heightAnchor.constraint(greaterThanOrEqualToConstant: 64).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -95,11 +96,10 @@ class CompanyCell : UITableViewCell {
 }
 
 class RecommendationsViewController: UIViewController {
+    
+    weak var coordinator: RecommendationsCoordinator?
 
     @IBOutlet weak var tableView: UITableView!
-    @IBAction func dismissMe(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
     
     var emptyRecomendationsListText: String? = nil
     var selectCompany: Company?
@@ -184,9 +184,6 @@ extension RecommendationsViewController : UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var recommendation = model.recommendationForIndexPath(indexPath)
-        guard let company = recommendation.company else {
-            return
-        }
-        CustomNavigationHelper.sharedInstance.presentCompanyDetailsPopover(parentCtrl: self, company: company)
+        coordinator?.showDetail(company: recommendation.company)
     }
 }

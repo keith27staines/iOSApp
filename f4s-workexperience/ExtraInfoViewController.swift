@@ -13,7 +13,7 @@ class ExtraInfoViewController: UIViewController {
     
     @IBOutlet weak var exploreMapButton: UIButton!
     @IBAction func exploreMoreCompanies(_ sender: Any) {
-        CustomTabBarViewController.rewindToDrawerAndSelectTab(vc: self.navigationController!, tab: .map)
+        TabBarViewController.rewindToDrawerAndSelectTab(vc: self.navigationController!, tab: .map)
     }
     @IBOutlet weak var toYoungStackView: UIStackView!
     
@@ -26,7 +26,7 @@ class ExtraInfoViewController: UIViewController {
     
     @IBAction func termsOfServiceLinkButton(_ sender: UIButton) {
         if let navigCtrl = self.navigationController {
-            CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.terms)
+            TabBarCoordinator.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.terms)
         }
     }
     
@@ -510,7 +510,7 @@ extension ExtraInfoViewController {
         let tapPoint = recognizer.location(in: self.dobInfoLabel)
         if glyphRect.contains(tapPoint) || glyphRect2.contains(tapPoint) {
             if let navigCtrl = self.navigationController {
-                CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.consent)
+                TabBarCoordinator.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.consent)
             }
         }
     }
@@ -539,7 +539,7 @@ extension ExtraInfoViewController {
         let tapPoint = recognizer.location(in: self.noVoucherInfoLabel)
         if glyphRect.contains(tapPoint) {
             if let navigCtrl = self.navigationController {
-                CustomNavigationHelper.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.voucher)
+                TabBarCoordinator.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.voucher)
             }
         }
     }

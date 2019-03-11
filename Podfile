@@ -4,21 +4,22 @@
 use_frameworks!
 
 target 'f4s-workexperience' do
-
-  # Pods for f4s-workexperience
-  pod 'Auth0', '~> 1.9.2'
-  pod 'ReachabilitySwift'
-  pod 'XCGLogger'
-  pod 'KeychainSwift'
-  pod 'SQLite.swift'
-  pod 'GRMustache.swift'
-  pod 'GoogleMaps'
-  pod 'GooglePlaces'
-  pod 'Analytics'
-  pod 'Segment-Bugsnag'
-  
+    
+    # Pods for f4s-workexperience
+    pod 'Auth0', '~> 1.9.2'
+    pod 'ReachabilitySwift'
+    pod 'XCGLogger'
+    pod 'KeychainSwift'
+    pod 'SQLite.swift'
+    pod 'GRMustache.swift'
+    pod 'GoogleMaps'
+    pod 'GooglePlaces'
+    pod 'Analytics'
+    pod 'Segment-Bugsnag'
+    
 end
   
 target 'f4s-workexperienceTests' do
+
 end
 

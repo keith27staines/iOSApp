@@ -17,13 +17,13 @@ class InterestDBOperations {
     }
 
     func saveInterest(_ interest: F4SInterest) {
-        if let userUuid = F4SUser.userUuidFromKeychain {
+        if let userUuid = F4SUser().uuid {
             InterestCoreDataManager.sharedInstance.saveInterestToContext(interest, userUuid: userUuid)
         }
     }
 
     func interestsForCurrentUser() -> F4SInterestSet {
-        guard let userUuid = F4SUser.userUuidFromKeychain else {
+        guard let userUuid = F4SUser().uuid else {
             return []
         }
         let interestDBData = InterestCoreDataManager.sharedInstance.getInterestsForUser(userUuid: userUuid)
@@ -46,7 +46,7 @@ class InterestDBOperations {
     }
 
     func removeUserInterestWithUuid(_ interestUuid: String) {
-        guard let userUuid = F4SUser.userUuidFromKeychain else {
+        guard let userUuid = F4SUser().uuid else {
             return
         }
         InterestCoreDataManager.sharedInstance.removeInterestWithId(interestUuid: interestUuid, userUuid: userUuid)

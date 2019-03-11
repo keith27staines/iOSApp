@@ -24,8 +24,9 @@ class CompanyToolbar: UIToolbar {
     weak var toolbarDelegate: CompanyToolbarDelegate?
     
     var shareButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(handleButtonTapped))
+         let button = UIBarButtonItem(image: #imageLiteral(resourceName: "share_ios"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(handleButtonTapped))
         button.tag = ActionType.showShare.rawValue
+        button.tintColor = UIColor.blue
         return button
     }()
     

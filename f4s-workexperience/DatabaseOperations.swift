@@ -140,7 +140,7 @@ extension DatabaseOperations {
     /// Get all companies from the company database
     public func getAllCompanies( completed: @escaping (_ companies: [Company]) -> Void) {
         guard let db = database else {
-            log.debug("`getAllCompanies` failed because the database connection is nil")
+            globalLog.debug("`getAllCompanies` failed because the database connection is nil")
             completed([])
             return
         }
@@ -158,7 +158,7 @@ extension DatabaseOperations {
             return
         } catch {
             let nsError = error as NSError
-            log.debug(nsError.localizedDescription)
+            globalLog.debug(nsError.localizedDescription)
             completed([])
         }
     }
@@ -241,7 +241,7 @@ extension DatabaseOperations {
     /// Get all interests from the database as a dictionary keyed by id
     public func getAllInterests( completed: @escaping (_ interests: [Int64:F4SInterest]) -> Void) {
         guard let db = database else {
-            log.debug("`getAllInterests` failed because the database connection is nil")
+            globalLog.debug("`getAllInterests` failed because the database connection is nil")
             completed([:])
             return
         }
@@ -258,7 +258,7 @@ extension DatabaseOperations {
             return
         } catch {
             let nsError = error as NSError
-            log.debug(nsError.localizedDescription)
+            globalLog.debug(nsError.localizedDescription)
             completed([:])
         }
     }
@@ -270,7 +270,7 @@ extension DatabaseOperations {
     ///   - returns: list of ids of interests of the company
     public func interestIdsFor(companyId: Int64) -> [Int64] {
         guard let db = database else {
-            log.debug("Can't get interests for company because the database isn't loaded")
+            globalLog.debug("Can't get interests for company because the database isn't loaded")
             return []
         }
    
@@ -290,7 +290,7 @@ extension DatabaseOperations {
     /// Returns the company with the specified id
     public func companyWithId(_ id: Int64) -> Company? {
         guard let db = database else {
-            log.debug("Can't find company with specified uuid because the database isn't loaded")
+            globalLog.debug("Can't find company with specified uuid because the database isn't loaded")
             return nil
         }
         let selectString: String = "SELECT * FROM businesses_company WHERE id = \(id)"
@@ -309,7 +309,7 @@ extension DatabaseOperations {
     /// Returns the company with the specified uuid
     public func companyWithUUID(_ uuid: F4SUUID) -> Company? {
         guard let db = database else {
-            log.debug("Can't find company with specified uuid because the database isn't loaded")
+            globalLog.debug("Can't find company with specified uuid because the database isn't loaded")
             return nil
         }
         let uuid = uuid.dehyphenated
@@ -333,7 +333,7 @@ extension DatabaseOperations {
     ///   - completed: return list of companies with that list
     public func getCompanies(withUuid: [String], completed: @escaping (_ companies: [Company]) -> Void) {
         guard let db = database else {
-            log.debug("Can't load database")
+            globalLog.debug("Can't load database")
             completed([])
             return
         }
@@ -353,7 +353,7 @@ extension DatabaseOperations {
             return
         } catch {
             let nsError = error as NSError
-            log.debug(nsError.localizedDescription)
+            globalLog.debug(nsError.localizedDescription)
             completed([])
         }
     }
@@ -364,7 +364,7 @@ extension DatabaseOperations {
     /// - Returns: template string
     public func getBusinessesSocialShareTemplateOfType(type: SocialShare) -> String {
         guard let db = database else {
-            log.debug("Can't load database")
+            globalLog.debug("Can't load database")
             return ""
         }
         do {
@@ -378,7 +378,7 @@ extension DatabaseOperations {
             }
         } catch {
             let nsError = error as NSError
-            log.debug(nsError.localizedDescription)
+            globalLog.debug(nsError.localizedDescription)
         }
         return ""
     }
@@ -389,7 +389,7 @@ extension DatabaseOperations {
     /// - Returns: subject to share
     public func getBusinessesSocialShareSubjectTemplateOfType(type: SocialShare) -> String {
         guard let db = database else {
-            log.debug("Can't load database")
+            globalLog.debug("Can't load database")
             return ""
         }
         do {
@@ -403,7 +403,7 @@ extension DatabaseOperations {
             }
         } catch {
             let nsError = error as NSError
-            log.debug(nsError.localizedDescription)
+            globalLog.debug(nsError.localizedDescription)
         }
         return ""
     }
@@ -521,7 +521,7 @@ extension DatabaseOperations {
             _database = try Connection(directoryURL)
         } catch {
             _database = nil
-            log.debug("error connecting to db")
+            globalLog.debug("error connecting to db")
         }
     }
     

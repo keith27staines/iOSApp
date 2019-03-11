@@ -38,12 +38,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Recommendations" id="b2R-IG-E7X">
                         <barButtonItem key="backBarButtonItem" title="Back" id="akt-md-bnm"/>
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="rXB-jl-Wto">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="dismissMe:" destination="tTr-4O-dEl" id="RGK-R5-Zds"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="information" id="eqy-hT-RNw">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>

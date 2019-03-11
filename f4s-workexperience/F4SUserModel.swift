@@ -95,8 +95,19 @@ extension F4SAnonymousUser {
     }
 }
 
-public struct F4SUser : Codable {
-    public var uuid: F4SUUID?
+public protocol F4SUserProtocol {
+    var uuid: F4SUUID? { get }
+    var isRegistered: Bool { get }
+    var isOnboarded: Bool { get }
+    mutating func updateUuid(uuid: F4SUUID)
+}
+
+public struct F4SUser : F4SUserProtocol, Codable {
+    
+    var localStore: LocalKeyedStorage = UserDefaults.standard
+    var analytics: F4SAnalytics? = f4sLog
+    
+    public private (set) var uuid: F4SUUID?
     public var consenterEmail: String?
     public var dateOfBirth: Date?
     public var requiresConsent: Bool
@@ -107,6 +118,15 @@ public struct F4SUser : Codable {
         didSet {
             assert(lastName == nil || lastName?.isEmpty == false)
         }
+    }
+    
+    public var isOnboarded: Bool {
+        guard let isFirstLaunch = localStore.value(key: LocalStore.Key.isFirstLaunch) as? Bool else { return false }
+        return !isFirstLaunch
+    }
+    
+    public func didFinishOnboarding() {
+        localStore.setValue(false, for: LocalStore.Key.isFirstLaunch)
     }
     
     public static func loadFromLocalPermanentStore() -> F4SUser? {
@@ -121,40 +141,41 @@ public struct F4SUser : Codable {
         return age
     }
     
-    public init(uuid: String? = nil, email: String = "", firstName: String = "", lastName: String? = nil, consenterEmail: String? = nil, dateOfBirth: Date? = nil, requiresConsent: Bool = false, placementUuid: String? = nil) {
-        self.uuid = uuid
-        self.email = email
-        self.firstName = firstName
-        self.lastName = lastName
-        self.consenterEmail = consenterEmail
-        self.dateOfBirth = dateOfBirth
-        self.requiresConsent = false
-        self.placementUuid = placementUuid
+    public init(localStore: LocalKeyedStorage = UserDefaults.standard) {
+        self.localStore = localStore
+        uuid = localStore.value(key: LocalStore.Key.userUuid) as! F4SUUID?
+        firstName = ""
+        requiresConsent = false
+        email = ""
     }
     
-    public mutating func updateUuidAndPersistToLocalStorage(uuid: F4SUUID) {
-        self.uuid = uuid
-        F4SUser.setUserUuid(uuid)
-    }
-    
-    public static func setUserUuid(_ uuid: F4SUUID) {
-        if uuid != F4SUser.userUuidFromKeychain {
-            let keychain = KeychainSwift()
-            keychain.set(uuid, forKey: UserDefaultsKeys.userUuid)
-            SEGAnalytics.shared().alias(uuid)
+    init(userData: UserInfoDB) {
+        self.init()
+        requiresConsent = userData.requiresConsent
+        email = userData.email ?? ""
+        firstName = userData.firstName ?? ""
+        lastName = userData.lastName?.isEmpty == false ? userData.lastName : nil
+        consenterEmail = userData.consenterEmail
+        placementUuid = userData.placementUuid
+        if let dateOfBirth = userData.dateOfBirth {
+            self.dateOfBirth =  Date.dateFromRfc3339(string: dateOfBirth)
         }
     }
     
-    public static var userHasUuid: Bool {
-        guard let uuid = userUuidFromKeychain else {
-            return false
-        }
-        return !uuid.isEmpty
+    public var isRegistered: Bool { return uuid != nil }
+    
+    public mutating func updateUuid(uuid: F4SUUID) {
+        guard uuid != self.uuid else { return }
+        self.uuid = uuid
+        localStore.setValue(uuid, for: LocalStore.Key.userUuid)
+        analytics?.alias(userId: uuid)
     }
     
-    public static var userUuidFromKeychain: F4SUUID? {
+    public static func dataFixMoveUUIDFromKeychainToUserDefaults() {
         let keychain = KeychainSwift()
-        return keychain.get(UserDefaultsKeys.userUuid)
+        guard let uuid = keychain.get(UserDefaultsKeys.userUuid) else { return }
+        UserDefaults.standard.setValue(uuid, forKey: UserDefaultsKeys.userUuid)
+        KeychainSwift().delete(UserDefaultsKeys.userUuid)
     }
 }
 

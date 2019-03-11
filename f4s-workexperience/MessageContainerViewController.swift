@@ -54,7 +54,7 @@ class MessageContainerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let userUuid = F4SUser.userUuidFromKeychain {
+        if let userUuid = F4SUser().uuid {
             self.currentUserUuid = userUuid
         }
         actionButtonHeightConstraint.constant = 0.0
@@ -136,7 +136,7 @@ class MessageContainerViewController: UIViewController {
                     guard let strongSelf = self else { return }
                     if let error = error {
                         MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf, cancelHandler: nil, retryHandler: nil)
-                        log.error(error)
+                        globalLog.error(error)
                     } else {
                         MessageHandler.sharedInstance.hideLoadingOverlay()
                         strongSelf.acceptContext = context
@@ -147,7 +147,7 @@ class MessageContainerViewController: UIViewController {
             case .viewCompanyExternalApplication:
                 guard let urlString = action.argument(name: F4SActionArgumentName.externalWebsite)?.value.first, let url = URL(string: urlString) else {
                     // Invalid url
-                    log.error("The action contained an invalid url to the company's external application page")
+                    globalLog.error("The action contained an invalid url to the company's external application page")
                     return
                 }
                 UIApplication.shared.open(url, options: [:]) { [weak self] (success) in
@@ -162,7 +162,7 @@ class MessageContainerViewController: UIViewController {
                 }
             }
         } catch {
-            log.error(error)
+            globalLog.error(error)
         }
     }
     
@@ -337,7 +337,7 @@ extension MessageContainerViewController {
     
     func showMessageWithThread(threadUuid: String) {
         if let placement = self.placements.filter({ $0.threadUuid == threadUuid }).first, let company = self.companies.filter({ $0.uuid == placement.companyUuid!.dehyphenated }).first {
-            CustomNavigationHelper.sharedInstance.pushMessageController(parentCtrl: self, threadUuid: threadUuid, company: company, placements: self.placements, companies: self.companies)
+            TabBarCoordinator.sharedInstance.pushMessageController(parentCtrl: self, threadUuid: threadUuid, company: company, placements: self.placements, companies: self.companies)
         }
     }
 }
@@ -353,6 +353,6 @@ extension MessageContainerViewController {
     
     @objc func showCompanyDetailsView() {
         guard let company = self.company else { return }
-        CustomNavigationHelper.sharedInstance.presentCompanyDetailsPopover(parentCtrl: self, company: company)
+        TabBarCoordinator.sharedInstance.presentCompanyDetailsPopover2(parentCtrl: self, company: company)
     }
 }

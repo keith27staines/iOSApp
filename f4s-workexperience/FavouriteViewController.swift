@@ -11,6 +11,8 @@ import UIKit
 
 class FavouriteViewController: UIViewController {
     
+    weak var coordinator: FavouritesCoordinator?
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noFavouritesBackgroundView: UIView!
     @IBOutlet weak var noFavouritesTitleLabel: UILabel!
@@ -154,9 +156,8 @@ extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let favourite = favouriteList[indexPath.row]
-        if let company = self.companies.filter({ $0.uuid == favourite.companyUuid.dehyphenated }).first {
-            CustomNavigationHelper.sharedInstance.presentCompanyDetailsPopover(parentCtrl: self, company: company)
-        }
+        let company = self.companies.filter({ $0.uuid == favourite.companyUuid.dehyphenated }).first
+        coordinator?.showDetail(company: company)
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -183,6 +184,6 @@ extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - user interaction
 extension FavouriteViewController {
     @objc func menuButtonTapped() {
-        CustomNavigationHelper.sharedInstance.toggleMenu()
+        TabBarCoordinator.sharedInstance.toggleMenu()
     }
 }

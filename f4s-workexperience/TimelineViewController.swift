@@ -10,6 +10,8 @@ import UIKit
 import Reachability
 
 class TimelineViewController: UIViewController {
+    
+    weak var coordinator: TimelineCoordinator?
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noPlacementsBackgroundView: UIView!
@@ -22,6 +24,10 @@ class TimelineViewController: UIViewController {
                 self.noPlacementsBackgroundView.isHidden = false
             } else {
                 self.noPlacementsBackgroundView.isHidden = true
+                if footerView == nil {
+                    footerView = UIView()
+                    tableView.tableFooterView = footerView
+                }
             }
         }
     }
@@ -39,6 +45,8 @@ class TimelineViewController: UIViewController {
         super.viewDidLoad()
         setupBackgroundView()
     }
+    
+    var footerView: UIView?
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -101,13 +109,13 @@ extension TimelineViewController {
     }
     
     func updatePlacements(placements: [F4STimelinePlacement]) {
-        if placements.sorted(by: {
-            $0.placementUuid! > $1.placementUuid!
-        }) == self.userPlacements.sorted(by: {
-            $0.placementUuid! > $1.placementUuid!
-        }) {
-            return
-        }
+//        if placements.sorted(by: {
+//            $0.placementUuid! > $1.placementUuid!
+//        }) == self.userPlacements.sorted(by: {
+//            $0.placementUuid! > $1.placementUuid!
+//        }) {
+//            return
+//        }
         MessageHandler.sharedInstance.showLoadingOverlay(self.view)
         defer {
             MessageHandler.sharedInstance.hideLoadingOverlay()
@@ -121,7 +129,7 @@ extension TimelineViewController {
             }
             return false
         }.count
-        (tabBarController as? CustomTabBarViewController)?.configureTimelineTabBarWithCount(count: unreadCount)
+        (tabBarController as? TabBarViewController)?.configureTimelineTabBarWithCount(count: unreadCount)
     }
 
     func getCompaniesWithUuids(uuid: [String?]) {
@@ -140,7 +148,7 @@ extension TimelineViewController {
             if let threadUuid = strongSelf.threadUuid, let placement = strongSelf.userPlacements.filter({ $0.threadUuid == threadUuid }).first {
                 if let company = strongSelf.companies.filter({ $0.uuid == placement.companyUuid?.dehyphenated }).first {
                     strongSelf.threadUuid = nil
-                    CustomNavigationHelper.sharedInstance.pushMessageController(parentCtrl: strongSelf, threadUuid: threadUuid, company: company, placements: strongSelf.userPlacements, companies: strongSelf.companies)
+                    TabBarCoordinator.sharedInstance.pushMessageController(parentCtrl: strongSelf, threadUuid: threadUuid, company: company, placements: strongSelf.userPlacements, companies: strongSelf.companies)
                 }
             }
         })
@@ -172,7 +180,7 @@ extension TimelineViewController {
 
     func setupBackgroundView() {
         let titleStr = NSLocalizedString("No applications yet", comment: "")
-        let infoStr = NSLocalizedString("You can use the map to find and apply for a placement. Once you have submitted your application, your messages with the company will appear here.", comment: "")
+        let infoStr = NSLocalizedString("You can use Search to find and apply for a placement. Once you have submitted your application, your messages with the company will appear here.", comment: "")
 
         self.noPlacementsTitleLabel.attributedText = NSAttributedString(string: titleStr, attributes: [
             NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.pinkishGrey),
@@ -252,7 +260,7 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         let placement = self.userPlacements[indexPath.row]
         if let company = self.companies.filter({ $0.uuid == placement.companyUuid?.dehyphenated }).first {
-            CustomNavigationHelper.sharedInstance.pushMessageController(parentCtrl: self, threadUuid: placement.threadUuid, company: company, placements: self.userPlacements, companies: self.companies)
+            TabBarCoordinator.sharedInstance.pushMessageController(parentCtrl: self, threadUuid: placement.threadUuid, company: company, placements: self.userPlacements, companies: self.companies)
         }
     }
 
@@ -268,7 +276,7 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
 // MARK: - user interaction
 extension TimelineViewController {
     @objc func menuButtonTapped() {
-        CustomNavigationHelper.sharedInstance.toggleMenu()
+        TabBarCoordinator.sharedInstance.toggleMenu()
     }
 
     func goToMessageViewCtrl() {
@@ -276,7 +284,7 @@ extension TimelineViewController {
         if let placement = self.userPlacements.filter({ $0.threadUuid == threadUuid }).first {
             if let company = self.companies.filter({ $0.uuid == placement.companyUuid?.dehyphenated }).first {
                 self.threadUuid = nil
-                CustomNavigationHelper.sharedInstance.pushMessageController(parentCtrl: self, threadUuid: placement.threadUuid!, company: company, placements: self.userPlacements, companies: self.companies)
+                TabBarCoordinator.sharedInstance.pushMessageController(parentCtrl: self, threadUuid: placement.threadUuid!, company: company, placements: self.userPlacements, companies: self.companies)
             }
         }
     }

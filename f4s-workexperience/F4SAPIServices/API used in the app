@@ -1,0 +1,46 @@
+
+USER and DEVICE
+v1/user/status                          GET (gets the unread message count and the unrated placements count)
+v1/device                               POST (obtains a temporary user uuid from the device's vendor uuid)
+v1/device                               PUT registers the device token for push notifications
+v1/user/uuid                            PUT (updates user details)
+
+COMPANY
+v2/company/uuid                         GET (gets details of a company)
+v2/company/uuid/documents               GET (retrieves documents the company has or might provide)
+v2/company/uuid/documents               POST (requests the company to provide a document)
+v2/company/uuid/roles/uuid              GET (gets the role the company has offered the YP)
+v1/company/dump/full                    GET (gets the metadata describing the company dump db)
+
+RECOMMENDATIONS
+v1/recommend                            GET (get all current recommendations for the YP)
+
+FAVOURITE
+v1/favourite                            POST (makes the specified company one the YPs favourites)
+v1/favourite/uuid                       DELETE
+
+PLACEMENT
+v2/placement/uuid                       GET (gets offer)
+v1/placement                            GET (gets all placements)
+v1/placement                            POST (creates the draft placement)
+v1/placement/uuid                       PUT (updates a placement with more information from the YP)
+v2/placement/uuid                       PATCH (confirm, decline or cancel a placement)
+v2/placement/uuid                       PATCH (update placement with YP availability information)
+v2/placement/uuid                       GET (retrieve availability information for the YP)
+
+v1/rating                               POST (YP rates a placement)
+v1/placement/uuid/documents             GET (returns YP's documents associated with the placement)
+v1/placement/uuid/documents             PUT (associates one or more Yp's documents with the placement)
+
+MESSAGING
+v2/messaging/threadUuid                 GET (gets all messages for the specified thread)
+v2/messaging/threadUUid                 PUT (send a canned response uuid to the thread)
+v2/messaging/threadUUid/user_action     GET (gets the action associated with the last message on the thread)
+v2/messaging/threadUuid/user_responses  GET (gets the list of canned responses the YP may use to answer a question)
+
+OTHER
+v2/partner                              GET (gets a list of partners)
+v1/feature-flag                         GET (gets feature flags)
+v1/cover-template                       GET (gets the moustache template for the cover letter)
+v1/voucher                              PUT (associates a voucher with a placement)
+v1/content                              GET (gets urls for faqs, t&cs, about, etc)

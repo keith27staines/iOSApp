@@ -17,6 +17,7 @@ enum CamerWillMoveAction {
 }
 
 class MapViewController: UIViewController {
+    weak var coordinator: SearchCoordinator?
     
     let peopleDataSource = PeopleSearchDataSource()
     let companyDataSource = CompanySearchDataSource()
@@ -100,7 +101,7 @@ class MapViewController: UIViewController {
     static let zoomMaximum: Float = 15.0
     
     var backgroundView = UIView()
-    var shouldRequestAuthorization: Bool?
+    var shouldRequestAuthorization: Bool = false
     var pressedPinOrCluster: UIView?
     var allowLocationUpdate: Bool = false
     
@@ -181,6 +182,24 @@ class MapViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        adjustNavigationBar()
+        displayRefineSearchLabelAnimated()
+        favouriteList = ShortlistDBOperations.sharedInstance.getShortlistForCurrentUser()
+    }
+    
+    var hasMovedToBestPosition: Bool = false
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        applyBranding()
+        self.becomeFirstResponder()
+        if !hasMovedToBestPosition {
+            moveCameraToBestPosition()
+            hasMovedToBestPosition = true
+        }
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         if let dbManager = (UIApplication.shared.delegate as? AppDelegate)?.databaseDownloadManager {
             dbManager.removeObserver(self)
@@ -192,8 +211,8 @@ class MapViewController: UIViewController {
         return true
     }
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        if motion == .motionShake && (debug?.userCanAccessDebugMenu() ?? false) {
-            CustomNavigationHelper.sharedInstance.presentHiddenDebugController(parentCtrl: self)
+        if motion == .motionShake && (f4sLog.userCanAccessDebugMenu()) {
+            TabBarCoordinator.sharedInstance.presentHiddenDebugController(parentCtrl: self)
         }
     }
     
@@ -224,7 +243,7 @@ class MapViewController: UIViewController {
         mapView.addSubview(pressedPinOrCluster!)
         
         let vc = UIStoryboard(name: "PopupCompanyList", bundle: nil).instantiateViewController(withIdentifier: "PopupListViewController") as! PopupCompanyListViewController
-        
+        vc.didSelectCompany = { [weak self] company in self?.coordinator?.showDetail(company: company) }
         vc.setCompanies(companies)
         
         vc.transitioningDelegate = self
@@ -233,24 +252,6 @@ class MapViewController: UIViewController {
     
     deinit {
         stopNotifier()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        adjustNavigationBar()
-        displayRefineSearchLabelAnimated()
-        favouriteList = ShortlistDBOperations.sharedInstance.getShortlistForCurrentUser()
-    }
-    
-    var hasMovedToBestPosition: Bool = false
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        applyBranding()
-        self.becomeFirstResponder()
-        if !hasMovedToBestPosition {
-            moveCameraToBestPosition()
-            hasMovedToBestPosition = true
-        }
     }
     
     func applyBranding() {
@@ -506,11 +507,9 @@ extension MapViewController {
         clusterManager.setDelegate(self, mapDelegate: self)
         
         locationManager = makeLocationManager()
-        if let shouldRequestAuthorization = self.shouldRequestAuthorization {
-            if shouldRequestAuthorization {
-                locationManager?.requestWhenInUseAuthorization()
-                allowLocationUpdate = true
-            }
+        if shouldRequestAuthorization {
+            locationManager?.requestWhenInUseAuthorization()
+            allowLocationUpdate = true
         }
         
         mapView.settings.myLocationButton = false
@@ -688,7 +687,7 @@ extension MapViewController: GMSMapViewDelegate {
         guard let company = companyFromMarker(marker: marker) else {
             return
         }
-        CustomNavigationHelper.sharedInstance.presentCompanyDetailsPopover(parentCtrl: self, company: company)
+        coordinator?.showDetail(company: company)
     }
     
     func mapView(_: GMSMapView, didCloseInfoWindowOf _: GMSMarker) {
@@ -762,12 +761,12 @@ extension MapViewController: CLLocationManagerDelegate {
         case .authorizedWhenInUse:
             locationManager!.startUpdatingLocation()
             mapView.isMyLocationEnabled = true
-            log.debug("location manager is in state 'authorized when in use'")
+            globalLog.debug("location manager is in state 'authorized when in use'")
             allowLocationUpdate = true
             
         case .denied:
             mapView.isMyLocationEnabled = false
-            log.debug("location manager is in state 'denied'")
+            globalLog.debug("location manager is in state 'denied'")
             
         case .authorizedAlways:
             locationManager!.startUpdatingLocation()
@@ -776,10 +775,10 @@ extension MapViewController: CLLocationManagerDelegate {
             
         case .restricted:
             mapView.isMyLocationEnabled = false
-            log.debug("location manager is in state 'restricted'")
+            globalLog.debug("location manager is in state 'restricted'")
             
         case .notDetermined:
-            log.debug("location manager is in state 'not determined'")
+            globalLog.debug("location manager is in state 'not determined'")
         }
         self.lastAuthorizationStatus = status
     }
@@ -812,14 +811,8 @@ extension MapViewController {
     }
     
     @IBAction func filtersButtonTouched(_: UIButton) {
-        let interestsStoryboard = UIStoryboard(name: "InterestsView", bundle: nil)
-        let interestsCtrl = interestsStoryboard.instantiateViewController(withIdentifier: "interestsCtrl") as! InterestsViewController
-        interestsCtrl.visibleBounds = self.visibleMapBounds
-        interestsCtrl.mapModel = unfilteredMapModel
-        interestsCtrl.delegate = self
-        let interestsCtrlNav = RotationAwareNavigationController(rootViewController: interestsCtrl)
         hideRefineSearchLabelAnimated()
-        self.navigationController?.present(interestsCtrlNav, animated: true, completion: nil)
+        coordinator?.filtersButtonWasTapped()
     }
 }
 
@@ -836,7 +829,7 @@ extension MapViewController {
     func startNotifier() {
         do {
             try reachability?.startNotifier()
-            log.debug("Started reachability notifier")
+            globalLog.debug("Started reachability notifier")
         } catch {
             return
         }
@@ -846,13 +839,13 @@ extension MapViewController {
         reachability?.stopNotifier()
         NotificationCenter.default.removeObserver(self, name: Notification.Name.reachabilityChanged, object: nil)
         reachability = nil
-        log.debug("Stopped reachability notifier")
+        globalLog.debug("Stopped reachability notifier")
     }
     
     @objc func reachabilityChanged(_ note: Notification) {
         let reachability = note.object as! Reachability
         if reachability.isReachableByAnyMeans {
-            log.debug("Network is reached")
+            globalLog.debug("Network is reached")
             if let appDelegate = UIApplication.shared.delegate as? AppDelegate, let dbManager = appDelegate.databaseDownloadManager {
                 if !dbManager.isLocalDatabaseAvailable() {
                     dbManager.start()
@@ -860,7 +853,7 @@ extension MapViewController {
                 }
             }
         } else {
-            log.debug("network not reachable")
+            globalLog.debug("network not reachable")
             if UserDefaults.standard.object(forKey: UserDefaultsKeys.companyDatabaseCreatedDate) == nil {
                 DispatchQueue.main.async {
                     MessageHandler.sharedInstance.hideLoadingOverlay()
@@ -918,15 +911,15 @@ extension MapViewController {
                         let errorMsg = NSLocalizedString("You appear to be offline at the moment. Please try again later when you have a working internet connection.",
                                                          comment: "")
                         MessageHandler.sharedInstance.displayWithTitle(title, errorMsg, parentCtrl: self)
-                        log.debug(err)
+                        globalLog.debug(err)
                     } else {
                         let title = NSLocalizedString("Location Not Found", comment: "")
                         let errorMsg = NSLocalizedString("We cannot find the location you entered. Please try again", comment: "")
                         MessageHandler.sharedInstance.displayWithTitle(title, errorMsg, parentCtrl: self)
-                        log.debug(err)
+                        globalLog.debug(err)
                     }
                 case let .deffinedError(error):
-                    log.debug(error)
+                    globalLog.debug(error)
                 }
             }
         }
@@ -1097,7 +1090,7 @@ extension MapViewController : SearchViewDelegate {
             guard
                 let uuid = item.uuidString,
                 let company = DatabaseOperations.sharedInstance.companyWithUUID(uuid) else { return }
-            CustomNavigationHelper.sharedInstance.presentCompanyDetailsPopover(parentCtrl: self, company: company)
+            coordinator?.showDetail(company: company)
         }
         searchView.minimizeSearchUI()
     }

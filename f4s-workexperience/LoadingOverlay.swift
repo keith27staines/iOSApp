@@ -26,7 +26,6 @@ class LoadingOverlay: UIView {
     lazy var captionLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
         label.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(label)
         label.layer.borderColor = UIColor.black.cgColor
         label.layer.borderWidth = 2
         label.layer.backgroundColor = UIColor.white.cgColor

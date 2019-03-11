@@ -17,14 +17,14 @@ class TemplateChoiceDBOperations {
     }
 
     func saveTemplateChoice(name: String, choiceList: [String]) {
-        guard let userUuid = F4SUser.userUuidFromKeychain else {
+        guard let userUuid = F4SUser().uuid else {
             return
         }
         TemplateChoiceCoreDataManager.sharedInstance.saveTemplateChoiceToContext(name: name, userUuid: userUuid, choiceList: choiceList)
     }
 
     func getSelectedTemplateBlanks() -> [F4STemplateBlank] {
-        guard let userUuid = F4SUser.userUuidFromKeychain else {
+        guard let userUuid = F4SUser().uuid else {
             return []
         }
         let templateChoiceDBData = TemplateChoiceCoreDataManager.sharedInstance.getTemplateChoicesForUser(userUuid: userUuid)
@@ -37,7 +37,7 @@ class TemplateChoiceDBOperations {
     }
 
     func getTemplateChoicesForCurrentUserWithName(name: String) -> F4STemplateBlank {
-        guard let userUuid = F4SUser.userUuidFromKeychain,
+        guard let userUuid = F4SUser().uuid,
             let templateChoiceDBData = TemplateChoiceCoreDataManager.sharedInstance.getTemplateChoicesForUserWithName(userUuid: userUuid, name: name) else {
             return F4STemplateBlank()
         }
@@ -55,7 +55,7 @@ class TemplateChoiceDBOperations {
     }
 
     func removeTemplateWithName(name: String) {
-        guard let userUuid = F4SUser.userUuidFromKeychain else {
+        guard let userUuid = F4SUser().uuid else {
             return
         }
         TemplateChoiceCoreDataManager.sharedInstance.removeTemplateChoiceWithName(name: name, userUuid: userUuid)

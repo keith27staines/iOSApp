@@ -2,6 +2,15 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:WorkfinderModules/WorkfinderUI/WorkfinderUI.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:WorkfinderModules/WorkfinderCommon/WorkfinderCommon.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:WorkfinderModules/WorkfinderNetworking/WorkfinderNetworking.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:f4s-workexperience.xcodeproj">
    </FileRef>
    <FileRef

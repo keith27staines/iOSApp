@@ -37,7 +37,7 @@ public class RecommendationsModel {
                 }
             case .error(let error):
                 DispatchQueue.main.async {
-                    log.debug("error refreshing recommendations \n\(error)")
+                    globalLog.debug("error refreshing recommendations \n\(error)")
                     completion()
                 }
             }

@@ -15,12 +15,11 @@ fileprivate enum DrawerSection: Int {
 }
 
 fileprivate enum NavigationSectionRow : Int {
-    case about = 0
-    case recommendations = 1
-    case faq = 2
-    case terms = 3
+    case about
+    case faq
+    case terms
     static var allRows: [NavigationSectionRow] {
-        return [.about, .recommendations, .faq, .terms]
+        return [.about, .faq, .terms]
     }
     
     var title: String {
@@ -28,8 +27,6 @@ fileprivate enum NavigationSectionRow : Int {
         {
         case .about:
             return NSLocalizedString("About", comment: "Menu item providing information about Workfinder")
-        case .recommendations:
-            return NSLocalizedString("Your recommendations", comment: "Menu item offering the user recommendations")
         case .faq:
             return NSLocalizedString("FAQs", comment: "Menu item providing access to frequently asked questions")
         case .terms:
@@ -184,17 +181,15 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
                 guard let navigationRow = NavigationSectionRow(rawValue: indexPath.row) else {
                     return
                 }
-                let navigationHelper = CustomNavigationHelper.sharedInstance
+                let navigationHelper = TabBarCoordinator.sharedInstance
                 switch navigationRow
                 {
                 case .about:
-                    navigationHelper.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.about)
-                case .recommendations:
-                    navigationHelper.navigateToRecommendations(company: nil)
+                    navigationHelper!.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.about)
                 case .faq:
-                    navigationHelper.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.faq)
+                    navigationHelper!.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.faq)
                 case .terms:
-                    navigationHelper.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.terms)
+                    navigationHelper!.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.terms)
                 }
             }
         case .LogoutSection:

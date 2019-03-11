@@ -17,10 +17,11 @@ class NotificationViewController: UIViewController {
     @IBOutlet weak var titleTopContraint: NSLayoutConstraint!
     @IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var buttonsTopConstraint: NSLayoutConstraint!
+    
+    var didComplete: (() -> Void)?
 
     fileprivate let lineHeight: CGFloat = 25
     var currentCompany: Company?
-    let backgroundPopoverView = UIView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +40,7 @@ extension NotificationViewController: UIPopoverPresentationControllerDelegate {
     }
 
     func popoverPresentationControllerShouldDismissPopover(_: UIPopoverPresentationController) -> Bool {
-        backgroundPopoverView.removeFromSuperview()
-        return true
+        return false
     }
 }
 
@@ -98,28 +98,16 @@ extension NotificationViewController {
 // MARK: - user interraction
 extension NotificationViewController {
     @IBAction func leftButton(_: Any) {
-        presentCoverletterController()
+        didComplete?()
     }
 
     @IBAction func rightButton(_: Any) {
         if UNService.shared.userDidDeclineNotifications {
-            if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url)
-            }
+            let url = URL(string: UIApplication.openSettingsURLString)!
+            UIApplication.shared.open(url)
         } else {
             UNService.shared.authorize()
         }
-        presentCoverletterController()
-    }
-    
-    func presentCoverletterController() {
-        self.backgroundPopoverView.removeFromSuperview()
-        self.dismiss(animated: true, completion: nil)
-        guard let viewCtrl = self.presentingViewController,
-            let company = self.currentCompany else {
-                log.error("Can't present cover letter")
-                return
-        }
-        CustomNavigationHelper.sharedInstance.presentCoverLetterController(parentCtrl: viewCtrl, currentCompany: company)
+        didComplete?()
     }
 }
