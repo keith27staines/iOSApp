@@ -58,7 +58,7 @@ class WEXSessionManagerTests : XCTestCase {
     
     func testBuildSmallImageTests() {
         let sut = makeSUT()
-        let cache = sut.buildSmallImageCache()
+        let cache = sut.makeSmallImageCache()
         XCTAssertEqual(cache.memoryCapacity, 5 * 1024 * 1024)
         XCTAssertEqual(cache.diskCapacity, 10 * 5 * 1024 * 1024)
     }
@@ -79,7 +79,7 @@ extension WEXSessionManagerTests {
         return WEXSessionManager(configuration: makeNetworkConfiguration())
     }
     
-    func assertEqual(config1: WexNetworkingConfigurationProtocol, config2: WexNetworkingConfigurationProtocol) {
+    func assertEqual(config1: WEXNetworkingConfigurationProtocol, config2: WEXNetworkingConfigurationProtocol) {
         XCTAssertEqual(config1.wexApiKey, config2.wexApiKey)
         XCTAssertEqual(config1.baseUrlString, config2.baseUrlString)
         XCTAssertEqual(config1.v1ApiUrlString, config2.v1ApiUrlString)

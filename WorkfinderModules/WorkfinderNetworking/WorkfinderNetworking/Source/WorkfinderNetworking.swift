@@ -11,7 +11,7 @@ import WorkfinderCommon
 
 var sharedSessionManager: WEXSessionManager!
 
-func configure(configuration: WexNetworkingConfigurationProtocol) throws {
+public func configure(configuration: WEXNetworkingConfigurationProtocol) throws {
     guard sharedSessionManager == nil else { throw WorkfinderNetworkingError.SessionManagerMayOnlyBeConfiguredOnce}
     sharedSessionManager = WEXSessionManager(configuration: configuration)
 }

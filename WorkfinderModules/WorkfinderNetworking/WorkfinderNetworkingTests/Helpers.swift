@@ -9,9 +9,12 @@
 import Foundation
 import WorkfinderCommon
 
-
-func makeNetworkConfiguration() -> WexNetworkingConfigurationProtocol {
-    let config: WexNetworkingConfigurationProtocol = WexNetworkingConfiguration(
+func makeNetworkConfiguration(
+    wexApiKey: String = "api",
+    baseUrlString: String = "baseUrl",
+    v1ApiUrlString: String = "v1Url",
+    v2ApiUrlString: String = "v2Url") -> WEXNetworkingConfigurationProtocol {
+    let config: WEXNetworkingConfigurationProtocol = WEXNetworkingConfiguration(
         wexApiKey: "api",
         baseUrlString: "baseUrl",
         v1ApiUrlString: "v1Url",

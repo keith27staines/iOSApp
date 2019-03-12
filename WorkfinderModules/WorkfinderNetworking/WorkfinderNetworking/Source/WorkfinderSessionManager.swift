@@ -19,64 +19,64 @@ public class WEXSessionManager {
     
     // MARK:- Public api
     
-    public init(configuration: WexNetworkingConfigurationProtocol) {
+    public init(configuration: WEXNetworkingConfigurationProtocol) {
         self.configuration = configuration
     }
     
     lazy public internal (set) var firstRegistrationSession: URLSession = {
-        return buildFirstRegistrationSession()
+        return makeFirstRegistrationSession()
     }()
     
     lazy public internal (set) var wexUserSession: URLSession = {
-        buildWexUserSession(user: nil)
+        makeWexUserSession(user: nil)
     }()
     
     lazy public internal (set) var smallImageSession: URLSession = {
-        buildSmallImageSession()
+        makeSmallImageSession()
     }()
     
     public func rebuildWexUserSession(user: F4SUUID) {
-        wexUserSession = buildWexUserSession(user: user)
+        wexUserSession = makeWexUserSession(user: user)
     }
     
     // MARK:- Internal storage
     
     static var shared: WEXSessionManager!
-    let configuration: WexNetworkingConfigurationProtocol
+    let configuration: WEXNetworkingConfigurationProtocol
     private (set) var userUUid: F4SUUID? = nil
     
 }
 
 // MARK:- Implementation
 extension WEXSessionManager {
-    func buildSmallImageCache() -> URLCache {
+    func makeSmallImageCache() -> URLCache {
         let memory = 5 * 1024 * 1024
         let disk = 10 * memory
         let diskpath = "smallImageCache"
         return URLCache(memoryCapacity: memory, diskCapacity: disk, diskPath: diskpath)
     }
     
-    private func buildFirstRegistrationSession() -> URLSession {
+    private func makeFirstRegistrationSession() -> URLSession {
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = firstRegistrationHeaders
         return URLSession(configuration: configuration)
     }
     
-    private func buildWexUserSession(user: F4SUUID?) -> URLSession {
+    private func makeWexUserSession(user: F4SUUID?) -> URLSession {
         self.userUUid = user
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = defaultHeaders
         return URLSession(configuration: configuration)
     }
     
-    private func buildSmallImageSession() -> URLSession {
-        return URLSession(configuration: buildSmallImageConfiguration())
+    private func makeSmallImageSession() -> URLSession {
+        return URLSession(configuration: makeSmallImageConfiguration())
     }
     
-    func buildSmallImageConfiguration() -> URLSessionConfiguration {
+    func makeSmallImageConfiguration() -> URLSessionConfiguration {
         let configuration = URLSessionConfiguration.default
         configuration.allowsCellularAccess = true
-        configuration.urlCache = buildSmallImageCache()
+        configuration.urlCache = makeSmallImageCache()
         configuration.requestCachePolicy = .useProtocolCachePolicy
         return configuration
     }

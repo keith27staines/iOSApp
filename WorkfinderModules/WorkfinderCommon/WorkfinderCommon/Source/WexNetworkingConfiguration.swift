@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol WexNetworkingConfigurationProtocol {
+public protocol WEXNetworkingConfigurationProtocol {
     /// The key for the Workfinder (wex) api
     var wexApiKey: String { get }
     /// The full url of workfinder
@@ -19,7 +19,7 @@ public protocol WexNetworkingConfigurationProtocol {
     var v2ApiUrlString: String { get }
 }
 
-public struct WexNetworkingConfiguration : WexNetworkingConfigurationProtocol {
+public struct WEXNetworkingConfiguration : WEXNetworkingConfigurationProtocol {
     public var wexApiKey: String
     public var baseUrlString: String
     public var v1ApiUrlString: String
