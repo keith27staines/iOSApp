@@ -10,26 +10,15 @@ import Foundation
 
 public class F4SNetworkSessionManager {
     
+    // MARK:- Public interface
+    
     public static let shared = F4SNetworkSessionManager()
-    
-    internal var _interactiveSession: URLSession?
-    internal var _smallImageSession: URLSession?
-    internal var _firstRegistrationSession: URLSession?
-    
-    internal init() {}
     
     public var interactiveSession: URLSession {
         if _interactiveSession == nil {
             _interactiveSession = URLSession(configuration: interactiveConfiguration)
         }
         return _interactiveSession!
-    }
-    
-    public var smallImageSession: URLSession {
-        if _smallImageSession == nil {
-            _smallImageSession = URLSession(configuration: smallImageConfiguration)
-        }
-        return _smallImageSession!
     }
     
     public var firstRegistrationSession: URLSession {
@@ -39,7 +28,27 @@ public class F4SNetworkSessionManager {
         return _firstRegistrationSession!
     }
     
-    // MARK:- Internal properties
+    public var smallImageSession: URLSession {
+        if _smallImageSession == nil {
+            _smallImageSession = URLSession(configuration: smallImageConfiguration)
+        }
+        return _smallImageSession!
+    }
+    
+    public func rebuildSessions() {
+        _interactiveSession = nil
+        _smallImageSession = nil
+        _firstRegistrationSession = nil
+    }
+    
+    // MARK:- Internal implementation
+    
+    internal var _interactiveSession: URLSession?
+    internal var _smallImageSession: URLSession?
+    internal var _firstRegistrationSession: URLSession?
+    
+    internal init() {}
+    
     internal var defaultHeaders : [String:String] {
         var header: [String : String] = ["wex.api.key": ApiConstants.apiKey]
         if let userUuid = F4SUser().uuid {
@@ -49,12 +58,6 @@ public class F4SNetworkSessionManager {
             assertionFailure("This method should only be called if a userUuid exists")
         }
         return header
-    }
-    
-    public func rebuildSessions() {
-        _interactiveSession = nil
-        _smallImageSession = nil
-        _firstRegistrationSession = nil
     }
     
     internal lazy var firstRegistrationHeaders : [String : String] = {

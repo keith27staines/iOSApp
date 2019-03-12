@@ -30,13 +30,14 @@ class WEXSessionManagerTests : XCTestCase {
     
     func testDefaultHeadersIsNotEmpty_whenUser() {
         let sut = makeSUT()
-        sut.buildWexUserSession(user: "1234")
+        sut.rebuildWexUserSession(user: "1234")
         XCTAssertEqual(sut.defaultHeaders[HeaderKeys.wexApiKey.rawValue], sut.configuration.wexApiKey)
         XCTAssertEqual(sut.defaultHeaders[HeaderKeys.wexUserUuid.rawValue], "1234")
     }
     
-    func testFirstRegistrationSession() {
+    func testInitFirstRegistrationSession() {
         let sut = makeSUT()
+        XCTAssertEqual(sut.firstRegistrationHeaders, ["wex.api.key": sut.configuration.wexApiKey])
         XCTAssertEqual(sut.firstRegistrationSession.configuration.httpAdditionalHeaders!.count,1)
     }
     
@@ -48,11 +49,26 @@ class WEXSessionManagerTests : XCTestCase {
     
     func testWexUserSession_afterBuildWexUserSession() {
         let sut = makeSUT()
-        sut.buildWexUserSession(user: "1234")
+        sut.rebuildWexUserSession(user: "1234")
         XCTAssertEqual(sut.wexUserSession.configuration.httpAdditionalHeaders!.count,2)
         XCTAssertEqual(sut.defaultHeaders[HeaderKeys.wexUserUuid.rawValue], "1234")
-        sut.buildWexUserSession(user: "54321")
+        sut.rebuildWexUserSession(user: "54321")
         XCTAssertEqual(sut.defaultHeaders[HeaderKeys.wexUserUuid.rawValue], "54321")
+    }
+    
+    func testBuildSmallImageTests() {
+        let sut = makeSUT()
+        let cache = sut.buildSmallImageCache()
+        XCTAssertEqual(cache.memoryCapacity, 5 * 1024 * 1024)
+        XCTAssertEqual(cache.diskCapacity, 10 * 5 * 1024 * 1024)
+    }
+    
+    func testsmallImageConfiguration() {
+        let sut = makeSUT()
+        let configuration = sut.smallImageSession.configuration
+        XCTAssertEqual(configuration.urlCache?.memoryCapacity , 5 * 1024 * 1024)
+        XCTAssertEqual(configuration.urlCache?.diskCapacity, 10 * 5 * 1024 * 1024)
+        XCTAssertTrue(configuration.allowsCellularAccess)
     }
 
 }
