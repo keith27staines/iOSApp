@@ -6,8 +6,8 @@
 //  Copyright © 2019 Founders4Schools. All rights reserved.
 //
 
-import Foundation
 import WorkfinderCommon
+
 typealias Headers = [String:String]
 
 enum HeaderKeys : String {

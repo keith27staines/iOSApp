@@ -6,7 +6,6 @@
 //  Copyright © 2019 Founders4Schools. All rights reserved.
 //
 
-import Foundation
 import WorkfinderCommon
 
 var sharedSessionManager: WEXSessionManager!
