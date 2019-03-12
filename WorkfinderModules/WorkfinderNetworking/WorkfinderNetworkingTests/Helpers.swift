@@ -15,10 +15,10 @@ func makeNetworkConfiguration(
     v1ApiUrlString: String = "v1Url",
     v2ApiUrlString: String = "v2Url") -> WEXNetworkingConfigurationProtocol {
     let config: WEXNetworkingConfigurationProtocol = WEXNetworkingConfiguration(
-        wexApiKey: "api",
-        baseUrlString: "baseUrl",
-        v1ApiUrlString: "v1Url",
-        v2ApiUrlString: "v2Url")
+        wexApiKey: wexApiKey,
+        baseUrlString: baseUrlString,
+        v1ApiUrlString: v1ApiUrlString,
+        v2ApiUrlString: v2ApiUrlString)
     return config
 }
 
