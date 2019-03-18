@@ -31,7 +31,7 @@ class EnterVoucherViewController: UIViewController, MFMailComposeViewControllerD
     }
     
     @IBAction func getVoucherTapped(_ sender: Any) {
-        let email: String = "community@workfinder.com"
+        let email: String = "support@workfinder.com"
         guard MFMailComposeViewController.canSendMail() else {
             let alert = UIAlertController(title: "Get voucher", message: "Please send an email requesting vouchers to", preferredStyle: .actionSheet)
             let doneAction = UIAlertAction(title: "OK", style: .default, handler: nil)

@@ -25,25 +25,29 @@ class FileHelper {
         return fileURL
     }
 
-    static func deleteFile(path: String) {
+    static func deleteFileIfExists(path: String) -> Bool {
+        guard fileExists(path: path) else { return true }
         do {
-            if FileHelper.fileExists(path: path) {
-                try! FileManager.default.removeItem(atPath: path)
-            }
+            try FileManager.default.removeItem(atPath: path)
+            return true
+        } catch {
+            return false
         }
     }
     
     static func moveFile(fromUrl: URL, toUrl: URL) {
-        deleteFile(path: toUrl.path)
-        try! FileManager.default.moveItem(at: fromUrl, to: toUrl)
-        deleteFile(path: fromUrl.path)
+        guard fileExists(path: fromUrl.path) else { return }
+        guard deleteFileIfExists(path: toUrl.path) else { return }
+        do {
+            try FileManager.default.moveItem(at: fromUrl, to: toUrl)
+            _ = deleteFileIfExists(path: fromUrl.path)
+        } catch {
+            
+        }
     }
 
     static func fileExists(path: String) -> Bool {
-        if FileManager.default.fileExists(atPath: path) {
-            return true
-        }
-        return false
+        return FileManager.default.fileExists(atPath: path)
     }
 
     static func saveData(data: NSData, path: URL) {
