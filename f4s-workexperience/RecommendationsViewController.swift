@@ -10,8 +10,15 @@ import UIKit
 
 class CompanyCell : UITableViewCell {
     
-    var company: Company! {
+    var company: Company? {
         didSet {
+            guard let company = company else {
+                self.companyNameLabel.attributedText = nil
+                self.industryLabel.attributedText = nil
+                self.starRating.rating = 0
+                self.logo.image = nil
+                return
+            }
             self.companyNameLabel.attributedText = NSAttributedString(
                 string: company.name, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.black])
             
