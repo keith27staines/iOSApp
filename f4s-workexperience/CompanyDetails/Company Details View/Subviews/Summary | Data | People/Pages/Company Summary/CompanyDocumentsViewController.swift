@@ -21,7 +21,10 @@ class CompanyDocumentsViewController : UIViewController {
     }
     
     override func loadView() {
-        view = CompanyDocumentsView()
+        let documentsView = CompanyDocumentsView()
+        documentsView.dataSource = self
+        documentsView.delegate = self
+        view = documentsView
     }
     
     private func loadDocuments() {
