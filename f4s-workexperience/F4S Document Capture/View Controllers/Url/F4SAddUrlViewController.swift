@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WorkfinderCommon
 
 protocol F4SDCAddUrlViewControllerDelegate : class {
     func didCaptureUrl(_ url: URL)

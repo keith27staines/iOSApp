@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 // MARK:- F4SMessageService
 public protocol F4SMessageServiceProtocol {

@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:WorkfinderModules/WorkfinderApplyUseCase/WorkfinderApplyUseCase.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:WorkfinderModules/WorkfinderUI/WorkfinderUI.xcodeproj">
    </FileRef>
    <FileRef
@@ -9,6 +12,9 @@
    </FileRef>
    <FileRef
       location = "group:WorkfinderModules/WorkfinderNetworking/WorkfinderNetworking.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:WorkfinderModules/GRMustache/Xcode/Mustache.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:f4s-workexperience.xcodeproj">

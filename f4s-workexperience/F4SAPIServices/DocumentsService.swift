@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 public protocol F4SDocumentServiceProtocol {
     var apiName: String { get }
@@ -21,7 +22,7 @@ public class F4SPlacementDocumentsService : F4SDataTaskService {
     public init(placementUuid: F4SUUID) {
         self.placementUuid = placementUuid
         let apiName = "placement/\(placementUuid)/documents"
-        super.init(baseURLString: Config.BASE_URL, apiName: apiName)
+        super.init(baseURLString: Config.BASE_URL2, apiName: apiName)
     }
 }
 

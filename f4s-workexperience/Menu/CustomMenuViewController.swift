@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WorkfinderCommon
 
 fileprivate enum DrawerSection: Int {
     case WelcomeSection

@@ -11,7 +11,6 @@ target 'f4s-workexperience' do
     pod 'XCGLogger'
     pod 'KeychainSwift'
     pod 'SQLite.swift'
-    pod 'GRMustache.swift'
     pod 'GoogleMaps'
     pod 'GooglePlaces'
     pod 'Analytics'

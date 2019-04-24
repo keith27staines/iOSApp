@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import WorkfinderCommon
 
 class PlacementCoreDataManager: CoreDataBaseManager {
     class var sharedInstance: PlacementCoreDataManager {
@@ -26,21 +27,12 @@ class PlacementCoreDataManager: CoreDataBaseManager {
         return PlacementDB.getPlacementsForUser(managedObjectContext,  userUuid: userUuid)
     }
 
-    func getPlacementsForUserAndCompany(userUuid: String, companyUuid: String) -> PlacementDB? {
-        return PlacementDB.getPlacementsForUserAndCompany(managedObjectContext,  userUuid: userUuid, companyUuid: companyUuid)
+    func getPlacementForCompany(companyUuid: String) -> PlacementDB? {
+        return PlacementDB.getPlacementForCompany(managedObjectContext, companyUuid: companyUuid)
     }
 
     func getAllPlacements() -> [PlacementDB] {
         return PlacementDB.getAllPlacements(managedObjectContext)
-    }
-
-    func getInProgressPlacementsForUser(userUuid: String) -> PlacementDB? {
-        return PlacementDB.getInProgressPlacementsForUser(managedObjectContext,  userUuid: userUuid)
-    }
-
-    func removePlacementWithId(placementUuid: String, userUuid: String) {
-        PlacementDB.removePlacementWithIdForUser(managedObjectContext,  placementUuid: placementUuid, userUuid: userUuid)
-        save()
     }
 
     func getPlacementForUserAndPlacementUuid(userUuid: String, placementUuid: String) -> PlacementDB? {

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 public typealias F4SCompanyPinSet = Set<F4SCompanyPin>
 public typealias F4SInterestSet = Set<F4SInterest>

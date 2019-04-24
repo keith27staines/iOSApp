@@ -13,26 +13,22 @@
         <!--Recommendations-->
         <scene sceneID="IwI-NC-21E">
             <objects>
-                <viewController storyboardIdentifier="RecommendationsViewController" id="tTr-4O-dEl" customClass="RecommendationsViewController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecommendationsViewController" id="tTr-4O-dEl" customClass="RecommendationsListViewController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="srm-XG-8OM" userLabel="RecommendationsViewControlller">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MYL-8r-083">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bhV-AQ-8rd" customClass="RecommendationsListMainView" customModule="f4s_workexperience" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="tTr-4O-dEl" id="ZU9-Oy-Nxj"/>
-                                    <outlet property="delegate" destination="tTr-4O-dEl" id="CBR-KR-Mwk"/>
-                                </connections>
-                            </tableView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Eh5-Lp-cqm" firstAttribute="trailing" secondItem="MYL-8r-083" secondAttribute="trailing" id="2JY-Pa-S4F"/>
-                            <constraint firstItem="MYL-8r-083" firstAttribute="top" secondItem="Eh5-Lp-cqm" secondAttribute="top" id="RC6-6k-T5j"/>
-                            <constraint firstItem="MYL-8r-083" firstAttribute="leading" secondItem="Eh5-Lp-cqm" secondAttribute="leading" id="bN8-4s-fj8"/>
-                            <constraint firstItem="Eh5-Lp-cqm" firstAttribute="bottom" secondItem="MYL-8r-083" secondAttribute="bottom" id="r4e-QM-RbS"/>
+                            <constraint firstItem="Eh5-Lp-cqm" firstAttribute="trailing" secondItem="bhV-AQ-8rd" secondAttribute="trailing" id="2Id-vg-pMb"/>
+                            <constraint firstItem="Eh5-Lp-cqm" firstAttribute="bottom" secondItem="bhV-AQ-8rd" secondAttribute="bottom" id="LHz-JG-CJa"/>
+                            <constraint firstItem="bhV-AQ-8rd" firstAttribute="leading" secondItem="Eh5-Lp-cqm" secondAttribute="leading" id="UVf-Iw-CUv"/>
+                            <constraint firstItem="bhV-AQ-8rd" firstAttribute="top" secondItem="Eh5-Lp-cqm" secondAttribute="top" id="uMA-zA-goR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Eh5-Lp-cqm"/>
                     </view>
@@ -46,7 +42,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="tableView" destination="MYL-8r-083" id="pCN-9g-VI3"/>
+                        <outlet property="mainView" destination="bhV-AQ-8rd" id="6jW-FN-03v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8q2-S1-4Cv" userLabel="First Responder" sceneMemberID="firstResponder"/>

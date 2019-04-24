@@ -8,6 +8,7 @@
 
 import UIKit
 import Reachability
+import WorkfinderCommon
 
 protocol RatingControlDelegate {
     func didUpdateRatingValue(ratingControll: RatingControl, rating: Int)
@@ -126,7 +127,7 @@ extension RatePlacementViewController {
 
         if let reachability = Reachability() {
             if !reachability.isReachableByAnyMeans {
-                MessageHandler.sharedInstance.display("No Internet Connection.", parentCtrl: self)
+                sharedUserMessageHandler.displayAlertFor("No Internet Connection.", parentCtrl: self)
                 globalLog.debug("No internet connection")
                 return
             }
@@ -137,7 +138,7 @@ extension RatePlacementViewController {
             return
         }
 
-        MessageHandler.sharedInstance.showLoadingOverlay(self.view)
+        sharedUserMessageHandler.showLoadingOverlay(self.view)
         let rating = self.ratingControlStackView.rating
         placementService.ratePlacement(placementUuid: placementUuid, rating: rating) { [weak self] (result) in
             guard let strongSelf = self else { return }
@@ -147,7 +148,7 @@ extension RatePlacementViewController {
             case .success(_):
                 globalLog.debug("rating of \(rating) submited for placement \(placementUuid)")
             }
-            MessageHandler.sharedInstance.hideLoadingOverlay()
+            sharedUserMessageHandler.hideLoadingOverlay()
             strongSelf.backgroundPopoverView.removeFromSuperview()
             strongSelf.dismiss(animated: true, completion: {
                 strongSelf.ratePlacementProtocol?.dismissRateController()

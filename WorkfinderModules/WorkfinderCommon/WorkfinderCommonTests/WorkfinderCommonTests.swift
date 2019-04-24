@@ -11,9 +11,5 @@ import XCTest
 
 class WorkfinderCommonTests: XCTestCase {
 
-    func testWorkfinderCommon() {
-        let greeting = WorkfinderCommon().sayHello(to: "you")
-        XCTAssertEqual(greeting, "Hello you from WorkfinderCommon")
-    }
 
 }

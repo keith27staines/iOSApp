@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WorkfinderCommon
 
 public struct F4SGetDocumentJson : Codable {
     public let uuid: F4SUUID?

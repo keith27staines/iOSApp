@@ -39,7 +39,7 @@ Warning: Do not use a beta version of the operating system if you intend to buil
 
 ### Development Environment
 
-Xcode is the single absolutely required tool. Various other tools might be helpful in various contexts and for various purposes but none are strictly required. Xcode 10 is strongly recommended. Later versions might incur the cost of having to eliminate build warnings.  Earlier versions will not build the code.
+Xcode is the single absolutely required tool. Various other tools might be helpful in various contexts and for various purposes but none are strictly required. Xcode 10.2 is required. Later versions might incur the cost of having to eliminate build warnings.  Earlier versions will not build the code.
 
 Warning: Do not use a beta version of Xcode if you intend to build a release. A build built with a beta version of Xcode can be uploaded to Testflight for beta testing but cannot be released to the Appstore.
 
@@ -70,13 +70,13 @@ When a feature branch is completed it is merged into *develop* and then deleted.
 
 2. Use a computer running macOS Mojave. More or less any machine will do in a pinch, from a 2013 MacBook Air up, but you will experience far less frustration if you have a machine with 8GB+ RAM and a multi-core processor.
 
-3. Install Xcode 10 from the Mac Appstore if not already installed.
+3. Install Xcode from the Mac Appstore if not already installed.
 
-4. In the Xcode 10 preferences pane, add the developer's account if not already done
+4. In the Xcode  preferences pane, add the developer's account if not already done
 
-5. In the Xcode 10 preferences pane, add an appropriate Github account if not already done. Ensure that HTTPS is selected rather than SSH.
+5. In the Xcode preferences pane, add an appropriate Github account if not already done. Ensure that HTTPS is selected rather than SSH.
 
-6. All other Xcode 10 settings can be safely left at their default values.
+6. All other Xcode settings can be safely left at their default values.
 
 7. Switch to a browser and go to  https://github.com/workfinder/iOSApp
 

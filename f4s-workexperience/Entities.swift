@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WorkfinderCommon
 
 struct F4SApplicationContext {
     var user: F4SUser?
@@ -103,7 +104,7 @@ public struct Company : Hashable {
     }
     
     var placement: F4SPlacement? {
-        return PlacementDBOperations.sharedInstance.getPlacementsForCurrentUserAndCompany(companyUuid: uuid)
+        return PlacementDBOperations.sharedInstance.getPlacementForCompany(companyUuid: uuid)
     }
 }
 
@@ -261,14 +262,6 @@ struct CompanyDatabaseMeta {
         self.created = created
         self.url = url
     }
-}
-
-enum ChooseAttributes: String {
-    case PersonalAttributes = "attributes"
-    case JobRole = "role"
-    case EmploymentSkills = "skills"
-    case StartDate = "start_date"
-    case EndDate = "end_date"
 }
 
 enum SocialShare: String {

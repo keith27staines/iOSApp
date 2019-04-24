@@ -7,10 +7,8 @@
 //
 
 import Foundation
-
-public protocol F4STemplateServiceProtocol {
-    func getTemplates(completion: @escaping (F4SNetworkResult<[F4STemplate]>) -> Void)
-}
+import WorkfinderCommon
+import WorkfinderApplyUseCase
 
 public class F4STemplateService: F4STemplateServiceProtocol {
     

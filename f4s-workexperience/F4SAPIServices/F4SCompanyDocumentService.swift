@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 fileprivate struct Json : Codable {
     var requested_documents: [[String : String]]

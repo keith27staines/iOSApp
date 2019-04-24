@@ -8,6 +8,7 @@
 
 import Foundation
 import SQLite
+import WorkfinderCommon
 
 /// Downloaded database operations handler
 class DatabaseOperations {

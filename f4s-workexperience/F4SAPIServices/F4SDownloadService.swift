@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 public protocol F4SDownloadServiceDelegate  {
     func downloadService(_ service: F4SDownloadService, didFinishDownloadingToUrl: URL)

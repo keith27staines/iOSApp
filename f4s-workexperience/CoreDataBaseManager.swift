@@ -23,6 +23,6 @@ class CoreDataBaseManager {
     }()
 
     func save() {
-        try? managedObjectContext.save()
+        try! managedObjectContext.save()
     }
 }

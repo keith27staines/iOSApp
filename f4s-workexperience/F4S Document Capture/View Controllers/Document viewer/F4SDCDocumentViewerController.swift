@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WorkfinderCommon
 
 class F4SDCDocumentViewerController: UIViewController {
     
@@ -21,7 +22,7 @@ class F4SDCDocumentViewerController: UIViewController {
     func loadDocument() {
         if let url = document.viewableUrl {
             print("loading document")
-            MessageHandler.sharedInstance.showLoadingOverlay(self.view)
+            sharedUserMessageHandler.showLoadingOverlay(self.view)
             let request = URLRequest(url: url)
             webview.delegate = self
             webview.loadRequest(request)
@@ -36,12 +37,12 @@ extension F4SDCDocumentViewerController : UIWebViewDelegate {
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
         print("finished loading document")
-        MessageHandler.sharedInstance.hideLoadingOverlay()
+        sharedUserMessageHandler.hideLoadingOverlay()
     }
     
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         print("failed to load document")
-        MessageHandler.sharedInstance.hideLoadingOverlay()
+        sharedUserMessageHandler.hideLoadingOverlay()
         let alert = UIAlertController(title: "Unable to load document", message: error.localizedDescription, preferredStyle: .alert)
         let retryAction = UIAlertAction(title: "Retry", style: .default) { (action) in
             self.loadDocument()

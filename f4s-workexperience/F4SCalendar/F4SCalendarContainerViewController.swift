@@ -52,11 +52,6 @@ class F4SCalendarContainerViewController: UIViewController {
     func applyStyle() {
         pageHeaderView.splashColor = splashColor
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let vc = segue.destination as? F4SCalendarCollectionViewController else {
@@ -67,8 +62,6 @@ class F4SCalendarContainerViewController: UIViewController {
         }
         vc.delegate = delegate
     }
-
-
 }
 
 // MARK:- Configure controls

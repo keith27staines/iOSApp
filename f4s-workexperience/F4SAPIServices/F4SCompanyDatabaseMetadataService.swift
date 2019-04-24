@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 public struct F4SCompanyDatabaseMetaData : Decodable {
     public var created: Date?
@@ -30,7 +31,7 @@ public class F4SCompanyDatabaseMetadataService : F4SDataTaskService {
     
     public init() {
         let apiName = "company/dump/full"
-        super.init(baseURLString: Config.BASE_URL, apiName: apiName)
+        super.init(baseURLString: Config.BASE_URL2, apiName: apiName)
     }
 }
 

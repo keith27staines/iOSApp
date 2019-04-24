@@ -100,4 +100,10 @@ class TemplateChoiceDB: NSManagedObject {
         }
         moc.delete(fetchResult[0])
     }
+    
+    class func deleteAllTemplateChoices(_ moc: NSManagedObjectContext) throws {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TemplateChoice")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        try moc.persistentStoreCoordinator?.execute(deleteRequest, with: moc)
+    }
 }

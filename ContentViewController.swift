@@ -8,6 +8,7 @@
 
 import UIKit
 import Reachability
+import WorkfinderCommon
 
 class ContentViewController: UIViewController {
 
@@ -15,6 +16,7 @@ class ContentViewController: UIViewController {
 
     var contentType: F4SContentType?
     var url: String?
+    var dismissByPopping: Bool = false
     
     lazy var contentService: F4SContentServiceProtocol = {
         let service = F4SContentService()
@@ -66,7 +68,11 @@ extension ContentViewController {
 // MARK: - user interaction
 extension ContentViewController {
     @objc func dismissPage() {
-        self.dismiss(animated: true, completion: nil)
+        if dismissByPopping {
+            navigationController?.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }
 
@@ -75,27 +81,27 @@ extension ContentViewController {
     func getContent() {
         if let reachability = Reachability() {
             if !reachability.isReachableByAnyMeans {
-                MessageHandler.sharedInstance.display("No Internet Connection.", parentCtrl: self)
+                sharedUserMessageHandler.displayAlertFor("No Internet Connection.", parentCtrl: self)
                 return
             }
         }
 
         if self.contentType == .company {
-            MessageHandler.sharedInstance.showLightLoadingOverlay(self.webView)
+            sharedUserMessageHandler.showLightLoadingOverlay(self.webView)
             if let companyUrl = url {
                 self.loadURL(url: companyUrl)
                 return
             }
         }
-        MessageHandler.sharedInstance.showLightLoadingOverlay(self.webView)
+        sharedUserMessageHandler.showLightLoadingOverlay(self.webView)
         contentService.getContent { [weak self] (result) in
             guard let strongSelf = self else { return }
             DispatchQueue.main.async {
                 guard let contentType = strongSelf.contentType else { return }
                 switch result {
                 case .error(let error):
-                    MessageHandler.sharedInstance.hideLoadingOverlay()
-                    MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf)
+                    sharedUserMessageHandler.hideLoadingOverlay()
+                    sharedUserMessageHandler.display(error, parentCtrl: strongSelf)
                 case .success(let contentDescriptors):
                     guard let index = contentDescriptors.index(where: { (descriptor) -> Bool in descriptor.slug == contentType }) else { return }
                     guard let contentUrl = contentDescriptors[index].url else { return }
@@ -112,11 +118,11 @@ extension ContentViewController: UIWebViewDelegate {
         self.webView.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
         self.webView.scrollView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
         self.webView.stringByEvaluatingJavaScript(from: "window.scroll(0,0)")
-        MessageHandler.sharedInstance.hideLoadingOverlay()
+        sharedUserMessageHandler.hideLoadingOverlay()
     }
 
     func webView(_: UIWebView, didFailLoadWithError error: Error) {
         globalLog.error(error)
-        MessageHandler.sharedInstance.hideLoadingOverlay()
+        sharedUserMessageHandler.hideLoadingOverlay()
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 class InterestDBOperations {
     class var sharedInstance: InterestDBOperations {

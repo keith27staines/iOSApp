@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import WorkfinderCommon
+import WorkfinderNetworking
 
 extension F4SAddDocumentsViewController : PostDocumentsWithDataViewControllerDelegate {
     func postDocumentsControllerDidCancel(_ controller: PostDocumentsWithDataViewController) {
@@ -28,20 +30,20 @@ extension F4SAddDocumentsViewController {
     
     func performPrimaryActionForBLRequestMode() {
         primaryActionButton.isEnabled = false
-        MessageHandler.sharedInstance.showLoadingOverlay(view)
+        sharedUserMessageHandler.showLoadingOverlay(view)
         documentModel.putDocumentsWithRemoteUrls { (success) in
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else { return }
                 strongSelf.primaryActionButton.isEnabled = true
                 if success {
-                    MessageHandler.sharedInstance.hideLoadingOverlay()
+                    sharedUserMessageHandler.hideLoadingOverlay()
                     if !strongSelf.documentModel.documentsWithData().isEmpty {
                         strongSelf.postDocumentsWithData()
                     } else {
                         strongSelf.dismiss(animated: true, completion: nil)
                     }
                 } else {
-                    MessageHandler.sharedInstance.hideLoadingOverlay()
+                    sharedUserMessageHandler.hideLoadingOverlay()
                     strongSelf.displayTryAgain(completion: strongSelf.performPrimaryActionForBLRequestMode)
                 }
             }
@@ -50,20 +52,20 @@ extension F4SAddDocumentsViewController {
     
     func performPrimaryActionForApplyMode() {
         primaryActionButton.isEnabled = false
-        MessageHandler.sharedInstance.showLoadingOverlay(view)
+        sharedUserMessageHandler.showLoadingOverlay(view)
         documentModel.putDocumentsWithRemoteUrls { (success) in
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else { return }
                 strongSelf.primaryActionButton.isEnabled = true
                 if success {
                     if !strongSelf.documentModel.documentsWithData().isEmpty {
-                        MessageHandler.sharedInstance.hideLoadingOverlay()
+                        sharedUserMessageHandler.hideLoadingOverlay()
                         strongSelf.postDocumentsWithData()
                     } else {
                         strongSelf.submitApplication(applicationContext: strongSelf.applicationContext)
                     }
                 } else {
-                    MessageHandler.sharedInstance.hideLoadingOverlay()
+                    sharedUserMessageHandler.hideLoadingOverlay()
                     strongSelf.displayTryAgain(completion: strongSelf.performPrimaryActionForApplyMode)
                 }
             }
@@ -92,27 +94,28 @@ extension F4SAddDocumentsViewController {
         userService.updateUser(user: user) { [weak self] (result) in
             guard let strongSelf = self else { return }
             DispatchQueue.main.async {
-                MessageHandler.sharedInstance.hideLoadingOverlay()
+                sharedUserMessageHandler.hideLoadingOverlay()
                 switch result {
                 case .success(let userModel):
                     guard let uuid = userModel.uuid else {
-                        MessageHandler.sharedInstance.displayWithTitle("Oops something went wrong", "Workfinder cannot complete this operation", parentCtrl: strongSelf)
+                        sharedUserMessageHandler.displayWithTitle("Oops something went wrong", "Workfinder cannot complete this operation", parentCtrl: strongSelf)
                         return
                     }
                     user.updateUuid(uuid: uuid)
+                    updateWEXSessionManagerWithUserUUID(uuid)
                     F4SNetworkSessionManager.shared.rebuildSessions() // Ensure session manager is aware of the possible change of user uuid
                     var updatedContext = applicationContext
                     updatedContext.user = user
                     var updatedPlacement = applicationContext.placement!
-                    updatedPlacement.status = F4SPlacementStatus.applied
+                    updatedPlacement.status = WEXPlacementState.applied
                     updatedContext.placement = updatedPlacement
                     strongSelf.applicationContext = updatedContext
                     PlacementDBOperations.sharedInstance.savePlacement(placement: updatedPlacement)
                     UserDefaults.standard.set(true, forKey: strongSelf.consentPreviouslyGivenKey)
                     strongSelf.afterSubmitApplication(applicationContext: updatedContext)
                 case .error(let error):
-                    MessageHandler.sharedInstance.display(error, parentCtrl: strongSelf, cancelHandler: nil) {
-                        MessageHandler.sharedInstance.showLoadingOverlay(strongSelf.view)
+                    sharedUserMessageHandler.display(error, parentCtrl: strongSelf, cancelHandler: nil) {
+                        sharedUserMessageHandler.showLoadingOverlay(strongSelf.view)
                         strongSelf.submitApplication(applicationContext: applicationContext)
                     }
                 }

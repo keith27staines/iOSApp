@@ -8,7 +8,7 @@
 
 import WorkfinderCommon
 
-func makeNetworkConfiguration(
+func makeMockNetworkConfiguration(
     wexApiKey: String = "api",
     baseUrlString: String = "baseUrl",
     v1ApiUrlString: String = "v1Url",

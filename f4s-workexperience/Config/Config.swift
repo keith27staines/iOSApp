@@ -48,7 +48,7 @@ struct Config {
     
     static var apnsEnv: String {
         if self.apns == "sandbox" {
-            return "dev"
+            return "staging" //"dev"
         } else {
             if ENVIRONMENT == "STAGING" {
                 return "staging"

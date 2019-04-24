@@ -38,4 +38,8 @@ class TemplateChoiceCoreDataManager: CoreDataBaseManager {
         TemplateChoiceDB.removeTemplateChoiceWithNameForUser(managedObjectContext, name: name, userUuid: userUuid)
         save()
     }
+    
+    func deleteAllTemplateChoices() throws {
+        try TemplateChoiceDB.deleteAllTemplateChoices(managedObjectContext)
+    }
 }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 public enum F4SHttpRequestVerb {
     case get

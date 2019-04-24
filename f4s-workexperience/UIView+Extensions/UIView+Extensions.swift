@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WorkfinderCommon
 
 extension UIView {
     var skin: Skin? {

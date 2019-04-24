@@ -7,11 +7,16 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
-public class F4SRecommendationService : F4SDataTaskService {
+public protocol F4SRecommendationServiceProtocol : class {
+    func fetch(completion: @escaping (F4SNetworkResult<[Recommendation]>) -> ())
+}
+
+public class F4SRecommendationService : F4SDataTaskService, F4SRecommendationServiceProtocol {
     public static let apiName = "recommend"
     public init() {
-        super.init(baseURLString: Config.BASE_URL, apiName: F4SRecommendationService.apiName)
+        super.init(baseURLString: Config.BASE_URL2, apiName: F4SRecommendationService.apiName)
     }
 
     public func fetch(completion: @escaping (F4SNetworkResult<[Recommendation]>) -> ()) {

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 public struct F4SShortlistJson : Decodable {
     public var uuid: F4SUUID?

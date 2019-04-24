@@ -10,10 +10,10 @@ v2/company/uuid                         GET (gets details of a company)
 v2/company/uuid/documents               GET (retrieves documents the company has or might provide)
 v2/company/uuid/documents               POST (requests the company to provide a document)
 v2/company/uuid/roles/uuid              GET (gets the role the company has offered the YP)
-v1/company/dump/full                    GET (gets the metadata describing the company dump db)
+v2/company/dump/full                    GET (gets the metadata describing the company dump db)
 
 RECOMMENDATIONS
-v1/recommend                            GET (get all current recommendations for the YP)
+v2/recommend                            GET (get all current recommendations for the YP)
 
 FAVOURITE
 v1/favourite                            POST (makes the specified company one the YPs favourites)
@@ -21,16 +21,16 @@ v1/favourite/uuid                       DELETE
 
 PLACEMENT
 v2/placement/uuid                       GET (gets offer)
-v1/placement                            GET (gets all placements)
-v1/placement                            POST (creates the draft placement)
-v1/placement/uuid                       PUT (updates a placement with more information from the YP)
+v2/placement                            GET (gets all placements)
+v2/placement                            POST (creates the draft placement)
+v2/placement/uuid                       PUT (updates a placement with more information from the YP)
 v2/placement/uuid                       PATCH (confirm, decline or cancel a placement)
 v2/placement/uuid                       PATCH (update placement with YP availability information)
 v2/placement/uuid                       GET (retrieve availability information for the YP)
+v2/placement/uuid/documents             GET (returns YP's documents associated with the placement)
+v2/placement/uuid/documents             PUT (associates one or more Yp's documents with the placement)
 
 v1/rating                               POST (YP rates a placement)
-v1/placement/uuid/documents             GET (returns YP's documents associated with the placement)
-v1/placement/uuid/documents             PUT (associates one or more Yp's documents with the placement)
 
 MESSAGING
 v2/messaging/threadUuid                 GET (gets all messages for the specified thread)
@@ -41,6 +41,6 @@ v2/messaging/threadUuid/user_responses  GET (gets the list of canned responses t
 OTHER
 v2/partner                              GET (gets a list of partners)
 v1/feature-flag                         GET (gets feature flags)
-v1/cover-template                       GET (gets the moustache template for the cover letter)
-v1/voucher                              PUT (associates a voucher with a placement)
-v1/content                              GET (gets urls for faqs, t&cs, about, etc)
+v2/cover-template                       GET (gets the moustache template for the cover letter)
+v2/voucher                              PUT (associates a voucher with a placement)
+v2/content                              GET (gets urls for faqs, t&cs, about, etc)

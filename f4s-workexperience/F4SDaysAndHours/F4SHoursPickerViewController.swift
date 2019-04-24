@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import WorkfinderCommon
 
 public protocol F4SHoursPickerDelegate {
     func hoursPicker(_ picker: F4SHoursPickerViewController, hoursType: F4SHoursType)

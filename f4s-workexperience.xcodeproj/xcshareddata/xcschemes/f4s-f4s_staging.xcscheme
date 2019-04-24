@@ -34,7 +34,7 @@
             testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "40E78E261DD31A86000A3776"
+               BlueprintIdentifier = "FCFBD0052250D69700A9361D"
                BuildableName = "f4s-workexperienceTests.xctest"
                BlueprintName = "f4s-workexperienceTests"
                ReferencedContainer = "container:f4s-workexperience.xcodeproj">

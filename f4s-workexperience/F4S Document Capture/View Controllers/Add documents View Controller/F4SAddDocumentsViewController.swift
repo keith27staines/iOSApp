@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WorkfinderCommon
 
 class F4SAddDocumentsViewController: UIViewController {
     let consentPreviouslyGivenKey = "consentPreviouslyGivenKey"
@@ -138,7 +139,7 @@ class F4SAddDocumentsViewController: UIViewController {
     func modeSpecificLoad() {
         switch mode {
         case .applyWorkflow:
-            MessageHandler.sharedInstance.showLoadingOverlay(self.view)
+            sharedUserMessageHandler.showLoadingOverlay(self.view)
             documentModel.fetchDocumentsForPlacement()
         case .businessLeaderRequest:
             break
@@ -229,9 +230,9 @@ extension F4SAddDocumentsViewController : F4SDocumentUploadModelDelegate {
     
     func documentUploadModelFailedToFetchDocuments(_ model: F4SDocumentUploadModelBase, error: Error) {
         DispatchQueue.main.async { [unowned self] in
-            MessageHandler.sharedInstance.hideLoadingOverlay()
+            sharedUserMessageHandler.hideLoadingOverlay()
             self.displayTryAgain {
-                MessageHandler.sharedInstance.showLoadingOverlay(self.view)
+                sharedUserMessageHandler.showLoadingOverlay(self.view)
                 self.documentModel.fetchDocumentsForPlacement()
             }
         }
@@ -240,7 +241,7 @@ extension F4SAddDocumentsViewController : F4SDocumentUploadModelDelegate {
     func documentUploadModelFetchedDocuments(_ model: F4SDocumentUploadModelBase) {
         DispatchQueue.main.async { [weak self] in
             self?.reloadFromModel()
-            MessageHandler.sharedInstance.hideLoadingOverlay()
+            sharedUserMessageHandler.hideLoadingOverlay()
         }
     }
     

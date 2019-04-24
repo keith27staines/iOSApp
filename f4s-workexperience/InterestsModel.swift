@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 /// A dictionary mapping interests to the number of companies having that interest
 public typealias F4SInterestCounts = [F4SInterest:Int]

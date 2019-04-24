@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 public protocol F4SDocumentUploaderDelegate : class {
     func documentUploader(_ uploader: F4SDocumentUploader, didChangeState state: F4SDocumentUploader.State)

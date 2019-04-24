@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 public typealias F4SMessagesModelResult = F4SNetworkResult<F4SMessagesModel>
 

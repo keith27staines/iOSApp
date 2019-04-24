@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 public struct F4SUserStatus : Codable {
     var unreadMessageCount: Int

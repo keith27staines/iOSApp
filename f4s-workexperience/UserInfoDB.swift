@@ -38,9 +38,9 @@ class UserInfoDB: NSManagedObject {
             newItem.email = userInfo.email
             newItem.firstName = userInfo.firstName
             newItem.lastName = userInfo.lastName
-            newItem.consenterEmail = userInfo.consenterEmail
+            newItem.consenterEmail = userInfo.parentEmail
             newItem.dateOfBirth = userInfo.dateOfBirth?.dateToStringRfc3339()
-            newItem.requiresConsent = userInfo.requiresConsent
+            newItem.requiresConsent = userInfo.requiresConsent ?? false
             newItem.placementUuid = userInfo.placementUuid
             newItem.userUuid = userUuid
 
@@ -49,9 +49,9 @@ class UserInfoDB: NSManagedObject {
             fetchResult[0].firstName = userInfo.firstName
             fetchResult[0].lastName = userInfo.lastName
             fetchResult[0].email = userInfo.email
-            fetchResult[0].consenterEmail = userInfo.consenterEmail
+            fetchResult[0].consenterEmail = userInfo.parentEmail
             fetchResult[0].dateOfBirth = userInfo.dateOfBirth?.dateToStringRfc3339()
-            fetchResult[0].requiresConsent = userInfo.requiresConsent
+            fetchResult[0].requiresConsent = userInfo.requiresConsent ?? false
             fetchResult[0].placementUuid = userInfo.placementUuid
             fetchResult[0].userUuid = userUuid
 

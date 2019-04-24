@@ -8,6 +8,7 @@
 
 import UIKit
 import KeychainSwift
+import WorkfinderCommon
 
 class F4SDebugViewController: UIViewController {
     

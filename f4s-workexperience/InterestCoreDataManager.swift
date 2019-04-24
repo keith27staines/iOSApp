@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import WorkfinderCommon
 
 class InterestCoreDataManager: CoreDataBaseManager {
     class var sharedInstance: InterestCoreDataManager {

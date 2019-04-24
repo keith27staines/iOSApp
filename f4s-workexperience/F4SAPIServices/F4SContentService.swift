@@ -7,28 +7,7 @@
 //
 
 import Foundation
-
-public enum F4SContentType: String, Codable {
-    case about = "about-workfinder"
-    case recommendations
-    case faq
-    case terms
-    case voucher
-    case consent
-    case company
-}
-
-public struct F4SContentDescriptor : Codable {
-    public var title: String
-    public var slug: F4SContentType
-    public var url: String?
-    
-    public init(title: String = "", slug: F4SContentType = .about, url: String? = "") {
-        self.title = title
-        self.slug = slug
-        self.url = url
-    }
-}
+import WorkfinderCommon
 
 public protocol F4SContentServiceProtocol {
     var apiName: String { get }
@@ -37,7 +16,7 @@ public protocol F4SContentServiceProtocol {
 
 public class F4SContentService : F4SDataTaskService {
     public init() {
-        super.init(baseURLString: Config.BASE_URL, apiName: "content")
+        super.init(baseURLString: Config.BASE_URL2, apiName: "content")
     }
 }
 

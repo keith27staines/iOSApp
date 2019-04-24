@@ -31,11 +31,10 @@
       <Testables>
          <TestableReference
             skipped = "NO"
-            parallelizable = "YES"
             testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "40E78E261DD31A86000A3776"
+               BlueprintIdentifier = "FCFBD0052250D69700A9361D"
                BuildableName = "f4s-workexperienceTests.xctest"
                BlueprintName = "f4s-workexperienceTests"
                ReferencedContainer = "container:f4s-workexperience.xcodeproj">
@@ -43,7 +42,6 @@
          </TestableReference>
          <TestableReference
             skipped = "NO"
-            parallelizable = "YES"
             testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
@@ -55,7 +53,6 @@
          </TestableReference>
          <TestableReference
             skipped = "NO"
-            parallelizable = "YES"
             testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
@@ -67,7 +64,6 @@
          </TestableReference>
          <TestableReference
             skipped = "NO"
-            parallelizable = "YES"
             testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
@@ -75,6 +71,17 @@
                BuildableName = "WorkfinderUITests.xctest"
                BlueprintName = "WorkfinderUITests"
                ReferencedContainer = "container:WorkfinderModules/WorkfinderUI/WorkfinderUI.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FC6E3D272248D74A00377736"
+               BuildableName = "WorkfinderApplyUseCaseTests.xctest"
+               BlueprintName = "WorkfinderApplyUseCaseTests"
+               ReferencedContainer = "container:WorkfinderModules/WorkfinderApplyUseCase/WorkfinderApplyUseCase.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

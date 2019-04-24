@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 public protocol F4SUserServiceProtocol : class {
     var vendorID: String { get }
@@ -17,7 +18,7 @@ public protocol F4SUserServiceProtocol : class {
 
 public class F4SUserService : F4SUserServiceProtocol {
     
-    public static var vendorID: String { return UIDevice.current.identifierForVendor!.uuidString }
+    public static var vendorID: String { return UIDevice.current.identifierForVendor?.uuidString ?? "vendorIdNotSet"}
     public var vendorID: String { return F4SUserService.vendorID }
     
     lazy var dobFormatter: DateFormatter = {
@@ -27,12 +28,12 @@ public class F4SUserService : F4SUserServiceProtocol {
     }()
     
     public func updateUser(user: F4SUser, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ()) {
+        var user = user
         let attempting = "Update user"
         var currentUserUuid: String = ""
-        if let userUuid = user.uuid {
-            currentUserUuid = userUuid
-        }
-        
+        if let userUuid = user.uuid { currentUserUuid = userUuid }
+        if let age = user.age() { user.requiresConsent = age < 16 }
+        if user.parentEmail?.isEmpty == true { user.parentEmail = nil }
         let url = URL(string: ApiConstants.updateUserProfileUrl + currentUserUuid)!
         
         let session = F4SNetworkSessionManager.shared.interactiveSession
@@ -42,7 +43,7 @@ public class F4SUserService : F4SUserServiceProtocol {
             encoder.dateEncodingStrategy = .formatted(dobFormatter)
             let data = try encoder.encode(user)
             globalLog.debug("updating user with json \n\(String(data: data, encoding: .utf8)!)")
-            let urlRequest = F4SDataTaskService.urlRequest(verb: .put, url: url, dataToSend: data)
+            let urlRequest = F4SDataTaskService.urlRequest(verb: .patch, url: url, dataToSend: data)
             let dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { [weak self] (result) in
                 
                 self?.handleUpdateUserTaskResult(attempting: attempting, result: result, completion: completion)

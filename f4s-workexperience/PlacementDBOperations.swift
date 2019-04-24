@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 class PlacementDBOperations {
     class var sharedInstance: PlacementDBOperations {
@@ -36,9 +37,8 @@ class PlacementDBOperations {
         return placements
     }
 
-    func getPlacementsForCurrentUserAndCompany(companyUuid: String) -> F4SPlacement? {
-        guard let userUuid = F4SUser().uuid,
-            let placementDB = PlacementCoreDataManager.sharedInstance.getPlacementsForUserAndCompany(userUuid: userUuid, companyUuid: companyUuid) else {
+    func getPlacementForCompany(companyUuid: String) -> F4SPlacement? {
+        guard let placementDB = PlacementCoreDataManager.sharedInstance.getPlacementForCompany(companyUuid: companyUuid) else {
             return nil
         }
         return PlacementDBOperations.sharedInstance.getPlacementFromPlacementDB(placementDB: placementDB)
@@ -52,20 +52,6 @@ class PlacementDBOperations {
             placements.append(placement)
         }
         return placements
-    }
-
-    func getInProgressPlacementsForCurrentUser() -> F4SPlacement? {
-        guard let userUuid = F4SUser().uuid,
-            let placementDB = PlacementCoreDataManager.sharedInstance.getInProgressPlacementsForUser(userUuid: userUuid) else {
-            return nil
-        }
-        return PlacementDBOperations.sharedInstance.getPlacementFromPlacementDB(placementDB: placementDB)
-    }
-
-    func removePlacementWithId(placementUuid: String) {
-        if let userUuid = F4SUser().uuid {
-            PlacementCoreDataManager.sharedInstance.removePlacementWithId(placementUuid: placementUuid, userUuid: userUuid)
-        }
     }
 
     func getPlacementWithUuid(placementUuid: String) -> F4SPlacement? {
@@ -85,10 +71,10 @@ class PlacementDBOperations {
             placement.companyUuid = companyUuid
         }
         if let placementStatus = placementDB.status {
-            placement.status = F4SPlacementStatus(rawValue: placementStatus)
+            placement.status = WEXPlacementState(rawValue: placementStatus)
             if placement.status == nil {
                 if placementStatus == "inProgress" {
-                    placement.status = F4SPlacementStatus.inProgress
+                    placement.status = WEXPlacementState.inProgress
                 }
             }
         }

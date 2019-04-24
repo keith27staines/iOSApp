@@ -10,7 +10,6 @@ PODS:
     - GoogleMaps/Base
   - GooglePlaces (2.7.0):
     - GoogleMaps/Base (= 2.7.0)
-  - GRMustache.swift (2.0.0)
   - KeychainSwift (11.0.0)
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
@@ -33,7 +32,6 @@ DEPENDENCIES:
   - Auth0 (~> 1.9.2)
   - GoogleMaps
   - GooglePlaces
-  - GRMustache.swift
   - KeychainSwift
   - ReachabilitySwift
   - Segment-Bugsnag
@@ -47,7 +45,6 @@ SPEC REPOS:
     - Bugsnag
     - GoogleMaps
     - GooglePlaces
-    - GRMustache.swift
     - KeychainSwift
     - ObjcExceptionBridging
     - ReachabilitySwift
@@ -62,7 +59,6 @@ SPEC CHECKSUMS:
   Bugsnag: e195a21dae67e32a37567689ff8e0863e4a17e09
   GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
   GooglePlaces: 3d06e6c99654545b4738ce49648745779c25f2ef
-  GRMustache.swift: 8a547c12bea16052071b2b540af83d770075f0eb
   KeychainSwift: bea6bd9f98af7b8d7ca4aa79fe105c00fab532db
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
@@ -71,6 +67,6 @@ SPEC CHECKSUMS:
   SQLite.swift: 6e5356850bb1791459f8c16d6ee9195b28714a2e
   XCGLogger: 4fc1bc0bdd5828cb8dc8da7a843536cda1bea8f3
 
-PODFILE CHECKSUM: 197e09ceed21225d29faf3febecc9a2a6650a9e5
+PODFILE CHECKSUM: b883632c5e0f933b38148b4ae59163d74b8b8dff
 
 COCOAPODS: 1.5.3

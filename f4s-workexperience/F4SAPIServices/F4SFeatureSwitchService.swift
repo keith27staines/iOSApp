@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import WorkfinderCommon
 
 public protocol F4SFeatureSwitchServiceProtocol {
     var apiName: String { get }

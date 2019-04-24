@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import WorkfinderCommon
+import WorkfinderApplyUseCase
 
 class TemplateChoiceDBOperations {
     class var sharedInstance: TemplateChoiceDBOperations {
@@ -59,6 +61,10 @@ class TemplateChoiceDBOperations {
             return
         }
         TemplateChoiceCoreDataManager.sharedInstance.removeTemplateChoiceWithName(name: name, userUuid: userUuid)
+    }
+    
+    func deleteAllTemplateChoices() throws {
+        try TemplateChoiceCoreDataManager.sharedInstance.deleteAllTemplateChoices()
     }
 
     fileprivate func getTemplateChoiceFromInterestDB(templateChoiceDB: TemplateChoiceDB) -> F4STemplateBlank {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WorkfinderCommon
 
 extension Skin {
     func calendarCellBackgroundColor(type: F4SCalendarDaySelectionType) -> UIColor {
@@ -46,24 +47,6 @@ extension Skin {
             return UIColor.white
         }
     }
-}
-
-enum F4SCalendarDaySelectionType {
-    case intermonthUnselected
-    case intermonthSelected
-    case unselectable
-    case unselected
-    case selected
-    case todayUnselected
-    case todaySelected
-}
-
-public enum F4SExtendibleSelectionState : Int {
-    case none = 0
-    case terminal = 1
-    case periodStart = 2
-    case periodEnd = 3
-    case midPeriod = 4
 }
 
 public class F4SCalendarMonthViewDayCell: UICollectionViewCell {

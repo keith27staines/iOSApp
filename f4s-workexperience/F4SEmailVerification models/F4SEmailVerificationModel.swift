@@ -11,6 +11,7 @@ import Auth0
 
 /// A state machine that controls the verification process for emails
 public class F4SEmailVerificationModel {
+    static var shared: F4SEmailVerificationModel = F4SEmailVerificationModel()
     
     /// The last non-error state before transitioning to the current state
     public private (set) var lastNonErrorState: F4SEmailVerificationState
@@ -19,7 +20,7 @@ public class F4SEmailVerificationModel {
     public let passwordlessType: PasswordlessType
     
     /// Initialises a new instance
-    public init() {
+    private init() {
         lastNonErrorState = F4SEmailVerificationState.start
         emailVerificationState = .previouslyVerified
         passwordlessType = .iOSLink

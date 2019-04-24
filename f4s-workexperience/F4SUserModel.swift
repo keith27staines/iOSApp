@@ -9,6 +9,7 @@
 import Foundation
 import KeychainSwift
 import Analytics
+import WorkfinderCommon
 
 public struct F4SPushNotificationStatus : Decodable {
     public var enabled: Bool?
@@ -104,16 +105,18 @@ public protocol F4SUserProtocol {
 
 public struct F4SUser : F4SUserProtocol, Codable {
     
-    var localStore: LocalKeyedStorage = UserDefaults.standard
+    var localStore: LocalStorageProtocol = UserDefaults.standard
     var analytics: F4SAnalytics? = f4sLog
     
     public private (set) var uuid: F4SUUID?
     public var consenterEmail: String?
+    public var parentEmail: String?
     public var dateOfBirth: Date?
-    public var requiresConsent: Bool
     public var placementUuid: String?
     public var email: String
     public var firstName: String
+    public var requiresConsent: Bool? = false
+    
     public var lastName: String? {
         didSet {
             assert(lastName == nil || lastName?.isEmpty == false)
@@ -141,21 +144,20 @@ public struct F4SUser : F4SUserProtocol, Codable {
         return age
     }
     
-    public init(localStore: LocalKeyedStorage = UserDefaults.standard) {
+    public init(localStore: LocalStorageProtocol = UserDefaults.standard) {
         self.localStore = localStore
         uuid = localStore.value(key: LocalStore.Key.userUuid) as! F4SUUID?
         firstName = ""
-        requiresConsent = false
         email = ""
     }
     
     init(userData: UserInfoDB) {
         self.init()
-        requiresConsent = userData.requiresConsent
         email = userData.email ?? ""
         firstName = userData.firstName ?? ""
         lastName = userData.lastName?.isEmpty == false ? userData.lastName : nil
         consenterEmail = userData.consenterEmail
+        parentEmail = userData.consenterEmail
         placementUuid = userData.placementUuid
         if let dateOfBirth = userData.dateOfBirth {
             self.dateOfBirth =  Date.dateFromRfc3339(string: dateOfBirth)
@@ -177,6 +179,7 @@ public struct F4SUser : F4SUserProtocol, Codable {
         UserDefaults.standard.setValue(uuid, forKey: UserDefaultsKeys.userUuid)
         KeychainSwift().delete(UserDefaultsKeys.userUuid)
     }
+
 }
 
 extension F4SUser {
@@ -188,6 +191,7 @@ extension F4SUser {
         case dateOfBirth = "date_of_birth"
         case requiresConsent = "requires_consent"
         case consenterEmail = "consenter_email"
+        case parentEmail = "parent_email"
         case placementUuid = "placement_uuid"
     }
 }

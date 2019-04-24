@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WorkfinderCommon
 
 public protocol F4SSelectDayTableViewCellDelegate {
     func selectionButtonWasTapped(_ cell: F4SSelectDayTableViewCell)

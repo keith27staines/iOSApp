@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import WorkfinderCommon
+import WorkfinderApplyUseCase
 
 public protocol F4SPCalendarServiceProtocol {
 

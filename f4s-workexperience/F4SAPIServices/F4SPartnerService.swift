@@ -6,6 +6,8 @@
 //  Copyright © 2017 Founders4Schools. All rights reserved.
 //
 
+import WorkfinderCommon
+
 public protocol F4SPartnerServiceProtocol {
     var apiName: String { get }
     func getPartners(completion: @escaping (F4SNetworkResult<[F4SPartner]>) -> ())

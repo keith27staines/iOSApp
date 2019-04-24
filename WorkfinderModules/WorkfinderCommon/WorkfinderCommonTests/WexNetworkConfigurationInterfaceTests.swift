@@ -12,8 +12,8 @@ import WorkfinderCommon
 class WorkfinderNetworkConfigurationInterfaceTests: XCTestCase {
 
     func testInterfaceInit() {
-        let sut: WexNetworkingConfigurationProtocol
-        sut = WexNetworkingConfiguration(
+        let sut: WEXNetworkingConfigurationProtocol
+        sut = WEXNetworkingConfiguration(
             wexApiKey: "apiKey",
             baseUrlString: "baseUrlString",
             v1ApiUrlString: "v1UrlString",

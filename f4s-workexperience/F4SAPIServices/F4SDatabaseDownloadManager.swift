@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import WorkfinderCommon
 
 public typealias BackgroundSessionCompletionHandler = () -> Void
 

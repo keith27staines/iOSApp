@@ -15,6 +15,7 @@ public struct F4SMessage : Codable {
     public var relativeDateTime: String?
     public var content: String
     public var sender: String?
+    public var isRead: Bool?
     
     public init(uuid: String = "", dateTime: Date = Date(), relativeDateTime: String = "", content: String = "", sender: String = "") {
         self.uuid = uuid
@@ -32,6 +33,7 @@ extension F4SMessage {
         case relativeDateTime = "datetime_rel"
         case content
         case sender
+        case isRead = "is_read"
     }
 }
 

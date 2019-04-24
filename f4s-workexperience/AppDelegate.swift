@@ -9,11 +9,8 @@
 import UIKit
 import CoreData
 import XCGLogger
-import GoogleMaps
-import GooglePlaces
-import UserNotifications
+import WorkfinderCommon
 
-let apiKey: String = "eTo0oeh4Yeen1oy7iDuv"
 let globalLog = XCGLogger.default
 
 extension Notification.Name {
@@ -45,14 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK:- Application events
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        WorkfinderModules().assert()
-        GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
-        GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
-        if ProcessInfo.processInfo.arguments.contains("isUnitTesting") {
-            print("Exiting didFinishLaunchingWithOptions early because `isUnitTesting` argument is set")
-            return true
-        }
-        runDataFixes()
+        if ProcessInfo.processInfo.arguments.contains("isUnitTesting") { return true }
+        DataFixes().run()
         f4sLog = F4SLog()
         globalLog.debug("\n\n\n********\nWorkfinder launched in environement \(Config.ENVIRONMENT)\n********")
         databaseDownloadManager = F4SDatabaseDownloadManager()
@@ -129,13 +120,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // This method handles notifications arriving whether the app was running already or the notification opened the app
     func application(_: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         DispatchQueue.main.async {
-            guard let window = self.window else {
-                globalLog.error("Push notification cannot be processed because the application does not have a window")
-                return
-            }
             globalLog.debug("Received remote notification")
-            let appState = UIApplication.shared.applicationState
-            UNService.shared.handleRemoteNotification(userInfo: userInfo, window: window, isAppActive: appState == .active)
+            UNService.shared.handleRemoteNotification(userInfo: userInfo)
             completionHandler(UIBackgroundFetchResult.newData)
         }
     }
@@ -180,9 +166,7 @@ extension AppDelegate {
     
     func setInvokingUrl(_ url: URL) {
         globalLog.debug("Invoked from url: \(url.absoluteString)")
-        guard let universalLink = UniversalLink(url: url) else {
-            return
-        }
+        guard let universalLink = UniversalLink(url: url) else { return }
         switch universalLink {
         case .recommendCompany(let company):
             TabBarCoordinator.sharedInstance.rewindAndNavigateToRecommendations(from: nil, show: company)
@@ -195,14 +179,6 @@ extension AppDelegate {
                 userInfo: userInfo)
             NotificationCenter.default.post(notification)
         }
-    }
-    
-
-}
-
-extension AppDelegate {
-    private func runDataFixes() {
-        F4SUser.dataFixMoveUUIDFromKeychainToUserDefaults()
     }
 }
 
