@@ -925,6 +925,7 @@
 		40E78E151DD31A86000A3776 /* f4s-workexperience */ = {
 			isa = PBXGroup;
 			children = (
+				40E78E1F1DD31A86000A3776 /* LaunchScreen.storyboard */,
 				FC24D245226B05B300FA04A1 /* Coordinators, Routing and Injection */,
 				FC96709F225A18B300318F69 /* Repositories */,
 				FC1DFD87222B9CF2001951ED /* Utilities and extensions */,
@@ -1027,7 +1028,6 @@
 		40E78E501DD328E0000A3776 /* Side menu */ = {
 			isa = PBXGroup;
 			children = (
-				40E78E1F1DD31A86000A3776 /* LaunchScreen.storyboard */,
 				40E78E521DD3292F000A3776 /* Side menu */,
 				FC1DFD8A222B9EF5001951ED /* Shared */,
 			);

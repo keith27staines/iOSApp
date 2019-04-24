@@ -12,7 +12,8 @@ import WorkfinderCommon
 fileprivate enum DrawerSection: Int {
     case WelcomeSection
     case NavigationSection
-    case LogoutSection
+    case BusinessLeadersSection
+    case EnvironmentSection
 }
 
 fileprivate enum NavigationSectionRow : Int {
@@ -46,7 +47,6 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
         setupTableView()
-        setupLabels()
         applyStyle()
     }
     
@@ -75,7 +75,6 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
         
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         secondLoad = true
@@ -99,7 +98,7 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
 
     // MARK: - UITableViewDataSource
     func numberOfSections(in _: UITableView) -> Int {
-        return 2
+        return 4
     }
 
     func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -109,8 +108,10 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
             return 1
         case .NavigationSection:
             return NavigationSectionRow.allRows.count
-        case .LogoutSection:
-            return 0
+        case .BusinessLeadersSection:
+            return 2
+        case .EnvironmentSection:
+            return 1
         }
     }
 
@@ -141,35 +142,95 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
                 return UITableViewCell()
             }
             cell.textLabel?.text = row.title
+            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 17)
             return cell
-        case .LogoutSection:
-            return UITableViewCell()
+        case .BusinessLeadersSection:
+            guard let _ = NavigationSectionRow(rawValue: indexPath.row), let cell = tableView.dequeueReusableCell(withIdentifier: "SideDrawerTableViewCell") as? SideDrawerTableViewCell else {
+                return UITableViewCell()
+            }
+            cell.textLabel?.text = indexPath.row == 0 ? "Register" : "login"
+            cell.textLabel?.font = UIFont.italicSystemFont(ofSize: 17)
+            return cell
+        case .EnvironmentSection:
+            guard let row = NavigationSectionRow(rawValue: indexPath.row), let cell = tableView.dequeueReusableCell(withIdentifier: "SideDrawerTableViewCell") as? SideDrawerTableViewCell else {
+                return UITableViewCell()
+            }
+            cell.textLabel?.text = getEnvironmentText()
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 12)
+            return cell
         }
     }
 
     // MARK: - UITableViewDelegate
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return nil
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SideDrawerTableViewCell") as? SideDrawerTableViewCell,
+            let section = DrawerSection(rawValue: section) else { return nil }
+
+        switch section {
+        case .WelcomeSection:
+            return nil
+        case .NavigationSection:
+            return nil
+        case .BusinessLeadersSection:
+            cell.textLabel?.text = "Workfinder hosts"
+            return cell
+        case .EnvironmentSection:
+            return nil
+        }
     }
     
-    func tableView(_: UITableView, heightForHeaderInSection _: Int) -> CGFloat {
-        return 0
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        guard
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SideDrawerTableViewCell") as? SideDrawerTableViewCell,
+            let section = DrawerSection(rawValue: section) else { return nil }
+        
+        switch section {
+        case .WelcomeSection:
+            return nil
+        case .NavigationSection:
+            cell.textLabel?.text = ""
+            return cell
+        case .BusinessLeadersSection:
+            cell.textLabel?.text = ""
+            return cell
+        case .EnvironmentSection:
+            return nil
+        }
+    }
+    
+    func tableView(_: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        guard let section = DrawerSection(rawValue: section) else {
+            return 0
+        }
+        switch section {
+        case .WelcomeSection: return 0
+        case .NavigationSection: return 0
+        case .BusinessLeadersSection: return 30
+        case .EnvironmentSection: return 0
+        }
+    }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        guard let section = DrawerSection(rawValue: section) else {
+            return 0
+        }
+        switch section {
+        case .WelcomeSection: return 0
+        case .NavigationSection: return 70
+        case .BusinessLeadersSection: return 70
+        case .EnvironmentSection: return 0
+        }
     }
     
     func tableView(_: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let section = DrawerSection(rawValue: indexPath.section) else { return normalCellHeight }
         switch section {
-        case .WelcomeSection:
-            return welcomeCellHeight
-        case .NavigationSection:
-            return normalCellHeight
-        case .LogoutSection:
-            return normalCellHeight
+        case .WelcomeSection: return welcomeCellHeight
+        case .NavigationSection: return normalCellHeight
+        case .BusinessLeadersSection: return normalCellHeight
+        case .EnvironmentSection: return normalCellHeight
         }
-    }
-    
-    func tableView(_: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return section == 0 ? 30 : 0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -193,7 +254,16 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
                     navigationHelper!.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.terms)
                 }
             }
-        case .LogoutSection:
+        case .BusinessLeadersSection:
+            var urlString: String
+            if indexPath.row == 0 {
+                urlString = "https://www.founders4schools.org.uk/signup/business-leaders/"
+            } else {
+                urlString = "https://www.founders4schools.org.uk/login/?next=/signup/business-leaders/"
+            }
+            let url = URL(string: urlString)!
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        case .EnvironmentSection:
             break
         }
 
@@ -204,31 +274,26 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
 
 // adjust text appereance
 extension CustomMenuViewController {
-
-    func setupLabels() {
-        let label = UILabel()
-        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-            var versionString = version
-            if let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
-                versionString = versionString + " build \(build)"
-            }
-            var environmentString: String
-            switch Config.ENVIRONMENT {
-            case "STAGING":
-                environmentString = "STAGING"
-            case "PRODUCTION":
-                environmentString = ""
-            default:
-                assertionFailure("Unexpected environment target")
-                environmentString = "ENV ?"
-            }
-            label.text = "version " + versionString + " " + environmentString.lowercased() + " | apns =" + Config.apns
+    
+    func getEnvironmentText() -> String {
+        guard let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else { return "" }
+        
+        var versionString = version
+        if let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+            versionString = versionString + " build \(build)"
         }
-        label.frame = CGRect(x: 5, y: self.view.frame.size.height - 55, width: 31, height: 14)
-        label.textColor = UIColor.white
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.sizeToFit()
-        self.view.addSubview(label)
+        var environmentString: String
+        switch Config.ENVIRONMENT {
+        case "STAGING":
+            environmentString = "STAGING"
+        case "PRODUCTION":
+            environmentString = ""
+        default:
+            assertionFailure("Unexpected environment target")
+            environmentString = "ENV ?"
+        }
+        
+        return "version " + versionString + " " + environmentString.lowercased() + " | apns =" + Config.apns
     }
 }
 extension CustomMenuViewController : UITextFieldDelegate {

@@ -42,13 +42,8 @@ class SideMenuViewController: CustomMenuViewController {
         self.title = "Left Drawer"
     }
 
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return super.tableView(tableView, titleForHeaderInSection: section)
-    }
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
-
         return cell
     }
 
