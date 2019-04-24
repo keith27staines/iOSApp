@@ -1271,16 +1271,8 @@
 				FC6B17E92201B54700556C59 /* CompanyFavouritesModel.swift */,
 				FC1DC07321FE14D7009ABC60 /* CompanyViewData.swift */,
 				FC1DC07421FE14D7009ABC60 /* PersonViewData.swift */,
-				FC1DC07521FE14D7009ABC60 /* CompanyViewModel.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		FC0B407A226B18CF00D992AC /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		FC0B407B226B1B7900D992AC /* View */ = {
@@ -1594,7 +1586,7 @@
 				FC1DC07021FE14BF009ABC60 /* CompanyCoordinator.swift */,
 				FC0B4079226B187500D992AC /* Model */,
 				FC0B4078226B186400D992AC /* View */,
-				FC0B407A226B18CF00D992AC /* ViewModel */,
+				FC5C32CE22705E8600C5BBCF /* ViewModel */,
 			);
 			path = CompanyDetail;
 			sourceTree = "<group>";
@@ -1706,13 +1698,6 @@
 			path = TabBarCoordinator;
 			sourceTree = "<group>";
 		};
-		FC313049222BC8730043D014 /* Company detail coordinator */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Company detail coordinator";
-			sourceTree = "<group>";
-		};
 		FC31F093204D547E009DD526 /* HiddenDebugScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -1770,6 +1755,14 @@
 				FC59B18C1F81546C0068EC9C /* F4SQuadtree.swift */,
 			);
 			name = F4SDataStructures;
+			sourceTree = "<group>";
+		};
+		FC5C32CE22705E8600C5BBCF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FC1DC07521FE14D7009ABC60 /* CompanyViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		FC5D3C6A20FE17F600F89169 /* .circleci */ = {
@@ -2067,7 +2060,6 @@
 				FCEE5E1D2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift */,
 				FCB49306222A5D3B00B88B8B /* Onboarding */,
 				FC313048222BC83C0043D014 /* TabBarCoordinator */,
-				FC313049222BC8730043D014 /* Company detail coordinator */,
 			);
 			path = "App Coordinator";
 			sourceTree = "<group>";
