@@ -103,8 +103,16 @@ extension ContentViewController {
                     sharedUserMessageHandler.hideLoadingOverlay()
                     sharedUserMessageHandler.display(error, parentCtrl: strongSelf)
                 case .success(let contentDescriptors):
-                    guard let index = contentDescriptors.index(where: { (descriptor) -> Bool in descriptor.slug == contentType }) else { return }
-                    guard let contentUrl = contentDescriptors[index].url else { return }
+                    guard let index = contentDescriptors.index(where: { (descriptor) -> Bool in descriptor.slug == contentType }) else {
+                        sharedUserMessageHandler.hideLoadingOverlay()
+                        print("No url for \(contentType)")
+                        return
+                    }
+                    guard let contentUrl = contentDescriptors[index].url else {
+                        sharedUserMessageHandler.hideLoadingOverlay()
+                        print("No url for\(contentType)")
+                        return
+                    }
                     strongSelf.loadURL(url: contentUrl)
                 }
             }
