@@ -23,7 +23,7 @@ public struct ApiConstants {
     public static let roleUrl: String = "\(baseUrl2)/company"
     
     // User
-    public static let userProfileUrl: String = "\(baseUrl)/device"
+    public static let registerVendorId: String = "\(baseUrl2)/register"
     public static let updateUserProfileUrl: String = "\(baseUrl)/user/"
     
     // Placement

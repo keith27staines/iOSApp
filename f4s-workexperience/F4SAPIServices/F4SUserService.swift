@@ -66,7 +66,7 @@ public class F4SUserService : F4SUserServiceProtocol {
     public func registerAnonymousUserOnServer(completion: @escaping (F4SNetworkResult<F4SRegisterResult>) -> Void) {
         let attempting = "Register anonymous user on server"
         globalLog.debug("Attempting to: \(attempting)")
-        let url = URL(string: ApiConstants.userProfileUrl)!
+        let url = URL(string: ApiConstants.registerVendorId)!
         let session = F4SNetworkSessionManager.shared.firstRegistrationSession
         let anonymousUser = F4SAnonymousUser(vendorUuid: vendorID, clientType: "ios", apnsEnvironment: Config.apnsEnv)
         let encoder = JSONEncoder()
@@ -97,7 +97,7 @@ public class F4SUserService : F4SUserServiceProtocol {
     
     public func enablePushNotificationForUser(withDeviceToken: String, completion: @escaping (F4SNetworkResult<F4SPushNotificationStatus>) -> Void) {
         let attempting = "Enable push notification on server"
-        let url = URL(string: ApiConstants.userProfileUrl + "/\(vendorID)")!
+        let url = URL(string: ApiConstants.registerVendorId + "/\(vendorID)")!
         let session = F4SNetworkSessionManager.shared.interactiveSession
         let pushToken = F4SPushToken(pushToken: withDeviceToken)
         let encoder = JSONEncoder()
