@@ -40,7 +40,7 @@ public class F4SUserStatusService : F4SDataTaskService {
     
     public init() {
         let apiName = "user/status"
-        super.init(baseURLString: Config.BASE_URL, apiName: apiName)
+        super.init(baseURLString: Config.BASE_URL2, apiName: apiName)
     }
     
     public func beginStatusUpdate() {

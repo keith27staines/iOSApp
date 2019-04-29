@@ -17,8 +17,8 @@ public struct ApiConstants {
     // Company
     public static let companyDatabaseUrl: String = "\(baseUrl2)/company/dump/full"
     public static let companyUrl: String = "\(baseUrl2)/company"
-    public static let shortlistCompanyUrl: String = "\(baseUrl)/favourite"
-    public static let unshortlistCompanyUrl: String = "\(baseUrl)/favourite"
+    public static let shortlistCompanyUrl: String = "\(baseUrl2)/favourite"
+    public static let unshortlistCompanyUrl: String = "\(baseUrl2)/favourite"
     public static let companyDocumentsUrl: String = "\(baseUrl2)/company"
     public static let roleUrl: String = "\(baseUrl2)/company"
     
@@ -41,7 +41,7 @@ public struct ApiConstants {
     public static let messagesInThreadUrl: String = "\(baseUrl)/messaging/"
     public static let optionsForThreadUrl: String = "\(baseUrl)/messaging/"
     public static let sendMessageForThreadUrl: String = "\(baseUrl)/messaging/"
-    public static let unreadMessagesCountUrl: String = "\(baseUrl)/user/status"
+    public static let unreadMessagesCountUrl: String = "\(baseUrl2)/user/status"
     
     // Template
     public static let templateUrl: String = "\(baseUrl2)/cover-template"
