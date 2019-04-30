@@ -38,9 +38,9 @@ public struct ApiConstants {
     public static let postDocumentsUrl: String = "\(baseUrl2)/placement"
     
     // Messages
-    public static let messagesInThreadUrl: String = "\(baseUrl)/messaging/"
-    public static let optionsForThreadUrl: String = "\(baseUrl)/messaging/"
-    public static let sendMessageForThreadUrl: String = "\(baseUrl)/messaging/"
+    public static let messagesInThreadUrl: String = "\(baseUrl2)/messaging/"
+    public static let optionsForThreadUrl: String = "\(baseUrl2)/messaging/"
+    public static let sendMessageForThreadUrl: String = "\(baseUrl2)/messaging/"
     public static let unreadMessagesCountUrl: String = "\(baseUrl2)/user/status"
     
     // Template
