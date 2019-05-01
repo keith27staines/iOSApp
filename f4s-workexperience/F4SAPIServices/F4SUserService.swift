@@ -97,7 +97,7 @@ public class F4SUserService : F4SUserServiceProtocol {
     
     public func enablePushNotificationForUser(withDeviceToken: String, completion: @escaping (F4SNetworkResult<F4SPushNotificationStatus>) -> Void) {
         let attempting = "Enable push notification on server"
-        let url = URL(string: ApiConstants.registerVendorId + "/\(vendorID)")!
+        let url = URL(string: ApiConstants.registerPushNotifictionToken + "/\(vendorID)")!
         let session = F4SNetworkSessionManager.shared.interactiveSession
         let pushToken = F4SPushToken(pushToken: withDeviceToken)
         let encoder = JSONEncoder()

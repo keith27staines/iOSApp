@@ -21,7 +21,6 @@ public final class Box<A> {
 
 enum Result<A> {
     case error(String)
-    case deffinedError(CallError)
     case value(Box<A>)
 }
 
@@ -104,8 +103,6 @@ class LocationHelper {
                 completion(coordinateResult)
             case .error(let error):
                 completion(.error(error))
-            case .deffinedError(let error):
-                completion(.error(error.serverErrorMessage ?? "Location could not be found"))
             }
         }
     }

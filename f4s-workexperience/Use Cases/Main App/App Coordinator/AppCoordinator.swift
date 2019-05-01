@@ -146,10 +146,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     
     
     private func ensureUserIsRegistered(completion: @escaping (F4SUUID)->()) {
-        guard !user.isRegistered else {
-            completion(user.uuid!)
-            return
-        }
         userService.registerAnonymousUserOnServer { [weak self] (result) in
             guard let strongSelf = self else { return }
             switch result {
@@ -199,7 +195,7 @@ extension AppCoordinator {
         let rootVC = window.rootViewController
         let alert = UIAlertController(
             title: NSLocalizedString("Workfinder cannot continue", comment: ""),
-            message: NSLocalizedString("We are very sorry, this should not have happened but Workfinder has encountered an error it cannot recover from", comment: ""),
+            message: NSLocalizedString("We are very sorry, this should not have happened. Workfinder has encountered an error it cannot recover from", comment: ""),
             preferredStyle: .alert)
         let retry = UIAlertAction(
             title: NSLocalizedString("Close Workfinder", comment: ""),

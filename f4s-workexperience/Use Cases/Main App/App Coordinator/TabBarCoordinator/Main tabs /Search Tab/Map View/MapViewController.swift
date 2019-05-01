@@ -922,8 +922,6 @@ extension MapViewController {
                         this.userMessageHandler.displayWithTitle(title, errorMsg, parentCtrl: this)
                         globalLog.debug(err)
                     }
-                case let .deffinedError(error):
-                    globalLog.debug(error)
                 }
             }
         }
