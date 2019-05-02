@@ -10,16 +10,12 @@ import Foundation
 import WorkfinderCommon
 
 public protocol F4SUserServiceProtocol : class {
-    var vendorID: String { get }
-    func registerAnonymousUserOnServer(completion: @escaping (F4SNetworkResult<F4SRegisterResult>) -> ())
+    func registerAnonymousUserOnServer(installationUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRegisterResult>) -> ())
     func updateUser(user: F4SUser, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ())
-    func enablePushNotificationForUser(withDeviceToken: String, completion: @escaping (_ result: F4SNetworkResult<F4SPushNotificationStatus>) -> ())
+    func enablePushNotificationForUser(installationUuid: F4SUUID, withDeviceToken: String, completion: @escaping (_ result: F4SNetworkResult<F4SPushNotificationStatus>) -> ())
 }
 
 public class F4SUserService : F4SUserServiceProtocol {
-    
-    public static var vendorID: String { return UIDevice.current.identifierForVendor?.uuidString ?? "vendorIdNotSet"}
-    public var vendorID: String { return F4SUserService.vendorID }
     
     lazy var dobFormatter: DateFormatter = {
         let df = DateFormatter()
@@ -63,12 +59,12 @@ public class F4SUserService : F4SUserServiceProtocol {
         }
     }
     
-    public func registerAnonymousUserOnServer(completion: @escaping (F4SNetworkResult<F4SRegisterResult>) -> Void) {
+    public func registerAnonymousUserOnServer(installationUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRegisterResult>) -> Void) {
         let attempting = "Register anonymous user on server"
         globalLog.debug("Attempting to: \(attempting)")
         let url = URL(string: ApiConstants.registerVendorId)!
         let session = F4SNetworkSessionManager.shared.firstRegistrationSession
-        let anonymousUser = F4SAnonymousUser(vendorUuid: vendorID, clientType: "ios", apnsEnvironment: Config.apnsEnv)
+        let anonymousUser = F4SAnonymousUser(vendorUuid: installationUuid, clientType: "ios", apnsEnvironment: Config.apnsEnv)
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         let data: Data
@@ -95,9 +91,9 @@ public class F4SUserService : F4SUserServiceProtocol {
         }
     }
     
-    public func enablePushNotificationForUser(withDeviceToken: String, completion: @escaping (F4SNetworkResult<F4SPushNotificationStatus>) -> Void) {
+    public func enablePushNotificationForUser(installationUuid: F4SUUID, withDeviceToken: String, completion: @escaping (F4SNetworkResult<F4SPushNotificationStatus>) -> Void) {
         let attempting = "Enable push notification on server"
-        let url = URL(string: ApiConstants.registerPushNotifictionToken + "/\(vendorID)")!
+        let url = URL(string: ApiConstants.registerPushNotifictionToken + "/\(installationUuid)")!
         let session = F4SNetworkSessionManager.shared.interactiveSession
         let pushToken = F4SPushToken(pushToken: withDeviceToken)
         let encoder = JSONEncoder()

@@ -17,6 +17,22 @@ extension Notification.Name {
     static let verificationCodeRecieved = Notification.Name("verificationCodeRecieved")
 }
 
+
+class AppInstallationUuidLogic {
+    let localStore: LocalStorageProtocol
+    init(localStore: LocalStorageProtocol = LocalStore()) {
+        self.localStore = localStore
+    }
+    var installationUuid: F4SUUID {
+        var uuid = localStore.value(key: LocalStore.Key.installationUuid) as? F4SUUID
+        if uuid == nil {
+            uuid = UIDevice.current.identifierForVendor!.uuidString
+            localStore.setValue(uuid, for: LocalStore.Key.installationUuid)
+        }
+        return uuid!
+    }
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var appCoordinator: AppCoordinatorProtocol!
@@ -40,6 +56,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return skins[partnerSkinKey] ?? workfinderSkin
     }()
     
+    lazy var appInstallationUuid = AppInstallationUuidLogic().installationUuid
+    
     // MARK:- Application events
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         if ProcessInfo.processInfo.arguments.contains("isUnitTesting") { return true }
@@ -52,6 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appCoordinator = appCoordinatorFactory.makeAppCoordinator(
             registrar: application,
             launchOptions: launchOptions,
+            installationUuid: appInstallationUuid,
             databaseDownloadManager: databaseDownloadManager!,
             f4sLog: f4sLog!)
         
@@ -103,7 +122,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return String(format: "%02.2hhx", data)
         }
         let token = tokenParts.joined()
-        userService.enablePushNotificationForUser(withDeviceToken: token) { (result) in
+        userService.enablePushNotificationForUser(installationUuid: appInstallationUuid, withDeviceToken: token) { (result) in
             switch result {
             case .error(let error):
                 globalLog.error(error)

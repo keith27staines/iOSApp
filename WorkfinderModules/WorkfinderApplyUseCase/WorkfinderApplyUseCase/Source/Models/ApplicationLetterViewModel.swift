@@ -11,7 +11,7 @@ import WorkfinderCommon
 
 public protocol ApplicationLetterViewProtocol : class {
     var isActivityIndicatorVisible: Bool { get set }
-    func showErrorWithCancelAndRetry(_ error: Error, retry: @escaping ()->Void )
+    func showErrorWithCancelAndRetry(_ error: Error, retry: @escaping ()->Void, cancel: @escaping () -> Void )
     func updateFromViewModel()
 }
 
@@ -46,7 +46,8 @@ public class ApplicationLetterViewModel : ApplicationLetterViewModelProtocol {
             if let error = error {
                 strongSelf.view?.showErrorWithCancelAndRetry(error, retry: {
                     strongSelf.applyButtonWasTapped()
-                })
+                },
+                cancel: {})
                 return
             }
         })
@@ -63,10 +64,13 @@ public class ApplicationLetterViewModel : ApplicationLetterViewModelProtocol {
 
 extension ApplicationLetterViewModel : ApplicationLetterModelDelegate {
     public func applicationLetterModel(_ model: ApplicationLetterModelProtocol, failedToSubmitLetter error: WEXError, retry: (() -> Void)?) {
-        view?.showErrorWithCancelAndRetry(error, retry: { [weak self] in
-            self?.model.render()
-            retry?()
-        })
+        view?.showErrorWithCancelAndRetry(
+            error,
+            retry: { [weak self] in
+                self?.model.render()
+                retry?()
+            },
+            cancel: {})
     }
     
     public func modelBusyState(_ model: ApplicationLetterModelProtocol, isBusy: Bool) {
@@ -76,7 +80,8 @@ extension ApplicationLetterViewModel : ApplicationLetterModelDelegate {
     public func applicationLetterModel(_ model: ApplicationLetterModelProtocol, stoppedProcessingWithError error: Error) {
         view?.showErrorWithCancelAndRetry(error, retry: { [weak self] in
             self?.model.render()
-        })
+            },
+            cancel: {})
     }
     
     public func applicationLetterModel(_ model: ApplicationLetterModelProtocol, renderedTemplateToString: NSAttributedString, allFieldsFilled: Bool) {

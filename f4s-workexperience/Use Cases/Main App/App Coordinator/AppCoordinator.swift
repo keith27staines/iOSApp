@@ -32,6 +32,7 @@ struct AppCoordinatoryFactory : AppCoordinatoryFactoryProtocol {
     func makeAppCoordinator(
         registrar: RemoteNotificationsRegistrarProtocol,
         launchOptions: LaunchOptions? = nil,
+        installationUuid: F4SUUID,
         user: F4SUserProtocol = F4SUser(),
         userService: F4SUserServiceProtocol = F4SUserService(),
         databaseDownloadManager: F4SDatabaseDownloadManagerProtocol = F4SDatabaseDownloadManager(),
@@ -41,6 +42,7 @@ struct AppCoordinatoryFactory : AppCoordinatoryFactoryProtocol {
         
         let injection = CoreInjection(
             launchOptions: launchOptions,
+            installationUuid: installationUuid,
             user: user,
             userService: userService,
             databaseDownloadManager: databaseDownloadManager,
@@ -146,7 +148,8 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     
     
     private func ensureUserIsRegistered(completion: @escaping (F4SUUID)->()) {
-        userService.registerAnonymousUserOnServer { [weak self] (result) in
+        let installationUuid = injected.installationUuid
+        userService.registerAnonymousUserOnServer(installationUuid: installationUuid) { [weak self] (result) in
             guard let strongSelf = self else { return }
             switch result {
             case .error(let error):
@@ -211,8 +214,8 @@ extension AppCoordinator {
     func printDebugUserInfo() {
         let info = """
         ***************
-        Vendor id = \(UIDevice.current.identifierForVendor?.uuidString ?? "nil")
-        User id = \(F4SUser().uuid ?? "nil user")
+        Installation UUID = \(injected.installationUuid)
+        User UUID = \(F4SUser().uuid ?? "nil user")
         ***************
         """
         globalLog.debug("\n\(info)")

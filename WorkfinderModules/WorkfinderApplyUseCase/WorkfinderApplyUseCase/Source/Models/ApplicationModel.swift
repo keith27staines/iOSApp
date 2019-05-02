@@ -29,7 +29,7 @@ public class ApplicationModel : ApplicationModelProtocol {
     
     public internal (set) lazy var userInterests: [F4SInterest] = []
     let placementRepository: F4SPlacementRepositoryProtocol
-    let vendorId: F4SUUID
+    let installationUuid: F4SUUID
     var userUuid: F4SUUID
     
     var roleUuid: F4SUUID? {
@@ -90,7 +90,7 @@ public class ApplicationModel : ApplicationModelProtocol {
     
     public init(
         userUuid: F4SUUID,
-        vendorId: F4SUUID,
+        installationUuid: F4SUUID,
         userInterests: [F4SInterest],
         placement: F4SPlacement?,
         placementRepository: F4SPlacementRepositoryProtocol,
@@ -99,7 +99,7 @@ public class ApplicationModel : ApplicationModelProtocol {
         templateService: F4STemplateServiceProtocol) {
         
         self.userUuid = userUuid
-        self.vendorId = vendorId
+        self.installationUuid = installationUuid
         self.placement = placement
         self.placementRepository = placementRepository
         self.companyViewData = companyViewData
@@ -118,7 +118,7 @@ public class ApplicationModel : ApplicationModelProtocol {
             user: self.userUuid,
             roleUuid: self.roleUuid!,
             company: companyViewData.uuid,
-            vendor: vendorId,
+            vendor: installationUuid,
             interests: userInterests.uuidList)
         applicationLetterViewModel.modelBusyState(applicationLetterModel, isBusy: true)
         placementService.createPlacement(with: createPlacementJson) { [weak self] (result) in
@@ -197,7 +197,7 @@ public class ApplicationModel : ApplicationModelProtocol {
 
 extension ApplicationModel {
     func makePlacementJsonFromPlacement(placement: F4SPlacement) -> WEXPlacementJson {
-        return WEXPlacementJson(uuid: placement.placementUuid, user: userUuid, company: placement.companyUuid!, vendor: vendorId, interests: userInterests.uuidList)
+        return WEXPlacementJson(uuid: placement.placementUuid, user: userUuid, company: placement.companyUuid!, vendor: installationUuid, interests: userInterests.uuidList)
     }
     
     func makeF4SPlacementFromResponseJson(json: WEXPlacementJson) -> F4SPlacement {

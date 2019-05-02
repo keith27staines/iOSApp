@@ -31,8 +31,8 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     
     lazy var applicationModel: ApplicationModelProtocol = {
         let userUuid = injected.user.uuid!
-        let vendorId = injected.userService.vendorID
-        return ApplicationModel(userUuid: userUuid, vendorId: vendorId, userInterests: userInterests, placement: placement, placementRepository: placementRepository, companyViewData: companyViewData, placementService: placementService, templateService: templateService)
+        let installationUuid = injected.installationUuid
+        return ApplicationModel(userUuid: userUuid, installationUuid: installationUuid, userInterests: userInterests, placement: placement, placementRepository: placementRepository, companyViewData: companyViewData, placementService: placementService, templateService: templateService)
     }()
     
     init(company: CompanyViewData,

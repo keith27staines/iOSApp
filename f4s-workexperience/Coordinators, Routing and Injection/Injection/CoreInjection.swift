@@ -11,6 +11,7 @@ import Foundation
 public typealias LaunchOptions = [UIApplication.LaunchOptionsKey: Any]
 
 protocol CoreInjectionProtocol : class {
+    var installationUuid: F4SUUID { get }
     var launchOptions: LaunchOptions? { get set }
     var user: F4SUserProtocol { get set }
     var userService: F4SUserServiceProtocol { get }
@@ -25,8 +26,10 @@ class CoreInjection : CoreInjectionProtocol {
     var userService: F4SUserServiceProtocol = F4SUserService()
     var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol = F4SDatabaseDownloadManager()
     var log: F4SAnalyticsAndDebugging
+    let installationUuid: F4SUUID
     
     init(launchOptions: LaunchOptions?,
+         installationUuid: F4SUUID,
          user: F4SUserProtocol,
          userService: F4SUserServiceProtocol,
          databaseDownloadManager: F4SDatabaseDownloadManagerProtocol,
@@ -38,5 +41,6 @@ class CoreInjection : CoreInjectionProtocol {
         self.userService = userService
         self.databaseDownloadManager = databaseDownloadManager
         self.log = f4sLog
+        self.installationUuid = installationUuid
     }
 }
