@@ -25,6 +25,7 @@ class ApplyCoordinatorTests: XCTestCase {
     
     lazy var mockedInjection = CoreInjection(
         launchOptions: nil,
+        installationUuid: "installationUuid",
         user: mockRegisteredUser,
         userService: mockUserService,
         databaseDownloadManager: mockDatabaseDownloadManager,

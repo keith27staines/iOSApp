@@ -27,6 +27,7 @@ class AppCoordinatorTests: XCTestCase {
         super.setUp()
         injection = CoreInjection(
             launchOptions: nil,
+            installationUuid: "installationUuid",
             user: mockUnregisteredUser,
             userService: mockUserService,
             databaseDownloadManager: mockDatabaseDownloadManager,
@@ -44,7 +45,7 @@ class AppCoordinatorTests: XCTestCase {
     }
     
     func testDefaultUserService() {
-        sut = AppCoordinatoryFactory().makeAppCoordinator(registrar: mockRegistrar, f4sLog: mockAnalytics) as? AppCoordinator
+        sut = AppCoordinatoryFactory().makeAppCoordinator(registrar: mockRegistrar, installationUuid: "installationUuid", f4sLog: mockAnalytics) as? AppCoordinator
         XCTAssertNotNil(sut.userService)
     }
     

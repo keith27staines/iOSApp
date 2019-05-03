@@ -11,7 +11,7 @@ import WorkfinderCommon
 @testable import f4s_workexperience
 
 class MockUserService: F4SUserServiceProtocol {
-    var vendorID: String = ""
+    
     var registerAnonymousUserOnServerCalled: Int = 0
     var registeringWillSucceedOnAttempt: Int = 0
     var successRegisterResult = F4SRegisterResult(uuid: UUID().uuidString, errors: nil)
@@ -22,7 +22,11 @@ class MockUserService: F4SUserServiceProtocol {
         self.registeringWillSucceedOnAttempt = registeringWillSucceedOnAttempt
     }
     
-    func registerAnonymousUserOnServer(completion: @escaping (F4SNetworkResult<F4SRegisterResult>) -> ()) {
+    func enablePushNotificationForUser(installationUuid: F4SUUID, withDeviceToken: String, completion: @escaping (F4SNetworkResult<F4SPushNotificationStatus>) -> ()) {
+        
+    }
+    
+    func registerAnonymousUserOnServer(installationUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRegisterResult>) -> ()) {
         registerAnonymousUserOnServerCalled += 1
         let result: F4SNetworkResult<F4SRegisterResult>
         if registerAnonymousUserOnServerCalled == registeringWillSucceedOnAttempt {
