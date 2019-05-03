@@ -83,9 +83,10 @@ public class RecommendationsViewModel : RecommendationsViewModelProtocol {
     }
     
     func processFetch(_ fetched: [Recommendation]?) {
-        let dehyphenatedFetch = fetched?.map { (recommendation) -> Recommendation in
-            return Recommendation(companyUUID: recommendation.uuid!.dehyphenated, sortIndex: recommendation.index)
-        }
+        let dehyphenatedFetch = fetched?.compactMap({ (recommendation) -> Recommendation? in
+            guard let uuid = recommendation.uuid else { return nil }
+            return Recommendation(companyUUID: uuid.dehyphenated, sortIndex: recommendation.index)
+        })
         let mergedRecommendations = merger.merge(fetchedFromServer: dehyphenatedFetch)
         let numberAddedSinceLastReset = merger.numberAddedSinceLastReset
         badgeValue = numberAddedSinceLastReset > 0 ? String(merger.numberAddedSinceLastReset) : nil
