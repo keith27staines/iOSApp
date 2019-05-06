@@ -106,16 +106,3 @@ extension F4SPointJson {
         case longitude = "long"
     }
 }
-
-/// The json object returned from the create placement api
-public struct F4SPlacementCreateResult : Decodable {
-    public var placementUuid: F4SUUID?
-    public var errors: F4SJSONValue?
-}
-
-extension F4SPlacementCreateResult {
-    private enum CodingKeys : String, CodingKey {
-        case placementUuid = "uuid"
-        case errors
-    }
-}
