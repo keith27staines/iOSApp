@@ -30,6 +30,7 @@
 		FCA91E7A2234043D007ED308 /* WorkfinderCommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91E792234043D007ED308 /* WorkfinderCommonTests.swift */; };
 		FCA91E7C2234043D007ED308 /* WorkfinderCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA91E6E2234043D007ED308 /* WorkfinderCommon.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCA91E88223404AF007ED308 /* WorkfinderCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91E87223404AF007ED308 /* WorkfinderCommon.swift */; };
+		FCDEA75322803BC000F1BE66 /* F4STimelinePlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDEA75222803BC000F1BE66 /* F4STimelinePlacement.swift */; };
 		FCDFEA0C223D1CBC00E58649 /* WEXErrorsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDFEA0B223D1CBC00E58649 /* WEXErrorsFactory.swift */; };
 		FCDFEA12223D2CF500E58649 /* WEXResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDFEA11223D2CF500E58649 /* WEXResult.swift */; };
 		FCE306552254B9CC000F928B /* WEXNetworkingInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE306542254B9CC000F928B /* WEXNetworkingInterface.swift */; };
@@ -102,6 +103,7 @@
 		FCA91E792234043D007ED308 /* WorkfinderCommonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderCommonTests.swift; sourceTree = "<group>"; };
 		FCA91E7B2234043D007ED308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCA91E87223404AF007ED308 /* WorkfinderCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderCommon.swift; sourceTree = "<group>"; };
+		FCDEA75222803BC000F1BE66 /* F4STimelinePlacement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STimelinePlacement.swift; sourceTree = "<group>"; };
 		FCDFEA0B223D1CBC00E58649 /* WEXErrorsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEXErrorsFactory.swift; sourceTree = "<group>"; };
 		FCDFEA11223D2CF500E58649 /* WEXResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEXResult.swift; sourceTree = "<group>"; };
 		FCE306542254B9CC000F928B /* WEXNetworkingInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEXNetworkingInterface.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				FCE4C57E223BBC5500C5B15E /* WEXLocation.swift */,
 				FCE4C580223BBC9F00C5B15E /* WEXPerson.swift */,
 				FCE4C582223BBE4C00C5B15E /* WEXDayOfWeek.swift */,
+				FCDEA75222803BC000F1BE66 /* F4STimelinePlacement.swift */,
 			);
 			path = WEXPlacement;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 				FCE4C583223BBE4C00C5B15E /* WEXDayOfWeek.swift in Sources */,
 				FC2AC5ED22352C5B00FF4E47 /* WexNetworkingConfiguration.swift in Sources */,
 				FCF5AEFF2248B2C800D9B8D1 /* UIButton+Extensions.swift in Sources */,
+				FCDEA75322803BC000F1BE66 /* F4STimelinePlacement.swift in Sources */,
 				FC96264F2248C77100D5F850 /* UIFont+Extensions.swift in Sources */,
 				FC9670A6225A279300318F69 /* F4SInterestsRepositoryProtocol.swift in Sources */,
 				FCA91E88223404AF007ED308 /* WorkfinderCommon.swift in Sources */,

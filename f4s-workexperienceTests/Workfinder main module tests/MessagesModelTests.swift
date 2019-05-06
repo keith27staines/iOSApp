@@ -8,6 +8,7 @@
 
 import XCTest
 import UIKit
+import WorkfinderCommon
 @testable import f4s_workexperience
 
 class MessagesModelTests: XCTestCase {

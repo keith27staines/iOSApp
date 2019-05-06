@@ -7,61 +7,9 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 // MARK:- F4SMessage
-public struct F4SMessage : Codable {
-    public var uuid: F4SUUID
-    public var dateTime: Date?
-    public var relativeDateTime: String?
-    public var content: String
-    public var sender: String?
-    public var isRead: Bool?
-    
-    public init(uuid: String = "", dateTime: Date = Date(), relativeDateTime: String = "", content: String = "", sender: String = "") {
-        self.uuid = uuid
-        self.dateTime = dateTime
-        self.relativeDateTime = relativeDateTime
-        self.content = content
-        self.sender = sender
-    }
-}
-
-extension F4SMessage {
-    private enum CodingKeys : String, CodingKey {
-        case uuid
-        case dateTime = "datetime"
-        case relativeDateTime = "datetime_rel"
-        case content
-        case sender
-        case isRead = "is_read"
-    }
-}
-
-extension F4SMessage : MessageProtocol {
-    
-    public var senderId: String {
-        return sender ?? "unknown sender"
-    }
-    
-    public var sentDate: Date? {
-        return dateTime
-    }
-    
-    public var receivedDate: Date? {
-        return dateTime
-    }
-    
-    public var readDate: Date? {
-        return nil
-    }
-    
-    public var text: String? {
-        return content
-    }
-    
-    
-}
-
 public struct F4SMessagesList : Codable {
     public var count: Int
     public var messages: [F4SMessage]

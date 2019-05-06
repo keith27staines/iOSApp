@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WorkfinderCommon
 
 class MessageTableViewCell: UITableViewCell {
     

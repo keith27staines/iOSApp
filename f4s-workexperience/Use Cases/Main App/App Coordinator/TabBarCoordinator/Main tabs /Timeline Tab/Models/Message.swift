@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 public struct Message : MessageProtocol {
     public var isRead: Bool?
