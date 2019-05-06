@@ -224,7 +224,13 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
             cell.unreadMessageDotView.backgroundColor = RGBA.red.uiColor
 
             guard let latestMessage = placement.latestMessage else {
-                // TODO: Fill out with suitable null values
+                cell.unreadMessageDotView.isHidden = true
+                cell.latestMessageLabel.attributedText = NSAttributedString(
+                    string: "Draft",
+                    attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallTextSize,weight: UIFont.Weight.light),NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.warmGrey)])
+                cell.dateTimeLatestMessageLabel.attributedText = NSAttributedString(
+                    string: "",
+                    attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallTextSize,weight: UIFont.Weight.light),NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.black)])
                 return cell
             }
             if latestMessage.isRead == true || latestMessage.content.isEmpty == true {
