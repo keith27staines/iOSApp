@@ -201,60 +201,13 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: timelineCellIdentifier, for: indexPath) as? TimelineEntryTableViewCell else {
+        let placement = self.userPlacements[indexPath.row]
+        guard
+            let company = self.companies.filter({ $0.uuid == placement.companyUuid?.dehyphenated }).first,
+            let cell = tableView.dequeueReusableCell(withIdentifier: timelineCellIdentifier, for: indexPath) as? TimelineEntryTableViewCell else {
             return UITableViewCell()
         }
-        let placement = self.userPlacements[indexPath.row]
-        if let company = self.companies.filter({ $0.uuid == placement.companyUuid?.dehyphenated }).first {
-            cell.companyImageView.image = UIImage(named: "DefaultLogo")
-            cell.companyTitleLabel.attributedText = NSAttributedString(string: company.name, attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.largeTextSize,weight: UIFont.Weight.medium),NSAttributedString.Key.foregroundColor: UIColor.black,])
-            cell.companyImageView.layer.cornerRadius = cell.companyImageView.bounds.height / 2
-            cell.companyImageView.image = UIImage(named: "DefaultLogo")
-            if !company.logoUrl.isEmpty, let url = NSURL(string: company.logoUrl) {
-                F4SImageService.sharedInstance.getImage(url: url, completion: {
-                    image in
-                    if image != nil {
-                        cell.companyImageView.image = image!
-                        cell.companyImageView.contentMode = .scaleAspectFit
-                    }
-                })
-            }
-
-            cell.unreadMessageDotView.layer.cornerRadius = cell.unreadMessageDotView.bounds.height / 2
-            cell.unreadMessageDotView.backgroundColor = RGBA.red.uiColor
-
-            guard let latestMessage = placement.latestMessage else {
-                cell.unreadMessageDotView.isHidden = true
-                cell.latestMessageLabel.attributedText = NSAttributedString(
-                    string: "Draft",
-                    attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallTextSize,weight: UIFont.Weight.light),NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.warmGrey)])
-                cell.dateTimeLatestMessageLabel.attributedText = NSAttributedString(
-                    string: "",
-                    attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallTextSize,weight: UIFont.Weight.light),NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.black)])
-                return cell
-            }
-            if latestMessage.isRead == true || latestMessage.content.isEmpty == true {
-                
-                cell.unreadMessageDotView.isHidden = true
-                cell.latestMessageLabel.attributedText = NSAttributedString(
-                    string: latestMessage.content,
-                    attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallTextSize,weight: UIFont.Weight.light),NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.warmGrey)])
-
-                cell.dateTimeLatestMessageLabel.attributedText = NSAttributedString(
-                    string: latestMessage.relativeDateTime ?? "",
-                    attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallTextSize,weight: UIFont.Weight.light),NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.black)])
-            } else {
-                cell.unreadMessageDotView.isHidden = false
-                cell.latestMessageLabel.attributedText = NSAttributedString(
-                    string: latestMessage.content,
-                    attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallTextSize,                                                                          weight: UIFont.Weight.semibold),NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.black)])
-
-                cell.dateTimeLatestMessageLabel.attributedText = NSAttributedString(
-                    string: latestMessage.relativeDateTime ?? "",
-                    attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallTextSize, weight: UIFont.Weight.semibold), NSAttributedString.Key.foregroundColor: RGBA.red.uiColor])
-            }
-        }
-
+        cell.presenter = TimelineCellViewPresenter(cell: cell, placement: placement, company: company)
         return cell
     }
 
@@ -263,6 +216,10 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
         if let company = self.companies.filter({ $0.uuid == placement.companyUuid?.dehyphenated }).first {
             TabBarCoordinator.sharedInstance.pushMessageController(parentCtrl: self, threadUuid: placement.threadUuid, company: company, placements: self.userPlacements, companies: self.companies)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        (cell as? TimelineEntryTableViewCell)?.presenter = nil
     }
 
     func tableView(_: UITableView, shouldHighlightRowAt _: IndexPath) -> Bool {
@@ -288,5 +245,68 @@ extension TimelineViewController {
                 TabBarCoordinator.sharedInstance.pushMessageController(parentCtrl: self, threadUuid: placement.threadUuid!, company: company, placements: self.userPlacements, companies: self.companies)
             }
         }
+    }
+}
+
+class TimelineCellViewPresenter {
+    let warmGrey = UIColor(netHex: Colors.warmGrey)
+    let black = UIColor.black
+    let red = UIColor.red
+    let lightWeight = UIFont.Weight.light
+    let semiBold = UIFont.Weight.semibold
+    let smallSize = UIFont.smallSystemFontSize
+    let cell: TimelineEntryTableViewCell
+    let placement: F4STimelinePlacement
+    let company: Company?
+    
+    init(cell: TimelineEntryTableViewCell, placement: F4STimelinePlacement, company: Company) {
+        self.placement = placement
+        self.company = company
+        self.cell = cell
+    }
+    
+    func present() {
+        prepareEmpty(cell)
+        prepareWithCompany(cell: cell, company: company)
+        prepareWithLatestMessage(cell: cell, message: placement.latestMessage)
+    }
+    
+    private func prepareEmpty(_ cell: TimelineEntryTableViewCell) {
+        cell.companyImageView.contentMode = .scaleAspectFit
+        cell.unreadMessageDotView.layer.cornerRadius = cell.unreadMessageDotView.bounds.height / 2
+        cell.companyImageView.layer.cornerRadius = cell.companyImageView.bounds.height / 2
+        cell.companyTitleLabel.text = NSLocalizedString("Company data not found", comment: "")
+        cell.companyImageView.image = nil
+        cell.unreadMessageDotView.isHidden = true
+        cell.latestMessageLabel.text = nil
+        cell.dateTimeLatestMessageLabel.text = nil
+    }
+    
+    private func prepareWithCompany(cell: TimelineEntryTableViewCell, company: Company?) {
+        guard let company = company else { return }
+        cell.companyTitleLabel.text = company.name.stripCompanySuffix()
+        cell.companyImageView.image = UIImage(named: "DefaultLogo")
+        guard !company.logoUrl.isEmpty, let url = NSURL(string: company.logoUrl) else { return }
+        F4SImageService.sharedInstance.getImage(url: url, completion: { [weak self] image in
+            guard self === cell.presenter else { return}
+            guard let image = image else { return }
+            cell.companyImageView.image = image
+        })
+    }
+    
+    private func prepareWithLatestMessage(cell: TimelineEntryTableViewCell, message: F4SMessage?) {
+        guard let message = message else {
+            cell.latestMessageLabel.text = NSLocalizedString("Draft", comment: "As in 'in preparation'")
+            cell.latestMessageLabel.textColor = warmGrey
+            return
+        }
+        cell.latestMessageLabel.text = message.content
+        cell.dateTimeLatestMessageLabel.text = message.relativeDateTime ?? ""
+        let isRead = message.isRead == true
+        let weight = isRead ? lightWeight : semiBold
+        cell.unreadMessageDotView.isHidden = isRead
+        cell.latestMessageLabel.textColor = isRead ? warmGrey : black
+        cell.dateTimeLatestMessageLabel.textColor = isRead ? black : red
+        cell.latestMessageLabel.font = UIFont.systemFont(ofSize: smallSize, weight: weight)
     }
 }

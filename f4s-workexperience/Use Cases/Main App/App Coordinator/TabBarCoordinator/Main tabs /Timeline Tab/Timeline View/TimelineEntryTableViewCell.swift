@@ -15,9 +15,16 @@ class TimelineEntryTableViewCell: UITableViewCell {
     @IBOutlet weak var latestMessageLabel: UILabel!
     @IBOutlet weak var dateTimeLatestMessageLabel: UILabel!
     @IBOutlet weak var unreadMessageDotView: UIView!
+    
+    var presenter: TimelineCellViewPresenter? {
+        didSet {
+            presenter?.present()
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        unreadMessageDotView.backgroundColor = UIColor.red
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
