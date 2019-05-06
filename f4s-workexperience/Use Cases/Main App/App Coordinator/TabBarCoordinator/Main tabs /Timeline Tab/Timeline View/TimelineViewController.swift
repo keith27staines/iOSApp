@@ -152,10 +152,6 @@ extension TimelineViewController {
         guard let message1 = placement1.latestMessage, let message2 = placement2.latestMessage else {
             return placement2.latestMessage == nil ? true : false
         }
-//        let isRead1 = placement1.latestMessage?.isRead ?? true
-//        let isRead2 = placement2.latestMessage?.isRead ?? true
-//        if isRead1 && !isRead2 { return false }
-//        if isRead2 && !isRead1 { return true }
         if message2.dateTime == nil { return false }
         if message1.dateTime == nil { return true }
         return message1.dateTime! > message2.dateTime!
