@@ -9,7 +9,7 @@
 import Foundation
 
 public struct ApiConstants {
-    public static let apiKey: String = "eTo0oeh4Yeen1oy7iDuv"
+    public static let apiKey: String =  "eTo0oeh4Yeen1oy7iDuv" // "eTo0oeh4Yeen1oy7iDuv" // "RxTsNHJgG9YxIY06GLD303onIgYyfG7MtlVi3nZKnC4"
     public static let base: String = Config.BASE
     public static let baseUrl: String = Config.BASE_URL
     public static let baseUrl2: String = Config.BASE_URL2

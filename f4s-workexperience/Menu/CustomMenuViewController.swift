@@ -8,6 +8,7 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 
 fileprivate enum DrawerSection: Int {
     case WelcomeSection
@@ -28,7 +29,7 @@ fileprivate enum NavigationSectionRow : Int {
         switch self
         {
         case .about:
-            return NSLocalizedString("About", comment: "Menu item providing information about Workfinder")
+            return NSLocalizedString("About Workfinder", comment: "Menu item providing information about Workfinder")
         case .faq:
             return NSLocalizedString("FAQs", comment: "Menu item providing access to frequently asked questions")
         case .terms:
@@ -109,7 +110,7 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
         case .NavigationSection:
             return NavigationSectionRow.allRows.count
         case .BusinessLeadersSection:
-            return 2
+            return 1
         case .EnvironmentSection:
             return 1
         }
@@ -148,11 +149,11 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
             guard let _ = NavigationSectionRow(rawValue: indexPath.row), let cell = tableView.dequeueReusableCell(withIdentifier: "SideDrawerTableViewCell") as? SideDrawerTableViewCell else {
                 return UITableViewCell()
             }
-            cell.textLabel?.text = indexPath.row == 0 ? "Register" : "login"
-            cell.textLabel?.font = UIFont.italicSystemFont(ofSize: 17)
+            cell.textLabel?.text = "Looking to offer work experience?"
+            cell.textLabel?.font = UIFont.italicSystemFont(ofSize: UIFont.smallSystemFontSize)
             return cell
         case .EnvironmentSection:
-            guard let row = NavigationSectionRow(rawValue: indexPath.row), let cell = tableView.dequeueReusableCell(withIdentifier: "SideDrawerTableViewCell") as? SideDrawerTableViewCell else {
+            guard let _ = NavigationSectionRow(rawValue: indexPath.row), let cell = tableView.dequeueReusableCell(withIdentifier: "SideDrawerTableViewCell") as? SideDrawerTableViewCell else {
                 return UITableViewCell()
             }
             cell.textLabel?.text = getEnvironmentText()
@@ -174,7 +175,8 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
         case .NavigationSection:
             return nil
         case .BusinessLeadersSection:
-            cell.textLabel?.text = "Workfinder hosts"
+            cell.textLabel?.text = ""
+            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize)
             return cell
         case .EnvironmentSection:
             return nil
@@ -255,14 +257,17 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
                 }
             }
         case .BusinessLeadersSection:
-            var urlString: String
-            if indexPath.row == 0 {
-                urlString = "https://www.founders4schools.org.uk/signup/business-leaders/"
-            } else {
-                urlString = "https://www.founders4schools.org.uk/login/?next=/signup/business-leaders/"
+            let alert = UIAlertController(title: "Intending to offer work experience?", message: "If you are looking for work experience, please cancel. You can do everything you need to do right here in this app. If you want to offer to host work experience, you should continue to founders4schools.org.uk website", preferredStyle: .alert)
+            let cancel = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil)
+            let go = UIAlertAction(title: "Continue", style: UIAlertAction.Style.default) { [weak self] (action) in
+                let urlString = "https://www.founders4schools.org.uk/login/?next=/signup/business-leaders/"
+                let webView = F4SWebViewController(urlString: urlString, showNavigationButtons: true, delegate: nil)
+                self?.present(webView, animated: true, completion: nil)
             }
-            let url = URL(string: urlString)!
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            alert.addAction(cancel)
+            alert.addAction(go)
+            present(alert, animated: true, completion: nil)
+
         case .EnvironmentSection:
             break
         }

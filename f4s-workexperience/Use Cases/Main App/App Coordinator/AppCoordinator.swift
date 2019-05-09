@@ -1,18 +1,8 @@
-//
-//  AppCoordinator.swift
-//  F4SPrototypes
-//
-//  Created by Keith Dev on 21/01/2019.
-//  Copyright © 2019 Keith Staines. All rights reserved.
-//
-
 import UIKit
 import WorkfinderCommon
 import WorkfinderNetworking
 import GoogleMaps
 import GooglePlaces
-
-fileprivate let wexApiKey: String = "eTo0oeh4Yeen1oy7iDuv"
 
 extension UIApplication : RemoteNotificationsRegistrarProtocol {}
 
@@ -222,7 +212,7 @@ extension AppCoordinator {
     }
     
     func configureNetwork(
-        wexApiKey: String = wexApiKey,
+        wexApiKey: String = ApiConstants.apiKey,
         baseUrlString: String = Config.BASE,
         v1ApiUrlString: String = Config.BASE_URL,
         v2ApiUrlString: String = Config.BASE_URL2) {
