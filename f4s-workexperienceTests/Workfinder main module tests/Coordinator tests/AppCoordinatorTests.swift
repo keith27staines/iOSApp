@@ -64,7 +64,7 @@ class AppCoordinatorTests: XCTestCase {
         let sut = makeSUTAppCoordinator(router: mockRouter, injecting: injection)
         sut.start()
         mockOnboardingCoordinator.completeOnboarding()
-        assertOnboardingCompleteCompleteState(sut: sut, expectedRegisterUserCount: 1)
+        assertOnboardingCompleteCompleteState(sut: sut, expectedRegisterUserCount: 0)
     }
     
     func testStartWithRegisteredAndOnboardedUser() {
@@ -72,7 +72,7 @@ class AppCoordinatorTests: XCTestCase {
         injection.user = mockRegisteredUser
         let sut = makeSUTAppCoordinator(router: mockRouter, injecting: injection)
         sut.start()
-        assertOnboardingCompleteCompleteState(sut: sut, expectedRegisterUserCount: 1)
+        assertOnboardingCompleteCompleteState(sut: sut, expectedRegisterUserCount: 0)
     }
 }
 
