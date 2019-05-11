@@ -1,12 +1,5 @@
-//
-//  OnboardingCoordinator.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 15/02/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
-
 import UIKit
+import WorkfinderCommon
 
 protocol OnboardingCoordinatorProtocol : Coordinating {
     var hideOnboardingControls: Bool { get set }

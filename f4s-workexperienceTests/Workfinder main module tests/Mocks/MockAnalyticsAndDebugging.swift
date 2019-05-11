@@ -7,13 +7,14 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 @testable import f4s_workexperience
 
 class MockF4SAnalyticsAndDebugging : F4SAnalyticsAndDebugging {
     
-    var identities = [F4SUUID]()
-    var aliases = [F4SUUID]()
+    var identities: [F4SUUID] = []
+    var aliases: [F4SUUID] = []
     
     func identity(userId: F4SUUID) {
         identities.append(userId)
@@ -64,6 +65,4 @@ class MockF4SAnalyticsAndDebugging : F4SAnalyticsAndDebugging {
     func debug(message: String) {
         debugMessages.append(message)
     }
-    
-    
 }

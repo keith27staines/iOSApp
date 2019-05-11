@@ -191,7 +191,7 @@ public class F4SEmailVerificationModel {
     }
     
     /// Checks the specified email to see if it matches the previously verified email
-    public func isEmailAddressVerified(email: String) -> Bool {
+    public func isEmailAddressVerified(email: String?) -> Bool {
         return email == verifiedEmail
     }
     

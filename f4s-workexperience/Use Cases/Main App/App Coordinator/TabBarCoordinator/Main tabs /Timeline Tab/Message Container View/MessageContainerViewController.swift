@@ -191,7 +191,7 @@ class MessageContainerViewController: UIViewController {
                         placement.duration = placement.availabilityPeriods?.first
                     }
                     
-                    let user = F4SUser.loadFromLocalPermanentStore()!
+                    let user = F4SUser()
                     if let url = NSURL(string: strongSelf.company?.logoUrl ?? "") {
                         F4SImageService.sharedInstance.getImage(url: url, completion: { [weak self] image in
                             guard let strongSelf = self else { return }

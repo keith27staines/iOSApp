@@ -30,6 +30,7 @@ public class LocalStore : LocalStorageProtocol {
         case invokingUrl
         case partnerID
         case hasPartnerIDBeenSentToServer = "hasParnerIDBeenSentToServer"
+        case user
         case userUuid
         case userHasAccount
         case companyDatabaseCreatedDate

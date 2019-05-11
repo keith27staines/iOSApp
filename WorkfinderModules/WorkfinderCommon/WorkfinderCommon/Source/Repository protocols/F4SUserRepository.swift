@@ -1,0 +1,25 @@
+import Foundation
+
+public protocol F4SUserRepositoryProtocol {
+    func save(user: F4SUserProtocol)
+    func load() -> F4SUserProtocol
+}
+
+public class F4SUserRepository : F4SUserRepositoryProtocol {
+    let localStore: LocalStorageProtocol
+    public init(localStore: LocalStorageProtocol = UserDefaults.standard) {
+        self.localStore = localStore
+    }
+    
+    public func save(user: F4SUserProtocol) {
+        let concreteUser = F4SUser(userInformation: user)
+        let data = try! JSONEncoder().encode(concreteUser)
+        localStore.setValue(data, for: LocalStore.Key.user)
+    }
+    
+    public func load() -> F4SUserProtocol {
+        guard let data = localStore.value(key: LocalStore.Key.user) as? Data else { return F4SUser() }
+        return try! JSONDecoder().decode(F4SUser.self, from: data)
+    }
+    
+}

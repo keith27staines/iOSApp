@@ -1,12 +1,5 @@
-//
-//  ShortlistDBOperations.swift
-//  f4s-workexperience
-//
-//  Created by Timea Tivadar on 2/8/17.
-//  Copyright © 2017 freshbyte. All rights reserved.
-//
-
 import Foundation
+import WorkfinderCommon
 
 class ShortlistDBOperations {
     class var sharedInstance: ShortlistDBOperations {

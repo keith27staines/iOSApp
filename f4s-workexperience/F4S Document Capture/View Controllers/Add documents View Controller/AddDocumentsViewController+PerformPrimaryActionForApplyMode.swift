@@ -90,7 +90,7 @@ extension F4SAddDocumentsViewController {
     }
     
     func submitApplication(applicationContext: F4SApplicationContext) {
-        var user = applicationContext.user!
+        let user = applicationContext.user!
         userService.updateUser(user: user) { [weak self] (result) in
             guard let strongSelf = self else { return }
             DispatchQueue.main.async {

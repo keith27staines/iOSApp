@@ -30,6 +30,10 @@
 		FCA91E7A2234043D007ED308 /* WorkfinderCommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91E792234043D007ED308 /* WorkfinderCommonTests.swift */; };
 		FCA91E7C2234043D007ED308 /* WorkfinderCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA91E6E2234043D007ED308 /* WorkfinderCommon.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCA91E88223404AF007ED308 /* WorkfinderCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91E87223404AF007ED308 /* WorkfinderCommon.swift */; };
+		FCBEA7B5228701E600CAB1F1 /* F4SUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBEA7B4228701E500CAB1F1 /* F4SUserTests.swift */; };
+		FCDB07382286F6640053347F /* F4SUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB07372286F6640053347F /* F4SUser.swift */; };
+		FCDB073A2286F7870053347F /* F4SUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB07392286F7870053347F /* F4SUserRepository.swift */; };
+		FCDB073C2286F8B00053347F /* Analytics and debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB073B2286F8B00053347F /* Analytics and debugging.swift */; };
 		FCDEA75322803BC000F1BE66 /* F4STimelinePlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDEA75222803BC000F1BE66 /* F4STimelinePlacement.swift */; };
 		FCDFEA0C223D1CBC00E58649 /* WEXErrorsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDFEA0B223D1CBC00E58649 /* WEXErrorsFactory.swift */; };
 		FCDFEA12223D2CF500E58649 /* WEXResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDFEA11223D2CF500E58649 /* WEXResult.swift */; };
@@ -103,6 +107,10 @@
 		FCA91E792234043D007ED308 /* WorkfinderCommonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderCommonTests.swift; sourceTree = "<group>"; };
 		FCA91E7B2234043D007ED308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCA91E87223404AF007ED308 /* WorkfinderCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderCommon.swift; sourceTree = "<group>"; };
+		FCBEA7B4228701E500CAB1F1 /* F4SUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserTests.swift; sourceTree = "<group>"; };
+		FCDB07372286F6640053347F /* F4SUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUser.swift; sourceTree = "<group>"; };
+		FCDB07392286F7870053347F /* F4SUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserRepository.swift; sourceTree = "<group>"; };
+		FCDB073B2286F8B00053347F /* Analytics and debugging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Analytics and debugging.swift"; sourceTree = "<group>"; };
 		FCDEA75222803BC000F1BE66 /* F4STimelinePlacement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STimelinePlacement.swift; sourceTree = "<group>"; };
 		FCDFEA0B223D1CBC00E58649 /* WEXErrorsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEXErrorsFactory.swift; sourceTree = "<group>"; };
 		FCDFEA11223D2CF500E58649 /* WEXResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEXResult.swift; sourceTree = "<group>"; };
@@ -170,6 +178,7 @@
 			children = (
 				FC9670A3225A195B00318F69 /* F4SPlacementRepositoryProtocol.swift */,
 				FC9670A5225A279300318F69 /* F4SInterestsRepositoryProtocol.swift */,
+				FCDB07392286F7870053347F /* F4SUserRepository.swift */,
 			);
 			path = "Repository protocols";
 			sourceTree = "<group>";
@@ -207,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				FCA91E7B2234043D007ED308 /* Info.plist */,
+				FCBEA7B4228701E500CAB1F1 /* F4SUserTests.swift */,
 				FCA91E792234043D007ED308 /* WorkfinderCommonTests.swift */,
 				FC53A0F0224BA83F00C2B97B /* LoadingOverlayTests.swift */,
 				FCE5194E2249645B00B550C9 /* F4SJsonDecodingTests.swift */,
@@ -251,6 +261,8 @@
 				FC9670992258C81000318F69 /* F4SPlacement.swift */,
 				FC96709B2258C8B100318F69 /* F4SInterest.swift */,
 				FC32FD422265E4C800740F0C /* F4SContentType.swift */,
+				FCDB07372286F6640053347F /* F4SUser.swift */,
+				FCDB073B2286F8B00053347F /* Analytics and debugging.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -455,10 +467,12 @@
 				FC53A0ED224B9DAC00C2B97B /* UserMessageHandler.swift in Sources */,
 				FCE51936224948E400B550C9 /* F4SDaysAndHoursModel.swift in Sources */,
 				FC9670A4225A195B00318F69 /* F4SPlacementRepositoryProtocol.swift in Sources */,
+				FCDB073C2286F8B00053347F /* Analytics and debugging.swift in Sources */,
 				FCF5AEF92248B1E500D9B8D1 /* RGBA.swift in Sources */,
 				FCE5192122493D3300B550C9 /* Date+Extensions.swift in Sources */,
 				FC96709A2258C81000318F69 /* F4SPlacement.swift in Sources */,
 				FCDFEA0C223D1CBC00E58649 /* WEXErrorsFactory.swift in Sources */,
+				FCDB073A2286F7870053347F /* F4SUserRepository.swift in Sources */,
 				FCF5AEFA2248B1E500D9B8D1 /* Skin.swift in Sources */,
 				FCF5AEFC2248B1E500D9B8D1 /* FactorySkins.swift in Sources */,
 				FCE306552254B9CC000F928B /* WEXNetworkingInterface.swift in Sources */,
@@ -467,6 +481,7 @@
 				FCE4C581223BBC9F00C5B15E /* WEXPerson.swift in Sources */,
 				FC7A439C224A4D9600B2D693 /* F4STemplateServiceProtocol.swift in Sources */,
 				FCE51937224948E400B550C9 /* F4SAvailabilityPeriod.swift in Sources */,
+				FCDB07382286F6640053347F /* F4SUser.swift in Sources */,
 				FC9626512248C91F00D5F850 /* UIViewController+Extensions.swift in Sources */,
 				FCDFEA12223D2CF500E58649 /* WEXResult.swift in Sources */,
 				FCE51938224948E400B550C9 /* F4SDayAndHoursSelection.swift in Sources */,
@@ -506,6 +521,7 @@
 				FCE519572249645C00B550C9 /* F4SCalendarMonthTests.swift in Sources */,
 				FC53A0F1224BA84000C2B97B /* LoadingOverlayTests.swift in Sources */,
 				FCE519522249645C00B550C9 /* F4SCalendarWeekTests.swift in Sources */,
+				FCBEA7B5228701E600CAB1F1 /* F4SUserTests.swift in Sources */,
 				FCE519532249645C00B550C9 /* F4SCalendarTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

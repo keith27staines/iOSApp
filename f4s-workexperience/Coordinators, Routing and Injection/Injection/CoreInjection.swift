@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 public typealias LaunchOptions = [UIApplication.LaunchOptionsKey: Any]
 

@@ -315,20 +315,17 @@ extension ExtraInfoViewController {
     }
     
     func displayUserInfoIfExists() {
-        if let user = UserInfoDBOperations.sharedInstance.getUserInfo() {
+        let user = F4SUser()
+        if let dob = user.dateOfBirth {
             infoStackViewTopConstraint.constant = 49
             userInfoStackView.isHidden = false
             noVoucherInfoLabel.isHidden = false
             scrollView.isScrollEnabled = true
-            if let dob = user.dateOfBirth {
-                dobTextField.text = dateOfBirthFormatter.string(from: dob)
-                datePicker.date = dob
-            } else {
-                dobTextField.text = ""
-            }
+            dobTextField.text = dateOfBirthFormatter.string(from: dob)
+            datePicker.date = dob
             parentEmailTextField.text = user.parentEmail
             emailTextField.text = user.email
-            firstAndLastNameTextField.text = user.firstName + " " + (user.lastName ?? "")
+            firstAndLastNameTextField.text = user.fullName
             emailUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
             firstAndLastNameUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
         } else {
@@ -366,7 +363,7 @@ extension ExtraInfoViewController {
     }
     
     func buildUserInfo() -> F4SUser {
-        var user = F4SUser()
+        let user = F4SUser()
         if let dateOfBirthText = dobTextField.text {
             user.dateOfBirth = dateOfBirthFormatter.date(from: dateOfBirthText)
         }
@@ -445,7 +442,8 @@ extension ExtraInfoViewController {
     
     func saveUserDetailsLocally() -> F4SUser {
         let updatedUser = self.buildUserInfo()
-        UserInfoDBOperations.sharedInstance.saveUserInfo(userInfo: updatedUser)
+        let repo = F4SUserRepository()
+        repo.save(user: updatedUser)
         applicationContext?.user = updatedUser
         return updatedUser
     }

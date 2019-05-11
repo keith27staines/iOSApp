@@ -100,7 +100,11 @@ extension TimelineViewController {
                             strongSelf.getAllPlacementsForUser()
                         })
                     } else {
-                         sharedUserMessageHandler.display(error, parentCtrl: strongSelf, cancelHandler: nil, retryHandler: strongSelf.getAllPlacementsForUser)
+                         sharedUserMessageHandler.display(
+                            error,
+                            parentCtrl: strongSelf,
+                            cancelHandler: {},
+                            retryHandler: strongSelf.getAllPlacementsForUser)
                     }
                 case .success(let placements):
                     strongSelf.updatePlacements(placements: placements)

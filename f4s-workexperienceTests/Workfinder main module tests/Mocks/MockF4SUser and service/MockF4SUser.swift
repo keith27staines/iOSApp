@@ -7,10 +7,31 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 @testable import f4s_workexperience
 
 class MockF4SUser :  F4SUserProtocol {
+    var email: String?
+    
+    var firstName: String?
+    
+    var lastName: String?
+    
+    var consenterEmail: String?
+    
+    var parentEmail: String?
+    
+    var requiresConsent: Bool = false
+    
+    var dateOfBirth: Date?
+    
+    var vouchers: [F4SUUID]?
+    
+    var partners: [F4SUUID]?
+    
+    var termsAgreed: Bool = false
+    
     
     func updateUuid(uuid: F4SUUID) { self.uuid = uuid }
     
