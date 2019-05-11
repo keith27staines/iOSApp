@@ -116,14 +116,17 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     
     private func onUserIsRegistered(userUuid: F4SUUID) {
         injected.user.updateUuid(uuid: userUuid)
-        
+        updateWEXSessionManagerWithUserUUID(userUuid)
         printDebugUserInfo()
         injected.log.identity(userId: userUuid)
         _ = F4SNetworkSessionManager.shared
         registrar.registerForRemoteNotifications()
         F4SUserStatusService.shared.beginStatusUpdate()
         databaseDownloadManager.start()
+        showOnboardingUIIfNecessary()
+    }
     
+    func showOnboardingUIIfNecessary() {
         if user.isOnboarded {
             onboardingDidFinish(onboardingCoordinator: onboardingCoordinator!)
         } else {
@@ -138,6 +141,11 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     
     
     private func ensureUserIsRegistered(completion: @escaping (F4SUUID)->()) {
+        let user = injected.user
+        guard user.uuid == nil else {
+            completion(user.uuid!)
+            return
+        }
         let installationUuid = injected.installationUuid
         userService.registerAnonymousUserOnServer(installationUuid: installationUuid) { [weak self] (result) in
             guard let strongSelf = self else { return }
@@ -152,9 +160,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                     globalLog.severe("registering user failed to obtain uuid")
                     fatalError("registering user failed to obtain uuid")
                 }
-                globalLog.info("Using anonymous user id \(anonymousUserUuid)")
-                updateWEXSessionManagerWithUserUUID(anonymousUserUuid)
-                strongSelf.injected.log.identity(userId: anonymousUserUuid)
                 completion(anonymousUserUuid)
             }
         }

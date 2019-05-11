@@ -62,7 +62,8 @@ class UserInfoDB: NSManagedObject {
     class func getUserInfo(_ moc: NSManagedObjectContext, userUuid: String) -> UserInfoDB? {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
 
-        let predicate = NSPredicate(format: "userUuid == %@", userUuid)
+        //let predicate = NSPredicate(format: "userUuid == %@", userUuid)
+        let predicate = NSPredicate(value: true)
         fetchRequest.predicate = predicate
 
         guard let fetchResult = (try? moc.fetch(fetchRequest)) as? [UserInfoDB], !fetchResult.isEmpty else {

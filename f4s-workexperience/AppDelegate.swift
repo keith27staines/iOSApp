@@ -26,7 +26,7 @@ class AppInstallationUuidLogic {
     var installationUuid: F4SUUID {
         var uuid = localStore.value(key: LocalStore.Key.installationUuid) as? F4SUUID
         if uuid == nil {
-            uuid = UIDevice.current.identifierForVendor!.uuidString
+            uuid = UUID().uuidString
             localStore.setValue(uuid, for: LocalStore.Key.installationUuid)
         }
         return uuid!

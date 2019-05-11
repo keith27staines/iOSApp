@@ -153,6 +153,7 @@ public struct F4SUser : F4SUserProtocol, Codable {
     
     init(userData: UserInfoDB) {
         self.init()
+        uuid = F4SUser().uuid
         email = userData.email ?? ""
         firstName = userData.firstName ?? ""
         lastName = userData.lastName?.isEmpty == false ? userData.lastName : nil
