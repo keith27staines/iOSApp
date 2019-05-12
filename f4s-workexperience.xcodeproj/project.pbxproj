@@ -48,7 +48,6 @@
 		20FABFEC1DDDA63600D583E2 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FABFEB1DDDA63600D583E2 /* FileHelper.swift */; };
 		20FEBDDA1DE5AD3400EBDCBF /* F4SImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FEBDD91DE5AD3400EBDCBF /* F4SImageService.swift */; };
 		401634C81E0A9F73000161FA /* NotificationView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 401634C61E0A9F73000161FA /* NotificationView.storyboard */; };
-		405974061DFD44670002DB3A /* ExtraInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 405974041DFD44660002DB3A /* ExtraInfo.storyboard */; };
 		405974081DFD449C0002DB3A /* ExtraInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405974071DFD449C0002DB3A /* ExtraInfoViewController.swift */; };
 		4059740A1E00115C0002DB3A /* NextResponderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405974091E00115B0002DB3A /* NextResponderTextField.swift */; };
 		40A28CB21E1D1D200077D490 /* TimelineEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A28CB11E1D1D200077D490 /* TimelineEntryTableViewCell.swift */; };
@@ -328,6 +327,11 @@
 		FCE51E44221039D600DC1D50 /* PersonSearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E43221039D600DC1D50 /* PersonSearchDataGetter.swift */; };
 		FCE83ED6213BD72000D0953A /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE83ED5213BD72000D0953A /* UITableView+Extensions.swift */; };
 		FCEE5E1E2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEE5E1D2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift */; };
+		FCEF43D622870F370055B5F7 /* ExtraInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF43D522870F370055B5F7 /* ExtraInfoViewModel.swift */; };
+		FCEF43D822870F410055B5F7 /* AgeLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF43D722870F410055B5F7 /* AgeLogic.swift */; };
+		FCEF43DA22870F490055B5F7 /* DateOfBirthPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF43D922870F490055B5F7 /* DateOfBirthPickerViewModel.swift */; };
+		FCEF43DC22870F520055B5F7 /* InformationLabelStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF43DB22870F520055B5F7 /* InformationLabelStrings.swift */; };
+		FCEF43DE2287130C0055B5F7 /* ExtraInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCEF43DD2287130C0055B5F7 /* ExtraInfo.storyboard */; };
 		FCEF70B721087207001C229A /* F4SInviteDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF70B621087207001C229A /* F4SInviteDetailCell.swift */; };
 		FCEF70BB2108A535001C229A /* F4SInviteButtonsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF70BA2108A535001C229A /* F4SInviteButtonsTableViewCell.swift */; };
 		FCEF70BD2108A809001C229A /* F4SInviteSectionHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF70BC2108A809001C229A /* F4SInviteSectionHeaderTableViewCell.swift */; };
@@ -440,7 +444,6 @@
 		20FABFEB1DDDA63600D583E2 /* FileHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		20FEBDD91DE5AD3400EBDCBF /* F4SImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SImageService.swift; sourceTree = "<group>"; };
 		401634C71E0A9F73000161FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/NotificationView.storyboard; sourceTree = "<group>"; };
-		405974051DFD44660002DB3A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ExtraInfo.storyboard; sourceTree = "<group>"; };
 		405974071DFD449C0002DB3A /* ExtraInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtraInfoViewController.swift; sourceTree = "<group>"; };
 		405974091E00115B0002DB3A /* NextResponderTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextResponderTextField.swift; sourceTree = "<group>"; };
 		40A28CB11E1D1D200077D490 /* TimelineEntryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineEntryTableViewCell.swift; sourceTree = "<group>"; };
@@ -773,6 +776,11 @@
 		FCE51E43221039D600DC1D50 /* PersonSearchDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonSearchDataGetter.swift; sourceTree = "<group>"; };
 		FCE83ED5213BD72000D0953A /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		FCEE5E1D2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorBackgroundViewController.swift; sourceTree = "<group>"; };
+		FCEF43D522870F370055B5F7 /* ExtraInfoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtraInfoViewModel.swift; sourceTree = "<group>"; };
+		FCEF43D722870F410055B5F7 /* AgeLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgeLogic.swift; sourceTree = "<group>"; };
+		FCEF43D922870F490055B5F7 /* DateOfBirthPickerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateOfBirthPickerViewModel.swift; sourceTree = "<group>"; };
+		FCEF43DB22870F520055B5F7 /* InformationLabelStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationLabelStrings.swift; sourceTree = "<group>"; };
+		FCEF43DD2287130C0055B5F7 /* ExtraInfo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ExtraInfo.storyboard; sourceTree = "<group>"; };
 		FCEF70B621087207001C229A /* F4SInviteDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInviteDetailCell.swift; sourceTree = "<group>"; };
 		FCEF70BA2108A535001C229A /* F4SInviteButtonsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInviteButtonsTableViewCell.swift; sourceTree = "<group>"; };
 		FCEF70BC2108A809001C229A /* F4SInviteSectionHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInviteSectionHeaderTableViewCell.swift; sourceTree = "<group>"; };
@@ -1644,8 +1652,12 @@
 		FC24D250226B0BA500FA04A1 /* Capture user details */ = {
 			isa = PBXGroup;
 			children = (
-				405974041DFD44660002DB3A /* ExtraInfo.storyboard */,
+				FCEF43DD2287130C0055B5F7 /* ExtraInfo.storyboard */,
 				405974071DFD449C0002DB3A /* ExtraInfoViewController.swift */,
+				FCEF43D522870F370055B5F7 /* ExtraInfoViewModel.swift */,
+				FCEF43D722870F410055B5F7 /* AgeLogic.swift */,
+				FCEF43D922870F490055B5F7 /* DateOfBirthPickerViewModel.swift */,
+				FCEF43DB22870F520055B5F7 /* InformationLabelStrings.swift */,
 			);
 			path = "Capture user details";
 			sourceTree = "<group>";
@@ -2429,6 +2441,7 @@
 				FC21BE33220F53EB00A0A389 /* RandomNames.csv in Resources */,
 				204203F51E4B793F007C7409 /* Favourite.storyboard in Resources */,
 				40A28CC21E24ED0D0077D490 /* SuccessExtraInfo.storyboard in Resources */,
+				FCEF43DE2287130C0055B5F7 /* ExtraInfo.storyboard in Resources */,
 				40E78E8F1DD32C4E000A3776 /* Settings.bundle in Resources */,
 				FCC212E9219077C000D8D5B7 /* F4SCameraCapture.storyboard in Resources */,
 				FCC212EB219077C000D8D5B7 /* Camera.storyboard in Resources */,
@@ -2440,7 +2453,6 @@
 				FC73719B2101C7EF00C0032A /* AcceptOffer.xcassets in Resources */,
 				D5E9EBE81DD60AB300BD796E /* Localizable.strings in Resources */,
 				FCB6D9361F75056100B8C268 /* Branding.plist in Resources */,
-				405974061DFD44670002DB3A /* ExtraInfo.storyboard in Resources */,
 				401634C81E0A9F73000161FA /* NotificationView.storyboard in Resources */,
 				40E78E211DD31A86000A3776 /* LaunchScreen.storyboard in Resources */,
 				40A28CB71E1F96A60077D490 /* RatePlacement.storyboard in Resources */,
@@ -2629,10 +2641,12 @@
 				FC99BDC520CFAFD400278DDE /* F4SCompanyFavouritingService.swift in Sources */,
 				40C6DDF41E03F445000F8806 /* UserInfoDB.swift in Sources */,
 				FC3CD1DA221566F200F91B50 /* Geocoding.swift in Sources */,
+				FCEF43DA22870F490055B5F7 /* DateOfBirthPickerViewModel.swift in Sources */,
 				FCEF70BB2108A535001C229A /* F4SInviteButtonsTableViewCell.swift in Sources */,
 				40E78E791DD32BE7000A3776 /* DrawerVisualState.swift in Sources */,
 				204C89791DF5F0B200D8493A /* ChooseAttributesViewController.swift in Sources */,
 				FC39F46021AAA618005B0A07 /* MessageViewController.swift in Sources */,
+				FCEF43D622870F370055B5F7 /* ExtraInfoViewModel.swift in Sources */,
 				FC64A5932119EBE3006464A5 /* CalendarChooserController.swift in Sources */,
 				FCB6B8ED2074C59C0042C725 /* F4SCalendarContainerViewController.swift in Sources */,
 				FC99BDCC20D172B600278DDE /* F4SCompanyDatabaseMetadataService.swift in Sources */,
@@ -2727,6 +2741,7 @@
 				FC21BE39220F53EB00A0A389 /* SearchView.swift in Sources */,
 				40E78E171DD31A86000A3776 /* AppDelegate.swift in Sources */,
 				FCC212F9219077C000D8D5B7 /* F4SDisplayTableViewCell.swift in Sources */,
+				FCEF43D822870F410055B5F7 /* AgeLogic.swift in Sources */,
 				FC39F45E21AAA618005B0A07 /* MessageTableViewCell.swift in Sources */,
 				FCC212FA219077C000D8D5B7 /* F4SCameraPageManagerViewController.swift in Sources */,
 				206F8F911E1E552F0024937B /* MessageOptionsView.swift in Sources */,
@@ -2813,6 +2828,7 @@
 				40E78E6E1DD32BD4000A3776 /* BaseMenuViewController.swift in Sources */,
 				40E78E711DD32BD4000A3776 /* SideMenuViewController.swift in Sources */,
 				FC11006A1FB36A230055EB9A /* ReachabilityExtension.swift in Sources */,
+				FCEF43DC22870F520055B5F7 /* InformationLabelStrings.swift in Sources */,
 				204203F91E4B81AB007C7409 /* FavouriteTableViewCell.swift in Sources */,
 				FC8E303A20F4A60B006059DE /* F4SLogger.swift in Sources */,
 				FC31F095204D54C6009DD526 /* F4SDebugViewController.swift in Sources */,
@@ -2953,14 +2969,6 @@
 				401634C71E0A9F73000161FA /* Base */,
 			);
 			name = NotificationView.storyboard;
-			sourceTree = "<group>";
-		};
-		405974041DFD44660002DB3A /* ExtraInfo.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				405974051DFD44660002DB3A /* Base */,
-			);
-			name = ExtraInfo.storyboard;
 			sourceTree = "<group>";
 		};
 		40A28CB51E1F96A60077D490 /* RatePlacement.storyboard */ = {

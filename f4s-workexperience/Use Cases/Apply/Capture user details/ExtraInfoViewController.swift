@@ -1,115 +1,62 @@
-//
-//  ExtraInfoViewController.swift
-//  f4s-workexperience
-//
-//  Created by Sergiu Simon on 11/12/16.
-//  Copyright © 2016 Chelsea Apps Factory. All rights reserved.
-//
-
 import UIKit
 import Reachability
 import WorkfinderCommon
 
 class ExtraInfoViewController: UIViewController {
     
+    var viewModel: ExtraInfoViewModel!
+    weak var coordinator: TabBarCoordinator!
+    
     @IBOutlet weak var exploreMapButton: UIButton!
-    @IBAction func exploreMoreCompanies(_ sender: Any) {
-        TabBarViewController.rewindToDrawerAndSelectTab(vc: self.navigationController!, tab: .map)
-    }
-    @IBOutlet weak var toYoungStackView: UIStackView!
-    
-    let consentPreviouslyGivenKey = "consentPreviouslyGivenKey"
-    
+    @IBOutlet weak var tooYoungStackView: UIStackView!
     @IBOutlet weak var acceptConditionsStackView: UIStackView!
     @IBOutlet weak var consentGiventSwitch: UISwitch!
-    
     @IBOutlet weak var consentGivenLinkButton: UIButton!
-    
-    @IBAction func termsOfServiceLinkButton(_ sender: UIButton) {
-        if let navigCtrl = self.navigationController {
-            TabBarCoordinator.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.terms)
-        }
-    }
-    
-    @IBAction func consentGivenChanged(_ sender: UISwitch) {
-        updateButtonStateAndImage()
-    }
     @IBOutlet weak var infoStackViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var completionImageView: UIImageView!
-    
     @IBOutlet weak var userInfoStackView: UIStackView!
     @IBOutlet weak var dobTextField: UITextField!
     @IBOutlet weak var dobInfoLabel: UILabel!
     @IBOutlet weak var dobUnderlineView: UIView!
     @IBOutlet weak var completeExtraInfoButton: UIButton!
-
-    
     @IBOutlet weak var parentEmailStackView: UIStackView!
     @IBOutlet weak var parentEmailTextField: NextResponderTextField!
     @IBOutlet weak var parentEmailUnderlineView: UIView!
-    
     @IBOutlet weak var emailStackView: UIStackView!
     @IBOutlet weak var emailTextField: NextResponderTextField!
     @IBOutlet weak var emailUnderlineView: UIView!
-    
     @IBOutlet weak var firstAndLastNameStackView: UIStackView!
     @IBOutlet weak var firstAndLastNameTextField: NextResponderTextField!
     @IBOutlet weak var firstAndLastNameUnderlineView: UIView!
-    
     @IBOutlet weak var voucherCodeStackView: UIStackView!
     @IBOutlet weak var voucherCodeTextField: NextResponderTextField!
     @IBOutlet weak var voucherCodeUnderlineView: UIView!
     @IBOutlet weak var noVoucherInfoLabel: UILabel!
-    
-    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     
     var applicationContext: F4SApplicationContext?
     var datePicker = UIDatePicker()
     var voucherVerificationService: F4SVoucherVerificationServiceProtocol?
+    var userRepository: F4SUserRepositoryProtocol?
     
     lazy var userService: F4SUserService = {
         return F4SUserService()
     }()
     
-    lazy var dateOfBirthFormatter: DateFormatter = {
-       let df = DateFormatter()
-        df.dateFormat = "d MMMM yyyy"
-        return df
-    }()
-    
-    var isParentEmailOkay: Bool {
-        let age = getUserAge()
-        if age < 13 { return false }
-        if age >= 16 { return true }
-        return (parentEmailTextField.text ?? "").isEmail()
-    }
-    
-    var isEmailOkay: Bool {
-        guard let emailAddress = emailTextField.text else {
-            return false
-        }
-        return emailAddress.isEmail() && !emailAddress.isEmpty
-    }
-    
-    var isNameOkay: Bool {
-        guard let fullName = firstAndLastNameTextField.text else {
-            return false
-        }
-        return fullName.isValidName() && !fullName.isEmpty
-    }
-    var isVoucherOkay: Bool {
-        guard let voucherText = voucherCodeTextField.text else {
-            return true
-        }
-        return voucherText.isEmpty || (voucherText.isVoucherCode() && voucherText.count == 6)
-    }
-    
     lazy var f4sDocumentUploadController: F4SAddDocumentsViewController = {
         let storyboard = UIStoryboard(name: "DocumentCapture", bundle: nil)
         return storyboard.instantiateInitialViewController() as! F4SAddDocumentsViewController
     }()
+    
+    func inject(
+        viewModel: ExtraInfoViewModel,
+        applicationContext: F4SApplicationContext,
+        userRepository: F4SUserRepositoryProtocol) {
+        self.viewModel = viewModel
+        self.applicationContext = applicationContext
+        self.userRepository  = userRepository
+    }
     
     lazy var emailController: F4SEmailVerificationViewController = {
         let emailStoryboard = UIStoryboard(name: "F4SEmailVerification", bundle: nil)
@@ -119,22 +66,18 @@ class ExtraInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.viewController = self
         setupControls()
-        displayUserInfoIfExists()
-        updateDOBValidityUnderlining()
+        datePicker.date = viewModel.dateOfBirth ?? viewModel.defaultDateOfBirth
+        configureForExistingUserInfo()
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardNotification(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        toYoungStackView.isHidden = true
         applyStyle()
         adjustNavigationBar()
-        updateButtonStateAndImage()
+        updateVisualState()
     }
     
     func applyStyle() {
@@ -143,6 +86,46 @@ class ExtraInfoViewController: UIViewController {
         skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: completeExtraInfoButton)
     }
     
+    @IBAction func termsOfServiceLinkButton(_ sender: UIButton) {
+        coordinator?.presentContentViewController(navCtrl: self.navigationController!, contentType: .terms)
+    }
+    
+    @IBAction func exploreMoreCompanies(_ sender: Any) {
+        viewModel.exploreMoreCompanies()
+    }
+    @IBAction func termsAgreedChanged(_ sender: UISwitch) {
+        viewModel.userInfo.termsAgreed = sender.isOn
+        updateVisualState()
+    }
+    
+    @IBAction func emailTextFieldDidChange(_ sender: NextResponderTextField) {
+        viewModel.userInfo.email = sender.text
+        updateVisualState()
+    }
+    
+    @IBAction func parentEmailTextFieldDidChange(_ sender: NextResponderTextField) {
+        viewModel.userInfo.parentEmail = sender.text
+        updateVisualState()
+    }
+    
+    @IBAction func firstNameAndLastNameTextFieldDidChange(_ sender: NextResponderTextField) {
+        viewModel.setNames(sender.text)
+        updateVisualState()
+    }
+    
+    @IBAction func voucherCodeTextFieldDidChange(_ sender: NextResponderTextField) {
+        viewModel.setVoucherString(sender.text)
+        updateVisualState()
+    }
+    
+    @IBAction func completeInfoButtonTouched(_: UIButton) {
+        self.view.endEditing(true)
+        saveUserDetailsLocally()
+        guard let applicationContext = applicationContext else { return }
+        verifyVoucher(applicationContext: applicationContext)
+    }
+    
+    deinit { NotificationCenter.default.removeObserver(self) }
 }
 
 // MARK: - Handle keyboard
@@ -150,35 +133,35 @@ extension ExtraInfoViewController {
     
     /// Handles changes to keyboard size and position
     @objc func keyboardNotification(notification: NSNotification) {
-        if let userInfo = notification.userInfo {
-            let endFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-            let duration:TimeInterval = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
-            let animationCurveRawNSN = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
-            let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
-            let animationCurve:UIView.AnimationOptions = UIView.AnimationOptions(rawValue: animationCurveRaw)
-            if (endFrame?.origin.y)! >= UIScreen.main.bounds.size.height {
-                let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-                scrollView.contentInset = contentInset
-                scrollView.scrollIndicatorInsets = contentInset
-            } else {
-                if let keyboardSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-                    let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height + 20, right: 0)
-                    scrollView.contentInset = contentInsets
-                    scrollView.scrollIndicatorInsets = contentInsets
-                }
+        guard let userInfo = notification.userInfo else { return }
+        let endFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        let duration:TimeInterval = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+        let animationCurveRawNSN = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
+        let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
+        let animationCurve:UIView.AnimationOptions = UIView.AnimationOptions(rawValue: animationCurveRaw)
+        if (endFrame?.origin.y)! >= UIScreen.main.bounds.size.height {
+            let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            scrollView.contentInset = contentInset
+            scrollView.scrollIndicatorInsets = contentInset
+        } else {
+            if let keyboardSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height + 20, right: 0)
+                scrollView.contentInset = contentInsets
+                scrollView.scrollIndicatorInsets = contentInsets
             }
-            UIView.animate(withDuration: duration,
-                           delay: TimeInterval(0),
-                           options: animationCurve,
-                           animations: { self.view.layoutIfNeeded() },
-                           completion: nil)
         }
+        UIView.animate(withDuration: duration,
+                       delay: TimeInterval(0),
+                       options: animationCurve,
+                       animations: { self.view.layoutIfNeeded() },
+                       completion: nil)
+        
     }
 }
 
 // MARK: - UI Setup
 extension ExtraInfoViewController {
-
+    
     func setupControls() {
         setupDatePicker()
         setupTextFields()
@@ -187,108 +170,36 @@ extension ExtraInfoViewController {
     }
     
     func setupTextFields() {
-        let dobString = NSLocalizedString("Date of birth", comment: "")
-        let nameString = NSLocalizedString("First and Last Name", comment: "")
-        let voucherString = NSLocalizedString("Voucher code (Optional)", comment: "")
-        
-        let placeHolderAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.pinkishGrey),
-            NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular),
-            ]
-        let inputStringAttributes: [String: Any] = [
-            NSAttributedString.Key.foregroundColor.rawValue: UIColor(netHex: Colors.black),
-            NSAttributedString.Key.font.rawValue: UIFont.f4sSystemFont(size: Style.biggerMediumTextSize, weight: UIFont.Weight.regular)]
-        
-        dobTextField.attributedPlaceholder = NSAttributedString(string: dobString, attributes: placeHolderAttributes)
-        firstAndLastNameTextField.attributedPlaceholder = NSAttributedString(string: nameString, attributes: placeHolderAttributes)
-        voucherCodeTextField.attributedPlaceholder = NSAttributedString(string: voucherString, attributes: placeHolderAttributes)
-        dobTextField.defaultTextAttributes = convertToNSAttributedStringKeyDictionary(inputStringAttributes)
-        firstAndLastNameTextField.defaultTextAttributes = convertToNSAttributedStringKeyDictionary(inputStringAttributes)
-        voucherCodeTextField.defaultTextAttributes = convertToNSAttributedStringKeyDictionary(inputStringAttributes)
-        
+        dobTextField.placeholder = viewModel.dateOfBirthPlaceholder
+        firstAndLastNameTextField.placeholder = viewModel.namePlaceholder
+        voucherCodeTextField.placeholder = viewModel.voucherPlaceholder
         dobTextField.inputView = datePicker
-        
-        updateDOBValidityUnderlining()
-        self.emailUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
-        parentEmailUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
-        self.firstAndLastNameUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
-        self.voucherCodeUnderlineView.backgroundColor = UIColor(netHex: Colors.warmGrey)
-        self.voucherCodeStackView.isHidden = false
     }
     
     func setupLabels() {
-        let dobInfoString1 = NSLocalizedString("When were you born? And ", comment: "")
-        let dobInfoString2 = NSLocalizedString("why do we need to know?", comment: "")
-        let voucherString1 = ""
-        let voucherString2 = ""
-        
-        let infoAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.warmGrey),
-            NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallTextSize, weight: UIFont.Weight.regular),
-            ]
-        let semiBoldInfoAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.warmGrey),
-            NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallTextSize, weight: UIFont.Weight.semibold),
-            ]
-        
-        let dobInfoString1Attr = NSAttributedString(string: dobInfoString1,
-                                                    attributes: infoAttributes)
-        let dobInfoString2Attr = NSAttributedString(string: dobInfoString2,
-                                                    attributes: semiBoldInfoAttributes)
-        
-        let voucherString1Attr = NSAttributedString(string: voucherString1,
-                                                    attributes: infoAttributes)
-        let voucherString2Attr = NSAttributedString(string: voucherString2,
-                                                    attributes: semiBoldInfoAttributes)
-        
-        let voucherConcatInfoString = NSMutableAttributedString(attributedString: voucherString1Attr)
-        let dobConcatInfoString = NSMutableAttributedString(attributedString: dobInfoString1Attr)
-        
-        voucherConcatInfoString.append(voucherString2Attr)
-        dobConcatInfoString.append(dobInfoString2Attr)
-        
-        dobInfoLabel.attributedText = dobConcatInfoString
+        dobInfoLabel.attributedText = viewModel.dateOfBirthInformationString
+        noVoucherInfoLabel.attributedText = viewModel.voucherInformationString
         dobInfoLabel.isUserInteractionEnabled = true
-        noVoucherInfoLabel.attributedText = voucherConcatInfoString
         noVoucherInfoLabel.isUserInteractionEnabled = true
-        
         let dobInfoLabelTap = UITapGestureRecognizer(target: self, action: #selector(didTapDobInfoLabel))
         let noVoucherInfoLabelTap = UITapGestureRecognizer(target: self, action: #selector(didTapNoVoucherInfoLabel))
         dobInfoLabelTap.numberOfTapsRequired = 1
         noVoucherInfoLabelTap.numberOfTapsRequired = 1
-        
         dobInfoLabel.addGestureRecognizer(dobInfoLabelTap)
         noVoucherInfoLabel.addGestureRecognizer(noVoucherInfoLabelTap)
     }
     
     func setupDatePicker() {
-        let currentDate = Date()
-        
-        datePicker.datePickerMode = .date
-        datePicker.backgroundColor = UIColor(netHex: Colors.white)
-        datePicker.maximumDate = currentDate
-        
-        let calendar = NSCalendar.current
-        var dateComponents = calendar.dateComponents([.year], from: currentDate)
-        dateComponents.year = dateComponents.year! - 16
-        dateComponents.month = 1
-        dateComponents.day = 1
-        if let defaultDate = calendar.date(from: dateComponents) {
-            datePicker.setDate(defaultDate, animated: false)
-        }
-        
         let toolBar = UIToolbar()
-        toolBar.barStyle = .default
-        toolBar.isTranslucent = true
+        let vm = viewModel.dateOfBirthViewModel
+        vm.configureDatePickerAppearance(datePicker)
+        vm.configureToolbarAppearance(toolBar)
         toolBar.tintColor = skin?.primaryButtonSkin.backgroundColor.uiColor
         toolBar.sizeToFit()
-        
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonTouched))
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(datePickerDoneButtonTouched))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelButtonTouched))
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(datePickerCancelButtonTouched))
         toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-        toolBar.isUserInteractionEnabled = true
-        
         dobTextField.inputAccessoryView = toolBar
     }
     
@@ -304,124 +215,49 @@ extension ExtraInfoViewController {
         return .default
     }
     
-    func consentGiven() -> Bool {
-        let previousConsent = consentPreviouslyGiven()
-        let currentConsent = consentGiventSwitch.isOn
-        return currentConsent || previousConsent
-    }
-    
-    func consentPreviouslyGiven() -> Bool {
-        return UserDefaults.standard.bool(forKey: consentPreviouslyGivenKey)
-    }
-    
-    func displayUserInfoIfExists() {
-        let user = F4SUser()
-        if let dob = user.dateOfBirth {
-            infoStackViewTopConstraint.constant = 49
-            userInfoStackView.isHidden = false
-            noVoucherInfoLabel.isHidden = false
-            scrollView.isScrollEnabled = true
-            dobTextField.text = dateOfBirthFormatter.string(from: dob)
-            datePicker.date = dob
-            parentEmailTextField.text = user.parentEmail
-            emailTextField.text = user.email
-            firstAndLastNameTextField.text = user.fullName
-            emailUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
-            firstAndLastNameUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
-        } else {
-            userInfoStackView.isHidden = true
-            noVoucherInfoLabel.isHidden = true
-            scrollView.isScrollEnabled = false
+    func configureForExistingUserInfo() {
+        if viewModel.dateOfBirth == nil {
             let screenHeight = self.view.bounds.height
             let infoLabelY = self.dobInfoLabel.frame.maxY
             let stackViewHeight = self.userInfoStackView.bounds.height
-            
-            self.infoStackViewTopConstraint.constant = screenHeight - infoLabelY - stackViewHeight + 90
+            infoStackViewTopConstraint.constant = screenHeight - infoLabelY - stackViewHeight + 90
+            scrollView.isScrollEnabled = false
+        } else {
+            infoStackViewTopConstraint.constant = 49
+            scrollView.isScrollEnabled = true
         }
-        self.noVoucherInfoLabel.isHidden = self.voucherCodeStackView.isHidden
-    }
-    
-    func getUserAge() -> Int {
-        let currentdate = NSDate()
-        let userBirthday = self.datePicker.date
-        let calendar = NSCalendar.current
-        let ageComponents = calendar.dateComponents([.year], from: userBirthday, to: currentdate as Date)
-        let age = ageComponents.year!
-        return age
-    }
-    
-    func checkIfAllFieldsAreValid() -> Bool {
-        return isParentEmailOkay && isEmailOkay && isNameOkay && isVoucherOkay
-    }
-    
-    func getPlacementUuid() -> String {
-        guard let currentCompany = self.applicationContext?.company,
-            let placement = PlacementDBOperations.sharedInstance.getPlacementForCompany(companyUuid: currentCompany.uuid) else {
-                return ""
-        }
-        return placement.placementUuid ?? ""
     }
     
     func buildUserInfo() -> F4SUser {
-        let user = F4SUser()
-        if let dateOfBirthText = dobTextField.text {
-            user.dateOfBirth = dateOfBirthFormatter.date(from: dateOfBirthText)
-        }
-        user.requiresConsent = getUserAge() < 16 ? true : false
-        if let email = emailTextField.text {
-            user.email = email
-        }
-        if let firstAndLastNameText = firstAndLastNameTextField.text {
-            let nameComponents = firstAndLastNameText.components(separatedBy: " ")
-            if nameComponents.count > 1 {
-                user.firstName = nameComponents.first!
-                let lastname = nameComponents.dropFirst().joined(separator: " ")
-                if !lastname.isEmpty {
-                    user.lastName = nameComponents.dropFirst().joined(separator: " ")
-                }
-            } else {
-                user.firstName = nameComponents.first!
-                user.lastName = nil
-            }
-        }
-        user.parentEmail = parentEmailTextField.text
-        user.placementUuid = getPlacementUuid()
-        applicationContext?.user = user
-        return user
+        return viewModel.buildUser()
     }
     
-    func updateButtonStateAndImage() {
-        let age = getUserAge()
-        if age < 13 {
-            self.toYoungStackView.isHidden = false
-            self.userInfoStackView.isHidden = true
-        } else {
-            self.toYoungStackView.isHidden = true
-            self.userInfoStackView.isHidden = false
-            parentEmailStackView.isHidden = age >= 16
-        }
-        parentEmailUnderlineView.backgroundColor = isParentEmailOkay ? UIColor(netHex: Colors.mediumGreen) : UIColor(netHex: Colors.orangeYellow)
-        emailUnderlineView.backgroundColor = isEmailOkay ? UIColor(netHex: Colors.mediumGreen) : UIColor(netHex: Colors.orangeYellow)
+    func updateVisualState() {
+        updateDisplayedValues()
         
-        firstAndLastNameUnderlineView.backgroundColor = isNameOkay ? UIColor(netHex: Colors.mediumGreen) : UIColor(netHex: Colors.orangeYellow)
+        tooYoungStackView.isHidden = viewModel.isUserTooYoungStackHidden
+        userInfoStackView.isHidden = viewModel.isUserInfoStackHidden
+        parentEmailStackView.isHidden = viewModel.isParentEmailStackHidden
+        acceptConditionsStackView.isHidden = viewModel.isAgreeTermsStackHidden
+        voucherCodeStackView.isHidden = viewModel.isVoucherStackHidden
+        noVoucherInfoLabel.isHidden = self.voucherCodeStackView.isHidden
         
-        voucherCodeUnderlineView.backgroundColor = isVoucherOkay  ? UIColor(netHex: Colors.mediumGreen) : UIColor(netHex: Colors.orangeYellow)
-        
-        if checkIfAllFieldsAreValid()  {
-            if consentPreviouslyGiven() {
-                completionImageView.image = UIImage(named: "checkMark")
-                completeExtraInfoButton.isEnabled = true
-                acceptConditionsStackView.isHidden = true
-            } else {
-                completionImageView.image = UIImage(named: "yellowQuestionMark")
-                completeExtraInfoButton.isEnabled = consentGiven()
-                acceptConditionsStackView.isHidden = false
-            }
-        } else {
-            completionImageView.image = UIImage(named: "yellowQuestionMark")
-            completeExtraInfoButton.isEnabled = false
-            acceptConditionsStackView.isHidden = true
-        }
+        dobUnderlineView.backgroundColor = viewModel.dateOfBirthUnderlineColor
+        emailUnderlineView.backgroundColor = viewModel.userEmailUnderlineColor
+        parentEmailUnderlineView.backgroundColor = viewModel.parentEmailUnderlineColor
+        firstAndLastNameUnderlineView.backgroundColor = viewModel.nameUnderlineColor
+        voucherCodeUnderlineView.backgroundColor = viewModel.voucherUnderlineColor
+        completeExtraInfoButton.isEnabled = viewModel.isCompleteInformationButtonEnabled
+        completionImageView.image = viewModel.image
+    }
+    
+    func updateDisplayedValues() {
+        dobTextField.text = viewModel.dateOfBirthText
+        parentEmailTextField.text = viewModel.parentEmail
+        emailTextField.text = viewModel.userEmail
+        firstAndLastNameTextField.text = viewModel.userName
+        voucherCodeTextField.text = viewModel.voucher
+        consentGiventSwitch.isOn = viewModel.termsAgreed
     }
 }
 
@@ -431,33 +267,29 @@ extension ExtraInfoViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_: UITextField) -> Bool {
         return true
     }
-    
-    func textFieldDidEndEditing(_: UITextField) {
-        updateButtonStateAndImage()
-    }
 }
 
 // MARK: - Calls
 extension ExtraInfoViewController {
     
-    func saveUserDetailsLocally() -> F4SUser {
+    func saveUserDetailsLocally() {
         let updatedUser = self.buildUserInfo()
-        let repo = F4SUserRepository()
-        repo.save(user: updatedUser)
+        updatedUser.placementUuid = applicationContext?.placement?.placementUuid
+        userRepository?.save(user: updatedUser)
         applicationContext?.user = updatedUser
-        return updatedUser
     }
 }
 
 // MARK: - User Interaction
 extension ExtraInfoViewController {
     
-    @objc func doneButtonTouched() {
-        dobTextField.text = dateOfBirthFormatter.string(from: datePicker.date)
+    @objc func datePickerDoneButtonTouched() {
+        viewModel.dateOfBirth = datePicker.date
+        dobTextField.text = viewModel.dateOfBirthText
         dobTextField.resignFirstResponder()
         scrollView.isScrollEnabled = true
         self.infoStackViewTopConstraint.constant = 49
-        self.updateButtonStateAndImage()
+        self.updateVisualState()
         UIView.animate(withDuration: 0.5, animations: { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.updateDOBValidityUnderlining()
@@ -466,98 +298,19 @@ extension ExtraInfoViewController {
     }
     
     func updateDOBValidityUnderlining() {
-        guard let dobText = dobTextField.text, !dobText.isEmpty else {
-            dobUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
-            return
-        }
-        if getUserAge() < 13 {
-            dobUnderlineView.backgroundColor = UIColor(netHex: Colors.orangeYellow)
-        } else {
-            dobUnderlineView.backgroundColor = UIColor(netHex: Colors.mediumGreen)
-        }
+        dobUnderlineView.backgroundColor = viewModel.dateOfBirthUnderlineColor
     }
     
-    @objc func cancelButtonTouched() {
+    @objc func datePickerCancelButtonTouched() {
         dobTextField.resignFirstResponder()
     }
     
     @objc func didTapDobInfoLabel(recognizer: UITapGestureRecognizer) {
-        guard let string = dobInfoLabel.attributedText else {
-            return
-        }
-        
-        let textStorage = NSTextStorage(attributedString: string)
-        let lm = NSLayoutManager()
-        textStorage.addLayoutManager(lm)
-        
-        let tc = NSTextContainer(size: CGSize(width: self.dobInfoLabel.bounds.width, height: self.dobInfoLabel.bounds.height))
-        
-        lm.addTextContainer(tc)
-        tc.lineFragmentPadding = 0
-        
-        let toRange = (string.string as NSString).range(of: "why do we")
-        let toRange2 = (string.string as NSString).range(of: "need to know?")
-        
-        let gr = lm.glyphRange(forCharacterRange: toRange, actualCharacterRange: nil)
-        let gr2 = lm.glyphRange(forCharacterRange: toRange2, actualCharacterRange: nil)
-        let glyphRect = lm.boundingRect(forGlyphRange: gr, in: tc)
-        let glyphRect2 = lm.boundingRect(forGlyphRange: gr2, in: tc)
-        
-        let tapPoint = recognizer.location(in: self.dobInfoLabel)
-        if glyphRect.contains(tapPoint) || glyphRect2.contains(tapPoint) {
-            if let navigCtrl = self.navigationController {
-                TabBarCoordinator.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.consent)
-            }
-        }
+        coordinator?.presentContentViewController(navCtrl: self.navigationController!, contentType: .consent)
     }
     
     @objc func didTapNoVoucherInfoLabel(recognizer: UITapGestureRecognizer) {
-        guard let string = noVoucherInfoLabel.attributedText else {
-            return
-        }
-        
-        let textStorage = NSTextStorage(attributedString: string)
-        let lm = NSLayoutManager()
-        textStorage.addLayoutManager(lm)
-        
-        let tc = NSTextContainer(size: CGSize(width: self.noVoucherInfoLabel.bounds.width, height: self.noVoucherInfoLabel.bounds.height))
-        
-        lm.addTextContainer(tc)
-        tc.lineFragmentPadding = 0
-        
-        let toRange = (string.string as NSString).range(of: "tap here")
-        
-        let gr = lm.glyphRange(forCharacterRange: toRange, actualCharacterRange: nil)
-        var glyphRect = lm.boundingRect(forGlyphRange: gr, in: tc)
-        glyphRect.size.height += 44
-        glyphRect.size.width += 22
-        
-        let tapPoint = recognizer.location(in: self.noVoucherInfoLabel)
-        if glyphRect.contains(tapPoint) {
-            if let navigCtrl = self.navigationController {
-                TabBarCoordinator.sharedInstance.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.voucher)
-            }
-        }
-    }
-    
-    @IBAction func emailTextFieldDidChange(_ sender: NextResponderTextField) {
-        updateButtonStateAndImage()
-    }
-    
-    @IBAction func firstNameAndLastNameTextFieldDidChange(_ sender: NextResponderTextField) {
-        updateButtonStateAndImage()
-    }
-    
-    @IBAction func voucherCodeTextFieldDidChange(_ sender: NextResponderTextField) {
-        updateButtonStateAndImage()
-    }
-    
-    @IBAction func completeInfoButtonTouched(_: UIButton) {
-        self.view.endEditing(true)
-        let user = saveUserDetailsLocally()
-        guard var applicationContext = applicationContext else { return }
-        applicationContext.user = user
-        verifyVoucher(applicationContext: applicationContext)
+        coordinator?.presentContentViewController(navCtrl: self.navigationController!, contentType: .voucher)
     }
     
     func verifyVoucher(applicationContext: F4SApplicationContext) {
@@ -566,7 +319,7 @@ extension ExtraInfoViewController {
             return
         }
         if voucherVerificationService == nil {
-            let placementUuid = applicationContext.user!.placementUuid!
+            let placementUuid = applicationContext.placement!.placementUuid!
             voucherVerificationService = F4SVoucherVerificationService(placementUuid: placementUuid, voucherCode: voucherCode)
         }
         showLoadingOverlay()
@@ -697,7 +450,3 @@ extension ExtraInfoViewController {
     }
 }
 
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToNSAttributedStringKeyDictionary(_ input: [String: Any]) -> [NSAttributedString.Key: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
-}

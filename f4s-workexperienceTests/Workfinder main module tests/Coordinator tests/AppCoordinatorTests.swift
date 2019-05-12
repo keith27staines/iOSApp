@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import WorkfinderCommon
 
 @testable import f4s_workexperience
 
@@ -30,6 +31,7 @@ class AppCoordinatorTests: XCTestCase {
             installationUuid: "installationUuid",
             user: mockUnregisteredUser,
             userService: mockUserService,
+            userRepository: MockUserRepository(user: mockUnregisteredUser),
             databaseDownloadManager: mockDatabaseDownloadManager,
             f4sLog: mockAnalytics
         )
@@ -109,6 +111,21 @@ extension AppCoordinatorTests {
         XCTAssertEqual(sut.childCoordinators.count, 1)
         XCTAssertTrue(sut.childCoordinators.first?.value is MockCoreInjectionNavigationCoordinator )
         XCTAssertEqual(mockUserService.registerAnonymousUserOnServerCalled, expectedRegisterUserCount)
+    }
+}
+
+class MockUserRepository: F4SUserRepositoryProtocol {
+    var user: F4SUser
+    init(user: F4SUserProtocol) {
+        self.user = F4SUser(userInformation: user)
+    }
+    
+    func save(user: F4SUserProtocol) {
+        self.user = F4SUser(userInformation: user)
+    }
+    
+    func load() -> F4SUserProtocol {
+        return user
     }
 }
 

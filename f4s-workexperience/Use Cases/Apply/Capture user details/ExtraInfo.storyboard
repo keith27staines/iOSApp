@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="20" width="414" height="829"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hz8-hB-HzJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="776.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="850.5"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yellowQuestionMark" translatesAutoresizingMaskIntoConstraints="NO" id="S8V-te-S2l">
                                                 <rect key="frame" x="162" y="40" width="90" height="90"/>
@@ -58,10 +58,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="74" translatesAutoresizingMaskIntoConstraints="NO" id="NrJ-np-QPp">
-                                                <rect key="frame" x="30" y="317.5" width="354" height="439"/>
+                                                <rect key="frame" x="30" y="317.5" width="354" height="513"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZwU-Av-rFq">
-                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="439"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="513"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ocK-RI-4cq">
                                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="132"/>
@@ -86,10 +86,10 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="49" translatesAutoresizingMaskIntoConstraints="NO" id="DIV-QA-nEC">
-                                                                <rect key="frame" x="0.0" y="142" width="354" height="271"/>
+                                                                <rect key="frame" x="0.0" y="142" width="354" height="371"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="y33-By-Vkx" userLabel="Parent email">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="31"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="56"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Parent or guardian Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IZi-FU-235" customClass="NextResponderTextField" customModule="f4s_workexperience" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="21"/>
@@ -97,7 +97,7 @@
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="username"/>
                                                                                 <connections>
-                                                                                    <action selector="emailTextFieldDidChange:" destination="6fi-A3-veq" eventType="editingChanged" id="7DL-MF-D0Y"/>
+                                                                                    <action selector="parentEmailTextFieldDidChange:" destination="6fi-A3-veq" eventType="editingChanged" id="Ysm-0I-awl"/>
                                                                                     <outlet property="delegate" destination="6fi-A3-veq" id="z9f-bD-g1H"/>
                                                                                     <outlet property="nextResponderField" destination="Ay3-HG-rFT" id="Cxx-7v-Irq"/>
                                                                                 </connections>
@@ -109,13 +109,19 @@
                                                                                     <constraint firstAttribute="height" constant="1" id="1AK-Zc-r5J"/>
                                                                                 </constraints>
                                                                             </view>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parent or guardian email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LIh-1f-QFf">
+                                                                                <rect key="frame" x="0.0" y="40" width="354" height="16"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                                <nil key="textColor"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
                                                                         </subviews>
                                                                         <constraints>
                                                                             <constraint firstItem="IZi-FU-235" firstAttribute="width" secondItem="GO6-le-PT5" secondAttribute="width" id="vOs-Hh-IVk"/>
                                                                         </constraints>
                                                                     </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="7iB-P1-4An">
-                                                                        <rect key="frame" x="0.0" y="80" width="354" height="31"/>
+                                                                        <rect key="frame" x="0.0" y="105" width="354" height="56"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ay3-HG-rFT" customClass="NextResponderTextField" customModule="f4s_workexperience" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="21"/>
@@ -135,13 +141,19 @@
                                                                                     <constraint firstAttribute="height" constant="1" id="eZR-LN-0o5"/>
                                                                                 </constraints>
                                                                             </view>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rqy-g3-drh">
+                                                                                <rect key="frame" x="0.0" y="40" width="354" height="16"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                                <nil key="textColor"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
                                                                         </subviews>
                                                                         <constraints>
                                                                             <constraint firstItem="Ay3-HG-rFT" firstAttribute="width" secondItem="Kej-Eg-p9x" secondAttribute="width" id="vqH-cH-9Qh"/>
                                                                         </constraints>
                                                                     </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="SDq-DG-ayv">
-                                                                        <rect key="frame" x="0.0" y="160" width="354" height="31"/>
+                                                                        <rect key="frame" x="0.0" y="210" width="354" height="56"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First and Last Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tuk-dL-J6F" customClass="NextResponderTextField" customModule="f4s_workexperience" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="21"/>
@@ -160,13 +172,19 @@
                                                                                     <constraint firstAttribute="height" constant="1" id="2Jc-FC-w1b"/>
                                                                                 </constraints>
                                                                             </view>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your first and last names" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QM2-ao-TvS">
+                                                                                <rect key="frame" x="0.0" y="40" width="354" height="16"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                                <nil key="textColor"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
                                                                         </subviews>
                                                                         <constraints>
                                                                             <constraint firstItem="Tuk-dL-J6F" firstAttribute="width" secondItem="jO5-dM-A01" secondAttribute="width" id="Ztg-i4-tP0"/>
                                                                         </constraints>
                                                                     </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="fjS-KP-AS4">
-                                                                        <rect key="frame" x="0.0" y="240" width="354" height="31"/>
+                                                                        <rect key="frame" x="0.0" y="315" width="354" height="56"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Voucher Code" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g1i-QR-DUi" customClass="NextResponderTextField" customModule="f4s_workexperience" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="21"/>
@@ -185,6 +203,12 @@
                                                                                     <constraint firstAttribute="height" constant="1" id="RXF-Y9-iXu"/>
                                                                                 </constraints>
                                                                             </view>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you don’t have a voucher code tap here" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KnY-Nh-iSQ">
+                                                                                <rect key="frame" x="0.0" y="40" width="354" height="16"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                                <nil key="textColor"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
                                                                         </subviews>
                                                                         <constraints>
                                                                             <constraint firstItem="g1i-QR-DUi" firstAttribute="width" secondItem="dmo-Qg-ULS" secondAttribute="width" id="xUW-aN-oxY"/>
@@ -192,12 +216,6 @@
                                                                     </stackView>
                                                                 </subviews>
                                                             </stackView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you don’t have a voucher code tap here" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KnY-Nh-iSQ">
-                                                                <rect key="frame" x="0.0" y="423" width="354" height="16"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
@@ -249,9 +267,9 @@
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gW3-Fg-VK0">
                                         <rect key="frame" x="0.0" y="0.0" width="61" height="31"/>
                                         <connections>
-                                            <action selector="consentGivenChanged:" destination="6fi-A3-veq" eventType="valueChanged" id="HW8-5K-td3"/>
                                             <action selector="consentGivenChanged:" destination="LPc-8h-Lzp" eventType="valueChanged" id="MYv-R2-Q0H"/>
                                             <action selector="consentGivenSwitch:" destination="LPc-8h-Lzp" eventType="valueChanged" id="h89-Cz-csY"/>
+                                            <action selector="termsAgreedChanged:" destination="6fi-A3-veq" eventType="valueChanged" id="HW8-5K-td3"/>
                                         </connections>
                                     </switch>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="flE-fk-fZP">
@@ -316,7 +334,7 @@
                         <outlet property="parentEmailTextField" destination="IZi-FU-235" id="d25-g4-pTe"/>
                         <outlet property="parentEmailUnderlineView" destination="GO6-le-PT5" id="gQU-Ua-yaG"/>
                         <outlet property="scrollView" destination="5Sm-Vm-OPb" id="EhW-LL-t1T"/>
-                        <outlet property="toYoungStackView" destination="ocK-RI-4cq" id="XFz-yv-WHU"/>
+                        <outlet property="tooYoungStackView" destination="ocK-RI-4cq" id="XFz-yv-WHU"/>
                         <outlet property="userInfoStackView" destination="DIV-QA-nEC" id="3J1-c7-6ce"/>
                         <outlet property="voucherCodeStackView" destination="fjS-KP-AS4" id="wgM-2A-tzw"/>
                         <outlet property="voucherCodeTextField" destination="g1i-QR-DUi" id="GYY-sa-Ick"/>

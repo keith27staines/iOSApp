@@ -102,6 +102,7 @@ extension F4SAddDocumentsViewController {
                         return
                     }
                     user.updateUuid(uuid: uuid)
+                    F4SUserRepository().save(user: user)
                     updateWEXSessionManagerWithUserUUID(uuid)
                     F4SNetworkSessionManager.shared.rebuildSessions() // Ensure session manager is aware of the possible change of user uuid
                     var updatedContext = applicationContext

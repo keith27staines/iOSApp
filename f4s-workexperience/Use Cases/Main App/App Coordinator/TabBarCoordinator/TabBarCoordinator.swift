@@ -379,9 +379,12 @@ class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoor
 
     func pushExtraInfoViewController(navigCtrl: UINavigationController, applicationContext: F4SApplicationContext) {
         let extraInfoStoryboard = UIStoryboard(name: "ExtraInfo", bundle: nil)
-        let extraInfoCtrl = extraInfoStoryboard.instantiateViewController(withIdentifier: "ExtraInfoCtrl") as! ExtraInfoViewController
-        extraInfoCtrl.applicationContext = applicationContext
-        navigCtrl.pushViewController(extraInfoCtrl, animated: true)
+        let controller = extraInfoStoryboard.instantiateViewController(withIdentifier: "ExtraInfoCtrl") as! ExtraInfoViewController
+        let userInfo = applicationContext.user!.extractUserInformation()
+        let viewModel = ExtraInfoViewModel(userInformation: userInfo, coordinator: self)
+        controller.coordinator = self
+        controller.inject(viewModel: viewModel, applicationContext: applicationContext, userRepository: injected.userRepository)
+        navigCtrl.pushViewController(controller, animated: true)
     }
 
     func pushMessageController(parentCtrl: UIViewController, threadUuid: String?, company: Company, placements: [F4STimelinePlacement], companies: [Company]) {

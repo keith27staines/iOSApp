@@ -25,6 +25,7 @@ struct AppCoordinatoryFactory : AppCoordinatoryFactoryProtocol {
         installationUuid: F4SUUID,
         user: F4SUserProtocol = F4SUser(),
         userService: F4SUserServiceProtocol = F4SUserService(),
+        userRepository: F4SUserRepositoryProtocol = F4SUserRepository(),
         databaseDownloadManager: F4SDatabaseDownloadManagerProtocol = F4SDatabaseDownloadManager(),
         navigationRouter: NavigationRoutingProtocol = NavigationRouter(navigationController: UINavigationController(rootViewController: AppCoordinatorBackgroundViewController())),
         f4sLog: F4SAnalyticsAndDebugging
@@ -35,6 +36,7 @@ struct AppCoordinatoryFactory : AppCoordinatoryFactoryProtocol {
             installationUuid: installationUuid,
             user: user,
             userService: userService,
+            userRepository: userRepository,
             databaseDownloadManager: databaseDownloadManager,
             f4sLog: f4sLog)
         

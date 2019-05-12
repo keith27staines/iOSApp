@@ -16,6 +16,7 @@ protocol CoreInjectionProtocol : class {
     var launchOptions: LaunchOptions? { get set }
     var user: F4SUserProtocol { get set }
     var userService: F4SUserServiceProtocol { get }
+    var userRepository: F4SUserRepositoryProtocol { get }
     var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol { get }
     var log: F4SAnalyticsAndDebugging { get }
 }
@@ -23,9 +24,10 @@ protocol CoreInjectionProtocol : class {
 class CoreInjection : CoreInjectionProtocol {
     
     var launchOptions: LaunchOptions? = nil
-    var user: F4SUserProtocol = F4SUser()
-    var userService: F4SUserServiceProtocol = F4SUserService()
-    var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol = F4SDatabaseDownloadManager()
+    var user: F4SUserProtocol
+    var userService: F4SUserServiceProtocol
+    var userRepository: F4SUserRepositoryProtocol
+    var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol
     var log: F4SAnalyticsAndDebugging
     let installationUuid: F4SUUID
     
@@ -33,6 +35,7 @@ class CoreInjection : CoreInjectionProtocol {
          installationUuid: F4SUUID,
          user: F4SUserProtocol,
          userService: F4SUserServiceProtocol,
+         userRepository: F4SUserRepositoryProtocol,
          databaseDownloadManager: F4SDatabaseDownloadManagerProtocol,
          tabBarFactory: @escaping (() -> Coordinating) = { return TabBarCoordinator.sharedInstance },
          f4sLog: F4SAnalyticsAndDebugging) {
@@ -40,6 +43,7 @@ class CoreInjection : CoreInjectionProtocol {
         self.launchOptions = launchOptions
         self.user = user
         self.userService = userService
+        self.userRepository = userRepository
         self.databaseDownloadManager = databaseDownloadManager
         self.log = f4sLog
         self.installationUuid = installationUuid

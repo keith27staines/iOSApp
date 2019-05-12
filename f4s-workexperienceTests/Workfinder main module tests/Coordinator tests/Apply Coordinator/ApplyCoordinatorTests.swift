@@ -28,6 +28,7 @@ class ApplyCoordinatorTests: XCTestCase {
         installationUuid: "installationUuid",
         user: mockRegisteredUser,
         userService: mockUserService,
+        userRepository: MockUserRepository(user: mockRegisteredUser),
         databaseDownloadManager: mockDatabaseDownloadManager,
         f4sLog: mockAnalytics)
 

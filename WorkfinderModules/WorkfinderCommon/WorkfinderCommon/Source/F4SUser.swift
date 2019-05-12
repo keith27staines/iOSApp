@@ -150,8 +150,6 @@ public class F4SUser : F4SUserProtocol, Codable {
     
     public func updateUuid(uuid: F4SUUID) {
         self.uuid = uuid
-        let repo = F4SUserRepository(localStore: localStore)
-        repo.save(user: self)
         analytics?.alias(userId: uuid)
     }
 }
