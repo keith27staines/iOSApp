@@ -165,7 +165,7 @@ class F4SDebug {
         if Config.ENVIRONMENT == "STAGING" {
             return true
         }
-        guard let lowercasedEmail = UserInfoDBOperations.sharedInstance.getUserInfo()?.email.lowercased() else {
+        guard let lowercasedEmail = F4SUser().email?.lowercased() else {
             return false
         }
         guard lowercasedEmail.contains("founders4schools.org.uk") ||
