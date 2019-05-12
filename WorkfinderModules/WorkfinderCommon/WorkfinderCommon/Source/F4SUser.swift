@@ -29,9 +29,11 @@ public protocol F4SUserProtocol {
 }
 public extension F4SUserProtocol {
     var fullName: String? {
-        var name = firstName ?? ""
-        if !name.isEmpty { name = name + " "}
-        name = name + (lastName ?? "")
+        let firstName = self.firstName ?? ""
+        let lastName = self.lastName ?? ""
+        var name = firstName
+        if (!firstName.isEmpty && !lastName.isEmpty) { name = name + " "}
+        name = name + lastName
         return name.isEmpty ? nil : name
     }
 }

@@ -118,6 +118,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     
     private func onUserIsRegistered(userUuid: F4SUUID) {
         injected.user.updateUuid(uuid: userUuid)
+        injected.userRepository.save(user: injected.user)
         updateWEXSessionManagerWithUserUUID(userUuid)
         printDebugUserInfo()
         injected.log.identity(userId: userUuid)

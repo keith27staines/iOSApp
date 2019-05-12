@@ -23,6 +23,24 @@ struct InformationLabelStrings {
         return combinedString
     }
     
+    var userEmailInformationString: NSAttributedString {
+        let text = NSLocalizedString("Your email", comment: "")
+        let string = NSAttributedString(string: text, attributes: infoAttributes)
+        return string
+    }
+    
+    var namesInformationString: NSAttributedString {
+        let text = NSLocalizedString("Your first and last names", comment: "")
+        let string = NSAttributedString(string: text, attributes: infoAttributes)
+        return string
+    }
+    
+    var parentEmailInformationString: NSAttributedString {
+        let text = NSLocalizedString("Your parent or guardian's email", comment: "")
+        let string = NSAttributedString(string: text, attributes: infoAttributes)
+        return string
+    }
+    
     var voucherInformationString: NSAttributedString {
         let text1 = NSLocalizedString("Enter your voucher if you have one", comment: "")
         let text2 = NSLocalizedString("", comment: "")

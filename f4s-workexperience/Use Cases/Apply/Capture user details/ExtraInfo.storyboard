@@ -329,12 +329,15 @@
                         <outlet property="firstAndLastNameTextField" destination="Tuk-dL-J6F" id="KaY-L9-HBx"/>
                         <outlet property="firstAndLastNameUnderlineView" destination="jO5-dM-A01" id="3JI-UR-49e"/>
                         <outlet property="infoStackViewTopConstraint" destination="Jmn-8L-pmJ" id="7mj-fr-NeA"/>
+                        <outlet property="namesInfoLabel" destination="QM2-ao-TvS" id="0AE-sG-e4s"/>
                         <outlet property="noVoucherInfoLabel" destination="KnY-Nh-iSQ" id="Ptb-8Y-6Lj"/>
+                        <outlet property="parentEmailInfoLabel" destination="LIh-1f-QFf" id="V79-4p-nTQ"/>
                         <outlet property="parentEmailStackView" destination="y33-By-Vkx" id="GrH-YW-xO7"/>
                         <outlet property="parentEmailTextField" destination="IZi-FU-235" id="d25-g4-pTe"/>
                         <outlet property="parentEmailUnderlineView" destination="GO6-le-PT5" id="gQU-Ua-yaG"/>
                         <outlet property="scrollView" destination="5Sm-Vm-OPb" id="EhW-LL-t1T"/>
                         <outlet property="tooYoungStackView" destination="ocK-RI-4cq" id="XFz-yv-WHU"/>
+                        <outlet property="userEmailInfoLabel" destination="rqy-g3-drh" id="T8b-Hv-kV7"/>
                         <outlet property="userInfoStackView" destination="DIV-QA-nEC" id="3J1-c7-6ce"/>
                         <outlet property="voucherCodeStackView" destination="fjS-KP-AS4" id="wgM-2A-tzw"/>
                         <outlet property="voucherCodeTextField" destination="g1i-QR-DUi" id="GYY-sa-Ick"/>

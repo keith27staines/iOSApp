@@ -23,6 +23,9 @@ public class ExtraInfoViewModel {
     var dateOfBirthText: String? { return ageLogic.dateOfBirthText }
     var dateOfBirthUnderlineColor: UIColor { return ageLogic.isAgeTooYoungToApply ? badValueColor : goodValueColor }
     var dateOfBirthInformationString: NSAttributedString { return labelStrings.dateOfBirthInformationString }
+    var userEMailInformationString: NSAttributedString { return labelStrings.userEmailInformationString }
+    var namesInformationString: NSAttributedString { return labelStrings.namesInformationString }
+    var parentEmailInformationString: NSAttributedString { return labelStrings.parentEmailInformationString }
     var voucherInformationString: NSAttributedString { return labelStrings.voucherInformationString }
     var voucher: String? { return userInfo.vouchers?.first }
 
@@ -32,7 +35,9 @@ public class ExtraInfoViewModel {
     var isUserTooYoungStackHidden: Bool { return !ageLogic.isAgeTooYoungToApply }
     var isUserInfoStackHidden: Bool { return ageLogic.isAgeTooYoungToApply }
     var isParentEmailStackHidden: Bool { return !ageLogic.isConsentRequired }
-    var isVoucherStackHidden: Bool { return false }
+    var isUserEmailStackHidden: Bool { return !(isParentEmailOK && ageLogic.age > 0) }
+    var isFirstAndLastNameStackHidden: Bool { return isUserEmailStackHidden }
+    var isVoucherStackHidden: Bool { return isUserEmailStackHidden }
     var isAgreeTermsStackHidden: Bool {
         return !(isDateOfBirthOK && isUserEmailOK && isParentEmailOK && isNameOK && isVoucherOK)
     }
@@ -47,7 +52,7 @@ public class ExtraInfoViewModel {
     }
     
     var userName: String? {
-        return (userInfo.firstName ?? "") + " " + (userInfo.lastName ?? "").trimmingCharacters(in: CharacterSet.whitespaces)
+        return namesString
     }
     
     lazy var dateOfBirthViewModel: DateOfBirthPickerViewModel = {
@@ -56,6 +61,7 @@ public class ExtraInfoViewModel {
     
     init(userInformation: F4SUserInformation, coordinator: TabBarCoordinator) {
         self.userInfo = userInformation
+        self.namesString = userInformation.fullName
         self.coordinator = coordinator
         self.ageLogic.dateOfBirth = userInformation.dateOfBirth
     }
@@ -63,6 +69,8 @@ public class ExtraInfoViewModel {
     func buildUser() -> F4SUser {
         let user = F4SUser()
         user.updateFromUserInformation(self.userInfo)
+        user.lastName = user.lastName ?? ""
+        if user.lastName!.isEmpty { user.lastName = " "}
         return user
     }
     
@@ -81,10 +89,12 @@ public class ExtraInfoViewModel {
     var voucherUnderlineColor: UIColor { return isVoucherOK ? goodValueColor : badValueColor }
     
     var isNameOK: Bool {
-        guard let
-            name = userName?.trimmingCharacters(in: CharacterSet.whitespaces),
-            !name.isEmpty else { return false }
-        return name.isValidName()
+        guard
+            let first = userInfo.firstName?.trimmingCharacters(in: CharacterSet.whitespaces),
+            let last = userInfo.lastName?.trimmingCharacters(in: CharacterSet.whitespaces),
+            first.isEmpty == false,
+            last.isEmpty == false else { return false }
+        return true
     }
     
     var isVoucherOK: Bool {
@@ -105,7 +115,10 @@ public class ExtraInfoViewModel {
         userInfo.vouchers = [voucher]
     }
     
+    var namesString: String?
+    
     func setNames(_ names: String?) {
+        namesString = names
         guard
             let substrings = names?.trimmingCharacters(in: CharacterSet.whitespaces).split(separator: " "),
             let firstSubstring = substrings.first else {
@@ -113,10 +126,10 @@ public class ExtraInfoViewModel {
             userInfo.lastName = nil
             return
         }
-        userInfo.firstName = String(firstSubstring)
+        userInfo.firstName = String(firstSubstring).trimmingCharacters(in: CharacterSet.whitespaces)
         userInfo.lastName = substrings.dropFirst().reduce("") { (lastNames, substring) -> String in
             return lastNames + " " + String(substring)
-        }
+        }.trimmingCharacters(in: CharacterSet.whitespaces)
     }
 }
 

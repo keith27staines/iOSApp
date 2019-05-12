@@ -16,7 +16,13 @@ class ExtraInfoViewController: UIViewController {
     @IBOutlet weak var completionImageView: UIImageView!
     @IBOutlet weak var userInfoStackView: UIStackView!
     @IBOutlet weak var dobTextField: UITextField!
+    
     @IBOutlet weak var dobInfoLabel: UILabel!
+    @IBOutlet weak var noVoucherInfoLabel: UILabel!
+    @IBOutlet weak var parentEmailInfoLabel: UILabel!
+    @IBOutlet weak var userEmailInfoLabel: UILabel!
+    @IBOutlet weak var namesInfoLabel: UILabel!
+    
     @IBOutlet weak var dobUnderlineView: UIView!
     @IBOutlet weak var completeExtraInfoButton: UIButton!
     @IBOutlet weak var parentEmailStackView: UIStackView!
@@ -31,7 +37,7 @@ class ExtraInfoViewController: UIViewController {
     @IBOutlet weak var voucherCodeStackView: UIStackView!
     @IBOutlet weak var voucherCodeTextField: NextResponderTextField!
     @IBOutlet weak var voucherCodeUnderlineView: UIView!
-    @IBOutlet weak var noVoucherInfoLabel: UILabel!
+
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     
@@ -178,6 +184,9 @@ extension ExtraInfoViewController {
     
     func setupLabels() {
         dobInfoLabel.attributedText = viewModel.dateOfBirthInformationString
+        parentEmailInfoLabel.attributedText = viewModel.parentEmailInformationString
+        userEmailInfoLabel.attributedText = viewModel.userEMailInformationString
+        namesInfoLabel.attributedText = viewModel.namesInformationString
         noVoucherInfoLabel.attributedText = viewModel.voucherInformationString
         dobInfoLabel.isUserInteractionEnabled = true
         noVoucherInfoLabel.isUserInteractionEnabled = true
@@ -238,6 +247,8 @@ extension ExtraInfoViewController {
         tooYoungStackView.isHidden = viewModel.isUserTooYoungStackHidden
         userInfoStackView.isHidden = viewModel.isUserInfoStackHidden
         parentEmailStackView.isHidden = viewModel.isParentEmailStackHidden
+        emailStackView.isHidden = viewModel.isUserEmailStackHidden
+        firstAndLastNameStackView.isHidden = viewModel.isFirstAndLastNameStackHidden
         acceptConditionsStackView.isHidden = viewModel.isAgreeTermsStackHidden
         voucherCodeStackView.isHidden = viewModel.isVoucherStackHidden
         noVoucherInfoLabel.isHidden = self.voucherCodeStackView.isHidden

@@ -11,7 +11,7 @@ class AgeLogic {
     
     init() {}
     
-    var isAgeTooYoungToApply: Bool { return age < 13 }
+    var isAgeTooYoungToApply: Bool { return age < 13 && age > 0 }
     var isConsentRequired: Bool { return age >= 13 && age < 16 }
     
     var age: Int {
