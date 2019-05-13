@@ -97,9 +97,6 @@ class CompanyViewDataTests: XCTestCase {
         sut.employees = 1
         XCTAssertFalse(sut.employeesIsHidden)
     }
-    
-    
-
 }
 
 extension CompanyViewDataTests {
