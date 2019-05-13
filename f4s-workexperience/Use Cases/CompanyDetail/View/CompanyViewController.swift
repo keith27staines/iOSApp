@@ -113,8 +113,9 @@ extension CompanyViewController : CompanyViewModelDelegate {
 
 extension CompanyViewController : CompanyMainViewDelegate {
     func companyMainViewDidTapApply(_ view: CompanyMainView) {
-        let initiateApplyResult = viewModel.didTapApply()
-        processInitiateApplyResult(initiateApplyResult)
+        viewModel.didTapApply { [weak self] (initiateApplyResult) in
+            self?.processInitiateApplyResult(initiateApplyResult)
+        }
     }
     
     func companyMainViewDidTapDone(_ view: CompanyMainView) {
@@ -151,7 +152,7 @@ extension CompanyViewController : CompanyMainViewDelegate {
             handler = { alertAction in
                 let segmentedControl = self.companyMainPageView.segmentedControl
                 segmentedControl.selectedSegmentIndex = 0
-                // TODO: enable peopple tab: uncomment next line
+                // TODO: enable people tab: uncomment next line
                 // self.pageViewController.moveToPage(index: CompanyViewModel.PageIndex.people)
             }
         case .deniedAlreadyApplied:

@@ -12,7 +12,7 @@ import WorkfinderCommon
 
 protocol CompanyViewModelCoordinatingDelegate : class {
     func companyViewModelDidComplete(_ viewModel: CompanyViewModel)
-    func companyViewModel(_ viewModel: CompanyViewModel, applyTo: CompanyViewData)
+    func companyViewModel(_ viewModel: CompanyViewModel, applyTo: CompanyViewData, continueFrom: F4STimelinePlacement?)
     func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn person: PersonViewData)
     func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn company: CompanyViewData)
     func companyViewModel(_ viewModel: CompanyViewModel, requestedShowDuedil company: CompanyViewData)
@@ -192,12 +192,40 @@ class CompanyViewModel : NSObject {
         coordinatingDelegate?.companyViewModel(self, requestedShowDuedil: company)
     }
     
-    func didTapApply() -> InitiateApplicationResult {
-        if appliedState == .applied { return .deniedAlreadyApplied }
-        if mustSelectPersonToApply { return .deniedMustSelectPerson }
-        if companyViewData.isRemoved { return .deniedCompanyNoAcceptingApplications }
-        coordinatingDelegate?.companyViewModel(self, applyTo: companyViewData)
-        return .allowed
+    func didTapApply(completion: @escaping (InitiateApplicationResult) -> Void) {
+        //if appliedState == .applied { completion(.deniedAlreadyApplied) ; return }
+        if mustSelectPersonToApply { completion(.deniedMustSelectPerson) ; return }
+        if companyViewData.isRemoved { completion(.deniedCompanyNoAcceptingApplications) ; return }
+        applyIfStateAllows(completion: completion)
+    }
+    
+    lazy var placementService: F4SPlacementService = {
+        return F4SPlacementService()
+    }()
+    
+    func applyIfStateAllows(completion: @escaping (InitiateApplicationResult) -> Void) {
+        viewModelDelegate?.companyViewModelDidBeginNetworkTask(self)
+        placementService.getAllPlacementsForUser { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            DispatchQueue.main.async {
+                strongSelf.viewModelDelegate?.companyViewModelDidCompleteLoadingTask(strongSelf)
+                switch result {
+                case .error(let error):
+                    strongSelf.viewModelDelegate?.companyViewModelNetworkTaskDidFail(strongSelf, error: error, retry: {
+                        strongSelf.applyIfStateAllows(completion: completion)
+                    })
+                case .success(let placements):
+                    for placement in placements {
+                        if placement.companyUuid?.dehyphenated == strongSelf.company.uuid {
+                            completion(.deniedAlreadyApplied)
+                            return
+                        }
+                    }
+                    strongSelf.coordinatingDelegate?.companyViewModel(strongSelf, applyTo: strongSelf.companyViewData, continueFrom: nil)
+                    completion(.allowed)
+                }
+            }
+        }
     }
 
     func loadCompany() {

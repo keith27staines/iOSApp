@@ -57,12 +57,12 @@ extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
         childCoordinators = [:]
     }
     
-    func companyViewModel(_ viewModel: CompanyViewModel, applyTo companyViewData: CompanyViewData) {
+    func companyViewModel(_ viewModel: CompanyViewModel, applyTo companyViewData: CompanyViewData, continueFrom placement: F4STimelinePlacement?) {
         let viewData = CompanyViewData(company: company)
-        startApplyCoordinator(companyViewData: viewData)
+        startApplyCoordinator(companyViewData: viewData, continueFrom: placement)
     }
     
-    func startApplyCoordinator(companyViewData: CompanyViewData) {
+    func startApplyCoordinator(companyViewData: CompanyViewData, continueFrom: F4STimelinePlacement?) {
         let applyCoordinator = ApplyCoordinator(
             company: companyViewData,
             placement: company.placement,

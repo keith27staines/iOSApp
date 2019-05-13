@@ -51,7 +51,7 @@ class CoordinatingDelegate: CompanyViewModelCoordinatingDelegate {
         didComplete = true
     }
     
-    func companyViewModel(_ viewModel: CompanyViewModel, applyTo: CompanyViewData) {
+    func companyViewModel(_ viewModel: CompanyViewModel, applyTo: CompanyViewData, continueFrom: F4STimelinePlacement?) {
         applyToCompany = applyTo
     }
     

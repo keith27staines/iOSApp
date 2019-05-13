@@ -35,17 +35,20 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         return ApplicationModel(userUuid: userUuid, installationUuid: installationUuid, userInterests: userInterests, placement: placement, placementRepository: placementRepository, companyViewData: companyViewData, placementService: placementService, templateService: templateService)
     }()
     
+    var continueFromTimelinePlacement: F4STimelinePlacement?
+    
     init(company: CompanyViewData,
          placement: F4SPlacement?,
          parent: ApplyCoordinatorCoordinating?,
          navigationRouter: NavigationRoutingProtocol,
          inject: CoreInjectionProtocol,
          placementService: WEXPlacementServiceProtocol,
-         templateService: F4STemplateServiceProtocol
-         ) {
+         templateService: F4STemplateServiceProtocol,
+         continueFrom: F4STimelinePlacement? = nil) {
         self.companyViewData = company
         self.placementService = placementService
         self.templateService = templateService
+        self.continueFromTimelinePlacement = continueFrom
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
