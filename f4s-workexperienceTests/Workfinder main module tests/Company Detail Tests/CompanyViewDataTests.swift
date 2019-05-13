@@ -109,7 +109,7 @@ extension CompanyViewDataTests {
             id: 1,
             created: now,
             modified: now,
-            isRemoved: false,
+            isAvailableForSearch: true,
             uuid: "uuid",
             name: "name",
             logoUrl: "logoUrlString",
