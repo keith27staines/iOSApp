@@ -193,7 +193,7 @@ class CompanyViewModel : NSObject {
     }
     
     func didTapApply(completion: @escaping (InitiateApplicationResult) -> Void) {
-        //if appliedState == .applied { completion(.deniedAlreadyApplied) ; return }
+        if appliedState == .applied { completion(.deniedAlreadyApplied) ; return }
         if mustSelectPersonToApply { completion(.deniedMustSelectPerson) ; return }
         if companyViewData.isRemoved { completion(.deniedCompanyNoAcceptingApplications) ; return }
         applyIfStateAllows(completion: completion)
