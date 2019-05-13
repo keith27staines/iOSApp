@@ -41,7 +41,7 @@ public struct Company : Hashable {
     public var id: Int64
     public var created: Date
     public var modified: Date
-    public var isRemoved: Bool
+    public var isAvailableForSearch: Bool
     public var uuid: String
     public var name: String {
         didSet { self.sortingName = name.stripCompanySuffix().lowercased() }
@@ -61,11 +61,11 @@ public struct Company : Hashable {
     public var companyUrl: String
     public var interestIds: Set<Int64> = Set<Int64>()
 
-    public init(id: Int64 = 0, created: Date = Date(), modified: Date = Date(), isRemoved: Bool = false, uuid: String = "", name: String = "", logoUrl: String = "", industry: String = "", latitude: Double = 0, longitude: Double = 0, summary: String = "", employeeCount: Int64 = 0, turnover: Double = 0, turnoverGrowth: Double = 0, rating: Double = 0, ratingCount: Double = 0, sourceId: String = "", hashtag: String = "", companyUrl: String = "") {
+    public init(id: Int64 = 0, created: Date = Date(), modified: Date = Date(), isAvailableForSearch: Bool = true, uuid: String = "", name: String = "", logoUrl: String = "", industry: String = "", latitude: Double = 0, longitude: Double = 0, summary: String = "", employeeCount: Int64 = 0, turnover: Double = 0, turnoverGrowth: Double = 0, rating: Double = 0, ratingCount: Double = 0, sourceId: String = "", hashtag: String = "", companyUrl: String = "") {
         self.id = id
         self.created = created
         self.modified = modified
-        self.isRemoved = isRemoved
+        self.isAvailableForSearch = isAvailableForSearch
         self.uuid = uuid
         self.name = name
         self.logoUrl = logoUrl
@@ -143,24 +143,6 @@ public struct BusinessCompanyInterest : Hashable {
     }
 }
 
-//public struct Interest : Hashable {
-//    public var hashValue: Int { return uuid.hashValue }
-//
-//    public static func ==(lhs: Interest, rhs: Interest) -> Bool {
-//        return lhs.uuid == rhs.uuid
-//    }
-//
-//    public var id: Int64
-//    public var uuid: String
-//    public var name: String
-//
-//    public init(id: Int64 = 0, uuid: String = "", name: String = "") {
-//        self.id = id
-//        self.uuid = uuid
-//        self.name = name
-//    }
-//}
-
 struct ContentEntity {
     var title: String
     var slug: ContentType
@@ -172,26 +154,6 @@ struct ContentEntity {
         self.url = url
     }
 }
-
-//struct TimelinePlacement {
-//    var placementUuid: String
-//    var userUuid: String
-//    var companyUuid: String
-//    var threadUuid: String
-//    var status: PlacementStatus
-//    var latestMessage: F4SMessage
-//    var isRead: Bool
-//
-//    init(placementUuid: String = "", userUuid: String = "", companyUuid: String = "", threadUuid: String = "", status: PlacementStatus = .inProgress, latestMessage: F4SMessage = F4SMessage(), isRead: Bool = true) {
-//        self.placementUuid = placementUuid
-//        self.companyUuid = companyUuid
-//        self.userUuid = userUuid
-//        self.threadUuid = threadUuid
-//        self.status = status
-//        self.latestMessage = latestMessage
-//        self.isRead = isRead
-//    }
-//}
 
 struct UserStatus {
     var unreadCount: Int

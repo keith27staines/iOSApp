@@ -13,8 +13,8 @@ public struct CompanyViewData : CompanyViewDataProtocol {
     public var uuid: F4SUUID = ""
     public var appliedState: AppliedState = .notApplied
     public var companyName: String = ""
-    public var isRemoved: Bool = false
     public var isFavourited: Bool = false
+    public var isAvailableForSearch: Bool = false
     public var starRating: Float? = 0
     public var industry: String? = ""
     public var description: String? = ""
@@ -41,7 +41,7 @@ public struct CompanyViewData : CompanyViewDataProtocol {
         self.description = company.summary
         self.industry = company.industry
         self.starRating = Float(company.rating)
-        self.isRemoved = company.isRemoved
+        self.isAvailableForSearch = company.isAvailableForSearch
         if let placementStatus = company.placement?.status {
             self.appliedState = (placementStatus == .draft) ? .draft : .applied
         } else {

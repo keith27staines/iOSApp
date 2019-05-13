@@ -18,7 +18,7 @@ public protocol CompanyViewDataProtocol {
     var uuid: F4SUUID { get }
     var appliedState: AppliedState { get }
     var companyName: String { get }
-    var isRemoved: Bool { get }
+    var isAvailableForSearch: Bool { get }
     var isFavourited: Bool { get }
     var starRating: Float? { get }
     var industry: String? { get }

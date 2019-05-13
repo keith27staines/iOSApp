@@ -18,7 +18,7 @@ class CompanyViewModelTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        let company = Company(id: 1, created: Date(), modified: Date(), isRemoved: false, uuid: UUID().uuidString, name: "companyName", logoUrl: "logoUrlString", industry: "industry", latitude: 45, longitude: 45, summary: "summary", employeeCount: 1, turnover: 1, turnoverGrowth: 1, rating: 1, ratingCount: 1, sourceId: "sourceId", hashtag: "hashtag", companyUrl: "companyUrlString")
+        let company = Company(id: 1, created: Date(), modified: Date(), uuid: UUID().uuidString, name: "companyName", logoUrl: "logoUrlString", industry: "industry", latitude: 45, longitude: 45, summary: "summary", employeeCount: 1, turnover: 1, turnoverGrowth: 1, rating: 1, ratingCount: 1, sourceId: "sourceId", hashtag: "hashtag", companyUrl: "companyUrlString")
         person = PersonViewData()
         coordinatingDelegate = CoordinatingDelegate()
         sut = CompanyViewModel(coordinatingDelegate: coordinatingDelegate, company: company, people: [person])

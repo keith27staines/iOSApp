@@ -47,7 +47,8 @@ class DatabaseOperations {
         static let id: Expression<Int64?> = Expression<Int64?>(BusinessesCompany.idColumnName)
         static let created: Expression<String?> = Expression<String?>(BusinessesCompany.createdColumnName)
         static let modified: Expression<String?> = Expression<String?>(BusinessesCompany.modifiedColumnName)
-        static let isRemoved: Expression<Bool?> = Expression<Bool?>(BusinessesCompany.isRemovedColumnName)
+        static let isAvailableForRecommendation: Expression<Bool?> = Expression<Bool?>(BusinessesCompany.isAvailableForRecommendation)
+        static let isAvailableForSearch: Expression<Bool?> = Expression<Bool?>(BusinessesCompany.isAvailableForSearch)
         static let uuid: Expression<String?> = Expression<String?>(BusinessesCompany.uuidColumnName)
         static let name: Expression<String?> = Expression<String?>(BusinessesCompany.nameColumnName)
         static let logoUrl: Expression<String?> = Expression<String?>(BusinessesCompany.logoUrlColumnName)
@@ -67,7 +68,8 @@ class DatabaseOperations {
         static let idColumnName: String = "id"
         static let createdColumnName: String = "created"
         static let modifiedColumnName: String = "modified"
-        static let isRemovedColumnName: String = "is_removed"
+        static let isAvailableForRecommendationColumnName = "is_available_for_recommendation"
+        static let isAvailableForSearchColumnName = "is_available_for_search"
         static let uuidColumnName: String = "uuid"
         static let nameColumnName: String = "name"
         static let logoUrlColumnName: String = "logo_url"
@@ -147,7 +149,7 @@ extension DatabaseOperations {
         }
         do {
             var companyList: [Company] = []
-            let selectStatement: String = "SELECT id, uuid, name, latitude, longitude FROM businesses_company WHERE latitude NOTNULL AND longitude NOTNULL"
+            let selectStatement: String = "SELECT id, uuid, name, latitude, longitude FROM businesses_company WHERE latitude NOTNULL AND longitude NOTNULL AND is_available_for_search == true"
             
             let stmt = try db.prepare(selectStatement)
             
@@ -185,8 +187,8 @@ extension DatabaseOperations {
                 if name == BusinessesCompany.modifiedColumnName, let modifiedDateValue = value as? String, let modifiedDate = formatter.date(from: modifiedDateValue) {
                     company.modified = modifiedDate
                 }
-                if name == BusinessesCompany.isRemovedColumnName, let isRemoved = value as? Bool {
-                    company.isRemoved = isRemoved
+                if name == BusinessesCompany.isAvailableForRecommendationColumnName, let isAvailable = value as? Bool {
+                    company.isAvailableForSearch = isAvailable
                 }
                 if name == BusinessesCompany.uuidColumnName, let uuid = value as? String {
                     company.uuid = uuid
