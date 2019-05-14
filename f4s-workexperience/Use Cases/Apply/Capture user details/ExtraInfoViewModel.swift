@@ -119,22 +119,10 @@ public class ExtraInfoViewModel {
     
     func setNames(_ names: String?) {
         namesString = names
-        guard
-            let substrings = names?.trimmingCharacters(in: CharacterSet.whitespaces).split(separator: " "),
-            let firstSubstring = substrings.first else {
-            userInfo.firstName = nil
-            userInfo.lastName = nil
-            return
-        }
-        userInfo.firstName = String(firstSubstring).trimmingCharacters(in: CharacterSet.whitespaces)
-        userInfo.lastName = substrings.dropFirst().reduce("") { (lastNames, substring) -> String in
-            return lastNames + " " + String(substring)
-        }.trimmingCharacters(in: CharacterSet.whitespaces)
+        let nameLogic = NameLogic(nameString: names)
+        userInfo.firstName = nameLogic.firstName
+        userInfo.lastName = nameLogic.otherNames
     }
-}
-
-extension ExtraInfoViewModel {
-
 }
 
 

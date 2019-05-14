@@ -188,6 +188,8 @@
 		FC5C5B952109FF48007DCB84 /* RequestBLProvideDocuments.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5C5B942109FF48007DCB84 /* RequestBLProvideDocuments.swift */; };
 		FC5D3C6C20FE17F600F89169 /* config.yml in Resources */ = {isa = PBXBuildFile; fileRef = FC5D3C6B20FE17F600F89169 /* config.yml */; };
 		FC5D3C6E20FE1CEC00F89169 /* Gemfile in Resources */ = {isa = PBXBuildFile; fileRef = FC5D3C6D20FE1CEB00F89169 /* Gemfile */; };
+		FC5DF8B9228AAC6D004B014D /* NameLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5DF8B8228AAC6D004B014D /* NameLogicTests.swift */; };
+		FC5DF8BB228AF25A004B014D /* NameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5DF8BA228AF25A004B014D /* NameLogic.swift */; };
 		FC5F3D4E20D938E90002F41B /* F4SUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F3D4D20D938E90002F41B /* F4SUserService.swift */; };
 		FC5F3D5020D93C070002F41B /* F4SUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F3D4F20D93C070002F41B /* F4SUserModel.swift */; };
 		FC62FF9820EF75FE003E52C5 /* F4SApiUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62FF9720EF75FE003E52C5 /* F4SApiUrls.swift */; };
@@ -631,6 +633,8 @@
 		FC5C5B942109FF48007DCB84 /* RequestBLProvideDocuments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBLProvideDocuments.swift; sourceTree = "<group>"; };
 		FC5D3C6B20FE17F600F89169 /* config.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.yml; sourceTree = "<group>"; };
 		FC5D3C6D20FE1CEB00F89169 /* Gemfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Gemfile; sourceTree = "<group>"; };
+		FC5DF8B8228AAC6D004B014D /* NameLogicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameLogicTests.swift; sourceTree = "<group>"; };
+		FC5DF8BA228AF25A004B014D /* NameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameLogic.swift; sourceTree = "<group>"; };
 		FC5F3D4D20D938E90002F41B /* F4SUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserService.swift; sourceTree = "<group>"; };
 		FC5F3D4F20D93C070002F41B /* F4SUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserModel.swift; sourceTree = "<group>"; };
 		FC62FF9720EF75FE003E52C5 /* F4SApiUrls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SApiUrls.swift; sourceTree = "<group>"; };
@@ -1658,6 +1662,7 @@
 				FCEF43D722870F410055B5F7 /* AgeLogic.swift */,
 				FCEF43D922870F490055B5F7 /* DateOfBirthPickerViewModel.swift */,
 				FCEF43DB22870F520055B5F7 /* InformationLabelStrings.swift */,
+				FC5DF8BA228AF25A004B014D /* NameLogic.swift */,
 			);
 			path = "Capture user details";
 			sourceTree = "<group>";
@@ -2324,6 +2329,7 @@
 				FC39F46121AAA64B005B0A07 /* MessagesModelTests.swift */,
 				FC0B4083226CB1F300D992AC /* RecommendedCompaniesMergerTests.swift */,
 				FC0B4085226CC06200D992AC /* RecommendationEquatableTests.swift */,
+				FC5DF8B8228AAC6D004B014D /* NameLogicTests.swift */,
 			);
 			path = "Workfinder main module tests";
 			sourceTree = "<group>";
@@ -2691,6 +2697,7 @@
 				40E78EA01DD5E208000A3776 /* LocationHelper.swift in Sources */,
 				40C1A5231DDF5ACE000F80AA /* POIItem.m in Sources */,
 				FCC1D4F8219985A0007DD2DB /* F4SPostDocumentDataViewController.swift in Sources */,
+				FC5DF8BB228AF25A004B014D /* NameLogic.swift in Sources */,
 				FCB46F042051365400F0779F /* F4SFeatureSwitchesViewController.swift in Sources */,
 				FCC212EE219077C000D8D5B7 /* F4SMultiPageDocument.swift in Sources */,
 				FC0B4082226CAB4E00D992AC /* RecommendationsMerger.swift in Sources */,
@@ -2883,6 +2890,7 @@
 				FCFBD01D2250DA3E00A9361D /* MockCoordinators.swift in Sources */,
 				FCFBD02B2250DC2700A9361D /* PersonViewDataTests.swift in Sources */,
 				FCFBD0092250D69700A9361D /* f4s_workexperienceTests.swift in Sources */,
+				FC5DF8B9228AAC6D004B014D /* NameLogicTests.swift in Sources */,
 				FCFBD01B2250DA1800A9361D /* MockDatabaseDownload.swift in Sources */,
 				FCFBD0192250D9FF00A9361D /* AppCoordinatorTests.swift in Sources */,
 			);
