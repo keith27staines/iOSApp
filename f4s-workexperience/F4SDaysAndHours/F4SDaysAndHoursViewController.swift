@@ -93,7 +93,7 @@ class F4SDaysAndHoursViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         if F4SHelpContext.daysAndHoursViewController.shouldShowAutomatically {
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+1.0) { [weak self] in
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
                 self?.mainInfoTapped()
             }
         }

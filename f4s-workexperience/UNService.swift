@@ -21,27 +21,19 @@ class UNService : NSObject {
     let center = UNUserNotificationCenter.current()
     
     func authorize() {
-        center.requestAuthorization(options: [.alert,.badge, .sound]) { [weak self] (success, error) in
-            guard let this = self else { return }
-            if let error = error {
-                globalLog.error(error)
+        center.getNotificationSettings { [weak self] (settings) in
+            guard let center = self?.center else { return }
+            switch settings.authorizationStatus {
+            case .notDetermined:
+                center.requestAuthorization(options: [.alert,.badge, .sound]) {_,_ in }
+            case .denied:
+                let settings = URL(string: UIApplication.openSettingsURLString)!
+                UIApplication.shared.open(settings, options: [:], completionHandler: nil)
+            case .authorized, .provisional:
+                break
             }
-            this.userDefaults.setValue(!success, forKey: this.didDeclineKey)
         }
-    }
-    
-    private var userDefaults: UserDefaults { return UserDefaults.standard }
-    
-    var userHasNotAgreedToNotifications: Bool {
-        return userHasNotBeenAskedToAllowNotifications || userDidDeclineNotifications
-    }
-    
-    var userHasNotBeenAskedToAllowNotifications: Bool {
-        return nil == userDefaults.value(forKey: didDeclineKey)
-    }
-    
-    var userDidDeclineNotifications: Bool {
-        return userDefaults.value(forKey: didDeclineKey) as? Bool ?? false
+
     }
     
     func getNotificationSettings(completion: @escaping (UNNotificationSettings) -> Void) {

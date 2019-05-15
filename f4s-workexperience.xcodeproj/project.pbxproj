@@ -47,7 +47,6 @@
 		20D51BE41E27710C003A8358 /* UNService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D51BE31E27710C003A8358 /* UNService.swift */; };
 		20FABFEC1DDDA63600D583E2 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FABFEB1DDDA63600D583E2 /* FileHelper.swift */; };
 		20FEBDDA1DE5AD3400EBDCBF /* F4SImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FEBDD91DE5AD3400EBDCBF /* F4SImageService.swift */; };
-		401634C81E0A9F73000161FA /* NotificationView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 401634C61E0A9F73000161FA /* NotificationView.storyboard */; };
 		405974081DFD449C0002DB3A /* ExtraInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405974071DFD449C0002DB3A /* ExtraInfoViewController.swift */; };
 		4059740A1E00115C0002DB3A /* NextResponderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405974091E00115B0002DB3A /* NextResponderTextField.swift */; };
 		40A28CB21E1D1D200077D490 /* TimelineEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A28CB11E1D1D200077D490 /* TimelineEntryTableViewCell.swift */; };
@@ -163,7 +162,6 @@
 		FC24D238226AEDD800FA04A1 /* RecommendationsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC24D237226AEDD800FA04A1 /* RecommendationsListViewModel.swift */; };
 		FC24D23A226AF2BF00FA04A1 /* RecommendationsListMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC24D239226AF2BF00FA04A1 /* RecommendationsListMainView.swift */; };
 		FC24D23D226AFC1800FA04A1 /* RecommendedCompaniesListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC24D23C226AFC1800FA04A1 /* RecommendedCompaniesListModel.swift */; };
-		FC24D252226B0C7B00FA04A1 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC24D251226B0C7B00FA04A1 /* NotificationViewController.swift */; };
 		FC25A05F1F850DF4002F51A9 /* F4SCompanyPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */; };
 		FC2D975C2218603E00763B06 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2D975B2218603E00763B06 /* Router.swift */; };
 		FC2D975F221860E900763B06 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2D975E221860E900763B06 /* NavigationRouter.swift */; };
@@ -176,6 +174,7 @@
 		FC39F45F21AAA618005B0A07 /* MessageViewController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC39F45821AAA617005B0A07 /* MessageViewController+UITableView.swift */; };
 		FC39F46021AAA618005B0A07 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC39F45921AAA617005B0A07 /* MessageViewController.swift */; };
 		FC3CD1DA221566F200F91B50 /* Geocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CD1D9221566F200F91B50 /* Geocoding.swift */; };
+		FC3FFA85228C2D5300408AB2 /* PushNotificationAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3FFA84228C2D5300408AB2 /* PushNotificationAuthorization.swift */; };
 		FC40921E2101CDFF00453A54 /* EnterVoucherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC40921D2101CDFF00453A54 /* EnterVoucherViewController.swift */; };
 		FC4BB6031FA20EF700173864 /* PartnerSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BB6021FA20EF700173864 /* PartnerSelectionViewController.swift */; };
 		FC4BB6051FA20F4100173864 /* F4SPartner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BB6041FA20F4100173864 /* F4SPartner.swift */; };
@@ -445,7 +444,6 @@
 		20D51BE31E27710C003A8358 /* UNService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNService.swift; sourceTree = "<group>"; };
 		20FABFEB1DDDA63600D583E2 /* FileHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		20FEBDD91DE5AD3400EBDCBF /* F4SImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SImageService.swift; sourceTree = "<group>"; };
-		401634C71E0A9F73000161FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/NotificationView.storyboard; sourceTree = "<group>"; };
 		405974071DFD449C0002DB3A /* ExtraInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtraInfoViewController.swift; sourceTree = "<group>"; };
 		405974091E00115B0002DB3A /* NextResponderTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextResponderTextField.swift; sourceTree = "<group>"; };
 		40A28CB11E1D1D200077D490 /* TimelineEntryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineEntryTableViewCell.swift; sourceTree = "<group>"; };
@@ -601,7 +599,6 @@
 		FC24D237226AEDD800FA04A1 /* RecommendationsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsListViewModel.swift; sourceTree = "<group>"; };
 		FC24D239226AF2BF00FA04A1 /* RecommendationsListMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsListMainView.swift; sourceTree = "<group>"; };
 		FC24D23C226AFC1800FA04A1 /* RecommendedCompaniesListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCompaniesListModel.swift; sourceTree = "<group>"; };
-		FC24D251226B0C7B00FA04A1 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyPin.swift; sourceTree = "<group>"; };
 		FC2D975B2218603E00763B06 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		FC2D975E221860E900763B06 /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
@@ -618,6 +615,7 @@
 		FC39F46221AAA64B005B0A07 /* MessageProtocolTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageProtocolTests.swift; sourceTree = "<group>"; };
 		FC3CD1D9221566F200F91B50 /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
 		FC3F391E222930940046F8F8 /* MockUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserService.swift; sourceTree = "<group>"; };
+		FC3FFA84228C2D5300408AB2 /* PushNotificationAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationAuthorization.swift; sourceTree = "<group>"; };
 		FC40921D2101CDFF00453A54 /* EnterVoucherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterVoucherViewController.swift; sourceTree = "<group>"; };
 		FC4336CB202DB999001D0569 /* F4SStringExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SStringExtensionTests.swift; sourceTree = "<group>"; };
 		FC4BB6021FA20EF700173864 /* PartnerSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerSelectionViewController.swift; sourceTree = "<group>"; };
@@ -1594,7 +1592,6 @@
 				FC9626402248C27D00D5F850 /* ApplyCoordinator.swift */,
 				FC24D24B226B085900FA04A1 /* Build cover letter */,
 				FC24D24D226B092A00FA04A1 /* Half-way-hooray */,
-				FC24D24F226B0B3D00FA04A1 /* Request permission for push notifications */,
 				FC24D250226B0BA500FA04A1 /* Capture user details */,
 				FCD3485620038B6B00DC1316 /* Validate user email */,
 				FC0B406A226B0E6A00D992AC /* Success Hooray */,
@@ -1644,15 +1641,6 @@
 			path = "Cover letter choices";
 			sourceTree = "<group>";
 		};
-		FC24D24F226B0B3D00FA04A1 /* Request permission for push notifications */ = {
-			isa = PBXGroup;
-			children = (
-				401634C61E0A9F73000161FA /* NotificationView.storyboard */,
-				FC24D251226B0C7B00FA04A1 /* NotificationViewController.swift */,
-			);
-			path = "Request permission for push notifications";
-			sourceTree = "<group>";
-		};
 		FC24D250226B0BA500FA04A1 /* Capture user details */ = {
 			isa = PBXGroup;
 			children = (
@@ -1663,6 +1651,7 @@
 				FCEF43D922870F490055B5F7 /* DateOfBirthPickerViewModel.swift */,
 				FCEF43DB22870F520055B5F7 /* InformationLabelStrings.swift */,
 				FC5DF8BA228AF25A004B014D /* NameLogic.swift */,
+				FC3FFA84228C2D5300408AB2 /* PushNotificationAuthorization.swift */,
 			);
 			path = "Capture user details";
 			sourceTree = "<group>";
@@ -2459,7 +2448,6 @@
 				FC73719B2101C7EF00C0032A /* AcceptOffer.xcassets in Resources */,
 				D5E9EBE81DD60AB300BD796E /* Localizable.strings in Resources */,
 				FCB6D9361F75056100B8C268 /* Branding.plist in Resources */,
-				401634C81E0A9F73000161FA /* NotificationView.storyboard in Resources */,
 				40E78E211DD31A86000A3776 /* LaunchScreen.storyboard in Resources */,
 				40A28CB71E1F96A60077D490 /* RatePlacement.storyboard in Resources */,
 				FC4BB6091FA21BA400173864 /* SelectPartner.storyboard in Resources */,
@@ -2759,7 +2747,6 @@
 				FCB3617B224D44610056E0B6 /* ChooseAttributesViewModel.swift in Sources */,
 				FC1DC09121FE1509009ABC60 /* PersonCollectionViewCell.swift in Sources */,
 				FC1E6A4D2217474500DC335B /* OnboardingCoordinator.swift in Sources */,
-				FC24D252226B0C7B00FA04A1 /* NotificationViewController.swift in Sources */,
 				FC1DC09821FE1509009ABC60 /* CompanyMainView.swift in Sources */,
 				2037B0AD1DEC560700A9DE3E /* PlacementCoreDataManager.swift in Sources */,
 				2037B0A91DEC3D3400A9DE3E /* InterestDBOperations.swift in Sources */,
@@ -2842,6 +2829,7 @@
 				FCB6B8E32074C59C0042C725 /* F4SMonthHeaderView.swift in Sources */,
 				FC67E60A207B70CE006F07FE /* F4SCalendarService.swift in Sources */,
 				FCE20CC1203C12F300CA821D /* F4SDocumentUploadWhileApplyingModel.swift in Sources */,
+				FC3FFA85228C2D5300408AB2 /* PushNotificationAuthorization.swift in Sources */,
 				FC860D82209C37F2007945E6 /* MessageDispatcher.swift in Sources */,
 				40E78E581DD32964000A3776 /* Constants.swift in Sources */,
 				FCE51E44221039D600DC1D50 /* PersonSearchDataGetter.swift in Sources */,
@@ -2969,14 +2957,6 @@
 				206F8F961E1E590A0024937B /* Base */,
 			);
 			name = MessageOptionsView.xib;
-			sourceTree = "<group>";
-		};
-		401634C61E0A9F73000161FA /* NotificationView.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				401634C71E0A9F73000161FA /* Base */,
-			);
-			name = NotificationView.storyboard;
 			sourceTree = "<group>";
 		};
 		40A28CB51E1F96A60077D490 /* RatePlacement.storyboard */ = {

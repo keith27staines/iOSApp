@@ -41,7 +41,7 @@ class ExtraInfoViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     
-    var applicationContext: F4SApplicationContext?
+    var applicationContext: F4SApplicationContext!
     var datePicker = UIDatePicker()
     var voucherVerificationService: F4SVoucherVerificationServiceProtocol?
     var userRepository: F4SUserRepositoryProtocol?
@@ -124,11 +124,21 @@ class ExtraInfoViewController: UIViewController {
         updateVisualState()
     }
     
+    var alertFactory = RequestPushNotificationsAlertFactory()
+    
     @IBAction func completeInfoButtonTouched(_: UIButton) {
         self.view.endEditing(true)
         saveUserDetailsLocally()
-        guard let applicationContext = applicationContext else { return }
-        verifyVoucher(applicationContext: applicationContext)
+        alertFactory.afterAction = { [weak self] in self?.verifyVoucher() }
+        alertFactory.makeAlertViewControllerIfNecessary { [weak self] (controller) in
+            DispatchQueue.main.async {
+                guard let controller = controller else {
+                    self?.verifyVoucher()
+                    return
+                }
+                self?.present(controller, animated: true, completion: nil)
+            }
+        }
     }
     
     deinit { NotificationCenter.default.removeObserver(self) }
@@ -324,9 +334,9 @@ extension ExtraInfoViewController {
         coordinator?.presentContentViewController(navCtrl: self.navigationController!, contentType: .voucher)
     }
     
-    func verifyVoucher(applicationContext: F4SApplicationContext) {
+    func verifyVoucher() {
         guard let voucherCode = voucherCodeTextField.text, voucherCode.isEmpty == false  else {
-            afterVoucherValidation(applicationContext: applicationContext)
+            afterVoucherValidation()
             return
         }
         if voucherVerificationService == nil {
@@ -342,7 +352,7 @@ extension ExtraInfoViewController {
                 case .error(let error):
                     if error.retry {
                         strongSelf.handleRetryForNetworkError(error, retry: {
-                            strongSelf.verifyVoucher(applicationContext: applicationContext)
+                            strongSelf.verifyVoucher()
                         })
                     } else {
                         let reason = NSLocalizedString("Please check your voucher code has been entered correctly", comment: "")
@@ -350,7 +360,7 @@ extension ExtraInfoViewController {
                     }
                 case .success(let voucherVerification):
                     if voucherVerification.status == "issued" {
-                        strongSelf.afterVoucherValidation(applicationContext: applicationContext)
+                        strongSelf.afterVoucherValidation()
                     } else {
                         let reason = voucherVerification.errors?.status ?? NSLocalizedString("Please check your voucher code has been entered correctly", comment: "")
                         strongSelf.presentInvalidVoucherAlert(reason: reason)
@@ -361,15 +371,11 @@ extension ExtraInfoViewController {
         })
     }
     
-    func afterVoucherValidation(applicationContext: F4SApplicationContext) {
-        getPartnersFromServer(applicationContext: applicationContext)
+    func afterVoucherValidation() {
+        getPartnersFromServer()
     }
     
-    func afterVoucherUpdate(applicationContext: F4SApplicationContext) {
-        getPartnersFromServer(applicationContext: applicationContext)
-    }
-    
-    func getPartnersFromServer(applicationContext: F4SApplicationContext) {
+    func getPartnersFromServer() {
         showLoadingOverlay()
         F4SPartnersModel.sharedInstance.getPartnersFromServer { [weak self] (result) in
             guard let strongSelf = self else { return }
@@ -379,27 +385,27 @@ extension ExtraInfoViewController {
                 case .error(let error):
                     if error.retry {
                         strongSelf.handleRetryForNetworkError(error, retry: {
-                            strongSelf.getPartnersFromServer(applicationContext: applicationContext)
+                            strongSelf.getPartnersFromServer()
                         })
                     }
                 case .success(_):
-                    strongSelf.afterGetPartners(applicationContext: applicationContext)
+                    strongSelf.afterGetPartners()
                 }
             }
         }
     }
     
-    func afterGetPartners(applicationContext: F4SApplicationContext) {
-        verifyEmail(applicationContext: applicationContext)
+    func afterGetPartners() {
+        verifyEmail()
     }
     
-    func verifyEmail(applicationContext: F4SApplicationContext) {
+    func verifyEmail() {
         let emailController = self.emailController
         let emailModel = emailController.model
         let user = applicationContext.user!
         
         if emailModel.isEmailAddressVerified(email: user.email) {
-            afterEmailVerfied(applicationContext: applicationContext)
+            afterEmailVerfied()
         } else {
             emailController.emailToVerify = user.email
             emailController.model.restart()
@@ -408,18 +414,18 @@ extension ExtraInfoViewController {
                 DispatchQueue.main.async {
                     strongSelf.emailTextField.text = emailController.model.verifiedEmail
                     _ = strongSelf.saveUserDetailsLocally()
-                    strongSelf.afterEmailVerfied(applicationContext: applicationContext)
+                    strongSelf.afterEmailVerfied()
                 }
             }
             self.navigationController!.pushViewController(emailController, animated: true)
         }
     }
     
-    func afterEmailVerfied(applicationContext: F4SApplicationContext) {
-        performDocumentUpload(applicationContext: applicationContext)
+    func afterEmailVerfied() {
+        performDocumentUpload()
     }
     
-    func performDocumentUpload(applicationContext: F4SApplicationContext) {
+    func performDocumentUpload() {
         let uploadController = f4sDocumentUploadController
         uploadController.applicationContext = self.applicationContext
         uploadController.mode = .applyWorkflow
