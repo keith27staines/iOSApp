@@ -33,7 +33,6 @@ class UNService : NSObject {
                 break
             }
         }
-
     }
     
     func getNotificationSettings(completion: @escaping (UNNotificationSettings) -> Void) {
@@ -42,30 +41,18 @@ class UNService : NSObject {
         }
     }
     
-    func alertUserNotificationReceived(userInfo: [AnyHashable: Any]) {
+    func alertUserNotificationReceived(notificationData: F4SPushNotificationData) {
         guard let rootViewCtrl = UIApplication.shared.delegate?.window??.rootViewController else {
             globalLog.debug("Can't handle notification because there is no root view controller")
             return
         }
-        guard let type = extractNotificationType(userInfo: userInfo) else { return }
-        var title: String = ""
-        var body: String = ""
-        (title,body) = extractTitleAndBody(userInfo: userInfo)
         
-        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.cancel, handler: nil)
+        let title: String = notificationData.alertTitle
+        let body: String = notificationData.alertBody
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
         let viewAction: UIAlertAction
-        switch type {
-        case .message:
-            title = NSLocalizedString("You have a new message", comment: "")
-            viewAction = UIAlertAction(title: "View", style: UIAlertAction.Style.default, handler: { (_) in
-                TabBarCoordinator.sharedInstance.navigateToTimeline(threadUuid: nil)
-            })
-        case .recommendation:
-            title = NSLocalizedString("We have new recommendations for you", comment: "")
-            viewAction = UIAlertAction(title: "View", style: UIAlertAction.Style.default, handler: { (_) in
-                TabBarCoordinator.sharedInstance.navigateToRecommendations()
-            })
-        case .rating: return
+        viewAction = UIAlertAction(title: NSLocalizedString("View", comment: ""), style: .default) { [weak self] (action) in
+            self?.dispatchToBestDestination(notificationData: notificationData)
         }
         let alertController = UIAlertController(title: title, message: body, preferredStyle: .alert)
         alertController.addAction(cancelAction)
@@ -83,56 +70,55 @@ class UNService : NSObject {
         globalLog.debug("Handling remote notification with user info...")
         globalLog.debug(userInfo)
         updateBadgeNumbers()  // Always take the chance to do this in response to any notification
-
+        guard let notificationData = F4SPushNotificationData(userInfo: userInfo) else { return }
         let state = UIApplication.shared.applicationState
         if state == .background  || state == .inactive{
             globalLog.debug("navigating to best destination for notification")
-            dispatchToBestDestination(userInfo: userInfo)
+            dispatchToBestDestination(notificationData: notificationData)
         }else if state == .active {
             globalLog.debug("Push notification cannot be processed because the app is active")
-            alertUserNotificationReceived(userInfo: userInfo)
+            alertUserNotificationReceived(notificationData: notificationData)
         }
     }
     
-    func dispatchToBestDestination(userInfo: [AnyHashable: Any]) {
-        
-        guard let type = extractNotificationType(userInfo: userInfo) else { return }
-        
-        switch type {
+    func dispatchToBestDestination(notificationData: F4SPushNotificationData) {
+        switch notificationData.type {
         case NotificationType.message:
-            globalLog.debug("Responding to message push notification by navigating to Timeline")
-            if let threadUuid = userInfo["thread_uuid"] as? String {
-                TabBarCoordinator.sharedInstance.navigateToTimeline(threadUuid: threadUuid)
-            }
+            TabBarCoordinator.sharedInstance.navigateToTimeline(threadUuid: notificationData.threadUuid)
             
         case NotificationType.rating:
-            globalLog.debug("Responding to rating push notification by presenting rating controller")
-            guard
-                let topViewCtrl = TabBarCoordinator.sharedInstance.topMostViewController(),
-                let placementUuid = userInfo["placement_uuid"] as? String
-                else { return }
-            TabBarCoordinator.sharedInstance.presentRatePlacementPopover(parentCtrl: topViewCtrl, placementUuid: placementUuid)
+            break
             
         case NotificationType.recommendation:
-            globalLog.debug("Responding to recommendation push notification by navigating to Recommendations page")
-            TabBarCoordinator.sharedInstance.rewindAndNavigateToRecommendations(from: nil, show: nil)
+            TabBarCoordinator.sharedInstance.navigateToRecommendations()
         }
+    }
+}
+
+struct F4SPushNotificationData {
+    var alertTitle: String
+    var alertBody: String
+    var type: NotificationType
+    var threadUuid: F4SUUID?
+    
+    init?(userInfo: [AnyHashable:Any]) {
+        guard
+            let aps = userInfo["aps"] as? [AnyHashable: Any],
+            let alert = aps["alert"] as? [AnyHashable: Any],
+            let typeString = userInfo["type"] as? String,
+            let type = NotificationType(rawValue: typeString) else { return nil }
+        self.alertTitle = (alert["title"] as? String) ?? ""
+        self.alertBody = (alert["body"] as? String) ?? ""
+        self.type = type
+        self.threadUuid = userInfo["thread_uuid"] as? F4SUUID
     }
     
     func extractNotificationType(userInfo:[AnyHashable: Any]) -> NotificationType? {
         guard let typeString = userInfo["type"] as? String,
-        let notificationType = NotificationType(rawValue: typeString) else { return nil }
+            let notificationType = NotificationType(rawValue: typeString) else { return nil }
         return notificationType
     }
     
-    func extractTitleAndBody(userInfo:[AnyHashable: Any]) -> (title:String, body:String) {
-        guard
-            let aps = userInfo["aps"] as? [AnyHashable: Any],
-            let alert = aps["alert"] as? [AnyHashable: Any] else { return ("", "") }
-        let title = (alert["title"] as? String) ?? ""
-        let body = (alert["body"] as? String) ?? ""
-        return (title, body)
-    }
 }
 
 extension UNService : UNUserNotificationCenterDelegate {
