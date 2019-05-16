@@ -43,26 +43,33 @@ class UNService : NSObject {
     }
     
     func alertUserNotificationReceived(userInfo: [AnyHashable: Any]) {
-        guard
-            let window = UIApplication.shared.delegate?.window,
-            let rootViewCtrl = window?.rootViewController
-        else {
-            globalLog.debug("Can't handle notification because there is no window or no root view controller")
+        guard let rootViewCtrl = UIApplication.shared.delegate?.window??.rootViewController else {
+            globalLog.debug("Can't handle notification because there is no root view controller")
             return
         }
+        guard let type = extractNotificationType(userInfo: userInfo) else { return }
+        var title: String = ""
+        var body: String = ""
+        (title,body) = extractTitleAndBody(userInfo: userInfo)
         
-        guard
-            let aps = userInfo["aps"] as? [AnyHashable: Any],
-            let alert = aps["alert"] as? [AnyHashable: Any]
-        else { return }
-        
-        let title: String = (alert["title"] as? String) ?? ""
-        let body: String = (alert["body"] as? String) ?? ""
-
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.cancel, handler: nil)
+        let viewAction: UIAlertAction
+        switch type {
+        case .message:
+            title = NSLocalizedString("You have a new message", comment: "")
+            viewAction = UIAlertAction(title: "View", style: UIAlertAction.Style.default, handler: { (_) in
+                TabBarCoordinator.sharedInstance.navigateToTimeline(threadUuid: nil)
+            })
+        case .recommendation:
+            title = NSLocalizedString("We have new recommendations for you", comment: "")
+            viewAction = UIAlertAction(title: "View", style: UIAlertAction.Style.default, handler: { (_) in
+                TabBarCoordinator.sharedInstance.navigateToRecommendations()
+            })
+        case .rating: return
+        }
         let alertController = UIAlertController(title: title, message: body, preferredStyle: .alert)
-        let ok = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default)
-        alertController.addAction(ok)
-        
+        alertController.addAction(cancelAction)
+        alertController.addAction(viewAction)
         let presenter = rootViewCtrl.topMostViewController ?? rootViewCtrl
         presenter.present(alertController, animated: true) {}
     }
@@ -105,6 +112,7 @@ class UNService : NSObject {
                 let placementUuid = userInfo["placement_uuid"] as? String
                 else { return }
             TabBarCoordinator.sharedInstance.presentRatePlacementPopover(parentCtrl: topViewCtrl, placementUuid: placementUuid)
+            
         case NotificationType.recommendation:
             globalLog.debug("Responding to recommendation push notification by navigating to Recommendations page")
             TabBarCoordinator.sharedInstance.rewindAndNavigateToRecommendations(from: nil, show: nil)
@@ -116,22 +124,33 @@ class UNService : NSObject {
         let notificationType = NotificationType(rawValue: typeString) else { return nil }
         return notificationType
     }
+    
+    func extractTitleAndBody(userInfo:[AnyHashable: Any]) -> (title:String, body:String) {
+        guard
+            let aps = userInfo["aps"] as? [AnyHashable: Any],
+            let alert = aps["alert"] as? [AnyHashable: Any] else { return ("", "") }
+        let title = (alert["title"] as? String) ?? ""
+        let body = (alert["body"] as? String) ?? ""
+        return (title, body)
+    }
 }
 
 extension UNService : UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter, openSettingsFor notification: UNNotification?) {
-        
-    }
+
+    // This method is called when:
+    // 1. The application was not previously running but has been instantiated by the user tapping a notification
+    // 2. The application was running in the background and the user tapped a notification
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
         handleRemoteNotification(userInfo: userInfo)
         completionHandler()
     }
+    
+    // This method is called when the app is in the foreground
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
-        print("Notification received while in foreground with serInfo \n\(userInfo)")
-        let settings: UNNotificationPresentationOptions = .badge
-        updateBadgeNumbers()
-        completionHandler(settings)
+        globalLog.debug("Notification received while in foreground with serInfo \n\(userInfo)")
+        handleRemoteNotification(userInfo: userInfo)
+        completionHandler([.badge, .sound])
     }
 }
