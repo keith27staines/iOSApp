@@ -124,13 +124,13 @@ class ExtraInfoViewController: UIViewController {
         updateVisualState()
     }
     
-    var alertFactory = RequestPushNotificationsAlertFactory()
+    var pushNotificationAlertFactory = RequestPushNotificationsAlertFactory()
     
     @IBAction func completeInfoButtonTouched(_: UIButton) {
         self.view.endEditing(true)
         saveUserDetailsLocally()
-        alertFactory.afterAction = { [weak self] in self?.verifyVoucher() }
-        alertFactory.makeAlertViewControllerIfNecessary { [weak self] (controller) in
+        pushNotificationAlertFactory.afterAction = { [weak self] in self?.verifyVoucher() }
+        pushNotificationAlertFactory.makeAlertViewControllerIfNecessary { [weak self] (controller) in
             DispatchQueue.main.async {
                 guard let controller = controller else {
                     self?.verifyVoucher()

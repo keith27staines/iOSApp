@@ -68,9 +68,9 @@ public class RequestPushNotificationsAlertFactory {
     }
     
     private func makeAlert(title: String, message: String, mainAction: UIAlertAction) -> UIAlertController {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
-        alert.addAction(mainAction)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(skipAction)
+        alert.addAction(mainAction)
         return alert
     }
     

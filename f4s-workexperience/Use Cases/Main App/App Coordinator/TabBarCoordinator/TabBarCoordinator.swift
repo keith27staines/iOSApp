@@ -348,22 +348,14 @@ class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoor
     }
 
     func presentSuccessExtraInfoPopover(parentCtrl: UIViewController) {
-        let popOverVC = UIStoryboard(name: "SuccessExtraInfo", bundle: nil).instantiateViewController(withIdentifier: "SuccessExtraInfoCtrl") as! SuccessExtraInfoViewController
-        parentCtrl.addChild(popOverVC)
-        popOverVC.backgroundPopoverView.frame = parentCtrl.view.frame
-        popOverVC.backgroundPopoverView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-        parentCtrl.view.addSubview(popOverVC.backgroundPopoverView)
-        let popoverNavigationController = UINavigationController(rootViewController: popOverVC)
-        popoverNavigationController.modalPresentationStyle = .popover
-        let popover = popoverNavigationController.popoverPresentationController
-        popover?.canOverlapSourceViewRect = true
-        popOverVC.navigationController?.isNavigationBarHidden = true
-        popOverVC.preferredContentSize = CGSize(width: popOverVC.view.frame.width - 40, height: popOverVC.getHeight())
-        popover?.sourceView = parentCtrl.view
-        popover?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
-        popover?.sourceRect = CGRect(x: parentCtrl.view.bounds.midX, y: parentCtrl.view.bounds.midY, width: 0, height: 0)
-        popover?.delegate = popOverVC as SuccessExtraInfoViewController
-        parentCtrl.present(popoverNavigationController, animated: true, completion: nil)
+        let successViewController = UIStoryboard(name: "SuccessExtraInfo", bundle: nil).instantiateViewController(withIdentifier: "SuccessExtraInfoCtrl") as! SuccessExtraInfoViewController
+        parentCtrl.navigationController?.navigationBar.isHidden = true
+        parentCtrl.addChild(successViewController)
+        successViewController.view.frame = parentCtrl.view.frame
+        successViewController.view.backgroundColor = UIColor.init(white: 0, alpha: 0.8)
+        parentCtrl.view.addSubview(successViewController.view)
+        successViewController.didMove(toParent: parentCtrl)
+        successViewController.view.fillSuperview()
     }
     
     func pushEmailVerification(navigCtrl: UINavigationController, applicationContext: F4SApplicationContext) {
