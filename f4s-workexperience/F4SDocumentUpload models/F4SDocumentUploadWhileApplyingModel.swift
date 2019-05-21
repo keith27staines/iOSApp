@@ -80,9 +80,6 @@ public class F4SDocument : Codable {
     public var name: String?
     public var data: Data? = nil
     
-    public var includeInApplication: Bool = false
-    public var isExpanded: Bool = false
-    
     public var hasValidRemoteUrl: Bool {
         guard let remoteUrl = self.remoteUrl else {
             return false
@@ -118,20 +115,14 @@ public class F4SDocument : Codable {
     /// - parameter urlString: The absolute string representation of the url where the document is permantently stored
     /// - parameter type: Describes the type of document
     /// - parameter name: The name of the document if it has one
-    /// - parameter includeInApplication: Specifies whether to include this document in the current application
-    /// - paraemter isExpanded: For use by the UI
     public init(uuid: F4SUUID? = nil,
                 urlString: String? = nil,
                 type: F4SUploadableDocumentType = .other,
-                name: String? = nil,
-                includeInApplication: Bool = false,
-                isExpanded: Bool = false) {
+                name: String? = nil) {
         self.uuid = uuid
         self.remoteUrlString = urlString
         self.type = type
         self.name = name ?? type.name
-        self.isExpanded = isExpanded
-        self.includeInApplication = includeInApplication
         self.data = nil
     }
 }
@@ -155,7 +146,9 @@ public protocol F4SDocumentUploadModelDelegate {
 }
 
 public class F4SDocumentUploadModelBase {
-    public fileprivate (set) var documentService: F4SPlacementDocumentsService?
+    public fileprivate (set) var placementDocumentService: F4SPlacementDocumentsService?
+    public fileprivate (set) var userDocumentService: F4SPlacementDocumentServiceProtocol? // F4SUserDocumentsServiceProtocol?
+    
     public var maximumDocumentCount : Int { return 2 }
     
     fileprivate var delegate: F4SDocumentUploadModelDelegate?
@@ -191,7 +184,7 @@ public class F4SDocumentUploadModelBase {
             return document.hasValidRemoteUrl
         }
         let putJson = F4SPutDocumentsJson(documents: documentsWithRemoteUrl)
-        documentService?.putDocumentsForPlacement(documents: putJson, completion: { (result) in
+        placementDocumentService?.putDocuments(documents: putJson, completion: { (result) in
             switch result {
             case .success(_):
                 completion(true)
@@ -234,14 +227,16 @@ public class F4SDocumentUploadModelBase {
     
     public init(delegate: F4SDocumentUploadModelDelegate, documentService: F4SPlacementDocumentsService) {
         self.delegate = delegate
-        self.documentService = documentService
+        self.placementDocumentService = documentService
+        self.userDocumentService = documentService //F4SUserDocumentsService()
         self.documents = []
     }
     
     public init(delegate: F4SDocumentUploadModelDelegate, placementUuid: F4SUUID) {
         let documentService = F4SPlacementDocumentsService(placementUuid: placementUuid)
         self.delegate = delegate
-        self.documentService = documentService
+        self.placementDocumentService = documentService
+        self.userDocumentService = documentService //F4SUserDocumentsService()
         self.documents = []
     }
     
@@ -284,7 +279,7 @@ public class F4SDocumentUploadWhileApplyingModel : F4SDocumentUploadModelBase {
     
     override public func fetchDocumentsForPlacement() {
         self.documents = []
-        self.documentService?.getDocumentsForPlacement(completion: documentsFetched)
+        self.userDocumentService?.getDocuments(completion: documentsFetched)
     }
     
     private func documentsFetched(networkResult: F4SNetworkResult<F4SGetDocumentJson>) {

@@ -122,7 +122,7 @@ class PostDocumentsWithDataViewController : UIViewController {
             delegate?.postDocumentsControllerDidCompleteUpload(self)
             return
         }
-        guard let placementUuid = documentModel?.documentService?.placementUuid,
+        guard let placementUuid = documentModel?.placementDocumentService?.placementUuid,
             let uploader = F4SDocumentUploader(document: document, placementUuid: placementUuid)
             else { return }
         updateUploadCount()

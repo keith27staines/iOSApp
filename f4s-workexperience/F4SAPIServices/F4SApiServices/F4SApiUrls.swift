@@ -9,7 +9,7 @@
 import Foundation
 
 public struct ApiConstants {
-    public static let apiKey: String =  "eTo0oeh4Yeen1oy7iDuv" // "eTo0oeh4Yeen1oy7iDuv" // "RxTsNHJgG9YxIY06GLD303onIgYyfG7MtlVi3nZKnC4"
+    public static let apiKey: String =  "eTo0oeh4Yeen1oy7iDuv"
     public static let base: String = Config.BASE
     public static let baseUrl: String = Config.BASE_URL
     public static let baseUrl2: String = Config.BASE_URL2
@@ -24,7 +24,7 @@ public struct ApiConstants {
     
     // User
     public static let registerVendorId: String = "\(baseUrl2)/register"
-    public static let registerPushNotifictionToken: String = "\(baseUrl)/device"
+    public static let registerPushNotifictionToken: String = "\(baseUrl2)/register"
     public static let updateUserProfileUrl: String = "\(baseUrl)/user/"
     
     // Placement
