@@ -11,8 +11,19 @@ import WorkfinderCommon
 @testable import f4s_workexperience
 
 class MockUserService: F4SUserServiceProtocol {
+    func registerDeviceWithServer(installationUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRegisterResult>) -> ()) {
+        registerDeviceOnServerCalled += 1
+        let result: F4SNetworkResult<F4SRegisterResult>
+        if registerDeviceOnServerCalled == registeringWillSucceedOnAttempt {
+            result = F4SNetworkResult.success(successRegisterResult)
+        } else {
+            result = F4SNetworkResult.error(error)
+        }
+        completion(result)
+    }
     
-    var registerAnonymousUserOnServerCalled: Int = 0
+    
+    var registerDeviceOnServerCalled: Int = 0
     var registeringWillSucceedOnAttempt: Int = 0
     var successRegisterResult = F4SRegisterResult(uuid: UUID().uuidString, errors: nil)
     var errorResult = F4SRegisterResult(uuid: nil, errors: F4SJSONValue(integerLiteral: 999))
@@ -24,17 +35,6 @@ class MockUserService: F4SUserServiceProtocol {
     
     func enablePushNotificationForUser(installationUuid: F4SUUID, withDeviceToken: String, completion: @escaping (F4SNetworkResult<F4SPushNotificationStatus>) -> ()) {
         
-    }
-    
-    func registerAnonymousUserOnServer(installationUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRegisterResult>) -> ()) {
-        registerAnonymousUserOnServerCalled += 1
-        let result: F4SNetworkResult<F4SRegisterResult>
-        if registerAnonymousUserOnServerCalled == registeringWillSucceedOnAttempt {
-            result = F4SNetworkResult.success(successRegisterResult)
-        } else {
-            result = F4SNetworkResult.error(error)
-        }
-        completion(result)
     }
     
     func updateUser(user: F4SUser, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ()) {

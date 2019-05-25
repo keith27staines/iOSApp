@@ -9,8 +9,8 @@
 import Foundation
 
 public extension WEXErrorsFactory {
-    public static func networkErrorFrom(response: HTTPURLResponse, data: Data?, attempting: String) -> WEXNetworkError? {
-        return WEXNetworkError(response: response, data: data, attempting: attempting)
+    public static func networkErrorFrom(response: HTTPURLResponse, responseData: Data?, attempting: String) -> WEXNetworkError? {
+        return WEXNetworkError(response: response, responseData: responseData, attempting: attempting)
     }
     public static func networkErrorFrom(error: Error, attempting: String) -> WEXNetworkError {
         return WEXNetworkError(error: error, attempting: attempting)
@@ -61,15 +61,17 @@ public struct WEXNetworkError : WEXError {
     
     /// Initializes a new instance
     /// - parameter response: the http resonse this instance will wrap, unless the response code is a success in which case this initializer will fail
-    /// - parameter data: The data returned in the body of the failed request (if any)
+    /// - parameter responseData: The data returned in the body of the failed request (if any)
     /// - parameter attempting: A short description of the context of the error (this might just be the operation name or a higher level description of it)
-    init?(response: HTTPURLResponse, data: Data?, attempting: String) {
+    init?(response: HTTPURLResponse, responseData: Data?, attempting: String) {
         retry = false
         self.response = response
         httpStatusCode = response.statusCode
         switch response.statusCode {
         case 200...299:
             return nil // These are success codes
+        case 400:
+            localizedDescription = "Bad request"
         case 401:
             localizedDescription = "The user's credentials were not provided or are incorrect"
         case 403:
@@ -77,10 +79,13 @@ public struct WEXNetworkError : WEXError {
         case 404:
             localizedDescription = "The URL was not found"
         case 429:
-            localizedDescription = "The server refused this request because it has received too many requests from this client"
             retry = true
+            localizedDescription = "The server refused this request because it has received too many requests from this client"
         case 500:
             localizedDescription = "Server error"
+        case 503:
+            retry = true
+            localizedDescription = "Server unavailable"
         default:
             localizedDescription = "Unknown reason"
         }

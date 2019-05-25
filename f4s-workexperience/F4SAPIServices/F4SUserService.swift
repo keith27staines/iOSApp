@@ -10,7 +10,7 @@ import Foundation
 import WorkfinderCommon
 
 public protocol F4SUserServiceProtocol : class {
-    func registerAnonymousUserOnServer(installationUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRegisterResult>) -> ())
+    func registerDeviceWithServer(installationUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRegisterResult>) -> ())
     func updateUser(user: F4SUser, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ())
     func enablePushNotificationForUser(installationUuid: F4SUUID, withDeviceToken: String, completion: @escaping (_ result: F4SNetworkResult<F4SPushNotificationStatus>) -> ())
 }
@@ -59,7 +59,7 @@ public class F4SUserService : F4SUserServiceProtocol {
         }
     }
     
-    public func registerAnonymousUserOnServer(installationUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRegisterResult>) -> Void) {
+    public func registerDeviceWithServer(installationUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRegisterResult>) -> Void) {
         let attempting = "Register anonymous user on server"
         globalLog.debug("Attempting to: \(attempting)")
         let url = URL(string: ApiConstants.registerVendorId)!

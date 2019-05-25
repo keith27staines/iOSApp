@@ -114,7 +114,7 @@ public class WEXDataTask {
                 completionHandler?(result)
                 return
             }
-            let wexError = WEXErrorsFactory.networkErrorFrom(response: httpResponse, data: requestData, attempting: attempting)
+            let wexError = WEXErrorsFactory.networkErrorFrom(response: httpResponse, responseData: responseData, attempting: attempting)
             let result = WEXDataResult.failure(wexError!)
             completionHandler?(result)
             return

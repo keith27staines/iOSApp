@@ -104,7 +104,7 @@ class MockPlacementServiceFactory : WEXPlacementServiceFactoryProtocol {
     func makePlacementService() -> WEXPlacementServiceProtocol {
         let url = URL(string: "somewhere.com")!
         let httpResponse = HTTPURLResponse(url: url, statusCode: responseStatusCode, httpVersion: "1.0", headerFields: nil)!
-        if let error = WEXErrorsFactory.networkErrorFrom(response: httpResponse, data: nil, attempting: "test") {
+        if let error = WEXErrorsFactory.networkErrorFrom(response: httpResponse, responseData: nil, attempting: "test") {
             let result = WEXResult<WEXPlacementJson,WEXError>.failure(error)
             return MockWEXPlacementService(result: result)
         } else {

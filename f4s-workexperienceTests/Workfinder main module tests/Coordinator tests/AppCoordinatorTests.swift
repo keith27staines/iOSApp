@@ -57,7 +57,7 @@ class AppCoordinatorTests: XCTestCase {
         let sut = makeSUTAppCoordinator(router: mockRouter, injecting: injection)
         sut.start()
         mockOnboardingCoordinator.completeOnboarding()
-        assertOnboardingCompleteCompleteState(sut: sut, expectedRegisterUserCount: 1)
+        assertOnboardingCompleteCompleteState(sut: sut, expectedRegisterDeviceCount: 1)
     }
     
     func testStartWithRegisteredButNotOnboardedUser() {
@@ -66,7 +66,7 @@ class AppCoordinatorTests: XCTestCase {
         let sut = makeSUTAppCoordinator(router: mockRouter, injecting: injection)
         sut.start()
         mockOnboardingCoordinator.completeOnboarding()
-        assertOnboardingCompleteCompleteState(sut: sut, expectedRegisterUserCount: 0)
+        assertOnboardingCompleteCompleteState(sut: sut, expectedRegisterDeviceCount: 1)
     }
     
     func testStartWithRegisteredAndOnboardedUser() {
@@ -74,7 +74,7 @@ class AppCoordinatorTests: XCTestCase {
         injection.user = mockRegisteredUser
         let sut = makeSUTAppCoordinator(router: mockRouter, injecting: injection)
         sut.start()
-        assertOnboardingCompleteCompleteState(sut: sut, expectedRegisterUserCount: 0)
+        assertOnboardingCompleteCompleteState(sut: sut, expectedRegisterDeviceCount: 1)
     }
 }
 
@@ -103,14 +103,14 @@ extension AppCoordinatorTests {
     
     func assertOnboardingCompleteCompleteState(
         sut: AppCoordinator,
-        expectedRegisterUserCount: Int) {
+        expectedRegisterDeviceCount: Int) {
         
         XCTAssertNotNil(sut.user.uuid)
         XCTAssertEqual(mockRouter.presentedViewControllers.count, 0)
         XCTAssertEqual(mockOnboardingCoordinator.startedCount, 1)
         XCTAssertEqual(sut.childCoordinators.count, 1)
         XCTAssertTrue(sut.childCoordinators.first?.value is MockCoreInjectionNavigationCoordinator )
-        XCTAssertEqual(mockUserService.registerAnonymousUserOnServerCalled, expectedRegisterUserCount)
+        XCTAssertEqual(mockUserService.registerDeviceOnServerCalled, expectedRegisterDeviceCount)
     }
 }
 

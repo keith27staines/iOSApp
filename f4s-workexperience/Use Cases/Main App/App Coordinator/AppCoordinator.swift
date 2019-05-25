@@ -99,7 +99,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         onboardingCoordinator.onboardingDidFinish = onboardingDidFinish
         addChildCoordinator(onboardingCoordinator)
         onboardingCoordinator.start()
-        ensureUserIsRegistered { [weak self] userUuid in
+        ensureDeviceIsRegistered { [weak self] userUuid in
             self?.onUserIsRegistered(userUuid: userUuid)
         }
     }
@@ -143,27 +143,23 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     }
     
     
-    private func ensureUserIsRegistered(completion: @escaping (F4SUUID)->()) {
-        let user = injected.user
-        guard user.uuid == nil else {
-            completion(user.uuid!)
-            return
-        }
+    private func ensureDeviceIsRegistered(completion: @escaping (F4SUUID)->()) {
         let installationUuid = injected.installationUuid
-        userService.registerAnonymousUserOnServer(installationUuid: installationUuid) { [weak self] (result) in
+        let userUuid = injected.user.uuid
+        userService.registerDeviceWithServer(installationUuid: installationUuid) { [weak self] (result) in
             guard let strongSelf = self else { return }
             switch result {
             case .error(let error):
                 globalLog.info("Couldn't register user, offering retry \(error)")
                 strongSelf.presentNoNetworkMustRetry(retryOperation: {
-                    strongSelf.ensureUserIsRegistered(completion: completion)
+                    strongSelf.ensureDeviceIsRegistered(completion: completion)
                 })
             case .success(let result):
                 guard let anonymousUserUuid = result.uuid else {
                     globalLog.severe("registering user failed to obtain uuid")
                     fatalError("registering user failed to obtain uuid")
                 }
-                completion(anonymousUserUuid)
+                completion(userUuid ?? anonymousUserUuid)
             }
         }
     }
