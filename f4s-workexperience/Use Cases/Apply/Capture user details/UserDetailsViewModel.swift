@@ -1,9 +1,9 @@
 import Foundation
 import WorkfinderCommon
 
-public class ExtraInfoViewModel {
-    weak var coordinator: TabBarCoordinator!
-    weak var viewController: ExtraInfoViewController?
+public class UserDetailsViewModel {
+    weak var coordinator: UserDetailsCoordinator!
+    weak var viewController: UserDetailsViewController?
     var userInfo: F4SUserInformation
     
     let badValueColor = UIColor(netHex: Colors.orangeYellow)
@@ -59,7 +59,7 @@ public class ExtraInfoViewModel {
         return DateOfBirthPickerViewModel(ageLogic: ageLogic, badValueColor: badValueColor, goodValueColor: goodValueColor)
     }()
     
-    init(userInformation: F4SUserInformation, coordinator: TabBarCoordinator) {
+    init(userInformation: F4SUserInformation, coordinator: UserDetailsCoordinator) {
         self.userInfo = userInformation
         self.namesString = userInformation.fullName
         self.coordinator = coordinator
@@ -103,8 +103,7 @@ public class ExtraInfoViewModel {
     }
     
     func exploreMoreCompanies() {
-        guard let viewController = viewController else { return }
-        TabBarViewController.rewindToDrawerAndSelectTab(vc: viewController, tab: .map)
+        coordinator?.userIsTooYoung?()
     }
     
     func setVoucherString(_ string: String?) {

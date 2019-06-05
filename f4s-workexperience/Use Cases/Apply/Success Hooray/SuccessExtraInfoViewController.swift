@@ -29,6 +29,9 @@ class SuccessExtraInfoViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         F4SUserStatusService.shared.beginStatusUpdate()
     }
+    
+    var timelineButtonWasTapped: (() -> Void)?
+    var searchButtonWasTapped: (() -> Void)?
 }
 
 // MARK: - UI Setup
@@ -45,13 +48,10 @@ extension SuccessExtraInfoViewController {
 extension SuccessExtraInfoViewController {
     
     @IBAction func timelineButtonTouched(_: UIButton) {
-        navigationController?.popToRootViewController(animated: true)
-        TabBarCoordinator.sharedInstance!.rewindAndNavigateToTimeline(from: self, show: nil)
+        timelineButtonWasTapped?()
     }
     
     @IBAction func viewMapButtonTouched(_: UIButton) {
-        navigationController?.popToRootViewController(animated: true)
-        //TabBarCoordinator.sharedInstance.popToTab(.map)
-        TabBarCoordinator.sharedInstance!.rewindAndNavigateToMap(from: self)
+        searchButtonWasTapped?()
     }
 }

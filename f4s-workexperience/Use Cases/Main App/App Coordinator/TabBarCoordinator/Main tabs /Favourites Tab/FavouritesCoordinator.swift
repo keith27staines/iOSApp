@@ -9,26 +9,7 @@
 import Foundation
 import WorkfinderCommon
 
-class FavouritesCoordinator : CoreInjectionNavigationCoordinator, ApplyCoordinatorCoordinating {
-
-    func continueApplicationFromPlacementInAppliedState(_ placementJson: WEXPlacementJson, takingOverFrom coordinator: Coordinating) {
-        let user = F4SUser()
-        let company = self.company!
-        let availabilityPeriod = F4SAvailabilityPeriod(availabilityPeriodJson: placementJson.availabilityPeriods!.first!)
-        let placement = F4SPlacement(
-            userUuid: user.uuid,
-            companyUuid: company.uuid,
-            interestList: [],
-            status: placementJson.workflowState,
-            placementUuid: placementJson.uuid!)
-        let applicationContext = F4SApplicationContext(
-            user: user,
-            company: company,
-            placement: placement,
-            availabilityPeriod: availabilityPeriod)
-        TabBarCoordinator.sharedInstance.pushProcessedMessages(navigationRouter.navigationController, applicationContext: applicationContext)
-    }
-    
+class FavouritesCoordinator : CoreInjectionNavigationCoordinator {
     
     lazy var rootViewController: FavouriteViewController = {
         let storyboard = UIStoryboard(name: "Favourite", bundle: nil)

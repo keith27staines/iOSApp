@@ -10,6 +10,7 @@ import Foundation
 import WorkfinderCommon
 
 public protocol ApplicationModelProtocol : class {
+    var placement: F4SPlacement? { get }
     var placementJson: WEXPlacementJson? { get }
     var availabilityPeriodJson: F4SAvailabilityPeriodJson { get set }
     var applicationLetterModel: ApplicationLetterModelProtocol { get }

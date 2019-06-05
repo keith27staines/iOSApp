@@ -45,6 +45,7 @@ class TimelineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackgroundView()
+        hidesBottomBarWhenPushed = false
     }
     
     var footerView: UIView?
@@ -146,7 +147,7 @@ extension TimelineViewController {
             if let threadUuid = strongSelf.threadUuid, let placement = strongSelf.userPlacements.filter({ $0.threadUuid == threadUuid }).first {
                 if let company = strongSelf.companies.filter({ $0.uuid == placement.companyUuid?.dehyphenated }).first {
                     strongSelf.threadUuid = nil
-                    TabBarCoordinator.sharedInstance.pushMessageController(parentCtrl: strongSelf, threadUuid: threadUuid, company: company, placements: strongSelf.userPlacements, companies: strongSelf.companies)
+                    strongSelf.coordinator?.showMessageController(parentCtrl: strongSelf, threadUuid: threadUuid, company: company, placements: strongSelf.userPlacements, companies: strongSelf.companies)
                 }
             }
         })
@@ -168,7 +169,7 @@ extension TimelineViewController {
     func adjustNavigationBar() {
         let menuButton = UIBarButtonItem(image: UIImage(named: "MenuButton")?.withRenderingMode(.alwaysTemplate), style: .done, target: self, action: #selector(TimelineViewController.menuButtonTapped))
         self.navigationItem.leftBarButtonItem = menuButton
-        self.navigationItem.title = NSLocalizedString("Timeline", comment: "")
+        self.navigationItem.title = NSLocalizedString("Messages", comment: "")
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         styleNavigationController()
     }
@@ -214,7 +215,7 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         let placement = self.userPlacements[indexPath.row]
         if let company = self.companies.filter({ $0.uuid == placement.companyUuid?.dehyphenated }).first {
-            TabBarCoordinator.sharedInstance.pushMessageController(parentCtrl: self, threadUuid: placement.threadUuid, company: company, placements: self.userPlacements, companies: self.companies)
+            coordinator?.showMessageController(parentCtrl: self, threadUuid: placement.threadUuid, company: company, placements: self.userPlacements, companies: self.companies)
         }
     }
     
@@ -242,7 +243,7 @@ extension TimelineViewController {
         if let placement = self.userPlacements.filter({ $0.threadUuid == threadUuid }).first {
             if let company = self.companies.filter({ $0.uuid == placement.companyUuid?.dehyphenated }).first {
                 self.threadUuid = nil
-                TabBarCoordinator.sharedInstance.pushMessageController(parentCtrl: self, threadUuid: placement.threadUuid!, company: company, placements: self.userPlacements, companies: self.companies)
+                coordinator?.showMessageController(parentCtrl: self, threadUuid: threadUuid, company: company, placements: self.userPlacements, companies: self.companies)
             }
         }
     }

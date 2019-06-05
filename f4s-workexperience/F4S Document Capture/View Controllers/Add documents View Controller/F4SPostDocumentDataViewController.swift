@@ -93,6 +93,7 @@ class PostDocumentsWithDataViewController : UIViewController {
         button.heightAnchor.constraint(equalToConstant: 60).isActive = true
         button.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
         button.addTarget(self, action: #selector(uploadNextDocument), for: .touchUpInside)
+        button.isHidden = true
         return button
     }()
     

@@ -30,8 +30,19 @@ class F4SAddUrlViewController: UIViewController {
         super.viewDidLoad()
         urlField.delegate = self
         urlField.addTarget(self, action: #selector(textChanged), for: .editingChanged)
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.cancel, target: self, action: #selector(handleCancel))
+        cancelButton.tintColor = UIColor.blue
+        navigationItem.rightBarButtonItem = cancelButton
         applySkin()
         configure()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationItem.hidesBackButton = true
+    }
+    
+    @objc func handleCancel() {
+        navigationController?.popViewController(animated: true)
     }
     
     @objc func textChanged() {

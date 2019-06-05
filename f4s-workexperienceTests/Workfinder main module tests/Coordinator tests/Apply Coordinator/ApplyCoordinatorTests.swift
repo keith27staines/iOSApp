@@ -51,7 +51,8 @@ class ApplyCoordinatorTests: XCTestCase {
 extension ApplyCoordinatorTests {
     
     func makeSUTApplyCoordinator(company: F4SUUID, continueExistingApplication uuid: F4SUUID? = nil) -> ApplyCoordinator {
-        let company = CompanyViewData()
+        let now = Date()
+        let company = Company(id: 1, created: now, modified: now, isAvailableForSearch: true, uuid: "companyUuid", name: "Test Company", logoUrl: "logoUrl", industry: "Test Industry", latitude: 51, longitude: 0, summary: "This is a test company", employeeCount: 7, turnover: 3, turnoverGrowth: 3, rating: 0, ratingCount: 0, sourceId: "some unknown source", hashtag: "", companyUrl: "companyUrl")
         let placementServiceFactory = MockPlacementServiceFactory(errorResponseCode: 404)
         let mockPlacementService = placementServiceFactory.makePlacementService()
         let mockTemplateService = MockTemplateService()

@@ -73,7 +73,7 @@ public struct F4SAvailabilityPeriod {
     
     func dayIsValid(day: F4SCalendarDay?) -> Bool {
         guard let day = day else { return true }
-        return day.isInFuture
+        return !day.isInPast
     }
     
     static func dateFromString(_ dateString: String?) -> Date? {

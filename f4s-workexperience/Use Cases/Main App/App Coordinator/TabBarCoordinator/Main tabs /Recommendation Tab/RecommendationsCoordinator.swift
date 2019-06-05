@@ -5,27 +5,7 @@ import WorkfinderCommon
 /// 1. Instantiate views, view models and models to display a list of recommended companies
 /// 2. Oversee the presentation of the view
 /// 3. Manage the transition into the apply workflow should the user decide to apply to a recommendation
-class RecommendationsCoordinator : CoreInjectionNavigationCoordinator, ApplyCoordinatorCoordinating {
-    
-    /// When the first part of the apply workflow (create placement) finishes, the apply use-case module
-    /// hands back responsibility for the remaining jobs (capture user details, verify email, etc)
-    func continueApplicationFromPlacementInAppliedState(_ placementJson: WEXPlacementJson, takingOverFrom coordinator: Coordinating) {
-        let user = F4SUser()
-        let company = self.company!
-        let availabilityPeriod = F4SAvailabilityPeriod(availabilityPeriodJson: placementJson.availabilityPeriods!.first!)
-        let placement = F4SPlacement(
-            userUuid: user.uuid,
-            companyUuid: company.uuid,
-            interestList: [],
-            status: placementJson.workflowState,
-            placementUuid: placementJson.uuid!)
-        let applicationContext = F4SApplicationContext(
-            user: user,
-            company: company,
-            placement: placement,
-            availabilityPeriod: availabilityPeriod)
-        TabBarCoordinator.sharedInstance.pushProcessedMessages(navigationRouter.navigationController, applicationContext: applicationContext)
-    }
+class RecommendationsCoordinator : CoreInjectionNavigationCoordinator {
     
     lazy var model: RecommendedCompaniesListModelProtocol = {
         return RecommendedCompaniesListModel()

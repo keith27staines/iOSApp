@@ -96,7 +96,6 @@ class TabBarViewController: UITabBarController {
 
     override func viewWillAppear(_ animation: Bool) {
         super.viewWillAppear(animation)
-        //addMenuCustomGesture()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -177,48 +176,4 @@ enum TabIndex : Int {
     case recommendations
     case favourites
     case map
-}
-
-extension TabBarViewController {
-    
-    static func rewindToDrawerAndPresentRecommendations(vc: UIViewController) {
-        recursiveRewindToDrawer(from: vc) { (drawerController) in
-            guard let centerController = drawerController?.centerViewController else { return }
-            guard let tabBarCtrl = centerController as? TabBarViewController else { return }
-            let recommendationsStoryboard = UIStoryboard(name: "Recommendations", bundle: nil)
-            guard let recommendationsNavController = recommendationsStoryboard.instantiateInitialViewController() else {
-                return
-            }
-            guard let recommendationsController = recommendationsNavController.topMostViewController as? RecommendationsListViewController else {
-                return
-            }
-            let noRecommendationsText = "No recommendations yet\n\nWe have no companies to recommend based on your recent application(s).  The more you apply, the more great companies we can recommend to you.\n\nKeep going, the world's your oyster!"
-            recommendationsController.emptyRecomendationsListText = noRecommendationsText
-            tabBarCtrl.selectedIndex = 0
-            tabBarCtrl.selectedViewController?.present(recommendationsNavController, animated: true, completion: nil)
-        }
-    }
-    
-    static func rewindToDrawerAndSelectTab(vc: UIViewController, tab: TabIndex) {
-        recursiveRewindToDrawer(from: vc, completion: { drawerController in
-            guard let centerController = drawerController?.centerViewController else { return }
-            guard let tabBarCtrl = centerController as? TabBarViewController else { return }
-            tabBarCtrl.selectedIndex = tab.rawValue
-        })
-    }
-    
-    static func recursiveRewindToDrawer(from vc: UIViewController?, completion: @escaping (DrawerController?) -> Void) {
-        guard let vc = vc else {
-            completion(nil)
-            return
-        }
-        if let drawerController = vc as? DrawerController {
-            completion(drawerController)
-            return
-        }
-        let presentingViewController = vc.presentingViewController
-        vc.dismiss(animated: false, completion: {
-            return recursiveRewindToDrawer(from: presentingViewController, completion: completion)
-        })
-    }
 }

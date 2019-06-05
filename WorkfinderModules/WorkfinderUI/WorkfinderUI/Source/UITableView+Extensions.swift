@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UITableView {
+public extension UITableView {
     
     func renderAllContentToImage() ->UIImage {
         let originalSize = self.frame.size

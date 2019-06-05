@@ -9,13 +9,18 @@
 import UIKit
 import WorkfinderCommon
 
-class ProcessedMessagesViewController: UIViewController {
+protocol HalfWayHoorayCoordinatorProtocol : class {
+    func halfWayHoorayDidFinish()
+}
+
+class HalfWayHoorayViewController: UIViewController {
 
     @IBOutlet weak var addInfoButton: UIButton!
     @IBOutlet weak var receivedLabel: UILabel!
     @IBOutlet weak var extraInformationLabel: UILabel!
 
-    var applicationContext: F4SApplicationContext?
+    var companyViewData: CompanyViewData?
+    var coordinator: HalfWayHoorayCoordinatorProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,16 +33,14 @@ class ProcessedMessagesViewController: UIViewController {
 }
 
 // MARK: - user interaction
-extension ProcessedMessagesViewController {
+extension HalfWayHoorayViewController {
     @IBAction func addInfoButton(_: Any) {
-        if let navigCtrl = self.navigationController, let _ = self.applicationContext?.company {
-            TabBarCoordinator.sharedInstance.pushExtraInfoViewController(navigCtrl: navigCtrl, applicationContext: applicationContext!)
-        }
+        coordinator?.halfWayHoorayDidFinish()
     }
 }
 
 // MARK: - appearance
-extension ProcessedMessagesViewController {
+extension HalfWayHoorayViewController {
     func setupAppearance() {
         self.navigationController?.navigationBar.isHidden = true
         setupAddInfoButton()
@@ -55,7 +58,7 @@ extension ProcessedMessagesViewController {
 
         let formattedString = NSMutableAttributedString()
         formattedString.append(NSAttributedString(string: receivedLabelText, attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.black)]))
-        if let currentCompanyName = applicationContext?.company?.name {
+        if let currentCompanyName = companyViewData?.companyName {
             formattedString.append(NSAttributedString(string: currentCompanyName, attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.semibold), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.black)]))
         }
         self.receivedLabel.attributedText = formattedString

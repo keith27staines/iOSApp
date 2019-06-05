@@ -1,0 +1,6 @@
+WorkfinderCommon
+
+README
+
+This project contains most of the commonly used structs and enums that are used widely throughout iOS Workfinder.
+It also contains most of the protocols that define interfaces for various shareable components

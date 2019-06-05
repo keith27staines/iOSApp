@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Extra Info View Controller-->
+        <!--User Details View Controller-->
         <scene sceneID="QzM-0e-h9g">
             <objects>
-                <viewController storyboardIdentifier="ExtraInfoCtrl" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6fi-A3-veq" customClass="ExtraInfoViewController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserDetailsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6fi-A3-veq" customClass="UserDetailsViewController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rVA-dq-XbI"/>
                         <viewControllerLayoutGuide type="bottom" id="iFc-6k-L1j"/>

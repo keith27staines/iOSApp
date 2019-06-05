@@ -11,6 +11,7 @@
 		FC2AC5EB2235281A00FF4E47 /* WorkfinderSessionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2AC5EA2235281A00FF4E47 /* WorkfinderSessionManagerTests.swift */; };
 		FC2AC5F12235516A00FF4E47 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2AC5F02235516A00FF4E47 /* Helpers.swift */; };
 		FC85F96C22365FA0002F84DF /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC85F96822365F75002F84DF /* WorkfinderCommon.framework */; };
+		FC9865BE229D39DC006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865BD229D39DC006D3E63 /* README */; };
 		FCA91E3C2233FF20007ED308 /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91E322233FF20007ED308 /* WorkfinderNetworking.framework */; };
 		FCA91E412233FF20007ED308 /* WorkfinderNetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91E402233FF20007ED308 /* WorkfinderNetworkingTests.swift */; };
 		FCA91E432233FF20007ED308 /* WorkfinderNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA91E352233FF20007ED308 /* WorkfinderNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -49,6 +50,7 @@
 		FC2AC5EA2235281A00FF4E47 /* WorkfinderSessionManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderSessionManagerTests.swift; sourceTree = "<group>"; };
 		FC2AC5F02235516A00FF4E47 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		FC85F96222365F75002F84DF /* WorkfinderCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WorkfinderCommon.xcodeproj; path = ../WorkfinderCommon/WorkfinderCommon.xcodeproj; sourceTree = "<group>"; };
+		FC9865BD229D39DC006D3E63 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		FCA91E322233FF20007ED308 /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA91E352233FF20007ED308 /* WorkfinderNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderNetworking.h; sourceTree = "<group>"; };
 		FCA91E362233FF20007ED308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 		FCA91E282233FF20007ED308 = {
 			isa = PBXGroup;
 			children = (
+				FC9865BD229D39DC006D3E63 /* README */,
 				FC85F96222365F75002F84DF /* WorkfinderCommon.xcodeproj */,
 				FCA91E342233FF20007ED308 /* WorkfinderNetworking */,
 				FCA91E3F2233FF20007ED308 /* WorkfinderNetworkingTests */,
@@ -313,6 +316,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC9865BE229D39DC006D3E63 /* README in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

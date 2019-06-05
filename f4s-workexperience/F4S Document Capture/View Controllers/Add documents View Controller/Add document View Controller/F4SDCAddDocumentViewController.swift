@@ -23,6 +23,8 @@ class F4SDCAddDocumentViewController: UIViewController {
     @IBOutlet weak var dropDownHeightConstraint: NSLayoutConstraint!
     weak var delegate: F4SDCAddDocumentViewControllerDelegate?
     
+    weak var coordinator: DocumentUploadCoordinator?
+    
     var document: F4SDocument = F4SDocument(type: .other) {
         didSet {
             setStateForDocumentType(document.type)
@@ -49,6 +51,10 @@ class F4SDCAddDocumentViewController: UIViewController {
         nameField.delegate = self
         setAddButtonsEnabled(state: false)
         applyStyle()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = false
     }
     
     func applyStyle() {
@@ -230,8 +236,6 @@ extension F4SDCAddDocumentViewController : F4SCameraCaptureViewControllerDelegat
 extension F4SDCAddDocumentViewController : UIDocumentPickerDelegate {
     
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-        // The next line isn't needed, the document picker seems to pop itself
-        // navigationController?.popViewController(animated: true)
     }
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
@@ -243,7 +247,6 @@ extension F4SDCAddDocumentViewController : UIDocumentPickerDelegate {
             if let fileData = try? Data(contentsOf: url) {
                 document.data = fileData
                 delegate?.didAddDocument(document)
-                navigationController?.popViewController(animated: true)
             } else {
                 print("No data!!")
             }
@@ -270,7 +273,6 @@ extension F4SDCAddDocumentViewController : UINavigationControllerDelegate, UIIma
             picker.dismiss(animated: true) { [weak self] in
                 guard let this = self else { return }
                 this.delegate?.didAddDocument(this.document)
-                this.navigationController?.popViewController(animated: true)
             }
         }
     }
@@ -291,9 +293,6 @@ extension UIImage {
         return data as Data
     }
 }
-
-
-
 
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {

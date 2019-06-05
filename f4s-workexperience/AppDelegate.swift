@@ -45,17 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return F4SUserService()
     }()
     
-    lazy var skins: Skins = Skin.loadSkins()
-    
-    lazy var skin: Skin? = {
-        let workfinderSkin = skins["workfinder"]
-        guard let partner = F4SPartnersModel.sharedInstance.selectedPartner else {
-            return workfinderSkin
-        }
-        let partnerSkinKey = partner.name.lowercased()
-        return skins[partnerSkinKey] ?? workfinderSkin
-    }()
-    
     lazy var appInstallationUuid = AppInstallationUuidLogic().installationUuid
     
     // MARK:- Application events
@@ -186,9 +175,9 @@ extension AppDelegate {
         globalLog.debug("Invoked from url: \(url.absoluteString)")
         guard let universalLink = UniversalLink(url: url) else { return }
         switch universalLink {
-        case .recommendCompany(let company):
-            TabBarCoordinator.sharedInstance.rewindAndNavigateToRecommendations(from: nil, show: company)
-            break
+        case .recommendCompany(_):
+            TabBarCoordinator.sharedInstance.navigateToRecommendations()
+
         case .passwordless( _):
             let userInfo: [AnyHashable: Any] = ["url" : url]
             let notification = Notification(

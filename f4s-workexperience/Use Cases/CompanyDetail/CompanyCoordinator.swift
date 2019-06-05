@@ -21,7 +21,7 @@ class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoordinato
     var company: Company
     
     init(
-        parent: ApplyCoordinatorCoordinating?,
+        parent: CoreInjectionNavigationCoordinator?,
         navigationRouter: NavigationRoutingProtocol,
         company: Company,
         inject: CoreInjectionProtocol) {
@@ -64,7 +64,7 @@ extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
     
     func startApplyCoordinator(companyViewData: CompanyViewData, continueFrom: F4STimelinePlacement?) {
         let applyCoordinator = ApplyCoordinator(
-            company: companyViewData,
+            company: company,
             placement: company.placement,
             parent: self,
             navigationRouter: navigationRouter,
@@ -72,6 +72,9 @@ extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
             placementService: placementService,
             templateService: templateService)
         addChildCoordinator(applyCoordinator)
+        applyCoordinator.applicationDidComplete = { [weak self] _ in
+            self?.navigationRouter.pop(animated: false)
+        }
         applyCoordinator.start()
     }
     
@@ -95,17 +98,9 @@ extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
     }
 }
 
-extension CompanyCoordinator :  ApplyCoordinatorCoordinating {
-    func continueApplicationFromPlacementInAppliedState(_ placementJson: WEXPlacementJson, takingOverFrom coordinator: Coordinating) {
-        cleanup()
-        (parentCoordinator as? ApplyCoordinatorCoordinating)?.continueApplicationFromPlacementInAppliedState(placementJson, takingOverFrom: self)
-        parentCoordinator?.childCoordinatorDidFinish(self)
-    }
-}
-
 struct CompanyCoordinatorFactory {
     func makeCompanyCoordinator(
-        parent: ApplyCoordinatorCoordinating?,
+        parent: CoreInjectionNavigationCoordinator?,
         navigationRouter: NavigationRoutingProtocol,
         company: Company,
         inject: CoreInjectionProtocol) -> CompanyCoordinatorProtocol {

@@ -9,26 +9,7 @@
 import Foundation
 import WorkfinderCommon
 
-class TimelineCoordinator : CoreInjectionNavigationCoordinator, ApplyCoordinatorCoordinating {
-    
-    func continueApplicationFromPlacementInAppliedState(_ placementJson: WEXPlacementJson, takingOverFrom coordinator: Coordinating) {
-        let user = F4SUser()
-        let company = self.company!
-        let availabilityPeriod = F4SAvailabilityPeriod(availabilityPeriodJson: placementJson.availabilityPeriods!.first!)
-        let placement = F4SPlacement(
-            userUuid: user.uuid,
-            companyUuid: company.uuid,
-            interestList: [],
-            status: placementJson.workflowState,
-            placementUuid: placementJson.uuid!)
-        let applicationContext = F4SApplicationContext(
-            user: user,
-            company: company,
-            placement: placement,
-            availabilityPeriod: availabilityPeriod)
-        TabBarCoordinator.sharedInstance.pushProcessedMessages(navigationRouter.navigationController, applicationContext: applicationContext)
-    }
-    
+class TimelineCoordinator : CoreInjectionNavigationCoordinator {
     
     lazy var rootViewController: TimelineViewController = {
         let storyboard = UIStoryboard(name: "TimelineView", bundle: nil)
@@ -40,20 +21,74 @@ class TimelineCoordinator : CoreInjectionNavigationCoordinator, ApplyCoordinator
         navigationRouter.navigationController.pushViewController(rootViewController, animated: false)
     }
     
-    func show(thread: F4SUUID?) {
+    func showThread(_ thread: F4SUUID?) {
         guard let thread = thread else { return }
         rootViewController.threadUuid = thread
-        rootViewController.goToMessageViewCtrl()
+        //rootViewController.goToMessageViewCtrl()
     }
     
     var company: Company?
     
-    func showDetail(company: Company?) {
+    func showCompanyDetails(parentCtrl: UIViewController, company: Company) {
         self.company = company
-        guard let company = company else { return }
-        rootViewController.dismiss(animated: true)
-        let companyCoordinator = CompanyCoordinator(parent: self, navigationRouter: navigationRouter, company: company, inject: injected)
+        assert(parentCtrl.navigationController != nil)
+        guard let navigationController = parentCtrl.navigationController else { return }
+        let factory = CompanyCoordinatorFactory()
+        let navigationRouter = NavigationRouter(navigationController: navigationController)
+        let companyCoordinator = factory.makeCompanyCoordinator(parent: self, navigationRouter: navigationRouter, company: company, inject: injected)
+        companyCoordinator.parentCoordinator = self
         addChildCoordinator(companyCoordinator)
         companyCoordinator.start()
+    }
+    
+    func showMessageController(parentCtrl: UIViewController, threadUuid: String?, company: Company, placements: [F4STimelinePlacement], companies: [Company]) {
+        let messageStoryboard = UIStoryboard(name: "Message", bundle: nil)
+        guard let messageController = messageStoryboard.instantiateViewController(withIdentifier: "MessageContainerViewCtrl") as? MessageContainerViewController else {
+            return
+        }
+        messageController.threadUuid = threadUuid
+        messageController.company = company
+        messageController.companies = companies
+        messageController.placements = placements
+        messageController.coordinator = self
+        parentCtrl.navigationController?.pushViewController(messageController, animated: true)
+    }
+    
+    func showAcceptOffer(acceptContext: AcceptOfferContext?) {
+        guard let acceptContext = acceptContext else { return }
+        let acceptCoordinator = AcceptOfferCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, acceptContext: acceptContext)
+        addChildCoordinator(acceptCoordinator)
+        acceptCoordinator.start()
+    }
+    
+    func showAddDocuments(placement: F4STimelinePlacement?, company: Company?, action: F4SAction) {
+        guard
+            let placement = placement, let company = company,
+            let requestModel = F4SBusinessLeadersRequestModel(action: action, placement: placement, company: company) else { return }
+        let mode = F4SAddDocumentsViewController.Mode.businessLeaderRequest(requestModel)
+        let coordinator = DocumentUploadCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, mode: mode, applicationContext: nil)
+        coordinator.didFinish = { [weak self] _ in
+            guard let strongSelf = self else { return }
+            strongSelf.navigationRouter.popToViewController(strongSelf.rootViewController, animated: true)
+            print("What is supposed to happen here?")
+        }
+        addChildCoordinator(coordinator)
+        coordinator.start()
+    }
+    
+    func showExternalCompanySite(urlString: String?, acceptContext: AcceptOfferContext?) {
+        guard
+            let urlString = urlString,
+            let url = URL(string: urlString),
+            let acceptContext = acceptContext else {
+                globalLog.error("Unable to open the company's external application page")
+                return
+        }
+        UIApplication.shared.open(url, options: [:]) { (success) in
+            var event = F4SAnalyticsEvent(name: .viewCompanyExternalApplication)
+            event.addProperty(name: "placement_uuid", value: acceptContext.placement.placementUuid ?? "")
+            event.addProperty(name: "company_name", value: acceptContext.company.name)
+            event.track()
+        }
     }
 }

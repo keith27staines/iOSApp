@@ -31,7 +31,7 @@ public class MessageViewController: UIViewController {
     
     public func insertMessage(_ message: MessageProtocol) {
         guard let indexPath = messagesModel.insertMessage(message) else { return }
-        tableView.reloadRows(at: [indexPath], with: .automatic)
+        tableView.insertRows(at: [indexPath], with: .automatic)
     }
     
     public func reloadWithMessages(outgoingSenderId: String, messages: [MessageProtocol]) {

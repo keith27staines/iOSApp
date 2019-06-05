@@ -10,14 +10,8 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderApplyUseCase
 
-protocol ApplyCoordinatorCoordinating : Coordinating {
-    func continueApplicationFromPlacementInAppliedState(_ placementJson: WEXPlacementJson, takingOverFrom coordinator: Coordinating)
-}
-
 class ApplyCoordinator : CoreInjectionNavigationCoordinator {
-    
-    let companyViewData: CompanyViewData
-    var placement: F4SPlacement?
+    var applicationContext: F4SApplicationContext
     var createPlacementJson: WEXCreatePlacementJson?
     var createPlacementServiceFactory: WEXPlacementServiceFactoryProtocol?
     var placementService: WEXPlacementServiceProtocol
@@ -32,23 +26,28 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     lazy var applicationModel: ApplicationModelProtocol = {
         let userUuid = injected.user.uuid!
         let installationUuid = injected.installationUuid
+        let companyViewData = CompanyViewData(company: applicationContext.company!)
+        let placement = applicationContext.placement
         return ApplicationModel(userUuid: userUuid, installationUuid: installationUuid, userInterests: userInterests, placement: placement, placementRepository: placementRepository, companyViewData: companyViewData, placementService: placementService, templateService: templateService)
     }()
     
     var continueFromTimelinePlacement: F4STimelinePlacement?
+    let startingViewController: UIViewController!
+    var applicationDidComplete: ((ApplyCoordinator) -> Void)?
     
-    init(company: CompanyViewData,
+    init(company: Company,
          placement: F4SPlacement?,
-         parent: ApplyCoordinatorCoordinating?,
+         parent: CoreInjectionNavigationCoordinator?,
          navigationRouter: NavigationRoutingProtocol,
          inject: CoreInjectionProtocol,
          placementService: WEXPlacementServiceProtocol,
          templateService: F4STemplateServiceProtocol,
          continueFrom: F4STimelinePlacement? = nil) {
-        self.companyViewData = company
+        self.applicationContext = F4SApplicationContext(user: F4SUser(), company: company, placement: placement)
         self.placementService = placementService
         self.templateService = templateService
         self.continueFromTimelinePlacement = continueFrom
+        self.startingViewController = navigationRouter.navigationController.topViewController
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
@@ -87,6 +86,7 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
 }
 
 extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
+    
     func continueApplicationWithCompletedLetter(sender: Any?, completion: @escaping (Error?) -> Void) {
         applicationModel.createApplicationIfNecessary { [weak self] (error) in
             guard let strongSelf = self else { return }
@@ -94,13 +94,65 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
                 completion(error)
                 return
             }
-            let parentCoordinator = strongSelf.parentCoordinator as! ApplyCoordinatorCoordinating
-            let placement = strongSelf.applicationModel.placementJson!
             strongSelf.cleanup(animated: false)
-            parentCoordinator.continueApplicationFromPlacementInAppliedState(placement, takingOverFrom: strongSelf)
             completion(nil)
-            parentCoordinator.childCoordinatorDidFinish(strongSelf)
+            strongSelf.showHalfWayHooray()
         }
+    }
+    
+    func showHalfWayHooray() {
+        let halfWayStoryboard = UIStoryboard(name: "HalfWayHooray", bundle: nil)
+        let vc = halfWayStoryboard.instantiateViewController(withIdentifier: "HalfWayHoorayViewController") as! HalfWayHoorayViewController
+        vc.companyViewData = CompanyViewData(company: applicationContext.company!)
+        vc.coordinator = self
+        navigationRouter.push(viewController: vc, animated: true)
+    }
+    
+    func halfWayHoorayDidFinish() {
+        showUserDetails()
+    }
+    
+    func showUserDetails() {
+        applicationContext.placement = applicationModel.placement
+        let userDetailsCoordinator = UserDetailsCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, applicationContext: applicationContext)
+        userDetailsCoordinator.didFinish = { [weak self] coordinator in
+            self?.userDetailsDidFinish()
+        }
+        userDetailsCoordinator.userIsTooYoung = { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.cleanup()
+            strongSelf.navigationRouter.navigationController.popToRootViewController(animated: false)
+            strongSelf.parentCoordinator?.childCoordinatorDidFinish(strongSelf)
+        }
+        addChildCoordinator(userDetailsCoordinator)
+        userDetailsCoordinator.start()
+    }
+    
+    func userDetailsDidFinish() {
+        navigationRouter.popToViewController(startingViewController, animated: false)
+        let successViewController = UIStoryboard(name: "SuccessExtraInfo", bundle: nil).instantiateViewController(withIdentifier: "SuccessExtraInfoCtrl") as! SuccessExtraInfoViewController
+        successViewController.timelineButtonWasTapped = { [weak self] in
+            self?.applicationCleanup(successViewController: successViewController)
+            TabBarCoordinator.sharedInstance!.navigateToTimeline()
+        }
+        successViewController.searchButtonWasTapped = { [weak self] in
+            self?.applicationCleanup(successViewController: successViewController)
+            TabBarCoordinator.sharedInstance!.navigateToMap()
+        }
+        
+        startingViewController.view.addSubview(successViewController.view)
+        startingViewController.addChild(successViewController)
+        successViewController.view.fillSuperview()
+        successViewController.didMove(toParent: startingViewController)
+        successViewController.view.backgroundColor = UIColor.init(white: 0, alpha: 0.6)
+    }
+    
+    func applicationCleanup(successViewController: SuccessExtraInfoViewController) {
+        successViewController.removeFromParent()
+        successViewController.view.removeFromSuperview()
+        navigationRouter.navigationController.popToRootViewController(animated: false)
+        applicationDidComplete?(self)
+        parentCoordinator?.childCoordinatorDidFinish(self)
     }
     
     func cancelButtonWasTapped(sender: Any?) {
@@ -147,3 +199,5 @@ extension ApplyCoordinator : ChooseAttributesViewControllerCoordinatorProtocol {
         navigationRouter.pop(animated: true)
     }
 }
+
+extension ApplyCoordinator : HalfWayHoorayCoordinatorProtocol {}

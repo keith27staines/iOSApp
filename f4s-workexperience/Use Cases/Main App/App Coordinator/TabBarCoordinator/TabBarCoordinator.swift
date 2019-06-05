@@ -47,12 +47,6 @@ class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoor
         navigateToMostAppropriateInitialTab()
     }
     
-    public func rewindAndNavigateToTimeline(from viewController: UIViewController, show threadUuid: F4SUUID?) {
-        rewindToTabBar(from: viewController) { [weak self] in
-            self?.navigateToTimeline(threadUuid: threadUuid)
-        }
-    }
-    
     public func navigateToMostAppropriateInitialTab() {
         let shouldLoadTimeline = UserDefaults.standard.value(forKey: UserDefaultsKeys.shouldLoadTimeline) as? Bool ?? false
         if shouldLoadTimeline {
@@ -71,7 +65,7 @@ class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoor
         closeMenu { [weak self] (success) in
             guard let strongSelf = self else { return }
             strongSelf.tabBar.selectedIndex = TabIndex.timeline.rawValue
-            strongSelf.timelineCoordinator.show(thread:threadUuid)
+            strongSelf.timelineCoordinator.showThread(threadUuid)
         }
     }
 
@@ -93,33 +87,6 @@ class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoor
         closeMenu { [weak self] (success) in
             guard let strongSelf = self else { return }
             strongSelf.tabBar.selectedIndex = TabIndex.map.rawValue
-        }
-    }
-    
-    public func rewindAndNavigateToTimeline(from viewController: UIViewController?) {
-        rewindToTabBar(from: viewController) { [weak self] in
-            guard let strongSelf = self else { return }
-            strongSelf.navigateToTimeline()
-        }
-    }
-    
-    public func rewindAndNavigateToRecommendations(from viewController: UIViewController?, show company: Company?) {
-        rewindToTabBar(from: viewController) { [weak self] in
-            guard let strongSelf = self else { return }
-            strongSelf.navigateToRecommendations(company: company)
-        }
-    }
-    
-    public func rewindAndNavigateToFavourites(from viewController: UIViewController) {
-        rewindToTabBar(from: viewController) { [weak self] in
-            guard let strongSelf = self else { return }
-            strongSelf.navigateToFavourites()
-        }
-    }
-    
-    public func rewindAndNavigateToMap(from viewController: UIViewController) {
-        rewindToTabBar(from: viewController) { [weak self] in
-            self?.navigateToMap()
         }
     }
     
@@ -209,7 +176,7 @@ class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoor
     lazy var timelineCoordinator: TimelineCoordinator = {
         let navigationController = UINavigationController()
         let icon = UIImage(named: "messageOutline")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
-        navigationController.tabBarItem = UITabBarItem(title: "Timeline", image: icon, selectedImage: nil)
+        navigationController.tabBarItem = UITabBarItem(title: "Messages", image: icon, selectedImage: nil)
         let router = NavigationRouter(navigationController: navigationController)
         let coordinator = TimelineCoordinator(parent: nil, navigationRouter: router, inject: injected)
         addChildCoordinator(coordinator)
@@ -292,30 +259,6 @@ class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoor
         recommendationsController.emptyRecomendationsListText = noRecommendationsText
         navCtrl.present(recommendationsNavController, animated: true, completion: nil)
     }
-
-    func rewindToTabBar(from vc: UIViewController?, completion: @escaping () -> Void) {
-        guard let vc = vc else {
-            completion()
-            return
-        }
-        
-        if drawerController == vc {
-            completion()
-            return
-        }
-        
-        guard let presentingViewController = vc.presentingViewController else {
-            completion()
-            return
-        }
-        vc.dismiss(animated: false, completion: { [weak self] in
-            self?.rewindToTabBar(from: presentingViewController, completion: completion)
-        })
-        timelineCoordinator.navigationRouter.navigationController.popToRootViewController(animated: true)
-        recommendationsCoordinator.navigationRouter.navigationController.popToRootViewController(animated: true)
-        favouritesCoordinator.navigationRouter.navigationController.popToRootViewController(animated: true)
-        searchCoodinator.navigationRouter.navigationController.popToRootViewController(animated: true)
-    }
     
     func presentContentViewController(navCtrl: UINavigationController, contentType: F4SContentType) {
         let contentStoryboard = UIStoryboard(name: "Content", bundle: nil)
@@ -339,58 +282,7 @@ class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoor
 
         navCtrl.present(navigationCtrl, animated: true, completion: nil)
     }
-
-    func pushProcessedMessages(_ navController: UINavigationController, applicationContext: F4SApplicationContext) {
-        let processedMessagesStoryboard = UIStoryboard(name: "ProcessedMessages", bundle: nil)
-        let ctrl = processedMessagesStoryboard.instantiateViewController(withIdentifier: "ProcessedMessagesCtrl") as! ProcessedMessagesViewController
-        ctrl.applicationContext = applicationContext
-        navController.pushViewController(ctrl, animated: true)
-    }
-
-    func presentSuccessExtraInfoPopover(parentCtrl: UIViewController) {
-        let successViewController = UIStoryboard(name: "SuccessExtraInfo", bundle: nil).instantiateViewController(withIdentifier: "SuccessExtraInfoCtrl") as! SuccessExtraInfoViewController
-        parentCtrl.navigationController?.navigationBar.isHidden = true
-        parentCtrl.addChild(successViewController)
-        successViewController.view.frame = parentCtrl.view.frame
-        successViewController.view.backgroundColor = UIColor.init(white: 0, alpha: 0.8)
-        parentCtrl.view.addSubview(successViewController.view)
-        successViewController.didMove(toParent: parentCtrl)
-        successViewController.view.fillSuperview()
-    }
     
-    func pushEmailVerification(navigCtrl: UINavigationController, applicationContext: F4SApplicationContext) {
-        let emailStoryboard = UIStoryboard(name: "F4SEmailVerification", bundle: nil)
-        guard let emailController = emailStoryboard.instantiateViewController(withIdentifier: "EmailVerification") as? F4SEmailVerificationViewController else {
-            return
-        }
-        emailController.emailWasVerified = { [weak self] in
-            self?.pushExtraInfoViewController(navigCtrl: navigCtrl, applicationContext: applicationContext)
-        }
-        navigCtrl.pushViewController(emailController, animated: true)
-    }
-
-    func pushExtraInfoViewController(navigCtrl: UINavigationController, applicationContext: F4SApplicationContext) {
-        let extraInfoStoryboard = UIStoryboard(name: "ExtraInfo", bundle: nil)
-        let controller = extraInfoStoryboard.instantiateViewController(withIdentifier: "ExtraInfoCtrl") as! ExtraInfoViewController
-        let userInfo = applicationContext.user!.extractUserInformation()
-        let viewModel = ExtraInfoViewModel(userInformation: userInfo, coordinator: self)
-        controller.coordinator = self
-        controller.inject(viewModel: viewModel, applicationContext: applicationContext, userRepository: injected.userRepository)
-        navigCtrl.pushViewController(controller, animated: true)
-    }
-
-    func pushMessageController(parentCtrl: UIViewController, threadUuid: String?, company: Company, placements: [F4STimelinePlacement], companies: [Company]) {
-        let messageStoryboard = UIStoryboard(name: "Message", bundle: nil)
-        guard let messageController = messageStoryboard.instantiateViewController(withIdentifier: "MessageContainerViewCtrl") as? MessageContainerViewController else {
-            return
-        }
-        messageController.threadUuid = threadUuid
-        messageController.company = company
-        messageController.companies = companies
-        messageController.placements = placements
-        parentCtrl.navigationController?.pushViewController(messageController, animated: true)
-    }
-
     func presentRatePlacementPopover(parentCtrl: UIViewController, placementUuid: String, ratePlacementProtocol: TabBarViewController? = nil) {
         guard let popOverCtrl = UIStoryboard(name: "RatePlacement", bundle: nil).instantiateViewController(withIdentifier: "RatePlacementCtrl") as? RatePlacementViewController else {
             return
@@ -432,22 +324,5 @@ class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoor
         } else {
             parentCtrl.present(popoverNavigationController, animated: true, completion: nil)
         }
-    }
-    
-    func presentCompanyDetailsPopover(parentCtrl: UIViewController, company: Company) {
-        assert(parentCtrl.navigationController != nil)
-        guard let navigationController = parentCtrl.navigationController else { return }
-        let factory = CompanyCoordinatorFactory()
-        let navigationRouter = NavigationRouter(navigationController: navigationController)
-        let companyCoordinator = factory.makeCompanyCoordinator(parent: self, navigationRouter: navigationRouter, company: company, inject: injected)
-        companyCoordinator.parentCoordinator = self
-        addChildCoordinator(companyCoordinator)
-        companyCoordinator.start()
-    }
-}
-
-extension TabBarCoordinator : ApplyCoordinatorCoordinating {
-    func continueApplicationFromPlacementInAppliedState(_ placementJson: WEXPlacementJson, takingOverFrom coordinator: Coordinating) {
-
     }
 }

@@ -1,0 +1,11 @@
+Moustache
+
+README
+
+This project is now the home of GRMoustache, an open source templating library that was maintained on cocoapods.
+
+The author has seemingly vanished and no longer supports the product or accepts pull requests.
+
+iOS Workfinder is dependent on this library in order to populate the covering letter (which is essentially a Moustache template).
+
+The library was brought in-house because we needed to upgrade it to Swift 4, whereas the last maintained version was stuck on Swift 3

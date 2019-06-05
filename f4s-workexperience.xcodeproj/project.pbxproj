@@ -47,7 +47,7 @@
 		20D51BE41E27710C003A8358 /* UNService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D51BE31E27710C003A8358 /* UNService.swift */; };
 		20FABFEC1DDDA63600D583E2 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FABFEB1DDDA63600D583E2 /* FileHelper.swift */; };
 		20FEBDDA1DE5AD3400EBDCBF /* F4SImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FEBDD91DE5AD3400EBDCBF /* F4SImageService.swift */; };
-		405974081DFD449C0002DB3A /* ExtraInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405974071DFD449C0002DB3A /* ExtraInfoViewController.swift */; };
+		405974081DFD449C0002DB3A /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405974071DFD449C0002DB3A /* UserDetailsViewController.swift */; };
 		4059740A1E00115C0002DB3A /* NextResponderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405974091E00115B0002DB3A /* NextResponderTextField.swift */; };
 		40A28CB21E1D1D200077D490 /* TimelineEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A28CB11E1D1D200077D490 /* TimelineEntryTableViewCell.swift */; };
 		40A28CB71E1F96A60077D490 /* RatePlacement.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40A28CB51E1F96A60077D490 /* RatePlacement.storyboard */; };
@@ -109,8 +109,8 @@
 		D54E0FFD1E044B0400A51560 /* InfoWindowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D54E0FFB1E044B0400A51560 /* InfoWindowView.xib */; };
 		D54E0FFF1E044B1800A51560 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54E0FFE1E044B1800A51560 /* ContentViewController.swift */; };
 		D54E10021E044B6B00A51560 /* Content.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D54E10001E044B6B00A51560 /* Content.storyboard */; };
-		D54E10051E044BA000A51560 /* ProcessedMessages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D54E10031E044BA000A51560 /* ProcessedMessages.storyboard */; };
-		D54E10071E044BC100A51560 /* ProcessedMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54E10061E044BC100A51560 /* ProcessedMessagesViewController.swift */; };
+		D54E10051E044BA000A51560 /* HalfWayHooray.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D54E10031E044BA000A51560 /* HalfWayHooray.storyboard */; };
+		D54E10071E044BC100A51560 /* HalfWayHoorayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54E10061E044BC100A51560 /* HalfWayHoorayViewController.swift */; };
 		D5E9EBE81DD60AB300BD796E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5E9EBEA1DD60AB300BD796E /* Localizable.strings */; };
 		FC06264722032E74000D2D04 /* CompanyDocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06264622032E74000D2D04 /* CompanyDocumentsViewController.swift */; };
 		FC0B407E226CAA6E00D992AC /* RecommendationCompanyConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B407D226CAA6E00D992AC /* RecommendationCompanyConverter.swift */; };
@@ -180,6 +180,8 @@
 		FC4BB6051FA20F4100173864 /* F4SPartner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BB6041FA20F4100173864 /* F4SPartner.swift */; };
 		FC4BB6071FA20F5100173864 /* F4SPartnersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BB6061FA20F5100173864 /* F4SPartnersModel.swift */; };
 		FC4BB6091FA21BA400173864 /* SelectPartner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC4BB6081FA21BA400173864 /* SelectPartner.storyboard */; };
+		FC4DC2012299AA9000C59C52 /* AcceptOfferCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4DC2002299AA9000C59C52 /* AcceptOfferCoordinator.swift */; };
+		FC4DC203229A864D00C59C52 /* DocumentUploadCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4DC202229A864D00C59C52 /* DocumentUploadCoordinator.swift */; };
 		FC505517220446830013AF4C /* CompanyMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC505516220446830013AF4C /* CompanyMapView.swift */; };
 		FC50E9CE2213EF5400C9A621 /* SearchModeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */; };
 		FC59B1921F8155480068EC9C /* F4SQuadtree.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18C1F81546C0068EC9C /* F4SQuadtree.swift */; };
@@ -205,7 +207,6 @@
 		FC72219F20FE248400F10953 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = FC72219B20FE248400F10953 /* Appfile */; };
 		FC7221A020FE248400F10953 /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = FC72219C20FE248400F10953 /* Fastfile */; };
 		FC73719B2101C7EF00C0032A /* AcceptOffer.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC73719A2101C7EF00C0032A /* AcceptOffer.xcassets */; };
-		FC789E622133E76100AED05D /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC789E612133E76100AED05D /* UIView+Extensions.swift */; };
 		FC85A5ED2191D87B004E877E /* AddDocumentsViewController+AddDocumentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85A5EC2191D87B004E877E /* AddDocumentsViewController+AddDocumentDelegate.swift */; };
 		FC85A5EF2191D92E004E877E /* AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85A5EE2191D92E004E877E /* AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift */; };
 		FC85FA8220A3436600059EFB /* F4SMessageServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85FA8120A3436600059EFB /* F4SMessageServices.swift */; };
@@ -274,6 +275,7 @@
 		FCB6B8ED2074C59C0042C725 /* F4SCalendarContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8DF2074C59C0042C725 /* F4SCalendarContainerViewController.swift */; };
 		FCB6D0EE2198182D00B392DB /* F4SDocumentUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6D0ED2198182D00B392DB /* F4SDocumentUploader.swift */; };
 		FCB6D9361F75056100B8C268 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCB6D9351F75056000B8C268 /* Branding.plist */; };
+		FCBF3F2D22993C2100C0A4F9 /* UserDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBF3F2C22993C2100C0A4F9 /* UserDetailsCoordinator.swift */; };
 		FCC1D4F8219985A0007DD2DB /* F4SPostDocumentDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1D4F7219985A0007DD2DB /* F4SPostDocumentDataViewController.swift */; };
 		FCC212E9219077C000D8D5B7 /* F4SCameraCapture.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC212C9219077C000D8D5B7 /* F4SCameraCapture.storyboard */; };
 		FCC212EA219077C000D8D5B7 /* DocumentCapture.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC212CA219077C000D8D5B7 /* DocumentCapture.storyboard */; };
@@ -326,13 +328,12 @@
 		FCE51E402210362800DC1D50 /* PlacesSearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E3F2210362800DC1D50 /* PlacesSearchDataGetter.swift */; };
 		FCE51E422210365B00DC1D50 /* CompanySearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E412210365B00DC1D50 /* CompanySearchDataGetter.swift */; };
 		FCE51E44221039D600DC1D50 /* PersonSearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E43221039D600DC1D50 /* PersonSearchDataGetter.swift */; };
-		FCE83ED6213BD72000D0953A /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE83ED5213BD72000D0953A /* UITableView+Extensions.swift */; };
 		FCEE5E1E2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEE5E1D2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift */; };
-		FCEF43D622870F370055B5F7 /* ExtraInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF43D522870F370055B5F7 /* ExtraInfoViewModel.swift */; };
+		FCEF43D622870F370055B5F7 /* UserDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF43D522870F370055B5F7 /* UserDetailsViewModel.swift */; };
 		FCEF43D822870F410055B5F7 /* AgeLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF43D722870F410055B5F7 /* AgeLogic.swift */; };
 		FCEF43DA22870F490055B5F7 /* DateOfBirthPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF43D922870F490055B5F7 /* DateOfBirthPickerViewModel.swift */; };
 		FCEF43DC22870F520055B5F7 /* InformationLabelStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF43DB22870F520055B5F7 /* InformationLabelStrings.swift */; };
-		FCEF43DE2287130C0055B5F7 /* ExtraInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCEF43DD2287130C0055B5F7 /* ExtraInfo.storyboard */; };
+		FCEF43DE2287130C0055B5F7 /* UserDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCEF43DD2287130C0055B5F7 /* UserDetails.storyboard */; };
 		FCEF70B721087207001C229A /* F4SInviteDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF70B621087207001C229A /* F4SInviteDetailCell.swift */; };
 		FCEF70BB2108A535001C229A /* F4SInviteButtonsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF70BA2108A535001C229A /* F4SInviteButtonsTableViewCell.swift */; };
 		FCEF70BD2108A809001C229A /* F4SInviteSectionHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF70BC2108A809001C229A /* F4SInviteSectionHeaderTableViewCell.swift */; };
@@ -444,7 +445,7 @@
 		20D51BE31E27710C003A8358 /* UNService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNService.swift; sourceTree = "<group>"; };
 		20FABFEB1DDDA63600D583E2 /* FileHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		20FEBDD91DE5AD3400EBDCBF /* F4SImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SImageService.swift; sourceTree = "<group>"; };
-		405974071DFD449C0002DB3A /* ExtraInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtraInfoViewController.swift; sourceTree = "<group>"; };
+		405974071DFD449C0002DB3A /* UserDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
 		405974091E00115B0002DB3A /* NextResponderTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextResponderTextField.swift; sourceTree = "<group>"; };
 		40A28CB11E1D1D200077D490 /* TimelineEntryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineEntryTableViewCell.swift; sourceTree = "<group>"; };
 		40A28CB61E1F96A60077D490 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/RatePlacement.storyboard; sourceTree = "<group>"; };
@@ -538,8 +539,8 @@
 		D54E0FFC1E044B0400A51560 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/InfoWindowView.xib; sourceTree = "<group>"; };
 		D54E0FFE1E044B1800A51560 /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		D54E10011E044B6B00A51560 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "f4s-workexperience/Base.lproj/Content.storyboard"; sourceTree = "<group>"; };
-		D54E10041E044BA000A51560 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "f4s-workexperience/Base.lproj/ProcessedMessages.storyboard"; sourceTree = "<group>"; };
-		D54E10061E044BC100A51560 /* ProcessedMessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessedMessagesViewController.swift; sourceTree = "<group>"; };
+		D54E10041E044BA000A51560 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "f4s-workexperience/Base.lproj/HalfWayHooray.storyboard"; sourceTree = "<group>"; };
+		D54E10061E044BC100A51560 /* HalfWayHoorayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfWayHoorayViewController.swift; sourceTree = "<group>"; };
 		D5E9EBE91DD60AB300BD796E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FC06264622032E74000D2D04 /* CompanyDocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDocumentsViewController.swift; sourceTree = "<group>"; };
 		FC0B407D226CAA6E00D992AC /* RecommendationCompanyConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationCompanyConverter.swift; sourceTree = "<group>"; };
@@ -622,6 +623,8 @@
 		FC4BB6041FA20F4100173864 /* F4SPartner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPartner.swift; sourceTree = "<group>"; };
 		FC4BB6061FA20F5100173864 /* F4SPartnersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPartnersModel.swift; sourceTree = "<group>"; };
 		FC4BB6081FA21BA400173864 /* SelectPartner.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectPartner.storyboard; sourceTree = "<group>"; };
+		FC4DC2002299AA9000C59C52 /* AcceptOfferCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptOfferCoordinator.swift; sourceTree = "<group>"; };
+		FC4DC202229A864D00C59C52 /* DocumentUploadCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentUploadCoordinator.swift; sourceTree = "<group>"; };
 		FC505516220446830013AF4C /* CompanyMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyMapView.swift; sourceTree = "<group>"; };
 		FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModeSelectorView.swift; sourceTree = "<group>"; };
 		FC59B18C1F81546C0068EC9C /* F4SQuadtree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SQuadtree.swift; sourceTree = "<group>"; };
@@ -649,7 +652,6 @@
 		FC72219B20FE248400F10953 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
 		FC72219C20FE248400F10953 /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
 		FC73719A2101C7EF00C0032A /* AcceptOffer.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AcceptOffer.xcassets; sourceTree = "<group>"; };
-		FC789E612133E76100AED05D /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		FC79314720226D440034D201 /* F4SDistribution.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = F4SDistribution.entitlements; path = Config/F4SDistribution.entitlements; sourceTree = "<group>"; };
 		FC85A5EC2191D87B004E877E /* AddDocumentsViewController+AddDocumentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddDocumentsViewController+AddDocumentDelegate.swift"; sourceTree = "<group>"; };
 		FC85A5EE2191D92E004E877E /* AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift"; sourceTree = "<group>"; };
@@ -722,6 +724,7 @@
 		FCB6B8DF2074C59C0042C725 /* F4SCalendarContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarContainerViewController.swift; sourceTree = "<group>"; };
 		FCB6D0ED2198182D00B392DB /* F4SDocumentUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDocumentUploader.swift; sourceTree = "<group>"; };
 		FCB6D9351F75056000B8C268 /* Branding.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
+		FCBF3F2C22993C2100C0A4F9 /* UserDetailsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsCoordinator.swift; sourceTree = "<group>"; };
 		FCC1D4F7219985A0007DD2DB /* F4SPostDocumentDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPostDocumentDataViewController.swift; sourceTree = "<group>"; };
 		FCC212C9219077C000D8D5B7 /* F4SCameraCapture.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SCameraCapture.storyboard; sourceTree = "<group>"; };
 		FCC212CB219077C000D8D5B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/DocumentCapture.storyboard; sourceTree = "<group>"; };
@@ -776,13 +779,12 @@
 		FCE51E3F2210362800DC1D50 /* PlacesSearchDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesSearchDataGetter.swift; sourceTree = "<group>"; };
 		FCE51E412210365B00DC1D50 /* CompanySearchDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanySearchDataGetter.swift; sourceTree = "<group>"; };
 		FCE51E43221039D600DC1D50 /* PersonSearchDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonSearchDataGetter.swift; sourceTree = "<group>"; };
-		FCE83ED5213BD72000D0953A /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		FCEE5E1D2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorBackgroundViewController.swift; sourceTree = "<group>"; };
-		FCEF43D522870F370055B5F7 /* ExtraInfoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtraInfoViewModel.swift; sourceTree = "<group>"; };
+		FCEF43D522870F370055B5F7 /* UserDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailsViewModel.swift; sourceTree = "<group>"; };
 		FCEF43D722870F410055B5F7 /* AgeLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgeLogic.swift; sourceTree = "<group>"; };
 		FCEF43D922870F490055B5F7 /* DateOfBirthPickerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateOfBirthPickerViewModel.swift; sourceTree = "<group>"; };
 		FCEF43DB22870F520055B5F7 /* InformationLabelStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationLabelStrings.swift; sourceTree = "<group>"; };
-		FCEF43DD2287130C0055B5F7 /* ExtraInfo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ExtraInfo.storyboard; sourceTree = "<group>"; };
+		FCEF43DD2287130C0055B5F7 /* UserDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserDetails.storyboard; sourceTree = "<group>"; };
 		FCEF70B621087207001C229A /* F4SInviteDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInviteDetailCell.swift; sourceTree = "<group>"; };
 		FCEF70BA2108A535001C229A /* F4SInviteButtonsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInviteButtonsTableViewCell.swift; sourceTree = "<group>"; };
 		FCEF70BC2108A809001C229A /* F4SInviteSectionHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInviteSectionHeaderTableViewCell.swift; sourceTree = "<group>"; };
@@ -1624,8 +1626,8 @@
 		FC24D24D226B092A00FA04A1 /* Half-way-hooray */ = {
 			isa = PBXGroup;
 			children = (
-				D54E10031E044BA000A51560 /* ProcessedMessages.storyboard */,
-				D54E10061E044BC100A51560 /* ProcessedMessagesViewController.swift */,
+				D54E10031E044BA000A51560 /* HalfWayHooray.storyboard */,
+				D54E10061E044BC100A51560 /* HalfWayHoorayViewController.swift */,
 			);
 			path = "Half-way-hooray";
 			sourceTree = "<group>";
@@ -1644,9 +1646,10 @@
 		FC24D250226B0BA500FA04A1 /* Capture user details */ = {
 			isa = PBXGroup;
 			children = (
-				FCEF43DD2287130C0055B5F7 /* ExtraInfo.storyboard */,
-				405974071DFD449C0002DB3A /* ExtraInfoViewController.swift */,
-				FCEF43D522870F370055B5F7 /* ExtraInfoViewModel.swift */,
+				FCBF3F2C22993C2100C0A4F9 /* UserDetailsCoordinator.swift */,
+				FCEF43DD2287130C0055B5F7 /* UserDetails.storyboard */,
+				405974071DFD449C0002DB3A /* UserDetailsViewController.swift */,
+				FCEF43D522870F370055B5F7 /* UserDetailsViewModel.swift */,
 				FCEF43D722870F410055B5F7 /* AgeLogic.swift */,
 				FCEF43D922870F490055B5F7 /* DateOfBirthPickerViewModel.swift */,
 				FCEF43DB22870F520055B5F7 /* InformationLabelStrings.swift */,
@@ -1901,8 +1904,6 @@
 		FC6771162125A55D000B0870 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				FC789E632133E79600AED05D /* UIViewController+Extensions */,
-				FC789E642133E7AF00AED05D /* UIView+Extensions */,
 				FC1D56052193239700451EED /* UIImage+Extensions */,
 			);
 			name = Extensions;
@@ -1927,22 +1928,6 @@
 				FC72219C20FE248400F10953 /* Fastfile */,
 			);
 			path = fastlane;
-			sourceTree = "<group>";
-		};
-		FC789E632133E79600AED05D /* UIViewController+Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "UIViewController+Extensions";
-			sourceTree = "<group>";
-		};
-		FC789E642133E7AF00AED05D /* UIView+Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				FC789E612133E76100AED05D /* UIView+Extensions.swift */,
-				FCE83ED5213BD72000D0953A /* UITableView+Extensions.swift */,
-			);
-			path = "UIView+Extensions";
 			sourceTree = "<group>";
 		};
 		FC8E303620F4A5DF006059DE /* F4SLogger */ = {
@@ -2013,6 +1998,7 @@
 		FCB3922820FF1C4B00792C0A /* Accept offer Workflow */ = {
 			isa = PBXGroup;
 			children = (
+				FC4DC2002299AA9000C59C52 /* AcceptOfferCoordinator.swift */,
 				FCDE24712105AB83008B4315 /* UI Components */,
 				FCB3922920FF1E0A00792C0A /* AcceptOffer.storyboard */,
 				FCB3922B20FF1E3100792C0A /* AcceptOfferViewController.swift */,
@@ -2112,7 +2098,6 @@
 			children = (
 				FCC212CC219077C000D8D5B7 /* Camera.storyboard */,
 				FCC212C9219077C000D8D5B7 /* F4SCameraCapture.storyboard */,
-				FCC212CA219077C000D8D5B7 /* DocumentCapture.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -2143,6 +2128,8 @@
 		FCC212D4219077C000D8D5B7 /* Add documents View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FC4DC202229A864D00C59C52 /* DocumentUploadCoordinator.swift */,
+				FCC212CA219077C000D8D5B7 /* DocumentCapture.storyboard */,
 				FCC212D6219077C000D8D5B7 /* F4SAddDocumentsViewController.swift */,
 				FC85A5EC2191D87B004E877E /* AddDocumentsViewController+AddDocumentDelegate.swift */,
 				FC85A5EE2191D92E004E877E /* AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift */,
@@ -2436,7 +2423,7 @@
 				FC21BE33220F53EB00A0A389 /* RandomNames.csv in Resources */,
 				204203F51E4B793F007C7409 /* Favourite.storyboard in Resources */,
 				40A28CC21E24ED0D0077D490 /* SuccessExtraInfo.storyboard in Resources */,
-				FCEF43DE2287130C0055B5F7 /* ExtraInfo.storyboard in Resources */,
+				FCEF43DE2287130C0055B5F7 /* UserDetails.storyboard in Resources */,
 				40E78E8F1DD32C4E000A3776 /* Settings.bundle in Resources */,
 				FCC212E9219077C000D8D5B7 /* F4SCameraCapture.storyboard in Resources */,
 				FCC212EB219077C000D8D5B7 /* Camera.storyboard in Resources */,
@@ -2465,7 +2452,7 @@
 				FC9B28AB222FAF870077CFF0 /* API used in the app in Resources */,
 				FCD3486B20049DFB00DC1316 /* F4SEmailVerification.storyboard in Resources */,
 				201458C51E1CFCE500DBC9BD /* Message.storyboard in Resources */,
-				D54E10051E044BA000A51560 /* ProcessedMessages.storyboard in Resources */,
+				D54E10051E044BA000A51560 /* HalfWayHooray.storyboard in Resources */,
 				40E78E951DD391F3000A3776 /* MapView.storyboard in Resources */,
 				FCC212F0219077C000D8D5B7 /* DocumentCapture.xcassets in Resources */,
 				FC72219F20FE248400F10953 /* Appfile in Resources */,
@@ -2604,7 +2591,7 @@
 				40C1A4E61DDB356B000F80AA /* TabBarViewController.swift in Sources */,
 				FCC212F4219077C000D8D5B7 /* F4SAddUrlViewController.swift in Sources */,
 				FCA53B921FE00CB5009F6DB0 /* Versioning.swift in Sources */,
-				D54E10071E044BC100A51560 /* ProcessedMessagesViewController.swift in Sources */,
+				D54E10071E044BC100A51560 /* HalfWayHoorayViewController.swift in Sources */,
 				FC85A5ED2191D87B004E877E /* AddDocumentsViewController+AddDocumentDelegate.swift in Sources */,
 				FCB46F0A20516FD200F0779F /* F4SFeatureSwitchTableViewCell.swift in Sources */,
 				FC24D238226AEDD800FA04A1 /* RecommendationsListViewModel.swift in Sources */,
@@ -2617,6 +2604,7 @@
 				2037B0AF1DEC592900A9DE3E /* PlacementDBOperations.swift in Sources */,
 				FCA90A88221D2D4500EACD8D /* UserDefaultKeys.swift in Sources */,
 				40A28CBB1E1F9BCF0077D490 /* RatingControl.swift in Sources */,
+				FC4DC2012299AA9000C59C52 /* AcceptOfferCoordinator.swift in Sources */,
 				FCB3923021006AB500792C0A /* F4SPlacementInviteDetailTableViewController.swift in Sources */,
 				FCE11E59211437B400403789 /* F4SDateHelper.swift in Sources */,
 				FC24D23D226AFC1800FA04A1 /* RecommendedCompaniesListModel.swift in Sources */,
@@ -2640,7 +2628,7 @@
 				40E78E791DD32BE7000A3776 /* DrawerVisualState.swift in Sources */,
 				204C89791DF5F0B200D8493A /* ChooseAttributesViewController.swift in Sources */,
 				FC39F46021AAA618005B0A07 /* MessageViewController.swift in Sources */,
-				FCEF43D622870F370055B5F7 /* ExtraInfoViewModel.swift in Sources */,
+				FCEF43D622870F370055B5F7 /* UserDetailsViewModel.swift in Sources */,
 				FC64A5932119EBE3006464A5 /* CalendarChooserController.swift in Sources */,
 				FCB6B8ED2074C59C0042C725 /* F4SCalendarContainerViewController.swift in Sources */,
 				FC99BDCC20D172B600278DDE /* F4SCompanyDatabaseMetadataService.swift in Sources */,
@@ -2703,13 +2691,12 @@
 				40A5CF3C1DED6FA2000007AB /* InterestsViewController.swift in Sources */,
 				40E78E701DD32BD4000A3776 /* MenuHelper.swift in Sources */,
 				FCB4930A222A879000B88B8B /* FavouritesCoordinator.swift in Sources */,
-				FCE83ED6213BD72000D0953A /* UITableView+Extensions.swift in Sources */,
 				FCB46F0820513D0100F0779F /* F4SFeatureSwitchModel.swift in Sources */,
-				FC789E622133E76100AED05D /* UIView+Extensions.swift in Sources */,
 				2037B0A71DEC3C3B00A9DE3E /* InterestCoreDataManager.swift in Sources */,
 				204C89551DF5A36100D8493A /* TemplateChoiceDB.swift in Sources */,
 				204C89781DF5F0B200D8493A /* ChooseAttributesTableViewCell.swift in Sources */,
 				FC99F3D72000BE4900E3AC5A /* F4SService.swift in Sources */,
+				FCBF3F2D22993C2100C0A4F9 /* UserDetailsCoordinator.swift in Sources */,
 				FC4BB6051FA20F4100173864 /* F4SPartner.swift in Sources */,
 				FCF798542227F5AB00D67A7D /* RecommendationsCoordinator.swift in Sources */,
 				FCA6C829210760E000A222FE /* F4SHoorayViewController.swift in Sources */,
@@ -2742,6 +2729,7 @@
 				206F8F911E1E552F0024937B /* MessageOptionsView.swift in Sources */,
 				FCC212FB219077C000D8D5B7 /* F4SDisplayTableViewController.swift in Sources */,
 				FC1DC08D21FE1509009ABC60 /* CompanyViewController.swift in Sources */,
+				FC4DC203229A864D00C59C52 /* DocumentUploadCoordinator.swift in Sources */,
 				206F8F8B1E1E48120024937B /* OptionLabel.swift in Sources */,
 				FC21BE3B220F53EB00A0A389 /* SearchViewStateMachine.swift in Sources */,
 				FCB3617B224D44610056E0B6 /* ChooseAttributesViewModel.swift in Sources */,
@@ -2797,7 +2785,7 @@
 				FCC212FC219077C000D8D5B7 /* F4SArrangeTableViewCell.swift in Sources */,
 				FC1DC06221FE137A009ABC60 /* ScaledNumber.swift in Sources */,
 				FC9EAD8421106846001C56CE /* F4SAccepOfferContext.swift in Sources */,
-				405974081DFD449C0002DB3A /* ExtraInfoViewController.swift in Sources */,
+				405974081DFD449C0002DB3A /* UserDetailsViewController.swift in Sources */,
 				206F8F8C1E1E48120024937B /* MessageOptionCollectionViewCell.swift in Sources */,
 				FC631CB820D679AC00199507 /* F4SNetworkSessionManager.swift in Sources */,
 				FC0B4080226CAAEE00D992AC /* RecommendedCompaniesLocalRepository.swift in Sources */,
@@ -3039,12 +3027,12 @@
 			name = Content.storyboard;
 			sourceTree = "<group>";
 		};
-		D54E10031E044BA000A51560 /* ProcessedMessages.storyboard */ = {
+		D54E10031E044BA000A51560 /* HalfWayHooray.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				D54E10041E044BA000A51560 /* Base */,
 			);
-			name = ProcessedMessages.storyboard;
+			name = HalfWayHooray.storyboard;
 			sourceTree = "<group>";
 		};
 		D5E9EBEA1DD60AB300BD796E /* Localizable.strings */ = {

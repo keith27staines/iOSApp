@@ -24,31 +24,33 @@ class CompanyToolbar: UIToolbar {
     weak var toolbarDelegate: CompanyToolbarDelegate?
     
     var shareButton: UIBarButtonItem = {
-         let button = UIBarButtonItem(image: #imageLiteral(resourceName: "share_ios"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(handleButtonTapped))
+        let button = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action, target: self, action: #selector(handleButtonTapped))
         button.tag = ActionType.showShare.rawValue
-        button.tintColor = UIColor.blue
+        button.tintColor = UIColor.gray
         return button
     }()
     
     func heartAppearance(hearted: Bool) {
         let on = #imageLiteral(resourceName: "heartFilled")
-        let off = #imageLiteral(resourceName: "heartUnfilled")
+        let off = UIImage(named: "heartOutline")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         heartButton.image = hearted ? on : off
-        heartButton.tintColor = hearted ? UIColor.red : UIColor.blue
+        heartButton.tintColor = hearted ? UIColor.blue : UIColor.gray
     }
     
-    func mapApperance(shown: Bool) {
-        mapButton.tintColor = shown ? UIColor.red : UIColor.blue
+    func mapAppearance(shown: Bool) {
+        mapButton.tintColor = shown ? UIColor.blue : UIColor.gray
     }
     
     var heartButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(image: #imageLiteral(resourceName: "heartUnfilled"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(handleButtonTapped))
+        let heartImage = UIImage(named: "heartOutline")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        let button = UIBarButtonItem(image: heartImage, style: UIBarButtonItem.Style.plain, target: self, action: #selector(handleButtonTapped))
         button.tag = ActionType.toggleHeart.rawValue
         return button
     }()
     
     var mapButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(image: #imageLiteral(resourceName: "map"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(handleButtonTapped))
+        let image = UIImage(named: "pin_on_map")
+        let button = UIBarButtonItem(image: image, style: UIBarButtonItem.Style.plain, target: self, action: #selector(handleButtonTapped))
         button.tag = ActionType.showMap.rawValue
         return button
     }()

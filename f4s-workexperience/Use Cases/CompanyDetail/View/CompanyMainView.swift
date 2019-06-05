@@ -74,7 +74,7 @@ class CompanyMainView: UIView {
         didSet {
             mapTopConstraint?.constant = mapOffsetConstant
             mapBottomConstraint?.constant = mapOffsetConstant
-            toolbarView.mapApperance(shown: mapOffsetConstant <= 0)
+            toolbarView.mapAppearance(shown: mapOffsetConstant <= 0)
         }
     }
     

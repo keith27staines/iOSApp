@@ -25,6 +25,7 @@ class MessageContainerViewController: UIViewController {
     @IBAction func unwindToMessageContainer(segue: UIStoryboardSegue) {
     }
     
+    weak var coordinator: TimelineCoordinator?
     var messageController: MessageViewController?
     var threadUuid: String?
     var company: Company?
@@ -121,15 +122,9 @@ class MessageContainerViewController: UIViewController {
         do {
             try F4SActionValidator.validate(action: action)
             let actionType = action.actionType!
-            switch action.actionType! {
+            switch actionType {
             case .uploadDocuments:
-                guard
-                    let addDocumentsController = UIStoryboard(name: "DocumentCapture", bundle: nil).instantiateInitialViewController() as? F4SAddDocumentsViewController,
-                    let placement = placement, let company = company,
-                    let requestModel = F4SBusinessLeadersRequestModel(action: action, placement: placement, company: company) else { return }
-                let navigationController = UINavigationController(rootViewController: addDocumentsController)
-                addDocumentsController.mode = .businessLeaderRequest(requestModel)
-                present(navigationController, animated: true, completion: nil)
+                coordinator?.showAddDocuments(placement: placement, company: company, action: action)
                 
             case .viewOffer:
                 sharedUserMessageHandler.showLoadingOverlay(self.view)
@@ -141,26 +136,13 @@ class MessageContainerViewController: UIViewController {
                     } else {
                         sharedUserMessageHandler.hideLoadingOverlay()
                         strongSelf.acceptContext = context
-                        strongSelf.performSegue(withIdentifier: actionType.rawValue, sender: self)
+                        strongSelf.coordinator?.showAcceptOffer(acceptContext: context)
                     }
                 }
                 
             case .viewCompanyExternalApplication:
-                guard let urlString = action.argument(name: F4SActionArgumentName.externalWebsite)?.value.first, let url = URL(string: urlString) else {
-                    // Invalid url
-                    globalLog.error("The action contained an invalid url to the company's external application page")
-                    return
-                }
-                UIApplication.shared.open(url, options: [:]) { [weak self] (success) in
-                    guard let strongSelf = self else {
-                        return
-                    }
-                    // log visit to segment
-                    var event = F4SAnalyticsEvent(name: .viewCompanyExternalApplication)
-                    event.addProperty(name: "placement_uuid", value: strongSelf.acceptContext?.placement.placementUuid ?? "")
-                    event.addProperty(name: "company_name", value: strongSelf.acceptContext?.company.name ?? "")
-                    event.track()
-                }
+                let urlString = action.argument(name: F4SActionArgumentName.externalWebsite)?.value.first
+                coordinator?.showExternalCompanySite(urlString: urlString, acceptContext: acceptContext)
             }
         } catch {
             globalLog.error(error)
@@ -194,33 +176,33 @@ class MessageContainerViewController: UIViewController {
                     let user = F4SUser()
                     if let url = NSURL(string: strongSelf.company?.logoUrl ?? "") {
                         F4SImageService.sharedInstance.getImage(url: url, completion: { [weak self] image in
-                            guard let strongSelf = self else { return }
-                            if let roleUuid = placement.roleUuid {
-                                let companyService = F4SCompanyService()
-                                let roleService = F4SRoleService()
-                                let companyUuid = strongSelf.company!.uuid
-                                roleService.getRoleForCompany(companyUuid: companyUuid, roleUuid: roleUuid, completion: { (networkResult) in
-                                    DispatchQueue.main.async {
-                                        switch networkResult {
-                                        case .error(let error):
-                                            completion(error, nil)
-                                        case .success(let role):
-                                            companyService.getCompany(uuid: companyUuid, completion: { (result) in
-                                                DispatchQueue.main.async {
-                                                    switch result {
-                                                    case .error(let error):
-                                                        completion(error, nil)
-                                                    case .success(let companyJson):
-                                                        let context = AcceptOfferContext(user: user, company: strongSelf.company!, companyJson: companyJson, logo: image, placement: placement, role: role)
-                                                        completion(nil, context)
-                                                    }
-                                                }
-                                            })
-                                        }
-                                    }
-                                })
-                            }
+                            guard
+                                let strongSelf = self,
+                                let roleUuid = placement.roleUuid else { return }
                             
+                            let companyService = F4SCompanyService()
+                            let roleService = F4SRoleService()
+                            let companyUuid = strongSelf.company!.uuid
+                            roleService.getRoleForCompany(companyUuid: companyUuid, roleUuid: roleUuid, completion: { (networkResult) in
+                                DispatchQueue.main.async {
+                                    switch networkResult {
+                                    case .error(let error):
+                                        completion(error, nil)
+                                    case .success(let role):
+                                        companyService.getCompany(uuid: companyUuid, completion: { (result) in
+                                            DispatchQueue.main.async {
+                                                switch result {
+                                                case .error(let error):
+                                                    completion(error, nil)
+                                                case .success(let companyJson):
+                                                    let context = AcceptOfferContext(user: user, company: strongSelf.company!, companyJson: companyJson, logo: image, placement: placement, role: role)
+                                                    completion(nil, context)
+                                                }
+                                            }
+                                        })
+                                    }
+                                }
+                            })
                         })
                     }
                 }
@@ -238,18 +220,9 @@ class MessageContainerViewController: UIViewController {
     internal var acceptContext: AcceptOfferContext? = nil
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let segueName: String = segue.identifier!
-        if segueName == "toMessage" {
-            messageController = (segue.destination as! MessageViewController)
-            configureMessageController()
-            return
-        }
-        if segueName == "view_offer" {
-            guard let vc = segue.destination as? AcceptOfferViewController else {
-                return
-            }
-            vc.accept = acceptContext
-        }
+        assert(segue.identifier == "toMessage", "Unexpected segue from MessageContainerViewController")
+        messageController = (segue.destination as! MessageViewController)
+        configureMessageController()
     }
     
     func configureMessageController() {
@@ -277,9 +250,8 @@ extension MessageContainerViewController {
             return
         }
         
-        guard let meesageOptionFooter = self.messageOptionsView else {
-            return
-        }
+        guard let meesageOptionFooter = self.messageOptionsView else { return }
+        
         if let cannedResponses = self.cannedResponses, cannedResponses.options.count > 0 {
             meesageOptionFooter.loadMessageOptions(options: cannedResponses.options, parentController: self)
             self.answersHeight.constant = MessageOptionHelper.sharedInstance.getFooterSize(options: cannedResponses.options).height
@@ -338,7 +310,7 @@ extension MessageContainerViewController {
     
     func showMessageWithThread(threadUuid: String) {
         if let placement = self.placements.filter({ $0.threadUuid == threadUuid }).first, let company = self.companies.filter({ $0.uuid == placement.companyUuid!.dehyphenated }).first {
-            TabBarCoordinator.sharedInstance.pushMessageController(parentCtrl: self, threadUuid: threadUuid, company: company, placements: self.placements, companies: self.companies)
+            coordinator?.showMessageController(parentCtrl: self, threadUuid: threadUuid, company: company, placements: self.placements, companies: self.companies)
         }
     }
 }
@@ -355,6 +327,6 @@ extension MessageContainerViewController {
     
     @objc func showCompanyDetailsView() {
         guard let company = self.company else { return }
-        TabBarCoordinator.sharedInstance.presentCompanyDetailsPopover(parentCtrl: self, company: company)
+        coordinator?.showCompanyDetails(parentCtrl: self, company: company)
     }
 }

@@ -137,8 +137,6 @@ extension PartnerSelectionViewController : UITableViewDataSource, UITableViewDel
         selectedPartner = partnersModel.partnerForIndexPath(indexPath)
         partnersModel.selectedPartner = selectedPartner
         partnerText.isHidden = selectedPartner?.name.lowercased() == "ncs" ? false : true
-        let skin = skinForPartner(partner: selectedPartner)
-        makeSkinGlobal(skin: skin)
         referrerTextBox.text = selectedPartner?.name ?? ""
         partnerLogoImageView.image = selectedPartner?.image
         animatePullUpTable()
@@ -147,23 +145,6 @@ extension PartnerSelectionViewController : UITableViewDataSource, UITableViewDel
             animatePartnerIn()
         }
         applyStyle()
-    }
-    
-    func makeSkinGlobal(skin: Skin?) {
-        (UIApplication.shared.delegate as? AppDelegate)?.skin = skin
-    }
-    
-    func skinForPartner(partner: F4SPartner?) -> Skin? {
-        let workfinder = (UIApplication.shared.delegate as? AppDelegate)?.skins["workfinder"]
-        guard let partner = partner else {
-            return workfinder
-        }
-        switch partner.name.lowercased() {
-        case "ncs":
-            return (UIApplication.shared.delegate as? AppDelegate)?.skins[partner.name.lowercased()]
-        default:
-            return workfinder
-        }
     }
 }
 

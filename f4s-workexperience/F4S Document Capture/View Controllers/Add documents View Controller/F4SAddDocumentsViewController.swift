@@ -24,6 +24,8 @@ class F4SAddDocumentsViewController: UIViewController {
     
     @IBOutlet weak var primaryActionButton: UIButton!
     
+    weak var coordinator: DocumentUploadCoordinator?
+    
     lazy var documentModel: F4SDocumentUploadModelBase = {
         switch mode {
         case .applyWorkflow:
@@ -35,16 +37,6 @@ class F4SAddDocumentsViewController: UIViewController {
         }
     }()
     
-    lazy var userService: F4SUserService = {
-        return F4SUserService()
-    }()
-    
-    @IBAction func addDocumentButtonTapped(_ sender: Any) {
-        hidePopopMenu()
-        selectedIndexPath = nil
-        performSegue(withIdentifier: "showPickMethod", sender: self)
-    }
-    
     lazy var popupCellMenu: F4SDCPopupMenuView = {
         let frame = CGRect(x: 0, y: 0, width: 150, height: 120)
         let popup = F4SDCPopupMenuView(frame: frame)
@@ -55,20 +47,6 @@ class F4SAddDocumentsViewController: UIViewController {
         popup.delegate = self
         return popup
     }()
-    
-    @IBAction func performPrimaryAction(_ sender: Any) {
-        switch mode {
-        case .applyWorkflow:
-            performPrimaryActionForApplyMode()
-        case .businessLeaderRequest:
-            performPrimaryActionForBLRequestMode()
-        }
-
-    }
-    
-    func popToHere() {
-        navigationController?.popToRootViewController(animated: true)
-    }
     
     enum Mode {
         case applyWorkflow
@@ -101,14 +79,7 @@ class F4SAddDocumentsViewController: UIViewController {
             }
         }
         
-        var bigPlusButtonHeightConstraintConstant: CGFloat {
-            switch self {
-            case .applyWorkflow:
-                return 60.0
-            case .businessLeaderRequest:
-                return 60.0
-            }
-        }
+        var bigPlusButtonHeightConstraintConstant: CGFloat { return 60.0 }
     }
     
     var mode: Mode = .applyWorkflow {
@@ -118,6 +89,13 @@ class F4SAddDocumentsViewController: UIViewController {
             subheadingLabel.text = mode.subheadingText
             addDocumentButton.isHidden = mode.bigPlusButtonIsHidden
             addButtonHeightConstraint.constant = mode.bigPlusButtonHeightConstraintConstant
+        }
+    }
+    
+    var showCancel: Bool {
+        switch mode {
+        case .applyWorkflow: return false
+        case .businessLeaderRequest(_): return true
         }
     }
     
@@ -132,8 +110,26 @@ class F4SAddDocumentsViewController: UIViewController {
         configureNavigationItems()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
+        navigationItem.hidesBackButton = true
+        navigationController?.isNavigationBarHidden = false
+        updateEnabledStateOfAddButton(documentModel)
         applySkin()
+    }
+    
+    @IBAction func addDocumentButtonTapped(_ sender: Any) {
+        hidePopopMenu()
+        selectedIndexPath = nil
+        coordinator?.showPickMethodForNewDocument(documentTypes: documentTypes, addDocumentDelegate: self)
+    }
+    
+    @IBAction func performPrimaryAction(_ sender: Any) {
+        switch mode {
+        case .applyWorkflow:
+            performPrimaryActionForApplyMode()
+        case .businessLeaderRequest:
+            performPrimaryActionForBLRequestMode()
+        }
     }
     
     func modeSpecificLoad() {
@@ -150,12 +146,14 @@ class F4SAddDocumentsViewController: UIViewController {
         let infoImage = #imageLiteral(resourceName: "infoIcon")
         let infoItem = UIBarButtonItem(image: infoImage, style: .plain, target: self, action: #selector(handleInfoTap))
         navigationItem.rightBarButtonItem = infoItem
-        let closeButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancelTap))
-        navigationItem.leftBarButtonItem = closeButton
+        if showCancel {
+            let closeButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancelTap))
+            navigationItem.leftBarButtonItem = closeButton
+        }
     }
     
     @objc func handleCancelTap() {
-        dismiss(animated: true, completion: nil)
+        coordinator?.documentUploadDidCancel()
     }
     
     @objc func handleInfoTap() {
@@ -193,37 +191,6 @@ class F4SAddDocumentsViewController: UIViewController {
     
     var selectedIndexPath: IndexPath? = nil
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-        switch segue.identifier {
-        case "showNext":
-            break
-            
-        case "showPickMethod":
-            if let vc = segue.destination as? F4SDCAddDocumentViewController {
-                vc.delegate = self
-                vc.documentTypes = documentTypes
-                vc.document = F4SDocument(type: .cv)
-            }
-            
-        case "showPickMethodForSelectedDocument":
-            if let vc = segue.destination as? F4SDCAddDocumentViewController,
-                let selectedDocument = self.selectedDocument {
-                vc.delegate = self
-                vc.documentTypes = [selectedDocument.type]
-                vc.document = selectedDocument
-            }
-            
-        case "showDocument":
-            guard let document = selectedDocument else { return }
-            if let vc = segue.destination as? F4SDCDocumentViewerController {
-                vc.document = document
-            }
-            
-        default:
-            break
-        }
-    }
 }
 
 extension F4SAddDocumentsViewController : F4SDocumentUploadModelDelegate {
@@ -257,6 +224,18 @@ extension F4SAddDocumentsViewController : F4SDocumentUploadModelDelegate {
     
     fileprivate func updateEnabledStateOfAddButton(_ model: F4SDocumentUploadModelBase) {
         addDocumentButton.isEnabled = model.canAddPlaceholder()
+        switch mode {
+        case .applyWorkflow:
+            primaryActionButton.isEnabled = true
+            if model.numberOfRows(for: 0) == 0 {
+                primaryActionButton.setTitle("Skip", for: UIControl.State.normal)
+            } else {
+                primaryActionButton.setTitle("Upload", for: UIControl.State.normal)
+            }
+        case .businessLeaderRequest(_):
+            primaryActionButton.setTitle("Upload", for: UIControl.State.normal)
+            primaryActionButton.isEnabled = model.numberOfRows(for: 0) == 0 ? false : true
+        }
     }
     
     fileprivate func reloadFromModel() {
@@ -314,7 +293,7 @@ extension F4SAddDocumentsViewController : UITableViewDataSource, UITableViewDele
             popupCellMenu.isHidden = false
             popupCellMenu.context = cell
         } else {
-            performSegue(withIdentifier: "showPickMethodForSelectedDocument", sender: self)
+            coordinator?.showPickMethodForDocument(selectedDocument, addDocumentDelegate: self)
         }
     }
 }
@@ -327,12 +306,10 @@ extension F4SAddDocumentsViewController : F4SDCPopupMenuViewDelegate {
         else { return }
         
         switch index {
-        case 0:
-            // view
-            performSegue(withIdentifier: "showDocument", sender: self)
+        case 0: // view document
+            coordinator?.showDocument(selectedDocument)
             
-        case 1:
-            // delete
+        case 1: // delete
             hidePopopMenu()
             let alert = UIAlertController(title: "Delete Document", message: "Are you sure you want to delete this document?", preferredStyle: .actionSheet)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -353,12 +330,10 @@ extension F4SAddDocumentsViewController : F4SDCPopupMenuViewDelegate {
             alert.addAction(deleteAction)
             present(alert, animated: true, completion: nil)
 
-        case 2:
-            // Close menu
+        case 2: // Close menu
             hidePopopMenu()
             
-        default:
-            break
+        default: break
         }
     }
     

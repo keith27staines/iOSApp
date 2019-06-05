@@ -9,10 +9,14 @@
 /* Begin PBXBuildFile section */
 		FC116B4C2284510E00146478 /* WebViewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC116B4B2284510E00146478 /* WebViewAssets.xcassets */; };
 		FC116B4E2284511E00146478 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC116B4D2284511E00146478 /* WebViewController.swift */; };
+		FC9865BA229D3901006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865B9229D3901006D3E63 /* README */; };
+		FCA636AB22A3E57E004B3050 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA636AA22A3E57E004B3050 /* WorkfinderCommon.framework */; };
 		FCA91EAC2234065A007ED308 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91EA22234065A007ED308 /* WorkfinderUI.framework */; };
 		FCA91EB12234065A007ED308 /* WorkfinderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91EB02234065A007ED308 /* WorkfinderUITests.swift */; };
 		FCA91EB32234065A007ED308 /* WorkfinderUI.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA91EA52234065A007ED308 /* WorkfinderUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCA91EBF223406B4007ED308 /* WorkfinderUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91EBE223406B4007ED308 /* WorkfinderUI.swift */; };
+		FCEB1D25229FC6D600C6D2C2 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEB1D24229FC6D500C6D2C2 /* UIView+Extensions.swift */; };
+		FCEB1D27229FC6DB00C6D2C2 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEB1D26229FC6DB00C6D2C2 /* UITableView+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +32,8 @@
 /* Begin PBXFileReference section */
 		FC116B4B2284510E00146478 /* WebViewAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WebViewAssets.xcassets; sourceTree = "<group>"; };
 		FC116B4D2284511E00146478 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		FC9865B9229D3901006D3E63 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		FCA636AA22A3E57E004B3050 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA91EA22234065A007ED308 /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA91EA52234065A007ED308 /* WorkfinderUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderUI.h; sourceTree = "<group>"; };
 		FCA91EA62234065A007ED308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -35,6 +41,8 @@
 		FCA91EB02234065A007ED308 /* WorkfinderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderUITests.swift; sourceTree = "<group>"; };
 		FCA91EB22234065A007ED308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCA91EBE223406B4007ED308 /* WorkfinderUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderUI.swift; sourceTree = "<group>"; };
+		FCEB1D24229FC6D500C6D2C2 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		FCEB1D26229FC6DB00C6D2C2 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCA636AB22A3E57E004B3050 /* WorkfinderCommon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,12 +74,22 @@
 			path = WebView;
 			sourceTree = "<group>";
 		};
+		FCA636A922A3E57E004B3050 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FCA636AA22A3E57E004B3050 /* WorkfinderCommon.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FCA91E9822340659007ED308 = {
 			isa = PBXGroup;
 			children = (
+				FC9865B9229D3901006D3E63 /* README */,
 				FCA91EA42234065A007ED308 /* WorkfinderUI */,
 				FCA91EAF2234065A007ED308 /* WorkfinderUITests */,
 				FCA91EA32234065A007ED308 /* Products */,
+				FCA636A922A3E57E004B3050 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -113,6 +132,8 @@
 		FCA91EBD22340680007ED308 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				FCEB1D26229FC6DB00C6D2C2 /* UITableView+Extensions.swift */,
+				FCEB1D24229FC6D500C6D2C2 /* UIView+Extensions.swift */,
 				FC116B4F2284515F00146478 /* WebView */,
 				FCA91EBE223406B4007ED308 /* WorkfinderUI.swift */,
 			);
@@ -211,6 +232,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC9865BA229D3901006D3E63 /* README in Resources */,
 				FC116B4C2284510E00146478 /* WebViewAssets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -229,8 +251,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCEB1D25229FC6D600C6D2C2 /* UIView+Extensions.swift in Sources */,
 				FCA91EBF223406B4007ED308 /* WorkfinderUI.swift in Sources */,
 				FC116B4E2284511E00146478 /* WebViewController.swift in Sources */,
+				FCEB1D27229FC6DB00C6D2C2 /* UITableView+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

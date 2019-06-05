@@ -26,6 +26,7 @@
 		FC96709C2258C8B100318F69 /* F4SInterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96709B2258C8B100318F69 /* F4SInterest.swift */; };
 		FC9670A4225A195B00318F69 /* F4SPlacementRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9670A3225A195B00318F69 /* F4SPlacementRepositoryProtocol.swift */; };
 		FC9670A6225A279300318F69 /* F4SInterestsRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9670A5225A279300318F69 /* F4SInterestsRepositoryProtocol.swift */; };
+		FC9865BC229D3963006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865BB229D3963006D3E63 /* README */; };
 		FCA91E752234043D007ED308 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91E6B2234043D007ED308 /* WorkfinderCommon.framework */; };
 		FCA91E7A2234043D007ED308 /* WorkfinderCommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91E792234043D007ED308 /* WorkfinderCommonTests.swift */; };
 		FCA91E7C2234043D007ED308 /* WorkfinderCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA91E6E2234043D007ED308 /* WorkfinderCommon.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -100,6 +101,7 @@
 		FC96709B2258C8B100318F69 /* F4SInterest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInterest.swift; sourceTree = "<group>"; };
 		FC9670A3225A195B00318F69 /* F4SPlacementRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementRepositoryProtocol.swift; sourceTree = "<group>"; };
 		FC9670A5225A279300318F69 /* F4SInterestsRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInterestsRepositoryProtocol.swift; sourceTree = "<group>"; };
+		FC9865BB229D3963006D3E63 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		FCA91E6B2234043D007ED308 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA91E6E2234043D007ED308 /* WorkfinderCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderCommon.h; sourceTree = "<group>"; };
 		FCA91E6F2234043D007ED308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 		FCA91E612234043D007ED308 = {
 			isa = PBXGroup;
 			children = (
+				FC9865BB229D3963006D3E63 /* README */,
 				FCA91E6D2234043D007ED308 /* WorkfinderCommon */,
 				FCA91E782234043D007ED308 /* WorkfinderCommonTests */,
 				FCA91E6C2234043D007ED308 /* Products */,
@@ -440,6 +443,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC9865BC229D3963006D3E63 /* README in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

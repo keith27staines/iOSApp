@@ -23,6 +23,7 @@
 		FC96263A2248C1A900D5F850 /* ApplicationLetterViewControllerMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626342248C1A900D5F850 /* ApplicationLetterViewControllerMainView.swift */; };
 		FC96263B2248C1A900D5F850 /* ApplicationLetterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626352248C1A900D5F850 /* ApplicationLetterViewModel.swift */; };
 		FC96263C2248C1A900D5F850 /* ApplicationLetterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626362248C1A900D5F850 /* ApplicationLetterViewController.swift */; };
+		FC9865B6229D380A006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865B5229D380A006D3E63 /* README */; };
 		FCE519092249384E00B550C9 /* ApplicationLetterTextDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE519072249384E00B550C9 /* ApplicationLetterTextDecorator.swift */; };
 		FCE5190A2249384E00B550C9 /* ApplicationLetterTemplateRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE519082249384E00B550C9 /* ApplicationLetterTemplateRenderer.swift */; };
 		FCE5190C2249388200B550C9 /* Mustache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE5190B2249388200B550C9 /* Mustache.framework */; };
@@ -60,6 +61,7 @@
 		FC9626362248C1A900D5F850 /* ApplicationLetterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLetterViewController.swift; sourceTree = "<group>"; };
 		FC9626522248CDB100D5F850 /* ApplicationLetterViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLetterViewControllerTests.swift; sourceTree = "<group>"; };
 		FC9626532248CDB100D5F850 /* ApplicationLetterViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLetterViewModelTests.swift; sourceTree = "<group>"; };
+		FC9865B5229D380A006D3E63 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		FCE519072249384E00B550C9 /* ApplicationLetterTextDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationLetterTextDecorator.swift; sourceTree = "<group>"; };
 		FCE519082249384E00B550C9 /* ApplicationLetterTemplateRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationLetterTemplateRenderer.swift; sourceTree = "<group>"; };
 		FCE5190B2249388200B550C9 /* Mustache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mustache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -184,6 +186,7 @@
 		FCF5AF062248BDCC00D9B8D1 = {
 			isa = PBXGroup;
 			children = (
+				FC9865B5229D380A006D3E63 /* README */,
 				FCF5AF122248BDCC00D9B8D1 /* WorkfinderApplyUseCase */,
 				FC6E3D292248D74A00377736 /* WorkfinderApplyUseCaseTests */,
 				FCF5AF112248BDCC00D9B8D1 /* Products */,
@@ -307,6 +310,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC9865B6229D380A006D3E63 /* README in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

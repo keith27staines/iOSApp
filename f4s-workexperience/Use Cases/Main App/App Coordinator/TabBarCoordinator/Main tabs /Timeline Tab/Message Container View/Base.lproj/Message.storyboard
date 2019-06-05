@@ -78,20 +78,11 @@
                         <outlet property="answersView" destination="aFI-gC-t8a" id="1K2-Bb-MCD"/>
                         <outlet property="containerView" destination="252-qr-zlJ" id="U0a-XJ-wFD"/>
                         <outlet property="subjectLabel" destination="boZ-j2-BHK" id="WZj-EK-XD7"/>
-                        <segue destination="SF5-bM-dYU" kind="show" identifier="view_offer" id="Nl4-Jk-3Cs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CUt-ux-7Oe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1311.2" y="161.46926536731635"/>
-        </scene>
-        <!--AcceptOffer-->
-        <scene sceneID="ZUm-IC-dI9">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="AcceptOffer" storyboardName="AcceptOffer" id="SF5-bM-dYU" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CJH-ht-tZG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-537" y="96"/>
         </scene>
         <!--Message View Controller-->
         <scene sceneID="aVN-Pw-9Pe">

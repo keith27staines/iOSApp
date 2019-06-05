@@ -11,13 +11,15 @@ public class RequestPushNotificationsAlertFactory {
     
     public func makeAlertViewControllerIfNecessary(completion: @escaping (UIAlertController?) -> Void) {
         center.getNotificationSettings { [weak self] (settings) in
-            switch settings.authorizationStatus {
-            case .notDetermined:
-                self?.makeRequestAlert(completion)
-            case .denied:
-                self?.makeChangeSettingsAlert(completion)
-            case .authorized, .provisional:
-                completion(nil)
+            DispatchQueue.main.async {
+                switch settings.authorizationStatus {
+                case .notDetermined:
+                    self?.makeRequestAlert(completion)
+                case .denied:
+                    self?.makeChangeSettingsAlert(completion)
+                case .authorized, .provisional:
+                    completion(nil)
+                }
             }
         }
     }

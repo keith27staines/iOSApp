@@ -13,13 +13,11 @@ struct F4SApplicationContext {
     var user: F4SUser?
     var company: Company?
     var placement: F4SPlacement?
-    var availabilityPeriod: F4SAvailabilityPeriod?
     
-    public init(user: F4SUser? = nil, company: Company? = nil, placement: F4SPlacement? = nil, availabilityPeriod: F4SAvailabilityPeriod? = nil) {
+    public init(user: F4SUser? = nil, company: Company? = nil, placement: F4SPlacement? = nil) {
         self.user = user
         self.company = company
         self.placement = placement
-        self.availabilityPeriod = availabilityPeriod
     }
 }
 

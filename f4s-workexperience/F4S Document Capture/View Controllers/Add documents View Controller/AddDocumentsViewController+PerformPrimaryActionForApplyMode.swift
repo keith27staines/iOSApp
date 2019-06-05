@@ -10,22 +10,6 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderNetworking
 
-extension F4SAddDocumentsViewController : PostDocumentsWithDataViewControllerDelegate {
-    func postDocumentsControllerDidCancel(_ controller: PostDocumentsWithDataViewController) {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    func postDocumentsControllerDidCompleteUpload(_ controller: PostDocumentsWithDataViewController) {
-        navigationController?.popViewController(animated: true)
-        switch mode {
-        case .applyWorkflow:
-            submitApplication(applicationContext: applicationContext)
-        case .businessLeaderRequest(_):
-            navigationController?.popViewController(animated: true)
-        }
-    }
-}
-
 extension F4SAddDocumentsViewController {
     
     func performPrimaryActionForBLRequestMode() {
@@ -62,7 +46,7 @@ extension F4SAddDocumentsViewController {
                         sharedUserMessageHandler.hideLoadingOverlay()
                         strongSelf.postDocumentsWithData()
                     } else {
-                        strongSelf.submitApplication(applicationContext: strongSelf.applicationContext)
+                        strongSelf.coordinator?.documentUploadDidFinish()
                     }
                 } else {
                     sharedUserMessageHandler.hideLoadingOverlay()
@@ -73,10 +57,7 @@ extension F4SAddDocumentsViewController {
     }
     
     func postDocumentsWithData() {
-        let postDocumentsController = PostDocumentsWithDataViewController()
-        postDocumentsController.delegate = self
-        postDocumentsController.documentModel = documentModel
-        navigationController?.pushViewController(postDocumentsController, animated: true)
+        coordinator?.postDocuments(documentModel: documentModel)
     }
     
     func displayTryAgain(completion: @escaping ()->()) {
@@ -87,45 +68,5 @@ extension F4SAddDocumentsViewController {
             }))
             self?.present(alert, animated: true, completion: nil)
         }
-    }
-    
-    func submitApplication(applicationContext: F4SApplicationContext) {
-        let user = applicationContext.user!
-        userService.updateUser(user: user) { [weak self] (result) in
-            guard let strongSelf = self else { return }
-            DispatchQueue.main.async {
-                sharedUserMessageHandler.hideLoadingOverlay()
-                switch result {
-                case .success(let userModel):
-                    guard let uuid = userModel.uuid else {
-                        sharedUserMessageHandler.displayWithTitle("Oops something went wrong", "Workfinder cannot complete this operation", parentCtrl: strongSelf)
-                        return
-                    }
-                    user.updateUuid(uuid: uuid)
-                    F4SUserRepository().save(user: user)
-                    updateWEXSessionManagerWithUserUUID(uuid)
-                    F4SNetworkSessionManager.shared.rebuildSessions() // Ensure session manager is aware of the possible change of user uuid
-                    var updatedContext = applicationContext
-                    updatedContext.user = user
-                    var updatedPlacement = applicationContext.placement!
-                    updatedPlacement.status = WEXPlacementState.applied
-                    updatedContext.placement = updatedPlacement
-                    strongSelf.applicationContext = updatedContext
-                    PlacementDBOperations.sharedInstance.savePlacement(placement: updatedPlacement)
-                    UserDefaults.standard.set(true, forKey: strongSelf.consentPreviouslyGivenKey)
-                    strongSelf.afterSubmitApplication(applicationContext: updatedContext)
-                case .error(let error):
-                    sharedUserMessageHandler.display(error, parentCtrl: strongSelf, cancelHandler: nil) {
-                        sharedUserMessageHandler.showLoadingOverlay(strongSelf.view)
-                        strongSelf.submitApplication(applicationContext: applicationContext)
-                    }
-                }
-            }
-        }
-    }
-    
-    func afterSubmitApplication(applicationContext: F4SApplicationContext) {
-        TabBarCoordinator.sharedInstance.presentSuccessExtraInfoPopover(
-            parentCtrl: self)
     }
 }

@@ -9,15 +9,15 @@
 import UIKit
 import WorkfinderCommon
 
-extension UIView {
-    var skin: Skin? {
-        get {
-            return ((UIApplication.shared.delegate) as! AppDelegate).skin
-        }
-    }
+private var skins: Skins = Skin.loadSkins()
+
+public var globalSkin: Skin? = { return skins["workfinder"] }()
+
+public extension UIView {
+    var skin: Skin? { return globalSkin }
 }
 
-extension UIView {
+public extension UIView {
     func snapshotToImage() -> UIImage {
         UIGraphicsBeginImageContext(bounds.size)
         guard let context = UIGraphicsGetCurrentContext() else { return UIImage() }

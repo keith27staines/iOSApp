@@ -139,20 +139,31 @@ class EnterVoucherViewController: UIViewController, MFMailComposeViewControllerD
 //        let curve = notification.userInfo![UIKeyboardAnimationCurveUserInfoKey] as! UInt
         let curFrame = (notification.userInfo![UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
         let targetFrame = (notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        let deltaY = targetFrame.origin.y - curFrame.origin.y
-        accododateKeyboardOffset(viewHeightDelta: deltaY)
+        let deltaY = -(targetFrame.origin.y - curFrame.origin.y)
+        print("keyboard height: \(deltaY)")
+        accommodateKeyboardOffset(viewHeightDelta: deltaY)
     }
     
-    func accododateKeyboardOffset(viewHeightDelta: CGFloat) {
+    func accommodateKeyboardOffset(viewHeightDelta: CGFloat) {
         let currentOffset = scrollView.contentOffset
-        let yOffset: CGFloat
-        if viewHeightDelta < 0 {
-            yOffset =  0.0 - viewHeightDelta/2.0
+        let voucherGapToKeyboard = voucherDistanceFromBottom - viewHeightDelta
+        if voucherGapToKeyboard < 8 {
+            let point = CGPoint(x: currentOffset.x, y: 8 - voucherGapToKeyboard )
+            scrollView.setContentOffset(point, animated: true)
         } else {
-            yOffset = currentOffset.y - viewHeightDelta/2.0
+            let point = CGPoint(x: currentOffset.x, y: 0 )
+            scrollView.setContentOffset(point, animated: true)
         }
-        let point = CGPoint(x: currentOffset.x, y: yOffset )
-        scrollView.setContentOffset(point, animated: true)
+    }
+    
+    var voucherDistanceFromBottom: CGFloat {
+        let maxY = voucherText.bounds.maxY
+        var pt = CGPoint(x: 0, y: maxY)
+        pt = voucherText.convert(pt, to: nil)
+        guard let windowHeight = view.window?.frame.size.height else { return 0 }
+        let d = windowHeight - pt.y
+        print("voucher distance from bottom \(d)")
+        return d
     }
     
     override func viewWillAppear(_ animated: Bool) {

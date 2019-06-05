@@ -8,6 +8,7 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 
 class AcceptOfferViewController: UIViewController {
     @IBOutlet weak var offsetHeight: NSLayoutConstraint!
@@ -26,6 +27,7 @@ class AcceptOfferViewController: UIViewController {
     var placementInviteModel: F4SPlacementInviteModel!
     var accept: AcceptOfferContext!
     var companyDocumentsModel: F4SCompanyDocumentsModel?
+    weak var coordinator: AcceptOfferCoordinator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,9 +120,9 @@ extension AcceptOfferViewController : UITableViewDataSource {
             let inviteDetails = placementInviteModel.inviteDetailsForIndexPath(indexPath)
             if inviteDetails.requiresButtonAction {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "detailWithLink", for: indexPath) as! F4SInviteDetailLinkCell
-                cell.buttonAction = { cell in
-                    guard let company = self.accept?.company else { return }
-                    TabBarCoordinator.sharedInstance.presentCompanyDetailsPopover(parentCtrl: self, company: company)
+                cell.buttonAction = { [weak self] cell in
+                    guard let company = self?.accept?.company else { return }
+                    self?.coordinator?.showCompanyDetail(company: company)
                 }
                 cell.detail = inviteDetails
                 return cell
@@ -277,9 +279,7 @@ extension AcceptOfferViewController {
                         strongSelf.declineApplication(uuid: uuid)
                     })
                 case .success(_):
-                    globalLog.debug("invite was declined by YP")
-                    strongSelf.navigationController?.popViewController(animated: true)
-                    break
+                    strongSelf.coordinator?.didDecline()
                 }
             }
         }
@@ -298,9 +298,7 @@ extension AcceptOfferViewController {
                         strongSelf.cancelApplication(uuid: uuid)
                     })
                 case .success(_):
-                    globalLog.debug("invite was cancelled by YP")
-                    strongSelf.navigationController?.popViewController(animated: true)
-                    break
+                    strongSelf.coordinator?.didCancel()
                 }
             }
         }

@@ -1,11 +1,12 @@
 import UIKit
 import Reachability
 import WorkfinderCommon
+import WorkfinderNetworking
 
-class ExtraInfoViewController: UIViewController {
+class UserDetailsViewController: UIViewController {
     
-    var viewModel: ExtraInfoViewModel!
-    weak var coordinator: TabBarCoordinator!
+    var viewModel: UserDetailsViewModel!
+    weak var coordinator: UserDetailsCoordinator!
     
     @IBOutlet weak var exploreMapButton: UIButton!
     @IBOutlet weak var tooYoungStackView: UIStackView!
@@ -50,13 +51,8 @@ class ExtraInfoViewController: UIViewController {
         return F4SUserService()
     }()
     
-    lazy var f4sDocumentUploadController: F4SAddDocumentsViewController = {
-        let storyboard = UIStoryboard(name: "DocumentCapture", bundle: nil)
-        return storyboard.instantiateInitialViewController() as! F4SAddDocumentsViewController
-    }()
-    
     func inject(
-        viewModel: ExtraInfoViewModel,
+        viewModel: UserDetailsViewModel,
         applicationContext: F4SApplicationContext,
         userRepository: F4SUserRepositoryProtocol) {
         self.viewModel = viewModel
@@ -93,7 +89,7 @@ class ExtraInfoViewController: UIViewController {
     }
     
     @IBAction func termsOfServiceLinkButton(_ sender: UIButton) {
-        coordinator?.presentContentViewController(navCtrl: self.navigationController!, contentType: .terms)
+        coordinator?.presentContent(F4SContentType.terms)
     }
     
     @IBAction func exploreMoreCompanies(_ sender: Any) {
@@ -145,7 +141,7 @@ class ExtraInfoViewController: UIViewController {
 }
 
 // MARK: - Handle keyboard
-extension ExtraInfoViewController {
+extension UserDetailsViewController {
     
     /// Handles changes to keyboard size and position
     @objc func keyboardNotification(notification: NSNotification) {
@@ -176,7 +172,7 @@ extension ExtraInfoViewController {
 }
 
 // MARK: - UI Setup
-extension ExtraInfoViewController {
+extension UserDetailsViewController {
     
     func setupControls() {
         setupDatePicker()
@@ -283,7 +279,7 @@ extension ExtraInfoViewController {
 }
 
 // MARK: - UITextFieldDelegate
-extension ExtraInfoViewController: UITextFieldDelegate {
+extension UserDetailsViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_: UITextField) -> Bool {
         return true
@@ -291,7 +287,7 @@ extension ExtraInfoViewController: UITextFieldDelegate {
 }
 
 // MARK: - Calls
-extension ExtraInfoViewController {
+extension UserDetailsViewController {
     
     func saveUserDetailsLocally() {
         let updatedUser = self.buildUserInfo()
@@ -302,7 +298,7 @@ extension ExtraInfoViewController {
 }
 
 // MARK: - User Interaction
-extension ExtraInfoViewController {
+extension UserDetailsViewController {
     
     @objc func datePickerDoneButtonTouched() {
         viewModel.dateOfBirth = datePicker.date
@@ -327,11 +323,11 @@ extension ExtraInfoViewController {
     }
     
     @objc func didTapDobInfoLabel(recognizer: UITapGestureRecognizer) {
-        coordinator?.presentContentViewController(navCtrl: self.navigationController!, contentType: .consent)
+        coordinator?.presentContent(F4SContentType.consent)
     }
     
     @objc func didTapNoVoucherInfoLabel(recognizer: UITapGestureRecognizer) {
-        coordinator?.presentContentViewController(navCtrl: self.navigationController!, contentType: .voucher)
+        coordinator?.presentContent(F4SContentType.voucher)
     }
     
     func verifyVoucher() {
@@ -405,7 +401,7 @@ extension ExtraInfoViewController {
         let user = applicationContext.user!
         
         if emailModel.isEmailAddressVerified(email: user.email) {
-            afterEmailVerfied()
+            afterEmailVerfied(verifiedEmail: user.email!)
         } else {
             emailController.emailToVerify = user.email
             emailController.model.restart()
@@ -414,27 +410,62 @@ extension ExtraInfoViewController {
                 DispatchQueue.main.async {
                     strongSelf.emailTextField.text = emailController.model.verifiedEmail
                     _ = strongSelf.saveUserDetailsLocally()
-                    strongSelf.afterEmailVerfied()
+                    strongSelf.afterEmailVerfied(verifiedEmail: emailController.model.verifiedEmail!)
                 }
             }
             self.navigationController!.pushViewController(emailController, animated: true)
         }
     }
     
-    func afterEmailVerfied() {
+    func afterEmailVerfied(verifiedEmail: String) {
+        let user = applicationContext.user!
+        user.email = verifiedEmail
+        userRepository?.save(user: user)
+        saveUserToServer()
+    }
+    
+    func saveUserToServer() {
+        showLoadingOverlay()
+        userService.updateUser(user: applicationContext.user!) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            DispatchQueue.main.async {
+                strongSelf.hideLoadingOverlay()
+                switch result {
+                case .error(let error):
+                    if error.retry {
+                        strongSelf.handleRetryForNetworkError(error, retry: {
+                            strongSelf.saveUserToServer()
+                        })
+                    } else {
+                        let reason = NSLocalizedString("Unable to save your details", comment: "")
+                        strongSelf.presentInvalidVoucherAlert(reason: reason)
+                    }
+                case .success(let userModel):
+                    guard let uuid = userModel.uuid else {
+                        sharedUserMessageHandler.displayWithTitle("Oops something went wrong", "Workfinder cannot complete this operation", parentCtrl: strongSelf)
+                        return
+                    }
+                    let user = strongSelf.applicationContext.user!
+                    user.updateUuid(uuid: uuid)
+                    strongSelf.userRepository?.save(user: user)
+                    updateWEXSessionManagerWithUserUUID(uuid)
+                    F4SNetworkSessionManager.shared.rebuildSessions()
+                    strongSelf.afterUserSavedToServer()
+                }
+            }
+        }
+    }
+    
+    func afterUserSavedToServer() {
         performDocumentUpload()
     }
     
     func performDocumentUpload() {
-        let uploadController = f4sDocumentUploadController
-        uploadController.applicationContext = self.applicationContext
-        uploadController.mode = .applyWorkflow
-        let navController = UINavigationController(rootViewController: uploadController)
-        self.present(navController, animated: true, completion: nil)
+        coordinator?.showAddDocuments()
     }
 }
 
-extension ExtraInfoViewController {
+extension UserDetailsViewController {
     
     func showLoadingOverlay() {
         sharedUserMessageHandler.showLoadingOverlay(self.view)
