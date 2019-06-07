@@ -76,7 +76,7 @@ public class CompanyFavouritesModel {
     }
     
     func shortListItemForCompany(company: Company) -> Shortlist? {
-        guard let index = shortlist.index(where: { (item) -> Bool in return item.companyUuid == company.uuid }) else {
+        guard let index = shortlist.firstIndex(where: { (item) -> Bool in return item.companyUuid == company.uuid }) else {
             return nil
         }
         return shortlist[index]

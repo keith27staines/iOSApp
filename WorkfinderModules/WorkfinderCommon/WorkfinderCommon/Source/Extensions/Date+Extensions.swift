@@ -9,7 +9,7 @@
 import Foundation
 
 public extension Date {
-    public func isGreaterThanDate(dateToCompare: Date) -> Bool {
+    func isGreaterThanDate(dateToCompare: Date) -> Bool {
         // Declare Variables
         var isGreater = false
         
@@ -22,7 +22,7 @@ public extension Date {
         return isGreater
     }
     
-    public func isLessThanDate(dateToCompare: Date) -> Bool {
+    func isLessThanDate(dateToCompare: Date) -> Bool {
         // Declare Variables
         var isLess = false
         
@@ -35,7 +35,7 @@ public extension Date {
         return isLess
     }
     
-    public func equalToDate(dateToCompare: Date) -> Bool {
+    func equalToDate(dateToCompare: Date) -> Bool {
         // Declare Variables
         var isEqualTo = false
         

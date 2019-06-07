@@ -14,12 +14,12 @@ public typealias LatLon = CGPoint
 public extension LatLon {
     
     // Calculates the greate circle distance between the current instance and `other` in meters
-    public func greatCircleDistance(_ other: LatLon) -> Double {
+    func greatCircleDistance(_ other: LatLon) -> Double {
         return LatLon.greatCircleDistance(p1:self,p2:other)
     }
     
     // Calculates the greate circle distance between two LatLons
-    public static func greatCircleDistance(p1: LatLon, p2: LatLon) -> Double {
+    static func greatCircleDistance(p1: LatLon, p2: LatLon) -> Double {
         let degreesToRadians = Double.pi / 360.0
         let r = 6371e3; // metres
         let φ1 = Double(p1.latitude) * degreesToRadians
@@ -41,8 +41,10 @@ public extension LatLon {
 public typealias LatLonRect = CGRect
 
 extension CLLocationCoordinate2D : Hashable {
-    public var hashValue: Int {
-        return latitude.hashValue ^ longitude.hashValue
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(latitude)
+        hasher.combine(longitude)
     }
     
     public static func ==(lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
@@ -62,25 +64,25 @@ extension CLLocationCoordinate2D : Hashable {
 }
 
 public extension GMSCoordinateBounds {
-    public convenience init(rect: LatLonRect) {
+    convenience init(rect: LatLonRect) {
         let soutWest = CLLocationCoordinate2D(latLon: rect.southWest)
         let northEast = CLLocationCoordinate2D(latLon: rect.northEast)
         self.init(coordinate: soutWest, coordinate: northEast)
     }
     
-    public func scaledBy(fraction f: Double) -> GMSCoordinateBounds {
+    func scaledBy(fraction f: Double) -> GMSCoordinateBounds {
         let rect = LatLonRect(bounds: self)
         let scaled = rect.scaledBy(fraction: CGFloat(f))
         return GMSCoordinateBounds(rect: scaled)
     }
     
     /// Returns the diagonal distance of bounds rectangle in meters
-    public func diagonalDistance() -> Double {
+    func diagonalDistance() -> Double {
         return southWest.greateCircleDistance(northEast)
     }
     
     /// Returns true if the current instance is fully inside the other bounds. That is, every point of the current instance is inside the boundary of other.
-    public func isFullyInside(other bounds: GMSCoordinateBounds) -> Bool {
+    func isFullyInside(other bounds: GMSCoordinateBounds) -> Bool {
         if !bounds.contains(self.southWest) || !bounds.contains(self.northEast) {
             return false
         }
@@ -94,22 +96,22 @@ public extension GMSCoordinateBounds {
 public extension LatLonRect {
     
     /// Returns the south west point of the rectangle
-    public var southWest: LatLon {
+    var southWest: LatLon {
         return origin
     }
     
     /// Returns the north east point of the rectangle
-    public var northEast: LatLon {
+    var northEast: LatLon {
         return LatLon(latitude: maxY, longitude: maxX)
     }
     
     /// Returns the center of the rectangle
-    public var center: LatLon {
+    var center: LatLon {
         return LatLon(latitude: self.midY, longitude: self.midX)
     }
     
     /// Initialize a new instance from a GMSCoordinateBounds
-    public init(bounds: GMSCoordinateBounds) {
+    init(bounds: GMSCoordinateBounds) {
         let origin = bounds.southWest
         let width = bounds.northEast.longitude - bounds.southWest.longitude
         let height = bounds.northEast.latitude - bounds.southWest.latitude
@@ -117,7 +119,7 @@ public extension LatLonRect {
     }
     
     /// Initializes a new instance from the southwest and north east latitudes and longitudes
-    public init(southWest: LatLon, northEast: LatLon) {
+    init(southWest: LatLon, northEast: LatLon) {
         let origin = southWest
         let width = northEast.longitude - southWest.longitude
         let height = northEast.latitude - southWest.latitude
@@ -126,7 +128,7 @@ public extension LatLonRect {
     }
     
     /// Returns a scaled rectangle with the same center as the current instance
-    public func scaledBy(fraction f: CGFloat) -> LatLonRect {
+    func scaledBy(fraction f: CGFloat) -> LatLonRect {
         let center = self.center
         let width = self.width * f
         let height = self.height * f

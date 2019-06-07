@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Auth0
+import WorkfinderNetworking
 
 /// A state machine that controls the verification process for emails
 public class F4SEmailVerificationModel {
@@ -16,14 +16,10 @@ public class F4SEmailVerificationModel {
     /// The last non-error state before transitioning to the current state
     public private (set) var lastNonErrorState: F4SEmailVerificationState
     
-    /// The type of passwordless authentication to use - either code or link
-    public let passwordlessType: PasswordlessType
-    
     /// Initialises a new instance
     private init() {
         lastNonErrorState = F4SEmailVerificationState.start
         emailVerificationState = .previouslyVerified
-        passwordlessType = .iOSLink
         addNotificationHandlers()
         emailVerificationState = F4SEmailVerificationModel.verificationState()
         switch emailVerificationState {
@@ -47,52 +43,44 @@ public class F4SEmailVerificationModel {
 
     /// Restarts the verification process
     public func restart() {
+        emailVerificationService?.cancel()
         emailVerificationState = .start
     }
     
     var submitEmailForVerificationRetryCount: Int = 0
     
+    var emailVerificationService: EmailVerificationService?
+    
     /// Verification is performed by sending an email to the specified address. The email contains a code or link which will, in turn, need to be submitted for final verification
     public func submitEmailForVerification(_ email: String, completion: @escaping (()->Void)) {
-        let clientId: String
-        let domain: String
+        emailVerificationService = EmailVerificationService(email: email, clientId: authenticationClientId())
+        emailVerificationService?.start(onSuccess: { [weak self] (email) in
+            guard let strongSelf = self else { return }
+            strongSelf.submitEmailForVerificationRetryCount = 0
+            strongSelf.emailVerificationState = .emailSent(email)
+            print("Email verification requested for \(email)")
+            completion()
+            return
+        }, onFailure: { [weak self] (email, verificationError) in
+            guard let strongSelf = self else { return }
+            strongSelf.submitEmailForVerificationRetryCount += 1
+            if strongSelf.submitEmailForVerificationRetryCount < 5 {
+                strongSelf.submitEmailForVerification(email, completion: completion)
+                return
+            }
+            let f4sError = F4SEmailVerificationError.f4sError(for: verificationError)
+            strongSelf.emailVerificationState = .error(f4sError)
+            completion()
+            return
+        })
+    }
+    
+    func authenticationClientId() -> String {
         switch Config.environment {
         case .staging:
-            clientId = "GP0piRmEoPLyKQJETNVjKdjhosvPGTw0"
-            domain = "founders4schools.eu.auth0.com"
+            return "GP0piRmEoPLyKQJETNVjKdjhosvPGTw0"
         case .production:
-            clientId = "2LfjThv1qvdIZn7L09v5OwxhsW87k4Hf"
-            domain = "founders4schools.eu.auth0.com"
-        }
-        
-        Auth0
-            .authentication(clientId: clientId, domain: domain, session: .shared)
-            .startPasswordless(
-                email: email,
-                type: passwordlessType,
-                connection: "email")
-            .start { [weak self] res in
-                DispatchQueue.main.async { [weak self] in
-                    guard let strongSelf = self else { return }
-                    switch res {
-                    case .failure(let error):
-                        strongSelf.submitEmailForVerificationRetryCount += 1
-                        if strongSelf.submitEmailForVerificationRetryCount < 5 {
-                            strongSelf.submitEmailForVerification(email, completion: completion)
-                            return
-                        }
-                        let f4sError = F4SEmailVerificationError.f4sError(for: error)
-                        strongSelf.emailVerificationState = .error(f4sError)
-                        completion()
-                        return
-                    case .success:
-                        strongSelf.submitEmailForVerificationRetryCount = 0
-                        strongSelf.emailVerificationState = .emailSent(email)
-                        print("Email verification requested for \(email)")
-                        completion()
-                        return
-                    }
-                }
+            return "2LfjThv1qvdIZn7L09v5OwxhsW87k4Hf"
         }
     }
     
@@ -103,35 +91,22 @@ public class F4SEmailVerificationModel {
             return
         }
         
-        Auth0.authentication()
-            .login(usernameOrEmail: emailSentForVerification,
-                   password: code,
-                   multifactorCode: nil,
-                   connection: "email",
-                   scope: "openid email",
-                   parameters: [:])
-            .start { result in
-                DispatchQueue.main.async { [weak self] in
-                    guard let strongSelf = self else { return }
-                    switch result {
-                    case .success(let credentials):
-                        let f4sCredentials = F4SCredentials(auth0Credentials: credentials)
-                        strongSelf.emailVerificationState = .verified(f4sCredentials)
-                        strongSelf.submitEmailForVerificationRetryCount = 0
-                    case .failure(let error):
-                        strongSelf.submitEmailForVerificationRetryCount += 1
-                        if strongSelf.submitEmailForVerificationRetryCount < 5 {
-                            print("Verify code retry \(strongSelf.submitEmailForVerificationRetryCount)")
-                            strongSelf.submitVerificationCode(code, completion: completion)
-                            return
-                        }
-                        print("Failed to authenticate email \(emailSentForVerification) with error \(error)")
-                        let f4sError = F4SEmailVerificationError.f4sError(for: error)
-                        self?.emailVerificationState = .error(f4sError)
-                    }
-                    completion()
-                }
-        }
+        emailVerificationService?.verifyWithCode(email: emailSentForVerification, code: code, onSuccess: { [weak self] (email) in
+            guard let strongSelf = self else { return }
+            strongSelf.emailVerificationState = .verified
+            strongSelf.submitEmailForVerificationRetryCount = 0
+        }, onFailure: { [weak self] (email, verificationError) in
+            guard let strongSelf = self else { return }
+            strongSelf.submitEmailForVerificationRetryCount += 1
+            if strongSelf.submitEmailForVerificationRetryCount < 5 {
+                print("Verify code retry \(strongSelf.submitEmailForVerificationRetryCount)")
+                strongSelf.submitVerificationCode(code, completion: completion)
+                return
+            }
+            print("Failed to authenticate email \(emailSentForVerification) with error \(verificationError)")
+            let f4sError = F4SEmailVerificationError.f4sError(for: verificationError)
+            self?.emailVerificationState = .error(f4sError)
+        })
     }
     
     /// A callback to notify the owner of a state change
@@ -157,7 +132,7 @@ public class F4SEmailVerificationModel {
                 verifiedEmail = nil
             case .linkReceived:
                 break
-            case .verified(_):
+            case .verified:
                 verifiedEmail = emailSentForVerification
                 emailSentForVerification = nil
             case .previouslyVerified:

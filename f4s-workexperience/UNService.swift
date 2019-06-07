@@ -31,6 +31,8 @@ class UNService : NSObject {
                 UIApplication.shared.open(settings, options: [:], completionHandler: nil)
             case .authorized, .provisional:
                 break
+            @unknown default:
+                assert(true, "Unexpected authorizations status")
             }
         }
     }

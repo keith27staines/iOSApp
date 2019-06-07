@@ -7,9 +7,10 @@
 //
 
 import Foundation
-import Auth0
+import WorkfinderNetworking
 
 public enum F4SEmailVerificationError : Error {
+    case networkNotAvailable
     case networkErrorSubmittingEmailForVerification
     case cientsideEmailFormatCheckFailed
     case serversideEmailFormatCheckFailed
@@ -18,20 +19,34 @@ public enum F4SEmailVerificationError : Error {
     case unknownError
     
     public static func f4sError(for error: Error) -> F4SEmailVerificationError {
-        if let f4s = error as? F4SEmailVerificationError {
-            return f4s
-        }
-        if let authError = error as? AuthenticationError {
-            switch authError.statusCode {
-            case 400:
-                return .serversideEmailFormatCheckFailed
-            case 401:
-                return .codeEmailCombinationNotValid
-            default:
-                return .unknownError
+        if let f4s = error as? F4SEmailVerificationError { return f4s }
+        
+        switch error {
+        case let error as EmailVerificationService.EmailSubmissionError:
+            switch error {
+            case .client:
+                return F4SEmailVerificationError.networkNotAvailable
+            case .cientsideEmailFormatCheckFailed:
+                return F4SEmailVerificationError.cientsideEmailFormatCheckFailed
+            case .serversideEmailFormatCheckFailed:
+                return F4SEmailVerificationError.serversideEmailFormatCheckFailed
+            case .networkError(_):
+                return F4SEmailVerificationError.networkErrorSubmittingEmailForVerification
             }
+        
+        case let error as EmailVerificationService.CodeValidationError:
+            switch error {
+            case .client:
+                return F4SEmailVerificationError.networkNotAvailable
+            case .codeEmailCombinationNotValid:
+                return F4SEmailVerificationError.codeEmailCombinationNotValid
+            case .emailNotTheSame:
+                return F4SEmailVerificationError.codeEmailCombinationNotValid
+            case .networkError(_):
+                return F4SEmailVerificationError.networkErrorProcessingLink
+            }
+        default: return .unknownError
         }
-        return .unknownError
     }
 }
 
@@ -50,14 +65,14 @@ public extension F4SEmailVerificationError {
             return true
         case .codeEmailCombinationNotValid:
             return true
-        case .unknownError:
+        case .unknownError, .networkNotAvailable:
             return true
         }
     }
     
     var titleForPrimaryButton: String {
         switch self {
-        case .networkErrorSubmittingEmailForVerification:
+        case .networkErrorSubmittingEmailForVerification, .networkNotAvailable:
             return LocalizedStrings.ButtonTitles.retry
         case .cientsideEmailFormatCheckFailed:
             return LocalizedStrings.ButtonTitles.editEmail
@@ -74,7 +89,7 @@ public extension F4SEmailVerificationError {
 
     var isSecondaryButtonVisible: Bool {
         switch self {
-        case .networkErrorSubmittingEmailForVerification:
+        case .networkErrorSubmittingEmailForVerification, .networkNotAvailable:
             return true
         case .cientsideEmailFormatCheckFailed:
             return true
@@ -92,7 +107,7 @@ public extension F4SEmailVerificationError {
     
     var titleForSecondaryButton: String {
         switch self {
-        case .networkErrorSubmittingEmailForVerification:
+        case .networkErrorSubmittingEmailForVerification, .networkNotAvailable:
             return LocalizedStrings.ButtonTitles.cancel
         case .cientsideEmailFormatCheckFailed:
             return LocalizedStrings.ButtonTitles.cancel
@@ -114,7 +129,7 @@ public extension F4SEmailVerificationError {
     /// Returns a short localised description of the error
     var description: String {
         switch self {
-        case .networkErrorSubmittingEmailForVerification:
+        case .networkErrorSubmittingEmailForVerification, .networkNotAvailable:
             return LocalizedStrings.ErrorDescriptions.networkErrorSubmittingEmail
         case .cientsideEmailFormatCheckFailed, .serversideEmailFormatCheckFailed:
             return LocalizedStrings.ErrorDescriptions.emailFormatError
@@ -129,7 +144,7 @@ public extension F4SEmailVerificationError {
     
     var correctiveAction: String {
         switch self {
-        case .networkErrorSubmittingEmailForVerification:
+        case .networkErrorSubmittingEmailForVerification, .networkNotAvailable:
             return LocalizedStrings.ErrorCorrectiveActions.networkErrorSubmittingEmail
         case .cientsideEmailFormatCheckFailed, .serversideEmailFormatCheckFailed:
             return LocalizedStrings.ErrorCorrectiveActions.emailFormatError

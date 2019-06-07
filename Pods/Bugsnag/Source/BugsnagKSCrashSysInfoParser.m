@@ -13,8 +13,6 @@
 #import "BugsnagConfiguration.h"
 #import "BugsnagLogger.h"
 
-#define PLATFORM_WORD_SIZE sizeof(void*)*8
-
 NSDictionary *BSGParseDevice(NSDictionary *report) {
     NSMutableDictionary *device = [NSMutableDictionary new];
     NSDictionary *state = [report valueForKeyPath:@"user.state.deviceState"];
@@ -33,6 +31,7 @@ NSDictionary *BSGParseDevice(NSDictionary *report) {
                          [report valueForKeyPath:@"system.memory.free"],
                          @"freeMemory");
     
+    BSGDictSetSafeObject(device, [report valueForKeyPath:@"report.timestamp"], @"time");
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(
@@ -61,9 +60,11 @@ NSDictionary *BSGParseDevice(NSDictionary *report) {
 }
 
 NSDictionary *BSGParseApp(NSDictionary *report) {
+    NSDictionary *system = report[BSGKeySystem];
+
     NSMutableDictionary *appState = [NSMutableDictionary dictionary];
     
-    NSDictionary *stats = report[@"application_stats"];
+    NSDictionary *stats = system[@"application_stats"];
     
     NSInteger activeTimeSinceLaunch =
     [stats[@"active_time_since_launch"] doubleValue] * 1000.0;
@@ -73,23 +74,25 @@ NSDictionary *BSGParseApp(NSDictionary *report) {
     BSGDictSetSafeObject(appState, @(activeTimeSinceLaunch),
                          @"durationInForeground");
 
-    BSGDictSetSafeObject(appState, report[BSGKeyExecutableName], BSGKeyName);
+    BSGDictSetSafeObject(appState, system[BSGKeyExecutableName], BSGKeyName);
     BSGDictSetSafeObject(appState,
                          @(activeTimeSinceLaunch + backgroundTimeSinceLaunch),
                          @"duration");
     BSGDictSetSafeObject(appState, stats[@"application_in_foreground"],
                          @"inForeground");
-    BSGDictSetSafeObject(appState, report[@"CFBundleIdentifier"], BSGKeyId);
+    BSGDictSetSafeObject(appState, system[@"CFBundleIdentifier"], BSGKeyId);
     return appState;
 }
 
-NSDictionary *BSGParseAppState(NSDictionary *report) {
+NSDictionary *BSGParseAppState(NSDictionary *report, NSString *preferredVersion) {
     NSMutableDictionary *app = [NSMutableDictionary dictionary];
+
+    NSString *version = preferredVersion ?: report[@"CFBundleShortVersionString"];
 
     BSGDictSetSafeObject(app, report[@"CFBundleVersion"], @"bundleVersion");
     BSGDictSetSafeObject(app, [Bugsnag configuration].releaseStage,
                          BSGKeyReleaseStage);
-    BSGDictSetSafeObject(app, report[@"CFBundleShortVersionString"], BSGKeyVersion);
+    BSGDictSetSafeObject(app, version, BSGKeyVersion);
     
     BSGDictSetSafeObject(app, [Bugsnag configuration].codeBundleId, @"codeBundleId");
     
@@ -115,6 +118,12 @@ NSDictionary *BSGParseDeviceState(NSDictionary *report) {
     BSGDictSetSafeObject(deviceState, report[@"machine"], @"model");
     BSGDictSetSafeObject(deviceState, report[@"system_name"], @"osName");
     BSGDictSetSafeObject(deviceState, report[@"system_version"], @"osVersion");
+
+    NSMutableDictionary *runtimeVersions = [NSMutableDictionary new];
+    BSGDictSetSafeObject(runtimeVersions, report[@"os_version"], @"osBuild");
+    BSGDictSetSafeObject(runtimeVersions, report[@"clang_version"], @"clangVersion");
+    BSGDictSetSafeObject(deviceState, runtimeVersions, @"runtimeVersions");
+
     BSGDictSetSafeObject(deviceState, @(PLATFORM_WORD_SIZE), @"wordSize");
     BSGDictSetSafeObject(deviceState, @"Apple", @"manufacturer");
     BSGDictSetSafeObject(deviceState, report[@"jailbroken"], @"jailbroken");

@@ -33,7 +33,9 @@ extension F4SInterest {
 }
 
 extension F4SInterest : Hashable {
-    public var hashValue: Int { return uuid.hashValue }
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(uuid)
+    }
 }
 
 public extension Sequence where Iterator.Element == F4SInterest {

@@ -19,6 +19,8 @@ public class RequestPushNotificationsAlertFactory {
                     self?.makeChangeSettingsAlert(completion)
                 case .authorized, .provisional:
                     completion(nil)
+                @unknown default:
+                    assert(true, "unexpcted authorization status")
                 }
             }
         }

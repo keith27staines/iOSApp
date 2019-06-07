@@ -128,7 +128,7 @@ public struct MapModel {
 
 // MARK:- public API for getting interests
 public extension MapModel {
-    public func getInterestsInBounds(_ bounds: GMSCoordinateBounds, completion: @escaping (F4SInterestSet) -> Void) {
+    func getInterestsInBounds(_ bounds: GMSCoordinateBounds, completion: @escaping (F4SInterestSet) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             var interestSet = F4SInterestSet()
             for companyPin in self.companyPinSetInsideBounds(bounds) {
@@ -146,7 +146,7 @@ public extension MapModel {
     ///
     /// - parameter bounds: The area to be searched for pins
     /// - parameter completion: Callback to return a set of company pins
-    public func getCompanyPinSet(for bounds: GMSCoordinateBounds, completion:@escaping (F4SCompanyPinSet) -> Void) {
+    func getCompanyPinSet(for bounds: GMSCoordinateBounds, completion:@escaping (F4SCompanyPinSet) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             let companyPins = self.companyPinSetInsideBounds(bounds)
             completion(companyPins)
@@ -158,7 +158,7 @@ public extension MapModel {
     /// - parameter count: The minimum number of companies to get
     /// - parameter location: The location at which to begin the search
     /// - parameter completion: Callback to return a set of company pins
-    public func getCompanyPins(
+    func getCompanyPins(
         target count: Int,
         near location: CLLocationCoordinate2D,
         completion: @escaping (F4SCompanyPinSet) -> Void) {
@@ -183,7 +183,7 @@ public extension MapModel {
     /// - parameter maxScalings: The maximum number of upward scalings allowed before giving up
     /// - parameter factor: The linear factor by which the bounds are expanded on each iteration
     /// - parameter completion: Returns the bounds that contain approximately `count` company pins, if that can be achieved before maxScalings has been reached. If not, the largest bounds attained when the maximum is reached is returned. The returned bounds are guarenteed to contain `location` if it is located within the bounds of the Map
-    public func getBoundsEnclosing(
+    func getBoundsEnclosing(
         target count: Int,
         near location: CLLocationCoordinate2D,
         maxScalings: Int = 30,

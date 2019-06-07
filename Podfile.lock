@@ -1,35 +1,31 @@
 PODS:
-  - Analytics (3.6.9)
-  - Auth0 (1.9.2):
-    - SimpleKeychain
-  - Bugsnag (5.16.0)
-  - GoogleMaps (2.7.0):
-    - GoogleMaps/Maps (= 2.7.0)
-  - GoogleMaps/Base (2.7.0)
-  - GoogleMaps/Maps (2.7.0):
+  - Analytics (3.6.10)
+  - Bugsnag (5.22.1)
+  - GoogleMaps (3.1.0):
+    - GoogleMaps/Maps (= 3.1.0)
+  - GoogleMaps/Base (3.1.0)
+  - GoogleMaps/Maps (3.1.0):
     - GoogleMaps/Base
-  - GooglePlaces (2.7.0):
-    - GoogleMaps/Base (= 2.7.0)
-  - KeychainSwift (11.0.0)
+  - GooglePlaces (3.1.0):
+    - GoogleMaps/Base (= 3.1.0)
+  - KeychainSwift (16.0.1)
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
-  - ReachabilitySwift (4.1.0)
+  - ReachabilitySwift (4.3.1)
   - Segment-Bugsnag (1.0.3):
     - Analytics (~> 3.0)
     - Bugsnag (~> 5.0)
-  - SimpleKeychain (0.8.1)
-  - SQLite.swift (0.11.5):
-    - SQLite.swift/standard (= 0.11.5)
-  - SQLite.swift/standard (0.11.5)
-  - XCGLogger (6.0.4):
-    - XCGLogger/Core (= 6.0.4)
-  - XCGLogger/Core (6.0.4):
+  - SQLite.swift (0.12.0):
+    - SQLite.swift/standard (= 0.12.0)
+  - SQLite.swift/standard (0.12.0)
+  - XCGLogger (7.0.0):
+    - XCGLogger/Core (= 7.0.0)
+  - XCGLogger/Core (7.0.0):
     - ObjcExceptionBridging
 
 DEPENDENCIES:
   - Analytics
-  - Auth0 (~> 1.9.2)
   - GoogleMaps
   - GooglePlaces
   - KeychainSwift
@@ -41,7 +37,6 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Analytics
-    - Auth0
     - Bugsnag
     - GoogleMaps
     - GooglePlaces
@@ -49,24 +44,21 @@ SPEC REPOS:
     - ObjcExceptionBridging
     - ReachabilitySwift
     - Segment-Bugsnag
-    - SimpleKeychain
     - SQLite.swift
     - XCGLogger
 
 SPEC CHECKSUMS:
-  Analytics: 6541ce337e99d9f7a2240a8b3953940a7be5f998
-  Auth0: 9eceebf97b6b3482eaed82193e090b50c3bd8ad6
-  Bugsnag: e195a21dae67e32a37567689ff8e0863e4a17e09
-  GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
-  GooglePlaces: 3d06e6c99654545b4738ce49648745779c25f2ef
-  KeychainSwift: bea6bd9f98af7b8d7ca4aa79fe105c00fab532db
+  Analytics: 63744ad4afa65c3bcdcdb7a94b62515bde5b3900
+  Bugsnag: 699634c49b03f3fdf04a8ad6ab6470e9bcc3834b
+  GoogleMaps: 5c13302e6fe6bb6e686b267196586b91cd594225
+  GooglePlaces: e874db179f2675c4f3eeda0b686b540273a578b0
+  KeychainSwift: 4209611373ca4a098e09b1e547eebd87c544dcc4
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
-  ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
+  ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
   Segment-Bugsnag: 9ee9635d7a5e1058a09b3e5766f69670095fbc01
-  SimpleKeychain: e2485c28d82fcece35e9e41faeac42ebfe614815
-  SQLite.swift: 6e5356850bb1791459f8c16d6ee9195b28714a2e
-  XCGLogger: 4fc1bc0bdd5828cb8dc8da7a843536cda1bea8f3
+  SQLite.swift: 7cad9db150a03716336e69469ec9559c85aece5b
+  XCGLogger: 0434f15e3909cdc450bb63faf638b8792ab782ab
 
-PODFILE CHECKSUM: b883632c5e0f933b38148b4ae59163d74b8b8dff
+PODFILE CHECKSUM: 74204e867dda763144b6140ae316855135bf25d2
 
 COCOAPODS: 1.5.3

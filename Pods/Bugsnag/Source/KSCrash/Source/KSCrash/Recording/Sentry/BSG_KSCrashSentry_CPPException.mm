@@ -44,6 +44,15 @@
 #define likely_if(x) if (__builtin_expect(x, 1))
 #define unlikely_if(x) if (__builtin_expect(x, 0))
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+// Internal NSException recorder
+void bsg_recordException(NSException *exception);
+#ifdef __cplusplus
+}
+#endif
+
 // ============================================================================
 #pragma mark - Globals -
 // ============================================================================
@@ -114,9 +123,11 @@ static void CPPExceptionTerminate(void) {
     try {
         throw;
     } catch (NSException *exception) {
-        BSG_KSLOG_DEBUG(@"Detected NSException. Letting the current "
+        BSG_KSLOG_DEBUG(@"Detected NSException. Recording details "
+                        @"and letting the current "
                         @"NSException handler deal with it.");
         isNSException = true;
+        bsg_recordException(exception);
     } catch (std::exception &exc) {
         strncpy(descriptionBuff, exc.what(), sizeof(descriptionBuff));
     }
@@ -168,7 +179,9 @@ static void CPPExceptionTerminate(void) {
         bsg_g_context->crashReason = description;
 
         BSG_KSLOG_DEBUG(@"Calling main crash handler.");
-        bsg_g_context->onCrash();
+        char errorClass[21];
+        strncpy(errorClass, bsg_g_context->CPPException.name, sizeof(errorClass));
+        bsg_g_context->onCrash('e', errorClass);
 
         BSG_KSLOG_DEBUG(
             @"Crash handling complete. Restoring original handlers.");
@@ -176,7 +189,9 @@ static void CPPExceptionTerminate(void) {
         bsg_kscrashsentry_resumeThreads();
     }
 
-    bsg_g_originalTerminateHandler();
+    if (bsg_g_originalTerminateHandler != NULL) {
+        bsg_g_originalTerminateHandler();
+    }
 }
 
 // ============================================================================

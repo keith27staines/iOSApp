@@ -12,14 +12,14 @@ fileprivate var skins: Skins = Skin.loadSkins()
 
 public extension UIViewController {
     
-    public var skin: Skin? { return skins["workfinder"] }
+    var skin: Skin? { return skins["workfinder"] }
 
-    public var splashColor: UIColor {
+    var splashColor: UIColor {
         return skin?.navigationBarSkin.barTintColor.uiColor ?? UIColor.white
     }
     
     /// Style the navigation bar
-    public func styleNavigationController() {
+    func styleNavigationController() {
         Skinner().apply(navigationBarSkin: skin?.navigationBarSkin, to: self)
         setNeedsStatusBarAppearanceUpdate()
     }

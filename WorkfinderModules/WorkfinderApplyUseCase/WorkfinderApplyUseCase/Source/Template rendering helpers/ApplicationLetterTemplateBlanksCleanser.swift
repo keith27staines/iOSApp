@@ -73,6 +73,6 @@ public class ApplicationLetterTemplateBlanksCleanser {
     }
     
     func indexForAttribute(_ attribute: TemplateBlankName) -> Int? {
-        return self.templateBlanks.index(where: { $0.name == attribute.rawValue })
+        return self.templateBlanks.firstIndex(where: { $0.name == attribute.rawValue })
     }
 }

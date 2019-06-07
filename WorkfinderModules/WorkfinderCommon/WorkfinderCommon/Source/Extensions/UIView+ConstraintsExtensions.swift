@@ -13,7 +13,7 @@ public extension UIView {
     /// Adds the specified view as a subview of the current instance
     /// adding constraints to ensure the subview fills the safe area (iOS 11+)
     /// or the area defined by the layout margins for earlier iOS
-    public func addSubViewToFillSafeArea(view: UIView) {
+    func addSubViewToFillSafeArea(view: UIView) {
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
         if #available(iOS 11.0, *) {
@@ -30,7 +30,7 @@ public extension UIView {
         }
     }
     
-    public func fillSuperview(padding: UIEdgeInsets) {
+    func fillSuperview(padding: UIEdgeInsets) {
         anchor(
             top: superview?.topAnchor,
             leading: superview?.leadingAnchor,
@@ -39,16 +39,16 @@ public extension UIView {
             padding: padding)
     }
     
-    public func fillSuperview() {
+    func fillSuperview() {
         fillSuperview(padding: .zero)
     }
     
-    public func anchorSize(to view: UIView) {
+    func anchorSize(to view: UIView) {
         widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
     }
     
-    public func anchor(
+    func anchor(
         top: NSLayoutYAxisAnchor?,
         leading: NSLayoutXAxisAnchor?,
         bottom: NSLayoutYAxisAnchor?,

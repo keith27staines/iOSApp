@@ -24,18 +24,18 @@ public struct Skin : Codable {
 }
 
 public extension Skin {
-    public static func skinsJsonData(skins: Skins) throws -> Data {
+    static func skinsJsonData(skins: Skins) throws -> Data {
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         return try encoder.encode(skins)
     }
     
-    public static func skinsPlistData(skins: Skins) throws -> Data {
+    static func skinsPlistData(skins: Skins) throws -> Data {
         let encoder = PropertyListEncoder()
         return try encoder.encode(skins)
     }
     
-    public static func writeSkinsToDocumentDirectory(skins: Skins) {
+    static func writeSkinsToDocumentDirectory(skins: Skins) {
         let fileManager = FileManager.default
         do {
             let documentDirectory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create:false)
@@ -49,7 +49,7 @@ public extension Skin {
 }
 
 public extension Skin {
-    public static func loadSkins() -> Skins {
+    static func loadSkins() -> Skins {
         let skins = FactorySkins.skins
         Skin.writeSkinsToDocumentDirectory(skins: skins)
         return FactorySkins.skins
@@ -68,7 +68,7 @@ public extension Skin {
 //        return skins ?? [:]
     }
     
-    public static func readSkinsFromPlist() -> Skins? {
+    static func readSkinsFromPlist() -> Skins? {
         guard let url = Bundle.main.url(forResource: plistDocumentName, withExtension: "plist") else {
             return nil
         }
@@ -77,7 +77,7 @@ public extension Skin {
         return try! decoder.decode(Skins.self, from: data)
     }
     
-    public static func readSkinsFromDocumentDirectory() -> Skins? {
+    static func readSkinsFromDocumentDirectory() -> Skins? {
         let fileManager = FileManager.default
         do {
             let documentDirectory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create:false)

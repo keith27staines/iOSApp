@@ -18,7 +18,7 @@ public extension JSONDecoder {
     /// - parameter intoType: The type into which the data is to be decoded
     /// - parameter attempting: A string describing the purpose of the call
     /// - parameter completion: Returns the result
-    public func decode<A:Decodable>(dataResult: F4SNetworkDataResult, intoType: A.Type, attempting: String, completion: (F4SNetworkResult<A>) -> ()) {
+    func decode<A:Decodable>(dataResult: F4SNetworkDataResult, intoType: A.Type, attempting: String, completion: (F4SNetworkResult<A>) -> ()) {
         switch dataResult {
         case .error(let error):
             completion(F4SNetworkResult.error(error))
@@ -33,7 +33,7 @@ public extension JSONDecoder {
     /// - parameter intoType: The type into which the data is to be decoded
     /// - parameter attempting: A string describing the purpose of the call
     /// - parameter completion: Returns the result
-    public func decode<A:Decodable>(data: Data?, intoType: A.Type, attempting: String, completion: (F4SNetworkResult<A>) -> ()) {
+    func decode<A:Decodable>(data: Data?, intoType: A.Type, attempting: String, completion: (F4SNetworkResult<A>) -> ()) {
         guard let data = data else {
             let noDataError = F4SNetworkDataErrorType.noData.error(attempting: attempting)
             completion(F4SNetworkResult.error(noDataError))

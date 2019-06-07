@@ -7,16 +7,6 @@
 //
 
 import Foundation
-import Auth0
-
-public struct F4SCredentials {
-    var accessToken: String?
-    var idToken: String?
-    public init(auth0Credentials: Credentials) {
-        self.accessToken = auth0Credentials.accessToken
-        self.idToken = auth0Credentials.idToken
-    }
-}
 
 public struct F4SAuth0MagicLinkInterpreter {
 

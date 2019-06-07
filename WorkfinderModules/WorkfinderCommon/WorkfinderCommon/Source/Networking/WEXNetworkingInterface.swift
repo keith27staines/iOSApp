@@ -9,16 +9,16 @@
 import Foundation
 
 public extension WEXErrorsFactory {
-    public static func networkErrorFrom(response: HTTPURLResponse, responseData: Data?, attempting: String) -> WEXNetworkError? {
+    static func networkErrorFrom(response: HTTPURLResponse, responseData: Data?, attempting: String) -> WEXNetworkError? {
         return WEXNetworkError(response: response, responseData: responseData, attempting: attempting)
     }
-    public static func networkErrorFrom(error: Error, attempting: String) -> WEXNetworkError {
+    static func networkErrorFrom(error: Error, attempting: String) -> WEXNetworkError {
         return WEXNetworkError(error: error, attempting: attempting)
     }
-    public static func networkErrorFromInvalidUrlString(_ urlString: String, attempting: String) -> WEXNetworkError {
+    static func networkErrorFromInvalidUrlString(_ urlString: String, attempting: String) -> WEXNetworkError {
         return WEXNetworkError(localizedDescription: urlString, attempting: attempting, retry: false)
     }
-    public static func networkNoDataReturnedError(attempting: String) -> WEXNetworkError {
+    static func networkNoDataReturnedError(attempting: String) -> WEXNetworkError {
         return WEXNetworkError(localizedDescription: "A valid response was obtained but the expected data was missing", attempting: attempting, retry: true)
     }
 }

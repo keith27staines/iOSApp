@@ -10,6 +10,7 @@
 		FC2AC5E922351E2C00FF4E47 /* WorkfinderSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2AC5E822351E2C00FF4E47 /* WorkfinderSessionManager.swift */; };
 		FC2AC5EB2235281A00FF4E47 /* WorkfinderSessionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2AC5EA2235281A00FF4E47 /* WorkfinderSessionManagerTests.swift */; };
 		FC2AC5F12235516A00FF4E47 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2AC5F02235516A00FF4E47 /* Helpers.swift */; };
+		FC4BBBA122AA43C700331F95 /* EmailVerificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BBBA022AA43C700331F95 /* EmailVerificationService.swift */; };
 		FC85F96C22365FA0002F84DF /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC85F96822365F75002F84DF /* WorkfinderCommon.framework */; };
 		FC9865BE229D39DC006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865BD229D39DC006D3E63 /* README */; };
 		FCA91E3C2233FF20007ED308 /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91E322233FF20007ED308 /* WorkfinderNetworking.framework */; };
@@ -49,6 +50,7 @@
 		FC2AC5E822351E2C00FF4E47 /* WorkfinderSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderSessionManager.swift; sourceTree = "<group>"; };
 		FC2AC5EA2235281A00FF4E47 /* WorkfinderSessionManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderSessionManagerTests.swift; sourceTree = "<group>"; };
 		FC2AC5F02235516A00FF4E47 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		FC4BBBA022AA43C700331F95 /* EmailVerificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationService.swift; sourceTree = "<group>"; };
 		FC85F96222365F75002F84DF /* WorkfinderCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WorkfinderCommon.xcodeproj; path = ../WorkfinderCommon/WorkfinderCommon.xcodeproj; sourceTree = "<group>"; };
 		FC9865BD229D39DC006D3E63 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		FCA91E322233FF20007ED308 /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				FCE4C588223BC5BB00C5B15E /* WEXPlacementService.swift */,
+				FC4BBBA022AA43C700331F95 /* EmailVerificationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -263,7 +266,7 @@
 				TargetAttributes = {
 					FCA91E312233FF20007ED308 = {
 						CreatedOnToolsVersion = 10.1;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1020;
 					};
 					FCA91E3A2233FF20007ED308 = {
 						CreatedOnToolsVersion = 10.1;
@@ -276,6 +279,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = FCA91E282233FF20007ED308;
 			productRefGroup = FCA91E332233FF20007ED308 /* Products */;
@@ -338,6 +342,7 @@
 				FCA91E4F2233FFDC007ED308 /* WorkfinderNetworking.swift in Sources */,
 				FC2AC5E922351E2C00FF4E47 /* WorkfinderSessionManager.swift in Sources */,
 				FCE4C589223BC5BB00C5B15E /* WEXPlacementService.swift in Sources */,
+				FC4BBBA122AA43C700331F95 /* EmailVerificationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,7 +512,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -533,7 +538,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderNetworking;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -662,7 +667,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = DebugF4SLive;
@@ -772,7 +777,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = DebugF4S;
@@ -875,7 +880,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderNetworking;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = ReleaseF4SLive;
@@ -978,7 +983,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderNetworking;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = ReleaseF4S;

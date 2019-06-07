@@ -12,7 +12,7 @@ public enum F4SEmailVerificationState : Equatable {
     case start
     case emailSent(String)
     case linkReceived
-    case verified(F4SCredentials)
+    case verified
     case previouslyVerified
     case error(F4SEmailVerificationError)
     
@@ -57,7 +57,7 @@ public extension F4SEmailVerificationState {
             return true
         case .linkReceived:
             return false
-        case .verified(_):
+        case .verified:
             return false
         case .previouslyVerified:
             return true
@@ -74,7 +74,7 @@ public extension F4SEmailVerificationState {
             return LocalizedStrings.ButtonTitles.resendLink
         case .linkReceived:
             return LocalizedStrings.ButtonTitles.processLink
-        case .verified(_):
+        case .verified:
             return LocalizedStrings.ButtonTitles.next
         case .previouslyVerified:
             return LocalizedStrings.ButtonTitles.next
@@ -98,7 +98,7 @@ public extension F4SEmailVerificationState {
             return LocalizedStrings.IntroductionStrings.emailSent
         case .linkReceived:
             return LocalizedStrings.IntroductionStrings.linkReceived
-        case .verified(_):
+        case .verified:
             return LocalizedStrings.IntroductionStrings.verified
         case .previouslyVerified:
             return LocalizedStrings.IntroductionStrings.previouslyVerified
@@ -115,7 +115,7 @@ public extension F4SEmailVerificationState {
             return LocalizedStrings.FeedbackStrings.emailSent
         case .linkReceived:
             return LocalizedStrings.FeedbackStrings.linkReceived
-        case .verified(_):
+        case .verified:
             return LocalizedStrings.FeedbackStrings.verified
         case .previouslyVerified:
             return LocalizedStrings.FeedbackStrings.previouslyVerified

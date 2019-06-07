@@ -43,11 +43,11 @@ extension String {
 
 // MARK:- Dehyphenating
 public extension String {
-    public var dehyphenated: String {
+    var dehyphenated: String {
         return self.replacingOccurrences(of: "-", with: "")
     }
     
-    public func htmlDecode() -> String {
+    func htmlDecode() -> String {
         return self
             .replacingOccurrences(of: "&amp;", with: "&")
             .replacingOccurrences(of: "&quot;", with: "\"")
@@ -56,28 +56,28 @@ public extension String {
             .replacingOccurrences(of: "&gt;", with: ">")
     }
     
-    public func capitalizingFirstLetter() -> String {
+    func capitalizingFirstLetter() -> String {
         let first = String(prefix(1)).capitalized
         let other = String(dropFirst())
         return first + other
     }
     
-    public mutating func capitalizeFirstLetter() {
+    mutating func capitalizeFirstLetter() {
         self = self.capitalizingFirstLetter()
     }
     
-    public func index(of string: String, options: String.CompareOptions = .literal) -> String.Index? {
+    func index(of string: String, options: String.CompareOptions = .literal) -> String.Index? {
         return range(of: string, options: options, range: nil, locale: nil)?.lowerBound
     }
     
-    public func index(of string: String, options: String.CompareOptions = .literal) -> Int? {
+    func index(of string: String, options: String.CompareOptions = .literal) -> Int? {
         if let indexOf = range(of: string, options: options, range: nil, locale: nil)?.lowerBound {
             return self.distance(from: self.startIndex, to: indexOf)
         }
         return nil
     }
     
-    public func stringByReplacingFirstOccurrenceOfString(target: String, withString replaceString: String) -> String {
+    func stringByReplacingFirstOccurrenceOfString(target: String, withString replaceString: String) -> String {
         if let range = self.range(of: target) {
             return self.replacingCharacters(in: range, with: replaceString)
         }

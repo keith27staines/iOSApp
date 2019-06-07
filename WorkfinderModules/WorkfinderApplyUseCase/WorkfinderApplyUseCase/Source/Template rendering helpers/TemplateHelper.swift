@@ -23,7 +23,7 @@ public struct TemplateHelper {
         for selectedBlank in blanks {
             
             // Ensure that this blank exists in the template, otherwise we need to nothing
-            guard let blankIndex = templateBlanks.index(where: { (templateBlank) -> Bool in
+            guard let blankIndex = templateBlanks.firstIndex(where: { (templateBlank) -> Bool in
                 templateBlank.name == selectedBlank.name
             }) else {
                 filteredBlanks.append(selectedBlank)

@@ -90,7 +90,7 @@ public class ApplicationLetterTemplateRenderer {
     }
     
     func findSelectedBlankMatching(templateBlank: F4STemplateBlank) -> F4STemplateBlank? {
-        guard let indexOfSelectedBlank = selectedTemplateChoices.index(where: { (otherBlank) -> Bool in
+        guard let indexOfSelectedBlank = selectedTemplateChoices.firstIndex(where: { (otherBlank) -> Bool in
             return templateBlank.name == otherBlank.name }) else { return nil }
         return selectedTemplateChoices[indexOfSelectedBlank]
     }
@@ -98,7 +98,7 @@ public class ApplicationLetterTemplateRenderer {
     func getFillStrings(selectedChoices: [F4SChoice], availableChoices: [F4SChoice]) -> [String] {
         var fillStrings = [String]()
         for selectedChoice in selectedChoices {
-            if let indexOfChoice = availableChoices.index(where: { $0.uuid == selectedChoice.uuid }) {
+            if let indexOfChoice = availableChoices.firstIndex(where: { $0.uuid == selectedChoice.uuid }) {
                 fillStrings.append(availableChoices[indexOfChoice].value)
             } else {
                 let dateFormatter = DateFormatter()
@@ -113,7 +113,7 @@ public class ApplicationLetterTemplateRenderer {
     }
     
     func getValueForUuid(choices: [F4SChoice], uuid: String) -> String {
-        if let indexOfChoice = choices.index(where: { $0.uuid == uuid }) {
+        if let indexOfChoice = choices.firstIndex(where: { $0.uuid == uuid }) {
             return choices[indexOfChoice].value
         }
         let dateFormatter = DateFormatter()

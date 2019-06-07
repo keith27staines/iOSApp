@@ -781,6 +781,8 @@ extension MapViewController: CLLocationManagerDelegate {
             
         case .notDetermined:
             globalLog.debug("location manager is in state 'not determined'")
+        @unknown default:
+            assert(true, "unexpcted authorization status")
         }
         self.lastAuthorizationStatus = status
     }

@@ -48,6 +48,7 @@ static NSString *const kHeaderApiSentAt = @"Bugsnag-Sent-At";
 @interface BugsnagConfiguration ()
 @property(nonatomic, readwrite, strong) NSMutableArray *beforeNotifyHooks;
 @property(nonatomic, readwrite, strong) NSMutableArray *beforeSendBlocks;
+@property(nonatomic, readwrite, strong) NSMutableArray *beforeSendSessionBlocks;
 @end
 
 @implementation BugsnagConfiguration
@@ -62,10 +63,13 @@ static NSString *const kHeaderApiSentAt = @"Bugsnag-Sent-At";
         _notifyURL = [NSURL URLWithString:BSGDefaultNotifyUrl];
         _beforeNotifyHooks = [NSMutableArray new];
         _beforeSendBlocks = [NSMutableArray new];
+        _beforeSendSessionBlocks = [NSMutableArray new];
         _notifyReleaseStages = nil;
         _breadcrumbs = [BugsnagBreadcrumbs new];
         _automaticallyCollectBreadcrumbs = YES;
         _shouldAutoCaptureSessions = YES;
+        _reportBackgroundOOMs = NO;
+        _reportOOMs = YES;
 
         if ([NSURLSession class]) {
             _session = [NSURLSession
@@ -105,6 +109,10 @@ static NSString *const kHeaderApiSentAt = @"Bugsnag-Sent-At";
     [(NSMutableArray *)self.beforeSendBlocks addObject:[block copy]];
 }
 
+- (void)addBeforeSendSession:(BeforeSendSession)block {
+    [(NSMutableArray *)self.beforeSendSessionBlocks addObject:[block copy]];
+}
+
 - (void)clearBeforeSendBlocks {
     [(NSMutableArray *)self.beforeSendBlocks removeAllObjects];
 }
@@ -123,7 +131,10 @@ static NSString *const kHeaderApiSentAt = @"Bugsnag-Sent-At";
 
 - (void)setReleaseStage:(NSString *)newReleaseStage {
     @synchronized (self) {
+        NSString *key = NSStringFromSelector(@selector(releaseStage));
+        [self willChangeValueForKey:key];
         _releaseStage = newReleaseStage;
+        [self didChangeValueForKey:key];
         [self.config addAttribute:BSGKeyReleaseStage
                         withValue:newReleaseStage
                     toTabWithName:BSGKeyConfig];
@@ -215,23 +226,6 @@ static NSString *const kHeaderApiSentAt = @"Bugsnag-Sent-At";
         [self didChangeValueForKey:NSStringFromSelector(@selector(apiKey))];
     } else {
         bsg_log_err(@"Attempted to override non-null API key with nil - ignoring.");
-    }
-}
-
-@synthesize shouldAutoCaptureSessions = _shouldAutoCaptureSessions;
-
-- (BOOL)shouldAutoCaptureSessions {
-    return _shouldAutoCaptureSessions;
-}
-
-- (void)setShouldAutoCaptureSessions:(BOOL)shouldAutoCaptureSessions {
-    @synchronized (self) {
-        _shouldAutoCaptureSessions = shouldAutoCaptureSessions;
-
-        if (shouldAutoCaptureSessions) { // track any existing sessions
-            BugsnagSessionTracker *sessionTracker = [Bugsnag notifier].sessionTracker;
-            [sessionTracker onAutoCaptureEnabled];
-        }
     }
 }
 

@@ -9,7 +9,7 @@
 import Foundation
 
 public extension UIFont {
-    public class func f4sSystemFont(size: CGFloat, weight: UIFont.Weight) -> UIFont {
+    class func f4sSystemFont(size: CGFloat, weight: UIFont.Weight) -> UIFont {
         return UIFont.systemFont(ofSize: size, weight:weight)
     }
 }

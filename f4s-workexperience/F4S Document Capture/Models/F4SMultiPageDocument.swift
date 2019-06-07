@@ -73,7 +73,7 @@ class F4SMultiPageDocument {
     }
     
     func indexForPage(_ page: F4SDocumentPage) -> Int? {
-        return pages.index(where: { (otherPage) -> Bool in
+        return pages.firstIndex(where: { (otherPage) -> Bool in
             return otherPage === page
         })
     }

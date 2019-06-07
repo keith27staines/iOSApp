@@ -25,8 +25,10 @@ public struct Company : Hashable {
     
     public static let defaultLogo = UIImage(named: "DefaultLogo")
     
-    public var hashValue: Int {
-        return uuid.hashValue ^ latitude.hashValue ^ longitude.hashValue
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(uuid)
+        hasher.combine(latitude)
+        hasher.combine(longitude)
     }
     
     public static func ==(lhs: Company, rhs: Company) -> Bool {
@@ -128,9 +130,11 @@ public struct BusinessCompanyInterest : Hashable {
         return false
     }
     
-    public var hashValue: Int {
-        return companyId.hashValue ^ interestId.hashValue
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(companyId)
+        hasher.combine(interestId)
     }
+    
     public var id: Int64
     public var interestId: Int64
     public var companyId: Int64
@@ -164,8 +168,9 @@ struct UserStatus {
 }
 
 struct Shortlist : Hashable {
-    var hashValue: Int {
-        return companyUuid.hashValue
+
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(companyUuid)
     }
     
     static func ==(lhs: Shortlist, rhs: Shortlist) -> Bool {

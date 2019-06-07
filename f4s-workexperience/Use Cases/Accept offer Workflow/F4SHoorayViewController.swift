@@ -110,6 +110,8 @@ extension F4SHoorayViewController {
         case EKAuthorizationStatus.restricted, EKAuthorizationStatus.denied:
             // The user will need to go to settings to allow us to write to calendar
             completion(false)
+        @unknown default:
+            assert(true, "unexpected authorization status")
         }
     }
     

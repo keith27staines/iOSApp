@@ -16,7 +16,7 @@ public extension UIColor {
     ///
     /// - parameter percentage: The percentage by which the color is to be lightened (default = 30)
     /// - returns: The lighter color
-    public func lighter(by percentage: CGFloat = 30.0) -> UIColor {
+    func lighter(by percentage: CGFloat = 30.0) -> UIColor {
         return self.adjustBrightness(by: abs(percentage))
     }
     
@@ -25,7 +25,7 @@ public extension UIColor {
     ///
     /// - parameter percentage: The percentage by which the color is to be darkened (default = 30)
     /// - returns: The darker color
-    public func darker(by percentage: CGFloat = 30.0) -> UIColor {
+    func darker(by percentage: CGFloat = 30.0) -> UIColor {
         return self.adjustBrightness(by: -abs(percentage))
     }
     
@@ -34,7 +34,7 @@ public extension UIColor {
     ///
     /// - parameter percentage: The percentage by which the color is to be saturated (default = 30)
     /// - returns: The more saturated color
-    public func saturated(by percentage: CGFloat = 30.0) -> UIColor {
+    func saturated(by percentage: CGFloat = 30.0) -> UIColor {
         return self.adjustSaturation(by: abs(percentage))
     }
     
@@ -43,11 +43,11 @@ public extension UIColor {
     ///
     /// - parameter percentage: The percentage by which the color is to be desaturated (default = 30)
     /// - returns: The desaturated color
-    public func desaturated(by percentage: CGFloat = 30.0) -> UIColor {
+    func desaturated(by percentage: CGFloat = 30.0) -> UIColor {
         return self.adjustSaturation(by: -abs(percentage))
     }
     
-    public func adjustBrightness(by percentage: CGFloat = 30.0) -> UIColor {
+    func adjustBrightness(by percentage: CGFloat = 30.0) -> UIColor {
         var h: CGFloat = 0, s: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
         if self.getHue(&h, saturation: &s, brightness: &b, alpha: &a) {
             if b < 1.0 {
@@ -66,7 +66,7 @@ public extension UIColor {
         return self
     }
     
-    public func adjustSaturation(by percentage: CGFloat = 30.0) -> UIColor {
+    func adjustSaturation(by percentage: CGFloat = 30.0) -> UIColor {
         var h: CGFloat = 0, s: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
         if self.getHue(&h, saturation: &s, brightness: &b, alpha: &a) {
             if s < 1.0 {
@@ -88,7 +88,7 @@ public extension UIColor {
 
 // MARK:- More initializers
 public extension UIColor {
-    public convenience init(red: Int, green: Int, blue: Int) {
+    convenience init(red: Int, green: Int, blue: Int) {
         assert(red >= 0 && red <= 255, "Invalid red component")
         assert(green >= 0 && green <= 255, "Invalid green component")
         assert(blue >= 0 && blue <= 255, "Invalid blue component")
@@ -96,7 +96,7 @@ public extension UIColor {
         self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
     }
     
-    public convenience init(netHex: Int) {
+    convenience init(netHex: Int) {
         self.init(red: (netHex >> 16) & 0xFF, green: (netHex >> 8) & 0xFF, blue: netHex & 0xFF)
     }
 }

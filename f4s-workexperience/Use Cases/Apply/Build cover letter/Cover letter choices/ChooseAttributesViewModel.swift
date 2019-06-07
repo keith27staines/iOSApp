@@ -74,7 +74,7 @@ public class ChooseAttributesViewModel : NSObject {
                 // special logic for blanks which permit a maximum of one choice: remove the previously selected one and add the new one
                 if let lastChoice = blank.choices.last {
                     blank.choices.removeLast()
-                    if let attributeIndex = self.matchingBlankFromTemplate?.choices.index(where: { $0.uuid == lastChoice.uuid }) {
+                    if let attributeIndex = self.matchingBlankFromTemplate?.choices.firstIndex(where: { $0.uuid == lastChoice.uuid }) {
                         indexPathsToReload.append(IndexPath(row: attributeIndex, section: indexPath.section))
                     }
                 }

@@ -95,12 +95,12 @@ public struct WorkAvailabilityWindow {
 
 public extension Date {
     /// Returns a date corresponding to the first instant of the current instance
-    public var startOfDay: Date {
+    var startOfDay: Date {
         return Calendar.current.startOfDay(for: self)
     }
     
     /// Returns a date corresponding to a second before the end of the day that contains the current instance
-    public var endOfDay: Date {
+    var endOfDay: Date {
         var components = DateComponents()
         components.day = 1
         components.second = -1

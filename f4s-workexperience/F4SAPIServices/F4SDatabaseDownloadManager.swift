@@ -57,7 +57,7 @@ public class F4SDatabaseDownloadManager  : NSObject, F4SDatabaseDownloadManagerP
         databaseAvailabilityObservers.append(boxedObserver)
     }
     public func removeObserver(_ observer: F4SCompanyDatabaseAvailabilityObserving) {
-        guard let index = databaseAvailabilityObservers.index(where: { (boxedObserver) -> Bool in
+        guard let index = databaseAvailabilityObservers.firstIndex(where: { (boxedObserver) -> Bool in
             return observer === boxedObserver.observer
         }) else {
             return
