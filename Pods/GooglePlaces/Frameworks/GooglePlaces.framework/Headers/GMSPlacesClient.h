@@ -169,7 +169,7 @@ typedef void (^GMSPlacePhotoImageResultCallback)(UIImage *_Nullable photo,
  * Image data may be cached by the SDK. If the requested photo does not exist in the cache then a
  * network lookup will be performed.
  *
- * @param photo The photo for which to load a |UIImage|.
+ * @param photoMetadata The photo for which to load a |UIImage|.
  * @param callback The callback to invoke with the loaded |UIImage|.
  */
 - (void)loadPlacePhoto:(GMSPlacePhotoMetadata *)photoMetadata
@@ -192,7 +192,7 @@ typedef void (^GMSPlacePhotoImageResultCallback)(UIImage *_Nullable photo,
  * integer before use. If an image is requested which is larger than the maximum size available a
  * smaller image may be returned.
  *
- * @param photo The photo for which to load a |UIImage|.
+ * @param photoMetadata The photo for which to load a |UIImage|.
  * @param maxSize The maximum size of the image.
  * @param scale The scale to load the image at.
  * @param callback The callback to invoke with the loaded |UIImage|.
