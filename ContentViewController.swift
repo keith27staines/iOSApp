@@ -28,11 +28,26 @@ class ContentViewController: UIViewController {
         adjustAppearance()
         getContent()
     }
+    
+    var didChangeNavigationBarVisibility: Bool = false
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if navigationController?.isNavigationBarHidden == true {
+            navigationController?.isNavigationBarHidden = false
+            didChangeNavigationBarVisibility = true
+            
+        }
         setNeedsStatusBarAppearanceUpdate()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if didChangeNavigationBarVisibility {
+            navigationController?.isNavigationBarHidden = true
+        }
+    }
+    
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }

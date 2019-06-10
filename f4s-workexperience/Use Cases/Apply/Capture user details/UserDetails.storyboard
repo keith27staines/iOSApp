@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -203,7 +203,7 @@
                                                                                     <constraint firstAttribute="height" constant="1" id="RXF-Y9-iXu"/>
                                                                                 </constraints>
                                                                             </view>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you don’t have a voucher code tap here" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KnY-Nh-iSQ">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your voucher if you have one" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KnY-Nh-iSQ">
                                                                                 <rect key="frame" x="0.0" y="40" width="354" height="16"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                                 <nil key="textColor"/>
@@ -330,7 +330,6 @@
                         <outlet property="firstAndLastNameUnderlineView" destination="jO5-dM-A01" id="3JI-UR-49e"/>
                         <outlet property="infoStackViewTopConstraint" destination="Jmn-8L-pmJ" id="7mj-fr-NeA"/>
                         <outlet property="namesInfoLabel" destination="QM2-ao-TvS" id="0AE-sG-e4s"/>
-                        <outlet property="noVoucherInfoLabel" destination="KnY-Nh-iSQ" id="Ptb-8Y-6Lj"/>
                         <outlet property="parentEmailInfoLabel" destination="LIh-1f-QFf" id="V79-4p-nTQ"/>
                         <outlet property="parentEmailStackView" destination="y33-By-Vkx" id="GrH-YW-xO7"/>
                         <outlet property="parentEmailTextField" destination="IZi-FU-235" id="d25-g4-pTe"/>
@@ -342,6 +341,7 @@
                         <outlet property="voucherCodeStackView" destination="fjS-KP-AS4" id="wgM-2A-tzw"/>
                         <outlet property="voucherCodeTextField" destination="g1i-QR-DUi" id="GYY-sa-Ick"/>
                         <outlet property="voucherCodeUnderlineView" destination="dmo-Qg-ULS" id="xwj-9Q-y6P"/>
+                        <outlet property="voucherInformationLabel" destination="KnY-Nh-iSQ" id="Ptb-8Y-6Lj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xCS-GH-ncR" userLabel="First Responder" sceneMemberID="firstResponder"/>

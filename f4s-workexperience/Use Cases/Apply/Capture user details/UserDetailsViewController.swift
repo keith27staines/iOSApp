@@ -19,7 +19,7 @@ class UserDetailsViewController: UIViewController {
     @IBOutlet weak var dobTextField: UITextField!
     
     @IBOutlet weak var dobInfoLabel: UILabel!
-    @IBOutlet weak var noVoucherInfoLabel: UILabel!
+    @IBOutlet weak var voucherInformationLabel: UILabel!
     @IBOutlet weak var parentEmailInfoLabel: UILabel!
     @IBOutlet weak var userEmailInfoLabel: UILabel!
     @IBOutlet weak var namesInfoLabel: UILabel!
@@ -116,7 +116,9 @@ class UserDetailsViewController: UIViewController {
     }
     
     @IBAction func voucherCodeTextFieldDidChange(_ sender: NextResponderTextField) {
-        viewModel.setVoucherString(sender.text)
+        var text = sender.text
+        if text?.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty == true { text = nil }
+        viewModel.setVoucherString(text)
         updateVisualState()
     }
     
@@ -193,15 +195,11 @@ extension UserDetailsViewController {
         parentEmailInfoLabel.attributedText = viewModel.parentEmailInformationString
         userEmailInfoLabel.attributedText = viewModel.userEMailInformationString
         namesInfoLabel.attributedText = viewModel.namesInformationString
-        noVoucherInfoLabel.attributedText = viewModel.voucherInformationString
+        voucherInformationLabel.attributedText = viewModel.voucherInformationString
         dobInfoLabel.isUserInteractionEnabled = true
-        noVoucherInfoLabel.isUserInteractionEnabled = true
         let dobInfoLabelTap = UITapGestureRecognizer(target: self, action: #selector(didTapDobInfoLabel))
-        let noVoucherInfoLabelTap = UITapGestureRecognizer(target: self, action: #selector(didTapNoVoucherInfoLabel))
         dobInfoLabelTap.numberOfTapsRequired = 1
-        noVoucherInfoLabelTap.numberOfTapsRequired = 1
         dobInfoLabel.addGestureRecognizer(dobInfoLabelTap)
-        noVoucherInfoLabel.addGestureRecognizer(noVoucherInfoLabelTap)
     }
     
     func setupDatePicker() {
@@ -257,7 +255,7 @@ extension UserDetailsViewController {
         firstAndLastNameStackView.isHidden = viewModel.isFirstAndLastNameStackHidden
         acceptConditionsStackView.isHidden = viewModel.isAgreeTermsStackHidden
         voucherCodeStackView.isHidden = viewModel.isVoucherStackHidden
-        noVoucherInfoLabel.isHidden = self.voucherCodeStackView.isHidden
+        voucherInformationLabel.isHidden = self.voucherCodeStackView.isHidden
         
         dobUnderlineView.backgroundColor = viewModel.dateOfBirthUnderlineColor
         emailUnderlineView.backgroundColor = viewModel.userEmailUnderlineColor
@@ -324,10 +322,6 @@ extension UserDetailsViewController {
     
     @objc func didTapDobInfoLabel(recognizer: UITapGestureRecognizer) {
         coordinator?.presentContent(F4SContentType.consent)
-    }
-    
-    @objc func didTapNoVoucherInfoLabel(recognizer: UITapGestureRecognizer) {
-        coordinator?.presentContent(F4SContentType.voucher)
     }
     
     func verifyVoucher() {
