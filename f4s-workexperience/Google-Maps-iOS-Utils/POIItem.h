@@ -24,7 +24,7 @@
 @property(nonatomic, readonly) CLLocationCoordinate2D position;
 @property(nonatomic, readonly) UIView *name;
 @property(nonatomic, readonly) int index;
-@property(nonatomic, readonly) bool shouldShowView;
+@property(nonatomic, readonly) BOOL shouldShowView;
 
 - (instancetype)initWithPosition:(CLLocationCoordinate2D)position name:(UIView *)name index:(int)index shouldShowView:(bool)shouldShowView;
 

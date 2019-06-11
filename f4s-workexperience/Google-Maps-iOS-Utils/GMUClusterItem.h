@@ -28,7 +28,7 @@
 /**
  * Load a view when reload it's true.
  */
-@property(nonatomic, readonly) bool shouldShowView;
+@property(nonatomic, readonly) BOOL shouldShowView;
 
 @end
 

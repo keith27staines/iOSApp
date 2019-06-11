@@ -9,7 +9,7 @@
 import UIKit
 
 struct GoogleApiKeys {
-    static let googleApiKey = "AIzaSyAEph2YRDNaWwgHhrU0Qnd6izMoDQudeNs"
+    static let googleApiKey = "AIzaSyCAqq7R-61crNaAkaqcfWR3b2BZqt9Vye8" 
     static let geocodeApiKey = "AIzaSyAEph2YRDNaWwgHhrU0Qnd6izMoDQudeNs"
     static let placesUrl = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
     static let geocodeUrl = "https://maps.googleapis.com/maps/api/geocode/json"

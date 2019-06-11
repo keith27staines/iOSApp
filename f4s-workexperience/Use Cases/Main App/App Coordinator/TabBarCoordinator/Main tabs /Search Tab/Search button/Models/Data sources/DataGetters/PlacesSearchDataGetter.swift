@@ -34,7 +34,7 @@ extension GMSAutocompletePrediction : SearchItemProtocol {
 class PlacesSearchDataGetter : Searchable {
     
     // autocomplete places api setup
-    let placesClient = GMSPlacesClient()
+    let placesClient = GMSPlacesClient.shared()
     
     let autoCompleteFilter: GMSAutocompleteFilter = {
         let autoCompleteFilter = GMSAutocompleteFilter()
