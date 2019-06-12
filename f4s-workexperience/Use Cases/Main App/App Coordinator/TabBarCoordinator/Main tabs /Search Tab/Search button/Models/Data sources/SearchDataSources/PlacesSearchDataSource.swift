@@ -12,19 +12,19 @@ class PlacesSearchDataSource : NSObject, SearchDataSourcing {
     
     private let dataFetcher = PlacesSearchDataGetter()
     private var items = [SearchItemProtocol]()
+    private var lastCalled: CFTimeInterval =  0
     
     func setSearchString(_ string: String?, completion: @escaping () -> Void) {
+        let timeNow = CACurrentMediaTime()
+        let interval = timeNow - lastCalled
+        print("Interval: \(interval)")
+        lastCalled = timeNow
+        guard let string = string, string.count >= 3, interval > 0.5 else {
+            items = []
+            return
+        }
         dataFetcher.itemsMatching(string) { [weak self] (foundItems) in
-            guard let string = string else {
-                self?.items = []
-                completion()
-                return
-            }
             self?.items = foundItems
-                .filter({ (searchItem) -> Bool in
-                    return searchItem.matchOnText.lowercased().contains(string.lowercased())
-                })
-                .sorted { return $0.matchOnText.lowercased() < $1.matchOnText.lowercased() }
             completion()
         }
     }

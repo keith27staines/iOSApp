@@ -39,6 +39,7 @@ class PlacesSearchDataGetter : Searchable {
     let autoCompleteFilter: GMSAutocompleteFilter = {
         let autoCompleteFilter = GMSAutocompleteFilter()
         autoCompleteFilter.country = "gb"
+        autoCompleteFilter.type = GMSPlacesAutocompleteTypeFilter.region
         return autoCompleteFilter
     }()
 
