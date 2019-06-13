@@ -79,7 +79,7 @@ class UNService : NSObject {
             dispatchToBestDestination(notificationData: notificationData)
         }else if state == .active {
             globalLog.debug("Push notification cannot be processed because the app is active")
-            alertUserNotificationReceived(notificationData: notificationData)
+            //alertUserNotificationReceived(notificationData: notificationData)
         }
     }
     
