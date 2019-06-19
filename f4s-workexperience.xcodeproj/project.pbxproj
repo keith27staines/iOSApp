@@ -225,7 +225,6 @@
 		FC99BDCC20D172B600278DDE /* F4SCompanyDatabaseMetadataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99BDCB20D172B600278DDE /* F4SCompanyDatabaseMetadataService.swift */; };
 		FC99F3D41FFE533000E3AC5A /* F4SRecommendationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99F3D31FFE533000E3AC5A /* F4SRecommendationService.swift */; };
 		FC99F3D72000BE4900E3AC5A /* F4SService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99F3D62000BE4900E3AC5A /* F4SService.swift */; };
-		FC9B28AB222FAF870077CFF0 /* API used in the app in Resources */ = {isa = PBXBuildFile; fileRef = FC9B28AA222FAF870077CFF0 /* API used in the app */; };
 		FC9BEE082015FF6000347437 /* UniversalLinkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9BEE072015FF6000347437 /* UniversalLinkParser.swift */; };
 		FC9EAD80210F5DEB001C56CE /* F4SRoleJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9EAD7F210F5DEB001C56CE /* F4SRoleJson.swift */; };
 		FC9EAD82210F5F64001C56CE /* F4SRoleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9EAD81210F5F64001C56CE /* F4SRoleService.swift */; };
@@ -672,7 +671,6 @@
 		FC99BDCB20D172B600278DDE /* F4SCompanyDatabaseMetadataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyDatabaseMetadataService.swift; sourceTree = "<group>"; };
 		FC99F3D31FFE533000E3AC5A /* F4SRecommendationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRecommendationService.swift; sourceTree = "<group>"; };
 		FC99F3D62000BE4900E3AC5A /* F4SService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SService.swift; sourceTree = "<group>"; };
-		FC9B28AA222FAF870077CFF0 /* API used in the app */ = {isa = PBXFileReference; lastKnownFileType = text; path = "API used in the app"; sourceTree = "<group>"; };
 		FC9BEE072015FF6000347437 /* UniversalLinkParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalLinkParser.swift; sourceTree = "<group>"; };
 		FC9EAD7F210F5DEB001C56CE /* F4SRoleJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRoleJson.swift; sourceTree = "<group>"; };
 		FC9EAD81210F5F64001C56CE /* F4SRoleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRoleService.swift; sourceTree = "<group>"; };
@@ -1773,7 +1771,6 @@
 		FC62FF8320EF6CEF003E52C5 /* F4SAPIServices */ = {
 			isa = PBXGroup;
 			children = (
-				FC9B28AA222FAF870077CFF0 /* API used in the app */,
 				FC99BDC420CFAFD400278DDE /* F4SCompanyFavouritingService.swift */,
 				2037B0B71DEC8A2400A9DE3E /* F4STemplateService.swift */,
 				FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */,
@@ -2455,7 +2452,6 @@
 				D54E0FFD1E044B0400A51560 /* InfoWindowView.xib in Resources */,
 				40A5CF3A1DED6F8D000007AB /* InterestsView.storyboard in Resources */,
 				FCB6B8CA2074C58F0042C725 /* F4SDisplayInformationViewController.storyboard in Resources */,
-				FC9B28AB222FAF870077CFF0 /* API used in the app in Resources */,
 				FCD3486B20049DFB00DC1316 /* F4SEmailVerification.storyboard in Resources */,
 				201458C51E1CFCE500DBC9BD /* Message.storyboard in Resources */,
 				D54E10051E044BA000A51560 /* HalfWayHooray.storyboard in Resources */,
