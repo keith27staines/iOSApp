@@ -8,6 +8,7 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderNetworking
 
 public protocol F4SContentServiceProtocol {
     var apiName: String { get }
@@ -16,7 +17,7 @@ public protocol F4SContentServiceProtocol {
 
 public class F4SContentService : F4SDataTaskService {
     public init() {
-        super.init(baseURLString: Config.BASE_URL2, apiName: "content")
+        super.init(baseURLString: NetworkConfig.BASE_URL2, apiName: "content")
     }
 }
 

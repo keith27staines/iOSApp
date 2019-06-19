@@ -11,6 +11,10 @@
 		FC2AC5EB2235281A00FF4E47 /* WorkfinderSessionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2AC5EA2235281A00FF4E47 /* WorkfinderSessionManagerTests.swift */; };
 		FC2AC5F12235516A00FF4E47 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2AC5F02235516A00FF4E47 /* Helpers.swift */; };
 		FC4BBBA122AA43C700331F95 /* EmailVerificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BBBA022AA43C700331F95 /* EmailVerificationService.swift */; };
+		FC6DBCA322BA20410080B8E4 /* F4SService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6DBC9E22BA20410080B8E4 /* F4SService.swift */; };
+		FC6DBCA422BA20410080B8E4 /* F4SApiUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6DBCA222BA20410080B8E4 /* F4SApiUrls.swift */; };
+		FC6DBCA522BA20410080B8E4 /* F4SNetworkSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6DBCA122BA20410080B8E4 /* F4SNetworkSessionManager.swift */; };
+		FC6DBCA822BA24270080B8E4 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6DBCA722BA24270080B8E4 /* NetworkConfig.swift */; };
 		FC85F96C22365FA0002F84DF /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC85F96822365F75002F84DF /* WorkfinderCommon.framework */; };
 		FC9865BE229D39DC006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865BD229D39DC006D3E63 /* README */; };
 		FCA91E3C2233FF20007ED308 /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91E322233FF20007ED308 /* WorkfinderNetworking.framework */; };
@@ -51,6 +55,10 @@
 		FC2AC5EA2235281A00FF4E47 /* WorkfinderSessionManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderSessionManagerTests.swift; sourceTree = "<group>"; };
 		FC2AC5F02235516A00FF4E47 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		FC4BBBA022AA43C700331F95 /* EmailVerificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationService.swift; sourceTree = "<group>"; };
+		FC6DBC9E22BA20410080B8E4 /* F4SService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SService.swift; sourceTree = "<group>"; };
+		FC6DBCA122BA20410080B8E4 /* F4SNetworkSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SNetworkSessionManager.swift; sourceTree = "<group>"; };
+		FC6DBCA222BA20410080B8E4 /* F4SApiUrls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SApiUrls.swift; sourceTree = "<group>"; };
+		FC6DBCA722BA24270080B8E4 /* NetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
 		FC85F96222365F75002F84DF /* WorkfinderCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WorkfinderCommon.xcodeproj; path = ../WorkfinderCommon/WorkfinderCommon.xcodeproj; sourceTree = "<group>"; };
 		FC9865BD229D39DC006D3E63 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		FCA91E322233FF20007ED308 /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,6 +93,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC6DBCA622BA20520080B8E4 /* F4SNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				FC6DBCA222BA20410080B8E4 /* F4SApiUrls.swift */,
+				FC6DBC9E22BA20410080B8E4 /* F4SService.swift */,
+				FC6DBCA122BA20410080B8E4 /* F4SNetworkSessionManager.swift */,
+			);
+			path = F4SNetworking;
+			sourceTree = "<group>";
+		};
 		FC85F96322365F75002F84DF /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +145,7 @@
 			children = (
 				FCA91E4D2233FFAC007ED308 /* Source */,
 				FCA91E4C2233FF90007ED308 /* Supporting files */,
+				FC6DBCA722BA24270080B8E4 /* NetworkConfig.swift */,
 			);
 			path = WorkfinderNetworking;
 			sourceTree = "<group>";
@@ -154,10 +173,11 @@
 		FCA91E4D2233FFAC007ED308 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				FCE306572254F69F000F928B /* Mocks */,
+				FC2AC5E822351E2C00FF4E47 /* WorkfinderSessionManager.swift */,
 				FCA91E4E2233FFDC007ED308 /* WorkfinderNetworking.swift */,
+				FC6DBCA622BA20520080B8E4 /* F4SNetworking */,
+				FCE306572254F69F000F928B /* Mocks */,
 				FCE4C587223BC56A00C5B15E /* Services */,
-				FCE4C584223BC53F00C5B15E /* Sessions */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -168,14 +188,6 @@
 				FCE3065A2254F6EA000F928B /* MockWEXPlacementService.swift */,
 			);
 			path = Mocks;
-			sourceTree = "<group>";
-		};
-		FCE4C584223BC53F00C5B15E /* Sessions */ = {
-			isa = PBXGroup;
-			children = (
-				FC2AC5E822351E2C00FF4E47 /* WorkfinderSessionManager.swift */,
-			);
-			path = Sessions;
 			sourceTree = "<group>";
 		};
 		FCE4C587223BC56A00C5B15E /* Services */ = {
@@ -341,8 +353,12 @@
 				FCE3065B2254F6EA000F928B /* MockWEXPlacementService.swift in Sources */,
 				FCA91E4F2233FFDC007ED308 /* WorkfinderNetworking.swift in Sources */,
 				FC2AC5E922351E2C00FF4E47 /* WorkfinderSessionManager.swift in Sources */,
+				FC6DBCA422BA20410080B8E4 /* F4SApiUrls.swift in Sources */,
+				FC6DBCA322BA20410080B8E4 /* F4SService.swift in Sources */,
 				FCE4C589223BC5BB00C5B15E /* WEXPlacementService.swift in Sources */,
 				FC4BBBA122AA43C700331F95 /* EmailVerificationService.swift in Sources */,
+				FC6DBCA522BA20410080B8E4 /* F4SNetworkSessionManager.swift in Sources */,
+				FC6DBCA822BA24270080B8E4 /* NetworkConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

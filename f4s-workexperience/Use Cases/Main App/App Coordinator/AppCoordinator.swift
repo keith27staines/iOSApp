@@ -217,15 +217,16 @@ extension AppCoordinator {
     
     func configureNetwork(
         wexApiKey: String = ApiConstants.apiKey,
-        baseUrlString: String = Config.BASE,
-        v1ApiUrlString: String = Config.BASE_URL,
-        v2ApiUrlString: String = Config.BASE_URL2) {
+        baseUrlString: String = NetworkConfig.BASE,
+        v1ApiUrlString: String = NetworkConfig.BASE_URL,
+        v2ApiUrlString: String = NetworkConfig.BASE_URL2) {
         let config: WEXNetworkingConfigurationProtocol = WEXNetworkingConfiguration(
             wexApiKey: wexApiKey,
             baseUrlString: baseUrlString,
             v1ApiUrlString: v1ApiUrlString,
             v2ApiUrlString: v2ApiUrlString)
         try? configureWEXSessionManager(configuration: config, userUuid: injected.user.uuid)
+        F4SNetworkSessionManager.shared = F4SNetworkSessionManager(log: f4sLog)
     }
 }
 

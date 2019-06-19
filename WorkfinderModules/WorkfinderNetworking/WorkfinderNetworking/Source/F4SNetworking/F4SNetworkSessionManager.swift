@@ -5,7 +5,8 @@ public class F4SNetworkSessionManager {
     
     // MARK:- Public interface
     
-    public static let shared = F4SNetworkSessionManager()
+    public static var shared: F4SNetworkSessionManager!
+    let log: F4SAnalyticsAndDebugging?
     
     public var interactiveSession: URLSession {
         if _interactiveSession == nil {
@@ -40,14 +41,16 @@ public class F4SNetworkSessionManager {
     internal var _smallImageSession: URLSession?
     internal var _firstRegistrationSession: URLSession?
     
-    internal init() {}
+    public init(log: F4SAnalyticsAndDebugging?) {
+        self.log = log
+    }
     
     internal var defaultHeaders : [String:String] {
         var header: [String : String] = ["wex.api.key": ApiConstants.apiKey]
         if let userUuid = F4SUser().uuid {
             header["wex.user.uuid"] = userUuid
         } else {
-            globalLog.debug("Default headers called but user.uuid is not available")
+            log?.debug(message: "Default headers called but user.uuid is not available")
             assertionFailure("This method should only be called if a userUuid exists")
         }
         return header

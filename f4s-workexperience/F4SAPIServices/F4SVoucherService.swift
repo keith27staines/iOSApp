@@ -8,6 +8,7 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderNetworking
 
 public struct F4SVoucherValidationError : Codable {
     public var status: String?
@@ -32,7 +33,7 @@ public class F4SVoucherVerificationService : F4SDataTaskService {
         self.placementUuid = placementUuid
         self.voucherCode = voucherCode
         let api = "voucher/\(voucherCode)"
-        super.init(baseURLString: Config.BASE_URL2, apiName: api)
+        super.init(baseURLString: NetworkConfig.BASE_URL2, apiName: api)
     }
 }
 

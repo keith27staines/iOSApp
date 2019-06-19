@@ -8,6 +8,7 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderNetworking
 
 public typealias F4SVersionValidity = Bool
 
@@ -22,7 +23,7 @@ public protocol F4SWorkfinderVersioningServiceProtocol {
 public class F4SWorkfinderVersioningService: F4SDataTaskService {
 
     public init() {
-        super.init(baseURLString: Config.BASE, apiName: "validation/ios-version")
+        super.init(baseURLString: NetworkConfig.BASE, apiName: "validation/ios-version")
     }
 }
 

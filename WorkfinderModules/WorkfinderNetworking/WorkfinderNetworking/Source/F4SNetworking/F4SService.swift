@@ -33,7 +33,7 @@ public enum F4SHttpRequestVerb {
 }
 
 extension DateFormatter {
-    static let iso8601Full: DateFormatter = {
+    public static let iso8601Full: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
         formatter.calendar = Calendar(identifier: .iso8601)
@@ -43,7 +43,7 @@ extension DateFormatter {
     }()
 }
 
-public class F4SDataTaskService {
+open class F4SDataTaskService {
     
     public let session: URLSession
     public let baseUrl: URL
@@ -59,7 +59,7 @@ public class F4SDataTaskService {
         return baseUrl.absoluteString + "/" + apiName
     }
     
-    var relativeUrlString: String?
+    public var relativeUrlString: String?
     
     public typealias DataTaskReturn = (data:Data?, response:URLResponse?, error:Error?)
     
@@ -178,7 +178,7 @@ public class F4SDataTaskService {
     private var task: URLSessionDataTask?
     private let _apiName: String
     
-    internal lazy var jsonDecoder: JSONDecoder = {
+    public lazy var jsonDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
         return decoder
@@ -191,11 +191,11 @@ public class F4SDataTaskService {
         return encoder
     }()
     
-    internal func urlRequest(verb: F4SHttpRequestVerb, url: URL, dataToSend: Data?) -> URLRequest {
+    public func urlRequest(verb: F4SHttpRequestVerb, url: URL, dataToSend: Data?) -> URLRequest {
         return F4SDataTaskService.urlRequest(verb:verb, url: url, dataToSend: dataToSend)
     }
     
-    static internal func urlRequest(verb: F4SHttpRequestVerb, url: URL, dataToSend: Data?) -> URLRequest {
+    public static func urlRequest(verb: F4SHttpRequestVerb, url: URL, dataToSend: Data?) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = verb.name
         request.httpBody = dataToSend
@@ -204,7 +204,7 @@ public class F4SDataTaskService {
         return request
     }
     
-    static internal func dataTask(with request: URLRequest, session: URLSession, attempting: String, completion: @escaping (F4SNetworkDataResult) -> ()) -> URLSessionDataTask {
+    public static func dataTask(with request: URLRequest, session: URLSession, attempting: String, completion: @escaping (F4SNetworkDataResult) -> ()) -> URLSessionDataTask {
         let task = session.dataTask(with: request, completionHandler: {data, response, error -> Void in
             if let error = error as NSError? {
                 if error.domain == "NSURLErrorDomain" && error.code == -999 {

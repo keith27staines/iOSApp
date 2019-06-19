@@ -9,6 +9,7 @@
 import Foundation
 import WorkfinderCommon
 import WorkfinderApplyUseCase
+import WorkfinderNetworking
 
 public protocol F4SPlacementServiceProtocol {
     func getAllPlacementsForUser(completion: @escaping (_ result: F4SNetworkResult<[F4STimelinePlacement]>) -> ())

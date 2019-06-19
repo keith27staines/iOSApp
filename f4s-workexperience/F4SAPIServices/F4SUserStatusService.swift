@@ -8,6 +8,7 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderNetworking
 
 public struct F4SUserStatus : Codable {
     var unreadMessageCount: Int
@@ -40,7 +41,7 @@ public class F4SUserStatusService : F4SDataTaskService {
     
     public init() {
         let apiName = "user/status"
-        super.init(baseURLString: Config.BASE_URL2, apiName: apiName)
+        super.init(baseURLString: NetworkConfig.BASE_URL2, apiName: apiName)
     }
     
     public func beginStatusUpdate() {
