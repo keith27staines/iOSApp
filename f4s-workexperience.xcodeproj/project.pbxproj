@@ -1790,6 +1790,7 @@
 				FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */,
 				FC67E609207B70CE006F07FE /* F4SCalendarService.swift */,
 				FC9EAD81210F5F64001C56CE /* F4SRoleService.swift */,
+				FCE5194022494FDE00B550C9 /* F4SPlacementService.swift */,
 				FC6DE52120AC4E7900F9BB71 /* F4SApiServices */,
 			);
 			path = F4SAPIServices;
@@ -1913,7 +1914,6 @@
 		FC6DE52120AC4E7900F9BB71 /* F4SApiServices */ = {
 			isa = PBXGroup;
 			children = (
-				FCE5194022494FDE00B550C9 /* F4SPlacementService.swift */,
 				FC631CB520D64BD100199507 /* F4SAsynchronousOperation.swift */,
 				FC62FF9720EF75FE003E52C5 /* F4SApiUrls.swift */,
 				FC99F3D62000BE4900E3AC5A /* F4SService.swift */,

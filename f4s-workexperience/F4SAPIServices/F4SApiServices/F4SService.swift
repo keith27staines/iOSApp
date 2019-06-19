@@ -67,7 +67,7 @@ public class F4SDataTaskService {
         let dataReturned = DataTaskReturn(data: data, response: response, error: error)
         return networkDataResultFrom(returned: dataReturned, attempting: attempting)
     }
-    
+
     public static func networkDataResultFrom(returned: DataTaskReturn, attempting: String) -> F4SNetworkDataResult {
         if let error = returned.error as NSError? {
             let result = F4SNetworkDataResult.error(F4SNetworkError(error: error, attempting: attempting))
@@ -137,6 +137,7 @@ public class F4SDataTaskService {
     }
     
     /// Performs an HTTP request with a "send" verb (e.g, put, patch, etc")
+    ///
     /// - parameter verb: Http request verb
     /// - parameter object: The codable (json encodable) object to be patched to the server
     /// - parameter attempting: A short high level description of the reason the operation is being performed
