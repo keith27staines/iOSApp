@@ -101,12 +101,12 @@ class MockF4SAnalyticsAndDebugging : F4SAnalyticsAndDebugging {
     
     var notifiedErrors = [Error]()
     
-    func notifyError(_ error: Error) {
+    func notifyError(_ error: Error, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
         notifiedErrors.append(error)
     }
     
     var breadcrumbs = [String]()
-    func leaveBreadcrumb(with message: String) {
+    func leaveBreadcrumb(with message: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
         breadcrumbs.append(message)
     }
     
@@ -127,17 +127,17 @@ class MockF4SAnalyticsAndDebugging : F4SAnalyticsAndDebugging {
     }
     
     var loggedErrorMessages = [String]()
-    func error(message: String) {
+    func error(message: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
         loggedErrorMessages.append(message)
     }
     
     var loggedErrors = [Error]()
-    func error(_ error: Error) {
+    func error(_ error: Error, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
         loggedErrors.append(error)
     }
     
     var debugMessages = [String]()
-    func debug(message: String) {
+    func debug(_ message: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
         debugMessages.append(message)
     }
 }
