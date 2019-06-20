@@ -228,11 +228,13 @@ open class F4SDataTaskService {
                     return
                 }
                 let result = F4SNetworkDataResult.error(F4SNetworkError(error: error, attempting: attempting))
+                logDataTaskFailure(error: error, request: modifiedRequest, response: nil, responseData: nil, log: log)
                 completion(result)
                 return
             }
             let httpResponse = response as! HTTPURLResponse
             if let error = F4SNetworkError(response: httpResponse, attempting: attempting) {
+                logDataTaskFailure(error: error, request: modifiedRequest, response: httpResponse, responseData: data, log: log)
                 let result = F4SNetworkDataResult.error(error)
                 completion(result)
                 return
@@ -240,6 +242,32 @@ open class F4SDataTaskService {
             completion(F4SNetworkDataResult.success(data))
         })
         return task
+    }
+    
+    static func logDataTaskFailure(error: Error,
+                         request: URLRequest,
+                         response: HTTPURLResponse?,
+                         responseData: Data?,
+                         log: F4SAnalyticsAndDebugging?,
+                         functionName: StaticString = #function,
+                         fileName: StaticString = #file,
+                         lineNumber: Int = #line) {
+        guard let log = log else { return }
+        guard (error as NSError).code != -1009 else { return /* network not available */ }
+        let separator = "-----------------------------------------------------------------------"
+        var text = "\n\n\(separator)\nNETWORK ERROR"
+        text = "\(text)\nDescription: \(error.localizedDescription)"
+        text = "\(text)\nRequest method: \(request.httpMethod?.uppercased() ?? "No VERB")"
+        text = "\(text)\nOn \(request.url?.absoluteString ?? "No URL")"
+        text = "\(text)\nResponse code: \(response?.statusCode ?? 0)"
+        if let requestData = request.httpBody {
+            text = "\(text)\n\nRequest data:\n\(String(data: requestData, encoding: .utf8)!))"
+        }
+        if let responseData = responseData {
+            text = "\(text)\n\nResponse data:\n\(String(data: responseData, encoding: .utf8)!))"
+        }
+        text = "\(text)\n\(separator)\n\n"
+        log.error(message: text, functionName: #function, fileName: #file, lineNumber: #line)
     }
     
     internal func dataTask(with request: URLRequest,

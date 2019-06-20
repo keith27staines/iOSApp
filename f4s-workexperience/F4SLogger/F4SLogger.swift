@@ -56,24 +56,24 @@ extension F4SLog : F4SAnalytics {
 }
 
 extension F4SLog : F4SDebugging {
-    public func error(message: String) {
-        XCGLogger.default.error(message)
+    public func error(message: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
+        XCGLogger.default.error(message, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
     
-    public func error(_ error: Error) {
-        XCGLogger.default.error(error)
+    public func error(_ error: Error, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
+        XCGLogger.default.error(error, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
     
-    public func debug(message: String) {
-        XCGLogger.default.debug(message)
+    public func debug(_ message: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
+        XCGLogger.default.debug(message, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
     
-    public func notifyError(_ error: Error) {
-        XCGLogger.default.error(error)
+    public func notifyError(_ error: Error, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
+        self.error(error, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
         Bugsnag.notifyError(error)
     }
     
-    public func leaveBreadcrumb(with message: String) {
+    public func leaveBreadcrumb(with message: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
         XCGLogger.default.debug(message)
         Bugsnag.leaveBreadcrumb(withMessage: message)
     }

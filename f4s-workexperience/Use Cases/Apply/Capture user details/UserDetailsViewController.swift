@@ -442,7 +442,7 @@ extension UserDetailsViewController {
                         return
                     }
                     let oldUuid = user.uuid ?? "nil"
-                    strongSelf.coordinator.injected.log.debug(message: "PATCHED user:\nold uuid: \(oldUuid)\nnew uuid: \(newUuid)")
+                    strongSelf.coordinator.injected.log.debug("PATCHED user:\nold uuid: \(oldUuid)\nnew uuid: \(newUuid)", functionName: #function, fileName: #file, lineNumber: #line)
                     
                     user.updateUuid(uuid: newUuid)
                     strongSelf.userRepository?.save(user: user)
