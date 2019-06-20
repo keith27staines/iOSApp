@@ -10,16 +10,9 @@ import WorkfinderCommon
 
 var sharedSessionManager: WEXSessionManager!
 
-public func configureWEXSessionManager(configuration: WEXNetworkingConfigurationProtocol, userUuid: F4SUUID?) throws {
+public func configureWEXSessionManager(configuration: WEXNetworkingConfigurationProtocol) throws {
     guard sharedSessionManager == nil else { throw WEXNetworkConfigurationError.sessionManagerMayOnlyBeConfiguredOnce}
     sharedSessionManager = WEXSessionManager(configuration: configuration)
-    if let uuid = userUuid {
-        sharedSessionManager.rebuildWexUserSession(user: uuid)
-    }
-}
-
-public func updateWEXSessionManagerWithUserUUID(_ uuid: F4SUUID) {
-    sharedSessionManager.rebuildWexUserSession(user: uuid)
 }
 
 public enum WEXNetworkConfigurationError : Error {
@@ -76,7 +69,14 @@ public class WEXDataTask {
         default:
             self.requestData = nil
         }
-        self.additionalHeaders = additionalHeaders
+        var headers = [String: String]()
+        if let userUuid = F4SUser().uuid {
+            headers["wex.user.uuid"] = userUuid
+        }
+        if let additionalHeaders = additionalHeaders {
+            headers.merge(additionalHeaders) { (current, _) -> String in current }
+        }
+        self.additionalHeaders = headers
         self.completionHandler = completion
     }
     

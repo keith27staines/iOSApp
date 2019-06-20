@@ -119,7 +119,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     private func onUserIsRegistered(userUuid: F4SUUID) {
         injected.user.updateUuid(uuid: userUuid)
         injected.userRepository.save(user: injected.user)
-        updateWEXSessionManagerWithUserUUID(userUuid)
         printDebugUserInfo()
         injected.log.identity(userId: userUuid)
         _ = F4SNetworkSessionManager.shared
@@ -225,7 +224,7 @@ extension AppCoordinator {
             baseUrlString: baseUrlString,
             v1ApiUrlString: v1ApiUrlString,
             v2ApiUrlString: v2ApiUrlString)
-        try? configureWEXSessionManager(configuration: config, userUuid: injected.user.uuid)
+        try? configureWEXSessionManager(configuration: config)
         F4SNetworkSessionManager.shared = F4SNetworkSessionManager(log: f4sLog)
     }
 }

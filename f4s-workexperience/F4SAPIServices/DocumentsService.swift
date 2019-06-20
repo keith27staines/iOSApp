@@ -22,7 +22,7 @@ public class F4SUserDocumentsService : F4SDataTaskService, F4SUserDocumentsServi
     }
     
     public func getDocuments(completion: @escaping (F4SNetworkResult<F4SGetDocumentJson>) -> ()) {
-        beginGetRequest(attempting: "Get document for the current user", completion: completion)
+        beginGetRequest(attempting: "Get document for the current user", log: f4sLog, completion: completion)
     }
 }
 
@@ -47,11 +47,11 @@ public class F4SPlacementDocumentsService : F4SDataTaskService {
 // MARK:- F4SDocumentServiceProtocol conformance
 extension F4SPlacementDocumentsService : F4SPlacementDocumentServiceProtocol {
     public func getDocuments(completion: @escaping (F4SNetworkResult<F4SGetDocumentJson>) -> ()) {
-        beginGetRequest(attempting: "Get supporting document urls for this placement", completion: completion)
+        beginGetRequest(attempting: "Get supporting document urls for this placement", log: f4sLog, completion: completion)
     }
     
     public func putDocuments(documents: F4SPutDocumentsJson, completion: @escaping ((F4SNetworkDataResult) -> Void )) {
-        super.beginSendRequest(verb: .put, objectToSend: documents, attempting: "Upload supporting document urls for this placement", completion: completion)
+        super.beginSendRequest(verb: .put, objectToSend: documents, attempting: "Upload supporting document urls for this placement", log: f4sLog, completion: completion)
     }
 }
 

@@ -42,7 +42,7 @@ public class F4SCompanyFavouritingService : F4SDataTaskService, CompanyFavouriti
         let params = ["company_uuid": companyUuid]
         let attempting = "Create shortist item for company"
         relativeUrlString = nil
-        super.beginSendRequest(verb: .post, objectToSend: params, attempting: attempting) { [weak self] (result) in
+        super.beginSendRequest(verb: .post, objectToSend: params, attempting: attempting, log: f4sLog) { [weak self] (result) in
             guard let strongSelf = self else { return }
             switch result {
             case .error(let error):
@@ -56,7 +56,7 @@ public class F4SCompanyFavouritingService : F4SDataTaskService, CompanyFavouriti
     public func unfavourite(shortlistUuid: String, completion: @escaping (F4SNetworkResult<F4SUUID>) -> ()) {
         let attempting = "Unfavourite"
         relativeUrlString = shortlistUuid
-        super.beginDelete(attempting: attempting) { (result) in
+        super.beginDelete(attempting: attempting, log: f4sLog) { (result) in
             switch result {
             case .error(let error):
                 completion(F4SNetworkResult.error(error))

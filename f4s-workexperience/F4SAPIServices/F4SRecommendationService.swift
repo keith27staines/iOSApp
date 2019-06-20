@@ -21,7 +21,7 @@ public class F4SRecommendationService : F4SDataTaskService, F4SRecommendationSer
     }
 
     public func fetch(completion: @escaping (F4SNetworkResult<[Recommendation]>) -> ()) {
-        beginGetRequest(attempting: "Get recommendations", completion: completion)
+        beginGetRequest(attempting: "Get recommendations", log: f4sLog, completion: completion)
     }
 }
 

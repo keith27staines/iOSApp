@@ -12,7 +12,6 @@ typealias Headers = [String:String]
 
 enum HeaderKeys : String {
     case wexApiKey = "wex.api.key"
-    case wexUserUuid = "wex.user.uuid"
 }
 
 public class WEXSessionManager {
@@ -23,27 +22,18 @@ public class WEXSessionManager {
         self.configuration = configuration
     }
     
-    lazy public internal (set) var firstRegistrationSession: URLSession = {
-        return makeFirstRegistrationSession()
-    }()
-    
     lazy public internal (set) var wexUserSession: URLSession = {
-        makeWexUserSession(user: nil)
+        makeWexUserSession()
     }()
     
     lazy public internal (set) var smallImageSession: URLSession = {
         makeSmallImageSession()
     }()
     
-    public func rebuildWexUserSession(user: F4SUUID) {
-        wexUserSession = makeWexUserSession(user: user)
-    }
-    
     // MARK:- Internal storage
     
     static var shared: WEXSessionManager!
     let configuration: WEXNetworkingConfigurationProtocol
-    private (set) var userUUid: F4SUUID? = nil
     
 }
 
@@ -56,14 +46,7 @@ extension WEXSessionManager {
         return URLCache(memoryCapacity: memory, diskCapacity: disk, diskPath: diskpath)
     }
     
-    private func makeFirstRegistrationSession() -> URLSession {
-        let configuration = URLSessionConfiguration.default
-        configuration.httpAdditionalHeaders = firstRegistrationHeaders
-        return URLSession(configuration: configuration)
-    }
-    
-    private func makeWexUserSession(user: F4SUUID?) -> URLSession {
-        self.userUUid = user
+    private func makeWexUserSession() -> URLSession {
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = defaultHeaders
         return URLSession(configuration: configuration)
@@ -81,15 +64,9 @@ extension WEXSessionManager {
         return configuration
     }
     
-    var firstRegistrationHeaders: Headers {
-        return [HeaderKeys.wexApiKey.rawValue: configuration.wexApiKey]
-    }
-    
     var defaultHeaders: Headers {
-        guard let userUUid = userUUid else { return firstRegistrationHeaders }
         var headers = Headers()
         headers[HeaderKeys.wexApiKey.rawValue] = configuration.wexApiKey
-        headers[HeaderKeys.wexUserUuid.rawValue] = userUUid
         return headers
     }
 }

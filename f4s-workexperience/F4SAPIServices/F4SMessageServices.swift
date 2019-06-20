@@ -32,13 +32,13 @@ public class F4SMessageService : F4SDataTaskService {
 extension F4SMessageService : F4SMessageServiceProtocol {
     
     public func getMessages(completion: @escaping (F4SNetworkResult<F4SMessagesList>) -> ()) {
-        beginGetRequest(attempting: "Get messages for thread", completion: completion)
+        beginGetRequest(attempting: "Get messages for thread", log: f4sLog, completion: completion)
     }
     
     public func sendMessage(responseUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SMessagesList>) -> Void) {
         let attempting = "Send message to thread"
         let sendDictionary = ["response_uuid": responseUuid]
-        super.beginSendRequest(verb: .put, objectToSend: sendDictionary, attempting: attempting, completion: {
+        super.beginSendRequest(verb: .put, objectToSend: sendDictionary, attempting: attempting, log: f4sLog, completion: {
             result in
             switch result {
             case .error(let error):
@@ -83,7 +83,7 @@ public class F4SMessageActionService : F4SDataTaskService {
 extension F4SMessageActionService : F4SMessageActionServiceProtocol {
     
     public func getMessageAction(completion: @escaping (F4SNetworkResult<F4SAction?>) -> ()) {
-        beginGetRequest(attempting: "Get action for thread", completion: completion)
+        beginGetRequest(attempting: "Get action for thread", log: f4sLog, completion: completion)
     }
     
 }
@@ -110,7 +110,7 @@ public class F4SCannedMessageResponsesService : F4SDataTaskService {
 extension F4SCannedMessageResponsesService : F4SCannedMessageResponsesServiceProtocol {
     
     public func getPermittedResponses(completion: @escaping (F4SNetworkResult<F4SCannedResponses>) -> ()) {
-        beginGetRequest(attempting: "Get message options for thread", completion: completion)
+        beginGetRequest(attempting: "Get message options for thread", log: f4sLog, completion: completion)
     }
 }
 

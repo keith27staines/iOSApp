@@ -414,7 +414,6 @@ extension UserDetailsViewController {
     func afterEmailVerfied(verifiedEmail: String) {
         let user = applicationContext.user!
         user.email = verifiedEmail
-        userRepository?.save(user: user)
         saveUserToServer()
     }
     
@@ -431,19 +430,22 @@ extension UserDetailsViewController {
                             strongSelf.saveUserToServer()
                         })
                     } else {
-                        let reason = NSLocalizedString("Unable to save your details", comment: "")
-                        strongSelf.presentInvalidVoucherAlert(reason: reason)
+                        sharedUserMessageHandler.display(error, parentCtrl: strongSelf, cancelHandler: nil
+                            , retryHandler: {
+                                strongSelf.saveUserToServer()
+                        })
                     }
                 case .success(let userModel):
-                    guard let uuid = userModel.uuid else {
-                        sharedUserMessageHandler.displayWithTitle("Oops something went wrong", "Workfinder cannot complete this operation", parentCtrl: strongSelf)
+                    let user = strongSelf.applicationContext.user!
+                    guard let newUuid = userModel.uuid else {
+                        sharedUserMessageHandler.displayWithTitle("Something went wrong", "Workfinder cannot complete this operation", parentCtrl: strongSelf)
                         return
                     }
-                    let user = strongSelf.applicationContext.user!
-                    user.updateUuid(uuid: uuid)
+                    let oldUuid = user.uuid ?? "nil"
+                    strongSelf.coordinator.injected.log.debug(message: "PATCHED user:\nold uuid: \(oldUuid)\nnew uuid: \(newUuid)")
+                    
+                    user.updateUuid(uuid: newUuid)
                     strongSelf.userRepository?.save(user: user)
-                    updateWEXSessionManagerWithUserUUID(uuid)
-                    F4SNetworkSessionManager.shared.rebuildSessions()
                     strongSelf.afterUserSavedToServer()
                 }
             }
@@ -451,11 +453,11 @@ extension UserDetailsViewController {
     }
     
     func afterUserSavedToServer() {
-        performDocumentUpload()
+        didComplete()
     }
     
-    func performDocumentUpload() {
-        coordinator?.showAddDocuments()
+    func didComplete() {
+        coordinator?.userDetailsDidComplete()
     }
 }
 

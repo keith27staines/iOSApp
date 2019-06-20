@@ -25,7 +25,7 @@ class UserDetailsCoordinator : CoreInjectionNavigationCoordinator {
         navigationRouter.push(viewController: controller, animated: true)
     }
     
-    func showAddDocuments() {
+    func userDetailsDidComplete() {
         let coordinator = DocumentUploadCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, mode: F4SAddDocumentsViewController.Mode.applyWorkflow, applicationContext: applicationContext)
         coordinator.didFinish = { [weak self] coordinator in
             guard let strongSelf = self else { return }

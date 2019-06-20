@@ -40,6 +40,6 @@ public class F4SFeatureSwitchService : F4SDataTaskService {
 // MARK:- F4SFeatureSwitchServiceProtocol conformance
 extension F4SFeatureSwitchService : F4SFeatureSwitchServiceProtocol {
     public func getFeatureSwitches(completion: @escaping (F4SNetworkResult<[F4SFeature]>) -> ()) {
-        beginGetRequest(attempting: "Get iOS feature switches", completion: completion)
+        beginGetRequest(attempting: "Get iOS feature switches", log: f4sLog, completion: completion)
     }
 }

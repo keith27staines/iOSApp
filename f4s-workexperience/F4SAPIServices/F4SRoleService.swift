@@ -23,7 +23,7 @@ public class F4SRoleService {
         let session = F4SNetworkSessionManager.shared.interactiveSession
         let urlRequest = F4SDataTaskService.urlRequest(verb: .get, url: url, dataToSend: nil)
         dataTask?.cancel()
-        dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { (result) in
+        dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting, log: f4sLog) { (result) in
             switch result {
             case .error(let error):
                 completion(F4SNetworkResult.error(error))
