@@ -63,7 +63,7 @@ extension F4SWorkfinderVersioningService : F4SWorkfinderVersioningServiceProtoco
             return
         }
         let postObject = ["version" : version]
-        super.beginSendRequest(verb: .post, objectToSend: postObject, attempting: "Check version is valid", log: f4sLog) { (result) in
+        super.beginSendRequest(verb: .post, objectToSend: postObject, attempting: "Check version is valid") { (result) in
             switch result {
                 
             case .error(let error):

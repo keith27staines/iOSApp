@@ -43,7 +43,7 @@ extension F4SVoucherVerificationService : F4SVoucherVerificationServiceProtocol 
     public func verify(completion: @escaping (F4SNetworkResult<F4SVoucherValidation>) -> ()) {
         let params = ["placement_uuid" : placementUuid]
         let attempting = "Validate voucher code"
-        beginSendRequest(verb: .put, objectToSend: params, attempting: attempting, log: f4sLog) { (result) in
+        beginSendRequest(verb: .put, objectToSend: params, attempting: attempting) { (result) in
             switch result {
             case .error(let error):
                 completion(F4SNetworkResult<F4SVoucherValidation>.error(error))

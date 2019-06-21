@@ -38,7 +38,7 @@ public class F4SCompanyDatabaseMetadataService : F4SDataTaskService {
 
 extension F4SCompanyDatabaseMetadataService : F4SCompanyDatabaseMetadataServiceProtocol {
     public func getDatabaseMetadata(completion: @escaping (F4SNetworkResult<F4SCompanyDatabaseMetaData>) -> ()) {
-        beginGetRequest(attempting: "Get company database metadata", log: f4sLog, completion: completion)
+        beginGetRequest(attempting: "Get company database metadata", completion: completion)
     }
 }
 

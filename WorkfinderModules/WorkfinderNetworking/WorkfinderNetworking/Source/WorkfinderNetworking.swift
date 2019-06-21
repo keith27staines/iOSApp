@@ -88,13 +88,34 @@ public class WEXDataTask {
             self.url = url
             let urlRequest = makeUrlRequest(verb: verb, url: url, dataToSend: requestData, additionalHeaders: additionalHeaders)
             self.urlRequest = urlRequest
-            dataTask = session.dataTask(with: urlRequest, completionHandler: handleDataTaskCompletion)
+            dataTask = session.dataTask(with: urlRequest) { [weak self] responseData, response, error in
+                guard let strongSelf = self else { return }
+                let httpUrlResponse = response as? HTTPURLResponse
+                strongSelf.responseData = responseData
+                guard strongSelf.isSuccessResponse(httpUrlResponse) else {
+                    guard let httpResponse = httpUrlResponse else {
+                        let wexError = WEXErrorsFactory.networkErrorFrom(error: error!, attempting: strongSelf.attempting)
+                        let result = WEXDataResult.failure(wexError)
+                        logger.logDataTaskFailure(error: wexError, request: urlRequest, response: httpUrlResponse, responseData: responseData)
+                        strongSelf.completionHandler?(result)
+                        return
+                    }
+                    let wexError = WEXErrorsFactory.networkErrorFrom(response: httpResponse, responseData: responseData, attempting: strongSelf.attempting)!
+                    let result = WEXDataResult.failure(wexError)
+                    logger.logDataTaskFailure(error: wexError, request: urlRequest, response: httpUrlResponse, responseData: responseData)
+                    strongSelf.completionHandler?(result)
+                    return
+                }
+                strongSelf.completionHandler?(WEXDataResult.success(responseData))
+            }
             dataTask?.resume()
         } catch let wexError as WEXNetworkError {
             let result = WEXDataResult.failure(wexError)
+            logger.logDataTaskFailure(error: wexError, request: urlRequest!, response: nil, responseData: responseData)
             completionHandler?(result)
         } catch let error {
             let wexError = WEXErrorsFactory.networkErrorFrom(error: error, attempting: attempting)
+            assert(false, "Invalid URL")
             let result = WEXDataResult.failure(wexError)
             completionHandler?(result)
         }
@@ -102,24 +123,6 @@ public class WEXDataTask {
     
     public func cancel() {
         dataTask?.cancel()
-    }
-    
-    func handleDataTaskCompletion(responseData: Data?, response: URLResponse?, error: Error?) {
-        let httpResponse = response as? HTTPURLResponse
-        self.responseData = responseData
-        guard isSuccessResponse(httpResponse) else {
-            guard let httpResponse = httpResponse else {
-                let wexError = WEXErrorsFactory.networkErrorFrom(error: error!, attempting: attempting)
-                let result = WEXDataResult.failure(wexError)
-                completionHandler?(result)
-                return
-            }
-            let wexError = WEXErrorsFactory.networkErrorFrom(response: httpResponse, responseData: responseData, attempting: attempting)
-            let result = WEXDataResult.failure(wexError!)
-            completionHandler?(result)
-            return
-        }
-        completionHandler?(WEXDataResult.success(responseData))
     }
     
     func isSuccessResponse(_ response: HTTPURLResponse?) -> Bool {

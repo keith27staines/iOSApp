@@ -148,8 +148,8 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         userService.registerDeviceWithServer(installationUuid: installationUuid) { [weak self] (result) in
             guard let strongSelf = self else { return }
             switch result {
-            case .error(let error):
-                globalLog.info("Couldn't register user, offering retry \(error)")
+            case .error(_):
+                globalLog.info("Couldn't register user, offering retry")
                 strongSelf.presentNoNetworkMustRetry(retryOperation: {
                     strongSelf.ensureDeviceIsRegistered(completion: completion)
                 })

@@ -6,7 +6,6 @@ public class F4SNetworkSessionManager {
     // MARK:- Public interface
     
     public static var shared: F4SNetworkSessionManager!
-    let log: F4SAnalyticsAndDebugging?
     
     public var interactiveSession: URLSession {
         if _interactiveSession == nil {
@@ -29,7 +28,7 @@ public class F4SNetworkSessionManager {
     internal var _firstRegistrationSession: URLSession?
     
     public init(log: F4SAnalyticsAndDebugging?) {
-        self.log = log
+        logger = Logger(log: log)
     }
     
     internal var defaultHeaders : [String:String] {

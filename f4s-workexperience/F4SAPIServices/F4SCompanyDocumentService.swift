@@ -40,7 +40,7 @@ public class F4SCompanyDocumentService {
             let data = try encoder.encode(json)
             globalLog.debug("updating placement with json \n\(String(data: data, encoding: .utf8)!)")
             let urlRequest = F4SDataTaskService.urlRequest(verb: .post, url: url, dataToSend: data)
-            let dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting, log: f4sLog) { result in
+            let dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { result in
                 switch result {
                 case .error(let error):
                     completion(F4SNetworkResult.error(error))
@@ -64,7 +64,7 @@ public class F4SCompanyDocumentService {
         let session = F4SNetworkSessionManager.shared.interactiveSession
         let urlRequest = F4SDataTaskService.urlRequest(verb: .get, url: url, dataToSend: nil)
         dataTask?.cancel()
-        dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting, log: f4sLog) { (result) in
+        dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { (result) in
             switch result {
             case .error(let error):
                 completion(F4SNetworkResult.error(error))

@@ -19,7 +19,7 @@ public class F4STemplateService: F4STemplateServiceProtocol {
         let url = URL(string: ApiConstants.templateUrl)!
         let request = F4SDataTaskService.urlRequest(verb: .get, url: url, dataToSend: nil)
         let session = F4SNetworkSessionManager.shared.interactiveSession
-        let dataTask = F4SDataTaskService.dataTask(with: request, session: session, attempting: attempting, log: f4sLog) { (result) in
+        let dataTask = F4SDataTaskService.dataTask(with: request, session: session, attempting: attempting) { (result) in
             switch result {
 
             case .error(let error):
