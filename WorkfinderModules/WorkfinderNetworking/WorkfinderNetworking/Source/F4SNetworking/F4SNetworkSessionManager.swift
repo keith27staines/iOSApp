@@ -21,14 +21,14 @@ public class F4SNetworkSessionManager {
         return _smallImageSession!
     }
     
+    public init(log: F4SAnalyticsAndDebugging?) {
+        logger = Logger(log: log)
+    }
+    
     // MARK:- Internal implementation
     
     internal var _interactiveSession: URLSession?
     internal var _smallImageSession: URLSession?
-    
-    public init(log: F4SAnalyticsAndDebugging?) {
-        logger = Logger(log: log)
-    }
     
     internal var defaultHeaders : [String:String] {
         let header: [String : String] = ["wex.api.key": ApiConstants.apiKey]
