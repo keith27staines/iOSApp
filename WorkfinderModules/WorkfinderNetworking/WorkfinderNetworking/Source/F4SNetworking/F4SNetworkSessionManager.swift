@@ -25,7 +25,6 @@ public class F4SNetworkSessionManager {
     
     internal var _interactiveSession: URLSession?
     internal var _smallImageSession: URLSession?
-    internal var _firstRegistrationSession: URLSession?
     
     public init(log: F4SAnalyticsAndDebugging?) {
         logger = Logger(log: log)
