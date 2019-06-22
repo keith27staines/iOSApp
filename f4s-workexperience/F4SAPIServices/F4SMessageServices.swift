@@ -25,7 +25,7 @@ public class F4SMessageService : F4SDataTaskService {
     public init(threadUuid: F4SUUID) {
         self.threadUuid = threadUuid
         let apiName = "messaging/\(threadUuid)"
-        super.init(baseURLString: NetworkConfig.BASE_URL2, apiName: apiName)
+        super.init(baseURLString: NetworkConfig.workfinderApiV2, apiName: apiName)
     }
 }
 
@@ -75,7 +75,7 @@ public class F4SMessageActionService : F4SDataTaskService {
     public init(threadUuid: F4SUUID) {
         self.threadUuid = threadUuid
         let apiName = "messaging/\(threadUuid)/user_action"
-        super.init(baseURLString: NetworkConfig.BASE_URL2, apiName: apiName)
+        super.init(baseURLString: NetworkConfig.workfinderApiV2, apiName: apiName)
     }
 }
 
@@ -103,7 +103,7 @@ public class F4SCannedMessageResponsesService : F4SDataTaskService {
     public init(threadUuid: F4SUUID) {
         self.threadUuid = threadUuid
         let apiName = "messaging/\(threadUuid)/possible_responses"
-        super.init(baseURLString: NetworkConfig.BASE_URL2, apiName: apiName)
+        super.init(baseURLString: NetworkConfig.workfinderApiV2, apiName: apiName)
     }
 }
 

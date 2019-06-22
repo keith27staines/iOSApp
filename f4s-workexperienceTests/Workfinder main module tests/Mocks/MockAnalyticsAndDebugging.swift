@@ -26,7 +26,7 @@ class MockF4SAnalyticsAndDebugging : F4SAnalyticsAndDebugging {
     
     var notifiedErrors = [Error]()
     
-    func notifyError(_ error: Error, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
+    func notifyError(_ error: NSError, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
         notifiedErrors.append(error)
     }
     

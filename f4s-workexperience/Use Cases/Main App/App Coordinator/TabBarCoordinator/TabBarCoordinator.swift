@@ -32,11 +32,7 @@ class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoor
 
     var tabBar: TabBarViewController!
     var drawerController: DrawerController?
-    var shouldAskOperatingSystemToAllowLocation = false {
-        didSet {
-            print(shouldAskOperatingSystemToAllowLocation)
-        }
-    }
+    var shouldAskOperatingSystemToAllowLocation = false
     
     func start() {
         createTabBar()

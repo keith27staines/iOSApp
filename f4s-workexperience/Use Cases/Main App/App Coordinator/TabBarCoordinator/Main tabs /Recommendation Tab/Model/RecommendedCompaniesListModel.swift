@@ -11,15 +11,12 @@ public class RecommendedCompaniesListModel : RecommendedCompaniesListModelProtoc
     
     public func fetch(completion: @escaping ([Recommendation]?) -> ()) {
         recommendationService.fetch { (result) in
-            switch result {
-            case .success(var recommendations):
-                recommendations = recommendations.sorted() { return $0.index < $1.index }
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                switch result {
+                case .success(var recommendations):
+                    recommendations = recommendations.sorted() { return $0.index < $1.index }
                     completion(recommendations)
-                }
-            case .error(let error):
-                DispatchQueue.main.async {
-                    globalLog.debug("error refreshing recommendations \n\(error)")
+                case .error(_):
                     completion(nil)
                 }
             }

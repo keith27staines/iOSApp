@@ -52,7 +52,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if ProcessInfo.processInfo.arguments.contains("isUnitTesting") { return true }
         DataFixes().run()
         f4sLog = F4SLog()
-        globalLog.debug("\n\n\n********\nWorkfinder launched in environement \(Config.ENVIRONMENT)\n********")
         databaseDownloadManager = F4SDatabaseDownloadManager()
         let appCoordinatorFactory = AppCoordinatoryFactory()
         appCoordinator = appCoordinatorFactory.makeAppCoordinator(

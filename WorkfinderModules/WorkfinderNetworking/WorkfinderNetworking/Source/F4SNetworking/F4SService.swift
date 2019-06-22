@@ -159,7 +159,6 @@ open class F4SDataTaskService {
             completion(F4SNetworkDataResult.error(error))
             return
         }
-        print(String(data:data, encoding: .utf8)!)
         let request = urlRequest(verb: verb, url: url, dataToSend: data)
         task = dataTask(with: request, attempting: attempting, completion: completion)
         task?.resume()
@@ -236,6 +235,7 @@ open class F4SDataTaskService {
                 completion(result)
                 return
             }
+            logger.logDataTaskSuccess(request: request, response: httpResponse, responseData: data!)
             completion(F4SNetworkDataResult.success(data))
         })
         return task

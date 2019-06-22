@@ -39,7 +39,6 @@ public class F4SUserService : F4SUserServiceProtocol {
             encoder.outputFormatting = .prettyPrinted
             encoder.dateEncodingStrategy = .formatted(dobFormatter)
             let data = try encoder.encode(user)
-            globalLog.debug("updating user with json \n\(String(data: data, encoding: .utf8)!)")
             let urlRequest = F4SDataTaskService.urlRequest(verb: .patch, url: url, dataToSend: data)
             let dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { [weak self] (result) in
                 
@@ -62,7 +61,6 @@ public class F4SUserService : F4SUserServiceProtocol {
     
     public func registerDeviceWithServer(installationUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRegisterResult>) -> Void) {
         let attempting = "Register anonymous user on server"
-        globalLog.debug("Attempting to: \(attempting)")
         let url = URL(string: ApiConstants.registerVendorId)!
         let session = F4SNetworkSessionManager.shared.interactiveSession
         let anonymousUser = F4SAnonymousUser(vendorUuid: installationUuid, clientType: "ios", apnsEnvironment: Config.apnsEnv)
@@ -71,7 +69,6 @@ public class F4SUserService : F4SUserServiceProtocol {
         let data: Data
         do {
             data = try encoder.encode(anonymousUser)
-            print(String(data:data,encoding:.utf8)!)
         } catch {
             let serializationError = F4SNetworkDataErrorType.serialization(anonymousUser).error(attempting: attempting)
             completion(F4SNetworkResult.error(serializationError))

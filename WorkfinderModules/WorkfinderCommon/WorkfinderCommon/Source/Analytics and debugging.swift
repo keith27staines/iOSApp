@@ -8,7 +8,7 @@ public protocol F4SAnalytics {
 }
 
 public protocol F4SDebugging {
-    func notifyError(_ error: Error, functionName: StaticString, fileName: StaticString, lineNumber: Int)
+    func notifyError(_ error: NSError, functionName: StaticString, fileName: StaticString, lineNumber: Int)
     func leaveBreadcrumb(with message: String, functionName: StaticString, fileName: StaticString, lineNumber: Int)
     func updateHistory()
     func textCombiningHistoryAndSessionLog() -> String?

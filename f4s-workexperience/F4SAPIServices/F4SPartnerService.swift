@@ -16,7 +16,7 @@ public protocol F4SPartnerServiceProtocol {
 
 public class F4SPartnerService : F4SDataTaskService {
     public init() {
-        super.init(baseURLString: NetworkConfig.BASE_URL2, apiName: "partner")
+        super.init(baseURLString: NetworkConfig.workfinderApiV2, apiName: "partner")
     }
 }
 

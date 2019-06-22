@@ -81,7 +81,7 @@ class TimelineCoordinator : CoreInjectionNavigationCoordinator {
             let urlString = urlString,
             let url = URL(string: urlString),
             let acceptContext = acceptContext else {
-                globalLog.error("Unable to open the company's external application page")
+                log.debug("acceptContext should not be nil", functionName: #function, fileName: #file, lineNumber: #line)
                 return
         }
         UIApplication.shared.open(url, options: [:]) { (success) in

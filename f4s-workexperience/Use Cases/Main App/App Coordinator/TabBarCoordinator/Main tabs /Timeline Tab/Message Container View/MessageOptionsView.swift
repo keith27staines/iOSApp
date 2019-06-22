@@ -62,7 +62,8 @@ class MessageOptionsView: UICollectionReusableView {
         loadTimer = Timer.scheduledTimer(timeInterval: animationTime, target: self, selector: #selector(insertCells), userInfo: nil, repeats: true)
         self.optionCollectionFlowLayout?.setCurrentOptionList(options: self.optionList)
         self.optionCollectionView.isUserInteractionEnabled = true
-        //   print("load cells")
+        
+        //  Load cells
         synchronized(lockable: lock, criticalSection: {
             self.loadCellIsInProgress = true
             self.deleteCellsInProgress = false
@@ -80,13 +81,13 @@ class MessageOptionsView: UICollectionReusableView {
             if !loadCellStatus {
                 deleteTimer.invalidate()
                 deleteTimer = Timer.scheduledTimer(timeInterval: animationTime, target: self, selector: #selector(deleteCells), userInfo: nil, repeats: true)
-                // print("delete cells")
+                // Delete cells
                 synchronized(lockable: lock, criticalSection: {
                     self.deleteCellsInProgress = true
                     self.shouldDeleteCells = false
                 })
             } else {
-                //  print("should delete cells but load is in progress")
+                //  Should delete cells but load is in progress
                 synchronized(lockable: lock, criticalSection: {
                     self.shouldDeleteCells = true
                     self.deleteCellsInProgress = false
@@ -101,12 +102,9 @@ class MessageOptionsView: UICollectionReusableView {
         if self.optionsToLoad.count > 0 {
             self.messageOptionFlowProtocol?.shouldAnimateCells(true)
             let lastCellIndexPath = IndexPath(item: self.optionsToLoad.count - 1, section: 0)
-            //  print("delete row")
-            // print(lastCellIndexPath)
             self.optionsToLoad.removeLast()
             self.optionCollectionView.deleteItems(at: [lastCellIndexPath])
         } else {
-            //  print("done delete")
             deleteTimer.invalidate()
             self.removeAnswerCompleted()
             synchronized(lockable: lock, criticalSection: {
@@ -119,12 +117,11 @@ class MessageOptionsView: UICollectionReusableView {
         let currentIndex = self.optionsToLoad.count
         self.messageOptionFlowProtocol?.shouldAnimateCells(true)
         if currentIndex < self.optionList.count {
-            //            print("insert cell")
-            //            print(currentIndex)
+            //  Insert cell
             self.optionsToLoad.append(self.optionList[currentIndex])
             self.optionCollectionView.insertItems(at: [IndexPath(item: currentIndex, section: 0)])
         } else {
-            // print("load done")
+            // Load done
             loadTimer.invalidate()
             var shouldDelete: Bool = false
             synchronized(lockable: lock, criticalSection: {
@@ -134,7 +131,7 @@ class MessageOptionsView: UICollectionReusableView {
             if shouldDelete {
                 deleteTimer.invalidate()
                 deleteTimer = Timer.scheduledTimer(timeInterval: animationTime, target: self, selector: #selector(deleteCells), userInfo: nil, repeats: true)
-                //  print("delete after load done")
+                //  Delete after load done
                 synchronized(lockable: lock, criticalSection: {
                     self.deleteCellsInProgress = true
                     self.shouldDeleteCells = false

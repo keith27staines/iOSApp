@@ -147,9 +147,6 @@ public class F4SCalendar {
             var state = value.1
             let previousDate = correctedValues[index-1].0
             var previousState = correctedValues[index-1].1
-            if previousState == .terminal {
-                print("")
-            }
             previousState = correctedPreviousState(previousState: previousState, state: state)
             state = correctedState(previousState: previousState, state: state)
             correctedValues[index-1] = (previousDate,previousState)

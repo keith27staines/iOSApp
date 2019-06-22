@@ -135,12 +135,9 @@ class EnterVoucherViewController: UIViewController, MFMailComposeViewControllerD
     }
     
     @objc func keyboardWillChange(notification: NSNotification) {
-//        let duration = notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! Double
-//        let curve = notification.userInfo![UIKeyboardAnimationCurveUserInfoKey] as! UInt
         let curFrame = (notification.userInfo![UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
         let targetFrame = (notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         let deltaY = -(targetFrame.origin.y - curFrame.origin.y)
-        print("keyboard height: \(deltaY)")
         accommodateKeyboardOffset(viewHeightDelta: deltaY)
     }
     
@@ -162,7 +159,6 @@ class EnterVoucherViewController: UIViewController, MFMailComposeViewControllerD
         pt = voucherText.convert(pt, to: nil)
         guard let windowHeight = view.window?.frame.size.height else { return 0 }
         let d = windowHeight - pt.y
-        print("voucher distance from bottom \(d)")
         return d
     }
     
@@ -170,7 +166,6 @@ class EnterVoucherViewController: UIViewController, MFMailComposeViewControllerD
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isTranslucent = true
         self.tabBarController?.tabBar.isHidden = true
-        print("placement \(accept.placement)")
         styleNavigationController()
     }
     

@@ -763,12 +763,10 @@ extension MapViewController: CLLocationManagerDelegate {
         case .authorizedWhenInUse:
             locationManager!.startUpdatingLocation()
             mapView.isMyLocationEnabled = true
-            globalLog.debug("location manager is in state 'authorized when in use'")
             allowLocationUpdate = true
             
         case .denied:
             mapView.isMyLocationEnabled = false
-            globalLog.debug("location manager is in state 'denied'")
             
         case .authorizedAlways:
             locationManager!.startUpdatingLocation()
@@ -777,10 +775,9 @@ extension MapViewController: CLLocationManagerDelegate {
             
         case .restricted:
             mapView.isMyLocationEnabled = false
-            globalLog.debug("location manager is in state 'restricted'")
             
         case .notDetermined:
-            globalLog.debug("location manager is in state 'not determined'")
+            break
         @unknown default:
             assert(true, "unexpcted authorization status")
         }
@@ -833,7 +830,6 @@ extension MapViewController {
     func startNotifier() {
         do {
             try reachability?.startNotifier()
-            globalLog.debug("Started reachability notifier")
         } catch {
             return
         }
@@ -843,13 +839,11 @@ extension MapViewController {
         reachability?.stopNotifier()
         NotificationCenter.default.removeObserver(self, name: Notification.Name.reachabilityChanged, object: nil)
         reachability = nil
-        globalLog.debug("Stopped reachability notifier")
     }
     
     @objc func reachabilityChanged(_ note: Notification) {
         let reachability = note.object as! Reachability
         if reachability.isReachableByAnyMeans {
-            globalLog.debug("Network is reached")
             if let appDelegate = UIApplication.shared.delegate as? AppDelegate, let dbManager = appDelegate.databaseDownloadManager {
                 if !dbManager.isLocalDatabaseAvailable() {
                     dbManager.start()
@@ -857,7 +851,6 @@ extension MapViewController {
                 }
             }
         } else {
-            globalLog.debug("network not reachable")
             if UserDefaults.standard.object(forKey: UserDefaultsKeys.companyDatabaseCreatedDate) == nil {
                 DispatchQueue.main.async { [weak self] in
                     guard let this = self else { return }
@@ -917,12 +910,10 @@ extension MapViewController {
                         let errorMsg = NSLocalizedString("You appear to be offline at the moment. Please try again later when you have a working internet connection.",
                                                          comment: "")
                         this.userMessageHandler.displayWithTitle(title, errorMsg, parentCtrl: this)
-                        globalLog.debug(err)
                     } else {
                         let title = NSLocalizedString("Location Not Found", comment: "")
                         let errorMsg = NSLocalizedString("We cannot find the location you entered. Please try again", comment: "")
                         this.userMessageHandler.displayWithTitle(title, errorMsg, parentCtrl: this)
-                        globalLog.debug(err)
                     }
                 }
             }

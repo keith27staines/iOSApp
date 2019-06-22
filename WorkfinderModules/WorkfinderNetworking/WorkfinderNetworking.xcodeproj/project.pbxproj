@@ -148,7 +148,6 @@
 			children = (
 				FCA91E4D2233FFAC007ED308 /* Source */,
 				FCA91E4C2233FF90007ED308 /* Supporting files */,
-				FC6DBCA722BA24270080B8E4 /* NetworkConfig.swift */,
 			);
 			path = WorkfinderNetworking;
 			sourceTree = "<group>";
@@ -176,6 +175,7 @@
 		FCA91E4D2233FFAC007ED308 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				FC6DBCA722BA24270080B8E4 /* NetworkConfig.swift */,
 				FC2AC5E822351E2C00FF4E47 /* WorkfinderSessionManager.swift */,
 				FCA91E4E2233FFDC007ED308 /* WorkfinderNetworking.swift */,
 				FC6DBCA622BA20520080B8E4 /* F4SNetworking */,

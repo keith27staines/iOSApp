@@ -23,7 +23,7 @@ public protocol F4SWorkfinderVersioningServiceProtocol {
 public class F4SWorkfinderVersioningService: F4SDataTaskService {
 
     public init() {
-        super.init(baseURLString: NetworkConfig.BASE, apiName: "validation/ios-version")
+        super.init(baseURLString: NetworkConfig.workfinderApi, apiName: "validation/ios-version")
     }
 }
 

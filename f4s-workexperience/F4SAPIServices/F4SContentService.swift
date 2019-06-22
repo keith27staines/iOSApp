@@ -17,7 +17,7 @@ public protocol F4SContentServiceProtocol {
 
 public class F4SContentService : F4SDataTaskService {
     public init() {
-        super.init(baseURLString: NetworkConfig.BASE_URL2, apiName: "content")
+        super.init(baseURLString: NetworkConfig.workfinderApiV2, apiName: "content")
     }
 }
 

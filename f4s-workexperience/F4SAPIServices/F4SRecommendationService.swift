@@ -17,7 +17,7 @@ public protocol F4SRecommendationServiceProtocol : class {
 public class F4SRecommendationService : F4SDataTaskService, F4SRecommendationServiceProtocol {
     public static let apiName = "recommend"
     public init() {
-        super.init(baseURLString: NetworkConfig.BASE_URL2, apiName: F4SRecommendationService.apiName)
+        super.init(baseURLString: NetworkConfig.workfinderApiV2, apiName: F4SRecommendationService.apiName)
     }
 
     public func fetch(completion: @escaping (F4SNetworkResult<[Recommendation]>) -> ()) {

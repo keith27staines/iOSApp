@@ -35,7 +35,7 @@ public protocol CompanyFavouritingServiceProtocol {
 public class F4SCompanyFavouritingService : F4SDataTaskService, CompanyFavouritingServiceProtocol {
 
     public init() {
-        super.init(baseURLString: NetworkConfig.BASE_URL2, apiName: "favourite")
+        super.init(baseURLString: NetworkConfig.workfinderApiV2, apiName: "favourite")
     }
     
     public func favourite(companyUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SShortlistJson>) -> ()) {

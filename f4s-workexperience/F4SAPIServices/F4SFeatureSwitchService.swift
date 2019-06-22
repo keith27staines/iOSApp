@@ -33,7 +33,7 @@ public class F4SFeatureSwitchService : F4SDataTaskService {
     
     public init() {
         let apiName = "feature-flag"
-        super.init(baseURLString: NetworkConfig.BASE_URL, apiName: apiName)
+        super.init(baseURLString: NetworkConfig.workfinderApiV1, apiName: apiName)
     }
 }
 

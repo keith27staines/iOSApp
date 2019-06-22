@@ -68,9 +68,11 @@ extension F4SLog : F4SDebugging {
         XCGLogger.default.debug(message, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
     
-    public func notifyError(_ error: Error, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
-        self.error(error, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
-        Bugsnag.notifyError(error)
+    public func notifyError(_ error: NSError, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
+        Bugsnag.notifyError(error) { report in
+            report.depth += 2
+            report.addMetadata(error.userInfo, toTabWithName: "UserInfo")
+        }
     }
     
     public func leaveBreadcrumb(with message: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {

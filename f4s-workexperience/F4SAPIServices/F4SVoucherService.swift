@@ -33,7 +33,7 @@ public class F4SVoucherVerificationService : F4SDataTaskService {
         self.placementUuid = placementUuid
         self.voucherCode = voucherCode
         let api = "voucher/\(voucherCode)"
-        super.init(baseURLString: NetworkConfig.BASE_URL2, apiName: api)
+        super.init(baseURLString: NetworkConfig.workfinderApiV2, apiName: api)
     }
 }
 

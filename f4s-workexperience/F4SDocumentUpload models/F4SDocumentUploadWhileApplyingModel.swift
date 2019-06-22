@@ -189,7 +189,6 @@ public class F4SDocumentUploadModelBase {
             case .success(_):
                 completion(true)
             case .error(let error):
-                globalLog.debug(error)
                 completion(false)
                 break
             }

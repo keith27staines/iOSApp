@@ -16,6 +16,8 @@ protocol CoreInjectionNavigationCoordinatorProtocol : Coordinating {
 /// A suitable base class for coordinators representing tabs on a tabbar
 class CoreInjectionNavigationCoordinator : NavigationCoordinator {
     let injected: CoreInjectionProtocol
+    var log: F4SAnalyticsAndDebugging { return injected.log }
+    
     init(parent: Coordinating?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol) {
         injected = inject
         super.init(parent: parent, navigationRouter: navigationRouter)

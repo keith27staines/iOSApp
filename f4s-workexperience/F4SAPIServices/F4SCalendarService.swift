@@ -22,7 +22,7 @@ public class F4SPCalendarService : F4SDataTaskService {
     public init(placementUuid: F4SUUID) {
         self.placementUuid = placementUuid
         let apiName = "placement/\(placementUuid)"
-        super.init(baseURLString: NetworkConfig.BASE_URL2, apiName: apiName)
+        super.init(baseURLString: NetworkConfig.workfinderApiV2, apiName: apiName)
     }
 }
 

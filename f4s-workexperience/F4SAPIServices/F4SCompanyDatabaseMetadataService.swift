@@ -32,7 +32,7 @@ public class F4SCompanyDatabaseMetadataService : F4SDataTaskService {
     
     public init() {
         let apiName = "company/dump/full"
-        super.init(baseURLString: NetworkConfig.BASE_URL2, apiName: apiName)
+        super.init(baseURLString: NetworkConfig.workfinderApiV2, apiName: apiName)
     }
 }
 

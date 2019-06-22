@@ -206,26 +206,25 @@ extension AppCoordinator {
 extension AppCoordinator {
     func printDebugUserInfo() {
         let info = """
-        ***************
+        
+        
+        ****************************************************************
+        Environment name = \(Config.environmentName)
         Installation UUID = \(injected.installationUuid)
         User UUID = \(F4SUser().uuid ?? "nil user")
-        ***************
+        Base api url = \(NetworkConfig.workfinderApi)
+        V1 api url = \(NetworkConfig.workfinderApiV1)
+        v2 api url = \(NetworkConfig.workfinderApiV2)
+        ****************************************************************
+        
         """
-        globalLog.debug("\n\(info)")
+        injected.log.debug(info, functionName: #function, fileName: #file, lineNumber: #line)
     }
     
     func configureNetwork(
         wexApiKey: String = ApiConstants.apiKey,
-        baseUrlString: String = NetworkConfig.BASE,
-        v1ApiUrlString: String = NetworkConfig.BASE_URL,
-        v2ApiUrlString: String = NetworkConfig.BASE_URL2) {
-        let config: WEXNetworkingConfigurationProtocol = WEXNetworkingConfiguration(
-            wexApiKey: wexApiKey,
-            baseUrlString: baseUrlString,
-            v1ApiUrlString: v1ApiUrlString,
-            v2ApiUrlString: v2ApiUrlString)
-        try? configureWEXSessionManager(configuration: config)
-        F4SNetworkSessionManager.shared = F4SNetworkSessionManager(log: f4sLog)
+        baseUrlString: String = Config.workfinderApiBase) {
+        NetworkConfig.configure(wexApiKey: wexApiKey, workfinderBaseApi: baseUrlString, log: injected.log)
     }
 }
 
