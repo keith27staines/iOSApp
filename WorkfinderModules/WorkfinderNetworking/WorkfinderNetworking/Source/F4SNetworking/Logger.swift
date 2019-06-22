@@ -57,10 +57,7 @@ class Logger {
     
     func logDataTaskSuccess(request: URLRequest,
                             response: HTTPURLResponse,
-                            responseData: Data,
-                            functionName: StaticString = #function,
-                            fileName: StaticString = #file,
-                            lineNumber: Int = #line) {
+                            responseData: Data) {
         guard let log = self.log else { return }
         let separator = "-----------------------------------------------------------------------"
         var text = "\n\n\(separator)\nNETWORK SUCCESS"
