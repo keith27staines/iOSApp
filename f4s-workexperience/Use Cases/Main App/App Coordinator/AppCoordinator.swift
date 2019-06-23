@@ -119,7 +119,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     private func onUserIsRegistered(userUuid: F4SUUID) {
         injected.user.updateUuid(uuid: userUuid)
         injected.userRepository.save(user: injected.user)
-        printDebugUserInfo()
+        logStartupInformation()
         injected.log.identity(userId: userUuid)
         _ = F4SNetworkSessionManager.shared
         registrar.registerForRemoteNotifications()
@@ -204,7 +204,7 @@ extension AppCoordinator {
 }
 
 extension AppCoordinator {
-    func printDebugUserInfo() {
+    func logStartupInformation() {
         let info = """
         
         

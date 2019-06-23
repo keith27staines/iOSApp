@@ -106,6 +106,7 @@ public class WEXDataTask {
                     strongSelf.completionHandler?(result)
                     return
                 }
+                logger.logDataTaskSuccess(request: urlRequest, response: httpUrlResponse!, responseData: responseData!)
                 strongSelf.completionHandler?(WEXDataResult.success(responseData))
             }
             dataTask?.resume()
@@ -115,7 +116,7 @@ public class WEXDataTask {
             completionHandler?(result)
         } catch let error {
             let wexError = WEXErrorsFactory.networkErrorFrom(error: error, attempting: attempting)
-            assert(false, "Invalid URL")
+            assert(false, "Invalid URL: \(urlString)")
             let result = WEXDataResult.failure(wexError)
             completionHandler?(result)
         }

@@ -19,13 +19,17 @@ class Logger {
         self.log = log
     }
     
-    func logDataTaskFailure(error: Error,
+    func logDataTaskFailure(attempting: String? = nil,
+                            error: Error,
                             request: URLRequest,
                             response: HTTPURLResponse?,
                             responseData: Data?) {
         guard let log = self.log else { return }
         let separator = "-----------------------------------------------------------------------"
         var text = "\n\n\(separator)\nNETWORK ERROR"
+        if let attempting = attempting {
+            text = "\(text)\nattempting: \(attempting)"
+        }
         text = "\(text)\nDescription: \(error.localizedDescription)"
         text = "\(text)\nRequest method: \(request.httpMethod?.uppercased() ?? "No VERB")"
         text = "\(text)\nOn \(request.url?.absoluteString ?? "No URL")"
