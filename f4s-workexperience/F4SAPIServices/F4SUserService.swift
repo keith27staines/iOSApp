@@ -27,11 +27,9 @@ public class F4SUserService : F4SUserServiceProtocol {
     public func updateUser(user: F4SUser, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ()) {
         let user = user
         let attempting = "Update user"
-        var currentUserUuid: String = ""
-        if let userUuid = user.uuid { currentUserUuid = userUuid }
         if let age = user.age() { user.requiresConsent = age < 16 }
         if user.parentEmail?.isEmpty == true { user.parentEmail = nil }
-        let url = URL(string: ApiConstants.updateUserProfileUrl + currentUserUuid)!
+        let url = URL(string: ApiConstants.updateUserProfileUrl)!
         
         let session = F4SNetworkSessionManager.shared.interactiveSession
         do {

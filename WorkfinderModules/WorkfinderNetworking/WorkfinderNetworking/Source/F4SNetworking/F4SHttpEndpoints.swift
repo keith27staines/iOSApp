@@ -25,7 +25,7 @@ public struct ApiConstants {
     // User
     public static let registerVendorId: String = "\(baseUrl2)/register"
     public static let registerPushNotifictionToken: String = "\(baseUrl2)/register"
-    public static let updateUserProfileUrl: String = "\(baseUrl)/user/"
+    public static let updateUserProfileUrl: String = "\(baseUrl2)/user/me"
     
     // Placement
     public static let patchPlacementUrl: String = "\(baseUrl2)/placement"
