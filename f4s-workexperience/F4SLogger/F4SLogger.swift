@@ -164,17 +164,7 @@ class F4SDebug {
         #if DEBUG
         return true
         #else
-        if Config.ENVIRONMENT == "STAGING" {
-            return true
-        }
-        guard let lowercasedEmail = F4SUser().email?.lowercased() else {
-            return false
-        }
-        guard lowercasedEmail.contains("founders4schools.org.uk") ||
-            lowercasedEmail.contains("workfinder.com") else {
-                return false
-        }
-        return true
+        return false
         #endif
         
     }
