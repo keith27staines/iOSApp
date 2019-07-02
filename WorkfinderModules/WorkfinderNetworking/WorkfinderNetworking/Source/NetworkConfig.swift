@@ -11,11 +11,18 @@ import WorkfinderCommon
 
 private var _workfinderBaseApiUrlString: String = ""
 
+/// Provides a single point to configure the entire networking stack
 public struct NetworkConfig {
     public static var workfinderApi: String { return _workfinderBaseApiUrlString }
     public static var workfinderApiV1: String { return "\(_workfinderBaseApiUrlString)/v1" }
     public static var workfinderApiV2: String { return "\(_workfinderBaseApiUrlString)/v2" }
     
+    /// Configures the entire networking stack
+    ///
+    /// - Parameters:
+    ///   - wexApiKey: the api key required for Workfinder api access
+    ///   - workfinderBaseApi: The base url for the api, which is supplemented inrterally by v1, v2 etc
+    ///   - log: A logging mechanism in which network errors will be reported
     public static func configure(wexApiKey: String, workfinderBaseApi: String, log: F4SAnalyticsAndDebugging) {
         _workfinderBaseApiUrlString = workfinderBaseApi
         let config: WEXNetworkingConfigurationProtocol = WEXNetworkingConfiguration(
