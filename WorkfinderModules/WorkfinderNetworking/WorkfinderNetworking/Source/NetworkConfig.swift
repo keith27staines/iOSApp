@@ -13,8 +13,14 @@ private var _workfinderBaseApiUrlString: String = ""
 
 /// Provides a single point to configure the entire networking stack
 public struct NetworkConfig {
+    
+    /// The base url for the workfinder api, excluding v1 or v2 postfixes
     public static var workfinderApi: String { return _workfinderBaseApiUrlString }
+    
+    /// The full url for the v1 api
     public static var workfinderApiV1: String { return "\(_workfinderBaseApiUrlString)/v1" }
+    
+    /// The full url for the v2 api
     public static var workfinderApiV2: String { return "\(_workfinderBaseApiUrlString)/v2" }
     
     /// Configures the entire networking stack
