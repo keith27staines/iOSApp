@@ -13,6 +13,7 @@ public protocol RemoteNotificationsRegistrarProtocol {
 
 public protocol AppCoordinatorProtocol : Coordinating {
     var window: UIWindow { get }
+    func performVersionCheck(completion: @escaping ((Bool) -> Void))
 }
 
 protocol AppCoordinatoryFactoryProtocol {}
@@ -90,7 +91,13 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
         _ = UNService.shared // ensure user notification service is wired up early
         _ = F4SEmailVerificationModel.shared
-        
+        performVersionCheck { [weak self] isValid in
+            guard isValid else { return }
+            self?.afterVersionCheck()
+        }
+    }
+    
+    func afterVersionCheck() {
         let onboardingCoordinator = onboardingCoordinatorFactory(self, navigationRouter)
         self.onboardingCoordinator = onboardingCoordinator
         onboardingCoordinator.parentCoordinator = self
@@ -103,6 +110,29 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
             self?.onUserIsRegistered(userUuid: userUuid)
         }
     }
+    
+    lazy var versioningService: F4SWorkfinderVersioningService = {
+        let service = F4SWorkfinderVersioningService()
+        return service
+    }()
+    
+    
+    public func performVersionCheck(completion: @escaping (Bool) -> Void) {
+        versioningService.getIsVersionValid { (result) in
+            DispatchQueue.main.async { [weak self] in
+                switch result {
+                case .success(let isValid):
+                    guard isValid else { self?.presentForceUpdate(); return }
+                    completion(isValid)
+                case .error(_):
+                    self?.presentNoNetworkMustRetry(retryOperation: {
+                        self?.performVersionCheck(completion: completion)
+                    })
+                }
+            }
+        }
+    }
+    
     
     private func onboardingDidFinish(onboardingCoordinator: OnboardingCoordinatorProtocol) {
         navigationRouter.dismiss(animated: false, completion: nil)

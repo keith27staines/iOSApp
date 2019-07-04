@@ -188,7 +188,7 @@ public class F4SDocumentUploadModelBase {
             switch result {
             case .success(_):
                 completion(true)
-            case .error(let error):
+            case .error( _):
                 completion(false)
                 break
             }
