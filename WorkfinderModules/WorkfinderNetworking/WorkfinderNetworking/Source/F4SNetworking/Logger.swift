@@ -70,7 +70,11 @@ class Logger {
         let code = response.statusCode
         text = "\(text)\nCode: \(code)"
         if let requestData = request.httpBody {
-            text = "\(text)\n\nRequest data:\n\(String(data: requestData, encoding: .utf8)!))"
+            if let dataAsString = String(data: requestData, encoding: .utf8) {
+                text = "\(text)\n\nRequest data:\n\(dataAsString))"
+            } else {
+                text = "\(text)\n\nRequest data: \(requestData.count) bytes"
+            }
         }
         text = "\(text)\n\nResponse data:\n\(String(data: responseData, encoding: .utf8)!))"
         if request.allHTTPHeaderFields?.isEmpty == false {
