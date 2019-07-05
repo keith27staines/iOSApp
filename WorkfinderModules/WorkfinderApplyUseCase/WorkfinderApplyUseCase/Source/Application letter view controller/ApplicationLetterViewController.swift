@@ -71,6 +71,10 @@ public class ApplicationLetterViewController : UIViewController {
         viewModel.onViewDidLoad()
     }
     
+    public override func viewWillAppear(_ animated: Bool) {
+        configureNavigationBar()
+    }
+    
     public func updateFromViewModel() {
         textView.attributedText = viewModel.attributedText
         applyButton.isEnabled = viewModel.applyButtonIsEnabled
@@ -78,9 +82,8 @@ public class ApplicationLetterViewController : UIViewController {
     }
     
     func configureNavigationBar() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: cancelButton)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: editButton)
-        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.navigationBar.barTintColor = UIColor.white
         navigationController?.navigationBar.tintColor = UIColor.darkText
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonTapped))

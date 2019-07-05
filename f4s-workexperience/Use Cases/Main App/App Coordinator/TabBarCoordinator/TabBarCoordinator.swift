@@ -30,13 +30,13 @@ class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoor
     
     static var sharedInstance: TabBarCoordinator!
 
-    var tabBar: TabBarViewController!
+    var tabBarViewController: TabBarViewController!
     var drawerController: DrawerController?
     var shouldAskOperatingSystemToAllowLocation = false
     
     func start() {
         createTabBar()
-        rootViewController = setUpDrawerController(navigationController: tabBar)
+        rootViewController = setUpDrawerController(navigationController: tabBarViewController)
         let window = (UIApplication.shared.delegate as? AppDelegate)?.window!
         window!.rootViewController = rootViewController
         window!.makeKeyAndVisible()
@@ -60,7 +60,7 @@ class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoor
     public func navigateToTimeline(threadUuid: F4SUUID? = nil) {
         closeMenu { [weak self] (success) in
             guard let strongSelf = self else { return }
-            strongSelf.tabBar.selectedIndex = TabIndex.timeline.rawValue
+            strongSelf.tabBarViewController.selectedIndex = TabIndex.timeline.rawValue
             strongSelf.timelineCoordinator.showThread(threadUuid)
         }
     }
@@ -68,21 +68,21 @@ class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoor
     public func navigateToRecommendations(company: Company? = nil) {
         closeMenu { [weak self] (success) in
             guard let strongSelf = self else { return }
-            strongSelf.tabBar.selectedIndex = TabIndex.recommendations.rawValue
+            strongSelf.tabBarViewController.selectedIndex = TabIndex.recommendations.rawValue
         }
     }
     
     public func navigateToFavourites() {
         closeMenu { [weak self] (success) in
             guard let strongSelf = self else { return }
-            strongSelf.tabBar.selectedIndex = TabIndex.favourites.rawValue
+            strongSelf.tabBarViewController.selectedIndex = TabIndex.favourites.rawValue
         }
     }
     
     public func navigateToMap() {
         closeMenu { [weak self] (success) in
             guard let strongSelf = self else { return }
-            strongSelf.tabBar.selectedIndex = TabIndex.map.rawValue
+            strongSelf.tabBarViewController.selectedIndex = TabIndex.map.rawValue
         }
     }
     
@@ -138,7 +138,7 @@ class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoor
     
     private func createTabBar() {
 
-        tabBar = TabBarViewController()
+        tabBarViewController = TabBarViewController()
 //        let homeNavigationController = homeCoordinator.navigationRouter.navigationController
         let timelineNavigationController = timelineCoordinator.navigationRouter.navigationController
         let recommendationsNavigationController = recommendationsCoordinator.navigationRouter.navigationController
@@ -151,7 +151,7 @@ class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoor
         favouritesCoordinator.start()
         searchCoodinator.start()
         
-        tabBar.viewControllers = [
+        tabBarViewController.viewControllers = [
             //homeNavigationController,
             timelineNavigationController,
             recommendationsNavigationController,

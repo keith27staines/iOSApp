@@ -10,7 +10,17 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderApplyUseCase
 
+protocol ApplyCoordinatorDelegate : class {
+    func applicationDidFinish(preferredDestination: ApplyCoordinator.PreferredDestinationAfterApplication)
+}
+
 class ApplyCoordinator : CoreInjectionNavigationCoordinator {
+    
+    enum PreferredDestinationAfterApplication {
+        case messages
+        case search
+    }
+    
     var applicationContext: F4SApplicationContext
     var createPlacementJson: WEXCreatePlacementJson?
     var createPlacementServiceFactory: WEXPlacementServiceFactoryProtocol?
@@ -18,6 +28,7 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     var templateService: F4STemplateServiceProtocol
     var placementRepository: F4SPlacementRepositoryProtocol = F4SPlacementRespository()
     var interestsRepository: F4SInterestsRepositoryProtocol = F4SInterestsRepository()
+    weak var applyCoordinatorDelegate: ApplyCoordinatorDelegate?
     
     lazy var userInterests: [F4SInterest] = {
         return interestsRepository.loadUserInterests()
@@ -33,9 +44,9 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     
     var continueFromTimelinePlacement: F4STimelinePlacement?
     let startingViewController: UIViewController!
-    var applicationDidComplete: ((ApplyCoordinator) -> Void)?
     
-    init(company: Company,
+    init(applyCoordinatorDelegate: ApplyCoordinatorDelegate? = nil,
+         company: Company,
          placement: F4SPlacement?,
          parent: CoreInjectionNavigationCoordinator?,
          navigationRouter: NavigationRoutingProtocol,
@@ -43,6 +54,7 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
          placementService: WEXPlacementServiceProtocol,
          templateService: F4STemplateServiceProtocol,
          continueFrom: F4STimelinePlacement? = nil) {
+        self.applyCoordinatorDelegate = applyCoordinatorDelegate
         self.applicationContext = F4SApplicationContext(user: F4SUser(), company: company, placement: placement)
         self.placementService = placementService
         self.templateService = templateService
@@ -83,21 +95,19 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         vc.viewModel = viewModel
         navigationRouter.push(viewController: vc, animated: true)
     }
+    
+    deinit {
+        print("ApplyCoordinator did deinit")
+    }
 }
 
 extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
     
     func continueApplicationWithCompletedLetter(sender: Any?, completion: @escaping (Error?) -> Void) {
-        applicationModel.createApplicationIfNecessary { [weak self] (error) in
-            guard let strongSelf = self else { return }
-            if let error = error {
-                completion(error)
-                return
-            }
-            strongSelf.cleanup(animated: false)
-            completion(nil)
-            strongSelf.showHalfWayHooray()
-        }
+        //cleanup(animated: false)
+        //showHalfWayHooray()
+        showUserDetails()
+        completion(nil)
     }
     
     func showHalfWayHooray() {
@@ -109,35 +119,66 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
     }
     
     func halfWayHoorayDidFinish() {
+        navigationRouter.pop(animated: true)
         showUserDetails()
     }
     
     func showUserDetails() {
-        applicationContext.placement = applicationModel.placement
+        
         let userDetailsCoordinator = UserDetailsCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, applicationContext: applicationContext)
+        
         userDetailsCoordinator.didFinish = { [weak self] coordinator in
             self?.userDetailsDidFinish()
         }
+        
         userDetailsCoordinator.userIsTooYoung = { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.cleanup()
             strongSelf.navigationRouter.navigationController.popToRootViewController(animated: false)
             strongSelf.parentCoordinator?.childCoordinatorDidFinish(strongSelf)
         }
+        
         addChildCoordinator(userDetailsCoordinator)
         userDetailsCoordinator.start()
     }
     
     func userDetailsDidFinish() {
+        applicationModel.createApplicationIfNecessary { [weak self] (error) in
+            guard let strongSelf = self else { return }
+            if let error = error {
+                //completion(error)
+                return
+            }
+            strongSelf.applicationContext.placement = strongSelf.applicationModel.placement
+            strongSelf.showAddDocuments()
+        }
+    }
+    
+    func showAddDocuments() {
+        let coordinator = DocumentUploadCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, mode: F4SAddDocumentsViewController.Mode.applyWorkflow, applicationContext: applicationContext)
+        coordinator.didFinish = { [weak self] coordinator in
+            guard let strongSelf = self else { return }
+            strongSelf.navigationRouter.pop(animated: false)
+            strongSelf.addDocumentsDidFinish()
+        }
+        addChildCoordinator(coordinator)
+        coordinator.start()
+    }
+    
+    func addDocumentsDidFinish() {
+        showApplicationSubmittedSuccessfully()
+    }
+    
+    func showApplicationSubmittedSuccessfully() {
         navigationRouter.popToViewController(startingViewController, animated: false)
         let successViewController = UIStoryboard(name: "SuccessExtraInfo", bundle: nil).instantiateViewController(withIdentifier: "SuccessExtraInfoCtrl") as! SuccessExtraInfoViewController
         successViewController.timelineButtonWasTapped = { [weak self] in
-            self?.applicationCleanup(successViewController: successViewController)
-            TabBarCoordinator.sharedInstance!.navigateToTimeline()
+            guard let strongSelf = self else { return }
+            strongSelf.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: .messages)
         }
         successViewController.searchButtonWasTapped = { [weak self] in
-            self?.applicationCleanup(successViewController: successViewController)
-            TabBarCoordinator.sharedInstance!.navigateToMap()
+            guard let strongSelf = self else { return }
+            strongSelf.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: .search)
         }
         
         startingViewController.view.addSubview(successViewController.view)
@@ -145,14 +186,6 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
         successViewController.view.fillSuperview()
         successViewController.didMove(toParent: startingViewController)
         successViewController.view.backgroundColor = UIColor.init(white: 0, alpha: 0.6)
-    }
-    
-    func applicationCleanup(successViewController: SuccessExtraInfoViewController) {
-        successViewController.removeFromParent()
-        successViewController.view.removeFromSuperview()
-        navigationRouter.navigationController.popToRootViewController(animated: false)
-        applicationDidComplete?(self)
-        parentCoordinator?.childCoordinatorDidFinish(self)
     }
     
     func cancelButtonWasTapped(sender: Any?) {
