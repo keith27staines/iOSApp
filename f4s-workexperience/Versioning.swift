@@ -13,10 +13,6 @@ import WorkfinderNetworking
 public typealias F4SVersionValidity = Bool
 
 public protocol F4SWorkfinderVersioningServiceProtocol {
-    static var releaseVersionNumber: String? { get }
-    static var buildVersionNumber: String? { get }
-    var apiName: String { get }
-
     func getIsVersionValid(completion: @escaping (F4SNetworkResult<F4SVersionValidity>) -> ())
 }
 

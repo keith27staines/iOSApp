@@ -11,44 +11,42 @@ public protocol RemoteNotificationsRegistrarProtocol {
     func registerForRemoteNotifications()
 }
 
-public protocol AppCoordinatorProtocol : Coordinating {
-    var window: UIWindow { get }
-    func performVersionCheck(completion: @escaping ((Bool) -> Void))
+protocol VersionChecking {
+    var versionCheckCompletion: ((F4SNetworkResult<F4SVersionValidity>) -> Void)? { get set }
 }
 
-protocol AppCoordinatoryFactoryProtocol {}
-
-struct AppCoordinatoryFactory : AppCoordinatoryFactoryProtocol {
+class VersionCheckCoordinator: NavigationCoordinator, VersionChecking {
     
-    func makeAppCoordinator(
-        registrar: RemoteNotificationsRegistrarProtocol,
-        launchOptions: LaunchOptions? = nil,
-        installationUuid: F4SUUID,
-        user: F4SUserProtocol = F4SUser(),
-        userService: F4SUserServiceProtocol = F4SUserService(),
-        userRepository: F4SUserRepositoryProtocol = F4SUserRepository(),
-        databaseDownloadManager: F4SDatabaseDownloadManagerProtocol = F4SDatabaseDownloadManager(),
-        navigationRouter: NavigationRoutingProtocol = NavigationRouter(navigationController: UINavigationController(rootViewController: AppCoordinatorBackgroundViewController())),
-        f4sLog: F4SAnalyticsAndDebugging
-        ) -> AppCoordinatorProtocol {
-        
-        let injection = CoreInjection(
-            launchOptions: launchOptions,
-            installationUuid: installationUuid,
-            user: user,
-            userService: userService,
-            userRepository: userRepository,
-            databaseDownloadManager: databaseDownloadManager,
-            f4sLog: f4sLog)
-        
-        return AppCoordinator(registrar: registrar,
-                              navigationRouter: navigationRouter,
-                              inject: injection)
+    var versionCheckCompletion: ((F4SNetworkResult<F4SVersionValidity>) -> Void)?
+    var versionCheckService: F4SWorkfinderVersioningServiceProtocol?
+    
+    override func start() {
+        versionCheckService?.getIsVersionValid(completion: { (result) in
+            DispatchQueue.main.async { [weak self] in
+                switch result {
+                case .success(let isValid):
+                    guard isValid else { self?.forceUpdate(); return }
+                    self?.versionCheckCompletion?(result)
+                case .error(_):
+                    self?.versionCheckCompletion?(result)
+                }
+            }
+        })
+    }
+    
+    func forceUpdate() {
+        let forceUpdateVC = F4SForceAppUpdateViewController()
+        navigationRouter.present(forceUpdateVC, animated: true, completion: nil)
     }
 }
 
+public protocol AppCoordinatorProtocol : Coordinating {
+    var window: UIWindow { get }
+    func performVersionCheck(resultHandler: @escaping ((F4SNetworkResult<F4SVersionValidity>)->Void))
+}
+
 class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
-    
+
     var window: UIWindow
     var injected: CoreInjectionProtocol
     var registrar: RemoteNotificationsRegistrarProtocol
@@ -56,6 +54,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     var user: F4SUserProtocol { return injected.user }
     var userService: F4SUserServiceProtocol { return injected.userService}
     var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol { return injected.databaseDownloadManager }
+    var versionCheckCoordinator: NavigationCoordinator & VersionChecking
     
     lazy var onboardingCoordinatorFactory: (_ parent: Coordinating?, _ router: NavigationRoutingProtocol) -> OnboardingCoordinatorProtocol = { [unowned self] _,_ in
         return OnboardingCoordinator(parent: self, navigationRouter: self.navigationRouter)
@@ -71,17 +70,18 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         return tabBarCoordinator
     }
     
-    public init(registrar: RemoteNotificationsRegistrarProtocol,
+    public init(versionCheckCoordinator: NavigationCoordinator & VersionChecking,
+                registrar: RemoteNotificationsRegistrarProtocol,
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol) {
-        
+        self.versionCheckCoordinator = versionCheckCoordinator
         self.registrar = registrar
         self.injected = inject
         window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = navigationRouter.rootViewController
         super.init(parent:nil, navigationRouter: navigationRouter)
+        versionCheckCoordinator.parentCoordinator = self
         window.makeKeyAndVisible()
-        configureNetwork()
     }
     
     var onboardingCoordinator: OnboardingCoordinatorProtocol?
@@ -91,13 +91,27 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
         _ = UNService.shared // ensure user notification service is wired up early
         _ = F4SEmailVerificationModel.shared
-        performVersionCheck { [weak self] isValid in
+        performVersionCheck(resultHandler: onVersionCheckResult)
+    }
+    
+    func performVersionCheck(resultHandler: @escaping (F4SNetworkResult<F4SVersionValidity>)->Void) {
+        versionCheckCoordinator.versionCheckCompletion = resultHandler
+        versionCheckCoordinator.start()
+    }
+    
+    func onVersionCheckResult(_ result:F4SNetworkResult<F4SVersionValidity>) {
+        switch result {
+        case .error(_):
+            self.presentNoNetworkMustRetry(retryOperation: { [weak self] in
+                self?.versionCheckCoordinator.start()
+            })
+        case .success(let isValid):
             guard isValid else { return }
-            self?.afterVersionCheck()
+            startOnboarding()
         }
     }
     
-    func afterVersionCheck() {
+    func startOnboarding() {
         let onboardingCoordinator = onboardingCoordinatorFactory(self, navigationRouter)
         self.onboardingCoordinator = onboardingCoordinator
         onboardingCoordinator.parentCoordinator = self
@@ -110,29 +124,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
             self?.onUserIsRegistered(userUuid: userUuid)
         }
     }
-    
-    lazy var versioningService: F4SWorkfinderVersioningService = {
-        let service = F4SWorkfinderVersioningService()
-        return service
-    }()
-    
-    
-    public func performVersionCheck(completion: @escaping (Bool) -> Void) {
-        versioningService.getIsVersionValid { (result) in
-            DispatchQueue.main.async { [weak self] in
-                switch result {
-                case .success(let isValid):
-                    guard isValid else { self?.presentForceUpdate(); return }
-                    completion(isValid)
-                case .error(_):
-                    self?.presentNoNetworkMustRetry(retryOperation: {
-                        self?.performVersionCheck(completion: completion)
-                    })
-                }
-            }
-        }
-    }
-    
     
     private func onboardingDidFinish(onboardingCoordinator: OnboardingCoordinatorProtocol) {
         navigationRouter.dismiss(animated: false, completion: nil)
@@ -195,11 +186,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
 }
 
 extension AppCoordinator {
-    func presentForceUpdate() {
-        let rootVC = window.rootViewController?.topMostViewController
-        let forceUpdateVC = F4SForceAppUpdateViewController()
-        rootVC?.present(forceUpdateVC, animated: true, completion: nil)
-    }
     
     func presentNoNetworkMustRetry(retryOperation: @escaping () -> ()) {
         let rootVC = window.rootViewController?.topMostViewController
@@ -249,12 +235,6 @@ extension AppCoordinator {
         
         """
         injected.log.debug(info, functionName: #function, fileName: #file, lineNumber: #line)
-    }
-    
-    func configureNetwork(
-        wexApiKey: String = ApiConstants.apiKey,
-        baseUrlString: String = Config.workfinderApiBase) {
-        NetworkConfig.configure(wexApiKey: wexApiKey, workfinderBaseApi: baseUrlString, log: injected.log)
     }
 }
 

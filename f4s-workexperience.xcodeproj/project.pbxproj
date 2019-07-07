@@ -200,6 +200,7 @@
 		FC67E60A207B70CE006F07FE /* F4SCalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC67E609207B70CE006F07FE /* F4SCalendarService.swift */; };
 		FC681C001F57473D0077BECA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFE1F57473D0077BECA /* Podfile */; };
 		FC681C011F57473D0077BECA /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFF1F57473D0077BECA /* Podfile.lock */; };
+		FC6A6FC722D1E04C005F625A /* AppCoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6A6FC622D1E04C005F625A /* AppCoordinatorFactory.swift */; };
 		FC6B17EB2201B54700556C59 /* CompanyFavouritesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6B17E92201B54700556C59 /* CompanyFavouritesModel.swift */; };
 		FC6DE52020AC3AD900F9BB71 /* F4SUserStatusService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6DE51F20AC3AD900F9BB71 /* F4SUserStatusService.swift */; };
 		FC72219F20FE248400F10953 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = FC72219B20FE248400F10953 /* Appfile */; };
@@ -641,6 +642,7 @@
 		FC67E609207B70CE006F07FE /* F4SCalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCalendarService.swift; sourceTree = "<group>"; };
 		FC681BFE1F57473D0077BECA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		FC681BFF1F57473D0077BECA /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
+		FC6A6FC622D1E04C005F625A /* AppCoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorFactory.swift; sourceTree = "<group>"; };
 		FC6B17E92201B54700556C59 /* CompanyFavouritesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyFavouritesModel.swift; sourceTree = "<group>"; };
 		FC6DE51F20AC3AD900F9BB71 /* F4SUserStatusService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserStatusService.swift; sourceTree = "<group>"; };
 		FC72219B20FE248400F10953 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
@@ -2011,6 +2013,7 @@
 		FCB49305222A5D1B00B88B8B /* App Coordinator */ = {
 			isa = PBXGroup;
 			children = (
+				FC6A6FC622D1E04C005F625A /* AppCoordinatorFactory.swift */,
 				FC1DC06A21FE142D009ABC60 /* AppCoordinator.swift */,
 				FCEE5E1D2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift */,
 				FCB49306222A5D3B00B88B8B /* Onboarding */,
@@ -2598,6 +2601,7 @@
 				FC1DC09221FE1509009ABC60 /* PersonBioView.swift in Sources */,
 				FCB6B8E52074C59C0042C725 /* F4SCalendarCollectionViewController.swift in Sources */,
 				FC1DC09021FE1509009ABC60 /* HeaderAndFooter.swift in Sources */,
+				FC6A6FC722D1E04C005F625A /* AppCoordinatorFactory.swift in Sources */,
 				FC31304B222BCA580043D014 /* RotationAwareController.swift in Sources */,
 				40A28CB21E1D1D200077D490 /* TimelineEntryTableViewCell.swift in Sources */,
 				FC21BE37220F53EB00A0A389 /* PeopleDataSource.swift in Sources */,
