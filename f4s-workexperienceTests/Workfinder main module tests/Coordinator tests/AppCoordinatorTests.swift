@@ -84,7 +84,7 @@ extension AppCoordinatorTests {
     func makeSUTAppCoordinator(router: NavigationRoutingProtocol, injecting: CoreInjectionProtocol) -> AppCoordinator {
         let navigationRouter = MockNavigationRouter()
         let versionCheckCoordinator = VersionCheckCoordinator(parent: nil, navigationRouter: navigationRouter)
-        versionCheckCoordinator.versionCheckService = MockVersionCheckingService()
+        versionCheckCoordinator.versionCheckService = MockVersionCheckingService(versionIsGood: true)
         
         let appCoordinator = AppCoordinator(
             versionCheckCoordinator: versionCheckCoordinator,
@@ -120,14 +120,15 @@ extension AppCoordinatorTests {
 
 class MockVersionCheckingService: F4SWorkfinderVersioningServiceProtocol {
     
-    lazy var returnResult: F4SNetworkResult<F4SVersionValidity> = {
-        let validity = true
-        let result = F4SNetworkResult.success(validity)
-        return result
-    }()
+    var versionIsGood: Bool
+    
+    init(versionIsGood: Bool) {
+        self.versionIsGood = versionIsGood
+    }
     
     func getIsVersionValid(completion: @escaping (F4SNetworkResult<F4SVersionValidity>) -> ()) {
-            completion(returnResult)
+        let result = F4SNetworkResult.success(versionIsGood)
+            completion(result)
     }
 }
 

@@ -11,35 +11,6 @@ public protocol RemoteNotificationsRegistrarProtocol {
     func registerForRemoteNotifications()
 }
 
-protocol VersionChecking {
-    var versionCheckCompletion: ((F4SNetworkResult<F4SVersionValidity>) -> Void)? { get set }
-}
-
-class VersionCheckCoordinator: NavigationCoordinator, VersionChecking {
-    
-    var versionCheckCompletion: ((F4SNetworkResult<F4SVersionValidity>) -> Void)?
-    var versionCheckService: F4SWorkfinderVersioningServiceProtocol?
-    
-    override func start() {
-        versionCheckService?.getIsVersionValid(completion: { (result) in
-            DispatchQueue.main.async { [weak self] in
-                switch result {
-                case .success(let isValid):
-                    guard isValid else { self?.forceUpdate(); return }
-                    self?.versionCheckCompletion?(result)
-                case .error(_):
-                    self?.versionCheckCompletion?(result)
-                }
-            }
-        })
-    }
-    
-    func forceUpdate() {
-        let forceUpdateVC = F4SForceAppUpdateViewController()
-        navigationRouter.present(forceUpdateVC, animated: true, completion: nil)
-    }
-}
-
 public protocol AppCoordinatorProtocol : Coordinating {
     var window: UIWindow { get }
     func performVersionCheck(resultHandler: @escaping ((F4SNetworkResult<F4SVersionValidity>)->Void))
@@ -95,6 +66,11 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     }
     
     func performVersionCheck(resultHandler: @escaping (F4SNetworkResult<F4SVersionValidity>)->Void) {
+        if !childCoordinators.contains(where: { (key, coordinating) -> Bool in
+            coordinating.uuid == versionCheckCoordinator.uuid
+        }) {
+            addChildCoordinator(versionCheckCoordinator)
+        }
         versionCheckCoordinator.versionCheckCompletion = resultHandler
         versionCheckCoordinator.start()
     }

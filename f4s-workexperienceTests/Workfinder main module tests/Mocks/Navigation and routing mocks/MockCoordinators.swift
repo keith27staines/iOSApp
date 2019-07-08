@@ -17,6 +17,20 @@ class MockTabBarCoordinator : MockCoreInjectionNavigationCoordinator, TabBarCoor
     }
 }
 
+class MockParentCoordinator: Coordinating {
+    
+    var parentCoordinator: Coordinating? = nil
+    var uuid: UUID = UUID()
+    var childCoordinators = [UUID : Coordinating]()
+    var router: NavigationRoutingProtocol
+    init(router: NavigationRoutingProtocol) {
+        self.router = router
+    }
+    
+    func start() {}
+    
+}
+
 class MockCoreInjectionNavigationCoordinator : CoreInjectionNavigationCoordinatorProtocol {
     
     var parentCoordinator: Coordinating?
