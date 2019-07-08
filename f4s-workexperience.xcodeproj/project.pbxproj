@@ -1716,7 +1716,7 @@
 			isa = PBXGroup;
 			children = (
 				FC1E6A48221714B800DC335B /* AppCoordinatorTests.swift */,
-				FCD683802248A5DD000B7FA2 /* Apply Coordinator */,
+				FC17E02E223A378D00B32CBD /* ApplyCoordinatorTests.swift */,
 				FC8E3F4922D33A4C00102C37 /* VersionCheckCoordinatorTests.swift */,
 			);
 			path = "Coordinator tests";
@@ -2203,14 +2203,6 @@
 				FCD3486220038C3100DC1316 /* F4SEmailVerificationError.swift */,
 			);
 			path = "F4SEmailVerification models";
-			sourceTree = "<group>";
-		};
-		FCD683802248A5DD000B7FA2 /* Apply Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				FC17E02E223A378D00B32CBD /* ApplyCoordinatorTests.swift */,
-			);
-			path = "Apply Coordinator";
 			sourceTree = "<group>";
 		};
 		FCD884F71FFBC0A000F05B08 /* View */ = {
