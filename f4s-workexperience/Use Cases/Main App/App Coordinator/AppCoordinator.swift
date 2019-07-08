@@ -120,7 +120,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         injected.log.identity(userId: userUuid)
         _ = F4SNetworkSessionManager.shared
         registrar.registerForRemoteNotifications()
-        F4SUserStatusService.shared.beginStatusUpdate()
+        injected.userStatusService.beginStatusUpdate()
         databaseDownloadManager.start()
         showOnboardingUIIfNecessary()
     }

@@ -61,6 +61,8 @@ class MockOnboardingCoordinator : OnboardingCoordinatorProtocol {
     var uuid: UUID = UUID()
     var childCoordinators = [UUID : Coordinating]()
     
+    var testNotifyOnStartCalled: (() -> Void)?
+    
     init(parent: Coordinating?) {
         parentCoordinator = parent
     }
@@ -72,6 +74,7 @@ class MockOnboardingCoordinator : OnboardingCoordinatorProtocol {
     }
     func start() {
         startedCount += 1
+        testNotifyOnStartCalled?()
     }
     
     /// Call this method to simulate the affect of the onboarding coordinator finishing its last user interaction

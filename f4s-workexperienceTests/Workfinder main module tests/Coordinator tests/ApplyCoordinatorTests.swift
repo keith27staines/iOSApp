@@ -19,6 +19,7 @@ class ApplyCoordinatorTests: XCTestCase {
     let mockRegisteredUser = MockF4SUser.makeRegisteredUser()
     let mockUnregisteredUser = MockF4SUser.makeRegisteredUser()
     let mockUserService = MockUserService(registeringWillSucceedOnAttempt: 1)
+    let mockUserStatusService = MockUserStatusService()
     let mockDatabaseDownloadManager = MockDatabaseDownloadManager()
     let mockAnalytics = MockF4SAnalyticsAndDebugging()
     var mockPlacementServiceFactory = MockPlacementServiceFactory(errorResponseCode: 404)

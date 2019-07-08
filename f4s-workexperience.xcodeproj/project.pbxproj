@@ -1716,8 +1716,8 @@
 			isa = PBXGroup;
 			children = (
 				FC1E6A48221714B800DC335B /* AppCoordinatorTests.swift */,
-				FC17E02E223A378D00B32CBD /* ApplyCoordinatorTests.swift */,
 				FC8E3F4922D33A4C00102C37 /* VersionCheckCoordinatorTests.swift */,
+				FC17E02E223A378D00B32CBD /* ApplyCoordinatorTests.swift */,
 			);
 			path = "Coordinator tests";
 			sourceTree = "<group>";
