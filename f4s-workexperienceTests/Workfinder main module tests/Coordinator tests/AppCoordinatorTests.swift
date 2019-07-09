@@ -17,12 +17,14 @@ class AppCoordinatorTests: XCTestCase {
     var injection: CoreInjection!
     var mockRouter = MockNavigationRouter()
     var mockUserService = MockUserService(registeringWillSucceedOnAttempt: 1)
+    var mockUserStatusService = MockUserStatusService()
     var mockRegisteredUser = MockF4SUser.makeRegisteredUser()
     var mockUnregisteredUser = MockF4SUser.makeUnregisteredUser()
     var mockAnalytics = MockF4SAnalyticsAndDebugging()
     var mockDatabaseDownloadManager = MockDatabaseDownloadManager()
     var sut: AppCoordinator!
     var mockOnboardingCoordinator: MockOnboardingCoordinator!
+    var versionCheckCoordinator: VersionCheckCoordinator!
     
     override func setUp() {
         super.setUp()
@@ -31,6 +33,7 @@ class AppCoordinatorTests: XCTestCase {
             installationUuid: "installationUuid",
             user: mockUnregisteredUser,
             userService: mockUserService,
+            userStatusService: mockUserStatusService,
             userRepository: MockUserRepository(user: mockUnregisteredUser),
             databaseDownloadManager: mockDatabaseDownloadManager,
             f4sLog: mockAnalytics
@@ -47,34 +50,23 @@ class AppCoordinatorTests: XCTestCase {
     }
     
     func testDefaultUserService() {
-        sut = AppCoordinatoryFactory().makeAppCoordinator(registrar: mockRegistrar, installationUuid: "installationUuid", f4sLog: mockAnalytics) as? AppCoordinator
+        sut = makeSUTAppCoordinator(router: mockRouter, injecting: injection)
         XCTAssertNotNil(sut.userService)
     }
     
-    func testStartWithUnregisteredAndNotOnboardedUser() {
+    func testOnboardingStarted() {
         mockUnregisteredUser.isOnboarded = false
         injection.user = mockUnregisteredUser
+        let onboardingComplete = XCTestExpectation(description: "onboardingComplete")
         let sut = makeSUTAppCoordinator(router: mockRouter, injecting: injection)
+        mockOnboardingCoordinator.testNotifyOnStartCalled = { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.mockOnboardingCoordinator.completeOnboarding()
+            strongSelf.assertOnboardingCompleteCompleteState(sut: sut)
+            onboardingComplete.fulfill()
+        }
         sut.start()
-        mockOnboardingCoordinator.completeOnboarding()
-        assertOnboardingCompleteCompleteState(sut: sut, expectedRegisterDeviceCount: 1)
-    }
-    
-    func testStartWithRegisteredButNotOnboardedUser() {
-        mockRegisteredUser.isOnboarded = false
-        injection.user = mockRegisteredUser
-        let sut = makeSUTAppCoordinator(router: mockRouter, injecting: injection)
-        sut.start()
-        mockOnboardingCoordinator.completeOnboarding()
-        assertOnboardingCompleteCompleteState(sut: sut, expectedRegisterDeviceCount: 1)
-    }
-    
-    func testStartWithRegisteredAndOnboardedUser() {
-        mockRegisteredUser.isOnboarded = true
-        injection.user = mockRegisteredUser
-        let sut = makeSUTAppCoordinator(router: mockRouter, injecting: injection)
-        sut.start()
-        assertOnboardingCompleteCompleteState(sut: sut, expectedRegisterDeviceCount: 1)
+        wait(for: [onboardingComplete], timeout: 1)
     }
 }
 
@@ -82,10 +74,12 @@ class AppCoordinatorTests: XCTestCase {
 extension AppCoordinatorTests {
     
     func makeSUTAppCoordinator(router: NavigationRoutingProtocol, injecting: CoreInjectionProtocol) -> AppCoordinator {
-        let navigationRouter = MockNavigationRouter()
+        versionCheckCoordinator = VersionCheckCoordinator(parent: nil, navigationRouter: router)
+        versionCheckCoordinator.versionCheckService = MockVersionCheckingService(versionIsGood: true)
         let appCoordinator = AppCoordinator(
+            versionCheckCoordinator: versionCheckCoordinator,
             registrar: MockUIApplication(),
-            navigationRouter: navigationRouter,
+            navigationRouter: router,
             inject: injecting)
         
         appCoordinator.onboardingCoordinatorFactory = {[weak self] _,_ in
@@ -101,16 +95,25 @@ extension AppCoordinatorTests {
         return appCoordinator
     }
     
-    func assertOnboardingCompleteCompleteState(
-        sut: AppCoordinator,
-        expectedRegisterDeviceCount: Int) {
-        
-        XCTAssertNotNil(sut.user.uuid)
+    func assertOnboardingCompleteCompleteState(sut: AppCoordinator) {
         XCTAssertEqual(mockRouter.presentedViewControllers.count, 0)
         XCTAssertEqual(mockOnboardingCoordinator.startedCount, 1)
         XCTAssertEqual(sut.childCoordinators.count, 1)
         XCTAssertTrue(sut.childCoordinators.first?.value is MockCoreInjectionNavigationCoordinator )
-        XCTAssertEqual(mockUserService.registerDeviceOnServerCalled, expectedRegisterDeviceCount)
+    }
+}
+
+class MockVersionCheckingService: F4SWorkfinderVersioningServiceProtocol {
+    
+    var versionIsGood: Bool
+    
+    init(versionIsGood: Bool) {
+        self.versionIsGood = versionIsGood
+    }
+    
+    func getIsVersionValid(completion: @escaping (F4SNetworkResult<F4SVersionValidity>) -> ()) {
+        let result = F4SNetworkResult.success(versionIsGood)
+            completion(result)
     }
 }
 

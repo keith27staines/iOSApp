@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import XCGLogger
 import WorkfinderCommon
+import WorkfinderNetworking
 
 let globalLog = XCGLogger.default
 
@@ -53,6 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DataFixes().run()
         f4sLog = F4SLog()
         databaseDownloadManager = F4SDatabaseDownloadManager()
+        configureNetwork()
+
         let appCoordinatorFactory = AppCoordinatoryFactory()
         appCoordinator = appCoordinatorFactory.makeAppCoordinator(
             registrar: application,
@@ -86,7 +89,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
     
     func applicationDidBecomeActive(_ appliction: UIApplication) {
@@ -169,6 +171,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 // MARK: helpers
 extension AppDelegate {
+    
+    func configureNetwork(
+        wexApiKey: String = ApiConstants.apiKey,
+        baseUrlString: String = Config.workfinderApiBase) {
+        NetworkConfig.configure(wexApiKey: wexApiKey, workfinderBaseApi: baseUrlString, log: f4sLog)
+    }
     
     func setInvokingUrl(_ url: URL) {
         globalLog.debug("Invoked from url: \(url.absoluteString)")

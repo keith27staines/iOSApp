@@ -12,6 +12,7 @@ class DocumentUploadCoordinator : CoreInjectionNavigationCoordinator {
     let applicationContext: F4SApplicationContext?
     
     let mode: F4SAddDocumentsViewController.Mode
+    var popOnCompletion: Bool = false
     
     var didFinish: ((DocumentUploadCoordinator)->Void)?
     
@@ -31,7 +32,7 @@ class DocumentUploadCoordinator : CoreInjectionNavigationCoordinator {
     }
     
     func documentUploadDidFinish() {
-        navigationRouter.popToViewController(root, animated: true)
+        if popOnCompletion { navigationRouter.popToViewController(root, animated: true) }
         parentCoordinator?.childCoordinatorDidFinish(self)
         didFinish?(self)
     }

@@ -422,7 +422,7 @@ extension UserDetailsViewController {
         userService.updateUser(user: applicationContext.user!) { [weak self] (result) in
             guard let strongSelf = self else { return }
             DispatchQueue.main.async {
-                strongSelf.hideLoadingOverlay()
+                //strongSelf.hideLoadingOverlay()
                 switch result {
                 case .error(let error):
                     if error.retry {

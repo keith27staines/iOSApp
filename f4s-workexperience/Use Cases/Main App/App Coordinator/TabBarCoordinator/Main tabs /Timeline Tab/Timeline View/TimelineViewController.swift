@@ -45,7 +45,6 @@ class TimelineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackgroundView()
-        hidesBottomBarWhenPushed = false
     }
     
     var footerView: UIView?
@@ -63,6 +62,7 @@ class TimelineViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         getAllPlacementsForUser()
+        TabBarCoordinator.sharedInstance.tabBarViewController.tabBar.isHidden = false
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

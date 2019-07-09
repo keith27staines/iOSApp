@@ -14,6 +14,7 @@ class UserDetailsCoordinator : CoreInjectionNavigationCoordinator {
     
     var didFinish: ((UserDetailsCoordinator) -> Void)?
     var userIsTooYoung: (() -> Void)?
+    var popOnCompletion: Bool = false
     
     override func start() {
         let userDetailsStoryboard = UIStoryboard(name: "UserDetails", bundle: nil)
@@ -26,16 +27,9 @@ class UserDetailsCoordinator : CoreInjectionNavigationCoordinator {
     }
     
     func userDetailsDidComplete() {
-        let coordinator = DocumentUploadCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, mode: F4SAddDocumentsViewController.Mode.applyWorkflow, applicationContext: applicationContext)
-        coordinator.didFinish = { [weak self] coordinator in
-            guard let strongSelf = self else { return }
-            strongSelf.navigationRouter.pop(animated: false)
-            strongSelf.parentCoordinator?.childCoordinatorDidFinish(strongSelf)
-            strongSelf.didFinish?(strongSelf)
-        }
-        
-        addChildCoordinator(coordinator)
-        coordinator.start()
+        if popOnCompletion { navigationRouter.pop(animated: false) }
+        parentCoordinator?.childCoordinatorDidFinish(self)
+        didFinish?(self)
     }
     
     init(parent: Coordinating?,
