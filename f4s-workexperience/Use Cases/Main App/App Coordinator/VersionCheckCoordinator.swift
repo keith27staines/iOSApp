@@ -33,6 +33,7 @@ class VersionCheckCoordinator: NavigationCoordinator, VersionChecking {
     
     /// This callback returns the result of the version check
     var versionCheckCompletion: ((F4SNetworkResult<F4SVersionValidity>) -> Void)?
+    
     /// Service used to determine whether the app needs to be updated
     var versionCheckService: F4SWorkfinderVersioningServiceProtocol?
     
