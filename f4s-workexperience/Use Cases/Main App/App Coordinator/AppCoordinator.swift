@@ -62,7 +62,11 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
         _ = UNService.shared // ensure user notification service is wired up early
         _ = F4SEmailVerificationModel.shared
-        performVersionCheck(resultHandler: onVersionCheckResult)
+        if launchOptions?[.remoteNotification] == nil {
+            performVersionCheck(resultHandler: onVersionCheckResult)
+        } else {
+            startTabBarCoordinator()
+        }
     }
     
     func performVersionCheck(resultHandler: @escaping (F4SNetworkResult<F4SVersionValidity>)->Void) {
@@ -136,6 +140,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     private func startTabBarCoordinator() {
         addChildCoordinator(tabBarCoordinator)
         tabBarCoordinator.start()
+        performVersionCheck { (result) in }
     }
     
     
