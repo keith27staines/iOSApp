@@ -10,8 +10,14 @@ import Foundation
 import WorkfinderCommon
 
 public class F4SPartnersModel {
-   
-    let ncsUID = "15e5a0a6-02cc-4e98-8edb-c3bfc0cb8b7d"
+    
+    static func hardCodedPartners() -> [F4SPartner] {
+        let parent = F4SPartner(uuid:   "2c4a2c39-eac7-4573-aa14-51c17810e7a1", name: "Parent (includes guardian)")
+        let school = F4SPartner(uuid:   "4b2ac792-5e2c-4ee9-b825-93d5d5411b33", name: "My School")
+        let friend = F4SPartner(uuid:   "a89feda0-4297-461d-b076-e291498dce9e", name: "My Friend")
+        let villiers = F4SPartner(uuid: "9f2a9d9c-1ccb-4a7e-9097-d43b6da8a801", name: "Villiers Park Educational Trust")
+        return [parent, school, friend, villiers]
+    }
     
     lazy var partnerService: F4SPartnerServiceProtocol = {
         return F4SPartnerService()
@@ -91,23 +97,10 @@ public class F4SPartnersModel {
     }
     
     private func getHardCodedPartners() {
-        let parent = F4SPartner(uuid: "2c4a2c39-eac7-4573-aa14-51c17810e7a1", name: "Parent (includes guardian)")
-        let school = F4SPartner(uuid: "96638617-13df-489e-bb10-e02a3dc3391b", name: "My School")
-        let friend = F4SPartner(uuid: "1c72eb94-538c-4a39-b0db-20a9f8269d35", name: "My Friend")
-        var nominet = F4SPartner(uuid: "13639d44-5111-45c4-ac21-014bedac20da", name: "Nominet Trust")
-        nominet.imageName = "partnerLogoNominet"
-        addOrReplacePartner(nominet)
-        // includeNCSPartner()
-        addOrReplacePartner(parent)
-        addOrReplacePartner(school)
-        addOrReplacePartner(friend)
+        F4SPartnersModel.hardCodedPartners().forEach { (partner) in
+            addOrReplacePartner(partner)
+        }
         addOrReplacePartner(F4SPartner.partnerProvidedLater)
-    }
-    
-    func includeNCSPartner() {
-        var ncs = F4SPartner(uuid: ncsUID, name: "NCS")
-        ncs.imageName = "partnerLogoNCS"
-        addOrReplacePartner(ncs)
     }
     
     /// Adds the specified partner to the local model if it exists in the model

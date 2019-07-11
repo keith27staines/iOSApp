@@ -17,6 +17,19 @@ public struct DataFixes {
         moveUserUuidFromKeychainToUserDefaults()
         moveSelectedTemplateChoicesToUserDefaults()
         moveUserRecordFromCoredataToLocalStore()
+        nullifyPartnerIfInvalid()
+    }
+    
+    private func nullifyPartnerIfInvalid() {
+        let localStore = LocalStore()
+        guard let chosenPartnerUuid = localStore.value(key: LocalStore.Key.partnerID) as? F4SUUID else {
+            localStore.setValue(nil, for: LocalStore.Key.partnerID)
+            return
+        }
+        guard F4SPartnersModel.hardCodedPartners().contains(where: { (partner) -> Bool in
+            partner.uuid == chosenPartnerUuid
+        }) else { return }
+        localStore.setValue(nil, for: LocalStore.Key.partnerID)
     }
     
     private func moveUserUuidFromKeychainToUserDefaults() {

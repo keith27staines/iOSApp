@@ -325,14 +325,14 @@ extension UserDetailsViewController {
     }
     
     func verifyVoucher() {
+        afterVoucherValidation()
+        return
         guard let voucherCode = voucherCodeTextField.text, voucherCode.isEmpty == false  else {
             afterVoucherValidation()
             return
         }
-        if voucherVerificationService == nil {
-            let placementUuid = applicationContext.placement!.placementUuid!
-            voucherVerificationService = F4SVoucherVerificationService(placementUuid: placementUuid, voucherCode: voucherCode)
-        }
+        let placementUuid = applicationContext.placement?.placementUuid
+        voucherVerificationService = F4SVoucherVerificationService(placementUuid: placementUuid, voucherCode: voucherCode)
         showLoadingOverlay()
         voucherVerificationService?.verify(completion: { [weak self] (result) in
             guard let strongSelf = self else { return }
@@ -419,6 +419,9 @@ extension UserDetailsViewController {
     
     func saveUserToServer() {
         showLoadingOverlay()
+        if let partnerUuid = LocalStore().value(key: LocalStore.Key.partnerID) as? F4SUUID {
+            applicationContext.user?.partners = [F4SUUIDDictionary(uuid: partnerUuid)]
+        }
         userService.updateUser(user: applicationContext.user!) { [weak self] (result) in
             guard let strongSelf = self else { return }
             DispatchQueue.main.async {
@@ -442,7 +445,7 @@ extension UserDetailsViewController {
                         return
                     }
                     let oldUuid = user.uuid ?? "nil"
-                    strongSelf.coordinator.injected.log.debug("PATCHED user:\nold uuid: \(oldUuid)\nnew uuid: \(newUuid)", functionName: #function, fileName: #file, lineNumber: #line)
+                    strongSelf.coordinator?.injected.log.debug("PATCHED user:\nold uuid: \(oldUuid)\nnew uuid: \(newUuid)", functionName: #function, fileName: #file, lineNumber: #line)
                     
                     user.updateUuid(uuid: newUuid)
                     strongSelf.userRepository?.save(user: user)

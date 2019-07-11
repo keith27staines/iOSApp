@@ -98,8 +98,6 @@ extension AppCoordinatorTests {
     func assertOnboardingCompleteCompleteState(sut: AppCoordinator) {
         XCTAssertEqual(mockRouter.presentedViewControllers.count, 0)
         XCTAssertEqual(mockOnboardingCoordinator.startedCount, 1)
-        XCTAssertEqual(sut.childCoordinators.count, 1)
-        XCTAssertTrue(sut.childCoordinators.first?.value is MockCoreInjectionNavigationCoordinator )
     }
 }
 

@@ -26,10 +26,10 @@ public protocol F4SVoucherVerificationServiceProtocol {
 }
 
 public class F4SVoucherVerificationService : F4SDataTaskService {
-    public let placementUuid: F4SUUID
+    public let placementUuid: F4SUUID?
     public let voucherCode: F4SUUID
     
-    public init(placementUuid: F4SUUID, voucherCode: String) {
+    public init(placementUuid: F4SUUID?, voucherCode: String) {
         self.placementUuid = placementUuid
         self.voucherCode = voucherCode
         let api = "voucher/\(voucherCode)"
@@ -41,7 +41,8 @@ public class F4SVoucherVerificationService : F4SDataTaskService {
 extension F4SVoucherVerificationService : F4SVoucherVerificationServiceProtocol {
     
     public func verify(completion: @escaping (F4SNetworkResult<F4SVoucherValidation>) -> ()) {
-        let params = ["placement_uuid" : placementUuid]
+        var params = [String: String]()
+        if let placementUuid = self.placementUuid { params = ["placement_uuid" : placementUuid] }
         let attempting = "Validate voucher code"
         beginSendRequest(verb: .put, objectToSend: params, attempting: attempting) { (result) in
             switch result {
