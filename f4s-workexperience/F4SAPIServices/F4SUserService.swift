@@ -25,12 +25,11 @@ public class F4SUserService : F4SUserServiceProtocol {
     }()
     
     public func updateUser(user: F4SUser, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ()) {
-        let user = user
+        let user = userRemovingInvalidPartnersFromUserDataFix(user: user)
         let attempting = "Update user"
         if let age = user.age() { user.requiresConsent = age < 16 }
         if user.parentEmail?.isEmpty == true { user.parentEmail = nil }
         let url = URL(string: ApiConstants.updateUserProfileUrl)!
-        
         let session = F4SNetworkSessionManager.shared.interactiveSession
         do {
             let encoder = JSONEncoder()
@@ -48,6 +47,20 @@ public class F4SUserService : F4SUserServiceProtocol {
             let serializationError = F4SNetworkDataErrorType.serialization(user).error(attempting: attempting)
             completion(F4SNetworkResult.error(serializationError))
         }
+    }
+    
+    /// If the user's partner (referrer) uuid isn't in one of the known good uuids
+    /// (currently "kown good" uuids are those in a hard coded list in
+    /// F4SPartnersModel) then the partner should be deleted
+    func userRemovingInvalidPartnersFromUserDataFix(user: F4SUser) -> F4SUser {
+        guard let partnerUuid = user.partners?.first else { return user }
+        if !F4SPartnersModel.hardCodedPartners().contains(where: { (partner) -> Bool in
+            partner.uuid == partnerUuid.uuid
+        }) {
+            user.partners = nil
+            return user
+        }
+        return user
     }
     
     private func handleUpdateUserTaskResult(attempting: String, result: F4SNetworkDataResult, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ()) {

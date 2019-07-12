@@ -19,7 +19,15 @@ public class F4SUserRepository : F4SUserRepositoryProtocol {
     
     public func load() -> F4SUserProtocol {
         guard let data = localStore.value(key: LocalStore.Key.user) as? Data else { return F4SUser() }
-        return try! JSONDecoder().decode(F4SUser.self, from: data)
+        let user = try! JSONDecoder().decode(F4SUser.self, from: data)
+        if let partnerUuid = localStore.value(key: LocalStore.Key.partnerID) as? F4SUUID {
+            if user.partners == nil {
+                let partnerUuidDictionary = F4SUUIDDictionary(uuid: partnerUuid)
+                user.partners = [partnerUuidDictionary]
+                self.save(user: user)
+            }
+        }
+        return user
     }
     
 }

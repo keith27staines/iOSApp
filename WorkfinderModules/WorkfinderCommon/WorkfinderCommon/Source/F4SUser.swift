@@ -23,7 +23,7 @@ public protocol F4SUserProtocol {
     var isRegistered: Bool { get }
     var isOnboarded: Bool { get }
     var vouchers: [F4SUUID]? { get set }
-    var partners: [F4SUUID]? { get set }
+    var partners: [F4SUUIDDictionary]? { get set }
     var termsAgreed: Bool { get set }
     mutating func updateUuid(uuid: F4SUUID)
 }
@@ -35,6 +35,13 @@ public extension F4SUserProtocol {
         if (!firstName.isEmpty && !lastName.isEmpty) { name = name + " "}
         name = name + lastName
         return name.isEmpty ? nil : name
+    }
+}
+
+public struct F4SUUIDDictionary : Codable {
+    public var uuid: F4SUUID
+    public init(uuid: F4SUUID) {
+        self.uuid = uuid
     }
 }
 
@@ -50,7 +57,8 @@ public class F4SUser : F4SUserProtocol, Codable {
     public var requiresConsent: Bool = false
     public var termsAgreed: Bool = false
     public var vouchers: [F4SUUID]?
-    public var partners: [F4SUUID]?
+    public var partners: [F4SUUIDDictionary]?
+    
     public var placementUuid: F4SUUID?
     
     public var isOnboarded: Bool {
@@ -102,7 +110,7 @@ public class F4SUser : F4SUserProtocol, Codable {
             requiresConsent: self.requiresConsent,
             termsAgreed: self.termsAgreed,
             vouchers: self.vouchers,
-            partners: self.vouchers,
+            partners: self.partners,
             isOnboarded: self.isOnboarded,
             isRegistered: self.isRegistered)
     }
@@ -138,6 +146,9 @@ public class F4SUser : F4SUserProtocol, Codable {
     public init(userData: UserData) {
         let localStore = LocalStore()
         uuid = localStore.value(key: LocalStore.Key.userUuid) as! F4SUUID?
+        if let partnerUuid = localStore.value(key: LocalStore.Key.partnerID) as? F4SUUID {
+            self.partners = [F4SUUIDDictionary(uuid: partnerUuid)]
+        }
         email = userData.email ?? ""
         firstName = userData.firstName ?? ""
         lastName = userData.lastName?.isEmpty == false ? userData.lastName : nil
@@ -184,7 +195,7 @@ public struct F4SUserInformation : F4SUserProtocol {
     public var requiresConsent: Bool = false
     public var termsAgreed: Bool = false
     public var vouchers: [F4SUUID]?
-    public var partners: [F4SUUID]?
+    public var partners: [F4SUUIDDictionary]?
     public var isOnboarded: Bool
     public var isRegistered: Bool
     public mutating func updateUuid(uuid: F4SUUID) { self.uuid = uuid }

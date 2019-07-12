@@ -12,6 +12,7 @@ import WorkfinderCommon
 @testable import f4s_workexperience
 
 class MockF4SUser :  F4SUserProtocol {
+    
     var email: String?
     
     var firstName: String?
@@ -28,7 +29,7 @@ class MockF4SUser :  F4SUserProtocol {
     
     var vouchers: [F4SUUID]?
     
-    var partners: [F4SUUID]?
+    var partners: [F4SUUIDDictionary]?
     
     var termsAgreed: Bool = false
     
