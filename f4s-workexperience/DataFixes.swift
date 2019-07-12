@@ -20,16 +20,20 @@ public struct DataFixes {
         nullifyPartnerIfInvalid()
     }
     
+    /// If the partner uuid held in the local store isn't in one of the known
+    /// good ones (currently "kown good" uuids are those in a hard coded list)
+    /// then it should be deleted
     private func nullifyPartnerIfInvalid() {
         let localStore = LocalStore()
-        guard let chosenPartnerUuid = localStore.value(key: LocalStore.Key.partnerID) as? F4SUUID else {
-            localStore.setValue(nil, for: LocalStore.Key.partnerID)
-            return
-        }
-        guard F4SPartnersModel.hardCodedPartners().contains(where: { (partner) -> Bool in
+        guard let chosenPartnerUuid = localStore.value(key: LocalStore.Key.partnerID) as? F4SUUID else { return }
+        
+        if !F4SPartnersModel.hardCodedPartners().contains(where: { (partner) -> Bool in
             partner.uuid == chosenPartnerUuid
-        }) else { return }
-        localStore.setValue(nil, for: LocalStore.Key.partnerID)
+        }) {
+            // remove invalid uuid from local store
+            localStore.setValue(nil, for: LocalStore.Key.partnerID)
+        }
+        
     }
     
     private func moveUserUuidFromKeychainToUserDefaults() {
