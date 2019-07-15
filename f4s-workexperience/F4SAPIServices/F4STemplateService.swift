@@ -9,6 +9,7 @@
 import Foundation
 import WorkfinderCommon
 import WorkfinderApplyUseCase
+import WorkfinderNetworking
 
 public class F4STemplateService: F4STemplateServiceProtocol {
     

@@ -83,8 +83,8 @@ public class F4SFeatureSwitchModel {
             switch result {
             case .success(let features):
                 self.updateLastFetchedFeatures(features: features)
-            case .error(let error):
-                globalLog.debug(error)
+            case .error(_):
+                break
             }
             completion?()
         }

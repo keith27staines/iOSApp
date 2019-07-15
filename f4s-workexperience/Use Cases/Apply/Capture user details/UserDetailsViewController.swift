@@ -325,14 +325,14 @@ extension UserDetailsViewController {
     }
     
     func verifyVoucher() {
+        afterVoucherValidation()
+        return
         guard let voucherCode = voucherCodeTextField.text, voucherCode.isEmpty == false  else {
             afterVoucherValidation()
             return
         }
-        if voucherVerificationService == nil {
-            let placementUuid = applicationContext.placement!.placementUuid!
-            voucherVerificationService = F4SVoucherVerificationService(placementUuid: placementUuid, voucherCode: voucherCode)
-        }
+        let placementUuid = applicationContext.placement?.placementUuid
+        voucherVerificationService = F4SVoucherVerificationService(placementUuid: placementUuid, voucherCode: voucherCode)
         showLoadingOverlay()
         voucherVerificationService?.verify(completion: { [weak self] (result) in
             guard let strongSelf = self else { return }
@@ -414,16 +414,18 @@ extension UserDetailsViewController {
     func afterEmailVerfied(verifiedEmail: String) {
         let user = applicationContext.user!
         user.email = verifiedEmail
-        userRepository?.save(user: user)
         saveUserToServer()
     }
     
     func saveUserToServer() {
         showLoadingOverlay()
+        if let partnerUuid = LocalStore().value(key: LocalStore.Key.partnerID) as? F4SUUID {
+            applicationContext.user?.partners = [F4SUUIDDictionary(uuid: partnerUuid)]
+        }
         userService.updateUser(user: applicationContext.user!) { [weak self] (result) in
             guard let strongSelf = self else { return }
             DispatchQueue.main.async {
-                strongSelf.hideLoadingOverlay()
+                //strongSelf.hideLoadingOverlay()
                 switch result {
                 case .error(let error):
                     if error.retry {
@@ -431,19 +433,22 @@ extension UserDetailsViewController {
                             strongSelf.saveUserToServer()
                         })
                     } else {
-                        let reason = NSLocalizedString("Unable to save your details", comment: "")
-                        strongSelf.presentInvalidVoucherAlert(reason: reason)
+                        sharedUserMessageHandler.display(error, parentCtrl: strongSelf, cancelHandler: nil
+                            , retryHandler: {
+                                strongSelf.saveUserToServer()
+                        })
                     }
                 case .success(let userModel):
-                    guard let uuid = userModel.uuid else {
-                        sharedUserMessageHandler.displayWithTitle("Oops something went wrong", "Workfinder cannot complete this operation", parentCtrl: strongSelf)
+                    let user = strongSelf.applicationContext.user!
+                    guard let newUuid = userModel.uuid else {
+                        sharedUserMessageHandler.displayWithTitle("Something went wrong", "Workfinder cannot complete this operation", parentCtrl: strongSelf)
                         return
                     }
-                    let user = strongSelf.applicationContext.user!
-                    user.updateUuid(uuid: uuid)
+                    let oldUuid = user.uuid ?? "nil"
+                    strongSelf.coordinator?.injected.log.debug("PATCHED user:\nold uuid: \(oldUuid)\nnew uuid: \(newUuid)", functionName: #function, fileName: #file, lineNumber: #line)
+                    
+                    user.updateUuid(uuid: newUuid)
                     strongSelf.userRepository?.save(user: user)
-                    updateWEXSessionManagerWithUserUUID(uuid)
-                    F4SNetworkSessionManager.shared.rebuildSessions()
                     strongSelf.afterUserSavedToServer()
                 }
             }
@@ -451,11 +456,11 @@ extension UserDetailsViewController {
     }
     
     func afterUserSavedToServer() {
-        performDocumentUpload()
+        didComplete()
     }
     
-    func performDocumentUpload() {
-        coordinator?.showAddDocuments()
+    func didComplete() {
+        coordinator?.userDetailsDidComplete()
     }
 }
 

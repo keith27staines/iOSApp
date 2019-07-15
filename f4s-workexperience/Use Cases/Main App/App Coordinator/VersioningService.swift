@@ -1,5 +1,5 @@
 //
-//  Versioning.swift
+//  VersioningService.swift
 //  f4s-workexperience
 //
 //  Created by Keith Dev on 12/12/2017.
@@ -8,21 +8,18 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderNetworking
 
 public typealias F4SVersionValidity = Bool
 
 public protocol F4SWorkfinderVersioningServiceProtocol {
-    static var releaseVersionNumber: String? { get }
-    static var buildVersionNumber: String? { get }
-    var apiName: String { get }
-
     func getIsVersionValid(completion: @escaping (F4SNetworkResult<F4SVersionValidity>) -> ())
 }
 
 public class F4SWorkfinderVersioningService: F4SDataTaskService {
 
     public init() {
-        super.init(baseURLString: Config.BASE, apiName: "validation/ios-version")
+        super.init(baseURLString: NetworkConfig.workfinderApi, apiName: "validation/ios-version")
     }
 }
 

@@ -8,6 +8,7 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderNetworking
 
 public protocol F4SFeatureSwitchServiceProtocol {
     var apiName: String { get }
@@ -32,7 +33,7 @@ public class F4SFeatureSwitchService : F4SDataTaskService {
     
     public init() {
         let apiName = "feature-flag"
-        super.init(baseURLString: Config.BASE_URL, apiName: apiName)
+        super.init(baseURLString: NetworkConfig.workfinderApiV1, apiName: apiName)
     }
 }
 

@@ -8,6 +8,7 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderNetworking
 
 fileprivate struct Json : Codable {
     var requested_documents: [[String : String]]
@@ -37,7 +38,6 @@ public class F4SCompanyDocumentService {
             let encoder = JSONEncoder()
             encoder.outputFormatting = .prettyPrinted
             let data = try encoder.encode(json)
-            globalLog.debug("updating placement with json \n\(String(data: data, encoding: .utf8)!)")
             let urlRequest = F4SDataTaskService.urlRequest(verb: .post, url: url, dataToSend: data)
             let dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { result in
                 switch result {

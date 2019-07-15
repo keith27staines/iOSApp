@@ -18,11 +18,6 @@ class WEXSessionManagerTests : XCTestCase {
         assertEqual(config1: config, config2: sut.configuration)
     }
     
-    func testFirstRegistrationHeaders() {
-        let sut = makeSUT()
-        XCTAssertEqual(sut.firstRegistrationHeaders, ["wex.api.key": sut.configuration.wexApiKey])
-    }
-    
     func testDefaultHeadersIsEmpty_whenNoUser() {
         let sut = makeSUT()
         XCTAssertEqual(sut.defaultHeaders, ["wex.api.key": sut.configuration.wexApiKey])
@@ -30,30 +25,7 @@ class WEXSessionManagerTests : XCTestCase {
     
     func testDefaultHeadersIsNotEmpty_whenUser() {
         let sut = makeSUT()
-        sut.rebuildWexUserSession(user: "1234")
         XCTAssertEqual(sut.defaultHeaders[HeaderKeys.wexApiKey.rawValue], sut.configuration.wexApiKey)
-        XCTAssertEqual(sut.defaultHeaders[HeaderKeys.wexUserUuid.rawValue], "1234")
-    }
-    
-    func testInitFirstRegistrationSession() {
-        let sut = makeSUT()
-        XCTAssertEqual(sut.firstRegistrationHeaders, ["wex.api.key": sut.configuration.wexApiKey])
-        XCTAssertEqual(sut.firstRegistrationSession.configuration.httpAdditionalHeaders!.count,1)
-    }
-    
-    func testWexUserSession_beforeUserSet() {
-        let sut = makeSUT()
-        XCTAssertEqual(sut.wexUserSession.configuration.httpAdditionalHeaders!.count,1)
-        XCTAssertNil(sut.defaultHeaders[HeaderKeys.wexUserUuid.rawValue])
-    }
-    
-    func testWexUserSession_afterBuildWexUserSession() {
-        let sut = makeSUT()
-        sut.rebuildWexUserSession(user: "1234")
-        XCTAssertEqual(sut.wexUserSession.configuration.httpAdditionalHeaders!.count,2)
-        XCTAssertEqual(sut.defaultHeaders[HeaderKeys.wexUserUuid.rawValue], "1234")
-        sut.rebuildWexUserSession(user: "54321")
-        XCTAssertEqual(sut.defaultHeaders[HeaderKeys.wexUserUuid.rawValue], "54321")
     }
     
     func testBuildSmallImageTests() {

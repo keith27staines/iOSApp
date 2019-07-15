@@ -3,6 +3,15 @@
 //
 
 struct Config {
+    #if STAGING
+    // Development & testing config
+    static let environmentName = "STAGING"
+    static let workfinderApiBase = "https://staging.workfinder.com/api"
+    #else
+    // Default to production (live) config
+    static let environmentName = "PRODUCTION"
+    static let workfinderApiBase = "https://www.workfinder.com/api"
+    #endif
     
     enum EnvironmentType {
         case staging
@@ -10,7 +19,7 @@ struct Config {
     }
     
     static var environment: EnvironmentType {
-        switch ENVIRONMENT {
+        switch environmentName {
         case "STAGING":
             return EnvironmentType.staging
         case "PRODUCTION":
@@ -20,37 +29,11 @@ struct Config {
         }
     }
     
-    #if STAGING
-
-        // Development & testing config
-
-        static let ENVIRONMENT = "STAGING"
-        static let BASE = "https://staging.workfinder.com/api"
-        static let BASE_URL = "https://staging.workfinder.com/api/v1"
-        static let BASE_URL2 = "https://staging.workfinder.com/api/v2"
-        static let ACTIVATION_CODE = "0000"
-        static let ERRORDOMAIN = "F4SErrorDomain"
-        static let REACHABILITY_URL = "www.google.com"
-
-    #else
-
-        // Default to production (live) config
-
-        static let ENVIRONMENT = "PRODUCTION"
-        static let BASE = "https://www.workfinder.com/api"
-        static let BASE_URL = "https://www.workfinder.com/api/v1"
-        static let BASE_URL2 = "https://www.workfinder.com/api/v2"
-        static let ACTIVATION_CODE = "0000"
-        static let ERRORDOMAIN = "F4SErrorDomain"
-        static let REACHABILITY_URL = "www.google.com"
-
-    #endif
-    
     static var apnsEnv: String {
         if self.apns == "sandbox" {
             return "staging" //"dev"
         } else {
-            if ENVIRONMENT == "STAGING" {
+            if environmentName == "STAGING" {
                 return "staging"
             } else {
                 return "production"
@@ -59,7 +42,7 @@ struct Config {
     }
     
     static var apns: String {
-        if ENVIRONMENT == "STAGING" {
+        if environmentName == "STAGING" {
             #if DEBUG
                 return "sandbox"
             #else

@@ -56,24 +56,26 @@ extension F4SLog : F4SAnalytics {
 }
 
 extension F4SLog : F4SDebugging {
-    public func error(message: String) {
-        XCGLogger.default.error(message)
+    public func error(message: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
+        XCGLogger.default.error(message, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
     
-    public func error(_ error: Error) {
-        XCGLogger.default.error(error)
+    public func error(_ error: Error, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
+        XCGLogger.default.error(error, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
     
-    public func debug(message: String) {
-        XCGLogger.default.debug(message)
+    public func debug(_ message: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
+        XCGLogger.default.debug(message, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
     
-    public func notifyError(_ error: Error) {
-        XCGLogger.default.error(error)
-        Bugsnag.notifyError(error)
+    public func notifyError(_ error: NSError, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
+        Bugsnag.notifyError(error) { report in
+            report.depth += 2
+            report.addMetadata(error.userInfo, toTabWithName: "UserInfo")
+        }
     }
     
-    public func leaveBreadcrumb(with message: String) {
+    public func leaveBreadcrumb(with message: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
         XCGLogger.default.debug(message)
         Bugsnag.leaveBreadcrumb(withMessage: message)
     }
@@ -162,17 +164,7 @@ class F4SDebug {
         #if DEBUG
         return true
         #else
-        if Config.ENVIRONMENT == "STAGING" {
-            return true
-        }
-        guard let lowercasedEmail = F4SUser().email?.lowercased() else {
-            return false
-        }
-        guard lowercasedEmail.contains("founders4schools.org.uk") ||
-            lowercasedEmail.contains("workfinder.com") else {
-                return false
-        }
-        return true
+        return false
         #endif
         
     }

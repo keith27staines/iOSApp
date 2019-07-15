@@ -8,6 +8,7 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderNetworking
 
 public struct F4SUserStatus : Codable {
     var unreadMessageCount: Int
@@ -40,7 +41,7 @@ public class F4SUserStatusService : F4SDataTaskService {
     
     public init() {
         let apiName = "user/status"
-        super.init(baseURLString: Config.BASE_URL2, apiName: apiName)
+        super.init(baseURLString: NetworkConfig.workfinderApiV2, apiName: apiName)
     }
     
     public func beginStatusUpdate() {
@@ -53,7 +54,7 @@ public class F4SUserStatusService : F4SDataTaskService {
                     self?.userStatus = status
                     let badgeNumber = status.unreadMessageCount
                     UIApplication.shared.applicationIconBadgeNumber = max(badgeNumber,0)
-                    print("BADGE NUMBER = \(badgeNumber)")
+                    print("\nBADGE NUMBER = \(badgeNumber)\n")
                     NotificationCenter.default.post(name: .f4sUserStatusUpdated, object: status)
                 }
             }

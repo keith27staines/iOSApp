@@ -9,6 +9,7 @@
 import Foundation
 import WorkfinderCommon
 import WorkfinderApplyUseCase
+import WorkfinderNetworking
 
 public protocol F4SPlacementServiceProtocol {
     func getAllPlacementsForUser(completion: @escaping (_ result: F4SNetworkResult<[F4STimelinePlacement]>) -> ())
@@ -98,7 +99,6 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
             let encoder = JSONEncoder()
             encoder.outputFormatting = .prettyPrinted
             let data = try encoder.encode(json)
-            globalLog.debug("updating placement with json \n\(String(data: data, encoding: .utf8)!)")
             let urlRequest = F4SDataTaskService.urlRequest(verb: .patch, url: url, dataToSend: data)
             let dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { result in
                 switch result {

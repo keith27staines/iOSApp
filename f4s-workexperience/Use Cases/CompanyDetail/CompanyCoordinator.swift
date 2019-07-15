@@ -43,6 +43,22 @@ class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoordinato
     }
 }
 
+extension CompanyCoordinator : ApplyCoordinatorDelegate {
+    func applicationDidFinish(preferredDestination: ApplyCoordinator.PreferredDestinationAfterApplication) {
+        cleanup()
+        navigationRouter.pop(animated: true)
+        parentCoordinator?.childCoordinatorDidFinish(self)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) {
+            switch preferredDestination {
+            case .messages:
+                TabBarCoordinator.sharedInstance!.navigateToTimeline()
+            case .search:
+                TabBarCoordinator.sharedInstance!.navigateToMap()
+            }
+        }
+    }
+}
+
 extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
 
     func companyViewModelDidComplete(_ viewModel: CompanyViewModel) {
@@ -64,6 +80,7 @@ extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
     
     func startApplyCoordinator(companyViewData: CompanyViewData, continueFrom: F4STimelinePlacement?) {
         let applyCoordinator = ApplyCoordinator(
+            applyCoordinatorDelegate: self,
             company: company,
             placement: company.placement,
             parent: self,
@@ -72,9 +89,6 @@ extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
             placementService: placementService,
             templateService: templateService)
         addChildCoordinator(applyCoordinator)
-        applyCoordinator.applicationDidComplete = { [weak self] _ in
-            self?.navigationRouter.pop(animated: false)
-        }
         applyCoordinator.start()
     }
     

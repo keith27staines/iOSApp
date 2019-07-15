@@ -194,15 +194,13 @@
 		FC5DF8BB228AF25A004B014D /* NameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5DF8BA228AF25A004B014D /* NameLogic.swift */; };
 		FC5F3D4E20D938E90002F41B /* F4SUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F3D4D20D938E90002F41B /* F4SUserService.swift */; };
 		FC5F3D5020D93C070002F41B /* F4SUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F3D4F20D93C070002F41B /* F4SUserModel.swift */; };
-		FC62FF9820EF75FE003E52C5 /* F4SApiUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62FF9720EF75FE003E52C5 /* F4SApiUrls.swift */; };
-		FC631CB620D64BD100199507 /* F4SAsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC631CB520D64BD100199507 /* F4SAsynchronousOperation.swift */; };
-		FC631CB820D679AC00199507 /* F4SNetworkSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC631CB720D679AC00199507 /* F4SNetworkSessionManager.swift */; };
 		FC64A5932119EBE3006464A5 /* CalendarChooserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC64A5902119EBE3006464A5 /* CalendarChooserController.swift */; };
 		FC64A595211ACA39006464A5 /* F4SCompanyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC64A594211ACA39006464A5 /* F4SCompanyService.swift */; };
 		FC64A597211AECDE006464A5 /* F4SInviteDetailLinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC64A596211AECDE006464A5 /* F4SInviteDetailLinkCell.swift */; };
 		FC67E60A207B70CE006F07FE /* F4SCalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC67E609207B70CE006F07FE /* F4SCalendarService.swift */; };
 		FC681C001F57473D0077BECA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFE1F57473D0077BECA /* Podfile */; };
 		FC681C011F57473D0077BECA /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFF1F57473D0077BECA /* Podfile.lock */; };
+		FC6A6FC722D1E04C005F625A /* AppCoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6A6FC622D1E04C005F625A /* AppCoordinatorFactory.swift */; };
 		FC6B17EB2201B54700556C59 /* CompanyFavouritesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6B17E92201B54700556C59 /* CompanyFavouritesModel.swift */; };
 		FC6DE52020AC3AD900F9BB71 /* F4SUserStatusService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6DE51F20AC3AD900F9BB71 /* F4SUserStatusService.swift */; };
 		FC72219F20FE248400F10953 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = FC72219B20FE248400F10953 /* Appfile */; };
@@ -214,6 +212,8 @@
 		FC860D82209C37F2007945E6 /* MessageDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC860D81209C37F2007945E6 /* MessageDispatcher.swift */; };
 		FC87387221945C8F00BF9743 /* F4SBusinessLeadersRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC87387121945C8F00BF9743 /* F4SBusinessLeadersRequestModel.swift */; };
 		FC8E303A20F4A60B006059DE /* F4SLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8E303920F4A60B006059DE /* F4SLogger.swift */; };
+		FC8E3F4822D3396A00102C37 /* VersionCheckCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8E3F4722D3396A00102C37 /* VersionCheckCoordinator.swift */; };
+		FC8E3F4A22D33A4C00102C37 /* VersionCheckCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8E3F4922D33A4C00102C37 /* VersionCheckCoordinatorTests.swift */; };
 		FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC92567A1F8F70D100FF9841 /* InterestsModel.swift */; };
 		FC9626412248C27D00D5F850 /* ApplyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626402248C27D00D5F850 /* ApplyCoordinator.swift */; };
 		FC96709E2259F61600318F69 /* InterestsPruner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96709D2259F61600318F69 /* InterestsPruner.swift */; };
@@ -224,14 +224,12 @@
 		FC99BDCA20D170CA00278DDE /* F4SDatabaseDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */; };
 		FC99BDCC20D172B600278DDE /* F4SCompanyDatabaseMetadataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99BDCB20D172B600278DDE /* F4SCompanyDatabaseMetadataService.swift */; };
 		FC99F3D41FFE533000E3AC5A /* F4SRecommendationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99F3D31FFE533000E3AC5A /* F4SRecommendationService.swift */; };
-		FC99F3D72000BE4900E3AC5A /* F4SService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99F3D62000BE4900E3AC5A /* F4SService.swift */; };
-		FC9B28AB222FAF870077CFF0 /* API used in the app in Resources */ = {isa = PBXBuildFile; fileRef = FC9B28AA222FAF870077CFF0 /* API used in the app */; };
 		FC9BEE082015FF6000347437 /* UniversalLinkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9BEE072015FF6000347437 /* UniversalLinkParser.swift */; };
 		FC9EAD80210F5DEB001C56CE /* F4SRoleJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9EAD7F210F5DEB001C56CE /* F4SRoleJson.swift */; };
 		FC9EAD82210F5F64001C56CE /* F4SRoleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9EAD81210F5F64001C56CE /* F4SRoleService.swift */; };
 		FC9EAD8421106846001C56CE /* F4SAccepOfferContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9EAD8321106846001C56CE /* F4SAccepOfferContext.swift */; };
 		FCA333A520BEA938002AA790 /* F4SMessagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA333A420BEA938002AA790 /* F4SMessagesModel.swift */; };
-		FCA53B921FE00CB5009F6DB0 /* Versioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA53B911FE00CB5009F6DB0 /* Versioning.swift */; };
+		FCA53B921FE00CB5009F6DB0 /* VersioningService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA53B911FE00CB5009F6DB0 /* VersioningService.swift */; };
 		FCA53B961FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA53B941FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift */; };
 		FCA53B971FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */; };
 		FCA6C8252107163B00A222FE /* F4SConfirmUseVoucherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6C8242107163B00A222FE /* F4SConfirmUseVoucherView.swift */; };
@@ -640,15 +638,13 @@
 		FC5DF8BA228AF25A004B014D /* NameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameLogic.swift; sourceTree = "<group>"; };
 		FC5F3D4D20D938E90002F41B /* F4SUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserService.swift; sourceTree = "<group>"; };
 		FC5F3D4F20D93C070002F41B /* F4SUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserModel.swift; sourceTree = "<group>"; };
-		FC62FF9720EF75FE003E52C5 /* F4SApiUrls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SApiUrls.swift; sourceTree = "<group>"; };
-		FC631CB520D64BD100199507 /* F4SAsynchronousOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SAsynchronousOperation.swift; sourceTree = "<group>"; };
-		FC631CB720D679AC00199507 /* F4SNetworkSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SNetworkSessionManager.swift; sourceTree = "<group>"; };
 		FC64A5902119EBE3006464A5 /* CalendarChooserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarChooserController.swift; sourceTree = "<group>"; };
 		FC64A594211ACA39006464A5 /* F4SCompanyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyService.swift; sourceTree = "<group>"; };
 		FC64A596211AECDE006464A5 /* F4SInviteDetailLinkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInviteDetailLinkCell.swift; sourceTree = "<group>"; };
 		FC67E609207B70CE006F07FE /* F4SCalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCalendarService.swift; sourceTree = "<group>"; };
 		FC681BFE1F57473D0077BECA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		FC681BFF1F57473D0077BECA /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
+		FC6A6FC622D1E04C005F625A /* AppCoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorFactory.swift; sourceTree = "<group>"; };
 		FC6B17E92201B54700556C59 /* CompanyFavouritesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyFavouritesModel.swift; sourceTree = "<group>"; };
 		FC6DE51F20AC3AD900F9BB71 /* F4SUserStatusService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserStatusService.swift; sourceTree = "<group>"; };
 		FC72219B20FE248400F10953 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
@@ -661,6 +657,8 @@
 		FC860D81209C37F2007945E6 /* MessageDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDispatcher.swift; sourceTree = "<group>"; };
 		FC87387121945C8F00BF9743 /* F4SBusinessLeadersRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SBusinessLeadersRequestModel.swift; sourceTree = "<group>"; };
 		FC8E303920F4A60B006059DE /* F4SLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SLogger.swift; sourceTree = "<group>"; };
+		FC8E3F4722D3396A00102C37 /* VersionCheckCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheckCoordinator.swift; sourceTree = "<group>"; };
+		FC8E3F4922D33A4C00102C37 /* VersionCheckCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheckCoordinatorTests.swift; sourceTree = "<group>"; };
 		FC92567A1F8F70D100FF9841 /* InterestsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsModel.swift; sourceTree = "<group>"; };
 		FC9626402248C27D00D5F850 /* ApplyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyCoordinator.swift; sourceTree = "<group>"; };
 		FC96709D2259F61600318F69 /* InterestsPruner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsPruner.swift; sourceTree = "<group>"; };
@@ -671,15 +669,13 @@
 		FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDatabaseDownloadManager.swift; sourceTree = "<group>"; };
 		FC99BDCB20D172B600278DDE /* F4SCompanyDatabaseMetadataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyDatabaseMetadataService.swift; sourceTree = "<group>"; };
 		FC99F3D31FFE533000E3AC5A /* F4SRecommendationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRecommendationService.swift; sourceTree = "<group>"; };
-		FC99F3D62000BE4900E3AC5A /* F4SService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SService.swift; sourceTree = "<group>"; };
-		FC9B28AA222FAF870077CFF0 /* API used in the app */ = {isa = PBXFileReference; lastKnownFileType = text; path = "API used in the app"; sourceTree = "<group>"; };
 		FC9BEE072015FF6000347437 /* UniversalLinkParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalLinkParser.swift; sourceTree = "<group>"; };
 		FC9EAD7F210F5DEB001C56CE /* F4SRoleJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRoleJson.swift; sourceTree = "<group>"; };
 		FC9EAD81210F5F64001C56CE /* F4SRoleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRoleService.swift; sourceTree = "<group>"; };
 		FC9EAD8321106846001C56CE /* F4SAccepOfferContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SAccepOfferContext.swift; sourceTree = "<group>"; };
 		FC9FECB620F4C52800450B46 /* F4SPlacementModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementModelsTests.swift; sourceTree = "<group>"; };
 		FCA333A420BEA938002AA790 /* F4SMessagesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SMessagesModel.swift; sourceTree = "<group>"; };
-		FCA53B911FE00CB5009F6DB0 /* Versioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Versioning.swift; sourceTree = "<group>"; };
+		FCA53B911FE00CB5009F6DB0 /* VersioningService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersioningService.swift; sourceTree = "<group>"; };
 		FCA53B941FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SForceAppUpdateViewController.swift; sourceTree = "<group>"; };
 		FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = F4SForceAppUpdateViewController.xib; sourceTree = "<group>"; };
 		FCA6C8242107163B00A222FE /* F4SConfirmUseVoucherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SConfirmUseVoucherView.swift; sourceTree = "<group>"; };
@@ -988,7 +984,6 @@
 			children = (
 				40E78E9F1DD5E208000A3776 /* LocationHelper.swift */,
 				FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */,
-				FCA53B911FE00CB5009F6DB0 /* Versioning.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1721,7 +1716,8 @@
 			isa = PBXGroup;
 			children = (
 				FC1E6A48221714B800DC335B /* AppCoordinatorTests.swift */,
-				FCD683802248A5DD000B7FA2 /* Apply Coordinator */,
+				FC8E3F4922D33A4C00102C37 /* VersionCheckCoordinatorTests.swift */,
+				FC17E02E223A378D00B32CBD /* ApplyCoordinatorTests.swift */,
 			);
 			path = "Coordinator tests";
 			sourceTree = "<group>";
@@ -1773,7 +1769,6 @@
 		FC62FF8320EF6CEF003E52C5 /* F4SAPIServices */ = {
 			isa = PBXGroup;
 			children = (
-				FC9B28AA222FAF870077CFF0 /* API used in the app */,
 				FC99BDC420CFAFD400278DDE /* F4SCompanyFavouritingService.swift */,
 				2037B0B71DEC8A2400A9DE3E /* F4STemplateService.swift */,
 				FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */,
@@ -1793,7 +1788,7 @@
 				FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */,
 				FC67E609207B70CE006F07FE /* F4SCalendarService.swift */,
 				FC9EAD81210F5F64001C56CE /* F4SRoleService.swift */,
-				FC6DE52120AC4E7900F9BB71 /* F4SApiServices */,
+				FCE5194022494FDE00B550C9 /* F4SPlacementService.swift */,
 			);
 			path = F4SAPIServices;
 			sourceTree = "<group>";
@@ -1913,18 +1908,6 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
-		FC6DE52120AC4E7900F9BB71 /* F4SApiServices */ = {
-			isa = PBXGroup;
-			children = (
-				FCE5194022494FDE00B550C9 /* F4SPlacementService.swift */,
-				FC631CB520D64BD100199507 /* F4SAsynchronousOperation.swift */,
-				FC62FF9720EF75FE003E52C5 /* F4SApiUrls.swift */,
-				FC99F3D62000BE4900E3AC5A /* F4SService.swift */,
-				FC631CB720D679AC00199507 /* F4SNetworkSessionManager.swift */,
-			);
-			path = F4SApiServices;
-			sourceTree = "<group>";
-		};
 		FC72219A20FE248400F10953 /* fastlane */ = {
 			isa = PBXGroup;
 			children = (
@@ -2034,6 +2017,9 @@
 		FCB49305222A5D1B00B88B8B /* App Coordinator */ = {
 			isa = PBXGroup;
 			children = (
+				FC8E3F4722D3396A00102C37 /* VersionCheckCoordinator.swift */,
+				FCA53B911FE00CB5009F6DB0 /* VersioningService.swift */,
+				FC6A6FC622D1E04C005F625A /* AppCoordinatorFactory.swift */,
 				FC1DC06A21FE142D009ABC60 /* AppCoordinator.swift */,
 				FCEE5E1D2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift */,
 				FCB49306222A5D3B00B88B8B /* Onboarding */,
@@ -2217,14 +2203,6 @@
 				FCD3486220038C3100DC1316 /* F4SEmailVerificationError.swift */,
 			);
 			path = "F4SEmailVerification models";
-			sourceTree = "<group>";
-		};
-		FCD683802248A5DD000B7FA2 /* Apply Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				FC17E02E223A378D00B32CBD /* ApplyCoordinatorTests.swift */,
-			);
-			path = "Apply Coordinator";
 			sourceTree = "<group>";
 		};
 		FCD884F71FFBC0A000F05B08 /* View */ = {
@@ -2455,7 +2433,6 @@
 				D54E0FFD1E044B0400A51560 /* InfoWindowView.xib in Resources */,
 				40A5CF3A1DED6F8D000007AB /* InterestsView.storyboard in Resources */,
 				FCB6B8CA2074C58F0042C725 /* F4SDisplayInformationViewController.storyboard in Resources */,
-				FC9B28AB222FAF870077CFF0 /* API used in the app in Resources */,
 				FCD3486B20049DFB00DC1316 /* F4SEmailVerification.storyboard in Resources */,
 				201458C51E1CFCE500DBC9BD /* Message.storyboard in Resources */,
 				D54E10051E044BA000A51560 /* HalfWayHooray.storyboard in Resources */,
@@ -2614,7 +2591,7 @@
 				40C1A4ED1DDB36FA000F80AA /* TimelineViewController.swift in Sources */,
 				40C1A4E61DDB356B000F80AA /* TabBarViewController.swift in Sources */,
 				FCC212F4219077C000D8D5B7 /* F4SAddUrlViewController.swift in Sources */,
-				FCA53B921FE00CB5009F6DB0 /* Versioning.swift in Sources */,
+				FCA53B921FE00CB5009F6DB0 /* VersioningService.swift in Sources */,
 				D54E10071E044BC100A51560 /* HalfWayHoorayViewController.swift in Sources */,
 				FC85A5ED2191D87B004E877E /* AddDocumentsViewController+AddDocumentDelegate.swift in Sources */,
 				FCB46F0A20516FD200F0779F /* F4SFeatureSwitchTableViewCell.swift in Sources */,
@@ -2622,6 +2599,7 @@
 				FC1DC09221FE1509009ABC60 /* PersonBioView.swift in Sources */,
 				FCB6B8E52074C59C0042C725 /* F4SCalendarCollectionViewController.swift in Sources */,
 				FC1DC09021FE1509009ABC60 /* HeaderAndFooter.swift in Sources */,
+				FC6A6FC722D1E04C005F625A /* AppCoordinatorFactory.swift in Sources */,
 				FC31304B222BCA580043D014 /* RotationAwareController.swift in Sources */,
 				40A28CB21E1D1D200077D490 /* TimelineEntryTableViewCell.swift in Sources */,
 				FC21BE37220F53EB00A0A389 /* PeopleDataSource.swift in Sources */,
@@ -2712,6 +2690,7 @@
 				FCB3922C20FF1E3100792C0A /* AcceptOfferViewController.swift in Sources */,
 				FCCD6AEB1FBB4B8A0088D7C7 /* CompanyInfoTableViewCell.swift in Sources */,
 				40C1A51E1DDF5ACE000F80AA /* GMUSimpleClusterAlgorithm.m in Sources */,
+				FC8E3F4822D3396A00102C37 /* VersionCheckCoordinator.swift in Sources */,
 				40A5CF3C1DED6FA2000007AB /* InterestsViewController.swift in Sources */,
 				40E78E701DD32BD4000A3776 /* MenuHelper.swift in Sources */,
 				FCB4930A222A879000B88B8B /* FavouritesCoordinator.swift in Sources */,
@@ -2719,7 +2698,6 @@
 				2037B0A71DEC3C3B00A9DE3E /* InterestCoreDataManager.swift in Sources */,
 				204C89551DF5A36100D8493A /* TemplateChoiceDB.swift in Sources */,
 				204C89781DF5F0B200D8493A /* ChooseAttributesTableViewCell.swift in Sources */,
-				FC99F3D72000BE4900E3AC5A /* F4SService.swift in Sources */,
 				FCBF3F2D22993C2100C0A4F9 /* UserDetailsCoordinator.swift in Sources */,
 				FC4BB6051FA20F4100173864 /* F4SPartner.swift in Sources */,
 				FCF798542227F5AB00D67A7D /* RecommendationsCoordinator.swift in Sources */,
@@ -2780,7 +2758,6 @@
 				40E78E591DD32964000A3776 /* Entities.swift in Sources */,
 				FCB6B8C72074C58F0042C725 /* F4SPageHeaderView.swift in Sources */,
 				FC2D975F221860E900763B06 /* NavigationRouter.swift in Sources */,
-				FC631CB620D64BD100199507 /* F4SAsynchronousOperation.swift in Sources */,
 				FCC212FD219077C000D8D5B7 /* F4SDCDocumentViewerController.swift in Sources */,
 				204203EA1E4B110A007C7409 /* ShortlistDB.swift in Sources */,
 				203658831E1F809E00D87DC4 /* StatusCollectionViewCell.swift in Sources */,
@@ -2811,7 +2788,6 @@
 				FC9EAD8421106846001C56CE /* F4SAccepOfferContext.swift in Sources */,
 				405974081DFD449C0002DB3A /* UserDetailsViewController.swift in Sources */,
 				206F8F8C1E1E48120024937B /* MessageOptionCollectionViewCell.swift in Sources */,
-				FC631CB820D679AC00199507 /* F4SNetworkSessionManager.swift in Sources */,
 				FC0B4080226CAAEE00D992AC /* RecommendedCompaniesLocalRepository.swift in Sources */,
 				FC505517220446830013AF4C /* CompanyMapView.swift in Sources */,
 				20FEBDDA1DE5AD3400EBDCBF /* F4SImageService.swift in Sources */,
@@ -2850,7 +2826,6 @@
 				FC50E9CE2213EF5400C9A621 /* SearchModeSelectorView.swift in Sources */,
 				FCD3486620038C3100DC1316 /* F4SEmailVerificationState.swift in Sources */,
 				FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */,
-				FC62FF9820EF75FE003E52C5 /* F4SApiUrls.swift in Sources */,
 				FC99BDCA20D170CA00278DDE /* F4SDatabaseDownloadManager.swift in Sources */,
 				FC85A5EF2191D92E004E877E /* AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift in Sources */,
 				FC85FA8220A3436600059EFB /* F4SMessageServices.swift in Sources */,
@@ -2866,6 +2841,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC8E3F4A22D33A4C00102C37 /* VersionCheckCoordinatorTests.swift in Sources */,
 				FCFBD0252250DB6000A9361D /* MessageProtocolTests.swift in Sources */,
 				FCFBD0202250DAE900A9361D /* MagicLinkInterpreterTests.swift in Sources */,
 				FCFBD01C2250DA3A00A9361D /* MockNavigationRouter.swift in Sources */,

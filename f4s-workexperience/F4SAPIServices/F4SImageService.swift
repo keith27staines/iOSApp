@@ -1,6 +1,7 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderNetworking
 
 public class F4SImageService {
 

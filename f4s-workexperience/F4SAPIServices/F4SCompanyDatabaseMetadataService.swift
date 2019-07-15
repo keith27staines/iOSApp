@@ -8,6 +8,7 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderNetworking
 
 public struct F4SCompanyDatabaseMetaData : Decodable {
     public var created: Date?
@@ -31,7 +32,7 @@ public class F4SCompanyDatabaseMetadataService : F4SDataTaskService {
     
     public init() {
         let apiName = "company/dump/full"
-        super.init(baseURLString: Config.BASE_URL2, apiName: apiName)
+        super.init(baseURLString: NetworkConfig.workfinderApiV2, apiName: apiName)
     }
 }
 

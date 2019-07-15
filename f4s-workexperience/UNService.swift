@@ -63,23 +63,25 @@ class UNService : NSObject {
         presenter.present(alertController, animated: true) {}
     }
     
-    func updateBadgeNumbers() {
-        F4SUserStatusService.shared.beginStatusUpdate()
-        TabBarCoordinator.sharedInstance.updateBadges()
+    func updateTabBarBadgeNumbers() {
+        TabBarCoordinator.sharedInstance?.updateBadges()
     }
 
     func handleRemoteNotification(userInfo: [AnyHashable: Any]) {
         globalLog.debug("Handling remote notification with user info...")
         globalLog.debug(userInfo)
-        updateBadgeNumbers()  // Always take the chance to do this in response to any notification
-        guard let notificationData = F4SPushNotificationData(userInfo: userInfo) else { return }
+        guard let _ = TabBarCoordinator.sharedInstance else { return /* No UI, so can't do anything */ }
+        updateTabBarBadgeNumbers() // Always take the opportunity to do this if there is UI to show it
+        guard let notificationData = F4SPushNotificationData(userInfo: userInfo) else {
+            globalLog.debug("Unrecognised notification")
+            return
+        }
         let state = UIApplication.shared.applicationState
         if state == .background  || state == .inactive{
             globalLog.debug("navigating to best destination for notification")
             dispatchToBestDestination(notificationData: notificationData)
         }else if state == .active {
             globalLog.debug("Push notification cannot be processed because the app is active")
-            //alertUserNotificationReceived(notificationData: notificationData)
         }
     }
     
@@ -104,14 +106,13 @@ struct F4SPushNotificationData {
     var threadUuid: F4SUUID?
     
     init?(userInfo: [AnyHashable:Any]) {
-        guard
-            let aps = userInfo["aps"] as? [AnyHashable: Any],
-            let alert = aps["alert"] as? [AnyHashable: Any],
-            let typeString = userInfo["type"] as? String,
-            let type = NotificationType(rawValue: typeString) else { return nil }
+        guard let aps = userInfo["aps"] as? [AnyHashable: Any] else { return nil }
+        guard let typeString = userInfo["type"] as? String else { return nil }
+        guard let alert = aps["alert"] as? [AnyHashable: Any] else { return nil }
+        guard let notificationType = NotificationType(rawValue: typeString) else { return nil }
         self.alertTitle = (alert["title"] as? String) ?? ""
         self.alertBody = (alert["body"] as? String) ?? ""
-        self.type = type
+        self.type = notificationType
         self.threadUuid = userInfo["thread_uuid"] as? F4SUUID
     }
     

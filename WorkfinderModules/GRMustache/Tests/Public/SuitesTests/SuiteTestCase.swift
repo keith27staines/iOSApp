@@ -193,7 +193,7 @@ class SuiteTestCase: XCTestCase {
         func testRendering(_ template: Template) {
             do {
                 let rendering = try template.render(renderedValue)
-                if let expectedRendering = expectedRendering as String! {
+                if let expectedRendering = expectedRendering {
                     if expectedRendering != rendering {
                         XCTAssertEqual(rendering, expectedRendering, "Unexpected rendering of \(description)")
                     }
@@ -267,7 +267,7 @@ class SuiteTestCase: XCTestCase {
                     }
                 }
                 
-                templatesPaths.append(templatesPath, encoding)
+                templatesPaths.append((templatesPath, encoding))
             }
             
             return templatesPaths

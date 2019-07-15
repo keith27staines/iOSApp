@@ -46,7 +46,6 @@ class CompanyViewController: UIViewController {
         companyMainPageView.segmentedControl.selectedSegmentIndex = viewModel.selectedPersonIndex ?? 0
         viewModel.userLocation = companyMainPageView.mapView.userLocation.location
         refresh()
-        hidesBottomBarWhenPushed = true
     }
     
     override func viewWillAppear(_ animated: Bool) {

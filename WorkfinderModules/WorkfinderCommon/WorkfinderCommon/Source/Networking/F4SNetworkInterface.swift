@@ -34,7 +34,7 @@ public enum F4SNetworkDataErrorType {
     case genericErrorWithRetry
     case badUrl(String)
     
-    public func error(attempting: String, logError: Bool = true) -> F4SNetworkError {
+    public func error(attempting: String) -> F4SNetworkError {
         let nsError: NSError
         let code: Int
         var userInfo: [String : Any] = [:]
@@ -67,7 +67,7 @@ public enum F4SNetworkDataErrorType {
             return F4SNetworkError(localizedDescription: description, attempting: attempting, retry: false)
         }
         nsError = NSError(domain: F4SNetworkErrorDomainType.client.rawValue, code: code, userInfo: userInfo)
-        return F4SNetworkError(error: nsError, attempting: attempting, logError: logError)
+        return F4SNetworkError(error: nsError, attempting: attempting)
     }
 }
 
@@ -106,8 +106,7 @@ public struct F4SNetworkError : Error {
     /// Initializes a new instance
     /// - parameter error: the immediate error this instance will wrap]
     /// - parameter attempting: A short description of the context of the error (this might just be the operation name or a higher level description of it)
-    /// - parameter logError: If true, the error will be written to the debug log
-    public init(error: Error, attempting: String, logError: Bool = true) {
+    public init(error: Error, attempting: String) {
         nsError = error as NSError
         let code = nsError.code
         domainType = .client
@@ -118,38 +117,19 @@ public struct F4SNetworkError : Error {
         default:
             retry = false
         }
-        if logError { writeToLog() }
     }
     
     /// Initialize a generic error with optional retry 
     public init(localizedDescription: String, attempting: String, retry: Bool, logError: Bool = true) {
         let nsError = NSError(domain: "com.f4s", code: 0, userInfo: nil)
-        self.init(error: nsError, attempting: attempting, logError: logError)
+        self.init(error: nsError, attempting: attempting)
         self.retry = retry
-    }
-    
-    
-    
-    /// Writes a description to the debug log (currently the Xcode console)
-    private func writeToLog() {
-        var msg = "F4SNetworkingError"
-        if let attempting = attempting {
-            msg += " attempting to: \(attempting)"
-        }
-        msg += "\ncode = \(code)"
-        msg += "\ndomain = \(domainType.rawValue)"
-        if let reason = nsError.localizedFailureReason {
-            msg += "\nreason = \(reason)"
-        }
-        msg += "\nuserInfo = \(nsError.userInfo)"
-        //globalLog.error(msg)
     }
     
     /// Initializes a new instance
     /// - parameter response: the http resonse this instance will wrap, unless the response code is a success in which case this initializer will fail
     /// - parameter attempting: A short description of the context of the error (this might just be the operation name or a higher level description of it)
-    /// - parameter logError: If true the error will be written to the debug log
-    public init?(response: HTTPURLResponse, attempting: String, logError: Bool = true) {
+    public init?(response: HTTPURLResponse, attempting: String) {
         var retry = false
         var userInfo : [String : Any] = ["response": response]
         switch response.statusCode {
@@ -170,9 +150,8 @@ public struct F4SNetworkError : Error {
             userInfo[NSLocalizedFailureReasonErrorKey] = "Unknown reason"
         }
         let nsError = NSError(domain: "HTTP", code: response.statusCode, userInfo: userInfo)
-        self.init(error: nsError, attempting: attempting, logError: false)
+        self.init(error: nsError, attempting: attempting)
         domainType = .server
         self.retry = retry
-        if logError { writeToLog() }
     }
 }

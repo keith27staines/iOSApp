@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WorkfinderCommon
 
 class F4SForceAppUpdateViewController: UIViewController {
     
@@ -24,10 +25,13 @@ class F4SForceAppUpdateViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var updateButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        view.backgroundColor = UIColor(red: 26, green: 168, blue: 76)
+        let skinner = Skinner()
+        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: updateButton)
     }
 
     override func didReceiveMemoryWarning() {

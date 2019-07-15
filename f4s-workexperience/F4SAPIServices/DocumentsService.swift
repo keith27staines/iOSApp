@@ -8,6 +8,7 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderNetworking
 
 public protocol F4SUserDocumentsServiceProtocol {
     func getDocuments(completion: @escaping (F4SNetworkResult<F4SGetDocumentJson>) -> ())
@@ -17,7 +18,7 @@ public class F4SUserDocumentsService : F4SDataTaskService, F4SUserDocumentsServi
     
     public init() {
         let apiName = "documents"
-        super.init(baseURLString: Config.BASE_URL2, apiName: apiName)
+        super.init(baseURLString: NetworkConfig.workfinderApiV2, apiName: apiName)
     }
     
     public func getDocuments(completion: @escaping (F4SNetworkResult<F4SGetDocumentJson>) -> ()) {
@@ -39,7 +40,7 @@ public class F4SPlacementDocumentsService : F4SDataTaskService {
     public init(placementUuid: F4SUUID) {
         self.placementUuid = placementUuid
         let apiName = "placement/\(placementUuid)/documents"
-        super.init(baseURLString: Config.BASE_URL2, apiName: apiName)
+        super.init(baseURLString: NetworkConfig.workfinderApiV2, apiName: apiName)
     }
 }
 

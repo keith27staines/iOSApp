@@ -7,6 +7,7 @@
 //
 
 import WorkfinderCommon
+import WorkfinderNetworking
 
 public protocol F4SPartnerServiceProtocol {
     var apiName: String { get }
@@ -15,7 +16,7 @@ public protocol F4SPartnerServiceProtocol {
 
 public class F4SPartnerService : F4SDataTaskService {
     public init() {
-        super.init(baseURLString: Config.BASE_URL2, apiName: "partner")
+        super.init(baseURLString: NetworkConfig.workfinderApiV2, apiName: "partner")
     }
 }
 

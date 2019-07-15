@@ -9,6 +9,7 @@
 import Foundation
 import WorkfinderCommon
 import WorkfinderApplyUseCase
+import WorkfinderNetworking
 
 public protocol F4SPCalendarServiceProtocol {
 
@@ -21,7 +22,7 @@ public class F4SPCalendarService : F4SDataTaskService {
     public init(placementUuid: F4SUUID) {
         self.placementUuid = placementUuid
         let apiName = "placement/\(placementUuid)"
-        super.init(baseURLString: Config.BASE_URL2, apiName: apiName)
+        super.init(baseURLString: NetworkConfig.workfinderApiV2, apiName: apiName)
     }
 }
 

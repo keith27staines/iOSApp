@@ -46,3 +46,17 @@ class MockUserService: F4SUserServiceProtocol {
     }
     
 }
+
+class MockUserStatusService : F4SUserStatusServiceProtocol {
+    var userStatus: F4SUserStatus?
+    
+    func beginStatusUpdate() {}
+    
+    func getUserStatus(completion: @escaping (F4SNetworkResult<F4SUserStatus>) -> ()) {
+        let status = F4SUserStatus(unreadMessageCount: 1, unratedPlacements: [])
+        let result = F4SNetworkResult.success(status)
+        completion(result)
+    }
+    
+    
+}

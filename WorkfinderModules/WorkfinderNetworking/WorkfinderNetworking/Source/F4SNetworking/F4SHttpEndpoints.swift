@@ -10,9 +10,9 @@ import Foundation
 
 public struct ApiConstants {
     public static let apiKey: String =  "eTo0oeh4Yeen1oy7iDuv"
-    public static let base: String = Config.BASE
-    public static let baseUrl: String = Config.BASE_URL
-    public static let baseUrl2: String = Config.BASE_URL2
+    public static let base: String = NetworkConfig.workfinderApi
+    public static let baseUrl: String = NetworkConfig.workfinderApiV1
+    public static let baseUrl2: String = NetworkConfig.workfinderApiV2
     
     // Company
     public static let companyDatabaseUrl: String = "\(baseUrl2)/company/dump/full"
@@ -25,7 +25,7 @@ public struct ApiConstants {
     // User
     public static let registerVendorId: String = "\(baseUrl2)/register"
     public static let registerPushNotifictionToken: String = "\(baseUrl2)/register"
-    public static let updateUserProfileUrl: String = "\(baseUrl)/user/"
+    public static let updateUserProfileUrl: String = "\(baseUrl2)/user/me"
     
     // Placement
     public static let patchPlacementUrl: String = "\(baseUrl2)/placement"

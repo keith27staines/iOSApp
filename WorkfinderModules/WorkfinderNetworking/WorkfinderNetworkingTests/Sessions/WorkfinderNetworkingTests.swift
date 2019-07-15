@@ -26,14 +26,14 @@ class WorkfinderNetworkingTests: XCTestCase {
     func testSharedInstanceNotNilAfterConfigure() {
         let config = makeMockNetworkConfiguration()
         XCTAssertNil(sharedSessionManager)
-        try! configureWEXSessionManager(configuration: config, userUuid: nil)
+        try! configureWEXSessionManager(configuration: config)
         XCTAssertNotNil(sharedSessionManager)
     }
     
     func testConfigureThrowsIfCalledTwice() {
         let config = makeMockNetworkConfiguration()
-        try! configureWEXSessionManager(configuration: config, userUuid: nil)
-        XCTAssertThrowsError(try configureWEXSessionManager(configuration: config, userUuid: nil))
+        try! configureWEXSessionManager(configuration: config)
+        XCTAssertThrowsError(try configureWEXSessionManager(configuration: config))
     }
     
 }

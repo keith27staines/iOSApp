@@ -37,13 +37,11 @@ class AcceptOfferCoordinator : CoreInjectionNavigationCoordinator {
     }
     
     func didDecline() {
-        globalLog.debug("invite was declined by YP")
         navigationRouter.pop(animated: true)
         parentCoordinator?.childCoordinatorDidFinish(self)
     }
     
     func didCancel() {
-        globalLog.debug("invite was cancelled by YP")
         navigationRouter.pop(animated: true)
         parentCoordinator?.childCoordinatorDidFinish(self)
     }

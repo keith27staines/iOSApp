@@ -58,7 +58,6 @@ class LocationHelper {
                     completion(.error("Location not found."))
                     return
                 }
-                print(String(data:data, encoding: .utf8)!)
                 let decoder = JSONDecoder()
                 guard let geocodeResult = try? decoder.decode(GeocodeResult.self, from: data),
                     let coordinates = geocodeResult.coordinates() else {

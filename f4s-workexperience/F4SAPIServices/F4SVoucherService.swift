@@ -8,6 +8,7 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderNetworking
 
 public struct F4SVoucherValidationError : Codable {
     public var status: String?
@@ -25,14 +26,14 @@ public protocol F4SVoucherVerificationServiceProtocol {
 }
 
 public class F4SVoucherVerificationService : F4SDataTaskService {
-    public let placementUuid: F4SUUID
+    public let placementUuid: F4SUUID?
     public let voucherCode: F4SUUID
     
-    public init(placementUuid: F4SUUID, voucherCode: String) {
+    public init(placementUuid: F4SUUID?, voucherCode: String) {
         self.placementUuid = placementUuid
         self.voucherCode = voucherCode
         let api = "voucher/\(voucherCode)"
-        super.init(baseURLString: Config.BASE_URL2, apiName: api)
+        super.init(baseURLString: NetworkConfig.workfinderApiV2, apiName: api)
     }
 }
 
@@ -40,7 +41,8 @@ public class F4SVoucherVerificationService : F4SDataTaskService {
 extension F4SVoucherVerificationService : F4SVoucherVerificationServiceProtocol {
     
     public func verify(completion: @escaping (F4SNetworkResult<F4SVoucherValidation>) -> ()) {
-        let params = ["placement_uuid" : placementUuid]
+        var params = [String: String]()
+        if let placementUuid = self.placementUuid { params = ["placement_uuid" : placementUuid] }
         let attempting = "Validate voucher code"
         beginSendRequest(verb: .put, objectToSend: params, attempting: attempting) { (result) in
             switch result {
@@ -48,7 +50,7 @@ extension F4SVoucherVerificationService : F4SVoucherVerificationServiceProtocol 
                 completion(F4SNetworkResult<F4SVoucherValidation>.error(error))
             case .success(let data):
                 guard let data = data else {
-                    let noDataError = F4SNetworkDataErrorType.noData.error(attempting: attempting, logError: true)
+                    let noDataError = F4SNetworkDataErrorType.noData.error(attempting: attempting)
                     completion(F4SNetworkResult.error(noDataError))
                     return
                 }

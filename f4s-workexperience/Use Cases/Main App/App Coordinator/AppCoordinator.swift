@@ -13,41 +13,11 @@ public protocol RemoteNotificationsRegistrarProtocol {
 
 public protocol AppCoordinatorProtocol : Coordinating {
     var window: UIWindow { get }
-}
-
-protocol AppCoordinatoryFactoryProtocol {}
-
-struct AppCoordinatoryFactory : AppCoordinatoryFactoryProtocol {
-    
-    func makeAppCoordinator(
-        registrar: RemoteNotificationsRegistrarProtocol,
-        launchOptions: LaunchOptions? = nil,
-        installationUuid: F4SUUID,
-        user: F4SUserProtocol = F4SUser(),
-        userService: F4SUserServiceProtocol = F4SUserService(),
-        userRepository: F4SUserRepositoryProtocol = F4SUserRepository(),
-        databaseDownloadManager: F4SDatabaseDownloadManagerProtocol = F4SDatabaseDownloadManager(),
-        navigationRouter: NavigationRoutingProtocol = NavigationRouter(navigationController: UINavigationController(rootViewController: AppCoordinatorBackgroundViewController())),
-        f4sLog: F4SAnalyticsAndDebugging
-        ) -> AppCoordinatorProtocol {
-        
-        let injection = CoreInjection(
-            launchOptions: launchOptions,
-            installationUuid: installationUuid,
-            user: user,
-            userService: userService,
-            userRepository: userRepository,
-            databaseDownloadManager: databaseDownloadManager,
-            f4sLog: f4sLog)
-        
-        return AppCoordinator(registrar: registrar,
-                              navigationRouter: navigationRouter,
-                              inject: injection)
-    }
+    func performVersionCheck(resultHandler: @escaping ((F4SNetworkResult<F4SVersionValidity>)->Void))
 }
 
 class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
-    
+
     var window: UIWindow
     var injected: CoreInjectionProtocol
     var registrar: RemoteNotificationsRegistrarProtocol
@@ -55,6 +25,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     var user: F4SUserProtocol { return injected.user }
     var userService: F4SUserServiceProtocol { return injected.userService}
     var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol { return injected.databaseDownloadManager }
+    var versionCheckCoordinator: NavigationCoordinator & VersionChecking
     
     lazy var onboardingCoordinatorFactory: (_ parent: Coordinating?, _ router: NavigationRoutingProtocol) -> OnboardingCoordinatorProtocol = { [unowned self] _,_ in
         return OnboardingCoordinator(parent: self, navigationRouter: self.navigationRouter)
@@ -70,17 +41,18 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         return tabBarCoordinator
     }
     
-    public init(registrar: RemoteNotificationsRegistrarProtocol,
+    public init(versionCheckCoordinator: NavigationCoordinator & VersionChecking,
+                registrar: RemoteNotificationsRegistrarProtocol,
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol) {
-        
+        self.versionCheckCoordinator = versionCheckCoordinator
         self.registrar = registrar
         self.injected = inject
         window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = navigationRouter.rootViewController
         super.init(parent:nil, navigationRouter: navigationRouter)
+        versionCheckCoordinator.parentCoordinator = self
         window.makeKeyAndVisible()
-        configureNetwork()
     }
     
     var onboardingCoordinator: OnboardingCoordinatorProtocol?
@@ -90,7 +62,36 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
         _ = UNService.shared // ensure user notification service is wired up early
         _ = F4SEmailVerificationModel.shared
-        
+        if launchOptions?[.remoteNotification] == nil {
+            performVersionCheck(resultHandler: onVersionCheckResult)
+        } else {
+            startTabBarCoordinator()
+        }
+    }
+    
+    func performVersionCheck(resultHandler: @escaping (F4SNetworkResult<F4SVersionValidity>)->Void) {
+        if !childCoordinators.contains(where: { (key, coordinating) -> Bool in
+            coordinating.uuid == versionCheckCoordinator.uuid
+        }) {
+            addChildCoordinator(versionCheckCoordinator)
+        }
+        versionCheckCoordinator.versionCheckCompletion = resultHandler
+        versionCheckCoordinator.start()
+    }
+    
+    func onVersionCheckResult(_ result:F4SNetworkResult<F4SVersionValidity>) {
+        switch result {
+        case .error(_):
+            self.presentNoNetworkMustRetry(retryOperation: { [weak self] in
+                self?.versionCheckCoordinator.start()
+            })
+        case .success(let isValid):
+            guard isValid else { return }
+            startOnboarding()
+        }
+    }
+    
+    func startOnboarding() {
         let onboardingCoordinator = onboardingCoordinatorFactory(self, navigationRouter)
         self.onboardingCoordinator = onboardingCoordinator
         onboardingCoordinator.parentCoordinator = self
@@ -119,12 +120,11 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     private func onUserIsRegistered(userUuid: F4SUUID) {
         injected.user.updateUuid(uuid: userUuid)
         injected.userRepository.save(user: injected.user)
-        updateWEXSessionManagerWithUserUUID(userUuid)
-        printDebugUserInfo()
+        logStartupInformation()
         injected.log.identity(userId: userUuid)
         _ = F4SNetworkSessionManager.shared
         registrar.registerForRemoteNotifications()
-        F4SUserStatusService.shared.beginStatusUpdate()
+        injected.userStatusService.beginStatusUpdate()
         databaseDownloadManager.start()
         showOnboardingUIIfNecessary()
     }
@@ -140,6 +140,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     private func startTabBarCoordinator() {
         addChildCoordinator(tabBarCoordinator)
         tabBarCoordinator.start()
+        performVersionCheck { (result) in }
     }
     
     
@@ -149,8 +150,8 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         userService.registerDeviceWithServer(installationUuid: installationUuid) { [weak self] (result) in
             guard let strongSelf = self else { return }
             switch result {
-            case .error(let error):
-                globalLog.info("Couldn't register user, offering retry \(error)")
+            case .error(_):
+                globalLog.info("Couldn't register user, offering retry")
                 strongSelf.presentNoNetworkMustRetry(retryOperation: {
                     strongSelf.ensureDeviceIsRegistered(completion: completion)
                 })
@@ -166,11 +167,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
 }
 
 extension AppCoordinator {
-    func presentForceUpdate() {
-        let rootVC = window.rootViewController?.topMostViewController
-        let forceUpdateVC = F4SForceAppUpdateViewController()
-        rootVC?.present(forceUpdateVC, animated: true, completion: nil)
-    }
     
     func presentNoNetworkMustRetry(retryOperation: @escaping () -> ()) {
         let rootVC = window.rootViewController?.topMostViewController
@@ -205,27 +201,21 @@ extension AppCoordinator {
 }
 
 extension AppCoordinator {
-    func printDebugUserInfo() {
+    func logStartupInformation() {
         let info = """
-        ***************
+        
+        
+        ****************************************************************
+        Environment name = \(Config.environmentName)
         Installation UUID = \(injected.installationUuid)
         User UUID = \(F4SUser().uuid ?? "nil user")
-        ***************
+        Base api url = \(NetworkConfig.workfinderApi)
+        V1 api url = \(NetworkConfig.workfinderApiV1)
+        v2 api url = \(NetworkConfig.workfinderApiV2)
+        ****************************************************************
+        
         """
-        globalLog.debug("\n\(info)")
-    }
-    
-    func configureNetwork(
-        wexApiKey: String = ApiConstants.apiKey,
-        baseUrlString: String = Config.BASE,
-        v1ApiUrlString: String = Config.BASE_URL,
-        v2ApiUrlString: String = Config.BASE_URL2) {
-        let config: WEXNetworkingConfigurationProtocol = WEXNetworkingConfiguration(
-            wexApiKey: wexApiKey,
-            baseUrlString: baseUrlString,
-            v1ApiUrlString: v1ApiUrlString,
-            v2ApiUrlString: v2ApiUrlString)
-        try? configureWEXSessionManager(configuration: config, userUuid: injected.user.uuid)
+        injected.log.debug(info, functionName: #function, fileName: #file, lineNumber: #line)
     }
 }
 

@@ -85,7 +85,6 @@ extension RatePlacementViewController {
         guard let placementUuid = self.placementUuid,
             let placement = PlacementDBOperations.sharedInstance.getPlacementWithUuid(placementUuid: placementUuid) else {
             self.company = nil
-            globalLog.debug("Can't get company")
             return
         }
 
@@ -128,15 +127,11 @@ extension RatePlacementViewController {
         if let reachability = Reachability() {
             if !reachability.isReachableByAnyMeans {
                 sharedUserMessageHandler.displayAlertFor("No Internet Connection.", parentCtrl: self)
-                globalLog.debug("No internet connection")
                 return
             }
         }
 
-        guard let placementUuid = self.placementUuid else {
-            globalLog.debug("Placement uuid is empty")
-            return
-        }
+        guard let placementUuid = self.placementUuid else { return }
 
         sharedUserMessageHandler.showLoadingOverlay(self.view)
         let rating = self.ratingControlStackView.rating
@@ -146,7 +141,7 @@ extension RatePlacementViewController {
             case .error(let error):
                 globalLog.error(error)
             case .success(_):
-                globalLog.debug("rating of \(rating) submited for placement \(placementUuid)")
+                break
             }
             sharedUserMessageHandler.hideLoadingOverlay()
             strongSelf.backgroundPopoverView.removeFromSuperview()

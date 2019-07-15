@@ -8,6 +8,7 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderNetworking
 
 public protocol F4SDocumentUploaderDelegate : class {
     func documentUploader(_ uploader: F4SDocumentUploader, didChangeState state: F4SDocumentUploader.State)
@@ -83,28 +84,21 @@ public class F4SDocumentUploader : NSObject {
         headers["Content-Length"] = String(data.count)
         request.allHTTPHeaderFields = headers
         request.httpBody = data
-        task = session.dataTask(with: request) { [weak self] (data, response, error) in
+        task = F4SDataTaskService.dataTask(with: request, session: session, attempting: "Upload documents", completion: { [weak self] (result) in
             DispatchQueue.main.async {
-                guard let this = self else {
-                    return
-                }
-                if let error = error {
+                guard let this = self else { return }
+                switch result {
+                case .error(let error):
                     this.state = .failed(error: error)
                     return
-                }
-                guard let httpResponse = response as? HTTPURLResponse else { return }
-                if let error = F4SNetworkError(response: httpResponse, attempting: "upload document") {
-                    this.state = .failed(error: error)
-                    return
-                }
-
-                if let data = data {
-                    print("Document did upload: " + String(data:data, encoding: .utf8)!)
+                case .success(let data):
+                    guard let _ = data else { return }
+                    print("Document(s) did upload")
                     document.isUploaded = true
                     this.state = .completed
                 }
             }
-        }
+        })
     }
     
     func cancel() {

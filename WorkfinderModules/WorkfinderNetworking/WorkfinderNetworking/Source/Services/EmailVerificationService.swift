@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 public class EmailVerificationService {
     public let email: String
@@ -63,7 +64,8 @@ public class EmailVerificationService {
         let request = prepareRequest(urlString: startUrlString, method: "POST", bodyData: payloadData)
         task?.cancel()
         task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [ weak self] in
+                self?.logResult(attempting: "Start email verification", request: request, data: data, response: response, error: error)
                 if let _ = error { onFailure(email, EmailSubmissionError.client) ; return }
                 let statusCode = (response as! HTTPURLResponse).statusCode
                 let submissionError = EmailSubmissionError.emailSubmissionError(from: statusCode)
@@ -74,6 +76,20 @@ public class EmailVerificationService {
         task?.resume()
     }
     
+    func logResult(attempting: String, request: URLRequest, data: Data?, response: URLResponse?, error: Error?) {
+        let httpResponse = response as? HTTPURLResponse
+        if let error = error {
+            logger.logDataTaskFailure(error: error, request: request, response: httpResponse, responseData: data)
+            return
+        }
+        if data == nil {
+            let wexError = WEXErrorsFactory.networkErrorFrom(response: httpResponse!, responseData: data, attempting: attempting)!
+            logger.logDataTaskFailure(error: wexError, request: request, response: httpResponse, responseData: data)
+            return
+        }
+        logger.logDataTaskSuccess(request: request, response: httpResponse!, responseData: data!)
+    }
+    
     public func verifyWithCode(email: String, code: String, onSuccess: @escaping  ( _ email:String) -> Void, onFailure: @escaping (_ email:String, _ error:CodeValidationError) -> Void) {
         guard email == self.email else { onFailure(email, CodeValidationError.emailNotTheSame) ; return }
         let payload = VerifyPayload(username: email, password: code)
@@ -81,7 +97,8 @@ public class EmailVerificationService {
         let request = prepareRequest(urlString: verifyUrlString, method: "POST", bodyData: payloadData)
         task?.cancel()
         task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [ weak self] in
+                self?.logResult(attempting: "Verify with code", request: request, data: data, response: response, error: error)
                 if let _ = error { onFailure(email, CodeValidationError.client) ; return }
                 let statusCode = (response as! HTTPURLResponse).statusCode
                 let verificationError = CodeValidationError.codeValidationError(from: statusCode)
