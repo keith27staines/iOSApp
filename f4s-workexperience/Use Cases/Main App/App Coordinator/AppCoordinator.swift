@@ -210,7 +210,6 @@ extension AppCoordinator {
         Installation UUID = \(injected.installationUuid)
         User UUID = \(F4SUser().uuid ?? "nil user")
         Base api url = \(NetworkConfig.workfinderApi)
-        V1 api url = \(NetworkConfig.workfinderApiV1)
         v2 api url = \(NetworkConfig.workfinderApiV2)
         ****************************************************************
         

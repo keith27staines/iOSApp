@@ -11,7 +11,6 @@ import Foundation
 public struct ApiConstants {
     public static let apiKey: String =  "eTo0oeh4Yeen1oy7iDuv"
     public static let base: String = NetworkConfig.workfinderApi
-    public static let baseUrl: String = NetworkConfig.workfinderApiV1
     public static let baseUrl2: String = NetworkConfig.workfinderApiV2
     
     // Company
