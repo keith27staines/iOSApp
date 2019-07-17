@@ -9,40 +9,6 @@
 import Foundation
 import WorkfinderCommon
 
-public enum F4SHttpRequestVerb {
-    case get
-    case put
-    case patch
-    case post
-    case delete
-    
-    var name: String {
-        switch self {
-        case .get:
-            return "GET"
-        case .put:
-            return "PUT"
-        case .patch:
-            return "PATCH"
-        case .post:
-            return "POST"
-        case .delete:
-            return "DELETE"
-        }
-    }
-}
-
-extension DateFormatter {
-    public static let iso8601Full: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
-        formatter.calendar = Calendar(identifier: .iso8601)
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        return formatter
-    }()
-}
-
 open class F4SDataTaskService {
     
     public let session: URLSession

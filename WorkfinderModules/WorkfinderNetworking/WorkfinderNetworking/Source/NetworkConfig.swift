@@ -36,7 +36,7 @@ public struct NetworkConfig {
             wexApiKey: wexApiKey,
             baseUrlString: NetworkConfig.workfinderApi,
             v2ApiUrlString: NetworkConfig.workfinderApiV2)
-        F4SNetworkSessionManager.shared = F4SNetworkSessionManager(log: log)
+        F4SNetworkSessionManager.shared = F4SNetworkSessionManager(log: log, wexApiKey: wexApiKey)
         try? configureWEXSessionManager(configuration: config)
     }
 }
