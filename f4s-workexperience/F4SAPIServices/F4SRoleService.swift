@@ -16,7 +16,7 @@ public class F4SRoleService {
     
     public func getRoleForCompany(companyUuid: F4SUUID, roleUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRoleJson>) -> ()) {
         let attempting = "Get role"
-        var url = URL(string: ApiConstants.roleUrl)!
+        var url = URL(string: WorkfinderEndpoint.roleUrl)!
         url.appendPathComponent(companyUuid)
         url.appendPathComponent("roles")
         url.appendPathComponent(roleUuid)

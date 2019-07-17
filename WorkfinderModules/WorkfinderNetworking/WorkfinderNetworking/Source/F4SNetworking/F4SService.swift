@@ -252,7 +252,7 @@ open class F4SDataTaskService {
 extension F4SDataTaskService {
     /// Returns a dictionary of headers configured for use with the workfinder api
     public static var defaultHeaders : [String:String] {
-        let header: [String : String] = ["wex.api.key": ApiConstants.apiKey]
+        let header: [String : String] = ["wex.api.key": NetworkConfig.wexApiKey]
         return header
     }
 

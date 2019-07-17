@@ -31,7 +31,7 @@ public class F4SNetworkSessionManager {
     internal var _smallImageSession: URLSession?
     
     internal var defaultHeaders : [String:String] {
-        let header: [String : String] = ["wex.api.key": ApiConstants.apiKey]
+        let header: [String : String] = ["wex.api.key": NetworkConfig.wexApiKey]
         return header
     }
     

@@ -1,15 +1,8 @@
-//
-//  F4SApiUrls.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 06/07/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
-//
 
 import Foundation
 
-public struct ApiConstants {
-    public static let apiKey: String =  "eTo0oeh4Yeen1oy7iDuv"
+public struct WorkfinderEndpoint {
+    
     public static let base: String = NetworkConfig.workfinderApi
     public static let baseUrl2: String = NetworkConfig.workfinderApiV2
     

@@ -173,7 +173,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     
     func configureNetwork(
-        wexApiKey: String = ApiConstants.apiKey,
+        wexApiKey: String = Config.wexApiKey,
         baseUrlString: String = Config.workfinderApiBase) {
         NetworkConfig.configure(wexApiKey: wexApiKey, workfinderBaseApi: baseUrlString, log: f4sLog)
     }

@@ -22,7 +22,7 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
     
     public func getPlacementOffer(uuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4STimelinePlacement>) -> ()) {
         let attempting = "Get placement"
-        var url = URL(string: ApiConstants.offerUrl)!
+        var url = URL(string: WorkfinderEndpoint.offerUrl)!
         url.appendPathComponent(uuid)
         let session = F4SNetworkSessionManager.shared.interactiveSession
         let urlRequest = F4SDataTaskService.urlRequest(verb: .get, url: url, dataToSend: nil)
@@ -42,7 +42,7 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
     
     public func getAllPlacementsForUser(completion: @escaping (F4SNetworkResult<[F4STimelinePlacement]>) -> ()) {
         let attempting = "Get all placements"
-        let url = URL(string: ApiConstants.allPlacementsUrl)!
+        let url = URL(string: WorkfinderEndpoint.allPlacementsUrl)!
         let session = F4SNetworkSessionManager.shared.interactiveSession
         let urlRequest = F4SDataTaskService.urlRequest(verb: .get, url: url, dataToSend: nil)
         dataTask?.cancel()
@@ -93,7 +93,7 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
     
     internal func patchPlacement<T:Encodable>(_ uuid: F4SUUID, json: T, attempting: String, completion: @escaping (F4SNetworkResult<Bool>) -> ()) {
         do {
-            let urlString = ApiConstants.patchPlacementUrl + "/\(uuid)"
+            let urlString = WorkfinderEndpoint.patchPlacementUrl + "/\(uuid)"
             let url = URL(string: urlString)!
             let session = F4SNetworkSessionManager.shared.interactiveSession
             let encoder = JSONEncoder()

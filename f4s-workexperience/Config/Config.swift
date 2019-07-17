@@ -3,6 +3,7 @@
 //
 
 struct Config {
+    static let wexApiKey = "eTo0oeh4Yeen1oy7iDuv"
     #if STAGING
     // Development & testing config
     static let environmentName = "STAGING"
