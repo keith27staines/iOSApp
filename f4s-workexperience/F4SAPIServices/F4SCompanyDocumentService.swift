@@ -30,7 +30,7 @@ public class F4SCompanyDocumentService {
     public func requestDocuments(companyUuid: F4SUUID, documents: F4SCompanyDocuments, completion: @escaping ((F4SNetworkResult<Bool>) -> ())) {
         let json = Json(documents: documents)
         let attempting = "Request company documents"
-        var url = URL(string: ApiConstants.companyDocumentsUrl)!
+        var url = URL(string: WorkfinderEndpoint.companyDocumentsUrl)!
         url.appendPathComponent(companyUuid)
         url.appendPathComponent("documents")
         let session = F4SNetworkSessionManager.shared.interactiveSession
@@ -57,7 +57,7 @@ public class F4SCompanyDocumentService {
     public func getDocuments(companyUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SGetCompanyDocuments>)->()) {
         
         let attempting = "Get company documents"
-        var url = URL(string: ApiConstants.companyDocumentsUrl)!
+        var url = URL(string: WorkfinderEndpoint.companyDocumentsUrl)!
         url.appendPathComponent(companyUuid)
         url.appendPathComponent("documents")
         let session = F4SNetworkSessionManager.shared.interactiveSession

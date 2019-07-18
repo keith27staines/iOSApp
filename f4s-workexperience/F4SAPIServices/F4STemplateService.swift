@@ -16,7 +16,7 @@ public class F4STemplateService: F4STemplateServiceProtocol {
     public func getTemplates(completion: @escaping (F4SNetworkResult<[F4STemplate]>) -> Void) {
         globalLog.debug("Entered F4STemplateService.getTemplates")
         let attempting = "Get templates"
-        let url = URL(string: ApiConstants.templateUrl)!
+        let url = URL(string: WorkfinderEndpoint.templateUrl)!
         let request = F4SDataTaskService.urlRequest(verb: .get, url: url, dataToSend: nil)
         let session = F4SNetworkSessionManager.shared.interactiveSession
         let dataTask = F4SDataTaskService.dataTask(with: request, session: session, attempting: attempting) { (result) in

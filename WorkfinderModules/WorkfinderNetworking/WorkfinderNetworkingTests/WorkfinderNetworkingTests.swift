@@ -12,15 +12,14 @@ import WorkfinderCommon
 
 class WorkfinderNetworkingTests: XCTestCase {
     
-    override func setUp() { super.tearDown() }
-    
-    override func tearDown() {
+    override func setUp() {
         super.setUp()
         sharedSessionManager = nil
     }
     
-    func testSharedInstanceIsNilBeforeCallingCreate() {
-        XCTAssertNil(sharedSessionManager)
+    override func tearDown() {
+        super.tearDown()
+        sharedSessionManager = nil
     }
     
     func testSharedInstanceNotNilAfterConfigure() {
@@ -34,6 +33,15 @@ class WorkfinderNetworkingTests: XCTestCase {
         let config = makeMockNetworkConfiguration()
         try! configureWEXSessionManager(configuration: config)
         XCTAssertThrowsError(try configureWEXSessionManager(configuration: config))
+    }
+    
+    func test_WEXHTTPRequestVerb_names() {
+        let data = Data()
+        XCTAssertEqual(WEXHTTPRequestVerb.delete.name, "DELETE")
+        XCTAssertEqual(WEXHTTPRequestVerb.get.name, "GET")
+        XCTAssertEqual(WEXHTTPRequestVerb.patch(data).name, "PATCH")
+        XCTAssertEqual(WEXHTTPRequestVerb.post(data).name, "POST")
+        XCTAssertEqual(WEXHTTPRequestVerb.put(data).name, "PUT")
     }
     
 }

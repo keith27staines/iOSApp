@@ -4,6 +4,7 @@ import WorkfinderCommon
 public class F4SNetworkSessionManager {
     
     // MARK:- Public interface
+    public let wexApiKey: String
     
     public static var shared: F4SNetworkSessionManager!
     
@@ -21,7 +22,8 @@ public class F4SNetworkSessionManager {
         return _smallImageSession!
     }
     
-    public init(log: F4SAnalyticsAndDebugging?) {
+    public init(log: F4SAnalyticsAndDebugging?, wexApiKey: String = NetworkConfig.wexApiKey) {
+        self.wexApiKey = wexApiKey
         logger = Logger(log: log)
     }
     
@@ -31,7 +33,7 @@ public class F4SNetworkSessionManager {
     internal var _smallImageSession: URLSession?
     
     internal var defaultHeaders : [String:String] {
-        let header: [String : String] = ["wex.api.key": ApiConstants.apiKey]
+        let header: [String : String] = ["wex.api.key": wexApiKey]
         return header
     }
     
@@ -47,8 +49,8 @@ public class F4SNetworkSessionManager {
         configuration.allowsCellularAccess = true
         let memory = 5 * 1024 * 1024
         let disk = 10 * memory
-        let name = "smallImageCache"
-        let cache = URLCache(memoryCapacity: memory, diskCapacity: disk, diskPath: name)
+        let diskPath = "smallImageCache"
+        let cache = URLCache(memoryCapacity: memory, diskCapacity: disk, diskPath: diskPath)
         configuration.urlCache = cache
         configuration.requestCachePolicy = .useProtocolCachePolicy
         return configuration

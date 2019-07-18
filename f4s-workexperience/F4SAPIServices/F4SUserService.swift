@@ -29,7 +29,7 @@ public class F4SUserService : F4SUserServiceProtocol {
         let attempting = "Update user"
         if let age = user.age() { user.requiresConsent = age < 16 }
         if user.parentEmail?.isEmpty == true { user.parentEmail = nil }
-        let url = URL(string: ApiConstants.updateUserProfileUrl)!
+        let url = URL(string: WorkfinderEndpoint.updateUserProfileUrl)!
         let session = F4SNetworkSessionManager.shared.interactiveSession
         do {
             let encoder = JSONEncoder()
@@ -72,7 +72,7 @@ public class F4SUserService : F4SUserServiceProtocol {
     
     public func registerDeviceWithServer(installationUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRegisterResult>) -> Void) {
         let attempting = "Register anonymous user on server"
-        let url = URL(string: ApiConstants.registerVendorId)!
+        let url = URL(string: WorkfinderEndpoint.registerVendorId)!
         let session = F4SNetworkSessionManager.shared.interactiveSession
         let anonymousUser = F4SAnonymousUser(vendorUuid: installationUuid, clientType: "ios", apnsEnvironment: Config.apnsEnv)
         let encoder = JSONEncoder()
@@ -102,7 +102,7 @@ public class F4SUserService : F4SUserServiceProtocol {
     
     public func enablePushNotificationForUser(installationUuid: F4SUUID, withDeviceToken: String, completion: @escaping (F4SNetworkResult<F4SPushNotificationStatus>) -> Void) {
         let attempting = "Enable push notification on server"
-        let url = URL(string: ApiConstants.registerPushNotifictionToken + "/\(installationUuid)")!
+        let url = URL(string: WorkfinderEndpoint.registerPushNotifictionToken + "/\(installationUuid)")!
         let session = F4SNetworkSessionManager.shared.interactiveSession
         let pushToken = F4SPushToken(pushToken: withDeviceToken)
         let encoder = JSONEncoder()

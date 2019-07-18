@@ -16,7 +16,6 @@ func makeMockNetworkConfiguration(
     let config: WEXNetworkingConfigurationProtocol = WEXNetworkingConfiguration(
         wexApiKey: wexApiKey,
         baseUrlString: baseUrlString,
-        v1ApiUrlString: v1ApiUrlString,
         v2ApiUrlString: v2ApiUrlString)
     return config
 }

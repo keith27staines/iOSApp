@@ -1,10 +1,3 @@
-//
-//  WorkfinderSessionManager.swift
-//  WorkfinderNetworking
-//
-//  Created by Keith Dev on 10/03/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
 
 import WorkfinderCommon
 
@@ -14,25 +7,33 @@ enum HeaderKeys : String {
     case wexApiKey = "wex.api.key"
 }
 
+/// Manages sessions for WEX services (might soon be abandoned in favour of F4SNetworkSessionManager
 public class WEXSessionManager {
     
-    // MARK:- Public api
     
+    /// Initialises a new instance of the session manager
+    ///
+    /// - Parameter configuration: contains api keys and base urls for endpoints
     public init(configuration: WEXNetworkingConfigurationProtocol) {
         self.configuration = configuration
     }
     
+    /// A session intended for general interactive use against the WEX api
     lazy public internal (set) var wexUserSession: URLSession = {
         makeWexUserSession()
     }()
     
+    
+    /// A session intended for downloading small images
     lazy public internal (set) var smallImageSession: URLSession = {
         makeSmallImageSession()
     }()
     
     // MARK:- Internal storage
     
+    /// A singleton shared instance of the session manager
     static var shared: WEXSessionManager!
+    
     let configuration: WEXNetworkingConfigurationProtocol
     
 }
