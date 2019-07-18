@@ -143,26 +143,29 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         performVersionCheck { (result) in }
     }
     
-    
     private func ensureDeviceIsRegistered(completion: @escaping (F4SUUID)->()) {
         let installationUuid = injected.installationUuid
-        let userUuid = injected.user.uuid
-        userService.registerDeviceWithServer(installationUuid: installationUuid) { [weak self] (result) in
-            guard let strongSelf = self else { return }
-            switch result {
-            case .error(_):
-                globalLog.info("Couldn't register user, offering retry")
-                strongSelf.presentNoNetworkMustRetry(retryOperation: {
-                    strongSelf.ensureDeviceIsRegistered(completion: completion)
-                })
-            case .success(let result):
-                guard let anonymousUserUuid = result.uuid else {
-                    globalLog.severe("registering user failed to obtain uuid")
-                    fatalError("registering user failed to obtain uuid")
+        guard let userUuid = injected.user.uuid  else {
+            userService.registerDeviceWithServer(installationUuid: installationUuid) { [weak self] (result) in
+                guard let strongSelf = self else { return }
+                switch result {
+                case .error(_):
+                    globalLog.info("Couldn't register user, offering retry")
+                    strongSelf.presentNoNetworkMustRetry(retryOperation: {
+                        strongSelf.ensureDeviceIsRegistered(completion: completion)
+                    })
+                case .success(let result):
+                    guard let anonymousUserUuid = result.uuid else {
+                        let error = NSError(domain: "F4S", code: 1, userInfo: [NSLocalizedDescriptionKey: "No uuid returned when registering device with uuid \(installationUuid)"])
+                        f4sLog.notifyError(error, functionName: #function, fileName: #file, lineNumber: #line)
+                        fatalError("registering device failed to obtain uuid")
+                    }
+                    completion(anonymousUserUuid)
                 }
-                completion(userUuid ?? anonymousUserUuid)
             }
+            return
         }
+        completion(userUuid)
     }
 }
 
