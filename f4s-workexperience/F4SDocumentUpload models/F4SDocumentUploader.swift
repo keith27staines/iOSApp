@@ -54,7 +54,7 @@ public class F4SDocumentUploader : NSObject {
     public let placementUuid: F4SUUID
     
     public var targetUrl: URL {
-        let urlString = ApiConstants.postDocumentsUrl + "/\(placementUuid)/documents"
+        let urlString = WorkfinderEndpoint.postDocumentsUrl + "/\(placementUuid)/documents"
         let url = URL(string: urlString)
         return url!
     }

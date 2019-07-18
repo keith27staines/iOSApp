@@ -251,10 +251,6 @@
 		FCB3922E21005DE300792C0A /* F4SPlacementDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB3922D21005DE300792C0A /* F4SPlacementDetail.swift */; };
 		FCB3923021006AB500792C0A /* F4SPlacementInviteDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB3922F21006AB500792C0A /* F4SPlacementInviteDetailTableViewController.swift */; };
 		FCB46F02204FD86D00F0779F /* F4SLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46F01204FD86D00F0779F /* F4SLogViewController.swift */; };
-		FCB46F042051365400F0779F /* F4SFeatureSwitchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46F032051365400F0779F /* F4SFeatureSwitchesViewController.swift */; };
-		FCB46F0820513D0100F0779F /* F4SFeatureSwitchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46F0720513D0100F0779F /* F4SFeatureSwitchModel.swift */; };
-		FCB46F0A20516FD200F0779F /* F4SFeatureSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46F0920516FD200F0779F /* F4SFeatureSwitchTableViewCell.swift */; };
-		FCB46F0C20518EE900F0779F /* F4SFeatureSwitchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46F0B20518EE900F0779F /* F4SFeatureSwitchService.swift */; };
 		FCB49301222A4B3B00B88B8B /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB49300222A4B3B00B88B8B /* SearchCoordinator.swift */; };
 		FCB49308222A875300B88B8B /* TimelineCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB49307222A875300B88B8B /* TimelineCoordinator.swift */; };
 		FCB4930A222A879000B88B8B /* FavouritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB49309222A879000B88B8B /* FavouritesCoordinator.swift */; };
@@ -699,10 +695,6 @@
 		FCB3922D21005DE300792C0A /* F4SPlacementDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementDetail.swift; sourceTree = "<group>"; };
 		FCB3922F21006AB500792C0A /* F4SPlacementInviteDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementInviteDetailTableViewController.swift; sourceTree = "<group>"; };
 		FCB46F01204FD86D00F0779F /* F4SLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SLogViewController.swift; sourceTree = "<group>"; };
-		FCB46F032051365400F0779F /* F4SFeatureSwitchesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SFeatureSwitchesViewController.swift; sourceTree = "<group>"; };
-		FCB46F0720513D0100F0779F /* F4SFeatureSwitchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SFeatureSwitchModel.swift; sourceTree = "<group>"; };
-		FCB46F0920516FD200F0779F /* F4SFeatureSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SFeatureSwitchTableViewCell.swift; sourceTree = "<group>"; };
-		FCB46F0B20518EE900F0779F /* F4SFeatureSwitchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SFeatureSwitchService.swift; sourceTree = "<group>"; };
 		FCB49300222A4B3B00B88B8B /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
 		FCB49307222A875300B88B8B /* TimelineCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineCoordinator.swift; sourceTree = "<group>"; };
 		FCB49309222A879000B88B8B /* FavouritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesCoordinator.swift; sourceTree = "<group>"; };
@@ -998,7 +990,6 @@
 				FC62FF9420EF71A2003E52C5 /* F4SCompanyDocuments */,
 				FCD3485B20038C3100DC1316 /* F4SEmailVerification models */,
 				FC62FF9220EF70F9003E52C5 /* F4SDocumentUpload models */,
-				FC62FF9120EF70AB003E52C5 /* F4SFeatureSwitch models */,
 				FC62FF8620EF6D98003E52C5 /* F4SPlacement models */,
 				FC62FF8920EF6EA8003E52C5 /* F4SVoucher models */,
 				FC62FF8720EF6E75003E52C5 /* F4STemplate models */,
@@ -1697,8 +1688,6 @@
 				FC31F096204D54E3009DD526 /* Debug.storyboard */,
 				FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */,
 				FCB46F01204FD86D00F0779F /* F4SLogViewController.swift */,
-				FCB46F032051365400F0779F /* F4SFeatureSwitchesViewController.swift */,
-				FCB46F0920516FD200F0779F /* F4SFeatureSwitchTableViewCell.swift */,
 			);
 			path = HiddenDebugScreen;
 			sourceTree = "<group>";
@@ -1774,7 +1763,6 @@
 				FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */,
 				FC64A594211ACA39006464A5 /* F4SCompanyService.swift */,
 				FCA6D2B51FA88CE00037962B /* F4SPartnerService.swift */,
-				FCB46F0B20518EE900F0779F /* F4SFeatureSwitchService.swift */,
 				FCD388E6208E27E500FC73C5 /* F4SCompanyDocumentService.swift */,
 				FC85FA8120A3436600059EFB /* F4SMessageServices.swift */,
 				FC99F3D31FFE533000E3AC5A /* F4SRecommendationService.swift */,
@@ -1842,14 +1830,6 @@
 			children = (
 			);
 			name = "F4SContent models";
-			sourceTree = "<group>";
-		};
-		FC62FF9120EF70AB003E52C5 /* F4SFeatureSwitch models */ = {
-			isa = PBXGroup;
-			children = (
-				FCB46F0720513D0100F0779F /* F4SFeatureSwitchModel.swift */,
-			);
-			path = "F4SFeatureSwitch models";
 			sourceTree = "<group>";
 		};
 		FC62FF9220EF70F9003E52C5 /* F4SDocumentUpload models */ = {
@@ -2594,7 +2574,6 @@
 				FCA53B921FE00CB5009F6DB0 /* VersioningService.swift in Sources */,
 				D54E10071E044BC100A51560 /* HalfWayHoorayViewController.swift in Sources */,
 				FC85A5ED2191D87B004E877E /* AddDocumentsViewController+AddDocumentDelegate.swift in Sources */,
-				FCB46F0A20516FD200F0779F /* F4SFeatureSwitchTableViewCell.swift in Sources */,
 				FC24D238226AEDD800FA04A1 /* RecommendationsListViewModel.swift in Sources */,
 				FC1DC09221FE1509009ABC60 /* PersonBioView.swift in Sources */,
 				FCB6B8E52074C59C0042C725 /* F4SCalendarCollectionViewController.swift in Sources */,
@@ -2676,7 +2655,6 @@
 				40C1A5231DDF5ACE000F80AA /* POIItem.m in Sources */,
 				FCC1D4F8219985A0007DD2DB /* F4SPostDocumentDataViewController.swift in Sources */,
 				FC5DF8BB228AF25A004B014D /* NameLogic.swift in Sources */,
-				FCB46F042051365400F0779F /* F4SFeatureSwitchesViewController.swift in Sources */,
 				FCC212EE219077C000D8D5B7 /* F4SMultiPageDocument.swift in Sources */,
 				FC0B4082226CAB4E00D992AC /* RecommendationsMerger.swift in Sources */,
 				40C1A52D1DE84410000F80AA /* TriangleView.swift in Sources */,
@@ -2694,7 +2672,6 @@
 				40A5CF3C1DED6FA2000007AB /* InterestsViewController.swift in Sources */,
 				40E78E701DD32BD4000A3776 /* MenuHelper.swift in Sources */,
 				FCB4930A222A879000B88B8B /* FavouritesCoordinator.swift in Sources */,
-				FCB46F0820513D0100F0779F /* F4SFeatureSwitchModel.swift in Sources */,
 				2037B0A71DEC3C3B00A9DE3E /* InterestCoreDataManager.swift in Sources */,
 				204C89551DF5A36100D8493A /* TemplateChoiceDB.swift in Sources */,
 				204C89781DF5F0B200D8493A /* ChooseAttributesTableViewCell.swift in Sources */,
@@ -2715,7 +2692,6 @@
 				FCD388E7208E27E500FC73C5 /* F4SCompanyDocumentService.swift in Sources */,
 				FCACBF4420C7EB9F00EABAE8 /* F4SContentService.swift in Sources */,
 				FCD388E5208DEFE100FC73C5 /* F4SCompanyDocumentsModel.swift in Sources */,
-				FCB46F0C20518EE900F0779F /* F4SFeatureSwitchService.swift in Sources */,
 				FC21BE38220F53EB00A0A389 /* SearchProtocols.swift in Sources */,
 				FC21BE35220F53EB00A0A389 /* CompanySearchDataSource.swift in Sources */,
 				204C89751DF5F0A100D8493A /* EditFooterView.swift in Sources */,

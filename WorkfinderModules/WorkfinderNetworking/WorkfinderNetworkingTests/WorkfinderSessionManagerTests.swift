@@ -28,6 +28,14 @@ class WEXSessionManagerTests : XCTestCase {
         XCTAssertEqual(sut.defaultHeaders[HeaderKeys.wexApiKey.rawValue], sut.configuration.wexApiKey)
     }
     
+    func testWexUserSession() {
+        let sut = makeSUT()
+        let wexHeader = sut.wexUserSession.configuration.httpAdditionalHeaders?.first(where: { (header) -> Bool in
+            (header.key as? String) == "wex.api.key"
+        })
+        XCTAssertEqual((wexHeader?.value as? String), sut.configuration.wexApiKey)
+    }
+    
     func testBuildSmallImageTests() {
         let sut = makeSUT()
         let cache = sut.makeSmallImageCache()
@@ -54,7 +62,6 @@ extension WEXSessionManagerTests {
     func assertEqual(config1: WEXNetworkingConfigurationProtocol, config2: WEXNetworkingConfigurationProtocol) {
         XCTAssertEqual(config1.wexApiKey, config2.wexApiKey)
         XCTAssertEqual(config1.baseUrlString, config2.baseUrlString)
-        XCTAssertEqual(config1.v1ApiUrlString, config2.v1ApiUrlString)
         XCTAssertEqual(config1.v2ApiUrlString, config2.v2ApiUrlString)
     }
 }

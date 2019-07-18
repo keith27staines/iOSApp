@@ -38,7 +38,7 @@ class F4SCompanyService : F4SCompanyServiceProtocol {
     
     func getCompany(uuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SCompanyJson>) -> ()) {
         let attempting = "Get company"
-        var url = URL(string: ApiConstants.companyUrl)!
+        var url = URL(string: WorkfinderEndpoint.companyUrl)!
         url.appendPathComponent(uuid)
         let session = F4SNetworkSessionManager.shared.interactiveSession
         let urlRequest = F4SDataTaskService.urlRequest(verb: .get, url: url, dataToSend: nil)
