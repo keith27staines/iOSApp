@@ -61,6 +61,10 @@ public class F4SUser : F4SUserProtocol, Codable {
     
     public var placementUuid: F4SUUID?
     
+    public func nullifyUuid() {
+        uuid = nil
+    }
+    
     public var isOnboarded: Bool {
         guard let isFirstLaunch = localStore.value(key: LocalStore.Key.isFirstLaunch) as? Bool else { return false }
         return !isFirstLaunch

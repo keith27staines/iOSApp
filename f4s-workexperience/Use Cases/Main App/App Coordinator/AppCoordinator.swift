@@ -144,28 +144,38 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     }
     
     private func ensureDeviceIsRegistered(completion: @escaping (F4SUUID)->()) {
-        let installationUuid = injected.installationUuid
-        guard let userUuid = injected.user.uuid  else {
-            userService.registerDeviceWithServer(installationUuid: installationUuid) { [weak self] (result) in
-                guard let strongSelf = self else { return }
-                switch result {
-                case .error(_):
-                    globalLog.info("Couldn't register user, offering retry")
-                    strongSelf.presentNoNetworkMustRetry(retryOperation: {
-                        strongSelf.ensureDeviceIsRegistered(completion: completion)
-                    })
-                case .success(let result):
-                    guard let anonymousUserUuid = result.uuid else {
-                        let error = NSError(domain: "F4S", code: 1, userInfo: [NSLocalizedDescriptionKey: "No uuid returned when registering device with uuid \(installationUuid)"])
-                        f4sLog.notifyError(error, functionName: #function, fileName: #file, lineNumber: #line)
-                        fatalError("registering device failed to obtain uuid")
-                    }
-                    completion(anonymousUserUuid)
-                }
-            }
+        let installationUuidLogic = injected.appInstallationUuidLogic
+        guard
+            installationUuidLogic.registeredInstallationUuid != nil,
+            let userUuid = injected.user.uuid
+        else {
+            registerDevice(completion: completion)
             return
         }
         completion(userUuid)
+    }
+    
+    private func registerDevice(completion: @escaping (F4SUUID)->()) {
+        let installationUuidLogic = injected.appInstallationUuidLogic
+        let newInstallationUuid = installationUuidLogic.makeNewInstallationUuid()
+        userService.registerDeviceWithServer(installationUuid: newInstallationUuid) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .error(_):
+                globalLog.info("Couldn't register user, offering retry")
+                strongSelf.presentNoNetworkMustRetry(retryOperation: {
+                    strongSelf.ensureDeviceIsRegistered(completion: completion)
+                })
+            case .success(let result):
+                guard let anonymousUserUuid = result.uuid else {
+                    let error = NSError(domain: "F4S", code: 1, userInfo: [NSLocalizedDescriptionKey: "No uuid returned when registering device with uuid \(newInstallationUuid)"])
+                    f4sLog.notifyError(error, functionName: #function, fileName: #file, lineNumber: #line)
+                    fatalError("registering device failed to obtain uuid")
+                }
+                installationUuidLogic.onInstallationUuidWasRegisteredWithServer(newInstallationUuid)
+                completion(anonymousUserUuid)
+            }
+        }
     }
 }
 
@@ -206,11 +216,11 @@ extension AppCoordinator {
 extension AppCoordinator {
     func logStartupInformation() {
         let info = """
-        
+
         
         ****************************************************************
         Environment name = \(Config.environmentName)
-        Installation UUID = \(injected.installationUuid)
+        Installation UUID = \(injected.appInstallationUuidLogic.registeredInstallationUuid!)
         User UUID = \(F4SUser().uuid ?? "nil user")
         Base api url = \(NetworkConfig.workfinderApi)
         v2 api url = \(NetworkConfig.workfinderApiV2)

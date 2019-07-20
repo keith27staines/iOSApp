@@ -36,6 +36,7 @@ public class LocalStore : LocalStorageProtocol {
         case companyDatabaseCreatedDate
         case isFirstLaunch
         case installationUuid
+        case isDeviceRegistered
         case shouldLoadTimeline
         case userPopulatedTemplateBlanksData
         case availabilityPeriodJsonData

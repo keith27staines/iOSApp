@@ -25,7 +25,8 @@ public class F4SUserService : F4SUserServiceProtocol {
     }()
     
     public func updateUser(user: F4SUser, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ()) {
-        let user = userRemovingInvalidPartnersFromUserDataFix(user: user)
+        var user = userRemovingInvalidPartnersFromUserDataFix(user: user)
+        user = userNullifyingUuid(user: user)
         let attempting = "Update user"
         if let age = user.age() { user.requiresConsent = age < 16 }
         if user.parentEmail?.isEmpty == true { user.parentEmail = nil }
@@ -60,6 +61,12 @@ public class F4SUserService : F4SUserServiceProtocol {
             user.partners = nil
             return user
         }
+        return user
+    }
+    
+    func userNullifyingUuid(user: F4SUser) -> F4SUser {
+        let user = F4SUser(userInformation: user)
+        user.nullifyUuid()
         return user
     }
     

@@ -309,6 +309,8 @@
 		FCD3486B20049DFB00DC1316 /* F4SEmailVerification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCD3486A20049DFA00DC1316 /* F4SEmailVerification.storyboard */; };
 		FCD388E5208DEFE100FC73C5 /* F4SCompanyDocumentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD388E4208DEFE100FC73C5 /* F4SCompanyDocumentsModel.swift */; };
 		FCD388E7208E27E500FC73C5 /* F4SCompanyDocumentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD388E6208E27E500FC73C5 /* F4SCompanyDocumentService.swift */; };
+		FCD6F9E822E315B7003F7C34 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD6F9E722E315B7003F7C34 /* WorkfinderAppLogic.framework */; };
+		FCD6F9E922E315B7003F7C34 /* WorkfinderAppLogic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCD6F9E722E315B7003F7C34 /* WorkfinderAppLogic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCD884F91FFBC0CC00F05B08 /* Recommendations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCD884F81FFBC0CC00F05B08 /* Recommendations.storyboard */; };
 		FCD884FB1FFBE04F00F05B08 /* RecommendationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD884FA1FFBE04F00F05B08 /* RecommendationsListViewController.swift */; };
 		FCDE24752105AB94008B4315 /* F4SRoundIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDE24742105AB94008B4315 /* F4SRoundIconView.swift */; };
@@ -386,6 +388,7 @@
 			files = (
 				FCFB1329224930660086BE25 /* Mustache.framework in Embed Frameworks */,
 				FCF5AF2C2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Embed Frameworks */,
+				FCD6F9E922E315B7003F7C34 /* WorkfinderAppLogic.framework in Embed Frameworks */,
 				FCA91EC222340743007ED308 /* WorkfinderUI.framework in Embed Frameworks */,
 				FCA91E9722340577007ED308 /* WorkfinderCommon.framework in Embed Frameworks */,
 				FCA91E5E22340161007ED308 /* WorkfinderNetworking.framework in Embed Frameworks */,
@@ -755,6 +758,7 @@
 		FCD3486A20049DFA00DC1316 /* F4SEmailVerification.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SEmailVerification.storyboard; sourceTree = "<group>"; };
 		FCD388E4208DEFE100FC73C5 /* F4SCompanyDocumentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyDocumentsModel.swift; sourceTree = "<group>"; };
 		FCD388E6208E27E500FC73C5 /* F4SCompanyDocumentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyDocumentService.swift; sourceTree = "<group>"; };
+		FCD6F9E722E315B7003F7C34 /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD884F81FFBC0CC00F05B08 /* Recommendations.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Recommendations.storyboard; sourceTree = "<group>"; };
 		FCD884FA1FFBE04F00F05B08 /* RecommendationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsListViewController.swift; sourceTree = "<group>"; };
 		FCDE24742105AB94008B4315 /* F4SRoundIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SRoundIconView.swift; sourceTree = "<group>"; };
@@ -799,6 +803,7 @@
 				FCF5AF2B2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Frameworks */,
 				C9C7302B49E1B7EF625802B5 /* Pods_f4s_workexperience.framework in Frameworks */,
 				FCA91E5D22340161007ED308 /* WorkfinderNetworking.framework in Frameworks */,
+				FCD6F9E822E315B7003F7C34 /* WorkfinderAppLogic.framework in Frameworks */,
 				FCFB1328224930660086BE25 /* Mustache.framework in Frameworks */,
 				FCA91EC122340743007ED308 /* WorkfinderUI.framework in Frameworks */,
 			);
@@ -884,6 +889,7 @@
 		40E78E0A1DD31A86000A3776 = {
 			isa = PBXGroup;
 			children = (
+				FCD6F9E722E315B7003F7C34 /* WorkfinderAppLogic.framework */,
 				FCFB1327224930660086BE25 /* Mustache.framework */,
 				FCF5AF2A2248BE1A00D9B8D1 /* WorkfinderApplyUseCase.framework */,
 				FCA91EC022340743007ED308 /* WorkfinderUI.framework */,

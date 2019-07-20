@@ -24,14 +24,26 @@ class ApplyCoordinatorTests: XCTestCase {
     let mockAnalytics = MockF4SAnalyticsAndDebugging()
     var mockPlacementServiceFactory = MockPlacementServiceFactory(errorResponseCode: 404)
     
-    lazy var mockedInjection = CoreInjection(
-        launchOptions: nil,
-        installationUuid: "installationUuid",
-        user: mockRegisteredUser,
-        userService: mockUserService,
-        userRepository: MockUserRepository(user: mockRegisteredUser),
-        databaseDownloadManager: mockDatabaseDownloadManager,
-        f4sLog: mockAnalytics)
+    func makeMockAppInstallationLogic(installationUuid: String?, isRegistered: Bool) -> AppInstallationUuidLogic {
+        let localStore = MockLocalStore()
+        localStore.setValue("installationUuid", for: LocalStore.Key.installationUuid)
+        localStore.setValue(isRegistered, for: LocalStore.Key.isDeviceRegistered)
+        let logic = AppInstallationUuidLogic(localStore: localStore)
+        return logic
+    }
+    
+    lazy var mockedInjection: CoreInjection = {
+        let injection = CoreInjection(
+            launchOptions: nil,
+            appInstallationUuidLogic: makeMockAppInstallationLogic(installationUuid: "installationUuid", isRegistered: true),
+            user: mockRegisteredUser,
+            userService: mockUserService,
+            userRepository: MockUserRepository(user: mockRegisteredUser),
+            databaseDownloadManager: mockDatabaseDownloadManager,
+            f4sLog: mockAnalytics
+        )
+        return injection
+    }()
 
     func testStart_withoutPlacement() {
         let sut = makeSUTApplyCoordinator(company: "company1234", continueExistingApplication: nil)

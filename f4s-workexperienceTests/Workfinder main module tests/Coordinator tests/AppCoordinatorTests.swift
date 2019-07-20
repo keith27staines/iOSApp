@@ -28,9 +28,11 @@ class AppCoordinatorTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
+        let localStore = MockLocalStore()
+        let logic = AppInstallationUuidLogic(localStore: localStore)
         injection = CoreInjection(
             launchOptions: nil,
-            installationUuid: "installationUuid",
+            appInstallationUuidLogic: logic,
             user: mockUnregisteredUser,
             userService: mockUserService,
             userStatusService: mockUserStatusService,

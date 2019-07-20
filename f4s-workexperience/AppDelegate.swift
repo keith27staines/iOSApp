@@ -11,27 +11,12 @@ import CoreData
 import XCGLogger
 import WorkfinderCommon
 import WorkfinderNetworking
+import WorkfinderAppLogic
 
 let globalLog = XCGLogger.default
 
 extension Notification.Name {
     static let verificationCodeRecieved = Notification.Name("verificationCodeRecieved")
-}
-
-
-class AppInstallationUuidLogic {
-    let localStore: LocalStorageProtocol
-    init(localStore: LocalStorageProtocol = LocalStore()) {
-        self.localStore = localStore
-    }
-    var installationUuid: F4SUUID {
-        var uuid = localStore.value(key: LocalStore.Key.installationUuid) as? F4SUUID
-        if uuid == nil {
-            uuid = UUID().uuidString
-            localStore.setValue(uuid, for: LocalStore.Key.installationUuid)
-        }
-        return uuid!
-    }
 }
 
 @UIApplicationMain
@@ -46,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return F4SUserService()
     }()
     
-    lazy var appInstallationUuid = AppInstallationUuidLogic().installationUuid
+    lazy var appInstallationUuidLogic = AppInstallationUuidLogic()
     
     // MARK:- Application events
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -60,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appCoordinator = appCoordinatorFactory.makeAppCoordinator(
             registrar: application,
             launchOptions: launchOptions,
-            installationUuid: appInstallationUuid,
+            appInstallationUuidLogic: appInstallationUuidLogic,
             databaseDownloadManager: databaseDownloadManager!,
             f4sLog: f4sLog!)
         
@@ -107,6 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        guard let appInstallationUuid = appInstallationUuidLogic.registeredInstallationUuid else { return }
         let tokenParts = deviceToken.map { data -> String in
             return String(format: "%02.2hhx", data)
         }
