@@ -9,6 +9,7 @@
 import XCTest
 import WorkfinderCommon
 import WorkfinderNetworking
+import WorkfinderAppLogic
 import WorkfinderApplyUseCase
 
 @testable import f4s_workexperience
@@ -24,18 +25,22 @@ class ApplyCoordinatorTests: XCTestCase {
     let mockAnalytics = MockF4SAnalyticsAndDebugging()
     var mockPlacementServiceFactory = MockPlacementServiceFactory(errorResponseCode: 404)
     
-    func makeMockAppInstallationLogic(installationUuid: String?, isRegistered: Bool) -> AppInstallationUuidLogic {
+    func makeMockAppInstallationLogic(
+        installationUuid: String?,
+        user: F4SUserProtocol,
+        isRegistered: Bool) -> AppInstallationUuidLogic {
         let localStore = MockLocalStore()
+        let userRepo = MockUserRepository(user: user)
         localStore.setValue("installationUuid", for: LocalStore.Key.installationUuid)
         localStore.setValue(isRegistered, for: LocalStore.Key.isDeviceRegistered)
-        let logic = AppInstallationUuidLogic(localStore: localStore)
+        let logic = AppInstallationUuidLogic(localStore: localStore, userService: mockUserService, userRepo: userRepo)
         return logic
     }
     
     lazy var mockedInjection: CoreInjection = {
         let injection = CoreInjection(
             launchOptions: nil,
-            appInstallationUuidLogic: makeMockAppInstallationLogic(installationUuid: "installationUuid", isRegistered: true),
+            appInstallationUuidLogic: makeMockAppInstallationLogic(installationUuid: "installationUuid", user: mockRegisteredUser, isRegistered: true),
             user: mockRegisteredUser,
             userService: mockUserService,
             userRepository: MockUserRepository(user: mockRegisteredUser),

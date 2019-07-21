@@ -32,6 +32,9 @@ public struct F4SRegisterDeviceResult : Decodable {
     public init(userUuid: F4SUUID) {
         self.uuid = userUuid
     }
+    public init(errors: F4SJSONValue?) {
+        self.errors = errors
+    }
 }
 
 public struct F4SPartnerJson : Codable {
