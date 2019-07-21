@@ -35,7 +35,7 @@ public class AppInstallationUuidLogic {
     }
     
     var mustRegisterAgain: Bool {
-        return true
+        return registeredInstallationUuid == nil  || !userHasVerifiedEmail
     }
     
     public var registeredInstallationUuid: F4SUUID? {
@@ -75,18 +75,20 @@ public class AppInstallationUuidLogic {
     private func registerDevice(completion: @escaping (F4SNetworkResult<F4SRegisterDeviceResult>)->()) {
         let newInstallationUuid = makeNewInstallationUuid()
         userService.registerDeviceWithServer(installationUuid: newInstallationUuid) { [weak self] (networkResult) in
-            guard let strongSelf = self else { return }
-            switch networkResult {
-            case .error(_):
-                completion(networkResult)
-            case .success(let registerDeviceResult):
-                if let anonymousUserUuid = registerDeviceResult.uuid {
-                    strongSelf.onDeviceWasRegisteredOnServer(
-                        withInstallationUuid: newInstallationUuid,
-                        networkResult: networkResult,
-                        completion: completion)
-                } else {
+            DispatchQueue.main.async { [weak self] in
+                guard let strongSelf = self else { return }
+                switch networkResult {
+                case .error(_):
                     completion(networkResult)
+                case .success(let registerDeviceResult):
+                    if let _ = registerDeviceResult.uuid {
+                        strongSelf.onDeviceWasRegisteredOnServer(
+                            withInstallationUuid: newInstallationUuid,
+                            networkResult: networkResult,
+                            completion: completion)
+                    } else {
+                        completion(networkResult)
+                    }
                 }
             }
         }
@@ -96,8 +98,7 @@ public class AppInstallationUuidLogic {
         withInstallationUuid installationUuid: F4SUUID,
         networkResult: F4SNetworkResult<F4SRegisterDeviceResult>,
         completion: @escaping (F4SNetworkResult<F4SRegisterDeviceResult>)->())  {
-        localStore.setValue(installationUuid, for: LocalStore.Key.installationUuid)
-        localStore.setValue(true, for: LocalStore.Key.isDeviceRegistered)
+
         if userHasVerifiedEmail {
             let userInfo = F4SUserInformation()
             var oldUser = userRepo.load()
@@ -105,20 +106,27 @@ public class AppInstallationUuidLogic {
             user.email = oldUser.email
             user.requiresConsent = oldUser.requiresConsent
             user.termsAgreed = oldUser.termsAgreed
-            userService.updateUser(user: user) { [weak self] updateUserResult in
-                guard let strongSelf = self else { return }
-                switch updateUserResult {
-                case .error(_):
-                    break
-                case .success(let userUpdateResult):
-                    var user = strongSelf.userRepo.load()
-                    user.updateUuid(uuid: userUpdateResult.uuid!)
-                    strongSelf.userRepo.save(user: user)
-                    let updatedResult = F4SNetworkResult.success(F4SRegisterDeviceResult.init(userUuid: user.uuid!))
-                    completion(updatedResult)
+            userService.updateUser(user: user) { updateUserResult in
+                DispatchQueue.main.async {  [weak self] in
+                    guard let strongSelf = self else { return }
+                    switch updateUserResult {
+                    case .error(let networkError):
+                        let updatedResult = F4SNetworkResult<F4SRegisterDeviceResult>.error(networkError)
+                        completion(updatedResult)
+                    case .success(let userUpdateResult):
+                        var user = strongSelf.userRepo.load()
+                        user.updateUuid(uuid: userUpdateResult.uuid!)
+                        strongSelf.userRepo.save(user: user)
+                        strongSelf.localStore.setValue(installationUuid, for: LocalStore.Key.installationUuid)
+                        strongSelf.localStore.setValue(true, for: LocalStore.Key.isDeviceRegistered)
+                        let updatedResult = F4SNetworkResult.success(F4SRegisterDeviceResult.init(userUuid: user.uuid!))
+                        completion(updatedResult)
+                    }
                 }
             }
         } else {
+            localStore.setValue(installationUuid, for: LocalStore.Key.installationUuid)
+            localStore.setValue(true, for: LocalStore.Key.isDeviceRegistered)
             completion(networkResult)
         }
     }
