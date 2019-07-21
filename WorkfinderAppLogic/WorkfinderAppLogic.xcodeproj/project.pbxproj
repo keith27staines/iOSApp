@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FC7F055122E31A2C009C3E25 /* AppInstallationUuidLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7F055022E31A2C009C3E25 /* AppInstallationUuidLogicTests.swift */; };
+		FCB24A6522E44FF600077DFF /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB24A6422E44FF600077DFF /* WorkfinderNetworking.framework */; };
 		FCD6F9D722E31591003F7C34 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD6F9CD22E31591003F7C34 /* WorkfinderAppLogic.framework */; };
 		FCD6F9DE22E31591003F7C34 /* WorkfinderAppLogic.h in Headers */ = {isa = PBXBuildFile; fileRef = FCD6F9D022E31591003F7C34 /* WorkfinderAppLogic.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCD6F9EC22E31637003F7C34 /* AppInstallationLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD6F9EB22E31637003F7C34 /* AppInstallationLogic.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		FC7F055022E31A2C009C3E25 /* AppInstallationUuidLogicTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppInstallationUuidLogicTests.swift; sourceTree = "<group>"; };
+		FCB24A6422E44FF600077DFF /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD6F9CD22E31591003F7C34 /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD6F9D022E31591003F7C34 /* WorkfinderAppLogic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderAppLogic.h; sourceTree = "<group>"; };
 		FCD6F9D122E31591003F7C34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -40,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCB24A6522E44FF600077DFF /* WorkfinderNetworking.framework in Frameworks */,
 				FCD6F9F122E31777003F7C34 /* WorkfinderCommon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -77,9 +80,9 @@
 		FCD6F9CF22E31591003F7C34 /* WorkfinderAppLogic */ = {
 			isa = PBXGroup;
 			children = (
-				FCD6F9EA22E31603003F7C34 /* Source */,
-				FCD6F9D022E31591003F7C34 /* WorkfinderAppLogic.h */,
 				FCD6F9D122E31591003F7C34 /* Info.plist */,
+				FCD6F9D022E31591003F7C34 /* WorkfinderAppLogic.h */,
+				FCD6F9EA22E31603003F7C34 /* Source */,
 			);
 			path = WorkfinderAppLogic;
 			sourceTree = "<group>";
@@ -104,6 +107,7 @@
 		FCD6F9EF22E31777003F7C34 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCB24A6422E44FF600077DFF /* WorkfinderNetworking.framework */,
 				FCD6F9F022E31777003F7C34 /* WorkfinderCommon.framework */,
 			);
 			name = Frameworks;

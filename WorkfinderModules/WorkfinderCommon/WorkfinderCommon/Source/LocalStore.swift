@@ -32,7 +32,6 @@ public class LocalStore : LocalStorageProtocol {
         case hasPartnerIDBeenSentToServer = "hasParnerIDBeenSentToServer"
         case user
         case userUuid
-        case userHasAccount
         case companyDatabaseCreatedDate
         case isFirstLaunch
         case installationUuid
@@ -41,6 +40,8 @@ public class LocalStore : LocalStorageProtocol {
         case userPopulatedTemplateBlanksData
         case availabilityPeriodJsonData
         case recommendedCompaniesJsonData
+        case verifiedEmailKey
+        case emailSentForVerificationKey
     }
     
     public init() {

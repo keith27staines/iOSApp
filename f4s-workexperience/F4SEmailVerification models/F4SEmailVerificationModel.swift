@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 import WorkfinderNetworking
 
 /// A state machine that controls the verification process for emails
@@ -147,12 +148,14 @@ public class F4SEmailVerificationModel {
     }
     
     /// The email address to which the validation email was sent
+    static var localStore: LocalStorageProtocol = LocalStore()
+    
     static public private (set) var emailSentForVerification: String? {
         get {
-            return UserDefaults.standard.string(forKey: emailSentForVerificationKey)
+            return localStore.value(key: LocalStore.Key.emailSentForVerificationKey) as? String
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: emailSentForVerificationKey)
+            localStore.setValue(newValue, for: LocalStore.Key.emailSentForVerificationKey)
         }
     }
     
@@ -176,10 +179,10 @@ public class F4SEmailVerificationModel {
     
     static public private (set) var verifiedEmail: String? {
         get {
-            return UserDefaults.standard.string(forKey: verifiedEmailKey)
+            return localStore.value(key: LocalStore.Key.verifiedEmailKey) as? String
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: verifiedEmailKey)
+            localStore.setValue(newValue, for: LocalStore.Key.verifiedEmailKey)
         }
     }
     
@@ -191,10 +194,6 @@ public class F4SEmailVerificationModel {
             F4SEmailVerificationModel.verifiedEmail = newValue
         }
     }
-    
-    //MARK:- Keys used for storing info in UserDefaults
-    private static let verifiedEmailKey = "verifiedEmailKey"
-    private static let emailSentForVerificationKey = "emailSentForVerificationKey"
 }
 
 

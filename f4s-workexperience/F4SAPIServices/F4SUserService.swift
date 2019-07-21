@@ -10,12 +10,6 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderNetworking
 
-public protocol F4SUserServiceProtocol : class {
-    func registerDeviceWithServer(installationUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRegisterResult>) -> ())
-    func updateUser(user: F4SUser, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ())
-    func enablePushNotificationForUser(installationUuid: F4SUUID, withDeviceToken: String, completion: @escaping (_ result: F4SNetworkResult<F4SPushNotificationStatus>) -> ())
-}
-
 public class F4SUserService : F4SUserServiceProtocol {
     
     lazy var dobFormatter: DateFormatter = {
@@ -77,7 +71,7 @@ public class F4SUserService : F4SUserServiceProtocol {
         }
     }
     
-    public func registerDeviceWithServer(installationUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRegisterResult>) -> Void) {
+    public func registerDeviceWithServer(installationUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRegisterDeviceResult>) -> Void) {
         let attempting = "Register anonymous user on server"
         let url = URL(string: WorkfinderEndpoint.registerVendorId)!
         let session = F4SNetworkSessionManager.shared.interactiveSession
@@ -100,10 +94,10 @@ public class F4SUserService : F4SUserServiceProtocol {
         dataTask.resume()
     }
     
-    private func handleRegisterAnonymousUserTaskResult(attempting: String, result: F4SNetworkDataResult, completion: @escaping (F4SNetworkResult<F4SRegisterResult>) -> ()) {
+    private func handleRegisterAnonymousUserTaskResult(attempting: String, result: F4SNetworkDataResult, completion: @escaping (F4SNetworkResult<F4SRegisterDeviceResult>) -> ()) {
         DispatchQueue.main.async {
             let decoder = JSONDecoder()
-            decoder.decode(dataResult: result, intoType: F4SRegisterResult.self, attempting: attempting, completion: completion)
+            decoder.decode(dataResult: result, intoType: F4SRegisterDeviceResult.self, attempting: attempting, completion: completion)
         }
     }
     

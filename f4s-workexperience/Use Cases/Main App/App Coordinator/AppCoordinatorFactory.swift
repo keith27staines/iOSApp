@@ -8,11 +8,12 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderNetworking
 import WorkfinderAppLogic
 
 protocol AppCoordinatoryFactoryProtocol {}
 
-struct AppCoordinatoryFactory : AppCoordinatoryFactoryProtocol {
+struct AppCoordinatorFactory : AppCoordinatoryFactoryProtocol {
     
     func makeAppCoordinator(
         registrar: RemoteNotificationsRegistrarProtocol,

@@ -145,20 +145,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     
     private func ensureDeviceIsRegistered(completion: @escaping (F4SUUID)->()) {
         let installationUuidLogic = injected.appInstallationUuidLogic
-        guard
-            installationUuidLogic.registeredInstallationUuid != nil,
-            let userUuid = injected.user.uuid
-        else {
-            registerDevice(completion: completion)
-            return
-        }
-        completion(userUuid)
-    }
-    
-    private func registerDevice(completion: @escaping (F4SUUID)->()) {
-        let installationUuidLogic = injected.appInstallationUuidLogic
-        let newInstallationUuid = installationUuidLogic.makeNewInstallationUuid()
-        userService.registerDeviceWithServer(installationUuid: newInstallationUuid) { [weak self] (result) in
+        installationUuidLogic.ensureDeviceIsRegistered {  [weak self] (result) in
             guard let strongSelf = self else { return }
             switch result {
             case .error(_):
@@ -168,11 +155,10 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                 })
             case .success(let result):
                 guard let anonymousUserUuid = result.uuid else {
-                    let error = NSError(domain: "F4S", code: 1, userInfo: [NSLocalizedDescriptionKey: "No uuid returned when registering device with uuid \(newInstallationUuid)"])
+                    let error = NSError(domain: "F4S", code: 1, userInfo: [NSLocalizedDescriptionKey: "No uuid returned when registering device"])
                     f4sLog.notifyError(error, functionName: #function, fileName: #file, lineNumber: #line)
                     fatalError("registering device failed to obtain uuid")
                 }
-                installationUuidLogic.onInstallationUuidWasRegisteredWithServer(newInstallationUuid)
                 completion(anonymousUserUuid)
             }
         }

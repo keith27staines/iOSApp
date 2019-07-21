@@ -1,15 +1,12 @@
 //
-//  F4SUserModel.swift
-//  f4s-workexperience
+//  WorkfinderCommonStructs.swift
+//  WorkfinderCommon
 //
-//  Created by Keith Dev on 19/06/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
+//  Created by Keith Dev on 21/07/2019.
+//  Copyright © 2019 Founders4Schools. All rights reserved.
 //
 
 import Foundation
-import KeychainSwift
-import Analytics
-import WorkfinderCommon
 
 public struct F4SPushNotificationStatus : Decodable {
     public var enabled: Bool?
@@ -18,6 +15,9 @@ public struct F4SPushNotificationStatus : Decodable {
 
 public struct F4SPushToken: Encodable {
     public var pushToken: String
+    public init(pushToken: String) {
+        self.pushToken = pushToken
+    }
 }
 
 extension F4SPushToken {
@@ -26,9 +26,12 @@ extension F4SPushToken {
     }
 }
 
-public struct F4SRegisterResult : Decodable {
+public struct F4SRegisterDeviceResult : Decodable {
     public var uuid: F4SUUID?
     public var errors: F4SJSONValue?
+    public init(userUuid: F4SUUID) {
+        self.uuid = userUuid
+    }
 }
 
 public struct F4SPartnerJson : Codable {
@@ -48,6 +51,11 @@ public struct F4SAnonymousUser : Codable {
     public var vendorUuid: String
     public var clientType: String
     public var apnsEnvironment: String
+    public init(vendorUuid: F4SUUID, clientType: String, apnsEnvironment: String) {
+        self.vendorUuid = vendorUuid
+        self.clientType = clientType
+        self.apnsEnvironment = apnsEnvironment
+    }
 }
 
 extension F4SAnonymousUser {
@@ -57,13 +65,3 @@ extension F4SAnonymousUser {
         case apnsEnvironment = "env"
     }
 }
-
-extension F4SUser {
-    public static func dataFixMoveUUIDFromKeychainToUserDefaults() {
-        let keychain = KeychainSwift()
-        guard let uuid = keychain.get(UserDefaultsKeys.userUuid) else { return }
-        UserDefaults.standard.setValue(uuid, forKey: UserDefaultsKeys.userUuid)
-        KeychainSwift().delete(UserDefaultsKeys.userUuid)
-    }
-}
-

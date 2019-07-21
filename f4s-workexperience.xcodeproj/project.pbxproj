@@ -193,7 +193,7 @@
 		FC5DF8B9228AAC6D004B014D /* NameLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5DF8B8228AAC6D004B014D /* NameLogicTests.swift */; };
 		FC5DF8BB228AF25A004B014D /* NameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5DF8BA228AF25A004B014D /* NameLogic.swift */; };
 		FC5F3D4E20D938E90002F41B /* F4SUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F3D4D20D938E90002F41B /* F4SUserService.swift */; };
-		FC5F3D5020D93C070002F41B /* F4SUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F3D4F20D93C070002F41B /* F4SUserModel.swift */; };
+		FC5F3D5020D93C070002F41B /* F4SUserDataFix.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F3D4F20D93C070002F41B /* F4SUserDataFix.swift */; };
 		FC64A5932119EBE3006464A5 /* CalendarChooserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC64A5902119EBE3006464A5 /* CalendarChooserController.swift */; };
 		FC64A595211ACA39006464A5 /* F4SCompanyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC64A594211ACA39006464A5 /* F4SCompanyService.swift */; };
 		FC64A597211AECDE006464A5 /* F4SInviteDetailLinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC64A596211AECDE006464A5 /* F4SInviteDetailLinkCell.swift */; };
@@ -636,7 +636,7 @@
 		FC5DF8B8228AAC6D004B014D /* NameLogicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameLogicTests.swift; sourceTree = "<group>"; };
 		FC5DF8BA228AF25A004B014D /* NameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameLogic.swift; sourceTree = "<group>"; };
 		FC5F3D4D20D938E90002F41B /* F4SUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserService.swift; sourceTree = "<group>"; };
-		FC5F3D4F20D93C070002F41B /* F4SUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserModel.swift; sourceTree = "<group>"; };
+		FC5F3D4F20D93C070002F41B /* F4SUserDataFix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserDataFix.swift; sourceTree = "<group>"; };
 		FC64A5902119EBE3006464A5 /* CalendarChooserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarChooserController.swift; sourceTree = "<group>"; };
 		FC64A594211ACA39006464A5 /* F4SCompanyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyService.swift; sourceTree = "<group>"; };
 		FC64A596211AECDE006464A5 /* F4SInviteDetailLinkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInviteDetailLinkCell.swift; sourceTree = "<group>"; };
@@ -1797,7 +1797,7 @@
 		FC62FF8520EF6D51003E52C5 /* F4SUser models */ = {
 			isa = PBXGroup;
 			children = (
-				FC5F3D4F20D93C070002F41B /* F4SUserModel.swift */,
+				FC5F3D4F20D93C070002F41B /* F4SUserDataFix.swift */,
 			);
 			name = "F4SUser models";
 			sourceTree = "<group>";
@@ -2551,7 +2551,7 @@
 				FC1DC07821FE14D7009ABC60 /* CompanyViewModel.swift in Sources */,
 				FCB3922E21005DE300792C0A /* F4SPlacementDetail.swift in Sources */,
 				FC39F45C21AAA618005B0A07 /* MessagesModel.swift in Sources */,
-				FC5F3D5020D93C070002F41B /* F4SUserModel.swift in Sources */,
+				FC5F3D5020D93C070002F41B /* F4SUserDataFix.swift in Sources */,
 				FC1E6A4F2217476400DC335B /* HomeCoordinator.swift in Sources */,
 				40E78E4B1DD32862000A3776 /* f4s-workexperience.xcdatamodeld in Sources */,
 				FC9BEE082015FF6000347437 /* UniversalLinkParser.swift in Sources */,

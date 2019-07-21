@@ -8,6 +8,7 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderNetworking
 import WorkfinderAppLogic
 
 public typealias LaunchOptions = [UIApplication.LaunchOptionsKey: Any]
