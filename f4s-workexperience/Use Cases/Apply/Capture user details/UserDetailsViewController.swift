@@ -325,40 +325,8 @@ extension UserDetailsViewController {
     }
     
     func verifyVoucher() {
+        // add code here to verify the voucher as currently entered by the user
         afterVoucherValidation()
-        return
-        guard let voucherCode = voucherCodeTextField.text, voucherCode.isEmpty == false  else {
-            afterVoucherValidation()
-            return
-        }
-        let placementUuid = applicationContext.placement?.placementUuid
-        voucherVerificationService = F4SVoucherVerificationService(placementUuid: placementUuid, voucherCode: voucherCode)
-        showLoadingOverlay()
-        voucherVerificationService?.verify(completion: { [weak self] (result) in
-            guard let strongSelf = self else { return }
-            DispatchQueue.main.async {
-                strongSelf.hideLoadingOverlay()
-                switch result {
-                case .error(let error):
-                    if error.retry {
-                        strongSelf.handleRetryForNetworkError(error, retry: {
-                            strongSelf.verifyVoucher()
-                        })
-                    } else {
-                        let reason = NSLocalizedString("Please check your voucher code has been entered correctly", comment: "")
-                        strongSelf.presentInvalidVoucherAlert(reason: reason)
-                    }
-                case .success(let voucherVerification):
-                    if voucherVerification.status == "issued" {
-                        strongSelf.afterVoucherValidation()
-                    } else {
-                        let reason = voucherVerification.errors?.status ?? NSLocalizedString("Please check your voucher code has been entered correctly", comment: "")
-                        strongSelf.presentInvalidVoucherAlert(reason: reason)
-                    }
-                }
-                strongSelf.voucherVerificationService = nil
-            }
-        })
     }
     
     func afterVoucherValidation() {

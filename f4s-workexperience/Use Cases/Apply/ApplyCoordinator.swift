@@ -36,7 +36,7 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     
     lazy var applicationModel: ApplicationModelProtocol = {
         let userUuid = injected.user.uuid!
-        let installationUuid = injected.installationUuid
+        let installationUuid = injected.appInstallationUuidLogic.registeredInstallationUuid!
         let companyViewData = CompanyViewData(company: applicationContext.company!)
         let placement = applicationContext.placement
         return ApplicationModel(userUuid: userUuid, installationUuid: installationUuid, userInterests: userInterests, placement: placement, placementRepository: placementRepository, companyViewData: companyViewData, placementService: placementService, templateService: templateService)
@@ -145,8 +145,7 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
     func userDetailsDidFinish() {
         applicationModel.createApplicationIfNecessary { [weak self] (error) in
             guard let strongSelf = self else { return }
-            if let error = error {
-                //completion(error)
+            if let _ = error {
                 return
             }
             strongSelf.applicationContext.placement = strongSelf.applicationModel.placement

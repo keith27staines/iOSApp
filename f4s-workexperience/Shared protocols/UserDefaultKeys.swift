@@ -8,7 +8,6 @@ struct UserDefaultsKeys {
     static let partnerID = "partnerID"
     static let hasParnerIDBeenSentToServer = "hasParnerIDBeenSentToServer"
     static let userUuid = "userUuid"
-    static let userHasAccount = "userHasAccount"
     static let companyDatabaseCreatedDate = "companyDatabaseCreatedDate"
     static let isFirstLaunch = "isFirstLaunch"
     static let vendorUuid = "vendorUuid"

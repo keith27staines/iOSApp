@@ -61,6 +61,10 @@ public class F4SUser : F4SUserProtocol, Codable {
     
     public var placementUuid: F4SUUID?
     
+    public func nullifyUuid() {
+        uuid = nil
+    }
+    
     public var isOnboarded: Bool {
         guard let isFirstLaunch = localStore.value(key: LocalStore.Key.isFirstLaunch) as? Bool else { return false }
         return !isFirstLaunch
@@ -196,7 +200,37 @@ public struct F4SUserInformation : F4SUserProtocol {
     public var termsAgreed: Bool = false
     public var vouchers: [F4SUUID]?
     public var partners: [F4SUUIDDictionary]?
-    public var isOnboarded: Bool
-    public var isRegistered: Bool
+    public var isOnboarded: Bool = false
+    public var isRegistered: Bool = false
     public mutating func updateUuid(uuid: F4SUUID) { self.uuid = uuid }
+    
+    public init(
+        uuid: String? = nil,
+        consenterEmail: String? = nil,
+        parentEmail: String? = nil,
+        dateOfBirth: Date? = nil,
+        email: String? = nil,
+        firstName: String? = nil,
+        lastName: String? = nil,
+        requiresConsent: Bool = false,
+        termsAgreed: Bool = false,
+        vouchers: [F4SUUID]? = nil,
+        partners: [F4SUUIDDictionary]? = nil,
+        isOnboarded: Bool = false,
+        isRegistered: Bool = false
+        ) {
+        self.uuid = uuid
+        self.consenterEmail = consenterEmail
+        self.parentEmail = parentEmail
+        self.dateOfBirth = dateOfBirth
+        self.firstName = firstName
+        self.lastName = lastName
+        self.email = email
+        self.requiresConsent = requiresConsent
+        self.termsAgreed = termsAgreed
+        self.vouchers = vouchers
+        self.partners = partners
+        self.isOnboarded = isOnboarded
+        self.isRegistered = isRegistered
+    }
 }

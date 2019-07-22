@@ -8,12 +8,13 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderNetworking
 @testable import f4s_workexperience
 
 class MockUserService: F4SUserServiceProtocol {
-    func registerDeviceWithServer(installationUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRegisterResult>) -> ()) {
+    func registerDeviceWithServer(installationUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRegisterDeviceResult>) -> ()) {
         registerDeviceOnServerCalled += 1
-        let result: F4SNetworkResult<F4SRegisterResult>
+        let result: F4SNetworkResult<F4SRegisterDeviceResult>
         if registerDeviceOnServerCalled == registeringWillSucceedOnAttempt {
             result = F4SNetworkResult.success(successRegisterResult)
         } else {
@@ -25,8 +26,8 @@ class MockUserService: F4SUserServiceProtocol {
     
     var registerDeviceOnServerCalled: Int = 0
     var registeringWillSucceedOnAttempt: Int = 0
-    var successRegisterResult = F4SRegisterResult(uuid: UUID().uuidString, errors: nil)
-    var errorResult = F4SRegisterResult(uuid: nil, errors: F4SJSONValue(integerLiteral: 999))
+    var successRegisterResult = F4SRegisterDeviceResult(userUuid: UUID().uuidString)
+    var errorResult = F4SRegisterDeviceResult(errors: F4SJSONValue(integerLiteral: 999))
     var error = F4SNetworkError(localizedDescription: "Error handling test", attempting: "test", retry: false, logError: false)
     
     init(registeringWillSucceedOnAttempt: Int) {
