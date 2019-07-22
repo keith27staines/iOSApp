@@ -41,7 +41,7 @@ public class AppInstallationUuidLogic {
     public var registeredInstallationUuid: F4SUUID? {
         guard
             let _ = localStore.value(key: LocalStore.Key.isDeviceRegistered) as? Bool,
-            let registeredDeviceUuid = localStore.value(key: LocalStore.Key.installationUuid) as? F4SUUID
+            let registeredDeviceUuid = installationUuid
         else {
             return nil
         }
@@ -94,7 +94,7 @@ public class AppInstallationUuidLogic {
         }
     }
     
-    public func onDeviceWasRegisteredOnServer(
+    func onDeviceWasRegisteredOnServer(
         withInstallationUuid installationUuid: F4SUUID,
         networkResult: F4SNetworkResult<F4SRegisterDeviceResult>,
         completion: @escaping (F4SNetworkResult<F4SRegisterDeviceResult>)->())  {
