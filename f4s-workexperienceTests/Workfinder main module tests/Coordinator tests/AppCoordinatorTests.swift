@@ -8,6 +8,7 @@
 
 import XCTest
 import WorkfinderCommon
+import WorkfinderAppLogic
 
 @testable import f4s_workexperience
 
@@ -28,10 +29,13 @@ class AppCoordinatorTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
+        let user = mockUnregisteredUser
+        let localStore = MockLocalStore()
+        let logic = AppInstallationUuidLogic(localStore: localStore, userService: mockUserService, userRepo: MockUserRepository(user: user))
         injection = CoreInjection(
             launchOptions: nil,
-            installationUuid: "installationUuid",
-            user: mockUnregisteredUser,
+            appInstallationUuidLogic: logic,
+            user: user,
             userService: mockUserService,
             userStatusService: mockUserStatusService,
             userRepository: MockUserRepository(user: mockUnregisteredUser),

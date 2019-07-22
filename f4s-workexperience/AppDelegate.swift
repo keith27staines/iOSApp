@@ -11,6 +11,7 @@ import CoreData
 import XCGLogger
 import WorkfinderCommon
 import WorkfinderNetworking
+import WorkfinderAppLogic
 
 let globalLog = XCGLogger.default
 
@@ -18,25 +19,9 @@ extension Notification.Name {
     static let verificationCodeRecieved = Notification.Name("verificationCodeRecieved")
 }
 
-
-class AppInstallationUuidLogic {
-    let localStore: LocalStorageProtocol
-    init(localStore: LocalStorageProtocol = LocalStore()) {
-        self.localStore = localStore
-    }
-    var installationUuid: F4SUUID {
-        var uuid = localStore.value(key: LocalStore.Key.installationUuid) as? F4SUUID
-        if uuid == nil {
-            uuid = UUID().uuidString
-            localStore.setValue(uuid, for: LocalStore.Key.installationUuid)
-        }
-        return uuid!
-    }
-}
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    var appCoordinator: AppCoordinatorProtocol!
+    
     var window: UIWindow?
     var deviceToken: String?
 
@@ -46,24 +31,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return F4SUserService()
     }()
     
-    lazy var appInstallationUuid = AppInstallationUuidLogic().installationUuid
+    lazy var appInstallationUuidLogic: AppInstallationUuidLogic = {
+        let localStore = LocalStore()
+        let userRepo = F4SUserRepository(localStore: localStore)
+        return AppInstallationUuidLogic(userService: self.userService, userRepo: userRepo)
+    }()
+    
+    lazy var appCoordinator: AppCoordinatorProtocol = {
+        let appCoordinatorFactory = AppCoordinatorFactory()
+        let appCoordinator = appCoordinatorFactory.makeAppCoordinator(
+            registrar: UIApplication.shared,
+            launchOptions: self.launchOptions,
+            appInstallationUuidLogic: appInstallationUuidLogic,
+            userService: userService,
+            databaseDownloadManager: databaseDownloadManager!,
+            f4sLog: f4sLog!)
+        return appCoordinator
+    }()
+    
+    var launchOptions: [UIApplication.LaunchOptionsKey : Any]?
     
     // MARK:- Application events
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         if ProcessInfo.processInfo.arguments.contains("isUnitTesting") { return true }
+        self.launchOptions = launchOptions
         DataFixes().run()
         f4sLog = F4SLog()
         databaseDownloadManager = F4SDatabaseDownloadManager()
         configureNetwork()
-
-        let appCoordinatorFactory = AppCoordinatoryFactory()
-        appCoordinator = appCoordinatorFactory.makeAppCoordinator(
-            registrar: application,
-            launchOptions: launchOptions,
-            installationUuid: appInstallationUuid,
-            databaseDownloadManager: databaseDownloadManager!,
-            f4sLog: f4sLog!)
-        
         window = appCoordinator.window
         appCoordinator.start()
         return true
@@ -107,6 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        guard let appInstallationUuid = appInstallationUuidLogic.registeredInstallationUuid else { return }
         let tokenParts = deviceToken.map { data -> String in
             return String(format: "%02.2hhx", data)
         }

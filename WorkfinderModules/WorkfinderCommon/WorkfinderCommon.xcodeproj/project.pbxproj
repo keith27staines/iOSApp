@@ -31,6 +31,7 @@
 		FCA91E7A2234043D007ED308 /* WorkfinderCommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91E792234043D007ED308 /* WorkfinderCommonTests.swift */; };
 		FCA91E7C2234043D007ED308 /* WorkfinderCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA91E6E2234043D007ED308 /* WorkfinderCommon.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCA91E88223404AF007ED308 /* WorkfinderCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91E87223404AF007ED308 /* WorkfinderCommon.swift */; };
+		FCB24A5F22E44AB100077DFF /* WorkfinderCommonStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB24A5E22E44AB100077DFF /* WorkfinderCommonStructs.swift */; };
 		FCBEA7B5228701E600CAB1F1 /* F4SUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBEA7B4228701E500CAB1F1 /* F4SUserTests.swift */; };
 		FCDB07382286F6640053347F /* F4SUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB07372286F6640053347F /* F4SUser.swift */; };
 		FCDB073A2286F7870053347F /* F4SUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB07392286F7870053347F /* F4SUserRepository.swift */; };
@@ -109,6 +110,7 @@
 		FCA91E792234043D007ED308 /* WorkfinderCommonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderCommonTests.swift; sourceTree = "<group>"; };
 		FCA91E7B2234043D007ED308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCA91E87223404AF007ED308 /* WorkfinderCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderCommon.swift; sourceTree = "<group>"; };
+		FCB24A5E22E44AB100077DFF /* WorkfinderCommonStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderCommonStructs.swift; sourceTree = "<group>"; };
 		FCBEA7B4228701E500CAB1F1 /* F4SUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserTests.swift; sourceTree = "<group>"; };
 		FCDB07372286F6640053347F /* F4SUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUser.swift; sourceTree = "<group>"; };
 		FCDB07392286F7870053347F /* F4SUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserRepository.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				FC32FD422265E4C800740F0C /* F4SContentType.swift */,
 				FCDB07372286F6640053347F /* F4SUser.swift */,
 				FCDB073B2286F8B00053347F /* Analytics and debugging.swift */,
+				FCB24A5E22E44AB100077DFF /* WorkfinderCommonStructs.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -471,6 +474,7 @@
 				FCE519302249482A00B550C9 /* F4SDisplayableMonth.swift in Sources */,
 				FC0E5CFB224E1B5700615B4F /* LocalStore.swift in Sources */,
 				FC53A0ED224B9DAC00C2B97B /* UserMessageHandler.swift in Sources */,
+				FCB24A5F22E44AB100077DFF /* WorkfinderCommonStructs.swift in Sources */,
 				FCE51936224948E400B550C9 /* F4SDaysAndHoursModel.swift in Sources */,
 				FC9670A4225A195B00318F69 /* F4SPlacementRepositoryProtocol.swift in Sources */,
 				FCDB073C2286F8B00053347F /* Analytics and debugging.swift in Sources */,

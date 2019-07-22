@@ -8,11 +8,13 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderNetworking
+import WorkfinderAppLogic
 
 public typealias LaunchOptions = [UIApplication.LaunchOptionsKey: Any]
 
 protocol CoreInjectionProtocol : class {
-    var installationUuid: F4SUUID { get }
+    var appInstallationUuidLogic: AppInstallationUuidLogic { get }
     var launchOptions: LaunchOptions? { get set }
     var user: F4SUserProtocol { get set }
     var userService: F4SUserServiceProtocol { get }
@@ -31,10 +33,10 @@ class CoreInjection : CoreInjectionProtocol {
     var userRepository: F4SUserRepositoryProtocol
     var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol
     var log: F4SAnalyticsAndDebugging
-    let installationUuid: F4SUUID
+    let appInstallationUuidLogic: AppInstallationUuidLogic
     
     init(launchOptions: LaunchOptions?,
-         installationUuid: F4SUUID,
+         appInstallationUuidLogic: AppInstallationUuidLogic,
          user: F4SUserProtocol,
          userService: F4SUserServiceProtocol,
          userStatusService: F4SUserStatusServiceProtocol = F4SUserStatusService.shared,
@@ -50,6 +52,6 @@ class CoreInjection : CoreInjectionProtocol {
         self.userRepository = userRepository
         self.databaseDownloadManager = databaseDownloadManager
         self.log = f4sLog
-        self.installationUuid = installationUuid
+        self.appInstallationUuidLogic = appInstallationUuidLogic
     }
 }

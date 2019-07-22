@@ -8,15 +8,17 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderNetworking
+import WorkfinderAppLogic
 
 protocol AppCoordinatoryFactoryProtocol {}
 
-struct AppCoordinatoryFactory : AppCoordinatoryFactoryProtocol {
+struct AppCoordinatorFactory : AppCoordinatoryFactoryProtocol {
     
     func makeAppCoordinator(
         registrar: RemoteNotificationsRegistrarProtocol,
         launchOptions: LaunchOptions? = nil,
-        installationUuid: F4SUUID,
+        appInstallationUuidLogic: AppInstallationUuidLogic,
         user: F4SUserProtocol = F4SUser(),
         userService: F4SUserServiceProtocol = F4SUserService(),
         userRepository: F4SUserRepositoryProtocol = F4SUserRepository(),
@@ -27,7 +29,7 @@ struct AppCoordinatoryFactory : AppCoordinatoryFactoryProtocol {
         
         let injection = CoreInjection(
             launchOptions: launchOptions,
-            installationUuid: installationUuid,
+            appInstallationUuidLogic: appInstallationUuidLogic,
             user: user,
             userService: userService,
             userRepository: userRepository,

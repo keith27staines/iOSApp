@@ -16,11 +16,9 @@ class WorkfinderNetworkConfigurationInterfaceTests: XCTestCase {
         sut = WEXNetworkingConfiguration(
             wexApiKey: "apiKey",
             baseUrlString: "baseUrlString",
-            v1ApiUrlString: "v1UrlString",
             v2ApiUrlString: "v2UrlString")
         XCTAssertEqual(sut.wexApiKey, "apiKey")
         XCTAssertEqual(sut.baseUrlString, "baseUrlString")
-        XCTAssertEqual(sut.v1ApiUrlString, "v1UrlString")
         XCTAssertEqual(sut.v2ApiUrlString, "v2UrlString")
     }
 
