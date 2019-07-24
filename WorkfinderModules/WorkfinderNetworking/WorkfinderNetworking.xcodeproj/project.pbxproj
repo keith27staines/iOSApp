@@ -28,6 +28,7 @@
 		FCA91E432233FF20007ED308 /* WorkfinderNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA91E352233FF20007ED308 /* WorkfinderNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCA91E4F2233FFDC007ED308 /* WorkfinderNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91E4E2233FFDC007ED308 /* WorkfinderNetworking.swift */; };
 		FCB24A6122E44F6B00077DFF /* F4SUserServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB24A6022E44F6B00077DFF /* F4SUserServiceProtocol.swift */; };
+		FCC2EC1622E85820009E8988 /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC2EC1522E85820009E8988 /* LoggerTests.swift */; };
 		FCD8AEB122BC9F0E00C52E74 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD8AEB022BC9F0E00C52E74 /* Logger.swift */; };
 		FCE3065B2254F6EA000F928B /* MockWEXPlacementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE3065A2254F6EA000F928B /* MockWEXPlacementService.swift */; };
 		FCE4C589223BC5BB00C5B15E /* WEXPlacementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE4C588223BC5BB00C5B15E /* WEXPlacementService.swift */; };
@@ -83,6 +84,7 @@
 		FCA91E422233FF20007ED308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCA91E4E2233FFDC007ED308 /* WorkfinderNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderNetworking.swift; sourceTree = "<group>"; };
 		FCB24A6022E44F6B00077DFF /* F4SUserServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserServiceProtocol.swift; sourceTree = "<group>"; };
+		FCC2EC1522E85820009E8988 /* LoggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerTests.swift; sourceTree = "<group>"; };
 		FCD8AEB022BC9F0E00C52E74 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		FCE3065A2254F6EA000F928B /* MockWEXPlacementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWEXPlacementService.swift; sourceTree = "<group>"; };
 		FCE4C588223BC5BB00C5B15E /* WEXPlacementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEXPlacementService.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 		FCA91E3F2233FF20007ED308 /* WorkfinderNetworkingTests */ = {
 			isa = PBXGroup;
 			children = (
+				FCC2EC1522E85820009E8988 /* LoggerTests.swift */,
 				FC2768E122DF09C700B9E369 /* NetworkConfigTests.swift */,
 				FC2AC5EA2235281A00FF4E47 /* WorkfinderSessionManagerTests.swift */,
 				FCA91E402233FF20007ED308 /* WorkfinderNetworkingTests.swift */,
@@ -187,11 +190,11 @@
 				FC6DBCA722BA24270080B8E4 /* NetworkConfig.swift */,
 				FC6DBCA222BA20410080B8E4 /* WorkfinderEndpoint.swift */,
 				FC2AC5E822351E2C00FF4E47 /* WorkfinderSessionManager.swift */,
-				FCA91E4E2233FFDC007ED308 /* WorkfinderNetworking.swift */,
 				FC6DBCA122BA20410080B8E4 /* F4SNetworkSessionManager.swift */,
 				FC2768E522DF582D00B9E369 /* F4SHttpRequestVerb.swift */,
 				FC2768E922DF5B3200B9E369 /* JsonDateFormatterExtension.swift */,
 				FC6DBC9E22BA20410080B8E4 /* F4SService.swift */,
+				FCA91E4E2233FFDC007ED308 /* WorkfinderNetworking.swift */,
 				FCD8AEB022BC9F0E00C52E74 /* Logger.swift */,
 				FCE306572254F69F000F928B /* Mocks */,
 				FCE4C587223BC56A00C5B15E /* Services */,
@@ -394,6 +397,7 @@
 				FC2768EC22DF63EA00B9E369 /* JsonDateFormatterExtensionTests.swift in Sources */,
 				FC2768E422DF252000B9E369 /* F4SNetworkSessionManagerTests.swift in Sources */,
 				FCA91E412233FF20007ED308 /* WorkfinderNetworkingTests.swift in Sources */,
+				FCC2EC1622E85820009E8988 /* LoggerTests.swift in Sources */,
 				FC2768E222DF09C700B9E369 /* NetworkConfigTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -36,10 +36,10 @@ class Logger {
         let code = response?.statusCode ?? (error as NSError).code
         text = "\(text)\nCode: \(code)"
         if let requestData = request.httpBody {
-            text = "\(text)\n\nRequest data:\n\(String(data: requestData, encoding: .utf8)!))"
+            text = "\(text)\n\nRequest data:\n\(String(data: requestData, encoding: .utf8)!)"
         }
         if let responseData = responseData {
-            text = "\(text)\n\nResponse data:\n\(String(data: responseData, encoding: .utf8)!))"
+            text = "\(text)\n\nResponse data:\n\(String(data: responseData, encoding: .utf8)!)"
         }
         if request.allHTTPHeaderFields?.isEmpty == false {
             text = "\n\(text)\nRequest Headers:"
@@ -71,12 +71,12 @@ class Logger {
         text = "\(text)\nCode: \(code)"
         if let requestData = request.httpBody {
             if let dataAsString = String(data: requestData, encoding: .utf8) {
-                text = "\(text)\n\nRequest data:\n\(dataAsString))"
+                text = "\(text)\n\nRequest data:\n\(dataAsString)"
             } else {
                 text = "\(text)\n\nRequest data: \(requestData.count) bytes"
             }
         }
-        text = "\(text)\n\nResponse data:\n\(String(data: responseData, encoding: .utf8)!))"
+        text = "\(text)\n\nResponse data:\n\(String(data: responseData, encoding: .utf8)!)"
         if request.allHTTPHeaderFields?.isEmpty == false {
             text = "\n\(text)\nRequest Headers:"
             request.allHTTPHeaderFields?.forEach({ (key, value) in

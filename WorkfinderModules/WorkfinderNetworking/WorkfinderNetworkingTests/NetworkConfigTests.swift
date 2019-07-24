@@ -24,13 +24,22 @@ class NetworkConfigTests: XCTestCase {
 
 
 class MockLog: F4SAnalyticsAndDebugging {
-    func identity(userId: F4SUUID) {}
+    
+    var lastIdentity: F4SUUID? = nil
+    
+    func identity(userId: F4SUUID) { lastIdentity = userId}
     
     func alias(userId: F4SUUID) {}
     
-    func notifyError(_ error: NSError, functionName: StaticString, fileName: StaticString, lineNumber: Int) {}
+    var notifiedErrors: [NSError] = []
+    func notifyError(_ error: NSError, functionName: StaticString, fileName: StaticString, lineNumber: Int) {
+        notifiedErrors.append(error)
+    }
     
-    func leaveBreadcrumb(with message: String, functionName: StaticString, fileName: StaticString, lineNumber: Int) {}
+    var breadcrumbs: [String] = []
+    func leaveBreadcrumb(with message: String, functionName: StaticString, fileName: StaticString, lineNumber: Int) {
+        breadcrumbs.append(message)
+    }
     
     func updateHistory() {}
     
@@ -38,10 +47,16 @@ class MockLog: F4SAnalyticsAndDebugging {
     
     func userCanAccessDebugMenu() -> Bool { return false }
     
-    func error(message: String, functionName: StaticString, fileName: StaticString, lineNumber: Int) {}
+    var errorText: [String] = []
+    func error(message: String, functionName: StaticString, fileName: StaticString, lineNumber: Int) {
+        errorText.append(message)
+    }
     
     func error(_ error: Error, functionName: StaticString, fileName: StaticString, lineNumber: Int) {}
     
-    func debug(_ message: String, functionName: StaticString, fileName: StaticString, lineNumber: Int) {}
+    var debugText: [String] = []
+    func debug(_ message: String, functionName: StaticString, fileName: StaticString, lineNumber: Int) {
+        debugText.append(message)
+    }
     
 }

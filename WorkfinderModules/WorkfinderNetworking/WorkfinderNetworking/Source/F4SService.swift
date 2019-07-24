@@ -14,6 +14,8 @@ open class F4SDataTaskService {
     public let session: URLSession
     public let baseUrl: URL
     public var apiName: String { return self._apiName }
+    public var relativeUrlString: String?
+    public typealias DataTaskReturn = (data:Data?, response:URLResponse?, error:Error?)
     
     public var url : URL? {
         let apiUrl = URL(string: urlString)!
@@ -24,10 +26,6 @@ open class F4SDataTaskService {
     private var urlString: String {
         return baseUrl.absoluteString + "/" + apiName
     }
-    
-    public var relativeUrlString: String?
-    
-    public typealias DataTaskReturn = (data:Data?, response:URLResponse?, error:Error?)
     
     public static func networkDataResultFrom(data: Data?, response: URLResponse?, error: Error?, attempting: String) -> F4SNetworkDataResult {
         let dataReturned = DataTaskReturn(data: data, response: response, error: error)
