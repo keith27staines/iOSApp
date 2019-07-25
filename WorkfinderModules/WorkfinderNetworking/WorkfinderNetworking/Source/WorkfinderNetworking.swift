@@ -1,11 +1,3 @@
-//
-//  WorkfinderNetworking.swift
-//  WorkfinderNetworking
-//
-//  Created by Keith Dev on 09/03/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
-
 import WorkfinderCommon
 
 var sharedSessionManager: WEXSessionManager!
@@ -19,24 +11,6 @@ func configureWEXSessionManager(configuration: WEXNetworkingConfigurationProtoco
 
 public enum WEXNetworkConfigurationError : Error {
     case sessionManagerMayOnlyBeConfiguredOnce
-}
-
-public enum WEXHTTPRequestVerb {
-    case get
-    case put(Data)
-    case patch(Data)
-    case post(Data)
-    case delete
-    
-    var name: String {
-        switch self {
-        case .get: return "GET"
-        case .put(_): return "PUT"
-        case .patch: return "PATCH"
-        case .post: return "POST"
-        case .delete: return "DELETE"
-        }
-    }
 }
 
 public typealias WEXDataResult = WEXResult<Data?,WEXNetworkError>

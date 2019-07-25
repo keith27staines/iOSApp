@@ -1,17 +1,26 @@
-//
-//  F4SService.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 06/01/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
-//
-
 import Foundation
 import WorkfinderCommon
 
+public protocol F4SNetworkTask {
+    func cancel()
+    func resume()
+}
+
+public protocol F4SNetworkSession {
+    func networkTask(with: URLRequest, completionHandler: @escaping ((Data?, URLResponse?, Error?) -> Void) ) -> F4SNetworkTask
+}
+
+extension URLSession : F4SNetworkSession {
+    public func networkTask(with request: URLRequest, completionHandler: @escaping ((Data?, URLResponse?, Error?) -> Void)) -> F4SNetworkTask {
+        return self.dataTask(with: request, completionHandler: completionHandler)
+    }
+}
+
+extension URLSessionDataTask : F4SNetworkTask {}
+
 open class F4SDataTaskService {
-    
-    public let session: URLSession
+    let _apiName: String
+    public let session: F4SNetworkSession
     public let baseUrl: URL
     public var apiName: String { return self._apiName }
     public var relativeUrlString: String?
@@ -23,29 +32,8 @@ open class F4SDataTaskService {
         return apiUrl.appendingPathComponent(relativeUrlString)
     }
     
-    private var urlString: String {
+    var urlString: String {
         return baseUrl.absoluteString + "/" + apiName
-    }
-    
-    public static func networkDataResultFrom(data: Data?, response: URLResponse?, error: Error?, attempting: String) -> F4SNetworkDataResult {
-        let dataReturned = DataTaskReturn(data: data, response: response, error: error)
-        return networkDataResultFrom(returned: dataReturned, attempting: attempting)
-    }
-
-    public static func networkDataResultFrom(returned: DataTaskReturn, attempting: String) -> F4SNetworkDataResult {
-        if let error = returned.error as NSError? {
-            let result = F4SNetworkDataResult.error(F4SNetworkError(error: error, attempting: attempting))
-            return result
-        }
-        
-        let httpResponse = returned.response as! HTTPURLResponse
-        
-        if let error = F4SNetworkError(response: httpResponse, attempting: attempting) {
-            let result = F4SNetworkDataResult.error(error)
-            return result
-        }
-        let result = F4SNetworkDataResult.success(returned.data)
-        return result
     }
     
     /// Initialize a new instance
@@ -139,12 +127,9 @@ open class F4SDataTaskService {
         task = dataTask(with: request, attempting: attempting, completion: completion)
         task?.resume()
     }
-    
-    // MARK:- internal
-    
+
     /// The dataTask currently being performed by this service (only one task can be in progress. Starting a second task will cancel the first)
-    private var task: URLSessionDataTask?
-    private let _apiName: String
+    var task: F4SNetworkTask?
     
     public lazy var jsonDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
@@ -172,16 +157,16 @@ open class F4SDataTaskService {
         return request
     }
     
-    public static func dataTask(with request: URLRequest,
-                                session: URLSession,
+    public static func networkTask(with request: URLRequest,
+                                session: F4SNetworkSession,
                                 attempting: String,
                                 completion: @escaping (F4SNetworkDataResult) -> ()
-                                ) -> URLSessionDataTask {
+                                ) -> F4SNetworkTask {
         var modifiedRequest = request
         if let userUuid = F4SUser().uuid {
             modifiedRequest.setValue(userUuid, forHTTPHeaderField: "wex.user.uuid")
         }
-        let task = session.dataTask(with: modifiedRequest, completionHandler: {data, response, error -> Void in
+        let task = session.networkTask(with: modifiedRequest, completionHandler: {data, response, error -> Void in
             if let error = error as NSError? {
                 if error.domain == "NSURLErrorDomain" && error.code == -999 {
                     // The operation was cancelled
@@ -208,8 +193,8 @@ open class F4SDataTaskService {
     internal func dataTask(with request: URLRequest,
                            attempting: String,
                            completion: @escaping (F4SNetworkDataResult) -> ()
-                           ) -> URLSessionDataTask {
-        return F4SDataTaskService.dataTask(with: request, session: session, attempting: attempting, completion: completion)
+                           ) -> F4SNetworkTask {
+        return F4SDataTaskService.networkTask(with: request, session: session, attempting: attempting, completion: completion)
     }
 }
 
