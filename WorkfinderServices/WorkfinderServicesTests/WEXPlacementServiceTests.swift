@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import WorkfinderNetworking
+@testable import WorkfinderServices
 
 class WEXPlacementServiceTests: XCTestCase {
 

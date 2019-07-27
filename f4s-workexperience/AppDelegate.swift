@@ -11,6 +11,7 @@ import CoreData
 import XCGLogger
 import WorkfinderCommon
 import WorkfinderNetworking
+import WorkfinderServices
 import WorkfinderAppLogic
 
 let globalLog = XCGLogger.default

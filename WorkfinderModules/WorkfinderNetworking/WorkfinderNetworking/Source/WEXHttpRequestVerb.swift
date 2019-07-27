@@ -15,7 +15,7 @@ public enum WEXHTTPRequestVerb {
     case post(Data)
     case delete
     
-    var name: String {
+    public var name: String {
         switch self {
         case .get: return "GET"
         case .put(_): return "PUT"

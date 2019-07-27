@@ -27,6 +27,7 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES"
       shouldUseLaunchSchemeArgsEnv = "NO">
       <Testables>
          <TestableReference
@@ -82,6 +83,26 @@
                BuildableName = "WorkfinderApplyUseCaseTests.xctest"
                BlueprintName = "WorkfinderApplyUseCaseTests"
                ReferencedContainer = "container:WorkfinderModules/WorkfinderApplyUseCase/WorkfinderApplyUseCase.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FCD6F9D522E31591003F7C34"
+               BuildableName = "WorkfinderAppLogicTests.xctest"
+               BlueprintName = "WorkfinderAppLogicTests"
+               ReferencedContainer = "container:WorkfinderAppLogic/WorkfinderAppLogic.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FC02D9F022EC70FD003C8148"
+               BuildableName = "WorkfinderServicesTests.xctest"
+               BlueprintName = "WorkfinderServicesTests"
+               ReferencedContainer = "container:WorkfinderServices/WorkfinderServices.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

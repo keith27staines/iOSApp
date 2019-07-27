@@ -9,9 +9,19 @@
 import Foundation
 import WorkfinderCommon
 
-var logger: Logger!
+public protocol NetworkCallLogger {
+    func logDataTaskFailure(attempting: String?,
+    error: Error,
+    request: URLRequest,
+    response: HTTPURLResponse?,
+    responseData: Data?)
+    
+    func logDataTaskSuccess(request: URLRequest,
+                            response: HTTPURLResponse,
+                            responseData: Data)
+}
 
-class Logger {
+class Logger : NetworkCallLogger {
     
     let log: F4SAnalyticsAndDebugging?
     

@@ -8,6 +8,7 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderServices
 import WorkfinderNetworking
 
 public class F4SUserService : F4SUserServiceProtocol {

@@ -79,15 +79,15 @@ public class EmailVerificationService {
     func logResult(attempting: String, request: URLRequest, data: Data?, response: URLResponse?, error: Error?) {
         let httpResponse = response as? HTTPURLResponse
         if let error = error {
-            logger.logDataTaskFailure(error: error, request: request, response: httpResponse, responseData: data)
+            logger?.logDataTaskFailure(attempting: attempting, error: error, request: request, response: httpResponse, responseData: data)
             return
         }
         if data == nil {
             let wexError = WEXErrorsFactory.networkErrorFrom(response: httpResponse!, responseData: data, attempting: attempting)!
-            logger.logDataTaskFailure(error: wexError, request: request, response: httpResponse, responseData: data)
+            logger?.logDataTaskFailure(attempting: attempting, error: wexError, request: request, response: httpResponse, responseData: data)
             return
         }
-        logger.logDataTaskSuccess(request: request, response: httpResponse!, responseData: data!)
+        logger?.logDataTaskSuccess(request: request, response: httpResponse!, responseData: data!)
     }
     
     public func verifyWithCode(email: String, code: String, onSuccess: @escaping  ( _ email:String) -> Void, onFailure: @escaping (_ email:String, _ error:CodeValidationError) -> Void) {
