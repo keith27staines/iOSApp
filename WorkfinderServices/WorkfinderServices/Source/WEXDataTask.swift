@@ -10,6 +10,7 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderNetworking
 
+public typealias HTTPHeaders = [String:String]
 public typealias WEXDataResult = WEXResult<Data?,WEXNetworkError>
 
 public class WEXDataTask {

@@ -1,38 +1,61 @@
 import Foundation
 import WorkfinderCommon
 
+/// Defines the two main functions of a network task
+/// This protocol was introduced to hide the complexity of the interface of
+/// URLSessionDataTask and simplify mocking of URLSessionDataTask in unit tests
 public protocol F4SNetworkTask {
+    /// Cancels (or attempts to cancel) the network task if it is running
     func cancel()
+    /// Starts or resumes a network task (cannot be called on a cancelled task)
     func resume()
 }
 
+/// `F4SNetworkSession` defines a very simplified interface for URLSession
+/// and was introduced to allow simpler mocking of URLSession in unit tests
 public protocol F4SNetworkSession {
     func networkTask(with: URLRequest, completionHandler: @escaping ((Data?, URLResponse?, Error?) -> Void) ) -> F4SNetworkTask
     var configuration: URLSessionConfiguration { get }
 }
 
+/// Conform URLSession to F4SNetworkSession to enable simple mocking of URLSession
 extension URLSession : F4SNetworkSession {
     public func networkTask(with request: URLRequest, completionHandler: @escaping ((Data?, URLResponse?, Error?) -> Void)) -> F4SNetworkTask {
         return self.dataTask(with: request, completionHandler: completionHandler)
     }
 }
 
+/// Conform URLSessionDataTask to F4SNetworkTask to simplify mocking
 extension URLSessionDataTask : F4SNetworkTask {}
 
+///
 open class F4SDataTaskService {
     let _apiName: String
+    
+    /// The session used by the service
     public internal (set) var session: F4SNetworkSession
+    
+    /// The base url of the api (e.g ...v2
     public let baseUrl: URL
+    
+    /// The api name (e.g `placement` or `user/me`
     public var apiName: String { return self._apiName }
+    
+    /// url relative to baseUrl/apiName (e.g uuid/documents when retrieving
+    /// documents from ...v2/company/uuid/documents)
     public var relativeUrlString: String?
+    
+    /// The object returned by the datatask in the completion handler
     public typealias DataTaskReturn = (data:Data?, response:URLResponse?, error:Error?)
     
+    /// Initialises a new instance
     public var url : URL {
         let apiUrl = URL(string: urlString)!
         guard let relativeUrlString = relativeUrlString else { return apiUrl }
         return apiUrl.appendingPathComponent(relativeUrlString)
     }
     
+    /// Returns the base url string concatenated with the apiname
     var urlString: String {
         return baseUrl.absoluteString + "/" + apiName
     }
@@ -53,11 +76,13 @@ open class F4SDataTaskService {
         session = URLSession(configuration: config)
     }
     
+    /// Cancels or attempts to cancel the current datatask
     public func cancel() {
         task?.cancel()
     }
     
-    /// Performs an HTTP get request
+    /// Performs an HTTP `GET` request and returns the result on the completion handler
+    ///
     /// - parameter attempting: A short high level description of the reason the operation is being performed
     /// - parameter completion: Returns a result containing either the return object or error information
     public func beginGetRequest<A>(attempting: String, completion: @escaping (F4SNetworkResult<A>) -> ()) {
@@ -85,7 +110,8 @@ open class F4SDataTaskService {
         task?.resume()
     }
     
-    /// Performs an HTTP request with a "send" verb (e.g, put, patch, etc")
+    /// Performs an HTTP request with a "send" verb (e.g, put, patch, etc") and
+    /// returns the result on the completion handler
     ///
     /// - parameter verb: Http request verb
     /// - parameter object: The codable (json encodable) object to be patched to the server
@@ -113,12 +139,14 @@ open class F4SDataTaskService {
     /// The dataTask currently being performed by this service (only one task can be in progress. Starting a second task will cancel the first)
     var task: F4SNetworkTask?
     
+    /// A JSON decoder equipped to decode datetimes as used in the Workfinder api
     public lazy var jsonDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
         return decoder
     }()
     
+    /// A JSON encoder equipped to encode dates as required by the Workfinder api
     internal lazy var jsonEncoder: JSONEncoder = {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .formatted(DateFormatter.iso8601Full)
@@ -139,6 +167,7 @@ open class F4SDataTaskService {
         return request
     }
     
+    /// Returns a `F4SNetworkTask` that can be used independently
     public static func networkTask(with request: URLRequest,
                                 session: F4SNetworkSession,
                                 attempting: String,

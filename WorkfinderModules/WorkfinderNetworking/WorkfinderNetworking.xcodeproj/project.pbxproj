@@ -13,7 +13,7 @@
 		FC2768E822DF595600B9E369 /* F4SHttpRequestVerbTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2768E722DF595600B9E369 /* F4SHttpRequestVerbTests.swift */; };
 		FC2768EA22DF5B3200B9E369 /* JsonDateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2768E922DF5B3200B9E369 /* JsonDateFormatterExtension.swift */; };
 		FC2768EC22DF63EA00B9E369 /* JsonDateFormatterExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2768EB22DF63EA00B9E369 /* JsonDateFormatterExtensionTests.swift */; };
-		FC2AC5E922351E2C00FF4E47 /* WorkfinderSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2AC5E822351E2C00FF4E47 /* WorkfinderSessionManager.swift */; };
+		FC2AC5E922351E2C00FF4E47 /* WEXSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2AC5E822351E2C00FF4E47 /* WEXSessionManager.swift */; };
 		FC2AC5EB2235281A00FF4E47 /* WorkfinderSessionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2AC5EA2235281A00FF4E47 /* WorkfinderSessionManagerTests.swift */; };
 		FC2AC5F12235516A00FF4E47 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2AC5F02235516A00FF4E47 /* Helpers.swift */; };
 		FC6DBCA322BA20410080B8E4 /* F4SDataTaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6DBC9E22BA20410080B8E4 /* F4SDataTaskService.swift */; };
@@ -64,7 +64,7 @@
 		FC2768E722DF595600B9E369 /* F4SHttpRequestVerbTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SHttpRequestVerbTests.swift; sourceTree = "<group>"; };
 		FC2768E922DF5B3200B9E369 /* JsonDateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDateFormatterExtension.swift; sourceTree = "<group>"; };
 		FC2768EB22DF63EA00B9E369 /* JsonDateFormatterExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDateFormatterExtensionTests.swift; sourceTree = "<group>"; };
-		FC2AC5E822351E2C00FF4E47 /* WorkfinderSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderSessionManager.swift; sourceTree = "<group>"; };
+		FC2AC5E822351E2C00FF4E47 /* WEXSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEXSessionManager.swift; sourceTree = "<group>"; };
 		FC2AC5EA2235281A00FF4E47 /* WorkfinderSessionManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderSessionManagerTests.swift; sourceTree = "<group>"; };
 		FC2AC5F02235516A00FF4E47 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		FC6DBC9E22BA20410080B8E4 /* F4SDataTaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDataTaskService.swift; sourceTree = "<group>"; };
@@ -186,7 +186,7 @@
 			children = (
 				FCA91E4E2233FFDC007ED308 /* WorkfinderNetworking.swift */,
 				FC6DBCA222BA20410080B8E4 /* WorkfinderEndpoint.swift */,
-				FC2AC5E822351E2C00FF4E47 /* WorkfinderSessionManager.swift */,
+				FC2AC5E822351E2C00FF4E47 /* WEXSessionManager.swift */,
 				FC6DBCA122BA20410080B8E4 /* F4SNetworkSessionManager.swift */,
 				FC2768E522DF582D00B9E369 /* F4SHttpRequestVerb.swift */,
 				FC2768E922DF5B3200B9E369 /* JsonDateFormatterExtension.swift */,
@@ -336,7 +336,7 @@
 				FCA91E4F2233FFDC007ED308 /* WorkfinderNetworking.swift in Sources */,
 				FCC2EC1822E89B88009E8988 /* WEXHttpRequestVerb.swift in Sources */,
 				FC2768E622DF582D00B9E369 /* F4SHttpRequestVerb.swift in Sources */,
-				FC2AC5E922351E2C00FF4E47 /* WorkfinderSessionManager.swift in Sources */,
+				FC2AC5E922351E2C00FF4E47 /* WEXSessionManager.swift in Sources */,
 				FC6DBCA422BA20410080B8E4 /* WorkfinderEndpoint.swift in Sources */,
 				FC6DBCA322BA20410080B8E4 /* F4SDataTaskService.swift in Sources */,
 				FCD8AEB122BC9F0E00C52E74 /* Logger.swift in Sources */,

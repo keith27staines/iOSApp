@@ -1,13 +1,7 @@
-//
-//  WEXHttpRequestVerb.swift
-//  WorkfinderNetworking
-//
-//  Created by Keith Dev on 24/07/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
-
 import Foundation
 
+
+/// This is almost obsolete, prefer to use the F4S equivalent
 public enum WEXHTTPRequestVerb {
     case get
     case put(Data)

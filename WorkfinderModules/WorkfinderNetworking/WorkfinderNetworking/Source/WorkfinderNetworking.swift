@@ -1,19 +1,24 @@
 import WorkfinderCommon
 
-public typealias HTTPHeaders = [String:String]
-
-public enum WEXNetworkConfigurationError : Error {
-    case sessionManagerMayOnlyBeConfiguredOnce
-}
-
 /*
  `WorkfinderNetworking` defines shared state required by the network stack
  */
 public struct WorkfinderNetworking {
     public static var networkCallLogger: NetworkCallLogger? { return logger }
+    
+    /// `sharedWEXSessionManager` is deprecated. Most of its functionality is
+    /// incorporated in its F4S equivalent. No new services should be built to
+    /// rely on any component of WEXNetworking
     public static var sharedWEXSessionManager: WEXSessionManager!
     
     /// Configures the entire networking stack
+    ///
+    /// Currently, WorkfinderNetworking manages two stacks: F4SNetworking and
+    /// WEXNetworking. WEXNetworking was an interim solution to a problem that
+    /// has gone away, and it can be dropped entirely once the three
+    /// remaining services that rely on it are rebuilt to use F4SNetworking
+    ///
+    /// - Note: Call this only once in the production code
     ///
     /// - Parameters:
     ///   - wexApiKey: the api key required for Workfinder api access
@@ -36,14 +41,15 @@ public struct WorkfinderNetworking {
 
 }
 
-var logger: Logger?
-
+/// `NetworkConfig` defines api keys and api endpoints which are exposed through
+/// static methods which are set by `WorkfinderNetworking.configure`
 public struct NetworkConfig {
     
+    /// `wexApiKey` is the api key required for all calls to Workfinder
     public static var wexApiKey: String { return _wexApiKey }
     internal static var _wexApiKey: String = ""
     
-    /// The base url for the workfinder api, excluding v1 or v2 postfixes
+    /// The base url for the Workfinder api, excluding the v2 postfixe
     public static var workfinderApi: String { return _workfinderBaseApiUrlString }
     internal static var _workfinderBaseApiUrlString: String = ""
     
@@ -52,7 +58,8 @@ public struct NetworkConfig {
     
 }
 
-
+/// `logger` provides a logging mechanism speclialised for network requests
+var logger: Logger?
 
 
 
