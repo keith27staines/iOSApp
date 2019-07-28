@@ -97,5 +97,4 @@ class Logger : NetworkCallLogger {
         text = "\(text)\n\(separator)\n\n"
         log.debug(text, functionName: #function, fileName: #file, lineNumber: #line)
     }
-    
 }
