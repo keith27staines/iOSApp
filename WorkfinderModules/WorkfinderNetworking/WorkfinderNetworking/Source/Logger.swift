@@ -1,7 +1,7 @@
 import Foundation
 import WorkfinderCommon
 
-/// Defines the methods required to log network calls in detail
+/// Defines the methods required to log detailed information about network calls
 public protocol NetworkCallLogger {
     /// Logs failures and writes the failure details to an external notification
     /// service
