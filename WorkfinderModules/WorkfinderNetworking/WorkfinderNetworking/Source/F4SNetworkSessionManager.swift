@@ -22,9 +22,8 @@ public class F4SNetworkSessionManager {
         return _smallImageSession!
     }
     
-    public init(log: F4SAnalyticsAndDebugging?, wexApiKey: String = NetworkConfig.wexApiKey) {
+    public init(wexApiKey: String = NetworkConfig.wexApiKey) {
         self.wexApiKey = wexApiKey
-        logger = Logger(log: log)
     }
     
     // MARK:- Internal implementation

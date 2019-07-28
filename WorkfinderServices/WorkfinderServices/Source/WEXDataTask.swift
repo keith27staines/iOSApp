@@ -13,7 +13,7 @@ import WorkfinderNetworking
 public typealias WEXDataResult = WEXResult<Data?,WEXNetworkError>
 
 public class WEXDataTask {
-    var session: URLSession { return sharedSessionManager.wexUserSession }
+    var session: URLSession { return WorkfinderNetworking.sharedWEXSessionManager.wexUserSession }
     let urlString: String
     let verb: WEXHTTPRequestVerb
     let additionalHeaders: HTTPHeaders?

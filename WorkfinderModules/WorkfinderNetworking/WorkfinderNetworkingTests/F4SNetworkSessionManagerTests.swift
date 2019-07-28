@@ -20,6 +20,6 @@ class F4SNetworkSessionManagerTests: XCTestCase {
     }
     
     func makeSut() -> F4SNetworkSessionManager {
-        return F4SNetworkSessionManager(log: mockLog, wexApiKey: "wexApiKey")
+        return F4SNetworkSessionManager(wexApiKey: "wexApiKey")
     }
 }

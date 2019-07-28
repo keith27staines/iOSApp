@@ -19,7 +19,7 @@
 		FC6DBCA322BA20410080B8E4 /* F4SDataTaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6DBC9E22BA20410080B8E4 /* F4SDataTaskService.swift */; };
 		FC6DBCA422BA20410080B8E4 /* WorkfinderEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6DBCA222BA20410080B8E4 /* WorkfinderEndpoint.swift */; };
 		FC6DBCA522BA20410080B8E4 /* F4SNetworkSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6DBCA122BA20410080B8E4 /* F4SNetworkSessionManager.swift */; };
-		FC6DBCA822BA24270080B8E4 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6DBCA722BA24270080B8E4 /* NetworkConfig.swift */; };
+		FC83C2D722ED716D00EA2778 /* MockLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83C2D622ED716D00EA2778 /* MockLog.swift */; };
 		FC85F96C22365FA0002F84DF /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC85F96822365F75002F84DF /* WorkfinderCommon.framework */; };
 		FC9865BE229D39DC006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865BD229D39DC006D3E63 /* README */; };
 		FCA91E3C2233FF20007ED308 /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91E322233FF20007ED308 /* WorkfinderNetworking.framework */; };
@@ -70,7 +70,7 @@
 		FC6DBC9E22BA20410080B8E4 /* F4SDataTaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDataTaskService.swift; sourceTree = "<group>"; };
 		FC6DBCA122BA20410080B8E4 /* F4SNetworkSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SNetworkSessionManager.swift; sourceTree = "<group>"; };
 		FC6DBCA222BA20410080B8E4 /* WorkfinderEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderEndpoint.swift; sourceTree = "<group>"; };
-		FC6DBCA722BA24270080B8E4 /* NetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
+		FC83C2D622ED716D00EA2778 /* MockLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLog.swift; sourceTree = "<group>"; };
 		FC85F96222365F75002F84DF /* WorkfinderCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WorkfinderCommon.xcodeproj; path = ../WorkfinderCommon/WorkfinderCommon.xcodeproj; sourceTree = "<group>"; };
 		FC9865BD229D39DC006D3E63 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		FCA91E322233FF20007ED308 /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,6 +167,7 @@
 				FCC2EC1922E89BD7009E8988 /* WEXHttpRequestVerbTests.swift */,
 				FC2AC5F02235516A00FF4E47 /* Helpers.swift */,
 				FCA91E422233FF20007ED308 /* Info.plist */,
+				FC83C2D622ED716D00EA2778 /* MockLog.swift */,
 			);
 			path = WorkfinderNetworkingTests;
 			sourceTree = "<group>";
@@ -184,7 +185,6 @@
 			isa = PBXGroup;
 			children = (
 				FCA91E4E2233FFDC007ED308 /* WorkfinderNetworking.swift */,
-				FC6DBCA722BA24270080B8E4 /* NetworkConfig.swift */,
 				FC6DBCA222BA20410080B8E4 /* WorkfinderEndpoint.swift */,
 				FC2AC5E822351E2C00FF4E47 /* WorkfinderSessionManager.swift */,
 				FC6DBCA122BA20410080B8E4 /* F4SNetworkSessionManager.swift */,
@@ -341,7 +341,6 @@
 				FC6DBCA322BA20410080B8E4 /* F4SDataTaskService.swift in Sources */,
 				FCD8AEB122BC9F0E00C52E74 /* Logger.swift in Sources */,
 				FC6DBCA522BA20410080B8E4 /* F4SNetworkSessionManager.swift in Sources */,
-				FC6DBCA822BA24270080B8E4 /* NetworkConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +357,7 @@
 				FCA91E412233FF20007ED308 /* WorkfinderNetworkingTests.swift in Sources */,
 				FCC2EC1622E85820009E8988 /* LoggerTests.swift in Sources */,
 				FC2768E222DF09C700B9E369 /* NetworkConfigTests.swift in Sources */,
+				FC83C2D722ED716D00EA2778 /* MockLog.swift in Sources */,
 				FCC2EC1A22E89BD7009E8988 /* WEXHttpRequestVerbTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
