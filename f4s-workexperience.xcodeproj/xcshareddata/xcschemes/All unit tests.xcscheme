@@ -27,7 +27,59 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES"
       shouldUseLaunchSchemeArgsEnv = "NO">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "40E78E121DD31A86000A3776"
+            BuildableName = "f4s-workexperience.app"
+            BlueprintName = "f4s-workexperience"
+            ReferencedContainer = "container:f4s-workexperience.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FCD6F9CC22E31591003F7C34"
+            BuildableName = "WorkfinderAppLogic.framework"
+            BlueprintName = "WorkfinderAppLogic"
+            ReferencedContainer = "container:WorkfinderAppLogic/WorkfinderAppLogic.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FCF5AF0F2248BDCC00D9B8D1"
+            BuildableName = "WorkfinderApplyUseCase.framework"
+            BlueprintName = "WorkfinderApplyUseCase"
+            ReferencedContainer = "container:WorkfinderModules/WorkfinderApplyUseCase/WorkfinderApplyUseCase.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FCA91E6A2234043D007ED308"
+            BuildableName = "WorkfinderCommon.framework"
+            BlueprintName = "WorkfinderCommon"
+            ReferencedContainer = "container:WorkfinderModules/WorkfinderCommon/WorkfinderCommon.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FCA91E312233FF20007ED308"
+            BuildableName = "WorkfinderNetworking.framework"
+            BlueprintName = "WorkfinderNetworking"
+            ReferencedContainer = "container:WorkfinderModules/WorkfinderNetworking/WorkfinderNetworking.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FC02D9E722EC70FD003C8148"
+            BuildableName = "WorkfinderServices.framework"
+            BlueprintName = "WorkfinderServices"
+            ReferencedContainer = "container:WorkfinderServices/WorkfinderServices.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FCA91EA12234065A007ED308"
+            BuildableName = "WorkfinderUI.framework"
+            BlueprintName = "WorkfinderUI"
+            ReferencedContainer = "container:WorkfinderModules/WorkfinderUI/WorkfinderUI.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
          <TestableReference
             skipped = "NO"
@@ -82,6 +134,26 @@
                BuildableName = "WorkfinderApplyUseCaseTests.xctest"
                BlueprintName = "WorkfinderApplyUseCaseTests"
                ReferencedContainer = "container:WorkfinderModules/WorkfinderApplyUseCase/WorkfinderApplyUseCase.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FCD6F9D522E31591003F7C34"
+               BuildableName = "WorkfinderAppLogicTests.xctest"
+               BlueprintName = "WorkfinderAppLogicTests"
+               ReferencedContainer = "container:WorkfinderAppLogic/WorkfinderAppLogic.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FC02D9F022EC70FD003C8148"
+               BuildableName = "WorkfinderServicesTests.xctest"
+               BlueprintName = "WorkfinderServicesTests"
+               ReferencedContainer = "container:WorkfinderServices/WorkfinderServices.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

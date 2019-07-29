@@ -24,8 +24,7 @@ fileprivate struct Json : Codable {
 
 public class F4SCompanyDocumentService {
     
-    private var dataTask: URLSessionDataTask?
-
+    private var dataTask: F4SNetworkTask?
     
     public func requestDocuments(companyUuid: F4SUUID, documents: F4SCompanyDocuments, completion: @escaping ((F4SNetworkResult<Bool>) -> ())) {
         let json = Json(documents: documents)
@@ -39,7 +38,7 @@ public class F4SCompanyDocumentService {
             encoder.outputFormatting = .prettyPrinted
             let data = try encoder.encode(json)
             let urlRequest = F4SDataTaskService.urlRequest(verb: .post, url: url, dataToSend: data)
-            let dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { result in
+            let dataTask = F4SDataTaskService.networkTask(with: urlRequest, session: session, attempting: attempting) { result in
                 switch result {
                 case .error(let error):
                     completion(F4SNetworkResult.error(error))
@@ -63,7 +62,7 @@ public class F4SCompanyDocumentService {
         let session = F4SNetworkSessionManager.shared.interactiveSession
         let urlRequest = F4SDataTaskService.urlRequest(verb: .get, url: url, dataToSend: nil)
         dataTask?.cancel()
-        dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { (result) in
+        dataTask = F4SDataTaskService.networkTask(with: urlRequest, session: session, attempting: attempting) { (result) in
             switch result {
             case .error(let error):
                 completion(F4SNetworkResult.error(error))

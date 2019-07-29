@@ -8,6 +8,7 @@
 
 import XCTest
 import WorkfinderCommon
+import WorkfinderServices
 import WorkfinderAppLogic
 
 @testable import f4s_workexperience

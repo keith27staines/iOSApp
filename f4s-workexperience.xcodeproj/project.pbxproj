@@ -113,6 +113,8 @@
 		D54E10051E044BA000A51560 /* HalfWayHooray.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D54E10031E044BA000A51560 /* HalfWayHooray.storyboard */; };
 		D54E10071E044BC100A51560 /* HalfWayHoorayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54E10061E044BC100A51560 /* HalfWayHoorayViewController.swift */; };
 		D5E9EBE81DD60AB300BD796E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5E9EBEA1DD60AB300BD796E /* Localizable.strings */; };
+		FC02DA2C22EC9481003C8148 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC02DA2622EC84EF003C8148 /* WorkfinderServices.framework */; };
+		FC02DA2D22EC9481003C8148 /* WorkfinderServices.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC02DA2622EC84EF003C8148 /* WorkfinderServices.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC06264722032E74000D2D04 /* CompanyDocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06264622032E74000D2D04 /* CompanyDocumentsViewController.swift */; };
 		FC0B407E226CAA6E00D992AC /* RecommendationCompanyConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B407D226CAA6E00D992AC /* RecommendationCompanyConverter.swift */; };
 		FC0B4080226CAAEE00D992AC /* RecommendedCompaniesLocalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B407F226CAAEE00D992AC /* RecommendedCompaniesLocalRepository.swift */; };
@@ -386,6 +388,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				FC02DA2D22EC9481003C8148 /* WorkfinderServices.framework in Embed Frameworks */,
 				FCFB1329224930660086BE25 /* Mustache.framework in Embed Frameworks */,
 				FCF5AF2C2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Embed Frameworks */,
 				FCD6F9E922E315B7003F7C34 /* WorkfinderAppLogic.framework in Embed Frameworks */,
@@ -541,6 +544,7 @@
 		D54E10041E044BA000A51560 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "f4s-workexperience/Base.lproj/HalfWayHooray.storyboard"; sourceTree = "<group>"; };
 		D54E10061E044BC100A51560 /* HalfWayHoorayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfWayHoorayViewController.swift; sourceTree = "<group>"; };
 		D5E9EBE91DD60AB300BD796E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FC02DA2622EC84EF003C8148 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC06264622032E74000D2D04 /* CompanyDocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDocumentsViewController.swift; sourceTree = "<group>"; };
 		FC0B407D226CAA6E00D992AC /* RecommendationCompanyConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationCompanyConverter.swift; sourceTree = "<group>"; };
 		FC0B407F226CAAEE00D992AC /* RecommendedCompaniesLocalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCompaniesLocalRepository.swift; sourceTree = "<group>"; };
@@ -799,6 +803,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC02DA2C22EC9481003C8148 /* WorkfinderServices.framework in Frameworks */,
 				FCA91E9622340577007ED308 /* WorkfinderCommon.framework in Frameworks */,
 				FCF5AF2B2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Frameworks */,
 				C9C7302B49E1B7EF625802B5 /* Pods_f4s_workexperience.framework in Frameworks */,
@@ -1082,6 +1087,7 @@
 		74E1A74324CAFF4EF516E014 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC02DA2622EC84EF003C8148 /* WorkfinderServices.framework */,
 				6DBDC6E5F710813F9107483D /* Pods_f4s_workexperience.framework */,
 				0FB15162F0A1B8298B159D38 /* Pods_f4s_workexperienceTests.framework */,
 			);

@@ -9,6 +9,7 @@
 import Foundation
 import WorkfinderCommon
 import WorkfinderNetworking
+import WorkfinderServices
 @testable import f4s_workexperience
 
 class MockUserService: F4SUserServiceProtocol {

@@ -34,7 +34,7 @@ public protocol F4SCompanyServiceProtocol {
 
 class F4SCompanyService : F4SCompanyServiceProtocol {
     
-    private var dataTask: URLSessionDataTask?
+    private var dataTask: F4SNetworkTask?
     
     func getCompany(uuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SCompanyJson>) -> ()) {
         let attempting = "Get company"
@@ -43,7 +43,7 @@ class F4SCompanyService : F4SCompanyServiceProtocol {
         let session = F4SNetworkSessionManager.shared.interactiveSession
         let urlRequest = F4SDataTaskService.urlRequest(verb: .get, url: url, dataToSend: nil)
         dataTask?.cancel()
-        dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { (result) in
+        dataTask = F4SDataTaskService.networkTask(with: urlRequest, session: session, attempting: attempting) { (result) in
             switch result {
             case .error(let error):
                 completion(F4SNetworkResult.error(error))

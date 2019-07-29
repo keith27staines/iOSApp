@@ -9,6 +9,7 @@
 import Foundation
 import WorkfinderCommon
 
+
 public class MockWEXPlacementService : WEXPlacementServiceProtocol {
     
     public var resultForCreate: WEXResult<WEXPlacementJson, WEXError>?
@@ -16,19 +17,21 @@ public class MockWEXPlacementService : WEXPlacementServiceProtocol {
     public var createCount: Int = 0
     public var patchCount: Int = 0
     
-    public init(result: WEXResult<WEXPlacementJson, WEXError>?) {
-        self.resultForCreate = result
+    public init(createResult: WEXResult<WEXPlacementJson, WEXError>) {
+        self.resultForCreate = createResult
+    }
+    
+    public init(patchResult: WEXResult<WEXPlacementJson, WEXError>) {
+        self.resultForPatch = patchResult
     }
     
     public func createPlacement(with json: WEXCreatePlacementJson, completion: @escaping (WEXResult<WEXPlacementJson, WEXError>) -> Void) {
         createCount += 1
-        guard let result = resultForCreate else { return }
-        completion(result)
+        completion(resultForCreate!)
     }
     
     public func patchPlacement(uuid: F4SUUID, with json: WEXPlacementJson, completion: @escaping (WEXResult<WEXPlacementJson, WEXError>) -> Void) {
         patchCount += 1
-        guard let result = resultForPatch else { return }
-        completion(result)
+        completion(resultForPatch!)
     }
 }

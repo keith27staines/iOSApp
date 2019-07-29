@@ -8,6 +8,7 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderNetworking
 
 public class WEXPlacementServiceFactory :  WEXPlacementServiceFactoryProtocol {
     public init() {}
@@ -19,11 +20,13 @@ public class WEXPlacementServiceFactory :  WEXPlacementServiceFactoryProtocol {
 public class WEXPlacementService {
     typealias CreateCompletionHandler = ((WEXResult<WEXCreatePlacementJson, WEXError>) -> Void)
     public typealias WEXCreatePlacementResult = WEXResult<WEXPlacementJson, WEXError>
-    public let placementApi = (sharedSessionManager?.configuration.v2ApiUrlString ?? "") + "/placement"
+    public let placementApi: String
     var createPlacementTask: WEXDataTask?
     var patchPlacementTask: WEXDataTask?
     
-    public init() {}
+    public init() {
+        placementApi = NetworkConfig.workfinderApiV2  + "/placement"
+    }
 }
 
 extension WEXPlacementService : WEXPlacementServiceProtocol {

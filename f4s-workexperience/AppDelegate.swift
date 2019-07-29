@@ -11,6 +11,7 @@ import CoreData
 import XCGLogger
 import WorkfinderCommon
 import WorkfinderNetworking
+import WorkfinderServices
 import WorkfinderAppLogic
 
 let globalLog = XCGLogger.default
@@ -171,7 +172,7 @@ extension AppDelegate {
     func configureNetwork(
         wexApiKey: String = Config.wexApiKey,
         baseUrlString: String = Config.workfinderApiBase) {
-        NetworkConfig.configure(wexApiKey: wexApiKey, workfinderBaseApi: baseUrlString, log: f4sLog)
+        WorkfinderNetworking.configure(wexApiKey: wexApiKey, workfinderBaseApi: baseUrlString, log: f4sLog)
     }
     
     func setInvokingUrl(_ url: URL) {

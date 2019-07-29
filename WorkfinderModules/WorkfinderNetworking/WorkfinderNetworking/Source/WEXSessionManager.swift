@@ -7,7 +7,8 @@ enum HeaderKeys : String {
     case wexApiKey = "wex.api.key"
 }
 
-/// Manages sessions for WEX services (might soon be abandoned in favour of F4SNetworkSessionManager
+/// Manages sessions for WEX services (will soon be abandoned in favour of
+/// F4SNetworkSessionManager
 public class WEXSessionManager {
     
     
