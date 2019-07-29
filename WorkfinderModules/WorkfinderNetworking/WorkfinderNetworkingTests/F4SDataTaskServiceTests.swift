@@ -43,6 +43,32 @@ class F4SDataTaskServiceTests: XCTestCase {
         XCTAssertTrue(mockTask.cancelled)
     }
     
+    func test_request_header_fields_without_user_uuid() {
+        let url = URL(string: "/v2")!
+        let request = URLRequest(url: url)
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+        let mockLocalStore = MockLocalStore()
+        let userRepo = F4SUserRepository(localStore: mockLocalStore)
+        F4SDataTaskService.userRepo = userRepo
+        let task = F4SDataTaskService.networkTask(with: request, session: session, attempting: "test") { (dataResult) in }
+        let headers = (task as? URLSessionDataTask)!.originalRequest!.allHTTPHeaderFields!
+        XCTAssertNil(headers["wex.user.uuid"])
+    }
+    
+    func test_request_header_fields_with_user_uuid() {
+        let url = URL(string: "/v2")!
+        let request = URLRequest(url: url)
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+        let userInfo = F4SUserInformation(uuid: "1234", requiresConsent: false, termsAgreed: true, isOnboarded: true, isRegistered: true)
+        let mockLocalStore = MockLocalStore()
+        let userRepo = F4SUserRepository(localStore: mockLocalStore)
+        userRepo.save(user: userInfo)
+        F4SDataTaskService.userRepo = userRepo
+        let task = F4SDataTaskService.networkTask(with: request, session: session, attempting: "test") { (dataResult) in }
+        let headers = (task as? URLSessionDataTask)!.originalRequest!.allHTTPHeaderFields!
+        XCTAssertEqual(headers["wex.user.uuid"], "1234")
+    }
+    
     //MARK:- get request tests
     
     func test_begin_get_request_cancels_previous_task() {
@@ -88,7 +114,7 @@ class F4SDataTaskServiceTests: XCTestCase {
         XCTAssertTrue(newTask.resumeWasCalled)
     }
     
-    func test_begin_get_request_generating_success() {
+    func test_begin_get_request_generating_success_response() {
         let sut = makeSUT()
         let jsonObject = ["jsonObject"]
         let newTask = mockTaskWithResponse(code: 200, responseBody: jsonObject)
@@ -101,6 +127,25 @@ class F4SDataTaskServiceTests: XCTestCase {
                 
             case .success(let stringArray):
                 XCTAssertEqual(stringArray[0], "jsonObject")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+        XCTAssertTrue(newTask.resumeWasCalled)
+    }
+    
+    func test_begin_get_request_generating_failure_response() {
+        let sut = makeSUT()
+        let jsonObject = ["Error"]
+        let newTask = mockTaskWithResponse(code: 400, responseBody: jsonObject)
+        sut.session = MockSession(task: newTask)
+        let expectation = XCTestExpectation(description: "beginGetRequest")
+        sut.beginGetRequest(attempting: "get something") { (result : F4SNetworkResult<[String]>) in
+            switch result {
+            case .error(let error):
+                XCTAssertTrue(error.code == "400")
+            case .success(_):
+                XCTFail("The get should return an error result")
             }
             expectation.fulfill()
         }
@@ -197,6 +242,42 @@ class F4SDataTaskServiceTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 1)
         XCTAssertTrue(newTask.resumeWasCalled)
+    }
+    
+    func test_beginDelete_calls_cancel_on_previous_task() {
+        let sut = F4SDataTaskService(baseURLString: "baseUrl", apiName: "apiName")
+        let previousTask = MockTask()
+        sut.task = previousTask
+        let newTask = MockTask()
+        sut.session = MockSession(task: newTask)
+        let expectation = XCTestExpectation(description: "beginDeleteRequest")
+        sut.beginDelete(attempting: "") { (result : F4SNetworkDataResult) in
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+        XCTAssertTrue(previousTask.cancelled)
+    }
+    
+    func test_beginDelete_calls_resume_on_new_task() {
+        let sut = F4SDataTaskService(baseURLString: "baseUrl", apiName: "apiName")
+        let previousTask = MockTask()
+        sut.task = previousTask
+        let newTask = MockTask()
+        sut.session = MockSession(task: newTask)
+        let expectation = XCTestExpectation(description: "beginDeleteRequest")
+        sut.beginDelete(attempting: "") { (result : F4SNetworkDataResult) in
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+        XCTAssertTrue(newTask.resumeWasCalled)
+    }
+    
+    func test_URLSessionConformsToF4SNetworkSession() {
+        let url = URL(string: "/something")!
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+        let request = URLRequest(url: url)
+        let networkTask = session.networkTask(with: request) { (data, response, error) in }
+        XCTAssertNotNil(networkTask as? URLSessionDataTask)
     }
 }
 

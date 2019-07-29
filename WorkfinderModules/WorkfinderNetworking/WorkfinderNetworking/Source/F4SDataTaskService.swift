@@ -60,11 +60,15 @@ open class F4SDataTaskService {
         return baseUrl.absoluteString + "/" + apiName
     }
     
+    static var userRepo: F4SUserRepositoryProtocol = F4SUserRepository(localStore: LocalStore())
+    
     /// Initialize a new instance
     /// - parameter baseURLString: The base url
     /// - parameter apiName: The name of the api being called
     /// - parameter additionalHeaders: Any additional request headers beyond the standard wex headers
-    public init(baseURLString: String, apiName: String, additionalHeaders: [String:Any]? = nil) {
+    public init(baseURLString: String,
+                apiName: String,
+                additionalHeaders: [String:Any]? = nil) {
         self._apiName = apiName
         self.baseUrl = URL(string: baseURLString)!
         let config = F4SDataTaskService.defaultConfiguration
@@ -93,14 +97,11 @@ open class F4SDataTaskService {
             switch result {
             case .error(let error):
                 completion(F4SNetworkResult.error(error))
-            case .success(let data):
-                guard let data = data else {
-                    let error = F4SNetworkDataErrorType.noData.error(attempting: attempting)
-                    completion(F4SNetworkResult.error(error))
-                    return
-                }
-                guard let jsonObject = try? strongSelf.jsonDecoder.decode(A.self, from: data) else {
-                    let error = F4SNetworkDataErrorType.deserialization(data).error(attempting: attempting)
+            case .success(let dataOrNil):
+                guard
+                    let data = dataOrNil,
+                    let jsonObject = try? strongSelf.jsonDecoder.decode(A.self, from: data) else {
+                    let error = F4SNetworkDataErrorType.deserialization(dataOrNil).error(attempting: attempting)
                     completion(F4SNetworkResult.error(error))
                     return
                 }
@@ -174,9 +175,10 @@ open class F4SDataTaskService {
                                 completion: @escaping (F4SNetworkDataResult) -> ()
                                 ) -> F4SNetworkTask {
         var modifiedRequest = request
-        if let userUuid = F4SUser().uuid {
-            modifiedRequest.setValue(userUuid, forHTTPHeaderField: "wex.user.uuid")
-        }
+//        if let userUuid = userRepo.load().uuid {
+//            modifiedRequest.setValue(userUuid, forHTTPHeaderField: "wex.user.uuid")
+//        }
+        modifiedRequest.setValue(userRepo.load().uuid, forHTTPHeaderField: "wex.user.uuid")
         let task = session.networkTask(with: modifiedRequest, completionHandler: {data, response, error -> Void in
             if let error = error as NSError? {
                 if error.domain == "NSURLErrorDomain" && error.code == -999 {

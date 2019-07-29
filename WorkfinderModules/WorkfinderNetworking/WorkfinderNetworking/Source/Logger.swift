@@ -24,9 +24,9 @@ public protocol NetworkCallLogger {
 /// data
 class Logger : NetworkCallLogger {
     
-    let log: F4SAnalyticsAndDebugging?
+    let log: F4SAnalyticsAndDebugging
     
-    init(log: F4SAnalyticsAndDebugging?) {
+    init(log: F4SAnalyticsAndDebugging) {
         self.log = log
     }
     
@@ -35,7 +35,6 @@ class Logger : NetworkCallLogger {
                             request: URLRequest,
                             response: HTTPURLResponse?,
                             responseData: Data?) {
-        guard let log = self.log else { return }
         let separator = "-----------------------------------------------------------------------"
         var text = "\n\n\(separator)\nNETWORK ERROR"
         if let attempting = attempting {
@@ -73,7 +72,6 @@ class Logger : NetworkCallLogger {
     func logDataTaskSuccess(request: URLRequest,
                             response: HTTPURLResponse,
                             responseData: Data) {
-        guard let log = self.log else { return }
         let separator = "-----------------------------------------------------------------------"
         var text = "\n\n\(separator)\nNETWORK SUCCESS"
         text = "\(text)\nRequest method: \(request.httpMethod!.uppercased())"
@@ -81,7 +79,7 @@ class Logger : NetworkCallLogger {
         let code = response.statusCode
         text = "\(text)\nCode: \(code)"
         if let requestData = request.httpBody {
-            if let dataAsString = String(data: requestData, encoding: .utf8) {
+            if let dataAsString = String(data: requestData, encoding: .utf8), !dataAsString.isEmpty {
                 text = "\(text)\n\nRequest data:\n\(dataAsString)"
             } else {
                 text = "\(text)\n\nRequest data: \(requestData.count) bytes"

@@ -28,7 +28,7 @@ class LoggerTests: XCTestCase {
         XCTAssertEqual(nsError.userInfo["reason"] as! String, "Bad stuff happened")
     }
     
-    func test_logDataTaskSuccess() {
+    func test_logDataTaskSuccess_with_valid_data() {
         let log = MockLog()
         let sut = Logger(log: log)
         var request = URLRequest(url: testURL)
@@ -49,6 +49,39 @@ class LoggerTests: XCTestCase {
 
         Request data:
         RequestData
+
+        Response data:
+        ResponseData
+        Request Headers:
+        headerField1:  headerField1
+        -----------------------------------------------------------------------
+
+
+        """
+        XCTAssertEqual(log.debugText[0], expectedLogText)
+        XCTAssertEqual(log.debugText.count, 1)
+    }
+    
+    func test_logDataTaskSuccess_with_invalid_data() {
+        let log = MockLog()
+        let sut = Logger(log: log)
+        var request = URLRequest(url: testURL)
+        request.httpBody = Data()
+        request.allHTTPHeaderFields = ["headerField1":"headerField1"]
+        let response = HTTPURLResponse(url: testURL, statusCode: 200, httpVersion: "httpVersion", headerFields: ["header1":"header1"])!
+        let responseData = "ResponseData".data(using: String.Encoding.utf8)!
+        sut.logDataTaskSuccess(request: request, response: response, responseData: responseData)
+        let expectedLogText = """
+
+
+
+        -----------------------------------------------------------------------
+        NETWORK SUCCESS
+        Request method: GET
+        On https://someserver.com
+        Code: 200
+
+        Request data: 0 bytes
 
         Response data:
         ResponseData
