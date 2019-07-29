@@ -1,60 +1,74 @@
-//
-//  F4SService.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 06/01/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
-//
-
 import Foundation
 import WorkfinderCommon
 
+/// Defines the two main functions of a network task
+/// This protocol was introduced to hide the complexity of the interface of
+/// URLSessionDataTask and simplify mocking of URLSessionDataTask in unit tests
+public protocol F4SNetworkTask {
+    /// Cancels (or attempts to cancel) the network task if it is running
+    func cancel()
+    /// Starts or resumes a network task (cannot be called on a cancelled task)
+    func resume()
+}
+
+/// `F4SNetworkSession` defines a very simplified interface for URLSession
+/// and was introduced to allow simpler mocking of URLSession in unit tests
+public protocol F4SNetworkSession {
+    func networkTask(with: URLRequest, completionHandler: @escaping ((Data?, URLResponse?, Error?) -> Void) ) -> F4SNetworkTask
+    var configuration: URLSessionConfiguration { get }
+}
+
+/// Conform URLSession to F4SNetworkSession to enable simple mocking of URLSession
+extension URLSession : F4SNetworkSession {
+    public func networkTask(with request: URLRequest, completionHandler: @escaping ((Data?, URLResponse?, Error?) -> Void)) -> F4SNetworkTask {
+        return self.dataTask(with: request, completionHandler: completionHandler)
+    }
+}
+
+/// Conform URLSessionDataTask to F4SNetworkTask to simplify mocking
+extension URLSessionDataTask : F4SNetworkTask {}
+
+///
 open class F4SDataTaskService {
+    let _apiName: String
     
-    public let session: URLSession
+    /// The session used by the service
+    public internal (set) var session: F4SNetworkSession
+    
+    /// The base url of the api (e.g ...v2
     public let baseUrl: URL
+    
+    /// The api name (e.g `placement` or `user/me`
     public var apiName: String { return self._apiName }
     
-    public var url : URL? {
+    /// url relative to baseUrl/apiName (e.g uuid/documents when retrieving
+    /// documents from ...v2/company/uuid/documents)
+    public var relativeUrlString: String?
+    
+    /// The object returned by the datatask in the completion handler
+    public typealias DataTaskReturn = (data:Data?, response:URLResponse?, error:Error?)
+    
+    /// Initialises a new instance
+    public var url : URL {
         let apiUrl = URL(string: urlString)!
         guard let relativeUrlString = relativeUrlString else { return apiUrl }
         return apiUrl.appendingPathComponent(relativeUrlString)
     }
     
-    private var urlString: String {
+    /// Returns the base url string concatenated with the apiname
+    var urlString: String {
         return baseUrl.absoluteString + "/" + apiName
     }
     
-    public var relativeUrlString: String?
-    
-    public typealias DataTaskReturn = (data:Data?, response:URLResponse?, error:Error?)
-    
-    public static func networkDataResultFrom(data: Data?, response: URLResponse?, error: Error?, attempting: String) -> F4SNetworkDataResult {
-        let dataReturned = DataTaskReturn(data: data, response: response, error: error)
-        return networkDataResultFrom(returned: dataReturned, attempting: attempting)
-    }
-
-    public static func networkDataResultFrom(returned: DataTaskReturn, attempting: String) -> F4SNetworkDataResult {
-        if let error = returned.error as NSError? {
-            let result = F4SNetworkDataResult.error(F4SNetworkError(error: error, attempting: attempting))
-            return result
-        }
-        
-        let httpResponse = returned.response as! HTTPURLResponse
-        
-        if let error = F4SNetworkError(response: httpResponse, attempting: attempting) {
-            let result = F4SNetworkDataResult.error(error)
-            return result
-        }
-        let result = F4SNetworkDataResult.success(returned.data)
-        return result
-    }
+    static var userRepo: F4SUserRepositoryProtocol = F4SUserRepository(localStore: LocalStore())
     
     /// Initialize a new instance
     /// - parameter baseURLString: The base url
     /// - parameter apiName: The name of the api being called
     /// - parameter additionalHeaders: Any additional request headers beyond the standard wex headers
-    public init(baseURLString: String, apiName: String, additionalHeaders: [String:Any]? = nil) {
+    public init(baseURLString: String,
+                apiName: String,
+                additionalHeaders: [String:Any]? = nil) {
         self._apiName = apiName
         self.baseUrl = URL(string: baseURLString)!
         let config = F4SDataTaskService.defaultConfiguration
@@ -66,34 +80,28 @@ open class F4SDataTaskService {
         session = URLSession(configuration: config)
     }
     
+    /// Cancels or attempts to cancel the current datatask
     public func cancel() {
         task?.cancel()
     }
     
-    /// Performs an HTTP get request
+    /// Performs an HTTP `GET` request and returns the result on the completion handler
+    ///
     /// - parameter attempting: A short high level description of the reason the operation is being performed
     /// - parameter completion: Returns a result containing either the return object or error information
     public func beginGetRequest<A>(attempting: String, completion: @escaping (F4SNetworkResult<A>) -> ()) {
         task?.cancel()
-        guard let url = url else {
-            let error = F4SNetworkDataErrorType.badUrl(self.urlString).error(attempting: attempting)
-            completion(F4SNetworkResult.error(error))
-            return
-        }
         let request = urlRequest(verb: .get, url: url, dataToSend: nil)
         task = dataTask(with: request, attempting: attempting, completion: { [weak self] (result) in
             guard let strongSelf = self else { return }
             switch result {
             case .error(let error):
                 completion(F4SNetworkResult.error(error))
-            case .success(let data):
-                guard let data = data else {
-                    let error = F4SNetworkDataErrorType.noData.error(attempting: attempting)
-                    completion(F4SNetworkResult.error(error))
-                    return
-                }
-                guard let jsonObject = try? strongSelf.jsonDecoder.decode(A.self, from: data) else {
-                    let error = F4SNetworkDataErrorType.deserialization(data).error(attempting: attempting)
+            case .success(let dataOrNil):
+                guard
+                    let data = dataOrNil,
+                    let jsonObject = try? strongSelf.jsonDecoder.decode(A.self, from: data) else {
+                    let error = F4SNetworkDataErrorType.deserialization(dataOrNil).error(attempting: attempting)
                     completion(F4SNetworkResult.error(error))
                     return
                 }
@@ -103,7 +111,8 @@ open class F4SDataTaskService {
         task?.resume()
     }
     
-    /// Performs an HTTP request with a "send" verb (e.g, put, patch, etc")
+    /// Performs an HTTP request with a "send" verb (e.g, put, patch, etc") and
+    /// returns the result on the completion handler
     ///
     /// - parameter verb: Http request verb
     /// - parameter object: The codable (json encodable) object to be patched to the server
@@ -115,16 +124,7 @@ open class F4SDataTaskService {
                                              completion: @escaping (F4SNetworkDataResult) -> ()
                                              ) {
         task?.cancel()
-        guard let url = url else {
-            let error = F4SNetworkDataErrorType.badUrl(urlString).error(attempting: attempting)
-            completion(F4SNetworkDataResult.error(error))
-            return
-        }
-        guard let data = try? jsonEncoder.encode(objectToSend) else {
-            let error = F4SNetworkDataErrorType.serialization(objectToSend).error(attempting: attempting)
-            completion(F4SNetworkDataResult.error(error))
-            return
-        }
+        let data = try! jsonEncoder.encode(objectToSend)
         let request = urlRequest(verb: verb, url: url, dataToSend: data)
         task = dataTask(with: request, attempting: attempting, completion: completion)
         task?.resume()
@@ -132,28 +132,22 @@ open class F4SDataTaskService {
     
     public func beginDelete(attempting: String, completion: @escaping (F4SNetworkDataResult) -> ()) {
         task?.cancel()
-        guard let url = url else {
-            let error = F4SNetworkDataErrorType.badUrl(urlString).error(attempting: attempting)
-            completion(F4SNetworkDataResult.error(error))
-            return
-        }
         let request = urlRequest(verb: .delete, url: url, dataToSend: nil)
         task = dataTask(with: request, attempting: attempting, completion: completion)
         task?.resume()
     }
-    
-    // MARK:- internal
-    
+
     /// The dataTask currently being performed by this service (only one task can be in progress. Starting a second task will cancel the first)
-    private var task: URLSessionDataTask?
-    private let _apiName: String
+    var task: F4SNetworkTask?
     
+    /// A JSON decoder equipped to decode datetimes as used in the Workfinder api
     public lazy var jsonDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
         return decoder
     }()
     
+    /// A JSON encoder equipped to encode dates as required by the Workfinder api
     internal lazy var jsonEncoder: JSONEncoder = {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .formatted(DateFormatter.iso8601Full)
@@ -174,34 +168,36 @@ open class F4SDataTaskService {
         return request
     }
     
-    public static func dataTask(with request: URLRequest,
-                                session: URLSession,
+    /// Returns a `F4SNetworkTask` that can be used independently
+    public static func networkTask(with request: URLRequest,
+                                session: F4SNetworkSession,
                                 attempting: String,
                                 completion: @escaping (F4SNetworkDataResult) -> ()
-                                ) -> URLSessionDataTask {
+                                ) -> F4SNetworkTask {
         var modifiedRequest = request
-        if let userUuid = F4SUser().uuid {
-            modifiedRequest.setValue(userUuid, forHTTPHeaderField: "wex.user.uuid")
-        }
-        let task = session.dataTask(with: modifiedRequest, completionHandler: {data, response, error -> Void in
+//        if let userUuid = userRepo.load().uuid {
+//            modifiedRequest.setValue(userUuid, forHTTPHeaderField: "wex.user.uuid")
+//        }
+        modifiedRequest.setValue(userRepo.load().uuid, forHTTPHeaderField: "wex.user.uuid")
+        let task = session.networkTask(with: modifiedRequest, completionHandler: {data, response, error -> Void in
             if let error = error as NSError? {
                 if error.domain == "NSURLErrorDomain" && error.code == -999 {
                     // The operation was cancelled
                     return
                 }
                 let result = F4SNetworkDataResult.error(F4SNetworkError(error: error, attempting: attempting))
-                logger.logDataTaskFailure(error: error, request: modifiedRequest, response: nil, responseData: nil)
+                logger?.logDataTaskFailure(error: error, request: modifiedRequest, response: nil, responseData: nil)
                 completion(result)
                 return
             }
             let httpResponse = response as! HTTPURLResponse
             if let error = F4SNetworkError(response: httpResponse, attempting: attempting) {
-                logger.logDataTaskFailure(error: error, request: modifiedRequest, response: httpResponse, responseData: data)
+                logger?.logDataTaskFailure(error: error, request: modifiedRequest, response: httpResponse, responseData: data)
                 let result = F4SNetworkDataResult.error(error)
                 completion(result)
                 return
             }
-            logger.logDataTaskSuccess(request: request, response: httpResponse, responseData: data!)
+            logger?.logDataTaskSuccess(request: request, response: httpResponse, responseData: data!)
             completion(F4SNetworkDataResult.success(data))
         })
         return task
@@ -210,8 +206,8 @@ open class F4SDataTaskService {
     internal func dataTask(with request: URLRequest,
                            attempting: String,
                            completion: @escaping (F4SNetworkDataResult) -> ()
-                           ) -> URLSessionDataTask {
-        return F4SDataTaskService.dataTask(with: request, session: session, attempting: attempting, completion: completion)
+                           ) -> F4SNetworkTask {
+        return F4SDataTaskService.networkTask(with: request, session: session, attempting: attempting, completion: completion)
     }
 }
 

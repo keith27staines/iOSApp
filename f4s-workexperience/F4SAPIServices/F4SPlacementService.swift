@@ -18,7 +18,7 @@ public protocol F4SPlacementServiceProtocol {
 
 public class F4SPlacementService : F4SPlacementServiceProtocol {
     
-    private var dataTask: URLSessionDataTask?
+    private var dataTask: F4SNetworkTask?
     
     public func getPlacementOffer(uuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4STimelinePlacement>) -> ()) {
         let attempting = "Get placement"
@@ -27,7 +27,7 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
         let session = F4SNetworkSessionManager.shared.interactiveSession
         let urlRequest = F4SDataTaskService.urlRequest(verb: .get, url: url, dataToSend: nil)
         dataTask?.cancel()
-        dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { (result) in
+        dataTask = F4SDataTaskService.networkTask(with: urlRequest, session: session, attempting: attempting) { (result) in
             switch result {
             case .error(let error):
                 completion(F4SNetworkResult.error(error))
@@ -46,7 +46,7 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
         let session = F4SNetworkSessionManager.shared.interactiveSession
         let urlRequest = F4SDataTaskService.urlRequest(verb: .get, url: url, dataToSend: nil)
         dataTask?.cancel()
-        dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { (result) in
+        dataTask = F4SDataTaskService.networkTask(with: urlRequest, session: session, attempting: attempting) { (result) in
             switch result {
             case .error(let error):
                 completion(F4SNetworkResult.error(error))
@@ -100,7 +100,7 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
             encoder.outputFormatting = .prettyPrinted
             let data = try encoder.encode(json)
             let urlRequest = F4SDataTaskService.urlRequest(verb: .patch, url: url, dataToSend: data)
-            let dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { result in
+            let dataTask = F4SDataTaskService.networkTask(with: urlRequest, session: session, attempting: attempting) { result in
                 switch result {
                 case .error(let error):
                     completion(F4SNetworkResult.error(error))

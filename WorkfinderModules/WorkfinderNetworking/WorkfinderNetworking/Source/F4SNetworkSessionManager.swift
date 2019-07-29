@@ -1,13 +1,25 @@
 import Foundation
 import WorkfinderCommon
 
+/// `F4SNetworkSessionManager` manages almost all network sessions for the app.
+/// Only three services are currently not directed through these sessions. They
+/// use the now deprecated `WEXSessionManager` which was introduced only to
+/// work around a problem in `F4SNetworkSessionManager` that is now fully
+/// resolved. Becuase the large majority of services in the app use
+/// `F4SNetworkSessionManager` and `WEXSessionManager` essentially implements
+/// the same functionality, `F4SNetworkSessionManager` will be retained and
+/// 'WEXSessionManager' will, with only a little more work, be obsolete and can
+/// then be removed from the project
 public class F4SNetworkSessionManager {
     
-    // MARK:- Public interface
+    /// The api key used in all Workfinder services
     public let wexApiKey: String
     
+    /// A singleton that manages all sessions
     public static var shared: F4SNetworkSessionManager!
     
+    /// `interactiveSession` is designed for services that connect to Workfinder
+    /// which includes majority of services used in the app
     public var interactiveSession: URLSession {
         if _interactiveSession == nil {
             _interactiveSession = URLSession(configuration: interactiveConfiguration)
@@ -15,6 +27,7 @@ public class F4SNetworkSessionManager {
         return _interactiveSession!
     }
     
+    /// `smallImageSession` is designed for downloading icons from 3rd parties
     public var smallImageSession: URLSession {
         if _smallImageSession == nil {
             _smallImageSession = URLSession(configuration: smallImageConfiguration)
@@ -22,9 +35,9 @@ public class F4SNetworkSessionManager {
         return _smallImageSession!
     }
     
-    public init(log: F4SAnalyticsAndDebugging?, wexApiKey: String = NetworkConfig.wexApiKey) {
+    /// Creates a new instance and configures it with the specified api key
+    public init(wexApiKey: String = NetworkConfig.wexApiKey) {
         self.wexApiKey = wexApiKey
-        logger = Logger(log: log)
     }
     
     // MARK:- Internal implementation

@@ -12,7 +12,7 @@ import WorkfinderNetworking
 
 public class F4SRoleService {
     
-    private var dataTask: URLSessionDataTask?
+    private var dataTask: F4SNetworkTask?
     
     public func getRoleForCompany(companyUuid: F4SUUID, roleUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRoleJson>) -> ()) {
         let attempting = "Get role"
@@ -23,7 +23,7 @@ public class F4SRoleService {
         let session = F4SNetworkSessionManager.shared.interactiveSession
         let urlRequest = F4SDataTaskService.urlRequest(verb: .get, url: url, dataToSend: nil)
         dataTask?.cancel()
-        dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { (result) in
+        dataTask = F4SDataTaskService.networkTask(with: urlRequest, session: session, attempting: attempting) { (result) in
             switch result {
             case .error(let error):
                 completion(F4SNetworkResult.error(error))

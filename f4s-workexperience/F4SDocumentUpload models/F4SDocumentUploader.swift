@@ -50,7 +50,7 @@ public class F4SDocumentUploader : NSObject {
     public let documentName: String
     public let documentType: F4SUploadableDocumentType
     public let localUrl: URL
-    private var task: URLSessionDataTask?
+    private var task: F4SNetworkTask?
     public let placementUuid: F4SUUID
     
     public var targetUrl: URL {
@@ -84,7 +84,7 @@ public class F4SDocumentUploader : NSObject {
         headers["Content-Length"] = String(data.count)
         request.allHTTPHeaderFields = headers
         request.httpBody = data
-        task = F4SDataTaskService.dataTask(with: request, session: session, attempting: "Upload documents", completion: { [weak self] (result) in
+        task = F4SDataTaskService.networkTask(with: request, session: session, attempting: "Upload documents", completion: { [weak self] (result) in
             DispatchQueue.main.async {
                 guard let this = self else { return }
                 switch result {

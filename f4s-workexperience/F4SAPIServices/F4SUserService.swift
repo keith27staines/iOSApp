@@ -8,6 +8,7 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderServices
 import WorkfinderNetworking
 
 public class F4SUserService : F4SUserServiceProtocol {
@@ -32,7 +33,7 @@ public class F4SUserService : F4SUserServiceProtocol {
             encoder.dateEncodingStrategy = .formatted(dobFormatter)
             let data = try encoder.encode(user)
             let urlRequest = F4SDataTaskService.urlRequest(verb: .patch, url: url, dataToSend: data)
-            let dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { [weak self] (result) in
+            let dataTask = F4SDataTaskService.networkTask(with: urlRequest, session: session, attempting: attempting) { [weak self] (result) in
                 
                 self?.handleUpdateUserTaskResult(attempting: attempting, result: result, completion: completion)
             
@@ -88,7 +89,7 @@ public class F4SUserService : F4SUserServiceProtocol {
         }
         
         let urlRequest = F4SDataTaskService.urlRequest(verb: .post, url: url, dataToSend: data)
-        let dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { [weak self] (result) in
+        let dataTask = F4SDataTaskService.networkTask(with: urlRequest, session: session, attempting: attempting) { [weak self] (result) in
             self?.handleRegisterAnonymousUserTaskResult(attempting: attempting, result: result, completion: completion)
         }
         dataTask.resume()
@@ -117,7 +118,7 @@ public class F4SUserService : F4SUserServiceProtocol {
         }
         
         let urlRequest = F4SDataTaskService.urlRequest(verb: .put, url: url, dataToSend: data)
-        let dataTask = F4SDataTaskService.dataTask(with: urlRequest, session: session, attempting: attempting) { [weak self] (result) in
+        let dataTask = F4SDataTaskService.networkTask(with: urlRequest, session: session, attempting: attempting) { [weak self] (result) in
             self?.handleEnableNotificatioTaskResult(attempting: attempting, result: result, completion: completion)
         }
         dataTask.resume()

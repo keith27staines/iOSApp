@@ -10,6 +10,7 @@ import UIKit
 import Reachability
 import WorkfinderCommon
 import WorkfinderNetworking
+import WorkfinderServices
 
 protocol CompanyCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol {}
 

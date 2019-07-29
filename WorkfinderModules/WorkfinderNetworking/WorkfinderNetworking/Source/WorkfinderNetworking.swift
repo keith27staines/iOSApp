@@ -1,154 +1,66 @@
-//
-//  WorkfinderNetworking.swift
-//  WorkfinderNetworking
-//
-//  Created by Keith Dev on 09/03/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
-
 import WorkfinderCommon
 
-var sharedSessionManager: WEXSessionManager!
-
-func configureWEXSessionManager(configuration: WEXNetworkingConfigurationProtocol) throws {
-    guard sharedSessionManager == nil else {
-        throw WEXNetworkConfigurationError.sessionManagerMayOnlyBeConfiguredOnce
+/*
+ `WorkfinderNetworking` defines shared state required by the network stack
+ */
+public struct WorkfinderNetworking {
+    public static var networkCallLogger: NetworkCallLogger? { return logger }
+    
+    /// `sharedWEXSessionManager` is deprecated. Most of its functionality is
+    /// incorporated in its F4S equivalent. No new services should be built to
+    /// rely on any component of WEXNetworking
+    public static var sharedWEXSessionManager: WEXSessionManager!
+    
+    /// Configures the entire networking stack
+    ///
+    /// Currently, WorkfinderNetworking manages two stacks: F4SNetworking and
+    /// WEXNetworking. WEXNetworking was an interim solution to a problem that
+    /// has gone away, and it can be dropped entirely once the three
+    /// remaining services that rely on it are rebuilt to use F4SNetworking
+    ///
+    /// - Note: Call this only once in the production code
+    ///
+    /// - Parameters:
+    ///   - wexApiKey: the api key required for Workfinder api access
+    ///   - workfinderBaseApi: The base url for the api, which is supplemented interally by v2 etc
+    ///   - log: A logging mechanism in which network errors will be reported
+    static public func configure(wexApiKey: String, workfinderBaseApi: String, log: F4SAnalyticsAndDebugging) {
+        logger = Logger(log: log)
+        NetworkConfig._workfinderBaseApiUrlString = workfinderBaseApi
+        NetworkConfig._wexApiKey = wexApiKey
+        let config: WEXNetworkingConfigurationProtocol = WEXNetworkingConfiguration(
+            wexApiKey: wexApiKey,
+            baseUrlString: NetworkConfig.workfinderApi,
+            v2ApiUrlString: NetworkConfig.workfinderApiV2)
+        F4SNetworkSessionManager.shared = F4SNetworkSessionManager(wexApiKey: wexApiKey)
+        sharedWEXSessionManager = WEXSessionManager(configuration: config)
     }
-    sharedSessionManager = WEXSessionManager(configuration: configuration)
+    
+    
+    static var _networkConfig: NetworkConfig!
+
 }
 
-public enum WEXNetworkConfigurationError : Error {
-    case sessionManagerMayOnlyBeConfiguredOnce
-}
-
-public enum WEXHTTPRequestVerb {
-    case get
-    case put(Data)
-    case patch(Data)
-    case post(Data)
-    case delete
+/// `NetworkConfig` defines api keys and api endpoints which are exposed through
+/// static methods which are set by `WorkfinderNetworking.configure`
+public struct NetworkConfig {
     
-    var name: String {
-        switch self {
-        case .get: return "GET"
-        case .put(_): return "PUT"
-        case .patch: return "PATCH"
-        case .post: return "POST"
-        case .delete: return "DELETE"
-        }
-    }
-}
-
-public typealias WEXDataResult = WEXResult<Data?,WEXNetworkError>
-public typealias HTTPHeaders = [String:String]
-
-public class WEXDataTask {
-    var session: URLSession { return sharedSessionManager.wexUserSession }
-    let urlString: String
-    let verb: WEXHTTPRequestVerb
-    let additionalHeaders: HTTPHeaders?
-    var requestData: Data?
-    var responseData: Data?
+    /// `wexApiKey` is the api key required for all calls to Workfinder
+    public static var wexApiKey: String { return _wexApiKey }
+    internal static var _wexApiKey: String = ""
     
-    var url: URL?
-    var urlRequest: URLRequest?
-    var completionHandler: ((WEXDataResult) -> Void)?
-    var dataTask: URLSessionDataTask?
+    /// The base url for the Workfinder api, excluding the v2 postfixe
+    public static var workfinderApi: String { return _workfinderBaseApiUrlString }
+    internal static var _workfinderBaseApiUrlString: String = ""
     
-    var attempting: String {
-        return "\(self.verb.name): \(urlString)"
-    }
-    
-    public init(urlString: String,
-                verb: WEXHTTPRequestVerb,
-                additionalHeaders: HTTPHeaders? = nil,
-                completion: @escaping ((WEXDataResult) -> Void)) {
-        self.urlString = urlString
-        self.verb = verb
-        switch verb {
-        case .post(let payload), .put(let payload), .patch(let payload):
-            self.requestData = payload
-        default:
-            self.requestData = nil
-        }
-        var headers = [String: String]()
-        if let userUuid = F4SUser().uuid {
-            headers["wex.user.uuid"] = userUuid
-        }
-        if let additionalHeaders = additionalHeaders {
-            headers.merge(additionalHeaders) { (current, _) -> String in current }
-        }
-        self.additionalHeaders = headers
-        self.completionHandler = completion
-    }
-    
-    public func start() {
-        do {
-            responseData = nil
-            dataTask?.cancel()
-            let url = try makeUrl(urlString: urlString)
-            self.url = url
-            let urlRequest = makeUrlRequest(verb: verb, url: url, dataToSend: requestData, additionalHeaders: additionalHeaders)
-            self.urlRequest = urlRequest
-            dataTask = session.dataTask(with: urlRequest) { [weak self] responseData, response, error in
-                guard let strongSelf = self else { return }
-                let httpUrlResponse = response as? HTTPURLResponse
-                strongSelf.responseData = responseData
-                guard strongSelf.isSuccessResponse(httpUrlResponse) else {
-                    guard let httpResponse = httpUrlResponse else {
-                        let wexError = WEXErrorsFactory.networkErrorFrom(error: error!, attempting: strongSelf.attempting)
-                        let result = WEXDataResult.failure(wexError)
-                        logger.logDataTaskFailure(error: wexError, request: urlRequest, response: httpUrlResponse, responseData: responseData)
-                        strongSelf.completionHandler?(result)
-                        return
-                    }
-                    let wexError = WEXErrorsFactory.networkErrorFrom(response: httpResponse, responseData: responseData, attempting: strongSelf.attempting)!
-                    let result = WEXDataResult.failure(wexError)
-                    logger.logDataTaskFailure(error: wexError, request: urlRequest, response: httpUrlResponse, responseData: responseData)
-                    strongSelf.completionHandler?(result)
-                    return
-                }
-                logger.logDataTaskSuccess(request: urlRequest, response: httpUrlResponse!, responseData: responseData!)
-                strongSelf.completionHandler?(WEXDataResult.success(responseData))
-            }
-            dataTask?.resume()
-        } catch let wexError as WEXNetworkError {
-            let result = WEXDataResult.failure(wexError)
-            logger.logDataTaskFailure(error: wexError, request: urlRequest!, response: nil, responseData: responseData)
-            completionHandler?(result)
-        } catch let error {
-            let wexError = WEXErrorsFactory.networkErrorFrom(error: error, attempting: attempting)
-            assert(false, "Invalid URL: \(urlString)")
-            let result = WEXDataResult.failure(wexError)
-            completionHandler?(result)
-        }
-    }
-    
-    public func cancel() {
-        dataTask?.cancel()
-    }
-    
-    func isSuccessResponse(_ response: HTTPURLResponse?) -> Bool {
-        guard let response = response, (200...299).contains(response.statusCode) else { return false }
-        return true
-    }
-    
-    func makeUrl(urlString: String) throws -> URL {
-        guard let url = URL(string: urlString) else {
-            throw WEXErrorsFactory.networkErrorFromInvalidUrlString(urlString, attempting: attempting)
-        }
-        return url
-    }
-        
-    func makeUrlRequest(verb: WEXHTTPRequestVerb, url: URL, dataToSend: Data?, additionalHeaders: HTTPHeaders?) -> URLRequest {
-        var request = URLRequest(url: url)
-        request.httpMethod = verb.name
-        request.httpBody = dataToSend
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        guard let additionalHeaders = additionalHeaders else { return request }
-        additionalHeaders.forEach { (key, value) in request.addValue(value, forHTTPHeaderField: key) }
-        return request
-    }
+    /// The full url for the v2 api
+    public static var workfinderApiV2: String { return "\(_workfinderBaseApiUrlString)/v2" }
     
 }
+
+/// `logger` provides a logging mechanism speclialised for network requests
+var logger: Logger?
+
+
+
+

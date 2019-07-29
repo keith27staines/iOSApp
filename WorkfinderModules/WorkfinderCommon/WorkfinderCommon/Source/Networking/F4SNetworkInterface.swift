@@ -28,7 +28,7 @@ public enum F4SNetworkErrorDomainType : String {
 public enum F4SNetworkDataErrorType {
     case noData
     case emptyData
-    case deserialization(Data)
+    case deserialization(Data?)
     case serialization(Encodable)
     case unknownError(Any?)
     case genericErrorWithRetry
