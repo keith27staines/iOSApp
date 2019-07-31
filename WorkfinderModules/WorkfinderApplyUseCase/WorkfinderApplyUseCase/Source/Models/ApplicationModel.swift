@@ -10,6 +10,7 @@ import Foundation
 import WorkfinderCommon
 
 public protocol ApplicationModelProtocol : class {
+    var voucherUuid: F4SUUID? { get set }
     var placement: F4SPlacement? { get }
     var placementJson: WEXPlacementJson? { get }
     var availabilityPeriodJson: F4SAvailabilityPeriodJson { get set }
@@ -20,7 +21,7 @@ public protocol ApplicationModelProtocol : class {
 }
 
 public class ApplicationModel : ApplicationModelProtocol {
-    
+    public var voucherUuid: F4SUUID?
     public internal (set) var placement: F4SPlacement?
     public internal (set) var placementJson: WEXPlacementJson?
     public internal (set) var placementService: WEXPlacementServiceProtocol
