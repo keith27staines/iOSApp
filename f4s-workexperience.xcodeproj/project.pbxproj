@@ -245,7 +245,6 @@
 		FCA91EC122340743007ED308 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91EC022340743007ED308 /* WorkfinderUI.framework */; };
 		FCA91EC222340743007ED308 /* WorkfinderUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91EC022340743007ED308 /* WorkfinderUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCACBF4420C7EB9F00EABAE8 /* F4SContentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCACBF4320C7EB9F00EABAE8 /* F4SContentService.swift */; };
-		FCACBF4620C8085900EABAE8 /* F4SVoucherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */; };
 		FCB1648320986E810045B9CA /* F4SRequestCompanyDocumentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB1648220986E810045B9CA /* F4SRequestCompanyDocumentTableViewCell.swift */; };
 		FCB3617B224D44610056E0B6 /* ChooseAttributesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB3617A224D44610056E0B6 /* ChooseAttributesViewModel.swift */; };
 		FCB3922A20FF1E0A00792C0A /* AcceptOffer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCB3922920FF1E0A00792C0A /* AcceptOffer.storyboard */; };
@@ -694,7 +693,6 @@
 		FCA91E9522340577007ED308 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA91EC022340743007ED308 /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCACBF4320C7EB9F00EABAE8 /* F4SContentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SContentService.swift; sourceTree = "<group>"; };
-		FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SVoucherService.swift; sourceTree = "<group>"; };
 		FCB1648220986E810045B9CA /* F4SRequestCompanyDocumentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRequestCompanyDocumentTableViewCell.swift; sourceTree = "<group>"; };
 		FCB3617A224D44610056E0B6 /* ChooseAttributesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseAttributesViewModel.swift; sourceTree = "<group>"; };
 		FCB3922920FF1E0A00792C0A /* AcceptOffer.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AcceptOffer.storyboard; sourceTree = "<group>"; };
@@ -1772,7 +1770,6 @@
 			children = (
 				FC99BDC420CFAFD400278DDE /* F4SCompanyFavouritingService.swift */,
 				2037B0B71DEC8A2400A9DE3E /* F4STemplateService.swift */,
-				FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */,
 				FC64A594211ACA39006464A5 /* F4SCompanyService.swift */,
 				FCA6D2B51FA88CE00037962B /* F4SPartnerService.swift */,
 				FCD388E6208E27E500FC73C5 /* F4SCompanyDocumentService.swift */,
@@ -2750,7 +2747,6 @@
 				204203EA1E4B110A007C7409 /* ShortlistDB.swift in Sources */,
 				203658831E1F809E00D87DC4 /* StatusCollectionViewCell.swift in Sources */,
 				2037B0A51DEC3C2000A9DE3E /* CoreDataBaseManager.swift in Sources */,
-				FCACBF4620C8085900EABAE8 /* F4SVoucherService.swift in Sources */,
 				40E78E6F1DD32BD4000A3776 /* CustomMenuViewController.swift in Sources */,
 				40E78E7F1DD32BF4000A3776 /* SideDrawerSectionHeaderView.swift in Sources */,
 				FC96709E2259F61600318F69 /* InterestsPruner.swift in Sources */,

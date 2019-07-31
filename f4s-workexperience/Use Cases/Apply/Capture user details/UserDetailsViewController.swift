@@ -2,6 +2,7 @@ import UIKit
 import Reachability
 import WorkfinderCommon
 import WorkfinderNetworking
+import WorkfinderServices
 
 class UserDetailsViewController: UIViewController {
     

@@ -18,6 +18,8 @@
 		FC6E3D2D2248D74A00377736 /* WorkfinderApplyUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF102248BDCC00D9B8D1 /* WorkfinderApplyUseCase.framework */; };
 		FC7A4394224A3AB200B2D693 /* F4SGrammarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4393224A3AB100B2D693 /* F4SGrammarTests.swift */; };
 		FC7A4398224A497800B2D693 /* ApplicationLetterTemplateBlanksCleanser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4397224A497800B2D693 /* ApplicationLetterTemplateBlanksCleanser.swift */; };
+		FC85D9F022F204140035C724 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC85D9EF22F204140035C724 /* WorkfinderServices.framework */; };
+		FC85D9F222F205610035C724 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC85D9F122F205610035C724 /* WorkfinderAppLogic.framework */; };
 		FC9626372248C1A900D5F850 /* ApplicationLetterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626312248C1A900D5F850 /* ApplicationLetterModel.swift */; };
 		FC9626392248C1A900D5F850 /* EditApplicationLetterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626332248C1A900D5F850 /* EditApplicationLetterButton.swift */; };
 		FC96263A2248C1A900D5F850 /* ApplicationLetterViewControllerMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626342248C1A900D5F850 /* ApplicationLetterViewControllerMainView.swift */; };
@@ -54,6 +56,8 @@
 		FC6E3D2C2248D74A00377736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC7A4393224A3AB100B2D693 /* F4SGrammarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SGrammarTests.swift; sourceTree = "<group>"; };
 		FC7A4397224A497800B2D693 /* ApplicationLetterTemplateBlanksCleanser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationLetterTemplateBlanksCleanser.swift; sourceTree = "<group>"; };
+		FC85D9EF22F204140035C724 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC85D9F122F205610035C724 /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC9626312248C1A900D5F850 /* ApplicationLetterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLetterModel.swift; sourceTree = "<group>"; };
 		FC9626332248C1A900D5F850 /* EditApplicationLetterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditApplicationLetterButton.swift; sourceTree = "<group>"; };
 		FC9626342248C1A900D5F850 /* ApplicationLetterViewControllerMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLetterViewControllerMainView.swift; sourceTree = "<group>"; };
@@ -90,6 +94,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC85D9F222F205610035C724 /* WorkfinderAppLogic.framework in Frameworks */,
+				FC85D9F022F204140035C724 /* WorkfinderServices.framework in Frameworks */,
 				FCE5190C2249388200B550C9 /* Mustache.framework in Frameworks */,
 				FC1EBEBD2248E0A500416D70 /* WorkfinderCommon.framework in Frameworks */,
 			);
@@ -166,6 +172,8 @@
 		FC96263D2248C20E00D5F850 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC85D9F122F205610035C724 /* WorkfinderAppLogic.framework */,
+				FC85D9EF22F204140035C724 /* WorkfinderServices.framework */,
 				FCE5190B2249388200B550C9 /* Mustache.framework */,
 				FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */,
 			);

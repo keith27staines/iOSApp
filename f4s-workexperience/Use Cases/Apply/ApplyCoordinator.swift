@@ -104,8 +104,6 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
 extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
     
     func continueApplicationWithCompletedLetter(sender: Any?, completion: @escaping (Error?) -> Void) {
-        //cleanup(animated: false)
-        //showHalfWayHooray()
         showUserDetails()
         completion(nil)
     }
@@ -143,6 +141,9 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
     }
     
     func userDetailsDidFinish() {
+        let user = F4SUser(userInformation: injected.userRepository.load())
+        applicationContext.user = user
+        applicationModel.voucherCode = user.vouchers?.first
         applicationModel.createApplicationIfNecessary { [weak self] (error) in
             guard let strongSelf = self else { return }
             if let _ = error {
