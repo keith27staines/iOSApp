@@ -122,13 +122,29 @@
 			isa = PBXGroup;
 			children = (
 				FC02DA2422EC7FCE003C8148 /* WorkfinderServices.swift */,
+				FC85D9EA22F1C8A80035C724 /* F4SServices */,
+				FC85D9E922F1C8740035C724 /* WEX Services */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		FC85D9E922F1C8740035C724 /* WEX Services */ = {
+			isa = PBXGroup;
+			children = (
 				FC02DA0722EC717A003C8148 /* WEXPlacementService.swift */,
 				FC02DA0422EC7134003C8148 /* MockWEXPlacementService.swift */,
 				FC02DA0822EC717B003C8148 /* EmailVerificationService.swift */,
-				FC02DA0622EC717A003C8148 /* F4SUserServiceProtocol.swift */,
 				FC02DA2A22EC898C003C8148 /* WEXDataTask.swift */,
 			);
-			path = Source;
+			path = "WEX Services";
+			sourceTree = "<group>";
+		};
+		FC85D9EA22F1C8A80035C724 /* F4SServices */ = {
+			isa = PBXGroup;
+			children = (
+				FC02DA0622EC717A003C8148 /* F4SUserServiceProtocol.swift */,
+			);
+			path = F4SServices;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
