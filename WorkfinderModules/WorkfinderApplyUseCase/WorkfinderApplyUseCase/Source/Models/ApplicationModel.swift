@@ -8,9 +8,11 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderServices
+import WorkfinderAppLogic
 
 public protocol ApplicationModelProtocol : class {
-    var voucherUuid: F4SUUID? { get set }
+    var voucherCode: String? { get set }
     var placement: F4SPlacement? { get }
     var placementJson: WEXPlacementJson? { get }
     var availabilityPeriodJson: F4SAvailabilityPeriodJson { get set }
@@ -21,7 +23,7 @@ public protocol ApplicationModelProtocol : class {
 }
 
 public class ApplicationModel : ApplicationModelProtocol {
-    public var voucherUuid: F4SUUID?
+    public var voucherCode: F4SUUID?
     public internal (set) var placement: F4SPlacement?
     public internal (set) var placementJson: WEXPlacementJson?
     public internal (set) var placementService: WEXPlacementServiceProtocol
@@ -144,6 +146,31 @@ public class ApplicationModel : ApplicationModelProtocol {
             guard let strongSelf = self else { return }
             strongSelf.handleResult(
                 result,
+                completion: completion,
+                onStepSuccess: strongSelf.associateVoucherWithPlacement,
+                onStepRetry: strongSelf.updatePlacementWithCoverLetterChoices)
+        }
+    }
+    
+    var voucherLogic: F4SVoucherLogic?
+    func associateVoucherWithPlacement(completion: @escaping ((Error?) -> Void)) {
+        guard let voucherCode = self.voucherCode else {
+            updatePlacementAsReviewed(completion: completion)
+            return
+        }
+        let placementUuid = (placementJson?.uuid)!
+        let voucherLogic = F4SVoucherLogic(placement: placementUuid, code: voucherCode)
+        voucherLogic.validateOnServer { [weak self] (codeValidationError) in
+            guard let strongSelf = self else { return }
+            var wexResult: WEXResult<WEXPlacementJson,WEXError> = WEXResult.success(strongSelf.placementJson!)
+            if let codeValidationError = codeValidationError {
+                if case .networkError = codeValidationError {
+                    let wexError = WEXErrorsFactory.networkErrorFrom(error: codeValidationError, attempting: "associate voucher with placement")
+                    wexResult = WEXResult.failure(wexError)
+                }
+            }
+            strongSelf.handleResult(
+                wexResult,
                 completion: completion,
                 onStepSuccess: strongSelf.updatePlacementAsReviewed,
                 onStepRetry: strongSelf.updatePlacementWithCoverLetterChoices)

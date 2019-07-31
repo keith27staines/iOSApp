@@ -143,7 +143,7 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
     func userDetailsDidFinish() {
         let user = F4SUser(userInformation: injected.userRepository.load())
         applicationContext.user = user
-        applicationModel.voucherUuid = user.vouchers?.first
+        applicationModel.voucherCode = user.vouchers?.first
         applicationModel.createApplicationIfNecessary { [weak self] (error) in
             guard let strongSelf = self else { return }
             if let _ = error {
