@@ -28,6 +28,8 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     var templateService: F4STemplateServiceProtocol
     var placementRepository: F4SPlacementRepositoryProtocol = F4SPlacementRespository()
     var interestsRepository: F4SInterestsRepositoryProtocol = F4SInterestsRepository()
+    var continueFromTimelinePlacement: F4STimelinePlacement?
+    let startingViewController: UIViewController!
     weak var applyCoordinatorDelegate: ApplyCoordinatorDelegate?
     
     lazy var userInterests: [F4SInterest] = {
@@ -41,9 +43,6 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         let placement = applicationContext.placement
         return ApplicationModel(userUuid: userUuid, installationUuid: installationUuid, userInterests: userInterests, placement: placement, placementRepository: placementRepository, companyViewData: companyViewData, placementService: placementService, templateService: templateService)
     }()
-    
-    var continueFromTimelinePlacement: F4STimelinePlacement?
-    let startingViewController: UIViewController!
     
     init(applyCoordinatorDelegate: ApplyCoordinatorDelegate? = nil,
          company: Company,

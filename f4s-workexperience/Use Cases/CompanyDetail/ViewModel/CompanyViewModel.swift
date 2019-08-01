@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import WorkfinderCommon
+import WorkfinderServices
 
 protocol CompanyViewModelCoordinatingDelegate : class {
     func companyViewModelDidComplete(_ viewModel: CompanyViewModel)
@@ -202,6 +203,8 @@ class CompanyViewModel : NSObject {
         return F4SPlacementService()
     }()
     
+    var allTimelinePlacements: [F4STimelinePlacement] = []
+    
     func applyIfStateAllows(completion: @escaping (InitiateApplicationResult) -> Void) {
         viewModelDelegate?.companyViewModelDidBeginNetworkTask(self)
         placementService.getAllPlacementsForUser { [weak self] (result) in
@@ -214,6 +217,7 @@ class CompanyViewModel : NSObject {
                         strongSelf.applyIfStateAllows(completion: completion)
                     })
                 case .success(let placements):
+                    strongSelf.allTimelinePlacements = placements
                     for placement in placements {
                         if placement.companyUuid?.dehyphenated == strongSelf.company.uuid {
                             completion(.deniedAlreadyApplied)

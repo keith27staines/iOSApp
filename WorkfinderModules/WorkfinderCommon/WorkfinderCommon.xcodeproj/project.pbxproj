@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		FC0E5CFB224E1B5700615B4F /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E5CFA224E1B5700615B4F /* LocalStore.swift */; };
 		FC0E5CFF224E65CC00615B4F /* CompanyViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E5CFE224E65CC00615B4F /* CompanyViewData.swift */; };
+		FC12B0FF22F33ECE00C33410 /* F4STimelinePlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B0FE22F33ECE00C33410 /* F4STimelinePlacement.swift */; };
+		FC12B10322F3415300C33410 /* JsonDateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B10022F3415200C33410 /* JsonDateFormatterExtension.swift */; };
+		FC12B10522F341D500C33410 /* JsonDateFormatterExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */; };
 		FC2AC5ED22352C5B00FF4E47 /* WexNetworkingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2AC5EC22352C5B00FF4E47 /* WexNetworkingConfiguration.swift */; };
 		FC2AC5EF2235411400FF4E47 /* WexNetworkConfigurationInterfaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2AC5EE2235411400FF4E47 /* WexNetworkConfigurationInterfaceTests.swift */; };
 		FC32FD432265E4C800740F0C /* F4SContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32FD422265E4C800740F0C /* F4SContentType.swift */; };
@@ -85,6 +88,9 @@
 /* Begin PBXFileReference section */
 		FC0E5CFA224E1B5700615B4F /* LocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStore.swift; sourceTree = "<group>"; };
 		FC0E5CFE224E65CC00615B4F /* CompanyViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyViewData.swift; sourceTree = "<group>"; };
+		FC12B0FE22F33ECE00C33410 /* F4STimelinePlacement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STimelinePlacement.swift; sourceTree = "<group>"; };
+		FC12B10022F3415200C33410 /* JsonDateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDateFormatterExtension.swift; sourceTree = "<group>"; };
+		FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDateFormatterExtensionTests.swift; sourceTree = "<group>"; };
 		FC2AC5EC22352C5B00FF4E47 /* WexNetworkingConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WexNetworkingConfiguration.swift; sourceTree = "<group>"; };
 		FC2AC5EE2235411400FF4E47 /* WexNetworkConfigurationInterfaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WexNetworkConfigurationInterfaceTests.swift; sourceTree = "<group>"; };
 		FC32FD422265E4C800740F0C /* F4SContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SContentType.swift; sourceTree = "<group>"; };
@@ -230,6 +236,8 @@
 				FCE5194D2249645A00B550C9 /* F4SCalendarTests.swift */,
 				FCE5194F2249645B00B550C9 /* F4SCalendarDayTests.swift */,
 				FCE519502249645B00B550C9 /* F4SDisplayableMonthTests.swift */,
+				FC12B0FE22F33ECE00C33410 /* F4STimelinePlacement.swift */,
+				FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */,
 				FC2AC5EE2235411400FF4E47 /* WexNetworkConfigurationInterfaceTests.swift */,
 			);
 			path = WorkfinderCommonTests;
@@ -331,6 +339,7 @@
 				FC9626502248C91F00D5F850 /* UIViewController+Extensions.swift */,
 				FCE5191522493B4C00B550C9 /* String+Extensions.swift */,
 				FCE5192022493D3300B550C9 /* Date+Extensions.swift */,
+				FC12B10022F3415200C33410 /* JsonDateFormatterExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -493,6 +502,7 @@
 				FCE51937224948E400B550C9 /* F4SAvailabilityPeriod.swift in Sources */,
 				FCDB07382286F6640053347F /* F4SUser.swift in Sources */,
 				FC9626512248C91F00D5F850 /* UIViewController+Extensions.swift in Sources */,
+				FC12B10322F3415300C33410 /* JsonDateFormatterExtension.swift in Sources */,
 				FCDFEA12223D2CF500E58649 /* WEXResult.swift in Sources */,
 				FCE51938224948E400B550C9 /* F4SDayAndHoursSelection.swift in Sources */,
 				FC96264D2248C58A00D5F850 /* UIView+ConstraintsExtensions.swift in Sources */,
@@ -527,7 +537,9 @@
 				FC2AC5EF2235411400FF4E47 /* WexNetworkConfigurationInterfaceTests.swift in Sources */,
 				FCE519552249645C00B550C9 /* F4SCalendarDayTests.swift in Sources */,
 				FCE519542249645C00B550C9 /* F4SJsonDecodingTests.swift in Sources */,
+				FC12B10522F341D500C33410 /* JsonDateFormatterExtensionTests.swift in Sources */,
 				FCA91E7A2234043D007ED308 /* WorkfinderCommonTests.swift in Sources */,
+				FC12B0FF22F33ECE00C33410 /* F4STimelinePlacement.swift in Sources */,
 				FCE519572249645C00B550C9 /* F4SCalendarMonthTests.swift in Sources */,
 				FC53A0F1224BA84000C2B97B /* LoadingOverlayTests.swift in Sources */,
 				FCE519522249645C00B550C9 /* F4SCalendarWeekTests.swift in Sources */,

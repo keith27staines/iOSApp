@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import WorkfinderCommon
 @testable import f4s_workexperience
 
 class CompanyViewModelTests: XCTestCase {
