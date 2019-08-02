@@ -163,13 +163,13 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
     
     func cancelAfterUserDetails() {
         let alert = UIAlertController(title: "Already applied", message: "You have already applied to this company (perhaps on a different device", preferredStyle: UIAlertController.Style.alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel) { [weak self] (action) in
+        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { [weak self] (action) in
             guard let strongSelf = self else { return }
             strongSelf.navigationRouter.popToViewController(strongSelf.rootViewController!, animated: false)
             strongSelf.applyCoordinatorDelegate?.applicationDidCancel()
             strongSelf.parentCoordinator?.childCoordinatorDidFinish(strongSelf)
         }
-        alert.addAction(cancelAction)
+        alert.addAction(okAction)
         navigationRouter.present(alert, animated: true, completion: nil)
     }
     
