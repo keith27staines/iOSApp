@@ -263,6 +263,7 @@
 				FCE5193C22494CEC00B550C9 /* F4SJsonValue.swift */,
 				FCE519312249483D00B550C9 /* F4SCalendar structs */,
 				FCA91E87223404AF007ED308 /* WorkfinderCommon.swift */,
+				FCDEA75222803BC000F1BE66 /* F4STimelinePlacement.swift */,
 				FCF5AEFD2248B2A300D9B8D1 /* Extensions */,
 				FCF5AF022248B36D00D9B8D1 /* Styling */,
 				FCDFEA15223D32EA00E58649 /* Networking */,
@@ -289,7 +290,6 @@
 				FCE4C57E223BBC5500C5B15E /* WEXLocation.swift */,
 				FCE4C580223BBC9F00C5B15E /* WEXPerson.swift */,
 				FCE4C582223BBE4C00C5B15E /* WEXDayOfWeek.swift */,
-				FCDEA75222803BC000F1BE66 /* F4STimelinePlacement.swift */,
 			);
 			path = WEXPlacement;
 			sourceTree = "<group>";

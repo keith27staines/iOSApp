@@ -12,7 +12,10 @@ import WorkfinderNetworking
 
 var logger: NetworkCallLogger? { return WorkfinderNetworking.networkCallLogger }
 
-public protocol F4SPlacementServiceProtocol {
-    func getAllPlacementsForUser(completion: @escaping (_ result: F4SNetworkResult<[F4STimelinePlacement]>) -> ())
+public protocol F4SPlacementServiceProtocol : F4SGetAllPlacementsServiceProtocol {
     func ratePlacement(placementUuid: String, rating: Int, completion: @escaping ( F4SNetworkResult<Bool>) -> ())
+}
+
+public protocol F4SGetAllPlacementsServiceProtocol {
+    func getAllPlacementsForUser(completion: @escaping (_ result: F4SNetworkResult<[F4STimelinePlacement]>) -> ())
 }

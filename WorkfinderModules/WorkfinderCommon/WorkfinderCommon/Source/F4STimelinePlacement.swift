@@ -14,6 +14,11 @@ public struct F4STimelinePlacement : Codable {
     public var duration: F4SAvailabilityPeriodJson?
     public var personResponsible: F4SPersonJson?
     public var location: F4SLocationJson?
+    public init(userUuid: F4SUUID, companyUuid: F4SUUID, placementUuid: F4SUUID) {
+        self.userUuid = userUuid
+        self.companyUuid = companyUuid
+        self.placementUuid = placementUuid
+    }
 }
 
 extension F4STimelinePlacement {

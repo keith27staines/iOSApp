@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import WorkfinderCommon
 import WorkfinderServices
+import WorkfinderAppLogic
 
 protocol CompanyViewModelCoordinatingDelegate : class {
     func companyViewModelDidComplete(_ viewModel: CompanyViewModel)
@@ -39,19 +40,13 @@ class CompanyViewModel : NSObject {
     }
     
     enum InitiateApplicationResult {
-        case deniedMustSelectPerson
         case deniedAlreadyApplied
-        case deniedCompanyNoAcceptingApplications
         case allowed
         
         var deniedReason: (title:String, message: String, buttonTitle: String)? {
             switch self {
-            case .deniedMustSelectPerson:
-                return ("You must select the person to whom you wish to apply","", "Select person")
             case .deniedAlreadyApplied:
                 return ("Already applied","You have already applied to this company", "Cancel")
-            case .deniedCompanyNoAcceptingApplications:
-                return ("This company is not accepting applications at this time","", "Cancel")
             case .allowed:
                 return nil
             }
@@ -195,38 +190,29 @@ class CompanyViewModel : NSObject {
     
     func didTapApply(completion: @escaping (InitiateApplicationResult) -> Void) {
         if appliedState == .applied { completion(.deniedAlreadyApplied) ; return }
-        if mustSelectPersonToApply { completion(.deniedMustSelectPerson) ; return }
         applyIfStateAllows(completion: completion)
     }
     
-    lazy var placementService: F4SPlacementService = {
-        return F4SPlacementService()
+    lazy var canApplyLogic: AllowedToApplyLogic = {
+        return AllowedToApplyLogic()
     }()
-    
-    var allTimelinePlacements: [F4STimelinePlacement] = []
     
     func applyIfStateAllows(completion: @escaping (InitiateApplicationResult) -> Void) {
         viewModelDelegate?.companyViewModelDidBeginNetworkTask(self)
-        placementService.getAllPlacementsForUser { [weak self] (result) in
+        canApplyLogic.checkUserCanApply(user: "", to: company.uuid) { [weak self] (networkResult) in
             guard let strongSelf = self else { return }
-            DispatchQueue.main.async {
+            switch networkResult {
+            case .error(let error):
+                strongSelf.viewModelDelegate?.companyViewModelNetworkTaskDidFail(strongSelf, error: error, retry: {
+                    strongSelf.applyIfStateAllows(completion: completion)
+                })
+            case .success(true):
                 strongSelf.viewModelDelegate?.companyViewModelDidCompleteLoadingTask(strongSelf)
-                switch result {
-                case .error(let error):
-                    strongSelf.viewModelDelegate?.companyViewModelNetworkTaskDidFail(strongSelf, error: error, retry: {
-                        strongSelf.applyIfStateAllows(completion: completion)
-                    })
-                case .success(let placements):
-                    strongSelf.allTimelinePlacements = placements
-                    for placement in placements {
-                        if placement.companyUuid?.dehyphenated == strongSelf.company.uuid {
-                            completion(.deniedAlreadyApplied)
-                            return
-                        }
-                    }
-                    strongSelf.coordinatingDelegate?.companyViewModel(strongSelf, applyTo: strongSelf.companyViewData, continueFrom: nil)
-                    completion(.allowed)
-                }
+                strongSelf.coordinatingDelegate?.companyViewModel(strongSelf, applyTo: strongSelf.companyViewData, continueFrom: nil)
+                completion(.allowed)
+            case .success(false):
+                strongSelf.viewModelDelegate?.companyViewModelDidCompleteLoadingTask(strongSelf)
+                completion(.deniedAlreadyApplied)
             }
         }
     }
