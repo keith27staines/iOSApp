@@ -9,9 +9,11 @@
 import Foundation
 import WorkfinderCommon
 import WorkfinderApplyUseCase
+import WorkfinderAppLogic
 
 protocol ApplyCoordinatorDelegate : class {
     func applicationDidFinish(preferredDestination: ApplyCoordinator.PreferredDestinationAfterApplication)
+    func applicationDidCancel()
 }
 
 class ApplyCoordinator : CoreInjectionNavigationCoordinator {
@@ -19,6 +21,7 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     enum PreferredDestinationAfterApplication {
         case messages
         case search
+        case none
     }
     
     var applicationContext: F4SApplicationContext
@@ -28,6 +31,8 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     var templateService: F4STemplateServiceProtocol
     var placementRepository: F4SPlacementRepositoryProtocol = F4SPlacementRespository()
     var interestsRepository: F4SInterestsRepositoryProtocol = F4SInterestsRepository()
+    var continueFromTimelinePlacement: F4STimelinePlacement?
+    let startingViewController: UIViewController!
     weak var applyCoordinatorDelegate: ApplyCoordinatorDelegate?
     
     lazy var userInterests: [F4SInterest] = {
@@ -41,9 +46,6 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         let placement = applicationContext.placement
         return ApplicationModel(userUuid: userUuid, installationUuid: installationUuid, userInterests: userInterests, placement: placement, placementRepository: placementRepository, companyViewData: companyViewData, placementService: placementService, templateService: templateService)
     }()
-    
-    var continueFromTimelinePlacement: F4STimelinePlacement?
-    let startingViewController: UIViewController!
     
     init(applyCoordinatorDelegate: ApplyCoordinatorDelegate? = nil,
          company: Company,
@@ -67,7 +69,12 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         super.start()
         showApplicationLetterViewController()
     }
+    
     var rootViewController: UIViewController?
+    
+    lazy var canApplyLogic: AllowedToApplyLogic = {
+        return AllowedToApplyLogic()
+    }()
     
     func showApplicationLetterViewController() {
         let applicationLetterViewModel = applicationModel.applicationLetterViewModel
@@ -108,19 +115,6 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
         completion(nil)
     }
     
-    func showHalfWayHooray() {
-        let halfWayStoryboard = UIStoryboard(name: "HalfWayHooray", bundle: nil)
-        let vc = halfWayStoryboard.instantiateViewController(withIdentifier: "HalfWayHoorayViewController") as! HalfWayHoorayViewController
-        vc.companyViewData = CompanyViewData(company: applicationContext.company!)
-        vc.coordinator = self
-        navigationRouter.push(viewController: vc, animated: true)
-    }
-    
-    func halfWayHoorayDidFinish() {
-        navigationRouter.pop(animated: true)
-        showUserDetails()
-    }
-    
     func showUserDetails() {
         
         let userDetailsCoordinator = UserDetailsCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, applicationContext: applicationContext)
@@ -144,6 +138,42 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
         let user = F4SUser(userInformation: injected.userRepository.load())
         applicationContext.user = user
         applicationModel.voucherCode = user.vouchers?.first
+        checkApplicationCanProceed()
+    }
+    
+    func checkApplicationCanProceed() {
+        let companyUuid = applicationContext.company!.uuid
+        canApplyLogic.checkUserCanApply(user: "", to: companyUuid) { [weak self] (networkResult) in
+            guard let strongSelf = self else { return }
+            switch networkResult {
+            case .error(let error):
+                let topViewController = strongSelf.navigationRouter.navigationController.topViewController!
+                sharedUserMessageHandler.display(error, parentCtrl: topViewController, cancelHandler: {
+                    strongSelf.cancelAfterUserDetails()
+                }, retryHandler: {
+                    strongSelf.checkApplicationCanProceed()
+                })
+            case .success(true):
+                strongSelf.apply()
+            case .success(false):
+                strongSelf.cancelAfterUserDetails()
+            }
+        }
+    }
+    
+    func cancelAfterUserDetails() {
+        let alert = UIAlertController(title: "Already applied", message: "You have already applied to this company (perhaps on a different device", preferredStyle: UIAlertController.Style.alert)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { [weak self] (action) in
+            guard let strongSelf = self else { return }
+            strongSelf.navigationRouter.popToViewController(strongSelf.rootViewController!, animated: false)
+            strongSelf.applyCoordinatorDelegate?.applicationDidCancel()
+            strongSelf.parentCoordinator?.childCoordinatorDidFinish(strongSelf)
+        }
+        alert.addAction(okAction)
+        navigationRouter.present(alert, animated: true, completion: nil)
+    }
+    
+    func apply() {
         applicationModel.createApplicationIfNecessary { [weak self] (error) in
             guard let strongSelf = self else { return }
             if let _ = error {
@@ -232,5 +262,3 @@ extension ApplyCoordinator : ChooseAttributesViewControllerCoordinatorProtocol {
         navigationRouter.pop(animated: true)
     }
 }
-
-extension ApplyCoordinator : HalfWayHoorayCoordinatorProtocol {}

@@ -1,5 +1,5 @@
 //
-//  F4SPlacementModelsTests.swift
+//  F4STimelinePlacementTests.swift
 //  f4s-workexperience
 //
 //  Created by Keith Dev on 10/07/2018.
@@ -7,58 +7,9 @@
 //
 
 import XCTest
-@testable import f4s_workexperience
+@testable import WorkfinderCommon
 
-class F4SPlacementModelsTests: XCTestCase {
-
-    
-//    public struct F4STimelinePlacement : Codable {
-//        public var placementUuid: F4SUUID?
-//        public var userUuid: F4SUUID?
-//        public var companyUuid: F4SUUID?
-//        public var threadUuid: F4SUUID?
-//        public var isRead: Bool?
-//        public var state: WEXPlacementState?
-//        public var latestMessage: F4SMessage?
-//    }
-//
-//    extension F4STimelinePlacement {
-//        private enum CodingKeys : String, CodingKey {
-//            case threadUuid = "thread_uuid"
-//            case placementUuid = "uuid"
-//            case userUuid = "user_uuid"
-//            case companyUuid = "company_uuid"
-//            case isRead = "is_read"
-//            case state
-//            case latestMessage = "latest_message"
-//        }
-//    }
-    
-//    public struct F4SMessage : Codable {
-//        public var uuid: F4SUUID
-//        public var dateTime: Date?
-//        public var relativeDateTime: String?
-//        public var content: String
-//        public var sender: String
-//
-//        public init(uuid: String = "", dateTime: Date = Date(), relativeDateTime: String = "", content: String = "", sender: String = "") {
-//            self.uuid = uuid
-//            self.dateTime = dateTime
-//            self.relativeDateTime = relativeDateTime
-//            self.content = content
-//            self.sender = sender
-//        }
-//    }
-//
-//    extension F4SMessage {
-//        private enum CodingKeys : String, CodingKey {
-//            case uuid
-//            case dateTime = "datetime"
-//            case relativeDateTime = "datetime_rel"
-//            case content
-//            case sender
-//        }
-//    }
+class F4STimelinePlacementTests: XCTestCase {
     
     func testDecodePlacementTimeline() {
         let p = """

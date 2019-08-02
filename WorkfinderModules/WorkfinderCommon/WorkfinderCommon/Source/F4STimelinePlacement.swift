@@ -1,13 +1,4 @@
-//
-//  F4SPlacementModels.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 21/06/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
-//
-
 import Foundation
-import WorkfinderCommon
 
 public struct F4STimelinePlacement : Codable {
     public var placementUuid: F4SUUID?
@@ -23,6 +14,11 @@ public struct F4STimelinePlacement : Codable {
     public var duration: F4SAvailabilityPeriodJson?
     public var personResponsible: F4SPersonJson?
     public var location: F4SLocationJson?
+    public init(userUuid: F4SUUID, companyUuid: F4SUUID, placementUuid: F4SUUID) {
+        self.userUuid = userUuid
+        self.companyUuid = companyUuid
+        self.placementUuid = placementUuid
+    }
 }
 
 extension F4STimelinePlacement {
@@ -75,7 +71,7 @@ public struct F4SLocationJson : Codable {
     public var website: String?
     public var point: F4SPointJson?
 }
-    
+
 extension F4SLocationJson {
     private enum CodingKeys : String, CodingKey {
         case address
@@ -104,5 +100,80 @@ extension F4SPointJson {
     private enum CodingKeys : String, CodingKey {
         case latitude = "lat"
         case longitude = "long"
+    }
+}
+
+public struct F4SMessage : Codable {
+    public var uuid: F4SUUID
+    public var dateTime: Date?
+    public var relativeDateTime: String?
+    public var content: String
+    public var sender: String?
+    public var isRead: Bool?
+    
+    public init(uuid: String = "", dateTime: Date = Date(), relativeDateTime: String = "", content: String = "", sender: String = "") {
+        self.uuid = uuid
+        self.dateTime = dateTime
+        self.relativeDateTime = relativeDateTime
+        self.content = content
+        self.sender = sender
+    }
+}
+
+extension F4SMessage {
+    private enum CodingKeys : String, CodingKey {
+        case uuid
+        case dateTime = "datetime"
+        case relativeDateTime = "datetime_rel"
+        case content
+        case sender
+        case isRead = "is_read"
+    }
+}
+
+extension F4SMessage : MessageProtocol {
+    
+    public var senderId: String {
+        return sender ?? "unknown sender"
+    }
+    
+    public var sentDate: Date? {
+        return dateTime
+    }
+    
+    public var receivedDate: Date? {
+        return dateTime
+    }
+    
+    public var readDate: Date? {
+        return nil
+    }
+    
+    public var text: String? {
+        return content
+    }
+}
+
+public protocol MessageProtocol {
+    var uuid: String { get }
+    var senderId: String { get }
+    var sentDate: Date? { get }
+    var receivedDate: Date? { get }
+    var readDate: Date? { get }
+    var isRead: Bool? { get }
+    var text: String? { get }
+}
+
+public extension MessageProtocol {
+    
+    func isEqual(other: MessageProtocol) -> Bool {
+        if uuid == other.uuid { return true }
+        return self.dateToOrderBy == other.dateToOrderBy && self.senderId == other.senderId
+    }
+    
+    var isRead: Bool? { return readDate != nil }
+    
+    var dateToOrderBy: Date {
+        return sentDate ?? receivedDate ?? Date.distantFuture
     }
 }

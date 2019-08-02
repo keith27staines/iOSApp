@@ -1,5 +1,5 @@
 import XCTest
-@testable import WorkfinderNetworking
+@testable import WorkfinderCommon
 
 class JsonDateFormatterExtensionTests: XCTestCase {
     
