@@ -110,8 +110,6 @@
 		D54E0FFD1E044B0400A51560 /* InfoWindowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D54E0FFB1E044B0400A51560 /* InfoWindowView.xib */; };
 		D54E0FFF1E044B1800A51560 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54E0FFE1E044B1800A51560 /* ContentViewController.swift */; };
 		D54E10021E044B6B00A51560 /* Content.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D54E10001E044B6B00A51560 /* Content.storyboard */; };
-		D54E10051E044BA000A51560 /* HalfWayHooray.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D54E10031E044BA000A51560 /* HalfWayHooray.storyboard */; };
-		D54E10071E044BC100A51560 /* HalfWayHoorayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54E10061E044BC100A51560 /* HalfWayHoorayViewController.swift */; };
 		D5E9EBE81DD60AB300BD796E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5E9EBEA1DD60AB300BD796E /* Localizable.strings */; };
 		FC02DA2C22EC9481003C8148 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC02DA2622EC84EF003C8148 /* WorkfinderServices.framework */; };
 		FC02DA2D22EC9481003C8148 /* WorkfinderServices.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC02DA2622EC84EF003C8148 /* WorkfinderServices.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -537,8 +535,6 @@
 		D54E0FFC1E044B0400A51560 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/InfoWindowView.xib; sourceTree = "<group>"; };
 		D54E0FFE1E044B1800A51560 /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		D54E10011E044B6B00A51560 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "f4s-workexperience/Base.lproj/Content.storyboard"; sourceTree = "<group>"; };
-		D54E10041E044BA000A51560 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "f4s-workexperience/Base.lproj/HalfWayHooray.storyboard"; sourceTree = "<group>"; };
-		D54E10061E044BC100A51560 /* HalfWayHoorayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfWayHoorayViewController.swift; sourceTree = "<group>"; };
 		D5E9EBE91DD60AB300BD796E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FC02DA2622EC84EF003C8148 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC06264622032E74000D2D04 /* CompanyDocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDocumentsViewController.swift; sourceTree = "<group>"; };
@@ -1587,7 +1583,6 @@
 			children = (
 				FC9626402248C27D00D5F850 /* ApplyCoordinator.swift */,
 				FC24D24B226B085900FA04A1 /* Build cover letter */,
-				FC24D24D226B092A00FA04A1 /* Half-way-hooray */,
 				FC24D250226B0BA500FA04A1 /* Capture user details */,
 				FCD3485620038B6B00DC1316 /* Validate user email */,
 				FC0B406A226B0E6A00D992AC /* Success Hooray */,
@@ -1615,15 +1610,6 @@
 				204C89721DF5F0A100D8493A /* EditFooterView.swift */,
 			);
 			path = "Edit Cover letter";
-			sourceTree = "<group>";
-		};
-		FC24D24D226B092A00FA04A1 /* Half-way-hooray */ = {
-			isa = PBXGroup;
-			children = (
-				D54E10031E044BA000A51560 /* HalfWayHooray.storyboard */,
-				D54E10061E044BC100A51560 /* HalfWayHoorayViewController.swift */,
-			);
-			path = "Half-way-hooray";
 			sourceTree = "<group>";
 		};
 		FC24D24E226B09DE00FA04A1 /* Cover letter choices */ = {
@@ -2415,7 +2401,6 @@
 				FCB6B8CA2074C58F0042C725 /* F4SDisplayInformationViewController.storyboard in Resources */,
 				FCD3486B20049DFB00DC1316 /* F4SEmailVerification.storyboard in Resources */,
 				201458C51E1CFCE500DBC9BD /* Message.storyboard in Resources */,
-				D54E10051E044BA000A51560 /* HalfWayHooray.storyboard in Resources */,
 				40E78E951DD391F3000A3776 /* MapView.storyboard in Resources */,
 				FCC212F0219077C000D8D5B7 /* DocumentCapture.xcassets in Resources */,
 				FC72219F20FE248400F10953 /* Appfile in Resources */,
@@ -2572,7 +2557,6 @@
 				40C1A4E61DDB356B000F80AA /* TabBarViewController.swift in Sources */,
 				FCC212F4219077C000D8D5B7 /* F4SAddUrlViewController.swift in Sources */,
 				FCA53B921FE00CB5009F6DB0 /* VersioningService.swift in Sources */,
-				D54E10071E044BC100A51560 /* HalfWayHoorayViewController.swift in Sources */,
 				FC85A5ED2191D87B004E877E /* AddDocumentsViewController+AddDocumentDelegate.swift in Sources */,
 				FC24D238226AEDD800FA04A1 /* RecommendationsListViewModel.swift in Sources */,
 				FC1DC09221FE1509009ABC60 /* PersonBioView.swift in Sources */,
@@ -2997,14 +2981,6 @@
 				D54E10011E044B6B00A51560 /* Base */,
 			);
 			name = Content.storyboard;
-			sourceTree = "<group>";
-		};
-		D54E10031E044BA000A51560 /* HalfWayHooray.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D54E10041E044BA000A51560 /* Base */,
-			);
-			name = HalfWayHooray.storyboard;
 			sourceTree = "<group>";
 		};
 		D5E9EBEA1DD60AB300BD796E /* Localizable.strings */ = {

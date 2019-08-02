@@ -55,8 +55,14 @@ extension CompanyCoordinator : ApplyCoordinatorDelegate {
                 TabBarCoordinator.sharedInstance!.navigateToTimeline()
             case .search:
                 TabBarCoordinator.sharedInstance!.navigateToMap()
+            case .none:
+                break
             }
         }
+    }
+    func applicationDidCancel() {
+        cleanup()
+        navigationRouter.pop(animated: true)
     }
 }
 
