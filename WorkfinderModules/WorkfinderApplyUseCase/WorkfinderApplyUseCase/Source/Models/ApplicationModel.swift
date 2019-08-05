@@ -19,10 +19,12 @@ public protocol ApplicationModelProtocol : class {
     var applicationLetterModel: ApplicationLetterModelProtocol { get }
     var applicationLetterViewModel: ApplicationLetterViewModelProtocol { get }
     var blanksModel: ApplicationLetterTemplateBlanksModelProtocol { get }
-    func createApplicationIfNecessary(completion: @escaping (Error?) -> Void)
+    func resumeApplicationFromPreexistingDraft(_ draft: F4SPlacement, completion: @escaping ((Error?) -> Void))
+    func createApplication(completion: @escaping (Error?) -> Void)
 }
 
 public class ApplicationModel : ApplicationModelProtocol {
+    
     public var voucherCode: F4SUUID?
     public internal (set) var placement: F4SPlacement?
     public internal (set) var placementJson: WEXPlacementJson?
@@ -112,12 +114,14 @@ public class ApplicationModel : ApplicationModelProtocol {
         self.userInterests = userInterests
     }
     
-    public func createApplicationIfNecessary(completion: @escaping ((Error?) -> Void)) -> Void {
-        guard placement == nil else {
-            placementJson = self.placementJson ?? makePlacementJsonFromPlacement(placement: placement!)
-            updatePlacementWithCoverLetterChoices(completion: completion)
-            return
-        }
+    public func resumeApplicationFromPreexistingDraft(_ draft: F4SPlacement, completion: @escaping ((Error?) -> Void)) {
+        self.placement = draft
+        placementJson = makePlacementJsonFromPlacement(placement: draft)
+        updatePlacementWithCoverLetterChoices(completion: completion)
+    }
+    
+    public func createApplication(completion: @escaping ((Error?) -> Void)) -> Void {
+        precondition(placement == nil, "If placement exists already, use `continueFromPreexistingDraftPlacement`")
         let createPlacementJson = WEXCreatePlacementJson(
             user: self.userUuid,
             roleUuid: self.roleUuid!,
@@ -131,7 +135,7 @@ public class ApplicationModel : ApplicationModelProtocol {
                 result,
                 completion: completion,
                 onStepSuccess: strongSelf.updatePlacementWithCoverLetterChoices,
-                onStepRetry: strongSelf.createApplicationIfNecessary)
+                onStepRetry: strongSelf.createApplication)
         }
     }
     

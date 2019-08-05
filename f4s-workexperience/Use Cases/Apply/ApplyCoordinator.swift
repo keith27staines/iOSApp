@@ -174,14 +174,21 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
     }
     
     func apply() {
-        applicationModel.createApplicationIfNecessary { [weak self] (error) in
-            guard let strongSelf = self else { return }
-            if let _ = error {
-                return
+        if let draft = canApplyLogic.draftPlacement {
+            applicationModel.resumeApplicationFromPreexistingDraft(draft) { [weak self] (error) in
+                self?.applyDidComplete(error: error)
             }
-            strongSelf.applicationContext.placement = strongSelf.applicationModel.placement
-            strongSelf.showAddDocuments()
+        } else {
+            applicationModel.createApplication { [weak self] (error) in
+                self?.applyDidComplete(error: error)
+            }
         }
+    }
+    
+    func applyDidComplete(error: Error?) {
+        guard error == nil else { return }
+        applicationContext.placement = applicationModel.placement
+        showAddDocuments()
     }
     
     func showAddDocuments() {

@@ -211,7 +211,10 @@ class CompanyViewModel : NSObject {
                 strongSelf.coordinatingDelegate?.companyViewModel(strongSelf, applyTo: strongSelf.companyViewData, continueFrom: nil)
                 completion(.allowed)
             case .success(false):
-                strongSelf.viewModelDelegate?.companyViewModelDidCompleteLoadingTask(strongSelf)  
+                strongSelf.viewModelDelegate?.companyViewModelDidCompleteLoadingTask(strongSelf)
+                strongSelf.coordinatingDelegate?.companyViewModel(strongSelf, applyTo: strongSelf.companyViewData, continueFrom: nil)
+                completion(.allowed)
+                strongSelf.viewModelDelegate?.companyViewModelDidCompleteLoadingTask(strongSelf)
                 completion(.deniedAlreadyApplied)
             }
         }

@@ -23,16 +23,35 @@ public class AllowedToApplyLogic {
         }
     }
     
+    public var draftTimelinePlacement: F4STimelinePlacement?
+    public var draftPlacement: F4SPlacement? {
+        return (draftTimelinePlacement != nil) ? F4SPlacement(timelinePlacement: draftTimelinePlacement!) : nil
+    }
+    
     public func checkUserCanApply(user: F4SUUID?,
                                   to company: F4SUUID,
                                   givenExistingPlacements existing: [F4STimelinePlacement],
                                   completion: @escaping (F4SNetworkResult<Bool>) -> Void) {
         DispatchQueue.main.async {
-            let match = existing.first(where: { (existing) -> Bool in
+            guard let match = existing.first(where: { (existing) -> Bool in
                 existing.companyUuid?.dehyphenated == company.dehyphenated
-            })
-            let result = F4SNetworkResult.success(match == nil)
+            }) else {
+                // No matching placement so the user is free to apply
+                let result = F4SNetworkResult.success(true)
+                completion(result)
+                return
+            }
+            guard let workflowState = match.workflowState else {
+                // The placement is in an unknown state so we can't allow the
+                // user to resume it
+                let result = F4SNetworkResult.success(false)
+                completion(result)
+                return
+            }
+            self.draftTimelinePlacement = (workflowState == .draft) ? match : nil
+            let result = F4SNetworkResult.success(workflowState == WEXPlacementState.draft)
             completion(result)
+
         }
     }
     

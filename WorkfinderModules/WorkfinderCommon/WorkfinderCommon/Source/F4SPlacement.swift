@@ -22,6 +22,14 @@ public struct F4SPlacement : Codable {
         self.status = status
         self.placementUuid = placementUuid
     }
+    
+    public init(timelinePlacement: F4STimelinePlacement) {
+        self.userUuid = timelinePlacement.userUuid
+        self.companyUuid = timelinePlacement.companyUuid
+        self.placementUuid = timelinePlacement.placementUuid
+        self.status = timelinePlacement.workflowState
+        self.interestList = []
+    }
 }
 
 extension F4SPlacement {
