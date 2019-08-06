@@ -45,6 +45,7 @@ public struct F4SUUIDDictionary : Codable {
     }
 }
 
+/// F4SUser represents the current user (assumed to be the only user)
 public class F4SUser : F4SUserProtocol, Codable {
     
     public private (set) var uuid: F4SUUID?
