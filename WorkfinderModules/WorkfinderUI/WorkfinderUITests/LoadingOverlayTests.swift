@@ -8,7 +8,7 @@
 
 import XCTest
 
-@testable import WorkfinderCommon
+@testable import WorkfinderUI
 
 class LoadingOverlayTests : XCTestCase {
     

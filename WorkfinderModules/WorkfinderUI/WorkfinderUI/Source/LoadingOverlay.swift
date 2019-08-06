@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 import UIKit
 
 class LoadingOverlay: UIView {

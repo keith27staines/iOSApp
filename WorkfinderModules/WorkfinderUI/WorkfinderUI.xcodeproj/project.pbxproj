@@ -9,6 +9,18 @@
 /* Begin PBXBuildFile section */
 		FC116B4C2284510E00146478 /* WebViewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC116B4B2284510E00146478 /* WebViewAssets.xcassets */; };
 		FC116B4E2284511E00146478 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC116B4D2284511E00146478 /* WebViewController.swift */; };
+		FC22DB9122F9764F0068C61C /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DB9022F9764F0068C61C /* UIButton+Extensions.swift */; };
+		FC22DBE822F979750068C61C /* FactorySkins.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBE422F979750068C61C /* FactorySkins.swift */; };
+		FC22DBE922F979750068C61C /* Skinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBE522F979750068C61C /* Skinner.swift */; };
+		FC22DBEA22F979750068C61C /* Skin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBE622F979750068C61C /* Skin.swift */; };
+		FC22DBEB22F979750068C61C /* RGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBE722F979750068C61C /* RGBA.swift */; };
+		FC22DBED22F979E90068C61C /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBEC22F979E90068C61C /* UIViewController+Extensions.swift */; };
+		FC22DBEF22F97A330068C61C /* UIView+ConstraintsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBEE22F97A320068C61C /* UIView+ConstraintsExtensions.swift */; };
+		FC22DBF122F97A960068C61C /* LoadingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBF022F97A960068C61C /* LoadingOverlay.swift */; };
+		FC22DBF322F97AAB0068C61C /* UserMessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBF222F97AAB0068C61C /* UserMessageHandler.swift */; };
+		FC22DBF522F97ADC0068C61C /* LoadingOverlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBF422F97ADC0068C61C /* LoadingOverlayTests.swift */; };
+		FC22DBF722F97CD70068C61C /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBF622F97CD70068C61C /* UIColor+Extensions.swift */; };
+		FC22DBF922F97CEB0068C61C /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBF822F97CEB0068C61C /* UIFont+Extensions.swift */; };
 		FC9865BA229D3901006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865B9229D3901006D3E63 /* README */; };
 		FCA636AB22A3E57E004B3050 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA636AA22A3E57E004B3050 /* WorkfinderCommon.framework */; };
 		FCA91EAC2234065A007ED308 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91EA22234065A007ED308 /* WorkfinderUI.framework */; };
@@ -32,6 +44,18 @@
 /* Begin PBXFileReference section */
 		FC116B4B2284510E00146478 /* WebViewAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WebViewAssets.xcassets; sourceTree = "<group>"; };
 		FC116B4D2284511E00146478 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		FC22DB9022F9764F0068C61C /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
+		FC22DBE422F979750068C61C /* FactorySkins.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FactorySkins.swift; sourceTree = "<group>"; };
+		FC22DBE522F979750068C61C /* Skinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skinner.swift; sourceTree = "<group>"; };
+		FC22DBE622F979750068C61C /* Skin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skin.swift; sourceTree = "<group>"; };
+		FC22DBE722F979750068C61C /* RGBA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGBA.swift; sourceTree = "<group>"; };
+		FC22DBEC22F979E90068C61C /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		FC22DBEE22F97A320068C61C /* UIView+ConstraintsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ConstraintsExtensions.swift"; sourceTree = "<group>"; };
+		FC22DBF022F97A960068C61C /* LoadingOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingOverlay.swift; sourceTree = "<group>"; };
+		FC22DBF222F97AAB0068C61C /* UserMessageHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMessageHandler.swift; sourceTree = "<group>"; };
+		FC22DBF422F97ADC0068C61C /* LoadingOverlayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingOverlayTests.swift; sourceTree = "<group>"; };
+		FC22DBF622F97CD70068C61C /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		FC22DBF822F97CEB0068C61C /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		FC9865B9229D3901006D3E63 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		FCA636AA22A3E57E004B3050 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA91EA22234065A007ED308 /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +98,17 @@
 			path = WebView;
 			sourceTree = "<group>";
 		};
+		FC22DBDB22F978D30068C61C /* Skinning */ = {
+			isa = PBXGroup;
+			children = (
+				FC22DBE722F979750068C61C /* RGBA.swift */,
+				FC22DBE422F979750068C61C /* FactorySkins.swift */,
+				FC22DBE622F979750068C61C /* Skin.swift */,
+				FC22DBE522F979750068C61C /* Skinner.swift */,
+			);
+			path = Skinning;
+			sourceTree = "<group>";
+		};
 		FCA636A922A3E57E004B3050 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +149,7 @@
 		FCA91EAF2234065A007ED308 /* WorkfinderUITests */ = {
 			isa = PBXGroup;
 			children = (
+				FC22DBF422F97ADC0068C61C /* LoadingOverlayTests.swift */,
 				FCA91EB02234065A007ED308 /* WorkfinderUITests.swift */,
 				FCA91EB22234065A007ED308 /* Info.plist */,
 			);
@@ -132,6 +168,14 @@
 		FCA91EBD22340680007ED308 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				FC22DBF822F97CEB0068C61C /* UIFont+Extensions.swift */,
+				FC22DBF622F97CD70068C61C /* UIColor+Extensions.swift */,
+				FC22DBF222F97AAB0068C61C /* UserMessageHandler.swift */,
+				FC22DBF022F97A960068C61C /* LoadingOverlay.swift */,
+				FC22DBEE22F97A320068C61C /* UIView+ConstraintsExtensions.swift */,
+				FC22DBEC22F979E90068C61C /* UIViewController+Extensions.swift */,
+				FC22DBDB22F978D30068C61C /* Skinning */,
+				FC22DB9022F9764F0068C61C /* UIButton+Extensions.swift */,
 				FCEB1D26229FC6DB00C6D2C2 /* UITableView+Extensions.swift */,
 				FCEB1D24229FC6D500C6D2C2 /* UIView+Extensions.swift */,
 				FC116B4F2284515F00146478 /* WebView */,
@@ -206,6 +250,7 @@
 					};
 					FCA91EAA2234065A007ED308 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -254,8 +299,19 @@
 			files = (
 				FCEB1D25229FC6D600C6D2C2 /* UIView+Extensions.swift in Sources */,
 				FCA91EBF223406B4007ED308 /* WorkfinderUI.swift in Sources */,
+				FC22DBED22F979E90068C61C /* UIViewController+Extensions.swift in Sources */,
+				FC22DBF322F97AAB0068C61C /* UserMessageHandler.swift in Sources */,
+				FC22DBEA22F979750068C61C /* Skin.swift in Sources */,
+				FC22DBE922F979750068C61C /* Skinner.swift in Sources */,
 				FC116B4E2284511E00146478 /* WebViewController.swift in Sources */,
+				FC22DBEB22F979750068C61C /* RGBA.swift in Sources */,
+				FC22DBE822F979750068C61C /* FactorySkins.swift in Sources */,
+				FC22DBEF22F97A330068C61C /* UIView+ConstraintsExtensions.swift in Sources */,
+				FC22DB9122F9764F0068C61C /* UIButton+Extensions.swift in Sources */,
+				FC22DBF722F97CD70068C61C /* UIColor+Extensions.swift in Sources */,
 				FCEB1D27229FC6DB00C6D2C2 /* UITableView+Extensions.swift in Sources */,
+				FC22DBF922F97CEB0068C61C /* UIFont+Extensions.swift in Sources */,
+				FC22DBF122F97A960068C61C /* LoadingOverlay.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCA91EB12234065A007ED308 /* WorkfinderUITests.swift in Sources */,
+				FC22DBF522F97ADC0068C61C /* LoadingOverlayTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,7 +528,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -490,7 +547,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -602,7 +659,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = DebugF4SLive;
@@ -714,7 +771,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = DebugF4S;
@@ -819,7 +876,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = ReleaseF4SLive;
@@ -924,7 +981,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = ReleaseF4S;

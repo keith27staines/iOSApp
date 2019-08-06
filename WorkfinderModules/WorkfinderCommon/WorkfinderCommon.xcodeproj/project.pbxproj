@@ -15,16 +15,10 @@
 		FC2AC5ED22352C5B00FF4E47 /* WexNetworkingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2AC5EC22352C5B00FF4E47 /* WexNetworkingConfiguration.swift */; };
 		FC2AC5EF2235411400FF4E47 /* WexNetworkConfigurationInterfaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2AC5EE2235411400FF4E47 /* WexNetworkConfigurationInterfaceTests.swift */; };
 		FC32FD432265E4C800740F0C /* F4SContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32FD422265E4C800740F0C /* F4SContentType.swift */; };
-		FC53A0ED224B9DAC00C2B97B /* UserMessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC53A0EC224B9DAC00C2B97B /* UserMessageHandler.swift */; };
-		FC53A0EF224B9DF100C2B97B /* LoadingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC53A0EE224B9DF100C2B97B /* LoadingOverlay.swift */; };
-		FC53A0F1224BA84000C2B97B /* LoadingOverlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC53A0F0224BA83F00C2B97B /* LoadingOverlayTests.swift */; };
 		FC7A4396224A3C0E00B2D693 /* F4SNetworkInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4395224A3C0E00B2D693 /* F4SNetworkInterface.swift */; };
 		FC7A439A224A49B500B2D693 /* F4STemplateModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4399224A49B500B2D693 /* F4STemplateModels.swift */; };
 		FC7A439C224A4D9600B2D693 /* F4STemplateServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A439B224A4D9600B2D693 /* F4STemplateServiceProtocol.swift */; };
 		FC7A439E224A7CF300B2D693 /* F4SJsonDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A439D224A7CF300B2D693 /* F4SJsonDecoding.swift */; };
-		FC96264D2248C58A00D5F850 /* UIView+ConstraintsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96264C2248C58900D5F850 /* UIView+ConstraintsExtensions.swift */; };
-		FC96264F2248C77100D5F850 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96264E2248C77100D5F850 /* UIFont+Extensions.swift */; };
-		FC9626512248C91F00D5F850 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626502248C91F00D5F850 /* UIViewController+Extensions.swift */; };
 		FC96709A2258C81000318F69 /* F4SPlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9670992258C81000318F69 /* F4SPlacement.swift */; };
 		FC96709C2258C8B100318F69 /* F4SInterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96709B2258C8B100318F69 /* F4SInterest.swift */; };
 		FC9670A4225A195B00318F69 /* F4SPlacementRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9670A3225A195B00318F69 /* F4SPlacementRepositoryProtocol.swift */; };
@@ -66,12 +60,6 @@
 		FCE519552249645C00B550C9 /* F4SCalendarDayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE5194F2249645B00B550C9 /* F4SCalendarDayTests.swift */; };
 		FCE519562249645C00B550C9 /* F4SDisplayableMonthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE519502249645B00B550C9 /* F4SDisplayableMonthTests.swift */; };
 		FCE519572249645C00B550C9 /* F4SCalendarMonthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE519512249645C00B550C9 /* F4SCalendarMonthTests.swift */; };
-		FCF5AEF92248B1E500D9B8D1 /* RGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF5AEF52248B1E400D9B8D1 /* RGBA.swift */; };
-		FCF5AEFA2248B1E500D9B8D1 /* Skin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF5AEF62248B1E400D9B8D1 /* Skin.swift */; };
-		FCF5AEFB2248B1E500D9B8D1 /* Skinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF5AEF72248B1E500D9B8D1 /* Skinner.swift */; };
-		FCF5AEFC2248B1E500D9B8D1 /* FactorySkins.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF5AEF82248B1E500D9B8D1 /* FactorySkins.swift */; };
-		FCF5AEFF2248B2C800D9B8D1 /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF5AEFE2248B2C800D9B8D1 /* UIButton+Extensions.swift */; };
-		FCF5AF012248B33C00D9B8D1 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF5AF002248B33C00D9B8D1 /* UIColor+Extensions.swift */; };
 		FCFE450E2250BA6700C38436 /* MockLocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE450D2250BA6700C38436 /* MockLocalStore.swift */; };
 /* End PBXBuildFile section */
 
@@ -94,16 +82,10 @@
 		FC2AC5EC22352C5B00FF4E47 /* WexNetworkingConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WexNetworkingConfiguration.swift; sourceTree = "<group>"; };
 		FC2AC5EE2235411400FF4E47 /* WexNetworkConfigurationInterfaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WexNetworkConfigurationInterfaceTests.swift; sourceTree = "<group>"; };
 		FC32FD422265E4C800740F0C /* F4SContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SContentType.swift; sourceTree = "<group>"; };
-		FC53A0EC224B9DAC00C2B97B /* UserMessageHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMessageHandler.swift; sourceTree = "<group>"; };
-		FC53A0EE224B9DF100C2B97B /* LoadingOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingOverlay.swift; sourceTree = "<group>"; };
-		FC53A0F0224BA83F00C2B97B /* LoadingOverlayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingOverlayTests.swift; sourceTree = "<group>"; };
 		FC7A4395224A3C0E00B2D693 /* F4SNetworkInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SNetworkInterface.swift; sourceTree = "<group>"; };
 		FC7A4399224A49B500B2D693 /* F4STemplateModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateModels.swift; sourceTree = "<group>"; };
 		FC7A439B224A4D9600B2D693 /* F4STemplateServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateServiceProtocol.swift; sourceTree = "<group>"; };
 		FC7A439D224A7CF300B2D693 /* F4SJsonDecoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SJsonDecoding.swift; sourceTree = "<group>"; };
-		FC96264C2248C58900D5F850 /* UIView+ConstraintsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ConstraintsExtensions.swift"; sourceTree = "<group>"; };
-		FC96264E2248C77100D5F850 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
-		FC9626502248C91F00D5F850 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		FC9670992258C81000318F69 /* F4SPlacement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacement.swift; sourceTree = "<group>"; };
 		FC96709B2258C8B100318F69 /* F4SInterest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInterest.swift; sourceTree = "<group>"; };
 		FC9670A3225A195B00318F69 /* F4SPlacementRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementRepositoryProtocol.swift; sourceTree = "<group>"; };
@@ -148,12 +130,6 @@
 		FCE5194F2249645B00B550C9 /* F4SCalendarDayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarDayTests.swift; sourceTree = "<group>"; };
 		FCE519502249645B00B550C9 /* F4SDisplayableMonthTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDisplayableMonthTests.swift; sourceTree = "<group>"; };
 		FCE519512249645C00B550C9 /* F4SCalendarMonthTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarMonthTests.swift; sourceTree = "<group>"; };
-		FCF5AEF52248B1E400D9B8D1 /* RGBA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGBA.swift; sourceTree = "<group>"; };
-		FCF5AEF62248B1E400D9B8D1 /* Skin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skin.swift; sourceTree = "<group>"; };
-		FCF5AEF72248B1E500D9B8D1 /* Skinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skinner.swift; sourceTree = "<group>"; };
-		FCF5AEF82248B1E500D9B8D1 /* FactorySkins.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FactorySkins.swift; sourceTree = "<group>"; };
-		FCF5AEFE2248B2C800D9B8D1 /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
-		FCF5AF002248B33C00D9B8D1 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		FCFE450D2250BA6700C38436 /* MockLocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocalStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -229,7 +205,6 @@
 				FCA91E7B2234043D007ED308 /* Info.plist */,
 				FCBEA7B4228701E500CAB1F1 /* F4SUserTests.swift */,
 				FCA91E792234043D007ED308 /* WorkfinderCommonTests.swift */,
-				FC53A0F0224BA83F00C2B97B /* LoadingOverlayTests.swift */,
 				FCE5194E2249645B00B550C9 /* F4SJsonDecodingTests.swift */,
 				FCE519512249645C00B550C9 /* F4SCalendarMonthTests.swift */,
 				FCE5194C2249645A00B550C9 /* F4SCalendarWeekTests.swift */,
@@ -256,8 +231,6 @@
 			isa = PBXGroup;
 			children = (
 				FC9670A2225A193700318F69 /* Repository protocols */,
-				FC53A0EE224B9DF100C2B97B /* LoadingOverlay.swift */,
-				FC53A0EC224B9DAC00C2B97B /* UserMessageHandler.swift */,
 				FC7A4399224A49B500B2D693 /* F4STemplateModels.swift */,
 				FC7A439D224A7CF300B2D693 /* F4SJsonDecoding.swift */,
 				FCE5193C22494CEC00B550C9 /* F4SJsonValue.swift */,
@@ -265,7 +238,6 @@
 				FCA91E87223404AF007ED308 /* WorkfinderCommon.swift */,
 				FCDEA75222803BC000F1BE66 /* F4STimelinePlacement.swift */,
 				FCF5AEFD2248B2A300D9B8D1 /* Extensions */,
-				FCF5AF022248B36D00D9B8D1 /* Styling */,
 				FCDFEA15223D32EA00E58649 /* Networking */,
 				FCDFEA13223D32A600E58649 /* WEXPlacement */,
 				FCDFEA14223D32D700E58649 /* Errors and Results */,
@@ -332,27 +304,11 @@
 		FCF5AEFD2248B2A300D9B8D1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				FC96264C2248C58900D5F850 /* UIView+ConstraintsExtensions.swift */,
-				FCF5AF002248B33C00D9B8D1 /* UIColor+Extensions.swift */,
-				FCF5AEFE2248B2C800D9B8D1 /* UIButton+Extensions.swift */,
-				FC96264E2248C77100D5F850 /* UIFont+Extensions.swift */,
-				FC9626502248C91F00D5F850 /* UIViewController+Extensions.swift */,
 				FCE5191522493B4C00B550C9 /* String+Extensions.swift */,
 				FCE5192022493D3300B550C9 /* Date+Extensions.swift */,
 				FC12B10022F3415200C33410 /* JsonDateFormatterExtension.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		FCF5AF022248B36D00D9B8D1 /* Styling */ = {
-			isa = PBXGroup;
-			children = (
-				FCF5AEF52248B1E400D9B8D1 /* RGBA.swift */,
-				FCF5AEF82248B1E500D9B8D1 /* FactorySkins.swift */,
-				FCF5AEF62248B1E400D9B8D1 /* Skin.swift */,
-				FCF5AEF72248B1E500D9B8D1 /* Skinner.swift */,
-			);
-			path = Styling;
 			sourceTree = "<group>";
 		};
 		FCFE450C2250BA4B00C38436 /* Mocks */ = {
@@ -482,18 +438,14 @@
 				FC7A4396224A3C0E00B2D693 /* F4SNetworkInterface.swift in Sources */,
 				FCE519302249482A00B550C9 /* F4SDisplayableMonth.swift in Sources */,
 				FC0E5CFB224E1B5700615B4F /* LocalStore.swift in Sources */,
-				FC53A0ED224B9DAC00C2B97B /* UserMessageHandler.swift in Sources */,
 				FCB24A5F22E44AB100077DFF /* WorkfinderCommonStructs.swift in Sources */,
 				FCE51936224948E400B550C9 /* F4SDaysAndHoursModel.swift in Sources */,
 				FC9670A4225A195B00318F69 /* F4SPlacementRepositoryProtocol.swift in Sources */,
 				FCDB073C2286F8B00053347F /* Analytics and debugging.swift in Sources */,
-				FCF5AEF92248B1E500D9B8D1 /* RGBA.swift in Sources */,
 				FCE5192122493D3300B550C9 /* Date+Extensions.swift in Sources */,
 				FC96709A2258C81000318F69 /* F4SPlacement.swift in Sources */,
 				FCDFEA0C223D1CBC00E58649 /* WEXErrorsFactory.swift in Sources */,
 				FCDB073A2286F7870053347F /* F4SUserRepository.swift in Sources */,
-				FCF5AEFA2248B1E500D9B8D1 /* Skin.swift in Sources */,
-				FCF5AEFC2248B1E500D9B8D1 /* FactorySkins.swift in Sources */,
 				FCE306552254B9CC000F928B /* WEXNetworkingInterface.swift in Sources */,
 				FCE4C57D223BBBF200C5B15E /* WEXMessage.swift in Sources */,
 				FC32FD432265E4C800740F0C /* F4SContentType.swift in Sources */,
@@ -501,25 +453,18 @@
 				FC7A439C224A4D9600B2D693 /* F4STemplateServiceProtocol.swift in Sources */,
 				FCE51937224948E400B550C9 /* F4SAvailabilityPeriod.swift in Sources */,
 				FCDB07382286F6640053347F /* F4SUser.swift in Sources */,
-				FC9626512248C91F00D5F850 /* UIViewController+Extensions.swift in Sources */,
 				FC12B10322F3415300C33410 /* JsonDateFormatterExtension.swift in Sources */,
 				FCDFEA12223D2CF500E58649 /* WEXResult.swift in Sources */,
 				FCE51938224948E400B550C9 /* F4SDayAndHoursSelection.swift in Sources */,
-				FC96264D2248C58A00D5F850 /* UIView+ConstraintsExtensions.swift in Sources */,
 				FCE5193E22494CED00B550C9 /* F4SJsonValue.swift in Sources */,
 				FCE5192F2249482A00B550C9 /* F4SCalendarMonth.swift in Sources */,
-				FC53A0EF224B9DF100C2B97B /* LoadingOverlay.swift in Sources */,
 				FCE4C579223BB89D00C5B15E /* WEXPlacement.swift in Sources */,
 				FC7A439A224A49B500B2D693 /* F4STemplateModels.swift in Sources */,
 				FCE4C57F223BBC5500C5B15E /* WEXLocation.swift in Sources */,
 				FCE5192E2249482A00B550C9 /* F4SCalendar.swift in Sources */,
-				FCF5AEFB2248B1E500D9B8D1 /* Skinner.swift in Sources */,
-				FCF5AF012248B33C00D9B8D1 /* UIColor+Extensions.swift in Sources */,
 				FCE4C583223BBE4C00C5B15E /* WEXDayOfWeek.swift in Sources */,
 				FC2AC5ED22352C5B00FF4E47 /* WexNetworkingConfiguration.swift in Sources */,
-				FCF5AEFF2248B2C800D9B8D1 /* UIButton+Extensions.swift in Sources */,
 				FCDEA75322803BC000F1BE66 /* F4STimelinePlacement.swift in Sources */,
-				FC96264F2248C77100D5F850 /* UIFont+Extensions.swift in Sources */,
 				FC9670A6225A279300318F69 /* F4SInterestsRepositoryProtocol.swift in Sources */,
 				FCA91E88223404AF007ED308 /* WorkfinderCommon.swift in Sources */,
 				FCE51939224948E400B550C9 /* WorkAvailabilityWindow.swift in Sources */,
@@ -541,7 +486,6 @@
 				FCA91E7A2234043D007ED308 /* WorkfinderCommonTests.swift in Sources */,
 				FC12B0FF22F33ECE00C33410 /* F4STimelinePlacement.swift in Sources */,
 				FCE519572249645C00B550C9 /* F4SCalendarMonthTests.swift in Sources */,
-				FC53A0F1224BA84000C2B97B /* LoadingOverlayTests.swift in Sources */,
 				FCE519522249645C00B550C9 /* F4SCalendarWeekTests.swift in Sources */,
 				FCBEA7B5228701E600CAB1F1 /* F4SUserTests.swift in Sources */,
 				FCE519532249645C00B550C9 /* F4SCalendarTests.swift in Sources */,
