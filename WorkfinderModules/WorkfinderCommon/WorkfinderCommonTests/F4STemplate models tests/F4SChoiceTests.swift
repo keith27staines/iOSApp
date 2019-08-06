@@ -26,5 +26,4 @@ class F4SChoiceTests: XCTestCase {
         let sut = F4SChoice(uuid: "2019-07-20", value: "")
         XCTAssertFalse(sut.uuidIsDate)
     }
-    
 }

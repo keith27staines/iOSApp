@@ -15,11 +15,15 @@
 		FC22DBFD22F989D60068C61C /* F4SInterestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBFC22F989D60068C61C /* F4SInterestTests.swift */; };
 		FC22DBFF22F9922D0068C61C /* F4STemplateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBFE22F9922D0068C61C /* F4STemplateTests.swift */; };
 		FC22DC0122F996D70068C61C /* F4SChoiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DC0022F996D70068C61C /* F4SChoiceTests.swift */; };
+		FC22DC0422F999FD0068C61C /* F4SChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DC0322F999FD0068C61C /* F4SChoice.swift */; };
+		FC22DC0622F9AC410068C61C /* F4STemplateBlankTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DC0522F9AC410068C61C /* F4STemplateBlankTests.swift */; };
+		FC22DC0822F9AC710068C61C /* F4STemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DC0722F9AC710068C61C /* F4STemplate.swift */; };
+		FC22DC0A22F9ACBC0068C61C /* F4STemplateBlank.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DC0922F9ACBC0068C61C /* F4STemplateBlank.swift */; };
 		FC2AC5ED22352C5B00FF4E47 /* WexNetworkingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2AC5EC22352C5B00FF4E47 /* WexNetworkingConfiguration.swift */; };
 		FC2AC5EF2235411400FF4E47 /* WexNetworkConfigurationInterfaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2AC5EE2235411400FF4E47 /* WexNetworkConfigurationInterfaceTests.swift */; };
 		FC32FD432265E4C800740F0C /* F4SContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32FD422265E4C800740F0C /* F4SContentType.swift */; };
 		FC7A4396224A3C0E00B2D693 /* F4SNetworkInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4395224A3C0E00B2D693 /* F4SNetworkInterface.swift */; };
-		FC7A439A224A49B500B2D693 /* F4STemplateModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4399224A49B500B2D693 /* F4STemplateModels.swift */; };
+		FC7A439A224A49B500B2D693 /* CoverLetterJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4399224A49B500B2D693 /* CoverLetterJson.swift */; };
 		FC7A439C224A4D9600B2D693 /* F4STemplateServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A439B224A4D9600B2D693 /* F4STemplateServiceProtocol.swift */; };
 		FC7A439E224A7CF300B2D693 /* F4SJsonDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A439D224A7CF300B2D693 /* F4SJsonDecoding.swift */; };
 		FC96709A2258C81000318F69 /* F4SPlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9670992258C81000318F69 /* F4SPlacement.swift */; };
@@ -85,11 +89,15 @@
 		FC22DBFC22F989D60068C61C /* F4SInterestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInterestTests.swift; sourceTree = "<group>"; };
 		FC22DBFE22F9922D0068C61C /* F4STemplateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateTests.swift; sourceTree = "<group>"; };
 		FC22DC0022F996D70068C61C /* F4SChoiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SChoiceTests.swift; sourceTree = "<group>"; };
+		FC22DC0322F999FD0068C61C /* F4SChoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SChoice.swift; sourceTree = "<group>"; };
+		FC22DC0522F9AC410068C61C /* F4STemplateBlankTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateBlankTests.swift; sourceTree = "<group>"; };
+		FC22DC0722F9AC710068C61C /* F4STemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplate.swift; sourceTree = "<group>"; };
+		FC22DC0922F9ACBC0068C61C /* F4STemplateBlank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateBlank.swift; sourceTree = "<group>"; };
 		FC2AC5EC22352C5B00FF4E47 /* WexNetworkingConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WexNetworkingConfiguration.swift; sourceTree = "<group>"; };
 		FC2AC5EE2235411400FF4E47 /* WexNetworkConfigurationInterfaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WexNetworkConfigurationInterfaceTests.swift; sourceTree = "<group>"; };
 		FC32FD422265E4C800740F0C /* F4SContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SContentType.swift; sourceTree = "<group>"; };
 		FC7A4395224A3C0E00B2D693 /* F4SNetworkInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SNetworkInterface.swift; sourceTree = "<group>"; };
-		FC7A4399224A49B500B2D693 /* F4STemplateModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateModels.swift; sourceTree = "<group>"; };
+		FC7A4399224A49B500B2D693 /* CoverLetterJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverLetterJson.swift; sourceTree = "<group>"; };
 		FC7A439B224A4D9600B2D693 /* F4STemplateServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateServiceProtocol.swift; sourceTree = "<group>"; };
 		FC7A439D224A7CF300B2D693 /* F4SJsonDecoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SJsonDecoding.swift; sourceTree = "<group>"; };
 		FC9670992258C81000318F69 /* F4SPlacement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacement.swift; sourceTree = "<group>"; };
@@ -158,6 +166,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC22DC0222F999A00068C61C /* F4STemplate models */ = {
+			isa = PBXGroup;
+			children = (
+				FC7A4399224A49B500B2D693 /* CoverLetterJson.swift */,
+				FC22DC0322F999FD0068C61C /* F4SChoice.swift */,
+				FC22DC0722F9AC710068C61C /* F4STemplate.swift */,
+				FC22DC0922F9ACBC0068C61C /* F4STemplateBlank.swift */,
+			);
+			path = "F4STemplate models";
+			sourceTree = "<group>";
+		};
+		FC22DC0B22F9AD530068C61C /* F4STemplate models tests */ = {
+			isa = PBXGroup;
+			children = (
+				FC22DC0022F996D70068C61C /* F4SChoiceTests.swift */,
+				FC22DC0522F9AC410068C61C /* F4STemplateBlankTests.swift */,
+				FC22DBFE22F9922D0068C61C /* F4STemplateTests.swift */,
+			);
+			path = "F4STemplate models tests";
+			sourceTree = "<group>";
+		};
 		FC6E3D212248D67000377736 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +237,7 @@
 		FCA91E782234043D007ED308 /* WorkfinderCommonTests */ = {
 			isa = PBXGroup;
 			children = (
+				FC22DC0B22F9AD530068C61C /* F4STemplate models tests */,
 				FC22DBFC22F989D60068C61C /* F4SInterestTests.swift */,
 				FCA91E7B2234043D007ED308 /* Info.plist */,
 				FCBEA7B4228701E500CAB1F1 /* F4SUserTests.swift */,
@@ -221,8 +251,6 @@
 				FC12B0FE22F33ECE00C33410 /* F4STimelinePlacement.swift */,
 				FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */,
 				FC2AC5EE2235411400FF4E47 /* WexNetworkConfigurationInterfaceTests.swift */,
-				FC22DBFE22F9922D0068C61C /* F4STemplateTests.swift */,
-				FC22DC0022F996D70068C61C /* F4SChoiceTests.swift */,
 			);
 			path = WorkfinderCommonTests;
 			sourceTree = "<group>";
@@ -240,7 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				FC9670A2225A193700318F69 /* Repository protocols */,
-				FC7A4399224A49B500B2D693 /* F4STemplateModels.swift */,
+				FC22DC0222F999A00068C61C /* F4STemplate models */,
 				FC7A439D224A7CF300B2D693 /* F4SJsonDecoding.swift */,
 				FCE5193C22494CEC00B550C9 /* F4SJsonValue.swift */,
 				FCE519312249483D00B550C9 /* F4SCalendar structs */,
@@ -452,7 +480,9 @@
 				FC9670A4225A195B00318F69 /* F4SPlacementRepositoryProtocol.swift in Sources */,
 				FCDB073C2286F8B00053347F /* Analytics and debugging.swift in Sources */,
 				FCE5192122493D3300B550C9 /* Date+Extensions.swift in Sources */,
+				FC22DC0A22F9ACBC0068C61C /* F4STemplateBlank.swift in Sources */,
 				FC96709A2258C81000318F69 /* F4SPlacement.swift in Sources */,
+				FC22DC0822F9AC710068C61C /* F4STemplate.swift in Sources */,
 				FCDFEA0C223D1CBC00E58649 /* WEXErrorsFactory.swift in Sources */,
 				FCDB073A2286F7870053347F /* F4SUserRepository.swift in Sources */,
 				FCE306552254B9CC000F928B /* WEXNetworkingInterface.swift in Sources */,
@@ -468,7 +498,7 @@
 				FCE5193E22494CED00B550C9 /* F4SJsonValue.swift in Sources */,
 				FCE5192F2249482A00B550C9 /* F4SCalendarMonth.swift in Sources */,
 				FCE4C579223BB89D00C5B15E /* WEXPlacement.swift in Sources */,
-				FC7A439A224A49B500B2D693 /* F4STemplateModels.swift in Sources */,
+				FC7A439A224A49B500B2D693 /* CoverLetterJson.swift in Sources */,
 				FCE4C57F223BBC5500C5B15E /* WEXLocation.swift in Sources */,
 				FCE5192E2249482A00B550C9 /* F4SCalendar.swift in Sources */,
 				FCE4C583223BBE4C00C5B15E /* WEXDayOfWeek.swift in Sources */,
@@ -477,6 +507,7 @@
 				FC9670A6225A279300318F69 /* F4SInterestsRepositoryProtocol.swift in Sources */,
 				FCA91E88223404AF007ED308 /* WorkfinderCommon.swift in Sources */,
 				FCE51939224948E400B550C9 /* WorkAvailabilityWindow.swift in Sources */,
+				FC22DC0422F999FD0068C61C /* F4SChoice.swift in Sources */,
 				FC96709C2258C8B100318F69 /* F4SInterest.swift in Sources */,
 				FCE5192C2249482A00B550C9 /* F4SCalendarWeek.swift in Sources */,
 				FC0E5CFF224E65CC00615B4F /* CompanyViewData.swift in Sources */,
@@ -491,6 +522,7 @@
 				FC2AC5EF2235411400FF4E47 /* WexNetworkConfigurationInterfaceTests.swift in Sources */,
 				FCE519552249645C00B550C9 /* F4SCalendarDayTests.swift in Sources */,
 				FCE519542249645C00B550C9 /* F4SJsonDecodingTests.swift in Sources */,
+				FC22DC0622F9AC410068C61C /* F4STemplateBlankTests.swift in Sources */,
 				FC12B10522F341D500C33410 /* JsonDateFormatterExtensionTests.swift in Sources */,
 				FC22DBFF22F9922D0068C61C /* F4STemplateTests.swift in Sources */,
 				FCA91E7A2234043D007ED308 /* WorkfinderCommonTests.swift in Sources */,
