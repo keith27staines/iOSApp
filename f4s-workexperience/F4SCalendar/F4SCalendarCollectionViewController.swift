@@ -8,6 +8,7 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 
 protocol F4SCalendarCollectionViewControllerDelegate {
     func calendarDidChangeRange(_ calendar: F4SCalendarCollectionViewController, firstDay: F4SCalendarDay? , lastDay: F4SCalendarDay?)

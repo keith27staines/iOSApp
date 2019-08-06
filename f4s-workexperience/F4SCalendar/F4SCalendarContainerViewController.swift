@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WorkfinderUI
 
 class F4SCalendarContainerViewController: UIViewController {
     @IBOutlet weak var pageHeaderView: F4SPageHeaderView!

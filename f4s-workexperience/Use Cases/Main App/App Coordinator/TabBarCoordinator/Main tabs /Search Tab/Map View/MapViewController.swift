@@ -10,6 +10,7 @@ import UIKit
 import GoogleMaps
 import Reachability
 import WorkfinderCommon
+import WorkfinderUI
 
 enum CamerWillMoveAction {
     case explodeCluster(GMUCluster)

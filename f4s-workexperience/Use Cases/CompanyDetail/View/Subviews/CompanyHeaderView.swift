@@ -8,6 +8,7 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 
 protocol CompanyHeaderViewDelegate : class {
     func didTapApply()

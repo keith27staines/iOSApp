@@ -3,6 +3,7 @@ import Reachability
 import Analytics
 import WorkfinderCommon
 import WorkfinderServices
+import WorkfinderUI
 
 class MessageContainerViewController: UIViewController {
     

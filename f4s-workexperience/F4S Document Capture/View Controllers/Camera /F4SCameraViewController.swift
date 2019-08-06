@@ -2,6 +2,7 @@
 
 import UIKit
 import AVFoundation
+import WorkfinderUI
 
 protocol F4SCameraViewControllerDelegate {
     func cameraCaptureDidComplete(controller: F4SCameraViewController, image: UIImage?)

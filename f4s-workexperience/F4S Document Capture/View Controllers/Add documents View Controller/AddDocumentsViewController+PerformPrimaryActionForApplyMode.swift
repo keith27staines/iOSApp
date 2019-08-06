@@ -9,6 +9,7 @@
 import UIKit
 import WorkfinderCommon
 import WorkfinderNetworking
+import WorkfinderUI
 
 extension F4SAddDocumentsViewController {
     

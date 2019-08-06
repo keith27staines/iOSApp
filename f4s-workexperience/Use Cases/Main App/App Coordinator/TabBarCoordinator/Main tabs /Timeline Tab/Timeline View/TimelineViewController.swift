@@ -10,6 +10,7 @@ import UIKit
 import Reachability
 import WorkfinderCommon
 import WorkfinderServices
+import WorkfinderUI
 
 class TimelineViewController: UIViewController {
     

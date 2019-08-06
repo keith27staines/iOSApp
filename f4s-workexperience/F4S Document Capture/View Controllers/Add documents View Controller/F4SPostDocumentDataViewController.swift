@@ -8,6 +8,7 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 
 protocol PostDocumentsWithDataViewControllerDelegate {
     func postDocumentsControllerDidCancel(_ controller: PostDocumentsWithDataViewController)

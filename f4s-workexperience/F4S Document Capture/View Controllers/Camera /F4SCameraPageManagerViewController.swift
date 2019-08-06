@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WorkfinderUI
 
 protocol F4SCameraCaptureViewControllerDelegate : class {
     func didCaptureDocumentasPDFData(_ data: Data)

@@ -8,6 +8,7 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 
 protocol F4SDaysAndHoursViewControllerDelegate {
     func didUpdateDaysAndHours(model: F4SDaysAndHoursModel)

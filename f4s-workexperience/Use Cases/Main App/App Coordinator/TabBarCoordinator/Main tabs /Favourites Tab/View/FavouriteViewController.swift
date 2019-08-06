@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 
 class FavouriteViewController: UIViewController {
     

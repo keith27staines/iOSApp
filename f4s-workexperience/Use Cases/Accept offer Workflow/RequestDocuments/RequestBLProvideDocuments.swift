@@ -8,6 +8,7 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 
 class RequestBLProvideDocuments: UIViewController {
     var accept: AcceptOfferContext!

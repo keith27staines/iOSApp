@@ -7,6 +7,7 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 
 class EmailTextField: UITextField {
     override var isEnabled: Bool {

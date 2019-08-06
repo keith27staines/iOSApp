@@ -10,6 +10,7 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderApplyUseCase
 import WorkfinderAppLogic
+import WorkfinderUI
 
 protocol ApplyCoordinatorDelegate : class {
     func applicationDidFinish(preferredDestination: ApplyCoordinator.PreferredDestinationAfterApplication)

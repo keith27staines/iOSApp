@@ -8,6 +8,7 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 
 class ApplicationLetterViewControllerMainView: UIView {
     

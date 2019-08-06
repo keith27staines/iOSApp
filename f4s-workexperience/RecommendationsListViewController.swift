@@ -1,5 +1,5 @@
 import WorkfinderCommon
-
+import WorkfinderUI
 
 class RecommendationsListViewController: UIViewController, RecommendationsListViewProtocol {
     

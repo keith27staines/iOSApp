@@ -9,6 +9,7 @@
 import UIKit
 import Reachability
 import WorkfinderCommon
+import WorkfinderUI
 
 class TabBarViewController: UITabBarController {
 

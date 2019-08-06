@@ -11,6 +11,7 @@ import MessageUI
 import WorkfinderCommon
 import WorkfinderServices
 import WorkfinderAppLogic
+import WorkfinderUI
 
 class EnterVoucherViewController: UIViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var scrollView: UIScrollView!

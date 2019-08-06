@@ -2,6 +2,7 @@ import UIKit
 import Reachability
 import WorkfinderCommon
 import WorkfinderServices
+import WorkfinderUI
 
 protocol RatingControlDelegate {
     func didUpdateRatingValue(ratingControll: RatingControl, rating: Int)

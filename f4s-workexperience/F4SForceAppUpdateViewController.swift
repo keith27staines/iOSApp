@@ -8,6 +8,7 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 
 class F4SForceAppUpdateViewController: UIViewController {
     

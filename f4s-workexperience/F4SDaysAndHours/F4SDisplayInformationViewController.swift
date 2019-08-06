@@ -8,6 +8,7 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 
 public protocol F4SDisplayInformationViewControllerDelegate {
     func dismissDisplayInformation()
