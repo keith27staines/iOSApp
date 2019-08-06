@@ -13,6 +13,8 @@
 		FC12B10322F3415300C33410 /* JsonDateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B10022F3415200C33410 /* JsonDateFormatterExtension.swift */; };
 		FC12B10522F341D500C33410 /* JsonDateFormatterExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */; };
 		FC22DBFD22F989D60068C61C /* F4SInterestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBFC22F989D60068C61C /* F4SInterestTests.swift */; };
+		FC22DBFF22F9922D0068C61C /* F4STemplateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBFE22F9922D0068C61C /* F4STemplateTests.swift */; };
+		FC22DC0122F996D70068C61C /* F4SChoiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DC0022F996D70068C61C /* F4SChoiceTests.swift */; };
 		FC2AC5ED22352C5B00FF4E47 /* WexNetworkingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2AC5EC22352C5B00FF4E47 /* WexNetworkingConfiguration.swift */; };
 		FC2AC5EF2235411400FF4E47 /* WexNetworkConfigurationInterfaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2AC5EE2235411400FF4E47 /* WexNetworkConfigurationInterfaceTests.swift */; };
 		FC32FD432265E4C800740F0C /* F4SContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32FD422265E4C800740F0C /* F4SContentType.swift */; };
@@ -81,6 +83,8 @@
 		FC12B10022F3415200C33410 /* JsonDateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDateFormatterExtension.swift; sourceTree = "<group>"; };
 		FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDateFormatterExtensionTests.swift; sourceTree = "<group>"; };
 		FC22DBFC22F989D60068C61C /* F4SInterestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInterestTests.swift; sourceTree = "<group>"; };
+		FC22DBFE22F9922D0068C61C /* F4STemplateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateTests.swift; sourceTree = "<group>"; };
+		FC22DC0022F996D70068C61C /* F4SChoiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SChoiceTests.swift; sourceTree = "<group>"; };
 		FC2AC5EC22352C5B00FF4E47 /* WexNetworkingConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WexNetworkingConfiguration.swift; sourceTree = "<group>"; };
 		FC2AC5EE2235411400FF4E47 /* WexNetworkConfigurationInterfaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WexNetworkConfigurationInterfaceTests.swift; sourceTree = "<group>"; };
 		FC32FD422265E4C800740F0C /* F4SContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SContentType.swift; sourceTree = "<group>"; };
@@ -204,6 +208,7 @@
 		FCA91E782234043D007ED308 /* WorkfinderCommonTests */ = {
 			isa = PBXGroup;
 			children = (
+				FC22DBFC22F989D60068C61C /* F4SInterestTests.swift */,
 				FCA91E7B2234043D007ED308 /* Info.plist */,
 				FCBEA7B4228701E500CAB1F1 /* F4SUserTests.swift */,
 				FCA91E792234043D007ED308 /* WorkfinderCommonTests.swift */,
@@ -216,7 +221,8 @@
 				FC12B0FE22F33ECE00C33410 /* F4STimelinePlacement.swift */,
 				FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */,
 				FC2AC5EE2235411400FF4E47 /* WexNetworkConfigurationInterfaceTests.swift */,
-				FC22DBFC22F989D60068C61C /* F4SInterestTests.swift */,
+				FC22DBFE22F9922D0068C61C /* F4STemplateTests.swift */,
+				FC22DC0022F996D70068C61C /* F4SChoiceTests.swift */,
 			);
 			path = WorkfinderCommonTests;
 			sourceTree = "<group>";
@@ -486,10 +492,12 @@
 				FCE519552249645C00B550C9 /* F4SCalendarDayTests.swift in Sources */,
 				FCE519542249645C00B550C9 /* F4SJsonDecodingTests.swift in Sources */,
 				FC12B10522F341D500C33410 /* JsonDateFormatterExtensionTests.swift in Sources */,
+				FC22DBFF22F9922D0068C61C /* F4STemplateTests.swift in Sources */,
 				FCA91E7A2234043D007ED308 /* WorkfinderCommonTests.swift in Sources */,
 				FC12B0FF22F33ECE00C33410 /* F4STimelinePlacement.swift in Sources */,
 				FCE519572249645C00B550C9 /* F4SCalendarMonthTests.swift in Sources */,
 				FCE519522249645C00B550C9 /* F4SCalendarWeekTests.swift in Sources */,
+				FC22DC0122F996D70068C61C /* F4SChoiceTests.swift in Sources */,
 				FCBEA7B5228701E600CAB1F1 /* F4SUserTests.swift in Sources */,
 				FCE519532249645C00B550C9 /* F4SCalendarTests.swift in Sources */,
 				FC22DBFD22F989D60068C61C /* F4SInterestTests.swift in Sources */,
