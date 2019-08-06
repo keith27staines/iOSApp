@@ -12,6 +12,7 @@
 		FC12B0FF22F33ECE00C33410 /* F4STimelinePlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B0FE22F33ECE00C33410 /* F4STimelinePlacement.swift */; };
 		FC12B10322F3415300C33410 /* JsonDateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B10022F3415200C33410 /* JsonDateFormatterExtension.swift */; };
 		FC12B10522F341D500C33410 /* JsonDateFormatterExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */; };
+		FC22DBFD22F989D60068C61C /* F4SInterestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBFC22F989D60068C61C /* F4SInterestTests.swift */; };
 		FC2AC5ED22352C5B00FF4E47 /* WexNetworkingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2AC5EC22352C5B00FF4E47 /* WexNetworkingConfiguration.swift */; };
 		FC2AC5EF2235411400FF4E47 /* WexNetworkConfigurationInterfaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2AC5EE2235411400FF4E47 /* WexNetworkConfigurationInterfaceTests.swift */; };
 		FC32FD432265E4C800740F0C /* F4SContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32FD422265E4C800740F0C /* F4SContentType.swift */; };
@@ -79,6 +80,7 @@
 		FC12B0FE22F33ECE00C33410 /* F4STimelinePlacement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STimelinePlacement.swift; sourceTree = "<group>"; };
 		FC12B10022F3415200C33410 /* JsonDateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDateFormatterExtension.swift; sourceTree = "<group>"; };
 		FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDateFormatterExtensionTests.swift; sourceTree = "<group>"; };
+		FC22DBFC22F989D60068C61C /* F4SInterestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInterestTests.swift; sourceTree = "<group>"; };
 		FC2AC5EC22352C5B00FF4E47 /* WexNetworkingConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WexNetworkingConfiguration.swift; sourceTree = "<group>"; };
 		FC2AC5EE2235411400FF4E47 /* WexNetworkConfigurationInterfaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WexNetworkConfigurationInterfaceTests.swift; sourceTree = "<group>"; };
 		FC32FD422265E4C800740F0C /* F4SContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SContentType.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				FC12B0FE22F33ECE00C33410 /* F4STimelinePlacement.swift */,
 				FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */,
 				FC2AC5EE2235411400FF4E47 /* WexNetworkConfigurationInterfaceTests.swift */,
+				FC22DBFC22F989D60068C61C /* F4SInterestTests.swift */,
 			);
 			path = WorkfinderCommonTests;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 				FCE519522249645C00B550C9 /* F4SCalendarWeekTests.swift in Sources */,
 				FCBEA7B5228701E600CAB1F1 /* F4SUserTests.swift in Sources */,
 				FCE519532249645C00B550C9 /* F4SCalendarTests.swift in Sources */,
+				FC22DBFD22F989D60068C61C /* F4SInterestTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
