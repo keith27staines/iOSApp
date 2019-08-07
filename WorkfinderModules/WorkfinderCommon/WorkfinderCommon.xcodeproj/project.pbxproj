@@ -17,6 +17,7 @@
 		FC1FA08822FAC0FF003EAE59 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08722FAC0FF003EAE59 /* StringExtensionsTests.swift */; };
 		FC1FA08A22FAD5D5003EAE59 /* DateExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08922FAD5D5003EAE59 /* DateExtensionTests.swift */; };
 		FC1FA08C22FB1F57003EAE59 /* WorkAvailabilityWindowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08B22FB1F57003EAE59 /* WorkAvailabilityWindowTests.swift */; };
+		FC1FA08E22FB3931003EAE59 /* F4SContentDescriptorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08D22FB3931003EAE59 /* F4SContentDescriptorTests.swift */; };
 		FC22DBFD22F989D60068C61C /* F4SInterestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBFC22F989D60068C61C /* F4SInterestTests.swift */; };
 		FC22DBFF22F9922D0068C61C /* F4STemplateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBFE22F9922D0068C61C /* F4STemplateTests.swift */; };
 		FC22DC0122F996D70068C61C /* F4SChoiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DC0022F996D70068C61C /* F4SChoiceTests.swift */; };
@@ -97,6 +98,7 @@
 		FC1FA08722FAC0FF003EAE59 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
 		FC1FA08922FAD5D5003EAE59 /* DateExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensionTests.swift; sourceTree = "<group>"; };
 		FC1FA08B22FB1F57003EAE59 /* WorkAvailabilityWindowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkAvailabilityWindowTests.swift; sourceTree = "<group>"; };
+		FC1FA08D22FB3931003EAE59 /* F4SContentDescriptorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SContentDescriptorTests.swift; sourceTree = "<group>"; };
 		FC22DBFC22F989D60068C61C /* F4SInterestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInterestTests.swift; sourceTree = "<group>"; };
 		FC22DBFE22F9922D0068C61C /* F4STemplateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateTests.swift; sourceTree = "<group>"; };
 		FC22DC0022F996D70068C61C /* F4SChoiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SChoiceTests.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 		FCA91E782234043D007ED308 /* WorkfinderCommonTests */ = {
 			isa = PBXGroup;
 			children = (
+				FC1FA08D22FB3931003EAE59 /* F4SContentDescriptorTests.swift */,
 				FC1FA08B22FB1F57003EAE59 /* WorkAvailabilityWindowTests.swift */,
 				FC1FA08622FAC0D9003EAE59 /* Extention tests */,
 				FC2E205C22F9E76A0094B134 /* F4SUserInformationTests.swift */,
@@ -567,6 +570,7 @@
 				FCE519572249645C00B550C9 /* F4SCalendarMonthTests.swift in Sources */,
 				FC1FA08A22FAD5D5003EAE59 /* DateExtensionTests.swift in Sources */,
 				FCE519522249645C00B550C9 /* F4SCalendarWeekTests.swift in Sources */,
+				FC1FA08E22FB3931003EAE59 /* F4SContentDescriptorTests.swift in Sources */,
 				FC1FA08522FAAC28003EAE59 /* MockAnalyticsAndDebugging.swift in Sources */,
 				FC1FA08C22FB1F57003EAE59 /* WorkAvailabilityWindowTests.swift in Sources */,
 				FC22DC0122F996D70068C61C /* F4SChoiceTests.swift in Sources */,
