@@ -68,7 +68,7 @@ public class UserDetailsViewModel {
 
     func buildUser() -> F4SUser {
         let user = F4SUser()
-        user.updateFromUserInformation(self.userInfo)
+        user.updateFrom(self.userInfo)
         user.lastName = user.lastName ?? ""
         if user.lastName!.isEmpty { user.lastName = " "}
         return user

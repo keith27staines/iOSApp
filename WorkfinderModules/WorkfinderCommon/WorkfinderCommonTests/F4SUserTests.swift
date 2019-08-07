@@ -108,7 +108,7 @@ class F4SUserTests: XCTestCase {
         XCTAssertNil(sut.fullName)
     }
     
-    func test_nillifyUuid() {
+    func test_nullifyUuid() {
         let injectedStore = makeMockLocalStore(userUuid: "uuid", isOnboarded: false)
         let sut = makeUser(injectingLocalStore: injectedStore)
         sut.nullifyUuid()
@@ -168,13 +168,6 @@ class F4SUserTests: XCTestCase {
         XCTAssertNil(age)
     }
     
-    func test_nullifyUuid() {
-        let injectedStore = makeMockLocalStore(userUuid: "uuid", isOnboarded: false)
-        let sut = makeUser(injectingLocalStore: injectedStore)
-        sut.nullifyUuid()
-        XCTAssertNil(sut.uuid)
-    }
-    
     func test_isOnboarded_when_not_onboarded() {
         let injectedStore = makeMockLocalStore(userUuid: "uuid", isOnboarded: false)
         injectedStore.setValue(nil, for: LocalStore.Key.isFirstLaunch)
@@ -221,7 +214,7 @@ class F4SUserTests: XCTestCase {
         let updateInfo = F4SUserInformation(uuid: "uuid1", consenterEmail: "consenterEmail1", parentEmail: "parentEmail1", dateOfBirth: dob1, email: "userEmail1", firstName: "first1", lastName: "last1", requiresConsent: true, termsAgreed: true, vouchers: ["voucherUuid1"], partners: partners1, isOnboarded: true, isRegistered: true)
         
         let sut = F4SUser(userInformation: info)
-        sut.updateFromUserInformation(updateInfo)
+        sut.updateFrom(updateInfo)
         assertUserInfoEquivalent(info1: updateInfo, info2: sut.extractUserInformation())
     }
 }
@@ -257,65 +250,5 @@ extension F4SUserTests {
         let user = F4SUser(localStore: injectingLocalStore)
         user.analytics = analytics ?? MockF4SAnalyticsAndDebugging()
         return user
-    }
-}
-
-class MockF4SAnalyticsAndDebugging : F4SAnalyticsAndDebugging {
-
-    var identities: [F4SUUID] = []
-    var aliases: [F4SUUID] = []
-    var breadcrumbs = [String]()
-    var updateHistoryCallCount: Int = 0
-    var textCombiningHistoryAndSessionLogCallCount: Int = 0
-    var _userCanAccessDebugMenu: Bool = false
-    var loggedErrorMessages = [String]()
-    var loggedErrors = [Error]()
-    var debugMessages = [String]()
-    var notifiedErrors = [Error]()
-    
-    func identity(userId: F4SUUID) {
-        identities.append(userId)
-    }
-    
-    func alias(userId: F4SUUID) {
-        aliases.append(userId)
-    }
-    
-    func notifyError(_ error: Error, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
-        notifiedErrors.append(error)
-    }
-    
-    func notifyError(_ error: NSError, functionName: StaticString, fileName: StaticString, lineNumber: Int) {
-        notifiedErrors.append(error)
-    }
-    
-    
-    func leaveBreadcrumb(with message: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
-        breadcrumbs.append(message)
-    }
-    
-    func updateHistory() {
-        updateHistoryCallCount += 1
-    }
-    
-    func textCombiningHistoryAndSessionLog() -> String? {
-        textCombiningHistoryAndSessionLogCallCount += 1
-        return ""
-    }
-    
-    func userCanAccessDebugMenu() -> Bool {
-        return _userCanAccessDebugMenu
-    }
-    
-    func error(message: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
-        loggedErrorMessages.append(message)
-    }
-    
-    func error(_ error: Error, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
-        loggedErrors.append(error)
-    }
-    
-    func debug(_ message: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
-        debugMessages.append(message)
     }
 }
