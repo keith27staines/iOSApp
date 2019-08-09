@@ -15,6 +15,8 @@
 		FC1F591622FD6D42007164BA /* F4SPushToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F591522FD6D42007164BA /* F4SPushToken.swift */; };
 		FC1F591822FD6DAB007164BA /* F4SPushTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F591722FD6DAB007164BA /* F4SPushTokenTests.swift */; };
 		FC1F591A22FD7222007164BA /* F4SAnonymousUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F591922FD7222007164BA /* F4SAnonymousUser.swift */; };
+		FC1F591C22FD75B2007164BA /* F4SAnonymousUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F591B22FD75B2007164BA /* F4SAnonymousUserTests.swift */; };
+		FC1F591E22FD78D6007164BA /* WorkfinderCommonStructsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F591D22FD78D6007164BA /* WorkfinderCommonStructsTests.swift */; };
 		FC1FA08222FAAB1B003EAE59 /* F4SUUIDDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08122FAAB1B003EAE59 /* F4SUUIDDictionary.swift */; };
 		FC1FA08522FAAC28003EAE59 /* MockAnalyticsAndDebugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08422FAAC28003EAE59 /* MockAnalyticsAndDebugging.swift */; };
 		FC1FA08822FAC0FF003EAE59 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08722FAC0FF003EAE59 /* StringExtensionsTests.swift */; };
@@ -101,6 +103,8 @@
 		FC1F591522FD6D42007164BA /* F4SPushToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPushToken.swift; sourceTree = "<group>"; };
 		FC1F591722FD6DAB007164BA /* F4SPushTokenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPushTokenTests.swift; sourceTree = "<group>"; };
 		FC1F591922FD7222007164BA /* F4SAnonymousUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SAnonymousUser.swift; sourceTree = "<group>"; };
+		FC1F591B22FD75B2007164BA /* F4SAnonymousUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SAnonymousUserTests.swift; sourceTree = "<group>"; };
+		FC1F591D22FD78D6007164BA /* WorkfinderCommonStructsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderCommonStructsTests.swift; sourceTree = "<group>"; };
 		FC1FA08122FAAB1B003EAE59 /* F4SUUIDDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUUIDDictionary.swift; sourceTree = "<group>"; };
 		FC1FA08422FAAC28003EAE59 /* MockAnalyticsAndDebugging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsAndDebugging.swift; sourceTree = "<group>"; };
 		FC1FA08722FAC0FF003EAE59 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
@@ -279,6 +283,10 @@
 		FCA91E782234043D007ED308 /* WorkfinderCommonTests */ = {
 			isa = PBXGroup;
 			children = (
+				FC1F591D22FD78D6007164BA /* WorkfinderCommonStructsTests.swift */,
+				FC1F591B22FD75B2007164BA /* F4SAnonymousUserTests.swift */,
+				FC1F591722FD6DAB007164BA /* F4SPushTokenTests.swift */,
+				FC83EC8022FC0EDB009D7A0B /* F4SUserRepositoryTests.swift */,
 				FC83EC8222FC1CBA009D7A0B /* CompanyViewDataProtocolTests.swift */,
 				FC83EC7E22FC0C55009D7A0B /* F4SJsonValueTests.swift */,
 				FC1FA08D22FB3931003EAE59 /* F4SContentDescriptorTests.swift */,
@@ -301,8 +309,6 @@
 				FC2AC5EE2235411400FF4E47 /* WexNetworkConfigurationInterfaceTests.swift */,
 				FC2E205A22F9D1DD0094B134 /* F4SUUIDDictionarytests.swift */,
 				FC1FA08422FAAC28003EAE59 /* MockAnalyticsAndDebugging.swift */,
-				FC83EC8022FC0EDB009D7A0B /* F4SUserRepositoryTests.swift */,
-				FC1F591722FD6DAB007164BA /* F4SPushTokenTests.swift */,
 			);
 			path = WorkfinderCommonTests;
 			sourceTree = "<group>";
@@ -591,6 +597,8 @@
 				FC83EC7F22FC0C55009D7A0B /* F4SJsonValueTests.swift in Sources */,
 				FCE519522249645C00B550C9 /* F4SCalendarWeekTests.swift in Sources */,
 				FC1FA08E22FB3931003EAE59 /* F4SContentDescriptorTests.swift in Sources */,
+				FC1F591E22FD78D6007164BA /* WorkfinderCommonStructsTests.swift in Sources */,
+				FC1F591C22FD75B2007164BA /* F4SAnonymousUserTests.swift in Sources */,
 				FC1FA08522FAAC28003EAE59 /* MockAnalyticsAndDebugging.swift in Sources */,
 				FC1FA08C22FB1F57003EAE59 /* WorkAvailabilityWindowTests.swift in Sources */,
 				FC22DC0122F996D70068C61C /* F4SChoiceTests.swift in Sources */,
