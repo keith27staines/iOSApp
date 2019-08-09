@@ -13,6 +13,7 @@ public struct F4SCalendarDay : Equatable, Comparable {
     public let midday: Date // midday
     let cal: F4SCalendar
     
+    /// The date used as "today" when deciding if the current instance isToday, isInFuture, and isInPast
     var dateToday = Date()
     
     /// Creates a new instance with a calendar and a date it is to contain
@@ -58,16 +59,22 @@ public struct F4SCalendarDay : Equatable, Comparable {
         return cal.dayNumber(date: midday)
     }
     
+    /// Returns true of the date represented by the current istance is equal
+    /// to `dateToday`, otherwise false
     public var isToday: Bool {
         let today = F4SCalendarDay(cal: cal, date: dateToday)
         return self == today
     }
     
+    /// Returns true if the date represented by the current instance is less
+    /// than the `dateToday`
     public var isInPast: Bool {
         let today = F4SCalendarDay(cal: cal, date: dateToday)
         return self < today
     }
     
+    /// Returns true if the date represented by the current instance is greater
+    /// than the `dateToday`
     public var isInFuture: Bool {
         let today = F4SCalendarDay(cal: cal, date: dateToday)
         return self > today
