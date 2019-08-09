@@ -8,12 +8,27 @@
 
 import Foundation
 
+/// Represents an interval between a first and last date during which the YP is
+/// available for work experience. The interval is refined by the addition of
+/// a structure that indicates day-of-the-week availability, with each day being
+/// selectable and further qualified by either am (which by convention is taken
+/// to mean 9am to 12), pm (12 - 5pm) or all.
+/// Note that the rules for day-of-the-week availaility are lax. It is legitimate
+/// to specify a day that is excluded by the first and last dates (this can
+/// happen if the interval between those dates is less than a week). However,
+/// the first to last date interval is taken to override the day of the week
+/// specification, so that if, say, a Monday is specified as "available", yet the
+/// interval between the first and last dates does not contain a Monday, then
+/// the Monday availability will be ignored
 public struct F4SAvailabilityPeriod {
-    
+    /// first day of availability
     public var firstDay: F4SCalendarDay?
+    /// last day of availability
     public var lastDay: F4SCalendarDay?
+    /// availabiity refined according to day of the week
     public var daysAndHours: F4SDaysAndHoursModel?
     
+    /// returns a json struct that represents the current instance
     public func makeAvailabilityPeriodJson() -> F4SAvailabilityPeriodJson {
         let start_date = F4SAvailabilityPeriod.formatYearString(day: self.firstDay)
         let end_date = F4SAvailabilityPeriod.formatYearString(day: self.lastDay)
@@ -22,12 +37,52 @@ public struct F4SAvailabilityPeriod {
         return period
     }
     
+    
+    /// initialise a new instance
+    ///
+    /// Represents an interval between a first and last date during which the YP is
+    /// available for work experience. The interval is refined by the addition of
+    /// a structure that indicates day-of-the-week availability, with each day being
+    /// selectable and further qualified by either am (which by convention is taken
+    /// to mean 9am to 12), pm (12 - 5pm) or all
+    ///
+    /// - Notes: The rules for day-of-the-week availaility are lax. It is legitimate
+    /// to specify a day that is excluded by the first and last dates (this can
+    /// happen if the interval between those dates is less than a week). However,
+    /// the first to last date interval is taken to override the day of the week
+    /// specification, so that if, say, a Monday is specified as "available", yet the
+    /// interval between the first and last dates does not contain a Monday, then
+    /// the Monday availability will be ignored
+    ///
+    /// - Parameters:
+    ///   - firstDay: first day of availability
+    ///   - lastDay: last day of availability
+    ///   - daysAndHours: a refinement of availability by day of the week
     public init(firstDay: F4SCalendarDay?, lastDay: F4SCalendarDay?, daysAndHours: F4SDaysAndHoursModel?) {
         self.firstDay = firstDay
         self.lastDay = lastDay
         self.daysAndHours = daysAndHours
     }
     
+    /// initialise a new instance
+    ///
+    /// Represents an interval between a first and last date during which the YP is
+    /// available for work experience. The interval is refined by the addition of
+    /// a structure that indicates day-of-the-week availability, with each day being
+    /// selectable and further qualified by either am (which by convention is taken
+    /// to mean 9am to 12), pm (12 - 5pm) or all
+    ///
+    /// - Notes: The rules for day-of-the-week availaility are lax. It is legitimate
+    /// to specify a day that is excluded by the first and last dates (this can
+    /// happen if the interval between those dates is less than a week). However,
+    /// the first to last date interval is taken to override the day of the week
+    /// specification, so that if, say, a Monday is specified as "available", yet the
+    /// interval between the first and last dates does not contain a Monday, then
+    /// the Monday availability will be ignored
+    ///
+    /// - Parameters:
+    ///    - availabilityPeriodJson: A struct directly representing json required
+    /// by the server
     public init(availabilityPeriodJson: F4SAvailabilityPeriodJson?) {
         guard let availabilityPeriodJson = availabilityPeriodJson else {
             self.init(firstDay: nil, lastDay: nil, daysAndHours: nil)
@@ -64,6 +119,10 @@ public struct F4SAvailabilityPeriod {
         self.init(firstDay: firstDay, lastDay: lastDay, daysAndHours: daysAndHours)
     }
     
+    /// nullifes the first (and last, if necessary) date of the availability interval. This
+    /// supports situations where the current date has advanced beyond the start of the availability interval
+    /// The days and hours availability structure is left unchanged by this
+    /// operation
     public func nullifyingInvalidStartOrEndDates() -> F4SAvailabilityPeriod {
         var period = self
         period.firstDay = dayIsValid(day: firstDay) ? firstDay : nil
@@ -71,11 +130,15 @@ public struct F4SAvailabilityPeriod {
         return period
     }
     
+    /// Tests whether the specified day is valid for availability. If the day is
+    /// in the past relative to "today" then it is invalid; otherwise it is
+    /// valid
     func dayIsValid(day: F4SCalendarDay?) -> Bool {
         guard let day = day else { return true }
         return !day.isInPast
     }
     
+    /// Returns a date from a "yyyy-MM-dd" string
     static func dateFromString(_ dateString: String?) -> Date? {
         guard let dateString = dateString else { return nil }
         let dateFormatter = DateFormatter()
@@ -84,6 +147,7 @@ public struct F4SAvailabilityPeriod {
         return date
     }
     
+    /// Returns a new [F4SDayTimeInfoJson] from a F4SDaysAndHoursModel
     private static func times(daysAndHours: F4SDaysAndHoursModel?) -> [F4SDayTimeInfoJson] {
         var times = [F4SDayTimeInfoJson]()
         guard let daysAndHours = daysAndHours else { return times }
@@ -96,6 +160,7 @@ public struct F4SAvailabilityPeriod {
         return times
     }
     
+    /// Returns a "yyyy-MM-dd" string representation of an F4SCalendarDay
     private static func formatYearString(day: F4SCalendarDay?) -> String? {
         guard let day = day else { return nil }
         let yearString = String(day.year)
@@ -168,11 +233,6 @@ public struct F4SDayTimeInfoJson : Codable {
     /// am | pm | all
     public var time: String
     
-    public init(day: String, time: String) {
-        self.day = day
-        self.time = time
-    }
-    
     public init(dayAndHours: F4SDayAndHourSelection){
         self.day = dayAndHours.dayOfWeek.twoLetterSymbol
         self.time = dayAndHours.hoursType.rawValue
@@ -189,102 +249,14 @@ public struct F4SDayAndHourSelection {
     public var dayOfWeek: F4SDayOfWeek
     public var hoursType: F4SHoursType
     public var contiguousPeriods: [DateInterval]?
-}
-
-public struct F4SCalendarDay : Equatable, Comparable {
-    
-    public static func <(lhs: F4SCalendarDay, rhs: F4SCalendarDay) -> Bool {
-        return lhs.midday < rhs.midday
-    }
-    
-    public static func ==(lhs: F4SCalendarDay, rhs: F4SCalendarDay) -> Bool {
-        return lhs.midday == rhs.midday
-    }
-    
-    public let midday: Date // midday
-    let cal: F4SCalendar
-    
-    /// Creates a new instance with a calendar and a date it is to contain
-    public init(cal: F4SCalendar, date: Date) {
-        self.cal = cal
-        self.midday = cal.middayOfDayContaining(date: date)
-    }
-    
-    /// Returns the F4SDay this day represents
-    public var dayOfWeek: F4SDayOfWeek {
-        return cal.dayOfWeekContaining(date: midday)
-    }
-    
-    /// Returns a DateInterval spanning the day
-    public var interval: DateInterval {
-        return cal.intervalForDayContaining(date: midday)
-    }
-    
-    /// Returns a new day that follows the current day
-    public var nextDay: F4SCalendarDay {
-        let nextMidday = midday.addingTimeInterval(24*3600)
-        return F4SCalendarDay(cal: cal, date: nextMidday)
-    }
-    
-    /// Returns a new day that preceeds the current day
-    public var previousDay: F4SCalendarDay {
-        let previousMidday = midday.addingTimeInterval(-24*3600)
-        return F4SCalendarDay(cal: cal, date: previousMidday)
-    }
-    
-    public func addingDays(_ number: Int) -> F4SCalendarDay {
-        var day = self
-        var daysLeftToAdd = abs(number)
-        while daysLeftToAdd != 0 {
-            daysLeftToAdd -= 1
-            day = day.nextDay
-        }
-        return day
-    }
-    
-    public func subtractingDays(_ number: Int) -> F4SCalendarDay {
-        var day = self
-        var daysLeftToSubtract = abs(number)
-        while daysLeftToSubtract != 0 {
-            daysLeftToSubtract -= 1
-            day = day.previousDay
-        }
-        return day
-    }
-    
-    /// Returns the year number that contains the current instance
-    public var year: Int {
-        return cal.yearNumber(date: midday)
-    }
-    
-    /// returns the month number that contains the current instance
-    public var monthOfYear: Int {
-        return cal.monthNumber(date: midday)
-    }
-    
-    /// Returns the day of the month for the current instance
-    public var dayOfMonth: Int {
-        return cal.dayNumber(date: midday)
-    }
-    
-    public var isToday: Bool {
-        let today = F4SCalendarDay(cal: cal, date: Date())
-        return self == today
-    }
-    
-    public var isSixWeeksIntoFuture: Bool {
-        let today = F4SCalendarDay(cal: cal, date: Date())
-        let cutoff = today.addingDays(6 * 7)
-        return self >= cutoff
-    }
-    
-    public var isInPast: Bool {
-        let today = F4SCalendarDay(cal: cal, date: Date())
-        return self < today
-    }
-    
-    public var isInFuture: Bool {
-        let today = F4SCalendarDay(cal: cal, date: Date())
-        return self > today
+    public init(dayIsSelected: Bool,
+                dayOfWeek: F4SDayOfWeek,
+                hoursType: F4SHoursType,
+                contiguousPeriods: [DateInterval]?) {
+        self.dayIsSelected = dayIsSelected
+        self.contiguousPeriods = contiguousPeriods
+        self.dayOfWeek = dayOfWeek
+        self.hoursType = hoursType
+        
     }
 }
