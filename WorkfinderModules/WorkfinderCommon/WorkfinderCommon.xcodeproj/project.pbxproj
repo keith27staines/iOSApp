@@ -25,6 +25,8 @@
 		FC1FA08A22FAD5D5003EAE59 /* DateExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08922FAD5D5003EAE59 /* DateExtensionTests.swift */; };
 		FC1FA08C22FB1F57003EAE59 /* WorkAvailabilityWindowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08B22FB1F57003EAE59 /* WorkAvailabilityWindowTests.swift */; };
 		FC1FA08E22FB3931003EAE59 /* F4SContentDescriptorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08D22FB3931003EAE59 /* F4SContentDescriptorTests.swift */; };
+		FC1FEEFC23014BA40039DD94 /* WEXPlacementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FEEFB23014BA40039DD94 /* WEXPlacementTests.swift */; };
+		FC1FEEFE230157140039DD94 /* WEXMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FEEFD230157140039DD94 /* WEXMessageTests.swift */; };
 		FC22DBFD22F989D60068C61C /* F4SInterestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBFC22F989D60068C61C /* F4SInterestTests.swift */; };
 		FC22DBFF22F9922D0068C61C /* F4STemplateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBFE22F9922D0068C61C /* F4STemplateTests.swift */; };
 		FC22DC0122F996D70068C61C /* F4SChoiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DC0022F996D70068C61C /* F4SChoiceTests.swift */; };
@@ -115,6 +117,8 @@
 		FC1FA08922FAD5D5003EAE59 /* DateExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensionTests.swift; sourceTree = "<group>"; };
 		FC1FA08B22FB1F57003EAE59 /* WorkAvailabilityWindowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkAvailabilityWindowTests.swift; sourceTree = "<group>"; };
 		FC1FA08D22FB3931003EAE59 /* F4SContentDescriptorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SContentDescriptorTests.swift; sourceTree = "<group>"; };
+		FC1FEEFB23014BA40039DD94 /* WEXPlacementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEXPlacementTests.swift; sourceTree = "<group>"; };
+		FC1FEEFD230157140039DD94 /* WEXMessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEXMessageTests.swift; sourceTree = "<group>"; };
 		FC22DBFC22F989D60068C61C /* F4SInterestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInterestTests.swift; sourceTree = "<group>"; };
 		FC22DBFE22F9922D0068C61C /* F4STemplateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateTests.swift; sourceTree = "<group>"; };
 		FC22DC0022F996D70068C61C /* F4SChoiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SChoiceTests.swift; sourceTree = "<group>"; };
@@ -287,6 +291,8 @@
 		FCA91E782234043D007ED308 /* WorkfinderCommonTests */ = {
 			isa = PBXGroup;
 			children = (
+				FC1FEEFD230157140039DD94 /* WEXMessageTests.swift */,
+				FC1FEEFB23014BA40039DD94 /* WEXPlacementTests.swift */,
 				FC1F591F22FD8ACF007164BA /* F4SAvailabilityPeriodTests.swift */,
 				FC1F591D22FD78D6007164BA /* WorkfinderCommonStructsTests.swift */,
 				FC1F591B22FD75B2007164BA /* F4SAnonymousUserTests.swift */,
@@ -591,6 +597,7 @@
 				FC2E205D22F9E76A0094B134 /* F4SUserInformationTests.swift in Sources */,
 				FC2E205B22F9D1DD0094B134 /* F4SUUIDDictionarytests.swift in Sources */,
 				FC22DC0622F9AC410068C61C /* F4STemplateBlankTests.swift in Sources */,
+				FC1FEEFE230157140039DD94 /* WEXMessageTests.swift in Sources */,
 				FC83EC8322FC1CBA009D7A0B /* CompanyViewDataProtocolTests.swift in Sources */,
 				FC12B10522F341D500C33410 /* JsonDateFormatterExtensionTests.swift in Sources */,
 				FC1F591822FD6DAB007164BA /* F4SPushTokenTests.swift in Sources */,
@@ -600,6 +607,7 @@
 				FC12B0FF22F33ECE00C33410 /* F4STimelinePlacement.swift in Sources */,
 				FCE519572249645C00B550C9 /* F4SCalendarMonthTests.swift in Sources */,
 				FC1FA08A22FAD5D5003EAE59 /* DateExtensionTests.swift in Sources */,
+				FC1FEEFC23014BA40039DD94 /* WEXPlacementTests.swift in Sources */,
 				FC83EC8122FC0EDB009D7A0B /* F4SUserRepositoryTests.swift in Sources */,
 				FC83EC7F22FC0C55009D7A0B /* F4SJsonValueTests.swift in Sources */,
 				FC1F592022FD8ACF007164BA /* F4SAvailabilityPeriodTests.swift in Sources */,

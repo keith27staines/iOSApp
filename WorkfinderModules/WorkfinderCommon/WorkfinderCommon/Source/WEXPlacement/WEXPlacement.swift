@@ -8,10 +8,13 @@
 
 import Foundation
 
+/// Defines the interface for WEXPlacementServiceFactory
 public protocol WEXPlacementServiceFactoryProtocol {
+    /// Creates and returns an object conforming to WEXPlacementServiceFactory
     func makePlacementService() -> WEXPlacementServiceProtocol
 }
 
+/// Defines the interface for WEXPlacementService
 public protocol WEXPlacementServiceProtocol {
     func createPlacement(
         with json: WEXCreatePlacementJson,
@@ -20,6 +23,7 @@ public protocol WEXPlacementServiceProtocol {
     func patchPlacement(uuid: F4SUUID, with json: WEXPlacementJson, completion: @escaping (WEXResult<WEXPlacementJson, WEXError>) -> Void)
 }
 
+/// Defines the workflow states of a WEXPlacement
 public enum WEXPlacementState : String, Codable {
     case inProgress = "in_progress"
     case applied
@@ -37,6 +41,7 @@ public enum WEXPlacementState : String, Codable {
     case referredByEmployer = "referred by employer"
 }
 
+/// Defines the interface for 
 public protocol WEXCreatePlacementJsonProtocol : Codable {
     var userUuid: F4SUUID { get }
     var companyUuid: F4SUUID { get }
