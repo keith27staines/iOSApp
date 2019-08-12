@@ -31,6 +31,41 @@ class F4SCalendarMonthTests: XCTestCase {
         f4sCalendar = F4SCalendar()
     }
     
+    func test_initialise() {
+        let day = F4SCalendarDay(cal: f4sCalendar, date: februaryDateNonLeapYear)
+        let sut = F4SCalendarMonth(cal: f4sCalendar, date: day.midday)
+        XCTAssertTrue(sut.contains(day: day))
+    }
+    
+    func test_veryShortSymbol() {
+        let day = F4SCalendarDay(cal: f4sCalendar, date: februaryDateNonLeapYear)
+        let sut = F4SCalendarMonth(cal: f4sCalendar, date: day.midday)
+        XCTAssertTrue(sut.veryShortMonthSymbol == "F")
+    }
+    
+    func test_next_when_midyear() {
+        let day = F4SCalendarDay(cal: f4sCalendar, date: februaryDateNonLeapYear)
+        let sut = F4SCalendarMonth(cal: f4sCalendar, date: day.midday)
+        XCTAssertTrue(sut.next.monthNumber == 3)
+    }
+    
+    func test_next_after_december() {
+        let decemberDay = DateComponents(calendar: Calendar.current, year: 2010, month: 12, day: 1).date!
+        let sut = F4SCalendarMonth(cal: f4sCalendar, date: decemberDay)
+        XCTAssertTrue(sut.monthNumber == 12)
+        XCTAssertTrue(sut.next.monthNumber == 1)
+        XCTAssertTrue(sut.next.year == sut.year + 1)
+    }
+    
+    func test_previous_before_january() {
+        let januaryDate = DateComponents(calendar: Calendar.current, year: 2010, month: 1, day: 1).date!
+        let sut = F4SCalendarMonth(cal: f4sCalendar, date: januaryDate)
+        XCTAssertTrue(sut.monthNumber == 1)
+        XCTAssertTrue(sut.previous.monthNumber == 12)
+        XCTAssertTrue(sut.previous.year == sut.year - 1)
+    }
+    
+    
     func testCountDaysInMonth() {
         let day = F4SCalendarDay(cal: f4sCalendar, date: februaryDateLeapYear)
         let month = F4SCalendarMonth(containing: day.nextDay)
@@ -97,5 +132,7 @@ class F4SCalendarMonthTests: XCTestCase {
         let month = F4SCalendarMonth(containing: day)
         XCTAssertFalse(month.contains(day: day.previousDay))
     }
+    
+    
     
 }
