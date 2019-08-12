@@ -27,6 +27,8 @@
 		FC1FA08E22FB3931003EAE59 /* F4SContentDescriptorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08D22FB3931003EAE59 /* F4SContentDescriptorTests.swift */; };
 		FC1FEEFC23014BA40039DD94 /* WEXPlacementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FEEFB23014BA40039DD94 /* WEXPlacementTests.swift */; };
 		FC1FEEFE230157140039DD94 /* WEXMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FEEFD230157140039DD94 /* WEXMessageTests.swift */; };
+		FC1FEF002301A1830039DD94 /* WEXDayOfWeekTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FEEFF2301A1830039DD94 /* WEXDayOfWeekTests.swift */; };
+		FC1FEF022301BFB10039DD94 /* F4SPlacementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FEF012301BFB10039DD94 /* F4SPlacementTests.swift */; };
 		FC22DBFD22F989D60068C61C /* F4SInterestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBFC22F989D60068C61C /* F4SInterestTests.swift */; };
 		FC22DBFF22F9922D0068C61C /* F4STemplateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBFE22F9922D0068C61C /* F4STemplateTests.swift */; };
 		FC22DC0122F996D70068C61C /* F4SChoiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DC0022F996D70068C61C /* F4SChoiceTests.swift */; };
@@ -119,6 +121,8 @@
 		FC1FA08D22FB3931003EAE59 /* F4SContentDescriptorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SContentDescriptorTests.swift; sourceTree = "<group>"; };
 		FC1FEEFB23014BA40039DD94 /* WEXPlacementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEXPlacementTests.swift; sourceTree = "<group>"; };
 		FC1FEEFD230157140039DD94 /* WEXMessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEXMessageTests.swift; sourceTree = "<group>"; };
+		FC1FEEFF2301A1830039DD94 /* WEXDayOfWeekTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEXDayOfWeekTests.swift; sourceTree = "<group>"; };
+		FC1FEF012301BFB10039DD94 /* F4SPlacementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementTests.swift; sourceTree = "<group>"; };
 		FC22DBFC22F989D60068C61C /* F4SInterestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInterestTests.swift; sourceTree = "<group>"; };
 		FC22DBFE22F9922D0068C61C /* F4STemplateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateTests.swift; sourceTree = "<group>"; };
 		FC22DC0022F996D70068C61C /* F4SChoiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SChoiceTests.swift; sourceTree = "<group>"; };
@@ -291,6 +295,8 @@
 		FCA91E782234043D007ED308 /* WorkfinderCommonTests */ = {
 			isa = PBXGroup;
 			children = (
+				FC1FEF012301BFB10039DD94 /* F4SPlacementTests.swift */,
+				FC1FEEFF2301A1830039DD94 /* WEXDayOfWeekTests.swift */,
 				FCE519512249645C00B550C9 /* F4SCalendarMonthTests.swift */,
 				FCE519502249645B00B550C9 /* F4SDisplayableMonthTests.swift */,
 				FC1FEEFD230157140039DD94 /* WEXMessageTests.swift */,
@@ -614,10 +620,12 @@
 				FCE519522249645C00B550C9 /* F4SCalendarWeekTests.swift in Sources */,
 				FC1FA08E22FB3931003EAE59 /* F4SContentDescriptorTests.swift in Sources */,
 				FC1F591E22FD78D6007164BA /* WorkfinderCommonStructsTests.swift in Sources */,
+				FC1FEF002301A1830039DD94 /* WEXDayOfWeekTests.swift in Sources */,
 				FC1F591C22FD75B2007164BA /* F4SAnonymousUserTests.swift in Sources */,
 				FC1FA08522FAAC28003EAE59 /* MockAnalyticsAndDebugging.swift in Sources */,
 				FC1FA08C22FB1F57003EAE59 /* WorkAvailabilityWindowTests.swift in Sources */,
 				FC22DC0122F996D70068C61C /* F4SChoiceTests.swift in Sources */,
+				FC1FEF022301BFB10039DD94 /* F4SPlacementTests.swift in Sources */,
 				FCBEA7B5228701E600CAB1F1 /* F4SUserTests.swift in Sources */,
 				FCE519532249645C00B550C9 /* F4SCalendarTests.swift in Sources */,
 				FC22DBFD22F989D60068C61C /* F4SInterestTests.swift in Sources */,
