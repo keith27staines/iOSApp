@@ -48,8 +48,8 @@ class F4STimelinePlacementTests: XCTestCase {
     }
     
     func test_equatable_when_differing_by_uuid() {
-        let json1 = makeTimelinePlacementJson()
-        let json2 = makeTimelinePlacementJson(with: "xxxx")
+        let json1 = makeTimelinePlacementJson(with: "xxxx")
+        let json2 = makeTimelinePlacementJson(with: "yyyy")
         let p1 = timelinePlacementFromJson(json1)
         let p2 = timelinePlacementFromJson(json2)
         XCTAssertNotNil(p1)
@@ -109,4 +109,25 @@ class F4STimelinePlacementTests: XCTestCase {
         return try? decoder.decode(F4STimelinePlacement.self, from: data)
     }
 
+}
+
+class F4SMessagetests : XCTestCase {
+    func test_initialise() {
+        let date = Date()
+        let sut = F4SMessage(uuid: "uuid", dateTime: date, relativeDateTime: "relative", content: "content", sender: "sender")
+        XCTAssertEqual(sut.uuid, "uuid")
+        XCTAssertEqual(sut.content, "content")
+        XCTAssertEqual(sut.dateTime, date)
+        XCTAssertEqual(sut.sender, "sender")
+        XCTAssertNil(sut.isRead)
+        XCTAssertNil(sut.readDate)
+        XCTAssertEqual(sut.receivedDate, date)
+    }
+    
+    func test_equatable_when_uuids_match() {
+        let date = Date()
+        let sut1 = F4SMessage(uuid: "uuid", dateTime: date, relativeDateTime: "relative", content: "content", sender: "sender")
+        let sut2 = F4SMessage(uuid: "uuid", dateTime: date.addingTimeInterval(1000), relativeDateTime: "relative1", content: "content1", sender: "sender1")
+        XCTAssertTrue(sut1.isEqual(other: sut2))
+    }
 }
