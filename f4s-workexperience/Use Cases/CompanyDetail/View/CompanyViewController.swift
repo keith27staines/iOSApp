@@ -8,6 +8,7 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 
 class CompanyViewController: UIViewController {
     
@@ -142,21 +143,12 @@ extension CompanyViewController : CompanyMainViewDelegate {
         let message = applyState.deniedReason?.message
         let buttonTitle = applyState.deniedReason?.buttonTitle
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        var handler: ((UIAlertAction) -> (Void))? = nil
+        let handler: ((UIAlertAction) -> (Void))? = nil
         let action: UIAlertAction
         switch applyState {
         case .allowed:
             return
-        case .deniedMustSelectPerson:
-            handler = { alertAction in
-                let segmentedControl = self.companyMainPageView.segmentedControl
-                segmentedControl.selectedSegmentIndex = 0
-                // TODO: enable people tab: uncomment next line
-                // self.pageViewController.moveToPage(index: CompanyViewModel.PageIndex.people)
-            }
         case .deniedAlreadyApplied:
-            break
-        case .deniedCompanyNoAcceptingApplications:
             break
         }
         action = UIAlertAction(title: buttonTitle, style: UIAlertAction.Style.cancel, handler: handler)

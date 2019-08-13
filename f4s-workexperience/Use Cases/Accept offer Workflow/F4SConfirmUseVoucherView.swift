@@ -9,6 +9,7 @@
 import UIKit
 import WorkfinderCommon
 import WorkfinderCommon
+import WorkfinderUI
 
 class F4SConfirmUseVoucherView: UIView {
     

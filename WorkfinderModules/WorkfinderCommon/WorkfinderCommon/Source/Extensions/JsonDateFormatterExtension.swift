@@ -1,5 +1,4 @@
 import Foundation
-import WorkfinderCommon
 
 extension DateFormatter {
     /// Creates a dateformatter designed to format dates encoded by the

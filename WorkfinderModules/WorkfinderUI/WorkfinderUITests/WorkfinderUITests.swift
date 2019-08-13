@@ -11,9 +11,6 @@ import XCTest
 
 class WorkfinderUITests: XCTestCase {
 
-    func testWorkfinderUI() {
-        let greeting = WorkfinderUI().sayHello(to: "you")
-        XCTAssertEqual(greeting, "Hello you from WorkfinderUI")
-    }
+
 
 }

@@ -89,6 +89,42 @@ class F4SCalendarDayTests: XCTestCase {
         XCTAssertEqual(days[1], day)
         XCTAssertEqual(days[2], day.nextDay)
     }
+    
+    func test_interval() {
+        let sut = F4SCalendarDay(cal: f4sCalendar, date: februaryDateNonLeapYear)
+        let interval = sut.interval
+        XCTAssertTrue(interval.duration == 86400.0)
+        XCTAssertTrue(interval.start.dateToStringRfc3339() == "2017-02-01T00:00:00Z")
+    }
+    
+    func test_isToday() {
+        var sut = F4SCalendarDay(cal: f4sCalendar, date: februaryDateNonLeapYear)
+        sut.dateToday = februaryDateNonLeapYear
+        XCTAssertTrue(sut.isToday)
+        XCTAssertFalse(sut.isInPast)
+        XCTAssertFalse(sut.isInFuture)
+    }
+    
+    func test_isInFuture() {
+        var sut = F4SCalendarDay(cal: f4sCalendar, date: februaryDateNonLeapYear)
+        sut.dateToday = februaryDateNonLeapYear.addingTimeInterval(-48*3600)
+        XCTAssertFalse(sut.isToday)
+        XCTAssertFalse(sut.isInPast)
+        XCTAssertTrue(sut.isInFuture)
+    }
+    
+    func test_isInPast() {
+        var sut = F4SCalendarDay(cal: f4sCalendar, date: februaryDateNonLeapYear)
+        sut.dateToday = februaryDateNonLeapYear.addingTimeInterval(48*3600)
+        XCTAssertFalse(sut.isToday)
+        XCTAssertTrue(sut.isInPast)
+        XCTAssertFalse(sut.isInFuture)
+    }
+    
+    func test_year() {
+        let sut = F4SCalendarDay(cal: f4sCalendar, date: februaryDateNonLeapYear)
+        XCTAssertTrue(sut.year == 2017)
+    }
 
 }
 

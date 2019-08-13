@@ -8,9 +8,4 @@
 
 import Foundation
 
-public class WorkfinderUI {
-    public init(){}
-    public func sayHello(to name: String) -> String {
-        return "Hello \(name) from WorkfinderUI"
-    }
-}
+

@@ -9,6 +9,7 @@
 import UIKit
 import EventKit
 import WorkfinderCommon
+import WorkfinderUI
 
 class F4SHoorayViewController: UIViewController {
     @IBOutlet weak var companyHeaderView: F4SCompanyHeaderViewWithLogo!

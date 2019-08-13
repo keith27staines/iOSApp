@@ -110,8 +110,6 @@
 		D54E0FFD1E044B0400A51560 /* InfoWindowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D54E0FFB1E044B0400A51560 /* InfoWindowView.xib */; };
 		D54E0FFF1E044B1800A51560 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54E0FFE1E044B1800A51560 /* ContentViewController.swift */; };
 		D54E10021E044B6B00A51560 /* Content.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D54E10001E044B6B00A51560 /* Content.storyboard */; };
-		D54E10051E044BA000A51560 /* HalfWayHooray.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D54E10031E044BA000A51560 /* HalfWayHooray.storyboard */; };
-		D54E10071E044BC100A51560 /* HalfWayHoorayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54E10061E044BC100A51560 /* HalfWayHoorayViewController.swift */; };
 		D5E9EBE81DD60AB300BD796E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5E9EBEA1DD60AB300BD796E /* Localizable.strings */; };
 		FC02DA2C22EC9481003C8148 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC02DA2622EC84EF003C8148 /* WorkfinderServices.framework */; };
 		FC02DA2D22EC9481003C8148 /* WorkfinderServices.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC02DA2622EC84EF003C8148 /* WorkfinderServices.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -245,7 +243,6 @@
 		FCA91EC122340743007ED308 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91EC022340743007ED308 /* WorkfinderUI.framework */; };
 		FCA91EC222340743007ED308 /* WorkfinderUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91EC022340743007ED308 /* WorkfinderUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCACBF4420C7EB9F00EABAE8 /* F4SContentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCACBF4320C7EB9F00EABAE8 /* F4SContentService.swift */; };
-		FCACBF4620C8085900EABAE8 /* F4SVoucherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */; };
 		FCB1648320986E810045B9CA /* F4SRequestCompanyDocumentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB1648220986E810045B9CA /* F4SRequestCompanyDocumentTableViewCell.swift */; };
 		FCB3617B224D44610056E0B6 /* ChooseAttributesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB3617A224D44610056E0B6 /* ChooseAttributesViewModel.swift */; };
 		FCB3922A20FF1E0A00792C0A /* AcceptOffer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCB3922920FF1E0A00792C0A /* AcceptOffer.storyboard */; };
@@ -323,7 +320,6 @@
 		FCE11E5C2115D26B00403789 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE11E5B2115D26B00403789 /* SwitchTableViewCell.swift */; };
 		FCE20CC1203C12F300CA821D /* F4SDocumentUploadWhileApplyingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE20CBD203C12F300CA821D /* F4SDocumentUploadWhileApplyingModel.swift */; };
 		FCE20CC6203D5CE400CA821D /* DocumentsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE20CC5203D5CE400CA821D /* DocumentsService.swift */; };
-		FCE5194122494FDE00B550C9 /* F4SPlacementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE5194022494FDE00B550C9 /* F4SPlacementService.swift */; };
 		FCE51E402210362800DC1D50 /* PlacesSearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E3F2210362800DC1D50 /* PlacesSearchDataGetter.swift */; };
 		FCE51E422210365B00DC1D50 /* CompanySearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E412210365B00DC1D50 /* CompanySearchDataGetter.swift */; };
 		FCE51E44221039D600DC1D50 /* PersonSearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E43221039D600DC1D50 /* PersonSearchDataGetter.swift */; };
@@ -336,7 +332,6 @@
 		FCEF70B721087207001C229A /* F4SInviteDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF70B621087207001C229A /* F4SInviteDetailCell.swift */; };
 		FCEF70BB2108A535001C229A /* F4SInviteButtonsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF70BA2108A535001C229A /* F4SInviteButtonsTableViewCell.swift */; };
 		FCEF70BD2108A809001C229A /* F4SInviteSectionHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF70BC2108A809001C229A /* F4SInviteSectionHeaderTableViewCell.swift */; };
-		FCF06EE720DBFEC100FD990C /* F4SPlacementModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF06EE620DBFEC100FD990C /* F4SPlacementModels.swift */; };
 		FCF0D16C1FBC244800F2AF1D /* PopupAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */; };
 		FCF5AF2B2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF2A2248BE1A00D9B8D1 /* WorkfinderApplyUseCase.framework */; };
 		FCF5AF2C2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF2A2248BE1A00D9B8D1 /* WorkfinderApplyUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -359,7 +354,6 @@
 		FCFBD01E2250DA6000A9361D /* ApplyCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC17E02E223A378D00B32CBD /* ApplyCoordinatorTests.swift */; };
 		FCFBD0202250DAE900A9361D /* MagicLinkInterpreterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3485D20038C3100DC1316 /* MagicLinkInterpreterTests.swift */; };
 		FCFBD0212250DAFE00A9361D /* PartnerModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32E3D8200F322800D7C36A /* PartnerModelTests.swift */; };
-		FCFBD0222250DB1300A9361D /* F4SPlacementModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9FECB620F4C52800450B46 /* F4SPlacementModelsTests.swift */; };
 		FCFBD0242250DB4D00A9361D /* F4SDatabaseDownloadManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC85B2220EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift */; };
 		FCFBD0252250DB6000A9361D /* MessageProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC39F46221AAA64B005B0A07 /* MessageProtocolTests.swift */; };
 		FCFBD0262250DB7700A9361D /* MessagesModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC39F46121AAA64B005B0A07 /* MessagesModelTests.swift */; };
@@ -541,8 +535,6 @@
 		D54E0FFC1E044B0400A51560 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/InfoWindowView.xib; sourceTree = "<group>"; };
 		D54E0FFE1E044B1800A51560 /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		D54E10011E044B6B00A51560 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "f4s-workexperience/Base.lproj/Content.storyboard"; sourceTree = "<group>"; };
-		D54E10041E044BA000A51560 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "f4s-workexperience/Base.lproj/HalfWayHooray.storyboard"; sourceTree = "<group>"; };
-		D54E10061E044BC100A51560 /* HalfWayHoorayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfWayHoorayViewController.swift; sourceTree = "<group>"; };
 		D5E9EBE91DD60AB300BD796E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FC02DA2622EC84EF003C8148 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC06264622032E74000D2D04 /* CompanyDocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDocumentsViewController.swift; sourceTree = "<group>"; };
@@ -676,7 +668,6 @@
 		FC9EAD7F210F5DEB001C56CE /* F4SRoleJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRoleJson.swift; sourceTree = "<group>"; };
 		FC9EAD81210F5F64001C56CE /* F4SRoleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRoleService.swift; sourceTree = "<group>"; };
 		FC9EAD8321106846001C56CE /* F4SAccepOfferContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SAccepOfferContext.swift; sourceTree = "<group>"; };
-		FC9FECB620F4C52800450B46 /* F4SPlacementModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementModelsTests.swift; sourceTree = "<group>"; };
 		FCA333A420BEA938002AA790 /* F4SMessagesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SMessagesModel.swift; sourceTree = "<group>"; };
 		FCA53B911FE00CB5009F6DB0 /* VersioningService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersioningService.swift; sourceTree = "<group>"; };
 		FCA53B941FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SForceAppUpdateViewController.swift; sourceTree = "<group>"; };
@@ -694,7 +685,6 @@
 		FCA91E9522340577007ED308 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA91EC022340743007ED308 /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCACBF4320C7EB9F00EABAE8 /* F4SContentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SContentService.swift; sourceTree = "<group>"; };
-		FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SVoucherService.swift; sourceTree = "<group>"; };
 		FCB1648220986E810045B9CA /* F4SRequestCompanyDocumentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRequestCompanyDocumentTableViewCell.swift; sourceTree = "<group>"; };
 		FCB3617A224D44610056E0B6 /* ChooseAttributesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseAttributesViewModel.swift; sourceTree = "<group>"; };
 		FCB3922920FF1E0A00792C0A /* AcceptOffer.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AcceptOffer.storyboard; sourceTree = "<group>"; };
@@ -773,7 +763,6 @@
 		FCE11E5B2115D26B00403789 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		FCE20CBD203C12F300CA821D /* F4SDocumentUploadWhileApplyingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDocumentUploadWhileApplyingModel.swift; sourceTree = "<group>"; };
 		FCE20CC5203D5CE400CA821D /* DocumentsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsService.swift; sourceTree = "<group>"; };
-		FCE5194022494FDE00B550C9 /* F4SPlacementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementService.swift; sourceTree = "<group>"; };
 		FCE51E3F2210362800DC1D50 /* PlacesSearchDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesSearchDataGetter.swift; sourceTree = "<group>"; };
 		FCE51E412210365B00DC1D50 /* CompanySearchDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanySearchDataGetter.swift; sourceTree = "<group>"; };
 		FCE51E43221039D600DC1D50 /* PersonSearchDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonSearchDataGetter.swift; sourceTree = "<group>"; };
@@ -786,7 +775,6 @@
 		FCEF70B621087207001C229A /* F4SInviteDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInviteDetailCell.swift; sourceTree = "<group>"; };
 		FCEF70BA2108A535001C229A /* F4SInviteButtonsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInviteButtonsTableViewCell.swift; sourceTree = "<group>"; };
 		FCEF70BC2108A809001C229A /* F4SInviteSectionHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInviteSectionHeaderTableViewCell.swift; sourceTree = "<group>"; };
-		FCF06EE620DBFEC100FD990C /* F4SPlacementModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementModels.swift; sourceTree = "<group>"; };
 		FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupAnimator.swift; sourceTree = "<group>"; };
 		FCF5AF2A2248BE1A00D9B8D1 /* WorkfinderApplyUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderApplyUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF798532227F5AB00D67A7D /* RecommendationsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsCoordinator.swift; sourceTree = "<group>"; };
@@ -1595,7 +1583,6 @@
 			children = (
 				FC9626402248C27D00D5F850 /* ApplyCoordinator.swift */,
 				FC24D24B226B085900FA04A1 /* Build cover letter */,
-				FC24D24D226B092A00FA04A1 /* Half-way-hooray */,
 				FC24D250226B0BA500FA04A1 /* Capture user details */,
 				FCD3485620038B6B00DC1316 /* Validate user email */,
 				FC0B406A226B0E6A00D992AC /* Success Hooray */,
@@ -1623,15 +1610,6 @@
 				204C89721DF5F0A100D8493A /* EditFooterView.swift */,
 			);
 			path = "Edit Cover letter";
-			sourceTree = "<group>";
-		};
-		FC24D24D226B092A00FA04A1 /* Half-way-hooray */ = {
-			isa = PBXGroup;
-			children = (
-				D54E10031E044BA000A51560 /* HalfWayHooray.storyboard */,
-				D54E10061E044BC100A51560 /* HalfWayHoorayViewController.swift */,
-			);
-			path = "Half-way-hooray";
 			sourceTree = "<group>";
 		};
 		FC24D24E226B09DE00FA04A1 /* Cover letter choices */ = {
@@ -1772,7 +1750,6 @@
 			children = (
 				FC99BDC420CFAFD400278DDE /* F4SCompanyFavouritingService.swift */,
 				2037B0B71DEC8A2400A9DE3E /* F4STemplateService.swift */,
-				FCACBF4520C8085900EABAE8 /* F4SVoucherService.swift */,
 				FC64A594211ACA39006464A5 /* F4SCompanyService.swift */,
 				FCA6D2B51FA88CE00037962B /* F4SPartnerService.swift */,
 				FCD388E6208E27E500FC73C5 /* F4SCompanyDocumentService.swift */,
@@ -1788,7 +1765,6 @@
 				FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */,
 				FC67E609207B70CE006F07FE /* F4SCalendarService.swift */,
 				FC9EAD81210F5F64001C56CE /* F4SRoleService.swift */,
-				FCE5194022494FDE00B550C9 /* F4SPlacementService.swift */,
 			);
 			path = F4SAPIServices;
 			sourceTree = "<group>";
@@ -1811,7 +1787,6 @@
 		FC62FF8620EF6D98003E52C5 /* F4SPlacement models */ = {
 			isa = PBXGroup;
 			children = (
-				FCF06EE620DBFEC100FD990C /* F4SPlacementModels.swift */,
 			);
 			name = "F4SPlacement models";
 			sourceTree = "<group>";
@@ -2273,7 +2248,6 @@
 				FC1DC09921FE153E009ABC60 /* Company Detail Tests */,
 				FCD3485D20038C3100DC1316 /* MagicLinkInterpreterTests.swift */,
 				FC32E3D8200F322800D7C36A /* PartnerModelTests.swift */,
-				FC9FECB620F4C52800450B46 /* F4SPlacementModelsTests.swift */,
 				FCC85B2220EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift */,
 				FC39F46221AAA64B005B0A07 /* MessageProtocolTests.swift */,
 				FC39F46121AAA64B005B0A07 /* MessagesModelTests.swift */,
@@ -2427,7 +2401,6 @@
 				FCB6B8CA2074C58F0042C725 /* F4SDisplayInformationViewController.storyboard in Resources */,
 				FCD3486B20049DFB00DC1316 /* F4SEmailVerification.storyboard in Resources */,
 				201458C51E1CFCE500DBC9BD /* Message.storyboard in Resources */,
-				D54E10051E044BA000A51560 /* HalfWayHooray.storyboard in Resources */,
 				40E78E951DD391F3000A3776 /* MapView.storyboard in Resources */,
 				FCC212F0219077C000D8D5B7 /* DocumentCapture.xcassets in Resources */,
 				FC72219F20FE248400F10953 /* Appfile in Resources */,
@@ -2584,7 +2557,6 @@
 				40C1A4E61DDB356B000F80AA /* TabBarViewController.swift in Sources */,
 				FCC212F4219077C000D8D5B7 /* F4SAddUrlViewController.swift in Sources */,
 				FCA53B921FE00CB5009F6DB0 /* VersioningService.swift in Sources */,
-				D54E10071E044BC100A51560 /* HalfWayHoorayViewController.swift in Sources */,
 				FC85A5ED2191D87B004E877E /* AddDocumentsViewController+AddDocumentDelegate.swift in Sources */,
 				FC24D238226AEDD800FA04A1 /* RecommendationsListViewModel.swift in Sources */,
 				FC1DC09221FE1509009ABC60 /* PersonBioView.swift in Sources */,
@@ -2660,7 +2632,6 @@
 				FCF79858222857E800D67A7D /* CoreInjectionNavigationCoordinator.swift in Sources */,
 				40C1A52B1DE82060000F80AA /* InfoWindowView.swift in Sources */,
 				FCD884FB1FFBE04F00F05B08 /* RecommendationsListViewController.swift in Sources */,
-				FCE5194122494FDE00B550C9 /* F4SPlacementService.swift in Sources */,
 				206F8F921E1E552F0024937B /* MessageOptionHelper.swift in Sources */,
 				FCC212EC219077C000D8D5B7 /* F4SDCDocumentCaptureFileHelper.swift in Sources */,
 				40E78EA01DD5E208000A3776 /* LocationHelper.swift in Sources */,
@@ -2750,7 +2721,6 @@
 				204203EA1E4B110A007C7409 /* ShortlistDB.swift in Sources */,
 				203658831E1F809E00D87DC4 /* StatusCollectionViewCell.swift in Sources */,
 				2037B0A51DEC3C2000A9DE3E /* CoreDataBaseManager.swift in Sources */,
-				FCACBF4620C8085900EABAE8 /* F4SVoucherService.swift in Sources */,
 				40E78E6F1DD32BD4000A3776 /* CustomMenuViewController.swift in Sources */,
 				40E78E7F1DD32BF4000A3776 /* SideDrawerSectionHeaderView.swift in Sources */,
 				FC96709E2259F61600318F69 /* InterestsPruner.swift in Sources */,
@@ -2792,7 +2762,6 @@
 				FC6B17EB2201B54700556C59 /* CompanyFavouritesModel.swift in Sources */,
 				FC1DC07721FE14D7009ABC60 /* PersonViewData.swift in Sources */,
 				FCC212F3219077C000D8D5B7 /* F4SDCAddDocumentViewController.swift in Sources */,
-				FCF06EE720DBFEC100FD990C /* F4SPlacementModels.swift in Sources */,
 				FCD3486820038C3100DC1316 /* F4SEmailVerificationError.swift in Sources */,
 				FCE20CC6203D5CE400CA821D /* DocumentsService.swift in Sources */,
 				40E78E6E1DD32BD4000A3776 /* BaseMenuViewController.swift in Sources */,
@@ -2841,7 +2810,6 @@
 				FCFBD0262250DB7700A9361D /* MessagesModelTests.swift in Sources */,
 				FCFBD0182250D9A400A9361D /* MockUserService.swift in Sources */,
 				FCFBD01E2250DA6000A9361D /* ApplyCoordinatorTests.swift in Sources */,
-				FCFBD0222250DB1300A9361D /* F4SPlacementModelsTests.swift in Sources */,
 				FCFBD02A2250DC0F00A9361D /* ImageFetcherTests.swift in Sources */,
 				FCFBD0132250D8FC00A9361D /* CGRect+MethodsTests.swift in Sources */,
 				FCFBD0292250DBE900A9361D /* CompanyViewModelTests.swift in Sources */,
@@ -3013,14 +2981,6 @@
 				D54E10011E044B6B00A51560 /* Base */,
 			);
 			name = Content.storyboard;
-			sourceTree = "<group>";
-		};
-		D54E10031E044BA000A51560 /* HalfWayHooray.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D54E10041E044BA000A51560 /* Base */,
-			);
-			name = HalfWayHooray.storyboard;
 			sourceTree = "<group>";
 		};
 		D5E9EBEA1DD60AB300BD796E /* Localizable.strings */ = {

@@ -8,6 +8,7 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 
 public protocol ApplicationLetterViewControllerCoordinating : class {
     func cancelButtonWasTapped(sender: Any?)

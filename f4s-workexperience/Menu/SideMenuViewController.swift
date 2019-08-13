@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WorkfinderUI
 
 class SideMenuViewController: CustomMenuViewController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {

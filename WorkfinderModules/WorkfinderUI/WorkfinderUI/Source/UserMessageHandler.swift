@@ -1,4 +1,4 @@
-
+import WorkfinderCommon
 import UIKit
 
 public let sharedUserMessageHandler = UserMessageHandler()

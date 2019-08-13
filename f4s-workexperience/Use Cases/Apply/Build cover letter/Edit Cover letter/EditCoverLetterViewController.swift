@@ -9,6 +9,7 @@
 import UIKit
 import WorkfinderCommon
 import WorkfinderApplyUseCase
+import WorkfinderUI
 
 protocol EditCoverLetterViewControllerCoordinatorProtocol {
     func chooseValuesForTemplateBlank(name: TemplateBlankName, inTemplate: F4STemplate)

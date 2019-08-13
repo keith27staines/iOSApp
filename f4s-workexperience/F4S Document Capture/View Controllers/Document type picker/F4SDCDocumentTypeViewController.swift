@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WorkfinderUI
 
 class F4SDCDocumentTypeViewController: UIViewController {
     

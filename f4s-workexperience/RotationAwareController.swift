@@ -8,6 +8,7 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 
 class RotationAwareNavigationController: UINavigationController {
     override func viewDidLoad() {

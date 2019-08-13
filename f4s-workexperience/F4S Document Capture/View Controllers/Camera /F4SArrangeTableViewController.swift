@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WorkfinderUI
 
 protocol F4SArrangeTableViewControllerDelegate : class {
     func arranger(_ arranger: F4SArrangeTableViewController, didSelectRowAtIndexPath:IndexPath)

@@ -1,16 +1,9 @@
-//
-//  MessageContainerViewController.swift
-//  f4s-workexperience
-//
-//  Created by Timea Tivadar on 2/13/17.
-//  Copyright © 2017 freshbyte. All rights reserved.
-//
-
-import Foundation
 import UIKit
 import Reachability
 import Analytics
 import WorkfinderCommon
+import WorkfinderServices
+import WorkfinderUI
 
 class MessageContainerViewController: UIViewController {
     

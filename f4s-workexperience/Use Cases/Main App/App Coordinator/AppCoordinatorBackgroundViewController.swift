@@ -8,6 +8,7 @@
 
 import  UIKit
 import WorkfinderCommon
+import WorkfinderUI
 
 class AppCoordinatorBackgroundViewController : UIViewController {
     override func viewDidLoad() {

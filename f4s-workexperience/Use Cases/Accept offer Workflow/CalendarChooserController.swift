@@ -9,6 +9,7 @@
 import UIKit
 import EventKit
 import WorkfinderCommon
+import WorkfinderUI
 
 protocol CalendarChooserControllerDelegate : class {
     func calendarChooserDidCancel(_ calendardChooser: CalendarChooserController)

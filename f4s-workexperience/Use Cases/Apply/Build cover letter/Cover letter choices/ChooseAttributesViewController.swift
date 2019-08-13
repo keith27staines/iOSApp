@@ -2,6 +2,7 @@
 import UIKit
 import WorkfinderCommon
 import WorkfinderApplyUseCase
+import WorkfinderUI
 
 protocol ChooseAttributesViewControllerCoordinatorProtocol : class {
     func chooseAttributesViewControllerDidFinish()

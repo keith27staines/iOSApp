@@ -9,6 +9,8 @@
 import UIKit
 import Reachability
 import WorkfinderCommon
+import WorkfinderServices
+import WorkfinderUI
 
 class TimelineViewController: UIViewController {
     
@@ -214,7 +216,23 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         let placement = self.userPlacements[indexPath.row]
-        if let company = self.companies.filter({ $0.uuid == placement.companyUuid?.dehyphenated }).first {
+        guard let company = self.companies.filter({ $0.uuid == placement.companyUuid?.dehyphenated }).first else { return }
+        guard let workflowState = placement.workflowState else { return }
+        switch workflowState {
+        case .draft:
+            let alert = UIAlertController(title: "This application is incomplete", message: "Resume application?", preferredStyle: UIAlertController.Style.alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel) { (cancelAction) in
+                return
+            }
+            let resumeAction = UIAlertAction(title: "Resume", style: UIAlertAction.Style.default) { [weak self] (resumeAction) in
+                guard let strongSelf = self else { return }
+                strongSelf.coordinator?.showCompanyDetails(parentCtrl: strongSelf, company: company)
+                return
+            }
+            alert.addAction(cancelAction)
+            alert.addAction(resumeAction)
+            present(alert, animated: true, completion: nil)
+        default:
             coordinator?.showMessageController(parentCtrl: self, threadUuid: placement.threadUuid, company: company, placements: self.userPlacements, companies: self.companies)
         }
     }

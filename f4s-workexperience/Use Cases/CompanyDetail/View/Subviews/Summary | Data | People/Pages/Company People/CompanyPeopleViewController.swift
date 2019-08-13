@@ -7,9 +7,9 @@
 //
 
 import UIKit
+import WorkfinderUI
 
 fileprivate let cardAspectRatio: CGFloat = 1.3
-
 
 protocol CompanyPeopleViewControllerDelegate {
     func companyPeopleViewController(_ controller: CompanyPeopleViewController, didSelectPerson: PersonViewData?)

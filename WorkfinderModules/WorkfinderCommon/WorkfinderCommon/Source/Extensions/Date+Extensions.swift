@@ -9,48 +9,36 @@
 import Foundation
 
 public extension Date {
+    /// Returns true if the current instance is greater than the specified date, otherwise false
     func isGreaterThanDate(dateToCompare: Date) -> Bool {
-        // Declare Variables
         var isGreater = false
-        
-        // Compare Values
         if self.compare(dateToCompare as Date) == ComparisonResult.orderedDescending {
             isGreater = true
         }
-        
-        // Return Result
         return isGreater
     }
     
+    /// Returns true if the current instance is less than the specified date, otherwise false
     func isLessThanDate(dateToCompare: Date) -> Bool {
-        // Declare Variables
         var isLess = false
-        
-        // Compare Values
         if self.compare(dateToCompare as Date) == ComparisonResult.orderedAscending {
             isLess = true
         }
-        
-        // Return Result
         return isLess
     }
     
+    /// Returns true of the current instance and the specified date are equal
     func equalToDate(dateToCompare: Date) -> Bool {
-        // Declare Variables
         var isEqualTo = false
-        
-        // Compare Values
         if self.compare(dateToCompare as Date) == ComparisonResult.orderedSame {
             isEqualTo = true
         }
-        
-        // Return Result
         return isEqualTo
     }
 }
 
 extension Date {
-    private struct DateFormatters {
+    struct DateFormatters {
         private static var _rfc3339UtcDateFormatter: DateFormatter?
         private static var _rfc3339UtcDateTimeFormatter: DateFormatter?
         private static var _rfc3339UtcDateTimeSubsecondFormatter: DateFormatter?
@@ -58,7 +46,7 @@ extension Date {
         static var rfc3339UtcDateFormatter: DateFormatter {
             if _rfc3339UtcDateFormatter == .none {
                 _rfc3339UtcDateFormatter = DateFormatter()
-                _rfc3339UtcDateFormatter?.locale = NSLocale(localeIdentifier: "en_GB") as Locale?
+                _rfc3339UtcDateFormatter?.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale?
                 _rfc3339UtcDateFormatter?.dateFormat = "yyyy'-'MM'-'dd"
                 _rfc3339UtcDateFormatter?.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone?
             }

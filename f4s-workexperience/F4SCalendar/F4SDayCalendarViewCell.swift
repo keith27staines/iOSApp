@@ -8,6 +8,7 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 
 extension Skin {
     func calendarCellBackgroundColor(type: F4SCalendarDaySelectionType) -> UIColor {

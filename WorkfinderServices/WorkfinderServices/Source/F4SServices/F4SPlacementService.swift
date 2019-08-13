@@ -8,17 +8,15 @@
 
 import Foundation
 import WorkfinderCommon
-import WorkfinderApplyUseCase
 import WorkfinderNetworking
-
-public protocol F4SPlacementServiceProtocol {
-    func getAllPlacementsForUser(completion: @escaping (_ result: F4SNetworkResult<[F4STimelinePlacement]>) -> ())
-    func ratePlacement(placementUuid: String, rating: Int, completion: @escaping ( F4SNetworkResult<Bool>) -> ())
-}
 
 public class F4SPlacementService : F4SPlacementServiceProtocol {
     
     private var dataTask: F4SNetworkTask?
+    
+    public init() {
+        
+    }
     
     public func getPlacementOffer(uuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4STimelinePlacement>) -> ()) {
         let attempting = "Get placement"

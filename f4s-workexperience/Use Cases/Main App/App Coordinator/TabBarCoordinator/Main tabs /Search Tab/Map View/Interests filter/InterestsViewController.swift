@@ -8,6 +8,7 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 
 protocol InterestsViewControllerDelegate {
     func interestsViewController(_ vc: InterestsViewController, didChangeSelectedInterests: F4SInterestSet)

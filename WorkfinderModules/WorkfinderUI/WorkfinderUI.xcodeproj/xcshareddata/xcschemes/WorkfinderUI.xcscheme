@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FCA91EAA2234065A007ED308"
+               BuildableName = "WorkfinderUITests.xctest"
+               BlueprintName = "WorkfinderUITests"
+               ReferencedContainer = "container:WorkfinderUI.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FCA91EA12234065A007ED308"
+            BuildableName = "WorkfinderUI.framework"
+            BlueprintName = "WorkfinderUI"
+            ReferencedContainer = "container:WorkfinderUI.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>

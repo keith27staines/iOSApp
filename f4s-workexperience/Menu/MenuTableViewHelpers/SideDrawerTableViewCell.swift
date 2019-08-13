@@ -20,6 +20,7 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 
 class SideDrawerLogosTableviewCell: SideDrawerTableViewCell {
     

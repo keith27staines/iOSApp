@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WorkfinderUI
 
 protocol CompanyPageViewControllerDelegate : class, CompanyPeopleViewControllerDelegate {}
 

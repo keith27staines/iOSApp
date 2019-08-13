@@ -7,6 +7,7 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 
 public class MessageViewController: UIViewController {
     

@@ -55,8 +55,14 @@ extension CompanyCoordinator : ApplyCoordinatorDelegate {
                 TabBarCoordinator.sharedInstance!.navigateToTimeline()
             case .search:
                 TabBarCoordinator.sharedInstance!.navigateToMap()
+            case .none:
+                break
             }
         }
+    }
+    func applicationDidCancel() {
+        cleanup()
+        navigationRouter.pop(animated: true)
     }
 }
 
@@ -79,7 +85,8 @@ extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
         startApplyCoordinator(companyViewData: viewData, continueFrom: placement)
     }
     
-    func startApplyCoordinator(companyViewData: CompanyViewData, continueFrom: F4STimelinePlacement?) {
+    func startApplyCoordinator(companyViewData: CompanyViewData,
+                               continueFrom: F4STimelinePlacement?) {
         let applyCoordinator = ApplyCoordinator(
             applyCoordinatorDelegate: self,
             company: company,
