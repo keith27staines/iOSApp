@@ -53,7 +53,7 @@ public struct WEXNetworkError : WEXError {
     }
     
     /// Initialize a generic error with optional retry
-    init(localizedDescription: String, attempting: String, retry: Bool, logError: Bool = true) {
+    init(localizedDescription: String, attempting: String, retry: Bool) {
         self.localizedDescription = localizedDescription
         self.attempting = attempting
         self.retry = retry
