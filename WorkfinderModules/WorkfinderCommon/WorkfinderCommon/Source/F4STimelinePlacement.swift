@@ -1,19 +1,40 @@
 import Foundation
 
+/// Models a placement as used to populate threads and messages
 public struct F4STimelinePlacement : Codable {
+    /// The uuid of the placement
     public var placementUuid: F4SUUID?
+    /// The uuid of the user
     public var userUuid: F4SUUID?
+    /// The uuid of the company
     public var companyUuid: F4SUUID?
+    /// The uuid of the message thread
     public var threadUuid: F4SUUID?
+    /// The state of the application
     public var workflowState: WEXPlacementState?
+    /// The last message on the thread associated with the placement
     public var latestMessage: F4SMessage?
+    /// The uuid of the role being applied for
     public var roleUuid: F4SUUID?
+    /// The availability period
     public var availabilityPeriods: [F4SAvailabilityPeriodJson]?
+    /// The code of the voucher the user added to the placement
     public var voucher: String?
+    /// The total hours of the placement
     public var totalHours: Double?
+    /// The duration describes which days and hours are to be worked
     public var duration: F4SAvailabilityPeriodJson?
+    /// The person responsible for the YP during the placement
     public var personResponsible: F4SPersonJson?
+    /// The location where the work is to be performed
     public var location: F4SLocationJson?
+    
+    /// Initialises a new instance with the specified parameters
+    ///
+    /// - Parameters:
+    ///   - userUuid: uuid of the user
+    ///   - companyUuid: uuid of the company
+    ///   - placementUuid: uuid of the placement
     public init(userUuid: F4SUUID, companyUuid: F4SUUID, placementUuid: F4SUUID) {
         self.userUuid = userUuid
         self.companyUuid = companyUuid

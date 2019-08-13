@@ -11,8 +11,7 @@ import XCTest
 
 class F4STimelinePlacementTests: XCTestCase {
     
-    func testDecodePlacementTimeline() {
-        let p = """
+    let timelinePlacementJson1 = """
         {
             \"uuid\": \"8afc6e14-8edc-42c8-bd30-3862120d194e\",
             \"user_uuid\": \"57198614-48bc-4788-8357-a91fd76798fc\",
@@ -29,11 +28,32 @@ class F4STimelinePlacementTests: XCTestCase {
             }
         }
         """
-        let data = p.data(using: .utf8)!
+
+    
+    func testDecodePlacementTimeline() {
+        let data = makeTimelinePlacementJson().data(using: .utf8)!
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
         let placement = try? decoder.decode(F4STimelinePlacement.self, from: data)
         XCTAssertNotNil(placement)
+    }
+    
+    func test_equatable_when_identical() {
+        let json1 = makeTimelinePlacementJson()
+        let json2 = makeTimelinePlacementJson()
+        let p1 = timelinePlacementFromJson(json1)
+        let p2 = timelinePlacementFromJson(json2)
+        XCTAssertNotNil(p1)
+        XCTAssertEqual(p1, p2)
+    }
+    
+    func test_equatable_when_differing_by_uuid() {
+        let json1 = makeTimelinePlacementJson()
+        let json2 = makeTimelinePlacementJson(with: "xxxx")
+        let p1 = timelinePlacementFromJson(json1)
+        let p2 = timelinePlacementFromJson(json2)
+        XCTAssertNotNil(p1)
+        XCTAssertNotEqual(p1, p2)
     }
     
     func testDecodePlacementWithNoSenderForLastMessage() {
@@ -58,6 +78,35 @@ class F4STimelinePlacementTests: XCTestCase {
         decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
         let placement = try? decoder.decode(F4STimelinePlacement.self, from: data)
         XCTAssertNotNil(placement)
+    }
+    
+    func makeTimelinePlacementJson(
+        with uuid: String = "8afc6e14-8edc-42c8-bd30-3862120d194e") -> String {
+        let p = """
+        {
+            \"uuid\": \"\(uuid)\",
+            \"user_uuid\": \"57198614-48bc-4788-8357-a91fd76798fc\",
+            \"company_uuid\": \"56aa95f8-f348-430a-98b3-dcfd21277c3f\",
+            \"state\": \"applied\",
+            \"thread_uuid\": \"7efa4948-8bb5-407e-98c3-d03210cade05\",
+            \"is_read\": true,
+            \"latest_message\": {
+                \"uuid\": \"bfa2fd79-c066-4d50-a437-b8e8819f3282\",
+                \"datetime\": \"2018-05-23T14:41:35.017946+01:00\",
+                \"datetime_rel\": \"1 month, 2 weeks ago\",
+                \"content\": \"We’ve sent your application! Good luck and well done for applying.\",
+                \"sender\": \"56aa95f8-f348-430a-98b3-dcfd21277c3f\"
+            }
+        }
+        """
+        return p
+    }
+    
+    func timelinePlacementFromJson(_ json: String) -> F4STimelinePlacement? {
+        guard let data = json.data(using: .utf8) else { return nil }
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
+        return try? decoder.decode(F4STimelinePlacement.self, from: data)
     }
 
 }
