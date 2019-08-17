@@ -166,10 +166,6 @@ extension F4SMessage : MessageProtocol {
         return dateTime
     }
     
-    public var readDate: Date? {
-        return nil
-    }
-    
     public var text: String? {
         return content
     }
@@ -180,7 +176,6 @@ public protocol MessageProtocol {
     var senderId: String { get }
     var sentDate: Date? { get }
     var receivedDate: Date? { get }
-    var readDate: Date? { get }
     var isRead: Bool? { get }
     var text: String? { get }
 }
@@ -191,8 +186,6 @@ public extension MessageProtocol {
         if uuid == other.uuid { return true }
         return self.dateToOrderBy == other.dateToOrderBy && self.senderId == other.senderId
     }
-    
-    var isRead: Bool? { return readDate != nil }
     
     var dateToOrderBy: Date {
         return sentDate ?? receivedDate ?? Date.distantFuture

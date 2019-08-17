@@ -24,6 +24,6 @@ class F4SChoiceTests: XCTestCase {
     
     func test_choice_is_date_when_uuid_is_date() {
         let sut = F4SChoice(uuid: "2019-07-20", value: "")
-        XCTAssertFalse(sut.uuidIsDate)
+        XCTAssertTrue(sut.uuidIsDate)
     }
 }

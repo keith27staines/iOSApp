@@ -31,6 +31,30 @@ class F4SCalendarWeekTests: XCTestCase {
         f4sCalendar = F4SCalendar()
     }
     
+    func test_initialise_with_date() {
+        let calendar = F4SCalendar()
+        let date = DateComponents(calendar: Calendar.current, year: 2019, month: 8, day: 16).date!
+        let sut = F4SCalendarWeek(cal: calendar, date: date)
+        XCTAssertTrue(sut.firstDay.dayOfMonth == 12)
+        XCTAssertTrue(sut.lastDay.dayOfMonth == 18)
+    }
+    
+    func test_next() {
+        let calendar = F4SCalendar()
+        let date = DateComponents(calendar: Calendar.current, year: 2019, month: 8, day: 16).date!
+        let sut = F4SCalendarWeek(cal: calendar, date: date)
+        XCTAssertTrue(sut.next.firstDay.dayOfMonth == 19)
+        XCTAssertTrue(sut.next.lastDay.dayOfMonth == 25)
+    }
+    
+    func test_previous() {
+        let calendar = F4SCalendar()
+        let date = DateComponents(calendar: Calendar.current, year: 2019, month: 8, day: 22).date!
+        let sut = F4SCalendarWeek(cal: calendar, date: date)
+        XCTAssertEqual(sut.previous.firstDay.dayOfMonth, 12)
+        XCTAssertEqual(sut.previous.lastDay.dayOfMonth, 18)
+    }
+    
     func testCountDaysInWeek() {
         let day = F4SCalendarDay(cal: f4sCalendar, date: februaryDateLeapYear)
         let week = F4SCalendarWeek(containing: day.nextDay)

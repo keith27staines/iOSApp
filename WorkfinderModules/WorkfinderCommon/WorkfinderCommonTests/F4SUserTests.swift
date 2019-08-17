@@ -217,6 +217,18 @@ class F4SUserTests: XCTestCase {
         sut.updateFrom(updateInfo)
         assertUserInfoEquivalent(info1: updateInfo, info2: sut.extractUserInformation())
     }
+    
+    func test_initialise_with_user_data() {
+        let userData = TestUserData(userUuid: "uuid", email: "email", firstName: "firstName", lastName: "lastName", consenterEmail: "consenter", requiresConsent: true, dateOfBirth: "2000-01-01")
+        let sut = F4SUser(userData: userData, localStore: MockLocalStore())
+        XCTAssertEqual(sut.uuid, "uuid")
+        XCTAssertEqual(sut.email, "email")
+        XCTAssertEqual(sut.firstName, "firstName")
+        XCTAssertEqual(sut.lastName, "lastName")
+        XCTAssertEqual(sut.consenterEmail, "consenter")
+        XCTAssertEqual(sut.requiresConsent, true)
+        XCTAssertEqual(sut.dateOfBirth, DateComponents(calendar: Calendar.current,year: 2000, month: 1, day: 1).date!)
+    }
 }
 
 extension F4SUserTests {
@@ -251,4 +263,21 @@ extension F4SUserTests {
         user.analytics = analytics ?? MockF4SAnalyticsAndDebugging()
         return user
     }
+}
+
+struct TestUserData: UserData {
+    var userUuid: String?
+    
+    var email: String?
+    
+    var firstName: String?
+    
+    var lastName: String?
+    
+    var consenterEmail: String?
+    
+    var requiresConsent: Bool
+    
+    var dateOfBirth: String?
+    
 }

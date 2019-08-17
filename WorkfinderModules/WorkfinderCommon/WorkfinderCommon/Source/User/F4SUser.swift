@@ -262,9 +262,8 @@ public class F4SUser : F4SUserProtocol, Codable {
     /// with old versions of the app that stored all user data in CoreData rather than
     /// a LocalStore
     /// - Parameter userData: a CoreData user record
-    public init(userData: UserData) {
-        let localStore = LocalStore()
-        uuid = localStore.value(key: LocalStore.Key.userUuid) as! F4SUUID?
+    public init(userData: UserData, localStore: LocalStorageProtocol = LocalStore()) {
+        uuid = (localStore.value(key: LocalStore.Key.userUuid) as? F4SUUID) ?? userData.userUuid
         if let partnerUuid = localStore.value(key: LocalStore.Key.partnerID) as? F4SUUID {
             self.partners = [F4SUUIDDictionary(uuid: partnerUuid)]
         }
@@ -273,6 +272,7 @@ public class F4SUser : F4SUserProtocol, Codable {
         lastName = userData.lastName?.isEmpty == false ? userData.lastName : nil
         consenterEmail = userData.consenterEmail
         parentEmail = userData.consenterEmail
+        requiresConsent = userData.requiresConsent
         if let dateOfBirth = userData.dateOfBirth {
             self.dateOfBirth =  Date.dateFromRfc3339(string: dateOfBirth)
         }

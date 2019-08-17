@@ -69,9 +69,132 @@ class F4SCalendarTests: XCTestCase {
         let monthNumber = f4sCalendar.monthNumber(date: lastDay )
         XCTAssertEqual(monthNumber, 3)
     }
+    
+    func test_tap_state_no_taps_yet() {
+        let sut = F4SCalendar()
+        switch sut.tap {
+        case F4SCalendar.Tap.select: break
+        default:
+            XCTFail("Incorrect state")
+        }
+    }
+    
+    func test_first_tap_is_in_past() {
+        let firstTapDate = DateComponents(calendar: Calendar.current, year: 2019, month: 8, day: 10).date!
+        let sut = F4SCalendar()
+        let day1 = F4SCalendarDay(cal: sut, date: firstTapDate)
+        sut.threeTapWaltz(day: day1)
+        switch sut.tap {
+        case F4SCalendar.Tap.select: break
+        default:
+            XCTFail("Incorrect state")
+        }
+    }
+    
+    func test_first_tap_is_in_future() {
+        let firstTapDate = DateComponents(calendar: Calendar.current, year: 2119, month: 8, day: 10).date!
+        let sut = F4SCalendar()
+        let day1 = F4SCalendarDay(cal: sut, date: firstTapDate)
+        sut.threeTapWaltz(day: day1)
+        switch sut.tap {
+        case F4SCalendar.Tap.extend(let day):
+            XCTAssertEqual(day, day1)
+        default:
+            XCTFail("Incorrect state")
+        }
+    }
+    
+    func test_second_tap_is_in_the_past() {
+        let now = Date()
+        let futureDate = now.addingTimeInterval(48*3600)
+        let pastDate = now.addingTimeInterval(-48*3600)
+        let sut = F4SCalendar()
+        let day1 = F4SCalendarDay(cal: sut, date: futureDate)
+        let day2 = F4SCalendarDay(cal: sut, date: pastDate)
+        sut.threeTapWaltz(day: day1)
+        sut.threeTapWaltz(day: day2) // should ignore the second tap because it is in the past
+        switch sut.tap {
+        case F4SCalendar.Tap.extend(let day):
+            XCTAssertEqual(day, day1)
+        default:
+            XCTFail("Incorrect state")
+        }
+    }
+    
+    func test_second_tap_is_in_the_future_after_first_tap() {
+        let now = Date()
+        let futureDate = now.addingTimeInterval(48*3600)
+        let furtherFutureDate = now.addingTimeInterval(64*3600)
+        let sut = F4SCalendar()
+        let day1 = F4SCalendarDay(cal: sut, date: futureDate)
+        let day2 = F4SCalendarDay(cal: sut, date: furtherFutureDate)
+        sut.threeTapWaltz(day: day1)
+        sut.threeTapWaltz(day: day2)
+        switch sut.tap {
+        case F4SCalendar.Tap.clear:
+            XCTAssertEqual(sut.firstDay, day1)
+            XCTAssertEqual(sut.lastDay, day2)
+        default:
+            XCTFail("Incorrect state")
+        }
+    }
+    
+    func test_third_tap() {
+        let now = Date()
+        let futureDate = now.addingTimeInterval(48*3600)
+        let furtherFutureDate = now.addingTimeInterval(64*3600)
+        let sut = F4SCalendar()
+        let day1 = F4SCalendarDay(cal: sut, date: futureDate)
+        let day2 = F4SCalendarDay(cal: sut, date: furtherFutureDate)
+        sut.threeTapWaltz(day: day1)
+        sut.threeTapWaltz(day: day2)
+        sut.threeTapWaltz(day: day2)
+        switch sut.tap {
+        case F4SCalendar.Tap.select:
+            XCTAssertNil(sut.firstDay)
+            XCTAssertNil(sut.lastDay)
+        default:
+            XCTFail("Incorrect state")
+        }
+    }
+    
+    func test_second_tap_is_same_as_first_tap() {
+        let now = Date()
+        let futureDate = now.addingTimeInterval(48*3600)
+        let sut = F4SCalendar()
+        let day1 = F4SCalendarDay(cal: sut, date: futureDate)
+        sut.threeTapWaltz(day: day1)
+        sut.threeTapWaltz(day: day1)
+        switch sut.tap {
+        case F4SCalendar.Tap.select:
+            XCTAssertNil(sut.firstDay)
+            XCTAssertNil(sut.lastDay)
+        default:
+            XCTFail("Incorrect state")
+        }
+    }
+    
+    func test_setSelection() {
+        let now = Date()
+        let futureDate = now.addingTimeInterval(48*3600)
+        let furtherFutureDate = now.addingTimeInterval(64*3600)
+        let sut = F4SCalendar()
+        let day1 = F4SCalendarDay(cal: sut, date: futureDate)
+        let day2 = F4SCalendarDay(cal: sut, date: furtherFutureDate)
+        sut.setSelection(firstDay: day1, lastDay: day2)
+        XCTAssertEqual(sut.firstDay, day1)
+        XCTAssertEqual(sut.lastDay, day2)
+    }
+    
+    func test_toggleSelection() {
+        let now = Date()
+        let futureDate = now.addingTimeInterval(48*3600)
+        let sut = F4SCalendar()
+        let day = F4SCalendarDay(cal: sut, date: futureDate)
+        sut.toggleSelection(day: day)
+        XCTAssertTrue((sut.selectionStates[day.midday] == F4SExtendibleSelectionState.terminal.rawValue))
+    }
 }
-
-
 
 
 

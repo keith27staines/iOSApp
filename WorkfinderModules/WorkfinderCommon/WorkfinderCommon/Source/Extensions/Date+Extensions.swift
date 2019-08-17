@@ -100,11 +100,13 @@ extension Date {
      - returns: Date if the string could be successfully parsed, nil otherwise.
      */
     public static func dateFromRfc3339(string: String) -> Date? {
+        if let date = DateFormatters.rfc3339UtcDateFormatter.date(from: string) {
+            return date
+        }
         if let date = DateFormatters.rfc3339UtcDateTimeFormatter.date(from: string) {
             return date
-        } else {
-            return DateFormatters.rfc3339UtcDateTimeSubsecondFormatter.date(from: string)
         }
+        return DateFormatters.rfc3339UtcDateTimeSubsecondFormatter.date(from: string)
     }
     
     public func dateToStringRfc3339() -> String? {

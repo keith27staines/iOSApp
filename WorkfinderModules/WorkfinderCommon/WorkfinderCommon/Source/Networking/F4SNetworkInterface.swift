@@ -58,13 +58,13 @@ public enum F4SNetworkDataErrorType {
             code = -1400
             userInfo["Type"] = "Generic error with retry"
             let description = NSLocalizedString("Unknown error", comment: "")
-            return F4SNetworkError(localizedDescription: description, attempting: attempting, retry: true)
+            return F4SNetworkError(localizedDescription: description, attempting: attempting, retry: true, code: code)
         case .badUrl(let badUrlString):
             code = -1500
             userInfo["Type"] =  "Malformed url"
             userInfo["bad url string"] = badUrlString
             let description = NSLocalizedString("The requested url is invalid", comment: "")
-            return F4SNetworkError(localizedDescription: description, attempting: attempting, retry: false)
+            return F4SNetworkError(localizedDescription: description, attempting: attempting, retry: false, code: code)
         }
         nsError = NSError(domain: F4SNetworkErrorDomainType.client.rawValue, code: code, userInfo: userInfo)
         return F4SNetworkError(error: nsError, attempting: attempting)
@@ -120,8 +120,9 @@ public struct F4SNetworkError : Error {
     }
     
     /// Initialize a generic error with optional retry 
-    public init(localizedDescription: String, attempting: String, retry: Bool, logError: Bool = true) {
-        let nsError = NSError(domain: "com.f4s", code: 0, userInfo: nil)
+    public init(localizedDescription: String, attempting: String, retry: Bool, logError: Bool = true, code: Int = 0) {
+        let userInfo = [NSLocalizedDescriptionKey: localizedDescription]
+        let nsError = NSError(domain: "com.f4s", code: code, userInfo: userInfo)
         self.init(error: nsError, attempting: attempting)
         self.retry = retry
     }
