@@ -136,6 +136,8 @@ public struct F4SNetworkError : Error {
         switch response.statusCode {
         case 200...299:
             return nil // These are success codes
+        case 400:
+            userInfo[NSLocalizedFailureReasonErrorKey] = "Bad request"
         case 401:
             userInfo[NSLocalizedFailureReasonErrorKey] = "The user's credentials were not provided or are incorrect"
         case 403:
@@ -147,6 +149,9 @@ public struct F4SNetworkError : Error {
             retry = true
         case 500:
             userInfo[NSLocalizedFailureReasonErrorKey] = "The request was badly formed (some parameters were incorrect or missing)"
+        case 503:
+            userInfo[NSLocalizedFailureReasonErrorKey] = "The server is unavailable"
+            retry = true
         default:
             userInfo[NSLocalizedFailureReasonErrorKey] = "Unknown reason"
         }

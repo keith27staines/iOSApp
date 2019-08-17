@@ -312,6 +312,7 @@
 		FCA91E782234043D007ED308 /* WorkfinderCommonTests */ = {
 			isa = PBXGroup;
 			children = (
+				FCE5194D2249645A00B550C9 /* F4SCalendarTests.swift */,
 				FC177FCE230703170068C2F7 /* F4SNetworkErrorTests.swift */,
 				FC177FCC2306A4010068C2F7 /* F4SHoursTypeTests.swift */,
 				FC73902323031C59003A9253 /* WEXNetworkErrorTests.swift */,
@@ -340,7 +341,6 @@
 				FCA91E792234043D007ED308 /* WorkfinderCommonTests.swift */,
 				FCE5194E2249645B00B550C9 /* F4SJsonDecodingTests.swift */,
 				FCE5194C2249645A00B550C9 /* F4SCalendarWeekTests.swift */,
-				FCE5194D2249645A00B550C9 /* F4SCalendarTests.swift */,
 				FCE5194F2249645B00B550C9 /* F4SCalendarDayTests.swift */,
 				FC12B0FE22F33ECE00C33410 /* F4STimelinePlacementTests.swift */,
 				FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */,
