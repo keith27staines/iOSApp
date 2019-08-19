@@ -75,3 +75,26 @@ class WEXNetworkErrorTests: XCTestCase {
 
 }
 
+class WEXNetworkErrorsFactoryTests : XCTestCase {
+    func test_networkErrorFrom_response() {
+        let url = URL(string: "/url")!
+        let response = HTTPURLResponse(url: url, statusCode: 400, httpVersion: "http1", headerFields: nil)!
+        let data = "error data".data(using: .utf8)!
+        let error = WEXErrorsFactory.networkErrorFrom(response: response, responseData: data, attempting: "something")
+        XCTAssertEqual(error?.httpStatusCode, 400)
+    }
+    
+    func test_networkErrorFrom_error() {
+        let error = NSError(domain: "domain", code: 700, userInfo: nil)
+        XCTAssertEqual(WEXErrorsFactory.networkErrorFrom(error: error, attempting: "something").code, 700)
+    }
+    
+    func test_networkErrorFromInvalidUrlString() {
+        let _ = WEXErrorsFactory.networkErrorFromInvalidUrlString("bad url", attempting: "something")
+    }
+    
+    func test_networkNoDataReturnedError() {
+        let _ = WEXErrorsFactory.networkNoDataReturnedError(attempting: "something")
+    }
+    
+}
