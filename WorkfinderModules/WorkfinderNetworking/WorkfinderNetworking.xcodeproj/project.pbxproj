@@ -27,7 +27,6 @@
 		FCC2EC1622E85820009E8988 /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC2EC1522E85820009E8988 /* LoggerTests.swift */; };
 		FCC2EC1822E89B88009E8988 /* WEXHttpRequestVerb.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC2EC1722E89B88009E8988 /* WEXHttpRequestVerb.swift */; };
 		FCC2EC1A22E89BD7009E8988 /* WEXHttpRequestVerbTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC2EC1922E89BD7009E8988 /* WEXHttpRequestVerbTests.swift */; };
-		FCC2EC1C22E8A0B1009E8988 /* F4SDataTaskServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC2EC1B22E8A0B1009E8988 /* F4SDataTaskServiceTests.swift */; };
 		FCD8AEB122BC9F0E00C52E74 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD8AEB022BC9F0E00C52E74 /* Logger.swift */; };
 /* End PBXBuildFile section */
 
@@ -79,7 +78,6 @@
 		FCC2EC1522E85820009E8988 /* LoggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerTests.swift; sourceTree = "<group>"; };
 		FCC2EC1722E89B88009E8988 /* WEXHttpRequestVerb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEXHttpRequestVerb.swift; sourceTree = "<group>"; };
 		FCC2EC1922E89BD7009E8988 /* WEXHttpRequestVerbTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEXHttpRequestVerbTests.swift; sourceTree = "<group>"; };
-		FCC2EC1B22E8A0B1009E8988 /* F4SDataTaskServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDataTaskServiceTests.swift; sourceTree = "<group>"; };
 		FCD8AEB022BC9F0E00C52E74 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -152,7 +150,6 @@
 		FCA91E3F2233FF20007ED308 /* WorkfinderNetworkingTests */ = {
 			isa = PBXGroup;
 			children = (
-				FCC2EC1B22E8A0B1009E8988 /* F4SDataTaskServiceTests.swift */,
 				FCC2EC1522E85820009E8988 /* LoggerTests.swift */,
 				FC2768E122DF09C700B9E369 /* NetworkConfigTests.swift */,
 				FC2AC5EA2235281A00FF4E47 /* WorkfinderSessionManagerTests.swift */,
@@ -344,7 +341,6 @@
 				FC2AC5EB2235281A00FF4E47 /* WorkfinderSessionManagerTests.swift in Sources */,
 				FC2AC5F12235516A00FF4E47 /* Helpers.swift in Sources */,
 				FC2768E822DF595600B9E369 /* F4SHttpRequestVerbTests.swift in Sources */,
-				FCC2EC1C22E8A0B1009E8988 /* F4SDataTaskServiceTests.swift in Sources */,
 				FC2768E422DF252000B9E369 /* F4SNetworkSessionManagerTests.swift in Sources */,
 				FCA91E412233FF20007ED308 /* WorkfinderNetworkingTests.swift in Sources */,
 				FCC2EC1622E85820009E8988 /* LoggerTests.swift in Sources */,

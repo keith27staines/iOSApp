@@ -8,6 +8,7 @@
 
 import WorkfinderCommon
 import WorkfinderNetworking
+import WorkfinderServices
 
 public protocol F4SPartnerServiceProtocol {
     var apiName: String { get }

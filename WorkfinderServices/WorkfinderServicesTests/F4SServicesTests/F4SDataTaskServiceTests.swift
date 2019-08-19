@@ -1,6 +1,7 @@
 import XCTest
 import WorkfinderCommon
-@testable import WorkfinderNetworking
+import WorkfinderNetworking
+@testable import WorkfinderServices
 
 class F4SDataTaskServiceTests: XCTestCase {
 
@@ -346,3 +347,5 @@ class MockTask : F4SNetworkTask {
         self.completion = completion
     }
 }
+
+extension String : Error {}

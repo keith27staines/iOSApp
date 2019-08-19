@@ -12,19 +12,21 @@ import WorkfinderNetworking
 
 public class F4SPlacementService : F4SPlacementServiceProtocol {
     
-    private var dataTask: F4SNetworkTask?
+    var dataTask: F4SNetworkTask?
+    var sessionManager: F4SNetworkSessionManagerProtocol
     
-    public init() {
-        
+    public init(sessionManager: F4SNetworkSessionManagerProtocol = F4SNetworkSessionManager.shared) {
+        self.sessionManager = sessionManager
     }
     
     public func getPlacementOffer(uuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4STimelinePlacement>) -> ()) {
         let attempting = "Get placement"
         var url = URL(string: WorkfinderEndpoint.offerUrl)!
         url.appendPathComponent(uuid)
-        let session = F4SNetworkSessionManager.shared.interactiveSession
+        let session = sessionManager.interactiveSession
         let urlRequest = F4SDataTaskService.urlRequest(verb: .get, url: url, dataToSend: nil)
         dataTask?.cancel()
+        
         dataTask = F4SDataTaskService.networkTask(with: urlRequest, session: session, attempting: attempting) { (result) in
             switch result {
             case .error(let error):

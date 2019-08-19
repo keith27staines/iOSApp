@@ -21,6 +21,9 @@
 		FC02DA2B22EC898C003C8148 /* WEXDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02DA2A22EC898C003C8148 /* WEXDataTask.swift */; };
 		FC12B0FB22F3280000C33410 /* F4SPlacementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B0FA22F3280000C33410 /* F4SPlacementService.swift */; };
 		FC85D9EC22F1E02D0035C724 /* F4SVoucherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85D9EB22F1E02D0035C724 /* F4SVoucherService.swift */; };
+		FC928362230A865E00E1FB75 /* F4SPlacementServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC928361230A865E00E1FB75 /* F4SPlacementServiceTests.swift */; };
+		FC928368230A94D100E1FB75 /* F4SDataTaskServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC928365230A94D100E1FB75 /* F4SDataTaskServiceTests.swift */; };
+		FC92836B230A982600E1FB75 /* F4SDataTaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC928369230A956700E1FB75 /* F4SDataTaskService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,9 @@
 		FC02DA2A22EC898C003C8148 /* WEXDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEXDataTask.swift; sourceTree = "<group>"; };
 		FC12B0FA22F3280000C33410 /* F4SPlacementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementService.swift; sourceTree = "<group>"; };
 		FC85D9EB22F1E02D0035C724 /* F4SVoucherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SVoucherService.swift; sourceTree = "<group>"; };
+		FC928361230A865E00E1FB75 /* F4SPlacementServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementServiceTests.swift; sourceTree = "<group>"; };
+		FC928365230A94D100E1FB75 /* F4SDataTaskServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDataTaskServiceTests.swift; sourceTree = "<group>"; };
+		FC928369230A956700E1FB75 /* F4SDataTaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDataTaskService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,8 +112,8 @@
 		FC02D9F522EC70FD003C8148 /* WorkfinderServicesTests */ = {
 			isa = PBXGroup;
 			children = (
-				FC02DA1E22EC7457003C8148 /* MockWEXPlacementServiceTests.swift */,
-				FC02DA2022EC7850003C8148 /* WEXPlacementServiceTests.swift */,
+				FC928363230A867000E1FB75 /* F4SServicesTests */,
+				FC928364230A868600E1FB75 /* WEXServicesTests */,
 				FC02D9F822EC70FD003C8148 /* Info.plist */,
 			);
 			path = WorkfinderServicesTests;
@@ -149,8 +155,27 @@
 				FC12B0FA22F3280000C33410 /* F4SPlacementService.swift */,
 				FC85D9EB22F1E02D0035C724 /* F4SVoucherService.swift */,
 				FC02DA0622EC717A003C8148 /* F4SUserServiceProtocol.swift */,
+				FC928369230A956700E1FB75 /* F4SDataTaskService.swift */,
 			);
 			path = F4SServices;
+			sourceTree = "<group>";
+		};
+		FC928363230A867000E1FB75 /* F4SServicesTests */ = {
+			isa = PBXGroup;
+			children = (
+				FC928365230A94D100E1FB75 /* F4SDataTaskServiceTests.swift */,
+				FC928361230A865E00E1FB75 /* F4SPlacementServiceTests.swift */,
+			);
+			path = F4SServicesTests;
+			sourceTree = "<group>";
+		};
+		FC928364230A868600E1FB75 /* WEXServicesTests */ = {
+			isa = PBXGroup;
+			children = (
+				FC02DA1E22EC7457003C8148 /* MockWEXPlacementServiceTests.swift */,
+				FC02DA2022EC7850003C8148 /* WEXPlacementServiceTests.swift */,
+			);
+			path = WEXServicesTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +289,7 @@
 				FC02DA0922EC717B003C8148 /* F4SUserServiceProtocol.swift in Sources */,
 				FC02DA0B22EC717B003C8148 /* EmailVerificationService.swift in Sources */,
 				FC02DA2522EC7FCE003C8148 /* WorkfinderServices.swift in Sources */,
+				FC92836B230A982600E1FB75 /* F4SDataTaskService.swift in Sources */,
 				FC12B0FB22F3280000C33410 /* F4SPlacementService.swift in Sources */,
 				FC85D9EC22F1E02D0035C724 /* F4SVoucherService.swift in Sources */,
 				FC02DA2B22EC898C003C8148 /* WEXDataTask.swift in Sources */,
@@ -276,7 +302,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC928362230A865E00E1FB75 /* F4SPlacementServiceTests.swift in Sources */,
 				FC02DA2122EC7851003C8148 /* WEXPlacementServiceTests.swift in Sources */,
+				FC928368230A94D100E1FB75 /* F4SDataTaskServiceTests.swift in Sources */,
 				FC02DA1F22EC7457003C8148 /* MockWEXPlacementServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

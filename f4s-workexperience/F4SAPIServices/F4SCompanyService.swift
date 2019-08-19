@@ -9,6 +9,7 @@
 import UIKit
 import WorkfinderCommon
 import WorkfinderNetworking
+import WorkfinderServices
 
 public struct F4SCompanyJson : Codable {
     var linkedInUrlString: String?

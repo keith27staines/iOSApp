@@ -9,6 +9,7 @@
 import Foundation
 import WorkfinderCommon
 import WorkfinderNetworking
+import WorkfinderServices
 
 // MARK:- F4SMessageService
 public protocol F4SMessageServiceProtocol {

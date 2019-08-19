@@ -9,6 +9,7 @@
 import Foundation
 import WorkfinderCommon
 import WorkfinderNetworking
+import WorkfinderServices
 
 public protocol F4SRecommendationServiceProtocol : class {
     func fetch(completion: @escaping (F4SNetworkResult<[Recommendation]>) -> ())

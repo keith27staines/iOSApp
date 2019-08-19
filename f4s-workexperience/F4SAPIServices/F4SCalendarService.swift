@@ -10,6 +10,7 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderApplyUseCase
 import WorkfinderNetworking
+import WorkfinderServices
 
 public protocol F4SPCalendarServiceProtocol {
 

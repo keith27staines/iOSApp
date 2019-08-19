@@ -9,6 +9,7 @@
 import Foundation
 import WorkfinderCommon
 import WorkfinderNetworking
+import WorkfinderServices
 
 public struct F4SUserStatus : Codable {
     var unreadMessageCount: Int

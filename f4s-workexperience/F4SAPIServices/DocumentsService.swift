@@ -9,6 +9,7 @@
 import Foundation
 import WorkfinderCommon
 import WorkfinderNetworking
+import WorkfinderServices
 
 public protocol F4SUserDocumentsServiceProtocol {
     func getDocuments(completion: @escaping (F4SNetworkResult<F4SGetDocumentJson>) -> ())

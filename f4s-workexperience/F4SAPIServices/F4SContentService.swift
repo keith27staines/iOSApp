@@ -9,6 +9,7 @@
 import Foundation
 import WorkfinderCommon
 import WorkfinderNetworking
+import WorkfinderServices
 
 public protocol F4SContentServiceProtocol {
     var apiName: String { get }
