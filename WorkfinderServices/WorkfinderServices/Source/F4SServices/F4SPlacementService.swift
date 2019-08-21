@@ -14,20 +14,22 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
     
     var dataTask: F4SNetworkTask?
     var sessionManager: F4SNetworkSessionManagerProtocol
+    var networkTaskFactory: F4SNetworkTaskFactoryProtocol
     
     public init(sessionManager: F4SNetworkSessionManagerProtocol = F4SNetworkSessionManager.shared) {
+        let repo = F4SUserRepository(localStore: LocalStore())
+        self.networkTaskFactory = F4SNetworkTaskFactory(userUuid: repo.load().uuid)
         self.sessionManager = sessionManager
     }
     
     public func getPlacementOffer(uuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4STimelinePlacement>) -> ()) {
         let attempting = "Get placement"
+        let verb = F4SHttpRequestVerb.get
         var url = URL(string: WorkfinderEndpoint.offerUrl)!
         url.appendPathComponent(uuid)
         let session = sessionManager.interactiveSession
-        let urlRequest = F4SDataTaskService.urlRequest(verb: .get, url: url, dataToSend: nil)
         dataTask?.cancel()
-        
-        dataTask = F4SDataTaskService.networkTask(with: urlRequest, session: session, attempting: attempting) { (result) in
+        dataTask = networkTaskFactory.networkTask(verb: verb, url: url, dataToSend: nil, attempting: attempting, session: session) { (result) in
             switch result {
             case .error(let error):
                 completion(F4SNetworkResult.error(error))
@@ -42,11 +44,11 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
     
     public func getAllPlacementsForUser(completion: @escaping (F4SNetworkResult<[F4STimelinePlacement]>) -> ()) {
         let attempting = "Get all placements"
+        let verb = F4SHttpRequestVerb.get
         let url = URL(string: WorkfinderEndpoint.allPlacementsUrl)!
         let session = F4SNetworkSessionManager.shared.interactiveSession
-        let urlRequest = F4SDataTaskService.urlRequest(verb: .get, url: url, dataToSend: nil)
         dataTask?.cancel()
-        dataTask = F4SDataTaskService.networkTask(with: urlRequest, session: session, attempting: attempting) { (result) in
+        dataTask = networkTaskFactory.networkTask(verb: verb, url: url, dataToSend: nil, attempting: attempting, session: session) { (result) in
             switch result {
             case .error(let error):
                 completion(F4SNetworkResult.error(error))
