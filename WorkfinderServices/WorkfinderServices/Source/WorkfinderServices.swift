@@ -13,7 +13,7 @@ import WorkfinderNetworking
 var logger: NetworkCallLogger? { return WorkfinderNetworking.networkCallLogger }
 
 public protocol F4SPlacementServiceProtocol : F4SGetAllPlacementsServiceProtocol {
-    func ratePlacement(placementUuid: String, rating: Int, completion: @escaping ( F4SNetworkResult<Bool>) -> ())
+    func ratePlacement(placementUuid: String, rating: Int, completion: @escaping ( F4SNetworkResult<Bool>) -> ()) throws
 }
 
 public protocol F4SGetAllPlacementsServiceProtocol {

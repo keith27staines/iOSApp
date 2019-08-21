@@ -129,7 +129,7 @@ extension RatePlacementViewController {
 
         sharedUserMessageHandler.showLoadingOverlay(self.view)
         let rating = self.ratingControlStackView.rating
-        placementService.ratePlacement(placementUuid: placementUuid, rating: rating) { [weak self] (result) in
+        try! placementService.ratePlacement(placementUuid: placementUuid, rating: rating) { [weak self] (result) in
             guard let strongSelf = self else { return }
             switch result {
             case .error(let error):

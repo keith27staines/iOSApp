@@ -52,6 +52,7 @@
 		FC83EC7F22FC0C55009D7A0B /* F4SJsonValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83EC7E22FC0C55009D7A0B /* F4SJsonValueTests.swift */; };
 		FC83EC8122FC0EDB009D7A0B /* F4SUserRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83EC8022FC0EDB009D7A0B /* F4SUserRepositoryTests.swift */; };
 		FC83EC8322FC1CBA009D7A0B /* CompanyViewDataProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83EC8222FC1CBA009D7A0B /* CompanyViewDataProtocolTests.swift */; };
+		FC94E53D230DB3200091E625 /* F4SError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC94E53C230DB3200091E625 /* F4SError.swift */; };
 		FC96709A2258C81000318F69 /* F4SPlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9670992258C81000318F69 /* F4SPlacement.swift */; };
 		FC96709C2258C8B100318F69 /* F4SInterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96709B2258C8B100318F69 /* F4SInterest.swift */; };
 		FC9670A4225A195B00318F69 /* F4SPlacementRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9670A3225A195B00318F69 /* F4SPlacementRepositoryProtocol.swift */; };
@@ -150,6 +151,7 @@
 		FC83EC7E22FC0C55009D7A0B /* F4SJsonValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SJsonValueTests.swift; sourceTree = "<group>"; };
 		FC83EC8022FC0EDB009D7A0B /* F4SUserRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserRepositoryTests.swift; sourceTree = "<group>"; };
 		FC83EC8222FC1CBA009D7A0B /* CompanyViewDataProtocolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyViewDataProtocolTests.swift; sourceTree = "<group>"; };
+		FC94E53C230DB3200091E625 /* F4SError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SError.swift; sourceTree = "<group>"; };
 		FC9670992258C81000318F69 /* F4SPlacement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacement.swift; sourceTree = "<group>"; };
 		FC96709B2258C8B100318F69 /* F4SInterest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInterest.swift; sourceTree = "<group>"; };
 		FC9670A3225A195B00318F69 /* F4SPlacementRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementRepositoryProtocol.swift; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 				FCB24A5E22E44AB100077DFF /* WorkfinderCommonStructs.swift */,
 				FC1F591522FD6D42007164BA /* F4SPushToken.swift */,
 				FC1F592122FDCD9D007164BA /* F4SCalendarDay.swift */,
+				FC94E53C230DB3200091E625 /* F4SError.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -604,6 +607,7 @@
 				FCA91E88223404AF007ED308 /* WorkfinderCommon.swift in Sources */,
 				FCE51939224948E400B550C9 /* WorkAvailabilityWindow.swift in Sources */,
 				FC22DC0422F999FD0068C61C /* F4SChoice.swift in Sources */,
+				FC94E53D230DB3200091E625 /* F4SError.swift in Sources */,
 				FC96709C2258C8B100318F69 /* F4SInterest.swift in Sources */,
 				FC5019652306A24500A26B53 /* F4SDayOfWeek.swift in Sources */,
 				FCE5192C2249482A00B550C9 /* F4SCalendarWeek.swift in Sources */,

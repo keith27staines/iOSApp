@@ -348,4 +348,4 @@ class MockTask : F4SNetworkTask {
     }
 }
 
-extension String : Error {}
+//extension String : Error {}

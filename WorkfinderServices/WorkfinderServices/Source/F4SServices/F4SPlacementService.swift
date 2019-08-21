@@ -46,7 +46,7 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
         let attempting = "Get all placements"
         let verb = F4SHttpRequestVerb.get
         let url = URL(string: WorkfinderEndpoint.allPlacementsUrl)!
-        let session = F4SNetworkSessionManager.shared.interactiveSession
+        let session = sessionManager.interactiveSession
         dataTask?.cancel()
         dataTask = networkTaskFactory.networkTask(verb: verb, url: url, dataToSend: nil, attempting: attempting, session: session) { (result) in
             switch result {
@@ -60,9 +60,9 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
         }
         dataTask?.resume()
     }
-    
-    public func ratePlacement(placementUuid: String, rating: Int, completion: @escaping (F4SNetworkResult<Bool>) -> ()) {
-        assertionFailure("Rate placement not implemented yet")
+
+    public func ratePlacement(placementUuid: String, rating: Int, completion: @escaping (F4SNetworkResult<Bool>) -> ()) throws {
+        throw F4SError.notImplementedYet("F4SPlacementService.ratePlacement")
     }
     
     public func confirmPlacement(placement: F4STimelinePlacement, voucherCode: String, completion: @escaping (F4SNetworkResult<Bool>) -> ()) {
@@ -97,12 +97,12 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
         do {
             let urlString = WorkfinderEndpoint.patchPlacementUrl + "/\(uuid)"
             let url = URL(string: urlString)!
-            let session = F4SNetworkSessionManager.shared.interactiveSession
+            let session = sessionManager.interactiveSession
             let encoder = JSONEncoder()
             encoder.outputFormatting = .prettyPrinted
             let data = try encoder.encode(json)
-            let urlRequest = F4SDataTaskService.urlRequest(verb: .patch, url: url, dataToSend: data)
-            let dataTask = F4SDataTaskService.networkTask(with: urlRequest, session: session, attempting: attempting) { result in
+            dataTask?.cancel()
+            dataTask = networkTaskFactory.networkTask(verb: .patch, url: url, dataToSend: data, attempting: attempting, session: session) { result in
                 switch result {
                 case .error(let error):
                     completion(F4SNetworkResult.error(error))
@@ -110,7 +110,7 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
                     completion(F4SNetworkResult.success(true))
                 }
             }
-            dataTask.resume()
+            dataTask?.resume()
         } catch {
             let serializationError = F4SNetworkDataErrorType.serialization(json).error(attempting: attempting)
             completion(F4SNetworkResult.error(serializationError))
