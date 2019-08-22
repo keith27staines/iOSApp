@@ -49,5 +49,26 @@ class F4SCalendarServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
     
+    func test_patchAvailability_with_success_result() {
+        let placementUuid = "placementUuid"
+        let sut = F4SPCalendarService(placementUuid: placementUuid)
+        let period = F4SAvailabilityPeriodJson(start_date: "2019-08-22", end_date: "2019-08-30", day_time_info: nil)
+        let periods = F4SAvailabilityPeriodsJson(availability_periods: [period])
+        let patch = [period]
+        let requiredResult = F4SNetworkResult.success(patch)
+        sut.networkTaskfactory = MockF4SNetworkTaskFactory(requiredSuccessResult: requiredResult)
+        let expectation = XCTestExpectation(description: "")
+        sut.patchAvailabilityForPlacement(availabilityPeriods: periods) { (result) in
+            switch result {
+            case .error(_):
+                XCTFail("The test was designed to return a success result")
+            case .success(_):
+                break
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+    }
+    
 }
 
