@@ -230,7 +230,6 @@
 		FCA53B971FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */; };
 		FCA6C8252107163B00A222FE /* F4SConfirmUseVoucherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6C8242107163B00A222FE /* F4SConfirmUseVoucherView.swift */; };
 		FCA6C829210760E000A222FE /* F4SHoorayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6C828210760E000A222FE /* F4SHoorayViewController.swift */; };
-		FCA6D2B61FA88CE10037962B /* F4SPartnerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6D2B51FA88CE00037962B /* F4SPartnerService.swift */; };
 		FCA90A88221D2D4500EACD8D /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA90A87221D2D4500EACD8D /* UserDefaultKeys.swift */; };
 		FCA91E5D22340161007ED308 /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91E5C22340161007ED308 /* WorkfinderNetworking.framework */; };
 		FCA91E5E22340161007ED308 /* WorkfinderNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91E5C22340161007ED308 /* WorkfinderNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -666,7 +665,6 @@
 		FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = F4SForceAppUpdateViewController.xib; sourceTree = "<group>"; };
 		FCA6C8242107163B00A222FE /* F4SConfirmUseVoucherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SConfirmUseVoucherView.swift; sourceTree = "<group>"; };
 		FCA6C828210760E000A222FE /* F4SHoorayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SHoorayViewController.swift; sourceTree = "<group>"; };
-		FCA6D2B51FA88CE00037962B /* F4SPartnerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPartnerService.swift; sourceTree = "<group>"; };
 		FCA90A87221D2D4500EACD8D /* UserDefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
 		FCA90A8C221D696400EACD8D /* MockNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNavigationRouter.swift; sourceTree = "<group>"; };
 		FCA90A8E221D69B600EACD8D /* MockCoordinators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoordinators.swift; sourceTree = "<group>"; };
@@ -1742,7 +1740,6 @@
 			children = (
 				2037B0B71DEC8A2400A9DE3E /* F4STemplateService.swift */,
 				FC64A594211ACA39006464A5 /* F4SCompanyService.swift */,
-				FCA6D2B51FA88CE00037962B /* F4SPartnerService.swift */,
 				FCD388E6208E27E500FC73C5 /* F4SCompanyDocumentService.swift */,
 				FC85FA8120A3436600059EFB /* F4SMessageServices.swift */,
 				FC99F3D31FFE533000E3AC5A /* F4SRecommendationService.swift */,
@@ -2601,7 +2598,6 @@
 				40C1A51F1DDF5ACE000F80AA /* GMUStaticCluster.m in Sources */,
 				FC5C5B952109FF48007DCB84 /* RequestBLProvideDocuments.swift in Sources */,
 				FC1DC09721FE1509009ABC60 /* CompanyToolbar.swift in Sources */,
-				FCA6D2B61FA88CE10037962B /* F4SPartnerService.swift in Sources */,
 				FC39F45F21AAA618005B0A07 /* MessageViewController+UITableView.swift in Sources */,
 				FCEF70B721087207001C229A /* F4SInviteDetailCell.swift in Sources */,
 				FCE11E572113407F00403789 /* F4SCalendarEventWriter.swift in Sources */,

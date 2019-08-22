@@ -8,6 +8,7 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderServices
 
 public class F4SPartnersModel {
     

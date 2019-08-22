@@ -1,4 +1,5 @@
 import Foundation
+import WorkfinderCommon
 
 public protocol RecommendedCompaniesListModelProtocol : class {
     func fetch(completion: @escaping ([Recommendation]?) -> Void)
