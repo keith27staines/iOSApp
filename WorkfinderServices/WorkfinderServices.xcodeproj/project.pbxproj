@@ -142,6 +142,40 @@
 			path = Source;
 			sourceTree = "<group>";
 		};
+		FC4EE6FA230E77DE00B40F6B /* inheriting from F4SDataTaskService */ = {
+			isa = PBXGroup;
+			children = (
+				FC85D9EB22F1E02D0035C724 /* F4SVoucherService.swift */,
+			);
+			path = "inheriting from F4SDataTaskService";
+			sourceTree = "<group>";
+		};
+		FC4EE6FB230E782300B40F6B /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				FC02DA0622EC717A003C8148 /* F4SUserServiceProtocol.swift */,
+				FC4EE6F6230E62EC00B40F6B /* F4SCommonServiceProtocols.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		FC4EE6FC230E784F00B40F6B /* Core code */ = {
+			isa = PBXGroup;
+			children = (
+				FC928369230A956700E1FB75 /* F4SDataTaskService.swift */,
+				FC4EE6F4230E620600B40F6B /* F4SNetworkTaskFactory.swift */,
+			);
+			path = "Core code";
+			sourceTree = "<group>";
+		};
+		FC4EE6FD230E786F00B40F6B /* services using F4SDataTaskService */ = {
+			isa = PBXGroup;
+			children = (
+				FC12B0FA22F3280000C33410 /* F4SPlacementService.swift */,
+			);
+			path = "services using F4SDataTaskService";
+			sourceTree = "<group>";
+		};
 		FC85D9E922F1C8740035C724 /* WEX Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,12 +190,10 @@
 		FC85D9EA22F1C8A80035C724 /* F4SServices */ = {
 			isa = PBXGroup;
 			children = (
-				FC928369230A956700E1FB75 /* F4SDataTaskService.swift */,
-				FC4EE6F6230E62EC00B40F6B /* F4SCommonServiceProtocols.swift */,
-				FC4EE6F4230E620600B40F6B /* F4SNetworkTaskFactory.swift */,
-				FC12B0FA22F3280000C33410 /* F4SPlacementService.swift */,
-				FC85D9EB22F1E02D0035C724 /* F4SVoucherService.swift */,
-				FC02DA0622EC717A003C8148 /* F4SUserServiceProtocol.swift */,
+				FC4EE6FD230E786F00B40F6B /* services using F4SDataTaskService */,
+				FC4EE6FA230E77DE00B40F6B /* inheriting from F4SDataTaskService */,
+				FC4EE6FC230E784F00B40F6B /* Core code */,
+				FC4EE6FB230E782300B40F6B /* Protocols */,
 			);
 			path = F4SServices;
 			sourceTree = "<group>";
