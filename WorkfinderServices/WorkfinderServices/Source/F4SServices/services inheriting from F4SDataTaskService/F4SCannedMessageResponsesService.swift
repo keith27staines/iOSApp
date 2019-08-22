@@ -1,6 +1,7 @@
 import Foundation
+import WorkfinderCommon
+import WorkfinderNetworking
 
-// MARK:- F4SCannedMessageResponsesService
 public protocol F4SCannedMessageResponsesServiceProtocol {
     
     var apiName: String { get }

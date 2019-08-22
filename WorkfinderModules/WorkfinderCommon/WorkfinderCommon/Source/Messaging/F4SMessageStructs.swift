@@ -1,8 +1,14 @@
+//
+//  F4SMessageModel.swift
+//  f4s-workexperience
+//
+//  Created by Keith Dev on 10/05/2018.
+//  Copyright © 2018 Founders4Schools. All rights reserved.
+//
 
 import Foundation
-import WorkfinderCommon
 
-// MARK:- F4SMessage
+// MARK:- F4SMessageList
 public struct F4SMessagesList : Codable {
     public var count: Int
     public var messages: [F4SMessage]
@@ -60,7 +66,7 @@ public enum F4SActionType : String, Codable {
     case viewOffer = "view_offer"
     case viewCompanyExternalApplication = "view_company_ext_application"
     
-    var actionTitle: String {
+    public var actionTitle: String {
         switch self {
         case .uploadDocuments:
             return NSLocalizedString("Add documents", comment: "Action request from business leader asking young person to upload certain documents (which are specified elsewhere)")

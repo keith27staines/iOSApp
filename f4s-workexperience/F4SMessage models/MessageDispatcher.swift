@@ -1,14 +1,5 @@
-//
-//  MessageDispatcher.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 04/05/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
-//
-
 import Foundation
-import UIKit
-
+import WorkfinderCommon
 
 public enum F4SActionValidatorError : Error {
     case missingActionType

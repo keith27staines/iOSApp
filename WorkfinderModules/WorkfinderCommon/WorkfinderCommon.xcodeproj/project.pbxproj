@@ -45,6 +45,7 @@
 		FC32FD432265E4C800740F0C /* F4SContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32FD422265E4C800740F0C /* F4SContentType.swift */; };
 		FC4EE710230EB9D700B40F6B /* F4SUserStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE70F230EB9D700B40F6B /* F4SUserStatus.swift */; };
 		FC4EE714230EBC8100B40F6B /* F4SRoleJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE713230EBC8100B40F6B /* F4SRoleJson.swift */; };
+		FC4EE72C230EF10400B40F6B /* F4SMessageStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE72B230EF10300B40F6B /* F4SMessageStructs.swift */; };
 		FC5019652306A24500A26B53 /* F4SDayOfWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5019642306A24500A26B53 /* F4SDayOfWeek.swift */; };
 		FC73902223030856003A9253 /* LocalStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC73902123030856003A9253 /* LocalStoreTests.swift */; };
 		FC73902423031C59003A9253 /* WEXNetworkErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC73902323031C59003A9253 /* WEXNetworkErrorTests.swift */; };
@@ -146,6 +147,7 @@
 		FC32FD422265E4C800740F0C /* F4SContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SContentType.swift; sourceTree = "<group>"; };
 		FC4EE70F230EB9D700B40F6B /* F4SUserStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserStatus.swift; sourceTree = "<group>"; };
 		FC4EE713230EBC8100B40F6B /* F4SRoleJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRoleJson.swift; sourceTree = "<group>"; };
+		FC4EE72B230EF10300B40F6B /* F4SMessageStructs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SMessageStructs.swift; sourceTree = "<group>"; };
 		FC5019642306A24500A26B53 /* F4SDayOfWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDayOfWeek.swift; sourceTree = "<group>"; };
 		FC73902123030856003A9253 /* LocalStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStoreTests.swift; sourceTree = "<group>"; };
 		FC73902323031C59003A9253 /* WEXNetworkErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEXNetworkErrorTests.swift; sourceTree = "<group>"; };
@@ -259,6 +261,14 @@
 			path = "F4STemplate models tests";
 			sourceTree = "<group>";
 		};
+		FC4EE72A230EF0DE00B40F6B /* Messaging */ = {
+			isa = PBXGroup;
+			children = (
+				FC4EE72B230EF10300B40F6B /* F4SMessageStructs.swift */,
+			);
+			path = Messaging;
+			sourceTree = "<group>";
+		};
 		FC5019632306A21B00A26B53 /* Days and hours selection */ = {
 			isa = PBXGroup;
 			children = (
@@ -369,6 +379,7 @@
 		FCA91E8622340478007ED308 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				FC4EE72A230EF0DE00B40F6B /* Messaging */,
 				FC4EE713230EBC8100B40F6B /* F4SRoleJson.swift */,
 				FC0E5CFA224E1B5700615B4F /* LocalStore.swift */,
 				FC9670A2225A193700318F69 /* Repository protocols */,
@@ -600,6 +611,7 @@
 				FCDB07382286F6640053347F /* F4SUser.swift in Sources */,
 				FC12B10322F3415300C33410 /* JsonDateFormatterExtension.swift in Sources */,
 				FCDFEA12223D2CF500E58649 /* WEXResult.swift in Sources */,
+				FC4EE72C230EF10400B40F6B /* F4SMessageStructs.swift in Sources */,
 				FC4EE710230EB9D700B40F6B /* F4SUserStatus.swift in Sources */,
 				FCE51938224948E400B550C9 /* F4SHoursType.swift in Sources */,
 				FCE5193E22494CED00B550C9 /* F4SJsonValue.swift in Sources */,
