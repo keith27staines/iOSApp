@@ -1,15 +1,6 @@
-//
-//  F4SBadgeNumberService.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 16/05/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
-//
-
 import Foundation
 import WorkfinderCommon
 import WorkfinderNetworking
-import WorkfinderServices
 
 public struct F4SUserStatus : Codable {
     var unreadMessageCount: Int
@@ -55,7 +46,6 @@ public class F4SUserStatusService : F4SDataTaskService {
                     self?.userStatus = status
                     let badgeNumber = status.unreadMessageCount
                     UIApplication.shared.applicationIconBadgeNumber = max(badgeNumber,0)
-                    print("\nBADGE NUMBER = \(badgeNumber)\n")
                     NotificationCenter.default.post(name: .f4sUserStatusUpdated, object: status)
                 }
             }

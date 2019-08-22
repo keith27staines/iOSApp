@@ -25,7 +25,6 @@ class F4SRoleServiceTests: XCTestCase {
     }
     
     func test_getRoleForCompany_with_error_result() {
-        let role = F4SRoleJson(uuid: "roleUUid", name: "roleName", description: "roleDescription")
         let sut = F4SRoleService(sessionManager: MockF4SNetworkSessionManager())
         sut.networkTaskFactory = MockF4SNetworkTaskFactory<F4SRoleJson>(requiredNetworkError: F4SNetworkError(error: F4SError.genericError("testing"), attempting: "attempting"))
         let expectation = XCTestExpectation(description: "")

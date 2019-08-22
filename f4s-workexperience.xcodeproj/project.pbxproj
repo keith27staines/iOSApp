@@ -202,7 +202,6 @@
 		FC681C011F57473D0077BECA /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFF1F57473D0077BECA /* Podfile.lock */; };
 		FC6A6FC722D1E04C005F625A /* AppCoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6A6FC622D1E04C005F625A /* AppCoordinatorFactory.swift */; };
 		FC6B17EB2201B54700556C59 /* CompanyFavouritesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6B17E92201B54700556C59 /* CompanyFavouritesModel.swift */; };
-		FC6DE52020AC3AD900F9BB71 /* F4SUserStatusService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6DE51F20AC3AD900F9BB71 /* F4SUserStatusService.swift */; };
 		FC72219F20FE248400F10953 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = FC72219B20FE248400F10953 /* Appfile */; };
 		FC7221A020FE248400F10953 /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = FC72219C20FE248400F10953 /* Fastfile */; };
 		FC73719B2101C7EF00C0032A /* AcceptOffer.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC73719A2101C7EF00C0032A /* AcceptOffer.xcassets */; };
@@ -640,7 +639,6 @@
 		FC681BFF1F57473D0077BECA /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		FC6A6FC622D1E04C005F625A /* AppCoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorFactory.swift; sourceTree = "<group>"; };
 		FC6B17E92201B54700556C59 /* CompanyFavouritesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyFavouritesModel.swift; sourceTree = "<group>"; };
-		FC6DE51F20AC3AD900F9BB71 /* F4SUserStatusService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserStatusService.swift; sourceTree = "<group>"; };
 		FC72219B20FE248400F10953 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
 		FC72219C20FE248400F10953 /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
 		FC73719A2101C7EF00C0032A /* AcceptOffer.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AcceptOffer.xcassets; sourceTree = "<group>"; };
@@ -1757,7 +1755,6 @@
 				FC99BDCB20D172B600278DDE /* F4SCompanyDatabaseMetadataService.swift */,
 				FCACBF4320C7EB9F00EABAE8 /* F4SContentService.swift */,
 				FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */,
-				FC6DE51F20AC3AD900F9BB71 /* F4SUserStatusService.swift */,
 				FCE20CC5203D5CE400CA821D /* DocumentsService.swift */,
 				FC5F3D4D20D938E90002F41B /* F4SUserService.swift */,
 				FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */,
@@ -2707,7 +2704,6 @@
 				FCC212FE219077C000D8D5B7 /* F4SDCPopupMenuView.swift in Sources */,
 				FC24D23A226AF2BF00FA04A1 /* RecommendationsListMainView.swift in Sources */,
 				FCB49301222A4B3B00B88B8B /* SearchCoordinator.swift in Sources */,
-				FC6DE52020AC3AD900F9BB71 /* F4SUserStatusService.swift in Sources */,
 				40E78E661DD32B94000A3776 /* TabBarCoordinator.swift in Sources */,
 				FCB6D0EE2198182D00B392DB /* F4SDocumentUploader.swift in Sources */,
 				40E78E591DD32964000A3776 /* Entities.swift in Sources */,
