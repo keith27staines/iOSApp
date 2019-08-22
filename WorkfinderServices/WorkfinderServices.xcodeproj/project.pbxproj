@@ -220,11 +220,11 @@
 		FC4EE700230E78F200B40F6B /* services inheriting from F4SDataTaskService */ = {
 			isa = PBXGroup;
 			children = (
+				FC4EE71E230EDBEC00B40F6B /* F4SCalendarServiceTests.swift */,
 				FC4EE71A230ED80F00B40F6B /* F4SPartnerServiceTests.swift */,
 				FC4EE716230EC56700B40F6B /* F4SCompanyFavouritingServiceTests.swift */,
 				FC4EE70B230EAAA800B40F6B /* F4SUserStatusServiceTests.swift */,
 				FC4EE701230E799900B40F6B /* F4SVoucherServiceTests.swift */,
-				FC4EE71E230EDBEC00B40F6B /* F4SCalendarServiceTests.swift */,
 			);
 			path = "services inheriting from F4SDataTaskService";
 			sourceTree = "<group>";
