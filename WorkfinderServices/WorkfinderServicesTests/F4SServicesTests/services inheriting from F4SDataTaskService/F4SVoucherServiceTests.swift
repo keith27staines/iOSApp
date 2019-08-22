@@ -46,7 +46,7 @@ class F4SVoucherServiceTests: XCTestCase {
             case .error(let error):
                 XCTAssertEqual(error.attempting,"something")
             case .success(_):
-                XCTFail("The test was designed to return a success result")
+                XCTFail("The test was designed to return an error result")
             }
             expectation.fulfill()
         }

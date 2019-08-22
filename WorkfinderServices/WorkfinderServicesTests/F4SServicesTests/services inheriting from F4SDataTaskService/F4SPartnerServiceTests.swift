@@ -3,36 +3,37 @@ import WorkfinderCommon
 import WorkfinderNetworking
 @testable import WorkfinderServices
 
-class F4SCompanyFavouritingServiceTests: XCTestCase {
+class F4SPartnerServiceTests: XCTestCase {
 
     func test_initialise() {
-        let sut = F4SCompanyFavouritingService()
-        XCTAssertEqual(sut.apiName, "favourite")
+        let sut = F4SPartnerService()
+        XCTAssertEqual(sut.apiName, "partner")
     }
-
-    func test_favourite_with_success_result() {
-        let sut = F4SCompanyFavouritingService()
-        let returnObject = F4SShortlistJson(uuid: "uuid", companyUuid: "companyUuid", errors: nil)
+    
+    func test_getPartners_with_success_result() {
+        let sut = F4SPartnerService()
+        let returnObject = [F4SPartner(uuid: "partnerUuid", name: "partnerName")]
         let requiredResult = F4SNetworkResult.success(returnObject)
         sut.networkTaskfactory = MockF4SNetworkTaskFactory(requiredSuccessResult: requiredResult)
         let expectation = XCTestExpectation(description: "")
-        sut.favourite(companyUuid: "companyUuid") { (result) in
+        sut.getPartners() { (result) in
             switch result {
             case .error(_):
                 XCTFail("The test was designed to return a success result")
-            case .success(let favourite):
-                XCTAssertEqual(favourite.companyUuid,"companyUuid")
+            case .success(let partners):
+                XCTAssertEqual(partners.count,1)
             }
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1)
     }
     
-    func test_favourite_with_error_result() {
-        let sut = F4SCompanyFavouritingService()
-        sut.networkTaskfactory = MockF4SNetworkTaskFactory<F4SShortlistJson>(requiredNetworkError: F4SNetworkError(error: F4SError.genericError("test error"), attempting: ""))
+    func test_getPartners_with_error_result() {
+        let sut = F4SPartnerService()
+        let error = F4SNetworkError(error: F4SError.genericError("test error"), attempting: "")
+        sut.networkTaskfactory = MockF4SNetworkTaskFactory<[F4SPartner]>(requiredNetworkError: error)
         let expectation = XCTestExpectation(description: "")
-        sut.favourite(companyUuid: "companyUuid") { (result) in
+        sut.getPartners() { (result) in
             switch result {
             case .error(_):
                 break
@@ -43,6 +44,5 @@ class F4SCompanyFavouritingServiceTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 1)
     }
-    
-    
+
 }

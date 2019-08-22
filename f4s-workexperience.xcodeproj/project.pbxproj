@@ -197,7 +197,6 @@
 		FC64A5932119EBE3006464A5 /* CalendarChooserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC64A5902119EBE3006464A5 /* CalendarChooserController.swift */; };
 		FC64A595211ACA39006464A5 /* F4SCompanyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC64A594211ACA39006464A5 /* F4SCompanyService.swift */; };
 		FC64A597211AECDE006464A5 /* F4SInviteDetailLinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC64A596211AECDE006464A5 /* F4SInviteDetailLinkCell.swift */; };
-		FC67E60A207B70CE006F07FE /* F4SCalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC67E609207B70CE006F07FE /* F4SCalendarService.swift */; };
 		FC681C001F57473D0077BECA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFE1F57473D0077BECA /* Podfile */; };
 		FC681C011F57473D0077BECA /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFF1F57473D0077BECA /* Podfile.lock */; };
 		FC6A6FC722D1E04C005F625A /* AppCoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6A6FC622D1E04C005F625A /* AppCoordinatorFactory.swift */; };
@@ -631,7 +630,6 @@
 		FC64A5902119EBE3006464A5 /* CalendarChooserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarChooserController.swift; sourceTree = "<group>"; };
 		FC64A594211ACA39006464A5 /* F4SCompanyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyService.swift; sourceTree = "<group>"; };
 		FC64A596211AECDE006464A5 /* F4SInviteDetailLinkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInviteDetailLinkCell.swift; sourceTree = "<group>"; };
-		FC67E609207B70CE006F07FE /* F4SCalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCalendarService.swift; sourceTree = "<group>"; };
 		FC681BFE1F57473D0077BECA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		FC681BFF1F57473D0077BECA /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		FC6A6FC622D1E04C005F625A /* AppCoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorFactory.swift; sourceTree = "<group>"; };
@@ -1750,7 +1748,6 @@
 				FCE20CC5203D5CE400CA821D /* DocumentsService.swift */,
 				FC5F3D4D20D938E90002F41B /* F4SUserService.swift */,
 				FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */,
-				FC67E609207B70CE006F07FE /* F4SCalendarService.swift */,
 			);
 			path = F4SAPIServices;
 			sourceTree = "<group>";
@@ -2752,7 +2749,6 @@
 				FC8E303A20F4A60B006059DE /* F4SLogger.swift in Sources */,
 				FC31F095204D54C6009DD526 /* F4SDebugViewController.swift in Sources */,
 				FCB6B8E32074C59C0042C725 /* F4SMonthHeaderView.swift in Sources */,
-				FC67E60A207B70CE006F07FE /* F4SCalendarService.swift in Sources */,
 				FCE20CC1203C12F300CA821D /* F4SDocumentUploadWhileApplyingModel.swift in Sources */,
 				FC3FFA85228C2D5300408AB2 /* PushNotificationAuthorization.swift in Sources */,
 				FC860D82209C37F2007945E6 /* MessageDispatcher.swift in Sources */,
