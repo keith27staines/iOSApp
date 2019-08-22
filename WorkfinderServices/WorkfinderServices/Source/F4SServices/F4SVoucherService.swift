@@ -44,25 +44,8 @@ extension F4SVoucherVerificationService : F4SVoucherVerificationServiceProtocol 
         var params = [String: String]()
         if let placementUuid = self.placementUuid { params = ["placement_uuid" : placementUuid] }
         let attempting = "Validate voucher code"
-        beginSendRequest(verb: .put, objectToSend: params, attempting: attempting) { (result) in
-            switch result {
-            case .error(let error):
-                completion(F4SNetworkResult<F4SVoucherValidation>.error(error))
-            case .success(let data):
-                guard let data = data else {
-                    let noDataError = F4SNetworkDataErrorType.noData.error(attempting: attempting)
-                    completion(F4SNetworkResult.error(noDataError))
-                    return
-                }
-                let decoder = self.jsonDecoder
-                do {
-                    let voucherValidation = try decoder.decode(F4SVoucherValidation.self, from: data)
-                    completion(F4SNetworkResult.success(voucherValidation))
-                } catch {
-                    let error = F4SNetworkDataErrorType.deserialization(data).error(attempting: attempting)
-                    completion(F4SNetworkResult.error(error))
-                }
-            }
+        beginSendRequest(verb: .put, objectToSend: params, attempting: attempting) { [weak self] (result) in
+            self?.processResult(result, attempting: attempting, completion: completion)
         }
     }
 }
