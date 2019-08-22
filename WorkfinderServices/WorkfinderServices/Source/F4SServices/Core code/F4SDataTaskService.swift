@@ -36,7 +36,7 @@ open class F4SDataTaskService {
     
     static var userRepo: F4SUserRepositoryProtocol = F4SUserRepository(localStore: LocalStore())
     
-    var networkTaskfactory: F4SNetworkTaskFactoryProtocol = F4SNetworkTaskFactory(userUuid: userRepo.load().uuid)
+    var networkTaskfactory: F4SNetworkTaskFactoryProtocol = F4SNetworkTaskFactory()
     
     /// Initialize a new instance
     /// - parameter baseURLString: The base url
@@ -139,7 +139,7 @@ open class F4SDataTaskService {
     
     // TODO: Remove this function when all services converted to new model which eliminates need for this
     public static func urlRequest(verb: F4SHttpRequestVerb, url: URL, dataToSend: Data?) -> URLRequest {
-        let factory = F4SNetworkTaskFactory(userUuid: F4SDataTaskService.userRepo.load().uuid)
+        let factory = F4SNetworkTaskFactory()
         return factory.urlRequest(verb: verb, url: url, dataToSend: dataToSend)
     }
     
@@ -164,7 +164,7 @@ open class F4SDataTaskService {
                                    attempting: String,
                                    completion: @escaping (F4SNetworkDataResult) -> ()
         ) -> F4SNetworkTask {
-        let factory = F4SNetworkTaskFactory(userUuid: userRepo.load().uuid)
+        let factory = F4SNetworkTaskFactory(userUuid: F4SDataTaskService.userRepo.load().uuid)
         return factory.networkTask(with: request, session: session, attempting: attempting, completion: completion)
     }
 }

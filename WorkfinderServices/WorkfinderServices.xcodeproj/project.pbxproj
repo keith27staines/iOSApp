@@ -23,6 +23,9 @@
 		FC4EE6F5230E620600B40F6B /* F4SNetworkTaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE6F4230E620600B40F6B /* F4SNetworkTaskFactory.swift */; };
 		FC4EE6F7230E62EC00B40F6B /* F4SCommonServiceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE6F6230E62EC00B40F6B /* F4SCommonServiceProtocols.swift */; };
 		FC4EE702230E799900B40F6B /* F4SVoucherServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE701230E799900B40F6B /* F4SVoucherServiceTests.swift */; };
+		FC4EE704230E8F7F00B40F6B /* F4SRoleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE703230E8F7E00B40F6B /* F4SRoleService.swift */; };
+		FC4EE706230E909200B40F6B /* F4SRoleServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE705230E909200B40F6B /* F4SRoleServiceTests.swift */; };
+		FC4EE708230E910400B40F6B /* F4SRoleJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE707230E910300B40F6B /* F4SRoleJson.swift */; };
 		FC85D9EC22F1E02D0035C724 /* F4SVoucherVerificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85D9EB22F1E02D0035C724 /* F4SVoucherVerificationService.swift */; };
 		FC928362230A865E00E1FB75 /* F4SPlacementServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC928361230A865E00E1FB75 /* F4SPlacementServiceTests.swift */; };
 		FC928368230A94D100E1FB75 /* F4SDataTaskServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC928365230A94D100E1FB75 /* F4SDataTaskServiceTests.swift */; };
@@ -59,6 +62,9 @@
 		FC4EE6F4230E620600B40F6B /* F4SNetworkTaskFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SNetworkTaskFactory.swift; sourceTree = "<group>"; };
 		FC4EE6F6230E62EC00B40F6B /* F4SCommonServiceProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCommonServiceProtocols.swift; sourceTree = "<group>"; };
 		FC4EE701230E799900B40F6B /* F4SVoucherServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SVoucherServiceTests.swift; sourceTree = "<group>"; };
+		FC4EE703230E8F7E00B40F6B /* F4SRoleService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SRoleService.swift; sourceTree = "<group>"; };
+		FC4EE705230E909200B40F6B /* F4SRoleServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRoleServiceTests.swift; sourceTree = "<group>"; };
+		FC4EE707230E910300B40F6B /* F4SRoleJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRoleJson.swift; sourceTree = "<group>"; };
 		FC85D9EB22F1E02D0035C724 /* F4SVoucherVerificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SVoucherVerificationService.swift; sourceTree = "<group>"; };
 		FC928361230A865E00E1FB75 /* F4SPlacementServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementServiceTests.swift; sourceTree = "<group>"; };
 		FC928365230A94D100E1FB75 /* F4SDataTaskServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDataTaskServiceTests.swift; sourceTree = "<group>"; };
@@ -155,6 +161,7 @@
 		FC4EE6FB230E782300B40F6B /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				FC4EE707230E910300B40F6B /* F4SRoleJson.swift */,
 				FC02DA0622EC717A003C8148 /* F4SUserServiceProtocol.swift */,
 				FC4EE6F6230E62EC00B40F6B /* F4SCommonServiceProtocols.swift */,
 			);
@@ -173,6 +180,7 @@
 		FC4EE6FD230E786F00B40F6B /* services using F4SDataTaskService */ = {
 			isa = PBXGroup;
 			children = (
+				FC4EE703230E8F7E00B40F6B /* F4SRoleService.swift */,
 				FC12B0FA22F3280000C33410 /* F4SPlacementService.swift */,
 			);
 			path = "services using F4SDataTaskService";
@@ -181,6 +189,7 @@
 		FC4EE6FE230E78B700B40F6B /* services using F4SDataTaskService */ = {
 			isa = PBXGroup;
 			children = (
+				FC4EE705230E909200B40F6B /* F4SRoleServiceTests.swift */,
 				FC928361230A865E00E1FB75 /* F4SPlacementServiceTests.swift */,
 			);
 			path = "services using F4SDataTaskService";
@@ -358,10 +367,12 @@
 				FC12B0FB22F3280000C33410 /* F4SPlacementService.swift in Sources */,
 				FC85D9EC22F1E02D0035C724 /* F4SVoucherVerificationService.swift in Sources */,
 				FC02DA2B22EC898C003C8148 /* WEXDataTask.swift in Sources */,
+				FC4EE704230E8F7F00B40F6B /* F4SRoleService.swift in Sources */,
 				FC02DA0522EC7134003C8148 /* MockWEXPlacementService.swift in Sources */,
 				FC4EE6F5230E620600B40F6B /* F4SNetworkTaskFactory.swift in Sources */,
 				FC02DA0A22EC717B003C8148 /* WEXPlacementService.swift in Sources */,
 				FC4EE6F7230E62EC00B40F6B /* F4SCommonServiceProtocols.swift in Sources */,
+				FC4EE708230E910400B40F6B /* F4SRoleJson.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,6 +385,7 @@
 				FC928368230A94D100E1FB75 /* F4SDataTaskServiceTests.swift in Sources */,
 				FC02DA1F22EC7457003C8148 /* MockWEXPlacementServiceTests.swift in Sources */,
 				FC4EE702230E799900B40F6B /* F4SVoucherServiceTests.swift in Sources */,
+				FC4EE706230E909200B40F6B /* F4SRoleServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

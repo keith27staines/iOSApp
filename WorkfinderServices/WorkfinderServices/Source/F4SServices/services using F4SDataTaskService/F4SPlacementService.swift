@@ -17,8 +17,7 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
     var networkTaskFactory: F4SNetworkTaskFactoryProtocol
     
     public init(sessionManager: F4SNetworkSessionManagerProtocol = F4SNetworkSessionManager.shared) {
-        let repo = F4SUserRepository(localStore: LocalStore())
-        self.networkTaskFactory = F4SNetworkTaskFactory(userUuid: repo.load().uuid)
+        self.networkTaskFactory = F4SNetworkTaskFactory()
         self.sessionManager = sessionManager
     }
     

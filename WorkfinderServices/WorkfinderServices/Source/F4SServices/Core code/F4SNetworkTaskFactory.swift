@@ -29,7 +29,15 @@ public class F4SNetworkTaskFactory : F4SNetworkTaskFactoryProtocol {
     
     var userUuid: F4SUUID?
     
-    init(userUuid: F4SUUID?) {
+    /// Initalises a new instance of the factory
+    ///
+    /// - Parameter userUuid:  the user uuid to be used by the factory. If omitted, the factory uses the uuid from the user in the default local store
+    init(userUuid: F4SUUID? = nil) {
+        guard let userUuid = userUuid else {
+            let userRepo = F4SUserRepository(localStore: LocalStore())
+            self.userUuid = userRepo.load().uuid
+            return
+        }
         self.userUuid = userUuid
     }
     
