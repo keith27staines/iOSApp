@@ -1,17 +1,8 @@
-//
-//  CompanyFavouritingService.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 12/06/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
-//
-
 import Foundation
 import WorkfinderCommon
 import WorkfinderNetworking
-import WorkfinderServices
 
-public struct F4SShortlistJson : Decodable {
+public struct F4SShortlistJson : Codable {
     public var uuid: F4SUUID?
     public var companyUuid: F4SUUID?
     public var errors: F4SServerErrors?
@@ -23,7 +14,7 @@ public struct F4SShortlistJson : Decodable {
     }
 }
 
-public struct F4SServerErrors : Decodable {
+public struct F4SServerErrors : Codable {
     public var errors: F4SJSONValue
 }
 

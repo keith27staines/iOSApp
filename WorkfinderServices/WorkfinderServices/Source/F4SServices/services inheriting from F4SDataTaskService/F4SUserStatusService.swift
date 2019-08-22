@@ -2,18 +2,6 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderNetworking
 
-public struct F4SUserStatus : Codable {
-    var unreadMessageCount: Int
-    var unratedPlacements: [F4SUUID]
-}
-
-private extension F4SUserStatus {
-    private enum CodingKeys : String, CodingKey {
-        case unreadMessageCount = "unread_count"
-        case unratedPlacements = "unrated"
-    }
-}
-
 public protocol F4SUserStatusServiceProtocol {
     var userStatus: F4SUserStatus? { get }
     func beginStatusUpdate()

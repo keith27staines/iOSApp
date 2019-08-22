@@ -10,7 +10,6 @@
 		FC02D9F222EC70FD003C8148 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC02D9E822EC70FD003C8148 /* WorkfinderServices.framework */; };
 		FC02D9F922EC70FD003C8148 /* WorkfinderServices.h in Headers */ = {isa = PBXBuildFile; fileRef = FC02D9EB22EC70FD003C8148 /* WorkfinderServices.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FC02DA0522EC7134003C8148 /* MockWEXPlacementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02DA0422EC7134003C8148 /* MockWEXPlacementService.swift */; };
-		FC02DA0922EC717B003C8148 /* F4SUserServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02DA0622EC717A003C8148 /* F4SUserServiceProtocol.swift */; };
 		FC02DA0A22EC717B003C8148 /* WEXPlacementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02DA0722EC717A003C8148 /* WEXPlacementService.swift */; };
 		FC02DA0B22EC717B003C8148 /* EmailVerificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02DA0822EC717B003C8148 /* EmailVerificationService.swift */; };
 		FC02DA0E22EC7214003C8148 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC02DA0D22EC7214003C8148 /* WorkfinderCommon.framework */; };
@@ -25,9 +24,10 @@
 		FC4EE702230E799900B40F6B /* F4SVoucherServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE701230E799900B40F6B /* F4SVoucherServiceTests.swift */; };
 		FC4EE704230E8F7F00B40F6B /* F4SRoleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE703230E8F7E00B40F6B /* F4SRoleService.swift */; };
 		FC4EE706230E909200B40F6B /* F4SRoleServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE705230E909200B40F6B /* F4SRoleServiceTests.swift */; };
-		FC4EE708230E910400B40F6B /* F4SRoleJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE707230E910300B40F6B /* F4SRoleJson.swift */; };
 		FC4EE70A230EA96700B40F6B /* F4SUserStatusService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE709230EA96600B40F6B /* F4SUserStatusService.swift */; };
 		FC4EE70C230EAAA800B40F6B /* F4SUserStatusServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE70B230EAAA800B40F6B /* F4SUserStatusServiceTests.swift */; };
+		FC4EE70E230EAFFF00B40F6B /* F4SCompanyFavouritingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE70D230EAFFF00B40F6B /* F4SCompanyFavouritingService.swift */; };
+		FC4EE717230EC56700B40F6B /* F4SCompanyFavouritingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE716230EC56700B40F6B /* F4SCompanyFavouritingServiceTests.swift */; };
 		FC85D9EC22F1E02D0035C724 /* F4SVoucherVerificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85D9EB22F1E02D0035C724 /* F4SVoucherVerificationService.swift */; };
 		FC928362230A865E00E1FB75 /* F4SPlacementServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC928361230A865E00E1FB75 /* F4SPlacementServiceTests.swift */; };
 		FC928368230A94D100E1FB75 /* F4SDataTaskServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC928365230A94D100E1FB75 /* F4SDataTaskServiceTests.swift */; };
@@ -51,7 +51,6 @@
 		FC02D9F122EC70FD003C8148 /* WorkfinderServicesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderServicesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC02D9F822EC70FD003C8148 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC02DA0422EC7134003C8148 /* MockWEXPlacementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWEXPlacementService.swift; sourceTree = "<group>"; };
-		FC02DA0622EC717A003C8148 /* F4SUserServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserServiceProtocol.swift; sourceTree = "<group>"; };
 		FC02DA0722EC717A003C8148 /* WEXPlacementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEXPlacementService.swift; sourceTree = "<group>"; };
 		FC02DA0822EC717B003C8148 /* EmailVerificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationService.swift; sourceTree = "<group>"; };
 		FC02DA0D22EC7214003C8148 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,9 +65,10 @@
 		FC4EE701230E799900B40F6B /* F4SVoucherServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SVoucherServiceTests.swift; sourceTree = "<group>"; };
 		FC4EE703230E8F7E00B40F6B /* F4SRoleService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SRoleService.swift; sourceTree = "<group>"; };
 		FC4EE705230E909200B40F6B /* F4SRoleServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRoleServiceTests.swift; sourceTree = "<group>"; };
-		FC4EE707230E910300B40F6B /* F4SRoleJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRoleJson.swift; sourceTree = "<group>"; };
 		FC4EE709230EA96600B40F6B /* F4SUserStatusService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserStatusService.swift; sourceTree = "<group>"; };
 		FC4EE70B230EAAA800B40F6B /* F4SUserStatusServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserStatusServiceTests.swift; sourceTree = "<group>"; };
+		FC4EE70D230EAFFF00B40F6B /* F4SCompanyFavouritingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyFavouritingService.swift; sourceTree = "<group>"; };
+		FC4EE716230EC56700B40F6B /* F4SCompanyFavouritingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyFavouritingServiceTests.swift; sourceTree = "<group>"; };
 		FC85D9EB22F1E02D0035C724 /* F4SVoucherVerificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SVoucherVerificationService.swift; sourceTree = "<group>"; };
 		FC928361230A865E00E1FB75 /* F4SPlacementServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementServiceTests.swift; sourceTree = "<group>"; };
 		FC928365230A94D100E1FB75 /* F4SDataTaskServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDataTaskServiceTests.swift; sourceTree = "<group>"; };
@@ -157,6 +157,7 @@
 		FC4EE6FA230E77DE00B40F6B /* services inheriting from F4SDataTaskService */ = {
 			isa = PBXGroup;
 			children = (
+				FC4EE70D230EAFFF00B40F6B /* F4SCompanyFavouritingService.swift */,
 				FC4EE709230EA96600B40F6B /* F4SUserStatusService.swift */,
 				FC85D9EB22F1E02D0035C724 /* F4SVoucherVerificationService.swift */,
 			);
@@ -166,8 +167,6 @@
 		FC4EE6FB230E782300B40F6B /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				FC4EE707230E910300B40F6B /* F4SRoleJson.swift */,
-				FC02DA0622EC717A003C8148 /* F4SUserServiceProtocol.swift */,
 				FC4EE6F6230E62EC00B40F6B /* F4SCommonServiceProtocols.swift */,
 			);
 			path = Protocols;
@@ -211,6 +210,7 @@
 		FC4EE700230E78F200B40F6B /* services inheriting from F4SDataTaskService */ = {
 			isa = PBXGroup;
 			children = (
+				FC4EE716230EC56700B40F6B /* F4SCompanyFavouritingServiceTests.swift */,
 				FC4EE70B230EAAA800B40F6B /* F4SUserStatusServiceTests.swift */,
 				FC4EE701230E799900B40F6B /* F4SVoucherServiceTests.swift */,
 			);
@@ -367,7 +367,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC4EE70A230EA96700B40F6B /* F4SUserStatusService.swift in Sources */,
-				FC02DA0922EC717B003C8148 /* F4SUserServiceProtocol.swift in Sources */,
+				FC4EE70E230EAFFF00B40F6B /* F4SCompanyFavouritingService.swift in Sources */,
 				FC02DA0B22EC717B003C8148 /* EmailVerificationService.swift in Sources */,
 				FC02DA2522EC7FCE003C8148 /* WorkfinderServices.swift in Sources */,
 				FC92836B230A982600E1FB75 /* F4SDataTaskService.swift in Sources */,
@@ -379,7 +379,6 @@
 				FC4EE6F5230E620600B40F6B /* F4SNetworkTaskFactory.swift in Sources */,
 				FC02DA0A22EC717B003C8148 /* WEXPlacementService.swift in Sources */,
 				FC4EE6F7230E62EC00B40F6B /* F4SCommonServiceProtocols.swift in Sources */,
-				FC4EE708230E910400B40F6B /* F4SRoleJson.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +386,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC4EE717230EC56700B40F6B /* F4SCompanyFavouritingServiceTests.swift in Sources */,
 				FC928362230A865E00E1FB75 /* F4SPlacementServiceTests.swift in Sources */,
 				FC02DA2122EC7851003C8148 /* WEXPlacementServiceTests.swift in Sources */,
 				FC928368230A94D100E1FB75 /* F4SDataTaskServiceTests.swift in Sources */,
