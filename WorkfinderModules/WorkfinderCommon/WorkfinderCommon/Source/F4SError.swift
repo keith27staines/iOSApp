@@ -10,4 +10,5 @@ import Foundation
 
 public enum F4SError : Error {
     case notImplementedYet(String)
+    case genericError(String?)
 }

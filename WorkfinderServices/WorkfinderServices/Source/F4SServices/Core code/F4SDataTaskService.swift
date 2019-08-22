@@ -36,7 +36,7 @@ open class F4SDataTaskService {
     
     static var userRepo: F4SUserRepositoryProtocol = F4SUserRepository(localStore: LocalStore())
     
-    var networkTaskfactory = F4SNetworkTaskFactory(userUuid: userRepo.load().uuid)
+    var networkTaskfactory: F4SNetworkTaskFactoryProtocol = F4SNetworkTaskFactory(userUuid: userRepo.load().uuid)
     
     /// Initialize a new instance
     /// - parameter baseURLString: The base url
@@ -136,10 +136,6 @@ open class F4SDataTaskService {
         encoder.outputFormatting = .prettyPrinted
         return encoder
     }()
-    
-    public func urlRequest(verb: F4SHttpRequestVerb, url: URL, dataToSend: Data?) -> URLRequest {
-        return networkTaskfactory.urlRequest(verb: verb, url: url, dataToSend: dataToSend)
-    }
     
     // TODO: Remove this function when all services converted to new model which eliminates need for this
     public static func urlRequest(verb: F4SHttpRequestVerb, url: URL, dataToSend: Data?) -> URLRequest {
