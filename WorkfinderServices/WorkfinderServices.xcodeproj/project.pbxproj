@@ -33,6 +33,7 @@
 		FC4EE71D230EDB4100B40F6B /* F4SCalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE71C230EDB4100B40F6B /* F4SCalendarService.swift */; };
 		FC4EE71F230EDBEC00B40F6B /* F4SCalendarServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE71E230EDBEC00B40F6B /* F4SCalendarServiceTests.swift */; };
 		FC4EE723230EE72600B40F6B /* F4SContentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE722230EE72600B40F6B /* F4SContentService.swift */; };
+		FC4EE725230EEBD200B40F6B /* F4SContentServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE724230EEBD200B40F6B /* F4SContentServiceTests.swift */; };
 		FC85D9EC22F1E02D0035C724 /* F4SVoucherVerificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85D9EB22F1E02D0035C724 /* F4SVoucherVerificationService.swift */; };
 		FC928362230A865E00E1FB75 /* F4SPlacementServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC928361230A865E00E1FB75 /* F4SPlacementServiceTests.swift */; };
 		FC928368230A94D100E1FB75 /* F4SDataTaskServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC928365230A94D100E1FB75 /* F4SDataTaskServiceTests.swift */; };
@@ -79,6 +80,7 @@
 		FC4EE71C230EDB4100B40F6B /* F4SCalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCalendarService.swift; sourceTree = "<group>"; };
 		FC4EE71E230EDBEC00B40F6B /* F4SCalendarServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCalendarServiceTests.swift; sourceTree = "<group>"; };
 		FC4EE722230EE72600B40F6B /* F4SContentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SContentService.swift; sourceTree = "<group>"; };
+		FC4EE724230EEBD200B40F6B /* F4SContentServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SContentServiceTests.swift; sourceTree = "<group>"; };
 		FC85D9EB22F1E02D0035C724 /* F4SVoucherVerificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SVoucherVerificationService.swift; sourceTree = "<group>"; };
 		FC928361230A865E00E1FB75 /* F4SPlacementServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementServiceTests.swift; sourceTree = "<group>"; };
 		FC928365230A94D100E1FB75 /* F4SDataTaskServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDataTaskServiceTests.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 		FC4EE700230E78F200B40F6B /* services inheriting from F4SDataTaskService */ = {
 			isa = PBXGroup;
 			children = (
+				FC4EE724230EEBD200B40F6B /* F4SContentServiceTests.swift */,
 				FC4EE71E230EDBEC00B40F6B /* F4SCalendarServiceTests.swift */,
 				FC4EE71A230ED80F00B40F6B /* F4SPartnerServiceTests.swift */,
 				FC4EE716230EC56700B40F6B /* F4SCompanyFavouritingServiceTests.swift */,
@@ -404,6 +407,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC4EE725230EEBD200B40F6B /* F4SContentServiceTests.swift in Sources */,
 				FC4EE717230EC56700B40F6B /* F4SCompanyFavouritingServiceTests.swift in Sources */,
 				FC928362230A865E00E1FB75 /* F4SPlacementServiceTests.swift in Sources */,
 				FC4EE71B230ED80F00B40F6B /* F4SPartnerServiceTests.swift in Sources */,
