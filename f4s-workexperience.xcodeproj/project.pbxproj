@@ -183,6 +183,7 @@
 		FC4BB6091FA21BA400173864 /* SelectPartner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC4BB6081FA21BA400173864 /* SelectPartner.storyboard */; };
 		FC4DC2012299AA9000C59C52 /* AcceptOfferCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4DC2002299AA9000C59C52 /* AcceptOfferCoordinator.swift */; };
 		FC4DC203229A864D00C59C52 /* DocumentUploadCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4DC202229A864D00C59C52 /* DocumentUploadCoordinator.swift */; };
+		FC4EE727230EEF3A00B40F6B /* F4SCannedMessageResponsesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE726230EEF3A00B40F6B /* F4SCannedMessageResponsesService.swift */; };
 		FC505517220446830013AF4C /* CompanyMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC505516220446830013AF4C /* CompanyMapView.swift */; };
 		FC50E9CE2213EF5400C9A621 /* SearchModeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */; };
 		FC59B1921F8155480068EC9C /* F4SQuadtree.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18C1F81546C0068EC9C /* F4SQuadtree.swift */; };
@@ -236,7 +237,6 @@
 		FCA91E9722340577007ED308 /* WorkfinderCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91E9522340577007ED308 /* WorkfinderCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCA91EC122340743007ED308 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91EC022340743007ED308 /* WorkfinderUI.framework */; };
 		FCA91EC222340743007ED308 /* WorkfinderUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91EC022340743007ED308 /* WorkfinderUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FCACBF4420C7EB9F00EABAE8 /* F4SContentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCACBF4320C7EB9F00EABAE8 /* F4SContentService.swift */; };
 		FCB1648320986E810045B9CA /* F4SRequestCompanyDocumentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB1648220986E810045B9CA /* F4SRequestCompanyDocumentTableViewCell.swift */; };
 		FCB3617B224D44610056E0B6 /* ChooseAttributesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB3617A224D44610056E0B6 /* ChooseAttributesViewModel.swift */; };
 		FCB3922A20FF1E0A00792C0A /* AcceptOffer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCB3922920FF1E0A00792C0A /* AcceptOffer.storyboard */; };
@@ -614,6 +614,7 @@
 		FC4BB6081FA21BA400173864 /* SelectPartner.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectPartner.storyboard; sourceTree = "<group>"; };
 		FC4DC2002299AA9000C59C52 /* AcceptOfferCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptOfferCoordinator.swift; sourceTree = "<group>"; };
 		FC4DC202229A864D00C59C52 /* DocumentUploadCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentUploadCoordinator.swift; sourceTree = "<group>"; };
+		FC4EE726230EEF3A00B40F6B /* F4SCannedMessageResponsesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCannedMessageResponsesService.swift; sourceTree = "<group>"; };
 		FC505516220446830013AF4C /* CompanyMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyMapView.swift; sourceTree = "<group>"; };
 		FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModeSelectorView.swift; sourceTree = "<group>"; };
 		FC59B18C1F81546C0068EC9C /* F4SQuadtree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SQuadtree.swift; sourceTree = "<group>"; };
@@ -672,7 +673,6 @@
 		FCA91E5C22340161007ED308 /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA91E9522340577007ED308 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA91EC022340743007ED308 /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCACBF4320C7EB9F00EABAE8 /* F4SContentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = F4SContentService.swift; path = "../../../WorkfinderServices/WorkfinderServices/Source/F4SServices/services inheriting from F4SDataTaskService/F4SContentService.swift"; sourceTree = "<group>"; };
 		FCB1648220986E810045B9CA /* F4SRequestCompanyDocumentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRequestCompanyDocumentTableViewCell.swift; sourceTree = "<group>"; };
 		FCB3617A224D44610056E0B6 /* ChooseAttributesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseAttributesViewModel.swift; sourceTree = "<group>"; };
 		FCB3922920FF1E0A00792C0A /* AcceptOffer.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AcceptOffer.storyboard; sourceTree = "<group>"; };
@@ -1703,10 +1703,10 @@
 			isa = PBXGroup;
 			children = (
 				FCE20CC5203D5CE400CA821D /* DocumentsService.swift */,
-				FCACBF4320C7EB9F00EABAE8 /* F4SContentService.swift */,
 				FC99BDCB20D172B600278DDE /* F4SCompanyDatabaseMetadataService.swift */,
 				FC99F3D31FFE533000E3AC5A /* F4SRecommendationService.swift */,
 				FC85FA8120A3436600059EFB /* F4SMessageServices.swift */,
+				FC4EE726230EEF3A00B40F6B /* F4SCannedMessageResponsesService.swift */,
 			);
 			path = inheritors;
 			sourceTree = "<group>";
@@ -1714,6 +1714,7 @@
 		FC4EE721230EE41C00B40F6B /* dependers */ = {
 			isa = PBXGroup;
 			children = (
+				FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */,
 				FC5F3D4D20D938E90002F41B /* F4SUserService.swift */,
 				20FEBDD91DE5AD3400EBDCBF /* F4SImageService.swift */,
 				2037B0B71DEC8A2400A9DE3E /* F4STemplateService.swift */,
@@ -1762,7 +1763,6 @@
 			children = (
 				FC4EE721230EE41C00B40F6B /* dependers */,
 				FC4EE720230EE3FC00B40F6B /* inheritors */,
-				FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */,
 				FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */,
 			);
 			path = F4SAPIServices;
@@ -2654,6 +2654,7 @@
 				204C89781DF5F0B200D8493A /* ChooseAttributesTableViewCell.swift in Sources */,
 				FCBF3F2D22993C2100C0A4F9 /* UserDetailsCoordinator.swift in Sources */,
 				FC4BB6051FA20F4100173864 /* F4SPartner.swift in Sources */,
+				FC4EE727230EEF3A00B40F6B /* F4SCannedMessageResponsesService.swift in Sources */,
 				FCF798542227F5AB00D67A7D /* RecommendationsCoordinator.swift in Sources */,
 				FCA6C829210760E000A222FE /* F4SHoorayViewController.swift in Sources */,
 				FC14E971221EA27A00EE985F /* CoreInjection.swift in Sources */,
@@ -2667,7 +2668,6 @@
 				202091AC1DF84BCF003F5B48 /* SocialShareItemSource.swift in Sources */,
 				40E78E981DD39275000A3776 /* MapViewController.swift in Sources */,
 				FCD388E7208E27E500FC73C5 /* F4SCompanyDocumentService.swift in Sources */,
-				FCACBF4420C7EB9F00EABAE8 /* F4SContentService.swift in Sources */,
 				FCD388E5208DEFE100FC73C5 /* F4SCompanyDocumentsModel.swift in Sources */,
 				FC21BE38220F53EB00A0A389 /* SearchProtocols.swift in Sources */,
 				FC21BE35220F53EB00A0A389 /* CompanySearchDataSource.swift in Sources */,
