@@ -2,7 +2,7 @@ import WorkfinderCommon
 import WorkfinderNetworking
 
 /// Base class providing common network service functionality
-open class F4SDataTaskService : F4SNetworkTaskFactoryProtocol {
+open class F4SDataTaskService {
     /// The api name (e.g `placement` or `user/me`)
     let _apiName: String
     
@@ -67,23 +67,10 @@ open class F4SDataTaskService : F4SNetworkTaskFactoryProtocol {
     /// - parameter completion: Returns a result containing either the return object or error information
     public func beginGetRequest<A>(attempting: String, completion: @escaping (F4SNetworkResult<A>) -> ()) {
         task?.cancel()
-        let request = urlRequest(verb: .get, url: url, dataToSend: nil)
-        task = dataTask(with: request, attempting: attempting, completion: { [weak self] (result) in
+        task = networkTask(verb: .get, url: url, dataToSend: nil, attempting: attempting) { [weak self] (result) in
             guard let strongSelf = self else { return }
-            switch result {
-            case .error(let error):
-                completion(F4SNetworkResult.error(error))
-            case .success(let dataOrNil):
-                guard
-                    let data = dataOrNil,
-                    let jsonObject = try? strongSelf.jsonDecoder.decode(A.self, from: data) else {
-                        let error = F4SNetworkDataErrorType.deserialization(dataOrNil).error(attempting: attempting)
-                        completion(F4SNetworkResult.error(error))
-                        return
-                }
-                completion(F4SNetworkResult.success(jsonObject))
-            }
-        })
+            strongSelf.processResult(result, attempting: attempting, completion: completion)
+        }
         task?.resume()
     }
     
@@ -99,10 +86,9 @@ open class F4SDataTaskService : F4SNetworkTaskFactoryProtocol {
                                              attempting: String,
                                              completion: @escaping (F4SNetworkDataResult) -> ()
         ) {
-        task?.cancel()
         let data = try! jsonEncoder.encode(objectToSend)
-        let request = urlRequest(verb: verb, url: url, dataToSend: data)
-        task = dataTask(with: request, attempting: attempting, completion: completion)
+        task?.cancel()
+        task = networkTask(verb: verb, url: url, dataToSend: data, attempting: attempting, completion: completion)
         task?.resume()
     }
     
@@ -129,22 +115,21 @@ open class F4SDataTaskService : F4SNetworkTaskFactoryProtocol {
     
     public func beginDelete(attempting: String, completion: @escaping (F4SNetworkDataResult) -> ()) {
         task?.cancel()
-        let request = urlRequest(verb: .delete, url: url, dataToSend: nil)
-        task = dataTask(with: request, attempting: attempting, completion: completion)
+        task = networkTask(verb: .delete, url: url, dataToSend: nil, attempting: attempting, completion: completion)
         task?.resume()
     }
     
     /// The dataTask currently being performed by this service (only one task can be in progress. Starting a second task will cancel the first)
     var task: F4SNetworkTask?
     
-    /// A JSON decoder equipped to decode datetimes as used in the Workfinder api
+    /// A Json decoder equipped to decode datetimes as used in the Workfinder api
     public lazy var jsonDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
         return decoder
     }()
     
-    /// A JSON encoder equipped to encode dates as required by the Workfinder api
+    /// A Json encoder equipped to encode dates as required by the Workfinder api
     internal lazy var jsonEncoder: JSONEncoder = {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .formatted(DateFormatter.iso8601Full)
@@ -156,12 +141,13 @@ open class F4SDataTaskService : F4SNetworkTaskFactoryProtocol {
         return networkTaskfactory.urlRequest(verb: verb, url: url, dataToSend: dataToSend)
     }
     
+    // TODO: Remove this function when all services converted to new model which eliminates need for this
     public static func urlRequest(verb: F4SHttpRequestVerb, url: URL, dataToSend: Data?) -> URLRequest {
         let factory = F4SNetworkTaskFactory(userUuid: F4SDataTaskService.userRepo.load().uuid)
         return factory.urlRequest(verb: verb, url: url, dataToSend: dataToSend)
     }
     
-    func networkTask(verb: F4SHttpRequestVerb, url: URL, dataToSend: Data?, attempting: String, session: F4SNetworkSession, completion: @escaping (F4SNetworkDataResult) -> ()) -> F4SNetworkTask {
+    func networkTask(verb: F4SHttpRequestVerb, url: URL, dataToSend: Data?, attempting: String, completion: @escaping (F4SNetworkDataResult) -> ()) -> F4SNetworkTask {
         return networkTaskfactory.networkTask(verb: verb,
                                    url: url,
                                    dataToSend: dataToSend,
@@ -171,7 +157,6 @@ open class F4SDataTaskService : F4SNetworkTaskFactoryProtocol {
     }
     
     func networkTask(with request: URLRequest,
-                     session: F4SNetworkSession,
                      attempting: String,
                      completion: @escaping (F4SNetworkDataResult) -> ()) -> F4SNetworkTask {
         return networkTaskfactory.networkTask(with: request, session: session, attempting: attempting, completion: completion)
@@ -185,13 +170,6 @@ open class F4SDataTaskService : F4SNetworkTaskFactoryProtocol {
         ) -> F4SNetworkTask {
         let factory = F4SNetworkTaskFactory(userUuid: userRepo.load().uuid)
         return factory.networkTask(with: request, session: session, attempting: attempting, completion: completion)
-    }
-    
-    internal func dataTask(with request: URLRequest,
-                           attempting: String,
-                           completion: @escaping (F4SNetworkDataResult) -> ()
-        ) -> F4SNetworkTask {
-        return networkTaskfactory.networkTask(with: request, session: session, attempting: attempting, completion: completion)
     }
 }
 
