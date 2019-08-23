@@ -15,7 +15,7 @@ public class EmailVerificationService {
     let startUrlString = "https://founders4schools.eu.auth0.com/passwordless/start"
     let verifyUrlString = "https://founders4schools.eu.auth0.com/oauth/ro"
     let startClientId: String
-    var task: URLSessionTask?
+    var task: F4SNetworkTask?
     
     public init(email: String, clientId: String) {
         self.email = email
@@ -32,7 +32,7 @@ public class EmailVerificationService {
             guard httpStatusCode != 200 else { return nil }
             switch httpStatusCode {
             case 400: return EmailSubmissionError.serversideEmailFormatCheckFailed
-            default: return emailSubmissionError(from: httpStatusCode)
+            default: return networkError(httpStatusCode)
             }
         }
     }

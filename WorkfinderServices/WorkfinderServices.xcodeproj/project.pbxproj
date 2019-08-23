@@ -22,6 +22,7 @@
 		FC083F6D230FBA1600641F17 /* F4SMessageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F6C230FBA1600641F17 /* F4SMessageServiceTests.swift */; };
 		FC083F6F230FCC0000641F17 /* F4SMessageActionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F6E230FCC0000641F17 /* F4SMessageActionService.swift */; };
 		FC083F71230FCCA200641F17 /* F4SMessageActionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F70230FCCA200641F17 /* F4SMessageActionServiceTests.swift */; };
+		FC083F73230FD7EF00641F17 /* EmailVerificationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F72230FD7EF00641F17 /* EmailVerificationServiceTests.swift */; };
 		FC12B0FB22F3280000C33410 /* F4SPlacementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B0FA22F3280000C33410 /* F4SPlacementService.swift */; };
 		FC4EE6F5230E620600B40F6B /* F4SNetworkTaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE6F4230E620600B40F6B /* F4SNetworkTaskFactory.swift */; };
 		FC4EE6F7230E62EC00B40F6B /* F4SCommonServiceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE6F6230E62EC00B40F6B /* F4SCommonServiceProtocols.swift */; };
@@ -75,6 +76,7 @@
 		FC083F6C230FBA1600641F17 /* F4SMessageServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SMessageServiceTests.swift; sourceTree = "<group>"; };
 		FC083F6E230FCC0000641F17 /* F4SMessageActionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SMessageActionService.swift; sourceTree = "<group>"; };
 		FC083F70230FCCA200641F17 /* F4SMessageActionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SMessageActionServiceTests.swift; sourceTree = "<group>"; };
+		FC083F72230FD7EF00641F17 /* EmailVerificationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationServiceTests.swift; sourceTree = "<group>"; };
 		FC12B0FA22F3280000C33410 /* F4SPlacementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementService.swift; sourceTree = "<group>"; };
 		FC4EE6F4230E620600B40F6B /* F4SNetworkTaskFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SNetworkTaskFactory.swift; sourceTree = "<group>"; };
 		FC4EE6F6230E62EC00B40F6B /* F4SCommonServiceProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCommonServiceProtocols.swift; sourceTree = "<group>"; };
@@ -258,7 +260,6 @@
 			children = (
 				FC02DA0722EC717A003C8148 /* WEXPlacementService.swift */,
 				FC02DA0422EC7134003C8148 /* MockWEXPlacementService.swift */,
-				FC02DA0822EC717B003C8148 /* EmailVerificationService.swift */,
 				FC02DA2A22EC898C003C8148 /* WEXDataTask.swift */,
 			);
 			path = "WEX Services";
@@ -267,6 +268,7 @@
 		FC85D9EA22F1C8A80035C724 /* F4SServices */ = {
 			isa = PBXGroup;
 			children = (
+				FC02DA0822EC717B003C8148 /* EmailVerificationService.swift */,
 				FC4EE6FA230E77DE00B40F6B /* services inheriting from F4SDataTaskService */,
 				FC4EE6FD230E786F00B40F6B /* services using F4SDataTaskService */,
 				FC4EE6FC230E784F00B40F6B /* Core code */,
@@ -278,6 +280,7 @@
 		FC928363230A867000E1FB75 /* F4SServicesTests */ = {
 			isa = PBXGroup;
 			children = (
+				FC083F72230FD7EF00641F17 /* EmailVerificationServiceTests.swift */,
 				FC4EE700230E78F200B40F6B /* services inheriting from F4SDataTaskService */,
 				FC4EE6FE230E78B700B40F6B /* services using F4SDataTaskService */,
 				FC4EE6FF230E78DD00B40F6B /* Core code */,
@@ -428,6 +431,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC083F73230FD7EF00641F17 /* EmailVerificationServiceTests.swift in Sources */,
 				FC4EE725230EEBD200B40F6B /* F4SContentServiceTests.swift in Sources */,
 				FC4EE717230EC56700B40F6B /* F4SCompanyFavouritingServiceTests.swift in Sources */,
 				FC928362230A865E00E1FB75 /* F4SPlacementServiceTests.swift in Sources */,
