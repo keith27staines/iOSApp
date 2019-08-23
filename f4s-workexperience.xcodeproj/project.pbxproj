@@ -310,7 +310,6 @@
 		FCE11E59211437B400403789 /* F4SDateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE11E58211437B400403789 /* F4SDateHelper.swift */; };
 		FCE11E5C2115D26B00403789 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE11E5B2115D26B00403789 /* SwitchTableViewCell.swift */; };
 		FCE20CC1203C12F300CA821D /* F4SDocumentUploadWhileApplyingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE20CBD203C12F300CA821D /* F4SDocumentUploadWhileApplyingModel.swift */; };
-		FCE20CC6203D5CE400CA821D /* DocumentsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE20CC5203D5CE400CA821D /* DocumentsService.swift */; };
 		FCE51E402210362800DC1D50 /* PlacesSearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E3F2210362800DC1D50 /* PlacesSearchDataGetter.swift */; };
 		FCE51E422210365B00DC1D50 /* CompanySearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E412210365B00DC1D50 /* CompanySearchDataGetter.swift */; };
 		FCE51E44221039D600DC1D50 /* PersonSearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E43221039D600DC1D50 /* PersonSearchDataGetter.swift */; };
@@ -743,7 +742,6 @@
 		FCE11E58211437B400403789 /* F4SDateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDateHelper.swift; sourceTree = "<group>"; };
 		FCE11E5B2115D26B00403789 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		FCE20CBD203C12F300CA821D /* F4SDocumentUploadWhileApplyingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDocumentUploadWhileApplyingModel.swift; sourceTree = "<group>"; };
-		FCE20CC5203D5CE400CA821D /* DocumentsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsService.swift; sourceTree = "<group>"; };
 		FCE51E3F2210362800DC1D50 /* PlacesSearchDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesSearchDataGetter.swift; sourceTree = "<group>"; };
 		FCE51E412210365B00DC1D50 /* CompanySearchDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanySearchDataGetter.swift; sourceTree = "<group>"; };
 		FCE51E43221039D600DC1D50 /* PersonSearchDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonSearchDataGetter.swift; sourceTree = "<group>"; };
@@ -1694,7 +1692,6 @@
 		FC4EE720230EE3FC00B40F6B /* inheritors */ = {
 			isa = PBXGroup;
 			children = (
-				FCE20CC5203D5CE400CA821D /* DocumentsService.swift */,
 				FC99F3D31FFE533000E3AC5A /* F4SRecommendationService.swift */,
 			);
 			path = inheritors;
@@ -2741,7 +2738,6 @@
 				FC1DC07721FE14D7009ABC60 /* PersonViewData.swift in Sources */,
 				FCC212F3219077C000D8D5B7 /* F4SDCAddDocumentViewController.swift in Sources */,
 				FCD3486820038C3100DC1316 /* F4SEmailVerificationError.swift in Sources */,
-				FCE20CC6203D5CE400CA821D /* DocumentsService.swift in Sources */,
 				40E78E6E1DD32BD4000A3776 /* BaseMenuViewController.swift in Sources */,
 				40E78E711DD32BD4000A3776 /* SideMenuViewController.swift in Sources */,
 				FC11006A1FB36A230055EB9A /* ReachabilityExtension.swift in Sources */,

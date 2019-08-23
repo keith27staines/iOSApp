@@ -6,6 +6,7 @@
 //  Copyright © 2018 Founders4Schools. All rights reserved.
 //
 
+import WorkfinderCommon
 import UIKit
 
 extension F4SAddDocumentsViewController :  F4SDCAddDocumentViewControllerDelegate {
