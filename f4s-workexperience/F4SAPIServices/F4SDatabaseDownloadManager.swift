@@ -8,6 +8,7 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderServices
 
 public typealias BackgroundSessionCompletionHandler = () -> Void
 

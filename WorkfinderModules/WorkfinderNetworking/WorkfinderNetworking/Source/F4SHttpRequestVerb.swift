@@ -6,7 +6,7 @@ public enum F4SHttpRequestVerb {
     case post
     case delete
     
-    var name: String {
+    public var name: String {
         switch self {
         case .get:
             return "GET"

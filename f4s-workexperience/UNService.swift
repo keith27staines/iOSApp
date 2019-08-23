@@ -1,6 +1,7 @@
 
 import Foundation
 import UserNotifications
+import WorkfinderCommon
 
 enum NotificationType: String {
     case message

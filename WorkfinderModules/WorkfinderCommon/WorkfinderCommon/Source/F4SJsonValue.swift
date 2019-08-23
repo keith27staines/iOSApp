@@ -1,6 +1,9 @@
 import Foundation
 
-public enum F4SJSONValue: Decodable {
+/// Represents a generic json object which conforms to the Codable protocol
+/// This code is almost a direct copy of code written by Sergio Mansette
+/// https://medium.com/grand-parade/creating-type-safe-json-in-swift-74a612991893
+public enum F4SJSONValue: Codable {
     case string(String)
     case int(Int)
     case double(Double)
@@ -26,9 +29,7 @@ public enum F4SJSONValue: Decodable {
             throw DecodingError.typeMismatch(F4SJSONValue.self, DecodingError.Context(codingPath: container.codingPath, debugDescription: "Not a JSON"))
         }
     }
-}
 
-extension F4SJSONValue: Encodable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
@@ -39,6 +40,13 @@ extension F4SJSONValue: Encodable {
         case .object(let object): try container.encode(object)
         case .array(let array): try container.encode(array)
         }
+    }
+}
+
+extension F4SJSONValue {
+    func decode<T: Decodable>() throws -> T {
+        let encoded = try JSONEncoder().encode(self)
+        return try JSONDecoder().decode(T.self, from: encoded)
     }
 }
 

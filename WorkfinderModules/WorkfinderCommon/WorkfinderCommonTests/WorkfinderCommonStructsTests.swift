@@ -40,5 +40,28 @@ class F4SUserModelTests: XCTestCase {
         XCTAssertNotNil(sut.uuid)
         XCTAssertNotNil(sut.errors)
     }
+}
+
+class F4SPartnerTests : XCTestCase {
+    func test_initialise() {
+        let sut = F4SPartner(uuid: "uuid", sortingIndex: 8, name: "name", description: "descr", imageName: nil)
+        XCTAssertEqual(sut.description, "descr")
+        XCTAssertEqual(sut.name, "name")
+        XCTAssertEqual(sut.uuid, "uuid")
+        XCTAssertEqual(sut.imageName, nil)
+        XCTAssertNil(sut.image)
+    }
     
+    func test_initialise_with_uuid_and_name() {
+        let sut = F4SPartner(uuid: "uuid", name: "name")
+        XCTAssertEqual(sut.description, "")
+        XCTAssertEqual(sut.name, "name")
+        XCTAssertEqual(sut.uuid, "uuid")
+        XCTAssertEqual(sut.imageName, nil)
+    }
+    
+    func test_static_partnerProvidedLater() {
+        let partner = F4SPartner.partnerProvidedLater
+        XCTAssertEqual(partner.name, "I will provide this later")
+    }
 }

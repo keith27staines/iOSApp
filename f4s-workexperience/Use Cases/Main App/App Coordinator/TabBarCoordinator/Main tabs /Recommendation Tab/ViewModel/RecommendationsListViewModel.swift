@@ -82,10 +82,10 @@ public class RecommendationsViewModel : RecommendationsViewModelProtocol {
         }
     }
     
-    func processFetch(_ fetched: [Recommendation]?) {
-        let dehyphenatedFetch = fetched?.compactMap({ (recommendation) -> Recommendation? in
+    func processFetch(_ fetched: [F4SRecommendation]?) {
+        let dehyphenatedFetch = fetched?.compactMap({ (recommendation) -> F4SRecommendation? in
             guard let uuid = recommendation.uuid else { return nil }
-            return Recommendation(companyUUID: uuid.dehyphenated, sortIndex: recommendation.index)
+            return F4SRecommendation(companyUUID: uuid.dehyphenated, sortIndex: recommendation.index)
         })
         let mergedRecommendations = merger.merge(fetchedFromServer: dehyphenatedFetch)
         let numberAddedSinceLastReset = merger.numberAddedSinceLastReset

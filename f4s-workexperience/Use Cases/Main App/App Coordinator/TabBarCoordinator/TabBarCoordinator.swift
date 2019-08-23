@@ -1,13 +1,6 @@
-//
-//  TabBarCoordinator.swift
-//  f4s-workexperience
-//
-//  Created by Andreea Rusu on 26/04/16.
-//  Copyright © 2016 Chelsea Apps Factory. All rights reserved.
-//
-
 import UIKit
 import WorkfinderCommon
+import WorkfinderServices
 
 protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol {
     var shouldAskOperatingSystemToAllowLocation: Bool { get set }

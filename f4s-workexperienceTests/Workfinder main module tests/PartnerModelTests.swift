@@ -7,6 +7,8 @@
 //
 
 import XCTest
+import WorkfinderCommon
+
 @testable import f4s_workexperience
 
 // From LIVE (17 Jan 2018)

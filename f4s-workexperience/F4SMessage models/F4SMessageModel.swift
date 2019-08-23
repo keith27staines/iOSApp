@@ -1,10 +1,3 @@
-//
-//  F4SMessageModel.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 10/05/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
-//
 
 import Foundation
 import WorkfinderCommon
@@ -24,11 +17,19 @@ public struct F4SMessagesList : Codable {
 public struct F4SCannedResponses : Codable {
     public var uuid: String
     public var options: [F4SCannedResponse]
+    public init(uuid: String, responses: [F4SCannedResponse]) {
+        self.uuid = uuid
+        self.options = responses
+    }
 }
 
 public struct F4SCannedResponse : Codable {
     public var uuid: F4SUUID
     public var value: String
+    public init(uuid: F4SUUID, value: String) {
+        self.uuid = uuid
+        self.value = value
+    }
 }
 
 // MARK:- F4SAction
