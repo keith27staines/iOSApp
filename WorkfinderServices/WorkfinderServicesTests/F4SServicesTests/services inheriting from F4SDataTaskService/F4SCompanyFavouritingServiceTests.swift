@@ -44,5 +44,23 @@ class F4SCompanyFavouritingServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
     
+    func test_unfavourite() {
+        let shortlistUuid = "shortlistUuid"
+        let sut = F4SCompanyFavouritingService()
+        let requiredResult = F4SNetworkResult.success([shortlistUuid])
+        sut.networkTaskfactory = MockF4SNetworkTaskFactory(requiredSuccessResult: requiredResult)
+        let expectation = XCTestExpectation(description: "")
+        sut.unfavourite(shortlistUuid: shortlistUuid) { (result) in
+            switch result {
+            case .error(_):
+                XCTFail("The test was designed to return a success result")
+            case .success(let uuid):
+                XCTAssertEqual(uuid, shortlistUuid)
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+    }
+    
     
 }
