@@ -1687,13 +1687,6 @@
 			path = "Model tests";
 			sourceTree = "<group>";
 		};
-		FC4EE720230EE3FC00B40F6B /* inheritors */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = inheritors;
-			sourceTree = "<group>";
-		};
 		FC4EE721230EE41C00B40F6B /* dependers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1745,7 +1738,6 @@
 			isa = PBXGroup;
 			children = (
 				FC4EE721230EE41C00B40F6B /* dependers */,
-				FC4EE720230EE3FC00B40F6B /* inheritors */,
 				FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */,
 			);
 			path = F4SAPIServices;
