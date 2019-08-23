@@ -67,6 +67,17 @@ class F4SJsonDecodingTests: XCTestCase {
         }
     }
     
+    func testDecodingNilData() {
+        JSONDecoder().decode(data: nil, intoType: Json.self, attempting: attempting) { (networkResult) in
+            switch networkResult {
+            case .error(let error):
+                XCTAssertEqual(error.code, F4SNetworkDataErrorType.noData.error(attempting: attempting).code)
+            case .success(_):
+                XCTAssertTrue(false, "Decoding empty data succeeded but was expected to error")
+            }
+        }
+    }
+    
     func testDecodeNetworkDataResultHoldingValidData() {
         JSONDecoder().decode(dataResult: successDataResult, intoType: Json.self, attempting: attempting) { (networkResult) in
             switch networkResult {
