@@ -35,13 +35,7 @@ public class F4SCompanyFavouritingService : F4SDataTaskService, CompanyFavouriti
         let attempting = "Create shortist item for company"
         relativeUrlString = nil
         super.beginSendRequest(verb: .post, objectToSend: params, attempting: attempting) { [weak self] (result) in
-            guard let strongSelf = self else { return }
-            switch result {
-            case .error(let error):
-                completion(F4SNetworkResult.error(error))
-            case .success(let data):
-                completion(strongSelf.decodeAddedCompanyData(data, attempting: attempting))
-            }
+            self?.processResult(result, attempting: attempting, completion: completion)
         }
     }
     
@@ -55,23 +49,6 @@ public class F4SCompanyFavouritingService : F4SDataTaskService, CompanyFavouriti
             case .success(_):
                 completion(F4SNetworkResult.success(shortlistUuid))
             }
-        }
-    }
-}
-
-// MARK:- helper methods
-extension F4SCompanyFavouritingService {
-    func decodeAddedCompanyData(_ data: Data?, attempting: String) -> F4SNetworkResult<F4SShortlistJson> {
-        guard let data = data else {
-            let error = F4SNetworkDataErrorType.noData.error(attempting: attempting)
-            return F4SNetworkResult.error(error)
-        }
-        do {
-            let shortlisted = try jsonDecoder.decode(F4SShortlistJson.self, from: data)
-            return F4SNetworkResult.success(shortlisted)
-        } catch {
-            let error = F4SNetworkDataErrorType.deserialization(data).error(attempting: attempting)
-            return F4SNetworkResult.error(error)
         }
     }
 }

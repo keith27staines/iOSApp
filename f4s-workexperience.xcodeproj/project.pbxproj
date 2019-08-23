@@ -206,7 +206,6 @@
 		FC73719B2101C7EF00C0032A /* AcceptOffer.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC73719A2101C7EF00C0032A /* AcceptOffer.xcassets */; };
 		FC85A5ED2191D87B004E877E /* AddDocumentsViewController+AddDocumentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85A5EC2191D87B004E877E /* AddDocumentsViewController+AddDocumentDelegate.swift */; };
 		FC85A5EF2191D92E004E877E /* AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85A5EE2191D92E004E877E /* AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift */; };
-		FC85FA8220A3436600059EFB /* F4SMessageServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85FA8120A3436600059EFB /* F4SMessageServices.swift */; };
 		FC860D82209C37F2007945E6 /* MessageDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC860D81209C37F2007945E6 /* MessageDispatcher.swift */; };
 		FC87387221945C8F00BF9743 /* F4SBusinessLeadersRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC87387121945C8F00BF9743 /* F4SBusinessLeadersRequestModel.swift */; };
 		FC8E303A20F4A60B006059DE /* F4SLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8E303920F4A60B006059DE /* F4SLogger.swift */; };
@@ -638,7 +637,6 @@
 		FC79314720226D440034D201 /* F4SDistribution.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = F4SDistribution.entitlements; path = Config/F4SDistribution.entitlements; sourceTree = "<group>"; };
 		FC85A5EC2191D87B004E877E /* AddDocumentsViewController+AddDocumentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddDocumentsViewController+AddDocumentDelegate.swift"; sourceTree = "<group>"; };
 		FC85A5EE2191D92E004E877E /* AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift"; sourceTree = "<group>"; };
-		FC85FA8120A3436600059EFB /* F4SMessageServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SMessageServices.swift; sourceTree = "<group>"; };
 		FC860D81209C37F2007945E6 /* MessageDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDispatcher.swift; sourceTree = "<group>"; };
 		FC87387121945C8F00BF9743 /* F4SBusinessLeadersRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SBusinessLeadersRequestModel.swift; sourceTree = "<group>"; };
 		FC8E303920F4A60B006059DE /* F4SLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SLogger.swift; sourceTree = "<group>"; };
@@ -1701,7 +1699,6 @@
 				FCE20CC5203D5CE400CA821D /* DocumentsService.swift */,
 				FC99BDCB20D172B600278DDE /* F4SCompanyDatabaseMetadataService.swift */,
 				FC99F3D31FFE533000E3AC5A /* F4SRecommendationService.swift */,
-				FC85FA8120A3436600059EFB /* F4SMessageServices.swift */,
 			);
 			path = inheritors;
 			sourceTree = "<group>";
@@ -2769,7 +2766,6 @@
 				FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */,
 				FC99BDCA20D170CA00278DDE /* F4SDatabaseDownloadManager.swift in Sources */,
 				FC85A5EF2191D92E004E877E /* AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift in Sources */,
-				FC85FA8220A3436600059EFB /* F4SMessageServices.swift in Sources */,
 				FCEF70BD2108A809001C229A /* F4SInviteSectionHeaderTableViewCell.swift in Sources */,
 				207364611E52091900786F4C /* MessageContainerViewController.swift in Sources */,
 				40E78E811DD32BF4000A3776 /* TableViewCell.swift in Sources */,

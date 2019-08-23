@@ -211,7 +211,9 @@ class MockF4SNetworkTaskFactory<A:Codable> : F4SNetworkTaskFactoryProtocol {
             return task
         }
         if case F4SNetworkResult.success(let json) = requiredSuccessResult {
-            let data = try! JSONEncoder().encode(json)
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .formatted(DateFormatter.iso8601Full)
+            let data = try! encoder.encode(json)
             let requiredDataResult = F4SNetworkDataResult.success(data)
             task.requiredDataResult = requiredDataResult
             return task
