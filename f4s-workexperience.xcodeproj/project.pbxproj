@@ -218,7 +218,6 @@
 		FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99B7E21F826D1400E2D5F0 /* LatLon.swift */; };
 		FC99BDC820CFD8E400278DDE /* F4SDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */; };
 		FC99BDCA20D170CA00278DDE /* F4SDatabaseDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */; };
-		FC99F3D41FFE533000E3AC5A /* F4SRecommendationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99F3D31FFE533000E3AC5A /* F4SRecommendationService.swift */; };
 		FC9BEE082015FF6000347437 /* UniversalLinkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9BEE072015FF6000347437 /* UniversalLinkParser.swift */; };
 		FC9EAD8421106846001C56CE /* F4SAccepOfferContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9EAD8321106846001C56CE /* F4SAccepOfferContext.swift */; };
 		FCA333A520BEA938002AA790 /* F4SMessagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA333A420BEA938002AA790 /* F4SMessagesModel.swift */; };
@@ -647,7 +646,6 @@
 		FC99B7E21F826D1400E2D5F0 /* LatLon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatLon.swift; sourceTree = "<group>"; };
 		FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDownloadService.swift; sourceTree = "<group>"; };
 		FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDatabaseDownloadManager.swift; sourceTree = "<group>"; };
-		FC99F3D31FFE533000E3AC5A /* F4SRecommendationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRecommendationService.swift; sourceTree = "<group>"; };
 		FC9BEE072015FF6000347437 /* UniversalLinkParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalLinkParser.swift; sourceTree = "<group>"; };
 		FC9EAD8321106846001C56CE /* F4SAccepOfferContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SAccepOfferContext.swift; sourceTree = "<group>"; };
 		FCA333A420BEA938002AA790 /* F4SMessagesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SMessagesModel.swift; sourceTree = "<group>"; };
@@ -1692,7 +1690,6 @@
 		FC4EE720230EE3FC00B40F6B /* inheritors */ = {
 			isa = PBXGroup;
 			children = (
-				FC99F3D31FFE533000E3AC5A /* F4SRecommendationService.swift */,
 			);
 			path = inheritors;
 			sourceTree = "<group>";
@@ -2601,7 +2598,6 @@
 				FC1DC06B21FE142D009ABC60 /* AppCoordinator.swift in Sources */,
 				204203EE1E4B16D7007C7409 /* ShortlistDBOperations.swift in Sources */,
 				204C89731DF5F0A100D8493A /* EditCoverLetterTableViewCell.swift in Sources */,
-				FC99F3D41FFE533000E3AC5A /* F4SRecommendationService.swift in Sources */,
 				4059740A1E00115C0002DB3A /* NextResponderTextField.swift in Sources */,
 				2037B0AB1DEC42F600A9DE3E /* PlacementDB.swift in Sources */,
 				FCE51E422210365B00DC1D50 /* CompanySearchDataGetter.swift in Sources */,

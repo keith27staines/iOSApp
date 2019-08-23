@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FC083F7B230FF01000641F17 /* F4SDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F7A230FF01000641F17 /* F4SDocument.swift */; };
+		FC083F852310101D00641F17 /* F4SRecommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F842310101D00641F17 /* F4SRecommendation.swift */; };
 		FC0E5CFB224E1B5700615B4F /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E5CFA224E1B5700615B4F /* LocalStore.swift */; };
 		FC0E5CFF224E65CC00615B4F /* CompanyViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E5CFE224E65CC00615B4F /* CompanyViewData.swift */; };
 		FC12B0FF22F33ECE00C33410 /* F4STimelinePlacementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B0FE22F33ECE00C33410 /* F4STimelinePlacementTests.swift */; };
@@ -111,6 +112,7 @@
 
 /* Begin PBXFileReference section */
 		FC083F7A230FF01000641F17 /* F4SDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDocument.swift; sourceTree = "<group>"; };
+		FC083F842310101D00641F17 /* F4SRecommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRecommendation.swift; sourceTree = "<group>"; };
 		FC0E5CFA224E1B5700615B4F /* LocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStore.swift; sourceTree = "<group>"; };
 		FC0E5CFE224E65CC00615B4F /* CompanyViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyViewData.swift; sourceTree = "<group>"; };
 		FC12B0FE22F33ECE00C33410 /* F4STimelinePlacementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STimelinePlacementTests.swift; sourceTree = "<group>"; };
@@ -408,6 +410,7 @@
 				FC1F592122FDCD9D007164BA /* F4SCalendarDay.swift */,
 				FC94E53C230DB3200091E625 /* F4SError.swift */,
 				FC4EE70F230EB9D700B40F6B /* F4SUserStatus.swift */,
+				FC083F842310101D00641F17 /* F4SRecommendation.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -588,6 +591,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCE5191622493B4C00B550C9 /* String+Extensions.swift in Sources */,
+				FC083F852310101D00641F17 /* F4SRecommendation.swift in Sources */,
 				FC7A439E224A7CF300B2D693 /* F4SJsonDecoding.swift in Sources */,
 				FCFE450E2250BA6700C38436 /* MockLocalStore.swift in Sources */,
 				FC7A4396224A3C0E00B2D693 /* F4SNetworkInterface.swift in Sources */,
