@@ -1,5 +1,6 @@
 import Foundation
 
+/// Represents the json returned when doing a GET onn a F4S document api
 public struct F4SGetDocumentJson : Codable {
     public let uuid: F4SUUID?
     public let documents: [F4SDocument]?
@@ -9,6 +10,7 @@ public struct F4SGetDocumentJson : Codable {
     }
 }
 
+/// Represents the json required when performing a PUT to an F4S document api
 public struct F4SPutDocumentsJson : Codable {
     public let documents: [F4SDocument]?
     public init(documents: [F4SDocument]?) {
@@ -34,6 +36,15 @@ public class F4SDocument : Codable {
     
     static public let defaultTitle = NSLocalizedString("untitled", comment: "")
     
+    /// The type of doocument
+    public var type: F4SUploadableDocumentType = .other
+    
+    /// The name given to this document
+    public var name: String?
+    
+    /// The content of the document as a Data
+    public var data: Data? = nil
+    
     /// F4S uuid of the document
     public var uuid: F4SUUID?
     
@@ -53,6 +64,7 @@ public class F4SDocument : Codable {
         return localUrlString // local url will be viewable if it exists
     }
     
+    var canOpenURL: ((URL) -> Bool) = UIApplication.shared.canOpenURL
     
     /// The url where the document can be viewed (might be local, might be remote)
     public var viewableUrl: URL? {
@@ -60,29 +72,25 @@ public class F4SDocument : Codable {
         return URL(string: urlString)
     }
     
-    private func isOptionalUrlStringOpenable(_ urlString: String?) -> Bool {
+    func isOptionalUrlStringOpenable(_ urlString: String?) -> Bool {
         guard
             let string = urlString,
             string.isEmpty == false,
             let url = URL(string: string),
-            UIApplication.shared.canOpenURL(url) else { return false }
+            canOpenURL(url) else { return false }
         return true
     }
     
     public var isViewableOnUrl: Bool {
-        guard let url = viewableUrl, UIApplication.shared.canOpenURL(url) else { return false }
+        guard let url = viewableUrl, canOpenURL(url) else { return false }
         return true
     }
-    
-    public var type: F4SUploadableDocumentType = .other
-    public var name: String?
-    public var data: Data? = nil
     
     public var hasValidRemoteUrl: Bool {
         guard let remoteUrl = self.remoteUrl else {
             return false
         }
-        return UIApplication.shared.canOpenURL(remoteUrl)
+        return canOpenURL(remoteUrl)
     }
     
     /// The remote url where the document should be available
@@ -96,7 +104,7 @@ public class F4SDocument : Codable {
         if let realData = data, realData.count > 0 { return true }
         guard let remoteUrlString = remoteUrlString,
             let url = URL(string: remoteUrlString),
-            UIApplication.shared.canOpenURL(url) else {
+            canOpenURL(url) else {
                 return false
         }
         return true

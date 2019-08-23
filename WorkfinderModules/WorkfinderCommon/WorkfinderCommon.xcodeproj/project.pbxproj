@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FC083F7B230FF01000641F17 /* F4SDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F7A230FF01000641F17 /* F4SDocument.swift */; };
 		FC083F852310101D00641F17 /* F4SRecommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F842310101D00641F17 /* F4SRecommendation.swift */; };
+		FC083F892310165900641F17 /* F4SDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F882310165900641F17 /* F4SDocumentTests.swift */; };
 		FC0E5CFB224E1B5700615B4F /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E5CFA224E1B5700615B4F /* LocalStore.swift */; };
 		FC0E5CFF224E65CC00615B4F /* CompanyViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E5CFE224E65CC00615B4F /* CompanyViewData.swift */; };
 		FC12B0FF22F33ECE00C33410 /* F4STimelinePlacementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B0FE22F33ECE00C33410 /* F4STimelinePlacementTests.swift */; };
@@ -113,6 +114,7 @@
 /* Begin PBXFileReference section */
 		FC083F7A230FF01000641F17 /* F4SDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDocument.swift; sourceTree = "<group>"; };
 		FC083F842310101D00641F17 /* F4SRecommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRecommendation.swift; sourceTree = "<group>"; };
+		FC083F882310165900641F17 /* F4SDocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDocumentTests.swift; sourceTree = "<group>"; };
 		FC0E5CFA224E1B5700615B4F /* LocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStore.swift; sourceTree = "<group>"; };
 		FC0E5CFE224E65CC00615B4F /* CompanyViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyViewData.swift; sourceTree = "<group>"; };
 		FC12B0FE22F33ECE00C33410 /* F4STimelinePlacementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STimelinePlacementTests.swift; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 		FCA91E782234043D007ED308 /* WorkfinderCommonTests */ = {
 			isa = PBXGroup;
 			children = (
+				FC083F882310165900641F17 /* F4SDocumentTests.swift */,
 				FCE5194D2249645A00B550C9 /* F4SCalendarTests.swift */,
 				FC177FCE230703170068C2F7 /* F4SNetworkErrorTests.swift */,
 				FC177FCC2306A4010068C2F7 /* F4SHoursTypeTests.swift */,
@@ -664,6 +667,7 @@
 				FC1FA08822FAC0FF003EAE59 /* StringExtensionsTests.swift in Sources */,
 				FCA91E7A2234043D007ED308 /* WorkfinderCommonTests.swift in Sources */,
 				FC12B0FF22F33ECE00C33410 /* F4STimelinePlacementTests.swift in Sources */,
+				FC083F892310165900641F17 /* F4SDocumentTests.swift in Sources */,
 				FCE519572249645C00B550C9 /* F4SCalendarMonthTests.swift in Sources */,
 				FC1FA08A22FAD5D5003EAE59 /* DateExtensionTests.swift in Sources */,
 				FC1FEEFC23014BA40039DD94 /* WEXPlacementTests.swift in Sources */,
