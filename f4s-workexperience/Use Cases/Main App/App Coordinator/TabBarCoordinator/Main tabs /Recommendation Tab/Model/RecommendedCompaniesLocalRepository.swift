@@ -2,8 +2,8 @@ import Foundation
 import WorkfinderCommon
 
 public protocol RecommendedCompaniesLocalRepositoryProtocol {
-    func loadRecommendations() -> [Recommendation]
-    func saveRecommendations(_ recommendations: [Recommendation])
+    func loadRecommendations() -> [F4SRecommendation]
+    func saveRecommendations(_ recommendations: [F4SRecommendation])
 }
 
 public class RecommendedCompaniesLocalRepository : RecommendedCompaniesLocalRepositoryProtocol {
@@ -12,15 +12,15 @@ public class RecommendedCompaniesLocalRepository : RecommendedCompaniesLocalRepo
         self.localStore = localStore
     }
     
-    public func loadRecommendations() -> [Recommendation] {
+    public func loadRecommendations() -> [F4SRecommendation] {
         guard let data = localStore.value(key: LocalStore.Key.recommendedCompaniesJsonData) as? Data else {
             return []
         }
-        let recommendations = try! JSONDecoder().decode([Recommendation].self, from: data)
+        let recommendations = try! JSONDecoder().decode([F4SRecommendation].self, from: data)
         return recommendations
     }
     
-    public func saveRecommendations(_ recommendations: [Recommendation]) {
+    public func saveRecommendations(_ recommendations: [F4SRecommendation]) {
         let data = try! JSONEncoder().encode(recommendations)
         localStore.setValue(data, for: LocalStore.Key.recommendedCompaniesJsonData)
     }

@@ -3,7 +3,7 @@ import WorkfinderCommon
 import WorkfinderNetworking
 
 public protocol F4SRecommendationServiceProtocol : class {
-    func fetch(completion: @escaping (F4SNetworkResult<[Recommendation]>) -> ())
+    func fetch(completion: @escaping (F4SNetworkResult<[F4SRecommendation]>) -> ())
 }
 
 public class F4SRecommendationService : F4SDataTaskService, F4SRecommendationServiceProtocol {
@@ -12,7 +12,7 @@ public class F4SRecommendationService : F4SDataTaskService, F4SRecommendationSer
         super.init(baseURLString: NetworkConfig.workfinderApiV2, apiName: F4SRecommendationService.apiName)
     }
 
-    public func fetch(completion: @escaping (F4SNetworkResult<[Recommendation]>) -> ()) {
+    public func fetch(completion: @escaping (F4SNetworkResult<[F4SRecommendation]>) -> ()) {
         beginGetRequest(attempting: "Get recommendations", completion: completion)
     }
 }

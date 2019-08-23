@@ -12,7 +12,7 @@ class F4SRecommendationServiceTests : XCTestCase {
     
     func test_fetch() {
         let sut = F4SRecommendationService()
-        let expectedRecommendation = Recommendation(companyUUID: "companyUuid", sortIndex: 0)
+        let expectedRecommendation = F4SRecommendation(companyUUID: "companyUuid", sortIndex: 0)
         let requiredResult = F4SNetworkResult.success([expectedRecommendation])
         sut.networkTaskfactory = MockF4SNetworkTaskFactory(requiredSuccessResult: requiredResult)
         let expectation = XCTestExpectation(description: "")

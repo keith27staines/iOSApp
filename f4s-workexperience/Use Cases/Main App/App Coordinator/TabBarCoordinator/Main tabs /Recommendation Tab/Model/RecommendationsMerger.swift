@@ -2,19 +2,19 @@ import Foundation
 import WorkfinderCommon
 
 public class RecommendedCompaniesMerger {
-    private (set) var fetchedFromServer: [RecommendationProtocol]? = nil
-    private (set) var fetchedFromLocalStore: [RecommendationProtocol] = []
-    private (set) var recommendations: [RecommendationProtocol] = []
-    private (set) var addedSet: Set<Recommendation> = []
-    private (set) var removedSet: Set<Recommendation> = []
+    private (set) var fetchedFromServer: [F4SRecommendationProtocol]? = nil
+    private (set) var fetchedFromLocalStore: [F4SRecommendationProtocol] = []
+    private (set) var recommendations: [F4SRecommendationProtocol] = []
+    private (set) var addedSet: Set<F4SRecommendation> = []
+    private (set) var removedSet: Set<F4SRecommendation> = []
     
     public var numberAddedSinceLastReset: Int { return addedSet.count }
     
-    public init(fetchedFromLocalStore: [RecommendationProtocol]) {
+    public init(fetchedFromLocalStore: [F4SRecommendationProtocol]) {
         reset(withFetchFromLocalStore: fetchedFromLocalStore)
     }
     
-    public func reset(withFetchFromLocalStore fetch: [RecommendationProtocol]) {
+    public func reset(withFetchFromLocalStore fetch: [F4SRecommendationProtocol]) {
         self.fetchedFromLocalStore = fetch
         self.fetchedFromServer = nil
         self.recommendations = fetchedFromLocalStore
@@ -22,7 +22,7 @@ public class RecommendedCompaniesMerger {
         self.removedSet = []
     }
     
-    public func merge(fetchedFromServer: [RecommendationProtocol]?) -> [RecommendationProtocol] {
+    public func merge(fetchedFromServer: [F4SRecommendationProtocol]?) -> [F4SRecommendationProtocol] {
         self.fetchedFromServer = fetchedFromServer
         guard let fetchedFromServer = fetchedFromServer else { return recommendations }
         let currentSet = setFromArray(recommendations: recommendations)
@@ -35,10 +35,10 @@ public class RecommendedCompaniesMerger {
         return fetchedFromServer
     }
     
-    func setFromArray(recommendations: [RecommendationProtocol]) -> Set<Recommendation> {
-        let array = recommendations.map { (recommendation) -> Recommendation in
-            return Recommendation(recommendation: recommendation)
+    func setFromArray(recommendations: [F4SRecommendationProtocol]) -> Set<F4SRecommendation> {
+        let array = recommendations.map { (recommendation) -> F4SRecommendation in
+            return F4SRecommendation(recommendation: recommendation)
         }
-        return Set<Recommendation>(array)
+        return Set<F4SRecommendation>(array)
     }
 }

@@ -1,14 +1,14 @@
 import Foundation
 
-public protocol RecommendationProtocol {
+public protocol F4SRecommendationProtocol {
     /// Required sort index
     var index: Int { get }
     /// the company uuid
     var uuid: F4SUUID? { get }
 }
 
-public struct Recommendation : Codable , Hashable, Equatable, RecommendationProtocol {
-    public static func == (lhs: Recommendation, rhs: Recommendation) -> Bool {
+public struct F4SRecommendation : Codable , Hashable, Equatable, F4SRecommendationProtocol {
+    public static func == (lhs: F4SRecommendation, rhs: F4SRecommendation) -> Bool {
         return lhs.uuid == rhs.uuid
     }
     
@@ -23,7 +23,7 @@ public struct Recommendation : Codable , Hashable, Equatable, RecommendationProt
         self.uuid = companyUUID.dehyphenated
     }
     
-    public init(recommendation: RecommendationProtocol) {
+    public init(recommendation: F4SRecommendationProtocol) {
         self.index = recommendation.index
         self.uuid = recommendation.uuid
     }

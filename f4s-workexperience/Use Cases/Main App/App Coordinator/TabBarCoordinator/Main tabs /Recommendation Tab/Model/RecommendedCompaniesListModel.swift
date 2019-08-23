@@ -3,7 +3,7 @@ import WorkfinderCommon
 import WorkfinderServices
 
 public protocol RecommendedCompaniesListModelProtocol : class {
-    func fetch(completion: @escaping ([Recommendation]?) -> Void)
+    func fetch(completion: @escaping ([F4SRecommendation]?) -> Void)
 }
 
 /// Represents the list of companies we are currently recommending to the YP
@@ -11,7 +11,7 @@ public class RecommendedCompaniesListModel : RecommendedCompaniesListModelProtoc
     
     let recommendationService: F4SRecommendationServiceProtocol
     
-    public func fetch(completion: @escaping ([Recommendation]?) -> ()) {
+    public func fetch(completion: @escaping ([F4SRecommendation]?) -> ()) {
         recommendationService.fetch { (result) in
             DispatchQueue.main.async {
                 switch result {

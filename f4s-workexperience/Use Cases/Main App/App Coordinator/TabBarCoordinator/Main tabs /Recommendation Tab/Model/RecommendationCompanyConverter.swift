@@ -3,7 +3,7 @@ import WorkfinderCommon
 
 public class RecommendationCompanyConverter {
     
-    public func convert(recommendations: [RecommendationProtocol]) -> [CompanyViewData] {
+    public func convert(recommendations: [F4SRecommendationProtocol]) -> [CompanyViewData] {
         var companies = [CompanyViewData]()
         for recommendation in recommendations {
             if let company = companyViewDataFromUuid(recommendation.uuid) {
@@ -13,10 +13,10 @@ public class RecommendationCompanyConverter {
         return companies
     }
     
-    public func convert(companies: [CompanyViewData]) -> [Recommendation] {
-        var recommendations = [Recommendation]()
+    public func convert(companies: [CompanyViewData]) -> [F4SRecommendation] {
+        var recommendations = [F4SRecommendation]()
         for (index,company) in companies.enumerated() {
-            let recommendaton = Recommendation(companyUUID: company.uuid, sortIndex: index)
+            let recommendaton = F4SRecommendation(companyUUID: company.uuid, sortIndex: index)
             recommendations.append(recommendaton)
         }
         return recommendations
