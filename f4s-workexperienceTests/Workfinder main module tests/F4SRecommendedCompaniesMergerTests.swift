@@ -1,11 +1,12 @@
 import XCTest
+import WorkfinderCommon
 @testable import f4s_workexperience
 
-class RecommendedCompaniesMergerTests: XCTestCase {
+class F4SRecommendedCompaniesMergerTests: XCTestCase {
 
     func testRecommendedCompaniesMerger_localEmpty_RemoteNil() {
-        let localFetch = [Recommendation]()
-        let serverFetch: [Recommendation]? = nil
+        let localFetch = [F4SRecommendation]()
+        let serverFetch: [F4SRecommendation]? = nil
         let sut = RecommendedCompaniesMerger(fetchedFromLocalStore: localFetch)
         let merged = sut.merge(fetchedFromServer: serverFetch)
         XCTAssertEqual(merged.count, 0)
@@ -14,8 +15,8 @@ class RecommendedCompaniesMergerTests: XCTestCase {
     }
     
     func testRecommendedCompaniesMerger_localEmpty_RemoteOne() {
-        let localFetch = [Recommendation]()
-        let serverFetch: [Recommendation]? = [Recommendation(companyUUID: "0", sortIndex: 0)]
+        let localFetch = [F4SRecommendation]()
+        let serverFetch: [F4SRecommendation]? = [F4SRecommendation(companyUUID: "0", sortIndex: 0)]
         let sut = RecommendedCompaniesMerger(fetchedFromLocalStore: localFetch)
         let merged = sut.merge(fetchedFromServer: serverFetch)
         XCTAssertEqual(merged.count, 1)
@@ -24,8 +25,8 @@ class RecommendedCompaniesMergerTests: XCTestCase {
     }
     
     func testRecommendedCompaniesMerger_localOne_RemoteNil() {
-        let localFetch: [Recommendation] = [Recommendation(companyUUID: "0", sortIndex: 0)]
-        let serverFetch: [Recommendation]? = nil
+        let localFetch: [F4SRecommendation] = [F4SRecommendation(companyUUID: "0", sortIndex: 0)]
+        let serverFetch: [F4SRecommendation]? = nil
         let sut = RecommendedCompaniesMerger(fetchedFromLocalStore: localFetch)
         let merged = sut.merge(fetchedFromServer: serverFetch)
         XCTAssertEqual(merged.count, 1)
@@ -34,8 +35,8 @@ class RecommendedCompaniesMergerTests: XCTestCase {
     }
     
     func testRecommendedCompaniesMerger_localOne_RemoteEmpty() {
-        let localFetch: [Recommendation] = [Recommendation(companyUUID: "0", sortIndex: 0)]
-        let serverFetch: [Recommendation]? = []
+        let localFetch: [F4SRecommendation] = [F4SRecommendation(companyUUID: "0", sortIndex: 0)]
+        let serverFetch: [F4SRecommendation]? = []
         let sut = RecommendedCompaniesMerger(fetchedFromLocalStore: localFetch)
         let merged = sut.merge(fetchedFromServer: serverFetch)
         XCTAssertEqual(merged.count, 0)
@@ -44,8 +45,8 @@ class RecommendedCompaniesMergerTests: XCTestCase {
     }
     
     func testRecommendedCompaniesMerger_local_remote_identical() {
-        let localFetch: [Recommendation] = [Recommendation(companyUUID: "0", sortIndex: 0)]
-        let serverFetch: [Recommendation]? = [Recommendation(companyUUID: "0", sortIndex: 0)]
+        let localFetch: [F4SRecommendation] = [F4SRecommendation(companyUUID: "0", sortIndex: 0)]
+        let serverFetch: [F4SRecommendation]? = [F4SRecommendation(companyUUID: "0", sortIndex: 0)]
         let sut = RecommendedCompaniesMerger(fetchedFromLocalStore: localFetch)
         let merged = sut.merge(fetchedFromServer: serverFetch)
         XCTAssertEqual(merged.count, 1)
@@ -54,8 +55,8 @@ class RecommendedCompaniesMergerTests: XCTestCase {
     }
     
     func testRecommendedCompaniesMerger_local_remote_differByUuid() {
-        let localFetch: [Recommendation] = [Recommendation(companyUUID: "0", sortIndex: 0)]
-        let serverFetch: [Recommendation]? = [Recommendation(companyUUID: "1", sortIndex: 0)]
+        let localFetch: [F4SRecommendation] = [F4SRecommendation(companyUUID: "0", sortIndex: 0)]
+        let serverFetch: [F4SRecommendation]? = [F4SRecommendation(companyUUID: "1", sortIndex: 0)]
         let sut = RecommendedCompaniesMerger(fetchedFromLocalStore: localFetch)
         let merged = sut.merge(fetchedFromServer: serverFetch)
         XCTAssertEqual(merged.count, 1)
@@ -65,17 +66,17 @@ class RecommendedCompaniesMergerTests: XCTestCase {
     }
     
     func testRecommendedCompaniesMerger_nonEmptyIntersection_sameIndex() {
-        let localFetch: [Recommendation] =
-            [Recommendation(companyUUID: "0", sortIndex: 0),
-             Recommendation(companyUUID: "1", sortIndex: 0),
-             Recommendation(companyUUID: "2", sortIndex: 0),
-             Recommendation(companyUUID: "3", sortIndex: 0),]
-        let serverFetch: [Recommendation]? =
-            [Recommendation(companyUUID: "2", sortIndex: 0),
-             Recommendation(companyUUID: "3", sortIndex: 0),
-             Recommendation(companyUUID: "4", sortIndex: 0),
-             Recommendation(companyUUID: "5", sortIndex: 0),
-             Recommendation(companyUUID: "6", sortIndex: 0)]
+        let localFetch: [F4SRecommendation] =
+            [F4SRecommendation(companyUUID: "0", sortIndex: 0),
+             F4SRecommendation(companyUUID: "1", sortIndex: 0),
+             F4SRecommendation(companyUUID: "2", sortIndex: 0),
+             F4SRecommendation(companyUUID: "3", sortIndex: 0),]
+        let serverFetch: [F4SRecommendation]? =
+            [F4SRecommendation(companyUUID: "2", sortIndex: 0),
+             F4SRecommendation(companyUUID: "3", sortIndex: 0),
+             F4SRecommendation(companyUUID: "4", sortIndex: 0),
+             F4SRecommendation(companyUUID: "5", sortIndex: 0),
+             F4SRecommendation(companyUUID: "6", sortIndex: 0)]
         let sut = RecommendedCompaniesMerger(fetchedFromLocalStore: localFetch)
         let merged = sut.merge(fetchedFromServer: serverFetch)
         XCTAssertEqual(merged.count, 5)
@@ -85,17 +86,17 @@ class RecommendedCompaniesMergerTests: XCTestCase {
     }
     
     func testRecommendedCompaniesMerger_nonEmptyIntersection_differentIndices() {
-        let localFetch: [Recommendation] =
-            [Recommendation(companyUUID: "0", sortIndex: 0),
-             Recommendation(companyUUID: "1", sortIndex: 1),
-             Recommendation(companyUUID: "2", sortIndex: 2),
-             Recommendation(companyUUID: "3", sortIndex: 3),]
-        let serverFetch: [Recommendation]? =
-            [Recommendation(companyUUID: "2", sortIndex: 4),
-             Recommendation(companyUUID: "3", sortIndex: 5),
-             Recommendation(companyUUID: "4", sortIndex: 6),
-             Recommendation(companyUUID: "5", sortIndex: 7),
-             Recommendation(companyUUID: "6", sortIndex: 8)]
+        let localFetch: [F4SRecommendation] =
+            [F4SRecommendation(companyUUID: "0", sortIndex: 0),
+             F4SRecommendation(companyUUID: "1", sortIndex: 1),
+             F4SRecommendation(companyUUID: "2", sortIndex: 2),
+             F4SRecommendation(companyUUID: "3", sortIndex: 3),]
+        let serverFetch: [F4SRecommendation]? =
+            [F4SRecommendation(companyUUID: "2", sortIndex: 4),
+             F4SRecommendation(companyUUID: "3", sortIndex: 5),
+             F4SRecommendation(companyUUID: "4", sortIndex: 6),
+             F4SRecommendation(companyUUID: "5", sortIndex: 7),
+             F4SRecommendation(companyUUID: "6", sortIndex: 8)]
         let sut = RecommendedCompaniesMerger(fetchedFromLocalStore: localFetch)
         let merged = sut.merge(fetchedFromServer: serverFetch)
         XCTAssertEqual(merged.count, 5)
@@ -105,17 +106,17 @@ class RecommendedCompaniesMergerTests: XCTestCase {
     }
     
     func testRecommendedCompaniesMerger_reset() {
-        let localFetch: [Recommendation] =
-            [Recommendation(companyUUID: "0", sortIndex: 0),
-             Recommendation(companyUUID: "1", sortIndex: 1),
-             Recommendation(companyUUID: "2", sortIndex: 2),
-             Recommendation(companyUUID: "3", sortIndex: 3),]
-        let serverFetch: [Recommendation]? =
-            [Recommendation(companyUUID: "2", sortIndex: 4),
-             Recommendation(companyUUID: "3", sortIndex: 5),
-             Recommendation(companyUUID: "4", sortIndex: 6),
-             Recommendation(companyUUID: "5", sortIndex: 7),
-             Recommendation(companyUUID: "6", sortIndex: 8)]
+        let localFetch: [F4SRecommendation] =
+            [F4SRecommendation(companyUUID: "0", sortIndex: 0),
+             F4SRecommendation(companyUUID: "1", sortIndex: 1),
+             F4SRecommendation(companyUUID: "2", sortIndex: 2),
+             F4SRecommendation(companyUUID: "3", sortIndex: 3),]
+        let serverFetch: [F4SRecommendation]? =
+            [F4SRecommendation(companyUUID: "2", sortIndex: 4),
+             F4SRecommendation(companyUUID: "3", sortIndex: 5),
+             F4SRecommendation(companyUUID: "4", sortIndex: 6),
+             F4SRecommendation(companyUUID: "5", sortIndex: 7),
+             F4SRecommendation(companyUUID: "6", sortIndex: 8)]
         let sut = RecommendedCompaniesMerger(fetchedFromLocalStore: localFetch)
         let merged = sut.merge(fetchedFromServer: serverFetch)
         sut.reset(withFetchFromLocalStore: merged)
@@ -127,13 +128,13 @@ class RecommendedCompaniesMergerTests: XCTestCase {
     }
     
     func testRecommendedCompaniesMerger_setFromArray() {
-        let array: [Recommendation] =
-            [Recommendation(companyUUID: "0", sortIndex: 0),
-             Recommendation(companyUUID: "1", sortIndex: 1),
-             Recommendation(companyUUID: "2", sortIndex: 2),
-             Recommendation(companyUUID: "3", sortIndex: 3),]
+        let array: [F4SRecommendation] =
+            [F4SRecommendation(companyUUID: "0", sortIndex: 0),
+             F4SRecommendation(companyUUID: "1", sortIndex: 1),
+             F4SRecommendation(companyUUID: "2", sortIndex: 2),
+             F4SRecommendation(companyUUID: "3", sortIndex: 3),]
         let sut = RecommendedCompaniesMerger(fetchedFromLocalStore: array)
         let set = sut.setFromArray(recommendations: array)
-        XCTAssertTrue(set.contains(Recommendation(companyUUID: "0", sortIndex: 0)))
+        XCTAssertTrue(set.contains(F4SRecommendation(companyUUID: "0", sortIndex: 0)))
     }
 }

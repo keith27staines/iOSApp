@@ -117,7 +117,7 @@
 		FC0B407E226CAA6E00D992AC /* RecommendationCompanyConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B407D226CAA6E00D992AC /* RecommendationCompanyConverter.swift */; };
 		FC0B4080226CAAEE00D992AC /* RecommendedCompaniesLocalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B407F226CAAEE00D992AC /* RecommendedCompaniesLocalRepository.swift */; };
 		FC0B4082226CAB4E00D992AC /* RecommendationsMerger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B4081226CAB4E00D992AC /* RecommendationsMerger.swift */; };
-		FC0B4084226CB1F300D992AC /* RecommendedCompaniesMergerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B4083226CB1F300D992AC /* RecommendedCompaniesMergerTests.swift */; };
+		FC0B4084226CB1F300D992AC /* F4SRecommendedCompaniesMergerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B4083226CB1F300D992AC /* F4SRecommendedCompaniesMergerTests.swift */; };
 		FC0B4086226CC06200D992AC /* RecommendationEquatableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B4085226CC06200D992AC /* RecommendationEquatableTests.swift */; };
 		FC0C87952122C05C007CF1F3 /* F4SAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C87942122C05C007CF1F3 /* F4SAnalyticsEvents.swift */; };
 		FC11006A1FB36A230055EB9A /* ReachabilityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */; };
@@ -529,7 +529,7 @@
 		FC0B407D226CAA6E00D992AC /* RecommendationCompanyConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationCompanyConverter.swift; sourceTree = "<group>"; };
 		FC0B407F226CAAEE00D992AC /* RecommendedCompaniesLocalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCompaniesLocalRepository.swift; sourceTree = "<group>"; };
 		FC0B4081226CAB4E00D992AC /* RecommendationsMerger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsMerger.swift; sourceTree = "<group>"; };
-		FC0B4083226CB1F300D992AC /* RecommendedCompaniesMergerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCompaniesMergerTests.swift; sourceTree = "<group>"; };
+		FC0B4083226CB1F300D992AC /* F4SRecommendedCompaniesMergerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRecommendedCompaniesMergerTests.swift; sourceTree = "<group>"; };
 		FC0B4085226CC06200D992AC /* RecommendationEquatableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationEquatableTests.swift; sourceTree = "<group>"; };
 		FC0C87942122C05C007CF1F3 /* F4SAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SAnalyticsEvents.swift; sourceTree = "<group>"; };
 		FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityExtension.swift; sourceTree = "<group>"; };
@@ -2223,7 +2223,7 @@
 				FCC85B2220EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift */,
 				FC39F46221AAA64B005B0A07 /* MessageProtocolTests.swift */,
 				FC39F46121AAA64B005B0A07 /* MessagesModelTests.swift */,
-				FC0B4083226CB1F300D992AC /* RecommendedCompaniesMergerTests.swift */,
+				FC0B4083226CB1F300D992AC /* F4SRecommendedCompaniesMergerTests.swift */,
 				FC0B4085226CC06200D992AC /* RecommendationEquatableTests.swift */,
 				FC5DF8B8228AAC6D004B014D /* NameLogicTests.swift */,
 			);
@@ -2778,7 +2778,7 @@
 				FCFBD0282250DBD100A9361D /* CompanyViewDataTests.swift in Sources */,
 				FCFBD02C2250DC4200A9361D /* ScaledNumberTests.swift in Sources */,
 				FCFBD0172250D9A400A9361D /* MockF4SUser.swift in Sources */,
-				FC0B4084226CB1F300D992AC /* RecommendedCompaniesMergerTests.swift in Sources */,
+				FC0B4084226CB1F300D992AC /* F4SRecommendedCompaniesMergerTests.swift in Sources */,
 				FCFBD01D2250DA3E00A9361D /* MockCoordinators.swift in Sources */,
 				FCFBD02B2250DC2700A9361D /* PersonViewDataTests.swift in Sources */,
 				FCFBD0092250D69700A9361D /* f4s_workexperienceTests.swift in Sources */,
