@@ -240,6 +240,7 @@
 		FC4EE700230E78F200B40F6B /* services inheriting from F4SDataTaskService */ = {
 			isa = PBXGroup;
 			children = (
+				FC083F70230FCCA200641F17 /* F4SMessageActionServiceTests.swift */,
 				FC083F6C230FBA1600641F17 /* F4SMessageServiceTests.swift */,
 				FC4EE72D230EF2DB00B40F6B /* F4SCannedMessageResponsesServiceTests.swift */,
 				FC4EE724230EEBD200B40F6B /* F4SContentServiceTests.swift */,
@@ -248,7 +249,6 @@
 				FC4EE716230EC56700B40F6B /* F4SCompanyFavouritingServiceTests.swift */,
 				FC4EE70B230EAAA800B40F6B /* F4SUserStatusServiceTests.swift */,
 				FC4EE701230E799900B40F6B /* F4SVoucherServiceTests.swift */,
-				FC083F70230FCCA200641F17 /* F4SMessageActionServiceTests.swift */,
 			);
 			path = "services inheriting from F4SDataTaskService";
 			sourceTree = "<group>";

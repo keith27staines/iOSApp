@@ -50,6 +50,12 @@ public struct F4SAction : Codable {
             return arg.argumentName == name
         }).first
     }
+    
+    public init(originatingMessageUuid: F4SUUID?, actionType: F4SActionType?, arguments: [F4SActionArgument]?) {
+        self.originatingMessageUuid = originatingMessageUuid
+        self.actionType = actionType
+        self.arguments = arguments
+    }
 }
 
 extension F4SAction {
@@ -82,6 +88,10 @@ public enum F4SActionType : String, Codable {
 public struct F4SActionArgument : Codable {
     public var argumentName: F4SActionArgumentName
     public var value: [String]
+    public init(name: F4SActionArgumentName, value: [String]) {
+        self.argumentName = name
+        self.value = value
+    }
 }
 
 extension F4SActionArgument {
