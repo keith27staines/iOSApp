@@ -3,6 +3,10 @@ import Foundation
 public struct F4SGetDocumentJson : Codable {
     public let uuid: F4SUUID?
     public let documents: [F4SDocument]?
+    public init(uuid: F4SUUID?, documents: [F4SDocument]?) {
+        self.uuid = uuid
+        self.documents = documents
+    }
 }
 
 public struct F4SPutDocumentsJson : Codable {
@@ -28,7 +32,7 @@ public enum F4SUploadableDocumentType : String, CaseIterable, Codable {
 
 public class F4SDocument : Codable {
     
-    static public let defaultTitle = "untitled"
+    static public let defaultTitle = NSLocalizedString("untitled", comment: "")
     
     /// F4S uuid of the document
     public var uuid: F4SUUID?
