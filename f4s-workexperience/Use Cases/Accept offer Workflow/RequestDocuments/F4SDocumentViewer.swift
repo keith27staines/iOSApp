@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import WorkfinderCommon
 
 class F4SDocumentViewer: UIViewController, WKUIDelegate {
     
