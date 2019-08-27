@@ -53,6 +53,9 @@
 		FC928362230A865E00E1FB75 /* F4SPlacementServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC928361230A865E00E1FB75 /* F4SPlacementServiceTests.swift */; };
 		FC928368230A94D100E1FB75 /* F4SDataTaskServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC928365230A94D100E1FB75 /* F4SDataTaskServiceTests.swift */; };
 		FC92836B230A982600E1FB75 /* F4SDataTaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC928369230A956700E1FB75 /* F4SDataTaskService.swift */; };
+		FC93768223150CC00058BA75 /* F4STemplateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93768123150CC00058BA75 /* F4STemplateService.swift */; };
+		FC93768423150CE10058BA75 /* F4SCompanyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93768323150CE10058BA75 /* F4SCompanyService.swift */; };
+		FC9376862315190B0058BA75 /* F4SCompanyServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9376852315190B0058BA75 /* F4SCompanyServiceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +118,9 @@
 		FC928361230A865E00E1FB75 /* F4SPlacementServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementServiceTests.swift; sourceTree = "<group>"; };
 		FC928365230A94D100E1FB75 /* F4SDataTaskServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDataTaskServiceTests.swift; sourceTree = "<group>"; };
 		FC928369230A956700E1FB75 /* F4SDataTaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDataTaskService.swift; sourceTree = "<group>"; };
+		FC93768123150CC00058BA75 /* F4STemplateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4STemplateService.swift; sourceTree = "<group>"; };
+		FC93768323150CE10058BA75 /* F4SCompanyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyService.swift; sourceTree = "<group>"; };
+		FC9376852315190B0058BA75 /* F4SCompanyServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyServiceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,6 +268,7 @@
 		FC4EE700230E78F200B40F6B /* services inheriting from F4SDataTaskService */ = {
 			isa = PBXGroup;
 			children = (
+				FC9376852315190B0058BA75 /* F4SCompanyServiceTests.swift */,
 				FC083F80230FFD5D00641F17 /* F4SPlacementDocumentsServiceTests.swift */,
 				FC083F7C230FFB3800641F17 /* F4SUserDocumentServiceTests.swift */,
 				FC083F76230FE87700641F17 /* F4SCompanyDatabaseMetadataServiceTests.swift */,
@@ -292,6 +299,8 @@
 		FC85D9EA22F1C8A80035C724 /* F4SServices */ = {
 			isa = PBXGroup;
 			children = (
+				FC93768323150CE10058BA75 /* F4SCompanyService.swift */,
+				FC93768123150CC00058BA75 /* F4STemplateService.swift */,
 				FC02DA0822EC717B003C8148 /* EmailVerificationService.swift */,
 				FC4EE6FA230E77DE00B40F6B /* services inheriting from F4SDataTaskService */,
 				FC4EE6FD230E786F00B40F6B /* services using F4SDataTaskService */,
@@ -434,6 +443,7 @@
 				FC4EE70E230EAFFF00B40F6B /* F4SCompanyFavouritingService.swift in Sources */,
 				FC02DA0B22EC717B003C8148 /* EmailVerificationService.swift in Sources */,
 				FC02DA2522EC7FCE003C8148 /* WorkfinderServices.swift in Sources */,
+				FC93768223150CC00058BA75 /* F4STemplateService.swift in Sources */,
 				FC083F8323100FB500641F17 /* F4SRecommendationService.swift in Sources */,
 				FC92836B230A982600E1FB75 /* F4SDataTaskService.swift in Sources */,
 				FC083F75230FE76100641F17 /* F4SCompanyDatabaseMetadataService.swift in Sources */,
@@ -452,6 +462,7 @@
 				FC4EE719230ED3CC00B40F6B /* F4SPartnerService.swift in Sources */,
 				FC4EE729230EEFA900B40F6B /* F4SCannedMessageResponsesService.swift in Sources */,
 				FC4EE6F7230E62EC00B40F6B /* F4SCommonServiceProtocols.swift in Sources */,
+				FC93768423150CE10058BA75 /* F4SCompanyService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,6 +481,7 @@
 				FC083F7D230FFB3800641F17 /* F4SUserDocumentServiceTests.swift in Sources */,
 				FC4EE71B230ED80F00B40F6B /* F4SPartnerServiceTests.swift in Sources */,
 				FC02DA2122EC7851003C8148 /* WEXPlacementServiceTests.swift in Sources */,
+				FC9376862315190B0058BA75 /* F4SCompanyServiceTests.swift in Sources */,
 				FC928368230A94D100E1FB75 /* F4SDataTaskServiceTests.swift in Sources */,
 				FC083F6D230FBA1600641F17 /* F4SMessageServiceTests.swift in Sources */,
 				FC4EE71F230EDBEC00B40F6B /* F4SCalendarServiceTests.swift in Sources */,

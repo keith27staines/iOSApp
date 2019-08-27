@@ -8,14 +8,15 @@
 
 import Foundation
 import WorkfinderCommon
-import WorkfinderApplyUseCase
 import WorkfinderNetworking
-import WorkfinderServices
 
 public class F4STemplateService: F4STemplateServiceProtocol {
     
+    public init() {
+        
+    }
+    
     public func getTemplates(completion: @escaping (F4SNetworkResult<[F4STemplate]>) -> Void) {
-        globalLog.debug("Entered F4STemplateService.getTemplates")
         let attempting = "Get templates"
         let url = URL(string: WorkfinderEndpoint.templateUrl)!
         let request = F4SDataTaskService.urlRequest(verb: .get, url: url, dataToSend: nil)
@@ -34,7 +35,6 @@ public class F4STemplateService: F4STemplateServiceProtocol {
                 do {
                     let decoder = JSONDecoder()
                     let templates = try decoder.decode([F4STemplate].self, from: data)
-                    globalLog.debug("F4STemplateService.getTemplates obtained templates")
                     completion(F4SNetworkResult.success(templates))
                 } catch {
                     let deserializationError = F4SNetworkDataErrorType.deserialization(data).error(attempting: attempting)

@@ -1,5 +1,6 @@
 import Foundation
 import WorkfinderCommon
+import WorkfinderServices
 import WorkfinderAppLogic
 
 class AcceptOfferContext {

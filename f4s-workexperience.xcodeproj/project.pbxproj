@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		200F640F1DF19995002F5F36 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F640E1DF19995002F5F36 /* Errors.swift */; };
 		201458C51E1CFCE500DBC9BD /* Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 201458C31E1CFCE500DBC9BD /* Message.storyboard */; };
 		202091AC1DF84BCF003F5B48 /* SocialShareItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202091AB1DF84BCF003F5B48 /* SocialShareItemSource.swift */; };
 		203658811E1F808100D87DC4 /* StatusCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2036587F1E1F808100D87DC4 /* StatusCollectionViewCell.xib */; };
@@ -19,7 +18,6 @@
 		2037B0AB1DEC42F600A9DE3E /* PlacementDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037B0AA1DEC42F600A9DE3E /* PlacementDB.swift */; };
 		2037B0AD1DEC560700A9DE3E /* PlacementCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037B0AC1DEC560700A9DE3E /* PlacementCoreDataManager.swift */; };
 		2037B0AF1DEC592900A9DE3E /* PlacementDBOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037B0AE1DEC592900A9DE3E /* PlacementDBOperations.swift */; };
-		2037B0B81DEC8A2400A9DE3E /* F4STemplateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037B0B71DEC8A2400A9DE3E /* F4STemplateService.swift */; };
 		204203EA1E4B110A007C7409 /* ShortlistDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204203E91E4B110A007C7409 /* ShortlistDB.swift */; };
 		204203EC1E4B160C007C7409 /* ShortlistCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204203EB1E4B160C007C7409 /* ShortlistCoreDataManager.swift */; };
 		204203EE1E4B16D7007C7409 /* ShortlistDBOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204203ED1E4B16D7007C7409 /* ShortlistDBOperations.swift */; };
@@ -195,7 +193,6 @@
 		FC5F3D4E20D938E90002F41B /* F4SUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F3D4D20D938E90002F41B /* F4SUserService.swift */; };
 		FC5F3D5020D93C070002F41B /* F4SUserDataFix.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F3D4F20D93C070002F41B /* F4SUserDataFix.swift */; };
 		FC64A5932119EBE3006464A5 /* CalendarChooserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC64A5902119EBE3006464A5 /* CalendarChooserController.swift */; };
-		FC64A595211ACA39006464A5 /* F4SCompanyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC64A594211ACA39006464A5 /* F4SCompanyService.swift */; };
 		FC64A597211AECDE006464A5 /* F4SInviteDetailLinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC64A596211AECDE006464A5 /* F4SInviteDetailLinkCell.swift */; };
 		FC681C001F57473D0077BECA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFE1F57473D0077BECA /* Podfile */; };
 		FC681C011F57473D0077BECA /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFF1F57473D0077BECA /* Podfile.lock */; };
@@ -386,7 +383,6 @@
 /* Begin PBXFileReference section */
 		0022DD3F6308590A19CBCF7B /* Pods-f4s-workexperienceTests.releasef4slive.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperienceTests.releasef4slive.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperienceTests/Pods-f4s-workexperienceTests.releasef4slive.xcconfig"; sourceTree = "<group>"; };
 		0FB15162F0A1B8298B159D38 /* Pods_f4s_workexperienceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_f4s_workexperienceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		200F640E1DF19995002F5F36 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		201458C41E1CFCE500DBC9BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Message.storyboard; sourceTree = "<group>"; };
 		202091AB1DF84BCF003F5B48 /* SocialShareItemSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialShareItemSource.swift; sourceTree = "<group>"; };
 		203658801E1F808100D87DC4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/StatusCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -398,7 +394,6 @@
 		2037B0AA1DEC42F600A9DE3E /* PlacementDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacementDB.swift; sourceTree = "<group>"; };
 		2037B0AC1DEC560700A9DE3E /* PlacementCoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacementCoreDataManager.swift; sourceTree = "<group>"; };
 		2037B0AE1DEC592900A9DE3E /* PlacementDBOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacementDBOperations.swift; sourceTree = "<group>"; };
-		2037B0B71DEC8A2400A9DE3E /* F4STemplateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4STemplateService.swift; sourceTree = "<group>"; };
 		204203E91E4B110A007C7409 /* ShortlistDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortlistDB.swift; sourceTree = "<group>"; };
 		204203EB1E4B160C007C7409 /* ShortlistCoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortlistCoreDataManager.swift; sourceTree = "<group>"; };
 		204203ED1E4B16D7007C7409 /* ShortlistDBOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortlistDBOperations.swift; sourceTree = "<group>"; };
@@ -622,7 +617,6 @@
 		FC5F3D4D20D938E90002F41B /* F4SUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserService.swift; sourceTree = "<group>"; };
 		FC5F3D4F20D93C070002F41B /* F4SUserDataFix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserDataFix.swift; sourceTree = "<group>"; };
 		FC64A5902119EBE3006464A5 /* CalendarChooserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarChooserController.swift; sourceTree = "<group>"; };
-		FC64A594211ACA39006464A5 /* F4SCompanyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyService.swift; sourceTree = "<group>"; };
 		FC64A596211AECDE006464A5 /* F4SInviteDetailLinkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInviteDetailLinkCell.swift; sourceTree = "<group>"; };
 		FC681BFE1F57473D0077BECA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		FC681BFF1F57473D0077BECA /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
@@ -982,7 +976,6 @@
 			children = (
 				40E78E541DD32964000A3776 /* Constants.swift */,
 				40E78E551DD32964000A3776 /* Entities.swift */,
-				200F640E1DF19995002F5F36 /* Errors.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -1693,8 +1686,6 @@
 				FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */,
 				FC5F3D4D20D938E90002F41B /* F4SUserService.swift */,
 				20FEBDD91DE5AD3400EBDCBF /* F4SImageService.swift */,
-				2037B0B71DEC8A2400A9DE3E /* F4STemplateService.swift */,
-				FC64A594211ACA39006464A5 /* F4SCompanyService.swift */,
 				FCD388E6208E27E500FC73C5 /* F4SCompanyDocumentService.swift */,
 			);
 			path = dependers;
@@ -2544,7 +2535,6 @@
 				FCB3923021006AB500792C0A /* F4SPlacementInviteDetailTableViewController.swift in Sources */,
 				FCE11E59211437B400403789 /* F4SDateHelper.swift in Sources */,
 				FC24D23D226AFC1800FA04A1 /* RecommendedCompaniesListModel.swift in Sources */,
-				FC64A595211ACA39006464A5 /* F4SCompanyService.swift in Sources */,
 				FC1DC09621FE1509009ABC60 /* CompanySubViewController.swift in Sources */,
 				FCA333A520BEA938002AA790 /* F4SMessagesModel.swift in Sources */,
 				40C1A5211DDF5ACE000F80AA /* GQTPointQuadTree.m in Sources */,
@@ -2610,7 +2600,6 @@
 				FC64A597211AECDE006464A5 /* F4SInviteDetailLinkCell.swift in Sources */,
 				205EB20B1DDB161D00034424 /* DatabaseOperations.swift in Sources */,
 				FCB49308222A875300B88B8B /* TimelineCoordinator.swift in Sources */,
-				200F640F1DF19995002F5F36 /* Errors.swift in Sources */,
 				FC24D22F226AEB6B00FA04A1 /* RecommendedCompanyTableViewCell.swift in Sources */,
 				FCC212F7219077C000D8D5B7 /* F4SArrangeTableViewController.swift in Sources */,
 				FC1DC06E21FE148B009ABC60 /* NavigationCoordinator.swift in Sources */,
@@ -2643,7 +2632,6 @@
 				FC21BE38220F53EB00A0A389 /* SearchProtocols.swift in Sources */,
 				FC21BE35220F53EB00A0A389 /* CompanySearchDataSource.swift in Sources */,
 				204C89751DF5F0A100D8493A /* EditFooterView.swift in Sources */,
-				2037B0B81DEC8A2400A9DE3E /* F4STemplateService.swift in Sources */,
 				40E78E761DD32BE7000A3776 /* AnimatedMenuButton.swift in Sources */,
 				FC06264722032E74000D2D04 /* CompanyDocumentsViewController.swift in Sources */,
 				FC21BE39220F53EB00A0A389 /* SearchView.swift in Sources */,
