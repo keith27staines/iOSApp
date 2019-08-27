@@ -67,8 +67,6 @@ public struct F4SCompanyDocument : Codable {
         self.urlString = urlString
         self.docType = docType
     }
-    
-    
 }
 
 extension F4SCompanyDocument {
