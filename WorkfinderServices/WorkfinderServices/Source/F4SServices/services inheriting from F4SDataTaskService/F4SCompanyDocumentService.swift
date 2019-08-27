@@ -9,7 +9,20 @@
 import Foundation
 import WorkfinderCommon
 import WorkfinderNetworking
-import WorkfinderServices
+
+public struct F4SGetCompanyDocuments: Decodable {
+    public var companyUuid: F4SUUID?
+    public var documents: F4SCompanyDocuments?
+    public var possibleDocumentTypes: [String]?
+}
+
+extension F4SGetCompanyDocuments {
+    private enum CodingKeys: String, CodingKey {
+        case companyUuid = "uuid"
+        case documents = "requested_documents"
+        case possibleDocumentTypes = "possible_doc_types"
+    }
+}
 
 fileprivate struct Json : Codable {
     var requested_documents: [[String : String]]
