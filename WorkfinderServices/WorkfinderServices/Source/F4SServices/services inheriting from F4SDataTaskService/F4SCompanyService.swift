@@ -25,7 +25,7 @@ public protocol F4SCompanyServiceProtocol {
     func getCompany(uuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SCompanyJson>) -> ())
 }
 
-public class F4SCompanyService : F4SDataTaskService, F4SCompanyServiceProtocol {
+public class F4SCompanyService: F4SDataTaskService, F4SCompanyServiceProtocol {
 
     public init() {
         let apiName = "company"

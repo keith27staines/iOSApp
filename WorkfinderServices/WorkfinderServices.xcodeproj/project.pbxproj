@@ -56,6 +56,7 @@
 		FC93768223150CC00058BA75 /* F4STemplateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93768123150CC00058BA75 /* F4STemplateService.swift */; };
 		FC93768423150CE10058BA75 /* F4SCompanyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93768323150CE10058BA75 /* F4SCompanyService.swift */; };
 		FC9376862315190B0058BA75 /* F4SCompanyServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9376852315190B0058BA75 /* F4SCompanyServiceTests.swift */; };
+		FC93768823151F020058BA75 /* F4STemplateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93768723151F020058BA75 /* F4STemplateService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +122,7 @@
 		FC93768123150CC00058BA75 /* F4STemplateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4STemplateService.swift; sourceTree = "<group>"; };
 		FC93768323150CE10058BA75 /* F4SCompanyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyService.swift; sourceTree = "<group>"; };
 		FC9376852315190B0058BA75 /* F4SCompanyServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyServiceTests.swift; sourceTree = "<group>"; };
+		FC93768723151F020058BA75 /* F4STemplateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +207,8 @@
 		FC4EE6FA230E77DE00B40F6B /* services inheriting from F4SDataTaskService */ = {
 			isa = PBXGroup;
 			children = (
+				FC93768123150CC00058BA75 /* F4STemplateService.swift */,
+				FC93768323150CE10058BA75 /* F4SCompanyService.swift */,
 				FC083F8223100FB400641F17 /* F4SRecommendationService.swift */,
 				FC083F7E230FFBD000641F17 /* F4SUserDocumentService.swift */,
 				FC083F78230FEDEE00641F17 /* F4SPlacementDocumentsService.swift */,
@@ -268,6 +272,7 @@
 		FC4EE700230E78F200B40F6B /* services inheriting from F4SDataTaskService */ = {
 			isa = PBXGroup;
 			children = (
+				FC93768723151F020058BA75 /* F4STemplateService.swift */,
 				FC9376852315190B0058BA75 /* F4SCompanyServiceTests.swift */,
 				FC083F80230FFD5D00641F17 /* F4SPlacementDocumentsServiceTests.swift */,
 				FC083F7C230FFB3800641F17 /* F4SUserDocumentServiceTests.swift */,
@@ -299,8 +304,6 @@
 		FC85D9EA22F1C8A80035C724 /* F4SServices */ = {
 			isa = PBXGroup;
 			children = (
-				FC93768323150CE10058BA75 /* F4SCompanyService.swift */,
-				FC93768123150CC00058BA75 /* F4STemplateService.swift */,
 				FC02DA0822EC717B003C8148 /* EmailVerificationService.swift */,
 				FC4EE6FA230E77DE00B40F6B /* services inheriting from F4SDataTaskService */,
 				FC4EE6FD230E786F00B40F6B /* services using F4SDataTaskService */,
@@ -478,6 +481,7 @@
 				FC4EE72E230EF2DB00B40F6B /* F4SCannedMessageResponsesServiceTests.swift in Sources */,
 				FC083F77230FE87700641F17 /* F4SCompanyDatabaseMetadataServiceTests.swift in Sources */,
 				FC083F81230FFD5D00641F17 /* F4SPlacementDocumentsServiceTests.swift in Sources */,
+				FC93768823151F020058BA75 /* F4STemplateService.swift in Sources */,
 				FC083F7D230FFB3800641F17 /* F4SUserDocumentServiceTests.swift in Sources */,
 				FC4EE71B230ED80F00B40F6B /* F4SPartnerServiceTests.swift in Sources */,
 				FC02DA2122EC7851003C8148 /* WEXPlacementServiceTests.swift in Sources */,

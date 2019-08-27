@@ -9,12 +9,13 @@ class F4SCompanyServiceTests: XCTestCase {
         XCTAssertEqual(sut.apiName, "company")
     }
     
-    func test_get() {
+    func test_getCompany() {
         let sut = F4SCompanyService()
         let requiredValue = F4SCompanyJson()
         let requiredResult = F4SNetworkResult.success(requiredValue)
         sut.networkTaskfactory = MockF4SNetworkTaskFactory(requiredSuccessResult:
                     requiredResult)
+        let expectation = XCTestExpectation(description: "")
         sut.getCompany(uuid: "companyUuid") { (result) in
             XCTAssertEqual(sut.url.lastPathComponent, "companyUuid")
             switch result {
@@ -23,7 +24,9 @@ class F4SCompanyServiceTests: XCTestCase {
             case .success(_):
                 break
             }
+            expectation.fulfill()
         }
+        wait(for: [expectation], timeout: 1)
     }
 
 }
