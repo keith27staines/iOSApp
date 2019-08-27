@@ -1,11 +1,4 @@
-//
-//  F4SPlacementService.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 25/03/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
-
+// F4SPlacementService
 import Foundation
 import WorkfinderCommon
 import WorkfinderNetworking

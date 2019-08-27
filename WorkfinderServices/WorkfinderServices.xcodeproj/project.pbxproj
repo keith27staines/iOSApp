@@ -59,6 +59,7 @@
 		FC93768A231534F20058BA75 /* F4SCompanyFavouritingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE716230EC56700B40F6B /* F4SCompanyFavouritingServiceTests.swift */; };
 		FC93768C231534FD0058BA75 /* F4SCompanyDocumentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93768B231534FD0058BA75 /* F4SCompanyDocumentService.swift */; };
 		FC937690231571710058BA75 /* F4SCompanyDocumentServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93768F231571710058BA75 /* F4SCompanyDocumentServiceTests.swift */; };
+		FC93769223157CEC0058BA75 /* MockF4SNetworkTaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93769123157CEC0058BA75 /* MockF4SNetworkTaskFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +128,7 @@
 		FC93768723151F020058BA75 /* F4STemplateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateService.swift; sourceTree = "<group>"; };
 		FC93768B231534FD0058BA75 /* F4SCompanyDocumentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyDocumentService.swift; sourceTree = "<group>"; };
 		FC93768F231571710058BA75 /* F4SCompanyDocumentServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyDocumentServiceTests.swift; sourceTree = "<group>"; };
+		FC93769123157CEC0058BA75 /* MockF4SNetworkTaskFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockF4SNetworkTaskFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				FC928365230A94D100E1FB75 /* F4SDataTaskServiceTests.swift */,
+				FC93769123157CEC0058BA75 /* MockF4SNetworkTaskFactory.swift */,
 			);
 			path = "Core code";
 			sourceTree = "<group>";
@@ -476,6 +479,7 @@
 				FC083F73230FD7EF00641F17 /* EmailVerificationServiceTests.swift in Sources */,
 				FC4EE725230EEBD200B40F6B /* F4SContentServiceTests.swift in Sources */,
 				FC083F872310121E00641F17 /* F4SRecommendationServiceTests.swift in Sources */,
+				FC93769223157CEC0058BA75 /* MockF4SNetworkTaskFactory.swift in Sources */,
 				FC928362230A865E00E1FB75 /* F4SPlacementServiceTests.swift in Sources */,
 				FC4EE72E230EF2DB00B40F6B /* F4SCannedMessageResponsesServiceTests.swift in Sources */,
 				FC93768A231534F20058BA75 /* F4SCompanyFavouritingServiceTests.swift in Sources */,
