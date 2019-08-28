@@ -63,7 +63,7 @@ public class ApplicationLetterViewModel : ApplicationLetterViewModelProtocol {
 }
 
 extension ApplicationLetterViewModel : ApplicationLetterModelDelegate {
-    public func applicationLetterModel(_ model: ApplicationLetterModelProtocol, failedToSubmitLetter error: WEXError, retry: (() -> Void)?) {
+    public func applicationLetterModel(_ model: ApplicationLetterModelProtocol, failedToSubmitLetter error: F4SNetworkError, retry: (() -> Void)?) {
         view?.showErrorWithCancelAndRetry(
             error,
             retry: { [weak self] in

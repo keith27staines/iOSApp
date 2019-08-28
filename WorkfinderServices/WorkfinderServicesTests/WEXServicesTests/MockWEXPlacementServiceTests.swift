@@ -8,7 +8,7 @@ class MockWEXPlacementServiceTests: XCTestCase {
     func test_injected_resultForCreate() {
         let placementJson = WEXPlacementJson(uuid: "123456")
         let result = WEXResult<WEXPlacementJson,WEXError>.success(placementJson)
-        let sut = MockWEXPlacementService(createResult: result)
+        let sut = MockF4SPlacementApplicationService(createResult: result)
         switch sut.resultForCreate! {
         case .success(let json):
             XCTAssertEqual(placementJson.uuid!, json.uuid!)
@@ -22,7 +22,7 @@ class MockWEXPlacementServiceTests: XCTestCase {
         let createJson = WEXCreatePlacementJson(user: "", roleUuid: "", company: "", vendor: "", interests: [])
         let resultJson = WEXPlacementJson(uuid: "1234")
         let result = WEXResult<WEXPlacementJson,WEXError>.success(resultJson)
-        let sut = MockWEXPlacementService(createResult: result)
+        let sut = MockF4SPlacementApplicationService(createResult: result)
         sut.createPlacement(with: createJson) { (result) in
             expectation.fulfill()
             switch result {
@@ -40,7 +40,7 @@ class MockWEXPlacementServiceTests: XCTestCase {
         let expectation = XCTestExpectation(description: "completion_called")
         let placementJson = WEXPlacementJson(uuid: "1234")
         let result = WEXResult<WEXPlacementJson,WEXError>.success(placementJson)
-        let sut = MockWEXPlacementService(patchResult: result)
+        let sut = MockF4SPlacementApplicationService(patchResult: result)
         sut.patchPlacement(uuid: "1234", with: placementJson) { (result) in
             expectation.fulfill()
             switch result {

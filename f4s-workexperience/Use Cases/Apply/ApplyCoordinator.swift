@@ -8,6 +8,7 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderServices
 import WorkfinderApplyUseCase
 import WorkfinderAppLogic
 import WorkfinderUI
@@ -27,8 +28,7 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     
     var applicationContext: F4SApplicationContext
     var createPlacementJson: WEXCreatePlacementJson?
-    var createPlacementServiceFactory: WEXPlacementServiceFactoryProtocol?
-    var placementService: WEXPlacementServiceProtocol
+    var placementService: F4SPlacementApplicationServiceProtocol
     var templateService: F4STemplateServiceProtocol
     var placementRepository: F4SPlacementRepositoryProtocol = F4SPlacementRespository()
     var interestsRepository: F4SInterestsRepositoryProtocol = F4SInterestsRepository()
@@ -54,7 +54,7 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
          parent: CoreInjectionNavigationCoordinator?,
          navigationRouter: NavigationRoutingProtocol,
          inject: CoreInjectionProtocol,
-         placementService: WEXPlacementServiceProtocol,
+         placementService: F4SPlacementApplicationServiceProtocol,
          templateService: F4STemplateServiceProtocol,
          continueFrom: F4STimelinePlacement? = nil) {
         self.applyCoordinatorDelegate = applyCoordinatorDelegate

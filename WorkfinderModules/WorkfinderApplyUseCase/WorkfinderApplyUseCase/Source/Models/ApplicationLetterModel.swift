@@ -21,7 +21,7 @@ public protocol ApplicationLetterModelDelegate : class {
     func modelBusyState(_ model: ApplicationLetterModelProtocol, isBusy: Bool)
     func applicationLetterModel(_ model: ApplicationLetterModelProtocol, stoppedProcessingWithError: Error)
     func applicationLetterModel(_ model: ApplicationLetterModelProtocol, renderedTemplateToString: NSAttributedString, allFieldsFilled: Bool)
-    func applicationLetterModel(_ model: ApplicationLetterModelProtocol, failedToSubmitLetter error: WEXError, retry: (()->Void)?)
+    func applicationLetterModel(_ model: ApplicationLetterModelProtocol, failedToSubmitLetter error: F4SNetworkError, retry: (()->Void)?)
 }
 
 public class ApplicationLetterModel : ApplicationLetterModelProtocol {

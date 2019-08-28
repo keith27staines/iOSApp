@@ -28,7 +28,7 @@ public class ApplicationModel : ApplicationModelProtocol {
     public var voucherCode: F4SUUID?
     public internal (set) var placement: F4SPlacement?
     public internal (set) var placementJson: WEXPlacementJson?
-    public internal (set) var placementService: WEXPlacementServiceProtocol
+    public internal (set) var placementService: F4SPlacementApplicationServiceProtocol
     public internal (set) var templateService: F4STemplateServiceProtocol
     public internal (set) var companyViewData: CompanyViewDataProtocol
     public internal (set) lazy var localStore: LocalStorageProtocol = { return LocalStore() }()
@@ -101,7 +101,7 @@ public class ApplicationModel : ApplicationModelProtocol {
         placement: F4SPlacement?,
         placementRepository: F4SPlacementRepositoryProtocol,
         companyViewData: CompanyViewDataProtocol,
-        placementService: WEXPlacementServiceProtocol,
+        placementService: F4SPlacementApplicationServiceProtocol,
         templateService: F4STemplateServiceProtocol) {
         
         self.userUuid = userUuid
@@ -129,7 +129,7 @@ public class ApplicationModel : ApplicationModelProtocol {
             vendor: installationUuid,
             interests: userInterests.uuidList)
         applicationLetterViewModel.modelBusyState(applicationLetterModel, isBusy: true)
-        placementService.createPlacement(with: createPlacementJson) { [weak self] (result) in
+        placementService.apply(with: createPlacementJson) { [weak self] (result) in
             guard let strongSelf = self else { return }
             strongSelf.handleResult(
                 result,
@@ -146,7 +146,7 @@ public class ApplicationModel : ApplicationModelProtocol {
         patch.skills = self.skills
         patch.availabilityPeriods = [self.availabilityPeriodJson]
         applicationLetterViewModel.modelBusyState(applicationLetterModel, isBusy: true)
-        placementService.patchPlacement(uuid: uuid, with: patch) { [weak self] (result) in
+        placementService.update(uuid: uuid, with: patch) { [weak self] (result) in
             guard let strongSelf = self else { return }
             strongSelf.handleResult(
                 result,
@@ -166,15 +166,15 @@ public class ApplicationModel : ApplicationModelProtocol {
         let voucherLogic = F4SVoucherLogic(placement: placementUuid, code: voucherCode)
         voucherLogic.validateOnServer { [weak self] (codeValidationError) in
             guard let strongSelf = self else { return }
-            var wexResult: WEXResult<WEXPlacementJson,WEXError> = WEXResult.success(strongSelf.placementJson!)
+            var result: F4SNetworkResult<WEXPlacementJson> = F4SNetworkResult.success(strongSelf.placementJson!)
             if let codeValidationError = codeValidationError {
                 if case .networkError = codeValidationError {
-                    let wexError = WEXErrorsFactory.networkErrorFrom(error: codeValidationError, attempting: "associate voucher with placement")
-                    wexResult = WEXResult.failure(wexError)
+                    let networkError = F4SNetworkError(localizedDescription: "network error", attempting: "associate voucher with placement", retry: true)
+                    result = F4SNetworkResult<WEXPlacementJson>.error(networkError)
                 }
             }
             strongSelf.handleResult(
-                wexResult,
+                result,
                 completion: completion,
                 onStepSuccess: strongSelf.updatePlacementAsReviewed,
                 onStepRetry: strongSelf.updatePlacementWithCoverLetterChoices)
@@ -186,7 +186,7 @@ public class ApplicationModel : ApplicationModelProtocol {
         var patch = WEXPlacementJson()
         patch.reviewed = true
         applicationLetterViewModel.modelBusyState(applicationLetterModel, isBusy: true)
-        placementService.patchPlacement(uuid: uuid, with: patch) { [weak self] (result) in
+        placementService.update(uuid: uuid, with: patch) { [weak self] (result) in
             guard let strongSelf = self else { return }
             strongSelf.handleResult(
                 result,
@@ -201,7 +201,7 @@ public class ApplicationModel : ApplicationModelProtocol {
     }
     
     func handleResult(
-        _ result: WEXResult<WEXPlacementJson, WEXError>,
+        _ result: F4SNetworkResult<WEXPlacementJson>,
         completion: @escaping ((Error?) -> Void),
         onStepSuccess: @escaping ((@escaping (Error?) -> Void)) -> Void,
         onStepRetry: @escaping ((@escaping (Error?) -> Void)) -> Void) {
@@ -213,7 +213,7 @@ public class ApplicationModel : ApplicationModelProtocol {
             
             applicationLetterViewModel.modelBusyState(letterModel, isBusy: false)
             switch result {
-            case .failure(let error):
+            case .error(let error):
                 applicationLetterViewModel.applicationLetterModel(letterModel, failedToSubmitLetter: error, retry: {
                     onStepRetry(completion)
                 })

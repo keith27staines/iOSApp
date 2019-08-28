@@ -1,11 +1,3 @@
-//
-//  CompanyCoordinator.swift
-//  F4SPrototypes
-//
-//  Created by Keith Dev on 21/01/2019.
-//  Copyright © 2019 Keith Staines. All rights reserved.
-//
-
 import UIKit
 import Reachability
 import WorkfinderCommon
@@ -16,7 +8,7 @@ protocol CompanyCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol
 
 class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoordinatorProtocol {
     
-    lazy var placementService: WEXPlacementServiceProtocol = { return WEXPlacementService() }()
+    lazy var applyService: F4SPlacementApplicationServiceProtocol = { return F4SPlacementApplicationService() }()
     var companyViewController: CompanyViewController!
     var companyViewModel: CompanyViewModel!
     var company: Company
@@ -94,7 +86,7 @@ extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
             parent: self,
             navigationRouter: navigationRouter,
             inject: injected,
-            placementService: placementService,
+            placementService: applyService,
             templateService: templateService)
         addChildCoordinator(applyCoordinator)
         applyCoordinator.start()

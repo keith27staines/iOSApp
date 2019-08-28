@@ -9,15 +9,13 @@
 /* Begin PBXBuildFile section */
 		FC02D9F222EC70FD003C8148 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC02D9E822EC70FD003C8148 /* WorkfinderServices.framework */; };
 		FC02D9F922EC70FD003C8148 /* WorkfinderServices.h in Headers */ = {isa = PBXBuildFile; fileRef = FC02D9EB22EC70FD003C8148 /* WorkfinderServices.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FC02DA0522EC7134003C8148 /* MockWEXPlacementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02DA0422EC7134003C8148 /* MockWEXPlacementService.swift */; };
-		FC02DA0A22EC717B003C8148 /* WEXPlacementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02DA0722EC717A003C8148 /* WEXPlacementService.swift */; };
+		FC02DA0522EC7134003C8148 /* MockF4SPlacementApplicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02DA0422EC7134003C8148 /* MockF4SPlacementApplicationService.swift */; };
 		FC02DA0B22EC717B003C8148 /* EmailVerificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02DA0822EC717B003C8148 /* EmailVerificationService.swift */; };
 		FC02DA0E22EC7214003C8148 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC02DA0D22EC7214003C8148 /* WorkfinderCommon.framework */; };
 		FC02DA1022EC721D003C8148 /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC02DA0F22EC721D003C8148 /* WorkfinderNetworking.framework */; };
 		FC02DA1F22EC7457003C8148 /* MockWEXPlacementServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02DA1E22EC7457003C8148 /* MockWEXPlacementServiceTests.swift */; };
-		FC02DA2122EC7851003C8148 /* WEXPlacementServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02DA2022EC7850003C8148 /* WEXPlacementServiceTests.swift */; };
+		FC02DA2122EC7851003C8148 /* F4SPlacementApplicationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02DA2022EC7850003C8148 /* F4SPlacementApplicationServiceTests.swift */; };
 		FC02DA2522EC7FCE003C8148 /* WorkfinderServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02DA2422EC7FCE003C8148 /* WorkfinderServices.swift */; };
-		FC02DA2B22EC898C003C8148 /* WEXDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02DA2A22EC898C003C8148 /* WEXDataTask.swift */; };
 		FC083F6B230FB9F600641F17 /* F4SMessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F6A230FB9F600641F17 /* F4SMessageService.swift */; };
 		FC083F6D230FBA1600641F17 /* F4SMessageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F6C230FBA1600641F17 /* F4SMessageServiceTests.swift */; };
 		FC083F6F230FCC0000641F17 /* F4SMessageActionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F6E230FCC0000641F17 /* F4SMessageActionService.swift */; };
@@ -32,6 +30,7 @@
 		FC083F8323100FB500641F17 /* F4SRecommendationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F8223100FB400641F17 /* F4SRecommendationService.swift */; };
 		FC083F872310121E00641F17 /* F4SRecommendationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F862310121E00641F17 /* F4SRecommendationServiceTests.swift */; };
 		FC12B0FB22F3280000C33410 /* F4SPlacementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B0FA22F3280000C33410 /* F4SPlacementService.swift */; };
+		FC2198FF231673A4005FAC5F /* F4SPlacementApplicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2198FE231673A4005FAC5F /* F4SPlacementApplicationService.swift */; };
 		FC4EE6F5230E620600B40F6B /* F4SNetworkTaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE6F4230E620600B40F6B /* F4SNetworkTaskFactory.swift */; };
 		FC4EE6F7230E62EC00B40F6B /* F4SCommonServiceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE6F6230E62EC00B40F6B /* F4SCommonServiceProtocols.swift */; };
 		FC4EE702230E799900B40F6B /* F4SVoucherServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE701230E799900B40F6B /* F4SVoucherServiceTests.swift */; };
@@ -78,15 +77,13 @@
 		FC02D9EC22EC70FD003C8148 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC02D9F122EC70FD003C8148 /* WorkfinderServicesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderServicesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC02D9F822EC70FD003C8148 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FC02DA0422EC7134003C8148 /* MockWEXPlacementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWEXPlacementService.swift; sourceTree = "<group>"; };
-		FC02DA0722EC717A003C8148 /* WEXPlacementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEXPlacementService.swift; sourceTree = "<group>"; };
+		FC02DA0422EC7134003C8148 /* MockF4SPlacementApplicationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockF4SPlacementApplicationService.swift; sourceTree = "<group>"; };
 		FC02DA0822EC717B003C8148 /* EmailVerificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationService.swift; sourceTree = "<group>"; };
 		FC02DA0D22EC7214003C8148 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC02DA0F22EC721D003C8148 /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC02DA1E22EC7457003C8148 /* MockWEXPlacementServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWEXPlacementServiceTests.swift; sourceTree = "<group>"; };
-		FC02DA2022EC7850003C8148 /* WEXPlacementServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEXPlacementServiceTests.swift; sourceTree = "<group>"; };
+		FC02DA2022EC7850003C8148 /* F4SPlacementApplicationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementApplicationServiceTests.swift; sourceTree = "<group>"; };
 		FC02DA2422EC7FCE003C8148 /* WorkfinderServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderServices.swift; sourceTree = "<group>"; };
-		FC02DA2A22EC898C003C8148 /* WEXDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEXDataTask.swift; sourceTree = "<group>"; };
 		FC083F6A230FB9F600641F17 /* F4SMessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SMessageService.swift; sourceTree = "<group>"; };
 		FC083F6C230FBA1600641F17 /* F4SMessageServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SMessageServiceTests.swift; sourceTree = "<group>"; };
 		FC083F6E230FCC0000641F17 /* F4SMessageActionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SMessageActionService.swift; sourceTree = "<group>"; };
@@ -101,6 +98,7 @@
 		FC083F8223100FB400641F17 /* F4SRecommendationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRecommendationService.swift; sourceTree = "<group>"; };
 		FC083F862310121E00641F17 /* F4SRecommendationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRecommendationServiceTests.swift; sourceTree = "<group>"; };
 		FC12B0FA22F3280000C33410 /* F4SPlacementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementService.swift; sourceTree = "<group>"; };
+		FC2198FE231673A4005FAC5F /* F4SPlacementApplicationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementApplicationService.swift; sourceTree = "<group>"; };
 		FC4EE6F4230E620600B40F6B /* F4SNetworkTaskFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SNetworkTaskFactory.swift; sourceTree = "<group>"; };
 		FC4EE6F6230E62EC00B40F6B /* F4SCommonServiceProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCommonServiceProtocols.swift; sourceTree = "<group>"; };
 		FC4EE701230E799900B40F6B /* F4SVoucherServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SVoucherServiceTests.swift; sourceTree = "<group>"; };
@@ -212,6 +210,7 @@
 		FC4EE6FA230E77DE00B40F6B /* services inheriting from F4SDataTaskService */ = {
 			isa = PBXGroup;
 			children = (
+				FC2198FE231673A4005FAC5F /* F4SPlacementApplicationService.swift */,
 				FC93768B231534FD0058BA75 /* F4SCompanyDocumentService.swift */,
 				FC93768123150CC00058BA75 /* F4STemplateService.swift */,
 				FC93768323150CE10058BA75 /* F4SCompanyService.swift */,
@@ -254,9 +253,7 @@
 			children = (
 				FC4EE703230E8F7E00B40F6B /* F4SRoleService.swift */,
 				FC12B0FA22F3280000C33410 /* F4SPlacementService.swift */,
-				FC02DA0722EC717A003C8148 /* WEXPlacementService.swift */,
-				FC02DA2A22EC898C003C8148 /* WEXDataTask.swift */,
-				FC02DA0422EC7134003C8148 /* MockWEXPlacementService.swift */,
+				FC02DA0422EC7134003C8148 /* MockF4SPlacementApplicationService.swift */,
 			);
 			path = "services using F4SDataTaskService";
 			sourceTree = "<group>";
@@ -282,6 +279,7 @@
 		FC4EE700230E78F200B40F6B /* services inheriting from F4SDataTaskService */ = {
 			isa = PBXGroup;
 			children = (
+				FC02DA2022EC7850003C8148 /* F4SPlacementApplicationServiceTests.swift */,
 				FC93768F231571710058BA75 /* F4SCompanyDocumentServiceTests.swift */,
 				FC4EE716230EC56700B40F6B /* F4SCompanyFavouritingServiceTests.swift */,
 				FC93768723151F020058BA75 /* F4STemplateService.swift */,
@@ -329,7 +327,6 @@
 			isa = PBXGroup;
 			children = (
 				FC02DA1E22EC7457003C8148 /* MockWEXPlacementServiceTests.swift */,
-				FC02DA2022EC7850003C8148 /* WEXPlacementServiceTests.swift */,
 			);
 			path = WEXServicesTests;
 			sourceTree = "<group>";
@@ -444,6 +441,7 @@
 			files = (
 				FC93768C231534FD0058BA75 /* F4SCompanyDocumentService.swift in Sources */,
 				FC4EE70A230EA96700B40F6B /* F4SUserStatusService.swift in Sources */,
+				FC2198FF231673A4005FAC5F /* F4SPlacementApplicationService.swift in Sources */,
 				FC083F7F230FFBD000641F17 /* F4SUserDocumentService.swift in Sources */,
 				FC4EE70E230EAFFF00B40F6B /* F4SCompanyFavouritingService.swift in Sources */,
 				FC02DA0B22EC717B003C8148 /* EmailVerificationService.swift in Sources */,
@@ -454,15 +452,13 @@
 				FC083F75230FE76100641F17 /* F4SCompanyDatabaseMetadataService.swift in Sources */,
 				FC12B0FB22F3280000C33410 /* F4SPlacementService.swift in Sources */,
 				FC85D9EC22F1E02D0035C724 /* F4SVoucherVerificationService.swift in Sources */,
-				FC02DA2B22EC898C003C8148 /* WEXDataTask.swift in Sources */,
 				FC4EE704230E8F7F00B40F6B /* F4SRoleService.swift in Sources */,
 				FC083F79230FEDEE00641F17 /* F4SPlacementDocumentsService.swift in Sources */,
-				FC02DA0522EC7134003C8148 /* MockWEXPlacementService.swift in Sources */,
+				FC02DA0522EC7134003C8148 /* MockF4SPlacementApplicationService.swift in Sources */,
 				FC083F6F230FCC0000641F17 /* F4SMessageActionService.swift in Sources */,
 				FC4EE6F5230E620600B40F6B /* F4SNetworkTaskFactory.swift in Sources */,
 				FC083F6B230FB9F600641F17 /* F4SMessageService.swift in Sources */,
 				FC4EE723230EE72600B40F6B /* F4SContentService.swift in Sources */,
-				FC02DA0A22EC717B003C8148 /* WEXPlacementService.swift in Sources */,
 				FC4EE71D230EDB4100B40F6B /* F4SCalendarService.swift in Sources */,
 				FC4EE719230ED3CC00B40F6B /* F4SPartnerService.swift in Sources */,
 				FC4EE729230EEFA900B40F6B /* F4SCannedMessageResponsesService.swift in Sources */,
@@ -488,7 +484,7 @@
 				FC93768823151F020058BA75 /* F4STemplateService.swift in Sources */,
 				FC083F7D230FFB3800641F17 /* F4SUserDocumentServiceTests.swift in Sources */,
 				FC4EE71B230ED80F00B40F6B /* F4SPartnerServiceTests.swift in Sources */,
-				FC02DA2122EC7851003C8148 /* WEXPlacementServiceTests.swift in Sources */,
+				FC02DA2122EC7851003C8148 /* F4SPlacementApplicationServiceTests.swift in Sources */,
 				FC9376862315190B0058BA75 /* F4SCompanyServiceTests.swift in Sources */,
 				FC928368230A94D100E1FB75 /* F4SDataTaskServiceTests.swift in Sources */,
 				FC083F6D230FBA1600641F17 /* F4SMessageServiceTests.swift in Sources */,

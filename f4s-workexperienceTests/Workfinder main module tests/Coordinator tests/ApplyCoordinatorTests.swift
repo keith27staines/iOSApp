@@ -126,10 +126,10 @@ class MockPlacementServiceFactory : WEXPlacementServiceFactoryProtocol {
         let httpResponse = HTTPURLResponse(url: url, statusCode: responseStatusCode, httpVersion: "1.0", headerFields: nil)!
         if let error = WEXErrorsFactory.networkErrorFrom(response: httpResponse, responseData: nil, attempting: "test") {
             let result = WEXResult<WEXPlacementJson,WEXError>.failure(error)
-            return MockWEXPlacementService(createResult: result)
+            return MockF4SPlacementApplicationService(createResult: result)
         } else {
             let result = WEXResult<WEXPlacementJson,WEXError>.success(successJson!)
-            return MockWEXPlacementService(createResult: result)
+            return MockF4SPlacementApplicationService(createResult: result)
         }
     }
 }
