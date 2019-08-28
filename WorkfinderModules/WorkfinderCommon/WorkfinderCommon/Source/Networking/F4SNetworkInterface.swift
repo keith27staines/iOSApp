@@ -16,6 +16,13 @@ public enum F4SNetworkResult<A:Decodable> {
     case success(A)
 }
 
+public struct F4SJSONBoolValue: Codable {
+    public var value: Bool
+    public init(value: Bool = true) {
+        self.value = value
+    }
+}
+
 public enum F4SNetworkDataResult {
     case error(F4SNetworkError)
     case success(Data?)

@@ -69,7 +69,7 @@ public class F4SCompanyDocumentsModel {
         }
     }
     
-    public func requestDocumentsFromCompany(completion: @escaping (F4SNetworkResult<Bool>) -> ()) {
+    public func requestDocumentsFromCompany(completion: @escaping (F4SNetworkResult<F4SJSONBoolValue>) -> ()) {
         var requestingDocuments = F4SCompanyDocuments()
         for document in documents {
             if document.userIsRequesting {
@@ -77,7 +77,7 @@ public class F4SCompanyDocumentsModel {
             }
         }
         guard requestingDocuments.count > 0 else {
-            completion(F4SNetworkResult.success(true))
+            completion(F4SNetworkResult.success(F4SJSONBoolValue(value: true)))
             return
         }
         service.requestDocuments(companyUuid: companyUuid, documents: requestingDocuments) { (result) in
