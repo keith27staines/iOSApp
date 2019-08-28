@@ -9,10 +9,10 @@
 import XCTest
 @testable import WorkfinderCommon
 
-class WEXCreatePlacementJsonTests: XCTestCase {
+class F4SCreatePlacementJsonTests: XCTestCase {
     
-    func test_WEXCreatePlacementJson_initialise() {
-        let sut = WEXCreatePlacementJson(user: "user", roleUuid: "role", company: "company", vendor: "vendor", interests: ["interest1"])
+    func test_F4SCreatePlacementJson_initialise() {
+        let sut = F4SCreatePlacementJson(user: "user", roleUuid: "role", company: "company", vendor: "vendor", interests: ["interest1"])
         XCTAssertTrue(sut.userUuid == "user")
         XCTAssertTrue(sut.roleUuid == "role")
         XCTAssertTrue(sut.companyUuid == "company")
@@ -34,7 +34,7 @@ class WEXCreatePlacementJsonTests: XCTestCase {
         }
         """
         let data = json.data(using: String.Encoding.utf8)!
-        let sut = try! JSONDecoder().decode(WEXCreatePlacementJson.self, from: data)
+        let sut = try! JSONDecoder().decode(F4SCreatePlacementJson.self, from: data)
         XCTAssertTrue(sut.userUuid == "user")
         XCTAssertTrue(sut.roleUuid == "role")
         XCTAssertTrue(sut.companyUuid == "company")
@@ -43,10 +43,10 @@ class WEXCreatePlacementJsonTests: XCTestCase {
     }
 }
 
-class WEXPlacementJsonTests: XCTestCase {
+class F4SPlacementJsonTests: XCTestCase {
     
     func test_CreatePlacementJson_initialise() {
-        let sut = WEXPlacementJson(uuid: "uuid", user: "user", company: "company", vendor: "vendor", interests: ["interest1"])
+        let sut = F4SPlacementJson(uuid: "uuid", user: "user", company: "company", vendor: "vendor", interests: ["interest1"])
         XCTAssertTrue(sut.uuid == "uuid")
         XCTAssertTrue(sut.userUuid == "user")
         XCTAssertTrue(sut.companyUuid == "company")
@@ -54,7 +54,7 @@ class WEXPlacementJsonTests: XCTestCase {
         XCTAssertTrue(sut.interests == ["interest1"])
     }
     
-    func test_WEXPlacementJson_decode() {
+    func test_F4SPlacementJson_decode() {
         let json = """
         {
             \"user_uuid\": \"user\",
@@ -69,7 +69,7 @@ class WEXPlacementJsonTests: XCTestCase {
         }
         """
         let data = json.data(using: String.Encoding.utf8)!
-        let sut = try! JSONDecoder().decode(WEXPlacementJson.self, from: data)
+        let sut = try! JSONDecoder().decode(F4SPlacementJson.self, from: data)
         XCTAssertTrue(sut.userUuid == "user")
         XCTAssertTrue(sut.roleUuid == "role")
         XCTAssertTrue(sut.companyUuid == "company")

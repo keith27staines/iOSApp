@@ -38,60 +38,6 @@ public class UserMessageHandler {
         }
     }
     
-    public func displayCancelRetryAlertFor(_ networkError: WEXNetworkError,
-                                           parentCtrl: UIViewController,
-                                           cancelHandler: (() -> Void)? = nil,
-                                           retryHandler: (() -> Void)? = nil) {
-        
-        let title: String
-        let message: String
-        
-        if networkError.retry {
-            if networkError.httpStatusCode == 429 {
-                title =  "The server is busy"
-                message = "Please wait a minute or so and try again"
-            } else {
-                title =  "Workfinder needs a network connection"
-                message = "Please make sure you have a good network connection and try again"
-            }
-        } else {
-            title = "Workfinder could not complete an operation"
-            var httpStatus: String
-            if let code = networkError.httpStatusCode {
-                httpStatus = String(code)
-            } else {
-                httpStatus = "Unknown error"
-            }
-            
-            message = "\(httpStatus): \(networkError.localizedDescription) attempting \(networkError.attempting ?? "the last action")"
-        }
-        
-        presentCancelRetryAlert(
-            title: title,
-            message: message,
-            cancelHandler: cancelHandler,
-            retryHandler: retryHandler,
-            parentCtrl: parentCtrl)
-    }
-
-    
-    public func displayCancelRetryAlertFor(_ error: WEXError,
-                        parentCtrl: UIViewController,
-                        cancelHandler: (() -> Void)? = nil,
-                        retryHandler: (() -> Void)? = nil) {
-        if let networkError = error as? WEXNetworkError {
-            displayCancelRetryAlertFor(networkError, parentCtrl: parentCtrl, cancelHandler: cancelHandler, retryHandler: retryHandler)
-            return
-        }
-        
-        presentCancelRetryAlert(
-            title: NSLocalizedString("A problem occurred", comment: ""),
-            message: error.localizedDescription,
-            cancelHandler: cancelHandler,
-            retryHandler: retryHandler,
-            parentCtrl: parentCtrl)
-    }
-    
     fileprivate func presentCancelRetryAlert(
         title: String,
         message: String,

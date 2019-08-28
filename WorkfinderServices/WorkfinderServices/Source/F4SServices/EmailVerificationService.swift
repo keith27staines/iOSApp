@@ -83,8 +83,8 @@ public class EmailVerificationService {
             return
         }
         if data == nil {
-            let wexError = WEXErrorsFactory.networkErrorFrom(response: httpResponse!, responseData: data, attempting: attempting)!
-            logger?.logDataTaskFailure(attempting: attempting, error: wexError, request: request, response: httpResponse, responseData: data)
+            let networkError = F4SNetworkError(response: httpResponse!, attempting: attempting)!
+            logger?.logDataTaskFailure(attempting: attempting, error: networkError, request: request, response: httpResponse, responseData: data)
             return
         }
         logger?.logDataTaskSuccess(request: request, response: httpResponse!, responseData: data!)

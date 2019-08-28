@@ -131,12 +131,12 @@ public class ApplicationLetterViewController : UIViewController {
 extension ApplicationLetterViewController : ApplicationLetterViewProtocol {
     
     public func showErrorWithCancelAndRetry(_ error: Error, retry: @escaping () -> Void, cancel: @escaping () -> Void) {
-        var wexError: WEXError
-        if let wex = error as? WEXError {
-            wexError = wex
+        
+        if let networkError = error as? F4SNetworkError {
+            userMessageHandler.display(networkError, parentCtrl: self, cancelHandler: cancel, retryHandler: retry)
         } else {
-            wexError = WEXErrorsFactory.networkErrorFrom(error: error, attempting: "")
+            let networkError = F4SNetworkError(error: error, attempting: "")
+                        userMessageHandler.display(networkError, parentCtrl: self, cancelHandler: cancel, retryHandler: retry)
         }
-        userMessageHandler.displayCancelRetryAlertFor(wexError, parentCtrl: self, cancelHandler: cancel, retryHandler: retry)
     }
 }

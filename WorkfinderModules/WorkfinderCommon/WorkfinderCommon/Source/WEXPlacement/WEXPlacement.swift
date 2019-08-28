@@ -1,27 +1,4 @@
-//
-//  WEXPlacement.swift
-//  WorkfinderCommon
-//
-//  Created by Keith Dev on 15/03/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
-
 import Foundation
-
-/// Defines the interface for WEXPlacementServiceFactory
-public protocol WEXPlacementServiceFactoryProtocol {
-    /// Creates and returns an object conforming to WEXPlacementServiceFactory
-    func makePlacementService() -> WEXPlacementServiceProtocol
-}
-
-/// Defines the interface for WEXPlacementService
-public protocol WEXPlacementServiceProtocol {
-    func createPlacement(
-        with json: WEXCreatePlacementJson,
-        completion: @escaping (WEXResult<WEXPlacementJson, WEXError>) -> Void)
-    
-    func patchPlacement(uuid: F4SUUID, with json: WEXPlacementJson, completion: @escaping (WEXResult<WEXPlacementJson, WEXError>) -> Void)
-}
 
 /// Defines the workflow states of a WEXPlacement
 public enum WEXPlacementState : String, Codable {
@@ -42,14 +19,14 @@ public enum WEXPlacementState : String, Codable {
 }
 
 /// Defines the interface for 
-public protocol WEXCreatePlacementJsonProtocol : Codable {
+public protocol F4SCreatePlacementJsonProtocol : Codable {
     var userUuid: F4SUUID { get }
     var companyUuid: F4SUUID { get }
     var vendorUuid: F4SUUID { get }
     var interests: [F4SUUID] { get }
 }
 
-public struct WEXCreatePlacementJson : WEXCreatePlacementJsonProtocol, Codable {
+public struct F4SCreatePlacementJson : F4SCreatePlacementJsonProtocol, Codable {
     public init(user: F4SUUID, roleUuid: F4SUUID, company: F4SUUID, vendor: F4SUUID, interests: [F4SUUID]) {
         self.userUuid = user
         self.roleUuid = roleUuid
@@ -65,7 +42,7 @@ public struct WEXCreatePlacementJson : WEXCreatePlacementJsonProtocol, Codable {
     public internal (set) var interests: [F4SUUID]
 }
 
-extension WEXCreatePlacementJson {
+extension F4SCreatePlacementJson {
     private enum CodingKeys : String, CodingKey {
         case userUuid = "user_uuid"
         case roleUuid = "role_uuid"
@@ -75,7 +52,7 @@ extension WEXCreatePlacementJson {
     }
 }
 
-public struct WEXPlacementJson : Codable {
+public struct F4SPlacementJson : Codable {
     public init(uuid: F4SUUID? = nil, user: F4SUUID? = nil, company: F4SUUID? = nil, vendor: F4SUUID? = nil, interests: [F4SUUID]? = nil) {
         self.uuid = uuid
         self.userUuid = user
@@ -99,7 +76,7 @@ public struct WEXPlacementJson : Codable {
 }
 
 
-extension WEXPlacementJson {
+extension F4SPlacementJson {
     private enum CodingKeys : String, CodingKey {
         case uuid = "uuid"
         case vendorUuid = "vendor_uuid"

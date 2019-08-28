@@ -14,7 +14,7 @@ import WorkfinderAppLogic
 public protocol ApplicationModelProtocol : class {
     var voucherCode: String? { get set }
     var placement: F4SPlacement? { get }
-    var placementJson: WEXPlacementJson? { get }
+    var placementJson: F4SPlacementJson? { get }
     var availabilityPeriodJson: F4SAvailabilityPeriodJson { get set }
     var applicationLetterModel: ApplicationLetterModelProtocol { get }
     var applicationLetterViewModel: ApplicationLetterViewModelProtocol { get }
@@ -27,7 +27,7 @@ public class ApplicationModel : ApplicationModelProtocol {
     
     public var voucherCode: F4SUUID?
     public internal (set) var placement: F4SPlacement?
-    public internal (set) var placementJson: WEXPlacementJson?
+    public internal (set) var placementJson: F4SPlacementJson?
     public internal (set) var placementService: F4SPlacementApplicationServiceProtocol
     public internal (set) var templateService: F4STemplateServiceProtocol
     public internal (set) var companyViewData: CompanyViewDataProtocol
@@ -122,7 +122,7 @@ public class ApplicationModel : ApplicationModelProtocol {
     
     public func createApplication(completion: @escaping ((Error?) -> Void)) -> Void {
         precondition(placement == nil, "If placement exists already, use `continueFromPreexistingDraftPlacement`")
-        let createPlacementJson = WEXCreatePlacementJson(
+        let createPlacementJson = F4SCreatePlacementJson(
             user: self.userUuid,
             roleUuid: self.roleUuid!,
             company: companyViewData.uuid,
@@ -141,7 +141,7 @@ public class ApplicationModel : ApplicationModelProtocol {
     
     func updatePlacementWithCoverLetterChoices(completion: @escaping ((Error?) -> Void)) {
         let uuid = (placementJson?.uuid)!
-        var patch  = WEXPlacementJson()
+        var patch  = F4SPlacementJson()
         patch.attributes = self.personalAttributes
         patch.skills = self.skills
         patch.availabilityPeriods = [self.availabilityPeriodJson]
@@ -166,11 +166,11 @@ public class ApplicationModel : ApplicationModelProtocol {
         let voucherLogic = F4SVoucherLogic(placement: placementUuid, code: voucherCode)
         voucherLogic.validateOnServer { [weak self] (codeValidationError) in
             guard let strongSelf = self else { return }
-            var result: F4SNetworkResult<WEXPlacementJson> = F4SNetworkResult.success(strongSelf.placementJson!)
+            var result: F4SNetworkResult<F4SPlacementJson> = F4SNetworkResult.success(strongSelf.placementJson!)
             if let codeValidationError = codeValidationError {
                 if case .networkError = codeValidationError {
                     let networkError = F4SNetworkError(localizedDescription: "network error", attempting: "associate voucher with placement", retry: true)
-                    result = F4SNetworkResult<WEXPlacementJson>.error(networkError)
+                    result = F4SNetworkResult<F4SPlacementJson>.error(networkError)
                 }
             }
             strongSelf.handleResult(
@@ -183,7 +183,7 @@ public class ApplicationModel : ApplicationModelProtocol {
     
     func updatePlacementAsReviewed(completion: @escaping ((Error?) -> Void)) {
         let uuid = (placementJson?.uuid)!
-        var patch = WEXPlacementJson()
+        var patch = F4SPlacementJson()
         patch.reviewed = true
         applicationLetterViewModel.modelBusyState(applicationLetterModel, isBusy: true)
         placementService.update(uuid: uuid, with: patch) { [weak self] (result) in
@@ -201,7 +201,7 @@ public class ApplicationModel : ApplicationModelProtocol {
     }
     
     func handleResult(
-        _ result: F4SNetworkResult<WEXPlacementJson>,
+        _ result: F4SNetworkResult<F4SPlacementJson>,
         completion: @escaping ((Error?) -> Void),
         onStepSuccess: @escaping ((@escaping (Error?) -> Void)) -> Void,
         onStepRetry: @escaping ((@escaping (Error?) -> Void)) -> Void) {
@@ -229,11 +229,11 @@ public class ApplicationModel : ApplicationModelProtocol {
 }
 
 extension ApplicationModel {
-    func makePlacementJsonFromPlacement(placement: F4SPlacement) -> WEXPlacementJson {
-        return WEXPlacementJson(uuid: placement.placementUuid, user: userUuid, company: placement.companyUuid!, vendor: installationUuid, interests: userInterests.uuidList)
+    func makePlacementJsonFromPlacement(placement: F4SPlacement) -> F4SPlacementJson {
+        return F4SPlacementJson(uuid: placement.placementUuid, user: userUuid, company: placement.companyUuid!, vendor: installationUuid, interests: userInterests.uuidList)
     }
     
-    func makeF4SPlacementFromResponseJson(json: WEXPlacementJson) -> F4SPlacement {
+    func makeF4SPlacementFromResponseJson(json: F4SPlacementJson) -> F4SPlacement {
         var placement = F4SPlacement(
             userUuid: json.userUuid,
             companyUuid: json.companyUuid,

@@ -27,7 +27,7 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     }
     
     var applicationContext: F4SApplicationContext
-    var createPlacementJson: WEXCreatePlacementJson?
+    var createPlacementJson: F4SCreatePlacementJson?
     var placementService: F4SPlacementApplicationServiceProtocol
     var templateService: F4STemplateServiceProtocol
     var placementRepository: F4SPlacementRepositoryProtocol = F4SPlacementRespository()
