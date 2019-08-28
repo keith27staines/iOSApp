@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 public typealias HTTPStatusCode = Int
 
 public enum F4SNetworkResult<A:Decodable> {
@@ -119,7 +120,7 @@ public struct F4SNetworkError : Error {
         }
     }
     
-    /// Initialize a generic error with optional retry 
+    /// Initialize a generic error with optional retry
     public init(localizedDescription: String, attempting: String, retry: Bool, logError: Bool = true, code: Int = 0) {
         let userInfo = [NSLocalizedDescriptionKey: localizedDescription]
         let nsError = NSError(domain: "com.f4s", code: code, userInfo: userInfo)

@@ -49,7 +49,7 @@ public class AllowedToApplyLogic {
                 return
             }
             self.draftTimelinePlacement = (workflowState == .draft) ? match : nil
-            let result = F4SNetworkResult.success(workflowState == WEXPlacementState.draft)
+            let result = F4SNetworkResult.success(workflowState == F4SPlacementState.draft)
             completion(result)
 
         }

@@ -6,11 +6,6 @@ import WorkfinderCommon
 public struct WorkfinderNetworking {
     public static var networkCallLogger: NetworkCallLogger? { return logger }
     
-    /// `sharedWEXSessionManager` is deprecated. Most of its functionality is
-    /// incorporated in its F4S equivalent. No new services should be built to
-    /// rely on any component of WEXNetworking
-    public static var sharedWEXSessionManager: WEXSessionManager!
-    
     /// Configures the entire networking stack
     ///
     /// Currently, WorkfinderNetworking manages two stacks: F4SNetworking and
@@ -28,12 +23,7 @@ public struct WorkfinderNetworking {
         logger = Logger(log: log)
         NetworkConfig._workfinderBaseApiUrlString = workfinderBaseApi
         NetworkConfig._wexApiKey = wexApiKey
-        let config: WEXNetworkingConfigurationProtocol = WEXNetworkingConfiguration(
-            wexApiKey: wexApiKey,
-            baseUrlString: NetworkConfig.workfinderApi,
-            v2ApiUrlString: NetworkConfig.workfinderApiV2)
         F4SNetworkSessionManager.shared = F4SNetworkSessionManager(wexApiKey: wexApiKey)
-        sharedWEXSessionManager = WEXSessionManager(configuration: config)
     }
     
     

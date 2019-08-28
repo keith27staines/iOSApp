@@ -11,7 +11,7 @@ public struct F4STimelinePlacement : Codable {
     /// The uuid of the message thread
     public var threadUuid: F4SUUID?
     /// The state of the application
-    public var workflowState: WEXPlacementState?
+    public var workflowState: F4SPlacementState?
     /// The last message on the thread associated with the placement
     public var latestMessage: F4SMessage?
     /// The uuid of the role being applied for

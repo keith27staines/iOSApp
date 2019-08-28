@@ -90,7 +90,7 @@ extension ApplyCoordinatorTests {
         company: CompanyViewData,
         userUuid: F4SUUID = "user1",
         placementUuid: F4SUUID = "placement1",
-        workflowState: WEXPlacementState = .draft,
+        workflowState: F4SPlacementState = .draft,
         interests: [F4SUUID] = []) -> F4SPlacementJson {
         var placement = F4SPlacementJson(uuid: "1", user: userUuid, company: company.uuid, vendor: "vendorId", interests: interests)
         placement.companyUuid = company.uuid
