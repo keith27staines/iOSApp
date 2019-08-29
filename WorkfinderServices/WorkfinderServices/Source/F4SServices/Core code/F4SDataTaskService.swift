@@ -1,6 +1,8 @@
 import WorkfinderCommon
 import WorkfinderNetworking
 
+public typealias URLDataTaskResult = (Data?,URLResponse?,Error?)
+
 /// Base class providing common network service functionality
 open class F4SDataTaskService {
     /// The api name (e.g `placement` or `user/me`)
