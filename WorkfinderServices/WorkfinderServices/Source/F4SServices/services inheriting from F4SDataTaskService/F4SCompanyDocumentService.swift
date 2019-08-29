@@ -47,7 +47,7 @@ public class F4SCompanyDocumentService: F4SDataTaskService {
     
     public func getDocuments(companyUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SGetCompanyDocuments>)->()) {
         let attempting = "Get company documents"
-        relativeUrlString = "companyUuid/documents"
+        relativeUrlString = "\(companyUuid)/documents"
         beginGetRequest(attempting: attempting, completion: completion)
     }
     
