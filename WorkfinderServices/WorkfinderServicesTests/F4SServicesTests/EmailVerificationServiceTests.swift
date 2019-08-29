@@ -176,10 +176,10 @@ class EmailVerificationServiceTests: XCTestCase {
     }
     
     func test_start_resulting_in_authorized() {
+        let task = MockDataTask()
         let sut = EmailVerificationService(email: email, clientId: clientId)
         let mockTaskFactory: ((URLRequest, @escaping URLDataTaskCompletion) -> F4SNetworkTask) = { request, completion in
-            let url = URL(string: "url")!
-            let task = MockDataTask()
+            let url = request.url!
             task.request = request
             task.expectedData = Data()
             task.completion = completion
@@ -195,15 +195,79 @@ class EmailVerificationServiceTests: XCTestCase {
             XCTFail("This task was designed to have a success result")
         })
         wait(for: [expectation], timeout: 1)
+        XCTAssertEqual(task.request!.httpMethod, "POST")
+        XCTAssertEqual(task.request?.url?.absoluteString, "https://founders4schools.eu.auth0.com/passwordless/start")
+    }
+    
+    func test_verifyWithCode_code_and_email_correct() {
+        let task = MockDataTask()
+        let sut = EmailVerificationService(email: email, clientId: clientId)
+        let mockTaskFactory: ((URLRequest, @escaping URLDataTaskCompletion) -> F4SNetworkTask) = { request, completion in
+            let url = request.url!
+            task.request = request
+            task.expectedData = Data()
+            task.completion = completion
+            task.expectedResponse = HTTPURLResponse(url: url, statusCode: 200, httpVersion: "http", headerFields: nil)
+            return task
+        }
+        sut.taskfactory = mockTaskFactory
+        let expectation = XCTestExpectation(description: "")
+        sut.verifyWithCode(email: "email", code: "1234", onSuccess: { (string) in
+            expectation.fulfill()
+        }) { (string, error) in
+            XCTFail("This test was designed to return a success result")
+        }
+        wait(for: [expectation], timeout: 1)
+        XCTAssertEqual(task.request!.httpMethod, "POST")
+        XCTAssertEqual(task.request?.url?.absoluteString, "https://founders4schools.eu.auth0.com/oauth/ro")
+    }
+    
+    func test_verifyWithCode_email_incorrect() {
+        let task = MockDataTask()
+        let sut = EmailVerificationService(email: email, clientId: clientId)
+        let mockTaskFactory: ((URLRequest, @escaping URLDataTaskCompletion) -> F4SNetworkTask) = { request, completion in
+            let url = request.url!
+            task.request = request
+            task.expectedData = Data()
+            task.completion = completion
+            task.expectedResponse = HTTPURLResponse(url: url, statusCode: 200, httpVersion: "http", headerFields: nil)
+            return task
+        }
+        sut.taskfactory = mockTaskFactory
+        let expectation = XCTestExpectation(description: "")
+        sut.verifyWithCode(email: "wrong email", code: "1234", onSuccess: { (string) in
+            XCTFail("This test was designed to return an error result")
+        }) { (string, error) in
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+    }
+    
+    func test_verifyWithCode_client_error() {
+        let task = MockDataTask()
+        let sut = EmailVerificationService(email: email, clientId: clientId)
+        let mockTaskFactory: ((URLRequest, @escaping URLDataTaskCompletion) -> F4SNetworkTask) = { request, completion in
+            task.request = request
+            task.expectedData = nil
+            task.completion = completion
+            task.expectedResponse = nil
+            task.expectedError = F4SError.genericError("")
+            return task
+        }
+        sut.taskfactory = mockTaskFactory
+        let expectation = XCTestExpectation(description: "")
+        sut.verifyWithCode(email: "wrong email", code: "1234", onSuccess: { (string) in
+            expectation.fulfill()
+            XCTFail("This test was designed to return an error result")
+        }) { (string, error) in
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
     }
     
     // MARK:- helpers
     func submissionErrorFromCode(_ code: Int) -> EmailVerificationService.EmailSubmissionError? {
         return EmailVerificationService.EmailSubmissionError.emailSubmissionError(from: code)
-    }
-    
-    func test_verifyWithCode() {
-        
     }
 }
 
