@@ -71,10 +71,10 @@ class PlacementDBOperations {
             placement.companyUuid = companyUuid
         }
         if let placementStatus = placementDB.status {
-            placement.status = WEXPlacementState(rawValue: placementStatus)
+            placement.status = F4SPlacementState(rawValue: placementStatus)
             if placement.status == nil {
                 if placementStatus == "inProgress" {
-                    placement.status = WEXPlacementState.inProgress
+                    placement.status = F4SPlacementState.inProgress
                 }
             }
         }

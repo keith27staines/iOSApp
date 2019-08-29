@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WorkfinderCommon
 
 protocol SwitchTableViewCellDelegate : class {
     func switchCellDidSwitch(_ cell: SwitchTableViewCell, didSwitch on: Bool)

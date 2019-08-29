@@ -131,6 +131,8 @@ extension ApplicationLetterViewControllerTests {
 }
 
 class MockApplicationLetterViewModel : ApplicationLetterViewModelProtocol {
+
+    
     func modelBusyState(_ model: ApplicationLetterModelProtocol, isBusy: Bool) {
         
     }
@@ -143,10 +145,9 @@ class MockApplicationLetterViewModel : ApplicationLetterViewModelProtocol {
         
     }
     
-    func applicationLetterModel(_ model: ApplicationLetterModelProtocol, failedToSubmitLetter error: WEXError, retry: (() -> Void)?) {
+    func applicationLetterModel(_ model: ApplicationLetterModelProtocol, failedToSubmitLetter error: F4SNetworkError, retry: (() -> Void)?) {
         
     }
-    
     
     var view: ApplicationLetterViewProtocol?
     var model: ApplicationLetterModelProtocol

@@ -90,9 +90,9 @@ extension ApplyCoordinatorTests {
         company: CompanyViewData,
         userUuid: F4SUUID = "user1",
         placementUuid: F4SUUID = "placement1",
-        workflowState: WEXPlacementState = .draft,
-        interests: [F4SUUID] = []) -> WEXPlacementJson {
-        var placement = WEXPlacementJson(uuid: "1", user: userUuid, company: company.uuid, vendor: "vendorId", interests: interests)
+        workflowState: F4SPlacementState = .draft,
+        interests: [F4SUUID] = []) -> F4SPlacementJson {
+        var placement = F4SPlacementJson(uuid: "1", user: userUuid, company: company.uuid, vendor: "vendorId", interests: interests)
         placement.companyUuid = company.uuid
         placement.userUuid = userUuid
         placement.uuid = placementUuid
@@ -108,11 +108,11 @@ extension ApplyCoordinatorTests {
     
 }
 
-class MockPlacementServiceFactory : WEXPlacementServiceFactoryProtocol {
-    var successJson: WEXPlacementJson?
+class MockPlacementServiceFactory : F4SPlacementApplicationServiceFactoryProtocol {
+    var successJson: F4SPlacementJson?
     let responseStatusCode: HTTPStatusCode
     
-    init(successCreatePlacementJson: WEXPlacementJson) {
+    init(successCreatePlacementJson: F4SPlacementJson) {
         self.successJson = successCreatePlacementJson
         self.responseStatusCode = 200
     }
@@ -121,15 +121,16 @@ class MockPlacementServiceFactory : WEXPlacementServiceFactoryProtocol {
         self.responseStatusCode = errorResponseCode
     }
     
-    func makePlacementService() -> WEXPlacementServiceProtocol {
+    func makePlacementService() -> F4SPlacementApplicationServiceProtocol {
         let url = URL(string: "somewhere.com")!
         let httpResponse = HTTPURLResponse(url: url, statusCode: responseStatusCode, httpVersion: "1.0", headerFields: nil)!
-        if let error = WEXErrorsFactory.networkErrorFrom(response: httpResponse, responseData: nil, attempting: "test") {
-            let result = WEXResult<WEXPlacementJson,WEXError>.failure(error)
-            return MockWEXPlacementService(createResult: result)
+        
+        if let networkError = F4SNetworkError(response: httpResponse, attempting: "test") {
+            let result = F4SNetworkResult<F4SPlacementJson>.error(networkError)
+            return MockF4SPlacementApplicationService(createResult: result)
         } else {
-            let result = WEXResult<WEXPlacementJson,WEXError>.success(successJson!)
-            return MockWEXPlacementService(createResult: result)
+            let result = F4SNetworkResult.success(successJson!)
+            return MockF4SPlacementApplicationService(createResult: result)
         }
     }
 }
@@ -140,14 +141,12 @@ class MockTemplateService : F4STemplateServiceProtocol {
     }
 }
 
-class MockPlacementService : WEXPlacementServiceProtocol {
-    func createPlacement(with json: WEXCreatePlacementJson, completion: @escaping (WEXResult<WEXPlacementJson, WEXError>) -> Void) {
-    
-    }
-    
-    func patchPlacement(uuid: F4SUUID, with json: WEXPlacementJson, completion: @escaping (WEXResult<WEXPlacementJson, WEXError>) -> Void) {
+class MockPlacementService : F4SPlacementApplicationServiceProtocol {
+    func apply(with json: F4SCreatePlacementJson, completion: @escaping (F4SNetworkResult<F4SPlacementJson>) -> Void) {
         
     }
     
-    
+    func update(uuid: F4SUUID, with json: F4SPlacementJson, completion: @escaping (F4SNetworkResult<F4SPlacementJson>) -> Void) {
+        
+    }
 }

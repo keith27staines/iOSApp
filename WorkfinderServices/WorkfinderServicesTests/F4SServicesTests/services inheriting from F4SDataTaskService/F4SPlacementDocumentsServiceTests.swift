@@ -29,4 +29,30 @@ class F4SPlacementDocumentsServiceTests : XCTestCase {
         }
         wait(for: [expectation], timeout: 1)
     }
+    
+    func test_putDocuments() {
+        let placementUuid = "placementUuid"
+        let sut = F4SPlacementDocumentsService(placementUuid: placementUuid)
+        let document = F4SDocument(uuid: "docUuid", urlString: "documentUrlstring", type: F4SUploadableDocumentType.cv, name: "my cv")
+        let documents = F4SPutDocumentsJson(documents: [document])
+        let expectation  = XCTestExpectation(description: "")
+        let requiredResult = F4SNetworkResult.success(F4SJSONBoolValue(value: true))
+        sut.networkTaskfactory = MockF4SNetworkTaskFactory(requiredSuccessResult:
+            requiredResult)
+        sut.putDocuments(documents: documents) { (result) in
+            switch result {
+            case .error(_):
+                XCTFail("This test was designed to return a success result")
+            case .success(let result):
+                switch result.value {
+                case true:
+                    break
+                case false:
+                    XCTFail("This test was designed to return a success result")
+                }
+                expectation.fulfill()
+            }
+        }
+        wait(for: [expectation], timeout: 1)
+    }
 }

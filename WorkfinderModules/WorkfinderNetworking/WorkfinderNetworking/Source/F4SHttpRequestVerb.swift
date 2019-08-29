@@ -6,6 +6,17 @@ public enum F4SHttpRequestVerb {
     case post
     case delete
     
+    public init?(verbName: String) {
+        switch verbName.lowercased() {
+        case "get": self = .get
+        case "put": self = .put
+        case "patch": self = .patch
+        case "post": self = .post
+        case "delete": self = .delete
+        default: return nil
+        }
+    }
+    
     public var name: String {
         switch self {
         case .get:

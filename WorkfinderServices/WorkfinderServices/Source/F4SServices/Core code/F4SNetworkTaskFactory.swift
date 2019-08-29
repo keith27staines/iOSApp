@@ -10,7 +10,7 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderNetworking
 
-protocol F4SNetworkTaskFactoryProtocol {
+public protocol F4SNetworkTaskFactoryProtocol {
     func urlRequest(verb: F4SHttpRequestVerb, url: URL, dataToSend: Data?) -> URLRequest
     func networkTask(verb: F4SHttpRequestVerb,
                      url: URL,
@@ -32,7 +32,7 @@ public class F4SNetworkTaskFactory : F4SNetworkTaskFactoryProtocol {
     /// Initalises a new instance of the factory
     ///
     /// - Parameter userUuid:  the user uuid to be used by the factory. If omitted, the factory uses the uuid from the user in the default local store
-    init(userUuid: F4SUUID? = nil) {
+    public init(userUuid: F4SUUID? = nil) {
         guard let userUuid = userUuid else {
             let userRepo = F4SUserRepository(localStore: LocalStore())
             self.userUuid = userRepo.load().uuid
@@ -41,7 +41,7 @@ public class F4SNetworkTaskFactory : F4SNetworkTaskFactoryProtocol {
         self.userUuid = userUuid
     }
     
-    func urlRequest(verb: F4SHttpRequestVerb, url: URL, dataToSend: Data?) -> URLRequest {
+    public func urlRequest(verb: F4SHttpRequestVerb, url: URL, dataToSend: Data?) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = verb.name
         request.httpBody = dataToSend
@@ -51,7 +51,7 @@ public class F4SNetworkTaskFactory : F4SNetworkTaskFactoryProtocol {
     }
     
     /// Returns a `F4SNetworkTask` that can be used independently
-    func networkTask(verb: F4SHttpRequestVerb,
+    public func networkTask(verb: F4SHttpRequestVerb,
                      url: URL,
                      dataToSend: Data?,
                      attempting: String,
@@ -62,7 +62,7 @@ public class F4SNetworkTaskFactory : F4SNetworkTaskFactoryProtocol {
     }
     
     /// Returns a `F4SNetworkTask` that can be used independently
-    func networkTask(with request: URLRequest,
+    public func networkTask(with request: URLRequest,
                      session: F4SNetworkSession,
                      attempting: String,
                      completion: @escaping (F4SNetworkDataResult) -> () ) -> F4SNetworkTask {

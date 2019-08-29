@@ -8,11 +8,19 @@
 
 import Foundation
 
+
 public typealias HTTPStatusCode = Int
 
 public enum F4SNetworkResult<A:Decodable> {
     case error(F4SNetworkError)
     case success(A)
+}
+
+public struct F4SJSONBoolValue: Codable {
+    public var value: Bool
+    public init(value: Bool = true) {
+        self.value = value
+    }
 }
 
 public enum F4SNetworkDataResult {
@@ -119,7 +127,7 @@ public struct F4SNetworkError : Error {
         }
     }
     
-    /// Initialize a generic error with optional retry 
+    /// Initialize a generic error with optional retry
     public init(localizedDescription: String, attempting: String, retry: Bool, logError: Bool = true, code: Int = 0) {
         let userInfo = [NSLocalizedDescriptionKey: localizedDescription]
         let nsError = NSError(domain: "com.f4s", code: code, userInfo: userInfo)

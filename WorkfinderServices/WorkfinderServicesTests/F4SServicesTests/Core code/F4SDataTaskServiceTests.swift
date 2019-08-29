@@ -322,8 +322,6 @@ class MockSession : F4SNetworkSession {
     
 }
 
-typealias URLDataTaskResult = (Data?,URLResponse?,Error?)
-
 class MockTask : F4SNetworkTask {
     var cancelled: Bool = false
     var resumeWasCalled: Bool = false

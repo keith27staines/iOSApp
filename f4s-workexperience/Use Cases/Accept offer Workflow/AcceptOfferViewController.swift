@@ -146,7 +146,7 @@ extension AcceptOfferViewController : UITableViewDataSource {
         }
     }
     
-    func configureButtonCell(_ buttonsCell: F4SInviteButtonsTableViewCell, for state: WEXPlacementState) {
+    func configureButtonCell(_ buttonsCell: F4SInviteButtonsTableViewCell, for state: F4SPlacementState) {
         buttonsCell.applyStyle()
         switch state {
         case .accepted:

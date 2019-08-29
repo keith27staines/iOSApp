@@ -8,103 +8,7 @@
 
 import Foundation
 import WorkfinderCommon
-
-public struct F4SCompanyDocument : Codable {
-    
-    public enum State : String, Codable {
-        case available
-        case requested
-        case unrequested
-        case unavailable
-    }
-    
-    // Encodable properties
-    var uuid: F4SUUID?
-    var name: String
-    var state: State
-    var docType: String?
-    var requestedCount: Int?
-    var urlString: String?
-    
-    var isRequestable: Bool {
-        return state == F4SCompanyDocument.State.unrequested ||
-            state == F4SCompanyDocument.State.requested
-    }
-    
-    var isViewable: Bool {
-        return state == .available && url != nil
-    }
-    
-    // Non-encodable properties
-    var userIsRequesting: Bool = false
-    var url: URL? {
-        guard let urlString = urlString else {
-            return nil
-        }
-        return URL(string: urlString)
-    }
-    
-    var providedNameOrDefaultName: String {
-        return name.isEmpty ? F4SCompanyDocument.defaultNameForType(type: docType) : name
-    }
-    public init(documentType: String) {
-        self.docType = documentType
-        self.state = .unrequested
-        self.name = F4SCompanyDocument.defaultNameForType(type: documentType)
-        self.requestedCount = 0
-        self.urlString = nil
-    }
-    
-    static func defaultNameForType(type: String?) -> String {
-        switch type{
-        case "ELC":
-            return "Employer's liability certificate"
-        case "SGC":
-            return "Safeguarding certificate"
-        default:
-            return type ?? "unknown"
-        }
-    }
-    
-    public init(uuid: F4SUUID, name: String, status: State, docType: String, requestedCount: Int? = 0, urlString: String? = nil) {
-        self.uuid = uuid
-        self.name = name
-        self.state = status
-        self.requestedCount = requestedCount
-        self.urlString = urlString
-        self.docType = docType
-    }
-
-
-}
-
-extension F4SCompanyDocument {
-
-    private enum CodingKeys: String, CodingKey {
-        case uuid
-        case name
-        case state
-        case docType = "doc_type"
-        case requestedCount = "request_count"
-        case urlString = "url"
-    }
-}
-
-public struct F4SGetCompanyDocuments: Decodable {
-    public var companyUuid: F4SUUID?
-    public var documents: F4SCompanyDocuments?
-    public var possibleDocumentTypes: [String]?
-}
-
-extension F4SGetCompanyDocuments {
-    private enum CodingKeys: String, CodingKey {
-        case companyUuid = "uuid"
-        case documents = "requested_documents"
-        case possibleDocumentTypes = "possible_doc_types"
-    }
-}
-
-public typealias F4SCompanyDocuments = [F4SCompanyDocument]
+import WorkfinderServices
 
 public class F4SCompanyDocumentsModel {
 
@@ -165,7 +69,7 @@ public class F4SCompanyDocumentsModel {
         }
     }
     
-    public func requestDocumentsFromCompany(completion: @escaping (F4SNetworkResult<Bool>) -> ()) {
+    public func requestDocumentsFromCompany(completion: @escaping (F4SNetworkResult<F4SJSONBoolValue>) -> ()) {
         var requestingDocuments = F4SCompanyDocuments()
         for document in documents {
             if document.userIsRequesting {
@@ -173,7 +77,7 @@ public class F4SCompanyDocumentsModel {
             }
         }
         guard requestingDocuments.count > 0 else {
-            completion(F4SNetworkResult.success(true))
+            completion(F4SNetworkResult.success(F4SJSONBoolValue(value: true)))
             return
         }
         service.requestDocuments(companyUuid: companyUuid, documents: requestingDocuments) { (result) in
