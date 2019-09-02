@@ -206,6 +206,14 @@
 			path = Source;
 			sourceTree = "<group>";
 		};
+		FC3021C1231805FD00D57D48 /* Other services */ = {
+			isa = PBXGroup;
+			children = (
+				FC02DA0822EC717B003C8148 /* EmailVerificationService.swift */,
+			);
+			path = "Other services";
+			sourceTree = "<group>";
+		};
 		FC4EE6FA230E77DE00B40F6B /* services inheriting from F4SDataTaskService */ = {
 			isa = PBXGroup;
 			children = (
@@ -302,7 +310,7 @@
 		FC85D9EA22F1C8A80035C724 /* F4SServices */ = {
 			isa = PBXGroup;
 			children = (
-				FC02DA0822EC717B003C8148 /* EmailVerificationService.swift */,
+				FC3021C1231805FD00D57D48 /* Other services */,
 				FC4EE6FA230E77DE00B40F6B /* services inheriting from F4SDataTaskService */,
 				FC4EE6FD230E786F00B40F6B /* services using F4SDataTaskService */,
 				FC4EE6FC230E784F00B40F6B /* Core code */,

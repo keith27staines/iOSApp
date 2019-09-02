@@ -8,7 +8,7 @@
 
 import UIKit
 
-class F4SInviteDetailCell: UITableViewCell {
+public class F4SInviteDetailCell: UITableViewCell {
     
     lazy var title: UILabel = {
         let title = UILabel()
@@ -53,7 +53,7 @@ class F4SInviteDetailCell: UITableViewCell {
         return stack
     }()
     
-    var detail: F4SPlacementInviteSectionDetails? {
+    public var detail: F4SPlacementInviteSectionDetails? {
         didSet {
             stack.removeArrangedSubview(title)
             stack.removeArrangedSubview(lines)

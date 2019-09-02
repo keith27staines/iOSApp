@@ -4,6 +4,7 @@ import Analytics
 import WorkfinderCommon
 import WorkfinderServices
 import WorkfinderUI
+import WorkfinderAcceptUseCase
 
 class MessageContainerViewController: UIViewController {
     
@@ -188,7 +189,8 @@ class MessageContainerViewController: UIViewController {
                                                 case .error(let error):
                                                     completion(error, nil)
                                                 case .success(let companyJson):
-                                                    let context = AcceptOfferContext(user: user, company: strongSelf.company!, companyJson: companyJson, logo: image, placement: placement, role: role)
+                                                    let companyViewData = CompanyViewData(company: strongSelf.company!)
+                                                    let context = AcceptOfferContext(user: user, company: companyViewData, companyJson: companyJson, logo: image, placement: placement, role: role)
                                                     completion(nil, context)
                                                 }
                                             }

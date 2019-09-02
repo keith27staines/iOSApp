@@ -49,8 +49,8 @@ public class F4SVoucherLogic {
     public func validateOnServer(completion: @escaping (CodeValidationError?)->()) {
         cancelServerValidation()
         if placement.isEmpty || code.isEmpty { return }
-        let service = F4SVoucherVerificationService(placementUuid: placement, voucherCode:  code)
-        service.verify(completion: { (result) in
+        service = F4SVoucherVerificationService(placementUuid: placement, voucherCode:  code)
+        service!.verify(completion: { (result) in
             DispatchQueue.main.async {
                 switch result {
                 case .error(let error):
@@ -69,7 +69,6 @@ public class F4SVoucherLogic {
                 }
             }
         })
-        self.service = service
     }
     
     public static var allowedSymbols: CharacterSet {

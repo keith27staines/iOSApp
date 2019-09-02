@@ -1,11 +1,3 @@
-//
-//  F4SPlacementDetail.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 19/07/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
-//
-
 import UIKit
 import WorkfinderCommon
 
@@ -72,7 +64,7 @@ public class F4SPlacementInviteModel {
         return sections[section].heading
     }
     
-    internal init (context: AcceptOfferContext) {
+    public init (context: AcceptOfferContext) {
         let company =  context.company
         let placement = context.placement
         var detail: F4SPlacementInviteSectionDetails
@@ -82,13 +74,13 @@ public class F4SPlacementInviteModel {
         
         // Offer Is From section
         var offerIsFromSection = F4SPlacementInviteSection(title: "Offer is from")
-        lines = [context.company.name.stripCompanySuffix()]
+        lines = [context.company.companyName.stripCompanySuffix()]
         detail = F4SPlacementInviteSectionDetails(icon: UIImage(named: "ui-company-icon"), lines: lines, linkUrlString: nil)
         detail.requiresButtonAction = true
         offerIsFromSection.inviteDetails.append(detail)
         
         lines = ["Company LinkedIn profile"]
-        detail = F4SPlacementInviteSectionDetails(icon: UIImage(named: "ui-linkedin-icon"), lines: lines, linkUrlString: company.companyUrl)
+        detail = F4SPlacementInviteSectionDetails(icon: UIImage(named: "ui-linkedin-icon"), lines: lines, linkUrlString: company.linkedinUrl)
         offerIsFromSection.inviteDetails.append(detail)
         
         // Role offered section

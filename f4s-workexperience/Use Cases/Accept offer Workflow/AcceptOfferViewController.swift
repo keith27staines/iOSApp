@@ -2,6 +2,7 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderServices
 import WorkfinderUI
+import WorkfinderAcceptUseCase
 
 class AcceptOfferViewController: UIViewController {
     @IBOutlet weak var offsetHeight: NSLayoutConstraint!
@@ -31,7 +32,7 @@ class AcceptOfferViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(F4SInviteDetailCell.self, forCellReuseIdentifier: "detail")
         applyStyle()
-        companyNameLabel.text = accept.company.name.stripCompanySuffix()
+        companyNameLabel.text = accept.company.companyName.stripCompanySuffix()
         pageHeaderView.icon = accept.companyLogo
     }
     
@@ -69,7 +70,7 @@ class AcceptOfferViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let enterVoucherViewController = segue.destination as? EnterVoucherViewController {
+        if let enterVoucherViewController = segue.destination as? AddVoucherViewController {
             enterVoucherViewController.accept = accept
             return
         }
@@ -114,7 +115,8 @@ extension AcceptOfferViewController : UITableViewDataSource {
             if inviteDetails.requiresButtonAction {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "detailWithLink", for: indexPath) as! F4SInviteDetailLinkCell
                 cell.buttonAction = { [weak self] cell in
-                    guard let company = self?.accept?.company else { return }
+                    guard let companyViewData = self?.accept?.company,
+                    let company = DatabaseOperations.sharedInstance.companyWithUUID(companyViewData.uuid) else { return }
                     self?.coordinator?.showCompanyDetail(company: company)
                 }
                 cell.detail = inviteDetails

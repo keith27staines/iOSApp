@@ -1,19 +1,12 @@
-//
-//  EnterVoucherViewController.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 20/07/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
-//
-
 import UIKit
 import MessageUI
 import WorkfinderCommon
 import WorkfinderServices
 import WorkfinderAppLogic
+import WorkfinderAcceptUseCase
 import WorkfinderUI
 
-class EnterVoucherViewController: UIViewController, MFMailComposeViewControllerDelegate {
+class AddVoucherViewController: UIViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var companyNameLabel: UILabel!
@@ -21,7 +14,6 @@ class EnterVoucherViewController: UIViewController, MFMailComposeViewControllerD
     @IBOutlet weak var statusIcon: UIImageView!
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var getOneButton: UIButton!
-    
     @IBOutlet weak var validationLabel: UILabel!
     
     var accept: AcceptOfferContext!
@@ -123,7 +115,7 @@ class EnterVoucherViewController: UIViewController, MFMailComposeViewControllerD
         voucherText.text = ""
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         scrollView.isScrollEnabled = false
-        companyNameLabel.text = accept.company.name.stripCompanySuffix()
+        companyNameLabel.text = accept.company.companyName.stripCompanySuffix()
         pageHeaderView.icon = accept.companyLogo
         validationLabel.isHidden = true
         voucherText.delegate = self
@@ -181,7 +173,7 @@ class EnterVoucherViewController: UIViewController, MFMailComposeViewControllerD
     
 }
 
-extension EnterVoucherViewController : UITextFieldDelegate {
+extension AddVoucherViewController : UITextFieldDelegate {
     func textFieldShouldReturn(_ scoreText: UITextField) -> Bool {
         self.view.endEditing(true)
         return true
@@ -286,7 +278,7 @@ extension EnterVoucherViewController : UITextFieldDelegate {
     }
 }
 
-extension EnterVoucherViewController {
+extension AddVoucherViewController {
     func applyStyle() {
         pageHeaderView.backgroundColor = UIColor.white
         navigationItem.title = ""

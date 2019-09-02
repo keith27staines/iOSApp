@@ -10,12 +10,12 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 
-class F4SInviteButtonsTableViewCell: UITableViewCell {
-    @IBOutlet weak var introductoryText: UILabel!
-    @IBOutlet weak var shareText: UILabel!
-    @IBOutlet weak var shareButton: UIButton!
-    @IBOutlet weak var primaryButton: UIButton!
-    @IBOutlet var secondaryButton: UIButton!
+public class F4SInviteButtonsTableViewCell: UITableViewCell {
+    @IBOutlet weak public var introductoryText: UILabel!
+    @IBOutlet weak public var shareText: UILabel!
+    @IBOutlet weak public var shareButton: UIButton!
+    @IBOutlet weak public var primaryButton: UIButton!
+    @IBOutlet public var secondaryButton: UIButton!
     
     @IBAction func primaryButtonTappedOffer(_ sender: Any) {
         primaryAction?()
@@ -29,17 +29,17 @@ class F4SInviteButtonsTableViewCell: UITableViewCell {
         shareOffer?()
     }
     
-    var primaryAction: ( ()->())?
-    var secondaryAction: (()->())?
-    var shareOffer: (()->())?
+    public var primaryAction: ( ()->())?
+    public var secondaryAction: (()->())?
+    public var shareOffer: (()->())?
     
-    func applyStyle() {
+    public func applyStyle() {
         let skinner = Skinner()
         skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: primaryButton)
         skinner.apply(buttonSkin: skin?.secondaryButtonSkin, to: secondaryButton)
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
+    public override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

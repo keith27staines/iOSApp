@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import WorkfinderCommon
+import WorkfinderAcceptUseCase
 
 class F4SPlacementInviteDetailTableViewController: UITableViewController {
 
@@ -60,7 +62,7 @@ class F4SPlacementInviteDetailTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let enterVoucherViewController = segue.destination as? EnterVoucherViewController {
+        if let enterVoucherViewController = segue.destination as? AddVoucherViewController {
             enterVoucherViewController.accept = accept
             return
         }

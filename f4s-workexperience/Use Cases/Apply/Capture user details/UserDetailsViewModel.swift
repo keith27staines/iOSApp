@@ -13,7 +13,6 @@ public class UserDetailsViewModel {
     
     let dateOfBirthPlaceholder = NSLocalizedString("Date of birth", comment: "")
     let namePlaceholder = NSLocalizedString("First and Last Name", comment: "")
-    let voucherPlaceholder = NSLocalizedString("Voucher code (Optional)", comment: "")
     
     var termsAgreed: Bool { return userInfo.termsAgreed }
     var userEmail: String? { return userInfo.email }
@@ -26,8 +25,6 @@ public class UserDetailsViewModel {
     var userEMailInformationString: NSAttributedString { return labelStrings.userEmailInformationString }
     var namesInformationString: NSAttributedString { return labelStrings.namesInformationString }
     var parentEmailInformationString: NSAttributedString { return labelStrings.parentEmailInformationString }
-    var voucherInformationString: NSAttributedString { return labelStrings.voucherInformationString }
-    var voucher: String? { return userInfo.vouchers?.first }
 
     var isDateOfBirthOK: Bool { return !ageLogic.isAgeTooYoungToApply }
     var defaultDateOfBirth: Date { return ageLogic.defaultDateOfBirth() }
@@ -37,9 +34,9 @@ public class UserDetailsViewModel {
     var isParentEmailStackHidden: Bool { return !ageLogic.isConsentRequired }
     var isUserEmailStackHidden: Bool { return !(isParentEmailOK && ageLogic.age > 0) }
     var isFirstAndLastNameStackHidden: Bool { return isUserEmailStackHidden }
-    var isVoucherStackHidden: Bool { return isUserEmailStackHidden }
+
     var isAgreeTermsStackHidden: Bool {
-        return !(isDateOfBirthOK && isUserEmailOK && isParentEmailOK && isNameOK && isVoucherOK)
+        return !(isDateOfBirthOK && isUserEmailOK && isParentEmailOK && isNameOK)
     }
     
     var dateOfBirth: Date? {
@@ -86,7 +83,6 @@ public class UserDetailsViewModel {
     var image: UIImage { return isCompleteInformationButtonEnabled ? UIImage(named: "checkMark")! : UIImage(named: "yellowQuestionMark")! }
     
     var nameUnderlineColor: UIColor { return isNameOK ? goodValueColor : badValueColor }
-    var voucherUnderlineColor: UIColor { return isVoucherOK ? goodValueColor : badValueColor }
     
     var isNameOK: Bool {
         guard
@@ -97,21 +93,8 @@ public class UserDetailsViewModel {
         return true
     }
     
-    var isVoucherOK: Bool {
-        guard let voucher = userInfo.vouchers?.first else { return true }
-        return voucher.count == 6 && voucher.isVoucherCode()
-    }
-    
     func exploreMoreCompanies() {
         coordinator?.userIsTooYoung?()
-    }
-    
-    func setVoucherString(_ string: String?) {
-        guard let voucher = string else {
-            userInfo.vouchers = nil
-            return
-        }
-        userInfo.vouchers = [voucher]
     }
     
     var namesString: String?

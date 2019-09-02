@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ffh-lH-QQL">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Add Voucher View Controller-->
+        <scene sceneID="F9b-dD-5n4">
+            <objects>
+                <viewController id="Ffh-lH-QQL" customClass="AddVoucherViewController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KvJ-86-2Wg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="675"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ya4-3C-iZZ" customClass="F4SCompanyHeaderViewWithLogo" customModule="f4s_workexperience" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="375" height="90"/>
+                                <color key="backgroundColor" red="0.58081901069999997" green="0.088427625600000004" blue="0.31863921880000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="97Q-Kf-j80"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="leftDrop">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rightDrop">
+                                        <real key="value" value="0.10000000000000001"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Company name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mp6-IE-RAk">
+                                <rect key="frame" x="92.5" y="186.5" width="190.5" height="31.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                                <color key="textColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Offered placement at" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PJJ-up-Em6">
+                                <rect key="frame" x="103" y="150" width="169.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qq2-W5-quD">
+                                <rect key="frame" x="0.0" y="234" width="375" height="346.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VNC-2H-4XU">
+                                        <rect key="frame" x="40" y="184.5" width="295" height="50"/>
+                                        <color key="backgroundColor" red="0.26411449910000001" green="0.155295819" blue="0.47808134559999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="UsH-sq-OXh"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <state key="normal" title="Accept placement">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="acceptButtonTapped:" destination="Ffh-lH-QQL" eventType="touchUpInside" id="O3I-eU-V4V"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" borderStyle="roundedRect" placeholder="Voucher" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1EY-Qj-RO4">
+                                        <rect key="frame" x="40" y="101" width="295" height="40"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="alphabet" textContentType="one-time-code"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In order to finalise this placement a voucher is needed" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Is-KB-X0X">
+                                        <rect key="frame" x="20" y="16" width="335" height="69"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="69" id="nWI-uh-LyE"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ui-pluscircle-icon" translatesAutoresizingMaskIntoConstraints="NO" id="wuQ-rK-IoT">
+                                        <rect key="frame" x="299" y="105" width="32" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="wuQ-rK-IoT" secondAttribute="height" multiplier="1:1" id="Inr-OQ-Gf0"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invalid voucher code. Please try again" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnx-Un-UG1">
+                                        <rect key="frame" x="40" y="148" width="295" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="VNC-2H-4XU" firstAttribute="leading" secondItem="1EY-Qj-RO4" secondAttribute="leading" id="1tW-Zv-WpW"/>
+                                    <constraint firstItem="1EY-Qj-RO4" firstAttribute="bottom" secondItem="wuQ-rK-IoT" secondAttribute="bottom" constant="4" id="39X-qS-TPK"/>
+                                    <constraint firstItem="1EY-Qj-RO4" firstAttribute="top" secondItem="7Is-KB-X0X" secondAttribute="bottom" constant="16" id="3YQ-SP-lyp"/>
+                                    <constraint firstItem="VNC-2H-4XU" firstAttribute="trailing" secondItem="1EY-Qj-RO4" secondAttribute="trailing" id="5UI-dg-Nva"/>
+                                    <constraint firstItem="dnx-Un-UG1" firstAttribute="trailing" secondItem="1EY-Qj-RO4" secondAttribute="trailing" id="Gj8-vn-6jV"/>
+                                    <constraint firstItem="7Is-KB-X0X" firstAttribute="top" secondItem="Qq2-W5-quD" secondAttribute="top" constant="16" id="HkN-DY-k0k"/>
+                                    <constraint firstAttribute="trailing" secondItem="7Is-KB-X0X" secondAttribute="trailing" constant="29" id="L7c-dH-JM2"/>
+                                    <constraint firstItem="dnx-Un-UG1" firstAttribute="top" secondItem="1EY-Qj-RO4" secondAttribute="bottom" constant="7" id="R00-mc-LeE"/>
+                                    <constraint firstItem="wuQ-rK-IoT" firstAttribute="trailing" secondItem="1EY-Qj-RO4" secondAttribute="trailing" constant="-4" id="ZCs-hI-RQw"/>
+                                    <constraint firstItem="1EY-Qj-RO4" firstAttribute="top" secondItem="wuQ-rK-IoT" secondAttribute="top" constant="-4" id="cjH-oW-L7I"/>
+                                    <constraint firstItem="1EY-Qj-RO4" firstAttribute="leading" secondItem="Qq2-W5-quD" secondAttribute="leading" constant="40" id="e9B-Kz-D0n"/>
+                                    <constraint firstItem="7Is-KB-X0X" firstAttribute="leading" secondItem="Qq2-W5-quD" secondAttribute="leading" constant="20" id="i5U-Tk-Fbs"/>
+                                    <constraint firstItem="1EY-Qj-RO4" firstAttribute="centerX" secondItem="Qq2-W5-quD" secondAttribute="centerX" id="lNt-vx-6Ri"/>
+                                    <constraint firstItem="dnx-Un-UG1" firstAttribute="leading" secondItem="1EY-Qj-RO4" secondAttribute="leading" id="qcZ-jB-2BW"/>
+                                    <constraint firstItem="7Is-KB-X0X" firstAttribute="centerX" secondItem="Qq2-W5-quD" secondAttribute="centerX" id="tDi-Ri-5Ov"/>
+                                    <constraint firstItem="VNC-2H-4XU" firstAttribute="top" secondItem="dnx-Un-UG1" secondAttribute="bottom" constant="16" id="xFg-Rc-fVh"/>
+                                    <constraint firstAttribute="bottom" secondItem="VNC-2H-4XU" secondAttribute="bottom" priority="750" constant="113.5" id="zER-Xe-Ddl"/>
+                                </constraints>
+                            </scrollView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="B0c-Aj-dZQ">
+                                <rect key="frame" x="32" y="600.5" width="240" height="20.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Don't have a voucher?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="peZ-JF-T4O">
+                                        <rect key="frame" x="0.0" y="0.0" width="170" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YcX-gZ-Kx9">
+                                        <rect key="frame" x="186" y="0.0" width="54" height="20.5"/>
+                                        <state key="normal" title="Get one"/>
+                                        <connections>
+                                            <action selector="getVoucherTapped:" destination="Ffh-lH-QQL" eventType="touchUpInside" id="db4-Rm-fpA"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20.5" id="AjN-o7-qHk"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="1Xw-HB-R88" firstAttribute="bottom" secondItem="B0c-Aj-dZQ" secondAttribute="bottom" constant="20" id="1db-Gu-dvG"/>
+                            <constraint firstItem="mp6-IE-RAk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1Xw-HB-R88" secondAttribute="leading" constant="20" id="3go-5p-ujl"/>
+                            <constraint firstItem="ya4-3C-iZZ" firstAttribute="leading" secondItem="1Xw-HB-R88" secondAttribute="leading" id="7CD-mp-lv8"/>
+                            <constraint firstItem="B0c-Aj-dZQ" firstAttribute="top" secondItem="Qq2-W5-quD" secondAttribute="bottom" constant="20" id="7nH-UY-hHF"/>
+                            <constraint firstItem="ya4-3C-iZZ" firstAttribute="top" secondItem="1Xw-HB-R88" secondAttribute="top" id="ANG-XU-Xyz"/>
+                            <constraint firstItem="B0c-Aj-dZQ" firstAttribute="leading" secondItem="1Xw-HB-R88" secondAttribute="leading" constant="32" id="CrC-hk-faj"/>
+                            <constraint firstItem="1Xw-HB-R88" firstAttribute="trailing" secondItem="Qq2-W5-quD" secondAttribute="trailing" id="Dfe-6v-CLW"/>
+                            <constraint firstItem="Qq2-W5-quD" firstAttribute="top" secondItem="mp6-IE-RAk" secondAttribute="bottom" constant="16" id="NKb-Vy-pXb"/>
+                            <constraint firstItem="PJJ-up-Em6" firstAttribute="centerX" secondItem="KvJ-86-2Wg" secondAttribute="centerX" id="aS8-Id-atC"/>
+                            <constraint firstItem="1Xw-HB-R88" firstAttribute="trailing" secondItem="ya4-3C-iZZ" secondAttribute="trailing" id="bZK-Ak-dyp"/>
+                            <constraint firstItem="mp6-IE-RAk" firstAttribute="centerX" secondItem="KvJ-86-2Wg" secondAttribute="centerX" id="cs1-aL-ik8"/>
+                            <constraint firstItem="PJJ-up-Em6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1Xw-HB-R88" secondAttribute="leading" constant="20" id="jpu-An-3r9"/>
+                            <constraint firstItem="1Xw-HB-R88" firstAttribute="leading" secondItem="Qq2-W5-quD" secondAttribute="leading" id="ofF-tQ-xJR"/>
+                            <constraint firstItem="mp6-IE-RAk" firstAttribute="top" secondItem="PJJ-up-Em6" secondAttribute="bottom" constant="16" id="tA8-PU-jWT"/>
+                            <constraint firstItem="PJJ-up-Em6" firstAttribute="top" secondItem="ya4-3C-iZZ" secondAttribute="bottom" constant="16" id="u3Y-GF-kj6"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="1Xw-HB-R88"/>
+                    </view>
+                    <size key="freeformSize" width="375" height="675"/>
+                    <connections>
+                        <outlet property="acceptButton" destination="VNC-2H-4XU" id="SsQ-aW-L6p"/>
+                        <outlet property="companyNameLabel" destination="mp6-IE-RAk" id="mXY-gQ-BcL"/>
+                        <outlet property="getOneButton" destination="YcX-gZ-Kx9" id="Fan-ow-EfD"/>
+                        <outlet property="pageHeaderView" destination="ya4-3C-iZZ" id="VnO-lS-xbu"/>
+                        <outlet property="scrollView" destination="Qq2-W5-quD" id="g81-09-RaT"/>
+                        <outlet property="statusIcon" destination="wuQ-rK-IoT" id="jEW-Mj-WIm"/>
+                        <outlet property="validationLabel" destination="dnx-Un-UG1" id="0oV-8p-Gj4"/>
+                        <outlet property="voucherText" destination="1EY-Qj-RO4" id="zKb-7e-eWy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lzW-be-CQE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1606" y="115"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ui-pluscircle-icon" width="37" height="37"/>
+    </resources>
+</document>

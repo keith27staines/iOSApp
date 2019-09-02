@@ -40,14 +40,4 @@ struct InformationLabelStrings {
         let string = NSAttributedString(string: text, attributes: infoAttributes)
         return string
     }
-    
-    var voucherInformationString: NSAttributedString {
-        let text1 = NSLocalizedString("Enter your voucher if you have one", comment: "")
-        let text2 = NSLocalizedString("", comment: "")
-        let string1 = NSAttributedString(string: text1, attributes: infoAttributes)
-        let string2 = NSAttributedString(string: text2, attributes: semiBoldInfoAttributes)
-        let combinedString = NSMutableAttributedString(attributedString: string1)
-        combinedString.append(string2)
-        return combinedString
-    }
 }

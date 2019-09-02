@@ -35,7 +35,6 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     var continueFromTimelinePlacement: F4STimelinePlacement?
     let startingViewController: UIViewController!
     weak var applyCoordinatorDelegate: ApplyCoordinatorDelegate?
-    
     lazy var userInterests: [F4SInterest] = {
         return interestsRepository.loadUserInterests()
     }()

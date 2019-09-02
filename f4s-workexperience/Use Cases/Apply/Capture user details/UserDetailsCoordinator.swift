@@ -16,14 +16,17 @@ class UserDetailsCoordinator : CoreInjectionNavigationCoordinator {
     var userIsTooYoung: (() -> Void)?
     var popOnCompletion: Bool = false
     
+    weak var userDetailsViewController: UserDetailsViewController? = nil
+    
     override func start() {
         let userDetailsStoryboard = UIStoryboard(name: "UserDetails", bundle: nil)
-        let controller = userDetailsStoryboard.instantiateViewController(withIdentifier: "UserDetailsViewController") as! UserDetailsViewController
+        let userDetailsViewController = userDetailsStoryboard.instantiateViewController(withIdentifier: "UserDetailsViewController") as! UserDetailsViewController
         let userInfo = applicationContext.user!.extractUserInformation()
         let viewModel = UserDetailsViewModel(userInformation: userInfo, coordinator: self)
-        controller.coordinator = self
-        controller.inject(viewModel: viewModel, applicationContext: applicationContext, userRepository: injected.userRepository)
-        navigationRouter.push(viewController: controller, animated: true)
+        userDetailsViewController.coordinator = self
+        userDetailsViewController.inject(viewModel: viewModel, applicationContext: applicationContext, userRepository: injected.userRepository)
+        navigationRouter.push(viewController: userDetailsViewController, animated: true)
+        self.userDetailsViewController = userDetailsViewController
     }
     
     func userDetailsDidComplete() {

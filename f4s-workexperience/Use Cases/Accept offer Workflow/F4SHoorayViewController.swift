@@ -10,6 +10,7 @@ import UIKit
 import EventKit
 import WorkfinderCommon
 import WorkfinderUI
+import WorkfinderAcceptUseCase
 
 class F4SHoorayViewController: UIViewController {
     @IBOutlet weak var companyHeaderView: F4SCompanyHeaderViewWithLogo!
@@ -87,7 +88,7 @@ class F4SHoorayViewController: UIViewController {
         companyHeaderView.leftDrop = 1.0
         companyHeaderView.rightDrop = 0.3
         companyHeaderView.backgroundColor = UIColor.clear
-        companyNameLabel.text = accept.company.name.stripCompanySuffix()
+        companyNameLabel.text = accept.company.companyName.stripCompanySuffix()
         companyHeaderView.icon = accept.companyLogo
         let skinner = Skinner()
         skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: doneButton)
@@ -163,7 +164,7 @@ extension F4SHoorayViewController : CalendarChooserControllerDelegate {
         navigationController?.popViewController(animated: true)
         let event = EKEvent(eventStore: eventStore)
         event.calendar = eventStore.calendar(withIdentifier: calendar.calendarIdentifier)
-        event.title = "Workfinder placement at \(accept.company.name.stripCompanySuffix())"
+        event.title = "Workfinder placement at \(accept.company.companyName.stripCompanySuffix())"
         event.notes = accept.description
         event.startDate = startDate!
         event.endDate = endDate!

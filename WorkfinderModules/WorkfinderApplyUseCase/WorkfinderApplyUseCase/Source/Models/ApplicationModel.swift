@@ -163,13 +163,17 @@ public class ApplicationModel : ApplicationModelProtocol {
             return
         }
         let placementUuid = (placementJson?.uuid)!
-        let voucherLogic = F4SVoucherLogic(placement: placementUuid, code: voucherCode)
-        voucherLogic.validateOnServer { [weak self] (codeValidationError) in
+        voucherLogic = F4SVoucherLogic(placement: placementUuid, code: voucherCode)
+        voucherLogic!.validateOnServer { [weak self] (codeValidationError) in
             guard let strongSelf = self else { return }
             var result: F4SNetworkResult<F4SPlacementJson> = F4SNetworkResult.success(strongSelf.placementJson!)
             if let codeValidationError = codeValidationError {
-                if case .networkError = codeValidationError {
+                switch codeValidationError {
+                case .networkError:
                     let networkError = F4SNetworkError(localizedDescription: "network error", attempting: "associate voucher with placement", retry: true)
+                    result = F4SNetworkResult<F4SPlacementJson>.error(networkError)
+                default:
+                    let networkError = F4SNetworkError(localizedDescription: "Invalid code", attempting: "associate voucher with placement", retry: false)
                     result = F4SNetworkResult<F4SPlacementJson>.error(networkError)
                 }
             }

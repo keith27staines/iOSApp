@@ -21,7 +21,6 @@ class UserDetailsViewController: UIViewController {
     @IBOutlet weak var dobTextField: UITextField!
     
     @IBOutlet weak var dobInfoLabel: UILabel!
-    @IBOutlet weak var voucherInformationLabel: UILabel!
     @IBOutlet weak var parentEmailInfoLabel: UILabel!
     @IBOutlet weak var userEmailInfoLabel: UILabel!
     @IBOutlet weak var namesInfoLabel: UILabel!
@@ -37,10 +36,6 @@ class UserDetailsViewController: UIViewController {
     @IBOutlet weak var firstAndLastNameStackView: UIStackView!
     @IBOutlet weak var firstAndLastNameTextField: NextResponderTextField!
     @IBOutlet weak var firstAndLastNameUnderlineView: UIView!
-    @IBOutlet weak var voucherCodeStackView: UIStackView!
-    @IBOutlet weak var voucherCodeTextField: NextResponderTextField!
-    @IBOutlet weak var voucherCodeUnderlineView: UIView!
-
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     
@@ -117,23 +112,18 @@ class UserDetailsViewController: UIViewController {
         updateVisualState()
     }
     
-    @IBAction func voucherCodeTextFieldDidChange(_ sender: NextResponderTextField) {
-        var text = sender.text
-        if text?.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty == true { text = nil }
-        viewModel.setVoucherString(text)
-        updateVisualState()
-    }
-    
     var pushNotificationAlertFactory = RequestPushNotificationsAlertFactory()
     
     @IBAction func completeInfoButtonTouched(_: UIButton) {
         self.view.endEditing(true)
         saveUserDetailsLocally()
-        pushNotificationAlertFactory.afterAction = { [weak self] in self?.verifyVoucher() }
+        pushNotificationAlertFactory.afterAction = {
+            [weak self] in self?.getPartnersFromServer()
+        }
         pushNotificationAlertFactory.makeAlertViewControllerIfNecessary { [weak self] (controller) in
             DispatchQueue.main.async {
                 guard let controller = controller else {
-                    self?.verifyVoucher()
+                    self?.getPartnersFromServer()
                     return
                 }
                 self?.present(controller, animated: true, completion: nil)
@@ -188,7 +178,6 @@ extension UserDetailsViewController {
     func setupTextFields() {
         dobTextField.placeholder = viewModel.dateOfBirthPlaceholder
         firstAndLastNameTextField.placeholder = viewModel.namePlaceholder
-        voucherCodeTextField.placeholder = viewModel.voucherPlaceholder
         dobTextField.inputView = datePicker
     }
     
@@ -197,7 +186,6 @@ extension UserDetailsViewController {
         parentEmailInfoLabel.attributedText = viewModel.parentEmailInformationString
         userEmailInfoLabel.attributedText = viewModel.userEMailInformationString
         namesInfoLabel.attributedText = viewModel.namesInformationString
-        voucherInformationLabel.attributedText = viewModel.voucherInformationString
         dobInfoLabel.isUserInteractionEnabled = true
         let dobInfoLabelTap = UITapGestureRecognizer(target: self, action: #selector(didTapDobInfoLabel))
         dobInfoLabelTap.numberOfTapsRequired = 1
@@ -249,21 +237,16 @@ extension UserDetailsViewController {
     
     func updateVisualState() {
         updateDisplayedValues()
-        
         tooYoungStackView.isHidden = viewModel.isUserTooYoungStackHidden
         userInfoStackView.isHidden = viewModel.isUserInfoStackHidden
         parentEmailStackView.isHidden = viewModel.isParentEmailStackHidden
         emailStackView.isHidden = viewModel.isUserEmailStackHidden
         firstAndLastNameStackView.isHidden = viewModel.isFirstAndLastNameStackHidden
         acceptConditionsStackView.isHidden = viewModel.isAgreeTermsStackHidden
-        voucherCodeStackView.isHidden = viewModel.isVoucherStackHidden
-        voucherInformationLabel.isHidden = self.voucherCodeStackView.isHidden
-        
         dobUnderlineView.backgroundColor = viewModel.dateOfBirthUnderlineColor
         emailUnderlineView.backgroundColor = viewModel.userEmailUnderlineColor
         parentEmailUnderlineView.backgroundColor = viewModel.parentEmailUnderlineColor
         firstAndLastNameUnderlineView.backgroundColor = viewModel.nameUnderlineColor
-        voucherCodeUnderlineView.backgroundColor = viewModel.voucherUnderlineColor
         completeExtraInfoButton.isEnabled = viewModel.isCompleteInformationButtonEnabled
         completionImageView.image = viewModel.image
     }
@@ -273,7 +256,6 @@ extension UserDetailsViewController {
         parentEmailTextField.text = viewModel.parentEmail
         emailTextField.text = viewModel.userEmail
         firstAndLastNameTextField.text = viewModel.userName
-        voucherCodeTextField.text = viewModel.voucher
         consentGiventSwitch.isOn = viewModel.termsAgreed
     }
 }
@@ -324,15 +306,6 @@ extension UserDetailsViewController {
     
     @objc func didTapDobInfoLabel(recognizer: UITapGestureRecognizer) {
         coordinator?.presentContent(F4SContentType.consent)
-    }
-    
-    func verifyVoucher() {
-        // add code here to verify the voucher as currently entered by the user
-        afterVoucherValidation()
-    }
-    
-    func afterVoucherValidation() {
-        getPartnersFromServer()
     }
     
     func getPartnersFromServer() {

@@ -9,21 +9,21 @@
 import UIKit
 
 @IBDesignable
-class F4SCompanyHeaderViewWithLogo : UIView {
+public class F4SCompanyHeaderViewWithLogo : UIView {
     
-    @IBInspectable var fillTop: Bool = true {
+    @IBInspectable public var fillTop: Bool = true {
         didSet {
             configure()
         }
     }
     
-    @IBInspectable var leftDrop: CGFloat = 0.2 {
+    @IBInspectable public var leftDrop: CGFloat = 0.2 {
         didSet {
             configure()
         }
     }
     
-    @IBInspectable var rightDrop: CGFloat = 1.0 {
+    @IBInspectable public var rightDrop: CGFloat = 1.0 {
         didSet {
             configure()
         }
@@ -35,21 +35,21 @@ class F4SCompanyHeaderViewWithLogo : UIView {
         }
     }
     
-    var leftDropHeight: CGFloat {
+    public var leftDropHeight: CGFloat {
         return leftDrop * bounds.height
     }
     
-    var rightDropHeight: CGFloat {
+    public var rightDropHeight: CGFloat {
         return rightDrop * bounds.height
     }
     
-    @IBInspectable var icon: UIImage? {
+    @IBInspectable public var icon: UIImage? {
         didSet {
             configure()
         }
     }
     
-    @IBInspectable var fillColor: UIColor = UIColor.blue {
+    @IBInspectable public var fillColor: UIColor = UIColor.blue {
         didSet {
             configure()
         }
@@ -58,12 +58,12 @@ class F4SCompanyHeaderViewWithLogo : UIView {
     fileprivate var shapeLayer = CAShapeLayer()
     fileprivate var iconView = F4SRoundIconView(frame: CGRect.zero)
     
-    override func awakeFromNib() {
+    public override func awakeFromNib() {
         super.awakeFromNib()
         setup()
     }
     
-    override func prepareForInterfaceBuilder() {
+    public override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         setup()
     }
@@ -89,7 +89,7 @@ class F4SCompanyHeaderViewWithLogo : UIView {
         shapeLayer.fillColor = fillColor.cgColor
     }
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         
         let middleX = max((bounds.origin.x + bounds.size.width)/2.0, 10.0)
         iconViewCenterYConstraint.constant = slopeHeight(at: middleX)

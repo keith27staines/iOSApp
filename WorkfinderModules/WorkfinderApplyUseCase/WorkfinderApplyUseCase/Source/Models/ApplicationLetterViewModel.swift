@@ -70,7 +70,9 @@ extension ApplicationLetterViewModel : ApplicationLetterModelDelegate {
                 self?.model.render()
                 retry?()
             },
-            cancel: {})
+            cancel: { [weak self] in
+                self?.view?.isActivityIndicatorVisible = false
+        })
     }
     
     public func modelBusyState(_ model: ApplicationLetterModelProtocol, isBusy: Bool) {

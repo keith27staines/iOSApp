@@ -8,6 +8,7 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderAcceptUseCase
 
 class TimelineCoordinator : CoreInjectionNavigationCoordinator {
     
@@ -87,7 +88,7 @@ class TimelineCoordinator : CoreInjectionNavigationCoordinator {
         UIApplication.shared.open(url, options: [:]) { (success) in
             var event = F4SAnalyticsEvent(name: .viewCompanyExternalApplication)
             event.addProperty(name: "placement_uuid", value: acceptContext.placement.placementUuid ?? "")
-            event.addProperty(name: "company_name", value: acceptContext.company.name)
+            event.addProperty(name: "company_name", value: acceptContext.company.companyName)
             event.track()
         }
     }

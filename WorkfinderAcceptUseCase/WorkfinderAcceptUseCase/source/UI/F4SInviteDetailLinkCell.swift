@@ -8,7 +8,7 @@
 
 import UIKit
 
-class F4SInviteDetailLinkCell: UITableViewCell {
+public class F4SInviteDetailLinkCell: UITableViewCell {
 
     @IBOutlet weak var linkButton: UIButton!
     @IBOutlet weak var icon: UIImageView!
@@ -26,7 +26,7 @@ class F4SInviteDetailLinkCell: UITableViewCell {
         ]
     }()
     
-    var buttonAction: ((F4SInviteDetailLinkCell)->())? = nil
+    public var buttonAction: ((F4SInviteDetailLinkCell)->())? = nil
     
     func defaultButtonAction(cell: F4SInviteDetailLinkCell) {
         guard let detail = detail else { return }
@@ -68,11 +68,11 @@ class F4SInviteDetailLinkCell: UITableViewCell {
         }
     }
     
-    var textAttributes: [NSAttributedString.Key: Any] {
+    public var textAttributes: [NSAttributedString.Key: Any] {
         return buttonAction == nil ? externalLinkTextAttributes : internalLinkTextAttributes
     }
     
-    var detail: F4SPlacementInviteSectionDetails? {
+    public var detail: F4SPlacementInviteSectionDetails? {
         didSet {
             self.icon.image = detail?.icon
             if let text = detail?.lines?.first {
