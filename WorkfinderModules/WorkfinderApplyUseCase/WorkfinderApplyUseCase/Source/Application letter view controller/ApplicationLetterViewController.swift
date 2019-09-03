@@ -19,7 +19,7 @@ public protocol ApplicationLetterViewControllerCoordinating : class {
 
 public class ApplicationLetterViewController : UIViewController {
     
-    weak var coordinator: ApplicationLetterViewControllerCoordinating?
+    public weak var coordinator: ApplicationLetterViewControllerCoordinating?
     var mainView: ApplicationLetterViewControllerMainView { return view as! ApplicationLetterViewControllerMainView }
     let editButton: EditApplicationLetterButton = EditApplicationLetterButton()
     var termsAndConditionsButton: UIButton { return mainView.termsAndConditionsButton }

@@ -26,11 +26,6 @@
 		204203F91E4B81AB007C7409 /* FavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204203F81E4B81AB007C7409 /* FavouriteTableViewCell.swift */; };
 		204C89551DF5A36100D8493A /* TemplateChoiceDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204C89541DF5A36100D8493A /* TemplateChoiceDB.swift */; };
 		204C895F1DF5F03200D8493A /* ChooseAttributes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 204C895D1DF5F03200D8493A /* ChooseAttributes.storyboard */; };
-		204C89641DF5F03F00D8493A /* EditCoverLetter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 204C89601DF5F03F00D8493A /* EditCoverLetter.storyboard */; };
-		204C89651DF5F03F00D8493A /* EditFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204C89621DF5F03F00D8493A /* EditFooter.xib */; };
-		204C89731DF5F0A100D8493A /* EditCoverLetterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204C89701DF5F0A100D8493A /* EditCoverLetterTableViewCell.swift */; };
-		204C89741DF5F0A100D8493A /* EditCoverLetterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204C89711DF5F0A100D8493A /* EditCoverLetterViewController.swift */; };
-		204C89751DF5F0A100D8493A /* EditFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204C89721DF5F0A100D8493A /* EditFooterView.swift */; };
 		204C89781DF5F0B200D8493A /* ChooseAttributesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204C89761DF5F0B200D8493A /* ChooseAttributesTableViewCell.swift */; };
 		204C89791DF5F0B200D8493A /* ChooseAttributesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204C89771DF5F0B200D8493A /* ChooseAttributesViewController.swift */; };
 		205EB20B1DDB161D00034424 /* DatabaseOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205EB20A1DDB161D00034424 /* DatabaseOperations.swift */; };
@@ -240,20 +235,8 @@
 		FCB49301222A4B3B00B88B8B /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB49300222A4B3B00B88B8B /* SearchCoordinator.swift */; };
 		FCB49308222A875300B88B8B /* TimelineCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB49307222A875300B88B8B /* TimelineCoordinator.swift */; };
 		FCB4930A222A879000B88B8B /* FavouritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB49309222A879000B88B8B /* FavouritesCoordinator.swift */; };
-		FCB6B8BA2074C5750042C725 /* DayHourPicker.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCB6B8B92074C5750042C725 /* DayHourPicker.xcassets */; };
-		FCB6B8C72074C58F0042C725 /* F4SPageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8BC2074C58E0042C725 /* F4SPageHeaderView.swift */; };
-		FCB6B8C82074C58F0042C725 /* F4SDaysAndHoursViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8BD2074C58E0042C725 /* F4SDaysAndHoursViewController.swift */; };
-		FCB6B8C92074C58F0042C725 /* F4SHoursPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8BE2074C58E0042C725 /* F4SHoursPickerViewController.swift */; };
 		FCB6B8CA2074C58F0042C725 /* F4SDisplayInformationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCB6B8BF2074C58E0042C725 /* F4SDisplayInformationViewController.storyboard */; };
 		FCB6B8CB2074C58F0042C725 /* F4SDaysAndHours.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCB6B8C12074C58E0042C725 /* F4SDaysAndHours.storyboard */; };
-		FCB6B8CC2074C58F0042C725 /* F4SDisplayInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8C32074C58E0042C725 /* F4SDisplayInformationViewController.swift */; };
-		FCB6B8CE2074C58F0042C725 /* F4SSelectDayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8C52074C58E0042C725 /* F4SSelectDayTableViewCell.swift */; };
-		FCB6B8E12074C59C0042C725 /* F4SCalendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCB6B8D12074C59C0042C725 /* F4SCalendar.storyboard */; };
-		FCB6B8E22074C59C0042C725 /* F4SDayCalendarViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8D22074C59C0042C725 /* F4SDayCalendarViewCell.swift */; };
-		FCB6B8E32074C59C0042C725 /* F4SMonthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8D32074C59C0042C725 /* F4SMonthHeaderView.swift */; };
-		FCB6B8E42074C59C0042C725 /* F4SCalendarColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8D52074C59C0042C725 /* F4SCalendarColors.swift */; };
-		FCB6B8E52074C59C0042C725 /* F4SCalendarCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8D62074C59C0042C725 /* F4SCalendarCollectionViewController.swift */; };
-		FCB6B8ED2074C59C0042C725 /* F4SCalendarContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6B8DF2074C59C0042C725 /* F4SCalendarContainerViewController.swift */; };
 		FCB6D0EE2198182D00B392DB /* F4SDocumentUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6D0ED2198182D00B392DB /* F4SDocumentUploader.swift */; };
 		FCB6D9361F75056100B8C268 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCB6D9351F75056000B8C268 /* Branding.plist */; };
 		FCBF3F2D22993C2100C0A4F9 /* UserDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBF3F2C22993C2100C0A4F9 /* UserDetailsCoordinator.swift */; };
@@ -395,11 +378,6 @@
 		204203F81E4B81AB007C7409 /* FavouriteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewCell.swift; sourceTree = "<group>"; };
 		204C89541DF5A36100D8493A /* TemplateChoiceDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateChoiceDB.swift; sourceTree = "<group>"; };
 		204C895E1DF5F03200D8493A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "f4s-workexperience/Base.lproj/ChooseAttributes.storyboard"; sourceTree = "<group>"; };
-		204C89611DF5F03F00D8493A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "f4s-workexperience/Base.lproj/EditCoverLetter.storyboard"; sourceTree = "<group>"; };
-		204C89631DF5F03F00D8493A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "f4s-workexperience/Base.lproj/EditFooter.xib"; sourceTree = "<group>"; };
-		204C89701DF5F0A100D8493A /* EditCoverLetterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCoverLetterTableViewCell.swift; sourceTree = "<group>"; };
-		204C89711DF5F0A100D8493A /* EditCoverLetterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCoverLetterViewController.swift; sourceTree = "<group>"; };
-		204C89721DF5F0A100D8493A /* EditFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditFooterView.swift; sourceTree = "<group>"; };
 		204C89761DF5F0B200D8493A /* ChooseAttributesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseAttributesTableViewCell.swift; sourceTree = "<group>"; };
 		204C89771DF5F0B200D8493A /* ChooseAttributesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseAttributesViewController.swift; sourceTree = "<group>"; };
 		205EB20A1DDB161D00034424 /* DatabaseOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseOperations.swift; sourceTree = "<group>"; };
@@ -658,20 +636,8 @@
 		FCB49300222A4B3B00B88B8B /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
 		FCB49307222A875300B88B8B /* TimelineCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineCoordinator.swift; sourceTree = "<group>"; };
 		FCB49309222A879000B88B8B /* FavouritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesCoordinator.swift; sourceTree = "<group>"; };
-		FCB6B8B92074C5750042C725 /* DayHourPicker.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = DayHourPicker.xcassets; sourceTree = "<group>"; };
-		FCB6B8BC2074C58E0042C725 /* F4SPageHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SPageHeaderView.swift; sourceTree = "<group>"; };
-		FCB6B8BD2074C58E0042C725 /* F4SDaysAndHoursViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDaysAndHoursViewController.swift; sourceTree = "<group>"; };
-		FCB6B8BE2074C58E0042C725 /* F4SHoursPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SHoursPickerViewController.swift; sourceTree = "<group>"; };
 		FCB6B8BF2074C58E0042C725 /* F4SDisplayInformationViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SDisplayInformationViewController.storyboard; sourceTree = "<group>"; };
 		FCB6B8C22074C58E0042C725 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/F4SDaysAndHours.storyboard; sourceTree = "<group>"; };
-		FCB6B8C32074C58E0042C725 /* F4SDisplayInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDisplayInformationViewController.swift; sourceTree = "<group>"; };
-		FCB6B8C52074C58E0042C725 /* F4SSelectDayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SSelectDayTableViewCell.swift; sourceTree = "<group>"; };
-		FCB6B8D12074C59C0042C725 /* F4SCalendar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SCalendar.storyboard; sourceTree = "<group>"; };
-		FCB6B8D22074C59C0042C725 /* F4SDayCalendarViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDayCalendarViewCell.swift; sourceTree = "<group>"; };
-		FCB6B8D32074C59C0042C725 /* F4SMonthHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SMonthHeaderView.swift; sourceTree = "<group>"; };
-		FCB6B8D52074C59C0042C725 /* F4SCalendarColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarColors.swift; sourceTree = "<group>"; };
-		FCB6B8D62074C59C0042C725 /* F4SCalendarCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarCollectionViewController.swift; sourceTree = "<group>"; };
-		FCB6B8DF2074C59C0042C725 /* F4SCalendarContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarContainerViewController.swift; sourceTree = "<group>"; };
 		FCB6D0ED2198182D00B392DB /* F4SDocumentUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDocumentUploader.swift; sourceTree = "<group>"; };
 		FCB6D9351F75056000B8C268 /* Branding.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
 		FCBF3F2C22993C2100C0A4F9 /* UserDetailsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsCoordinator.swift; sourceTree = "<group>"; };
@@ -1550,11 +1516,6 @@
 		FC24D24C226B088E00FA04A1 /* Edit Cover letter */ = {
 			isa = PBXGroup;
 			children = (
-				204C89601DF5F03F00D8493A /* EditCoverLetter.storyboard */,
-				204C89711DF5F0A100D8493A /* EditCoverLetterViewController.swift */,
-				204C89701DF5F0A100D8493A /* EditCoverLetterTableViewCell.swift */,
-				204C89621DF5F03F00D8493A /* EditFooter.xib */,
-				204C89721DF5F0A100D8493A /* EditFooterView.swift */,
 			);
 			path = "Edit Cover letter";
 			sourceTree = "<group>";
@@ -1777,7 +1738,6 @@
 			children = (
 				FC73719A2101C7EF00C0032A /* AcceptOffer.xcassets */,
 				40E78E1D1DD31A86000A3776 /* Assets.xcassets */,
-				FCB6B8B92074C5750042C725 /* DayHourPicker.xcassets */,
 				FCC212D2219077C000D8D5B7 /* DocumentCapture.xcassets */,
 				FC1DC06721FE13FE009ABC60 /* CompanyDetailAssets.xcassets */,
 			);
@@ -1928,13 +1888,8 @@
 		FCB6B8BB2074C58E0042C725 /* F4SDaysAndHours */ = {
 			isa = PBXGroup;
 			children = (
-				FCB6B8C52074C58E0042C725 /* F4SSelectDayTableViewCell.swift */,
 				FCB6B8C12074C58E0042C725 /* F4SDaysAndHours.storyboard */,
-				FCB6B8BC2074C58E0042C725 /* F4SPageHeaderView.swift */,
-				FCB6B8BD2074C58E0042C725 /* F4SDaysAndHoursViewController.swift */,
-				FCB6B8BE2074C58E0042C725 /* F4SHoursPickerViewController.swift */,
 				FCB6B8BF2074C58E0042C725 /* F4SDisplayInformationViewController.storyboard */,
-				FCB6B8C32074C58E0042C725 /* F4SDisplayInformationViewController.swift */,
 			);
 			path = F4SDaysAndHours;
 			sourceTree = "<group>";
@@ -1942,12 +1897,6 @@
 		FCB6B8D02074C59C0042C725 /* F4SCalendar */ = {
 			isa = PBXGroup;
 			children = (
-				FCB6B8D12074C59C0042C725 /* F4SCalendar.storyboard */,
-				FCB6B8DF2074C59C0042C725 /* F4SCalendarContainerViewController.swift */,
-				FCB6B8D62074C59C0042C725 /* F4SCalendarCollectionViewController.swift */,
-				FCB6B8D22074C59C0042C725 /* F4SDayCalendarViewCell.swift */,
-				FCB6B8D32074C59C0042C725 /* F4SMonthHeaderView.swift */,
-				FCB6B8D52074C59C0042C725 /* F4SCalendarColors.swift */,
 			);
 			path = F4SCalendar;
 			sourceTree = "<group>";
@@ -2281,7 +2230,6 @@
 				FC31F097204D54E3009DD526 /* Debug.storyboard in Resources */,
 				FCB6B8CB2074C58F0042C725 /* F4SDaysAndHours.storyboard in Resources */,
 				FC503F12231D0210008722FF /* AddVoucher.storyboard in Resources */,
-				FCB6B8E12074C59C0042C725 /* F4SCalendar.storyboard in Resources */,
 				FC73719B2101C7EF00C0032A /* AcceptOffer.xcassets in Resources */,
 				D5E9EBE81DD60AB300BD796E /* Localizable.strings in Resources */,
 				FCB6D9361F75056100B8C268 /* Branding.plist in Resources */,
@@ -2289,10 +2237,7 @@
 				40A28CB71E1F96A60077D490 /* RatePlacement.storyboard in Resources */,
 				FC4BB6091FA21BA400173864 /* SelectPartner.storyboard in Resources */,
 				FCC5EBB61F449C310085CE15 /* README.md in Resources */,
-				204C89651DF5F03F00D8493A /* EditFooter.xib in Resources */,
 				FC681C011F57473D0077BECA /* Podfile.lock in Resources */,
-				FCB6B8BA2074C5750042C725 /* DayHourPicker.xcassets in Resources */,
-				204C89641DF5F03F00D8493A /* EditCoverLetter.storyboard in Resources */,
 				FCD3485820038B8700DC1316 /* Auth0.plist in Resources */,
 				40C1A4F31DDEF2F6000F80AA /* AutoCompleteTableViewCell.xib in Resources */,
 				40E78E1E1DD31A86000A3776 /* Assets.xcassets in Resources */,
@@ -2437,7 +2382,6 @@
 				FC99BDC820CFD8E400278DDE /* F4SDownloadService.swift in Sources */,
 				20B128181DDA1A3900CE3F1F /* Config.swift in Sources */,
 				FC1DC09321FE1509009ABC60 /* CompanyPeopleViewController.swift in Sources */,
-				FCB6B8C82074C58F0042C725 /* F4SDaysAndHoursViewController.swift in Sources */,
 				40A28CBF1E24ECE90077D490 /* SuccessExtraInfoViewController.swift in Sources */,
 				FCD3486420038C3100DC1316 /* F4SAuth0MagicLinkInterpreterer.swift in Sources */,
 				FC21BE3A220F53EB00A0A389 /* SearchViewFooterView.swift in Sources */,
@@ -2457,7 +2401,6 @@
 				FC85A5ED2191D87B004E877E /* AddDocumentsViewController+AddDocumentDelegate.swift in Sources */,
 				FC24D238226AEDD800FA04A1 /* RecommendationsListViewModel.swift in Sources */,
 				FC1DC09221FE1509009ABC60 /* PersonBioView.swift in Sources */,
-				FCB6B8E52074C59C0042C725 /* F4SCalendarCollectionViewController.swift in Sources */,
 				FC1DC09021FE1509009ABC60 /* HeaderAndFooter.swift in Sources */,
 				FC6A6FC722D1E04C005F625A /* AppCoordinatorFactory.swift in Sources */,
 				FC31304B222BCA580043D014 /* RotationAwareController.swift in Sources */,
@@ -2479,7 +2422,6 @@
 				40C1A5271DE58EED000F80AA /* CutomClusterIconGenerator.swift in Sources */,
 				FCC9D13D1FC82B010081F7B5 /* StarRatingView.swift in Sources */,
 				FC21BE3D220F53EB00A0A389 /* FilterButton.swift in Sources */,
-				FCB6B8E22074C59C0042C725 /* F4SDayCalendarViewCell.swift in Sources */,
 				40C6DDF41E03F445000F8806 /* UserInfoDB.swift in Sources */,
 				FC3CD1DA221566F200F91B50 /* Geocoding.swift in Sources */,
 				FCEF43DA22870F490055B5F7 /* DateOfBirthPickerViewModel.swift in Sources */,
@@ -2488,19 +2430,16 @@
 				FC39F46021AAA618005B0A07 /* MessageViewController.swift in Sources */,
 				FCEF43D622870F370055B5F7 /* UserDetailsViewModel.swift in Sources */,
 				FC64A5932119EBE3006464A5 /* CalendarChooserController.swift in Sources */,
-				FCB6B8ED2074C59C0042C725 /* F4SCalendarContainerViewController.swift in Sources */,
 				FCE11E5C2115D26B00403789 /* SwitchTableViewCell.swift in Sources */,
 				40C1A5201DDF5ACE000F80AA /* GMUWrappingDictionaryKey.m in Sources */,
 				40A28CB91E1F96C20077D490 /* RatePlacementViewController.swift in Sources */,
 				40A5CF401DED81F7000007AB /* CustomViewFlowLayout.swift in Sources */,
-				FCB6B8CE2074C58F0042C725 /* F4SSelectDayTableViewCell.swift in Sources */,
 				40E78E771DD32BE7000A3776 /* DrawerBarButtonItem.swift in Sources */,
 				FCC212F1219077C000D8D5B7 /* F4SDocumentTableViewController.swift in Sources */,
 				40E78E9A1DD392B5000A3776 /* OnboardingViewController.swift in Sources */,
 				FCA6C8252107163B00A222FE /* F4SConfirmUseVoucherView.swift in Sources */,
 				FC21BE36220F53EB00A0A389 /* TestSearchDataGetter.swift in Sources */,
 				FCA53B961FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift in Sources */,
-				FCB6B8CC2074C58F0042C725 /* F4SDisplayInformationViewController.swift in Sources */,
 				40C1A51D1DDF5ACE000F80AA /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				FCEE5E1E2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift in Sources */,
 				FC1DC09521FE1509009ABC60 /* CompanySummaryViewController.swift in Sources */,
@@ -2511,7 +2450,6 @@
 				FCE11E572113407F00403789 /* F4SCalendarEventWriter.swift in Sources */,
 				FC1DC06B21FE142D009ABC60 /* AppCoordinator.swift in Sources */,
 				204203EE1E4B16D7007C7409 /* ShortlistDBOperations.swift in Sources */,
-				204C89731DF5F0A100D8493A /* EditCoverLetterTableViewCell.swift in Sources */,
 				4059740A1E00115C0002DB3A /* NextResponderTextField.swift in Sources */,
 				2037B0AB1DEC42F600A9DE3E /* PlacementDB.swift in Sources */,
 				FCE51E422210365B00DC1D50 /* CompanySearchDataGetter.swift in Sources */,
@@ -2562,7 +2500,6 @@
 				FCD388E5208DEFE100FC73C5 /* F4SCompanyDocumentsModel.swift in Sources */,
 				FC21BE38220F53EB00A0A389 /* SearchProtocols.swift in Sources */,
 				FC21BE35220F53EB00A0A389 /* CompanySearchDataSource.swift in Sources */,
-				204C89751DF5F0A100D8493A /* EditFooterView.swift in Sources */,
 				40E78E761DD32BE7000A3776 /* AnimatedMenuButton.swift in Sources */,
 				FC06264722032E74000D2D04 /* CompanyDocumentsViewController.swift in Sources */,
 				FC21BE39220F53EB00A0A389 /* SearchView.swift in Sources */,
@@ -2584,7 +2521,6 @@
 				2037B0AD1DEC560700A9DE3E /* PlacementCoreDataManager.swift in Sources */,
 				2037B0A91DEC3D3400A9DE3E /* InterestDBOperations.swift in Sources */,
 				FC9626412248C27D00D5F850 /* ApplyCoordinator.swift in Sources */,
-				FCB6B8E42074C59C0042C725 /* F4SCalendarColors.swift in Sources */,
 				FC1DC09421FE1509009ABC60 /* CompanyDataViewController.swift in Sources */,
 				FC1DC07621FE14D7009ABC60 /* CompanyViewData.swift in Sources */,
 				20FABFEC1DDDA63600D583E2 /* FileHelper.swift in Sources */,
@@ -2598,7 +2534,6 @@
 				40E78E661DD32B94000A3776 /* TabBarCoordinator.swift in Sources */,
 				FCB6D0EE2198182D00B392DB /* F4SDocumentUploader.swift in Sources */,
 				40E78E591DD32964000A3776 /* Entities.swift in Sources */,
-				FCB6B8C72074C58F0042C725 /* F4SPageHeaderView.swift in Sources */,
 				FC2D975F221860E900763B06 /* NavigationRouter.swift in Sources */,
 				FCC212FD219077C000D8D5B7 /* F4SDCDocumentViewerController.swift in Sources */,
 				204203EA1E4B110A007C7409 /* ShortlistDB.swift in Sources */,
@@ -2618,7 +2553,6 @@
 				FC87387221945C8F00BF9743 /* F4SBusinessLeadersRequestModel.swift in Sources */,
 				D54E0FFF1E044B1800A51560 /* ContentViewController.swift in Sources */,
 				FCC212F8219077C000D8D5B7 /* F4SCameraViewController.swift in Sources */,
-				204C89741DF5F0A100D8493A /* EditCoverLetterViewController.swift in Sources */,
 				FC1DC06F21FE148B009ABC60 /* Coordinating Protocol.swift in Sources */,
 				FCB46F02204FD86D00F0779F /* F4SLogViewController.swift in Sources */,
 				FC21BE34220F53EB00A0A389 /* PlacesSearchDataSource.swift in Sources */,
@@ -2648,13 +2582,11 @@
 				204203F91E4B81AB007C7409 /* FavouriteTableViewCell.swift in Sources */,
 				FC8E303A20F4A60B006059DE /* F4SLogger.swift in Sources */,
 				FC31F095204D54C6009DD526 /* F4SDebugViewController.swift in Sources */,
-				FCB6B8E32074C59C0042C725 /* F4SMonthHeaderView.swift in Sources */,
 				FCE20CC1203C12F300CA821D /* F4SDocumentUploadWhileApplyingModel.swift in Sources */,
 				FC3FFA85228C2D5300408AB2 /* PushNotificationAuthorization.swift in Sources */,
 				FC860D82209C37F2007945E6 /* MessageDispatcher.swift in Sources */,
 				40E78E581DD32964000A3776 /* Constants.swift in Sources */,
 				FCE51E44221039D600DC1D50 /* PersonSearchDataGetter.swift in Sources */,
-				FCB6B8C92074C58F0042C725 /* F4SHoursPickerViewController.swift in Sources */,
 				40C1A51C1DDF5ACE000F80AA /* GMUGridBasedClusterAlgorithm.m in Sources */,
 				FC50E9CE2213EF5400C9A621 /* SearchModeSelectorView.swift in Sources */,
 				FCD3486620038C3100DC1316 /* F4SEmailVerificationState.swift in Sources */,
@@ -2743,22 +2675,6 @@
 				204C895E1DF5F03200D8493A /* Base */,
 			);
 			name = ChooseAttributes.storyboard;
-			sourceTree = "<group>";
-		};
-		204C89601DF5F03F00D8493A /* EditCoverLetter.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				204C89611DF5F03F00D8493A /* Base */,
-			);
-			name = EditCoverLetter.storyboard;
-			sourceTree = "<group>";
-		};
-		204C89621DF5F03F00D8493A /* EditFooter.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				204C89631DF5F03F00D8493A /* Base */,
-			);
-			name = EditFooter.xib;
 			sourceTree = "<group>";
 		};
 		206F8F931E1E590A0024937B /* MessageOptionCollectionViewCell.xib */ = {

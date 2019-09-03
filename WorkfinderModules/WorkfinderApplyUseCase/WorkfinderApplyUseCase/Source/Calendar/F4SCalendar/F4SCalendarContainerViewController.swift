@@ -1,11 +1,3 @@
-//
-//  F4SCalendarContainerViewController.swift
-//  HoursPicker2
-//
-//  Created by Keith Dev on 03/04/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
-//
-
 import UIKit
 import WorkfinderUI
 
@@ -16,7 +8,8 @@ class F4SCalendarContainerViewController: UIViewController {
     var maskView: UIView?
     
     lazy var infoController: F4SDisplayInformationViewController = {
-        let storyboard = UIStoryboard(name: "F4SDisplayInformationViewController", bundle: nil)
+        let bundle = Bundle(identifier: "com.f4s.WorkfinderApplyUseCase")
+        let storyboard = UIStoryboard(name: "F4SDisplayInformationViewController", bundle: bundle)
         let vc = storyboard.instantiateInitialViewController() as! F4SDisplayInformationViewController
         vc.delegate = self
         vc.helpContext = F4SHelpContext.calendarController

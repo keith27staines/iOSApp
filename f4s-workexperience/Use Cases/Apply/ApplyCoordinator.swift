@@ -80,7 +80,8 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     }
     
     func showApplicationLetterEditor() {
-        let coverLetterStoryboard = UIStoryboard(name: "EditCoverLetter", bundle: nil)
+        let bundle = Bundle(identifier: "com.f4s.WorkfinderApplyUseCase")
+        let coverLetterStoryboard = UIStoryboard(name: "EditCoverLetter", bundle: bundle)
         let editor = coverLetterStoryboard.instantiateViewController(withIdentifier: "EditCoverLetterCtrl") as! EditCoverLetterViewController
         editor.coordinator = self
         editor.blanksModel = applicationModel.blanksModel

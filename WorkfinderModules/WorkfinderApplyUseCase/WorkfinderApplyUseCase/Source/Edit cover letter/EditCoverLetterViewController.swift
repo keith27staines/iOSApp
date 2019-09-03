@@ -1,23 +1,14 @@
-//
-//  CoverLetterViewController.swift
-//  f4s-workexperience
-//
-//  Created by iOS FRB on 11/22/16.
-//  Copyright © 2016 Chelsea Apps Factory. All rights reserved.
-//
-
 import UIKit
 import WorkfinderCommon
-import WorkfinderApplyUseCase
 import WorkfinderUI
 
-protocol EditCoverLetterViewControllerCoordinatorProtocol {
+public protocol EditCoverLetterViewControllerCoordinatorProtocol {
     func chooseValuesForTemplateBlank(name: TemplateBlankName, inTemplate: F4STemplate)
     func editCoverLetterViewControllerDidCancel()
     func editCoverLetterViewControllerDidFinish(_ viewController: EditCoverLetterViewController)
 }
 
-class EditCoverLetterViewController: UIViewController {
+public class EditCoverLetterViewController: UIViewController {
 
     @IBOutlet weak var updateButton: UIButton!
     @IBOutlet weak var contentView: UIView!
@@ -28,27 +19,27 @@ class EditCoverLetterViewController: UIViewController {
     fileprivate let smallFooterSize = CGFloat(21)
     fileprivate var numberOfRowsInSection2 = 2
     var dateFormatter: DateFormatter?
-    var availabilityPeriodJson: F4SAvailabilityPeriodJson = F4SAvailabilityPeriodJson()
-    var coordinator: EditCoverLetterViewControllerCoordinatorProtocol?
+    public var availabilityPeriodJson: F4SAvailabilityPeriodJson = F4SAvailabilityPeriodJson()
+    public var coordinator: EditCoverLetterViewControllerCoordinatorProtocol?
     
-    var blanksModel: ApplicationLetterTemplateBlanksModelProtocol? {
+    public var blanksModel: ApplicationLetterTemplateBlanksModelProtocol? {
         didSet {
             updateFromModel()
         }
     }
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         setupAppereance()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
+    override public func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupNavigationBar()
         updateFromModel()
     }
     
-    override func viewWillAppear(_: Bool) {
+    override public func viewWillAppear(_: Bool) {
         super.viewWillAppear(true)
         setupNavigationBar()
         coverLetterTableView.reloadData()
@@ -60,7 +51,7 @@ class EditCoverLetterViewController: UIViewController {
         Skinner().apply(buttonSkin: skin?.primaryButtonSkin, to: updateButton)
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
+    override public var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
@@ -108,20 +99,20 @@ extension EditCoverLetterViewController :  F4SCalendarCollectionViewControllerDe
 
 // MARK: -UITableViewDelegate,UITableViewDataSource
 extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in _: UITableView) -> Int {
+    public func numberOfSections(in _: UITableView) -> Int {
         return 5
     }
 
-    func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let _ = EditableSection(rawValue: section) else { return 0 }
         return 1
     }
 
-    func tableView(_: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    public func tableView(_: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(44)
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: coverLetterCellIdentifier, for: indexPath) as? EditCoverLetterTableViewCell else {
             return UITableViewCell()
         }
@@ -226,7 +217,7 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
         case skills = 4
     }
 
-    func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+    public func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let editableSection = EditableSection(rawValue: indexPath.section) else { return }
         guard let navCtrl = self.navigationController, let template = blanksModel?.template else { return }
         switch editableSection {
@@ -248,7 +239,7 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
         coverLetterTableView.reloadData()
     }
 
-    func tableView(_: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    public func tableView(_: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         guard let editableSection = EditableSection(rawValue: section) else { return 0 }
         switch editableSection
         {
@@ -277,7 +268,8 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func pushCalendar(navigationController: UINavigationController) {
-        let storyboard = UIStoryboard(name: "F4SCalendar", bundle: nil)
+        let bundle = Bundle(identifier: "com.f4s.WorkfinderApplyUseCase")
+        let storyboard = UIStoryboard(name: "F4SCalendar", bundle: bundle)
         guard let vc = storyboard.instantiateInitialViewController() as? F4SCalendarContainerViewController else {
             return
         }
@@ -289,7 +281,7 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
         navigationController.pushViewController(vc, animated: true)
     }
 
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         var bigFooterView: UIView
         var smallFooterView: UIView
 
