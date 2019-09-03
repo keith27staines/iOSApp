@@ -39,9 +39,7 @@ class CompanyHeaderView: UIView {
     
     func refresh() {
         companyNameLabel.text = companyViewData.companyName
-        companyViewData.getLogo { [weak self] (image) in
-            self?.companyIconImageView.image = image
-        }
+        companyIconImageView.load(urlString: companyViewData.logoUrlString, defaultImage: UIImage(named: "DefaultLogo"))
     }
     
     lazy var doneButton : UIButton = {
@@ -71,8 +69,8 @@ class CompanyHeaderView: UIView {
         return button
     }()
     
-    lazy var companyIconImageView: UIImageView = {
-        let imageView = UIImageView()
+    lazy var companyIconImageView: F4SSelfLoadingImageView = {
+        let imageView = F4SSelfLoadingImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.borderColor = UIColor.lightGray.cgColor
         imageView.layer.borderWidth = 1

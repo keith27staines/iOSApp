@@ -951,12 +951,6 @@
 				FC62FF9420EF71A2003E52C5 /* F4SCompanyDocuments */,
 				FCD3485B20038C3100DC1316 /* F4SEmailVerification models */,
 				FC62FF9220EF70F9003E52C5 /* F4SDocumentUpload models */,
-				FC62FF8620EF6D98003E52C5 /* F4SPlacement models */,
-				FC62FF8920EF6EA8003E52C5 /* F4SVoucher models */,
-				FC62FF8720EF6E75003E52C5 /* F4STemplate models */,
-				FC62FF8820EF6E87003E52C5 /* F4SShortlist models */,
-				FC62FF8A20EF6EB8003E52C5 /* F4SContent models */,
-				FC62FF8420EF6D26003E52C5 /* F4SDatabaseDownload models */,
 				FC62FF8520EF6D51003E52C5 /* F4SUser models */,
 				FCE11E562113407F00403789 /* F4SCalendarEventWriter.swift */,
 			);
@@ -1744,54 +1738,12 @@
 			path = F4SAPIServices;
 			sourceTree = "<group>";
 		};
-		FC62FF8420EF6D26003E52C5 /* F4SDatabaseDownload models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "F4SDatabaseDownload models";
-			sourceTree = "<group>";
-		};
 		FC62FF8520EF6D51003E52C5 /* F4SUser models */ = {
 			isa = PBXGroup;
 			children = (
 				FC5F3D4F20D93C070002F41B /* F4SUserDataFix.swift */,
 			);
 			name = "F4SUser models";
-			sourceTree = "<group>";
-		};
-		FC62FF8620EF6D98003E52C5 /* F4SPlacement models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "F4SPlacement models";
-			sourceTree = "<group>";
-		};
-		FC62FF8720EF6E75003E52C5 /* F4STemplate models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "F4STemplate models";
-			sourceTree = "<group>";
-		};
-		FC62FF8820EF6E87003E52C5 /* F4SShortlist models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "F4SShortlist models";
-			sourceTree = "<group>";
-		};
-		FC62FF8920EF6EA8003E52C5 /* F4SVoucher models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "F4SVoucher models";
-			sourceTree = "<group>";
-		};
-		FC62FF8A20EF6EB8003E52C5 /* F4SContent models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "F4SContent models";
 			sourceTree = "<group>";
 		};
 		FC62FF9220EF70F9003E52C5 /* F4SDocumentUpload models */ = {

@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import WorkfinderUI
 
 class TimelineEntryTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var companyImageView: UIImageView!
+    @IBOutlet weak var companyImageView: F4SSelfLoadingImageView!
     @IBOutlet weak var companyTitleLabel: UILabel!
     @IBOutlet weak var latestMessageLabel: UILabel!
     @IBOutlet weak var dateTimeLatestMessageLabel: UILabel!

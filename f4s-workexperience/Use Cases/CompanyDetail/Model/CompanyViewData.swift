@@ -25,6 +25,7 @@ public struct CompanyViewData : CompanyViewDataProtocol {
     public var duedilUrl: String? = nil
     public var linkedinUrl: String? = nil
     public var postcode: String? = nil
+    public var logoUrlString: String?
     
     private var company: Company?
     
@@ -42,27 +43,12 @@ public struct CompanyViewData : CompanyViewDataProtocol {
         self.industry = company.industry
         self.starRating = Float(company.rating)
         self.isAvailableForSearch = company.isAvailableForSearch
-        if let placementStatus = company.placement?.status {
-            self.appliedState = (placementStatus == .draft) ? .draft : .applied
-        } else {
-            self.appliedState = .notApplied
-        }
+        self.logoUrlString = company.logoUrl
     }
 }
 
 extension CompanyViewData {
-    
-    func getLogo(completion: @escaping (UIImage) -> Void) {
-        let defaultLogo: UIImage = #imageLiteral(resourceName: "DefaultLogo")
-        guard let company = company else {
-            completion(defaultLogo)
-            return
-        }
-        company.getLogo(defaultLogo: defaultLogo) { (image) in
-            completion(image ?? defaultLogo)
-        }
-    }
-    
+        
     var revenueString: String {
         guard let revenue = revenue, revenue > 0 else { return "" }
         return "Annual revenue: £\(ScaledNumber.formattedString(for: revenue))"

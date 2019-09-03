@@ -131,10 +131,7 @@ extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
                 string: company.name,
                 attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.largeTextSize,weight: UIFont.Weight.medium),NSAttributedString.Key.foregroundColor: UIColor.black])
             cell.companyImageView.layer.cornerRadius = cell.companyImageView.bounds.height / 2
-            cell.companyImageView.image = Company.defaultLogo
-            company.getLogo(defaultLogo: Company.defaultLogo, completion: { (image) in
-                cell.companyImageView.image = image
-            })
+            cell.companyImageView.load(urlString: company.logoUrl, defaultImage: Company.defaultLogo)
             cell.companyIndustryLabel.attributedText = NSAttributedString(
                 string: company.industry,
                 attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallTextSize,weight: UIFont.Weight.light), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.black)])

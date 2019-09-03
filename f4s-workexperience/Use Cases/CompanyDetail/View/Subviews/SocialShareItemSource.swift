@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Mustache
+import WorkfinderCommon
 
 class SocialShareItemSource: NSObject, UIActivityItemSource {
     var company: Company?

@@ -32,7 +32,6 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     var templateService: F4STemplateServiceProtocol
     var placementRepository: F4SPlacementRepositoryProtocol = F4SPlacementRespository()
     var interestsRepository: F4SInterestsRepositoryProtocol = F4SInterestsRepository()
-    var continueFromTimelinePlacement: F4STimelinePlacement?
     let startingViewController: UIViewController!
     weak var applyCoordinatorDelegate: ApplyCoordinatorDelegate?
     lazy var userInterests: [F4SInterest] = {
@@ -49,18 +48,15 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     
     init(applyCoordinatorDelegate: ApplyCoordinatorDelegate? = nil,
          company: Company,
-         placement: F4SPlacement?,
          parent: CoreInjectionNavigationCoordinator?,
          navigationRouter: NavigationRoutingProtocol,
          inject: CoreInjectionProtocol,
          placementService: F4SPlacementApplicationServiceProtocol,
-         templateService: F4STemplateServiceProtocol,
-         continueFrom: F4STimelinePlacement? = nil) {
+         templateService: F4STemplateServiceProtocol) {
         self.applyCoordinatorDelegate = applyCoordinatorDelegate
-        self.applicationContext = F4SApplicationContext(user: F4SUser(), company: company, placement: placement)
+        self.applicationContext = F4SApplicationContext(user: F4SUser(), company: company, placement: nil)
         self.placementService = placementService
         self.templateService = templateService
-        self.continueFromTimelinePlacement = continueFrom
         self.startingViewController = navigationRouter.navigationController.topViewController
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }

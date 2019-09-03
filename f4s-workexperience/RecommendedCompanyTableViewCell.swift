@@ -2,6 +2,7 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 
 class CompanyCell : UITableViewCell {
     
@@ -25,17 +26,7 @@ class CompanyCell : UITableViewCell {
                 string: company.industry, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.darkGray])
             self.starRating.rating = Float(company.rating)
             self.starRating.isHidden = (company.rating == 0) ? true : false
-            self.logo.image = UIImage(named: "DefaultLogo")
-            if !company.logoUrl.isEmpty, let url = NSURL(string: company.logoUrl) {
-                F4SImageService.sharedInstance.getImage(url: url, completion: { [weak self]
-                    image in
-                    if image != nil {
-                        self?.logo.image = image!
-                    } else {
-                        self?.logo.image = UIImage(named: "DefaultLogo")
-                    }
-                })
-            }
+            self.logo.load(urlString: company.logoUrl, defaultImage: UIImage(named: "DefaultLogo"))
         }
     }
     
@@ -55,8 +46,8 @@ class CompanyCell : UITableViewCell {
         return label
     }()
     
-    lazy var logo: UIImageView = {
-        let imageView = UIImageView()
+    lazy var logo: F4SSelfLoadingImageView = {
+        let imageView = F4SSelfLoadingImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.heightAnchor.constraint(equalToConstant: 40).isActive = true

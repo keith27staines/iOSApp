@@ -90,7 +90,7 @@ class CompanyViewModel : NSObject {
     var companyViewData: CompanyViewData
     let people: [PersonViewData]
     let companyService: F4SCompanyServiceProtocol
-    var appliedState: AppliedState { return companyViewData.appliedState }
+    //var appliedState: AppliedState { return companyViewData.appliedState }
     private var viewControllers = [UIViewController]()
     var currentPageIndex: PageIndex = .summary
     
@@ -189,7 +189,6 @@ class CompanyViewModel : NSObject {
     }
     
     func didTapApply(completion: @escaping (InitiateApplicationResult) -> Void) {
-        if appliedState == .applied { completion(.deniedAlreadyApplied) ; return }
         applyIfStateAllows(completion: completion)
     }
     

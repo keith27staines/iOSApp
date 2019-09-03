@@ -32,6 +32,7 @@ public protocol CompanyViewDataProtocol {
     var postcode: String? { get set }
     var duedilUrl: String? { get }
     var linkedinUrl: String? { get }
+    var logoUrlString: String? { get }
 }
 
 public extension CompanyViewDataProtocol {

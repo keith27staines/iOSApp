@@ -23,6 +23,8 @@
 		FC22DBF922F97CEB0068C61C /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBF822F97CEB0068C61C /* UIFont+Extensions.swift */; };
 		FC5CBA55231D2C4D00C2D3C5 /* F4SCompanyHeaderViewWithLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBA54231D2C4D00C2D3C5 /* F4SCompanyHeaderViewWithLogo.swift */; };
 		FC5CBA57231D2C7D00C2D3C5 /* F4SRoundIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBA56231D2C7D00C2D3C5 /* F4SRoundIconView.swift */; };
+		FC9535A1231E448D00F4A9DA /* F4SSelfLoadingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9535A0231E448D00F4A9DA /* F4SSelfLoadingImageView.swift */; };
+		FC9535A3231E52E600F4A9DA /* F4SSelfLoadingImageViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9535A2231E52E600F4A9DA /* F4SSelfLoadingImageViewTests.swift */; };
 		FC9865BA229D3901006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865B9229D3901006D3E63 /* README */; };
 		FCA636AB22A3E57E004B3050 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA636AA22A3E57E004B3050 /* WorkfinderCommon.framework */; };
 		FCA91EAC2234065A007ED308 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91EA22234065A007ED308 /* WorkfinderUI.framework */; };
@@ -60,6 +62,8 @@
 		FC22DBF822F97CEB0068C61C /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		FC5CBA54231D2C4D00C2D3C5 /* F4SCompanyHeaderViewWithLogo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCompanyHeaderViewWithLogo.swift; sourceTree = "<group>"; };
 		FC5CBA56231D2C7D00C2D3C5 /* F4SRoundIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SRoundIconView.swift; sourceTree = "<group>"; };
+		FC9535A0231E448D00F4A9DA /* F4SSelfLoadingImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SSelfLoadingImageView.swift; sourceTree = "<group>"; };
+		FC9535A2231E52E600F4A9DA /* F4SSelfLoadingImageViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SSelfLoadingImageViewTests.swift; sourceTree = "<group>"; };
 		FC9865B9229D3901006D3E63 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		FCA636AA22A3E57E004B3050 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA91EA22234065A007ED308 /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,6 +157,7 @@
 		FCA91EAF2234065A007ED308 /* WorkfinderUITests */ = {
 			isa = PBXGroup;
 			children = (
+				FC9535A2231E52E600F4A9DA /* F4SSelfLoadingImageViewTests.swift */,
 				FC22DBF422F97ADC0068C61C /* LoadingOverlayTests.swift */,
 				FCA91EB02234065A007ED308 /* WorkfinderUITests.swift */,
 				FCA91EB22234065A007ED308 /* Info.plist */,
@@ -172,6 +177,7 @@
 		FCA91EBD22340680007ED308 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				FC9535A0231E448D00F4A9DA /* F4SSelfLoadingImageView.swift */,
 				FC5CBA56231D2C7D00C2D3C5 /* F4SRoundIconView.swift */,
 				FC5CBA54231D2C4D00C2D3C5 /* F4SCompanyHeaderViewWithLogo.swift */,
 				FC22DBF822F97CEB0068C61C /* UIFont+Extensions.swift */,
@@ -310,6 +316,7 @@
 				FC22DBEA22F979750068C61C /* Skin.swift in Sources */,
 				FC22DBE922F979750068C61C /* Skinner.swift in Sources */,
 				FC116B4E2284511E00146478 /* WebViewController.swift in Sources */,
+				FC9535A1231E448D00F4A9DA /* F4SSelfLoadingImageView.swift in Sources */,
 				FC22DBEB22F979750068C61C /* RGBA.swift in Sources */,
 				FC22DBE822F979750068C61C /* FactorySkins.swift in Sources */,
 				FC22DBEF22F97A330068C61C /* UIView+ConstraintsExtensions.swift in Sources */,
@@ -327,6 +334,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC9535A3231E52E600F4A9DA /* F4SSelfLoadingImageViewTests.swift in Sources */,
 				FCA91EB12234065A007ED308 /* WorkfinderUITests.swift in Sources */,
 				FC22DBF522F97ADC0068C61C /* LoadingOverlayTests.swift in Sources */,
 			);

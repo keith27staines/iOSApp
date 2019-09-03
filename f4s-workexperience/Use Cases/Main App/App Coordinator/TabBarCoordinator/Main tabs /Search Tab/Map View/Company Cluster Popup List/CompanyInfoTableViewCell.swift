@@ -1,12 +1,5 @@
-//
-//  CompanyInfoTableViewCell.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 14/11/2017.
-//  Copyright © 2017 Founders4Schools. All rights reserved.
-//
-
 import UIKit
+import WorkfinderCommon
 
 class CompanyInfoTableViewCell: UITableViewCell {
     

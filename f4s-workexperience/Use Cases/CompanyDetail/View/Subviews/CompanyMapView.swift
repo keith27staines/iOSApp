@@ -7,6 +7,7 @@
 //
 
 import MapKit
+import WorkfinderCommon
 
 class CompanyMapView: MKMapView {
     let company: Company

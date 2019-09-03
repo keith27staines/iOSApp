@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 extension Company : SearchItemProtocol {
     var location: CLLocationCoordinate2D? {

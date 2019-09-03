@@ -82,7 +82,6 @@ extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
         let applyCoordinator = ApplyCoordinator(
             applyCoordinatorDelegate: self,
             company: company,
-            placement: company.placement,
             parent: self,
             navigationRouter: navigationRouter,
             inject: injected,
