@@ -77,7 +77,6 @@ extension ApplyCoordinatorTests {
         let mockTemplateService = MockTemplateService()
         let sut = ApplyCoordinator(
             company: company,
-            placement: nil,
             parent: nil,
             navigationRouter: mockRouter,
             inject: mockedInjection,
