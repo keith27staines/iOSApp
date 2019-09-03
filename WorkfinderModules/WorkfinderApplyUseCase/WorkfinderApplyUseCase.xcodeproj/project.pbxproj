@@ -35,6 +35,7 @@
 		FC29994A231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC299946231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard */; };
 		FC29994B231ED87600F83FB6 /* F4SDaysAndHours.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC299947231ED87600F83FB6 /* F4SDaysAndHours.storyboard */; };
 		FC29994E231EDC3C00F83FB6 /* WorkfinderApplyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC29994D231EDC3C00F83FB6 /* WorkfinderApplyUseCase.swift */; };
+		FC29994F231EE4F800F83FB6 /* Calendar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC299944231ED35100F83FB6 /* Calendar.xcassets */; };
 		FC6E3D2D2248D74A00377736 /* WorkfinderApplyUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF102248BDCC00D9B8D1 /* WorkfinderApplyUseCase.framework */; };
 		FC7A4394224A3AB200B2D693 /* F4SGrammarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4393224A3AB100B2D693 /* F4SGrammarTests.swift */; };
 		FC7A4398224A497800B2D693 /* ApplicationLetterTemplateBlanksCleanser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4397224A497800B2D693 /* ApplicationLetterTemplateBlanksCleanser.swift */; };
@@ -428,6 +429,7 @@
 			files = (
 				FC299941231ED0BD00F83FB6 /* EditFooter.xib in Resources */,
 				FC29994B231ED87600F83FB6 /* F4SDaysAndHours.storyboard in Resources */,
+				FC29994F231EE4F800F83FB6 /* Calendar.xcassets in Resources */,
 				FC9865B6229D380A006D3E63 /* README in Resources */,
 				FC29991B231EBFCD00F83FB6 /* EditCoverLetter.storyboard in Resources */,
 				FC29994A231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard in Resources */,
