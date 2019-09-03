@@ -8,6 +8,7 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderApplyUseCase
 
 class DocumentUploadCoordinator : CoreInjectionNavigationCoordinator {
     let applicationContext: F4SApplicationContext?

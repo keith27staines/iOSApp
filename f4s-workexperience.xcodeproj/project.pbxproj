@@ -1021,8 +1021,8 @@
 		FC0B406A226B0E6A00D992AC /* Success Hooray */ = {
 			isa = PBXGroup;
 			children = (
-				40A28CBE1E24ECE90077D490 /* SuccessExtraInfoViewController.swift */,
 				40A28CC01E24ED0D0077D490 /* SuccessExtraInfo.storyboard */,
+				40A28CBE1E24ECE90077D490 /* SuccessExtraInfoViewController.swift */,
 			);
 			path = "Success Hooray";
 			sourceTree = "<group>";

@@ -9,32 +9,6 @@
 import UIKit
 import WorkfinderCommon
 
-struct F4SApplicationContext {
-    var user: F4SUser?
-    var company: Company?
-    var placement: F4SPlacement?
-    
-    public init(user: F4SUser? = nil, company: Company? = nil, placement: F4SPlacement? = nil) {
-        self.user = user
-        self.company = company
-        self.placement = placement
-    }
-}
-
-public struct Placement {
-    public var companyUuid: String
-    public var interestsList: [F4SInterest]
-    public var status: PlacementStatus
-    public var placementUuid: String
-
-    public init(companyUuid: String = "", interestsList: [F4SInterest] = [], status: PlacementStatus = .inProgress, placementUuid: String = "") {
-        self.companyUuid = companyUuid
-        self.interestsList = interestsList
-        self.status = status
-        self.placementUuid = placementUuid
-    }
-}
-
 public struct BusinessCompanyInterest : Hashable {
     public static func ==(lhs: BusinessCompanyInterest, rhs: BusinessCompanyInterest) -> Bool {
         if lhs.interestId == rhs.interestId && lhs.companyId == lhs.companyId {
@@ -115,20 +89,6 @@ enum TemplateOptionType {
     case multiSelect
     case select
     case date
-}
-
-public enum PlacementStatus {
-    case inProgress
-    case applied
-    case accepted
-    case rejected
-    case confirmed
-    case completed
-    case draft
-    case noAge
-    case noVoucher
-    case noParentalConsent
-    case unsuccessful
 }
 
 // MARK: - call entities

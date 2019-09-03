@@ -4,6 +4,7 @@ import WorkfinderCommon
 import WorkfinderNetworking
 import WorkfinderServices
 import WorkfinderUI
+import WorkfinderApplyUseCase
 
 class UserDetailsViewController: UIViewController {
     

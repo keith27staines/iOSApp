@@ -9,6 +9,7 @@
 import UIKit
 import WorkfinderCommon
 import WorkfinderUI
+import WorkfinderApplyUseCase
 
 class F4SAddDocumentsViewController: UIViewController {
     let consentPreviouslyGivenKey = "consentPreviouslyGivenKey"
