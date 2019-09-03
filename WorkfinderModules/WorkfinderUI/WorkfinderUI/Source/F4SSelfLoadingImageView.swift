@@ -49,6 +49,18 @@ public class ImageFetcher : ImageFetching {
     
     public init() {}
     
+    public func getImage(urlString: String?, completion: @escaping ((UIImage?) -> Void)) {
+        guard
+            let urlString = urlString,
+            urlString.isEmpty == false,
+            let url = URL(string: urlString)
+        else {
+            completion(nil)
+            return
+        }
+        getImage(url: url, completion: completion)
+    }
+    
     /// Attempts to get image data from the specified url. The data retrieved by the get is used to construct a UIImage.
     /// The completion handler is called on the main thread because the image will be used on the main thread
     /// - parameter url: the Url from which to retrieve image data

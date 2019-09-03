@@ -143,6 +143,8 @@ class MessageContainerViewController: UIViewController {
         }
     }
     
+    var fetcher = ImageFetcher()
+    
     func prepareAcceptOffer(completion: @escaping (F4SNetworkError?, AcceptOfferContext?) -> ()) {
         guard let placementUuid = placement?.placementUuid else { return }
         loadPlacementOffer(uuid: placementUuid) { [weak self] (networkResult) in
@@ -168,37 +170,35 @@ class MessageContainerViewController: UIViewController {
                     }
                     
                     let user = F4SUser()
-                    if let url = NSURL(string: strongSelf.company?.logoUrl ?? "") {
-                        F4SImageService.sharedInstance.getImage(url: url, completion: { [weak self] image in
-                            guard
-                                let strongSelf = self,
-                                let roleUuid = placement.roleUuid else { return }
-                            
-                            let companyService = F4SCompanyService()
-                            let roleService = F4SRoleService()
-                            let companyUuid = strongSelf.company!.uuid
-                            roleService.getRoleForCompany(companyUuid: companyUuid, roleUuid: roleUuid, completion: { (networkResult) in
-                                DispatchQueue.main.async {
-                                    switch networkResult {
-                                    case .error(let error):
-                                        completion(error, nil)
-                                    case .success(let role):
-                                        companyService.getCompany(uuid: companyUuid, completion: { (result) in
-                                            DispatchQueue.main.async {
-                                                switch result {
-                                                case .error(let error):
-                                                    completion(error, nil)
-                                                case .success(let companyJson):
-                                                    let companyViewData = CompanyViewData(company: strongSelf.company!)
-                                                    let context = AcceptOfferContext(user: user, company: companyViewData, companyJson: companyJson, logo: image, placement: placement, role: role)
-                                                    completion(nil, context)
-                                                }
+                    strongSelf.fetcher.getImage(urlString: strongSelf.company?.logoUrl) { [weak self] image in
+                        guard
+                            let strongSelf = self,
+                            let roleUuid = placement.roleUuid else { return }
+                        
+                        let companyService = F4SCompanyService()
+                        let roleService = F4SRoleService()
+                        let companyUuid = strongSelf.company!.uuid
+                        roleService.getRoleForCompany(companyUuid: companyUuid, roleUuid: roleUuid) { (networkResult) in
+                            DispatchQueue.main.async {
+                                switch networkResult {
+                                case .error(let error):
+                                    completion(error, nil)
+                                case .success(let role):
+                                    companyService.getCompany(uuid: companyUuid) { (result) in
+                                        DispatchQueue.main.async {
+                                            switch result {
+                                            case .error(let error):
+                                                completion(error, nil)
+                                            case .success(let companyJson):
+                                                let companyViewData = CompanyViewData(company: strongSelf.company!)
+                                                let context = AcceptOfferContext(user: user, company: companyViewData, companyJson: companyJson, logo: image, placement: placement, role: role)
+                                                completion(nil, context)
                                             }
-                                        })
+                                        }
                                     }
                                 }
-                            })
-                        })
+                            }
+                        }
                     }
                 }
             }
