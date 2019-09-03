@@ -21,7 +21,6 @@ class EditFooterView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        let bundle = Bundle(identifier: "com.f4s.WorkfinderApplyUseCase")!
         if let view = bundle.loadNibNamed("EditFooter", owner: self, options: nil)?[0] as? UIView {
             view.isUserInteractionEnabled = false
             view.backgroundColor = UIColor(netHex: Colors.lightGray)

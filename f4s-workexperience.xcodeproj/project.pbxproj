@@ -235,8 +235,6 @@
 		FCB49301222A4B3B00B88B8B /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB49300222A4B3B00B88B8B /* SearchCoordinator.swift */; };
 		FCB49308222A875300B88B8B /* TimelineCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB49307222A875300B88B8B /* TimelineCoordinator.swift */; };
 		FCB4930A222A879000B88B8B /* FavouritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB49309222A879000B88B8B /* FavouritesCoordinator.swift */; };
-		FCB6B8CA2074C58F0042C725 /* F4SDisplayInformationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCB6B8BF2074C58E0042C725 /* F4SDisplayInformationViewController.storyboard */; };
-		FCB6B8CB2074C58F0042C725 /* F4SDaysAndHours.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCB6B8C12074C58E0042C725 /* F4SDaysAndHours.storyboard */; };
 		FCB6D0EE2198182D00B392DB /* F4SDocumentUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB6D0ED2198182D00B392DB /* F4SDocumentUploader.swift */; };
 		FCB6D9361F75056100B8C268 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCB6D9351F75056000B8C268 /* Branding.plist */; };
 		FCBF3F2D22993C2100C0A4F9 /* UserDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBF3F2C22993C2100C0A4F9 /* UserDetailsCoordinator.swift */; };
@@ -636,8 +634,6 @@
 		FCB49300222A4B3B00B88B8B /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
 		FCB49307222A875300B88B8B /* TimelineCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineCoordinator.swift; sourceTree = "<group>"; };
 		FCB49309222A879000B88B8B /* FavouritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesCoordinator.swift; sourceTree = "<group>"; };
-		FCB6B8BF2074C58E0042C725 /* F4SDisplayInformationViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SDisplayInformationViewController.storyboard; sourceTree = "<group>"; };
-		FCB6B8C22074C58E0042C725 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/F4SDaysAndHours.storyboard; sourceTree = "<group>"; };
 		FCB6D0ED2198182D00B392DB /* F4SDocumentUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDocumentUploader.swift; sourceTree = "<group>"; };
 		FCB6D9351F75056000B8C268 /* Branding.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
 		FCBF3F2C22993C2100C0A4F9 /* UserDetailsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsCoordinator.swift; sourceTree = "<group>"; };
@@ -1506,18 +1502,9 @@
 		FC24D24B226B085900FA04A1 /* Build cover letter */ = {
 			isa = PBXGroup;
 			children = (
-				FC24D24C226B088E00FA04A1 /* Edit Cover letter */,
 				FC24D24E226B09DE00FA04A1 /* Cover letter choices */,
-				FCB6B8B82074C51B0042C725 /* Calendar and diary */,
 			);
 			path = "Build cover letter";
-			sourceTree = "<group>";
-		};
-		FC24D24C226B088E00FA04A1 /* Edit Cover letter */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Edit Cover letter";
 			sourceTree = "<group>";
 		};
 		FC24D24E226B09DE00FA04A1 /* Cover letter choices */ = {
@@ -1875,32 +1862,6 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
-		FCB6B8B82074C51B0042C725 /* Calendar and diary */ = {
-			isa = PBXGroup;
-			children = (
-				FCB6B8BB2074C58E0042C725 /* F4SDaysAndHours */,
-				FCB6B8D02074C59C0042C725 /* F4SCalendar */,
-			);
-			name = "Calendar and diary";
-			path = ../../..;
-			sourceTree = "<group>";
-		};
-		FCB6B8BB2074C58E0042C725 /* F4SDaysAndHours */ = {
-			isa = PBXGroup;
-			children = (
-				FCB6B8C12074C58E0042C725 /* F4SDaysAndHours.storyboard */,
-				FCB6B8BF2074C58E0042C725 /* F4SDisplayInformationViewController.storyboard */,
-			);
-			path = F4SDaysAndHours;
-			sourceTree = "<group>";
-		};
-		FCB6B8D02074C59C0042C725 /* F4SCalendar */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = F4SCalendar;
-			sourceTree = "<group>";
-		};
 		FCC212C7219077C000D8D5B7 /* F4S Document Capture */ = {
 			isa = PBXGroup;
 			children = (
@@ -2228,7 +2189,6 @@
 				FC7221A020FE248400F10953 /* Fastfile in Resources */,
 				FCC212EA219077C000D8D5B7 /* DocumentCapture.storyboard in Resources */,
 				FC31F097204D54E3009DD526 /* Debug.storyboard in Resources */,
-				FCB6B8CB2074C58F0042C725 /* F4SDaysAndHours.storyboard in Resources */,
 				FC503F12231D0210008722FF /* AddVoucher.storyboard in Resources */,
 				FC73719B2101C7EF00C0032A /* AcceptOffer.xcassets in Resources */,
 				D5E9EBE81DD60AB300BD796E /* Localizable.strings in Resources */,
@@ -2243,7 +2203,6 @@
 				40E78E1E1DD31A86000A3776 /* Assets.xcassets in Resources */,
 				D54E0FFD1E044B0400A51560 /* InfoWindowView.xib in Resources */,
 				40A5CF3A1DED6F8D000007AB /* InterestsView.storyboard in Resources */,
-				FCB6B8CA2074C58F0042C725 /* F4SDisplayInformationViewController.storyboard in Resources */,
 				FCD3486B20049DFB00DC1316 /* F4SEmailVerification.storyboard in Resources */,
 				201458C51E1CFCE500DBC9BD /* Message.storyboard in Resources */,
 				40E78E951DD391F3000A3776 /* MapView.storyboard in Resources */,
@@ -2779,14 +2738,6 @@
 				D5E9EBE91DD60AB300BD796E /* en */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		FCB6B8C12074C58E0042C725 /* F4SDaysAndHours.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FCB6B8C22074C58E0042C725 /* Base */,
-			);
-			name = F4SDaysAndHours.storyboard;
 			sourceTree = "<group>";
 		};
 		FCC212CA219077C000D8D5B7 /* DocumentCapture.storyboard */ = {

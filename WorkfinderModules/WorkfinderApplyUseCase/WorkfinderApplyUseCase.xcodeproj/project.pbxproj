@@ -32,6 +32,9 @@
 		FC299938231EC50300F83FB6 /* F4SDayCalendarViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC29992F231EC4FD00F83FB6 /* F4SDayCalendarViewCell.swift */; };
 		FC29993E231ECDEE00F83FB6 /* F4SCalendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC29993B231ECACC00F83FB6 /* F4SCalendar.storyboard */; };
 		FC299941231ED0BD00F83FB6 /* EditFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC299940231ED0B400F83FB6 /* EditFooter.xib */; };
+		FC29994A231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC299946231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard */; };
+		FC29994B231ED87600F83FB6 /* F4SDaysAndHours.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC299947231ED87600F83FB6 /* F4SDaysAndHours.storyboard */; };
+		FC29994E231EDC3C00F83FB6 /* WorkfinderApplyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC29994D231EDC3C00F83FB6 /* WorkfinderApplyUseCase.swift */; };
 		FC6E3D2D2248D74A00377736 /* WorkfinderApplyUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF102248BDCC00D9B8D1 /* WorkfinderApplyUseCase.framework */; };
 		FC7A4394224A3AB200B2D693 /* F4SGrammarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4393224A3AB100B2D693 /* F4SGrammarTests.swift */; };
 		FC7A4398224A497800B2D693 /* ApplicationLetterTemplateBlanksCleanser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4397224A497800B2D693 /* ApplicationLetterTemplateBlanksCleanser.swift */; };
@@ -87,6 +90,9 @@
 		FC29993B231ECACC00F83FB6 /* F4SCalendar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SCalendar.storyboard; sourceTree = "<group>"; };
 		FC29993F231ED0B400F83FB6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "f4s-workexperience/Base.lproj/EditFooter.xib"; sourceTree = "<group>"; };
 		FC299944231ED35100F83FB6 /* Calendar.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Calendar.xcassets; sourceTree = "<group>"; };
+		FC299946231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SDisplayInformationViewController.storyboard; sourceTree = "<group>"; };
+		FC299948231ED87600F83FB6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/F4SDaysAndHours.storyboard; sourceTree = "<group>"; };
+		FC29994D231EDC3C00F83FB6 /* WorkfinderApplyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderApplyUseCase.swift; sourceTree = "<group>"; };
 		FC6E3D282248D74A00377736 /* WorkfinderApplyUseCaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderApplyUseCaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC6E3D2C2248D74A00377736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC7A4393224A3AB100B2D693 /* F4SGrammarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SGrammarTests.swift; sourceTree = "<group>"; };
@@ -186,6 +192,14 @@
 			path = F4SDaysAndHours;
 			sourceTree = "<group>";
 		};
+		FC299945231ED87600F83FB6 /* F4SDaysAndHours */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = F4SDaysAndHours;
+			path = "../../../../f4s-workexperience/F4SDaysAndHours";
+			sourceTree = "<group>";
+		};
 		FC6E3D292248D74A00377736 /* WorkfinderApplyUseCaseTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +258,9 @@
 		FC9626222248C07800D5F850 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				FC299947231ED87600F83FB6 /* F4SDaysAndHours.storyboard */,
+				FC299946231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard */,
+				FC299945231ED87600F83FB6 /* F4SDaysAndHours */,
 				FC29991D231EC18300F83FB6 /* Edit cover letter */,
 				FC299924231EC38700F83FB6 /* Calendar */,
 				FCF4FACE22646502000EE4B7 /* Models */,
@@ -302,6 +319,7 @@
 				FC299944231ED35100F83FB6 /* Calendar.xcassets */,
 				FC9626222248C07800D5F850 /* Source */,
 				FC7A4392224A395400B2D693 /* Supporting files */,
+				FC29994D231EDC3C00F83FB6 /* WorkfinderApplyUseCase.swift */,
 			);
 			path = WorkfinderApplyUseCase;
 			sourceTree = "<group>";
@@ -409,8 +427,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC299941231ED0BD00F83FB6 /* EditFooter.xib in Resources */,
+				FC29994B231ED87600F83FB6 /* F4SDaysAndHours.storyboard in Resources */,
 				FC9865B6229D380A006D3E63 /* README in Resources */,
 				FC29991B231EBFCD00F83FB6 /* EditCoverLetter.storyboard in Resources */,
+				FC29994A231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard in Resources */,
 				FC29993E231ECDEE00F83FB6 /* F4SCalendar.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,6 +474,7 @@
 				FC9626392248C1A900D5F850 /* EditApplicationLetterButton.swift in Sources */,
 				FC29992B231EC41A00F83FB6 /* F4SDaysAndHoursViewController.swift in Sources */,
 				FC96263A2248C1A900D5F850 /* ApplicationLetterViewControllerMainView.swift in Sources */,
+				FC29994E231EDC3C00F83FB6 /* WorkfinderApplyUseCase.swift in Sources */,
 				FC299934231EC50300F83FB6 /* F4SCalendarContainerViewController.swift in Sources */,
 				FCE51923224940F300B550C9 /* F4SGrammar.swift in Sources */,
 				FC299922231EC1E200F83FB6 /* EditFooterView.swift in Sources */,
@@ -482,6 +503,14 @@
 				FC29993F231ED0B400F83FB6 /* Base */,
 			);
 			name = EditFooter.xib;
+			sourceTree = "<group>";
+		};
+		FC299947231ED87600F83FB6 /* F4SDaysAndHours.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC299948231ED87600F83FB6 /* Base */,
+			);
+			name = F4SDaysAndHours.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

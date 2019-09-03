@@ -257,7 +257,7 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func pushDaysAndHours(navigationController: UINavigationController) {
-        let storyboard = UIStoryboard(name: "F4SDaysAndHours", bundle: nil)
+        let storyboard = UIStoryboard(name: "F4SDaysAndHours", bundle: bundle)
         guard let vc = storyboard.instantiateInitialViewController() as? F4SDaysAndHoursViewController else {
             return
         }
@@ -268,7 +268,6 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func pushCalendar(navigationController: UINavigationController) {
-        let bundle = Bundle(identifier: "com.f4s.WorkfinderApplyUseCase")
         let storyboard = UIStoryboard(name: "F4SCalendar", bundle: bundle)
         guard let vc = storyboard.instantiateInitialViewController() as? F4SCalendarContainerViewController else {
             return
