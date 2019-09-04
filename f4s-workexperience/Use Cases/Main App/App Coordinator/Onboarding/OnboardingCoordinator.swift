@@ -42,7 +42,7 @@ class OnboardingCoordinator : NavigationCoordinator, OnboardingCoordinatorProtoc
         partnerSelectionViewController = vc
         vc.doneButtonTapped = { [weak self] in
             guard let strongSelf = self else { return }
-            F4SUser().didFinishOnboarding()
+            LocalStore().setValue(false, for: LocalStore.Key.isFirstLaunch)
             strongSelf.onboardingDidFinish?(strongSelf)
         }
         onboardingViewController?.present(vc, animated: true, completion: nil)

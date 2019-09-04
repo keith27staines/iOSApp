@@ -47,8 +47,8 @@ public struct DataFixes {
         }
         guard
             let userUuid = LocalStore().value(key: LocalStore.Key.userUuid) as? F4SUUID,
-            let user = UserInfoDBOperations.sharedInstance.getUserInfo() else { return }
-        user.updateUuid(uuid: userUuid)
+            var user = UserInfoDBOperations.sharedInstance.getUserInfo() else { return }
+        user.uuid = userUuid
         let repo = F4SUserRepository()
         repo.save(user: user)
     }

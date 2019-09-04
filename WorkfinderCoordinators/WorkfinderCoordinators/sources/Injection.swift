@@ -8,7 +8,7 @@ public typealias LaunchOptions = [UIApplication.LaunchOptionsKey: Any]
 public protocol CoreInjectionProtocol : class {
     var appInstallationUuidLogic: AppInstallationUuidLogic { get }
     var launchOptions: LaunchOptions? { get set }
-    var user: F4SUserProtocol { get set }
+    var user: F4SUser { get set }
     var userService: F4SUserServiceProtocol { get }
     var userStatusService: F4SUserStatusServiceProtocol { get }
     var userRepository: F4SUserRepositoryProtocol { get }
@@ -19,7 +19,7 @@ public protocol CoreInjectionProtocol : class {
 public class CoreInjection : CoreInjectionProtocol {
     
     public var launchOptions: LaunchOptions? = nil
-    public var user: F4SUserProtocol
+    public var user: F4SUser
     public var userService: F4SUserServiceProtocol
     public var userStatusService: F4SUserStatusServiceProtocol
     public var userRepository: F4SUserRepositoryProtocol
@@ -29,7 +29,7 @@ public class CoreInjection : CoreInjectionProtocol {
     
     public init(launchOptions: LaunchOptions?,
                 appInstallationUuidLogic: AppInstallationUuidLogic,
-                user: F4SUserProtocol,
+                user: F4SUser,
                 userService: F4SUserServiceProtocol,
                 userStatusService: F4SUserStatusServiceProtocol = F4SUserStatusService.shared,
                 userRepository: F4SUserRepositoryProtocol,

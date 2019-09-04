@@ -19,8 +19,8 @@ import WorkfinderApplyUseCase
 class ApplyCoordinatorTests: XCTestCase {
     
     let mockRouter = MockNavigationRouter()
-    let mockRegisteredUser = MockF4SUser.makeRegisteredUser()
-    let mockUnregisteredUser = MockF4SUser.makeRegisteredUser()
+    let mockRegisteredUser = makeRegisteredUser()
+    let mockUnregisteredUser = makeRegisteredUser()
     let mockUserService = MockUserService(registeringWillSucceedOnAttempt: 1)
     let mockUserStatusService = MockUserStatusService()
     let mockDatabaseDownloadManager = MockDatabaseDownloadManager()
@@ -29,7 +29,7 @@ class ApplyCoordinatorTests: XCTestCase {
     
     func makeMockAppInstallationLogic(
         installationUuid: String?,
-        user: F4SUserProtocol,
+        user: F4SUser,
         isRegistered: Bool) -> AppInstallationUuidLogic {
         let localStore = MockLocalStore()
         let userRepo = MockUserRepository(user: user)

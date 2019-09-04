@@ -21,7 +21,7 @@ public class F4SUserService : F4SUserServiceProtocol {
     
     public func updateUser(user: F4SUser, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ()) {
         var user = userRemovingInvalidPartnersFromUserDataFix(user: user)
-        user = userNullifyingUuid(user: user)
+        user.uuid = nil
         let attempting = "Update user"
         if let age = user.age() { user.requiresConsent = age < 16 }
         if user.parentEmail?.isEmpty == true { user.parentEmail = nil }
@@ -49,20 +49,15 @@ public class F4SUserService : F4SUserServiceProtocol {
     /// (currently "kown good" uuids are those in a hard coded list in
     /// F4SPartnersModel) then the partner should be deleted
     func userRemovingInvalidPartnersFromUserDataFix(user: F4SUser) -> F4SUser {
+        var updatedUser = user
         guard let partnerUuid = user.partners?.first else { return user }
         if !F4SPartnersModel.hardCodedPartners().contains(where: { (partner) -> Bool in
             partner.uuid == partnerUuid.uuid
         }) {
-            user.partners = nil
-            return user
+            updatedUser.partners = nil
+            return updatedUser
         }
-        return user
-    }
-    
-    func userNullifyingUuid(user: F4SUser) -> F4SUser {
-        let user = F4SUser(userInformation: user)
-        user.nullifyUuid()
-        return user
+        return updatedUser
     }
     
     private func handleUpdateUserTaskResult(attempting: String, result: F4SNetworkDataResult, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ()) {

@@ -60,7 +60,7 @@ class F4SDataTaskServiceTests: XCTestCase {
         let url = URL(string: "/v2")!
         let request = URLRequest(url: url)
         let session = URLSession(configuration: URLSessionConfiguration.default)
-        let userInfo = F4SUserInformation(uuid: "1234", requiresConsent: false, termsAgreed: true, isOnboarded: true, isRegistered: true)
+        let userInfo = F4SUser(uuid: "1234")
         let mockLocalStore = MockLocalStore()
         let userRepo = F4SUserRepository(localStore: mockLocalStore)
         userRepo.save(user: userInfo)

@@ -24,7 +24,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     var injected: CoreInjectionProtocol
     var registrar: RemoteNotificationsRegistrarProtocol
     var launchOptions: [UIApplication.LaunchOptionsKey: Any]? { return injected.launchOptions }
-    var user: F4SUserProtocol { return injected.user }
+    var user: F4SUser { return injected.userRepository.load() }
     var userService: F4SUserServiceProtocol { return injected.userService}
     var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol { return injected.databaseDownloadManager }
     var versionCheckCoordinator: NavigationCoordinator & VersionChecking
@@ -120,7 +120,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     }
     
     private func onUserIsRegistered(userUuid: F4SUUID) {
-        injected.user.updateUuid(uuid: userUuid)
+        injected.user.uuid = userUuid
         injected.userRepository.save(user: injected.user)
         logStartupInformation()
         injected.log.identity(userId: userUuid)
@@ -132,10 +132,13 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     }
     
     func showOnboardingUIIfNecessary() {
-        if user.isOnboarded {
-            onboardingDidFinish(onboardingCoordinator: onboardingCoordinator!)
-        } else {
+        let localStore = LocalStore()
+        let onboardingRequired = localStore.value(key: LocalStore.Key.isFirstLaunch) as! Bool? ?? true
+        
+        if onboardingRequired {
             onboardingCoordinator?.hideOnboardingControls = false
+        } else {
+            onboardingDidFinish(onboardingCoordinator: onboardingCoordinator!)
         }
     }
     

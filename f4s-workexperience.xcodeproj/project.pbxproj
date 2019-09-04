@@ -298,7 +298,6 @@
 		FCFBD0132250D8FC00A9361D /* CGRect+MethodsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18E1F81549A0068EC9C /* CGRect+MethodsTests.swift */; };
 		FCFBD0142250D90F00A9361D /* F4SQuadtreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18F1F81549A0068EC9C /* F4SQuadtreeTests.swift */; };
 		FCFBD0162250D96900A9361D /* MockAnalyticsAndDebugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC14E975221EBF6600EE985F /* MockAnalyticsAndDebugging.swift */; };
-		FCFBD0172250D9A400A9361D /* MockF4SUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA90A94221D6AB600EACD8D /* MockF4SUser.swift */; };
 		FCFBD0182250D9A400A9361D /* MockUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3F391E222930940046F8F8 /* MockUserService.swift */; };
 		FCFBD0192250D9FF00A9361D /* AppCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A48221714B800DC335B /* AppCoordinatorTests.swift */; };
 		FCFBD01A2250DA1800A9361D /* MockUIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA90A92221D6A5600EACD8D /* MockUIApplication.swift */; };
@@ -610,7 +609,6 @@
 		FCA90A8E221D69B600EACD8D /* MockCoordinators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoordinators.swift; sourceTree = "<group>"; };
 		FCA90A90221D6A1700EACD8D /* MockDatabaseDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDatabaseDownload.swift; sourceTree = "<group>"; };
 		FCA90A92221D6A5600EACD8D /* MockUIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUIApplication.swift; sourceTree = "<group>"; };
-		FCA90A94221D6AB600EACD8D /* MockF4SUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockF4SUser.swift; sourceTree = "<group>"; };
 		FCA91E5C22340161007ED308 /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA91E9522340577007ED308 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA91EC022340743007ED308 /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1538,7 +1536,6 @@
 		FC3F3920222931170046F8F8 /* MockF4SUser and service */ = {
 			isa = PBXGroup;
 			children = (
-				FCA90A94221D6AB600EACD8D /* MockF4SUser.swift */,
 				FC3F391E222930940046F8F8 /* MockUserService.swift */,
 			);
 			path = "MockF4SUser and service";
@@ -2531,7 +2528,6 @@
 				FCFBD0122250D8D400A9361D /* F4SStringExtensionTests.swift in Sources */,
 				FCFBD0282250DBD100A9361D /* CompanyViewDataTests.swift in Sources */,
 				FCFBD02C2250DC4200A9361D /* ScaledNumberTests.swift in Sources */,
-				FCFBD0172250D9A400A9361D /* MockF4SUser.swift in Sources */,
 				FC0B4084226CB1F300D992AC /* F4SRecommendedCompaniesMergerTests.swift in Sources */,
 				FCFBD01D2250DA3E00A9361D /* MockCoordinators.swift in Sources */,
 				FCFBD02B2250DC2700A9361D /* PersonViewDataTests.swift in Sources */,

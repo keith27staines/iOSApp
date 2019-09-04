@@ -4,7 +4,6 @@ import WorkfinderCommon
 import WorkfinderNetworking
 import WorkfinderServices
 import WorkfinderUI
-import WorkfinderApplyUseCase
 
 class UserDetailsViewController: UIViewController {
     
@@ -40,10 +39,9 @@ class UserDetailsViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     
-    var applicationContext: F4SApplicationContext!
     var datePicker = UIDatePicker()
     var voucherVerificationService: F4SVoucherVerificationServiceProtocol?
-    var userRepository: F4SUserRepositoryProtocol?
+    var userRepository: F4SUserRepositoryProtocol!
     
     lazy var userService: F4SUserService = {
         return F4SUserService()
@@ -51,10 +49,8 @@ class UserDetailsViewController: UIViewController {
     
     func inject(
         viewModel: UserDetailsViewModel,
-        applicationContext: F4SApplicationContext,
         userRepository: F4SUserRepositoryProtocol) {
         self.viewModel = viewModel
-        self.applicationContext = applicationContext
         self.userRepository  = userRepository
     }
     
@@ -274,9 +270,7 @@ extension UserDetailsViewController {
     
     func saveUserDetailsLocally() {
         let updatedUser = self.buildUserInfo()
-        updatedUser.placementUuid = applicationContext?.placement?.placementUuid
         userRepository?.save(user: updatedUser)
-        applicationContext?.user = updatedUser
     }
 }
 
@@ -336,8 +330,7 @@ extension UserDetailsViewController {
     func verifyEmail() {
         let emailController = self.emailController
         let emailModel = emailController.model
-        let user = applicationContext.user!
-        
+        let user = userRepository.load()
         if emailModel.isEmailAddressVerified(email: user.email) {
             afterEmailVerfied(verifiedEmail: user.email!)
         } else {
@@ -356,17 +349,16 @@ extension UserDetailsViewController {
     }
     
     func afterEmailVerfied(verifiedEmail: String) {
-        let user = applicationContext.user!
+        var user = userRepository.load()
         user.email = verifiedEmail
+        userRepository.save(user: user)
         saveUserToServer()
     }
     
     func saveUserToServer() {
         showLoadingOverlay()
-        if let partnerUuid = LocalStore().value(key: LocalStore.Key.partnerID) as? F4SUUID {
-            applicationContext.user?.partners = [F4SUUIDDictionary(uuid: partnerUuid)]
-        }
-        userService.updateUser(user: applicationContext.user!) { [weak self] (result) in
+        var user = userRepository.load()
+        userService.updateUser(user: user) { [weak self] (result) in
             guard let strongSelf = self else { return }
             DispatchQueue.main.async {
                 //strongSelf.hideLoadingOverlay()
@@ -383,7 +375,6 @@ extension UserDetailsViewController {
                         })
                     }
                 case .success(let userModel):
-                    let user = strongSelf.applicationContext.user!
                     guard let newUuid = userModel.uuid else {
                         sharedUserMessageHandler.displayWithTitle("Something went wrong", "Workfinder cannot complete this operation", parentCtrl: strongSelf)
                         return
@@ -391,7 +382,7 @@ extension UserDetailsViewController {
                     let oldUuid = user.uuid ?? "nil"
                     strongSelf.coordinator?.injected.log.debug("PATCHED user:\nold uuid: \(oldUuid)\nnew uuid: \(newUuid)", functionName: #function, fileName: #file, lineNumber: #line)
                     
-                    user.updateUuid(uuid: newUuid)
+                    user.uuid = newUuid
                     strongSelf.userRepository?.save(user: user)
                     strongSelf.afterUserSavedToServer()
                 }

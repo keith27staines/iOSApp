@@ -21,8 +21,8 @@ class AppCoordinatorTests: XCTestCase {
     var mockRouter = MockNavigationRouter()
     var mockUserService = MockUserService(registeringWillSucceedOnAttempt: 1)
     var mockUserStatusService = MockUserStatusService()
-    var mockRegisteredUser = MockF4SUser.makeRegisteredUser()
-    var mockUnregisteredUser = MockF4SUser.makeUnregisteredUser()
+    var mockRegisteredUser = makeRegisteredUser()
+    var mockUnregisteredUser = makeUnregisteredUser()
     var mockAnalytics = MockF4SAnalyticsAndDebugging()
     var mockDatabaseDownloadManager = MockDatabaseDownloadManager()
     var sut: AppCoordinator!
@@ -61,7 +61,6 @@ class AppCoordinatorTests: XCTestCase {
     }
     
     func testOnboardingStarted() {
-        mockUnregisteredUser.isOnboarded = false
         injection.user = mockUnregisteredUser
         let onboardingComplete = XCTestExpectation(description: "onboardingComplete")
         let sut = makeSUTAppCoordinator(router: mockRouter, injecting: injection)
@@ -74,6 +73,14 @@ class AppCoordinatorTests: XCTestCase {
         sut.start()
         wait(for: [onboardingComplete], timeout: 1)
     }
+}
+
+func makeRegisteredUser() -> F4SUser {
+    return F4SUser(uuid: "uuid")
+}
+
+func makeUnregisteredUser() -> F4SUser {
+    return F4SUser()
 }
 
 // MARK:- AppCoordinatorTests helpers
@@ -123,15 +130,15 @@ class MockVersionCheckingService: F4SWorkfinderVersioningServiceProtocol {
 
 class MockUserRepository: F4SUserRepositoryProtocol {
     var user: F4SUser
-    init(user: F4SUserProtocol) {
-        self.user = F4SUser(userInformation: user)
+    init(user: F4SUser) {
+        self.user = user
     }
     
-    func save(user: F4SUserProtocol) {
-        self.user = F4SUser(userInformation: user)
+    func save(user: F4SUser) {
+        self.user = user
     }
     
-    func load() -> F4SUserProtocol {
+    func load() -> F4SUser {
         return user
     }
 }

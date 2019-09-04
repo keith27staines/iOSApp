@@ -79,6 +79,27 @@
             BlueprintName = "WorkfinderUI"
             ReferencedContainer = "container:WorkfinderModules/WorkfinderUI/WorkfinderUI.xcodeproj">
          </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FC5CBA24231D296F00C2D3C5"
+            BuildableName = "WorkfinderAcceptUseCase.framework"
+            BlueprintName = "WorkfinderAcceptUseCase"
+            ReferencedContainer = "container:WorkfinderAcceptUseCase/WorkfinderAcceptUseCase.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FC93DB9A231F888C00F1CE23"
+            BuildableName = "WorkfinderCoordinators.framework"
+            BlueprintName = "WorkfinderCoordinators"
+            ReferencedContainer = "container:WorkfinderCoordinators/WorkfinderCoordinators.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FC93DBF0231FB92D00F1CE23"
+            BuildableName = "WorkfinderUserDetailsUseCase.framework"
+            BlueprintName = "WorkfinderUserDetailsUseCase"
+            ReferencedContainer = "container:WorkfinderUserDetailsUseCase/WorkfinderUserDetailsUseCase.xcodeproj">
+         </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
          <TestableReference

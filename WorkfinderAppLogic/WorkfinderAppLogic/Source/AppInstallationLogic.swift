@@ -59,12 +59,12 @@ public class AppInstallationUuidLogic {
         }
     }
     
-    func loadUser() -> F4SUserProtocol {
+    func loadUser() -> F4SUser {
         return userRepo.load()
     }
     
-    func saveUser(_ userProtocol: F4SUserProtocol) {
-        userRepo.save(user: userProtocol)
+    func saveUser(_ user: F4SUser) {
+        userRepo.save(user: user)
     }
     
     var userHasVerifiedEmail: Bool {
@@ -100,12 +100,7 @@ public class AppInstallationUuidLogic {
         completion: @escaping (F4SNetworkResult<F4SRegisterDeviceResult>)->())  {
 
         if userHasVerifiedEmail {
-            let userInfo = F4SUserInformation()
-            var oldUser = userRepo.load()
-            let user = F4SUser(userInformation: userInfo)
-            user.email = oldUser.email
-            user.requiresConsent = oldUser.requiresConsent
-            user.termsAgreed = oldUser.termsAgreed
+            let user = userRepo.load()
             userService.updateUser(user: user) { updateUserResult in
                 DispatchQueue.main.async {  [weak self] in
                     guard let strongSelf = self else { return }
@@ -115,7 +110,7 @@ public class AppInstallationUuidLogic {
                         completion(updatedResult)
                     case .success(let userUpdateResult):
                         var user = strongSelf.userRepo.load()
-                        user.updateUuid(uuid: userUpdateResult.uuid!)
+                        user.uuid = userUpdateResult.uuid!
                         strongSelf.userRepo.save(user: user)
                         strongSelf.localStore.setValue(installationUuid, for: LocalStore.Key.installationUuid)
                         strongSelf.localStore.setValue(true, for: LocalStore.Key.isDeviceRegistered)

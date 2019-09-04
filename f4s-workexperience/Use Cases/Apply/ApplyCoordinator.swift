@@ -109,7 +109,7 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
     
     func showUserDetails() {
         
-        let userDetailsCoordinator = UserDetailsCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, applicationContext: applicationContext)
+        let userDetailsCoordinator = UserDetailsCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected)
         
         userDetailsCoordinator.didFinish = { [weak self] coordinator in
             self?.userDetailsDidFinish()
@@ -127,9 +127,8 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
     }
     
     func userDetailsDidFinish() {
-        let user = F4SUser(userInformation: injected.userRepository.load())
+        let user = injected.userRepository.load()
         applicationContext.user = user
-        applicationModel.voucherCode = user.vouchers?.first
         checkApplicationCanProceed()
     }
     

@@ -4,7 +4,7 @@ import WorkfinderCommon
 public class UserDetailsViewModel {
     weak var coordinator: UserDetailsCoordinator!
     weak var viewController: UserDetailsViewController?
-    var userInfo: F4SUserInformation
+    var userInfo: F4SUser
     
     let badValueColor = UIColor(netHex: Colors.orangeYellow)
     let goodValueColor = UIColor(netHex: Colors.mediumGreen)
@@ -56,16 +56,15 @@ public class UserDetailsViewModel {
         return DateOfBirthPickerViewModel(ageLogic: ageLogic, badValueColor: badValueColor, goodValueColor: goodValueColor)
     }()
     
-    init(userInformation: F4SUserInformation, coordinator: UserDetailsCoordinator) {
-        self.userInfo = userInformation
-        self.namesString = userInformation.fullName
+    init(user: F4SUser, coordinator: UserDetailsCoordinator) {
+        self.userInfo = user
+        self.namesString = user.fullName
         self.coordinator = coordinator
-        self.ageLogic.dateOfBirth = userInformation.dateOfBirth
+        self.ageLogic.dateOfBirth = user.dateOfBirth
     }
 
     func buildUser() -> F4SUser {
-        let user = F4SUser()
-        user.updateFrom(self.userInfo)
+        var user = self.userInfo
         user.lastName = user.lastName ?? ""
         if user.lastName!.isEmpty { user.lastName = " "}
         return user
