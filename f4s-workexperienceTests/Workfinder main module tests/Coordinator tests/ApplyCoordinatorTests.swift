@@ -11,6 +11,7 @@ import WorkfinderCommon
 import WorkfinderNetworking
 import WorkfinderServices
 import WorkfinderAppLogic
+import WorkfinderCoordinators
 import WorkfinderApplyUseCase
 
 @testable import f4s_workexperience
@@ -75,13 +76,17 @@ extension ApplyCoordinatorTests {
         let placementServiceFactory = MockPlacementServiceFactory(errorResponseCode: 404)
         let mockPlacementService = placementServiceFactory.makePlacementService()
         let mockTemplateService = MockTemplateService()
+        let mockPlacementRepository = MockPlacementsRepository()
+        let mockInterestsRepository = MockInterestsRepository()
         let sut = ApplyCoordinator(
             company: company,
             parent: nil,
             navigationRouter: mockRouter,
             inject: mockedInjection,
             placementService: mockPlacementService,
-            templateService: mockTemplateService)
+            templateService: mockTemplateService,
+            placementRepository: mockPlacementRepository,
+            interestsRepository: mockInterestsRepository)
         return sut
     }
     
@@ -147,5 +152,25 @@ class MockPlacementService : F4SPlacementApplicationServiceProtocol {
     
     func update(uuid: F4SUUID, with json: F4SPlacementJson, completion: @escaping (F4SNetworkResult<F4SPlacementJson>) -> Void) {
         
+    }
+}
+
+class MockPlacementsRepository: F4SPlacementRepositoryProtocol {
+    var placements = [F4SUUID:F4SPlacement]()
+    func save(placement: F4SPlacement) {
+        placements[placement.placementUuid!] = placement
+    }
+}
+
+class MockInterestsRepository: F4SInterestsRepositoryProtocol {
+    var allInterests = [F4SUUID: F4SInterest]()
+    var userInterests = [F4SInterest]()
+    
+    func loadAllInterests() -> [F4SInterest] {
+        return Array(allInterests.values)
+    }
+    
+    func loadUserInterests() -> [F4SInterest] {
+        return userInterests
     }
 }
