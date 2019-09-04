@@ -69,7 +69,7 @@ class F4SEmailVerificationViewController: UIViewController {
     }
     
     func conditionallyAddStagingEmailVerificationBypass() {
-        guard Config.environment == .staging else { return }
+        guard __environment == .staging else { return }
         let bypassButton = UIButton(type: .system)
         bypassButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(bypassButton)
@@ -80,7 +80,7 @@ class F4SEmailVerificationViewController: UIViewController {
     }
     
     @objc func handleVerificationBypass() {
-        guard Config.environment == .staging, let email = emailTextField.text else {
+        guard __environment == .staging, let email = emailTextField.text else {
             return
         }
         emailToVerify = email.trimmingCharacters(in: .whitespacesAndNewlines)

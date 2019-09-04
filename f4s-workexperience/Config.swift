@@ -1,3 +1,5 @@
+import WorkfinderCommon
+
 public struct Config {
     public static let wexApiKey = "eTo0oeh4Yeen1oy7iDuv"
     #if STAGING
@@ -9,11 +11,6 @@ public struct Config {
     public static let environmentName = "PRODUCTION"
     public static let workfinderApiBase = "https://www.workfinder.com/api"
     #endif
-    
-    public enum EnvironmentType {
-        case staging
-        case production
-    }
     
     public static var environment: EnvironmentType {
         switch environmentName {

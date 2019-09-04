@@ -13,6 +13,7 @@ import WorkfinderCommon
 import WorkfinderNetworking
 import WorkfinderServices
 import WorkfinderAppLogic
+import WorkfinderUserDetailsUseCase
 
 let globalLog = XCGLogger.default
 
@@ -56,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         f4sLog = F4SLog()
         databaseDownloadManager = F4SDatabaseDownloadManager()
         configureNetwork()
+        _ = WorkfinderUserDetailsUseCase(environmentType: Config.environment)
         window = appCoordinator.window
         appCoordinator.start()
         return true

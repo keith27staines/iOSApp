@@ -196,6 +196,7 @@
 		FC93DBD6231F8E0A00F1CE23 /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DBD5231F8E0A00F1CE23 /* WorkfinderCoordinators.framework */; };
 		FC93DBD7231F8E0A00F1CE23 /* WorkfinderCoordinators.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DBD5231F8E0A00F1CE23 /* WorkfinderCoordinators.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC93DC4223201AA200F1CE23 /* WorkfinderUserDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DC4123201AA200F1CE23 /* WorkfinderUserDetailsUseCase.framework */; };
+		FC93DC5823202B8F00F1CE23 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC5723202B8F00F1CE23 /* Config.swift */; };
 		FC9626412248C27D00D5F850 /* ApplyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626402248C27D00D5F850 /* ApplyCoordinator.swift */; };
 		FC96709E2259F61600318F69 /* InterestsPruner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96709D2259F61600318F69 /* InterestsPruner.swift */; };
 		FC9670A1225A18D900318F69 /* PlacementRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9670A0225A18D900318F69 /* PlacementRepository.swift */; };
@@ -568,6 +569,7 @@
 		FC92567A1F8F70D100FF9841 /* InterestsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsModel.swift; sourceTree = "<group>"; };
 		FC93DBD5231F8E0A00F1CE23 /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC93DC4123201AA200F1CE23 /* WorkfinderUserDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUserDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC93DC5723202B8F00F1CE23 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		FC9626402248C27D00D5F850 /* ApplyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyCoordinator.swift; sourceTree = "<group>"; };
 		FC96709D2259F61600318F69 /* InterestsPruner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsPruner.swift; sourceTree = "<group>"; };
 		FC9670A0225A18D900318F69 /* PlacementRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacementRepository.swift; sourceTree = "<group>"; };
@@ -831,6 +833,7 @@
 		40E78E481DD32848000A3776 /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
+				FC93DC5723202B8F00F1CE23 /* Config.swift */,
 				FCCFC7CE224D2C110060F7EC /* DataFixes.swift */,
 				40E78E161DD31A86000A3776 /* AppDelegate.swift */,
 				FC9BEE072015FF6000347437 /* UniversalLinkParser.swift */,
@@ -2268,6 +2271,7 @@
 				FCCFC7CF224D2C110060F7EC /* DataFixes.swift in Sources */,
 				40C1A52B1DE82060000F80AA /* InfoWindowView.swift in Sources */,
 				FCD884FB1FFBE04F00F05B08 /* RecommendationsListViewController.swift in Sources */,
+				FC93DC5823202B8F00F1CE23 /* Config.swift in Sources */,
 				206F8F921E1E552F0024937B /* MessageOptionHelper.swift in Sources */,
 				FCC212EC219077C000D8D5B7 /* F4SDCDocumentCaptureFileHelper.swift in Sources */,
 				40E78EA01DD5E208000A3776 /* LocationHelper.swift in Sources */,

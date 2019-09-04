@@ -78,7 +78,7 @@ public class F4SEmailVerificationModel {
     }
     
     func authenticationClientId() -> String {
-        switch Config.environment {
+        switch __environment {
         case .staging:
             return "GP0piRmEoPLyKQJETNVjKdjhosvPGTw0"
         case .production:

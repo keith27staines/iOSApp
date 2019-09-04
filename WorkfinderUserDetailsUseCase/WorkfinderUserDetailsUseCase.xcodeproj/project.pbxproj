@@ -32,6 +32,9 @@
 		FC93DC4F23201F6900F1CE23 /* LocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC4A23201F6800F1CE23 /* LocalizedStrings.swift */; };
 		FC93DC5023201F6900F1CE23 /* F4SEmailVerificationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC4C23201F6900F1CE23 /* F4SEmailVerificationError.swift */; };
 		FC93DC52232020A600F1CE23 /* F4SAuth0MagicLinkInterpreterer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC51232020A500F1CE23 /* F4SAuth0MagicLinkInterpreterer.swift */; };
+		FC93DC5B2320357B00F1CE23 /* UserDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC93DC4723201DD100F1CE23 /* UserDetails.storyboard */; };
+		FC93DC5C2320358100F1CE23 /* F4SEmailVerification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC93DC4323201D4E00F1CE23 /* F4SEmailVerification.storyboard */; };
+		FC93DC5E232038DD00F1CE23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC93DC5D232038DD00F1CE23 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +78,7 @@
 		FC93DC4B23201F6900F1CE23 /* F4SEmailVerificationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SEmailVerificationModel.swift; sourceTree = "<group>"; };
 		FC93DC4C23201F6900F1CE23 /* F4SEmailVerificationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SEmailVerificationError.swift; sourceTree = "<group>"; };
 		FC93DC51232020A500F1CE23 /* F4SAuth0MagicLinkInterpreterer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SAuth0MagicLinkInterpreterer.swift; sourceTree = "<group>"; };
+		FC93DC5D232038DD00F1CE23 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +186,7 @@
 		FC93DC4823201E1600F1CE23 /* UserDetails */ = {
 			isa = PBXGroup;
 			children = (
+				FC93DC5D232038DD00F1CE23 /* Assets.xcassets */,
 				FC93DC4723201DD100F1CE23 /* UserDetails.storyboard */,
 				FC93DC2E23200B2600F1CE23 /* UserDetailsCoordinator.swift */,
 				FC93DC2D23200B2600F1CE23 /* UserDetailsViewModel.swift */,
@@ -286,6 +291,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC93DC5C2320358100F1CE23 /* F4SEmailVerification.storyboard in Resources */,
+				FC93DC5E232038DD00F1CE23 /* Assets.xcassets in Resources */,
+				FC93DC5B2320357B00F1CE23 /* UserDetails.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
