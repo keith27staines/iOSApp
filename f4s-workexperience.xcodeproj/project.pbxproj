@@ -822,7 +822,6 @@
 			isa = PBXGroup;
 			children = (
 				40E78E1F1DD31A86000A3776 /* LaunchScreen.storyboard */,
-				FC24D245226B05B300FA04A1 /* Coordinators, Routing and Injection */,
 				FC96709F225A18B300318F69 /* Repositories */,
 				FC1DFD87222B9CF2001951ED /* Utilities and extensions */,
 				FCA90A84221D2CFD00EACD8D /* Shared protocols */,
@@ -1414,21 +1413,6 @@
 				FC0B4081226CAB4E00D992AC /* RecommendationsMerger.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		FC24D245226B05B300FA04A1 /* Coordinators, Routing and Injection */ = {
-			isa = PBXGroup;
-			children = (
-				FC24D246226B05C900FA04A1 /* Coordinators */,
-			);
-			path = "Coordinators, Routing and Injection";
-			sourceTree = "<group>";
-		};
-		FC24D246226B05C900FA04A1 /* Coordinators */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Coordinators;
 			sourceTree = "<group>";
 		};
 		FC24D249226B07E700FA04A1 /* CompanyDetail */ = {
