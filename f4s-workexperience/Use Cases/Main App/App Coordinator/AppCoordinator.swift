@@ -122,7 +122,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     private func onUserIsRegistered(userUuid: F4SUUID) {
         injected.user.uuid = userUuid
         injected.userRepository.save(user: injected.user)
-        logStartupInformation()
+        logStartupInformation(userId: userUuid)
         injected.log.identity(userId: userUuid)
         _ = F4SNetworkSessionManager.shared
         registrar.registerForRemoteNotifications()
@@ -205,14 +205,14 @@ extension AppCoordinator {
 }
 
 extension AppCoordinator {
-    func logStartupInformation() {
+    func logStartupInformation(userId: F4SUUID) {
         let info = """
 
         
         ****************************************************************
         Environment name = \(Config.environmentName)
         Installation UUID = \(injected.appInstallationUuidLogic.registeredInstallationUuid!)
-        User UUID = \(F4SUser().uuid ?? "nil user")
+        User UUID = \(userId)
         Base api url = \(NetworkConfig.workfinderApi)
         v2 api url = \(NetworkConfig.workfinderApiV2)
         ****************************************************************
