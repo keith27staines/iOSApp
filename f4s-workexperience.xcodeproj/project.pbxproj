@@ -111,7 +111,6 @@
 		FC0B4086226CC06200D992AC /* RecommendationEquatableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B4085226CC06200D992AC /* RecommendationEquatableTests.swift */; };
 		FC0C87952122C05C007CF1F3 /* F4SAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C87942122C05C007CF1F3 /* F4SAnalyticsEvents.swift */; };
 		FC11006A1FB36A230055EB9A /* ReachabilityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */; };
-		FC14E971221EA27A00EE985F /* CoreInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC14E970221EA27A00EE985F /* CoreInjection.swift */; };
 		FC1DC06221FE137A009ABC60 /* ScaledNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1DC06121FE137A009ABC60 /* ScaledNumber.swift */; };
 		FC1DC06821FE13FE009ABC60 /* CompanyDetailAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC1DC06721FE13FE009ABC60 /* CompanyDetailAssets.xcassets */; };
 		FC1DC06B21FE142D009ABC60 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1DC06A21FE142D009ABC60 /* AppCoordinator.swift */; };
@@ -292,7 +291,6 @@
 		FCF5AF2B2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF2A2248BE1A00D9B8D1 /* WorkfinderApplyUseCase.framework */; };
 		FCF5AF2C2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF2A2248BE1A00D9B8D1 /* WorkfinderApplyUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCF798542227F5AB00D67A7D /* RecommendationsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF798532227F5AB00D67A7D /* RecommendationsCoordinator.swift */; };
-		FCF79858222857E800D67A7D /* CoreInjectionNavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF79857222857E800D67A7D /* CoreInjectionNavigationCoordinator.swift */; };
 		FCFB1328224930660086BE25 /* Mustache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCFB1327224930660086BE25 /* Mustache.framework */; };
 		FCFB1329224930660086BE25 /* Mustache.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCFB1327224930660086BE25 /* Mustache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCFBD0092250D69700A9361D /* f4s_workexperienceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFBD0082250D69700A9361D /* f4s_workexperienceTests.swift */; };
@@ -491,7 +489,6 @@
 		FC0B4085226CC06200D992AC /* RecommendationEquatableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationEquatableTests.swift; sourceTree = "<group>"; };
 		FC0C87942122C05C007CF1F3 /* F4SAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SAnalyticsEvents.swift; sourceTree = "<group>"; };
 		FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityExtension.swift; sourceTree = "<group>"; };
-		FC14E970221EA27A00EE985F /* CoreInjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreInjection.swift; sourceTree = "<group>"; };
 		FC14E975221EBF6600EE985F /* MockAnalyticsAndDebugging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsAndDebugging.swift; sourceTree = "<group>"; };
 		FC17E02E223A378D00B32CBD /* ApplyCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyCoordinatorTests.swift; sourceTree = "<group>"; };
 		FC1DC06121FE137A009ABC60 /* ScaledNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaledNumber.swift; sourceTree = "<group>"; };
@@ -687,7 +684,6 @@
 		FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupAnimator.swift; sourceTree = "<group>"; };
 		FCF5AF2A2248BE1A00D9B8D1 /* WorkfinderApplyUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderApplyUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF798532227F5AB00D67A7D /* RecommendationsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsCoordinator.swift; sourceTree = "<group>"; };
-		FCF79857222857E800D67A7D /* CoreInjectionNavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreInjectionNavigationCoordinator.swift; sourceTree = "<group>"; };
 		FCFB1327224930660086BE25 /* Mustache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mustache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCFBD0062250D69700A9361D /* f4s-workexperienceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "f4s-workexperienceTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCFBD0082250D69700A9361D /* f4s_workexperienceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = f4s_workexperienceTests.swift; sourceTree = "<group>"; };
@@ -1426,8 +1422,6 @@
 			isa = PBXGroup;
 			children = (
 				FC24D246226B05C900FA04A1 /* Coordinators */,
-				FC24D247226B067100FA04A1 /* Routing */,
-				FC24D248226B071E00FA04A1 /* Injection */,
 			);
 			path = "Coordinators, Routing and Injection";
 			sourceTree = "<group>";
@@ -1435,24 +1429,8 @@
 		FC24D246226B05C900FA04A1 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				FCF79857222857E800D67A7D /* CoreInjectionNavigationCoordinator.swift */,
 			);
 			path = Coordinators;
-			sourceTree = "<group>";
-		};
-		FC24D247226B067100FA04A1 /* Routing */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Routing;
-			sourceTree = "<group>";
-		};
-		FC24D248226B071E00FA04A1 /* Injection */ = {
-			isa = PBXGroup;
-			children = (
-				FC14E970221EA27A00EE985F /* CoreInjection.swift */,
-			);
-			path = Injection;
 			sourceTree = "<group>";
 		};
 		FC24D249226B07E700FA04A1 /* CompanyDetail */ = {
@@ -2391,7 +2369,6 @@
 				FCE51E422210365B00DC1D50 /* CompanySearchDataGetter.swift in Sources */,
 				FCC212F2219077C000D8D5B7 /* F4SAddDocumentsViewController.swift in Sources */,
 				FCCFC7CF224D2C110060F7EC /* DataFixes.swift in Sources */,
-				FCF79858222857E800D67A7D /* CoreInjectionNavigationCoordinator.swift in Sources */,
 				40C1A52B1DE82060000F80AA /* InfoWindowView.swift in Sources */,
 				FCD884FB1FFBE04F00F05B08 /* RecommendationsListViewController.swift in Sources */,
 				206F8F921E1E552F0024937B /* MessageOptionHelper.swift in Sources */,
@@ -2422,7 +2399,6 @@
 				FC4BB6051FA20F4100173864 /* F4SPartner.swift in Sources */,
 				FCF798542227F5AB00D67A7D /* RecommendationsCoordinator.swift in Sources */,
 				FCA6C829210760E000A222FE /* F4SHoorayViewController.swift in Sources */,
-				FC14E971221EA27A00EE985F /* CoreInjection.swift in Sources */,
 				FCD3486520038C3100DC1316 /* LocalizedStrings.swift in Sources */,
 				FC0C87952122C05C007CF1F3 /* F4SAnalyticsEvents.swift in Sources */,
 				FC21BE3F220F53EB00A0A389 /* SearchViewProtocol.swift in Sources */,

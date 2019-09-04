@@ -1,13 +1,6 @@
-//
-//  SearchCoordinator.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 02/03/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
-
 import Foundation
 import WorkfinderCommon
+import WorkfinderCoordinators
 
 class SearchCoordinator : CoreInjectionNavigationCoordinator {
     

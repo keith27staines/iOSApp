@@ -8,6 +8,7 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderCoordinators
 
 class FavouritesCoordinator : CoreInjectionNavigationCoordinator {
     

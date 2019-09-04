@@ -83,7 +83,7 @@ class TimelineCoordinator : CoreInjectionNavigationCoordinator {
             let urlString = urlString,
             let url = URL(string: urlString),
             let acceptContext = acceptContext else {
-                log.debug("acceptContext should not be nil", functionName: #function, fileName: #file, lineNumber: #line)
+                injected.log.debug("acceptContext should not be nil", functionName: #function, fileName: #file, lineNumber: #line)
                 return
         }
         UIApplication.shared.open(url, options: [:]) { (success) in

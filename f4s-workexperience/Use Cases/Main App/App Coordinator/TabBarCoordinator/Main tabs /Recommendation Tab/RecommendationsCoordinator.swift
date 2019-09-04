@@ -1,5 +1,6 @@
 import Foundation
 import WorkfinderCommon
+import WorkfinderCoordinators
 
 /// RecommendationsCoordinator is responsible for:
 /// 1. Instantiate views, view models and models to display a list of recommended companies

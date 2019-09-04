@@ -13,6 +13,8 @@ class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoordinato
     var companyViewController: CompanyViewController!
     var companyViewModel: CompanyViewModel!
     var company: Company
+    var placementsRepository: F4SPlacementRepositoryProtocol = F4SPlacementRespository()
+    var interestsRepository: F4SInterestsRepositoryProtocol = F4SInterestsRepository()
     
     init(
         parent: CoreInjectionNavigationCoordinator?,
@@ -87,7 +89,9 @@ extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
             navigationRouter: navigationRouter,
             inject: injected,
             placementService: applyService,
-            templateService: templateService)
+            templateService: templateService,
+            placementRepository: placementsRepository,
+            interestsRepository: interestsRepository)
         addChildCoordinator(applyCoordinator)
         applyCoordinator.start()
     }

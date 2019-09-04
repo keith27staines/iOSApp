@@ -23,8 +23,8 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     var createPlacementJson: F4SCreatePlacementJson?
     var placementService: F4SPlacementApplicationServiceProtocol
     var templateService: F4STemplateServiceProtocol
-    var placementRepository: F4SPlacementRepositoryProtocol = F4SPlacementRespository()
-    var interestsRepository: F4SInterestsRepositoryProtocol = F4SInterestsRepository()
+    var placementRepository: F4SPlacementRepositoryProtocol
+    var interestsRepository: F4SInterestsRepositoryProtocol
     let startingViewController: UIViewController!
     weak var applyCoordinatorDelegate: ApplyCoordinatorDelegate?
     lazy var userInterests: [F4SInterest] = {
@@ -45,12 +45,16 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
          navigationRouter: NavigationRoutingProtocol,
          inject: CoreInjectionProtocol,
          placementService: F4SPlacementApplicationServiceProtocol,
-         templateService: F4STemplateServiceProtocol) {
+         templateService: F4STemplateServiceProtocol,
+         placementRepository: F4SPlacementRepositoryProtocol,
+         interestsRepository: F4SInterestsRepositoryProtocol) {
         self.applyCoordinatorDelegate = applyCoordinatorDelegate
         self.applicationContext = F4SApplicationContext(user: F4SUser(), company: company, placement: nil)
         self.placementService = placementService
         self.templateService = templateService
         self.startingViewController = navigationRouter.navigationController.topViewController
+        self.placementRepository = placementRepository
+        self.interestsRepository = interestsRepository
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     

@@ -19,6 +19,7 @@
 		FC93DBD0231F8D7E00F1CE23 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DBCF231F8D7E00F1CE23 /* Router.swift */; };
 		FC93DBD1231F8D7E00F1CE23 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DBCE231F8D7E00F1CE23 /* NavigationRouter.swift */; };
 		FC93DBD9231F94B600F1CE23 /* Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DBD8231F94B600F1CE23 /* Injection.swift */; };
+		FC93DBE6231FA62900F1CE23 /* CoreInjectionNavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DBE5231FA62900F1CE23 /* CoreInjectionNavigationCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		FC93DBCE231F8D7E00F1CE23 /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		FC93DBCF231F8D7E00F1CE23 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		FC93DBD8231F94B600F1CE23 /* Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injection.swift; sourceTree = "<group>"; };
+		FC93DBE5231FA62900F1CE23 /* CoreInjectionNavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreInjectionNavigationCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 			children = (
 				FC93DBC2231F8C7F00F1CE23 /* Coordinating Protocol.swift */,
 				FC93DBC1231F8C7E00F1CE23 /* NavigationCoordinator.swift */,
+				FC93DBE5231FA62900F1CE23 /* CoreInjectionNavigationCoordinator.swift */,
 			);
 			path = Coordinating;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				FC93DBD9231F94B600F1CE23 /* Injection.swift in Sources */,
 				FC93DBC4231F8C7F00F1CE23 /* NavigationCoordinator.swift in Sources */,
 				FC93DBD0231F8D7E00F1CE23 /* Router.swift in Sources */,
+				FC93DBE6231FA62900F1CE23 /* CoreInjectionNavigationCoordinator.swift in Sources */,
 				FC93DBD1231F8D7E00F1CE23 /* NavigationRouter.swift in Sources */,
 				FC93DBC3231F8C7F00F1CE23 /* Coordinating Protocol.swift in Sources */,
 			);
