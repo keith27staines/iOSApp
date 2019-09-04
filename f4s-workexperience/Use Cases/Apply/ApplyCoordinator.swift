@@ -5,6 +5,7 @@ import WorkfinderApplyUseCase
 import WorkfinderAppLogic
 import WorkfinderUI
 import WorkfinderCoordinators
+import WorkfinderUserDetailsUseCase
 
 protocol ApplyCoordinatorDelegate : class {
     func applicationDidFinish(preferredDestination: ApplyCoordinator.PreferredDestinationAfterApplication)

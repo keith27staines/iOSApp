@@ -48,7 +48,8 @@ class AppInstallationUuidLogicTests: XCTestCase {
         return AppInstallationUuidLogic(
             localStore: localStore,
             userService: userService,
-            userRepo: userRepo)
+            userRepo: userRepo,
+            apnsEnvironment: "apnsEnvironment")
     }
     
 }

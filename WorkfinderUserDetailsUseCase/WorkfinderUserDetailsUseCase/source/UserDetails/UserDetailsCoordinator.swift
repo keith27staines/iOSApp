@@ -2,14 +2,14 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderCoordinators
 
-class UserDetailsCoordinator : CoreInjectionNavigationCoordinator {
-    var didFinish: ((UserDetailsCoordinator) -> Void)?
-    var userIsTooYoung: (() -> Void)?
-    var popOnCompletion: Bool = false
+public class UserDetailsCoordinator : CoreInjectionNavigationCoordinator {
+    public var didFinish: ((UserDetailsCoordinator) -> Void)?
+    public var userIsTooYoung: (() -> Void)?
+    public var popOnCompletion: Bool = false
     
     weak var userDetailsViewController: UserDetailsViewController? = nil
     
-    override func start() {
+    public override func start() {
         let userDetailsStoryboard = UIStoryboard(name: "UserDetails", bundle: nil)
         let userDetailsViewController = userDetailsStoryboard.instantiateViewController(withIdentifier: "UserDetailsViewController") as! UserDetailsViewController
         let user = injected.userRepository.load()

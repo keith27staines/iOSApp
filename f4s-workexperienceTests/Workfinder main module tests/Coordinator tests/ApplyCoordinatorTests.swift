@@ -35,7 +35,7 @@ class ApplyCoordinatorTests: XCTestCase {
         let userRepo = MockUserRepository(user: user)
         localStore.setValue("installationUuid", for: LocalStore.Key.installationUuid)
         localStore.setValue(isRegistered, for: LocalStore.Key.isDeviceRegistered)
-        let logic = AppInstallationUuidLogic(localStore: localStore, userService: mockUserService, userRepo: userRepo)
+        let logic = AppInstallationUuidLogic(localStore: localStore, userService: mockUserService, userRepo: userRepo, apnsEnvironment: "apnsEnvironment")
         return logic
     }
     

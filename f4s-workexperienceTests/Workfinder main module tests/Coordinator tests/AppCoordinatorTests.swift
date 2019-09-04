@@ -33,7 +33,7 @@ class AppCoordinatorTests: XCTestCase {
         super.setUp()
         let user = mockUnregisteredUser
         let localStore = MockLocalStore()
-        let logic = AppInstallationUuidLogic(localStore: localStore, userService: mockUserService, userRepo: MockUserRepository(user: user))
+        let logic = AppInstallationUuidLogic(localStore: localStore, userService: mockUserService, userRepo: MockUserRepository(user: user), apnsEnvironment: "apnsEnvironment")
         injection = CoreInjection(
             launchOptions: nil,
             appInstallationUuidLogic: logic,

@@ -13,7 +13,7 @@ import WorkfinderServices
 
 /// A state machine that controls the verification process for emails
 public class F4SEmailVerificationModel {
-    static var shared: F4SEmailVerificationModel = F4SEmailVerificationModel()
+    public static var shared: F4SEmailVerificationModel = F4SEmailVerificationModel()
     
     /// The last non-error state before transitioning to the current state
     public private (set) var lastNonErrorState: F4SEmailVerificationState

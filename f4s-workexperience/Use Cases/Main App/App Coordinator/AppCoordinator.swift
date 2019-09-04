@@ -3,6 +3,7 @@ import WorkfinderCommon
 import WorkfinderNetworking
 import WorkfinderServices
 import WorkfinderCoordinators
+import WorkfinderUserDetailsUseCase
 import GoogleMaps
 import GooglePlaces
 

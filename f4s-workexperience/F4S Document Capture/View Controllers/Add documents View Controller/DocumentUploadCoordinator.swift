@@ -17,7 +17,7 @@ class DocumentUploadCoordinator : CoreInjectionNavigationCoordinator {
     let mode: F4SAddDocumentsViewController.Mode
     var popOnCompletion: Bool = false
     
-    var didFinish: ((DocumentUploadCoordinator)->Void)?
+    public var didFinish: ((DocumentUploadCoordinator)->Void)?
     
     init(parent: Coordinating?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol, mode: F4SAddDocumentsViewController.Mode, applicationContext: F4SApplicationContext?) {
         self.applicationContext = applicationContext

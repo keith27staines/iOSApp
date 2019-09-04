@@ -1,5 +1,4 @@
 import UIKit
-import Reachability
 import WorkfinderCommon
 import WorkfinderNetworking
 import WorkfinderServices
@@ -115,12 +114,12 @@ class UserDetailsViewController: UIViewController {
         self.view.endEditing(true)
         saveUserDetailsLocally()
         pushNotificationAlertFactory.afterAction = {
-            [weak self] in self?.getPartnersFromServer()
+            [weak self] in self?.verifyEmail()
         }
         pushNotificationAlertFactory.makeAlertViewControllerIfNecessary { [weak self] (controller) in
             DispatchQueue.main.async {
                 guard let controller = controller else {
-                    self?.getPartnersFromServer()
+                    self?.verifyEmail()
                     return
                 }
                 self?.present(controller, animated: true, completion: nil)
@@ -301,30 +300,6 @@ extension UserDetailsViewController {
     
     @objc func didTapDobInfoLabel(recognizer: UITapGestureRecognizer) {
         coordinator?.presentContent(F4SContentType.consent)
-    }
-    
-    func getPartnersFromServer() {
-        showLoadingOverlay()
-        F4SPartnersModel.sharedInstance.getPartnersFromServer { [weak self] (result) in
-            guard let strongSelf = self else { return }
-            DispatchQueue.main.async {
-                strongSelf.hideLoadingOverlay()
-                switch result {
-                case .error(let error):
-                    if error.retry {
-                        strongSelf.handleRetryForNetworkError(error, retry: {
-                            strongSelf.getPartnersFromServer()
-                        })
-                    }
-                case .success(_):
-                    strongSelf.afterGetPartners()
-                }
-            }
-        }
-    }
-    
-    func afterGetPartners() {
-        verifyEmail()
     }
     
     func verifyEmail() {

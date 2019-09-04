@@ -26,6 +26,7 @@
 		FC93DBDF231F981D00F1CE23 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DBDE231F981D00F1CE23 /* ContentViewController.swift */; };
 		FC93DBE2231F98E600F1CE23 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DBE1231F98E600F1CE23 /* WorkfinderServices.framework */; };
 		FC93DBE4231F9F4500F1CE23 /* Content.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC93DBDD231F981C00F1CE23 /* Content.storyboard */; };
+		FC93DC3A23200BC100F1CE23 /* NextResponderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC3923200BC100F1CE23 /* NextResponderTextField.swift */; };
 		FC9535A1231E448D00F4A9DA /* F4SSelfLoadingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9535A0231E448D00F4A9DA /* F4SSelfLoadingImageView.swift */; };
 		FC9535A3231E52E600F4A9DA /* F4SSelfLoadingImageViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9535A2231E52E600F4A9DA /* F4SSelfLoadingImageViewTests.swift */; };
 		FC9865BA229D3901006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865B9229D3901006D3E63 /* README */; };
@@ -68,6 +69,7 @@
 		FC93DBDC231F981C00F1CE23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "f4s-workexperience/Base.lproj/Content.storyboard"; sourceTree = "<group>"; };
 		FC93DBDE231F981D00F1CE23 /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		FC93DBE1231F98E600F1CE23 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC93DC3923200BC100F1CE23 /* NextResponderTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextResponderTextField.swift; sourceTree = "<group>"; };
 		FC9535A0231E448D00F4A9DA /* F4SSelfLoadingImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SSelfLoadingImageView.swift; sourceTree = "<group>"; };
 		FC9535A2231E52E600F4A9DA /* F4SSelfLoadingImageViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SSelfLoadingImageViewTests.swift; sourceTree = "<group>"; };
 		FC9865B9229D3901006D3E63 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				FCA91EBE223406B4007ED308 /* WorkfinderUI.swift */,
+				FC93DC3923200BC100F1CE23 /* NextResponderTextField.swift */,
 				FC22DBF022F97A960068C61C /* LoadingOverlay.swift */,
 				FC22DBF222F97AAB0068C61C /* UserMessageHandler.swift */,
 				FC9535A0231E448D00F4A9DA /* F4SSelfLoadingImageView.swift */,
@@ -338,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCEB1D25229FC6D600C6D2C2 /* UIView+Extensions.swift in Sources */,
+				FC93DC3A23200BC100F1CE23 /* NextResponderTextField.swift in Sources */,
 				FCA91EBF223406B4007ED308 /* WorkfinderUI.swift in Sources */,
 				FC22DBED22F979E90068C61C /* UIViewController+Extensions.swift in Sources */,
 				FC22DBF322F97AAB0068C61C /* UserMessageHandler.swift in Sources */,

@@ -16,10 +16,6 @@ import WorkfinderAppLogic
 
 let globalLog = XCGLogger.default
 
-extension Notification.Name {
-    static let verificationCodeRecieved = Notification.Name("verificationCodeRecieved")
-}
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -35,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var appInstallationUuidLogic: AppInstallationUuidLogic = {
         let localStore = LocalStore()
         let userRepo = F4SUserRepository(localStore: localStore)
-        return AppInstallationUuidLogic(userService: self.userService, userRepo: userRepo)
+        return AppInstallationUuidLogic(userService: self.userService, userRepo: userRepo, apnsEnvironment: Config.apnsEnv)
     }()
     
     lazy var appCoordinator: AppCoordinatorProtocol = {

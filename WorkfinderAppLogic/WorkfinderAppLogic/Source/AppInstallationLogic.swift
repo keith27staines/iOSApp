@@ -15,6 +15,7 @@ public class AppInstallationUuidLogic {
     let localStore: LocalStorageProtocol
     let userService: F4SUserServiceProtocol
     let userRepo: F4SUserRepositoryProtocol
+    let apnsEnvironment: String
     
     var installationUuid: F4SUUID? {
         return localStore.value(key: LocalStore.Key.installationUuid) as? F4SUUID
@@ -22,10 +23,12 @@ public class AppInstallationUuidLogic {
     
     public init(localStore: LocalStorageProtocol = LocalStore(),
                 userService: F4SUserServiceProtocol,
-                userRepo: F4SUserRepositoryProtocol) {
+                userRepo: F4SUserRepositoryProtocol,
+                apnsEnvironment: String) {
         self.localStore = localStore
         self.userService = userService
         self.userRepo = userRepo
+        self.apnsEnvironment = apnsEnvironment
     }
     
     func makeNewInstallationUuid() -> F4SUUID {
@@ -74,24 +77,9 @@ public class AppInstallationUuidLogic {
     
     private func registerDevice(completion: @escaping (F4SNetworkResult<F4SRegisterDeviceResult>)->()) {
         let newInstallationUuid = makeNewInstallationUuid()
-        userService.registerDeviceWithServer(installationUuid: newInstallationUuid) { [weak self] (networkResult) in
-            DispatchQueue.main.async { [weak self] in
-                guard let strongSelf = self else { return }
-                switch networkResult {
-                case .error(_):
-                    completion(networkResult)
-                case .success(let registerDeviceResult):
-                    if let _ = registerDeviceResult.uuid {
-                        strongSelf.onDeviceWasRegisteredOnServer(
-                            withInstallationUuid: newInstallationUuid,
-                            networkResult: networkResult,
-                            completion: completion)
-                    } else {
-                        completion(networkResult)
-                    }
-                }
-            }
-        }
+        let registerService = F4SDeviceRegistrationService()
+        let anonymousUser = F4SAnonymousUser(vendorUuid: newInstallationUuid, clientType: "ios", apnsEnvironment: apnsEnvironment)
+        registerService.registerDevice(anonymousUser: anonymousUser, completion: completion)
     }
     
     func onDeviceWasRegisteredOnServer(
