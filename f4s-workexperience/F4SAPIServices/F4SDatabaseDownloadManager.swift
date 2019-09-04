@@ -12,15 +12,6 @@ import WorkfinderServices
 
 public typealias BackgroundSessionCompletionHandler = () -> Void
 
-public protocol F4SDatabaseDownloadManagerProtocol : class {
-    var localDatabaseDatestamp: Date? { get }
-    func start()
-    func registerObserver(_ observer: F4SCompanyDatabaseAvailabilityObserving)
-    func removeObserver(_ observer: F4SCompanyDatabaseAvailabilityObserving)
-    func ageOfLocalDatabase() -> TimeInterval
-    func isLocalDatabaseAvailable() -> Bool
-}
-
 public class F4SDatabaseDownloadManager  : NSObject, F4SDatabaseDownloadManagerProtocol {
     
     struct BoxedObserver {
@@ -226,9 +217,4 @@ extension F4SDatabaseDownloadManager : F4SDownloadServiceDelegate {
             boxedObserver.observer?.newDatabaseIsDownloading(progress: fractionComplete)
         })
     }
-}
-
-public protocol F4SCompanyDatabaseAvailabilityObserving : class {
-    func newStagedDatabaseIsAvailable(url: URL)
-    func newDatabaseIsDownloading(progress: Double)
 }

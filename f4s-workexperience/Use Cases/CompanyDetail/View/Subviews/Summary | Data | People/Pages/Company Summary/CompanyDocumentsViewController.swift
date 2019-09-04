@@ -1,14 +1,7 @@
-//
-//  CompanyDocumentsViewController.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 31/01/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
-
 import UIKit
 import WorkfinderCommon
 import WorkfinderUI
+import WorkfinderCoordinators
 
 class CompanyDocumentsViewController : UIViewController {
     

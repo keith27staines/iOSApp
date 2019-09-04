@@ -11,40 +11,27 @@ import WorkfinderCommon
 import WorkfinderNetworking
 import WorkfinderServices
 import WorkfinderAppLogic
+import WorkfinderCoordinators
 
-public typealias LaunchOptions = [UIApplication.LaunchOptionsKey: Any]
-
-protocol CoreInjectionProtocol : class {
-    var appInstallationUuidLogic: AppInstallationUuidLogic { get }
-    var launchOptions: LaunchOptions? { get set }
-    var user: F4SUserProtocol { get set }
-    var userService: F4SUserServiceProtocol { get }
-    var userStatusService: F4SUserStatusServiceProtocol { get }
-    var userRepository: F4SUserRepositoryProtocol { get }
-    var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol { get }
-    var log: F4SAnalyticsAndDebugging { get }
-}
-
-class CoreInjection : CoreInjectionProtocol {
+public class CoreInjection : CoreInjectionProtocol {
     
-    var launchOptions: LaunchOptions? = nil
-    var user: F4SUserProtocol
-    var userService: F4SUserServiceProtocol
-    var userStatusService: F4SUserStatusServiceProtocol
-    var userRepository: F4SUserRepositoryProtocol
-    var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol
-    var log: F4SAnalyticsAndDebugging
-    let appInstallationUuidLogic: AppInstallationUuidLogic
+    public var launchOptions: LaunchOptions? = nil
+    public var user: F4SUserProtocol
+    public var userService: F4SUserServiceProtocol
+    public var userStatusService: F4SUserStatusServiceProtocol
+    public var userRepository: F4SUserRepositoryProtocol
+    public var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol
+    public var log: F4SAnalyticsAndDebugging
+    public let appInstallationUuidLogic: AppInstallationUuidLogic
     
-    init(launchOptions: LaunchOptions?,
-         appInstallationUuidLogic: AppInstallationUuidLogic,
-         user: F4SUserProtocol,
-         userService: F4SUserServiceProtocol,
-         userStatusService: F4SUserStatusServiceProtocol = F4SUserStatusService.shared,
-         userRepository: F4SUserRepositoryProtocol,
-         databaseDownloadManager: F4SDatabaseDownloadManagerProtocol,
-         tabBarFactory: @escaping (() -> Coordinating) = { return TabBarCoordinator.sharedInstance },
-         f4sLog: F4SAnalyticsAndDebugging) {
+    public init(launchOptions: LaunchOptions?,
+                appInstallationUuidLogic: AppInstallationUuidLogic,
+                user: F4SUserProtocol,
+                userService: F4SUserServiceProtocol,
+                userStatusService: F4SUserStatusServiceProtocol = F4SUserStatusService.shared,
+                userRepository: F4SUserRepositoryProtocol,
+                databaseDownloadManager: F4SDatabaseDownloadManagerProtocol,
+                f4sLog: F4SAnalyticsAndDebugging) {
         
         self.launchOptions = launchOptions
         self.user = user

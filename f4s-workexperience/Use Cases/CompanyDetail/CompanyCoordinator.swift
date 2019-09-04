@@ -3,6 +3,7 @@ import Reachability
 import WorkfinderCommon
 import WorkfinderNetworking
 import WorkfinderServices
+import WorkfinderCoordinators
 
 protocol CompanyCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol {}
 

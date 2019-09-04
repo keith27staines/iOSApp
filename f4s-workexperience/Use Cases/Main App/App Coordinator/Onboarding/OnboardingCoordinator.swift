@@ -1,5 +1,6 @@
 import UIKit
 import WorkfinderCommon
+import WorkfinderCoordinators
 
 protocol OnboardingCoordinatorProtocol : Coordinating {
     var hideOnboardingControls: Bool { get set }

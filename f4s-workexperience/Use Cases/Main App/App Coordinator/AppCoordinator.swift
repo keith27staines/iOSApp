@@ -2,6 +2,7 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderNetworking
 import WorkfinderServices
+import WorkfinderCoordinators
 import GoogleMaps
 import GooglePlaces
 

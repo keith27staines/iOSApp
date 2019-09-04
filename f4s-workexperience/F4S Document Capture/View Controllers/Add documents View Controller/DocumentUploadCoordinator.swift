@@ -8,6 +8,7 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderCoordinators
 import WorkfinderApplyUseCase
 
 class DocumentUploadCoordinator : CoreInjectionNavigationCoordinator {

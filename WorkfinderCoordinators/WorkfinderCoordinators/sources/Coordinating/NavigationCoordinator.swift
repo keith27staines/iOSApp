@@ -9,22 +9,22 @@
 import UIKit
 
 /// A convenient starting point for creating a coordinator that uses a UINavigationController
-class NavigationCoordinator : Coordinating {
+open class NavigationCoordinator : Coordinating {
     
-    var navigationRouter: NavigationRoutingProtocol
-    let uuid: UUID = UUID()
-    var parentCoordinator: Coordinating?
-    var childCoordinators = [UUID : Coordinating]()
+    public var navigationRouter: NavigationRoutingProtocol
+    public let uuid: UUID = UUID()
+    public var parentCoordinator: Coordinating?
+    public var childCoordinators = [UUID : Coordinating]()
     
-    init(parent: Coordinating?, navigationRouter: NavigationRoutingProtocol) {
+    public init(parent: Coordinating?, navigationRouter: NavigationRoutingProtocol) {
         self.navigationRouter = navigationRouter
         self.parentCoordinator = parent
     }
-    func start() {}
+    open func start() {}
 }
 
 // MARK:- Support opening URLs
-extension NavigationCoordinator {
+public extension NavigationCoordinator {
     func openUrl(_ urlString: String?) { NavigationCoordinator.openUrl(urlString) }
     func openUrl(_ url: URL?) { NavigationCoordinator.openUrl(url) }
     

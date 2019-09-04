@@ -1,5 +1,6 @@
 import Foundation
 import WorkfinderCommon
+import WorkfinderCoordinators
 import WorkfinderAcceptUseCase
 
 class AcceptOfferCoordinator : CoreInjectionNavigationCoordinator {

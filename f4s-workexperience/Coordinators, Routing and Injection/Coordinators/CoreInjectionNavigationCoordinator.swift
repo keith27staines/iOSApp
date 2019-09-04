@@ -8,14 +8,16 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderUI
+import WorkfinderCoordinators
 
-protocol CoreInjectionNavigationCoordinatorProtocol : Coordinating {
+public protocol CoreInjectionNavigationCoordinatorProtocol : Coordinating {
     var injected: CoreInjectionProtocol { get }
 }
 
 /// A suitable base class for coordinators representing tabs on a tabbar
-class CoreInjectionNavigationCoordinator : NavigationCoordinator {
-    let injected: CoreInjectionProtocol
+public class CoreInjectionNavigationCoordinator : NavigationCoordinator {
+    public let injected: CoreInjectionProtocol
     var log: F4SAnalyticsAndDebugging { return injected.log }
     
     init(parent: Coordinating?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol) {
@@ -24,10 +26,7 @@ class CoreInjectionNavigationCoordinator : NavigationCoordinator {
     }
     
     func presentContent(_ contentType: F4SContentType) {
-        let storyboard = UIStoryboard(name: "Content", bundle: nil)
-        let contentViewController = storyboard.instantiateViewController(withIdentifier: "ContentViewCtrl") as! ContentViewController
-        contentViewController.contentType = contentType
-        contentViewController.dismissByPopping = true
+        let contentViewController = WorkfinderUI().makeWebContentViewController(contentType: contentType, dismissByPopping: true)
         navigationRouter.navigationController.pushViewController(contentViewController, animated: true)
     }
 }

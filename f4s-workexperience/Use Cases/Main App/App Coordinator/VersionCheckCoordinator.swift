@@ -7,6 +7,7 @@
 //
 
 import WorkfinderCommon
+import WorkfinderCoordinators
 
 protocol VersionChecking {
     var versionCheckCompletion: ((F4SNetworkResult<F4SVersionValidity>) -> Void)? { get set }

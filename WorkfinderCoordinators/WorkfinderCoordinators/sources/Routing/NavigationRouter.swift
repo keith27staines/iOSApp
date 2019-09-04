@@ -8,15 +8,15 @@
 
 import Foundation
 
-class NavigationRouter : NavigationRoutingProtocol {
-    let navigationController: UINavigationController
-    var rootViewController: UIViewController
+public class NavigationRouter : NavigationRoutingProtocol {
+    public let navigationController: UINavigationController
+    public var rootViewController: UIViewController
     
-    func push(viewController: UIViewController, animated: Bool) {
+    public func push(viewController: UIViewController, animated: Bool) {
         navigationController.pushViewController(viewController, animated: animated)
     }
     
-    func popToViewController(_ viewController: UIViewController, animated: Bool) {
+    public func popToViewController(_ viewController: UIViewController, animated: Bool) {
         navigationController.popToViewController(viewController, animated: animated)
     }
     
@@ -24,20 +24,20 @@ class NavigationRouter : NavigationRoutingProtocol {
         navigationController.popToRootViewController(animated: animated)
     }
     
-    func pop(animated: Bool = true) {
+    public func pop(animated: Bool = true) {
         navigationController.popViewController(animated: true)
     }
     
-    func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)? = nil) {
+    public func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)? = nil) {
         navigationController.present(viewController, animated: animated, completion: completion)
     }
     
-    func dismiss(animated: Bool, completion: (() -> Void)?) {
+    public func dismiss(animated: Bool, completion: (() -> Void)?) {
         navigationController.dismiss(animated: animated, completion: nil)
     }
     
     
-    init(navigationController: UINavigationController) {
+    public init(navigationController: UINavigationController) {
         rootViewController = navigationController
         self.navigationController = navigationController
     }

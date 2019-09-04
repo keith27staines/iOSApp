@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Content View Controller-->
+        <scene sceneID="zpw-sJ-8Yl">
+            <objects>
+                <viewController storyboardIdentifier="ContentViewCtrl" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nuu-tT-GOF" customClass="ContentViewController" customModule="WorkfinderUI" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bfU-Yv-3uf"/>
+                        <viewControllerLayoutGuide type="bottom" id="rYR-m0-lRU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oQB-rp-bFo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XYQ-rd-Khm">
+                                <rect key="frame" x="0.0" y="20" width="375" height="599"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LEE-0d-IFa">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="done" id="Sdd-1Y-tT2">
+                                        <color key="tintColor" red="0.32549019610000002" green="0.64313725489999995" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <action selector="doneTapped:" destination="nuu-tT-GOF" id="d0m-o3-NqT"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XYQ-rd-Khm" firstAttribute="top" secondItem="bfU-Yv-3uf" secondAttribute="bottom" id="Pm5-6D-FCU"/>
+                            <constraint firstItem="LEE-0d-IFa" firstAttribute="leading" secondItem="oQB-rp-bFo" secondAttribute="leading" id="Qmh-MQ-qBf"/>
+                            <constraint firstItem="rYR-m0-lRU" firstAttribute="top" secondItem="LEE-0d-IFa" secondAttribute="bottom" id="QzX-Ez-DD9"/>
+                            <constraint firstAttribute="trailing" secondItem="XYQ-rd-Khm" secondAttribute="trailing" id="V7a-cU-5e3"/>
+                            <constraint firstItem="LEE-0d-IFa" firstAttribute="top" secondItem="XYQ-rd-Khm" secondAttribute="bottom" constant="4" id="lIQ-1O-4aE"/>
+                            <constraint firstItem="XYQ-rd-Khm" firstAttribute="leading" secondItem="oQB-rp-bFo" secondAttribute="leading" id="mJF-pv-hl4"/>
+                            <constraint firstAttribute="trailing" secondItem="LEE-0d-IFa" secondAttribute="trailing" id="nEn-Yx-xj7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="doneButton" destination="Sdd-1Y-tT2" id="u86-7r-FXZ"/>
+                        <outlet property="webView" destination="XYQ-rd-Khm" id="1bG-eQ-f3Y"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CbJ-tU-0rT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1940" y="127.28635682158921"/>
+        </scene>
+    </scenes>
+</document>

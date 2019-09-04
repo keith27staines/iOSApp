@@ -1,21 +1,16 @@
-//
-//  TermsViewController.swift
-//  f4s-workexperience
-//
-//  Created by iOS FRB on 12/8/16.
-//  Copyright © 2016 Chelsea Apps Factory. All rights reserved.
-//
-
 import UIKit
-import Reachability
 import WorkfinderCommon
 import WorkfinderServices
-import WorkfinderUI
 
-class ContentViewController: UIViewController {
+public class ContentViewController: UIViewController {
 
     @IBOutlet weak var webView: UIWebView!
-
+    @IBOutlet weak var doneButton: UIBarButtonItem!
+    
+    @IBAction func doneTapped(_ sender: Any) {
+        dismissPage()
+    }
+    
     var contentType: F4SContentType?
     var url: String?
     var dismissByPopping: Bool = false
@@ -25,7 +20,7 @@ class ContentViewController: UIViewController {
         return service
     }()
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         adjustAppearance()
         getContent()
@@ -33,24 +28,22 @@ class ContentViewController: UIViewController {
     
     var didChangeNavigationBarVisibility: Bool = false
 
-    override func viewWillAppear(_ animated: Bool) {
+    override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if navigationController?.isNavigationBarHidden == true {
             navigationController?.isNavigationBarHidden = false
             didChangeNavigationBarVisibility = true
-            
         }
         setNeedsStatusBarAppearanceUpdate()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override public func viewWillDisappear(_ animated: Bool) {
         if didChangeNavigationBarVisibility {
             navigationController?.isNavigationBarHidden = true
         }
     }
     
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
+    override public var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
 }
@@ -85,8 +78,8 @@ extension ContentViewController {
 // MARK: - user interaction
 extension ContentViewController {
     @objc func dismissPage() {
-        if dismissByPopping {
-            navigationController?.popViewController(animated: true)
+        if let navigationController = navigationController, dismissByPopping == true {
+            navigationController.popViewController(animated: true)
         } else {
             self.dismiss(animated: true, completion: nil)
         }
@@ -96,13 +89,6 @@ extension ContentViewController {
 // MARK: - calls
 extension ContentViewController {
     func getContent() {
-        if let reachability = Reachability() {
-            if !reachability.isReachableByAnyMeans {
-                sharedUserMessageHandler.displayAlertFor("No Internet Connection.", parentCtrl: self)
-                return
-            }
-        }
-
         if self.contentType == .company {
             sharedUserMessageHandler.showLightLoadingOverlay(self.webView)
             if let companyUrl = url {
@@ -139,15 +125,14 @@ extension ContentViewController {
 
 // MARK: - UIWebViewDelegate
 extension ContentViewController: UIWebViewDelegate {
-    func webViewDidFinishLoad(_: UIWebView) {
+    public func webViewDidFinishLoad(_: UIWebView) {
         self.webView.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
         self.webView.scrollView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
         self.webView.stringByEvaluatingJavaScript(from: "window.scroll(0,0)")
         sharedUserMessageHandler.hideLoadingOverlay()
     }
 
-    func webView(_: UIWebView, didFailLoadWithError error: Error) {
-        globalLog.error(error)
+    public func webView(_: UIWebView, didFailLoadWithError error: Error) {
         sharedUserMessageHandler.hideLoadingOverlay()
     }
 }

@@ -10,6 +10,7 @@ import UIKit
 import GoogleMaps
 import Reachability
 import WorkfinderCommon
+import WorkfinderServices
 import WorkfinderUI
 
 enum CamerWillMoveAction {

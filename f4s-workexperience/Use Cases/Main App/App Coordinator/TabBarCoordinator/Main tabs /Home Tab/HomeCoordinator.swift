@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import WorkfinderUI
+import WorkfinderCoordinators
 
 protocol HomeCoordinatorProtocol : Coordinating {}
 

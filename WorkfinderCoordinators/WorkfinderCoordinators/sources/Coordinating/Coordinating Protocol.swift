@@ -12,7 +12,7 @@ public protocol Coordinating : class {
     func childCoordinatorDidFinish(_ coordinator: Coordinating)
 }
 
-extension Coordinating {
+public extension Coordinating {
     
     func childCoordinatorDidFinish(_ coordinator: Coordinating) {
         removeChildCoordinator(coordinator)

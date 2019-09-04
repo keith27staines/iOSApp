@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCoordinators
 import WorkfinderApplyUseCase
 
 class UserDetailsCoordinator : CoreInjectionNavigationCoordinator {

@@ -11,6 +11,7 @@ import WorkfinderCommon
 import WorkfinderNetworking
 import WorkfinderServices
 import WorkfinderAppLogic
+import WorkfinderCoordinators
 
 protocol AppCoordinatoryFactoryProtocol {}
 
