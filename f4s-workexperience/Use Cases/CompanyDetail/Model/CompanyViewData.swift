@@ -41,38 +41,37 @@ public struct CompanyViewData : CompanyViewDataProtocol {
 
 extension CompanyViewData {
         
-    var revenueString: String {
+    public var revenueString: String {
         guard let revenue = revenue, revenue > 0 else { return "" }
         return "Annual revenue: £\(ScaledNumber.formattedString(for: revenue))"
     }
-    var growthString: String? {
+    public var growthString: String? {
         guard let growth = growth, growth > 0 else { return "" }
         return "Annual growth: \(Int(100.0*growth))%"
     }
     
-    var employeesString: String? {
+    public var employeesString: String? {
         guard let employees = employees, employees > 0 else { return "" }
         return "Employees: \(ScaledNumber.formattedString(for: Double(employees)))"
     }
     
-    var starRatingIsHidden: Bool {
+    public var starRatingIsHidden: Bool {
         guard let rating = starRating else { return true }
         return rating <= 0
     }
     
-    var revenueIsHidden: Bool {
+    public var revenueIsHidden: Bool {
         guard let revenue = revenue else { return true }
         return revenue <= 0.0
     }
     
-    var growthIsHidden: Bool {
+    public var growthIsHidden: Bool {
         guard let growth = growth else { return true }
         return growth <= 0.0
     }
     
-    var employeesIsHidden: Bool {
+    public var employeesIsHidden: Bool {
         guard let employees = employees else { return true }
         return employees <= 0
     }
-    
 }

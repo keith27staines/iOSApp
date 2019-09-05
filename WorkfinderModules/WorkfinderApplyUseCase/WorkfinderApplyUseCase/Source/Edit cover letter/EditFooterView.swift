@@ -21,7 +21,7 @@ class EditFooterView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        if let view = bundle.loadNibNamed("EditFooter", owner: self, options: nil)?[0] as? UIView {
+        if let view = __bundle.loadNibNamed("EditFooter", owner: self, options: nil)?[0] as? UIView {
             view.isUserInteractionEnabled = false
             view.backgroundColor = UIColor(netHex: Colors.lightGray)
             view.frame = frame

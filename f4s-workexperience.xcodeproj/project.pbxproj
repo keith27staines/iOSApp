@@ -25,9 +25,6 @@
 		204203F71E4B7966007C7409 /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204203F61E4B7966007C7409 /* FavouriteViewController.swift */; };
 		204203F91E4B81AB007C7409 /* FavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204203F81E4B81AB007C7409 /* FavouriteTableViewCell.swift */; };
 		204C89551DF5A36100D8493A /* TemplateChoiceDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204C89541DF5A36100D8493A /* TemplateChoiceDB.swift */; };
-		204C895F1DF5F03200D8493A /* ChooseAttributes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 204C895D1DF5F03200D8493A /* ChooseAttributes.storyboard */; };
-		204C89781DF5F0B200D8493A /* ChooseAttributesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204C89761DF5F0B200D8493A /* ChooseAttributesTableViewCell.swift */; };
-		204C89791DF5F0B200D8493A /* ChooseAttributesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204C89771DF5F0B200D8493A /* ChooseAttributesViewController.swift */; };
 		205EB20B1DDB161D00034424 /* DatabaseOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205EB20A1DDB161D00034424 /* DatabaseOperations.swift */; };
 		206F8F8B1E1E48120024937B /* OptionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206F8F891E1E48120024937B /* OptionLabel.swift */; };
 		206F8F8C1E1E48120024937B /* MessageOptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206F8F8A1E1E48120024937B /* MessageOptionCollectionViewCell.swift */; };
@@ -195,7 +192,6 @@
 		FC93DBD7231F8E0A00F1CE23 /* WorkfinderCoordinators.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DBD5231F8E0A00F1CE23 /* WorkfinderCoordinators.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC93DC4223201AA200F1CE23 /* WorkfinderUserDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DC4123201AA200F1CE23 /* WorkfinderUserDetailsUseCase.framework */; };
 		FC93DC5823202B8F00F1CE23 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC5723202B8F00F1CE23 /* Config.swift */; };
-		FC9626412248C27D00D5F850 /* ApplyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626402248C27D00D5F850 /* ApplyCoordinator.swift */; };
 		FC96709E2259F61600318F69 /* InterestsPruner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96709D2259F61600318F69 /* InterestsPruner.swift */; };
 		FC9670A1225A18D900318F69 /* PlacementRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9670A0225A18D900318F69 /* PlacementRepository.swift */; };
 		FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99B7E21F826D1400E2D5F0 /* LatLon.swift */; };
@@ -216,7 +212,6 @@
 		FCA91EC122340743007ED308 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91EC022340743007ED308 /* WorkfinderUI.framework */; };
 		FCA91EC222340743007ED308 /* WorkfinderUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91EC022340743007ED308 /* WorkfinderUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCB1648320986E810045B9CA /* F4SRequestCompanyDocumentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB1648220986E810045B9CA /* F4SRequestCompanyDocumentTableViewCell.swift */; };
-		FCB3617B224D44610056E0B6 /* ChooseAttributesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB3617A224D44610056E0B6 /* ChooseAttributesViewModel.swift */; };
 		FCB3922A20FF1E0A00792C0A /* AcceptOffer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCB3922920FF1E0A00792C0A /* AcceptOffer.storyboard */; };
 		FCB3922C20FF1E3100792C0A /* AcceptOfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB3922B20FF1E3100792C0A /* AcceptOfferViewController.swift */; };
 		FCB3923021006AB500792C0A /* F4SPlacementInviteDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB3922F21006AB500792C0A /* F4SPlacementInviteDetailTableViewController.swift */; };
@@ -350,9 +345,6 @@
 		204203F61E4B7966007C7409 /* FavouriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouriteViewController.swift; sourceTree = "<group>"; };
 		204203F81E4B81AB007C7409 /* FavouriteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewCell.swift; sourceTree = "<group>"; };
 		204C89541DF5A36100D8493A /* TemplateChoiceDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateChoiceDB.swift; sourceTree = "<group>"; };
-		204C895E1DF5F03200D8493A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "f4s-workexperience/Base.lproj/ChooseAttributes.storyboard"; sourceTree = "<group>"; };
-		204C89761DF5F0B200D8493A /* ChooseAttributesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseAttributesTableViewCell.swift; sourceTree = "<group>"; };
-		204C89771DF5F0B200D8493A /* ChooseAttributesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseAttributesViewController.swift; sourceTree = "<group>"; };
 		205EB20A1DDB161D00034424 /* DatabaseOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseOperations.swift; sourceTree = "<group>"; };
 		206F8F891E1E48120024937B /* OptionLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionLabel.swift; sourceTree = "<group>"; };
 		206F8F8A1E1E48120024937B /* MessageOptionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageOptionCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -566,7 +558,6 @@
 		FC93DBD5231F8E0A00F1CE23 /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC93DC4123201AA200F1CE23 /* WorkfinderUserDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUserDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC93DC5723202B8F00F1CE23 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		FC9626402248C27D00D5F850 /* ApplyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyCoordinator.swift; sourceTree = "<group>"; };
 		FC96709D2259F61600318F69 /* InterestsPruner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsPruner.swift; sourceTree = "<group>"; };
 		FC9670A0225A18D900318F69 /* PlacementRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacementRepository.swift; sourceTree = "<group>"; };
 		FC99B7E21F826D1400E2D5F0 /* LatLon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatLon.swift; sourceTree = "<group>"; };
@@ -588,7 +579,6 @@
 		FCA91E9522340577007ED308 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA91EC022340743007ED308 /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCB1648220986E810045B9CA /* F4SRequestCompanyDocumentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRequestCompanyDocumentTableViewCell.swift; sourceTree = "<group>"; };
-		FCB3617A224D44610056E0B6 /* ChooseAttributesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseAttributesViewModel.swift; sourceTree = "<group>"; };
 		FCB3922920FF1E0A00792C0A /* AcceptOffer.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AcceptOffer.storyboard; sourceTree = "<group>"; };
 		FCB3922B20FF1E3100792C0A /* AcceptOfferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptOfferViewController.swift; sourceTree = "<group>"; };
 		FCB3922F21006AB500792C0A /* F4SPlacementInviteDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementInviteDetailTableViewController.swift; sourceTree = "<group>"; };
@@ -1380,34 +1370,6 @@
 			path = CompanyDetail;
 			sourceTree = "<group>";
 		};
-		FC24D24A226B082800FA04A1 /* Apply */ = {
-			isa = PBXGroup;
-			children = (
-				FC9626402248C27D00D5F850 /* ApplyCoordinator.swift */,
-				FC24D24B226B085900FA04A1 /* Build cover letter */,
-			);
-			path = Apply;
-			sourceTree = "<group>";
-		};
-		FC24D24B226B085900FA04A1 /* Build cover letter */ = {
-			isa = PBXGroup;
-			children = (
-				FC24D24E226B09DE00FA04A1 /* Cover letter choices */,
-			);
-			path = "Build cover letter";
-			sourceTree = "<group>";
-		};
-		FC24D24E226B09DE00FA04A1 /* Cover letter choices */ = {
-			isa = PBXGroup;
-			children = (
-				204C895D1DF5F03200D8493A /* ChooseAttributes.storyboard */,
-				204C89771DF5F0B200D8493A /* ChooseAttributesViewController.swift */,
-				204C89761DF5F0B200D8493A /* ChooseAttributesTableViewCell.swift */,
-				FCB3617A224D44610056E0B6 /* ChooseAttributesViewModel.swift */,
-			);
-			path = "Cover letter choices";
-			sourceTree = "<group>";
-		};
 		FC25A05D1F850DAC002F51A9 /* F4SMap models */ = {
 			isa = PBXGroup;
 			children = (
@@ -1426,7 +1388,6 @@
 				FC0B406B226B0F1000D992AC /* Onboarding */,
 				FC1DC06921FE1410009ABC60 /* Main App */,
 				FC24D249226B07E700FA04A1 /* CompanyDetail */,
-				FC24D24A226B082800FA04A1 /* Apply */,
 				FCB3922820FF1C4B00792C0A /* Accept offer Workflow */,
 			);
 			path = "Use Cases";
@@ -2055,7 +2016,6 @@
 				FCC212F0219077C000D8D5B7 /* DocumentCapture.xcassets in Resources */,
 				FC72219F20FE248400F10953 /* Appfile in Resources */,
 				FCCD6AE71FBB42A90088D7C7 /* PopupCompanyList.storyboard in Resources */,
-				204C895F1DF5F03200D8493A /* ChooseAttributes.storyboard in Resources */,
 				FC5D3C6E20FE1CEC00F89169 /* Gemfile in Resources */,
 				206F8F981E1E590A0024937B /* MessageOptionsView.xib in Resources */,
 				FC681C001F57473D0077BECA /* Podfile in Resources */,
@@ -2226,7 +2186,6 @@
 				40C6DDF41E03F445000F8806 /* UserInfoDB.swift in Sources */,
 				FC3CD1DA221566F200F91B50 /* Geocoding.swift in Sources */,
 				40E78E791DD32BE7000A3776 /* DrawerVisualState.swift in Sources */,
-				204C89791DF5F0B200D8493A /* ChooseAttributesViewController.swift in Sources */,
 				FC39F46021AAA618005B0A07 /* MessageViewController.swift in Sources */,
 				FC64A5932119EBE3006464A5 /* CalendarChooserController.swift in Sources */,
 				FCE11E5C2115D26B00403789 /* SwitchTableViewCell.swift in Sources */,
@@ -2278,7 +2237,6 @@
 				2037B0A71DEC3C3B00A9DE3E /* InterestCoreDataManager.swift in Sources */,
 				FC503F1A231D1F97008722FF /* AddVoucherViewModel.swift in Sources */,
 				204C89551DF5A36100D8493A /* TemplateChoiceDB.swift in Sources */,
-				204C89781DF5F0B200D8493A /* ChooseAttributesTableViewCell.swift in Sources */,
 				FC4BB6051FA20F4100173864 /* F4SPartner.swift in Sources */,
 				FCF798542227F5AB00D67A7D /* RecommendationsCoordinator.swift in Sources */,
 				FCA6C829210760E000A222FE /* F4SHoorayViewController.swift in Sources */,
@@ -2306,13 +2264,11 @@
 				FC4DC203229A864D00C59C52 /* DocumentUploadCoordinator.swift in Sources */,
 				206F8F8B1E1E48120024937B /* OptionLabel.swift in Sources */,
 				FC21BE3B220F53EB00A0A389 /* SearchViewStateMachine.swift in Sources */,
-				FCB3617B224D44610056E0B6 /* ChooseAttributesViewModel.swift in Sources */,
 				FC1DC09121FE1509009ABC60 /* PersonCollectionViewCell.swift in Sources */,
 				FC1E6A4D2217474500DC335B /* OnboardingCoordinator.swift in Sources */,
 				FC1DC09821FE1509009ABC60 /* CompanyMainView.swift in Sources */,
 				2037B0AD1DEC560700A9DE3E /* PlacementCoreDataManager.swift in Sources */,
 				2037B0A91DEC3D3400A9DE3E /* InterestDBOperations.swift in Sources */,
-				FC9626412248C27D00D5F850 /* ApplyCoordinator.swift in Sources */,
 				FC1DC09421FE1509009ABC60 /* CompanyDataViewController.swift in Sources */,
 				FC1DC07621FE14D7009ABC60 /* CompanyViewData.swift in Sources */,
 				20FABFEC1DDDA63600D583E2 /* FileHelper.swift in Sources */,
@@ -2447,14 +2403,6 @@
 				204203F41E4B793F007C7409 /* Base */,
 			);
 			name = Favourite.storyboard;
-			sourceTree = "<group>";
-		};
-		204C895D1DF5F03200D8493A /* ChooseAttributes.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				204C895E1DF5F03200D8493A /* Base */,
-			);
-			name = ChooseAttributes.storyboard;
 			sourceTree = "<group>";
 		};
 		206F8F931E1E590A0024937B /* MessageOptionCollectionViewCell.xib */ = {

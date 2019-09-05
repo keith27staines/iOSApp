@@ -34,7 +34,6 @@
 		FC299941231ED0BD00F83FB6 /* EditFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC299940231ED0B400F83FB6 /* EditFooter.xib */; };
 		FC29994A231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC299946231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard */; };
 		FC29994B231ED87600F83FB6 /* F4SDaysAndHours.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC299947231ED87600F83FB6 /* F4SDaysAndHours.storyboard */; };
-		FC29994E231EDC3C00F83FB6 /* WorkfinderApplyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC29994D231EDC3C00F83FB6 /* WorkfinderApplyUseCase.swift */; };
 		FC29994F231EE4F800F83FB6 /* Calendar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC299944231ED35100F83FB6 /* Calendar.xcassets */; };
 		FC299953231EEB4000F83FB6 /* F4SApplicationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC299952231EEB4000F83FB6 /* F4SApplicationContext.swift */; };
 		FC6E3D2D2248D74A00377736 /* WorkfinderApplyUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF102248BDCC00D9B8D1 /* WorkfinderApplyUseCase.framework */; };
@@ -58,6 +57,12 @@
 		FCE8DA842320D35E00934E2F /* Success.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCE8DA832320D35E00934E2F /* Success.xcassets */; };
 		FCE8DA872320D3A700934E2F /* SuccessExtraInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCE8DA862320D39D00934E2F /* SuccessExtraInfo.storyboard */; };
 		FCE8DA892320D3CB00934E2F /* SuccessExtraInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DA882320D3CB00934E2F /* SuccessExtraInfoViewController.swift */; };
+		FCE8DA912320E0A600934E2F /* ChooseAttributes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCE8DA902320E09A00934E2F /* ChooseAttributes.storyboard */; };
+		FCE8DA952320E0C300934E2F /* ChooseAttributesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DA932320E0C200934E2F /* ChooseAttributesTableViewCell.swift */; };
+		FCE8DA962320E0C300934E2F /* ChooseAttributesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DA942320E0C200934E2F /* ChooseAttributesViewController.swift */; };
+		FCE8DA972320E0C300934E2F /* ChooseAttributesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DA922320E0C200934E2F /* ChooseAttributesViewModel.swift */; };
+		FCE8DA9A2320E24600934E2F /* ApplyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DA992320E24600934E2F /* ApplyCoordinator.swift */; };
+		FCE8DA9C2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE8DA9B2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework */; };
 		FCF5AF212248BDCC00D9B8D1 /* WorkfinderApplyUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = FCF5AF132248BDCC00D9B8D1 /* WorkfinderApplyUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCFBD02E2250DE3600A9361D /* F4STemplateModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFBD02D2250DE3600A9361D /* F4STemplateModelTests.swift */; };
 /* End PBXBuildFile section */
@@ -97,7 +102,6 @@
 		FC299944231ED35100F83FB6 /* Calendar.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Calendar.xcassets; sourceTree = "<group>"; };
 		FC299946231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SDisplayInformationViewController.storyboard; sourceTree = "<group>"; };
 		FC299948231ED87600F83FB6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/F4SDaysAndHours.storyboard; sourceTree = "<group>"; };
-		FC29994D231EDC3C00F83FB6 /* WorkfinderApplyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderApplyUseCase.swift; sourceTree = "<group>"; };
 		FC299952231EEB4000F83FB6 /* F4SApplicationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SApplicationContext.swift; sourceTree = "<group>"; };
 		FC6E3D282248D74A00377736 /* WorkfinderApplyUseCaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderApplyUseCaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC6E3D2C2248D74A00377736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -123,6 +127,12 @@
 		FCE8DA832320D35E00934E2F /* Success.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Success.xcassets; sourceTree = "<group>"; };
 		FCE8DA852320D39D00934E2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SuccessExtraInfo.storyboard; sourceTree = "<group>"; };
 		FCE8DA882320D3CB00934E2F /* SuccessExtraInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessExtraInfoViewController.swift; sourceTree = "<group>"; };
+		FCE8DA8F2320E09A00934E2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "f4s-workexperience/Base.lproj/ChooseAttributes.storyboard"; sourceTree = "<group>"; };
+		FCE8DA922320E0C200934E2F /* ChooseAttributesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseAttributesViewModel.swift; sourceTree = "<group>"; };
+		FCE8DA932320E0C200934E2F /* ChooseAttributesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseAttributesTableViewCell.swift; sourceTree = "<group>"; };
+		FCE8DA942320E0C200934E2F /* ChooseAttributesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseAttributesViewController.swift; sourceTree = "<group>"; };
+		FCE8DA992320E24600934E2F /* ApplyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyCoordinator.swift; sourceTree = "<group>"; };
+		FCE8DA9B2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUserDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF5AF102248BDCC00D9B8D1 /* WorkfinderApplyUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderApplyUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF5AF132248BDCC00D9B8D1 /* WorkfinderApplyUseCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderApplyUseCase.h; sourceTree = "<group>"; };
 		FCF5AF142248BDCC00D9B8D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -144,6 +154,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCE8DA9C2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework in Frameworks */,
 				FC22DBFB22F97F330068C61C /* WorkfinderUI.framework in Frameworks */,
 				FC85D9F222F205610035C724 /* WorkfinderAppLogic.framework in Frameworks */,
 				FC85D9F022F204140035C724 /* WorkfinderServices.framework in Frameworks */,
@@ -267,10 +278,11 @@
 		FC9626222248C07800D5F850 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				FC29994D231EDC3C00F83FB6 /* WorkfinderApplyUseCase.swift */,
+				FCE8DA992320E24600934E2F /* ApplyCoordinator.swift */,
 				FC299952231EEB4000F83FB6 /* F4SApplicationContext.swift */,
 				FC299947231ED87600F83FB6 /* F4SDaysAndHours.storyboard */,
 				FC299946231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard */,
+				FCE8DA982320E11100934E2F /* Letter choices */,
 				FCE8DA8A2320D42600934E2F /* Success screen */,
 				FC299945231ED87600F83FB6 /* F4SDaysAndHours */,
 				FC29991D231EC18300F83FB6 /* Edit cover letter */,
@@ -285,6 +297,7 @@
 		FC96263D2248C20E00D5F850 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCE8DA9B2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework */,
 				FC22DBFA22F97F330068C61C /* WorkfinderUI.framework */,
 				FC85D9F122F205610035C724 /* WorkfinderAppLogic.framework */,
 				FC85D9EF22F204140035C724 /* WorkfinderServices.framework */,
@@ -301,6 +314,17 @@
 				FCE8DA882320D3CB00934E2F /* SuccessExtraInfoViewController.swift */,
 			);
 			path = "Success screen";
+			sourceTree = "<group>";
+		};
+		FCE8DA982320E11100934E2F /* Letter choices */ = {
+			isa = PBXGroup;
+			children = (
+				FCE8DA902320E09A00934E2F /* ChooseAttributes.storyboard */,
+				FCE8DA942320E0C200934E2F /* ChooseAttributesViewController.swift */,
+				FCE8DA932320E0C200934E2F /* ChooseAttributesTableViewCell.swift */,
+				FCE8DA922320E0C200934E2F /* ChooseAttributesViewModel.swift */,
+			);
+			path = "Letter choices";
 			sourceTree = "<group>";
 		};
 		FCF4FACE22646502000EE4B7 /* Models */ = {
@@ -451,6 +475,7 @@
 				FC29994B231ED87600F83FB6 /* F4SDaysAndHours.storyboard in Resources */,
 				FC29994F231EE4F800F83FB6 /* Calendar.xcassets in Resources */,
 				FC9865B6229D380A006D3E63 /* README in Resources */,
+				FCE8DA912320E0A600934E2F /* ChooseAttributes.storyboard in Resources */,
 				FCE8DA872320D3A700934E2F /* SuccessExtraInfo.storyboard in Resources */,
 				FC29991B231EBFCD00F83FB6 /* EditCoverLetter.storyboard in Resources */,
 				FCE8DA842320D35E00934E2F /* Success.xcassets in Resources */,
@@ -499,15 +524,18 @@
 				FC9626392248C1A900D5F850 /* EditApplicationLetterButton.swift in Sources */,
 				FC29992B231EC41A00F83FB6 /* F4SDaysAndHoursViewController.swift in Sources */,
 				FC96263A2248C1A900D5F850 /* ApplicationLetterViewControllerMainView.swift in Sources */,
-				FC29994E231EDC3C00F83FB6 /* WorkfinderApplyUseCase.swift in Sources */,
 				FC299934231EC50300F83FB6 /* F4SCalendarContainerViewController.swift in Sources */,
+				FCE8DA952320E0C300934E2F /* ChooseAttributesTableViewCell.swift in Sources */,
 				FCE51923224940F300B550C9 /* F4SGrammar.swift in Sources */,
 				FC299922231EC1E200F83FB6 /* EditFooterView.swift in Sources */,
 				FC299921231EC1E200F83FB6 /* EditCoverLetterViewController.swift in Sources */,
+				FCE8DA962320E0C300934E2F /* ChooseAttributesViewController.swift in Sources */,
 				FC299935231EC50300F83FB6 /* F4SMonthHeaderView.swift in Sources */,
 				FC299936231EC50300F83FB6 /* F4SCalendarColors.swift in Sources */,
+				FCE8DA9A2320E24600934E2F /* ApplyCoordinator.swift in Sources */,
 				FC299937231EC50300F83FB6 /* F4SCalendarCollectionViewController.swift in Sources */,
 				FC7A4398224A497800B2D693 /* ApplicationLetterTemplateBlanksCleanser.swift in Sources */,
+				FCE8DA972320E0C300934E2F /* ChooseAttributesViewModel.swift in Sources */,
 				FCE8DA892320D3CB00934E2F /* SuccessExtraInfoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -545,6 +573,14 @@
 				FCE8DA852320D39D00934E2F /* Base */,
 			);
 			name = SuccessExtraInfo.storyboard;
+			sourceTree = "<group>";
+		};
+		FCE8DA902320E09A00934E2F /* ChooseAttributes.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FCE8DA8F2320E09A00934E2F /* Base */,
+			);
+			name = ChooseAttributes.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

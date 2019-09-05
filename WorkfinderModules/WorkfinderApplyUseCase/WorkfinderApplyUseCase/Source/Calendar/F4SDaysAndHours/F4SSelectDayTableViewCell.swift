@@ -23,11 +23,11 @@ public class F4SSelectDayTableViewCell: UITableViewCell {
     lazy var selectedColor = skin?.primaryButtonSkin.backgroundColor.uiColor ?? UIColor.red
     
     lazy var selectedTick: UIImage = {
-        return UIImage(named: "ui-tickcircleOn-icon", in: bundle, compatibleWith: nil)!.withRenderingMode(.alwaysTemplate)
+        return UIImage(named: "ui-tickcircleOn-icon", in: __bundle, compatibleWith: nil)!.withRenderingMode(.alwaysTemplate)
     }()
     
     lazy var deselectedImage: UIImage = {
-        return UIImage(named: "ui-tickcircleOff-icon", in: bundle, compatibleWith: nil)!
+        return UIImage(named: "ui-tickcircleOff-icon", in: __bundle, compatibleWith: nil)!
     }()
     
     public var dayHourSelection: F4SDayAndHourSelection! {

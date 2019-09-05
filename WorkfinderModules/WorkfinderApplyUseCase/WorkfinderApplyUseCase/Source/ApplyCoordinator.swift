@@ -5,18 +5,17 @@ import WorkfinderAppLogic
 import WorkfinderUI
 import WorkfinderCoordinators
 import WorkfinderUserDetailsUseCase
-import WorkfinderApplyUseCase
 
-let applyBundle = Bundle(identifier: "com.f4s.WorkfinderApplyUseCase")
+let __bundle = Bundle(identifier: "com.f4s.WorkfinderApplyUseCase")!
 
-protocol ApplyCoordinatorDelegate : class {
+public protocol ApplyCoordinatorDelegate : class {
     func applicationDidFinish(preferredDestination: ApplyCoordinator.PreferredDestinationAfterApplication)
     func applicationDidCancel()
 }
 
-class ApplyCoordinator : CoreInjectionNavigationCoordinator {
+public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     
-    enum PreferredDestinationAfterApplication {
+    public enum PreferredDestinationAfterApplication {
         case messages
         case search
         case none
@@ -61,7 +60,7 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
-    override func start() {
+    override public func start() {
         super.start()
         showApplicationLetterViewController()
     }
@@ -80,7 +79,8 @@ class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     }
     
     func showApplicationLetterEditor() {
-        let editor = WorkfinderApplyUseCase().instantiateViewController(type: .editCoverLetter) as! EditCoverLetterViewController
+        let coverLetterStoryboard = UIStoryboard(name: "EditCoverLetter", bundle: bundle)
+        let editor = coverLetterStoryboard.instantiateViewController(withIdentifier: "EditCoverLetterCtrl") as! EditCoverLetterViewController
         editor.coordinator = self
         editor.blanksModel = applicationModel.blanksModel
         editor.availabilityPeriodJson = applicationModel.availabilityPeriodJson

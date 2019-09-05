@@ -60,7 +60,7 @@ class F4SDaysAndHoursViewController: UIViewController {
     var maskView: UIView?
     
     lazy var infoController: F4SDisplayInformationViewController = {
-        let storyboard = UIStoryboard(name: "F4SDisplayInformationViewController", bundle: bundle)
+        let storyboard = UIStoryboard(name: "F4SDisplayInformationViewController", bundle: __bundle)
         let vc = storyboard.instantiateInitialViewController() as! F4SDisplayInformationViewController
         vc.helpContext = F4SHelpContext.daysAndHoursViewController
         vc.delegate = self

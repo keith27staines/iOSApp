@@ -4,12 +4,12 @@ import WorkfinderCommon
 import WorkfinderApplyUseCase
 import WorkfinderUI
 
-protocol ChooseAttributesViewControllerCoordinatorProtocol : class {
+public protocol ChooseAttributesViewControllerCoordinatorProtocol : class {
     func chooseAttributesViewControllerDidFinish()
     func chooseAttributesViewControllerDidCancel()
 }
 
-class ChooseAttributesViewController: UIViewController {
+public class ChooseAttributesViewController: UIViewController {
     
     weak var coordinator: ChooseAttributesViewControllerCoordinatorProtocol?
     
@@ -22,7 +22,7 @@ class ChooseAttributesViewController: UIViewController {
         }
     }
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         setupAppereance()
         updateFromViewModel()
@@ -57,21 +57,21 @@ extension ChooseAttributesViewController {
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
 extension ChooseAttributesViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in _: UITableView) -> Int {
+    public func numberOfSections(in _: UITableView) -> Int {
         return viewModel.numberOfSections()
     }
 
-    func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRowsInSection(section)
     }
 
-    func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = attributesTableView.dequeueReusableCell(withIdentifier: chooseAttributesCellIdentifier) as! ChooseAttributesTableViewCell
         viewModel.configure(cell: cell, atIndexPath: indexPath)
         return cell
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         _ = viewModel.didSelectIndexPath(indexPath)
         tableView.reloadData()

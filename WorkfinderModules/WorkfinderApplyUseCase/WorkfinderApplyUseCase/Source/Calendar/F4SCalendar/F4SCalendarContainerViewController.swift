@@ -8,7 +8,7 @@ class F4SCalendarContainerViewController: UIViewController {
     var maskView: UIView?
     
     lazy var infoController: F4SDisplayInformationViewController = {
-        let storyboard = UIStoryboard(name: "F4SDisplayInformationViewController", bundle: bundle)
+        let storyboard = UIStoryboard(name: "F4SDisplayInformationViewController", bundle: __bundle)
         let vc = storyboard.instantiateInitialViewController() as! F4SDisplayInformationViewController
         vc.delegate = self
         vc.helpContext = F4SHelpContext.calendarController

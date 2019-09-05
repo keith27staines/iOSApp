@@ -8,7 +8,6 @@
 
 import Foundation
 import WorkfinderCommon
-import WorkfinderApplyUseCase
 
 public class ChooseAttributesViewModel : NSObject {
     
