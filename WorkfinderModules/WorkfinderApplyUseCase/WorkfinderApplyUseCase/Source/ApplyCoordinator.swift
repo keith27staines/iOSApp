@@ -89,7 +89,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     }
     
     func showChooseValuesForBlank(name: TemplateBlankName, inTemplate template: F4STemplate) {
-        let storyboard = UIStoryboard(name: "ChooseAttributes", bundle: nil)
+        let storyboard = UIStoryboard(name: "ChooseAttributes", bundle: __bundle)
         let vc = storyboard.instantiateViewController(withIdentifier: "ChooseAttributesCtrl") as! ChooseAttributesViewController
         let model = applicationModel.applicationLetterModel.blanksModel
         let viewModel = ChooseAttributesViewModel(model: model, chooseValuesFor: name)

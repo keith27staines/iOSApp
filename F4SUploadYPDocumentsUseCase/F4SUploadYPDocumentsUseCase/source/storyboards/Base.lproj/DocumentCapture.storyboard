@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VZL-kF-FTn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VZL-kF-FTn">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +13,7 @@
         <!--Add document-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="F4SDCAddDocumentViewController" id="BYZ-38-t0r" customClass="F4SDCAddDocumentViewController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="F4SDCAddDocumentViewController" id="BYZ-38-t0r" customClass="F4SDCAddDocumentViewController" customModule="WorkfinderUploadYPDocumentsUseCase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -149,7 +149,7 @@
         <!--URL-->
         <scene sceneID="FWO-QV-KrP">
             <objects>
-                <viewController id="WlS-hd-tft" customClass="F4SAddUrlViewController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="WlS-hd-tft" customClass="F4SAddUrlViewController" customModule="WorkfinderUploadYPDocumentsUseCase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="i2v-gM-75W">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -211,7 +211,7 @@
         <!--Add documents-->
         <scene sceneID="Y5M-u4-Kaj">
             <objects>
-                <viewController id="VZL-kF-FTn" customClass="F4SAddDocumentsViewController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="VZL-kF-FTn" customClass="F4SAddDocumentsViewController" customModule="WorkfinderUploadYPDocumentsUseCase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Zb1-T0-o4i">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -338,7 +338,7 @@
         <!--Document viewer-->
         <scene sceneID="RoQ-lx-Rbh">
             <objects>
-                <viewController storyboardIdentifier="F4SDCDocumentViewerController" id="Kmj-n9-hXG" customClass="F4SDCDocumentViewerController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="F4SDCDocumentViewerController" id="Kmj-n9-hXG" customClass="F4SDCDocumentViewerController" customModule="WorkfinderUploadYPDocumentsUseCase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wqw-p8-kbY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -369,7 +369,7 @@
         <!--Document Type View Controller-->
         <scene sceneID="Xfm-mT-ECn">
             <objects>
-                <viewController id="aye-C9-Pn9" customClass="F4SDCDocumentTypeViewController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="aye-C9-Pn9" customClass="F4SDCDocumentTypeViewController" customModule="WorkfinderUploadYPDocumentsUseCase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4VT-A3-Fbo">
                         <rect key="frame" x="0.0" y="0.0" width="355" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -413,7 +413,7 @@
                                 <rect key="frame" x="0.0" y="58" width="355" height="342"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="wHA-oh-D9Z" style="IBUITableViewCellStyleDefault" id="kmW-tu-lXl">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="wHA-oh-D9Z" style="IBUITableViewCellStyleDefault" id="kmW-tu-lXl">
                                         <rect key="frame" x="0.0" y="28" width="355" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kmW-tu-lXl" id="Z7m-qz-t2V">
@@ -464,7 +464,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="downDisclosureTriangle" width="512" height="512"/>
+        <image name="downDisclosureTriangle" width="256" height="256"/>
         <image name="ui-amberdoc-circle" width="80" height="80"/>
         <image name="ui-photoplus-icon" width="70" height="70"/>
     </resources>

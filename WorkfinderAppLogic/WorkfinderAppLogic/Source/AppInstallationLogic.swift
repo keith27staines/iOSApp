@@ -75,11 +75,28 @@ public class AppInstallationUuidLogic {
         return verifiedEmail.isEmpty == false
     }
     
+    var registerService = F4SDeviceRegistrationService()
     private func registerDevice(completion: @escaping (F4SNetworkResult<F4SRegisterDeviceResult>)->()) {
         let newInstallationUuid = makeNewInstallationUuid()
-        let registerService = F4SDeviceRegistrationService()
         let anonymousUser = F4SAnonymousUser(vendorUuid: newInstallationUuid, clientType: "ios", apnsEnvironment: apnsEnvironment)
-        registerService.registerDevice(anonymousUser: anonymousUser, completion: completion)
+        registerService.registerDevice(anonymousUser: anonymousUser) { [weak self] (networkResult) in
+            DispatchQueue.main.async { [weak self] in
+                guard let strongSelf = self else { return }
+                switch networkResult {
+                case .error(_):
+                    completion(networkResult)
+                case .success(let registerDeviceResult):
+                    if let _ = registerDeviceResult.uuid {
+                        strongSelf.onDeviceWasRegisteredOnServer(
+                            withInstallationUuid: newInstallationUuid,
+                            networkResult: networkResult,
+                            completion: completion)
+                    } else {
+                        completion(networkResult)
+                    }
+                }
+            }
+        }
     }
     
     func onDeviceWasRegisteredOnServer(

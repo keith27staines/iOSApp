@@ -10,6 +10,7 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderCoordinators
 import WorkfinderAcceptUseCase
+import WorkfinderUploadYPDocumentsUseCase
 
 class TimelineCoordinator : CoreInjectionNavigationCoordinator {
     
@@ -65,10 +66,12 @@ class TimelineCoordinator : CoreInjectionNavigationCoordinator {
     
     func showAddDocuments(placement: F4STimelinePlacement?, company: Company?, action: F4SAction) {
         guard
-            let placement = placement, let company = company,
+            let placement = placement,
+            let placementUuid = placement.placementUuid,
+            let company = company,
             let requestModel = F4SBusinessLeadersRequestModel(action: action, placement: placement, company: company) else { return }
-        let mode = F4SAddDocumentsViewController.Mode.businessLeaderRequest(requestModel)
-        let coordinator = DocumentUploadCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, mode: mode, applicationContext: nil)
+        let mode = UploadScenario.businessLeaderRequest(requestModel)
+        let coordinator = DocumentUploadCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, mode: mode, placementUuid: placementUuid)
         coordinator.didFinish = { [weak self] _ in
             guard let strongSelf = self else { return }
             strongSelf.navigationRouter.popToViewController(strongSelf.rootViewController, animated: true)

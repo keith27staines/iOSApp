@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC7C21932321575A00721D1D /* DocumentCapture.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC7C21922321477700721D1D /* DocumentCapture.xcassets */; };
 		FCE8DABD2320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE8DAB32320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCase.framework */; };
 		FCE8DAC22320F13D00934E2F /* F4SUploadYPDocumentsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAC12320F13D00934E2F /* F4SUploadYPDocumentsUseCaseTests.swift */; };
 		FCE8DAC42320F13D00934E2F /* F4SUploadYPDocumentsUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = FCE8DAB62320F13D00934E2F /* F4SUploadYPDocumentsUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -54,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FC7C21922321477700721D1D /* DocumentCapture.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = DocumentCapture.xcassets; sourceTree = "<group>"; };
 		FCE8DAB32320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderUploadYPDocumentsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCE8DAB62320F13D00934E2F /* F4SUploadYPDocumentsUseCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = F4SUploadYPDocumentsUseCase.h; sourceTree = "<group>"; };
 		FCE8DAB72320F13D00934E2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 		FCE8DAB52320F13D00934E2F /* F4SUploadYPDocumentsUseCase */ = {
 			isa = PBXGroup;
 			children = (
+				FC7C21922321477700721D1D /* DocumentCapture.xcassets */,
 				FCE8DACD2320F18E00934E2F /* source */,
 				FCE8DAB62320F13D00934E2F /* F4SUploadYPDocumentsUseCase.h */,
 				FCE8DAB72320F13D00934E2F /* Info.plist */,
@@ -160,9 +163,9 @@
 			children = (
 				FCE8DADF2320F54100934E2F /* DocumentUploadCoordinator.swift */,
 				FCE8DB112320FAA400934E2F /* F4SDocumentUploader.swift */,
+				FCE8DAD12320F2EC00934E2F /* storyboards */,
 				FCE8DAD92320F3CD00934E2F /* view controllers */,
 				FCE8DAD82320F3A400934E2F /* models */,
-				FCE8DAD12320F2EC00934E2F /* storyboards */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -192,9 +195,9 @@
 			isa = PBXGroup;
 			children = (
 				FCE8DAEC2320F68300934E2F /* F4SDCDocumentTypeViewController.swift */,
+				FCE8DADA2320F3EB00934E2F /* add documents */,
 				FCE8DB002320F7C800934E2F /* Document viewer */,
 				FCE8DAEB2320F66B00934E2F /* document sources */,
-				FCE8DADA2320F3EB00934E2F /* add documents */,
 			);
 			path = "view controllers";
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				FCE8DB032320F96600934E2F /* DocumentCapture.storyboard in Resources */,
 				FCE8DB042320F97100934E2F /* F4SCameraCapture.storyboard in Resources */,
 				FCE8DACF2320F24800934E2F /* Camera.storyboard in Resources */,
+				FC7C21932321575A00721D1D /* DocumentCapture.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

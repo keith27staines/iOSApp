@@ -553,7 +553,7 @@
 		FCB49307222A875300B88B8B /* TimelineCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineCoordinator.swift; sourceTree = "<group>"; };
 		FCB49309222A879000B88B8B /* FavouritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesCoordinator.swift; sourceTree = "<group>"; };
 		FCB6D9351F75056000B8C268 /* Branding.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
-		FCC212D2219077C000D8D5B7 /* DocumentCapture.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = DocumentCapture.xcassets; sourceTree = "<group>"; };
+		FCC212D2219077C000D8D5B7 /* DocumentCapture.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = DocumentCapture.xcassets; path = ../F4SUploadYPDocumentsUseCase/F4SUploadYPDocumentsUseCase/DocumentCapture.xcassets; sourceTree = "<group>"; };
 		FCC5EBB51F449C310085CE15 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FCC753ED1F80F26200E9ECD6 /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
 		FCC85B2220EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDatabaseDownloadManagerTests.swift; sourceTree = "<group>"; };
