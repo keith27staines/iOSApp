@@ -5,6 +5,7 @@ import WorkfinderAppLogic
 import WorkfinderUI
 import WorkfinderCoordinators
 import WorkfinderUserDetailsUseCase
+import WorkfinderUploadYPDocumentsUseCase
 
 let __bundle = Bundle(identifier: "com.f4s.WorkfinderApplyUseCase")!
 
@@ -21,7 +22,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         case none
     }
     
-    var placementUuid: F4SUUID
+    var applicationContext: F4SApplicationContext
     var createPlacementJson: F4SCreatePlacementJson?
     var placementService: F4SPlacementApplicationServiceProtocol
     var templateService: F4STemplateServiceProtocol
@@ -41,7 +42,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         return ApplicationModel(userUuid: userUuid, installationUuid: installationUuid, userInterests: userInterests, placement: placement, placementRepository: placementRepository, companyViewData: companyViewData, placementService: placementService, templateService: templateService)
     }()
     
-    init(applyCoordinatorDelegate: ApplyCoordinatorDelegate? = nil,
+    public init(applyCoordinatorDelegate: ApplyCoordinatorDelegate? = nil,
          company: Company,
          parent: CoreInjectionNavigationCoordinator?,
          navigationRouter: NavigationRoutingProtocol,
@@ -186,7 +187,8 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
     }
     
     func showAddDocuments() {
-        let coordinator = DocumentUploadCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, mode: F4SAddDocumentsViewController.Mode.applyWorkflow, applicationContext: applicationContext)
+        let placementuuid = applicationContext.placement!.placementUuid!
+        let coordinator = DocumentUploadCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, mode: .applyWorkflow, placementUuid: placementuuid)
         coordinator.didFinish = { [weak self] coordinator in
             guard let strongSelf = self else { return }
             strongSelf.navigationRouter.pop(animated: false)

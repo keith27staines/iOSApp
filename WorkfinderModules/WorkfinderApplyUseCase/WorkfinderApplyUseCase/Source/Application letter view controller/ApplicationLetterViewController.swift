@@ -36,7 +36,7 @@ class ApplicationLetterViewController : UIViewController {
         return UserMessageHandler()
     }()
     
-    public var isActivityIndicatorVisible: Bool {
+    var isActivityIndicatorVisible: Bool {
         didSet {
             if isActivityIndicatorVisible {
                 userMessageHandler.showLightLoadingOverlay(view)
@@ -64,7 +64,7 @@ class ApplicationLetterViewController : UIViewController {
         viewModel.coordinator = coordinator
     }
     
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         applySkin()
         configureNavigationBar()
         setTargetsForButtons()
@@ -72,11 +72,11 @@ class ApplicationLetterViewController : UIViewController {
         viewModel.onViewDidLoad()
     }
     
-    public override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         configureNavigationBar()
     }
     
-    public func updateFromViewModel() {
+    func updateFromViewModel() {
         textView.attributedText = viewModel.attributedText
         applyButton.isEnabled = viewModel.applyButtonIsEnabled
         editButton.configureForLetterIsCompleteState(viewModel.applyButtonIsEnabled)
@@ -104,7 +104,7 @@ class ApplicationLetterViewController : UIViewController {
         skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: applyButton)
     }
     
-    public override func loadView() {
+    override func loadView() {
         view = ApplicationLetterViewControllerMainView()
     }
     
@@ -130,7 +130,7 @@ class ApplicationLetterViewController : UIViewController {
 
 extension ApplicationLetterViewController : ApplicationLetterViewProtocol {
     
-    public func showErrorWithCancelAndRetry(_ error: Error, retry: @escaping () -> Void, cancel: @escaping () -> Void) {
+    func showErrorWithCancelAndRetry(_ error: Error, retry: @escaping () -> Void, cancel: @escaping () -> Void) {
         
         if let networkError = error as? F4SNetworkError {
             userMessageHandler.display(networkError, parentCtrl: self, cancelHandler: cancel, retryHandler: retry)

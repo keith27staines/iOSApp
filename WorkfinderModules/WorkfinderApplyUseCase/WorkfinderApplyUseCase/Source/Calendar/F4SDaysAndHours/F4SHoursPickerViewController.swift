@@ -10,12 +10,12 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 
-public protocol F4SHoursPickerDelegate {
+protocol F4SHoursPickerDelegate {
     func hoursPicker(_ picker: F4SHoursPickerViewController, hoursType: F4SHoursType)
     
 }
 
-public class F4SHoursPickerViewController: UIViewController {
+class F4SHoursPickerViewController: UIViewController {
     
     @IBOutlet weak var amButton: UIButton!
     @IBOutlet weak var pmButton: UIButton!
@@ -23,7 +23,7 @@ public class F4SHoursPickerViewController: UIViewController {
     
     var delegate: F4SHoursPickerDelegate? = nil
     
-    public override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         styleButton(button: amButton)
         styleButton(button: pmButton)
         styleButton(button: ampmButton)
@@ -41,7 +41,7 @@ public class F4SHoursPickerViewController: UIViewController {
     }
     
     
-    public var selectedHoursType: F4SHoursType = .all {
+    var selectedHoursType: F4SHoursType = .all {
         didSet {
             amButton.isSelected = false
             pmButton.isSelected = false

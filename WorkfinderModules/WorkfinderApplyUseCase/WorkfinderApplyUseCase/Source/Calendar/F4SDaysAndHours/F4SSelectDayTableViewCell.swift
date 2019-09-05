@@ -9,11 +9,11 @@
 import UIKit
 import WorkfinderCommon
 
-public protocol F4SSelectDayTableViewCellDelegate {
+protocol F4SSelectDayTableViewCellDelegate {
     func selectionButtonWasTapped(_ cell: F4SSelectDayTableViewCell)
 }
 
-public class F4SSelectDayTableViewCell: UITableViewCell {
+class F4SSelectDayTableViewCell: UITableViewCell {
 
     @IBOutlet weak var tickImage: UIImageView!
     
@@ -30,7 +30,7 @@ public class F4SSelectDayTableViewCell: UITableViewCell {
         return UIImage(named: "ui-tickcircleOff-icon", in: __bundle, compatibleWith: nil)!
     }()
     
-    public var dayHourSelection: F4SDayAndHourSelection! {
+    var dayHourSelection: F4SDayAndHourSelection! {
         didSet {
             dayNameLabel.text = dayHourSelection.dayOfWeek.longSymbol
             
@@ -55,22 +55,22 @@ public class F4SSelectDayTableViewCell: UITableViewCell {
     @IBOutlet weak var hoursDropdownLabel: UILabel!
     
     
-    public override func awakeFromNib() {
+    override func awakeFromNib() {
         super.awakeFromNib()
         commonInitialization()
     }
     
-    public func commonInitialization() {
+    func commonInitialization() {
         tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapSelectionTick))
         tickImage.isUserInteractionEnabled = true
         tickImage.addGestureRecognizer(tapRecognizer)
     }
 
-    public override func setSelected(_ selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    public func enable(_ enable: Bool) {
+    func enable(_ enable: Bool) {
         if enable {
             dayNameLabel.textColor = UIColor.black
             hoursDropdownLabel.textColor = UIColor.black

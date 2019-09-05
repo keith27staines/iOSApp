@@ -4,6 +4,8 @@ import WorkfinderUI
 
 class F4SAddDocumentsViewController: UIViewController {
     let consentPreviouslyGivenKey = "consentPreviouslyGivenKey"
+    let bigPlusButtonHeightConstraintConstant = CGFloat(60.0)
+    
     @IBOutlet weak var addButtonHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var addDocumentButton: UIButton!
     @IBOutlet weak var headingLabel: UILabel!
@@ -20,7 +22,7 @@ class F4SAddDocumentsViewController: UIViewController {
     weak var coordinator: DocumentUploadCoordinator?
     
     lazy var documentModel: F4SDocumentUploadModelBase = {
-        switch mode {
+        switch uploadScenario {
         case .applyWorkflow:
             return F4SDocumentUploadWhileApplyingModel(delegate: self, placementUuid: placementUuid)
         case .businessLeaderRequest(let requestModel):
@@ -41,52 +43,18 @@ class F4SAddDocumentsViewController: UIViewController {
         return popup
     }()
     
-    enum Mode {
-        case applyWorkflow
-        case businessLeaderRequest(F4SBusinessLeadersRequestModel)
-        
-        var headingText: String {
-            switch self {
-            case .applyWorkflow:
-                return "Stand out from the crowd!"
-            case .businessLeaderRequest:
-                return "Add requested information"
-            }
-        }
-        
-        var subheadingText: String {
-            switch self {
-            case .applyWorkflow:
-                return "Add your CV or any supporting document to make it easier for companies to choose you"
-            case .businessLeaderRequest(let requestModel):
-                return "Add the documents requested by \(requestModel.companyName) in their recent message to you"
-            }
-        }
-        
-        var bigPlusButtonIsHidden: Bool {
-            switch self {
-            case .applyWorkflow:
-                return false
-            case .businessLeaderRequest:
-                return true
-            }
-        }
-        
-        var bigPlusButtonHeightConstraintConstant: CGFloat { return 60.0 }
-    }
-    
-    var mode: Mode = .applyWorkflow {
+    var uploadScenario: UploadScenario = .applyWorkflow {
         didSet {
             _ = view
-            headingLabel.text = mode.headingText
-            subheadingLabel.text = mode.subheadingText
-            addDocumentButton.isHidden = mode.bigPlusButtonIsHidden
-            addButtonHeightConstraint.constant = mode.bigPlusButtonHeightConstraintConstant
+            headingLabel.text = uploadScenario.headingText
+            subheadingLabel.text = uploadScenario.subheadingText
+            addDocumentButton.isHidden = uploadScenario.bigPlusButtonIsHidden
+            addButtonHeightConstraint.constant = bigPlusButtonHeightConstraintConstant
         }
     }
     
     var showCancel: Bool {
-        switch mode {
+        switch uploadScenario {
         case .applyWorkflow: return false
         case .businessLeaderRequest(_): return true
         }
@@ -117,7 +85,7 @@ class F4SAddDocumentsViewController: UIViewController {
     }
     
     @IBAction func performPrimaryAction(_ sender: Any) {
-        switch mode {
+        switch uploadScenario {
         case .applyWorkflow:
             performPrimaryActionForApplyMode()
         case .businessLeaderRequest:
@@ -126,7 +94,7 @@ class F4SAddDocumentsViewController: UIViewController {
     }
     
     func modeSpecificLoad() {
-        switch mode {
+        switch uploadScenario {
         case .applyWorkflow:
             sharedUserMessageHandler.showLoadingOverlay(self.view)
             documentModel.fetchDocumentsForPlacement()
@@ -217,7 +185,7 @@ extension F4SAddDocumentsViewController : F4SDocumentUploadModelDelegate {
     
     fileprivate func updateEnabledStateOfAddButton(_ model: F4SDocumentUploadModelBase) {
         addDocumentButton.isEnabled = model.canAddPlaceholder()
-        switch mode {
+        switch uploadScenario {
         case .applyWorkflow:
             primaryActionButton.isEnabled = true
             if model.numberOfRows(for: 0) == 0 {
@@ -260,7 +228,7 @@ extension F4SAddDocumentsViewController : UITableViewDataSource, UITableViewDele
         let addImage = UIImage(named: "ui-photoplus-icon")
         let accessoryImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         accessoryImageView.contentMode = .scaleAspectFit
-        switch mode {
+        switch uploadScenario {
         case .applyWorkflow:
             cell.textLabel?.text = document.defaultName
             accessoryImageView.image = shouldDisplayMenuForDocument(document) ? dotImage : nil
@@ -307,7 +275,7 @@ extension F4SAddDocumentsViewController : F4SDCPopupMenuViewDelegate {
             let alert = UIAlertController(title: "Delete Document", message: "Are you sure you want to delete this document?", preferredStyle: .actionSheet)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [unowned self] (_) in
-                switch self.mode {
+                switch self.uploadScenario {
                 case .applyWorkflow:
                     self.documentModel.deleteDocument(indexPath: cellIndexPath)
                     self.tableView.deleteRows(at: [cellIndexPath], with: .automatic)

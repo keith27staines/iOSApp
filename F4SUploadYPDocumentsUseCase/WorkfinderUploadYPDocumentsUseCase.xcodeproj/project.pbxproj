@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FCE8DABD2320F13D00934E2F /* F4SUploadYPDocumentsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE8DAB32320F13D00934E2F /* F4SUploadYPDocumentsUseCase.framework */; };
+		FCE8DABD2320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE8DAB32320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCase.framework */; };
 		FCE8DAC22320F13D00934E2F /* F4SUploadYPDocumentsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAC12320F13D00934E2F /* F4SUploadYPDocumentsUseCaseTests.swift */; };
 		FCE8DAC42320F13D00934E2F /* F4SUploadYPDocumentsUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = FCE8DAB62320F13D00934E2F /* F4SUploadYPDocumentsUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCE8DACF2320F24800934E2F /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCE8DACE2320F24800934E2F /* Camera.storyboard */; };
@@ -40,6 +40,7 @@
 		FCE8DB0F2320FA1800934E2F /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE8DB0E2320FA1800934E2F /* WorkfinderUI.framework */; };
 		FCE8DB122320FAA400934E2F /* F4SDocumentUploadWhileApplyingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DB102320FAA400934E2F /* F4SDocumentUploadWhileApplyingModel.swift */; };
 		FCE8DB132320FAA400934E2F /* F4SDocumentUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DB112320FAA400934E2F /* F4SDocumentUploader.swift */; };
+		FCE8DB1B23210FF600934E2F /* UploadScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DB1A23210FF600934E2F /* UploadScenario.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,10 +54,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		FCE8DAB32320F13D00934E2F /* F4SUploadYPDocumentsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = F4SUploadYPDocumentsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCE8DAB32320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderUploadYPDocumentsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCE8DAB62320F13D00934E2F /* F4SUploadYPDocumentsUseCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = F4SUploadYPDocumentsUseCase.h; sourceTree = "<group>"; };
 		FCE8DAB72320F13D00934E2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FCE8DABC2320F13D00934E2F /* F4SUploadYPDocumentsUseCaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = F4SUploadYPDocumentsUseCaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCE8DABC2320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderUploadYPDocumentsUseCaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCE8DAC12320F13D00934E2F /* F4SUploadYPDocumentsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUploadYPDocumentsUseCaseTests.swift; sourceTree = "<group>"; };
 		FCE8DAC32320F13D00934E2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCE8DACE2320F24800934E2F /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
@@ -89,6 +90,7 @@
 		FCE8DB0E2320FA1800934E2F /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCE8DB102320FAA400934E2F /* F4SDocumentUploadWhileApplyingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDocumentUploadWhileApplyingModel.swift; sourceTree = "<group>"; };
 		FCE8DB112320FAA400934E2F /* F4SDocumentUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDocumentUploader.swift; sourceTree = "<group>"; };
+		FCE8DB1A23210FF600934E2F /* UploadScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadScenario.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FCE8DABD2320F13D00934E2F /* F4SUploadYPDocumentsUseCase.framework in Frameworks */,
+				FCE8DABD2320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,8 +130,8 @@
 		FCE8DAB42320F13D00934E2F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FCE8DAB32320F13D00934E2F /* F4SUploadYPDocumentsUseCase.framework */,
-				FCE8DABC2320F13D00934E2F /* F4SUploadYPDocumentsUseCaseTests.xctest */,
+				FCE8DAB32320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCase.framework */,
+				FCE8DABC2320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCaseTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -207,6 +209,7 @@
 				FCE8DAE12320F54100934E2F /* AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift */,
 				FCE8DADE2320F54100934E2F /* F4SDocumentTableViewController.swift */,
 				FCE8DAE22320F54100934E2F /* F4SPostDocumentDataViewController.swift */,
+				FCE8DB1A23210FF600934E2F /* UploadScenario.swift */,
 			);
 			path = "add documents";
 			sourceTree = "<group>";
@@ -275,9 +278,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		FCE8DAB22320F13D00934E2F /* F4SUploadYPDocumentsUseCase */ = {
+		FCE8DAB22320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCase */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FCE8DAC72320F13D00934E2F /* Build configuration list for PBXNativeTarget "F4SUploadYPDocumentsUseCase" */;
+			buildConfigurationList = FCE8DAC72320F13D00934E2F /* Build configuration list for PBXNativeTarget "WorkfinderUploadYPDocumentsUseCase" */;
 			buildPhases = (
 				FCE8DAAE2320F13D00934E2F /* Headers */,
 				FCE8DAAF2320F13D00934E2F /* Sources */,
@@ -288,14 +291,14 @@
 			);
 			dependencies = (
 			);
-			name = F4SUploadYPDocumentsUseCase;
+			name = WorkfinderUploadYPDocumentsUseCase;
 			productName = F4SUploadYPDocumentsUseCase;
-			productReference = FCE8DAB32320F13D00934E2F /* F4SUploadYPDocumentsUseCase.framework */;
+			productReference = FCE8DAB32320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCase.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		FCE8DABB2320F13D00934E2F /* F4SUploadYPDocumentsUseCaseTests */ = {
+		FCE8DABB2320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCaseTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FCE8DACA2320F13D00934E2F /* Build configuration list for PBXNativeTarget "F4SUploadYPDocumentsUseCaseTests" */;
+			buildConfigurationList = FCE8DACA2320F13D00934E2F /* Build configuration list for PBXNativeTarget "WorkfinderUploadYPDocumentsUseCaseTests" */;
 			buildPhases = (
 				FCE8DAB82320F13D00934E2F /* Sources */,
 				FCE8DAB92320F13D00934E2F /* Frameworks */,
@@ -306,9 +309,9 @@
 			dependencies = (
 				FCE8DABF2320F13D00934E2F /* PBXTargetDependency */,
 			);
-			name = F4SUploadYPDocumentsUseCaseTests;
+			name = WorkfinderUploadYPDocumentsUseCaseTests;
 			productName = F4SUploadYPDocumentsUseCaseTests;
-			productReference = FCE8DABC2320F13D00934E2F /* F4SUploadYPDocumentsUseCaseTests.xctest */;
+			productReference = FCE8DABC2320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCaseTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -329,7 +332,7 @@
 					};
 				};
 			};
-			buildConfigurationList = FCE8DAAD2320F13D00934E2F /* Build configuration list for PBXProject "F4SUploadYPDocumentsUseCase" */;
+			buildConfigurationList = FCE8DAAD2320F13D00934E2F /* Build configuration list for PBXProject "WorkfinderUploadYPDocumentsUseCase" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -343,8 +346,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FCE8DAB22320F13D00934E2F /* F4SUploadYPDocumentsUseCase */,
-				FCE8DABB2320F13D00934E2F /* F4SUploadYPDocumentsUseCaseTests */,
+				FCE8DAB22320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCase */,
+				FCE8DABB2320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCaseTests */,
 			);
 		};
 /* End PBXProject section */
@@ -380,6 +383,7 @@
 				FCE8DB022320F81700934E2F /* F4SDCPopupMenuView.swift in Sources */,
 				FCE8DB122320FAA400934E2F /* F4SDocumentUploadWhileApplyingModel.swift in Sources */,
 				FCE8DAD52320F31300934E2F /* F4SBusinessLeadersRequestModel.swift in Sources */,
+				FCE8DB1B23210FF600934E2F /* UploadScenario.swift in Sources */,
 				FCE8DB132320FAA400934E2F /* F4SDocumentUploader.swift in Sources */,
 				FCE8DAFD2320F72700934E2F /* F4SCameraPageManagerViewController.swift in Sources */,
 				FCE8DAEA2320F59F00934E2F /* F4SDCAddDocumentViewController.swift in Sources */,
@@ -412,7 +416,7 @@
 /* Begin PBXTargetDependency section */
 		FCE8DABF2320F13D00934E2F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = FCE8DAB22320F13D00934E2F /* F4SUploadYPDocumentsUseCase */;
+			target = FCE8DAB22320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCase */;
 			targetProxy = FCE8DABE2320F13D00934E2F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -642,7 +646,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FCE8DAAD2320F13D00934E2F /* Build configuration list for PBXProject "F4SUploadYPDocumentsUseCase" */ = {
+		FCE8DAAD2320F13D00934E2F /* Build configuration list for PBXProject "WorkfinderUploadYPDocumentsUseCase" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FCE8DAC52320F13D00934E2F /* Debug */,
@@ -651,7 +655,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FCE8DAC72320F13D00934E2F /* Build configuration list for PBXNativeTarget "F4SUploadYPDocumentsUseCase" */ = {
+		FCE8DAC72320F13D00934E2F /* Build configuration list for PBXNativeTarget "WorkfinderUploadYPDocumentsUseCase" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FCE8DAC82320F13D00934E2F /* Debug */,
@@ -660,7 +664,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FCE8DACA2320F13D00934E2F /* Build configuration list for PBXNativeTarget "F4SUploadYPDocumentsUseCaseTests" */ = {
+		FCE8DACA2320F13D00934E2F /* Build configuration list for PBXNativeTarget "WorkfinderUploadYPDocumentsUseCaseTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FCE8DACB2320F13D00934E2F /* Debug */,

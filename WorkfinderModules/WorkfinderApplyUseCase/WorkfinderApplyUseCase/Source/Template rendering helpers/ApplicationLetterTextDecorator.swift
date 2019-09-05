@@ -9,11 +9,11 @@
 import Foundation
 import WorkfinderCommon
 
-public class ApplicationLetterTextDecorator {
+class ApplicationLetterTextDecorator {
     
-    public init() {}
+    init() {}
     
-    public func decorateLetterText(_ letterText: String) -> NSAttributedString {
+    func decorateLetterText(_ letterText: String) -> NSAttributedString {
         
         // normal font to begin
         var customMutableAttributedString: [([NSAttributedString.Key: Any], NSRange)] = []

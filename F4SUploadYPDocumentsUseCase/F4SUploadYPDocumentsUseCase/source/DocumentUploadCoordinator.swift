@@ -5,23 +5,23 @@ import WorkfinderCoordinators
 let __bundle = Bundle(identifier: "com.f4s.F4SUploadYPDocumentsUseCase")
 
 public class DocumentUploadCoordinator : CoreInjectionNavigationCoordinator {
-    let mode: F4SAddDocumentsViewController.Mode
+    let mode: UploadScenario
     var popOnCompletion: Bool = false
+    var root: UIViewController!
     
     public var didFinish: ((DocumentUploadCoordinator)->Void)?
     
     let placementUuid: F4SUUID
     
-    init(parent: Coordinating?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol, mode: F4SAddDocumentsViewController.Mode, placementUuid: F4SUUID) {
+    public init(parent: Coordinating?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol, mode: UploadScenario, placementUuid: F4SUUID) {
         self.placementUuid = placementUuid
         self.mode = mode
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
-    var root: UIViewController!
     public override func start() {
         let addDocumentsController = UIStoryboard(name: "DocumentCapture", bundle: __bundle).instantiateInitialViewController() as! F4SAddDocumentsViewController
         addDocumentsController.placementUuid = placementUuid
-        addDocumentsController.mode = mode
+        addDocumentsController.uploadScenario = mode
         addDocumentsController.coordinator = self
         navigationRouter.push(viewController: addDocumentsController, animated: true)
         root = addDocumentsController
