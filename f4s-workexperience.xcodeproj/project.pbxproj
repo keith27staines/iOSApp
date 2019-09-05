@@ -568,6 +568,7 @@
 		FCD6F9E722E315B7003F7C34 /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD884F81FFBC0CC00F05B08 /* Recommendations.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Recommendations.storyboard; sourceTree = "<group>"; };
 		FCD884FA1FFBE04F00F05B08 /* RecommendationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsListViewController.swift; sourceTree = "<group>"; };
+		FCDB86112321268C0047FF96 /* Mustache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mustache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCE11E562113407F00403789 /* F4SCalendarEventWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCalendarEventWriter.swift; sourceTree = "<group>"; };
 		FCE11E58211437B400403789 /* F4SDateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = F4SDateHelper.swift; path = ../WorkfinderModules/WorkfinderCommon/WorkfinderCommon/Source/F4SDateHelper.swift; sourceTree = "<group>"; };
 		FCE11E5B2115D26B00403789 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
@@ -681,6 +682,7 @@
 		40E78E0A1DD31A86000A3776 = {
 			isa = PBXGroup;
 			children = (
+				FCDB86112321268C0047FF96 /* Mustache.framework */,
 				FC93DBD5231F8E0A00F1CE23 /* WorkfinderCoordinators.framework */,
 				FC5CBA50231D2A4700C2D3C5 /* WorkfinderAcceptUseCase.framework */,
 				FCD6F9E722E315B7003F7C34 /* WorkfinderAppLogic.framework */,

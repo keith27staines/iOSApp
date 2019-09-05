@@ -4,6 +4,7 @@ import WorkfinderCommon
 import WorkfinderNetworking
 import WorkfinderServices
 import WorkfinderCoordinators
+import WorkfinderApplyUseCase
 
 protocol CompanyCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol {}
 

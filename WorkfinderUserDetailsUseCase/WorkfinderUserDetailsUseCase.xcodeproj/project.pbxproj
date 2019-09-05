@@ -11,7 +11,6 @@
 		FC93DC00231FB92D00F1CE23 /* WorkfinderUserDetailsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DBFF231FB92D00F1CE23 /* WorkfinderUserDetailsUseCaseTests.swift */; };
 		FC93DC02231FB92D00F1CE23 /* WorkfinderUserDetailsUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = FC93DBF4231FB92D00F1CE23 /* WorkfinderUserDetailsUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FC93DC19231FB9C200F1CE23 /* WorkfinderUserDetailsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC18231FB9C200F1CE23 /* WorkfinderUserDetailsUseCase.swift */; };
-		FC93DC1C231FBA4400F1CE23 /* WorkfinderAcceptUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DC1B231FBA4400F1CE23 /* WorkfinderAcceptUseCase.framework */; };
 		FC93DC1E231FBA4400F1CE23 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DC1D231FBA4400F1CE23 /* WorkfinderAppLogic.framework */; };
 		FC93DC20231FBA4400F1CE23 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DC1F231FBA4400F1CE23 /* WorkfinderCommon.framework */; };
 		FC93DC22231FBA4400F1CE23 /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DC21231FBA4400F1CE23 /* WorkfinderCoordinators.framework */; };
@@ -88,7 +87,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC93DC1C231FBA4400F1CE23 /* WorkfinderAcceptUseCase.framework in Frameworks */,
 				FC93DC1E231FBA4400F1CE23 /* WorkfinderAppLogic.framework in Frameworks */,
 				FC93DC20231FBA4400F1CE23 /* WorkfinderCommon.framework in Frameworks */,
 				FC93DC22231FBA4400F1CE23 /* WorkfinderCoordinators.framework in Frameworks */,

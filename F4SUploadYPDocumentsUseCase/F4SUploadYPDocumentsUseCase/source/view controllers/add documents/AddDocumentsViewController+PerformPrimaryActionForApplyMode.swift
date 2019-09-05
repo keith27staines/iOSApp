@@ -1,14 +1,3 @@
-//
-//  AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 06/11/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
-//
-
-import UIKit
-import WorkfinderCommon
-import WorkfinderNetworking
 import WorkfinderUI
 
 extension F4SAddDocumentsViewController {
