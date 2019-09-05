@@ -55,6 +55,9 @@
 		FCE519452249545800B550C9 /* TemplateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE519442249545800B550C9 /* TemplateHelper.swift */; };
 		FCE5194A224963DB00B550C9 /* F4SChoiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51948224963DA00B550C9 /* F4SChoiceTests.swift */; };
 		FCE5194B224963DB00B550C9 /* F4STemplateHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51949224963DA00B550C9 /* F4STemplateHelperTests.swift */; };
+		FCE8DA842320D35E00934E2F /* Success.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCE8DA832320D35E00934E2F /* Success.xcassets */; };
+		FCE8DA872320D3A700934E2F /* SuccessExtraInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCE8DA862320D39D00934E2F /* SuccessExtraInfo.storyboard */; };
+		FCE8DA892320D3CB00934E2F /* SuccessExtraInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DA882320D3CB00934E2F /* SuccessExtraInfoViewController.swift */; };
 		FCF5AF212248BDCC00D9B8D1 /* WorkfinderApplyUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = FCF5AF132248BDCC00D9B8D1 /* WorkfinderApplyUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCFBD02E2250DE3600A9361D /* F4STemplateModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFBD02D2250DE3600A9361D /* F4STemplateModelTests.swift */; };
 /* End PBXBuildFile section */
@@ -117,6 +120,9 @@
 		FCE519442249545800B550C9 /* TemplateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateHelper.swift; sourceTree = "<group>"; };
 		FCE51948224963DA00B550C9 /* F4SChoiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SChoiceTests.swift; sourceTree = "<group>"; };
 		FCE51949224963DA00B550C9 /* F4STemplateHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateHelperTests.swift; sourceTree = "<group>"; };
+		FCE8DA832320D35E00934E2F /* Success.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Success.xcassets; sourceTree = "<group>"; };
+		FCE8DA852320D39D00934E2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SuccessExtraInfo.storyboard; sourceTree = "<group>"; };
+		FCE8DA882320D3CB00934E2F /* SuccessExtraInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessExtraInfoViewController.swift; sourceTree = "<group>"; };
 		FCF5AF102248BDCC00D9B8D1 /* WorkfinderApplyUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderApplyUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF5AF132248BDCC00D9B8D1 /* WorkfinderApplyUseCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderApplyUseCase.h; sourceTree = "<group>"; };
 		FCF5AF142248BDCC00D9B8D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -265,6 +271,7 @@
 				FC299952231EEB4000F83FB6 /* F4SApplicationContext.swift */,
 				FC299947231ED87600F83FB6 /* F4SDaysAndHours.storyboard */,
 				FC299946231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard */,
+				FCE8DA8A2320D42600934E2F /* Success screen */,
 				FC299945231ED87600F83FB6 /* F4SDaysAndHours */,
 				FC29991D231EC18300F83FB6 /* Edit cover letter */,
 				FC299924231EC38700F83FB6 /* Calendar */,
@@ -285,6 +292,15 @@
 				FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FCE8DA8A2320D42600934E2F /* Success screen */ = {
+			isa = PBXGroup;
+			children = (
+				FCE8DA862320D39D00934E2F /* SuccessExtraInfo.storyboard */,
+				FCE8DA882320D3CB00934E2F /* SuccessExtraInfoViewController.swift */,
+			);
+			path = "Success screen";
 			sourceTree = "<group>";
 		};
 		FCF4FACE22646502000EE4B7 /* Models */ = {
@@ -321,6 +337,7 @@
 		FCF5AF122248BDCC00D9B8D1 /* WorkfinderApplyUseCase */ = {
 			isa = PBXGroup;
 			children = (
+				FCE8DA832320D35E00934E2F /* Success.xcassets */,
 				FC299944231ED35100F83FB6 /* Calendar.xcassets */,
 				FC9626222248C07800D5F850 /* Source */,
 				FC7A4392224A395400B2D693 /* Supporting files */,
@@ -434,7 +451,9 @@
 				FC29994B231ED87600F83FB6 /* F4SDaysAndHours.storyboard in Resources */,
 				FC29994F231EE4F800F83FB6 /* Calendar.xcassets in Resources */,
 				FC9865B6229D380A006D3E63 /* README in Resources */,
+				FCE8DA872320D3A700934E2F /* SuccessExtraInfo.storyboard in Resources */,
 				FC29991B231EBFCD00F83FB6 /* EditCoverLetter.storyboard in Resources */,
+				FCE8DA842320D35E00934E2F /* Success.xcassets in Resources */,
 				FC29994A231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard in Resources */,
 				FC29993E231ECDEE00F83FB6 /* F4SCalendar.storyboard in Resources */,
 			);
@@ -489,6 +508,7 @@
 				FC299936231EC50300F83FB6 /* F4SCalendarColors.swift in Sources */,
 				FC299937231EC50300F83FB6 /* F4SCalendarCollectionViewController.swift in Sources */,
 				FC7A4398224A497800B2D693 /* ApplicationLetterTemplateBlanksCleanser.swift in Sources */,
+				FCE8DA892320D3CB00934E2F /* SuccessExtraInfoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,6 +537,14 @@
 				FC299948231ED87600F83FB6 /* Base */,
 			);
 			name = F4SDaysAndHours.storyboard;
+			sourceTree = "<group>";
+		};
+		FCE8DA862320D39D00934E2F /* SuccessExtraInfo.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FCE8DA852320D39D00934E2F /* Base */,
+			);
+			name = SuccessExtraInfo.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

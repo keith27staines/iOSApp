@@ -12,7 +12,7 @@
         <!--User Details View Controller-->
         <scene sceneID="QzM-0e-h9g">
             <objects>
-                <viewController storyboardIdentifier="UserDetailsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6fi-A3-veq" customClass="UserDetailsViewController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserDetailsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6fi-A3-veq" customClass="UserDetailsViewController" customModule="WorkfinderUserDetailsUseCase" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rVA-dq-XbI"/>
                         <viewControllerLayoutGuide type="bottom" id="iFc-6k-L1j"/>
@@ -91,7 +91,7 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="y33-By-Vkx" userLabel="Parent email">
                                                                         <rect key="frame" x="0.0" y="0.0" width="354" height="56"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Parent or guardian Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IZi-FU-235" customClass="NextResponderTextField" customModule="f4s_workexperience" customModuleProvider="target">
+                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Parent or guardian Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IZi-FU-235" customClass="NextResponderTextField" customModule="WorkfinderUI">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="21"/>
                                                                                 <nil key="textColor"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -123,7 +123,7 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="7iB-P1-4An">
                                                                         <rect key="frame" x="0.0" y="105" width="354" height="56"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ay3-HG-rFT" customClass="NextResponderTextField" customModule="f4s_workexperience" customModuleProvider="target">
+                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ay3-HG-rFT" customClass="NextResponderTextField" customModule="WorkfinderUI">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="21"/>
                                                                                 <nil key="textColor"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -155,7 +155,7 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="SDq-DG-ayv">
                                                                         <rect key="frame" x="0.0" y="210" width="354" height="56"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First and Last Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tuk-dL-J6F" customClass="NextResponderTextField" customModule="f4s_workexperience" customModuleProvider="target">
+                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First and Last Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tuk-dL-J6F" customClass="NextResponderTextField" customModule="WorkfinderUI">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="21"/>
                                                                                 <nil key="textColor"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>

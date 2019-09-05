@@ -42,8 +42,6 @@
 		40A28CB71E1F96A60077D490 /* RatePlacement.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40A28CB51E1F96A60077D490 /* RatePlacement.storyboard */; };
 		40A28CB91E1F96C20077D490 /* RatePlacementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A28CB81E1F96C20077D490 /* RatePlacementViewController.swift */; };
 		40A28CBB1E1F9BCF0077D490 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A28CBA1E1F9BCF0077D490 /* RatingControl.swift */; };
-		40A28CBF1E24ECE90077D490 /* SuccessExtraInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A28CBE1E24ECE90077D490 /* SuccessExtraInfoViewController.swift */; };
-		40A28CC21E24ED0D0077D490 /* SuccessExtraInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40A28CC01E24ED0D0077D490 /* SuccessExtraInfo.storyboard */; };
 		40A5CF3A1DED6F8D000007AB /* InterestsView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40A5CF381DED6F8D000007AB /* InterestsView.storyboard */; };
 		40A5CF3C1DED6FA2000007AB /* InterestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A5CF3B1DED6FA1000007AB /* InterestsViewController.swift */; };
 		40A5CF3E1DED72E8000007AB /* InterestsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A5CF3D1DED72E8000007AB /* InterestsCollectionViewCell.swift */; };
@@ -372,8 +370,6 @@
 		40A28CB61E1F96A60077D490 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/RatePlacement.storyboard; sourceTree = "<group>"; };
 		40A28CB81E1F96C20077D490 /* RatePlacementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatePlacementViewController.swift; sourceTree = "<group>"; };
 		40A28CBA1E1F9BCF0077D490 /* RatingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
-		40A28CBE1E24ECE90077D490 /* SuccessExtraInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessExtraInfoViewController.swift; sourceTree = "<group>"; };
-		40A28CC11E24ED0D0077D490 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SuccessExtraInfo.storyboard; sourceTree = "<group>"; };
 		40A5CF391DED6F8D000007AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/InterestsView.storyboard; sourceTree = "<group>"; };
 		40A5CF3B1DED6FA1000007AB /* InterestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestsViewController.swift; sourceTree = "<group>"; };
 		40A5CF3D1DED72E8000007AB /* InterestsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -962,15 +958,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		FC0B406A226B0E6A00D992AC /* Success Hooray */ = {
-			isa = PBXGroup;
-			children = (
-				40A28CC01E24ED0D0077D490 /* SuccessExtraInfo.storyboard */,
-				40A28CBE1E24ECE90077D490 /* SuccessExtraInfoViewController.swift */,
-			);
-			path = "Success Hooray";
-			sourceTree = "<group>";
-		};
 		FC0B406B226B0F1000D992AC /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -1398,7 +1385,6 @@
 			children = (
 				FC9626402248C27D00D5F850 /* ApplyCoordinator.swift */,
 				FC24D24B226B085900FA04A1 /* Build cover letter */,
-				FC0B406A226B0E6A00D992AC /* Success Hooray */,
 			);
 			path = Apply;
 			sourceTree = "<group>";
@@ -2045,7 +2031,6 @@
 				FC1DC06821FE13FE009ABC60 /* CompanyDetailAssets.xcassets in Resources */,
 				FC21BE33220F53EB00A0A389 /* RandomNames.csv in Resources */,
 				204203F51E4B793F007C7409 /* Favourite.storyboard in Resources */,
-				40A28CC21E24ED0D0077D490 /* SuccessExtraInfo.storyboard in Resources */,
 				40E78E8F1DD32C4E000A3776 /* Settings.bundle in Resources */,
 				FCC212E9219077C000D8D5B7 /* F4SCameraCapture.storyboard in Resources */,
 				FCC212EB219077C000D8D5B7 /* Camera.storyboard in Resources */,
@@ -2200,7 +2185,6 @@
 				204203F71E4B7966007C7409 /* FavouriteViewController.swift in Sources */,
 				FC99BDC820CFD8E400278DDE /* F4SDownloadService.swift in Sources */,
 				FC1DC09321FE1509009ABC60 /* CompanyPeopleViewController.swift in Sources */,
-				40A28CBF1E24ECE90077D490 /* SuccessExtraInfoViewController.swift in Sources */,
 				FCD3486420038C3100DC1316 /* F4SAuth0MagicLinkInterpreterer.swift in Sources */,
 				FC21BE3A220F53EB00A0A389 /* SearchViewFooterView.swift in Sources */,
 				FC1DC07121FE14BF009ABC60 /* CompanyCoordinator.swift in Sources */,
@@ -2495,14 +2479,6 @@
 				40A28CB61E1F96A60077D490 /* Base */,
 			);
 			name = RatePlacement.storyboard;
-			sourceTree = "<group>";
-		};
-		40A28CC01E24ED0D0077D490 /* SuccessExtraInfo.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				40A28CC11E24ED0D0077D490 /* Base */,
-			);
-			name = SuccessExtraInfo.storyboard;
 			sourceTree = "<group>";
 		};
 		40A5CF381DED6F8D000007AB /* InterestsView.storyboard */ = {

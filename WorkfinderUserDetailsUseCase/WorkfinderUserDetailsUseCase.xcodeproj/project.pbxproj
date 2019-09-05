@@ -35,6 +35,7 @@
 		FC93DC5B2320357B00F1CE23 /* UserDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC93DC4723201DD100F1CE23 /* UserDetails.storyboard */; };
 		FC93DC5C2320358100F1CE23 /* F4SEmailVerification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC93DC4323201D4E00F1CE23 /* F4SEmailVerification.storyboard */; };
 		FC93DC5E232038DD00F1CE23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC93DC5D232038DD00F1CE23 /* Assets.xcassets */; };
+		FCE8DA8E2320DB5300934E2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCE8DA8D2320DB5300934E2F /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		FC93DC4C23201F6900F1CE23 /* F4SEmailVerificationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SEmailVerificationError.swift; sourceTree = "<group>"; };
 		FC93DC51232020A500F1CE23 /* F4SAuth0MagicLinkInterpreterer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SAuth0MagicLinkInterpreterer.swift; sourceTree = "<group>"; };
 		FC93DC5D232038DD00F1CE23 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FCE8DA8D2320DB5300934E2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 		FC93DBF3231FB92D00F1CE23 /* WorkfinderUserDetailsUseCase */ = {
 			isa = PBXGroup;
 			children = (
+				FCE8DA8D2320DB5300934E2F /* Assets.xcassets */,
 				FC93DC17231FB9A500F1CE23 /* source */,
 				FC93DBF4231FB92D00F1CE23 /* WorkfinderUserDetailsUseCase.h */,
 				FC93DBF5231FB92D00F1CE23 /* Info.plist */,
@@ -293,6 +296,7 @@
 			files = (
 				FC93DC5C2320358100F1CE23 /* F4SEmailVerification.storyboard in Resources */,
 				FC93DC5E232038DD00F1CE23 /* Assets.xcassets in Resources */,
+				FCE8DA8E2320DB5300934E2F /* Assets.xcassets in Resources */,
 				FC93DC5B2320357B00F1CE23 /* UserDetails.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

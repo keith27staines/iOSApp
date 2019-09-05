@@ -54,7 +54,7 @@ class UserDetailsViewController: UIViewController {
     }
     
     lazy var emailController: F4SEmailVerificationViewController = {
-        let emailStoryboard = UIStoryboard(name: "F4SEmailVerification", bundle: nil)
+        let emailStoryboard = UIStoryboard(name: "F4SEmailVerification", bundle: __bundle)
         let emailController = emailStoryboard.instantiateViewController(withIdentifier: "EmailVerification") as! F4SEmailVerificationViewController
         return emailController
     }()

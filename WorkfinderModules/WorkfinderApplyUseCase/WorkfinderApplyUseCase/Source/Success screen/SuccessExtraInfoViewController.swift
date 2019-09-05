@@ -11,7 +11,7 @@ import WorkfinderCommon
 import WorkfinderServices
 import WorkfinderUI
 
-class SuccessExtraInfoViewController: UIViewController {
+public class SuccessExtraInfoViewController: UIViewController {
 
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var timelineButton: UIButton!
@@ -20,7 +20,7 @@ class SuccessExtraInfoViewController: UIViewController {
 
     @IBOutlet weak var centerView: UIView!
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         centerView.backgroundColor = UIColor.white
         centerView.layer.cornerRadius = 8
@@ -28,12 +28,12 @@ class SuccessExtraInfoViewController: UIViewController {
         applyStyle()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override public func viewWillAppear(_ animated: Bool) {
         F4SUserStatusService.shared.beginStatusUpdate()
     }
     
-    var timelineButtonWasTapped: (() -> Void)?
-    var searchButtonWasTapped: (() -> Void)?
+    public var timelineButtonWasTapped: (() -> Void)?
+    public var searchButtonWasTapped: (() -> Void)?
 }
 
 // MARK: - UI Setup

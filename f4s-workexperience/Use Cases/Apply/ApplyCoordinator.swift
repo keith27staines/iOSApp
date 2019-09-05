@@ -1,11 +1,13 @@
 import Foundation
 import WorkfinderCommon
 import WorkfinderServices
-import WorkfinderApplyUseCase
 import WorkfinderAppLogic
 import WorkfinderUI
 import WorkfinderCoordinators
 import WorkfinderUserDetailsUseCase
+import WorkfinderApplyUseCase
+
+let applyBundle = Bundle(identifier: "com.f4s.WorkfinderApplyUseCase")
 
 protocol ApplyCoordinatorDelegate : class {
     func applicationDidFinish(preferredDestination: ApplyCoordinator.PreferredDestinationAfterApplication)
@@ -200,7 +202,7 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
     
     func showApplicationSubmittedSuccessfully() {
         navigationRouter.popToViewController(startingViewController, animated: false)
-        let successViewController = UIStoryboard(name: "SuccessExtraInfo", bundle: nil).instantiateViewController(withIdentifier: "SuccessExtraInfoCtrl") as! SuccessExtraInfoViewController
+        let successViewController = UIStoryboard(name: "SuccessExtraInfo", bundle: applyBundle).instantiateViewController(withIdentifier: "SuccessExtraInfoCtrl") as! SuccessExtraInfoViewController
         successViewController.timelineButtonWasTapped = { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: .messages)
