@@ -1,33 +1,26 @@
-//
-//  DocumentUploadCoordinator.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 26/05/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
-
 import Foundation
 import WorkfinderCommon
 import WorkfinderCoordinators
-import WorkfinderApplyUseCase
 
-class DocumentUploadCoordinator : CoreInjectionNavigationCoordinator {
-    let applicationContext: F4SApplicationContext?
-    
+let __bundle = Bundle(identifier: "com.f4s.F4SUploadYPDocumentsUseCase")
+
+public class DocumentUploadCoordinator : CoreInjectionNavigationCoordinator {
     let mode: F4SAddDocumentsViewController.Mode
     var popOnCompletion: Bool = false
     
     public var didFinish: ((DocumentUploadCoordinator)->Void)?
     
-    init(parent: Coordinating?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol, mode: F4SAddDocumentsViewController.Mode, applicationContext: F4SApplicationContext?) {
-        self.applicationContext = applicationContext
+    let placementUuid: F4SUUID
+    
+    init(parent: Coordinating?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol, mode: F4SAddDocumentsViewController.Mode, placementUuid: F4SUUID) {
+        self.placementUuid = placementUuid
         self.mode = mode
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     var root: UIViewController!
-    override func start() {
-        let addDocumentsController = UIStoryboard(name: "DocumentCapture", bundle: nil).instantiateInitialViewController() as! F4SAddDocumentsViewController
-        addDocumentsController.applicationContext = applicationContext
+    public override func start() {
+        let addDocumentsController = UIStoryboard(name: "DocumentCapture", bundle: __bundle).instantiateInitialViewController() as! F4SAddDocumentsViewController
+        addDocumentsController.placementUuid = placementUuid
         addDocumentsController.mode = mode
         addDocumentsController.coordinator = self
         navigationRouter.push(viewController: addDocumentsController, animated: true)
@@ -48,7 +41,7 @@ class DocumentUploadCoordinator : CoreInjectionNavigationCoordinator {
     
     func showDocument(_ document: F4SDocument?) {
         guard let document = document else { return }
-        let storyboard = UIStoryboard(name: "DocumentCapture", bundle: nil)
+        let storyboard = UIStoryboard(name: "DocumentCapture", bundle: __bundle)
         let viewer = storyboard.instantiateViewController(withIdentifier: "F4SDCDocumentViewerController") as! F4SDCDocumentViewerController
         viewer.document = document
         navigationRouter.push(viewController: viewer, animated: true)
@@ -56,7 +49,7 @@ class DocumentUploadCoordinator : CoreInjectionNavigationCoordinator {
     
     func showPickMethodForDocument(_ document: F4SDocument?, addDocumentDelegate delegate: F4SDCAddDocumentViewControllerDelegate) {
         guard let document = document else { return }
-        let storyboard = UIStoryboard(name: "DocumentCapture", bundle: nil)
+        let storyboard = UIStoryboard(name: "DocumentCapture", bundle: __bundle)
         let vc = storyboard.instantiateViewController(withIdentifier: "F4SDCAddDocumentViewController") as! F4SDCAddDocumentViewController
         vc.delegate = delegate
         vc.documentTypes = [document.type]
@@ -66,7 +59,7 @@ class DocumentUploadCoordinator : CoreInjectionNavigationCoordinator {
     }
     
     func showPickMethodForNewDocument(documentTypes: [F4SUploadableDocumentType], addDocumentDelegate delegate: F4SDCAddDocumentViewControllerDelegate) {
-        let storyboard = UIStoryboard(name: "DocumentCapture", bundle: nil)
+        let storyboard = UIStoryboard(name: "DocumentCapture", bundle: __bundle)
         let vc = storyboard.instantiateViewController(withIdentifier: "F4SDCAddDocumentViewController") as! F4SDCAddDocumentViewController
         vc.delegate = delegate
         vc.documentTypes = documentTypes

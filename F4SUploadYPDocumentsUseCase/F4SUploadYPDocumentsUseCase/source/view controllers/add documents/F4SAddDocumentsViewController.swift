@@ -1,15 +1,6 @@
-//
-//  F4SAddDocumentsViewController.swift
-//  DocumentCapture
-//
-//  Created by Keith Dev on 29/07/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
-//
-
 import UIKit
 import WorkfinderCommon
 import WorkfinderUI
-import WorkfinderApplyUseCase
 
 class F4SAddDocumentsViewController: UIViewController {
     let consentPreviouslyGivenKey = "consentPreviouslyGivenKey"
@@ -21,7 +12,7 @@ class F4SAddDocumentsViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     
-    var applicationContext: F4SApplicationContext!
+    var placementUuid: F4SUUID!
     var blRequestModel: F4SBusinessLeadersRequestModel? = nil
     
     @IBOutlet weak var primaryActionButton: UIButton!
@@ -31,7 +22,7 @@ class F4SAddDocumentsViewController: UIViewController {
     lazy var documentModel: F4SDocumentUploadModelBase = {
         switch mode {
         case .applyWorkflow:
-            return F4SDocumentUploadWhileApplyingModel(delegate: self, placementUuid: self.applicationContext.placement!.placementUuid!)
+            return F4SDocumentUploadWhileApplyingModel(delegate: self, placementUuid: placementUuid)
         case .businessLeaderRequest(let requestModel):
             let placementUuid = requestModel.placementUuid
             let documents = requestModel.documents

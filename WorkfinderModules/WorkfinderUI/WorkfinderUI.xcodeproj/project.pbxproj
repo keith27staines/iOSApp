@@ -35,6 +35,7 @@
 		FCA91EB12234065A007ED308 /* WorkfinderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91EB02234065A007ED308 /* WorkfinderUITests.swift */; };
 		FCA91EB32234065A007ED308 /* WorkfinderUI.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA91EA52234065A007ED308 /* WorkfinderUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCA91EBF223406B4007ED308 /* WorkfinderUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91EBE223406B4007ED308 /* WorkfinderUI.swift */; };
+		FCE8DB152320FCB100934E2F /* UIImage+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DB142320FCB100934E2F /* UIImage+extensions.swift */; };
 		FCEB1D25229FC6D600C6D2C2 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEB1D24229FC6D500C6D2C2 /* UIView+Extensions.swift */; };
 		FCEB1D27229FC6DB00C6D2C2 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEB1D26229FC6DB00C6D2C2 /* UITableView+Extensions.swift */; };
 /* End PBXBuildFile section */
@@ -81,6 +82,7 @@
 		FCA91EB02234065A007ED308 /* WorkfinderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderUITests.swift; sourceTree = "<group>"; };
 		FCA91EB22234065A007ED308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCA91EBE223406B4007ED308 /* WorkfinderUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderUI.swift; sourceTree = "<group>"; };
+		FCE8DB142320FCB100934E2F /* UIImage+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extensions.swift"; sourceTree = "<group>"; };
 		FCEB1D24229FC6D500C6D2C2 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		FCEB1D26229FC6DB00C6D2C2 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -221,6 +223,7 @@
 				FCEB1D24229FC6D500C6D2C2 /* UIView+Extensions.swift */,
 				FC93DBE0231F982600F1CE23 /* Content view controller */,
 				FC116B4F2284515F00146478 /* WebView */,
+				FCE8DB142320FCB100934E2F /* UIImage+extensions.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				FC22DBEA22F979750068C61C /* Skin.swift in Sources */,
 				FC22DBE922F979750068C61C /* Skinner.swift in Sources */,
 				FC116B4E2284511E00146478 /* WebViewController.swift in Sources */,
+				FCE8DB152320FCB100934E2F /* UIImage+extensions.swift in Sources */,
 				FC9535A1231E448D00F4A9DA /* F4SSelfLoadingImageView.swift in Sources */,
 				FC22DBEB22F979750068C61C /* RGBA.swift in Sources */,
 				FC93DBDF231F981D00F1CE23 /* ContentViewController.swift in Sources */,

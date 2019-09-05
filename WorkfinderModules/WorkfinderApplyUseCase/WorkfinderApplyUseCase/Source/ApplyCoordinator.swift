@@ -21,7 +21,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         case none
     }
     
-    var applicationContext: F4SApplicationContext
+    var placementUuid: F4SUUID
     var createPlacementJson: F4SCreatePlacementJson?
     var placementService: F4SPlacementApplicationServiceProtocol
     var templateService: F4STemplateServiceProtocol
