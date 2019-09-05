@@ -10,16 +10,16 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 
-public protocol ApplicationLetterViewControllerCoordinating : class {
+protocol ApplicationLetterViewControllerCoordinating : class {
     func cancelButtonWasTapped(sender: Any?)
     func editButtonWasTapped(sender: Any?)
     func continueApplicationWithCompletedLetter(sender: Any?, completion: @escaping (Error?) -> Void)
     func termsAndConditionsWasTapped(sender: Any?)
 }
 
-public class ApplicationLetterViewController : UIViewController {
+class ApplicationLetterViewController : UIViewController {
     
-    public weak var coordinator: ApplicationLetterViewControllerCoordinating?
+    weak var coordinator: ApplicationLetterViewControllerCoordinating?
     var mainView: ApplicationLetterViewControllerMainView { return view as! ApplicationLetterViewControllerMainView }
     let editButton: EditApplicationLetterButton = EditApplicationLetterButton()
     var termsAndConditionsButton: UIButton { return mainView.termsAndConditionsButton }
@@ -53,7 +53,7 @@ public class ApplicationLetterViewController : UIViewController {
         }
     }
     
-    public init(
+    init(
         coordinator: ApplicationLetterViewControllerCoordinating,
         viewModel: ApplicationLetterViewModelProtocol) {
         self.coordinator = coordinator

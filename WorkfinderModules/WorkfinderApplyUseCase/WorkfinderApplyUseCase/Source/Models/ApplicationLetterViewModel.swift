@@ -9,13 +9,13 @@
 import Foundation
 import WorkfinderCommon
 
-public protocol ApplicationLetterViewProtocol : class {
+protocol ApplicationLetterViewProtocol : class {
     var isActivityIndicatorVisible: Bool { get set }
     func showErrorWithCancelAndRetry(_ error: Error, retry: @escaping ()->Void, cancel: @escaping () -> Void )
     func updateFromViewModel()
 }
 
-public protocol ApplicationLetterViewModelProtocol : ApplicationLetterModelDelegate {
+protocol ApplicationLetterViewModelProtocol : ApplicationLetterModelDelegate {
     var view: ApplicationLetterViewProtocol? { get set }
     var coordinator: ApplicationLetterViewControllerCoordinating? { get set }
     var model: ApplicationLetterModelProtocol { get }
@@ -26,19 +26,19 @@ public protocol ApplicationLetterViewModelProtocol : ApplicationLetterModelDeleg
     func onViewDidLoad()
 }
 
-public class ApplicationLetterViewModel : ApplicationLetterViewModelProtocol {
+class ApplicationLetterViewModel : ApplicationLetterViewModelProtocol {
 
-    public var applyButtonIsEnabled: Bool { return model.allFieldsFilled }
-    public var attributedText: NSAttributedString { return model.letterString }
-    public let model: ApplicationLetterModelProtocol
-    public weak var coordinator: ApplicationLetterViewControllerCoordinating?
-    public weak var view: ApplicationLetterViewProtocol?
+    var applyButtonIsEnabled: Bool { return model.allFieldsFilled }
+    var attributedText: NSAttributedString { return model.letterString }
+    let model: ApplicationLetterModelProtocol
+    weak var coordinator: ApplicationLetterViewControllerCoordinating?
+    weak var view: ApplicationLetterViewProtocol?
     
-    public init(letterModel: ApplicationLetterModelProtocol) {
+    init(letterModel: ApplicationLetterModelProtocol) {
         model = letterModel
     }
     
-    public func applyButtonWasTapped() {
+    func applyButtonWasTapped() {
         view?.isActivityIndicatorVisible = true
         coordinator?.continueApplicationWithCompletedLetter(sender: nil, completion: { [weak self] error in
             guard let strongSelf = self else { return }
@@ -53,17 +53,17 @@ public class ApplicationLetterViewModel : ApplicationLetterViewModelProtocol {
         })
     }
     
-    public func termsAndConditionsButtonWasTapped(sender: Any) {
+    func termsAndConditionsButtonWasTapped(sender: Any) {
         coordinator?.termsAndConditionsWasTapped(sender: sender)
     }
     
-    public func onViewDidLoad() {
+    func onViewDidLoad() {
         model.render()
     }
 }
 
 extension ApplicationLetterViewModel : ApplicationLetterModelDelegate {
-    public func applicationLetterModel(_ model: ApplicationLetterModelProtocol, failedToSubmitLetter error: F4SNetworkError, retry: (() -> Void)?) {
+    func applicationLetterModel(_ model: ApplicationLetterModelProtocol, failedToSubmitLetter error: F4SNetworkError, retry: (() -> Void)?) {
         view?.showErrorWithCancelAndRetry(
             error,
             retry: { [weak self] in
@@ -75,18 +75,18 @@ extension ApplicationLetterViewModel : ApplicationLetterModelDelegate {
         })
     }
     
-    public func modelBusyState(_ model: ApplicationLetterModelProtocol, isBusy: Bool) {
+    func modelBusyState(_ model: ApplicationLetterModelProtocol, isBusy: Bool) {
         view?.isActivityIndicatorVisible = isBusy
     }
     
-    public func applicationLetterModel(_ model: ApplicationLetterModelProtocol, stoppedProcessingWithError error: Error) {
+    func applicationLetterModel(_ model: ApplicationLetterModelProtocol, stoppedProcessingWithError error: Error) {
         view?.showErrorWithCancelAndRetry(error, retry: { [weak self] in
             self?.model.render()
             },
             cancel: {})
     }
     
-    public func applicationLetterModel(_ model: ApplicationLetterModelProtocol, renderedTemplateToString: NSAttributedString, allFieldsFilled: Bool) {
+    func applicationLetterModel(_ model: ApplicationLetterModelProtocol, renderedTemplateToString: NSAttributedString, allFieldsFilled: Bool) {
         view?.updateFromViewModel()
     }
 }

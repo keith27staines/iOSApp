@@ -9,7 +9,7 @@
 import Foundation
 import WorkfinderCommon
 
-public class ChooseAttributesViewModel : NSObject {
+class ChooseAttributesViewModel : NSObject {
     
     weak var coordinator: ChooseAttributesViewControllerCoordinatorProtocol?
     let model: ApplicationLetterTemplateBlanksModelProtocol
@@ -18,7 +18,7 @@ public class ChooseAttributesViewModel : NSObject {
     let blankName: TemplateBlankName?
     let choices: [F4SChoice]
     
-    public init(model: ApplicationLetterTemplateBlanksModelProtocol, chooseValuesFor blankName: TemplateBlankName) {
+    init(model: ApplicationLetterTemplateBlanksModelProtocol, chooseValuesFor blankName: TemplateBlankName) {
         self.model = model
         self.blankName = blankName
         self.matchingBlankFromTemplate = model.templateBlankWithName(blankName.rawValue)
@@ -32,11 +32,11 @@ public class ChooseAttributesViewModel : NSObject {
         }
     }
     
-    public func numberOfSections() -> Int {
+    func numberOfSections() -> Int {
         return 1
     }
     
-    public func numberOfRowsInSection(_ section: Int) -> Int {
+    func numberOfRowsInSection(_ section: Int) -> Int {
         guard let _ = blank, let _ = matchingBlankFromTemplate else { return 0 }
         return choices.count
     }

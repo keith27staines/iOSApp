@@ -79,7 +79,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     }
     
     func showApplicationLetterEditor() {
-        let coverLetterStoryboard = UIStoryboard(name: "EditCoverLetter", bundle: bundle)
+        let coverLetterStoryboard = UIStoryboard(name: "EditCoverLetter", bundle: __bundle)
         let editor = coverLetterStoryboard.instantiateViewController(withIdentifier: "EditCoverLetterCtrl") as! EditCoverLetterViewController
         editor.coordinator = self
         editor.blanksModel = applicationModel.blanksModel
@@ -202,7 +202,7 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
     
     func showApplicationSubmittedSuccessfully() {
         navigationRouter.popToViewController(startingViewController, animated: false)
-        let successViewController = UIStoryboard(name: "SuccessExtraInfo", bundle: applyBundle).instantiateViewController(withIdentifier: "SuccessExtraInfoCtrl") as! SuccessExtraInfoViewController
+        let successViewController = UIStoryboard(name: "SuccessExtraInfo", bundle: __bundle).instantiateViewController(withIdentifier: "SuccessExtraInfoCtrl") as! SuccessExtraInfoViewController
         successViewController.timelineButtonWasTapped = { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: .messages)

@@ -2,13 +2,13 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 
-public protocol EditCoverLetterViewControllerCoordinatorProtocol {
+protocol EditCoverLetterViewControllerCoordinatorProtocol {
     func chooseValuesForTemplateBlank(name: TemplateBlankName, inTemplate: F4STemplate)
     func editCoverLetterViewControllerDidCancel()
     func editCoverLetterViewControllerDidFinish(_ viewController: EditCoverLetterViewController)
 }
 
-public class EditCoverLetterViewController: UIViewController {
+class EditCoverLetterViewController: UIViewController {
 
     @IBOutlet weak var updateButton: UIButton!
     @IBOutlet weak var contentView: UIView!
@@ -19,27 +19,27 @@ public class EditCoverLetterViewController: UIViewController {
     fileprivate let smallFooterSize = CGFloat(21)
     fileprivate var numberOfRowsInSection2 = 2
     var dateFormatter: DateFormatter?
-    public var availabilityPeriodJson: F4SAvailabilityPeriodJson = F4SAvailabilityPeriodJson()
-    public var coordinator: EditCoverLetterViewControllerCoordinatorProtocol?
+    var availabilityPeriodJson: F4SAvailabilityPeriodJson = F4SAvailabilityPeriodJson()
+    var coordinator: EditCoverLetterViewControllerCoordinatorProtocol?
     
-    public var blanksModel: ApplicationLetterTemplateBlanksModelProtocol? {
+    var blanksModel: ApplicationLetterTemplateBlanksModelProtocol? {
         didSet {
             updateFromModel()
         }
     }
 
-    override public func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         setupAppereance()
     }
 
-    override public func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupNavigationBar()
         updateFromModel()
     }
     
-    override public func viewWillAppear(_: Bool) {
+    override func viewWillAppear(_: Bool) {
         super.viewWillAppear(true)
         setupNavigationBar()
         coverLetterTableView.reloadData()
@@ -51,7 +51,7 @@ public class EditCoverLetterViewController: UIViewController {
         Skinner().apply(buttonSkin: skin?.primaryButtonSkin, to: updateButton)
     }
     
-    override public var preferredStatusBarStyle: UIStatusBarStyle {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
@@ -99,20 +99,20 @@ extension EditCoverLetterViewController :  F4SCalendarCollectionViewControllerDe
 
 // MARK: -UITableViewDelegate,UITableViewDataSource
 extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSource {
-    public func numberOfSections(in _: UITableView) -> Int {
+    func numberOfSections(in _: UITableView) -> Int {
         return 5
     }
 
-    public func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let _ = EditableSection(rawValue: section) else { return 0 }
         return 1
     }
 
-    public func tableView(_: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(44)
     }
 
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: coverLetterCellIdentifier, for: indexPath) as? EditCoverLetterTableViewCell else {
             return UITableViewCell()
         }
@@ -217,7 +217,7 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
         case skills = 4
     }
 
-    public func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let editableSection = EditableSection(rawValue: indexPath.section) else { return }
         guard let navCtrl = self.navigationController, let template = blanksModel?.template else { return }
         switch editableSection {
@@ -239,7 +239,7 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
         coverLetterTableView.reloadData()
     }
 
-    public func tableView(_: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         guard let editableSection = EditableSection(rawValue: section) else { return 0 }
         switch editableSection
         {
@@ -280,7 +280,7 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
         navigationController.pushViewController(vc, animated: true)
     }
 
-    public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         var bigFooterView: UIView
         var smallFooterView: UIView
 

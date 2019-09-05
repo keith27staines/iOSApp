@@ -11,7 +11,7 @@ import WorkfinderCommon
 import WorkfinderServices
 import WorkfinderAppLogic
 
-public protocol ApplicationModelProtocol : class {
+protocol ApplicationModelProtocol : class {
     var voucherCode: String? { get set }
     var placement: F4SPlacement? { get }
     var placementJson: F4SPlacementJson? { get }
@@ -23,7 +23,7 @@ public protocol ApplicationModelProtocol : class {
     func createApplication(completion: @escaping (Error?) -> Void)
 }
 
-public class ApplicationModel : ApplicationModelProtocol {
+class ApplicationModel : ApplicationModelProtocol {
     
     public var voucherCode: F4SUUID?
     public internal (set) var placement: F4SPlacement?
@@ -50,7 +50,7 @@ public class ApplicationModel : ApplicationModelProtocol {
         return applicationLetterModel.blanksModel.populatedBlankWithName(TemplateBlankName.personalAttributes)?.choices.uuidList
     }
     
-    public var availabilityPeriodJson: F4SAvailabilityPeriodJson {
+    var availabilityPeriodJson: F4SAvailabilityPeriodJson {
         get {
             let defaultAvailabilityPeriodJson: F4SAvailabilityPeriodJson = F4SAvailabilityPeriodJson()
             guard let data = localStore.value(key: LocalStore.Key.availabilityPeriodJsonData) as? Data else {
@@ -72,7 +72,7 @@ public class ApplicationModel : ApplicationModelProtocol {
         }
     }
     
-    public internal (set) lazy var applicationLetterModel: ApplicationLetterModelProtocol = {
+    lazy var applicationLetterModel: ApplicationLetterModelProtocol = {
         return ApplicationLetterModel(
             companyName: companyViewData.companyName,
             templateService: self.templateService,
@@ -86,7 +86,7 @@ public class ApplicationModel : ApplicationModelProtocol {
         return viewModel
     }()
     
-    public internal (set) lazy var blanksModel: ApplicationLetterTemplateBlanksModelProtocol = {
+    lazy var blanksModel: ApplicationLetterTemplateBlanksModelProtocol = {
         let blanksModel = ApplicationLetterTemplateBlanksModel(store: localStore)
         let availability = availabilityPeriodJson
         let period = F4SAvailabilityPeriod(availabilityPeriodJson: availability)
@@ -94,7 +94,7 @@ public class ApplicationModel : ApplicationModelProtocol {
         return blanksModel
     }()
     
-    public init(
+    init(
         userUuid: F4SUUID,
         installationUuid: F4SUUID,
         userInterests: [F4SInterest],
@@ -114,13 +114,13 @@ public class ApplicationModel : ApplicationModelProtocol {
         self.userInterests = userInterests
     }
     
-    public func resumeApplicationFromPreexistingDraft(_ draft: F4SPlacement, completion: @escaping ((Error?) -> Void)) {
+    func resumeApplicationFromPreexistingDraft(_ draft: F4SPlacement, completion: @escaping ((Error?) -> Void)) {
         self.placement = draft
         placementJson = makePlacementJsonFromPlacement(placement: draft)
         updatePlacementWithCoverLetterChoices(completion: completion)
     }
     
-    public func createApplication(completion: @escaping ((Error?) -> Void)) -> Void {
+    func createApplication(completion: @escaping ((Error?) -> Void)) -> Void {
         precondition(placement == nil, "If placement exists already, use `continueFromPreexistingDraftPlacement`")
         let createPlacementJson = F4SCreatePlacementJson(
             user: self.userUuid,
@@ -249,7 +249,7 @@ extension ApplicationModel {
     }
 }
 
-public extension Sequence where Iterator.Element == F4SChoice {
+extension Sequence where Iterator.Element == F4SChoice {
     var uuidList: [F4SUUID] {
         return map({ (choice) -> F4SUUID in
             choice.uuid

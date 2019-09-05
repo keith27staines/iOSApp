@@ -1,15 +1,14 @@
 
 import UIKit
 import WorkfinderCommon
-import WorkfinderApplyUseCase
 import WorkfinderUI
 
-public protocol ChooseAttributesViewControllerCoordinatorProtocol : class {
+protocol ChooseAttributesViewControllerCoordinatorProtocol : class {
     func chooseAttributesViewControllerDidFinish()
     func chooseAttributesViewControllerDidCancel()
 }
 
-public class ChooseAttributesViewController: UIViewController {
+class ChooseAttributesViewController: UIViewController {
     
     weak var coordinator: ChooseAttributesViewControllerCoordinatorProtocol?
     
@@ -57,21 +56,21 @@ extension ChooseAttributesViewController {
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
 extension ChooseAttributesViewController: UITableViewDelegate, UITableViewDataSource {
-    public func numberOfSections(in _: UITableView) -> Int {
+    func numberOfSections(in _: UITableView) -> Int {
         return viewModel.numberOfSections()
     }
 
-    public func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRowsInSection(section)
     }
 
-    public func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = attributesTableView.dequeueReusableCell(withIdentifier: chooseAttributesCellIdentifier) as! ChooseAttributesTableViewCell
         viewModel.configure(cell: cell, atIndexPath: indexPath)
         return cell
     }
 
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         _ = viewModel.didSelectIndexPath(indexPath)
         tableView.reloadData()
