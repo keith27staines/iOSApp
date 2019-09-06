@@ -12,15 +12,14 @@ import WorkfinderNetworking
 import WorkfinderServices
 import WorkfinderAppLogic
 import WorkfinderCoordinators
-import WorkfinderApplyUseCase
 
-@testable import f4s_workexperience
+@testable import WorkfinderApplyUseCase
 
 class ApplyCoordinatorTests: XCTestCase {
     
     let mockRouter = MockNavigationRouter()
-    let mockRegisteredUser = makeRegisteredUser()
-    let mockUnregisteredUser = makeRegisteredUser()
+    let mockRegisteredUser = F4SUser(uuid: "userUuid1234")
+    let mockUnregisteredUser = F4SUser()
     let mockUserService = MockUserService(registeringWillSucceedOnAttempt: 1)
     let mockUserStatusService = MockUserStatusService()
     let mockDatabaseDownloadManager = MockDatabaseDownloadManager()
@@ -173,4 +172,191 @@ class MockInterestsRepository: F4SInterestsRepositoryProtocol {
     func loadUserInterests() -> [F4SInterest] {
         return userInterests
     }
+}
+
+class MockNavigationRouter : NavigationRoutingProtocol {
+    func pop(animated: Bool) {
+        
+    }
+    
+    func popToViewController(_ viewController: UIViewController, animated: Bool) {
+        
+    }
+    
+    
+    var navigationController: UINavigationController = UINavigationController()
+    
+    func push(viewController: UIViewController, animated: Bool = false) {
+        pushedViewControllers.append(viewController)
+    }
+    
+    func present(_ viewController: UIViewController, animated: Bool = false, completion: (() -> Void)? = nil) {
+        presentedViewControllers.append(viewController)
+    }
+    
+    func dismiss(animated: Bool, completion: (() -> Void)? = nil) {
+        guard presentedViewControllers.count > 0 else { return }
+        presentedViewControllers.removeLast()
+    }
+    
+    var rootViewController: UIViewController = UIViewController()
+    var pushedViewControllers = [UIViewController]()
+    var presentedViewControllers = [UIViewController]()
+    var dismissCount: Int = 0
+    
+    func pop() {
+        pushedViewControllers.removeLast()
+    }
+}
+
+class MockUserRepository: F4SUserRepositoryProtocol {
+    var user: F4SUser
+    init(user: F4SUser) {
+        self.user = user
+    }
+    
+    func save(user: F4SUser) {
+        self.user = user
+    }
+    
+    func load() -> F4SUser {
+        return user
+    }
+}
+
+class MockUserService: F4SUserServiceProtocol {
+    func registerDeviceWithServer(installationUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRegisterDeviceResult>) -> ()) {
+        registerDeviceOnServerCalled += 1
+        let result: F4SNetworkResult<F4SRegisterDeviceResult>
+        if registerDeviceOnServerCalled == registeringWillSucceedOnAttempt {
+            result = F4SNetworkResult.success(successRegisterResult)
+        } else {
+            result = F4SNetworkResult.error(error)
+        }
+        completion(result)
+    }
+    
+    
+    var registerDeviceOnServerCalled: Int = 0
+    var registeringWillSucceedOnAttempt: Int = 0
+    var successRegisterResult = F4SRegisterDeviceResult(userUuid: UUID().uuidString)
+    var errorResult = F4SRegisterDeviceResult(errors: F4SJSONValue(integerLiteral: 999))
+    var error = F4SNetworkError(localizedDescription: "Error handling test", attempting: "test", retry: false, logError: false)
+    
+    init(registeringWillSucceedOnAttempt: Int) {
+        self.registeringWillSucceedOnAttempt = registeringWillSucceedOnAttempt
+    }
+    
+    func enablePushNotificationForUser(installationUuid: F4SUUID, withDeviceToken: String, completion: @escaping (F4SNetworkResult<F4SPushNotificationStatus>) -> ()) {
+        
+    }
+    
+    func updateUser(user: F4SUser, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ()) {
+        fatalError()
+    }
+    
+    func enablePushNotificationForUser(withDeviceToken: String, completion: @escaping (F4SNetworkResult<F4SPushNotificationStatus>) -> ()) {
+        fatalError()
+    }
+    
+}
+
+class MockUserStatusService : F4SUserStatusServiceProtocol {
+    var userStatus: F4SUserStatus?
+    
+    func beginStatusUpdate() {}
+    
+    func getUserStatus(completion: @escaping (F4SNetworkResult<F4SUserStatus>) -> ()) {
+        let status = F4SUserStatus(unreadMessageCount: 1, unratedPlacements: [])
+        let result = F4SNetworkResult.success(status)
+        completion(result)
+    }
+}
+
+class MockF4SAnalyticsAndDebugging : F4SAnalyticsAndDebugging {
+    
+    var identities: [F4SUUID] = []
+    var aliases: [F4SUUID] = []
+    
+    func identity(userId: F4SUUID) {
+        identities.append(userId)
+    }
+    
+    func alias(userId: F4SUUID) {
+        aliases.append(userId)
+    }
+    
+    var notifiedErrors = [Error]()
+    
+    func notifyError(_ error: NSError, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
+        notifiedErrors.append(error)
+    }
+    
+    var breadcrumbs = [String]()
+    func leaveBreadcrumb(with message: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
+        breadcrumbs.append(message)
+    }
+    
+    var updateHistoryCallCount: Int = 0
+    func updateHistory() {
+        updateHistoryCallCount += 1
+    }
+    
+    var textCombiningHistoryAndSessionLogCallCount: Int = 0
+    func textCombiningHistoryAndSessionLog() -> String? {
+        textCombiningHistoryAndSessionLogCallCount += 1
+        return ""
+    }
+    
+    var _userCanAccessDebugMenu: Bool = false
+    func userCanAccessDebugMenu() -> Bool {
+        return _userCanAccessDebugMenu
+    }
+    
+    var loggedErrorMessages = [String]()
+    func error(message: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
+        loggedErrorMessages.append(message)
+    }
+    
+    var loggedErrors = [Error]()
+    func error(_ error: Error, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
+        loggedErrors.append(error)
+    }
+    
+    var debugMessages = [String]()
+    func debug(_ message: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
+        debugMessages.append(message)
+    }
+}
+
+class MockDatabaseDownloadManager : F4SDatabaseDownloadManagerProtocol {
+    
+    // spies
+    var registeredObservers = [F4SCompanyDatabaseAvailabilityObserving]()
+    
+    var age: TimeInterval = 0
+    var isAvailable: Bool = false
+    
+    // interface
+    var localDatabaseDatestamp: Date?
+    
+    func registerObserver(_ observer: F4SCompanyDatabaseAvailabilityObserving) {
+        registeredObservers.append(observer)
+    }
+    
+    func removeObserver(_ observer: F4SCompanyDatabaseAvailabilityObserving) {
+        registeredObservers.removeAll { (anObserver) -> Bool in
+            anObserver === observer
+        }
+    }
+    
+    func ageOfLocalDatabase() -> TimeInterval {
+        return age
+    }
+    
+    func isLocalDatabaseAvailable() -> Bool {
+        return isAvailable
+    }
+    
+    func start() {}
 }

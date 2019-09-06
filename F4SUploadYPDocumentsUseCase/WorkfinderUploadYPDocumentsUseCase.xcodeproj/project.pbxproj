@@ -42,6 +42,8 @@
 		FCE8DB122320FAA400934E2F /* F4SDocumentUploadWhileApplyingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DB102320FAA400934E2F /* F4SDocumentUploadWhileApplyingModel.swift */; };
 		FCE8DB132320FAA400934E2F /* F4SDocumentUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DB112320FAA400934E2F /* F4SDocumentUploader.swift */; };
 		FCE8DB1B23210FF600934E2F /* UploadScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DB1A23210FF600934E2F /* UploadScenario.swift */; };
+		FCFC0695232240F7003C59C8 /* NameLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC0694232240F6003C59C8 /* NameLogicTests.swift */; };
+		FCFC069D23224333003C59C8 /* MagicLinkInterpreterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC069C23224333003C59C8 /* MagicLinkInterpreterTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +95,8 @@
 		FCE8DB102320FAA400934E2F /* F4SDocumentUploadWhileApplyingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDocumentUploadWhileApplyingModel.swift; sourceTree = "<group>"; };
 		FCE8DB112320FAA400934E2F /* F4SDocumentUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDocumentUploader.swift; sourceTree = "<group>"; };
 		FCE8DB1A23210FF600934E2F /* UploadScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadScenario.swift; sourceTree = "<group>"; };
+		FCFC0694232240F6003C59C8 /* NameLogicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameLogicTests.swift; sourceTree = "<group>"; };
+		FCFC069C23224333003C59C8 /* MagicLinkInterpreterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagicLinkInterpreterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +156,8 @@
 		FCE8DAC02320F13D00934E2F /* F4SUploadYPDocumentsUseCaseTests */ = {
 			isa = PBXGroup;
 			children = (
+				FCFC069C23224333003C59C8 /* MagicLinkInterpreterTests.swift */,
+				FCFC0694232240F6003C59C8 /* NameLogicTests.swift */,
 				FCE8DAC12320F13D00934E2F /* F4SUploadYPDocumentsUseCaseTests.swift */,
 				FCE8DAC32320F13D00934E2F /* Info.plist */,
 			);
@@ -412,6 +418,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCE8DAC22320F13D00934E2F /* F4SUploadYPDocumentsUseCaseTests.swift in Sources */,
+				FCFC069D23224333003C59C8 /* MagicLinkInterpreterTests.swift in Sources */,
+				FCFC0695232240F7003C59C8 /* NameLogicTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -99,6 +99,17 @@
 		FCE519572249645C00B550C9 /* F4SCalendarMonthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE519512249645C00B550C9 /* F4SCalendarMonthTests.swift */; };
 		FCE8DAA62320E71300934E2F /* CompanyViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAA52320E71200934E2F /* CompanyViewData.swift */; };
 		FCE8DAA82320E80B00934E2F /* ScaledNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAA72320E80B00934E2F /* ScaledNumber.swift */; };
+		FCFC069323224081003C59C8 /* ScaledNumberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC069223224080003C59C8 /* ScaledNumberTests.swift */; };
+		FCFC069723224156003C59C8 /* RecommendationEquatableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC069623224156003C59C8 /* RecommendationEquatableTests.swift */; };
+		FCFC069923224269003C59C8 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC069823224269003C59C8 /* Message.swift */; };
+		FCFC069B2322429F003C59C8 /* MessageProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC069A2322429F003C59C8 /* MessageProtocolTests.swift */; };
+		FCFC069F23224482003C59C8 /* CompanyViewDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC069E23224482003C59C8 /* CompanyViewDataTests.swift */; };
+		FCFC06A123225571003C59C8 /* F4SStringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06A023225570003C59C8 /* F4SStringExtensionTests.swift */; };
+		FCFC06A423225670003C59C8 /* F4SQuadtree.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06A22322566F003C59C8 /* F4SQuadtree.swift */; };
+		FCFC06A523225670003C59C8 /* CGRect+Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06A32322566F003C59C8 /* CGRect+Methods.swift */; };
+		FCFC06A8232256C0003C59C8 /* F4SQuadtreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06A7232256C0003C59C8 /* F4SQuadtreeTests.swift */; };
+		FCFC06A9232256C0003C59C8 /* CGRect+MethodsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06A6232256C0003C59C8 /* CGRect+MethodsTests.swift */; };
+		FCFC06AB23225765003C59C8 /* LatLon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06AA23225764003C59C8 /* LatLon.swift */; };
 		FCFE450E2250BA6700C38436 /* MockLocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE450D2250BA6700C38436 /* MockLocalStore.swift */; };
 /* End PBXBuildFile section */
 
@@ -208,6 +219,17 @@
 		FCE519512249645C00B550C9 /* F4SCalendarMonthTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarMonthTests.swift; sourceTree = "<group>"; };
 		FCE8DAA52320E71200934E2F /* CompanyViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyViewData.swift; sourceTree = "<group>"; };
 		FCE8DAA72320E80B00934E2F /* ScaledNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaledNumber.swift; sourceTree = "<group>"; };
+		FCFC069223224080003C59C8 /* ScaledNumberTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaledNumberTests.swift; sourceTree = "<group>"; };
+		FCFC069623224156003C59C8 /* RecommendationEquatableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationEquatableTests.swift; sourceTree = "<group>"; };
+		FCFC069823224269003C59C8 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		FCFC069A2322429F003C59C8 /* MessageProtocolTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageProtocolTests.swift; sourceTree = "<group>"; };
+		FCFC069E23224482003C59C8 /* CompanyViewDataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyViewDataTests.swift; sourceTree = "<group>"; };
+		FCFC06A023225570003C59C8 /* F4SStringExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SStringExtensionTests.swift; sourceTree = "<group>"; };
+		FCFC06A22322566F003C59C8 /* F4SQuadtree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SQuadtree.swift; sourceTree = "<group>"; };
+		FCFC06A32322566F003C59C8 /* CGRect+Methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Methods.swift"; sourceTree = "<group>"; };
+		FCFC06A6232256C0003C59C8 /* CGRect+MethodsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+MethodsTests.swift"; sourceTree = "<group>"; };
+		FCFC06A7232256C0003C59C8 /* F4SQuadtreeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SQuadtreeTests.swift; sourceTree = "<group>"; };
+		FCFC06AA23225764003C59C8 /* LatLon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatLon.swift; sourceTree = "<group>"; };
 		FCFE450D2250BA6700C38436 /* MockLocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocalStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -336,6 +358,13 @@
 		FCA91E782234043D007ED308 /* WorkfinderCommonTests */ = {
 			isa = PBXGroup;
 			children = (
+				FCFC06A6232256C0003C59C8 /* CGRect+MethodsTests.swift */,
+				FCFC06A7232256C0003C59C8 /* F4SQuadtreeTests.swift */,
+				FCFC06A023225570003C59C8 /* F4SStringExtensionTests.swift */,
+				FCFC069E23224482003C59C8 /* CompanyViewDataTests.swift */,
+				FCFC069A2322429F003C59C8 /* MessageProtocolTests.swift */,
+				FCFC069623224156003C59C8 /* RecommendationEquatableTests.swift */,
+				FCFC069223224080003C59C8 /* ScaledNumberTests.swift */,
 				FC083F8C23102E6C00641F17 /* F4SMessageStructsTests.swift */,
 				FC083F8A23102D3100641F17 /* F4SUserStatusTests.swift */,
 				FC083F882310165900641F17 /* F4SDocumentTests.swift */,
@@ -388,6 +417,10 @@
 		FCA91E8622340478007ED308 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				FCFC06AA23225764003C59C8 /* LatLon.swift */,
+				FCFC06A32322566F003C59C8 /* CGRect+Methods.swift */,
+				FCFC06A22322566F003C59C8 /* F4SQuadtree.swift */,
+				FCFC069823224269003C59C8 /* Message.swift */,
 				FCE8DAA72320E80B00934E2F /* ScaledNumber.swift */,
 				FCE8DAA52320E71200934E2F /* CompanyViewData.swift */,
 				FC299950231EEA2E00F83FB6 /* Placement.swift */,
@@ -597,6 +630,7 @@
 				FC93768E231535750058BA75 /* F4SCompanyDocument.swift in Sources */,
 				FC0E5CFB224E1B5700615B4F /* LocalStore.swift in Sources */,
 				FCE8DAA62320E71300934E2F /* CompanyViewData.swift in Sources */,
+				FCFC06AB23225765003C59C8 /* LatLon.swift in Sources */,
 				FC93DC56232026AA00F1CE23 /* CommonNotifications.swift in Sources */,
 				FC299951231EEA2E00F83FB6 /* Placement.swift in Sources */,
 				FC1F591A22FD7222007164BA /* F4SAnonymousUser.swift in Sources */,
@@ -609,6 +643,7 @@
 				FC22DC0A22F9ACBC0068C61C /* F4STemplateBlank.swift in Sources */,
 				FC96709A2258C81000318F69 /* F4SPlacement.swift in Sources */,
 				FC22DC0822F9AC710068C61C /* F4STemplate.swift in Sources */,
+				FCFC069923224269003C59C8 /* Message.swift in Sources */,
 				FCDFEA0C223D1CBC00E58649 /* WEXErrorsFactory.swift in Sources */,
 				FCDB073A2286F7870053347F /* F4SUserRepository.swift in Sources */,
 				FC32FD432265E4C800740F0C /* F4SContentType.swift in Sources */,
@@ -625,6 +660,7 @@
 				FCE5192F2249482A00B550C9 /* F4SCalendarMonth.swift in Sources */,
 				FC083F7B230FF01000641F17 /* F4SDocument.swift in Sources */,
 				FC1FA08222FAAB1B003EAE59 /* F4SUUIDDictionary.swift in Sources */,
+				FCFC06A423225670003C59C8 /* F4SQuadtree.swift in Sources */,
 				FCE5192E2249482A00B550C9 /* F4SCalendar.swift in Sources */,
 				FC93DC5A23202CFB00F1CE23 /* EnvironmentType.swift in Sources */,
 				FCDEA75322803BC000F1BE66 /* F4STimelinePlacement.swift in Sources */,
@@ -640,6 +676,7 @@
 				FC5CBA6A231D3E4700C2D3C5 /* F4SDateHelper.swift in Sources */,
 				FC1F591622FD6D42007164BA /* F4SPushToken.swift in Sources */,
 				FC9535A5231E7E7700F4A9DA /* Company.swift in Sources */,
+				FCFC06A523225670003C59C8 /* CGRect+Methods.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,6 +698,7 @@
 				FCA91E7A2234043D007ED308 /* WorkfinderCommonTests.swift in Sources */,
 				FC12B0FF22F33ECE00C33410 /* F4STimelinePlacementTests.swift in Sources */,
 				FC083F892310165900641F17 /* F4SDocumentTests.swift in Sources */,
+				FCFC069F23224482003C59C8 /* CompanyViewDataTests.swift in Sources */,
 				FCE519572249645C00B550C9 /* F4SCalendarMonthTests.swift in Sources */,
 				FC1FA08A22FAD5D5003EAE59 /* DateExtensionTests.swift in Sources */,
 				FC1FEEFC23014BA40039DD94 /* WEXPlacementTests.swift in Sources */,
@@ -668,18 +706,24 @@
 				FC83EC7F22FC0C55009D7A0B /* F4SJsonValueTests.swift in Sources */,
 				FC177FCD2306A4010068C2F7 /* F4SHoursTypeTests.swift in Sources */,
 				FC1F592022FD8ACF007164BA /* F4SAvailabilityPeriodTests.swift in Sources */,
+				FCFC069723224156003C59C8 /* RecommendationEquatableTests.swift in Sources */,
 				FC177FCF230703170068C2F7 /* F4SNetworkErrorTests.swift in Sources */,
+				FCFC06A8232256C0003C59C8 /* F4SQuadtreeTests.swift in Sources */,
 				FCE519522249645C00B550C9 /* F4SCalendarWeekTests.swift in Sources */,
 				FC083F8B23102D3100641F17 /* F4SUserStatusTests.swift in Sources */,
 				FC1FA08E22FB3931003EAE59 /* F4SContentDescriptorTests.swift in Sources */,
 				FC083F8D23102E6C00641F17 /* F4SMessageStructsTests.swift in Sources */,
+				FCFC069B2322429F003C59C8 /* MessageProtocolTests.swift in Sources */,
 				FC1F591E22FD78D6007164BA /* WorkfinderCommonStructsTests.swift in Sources */,
 				FC1FEF002301A1830039DD94 /* F4SDayOfWeekTests.swift in Sources */,
 				FC1F591C22FD75B2007164BA /* F4SAnonymousUserTests.swift in Sources */,
 				FC083F912310464400641F17 /* F4SRecommendationTests.swift in Sources */,
 				FC1FA08522FAAC28003EAE59 /* MockAnalyticsAndDebugging.swift in Sources */,
 				FC1FA08C22FB1F57003EAE59 /* WorkAvailabilityWindowTests.swift in Sources */,
+				FCFC06A9232256C0003C59C8 /* CGRect+MethodsTests.swift in Sources */,
 				FC22DC0122F996D70068C61C /* F4SChoiceTests.swift in Sources */,
+				FCFC06A123225571003C59C8 /* F4SStringExtensionTests.swift in Sources */,
+				FCFC069323224081003C59C8 /* ScaledNumberTests.swift in Sources */,
 				FC1FEF022301BFB10039DD94 /* F4SPlacementTests.swift in Sources */,
 				FC083F8F2310417E00641F17 /* F4SRoleJsonTests.swift in Sources */,
 				FCBEA7B5228701E600CAB1F1 /* F4SUserTests.swift in Sources */,

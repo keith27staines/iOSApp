@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import f4s_workexperience
+@testable import WorkfinderCommon
 
 class F4SStringExtensionTests: XCTestCase {
     

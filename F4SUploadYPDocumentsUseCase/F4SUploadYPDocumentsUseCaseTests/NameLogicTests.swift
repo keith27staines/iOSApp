@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import f4s_workexperience
+import WorkfinderUserDetailsUseCase
 
 class NameLogicTests: XCTestCase {
 

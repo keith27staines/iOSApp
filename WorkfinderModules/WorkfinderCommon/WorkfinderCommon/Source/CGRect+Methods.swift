@@ -9,7 +9,7 @@
 import Foundation
 
 // MARK:- CGRect extensions
-extension CGRect {
+public extension CGRect {
     
     /// Returns a dictionary containing rectangles covering the the four quadrants of the current instance
     func quadrantRects() -> [F4SQuadtreeQuadrant : CGRect] {

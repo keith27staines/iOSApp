@@ -100,7 +100,6 @@
 		FC0B4080226CAAEE00D992AC /* RecommendedCompaniesLocalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B407F226CAAEE00D992AC /* RecommendedCompaniesLocalRepository.swift */; };
 		FC0B4082226CAB4E00D992AC /* RecommendationsMerger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B4081226CAB4E00D992AC /* RecommendationsMerger.swift */; };
 		FC0B4084226CB1F300D992AC /* F4SRecommendedCompaniesMergerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B4083226CB1F300D992AC /* F4SRecommendedCompaniesMergerTests.swift */; };
-		FC0B4086226CC06200D992AC /* RecommendationEquatableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B4085226CC06200D992AC /* RecommendationEquatableTests.swift */; };
 		FC0C87952122C05C007CF1F3 /* F4SAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C87942122C05C007CF1F3 /* F4SAnalyticsEvents.swift */; };
 		FC11006A1FB36A230055EB9A /* ReachabilityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */; };
 		FC1DC06821FE13FE009ABC60 /* CompanyDetailAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC1DC06721FE13FE009ABC60 /* CompanyDetailAssets.xcassets */; };
@@ -143,7 +142,6 @@
 		FC31304B222BCA580043D014 /* RotationAwareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC31304A222BCA580043D014 /* RotationAwareController.swift */; };
 		FC31F095204D54C6009DD526 /* F4SDebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */; };
 		FC31F097204D54E3009DD526 /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC31F096204D54E3009DD526 /* Debug.storyboard */; };
-		FC39F45A21AAA618005B0A07 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC39F44F21AAA617005B0A07 /* Message.swift */; };
 		FC39F45C21AAA618005B0A07 /* MessagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC39F45121AAA617005B0A07 /* MessagesModel.swift */; };
 		FC39F45E21AAA618005B0A07 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC39F45621AAA617005B0A07 /* MessageTableViewCell.swift */; };
 		FC39F45F21AAA618005B0A07 /* MessageViewController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC39F45821AAA617005B0A07 /* MessageViewController+UITableView.swift */; };
@@ -160,14 +158,11 @@
 		FC503F1A231D1F97008722FF /* AddVoucherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC503F19231D1F97008722FF /* AddVoucherViewModel.swift */; };
 		FC505517220446830013AF4C /* CompanyMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC505516220446830013AF4C /* CompanyMapView.swift */; };
 		FC50E9CE2213EF5400C9A621 /* SearchModeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */; };
-		FC59B1921F8155480068EC9C /* F4SQuadtree.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18C1F81546C0068EC9C /* F4SQuadtree.swift */; };
-		FC59B1931F81554F0068EC9C /* CGRect+Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18D1F81546C0068EC9C /* CGRect+Methods.swift */; };
 		FC5C5B952109FF48007DCB84 /* RequestBLProvideDocuments.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5C5B942109FF48007DCB84 /* RequestBLProvideDocuments.swift */; };
 		FC5CBA51231D2A4700C2D3C5 /* WorkfinderAcceptUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC5CBA50231D2A4700C2D3C5 /* WorkfinderAcceptUseCase.framework */; };
 		FC5CBA52231D2A4700C2D3C5 /* WorkfinderAcceptUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC5CBA50231D2A4700C2D3C5 /* WorkfinderAcceptUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC5D3C6C20FE17F600F89169 /* config.yml in Resources */ = {isa = PBXBuildFile; fileRef = FC5D3C6B20FE17F600F89169 /* config.yml */; };
 		FC5D3C6E20FE1CEC00F89169 /* Gemfile in Resources */ = {isa = PBXBuildFile; fileRef = FC5D3C6D20FE1CEB00F89169 /* Gemfile */; };
-		FC5DF8B9228AAC6D004B014D /* NameLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5DF8B8228AAC6D004B014D /* NameLogicTests.swift */; };
 		FC5F3D5020D93C070002F41B /* F4SUserDataFix.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F3D4F20D93C070002F41B /* F4SUserDataFix.swift */; };
 		FC64A5932119EBE3006464A5 /* CalendarChooserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC64A5902119EBE3006464A5 /* CalendarChooserController.swift */; };
 		FC681C001F57473D0077BECA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFE1F57473D0077BECA /* Podfile */; };
@@ -242,9 +237,6 @@
 		FCFB1328224930660086BE25 /* Mustache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCFB1327224930660086BE25 /* Mustache.framework */; };
 		FCFB1329224930660086BE25 /* Mustache.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCFB1327224930660086BE25 /* Mustache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCFBD0092250D69700A9361D /* f4s_workexperienceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFBD0082250D69700A9361D /* f4s_workexperienceTests.swift */; };
-		FCFBD0122250D8D400A9361D /* F4SStringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4336CB202DB999001D0569 /* F4SStringExtensionTests.swift */; };
-		FCFBD0132250D8FC00A9361D /* CGRect+MethodsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18E1F81549A0068EC9C /* CGRect+MethodsTests.swift */; };
-		FCFBD0142250D90F00A9361D /* F4SQuadtreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59B18F1F81549A0068EC9C /* F4SQuadtreeTests.swift */; };
 		FCFBD0162250D96900A9361D /* MockAnalyticsAndDebugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC14E975221EBF6600EE985F /* MockAnalyticsAndDebugging.swift */; };
 		FCFBD0182250D9A400A9361D /* MockUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3F391E222930940046F8F8 /* MockUserService.swift */; };
 		FCFBD0192250D9FF00A9361D /* AppCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A48221714B800DC335B /* AppCoordinatorTests.swift */; };
@@ -252,16 +244,12 @@
 		FCFBD01B2250DA1800A9361D /* MockDatabaseDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA90A90221D6A1700EACD8D /* MockDatabaseDownload.swift */; };
 		FCFBD01C2250DA3A00A9361D /* MockNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA90A8C221D696400EACD8D /* MockNavigationRouter.swift */; };
 		FCFBD01D2250DA3E00A9361D /* MockCoordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA90A8E221D69B600EACD8D /* MockCoordinators.swift */; };
-		FCFBD01E2250DA6000A9361D /* ApplyCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC17E02E223A378D00B32CBD /* ApplyCoordinatorTests.swift */; };
-		FCFBD0202250DAE900A9361D /* MagicLinkInterpreterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3485D20038C3100DC1316 /* MagicLinkInterpreterTests.swift */; };
 		FCFBD0212250DAFE00A9361D /* PartnerModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32E3D8200F322800D7C36A /* PartnerModelTests.swift */; };
 		FCFBD0242250DB4D00A9361D /* F4SDatabaseDownloadManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC85B2220EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift */; };
-		FCFBD0252250DB6000A9361D /* MessageProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC39F46221AAA64B005B0A07 /* MessageProtocolTests.swift */; };
 		FCFBD0262250DB7700A9361D /* MessagesModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC39F46121AAA64B005B0A07 /* MessagesModelTests.swift */; };
-		FCFBD0282250DBD100A9361D /* CompanyViewDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1DC09F21FE1564009ABC60 /* CompanyViewDataTests.swift */; };
 		FCFBD0292250DBE900A9361D /* CompanyViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1DC09D21FE1563009ABC60 /* CompanyViewModelTests.swift */; };
 		FCFBD02B2250DC2700A9361D /* PersonViewDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1DC09B21FE1562009ABC60 /* PersonViewDataTests.swift */; };
-		FCFBD02C2250DC4200A9361D /* ScaledNumberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1DC09C21FE1562009ABC60 /* ScaledNumberTests.swift */; };
+		FCFC06AD23225B9E003C59C8 /* LatLon+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06AC23225B9E003C59C8 /* LatLon+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -425,11 +413,9 @@
 		FC0B407F226CAAEE00D992AC /* RecommendedCompaniesLocalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCompaniesLocalRepository.swift; sourceTree = "<group>"; };
 		FC0B4081226CAB4E00D992AC /* RecommendationsMerger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsMerger.swift; sourceTree = "<group>"; };
 		FC0B4083226CB1F300D992AC /* F4SRecommendedCompaniesMergerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRecommendedCompaniesMergerTests.swift; sourceTree = "<group>"; };
-		FC0B4085226CC06200D992AC /* RecommendationEquatableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationEquatableTests.swift; sourceTree = "<group>"; };
 		FC0C87942122C05C007CF1F3 /* F4SAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SAnalyticsEvents.swift; sourceTree = "<group>"; };
 		FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityExtension.swift; sourceTree = "<group>"; };
 		FC14E975221EBF6600EE985F /* MockAnalyticsAndDebugging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsAndDebugging.swift; sourceTree = "<group>"; };
-		FC17E02E223A378D00B32CBD /* ApplyCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyCoordinatorTests.swift; sourceTree = "<group>"; };
 		FC1DC06721FE13FE009ABC60 /* CompanyDetailAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CompanyDetailAssets.xcassets; sourceTree = "<group>"; };
 		FC1DC06A21FE142D009ABC60 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		FC1DC07021FE14BF009ABC60 /* CompanyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyCoordinator.swift; sourceTree = "<group>"; };
@@ -448,9 +434,7 @@
 		FC1DC08B21FE1509009ABC60 /* CompanyToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyToolbar.swift; sourceTree = "<group>"; };
 		FC1DC08C21FE1509009ABC60 /* CompanyMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyMainView.swift; sourceTree = "<group>"; };
 		FC1DC09B21FE1562009ABC60 /* PersonViewDataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonViewDataTests.swift; sourceTree = "<group>"; };
-		FC1DC09C21FE1562009ABC60 /* ScaledNumberTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaledNumberTests.swift; sourceTree = "<group>"; };
 		FC1DC09D21FE1563009ABC60 /* CompanyViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyViewModelTests.swift; sourceTree = "<group>"; };
-		FC1DC09F21FE1564009ABC60 /* CompanyViewDataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyViewDataTests.swift; sourceTree = "<group>"; };
 		FC1E6A48221714B800DC335B /* AppCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorTests.swift; sourceTree = "<group>"; };
 		FC1E6A4C2217474500DC335B /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		FC1E6A4E2217476400DC335B /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
@@ -476,17 +460,14 @@
 		FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDebugViewController.swift; sourceTree = "<group>"; };
 		FC31F096204D54E3009DD526 /* Debug.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
 		FC32E3D8200F322800D7C36A /* PartnerModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerModelTests.swift; sourceTree = "<group>"; };
-		FC39F44F21AAA617005B0A07 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		FC39F45121AAA617005B0A07 /* MessagesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesModel.swift; sourceTree = "<group>"; };
 		FC39F45621AAA617005B0A07 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		FC39F45821AAA617005B0A07 /* MessageViewController+UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MessageViewController+UITableView.swift"; sourceTree = "<group>"; };
 		FC39F45921AAA617005B0A07 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		FC39F46121AAA64B005B0A07 /* MessagesModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesModelTests.swift; sourceTree = "<group>"; };
-		FC39F46221AAA64B005B0A07 /* MessageProtocolTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageProtocolTests.swift; sourceTree = "<group>"; };
 		FC3CD1D9221566F200F91B50 /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
 		FC3F391E222930940046F8F8 /* MockUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserService.swift; sourceTree = "<group>"; };
 		FC40921D2101CDFF00453A54 /* AddVoucherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVoucherViewController.swift; sourceTree = "<group>"; };
-		FC4336CB202DB999001D0569 /* F4SStringExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SStringExtensionTests.swift; sourceTree = "<group>"; };
 		FC4BB6021FA20EF700173864 /* PartnerSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerSelectionViewController.swift; sourceTree = "<group>"; };
 		FC4BB6041FA20F4100173864 /* F4SPartner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPartner.swift; sourceTree = "<group>"; };
 		FC4BB6061FA20F5100173864 /* F4SPartnersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPartnersModel.swift; sourceTree = "<group>"; };
@@ -497,15 +478,10 @@
 		FC503F19231D1F97008722FF /* AddVoucherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVoucherViewModel.swift; sourceTree = "<group>"; };
 		FC505516220446830013AF4C /* CompanyMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyMapView.swift; sourceTree = "<group>"; };
 		FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModeSelectorView.swift; sourceTree = "<group>"; };
-		FC59B18C1F81546C0068EC9C /* F4SQuadtree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SQuadtree.swift; sourceTree = "<group>"; };
-		FC59B18D1F81546C0068EC9C /* CGRect+Methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Methods.swift"; sourceTree = "<group>"; };
-		FC59B18E1F81549A0068EC9C /* CGRect+MethodsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+MethodsTests.swift"; sourceTree = "<group>"; };
-		FC59B18F1F81549A0068EC9C /* F4SQuadtreeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SQuadtreeTests.swift; sourceTree = "<group>"; };
 		FC5C5B942109FF48007DCB84 /* RequestBLProvideDocuments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBLProvideDocuments.swift; sourceTree = "<group>"; };
 		FC5CBA50231D2A4700C2D3C5 /* WorkfinderAcceptUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAcceptUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5D3C6B20FE17F600F89169 /* config.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.yml; sourceTree = "<group>"; };
 		FC5D3C6D20FE1CEB00F89169 /* Gemfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Gemfile; sourceTree = "<group>"; };
-		FC5DF8B8228AAC6D004B014D /* NameLogicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameLogicTests.swift; sourceTree = "<group>"; };
 		FC5F3D4F20D93C070002F41B /* F4SUserDataFix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserDataFix.swift; sourceTree = "<group>"; };
 		FC64A5902119EBE3006464A5 /* CalendarChooserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarChooserController.swift; sourceTree = "<group>"; };
 		FC681BFE1F57473D0077BECA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -526,7 +502,7 @@
 		FC93DC5723202B8F00F1CE23 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		FC96709D2259F61600318F69 /* InterestsPruner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsPruner.swift; sourceTree = "<group>"; };
 		FC9670A0225A18D900318F69 /* PlacementRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacementRepository.swift; sourceTree = "<group>"; };
-		FC99B7E21F826D1400E2D5F0 /* LatLon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatLon.swift; sourceTree = "<group>"; };
+		FC99B7E21F826D1400E2D5F0 /* LatLon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LatLon.swift; path = ../WorkfinderModules/WorkfinderCommon/WorkfinderCommon/Source/LatLon.swift; sourceTree = "<group>"; };
 		FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDownloadService.swift; sourceTree = "<group>"; };
 		FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDatabaseDownloadManager.swift; sourceTree = "<group>"; };
 		FC9BEE072015FF6000347437 /* UniversalLinkParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalLinkParser.swift; sourceTree = "<group>"; };
@@ -562,7 +538,6 @@
 		FCCD6AE81FBB44CF0088D7C7 /* PopupCompanyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupCompanyListViewController.swift; sourceTree = "<group>"; };
 		FCCD6AEA1FBB4B8A0088D7C7 /* CompanyInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyInfoTableViewCell.swift; sourceTree = "<group>"; };
 		FCCFC7CE224D2C110060F7EC /* DataFixes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFixes.swift; sourceTree = "<group>"; };
-		FCD3485D20038C3100DC1316 /* MagicLinkInterpreterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagicLinkInterpreterTests.swift; sourceTree = "<group>"; };
 		FCD3485E20038C3100DC1316 /* F4SAuth0MagicLinkInterpreterer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = F4SAuth0MagicLinkInterpreterer.swift; path = "../../WorkfinderUserDetailsUseCase/WorkfinderUserDetailsUseCase/source/Email verification/F4SAuth0MagicLinkInterpreterer.swift"; sourceTree = "<group>"; };
 		FCD388E4208DEFE100FC73C5 /* F4SCompanyDocumentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyDocumentsModel.swift; sourceTree = "<group>"; };
 		FCD6F9E722E315B7003F7C34 /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -583,6 +558,7 @@
 		FCFBD0062250D69700A9361D /* f4s-workexperienceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "f4s-workexperienceTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCFBD0082250D69700A9361D /* f4s_workexperienceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = f4s_workexperienceTests.swift; sourceTree = "<group>"; };
 		FCFBD00A2250D69700A9361D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCFC06AC23225B9E003C59C8 /* LatLon+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LatLon+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -786,7 +762,6 @@
 		40E78E4D1DD3289B000A3776 /* F4S models and services */ = {
 			isa = PBXGroup;
 			children = (
-				FC59B18B1F8154350068EC9C /* F4SDataStructures */,
 				FC62FF8320EF6CEF003E52C5 /* F4SAPIServices */,
 				FC25A05D1F850DAC002F51A9 /* F4SMap models */,
 				FC62FF9520EF7235003E52C5 /* F4SMessage models */,
@@ -960,7 +935,6 @@
 		FC0B4072226B13D300D992AC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FC39F44F21AAA617005B0A07 /* Message.swift */,
 				FC39F45121AAA617005B0A07 /* MessagesModel.swift */,
 			);
 			path = Models;
@@ -1137,10 +1111,8 @@
 		FC1DC09921FE153E009ABC60 /* Company Detail Tests */ = {
 			isa = PBXGroup;
 			children = (
-				FC1DC09F21FE1564009ABC60 /* CompanyViewDataTests.swift */,
 				FC1DC09D21FE1563009ABC60 /* CompanyViewModelTests.swift */,
 				FC1DC09B21FE1562009ABC60 /* PersonViewDataTests.swift */,
-				FC1DC09C21FE1562009ABC60 /* ScaledNumberTests.swift */,
 			);
 			path = "Company Detail Tests";
 			sourceTree = "<group>";
@@ -1310,6 +1282,7 @@
 				FC99B7E21F826D1400E2D5F0 /* LatLon.swift */,
 				FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */,
 				FC92567A1F8F70D100FF9841 /* InterestsModel.swift */,
+				FCFC06AC23225B9E003C59C8 /* LatLon+Extensions.swift */,
 			);
 			name = "F4SMap models";
 			sourceTree = "<group>";
@@ -1346,32 +1319,13 @@
 			path = HiddenDebugScreen;
 			sourceTree = "<group>";
 		};
-		FC3F3920222931170046F8F8 /* MockF4SUser and service */ = {
-			isa = PBXGroup;
-			children = (
-				FC3F391E222930940046F8F8 /* MockUserService.swift */,
-			);
-			path = "MockF4SUser and service";
-			sourceTree = "<group>";
-		};
 		FC3F3921222931630046F8F8 /* Coordinator tests */ = {
 			isa = PBXGroup;
 			children = (
 				FC1E6A48221714B800DC335B /* AppCoordinatorTests.swift */,
 				FC8E3F4922D33A4C00102C37 /* VersionCheckCoordinatorTests.swift */,
-				FC17E02E223A378D00B32CBD /* ApplyCoordinatorTests.swift */,
 			);
 			path = "Coordinator tests";
-			sourceTree = "<group>";
-		};
-		FC3F39222229317D0046F8F8 /* Model tests */ = {
-			isa = PBXGroup;
-			children = (
-				FC4336CB202DB999001D0569 /* F4SStringExtensionTests.swift */,
-				FC59B18E1F81549A0068EC9C /* CGRect+MethodsTests.swift */,
-				FC59B18F1F81549A0068EC9C /* F4SQuadtreeTests.swift */,
-			);
-			path = "Model tests";
 			sourceTree = "<group>";
 		};
 		FC503F13231D0274008722FF /* Add Voucher */ = {
@@ -1399,15 +1353,6 @@
 				FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */,
 			);
 			path = Subviews;
-			sourceTree = "<group>";
-		};
-		FC59B18B1F8154350068EC9C /* F4SDataStructures */ = {
-			isa = PBXGroup;
-			children = (
-				FC59B18D1F81546C0068EC9C /* CGRect+Methods.swift */,
-				FC59B18C1F81546C0068EC9C /* F4SQuadtree.swift */,
-			);
-			name = F4SDataStructures;
 			sourceTree = "<group>";
 		};
 		FC5C32CE22705E8600C5BBCF /* ViewModel */ = {
@@ -1539,7 +1484,7 @@
 				FCA90A96221D6E9E00EACD8D /* Navigation and routing mocks */,
 				FCA90A92221D6A5600EACD8D /* MockUIApplication.swift */,
 				FCA90A90221D6A1700EACD8D /* MockDatabaseDownload.swift */,
-				FC3F3920222931170046F8F8 /* MockF4SUser and service */,
+				FC3F391E222930940046F8F8 /* MockUserService.swift */,
 				FC14E975221EBF6600EE985F /* MockAnalyticsAndDebugging.swift */,
 			);
 			path = Mocks;
@@ -1669,17 +1614,12 @@
 			isa = PBXGroup;
 			children = (
 				FCA90A8B221D693700EACD8D /* Mocks */,
-				FC3F39222229317D0046F8F8 /* Model tests */,
 				FC3F3921222931630046F8F8 /* Coordinator tests */,
 				FC1DC09921FE153E009ABC60 /* Company Detail Tests */,
-				FCD3485D20038C3100DC1316 /* MagicLinkInterpreterTests.swift */,
 				FC32E3D8200F322800D7C36A /* PartnerModelTests.swift */,
 				FCC85B2220EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift */,
-				FC39F46221AAA64B005B0A07 /* MessageProtocolTests.swift */,
 				FC39F46121AAA64B005B0A07 /* MessagesModelTests.swift */,
 				FC0B4083226CB1F300D992AC /* F4SRecommendedCompaniesMergerTests.swift */,
-				FC0B4085226CC06200D992AC /* RecommendationEquatableTests.swift */,
-				FC5DF8B8228AAC6D004B014D /* NameLogicTests.swift */,
 			);
 			path = "Workfinder main module tests";
 			sourceTree = "<group>";
@@ -1977,8 +1917,6 @@
 				FC1DC09621FE1509009ABC60 /* CompanySubViewController.swift in Sources */,
 				FCA333A520BEA938002AA790 /* F4SMessagesModel.swift in Sources */,
 				40C1A5211DDF5ACE000F80AA /* GQTPointQuadTree.m in Sources */,
-				FC59B1931F81554F0068EC9C /* CGRect+Methods.swift in Sources */,
-				FC59B1921F8155480068EC9C /* F4SQuadtree.swift in Sources */,
 				40E78E801DD32BF4000A3776 /* SideDrawerTableViewCell.swift in Sources */,
 				40C1A5271DE58EED000F80AA /* CutomClusterIconGenerator.swift in Sources */,
 				FCC9D13D1FC82B010081F7B5 /* StarRatingView.swift in Sources */,
@@ -2045,6 +1983,7 @@
 				FCD388E5208DEFE100FC73C5 /* F4SCompanyDocumentsModel.swift in Sources */,
 				FC21BE38220F53EB00A0A389 /* SearchProtocols.swift in Sources */,
 				FC21BE35220F53EB00A0A389 /* CompanySearchDataSource.swift in Sources */,
+				FCFC06AD23225B9E003C59C8 /* LatLon+Extensions.swift in Sources */,
 				40E78E761DD32BE7000A3776 /* AnimatedMenuButton.swift in Sources */,
 				FC06264722032E74000D2D04 /* CompanyDocumentsViewController.swift in Sources */,
 				FC21BE39220F53EB00A0A389 /* SearchView.swift in Sources */,
@@ -2074,7 +2013,6 @@
 				40E78E6F1DD32BD4000A3776 /* CustomMenuViewController.swift in Sources */,
 				40E78E7F1DD32BF4000A3776 /* SideDrawerSectionHeaderView.swift in Sources */,
 				FC96709E2259F61600318F69 /* InterestsPruner.swift in Sources */,
-				FC39F45A21AAA618005B0A07 /* Message.swift in Sources */,
 				FC9670A1225A18D900318F69 /* PlacementRepository.swift in Sources */,
 				FC21BE32220F53EB00A0A389 /* SearchDataSourcing.swift in Sources */,
 				40E78E831DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift in Sources */,
@@ -2120,29 +2058,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC8E3F4A22D33A4C00102C37 /* VersionCheckCoordinatorTests.swift in Sources */,
-				FCFBD0252250DB6000A9361D /* MessageProtocolTests.swift in Sources */,
-				FCFBD0202250DAE900A9361D /* MagicLinkInterpreterTests.swift in Sources */,
 				FCFBD01C2250DA3A00A9361D /* MockNavigationRouter.swift in Sources */,
-				FCFBD0142250D90F00A9361D /* F4SQuadtreeTests.swift in Sources */,
 				FC503F18231D049F008722FF /* AddVoucherViewModelTests.swift in Sources */,
-				FC0B4086226CC06200D992AC /* RecommendationEquatableTests.swift in Sources */,
 				FCFBD0162250D96900A9361D /* MockAnalyticsAndDebugging.swift in Sources */,
 				FCFBD0242250DB4D00A9361D /* F4SDatabaseDownloadManagerTests.swift in Sources */,
 				FCFBD01A2250DA1800A9361D /* MockUIApplication.swift in Sources */,
 				FCFBD0262250DB7700A9361D /* MessagesModelTests.swift in Sources */,
 				FCFBD0182250D9A400A9361D /* MockUserService.swift in Sources */,
-				FCFBD01E2250DA6000A9361D /* ApplyCoordinatorTests.swift in Sources */,
-				FCFBD0132250D8FC00A9361D /* CGRect+MethodsTests.swift in Sources */,
 				FCFBD0292250DBE900A9361D /* CompanyViewModelTests.swift in Sources */,
 				FCFBD0212250DAFE00A9361D /* PartnerModelTests.swift in Sources */,
-				FCFBD0122250D8D400A9361D /* F4SStringExtensionTests.swift in Sources */,
-				FCFBD0282250DBD100A9361D /* CompanyViewDataTests.swift in Sources */,
-				FCFBD02C2250DC4200A9361D /* ScaledNumberTests.swift in Sources */,
 				FC0B4084226CB1F300D992AC /* F4SRecommendedCompaniesMergerTests.swift in Sources */,
 				FCFBD01D2250DA3E00A9361D /* MockCoordinators.swift in Sources */,
 				FCFBD02B2250DC2700A9361D /* PersonViewDataTests.swift in Sources */,
 				FCFBD0092250D69700A9361D /* f4s_workexperienceTests.swift in Sources */,
-				FC5DF8B9228AAC6D004B014D /* NameLogicTests.swift in Sources */,
 				FCFBD01B2250DA1800A9361D /* MockDatabaseDownload.swift in Sources */,
 				FCFBD0192250D9FF00A9361D /* AppCoordinatorTests.swift in Sources */,
 			);

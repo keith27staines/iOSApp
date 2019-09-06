@@ -7,8 +7,7 @@
 //
 
 import XCTest
-import WorkfinderCommon
-@testable import f4s_workexperience
+@testable import WorkfinderCommon
 
 class CompanyViewDataTests: XCTestCase {
     
