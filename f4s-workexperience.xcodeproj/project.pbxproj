@@ -236,7 +236,6 @@
 		FCF798542227F5AB00D67A7D /* RecommendationsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF798532227F5AB00D67A7D /* RecommendationsCoordinator.swift */; };
 		FCFB1328224930660086BE25 /* Mustache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCFB1327224930660086BE25 /* Mustache.framework */; };
 		FCFB1329224930660086BE25 /* Mustache.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCFB1327224930660086BE25 /* Mustache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FCFBD0092250D69700A9361D /* f4s_workexperienceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFBD0082250D69700A9361D /* f4s_workexperienceTests.swift */; };
 		FCFBD0162250D96900A9361D /* MockAnalyticsAndDebugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC14E975221EBF6600EE985F /* MockAnalyticsAndDebugging.swift */; };
 		FCFBD0182250D9A400A9361D /* MockUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3F391E222930940046F8F8 /* MockUserService.swift */; };
 		FCFBD0192250D9FF00A9361D /* AppCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A48221714B800DC335B /* AppCoordinatorTests.swift */; };
@@ -556,7 +555,6 @@
 		FCF798532227F5AB00D67A7D /* RecommendationsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsCoordinator.swift; sourceTree = "<group>"; };
 		FCFB1327224930660086BE25 /* Mustache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mustache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCFBD0062250D69700A9361D /* f4s-workexperienceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "f4s-workexperienceTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCFBD0082250D69700A9361D /* f4s_workexperienceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = f4s_workexperienceTests.swift; sourceTree = "<group>"; };
 		FCFBD00A2250D69700A9361D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCFC06AC23225B9E003C59C8 /* LatLon+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LatLon+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1481,22 +1479,14 @@
 		FCA90A8B221D693700EACD8D /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				FCA90A96221D6E9E00EACD8D /* Navigation and routing mocks */,
+				FCA90A8E221D69B600EACD8D /* MockCoordinators.swift */,
+				FCA90A8C221D696400EACD8D /* MockNavigationRouter.swift */,
 				FCA90A92221D6A5600EACD8D /* MockUIApplication.swift */,
 				FCA90A90221D6A1700EACD8D /* MockDatabaseDownload.swift */,
 				FC3F391E222930940046F8F8 /* MockUserService.swift */,
 				FC14E975221EBF6600EE985F /* MockAnalyticsAndDebugging.swift */,
 			);
 			path = Mocks;
-			sourceTree = "<group>";
-		};
-		FCA90A96221D6E9E00EACD8D /* Navigation and routing mocks */ = {
-			isa = PBXGroup;
-			children = (
-				FCA90A8C221D696400EACD8D /* MockNavigationRouter.swift */,
-				FCA90A8E221D69B600EACD8D /* MockCoordinators.swift */,
-			);
-			path = "Navigation and routing mocks";
 			sourceTree = "<group>";
 		};
 		FCB3922820FF1C4B00792C0A /* Accept offer Workflow */ = {
@@ -1603,7 +1593,6 @@
 			isa = PBXGroup;
 			children = (
 				FC503F16231D0456008722FF /* AddVoucherUseCase */,
-				FCFBD0082250D69700A9361D /* f4s_workexperienceTests.swift */,
 				FCFE450F2250CAD600C38436 /* Workfinder main module tests */,
 				FCFBD00A2250D69700A9361D /* Info.plist */,
 			);
@@ -2070,7 +2059,6 @@
 				FC0B4084226CB1F300D992AC /* F4SRecommendedCompaniesMergerTests.swift in Sources */,
 				FCFBD01D2250DA3E00A9361D /* MockCoordinators.swift in Sources */,
 				FCFBD02B2250DC2700A9361D /* PersonViewDataTests.swift in Sources */,
-				FCFBD0092250D69700A9361D /* f4s_workexperienceTests.swift in Sources */,
 				FCFBD01B2250DA1800A9361D /* MockDatabaseDownload.swift in Sources */,
 				FCFBD0192250D9FF00A9361D /* AppCoordinatorTests.swift in Sources */,
 			);
