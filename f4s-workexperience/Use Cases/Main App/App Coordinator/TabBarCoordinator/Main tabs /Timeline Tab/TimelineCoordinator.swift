@@ -59,7 +59,8 @@ class TimelineCoordinator : CoreInjectionNavigationCoordinator {
     
     func showAcceptOffer(acceptContext: AcceptOfferContext?) {
         guard let acceptContext = acceptContext else { return }
-        let acceptCoordinator = AcceptOfferCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, acceptContext: acceptContext)
+        let companyCoordinatorFactory = CompanyCoordinatorFactory()
+        let acceptCoordinator = AcceptOfferCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, acceptContext: acceptContext, companyCoordinatorFactory: companyCoordinatorFactory)
         addChildCoordinator(acceptCoordinator)
         acceptCoordinator.start()
     }

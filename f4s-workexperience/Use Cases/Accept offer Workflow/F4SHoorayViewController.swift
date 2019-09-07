@@ -25,6 +25,11 @@ class F4SHoorayViewController: UIViewController {
     @IBOutlet weak var shareImageView: UIImageView!
     let eventStore = EKEventStore()
     var accept: AcceptOfferContext!
+    var coordinator: AcceptOfferCoordinator?
+    
+    @IBAction func doneTapped(_ sender: Any) {
+        coordinator?.didFinish()
+    }
     
     @IBAction func shareTapped(_ sender: Any) {
         accept.presentShare(from: self, sourceView: shareImageView)

@@ -3,7 +3,13 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderNetworking
 
-public class F4SPlacementService : F4SPlacementServiceProtocol {
+public protocol F4SOfferProcessingServiceProtocol {
+    func confirmPlacement(placement: F4STimelinePlacement, completion: @escaping (F4SNetworkResult<Bool>) -> ())
+    func cancelPlacement(_ uuid: F4SUUID, completion: @escaping (F4SNetworkResult<Bool>) -> ())
+    func declinePlacement(_ uuid: F4SUUID, completion: @escaping (F4SNetworkResult<Bool>) -> ())
+}
+
+public class F4SPlacementService : F4SPlacementServiceProtocol, F4SOfferProcessingServiceProtocol {
     
     var dataTask: F4SNetworkTask?
     var sessionManager: F4SNetworkSessionManagerProtocol

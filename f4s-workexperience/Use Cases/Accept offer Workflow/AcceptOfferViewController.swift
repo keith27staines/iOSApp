@@ -23,6 +23,10 @@ class AcceptOfferViewController: UIViewController {
     var companyDocumentsModel: F4SCompanyDocumentsModel?
     weak var coordinator: AcceptOfferCoordinator?
     
+    var offerProcessor: F4SOfferProcessingServiceProtocol = F4SPlacementService()
+    var userMessageHandler = UserMessageHandler()
+    var offerConfirmer: F4SOfferConfirmer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         placementInviteModel = F4SPlacementInviteModel(context: accept)
@@ -72,42 +76,27 @@ class AcceptOfferViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let hoorayViewController = segue.destination as? F4SHoorayViewController {
             hoorayViewController.accept = accept
+            hoorayViewController.coordinator = coordinator
             return
         }
         if let requestDocumentsViewController = segue.destination as? RequestBLProvideDocuments {
             requestDocumentsViewController.accept = accept
+            requestDocumentsViewController.coordinator = coordinator
             requestDocumentsViewController.companyDocumentsModel = self.companyDocumentsModel
             return
         }
     }
     
-    var placementService = F4SPlacementService()
     func confirmOffer() {
-        sharedUserMessageHandler.showLoadingOverlay(self.view)
-        let placement = accept.placement
-        placementService.confirmPlacement(placement: placement, completion: {
-            (confirmResult) in
-            DispatchQueue.main.async { [weak self] in
-                guard let strongSelf = self else { return }
-                sharedUserMessageHandler.hideLoadingOverlay()
-                switch  confirmResult {
-                case .error(let error):
-                    if error.retry {
-                        sharedUserMessageHandler.display(error, parentCtrl: strongSelf, cancelHandler: nil, retryHandler: {
-                            strongSelf.confirmOffer()
-                        })
-                    } else {
-                        sharedUserMessageHandler.display(error, parentCtrl: strongSelf)
-                    }
-                case .success(let success):
-                    if success == true {
-                        strongSelf.performSegue(withIdentifier: "showHooray", sender: self)
-                    } else {
-                        globalLog.error("confirm placement failed with an unexpected error in the response body")
-                    }
-                }
-            }
-        })
+        let offerConfirmer = F4SOfferConfirmer(
+            messageHandler: userMessageHandler,
+            placementService: offerProcessor,
+            placement: accept.placement,
+            sender: self)
+        offerConfirmer.confirmOffer() { [weak self] in
+            self?.performSegue(withIdentifier: "showHooray", sender: self)
+        }
+        self.offerConfirmer = offerConfirmer
     }
 }
 
@@ -192,7 +181,8 @@ extension AcceptOfferViewController : UITableViewDataSource {
             }
             buttonsCell.secondaryAction = { [weak self] in
                 guard let strongSelf = self else { return }
-                strongSelf.declineApplication(uuid: strongSelf.accept.placement.placementUuid!)
+                let uuid = strongSelf.accept.placement.placementUuid!
+                strongSelf.declineApplication(uuid: uuid)
             }
             buttonsCell.shareOffer = { [weak self] in
                 guard let strongSelf = self else { return }
@@ -209,7 +199,8 @@ extension AcceptOfferViewController : UITableViewDataSource {
             buttonsCell.primaryAction = nil
             buttonsCell.secondaryAction = { [weak self] in
                 guard let strongSelf = self else { return }
-                strongSelf.cancelApplication(uuid: strongSelf.accept.placement.placementUuid!)
+                let uuid = strongSelf.accept.placement.placementUuid!
+                strongSelf.cancelApplication(uuid: uuid)
             }
             buttonsCell.shareOffer = { [weak self] in
                 guard let strongSelf = self else { return }
@@ -291,8 +282,7 @@ extension AcceptOfferViewController {
     
     func declineApplication(uuid: F4SUUID) {
         sharedUserMessageHandler.showLoadingOverlay(self.view)
-        let service = F4SPlacementService()
-        service.declinePlacement(uuid) { (result) in
+        offerProcessor.declinePlacement(uuid) { (result) in
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else { return }
                 sharedUserMessageHandler.hideLoadingOverlay()
@@ -302,7 +292,19 @@ extension AcceptOfferViewController {
                         strongSelf.declineApplication(uuid: uuid)
                     })
                 case .success(_):
-                    strongSelf.coordinator?.didDecline()
+                    let title = "Offer declined"
+                    let message = "You have declined this offer of work experience"
+                    let alert = UIAlertController(
+                        title: title,
+                        message: message, preferredStyle: .alert)
+                    let okAction = UIAlertAction(
+                        title: "OK",
+                        style: .default,
+                        handler: { (_) in
+                            strongSelf.coordinator?.didDecline()
+                    })
+                    alert.addAction(okAction)
+                    strongSelf.present(alert, animated: true, completion: nil)
                 }
             }
         }
@@ -310,8 +312,7 @@ extension AcceptOfferViewController {
     
     func cancelApplication(uuid: F4SUUID) {
         sharedUserMessageHandler.showLoadingOverlay(self.view)
-        let service = F4SPlacementService()
-        service.cancelPlacement(uuid) { (result) in
+        offerProcessor.cancelPlacement(uuid) { (result) in
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else { return }
                 sharedUserMessageHandler.hideLoadingOverlay()
@@ -321,7 +322,19 @@ extension AcceptOfferViewController {
                         strongSelf.cancelApplication(uuid: uuid)
                     })
                 case .success(_):
-                    strongSelf.coordinator?.didCancel()
+                    let title = "Placement cancelled"
+                    let message = "You have cancelled your placement"
+                    let alert = UIAlertController(
+                        title: title,
+                        message: message, preferredStyle: .alert)
+                    let okAction = UIAlertAction(
+                        title: "OK",
+                        style: .default,
+                        handler: { (_) in
+                            strongSelf.coordinator?.didCancel()
+                    })
+                    alert.addAction(okAction)
+                    strongSelf.present(alert, animated: true, completion: nil)
                 }
             }
         }

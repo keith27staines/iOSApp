@@ -6,7 +6,20 @@ import WorkfinderServices
 import WorkfinderCoordinators
 import WorkfinderApplyUseCase
 
-protocol CompanyCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol {}
+class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol{
+    func makeCompanyCoordinator(parent: CoreInjectionNavigationCoordinator, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol, companyUuid: F4SUUID) ->  CompanyCoordinatorProtocol? {
+        guard let company = F4SCompanyRepository().load(companyUuid: companyUuid) else { return nil }
+        return makeCompanyCoordinator(parent: parent, navigationRouter: navigationRouter, company: company, inject: inject)
+    }
+    
+    func makeCompanyCoordinator(
+        parent: CoreInjectionNavigationCoordinator?,
+        navigationRouter: NavigationRoutingProtocol,
+        company: Company,
+        inject: CoreInjectionProtocol) -> CompanyCoordinatorProtocol {
+        return CompanyCoordinator(parent: parent, navigationRouter: navigationRouter, company: company, inject: inject)
+    }
+}
 
 class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoordinatorProtocol {
     
@@ -117,12 +130,3 @@ extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
     }
 }
 
-struct CompanyCoordinatorFactory {
-    func makeCompanyCoordinator(
-        parent: CoreInjectionNavigationCoordinator?,
-        navigationRouter: NavigationRoutingProtocol,
-        company: Company,
-        inject: CoreInjectionProtocol) -> CompanyCoordinatorProtocol {
-        return CompanyCoordinator(parent: parent, navigationRouter: navigationRouter, company: company, inject: inject)
-    }
-}

@@ -3,43 +3,67 @@ import WorkfinderCommon
 import WorkfinderCoordinators
 import WorkfinderAcceptUseCase
 
-class AcceptOfferCoordinator : CoreInjectionNavigationCoordinator {
+public class AcceptOfferCoordinator : CoreInjectionNavigationCoordinator {
     
     let acceptContext: AcceptOfferContext
     let parent: CoreInjectionNavigationCoordinator
+    var parentViewController: UIViewController?
+    var firstViewController: UIViewController?
+    let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     
-    init(parent: CoreInjectionNavigationCoordinator,
+    public init(parent: CoreInjectionNavigationCoordinator,
          navigationRouter: NavigationRoutingProtocol,
          inject: CoreInjectionProtocol,
-         acceptContext: AcceptOfferContext) {
+         acceptContext: AcceptOfferContext,
+         companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol) {
         self.parent = parent
         self.acceptContext = acceptContext
+        self.companyCoordinatorFactory = companyCoordinatorFactory
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
-    
-    override func start() {
+
+    public override func start() {
         let acceptStoryboard = UIStoryboard(name: "AcceptOffer", bundle: nil)
         let vc = acceptStoryboard.instantiateInitialViewController() as! AcceptOfferViewController
         vc.accept = acceptContext
         vc.coordinator = self
         navigationRouter.push(viewController: vc, animated: true)
+        firstViewController = vc
+        parentViewController = vc.parent
     }
     
     func showCompanyDetail(_ companyViewData: CompanyViewDataProtocol) {
-        let company = DatabaseOperations.sharedInstance.companyWithUUID(companyViewData.uuid)!
-        let companyCoordinator = CompanyCoordinator(parent: parent, navigationRouter: navigationRouter, company: company, inject: injected)
+        guard let companyCoordinator = companyCoordinatorFactory.makeCompanyCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, companyUuid: companyViewData.uuid) else { return }
         addChildCoordinator(companyCoordinator)
         companyCoordinator.start()
     }
     
     func didDecline() {
-        navigationRouter.pop(animated: true)
-        parentCoordinator?.childCoordinatorDidFinish(self)
+        didFinish()
     }
     
     func didCancel() {
-        navigationRouter.pop(animated: true)
-        parentCoordinator?.childCoordinatorDidFinish(self)
+        didFinish()
     }
     
+    func didFinish() {
+        guard let popTo = parentViewController ?? firstViewController else { return }
+        navigationRouter.popToViewController(popTo, animated: true)
+        parentCoordinator?.childCoordinatorDidFinish(self)
+    }
 }
+
+extension AcceptOfferCoordinator {
+    func createFinishingAlert(title: String,
+                              message: String,
+                              completion: @escaping () -> Void) -> UIAlertController {
+        let style = UIAlertController.Style.alert
+        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { _ in
+            completion()
+        }
+        let controller = UIAlertController(title: title, message: message, preferredStyle: style)
+        controller.addAction(okAction)
+        return controller
+    }
+}
+

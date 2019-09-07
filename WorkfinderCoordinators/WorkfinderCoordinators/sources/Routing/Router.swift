@@ -19,5 +19,4 @@ public protocol NavigationRoutingProtocol : RoutingProtocol {
     func push(viewController: UIViewController, animated: Bool)
     func pop(animated: Bool)
     func popToViewController(_ viewController: UIViewController, animated: Bool)
-    //func popToRootViewController(animated: Bool)
 }

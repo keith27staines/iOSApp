@@ -8,19 +8,21 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderServices
 import WorkfinderUI
 import WorkfinderAcceptUseCase
 
 class RequestBLProvideDocuments: UIViewController {
     var accept: AcceptOfferContext!
     var companyDocumentsModel: F4SCompanyDocumentsModel!
+    var coordinator: AcceptOfferCoordinator?
 
     @IBOutlet weak var tableVIew: UITableView!
     @IBOutlet weak var requestButton: UIButton!
     @IBOutlet weak var skipButton: UIButton!
     
     @IBAction func skipButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "showVoucherEntry", sender: self)
+        confirmOffer()
     }
     
     @IBAction func requestButtonTapped(_ sender: Any) {
@@ -39,10 +41,23 @@ class RequestBLProvideDocuments: UIViewController {
                         sharedUserMessageHandler.display(error, parentCtrl: strongSelf, cancelHandler: nil, retryHandler: nil)
                     }
                 case .success(_):
-                    strongSelf.performSegue(withIdentifier: "showVoucherEntry", sender: strongSelf)
+                    strongSelf.confirmOffer()
                 }
             }
         }
+    }
+    
+    var userMessageHandler = UserMessageHandler()
+    var offerConfirmer: F4SOfferConfirmer?
+    func confirmOffer() {
+        let offerConfirmer = F4SOfferConfirmer(messageHandler: userMessageHandler,
+                                               placementService: F4SPlacementService(),
+                                               placement: accept.placement,
+                                               sender: self)
+        offerConfirmer.confirmOffer() { [weak self] in
+            self?.performSegue(withIdentifier: "showHooray", sender: self)
+        }
+        self.offerConfirmer = offerConfirmer
     }
     
     var selectedDocument: F4SCompanyDocument? = nil
@@ -79,6 +94,7 @@ class RequestBLProvideDocuments: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let hoorayViewController = segue.destination as? F4SHoorayViewController {
             hoorayViewController.accept = accept
+            hoorayViewController.coordinator = coordinator
             return
         }
         if let viewDocumentViewController = segue.destination as? F4SDocumentViewer, let documentToDisplay = selectedDocument {
@@ -86,7 +102,6 @@ class RequestBLProvideDocuments: UIViewController {
             return
         }
     }
-
 }
 
 extension RequestBLProvideDocuments : UITableViewDataSource, UITableViewDelegate {

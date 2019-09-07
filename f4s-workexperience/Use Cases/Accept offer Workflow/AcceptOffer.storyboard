@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q51-MB-96S" customClass="F4SCompanyHeaderViewWithLogo" customModule="f4s_workexperience" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q51-MB-96S" customClass="F4SCompanyHeaderViewWithLogo" customModule="WorkfinderUI">
                                 <rect key="frame" x="0.0" y="20" width="375" height="100"/>
                                 <color key="backgroundColor" red="0.58081901069999997" green="0.088427625600000004" blue="0.31863921880000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -468,7 +468,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hooray" translatesAutoresizingMaskIntoConstraints="NO" id="GZB-Xt-Dp1" userLabel="hooray">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="212"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uOy-iP-aAH" customClass="F4SCompanyHeaderViewWithLogo" customModule="f4s_workexperience" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uOy-iP-aAH" customClass="F4SCompanyHeaderViewWithLogo" customModule="WorkfinderUI">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="212"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
@@ -521,7 +521,7 @@
                                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="VO7-vy-1f9" kind="unwind" identifier="unwindToMessages" unwindAction="unwindToMessageContainerWithSegue:" id="ovq-9D-lZP"/>
+                                                    <action selector="doneTapped:" destination="0G0-HQ-u2r" eventType="touchUpInside" id="E3D-Xz-3nU"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mup-zf-05d">
@@ -580,7 +580,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ivz-fd-5Zi" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="VO7-vy-1f9" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="e3t-lP-ogb">
                     <connections>
                         <action selector="shareTapped:" destination="0G0-HQ-u2r" id="fSm-HZ-2ZN"/>
@@ -684,6 +683,6 @@
         <image name="ui-offershare-icon" width="45" height="45"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="X1h-Ar-v6R"/>
+        <segue reference="OvE-ze-RpY"/>
     </inferredMetricsTieBreakers>
 </document>

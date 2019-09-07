@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC53D6DE2323C0B600A339ED /* CompanyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC53D6DD2323C0B600A339ED /* CompanyCoordinator.swift */; };
 		FC93DBA5231F888C00F1CE23 /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DB9B231F888C00F1CE23 /* WorkfinderCoordinators.framework */; };
 		FC93DBAA231F888C00F1CE23 /* WorkfinderCoordinatorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DBA9231F888C00F1CE23 /* WorkfinderCoordinatorsTests.swift */; };
 		FC93DBAC231F888C00F1CE23 /* WorkfinderCoordinators.h in Headers */ = {isa = PBXBuildFile; fileRef = FC93DB9E231F888C00F1CE23 /* WorkfinderCoordinators.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -33,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FC53D6DD2323C0B600A339ED /* CompanyCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCoordinator.swift; sourceTree = "<group>"; };
 		FC93DB9B231F888C00F1CE23 /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC93DB9E231F888C00F1CE23 /* WorkfinderCoordinators.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderCoordinators.h; sourceTree = "<group>"; };
 		FC93DB9F231F888C00F1CE23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				FC93DBC2231F8C7F00F1CE23 /* Coordinating Protocol.swift */,
 				FC93DBC1231F8C7E00F1CE23 /* NavigationCoordinator.swift */,
 				FC93DBE5231FA62900F1CE23 /* CoreInjectionNavigationCoordinator.swift */,
+				FC53D6DD2323C0B600A339ED /* CompanyCoordinator.swift */,
 			);
 			path = Coordinating;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				FC93DBE6231FA62900F1CE23 /* CoreInjectionNavigationCoordinator.swift in Sources */,
 				FC93DBD1231F8D7E00F1CE23 /* NavigationRouter.swift in Sources */,
 				FC93DBC3231F8C7F00F1CE23 /* Coordinating Protocol.swift in Sources */,
+				FC53D6DE2323C0B600A339ED /* CompanyCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
