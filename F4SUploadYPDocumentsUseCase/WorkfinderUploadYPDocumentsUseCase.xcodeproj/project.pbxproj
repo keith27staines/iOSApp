@@ -767,7 +767,7 @@
 			};
 			name = ReleaseF4S;
 		};
-		FC7C218F23212AE500721D1D /* ReleaseF4SF4SLive */ = {
+		FC7C218F23212AE500721D1D /* ReleaseF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -823,9 +823,9 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = ReleaseF4SF4SLive;
+			name = ReleaseF4SLive;
 		};
-		FC7C219023212AE500721D1D /* ReleaseF4SF4SLive */ = {
+		FC7C219023212AE500721D1D /* ReleaseF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
@@ -848,9 +848,9 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = ReleaseF4SF4SLive;
+			name = ReleaseF4SLive;
 		};
-		FC7C219123212AE500721D1D /* ReleaseF4SF4SLive */ = {
+		FC7C219123212AE500721D1D /* ReleaseF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -867,7 +867,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = ReleaseF4SF4SLive;
+			name = ReleaseF4SLive;
 		};
 		FCE8DAC52320F13D00934E2F /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1090,7 +1090,7 @@
 				FC7C218923212ACC00721D1D /* DebugF4SLive */,
 				FCE8DAC62320F13D00934E2F /* Release */,
 				FC7C218C23212AD900721D1D /* ReleaseF4S */,
-				FC7C218F23212AE500721D1D /* ReleaseF4SF4SLive */,
+				FC7C218F23212AE500721D1D /* ReleaseF4SLive */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1103,7 +1103,7 @@
 				FC7C218A23212ACC00721D1D /* DebugF4SLive */,
 				FCE8DAC92320F13D00934E2F /* Release */,
 				FC7C218D23212AD900721D1D /* ReleaseF4S */,
-				FC7C219023212AE500721D1D /* ReleaseF4SF4SLive */,
+				FC7C219023212AE500721D1D /* ReleaseF4SLive */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1116,7 +1116,7 @@
 				FC7C218B23212ACC00721D1D /* DebugF4SLive */,
 				FCE8DACC2320F13D00934E2F /* Release */,
 				FC7C218E23212AD900721D1D /* ReleaseF4S */,
-				FC7C219123212AE500721D1D /* ReleaseF4SF4SLive */,
+				FC7C219123212AE500721D1D /* ReleaseF4SLive */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

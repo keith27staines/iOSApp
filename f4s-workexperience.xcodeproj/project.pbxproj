@@ -2180,7 +2180,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		201458B71E1BA9B900DBC9BD /* DebugF4S */ = {
+		201458B71E1BA9B900DBC9BD /* DebugF4SLive */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 20B1281F1DDA1D5B00CE3F1F /* f4s-workexperience.xcconfig */;
 			buildSettings = {
@@ -2243,9 +2243,9 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
-			name = DebugF4S;
+			name = DebugF4SLive;
 		};
-		201458B81E1BA9B900DBC9BD /* DebugF4S */ = {
+		201458B81E1BA9B900DBC9BD /* DebugF4SLive */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C244124FAD6DA2320378A05F /* Pods-f4s-workexperience.debugf4s.xcconfig */;
 			buildSettings = {
@@ -2270,9 +2270,9 @@
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
-			name = DebugF4S;
+			name = DebugF4SLive;
 		};
-		201458BB1E1BA9C400DBC9BD /* ReleaseF4S */ = {
+		201458BB1E1BA9C400DBC9BD /* ReleaseF4SLive */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 20B1281F1DDA1D5B00CE3F1F /* f4s-workexperience.xcconfig */;
 			buildSettings = {
@@ -2329,9 +2329,9 @@
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
-			name = ReleaseF4S;
+			name = ReleaseF4SLive;
 		};
-		201458BC1E1BA9C400DBC9BD /* ReleaseF4S */ = {
+		201458BC1E1BA9C400DBC9BD /* ReleaseF4SLive */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 698B16C1DEA4421DE6C2C9D6 /* Pods-f4s-workexperience.releasef4s.xcconfig */;
 			buildSettings = {
@@ -2356,9 +2356,9 @@
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
-			name = ReleaseF4S;
+			name = ReleaseF4SLive;
 		};
-		40D53C841E30EA2900D7AA32 /* DebugF4SLive */ = {
+		40D53C841E30EA2900D7AA32 /* DebugF4S */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 20B1281F1DDA1D5B00CE3F1F /* f4s-workexperience.xcconfig */;
 			buildSettings = {
@@ -2421,9 +2421,9 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
-			name = DebugF4SLive;
+			name = DebugF4S;
 		};
-		40D53C851E30EA2900D7AA32 /* DebugF4SLive */ = {
+		40D53C851E30EA2900D7AA32 /* DebugF4S */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9C8235BD4A169F7DD6BA6996 /* Pods-f4s-workexperience.debugf4slive.xcconfig */;
 			buildSettings = {
@@ -2447,9 +2447,9 @@
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
-			name = DebugF4SLive;
+			name = DebugF4S;
 		};
-		40D53C881E30EA6E00D7AA32 /* ReleaseF4SLive */ = {
+		40D53C881E30EA6E00D7AA32 /* ReleaseF4S */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 20B1281F1DDA1D5B00CE3F1F /* f4s-workexperience.xcconfig */;
 			buildSettings = {
@@ -2506,9 +2506,9 @@
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
-			name = ReleaseF4SLive;
+			name = ReleaseF4S;
 		};
-		40D53C891E30EA6E00D7AA32 /* ReleaseF4SLive */ = {
+		40D53C891E30EA6E00D7AA32 /* ReleaseF4S */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 590A4AE101882A503C247BC5 /* Pods-f4s-workexperience.releasef4slive.xcconfig */;
 			buildSettings = {
@@ -2533,9 +2533,9 @@
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
-			name = ReleaseF4SLive;
+			name = ReleaseF4S;
 		};
-		FCFBD00D2250D69700A9361D /* DebugF4SLive */ = {
+		FCFBD00D2250D69700A9361D /* DebugF4S */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A8C2B2FDB72FFFD854511B24 /* Pods-f4s-workexperienceTests.debugf4slive.xcconfig */;
 			buildSettings = {
@@ -2605,9 +2605,9 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s-workexperience.app/f4s-workexperience";
 			};
-			name = DebugF4SLive;
+			name = DebugF4S;
 		};
-		FCFBD00E2250D69700A9361D /* DebugF4S */ = {
+		FCFBD00E2250D69700A9361D /* DebugF4SLive */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5EDAD0D218CD01AA5D5D2DD5 /* Pods-f4s-workexperienceTests.debugf4s.xcconfig */;
 			buildSettings = {
@@ -2677,9 +2677,9 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s-workexperience.app/f4s-workexperience";
 			};
-			name = DebugF4S;
+			name = DebugF4SLive;
 		};
-		FCFBD00F2250D69700A9361D /* ReleaseF4SLive */ = {
+		FCFBD00F2250D69700A9361D /* ReleaseF4S */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0022DD3F6308590A19CBCF7B /* Pods-f4s-workexperienceTests.releasef4slive.xcconfig */;
 			buildSettings = {
@@ -2742,9 +2742,9 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s-workexperience.app/f4s-workexperience";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = ReleaseF4SLive;
+			name = ReleaseF4S;
 		};
-		FCFBD0102250D69700A9361D /* ReleaseF4S */ = {
+		FCFBD0102250D69700A9361D /* ReleaseF4SLive */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D01AFAF1CC1AF1F3203880BF /* Pods-f4s-workexperienceTests.releasef4s.xcconfig */;
 			buildSettings = {
@@ -2807,7 +2807,7 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s-workexperience.app/f4s-workexperience";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = ReleaseF4S;
+			name = ReleaseF4SLive;
 		};
 /* End XCBuildConfiguration section */
 
@@ -2815,35 +2815,35 @@
 		40E78E0E1DD31A86000A3776 /* Build configuration list for PBXProject "f4s-workexperience" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				40D53C841E30EA2900D7AA32 /* DebugF4SLive */,
-				201458B71E1BA9B900DBC9BD /* DebugF4S */,
-				40D53C881E30EA6E00D7AA32 /* ReleaseF4SLive */,
-				201458BB1E1BA9C400DBC9BD /* ReleaseF4S */,
+				40D53C841E30EA2900D7AA32 /* DebugF4S */,
+				201458B71E1BA9B900DBC9BD /* DebugF4SLive */,
+				40D53C881E30EA6E00D7AA32 /* ReleaseF4S */,
+				201458BB1E1BA9C400DBC9BD /* ReleaseF4SLive */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = ReleaseF4SLive;
+			defaultConfigurationName = ReleaseF4S;
 		};
 		40E78E3B1DD31A86000A3776 /* Build configuration list for PBXNativeTarget "f4s-workexperience" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				40D53C851E30EA2900D7AA32 /* DebugF4SLive */,
-				201458B81E1BA9B900DBC9BD /* DebugF4S */,
-				40D53C891E30EA6E00D7AA32 /* ReleaseF4SLive */,
-				201458BC1E1BA9C400DBC9BD /* ReleaseF4S */,
+				40D53C851E30EA2900D7AA32 /* DebugF4S */,
+				201458B81E1BA9B900DBC9BD /* DebugF4SLive */,
+				40D53C891E30EA6E00D7AA32 /* ReleaseF4S */,
+				201458BC1E1BA9C400DBC9BD /* ReleaseF4SLive */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = ReleaseF4SLive;
+			defaultConfigurationName = ReleaseF4S;
 		};
 		FCFBD0112250D69700A9361D /* Build configuration list for PBXNativeTarget "f4s-workexperienceTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FCFBD00D2250D69700A9361D /* DebugF4SLive */,
-				FCFBD00E2250D69700A9361D /* DebugF4S */,
-				FCFBD00F2250D69700A9361D /* ReleaseF4SLive */,
-				FCFBD0102250D69700A9361D /* ReleaseF4S */,
+				FCFBD00D2250D69700A9361D /* DebugF4S */,
+				FCFBD00E2250D69700A9361D /* DebugF4SLive */,
+				FCFBD00F2250D69700A9361D /* ReleaseF4S */,
+				FCFBD0102250D69700A9361D /* ReleaseF4SLive */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = ReleaseF4SLive;
+			defaultConfigurationName = ReleaseF4S;
 		};
 /* End XCConfigurationList section */
 
