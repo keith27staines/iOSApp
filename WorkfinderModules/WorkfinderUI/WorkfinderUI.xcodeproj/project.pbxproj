@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC0B6B372323D22400A1867D /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0B6B362323D22400A1867D /* WorkfinderNetworking.framework */; };
 		FC116B4C2284510E00146478 /* WebViewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC116B4B2284510E00146478 /* WebViewAssets.xcassets */; };
 		FC116B4E2284511E00146478 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC116B4D2284511E00146478 /* WebViewController.swift */; };
 		FC22DB9122F9764F0068C61C /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DB9022F9764F0068C61C /* UIButton+Extensions.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FC0B6B362323D22400A1867D /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC116B4B2284510E00146478 /* WebViewAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WebViewAssets.xcassets; sourceTree = "<group>"; };
 		FC116B4D2284511E00146478 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		FC22DB9022F9764F0068C61C /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC0B6B372323D22400A1867D /* WorkfinderNetworking.framework in Frameworks */,
 				FC93DBE2231F98E600F1CE23 /* WorkfinderServices.framework in Frameworks */,
 				FCA636AB22A3E57E004B3050 /* WorkfinderCommon.framework in Frameworks */,
 			);
@@ -151,6 +154,7 @@
 		FCA636A922A3E57E004B3050 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC0B6B362323D22400A1867D /* WorkfinderNetworking.framework */,
 				FC93DBE1231F98E600F1CE23 /* WorkfinderServices.framework */,
 				FCA636AA22A3E57E004B3050 /* WorkfinderCommon.framework */,
 			);
