@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC0B6B312323CB5400A1867D /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0B6B302323CB5400A1867D /* WorkfinderNetworking.framework */; };
 		FC7C21932321575A00721D1D /* F4SUploadYPDocumentsUseCase.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC7C21922321477700721D1D /* F4SUploadYPDocumentsUseCase.xcassets */; };
 		FCE8DABD2320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE8DAB32320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCase.framework */; };
 		FCE8DAC22320F13D00934E2F /* F4SUploadYPDocumentsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAC12320F13D00934E2F /* F4SUploadYPDocumentsUseCaseTests.swift */; };
@@ -57,6 +58,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FC0B6B302323CB5400A1867D /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC7C21922321477700721D1D /* F4SUploadYPDocumentsUseCase.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = F4SUploadYPDocumentsUseCase.xcassets; sourceTree = "<group>"; };
 		FCE8DAB32320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderUploadYPDocumentsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCE8DAB62320F13D00934E2F /* F4SUploadYPDocumentsUseCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = F4SUploadYPDocumentsUseCase.h; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC0B6B312323CB5400A1867D /* WorkfinderNetworking.framework in Frameworks */,
 				FCE8DB072320FA1800934E2F /* WorkfinderAppLogic.framework in Frameworks */,
 				FCE8DB092320FA1800934E2F /* WorkfinderCommon.framework in Frameworks */,
 				FCE8DB0B2320FA1800934E2F /* WorkfinderCoordinators.framework in Frameworks */,
@@ -264,6 +267,7 @@
 		FCE8DB052320FA1800934E2F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC0B6B302323CB5400A1867D /* WorkfinderNetworking.framework */,
 				FCE8DB062320FA1800934E2F /* WorkfinderAppLogic.framework */,
 				FCE8DB082320FA1800934E2F /* WorkfinderCommon.framework */,
 				FCE8DB0A2320FA1800934E2F /* WorkfinderCoordinators.framework */,
