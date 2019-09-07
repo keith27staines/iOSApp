@@ -147,15 +147,12 @@
 		FC39F45F21AAA618005B0A07 /* MessageViewController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC39F45821AAA617005B0A07 /* MessageViewController+UITableView.swift */; };
 		FC39F46021AAA618005B0A07 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC39F45921AAA617005B0A07 /* MessageViewController.swift */; };
 		FC3CD1DA221566F200F91B50 /* Geocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CD1D9221566F200F91B50 /* Geocoding.swift */; };
-		FC40921E2101CDFF00453A54 /* AddVoucherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC40921D2101CDFF00453A54 /* AddVoucherViewController.swift */; };
 		FC4BB6031FA20EF700173864 /* PartnerSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BB6021FA20EF700173864 /* PartnerSelectionViewController.swift */; };
 		FC4BB6051FA20F4100173864 /* F4SPartner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BB6041FA20F4100173864 /* F4SPartner.swift */; };
 		FC4BB6071FA20F5100173864 /* F4SPartnersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BB6061FA20F5100173864 /* F4SPartnersModel.swift */; };
 		FC4BB6091FA21BA400173864 /* SelectPartner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC4BB6081FA21BA400173864 /* SelectPartner.storyboard */; };
 		FC4DC2012299AA9000C59C52 /* AcceptOfferCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4DC2002299AA9000C59C52 /* AcceptOfferCoordinator.swift */; };
-		FC503F12231D0210008722FF /* AddVoucher.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC503F11231D0210008722FF /* AddVoucher.storyboard */; };
 		FC503F18231D049F008722FF /* AddVoucherViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC503F17231D049F008722FF /* AddVoucherViewModelTests.swift */; };
-		FC503F1A231D1F97008722FF /* AddVoucherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC503F19231D1F97008722FF /* AddVoucherViewModel.swift */; };
 		FC505517220446830013AF4C /* CompanyMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC505516220446830013AF4C /* CompanyMapView.swift */; };
 		FC50E9CE2213EF5400C9A621 /* SearchModeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */; };
 		FC5C5B952109FF48007DCB84 /* RequestBLProvideDocuments.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5C5B942109FF48007DCB84 /* RequestBLProvideDocuments.swift */; };
@@ -466,15 +463,12 @@
 		FC39F46121AAA64B005B0A07 /* MessagesModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesModelTests.swift; sourceTree = "<group>"; };
 		FC3CD1D9221566F200F91B50 /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
 		FC3F391E222930940046F8F8 /* MockUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserService.swift; sourceTree = "<group>"; };
-		FC40921D2101CDFF00453A54 /* AddVoucherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVoucherViewController.swift; sourceTree = "<group>"; };
 		FC4BB6021FA20EF700173864 /* PartnerSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerSelectionViewController.swift; sourceTree = "<group>"; };
 		FC4BB6041FA20F4100173864 /* F4SPartner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPartner.swift; sourceTree = "<group>"; };
 		FC4BB6061FA20F5100173864 /* F4SPartnersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPartnersModel.swift; sourceTree = "<group>"; };
 		FC4BB6081FA21BA400173864 /* SelectPartner.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectPartner.storyboard; sourceTree = "<group>"; };
 		FC4DC2002299AA9000C59C52 /* AcceptOfferCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptOfferCoordinator.swift; sourceTree = "<group>"; };
-		FC503F11231D0210008722FF /* AddVoucher.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddVoucher.storyboard; sourceTree = "<group>"; };
 		FC503F17231D049F008722FF /* AddVoucherViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVoucherViewModelTests.swift; sourceTree = "<group>"; };
-		FC503F19231D1F97008722FF /* AddVoucherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVoucherViewModel.swift; sourceTree = "<group>"; };
 		FC505516220446830013AF4C /* CompanyMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyMapView.swift; sourceTree = "<group>"; };
 		FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModeSelectorView.swift; sourceTree = "<group>"; };
 		FC5C5B942109FF48007DCB84 /* RequestBLProvideDocuments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBLProvideDocuments.swift; sourceTree = "<group>"; };
@@ -1288,7 +1282,6 @@
 		FC2D975A22185D0C00763B06 /* Use Cases */ = {
 			isa = PBXGroup;
 			children = (
-				FC503F13231D0274008722FF /* Add Voucher */,
 				FC0B406B226B0F1000D992AC /* Onboarding */,
 				FC1DC06921FE1410009ABC60 /* Main App */,
 				FC24D249226B07E700FA04A1 /* CompanyDetail */,
@@ -1324,16 +1317,6 @@
 				FC8E3F4922D33A4C00102C37 /* VersionCheckCoordinatorTests.swift */,
 			);
 			path = "Coordinator tests";
-			sourceTree = "<group>";
-		};
-		FC503F13231D0274008722FF /* Add Voucher */ = {
-			isa = PBXGroup;
-			children = (
-				FC503F11231D0210008722FF /* AddVoucher.storyboard */,
-				FC503F19231D1F97008722FF /* AddVoucherViewModel.swift */,
-				FC40921D2101CDFF00453A54 /* AddVoucherViewController.swift */,
-			);
-			path = "Add Voucher";
 			sourceTree = "<group>";
 		};
 		FC503F16231D0456008722FF /* AddVoucherUseCase */ = {
@@ -1492,8 +1475,8 @@
 		FCB3922820FF1C4B00792C0A /* Accept offer Workflow */ = {
 			isa = PBXGroup;
 			children = (
-				FC4DC2002299AA9000C59C52 /* AcceptOfferCoordinator.swift */,
 				FCB3922920FF1E0A00792C0A /* AcceptOffer.storyboard */,
+				FC4DC2002299AA9000C59C52 /* AcceptOfferCoordinator.swift */,
 				FCB3922B20FF1E3100792C0A /* AcceptOfferViewController.swift */,
 				FCB3922F21006AB500792C0A /* F4SPlacementInviteDetailTableViewController.swift */,
 				FCA6C8242107163B00A222FE /* F4SConfirmUseVoucherView.swift */,
@@ -1730,7 +1713,6 @@
 				40E78E8F1DD32C4E000A3776 /* Settings.bundle in Resources */,
 				FC7221A020FE248400F10953 /* Fastfile in Resources */,
 				FC31F097204D54E3009DD526 /* Debug.storyboard in Resources */,
-				FC503F12231D0210008722FF /* AddVoucher.storyboard in Resources */,
 				FC73719B2101C7EF00C0032A /* AcceptOffer.xcassets in Resources */,
 				D5E9EBE81DD60AB300BD796E /* Localizable.strings in Resources */,
 				FCB6D9361F75056100B8C268 /* Branding.plist in Resources */,
@@ -1956,14 +1938,12 @@
 				40E78E701DD32BD4000A3776 /* MenuHelper.swift in Sources */,
 				FCB4930A222A879000B88B8B /* FavouritesCoordinator.swift in Sources */,
 				2037B0A71DEC3C3B00A9DE3E /* InterestCoreDataManager.swift in Sources */,
-				FC503F1A231D1F97008722FF /* AddVoucherViewModel.swift in Sources */,
 				204C89551DF5A36100D8493A /* TemplateChoiceDB.swift in Sources */,
 				FC4BB6051FA20F4100173864 /* F4SPartner.swift in Sources */,
 				FCF798542227F5AB00D67A7D /* RecommendationsCoordinator.swift in Sources */,
 				FCA6C829210760E000A222FE /* F4SHoorayViewController.swift in Sources */,
 				FC0C87952122C05C007CF1F3 /* F4SAnalyticsEvents.swift in Sources */,
 				FC21BE3F220F53EB00A0A389 /* SearchViewProtocol.swift in Sources */,
-				FC40921E2101CDFF00453A54 /* AddVoucherViewController.swift in Sources */,
 				FCCD6AE91FBB44CF0088D7C7 /* PopupCompanyListViewController.swift in Sources */,
 				FC0B407E226CAA6E00D992AC /* RecommendationCompanyConverter.swift in Sources */,
 				204203EC1E4B160C007C7409 /* ShortlistCoreDataManager.swift in Sources */,

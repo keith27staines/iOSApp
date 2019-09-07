@@ -62,8 +62,8 @@ class F4SPlacementInviteDetailTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let enterVoucherViewController = segue.destination as? AddVoucherViewController {
-            enterVoucherViewController.accept = accept
+        if let hoorayViewController = segue.destination as? F4SHoorayViewController {
+            hoorayViewController.accept = accept
             return
         }
     }

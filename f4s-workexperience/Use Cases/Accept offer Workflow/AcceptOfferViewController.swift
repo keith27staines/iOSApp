@@ -70,8 +70,8 @@ class AcceptOfferViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let enterVoucherViewController = segue.destination as? AddVoucherViewController {
-            enterVoucherViewController.accept = accept
+        if let hoorayViewController = segue.destination as? F4SHoorayViewController {
+            hoorayViewController.accept = accept
             return
         }
         if let requestDocumentsViewController = segue.destination as? RequestBLProvideDocuments {
@@ -79,6 +79,35 @@ class AcceptOfferViewController: UIViewController {
             requestDocumentsViewController.companyDocumentsModel = self.companyDocumentsModel
             return
         }
+    }
+    
+    var placementService = F4SPlacementService()
+    func confirmOffer() {
+        sharedUserMessageHandler.showLoadingOverlay(self.view)
+        let placement = accept.placement
+        placementService.confirmPlacement(placement: placement, completion: {
+            (confirmResult) in
+            DispatchQueue.main.async { [weak self] in
+                guard let strongSelf = self else { return }
+                sharedUserMessageHandler.hideLoadingOverlay()
+                switch  confirmResult {
+                case .error(let error):
+                    if error.retry {
+                        sharedUserMessageHandler.display(error, parentCtrl: strongSelf, cancelHandler: nil, retryHandler: {
+                            strongSelf.confirmOffer()
+                        })
+                    } else {
+                        sharedUserMessageHandler.display(error, parentCtrl: strongSelf)
+                    }
+                case .success(let success):
+                    if success == true {
+                        strongSelf.performSegue(withIdentifier: "showHooray", sender: self)
+                    } else {
+                        globalLog.error("confirm placement failed with an unexpected error in the response body")
+                    }
+                }
+            }
+        })
     }
 }
 
@@ -115,9 +144,8 @@ extension AcceptOfferViewController : UITableViewDataSource {
             if inviteDetails.requiresButtonAction {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "detailWithLink", for: indexPath) as! F4SInviteDetailLinkCell
                 cell.buttonAction = { [weak self] cell in
-                    guard let companyViewData = self?.accept?.company,
-                    let company = DatabaseOperations.sharedInstance.companyWithUUID(companyViewData.uuid) else { return }
-                    self?.coordinator?.showCompanyDetail(company: company)
+                    guard let companyViewData = self?.accept?.company else { return }
+                    self?.coordinator?.showCompanyDetail(companyViewData)
                 }
                 cell.detail = inviteDetails
                 return cell

@@ -244,7 +244,7 @@
                         <outlet property="pageHeaderView" destination="Q51-MB-96S" id="mRH-eJ-lTs"/>
                         <outlet property="tableView" destination="hTu-zQ-JYD" id="Nya-wy-Fps"/>
                         <segue destination="ba2-Ig-Xrb" kind="show" identifier="showRequestCompanyDocuments" id="LLf-Y4-iw9"/>
-                        <segue destination="ho2-Zy-V23" kind="show" identifier="showVoucherEntry" id="EH5-xE-Tut"/>
+                        <segue destination="0G0-HQ-u2r" kind="show" identifier="showHooray" id="X1h-Ar-v6R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5C1-u9-jEc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -419,8 +419,8 @@
                         <outlet property="requestButton" destination="d6g-0i-dbl" id="o13-u3-Md4"/>
                         <outlet property="skipButton" destination="xEl-IH-PLM" id="iea-Mq-kPv"/>
                         <outlet property="tableVIew" destination="cDd-5X-BVH" id="kMn-ql-dYx"/>
-                        <segue destination="ho2-Zy-V23" kind="show" identifier="showVoucherEntry" id="Tzk-rj-2xp"/>
                         <segue destination="YZD-Eh-QKR" kind="show" identifier="showDocument" id="3rJ-H2-wcr"/>
+                        <segue destination="0G0-HQ-u2r" kind="show" identifier="showHooray" id="OvE-ze-RpY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1RW-wE-U0m" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -455,7 +455,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uot-lz-CzP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2542" y="861"/>
+            <point key="canvasLocation" x="1868" y="861"/>
         </scene>
         <!--Hooray View Controller-->
         <scene sceneID="ub4-WX-0en">
@@ -587,7 +587,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2553" y="115"/>
+            <point key="canvasLocation" x="1868" y="115"/>
         </scene>
         <!--Calendar Chooser Controller-->
         <scene sceneID="TNp-iV-M1V">
@@ -675,15 +675,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7v5-kf-DEj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3440.8000000000002" y="114.69265367316342"/>
-        </scene>
-        <!--AddVoucher-->
-        <scene sceneID="fCH-Ll-fG1">
-            <objects>
-                <viewControllerPlaceholder storyboardName="AddVoucher" id="ho2-Zy-V23" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Nhb-zH-fy3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1606" y="115"/>
+            <point key="canvasLocation" x="2966" y="115"/>
         </scene>
     </scenes>
     <resources>
@@ -692,6 +684,6 @@
         <image name="ui-offershare-icon" width="45" height="45"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="EH5-xE-Tut"/>
+        <segue reference="X1h-Ar-v6R"/>
     </inferredMetricsTieBreakers>
 </document>

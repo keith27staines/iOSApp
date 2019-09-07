@@ -25,7 +25,8 @@ class AcceptOfferCoordinator : CoreInjectionNavigationCoordinator {
         navigationRouter.push(viewController: vc, animated: true)
     }
     
-    func showCompanyDetail(company: Company) {
+    func showCompanyDetail(_ companyViewData: CompanyViewDataProtocol) {
+        let company = DatabaseOperations.sharedInstance.companyWithUUID(companyViewData.uuid)!
         let companyCoordinator = CompanyCoordinator(parent: parent, navigationRouter: navigationRouter, company: company, inject: injected)
         addChildCoordinator(companyCoordinator)
         companyCoordinator.start()
