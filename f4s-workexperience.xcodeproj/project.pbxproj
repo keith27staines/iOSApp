@@ -1503,9 +1503,9 @@
 		FCFE450F2250CAD600C38436 /* Workfinder main module tests */ = {
 			isa = PBXGroup;
 			children = (
+				FC1DC09921FE153E009ABC60 /* Company Detail Tests */,
 				FCA90A8B221D693700EACD8D /* Mocks */,
 				FC3F3921222931630046F8F8 /* Coordinator tests */,
-				FC1DC09921FE153E009ABC60 /* Company Detail Tests */,
 				FC32E3D8200F322800D7C36A /* PartnerModelTests.swift */,
 				FCC85B2220EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift */,
 				FC39F46121AAA64B005B0A07 /* MessagesModelTests.swift */,
