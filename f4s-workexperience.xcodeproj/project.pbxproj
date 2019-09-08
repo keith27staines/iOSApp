@@ -151,7 +151,6 @@
 		FC4BB6051FA20F4100173864 /* F4SPartner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BB6041FA20F4100173864 /* F4SPartner.swift */; };
 		FC4BB6071FA20F5100173864 /* F4SPartnersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BB6061FA20F5100173864 /* F4SPartnersModel.swift */; };
 		FC4BB6091FA21BA400173864 /* SelectPartner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC4BB6081FA21BA400173864 /* SelectPartner.storyboard */; };
-		FC503F18231D049F008722FF /* AddVoucherViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC503F17231D049F008722FF /* AddVoucherViewModelTests.swift */; };
 		FC505517220446830013AF4C /* CompanyMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC505516220446830013AF4C /* CompanyMapView.swift */; };
 		FC50E9CE2213EF5400C9A621 /* SearchModeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */; };
 		FC53D6E02323C56F00A339ED /* WorkfinderUserDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC53D6DF2323C56F00A339ED /* WorkfinderUserDetailsUseCase.framework */; };
@@ -458,7 +457,6 @@
 		FC4BB6041FA20F4100173864 /* F4SPartner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPartner.swift; sourceTree = "<group>"; };
 		FC4BB6061FA20F5100173864 /* F4SPartnersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPartnersModel.swift; sourceTree = "<group>"; };
 		FC4BB6081FA21BA400173864 /* SelectPartner.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectPartner.storyboard; sourceTree = "<group>"; };
-		FC503F17231D049F008722FF /* AddVoucherViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVoucherViewModelTests.swift; sourceTree = "<group>"; };
 		FC505516220446830013AF4C /* CompanyMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyMapView.swift; sourceTree = "<group>"; };
 		FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModeSelectorView.swift; sourceTree = "<group>"; };
 		FC53D6DF2323C56F00A339ED /* WorkfinderUserDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUserDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1300,14 +1298,6 @@
 			path = "Coordinator tests";
 			sourceTree = "<group>";
 		};
-		FC503F16231D0456008722FF /* AddVoucherUseCase */ = {
-			isa = PBXGroup;
-			children = (
-				FC503F17231D049F008722FF /* AddVoucherViewModelTests.swift */,
-			);
-			path = AddVoucherUseCase;
-			sourceTree = "<group>";
-		};
 		FC50E9CA2213EF1D00C9A621 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
@@ -1529,7 +1519,6 @@
 		FCFBD0072250D69700A9361D /* f4s-workexperienceTests */ = {
 			isa = PBXGroup;
 			children = (
-				FC503F16231D0456008722FF /* AddVoucherUseCase */,
 				FCFE450F2250CAD600C38436 /* Workfinder main module tests */,
 				FCFBD00A2250D69700A9361D /* Info.plist */,
 			);
@@ -1970,7 +1959,6 @@
 			files = (
 				FC8E3F4A22D33A4C00102C37 /* VersionCheckCoordinatorTests.swift in Sources */,
 				FCFBD01C2250DA3A00A9361D /* MockNavigationRouter.swift in Sources */,
-				FC503F18231D049F008722FF /* AddVoucherViewModelTests.swift in Sources */,
 				FCFBD0162250D96900A9361D /* MockAnalyticsAndDebugging.swift in Sources */,
 				FCFBD0242250DB4D00A9361D /* F4SDatabaseDownloadManagerTests.swift in Sources */,
 				FCFBD01A2250DA1800A9361D /* MockUIApplication.swift in Sources */,
