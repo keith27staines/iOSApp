@@ -210,7 +210,6 @@
 		FCD6F9E922E315B7003F7C34 /* WorkfinderAppLogic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCD6F9E722E315B7003F7C34 /* WorkfinderAppLogic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCD884F91FFBC0CC00F05B08 /* Recommendations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCD884F81FFBC0CC00F05B08 /* Recommendations.storyboard */; };
 		FCD884FB1FFBE04F00F05B08 /* RecommendationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD884FA1FFBE04F00F05B08 /* RecommendationsListViewController.swift */; };
-		FCE11E572113407F00403789 /* F4SCalendarEventWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE11E562113407F00403789 /* F4SCalendarEventWriter.swift */; };
 		FCE11E59211437B400403789 /* F4SDateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE11E58211437B400403789 /* F4SDateHelper.swift */; };
 		FCE51E402210362800DC1D50 /* PlacesSearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E3F2210362800DC1D50 /* PlacesSearchDataGetter.swift */; };
 		FCE51E422210365B00DC1D50 /* CompanySearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E412210365B00DC1D50 /* CompanySearchDataGetter.swift */; };
@@ -516,7 +515,6 @@
 		FCD884F81FFBC0CC00F05B08 /* Recommendations.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Recommendations.storyboard; sourceTree = "<group>"; };
 		FCD884FA1FFBE04F00F05B08 /* RecommendationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsListViewController.swift; sourceTree = "<group>"; };
 		FCDB86112321268C0047FF96 /* Mustache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mustache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCE11E562113407F00403789 /* F4SCalendarEventWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCalendarEventWriter.swift; sourceTree = "<group>"; };
 		FCE11E58211437B400403789 /* F4SDateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = F4SDateHelper.swift; path = ../WorkfinderModules/WorkfinderCommon/WorkfinderCommon/Source/F4SDateHelper.swift; sourceTree = "<group>"; };
 		FCE51E3F2210362800DC1D50 /* PlacesSearchDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesSearchDataGetter.swift; sourceTree = "<group>"; };
 		FCE51E412210365B00DC1D50 /* CompanySearchDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanySearchDataGetter.swift; sourceTree = "<group>"; };
@@ -737,10 +735,8 @@
 				FC62FF8320EF6CEF003E52C5 /* F4SAPIServices */,
 				FC25A05D1F850DAC002F51A9 /* F4SMap models */,
 				FC62FF9520EF7235003E52C5 /* F4SMessage models */,
-				FC62FF9420EF71A2003E52C5 /* F4SCompanyDocuments */,
 				FCD3485B20038C3100DC1316 /* F4SEmailVerification models */,
 				FC62FF8520EF6D51003E52C5 /* F4SUser models */,
-				FCE11E562113407F00403789 /* F4SCalendarEventWriter.swift */,
 			);
 			name = "F4S models and services";
 			sourceTree = "<group>";
@@ -979,6 +975,7 @@
 		FC0B4079226B187500D992AC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FC1DC07521FE14D7009ABC60 /* CompanyViewModel.swift */,
 				FC6B17E92201B54700556C59 /* CompanyFavouritesModel.swift */,
 				FC1DC07421FE14D7009ABC60 /* PersonViewData.swift */,
 			);
@@ -1242,7 +1239,6 @@
 				FC1DC07021FE14BF009ABC60 /* CompanyCoordinator.swift */,
 				FC0B4079226B187500D992AC /* Model */,
 				FC0B4078226B186400D992AC /* View */,
-				FC5C32CE22705E8600C5BBCF /* ViewModel */,
 			);
 			path = CompanyDetail;
 			sourceTree = "<group>";
@@ -1307,14 +1303,6 @@
 			path = Subviews;
 			sourceTree = "<group>";
 		};
-		FC5C32CE22705E8600C5BBCF /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				FC1DC07521FE14D7009ABC60 /* CompanyViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		FC5D3C6A20FE17F600F89169 /* .circleci */ = {
 			isa = PBXGroup;
 			children = (
@@ -1338,13 +1326,6 @@
 				FC5F3D4F20D93C070002F41B /* F4SUserDataFix.swift */,
 			);
 			name = "F4SUser models";
-			sourceTree = "<group>";
-		};
-		FC62FF9420EF71A2003E52C5 /* F4SCompanyDocuments */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = F4SCompanyDocuments;
 			sourceTree = "<group>";
 		};
 		FC62FF9520EF7235003E52C5 /* F4SMessage models */ = {
@@ -1848,7 +1829,6 @@
 				40C1A51F1DDF5ACE000F80AA /* GMUStaticCluster.m in Sources */,
 				FC1DC09721FE1509009ABC60 /* CompanyToolbar.swift in Sources */,
 				FC39F45F21AAA618005B0A07 /* MessageViewController+UITableView.swift in Sources */,
-				FCE11E572113407F00403789 /* F4SCalendarEventWriter.swift in Sources */,
 				FC1DC06B21FE142D009ABC60 /* AppCoordinator.swift in Sources */,
 				204203EE1E4B16D7007C7409 /* ShortlistDBOperations.swift in Sources */,
 				2037B0AB1DEC42F600A9DE3E /* PlacementDB.swift in Sources */,
