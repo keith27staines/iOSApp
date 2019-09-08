@@ -9,64 +9,6 @@
 import UIKit
 import Foundation
 
-extension String {
-
-    func isValidName() -> Bool {
-        let regexSymbols: NSRegularExpression?
-        do {
-            regexSymbols = try NSRegularExpression(pattern: "[^ A-Za-z0-9_-]", options: [])
-        } catch _ as NSError {
-            regexSymbols = nil
-        }
-        if (regexSymbols?.numberOfMatches(in: self, options: [], range: NSMakeRange(0, self.count)))! > 0 {
-            return false
-        }
-        return true
-    }
-
-    func isVoucherCode() -> Bool {
-        let regexSymbols: NSRegularExpression?
-        do {
-            regexSymbols = try NSRegularExpression(pattern: "[^ A-Za-z0-9]", options: [])
-        } catch _ as NSError {
-            regexSymbols = nil
-        }
-        if (regexSymbols?.numberOfMatches(in: self, options: [], range: NSMakeRange(0, self.count)))! > 0 || self.contains(" ") {
-            return false
-        }
-        return true
-    }
-
-    static func randomString(length: Int) -> String {
-
-        let letters: NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        let len = UInt32(letters.length)
-
-        var randomString = ""
-
-        for _ in 0 ..< length {
-            let rand = arc4random_uniform(len)
-            var nextChar = letters.character(at: Int(rand))
-            randomString += NSString(characters: &nextChar, length: 1) as String
-        }
-
-        return randomString
-    }
-
-}
-
-extension UIView {
-    static func gradient(view: UIView, colorTop: CGColor, colorBottom: CGColor) -> UIView {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [colorTop, colorBottom]
-        gradientLayer.locations = [0.0, 1.0]
-        gradientLayer.frame.size = view.frame.size
-
-        view.layer.addSublayer(gradientLayer)
-        return view
-    }
-}
-
 extension NSObject {
     /// Use an NSLocking object as a mutex for a critical section of code
     func synchronized<L: NSLocking>(lockable: L, criticalSection: () -> Void) {
