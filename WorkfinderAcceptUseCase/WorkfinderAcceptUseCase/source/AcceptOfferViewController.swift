@@ -2,7 +2,7 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderServices
 import WorkfinderUI
-import WorkfinderAcceptUseCase
+import WorkfinderAppLogic
 
 class AcceptOfferViewController: UIViewController {
     @IBOutlet weak var offsetHeight: NSLayoutConstraint!

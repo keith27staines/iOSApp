@@ -1,14 +1,7 @@
-//
-//  CompanyDescriptionViewController.swift
-//  F4SPrototypes
-//
-//  Created by Keith Staines on 21/12/2018.
-//  Copyright © 2018 Keith Staines. All rights reserved.
-//
-
 import UIKit
 import WorkfinderCommon
 import WorkfinderUI
+import WorkfinderAppLogic
 
 class CompanySummaryViewController: CompanySubViewController {
     

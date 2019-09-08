@@ -9,15 +9,18 @@ class F4SOfferConfirmer {
     var messageHandler: UserMessageHandler
     let placement: F4STimelinePlacement
     let sender: UIViewController
+    var logger: F4SAnalyticsAndDebugging?
     
     init(messageHandler: UserMessageHandler,
          placementService: F4SOfferProcessingServiceProtocol,
          placement: F4STimelinePlacement,
-         sender: UIViewController) {
+         sender: UIViewController,
+         logger: F4SAnalyticsAndDebugging? = nil) {
         self .messageHandler = messageHandler
         self.placementService = placementService
         self.placement = placement
         self.sender = sender
+        self.logger = logger
     }
     
     func confirmOffer(success: @escaping (() -> Void) ) {
@@ -46,7 +49,7 @@ class F4SOfferConfirmer {
             if confirmed == true {
                 success()
             } else {
-                globalLog.error("confirm placement failed with an unexpected error in the response body")
+                logger?.error(message: "confirm placement failed with an unexpected error in the response body", functionName: #function, fileName: #file, lineNumber: #line)
             }
         }
     }

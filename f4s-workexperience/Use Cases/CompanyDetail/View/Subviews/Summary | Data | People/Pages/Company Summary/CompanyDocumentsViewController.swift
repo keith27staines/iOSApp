@@ -1,6 +1,7 @@
 import UIKit
 import WorkfinderCommon
 import WorkfinderUI
+import WorkfinderAppLogic
 import WorkfinderCoordinators
 
 class CompanyDocumentsViewController : UIViewController {

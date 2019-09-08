@@ -1,7 +1,8 @@
 import Foundation
 import WorkfinderCommon
 import WorkfinderCoordinators
-import WorkfinderAcceptUseCase
+
+let __bundle = Bundle(identifier: "com.f4s.WorkfinderAcceptUseCase")
 
 public class AcceptOfferCoordinator : CoreInjectionNavigationCoordinator {
     
@@ -23,7 +24,7 @@ public class AcceptOfferCoordinator : CoreInjectionNavigationCoordinator {
     }
 
     public override func start() {
-        let acceptStoryboard = UIStoryboard(name: "AcceptOffer", bundle: nil)
+        let acceptStoryboard = UIStoryboard(name: "AcceptOffer", bundle: __bundle)
         let vc = acceptStoryboard.instantiateInitialViewController() as! AcceptOfferViewController
         vc.accept = acceptContext
         vc.coordinator = self

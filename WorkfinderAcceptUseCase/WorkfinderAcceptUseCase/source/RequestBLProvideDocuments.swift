@@ -10,7 +10,7 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderServices
 import WorkfinderUI
-import WorkfinderAcceptUseCase
+import WorkfinderAppLogic
 
 class RequestBLProvideDocuments: UIViewController {
     var accept: AcceptOfferContext!

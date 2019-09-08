@@ -8,7 +8,6 @@
 
 import UIKit
 import WorkfinderCommon
-import WorkfinderAcceptUseCase
 
 class F4SPlacementInviteDetailTableViewController: UITableViewController {
 

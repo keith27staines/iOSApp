@@ -57,7 +57,8 @@ class CompanyDataViewController: CompanySubViewController {
     var duedilButton: UIButton = {
         let button = UIButton(type: UIButton.ButtonType.system)
         button.isHidden = true
-        button.setImage(#imageLiteral(resourceName: "Duedil"), for: .normal)
+        let image = UIImage(named: "ui-duedil-icon")
+        button.setImage(image, for: .normal)
         button.setTitle("See more on Duedil", for: .normal)
         button.addTarget(self, action: #selector(handleDuedilTapped), for: .touchUpInside)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
