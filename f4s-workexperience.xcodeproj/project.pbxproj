@@ -92,8 +92,6 @@
 		C9C7302B49E1B7EF625802B5 /* Pods_f4s_workexperience.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DBDC6E5F710813F9107483D /* Pods_f4s_workexperience.framework */; };
 		D54E0FFD1E044B0400A51560 /* InfoWindowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D54E0FFB1E044B0400A51560 /* InfoWindowView.xib */; };
 		D5E9EBE81DD60AB300BD796E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5E9EBEA1DD60AB300BD796E /* Localizable.strings */; };
-		FC02DA2C22EC9481003C8148 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC02DA2622EC84EF003C8148 /* WorkfinderServices.framework */; };
-		FC02DA2D22EC9481003C8148 /* WorkfinderServices.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC02DA2622EC84EF003C8148 /* WorkfinderServices.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC06605223264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC06605123264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework */; };
 		FC06605323264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC06605123264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC06605523265FC300496FE2 /* CompanyCoordinatorParentProtocol+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06605423265FC300496FE2 /* CompanyCoordinatorParentProtocol+extensions.swift */; };
@@ -137,7 +135,6 @@
 		FC4BB6071FA20F5100173864 /* F4SPartnersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BB6061FA20F5100173864 /* F4SPartnersModel.swift */; };
 		FC4BB6091FA21BA400173864 /* SelectPartner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC4BB6081FA21BA400173864 /* SelectPartner.storyboard */; };
 		FC50E9CE2213EF5400C9A621 /* SearchModeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */; };
-		FC53D6E02323C56F00A339ED /* WorkfinderUserDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC53D6DF2323C56F00A339ED /* WorkfinderUserDetailsUseCase.framework */; };
 		FC53D6E12323C56F00A339ED /* WorkfinderUserDetailsUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC53D6DF2323C56F00A339ED /* WorkfinderUserDetailsUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC5CBA51231D2A4700C2D3C5 /* WorkfinderAcceptUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC5CBA50231D2A4700C2D3C5 /* WorkfinderAcceptUseCase.framework */; };
 		FC5CBA52231D2A4700C2D3C5 /* WorkfinderAcceptUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC5CBA50231D2A4700C2D3C5 /* WorkfinderAcceptUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -196,6 +193,8 @@
 		FCE51E402210362800DC1D50 /* PlacesSearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E3F2210362800DC1D50 /* PlacesSearchDataGetter.swift */; };
 		FCE51E422210365B00DC1D50 /* CompanySearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E412210365B00DC1D50 /* CompanySearchDataGetter.swift */; };
 		FCE51E44221039D600DC1D50 /* PersonSearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E43221039D600DC1D50 /* PersonSearchDataGetter.swift */; };
+		FCEA3C6B2326AB9B006D9106 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC02DA2622EC84EF003C8148 /* WorkfinderServices.framework */; };
+		FCEA3C6C2326AB9B006D9106 /* WorkfinderServices.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC02DA2622EC84EF003C8148 /* WorkfinderServices.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCEE5E1E2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEE5E1D2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift */; };
 		FCF0D16C1FBC244800F2AF1D /* PopupAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */; };
 		FCF5AF2B2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF2A2248BE1A00D9B8D1 /* WorkfinderApplyUseCase.framework */; };
@@ -233,9 +232,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				FC02DA2D22EC9481003C8148 /* WorkfinderServices.framework in Embed Frameworks */,
 				FC53D6E12323C56F00A339ED /* WorkfinderUserDetailsUseCase.framework in Embed Frameworks */,
 				FC06605323264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework in Embed Frameworks */,
+				FCEA3C6C2326AB9B006D9106 /* WorkfinderServices.framework in Embed Frameworks */,
 				FC93DBD7231F8E0A00F1CE23 /* WorkfinderCoordinators.framework in Embed Frameworks */,
 				FCFB1329224930660086BE25 /* Mustache.framework in Embed Frameworks */,
 				FCF5AF2C2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Embed Frameworks */,
@@ -495,14 +494,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC93DC4223201AA200F1CE23 /* WorkfinderUserDetailsUseCase.framework in Frameworks */,
-				FC02DA2C22EC9481003C8148 /* WorkfinderServices.framework in Frameworks */,
 				FCA91E9622340577007ED308 /* WorkfinderCommon.framework in Frameworks */,
 				FCF5AF2B2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Frameworks */,
 				C9C7302B49E1B7EF625802B5 /* Pods_f4s_workexperience.framework in Frameworks */,
 				FCA91E5D22340161007ED308 /* WorkfinderNetworking.framework in Frameworks */,
 				FC06605223264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */,
 				FCD6F9E822E315B7003F7C34 /* WorkfinderAppLogic.framework in Frameworks */,
-				FC53D6E02323C56F00A339ED /* WorkfinderUserDetailsUseCase.framework in Frameworks */,
+				FCEA3C6B2326AB9B006D9106 /* WorkfinderServices.framework in Frameworks */,
 				FC93DBD6231F8E0A00F1CE23 /* WorkfinderCoordinators.framework in Frameworks */,
 				FC5CBA51231D2A4700C2D3C5 /* WorkfinderAcceptUseCase.framework in Frameworks */,
 				FCFB1328224930660086BE25 /* Mustache.framework in Frameworks */,
