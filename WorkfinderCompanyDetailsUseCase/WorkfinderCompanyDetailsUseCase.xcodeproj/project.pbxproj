@@ -38,6 +38,9 @@
 		FCC1DF55232504780074D5C1 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC1DF54232504780074D5C1 /* WorkfinderServices.framework */; };
 		FCC1DF57232504780074D5C1 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC1DF56232504780074D5C1 /* WorkfinderUI.framework */; };
 		FCC1DF6323250B780074D5C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DF6223250B780074D5C1 /* Assets.xcassets */; };
+		FCEA3C6E2326B2C6006D9106 /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEA3C6D2326B2C6006D9106 /* WorkfinderNetworking.framework */; };
+		FCEA3C702326B2C6006D9106 /* WorkfinderUploadYPDocumentsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEA3C6F2326B2C6006D9106 /* WorkfinderUploadYPDocumentsUseCase.framework */; };
+		FCEA3C722326B2C6006D9106 /* WorkfinderUserDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEA3C712326B2C6006D9106 /* WorkfinderUserDetailsUseCase.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +88,9 @@
 		FCC1DF54232504780074D5C1 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCC1DF56232504780074D5C1 /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCC1DF6223250B780074D5C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FCEA3C6D2326B2C6006D9106 /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCEA3C6F2326B2C6006D9106 /* WorkfinderUploadYPDocumentsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUploadYPDocumentsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCEA3C712326B2C6006D9106 /* WorkfinderUserDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUserDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +98,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCEA3C6E2326B2C6006D9106 /* WorkfinderNetworking.framework in Frameworks */,
+				FCEA3C702326B2C6006D9106 /* WorkfinderUploadYPDocumentsUseCase.framework in Frameworks */,
+				FCEA3C722326B2C6006D9106 /* WorkfinderUserDetailsUseCase.framework in Frameworks */,
 				FCC1DF4D232504780074D5C1 /* WorkfinderAppLogic.framework in Frameworks */,
 				FCC1DF4F232504780074D5C1 /* WorkfinderApplyUseCase.framework in Frameworks */,
 				FCC1DF51232504780074D5C1 /* WorkfinderCommon.framework in Frameworks */,
@@ -238,6 +247,9 @@
 		FCC1DF4B232504780074D5C1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCEA3C6D2326B2C6006D9106 /* WorkfinderNetworking.framework */,
+				FCEA3C6F2326B2C6006D9106 /* WorkfinderUploadYPDocumentsUseCase.framework */,
+				FCEA3C712326B2C6006D9106 /* WorkfinderUserDetailsUseCase.framework */,
 				FCC1DF4C232504780074D5C1 /* WorkfinderAppLogic.framework */,
 				FCC1DF4E232504780074D5C1 /* WorkfinderApplyUseCase.framework */,
 				FCC1DF50232504780074D5C1 /* WorkfinderCommon.framework */,
