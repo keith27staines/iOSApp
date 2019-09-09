@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import WorkfinderCommon
 import WorkfinderCoordinators
 
-protocol HomeCoordinatorProtocol : Coordinating {}
+protocol HomeCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol {}
 
 class HomeCoordinator : CoreInjectionNavigationCoordinator, HomeCoordinatorProtocol {
 

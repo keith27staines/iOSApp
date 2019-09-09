@@ -2,10 +2,6 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderUI
 
-public protocol CoreInjectionNavigationCoordinatorProtocol : Coordinating {
-    var injected: CoreInjectionProtocol { get }
-}
-
 /// A suitable base class for coordinators representing tabs on a tabbar
 open class CoreInjectionNavigationCoordinator : NavigationCoordinator {
     public let injected: CoreInjectionProtocol

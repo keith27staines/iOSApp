@@ -1,49 +1,45 @@
 import UIKit
-import Reachability
 import WorkfinderCommon
 import WorkfinderNetworking
 import WorkfinderServices
 import WorkfinderCoordinators
 import WorkfinderApplyUseCase
 
-class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol{
-    func makeCompanyCoordinator(parent: CoreInjectionNavigationCoordinator, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol, companyUuid: F4SUUID) ->  CompanyCoordinatorProtocol? {
-        guard let company = F4SCompanyRepository().load(companyUuid: companyUuid) else { return nil }
-        return makeCompanyCoordinator(parent: parent, navigationRouter: navigationRouter, company: company, inject: inject)
-    }
-    
-    func makeCompanyCoordinator(
-        parent: CoreInjectionNavigationCoordinator?,
-        navigationRouter: NavigationRoutingProtocol,
-        company: Company,
-        inject: CoreInjectionProtocol) -> CompanyCoordinatorProtocol {
-        return CompanyCoordinator(parent: parent, navigationRouter: navigationRouter, company: company, inject: inject)
-    }
-}
-
-class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoordinatorProtocol {
+public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoordinatorProtocol {
     
     lazy var applyService: F4SPlacementApplicationServiceProtocol = { return F4SPlacementApplicationService() }()
     var companyViewController: CompanyViewController!
     var companyViewModel: CompanyViewModel!
+    var favouritesModel: CompanyFavouritesModel
     var company: Company
-    var placementsRepository: F4SPlacementRepositoryProtocol = F4SPlacementRespository()
-    var interestsRepository: F4SInterestsRepositoryProtocol = F4SInterestsRepository()
+    var placementsRepository: F4SPlacementRepositoryProtocol
+    var interestsRepository: F4SInterestsRepositoryProtocol
+    let socialShareItemSource: SocialShareItemSource
+    weak var finishDespatcher: CompanyCoordinatorParentProtocol?
     
-    init(
-        parent: CoreInjectionNavigationCoordinator?,
+    public init(
+        parent: CompanyCoordinatorParentProtocol?,
         navigationRouter: NavigationRoutingProtocol,
         company: Company,
-        inject: CoreInjectionProtocol) {
+        inject: CoreInjectionProtocol,
+        placementsRepository: F4SPlacementRepositoryProtocol,
+        interestsRepository: F4SInterestsRepositoryProtocol,
+        socialShareItemSource: SocialShareItemSource,
+        favouritesModel: CompanyFavouritesModel) {
+        self.socialShareItemSource = socialShareItemSource
+        self.interestsRepository = interestsRepository
+        self.placementsRepository = placementsRepository
         self.company = company
+        self.favouritesModel = favouritesModel
+        self.finishDespatcher = parent
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
     lazy var templateService: F4STemplateServiceProtocol = { return F4STemplateService() }()
     
-    override func start() {
+    public override func start() {
         super.start()
-        companyViewModel = CompanyViewModel(coordinatingDelegate: self, company: company, people: [])
+        companyViewModel = CompanyViewModel(coordinatingDelegate: self, company: company, people: [], favouritingModel: favouritesModel)
         companyViewController = CompanyViewController(viewModel: companyViewModel)
         navigationRouter.push(viewController: companyViewController, animated: true)
     }
@@ -54,22 +50,22 @@ class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoordinato
 }
 
 extension CompanyCoordinator : ApplyCoordinatorDelegate {
-    func applicationDidFinish(preferredDestination: ApplyCoordinator.PreferredDestinationAfterApplication) {
+    public func applicationDidFinish(preferredDestination: ApplyCoordinator.PreferredDestinationAfterApplication) {
         cleanup()
         navigationRouter.pop(animated: true)
         parentCoordinator?.childCoordinatorDidFinish(self)
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
             switch preferredDestination {
             case .messages:
-                TabBarCoordinator.sharedInstance!.navigateToTimeline()
+                self?.finishDespatcher?.showMessages()
             case .search:
-                TabBarCoordinator.sharedInstance!.navigateToMap()
+                self?.finishDespatcher?.showSearch()
             case .none:
                 break
             }
         }
     }
-    func applicationDidCancel() {
+    public func applicationDidCancel() {
         cleanup()
         navigationRouter.pop(animated: true)
     }
@@ -123,9 +119,8 @@ extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
     }
     
     func companyViewModel(_ viewModel: CompanyViewModel, showShare company: CompanyViewData) {
-        let socialShareData = SocialShareItemSource()
-        socialShareData.company = self.company
-        let activityViewController = UIActivityViewController(activityItems: [socialShareData], applicationActivities: nil)
+        socialShareItemSource.company = self.company
+        let activityViewController = UIActivityViewController(activityItems: [socialShareItemSource], applicationActivities: nil)
         companyViewController.present(activityViewController, animated: true, completion: nil)
     }
 }

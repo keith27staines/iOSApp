@@ -18,11 +18,14 @@ public protocol CompanyFavouritesModelDelegate : class {
 public class CompanyFavouritesModel {
     let service: CompanyFavouritingServiceProtocol
     weak var delegate: CompanyFavouritesModelDelegate?
-    var shortlist: [Shortlist] = ShortlistDBOperations.sharedInstance.getShortlistForCurrentUser()
+    var favouritesRepository: FavouritesRepositoryProtocol
+    var shortlist: [Shortlist] { return favouritesRepository.loadFavourites() }
     
     public init(
-        favouritingService: CompanyFavouritingServiceProtocol = F4SCompanyFavouritingService()) {
+        favouritingService: CompanyFavouritingServiceProtocol,
+        favouritesRepository: FavouritesRepositoryProtocol) {
         self.service = favouritingService
+        self.favouritesRepository = favouritesRepository
     }
     
     func isFavourite(company: Company) -> Bool {
@@ -43,8 +46,7 @@ public class CompanyFavouritesModel {
                         strongSelf.unfavourite(company: company)
                     })
                 case .success(_):
-                    ShortlistDBOperations.sharedInstance.removeShortlistWithId(shortlistUuid: shortlistUuid)
-                    strongSelf.shortlist = ShortlistDBOperations.sharedInstance.getShortlistForCurrentUser()
+                    strongSelf.favouritesRepository.removeFavourite(uuid: shortlistUuid)
                     strongSelf.delegate?.companyFavouritesModelDidUpate(strongSelf, company: company, isFavourite: false)
                 }
             }
@@ -68,8 +70,7 @@ public class CompanyFavouritesModel {
                 case .success(let shortlistItem):
                     let shortlistUuid = shortlistItem.uuid!
                     let shortlistedCompany = Shortlist(companyUuid: company.uuid, uuid: shortlistUuid, date: Date())
-                    ShortlistDBOperations.sharedInstance.saveShortlist(shortlist: shortlistedCompany)
-                    strongSelf.shortlist = ShortlistDBOperations.sharedInstance.getShortlistForCurrentUser()
+                    strongSelf.favouritesRepository.addFavourite(shortlistedCompany)
                     strongSelf.delegate?.companyFavouritesModelDidUpate(strongSelf, company: company, isFavourite: true)
                 }
             }

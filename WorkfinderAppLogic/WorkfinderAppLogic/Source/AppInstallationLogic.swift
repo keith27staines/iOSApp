@@ -10,7 +10,7 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderServices
 
-public class AppInstallationUuidLogic {
+public class AppInstallationUuidLogic : AppInstallationUuidLogicProtocol {
     
     let localStore: LocalStorageProtocol
     let userService: F4SUserServiceProtocol

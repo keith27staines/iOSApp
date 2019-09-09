@@ -84,7 +84,7 @@ class CompanyViewModel : NSObject {
     weak var coordinatingDelegate: CompanyViewModelCoordinatingDelegate?
     weak var viewModelDelegate: CompanyViewModelDelegate?
     let favouritingModel: CompanyFavouritesModel
-    lazy var placement = PlacementDBOperations.sharedInstance.getPlacementForCompany(companyUuid: company.uuid)
+//    lazy var placement = PlacementDBOperations.sharedInstance.getPlacementForCompany(companyUuid: company.uuid)
     var addToshortlistService: CompanyFavouritingServiceProtocol?
     private (set) var company: Company
     var companyViewData: CompanyViewData
@@ -127,7 +127,7 @@ class CompanyViewModel : NSObject {
         company: Company,
         people: [PersonViewData],
         companyService: F4SCompanyServiceProtocol = F4SCompanyService(),
-        favouritingModel: CompanyFavouritesModel? = nil
+        favouritingModel: CompanyFavouritesModel
         ) {
         self.companyService = companyService
         self.company = company
@@ -135,7 +135,7 @@ class CompanyViewModel : NSObject {
         self.people = people
         self.coordinatingDelegate = coordinatingDelegate
         self.viewModelDelegate = viewModelDelegate
-        self.favouritingModel = favouritingModel ?? CompanyFavouritesModel()
+        self.favouritingModel = favouritingModel
         self.companyViewData.isFavourited = self.favouritingModel.isFavourite(company: company)
         super.init()
         // TODO: enable peopple tab:  viewControllers = [descriptionViewController, dataViewController, peopleViewController]

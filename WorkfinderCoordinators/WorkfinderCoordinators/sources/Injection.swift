@@ -3,18 +3,7 @@ import WorkfinderCommon
 import WorkfinderServices
 import WorkfinderAppLogic
 
-public typealias LaunchOptions = [UIApplication.LaunchOptionsKey: Any]
 
-public protocol CoreInjectionProtocol : class {
-    var appInstallationUuidLogic: AppInstallationUuidLogic { get }
-    var launchOptions: LaunchOptions? { get set }
-    var user: F4SUser { get set }
-    var userService: F4SUserServiceProtocol { get }
-    var userStatusService: F4SUserStatusServiceProtocol { get }
-    var userRepository: F4SUserRepositoryProtocol { get }
-    var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol { get }
-    var log: F4SAnalyticsAndDebugging { get }
-}
 
 public class CoreInjection : CoreInjectionProtocol {
     
@@ -25,7 +14,7 @@ public class CoreInjection : CoreInjectionProtocol {
     public var userRepository: F4SUserRepositoryProtocol
     public var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol
     public var log: F4SAnalyticsAndDebugging
-    public let appInstallationUuidLogic: AppInstallationUuidLogic
+    public let appInstallationUuidLogic: AppInstallationUuidLogicProtocol
     
     public init(launchOptions: LaunchOptions?,
                 appInstallationUuidLogic: AppInstallationUuidLogic,

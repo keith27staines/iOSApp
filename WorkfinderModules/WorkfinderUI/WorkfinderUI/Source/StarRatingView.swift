@@ -1,20 +1,12 @@
-//
-//  StarRatingView.swift
-//  StarRating
-//
-//  Created by Keith Dev on 23/11/2017.
-//  Copyright © 2017 F4S. All rights reserved.
-//
-
 import UIKit
 
 @IBDesignable
-class StarRatingView: UIView {
+public class StarRatingView: UIView {
 
     /// Name of image used to represent no star
     public var noStar: String = "ratingUnfilledStar"
     /// Name of image used to represent a half-filled star
-    public var halfStar: String = "HalfStar"
+    public var halfStar: String = "ratingHalfStar"
     /// Name of image used to represent a full star
     public var fullStar: String = "ratingFilledStar"
     
@@ -57,7 +49,7 @@ class StarRatingView: UIView {
         updateRatingDisplay()
     }
     
-    override var intrinsicContentSize: CGSize {
+    public override var intrinsicContentSize: CGSize {
         return CGSize(width: 0, height: 12)
     }
 }

@@ -54,26 +54,7 @@ struct UserStatus {
     }
 }
 
-struct Shortlist : Hashable {
 
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(companyUuid)
-    }
-    
-    static func ==(lhs: Shortlist, rhs: Shortlist) -> Bool {
-        return lhs.companyUuid == rhs.companyUuid
-    }
-    
-    var companyUuid: String
-    var uuid: String
-    var date: Date
-
-    init(companyUuid: String = "", uuid: String = "", date: Date = Date()) {
-        self.companyUuid = companyUuid
-        self.uuid = uuid
-        self.date = date
-    }
-}
 
 enum ContentType: String {
     case about = "about-workfinder"
@@ -100,12 +81,4 @@ struct CompanyDatabaseMeta {
         self.created = created
         self.url = url
     }
-}
-
-enum SocialShare: String {
-    case sms
-    case email
-    case twitter
-    case facebook
-    case other
 }

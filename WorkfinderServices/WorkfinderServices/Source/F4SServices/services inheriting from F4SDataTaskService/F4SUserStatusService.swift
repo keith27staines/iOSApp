@@ -2,12 +2,6 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderNetworking
 
-public protocol F4SUserStatusServiceProtocol {
-    var userStatus: F4SUserStatus? { get }
-    func beginStatusUpdate()
-    func getUserStatus(completion: @escaping (F4SNetworkResult<F4SUserStatus>) -> ())
-}
-
 public extension Notification.Name {
     static let f4sUserStatusUpdated = Notification.Name(
         rawValue: "f4sUserStatusUpdated")

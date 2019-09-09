@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 import CoreData
 
 class ShortlistCoreDataManager: CoreDataBaseManager {

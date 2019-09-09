@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WorkfinderCommon
 
 /// A convenient starting point for creating a coordinator that uses a UINavigationController
 open class NavigationCoordinator : Coordinating {

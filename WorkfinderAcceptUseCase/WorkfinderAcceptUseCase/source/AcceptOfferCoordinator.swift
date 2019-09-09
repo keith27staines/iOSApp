@@ -54,6 +54,16 @@ public class AcceptOfferCoordinator : CoreInjectionNavigationCoordinator {
     }
 }
 
+extension AcceptOfferCoordinator: CompanyCoordinatorParentProtocol {
+    public func showMessages() {
+        
+    }
+    
+    public func showSearch() {
+        
+    }
+}
+
 extension AcceptOfferCoordinator {
     func createFinishingAlert(title: String,
                               message: String,
