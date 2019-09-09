@@ -1,16 +1,9 @@
-//
-//  PersonViewDataTests.swift
-//  F4SPrototypesTests
-//
-//  Created by Keith Dev on 26/01/2019.
-//  Copyright © 2019 Keith Staines. All rights reserved.
-//
-
 import XCTest
-@testable import f4s_workexperience
+import Foundation
+@ testable import WorkfinderCommon
 
 class PersonViewDataTests: XCTestCase {
-
+    
     var sut: PersonViewData!
     
     override func setUp() {
@@ -45,5 +38,5 @@ class PersonViewDataTests: XCTestCase {
         sut.linkedInUrl = "something"
         XCTAssertFalse(sut.islinkedInHidden)
     }
-
+    
 }

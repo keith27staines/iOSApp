@@ -7,23 +7,7 @@
 //
 
 import Foundation
-
-struct PersonViewData {
-    var uuid: String? = nil
-    var firstName: String? = nil
-    var lastName: String? = nil
-    var bio: String? = nil
-    var role: String? = nil
-    var imageName: String? = nil
-    
-    var fullName: String { return "\(firstName ?? "") \(lastName ?? "")" }
-    var fullNameAndRole: String { return "\(fullName), \(role ?? "")"}
-    var linkedInUrl: String? = "https://www.bbc.co.uk"
-    var islinkedInHidden: Bool {
-        return linkedInUrl == nil
-    }
-}
-
+import WorkfinderCommon
 
 extension PersonViewData {
 

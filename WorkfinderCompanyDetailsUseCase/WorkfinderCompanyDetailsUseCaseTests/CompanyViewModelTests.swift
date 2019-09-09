@@ -8,7 +8,7 @@
 
 import XCTest
 import WorkfinderCommon
-@testable import f4s_workexperience
+@testable import WorkfinderCompanyDetailsUseCase
 
 class CompanyViewModelTests: XCTestCase {
     
@@ -21,8 +21,12 @@ class CompanyViewModelTests: XCTestCase {
         super.setUp()
         let company = Company(id: 1, created: Date(), modified: Date(), uuid: UUID().uuidString, name: "companyName", logoUrl: "logoUrlString", industry: "industry", latitude: 45, longitude: 45, summary: "summary", employeeCount: 1, turnover: 1, turnoverGrowth: 1, rating: 1, ratingCount: 1, sourceId: "sourceId", hashtag: "hashtag", companyUrl: "companyUrlString")
         person = PersonViewData()
+        let favouritesModel = makeFavouritingModel()
         coordinatingDelegate = CoordinatingDelegate()
-        sut = CompanyViewModel(coordinatingDelegate: coordinatingDelegate, company: company, people: [person])
+        sut = CompanyViewModel(coordinatingDelegate: coordinatingDelegate,
+                               company: company,
+                               people: [person],
+                               favouritingModel: favouritesModel)
         self.company = sut.companyViewData
     }
 
@@ -31,6 +35,60 @@ class CompanyViewModelTests: XCTestCase {
         super.tearDown()
     }
 
+    func makeFavouritingModel() -> CompanyFavouritesModel {
+        let shortlistJson = F4SShortlistJson()
+        let expectedFavouriteResult =  F4SNetworkResult.success(shortlistJson)
+        let expectedUnfavouriteResult = F4SNetworkResult.success("uuid")
+        let favouritingService = MockFavouritingService(expectedFavouriteResult: expectedFavouriteResult, expectedUnfavouriteResult: expectedUnfavouriteResult)
+        let favouritingRepository = MockFavouritingRepository()
+        let favouritesModel = CompanyFavouritesModel(
+            favouritingService: favouritingService,
+            favouritesRepository: favouritingRepository)
+        return favouritesModel
+    }
+    
+}
+
+class MockFavouritingRepository: FavouritesRepositoryProtocol {
+    var favourites = [F4SUUID: Shortlist]()
+    
+    func loadFavourites() -> [Shortlist] {
+        return Array(favourites.values)
+    }
+    
+    func removeFavourite(uuid: F4SUUID) {
+        favourites[uuid] = nil
+    }
+    
+    func addFavourite(_ item: Shortlist) {
+        favourites[item.uuid] = item
+    }
+}
+
+class MockFavouritingService: CompanyFavouritingServiceProtocol {
+    var apiName: String = "MockFavouritingService/api"
+    var expectedFavouriteResult: F4SNetworkResult<F4SShortlistJson>
+    var expectedUnfavouriteResult: F4SNetworkResult<F4SUUID>
+    
+    public init(expectedFavouriteResult: F4SNetworkResult<F4SShortlistJson>,
+                expectedUnfavouriteResult: F4SNetworkResult<F4SUUID>) {
+        self.expectedFavouriteResult = expectedFavouriteResult
+        self.expectedUnfavouriteResult = expectedUnfavouriteResult
+    }
+    
+    func favourite(companyUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SShortlistJson>) -> Void) {
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            completion(strongSelf.expectedFavouriteResult)
+        }
+    }
+    
+    func unfavourite(shortlistUuid: String, completion: @escaping (F4SNetworkResult<F4SUUID>) -> Void) {
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            completion(strongSelf.expectedUnfavouriteResult)
+        }
+    }
 }
 
 class CoordinatingDelegate: CompanyViewModelCoordinatingDelegate {

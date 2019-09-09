@@ -7,7 +7,8 @@
 //
 
 import Foundation
-import WorkfinderServices
+import WorkfinderCommon
+
 @testable import f4s_workexperience
 
 class MockDatabaseDownloadManager : F4SDatabaseDownloadManagerProtocol {

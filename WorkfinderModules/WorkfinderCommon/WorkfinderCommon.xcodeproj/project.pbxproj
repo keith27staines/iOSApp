@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		FC066050232645D800496FE2 /* F4SFavouritesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06604F232645D800496FE2 /* F4SFavouritesRepository.swift */; };
 		FC0660572326635000496FE2 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0660562326635000496FE2 /* Protocols.swift */; };
+		FC06605923266F2300496FE2 /* PersonViewDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06605823266F2300496FE2 /* PersonViewDataTests.swift */; };
+		FC06605D2326770B00496FE2 /* F4SShortlistJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06605C2326770B00496FE2 /* F4SShortlistJson.swift */; };
 		FC083F7B230FF01000641F17 /* F4SDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F7A230FF01000641F17 /* F4SDocument.swift */; };
 		FC083F852310101D00641F17 /* F4SRecommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F842310101D00641F17 /* F4SRecommendation.swift */; };
 		FC083F892310165900641F17 /* F4SDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F882310165900641F17 /* F4SDocumentTests.swift */; };
@@ -131,6 +133,8 @@
 /* Begin PBXFileReference section */
 		FC06604F232645D800496FE2 /* F4SFavouritesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SFavouritesRepository.swift; sourceTree = "<group>"; };
 		FC0660562326635000496FE2 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		FC06605823266F2300496FE2 /* PersonViewDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonViewDataTests.swift; sourceTree = "<group>"; };
+		FC06605C2326770B00496FE2 /* F4SShortlistJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SShortlistJson.swift; sourceTree = "<group>"; };
 		FC083F7A230FF01000641F17 /* F4SDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDocument.swift; sourceTree = "<group>"; };
 		FC083F842310101D00641F17 /* F4SRecommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRecommendation.swift; sourceTree = "<group>"; };
 		FC083F882310165900641F17 /* F4SDocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDocumentTests.swift; sourceTree = "<group>"; };
@@ -413,6 +417,7 @@
 				FC1FA08422FAAC28003EAE59 /* MockAnalyticsAndDebugging.swift */,
 				FC083F8E2310417E00641F17 /* F4SRoleJsonTests.swift */,
 				FC083F902310464400641F17 /* F4SRecommendationTests.swift */,
+				FC06605823266F2300496FE2 /* PersonViewDataTests.swift */,
 			);
 			path = WorkfinderCommonTests;
 			sourceTree = "<group>";
@@ -470,6 +475,7 @@
 				FC93DC5923202CFB00F1CE23 /* EnvironmentType.swift */,
 				FCC1DF5C232505FF0074D5C1 /* Shortlist.swift */,
 				FCC1DF5E232507530074D5C1 /* SocialShare.swift */,
+				FC06605C2326770B00496FE2 /* F4SShortlistJson.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -675,6 +681,7 @@
 				FCE8DAA82320E80B00934E2F /* ScaledNumber.swift in Sources */,
 				FC4EE710230EB9D700B40F6B /* F4SUserStatus.swift in Sources */,
 				FCE51938224948E400B550C9 /* F4SHoursType.swift in Sources */,
+				FC06605D2326770B00496FE2 /* F4SShortlistJson.swift in Sources */,
 				FCE5193E22494CED00B550C9 /* F4SJsonValue.swift in Sources */,
 				FCE5192F2249482A00B550C9 /* F4SCalendarMonth.swift in Sources */,
 				FC083F7B230FF01000641F17 /* F4SDocument.swift in Sources */,
@@ -743,6 +750,7 @@
 				FCFC06A9232256C0003C59C8 /* CGRect+MethodsTests.swift in Sources */,
 				FC22DC0122F996D70068C61C /* F4SChoiceTests.swift in Sources */,
 				FCFC06A123225571003C59C8 /* F4SStringExtensionTests.swift in Sources */,
+				FC06605923266F2300496FE2 /* PersonViewDataTests.swift in Sources */,
 				FCFC069323224081003C59C8 /* ScaledNumberTests.swift in Sources */,
 				FC1FEF022301BFB10039DD94 /* F4SPlacementTests.swift in Sources */,
 				FC083F8F2310417E00641F17 /* F4SRoleJsonTests.swift in Sources */,

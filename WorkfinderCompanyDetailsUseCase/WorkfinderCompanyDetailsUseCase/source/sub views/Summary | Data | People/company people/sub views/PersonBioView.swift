@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WorkfinderCommon
 
 class PersonBioView: UIView {
     

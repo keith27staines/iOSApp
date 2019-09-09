@@ -100,6 +100,20 @@
             BlueprintName = "WorkfinderUserDetailsUseCase"
             ReferencedContainer = "container:WorkfinderUserDetailsUseCase/WorkfinderUserDetailsUseCase.xcodeproj">
          </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FCC1DEF3232501ED0074D5C1"
+            BuildableName = "WorkfinderCompanyDetailsUseCase.framework"
+            BlueprintName = "WorkfinderCompanyDetailsUseCase"
+            ReferencedContainer = "container:WorkfinderCompanyDetailsUseCase/WorkfinderCompanyDetailsUseCase.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FCE8DAB22320F13D00934E2F"
+            BuildableName = "WorkfinderUploadYPDocumentsUseCase.framework"
+            BlueprintName = "WorkfinderUploadYPDocumentsUseCase"
+            ReferencedContainer = "container:F4SUploadYPDocumentsUseCase/WorkfinderUploadYPDocumentsUseCase.xcodeproj">
+         </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
          <TestableReference

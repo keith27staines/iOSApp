@@ -213,8 +213,6 @@
 		FCFBD0212250DAFE00A9361D /* PartnerModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32E3D8200F322800D7C36A /* PartnerModelTests.swift */; };
 		FCFBD0242250DB4D00A9361D /* F4SDatabaseDownloadManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC85B2220EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift */; };
 		FCFBD0262250DB7700A9361D /* MessagesModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC39F46121AAA64B005B0A07 /* MessagesModelTests.swift */; };
-		FCFBD0292250DBE900A9361D /* CompanyViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1DC09D21FE1563009ABC60 /* CompanyViewModelTests.swift */; };
-		FCFBD02B2250DC2700A9361D /* PersonViewDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1DC09B21FE1562009ABC60 /* PersonViewDataTests.swift */; };
 		FCFC06AD23225B9E003C59C8 /* LatLon+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06AC23225B9E003C59C8 /* LatLon+Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -387,8 +385,6 @@
 		FC14E975221EBF6600EE985F /* MockAnalyticsAndDebugging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsAndDebugging.swift; sourceTree = "<group>"; };
 		FC1DC06721FE13FE009ABC60 /* CompanyDetailAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CompanyDetailAssets.xcassets; sourceTree = "<group>"; };
 		FC1DC06A21FE142D009ABC60 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		FC1DC09B21FE1562009ABC60 /* PersonViewDataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonViewDataTests.swift; sourceTree = "<group>"; };
-		FC1DC09D21FE1563009ABC60 /* CompanyViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyViewModelTests.swift; sourceTree = "<group>"; };
 		FC1E6A48221714B800DC335B /* AppCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorTests.swift; sourceTree = "<group>"; };
 		FC1E6A4C2217474500DC335B /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		FC1E6A4E2217476400DC335B /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
@@ -955,15 +951,6 @@
 			path = "Main App";
 			sourceTree = "<group>";
 		};
-		FC1DC09921FE153E009ABC60 /* Company Detail Tests */ = {
-			isa = PBXGroup;
-			children = (
-				FC1DC09D21FE1563009ABC60 /* CompanyViewModelTests.swift */,
-				FC1DC09B21FE1562009ABC60 /* PersonViewDataTests.swift */,
-			);
-			path = "Company Detail Tests";
-			sourceTree = "<group>";
-		};
 		FC1DFD86222B9C67001951ED /* Models and services */ = {
 			isa = PBXGroup;
 			children = (
@@ -1383,7 +1370,6 @@
 		FCFE450F2250CAD600C38436 /* Workfinder main module tests */ = {
 			isa = PBXGroup;
 			children = (
-				FC1DC09921FE153E009ABC60 /* Company Detail Tests */,
 				FCA90A8B221D693700EACD8D /* Mocks */,
 				FC3F3921222931630046F8F8 /* Coordinator tests */,
 				FC32E3D8200F322800D7C36A /* PartnerModelTests.swift */,
@@ -1798,11 +1784,9 @@
 				FCFBD01A2250DA1800A9361D /* MockUIApplication.swift in Sources */,
 				FCFBD0262250DB7700A9361D /* MessagesModelTests.swift in Sources */,
 				FCFBD0182250D9A400A9361D /* MockUserService.swift in Sources */,
-				FCFBD0292250DBE900A9361D /* CompanyViewModelTests.swift in Sources */,
 				FCFBD0212250DAFE00A9361D /* PartnerModelTests.swift in Sources */,
 				FC0B4084226CB1F300D992AC /* F4SRecommendedCompaniesMergerTests.swift in Sources */,
 				FCFBD01D2250DA3E00A9361D /* MockCoordinators.swift in Sources */,
-				FCFBD02B2250DC2700A9361D /* PersonViewDataTests.swift in Sources */,
 				FCFBD01B2250DA1800A9361D /* MockDatabaseDownload.swift in Sources */,
 				FCFBD0192250D9FF00A9361D /* AppCoordinatorTests.swift in Sources */,
 			);
@@ -2001,10 +1985,10 @@
 		};
 		201458B81E1BA9B900DBC9BD /* DebugF4SLive */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C244124FAD6DA2320378A05F /* Pods-f4s-workexperience.debugf4s.xcconfig */;
+			baseConfigurationReference = 9C8235BD4A169F7DD6BA6996 /* Pods-f4s-workexperience.debugf4slive.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
-				BUNDLE_ID_SUFFIX = .staging;
+				BUNDLE_ID_SUFFIX = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -2012,7 +1996,8 @@
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s.staging;
+				NAME_FOR_ENVIRONMENT = Workfinder;
+				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2087,10 +2072,10 @@
 		};
 		201458BC1E1BA9C400DBC9BD /* ReleaseF4SLive */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 698B16C1DEA4421DE6C2C9D6 /* Pods-f4s-workexperience.releasef4s.xcconfig */;
+			baseConfigurationReference = 590A4AE101882A503C247BC5 /* Pods-f4s-workexperience.releasef4slive.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
-				BUNDLE_ID_SUFFIX = .staging;
+				BUNDLE_ID_SUFFIX = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -2098,7 +2083,8 @@
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s.staging;
+				NAME_FOR_ENVIRONMENT = Workfinder;
+				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2179,9 +2165,10 @@
 		};
 		40D53C851E30EA2900D7AA32 /* DebugF4S */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9C8235BD4A169F7DD6BA6996 /* Pods-f4s-workexperience.debugf4slive.xcconfig */;
+			baseConfigurationReference = C244124FAD6DA2320378A05F /* Pods-f4s-workexperience.debugf4s.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
+				BUNDLE_ID_SUFFIX = .staging;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -2189,7 +2176,8 @@
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
+				NAME_FOR_ENVIRONMENT = F4S.Staging;
+				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s.staging;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2264,10 +2252,10 @@
 		};
 		40D53C891E30EA6E00D7AA32 /* ReleaseF4S */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 590A4AE101882A503C247BC5 /* Pods-f4s-workexperience.releasef4slive.xcconfig */;
+			baseConfigurationReference = 698B16C1DEA4421DE6C2C9D6 /* Pods-f4s-workexperience.releasef4s.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
-				BUNDLE_ID_SUFFIX = "";
+				BUNDLE_ID_SUFFIX = .staging;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -2275,7 +2263,8 @@
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
+				NAME_FOR_ENVIRONMENT = F4S.Staging;
+				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s.staging;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2291,7 +2280,7 @@
 		};
 		FCFBD00D2250D69700A9361D /* DebugF4S */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A8C2B2FDB72FFFD854511B24 /* Pods-f4s-workexperienceTests.debugf4slive.xcconfig */;
+			baseConfigurationReference = 5EDAD0D218CD01AA5D5D2DD5 /* Pods-f4s-workexperienceTests.debugf4s.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2363,7 +2352,7 @@
 		};
 		FCFBD00E2250D69700A9361D /* DebugF4SLive */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5EDAD0D218CD01AA5D5D2DD5 /* Pods-f4s-workexperienceTests.debugf4s.xcconfig */;
+			baseConfigurationReference = A8C2B2FDB72FFFD854511B24 /* Pods-f4s-workexperienceTests.debugf4slive.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2435,7 +2424,7 @@
 		};
 		FCFBD00F2250D69700A9361D /* ReleaseF4S */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0022DD3F6308590A19CBCF7B /* Pods-f4s-workexperienceTests.releasef4slive.xcconfig */;
+			baseConfigurationReference = D01AFAF1CC1AF1F3203880BF /* Pods-f4s-workexperienceTests.releasef4s.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2500,7 +2489,7 @@
 		};
 		FCFBD0102250D69700A9361D /* ReleaseF4SLive */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D01AFAF1CC1AF1F3203880BF /* Pods-f4s-workexperienceTests.releasef4s.xcconfig */;
+			baseConfigurationReference = 0022DD3F6308590A19CBCF7B /* Pods-f4s-workexperienceTests.releasef4slive.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";

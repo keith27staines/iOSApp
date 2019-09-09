@@ -1,5 +1,11 @@
 import Foundation
 
+public protocol CompanyFavouritingServiceProtocol {
+    var apiName: String { get }
+    func favourite(companyUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SShortlistJson>) -> Void)
+    func unfavourite(shortlistUuid: String, completion: @escaping (F4SNetworkResult<F4SUUID>) -> Void)
+}
+
 public protocol RoutingProtocol {
     var rootViewController: UIViewController { get }
     func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)?)
@@ -105,4 +111,31 @@ public protocol CompanyCoordinatorFactoryProtocol {
         navigationRouter: NavigationRoutingProtocol,
         company: Company,
         inject: CoreInjectionProtocol) -> CompanyCoordinatorProtocol
+}
+
+public struct PersonViewData {
+    public var uuid: String? = nil
+    public var firstName: String? = nil
+    public var lastName: String? = nil
+    public var bio: String? = nil
+    public var role: String? = nil
+    public var imageName: String? = nil
+    
+    public var fullName: String { return "\(firstName ?? "") \(lastName ?? "")" }
+    public var fullNameAndRole: String { return "\(fullName), \(role ?? "")"}
+    public var linkedInUrl: String? = "https://www.bbc.co.uk"
+    public var islinkedInHidden: Bool {
+        return linkedInUrl == nil
+    }
+    
+    public init(
+        uuid: F4SUUID? = nil,
+        firstName: String? = nil,
+        lastName: String? = nil,
+        bio: String? = nil,
+        role: String? = nil,
+        imageName: String? = nil,
+        linkedInUrl: String? = nil) {
+        
+    }
 }

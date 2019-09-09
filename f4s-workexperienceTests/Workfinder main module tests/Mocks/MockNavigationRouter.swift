@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import WorkfinderCoordinators
+import WorkfinderCommon
 @testable import f4s_workexperience
 
 class MockNavigationRouter : NavigationRoutingProtocol {

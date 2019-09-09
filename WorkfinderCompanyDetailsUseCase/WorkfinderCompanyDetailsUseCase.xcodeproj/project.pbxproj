@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC06605B23266FC000496FE2 /* CompanyViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06605A23266FC000496FE2 /* CompanyViewModelTests.swift */; };
 		FCC1DEFE232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC1DEF4232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCase.framework */; };
 		FCC1DF03232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF02232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCaseTests.swift */; };
 		FCC1DF05232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = FCC1DEF7232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FC06605A23266FC000496FE2 /* CompanyViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyViewModelTests.swift; sourceTree = "<group>"; };
 		FCC1DEF4232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderCompanyDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCC1DEF7232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderCompanyDetailsUseCase.h; sourceTree = "<group>"; };
 		FCC1DEF8232501ED0074D5C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		FCC1DF01232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCaseTests */ = {
 			isa = PBXGroup;
 			children = (
+				FC06605A23266FC000496FE2 /* CompanyViewModelTests.swift */,
 				FCC1DF02232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCaseTests.swift */,
 				FCC1DF04232501ED0074D5C1 /* Info.plist */,
 			);
@@ -381,6 +384,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC06605B23266FC000496FE2 /* CompanyViewModelTests.swift in Sources */,
 				FCC1DF03232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

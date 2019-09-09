@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WorkfinderCommon
 import WorkfinderUI
 
 fileprivate let cardAspectRatio: CGFloat = 1.3
