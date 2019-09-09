@@ -13,12 +13,9 @@ import WorkfinderCommon
 import WorkfinderNetworking
 import WorkfinderServices
 import WorkfinderAppLogic
+import WorkfinderUserDetailsUseCase
 
 let globalLog = XCGLogger.default
-
-extension Notification.Name {
-    static let verificationCodeRecieved = Notification.Name("verificationCodeRecieved")
-}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -35,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var appInstallationUuidLogic: AppInstallationUuidLogic = {
         let localStore = LocalStore()
         let userRepo = F4SUserRepository(localStore: localStore)
-        return AppInstallationUuidLogic(userService: self.userService, userRepo: userRepo)
+        return AppInstallationUuidLogic(userService: self.userService, userRepo: userRepo, apnsEnvironment: Config.apnsEnv)
     }()
     
     lazy var appCoordinator: AppCoordinatorProtocol = {
@@ -60,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         f4sLog = F4SLog()
         databaseDownloadManager = F4SDatabaseDownloadManager()
         configureNetwork()
+        _ = WorkfinderUserDetailsUseCase(environmentType: Config.environment)
         window = appCoordinator.window
         appCoordinator.start()
         return true

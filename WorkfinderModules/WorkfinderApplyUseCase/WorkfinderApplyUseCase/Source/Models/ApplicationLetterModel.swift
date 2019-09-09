@@ -9,7 +9,7 @@
 //import Foundation
 import WorkfinderCommon
 
-public protocol ApplicationLetterModelProtocol {
+protocol ApplicationLetterModelProtocol {
     var letterString: NSAttributedString { get }
     var allFieldsFilled: Bool { get }
     var blanksModel: ApplicationLetterTemplateBlanksModelProtocol { get }
@@ -17,14 +17,14 @@ public protocol ApplicationLetterModelProtocol {
     func render()
 }
 
-public protocol ApplicationLetterModelDelegate : class {
+protocol ApplicationLetterModelDelegate : class {
     func modelBusyState(_ model: ApplicationLetterModelProtocol, isBusy: Bool)
     func applicationLetterModel(_ model: ApplicationLetterModelProtocol, stoppedProcessingWithError: Error)
     func applicationLetterModel(_ model: ApplicationLetterModelProtocol, renderedTemplateToString: NSAttributedString, allFieldsFilled: Bool)
     func applicationLetterModel(_ model: ApplicationLetterModelProtocol, failedToSubmitLetter error: F4SNetworkError, retry: (()->Void)?)
 }
 
-public class ApplicationLetterModel : ApplicationLetterModelProtocol {
+class ApplicationLetterModel : ApplicationLetterModelProtocol {
     
     public var allFieldsFilled: Bool
     public var letterString: NSAttributedString

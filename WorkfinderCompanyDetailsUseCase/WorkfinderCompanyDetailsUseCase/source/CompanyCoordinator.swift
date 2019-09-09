@@ -1,0 +1,127 @@
+import UIKit
+import WorkfinderCommon
+import WorkfinderNetworking
+import WorkfinderServices
+import WorkfinderCoordinators
+import WorkfinderApplyUseCase
+
+public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoordinatorProtocol {
+    
+    lazy var applyService: F4SPlacementApplicationServiceProtocol = { return F4SPlacementApplicationService() }()
+    var companyViewController: CompanyViewController!
+    var companyViewModel: CompanyViewModel!
+    var favouritesModel: CompanyFavouritesModel
+    var company: Company
+    var placementsRepository: F4SPlacementRepositoryProtocol
+    var interestsRepository: F4SInterestsRepositoryProtocol
+    let socialShareItemSource: SocialShareItemSource
+    weak var finishDespatcher: CompanyCoordinatorParentProtocol?
+    
+    public init(
+        parent: CompanyCoordinatorParentProtocol?,
+        navigationRouter: NavigationRoutingProtocol,
+        company: Company,
+        inject: CoreInjectionProtocol,
+        placementsRepository: F4SPlacementRepositoryProtocol,
+        interestsRepository: F4SInterestsRepositoryProtocol,
+        socialShareItemSource: SocialShareItemSource,
+        favouritesModel: CompanyFavouritesModel) {
+        self.socialShareItemSource = socialShareItemSource
+        self.interestsRepository = interestsRepository
+        self.placementsRepository = placementsRepository
+        self.company = company
+        self.favouritesModel = favouritesModel
+        self.finishDespatcher = parent
+        super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
+    }
+    
+    lazy var templateService: F4STemplateServiceProtocol = { return F4STemplateService() }()
+    
+    public override func start() {
+        super.start()
+        companyViewModel = CompanyViewModel(coordinatingDelegate: self, company: company, people: [], favouritingModel: favouritesModel)
+        companyViewController = CompanyViewController(viewModel: companyViewModel)
+        navigationRouter.push(viewController: companyViewController, animated: true)
+    }
+    
+    deinit {
+        print("*************** Company coordinator was deinitialized")
+    }
+}
+
+extension CompanyCoordinator : ApplyCoordinatorDelegate {
+    public func applicationDidFinish(preferredDestination: ApplyCoordinator.PreferredDestinationAfterApplication) {
+        cleanup()
+        navigationRouter.pop(animated: true)
+        parentCoordinator?.childCoordinatorDidFinish(self)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
+            switch preferredDestination {
+            case .messages:
+                self?.finishDespatcher?.showMessages()
+            case .search:
+                self?.finishDespatcher?.showSearch()
+            case .none:
+                break
+            }
+        }
+    }
+    public func applicationDidCancel() {
+        cleanup()
+        navigationRouter.pop(animated: true)
+    }
+}
+
+extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
+
+    func companyViewModelDidComplete(_ viewModel: CompanyViewModel) {
+        cleanup()
+        navigationRouter.pop(animated: true)
+        parentCoordinator?.childCoordinatorDidFinish(self)
+    }
+    
+    func cleanup() {
+        companyViewController = nil
+        companyViewModel = nil
+        childCoordinators = [:]
+    }
+    
+    func companyViewModel(_ viewModel: CompanyViewModel, applyTo companyViewData: CompanyViewData, continueFrom placement: F4STimelinePlacement?) {
+        let viewData = CompanyViewData(company: company)
+        startApplyCoordinator(companyViewData: viewData, continueFrom: placement)
+    }
+    
+    func startApplyCoordinator(companyViewData: CompanyViewData,
+                               continueFrom: F4STimelinePlacement?) {
+        let applyCoordinator = ApplyCoordinator(
+            applyCoordinatorDelegate: self,
+            company: company,
+            parent: self,
+            navigationRouter: navigationRouter,
+            inject: injected,
+            placementService: applyService,
+            templateService: templateService,
+            placementRepository: placementsRepository,
+            interestsRepository: interestsRepository)
+        addChildCoordinator(applyCoordinator)
+        applyCoordinator.start()
+    }
+    
+    func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn person: PersonViewData) {
+        print("Show linkedIn profile for \(person.fullName)")
+    }
+    
+    func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn company: CompanyViewData) {
+        openUrl(company.linkedinUrl)
+    }
+    
+    func companyViewModel(_ viewModel: CompanyViewModel, requestedShowDuedil company: CompanyViewData) {
+        openUrl(company.duedilUrl)
+    }
+    
+    func companyViewModel(_ viewModel: CompanyViewModel, showShare company: CompanyViewData) {
+        socialShareItemSource.company = self.company
+        let activityViewController = UIActivityViewController(activityItems: [socialShareItemSource], applicationActivities: nil)
+        companyViewController.present(activityViewController, animated: true, completion: nil)
+    }
+}
+

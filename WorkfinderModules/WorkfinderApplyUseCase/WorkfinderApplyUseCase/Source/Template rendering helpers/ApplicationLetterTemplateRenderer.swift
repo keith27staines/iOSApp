@@ -19,11 +19,11 @@ enum TemplateCustomParse: String {
     case endBold = "endBold}}"
 }
 
-public protocol TemplateChoicesLocalStorage {
+protocol TemplateChoicesLocalStorage {
     func removeChoiceWithName(_ name: String)
 }
 
-public class ApplicationLetterTemplateRenderer {
+class ApplicationLetterTemplateRenderer {
 
     let currentTemplate: F4STemplate
     let companyName: String
@@ -39,7 +39,7 @@ public class ApplicationLetterTemplateRenderer {
         self.selectedTemplateChoices = selectedTemplateChoices
     }
     
-    public func populatedField(with string: String) -> String {
+    func populatedField(with string: String) -> String {
         return TemplateCustomParse.startSelected.rawValue + string + TemplateCustomParse.endSelected.rawValue
     }
     

@@ -1,0 +1,1127 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FC0B6B312323CB5400A1867D /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0B6B302323CB5400A1867D /* WorkfinderNetworking.framework */; };
+		FC7C21932321575A00721D1D /* F4SUploadYPDocumentsUseCase.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC7C21922321477700721D1D /* F4SUploadYPDocumentsUseCase.xcassets */; };
+		FCE8DABD2320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE8DAB32320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCase.framework */; };
+		FCE8DAC22320F13D00934E2F /* F4SUploadYPDocumentsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAC12320F13D00934E2F /* F4SUploadYPDocumentsUseCaseTests.swift */; };
+		FCE8DAC42320F13D00934E2F /* F4SUploadYPDocumentsUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = FCE8DAB62320F13D00934E2F /* F4SUploadYPDocumentsUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FCE8DACF2320F24800934E2F /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCE8DACE2320F24800934E2F /* Camera.storyboard */; };
+		FCE8DAD52320F31300934E2F /* F4SBusinessLeadersRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAD22320F31300934E2F /* F4SBusinessLeadersRequestModel.swift */; };
+		FCE8DAD62320F31300934E2F /* F4SMultiPageDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAD32320F31300934E2F /* F4SMultiPageDocument.swift */; };
+		FCE8DAD72320F31300934E2F /* F4SDCDocumentCaptureFileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAD42320F31300934E2F /* F4SDCDocumentCaptureFileHelper.swift */; };
+		FCE8DAE32320F54200934E2F /* AddDocumentsViewController+AddDocumentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DADD2320F54100934E2F /* AddDocumentsViewController+AddDocumentDelegate.swift */; };
+		FCE8DAE42320F54200934E2F /* F4SDocumentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DADE2320F54100934E2F /* F4SDocumentTableViewController.swift */; };
+		FCE8DAE52320F54200934E2F /* DocumentUploadCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DADF2320F54100934E2F /* DocumentUploadCoordinator.swift */; };
+		FCE8DAE62320F54200934E2F /* F4SAddDocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAE02320F54100934E2F /* F4SAddDocumentsViewController.swift */; };
+		FCE8DAE72320F54200934E2F /* AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAE12320F54100934E2F /* AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift */; };
+		FCE8DAE82320F54200934E2F /* F4SPostDocumentDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAE22320F54100934E2F /* F4SPostDocumentDataViewController.swift */; };
+		FCE8DAEA2320F59F00934E2F /* F4SDCAddDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAE92320F59F00934E2F /* F4SDCAddDocumentViewController.swift */; };
+		FCE8DAED2320F68300934E2F /* F4SDCDocumentTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAEC2320F68300934E2F /* F4SDCDocumentTypeViewController.swift */; };
+		FCE8DAEF2320F6E000934E2F /* F4SAddUrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAEE2320F6E000934E2F /* F4SAddUrlViewController.swift */; };
+		FCE8DAF82320F72700934E2F /* F4SDisplayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAF22320F72600934E2F /* F4SDisplayTableViewController.swift */; };
+		FCE8DAF92320F72700934E2F /* F4SArrangeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAF32320F72600934E2F /* F4SArrangeTableViewCell.swift */; };
+		FCE8DAFA2320F72700934E2F /* F4SDisplayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAF42320F72600934E2F /* F4SDisplayTableViewCell.swift */; };
+		FCE8DAFB2320F72700934E2F /* F4SCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAF52320F72700934E2F /* F4SCameraViewController.swift */; };
+		FCE8DAFC2320F72700934E2F /* F4SArrangeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAF62320F72700934E2F /* F4SArrangeTableViewController.swift */; };
+		FCE8DAFD2320F72700934E2F /* F4SCameraPageManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAF72320F72700934E2F /* F4SCameraPageManagerViewController.swift */; };
+		FCE8DAFF2320F7B500934E2F /* F4SDCDocumentViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAFE2320F7B500934E2F /* F4SDCDocumentViewerController.swift */; };
+		FCE8DB022320F81700934E2F /* F4SDCPopupMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DB012320F81700934E2F /* F4SDCPopupMenuView.swift */; };
+		FCE8DB032320F96600934E2F /* DocumentCapture.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCE8DADC2320F42A00934E2F /* DocumentCapture.storyboard */; };
+		FCE8DB042320F97100934E2F /* F4SCameraCapture.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCE8DAD02320F26D00934E2F /* F4SCameraCapture.storyboard */; };
+		FCE8DB072320FA1800934E2F /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE8DB062320FA1800934E2F /* WorkfinderAppLogic.framework */; };
+		FCE8DB092320FA1800934E2F /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE8DB082320FA1800934E2F /* WorkfinderCommon.framework */; };
+		FCE8DB0B2320FA1800934E2F /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE8DB0A2320FA1800934E2F /* WorkfinderCoordinators.framework */; };
+		FCE8DB0D2320FA1800934E2F /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE8DB0C2320FA1800934E2F /* WorkfinderServices.framework */; };
+		FCE8DB0F2320FA1800934E2F /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE8DB0E2320FA1800934E2F /* WorkfinderUI.framework */; };
+		FCE8DB122320FAA400934E2F /* F4SDocumentUploadWhileApplyingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DB102320FAA400934E2F /* F4SDocumentUploadWhileApplyingModel.swift */; };
+		FCE8DB132320FAA400934E2F /* F4SDocumentUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DB112320FAA400934E2F /* F4SDocumentUploader.swift */; };
+		FCE8DB1B23210FF600934E2F /* UploadScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DB1A23210FF600934E2F /* UploadScenario.swift */; };
+		FCFC0695232240F7003C59C8 /* NameLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC0694232240F6003C59C8 /* NameLogicTests.swift */; };
+		FCFC069D23224333003C59C8 /* MagicLinkInterpreterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC069C23224333003C59C8 /* MagicLinkInterpreterTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FCE8DABE2320F13D00934E2F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCE8DAAA2320F13D00934E2F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FCE8DAB22320F13D00934E2F;
+			remoteInfo = F4SUploadYPDocumentsUseCase;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FC0B6B302323CB5400A1867D /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC7C21922321477700721D1D /* F4SUploadYPDocumentsUseCase.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = F4SUploadYPDocumentsUseCase.xcassets; sourceTree = "<group>"; };
+		FCE8DAB32320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderUploadYPDocumentsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCE8DAB62320F13D00934E2F /* F4SUploadYPDocumentsUseCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = F4SUploadYPDocumentsUseCase.h; sourceTree = "<group>"; };
+		FCE8DAB72320F13D00934E2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCE8DABC2320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderUploadYPDocumentsUseCaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCE8DAC12320F13D00934E2F /* F4SUploadYPDocumentsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUploadYPDocumentsUseCaseTests.swift; sourceTree = "<group>"; };
+		FCE8DAC32320F13D00934E2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCE8DACE2320F24800934E2F /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
+		FCE8DAD02320F26D00934E2F /* F4SCameraCapture.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SCameraCapture.storyboard; sourceTree = "<group>"; };
+		FCE8DAD22320F31300934E2F /* F4SBusinessLeadersRequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SBusinessLeadersRequestModel.swift; sourceTree = "<group>"; };
+		FCE8DAD32320F31300934E2F /* F4SMultiPageDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SMultiPageDocument.swift; sourceTree = "<group>"; };
+		FCE8DAD42320F31300934E2F /* F4SDCDocumentCaptureFileHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDCDocumentCaptureFileHelper.swift; sourceTree = "<group>"; };
+		FCE8DADB2320F42A00934E2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/DocumentCapture.storyboard; sourceTree = "<group>"; };
+		FCE8DADD2320F54100934E2F /* AddDocumentsViewController+AddDocumentDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AddDocumentsViewController+AddDocumentDelegate.swift"; sourceTree = "<group>"; };
+		FCE8DADE2320F54100934E2F /* F4SDocumentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDocumentTableViewController.swift; sourceTree = "<group>"; };
+		FCE8DADF2320F54100934E2F /* DocumentUploadCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentUploadCoordinator.swift; sourceTree = "<group>"; };
+		FCE8DAE02320F54100934E2F /* F4SAddDocumentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SAddDocumentsViewController.swift; sourceTree = "<group>"; };
+		FCE8DAE12320F54100934E2F /* AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift"; sourceTree = "<group>"; };
+		FCE8DAE22320F54100934E2F /* F4SPostDocumentDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SPostDocumentDataViewController.swift; sourceTree = "<group>"; };
+		FCE8DAE92320F59F00934E2F /* F4SDCAddDocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDCAddDocumentViewController.swift; sourceTree = "<group>"; };
+		FCE8DAEC2320F68300934E2F /* F4SDCDocumentTypeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDCDocumentTypeViewController.swift; sourceTree = "<group>"; };
+		FCE8DAEE2320F6E000934E2F /* F4SAddUrlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SAddUrlViewController.swift; sourceTree = "<group>"; };
+		FCE8DAF22320F72600934E2F /* F4SDisplayTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDisplayTableViewController.swift; sourceTree = "<group>"; };
+		FCE8DAF32320F72600934E2F /* F4SArrangeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SArrangeTableViewCell.swift; sourceTree = "<group>"; };
+		FCE8DAF42320F72600934E2F /* F4SDisplayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDisplayTableViewCell.swift; sourceTree = "<group>"; };
+		FCE8DAF52320F72700934E2F /* F4SCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCameraViewController.swift; sourceTree = "<group>"; };
+		FCE8DAF62320F72700934E2F /* F4SArrangeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SArrangeTableViewController.swift; sourceTree = "<group>"; };
+		FCE8DAF72320F72700934E2F /* F4SCameraPageManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCameraPageManagerViewController.swift; sourceTree = "<group>"; };
+		FCE8DAFE2320F7B500934E2F /* F4SDCDocumentViewerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDCDocumentViewerController.swift; sourceTree = "<group>"; };
+		FCE8DB012320F81700934E2F /* F4SDCPopupMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDCPopupMenuView.swift; sourceTree = "<group>"; };
+		FCE8DB062320FA1800934E2F /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCE8DB082320FA1800934E2F /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCE8DB0A2320FA1800934E2F /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCE8DB0C2320FA1800934E2F /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCE8DB0E2320FA1800934E2F /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCE8DB102320FAA400934E2F /* F4SDocumentUploadWhileApplyingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDocumentUploadWhileApplyingModel.swift; sourceTree = "<group>"; };
+		FCE8DB112320FAA400934E2F /* F4SDocumentUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDocumentUploader.swift; sourceTree = "<group>"; };
+		FCE8DB1A23210FF600934E2F /* UploadScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadScenario.swift; sourceTree = "<group>"; };
+		FCFC0694232240F6003C59C8 /* NameLogicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameLogicTests.swift; sourceTree = "<group>"; };
+		FCFC069C23224333003C59C8 /* MagicLinkInterpreterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagicLinkInterpreterTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FCE8DAB02320F13D00934E2F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC0B6B312323CB5400A1867D /* WorkfinderNetworking.framework in Frameworks */,
+				FCE8DB072320FA1800934E2F /* WorkfinderAppLogic.framework in Frameworks */,
+				FCE8DB092320FA1800934E2F /* WorkfinderCommon.framework in Frameworks */,
+				FCE8DB0B2320FA1800934E2F /* WorkfinderCoordinators.framework in Frameworks */,
+				FCE8DB0D2320FA1800934E2F /* WorkfinderServices.framework in Frameworks */,
+				FCE8DB0F2320FA1800934E2F /* WorkfinderUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCE8DAB92320F13D00934E2F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCE8DABD2320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCase.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FCE8DAA92320F13D00934E2F = {
+			isa = PBXGroup;
+			children = (
+				FCE8DAB52320F13D00934E2F /* F4SUploadYPDocumentsUseCase */,
+				FCE8DAC02320F13D00934E2F /* F4SUploadYPDocumentsUseCaseTests */,
+				FCE8DAB42320F13D00934E2F /* Products */,
+				FCE8DB052320FA1800934E2F /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		FCE8DAB42320F13D00934E2F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FCE8DAB32320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCase.framework */,
+				FCE8DABC2320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCaseTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FCE8DAB52320F13D00934E2F /* F4SUploadYPDocumentsUseCase */ = {
+			isa = PBXGroup;
+			children = (
+				FC7C21922321477700721D1D /* F4SUploadYPDocumentsUseCase.xcassets */,
+				FCE8DACD2320F18E00934E2F /* source */,
+				FCE8DAB62320F13D00934E2F /* F4SUploadYPDocumentsUseCase.h */,
+				FCE8DAB72320F13D00934E2F /* Info.plist */,
+			);
+			path = F4SUploadYPDocumentsUseCase;
+			sourceTree = "<group>";
+		};
+		FCE8DAC02320F13D00934E2F /* F4SUploadYPDocumentsUseCaseTests */ = {
+			isa = PBXGroup;
+			children = (
+				FCFC069C23224333003C59C8 /* MagicLinkInterpreterTests.swift */,
+				FCFC0694232240F6003C59C8 /* NameLogicTests.swift */,
+				FCE8DAC12320F13D00934E2F /* F4SUploadYPDocumentsUseCaseTests.swift */,
+				FCE8DAC32320F13D00934E2F /* Info.plist */,
+			);
+			path = F4SUploadYPDocumentsUseCaseTests;
+			sourceTree = "<group>";
+		};
+		FCE8DACD2320F18E00934E2F /* source */ = {
+			isa = PBXGroup;
+			children = (
+				FCE8DADF2320F54100934E2F /* DocumentUploadCoordinator.swift */,
+				FCE8DB112320FAA400934E2F /* F4SDocumentUploader.swift */,
+				FCE8DAD12320F2EC00934E2F /* storyboards */,
+				FCE8DAD92320F3CD00934E2F /* view controllers */,
+				FCE8DAD82320F3A400934E2F /* models */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+		FCE8DAD12320F2EC00934E2F /* storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				FCE8DADC2320F42A00934E2F /* DocumentCapture.storyboard */,
+				FCE8DACE2320F24800934E2F /* Camera.storyboard */,
+				FCE8DAD02320F26D00934E2F /* F4SCameraCapture.storyboard */,
+			);
+			path = storyboards;
+			sourceTree = "<group>";
+		};
+		FCE8DAD82320F3A400934E2F /* models */ = {
+			isa = PBXGroup;
+			children = (
+				FCE8DB102320FAA400934E2F /* F4SDocumentUploadWhileApplyingModel.swift */,
+				FCE8DAD22320F31300934E2F /* F4SBusinessLeadersRequestModel.swift */,
+				FCE8DAD42320F31300934E2F /* F4SDCDocumentCaptureFileHelper.swift */,
+				FCE8DAD32320F31300934E2F /* F4SMultiPageDocument.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		FCE8DAD92320F3CD00934E2F /* view controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FCE8DAEC2320F68300934E2F /* F4SDCDocumentTypeViewController.swift */,
+				FCE8DADA2320F3EB00934E2F /* add documents */,
+				FCE8DB002320F7C800934E2F /* Document viewer */,
+				FCE8DAEB2320F66B00934E2F /* document sources */,
+			);
+			path = "view controllers";
+			sourceTree = "<group>";
+		};
+		FCE8DADA2320F3EB00934E2F /* add documents */ = {
+			isa = PBXGroup;
+			children = (
+				FCE8DB012320F81700934E2F /* F4SDCPopupMenuView.swift */,
+				FCE8DAE92320F59F00934E2F /* F4SDCAddDocumentViewController.swift */,
+				FCE8DAE02320F54100934E2F /* F4SAddDocumentsViewController.swift */,
+				FCE8DADD2320F54100934E2F /* AddDocumentsViewController+AddDocumentDelegate.swift */,
+				FCE8DAE12320F54100934E2F /* AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift */,
+				FCE8DADE2320F54100934E2F /* F4SDocumentTableViewController.swift */,
+				FCE8DAE22320F54100934E2F /* F4SPostDocumentDataViewController.swift */,
+				FCE8DB1A23210FF600934E2F /* UploadScenario.swift */,
+			);
+			path = "add documents";
+			sourceTree = "<group>";
+		};
+		FCE8DAEB2320F66B00934E2F /* document sources */ = {
+			isa = PBXGroup;
+			children = (
+				FCE8DAF12320F70600934E2F /* from camera */,
+				FCE8DAF02320F6F300934E2F /* from URL */,
+			);
+			path = "document sources";
+			sourceTree = "<group>";
+		};
+		FCE8DAF02320F6F300934E2F /* from URL */ = {
+			isa = PBXGroup;
+			children = (
+				FCE8DAEE2320F6E000934E2F /* F4SAddUrlViewController.swift */,
+			);
+			path = "from URL";
+			sourceTree = "<group>";
+		};
+		FCE8DAF12320F70600934E2F /* from camera */ = {
+			isa = PBXGroup;
+			children = (
+				FCE8DAF62320F72700934E2F /* F4SArrangeTableViewController.swift */,
+				FCE8DAF52320F72700934E2F /* F4SCameraViewController.swift */,
+				FCE8DAF42320F72600934E2F /* F4SDisplayTableViewCell.swift */,
+				FCE8DAF72320F72700934E2F /* F4SCameraPageManagerViewController.swift */,
+				FCE8DAF22320F72600934E2F /* F4SDisplayTableViewController.swift */,
+				FCE8DAF32320F72600934E2F /* F4SArrangeTableViewCell.swift */,
+			);
+			path = "from camera";
+			sourceTree = "<group>";
+		};
+		FCE8DB002320F7C800934E2F /* Document viewer */ = {
+			isa = PBXGroup;
+			children = (
+				FCE8DAFE2320F7B500934E2F /* F4SDCDocumentViewerController.swift */,
+			);
+			path = "Document viewer";
+			sourceTree = "<group>";
+		};
+		FCE8DB052320FA1800934E2F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC0B6B302323CB5400A1867D /* WorkfinderNetworking.framework */,
+				FCE8DB062320FA1800934E2F /* WorkfinderAppLogic.framework */,
+				FCE8DB082320FA1800934E2F /* WorkfinderCommon.framework */,
+				FCE8DB0A2320FA1800934E2F /* WorkfinderCoordinators.framework */,
+				FCE8DB0C2320FA1800934E2F /* WorkfinderServices.framework */,
+				FCE8DB0E2320FA1800934E2F /* WorkfinderUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		FCE8DAAE2320F13D00934E2F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCE8DAC42320F13D00934E2F /* F4SUploadYPDocumentsUseCase.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		FCE8DAB22320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCase */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FCE8DAC72320F13D00934E2F /* Build configuration list for PBXNativeTarget "WorkfinderUploadYPDocumentsUseCase" */;
+			buildPhases = (
+				FCE8DAAE2320F13D00934E2F /* Headers */,
+				FCE8DAAF2320F13D00934E2F /* Sources */,
+				FCE8DAB02320F13D00934E2F /* Frameworks */,
+				FCE8DAB12320F13D00934E2F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WorkfinderUploadYPDocumentsUseCase;
+			productName = F4SUploadYPDocumentsUseCase;
+			productReference = FCE8DAB32320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCase.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		FCE8DABB2320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCaseTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FCE8DACA2320F13D00934E2F /* Build configuration list for PBXNativeTarget "WorkfinderUploadYPDocumentsUseCaseTests" */;
+			buildPhases = (
+				FCE8DAB82320F13D00934E2F /* Sources */,
+				FCE8DAB92320F13D00934E2F /* Frameworks */,
+				FCE8DABA2320F13D00934E2F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FCE8DABF2320F13D00934E2F /* PBXTargetDependency */,
+			);
+			name = WorkfinderUploadYPDocumentsUseCaseTests;
+			productName = F4SUploadYPDocumentsUseCaseTests;
+			productReference = FCE8DABC2320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCaseTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FCE8DAAA2320F13D00934E2F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = Founders4Schools;
+				TargetAttributes = {
+					FCE8DAB22320F13D00934E2F = {
+						CreatedOnToolsVersion = 10.2;
+					};
+					FCE8DABB2320F13D00934E2F = {
+						CreatedOnToolsVersion = 10.2;
+					};
+				};
+			};
+			buildConfigurationList = FCE8DAAD2320F13D00934E2F /* Build configuration list for PBXProject "WorkfinderUploadYPDocumentsUseCase" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				global,
+				Base,
+			);
+			mainGroup = FCE8DAA92320F13D00934E2F;
+			productRefGroup = FCE8DAB42320F13D00934E2F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FCE8DAB22320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCase */,
+				FCE8DABB2320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCaseTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FCE8DAB12320F13D00934E2F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCE8DB032320F96600934E2F /* DocumentCapture.storyboard in Resources */,
+				FCE8DB042320F97100934E2F /* F4SCameraCapture.storyboard in Resources */,
+				FCE8DACF2320F24800934E2F /* Camera.storyboard in Resources */,
+				FC7C21932321575A00721D1D /* F4SUploadYPDocumentsUseCase.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCE8DABA2320F13D00934E2F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FCE8DAAF2320F13D00934E2F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCE8DAE72320F54200934E2F /* AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift in Sources */,
+				FCE8DAED2320F68300934E2F /* F4SDCDocumentTypeViewController.swift in Sources */,
+				FCE8DAFC2320F72700934E2F /* F4SArrangeTableViewController.swift in Sources */,
+				FCE8DB022320F81700934E2F /* F4SDCPopupMenuView.swift in Sources */,
+				FCE8DB122320FAA400934E2F /* F4SDocumentUploadWhileApplyingModel.swift in Sources */,
+				FCE8DAD52320F31300934E2F /* F4SBusinessLeadersRequestModel.swift in Sources */,
+				FCE8DB1B23210FF600934E2F /* UploadScenario.swift in Sources */,
+				FCE8DB132320FAA400934E2F /* F4SDocumentUploader.swift in Sources */,
+				FCE8DAFD2320F72700934E2F /* F4SCameraPageManagerViewController.swift in Sources */,
+				FCE8DAEA2320F59F00934E2F /* F4SDCAddDocumentViewController.swift in Sources */,
+				FCE8DAEF2320F6E000934E2F /* F4SAddUrlViewController.swift in Sources */,
+				FCE8DAE42320F54200934E2F /* F4SDocumentTableViewController.swift in Sources */,
+				FCE8DAF92320F72700934E2F /* F4SArrangeTableViewCell.swift in Sources */,
+				FCE8DAFA2320F72700934E2F /* F4SDisplayTableViewCell.swift in Sources */,
+				FCE8DAE52320F54200934E2F /* DocumentUploadCoordinator.swift in Sources */,
+				FCE8DAF82320F72700934E2F /* F4SDisplayTableViewController.swift in Sources */,
+				FCE8DAD62320F31300934E2F /* F4SMultiPageDocument.swift in Sources */,
+				FCE8DAE62320F54200934E2F /* F4SAddDocumentsViewController.swift in Sources */,
+				FCE8DAFF2320F7B500934E2F /* F4SDCDocumentViewerController.swift in Sources */,
+				FCE8DAD72320F31300934E2F /* F4SDCDocumentCaptureFileHelper.swift in Sources */,
+				FCE8DAFB2320F72700934E2F /* F4SCameraViewController.swift in Sources */,
+				FCE8DAE32320F54200934E2F /* AddDocumentsViewController+AddDocumentDelegate.swift in Sources */,
+				FCE8DAE82320F54200934E2F /* F4SPostDocumentDataViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCE8DAB82320F13D00934E2F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCE8DAC22320F13D00934E2F /* F4SUploadYPDocumentsUseCaseTests.swift in Sources */,
+				FCFC069D23224333003C59C8 /* MagicLinkInterpreterTests.swift in Sources */,
+				FCFC0695232240F7003C59C8 /* NameLogicTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FCE8DABF2320F13D00934E2F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FCE8DAB22320F13D00934E2F /* WorkfinderUploadYPDocumentsUseCase */;
+			targetProxy = FCE8DABE2320F13D00934E2F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FCE8DADC2320F42A00934E2F /* DocumentCapture.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FCE8DADB2320F42A00934E2F /* Base */,
+			);
+			name = DocumentCapture.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FC7C218623212ABF00721D1D /* DebugF4S */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = DebugF4S;
+		};
+		FC7C218723212ABF00721D1D /* DebugF4S */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = F4SUploadYPDocumentsUseCase/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.F4SUploadYPDocumentsUseCase;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = DebugF4S;
+		};
+		FC7C218823212ABF00721D1D /* DebugF4S */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
+				INFOPLIST_FILE = F4SUploadYPDocumentsUseCaseTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.F4SUploadYPDocumentsUseCaseTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = DebugF4S;
+		};
+		FC7C218923212ACC00721D1D /* DebugF4SLive */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = DebugF4SLive;
+		};
+		FC7C218A23212ACC00721D1D /* DebugF4SLive */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = F4SUploadYPDocumentsUseCase/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.F4SUploadYPDocumentsUseCase;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = DebugF4SLive;
+		};
+		FC7C218B23212ACC00721D1D /* DebugF4SLive */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
+				INFOPLIST_FILE = F4SUploadYPDocumentsUseCaseTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.F4SUploadYPDocumentsUseCaseTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = DebugF4SLive;
+		};
+		FC7C218C23212AD900721D1D /* ReleaseF4S */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = ReleaseF4S;
+		};
+		FC7C218D23212AD900721D1D /* ReleaseF4S */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = F4SUploadYPDocumentsUseCase/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.F4SUploadYPDocumentsUseCase;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = ReleaseF4S;
+		};
+		FC7C218E23212AD900721D1D /* ReleaseF4S */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
+				INFOPLIST_FILE = F4SUploadYPDocumentsUseCaseTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.F4SUploadYPDocumentsUseCaseTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = ReleaseF4S;
+		};
+		FC7C218F23212AE500721D1D /* ReleaseF4SLive */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = ReleaseF4SLive;
+		};
+		FC7C219023212AE500721D1D /* ReleaseF4SLive */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = F4SUploadYPDocumentsUseCase/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.F4SUploadYPDocumentsUseCase;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = ReleaseF4SLive;
+		};
+		FC7C219123212AE500721D1D /* ReleaseF4SLive */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
+				INFOPLIST_FILE = F4SUploadYPDocumentsUseCaseTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.F4SUploadYPDocumentsUseCaseTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = ReleaseF4SLive;
+		};
+		FCE8DAC52320F13D00934E2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		FCE8DAC62320F13D00934E2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		FCE8DAC82320F13D00934E2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = F4SUploadYPDocumentsUseCase/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.F4SUploadYPDocumentsUseCase;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FCE8DAC92320F13D00934E2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = F4SUploadYPDocumentsUseCase/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.F4SUploadYPDocumentsUseCase;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		FCE8DACB2320F13D00934E2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
+				INFOPLIST_FILE = F4SUploadYPDocumentsUseCaseTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.F4SUploadYPDocumentsUseCaseTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FCE8DACC2320F13D00934E2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
+				INFOPLIST_FILE = F4SUploadYPDocumentsUseCaseTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.F4SUploadYPDocumentsUseCaseTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FCE8DAAD2320F13D00934E2F /* Build configuration list for PBXProject "WorkfinderUploadYPDocumentsUseCase" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCE8DAC52320F13D00934E2F /* Debug */,
+				FC7C218623212ABF00721D1D /* DebugF4S */,
+				FC7C218923212ACC00721D1D /* DebugF4SLive */,
+				FCE8DAC62320F13D00934E2F /* Release */,
+				FC7C218C23212AD900721D1D /* ReleaseF4S */,
+				FC7C218F23212AE500721D1D /* ReleaseF4SLive */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FCE8DAC72320F13D00934E2F /* Build configuration list for PBXNativeTarget "WorkfinderUploadYPDocumentsUseCase" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCE8DAC82320F13D00934E2F /* Debug */,
+				FC7C218723212ABF00721D1D /* DebugF4S */,
+				FC7C218A23212ACC00721D1D /* DebugF4SLive */,
+				FCE8DAC92320F13D00934E2F /* Release */,
+				FC7C218D23212AD900721D1D /* ReleaseF4S */,
+				FC7C219023212AE500721D1D /* ReleaseF4SLive */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FCE8DACA2320F13D00934E2F /* Build configuration list for PBXNativeTarget "WorkfinderUploadYPDocumentsUseCaseTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCE8DACB2320F13D00934E2F /* Debug */,
+				FC7C218823212ABF00721D1D /* DebugF4S */,
+				FC7C218B23212ACC00721D1D /* DebugF4SLive */,
+				FCE8DACC2320F13D00934E2F /* Release */,
+				FC7C218E23212AD900721D1D /* ReleaseF4S */,
+				FC7C219123212AE500721D1D /* ReleaseF4SLive */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FCE8DAAA2320F13D00934E2F /* Project object */;
+}

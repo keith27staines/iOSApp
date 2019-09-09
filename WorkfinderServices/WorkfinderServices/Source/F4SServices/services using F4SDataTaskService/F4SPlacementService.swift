@@ -3,7 +3,13 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderNetworking
 
-public class F4SPlacementService : F4SPlacementServiceProtocol {
+public protocol F4SOfferProcessingServiceProtocol {
+    func confirmPlacement(placement: F4STimelinePlacement, completion: @escaping (F4SNetworkResult<Bool>) -> ())
+    func cancelPlacement(_ uuid: F4SUUID, completion: @escaping (F4SNetworkResult<Bool>) -> ())
+    func declinePlacement(_ uuid: F4SUUID, completion: @escaping (F4SNetworkResult<Bool>) -> ())
+}
+
+public class F4SPlacementService : F4SPlacementServiceProtocol, F4SOfferProcessingServiceProtocol {
     
     var dataTask: F4SNetworkTask?
     var sessionManager: F4SNetworkSessionManagerProtocol
@@ -57,13 +63,12 @@ public class F4SPlacementService : F4SPlacementServiceProtocol {
         throw F4SError.notImplementedYet("F4SPlacementService.ratePlacement")
     }
     
-    public func confirmPlacement(placement: F4STimelinePlacement, voucherCode: String, completion: @escaping (F4SNetworkResult<Bool>) -> ()) {
+    public func confirmPlacement(placement: F4STimelinePlacement, completion: @escaping (F4SNetworkResult<Bool>) -> ()) {
         let attempting = "Confirm placement with voucher"
         struct Confirm : Codable {
             var confirmed: Bool
-            var voucher: String
         }
-        let confirmJson = Confirm(confirmed: true, voucher: voucherCode)
+        let confirmJson = Confirm(confirmed: true)
         patchPlacement(placement.placementUuid!, json: confirmJson, attempting: attempting, completion: completion)
     }
     

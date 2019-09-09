@@ -8,6 +8,9 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderCoordinators
+import WorkfinderAcceptUseCase
+import WorkfinderUploadYPDocumentsUseCase
 
 class TimelineCoordinator : CoreInjectionNavigationCoordinator {
     
@@ -56,17 +59,20 @@ class TimelineCoordinator : CoreInjectionNavigationCoordinator {
     
     func showAcceptOffer(acceptContext: AcceptOfferContext?) {
         guard let acceptContext = acceptContext else { return }
-        let acceptCoordinator = AcceptOfferCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, acceptContext: acceptContext)
+        let companyCoordinatorFactory = CompanyCoordinatorFactory()
+        let acceptCoordinator = AcceptOfferCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, acceptContext: acceptContext, companyCoordinatorFactory: companyCoordinatorFactory)
         addChildCoordinator(acceptCoordinator)
         acceptCoordinator.start()
     }
     
     func showAddDocuments(placement: F4STimelinePlacement?, company: Company?, action: F4SAction) {
         guard
-            let placement = placement, let company = company,
+            let placement = placement,
+            let placementUuid = placement.placementUuid,
+            let company = company,
             let requestModel = F4SBusinessLeadersRequestModel(action: action, placement: placement, company: company) else { return }
-        let mode = F4SAddDocumentsViewController.Mode.businessLeaderRequest(requestModel)
-        let coordinator = DocumentUploadCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, mode: mode, applicationContext: nil)
+        let mode = UploadScenario.businessLeaderRequest(requestModel)
+        let coordinator = DocumentUploadCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, mode: mode, placementUuid: placementUuid)
         coordinator.didFinish = { [weak self] _ in
             guard let strongSelf = self else { return }
             strongSelf.navigationRouter.popToViewController(strongSelf.rootViewController, animated: true)
@@ -81,14 +87,16 @@ class TimelineCoordinator : CoreInjectionNavigationCoordinator {
             let urlString = urlString,
             let url = URL(string: urlString),
             let acceptContext = acceptContext else {
-                log.debug("acceptContext should not be nil", functionName: #function, fileName: #file, lineNumber: #line)
+                injected.log.debug("acceptContext should not be nil", functionName: #function, fileName: #file, lineNumber: #line)
                 return
         }
         UIApplication.shared.open(url, options: [:]) { (success) in
             var event = F4SAnalyticsEvent(name: .viewCompanyExternalApplication)
             event.addProperty(name: "placement_uuid", value: acceptContext.placement.placementUuid ?? "")
-            event.addProperty(name: "company_name", value: acceptContext.company.name)
+            event.addProperty(name: "company_name", value: acceptContext.company.companyName)
             event.track()
         }
     }
 }
+
+

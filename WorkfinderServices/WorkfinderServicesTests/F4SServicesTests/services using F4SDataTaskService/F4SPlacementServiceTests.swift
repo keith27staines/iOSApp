@@ -79,7 +79,7 @@ class F4SPlacementServiceTests: XCTestCase {
         let sut = makeSUT(successResult: successResult)
         let expectation = XCTestExpectation(description: "")
         let placement = F4STimelinePlacement(userUuid: "userUuid", companyUuid: "companyUuid", placementUuid: "placementUuid")
-        sut.confirmPlacement(placement: placement, voucherCode: "voucher") { (result) in
+        sut.confirmPlacement(placement: placement) { (result) in
             switch result {
             case .error(_):
                 XCTFail("The test was intended to return a success result")

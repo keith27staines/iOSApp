@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Email Verification View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="EmailVerification" id="BYZ-38-t0r" customClass="F4SEmailVerificationViewController" customModule="f4s_workexperience" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Intro Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Abi-uO-h0M" userLabel="IntroLabel">
+                                <rect key="frame" x="16" y="60" width="343" height="24"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="aEY-k0-OoH" userLabel="MainStackView">
+                                <rect key="frame" x="16" y="160" width="343" height="240"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Somebody@somewhere.com" borderStyle="roundedRect" placeholder="Your email address" textAlignment="natural" minimumFontSize="14" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3w7-qg-JXT" userLabel="EmailTextfield" customClass="EmailTextField" customModule="f4s_workexperience" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="XuZ-dp-AKk"/>
+                                        </constraints>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES" textContentType="username"/>
+                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="fEW-b9-Vad" userLabel="ButtonsStackView">
+                                        <rect key="frame" x="0.0" y="90" width="343" height="150"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C4c-vF-7Bf" userLabel="PrimaryActionButton">
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="60"/>
+                                                <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="iB0-N2-kOB"/>
+                                                </constraints>
+                                                <state key="normal" title="Primary action button">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="primaryActionButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9hO-sV-3WD"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fr8-Df-YOl" userLabel="SecondaryActionButton">
+                                                <rect key="frame" x="0.0" y="90" width="343" height="60"/>
+                                                <state key="normal" title="Secondary action button">
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="secondaryActionButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MzG-Xg-TxA"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="1000" text="Feedback" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MCP-5P-Dy9" userLabel="FeedbackLabel">
+                                <rect key="frame" x="20" y="420" width="335" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="990" constant="100" id="CtU-Xa-hGg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="YFN-fH-Spb">
+                                <rect key="frame" x="318" y="28" width="37" height="37"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Abi-uO-h0M" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="42f-uY-Ckc"/>
+                            <constraint firstItem="MCP-5P-Dy9" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" priority="999" id="9L0-t7-nL2"/>
+                            <constraint firstItem="MCP-5P-Dy9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="DMw-s7-Eoa"/>
+                            <constraint firstItem="aEY-k0-OoH" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Abi-uO-h0M" secondAttribute="bottom" constant="20" id="EbD-Ie-RGl"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Abi-uO-h0M" secondAttribute="trailing" constant="16" id="GhE-qm-WRJ"/>
+                            <constraint firstItem="YFN-fH-Spb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="Huf-p3-LCc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="aEY-k0-OoH" secondAttribute="trailing" constant="16" id="J9r-2F-zEp"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YFN-fH-Spb" secondAttribute="trailing" constant="20" id="Pip-UR-3fv"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Abi-uO-h0M" secondAttribute="trailing" constant="16" id="QcN-Nq-8x5"/>
+                            <constraint firstItem="Abi-uO-h0M" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Wbj-wC-Lge"/>
+                            <constraint firstItem="aEY-k0-OoH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="g7d-gn-J3F"/>
+                            <constraint firstItem="aEY-k0-OoH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="140" id="ife-Kj-BeY"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="MCP-5P-Dy9" secondAttribute="trailing" constant="20" id="pcH-NA-7Wr"/>
+                            <constraint firstItem="MCP-5P-Dy9" firstAttribute="top" relation="greaterThanOrEqual" secondItem="aEY-k0-OoH" secondAttribute="bottom" constant="20" id="twi-M3-pEK"/>
+                            <constraint firstItem="Abi-uO-h0M" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" priority="999" constant="40" id="wtc-VN-bb1"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="activitySpinner" destination="YFN-fH-Spb" id="dpD-T3-Z4V"/>
+                        <outlet property="emailTextField" destination="3w7-qg-JXT" id="EN0-9e-eV1"/>
+                        <outlet property="feedbackLabel" destination="MCP-5P-Dy9" id="jtp-bp-bga"/>
+                        <outlet property="introductionLabel" destination="Abi-uO-h0M" id="rCI-LU-eZ9"/>
+                        <outlet property="primaryActionButton" destination="C4c-vF-7Bf" id="Du2-T7-yM2"/>
+                        <outlet property="secondaryActionButton" destination="fr8-Df-YOl" id="UXm-54-slv"/>
+                    </connections>
+                </viewController>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="keith.staines@workfinder.com" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="KUn-0f-0At">
+                    <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-135" y="34"/>
+        </scene>
+    </scenes>
+</document>

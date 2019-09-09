@@ -1,16 +1,10 @@
-//
-//  SearchCoordinator.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 02/03/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
-
 import Foundation
 import WorkfinderCommon
+import WorkfinderCoordinators
 
 class SearchCoordinator : CoreInjectionNavigationCoordinator {
     
+    let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     var shouldAskOperatingSystemToAllowLocation = false
     
     lazy var rootViewController: MapViewController = {
@@ -19,6 +13,11 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
         vc.coordinator = self
         return vc
     }()
+    
+    init(parent: Coordinating, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol, companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol) {
+        self.companyCoordinatorFactory = companyCoordinatorFactory
+        super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
+    }
     
     override func start() {
         rootViewController.coordinator = self
@@ -32,7 +31,7 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
         guard let company = company else { return }
         showingDetailForCompany = company
         rootViewController.dismiss(animated: true)
-        let companyCoordinator = CompanyCoordinator(parent: self, navigationRouter: navigationRouter, company: company, inject: injected)
+        let companyCoordinator = companyCoordinatorFactory.makeCompanyCoordinator(parent: self, navigationRouter: navigationRouter, company: company, inject: injected)
         addChildCoordinator(companyCoordinator)
         companyCoordinator.start()
     }

@@ -10,11 +10,12 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderServices
 
-public class AppInstallationUuidLogic {
+public class AppInstallationUuidLogic : AppInstallationUuidLogicProtocol {
     
     let localStore: LocalStorageProtocol
     let userService: F4SUserServiceProtocol
     let userRepo: F4SUserRepositoryProtocol
+    let apnsEnvironment: String
     
     var installationUuid: F4SUUID? {
         return localStore.value(key: LocalStore.Key.installationUuid) as? F4SUUID
@@ -22,10 +23,12 @@ public class AppInstallationUuidLogic {
     
     public init(localStore: LocalStorageProtocol = LocalStore(),
                 userService: F4SUserServiceProtocol,
-                userRepo: F4SUserRepositoryProtocol) {
+                userRepo: F4SUserRepositoryProtocol,
+                apnsEnvironment: String) {
         self.localStore = localStore
         self.userService = userService
         self.userRepo = userRepo
+        self.apnsEnvironment = apnsEnvironment
     }
     
     func makeNewInstallationUuid() -> F4SUUID {
@@ -59,12 +62,12 @@ public class AppInstallationUuidLogic {
         }
     }
     
-    func loadUser() -> F4SUserProtocol {
+    func loadUser() -> F4SUser {
         return userRepo.load()
     }
     
-    func saveUser(_ userProtocol: F4SUserProtocol) {
-        userRepo.save(user: userProtocol)
+    func saveUser(_ user: F4SUser) {
+        userRepo.save(user: user)
     }
     
     var userHasVerifiedEmail: Bool {
@@ -72,9 +75,11 @@ public class AppInstallationUuidLogic {
         return verifiedEmail.isEmpty == false
     }
     
+    var registerService = F4SDeviceRegistrationService()
     private func registerDevice(completion: @escaping (F4SNetworkResult<F4SRegisterDeviceResult>)->()) {
         let newInstallationUuid = makeNewInstallationUuid()
-        userService.registerDeviceWithServer(installationUuid: newInstallationUuid) { [weak self] (networkResult) in
+        let anonymousUser = F4SAnonymousUser(vendorUuid: newInstallationUuid, clientType: "ios", apnsEnvironment: apnsEnvironment)
+        registerService.registerDevice(anonymousUser: anonymousUser) { [weak self] (networkResult) in
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else { return }
                 switch networkResult {
@@ -100,12 +105,7 @@ public class AppInstallationUuidLogic {
         completion: @escaping (F4SNetworkResult<F4SRegisterDeviceResult>)->())  {
 
         if userHasVerifiedEmail {
-            let userInfo = F4SUserInformation()
-            var oldUser = userRepo.load()
-            let user = F4SUser(userInformation: userInfo)
-            user.email = oldUser.email
-            user.requiresConsent = oldUser.requiresConsent
-            user.termsAgreed = oldUser.termsAgreed
+            let user = userRepo.load()
             userService.updateUser(user: user) { updateUserResult in
                 DispatchQueue.main.async {  [weak self] in
                     guard let strongSelf = self else { return }
@@ -115,7 +115,7 @@ public class AppInstallationUuidLogic {
                         completion(updatedResult)
                     case .success(let userUpdateResult):
                         var user = strongSelf.userRepo.load()
-                        user.updateUuid(uuid: userUpdateResult.uuid!)
+                        user.uuid = userUpdateResult.uuid!
                         strongSelf.userRepo.save(user: user)
                         strongSelf.localStore.setValue(installationUuid, for: LocalStore.Key.installationUuid)
                         strongSelf.localStore.setValue(true, for: LocalStore.Key.isDeviceRegistered)

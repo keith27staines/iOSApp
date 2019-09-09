@@ -1,6 +1,8 @@
 import UIKit
 import WorkfinderCommon
 import WorkfinderServices
+import WorkfinderUI
+import WorkfinderCoordinators
 
 protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol {
     var shouldAskOperatingSystemToAllowLocation: Bool { get set }
@@ -177,9 +179,14 @@ class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoor
         let lightbulbImage = UIImage(named: "light-bulb")
         navigationController.tabBarItem = UITabBarItem(title: "Recommendations", image: lightbulbImage, selectedImage: nil)
         let router = NavigationRouter(navigationController: navigationController)
-        let coordinator = RecommendationsCoordinator(parent: nil, navigationRouter: router, inject: injected)
+        let coordinator = RecommendationsCoordinator(parent: nil, navigationRouter: router, inject: injected, companyCoordinatorFactory: companyCoordinatorFactory)
         addChildCoordinator(coordinator)
         return coordinator
+    }()
+    
+    lazy var companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol = {
+        let factory = CompanyCoordinatorFactory()
+        return factory
     }()
     
     lazy var favouritesCoordinator: FavouritesCoordinator = {
@@ -187,7 +194,7 @@ class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoor
         let icon = UIImage(named: "heartOutline")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         navigationController.tabBarItem = UITabBarItem(title: "Favourites", image: icon, selectedImage: nil)
         let router = NavigationRouter(navigationController: navigationController)
-        let coordinator = FavouritesCoordinator(parent: nil, navigationRouter: router, inject: injected)
+        let coordinator = FavouritesCoordinator(parent: nil, navigationRouter: router, inject: injected, companyCoordinatorFactory: companyCoordinatorFactory)
         addChildCoordinator(coordinator)
         return coordinator
     }()
@@ -197,7 +204,7 @@ class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoor
         let searchIcon = UIImage(named: "searchIcon2")?.withRenderingMode(.alwaysTemplate)
         navigationController.tabBarItem = UITabBarItem(title: "Search", image: searchIcon, selectedImage: nil)
         let router = NavigationRouter(navigationController: navigationController)
-        let coordinator = SearchCoordinator(parent: nil, navigationRouter: router, inject: injected)
+        let coordinator = SearchCoordinator(parent: self, navigationRouter: router, inject: injected, companyCoordinatorFactory: companyCoordinatorFactory)
         coordinator.shouldAskOperatingSystemToAllowLocation = shouldAskOperatingSystemToAllowLocation
         addChildCoordinator(coordinator)
         return coordinator
@@ -250,26 +257,8 @@ class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoor
     }
     
     func presentContentViewController(navCtrl: UINavigationController, contentType: F4SContentType) {
-        let contentStoryboard = UIStoryboard(name: "Content", bundle: nil)
-        guard let contentViewController = contentStoryboard.instantiateViewController(withIdentifier: "ContentViewCtrl") as? ContentViewController else {
-            return
-        }
-        contentViewController.contentType = contentType
-        let navigationCtrl = RotationAwareNavigationController(rootViewController: contentViewController)
-
-        navCtrl.present(navigationCtrl, animated: true, completion: nil)
-    }
-
-    func presentContentViewController(navCtrl: UINavigationController, contentType: F4SContentType, url: String) {
-        let contentStoryboard = UIStoryboard(name: "Content", bundle: nil)
-        guard let contentViewController = contentStoryboard.instantiateViewController(withIdentifier: "ContentViewCtrl") as? ContentViewController else {
-            return
-        }
-        contentViewController.contentType = contentType
-        contentViewController.url = url
-        let navigationCtrl = RotationAwareNavigationController(rootViewController: contentViewController)
-
-        navCtrl.present(navigationCtrl, animated: true, completion: nil)
+        let content = WorkfinderUI().makeWebContentViewController(contentType: contentType, dismissByPopping: true)
+        navCtrl.present(content, animated: true, completion: nil)
     }
     
     func presentRatePlacementPopover(parentCtrl: UIViewController, placementUuid: String, ratePlacementProtocol: TabBarViewController? = nil) {

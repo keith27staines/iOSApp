@@ -10,14 +10,14 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 
-public protocol ApplicationLetterViewControllerCoordinating : class {
+protocol ApplicationLetterViewControllerCoordinating : class {
     func cancelButtonWasTapped(sender: Any?)
     func editButtonWasTapped(sender: Any?)
     func continueApplicationWithCompletedLetter(sender: Any?, completion: @escaping (Error?) -> Void)
     func termsAndConditionsWasTapped(sender: Any?)
 }
 
-public class ApplicationLetterViewController : UIViewController {
+class ApplicationLetterViewController : UIViewController {
     
     weak var coordinator: ApplicationLetterViewControllerCoordinating?
     var mainView: ApplicationLetterViewControllerMainView { return view as! ApplicationLetterViewControllerMainView }
@@ -36,7 +36,7 @@ public class ApplicationLetterViewController : UIViewController {
         return UserMessageHandler()
     }()
     
-    public var isActivityIndicatorVisible: Bool {
+    var isActivityIndicatorVisible: Bool {
         didSet {
             if isActivityIndicatorVisible {
                 userMessageHandler.showLightLoadingOverlay(view)
@@ -53,7 +53,7 @@ public class ApplicationLetterViewController : UIViewController {
         }
     }
     
-    public init(
+    init(
         coordinator: ApplicationLetterViewControllerCoordinating,
         viewModel: ApplicationLetterViewModelProtocol) {
         self.coordinator = coordinator
@@ -64,7 +64,7 @@ public class ApplicationLetterViewController : UIViewController {
         viewModel.coordinator = coordinator
     }
     
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         applySkin()
         configureNavigationBar()
         setTargetsForButtons()
@@ -72,11 +72,11 @@ public class ApplicationLetterViewController : UIViewController {
         viewModel.onViewDidLoad()
     }
     
-    public override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         configureNavigationBar()
     }
     
-    public func updateFromViewModel() {
+    func updateFromViewModel() {
         textView.attributedText = viewModel.attributedText
         applyButton.isEnabled = viewModel.applyButtonIsEnabled
         editButton.configureForLetterIsCompleteState(viewModel.applyButtonIsEnabled)
@@ -104,7 +104,7 @@ public class ApplicationLetterViewController : UIViewController {
         skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: applyButton)
     }
     
-    public override func loadView() {
+    override func loadView() {
         view = ApplicationLetterViewControllerMainView()
     }
     
@@ -130,7 +130,7 @@ public class ApplicationLetterViewController : UIViewController {
 
 extension ApplicationLetterViewController : ApplicationLetterViewProtocol {
     
-    public func showErrorWithCancelAndRetry(_ error: Error, retry: @escaping () -> Void, cancel: @escaping () -> Void) {
+    func showErrorWithCancelAndRetry(_ error: Error, retry: @escaping () -> Void, cancel: @escaping () -> Void) {
         
         if let networkError = error as? F4SNetworkError {
             userMessageHandler.display(networkError, parentCtrl: self, cancelHandler: cancel, retryHandler: retry)

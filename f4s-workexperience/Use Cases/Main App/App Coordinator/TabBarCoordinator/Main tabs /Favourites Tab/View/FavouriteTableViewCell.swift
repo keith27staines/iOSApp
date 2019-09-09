@@ -8,10 +8,11 @@
 
 import Foundation
 import UIKit
+import WorkfinderUI
 
 class FavouriteTableViewCell: UITableViewCell {
  
-    @IBOutlet weak var companyImageView: UIImageView!
+    @IBOutlet weak var companyImageView: F4SSelfLoadingImageView!
     @IBOutlet weak var companyTitleLabel: UILabel!
     @IBOutlet weak var companyIndustryLabel: UILabel!
     @IBOutlet weak var companyStatusLabel: UILabel!

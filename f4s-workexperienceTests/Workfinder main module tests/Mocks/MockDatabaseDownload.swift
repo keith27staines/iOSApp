@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 @testable import f4s_workexperience
 

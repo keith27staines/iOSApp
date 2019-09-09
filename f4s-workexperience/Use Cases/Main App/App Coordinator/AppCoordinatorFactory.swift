@@ -11,6 +11,7 @@ import WorkfinderCommon
 import WorkfinderNetworking
 import WorkfinderServices
 import WorkfinderAppLogic
+import WorkfinderCoordinators
 
 protocol AppCoordinatoryFactoryProtocol {}
 
@@ -20,7 +21,6 @@ struct AppCoordinatorFactory : AppCoordinatoryFactoryProtocol {
         registrar: RemoteNotificationsRegistrarProtocol,
         launchOptions: LaunchOptions? = nil,
         appInstallationUuidLogic: AppInstallationUuidLogic,
-        user: F4SUserProtocol = F4SUser(),
         userService: F4SUserServiceProtocol = F4SUserService(),
         userRepository: F4SUserRepositoryProtocol = F4SUserRepository(),
         databaseDownloadManager: F4SDatabaseDownloadManagerProtocol = F4SDatabaseDownloadManager(),
@@ -31,7 +31,7 @@ struct AppCoordinatorFactory : AppCoordinatoryFactoryProtocol {
         let injection = CoreInjection(
             launchOptions: launchOptions,
             appInstallationUuidLogic: appInstallationUuidLogic,
-            user: user,
+            user: userRepository.load(),
             userService: userService,
             userRepository: userRepository,
             databaseDownloadManager: databaseDownloadManager,

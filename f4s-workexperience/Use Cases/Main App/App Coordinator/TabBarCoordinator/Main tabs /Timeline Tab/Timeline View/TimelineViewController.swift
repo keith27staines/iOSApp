@@ -304,13 +304,8 @@ class TimelineCellViewPresenter {
     private func prepareWithCompany(cell: TimelineEntryTableViewCell, company: Company?) {
         guard let company = company else { return }
         cell.companyTitleLabel.text = company.name.stripCompanySuffix()
-        cell.companyImageView.image = UIImage(named: "DefaultLogo")
-        guard !company.logoUrl.isEmpty, let url = NSURL(string: company.logoUrl) else { return }
-        F4SImageService.sharedInstance.getImage(url: url, completion: { [weak self] image in
-            guard self === cell.presenter else { return}
-            guard let image = image else { return }
-            cell.companyImageView.image = image
-        })
+        
+        cell.companyImageView.load(urlString: company.logoUrl, defaultImage: UIImage(named: "DefaultLogo"))
     }
     
     private func prepareWithLatestMessage(cell: TimelineEntryTableViewCell, message: F4SMessage?) {

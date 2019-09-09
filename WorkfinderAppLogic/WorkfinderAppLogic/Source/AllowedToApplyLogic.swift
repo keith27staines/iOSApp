@@ -13,6 +13,8 @@ import WorkfinderServices
 
 public class AllowedToApplyLogic {
     
+    var placements: [F4STimelinePlacement] = []
+    
     public lazy var placementService: F4SGetAllPlacementsServiceProtocol = {
         return F4SPlacementService()
     }()
@@ -33,6 +35,7 @@ public class AllowedToApplyLogic {
                                   givenExistingPlacements existing: [F4STimelinePlacement],
                                   completion: @escaping (F4SNetworkResult<Bool>) -> Void) {
         DispatchQueue.main.async {
+            self.placements = existing
             guard let match = existing.first(where: { (existing) -> Bool in
                 existing.companyUuid?.dehyphenated == company.dehyphenated
             }) else {
