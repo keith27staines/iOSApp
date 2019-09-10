@@ -39,6 +39,7 @@
 		FC4066F523277B80002B425E /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4066F423277B80002B425E /* WorkfinderCommon.framework */; };
 		FC4066F723277B80002B425E /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4066F623277B80002B425E /* WorkfinderServices.framework */; };
 		FC4066F923277BB4002B425E /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4066F823277BB4002B425E /* WorkfinderCoordinators.framework */; };
+		FC40670023278160002B425E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC4066FF23278160002B425E /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		FC4066F423277B80002B425E /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC4066F623277B80002B425E /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC4066F823277BB4002B425E /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC4066FF23278160002B425E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 		FC229A6C2326C50200F7B5CD /* WorkfinderDocumentUploadUseCase */ = {
 			isa = PBXGroup;
 			children = (
+				FC4066FF23278160002B425E /* Assets.xcassets */,
 				FC229A852326C64E00F7B5CD /* storyboards */,
 				FC229A842326C5AB00F7B5CD /* source */,
 				FC229A6D2326C50200F7B5CD /* WorkfinderDocumentUploadUseCase.h */,
@@ -352,6 +355,7 @@
 			files = (
 				FC4066A523277299002B425E /* DocumentCapture.storyboard in Resources */,
 				FC4066A223277286002B425E /* F4SCameraCapture.storyboard in Resources */,
+				FC40670023278160002B425E /* Assets.xcassets in Resources */,
 				FC4066A323277286002B425E /* Camera.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
