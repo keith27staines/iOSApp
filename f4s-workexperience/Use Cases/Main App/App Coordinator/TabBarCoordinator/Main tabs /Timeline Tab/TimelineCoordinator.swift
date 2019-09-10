@@ -10,7 +10,7 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderCoordinators
 import WorkfinderAcceptUseCase
-import WorkfinderUploadYPDocumentsUseCase
+import WorkfinderDocumentUploadUseCase
 
 class TimelineCoordinator : CoreInjectionNavigationCoordinator {
     

@@ -39,7 +39,6 @@
 		FCC1DF57232504780074D5C1 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC1DF56232504780074D5C1 /* WorkfinderUI.framework */; };
 		FCC1DF6323250B780074D5C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DF6223250B780074D5C1 /* Assets.xcassets */; };
 		FCEA3C6E2326B2C6006D9106 /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEA3C6D2326B2C6006D9106 /* WorkfinderNetworking.framework */; };
-		FCEA3C702326B2C6006D9106 /* WorkfinderUploadYPDocumentsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEA3C6F2326B2C6006D9106 /* WorkfinderUploadYPDocumentsUseCase.framework */; };
 		FCEA3C722326B2C6006D9106 /* WorkfinderUserDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEA3C712326B2C6006D9106 /* WorkfinderUserDetailsUseCase.framework */; };
 /* End PBXBuildFile section */
 
@@ -99,7 +98,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCEA3C6E2326B2C6006D9106 /* WorkfinderNetworking.framework in Frameworks */,
-				FCEA3C702326B2C6006D9106 /* WorkfinderUploadYPDocumentsUseCase.framework in Frameworks */,
 				FCEA3C722326B2C6006D9106 /* WorkfinderUserDetailsUseCase.framework in Frameworks */,
 				FCC1DF4D232504780074D5C1 /* WorkfinderAppLogic.framework in Frameworks */,
 				FCC1DF4F232504780074D5C1 /* WorkfinderApplyUseCase.framework in Frameworks */,

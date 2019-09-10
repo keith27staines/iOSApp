@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC4066E323277668002B425E /* NameLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066E123277667002B425E /* NameLogicTests.swift */; };
+		FC4066E423277668002B425E /* MagicLinkInterpreterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066E223277668002B425E /* MagicLinkInterpreterTests.swift */; };
 		FC93DBFB231FB92D00F1CE23 /* WorkfinderUserDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DBF1231FB92D00F1CE23 /* WorkfinderUserDetailsUseCase.framework */; };
-		FC93DC00231FB92D00F1CE23 /* WorkfinderUserDetailsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DBFF231FB92D00F1CE23 /* WorkfinderUserDetailsUseCaseTests.swift */; };
 		FC93DC02231FB92D00F1CE23 /* WorkfinderUserDetailsUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = FC93DBF4231FB92D00F1CE23 /* WorkfinderUserDetailsUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FC93DC19231FB9C200F1CE23 /* WorkfinderUserDetailsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC18231FB9C200F1CE23 /* WorkfinderUserDetailsUseCase.swift */; };
 		FC93DC1E231FBA4400F1CE23 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DC1D231FBA4400F1CE23 /* WorkfinderAppLogic.framework */; };
@@ -47,11 +48,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FC4066E123277667002B425E /* NameLogicTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameLogicTests.swift; sourceTree = "<group>"; };
+		FC4066E223277668002B425E /* MagicLinkInterpreterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagicLinkInterpreterTests.swift; sourceTree = "<group>"; };
 		FC93DBF1231FB92D00F1CE23 /* WorkfinderUserDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderUserDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC93DBF4231FB92D00F1CE23 /* WorkfinderUserDetailsUseCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderUserDetailsUseCase.h; sourceTree = "<group>"; };
 		FC93DBF5231FB92D00F1CE23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC93DBFA231FB92D00F1CE23 /* WorkfinderUserDetailsUseCaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderUserDetailsUseCaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC93DBFF231FB92D00F1CE23 /* WorkfinderUserDetailsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderUserDetailsUseCaseTests.swift; sourceTree = "<group>"; };
 		FC93DC01231FB92D00F1CE23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC93DC18231FB9C200F1CE23 /* WorkfinderUserDetailsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderUserDetailsUseCase.swift; sourceTree = "<group>"; };
 		FC93DC1B231FBA4400F1CE23 /* WorkfinderAcceptUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAcceptUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,7 +139,8 @@
 		FC93DBFE231FB92D00F1CE23 /* WorkfinderUserDetailsUseCaseTests */ = {
 			isa = PBXGroup;
 			children = (
-				FC93DBFF231FB92D00F1CE23 /* WorkfinderUserDetailsUseCaseTests.swift */,
+				FC4066E223277668002B425E /* MagicLinkInterpreterTests.swift */,
+				FC4066E123277667002B425E /* NameLogicTests.swift */,
 				FC93DC01231FB92D00F1CE23 /* Info.plist */,
 			);
 			path = WorkfinderUserDetailsUseCaseTests;
@@ -332,7 +335,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC93DC00231FB92D00F1CE23 /* WorkfinderUserDetailsUseCaseTests.swift in Sources */,
+				FC4066E423277668002B425E /* MagicLinkInterpreterTests.swift in Sources */,
+				FC4066E323277668002B425E /* NameLogicTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

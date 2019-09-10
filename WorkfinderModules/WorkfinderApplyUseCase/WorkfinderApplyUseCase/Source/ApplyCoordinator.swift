@@ -5,7 +5,7 @@ import WorkfinderAppLogic
 import WorkfinderUI
 import WorkfinderCoordinators
 import WorkfinderUserDetailsUseCase
-import WorkfinderUploadYPDocumentsUseCase
+import WorkfinderDocumentUploadUseCase
 
 let __bundle = Bundle(identifier: "com.f4s.WorkfinderApplyUseCase")!
 
