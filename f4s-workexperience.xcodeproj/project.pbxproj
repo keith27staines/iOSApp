@@ -808,6 +808,7 @@
 			isa = PBXGroup;
 			children = (
 				40E78E1A1DD31A86000A3776 /* Onboarding.storyboard */,
+				FC1E6A4C2217474500DC335B /* OnboardingCoordinator.swift */,
 				40E78E991DD392B5000A3776 /* OnboardingViewController.swift */,
 				FC0B406C226B0FAD00D992AC /* Partner selection */,
 			);
@@ -861,8 +862,8 @@
 			isa = PBXGroup;
 			children = (
 				40C1A4E91DDB36DC000F80AA /* TimelineView.storyboard */,
-				40A28CB11E1D1D200077D490 /* TimelineEntryTableViewCell.swift */,
 				40C1A4EC1DDB36FA000F80AA /* TimelineViewController.swift */,
+				40A28CB11E1D1D200077D490 /* TimelineEntryTableViewCell.swift */,
 			);
 			path = "Timeline View";
 			sourceTree = "<group>";
@@ -1299,18 +1300,9 @@
 				FC6A6FC622D1E04C005F625A /* AppCoordinatorFactory.swift */,
 				FC1DC06A21FE142D009ABC60 /* AppCoordinator.swift */,
 				FCEE5E1D2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift */,
-				FCB49306222A5D3B00B88B8B /* Onboarding */,
 				FC313048222BC83C0043D014 /* TabBarCoordinator */,
 			);
 			path = "App Coordinator";
-			sourceTree = "<group>";
-		};
-		FCB49306222A5D3B00B88B8B /* Onboarding */ = {
-			isa = PBXGroup;
-			children = (
-				FC1E6A4C2217474500DC335B /* OnboardingCoordinator.swift */,
-			);
-			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		FCC1DF59232505340074D5C1 /* Factories */ = {

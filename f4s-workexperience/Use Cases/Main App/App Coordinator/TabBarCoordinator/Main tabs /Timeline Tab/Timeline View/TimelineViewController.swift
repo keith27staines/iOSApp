@@ -304,7 +304,6 @@ class TimelineCellViewPresenter {
     private func prepareWithCompany(cell: TimelineEntryTableViewCell, company: Company?) {
         guard let company = company else { return }
         cell.companyTitleLabel.text = company.name.stripCompanySuffix()
-        
         cell.companyImageView.load(urlString: company.logoUrl, defaultImage: UIImage(named: "DefaultLogo"))
     }
     

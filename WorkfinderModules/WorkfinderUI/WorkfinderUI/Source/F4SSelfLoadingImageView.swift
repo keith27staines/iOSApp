@@ -16,29 +16,55 @@ public protocol ImageFetching: class {
 public class F4SSelfLoadingImageView : UIImageView {
     var urlString: String?
     var fetcher: ImageFetching?
+    var fetchedImage: UIImage?
+    var fetchedUrlString: String?
+    var defaultImage: UIImage?
+    
     public func load(urlString: String?,
               defaultImage: UIImage?,
               fetcher: ImageFetching = ImageFetcher(),
               completion: ( () -> Void )? = nil ) {
         self.fetcher?.cancel()
-        self.urlString = self.urlString ?? urlString
-        self.image = defaultImage
-        guard let urlString = urlString, let url = URL(string: urlString) else {
+        self.fetcher = fetcher
+        self.urlString = urlString
+        self.defaultImage = defaultImage
+        guard
+            let urlString = urlString,
+            let url = URL(string: urlString)
+        else {
+            self.image = defaultImage
             completion?()
             return
         }
-        self.fetcher = fetcher
+        if urlString == self.fetchedUrlString {
+            if self.fetchedImage != nil {
+                image = fetchedImage
+                completion?()
+                return
+            }
+        }
+        prepareForNewFetch()
         self.fetcher?.getImage(url: url, completion: { [weak self] (image) in
             DispatchQueue.main.async {
                 guard let strongSelf = self, urlString == self?.urlString else {
                     completion?()
                     return
                 }
-                strongSelf.image = image ?? defaultImage
+                if image != nil {
+                    strongSelf.fetchedUrlString = urlString
+                    strongSelf.fetchedImage = image
+                }
                 strongSelf.urlString = urlString
+                strongSelf.image = strongSelf.fetchedImage ?? defaultImage
                 completion?()
             }
         })
+    }
+    
+    func prepareForNewFetch() {
+        self.image = defaultImage
+        self.fetchedUrlString = nil
+        self.fetchedImage = nil
     }
 }
 
