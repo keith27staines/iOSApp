@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -383,7 +383,7 @@
 		0D706A06626034FC2838B9E6CDEAAC5B /* Pods-f4s-workexperienceTests.debugf4slive.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-f4s-workexperienceTests.debugf4slive.xcconfig"; sourceTree = "<group>"; };
 		0DA82CF17C71F96D4B9A167180D0FC85 /* BaseQueuedDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseQueuedDestination.swift; path = Sources/XCGLogger/Destinations/BaseQueuedDestination.swift; sourceTree = "<group>"; };
 		0E80D2C6EBD1F6784529FB5D45BDE10B /* SEGBugsnagIntegration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SEGBugsnagIntegration.h; path = Pod/Classes/SEGBugsnagIntegration.h; sourceTree = "<group>"; };
-		0F921FC706C449C5DAA1BEB701D595C1 /* BSG_KSJSONCodec.c */ = {isa = PBXFileReference; includeInIndex = 1; name = BSG_KSJSONCodec.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSJSONCodec.c; sourceTree = "<group>"; };
+		0F921FC706C449C5DAA1BEB701D595C1 /* BSG_KSJSONCodec.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = BSG_KSJSONCodec.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSJSONCodec.c; sourceTree = "<group>"; };
 		1002761C4564F3232273D94B5930DC86 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		1007C432C55492F3CAEEACBE0AB1E9CB /* BSG_KSCrashSentry_NSException.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSCrashSentry_NSException.h; path = Source/KSCrash/Source/KSCrash/Recording/Sentry/BSG_KSCrashSentry_NSException.h; sourceTree = "<group>"; };
 		104EC407C7B6C4E376EC082AE72F60E4 /* SEGUserDefaultsStorage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SEGUserDefaultsStorage.h; path = Analytics/Classes/Internal/SEGUserDefaultsStorage.h; sourceTree = "<group>"; };
@@ -403,14 +403,14 @@
 		17DEDBE085489267C9C76716C46FE082 /* Bugsnag.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = Bugsnag.m; path = Source/Bugsnag.m; sourceTree = "<group>"; };
 		18581B5937F866E2454B33764E51D5A5 /* Base64LogFormatter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Base64LogFormatter.swift; path = Sources/XCGLogger/LogFormatters/Base64LogFormatter.swift; sourceTree = "<group>"; };
 		192AC27A9EB397115377E342B4165AA6 /* BSG_KSCrashType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSCrashType.h; path = Source/KSCrash/Source/KSCrash/Recording/BSG_KSCrashType.h; sourceTree = "<group>"; };
-		1A08BFEC06582D967B5B8FD3A78B3209 /* BSG_KSCrashReport.c */ = {isa = PBXFileReference; includeInIndex = 1; name = BSG_KSCrashReport.c; path = Source/KSCrash/Source/KSCrash/Recording/BSG_KSCrashReport.c; sourceTree = "<group>"; };
+		1A08BFEC06582D967B5B8FD3A78B3209 /* BSG_KSCrashReport.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = BSG_KSCrashReport.c; path = Source/KSCrash/Source/KSCrash/Recording/BSG_KSCrashReport.c; sourceTree = "<group>"; };
 		1A1C90A2ECCDD359326B92F3F19D6FAD /* BSG_KSCrashSentry_MachException.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSCrashSentry_MachException.h; path = Source/KSCrash/Source/KSCrash/Recording/Sentry/BSG_KSCrashSentry_MachException.h; sourceTree = "<group>"; };
 		1AEE064C39632AE148A0782431C2C126 /* Segment-Bugsnag-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Segment-Bugsnag-dummy.m"; sourceTree = "<group>"; };
 		1B3BCA8BDDC4B4914397FECCA20054AB /* BSG_KSCrashSentry_Signal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSCrashSentry_Signal.h; path = Source/KSCrash/Source/KSCrash/Recording/Sentry/BSG_KSCrashSentry_Signal.h; sourceTree = "<group>"; };
 		1B76D90DCC7A1C404CD5AB7DE7CD7B0D /* ConsoleDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConsoleDestination.swift; path = Sources/XCGLogger/Destinations/ConsoleDestination.swift; sourceTree = "<group>"; };
 		1B885D65316E4B7E2E9432B96BD14305 /* SEGAES256Crypto.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SEGAES256Crypto.h; path = Analytics/Classes/Crypto/SEGAES256Crypto.h; sourceTree = "<group>"; };
 		1C4E3F274006C04F4B1F7D44DBCF568E /* DateAndTimeFunctions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DateAndTimeFunctions.swift; path = Sources/SQLite/Typed/DateAndTimeFunctions.swift; sourceTree = "<group>"; };
-		1C64DE9198EF9021D42482ABD8A412D1 /* BSG_KSCrashSentry_CPPException.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = BSG_KSCrashSentry_CPPException.mm; path = Source/KSCrash/Source/KSCrash/Recording/Sentry/BSG_KSCrashSentry_CPPException.mm; sourceTree = "<group>"; };
+		1C64DE9198EF9021D42482ABD8A412D1 /* BSG_KSCrashSentry_CPPException.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = BSG_KSCrashSentry_CPPException.mm; path = Source/KSCrash/Source/KSCrash/Recording/Sentry/BSG_KSCrashSentry_CPPException.mm; sourceTree = "<group>"; };
 		1DDF02CC0E80DB6E5B007AC22D777C48 /* BugsnagSink.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BugsnagSink.h; path = Source/BugsnagSink.h; sourceTree = "<group>"; };
 		1EA53D7D52D283458BFFBEFBC570EFB5 /* Foundation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Foundation.swift; path = Sources/SQLite/Foundation.swift; sourceTree = "<group>"; };
 		1EB6BF4801433EA72F29ED61965E8AF4 /* BSGSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSGSerialization.h; path = Source/BSGSerialization.h; sourceTree = "<group>"; };
@@ -419,15 +419,15 @@
 		22C5C1270F92E0A4AEB02100EB02425B /* Errors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Errors.swift; path = Sources/SQLite/Core/Errors.swift; sourceTree = "<group>"; };
 		244BDC1CC2E604447BAD6A0192E02FA9 /* XCGLogger.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = XCGLogger.xcconfig; sourceTree = "<group>"; };
 		249F6CCADCD95549D6F2B52D0EC86399 /* SQLite.swift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SQLite.swift-dummy.m"; sourceTree = "<group>"; };
-		25FC3651F50D7A9EEB4E7E532AE6CAED /* Bugsnag.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Bugsnag.framework; path = Bugsnag.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		25FC3651F50D7A9EEB4E7E532AE6CAED /* Bugsnag.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bugsnag.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		289CD4DBDB309E30CCC580CB94E67AC7 /* BSG_KSString.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSString.h; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSString.h; sourceTree = "<group>"; };
 		295E023C5BB73DDCDFD9A99200749BE6 /* Pods-f4s-workexperienceTests.releasef4s.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-f4s-workexperienceTests.releasef4s.xcconfig"; sourceTree = "<group>"; };
 		2B60580763DD02BA6BC12D9E558B7E5A /* BugsnagErrorReportApiClient.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BugsnagErrorReportApiClient.h; path = Source/BugsnagErrorReportApiClient.h; sourceTree = "<group>"; };
 		2C7A05DF066A4F5D91C78883949D9D18 /* BugsnagNotifier.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BugsnagNotifier.m; path = Source/BugsnagNotifier.m; sourceTree = "<group>"; };
 		2E02B5F718075B3B3C2D74BDC5E05046 /* NSError+BSG_SimpleConstructor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSError+BSG_SimpleConstructor.h"; path = "Source/KSCrash/Source/KSCrash/Recording/Tools/NSError+BSG_SimpleConstructor.h"; sourceTree = "<group>"; };
 		2E044A1CE68F0A74860C8C25283C58FC /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2E0D03DF88247EE0B7650B159C9B84C2 /* BSG_KSCrashSentry_Signal.c */ = {isa = PBXFileReference; includeInIndex = 1; name = BSG_KSCrashSentry_Signal.c; path = Source/KSCrash/Source/KSCrash/Recording/Sentry/BSG_KSCrashSentry_Signal.c; sourceTree = "<group>"; };
-		2F5168C9C7907B31DC03C8AE5544BC0B /* ObjcExceptionBridging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = ObjcExceptionBridging.framework; path = ObjcExceptionBridging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E0D03DF88247EE0B7650B159C9B84C2 /* BSG_KSCrashSentry_Signal.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = BSG_KSCrashSentry_Signal.c; path = Source/KSCrash/Source/KSCrash/Recording/Sentry/BSG_KSCrashSentry_Signal.c; sourceTree = "<group>"; };
+		2F5168C9C7907B31DC03C8AE5544BC0B /* ObjcExceptionBridging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjcExceptionBridging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F58234F4400A67DEBEAC70EF5602860 /* BugsnagApiClient.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BugsnagApiClient.h; path = Source/BugsnagApiClient.h; sourceTree = "<group>"; };
 		32BB30630E2CA937DCE9A68E9F8C2629 /* ObjcExceptionBridging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ObjcExceptionBridging.xcconfig; sourceTree = "<group>"; };
 		33689B47EB431D1E00F0A05A9406B0B2 /* BSG_KSCrashSentry_CPPException.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSCrashSentry_CPPException.h; path = Source/KSCrash/Source/KSCrash/Recording/Sentry/BSG_KSCrashSentry_CPPException.h; sourceTree = "<group>"; };
@@ -441,7 +441,7 @@
 		35971117990E862A9EEB5B72A2E1AB74 /* BSG_KSJSONCodecObjC.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSJSONCodecObjC.h; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSJSONCodecObjC.h; sourceTree = "<group>"; };
 		368D3BDC3313DCCB16B60807541AF527 /* BSGConnectivity.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSGConnectivity.h; path = Source/BSGConnectivity.h; sourceTree = "<group>"; };
 		378B99DD9989B21DBC4D0772FEBEE380 /* Bugsnag.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bugsnag.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		385A2AD894096942993670F2E3D0CEB0 /* BSG_KSObjC.c */ = {isa = PBXFileReference; includeInIndex = 1; name = BSG_KSObjC.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSObjC.c; sourceTree = "<group>"; };
+		385A2AD894096942993670F2E3D0CEB0 /* BSG_KSObjC.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = BSG_KSObjC.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSObjC.c; sourceTree = "<group>"; };
 		39C9AF426E9F5250D08D1DE6AACD24EC /* SEGGroupPayload.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SEGGroupPayload.m; path = Analytics/Classes/Integrations/SEGGroupPayload.m; sourceTree = "<group>"; };
 		3B5C6249B3D819A6D76D81DF2496F0B6 /* BSG_KSBacktrace_Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSBacktrace_Private.h; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSBacktrace_Private.h; sourceTree = "<group>"; };
 		3D78A82669E348AD4C50C93CD0F2AF45 /* BSG_KSCrashReportFilter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSCrashReportFilter.h; path = Source/KSCrash/Source/KSCrash/Reporting/Filters/BSG_KSCrashReportFilter.h; sourceTree = "<group>"; };
@@ -449,7 +449,7 @@
 		3DAD81A7645D0E486481183A7CA85537 /* TagFilter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TagFilter.swift; path = Sources/XCGLogger/Filters/TagFilter.swift; sourceTree = "<group>"; };
 		3DDD4A9AFF208A26F0CCC4E54E782A3B /* BugsnagApiClient.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BugsnagApiClient.m; path = Source/BugsnagApiClient.m; sourceTree = "<group>"; };
 		3E41A7C30EB727BC22FAB97CF2BDC019 /* SEGUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SEGUtils.h; path = Analytics/Classes/Internal/SEGUtils.h; sourceTree = "<group>"; };
-		40EF9EB15C5666350372D27BB6A34E9D /* Segment_Bugsnag.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Segment_Bugsnag.framework; path = "Segment-Bugsnag.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		40EF9EB15C5666350372D27BB6A34E9D /* Segment_Bugsnag.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Segment_Bugsnag.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		427080E151BEA4D583D4CCC63C5D83FA /* Pods-f4s-workexperienceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-f4s-workexperienceTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4281843F07756E6D0A3CD801EADADF7A /* Pods-f4s-workexperienceTests.releasef4slive.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-f4s-workexperienceTests.releasef4slive.xcconfig"; sourceTree = "<group>"; };
 		42E22A651FA25B6ECE0F87703742B238 /* SEGAnalyticsUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SEGAnalyticsUtils.h; path = Analytics/Classes/Internal/SEGAnalyticsUtils.h; sourceTree = "<group>"; };
@@ -459,7 +459,7 @@
 		45C1B16E0C8CC2949F418E31A1CCEA27 /* SEGContext.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SEGContext.m; path = Analytics/Classes/Middlewares/SEGContext.m; sourceTree = "<group>"; };
 		46D508DF908810E0804FE43747199575 /* SQLite.swift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SQLite.swift.xcconfig; sourceTree = "<group>"; };
 		473490AA7E83EA4F061C9573ADBE6B87 /* Bugsnag.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Bugsnag.xcconfig; sourceTree = "<group>"; };
-		474D47C12FDAE9071428DFBCE1DEB13C /* KeychainSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = KeychainSwift.framework; path = KeychainSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		474D47C12FDAE9071428DFBCE1DEB13C /* KeychainSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KeychainSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4831753F27BFA2E3D039539AC723536D /* SEGPayload.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SEGPayload.m; path = Analytics/Classes/Integrations/SEGPayload.m; sourceTree = "<group>"; };
 		487940A59D463C0C192B59AAFDC9DC15 /* BSG_KSCrashAdvanced.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSCrashAdvanced.h; path = Source/KSCrash/Source/KSCrash/Recording/BSG_KSCrashAdvanced.h; sourceTree = "<group>"; };
 		48A671A1BF174A3186475D79E27A91AB /* BSG_KSJSONCodec.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSJSONCodec.h; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSJSONCodec.h; sourceTree = "<group>"; };
@@ -469,7 +469,7 @@
 		4B23A297FD6EED68CAEEAD264E9960A2 /* BugsnagSessionTracker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BugsnagSessionTracker.h; path = Source/BugsnagSessionTracker.h; sourceTree = "<group>"; };
 		4B23DA5DA8743B42B466953A9123B128 /* Analytics.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Analytics.xcconfig; sourceTree = "<group>"; };
 		4B60D9545B1186B6D648A8FC9EA148C5 /* SEGSegmentIntegration.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SEGSegmentIntegration.m; path = Analytics/Classes/Internal/SEGSegmentIntegration.m; sourceTree = "<group>"; };
-		4C822F070043E7A70B3691C6B78E9CDF /* SQLite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SQLite.framework; path = SQLite.swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C822F070043E7A70B3691C6B78E9CDF /* SQLite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SQLite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CB81FAF65C12BEB4938022C8A3D628F /* BSG_KSCrashReportFilterCompletion.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSCrashReportFilterCompletion.h; path = Source/KSCrash/Source/KSCrash/Reporting/Filters/BSG_KSCrashReportFilterCompletion.h; sourceTree = "<group>"; };
 		4D24138C980BA046D904112702EE9A43 /* fts3_tokenizer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = fts3_tokenizer.h; path = Sources/SQLiteObjc/fts3_tokenizer.h; sourceTree = "<group>"; };
 		4D62944FAAEF4A55ECC2FE465D0EBCAA /* Value.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Value.swift; path = Sources/SQLite/Core/Value.swift; sourceTree = "<group>"; };
@@ -491,7 +491,7 @@
 		591D82293F473737C61E2F286222367A /* SEGSerializableValue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SEGSerializableValue.h; path = Analytics/Classes/SEGSerializableValue.h; sourceTree = "<group>"; };
 		5945AF528AD3A7FF2A6DD0616D013FD6 /* BSG_KSCrashCallCompletion.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSCrashCallCompletion.h; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSCrashCallCompletion.h; sourceTree = "<group>"; };
 		59B3898622782294B1D0C2C6C4D57DAD /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5A4C6BB6DBDFE10840281696261F89B0 /* BSG_KSMach_x86_32.c */ = {isa = PBXFileReference; includeInIndex = 1; name = BSG_KSMach_x86_32.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSMach_x86_32.c; sourceTree = "<group>"; };
+		5A4C6BB6DBDFE10840281696261F89B0 /* BSG_KSMach_x86_32.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = BSG_KSMach_x86_32.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSMach_x86_32.c; sourceTree = "<group>"; };
 		5B2689257C3811CCEB79703DD7B45AC4 /* KeychainSwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KeychainSwift-umbrella.h"; sourceTree = "<group>"; };
 		5B404B6F4A2601DC23334913AB451847 /* BaseDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseDestination.swift; path = Sources/XCGLogger/Destinations/BaseDestination.swift; sourceTree = "<group>"; };
 		5B6797EAFACFD233F6D57A32648AC4F7 /* Pods-f4s-workexperience-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-f4s-workexperience-dummy.m"; sourceTree = "<group>"; };
@@ -511,7 +511,7 @@
 		673A5A06BFF79336B4786A36C813927A /* Bugsnag.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Bugsnag.modulemap; sourceTree = "<group>"; };
 		67768A44A10CE0E61C740CC36E654545 /* BSG_KSCrashContext.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSCrashContext.h; path = Source/KSCrash/Source/KSCrash/Recording/BSG_KSCrashContext.h; sourceTree = "<group>"; };
 		68ADD103CF9F3888EA134CBC6BCC551D /* KeychainSwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = KeychainSwift.modulemap; sourceTree = "<group>"; };
-		6931990A08BA415B4794C1C70930E3D4 /* .swift-version */ = {isa = PBXFileReference; includeInIndex = 1; path = ".swift-version"; sourceTree = "<group>"; };
+		6931990A08BA415B4794C1C70930E3D4 /* .swift-version */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = ".swift-version"; sourceTree = "<group>"; };
 		6A5B6F444FB2738AFCF5F11863F07CA0 /* BSG_KSCrashDoctor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BSG_KSCrashDoctor.m; path = Source/KSCrash/Source/KSCrash/Recording/BSG_KSCrashDoctor.m; sourceTree = "<group>"; };
 		6A7EF8DAA39F1A603BF4298CC4D6CCB6 /* Pods-f4s-workexperienceTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-f4s-workexperienceTests.modulemap"; sourceTree = "<group>"; };
 		6AA2BE5DA9660E772C69BC60EDC6DBB9 /* Pods-f4s-workexperienceTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-f4s-workexperienceTests-acknowledgements.markdown"; sourceTree = "<group>"; };
@@ -530,15 +530,15 @@
 		779C6E72F4896602AECAD1E7BD28F3BE /* KeychainSwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "KeychainSwift-dummy.m"; sourceTree = "<group>"; };
 		7896835DACC0BB1AE04B81DF58789183 /* BSG_KSCrashReportVersion.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSCrashReportVersion.h; path = Source/KSCrash/Source/KSCrash/Recording/BSG_KSCrashReportVersion.h; sourceTree = "<group>"; };
 		793B3433DC0D242B4938EB4B64427359 /* TegKeychainConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TegKeychainConstants.swift; path = Sources/TegKeychainConstants.swift; sourceTree = "<group>"; };
-		794A7BA692B773F8F34319A0C1EA5C5D /* BSG_KSMach.c */ = {isa = PBXFileReference; includeInIndex = 1; name = BSG_KSMach.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSMach.c; sourceTree = "<group>"; };
+		794A7BA692B773F8F34319A0C1EA5C5D /* BSG_KSMach.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = BSG_KSMach.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSMach.c; sourceTree = "<group>"; };
 		7A94340FE4F3D3A6B2452F9AA63604E5 /* Pods-f4s-workexperienceTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-f4s-workexperienceTests-umbrella.h"; sourceTree = "<group>"; };
-		7B3C954076C1E5733EB877C874B3F0B0 /* BSG_KSBacktrace.c */ = {isa = PBXFileReference; includeInIndex = 1; name = BSG_KSBacktrace.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSBacktrace.c; sourceTree = "<group>"; };
+		7B3C954076C1E5733EB877C874B3F0B0 /* BSG_KSBacktrace.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = BSG_KSBacktrace.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSBacktrace.c; sourceTree = "<group>"; };
 		7BE4398F29AB8A761B2334C3399C267D /* DispatchQueue+XCGAdditions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DispatchQueue+XCGAdditions.swift"; path = "Sources/XCGLogger/Extensions/DispatchQueue+XCGAdditions.swift"; sourceTree = "<group>"; };
 		7D072CD4C21187E239A799D28D24E801 /* BSG_KSCrashReportWriter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSCrashReportWriter.h; path = Source/BSG_KSCrashReportWriter.h; sourceTree = "<group>"; };
 		7D6704109F7D26D064B1416A268F3ABD /* ReachabilitySwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ReachabilitySwift-prefix.pch"; sourceTree = "<group>"; };
-		7D6E999D4AB30BCB655AC988F2BF9ECA /* BSG_KSMach_Arm64.c */ = {isa = PBXFileReference; includeInIndex = 1; name = BSG_KSMach_Arm64.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSMach_Arm64.c; sourceTree = "<group>"; };
+		7D6E999D4AB30BCB655AC988F2BF9ECA /* BSG_KSMach_Arm64.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = BSG_KSMach_Arm64.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSMach_Arm64.c; sourceTree = "<group>"; };
 		7D9AE76302C1EC26FAE4B7E27414AAF1 /* SEGTrackPayload.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SEGTrackPayload.m; path = Analytics/Classes/Integrations/SEGTrackPayload.m; sourceTree = "<group>"; };
-		7F0EB2B2FEF44565AB2DF46225D8540E /* XCGLogger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = XCGLogger.framework; path = XCGLogger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F0EB2B2FEF44565AB2DF46225D8540E /* XCGLogger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XCGLogger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F595C0E42DA025E3F28B80A2184782C /* BugsnagSessionFileStore.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BugsnagSessionFileStore.m; path = Source/BugsnagSessionFileStore.m; sourceTree = "<group>"; };
 		7FA9CF13C9B95ED12C772141798E9009 /* Pods-f4s-workexperience.debugf4s.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-f4s-workexperience.debugf4s.xcconfig"; sourceTree = "<group>"; };
 		8230ACD0D6D537F0835F2A4CBC0931CA /* BSG_KSCrashSentry_NSException.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BSG_KSCrashSentry_NSException.m; path = Source/KSCrash/Source/KSCrash/Recording/Sentry/BSG_KSCrashSentry_NSException.m; sourceTree = "<group>"; };
@@ -546,7 +546,7 @@
 		83C5BAABE572ABC53C28A1E58AA78511 /* BSG_KSSingleton.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSSingleton.h; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSSingleton.h; sourceTree = "<group>"; };
 		84614B58C21A71720FA55CD3045D1115 /* SEGMiddleware.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SEGMiddleware.h; path = Analytics/Classes/Middlewares/SEGMiddleware.h; sourceTree = "<group>"; };
 		854730952246C967EC10249A428C7474 /* SEGIntegrationsManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SEGIntegrationsManager.h; path = Analytics/Classes/Integrations/SEGIntegrationsManager.h; sourceTree = "<group>"; };
-		858CFEC0A9756D18790D75FE6703AFFB /* BSG_KSCrashType.c */ = {isa = PBXFileReference; includeInIndex = 1; name = BSG_KSCrashType.c; path = Source/KSCrash/Source/KSCrash/Recording/BSG_KSCrashType.c; sourceTree = "<group>"; };
+		858CFEC0A9756D18790D75FE6703AFFB /* BSG_KSCrashType.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = BSG_KSCrashType.c; path = Source/KSCrash/Source/KSCrash/Recording/BSG_KSCrashType.c; sourceTree = "<group>"; };
 		86A324282AF30418388B89C93790037C /* Setter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Setter.swift; path = Sources/SQLite/Typed/Setter.swift; sourceTree = "<group>"; };
 		87AD830F97EAA608FA66ED217D3C934C /* PrePostFixLogFormatter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PrePostFixLogFormatter.swift; path = Sources/XCGLogger/LogFormatters/PrePostFixLogFormatter.swift; sourceTree = "<group>"; };
 		87DA8AFFDE5852CE9D95917D19794F27 /* Analytics-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Analytics-umbrella.h"; sourceTree = "<group>"; };
@@ -558,8 +558,8 @@
 		913D6020D73530B5F4C3C68BFF3FC07A /* LogFormatterProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LogFormatterProtocol.swift; path = Sources/XCGLogger/LogFormatters/LogFormatterProtocol.swift; sourceTree = "<group>"; };
 		923165B7DE7F6ABAF2C259BA44F0284E /* BSG_KSCrashState.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSCrashState.h; path = Source/KSCrash/Source/KSCrash/Recording/BSG_KSCrashState.h; sourceTree = "<group>"; };
 		93102EFE9DB953E19ACEB1722AD478A2 /* Pods-f4s-workexperienceTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-f4s-workexperienceTests-dummy.m"; sourceTree = "<group>"; };
-		9329F5D253D3C86A92F695E848A44D69 /* BSG_KSDynamicLinker.c */ = {isa = PBXFileReference; includeInIndex = 1; name = BSG_KSDynamicLinker.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSDynamicLinker.c; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9329F5D253D3C86A92F695E848A44D69 /* BSG_KSDynamicLinker.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = BSG_KSDynamicLinker.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSDynamicLinker.c; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		93C177AB045EDE3C9F36816C93B9D35E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9467C402C928A258D406663E1DCDBAD4 /* TestDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TestDestination.swift; path = Sources/XCGLogger/Destinations/TestDestination.swift; sourceTree = "<group>"; };
 		95D94B2101323C03B08AB60074A8EDE4 /* BSG_KSMachApple.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSMachApple.h; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSMachApple.h; sourceTree = "<group>"; };
@@ -576,18 +576,18 @@
 		9D23113048B076A3396B28BD2EA82C6F /* BSG_KSArchSpecific.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSArchSpecific.h; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSArchSpecific.h; sourceTree = "<group>"; };
 		9D3C9D548FFD00F691904B246EBCC130 /* SEGSegmentIntegrationFactory.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SEGSegmentIntegrationFactory.h; path = Analytics/Classes/Internal/SEGSegmentIntegrationFactory.h; sourceTree = "<group>"; };
 		9D7ABE0986BAA30AC3173ECB7B0C5839 /* BSG_KSLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSLogger.h; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSLogger.h; sourceTree = "<group>"; };
-		9E359F1916E2F61C93E31C02A09F3EDA /* Reachability.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Reachability.framework; path = ReachabilitySwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E359F1916E2F61C93E31C02A09F3EDA /* Reachability.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Reachability.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FE07518BB34E0AF7268DD692CE0ECD0 /* BugsnagNotifier.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BugsnagNotifier.h; path = Source/BugsnagNotifier.h; sourceTree = "<group>"; };
 		9FF3C5C044D0E20C33CA72CBD4D3D9EB /* SEGAnalytics.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SEGAnalytics.m; path = Analytics/Classes/SEGAnalytics.m; sourceTree = "<group>"; };
 		A38DA559E4BE290E6AA7A46C9BD6754D /* BSG_KSCrashReportStore.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSCrashReportStore.h; path = Source/KSCrash/Source/KSCrash/Recording/BSG_KSCrashReportStore.h; sourceTree = "<group>"; };
 		A4A462A7B4DB6F189D79398DFB6881F8 /* BugsnagCrashReport.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BugsnagCrashReport.m; path = Source/BugsnagCrashReport.m; sourceTree = "<group>"; };
 		A4F3C96CFCEA001BC8D28F85A249FC41 /* BugsnagFileStore.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BugsnagFileStore.m; path = Source/BugsnagFileStore.m; sourceTree = "<group>"; };
 		A537CDA4FC2071B6FD5712F4BF721193 /* BugsnagSessionTrackingApiClient.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BugsnagSessionTrackingApiClient.m; path = Source/BugsnagSessionTrackingApiClient.m; sourceTree = "<group>"; };
-		A5B47B97388B0AEE5DFC4EB6D294EB46 /* BSG_KSCrashSentry_User.c */ = {isa = PBXFileReference; includeInIndex = 1; name = BSG_KSCrashSentry_User.c; path = Source/KSCrash/Source/KSCrash/Recording/Sentry/BSG_KSCrashSentry_User.c; sourceTree = "<group>"; };
+		A5B47B97388B0AEE5DFC4EB6D294EB46 /* BSG_KSCrashSentry_User.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = BSG_KSCrashSentry_User.c; path = Source/KSCrash/Source/KSCrash/Recording/Sentry/BSG_KSCrashSentry_User.c; sourceTree = "<group>"; };
 		A5D9315B01DE00F4988DE2DC9FC3F08C /* SQLiteObjc.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SQLiteObjc.h; path = Sources/SQLiteObjc/include/SQLiteObjc.h; sourceTree = "<group>"; };
 		A6FF19888083E618A2A5F15491875112 /* BSG_KSCrashState.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BSG_KSCrashState.m; path = Source/KSCrash/Source/KSCrash/Recording/BSG_KSCrashState.m; sourceTree = "<group>"; };
 		A756E283D2D98CDB7D01A8986B2DFAA2 /* SEGBugsnagIntegrationFactory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SEGBugsnagIntegrationFactory.m; path = Pod/Classes/SEGBugsnagIntegrationFactory.m; sourceTree = "<group>"; };
-		A7605A9FE8B8C9D776DB6C35863AD086 /* BSG_KSCrashC.c */ = {isa = PBXFileReference; includeInIndex = 1; name = BSG_KSCrashC.c; path = Source/KSCrash/Source/KSCrash/Recording/BSG_KSCrashC.c; sourceTree = "<group>"; };
+		A7605A9FE8B8C9D776DB6C35863AD086 /* BSG_KSCrashC.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = BSG_KSCrashC.c; path = Source/KSCrash/Source/KSCrash/Recording/BSG_KSCrashC.c; sourceTree = "<group>"; };
 		A78C08BF4AEC542D347BDC86B7D3EC18 /* Pods-f4s-workexperience.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-f4s-workexperience.release.xcconfig"; sourceTree = "<group>"; };
 		A80FB8E8659BA3D32AF3368ABEBEB114 /* BSG_KSCrashSentry_User.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSCrashSentry_User.h; path = Source/KSCrash/Source/KSCrash/Recording/Sentry/BSG_KSCrashSentry_User.h; sourceTree = "<group>"; };
 		AA1BED65F63CB95A0455B9E591253E17 /* SEGCrypto.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SEGCrypto.h; path = Analytics/Classes/Crypto/SEGCrypto.h; sourceTree = "<group>"; };
@@ -599,17 +599,17 @@
 		B0F50418DB2B39F974CAD1F1FF8CDD1E /* ObjcExceptionBridging-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ObjcExceptionBridging-umbrella.h"; sourceTree = "<group>"; };
 		B1A524890D7351683A952532F33543F9 /* Operators.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Operators.swift; path = Sources/SQLite/Typed/Operators.swift; sourceTree = "<group>"; };
 		B1F3CCF09D5F5A24F35AFCC64F69FA9A /* FileNameFilter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileNameFilter.swift; path = Sources/XCGLogger/Filters/FileNameFilter.swift; sourceTree = "<group>"; };
-		B2A437C13A687F9340DDA1267BA91DAB /* Analytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Analytics.framework; path = Analytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B40BC1227C95BACE9F993964959CAD59 /* BSG_KSFileUtils.c */ = {isa = PBXFileReference; includeInIndex = 1; name = BSG_KSFileUtils.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSFileUtils.c; sourceTree = "<group>"; };
+		B2A437C13A687F9340DDA1267BA91DAB /* Analytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Analytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B40BC1227C95BACE9F993964959CAD59 /* BSG_KSFileUtils.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = BSG_KSFileUtils.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSFileUtils.c; sourceTree = "<group>"; };
 		B4579A17DA22C1DF78F3D9658A8C86F6 /* Pods-f4s-workexperience-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-f4s-workexperience-frameworks.sh"; sourceTree = "<group>"; };
 		B728BCD2906469086C7D0F9561A8194F /* Reachability.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Reachability.swift; path = Sources/Reachability.swift; sourceTree = "<group>"; };
 		B76E51865CD25ABADA117C667D1C9F1B /* SEGAES256Crypto.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SEGAES256Crypto.m; path = Analytics/Classes/Crypto/SEGAES256Crypto.m; sourceTree = "<group>"; };
 		B7C68B8E58BFC98DE874E6B3BF706EAB /* Pods-f4s-workexperience.releasef4slive.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-f4s-workexperience.releasef4slive.xcconfig"; sourceTree = "<group>"; };
 		B89C3109030D0E1451EFE91BB4D1F2C7 /* Coding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Coding.swift; path = Sources/SQLite/Typed/Coding.swift; sourceTree = "<group>"; };
-		B90020CB1A73EC08FD96E8443FA81AA6 /* BSG_KSMach_Arm.c */ = {isa = PBXFileReference; includeInIndex = 1; name = BSG_KSMach_Arm.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSMach_Arm.c; sourceTree = "<group>"; };
+		B90020CB1A73EC08FD96E8443FA81AA6 /* BSG_KSMach_Arm.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = BSG_KSMach_Arm.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSMach_Arm.c; sourceTree = "<group>"; };
 		BACC0A85F532DEFAFEA79F820C56D731 /* SEGReachability.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SEGReachability.m; path = Analytics/Vendor/SEGReachability.m; sourceTree = "<group>"; };
 		BB3A03D3C79AC55FDAFC56E46BBF510C /* SQLite.swift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SQLite.swift-umbrella.h"; sourceTree = "<group>"; };
-		BBE785F01808DBB97294B7EA3B7DB23A /* BSG_KSCrashSentry.c */ = {isa = PBXFileReference; includeInIndex = 1; name = BSG_KSCrashSentry.c; path = Source/KSCrash/Source/KSCrash/Recording/Sentry/BSG_KSCrashSentry.c; sourceTree = "<group>"; };
+		BBE785F01808DBB97294B7EA3B7DB23A /* BSG_KSCrashSentry.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = BSG_KSCrashSentry.c; path = Source/KSCrash/Source/KSCrash/Recording/Sentry/BSG_KSCrashSentry.c; sourceTree = "<group>"; };
 		BC13FAD210C97A85349F35213718D86F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BC7B2227BB8B0F71651BBA10FACDFAA5 /* BugsnagBreadcrumb.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BugsnagBreadcrumb.m; path = Source/BugsnagBreadcrumb.m; sourceTree = "<group>"; };
 		BCE7D7DAB161A17BE90492E4190B6F2D /* BSG_KSBacktrace.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSBacktrace.h; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSBacktrace.h; sourceTree = "<group>"; };
@@ -623,10 +623,10 @@
 		C19D196F860ABCFA6BAA31431ED39083 /* Blob.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Blob.swift; path = Sources/SQLite/Core/Blob.swift; sourceTree = "<group>"; };
 		C35064A2A3BE4DADBCC7DE9ED2D80535 /* SEGHTTPClient.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SEGHTTPClient.m; path = Analytics/Classes/Internal/SEGHTTPClient.m; sourceTree = "<group>"; };
 		C443B8C833D2BDFF0E4EC72CF2869E1E /* SEGIntegration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SEGIntegration.h; path = Analytics/Classes/Integrations/SEGIntegration.h; sourceTree = "<group>"; };
-		C4781E59673BE63DD2AB7D2D0BF09FB3 /* Pods_f4s_workexperienceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_f4s_workexperienceTests.framework; path = "Pods-f4s-workexperienceTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4781E59673BE63DD2AB7D2D0BF09FB3 /* Pods_f4s_workexperienceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_f4s_workexperienceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4C23BE7F9CC243E26F0C2D0511EDEFA /* SEGStoreKitTracker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SEGStoreKitTracker.m; path = Analytics/Classes/Internal/SEGStoreKitTracker.m; sourceTree = "<group>"; };
 		C5792866CA5BBEF732D259ACAEAF5E10 /* XCGLogger-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "XCGLogger-dummy.m"; sourceTree = "<group>"; };
-		C6A304F56AF56DAE36DA176B2806B354 /* BSG_KSMach_x86_64.c */ = {isa = PBXFileReference; includeInIndex = 1; name = BSG_KSMach_x86_64.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSMach_x86_64.c; sourceTree = "<group>"; };
+		C6A304F56AF56DAE36DA176B2806B354 /* BSG_KSMach_x86_64.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = BSG_KSMach_x86_64.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSMach_x86_64.c; sourceTree = "<group>"; };
 		C75E02EC66E6234317756B56F32D503D /* BSG_KSCrashDoctor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSCrashDoctor.h; path = Source/KSCrash/Source/KSCrash/Recording/BSG_KSCrashDoctor.h; sourceTree = "<group>"; };
 		C7BCFED9862BFE0D7AB71A08A96543DC /* Pods-f4s-workexperience-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-f4s-workexperience-resources.sh"; sourceTree = "<group>"; };
 		C82DC00D17854125DAE12AFEC247F3CD /* SEGGroupPayload.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SEGGroupPayload.h; path = Analytics/Classes/Integrations/SEGGroupPayload.h; sourceTree = "<group>"; };
@@ -635,7 +635,7 @@
 		C9C807BDF4D37BA7E89FF80A764FA0F5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		CA8C7A64970F93E53CD923FDFA17B6FF /* BSGOutOfMemoryWatchdog.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSGOutOfMemoryWatchdog.h; path = Source/BSGOutOfMemoryWatchdog.h; sourceTree = "<group>"; };
 		CC5E212DE381F1102F926ACCEEE21270 /* SEGAliasPayload.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SEGAliasPayload.h; path = Analytics/Classes/Integrations/SEGAliasPayload.h; sourceTree = "<group>"; };
-		CC7B1A568F069A58DD12E7C9B92831BE /* BSG_KSCrashSentry_MachException.c */ = {isa = PBXFileReference; includeInIndex = 1; name = BSG_KSCrashSentry_MachException.c; path = Source/KSCrash/Source/KSCrash/Recording/Sentry/BSG_KSCrashSentry_MachException.c; sourceTree = "<group>"; };
+		CC7B1A568F069A58DD12E7C9B92831BE /* BSG_KSCrashSentry_MachException.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = BSG_KSCrashSentry_MachException.c; path = Source/KSCrash/Source/KSCrash/Recording/Sentry/BSG_KSCrashSentry_MachException.c; sourceTree = "<group>"; };
 		CC7FECB8BD1EE78DDE7C92298FD8EC33 /* BugsnagSessionFileStore.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BugsnagSessionFileStore.h; path = Source/BugsnagSessionFileStore.h; sourceTree = "<group>"; };
 		CF82A58837385A9705D17C5BF84C51FA /* Connection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Connection.swift; path = Sources/SQLite/Core/Connection.swift; sourceTree = "<group>"; };
 		CF846C9F4818EB4CE083578B84367749 /* BSG_KSMach.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSMach.h; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSMach.h; sourceTree = "<group>"; };
@@ -647,10 +647,10 @@
 		D2693499A368502709A37A494C9BE178 /* SEGHTTPClient.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SEGHTTPClient.h; path = Analytics/Classes/Internal/SEGHTTPClient.h; sourceTree = "<group>"; };
 		D3AB19ED860F7B1E00160EFD47915CFB /* ANSIColorLogFormatter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ANSIColorLogFormatter.swift; path = Sources/XCGLogger/LogFormatters/ANSIColorLogFormatter.swift; sourceTree = "<group>"; };
 		D485ACD5E7112C6448CD4A400A80F0A6 /* SEGBugsnagIntegration.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SEGBugsnagIntegration.m; path = Pod/Classes/SEGBugsnagIntegration.m; sourceTree = "<group>"; };
-		D54D5C29A36DD98808FDA43D34927AC2 /* BSG_KSString.c */ = {isa = PBXFileReference; includeInIndex = 1; name = BSG_KSString.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSString.c; sourceTree = "<group>"; };
+		D54D5C29A36DD98808FDA43D34927AC2 /* BSG_KSString.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = BSG_KSString.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSString.c; sourceTree = "<group>"; };
 		D7BC8FAA05D335DB97AE81D804C7A476 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D7BF10B4D4065F9F0A4C8203AF3CA68D /* BugsnagHandledState.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BugsnagHandledState.h; path = Source/BugsnagHandledState.h; sourceTree = "<group>"; };
-		D7E3CD5448FF5BEC71A3C9207AEE5FC9 /* BSG_KSSysCtl.c */ = {isa = PBXFileReference; includeInIndex = 1; name = BSG_KSSysCtl.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSSysCtl.c; sourceTree = "<group>"; };
+		D7E3CD5448FF5BEC71A3C9207AEE5FC9 /* BSG_KSSysCtl.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = BSG_KSSysCtl.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSSysCtl.c; sourceTree = "<group>"; };
 		D84A8E58B4E6640231B33B811F6FF0ED /* BSG_KSCrashC.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BSG_KSCrashC.h; path = Source/KSCrash/Source/KSCrash/Recording/BSG_KSCrashC.h; sourceTree = "<group>"; };
 		D8D64A948998453B8F2BCA9469338B10 /* BSG_KSCrashCallCompletion.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BSG_KSCrashCallCompletion.m; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSCrashCallCompletion.m; sourceTree = "<group>"; };
 		D982D1FB977936A0807E9B4D65A1D0FE /* AppleSystemLogDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppleSystemLogDestination.swift; path = Sources/XCGLogger/Destinations/AppleSystemLogDestination.swift; sourceTree = "<group>"; };
@@ -661,7 +661,7 @@
 		E16F81E47EA505DE3D8488B4D1BFD013 /* Bugsnag-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Bugsnag-umbrella.h"; sourceTree = "<group>"; };
 		E2071839ECCDD179B08C21938A687FE4 /* Pods-f4s-workexperienceTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-f4s-workexperienceTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		E2296F3DB79E1F562679F1859F2B005B /* Pods-f4s-workexperience.debugf4slive.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-f4s-workexperience.debugf4slive.xcconfig"; sourceTree = "<group>"; };
-		E41545D16E1412B94DE8692E47FFCA32 /* Pods_f4s_workexperience.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_f4s_workexperience.framework; path = "Pods-f4s-workexperience.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E41545D16E1412B94DE8692E47FFCA32 /* Pods_f4s_workexperience.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_f4s_workexperience.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E464B1881C69EB320FE40ECF374C57E9 /* SEGTrackPayload.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SEGTrackPayload.h; path = Analytics/Classes/Integrations/SEGTrackPayload.h; sourceTree = "<group>"; };
 		E4F53A05C1218521AE86D7263C817E93 /* URL+XCGAdditions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URL+XCGAdditions.swift"; path = "Sources/XCGLogger/Extensions/URL+XCGAdditions.swift"; sourceTree = "<group>"; };
 		E5F61038AD29862C5B6DB6D666B37A9E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -683,7 +683,7 @@
 		EF0F091BA1025A925379DB269144B273 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF7D1457E7CE30A1B9095D72873721F6 /* SEGScreenPayload.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SEGScreenPayload.m; path = Analytics/Classes/Integrations/SEGScreenPayload.m; sourceTree = "<group>"; };
 		F0361CAE38AA51CB1889DB5553C2BC4D /* SQLite.swift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SQLite.swift-prefix.pch"; sourceTree = "<group>"; };
-		F0E2BDA99321083395D9FB93E84889FF /* BSG_KSSignalInfo.c */ = {isa = PBXFileReference; includeInIndex = 1; name = BSG_KSSignalInfo.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSSignalInfo.c; sourceTree = "<group>"; };
+		F0E2BDA99321083395D9FB93E84889FF /* BSG_KSSignalInfo.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = BSG_KSSignalInfo.c; path = Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSSignalInfo.c; sourceTree = "<group>"; };
 		F113851209B076B3DFD204D67287C821 /* BugsnagSession.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BugsnagSession.h; path = Source/BugsnagSession.h; sourceTree = "<group>"; };
 		F1630C54896F54A0BBB96B643BB37B17 /* BSGConnectivity.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BSGConnectivity.m; path = Source/BSGConnectivity.m; sourceTree = "<group>"; };
 		F1C25291404071804B24ABE42B2834EA /* BugsnagBreadcrumb.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BugsnagBreadcrumb.h; path = Source/BugsnagBreadcrumb.h; sourceTree = "<group>"; };
@@ -844,7 +844,6 @@
 				B728BCD2906469086C7D0F9561A8194F /* Reachability.swift */,
 				B5E8A7A88BD03493965CC0C157AD50F6 /* Support Files */,
 			);
-			name = ReachabilitySwift;
 			path = ReachabilitySwift;
 			sourceTree = "<group>";
 		};
@@ -863,7 +862,6 @@
 				6CABE2465154D22228DC18292D37C64D /* standard */,
 				0F3EC6F70B5F91EE78FDBC9C63D74EB8 /* Support Files */,
 			);
-			name = SQLite.swift;
 			path = SQLite.swift;
 			sourceTree = "<group>";
 		};
@@ -901,7 +899,6 @@
 				A8E9D919658BD6D7B4FA3F2F9597CDBC /* ObjcExceptionBridging */,
 				2EA9E8436DE3F6D872016CDBB42CA1A9 /* Support Files */,
 			);
-			name = ObjcExceptionBridging;
 			path = ObjcExceptionBridging;
 			sourceTree = "<group>";
 		};
@@ -1017,7 +1014,6 @@
 				15AF4BD77DE29C481A169B535A0ADE89 /* Base */,
 				89ED4324B34EDFA305AC036ED646116D /* Maps */,
 			);
-			name = GoogleMaps;
 			path = GoogleMaps;
 			sourceTree = "<group>";
 		};
@@ -1041,7 +1037,6 @@
 				FF6116EB607CD97F2D2BEA2770FC4A7D /* Frameworks */,
 				601D1142F9351853A94C750A05E86279 /* Resources */,
 			);
-			name = GooglePlaces;
 			path = GooglePlaces;
 			sourceTree = "<group>";
 		};
@@ -1073,7 +1068,6 @@
 				793B3433DC0D242B4938EB4B64427359 /* TegKeychainConstants.swift */,
 				126813039E3C8A5496A30FAB1D6111EC /* Support Files */,
 			);
-			name = KeychainSwift;
 			path = KeychainSwift;
 			sourceTree = "<group>";
 		};
@@ -1109,7 +1103,6 @@
 				A756E283D2D98CDB7D01A8986B2DFAA2 /* SEGBugsnagIntegrationFactory.m */,
 				4D5310680CB54791EE563A491F566A97 /* Support Files */,
 			);
-			name = "Segment-Bugsnag";
 			path = "Segment-Bugsnag";
 			sourceTree = "<group>";
 		};
@@ -1157,7 +1150,6 @@
 				FBC292C7CEE404E756A144511C464609 /* Core */,
 				55504018DCFEF16E7AE0C1A96EBE1270 /* Support Files */,
 			);
-			name = XCGLogger;
 			path = XCGLogger;
 			sourceTree = "<group>";
 		};
@@ -1309,7 +1301,6 @@
 				568831D603A1D54D3EF53ABB1B6234F6 /* Private.h */,
 				71464BE9316505EA4171990E5E89497A /* Support Files */,
 			);
-			name = Bugsnag;
 			path = Bugsnag;
 			sourceTree = "<group>";
 		};
@@ -1442,7 +1433,6 @@
 				58C444537A5C83A7816FE9CB494B67ED /* UIViewController+SEGScreen.m */,
 				25D34C926605ECB8A0E1432CB2C14326 /* Support Files */,
 			);
-			name = Analytics;
 			path = Analytics;
 			sourceTree = "<group>";
 		};
@@ -1842,14 +1832,15 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1100;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
 			productRefGroup = C59D0F16F5A4961AF92D6BE7A2E9BCF7 /* Products */;
@@ -2998,6 +2989,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -3049,8 +3041,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -3286,6 +3277,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -3320,6 +3312,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -3335,10 +3328,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -3446,6 +3439,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -3497,8 +3491,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -3966,6 +3959,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -4000,6 +3994,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -4015,10 +4010,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -4225,6 +4220,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -4326,6 +4322,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -4377,8 +4374,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};
