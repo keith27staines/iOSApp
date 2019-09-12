@@ -91,19 +91,19 @@ EOM
       ;;
   esac
 }
-if [[ "$CONFIGURATION" == "DebugF4SLive" ]]; then
-  install_resource "${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle"
-  install_resource "${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle"
-fi
 if [[ "$CONFIGURATION" == "DebugF4S" ]]; then
   install_resource "${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle"
   install_resource "${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle"
 fi
-if [[ "$CONFIGURATION" == "ReleaseF4SLive" ]]; then
+if [[ "$CONFIGURATION" == "DebugF4SLive" ]]; then
   install_resource "${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle"
   install_resource "${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle"
 fi
 if [[ "$CONFIGURATION" == "ReleaseF4S" ]]; then
+  install_resource "${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle"
+  install_resource "${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle"
+fi
+if [[ "$CONFIGURATION" == "ReleaseF4SLive" ]]; then
   install_resource "${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle"
   install_resource "${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle"
 fi

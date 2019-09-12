@@ -27,7 +27,7 @@ public struct F4SAnalyticsEvent {
         properties[name] = value
     }
     public func track() {
-        SEGAnalytics.shared().track(name.rawValue, properties: properties)
+        SEGAnalytics.shared()?.track(name.rawValue, properties: properties)
     }
 }
 

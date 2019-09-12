@@ -1,13 +1,13 @@
 PODS:
-  - Analytics (3.6.10)
-  - Bugsnag (5.22.1)
-  - GoogleMaps (3.1.0):
-    - GoogleMaps/Maps (= 3.1.0)
-  - GoogleMaps/Base (3.1.0)
-  - GoogleMaps/Maps (3.1.0):
+  - Analytics (3.7.0)
+  - Bugsnag (5.22.5)
+  - GoogleMaps (3.4.0):
+    - GoogleMaps/Maps (= 3.4.0)
+  - GoogleMaps/Base (3.4.0)
+  - GoogleMaps/Maps (3.4.0):
     - GoogleMaps/Base
-  - GooglePlaces (3.1.0):
-    - GoogleMaps/Base (= 3.1.0)
+  - GooglePlaces (3.4.0):
+    - GoogleMaps/Base (= 3.4.0)
   - KeychainSwift (16.0.1)
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
@@ -16,9 +16,9 @@ PODS:
   - Segment-Bugsnag (1.0.3):
     - Analytics (~> 3.0)
     - Bugsnag (~> 5.0)
-  - SQLite.swift (0.12.0):
-    - SQLite.swift/standard (= 0.12.0)
-  - SQLite.swift/standard (0.12.0)
+  - SQLite.swift (0.12.2):
+    - SQLite.swift/standard (= 0.12.2)
+  - SQLite.swift/standard (0.12.2)
   - XCGLogger (7.0.0):
     - XCGLogger/Core (= 7.0.0)
   - XCGLogger/Core (7.0.0):
@@ -48,17 +48,17 @@ SPEC REPOS:
     - XCGLogger
 
 SPEC CHECKSUMS:
-  Analytics: 63744ad4afa65c3bcdcdb7a94b62515bde5b3900
-  Bugsnag: 699634c49b03f3fdf04a8ad6ab6470e9bcc3834b
-  GoogleMaps: 5c13302e6fe6bb6e686b267196586b91cd594225
-  GooglePlaces: e874db179f2675c4f3eeda0b686b540273a578b0
+  Analytics: 77fd5fb102a4a5eedafa2c2b0245ceb7b7c15e45
+  Bugsnag: 60e887aa63a5a842fc77f7b1e7c1310800f5b4e1
+  GoogleMaps: 67f4a604f80dd6a22d09c2a507a3a395b9f23060
+  GooglePlaces: 7547289e3fffc8980f4a027be99888e29d59b15d
   KeychainSwift: 4209611373ca4a098e09b1e547eebd87c544dcc4
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
   Segment-Bugsnag: 9ee9635d7a5e1058a09b3e5766f69670095fbc01
-  SQLite.swift: 7cad9db150a03716336e69469ec9559c85aece5b
+  SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   XCGLogger: 0434f15e3909cdc450bb63faf638b8792ab782ab
 
-PODFILE CHECKSUM: 74204e867dda763144b6140ae316855135bf25d2
+PODFILE CHECKSUM: a986c56441cce079b5385449f8ded5ccf219291e
 
 COCOAPODS: 1.5.3

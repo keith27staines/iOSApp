@@ -35,7 +35,7 @@ public class F4SLog : F4SAnalyticsAndDebugging {
             config.use(bugsnagIntegrationFactory)
         }
         SEGAnalytics.setup(with: config)
-        analytics = SEGAnalytics.shared()
+        analytics = SEGAnalytics.shared()!
         
         do {
             f4sDebug = try F4SDebug()

@@ -142,16 +142,6 @@ strip_invalid_archs() {
 }
 
 
-if [[ "$CONFIGURATION" == "DebugF4SLive" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/Analytics/Analytics.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Bugsnag/Bugsnag.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Segment-Bugsnag/Segment_Bugsnag.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework"
-fi
 if [[ "$CONFIGURATION" == "DebugF4S" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Analytics/Analytics.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Bugsnag/Bugsnag.framework"
@@ -162,7 +152,7 @@ if [[ "$CONFIGURATION" == "DebugF4S" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Segment-Bugsnag/Segment_Bugsnag.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework"
 fi
-if [[ "$CONFIGURATION" == "ReleaseF4SLive" ]]; then
+if [[ "$CONFIGURATION" == "DebugF4SLive" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Analytics/Analytics.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Bugsnag/Bugsnag.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework"
@@ -173,6 +163,16 @@ if [[ "$CONFIGURATION" == "ReleaseF4SLive" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework"
 fi
 if [[ "$CONFIGURATION" == "ReleaseF4S" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/Analytics/Analytics.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Bugsnag/Bugsnag.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Segment-Bugsnag/Segment_Bugsnag.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework"
+fi
+if [[ "$CONFIGURATION" == "ReleaseF4SLive" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Analytics/Analytics.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Bugsnag/Bugsnag.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework"
