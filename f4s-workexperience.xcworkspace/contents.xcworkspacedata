@@ -2,6 +2,15 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:WorkfinderRecommendations/WorkfinderRecommendations.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:WorkfinderMessagesUseCase/WorkfinderMessagesUseCase.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:WorkfinderFavouritesUseCase/WorkfinderFavouritesUseCase.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:WorkfinderDocumentUploadUseCase/WorkfinderDocumentUploadUseCase.xcodeproj">
    </FileRef>
    <FileRef

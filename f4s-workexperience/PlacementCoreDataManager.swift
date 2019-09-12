@@ -23,10 +23,6 @@ class PlacementCoreDataManager: CoreDataBaseManager {
         save()
     }
 
-    func getPlacementsForUser(userUuid: String) -> [PlacementDB] {
-        return PlacementDB.getPlacementsForUser(managedObjectContext,  userUuid: userUuid)
-    }
-
     func getPlacementForCompany(companyUuid: String) -> PlacementDB? {
         return PlacementDB.getPlacementForCompany(managedObjectContext, companyUuid: companyUuid)
     }
@@ -35,7 +31,7 @@ class PlacementCoreDataManager: CoreDataBaseManager {
         return PlacementDB.getAllPlacements(managedObjectContext)
     }
 
-    func getPlacementForUserAndPlacementUuid(userUuid: String, placementUuid: String) -> PlacementDB? {
-        return PlacementDB.getPlacementsWithUuid(managedObjectContext,  userUuid: userUuid, placementUuid: placementUuid)
+    func getPlacement(placementUuid: String) -> PlacementDB? {
+        return PlacementDB.getPlacement(managedObjectContext, placementUuid: placementUuid)
     }
 }

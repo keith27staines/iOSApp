@@ -3,10 +3,7 @@ import WorkfinderCommon
 import WorkfinderServices
 import WorkfinderUI
 import WorkfinderCoordinators
-
-protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol {
-    var shouldAskOperatingSystemToAllowLocation: Bool { get set }
-}
+import WorkfinderFavouritesUseCase
 
 class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoordinatorProtocol {
     var injected: CoreInjectionProtocol

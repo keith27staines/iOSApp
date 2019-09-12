@@ -86,26 +86,26 @@ extension FavouriteViewController {
 extension FavouriteViewController {
     
     func loadData() {
-        favouriteList = ShortlistDBOperations.sharedInstance.getShortlistForCurrentUser()
-        favouriteList.sort(by: { $0.date > $1.date })
-        placementList = PlacementDBOperations.sharedInstance.getPlacementsForCurrentUser()
-        let companyUuids = favouriteList.map({ $0.companyUuid })
-        getCompaniesWithUuids(uuid: companyUuids)
+//        favouriteList = ShortlistDBOperations.sharedInstance.getShortlistForCurrentUser()
+//        favouriteList.sort(by: { $0.date > $1.date })
+//        placementList = PlacementDBOperations.sharedInstance.getPl
+//        let companyUuids = favouriteList.map({ $0.companyUuid })
+//        getCompaniesWithUuids(uuid: companyUuids)
     }
     
     func getCompaniesWithUuids(uuid: [String?]) {
         guard let comapaniesUuid = uuid as? [String] else {
             return
         }
-        
-        DatabaseOperations.sharedInstance.getCompanies(withUuid: comapaniesUuid, completed: {
-            [weak self]
-            companies in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.companies = companies
-        })
+//
+//        DatabaseOperations.sharedInstance.getCompanies(withUuid: comapaniesUuid, completed: {
+//            [weak self]
+//            companies in
+//            guard let strongSelf = self else {
+//                return
+//            }
+//            strongSelf.companies = companies
+//        })
     }
 }
 
@@ -172,7 +172,7 @@ extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
-        let text = NSLocalizedString("You can favourite a maximum of \(AppConstants.maximumNumberOfShortlists) companies.", comment: "")
+        let text = NSLocalizedString("You can favourite a maximum of \(__maximumNumberOfFavourites) companies.", comment: "")
         label.attributedText = NSAttributedString(
             string: text,
             attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.mediumTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.pinkishGrey)])
@@ -184,6 +184,6 @@ extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - user interaction
 extension FavouriteViewController {
     @objc func menuButtonTapped() {
-        TabBarCoordinator.sharedInstance.toggleMenu()
+        (parent as? TabBarCoordinatorProtocol)?.toggleMenu(completion: nil)
     }
 }

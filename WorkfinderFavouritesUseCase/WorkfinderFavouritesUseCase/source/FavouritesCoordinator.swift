@@ -11,15 +11,18 @@ import WorkfinderCommon
 import WorkfinderCoordinators
 import WorkfinderCompanyDetailsUseCase
 
-class FavouritesCoordinator : CoreInjectionNavigationCoordinator {
+let __bundle = Bundle(identifier: "com.f4s.WorkfinderFavouritesUseCase")
+let __maximumNumberOfFavourites = 20
+
+public class FavouritesCoordinator : CoreInjectionNavigationCoordinator {
     
     lazy var rootViewController: FavouriteViewController = {
-        let storyboard = UIStoryboard(name: "Favourite", bundle: nil)
+        let storyboard = UIStoryboard(name: "Favourite", bundle: __bundle)
         return storyboard.instantiateViewController(withIdentifier: "FavouriteViewCtrl") as! FavouriteViewController
     }()
     
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
-    init(parent: Coordinating?,
+    public init(parent: CompanyCoordinatorParentProtocol?,
          navigationRouter: NavigationRoutingProtocol,
          inject: CoreInjectionProtocol,
          companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol) {
@@ -27,7 +30,7 @@ class FavouritesCoordinator : CoreInjectionNavigationCoordinator {
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
-    override func start() {
+    public override func start() {
         rootViewController.coordinator = self
         navigationRouter.navigationController.pushViewController(rootViewController, animated: false)
     }
@@ -41,5 +44,15 @@ class FavouritesCoordinator : CoreInjectionNavigationCoordinator {
         let companyCoordinator = companyCoordinatorFactory.makeCompanyCoordinator(parent: self, navigationRouter: navigationRouter, company: company, inject: injected)
         addChildCoordinator(companyCoordinator)
         companyCoordinator.start()
+    }
+}
+
+extension FavouritesCoordinator: CompanyCoordinatorParentProtocol {
+    public func showMessages() {
+        (parentCoordinator as? CompanyCoordinatorParentProtocol)?.showMessages()
+    }
+    
+    public func showSearch() {
+        (parentCoordinator as? CompanyCoordinatorParentProtocol)?.showSearch()
     }
 }

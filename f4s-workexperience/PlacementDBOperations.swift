@@ -23,12 +23,9 @@ class PlacementDBOperations {
         }
         PlacementCoreDataManager.sharedInstance.savePlacementToContext(placement, userUuid: userUuid)
     }
-
-    func getPlacementsForCurrentUser() -> [F4SPlacement] {
-        guard let userUuid = F4SUser().uuid else {
-            return []
-        }
-        let placementDBData = PlacementCoreDataManager.sharedInstance.getPlacementsForUser(userUuid: userUuid)
+    
+    func getAllPlacements() -> [F4SPlacement] {
+        let placementDBData = PlacementCoreDataManager.sharedInstance.getAllPlacements()
         var placements: [F4SPlacement] = []
         for placementDB in placementDBData {
             let placement = PlacementDBOperations.sharedInstance.getPlacementFromPlacementDB(placementDB: placementDB)
@@ -44,19 +41,9 @@ class PlacementDBOperations {
         return PlacementDBOperations.sharedInstance.getPlacementFromPlacementDB(placementDB: placementDB)
     }
 
-    func getAllPlacements() -> [F4SPlacement] {
-        let placementDBData = PlacementCoreDataManager.sharedInstance.getAllPlacements()
-        var placements: [F4SPlacement] = []
-        for placementDB in placementDBData {
-            let placement = PlacementDBOperations.sharedInstance.getPlacementFromPlacementDB(placementDB: placementDB)
-            placements.append(placement)
-        }
-        return placements
-    }
-
     func getPlacementWithUuid(placementUuid: String) -> F4SPlacement? {
-        guard let userUuid = F4SUser().uuid,
-            let placementDB = PlacementCoreDataManager.sharedInstance.getPlacementForUserAndPlacementUuid(userUuid: userUuid, placementUuid: placementUuid) else {
+        guard
+            let placementDB = PlacementCoreDataManager.sharedInstance.getPlacement(placementUuid: placementUuid) else {
             return nil
         }
         return PlacementDBOperations.sharedInstance.getPlacementFromPlacementDB(placementDB: placementDB)

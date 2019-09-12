@@ -7,6 +7,10 @@ public class F4SPlacementRespository : F4SPlacementRepositoryProtocol {
         PlacementDBOperations.sharedInstance.savePlacement(placement: placement)
     }
     
+    public func load() -> [F4SPlacement] {
+        return PlacementDBOperations.sharedInstance.getAllPlacements()
+    }
+    
 }
 
 public class F4SCompanyRepository : F4SCompanyRepositoryProtocol {

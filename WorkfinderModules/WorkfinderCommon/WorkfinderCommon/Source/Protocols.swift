@@ -1,5 +1,10 @@
 import Foundation
 
+public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol {
+    func toggleMenu(completion: ((Bool) -> ())?)
+    var shouldAskOperatingSystemToAllowLocation: Bool { get set }
+}
+
 public protocol CompanyFavouritingServiceProtocol {
     var apiName: String { get }
     func favourite(companyUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SShortlistJson>) -> Void)
