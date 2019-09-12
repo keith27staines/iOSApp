@@ -149,6 +149,7 @@ extension CompanyViewController : CompanyMainViewDelegate {
         case .allowed:
             return
         case .deniedAlreadyApplied:
+            
             break
         }
         action = UIAlertAction(title: buttonTitle, style: UIAlertAction.Style.cancel, handler: handler)

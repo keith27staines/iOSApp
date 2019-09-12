@@ -84,7 +84,6 @@ class CompanyViewModel : NSObject {
     weak var coordinatingDelegate: CompanyViewModelCoordinatingDelegate?
     weak var viewModelDelegate: CompanyViewModelDelegate?
     let favouritingModel: CompanyFavouritesModel
-//    lazy var placement = PlacementDBOperations.sharedInstance.getPlacementForCompany(companyUuid: company.uuid)
     var addToshortlistService: CompanyFavouritingServiceProtocol?
     private (set) var company: Company
     var companyViewData: CompanyViewData
@@ -211,8 +210,6 @@ class CompanyViewModel : NSObject {
                 completion(.allowed)
             case .success(false):
                 strongSelf.viewModelDelegate?.companyViewModelDidCompleteLoadingTask(strongSelf)
-                strongSelf.coordinatingDelegate?.companyViewModel(strongSelf, applyTo: strongSelf.companyViewData, continueFrom: nil)
-                completion(.allowed)
                 strongSelf.viewModelDelegate?.companyViewModelDidCompleteLoadingTask(strongSelf)
                 completion(.deniedAlreadyApplied)
             }

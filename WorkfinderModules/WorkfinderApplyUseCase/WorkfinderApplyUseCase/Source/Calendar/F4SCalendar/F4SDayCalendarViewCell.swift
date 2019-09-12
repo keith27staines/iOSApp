@@ -262,7 +262,7 @@ public class F4SCalendarMonthViewDayCell: UICollectionViewCell {
         terminalView.addSubview(dateLabel)
         terminalView.centerXAnchor.constraint(equalTo: dateLabel.centerXAnchor).isActive = true
         terminalView.centerYAnchor.constraint(equalTo: dateLabel.centerYAnchor).isActive = true
-        dateLabel.heightAnchor.constraint(equalTo: dateLabel.widthAnchor, multiplier: 1.0)
+        dateLabel.heightAnchor.constraint(equalTo: dateLabel.widthAnchor, multiplier: 1.0).isActive = true
         terminalView.leftAnchor.constraint(lessThanOrEqualTo: dateLabel.leftAnchor).isActive = true
         terminalView.topAnchor.constraint(lessThanOrEqualTo: dateLabel.topAnchor).isActive = true
         dateLabel.textAlignment = .center

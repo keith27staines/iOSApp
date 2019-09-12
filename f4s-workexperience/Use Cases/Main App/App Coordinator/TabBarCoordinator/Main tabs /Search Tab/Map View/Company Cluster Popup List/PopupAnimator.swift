@@ -30,7 +30,7 @@ class PopupAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
         let containerView = transitionContext.containerView
-        let toView = transitionContext.view(forKey: .to)!
+        guard let toView = transitionContext.view(forKey: .to) else { return }
         let popupFrame = presenting ? toView : transitionContext.view(forKey: .from)!
         
         let initialFrame = presenting ? originFrame : popupFrame.frame

@@ -51,10 +51,8 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
 
 extension CompanyCoordinator : ApplyCoordinatorDelegate {
     public func applicationDidFinish(preferredDestination: ApplyCoordinator.PreferredDestinationAfterApplication) {
-        cleanup()
-        navigationRouter.pop(animated: true)
-        parentCoordinator?.childCoordinatorDidFinish(self)
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
+            guard let strongSelf = self else { return }
             switch preferredDestination {
             case .messages:
                 self?.finishDespatcher?.showMessages()
@@ -63,6 +61,9 @@ extension CompanyCoordinator : ApplyCoordinatorDelegate {
             case .none:
                 break
             }
+            strongSelf.cleanup()
+            strongSelf.navigationRouter.pop(animated: true)
+            strongSelf.parentCoordinator?.childCoordinatorDidFinish(strongSelf)
         }
     }
     public func applicationDidCancel() {

@@ -39,7 +39,6 @@ extension ChooseAttributesViewController {
         setupTableView()
         attributesTableView.backgroundColor = UIColor.clear
         self.view.backgroundColor = UIColor(netHex: Colors.lightGray)
-        self.automaticallyAdjustsScrollViewInsets = false
         setupNavigationBar()
     }
 
