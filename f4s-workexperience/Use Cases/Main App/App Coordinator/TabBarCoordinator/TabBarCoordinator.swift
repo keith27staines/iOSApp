@@ -191,7 +191,16 @@ class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoor
         let icon = UIImage(named: "heartOutline")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         navigationController.tabBarItem = UITabBarItem(title: "Favourites", image: icon, selectedImage: nil)
         let router = NavigationRouter(navigationController: navigationController)
-        let coordinator = FavouritesCoordinator(parent: nil, navigationRouter: router, inject: injected, companyCoordinatorFactory: companyCoordinatorFactory)
+        let placementRepository = F4SPlacementRespository()
+        let favouritesRepository = F4SFavouritesRepository()
+        let companyRepository = F4SCompanyRepository()
+        let coordinator = FavouritesCoordinator(parent: self,
+                                                navigationRouter: router,
+                                                inject: injected,
+                                                companyCoordinatorFactory: companyCoordinatorFactory,
+                                                placementsRepository: placementRepository,
+                                                favouritesRepository: favouritesRepository,
+                                                companyRepository: companyRepository)
         addChildCoordinator(coordinator)
         return coordinator
     }()

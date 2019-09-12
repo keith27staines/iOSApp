@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol FavouritesRepositoryProtocol {
+public protocol F4SFavouritesRepositoryProtocol {
     func loadFavourites() -> [Shortlist]
     func removeFavourite(uuid: F4SUUID)
     func addFavourite(_ item: Shortlist)

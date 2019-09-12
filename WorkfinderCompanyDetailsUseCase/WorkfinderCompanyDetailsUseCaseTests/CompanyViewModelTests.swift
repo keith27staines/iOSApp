@@ -49,7 +49,7 @@ class CompanyViewModelTests: XCTestCase {
     
 }
 
-class MockFavouritingRepository: FavouritesRepositoryProtocol {
+class MockFavouritingRepository: F4SFavouritesRepositoryProtocol {
     var favourites = [F4SUUID: Shortlist]()
     
     func loadFavourites() -> [Shortlist] {

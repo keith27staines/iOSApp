@@ -16,26 +16,39 @@ let __maximumNumberOfFavourites = 20
 
 public class FavouritesCoordinator : CoreInjectionNavigationCoordinator {
     
+    var company: Company?
+    let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
+    let placementsRepository: F4SPlacementRepositoryProtocol!
+    let favouritesRepository: F4SFavouritesRepositoryProtocol!
+    let companyRepository: F4SCompanyRepositoryProtocol!
+    
     lazy var rootViewController: FavouriteViewController = {
         let storyboard = UIStoryboard(name: "Favourite", bundle: __bundle)
         return storyboard.instantiateViewController(withIdentifier: "FavouriteViewCtrl") as! FavouriteViewController
     }()
     
-    let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
+    
     public init(parent: CompanyCoordinatorParentProtocol?,
          navigationRouter: NavigationRoutingProtocol,
          inject: CoreInjectionProtocol,
-         companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol) {
+         companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
+         placementsRepository: F4SPlacementRepositoryProtocol,
+         favouritesRepository: F4SFavouritesRepositoryProtocol,
+         companyRepository: F4SCompanyRepositoryProtocol) {
         self.companyCoordinatorFactory = companyCoordinatorFactory
+        self.placementsRepository = placementsRepository
+        self.favouritesRepository = favouritesRepository
+        self.companyRepository = companyRepository
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
     public override func start() {
         rootViewController.coordinator = self
+        rootViewController.placementsRepository = placementsRepository
+        rootViewController.favouritesRepository = favouritesRepository
+        rootViewController.companyRepository = companyRepository
         navigationRouter.navigationController.pushViewController(rootViewController, animated: false)
     }
-    
-    var company: Company?
     
     func showDetail(company: Company?) {
         self.company = company

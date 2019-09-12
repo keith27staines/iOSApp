@@ -12,6 +12,12 @@ import WorkfinderCommon
 @testable import f4s_workexperience
 
 class MockTabBarCoordinator : MockCoreInjectionNavigationCoordinator, TabBarCoordinatorProtocol {
+    var menuOpen: Bool = false
+    func toggleMenu(completion: ((Bool) -> ())?) {
+        menuOpen.toggle()
+        completion?(menuOpen)
+    }
+    
     var shouldAskOperatingSystemToAllowLocation: Bool = false
     required init(parent: Coordinating?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol) {
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)

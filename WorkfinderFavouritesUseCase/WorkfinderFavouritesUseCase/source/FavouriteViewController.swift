@@ -20,6 +20,10 @@ class FavouriteViewController: UIViewController {
     @IBOutlet weak var noFavouritesTitleLabel: UILabel!
     @IBOutlet weak var noFavouritesMessageLabel: UILabel!
     
+    var placementsRepository: F4SPlacementRepositoryProtocol!
+    var favouritesRepository: F4SFavouritesRepositoryProtocol!
+    var companyRepository: F4SCompanyRepositoryProtocol!
+    
     var favouriteList: [Shortlist] = [] {
         didSet {
             if favouriteList.count == 0 {
@@ -86,26 +90,23 @@ extension FavouriteViewController {
 extension FavouriteViewController {
     
     func loadData() {
-//        favouriteList = ShortlistDBOperations.sharedInstance.getShortlistForCurrentUser()
-//        favouriteList.sort(by: { $0.date > $1.date })
-//        placementList = PlacementDBOperations.sharedInstance.getPl
-//        let companyUuids = favouriteList.map({ $0.companyUuid })
-//        getCompaniesWithUuids(uuid: companyUuids)
+        favouriteList = favouritesRepository.loadFavourites()
+        favouriteList.sort(by: { $0.date > $1.date })
+        placementList = placementsRepository.load()
+        let companyUuids = favouriteList.map({ $0.companyUuid })
+        getCompaniesWithUuids(uuid: companyUuids)
     }
     
     func getCompaniesWithUuids(uuid: [String?]) {
-        guard let comapaniesUuid = uuid as? [String] else {
+        guard let comapanyUuids = uuid as? [String] else {
             return
         }
-//
-//        DatabaseOperations.sharedInstance.getCompanies(withUuid: comapaniesUuid, completed: {
-//            [weak self]
-//            companies in
-//            guard let strongSelf = self else {
-//                return
-//            }
-//            strongSelf.companies = companies
-//        })
+        companyRepository.load(companyUuids: comapanyUuids) { [weak self] (companies) in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.companies = companies
+        }
     }
 }
 

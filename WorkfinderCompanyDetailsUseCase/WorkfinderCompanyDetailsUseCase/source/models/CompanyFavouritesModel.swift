@@ -18,12 +18,12 @@ public protocol CompanyFavouritesModelDelegate : class {
 public class CompanyFavouritesModel {
     let service: CompanyFavouritingServiceProtocol
     weak var delegate: CompanyFavouritesModelDelegate?
-    var favouritesRepository: FavouritesRepositoryProtocol
+    var favouritesRepository: F4SFavouritesRepositoryProtocol
     var shortlist: [Shortlist] { return favouritesRepository.loadFavourites() }
     
     public init(
         favouritingService: CompanyFavouritingServiceProtocol,
-        favouritesRepository: FavouritesRepositoryProtocol) {
+        favouritesRepository: F4SFavouritesRepositoryProtocol) {
         self.service = favouritingService
         self.favouritesRepository = favouritesRepository
     }

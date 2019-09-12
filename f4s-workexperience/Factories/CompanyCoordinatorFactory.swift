@@ -25,7 +25,7 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
         let shareTemplateProvider = ShareTemplateProvider()
         let socialShareItemSource = SocialShareItemSource(company: company, shareTemplateProvider: shareTemplateProvider)
         let favouritingService = F4SCompanyFavouritingService()
-        let favouritesRepository = FavouritesRepository()
+        let favouritesRepository = F4SFavouritesRepository()
         let favouritesModel = CompanyFavouritesModel(favouritingService: favouritingService, favouritesRepository: favouritesRepository)
         return CompanyCoordinator(
             parent: parent,
@@ -36,20 +36,6 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
             interestsRepository: interestsRepository,
             socialShareItemSource: socialShareItemSource,
             favouritesModel: favouritesModel)
-    }
-}
-
-class FavouritesRepository: FavouritesRepositoryProtocol {
-    func loadFavourites() -> [Shortlist] {
-        return ShortlistDBOperations.sharedInstance.getShortlistForCurrentUser()
-    }
-    
-    func removeFavourite(uuid: F4SUUID) {
-        ShortlistDBOperations.sharedInstance.removeShortlistWithId(shortlistUuid: uuid)
-    }
-    
-    func addFavourite(_ item: Shortlist) {
-        ShortlistDBOperations.sharedInstance.saveShortlist(shortlist: item)
     }
 }
 

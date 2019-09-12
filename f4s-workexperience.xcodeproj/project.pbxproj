@@ -155,7 +155,7 @@
 		FC93DC4223201AA200F1CE23 /* WorkfinderUserDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DC4123201AA200F1CE23 /* WorkfinderUserDetailsUseCase.framework */; };
 		FC93DC5823202B8F00F1CE23 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC5723202B8F00F1CE23 /* Config.swift */; };
 		FC96709E2259F61600318F69 /* InterestsPruner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96709D2259F61600318F69 /* InterestsPruner.swift */; };
-		FC9670A1225A18D900318F69 /* PlacementRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9670A0225A18D900318F69 /* PlacementRepository.swift */; };
+		FC9670A1225A18D900318F69 /* Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9670A0225A18D900318F69 /* Repositories.swift */; };
 		FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99B7E21F826D1400E2D5F0 /* LatLon.swift */; };
 		FC99BDC820CFD8E400278DDE /* F4SDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */; };
 		FC99BDCA20D170CA00278DDE /* F4SDatabaseDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */; };
@@ -439,7 +439,7 @@
 		FC93DC4123201AA200F1CE23 /* WorkfinderUserDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUserDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC93DC5723202B8F00F1CE23 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		FC96709D2259F61600318F69 /* InterestsPruner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsPruner.swift; sourceTree = "<group>"; };
-		FC9670A0225A18D900318F69 /* PlacementRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacementRepository.swift; sourceTree = "<group>"; };
+		FC9670A0225A18D900318F69 /* Repositories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repositories.swift; sourceTree = "<group>"; };
 		FC99B7E21F826D1400E2D5F0 /* LatLon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LatLon.swift; path = ../WorkfinderModules/WorkfinderCommon/WorkfinderCommon/Source/LatLon.swift; sourceTree = "<group>"; };
 		FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDownloadService.swift; sourceTree = "<group>"; };
 		FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDatabaseDownloadManager.swift; sourceTree = "<group>"; };
@@ -1221,7 +1221,7 @@
 		FC96709F225A18B300318F69 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				FC9670A0225A18D900318F69 /* PlacementRepository.swift */,
+				FC9670A0225A18D900318F69 /* Repositories.swift */,
 			);
 			name = Repositories;
 			sourceTree = "<group>";
@@ -1718,7 +1718,7 @@
 				40E78E6F1DD32BD4000A3776 /* CustomMenuViewController.swift in Sources */,
 				40E78E7F1DD32BF4000A3776 /* SideDrawerSectionHeaderView.swift in Sources */,
 				FC96709E2259F61600318F69 /* InterestsPruner.swift in Sources */,
-				FC9670A1225A18D900318F69 /* PlacementRepository.swift in Sources */,
+				FC9670A1225A18D900318F69 /* Repositories.swift in Sources */,
 				FC21BE32220F53EB00A0A389 /* SearchDataSourcing.swift in Sources */,
 				40E78E831DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift in Sources */,
 				FC4BB6031FA20EF700173864 /* PartnerSelectionViewController.swift in Sources */,
@@ -1894,6 +1894,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1949,7 +1950,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "$(ARCHS_STANDARD)";
+				VALID_ARCHS = "arm64e arm64 arm7s arm7";
 			};
 			name = DebugF4SLive;
 		};
@@ -1988,6 +1989,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -2037,7 +2039,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "$(ARCHS_STANDARD)";
+				VALID_ARCHS = "arm64e arm64 arm7s arm7";
 			};
 			name = ReleaseF4SLive;
 		};
@@ -2076,6 +2078,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -2131,7 +2134,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "$(ARCHS_STANDARD)";
+				VALID_ARCHS = "arm64e arm64 arm7s arm7";
 			};
 			name = DebugF4S;
 		};
@@ -2170,6 +2173,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -2219,7 +2223,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "$(ARCHS_STANDARD)";
+				VALID_ARCHS = "arm64e arm64 arm7s arm7";
 			};
 			name = ReleaseF4S;
 		};
