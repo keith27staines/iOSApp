@@ -185,6 +185,6 @@ extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - user interaction
 extension FavouriteViewController {
     @objc func menuButtonTapped() {
-        (parent as? TabBarCoordinatorProtocol)?.toggleMenu(completion: nil)
+        coordinator?.toggleMenu()
     }
 }

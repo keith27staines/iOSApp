@@ -27,14 +27,16 @@ public class FavouritesCoordinator : CoreInjectionNavigationCoordinator {
         return storyboard.instantiateViewController(withIdentifier: "FavouriteViewCtrl") as! FavouriteViewController
     }()
     
+    weak var tabBarCoordinator: TabBarCoordinatorProtocol?
     
-    public init(parent: CompanyCoordinatorParentProtocol?,
+    public init(parent: TabBarCoordinatorProtocol,
          navigationRouter: NavigationRoutingProtocol,
          inject: CoreInjectionProtocol,
          companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
          placementsRepository: F4SPlacementRepositoryProtocol,
          favouritesRepository: F4SFavouritesRepositoryProtocol,
          companyRepository: F4SCompanyRepositoryProtocol) {
+        self.tabBarCoordinator = parent
         self.companyCoordinatorFactory = companyCoordinatorFactory
         self.placementsRepository = placementsRepository
         self.favouritesRepository = favouritesRepository
@@ -67,5 +69,11 @@ extension FavouritesCoordinator: CompanyCoordinatorParentProtocol {
     
     public func showSearch() {
         (parentCoordinator as? CompanyCoordinatorParentProtocol)?.showSearch()
+    }
+}
+
+extension FavouritesCoordinator {
+    func toggleMenu() {
+        tabBarCoordinator?.toggleMenu(completion: nil)
     }
 }
