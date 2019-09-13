@@ -1024,9 +1024,11 @@
 			isa = PBXGroup;
 			children = (
 				FCF798532227F5AB00D67A7D /* RecommendationsCoordinator.swift */,
+				FCD884F81FFBC0CC00F05B08 /* Recommendations.storyboard */,
+				FCD884FA1FFBE04F00F05B08 /* RecommendationsListViewController.swift */,
+				FC24D239226AF2BF00FA04A1 /* RecommendationsListMainView.swift */,
+				FC24D22E226AEB6B00FA04A1 /* RecommendedCompanyTableViewCell.swift */,
 				FC24D23B226AFB6600FA04A1 /* Model */,
-				FCD884F71FFBC0A000F05B08 /* View */,
-				FC24D236226AED9C00FA04A1 /* ViewModel */,
 			);
 			path = "Recommendation Tab";
 			sourceTree = "<group>";
@@ -1051,13 +1053,6 @@
 			path = "Timeline Tab";
 			sourceTree = "<group>";
 		};
-		FC24D233226AED4600FA04A1 /* Favourites Tab */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Favourites Tab";
-			sourceTree = "<group>";
-		};
 		FC24D235226AED5E00FA04A1 /* Search Tab */ = {
 			isa = PBXGroup;
 			children = (
@@ -1068,17 +1063,10 @@
 			path = "Search Tab";
 			sourceTree = "<group>";
 		};
-		FC24D236226AED9C00FA04A1 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				FC24D237226AEDD800FA04A1 /* RecommendationsListViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		FC24D23B226AFB6600FA04A1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FC24D237226AEDD800FA04A1 /* RecommendationsListViewModel.swift */,
 				FC0B407D226CAA6E00D992AC /* RecommendationCompanyConverter.swift */,
 				FC24D23C226AFC1800FA04A1 /* RecommendedCompaniesListModel.swift */,
 				FC0B407F226CAAEE00D992AC /* RecommendedCompaniesLocalRepository.swift */,
@@ -1272,7 +1260,6 @@
 				FC24D231226AED2B00FA04A1 /* Home Tab */,
 				FC24D232226AED3B00FA04A1 /* Timeline Tab */,
 				FC24D230226AED1A00FA04A1 /* Recommendation Tab */,
-				FC24D233226AED4600FA04A1 /* Favourites Tab */,
 				FC24D235226AED5E00FA04A1 /* Search Tab */,
 			);
 			path = "Main tabs ";
@@ -1305,18 +1292,6 @@
 				FCD3485E20038C3100DC1316 /* F4SAuth0MagicLinkInterpreterer.swift */,
 			);
 			path = "F4SEmailVerification models";
-			sourceTree = "<group>";
-		};
-		FCD884F71FFBC0A000F05B08 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				FCD884F81FFBC0CC00F05B08 /* Recommendations.storyboard */,
-				FCD884FA1FFBE04F00F05B08 /* RecommendationsListViewController.swift */,
-				FC24D239226AF2BF00FA04A1 /* RecommendationsListMainView.swift */,
-				FC24D22E226AEB6B00FA04A1 /* RecommendedCompanyTableViewCell.swift */,
-			);
-			name = View;
-			path = ../../../../../..;
 			sourceTree = "<group>";
 		};
 		FCE51E3C2210144E00DC1D50 /* DataGetters */ = {

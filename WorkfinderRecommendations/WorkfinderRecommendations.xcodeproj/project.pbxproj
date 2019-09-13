@@ -83,6 +83,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC0C6FC0232B750400816332 /* source */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
 		FCEF2262232A9FC1004914F7 = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +112,7 @@
 		FCEF226E232A9FC1004914F7 /* WorkfinderRecommendations */ = {
 			isa = PBXGroup;
 			children = (
+				FC0C6FC0232B750400816332 /* source */,
 				FCEF226F232A9FC1004914F7 /* WorkfinderRecommendations.h */,
 				FCEF2270232A9FC1004914F7 /* Info.plist */,
 			);
