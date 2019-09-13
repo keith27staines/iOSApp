@@ -49,7 +49,6 @@ class TabBarViewController: UITabBarController {
     
     func processUserStatusUpdate(_ status: F4SUserStatus) {
         configureTimelineTabBarWithCount(count: status.unreadMessageCount)
-        displayRatingPopover(unratedPlacements: status.unratedPlacements)
         let shouldLoadTimeline = status.unreadMessageCount > 0
         UserDefaults.standard.set(shouldLoadTimeline, forKey: UserDefaultsKeys.shouldLoadTimeline)
     }
@@ -63,20 +62,6 @@ class TabBarViewController: UITabBarController {
             } else {
                 tabBarItem.badgeValue = nil
             }
-        }
-    }
-    
-    func displayRatingPopover(unratedPlacements: [F4SUUID]) {
-        guard let placementUuid = unratedPlacements.first, let topViewCtrl = self.topMostViewController else { return }
-
-        if topViewCtrl is TimelineViewController || topViewCtrl is MessageViewController || topViewCtrl is MessageContainerViewController || topViewCtrl is MapViewController {
-            if let centerCtrl = self.evo_drawerController?.centerViewController as? TabBarViewController {
-                if let currentTabCtrl = centerCtrl.selectedViewController {
-                    TabBarCoordinator.sharedInstance.presentRatePlacementPopover(parentCtrl: currentTabCtrl, placementUuid: placementUuid, ratePlacementProtocol: self)
-                }
-            }
-        } else {
-            TabBarCoordinator.sharedInstance.presentRatePlacementPopover(parentCtrl: topViewCtrl, placementUuid: placementUuid, ratePlacementProtocol: self)
         }
     }
 

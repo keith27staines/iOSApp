@@ -6,6 +6,7 @@
 //  Copyright © 2017 freshbyte. All rights reserved.
 //
 import UIKit
+import WorkfinderUI
 
 class MessageOptionCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var answerLabel: OptionLabel!
@@ -16,7 +17,7 @@ class MessageOptionCollectionViewCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        guard let nibView = Bundle.main.loadNibNamed("MessageOptionCollectionViewCell", owner: self, options: nil)?[0] as? UICollectionViewCell else {
+        guard let nibView = __bundle.loadNibNamed("MessageOptionCollectionViewCell", owner: self, options: nil)?[0] as? UICollectionViewCell else {
             return
         }
         nibView.frame = self.bounds

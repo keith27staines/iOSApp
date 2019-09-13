@@ -89,7 +89,7 @@ class UNService : NSObject {
     func dispatchToBestDestination(notificationData: F4SPushNotificationData) {
         switch notificationData.type {
         case NotificationType.message:
-            TabBarCoordinator.sharedInstance.navigateToTimeline(threadUuid: notificationData.threadUuid)
+            TabBarCoordinator.sharedInstance.navigateToTimeline()
             
         case NotificationType.rating:
             break

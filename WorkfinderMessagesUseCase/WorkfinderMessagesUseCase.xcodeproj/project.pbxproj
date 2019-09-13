@@ -7,6 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC0C6FDD232B8F3B00816332 /* TimelineCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C6FDC232B8F3B00816332 /* TimelineCoordinator.swift */; };
+		FC0C6FDF232B8F6000816332 /* MessagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C6FDE232B8F6000816332 /* MessagesModel.swift */; };
+		FC0C6FE4232B8F8700816332 /* TimelineEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C6FE2232B8F8700816332 /* TimelineEntryTableViewCell.swift */; };
+		FC0C6FE5232B8F8700816332 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C6FE3232B8F8700816332 /* TimelineViewController.swift */; };
+		FC0C704F232B91B900816332 /* WorkfinderAcceptUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0C704E232B91B900816332 /* WorkfinderAcceptUseCase.framework */; };
+		FC0C7050232B91B900816332 /* WorkfinderAcceptUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC0C704E232B91B900816332 /* WorkfinderAcceptUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FC0C70E9232B9B3100816332 /* MessageOptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C70DC232B9B3100816332 /* MessageOptionCollectionViewCell.swift */; };
+		FC0C70EA232B9B3100816332 /* MessageOptionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC0C70DD232B9B3100816332 /* MessageOptionsView.xib */; };
+		FC0C70EB232B9B3100816332 /* StatusCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC0C70DF232B9B3100816332 /* StatusCollectionViewCell.xib */; };
+		FC0C70EC232B9B3100816332 /* Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC0C70E1232B9B3100816332 /* Message.storyboard */; };
+		FC0C70ED232B9B3100816332 /* MessageOptionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC0C70E3232B9B3100816332 /* MessageOptionCollectionViewCell.xib */; };
+		FC0C70EE232B9B3100816332 /* MessageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C70E5232B9B3100816332 /* MessageContainerViewController.swift */; };
+		FC0C70EF232B9B3100816332 /* MessageOptionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C70E6232B9B3100816332 /* MessageOptionHelper.swift */; };
+		FC0C70F0232B9B3100816332 /* StatusCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C70E7232B9B3100816332 /* StatusCollectionViewCell.swift */; };
+		FC0C70F1232B9B3100816332 /* MessageOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C70E8232B9B3100816332 /* MessageOptionsView.swift */; };
+		FC0C70F6232B9BCB00816332 /* MessageViewController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C70F5232B9BCB00816332 /* MessageViewController+UITableView.swift */; };
+		FC0C70F7232B9BCB00816332 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C70F4232B9BCB00816332 /* MessageViewController.swift */; };
+		FC0C70F8232B9BCB00816332 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C70F3232B9BCA00816332 /* MessageTableViewCell.swift */; };
+		FC0C7103232B9DFA00816332 /* F4SMessagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C7100232B9DF900816332 /* F4SMessagesModel.swift */; };
+		FC0C7105232B9DFA00816332 /* MessageDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C7102232B9DFA00816332 /* MessageDispatcher.swift */; };
+		FC0C7107232B9E4E00816332 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C7106232B9E4E00816332 /* extensions.swift */; };
+		FC0C710B232BA41300816332 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0C710A232BA41300816332 /* WorkfinderUI.framework */; };
+		FC0C710C232BA41300816332 /* WorkfinderUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC0C710A232BA41300816332 /* WorkfinderUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCEF2235232A9EB9004914F7 /* WorkfinderMessagesUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF222B232A9EB9004914F7 /* WorkfinderMessagesUseCase.framework */; };
 		FCEF223A232A9EB9004914F7 /* WorkfinderMessagesUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF2239232A9EB9004914F7 /* WorkfinderMessagesUseCaseTests.swift */; };
 		FCEF223C232A9EB9004914F7 /* WorkfinderMessagesUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = FCEF222E232A9EB9004914F7 /* WorkfinderMessagesUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -18,6 +41,7 @@
 		FCEF225B232A9F41004914F7 /* WorkfinderCoordinators.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2254232A9F41004914F7 /* WorkfinderCoordinators.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCEF225C232A9F41004914F7 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2255232A9F41004914F7 /* WorkfinderServices.framework */; };
 		FCEF225D232A9F41004914F7 /* WorkfinderServices.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2255232A9F41004914F7 /* WorkfinderServices.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FCF4B605232BBE46001340DF /* TimelineView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC0C6FE1232B8F8600816332 /* TimelineView.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +64,9 @@
 				FCEF2259232A9F41004914F7 /* WorkfinderCompanyDetailsUseCase.framework in Embed Frameworks */,
 				FCEF225B232A9F41004914F7 /* WorkfinderCoordinators.framework in Embed Frameworks */,
 				FCEF2257232A9F41004914F7 /* WorkfinderCommon.framework in Embed Frameworks */,
+				FC0C710C232BA41300816332 /* WorkfinderUI.framework in Embed Frameworks */,
 				FCEF225D232A9F41004914F7 /* WorkfinderServices.framework in Embed Frameworks */,
+				FC0C7050232B91B900816332 /* WorkfinderAcceptUseCase.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -48,6 +74,28 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		FC0C6FDC232B8F3B00816332 /* TimelineCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineCoordinator.swift; sourceTree = "<group>"; };
+		FC0C6FDE232B8F6000816332 /* MessagesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesModel.swift; sourceTree = "<group>"; };
+		FC0C6FE0232B8F8600816332 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TimelineView.storyboard; sourceTree = "<group>"; };
+		FC0C6FE2232B8F8700816332 /* TimelineEntryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineEntryTableViewCell.swift; sourceTree = "<group>"; };
+		FC0C6FE3232B8F8700816332 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
+		FC0C704E232B91B900816332 /* WorkfinderAcceptUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAcceptUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC0C70DC232B9B3100816332 /* MessageOptionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageOptionCollectionViewCell.swift; sourceTree = "<group>"; };
+		FC0C70DE232B9B3100816332 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MessageOptionsView.xib; sourceTree = "<group>"; };
+		FC0C70E0232B9B3100816332 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/StatusCollectionViewCell.xib; sourceTree = "<group>"; };
+		FC0C70E2232B9B3100816332 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Message.storyboard; sourceTree = "<group>"; };
+		FC0C70E4232B9B3100816332 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MessageOptionCollectionViewCell.xib; sourceTree = "<group>"; };
+		FC0C70E5232B9B3100816332 /* MessageContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageContainerViewController.swift; sourceTree = "<group>"; };
+		FC0C70E6232B9B3100816332 /* MessageOptionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageOptionHelper.swift; sourceTree = "<group>"; };
+		FC0C70E7232B9B3100816332 /* StatusCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusCollectionViewCell.swift; sourceTree = "<group>"; };
+		FC0C70E8232B9B3100816332 /* MessageOptionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageOptionsView.swift; sourceTree = "<group>"; };
+		FC0C70F3232B9BCA00816332 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		FC0C70F4232B9BCB00816332 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		FC0C70F5232B9BCB00816332 /* MessageViewController+UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MessageViewController+UITableView.swift"; sourceTree = "<group>"; };
+		FC0C7100232B9DF900816332 /* F4SMessagesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SMessagesModel.swift; sourceTree = "<group>"; };
+		FC0C7102232B9DFA00816332 /* MessageDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDispatcher.swift; sourceTree = "<group>"; };
+		FC0C7106232B9E4E00816332 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
+		FC0C710A232BA41300816332 /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCEF222B232A9EB9004914F7 /* WorkfinderMessagesUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderMessagesUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCEF222E232A9EB9004914F7 /* WorkfinderMessagesUseCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderMessagesUseCase.h; sourceTree = "<group>"; };
 		FCEF222F232A9EB9004914F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -68,7 +116,9 @@
 				FCEF2258232A9F41004914F7 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */,
 				FCEF225A232A9F41004914F7 /* WorkfinderCoordinators.framework in Frameworks */,
 				FCEF2256232A9F41004914F7 /* WorkfinderCommon.framework in Frameworks */,
+				FC0C710B232BA41300816332 /* WorkfinderUI.framework in Frameworks */,
 				FCEF225C232A9F41004914F7 /* WorkfinderServices.framework in Frameworks */,
+				FC0C704F232B91B900816332 /* WorkfinderAcceptUseCase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +133,65 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC0C6FDA232B8E3800816332 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				FC0C6FDC232B8F3B00816332 /* TimelineCoordinator.swift */,
+				FC0C6FE6232B8FA000816332 /* Timeline view */,
+				FC0C6FDB232B8EF200816332 /* models */,
+				FC0C7106232B9E4E00816332 /* extensions.swift */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+		FC0C6FDB232B8EF200816332 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				FC0C7100232B9DF900816332 /* F4SMessagesModel.swift */,
+				FC0C7102232B9DFA00816332 /* MessageDispatcher.swift */,
+				FC0C6FDE232B8F6000816332 /* MessagesModel.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		FC0C6FE6232B8FA000816332 /* Timeline view */ = {
+			isa = PBXGroup;
+			children = (
+				FC0C70DB232B9B3100816332 /* Message container */,
+				FC0C6FE1232B8F8600816332 /* TimelineView.storyboard */,
+				FC0C6FE3232B8F8700816332 /* TimelineViewController.swift */,
+				FC0C6FE2232B8F8700816332 /* TimelineEntryTableViewCell.swift */,
+			);
+			path = "Timeline view";
+			sourceTree = "<group>";
+		};
+		FC0C70DB232B9B3100816332 /* Message container */ = {
+			isa = PBXGroup;
+			children = (
+				FC0C70DC232B9B3100816332 /* MessageOptionCollectionViewCell.swift */,
+				FC0C70DD232B9B3100816332 /* MessageOptionsView.xib */,
+				FC0C70DF232B9B3100816332 /* StatusCollectionViewCell.xib */,
+				FC0C70E1232B9B3100816332 /* Message.storyboard */,
+				FC0C70E3232B9B3100816332 /* MessageOptionCollectionViewCell.xib */,
+				FC0C70E5232B9B3100816332 /* MessageContainerViewController.swift */,
+				FC0C70E6232B9B3100816332 /* MessageOptionHelper.swift */,
+				FC0C70E7232B9B3100816332 /* StatusCollectionViewCell.swift */,
+				FC0C70E8232B9B3100816332 /* MessageOptionsView.swift */,
+				FC0C70F9232B9BD400816332 /* Message list view */,
+			);
+			path = "Message container";
+			sourceTree = "<group>";
+		};
+		FC0C70F9232B9BD400816332 /* Message list view */ = {
+			isa = PBXGroup;
+			children = (
+				FC0C70F3232B9BCA00816332 /* MessageTableViewCell.swift */,
+				FC0C70F5232B9BCB00816332 /* MessageViewController+UITableView.swift */,
+				FC0C70F4232B9BCB00816332 /* MessageViewController.swift */,
+			);
+			path = "Message list view";
+			sourceTree = "<group>";
+		};
 		FCEF2221232A9EB9004914F7 = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +214,7 @@
 		FCEF222D232A9EB9004914F7 /* WorkfinderMessagesUseCase */ = {
 			isa = PBXGroup;
 			children = (
+				FC0C6FDA232B8E3800816332 /* source */,
 				FCEF222E232A9EB9004914F7 /* WorkfinderMessagesUseCase.h */,
 				FCEF222F232A9EB9004914F7 /* Info.plist */,
 			);
@@ -123,6 +233,8 @@
 		FCEF2251232A9F40004914F7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC0C710A232BA41300816332 /* WorkfinderUI.framework */,
+				FC0C704E232B91B900816332 /* WorkfinderAcceptUseCase.framework */,
 				FCEF2252232A9F41004914F7 /* WorkfinderCommon.framework */,
 				FCEF2253232A9F41004914F7 /* WorkfinderCompanyDetailsUseCase.framework */,
 				FCEF2254232A9F41004914F7 /* WorkfinderCoordinators.framework */,
@@ -224,6 +336,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCF4B605232BBE46001340DF /* TimelineView.storyboard in Resources */,
+				FC0C70EB232B9B3100816332 /* StatusCollectionViewCell.xib in Resources */,
+				FC0C70ED232B9B3100816332 /* MessageOptionCollectionViewCell.xib in Resources */,
+				FC0C70EC232B9B3100816332 /* Message.storyboard in Resources */,
+				FC0C70EA232B9B3100816332 /* MessageOptionsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +358,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC0C6FDD232B8F3B00816332 /* TimelineCoordinator.swift in Sources */,
+				FC0C6FE5232B8F8700816332 /* TimelineViewController.swift in Sources */,
+				FC0C70EE232B9B3100816332 /* MessageContainerViewController.swift in Sources */,
+				FC0C70EF232B9B3100816332 /* MessageOptionHelper.swift in Sources */,
+				FC0C70F6232B9BCB00816332 /* MessageViewController+UITableView.swift in Sources */,
+				FC0C7105232B9DFA00816332 /* MessageDispatcher.swift in Sources */,
+				FC0C70F8232B9BCB00816332 /* MessageTableViewCell.swift in Sources */,
+				FC0C70F0232B9B3100816332 /* StatusCollectionViewCell.swift in Sources */,
+				FC0C6FDF232B8F6000816332 /* MessagesModel.swift in Sources */,
+				FC0C70F7232B9BCB00816332 /* MessageViewController.swift in Sources */,
+				FC0C7103232B9DFA00816332 /* F4SMessagesModel.swift in Sources */,
+				FC0C7107232B9E4E00816332 /* extensions.swift in Sources */,
+				FC0C70F1232B9B3100816332 /* MessageOptionsView.swift in Sources */,
+				FC0C6FE4232B8F8700816332 /* TimelineEntryTableViewCell.swift in Sources */,
+				FC0C70E9232B9B3100816332 /* MessageOptionCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +393,49 @@
 			targetProxy = FCEF2236232A9EB9004914F7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FC0C6FE1232B8F8600816332 /* TimelineView.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC0C6FE0232B8F8600816332 /* Base */,
+			);
+			name = TimelineView.storyboard;
+			sourceTree = "<group>";
+		};
+		FC0C70DD232B9B3100816332 /* MessageOptionsView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC0C70DE232B9B3100816332 /* Base */,
+			);
+			name = MessageOptionsView.xib;
+			sourceTree = "<group>";
+		};
+		FC0C70DF232B9B3100816332 /* StatusCollectionViewCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC0C70E0232B9B3100816332 /* Base */,
+			);
+			name = StatusCollectionViewCell.xib;
+			sourceTree = "<group>";
+		};
+		FC0C70E1232B9B3100816332 /* Message.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC0C70E2232B9B3100816332 /* Base */,
+			);
+			name = Message.storyboard;
+			sourceTree = "<group>";
+		};
+		FC0C70E3232B9B3100816332 /* MessageOptionCollectionViewCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC0C70E4232B9B3100816332 /* Base */,
+			);
+			name = MessageOptionCollectionViewCell.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		FCEF223D232A9EB9004914F7 /* Debug */ = {
@@ -434,6 +609,7 @@
 		FCEF2243232A9EB9004914F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = WorkfinderMessagesUseCaseTests/Info.plist;
@@ -452,6 +628,7 @@
 		FCEF2244232A9EB9004914F7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = WorkfinderMessagesUseCaseTests/Info.plist;
@@ -557,6 +734,7 @@
 		FCEF2247232A9EC8004914F7 /* DebugF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = WorkfinderMessagesUseCaseTests/Info.plist;
@@ -662,6 +840,7 @@
 		FCEF224A232A9ECC004914F7 /* DebugF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = WorkfinderMessagesUseCaseTests/Info.plist;
@@ -761,6 +940,7 @@
 		FCEF224D232A9EE1004914F7 /* ReleaseF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = WorkfinderMessagesUseCaseTests/Info.plist;
@@ -860,6 +1040,7 @@
 		FCEF2250232A9EE5004914F7 /* ReleaseF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = WorkfinderMessagesUseCaseTests/Info.plist;

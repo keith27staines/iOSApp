@@ -5,6 +5,7 @@ import WorkfinderUI
 import WorkfinderCoordinators
 import WorkfinderFavouritesUseCase
 import WorkfinderRecommendations
+import WorkfinderMessagesUseCase
 
 class TabBarCoordinator : TabBarCoordinatorProtocol {
     
@@ -40,7 +41,7 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
     public func navigateToMostAppropriateInitialTab() {
         let shouldLoadTimeline = UserDefaults.standard.value(forKey: UserDefaultsKeys.shouldLoadTimeline) as? Bool ?? false
         if shouldLoadTimeline {
-            navigateToTimeline(threadUuid: nil)
+            navigateToTimeline()
         } else {
             navigateToMap()
         }
@@ -51,11 +52,10 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
         recommendationsCoordinator.updateBadges()
     }
     
-    public func navigateToTimeline(threadUuid: F4SUUID? = nil) {
+    public func navigateToTimeline() {
         closeMenu { [weak self] (success) in
             guard let strongSelf = self else { return }
             strongSelf.tabBarViewController.selectedIndex = TabIndex.timeline.rawValue
-            strongSelf.timelineCoordinator.showThread(threadUuid)
         }
     }
 
@@ -168,7 +168,13 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
         let icon = UIImage(named: "messageOutline")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         navigationController.tabBarItem = UITabBarItem(title: "Messages", image: icon, selectedImage: nil)
         let router = NavigationRouter(navigationController: navigationController)
-        let coordinator = TimelineCoordinator(parent: nil, navigationRouter: router, inject: injected)
+        let factory = CompanyCoordinatorFactory()
+        let companyRepository = F4SCompanyRepository()
+        let coordinator = TimelineCoordinator(parent: nil,
+                                              navigationRouter: router,
+                                              inject: injected,
+                                              companyCoordinatorFactory: factory,
+                                              companyRepository: companyRepository)
         addChildCoordinator(coordinator)
         return coordinator
     }()
@@ -310,6 +316,10 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
     
     func showSearch() {
         navigateToMap()
+    }
+    
+    func updateUnreadMessagesCount(_ count: Int) {
+        tabBarViewController.configureTimelineTabBarWithCount(count: count)
     }
 
 }

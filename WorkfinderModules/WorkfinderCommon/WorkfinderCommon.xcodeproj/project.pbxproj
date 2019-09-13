@@ -18,6 +18,7 @@
 		FC083F8D23102E6C00641F17 /* F4SMessageStructsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F8C23102E6C00641F17 /* F4SMessageStructsTests.swift */; };
 		FC083F8F2310417E00641F17 /* F4SRoleJsonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F8E2310417E00641F17 /* F4SRoleJsonTests.swift */; };
 		FC083F912310464400641F17 /* F4SRecommendationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F902310464400641F17 /* F4SRecommendationTests.swift */; };
+		FC0C710E232BA8A500816332 /* F4SAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C710D232BA8A500816332 /* F4SAnalyticsEvents.swift */; };
 		FC0E5CFB224E1B5700615B4F /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E5CFA224E1B5700615B4F /* LocalStore.swift */; };
 		FC12B0FF22F33ECE00C33410 /* F4STimelinePlacementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B0FE22F33ECE00C33410 /* F4STimelinePlacementTests.swift */; };
 		FC12B10322F3415300C33410 /* JsonDateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B10022F3415200C33410 /* JsonDateFormatterExtension.swift */; };
@@ -142,6 +143,7 @@
 		FC083F8C23102E6C00641F17 /* F4SMessageStructsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SMessageStructsTests.swift; sourceTree = "<group>"; };
 		FC083F8E2310417E00641F17 /* F4SRoleJsonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRoleJsonTests.swift; sourceTree = "<group>"; };
 		FC083F902310464400641F17 /* F4SRecommendationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRecommendationTests.swift; sourceTree = "<group>"; };
+		FC0C710D232BA8A500816332 /* F4SAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SAnalyticsEvents.swift; sourceTree = "<group>"; };
 		FC0E5CFA224E1B5700615B4F /* LocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStore.swift; sourceTree = "<group>"; };
 		FC12B0FE22F33ECE00C33410 /* F4STimelinePlacementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STimelinePlacementTests.swift; sourceTree = "<group>"; };
 		FC12B10022F3415200C33410 /* JsonDateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDateFormatterExtension.swift; sourceTree = "<group>"; };
@@ -434,6 +436,7 @@
 		FCA91E8622340478007ED308 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				FC0C710D232BA8A500816332 /* F4SAnalyticsEvents.swift */,
 				FC0660562326635000496FE2 /* Protocols.swift */,
 				FCFC06AA23225764003C59C8 /* LatLon.swift */,
 				FCFC06A32322566F003C59C8 /* CGRect+Methods.swift */,
@@ -660,6 +663,7 @@
 				FC1F592222FDCD9D007164BA /* F4SCalendarDay.swift in Sources */,
 				FCE51936224948E400B550C9 /* F4SDaysAndHoursModel.swift in Sources */,
 				FC9670A4225A195B00318F69 /* F4SPlacementRepositoryProtocol.swift in Sources */,
+				FC0C710E232BA8A500816332 /* F4SAnalyticsEvents.swift in Sources */,
 				FCDB073C2286F8B00053347F /* Analytics and debugging.swift in Sources */,
 				FCE5192122493D3300B550C9 /* Date+Extensions.swift in Sources */,
 				FC22DC0A22F9ACBC0068C61C /* F4STemplateBlank.swift in Sources */,

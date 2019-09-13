@@ -16,7 +16,7 @@ class StatusCollectionViewCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        guard let nibView = Bundle.main.loadNibNamed("StatusCollectionViewCell", owner: self, options: nil)?[0] as? UICollectionViewCell else {
+        guard let nibView = __bundle.loadNibNamed("StatusCollectionViewCell", owner: self, options: nil)?[0] as? UICollectionViewCell else {
             return
         }
         nibView.frame = self.bounds

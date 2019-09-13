@@ -36,7 +36,7 @@ class MessageOptionsView: UICollectionReusableView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        let nibView = Bundle.main.loadNibNamed("MessageOptionsView", owner: self, options: nil)?[0] as! UIView
+        let nibView = __bundle.loadNibNamed("MessageOptionsView", owner: self, options: nil)?[0] as! UIView
         nibView.frame = self.bounds
         nibView.autoresizingMask = [UIView.AutoresizingMask.flexibleHeight, UIView.AutoresizingMask.flexibleWidth]
         self.addSubview(nibView)

@@ -4,6 +4,7 @@ public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorPr
     func showSearch()
     func showMessages()
     func toggleMenu(completion: ((Bool) -> ())?)
+    func updateUnreadMessagesCount(_ count: Int)
     var shouldAskOperatingSystemToAllowLocation: Bool { get set }
 }
 

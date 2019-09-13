@@ -81,4 +81,5 @@ extension RecommendationsCoordinator {
     func toggleMenu() {
         tabBarCoordinator?.toggleMenu(completion: nil)
     }
+    
 }

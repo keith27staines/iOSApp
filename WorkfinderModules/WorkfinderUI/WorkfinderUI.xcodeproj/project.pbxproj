@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FC0B6B372323D22400A1867D /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0B6B362323D22400A1867D /* WorkfinderNetworking.framework */; };
+		FC0C7109232BA38700816332 /* OptionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C7108232BA38700816332 /* OptionLabel.swift */; };
 		FC116B4C2284510E00146478 /* WebViewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC116B4B2284510E00146478 /* WebViewAssets.xcassets */; };
 		FC116B4E2284511E00146478 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC116B4D2284511E00146478 /* WebViewController.swift */; };
 		FC22DB9122F9764F0068C61C /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DB9022F9764F0068C61C /* UIButton+Extensions.swift */; };
@@ -55,6 +56,7 @@
 
 /* Begin PBXFileReference section */
 		FC0B6B362323D22400A1867D /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC0C7108232BA38700816332 /* OptionLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionLabel.swift; sourceTree = "<group>"; };
 		FC116B4B2284510E00146478 /* WebViewAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WebViewAssets.xcassets; sourceTree = "<group>"; };
 		FC116B4D2284511E00146478 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		FC22DB9022F9764F0068C61C /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 		FCA91EBD22340680007ED308 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				FC0C7108232BA38700816332 /* OptionLabel.swift */,
 				FCA91EBE223406B4007ED308 /* WorkfinderUI.swift */,
 				FCC1DF6023250A0C0074D5C1 /* StarRatingView.swift */,
 				FC93DC3923200BC100F1CE23 /* NextResponderTextField.swift */,
@@ -371,6 +374,7 @@
 				FC22DBEF22F97A330068C61C /* UIView+ConstraintsExtensions.swift in Sources */,
 				FC5CBA57231D2C7D00C2D3C5 /* F4SRoundIconView.swift in Sources */,
 				FC5CBA55231D2C4D00C2D3C5 /* F4SCompanyHeaderViewWithLogo.swift in Sources */,
+				FC0C7109232BA38700816332 /* OptionLabel.swift in Sources */,
 				FC22DB9122F9764F0068C61C /* UIButton+Extensions.swift in Sources */,
 				FC22DBF722F97CD70068C61C /* UIColor+Extensions.swift in Sources */,
 				FCEB1D27229FC6DB00C6D2C2 /* UITableView+Extensions.swift in Sources */,

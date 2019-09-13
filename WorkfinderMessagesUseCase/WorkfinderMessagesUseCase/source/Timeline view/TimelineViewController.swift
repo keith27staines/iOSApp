@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Reachability
 import WorkfinderCommon
 import WorkfinderServices
 import WorkfinderUI
@@ -20,6 +19,8 @@ class TimelineViewController: UIViewController {
     @IBOutlet weak var noPlacementsBackgroundView: UIView!
     @IBOutlet weak var noPlacementsTitleLabel: UILabel!
     @IBOutlet weak var noPlacementsInfoLabel: UILabel!
+    
+    var companyRepository: F4SCompanyRepositoryProtocol!
 
     var userPlacements: [F4STimelinePlacement] = [] {
         didSet {
@@ -64,7 +65,6 @@ class TimelineViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         getAllPlacementsForUser()
-        TabBarCoordinator.sharedInstance.tabBarViewController.tabBar.isHidden = false
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -80,13 +80,6 @@ class TimelineViewController: UIViewController {
 extension TimelineViewController {
     
     func getAllPlacementsForUser() {
-        if let reachability = Reachability() {
-            if !reachability.isReachableByAnyMeans && userPlacements.isEmpty {
-                sharedUserMessageHandler.displayAlertFor("Placements aren't loading at the moment. Please ensure you have an internet connection", parentCtrl: self)
-                return
-            }
-        }
-        
         if userPlacements.isEmpty {
             sharedUserMessageHandler.showLoadingOverlay(self.view)
         }
@@ -130,17 +123,14 @@ extension TimelineViewController {
             }
             return false
         }.count
-        (tabBarController as? TabBarViewController)?.configureTimelineTabBarWithCount(count: unreadCount)
+        coordinator?.updateUnreadCount(unreadCount)
     }
 
     func getCompaniesWithUuids(uuid: [String?]) {
         guard let comapaniesUuid = uuid as? [String] else {
             return
         }
-
-        DatabaseOperations.sharedInstance.getCompanies(withUuid: comapaniesUuid, completed: {
-            [weak self]
-            companies in
+        companyRepository.load(companyUuids: comapaniesUuid) { [weak self] companies in
             guard let strongSelf = self else {
                 return
             }
@@ -152,7 +142,7 @@ extension TimelineViewController {
                     strongSelf.coordinator?.showMessageController(parentCtrl: strongSelf, threadUuid: threadUuid, company: company, placements: strongSelf.userPlacements, companies: strongSelf.companies)
                 }
             }
-        })
+        }
     }
 
     func sortPlacementsByLatestMessage(placement1: F4STimelinePlacement, placement2: F4STimelinePlacement) -> Bool {
@@ -253,7 +243,7 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
 // MARK: - user interaction
 extension TimelineViewController {
     @objc func menuButtonTapped() {
-        TabBarCoordinator.sharedInstance.toggleMenu()
+        coordinator?.toggleMenu()
     }
 
     func goToMessageViewCtrl() {

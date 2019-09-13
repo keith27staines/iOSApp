@@ -1,6 +1,4 @@
 import UIKit
-import Reachability
-import Analytics
 import WorkfinderCommon
 import WorkfinderServices
 import WorkfinderUI
@@ -63,7 +61,6 @@ class MessageContainerViewController: UIViewController {
         addAnswersView()
         setNavigationBar()
         subjectLabel.text = company?.name ?? "Workfinder"
-        self.evo_drawerController?.openDrawerGestureModeMask = .init(rawValue: 0)
         self.tabBarController?.tabBar.isTranslucent = true
         self.tabBarController?.tabBar.isHidden = true
         guard let threadUuid = self.threadUuid else { return }
@@ -106,7 +103,6 @@ class MessageContainerViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.evo_drawerController?.openDrawerGestureModeMask = .all
         self.tabBarController?.tabBar.isTranslucent = false
         self.tabBarController?.tabBar.isHidden = false
     }
@@ -126,7 +122,6 @@ class MessageContainerViewController: UIViewController {
                     guard let strongSelf = self else { return }
                     if let error = error {
                         sharedUserMessageHandler.display(error, parentCtrl: strongSelf, cancelHandler: nil, retryHandler: nil)
-                        globalLog.error(error)
                     } else {
                         sharedUserMessageHandler.hideLoadingOverlay()
                         strongSelf.acceptContext = context
@@ -139,7 +134,7 @@ class MessageContainerViewController: UIViewController {
                 coordinator?.showExternalCompanySite(urlString: urlString, acceptContext: acceptContext)
             }
         } catch {
-            globalLog.error(error)
+            print(error)
         }
     }
     
