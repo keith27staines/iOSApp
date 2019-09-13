@@ -578,8 +578,8 @@
 		40E78E151DD31A86000A3776 /* f4s-workexperience */ = {
 			isa = PBXGroup;
 			children = (
-				FCC1DF59232505340074D5C1 /* Factories */,
 				40E78E1F1DD31A86000A3776 /* LaunchScreen.storyboard */,
+				FCC1DF59232505340074D5C1 /* Factories */,
 				FC96709F225A18B300318F69 /* Repositories */,
 				FC1DFD87222B9CF2001951ED /* Utilities and extensions */,
 				FCA90A84221D2CFD00EACD8D /* Shared protocols */,
