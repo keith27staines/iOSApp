@@ -67,20 +67,6 @@ class F4SSelfLoadingImageViewTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 1)
     }
-    
-    func test_fetch_ignored_if_url_changed() {
-        let defaultImage = createImage()
-        let imageToFetch = createImage()
-        let mockFetcher = MockImageFetcher(imageToFetch: imageToFetch)
-        let sut = F4SSelfLoadingImageView()
-        sut.urlString = "url/original"
-        let expectation = XCTestExpectation(description: "")
-        sut.load(urlString: "url/changed", defaultImage: defaultImage, fetcher: mockFetcher) {
-            XCTAssertEqual(sut.image, defaultImage)
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 1)
-    }
 }
 
 class MockImageFetcher: ImageFetching {

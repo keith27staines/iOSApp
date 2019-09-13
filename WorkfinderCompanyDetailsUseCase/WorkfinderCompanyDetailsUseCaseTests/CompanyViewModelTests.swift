@@ -36,7 +36,7 @@ class CompanyViewModelTests: XCTestCase {
     }
 
     func makeFavouritingModel() -> CompanyFavouritesModel {
-        let shortlistJson = F4SShortlistJson()
+        let shortlistJson = F4SShortlistJson(uuid: "uuid", companyUuid: "companyUuid")
         let expectedFavouriteResult =  F4SNetworkResult.success(shortlistJson)
         let expectedUnfavouriteResult = F4SNetworkResult.success("uuid")
         let favouritingService = MockFavouritingService(expectedFavouriteResult: expectedFavouriteResult, expectedUnfavouriteResult: expectedUnfavouriteResult)

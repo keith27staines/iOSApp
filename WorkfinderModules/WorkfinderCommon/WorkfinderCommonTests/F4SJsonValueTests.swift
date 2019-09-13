@@ -13,7 +13,6 @@ class F4SJsonValueTests: XCTestCase {
     func test_decode_with_string_array() {
         let data = "[\"hello\"]".data(using: .utf8)!
         let decoder = JSONDecoder()
-        let encoder = JSONEncoder()
         XCTAssertNoThrow(try decoder.decode(F4SJSONValue.self, from: data))
     }
     
