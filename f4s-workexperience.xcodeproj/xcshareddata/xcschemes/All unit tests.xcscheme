@@ -124,10 +124,38 @@
          </BuildableReference>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FCE8DAB22320F13D00934E2F"
-            BuildableName = "WorkfinderUploadYPDocumentsUseCase.framework"
-            BlueprintName = "WorkfinderUploadYPDocumentsUseCase"
-            ReferencedContainer = "container:F4SUploadYPDocumentsUseCase/WorkfinderUploadYPDocumentsUseCase.xcodeproj">
+            BlueprintIdentifier = "FCF4B60F232BC090001340DF"
+            BuildableName = "WorkfinderOnboardingUseCase.framework"
+            BlueprintName = "WorkfinderOnboardingUseCase"
+            ReferencedContainer = "container:WorkfinderOnboardingUseCase/WorkfinderOnboardingUseCase.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FCEF222A232A9EB9004914F7"
+            BuildableName = "WorkfinderMessagesUseCase.framework"
+            BlueprintName = "WorkfinderMessagesUseCase"
+            ReferencedContainer = "container:WorkfinderMessagesUseCase/WorkfinderMessagesUseCase.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FCEF21E2232A9B83004914F7"
+            BuildableName = "WorkfinderFavouritesUseCase.framework"
+            BlueprintName = "WorkfinderFavouritesUseCase"
+            ReferencedContainer = "container:WorkfinderFavouritesUseCase/WorkfinderFavouritesUseCase.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FCEF226B232A9FC1004914F7"
+            BuildableName = "WorkfinderRecommendations.framework"
+            BlueprintName = "WorkfinderRecommendations"
+            ReferencedContainer = "container:WorkfinderRecommendations/WorkfinderRecommendations.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FC229A692326C50200F7B5CD"
+            BuildableName = "WorkfinderDocumentUploadUseCase.framework"
+            BlueprintName = "WorkfinderDocumentUploadUseCase"
+            ReferencedContainer = "container:WorkfinderDocumentUploadUseCase/WorkfinderDocumentUploadUseCase.xcodeproj">
          </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
@@ -216,7 +244,6 @@
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
-      stopOnEveryMainThreadCheckerIssue = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
       <BuildableProductRunnable

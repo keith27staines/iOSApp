@@ -156,6 +156,9 @@ class MockPlacementService : F4SPlacementApplicationServiceProtocol {
 
 class MockPlacementsRepository: F4SPlacementRepositoryProtocol {
     var placements = [F4SUUID:F4SPlacement]()
+    func load() -> [F4SPlacement] {
+        return Array(placements.values)
+    }
     func save(placement: F4SPlacement) {
         placements[placement.placementUuid!] = placement
     }
