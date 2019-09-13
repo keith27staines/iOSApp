@@ -6,10 +6,6 @@ import WorkfinderUI
 
 class CompanyCell : UITableViewCell {
     
-    func configureWithCompanyUuid(_ uuid: F4SUUID) {
-        company = DatabaseOperations.sharedInstance.companyWithUUID(uuid)
-    }
-    
     var company: Company? {
         didSet {
             guard let company = company else {

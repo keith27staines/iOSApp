@@ -27,6 +27,7 @@ public protocol RecommendationsViewModelProtocol : class {
     func viewDidAppear()
     func viewDidDisappear()
     func startPolling()
+    func companyForUuid(_ uuid: F4SUUID) -> Company?
 }
 
 public class RecommendationsViewModel : RecommendationsViewModelProtocol {
@@ -34,7 +35,7 @@ public class RecommendationsViewModel : RecommendationsViewModelProtocol {
     public var isViewVisible: Bool = false
     public var badgeValue: String?
     public let numberOfSections: Int = 1
-    public let emptyRecomendationsListText: String = NSLocalizedString("No recommendations for you yet", comment: "")
+    public let emptyRecomendationsListText: String = NSLocalizedString("No recommendations yet\n\nAfter you start applying to companies, we will recommend other great companies you may like\n\nGet cracking today!", comment: "")
     public var emptyRecomendationsListIsHidden: Bool { return !companies.isEmpty }
     
     let model: RecommendedCompaniesListModelProtocol
@@ -42,7 +43,7 @@ public class RecommendationsViewModel : RecommendationsViewModelProtocol {
     var pollTimer: Timer?
     weak var coordinator: RecommendationsCoordinator?
 
-    let converter = RecommendationCompanyConverter()
+    lazy var converter = RecommendationCompanyConverter(companyRepository: companyRepository)
     var companies: [CompanyViewData] = []
     
     lazy var recommendationsRepository: RecommendedCompaniesLocalRepositoryProtocol = {
@@ -107,6 +108,10 @@ public class RecommendationsViewModel : RecommendationsViewModelProtocol {
         return companies.count
     }
     
+    public func companyForUuid(_ uuid: F4SUUID) -> Company? {
+        return companyRepository.load(companyUuid: uuid)
+    }
+    
     public func startPolling() {
         reload()
         let interval: TimeInterval = 120
@@ -117,12 +122,16 @@ public class RecommendationsViewModel : RecommendationsViewModelProtocol {
         }
     }
     
+    let companyRepository: F4SCompanyRepositoryProtocol
+    
     init(coordinator: RecommendationsCoordinator,
          model: RecommendedCompaniesListModelProtocol = RecommendedCompaniesListModel(),
-         view: RecommendationsListViewProtocol) {
+         view: RecommendationsListViewProtocol,
+         companyRepository: F4SCompanyRepositoryProtocol) {
         self.coordinator = coordinator
         self.model = model
         self.view = view
+        self.companyRepository = companyRepository
     }
 }
 

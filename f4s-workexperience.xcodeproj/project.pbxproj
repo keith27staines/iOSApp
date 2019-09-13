@@ -92,11 +92,10 @@
 		FC06605223264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC06605123264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework */; };
 		FC06605323264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC06605123264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC06605523265FC300496FE2 /* CompanyCoordinatorParentProtocol+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06605423265FC300496FE2 /* CompanyCoordinatorParentProtocol+extensions.swift */; };
-		FC0B407E226CAA6E00D992AC /* RecommendationCompanyConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B407D226CAA6E00D992AC /* RecommendationCompanyConverter.swift */; };
-		FC0B4080226CAAEE00D992AC /* RecommendedCompaniesLocalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B407F226CAAEE00D992AC /* RecommendedCompaniesLocalRepository.swift */; };
-		FC0B4082226CAB4E00D992AC /* RecommendationsMerger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B4081226CAB4E00D992AC /* RecommendationsMerger.swift */; };
 		FC0B4084226CB1F300D992AC /* F4SRecommendedCompaniesMergerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B4083226CB1F300D992AC /* F4SRecommendedCompaniesMergerTests.swift */; };
 		FC0B6B392323D5D600A1867D /* Uploads.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC0B6B382323D5D600A1867D /* Uploads.xcassets */; };
+		FC0C6FD8232B7E5700816332 /* WorkfinderRecommendations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0C6FD7232B7E5700816332 /* WorkfinderRecommendations.framework */; };
+		FC0C6FD9232B7E5700816332 /* WorkfinderRecommendations.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC0C6FD7232B7E5700816332 /* WorkfinderRecommendations.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC0C87952122C05C007CF1F3 /* F4SAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C87942122C05C007CF1F3 /* F4SAnalyticsEvents.swift */; };
 		FC11006A1FB36A230055EB9A /* ReachabilityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */; };
 		FC1DC06821FE13FE009ABC60 /* CompanyDetailAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC1DC06721FE13FE009ABC60 /* CompanyDetailAssets.xcassets */; };
@@ -115,10 +114,6 @@
 		FC21BE3B220F53EB00A0A389 /* SearchViewStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21BE2A220F53EB00A0A389 /* SearchViewStateMachine.swift */; };
 		FC21BE3D220F53EB00A0A389 /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21BE2C220F53EB00A0A389 /* FilterButton.swift */; };
 		FC21BE3F220F53EB00A0A389 /* SearchViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21BE2E220F53EB00A0A389 /* SearchViewProtocol.swift */; };
-		FC24D22F226AEB6B00FA04A1 /* RecommendedCompanyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC24D22E226AEB6B00FA04A1 /* RecommendedCompanyTableViewCell.swift */; };
-		FC24D238226AEDD800FA04A1 /* RecommendationsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC24D237226AEDD800FA04A1 /* RecommendationsListViewModel.swift */; };
-		FC24D23A226AF2BF00FA04A1 /* RecommendationsListMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC24D239226AF2BF00FA04A1 /* RecommendationsListMainView.swift */; };
-		FC24D23D226AFC1800FA04A1 /* RecommendedCompaniesListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC24D23C226AFC1800FA04A1 /* RecommendedCompaniesListModel.swift */; };
 		FC25A05F1F850DF4002F51A9 /* F4SCompanyPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */; };
 		FC31F095204D54C6009DD526 /* F4SDebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */; };
 		FC31F097204D54E3009DD526 /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC31F096204D54E3009DD526 /* Debug.storyboard */; };
@@ -186,8 +181,6 @@
 		FCD3486420038C3100DC1316 /* F4SAuth0MagicLinkInterpreterer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3485E20038C3100DC1316 /* F4SAuth0MagicLinkInterpreterer.swift */; };
 		FCD6F9E822E315B7003F7C34 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD6F9E722E315B7003F7C34 /* WorkfinderAppLogic.framework */; };
 		FCD6F9E922E315B7003F7C34 /* WorkfinderAppLogic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCD6F9E722E315B7003F7C34 /* WorkfinderAppLogic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FCD884F91FFBC0CC00F05B08 /* Recommendations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCD884F81FFBC0CC00F05B08 /* Recommendations.storyboard */; };
-		FCD884FB1FFBE04F00F05B08 /* RecommendationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD884FA1FFBE04F00F05B08 /* RecommendationsListViewController.swift */; };
 		FCE51E402210362800DC1D50 /* PlacesSearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E3F2210362800DC1D50 /* PlacesSearchDataGetter.swift */; };
 		FCE51E422210365B00DC1D50 /* CompanySearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E412210365B00DC1D50 /* CompanySearchDataGetter.swift */; };
 		FCE51E44221039D600DC1D50 /* PersonSearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E43221039D600DC1D50 /* PersonSearchDataGetter.swift */; };
@@ -199,7 +192,6 @@
 		FCF0D16C1FBC244800F2AF1D /* PopupAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */; };
 		FCF5AF2B2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF2A2248BE1A00D9B8D1 /* WorkfinderApplyUseCase.framework */; };
 		FCF5AF2C2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF2A2248BE1A00D9B8D1 /* WorkfinderApplyUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FCF798542227F5AB00D67A7D /* RecommendationsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF798532227F5AB00D67A7D /* RecommendationsCoordinator.swift */; };
 		FCFB1328224930660086BE25 /* Mustache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCFB1327224930660086BE25 /* Mustache.framework */; };
 		FCFB1329224930660086BE25 /* Mustache.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCFB1327224930660086BE25 /* Mustache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCFBD0162250D96900A9361D /* MockAnalyticsAndDebugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC14E975221EBF6600EE985F /* MockAnalyticsAndDebugging.swift */; };
@@ -242,6 +234,7 @@
 				FC5CBA52231D2A4700C2D3C5 /* WorkfinderAcceptUseCase.framework in Embed Frameworks */,
 				FCD6F9E922E315B7003F7C34 /* WorkfinderAppLogic.framework in Embed Frameworks */,
 				FCA91EC222340743007ED308 /* WorkfinderUI.framework in Embed Frameworks */,
+				FC0C6FD9232B7E5700816332 /* WorkfinderRecommendations.framework in Embed Frameworks */,
 				FCA91E9722340577007ED308 /* WorkfinderCommon.framework in Embed Frameworks */,
 				FCEF2220232A9E24004914F7 /* WorkfinderFavouritesUseCase.framework in Embed Frameworks */,
 				FCA91E5E22340161007ED308 /* WorkfinderNetworking.framework in Embed Frameworks */,
@@ -373,11 +366,9 @@
 		FC02DA2622EC84EF003C8148 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC06605123264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCompanyDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC06605423265FC300496FE2 /* CompanyCoordinatorParentProtocol+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompanyCoordinatorParentProtocol+extensions.swift"; sourceTree = "<group>"; };
-		FC0B407D226CAA6E00D992AC /* RecommendationCompanyConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationCompanyConverter.swift; sourceTree = "<group>"; };
-		FC0B407F226CAAEE00D992AC /* RecommendedCompaniesLocalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCompaniesLocalRepository.swift; sourceTree = "<group>"; };
-		FC0B4081226CAB4E00D992AC /* RecommendationsMerger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsMerger.swift; sourceTree = "<group>"; };
 		FC0B4083226CB1F300D992AC /* F4SRecommendedCompaniesMergerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRecommendedCompaniesMergerTests.swift; sourceTree = "<group>"; };
 		FC0B6B382323D5D600A1867D /* Uploads.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Uploads.xcassets; sourceTree = "<group>"; };
+		FC0C6FD7232B7E5700816332 /* WorkfinderRecommendations.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderRecommendations.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC0C87942122C05C007CF1F3 /* F4SAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SAnalyticsEvents.swift; sourceTree = "<group>"; };
 		FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityExtension.swift; sourceTree = "<group>"; };
 		FC14E975221EBF6600EE985F /* MockAnalyticsAndDebugging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsAndDebugging.swift; sourceTree = "<group>"; };
@@ -398,10 +389,6 @@
 		FC21BE2A220F53EB00A0A389 /* SearchViewStateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewStateMachine.swift; sourceTree = "<group>"; };
 		FC21BE2C220F53EB00A0A389 /* FilterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
 		FC21BE2E220F53EB00A0A389 /* SearchViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewProtocol.swift; sourceTree = "<group>"; };
-		FC24D22E226AEB6B00FA04A1 /* RecommendedCompanyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCompanyTableViewCell.swift; sourceTree = "<group>"; };
-		FC24D237226AEDD800FA04A1 /* RecommendationsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsListViewModel.swift; sourceTree = "<group>"; };
-		FC24D239226AF2BF00FA04A1 /* RecommendationsListMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsListMainView.swift; sourceTree = "<group>"; };
-		FC24D23C226AFC1800FA04A1 /* RecommendedCompaniesListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCompaniesListModel.swift; sourceTree = "<group>"; };
 		FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyPin.swift; sourceTree = "<group>"; };
 		FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDebugViewController.swift; sourceTree = "<group>"; };
 		FC31F096204D54E3009DD526 /* Debug.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
@@ -471,8 +458,6 @@
 		FCCFC7CE224D2C110060F7EC /* DataFixes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFixes.swift; sourceTree = "<group>"; };
 		FCD3485E20038C3100DC1316 /* F4SAuth0MagicLinkInterpreterer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = F4SAuth0MagicLinkInterpreterer.swift; path = "../../WorkfinderUserDetailsUseCase/WorkfinderUserDetailsUseCase/source/Email verification/F4SAuth0MagicLinkInterpreterer.swift"; sourceTree = "<group>"; };
 		FCD6F9E722E315B7003F7C34 /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCD884F81FFBC0CC00F05B08 /* Recommendations.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Recommendations.storyboard; sourceTree = "<group>"; };
-		FCD884FA1FFBE04F00F05B08 /* RecommendationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsListViewController.swift; sourceTree = "<group>"; };
 		FCDB86112321268C0047FF96 /* Mustache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mustache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCE51E3F2210362800DC1D50 /* PlacesSearchDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesSearchDataGetter.swift; sourceTree = "<group>"; };
 		FCE51E412210365B00DC1D50 /* CompanySearchDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanySearchDataGetter.swift; sourceTree = "<group>"; };
@@ -481,7 +466,6 @@
 		FCEF221E232A9E24004914F7 /* WorkfinderFavouritesUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderFavouritesUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupAnimator.swift; sourceTree = "<group>"; };
 		FCF5AF2A2248BE1A00D9B8D1 /* WorkfinderApplyUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderApplyUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCF798532227F5AB00D67A7D /* RecommendationsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsCoordinator.swift; sourceTree = "<group>"; };
 		FCFB1327224930660086BE25 /* Mustache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mustache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCFBD0062250D69700A9361D /* f4s-workexperienceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "f4s-workexperienceTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCFBD00A2250D69700A9361D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -495,6 +479,7 @@
 			files = (
 				FC93DC4223201AA200F1CE23 /* WorkfinderUserDetailsUseCase.framework in Frameworks */,
 				FCA91E9622340577007ED308 /* WorkfinderCommon.framework in Frameworks */,
+				FC0C6FD8232B7E5700816332 /* WorkfinderRecommendations.framework in Frameworks */,
 				FCF5AF2B2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Frameworks */,
 				C9C7302B49E1B7EF625802B5 /* Pods_f4s_workexperience.framework in Frameworks */,
 				FCA91E5D22340161007ED308 /* WorkfinderNetworking.framework in Frameworks */,
@@ -778,6 +763,7 @@
 		74E1A74324CAFF4EF516E014 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC0C6FD7232B7E5700816332 /* WorkfinderRecommendations.framework */,
 				FCEF221E232A9E24004914F7 /* WorkfinderFavouritesUseCase.framework */,
 				FC93DC4123201AA200F1CE23 /* WorkfinderUserDetailsUseCase.framework */,
 				FC02DA2622EC84EF003C8148 /* WorkfinderServices.framework */,
@@ -1020,19 +1006,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		FC24D230226AED1A00FA04A1 /* Recommendation Tab */ = {
-			isa = PBXGroup;
-			children = (
-				FCF798532227F5AB00D67A7D /* RecommendationsCoordinator.swift */,
-				FCD884F81FFBC0CC00F05B08 /* Recommendations.storyboard */,
-				FCD884FA1FFBE04F00F05B08 /* RecommendationsListViewController.swift */,
-				FC24D239226AF2BF00FA04A1 /* RecommendationsListMainView.swift */,
-				FC24D22E226AEB6B00FA04A1 /* RecommendedCompanyTableViewCell.swift */,
-				FC24D23B226AFB6600FA04A1 /* Model */,
-			);
-			path = "Recommendation Tab";
-			sourceTree = "<group>";
-		};
 		FC24D231226AED2B00FA04A1 /* Home Tab */ = {
 			isa = PBXGroup;
 			children = (
@@ -1061,18 +1034,6 @@
 				FC0B4074226B15C700D992AC /* Map View */,
 			);
 			path = "Search Tab";
-			sourceTree = "<group>";
-		};
-		FC24D23B226AFB6600FA04A1 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				FC24D237226AEDD800FA04A1 /* RecommendationsListViewModel.swift */,
-				FC0B407D226CAA6E00D992AC /* RecommendationCompanyConverter.swift */,
-				FC24D23C226AFC1800FA04A1 /* RecommendedCompaniesListModel.swift */,
-				FC0B407F226CAAEE00D992AC /* RecommendedCompaniesLocalRepository.swift */,
-				FC0B4081226CAB4E00D992AC /* RecommendationsMerger.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		FC25A05D1F850DAC002F51A9 /* F4SMap models */ = {
@@ -1259,7 +1220,6 @@
 			children = (
 				FC24D231226AED2B00FA04A1 /* Home Tab */,
 				FC24D232226AED3B00FA04A1 /* Timeline Tab */,
-				FC24D230226AED1A00FA04A1 /* Recommendation Tab */,
 				FC24D235226AED5E00FA04A1 /* Search Tab */,
 			);
 			path = "Main tabs ";
@@ -1446,7 +1406,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				203658811E1F808100D87DC4 /* StatusCollectionViewCell.xib in Resources */,
-				FCD884F91FFBC0CC00F05B08 /* Recommendations.storyboard in Resources */,
 				40C1A4EB1DDB36DC000F80AA /* TimelineView.storyboard in Resources */,
 				FC1DC06821FE13FE009ABC60 /* CompanyDetailAssets.xcassets in Resources */,
 				FC21BE33220F53EB00A0A389 /* RandomNames.csv in Resources */,
@@ -1605,14 +1564,12 @@
 				40C1A4ED1DDB36FA000F80AA /* TimelineViewController.swift in Sources */,
 				40C1A4E61DDB356B000F80AA /* TabBarViewController.swift in Sources */,
 				FCA53B921FE00CB5009F6DB0 /* VersioningService.swift in Sources */,
-				FC24D238226AEDD800FA04A1 /* RecommendationsListViewModel.swift in Sources */,
 				FC6A6FC722D1E04C005F625A /* AppCoordinatorFactory.swift in Sources */,
 				40A28CB21E1D1D200077D490 /* TimelineEntryTableViewCell.swift in Sources */,
 				FC21BE37220F53EB00A0A389 /* PeopleDataSource.swift in Sources */,
 				2037B0AF1DEC592900A9DE3E /* PlacementDBOperations.swift in Sources */,
 				FCA90A88221D2D4500EACD8D /* UserDefaultKeys.swift in Sources */,
 				40A28CBB1E1F9BCF0077D490 /* RatingControl.swift in Sources */,
-				FC24D23D226AFC1800FA04A1 /* RecommendedCompaniesListModel.swift in Sources */,
 				FCA333A520BEA938002AA790 /* F4SMessagesModel.swift in Sources */,
 				40C1A5211DDF5ACE000F80AA /* GQTPointQuadTree.m in Sources */,
 				40E78E801DD32BF4000A3776 /* SideDrawerTableViewCell.swift in Sources */,
@@ -1640,16 +1597,13 @@
 				FCE51E422210365B00DC1D50 /* CompanySearchDataGetter.swift in Sources */,
 				FCCFC7CF224D2C110060F7EC /* DataFixes.swift in Sources */,
 				40C1A52B1DE82060000F80AA /* InfoWindowView.swift in Sources */,
-				FCD884FB1FFBE04F00F05B08 /* RecommendationsListViewController.swift in Sources */,
 				FC93DC5823202B8F00F1CE23 /* Config.swift in Sources */,
 				206F8F921E1E552F0024937B /* MessageOptionHelper.swift in Sources */,
 				40E78EA01DD5E208000A3776 /* LocationHelper.swift in Sources */,
 				40C1A5231DDF5ACE000F80AA /* POIItem.m in Sources */,
-				FC0B4082226CAB4E00D992AC /* RecommendationsMerger.swift in Sources */,
 				40C1A52D1DE84410000F80AA /* TriangleView.swift in Sources */,
 				205EB20B1DDB161D00034424 /* DatabaseOperations.swift in Sources */,
 				FCB49308222A875300B88B8B /* TimelineCoordinator.swift in Sources */,
-				FC24D22F226AEB6B00FA04A1 /* RecommendedCompanyTableViewCell.swift in Sources */,
 				FCCD6AEB1FBB4B8A0088D7C7 /* CompanyInfoTableViewCell.swift in Sources */,
 				40C1A51E1DDF5ACE000F80AA /* GMUSimpleClusterAlgorithm.m in Sources */,
 				FC8E3F4822D3396A00102C37 /* VersionCheckCoordinator.swift in Sources */,
@@ -1658,11 +1612,9 @@
 				2037B0A71DEC3C3B00A9DE3E /* InterestCoreDataManager.swift in Sources */,
 				204C89551DF5A36100D8493A /* TemplateChoiceDB.swift in Sources */,
 				FC4BB6051FA20F4100173864 /* F4SPartner.swift in Sources */,
-				FCF798542227F5AB00D67A7D /* RecommendationsCoordinator.swift in Sources */,
 				FC0C87952122C05C007CF1F3 /* F4SAnalyticsEvents.swift in Sources */,
 				FC21BE3F220F53EB00A0A389 /* SearchViewProtocol.swift in Sources */,
 				FCCD6AE91FBB44CF0088D7C7 /* PopupCompanyListViewController.swift in Sources */,
-				FC0B407E226CAA6E00D992AC /* RecommendationCompanyConverter.swift in Sources */,
 				204203EC1E4B160C007C7409 /* ShortlistCoreDataManager.swift in Sources */,
 				40E78E981DD39275000A3776 /* MapViewController.swift in Sources */,
 				FC21BE38220F53EB00A0A389 /* SearchProtocols.swift in Sources */,
@@ -1682,7 +1634,6 @@
 				40E78E891DD32C3C000A3776 /* ExtensionsHelper.swift in Sources */,
 				40A5CF3E1DED72E8000007AB /* InterestsCollectionViewCell.swift in Sources */,
 				40C1A51A1DDF5ACE000F80AA /* GMUDefaultClusterIconGenerator.m in Sources */,
-				FC24D23A226AF2BF00FA04A1 /* RecommendationsListMainView.swift in Sources */,
 				FCB49301222A4B3B00B88B8B /* SearchCoordinator.swift in Sources */,
 				40E78E661DD32B94000A3776 /* TabBarCoordinator.swift in Sources */,
 				40E78E591DD32964000A3776 /* Entities.swift in Sources */,
@@ -1700,7 +1651,6 @@
 				FCB46F02204FD86D00F0779F /* F4SLogViewController.swift in Sources */,
 				FC21BE34220F53EB00A0A389 /* PlacesSearchDataSource.swift in Sources */,
 				206F8F8C1E1E48120024937B /* MessageOptionCollectionViewCell.swift in Sources */,
-				FC0B4080226CAAEE00D992AC /* RecommendedCompaniesLocalRepository.swift in Sources */,
 				FC25A05F1F850DF4002F51A9 /* F4SCompanyPin.swift in Sources */,
 				FCF0D16C1FBC244800F2AF1D /* PopupAnimator.swift in Sources */,
 				FCE51E402210362800DC1D50 /* PlacesSearchDataGetter.swift in Sources */,

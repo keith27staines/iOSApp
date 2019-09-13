@@ -3,6 +3,12 @@ import WorkfinderCommon
 
 public class RecommendationCompanyConverter {
     
+    let companyRepository: F4SCompanyRepositoryProtocol
+    
+    public init(companyRepository: F4SCompanyRepositoryProtocol) {
+        self.companyRepository = companyRepository
+    }
+    
     public func convert(recommendations: [F4SRecommendationProtocol]) -> [CompanyViewData] {
         var companies = [CompanyViewData]()
         for recommendation in recommendations {
@@ -24,7 +30,7 @@ public class RecommendationCompanyConverter {
     
     func companyViewDataFromUuid(_ companyUuid: F4SUUID?) -> CompanyViewData? {
         guard let companyUuid = companyUuid,
-            let company = DatabaseOperations.sharedInstance.companyWithUUID(companyUuid)
+            let company = companyRepository.load(companyUuid: companyUuid)
             else { return nil }
         return CompanyViewData(company: company)
     }

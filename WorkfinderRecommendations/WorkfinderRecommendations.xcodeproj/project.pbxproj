@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC0C6FC6232B75AC00816332 /* RecommendationsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C6FC1232B75AB00816332 /* RecommendationsCoordinator.swift */; };
+		FC0C6FC7232B75AC00816332 /* RecommendedCompanyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C6FC2232B75AB00816332 /* RecommendedCompanyTableViewCell.swift */; };
+		FC0C6FC8232B75AC00816332 /* Recommendations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC0C6FC3232B75AB00816332 /* Recommendations.storyboard */; };
+		FC0C6FC9232B75AC00816332 /* RecommendationsListMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C6FC4232B75AC00816332 /* RecommendationsListMainView.swift */; };
+		FC0C6FCA232B75AC00816332 /* RecommendationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C6FC5232B75AC00816332 /* RecommendationsListViewController.swift */; };
+		FC0C6FD2232B762E00816332 /* RecommendedCompaniesListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C6FCD232B762E00816332 /* RecommendedCompaniesListModel.swift */; };
+		FC0C6FD3232B762E00816332 /* RecommendationsMerger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C6FCE232B762E00816332 /* RecommendationsMerger.swift */; };
+		FC0C6FD4232B762E00816332 /* RecommendationsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C6FCF232B762E00816332 /* RecommendationsListViewModel.swift */; };
+		FC0C6FD5232B762E00816332 /* RecommendationCompanyConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C6FD0232B762E00816332 /* RecommendationCompanyConverter.swift */; };
+		FC0C6FD6232B762E00816332 /* RecommendedCompaniesLocalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C6FD1232B762E00816332 /* RecommendedCompaniesLocalRepository.swift */; };
 		FCEF2276232A9FC1004914F7 /* WorkfinderRecommendations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF226C232A9FC1004914F7 /* WorkfinderRecommendations.framework */; };
 		FCEF227B232A9FC1004914F7 /* WorkfinderRecommendationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF227A232A9FC1004914F7 /* WorkfinderRecommendationsTests.swift */; };
 		FCEF227D232A9FC1004914F7 /* WorkfinderRecommendations.h in Headers */ = {isa = PBXBuildFile; fileRef = FCEF226F232A9FC1004914F7 /* WorkfinderRecommendations.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -48,6 +58,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		FC0C6FC1232B75AB00816332 /* RecommendationsCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendationsCoordinator.swift; sourceTree = "<group>"; };
+		FC0C6FC2232B75AB00816332 /* RecommendedCompanyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendedCompanyTableViewCell.swift; sourceTree = "<group>"; };
+		FC0C6FC3232B75AB00816332 /* Recommendations.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Recommendations.storyboard; sourceTree = "<group>"; };
+		FC0C6FC4232B75AC00816332 /* RecommendationsListMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendationsListMainView.swift; sourceTree = "<group>"; };
+		FC0C6FC5232B75AC00816332 /* RecommendationsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendationsListViewController.swift; sourceTree = "<group>"; };
+		FC0C6FCD232B762E00816332 /* RecommendedCompaniesListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendedCompaniesListModel.swift; sourceTree = "<group>"; };
+		FC0C6FCE232B762E00816332 /* RecommendationsMerger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendationsMerger.swift; sourceTree = "<group>"; };
+		FC0C6FCF232B762E00816332 /* RecommendationsListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendationsListViewModel.swift; sourceTree = "<group>"; };
+		FC0C6FD0232B762E00816332 /* RecommendationCompanyConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendationCompanyConverter.swift; sourceTree = "<group>"; };
+		FC0C6FD1232B762E00816332 /* RecommendedCompaniesLocalRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendedCompaniesLocalRepository.swift; sourceTree = "<group>"; };
 		FCEF226C232A9FC1004914F7 /* WorkfinderRecommendations.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderRecommendations.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCEF226F232A9FC1004914F7 /* WorkfinderRecommendations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderRecommendations.h; sourceTree = "<group>"; };
 		FCEF2270232A9FC1004914F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -86,8 +106,34 @@
 		FC0C6FC0232B750400816332 /* source */ = {
 			isa = PBXGroup;
 			children = (
+				FC0C6FC3232B75AB00816332 /* Recommendations.storyboard */,
+				FC0C6FC1232B75AB00816332 /* RecommendationsCoordinator.swift */,
+				FC0C6FCB232B75DE00816332 /* views */,
+				FC0C6FCC232B760500816332 /* models */,
 			);
 			path = source;
+			sourceTree = "<group>";
+		};
+		FC0C6FCB232B75DE00816332 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				FC0C6FC5232B75AC00816332 /* RecommendationsListViewController.swift */,
+				FC0C6FC4232B75AC00816332 /* RecommendationsListMainView.swift */,
+				FC0C6FC2232B75AB00816332 /* RecommendedCompanyTableViewCell.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		FC0C6FCC232B760500816332 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				FC0C6FCF232B762E00816332 /* RecommendationsListViewModel.swift */,
+				FC0C6FD0232B762E00816332 /* RecommendationCompanyConverter.swift */,
+				FC0C6FCD232B762E00816332 /* RecommendedCompaniesListModel.swift */,
+				FC0C6FD1232B762E00816332 /* RecommendedCompaniesLocalRepository.swift */,
+				FC0C6FCE232B762E00816332 /* RecommendationsMerger.swift */,
+			);
+			path = models;
 			sourceTree = "<group>";
 		};
 		FCEF2262232A9FC1004914F7 = {
@@ -232,6 +278,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC0C6FC8232B75AC00816332 /* Recommendations.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +296,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC0C6FC6232B75AC00816332 /* RecommendationsCoordinator.swift in Sources */,
+				FC0C6FCA232B75AC00816332 /* RecommendationsListViewController.swift in Sources */,
+				FC0C6FD4232B762E00816332 /* RecommendationsListViewModel.swift in Sources */,
+				FC0C6FD6232B762E00816332 /* RecommendedCompaniesLocalRepository.swift in Sources */,
+				FC0C6FD5232B762E00816332 /* RecommendationCompanyConverter.swift in Sources */,
+				FC0C6FD3232B762E00816332 /* RecommendationsMerger.swift in Sources */,
+				FC0C6FC9232B75AC00816332 /* RecommendationsListMainView.swift in Sources */,
+				FC0C6FD2232B762E00816332 /* RecommendedCompaniesListModel.swift in Sources */,
+				FC0C6FC7232B75AC00816332 /* RecommendedCompanyTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +508,7 @@
 		FCEF2284232A9FC1004914F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = WorkfinderRecommendationsTests/Info.plist;
@@ -470,6 +527,7 @@
 		FCEF2285232A9FC1004914F7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = WorkfinderRecommendationsTests/Info.plist;
@@ -580,6 +638,7 @@
 		FCEF2288232A9FD5004914F7 /* DebugF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = WorkfinderRecommendationsTests/Info.plist;
@@ -690,6 +749,7 @@
 		FCEF228B232A9FD7004914F7 /* DebugF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = WorkfinderRecommendationsTests/Info.plist;
@@ -794,6 +854,7 @@
 		FCEF228E232A9FDD004914F7 /* ReleaseF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = WorkfinderRecommendationsTests/Info.plist;
@@ -898,6 +959,7 @@
 		FCEF2291232A9FE1004914F7 /* ReleaseF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = WorkfinderRecommendationsTests/Info.plist;

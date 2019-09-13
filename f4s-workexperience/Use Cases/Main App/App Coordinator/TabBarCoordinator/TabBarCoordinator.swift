@@ -4,8 +4,10 @@ import WorkfinderServices
 import WorkfinderUI
 import WorkfinderCoordinators
 import WorkfinderFavouritesUseCase
+import WorkfinderRecommendations
 
-class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoordinatorProtocol {
+class TabBarCoordinator : TabBarCoordinatorProtocol {
+    
     var injected: CoreInjectionProtocol
     
     required init(parent: Coordinating?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol) {
@@ -46,7 +48,7 @@ class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoor
     
     public func updateBadges() {
         F4SUserStatusService.shared.beginStatusUpdate()
-        recommendationsCoordinator.viewModel.reload()
+        recommendationsCoordinator.updateBadges()
     }
     
     public func navigateToTimeline(threadUuid: F4SUUID? = nil) {
@@ -176,7 +178,13 @@ class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoor
         let lightbulbImage = UIImage(named: "light-bulb")
         navigationController.tabBarItem = UITabBarItem(title: "Recommendations", image: lightbulbImage, selectedImage: nil)
         let router = NavigationRouter(navigationController: navigationController)
-        let coordinator = RecommendationsCoordinator(parent: nil, navigationRouter: router, inject: injected, companyCoordinatorFactory: companyCoordinatorFactory)
+        let companyRepository = F4SCompanyRepository()
+        let coordinator = RecommendationsCoordinator(
+            parent: self,
+            navigationRouter: router,
+            inject: injected,
+            companyCoordinatorFactory: companyCoordinatorFactory,
+            companyRepository: companyRepository)
         addChildCoordinator(coordinator)
         return coordinator
     }()
@@ -247,20 +255,6 @@ class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoor
         }
         parentCtrl.present(navigationController, animated: true, completion: nil)
     }
-        
-    func presentRecommendationsController(from navCtrl: UINavigationController, company: Company? = nil) {
-        let recommendationsStoryboard = UIStoryboard(name: "Recommendations", bundle: nil) 
-        guard let recommendationsNavController = recommendationsStoryboard.instantiateInitialViewController() as? UINavigationController else {
-            return
-        }
-        guard let recommendationsController = recommendationsNavController.topMostViewController as? RecommendationsListViewController else {
-            return
-        }
-        recommendationsController.selectCompany = company
-        let noRecommendationsText = "No recommendations yet\n\nAfter you start applying to companies, we will recommend other great companies you may like\n\nGet cracking today!"
-        recommendationsController.emptyRecomendationsListText = noRecommendationsText
-        navCtrl.present(recommendationsNavController, animated: true, completion: nil)
-    }
     
     func presentContentViewController(navCtrl: UINavigationController, contentType: F4SContentType) {
         let content = WorkfinderUI().makeWebContentViewController(contentType: contentType, dismissByPopping: true)
@@ -309,4 +303,13 @@ class TabBarCoordinator : CoreInjectionNavigationCoordinatorProtocol, TabBarCoor
             parentCtrl.present(popoverNavigationController, animated: true, completion: nil)
         }
     }
+    
+    func showMessages() {
+        navigateToTimeline()
+    }
+    
+    func showSearch() {
+        navigateToMap()
+    }
+
 }

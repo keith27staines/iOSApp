@@ -1,6 +1,8 @@
 import Foundation
 
 public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol {
+    func showSearch()
+    func showMessages()
     func toggleMenu(completion: ((Bool) -> ())?)
     var shouldAskOperatingSystemToAllowLocation: Bool { get set }
 }

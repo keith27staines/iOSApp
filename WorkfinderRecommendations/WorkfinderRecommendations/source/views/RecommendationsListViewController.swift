@@ -1,7 +1,9 @@
 import WorkfinderCommon
 import WorkfinderUI
 
-class RecommendationsListViewController: UIViewController, RecommendationsListViewProtocol {
+public class RecommendationsListViewController: UIViewController, RecommendationsListViewProtocol {
+    
+    weak var coordinator: RecommendationsCoordinator?
     
     var emptyRecomendationsListText: String? = nil
     var selectCompany: Company?
@@ -17,26 +19,38 @@ class RecommendationsListViewController: UIViewController, RecommendationsListVi
         viewModel.startPolling()
     }
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    func adjustNavigationBar() {
+        let menuButton = UIBarButtonItem(image: UIImage(named: "MenuButton")?.withRenderingMode(.alwaysTemplate), style: .done, target: self, action: #selector(menuButtonTapped))
+        self.navigationItem.leftBarButtonItem = menuButton
+        self.navigationItem.title = NSLocalizedString("Recommendations", comment: "")
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         styleNavigationController()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
+        adjustNavigationBar()
+        styleNavigationController()
+    }
+    
+    @objc func menuButtonTapped() {
+        coordinator?.toggleMenu()
+    }
+    
+    public override func viewDidAppear(_ animated: Bool) {
         viewModel.viewDidAppear()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    public override func viewDidDisappear(_ animated: Bool) {
         viewModel.viewDidDisappear()
     }
     
-    func updateFromViewModel() {
+    public func updateFromViewModel() {
         navigationController?.tabBarItem.badgeValue = viewModel.badgeValue
         guard viewModel.isViewVisible else { return }
         tableView.reloadData()
@@ -44,32 +58,33 @@ class RecommendationsListViewController: UIViewController, RecommendationsListVi
         mainView.emptyRecommendationsView.isHidden = viewModel.emptyRecomendationsListIsHidden
     }
     
-    func showLoadingOverlay() {
+    public func showLoadingOverlay() {
         userMessageHandler.showLoadingOverlay(self.view)
     }
     
-    func hideLoadingOverlay() {
+    public func hideLoadingOverlay() {
         userMessageHandler.hideLoadingOverlay()
     }
 }
 
 extension RecommendationsListViewController : UITableViewDataSource, UITableViewDelegate {
-    func numberOfSections(in tableView: UITableView) -> Int {
+    public func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.numberOfSections
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRowsInSection(section)
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! CompanyCell
         let companyUuid = viewModel.recommendationForIndexPath(indexPath).uuid
-        cell.configureWithCompanyUuid(companyUuid)
+        let company = viewModel.companyForUuid(companyUuid)
+        cell.company = company
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.didSelectIndexPath(indexPath)
     }
 }
