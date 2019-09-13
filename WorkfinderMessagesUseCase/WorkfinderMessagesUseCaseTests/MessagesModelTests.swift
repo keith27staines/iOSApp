@@ -9,7 +9,7 @@
 import XCTest
 import UIKit
 import WorkfinderCommon
-@testable import f4s_workexperience
+@testable import WorkfinderMe
 
 class MessagesModelTests: XCTestCase {
     

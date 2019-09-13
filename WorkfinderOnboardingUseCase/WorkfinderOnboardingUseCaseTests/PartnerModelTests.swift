@@ -9,7 +9,7 @@
 import XCTest
 import WorkfinderCommon
 
-@testable import f4s_workexperience
+@testable import WorkfinderOnboardingUseCase
 
 // From LIVE (17 Jan 2018)
 //4b2ac792-5e2c-4ee9-b825-93d5d5411b33: My School

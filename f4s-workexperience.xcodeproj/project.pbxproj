@@ -77,7 +77,6 @@
 		FC06605223264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC06605123264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework */; };
 		FC06605323264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC06605123264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC06605523265FC300496FE2 /* CompanyCoordinatorParentProtocol+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06605423265FC300496FE2 /* CompanyCoordinatorParentProtocol+extensions.swift */; };
-		FC0B4084226CB1F300D992AC /* F4SRecommendedCompaniesMergerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B4083226CB1F300D992AC /* F4SRecommendedCompaniesMergerTests.swift */; };
 		FC0B6B392323D5D600A1867D /* Uploads.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC0B6B382323D5D600A1867D /* Uploads.xcassets */; };
 		FC0C6FD8232B7E5700816332 /* WorkfinderRecommendations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0C6FD7232B7E5700816332 /* WorkfinderRecommendations.framework */; };
 		FC0C6FD9232B7E5700816332 /* WorkfinderRecommendations.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC0C6FD7232B7E5700816332 /* WorkfinderRecommendations.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -177,9 +176,7 @@
 		FCFBD01B2250DA1800A9361D /* MockDatabaseDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA90A90221D6A1700EACD8D /* MockDatabaseDownload.swift */; };
 		FCFBD01C2250DA3A00A9361D /* MockNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA90A8C221D696400EACD8D /* MockNavigationRouter.swift */; };
 		FCFBD01D2250DA3E00A9361D /* MockCoordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA90A8E221D69B600EACD8D /* MockCoordinators.swift */; };
-		FCFBD0212250DAFE00A9361D /* PartnerModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32E3D8200F322800D7C36A /* PartnerModelTests.swift */; };
 		FCFBD0242250DB4D00A9361D /* F4SDatabaseDownloadManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC85B2220EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift */; };
-		FCFBD0262250DB7700A9361D /* MessagesModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC39F46121AAA64B005B0A07 /* MessagesModelTests.swift */; };
 		FCFC06AD23225B9E003C59C8 /* LatLon+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06AC23225B9E003C59C8 /* LatLon+Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -329,7 +326,6 @@
 		FC02DA2622EC84EF003C8148 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC06605123264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCompanyDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC06605423265FC300496FE2 /* CompanyCoordinatorParentProtocol+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompanyCoordinatorParentProtocol+extensions.swift"; sourceTree = "<group>"; };
-		FC0B4083226CB1F300D992AC /* F4SRecommendedCompaniesMergerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRecommendedCompaniesMergerTests.swift; sourceTree = "<group>"; };
 		FC0B6B382323D5D600A1867D /* Uploads.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Uploads.xcassets; sourceTree = "<group>"; };
 		FC0C6FD7232B7E5700816332 /* WorkfinderRecommendations.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderRecommendations.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC0C710F232BB1D100816332 /* F4SAuth0MagicLinkInterpreterer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = F4SAuth0MagicLinkInterpreterer.swift; path = "../../../WorkfinderUserDetailsUseCase/WorkfinderUserDetailsUseCase/source/Email verification/F4SAuth0MagicLinkInterpreterer.swift"; sourceTree = "<group>"; };
@@ -355,8 +351,6 @@
 		FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyPin.swift; sourceTree = "<group>"; };
 		FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDebugViewController.swift; sourceTree = "<group>"; };
 		FC31F096204D54E3009DD526 /* Debug.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
-		FC32E3D8200F322800D7C36A /* PartnerModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerModelTests.swift; sourceTree = "<group>"; };
-		FC39F46121AAA64B005B0A07 /* MessagesModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesModelTests.swift; sourceTree = "<group>"; };
 		FC3CD1D9221566F200F91B50 /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
 		FC3F391E222930940046F8F8 /* MockUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserService.swift; sourceTree = "<group>"; };
 		FC4066FC23277D8F002B425E /* WorkfinderDocumentUploadUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderDocumentUploadUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1131,10 +1125,7 @@
 			children = (
 				FCA90A8B221D693700EACD8D /* Mocks */,
 				FC3F3921222931630046F8F8 /* Coordinator tests */,
-				FC32E3D8200F322800D7C36A /* PartnerModelTests.swift */,
 				FCC85B2220EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift */,
-				FC39F46121AAA64B005B0A07 /* MessagesModelTests.swift */,
-				FC0B4083226CB1F300D992AC /* F4SRecommendedCompaniesMergerTests.swift */,
 			);
 			path = "Workfinder main module tests";
 			sourceTree = "<group>";
@@ -1499,10 +1490,7 @@
 				FCFBD0162250D96900A9361D /* MockAnalyticsAndDebugging.swift in Sources */,
 				FCFBD0242250DB4D00A9361D /* F4SDatabaseDownloadManagerTests.swift in Sources */,
 				FCFBD01A2250DA1800A9361D /* MockUIApplication.swift in Sources */,
-				FCFBD0262250DB7700A9361D /* MessagesModelTests.swift in Sources */,
 				FCFBD0182250D9A400A9361D /* MockUserService.swift in Sources */,
-				FCFBD0212250DAFE00A9361D /* PartnerModelTests.swift in Sources */,
-				FC0B4084226CB1F300D992AC /* F4SRecommendedCompaniesMergerTests.swift in Sources */,
 				FCFBD01D2250DA3E00A9361D /* MockCoordinators.swift in Sources */,
 				FCFBD01B2250DA1800A9361D /* MockDatabaseDownload.swift in Sources */,
 				FCFBD0192250D9FF00A9361D /* AppCoordinatorTests.swift in Sources */,

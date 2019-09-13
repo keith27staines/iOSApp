@@ -1,6 +1,6 @@
 import XCTest
 import WorkfinderCommon
-@testable import f4s_workexperience
+@testable import WorkfinderRecommendations
 
 class F4SRecommendedCompaniesMergerTests: XCTestCase {
 

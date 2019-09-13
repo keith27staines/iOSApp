@@ -8,10 +8,28 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderOnboardingUseCase
 
 @testable import f4s_workexperience
 
 class MockTabBarCoordinator : MockCoreInjectionNavigationCoordinator, TabBarCoordinatorProtocol {
+    
+    var showSearchCallCount: Int = 0
+    var showMessagesCallCount: Int = 0
+    var updateUnreadMessagesCallCount: Int = 0
+    
+    func showSearch() {
+        showSearchCallCount += 1
+    }
+    
+    func showMessages() {
+        showMessagesCallCount += 1
+    }
+    
+    func updateUnreadMessagesCount(_ count: Int) {
+        updateUnreadMessagesCallCount += 1
+    }
+    
     var menuOpen: Bool = false
     func toggleMenu(completion: ((Bool) -> ())?) {
         menuOpen.toggle()

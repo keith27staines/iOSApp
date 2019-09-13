@@ -28,6 +28,7 @@
 		FCEF229C232AA04B004914F7 /* WorkfinderCoordinators.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2295232AA04B004914F7 /* WorkfinderCoordinators.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCEF229D232AA04B004914F7 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2296232AA04B004914F7 /* WorkfinderServices.framework */; };
 		FCEF229E232AA04B004914F7 /* WorkfinderServices.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2296232AA04B004914F7 /* WorkfinderServices.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FCF4B65B232BCE58001340DF /* F4SRecommendedCompaniesMergerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF4B65A232BCE58001340DF /* F4SRecommendedCompaniesMergerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		FCEF2294232AA04B004914F7 /* WorkfinderCompanyDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCompanyDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCEF2295232AA04B004914F7 /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCEF2296232AA04B004914F7 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCF4B65A232BCE58001340DF /* F4SRecommendedCompaniesMergerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRecommendedCompaniesMergerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				FCEF227A232A9FC1004914F7 /* WorkfinderRecommendationsTests.swift */,
+				FCF4B65A232BCE58001340DF /* F4SRecommendedCompaniesMergerTests.swift */,
 				FCEF227C232A9FC1004914F7 /* Info.plist */,
 			);
 			path = WorkfinderRecommendationsTests;
@@ -313,6 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCEF227B232A9FC1004914F7 /* WorkfinderRecommendationsTests.swift in Sources */,
+				FCF4B65B232BCE58001340DF /* F4SRecommendedCompaniesMergerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -24,6 +24,7 @@
 		FCF4B654232BC900001340DF /* SelectPartner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCF4B645232BC23F001340DF /* SelectPartner.storyboard */; };
 		FCF4B655232BC905001340DF /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCF4B63C232BC1DE001340DF /* Onboarding.storyboard */; };
 		FCF4B657232BC9E5001340DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCF4B656232BC9E5001340DF /* Assets.xcassets */; };
+		FCF4B659232BCDE6001340DF /* PartnerModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF4B658232BCDE5001340DF /* PartnerModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		FCF4B649232BC315001340DF /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF4B64C232BC33B001340DF /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF4B656232BC9E5001340DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FCF4B658232BCDE5001340DF /* PartnerModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				FCF4B61E232BC090001340DF /* WorkfinderOnboardingUseCaseTests.swift */,
+				FCF4B658232BCDE5001340DF /* PartnerModelTests.swift */,
 				FCF4B620232BC090001340DF /* Info.plist */,
 			);
 			path = WorkfinderOnboardingUseCaseTests;
@@ -282,6 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCF4B659232BCDE6001340DF /* PartnerModelTests.swift in Sources */,
 				FCF4B61F232BC090001340DF /* WorkfinderOnboardingUseCaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

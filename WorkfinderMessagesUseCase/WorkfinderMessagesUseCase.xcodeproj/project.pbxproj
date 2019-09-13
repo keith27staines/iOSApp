@@ -42,6 +42,7 @@
 		FCEF225C232A9F41004914F7 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2255232A9F41004914F7 /* WorkfinderServices.framework */; };
 		FCEF225D232A9F41004914F7 /* WorkfinderServices.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2255232A9F41004914F7 /* WorkfinderServices.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCF4B605232BBE46001340DF /* TimelineView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC0C6FE1232B8F8600816332 /* TimelineView.storyboard */; };
+		FCF4B65D232BCEA4001340DF /* MessagesModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF4B65C232BCEA4001340DF /* MessagesModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +107,7 @@
 		FCEF2253232A9F41004914F7 /* WorkfinderCompanyDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCompanyDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCEF2254232A9F41004914F7 /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCEF2255232A9F41004914F7 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCF4B65C232BCEA4001340DF /* MessagesModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				FCEF2239232A9EB9004914F7 /* WorkfinderMessagesUseCaseTests.swift */,
+				FCF4B65C232BCEA4001340DF /* MessagesModelTests.swift */,
 				FCEF223B232A9EB9004914F7 /* Info.plist */,
 			);
 			path = WorkfinderMessagesUseCaseTests;
@@ -381,6 +384,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCEF223A232A9EB9004914F7 /* WorkfinderMessagesUseCaseTests.swift in Sources */,
+				FCF4B65D232BCEA4001340DF /* MessagesModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
