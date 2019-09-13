@@ -15,13 +15,9 @@
 		FCEF2210232A9C37004914F7 /* FavouritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF220B232A9C36004914F7 /* FavouritesCoordinator.swift */; };
 		FCEF2212232A9CAC004914F7 /* Favourite.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCEF220A232A9C36004914F7 /* Favourite.storyboard */; };
 		FCEF2217232A9D3D004914F7 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2214232A9D3D004914F7 /* WorkfinderCommon.framework */; };
-		FCEF2218232A9D3D004914F7 /* WorkfinderCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2214232A9D3D004914F7 /* WorkfinderCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCEF2219232A9D3D004914F7 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2215232A9D3D004914F7 /* WorkfinderCompanyDetailsUseCase.framework */; };
-		FCEF221A232A9D3D004914F7 /* WorkfinderCompanyDetailsUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2215232A9D3D004914F7 /* WorkfinderCompanyDetailsUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCEF221B232A9D3D004914F7 /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2216232A9D3D004914F7 /* WorkfinderCoordinators.framework */; };
-		FCEF221C232A9D3D004914F7 /* WorkfinderCoordinators.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2216232A9D3D004914F7 /* WorkfinderCoordinators.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCEF2260232A9F4F004914F7 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF225F232A9F4F004914F7 /* WorkfinderServices.framework */; };
-		FCEF2261232A9F4F004914F7 /* WorkfinderServices.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF225F232A9F4F004914F7 /* WorkfinderServices.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,23 +29,6 @@
 			remoteInfo = WorkfinderFavouritesUseCase;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		FCEF221D232A9D3D004914F7 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				FCEF221A232A9D3D004914F7 /* WorkfinderCompanyDetailsUseCase.framework in Embed Frameworks */,
-				FCEF221C232A9D3D004914F7 /* WorkfinderCoordinators.framework in Embed Frameworks */,
-				FCEF2218232A9D3D004914F7 /* WorkfinderCommon.framework in Embed Frameworks */,
-				FCEF2261232A9F4F004914F7 /* WorkfinderServices.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		FCEF21E3232A9B83004914F7 /* WorkfinderFavouritesUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderFavouritesUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,7 +152,6 @@
 				FCEF21DF232A9B83004914F7 /* Sources */,
 				FCEF21E0232A9B83004914F7 /* Frameworks */,
 				FCEF21E1232A9B83004914F7 /* Resources */,
-				FCEF221D232A9D3D004914F7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

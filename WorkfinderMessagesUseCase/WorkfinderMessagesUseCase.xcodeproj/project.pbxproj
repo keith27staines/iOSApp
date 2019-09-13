@@ -12,7 +12,6 @@
 		FC0C6FE4232B8F8700816332 /* TimelineEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C6FE2232B8F8700816332 /* TimelineEntryTableViewCell.swift */; };
 		FC0C6FE5232B8F8700816332 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C6FE3232B8F8700816332 /* TimelineViewController.swift */; };
 		FC0C704F232B91B900816332 /* WorkfinderAcceptUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0C704E232B91B900816332 /* WorkfinderAcceptUseCase.framework */; };
-		FC0C7050232B91B900816332 /* WorkfinderAcceptUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC0C704E232B91B900816332 /* WorkfinderAcceptUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC0C70E9232B9B3100816332 /* MessageOptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C70DC232B9B3100816332 /* MessageOptionCollectionViewCell.swift */; };
 		FC0C70EA232B9B3100816332 /* MessageOptionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC0C70DD232B9B3100816332 /* MessageOptionsView.xib */; };
 		FC0C70EB232B9B3100816332 /* StatusCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC0C70DF232B9B3100816332 /* StatusCollectionViewCell.xib */; };
@@ -29,18 +28,13 @@
 		FC0C7105232B9DFA00816332 /* MessageDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C7102232B9DFA00816332 /* MessageDispatcher.swift */; };
 		FC0C7107232B9E4E00816332 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C7106232B9E4E00816332 /* extensions.swift */; };
 		FC0C710B232BA41300816332 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0C710A232BA41300816332 /* WorkfinderUI.framework */; };
-		FC0C710C232BA41300816332 /* WorkfinderUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC0C710A232BA41300816332 /* WorkfinderUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCEF2235232A9EB9004914F7 /* WorkfinderMessagesUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF222B232A9EB9004914F7 /* WorkfinderMessagesUseCase.framework */; };
 		FCEF223A232A9EB9004914F7 /* WorkfinderMessagesUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF2239232A9EB9004914F7 /* WorkfinderMessagesUseCaseTests.swift */; };
 		FCEF223C232A9EB9004914F7 /* WorkfinderMessagesUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = FCEF222E232A9EB9004914F7 /* WorkfinderMessagesUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCEF2256232A9F41004914F7 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2252232A9F41004914F7 /* WorkfinderCommon.framework */; };
-		FCEF2257232A9F41004914F7 /* WorkfinderCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2252232A9F41004914F7 /* WorkfinderCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCEF2258232A9F41004914F7 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2253232A9F41004914F7 /* WorkfinderCompanyDetailsUseCase.framework */; };
-		FCEF2259232A9F41004914F7 /* WorkfinderCompanyDetailsUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2253232A9F41004914F7 /* WorkfinderCompanyDetailsUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCEF225A232A9F41004914F7 /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2254232A9F41004914F7 /* WorkfinderCoordinators.framework */; };
-		FCEF225B232A9F41004914F7 /* WorkfinderCoordinators.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2254232A9F41004914F7 /* WorkfinderCoordinators.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCEF225C232A9F41004914F7 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2255232A9F41004914F7 /* WorkfinderServices.framework */; };
-		FCEF225D232A9F41004914F7 /* WorkfinderServices.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2255232A9F41004914F7 /* WorkfinderServices.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCF4B605232BBE46001340DF /* TimelineView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC0C6FE1232B8F8600816332 /* TimelineView.storyboard */; };
 		FCF4B65D232BCEA4001340DF /* MessagesModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF4B65C232BCEA4001340DF /* MessagesModelTests.swift */; };
 /* End PBXBuildFile section */
@@ -54,25 +48,6 @@
 			remoteInfo = WorkfinderMessagesUseCase;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		FCEF225E232A9F41004914F7 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				FCEF2259232A9F41004914F7 /* WorkfinderCompanyDetailsUseCase.framework in Embed Frameworks */,
-				FCEF225B232A9F41004914F7 /* WorkfinderCoordinators.framework in Embed Frameworks */,
-				FCEF2257232A9F41004914F7 /* WorkfinderCommon.framework in Embed Frameworks */,
-				FC0C710C232BA41300816332 /* WorkfinderUI.framework in Embed Frameworks */,
-				FCEF225D232A9F41004914F7 /* WorkfinderServices.framework in Embed Frameworks */,
-				FC0C7050232B91B900816332 /* WorkfinderAcceptUseCase.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		FC0C6FDC232B8F3B00816332 /* TimelineCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineCoordinator.swift; sourceTree = "<group>"; };
@@ -268,7 +243,6 @@
 				FCEF2227232A9EB9004914F7 /* Sources */,
 				FCEF2228232A9EB9004914F7 /* Frameworks */,
 				FCEF2229232A9EB9004914F7 /* Resources */,
-				FCEF225E232A9F41004914F7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
