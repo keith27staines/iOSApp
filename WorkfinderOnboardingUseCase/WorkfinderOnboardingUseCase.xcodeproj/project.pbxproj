@@ -12,6 +12,18 @@
 		FCF4B621232BC090001340DF /* WorkfinderOnboardingUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = FCF4B613232BC090001340DF /* WorkfinderOnboardingUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCF4B62C232BC0BD001340DF /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF4B62B232BC0BD001340DF /* WorkfinderCommon.framework */; };
 		FCF4B62D232BC0BD001340DF /* WorkfinderCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCF4B62B232BC0BD001340DF /* WorkfinderCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FCF4B63F232BC1F8001340DF /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF4B63D232BC1F8001340DF /* OnboardingViewController.swift */; };
+		FCF4B640232BC1F8001340DF /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF4B63E232BC1F8001340DF /* OnboardingCoordinator.swift */; };
+		FCF4B643232BC20F001340DF /* F4SPartnersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF4B642232BC20F001340DF /* F4SPartnersModel.swift */; };
+		FCF4B644232BC20F001340DF /* F4SPartner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF4B641232BC20F001340DF /* F4SPartner.swift */; };
+		FCF4B647232BC259001340DF /* PartnerSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF4B646232BC259001340DF /* PartnerSelectionViewController.swift */; };
+		FCF4B64A232BC315001340DF /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF4B649232BC315001340DF /* WorkfinderCoordinators.framework */; };
+		FCF4B64B232BC315001340DF /* WorkfinderCoordinators.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCF4B649232BC315001340DF /* WorkfinderCoordinators.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FCF4B64D232BC33B001340DF /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF4B64C232BC33B001340DF /* WorkfinderUI.framework */; };
+		FCF4B64E232BC33B001340DF /* WorkfinderUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCF4B64C232BC33B001340DF /* WorkfinderUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FCF4B654232BC900001340DF /* SelectPartner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCF4B645232BC23F001340DF /* SelectPartner.storyboard */; };
+		FCF4B655232BC905001340DF /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCF4B63C232BC1DE001340DF /* Onboarding.storyboard */; };
+		FCF4B657232BC9E5001340DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCF4B656232BC9E5001340DF /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +43,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				FCF4B64E232BC33B001340DF /* WorkfinderUI.framework in Embed Frameworks */,
+				FCF4B64B232BC315001340DF /* WorkfinderCoordinators.framework in Embed Frameworks */,
 				FCF4B62D232BC0BD001340DF /* WorkfinderCommon.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -46,6 +60,16 @@
 		FCF4B61E232BC090001340DF /* WorkfinderOnboardingUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderOnboardingUseCaseTests.swift; sourceTree = "<group>"; };
 		FCF4B620232BC090001340DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCF4B62B232BC0BD001340DF /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCF4B63B232BC1DE001340DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Onboarding.storyboard; sourceTree = "<group>"; };
+		FCF4B63D232BC1F8001340DF /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		FCF4B63E232BC1F8001340DF /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
+		FCF4B641232BC20F001340DF /* F4SPartner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPartner.swift; sourceTree = "<group>"; };
+		FCF4B642232BC20F001340DF /* F4SPartnersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPartnersModel.swift; sourceTree = "<group>"; };
+		FCF4B645232BC23F001340DF /* SelectPartner.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectPartner.storyboard; sourceTree = "<group>"; };
+		FCF4B646232BC259001340DF /* PartnerSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerSelectionViewController.swift; sourceTree = "<group>"; };
+		FCF4B649232BC315001340DF /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCF4B64C232BC33B001340DF /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCF4B656232BC9E5001340DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +77,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCF4B64D232BC33B001340DF /* WorkfinderUI.framework in Frameworks */,
+				FCF4B64A232BC315001340DF /* WorkfinderCoordinators.framework in Frameworks */,
 				FCF4B62C232BC0BD001340DF /* WorkfinderCommon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,6 +116,13 @@
 		FCF4B612232BC090001340DF /* WorkfinderOnboardingUseCase */ = {
 			isa = PBXGroup;
 			children = (
+				FCF4B656232BC9E5001340DF /* Assets.xcassets */,
+				FCF4B648232BC264001340DF /* Partner selection */,
+				FCF4B63E232BC1F8001340DF /* OnboardingCoordinator.swift */,
+				FCF4B63D232BC1F8001340DF /* OnboardingViewController.swift */,
+				FCF4B63C232BC1DE001340DF /* Onboarding.storyboard */,
+				FCF4B641232BC20F001340DF /* F4SPartner.swift */,
+				FCF4B642232BC20F001340DF /* F4SPartnersModel.swift */,
 				FCF4B613232BC090001340DF /* WorkfinderOnboardingUseCase.h */,
 				FCF4B614232BC090001340DF /* Info.plist */,
 			);
@@ -108,9 +141,20 @@
 		FCF4B62A232BC0BD001340DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCF4B64C232BC33B001340DF /* WorkfinderUI.framework */,
+				FCF4B649232BC315001340DF /* WorkfinderCoordinators.framework */,
 				FCF4B62B232BC0BD001340DF /* WorkfinderCommon.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FCF4B648232BC264001340DF /* Partner selection */ = {
+			isa = PBXGroup;
+			children = (
+				FCF4B646232BC259001340DF /* PartnerSelectionViewController.swift */,
+				FCF4B645232BC23F001340DF /* SelectPartner.storyboard */,
+			);
+			path = "Partner selection";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -206,6 +250,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCF4B654232BC900001340DF /* SelectPartner.storyboard in Resources */,
+				FCF4B657232BC9E5001340DF /* Assets.xcassets in Resources */,
+				FCF4B655232BC905001340DF /* Onboarding.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,6 +270,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCF4B647232BC259001340DF /* PartnerSelectionViewController.swift in Sources */,
+				FCF4B644232BC20F001340DF /* F4SPartner.swift in Sources */,
+				FCF4B63F232BC1F8001340DF /* OnboardingViewController.swift in Sources */,
+				FCF4B640232BC1F8001340DF /* OnboardingCoordinator.swift in Sources */,
+				FCF4B643232BC20F001340DF /* F4SPartnersModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +295,17 @@
 			targetProxy = FCF4B61B232BC090001340DF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FCF4B63C232BC1DE001340DF /* Onboarding.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FCF4B63B232BC1DE001340DF /* Base */,
+			);
+			name = Onboarding.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		FCF4B622232BC090001340DF /* Debug */ = {
@@ -296,7 +359,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -353,7 +416,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -416,6 +479,7 @@
 		FCF4B628232BC090001340DF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = WorkfinderOnboardingUseCaseTests/Info.plist;
@@ -434,6 +498,7 @@
 		FCF4B629232BC090001340DF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = WorkfinderOnboardingUseCaseTests/Info.plist;
@@ -500,7 +565,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -539,6 +604,7 @@
 		FCF4B631232BC0D3001340DF /* DebugF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = WorkfinderOnboardingUseCaseTests/Info.plist;
@@ -605,7 +671,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -644,6 +710,7 @@
 		FCF4B634232BC0D7001340DF /* DebugF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = WorkfinderOnboardingUseCaseTests/Info.plist;
@@ -704,7 +771,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -743,6 +810,7 @@
 		FCF4B637232BC0E9001340DF /* ReleaseF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = WorkfinderOnboardingUseCaseTests/Info.plist;
@@ -803,7 +871,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -842,6 +910,7 @@
 		FCF4B63A232BC0F2001340DF /* ReleaseF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = WorkfinderOnboardingUseCaseTests/Info.plist;

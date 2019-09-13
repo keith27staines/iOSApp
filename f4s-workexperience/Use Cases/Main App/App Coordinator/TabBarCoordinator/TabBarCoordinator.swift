@@ -6,6 +6,7 @@ import WorkfinderCoordinators
 import WorkfinderFavouritesUseCase
 import WorkfinderRecommendations
 import WorkfinderMessagesUseCase
+import WorkfinderOnboardingUseCase
 
 class TabBarCoordinator : TabBarCoordinatorProtocol {
     
@@ -120,11 +121,6 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
         })
         return p
     }()
-    
-    func presentPartnerSelection() {
-        let vc = UIStoryboard(name: "SelectPartner", bundle: Bundle.main).instantiateInitialViewController() as! PartnerSelectionViewController
-        topNavigationController.present(vc, animated: true) {}
-    }
     
     var topNavigationController: UINavigationController {
         return (UIApplication.shared.delegate?.window!!.rootViewController?.topMostViewController?.navigationController)!

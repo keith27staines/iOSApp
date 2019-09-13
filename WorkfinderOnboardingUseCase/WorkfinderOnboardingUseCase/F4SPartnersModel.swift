@@ -12,7 +12,7 @@ import WorkfinderServices
 
 public class F4SPartnersModel {
     
-    static func hardCodedPartners() -> [F4SPartner] {
+    public static func hardCodedPartners() -> [F4SPartner] {
         let parent = F4SPartner(uuid:   "2c4a2c39-eac7-4573-aa14-51c17810e7a1", name: "Parent (includes guardian)")
         let school = F4SPartner(uuid:   "4b2ac792-5e2c-4ee9-b825-93d5d5411b33", name: "My School")
         let friend = F4SPartner(uuid:   "a89feda0-4297-461d-b076-e291498dce9e", name: "My Friend")
@@ -40,7 +40,7 @@ public class F4SPartnersModel {
     private (set) var isReady: Bool = false
     
     /// Returns the shared instance
-    class var sharedInstance: F4SPartnersModel {
+    public class var sharedInstance: F4SPartnersModel {
         struct Static {
             static let instance: F4SPartnersModel = F4SPartnersModel()
         }

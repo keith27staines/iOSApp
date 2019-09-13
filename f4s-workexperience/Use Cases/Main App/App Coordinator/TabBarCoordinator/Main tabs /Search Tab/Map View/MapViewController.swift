@@ -12,6 +12,7 @@ import Reachability
 import WorkfinderCommon
 import WorkfinderServices
 import WorkfinderUI
+import WorkfinderOnboardingUseCase
 
 enum CamerWillMoveAction {
     case explodeCluster(GMUCluster)

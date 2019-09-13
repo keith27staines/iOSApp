@@ -107,6 +107,7 @@
 		FCE519572249645C00B550C9 /* F4SCalendarMonthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE519512249645C00B550C9 /* F4SCalendarMonthTests.swift */; };
 		FCE8DAA62320E71300934E2F /* CompanyViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAA52320E71200934E2F /* CompanyViewData.swift */; };
 		FCE8DAA82320E80B00934E2F /* ScaledNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAA72320E80B00934E2F /* ScaledNumber.swift */; };
+		FCF4B650232BC377001340DF /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF4B64F232BC377001340DF /* UserDefaultKeys.swift */; };
 		FCFC069323224081003C59C8 /* ScaledNumberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC069223224080003C59C8 /* ScaledNumberTests.swift */; };
 		FCFC069723224156003C59C8 /* RecommendationEquatableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC069623224156003C59C8 /* RecommendationEquatableTests.swift */; };
 		FCFC069923224269003C59C8 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC069823224269003C59C8 /* Message.swift */; };
@@ -235,6 +236,7 @@
 		FCE519512249645C00B550C9 /* F4SCalendarMonthTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarMonthTests.swift; sourceTree = "<group>"; };
 		FCE8DAA52320E71200934E2F /* CompanyViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyViewData.swift; sourceTree = "<group>"; };
 		FCE8DAA72320E80B00934E2F /* ScaledNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaledNumber.swift; sourceTree = "<group>"; };
+		FCF4B64F232BC377001340DF /* UserDefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
 		FCFC069223224080003C59C8 /* ScaledNumberTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaledNumberTests.swift; sourceTree = "<group>"; };
 		FCFC069623224156003C59C8 /* RecommendationEquatableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationEquatableTests.swift; sourceTree = "<group>"; };
 		FCFC069823224269003C59C8 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -436,6 +438,7 @@
 		FCA91E8622340478007ED308 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				FCF4B64F232BC377001340DF /* UserDefaultKeys.swift */,
 				FC0C710D232BA8A500816332 /* F4SAnalyticsEvents.swift */,
 				FC0660562326635000496FE2 /* Protocols.swift */,
 				FCFC06AA23225764003C59C8 /* LatLon.swift */,
@@ -693,6 +696,7 @@
 				FCFC06A423225670003C59C8 /* F4SQuadtree.swift in Sources */,
 				FCE5192E2249482A00B550C9 /* F4SCalendar.swift in Sources */,
 				FC0660572326635000496FE2 /* Protocols.swift in Sources */,
+				FCF4B650232BC377001340DF /* UserDefaultKeys.swift in Sources */,
 				FC93DC5A23202CFB00F1CE23 /* EnvironmentType.swift in Sources */,
 				FCDEA75322803BC000F1BE66 /* F4STimelinePlacement.swift in Sources */,
 				FC4EE714230EBC8100B40F6B /* F4SRoleJson.swift in Sources */,

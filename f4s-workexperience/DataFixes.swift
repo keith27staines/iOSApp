@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 import WorkfinderCommon
 import WorkfinderApplyUseCase
+import WorkfinderOnboardingUseCase
 
 public struct DataFixes {
     

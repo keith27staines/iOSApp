@@ -46,7 +46,6 @@
 		40C1A52D1DE84410000F80AA /* TriangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C1A52C1DE8440F000F80AA /* TriangleView.swift */; };
 		40C6DDF41E03F445000F8806 /* UserInfoDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C6DDF31E03F445000F8806 /* UserInfoDB.swift */; };
 		40E78E171DD31A86000A3776 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E161DD31A86000A3776 /* AppDelegate.swift */; };
-		40E78E1C1DD31A86000A3776 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E1A1DD31A86000A3776 /* Onboarding.storyboard */; };
 		40E78E1E1DD31A86000A3776 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E1D1DD31A86000A3776 /* Assets.xcassets */; };
 		40E78E211DD31A86000A3776 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E1F1DD31A86000A3776 /* LaunchScreen.storyboard */; };
 		40E78E4B1DD32862000A3776 /* f4s-workexperience.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E491DD32862000A3776 /* f4s-workexperience.xcdatamodeld */; };
@@ -70,7 +69,6 @@
 		40E78E8F1DD32C4E000A3776 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E8E1DD32C4E000A3776 /* Settings.bundle */; };
 		40E78E951DD391F3000A3776 /* MapView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E931DD391F3000A3776 /* MapView.storyboard */; };
 		40E78E981DD39275000A3776 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E971DD39275000A3776 /* MapViewController.swift */; };
-		40E78E9A1DD392B5000A3776 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E991DD392B5000A3776 /* OnboardingViewController.swift */; };
 		40E78EA01DD5E208000A3776 /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E9F1DD5E208000A3776 /* LocationHelper.swift */; };
 		799C96B7E6F564EADBEF1AFB /* Pods_f4s_workexperienceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FB15162F0A1B8298B159D38 /* Pods_f4s_workexperienceTests.framework */; };
 		C9C7302B49E1B7EF625802B5 /* Pods_f4s_workexperience.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DBDC6E5F710813F9107483D /* Pods_f4s_workexperience.framework */; };
@@ -88,7 +86,6 @@
 		FC11006A1FB36A230055EB9A /* ReachabilityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */; };
 		FC1DC06821FE13FE009ABC60 /* CompanyDetailAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC1DC06721FE13FE009ABC60 /* CompanyDetailAssets.xcassets */; };
 		FC1DC06B21FE142D009ABC60 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1DC06A21FE142D009ABC60 /* AppCoordinator.swift */; };
-		FC1E6A4D2217474500DC335B /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A4C2217474500DC335B /* OnboardingCoordinator.swift */; };
 		FC1E6A4F2217476400DC335B /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A4E2217476400DC335B /* HomeCoordinator.swift */; };
 		FC21BE32220F53EB00A0A389 /* SearchDataSourcing.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21BE20220F53EB00A0A389 /* SearchDataSourcing.swift */; };
 		FC21BE33220F53EB00A0A389 /* RandomNames.csv in Resources */ = {isa = PBXBuildFile; fileRef = FC21BE21220F53EB00A0A389 /* RandomNames.csv */; };
@@ -108,10 +105,6 @@
 		FC3CD1DA221566F200F91B50 /* Geocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CD1D9221566F200F91B50 /* Geocoding.swift */; };
 		FC4066FD23277D8F002B425E /* WorkfinderDocumentUploadUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4066FC23277D8F002B425E /* WorkfinderDocumentUploadUseCase.framework */; };
 		FC4066FE23277D8F002B425E /* WorkfinderDocumentUploadUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC4066FC23277D8F002B425E /* WorkfinderDocumentUploadUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FC4BB6031FA20EF700173864 /* PartnerSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BB6021FA20EF700173864 /* PartnerSelectionViewController.swift */; };
-		FC4BB6051FA20F4100173864 /* F4SPartner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BB6041FA20F4100173864 /* F4SPartner.swift */; };
-		FC4BB6071FA20F5100173864 /* F4SPartnersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BB6061FA20F5100173864 /* F4SPartnersModel.swift */; };
-		FC4BB6091FA21BA400173864 /* SelectPartner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC4BB6081FA21BA400173864 /* SelectPartner.storyboard */; };
 		FC50E9CE2213EF5400C9A621 /* SearchModeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */; };
 		FC53D6E12323C56F00A339ED /* WorkfinderUserDetailsUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC53D6DF2323C56F00A339ED /* WorkfinderUserDetailsUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC5CBA51231D2A4700C2D3C5 /* WorkfinderAcceptUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC5CBA50231D2A4700C2D3C5 /* WorkfinderAcceptUseCase.framework */; };
@@ -143,7 +136,6 @@
 		FCA53B921FE00CB5009F6DB0 /* VersioningService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA53B911FE00CB5009F6DB0 /* VersioningService.swift */; };
 		FCA53B961FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA53B941FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift */; };
 		FCA53B971FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */; };
-		FCA90A88221D2D4500EACD8D /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA90A87221D2D4500EACD8D /* UserDefaultKeys.swift */; };
 		FCA91E5D22340161007ED308 /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91E5C22340161007ED308 /* WorkfinderNetworking.framework */; };
 		FCA91E5E22340161007ED308 /* WorkfinderNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91E5C22340161007ED308 /* WorkfinderNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCA91E9622340577007ED308 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91E9522340577007ED308 /* WorkfinderCommon.framework */; };
@@ -172,6 +164,8 @@
 		FCEF221F232A9E24004914F7 /* WorkfinderFavouritesUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF221E232A9E24004914F7 /* WorkfinderFavouritesUseCase.framework */; };
 		FCEF2220232A9E24004914F7 /* WorkfinderFavouritesUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF221E232A9E24004914F7 /* WorkfinderFavouritesUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCF0D16C1FBC244800F2AF1D /* PopupAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */; };
+		FCF4B652232BC49A001340DF /* WorkfinderOnboardingUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF4B651232BC49A001340DF /* WorkfinderOnboardingUseCase.framework */; };
+		FCF4B653232BC49A001340DF /* WorkfinderOnboardingUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCF4B651232BC49A001340DF /* WorkfinderOnboardingUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCF5AF2B2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF2A2248BE1A00D9B8D1 /* WorkfinderApplyUseCase.framework */; };
 		FCF5AF2C2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF2A2248BE1A00D9B8D1 /* WorkfinderApplyUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCFB1328224930660086BE25 /* Mustache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCFB1327224930660086BE25 /* Mustache.framework */; };
@@ -214,6 +208,7 @@
 				FCFB1329224930660086BE25 /* Mustache.framework in Embed Frameworks */,
 				FCF5AF2C2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Embed Frameworks */,
 				FC5CBA52231D2A4700C2D3C5 /* WorkfinderAcceptUseCase.framework in Embed Frameworks */,
+				FCF4B653232BC49A001340DF /* WorkfinderOnboardingUseCase.framework in Embed Frameworks */,
 				FCD6F9E922E315B7003F7C34 /* WorkfinderAppLogic.framework in Embed Frameworks */,
 				FCA91EC222340743007ED308 /* WorkfinderUI.framework in Embed Frameworks */,
 				FC0C6FD9232B7E5700816332 /* WorkfinderRecommendations.framework in Embed Frameworks */,
@@ -296,7 +291,6 @@
 		40C6DDF31E03F445000F8806 /* UserInfoDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoDB.swift; sourceTree = "<group>"; };
 		40E78E131DD31A86000A3776 /* f4s-workexperience.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "f4s-workexperience.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		40E78E161DD31A86000A3776 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		40E78E1B1DD31A86000A3776 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Onboarding.storyboard; sourceTree = "<group>"; };
 		40E78E1D1DD31A86000A3776 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40E78E201DD31A86000A3776 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40E78E221DD31A86000A3776 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -321,7 +315,6 @@
 		40E78E8E1DD32C4E000A3776 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		40E78E941DD391F3000A3776 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MapView.storyboard; sourceTree = "<group>"; };
 		40E78E971DD39275000A3776 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		40E78E991DD392B5000A3776 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		40E78E9F1DD5E208000A3776 /* LocationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationHelper.swift; sourceTree = "<group>"; };
 		590A4AE101882A503C247BC5 /* Pods-f4s-workexperience.releasef4slive.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperience.releasef4slive.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperience/Pods-f4s-workexperience.releasef4slive.xcconfig"; sourceTree = "<group>"; };
 		5EDAD0D218CD01AA5D5D2DD5 /* Pods-f4s-workexperienceTests.debugf4s.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperienceTests.debugf4s.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperienceTests/Pods-f4s-workexperienceTests.debugf4s.xcconfig"; sourceTree = "<group>"; };
@@ -346,7 +339,6 @@
 		FC1DC06721FE13FE009ABC60 /* CompanyDetailAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CompanyDetailAssets.xcassets; sourceTree = "<group>"; };
 		FC1DC06A21FE142D009ABC60 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		FC1E6A48221714B800DC335B /* AppCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorTests.swift; sourceTree = "<group>"; };
-		FC1E6A4C2217474500DC335B /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		FC1E6A4E2217476400DC335B /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		FC21BE20220F53EB00A0A389 /* SearchDataSourcing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDataSourcing.swift; sourceTree = "<group>"; };
 		FC21BE21220F53EB00A0A389 /* RandomNames.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RandomNames.csv; sourceTree = "<group>"; };
@@ -368,10 +360,6 @@
 		FC3CD1D9221566F200F91B50 /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
 		FC3F391E222930940046F8F8 /* MockUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserService.swift; sourceTree = "<group>"; };
 		FC4066FC23277D8F002B425E /* WorkfinderDocumentUploadUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderDocumentUploadUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC4BB6021FA20EF700173864 /* PartnerSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerSelectionViewController.swift; sourceTree = "<group>"; };
-		FC4BB6041FA20F4100173864 /* F4SPartner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPartner.swift; sourceTree = "<group>"; };
-		FC4BB6061FA20F5100173864 /* F4SPartnersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPartnersModel.swift; sourceTree = "<group>"; };
-		FC4BB6081FA21BA400173864 /* SelectPartner.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectPartner.storyboard; sourceTree = "<group>"; };
 		FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModeSelectorView.swift; sourceTree = "<group>"; };
 		FC53D6DF2323C56F00A339ED /* WorkfinderUserDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUserDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5CBA50231D2A4700C2D3C5 /* WorkfinderAcceptUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAcceptUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -402,7 +390,6 @@
 		FCA53B911FE00CB5009F6DB0 /* VersioningService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersioningService.swift; sourceTree = "<group>"; };
 		FCA53B941FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SForceAppUpdateViewController.swift; sourceTree = "<group>"; };
 		FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = F4SForceAppUpdateViewController.xib; sourceTree = "<group>"; };
-		FCA90A87221D2D4500EACD8D /* UserDefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
 		FCA90A8C221D696400EACD8D /* MockNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNavigationRouter.swift; sourceTree = "<group>"; };
 		FCA90A8E221D69B600EACD8D /* MockCoordinators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoordinators.swift; sourceTree = "<group>"; };
 		FCA90A90221D6A1700EACD8D /* MockDatabaseDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDatabaseDownload.swift; sourceTree = "<group>"; };
@@ -430,6 +417,7 @@
 		FCEE5E1D2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorBackgroundViewController.swift; sourceTree = "<group>"; };
 		FCEF221E232A9E24004914F7 /* WorkfinderFavouritesUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderFavouritesUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupAnimator.swift; sourceTree = "<group>"; };
+		FCF4B651232BC49A001340DF /* WorkfinderOnboardingUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderOnboardingUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF5AF2A2248BE1A00D9B8D1 /* WorkfinderApplyUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderApplyUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCFB1327224930660086BE25 /* Mustache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mustache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCFBD0062250D69700A9361D /* f4s-workexperienceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "f4s-workexperienceTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -458,6 +446,7 @@
 				FC4066FD23277D8F002B425E /* WorkfinderDocumentUploadUseCase.framework in Frameworks */,
 				FCFB1328224930660086BE25 /* Mustache.framework in Frameworks */,
 				FCA91EC122340743007ED308 /* WorkfinderUI.framework in Frameworks */,
+				FCF4B652232BC49A001340DF /* WorkfinderOnboardingUseCase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,7 +571,6 @@
 				FCC1DF59232505340074D5C1 /* Factories */,
 				FC96709F225A18B300318F69 /* Repositories */,
 				FC1DFD87222B9CF2001951ED /* Utilities and extensions */,
-				FCA90A84221D2CFD00EACD8D /* Shared protocols */,
 				FC67711121258448000B0870 /* Assets */,
 				40E78E481DD32848000A3776 /* AppDelegate */,
 				FC2D975A22185D0C00763B06 /* Use Cases */,
@@ -728,6 +716,7 @@
 		74E1A74324CAFF4EF516E014 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCF4B651232BC49A001340DF /* WorkfinderOnboardingUseCase.framework */,
 				FC0C7110232BB31B00816332 /* WorkfinderMessagesUseCase.framework */,
 				FC0C6FD7232B7E5700816332 /* WorkfinderRecommendations.framework */,
 				FCEF221E232A9E24004914F7 /* WorkfinderFavouritesUseCase.framework */,
@@ -752,26 +741,6 @@
 				D01AFAF1CC1AF1F3203880BF /* Pods-f4s-workexperienceTests.releasef4s.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		FC0B406B226B0F1000D992AC /* Onboarding */ = {
-			isa = PBXGroup;
-			children = (
-				40E78E1A1DD31A86000A3776 /* Onboarding.storyboard */,
-				FC1E6A4C2217474500DC335B /* OnboardingCoordinator.swift */,
-				40E78E991DD392B5000A3776 /* OnboardingViewController.swift */,
-				FC0B406C226B0FAD00D992AC /* Partner selection */,
-			);
-			path = Onboarding;
-			sourceTree = "<group>";
-		};
-		FC0B406C226B0FAD00D992AC /* Partner selection */ = {
-			isa = PBXGroup;
-			children = (
-				FC0B407C226B1B8500D992AC /* Model */,
-				FC0B407B226B1B7900D992AC /* View */,
-			);
-			path = "Partner selection";
 			sourceTree = "<group>";
 		};
 		FC0B4074226B15C700D992AC /* Map View */ = {
@@ -816,24 +785,6 @@
 				40A5CF381DED6F8D000007AB /* InterestsView.storyboard */,
 			);
 			path = "Interests filter";
-			sourceTree = "<group>";
-		};
-		FC0B407B226B1B7900D992AC /* View */ = {
-			isa = PBXGroup;
-			children = (
-				FC4BB6081FA21BA400173864 /* SelectPartner.storyboard */,
-				FC4BB6021FA20EF700173864 /* PartnerSelectionViewController.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		FC0B407C226B1B8500D992AC /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				FC4BB6041FA20F4100173864 /* F4SPartner.swift */,
-				FC4BB6061FA20F5100173864 /* F4SPartnersModel.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		FC1DC06921FE1410009ABC60 /* Main App */ = {
@@ -960,7 +911,6 @@
 		FC2D975A22185D0C00763B06 /* Use Cases */ = {
 			isa = PBXGroup;
 			children = (
-				FC0B406B226B0F1000D992AC /* Onboarding */,
 				FC1DC06921FE1410009ABC60 /* Main App */,
 			);
 			path = "Use Cases";
@@ -1100,14 +1050,6 @@
 				FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */,
 			);
 			name = "Force app update";
-			sourceTree = "<group>";
-		};
-		FCA90A84221D2CFD00EACD8D /* Shared protocols */ = {
-			isa = PBXGroup;
-			children = (
-				FCA90A87221D2D4500EACD8D /* UserDefaultKeys.swift */,
-			);
-			path = "Shared protocols";
 			sourceTree = "<group>";
 		};
 		FCA90A8B221D693700EACD8D /* Mocks */ = {
@@ -1314,7 +1256,6 @@
 				FCB6D9361F75056100B8C268 /* Branding.plist in Resources */,
 				40E78E211DD31A86000A3776 /* LaunchScreen.storyboard in Resources */,
 				40A28CB71E1F96A60077D490 /* RatePlacement.storyboard in Resources */,
-				FC4BB6091FA21BA400173864 /* SelectPartner.storyboard in Resources */,
 				FC0B6B392323D5D600A1867D /* Uploads.xcassets in Resources */,
 				FCC5EBB61F449C310085CE15 /* README.md in Resources */,
 				FC681C011F57473D0077BECA /* Podfile.lock in Resources */,
@@ -1327,7 +1268,6 @@
 				FCCD6AE71FBB42A90088D7C7 /* PopupCompanyList.storyboard in Resources */,
 				FC5D3C6E20FE1CEC00F89169 /* Gemfile in Resources */,
 				FC681C001F57473D0077BECA /* Podfile in Resources */,
-				40E78E1C1DD31A86000A3776 /* Onboarding.storyboard in Resources */,
 				FCA53B971FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib in Resources */,
 				FC5D3C6C20FE17F600F89169 /* config.yml in Resources */,
 			);
@@ -1450,7 +1390,6 @@
 				FC21BE3A220F53EB00A0A389 /* SearchViewFooterView.swift in Sources */,
 				FCC753EE1F80F26200E9ECD6 /* MapModel.swift in Sources */,
 				40C1A5191DDF5ACE000F80AA /* GMUClusterManager.m in Sources */,
-				FC4BB6071FA20F5100173864 /* F4SPartnersModel.swift in Sources */,
 				20D51BE41E27710C003A8358 /* UNService.swift in Sources */,
 				40C1A51B1DDF5ACE000F80AA /* GMUDefaultClusterRenderer.m in Sources */,
 				2037B0A31DEC2DB600A9DE3E /* InterestDB.swift in Sources */,
@@ -1459,7 +1398,6 @@
 				FC6A6FC722D1E04C005F625A /* AppCoordinatorFactory.swift in Sources */,
 				FC21BE37220F53EB00A0A389 /* PeopleDataSource.swift in Sources */,
 				2037B0AF1DEC592900A9DE3E /* PlacementDBOperations.swift in Sources */,
-				FCA90A88221D2D4500EACD8D /* UserDefaultKeys.swift in Sources */,
 				40A28CBB1E1F9BCF0077D490 /* RatingControl.swift in Sources */,
 				FCA333A520BEA938002AA790 /* F4SMessagesModel.swift in Sources */,
 				40C1A5211DDF5ACE000F80AA /* GQTPointQuadTree.m in Sources */,
@@ -1474,7 +1412,6 @@
 				40A28CB91E1F96C20077D490 /* RatePlacementViewController.swift in Sources */,
 				40A5CF401DED81F7000007AB /* CustomViewFlowLayout.swift in Sources */,
 				40E78E771DD32BE7000A3776 /* DrawerBarButtonItem.swift in Sources */,
-				40E78E9A1DD392B5000A3776 /* OnboardingViewController.swift in Sources */,
 				FC21BE36220F53EB00A0A389 /* TestSearchDataGetter.swift in Sources */,
 				FCA53B961FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift in Sources */,
 				40C1A51D1DDF5ACE000F80AA /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
@@ -1498,7 +1435,6 @@
 				40E78E701DD32BD4000A3776 /* MenuHelper.swift in Sources */,
 				2037B0A71DEC3C3B00A9DE3E /* InterestCoreDataManager.swift in Sources */,
 				204C89551DF5A36100D8493A /* TemplateChoiceDB.swift in Sources */,
-				FC4BB6051FA20F4100173864 /* F4SPartner.swift in Sources */,
 				FC21BE3F220F53EB00A0A389 /* SearchViewProtocol.swift in Sources */,
 				FCCD6AE91FBB44CF0088D7C7 /* PopupCompanyListViewController.swift in Sources */,
 				204203EC1E4B160C007C7409 /* ShortlistCoreDataManager.swift in Sources */,
@@ -1510,7 +1446,6 @@
 				FC21BE39220F53EB00A0A389 /* SearchView.swift in Sources */,
 				40E78E171DD31A86000A3776 /* AppDelegate.swift in Sources */,
 				FC21BE3B220F53EB00A0A389 /* SearchViewStateMachine.swift in Sources */,
-				FC1E6A4D2217474500DC335B /* OnboardingCoordinator.swift in Sources */,
 				2037B0AD1DEC560700A9DE3E /* PlacementCoreDataManager.swift in Sources */,
 				2037B0A91DEC3D3400A9DE3E /* InterestDBOperations.swift in Sources */,
 				20FABFEC1DDDA63600D583E2 /* FileHelper.swift in Sources */,
@@ -1529,7 +1464,6 @@
 				FC9670A1225A18D900318F69 /* Repositories.swift in Sources */,
 				FC21BE32220F53EB00A0A389 /* SearchDataSourcing.swift in Sources */,
 				40E78E831DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift in Sources */,
-				FC4BB6031FA20EF700173864 /* PartnerSelectionViewController.swift in Sources */,
 				FCB46F02204FD86D00F0779F /* F4SLogViewController.swift in Sources */,
 				FC21BE34220F53EB00A0A389 /* PlacesSearchDataSource.swift in Sources */,
 				FC25A05F1F850DF4002F51A9 /* F4SCompanyPin.swift in Sources */,
@@ -1608,14 +1542,6 @@
 				40C1A4F21DDEF2F6000F80AA /* Base */,
 			);
 			name = AutoCompleteTableViewCell.xib;
-			sourceTree = "<group>";
-		};
-		40E78E1A1DD31A86000A3776 /* Onboarding.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				40E78E1B1DD31A86000A3776 /* Base */,
-			);
-			name = Onboarding.storyboard;
 			sourceTree = "<group>";
 		};
 		40E78E1F1DD31A86000A3776 /* LaunchScreen.storyboard */ = {

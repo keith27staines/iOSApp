@@ -2,32 +2,34 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderCoordinators
 
-protocol OnboardingCoordinatorProtocol : Coordinating {
+public protocol OnboardingCoordinatorProtocol : Coordinating {
     var hideOnboardingControls: Bool { get set }
     var delegate: OnboardingCoordinatorDelegate? { get set }
     var onboardingDidFinish: ((OnboardingCoordinatorProtocol) -> Void)? { get set }
 }
 
-protocol OnboardingCoordinatorDelegate : class {
+public protocol OnboardingCoordinatorDelegate : class {
     func shouldEnableLocation(_ :Bool)
 }
 
-class OnboardingCoordinator : NavigationCoordinator, OnboardingCoordinatorProtocol {
+let __bundle = Bundle(identifier: "com.f4s.WorkfinderOnboardingUseCase")
+
+public class OnboardingCoordinator : NavigationCoordinator, OnboardingCoordinatorProtocol {
     
-    weak var delegate: OnboardingCoordinatorDelegate?
+    weak public var delegate: OnboardingCoordinatorDelegate?
     weak var onboardingViewController: OnboardingViewController?
     weak var partnerSelectionViewController: PartnerSelectionViewController?
     
-    var onboardingDidFinish: ((OnboardingCoordinatorProtocol) -> Void)?
+    public var onboardingDidFinish: ((OnboardingCoordinatorProtocol) -> Void)?
     
-    var hideOnboardingControls: Bool = true {
+    public var hideOnboardingControls: Bool = true {
         didSet {
             onboardingViewController?.hideOnboardingControls = hideOnboardingControls
         }
     }
     
-    override func start() {
-        let onboardingViewController = UIStoryboard(name: "Onboarding", bundle: nil).instantiateViewController(withIdentifier: "OnboardingViewController") as! OnboardingViewController
+    public override func start() {
+        let onboardingViewController = UIStoryboard(name: "Onboarding", bundle: __bundle).instantiateViewController(withIdentifier: "OnboardingViewController") as! OnboardingViewController
         self.onboardingViewController = onboardingViewController
         onboardingViewController.hideOnboardingControls = hideOnboardingControls
         onboardingViewController.shouldEnableLocation = { [weak self] enable in
@@ -38,7 +40,7 @@ class OnboardingCoordinator : NavigationCoordinator, OnboardingCoordinatorProtoc
     }
     
     func showPartnerList() {
-        let vc = UIStoryboard(name: "SelectPartner", bundle: Bundle.main).instantiateInitialViewController() as! PartnerSelectionViewController
+        let vc = UIStoryboard(name: "SelectPartner", bundle: __bundle).instantiateInitialViewController() as! PartnerSelectionViewController
         partnerSelectionViewController = vc
         vc.doneButtonTapped = { [weak self] in
             guard let strongSelf = self else { return }

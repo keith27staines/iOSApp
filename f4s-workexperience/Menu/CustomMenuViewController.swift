@@ -9,6 +9,7 @@
 import UIKit
 import WorkfinderCommon
 import WorkfinderUI
+import WorkfinderOnboardingUseCase
 
 fileprivate enum DrawerSection: Int {
     case WelcomeSection
