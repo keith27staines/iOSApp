@@ -2,15 +2,11 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderNetworking
 
-public protocol F4SUserDocumentsServiceProtocol {
-    func getDocuments(completion: @escaping (F4SNetworkResult<F4SGetDocumentJson>) -> ())
-}
-
 public class F4SUserDocumentsService : F4SDataTaskService, F4SUserDocumentsServiceProtocol {
     
-    public init() {
+    public init(configuration: NetworkConfig) {
         let apiName = "documents"
-        super.init(baseURLString: NetworkConfig.workfinderApiV2, apiName: apiName)
+        super.init(baseURLString: configuration.workfinderApiV2, apiName: apiName, configuration: configuration)
     }
     
     public func getDocuments(completion: @escaping (F4SNetworkResult<F4SGetDocumentJson>) -> ()) {

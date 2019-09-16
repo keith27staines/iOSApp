@@ -4,8 +4,12 @@ import WorkfinderNetworking
 
 public class F4SUserService : F4SUserServiceProtocol {
     
-    public init() {
-        
+    let configuration: NetworkConfig
+    let factory: F4SNetworkTaskFactory
+    
+    public init(configuration: NetworkConfig) {
+        self.configuration = configuration
+        self.factory = F4SNetworkTaskFactory(configuration: configuration)
     }
     
     lazy var dobFormatter: DateFormatter = {
@@ -18,16 +22,14 @@ public class F4SUserService : F4SUserServiceProtocol {
         var user = user
         user.uuid = nil
         let attempting = "Update user"
-        let url = URL(string: WorkfinderEndpoint.updateUserProfileUrl)!
-        let session = F4SNetworkSessionManager.shared.interactiveSession
+        let url = URL(string: configuration.endpoints.updateUserProfileUrl)!
+        let session = configuration.sessionManager.interactiveSession
         do {
             let encoder = JSONEncoder()
             encoder.outputFormatting = .prettyPrinted
             encoder.dateEncodingStrategy = .formatted(dobFormatter)
             let data = try encoder.encode(user)
-            let urlRequest = F4SDataTaskService.urlRequest(verb: .patch, url: url, dataToSend: data)
-            let dataTask = F4SDataTaskService.networkTask(with: urlRequest, session: session, attempting: attempting) { [weak self] (result) in
-                
+            let dataTask = factory.networkTask(verb: .patch, url: url, dataToSend: data, attempting: attempting, session: session) { [weak self] (result) in
                 self?.handleUpdateUserTaskResult(attempting: attempting, result: result, completion: completion)
             
             }
@@ -47,8 +49,8 @@ public class F4SUserService : F4SUserServiceProtocol {
     
     public func enablePushNotificationForUser(installationUuid: F4SUUID, withDeviceToken: String, completion: @escaping (F4SNetworkResult<F4SPushNotificationStatus>) -> Void) {
         let attempting = "Enable push notification on server"
-        let url = URL(string: WorkfinderEndpoint.registerPushNotifictionToken + "/\(installationUuid)")!
-        let session = F4SNetworkSessionManager.shared.interactiveSession
+        let url = URL(string: configuration.endpoints.registerPushNotifictionToken + "/\(installationUuid)")!
+        let session = configuration.sessionManager.interactiveSession
         let pushToken = F4SPushToken(pushToken: withDeviceToken)
         let encoder = JSONEncoder()
         let data: Data
@@ -59,9 +61,7 @@ public class F4SUserService : F4SUserServiceProtocol {
             completion(F4SNetworkResult.error(serializationError))
             return
         }
-        
-        let urlRequest = F4SDataTaskService.urlRequest(verb: .put, url: url, dataToSend: data)
-        let dataTask = F4SDataTaskService.networkTask(with: urlRequest, session: session, attempting: attempting) { [weak self] (result) in
+        let dataTask = factory.networkTask(verb: .put, url: url, dataToSend: data, attempting: attempting, session: session) { [weak self] (result) in
             self?.handleEnableNotificatioTaskResult(attempting: attempting, result: result, completion: completion)
         }
         dataTask.resume()

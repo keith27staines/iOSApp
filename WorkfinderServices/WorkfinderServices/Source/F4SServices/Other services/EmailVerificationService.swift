@@ -10,7 +10,7 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderNetworking
 
-public typealias URLDataTaskCompletion = ((Data?, URLResponse?, Error?) -> Void)
+typealias URLDataTaskCompletion = ((Data?, URLResponse?, Error?) -> Void)
 
 public class EmailVerificationService {
     
@@ -24,9 +24,12 @@ public class EmailVerificationService {
         return URLSession.shared.dataTask(with: request, completionHandler: result)
     }
     
-    public init(email: String, clientId: String) {
+    let configuration: NetworkConfig
+    
+    public init(email: String, clientId: String, configuration: NetworkConfig) {
         self.email = email
         self.startClientId = clientId
+        self.configuration = configuration
     }
     
     public enum EmailSubmissionError : Error {
@@ -83,18 +86,19 @@ public class EmailVerificationService {
         task?.resume()
     }
     
-    func logResult(attempting: String, request: URLRequest, data: Data?, response: URLResponse?, error: Error?, logger: NetworkCallLogger? = WorkfinderNetworking.networkCallLogger) {
+    func logResult(attempting: String, request: URLRequest, data: Data?, response: URLResponse?, error: Error?) {
         let httpResponse = response as? HTTPURLResponse
+        let logger = configuration.logger
         if let error = error {
-            logger?.logDataTaskFailure(attempting: attempting, error: error, request: request, response: httpResponse, responseData: data)
+            logger.logDataTaskFailure(attempting: attempting, error: error, request: request, response: httpResponse, responseData: data)
             return
         }
         if data == nil {
             let networkError = F4SNetworkError(response: httpResponse!, attempting: attempting)!
-            logger?.logDataTaskFailure(attempting: attempting, error: networkError, request: request, response: httpResponse, responseData: data)
+            logger.logDataTaskFailure(attempting: attempting, error: networkError, request: request, response: httpResponse, responseData: data)
             return
         }
-        logger?.logDataTaskSuccess(request: request, response: httpResponse!, responseData: data!)
+        logger.logDataTaskSuccess(request: request, response: httpResponse!, responseData: data!)
     }
     
     public func verifyWithCode(email: String, code: String, onSuccess: @escaping  ( _ email:String) -> Void, onFailure: @escaping (_ email:String, _ error:CodeValidationError) -> Void) {

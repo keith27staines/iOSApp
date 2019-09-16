@@ -2,23 +2,16 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderNetworking
 
-public protocol F4SPCalendarServiceProtocol {
-
-}
-
-public class F4SPCalendarService : F4SDataTaskService {
+public class F4SAvailabilityService : F4SDataTaskService, F4SAvailabilityServiceProtocol {
     
     public let placementUuid: String
     
-    public init(placementUuid: F4SUUID) {
+    public init(placementUuid: F4SUUID, configuration: NetworkConfig) {
         self.placementUuid = placementUuid
         let apiName = "placement/\(placementUuid)"
-        super.init(baseURLString: NetworkConfig.workfinderApiV2, apiName: apiName)
+        super.init(baseURLString: configuration.workfinderApiV2, apiName: apiName, configuration: configuration)
     }
-}
 
-// MARK:- F4SDocumentServiceProtocol conformance
-extension F4SPCalendarService : F4SPCalendarServiceProtocol {
     public func getAvailabilityForPlacement(completion: @escaping (F4SNetworkResult<[F4SAvailabilityPeriodJson]>) -> ()) {
         beginGetRequest(attempting: "Get availability periods for this placement", completion: completion)
     }

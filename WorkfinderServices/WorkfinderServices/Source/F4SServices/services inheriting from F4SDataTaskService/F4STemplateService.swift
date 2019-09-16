@@ -12,9 +12,9 @@ import WorkfinderNetworking
 
 public class F4STemplateService:  F4SDataTaskService, F4STemplateServiceProtocol {
     
-    public init() {
+    public init(configuration: NetworkConfig) {
         let apiName = "cover-template"
-        super.init(baseURLString: NetworkConfig.workfinderApiV2, apiName: apiName)
+        super.init(baseURLString: configuration.workfinderApiV2, apiName: apiName, configuration: configuration)
     }
     
     public func getTemplates(completion: @escaping (F4SNetworkResult<[F4STemplate]>) -> Void) {

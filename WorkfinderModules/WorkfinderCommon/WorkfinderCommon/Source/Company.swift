@@ -1,5 +1,25 @@
 import Foundation
 
+public struct F4SCompanyJson : Codable {
+    public var linkedInUrlString: String?
+    public var duedilUrlString: String?
+    public var linkedinUrl: URL? {
+        return URL(string: self.linkedInUrlString ?? "")
+    }
+    public var duedilUrl: URL? {
+        return URL(string: self.duedilUrlString ?? "")
+    }
+    public init() {
+    }
+}
+
+extension F4SCompanyJson {
+    private enum CodingKeys : String, CodingKey {
+        case linkedInUrlString = "linkedin_url"
+        case duedilUrlString = "duedil_url"
+    }
+}
+
 public struct Company : Hashable {
     
     public static let defaultLogo = UIImage(named: "DefaultLogo")

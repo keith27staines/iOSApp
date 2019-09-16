@@ -9,19 +9,11 @@
 import WorkfinderCommon
 import WorkfinderNetworking
 
-public protocol F4SPartnerServiceProtocol {
-    var apiName: String { get }
-    func getPartners(completion: @escaping (F4SNetworkResult<[F4SPartner]>) -> ())
-}
-
-public class F4SPartnerService : F4SDataTaskService {
-    public init() {
-        super.init(baseURLString: NetworkConfig.workfinderApiV2, apiName: "partner")
+public class F4SPartnerService : F4SDataTaskService, F4SPartnerServiceProtocol {
+    public init(configuration: NetworkConfig) {
+        super.init(baseURLString: configuration.workfinderApiV2, apiName: "partner", configuration: configuration)
     }
-}
 
-// MARK:- F4SDocumentServiceProtocol conformance
-extension F4SPartnerService : F4SPartnerServiceProtocol {
     public func getPartners(completion: @escaping (F4SNetworkResult<[F4SPartner]>) -> ()) {
         beginGetRequest(attempting: "Get partners", completion: completion)
     }

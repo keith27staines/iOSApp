@@ -38,24 +38,28 @@ open class F4SDataTaskService {
     
     static var userRepo: F4SUserRepositoryProtocol = F4SUserRepository(localStore: LocalStore())
     
-    var networkTaskfactory: F4SNetworkTaskFactoryProtocol = F4SNetworkTaskFactory()
+    let networkTaskfactory: F4SNetworkTaskFactoryProtocol
     
     /// Initialize a new instance
     /// - parameter baseURLString: The base url
+    /// - parameter networkConfiguration: The network configation for Workfinder services
     /// - parameter apiName: The name of the api being called
+    /// - parameter configuration: Network configuration
     /// - parameter additionalHeaders: Any additional request headers beyond the standard wex headers
     public init(baseURLString: String,
                 apiName: String,
-                additionalHeaders: [String:Any]? = nil) {
+                configuration: NetworkConfig /*,
+                additionalHeaders: [String:Any]? = nil */) {
         self._apiName = apiName
         self.baseUrl = URL(string: baseURLString)!
-        let config = F4SDataTaskService.defaultConfiguration
-        if let additionalHeaders = additionalHeaders {
-            config.httpAdditionalHeaders?.merge(additionalHeaders, uniquingKeysWith: { (current, new) -> Any in
-                return new
-            })
-        }
-        session = URLSession(configuration: config)
+        self.networkTaskfactory = F4SNetworkTaskFactory(configuration: configuration)
+        let urlSessionConfiguration = configuration.sessionManager.interactiveSession.configuration
+//        if let additionalHeaders = additionalHeaders {
+//            config.httpAdditionalHeaders?.merge(additionalHeaders, uniquingKeysWith: { (current, new) -> Any in
+//                return new
+//            })
+//        }
+        session = URLSession(configuration: urlSessionConfiguration)
     }
     
     /// Cancels or attempts to cancel the current datatask
@@ -139,12 +143,6 @@ open class F4SDataTaskService {
         return encoder
     }()
     
-    // TODO: Remove this function when all services converted to new model which eliminates need for this
-    public static func urlRequest(verb: F4SHttpRequestVerb, url: URL, dataToSend: Data?) -> URLRequest {
-        let factory = F4SNetworkTaskFactory()
-        return factory.urlRequest(verb: verb, url: url, dataToSend: dataToSend)
-    }
-    
     func networkTask(verb: F4SHttpRequestVerb, url: URL, dataToSend: Data?, attempting: String, completion: @escaping (F4SNetworkDataResult) -> ()) -> F4SNetworkTask {
         return networkTaskfactory.networkTask(verb: verb,
                                    url: url,
@@ -158,31 +156,5 @@ open class F4SDataTaskService {
                      attempting: String,
                      completion: @escaping (F4SNetworkDataResult) -> ()) -> F4SNetworkTask {
         return networkTaskfactory.networkTask(with: request, session: session, attempting: attempting, completion: completion)
-    }
-    
-    /// Returns a `F4SNetworkTask` that can be used independently
-    public static func networkTask(with request: URLRequest,
-                                   session: F4SNetworkSession,
-                                   attempting: String,
-                                   completion: @escaping (F4SNetworkDataResult) -> ()
-        ) -> F4SNetworkTask {
-        let factory = F4SNetworkTaskFactory(userUuid: F4SDataTaskService.userRepo.load().uuid)
-        return factory.networkTask(with: request, session: session, attempting: attempting, completion: completion)
-    }
-}
-
-extension F4SDataTaskService {
-    /// Returns a dictionary of headers configured for use with the workfinder api
-    public static var defaultHeaders : [String:String] {
-        let header: [String : String] = ["wex.api.key": NetworkConfig.wexApiKey]
-        return header
-    }
-    
-    /// Returns a URLSessionConfiguration configured with appropriate parameters
-    public static var defaultConfiguration : URLSessionConfiguration {
-        let session = URLSessionConfiguration.default
-        session.allowsCellularAccess = true
-        session.httpAdditionalHeaders = defaultHeaders
-        return session
     }
 }

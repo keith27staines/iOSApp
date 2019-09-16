@@ -17,7 +17,7 @@ public struct NetworkConfig {
     public let sessionManager: F4SNetworkSessionManagerProtocol
     
     /// A logger designed to capture full details of network errors
-    let logger: NetworkCallLoggerProtocol
+    public let logger: NetworkCallLoggerProtocol
     
     public let endpoints: WorkfinderEndpoint!
     

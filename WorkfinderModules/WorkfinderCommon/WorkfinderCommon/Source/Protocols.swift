@@ -8,12 +8,6 @@ public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorPr
     var shouldAskOperatingSystemToAllowLocation: Bool { get set }
 }
 
-public protocol CompanyFavouritingServiceProtocol {
-    var apiName: String { get }
-    func favourite(companyUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SShortlistJson>) -> Void)
-    func unfavourite(shortlistUuid: String, completion: @escaping (F4SNetworkResult<F4SUUID>) -> Void)
-}
-
 public protocol RoutingProtocol {
     var rootViewController: UIViewController { get }
     func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)?)
@@ -44,17 +38,6 @@ public protocol F4SDatabaseDownloadManagerProtocol : class {
 public protocol F4SCompanyDatabaseAvailabilityObserving : class {
     func newStagedDatabaseIsAvailable(url: URL)
     func newDatabaseIsDownloading(progress: Double)
-}
-
-public protocol F4SUserStatusServiceProtocol {
-    var userStatus: F4SUserStatus? { get }
-    func beginStatusUpdate()
-    func getUserStatus(completion: @escaping (F4SNetworkResult<F4SUserStatus>) -> ())
-}
-
-public protocol F4SUserServiceProtocol : class {
-    func updateUser(user: F4SUser, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ())
-    func enablePushNotificationForUser(installationUuid: F4SUUID, withDeviceToken: String, completion: @escaping (_ result: F4SNetworkResult<F4SPushNotificationStatus>) -> ())
 }
 
 public protocol AppInstallationUuidLogicProtocol : class {
