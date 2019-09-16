@@ -105,6 +105,7 @@
 		FCE519552249645C00B550C9 /* F4SCalendarDayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE5194F2249645B00B550C9 /* F4SCalendarDayTests.swift */; };
 		FCE519562249645C00B550C9 /* F4SDisplayableMonthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE519502249645B00B550C9 /* F4SDisplayableMonthTests.swift */; };
 		FCE519572249645C00B550C9 /* F4SCalendarMonthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE519512249645C00B550C9 /* F4SCalendarMonthTests.swift */; };
+		FCE75CC6232F631C00C2E976 /* NetworkCallLoggerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE75CC5232F631C00C2E976 /* NetworkCallLoggerProtocol.swift */; };
 		FCE8DAA62320E71300934E2F /* CompanyViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAA52320E71200934E2F /* CompanyViewData.swift */; };
 		FCE8DAA82320E80B00934E2F /* ScaledNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAA72320E80B00934E2F /* ScaledNumber.swift */; };
 		FCF4B650232BC377001340DF /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF4B64F232BC377001340DF /* UserDefaultKeys.swift */; };
@@ -234,6 +235,7 @@
 		FCE5194F2249645B00B550C9 /* F4SCalendarDayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarDayTests.swift; sourceTree = "<group>"; };
 		FCE519502249645B00B550C9 /* F4SDisplayableMonthTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDisplayableMonthTests.swift; sourceTree = "<group>"; };
 		FCE519512249645C00B550C9 /* F4SCalendarMonthTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarMonthTests.swift; sourceTree = "<group>"; };
+		FCE75CC5232F631C00C2E976 /* NetworkCallLoggerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCallLoggerProtocol.swift; sourceTree = "<group>"; };
 		FCE8DAA52320E71200934E2F /* CompanyViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyViewData.swift; sourceTree = "<group>"; };
 		FCE8DAA72320E80B00934E2F /* ScaledNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaledNumber.swift; sourceTree = "<group>"; };
 		FCF4B64F232BC377001340DF /* UserDefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
@@ -438,6 +440,7 @@
 		FCA91E8622340478007ED308 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				FCE75CC5232F631C00C2E976 /* NetworkCallLoggerProtocol.swift */,
 				FCF4B64F232BC377001340DF /* UserDefaultKeys.swift */,
 				FC0C710D232BA8A500816332 /* F4SAnalyticsEvents.swift */,
 				FC0660562326635000496FE2 /* Protocols.swift */,
@@ -658,6 +661,7 @@
 				FC93768E231535750058BA75 /* F4SCompanyDocument.swift in Sources */,
 				FC0E5CFB224E1B5700615B4F /* LocalStore.swift in Sources */,
 				FCE8DAA62320E71300934E2F /* CompanyViewData.swift in Sources */,
+				FCE75CC6232F631C00C2E976 /* NetworkCallLoggerProtocol.swift in Sources */,
 				FCFC06AB23225765003C59C8 /* LatLon.swift in Sources */,
 				FC93DC56232026AA00F1CE23 /* CommonNotifications.swift in Sources */,
 				FC299951231EEA2E00F83FB6 /* Placement.swift in Sources */,
