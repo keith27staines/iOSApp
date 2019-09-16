@@ -1,17 +1,16 @@
 import XCTest
 import WorkfinderCommon
-import WorkfinderNetworking
 @testable import WorkfinderServices
 
 class F4SCompanyFavouritingServiceTests: XCTestCase {
 
     func test_initialise() {
-        let sut = F4SCompanyFavouritingService()
+        let sut = F4SCompanyFavouritingService(configuration: makeTestConfiguration())
         XCTAssertEqual(sut.apiName, "favourite")
     }
 
     func test_favourite_with_success_result() {
-        let sut = F4SCompanyFavouritingService()
+        let sut = F4SCompanyFavouritingService(configuration: makeTestConfiguration())
         let returnObject = F4SShortlistJson(uuid: "uuid", companyUuid: "companyUuid", errors: nil)
         let requiredResult = F4SNetworkResult.success(returnObject)
         sut.networkTaskfactory = MockF4SNetworkTaskFactory(requiredSuccessResult: requiredResult)
@@ -29,7 +28,7 @@ class F4SCompanyFavouritingServiceTests: XCTestCase {
     }
     
     func test_favourite_with_error_result() {
-        let sut = F4SCompanyFavouritingService()
+        let sut = F4SCompanyFavouritingService(configuration: makeTestConfiguration())
         sut.networkTaskfactory = MockF4SNetworkTaskFactory<F4SShortlistJson>(requiredNetworkError: F4SNetworkError(error: F4SError.genericError("test error"), attempting: ""))
         let expectation = XCTestExpectation(description: "")
         sut.favourite(companyUuid: "companyUuid") { (result) in
@@ -46,7 +45,7 @@ class F4SCompanyFavouritingServiceTests: XCTestCase {
     
     func test_unfavourite() {
         let shortlistUuid = "shortlistUuid"
-        let sut = F4SCompanyFavouritingService()
+        let sut = F4SCompanyFavouritingService(configuration: makeTestConfiguration())
         let requiredResult = F4SNetworkResult.success([shortlistUuid])
         sut.networkTaskfactory = MockF4SNetworkTaskFactory(requiredSuccessResult: requiredResult)
         let expectation = XCTestExpectation(description: "")

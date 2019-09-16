@@ -8,7 +8,6 @@
 
 import XCTest
 import WorkfinderCommon
-import WorkfinderNetworking
 @testable import WorkfinderServices
 
 class F4SPlacementServiceTests: XCTestCase {
@@ -31,13 +30,13 @@ class F4SPlacementServiceTests: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1)
-        XCTAssertTrue(sut.sessionManager as! MockF4SNetworkSessionManager === sessionManager)
+        XCTAssertNotNil(sut.sessionManager as? MockF4SNetworkSessionManager)
         XCTAssertTrue(previousTask.cancelWasCalled)
-        assertMockDataTask(sut.dataTask as!MockNetworkTask<F4STimelinePlacement>, verb: .get, url: "/v2/placement/placementUuid")
+        assertMockDataTask(sut.dataTask as!MockNetworkTask<F4STimelinePlacement>, verb: .get)
     }
     
     func test_getPlacement_with_error_result() {
-        let sut = F4SPlacementService(sessionManager: sessionManager)
+        let sut = F4SPlacementService(configuration: makeTestConfiguration())
         sut.networkTaskFactory = MockF4SNetworkTaskFactory<F4STimelinePlacement>(userUuid: "uuid", requiredNetworkError: F4SNetworkError(error: "test error", attempting: "get placement"))
         let expectation = XCTestExpectation(description: "")
         sut.getPlacementOffer(uuid: "placementuuid") { (result) in
@@ -68,9 +67,9 @@ class F4SPlacementServiceTests: XCTestCase {
             expectation.fulfill()
         })
         wait(for: [expectation], timeout: 1)
-        XCTAssertTrue(sut.sessionManager as! MockF4SNetworkSessionManager === sessionManager)
+        XCTAssertNotNil(sut.sessionManager as? MockF4SNetworkSessionManager)
         XCTAssertTrue(previousTask.cancelWasCalled)
-        assertMockDataTask(sut.dataTask as! MockNetworkTask<[String: String?]>, verb: .patch, url: "/v2/placement/placementUuid")
+        assertMockDataTask(sut.dataTask as! MockNetworkTask<[String: String?]>, verb: .patch)
     }
     
     func test_confirm() {
@@ -89,9 +88,9 @@ class F4SPlacementServiceTests: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1)
-        XCTAssertTrue(sut.sessionManager as! MockF4SNetworkSessionManager === sessionManager)
+        XCTAssertNotNil(sut.sessionManager as? MockF4SNetworkSessionManager)
         XCTAssertTrue(previousTask.cancelWasCalled)
-        assertMockDataTask(sut.dataTask as! MockNetworkTask<[String: String?]>, verb: .patch, url: "/v2/placement/placementUuid")
+        assertMockDataTask(sut.dataTask as! MockNetworkTask<[String: String?]>, verb: .patch)
     }
     
     func test_cancel() {
@@ -109,9 +108,8 @@ class F4SPlacementServiceTests: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1)
-        XCTAssertTrue(sut.sessionManager as! MockF4SNetworkSessionManager === sessionManager)
         XCTAssertTrue(previousTask.cancelWasCalled)
-        assertMockDataTask(sut.dataTask as! MockNetworkTask<[String: String?]>, verb: .patch, url: "/v2/placement/placementUuid")
+        assertMockDataTask(sut.dataTask as! MockNetworkTask<[String: String?]>, verb: .patch)
     }
     
     func test_decline() {
@@ -129,9 +127,8 @@ class F4SPlacementServiceTests: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1)
-        XCTAssertTrue(sut.sessionManager as! MockF4SNetworkSessionManager === sessionManager)
         XCTAssertTrue(previousTask.cancelWasCalled)
-        assertMockDataTask(sut.dataTask as! MockNetworkTask<[String: String?]>, verb: .patch, url: "/v2/placement/placementUuid")
+        assertMockDataTask(sut.dataTask as! MockNetworkTask<[String: String?]>, verb: .patch)
     }
 
     func test_getAllPlacementsForUser() {
@@ -149,9 +146,8 @@ class F4SPlacementServiceTests: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1)
-        XCTAssertTrue(sut.sessionManager as! MockF4SNetworkSessionManager === sessionManager)
         XCTAssertTrue(previousTask.cancelWasCalled)
-        assertMockDataTask(sut.dataTask as! MockNetworkTask<[F4STimelinePlacement]>, verb: .get, url: "/v2/placement")
+        assertMockDataTask(sut.dataTask as! MockNetworkTask<[F4STimelinePlacement]>, verb: .get)
     }
     
     func test_ratePlacement() {
@@ -163,15 +159,14 @@ class F4SPlacementServiceTests: XCTestCase {
     
     // MARK:- helpers
     
-    func assertMockDataTask<A:Codable>(_ dataTask: MockNetworkTask<A>, verb: F4SHttpRequestVerb, url: String) {
+    func assertMockDataTask<A:Codable>(_ dataTask: MockNetworkTask<A>, verb: F4SHttpRequestVerb) {
         XCTAssertTrue(dataTask.resumeWasCalled)
         XCTAssertFalse(dataTask.cancelWasCalled)
         XCTAssertEqual(dataTask.verb, verb)
-        XCTAssertTrue(dataTask.url! == URL(string: url)!)
     }
     
     func makeSUT<A:Codable>(successResult: F4SNetworkResult<A>) -> F4SPlacementService {
-        let sut = F4SPlacementService(sessionManager: sessionManager)
+        let sut = F4SPlacementService(configuration: makeTestConfiguration())
         sut.dataTask = previousTask
         sut.networkTaskFactory = MockF4SNetworkTaskFactory(userUuid: "userUuid", requiredSuccessResult: successResult)
         return sut

@@ -11,21 +11,25 @@ public class AcceptOfferCoordinator : CoreInjectionNavigationCoordinator {
     var parentViewController: UIViewController?
     var firstViewController: UIViewController?
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
+    let offerProcessor: F4SOfferProcessingServiceProtocol
     
     public init(parent: CoreInjectionNavigationCoordinator,
          navigationRouter: NavigationRoutingProtocol,
          inject: CoreInjectionProtocol,
          acceptContext: AcceptOfferContext,
-         companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol) {
+         companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
+         offerProcessor: F4SOfferProcessingServiceProtocol) {
         self.parent = parent
         self.acceptContext = acceptContext
         self.companyCoordinatorFactory = companyCoordinatorFactory
+        self.offerProcessor = offerProcessor
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
 
     public override func start() {
         let acceptStoryboard = UIStoryboard(name: "AcceptOffer", bundle: __bundle)
         let vc = acceptStoryboard.instantiateInitialViewController() as! AcceptOfferViewController
+        vc.offerProcessor = offerProcessor
         vc.accept = acceptContext
         vc.coordinator = self
         navigationRouter.push(viewController: vc, animated: true)

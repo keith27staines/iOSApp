@@ -1,5 +1,4 @@
 import WorkfinderCommon
-import WorkfinderNetworking
 
 /// Defines the two main functions of a network task
 /// This protocol was introduced to hide the complexity of the interface of

@@ -1,17 +1,16 @@
 import XCTest
 import WorkfinderCommon
-import WorkfinderNetworking
 @testable import WorkfinderServices
 
 class F4SContentServiceTests: XCTestCase {
 
     func test_initialise() {
-        let sut = F4SContentService()
+        let sut = F4SContentService(configuration: makeTestConfiguration())
         XCTAssertEqual(sut.apiName, "content")
     }
     
     func test_getContent() {
-        let sut = F4SContentService()
+        let sut = F4SContentService(configuration: makeTestConfiguration())
         let descriptor = [F4SContentDescriptor(title: "title", slug: F4SContentType.company)]
         let requiredResult = F4SNetworkResult.success(descriptor)
         sut.networkTaskfactory = MockF4SNetworkTaskFactory(requiredSuccessResult: requiredResult)

@@ -1,19 +1,22 @@
 import XCTest
 import WorkfinderCommon
-import WorkfinderNetworking
 @testable import WorkfinderServices
 
 class F4SCannedMessageResponsesServiceTests: XCTestCase {
     
     func test_initialise() {
         let threadUuid = "threadUuid"
-        let sut = F4SCannedMessageResponsesService(threadUuid: threadUuid)
+        let sut = F4SCannedMessageResponsesService(
+            threadUuid: threadUuid,
+            configuration: makeTestConfiguration())
         XCTAssertEqual(sut.apiName, "messaging/\(threadUuid)/possible_responses")
     }
     
     func test_getPermittedResponses() {
         let threadUuid = "threadUuid"
-        let sut = F4SCannedMessageResponsesService(threadUuid: threadUuid)
+        let sut = F4SCannedMessageResponsesService(
+            threadUuid: threadUuid,
+            configuration: makeTestConfiguration())
         let responses = F4SCannedResponses(uuid: "responsesUuid", responses: [F4SCannedResponse(uuid: "responseUuid", value: "responseValue")])
         let requiredResult = F4SNetworkResult.success(responses)
         sut.networkTaskfactory = MockF4SNetworkTaskFactory(requiredSuccessResult: requiredResult)

@@ -1,6 +1,5 @@
 import Foundation
 import WorkfinderCommon
-import WorkfinderNetworking
 
 public class F4SAvailabilityService : F4SDataTaskService, F4SAvailabilityServiceProtocol {
     

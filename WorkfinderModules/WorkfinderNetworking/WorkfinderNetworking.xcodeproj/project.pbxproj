@@ -9,15 +9,12 @@
 /* Begin PBXBuildFile section */
 		FC2768E222DF09C700B9E369 /* NetworkConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2768E122DF09C700B9E369 /* NetworkConfigTests.swift */; };
 		FC2768E422DF252000B9E369 /* F4SNetworkSessionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2768E322DF252000B9E369 /* F4SNetworkSessionManagerTests.swift */; };
-		FC2768E622DF582D00B9E369 /* F4SHttpRequestVerb.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2768E522DF582D00B9E369 /* F4SHttpRequestVerb.swift */; };
 		FC2768E822DF595600B9E369 /* F4SHttpRequestVerbTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2768E722DF595600B9E369 /* F4SHttpRequestVerbTests.swift */; };
-		FC6DBCA422BA20410080B8E4 /* WorkfinderEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6DBCA222BA20410080B8E4 /* WorkfinderEndpoint.swift */; };
 		FC6DBCA522BA20410080B8E4 /* F4SNetworkSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6DBCA122BA20410080B8E4 /* F4SNetworkSessionManager.swift */; };
 		FC83C2D722ED716D00EA2778 /* MockLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83C2D622ED716D00EA2778 /* MockLog.swift */; };
 		FC9865BE229D39DC006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865BD229D39DC006D3E63 /* README */; };
 		FCA91E3C2233FF20007ED308 /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91E322233FF20007ED308 /* WorkfinderNetworking.framework */; };
 		FCA91E432233FF20007ED308 /* WorkfinderNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA91E352233FF20007ED308 /* WorkfinderNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FCA91E4F2233FFDC007ED308 /* WorkfinderNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91E4E2233FFDC007ED308 /* WorkfinderNetworking.swift */; };
 		FCC2EC1622E85820009E8988 /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC2EC1522E85820009E8988 /* LoggerTests.swift */; };
 		FCD8AEB122BC9F0E00C52E74 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD8AEB022BC9F0E00C52E74 /* Logger.swift */; };
 		FCE75CCA232F657000C2E976 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE75CC9232F657000C2E976 /* WorkfinderCommon.framework */; };
@@ -51,10 +48,8 @@
 /* Begin PBXFileReference section */
 		FC2768E122DF09C700B9E369 /* NetworkConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfigTests.swift; sourceTree = "<group>"; };
 		FC2768E322DF252000B9E369 /* F4SNetworkSessionManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SNetworkSessionManagerTests.swift; sourceTree = "<group>"; };
-		FC2768E522DF582D00B9E369 /* F4SHttpRequestVerb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SHttpRequestVerb.swift; sourceTree = "<group>"; };
 		FC2768E722DF595600B9E369 /* F4SHttpRequestVerbTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SHttpRequestVerbTests.swift; sourceTree = "<group>"; };
 		FC6DBCA122BA20410080B8E4 /* F4SNetworkSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SNetworkSessionManager.swift; sourceTree = "<group>"; };
-		FC6DBCA222BA20410080B8E4 /* WorkfinderEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderEndpoint.swift; sourceTree = "<group>"; };
 		FC83C2D622ED716D00EA2778 /* MockLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLog.swift; sourceTree = "<group>"; };
 		FC9865BD229D39DC006D3E63 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		FCA91E322233FF20007ED308 /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,7 +57,6 @@
 		FCA91E362233FF20007ED308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCA91E3B2233FF20007ED308 /* WorkfinderNetworkingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderNetworkingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA91E422233FF20007ED308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FCA91E4E2233FFDC007ED308 /* WorkfinderNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderNetworking.swift; sourceTree = "<group>"; };
 		FCC2EC1522E85820009E8988 /* LoggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerTests.swift; sourceTree = "<group>"; };
 		FCD8AEB022BC9F0E00C52E74 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		FCE75CC9232F657000C2E976 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,10 +144,7 @@
 		FCA91E4D2233FFAC007ED308 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				FCA91E4E2233FFDC007ED308 /* WorkfinderNetworking.swift */,
-				FC6DBCA222BA20410080B8E4 /* WorkfinderEndpoint.swift */,
 				FC6DBCA122BA20410080B8E4 /* F4SNetworkSessionManager.swift */,
-				FC2768E522DF582D00B9E369 /* F4SHttpRequestVerb.swift */,
 				FCD8AEB022BC9F0E00C52E74 /* Logger.swift */,
 			);
 			path = Source;
@@ -272,9 +263,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FCA91E4F2233FFDC007ED308 /* WorkfinderNetworking.swift in Sources */,
-				FC2768E622DF582D00B9E369 /* F4SHttpRequestVerb.swift in Sources */,
-				FC6DBCA422BA20410080B8E4 /* WorkfinderEndpoint.swift in Sources */,
 				FCD8AEB122BC9F0E00C52E74 /* Logger.swift in Sources */,
 				FC6DBCA522BA20410080B8E4 /* F4SNetworkSessionManager.swift in Sources */,
 			);

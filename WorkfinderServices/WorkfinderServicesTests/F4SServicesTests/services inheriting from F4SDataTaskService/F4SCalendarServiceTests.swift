@@ -1,20 +1,23 @@
 import XCTest
 import WorkfinderCommon
-import WorkfinderNetworking
 @testable import WorkfinderServices
 
 class F4SCalendarServiceTests: XCTestCase {
     
     func test_initialise() {
         let placementUuid = "placementUuid"
-        let sut = F4SAvailabilityService(placementUuid: placementUuid)
+        let sut = F4SAvailabilityService(
+            placementUuid: placementUuid,
+            configuration: makeTestConfiguration())
         XCTAssertEqual(sut.apiName, "placement/\(placementUuid)")
         XCTAssertEqual(sut.placementUuid, placementUuid)
     }
     
     func test_getAvailability_with_success_result() {
         let placementUuid = "placementUuid"
-        let sut = F4SAvailabilityService(placementUuid: placementUuid)
+        let sut = F4SAvailabilityService(
+            placementUuid: placementUuid,
+            configuration: makeTestConfiguration())
         let returnObject = [F4SAvailabilityPeriodJson(start_date: "2019-08-22", end_date: "2019-08-30", day_time_info: nil)]
         let requiredResult = F4SNetworkResult.success(returnObject)
         sut.networkTaskfactory = MockF4SNetworkTaskFactory(requiredSuccessResult: requiredResult)
@@ -33,7 +36,9 @@ class F4SCalendarServiceTests: XCTestCase {
     
     func test_getPartners_with_error_result() {
         let placementUuid = "placementUuid"
-        let sut = F4SAvailabilityService(placementUuid: placementUuid)
+        let sut = F4SAvailabilityService(
+            placementUuid: placementUuid,
+            configuration: makeTestConfiguration())
         let error = F4SNetworkError(error: F4SError.genericError("test error"), attempting: "")
         sut.networkTaskfactory = MockF4SNetworkTaskFactory<[F4SAvailabilityPeriodJson]>(requiredNetworkError: error)
         let expectation = XCTestExpectation(description: "")
@@ -51,7 +56,9 @@ class F4SCalendarServiceTests: XCTestCase {
     
     func test_patchAvailability_with_success_result() {
         let placementUuid = "placementUuid"
-        let sut = F4SAvailabilityService(placementUuid: placementUuid)
+        let sut = F4SAvailabilityService(
+            placementUuid: placementUuid,
+            configuration: makeTestConfiguration())
         let period = F4SAvailabilityPeriodJson(start_date: "2019-08-22", end_date: "2019-08-30", day_time_info: nil)
         let periods = F4SAvailabilityPeriodsJson(availability_periods: [period])
         let patch = [period]

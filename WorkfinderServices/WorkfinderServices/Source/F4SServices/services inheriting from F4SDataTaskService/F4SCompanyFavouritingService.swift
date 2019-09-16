@@ -1,6 +1,5 @@
 import Foundation
 import WorkfinderCommon
-import WorkfinderNetworking
 
 public class F4SCompanyFavouritingService : F4SDataTaskService, CompanyFavouritingServiceProtocol {
 

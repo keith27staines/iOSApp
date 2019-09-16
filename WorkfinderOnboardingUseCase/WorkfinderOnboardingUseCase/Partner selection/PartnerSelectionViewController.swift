@@ -29,6 +29,7 @@ class PartnerSelectionViewController: UIViewController {
     @IBOutlet weak var partnerLogoImageView: UIImageView!
     
     var doneButtonTapped: (() -> ())?
+    var partnersModel: F4SPartnersModel!
     
     @IBAction func doneButtonPressed(_ sender: Any) {
         partnersModel.selectedPartner = selectedPartner
@@ -86,11 +87,6 @@ class PartnerSelectionViewController: UIViewController {
         styleNavigationController()
         self.view.backgroundColor = splashColor
     }
-    
-    lazy var partnersModel: F4SPartnersModel = {
-        let model = F4SPartnersModel.sharedInstance
-        return model
-    }()
 }
 
 // MARK: UITextFieldDelegate conformance

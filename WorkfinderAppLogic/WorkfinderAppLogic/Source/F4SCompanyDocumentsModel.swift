@@ -13,9 +13,9 @@ import WorkfinderServices
 public class F4SCompanyDocumentsModel {
 
     public let companyUuid: F4SUUID
-    
     public private (set) var documents: F4SCompanyDocuments = F4SCompanyDocuments()
-    
+    let service: F4SCompanyDocumentServiceProtocol
+
     public var availableDocuments: F4SCompanyDocuments {
         return documents.filter({ (document) -> Bool in
             document.state == F4SCompanyDocument.State.available
@@ -34,8 +34,9 @@ public class F4SCompanyDocumentsModel {
         })
     }
     
-    public init(companyUuid: F4SUUID) {
+    public init(companyUuid: F4SUUID, documentsService: F4SCompanyDocumentServiceProtocol) {
         self.companyUuid = companyUuid
+        self.service = documentsService
     }
     
     public var numberOfSections: Int = 3
@@ -84,10 +85,6 @@ public class F4SCompanyDocumentsModel {
             completion(result)
         }
     }
-    
-    lazy var service: F4SCompanyDocumentService = {
-        return F4SCompanyDocumentService()
-    }()
     
     public func getDocuments(age: Int, completion: @escaping (F4SNetworkResult<F4SCompanyDocuments>)->()) {
         service.getDocuments(companyUuid: companyUuid) { [weak self] result in

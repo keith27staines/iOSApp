@@ -13,13 +13,16 @@ import WorkfinderServices
 
 /// A state machine that controls the verification process for emails
 public class F4SEmailVerificationModel {
-    public static var shared: F4SEmailVerificationModel = F4SEmailVerificationModel()
     
     /// The last non-error state before transitioning to the current state
     public private (set) var lastNonErrorState: F4SEmailVerificationState
     
+    /// The service required to initiate and complete email verification requests
+    let emailVerificationService: EmailVerificationServiceProtocol
+    
     /// Initialises a new instance
-    private init() {
+    public init(emailVerificationService: EmailVerificationServiceProtocol) {
+        self.emailVerificationService = emailVerificationService
         lastNonErrorState = F4SEmailVerificationState.start
         emailVerificationState = .previouslyVerified
         addNotificationHandlers()
@@ -45,18 +48,15 @@ public class F4SEmailVerificationModel {
 
     /// Restarts the verification process
     public func restart() {
-        emailVerificationService?.cancel()
+        emailVerificationService.cancel()
         emailVerificationState = .start
     }
     
     var submitEmailForVerificationRetryCount: Int = 0
     
-    var emailVerificationService: EmailVerificationService?
-    
     /// Verification is performed by sending an email to the specified address. The email contains a code or link which will, in turn, need to be submitted for final verification
     public func submitEmailForVerification(_ email: String, completion: @escaping (()->Void)) {
-        emailVerificationService = EmailVerificationService(email: email, clientId: authenticationClientId())
-        emailVerificationService?.start(onSuccess: { [weak self] (email) in
+        emailVerificationService.start(onSuccess: { [weak self] (email) in
             guard let strongSelf = self else { return }
             strongSelf.submitEmailForVerificationRetryCount = 0
             strongSelf.emailVerificationState = .emailSent(email)
@@ -93,7 +93,7 @@ public class F4SEmailVerificationModel {
             return
         }
         
-        emailVerificationService?.verifyWithCode(email: emailSentForVerification, code: code, onSuccess: { [weak self] (email) in
+        emailVerificationService.verifyWithCode(email: emailSentForVerification, code: code, onSuccess: { [weak self] (email) in
             guard let strongSelf = self else { return }
             strongSelf.emailVerificationState = .verified
             strongSelf.submitEmailForVerificationRetryCount = 0

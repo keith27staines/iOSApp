@@ -1,17 +1,16 @@
 import XCTest
 import WorkfinderCommon
-import WorkfinderNetworking
 @testable import WorkfinderServices
 
 class F4SPartnerServiceTests: XCTestCase {
 
     func test_initialise() {
-        let sut = F4SPartnerService()
+        let sut = F4SPartnerService(configuration: makeTestConfiguration())
         XCTAssertEqual(sut.apiName, "partner")
     }
     
     func test_getPartners_with_success_result() {
-        let sut = F4SPartnerService()
+        let sut = F4SPartnerService(configuration: makeTestConfiguration())
         let returnObject = [F4SPartner(uuid: "partnerUuid", name: "partnerName")]
         let requiredResult = F4SNetworkResult.success(returnObject)
         sut.networkTaskfactory = MockF4SNetworkTaskFactory(requiredSuccessResult: requiredResult)
@@ -29,7 +28,7 @@ class F4SPartnerServiceTests: XCTestCase {
     }
     
     func test_getPartners_with_error_result() {
-        let sut = F4SPartnerService()
+        let sut = F4SPartnerService(configuration: makeTestConfiguration())
         let error = F4SNetworkError(error: F4SError.genericError("test error"), attempting: "")
         sut.networkTaskfactory = MockF4SNetworkTaskFactory<[F4SPartner]>(requiredNetworkError: error)
         let expectation = XCTestExpectation(description: "")

@@ -1,14 +1,5 @@
-//
-//  F4SCompanyDocumentService.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 23/04/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
-//
-
 import Foundation
 import WorkfinderCommon
-import WorkfinderNetworking
 
 public class F4SCompanyDocumentService: F4SDataTaskService, F4SCompanyDocumentServiceProtocol {
 

@@ -1,5 +1,4 @@
 import WorkfinderCommon
-import WorkfinderNetworking
 
 public typealias URLDataTaskResult = (Data?,URLResponse?,Error?)
 
@@ -36,29 +35,22 @@ open class F4SDataTaskService {
         return baseUrl.absoluteString + "/" + apiName
     }
     
-    static var userRepo: F4SUserRepositoryProtocol = F4SUserRepository(localStore: LocalStore())
+    var userRepo: F4SUserRepositoryProtocol = F4SUserRepository(localStore: LocalStore())
     
-    let networkTaskfactory: F4SNetworkTaskFactoryProtocol
+    var networkTaskfactory: F4SNetworkTaskFactoryProtocol
     
     /// Initialize a new instance
     /// - parameter baseURLString: The base url
     /// - parameter networkConfiguration: The network configation for Workfinder services
     /// - parameter apiName: The name of the api being called
     /// - parameter configuration: Network configuration
-    /// - parameter additionalHeaders: Any additional request headers beyond the standard wex headers
     public init(baseURLString: String,
                 apiName: String,
-                configuration: NetworkConfig /*,
-                additionalHeaders: [String:Any]? = nil */) {
+                configuration: NetworkConfig) {
         self._apiName = apiName
         self.baseUrl = URL(string: baseURLString)!
         self.networkTaskfactory = F4SNetworkTaskFactory(configuration: configuration)
         let urlSessionConfiguration = configuration.sessionManager.interactiveSession.configuration
-//        if let additionalHeaders = additionalHeaders {
-//            config.httpAdditionalHeaders?.merge(additionalHeaders, uniquingKeysWith: { (current, new) -> Any in
-//                return new
-//            })
-//        }
         session = URLSession(configuration: urlSessionConfiguration)
     }
     

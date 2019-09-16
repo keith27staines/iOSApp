@@ -1,6 +1,5 @@
 import XCTest
 import WorkfinderCommon
-import WorkfinderNetworking
 import WorkfinderServices
 
 class MockF4SNetworkTaskFactory<A:Codable> : F4SNetworkTaskFactoryProtocol {
@@ -11,13 +10,17 @@ class MockF4SNetworkTaskFactory<A:Codable> : F4SNetworkTaskFactoryProtocol {
     
     init(userUuid: F4SUUID = "userUuid",
          requiredSuccessResult: F4SNetworkResult<A>) {
-        self.factory = F4SNetworkTaskFactory(userUuid: userUuid)
+        self.factory = F4SNetworkTaskFactory(
+            userUuid: userUuid,
+            configuration: makeTestConfiguration())
         self.requiredSuccessResult = requiredSuccessResult
         self.requiredNetworkError = nil
     }
     init(userUuid: F4SUUID = "userUuid",
          requiredNetworkError: F4SNetworkError) {
-        self.factory = F4SNetworkTaskFactory(userUuid: userUuid)
+        self.factory = F4SNetworkTaskFactory(
+            userUuid: userUuid,
+            configuration: makeTestConfiguration())
         self.requiredNetworkError = requiredNetworkError
         self.requiredSuccessResult = nil
     }

@@ -1,6 +1,5 @@
 import Foundation
 import WorkfinderCommon
-import WorkfinderNetworking
 
 public class F4SPlacementDocumentsService : F4SDataTaskService, F4SPlacementDocumentServiceProtocol {
     public let placementUuid: String

@@ -1,7 +1,6 @@
 // F4SPlacementService
 import Foundation
 import WorkfinderCommon
-import WorkfinderNetworking
 
 public class F4SPlacementService : F4SPlacementServiceProtocol, F4SOfferProcessingServiceProtocol {
     

@@ -53,6 +53,10 @@
 		FC2E205B22F9D1DD0094B134 /* F4SUUIDDictionarytests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2E205A22F9D1DD0094B134 /* F4SUUIDDictionarytests.swift */; };
 		FC32FD432265E4C800740F0C /* F4SContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32FD422265E4C800740F0C /* F4SContentType.swift */; };
 		FC426EFC232FA274004F8A3E /* WorkfinderServiceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426EFB232FA274004F8A3E /* WorkfinderServiceProtocols.swift */; };
+		FC426EFE232FAC6C004F8A3E /* F4SNetworkSessionManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426EFD232FAC6C004F8A3E /* F4SNetworkSessionManagerProtocol.swift */; };
+		FC426F04232FAEA9004F8A3E /* WorkfinderEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426F03232FAEA9004F8A3E /* WorkfinderEndpoint.swift */; };
+		FC426F08232FAFF0004F8A3E /* WorkfinderNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426F07232FAFF0004F8A3E /* WorkfinderNetworking.swift */; };
+		FC426F0E232FF8BC004F8A3E /* EmailVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426F0D232FF8BC004F8A3E /* EmailVerification.swift */; };
 		FC4EE710230EB9D700B40F6B /* F4SUserStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE70F230EB9D700B40F6B /* F4SUserStatus.swift */; };
 		FC4EE714230EBC8100B40F6B /* F4SRoleJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE713230EBC8100B40F6B /* F4SRoleJson.swift */; };
 		FC4EE72C230EF10400B40F6B /* F4SMessageStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE72B230EF10300B40F6B /* F4SMessageStructs.swift */; };
@@ -181,6 +185,10 @@
 		FC2E205A22F9D1DD0094B134 /* F4SUUIDDictionarytests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUUIDDictionarytests.swift; sourceTree = "<group>"; };
 		FC32FD422265E4C800740F0C /* F4SContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SContentType.swift; sourceTree = "<group>"; };
 		FC426EFB232FA274004F8A3E /* WorkfinderServiceProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkfinderServiceProtocols.swift; sourceTree = "<group>"; };
+		FC426EFD232FAC6C004F8A3E /* F4SNetworkSessionManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SNetworkSessionManagerProtocol.swift; sourceTree = "<group>"; };
+		FC426F03232FAEA9004F8A3E /* WorkfinderEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderEndpoint.swift; sourceTree = "<group>"; };
+		FC426F07232FAFF0004F8A3E /* WorkfinderNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderNetworking.swift; sourceTree = "<group>"; };
+		FC426F0D232FF8BC004F8A3E /* EmailVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerification.swift; sourceTree = "<group>"; };
 		FC4EE70F230EB9D700B40F6B /* F4SUserStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserStatus.swift; sourceTree = "<group>"; };
 		FC4EE713230EBC8100B40F6B /* F4SRoleJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRoleJson.swift; sourceTree = "<group>"; };
 		FC4EE72B230EF10300B40F6B /* F4SMessageStructs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SMessageStructs.swift; sourceTree = "<group>"; };
@@ -296,6 +304,7 @@
 		FC22438D232F94AA0073C9B1 /* ServiceProtocols */ = {
 			isa = PBXGroup;
 			children = (
+				FC426F03232FAEA9004F8A3E /* WorkfinderEndpoint.swift */,
 				FC426EFB232FA274004F8A3E /* WorkfinderServiceProtocols.swift */,
 			);
 			path = ServiceProtocols;
@@ -450,6 +459,7 @@
 		FCA91E8622340478007ED308 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				FCDFEA15223D32EA00E58649 /* Networking */,
 				FC22438D232F94AA0073C9B1 /* ServiceProtocols */,
 				FCE75CC5232F631C00C2E976 /* NetworkCallLoggerProtocol.swift */,
 				FCF4B64F232BC377001340DF /* UserDefaultKeys.swift */,
@@ -477,7 +487,6 @@
 				FCA91E87223404AF007ED308 /* WorkfinderCommon.swift */,
 				FCDEA75222803BC000F1BE66 /* F4STimelinePlacement.swift */,
 				FCF5AEFD2248B2A300D9B8D1 /* Extensions */,
-				FCDFEA15223D32EA00E58649 /* Networking */,
 				FCDFEA14223D32D700E58649 /* Errors and Results */,
 				FC9670992258C81000318F69 /* F4SPlacement.swift */,
 				FC96709B2258C8B100318F69 /* F4SInterest.swift */,
@@ -496,6 +505,7 @@
 				FCC1DF5E232507530074D5C1 /* SocialShare.swift */,
 				FC06605C2326770B00496FE2 /* F4SShortlistJson.swift */,
 				FC22438E232F9E750073C9B1 /* F4SCompanyDatabaseMetaData.swift */,
+				FC426F0D232FF8BC004F8A3E /* EmailVerification.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -512,6 +522,8 @@
 		FCDFEA15223D32EA00E58649 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				FC426F07232FAFF0004F8A3E /* WorkfinderNetworking.swift */,
+				FC426EFD232FAC6C004F8A3E /* F4SNetworkSessionManagerProtocol.swift */,
 				FC7A4395224A3C0E00B2D693 /* F4SNetworkInterface.swift */,
 			);
 			path = Networking;
@@ -687,12 +699,14 @@
 				FC22DC0A22F9ACBC0068C61C /* F4STemplateBlank.swift in Sources */,
 				FC96709A2258C81000318F69 /* F4SPlacement.swift in Sources */,
 				FCC1DF5F232507530074D5C1 /* SocialShare.swift in Sources */,
+				FC426F04232FAEA9004F8A3E /* WorkfinderEndpoint.swift in Sources */,
 				FC53D6DC2323BA4300A339ED /* F4SCompanyRepository.swift in Sources */,
 				FC22DC0822F9AC710068C61C /* F4STemplate.swift in Sources */,
 				FCFC069923224269003C59C8 /* Message.swift in Sources */,
 				FCDFEA0C223D1CBC00E58649 /* WEXErrorsFactory.swift in Sources */,
 				FCDB073A2286F7870053347F /* F4SUserRepository.swift in Sources */,
 				FC32FD432265E4C800740F0C /* F4SContentType.swift in Sources */,
+				FC426EFE232FAC6C004F8A3E /* F4SNetworkSessionManagerProtocol.swift in Sources */,
 				FC22438F232F9E750073C9B1 /* F4SCompanyDatabaseMetaData.swift in Sources */,
 				FCE51937224948E400B550C9 /* F4SAvailabilityPeriod.swift in Sources */,
 				FCDB07382286F6640053347F /* F4SUser.swift in Sources */,
@@ -715,6 +729,7 @@
 				FCF4B650232BC377001340DF /* UserDefaultKeys.swift in Sources */,
 				FC93DC5A23202CFB00F1CE23 /* EnvironmentType.swift in Sources */,
 				FCDEA75322803BC000F1BE66 /* F4STimelinePlacement.swift in Sources */,
+				FC426F0E232FF8BC004F8A3E /* EmailVerification.swift in Sources */,
 				FC4EE714230EBC8100B40F6B /* F4SRoleJson.swift in Sources */,
 				FC9670A6225A279300318F69 /* F4SInterestsRepositoryProtocol.swift in Sources */,
 				FCA91E88223404AF007ED308 /* WorkfinderCommon.swift in Sources */,
@@ -725,6 +740,7 @@
 				FC5019652306A24500A26B53 /* F4SDayOfWeek.swift in Sources */,
 				FCE5192C2249482A00B550C9 /* F4SCalendarWeek.swift in Sources */,
 				FC5CBA6A231D3E4700C2D3C5 /* F4SDateHelper.swift in Sources */,
+				FC426F08232FAFF0004F8A3E /* WorkfinderNetworking.swift in Sources */,
 				FC1F591622FD6D42007164BA /* F4SPushToken.swift in Sources */,
 				FC9535A5231E7E7700F4A9DA /* Company.swift in Sources */,
 				FCFC06A523225670003C59C8 /* CGRect+Methods.swift in Sources */,

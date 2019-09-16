@@ -44,10 +44,12 @@ class F4SEmailVerificationViewController: UIViewController {
 
     /// A callback to inform the presenter that the email was verified
     var emailWasVerified: (() -> Void)? = nil
+    
+    var emailVerificationService: EmailVerificationServiceProtocol!
 
     /// The finite state machine that serves as the model for this view
     lazy var model: F4SEmailVerificationModel = {
-        let model = F4SEmailVerificationModel.shared
+        let model = F4SEmailVerificationModel(emailVerificationService: emailVerificationService)
         model.didChangeState = handleStateChange(oldState:newState:)
         return model
     }()

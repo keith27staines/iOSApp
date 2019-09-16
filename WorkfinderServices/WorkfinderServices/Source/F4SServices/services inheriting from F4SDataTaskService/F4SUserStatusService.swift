@@ -1,6 +1,5 @@
 import Foundation
 import WorkfinderCommon
-import WorkfinderNetworking
 
 public extension Notification.Name {
     static let f4sUserStatusUpdated = Notification.Name(

@@ -1,6 +1,5 @@
 import Foundation
 import WorkfinderCommon
-import WorkfinderNetworking
 
 public class F4SRecommendationService : F4SDataTaskService, F4SRecommendationServiceProtocol {
     public static let apiName = "recommend"

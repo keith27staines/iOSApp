@@ -4,7 +4,7 @@ import Foundation
 /// currently used in the app
 public struct WorkfinderEndpoint {
     
-    init(baseUrlString: String) {
+    public init(baseUrlString: String) {
         self.base = baseUrlString
     }
     

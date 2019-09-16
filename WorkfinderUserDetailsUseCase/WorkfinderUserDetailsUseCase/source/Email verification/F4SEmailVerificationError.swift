@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 import WorkfinderNetworking
 import WorkfinderServices
 
@@ -23,7 +24,7 @@ public enum F4SEmailVerificationError : Error {
         if let f4s = error as? F4SEmailVerificationError { return f4s }
         
         switch error {
-        case let error as EmailVerificationService.EmailSubmissionError:
+        case let error as EmailSubmissionError:
             switch error {
             case .client:
                 return F4SEmailVerificationError.networkNotAvailable
@@ -35,7 +36,7 @@ public enum F4SEmailVerificationError : Error {
                 return F4SEmailVerificationError.networkErrorSubmittingEmailForVerification
             }
         
-        case let error as EmailVerificationService.CodeValidationError:
+        case let error as CodeValidationError:
             switch error {
             case .client:
                 return F4SEmailVerificationError.networkNotAvailable

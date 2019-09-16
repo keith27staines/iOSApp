@@ -23,7 +23,7 @@ class AcceptOfferViewController: UIViewController {
     var companyDocumentsModel: F4SCompanyDocumentsModel?
     weak var coordinator: AcceptOfferCoordinator?
     
-    var offerProcessor: F4SOfferProcessingServiceProtocol = F4SPlacementService()
+    var offerProcessor: F4SOfferProcessingServiceProtocol!
     var userMessageHandler = UserMessageHandler()
     var offerConfirmer: F4SOfferConfirmer?
     
@@ -83,6 +83,7 @@ class AcceptOfferViewController: UIViewController {
             requestDocumentsViewController.accept = accept
             requestDocumentsViewController.coordinator = coordinator
             requestDocumentsViewController.companyDocumentsModel = self.companyDocumentsModel
+            requestDocumentsViewController.placementService = offerProcessor
             return
         }
     }

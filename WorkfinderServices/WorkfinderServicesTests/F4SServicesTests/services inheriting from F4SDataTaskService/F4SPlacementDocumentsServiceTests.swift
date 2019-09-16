@@ -1,19 +1,22 @@
 import XCTest
 import WorkfinderCommon
-import WorkfinderNetworking
 @testable import WorkfinderServices
 
 class F4SPlacementDocumentsServiceTests : XCTestCase {
     
     func test_initialise() {
         let placementUuid = "placementUuid"
-        let sut = F4SPlacementDocumentsService(placementUuid: placementUuid)
+        let sut = F4SPlacementDocumentsService(
+            placementUuid: placementUuid,
+            configuration: makeTestConfiguration())
         XCTAssertEqual(sut.apiName, "placement/\(placementUuid)/documents")
     }
     
     func test_getDocuments() {
         let placementUuid = "placementUuid"
-        let sut = F4SPlacementDocumentsService(placementUuid: placementUuid)
+        let sut = F4SPlacementDocumentsService(
+            placementUuid: placementUuid,
+            configuration: makeTestConfiguration())
         let expectedValue = F4SGetDocumentJson(uuid: "uuid", documents: [F4SDocument(uuid: "documentUuid", urlString: "url/url", type: F4SUploadableDocumentType.cv, name: "my cv")])
         let requiredResult = F4SNetworkResult.success(expectedValue)
         sut.networkTaskfactory = MockF4SNetworkTaskFactory(requiredSuccessResult: requiredResult)
@@ -32,7 +35,9 @@ class F4SPlacementDocumentsServiceTests : XCTestCase {
     
     func test_putDocuments() {
         let placementUuid = "placementUuid"
-        let sut = F4SPlacementDocumentsService(placementUuid: placementUuid)
+        let sut = F4SPlacementDocumentsService(
+            placementUuid: placementUuid,
+            configuration: makeTestConfiguration())
         let document = F4SDocument(uuid: "docUuid", urlString: "documentUrlstring", type: F4SUploadableDocumentType.cv, name: "my cv")
         let documents = F4SPutDocumentsJson(documents: [document])
         let expectation  = XCTestExpectation(description: "")

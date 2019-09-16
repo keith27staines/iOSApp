@@ -1,5 +1,11 @@
 import Foundation
 
+public protocol EmailVerificationServiceProtocol {
+    func cancel()
+    func start(onSuccess: @escaping (_ email:String) -> Void, onFailure: @escaping (_ email:String, _ error:EmailSubmissionError) -> Void)
+    func verifyWithCode(email: String, code: String, onSuccess: @escaping  ( _ email:String) -> Void, onFailure: @escaping (_ email:String, _ error:CodeValidationError) -> Void)
+}
+
 public protocol F4SPlacementServiceProtocol : F4SGetAllPlacementsServiceProtocol {
     func ratePlacement(placementUuid: String, rating: Int, completion: @escaping ( F4SNetworkResult<Bool>) -> ()) throws
 }

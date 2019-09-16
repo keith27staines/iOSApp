@@ -1,5 +1,3 @@
-import WorkfinderCommon
-
 /// `NetworkConfig` defines api keys and api endpoints which are exposed through
 /// static methods which are set by `WorkfinderNetworking.configure`
 public struct NetworkConfig {
@@ -26,17 +24,19 @@ public struct NetworkConfig {
     /// - Parameters:
     ///   - workfinderApiKey: the api key required for Workfinder api access
     ///   - workfinderBaseApi: The base url for the api, which is supplemented interally by v2 etc
-    ///   - log: A logging mechanism in which network errors will be reported
+    ///   - logger: logs network failures
     public init(
         workfinderApiKey: String,
         workfinderBaseApi: String,
-        log: F4SAnalyticsAndDebugging) {
-        self.logger = Logger(log: log)
+        logger: NetworkCallLoggerProtocol,
+        sessionManager: F4SNetworkSessionManagerProtocol,
+        endpoints: WorkfinderEndpoint) {
+        self.logger = logger
         self.workfinderApi = workfinderBaseApi
         self.workfinderApiV2 = "\(workfinderBaseApi)/v2"
         self.wexApiKey = workfinderApiKey
-        self.sessionManager = F4SNetworkSessionManager(wexApiKey: wexApiKey)
-        self.endpoints = WorkfinderEndpoint(baseUrlString: workfinderBaseApi)
+        self.sessionManager = sessionManager
+        self.endpoints = endpoints
     }
 }
 

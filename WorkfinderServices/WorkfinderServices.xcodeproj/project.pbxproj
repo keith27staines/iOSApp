@@ -12,7 +12,6 @@
 		FC02DA0522EC7134003C8148 /* MockF4SPlacementApplicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02DA0422EC7134003C8148 /* MockF4SPlacementApplicationService.swift */; };
 		FC02DA0B22EC717B003C8148 /* EmailVerificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02DA0822EC717B003C8148 /* EmailVerificationService.swift */; };
 		FC02DA0E22EC7214003C8148 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC02DA0D22EC7214003C8148 /* WorkfinderCommon.framework */; };
-		FC02DA1022EC721D003C8148 /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC02DA0F22EC721D003C8148 /* WorkfinderNetworking.framework */; };
 		FC02DA2122EC7851003C8148 /* F4SPlacementApplicationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02DA2022EC7850003C8148 /* F4SPlacementApplicationServiceTests.swift */; };
 		FC083F6B230FB9F600641F17 /* F4SMessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F6A230FB9F600641F17 /* F4SMessageService.swift */; };
 		FC083F6D230FBA1600641F17 /* F4SMessageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F6C230FBA1600641F17 /* F4SMessageServiceTests.swift */; };
@@ -31,9 +30,11 @@
 		FC2198FF231673A4005FAC5F /* F4SPlacementApplicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2198FE231673A4005FAC5F /* F4SPlacementApplicationService.swift */; };
 		FC219901231693CD005FAC5F /* MockF4SPlacementApplicationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC219900231693CC005FAC5F /* MockF4SPlacementApplicationServiceTests.swift */; };
 		FC22438C232F91130073C9B1 /* F4SServiceFactoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22438B232F91130073C9B1 /* F4SServiceFactoryProtocols.swift */; };
+		FC426F06232FAF85004F8A3E /* F4SHttpRequestVerb.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426F05232FAF85004F8A3E /* F4SHttpRequestVerb.swift */; };
+		FC426F0A232FB496004F8A3E /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426F09232FB496004F8A3E /* Mocks.swift */; };
+		FC426F0C232FB884004F8A3E /* WorkfinderServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426F0B232FB884004F8A3E /* WorkfinderServiceTests.swift */; };
 		FC4EE6F5230E620600B40F6B /* F4SNetworkTaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE6F4230E620600B40F6B /* F4SNetworkTaskFactory.swift */; };
 		FC4EE6F7230E62EC00B40F6B /* F4SCommonServiceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE6F6230E62EC00B40F6B /* F4SCommonServiceProtocols.swift */; };
-		FC4EE702230E799900B40F6B /* F4SVoucherServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE701230E799900B40F6B /* F4SVoucherServiceTests.swift */; };
 		FC4EE704230E8F7F00B40F6B /* F4SRoleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE703230E8F7E00B40F6B /* F4SRoleService.swift */; };
 		FC4EE706230E909200B40F6B /* F4SRoleServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE705230E909200B40F6B /* F4SRoleServiceTests.swift */; };
 		FC4EE70A230EA96700B40F6B /* F4SUserStatusService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE709230EA96600B40F6B /* F4SUserStatusService.swift */; };
@@ -100,9 +101,11 @@
 		FC2198FE231673A4005FAC5F /* F4SPlacementApplicationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementApplicationService.swift; sourceTree = "<group>"; };
 		FC219900231693CC005FAC5F /* MockF4SPlacementApplicationServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockF4SPlacementApplicationServiceTests.swift; sourceTree = "<group>"; };
 		FC22438B232F91130073C9B1 /* F4SServiceFactoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SServiceFactoryProtocols.swift; sourceTree = "<group>"; };
+		FC426F05232FAF85004F8A3E /* F4SHttpRequestVerb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SHttpRequestVerb.swift; sourceTree = "<group>"; };
+		FC426F09232FB496004F8A3E /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
+		FC426F0B232FB884004F8A3E /* WorkfinderServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderServiceTests.swift; sourceTree = "<group>"; };
 		FC4EE6F4230E620600B40F6B /* F4SNetworkTaskFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SNetworkTaskFactory.swift; sourceTree = "<group>"; };
 		FC4EE6F6230E62EC00B40F6B /* F4SCommonServiceProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCommonServiceProtocols.swift; sourceTree = "<group>"; };
-		FC4EE701230E799900B40F6B /* F4SVoucherServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SVoucherServiceTests.swift; sourceTree = "<group>"; };
 		FC4EE703230E8F7E00B40F6B /* F4SRoleService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SRoleService.swift; sourceTree = "<group>"; };
 		FC4EE705230E909200B40F6B /* F4SRoleServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRoleServiceTests.swift; sourceTree = "<group>"; };
 		FC4EE709230EA96600B40F6B /* F4SUserStatusService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserStatusService.swift; sourceTree = "<group>"; };
@@ -136,7 +139,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC02DA1022EC721D003C8148 /* WorkfinderNetworking.framework in Frameworks */,
 				FC02DA0E22EC7214003C8148 /* WorkfinderCommon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -184,6 +186,8 @@
 		FC02D9F522EC70FD003C8148 /* WorkfinderServicesTests */ = {
 			isa = PBXGroup;
 			children = (
+				FC426F0B232FB884004F8A3E /* WorkfinderServiceTests.swift */,
+				FC426F09232FB496004F8A3E /* Mocks.swift */,
 				FC928363230A867000E1FB75 /* F4SServicesTests */,
 				FC02D9F822EC70FD003C8148 /* Info.plist */,
 			);
@@ -304,7 +308,6 @@
 				FC4EE71E230EDBEC00B40F6B /* F4SCalendarServiceTests.swift */,
 				FC4EE71A230ED80F00B40F6B /* F4SPartnerServiceTests.swift */,
 				FC4EE70B230EAAA800B40F6B /* F4SUserStatusServiceTests.swift */,
-				FC4EE701230E799900B40F6B /* F4SVoucherServiceTests.swift */,
 				FC083F862310121E00641F17 /* F4SRecommendationServiceTests.swift */,
 			);
 			path = "services inheriting from F4SDataTaskService";
@@ -313,6 +316,7 @@
 		FC85D9EA22F1C8A80035C724 /* F4SServices */ = {
 			isa = PBXGroup;
 			children = (
+				FC426F05232FAF85004F8A3E /* F4SHttpRequestVerb.swift */,
 				FC3021C1231805FD00D57D48 /* Other services */,
 				FC4EE6FA230E77DE00B40F6B /* services inheriting from F4SDataTaskService */,
 				FC4EE6FD230E786F00B40F6B /* services using F4SDataTaskService */,
@@ -452,6 +456,7 @@
 				FC02DA0B22EC717B003C8148 /* EmailVerificationService.swift in Sources */,
 				FC93768223150CC00058BA75 /* F4STemplateService.swift in Sources */,
 				FC083F8323100FB500641F17 /* F4SRecommendationService.swift in Sources */,
+				FC426F06232FAF85004F8A3E /* F4SHttpRequestVerb.swift in Sources */,
 				FC92836B230A982600E1FB75 /* F4SDataTaskService.swift in Sources */,
 				FC083F75230FE76100641F17 /* F4SCompanyDatabaseMetadataService.swift in Sources */,
 				FC12B0FB22F3280000C33410 /* F4SPlacementService.swift in Sources */,
@@ -487,15 +492,16 @@
 				FC93768A231534F20058BA75 /* F4SCompanyFavouritingServiceTests.swift in Sources */,
 				FC083F77230FE87700641F17 /* F4SCompanyDatabaseMetadataServiceTests.swift in Sources */,
 				FC083F81230FFD5D00641F17 /* F4SPlacementDocumentsServiceTests.swift in Sources */,
+				FC426F0A232FB496004F8A3E /* Mocks.swift in Sources */,
 				FC93768823151F020058BA75 /* F4STemplateService.swift in Sources */,
 				FC083F7D230FFB3800641F17 /* F4SUserDocumentServiceTests.swift in Sources */,
+				FC426F0C232FB884004F8A3E /* WorkfinderServiceTests.swift in Sources */,
 				FC4EE71B230ED80F00B40F6B /* F4SPartnerServiceTests.swift in Sources */,
 				FC02DA2122EC7851003C8148 /* F4SPlacementApplicationServiceTests.swift in Sources */,
 				FC9376862315190B0058BA75 /* F4SCompanyServiceTests.swift in Sources */,
 				FC928368230A94D100E1FB75 /* F4SDataTaskServiceTests.swift in Sources */,
 				FC083F6D230FBA1600641F17 /* F4SMessageServiceTests.swift in Sources */,
 				FC4EE71F230EDBEC00B40F6B /* F4SCalendarServiceTests.swift in Sources */,
-				FC4EE702230E799900B40F6B /* F4SVoucherServiceTests.swift in Sources */,
 				FC083F71230FCCA200641F17 /* F4SMessageActionServiceTests.swift in Sources */,
 				FC4EE70C230EAAA800B40F6B /* F4SUserStatusServiceTests.swift in Sources */,
 				FC4EE706230E909200B40F6B /* F4SRoleServiceTests.swift in Sources */,

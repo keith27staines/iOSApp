@@ -1,42 +1,34 @@
 import XCTest
 import WorkfinderCommon
-import WorkfinderNetworking
 @testable import WorkfinderServices
 
 class F4SDataTaskServiceTests: XCTestCase {
 
-    func test_initialise_with_no_additional_headers() {
-        let expectedHeaders: [String: String] = ["wex.api.key": ""]
-        let sut = F4SDataTaskService(baseURLString: "baseUrl", apiName: "apiName")
+    func test_initialise() {
+        let sut = F4SDataTaskService(
+            baseURLString: "baseUrl",
+            apiName: "apiName",
+            configuration: makeTestConfiguration())
         
         XCTAssertEqual(sut.apiName, "apiName")
         XCTAssertEqual(sut.baseUrl, URL(string: "baseUrl"))
         XCTAssertEqual(sut.url, URL(string: "baseUrl/apiName"))
-        XCTAssertEqual(sut.session.configuration.httpAdditionalHeaders as? [String: String], expectedHeaders)
-    }
-    
-    func test_initialise_with_additional_headers() {
-        let additionalHeaders: [String: String] = ["AdditionalHeader1" : "AdditionalHeader1", "wex.api.key": "wexApiKey"]
-        let expectedHeaders: [String: String] = [
-            "wex.api.key": "wexApiKey",
-            "AdditionalHeader1" : "AdditionalHeader1"
-        ]
-        let sut = F4SDataTaskService(baseURLString: "baseUrl", apiName: "apiName", additionalHeaders: additionalHeaders)
-
-        XCTAssertEqual(sut.apiName, "apiName")
-        XCTAssertEqual(sut.baseUrl, URL(string: "baseUrl"))
-        XCTAssertEqual(sut.url, URL(string: "baseUrl/apiName"))
-        XCTAssertEqual(sut.session.configuration.httpAdditionalHeaders as? [String: String], expectedHeaders)
     }
     
     func test_add_relativeUrl() {
-        let sut = F4SDataTaskService(baseURLString: "baseUrl", apiName: "apiName")
+        let sut = F4SDataTaskService(
+            baseURLString: "baseUrl",
+            apiName: "apiName",
+            configuration: makeTestConfiguration())
         sut.relativeUrlString = "relativeUrl"
         XCTAssertEqual(sut.url, URL(string: "baseUrl/apiName/relativeUrl"))
     }
     
     func test_cancel() {
-        let sut = F4SDataTaskService(baseURLString: "baseUrl", apiName: "apiName")
+        let sut = F4SDataTaskService(
+            baseURLString: "baseUrl",
+            apiName: "apiName",
+            configuration: makeTestConfiguration())
         let mockTask = MockTask()
         sut.task = mockTask
         mockTask.cancelled = false
@@ -47,33 +39,22 @@ class F4SDataTaskServiceTests: XCTestCase {
     func test_request_header_fields_without_user_uuid() {
         let url = URL(string: "/v2")!
         let request = URLRequest(url: url)
-        let session = URLSession(configuration: URLSessionConfiguration.default)
         let mockLocalStore = MockLocalStore()
         let userRepo = F4SUserRepository(localStore: mockLocalStore)
-        F4SDataTaskService.userRepo = userRepo
-        let task = F4SDataTaskService.networkTask(with: request, session: session, attempting: "test") { (dataResult) in }
+        let sut = F4SDataTaskService(
+            baseURLString: "baseUrl",
+            apiName: "apiName",
+            configuration: makeTestConfiguration())
+        sut.userRepo = userRepo
+        let task = sut.networkTask(with: request, attempting: "test") { (dataResult) in }
         let headers = (task as? URLSessionDataTask)!.originalRequest!.allHTTPHeaderFields!
         XCTAssertNil(headers["wex.user.uuid"])
-    }
-    
-    func test_request_header_fields_with_user_uuid() {
-        let url = URL(string: "/v2")!
-        let request = URLRequest(url: url)
-        let session = URLSession(configuration: URLSessionConfiguration.default)
-        let userInfo = F4SUser(uuid: "1234")
-        let mockLocalStore = MockLocalStore()
-        let userRepo = F4SUserRepository(localStore: mockLocalStore)
-        userRepo.save(user: userInfo)
-        F4SDataTaskService.userRepo = userRepo
-        let task = F4SDataTaskService.networkTask(with: request, session: session, attempting: "test") { (dataResult) in }
-        let headers = (task as? URLSessionDataTask)!.originalRequest!.allHTTPHeaderFields!
-        XCTAssertEqual(headers["wex.user.uuid"], "1234")
     }
     
     //MARK:- get request tests
     
     func test_begin_get_request_cancels_previous_task() {
-        let sut = F4SDataTaskService(baseURLString: "baseUrl", apiName: "apiName")
+        let sut = F4SDataTaskService(baseURLString: "baseUrl", apiName: "apiName", configuration: makeTestConfiguration())
         let previousTask = MockTask()
         sut.task = previousTask
         let newTask = MockTask()
@@ -83,7 +64,7 @@ class F4SDataTaskServiceTests: XCTestCase {
     }
     
     func test_begin_get_request_calls_resume_on_new_task() {
-        let sut = F4SDataTaskService(baseURLString: "baseUrl", apiName: "apiName")
+        let sut = F4SDataTaskService(baseURLString: "baseUrl", apiName: "apiName", configuration: makeTestConfiguration())
         let previousTask = MockTask()
         sut.task = previousTask
         let newTask = MockTask()
@@ -176,7 +157,10 @@ class F4SDataTaskServiceTests: XCTestCase {
     //MARK:- send request tests
     
     func test_begin_send_request_cancels_previous_task() {
-        let sut = F4SDataTaskService(baseURLString: "baseUrl", apiName: "apiName")
+        let sut = F4SDataTaskService(
+            baseURLString: "baseUrl",
+            apiName: "apiName",
+            configuration: makeTestConfiguration())
         let previousTask = MockTask()
         sut.task = previousTask
         let newTask = MockTask()
@@ -187,7 +171,10 @@ class F4SDataTaskServiceTests: XCTestCase {
     }
     
     func test_begin_send_request_calls_resume_on_new_task() {
-        let sut = F4SDataTaskService(baseURLString: "baseUrl", apiName: "apiName")
+        let sut = F4SDataTaskService(
+            baseURLString: "baseUrl",
+            apiName: "apiName",
+            configuration: makeTestConfiguration())
         let previousTask = MockTask()
         sut.task = previousTask
         let newTask = MockTask()
@@ -246,7 +233,10 @@ class F4SDataTaskServiceTests: XCTestCase {
     }
     
     func test_beginDelete_calls_cancel_on_previous_task() {
-        let sut = F4SDataTaskService(baseURLString: "baseUrl", apiName: "apiName")
+        let sut = F4SDataTaskService(
+            baseURLString: "baseUrl",
+            apiName: "apiName",
+            configuration: makeTestConfiguration())
         let previousTask = MockTask()
         sut.task = previousTask
         let newTask = MockTask()
@@ -260,7 +250,10 @@ class F4SDataTaskServiceTests: XCTestCase {
     }
     
     func test_beginDelete_calls_resume_on_new_task() {
-        let sut = F4SDataTaskService(baseURLString: "baseUrl", apiName: "apiName")
+        let sut = F4SDataTaskService(
+            baseURLString: "baseUrl",
+            apiName: "apiName",
+            configuration: makeTestConfiguration())
         let previousTask = MockTask()
         sut.task = previousTask
         let newTask = MockTask()
@@ -299,7 +292,10 @@ extension F4SDataTaskServiceTests {
     }
     
     func makeSUT() -> F4SDataTaskService {
-        let sut = F4SDataTaskService(baseURLString: "baseUrl", apiName: "apiName")
+        let sut = F4SDataTaskService(
+            baseURLString: "baseUrl",
+            apiName: "apiName",
+            configuration: makeTestConfiguration())
         let previousTask = MockTask()
         sut.task = previousTask
         return sut
@@ -345,5 +341,3 @@ class MockTask : F4SNetworkTask {
         self.completion = completion
     }
 }
-
-//extension String : Error {}

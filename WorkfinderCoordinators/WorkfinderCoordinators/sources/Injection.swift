@@ -20,7 +20,7 @@ public class CoreInjection : CoreInjectionProtocol {
                 appInstallationUuidLogic: AppInstallationUuidLogic,
                 user: F4SUser,
                 userService: F4SUserServiceProtocol,
-                userStatusService: F4SUserStatusServiceProtocol = F4SUserStatusService.shared,
+                userStatusService: F4SUserStatusServiceProtocol,
                 userRepository: F4SUserRepositoryProtocol,
                 databaseDownloadManager: F4SDatabaseDownloadManagerProtocol,
                 f4sLog: F4SAnalyticsAndDebugging) {

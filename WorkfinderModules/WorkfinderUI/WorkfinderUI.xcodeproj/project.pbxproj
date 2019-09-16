@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FC0B6B372323D22400A1867D /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0B6B362323D22400A1867D /* WorkfinderNetworking.framework */; };
 		FC0C7109232BA38700816332 /* OptionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C7108232BA38700816332 /* OptionLabel.swift */; };
 		FC116B4C2284510E00146478 /* WebViewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC116B4B2284510E00146478 /* WebViewAssets.xcassets */; };
 		FC116B4E2284511E00146478 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC116B4D2284511E00146478 /* WebViewController.swift */; };
@@ -100,7 +99,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC0B6B372323D22400A1867D /* WorkfinderNetworking.framework in Frameworks */,
 				FC93DBE2231F98E600F1CE23 /* WorkfinderServices.framework in Frameworks */,
 				FCA636AB22A3E57E004B3050 /* WorkfinderCommon.framework in Frameworks */,
 			);

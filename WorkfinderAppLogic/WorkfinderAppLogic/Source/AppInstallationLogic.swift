@@ -16,7 +16,7 @@ public class AppInstallationUuidLogic : AppInstallationUuidLogicProtocol {
     let userService: F4SUserServiceProtocol
     let userRepo: F4SUserRepositoryProtocol
     let apnsEnvironment: String
-    
+    let registerService: F4SDeviceRegistrationServiceProtocol
     var installationUuid: F4SUUID? {
         return localStore.value(key: LocalStore.Key.installationUuid) as? F4SUUID
     }
@@ -24,11 +24,13 @@ public class AppInstallationUuidLogic : AppInstallationUuidLogicProtocol {
     public init(localStore: LocalStorageProtocol = LocalStore(),
                 userService: F4SUserServiceProtocol,
                 userRepo: F4SUserRepositoryProtocol,
-                apnsEnvironment: String) {
+                apnsEnvironment: String,
+                registerDeviceService: F4SDeviceRegistrationServiceProtocol) {
         self.localStore = localStore
         self.userService = userService
         self.userRepo = userRepo
         self.apnsEnvironment = apnsEnvironment
+        self.registerService = registerDeviceService
     }
     
     func makeNewInstallationUuid() -> F4SUUID {
@@ -75,7 +77,6 @@ public class AppInstallationUuidLogic : AppInstallationUuidLogicProtocol {
         return verifiedEmail.isEmpty == false
     }
     
-    var registerService = F4SDeviceRegistrationService()
     private func registerDevice(completion: @escaping (F4SNetworkResult<F4SRegisterDeviceResult>)->()) {
         let newInstallationUuid = makeNewInstallationUuid()
         let anonymousUser = F4SAnonymousUser(vendorUuid: newInstallationUuid, clientType: "ios", apnsEnvironment: apnsEnvironment)

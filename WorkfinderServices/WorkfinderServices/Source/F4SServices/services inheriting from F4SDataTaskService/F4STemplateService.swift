@@ -1,14 +1,5 @@
-//
-//  F4STemplateService.swift
-//  f4s-workexperience
-//
-//  Created by Timea Tivadar on 11/28/16.
-//  Copyright © 2016 Chelsea Apps Factory. All rights reserved.
-//
-
 import Foundation
 import WorkfinderCommon
-import WorkfinderNetworking
 
 public class F4STemplateService:  F4SDataTaskService, F4STemplateServiceProtocol {
     

@@ -39,23 +39,24 @@ class UserDetailsViewController: UIViewController {
     @IBOutlet weak var contentView: UIView!
     
     var datePicker = UIDatePicker()
-    var voucherVerificationService: F4SVoucherVerificationServiceProtocol?
     var userRepository: F4SUserRepositoryProtocol!
-    
-    lazy var userService: F4SUserService = {
-        return F4SUserService()
-    }()
+    var userService: F4SUserServiceProtocol!
+    var emailVerificationService: EmailVerificationServiceProtocol!
     
     func inject(
         viewModel: UserDetailsViewModel,
-        userRepository: F4SUserRepositoryProtocol) {
+        userRepository: F4SUserRepositoryProtocol,
+        userService: F4SUserServiceProtocol,
+        emailVerificationService: EmailVerificationServiceProtocol) {
         self.viewModel = viewModel
         self.userRepository  = userRepository
+        self.userService = userService
     }
     
     lazy var emailController: F4SEmailVerificationViewController = {
         let emailStoryboard = UIStoryboard(name: "F4SEmailVerification", bundle: __bundle)
         let emailController = emailStoryboard.instantiateViewController(withIdentifier: "EmailVerification") as! F4SEmailVerificationViewController
+        emailController.emailVerificationService = self.emailVerificationService
         return emailController
     }()
     

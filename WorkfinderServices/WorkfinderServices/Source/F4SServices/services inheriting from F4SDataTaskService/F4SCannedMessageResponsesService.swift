@@ -1,6 +1,5 @@
 import Foundation
 import WorkfinderCommon
-import WorkfinderNetworking
 
 public class F4SCannedMessageResponsesService : F4SDataTaskService, F4SCannedMessageResponsesServiceProtocol {
     

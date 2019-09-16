@@ -1,17 +1,16 @@
 import XCTest
 import WorkfinderCommon
-import WorkfinderNetworking
 @testable import WorkfinderServices
 
 class F4SCompanyDatabaseMetadataServiceTests: XCTestCase {
 
     func test_initialise() {
-        let sut = F4SCompanyDatabaseMetadataService()
+        let sut = F4SCompanyDatabaseMetadataService(configuration: makeTestConfiguration())
         XCTAssertEqual(sut.apiName, "company/dump/full")
     }
     
     func test_getDatabaseMetadata() {
-        let sut = F4SCompanyDatabaseMetadataService()
+        let sut = F4SCompanyDatabaseMetadataService(configuration: makeTestConfiguration())
         let date = Date()
         let expectedMetadata = F4SCompanyDatabaseMetaData(created: date, urlString: "urlString", errors: nil)
         let requiredResult = F4SNetworkResult.success(expectedMetadata)

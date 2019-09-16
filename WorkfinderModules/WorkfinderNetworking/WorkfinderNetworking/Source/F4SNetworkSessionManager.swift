@@ -1,12 +1,6 @@
 import Foundation
 import WorkfinderCommon
 
-public protocol F4SNetworkSessionManagerProtocol {
-    /// `interactiveSession` is designed for services that connect to Workfinder
-    /// which includes majority of services used in the app
-    var interactiveSession: URLSession { get }
-}
-
 /// `F4SNetworkSessionManager` manages almost all network sessions for the app.
 /// Only three services are currently not directed through these sessions. They
 /// use the now deprecated `WEXSessionManager` which was introduced only to

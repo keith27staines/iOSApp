@@ -1,18 +1,9 @@
-//
-//  EmailVerificationService.swift
-//  WorkfinderNetworking
-//
-//  Created by Keith Dev on 07/06/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
-
 import Foundation
 import WorkfinderCommon
-import WorkfinderNetworking
 
 typealias URLDataTaskCompletion = ((Data?, URLResponse?, Error?) -> Void)
 
-public class EmailVerificationService {
+public class EmailVerificationService : EmailVerificationServiceProtocol {
     
     public let email: String
     
@@ -30,36 +21,6 @@ public class EmailVerificationService {
         self.email = email
         self.startClientId = clientId
         self.configuration = configuration
-    }
-    
-    public enum EmailSubmissionError : Error {
-        case client
-        case cientsideEmailFormatCheckFailed
-        case serversideEmailFormatCheckFailed
-        case networkError(Int)
-        
-        static func emailSubmissionError(from httpStatusCode: Int) -> EmailSubmissionError? {
-            guard httpStatusCode != 200 else { return nil }
-            switch httpStatusCode {
-            case 400: return EmailSubmissionError.serversideEmailFormatCheckFailed
-            default: return networkError(httpStatusCode)
-            }
-        }
-    }
-    
-    public enum CodeValidationError : Error {
-        case client
-        case codeEmailCombinationNotValid
-        case emailNotTheSame
-        case networkError(Int)
-        
-        static func codeValidationError(from httpStatusCode: Int) -> CodeValidationError? {
-            guard httpStatusCode != 200 else { return nil }
-            switch httpStatusCode {
-            case 401: return CodeValidationError.codeEmailCombinationNotValid
-            default: return CodeValidationError.networkError(httpStatusCode)
-            }
-        }
     }
     
     public func cancel() {

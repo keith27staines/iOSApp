@@ -4,6 +4,13 @@ public struct F4SGetCompanyDocuments: Codable {
     public var companyUuid: F4SUUID?
     public var documents: F4SCompanyDocuments?
     public var possibleDocumentTypes: [String]?
+    public init(companyUuid: String?,
+                documents: F4SCompanyDocuments?,
+                possibleDocumentTypes: [String]?) {
+        self.companyUuid = companyUuid
+        self.documents = documents
+        self.possibleDocumentTypes = possibleDocumentTypes
+    }
 }
 
 extension F4SGetCompanyDocuments {

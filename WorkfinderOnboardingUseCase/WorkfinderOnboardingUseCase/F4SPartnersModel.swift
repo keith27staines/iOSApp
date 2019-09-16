@@ -20,9 +20,7 @@ public class F4SPartnersModel {
         return [parent, school, friend, villiers]
     }
     
-    lazy var partnerService: F4SPartnerServiceProtocol = {
-        return F4SPartnerService()
-    }()
+    let partnerService: F4SPartnerServiceProtocol
     
     public var showWillProvidePartnerLater: Bool = false {
         didSet {
@@ -39,18 +37,11 @@ public class F4SPartnersModel {
     public internal (set) var serversidePartners: [String : F4SPartner]?
     private (set) var isReady: Bool = false
     
-    /// Returns the shared instance
-    public class var sharedInstance: F4SPartnersModel {
-        struct Static {
-            static let instance: F4SPartnersModel = F4SPartnersModel()
-        }
-        return Static.instance
-    }
-    
-    public init() {
-        partners = [F4SUUID:F4SPartner]()
-        partnersArray = []
-        getPartners { (_) in
+    public init(partnerService: F4SPartnerServiceProtocol) {
+        self.partnerService = partnerService
+        self.partners = [F4SUUID:F4SPartner]()
+        self.partnersArray = []
+        self.getPartners { (_) in
             //
         }
     }
