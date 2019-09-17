@@ -1,10 +1,3 @@
-//
-//  Skinner.swift
-//  Skins
-//
-//  Created by Keith Dev on 13/08/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
-//
 
 import UIKit
 

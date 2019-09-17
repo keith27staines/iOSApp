@@ -25,7 +25,6 @@
 		FC5CBA55231D2C4D00C2D3C5 /* F4SCompanyHeaderViewWithLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBA54231D2C4D00C2D3C5 /* F4SCompanyHeaderViewWithLogo.swift */; };
 		FC5CBA57231D2C7D00C2D3C5 /* F4SRoundIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBA56231D2C7D00C2D3C5 /* F4SRoundIconView.swift */; };
 		FC93DBDF231F981D00F1CE23 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DBDE231F981D00F1CE23 /* ContentViewController.swift */; };
-		FC93DBE2231F98E600F1CE23 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DBE1231F98E600F1CE23 /* WorkfinderServices.framework */; };
 		FC93DBE4231F9F4500F1CE23 /* Content.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC93DBDD231F981C00F1CE23 /* Content.storyboard */; };
 		FC93DC3A23200BC100F1CE23 /* NextResponderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC3923200BC100F1CE23 /* NextResponderTextField.swift */; };
 		FC9535A1231E448D00F4A9DA /* F4SSelfLoadingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9535A0231E448D00F4A9DA /* F4SSelfLoadingImageView.swift */; };
@@ -99,7 +98,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC93DBE2231F98E600F1CE23 /* WorkfinderServices.framework in Frameworks */,
 				FCA636AB22A3E57E004B3050 /* WorkfinderCommon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,6 +1,5 @@
 import UIKit
 import WorkfinderCommon
-import WorkfinderServices
 
 public class ContentViewController: UIViewController {
 

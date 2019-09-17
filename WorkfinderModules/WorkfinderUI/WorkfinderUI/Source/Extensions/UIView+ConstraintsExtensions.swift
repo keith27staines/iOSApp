@@ -1,10 +1,3 @@
-//
-//  UIView+ConstraintsExtensions.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 29/08/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
-//
 
 import UIKit
 
