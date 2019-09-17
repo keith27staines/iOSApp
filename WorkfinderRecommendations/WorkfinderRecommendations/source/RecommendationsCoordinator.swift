@@ -12,10 +12,11 @@ let __bundle = Bundle(identifier: "com.f4s.WorkfinderRecommendations")
 public class RecommendationsCoordinator : CoreInjectionNavigationCoordinator {
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     let companyRepository: F4SCompanyRepositoryProtocol
+    let recommendationsService: F4SRecommendationServiceProtocol
     weak var tabBarCoordinator: TabBarCoordinatorProtocol?
     
     lazy var model: RecommendedCompaniesListModelProtocol = {
-        return RecommendedCompaniesListModel()
+        return RecommendedCompaniesListModel(recommendationsService: recommendationsService)
     }()
     
     lazy var viewModel: RecommendationsViewModel = {
@@ -40,10 +41,12 @@ public class RecommendationsCoordinator : CoreInjectionNavigationCoordinator {
          navigationRouter: NavigationRoutingProtocol,
          inject: CoreInjectionProtocol,
          companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
-         companyRepository: F4SCompanyRepositoryProtocol) {
+         companyRepository: F4SCompanyRepositoryProtocol,
+         recommendationsService: F4SRecommendationServiceProtocol) {
         self.tabBarCoordinator = parent
         self.companyCoordinatorFactory = companyCoordinatorFactory
         self.companyRepository = companyRepository
+        self.recommendationsService = recommendationsService
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     

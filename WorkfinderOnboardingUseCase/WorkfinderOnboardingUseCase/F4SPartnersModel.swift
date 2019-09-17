@@ -1,14 +1,6 @@
-//
-//  PartnerModel.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 26/10/2017.
-//  Copyright © 2017 Founders4Schools. All rights reserved.
-//
 
 import Foundation
 import WorkfinderCommon
-import WorkfinderServices
 
 public class F4SPartnersModel {
     
