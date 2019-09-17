@@ -1,6 +1,5 @@
 import UIKit
 import WorkfinderCommon
-import WorkfinderServices
 import WorkfinderUI
 
 class UserDetailsViewController: UIViewController {

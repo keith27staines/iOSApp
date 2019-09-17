@@ -1,14 +1,6 @@
-//
-//  F4SEmailVerificationError.swift
-//  AuthTest
-//
-//  Created by Keith Dev on 28/12/2017.
-//  Copyright © 2017 F4S. All rights reserved.
-//
 
 import Foundation
 import WorkfinderCommon
-import WorkfinderServices
 
 public enum F4SEmailVerificationError : Error {
     case networkNotAvailable

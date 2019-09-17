@@ -15,7 +15,6 @@
 		FC93DC1E231FBA4400F1CE23 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DC1D231FBA4400F1CE23 /* WorkfinderAppLogic.framework */; };
 		FC93DC20231FBA4400F1CE23 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DC1F231FBA4400F1CE23 /* WorkfinderCommon.framework */; };
 		FC93DC22231FBA4400F1CE23 /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DC21231FBA4400F1CE23 /* WorkfinderCoordinators.framework */; };
-		FC93DC24231FBA4400F1CE23 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DC23231FBA4400F1CE23 /* WorkfinderServices.framework */; };
 		FC93DC26231FBA4400F1CE23 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DC25231FBA4400F1CE23 /* WorkfinderUI.framework */; };
 		FC93DC3123200B2700F1CE23 /* InformationLabelStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC2C23200B2600F1CE23 /* InformationLabelStrings.swift */; };
 		FC93DC3223200B2700F1CE23 /* PushNotificationAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC3023200B2700F1CE23 /* PushNotificationAuthorization.swift */; };
@@ -90,7 +89,6 @@
 				FC93DC1E231FBA4400F1CE23 /* WorkfinderAppLogic.framework in Frameworks */,
 				FC93DC20231FBA4400F1CE23 /* WorkfinderCommon.framework in Frameworks */,
 				FC93DC22231FBA4400F1CE23 /* WorkfinderCoordinators.framework in Frameworks */,
-				FC93DC24231FBA4400F1CE23 /* WorkfinderServices.framework in Frameworks */,
 				FC93DC26231FBA4400F1CE23 /* WorkfinderUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

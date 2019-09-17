@@ -1,14 +1,6 @@
-//
-//  F4SEmailVerificationModel.swift
-//  AuthTest
-//
-//  Created by Keith Dev on 18/12/2017.
-//  Copyright © 2017 F4S. All rights reserved.
-//
 
 import Foundation
 import WorkfinderCommon
-import WorkfinderServices
 
 /// A state machine that controls the verification process for emails
 public class F4SEmailVerificationModel {
