@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FC02DA2922EC8554003C8148 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC02DA2822EC8554003C8148 /* WorkfinderServices.framework */; };
 		FC12B0F722F30E3700C33410 /* AllowedToApplyLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B0F622F30E3700C33410 /* AllowedToApplyLogic.swift */; };
 		FC12B0F922F31B6A00C33410 /* AllowedToApplyLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B0F822F31B6A00C33410 /* AllowedToApplyLogicTests.swift */; };
 		FC7F055122E31A2C009C3E25 /* AppInstallationUuidLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7F055022E31A2C009C3E25 /* AppInstallationUuidLogicTests.swift */; };
@@ -49,7 +48,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC02DA2922EC8554003C8148 /* WorkfinderServices.framework in Frameworks */,
 				FCD6F9F122E31777003F7C34 /* WorkfinderCommon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,14 +1,6 @@
-//
-//  AllowedToApplyLogic.swift
-//  WorkfinderAppLogic
-//
-//  Created by Keith Dev on 01/08/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
 
 import Foundation
 import WorkfinderCommon
-import WorkfinderServices
 
 public class AllowedToApplyLogic {
     

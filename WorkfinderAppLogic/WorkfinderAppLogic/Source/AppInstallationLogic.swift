@@ -1,14 +1,6 @@
-//
-//  AppInstallationLogic.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 20/07/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
 
 import Foundation
 import WorkfinderCommon
-import WorkfinderServices
 
 public class AppInstallationUuidLogic : AppInstallationUuidLogicProtocol {
     
