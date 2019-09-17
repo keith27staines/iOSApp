@@ -1,9 +1,7 @@
+
 import Foundation
 import WorkfinderCommon
-import WorkfinderServices
 import WorkfinderAppLogic
-
-
 
 public class CoreInjection : CoreInjectionProtocol {
     
