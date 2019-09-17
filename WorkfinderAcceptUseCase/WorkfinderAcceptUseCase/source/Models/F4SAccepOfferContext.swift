@@ -1,7 +1,7 @@
+
 import UIKit
 import WorkfinderCommon
 import WorkfinderAppLogic
-import WorkfinderServices
 
 public class AcceptOfferContext {
     public var companyJson: F4SCompanyJson

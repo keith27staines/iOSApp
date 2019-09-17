@@ -1,6 +1,6 @@
+
 import Foundation
 import WorkfinderCommon
-import WorkfinderServices
 import WorkfinderUI
 
 class F4SOfferConfirmer {
