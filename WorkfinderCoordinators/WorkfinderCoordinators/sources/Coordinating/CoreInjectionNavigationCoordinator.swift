@@ -12,8 +12,8 @@ open class CoreInjectionNavigationCoordinator : NavigationCoordinator {
         super.init(parent: parent, navigationRouter: navigationRouter)
     }
     
-    public func presentContent(_ contentType: F4SContentType, service: F4SContentServiceProtocol) {
-        let contentViewController = WorkfinderUI().makeWebContentViewController(contentType: contentType, dismissByPopping: true, contentService: service)
+    public func presentContent(_ contentType: F4SContentType) {
+        let contentViewController = WorkfinderUI().makeWebContentViewController(contentType: contentType, dismissByPopping: true, contentService: injected.contentService)
         navigationRouter.navigationController.pushViewController(contentViewController, animated: true)
     }
 }

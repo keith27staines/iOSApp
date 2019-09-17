@@ -29,10 +29,11 @@
 		FC12B0FB22F3280000C33410 /* F4SPlacementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B0FA22F3280000C33410 /* F4SPlacementService.swift */; };
 		FC2198FF231673A4005FAC5F /* F4SPlacementApplicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2198FE231673A4005FAC5F /* F4SPlacementApplicationService.swift */; };
 		FC219901231693CD005FAC5F /* MockF4SPlacementApplicationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC219900231693CC005FAC5F /* MockF4SPlacementApplicationServiceTests.swift */; };
-		FC22438C232F91130073C9B1 /* F4SServiceFactoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22438B232F91130073C9B1 /* F4SServiceFactoryProtocols.swift */; };
 		FC426F06232FAF85004F8A3E /* F4SHttpRequestVerb.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426F05232FAF85004F8A3E /* F4SHttpRequestVerb.swift */; };
 		FC426F0A232FB496004F8A3E /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426F09232FB496004F8A3E /* Mocks.swift */; };
 		FC426F0C232FB884004F8A3E /* WorkfinderServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426F0B232FB884004F8A3E /* WorkfinderServiceTests.swift */; };
+		FC426F102330CC26004F8A3E /* F4SDocumentUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426F0F2330CC26004F8A3E /* F4SDocumentUploader.swift */; };
+		FC426F1223310308004F8A3E /* F4SServiceFactories.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426F1123310308004F8A3E /* F4SServiceFactories.swift */; };
 		FC4EE6F5230E620600B40F6B /* F4SNetworkTaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE6F4230E620600B40F6B /* F4SNetworkTaskFactory.swift */; };
 		FC4EE6F7230E62EC00B40F6B /* F4SCommonServiceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE6F6230E62EC00B40F6B /* F4SCommonServiceProtocols.swift */; };
 		FC4EE704230E8F7F00B40F6B /* F4SRoleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE703230E8F7E00B40F6B /* F4SRoleService.swift */; };
@@ -100,10 +101,11 @@
 		FC12B0FA22F3280000C33410 /* F4SPlacementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementService.swift; sourceTree = "<group>"; };
 		FC2198FE231673A4005FAC5F /* F4SPlacementApplicationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementApplicationService.swift; sourceTree = "<group>"; };
 		FC219900231693CC005FAC5F /* MockF4SPlacementApplicationServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockF4SPlacementApplicationServiceTests.swift; sourceTree = "<group>"; };
-		FC22438B232F91130073C9B1 /* F4SServiceFactoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SServiceFactoryProtocols.swift; sourceTree = "<group>"; };
 		FC426F05232FAF85004F8A3E /* F4SHttpRequestVerb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SHttpRequestVerb.swift; sourceTree = "<group>"; };
 		FC426F09232FB496004F8A3E /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 		FC426F0B232FB884004F8A3E /* WorkfinderServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderServiceTests.swift; sourceTree = "<group>"; };
+		FC426F0F2330CC26004F8A3E /* F4SDocumentUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDocumentUploader.swift; sourceTree = "<group>"; };
+		FC426F1123310308004F8A3E /* F4SServiceFactories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SServiceFactories.swift; sourceTree = "<group>"; };
 		FC4EE6F4230E620600B40F6B /* F4SNetworkTaskFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SNetworkTaskFactory.swift; sourceTree = "<group>"; };
 		FC4EE6F6230E62EC00B40F6B /* F4SCommonServiceProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCommonServiceProtocols.swift; sourceTree = "<group>"; };
 		FC4EE703230E8F7E00B40F6B /* F4SRoleService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SRoleService.swift; sourceTree = "<group>"; };
@@ -206,7 +208,7 @@
 		FC02DA1D22EC7301003C8148 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				FC22438B232F91130073C9B1 /* F4SServiceFactoryProtocols.swift */,
+				FC426F1123310308004F8A3E /* F4SServiceFactories.swift */,
 				FC85D9EA22F1C8A80035C724 /* F4SServices */,
 			);
 			path = Source;
@@ -215,6 +217,7 @@
 		FC3021C1231805FD00D57D48 /* Other services */ = {
 			isa = PBXGroup;
 			children = (
+				FC426F0F2330CC26004F8A3E /* F4SDocumentUploader.swift */,
 				FC93DC3D23200D8100F1CE23 /* F4SUserService.swift */,
 				FC02DA0822EC717B003C8148 /* EmailVerificationService.swift */,
 			);
@@ -451,7 +454,6 @@
 				FC4EE70A230EA96700B40F6B /* F4SUserStatusService.swift in Sources */,
 				FC2198FF231673A4005FAC5F /* F4SPlacementApplicationService.swift in Sources */,
 				FC083F7F230FFBD000641F17 /* F4SUserDocumentService.swift in Sources */,
-				FC22438C232F91130073C9B1 /* F4SServiceFactoryProtocols.swift in Sources */,
 				FC4EE70E230EAFFF00B40F6B /* F4SCompanyFavouritingService.swift in Sources */,
 				FC02DA0B22EC717B003C8148 /* EmailVerificationService.swift in Sources */,
 				FC93768223150CC00058BA75 /* F4STemplateService.swift in Sources */,
@@ -463,7 +465,9 @@
 				FC93DC3E23200D8100F1CE23 /* F4SUserService.swift in Sources */,
 				FC4EE704230E8F7F00B40F6B /* F4SRoleService.swift in Sources */,
 				FC083F79230FEDEE00641F17 /* F4SPlacementDocumentsService.swift in Sources */,
+				FC426F102330CC26004F8A3E /* F4SDocumentUploader.swift in Sources */,
 				FC02DA0522EC7134003C8148 /* MockF4SPlacementApplicationService.swift in Sources */,
+				FC426F1223310308004F8A3E /* F4SServiceFactories.swift in Sources */,
 				FC083F6F230FCC0000641F17 /* F4SMessageActionService.swift in Sources */,
 				FC4EE6F5230E620600B40F6B /* F4SNetworkTaskFactory.swift in Sources */,
 				FC083F6B230FB9F600641F17 /* F4SMessageService.swift in Sources */,

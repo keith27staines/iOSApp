@@ -57,6 +57,7 @@
 		FC426F04232FAEA9004F8A3E /* WorkfinderEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426F03232FAEA9004F8A3E /* WorkfinderEndpoint.swift */; };
 		FC426F08232FAFF0004F8A3E /* WorkfinderNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426F07232FAFF0004F8A3E /* WorkfinderNetworking.swift */; };
 		FC426F0E232FF8BC004F8A3E /* EmailVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426F0D232FF8BC004F8A3E /* EmailVerification.swift */; };
+		FC426F1423310434004F8A3E /* F4SServiceFactoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426F1323310434004F8A3E /* F4SServiceFactoryProtocols.swift */; };
 		FC4EE710230EB9D700B40F6B /* F4SUserStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE70F230EB9D700B40F6B /* F4SUserStatus.swift */; };
 		FC4EE714230EBC8100B40F6B /* F4SRoleJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE713230EBC8100B40F6B /* F4SRoleJson.swift */; };
 		FC4EE72C230EF10400B40F6B /* F4SMessageStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE72B230EF10300B40F6B /* F4SMessageStructs.swift */; };
@@ -189,6 +190,7 @@
 		FC426F03232FAEA9004F8A3E /* WorkfinderEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderEndpoint.swift; sourceTree = "<group>"; };
 		FC426F07232FAFF0004F8A3E /* WorkfinderNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderNetworking.swift; sourceTree = "<group>"; };
 		FC426F0D232FF8BC004F8A3E /* EmailVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerification.swift; sourceTree = "<group>"; };
+		FC426F1323310434004F8A3E /* F4SServiceFactoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SServiceFactoryProtocols.swift; sourceTree = "<group>"; };
 		FC4EE70F230EB9D700B40F6B /* F4SUserStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserStatus.swift; sourceTree = "<group>"; };
 		FC4EE713230EBC8100B40F6B /* F4SRoleJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRoleJson.swift; sourceTree = "<group>"; };
 		FC4EE72B230EF10300B40F6B /* F4SMessageStructs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SMessageStructs.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 		FC22438D232F94AA0073C9B1 /* ServiceProtocols */ = {
 			isa = PBXGroup;
 			children = (
+				FC426F1323310434004F8A3E /* F4SServiceFactoryProtocols.swift */,
 				FC426F03232FAEA9004F8A3E /* WorkfinderEndpoint.swift */,
 				FC426EFB232FA274004F8A3E /* WorkfinderServiceProtocols.swift */,
 			);
@@ -719,6 +722,7 @@
 				FCE51938224948E400B550C9 /* F4SHoursType.swift in Sources */,
 				FC06605D2326770B00496FE2 /* F4SShortlistJson.swift in Sources */,
 				FCE5193E22494CED00B550C9 /* F4SJsonValue.swift in Sources */,
+				FC426F1423310434004F8A3E /* F4SServiceFactoryProtocols.swift in Sources */,
 				FCE5192F2249482A00B550C9 /* F4SCalendarMonth.swift in Sources */,
 				FC426EFC232FA274004F8A3E /* WorkfinderServiceProtocols.swift in Sources */,
 				FC083F7B230FF01000641F17 /* F4SDocument.swift in Sources */,

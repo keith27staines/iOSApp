@@ -28,7 +28,11 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     var templateService: F4STemplateServiceProtocol
     var placementRepository: F4SPlacementRepositoryProtocol
     var interestsRepository: F4SInterestsRepositoryProtocol
+    let getAllPlacementsService: F4SGetAllPlacementsServiceProtocol
+    let emailVerificationService: EmailVerificationServiceProtocol
     let startingViewController: UIViewController!
+    let documentService: F4SPlacementDocumentServiceProtocol
+    let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
     weak var applyCoordinatorDelegate: ApplyCoordinatorDelegate?
     lazy var userInterests: [F4SInterest] = {
         return interestsRepository.loadUserInterests()
@@ -50,7 +54,11 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
          placementService: F4SPlacementApplicationServiceProtocol,
          templateService: F4STemplateServiceProtocol,
          placementRepository: F4SPlacementRepositoryProtocol,
-         interestsRepository: F4SInterestsRepositoryProtocol) {
+         interestsRepository: F4SInterestsRepositoryProtocol,
+         getAllPlacementsService: F4SGetAllPlacementsServiceProtocol,
+         emailVerificationService: EmailVerificationServiceProtocol,
+         documentService: F4SPlacementDocumentServiceProtocol,
+         documentUploaderFactory: F4SDocumentUploaderFactoryProtocol) {
         self.applyCoordinatorDelegate = applyCoordinatorDelegate
         self.applicationContext = F4SApplicationContext(user: F4SUser(), company: company, placement: nil)
         self.placementService = placementService
@@ -58,6 +66,10 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         self.startingViewController = navigationRouter.navigationController.topViewController
         self.placementRepository = placementRepository
         self.interestsRepository = interestsRepository
+        self.getAllPlacementsService = getAllPlacementsService
+        self.emailVerificationService = emailVerificationService
+        self.documentService = documentService
+        self.documentUploaderFactory = documentUploaderFactory
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
@@ -69,7 +81,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     var rootViewController: UIViewController?
     
     lazy var canApplyLogic: AllowedToApplyLogic = {
-        return AllowedToApplyLogic()
+        return AllowedToApplyLogic(service: self.getAllPlacementsService)
     }()
     
     func showApplicationLetterViewController() {
@@ -113,7 +125,11 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
     
     func showUserDetails() {
         
-        let userDetailsCoordinator = UserDetailsCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected)
+        let userDetailsCoordinator = UserDetailsCoordinator(
+            parent: self,
+            navigationRouter: navigationRouter,
+            inject: injected,
+            emailVerificationService: emailVerificationService)
         
         userDetailsCoordinator.didFinish = { [weak self] coordinator in
             self?.userDetailsDidFinish()
@@ -188,7 +204,14 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
     
     func showAddDocuments() {
         let placementuuid = applicationContext.placement!.placementUuid!
-        let coordinator = DocumentUploadCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, mode: .applyWorkflow, placementUuid: placementuuid)
+        let coordinator = DocumentUploadCoordinator(
+            parent: self,
+            navigationRouter: navigationRouter,
+            inject: injected,
+            mode: .applyWorkflow,
+            placementUuid: placementuuid,
+            documentService: documentService,
+            documentUploaderFactory: documentUploaderFactory)
         coordinator.didFinish = { [weak self] coordinator in
             guard let strongSelf = self else { return }
             strongSelf.navigationRouter.pop(animated: false)

@@ -5,6 +5,17 @@ import WorkfinderAppLogic
 
 class CompanySummaryViewController: CompanySubViewController {
     
+    let documentsModel: F4SCompanyDocumentsModel
+    
+    init(viewModel: CompanyViewModel,
+         pageIndex: CompanyViewModel.PageIndex,
+         documentsModel: F4SCompanyDocumentsModel) {
+        self.documentsModel = documentsModel
+        super.init(viewModel: viewModel, pageIndex: pageIndex)
+    }
+    
+    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViews()
@@ -31,7 +42,6 @@ class CompanySummaryViewController: CompanySubViewController {
     var documentsView: UIView!
     
     func addSubControllers() {
-        let documentsModel = F4SCompanyDocumentsModel(companyUuid: viewModel.company.uuid)
         let vc = CompanyDocumentsViewController(documentsModel: documentsModel)
         documentsView = vc.view
         view.addSubview(documentsView)

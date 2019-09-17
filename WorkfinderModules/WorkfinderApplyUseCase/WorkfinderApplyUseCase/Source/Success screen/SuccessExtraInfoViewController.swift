@@ -28,10 +28,6 @@ public class SuccessExtraInfoViewController: UIViewController {
         applyStyle()
     }
     
-    override public func viewWillAppear(_ animated: Bool) {
-        F4SUserStatusService.shared.beginStatusUpdate()
-    }
-    
     public var timelineButtonWasTapped: (() -> Void)?
     public var searchButtonWasTapped: (() -> Void)?
 }

@@ -1,5 +1,6 @@
 import Foundation
 import WorkfinderCommon
+import WorkfinderAppLogic
 import WorkfinderCoordinators
 
 let __bundle = Bundle(identifier: "com.f4s.WorkfinderAcceptUseCase")
@@ -12,17 +13,20 @@ public class AcceptOfferCoordinator : CoreInjectionNavigationCoordinator {
     var firstViewController: UIViewController?
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     let offerProcessor: F4SOfferProcessingServiceProtocol
+    let companyDocumentsModel: F4SCompanyDocumentsModel
     
     public init(parent: CoreInjectionNavigationCoordinator,
          navigationRouter: NavigationRoutingProtocol,
          inject: CoreInjectionProtocol,
          acceptContext: AcceptOfferContext,
          companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
-         offerProcessor: F4SOfferProcessingServiceProtocol) {
+         offerProcessor: F4SOfferProcessingServiceProtocol,
+         companyDocumentsModel: F4SCompanyDocumentsModel) {
         self.parent = parent
         self.acceptContext = acceptContext
         self.companyCoordinatorFactory = companyCoordinatorFactory
         self.offerProcessor = offerProcessor
+        self.companyDocumentsModel = companyDocumentsModel
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
 
@@ -30,6 +34,7 @@ public class AcceptOfferCoordinator : CoreInjectionNavigationCoordinator {
         let acceptStoryboard = UIStoryboard(name: "AcceptOffer", bundle: __bundle)
         let vc = acceptStoryboard.instantiateInitialViewController() as! AcceptOfferViewController
         vc.offerProcessor = offerProcessor
+        vc.companyDocumentsModel = self.companyDocumentsModel
         vc.accept = acceptContext
         vc.coordinator = self
         navigationRouter.push(viewController: vc, animated: true)

@@ -1,5 +1,27 @@
 import Foundation
 
+public enum DocumentUploadState {
+    case waiting
+    case uploading(fraction: Float)
+    case completed
+    case cancelled
+    case paused(fraction: Float)
+    case failed(error: Error)
+}
+
+
+
+public protocol F4SDocumentUploaderDelegate : class {
+    func documentUploader(_ uploader: F4SDocumentUploaderProtocol, didChangeState state: DocumentUploadState)
+}
+
+public protocol F4SDocumentUploaderProtocol : class {
+    var delegate: F4SDocumentUploaderDelegate? { get set }
+    var state: DocumentUploadState { get }
+    func cancel()
+    func resume()
+}
+
 public protocol EmailVerificationServiceProtocol {
     func cancel()
     func start(onSuccess: @escaping (_ email:String) -> Void, onFailure: @escaping (_ email:String, _ error:EmailSubmissionError) -> Void)

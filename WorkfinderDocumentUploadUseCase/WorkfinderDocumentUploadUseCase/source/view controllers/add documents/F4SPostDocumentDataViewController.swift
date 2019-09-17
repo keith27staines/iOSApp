@@ -16,12 +16,18 @@ protocol PostDocumentsWithDataViewControllerDelegate {
 }
 
 class PostDocumentsWithDataViewController : UIViewController {
-    var documentModel: F4SDocumentUploadModelBase?
     
+    let uploaderFactory: F4SDocumentUploaderFactoryProtocol
+    var documentModel: F4SDocumentUploadModelBase?
     var delegate: PostDocumentsWithDataViewControllerDelegate? = nil
     var currentDocumentIndex: Int? = 0
-    
     var cancelled: Bool = false
+    var numberUploaded = 0
+    var currentUpload: F4SDocumentUploaderProtocol? = nil
+    
+    lazy var numberToUpload: Int = {
+       return documentModel?.documentsWithData().count ?? 0
+    }()
     
     var nameLabel: UILabel = {
         let label = UILabel()
@@ -51,9 +57,9 @@ class PostDocumentsWithDataViewController : UIViewController {
         return stack
     }()
     
-    func cancel() {
-        cancelled = true
-        currentUpload?.cancel()
+    init(uploaderFactory: F4SDocumentUploaderFactoryProtocol) {
+        self.uploaderFactory = uploaderFactory
+        super.init(nibName: nil, bundle: nil)
     }
     
     override func viewDidLoad() {
@@ -98,17 +104,15 @@ class PostDocumentsWithDataViewController : UIViewController {
         return button
     }()
     
-    var currentUpload: F4SDocumentUploader? = nil
-    
     @objc func handleCancel() {
         cancel()
         delegate?.postDocumentsControllerDidCancel(self)
     }
     
-    lazy var numberToUpload: Int = {
-       return documentModel?.documentsWithData().count ?? 0
-    }()
-    var numberUploaded = 0
+    func cancel() {
+        cancelled = true
+        currentUpload?.cancel()
+    }
     
     func updateUploadCount() {
         title = "Upload \(numberUploaded+1)/\(numberToUpload)"
@@ -124,8 +128,8 @@ class PostDocumentsWithDataViewController : UIViewController {
             delegate?.postDocumentsControllerDidCompleteUpload(self)
             return
         }
-        guard let placementUuid = documentModel?.placementDocumentService?.placementUuid,
-            let uploader = F4SDocumentUploader(document: document, placementUuid: placementUuid)
+        guard let placementUuid = documentModel?.placementUuid,
+            let uploader = uploaderFactory.makeDocumentUploader(document: document, placementuuid: placementUuid)
             else { return }
         updateUploadCount()
         nameLabel.text = "Uploading \"\(document.name ?? "...")\""
@@ -138,12 +142,14 @@ class PostDocumentsWithDataViewController : UIViewController {
         view = UIView()
         view.backgroundColor = UIColor.white
     }
+    
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
 
 extension PostDocumentsWithDataViewController : F4SDocumentUploaderDelegate {
-    func documentUploader(_ uploader: F4SDocumentUploader, didChangeState state: F4SDocumentUploader.State) {
+    func documentUploader(_ uploader: F4SDocumentUploaderProtocol, didChangeState state: DocumentUploadState) {
         retryButton.isHidden = true
-        switch uploader.state {
+        switch state {
         case .waiting:
             stateLabel.text = "Waiting for connection"
         case .uploading(let fraction):

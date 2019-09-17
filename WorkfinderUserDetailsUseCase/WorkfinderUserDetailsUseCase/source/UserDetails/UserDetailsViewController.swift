@@ -1,6 +1,5 @@
 import UIKit
 import WorkfinderCommon
-import WorkfinderNetworking
 import WorkfinderServices
 import WorkfinderUI
 

@@ -19,11 +19,9 @@ public protocol F4SDocumentUploadModelDelegate {
 }
 
 public class F4SDocumentUploadModelBase {
-    public fileprivate (set) var placementDocumentService: F4SPlacementDocumentsService?
-    public fileprivate (set) var userDocumentService: F4SPlacementDocumentServiceProtocol? // F4SUserDocumentsServiceProtocol?
-    
+    public let documentService: F4SPlacementDocumentServiceProtocol
     public var maximumDocumentCount : Int { return 2 }
-    
+    public var placementUuid: F4SUUID?
     fileprivate var delegate: F4SDocumentUploadModelDelegate?
     fileprivate var documents : [F4SDocument]
     
@@ -57,7 +55,7 @@ public class F4SDocumentUploadModelBase {
             return document.hasValidRemoteUrl
         }
         let putJson = F4SPutDocumentsJson(documents: documentsWithRemoteUrl)
-        placementDocumentService?.putDocuments(documents: putJson, completion: { (result) in
+        documentService.putDocuments(documents: putJson, completion: { (result) in
             switch result {
             case .success(_):
                 completion(true)
@@ -97,19 +95,14 @@ public class F4SDocumentUploadModelBase {
         return document
     }
     
-    public init(delegate: F4SDocumentUploadModelDelegate, documentService: F4SPlacementDocumentsService) {
+    public init(delegate: F4SDocumentUploadModelDelegate,
+                placementUuid: F4SUUID?,
+                documentService: F4SPlacementDocumentServiceProtocol,
+                documents: [F4SDocument]) {
         self.delegate = delegate
-        self.placementDocumentService = documentService
-        self.userDocumentService = documentService //F4SUserDocumentsService()
-        self.documents = []
-    }
-    
-    public init(delegate: F4SDocumentUploadModelDelegate, placementUuid: F4SUUID) {
-        let documentService = F4SPlacementDocumentsService(placementUuid: placementUuid)
-        self.delegate = delegate
-        self.placementDocumentService = documentService
-        self.userDocumentService = documentService //F4SUserDocumentsService()
-        self.documents = []
+        self.placementUuid = placementUuid
+        self.documentService = documentService
+        self.documents = documents
     }
     
     public func numberOfSections() -> Int {
@@ -122,11 +115,6 @@ public class F4SDocumentUploadModelBase {
 }
 
 public class F4SDocumentUploadAtBLRequestModel : F4SDocumentUploadModelBase {
-    
-    public init(delegate: F4SDocumentUploadModelDelegate, placementUuid: F4SUUID, documents: [F4SDocument]) {
-        super.init(delegate: delegate, placementUuid: placementUuid)
-        self.documents = documents
-    }
     
     override public var maximumDocumentCount: Int { return documents.count }
     override public func canAddPlaceholder() -> Bool { return false }
@@ -151,7 +139,7 @@ public class F4SDocumentUploadWhileApplyingModel : F4SDocumentUploadModelBase {
     
     override public func fetchDocumentsForPlacement() {
         self.documents = []
-        self.userDocumentService?.getDocuments(completion: documentsFetched)
+        self.documentService.getDocuments(completion: documentsFetched)
     }
     
     private func documentsFetched(networkResult: F4SNetworkResult<F4SGetDocumentJson>) {
@@ -171,5 +159,4 @@ public class F4SDocumentUploadWhileApplyingModel : F4SDocumentUploadModelBase {
             }
         }
     }
-
 }

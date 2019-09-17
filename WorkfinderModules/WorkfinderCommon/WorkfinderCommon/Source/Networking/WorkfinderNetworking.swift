@@ -1,5 +1,4 @@
-/// `NetworkConfig` defines api keys and api endpoints which are exposed through
-/// static methods which are set by `WorkfinderNetworking.configure`
+/// `NetworkConfig` defines api keys and api endpoints
 public struct NetworkConfig {
     
     /// `wexApiKey` is the api key required for all calls to the Workfinder API

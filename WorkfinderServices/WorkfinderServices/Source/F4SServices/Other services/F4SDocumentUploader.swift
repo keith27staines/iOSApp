@@ -1,91 +1,68 @@
-//
-//  MultipartUpload.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 11/11/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
-//
-
 import Foundation
 import WorkfinderCommon
-import WorkfinderNetworking
-import WorkfinderServices
 
-public protocol F4SDocumentUploaderDelegate : class {
-    func documentUploader(_ uploader: F4SDocumentUploader, didChangeState state: F4SDocumentUploader.State)
-}
-
-public class F4SDocumentUploader : NSObject {
+public class F4SDocumentUploader : NSObject, F4SDocumentUploaderProtocol {
     
     public var delegate : F4SDocumentUploaderDelegate?
     public static let sessionIdentifier = "F4SDocumentUploaderSession"
-    
-    public static let sessionConfiguration: URLSessionConfiguration = {
-        var config = URLSessionConfiguration.default
-        return config
-    }()
-
-    public enum State {
-        case waiting
-        case uploading(fraction: Float)
-        case completed
-        case cancelled
-        case paused(fraction: Float)
-        case failed(error: Error)
-    }
-    
-    public private (set) var state: State {
-        didSet {
-            delegate?.documentUploader(self, didChangeState: state)
-        }
-    }
-    
-    public lazy var session: URLSession = {
-        var session = URLSession(configuration: F4SDocumentUploader.sessionConfiguration, delegate: self, delegateQueue: OperationQueue.main)
-        return session
-    }()
-    
-    public let standardHeaders = F4SDataTaskService.defaultHeaders
     public lazy var boundary: String = { return generateBoundary() }()
     public let document: F4SDocument
     public let documentName: String
     public let documentType: F4SUploadableDocumentType
     public let localUrl: URL
-    private var task: F4SNetworkTask?
     public let placementUuid: F4SUUID
+
+    var task: F4SNetworkTask?
+    let configuration: NetworkConfig
+    let targetUrl: URL
+    var data: Data!
     
-    public var targetUrl: URL {
-        let urlString = WorkfinderEndpoint.postDocumentsUrl + "/\(placementUuid)/documents"
-        let url = URL(string: urlString)
-        return url!
+    public internal (set) var state: DocumentUploadState {
+        didSet {
+            delegate?.documentUploader(self, didChangeState: state)
+        }
     }
     
-    public lazy var request: URLRequest = {
-        var request = URLRequest(url: targetUrl)
-        request.httpMethod = "POST"
-        return request
+    lazy var sessionConfiguration: URLSessionConfiguration = {
+        return self.configuration.sessionManager.interactiveSession.configuration
     }()
     
-    public init?(document: F4SDocument, placementUuid: F4SUUID) {
+    lazy var session: URLSession = {
+        var session = URLSession(configuration: sessionConfiguration, delegate: self, delegateQueue: OperationQueue.main)
+        return session
+    }()
+    
+    public init?(document: F4SDocument, placementUuid: F4SUUID, configuration: NetworkConfig) {
         guard
             let localUrlString = document.localUrlString,
             let localUrl = URL(string: localUrlString),
             let documentName = document.name
             else { return nil }
+        let targetUrlString = configuration.endpoints.postDocumentsUrl + "/\(placementUuid)/documents"
+        guard let targetUrl = URL(string: targetUrlString) else { return nil }
+        self.targetUrl = targetUrl
         self.placementUuid = placementUuid
         self.document = document
         self.documentName = documentName
         self.documentType = document.type
         self.localUrl = localUrl
         self.state = .waiting
+        self.configuration = configuration
         super.init()
         guard let data = createMultipartData() else { return nil }
-        var headers = F4SDataTaskService.defaultHeaders
+        self.data = data
+    }
+    
+    func makeTask() -> F4SNetworkTask {
+        var headers = [String:String]()
         headers["Content-Type"] = "multipart/form-data; boundary=\(boundary)"
         headers["Content-Length"] = String(data.count)
+        var request = URLRequest(url: targetUrl)
+        request.httpMethod = "POST"
         request.allHTTPHeaderFields = headers
         request.httpBody = data
-        task = F4SDataTaskService.networkTask(with: request, session: session, attempting: "Upload documents", completion: { [weak self] (result) in
+        let taskFactory = F4SNetworkTaskFactory(configuration: configuration)
+        let task = taskFactory.networkTask(with: request, session: session, attempting: "Upload document") { [weak self] (result) in
             DispatchQueue.main.async {
                 guard let this = self else { return }
                 switch result {
@@ -95,18 +72,19 @@ public class F4SDocumentUploader : NSObject {
                 case .success(let data):
                     guard let _ = data else { return }
                     print("Document(s) did upload")
-                    document.isUploaded = true
+                    this.document.isUploaded = true
                     this.state = .completed
                 }
             }
-        })
+        }
+        return task
     }
     
-    func cancel() {
+    public func cancel() {
         task?.cancel()
     }
     
-    func resume() {
+    public func resume() {
         switch state {
         case .waiting, .paused(_):
             task?.resume()

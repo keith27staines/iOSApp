@@ -8,7 +8,6 @@
 
 import Foundation
 import WorkfinderCommon
-import WorkfinderNetworking
 import WorkfinderServices
 
 /// A state machine that controls the verification process for emails

@@ -20,7 +20,7 @@ class AcceptOfferViewController: UIViewController {
     
     var placementInviteModel: F4SPlacementInviteModel!
     var accept: AcceptOfferContext!
-    var companyDocumentsModel: F4SCompanyDocumentsModel?
+    var companyDocumentsModel: F4SCompanyDocumentsModel!
     weak var coordinator: AcceptOfferCoordinator?
     
     var offerProcessor: F4SOfferProcessingServiceProtocol!
@@ -253,8 +253,6 @@ extension AcceptOfferViewController {
     
     func proceedWithApplication() {
         sharedUserMessageHandler.showLoadingOverlay(self.view)
-        self.companyDocumentsModel = F4SCompanyDocumentsModel(companyUuid: accept.company.uuid)
-        let companyDocumentsModel = self.companyDocumentsModel!
         let age = accept.user.age() ?? 0
         companyDocumentsModel.getDocuments(age: age) { (result) in
             DispatchQueue.main.async { [weak self] in
@@ -271,7 +269,7 @@ extension AcceptOfferViewController {
                     }
                 case .success(_):
                     sharedUserMessageHandler.hideLoadingOverlay()
-                    if companyDocumentsModel.requestableDocuments.count > 0 {
+                    if strongSelf.companyDocumentsModel.requestableDocuments.count > 0 {
                         strongSelf.performSegue(withIdentifier: "showRequestCompanyDocuments", sender: strongSelf)
                     } else {
                         strongSelf.performSegue(withIdentifier: "showVoucherEntry", sender: strongSelf)
