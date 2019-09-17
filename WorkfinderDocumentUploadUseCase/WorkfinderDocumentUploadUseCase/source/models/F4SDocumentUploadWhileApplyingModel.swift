@@ -1,14 +1,6 @@
-//
-//  F4SDocumentUploadModel.swift
-//  UrlUploadDemo
-//
-//  Created by Keith Dev on 16/02/2018.
-//  Copyright © 2018 Keith Dev. All rights reserved.
-//
 
 import UIKit
 import WorkfinderCommon
-import WorkfinderServices
 
 public protocol F4SDocumentUploadModelDelegate {
     func documentUploadModel(_ model: F4SDocumentUploadModelBase, deleted: F4SDocument)
