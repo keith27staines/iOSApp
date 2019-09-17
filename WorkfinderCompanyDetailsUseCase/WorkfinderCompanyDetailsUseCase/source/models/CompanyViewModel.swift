@@ -1,15 +1,7 @@
-//
-//  CompanyViewViewModel.swift
-//  F4SPrototypes
-//
-//  Created by Keith Staines on 21/12/2018.
-//  Copyright © 2018 Keith Staines. All rights reserved.
-//
 
 import UIKit
 import CoreLocation
 import WorkfinderCommon
-import WorkfinderServices
 import WorkfinderAppLogic
 
 protocol CompanyViewModelCoordinatingDelegate : class {
