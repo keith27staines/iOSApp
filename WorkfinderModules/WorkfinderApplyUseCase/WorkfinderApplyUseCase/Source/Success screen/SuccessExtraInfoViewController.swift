@@ -1,14 +1,6 @@
-//
-//  SuccessExtraInfoViewController.swift
-//  f4s-workexperience
-//
-//  Created by Sergiu Simon on 10/01/17.
-//  Copyright © 2017 freshbyte. All rights reserved.
-//
 
 import UIKit
 import WorkfinderCommon
-import WorkfinderServices
 import WorkfinderUI
 
 public class SuccessExtraInfoViewController: UIViewController {

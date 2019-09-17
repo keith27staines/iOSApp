@@ -1,14 +1,6 @@
-//
-//  ApplicationModel.swift
-//  WorkfinderApplyUseCase
-//
-//  Created by Keith Dev on 29/03/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
 
 import Foundation
 import WorkfinderCommon
-import WorkfinderServices
 import WorkfinderAppLogic
 
 protocol ApplicationModelProtocol : class {
