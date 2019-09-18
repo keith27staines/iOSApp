@@ -40,6 +40,7 @@ public protocol F4SOfferProcessingServiceProtocol {
     func confirmPlacement(placement: F4STimelinePlacement, completion: @escaping (F4SNetworkResult<Bool>) -> ())
     func cancelPlacement(_ uuid: F4SUUID, completion: @escaping (F4SNetworkResult<Bool>) -> ())
     func declinePlacement(_ uuid: F4SUUID, completion: @escaping (F4SNetworkResult<Bool>) -> ())
+    func getPlacementOffer(uuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4STimelinePlacement>) -> ())
 }
 
 public protocol F4SRoleServiceProtocol {

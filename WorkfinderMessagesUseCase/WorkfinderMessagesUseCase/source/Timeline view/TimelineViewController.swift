@@ -21,7 +21,9 @@ class TimelineViewController: UIViewController {
     @IBOutlet weak var noPlacementsInfoLabel: UILabel!
     
     var companyRepository: F4SCompanyRepositoryProtocol!
-
+    var userStatusService: F4SUserStatusServiceProtocol!
+    var placementService: F4SPlacementServiceProtocol!
+    
     var userPlacements: [F4STimelinePlacement] = [] {
         didSet {
             if userPlacements.count == 0 {
@@ -59,7 +61,7 @@ class TimelineViewController: UIViewController {
     override func viewWillAppear(_: Bool) {
         super.viewWillAppear(true)
         adjustNavigationBar()
-        F4SUserStatusService.shared.beginStatusUpdate()
+        userStatusService?.beginStatusUpdate()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -70,10 +72,6 @@ class TimelineViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return skin?.navigationBarSkin.statusbarMode == .light ? .lightContent : .default
     }
-    
-    lazy var placementService: F4SPlacementService = {
-        return F4SPlacementService()
-    }()
 }
 
 // MARK: - API Calls

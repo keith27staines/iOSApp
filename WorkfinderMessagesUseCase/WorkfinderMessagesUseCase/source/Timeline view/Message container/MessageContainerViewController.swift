@@ -17,7 +17,11 @@ class MessageContainerViewController: UIViewController {
     @IBAction func unwindToMessageContainer(segue: UIStoryboardSegue) {
     }
     
-    weak var coordinator: TimelineCoordinator?
+    weak var coordinator: TimelineCoordinator!
+    var offerProcessor: F4SOfferProcessingServiceProtocol!
+    var companyService: F4SCompanyServiceProtocol!
+    var roleService: F4SRoleServiceProtocol!
+    var messageServiceFactory: F4SMessageServiceFactoryProtocol!
     var messageController: MessageViewController?
     var threadUuid: String?
     var company: Company?
@@ -75,8 +79,9 @@ class MessageContainerViewController: UIViewController {
     
     func loadModel(threadUuid: F4SUUID) {
         sharedUserMessageHandler.showLoadingOverlay(self.view)
-        modelBuilder = F4SMessageModelBuilder(threadUuid: threadUuid)
-        modelBuilder!.build(threadUuid: threadUuid) { [weak self] (result) in
+        guard let modelBuilder = coordinator?.makeMessageModelBuilder(threadUuid: threadUuid)
+            else { return }
+        modelBuilder.build(threadUuid: threadUuid) { [weak self] (result) in
             DispatchQueue.main.async {
                 guard let strongSelf = self else { return }
                 switch result {
@@ -142,7 +147,7 @@ class MessageContainerViewController: UIViewController {
     
     func prepareAcceptOffer(completion: @escaping (F4SNetworkError?, AcceptOfferContext?) -> ()) {
         guard let placementUuid = placement?.placementUuid else { return }
-        loadPlacementOffer(uuid: placementUuid) { [weak self] (networkResult) in
+        offerProcessor.getPlacementOffer(uuid: placementUuid) { [weak self] (networkResult) in
             guard let strongSelf = self else { return }
             DispatchQueue.main.async {
                 sharedUserMessageHandler.hideLoadingOverlay()
@@ -165,21 +170,20 @@ class MessageContainerViewController: UIViewController {
                     }
                     
                     let user = F4SUser()
-                    strongSelf.fetcher.getImage(urlString: strongSelf.company?.logoUrl) { [weak self] image in
+                    let logoUrl = strongSelf.company?.logoUrl
+                    strongSelf.fetcher.getImage(urlString: logoUrl) { [weak self] image in
                         guard
                             let strongSelf = self,
                             let roleUuid = placement.roleUuid else { return }
-                        
-                        let companyService = F4SCompanyService()
-                        let roleService = F4SRoleService()
                         let companyUuid = strongSelf.company!.uuid
-                        roleService.getRoleForCompany(companyUuid: companyUuid, roleUuid: roleUuid) { (networkResult) in
-                            DispatchQueue.main.async {
+                        self?.roleService.getRoleForCompany(companyUuid: companyUuid,
+                                                            roleUuid: roleUuid) { (networkResult) in
+                            DispatchQueue.main.async { [weak self] in
                                 switch networkResult {
                                 case .error(let error):
                                     completion(error, nil)
                                 case .success(let role):
-                                    companyService.getCompany(uuid: companyUuid) { (result) in
+                                    self?.companyService.getCompany(uuid: companyUuid) { (result) in
                                         DispatchQueue.main.async {
                                             switch result {
                                             case .error(let error):
@@ -199,13 +203,12 @@ class MessageContainerViewController: UIViewController {
             }
         }
     }
-    
-    func loadPlacementOffer(uuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4STimelinePlacement>) -> () ) {
-        let service = F4SPlacementService()
-        service.getPlacementOffer(uuid: uuid) { (networkResult) in
-            completion(networkResult)
-        }
-    }
+
+//    func loadPlacementOffer(uuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4STimelinePlacement>) -> () ) {
+//        offerProcessor.getPlacementOffer(uuid: uuid) { (networkResult) in
+//            completion(networkResult)
+//        }
+//    }
     
     internal var acceptContext: AcceptOfferContext? = nil
     
@@ -265,8 +268,8 @@ extension MessageContainerViewController {
         }
         var isDoneRemove: Bool = false
         var isDoneGet: Bool = false
-        
-        F4SMessageService(threadUuid: threadUuid).sendMessage(responseUuid: response.uuid) { (result) in
+        let messageService = messageServiceFactory.makeMessageService(threadUuid: threadUuid)
+        messageService.sendMessage(responseUuid: response.uuid) { (result) in
             switch result {
                 
             case .error(_):

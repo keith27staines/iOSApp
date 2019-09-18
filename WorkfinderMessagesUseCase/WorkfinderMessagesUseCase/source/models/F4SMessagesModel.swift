@@ -14,22 +14,20 @@ public typealias F4SMessagesModelResult = F4SNetworkResult<F4SMessagesModel>
 
 public class F4SMessageModelBuilder {
     
-    private let threadUuid: F4SUUID
+    let threadUuid: F4SUUID
     
-    private lazy var messageService = {
-        return F4SMessageService(threadUuid: threadUuid)
-    }()
+    let messageService: F4SMessageServiceProtocol
+    let messageActionService: F4SMessageActionServiceProtocol
+    let messageCannedResponseService: F4SCannedMessageResponsesServiceProtocol
     
-    private lazy var messageActionService = {
-        return F4SMessageActionService(threadUuid: threadUuid)
-    }()
-    
-    private lazy var messageCannedResponseService = {
-        return F4SCannedMessageResponsesService(threadUuid: threadUuid)
-    }()
-    
-    public init(threadUuid: F4SUUID) {
+    public init(threadUuid: F4SUUID,
+                messageService: F4SMessageServiceProtocol,
+                messageActionService: F4SMessageActionServiceProtocol,
+                messageCannedResponseService: F4SCannedMessageResponsesServiceProtocol) {
         self.threadUuid = threadUuid
+        self.messageService = messageService
+        self.messageActionService = messageActionService
+        self.messageCannedResponseService = messageCannedResponseService
     }
     
     public func build(threadUuid: F4SUUID, completion: @escaping (F4SMessagesModelResult) -> Void) {
