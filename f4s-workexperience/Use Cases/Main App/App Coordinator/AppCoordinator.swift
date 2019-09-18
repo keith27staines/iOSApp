@@ -31,9 +31,8 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol { return injected.databaseDownloadManager }
     var versionCheckCoordinator: NavigationCoordinator & VersionChecking
     
-    lazy var onboardingCoordinatorFactory: (_ parent: Coordinating?, _ router: NavigationRoutingProtocol) -> OnboardingCoordinatorProtocol = { [unowned self] _,_ in
-        return OnboardingCoordinator(parent: self, navigationRouter: self.navigationRouter)
-    }
+    let onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol
+    let emailVerificationModel: F4SEmailVerificationModel
     
     lazy var tabBarCoordinator: TabBarCoordinatorProtocol = {
         return tabBarCoordinatorFactory(self, navigationRouter, injected)
@@ -48,10 +47,14 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     public init(versionCheckCoordinator: NavigationCoordinator & VersionChecking,
                 registrar: RemoteNotificationsRegistrarProtocol,
                 navigationRouter: NavigationRoutingProtocol,
-                inject: CoreInjectionProtocol) {
+                inject: CoreInjectionProtocol,
+                onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol,
+                emailVerificationModel: F4SEmailVerificationModel) {
         self.versionCheckCoordinator = versionCheckCoordinator
         self.registrar = registrar
         self.injected = inject
+        self.onboardingCoordinatorFactory = onboardingCoordinatorFactory
+        self.emailVerificationModel = emailVerificationModel
         window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = navigationRouter.rootViewController
         super.init(parent:nil, navigationRouter: navigationRouter)
@@ -65,7 +68,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
         _ = UNService.shared // ensure user notification service is wired up early
-        _ = F4SEmailVerificationModel.shared
         if launchOptions?[.remoteNotification] == nil {
             performVersionCheck(resultHandler: onVersionCheckResult)
         } else {
@@ -96,7 +98,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     }
     
     func startOnboarding() {
-        let onboardingCoordinator = onboardingCoordinatorFactory(self, navigationRouter)
+        let onboardingCoordinator = onboardingCoordinatorFactory.makeOnboardingCoordinator(parent: self, navigationRouter: navigationRouter)
         self.onboardingCoordinator = onboardingCoordinator
         onboardingCoordinator.parentCoordinator = self
         onboardingCoordinator.delegate = self
@@ -126,7 +128,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         injected.userRepository.save(user: injected.user)
         logStartupInformation(userId: userUuid)
         injected.log.identity(userId: userUuid)
-        _ = F4SNetworkSessionManager.shared
         registrar.registerForRemoteNotifications()
         injected.userStatusService.beginStatusUpdate()
         databaseDownloadManager.start()

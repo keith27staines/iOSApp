@@ -19,111 +19,14 @@ import WorkfinderUserDetailsUseCase
 let globalLog = XCGLogger.default
 public var f4sLog: F4SAnalyticsAndDebugging!
 
-class MasterBuilder {
-    let launchOptions: [UIApplication.LaunchOptionsKey : Any]?
-    let localStore: LocalStore
-    let userRepo: F4SUserRepository
-    let databaseDownloadManager: F4SDatabaseDownloadManager
-    let log: F4SAnalyticsAndDebugging
-    let registrar: RemoteNotificationsRegistrarProtocol
-
-    lazy var networkConfiguration: NetworkConfig = {
-        let wexApiKey = Config.wexApiKey
-        let baseUrlString = Config.workfinderApiBase
-        let sessionManager = F4SNetworkSessionManager(wexApiKey: wexApiKey)
-        let endpoints = WorkfinderEndpoint(baseUrlString: baseUrlString)
-        let networkCallLogger = NetworkCallLogger(log: f4sLog)
-        let networkConfig = NetworkConfig(workfinderApiKey: wexApiKey,
-                                          logger: networkCallLogger,
-                                          sessionManager: sessionManager,
-                                          endpoints: endpoints)
-        return networkConfig
-    }()
-    
-    lazy var appInstallationUuidLogic: AppInstallationUuidLogic = {
-        let userRepo = F4SUserRepository(localStore: localStore)
-        let userService = makeUserService()
-        let registerDeviceService = makeDeviceRegistrationService()
-        return AppInstallationUuidLogic(userService: userService,
-                                        userRepo: userRepo,
-                                        apnsEnvironment: Config.apnsEnv,
-                                        registerDeviceService: registerDeviceService)
-    }()
-    
-    init(registrar: RemoteNotificationsRegistrarProtocol, launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
-        self.localStore = LocalStore()
-        self.userRepo = F4SUserRepository(localStore: localStore)
-        self.launchOptions = launchOptions
-        self.log = F4SLog()
-        self.databaseDownloadManager = F4SDatabaseDownloadManager()
-    }
-    
-    func build() {
-        networkConfiguration = makeNetworkConfiguration(wexApiKey: , baseUrlString: Config.workfinderApiBase)
-    }
-    
-    func makeUserService() -> F4SUserServiceProtocol {
-        return F4SUserService(configuration: networkConfiguration)
-    }
-    
-    func makeUserStatusService() -> F4SUserStatusServiceProtocol {
-        return F4SUserStatusService(configuration: networkConfiguration)
-    }
-    
-    func makeDeviceRegistrationService() -> F4SDeviceRegistrationServiceProtocol {
-        return F4SDeviceRegistrationService(configuration: networkConfiguration)
-    }
-    
-    func makeContentService() -> F4SContentServiceProtocol {
-        return F4SContentService(configuration: networkConfiguration)
-    }
-    
-    func makeVersionCheckService() -> F4SWorkfinderVersioningService {
-        return F4SWorkfinderVersioningService(configuration: networkConfiguration)
-    }
-    
-    lazy var appCoordinator: AppCoordinator = {
-        let networkConfiguration = self.networkConfiguration
-        let navigationController = UINavigationController(rootViewController: AppCoordinatorBackgroundViewController())
-        let navigationRouter = NavigationRouter(navigationController: navigationController)
-        let userRepo = self.userRepo
-        let userService = self.makeUserService()
-        let userStatusService = self.makeUserStatusService()
-        let databaseDownloadManager = self.databaseDownloadManager
-        let contentService = self.makeContentService()
-        let versionCheckService = makeVersionCheckService()
-        let injection = CoreInjection(
-            launchOptions: launchOptions,
-            appInstallationUuidLogic: appInstallationUuidLogic,
-            user: userRepo.load(),
-            userService: userService,
-            userStatusService: userStatusService,
-            userRepository: userRepo,
-            databaseDownloadManager: databaseDownloadManager,
-            contentService: contentService,
-            f4sLog: log)
-        let versionCheckCoordinator = VersionCheckCoordinator(parent: nil, navigationRouter: navigationRouter)
-        versionCheckCoordinator.versionCheckService = versionCheckService
-        
-        return AppCoordinator(versionCheckCoordinator: versionCheckCoordinator,
-                              registrar: registrar,
-                              navigationRouter: navigationRouter,
-                              inject: injection)
-    }()
-
-}
-
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     var deviceToken: String?
     var masterBuilder: MasterBuilder!
-    
-    lazy var userService: F4SUserServiceProtocol = {
-        return self.masterBuilder.makeUserService()
-    }()
+    var databaseDownloadManager: F4SDatabaseDownloadManager!
+    lazy var userService: F4SUserServiceProtocol = { return self.masterBuilder.makeUserService() }()
     
     // MARK:- Application events
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -132,7 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if ProcessInfo.processInfo.arguments.contains("isUnitTesting") { return true }
  
         DataFixes().run()
-        masterBuilder = MasterBuilder(registrar: self, launchOptions: launchOptions)
+        masterBuilder = MasterBuilder(registrar: application, launchOptions: launchOptions)
+        databaseDownloadManager = masterBuilder.databaseDownloadManager
         f4sLog = masterBuilder.log
         let appCoordinator = masterBuilder.appCoordinator
         window = appCoordinator.window
@@ -175,7 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        guard let appInstallationUuid = appInstallationUuidLogic.registeredInstallationUuid else { return }
+        guard let appInstallationUuid = masterBuilder.appInstallationUuidLogic.registeredInstallationUuid else { return }
         let tokenParts = deviceToken.map { data -> String in
             return String(format: "%02.2hhx", data)
         }
@@ -202,7 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             completionHandler(UIBackgroundFetchResult.newData)
         }
     }
-
+    
     // MARK:- Handle restoration of background session
     func application(_ application: UIApplication,
                      handleEventsForBackgroundURLSession identifier: String,

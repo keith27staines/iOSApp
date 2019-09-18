@@ -10,9 +10,12 @@ import WorkfinderOnboardingUseCase
 
 class TabBarCoordinator : TabBarCoordinatorProtocol {
     
-    var injected: CoreInjectionProtocol
-    
-    required init(parent: Coordinating?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol) {
+    let injected: CoreInjectionProtocol
+    let partnersModel: F4SPartnersModel
+    required init(parent: Coordinating?,
+                  navigationRouter: NavigationRoutingProtocol,
+                  inject: CoreInjectionProtocol,
+                  partnersModel: F4SPartnersModel) {
         self.injected = inject
         self.parentCoordinator = parent
     }
@@ -49,7 +52,7 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
     }
     
     public func updateBadges() {
-        F4SUserStatusService.shared.beginStatusUpdate()
+        injected.userStatusService.beginStatusUpdate()
         recommendationsCoordinator.updateBadges()
     }
     
@@ -112,15 +115,6 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
         }
         return false
     }
-
-    lazy var partnersModel: F4SPartnersModel = {
-        let p = F4SPartnersModel.sharedInstance
-        p.showWillProvidePartnerLater = true
-        p.getPartners(completed: { (_) in
-            return
-        })
-        return p
-    }()
     
     var topNavigationController: UINavigationController {
         return (UIApplication.shared.delegate?.window!!.rootViewController?.topMostViewController?.navigationController)!
@@ -128,7 +122,7 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
     
     private func createTabBar() {
 
-        tabBarViewController = TabBarViewController()
+        tabBarViewController = TabBarViewController(userStatusService: injected.userStatusService)
 //        let homeNavigationController = homeCoordinator.navigationRouter.navigationController
         let timelineNavigationController = timelineCoordinator.navigationRouter.navigationController
         let recommendationsNavigationController = recommendationsCoordinator.navigationRouter.navigationController

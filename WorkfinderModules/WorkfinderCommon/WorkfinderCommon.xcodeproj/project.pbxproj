@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC04B867233277080034A60E /* CoordinatorProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04B866233277080034A60E /* CoordinatorProtocols.swift */; };
+		FC04B8692332827D0034A60E /* CoordinatorFactoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04B8682332827D0034A60E /* CoordinatorFactoryProtocols.swift */; };
 		FC066050232645D800496FE2 /* F4SFavouritesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06604F232645D800496FE2 /* F4SFavouritesRepository.swift */; };
 		FC0660572326635000496FE2 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0660562326635000496FE2 /* Protocols.swift */; };
 		FC06605923266F2300496FE2 /* PersonViewDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06605823266F2300496FE2 /* PersonViewDataTests.swift */; };
@@ -140,6 +142,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FC04B866233277080034A60E /* CoordinatorProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocols.swift; sourceTree = "<group>"; };
+		FC04B8682332827D0034A60E /* CoordinatorFactoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFactoryProtocols.swift; sourceTree = "<group>"; };
 		FC06604F232645D800496FE2 /* F4SFavouritesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SFavouritesRepository.swift; sourceTree = "<group>"; };
 		FC0660562326635000496FE2 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		FC06605823266F2300496FE2 /* PersonViewDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonViewDataTests.swift; sourceTree = "<group>"; };
@@ -284,6 +288,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC04B865233276960034A60E /* Coordinator protocols */ = {
+			isa = PBXGroup;
+			children = (
+				FC04B866233277080034A60E /* CoordinatorProtocols.swift */,
+				FC04B8682332827D0034A60E /* CoordinatorFactoryProtocols.swift */,
+			);
+			path = "Coordinator protocols";
+			sourceTree = "<group>";
+		};
 		FC1FA08322FAABDE003EAE59 /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,14 +316,14 @@
 			path = "Extention tests";
 			sourceTree = "<group>";
 		};
-		FC22438D232F94AA0073C9B1 /* ServiceProtocols */ = {
+		FC22438D232F94AA0073C9B1 /* Service protocols */ = {
 			isa = PBXGroup;
 			children = (
 				FC426F1323310434004F8A3E /* F4SServiceFactoryProtocols.swift */,
 				FC426F03232FAEA9004F8A3E /* WorkfinderEndpoint.swift */,
 				FC426EFB232FA274004F8A3E /* WorkfinderServiceProtocols.swift */,
 			);
-			path = ServiceProtocols;
+			path = "Service protocols";
 			sourceTree = "<group>";
 		};
 		FC22DC0222F999A00068C61C /* F4STemplate models */ = {
@@ -462,8 +475,10 @@
 		FCA91E8622340478007ED308 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				FC9670A2225A193700318F69 /* Repository protocols */,
 				FCDFEA15223D32EA00E58649 /* Networking */,
-				FC22438D232F94AA0073C9B1 /* ServiceProtocols */,
+				FC04B865233276960034A60E /* Coordinator protocols */,
+				FC22438D232F94AA0073C9B1 /* Service protocols */,
 				FCE75CC5232F631C00C2E976 /* NetworkCallLoggerProtocol.swift */,
 				FCF4B64F232BC377001340DF /* UserDefaultKeys.swift */,
 				FC0C710D232BA8A500816332 /* F4SAnalyticsEvents.swift */,
@@ -482,7 +497,6 @@
 				FC4EE72A230EF0DE00B40F6B /* Messaging */,
 				FC4EE713230EBC8100B40F6B /* F4SRoleJson.swift */,
 				FC0E5CFA224E1B5700615B4F /* LocalStore.swift */,
-				FC9670A2225A193700318F69 /* Repository protocols */,
 				FC22DC0222F999A00068C61C /* F4STemplate models */,
 				FC7A439D224A7CF300B2D693 /* F4SJsonDecoding.swift */,
 				FCE5193C22494CEC00B550C9 /* F4SJsonValue.swift */,
@@ -707,6 +721,7 @@
 				FC22DC0822F9AC710068C61C /* F4STemplate.swift in Sources */,
 				FCFC069923224269003C59C8 /* Message.swift in Sources */,
 				FCDFEA0C223D1CBC00E58649 /* WEXErrorsFactory.swift in Sources */,
+				FC04B867233277080034A60E /* CoordinatorProtocols.swift in Sources */,
 				FCDB073A2286F7870053347F /* F4SUserRepository.swift in Sources */,
 				FC32FD432265E4C800740F0C /* F4SContentType.swift in Sources */,
 				FC426EFE232FAC6C004F8A3E /* F4SNetworkSessionManagerProtocol.swift in Sources */,
@@ -742,6 +757,7 @@
 				FC94E53D230DB3200091E625 /* F4SError.swift in Sources */,
 				FC96709C2258C8B100318F69 /* F4SInterest.swift in Sources */,
 				FC5019652306A24500A26B53 /* F4SDayOfWeek.swift in Sources */,
+				FC04B8692332827D0034A60E /* CoordinatorFactoryProtocols.swift in Sources */,
 				FCE5192C2249482A00B550C9 /* F4SCalendarWeek.swift in Sources */,
 				FC5CBA6A231D3E4700C2D3C5 /* F4SDateHelper.swift in Sources */,
 				FC426F08232FAFF0004F8A3E /* WorkfinderNetworking.swift in Sources */,

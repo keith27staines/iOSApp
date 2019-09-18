@@ -3,16 +3,6 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderCoordinators
 
-public protocol OnboardingCoordinatorProtocol : Coordinating {
-    var hideOnboardingControls: Bool { get set }
-    var delegate: OnboardingCoordinatorDelegate? { get set }
-    var onboardingDidFinish: ((OnboardingCoordinatorProtocol) -> Void)? { get set }
-}
-
-public protocol OnboardingCoordinatorDelegate : class {
-    func shouldEnableLocation(_ :Bool)
-}
-
 let __bundle = Bundle(identifier: "com.f4s.WorkfinderOnboardingUseCase")
 
 public class OnboardingCoordinator : NavigationCoordinator, OnboardingCoordinatorProtocol {

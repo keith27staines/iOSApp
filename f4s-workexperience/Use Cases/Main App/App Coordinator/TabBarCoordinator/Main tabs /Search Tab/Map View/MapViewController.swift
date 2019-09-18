@@ -177,7 +177,6 @@ class MapViewController: UIViewController {
         
         adjustAppeareance()
         setupMap()
-        setupLogos()
         setupReachability(nil, useClosures: true)
         startNotifier()
         if !(UIApplication.shared.delegate as! AppDelegate).databaseDownloadManager!.isLocalDatabaseAvailable() {
@@ -309,18 +308,6 @@ extension MapViewController {
         filtersButton.setImage(UIImage(named: "filtersIcon"), for: .normal)
         filtersButton.setImage(UIImage(named: "filtersIcon"), for: .highlighted)
         myLocationButton.tintColor = splashColor
-    }
-    
-    fileprivate func setupLogos() {
-        guard let partnerLogo = F4SPartnersModel.sharedInstance.selectedPartner?.image else {
-            logoStack.isHidden = true
-            return
-        }
-        logoStack.isHidden = false
-        workfinderLogoImageView.image = UIImage(named: "logo2")?.withRenderingMode(.alwaysTemplate)
-        workfinderLogoImageView.tintColor = UIColor.gray
-        partnerLogoImageView.image = partnerLogo.withRenderingMode(.alwaysTemplate)
-        partnerLogoImageView.tintColor = UIColor.gray
     }
     
     fileprivate func setupLabels() {
