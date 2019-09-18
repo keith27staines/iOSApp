@@ -16,7 +16,7 @@
 		FCA91E3C2233FF20007ED308 /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91E322233FF20007ED308 /* WorkfinderNetworking.framework */; };
 		FCA91E432233FF20007ED308 /* WorkfinderNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA91E352233FF20007ED308 /* WorkfinderNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCC2EC1622E85820009E8988 /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC2EC1522E85820009E8988 /* LoggerTests.swift */; };
-		FCD8AEB122BC9F0E00C52E74 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD8AEB022BC9F0E00C52E74 /* Logger.swift */; };
+		FCD8AEB122BC9F0E00C52E74 /* NetworkCallLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD8AEB022BC9F0E00C52E74 /* NetworkCallLogger.swift */; };
 		FCE75CCA232F657000C2E976 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE75CC9232F657000C2E976 /* WorkfinderCommon.framework */; };
 		FCE75CCB232F657000C2E976 /* WorkfinderCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCE75CC9232F657000C2E976 /* WorkfinderCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -58,7 +58,7 @@
 		FCA91E3B2233FF20007ED308 /* WorkfinderNetworkingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderNetworkingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA91E422233FF20007ED308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCC2EC1522E85820009E8988 /* LoggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerTests.swift; sourceTree = "<group>"; };
-		FCD8AEB022BC9F0E00C52E74 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		FCD8AEB022BC9F0E00C52E74 /* NetworkCallLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCallLogger.swift; sourceTree = "<group>"; };
 		FCE75CC9232F657000C2E976 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -145,7 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				FC6DBCA122BA20410080B8E4 /* F4SNetworkSessionManager.swift */,
-				FCD8AEB022BC9F0E00C52E74 /* Logger.swift */,
+				FCD8AEB022BC9F0E00C52E74 /* NetworkCallLogger.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -263,7 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FCD8AEB122BC9F0E00C52E74 /* Logger.swift in Sources */,
+				FCD8AEB122BC9F0E00C52E74 /* NetworkCallLogger.swift in Sources */,
 				FC6DBCA522BA20410080B8E4 /* F4SNetworkSessionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

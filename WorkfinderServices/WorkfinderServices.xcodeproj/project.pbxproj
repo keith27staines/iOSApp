@@ -13,6 +13,7 @@
 		FC02DA0B22EC717B003C8148 /* EmailVerificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02DA0822EC717B003C8148 /* EmailVerificationService.swift */; };
 		FC02DA0E22EC7214003C8148 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC02DA0D22EC7214003C8148 /* WorkfinderCommon.framework */; };
 		FC02DA2122EC7851003C8148 /* F4SPlacementApplicationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02DA2022EC7850003C8148 /* F4SPlacementApplicationServiceTests.swift */; };
+		FC04B85F233237B70034A60E /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04B85E233237B70034A60E /* File.swift */; };
 		FC083F6B230FB9F600641F17 /* F4SMessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F6A230FB9F600641F17 /* F4SMessageService.swift */; };
 		FC083F6D230FBA1600641F17 /* F4SMessageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F6C230FBA1600641F17 /* F4SMessageServiceTests.swift */; };
 		FC083F6F230FCC0000641F17 /* F4SMessageActionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F6E230FCC0000641F17 /* F4SMessageActionService.swift */; };
@@ -85,6 +86,7 @@
 		FC02DA0D22EC7214003C8148 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC02DA0F22EC721D003C8148 /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC02DA2022EC7850003C8148 /* F4SPlacementApplicationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementApplicationServiceTests.swift; sourceTree = "<group>"; };
+		FC04B85E233237B70034A60E /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		FC083F6A230FB9F600641F17 /* F4SMessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SMessageService.swift; sourceTree = "<group>"; };
 		FC083F6C230FBA1600641F17 /* F4SMessageServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SMessageServiceTests.swift; sourceTree = "<group>"; };
 		FC083F6E230FCC0000641F17 /* F4SMessageActionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SMessageActionService.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				FC4EE70D230EAFFF00B40F6B /* F4SCompanyFavouritingService.swift */,
 				FC4EE709230EA96600B40F6B /* F4SUserStatusService.swift */,
 				FC93DC3F232011A600F1CE23 /* F4SDeviceRegistrationService.swift */,
+				FC04B85E233237B70034A60E /* File.swift */,
 			);
 			path = "services inheriting from F4SDataTaskService";
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 				FC2198FF231673A4005FAC5F /* F4SPlacementApplicationService.swift in Sources */,
 				FC083F7F230FFBD000641F17 /* F4SUserDocumentService.swift in Sources */,
 				FC4EE70E230EAFFF00B40F6B /* F4SCompanyFavouritingService.swift in Sources */,
+				FC04B85F233237B70034A60E /* File.swift in Sources */,
 				FC02DA0B22EC717B003C8148 /* EmailVerificationService.swift in Sources */,
 				FC93768223150CC00058BA75 /* F4STemplateService.swift in Sources */,
 				FC083F8323100FB500641F17 /* F4SRecommendationService.swift in Sources */,

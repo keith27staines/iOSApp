@@ -15,14 +15,14 @@ import WorkfinderUI
 class TabBarViewController: UITabBarController {
 
     var reachability: Reachability?
+    let userStatusService: F4SUserStatusServiceProtocol
     
-    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    public init(userStatusService: F4SUserStatusServiceProtocol) {
+        self.userStatusService = userStatusService
+        super.init(nibName: nil, bundle: nil)
     }
     
-    public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
+    public required init?(coder aDecoder: NSCoder) { fatalError() }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +34,7 @@ class TabBarViewController: UITabBarController {
                                        selector: #selector(catchUserStatusUpdatedNotification),
                                        name: .f4sUserStatusUpdated,
                                        object: nil)
-        if let status = F4SUserStatusService.shared.userStatus {
+        if let status = userStatusService.userStatus {
             processUserStatusUpdate(status)
         }
         

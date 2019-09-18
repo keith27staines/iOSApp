@@ -13,8 +13,6 @@ import Bugsnag
 import XCGLogger
 import WorkfinderCommon
 
-public var f4sLog: F4SAnalyticsAndDebugging!
-
 public class F4SLog : F4SAnalyticsAndDebugging {
     
     private var analytics: SEGAnalytics

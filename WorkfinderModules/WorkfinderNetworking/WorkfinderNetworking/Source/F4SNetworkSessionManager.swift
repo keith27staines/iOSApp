@@ -33,7 +33,7 @@ public class F4SNetworkSessionManager: F4SNetworkSessionManagerProtocol {
     }
     
     /// Creates a new instance and configures it with the specified api key
-    init(wexApiKey: String) {
+    public init(wexApiKey: String) {
         self.wexApiKey = wexApiKey
     }
     

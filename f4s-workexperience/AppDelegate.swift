@@ -12,72 +12,146 @@ import XCGLogger
 import WorkfinderCommon
 import WorkfinderNetworking
 import WorkfinderServices
+import WorkfinderCoordinators
 import WorkfinderAppLogic
 import WorkfinderUserDetailsUseCase
 
 let globalLog = XCGLogger.default
+public var f4sLog: F4SAnalyticsAndDebugging!
+
+class MasterBuilder {
+    let launchOptions: [UIApplication.LaunchOptionsKey : Any]?
+    let localStore: LocalStore
+    let userRepo: F4SUserRepository
+    let databaseDownloadManager: F4SDatabaseDownloadManager
+    let log: F4SAnalyticsAndDebugging
+    let registrar: RemoteNotificationsRegistrarProtocol
+
+    lazy var networkConfiguration: NetworkConfig = {
+        let wexApiKey = Config.wexApiKey
+        let baseUrlString = Config.workfinderApiBase
+        let sessionManager = F4SNetworkSessionManager(wexApiKey: wexApiKey)
+        let endpoints = WorkfinderEndpoint(baseUrlString: baseUrlString)
+        let networkCallLogger = NetworkCallLogger(log: f4sLog)
+        let networkConfig = NetworkConfig(workfinderApiKey: wexApiKey,
+                                          logger: networkCallLogger,
+                                          sessionManager: sessionManager,
+                                          endpoints: endpoints)
+        return networkConfig
+    }()
+    
+    lazy var appInstallationUuidLogic: AppInstallationUuidLogic = {
+        let userRepo = F4SUserRepository(localStore: localStore)
+        let userService = makeUserService()
+        let registerDeviceService = makeDeviceRegistrationService()
+        return AppInstallationUuidLogic(userService: userService,
+                                        userRepo: userRepo,
+                                        apnsEnvironment: Config.apnsEnv,
+                                        registerDeviceService: registerDeviceService)
+    }()
+    
+    init(registrar: RemoteNotificationsRegistrarProtocol, launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
+        self.localStore = LocalStore()
+        self.userRepo = F4SUserRepository(localStore: localStore)
+        self.launchOptions = launchOptions
+        self.log = F4SLog()
+        self.databaseDownloadManager = F4SDatabaseDownloadManager()
+    }
+    
+    func build() {
+        networkConfiguration = makeNetworkConfiguration(wexApiKey: , baseUrlString: Config.workfinderApiBase)
+    }
+    
+    func makeUserService() -> F4SUserServiceProtocol {
+        return F4SUserService(configuration: networkConfiguration)
+    }
+    
+    func makeUserStatusService() -> F4SUserStatusServiceProtocol {
+        return F4SUserStatusService(configuration: networkConfiguration)
+    }
+    
+    func makeDeviceRegistrationService() -> F4SDeviceRegistrationServiceProtocol {
+        return F4SDeviceRegistrationService(configuration: networkConfiguration)
+    }
+    
+    func makeContentService() -> F4SContentServiceProtocol {
+        return F4SContentService(configuration: networkConfiguration)
+    }
+    
+    func makeVersionCheckService() -> F4SWorkfinderVersioningService {
+        return F4SWorkfinderVersioningService(configuration: networkConfiguration)
+    }
+    
+    lazy var appCoordinator: AppCoordinator = {
+        let networkConfiguration = self.networkConfiguration
+        let navigationController = UINavigationController(rootViewController: AppCoordinatorBackgroundViewController())
+        let navigationRouter = NavigationRouter(navigationController: navigationController)
+        let userRepo = self.userRepo
+        let userService = self.makeUserService()
+        let userStatusService = self.makeUserStatusService()
+        let databaseDownloadManager = self.databaseDownloadManager
+        let contentService = self.makeContentService()
+        let versionCheckService = makeVersionCheckService()
+        let injection = CoreInjection(
+            launchOptions: launchOptions,
+            appInstallationUuidLogic: appInstallationUuidLogic,
+            user: userRepo.load(),
+            userService: userService,
+            userStatusService: userStatusService,
+            userRepository: userRepo,
+            databaseDownloadManager: databaseDownloadManager,
+            contentService: contentService,
+            f4sLog: log)
+        let versionCheckCoordinator = VersionCheckCoordinator(parent: nil, navigationRouter: navigationRouter)
+        versionCheckCoordinator.versionCheckService = versionCheckService
+        
+        return AppCoordinator(versionCheckCoordinator: versionCheckCoordinator,
+                              registrar: registrar,
+                              navigationRouter: navigationRouter,
+                              inject: injection)
+    }()
+
+}
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     var deviceToken: String?
-
-    public private (set) var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol?
+    var masterBuilder: MasterBuilder!
     
-    var userService: F4SUserServiceProtocol = {
-        return F4SUserService()
+    lazy var userService: F4SUserServiceProtocol = {
+        return self.masterBuilder.makeUserService()
     }()
-    
-    lazy var appInstallationUuidLogic: AppInstallationUuidLogic = {
-        let localStore = LocalStore()
-        let userRepo = F4SUserRepository(localStore: localStore)
-        return AppInstallationUuidLogic(userService: self.userService, userRepo: userRepo, apnsEnvironment: Config.apnsEnv)
-    }()
-    
-    lazy var appCoordinator: AppCoordinatorProtocol = {
-        let appCoordinatorFactory = AppCoordinatorFactory()
-        let appCoordinator = appCoordinatorFactory.makeAppCoordinator(
-            registrar: UIApplication.shared,
-            launchOptions: self.launchOptions,
-            appInstallationUuidLogic: appInstallationUuidLogic,
-            userService: userService,
-            databaseDownloadManager: databaseDownloadManager!,
-            f4sLog: f4sLog!)
-        return appCoordinator
-    }()
-    
-    var launchOptions: [UIApplication.LaunchOptionsKey : Any]?
     
     // MARK:- Application events
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        // Prevent the entire application being built if we are just running unit tests
         if ProcessInfo.processInfo.arguments.contains("isUnitTesting") { return true }
-        self.launchOptions = launchOptions
+ 
         DataFixes().run()
-        f4sLog = F4SLog()
-        databaseDownloadManager = F4SDatabaseDownloadManager()
-        configureNetwork()
-        _ = WorkfinderUserDetailsUseCase(environmentType: Config.environment)
+        masterBuilder = MasterBuilder(registrar: self, launchOptions: launchOptions)
+        f4sLog = masterBuilder.log
+        let appCoordinator = masterBuilder.appCoordinator
         window = appCoordinator.window
         appCoordinator.start()
         return true
     }
     
+    // Handle being invoked from a universal link in safari running on the current device
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         guard let url = userActivity.webpageURL else {
             return false
         }
-        // Handle being invoked from a universal link in safari running on the current device
-        if databaseDownloadManager == nil {
-            databaseDownloadManager = F4SDatabaseDownloadManager()
-        }
-        
         setInvokingUrl(url)
         return true
     }
     
+    // Handle being invoked from a smart banner somewhere out there on the web
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        // Handle being invoked from a smart banner somewhere out there on the web
+        
         setInvokingUrl(url)
         return true
     }
@@ -166,12 +240,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 // MARK: helpers
 extension AppDelegate {
-    
-    func configureNetwork(
-        wexApiKey: String = Config.wexApiKey,
-        baseUrlString: String = Config.workfinderApiBase) {
-        WorkfinderNetworking.configure(wexApiKey: wexApiKey, workfinderBaseApi: baseUrlString, log: f4sLog)
-    }
     
     func setInvokingUrl(_ url: URL) {
         globalLog.debug("Invoked from url: \(url.absoluteString)")

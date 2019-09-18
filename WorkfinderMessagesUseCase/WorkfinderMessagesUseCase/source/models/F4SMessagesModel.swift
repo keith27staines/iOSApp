@@ -1,14 +1,6 @@
-//
-//  F4SMessagesModel.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 30/05/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
-//
 
 import Foundation
 import WorkfinderCommon
-import WorkfinderServices
 
 public typealias F4SMessagesModelResult = F4SNetworkResult<F4SMessagesModel>
 

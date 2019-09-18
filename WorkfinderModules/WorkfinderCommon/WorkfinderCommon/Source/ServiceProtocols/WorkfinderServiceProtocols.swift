@@ -9,7 +9,11 @@ public enum DocumentUploadState {
     case failed(error: Error)
 }
 
+public typealias F4SVersionValidity = Bool
 
+public protocol F4SWorkfinderVersioningServiceProtocol {
+    func getIsVersionValid(version: String, completion: @escaping (F4SNetworkResult<F4SVersionValidity>) -> ())
+}
 
 public protocol F4SDocumentUploaderDelegate : class {
     func documentUploader(_ uploader: F4SDocumentUploaderProtocol, didChangeState state: DocumentUploadState)

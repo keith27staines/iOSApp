@@ -6,15 +6,15 @@ import WorkfinderCommon
 /// into a very complete yet easily readable form.
 /// The implementation uses an instance of `F4SAnalyticsAndDebugging` to write
 /// data
-class Logger : NetworkCallLoggerProtocol {
+public class NetworkCallLogger : NetworkCallLoggerProtocol {
     
     let log: F4SAnalyticsAndDebugging
     
-    init(log: F4SAnalyticsAndDebugging) {
+    public init(log: F4SAnalyticsAndDebugging) {
         self.log = log
     }
     
-    func logDataTaskFailure(attempting: String? = nil,
+    public func logDataTaskFailure(attempting: String? = nil,
                             error: Error,
                             request: URLRequest,
                             response: HTTPURLResponse?,
@@ -53,7 +53,7 @@ class Logger : NetworkCallLoggerProtocol {
         return NSError(domain: "iOS Workfinder Networking", code: code, userInfo: ["reason": text])
     }
     
-    func logDataTaskSuccess(request: URLRequest,
+    public func logDataTaskSuccess(request: URLRequest,
                             response: HTTPURLResponse,
                             responseData: Data) {
         let separator = "-----------------------------------------------------------------------"

@@ -263,49 +263,6 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
         navCtrl.present(content, animated: true, completion: nil)
     }
     
-    func presentRatePlacementPopover(parentCtrl: UIViewController, placementUuid: String, ratePlacementProtocol: TabBarViewController? = nil) {
-        guard let popOverCtrl = UIStoryboard(name: "RatePlacement", bundle: nil).instantiateViewController(withIdentifier: "RatePlacementCtrl") as? RatePlacementViewController else {
-            return
-        }
-        popOverCtrl.placementUuid = placementUuid
-        parentCtrl.addChild(popOverCtrl)
-        popOverCtrl.backgroundPopoverView.frame = CGRect(x: 0, y: 0, width: parentCtrl.view.frame.width, height: UIScreen.main.bounds.height)
-        popOverCtrl.backgroundPopoverView.backgroundColor = UIColor.black
-        popOverCtrl.backgroundPopoverView.alpha = 0.5
-        if parentCtrl.parent is TabBarViewController {
-            parentCtrl.parent?.view.addSubview(popOverCtrl.backgroundPopoverView)
-        } else {
-            if let navigCtrl = parentCtrl.navigationController {
-                navigCtrl.view.addSubview(popOverCtrl.backgroundPopoverView)
-            } else {
-                parentCtrl.view.addSubview(popOverCtrl.backgroundPopoverView)
-            }
-        }
-        if ratePlacementProtocol != nil {
-            popOverCtrl.ratePlacementProtocol = ratePlacementProtocol
-        }
-
-        let popoverNavigationController = UINavigationController(rootViewController: popOverCtrl)
-        popoverNavigationController.modalPresentationStyle = .popover
-
-        let popover = popoverNavigationController.popoverPresentationController
-        popover?.canOverlapSourceViewRect = true
-
-        popOverCtrl.navigationController?.isNavigationBarHidden = true
-        popOverCtrl.preferredContentSize = CGSize(width: popOverCtrl.view.frame.width - 40, height: popOverCtrl.getHeight())
-
-        popover?.sourceView = parentCtrl.view
-        popover?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
-        popover?.sourceRect = CGRect(x: parentCtrl.view.bounds.midX, y: parentCtrl.view.bounds.midY, width: 0, height: 0)
-        popover?.delegate = popOverCtrl
-
-        if let navigCtrl = parentCtrl.navigationController {
-            navigCtrl.present(popoverNavigationController, animated: true, completion: nil)
-        } else {
-            parentCtrl.present(popoverNavigationController, animated: true, completion: nil)
-        }
-    }
-    
     func showMessages() {
         navigateToTimeline()
     }

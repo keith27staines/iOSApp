@@ -215,8 +215,7 @@ extension AppCoordinator {
         Environment name = \(Config.environmentName)
         Installation UUID = \(injected.appInstallationUuidLogic.registeredInstallationUuid!)
         User UUID = \(userId)
-        Base api url = \(NetworkConfig.workfinderApi)
-        v2 api url = \(NetworkConfig.workfinderApiV2)
+        Base api url = \(Config.workfinderApiBase)
         ****************************************************************
         
         """
