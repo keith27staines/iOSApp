@@ -1,7 +1,30 @@
 import Foundation
 import WorkfinderCommon
 
-// MARK:- Factory implementations
+public class EmailVerificationServiceFactory: EmailVerificationServiceFactoryProtocol {
+    
+    let configuration: NetworkConfig
+    
+    public init(configuration: NetworkConfig) {
+        self.configuration = configuration
+    }
+    
+    public func makeEmailVerificationService() -> EmailVerificationServiceProtocol {
+        return EmailVerificationService(configuration: configuration)
+    }
+}
+
+public class F4SPlacementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol {
+    let configuration: NetworkConfig
+    
+    public init(configuration: NetworkConfig) {
+        self.configuration = configuration
+    }
+    
+    public func makePlacementDocumentsService(placementUuid: F4SUUID) -> F4SPlacementDocumentsServiceProtocol {
+        return F4SPlacementDocumentsService(placementUuid: placementUuid, configuration: configuration)
+    }
+}
 
 public class F4SDocumentUploaderFactory: F4SDocumentUploaderFactoryProtocol {
 
@@ -17,8 +40,6 @@ public class F4SDocumentUploaderFactory: F4SDocumentUploaderFactoryProtocol {
                                    configuration: configuration)
     }
 }
-
-
 
 public class F4SMessageServiceFactory : F4SMessageServiceFactoryProtocol {
     let configuration: NetworkConfig

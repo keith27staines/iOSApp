@@ -9,6 +9,44 @@ import WorkfinderCompanyDetailsUseCase
 import WorkfinderApplyUseCase
 
 class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
+    let applyService: F4SPlacementApplicationServiceProtocol
+    let companyFavouritesModel: CompanyFavouritesModel
+    let companyService: F4SCompanyServiceProtocol
+    let companyDocumentService: F4SCompanyDocumentServiceProtocol
+    let documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol
+    let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
+    let emailVerificationService: EmailVerificationServiceProtocol
+    let getAllPlacementsService: F4SGetAllPlacementsServiceProtocol
+    let interestsRepository: F4SInterestsRepositoryProtocol
+    let placementRepository: F4SPlacementRepositoryProtocol
+    let shareTemplateProvider: ShareTemplateProviderProtocol
+    let templateService: F4STemplateServiceProtocol
+
+    init(applyService: F4SPlacementApplicationServiceProtocol,
+         companyFavouritesModel: CompanyFavouritesModel,
+         companyService: F4SCompanyServiceProtocol,
+         companyDocumentService: F4SCompanyDocumentServiceProtocol,
+         documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
+         documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
+         emailVerificationService: EmailVerificationServiceProtocol,
+         getAllPlacementsService: F4SGetAllPlacementsServiceProtocol,
+         interestsRepository: F4SInterestsRepositoryProtocol,
+         placementRepository: F4SPlacementRepositoryProtocol,
+         shareTemplateProvider: ShareTemplateProviderProtocol,
+         templateService: F4STemplateServiceProtocol) {
+        self.applyService = applyService
+        self.companyFavouritesModel = companyFavouritesModel
+        self.companyService = companyService
+        self.companyDocumentService = companyDocumentService
+        self.documentServiceFactory = documentServiceFactory
+        self.documentUploaderFactory = documentUploaderFactory
+        self.emailVerificationService = emailVerificationService
+        self.getAllPlacementsService = getAllPlacementsService
+        self.interestsRepository = interestsRepository
+        self.placementRepository = placementRepository
+        self.shareTemplateProvider = shareTemplateProvider
+        self.templateService = templateService
+    }
     
     func makeCompanyCoordinator(parent: CompanyCoordinatorParentProtocol, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol, companyUuid: F4SUUID) ->  CompanyCoordinatorProtocol? {
         guard let company = F4SCompanyRepository().load(companyUuid: companyUuid) else { return nil }
@@ -20,13 +58,9 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
         navigationRouter: NavigationRoutingProtocol,
         company: Company,
         inject: CoreInjectionProtocol) -> CompanyCoordinatorProtocol {
-        let placementRepository = F4SPlacementRespository()
-        let interestsRepository = F4SInterestsRepository()
-        let shareTemplateProvider = ShareTemplateProvider()
-        let socialShareItemSource = SocialShareItemSource(company: company, shareTemplateProvider: shareTemplateProvider)
-        let favouritingService = F4SCompanyFavouritingService()
-        let favouritesRepository = F4SFavouritesRepository()
-        let favouritesModel = CompanyFavouritesModel(favouritingService: favouritingService, favouritesRepository: favouritesRepository)
+        let socialShareItemSource = SocialShareItemSource(
+            company: company,
+            shareTemplateProvider: shareTemplateProvider)
         return CompanyCoordinator(
             parent: parent,
             navigationRouter: navigationRouter,
@@ -35,7 +69,15 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
             placementsRepository: placementRepository,
             interestsRepository: interestsRepository,
             socialShareItemSource: socialShareItemSource,
-            favouritesModel: favouritesModel)
+            favouritesModel: companyFavouritesModel,
+            templateService: templateService,
+            getAllPlacementsService: getAllPlacementsService,
+            emailVerificationService: emailVerificationService,
+            documentServiceFactory: documentServiceFactory,
+            documentUploaderFactory: documentUploaderFactory,
+            applyService: applyService,
+            companyService: companyService,
+            companyDocumentService: companyDocumentService)
     }
 }
 

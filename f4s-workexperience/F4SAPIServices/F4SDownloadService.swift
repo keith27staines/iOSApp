@@ -30,12 +30,10 @@ public class F4SDownloadService : NSObject, F4SDownloadServiceProtocol {
     
     private var downloadTask: URLSessionDownloadTask? = nil
     private var delegate: F4SDownloadServiceDelegate
-    private let additionalHeaders: [String: String]
     
     private lazy var configuration: URLSessionConfiguration = {
         let configuration = URLSessionConfiguration.background(withIdentifier: F4SDownloadService.sessionIdentifier)
         
-        configuration.httpAdditionalHeaders = self.additionalHeaders
         configuration.allowsCellularAccess = true
         configuration.sessionSendsLaunchEvents = true
         configuration.waitsForConnectivity = true
@@ -55,9 +53,8 @@ public class F4SDownloadService : NSObject, F4SDownloadServiceProtocol {
         return session
     }()
     
-    public init(delegate: F4SDownloadServiceDelegate, additionalHeaders: [String: String]) {
+    public init(delegate: F4SDownloadServiceDelegate) {
         self.delegate = delegate
-        self.additionalHeaders = additionalHeaders
         self.isDownloading = false
         super.init()
         _ = downloadsSession

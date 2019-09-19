@@ -9,7 +9,7 @@
 import WorkfinderCommon
 import WorkfinderCoordinators
 
-protocol VersionChecking {
+protocol VersionChecking : class {
     var versionCheckCompletion: ((F4SNetworkResult<F4SVersionValidity>) -> Void)? { get set }
 }
 

@@ -5,21 +5,15 @@ typealias URLDataTaskCompletion = ((Data?, URLResponse?, Error?) -> Void)
 
 public class EmailVerificationService : EmailVerificationServiceProtocol {
     
-    public let email: String
-    
+    let configuration: NetworkConfig
     let startUrlString = "https://founders4schools.eu.auth0.com/passwordless/start"
     let verifyUrlString = "https://founders4schools.eu.auth0.com/oauth/ro"
-    let startClientId: String
     var task: F4SNetworkTask?
     var taskfactory: ((URLRequest, @escaping URLDataTaskCompletion) -> F4SNetworkTask) = { request, result in
         return URLSession.shared.dataTask(with: request, completionHandler: result)
     }
     
-    let configuration: NetworkConfig
-    
-    public init(email: String, clientId: String, configuration: NetworkConfig) {
-        self.email = email
-        self.startClientId = clientId
+    public init(configuration: NetworkConfig) {
         self.configuration = configuration
     }
     
@@ -27,18 +21,25 @@ public class EmailVerificationService : EmailVerificationServiceProtocol {
         task?.cancel()
     }
     
-    public func start(onSuccess: @escaping (_ email:String) -> Void, onFailure: @escaping (_ email:String, _ error:EmailSubmissionError) -> Void) {
-        let email = self.email
-        let payload = StartPayload(email: email, client_id: startClientId)
+    public func start(email: String,
+                      clientId: String,
+                      onSuccess: @escaping (_ email:String) -> Void,
+                      onFailure: @escaping (_ email:String, _ clientId:String, _ error:EmailSubmissionError) -> Void) {
+        
+        let payload = StartPayload(email: email, client_id: clientId)
         let payloadData = try! JSONEncoder().encode(payload)
         let request = prepareRequest(urlString: startUrlString, method: "POST", bodyData: payloadData)
         let taskCompletion: URLDataTaskCompletion = { (data, response, error) in
             DispatchQueue.main.async { [ weak self] in
-                self?.logResult(attempting: "Start email verification", request: request, data: data, response: response, error: error)
-                if let _ = error { onFailure(email, EmailSubmissionError.client) ; return }
+                self?.logResult(attempting: "Start email verification",
+                                request: request,
+                                data: data,
+                                response: response,
+                                error: error)
+                if let _ = error { onFailure(email, clientId, EmailSubmissionError.client) ; return }
                 let statusCode = (response as! HTTPURLResponse).statusCode
                 let submissionError = EmailSubmissionError.emailSubmissionError(from: statusCode)
-                guard submissionError == nil else {onFailure(email, submissionError!) ;  return }
+                guard submissionError == nil else {onFailure(email, clientId, submissionError!) ;  return }
                 onSuccess(email)
             }
         }
@@ -63,7 +64,6 @@ public class EmailVerificationService : EmailVerificationServiceProtocol {
     }
     
     public func verifyWithCode(email: String, code: String, onSuccess: @escaping  ( _ email:String) -> Void, onFailure: @escaping (_ email:String, _ error:CodeValidationError) -> Void) {
-        guard email == self.email else { onFailure(email, CodeValidationError.emailNotTheSame) ; return }
         let payload = VerifyPayload(username: email, password: code)
         let payloadData = try! JSONEncoder().encode(payload)
         let request = prepareRequest(urlString: verifyUrlString, method: "POST", bodyData: payloadData)

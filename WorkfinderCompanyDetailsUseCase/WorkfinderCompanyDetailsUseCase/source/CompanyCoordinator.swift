@@ -17,7 +17,7 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
     let socialShareItemSource: SocialShareItemSource
     let getAllPlacementsService: F4SGetAllPlacementsServiceProtocol
     let emailVerificationService: EmailVerificationServiceProtocol
-    let documentService: F4SPlacementDocumentServiceProtocol
+    let documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol
     let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
     let templateService: F4STemplateServiceProtocol
     let companyService: F4SCompanyServiceProtocol
@@ -37,7 +37,7 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
         templateService: F4STemplateServiceProtocol,
         getAllPlacementsService: F4SGetAllPlacementsServiceProtocol,
         emailVerificationService: EmailVerificationServiceProtocol,
-        documentService: F4SPlacementDocumentServiceProtocol,
+        documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
         documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
         applyService: F4SPlacementApplicationServiceProtocol,
         companyService: F4SCompanyServiceProtocol,
@@ -52,7 +52,7 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
         self.finishDespatcher = parent
         self.getAllPlacementsService = getAllPlacementsService
         self.emailVerificationService = emailVerificationService
-        self.documentService = documentService
+        self.documentServiceFactory = documentServiceFactory
         self.documentUploaderFactory = documentUploaderFactory
         self.companyService = companyService
         self.companyDocumentService = companyDocumentService
@@ -136,7 +136,7 @@ extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
             interestsRepository: interestsRepository,
             getAllPlacementsService: getAllPlacementsService,
             emailVerificationService: emailVerificationService,
-            documentService: documentService,
+            documentServiceFactory: documentServiceFactory,
             documentUploaderFactory: documentUploaderFactory)
         addChildCoordinator(applyCoordinator)
         applyCoordinator.start()

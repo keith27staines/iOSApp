@@ -18,7 +18,7 @@ public class TimelineCoordinator : CoreInjectionNavigationCoordinator, CompanyCo
     let messageCannedResponsesServiceFactory: F4SCannedMessageResponsesServiceFactoryProtocol
     let offerProcessingService: F4SOfferProcessingServiceProtocol
     let companyDocumentsService: F4SCompanyDocumentServiceProtocol
-    let placementDocumentsService: F4SPlacementDocumentServiceProtocol
+    let placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol
     let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
     let placementService: F4SPlacementServiceProtocol
     let companyService: F4SCompanyServiceProtocol
@@ -42,7 +42,7 @@ public class TimelineCoordinator : CoreInjectionNavigationCoordinator, CompanyCo
                 messageCannedResponsesServiceFactory: F4SCannedMessageResponsesServiceFactoryProtocol,
                 offerProcessingService: F4SOfferProcessingServiceProtocol,
                 companyDocumentsService: F4SCompanyDocumentServiceProtocol,
-                placementDocumentsService: F4SPlacementDocumentServiceProtocol,
+                placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
                 documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
                 companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
                 companyRepository: F4SCompanyRepositoryProtocol,
@@ -54,7 +54,7 @@ public class TimelineCoordinator : CoreInjectionNavigationCoordinator, CompanyCo
         self.messageCannedResponsesServiceFactory = messageCannedResponsesServiceFactory
         self.offerProcessingService = offerProcessingService
         self.companyDocumentsService = companyDocumentsService
-        self.placementDocumentsService = placementDocumentsService
+        self.placementDocumentsServiceFactory = placementDocumentsServiceFactory
         self.documentUploaderFactory = documentUploaderFactory
         self.companyCoordinatorFactory = companyCoordinatorFactory
         self.companyRepository = companyRepository
@@ -132,6 +132,7 @@ public class TimelineCoordinator : CoreInjectionNavigationCoordinator, CompanyCo
             let company = company,
             let requestModel = F4SBusinessLeadersRequestModel(action: action, placement: placement, company: company) else { return }
         let mode = UploadScenario.businessLeaderRequest(requestModel)
+        let placementDocumentsService = placementDocumentsServiceFactory.makePlacementDocumentsService(placementUuid: placementUuid)
         let coordinator = DocumentUploadCoordinator(
             parent: self,
             navigationRouter: navigationRouter,

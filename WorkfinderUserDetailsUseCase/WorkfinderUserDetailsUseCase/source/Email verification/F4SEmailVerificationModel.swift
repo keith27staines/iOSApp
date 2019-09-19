@@ -47,14 +47,15 @@ public class F4SEmailVerificationModel {
     
     /// Verification is performed by sending an email to the specified address. The email contains a code or link which will, in turn, need to be submitted for final verification
     public func submitEmailForVerification(_ email: String, completion: @escaping (()->Void)) {
-        emailVerificationService.start(onSuccess: { [weak self] (email) in
+        let clientId = authenticationClientId()
+        emailVerificationService.start(email: email, clientId: clientId, onSuccess: { [weak self] (email) in
             guard let strongSelf = self else { return }
             strongSelf.submitEmailForVerificationRetryCount = 0
             strongSelf.emailVerificationState = .emailSent(email)
             print("Email verification requested for \(email)")
             completion()
             return
-        }, onFailure: { [weak self] (email, verificationError) in
+        }, onFailure: { [weak self] (email, clientId, verificationError) in
             guard let strongSelf = self else { return }
             strongSelf.submitEmailForVerificationRetryCount += 1
             if strongSelf.submitEmailForVerificationRetryCount < 5 {

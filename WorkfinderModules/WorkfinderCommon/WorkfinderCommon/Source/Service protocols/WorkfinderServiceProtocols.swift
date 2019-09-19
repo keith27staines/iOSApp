@@ -28,7 +28,12 @@ public protocol F4SDocumentUploaderProtocol : class {
 
 public protocol EmailVerificationServiceProtocol {
     func cancel()
-    func start(onSuccess: @escaping (_ email:String) -> Void, onFailure: @escaping (_ email:String, _ error:EmailSubmissionError) -> Void)
+    
+    func start(email: String,
+               clientId: String,
+               onSuccess: @escaping (_ email:String) -> Void,
+               onFailure: @escaping (_ email:String, _ clientId:String, _ error:EmailSubmissionError) -> Void)
+    
     func verifyWithCode(email: String, code: String, onSuccess: @escaping  ( _ email:String) -> Void, onFailure: @escaping (_ email:String, _ error:CodeValidationError) -> Void)
 }
 
@@ -105,7 +110,7 @@ public protocol F4SCompanyDatabaseMetadataServiceProtocol {
     func getDatabaseMetadata(completion: @escaping (F4SNetworkResult<F4SCompanyDatabaseMetaData>) -> ())
 }
 
-public protocol F4SPlacementDocumentServiceProtocol {
+public protocol F4SPlacementDocumentsServiceProtocol {
     func getDocuments(completion: @escaping (F4SNetworkResult<F4SGetDocumentJson>) -> ())
     func putDocuments(documents: F4SPutDocumentsJson, completion: @escaping ((F4SNetworkResult<F4SJSONBoolValue>) -> Void ))
 }

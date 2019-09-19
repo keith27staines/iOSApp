@@ -475,10 +475,10 @@
 		FCA91E8622340478007ED308 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				FC9670A2225A193700318F69 /* Repository protocols */,
-				FCDFEA15223D32EA00E58649 /* Networking */,
 				FC04B865233276960034A60E /* Coordinator protocols */,
 				FC22438D232F94AA0073C9B1 /* Service protocols */,
+				FC9670A2225A193700318F69 /* Repository protocols */,
+				FCDFEA15223D32EA00E58649 /* Networking */,
 				FCE75CC5232F631C00C2E976 /* NetworkCallLoggerProtocol.swift */,
 				FCF4B64F232BC377001340DF /* UserDefaultKeys.swift */,
 				FC0C710D232BA8A500816332 /* F4SAnalyticsEvents.swift */,

@@ -10,28 +10,78 @@ import WorkfinderOnboardingUseCase
 
 class TabBarCoordinator : TabBarCoordinatorProtocol {
     
+    static var sharedInstance: TabBarCoordinator!
+    
     let injected: CoreInjectionProtocol
+    let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
+    let companyDocumentsService: F4SCompanyDocumentServiceProtocol
+    let companyRepository: F4SCompanyRepositoryProtocol
+    let companyService: F4SCompanyServiceProtocol
+    let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
+    let offerProcessingService: F4SOfferProcessingServiceProtocol
     let partnersModel: F4SPartnersModel
-    required init(parent: Coordinating?,
-                  navigationRouter: NavigationRoutingProtocol,
-                  inject: CoreInjectionProtocol,
-                  partnersModel: F4SPartnersModel) {
-        self.injected = inject
-        self.parentCoordinator = parent
-    }
+    let placementService: F4SPlacementServiceProtocol
+    let placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol
+    let messageServiceFactory: F4SMessageServiceFactoryProtocol
+    let messageActionServiceFactory: F4SMessageActionServiceFactoryProtocol
+    let messageCannedResponsesServiceFactory: F4SCannedMessageResponsesServiceFactoryProtocol
+    let recommendationsService: F4SRecommendationServiceProtocol
+    let roleService: F4SRoleServiceProtocol
     
     var parentCoordinator: Coordinating?
-    var uuid: UUID = UUID()
+    let uuid: UUID = UUID()
+    let navigationRouter: NavigationRoutingProtocol?
+    weak var rootViewController: UIViewController!
     
-    var navigationRouter: NavigationRoutingProtocol?
-    var rootViewController: UIViewController!
     var childCoordinators: [UUID : Coordinating] = [:]
     
-    static var sharedInstance: TabBarCoordinator!
-
     var tabBarViewController: TabBarViewController!
     var drawerController: DrawerController?
     var shouldAskOperatingSystemToAllowLocation = false
+    
+    var timelineCoordinator: TimelineCoordinator!
+    var recommendationsCoordinator: RecommendationsCoordinator!
+    var favouritesCoordinator: FavouritesCoordinator!
+    var searchCoordinator: SearchCoordinator!
+    
+    required init(parent: Coordinating?,
+                  navigationRouter: NavigationRoutingProtocol,
+                  inject: CoreInjectionProtocol,
+                  companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
+                  companyDocumentsService: F4SCompanyDocumentServiceProtocol,
+                  companyRepository: F4SCompanyRepositoryProtocol,
+                  companyService: F4SCompanyServiceProtocol,
+                  documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
+                  offerProcessingService: F4SOfferProcessingServiceProtocol,
+                  partnersModel: F4SPartnersModel,
+                  placementService: F4SPlacementServiceProtocol,
+                  placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
+                  messageServiceFactory: F4SMessageServiceFactoryProtocol,
+                  messageActionServiceFactory: F4SMessageActionServiceFactoryProtocol,
+                  messageCannedResponsesServiceFactory: F4SCannedMessageResponsesServiceFactoryProtocol,
+                  recommendationsService: F4SRecommendationServiceProtocol,
+                  roleService: F4SRoleServiceProtocol) {
+        self.parentCoordinator = parent
+        self.navigationRouter = navigationRouter
+        self.injected = inject
+        
+        self.companyCoordinatorFactory = companyCoordinatorFactory
+        self.companyDocumentsService = companyDocumentsService
+        self.companyRepository = companyRepository
+        self.companyService = companyService
+        self.documentUploaderFactory = documentUploaderFactory
+        
+        self.offerProcessingService = offerProcessingService
+        self.partnersModel = partnersModel
+        self.placementService = placementService
+        self.placementDocumentsServiceFactory = placementDocumentsServiceFactory
+        self.messageServiceFactory = messageServiceFactory
+        
+        self.messageActionServiceFactory = messageActionServiceFactory
+        self.messageCannedResponsesServiceFactory = messageCannedResponsesServiceFactory
+        self.recommendationsService = recommendationsService
+        self.roleService = roleService
+    }
     
     func start() {
         createTabBar()
@@ -121,20 +171,23 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
     }
     
     private func createTabBar() {
-
-        tabBarViewController = TabBarViewController(userStatusService: injected.userStatusService)
-//        let homeNavigationController = homeCoordinator.navigationRouter.navigationController
+        
+        timelineCoordinator = makeTimelineCoordinator()
+        recommendationsCoordinator = makeRecommendationsCoordinator()
+        favouritesCoordinator = makeFavouritesCoordinator()
+        searchCoordinator = makeSearchCoordinator()
+        
         let timelineNavigationController = timelineCoordinator.navigationRouter.navigationController
         let recommendationsNavigationController = recommendationsCoordinator.navigationRouter.navigationController
         let favouritesNavigationContoller = favouritesCoordinator.navigationRouter.navigationController
-        let searchNavigationController = searchCoodinator.navigationRouter.navigationController
-        
-        //homeCoordinator.start()
+        let searchNavigationController = searchCoordinator.navigationRouter.navigationController
+
         timelineCoordinator.start()
         recommendationsCoordinator.start()
         favouritesCoordinator.start()
-        searchCoodinator.start()
+        searchCoordinator.start()
         
+        tabBarViewController = TabBarViewController(userStatusService: injected.userStatusService)
         tabBarViewController.viewControllers = [
             //homeNavigationController,
             timelineNavigationController,
@@ -153,23 +206,31 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
         return coordinator
     }()
     
-    lazy var timelineCoordinator: TimelineCoordinator = {
+    func makeTimelineCoordinator() -> TimelineCoordinator{
         let navigationController = UINavigationController()
         let icon = UIImage(named: "messageOutline")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         navigationController.tabBarItem = UITabBarItem(title: "Messages", image: icon, selectedImage: nil)
         let router = NavigationRouter(navigationController: navigationController)
-        let factory = CompanyCoordinatorFactory()
-        let companyRepository = F4SCompanyRepository()
         let coordinator = TimelineCoordinator(parent: nil,
                                               navigationRouter: router,
                                               inject: injected,
-                                              companyCoordinatorFactory: factory,
-                                              companyRepository: companyRepository)
+                                              messageServiceFactory: messageServiceFactory,
+                                              messageActionServiceFactory: messageActionServiceFactory,
+                                              messageCannedResponsesServiceFactory: messageCannedResponsesServiceFactory,
+                                              offerProcessingService: offerProcessingService,
+                                              companyDocumentsService: companyDocumentsService,
+                                              placementDocumentsServiceFactory: placementDocumentsServiceFactory,
+                                              documentUploaderFactory: documentUploaderFactory,
+                                              companyCoordinatorFactory: companyCoordinatorFactory,
+                                              companyRepository: companyRepository,
+                                              placementService: placementService,
+                                              companyService: companyService,
+                                              roleService: roleService)
         addChildCoordinator(coordinator)
         return coordinator
-    }()
+    }
     
-    lazy var recommendationsCoordinator: RecommendationsCoordinator = {
+    func makeRecommendationsCoordinator() -> RecommendationsCoordinator {
         let navigationController = UINavigationController()
         let lightbulbImage = UIImage(named: "light-bulb")
         navigationController.tabBarItem = UITabBarItem(title: "Recommendations", image: lightbulbImage, selectedImage: nil)
@@ -180,22 +241,18 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
             navigationRouter: router,
             inject: injected,
             companyCoordinatorFactory: companyCoordinatorFactory,
-            companyRepository: companyRepository)
+            companyRepository: companyRepository,
+            recommendationsService: recommendationsService)
         addChildCoordinator(coordinator)
         return coordinator
-    }()
+    }
     
-    lazy var companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol = {
-        let factory = CompanyCoordinatorFactory()
-        return factory
-    }()
-    
-    lazy var favouritesCoordinator: FavouritesCoordinator = {
+    func makeFavouritesCoordinator() -> FavouritesCoordinator {
         let navigationController = UINavigationController()
         let icon = UIImage(named: "heartOutline")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         navigationController.tabBarItem = UITabBarItem(title: "Favourites", image: icon, selectedImage: nil)
         let router = NavigationRouter(navigationController: navigationController)
-        let placementRepository = F4SPlacementRespository()
+        let placementRepository = F4SPlacementRepository()
         let favouritesRepository = F4SFavouritesRepository()
         let companyRepository = F4SCompanyRepository()
         let coordinator = FavouritesCoordinator(parent: self,
@@ -207,9 +264,9 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
                                                 companyRepository: companyRepository)
         addChildCoordinator(coordinator)
         return coordinator
-    }()
+    }
     
-    lazy var searchCoodinator: SearchCoordinator = {
+    func makeSearchCoordinator() -> SearchCoordinator {
         let navigationController = UINavigationController()
         let searchIcon = UIImage(named: "searchIcon2")?.withRenderingMode(.alwaysTemplate)
         navigationController.tabBarItem = UITabBarItem(title: "Search", image: searchIcon, selectedImage: nil)
@@ -218,7 +275,7 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
         coordinator.shouldAskOperatingSystemToAllowLocation = shouldAskOperatingSystemToAllowLocation
         addChildCoordinator(coordinator)
         return coordinator
-    }()
+    }
 
     private func setUpDrawerController(navigationController: UIViewController) -> DrawerController {
         navigationController.restorationIdentifier = "ExampleCenterNavigationControllerRestorationKey"
@@ -253,7 +310,9 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
     }
     
     func presentContentViewController(navCtrl: UINavigationController, contentType: F4SContentType) {
-        let content = WorkfinderUI().makeWebContentViewController(contentType: contentType, dismissByPopping: true)
+        let content = WorkfinderUI().makeWebContentViewController(contentType: contentType,
+                                                                  dismissByPopping: true,
+                                                                  contentService: injected.contentService)
         navCtrl.present(content, animated: true, completion: nil)
     }
     

@@ -129,8 +129,7 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
                     return UITableViewCell()
                 }
                 let workfinderLogo = UIImage(named: "logo2")
-                let partnerLogo = F4SPartnersModel.sharedInstance.selectedPartner?.image
-                let logos: [UIImage?] = [workfinderLogo, partnerLogo]
+                let logos: [UIImage?] = [workfinderLogo]
                 logoCell.setLogos(logos)
                 logoCell.isUserInteractionEnabled = false
                 logoCell.lineImageView.isHidden = true

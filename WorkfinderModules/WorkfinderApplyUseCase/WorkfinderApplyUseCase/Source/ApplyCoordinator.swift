@@ -31,7 +31,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     let getAllPlacementsService: F4SGetAllPlacementsServiceProtocol
     let emailVerificationService: EmailVerificationServiceProtocol
     let startingViewController: UIViewController!
-    let documentService: F4SPlacementDocumentServiceProtocol
+    let documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol
     let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
     weak var applyCoordinatorDelegate: ApplyCoordinatorDelegate?
     lazy var userInterests: [F4SInterest] = {
@@ -57,7 +57,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
          interestsRepository: F4SInterestsRepositoryProtocol,
          getAllPlacementsService: F4SGetAllPlacementsServiceProtocol,
          emailVerificationService: EmailVerificationServiceProtocol,
-         documentService: F4SPlacementDocumentServiceProtocol,
+         documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
          documentUploaderFactory: F4SDocumentUploaderFactoryProtocol) {
         self.applyCoordinatorDelegate = applyCoordinatorDelegate
         self.applicationContext = F4SApplicationContext(user: F4SUser(), company: company, placement: nil)
@@ -68,7 +68,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         self.interestsRepository = interestsRepository
         self.getAllPlacementsService = getAllPlacementsService
         self.emailVerificationService = emailVerificationService
-        self.documentService = documentService
+        self.documentServiceFactory = documentServiceFactory
         self.documentUploaderFactory = documentUploaderFactory
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
@@ -204,6 +204,7 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
     
     func showAddDocuments() {
         let placementuuid = applicationContext.placement!.placementUuid!
+        let documentService = documentServiceFactory.makePlacementDocumentsService(placementUuid: placementuuid)
         let coordinator = DocumentUploadCoordinator(
             parent: self,
             navigationRouter: navigationRouter,

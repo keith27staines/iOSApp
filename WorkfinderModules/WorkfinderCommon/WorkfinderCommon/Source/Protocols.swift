@@ -1,8 +1,8 @@
+
 import Foundation
-
-
-
+public typealias BackgroundSessionCompletionHandler = () -> Void
 public protocol F4SDatabaseDownloadManagerProtocol : class {
+    var backgroundSessionCompletionHandler: BackgroundSessionCompletionHandler? { get set }
     var localDatabaseDatestamp: Date? { get }
     func start()
     func registerObserver(_ observer: F4SCompanyDatabaseAvailabilityObserving)

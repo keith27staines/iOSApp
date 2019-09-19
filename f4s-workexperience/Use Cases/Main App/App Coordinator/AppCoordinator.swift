@@ -26,43 +26,86 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     var injected: CoreInjectionProtocol
     var registrar: RemoteNotificationsRegistrarProtocol
     var launchOptions: [UIApplication.LaunchOptionsKey: Any]? { return injected.launchOptions }
+    
+    var tabBarCoordinator: TabBarCoordinatorProtocol!
+    var onboardingCoordinator: OnboardingCoordinatorProtocol?
+    var versionCheckCoordinator: (NavigationCoordinator & VersionChecking)?
+    
+    let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
+    let companyDocumentsService: F4SCompanyDocumentServiceProtocol
+    let companyRepository: F4SCompanyRepositoryProtocol
+    let companyService: F4SCompanyServiceProtocol
+    let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
+    let emailVerificationModel: F4SEmailVerificationModel
+    let onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol
+    let offerProcessingService: F4SOfferProcessingServiceProtocol
+    let partnersModel: F4SPartnersModel
+    let placementService: F4SPlacementServiceProtocol
+    let placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol
+    let messageServiceFactory: F4SMessageServiceFactoryProtocol
+    let messageActionServiceFactory: F4SMessageActionServiceFactoryProtocol
+    let messageCannedResponsesServiceFactory: F4SCannedMessageResponsesServiceFactoryProtocol
+    let recommendationsService: F4SRecommendationServiceProtocol
+    let roleService: F4SRoleServiceProtocol
+    
     var user: F4SUser { return injected.userRepository.load() }
     var userService: F4SUserServiceProtocol { return injected.userService}
     var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol { return injected.databaseDownloadManager }
-    var versionCheckCoordinator: NavigationCoordinator & VersionChecking
     
-    let onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol
-    let emailVerificationModel: F4SEmailVerificationModel
-    
-    lazy var tabBarCoordinator: TabBarCoordinatorProtocol = {
-        return tabBarCoordinatorFactory(self, navigationRouter, injected)
-    }()
-    
-    lazy var tabBarCoordinatorFactory: (_ parent: Coordinating?, _ router: NavigationRoutingProtocol, _ inject: CoreInjectionProtocol) -> TabBarCoordinatorProtocol = {parent, router, inject in
-        let tabBarCoordinator = TabBarCoordinator(parent: parent, navigationRouter: router, inject: inject)
-        TabBarCoordinator.sharedInstance = tabBarCoordinator
-        return tabBarCoordinator
-    }
-    
-    public init(versionCheckCoordinator: NavigationCoordinator & VersionChecking,
+    public init(
                 registrar: RemoteNotificationsRegistrarProtocol,
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
+                companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
+                companyDocumentsService: F4SCompanyDocumentServiceProtocol,
+                companyRepository: F4SCompanyRepositoryProtocol,
+                companyService: F4SCompanyServiceProtocol,
+                documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
+                emailVerificationModel: F4SEmailVerificationModel,
+                offerProcessingService: F4SOfferProcessingServiceProtocol,
                 onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol,
-                emailVerificationModel: F4SEmailVerificationModel) {
-        self.versionCheckCoordinator = versionCheckCoordinator
+                partnersModel: F4SPartnersModel,
+                placementService: F4SPlacementServiceProtocol,
+                placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
+                messageServiceFactory: F4SMessageServiceFactoryProtocol,
+                messageActionServiceFactory: F4SMessageActionServiceFactoryProtocol,
+                messageCannedResponsesServiceFactory: F4SCannedMessageResponsesServiceFactoryProtocol,
+                recommendationsService: F4SRecommendationServiceProtocol,
+                roleService: F4SRoleServiceProtocol,
+                versionCheckCoordinator: NavigationCoordinator & VersionChecking) {
+        
         self.registrar = registrar
         self.injected = inject
-        self.onboardingCoordinatorFactory = onboardingCoordinatorFactory
+        
+        self.companyCoordinatorFactory = companyCoordinatorFactory
+        self.companyDocumentsService = companyDocumentsService
+        self.companyRepository = companyRepository
+        self.companyService = companyService
+        self.documentUploaderFactory = documentUploaderFactory
+        
         self.emailVerificationModel = emailVerificationModel
+        self.offerProcessingService = offerProcessingService
+        self.partnersModel = partnersModel
+        self.placementService = placementService
+        self.placementDocumentsServiceFactory = placementDocumentsServiceFactory
+        
+        self.messageServiceFactory = messageServiceFactory
+        self.messageActionServiceFactory = messageActionServiceFactory
+        self.messageCannedResponsesServiceFactory = messageCannedResponsesServiceFactory
+        self.onboardingCoordinatorFactory = onboardingCoordinatorFactory
+        
+        self.recommendationsService = recommendationsService
+        self.roleService = roleService
+        self.versionCheckCoordinator = versionCheckCoordinator
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = navigationRouter.rootViewController
-        super.init(parent:nil, navigationRouter: navigationRouter)
-        versionCheckCoordinator.parentCoordinator = self
         window.makeKeyAndVisible()
+
+        super.init(parent:nil, navigationRouter: navigationRouter)
+        
+        versionCheckCoordinator.parentCoordinator = self
     }
-    
-    var onboardingCoordinator: OnboardingCoordinatorProtocol?
     
     override func start() {
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
@@ -75,7 +118,46 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         }
     }
     
+    func makeTabBarCoordinator(
+        parent: Coordinating?,
+        navigationRouter: NavigationRoutingProtocol,
+        inject: CoreInjectionProtocol,
+        companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
+        companyDocumentsService: F4SCompanyDocumentServiceProtocol,
+        companyRepository: F4SCompanyRepositoryProtocol,
+        companyService: F4SCompanyServiceProtocol,
+        documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
+        offerProcessingService: F4SOfferProcessingServiceProtocol,
+        partnersModel: F4SPartnersModel,
+        placementService: F4SPlacementServiceProtocol,
+        placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
+        messageServiceFactory: F4SMessageServiceFactoryProtocol,
+        messageActionServiceFactory: F4SMessageActionServiceFactoryProtocol,
+        messageCannedResponsesServiceFactory: F4SCannedMessageResponsesServiceFactoryProtocol,
+        recommendationsService: F4SRecommendationServiceProtocol,
+        roleService: F4SRoleServiceProtocol) -> TabBarCoordinatorProtocol {
+        return TabBarCoordinator(
+            parent: parent,
+            navigationRouter: navigationRouter,
+            inject: inject,
+            companyCoordinatorFactory: companyCoordinatorFactory,
+            companyDocumentsService: companyDocumentsService,
+            companyRepository: companyRepository,
+            companyService: companyService,
+            documentUploaderFactory: documentUploaderFactory,
+            offerProcessingService: offerProcessingService,
+            partnersModel: partnersModel,
+            placementService: placementService,
+            placementDocumentsServiceFactory: placementDocumentsServiceFactory,
+            messageServiceFactory: messageServiceFactory,
+            messageActionServiceFactory: messageActionServiceFactory,
+            messageCannedResponsesServiceFactory: messageCannedResponsesServiceFactory,
+            recommendationsService: recommendationsService,
+            roleService: roleService)
+    }
+    
     func performVersionCheck(resultHandler: @escaping (F4SNetworkResult<F4SVersionValidity>)->Void) {
+        guard let versionCheckCoordinator = versionCheckCoordinator else { return }
         if !childCoordinators.contains(where: { (key, coordinating) -> Bool in
             coordinating.uuid == versionCheckCoordinator.uuid
         }) {
@@ -89,11 +171,12 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         switch result {
         case .error(_):
             self.presentNoNetworkMustRetry(retryOperation: { [weak self] in
-                self?.versionCheckCoordinator.start()
+                self?.versionCheckCoordinator?.start()
             })
         case .success(let isValid):
             guard isValid else { return }
             startOnboarding()
+            versionCheckCoordinator = nil
         }
     }
     
@@ -146,6 +229,24 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     }
     
     private func startTabBarCoordinator() {
+        tabBarCoordinator = makeTabBarCoordinator(
+            parent: self,
+            navigationRouter: navigationRouter,
+            inject: injected,
+            companyCoordinatorFactory: companyCoordinatorFactory,
+            companyDocumentsService: companyDocumentsService,
+            companyRepository: companyRepository,
+            companyService: companyService,
+            documentUploaderFactory: documentUploaderFactory,
+            offerProcessingService: offerProcessingService,
+            partnersModel: partnersModel,
+            placementService: placementService,
+            placementDocumentsServiceFactory: placementDocumentsServiceFactory,
+            messageServiceFactory: messageServiceFactory,
+            messageActionServiceFactory: messageActionServiceFactory,
+            messageCannedResponsesServiceFactory: messageCannedResponsesServiceFactory,
+            recommendationsService: recommendationsService,
+            roleService: roleService)
         addChildCoordinator(tabBarCoordinator)
         tabBarCoordinator.start()
         performVersionCheck { (result) in }

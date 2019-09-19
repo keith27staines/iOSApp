@@ -11,7 +11,7 @@ public protocol F4SDocumentUploadModelDelegate {
 }
 
 public class F4SDocumentUploadModelBase {
-    public let documentService: F4SPlacementDocumentServiceProtocol
+    public let documentService: F4SPlacementDocumentsServiceProtocol
     public var maximumDocumentCount : Int { return 2 }
     public var placementUuid: F4SUUID?
     fileprivate var delegate: F4SDocumentUploadModelDelegate?
@@ -89,7 +89,7 @@ public class F4SDocumentUploadModelBase {
     
     public init(delegate: F4SDocumentUploadModelDelegate,
                 placementUuid: F4SUUID?,
-                documentService: F4SPlacementDocumentServiceProtocol,
+                documentService: F4SPlacementDocumentsServiceProtocol,
                 documents: [F4SDocument]) {
         self.delegate = delegate
         self.placementUuid = placementUuid

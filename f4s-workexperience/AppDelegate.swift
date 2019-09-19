@@ -25,8 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var deviceToken: String?
     var masterBuilder: MasterBuilder!
-    var databaseDownloadManager: F4SDatabaseDownloadManager!
-    lazy var userService: F4SUserServiceProtocol = { return self.masterBuilder.makeUserService() }()
+    var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol!
+    lazy var userService: F4SUserServiceProtocol = { return self.masterBuilder.userService }()
     
     // MARK:- Application events
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         masterBuilder = MasterBuilder(registrar: application, launchOptions: launchOptions)
         databaseDownloadManager = masterBuilder.databaseDownloadManager
         f4sLog = masterBuilder.log
-        let appCoordinator = masterBuilder.appCoordinator
+        let appCoordinator = masterBuilder.buildAppCoordinator()
         window = appCoordinator.window
         appCoordinator.start()
         return true
@@ -111,7 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      handleEventsForBackgroundURLSession identifier: String,
                      completionHandler: @escaping () -> Void) {
-        databaseDownloadManager = F4SDatabaseDownloadManager(backgroundSessionCompletionHandler: completionHandler)
+        databaseDownloadManager?.backgroundSessionCompletionHandler = completionHandler
         databaseDownloadManager?.start()
     }
     

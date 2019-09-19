@@ -12,7 +12,7 @@ public class DocumentUploadCoordinator : CoreInjectionNavigationCoordinator {
     public var didFinish: ((DocumentUploadCoordinator)->Void)?
     
     let placementUuid: F4SUUID
-    let documentService: F4SPlacementDocumentServiceProtocol
+    let documentService: F4SPlacementDocumentsServiceProtocol
     let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
     
     public init(parent: Coordinating?,
@@ -20,7 +20,7 @@ public class DocumentUploadCoordinator : CoreInjectionNavigationCoordinator {
                 inject: CoreInjectionProtocol,
                 mode: UploadScenario,
                 placementUuid: F4SUUID,
-                documentService: F4SPlacementDocumentServiceProtocol,
+                documentService: F4SPlacementDocumentsServiceProtocol,
                 documentUploaderFactory: F4SDocumentUploaderFactoryProtocol) {
         self.placementUuid = placementUuid
         self.documentService = documentService
