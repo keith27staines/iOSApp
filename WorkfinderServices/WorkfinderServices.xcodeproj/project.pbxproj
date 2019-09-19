@@ -30,7 +30,6 @@
 		FC12B0FB22F3280000C33410 /* F4SPlacementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B0FA22F3280000C33410 /* F4SPlacementService.swift */; };
 		FC2198FF231673A4005FAC5F /* F4SPlacementApplicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2198FE231673A4005FAC5F /* F4SPlacementApplicationService.swift */; };
 		FC219901231693CD005FAC5F /* MockF4SPlacementApplicationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC219900231693CC005FAC5F /* MockF4SPlacementApplicationServiceTests.swift */; };
-		FC426F06232FAF85004F8A3E /* F4SHttpRequestVerb.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426F05232FAF85004F8A3E /* F4SHttpRequestVerb.swift */; };
 		FC426F0A232FB496004F8A3E /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426F09232FB496004F8A3E /* Mocks.swift */; };
 		FC426F0C232FB884004F8A3E /* WorkfinderServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426F0B232FB884004F8A3E /* WorkfinderServiceTests.swift */; };
 		FC426F102330CC26004F8A3E /* F4SDocumentUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426F0F2330CC26004F8A3E /* F4SDocumentUploader.swift */; };
@@ -103,7 +102,6 @@
 		FC12B0FA22F3280000C33410 /* F4SPlacementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementService.swift; sourceTree = "<group>"; };
 		FC2198FE231673A4005FAC5F /* F4SPlacementApplicationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementApplicationService.swift; sourceTree = "<group>"; };
 		FC219900231693CC005FAC5F /* MockF4SPlacementApplicationServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockF4SPlacementApplicationServiceTests.swift; sourceTree = "<group>"; };
-		FC426F05232FAF85004F8A3E /* F4SHttpRequestVerb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SHttpRequestVerb.swift; sourceTree = "<group>"; };
 		FC426F09232FB496004F8A3E /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 		FC426F0B232FB884004F8A3E /* WorkfinderServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderServiceTests.swift; sourceTree = "<group>"; };
 		FC426F0F2330CC26004F8A3E /* F4SDocumentUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDocumentUploader.swift; sourceTree = "<group>"; };
@@ -322,7 +320,6 @@
 		FC85D9EA22F1C8A80035C724 /* F4SServices */ = {
 			isa = PBXGroup;
 			children = (
-				FC426F05232FAF85004F8A3E /* F4SHttpRequestVerb.swift */,
 				FC3021C1231805FD00D57D48 /* Other services */,
 				FC4EE6FA230E77DE00B40F6B /* services inheriting from F4SDataTaskService */,
 				FC4EE6FD230E786F00B40F6B /* services using F4SDataTaskService */,
@@ -462,7 +459,6 @@
 				FC02DA0B22EC717B003C8148 /* EmailVerificationService.swift in Sources */,
 				FC93768223150CC00058BA75 /* F4STemplateService.swift in Sources */,
 				FC083F8323100FB500641F17 /* F4SRecommendationService.swift in Sources */,
-				FC426F06232FAF85004F8A3E /* F4SHttpRequestVerb.swift in Sources */,
 				FC92836B230A982600E1FB75 /* F4SDataTaskService.swift in Sources */,
 				FC083F75230FE76100641F17 /* F4SCompanyDatabaseMetadataService.swift in Sources */,
 				FC12B0FB22F3280000C33410 /* F4SPlacementService.swift in Sources */,

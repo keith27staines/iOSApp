@@ -8,7 +8,6 @@ func makeTestConfiguration() -> NetworkConfig {
     let endpoints = WorkfinderEndpoint(baseUrlString:baseUrlString)
     let config = NetworkConfig(
         workfinderApiKey: apiKey,
-        workfinderBaseApi: baseUrlString,
         logger: logger,
         sessionManager: sessionManager,
         endpoints: endpoints)
