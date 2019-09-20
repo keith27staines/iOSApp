@@ -281,6 +281,7 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
         navigationController.restorationIdentifier = "ExampleCenterNavigationControllerRestorationKey"
 
         let leftSideMenuViewController = SideMenuViewController()
+        leftSideMenuViewController.tabBarCoordinator = self
 
         let leftSideNavController = UINavigationController(rootViewController: leftSideMenuViewController)
         leftSideNavController.restorationIdentifier = "ExampleLeftNavigationControllerRestorationKey"

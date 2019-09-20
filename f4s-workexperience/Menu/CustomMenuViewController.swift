@@ -44,7 +44,7 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
     let normalCellHeight: CGFloat = 60
     let welcomeCellHeight: CGFloat = 100
     var secondLoad = false
-    var tabBarCoordinator: TabBarCoordinator!
+    weak var tabBarCoordinator: TabBarCoordinator!
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
