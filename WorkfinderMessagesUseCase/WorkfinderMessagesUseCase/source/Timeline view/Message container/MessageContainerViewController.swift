@@ -79,8 +79,8 @@ class MessageContainerViewController: UIViewController {
     
     func loadModel(threadUuid: F4SUUID) {
         sharedUserMessageHandler.showLoadingOverlay(self.view)
-        guard let modelBuilder = coordinator?.makeMessageModelBuilder(threadUuid: threadUuid)
-            else { return }
+        modelBuilder = coordinator?.makeMessageModelBuilder(threadUuid: threadUuid)
+        guard let modelBuilder = modelBuilder else { return }
         modelBuilder.build(threadUuid: threadUuid) { [weak self] (result) in
             DispatchQueue.main.async {
                 guard let strongSelf = self else { return }

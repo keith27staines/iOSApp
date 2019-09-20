@@ -22,8 +22,9 @@ public class F4SMessageModelBuilder {
         self.messageCannedResponseService = messageCannedResponseService
     }
     
+    var messagesModel: F4SMessagesModel!
     public func build(threadUuid: F4SUUID, completion: @escaping (F4SMessagesModelResult) -> Void) {
-        let messagesModel = F4SMessagesModel(threadUuid: threadUuid)
+        messagesModel = F4SMessagesModel(threadUuid: threadUuid)
         let result = F4SMessagesModelResult.success(messagesModel)
         addMessages(threadUuid: threadUuid, messagesResult: result) { [weak self] (result) in
             guard let strongSelf = self else { return }
