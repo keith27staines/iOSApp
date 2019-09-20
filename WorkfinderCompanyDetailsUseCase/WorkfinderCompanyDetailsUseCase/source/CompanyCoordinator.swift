@@ -7,6 +7,7 @@ import WorkfinderApplyUseCase
 
 public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoordinatorProtocol {
     
+    let environment: EnvironmentType
     let applyService: F4SPlacementApplicationServiceProtocol
     var companyViewController: CompanyViewController!
     var companyViewModel: CompanyViewModel!
@@ -16,7 +17,7 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
     var interestsRepository: F4SInterestsRepositoryProtocol
     let socialShareItemSource: SocialShareItemSource
     let getAllPlacementsService: F4SGetAllPlacementsServiceProtocol
-    let emailVerificationService: EmailVerificationServiceProtocol
+    let emailVerificationModel: F4SEmailVerificationModelProtocol
     let documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol
     let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
     let templateService: F4STemplateServiceProtocol
@@ -30,18 +31,20 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
         navigationRouter: NavigationRoutingProtocol,
         company: Company,
         inject: CoreInjectionProtocol,
+        environment: EnvironmentType,
         placementsRepository: F4SPlacementRepositoryProtocol,
         interestsRepository: F4SInterestsRepositoryProtocol,
         socialShareItemSource: SocialShareItemSource,
         favouritesModel: CompanyFavouritesModel,
         templateService: F4STemplateServiceProtocol,
         getAllPlacementsService: F4SGetAllPlacementsServiceProtocol,
-        emailVerificationService: EmailVerificationServiceProtocol,
+        emailVerificationModel: F4SEmailVerificationModelProtocol,
         documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
         documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
         applyService: F4SPlacementApplicationServiceProtocol,
         companyService: F4SCompanyServiceProtocol,
         companyDocumentService: F4SCompanyDocumentServiceProtocol) {
+        self.environment = environment
         self.socialShareItemSource = socialShareItemSource
         self.interestsRepository = interestsRepository
         self.placementsRepository = placementsRepository
@@ -51,7 +54,7 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
         self.applyService = applyService
         self.finishDespatcher = parent
         self.getAllPlacementsService = getAllPlacementsService
-        self.emailVerificationService = emailVerificationService
+        self.emailVerificationModel = emailVerificationModel
         self.documentServiceFactory = documentServiceFactory
         self.documentUploaderFactory = documentUploaderFactory
         self.companyService = companyService
@@ -130,12 +133,13 @@ extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
             parent: self,
             navigationRouter: navigationRouter,
             inject: injected,
+            environment: environment,
             placementService: applyService,
             templateService: templateService,
             placementRepository: placementsRepository,
             interestsRepository: interestsRepository,
             getAllPlacementsService: getAllPlacementsService,
-            emailVerificationService: emailVerificationService,
+            emailVerificationModel: emailVerificationModel,
             documentServiceFactory: documentServiceFactory,
             documentUploaderFactory: documentUploaderFactory)
         addChildCoordinator(applyCoordinator)

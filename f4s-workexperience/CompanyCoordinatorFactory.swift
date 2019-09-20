@@ -7,15 +7,17 @@ import WorkfinderServices
 import WorkfinderCoordinators
 import WorkfinderCompanyDetailsUseCase
 import WorkfinderApplyUseCase
+import WorkfinderUserDetailsUseCase
 
 class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
+    let environment: EnvironmentType
     let applyService: F4SPlacementApplicationServiceProtocol
     let companyFavouritesModel: CompanyFavouritesModel
     let companyService: F4SCompanyServiceProtocol
     let companyDocumentService: F4SCompanyDocumentServiceProtocol
     let documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol
     let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
-    let emailVerificationService: EmailVerificationServiceProtocol
+    let emailVerificationModel: F4SEmailVerificationModel
     let getAllPlacementsService: F4SGetAllPlacementsServiceProtocol
     let interestsRepository: F4SInterestsRepositoryProtocol
     let placementRepository: F4SPlacementRepositoryProtocol
@@ -28,7 +30,8 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
          companyDocumentService: F4SCompanyDocumentServiceProtocol,
          documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
          documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
-         emailVerificationService: EmailVerificationServiceProtocol,
+         emailVerificationModel: F4SEmailVerificationModel,
+         environment: EnvironmentType,
          getAllPlacementsService: F4SGetAllPlacementsServiceProtocol,
          interestsRepository: F4SInterestsRepositoryProtocol,
          placementRepository: F4SPlacementRepositoryProtocol,
@@ -40,7 +43,8 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
         self.companyDocumentService = companyDocumentService
         self.documentServiceFactory = documentServiceFactory
         self.documentUploaderFactory = documentUploaderFactory
-        self.emailVerificationService = emailVerificationService
+        self.emailVerificationModel = emailVerificationModel
+        self.environment = environment
         self.getAllPlacementsService = getAllPlacementsService
         self.interestsRepository = interestsRepository
         self.placementRepository = placementRepository
@@ -66,13 +70,14 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
             navigationRouter: navigationRouter,
             company: company,
             inject: inject,
+            environment: environment,
             placementsRepository: placementRepository,
             interestsRepository: interestsRepository,
             socialShareItemSource: socialShareItemSource,
             favouritesModel: companyFavouritesModel,
             templateService: templateService,
             getAllPlacementsService: getAllPlacementsService,
-            emailVerificationService: emailVerificationService,
+            emailVerificationModel: emailVerificationModel,
             documentServiceFactory: documentServiceFactory,
             documentUploaderFactory: documentUploaderFactory,
             applyService: applyService,

@@ -4,8 +4,8 @@ import WorkfinderCommon
 import WorkfinderAppLogic
 import WorkfinderUI
 import WorkfinderCoordinators
-import WorkfinderUserDetailsUseCase
 import WorkfinderDocumentUploadUseCase
+import WorkfinderUserDetailsUseCase
 
 let __bundle = Bundle(identifier: "com.f4s.WorkfinderApplyUseCase")!
 
@@ -21,7 +21,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         case search
         case none
     }
-    
+    let environment: EnvironmentType
     var applicationContext: F4SApplicationContext
     var createPlacementJson: F4SCreatePlacementJson?
     var placementService: F4SPlacementApplicationServiceProtocol
@@ -29,7 +29,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     var placementRepository: F4SPlacementRepositoryProtocol
     var interestsRepository: F4SInterestsRepositoryProtocol
     let getAllPlacementsService: F4SGetAllPlacementsServiceProtocol
-    let emailVerificationService: EmailVerificationServiceProtocol
+    let emailVerificationModel: F4SEmailVerificationModelProtocol
     let startingViewController: UIViewController!
     let documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol
     let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
@@ -47,18 +47,20 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     }()
     
     public init(applyCoordinatorDelegate: ApplyCoordinatorDelegate? = nil,
-         company: Company,
-         parent: CoreInjectionNavigationCoordinator?,
-         navigationRouter: NavigationRoutingProtocol,
-         inject: CoreInjectionProtocol,
-         placementService: F4SPlacementApplicationServiceProtocol,
-         templateService: F4STemplateServiceProtocol,
-         placementRepository: F4SPlacementRepositoryProtocol,
-         interestsRepository: F4SInterestsRepositoryProtocol,
-         getAllPlacementsService: F4SGetAllPlacementsServiceProtocol,
-         emailVerificationService: EmailVerificationServiceProtocol,
-         documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
-         documentUploaderFactory: F4SDocumentUploaderFactoryProtocol) {
+                company: Company,
+                parent: CoreInjectionNavigationCoordinator?,
+                navigationRouter: NavigationRoutingProtocol,
+                inject: CoreInjectionProtocol,
+                environment: EnvironmentType,
+                placementService: F4SPlacementApplicationServiceProtocol,
+                templateService: F4STemplateServiceProtocol,
+                placementRepository: F4SPlacementRepositoryProtocol,
+                interestsRepository: F4SInterestsRepositoryProtocol,
+                getAllPlacementsService: F4SGetAllPlacementsServiceProtocol,
+                emailVerificationModel: F4SEmailVerificationModelProtocol,
+                documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
+                documentUploaderFactory: F4SDocumentUploaderFactoryProtocol) {
+        self.environment = environment
         self.applyCoordinatorDelegate = applyCoordinatorDelegate
         self.applicationContext = F4SApplicationContext(user: F4SUser(), company: company, placement: nil)
         self.placementService = placementService
@@ -67,7 +69,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         self.placementRepository = placementRepository
         self.interestsRepository = interestsRepository
         self.getAllPlacementsService = getAllPlacementsService
-        self.emailVerificationService = emailVerificationService
+        self.emailVerificationModel = emailVerificationModel
         self.documentServiceFactory = documentServiceFactory
         self.documentUploaderFactory = documentUploaderFactory
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
@@ -129,7 +131,8 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
             parent: self,
             navigationRouter: navigationRouter,
             inject: injected,
-            emailVerificationService: emailVerificationService)
+            emailVerificationModel: emailVerificationModel,
+            environment: environment)
         
         userDetailsCoordinator.didFinish = { [weak self] coordinator in
             self?.userDetailsDidFinish()

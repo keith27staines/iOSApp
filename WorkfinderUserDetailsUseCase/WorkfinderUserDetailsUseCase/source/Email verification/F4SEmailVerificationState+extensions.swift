@@ -1,27 +1,7 @@
-//
-//  F4SEmailVerificationState.swift
-//  AuthTest
-//
-//  Created by Keith Dev on 28/12/2017.
-//  Copyright © 2017 F4S. All rights reserved.
-//
 
 import Foundation
+import WorkfinderCommon
 
-public enum F4SEmailVerificationState : Equatable {
-    case start
-    case emailSent(String)
-    case linkReceived
-    case verified
-    case previouslyVerified
-    case error(F4SEmailVerificationError)
-    
-    public static func ==(lhs: F4SEmailVerificationState, rhs: F4SEmailVerificationState) -> Bool {
-        return String(describing: lhs) == String(describing:rhs)
-    }
-}
-
-// MARK:- Utility methods
 public extension F4SEmailVerificationState {
     var isErrorState: Bool {
         switch self {

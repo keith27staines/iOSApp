@@ -15,6 +15,10 @@ class MasterBuilder {
     
     let launchOptions: [UIApplication.LaunchOptionsKey : Any]?
     let registrar: RemoteNotificationsRegistrarProtocol
+    let apnsEnvironment: String = Config.apnsEnv
+    let environment: EnvironmentType = Config.environment
+    let wexApiKey = Config.wexApiKey
+    let baseUrlString = Config.workfinderApiBase
     
     init(registrar: RemoteNotificationsRegistrarProtocol,
          launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
@@ -23,8 +27,6 @@ class MasterBuilder {
     }
     
     lazy var networkConfiguration: NetworkConfig = {
-        let wexApiKey = Config.wexApiKey
-        let baseUrlString = Config.workfinderApiBase
         let sessionManager = F4SNetworkSessionManager(wexApiKey: wexApiKey)
         let endpoints = WorkfinderEndpoint(baseUrlString: baseUrlString)
         let networkCallLogger = NetworkCallLogger(log: log)
@@ -39,7 +41,7 @@ class MasterBuilder {
         let userRepo = F4SUserRepository(localStore: localStore)
         return AppInstallationUuidLogic(userService: userService,
                                         userRepo: userRepo,
-                                        apnsEnvironment: Config.apnsEnv,
+                                        apnsEnvironment: apnsEnvironment,
                                         registerDeviceService: self.deviceRegistrationService)
     }()
     
@@ -82,14 +84,14 @@ class MasterBuilder {
     }
     
     lazy var companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol = {
-        let emailVerificationService = self.emailVerificationServiceFactory.makeEmailVerificationService()
         return CompanyCoordinatorFactory(applyService: applyService,
                                          companyFavouritesModel: companyFavouritesModel,
                                          companyService: companyService,
                                          companyDocumentService: companyDocumentsService,
                                          documentServiceFactory: placementDocumentsServiceFactory,
                                          documentUploaderFactory: documentUploaderFactory,
-                                         emailVerificationService: emailVerificationService,
+                                         emailVerificationModel: self.emailVerificationModel,
+                                         environment: environment,
                                          getAllPlacementsService: placementService,
                                          interestsRepository: interestsRepository,
                                          placementRepository: placementRepository,
@@ -160,7 +162,8 @@ class MasterBuilder {
     
     lazy var emailVerificationModel: F4SEmailVerificationModel = {
         let service = self.emailVerificationServiceFactory.makeEmailVerificationService()
-        return F4SEmailVerificationModel(emailVerificationService: service)
+        return F4SEmailVerificationModel(localStore: localStore,
+                                         emailVerificationService: service)
     }()
     
     lazy var emailVerificationServiceFactory: EmailVerificationServiceFactoryProtocol = {

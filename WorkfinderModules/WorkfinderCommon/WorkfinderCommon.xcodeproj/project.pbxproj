@@ -27,6 +27,7 @@
 		FC12B10522F341D500C33410 /* JsonDateFormatterExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */; };
 		FC177FCD2306A4010068C2F7 /* F4SHoursTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC177FCC2306A4010068C2F7 /* F4SHoursTypeTests.swift */; };
 		FC177FCF230703170068C2F7 /* F4SNetworkErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC177FCE230703170068C2F7 /* F4SNetworkErrorTests.swift */; };
+		FC1DBDF92335474500D68C83 /* F4SEmailVerificationModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1DBDF82335474500D68C83 /* F4SEmailVerificationModelProtocol.swift */; };
 		FC1F591622FD6D42007164BA /* F4SPushToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F591522FD6D42007164BA /* F4SPushToken.swift */; };
 		FC1F591822FD6DAB007164BA /* F4SPushTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F591722FD6DAB007164BA /* F4SPushTokenTests.swift */; };
 		FC1F591A22FD7222007164BA /* F4SAnonymousUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F591922FD7222007164BA /* F4SAnonymousUser.swift */; };
@@ -163,6 +164,7 @@
 		FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDateFormatterExtensionTests.swift; sourceTree = "<group>"; };
 		FC177FCC2306A4010068C2F7 /* F4SHoursTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SHoursTypeTests.swift; sourceTree = "<group>"; };
 		FC177FCE230703170068C2F7 /* F4SNetworkErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SNetworkErrorTests.swift; sourceTree = "<group>"; };
+		FC1DBDF82335474500D68C83 /* F4SEmailVerificationModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SEmailVerificationModelProtocol.swift; sourceTree = "<group>"; };
 		FC1F591522FD6D42007164BA /* F4SPushToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPushToken.swift; sourceTree = "<group>"; };
 		FC1F591722FD6DAB007164BA /* F4SPushTokenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPushTokenTests.swift; sourceTree = "<group>"; };
 		FC1F591922FD7222007164BA /* F4SAnonymousUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SAnonymousUser.swift; sourceTree = "<group>"; };
@@ -297,6 +299,14 @@
 				FC04B8682332827D0034A60E /* CoordinatorFactoryProtocols.swift */,
 			);
 			path = "Coordinator protocols";
+			sourceTree = "<group>";
+		};
+		FC1DBDF72335471900D68C83 /* Model protocols */ = {
+			isa = PBXGroup;
+			children = (
+				FC1DBDF82335474500D68C83 /* F4SEmailVerificationModelProtocol.swift */,
+			);
+			path = "Model protocols";
 			sourceTree = "<group>";
 		};
 		FC1FA08322FAABDE003EAE59 /* User */ = {
@@ -477,6 +487,7 @@
 		FCA91E8622340478007ED308 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				FC1DBDF72335471900D68C83 /* Model protocols */,
 				FC04B865233276960034A60E /* Coordinator protocols */,
 				FC22438D232F94AA0073C9B1 /* Service protocols */,
 				FC9670A2225A193700318F69 /* Repository protocols */,
@@ -719,6 +730,7 @@
 				FCE5192122493D3300B550C9 /* Date+Extensions.swift in Sources */,
 				FC22DC0A22F9ACBC0068C61C /* F4STemplateBlank.swift in Sources */,
 				FC96709A2258C81000318F69 /* F4SPlacement.swift in Sources */,
+				FC1DBDF92335474500D68C83 /* F4SEmailVerificationModelProtocol.swift in Sources */,
 				FCC1DF5F232507530074D5C1 /* SocialShare.swift in Sources */,
 				FC426F04232FAEA9004F8A3E /* WorkfinderEndpoint.swift in Sources */,
 				FC53D6DC2323BA4300A339ED /* F4SCompanyRepository.swift in Sources */,

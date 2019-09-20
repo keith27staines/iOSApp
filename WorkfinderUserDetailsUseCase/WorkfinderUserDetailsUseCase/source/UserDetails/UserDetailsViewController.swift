@@ -39,22 +39,23 @@ class UserDetailsViewController: UIViewController {
     var datePicker = UIDatePicker()
     var userRepository: F4SUserRepositoryProtocol!
     var userService: F4SUserServiceProtocol!
-    var emailVerificationService: EmailVerificationServiceProtocol!
+    var emailVerificationModel: F4SEmailVerificationModelProtocol!
     
     func inject(
         viewModel: UserDetailsViewModel,
         userRepository: F4SUserRepositoryProtocol,
         userService: F4SUserServiceProtocol,
-        emailVerificationService: EmailVerificationServiceProtocol) {
+        emailVerificationModel: F4SEmailVerificationModelProtocol) {
         self.viewModel = viewModel
         self.userRepository  = userRepository
         self.userService = userService
+        self.emailVerificationModel = emailVerificationModel
     }
     
     lazy var emailController: F4SEmailVerificationViewController = {
         let emailStoryboard = UIStoryboard(name: "F4SEmailVerification", bundle: __bundle)
         let emailController = emailStoryboard.instantiateViewController(withIdentifier: "EmailVerification") as! F4SEmailVerificationViewController
-        emailController.emailVerificationService = self.emailVerificationService
+        emailController.emailVerificationModel = self.emailVerificationModel
         return emailController
     }()
     
@@ -303,19 +304,19 @@ extension UserDetailsViewController {
     
     func verifyEmail() {
         let emailController = self.emailController
-        let emailModel = emailController.model
+        let emailModel = emailVerificationModel!
         let user = userRepository.load()
         if emailModel.isEmailAddressVerified(email: user.email) {
             afterEmailVerfied(verifiedEmail: user.email!)
         } else {
             emailController.emailToVerify = user.email
-            emailController.model.restart()
+            emailController.emailVerificationModel.restart()
             emailController.emailWasVerified = { [weak self] in
                 guard let strongSelf = self else { return }
                 DispatchQueue.main.async {
-                    strongSelf.emailTextField.text = emailController.model.verifiedEmail
+                    strongSelf.emailTextField.text = emailController.emailVerificationModel.verifiedEmail
                     _ = strongSelf.saveUserDetailsLocally()
-                    strongSelf.afterEmailVerfied(verifiedEmail: emailController.model.verifiedEmail!)
+                    strongSelf.afterEmailVerfied(verifiedEmail: emailController.emailVerificationModel.verifiedEmail!)
                 }
             }
             self.navigationController!.pushViewController(emailController, animated: true)
