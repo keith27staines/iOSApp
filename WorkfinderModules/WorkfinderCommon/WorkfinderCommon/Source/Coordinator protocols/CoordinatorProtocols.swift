@@ -8,7 +8,20 @@
 
 import Foundation
 
+public protocol AppCoordinatorProtocol : Coordinating {
+    var window: UIWindow { get }
+    var log: F4SAnalyticsAndDebugging { get }
+    func performVersionCheck(resultHandler: @escaping ((F4SNetworkResult<F4SVersionValidity>)->Void))
+    func showRecommendations()
+    func showMessages()
+    func showSearch()
+    func updateBadges()
+    func handleRemoteNotification(userInfo: [AnyHashable: Any])
+}
 
+public protocol RemoteNotificationsRegistrarProtocol {
+    func registerForRemoteNotifications()
+}
 
 public protocol CompanyCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol {}
 
@@ -44,12 +57,15 @@ public protocol CompanyCoordinatorParentProtocol : CoreInjectionNavigationCoordi
 public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol {
     func showSearch()
     func showMessages()
+    func showRecommendations()
+    func updateBadges()
     func toggleMenu(completion: ((Bool) -> ())?)
     func updateUnreadMessagesCount(_ count: Int)
     var shouldAskOperatingSystemToAllowLocation: Bool { get set }
 }
 
 public protocol CoreInjectionProtocol : class {
+    var appCoordinator: AppCoordinatorProtocol? { get set }
     var appInstallationUuidLogic: AppInstallationUuidLogicProtocol { get }
     var launchOptions: LaunchOptions? { get set }
     var user: F4SUser { get set }

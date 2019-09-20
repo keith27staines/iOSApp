@@ -10,16 +10,6 @@ import GooglePlaces
 
 extension UIApplication : RemoteNotificationsRegistrarProtocol {}
 
-/// UIApplication conforms to this protocol
-public protocol RemoteNotificationsRegistrarProtocol {
-    func registerForRemoteNotifications()
-}
-
-public protocol AppCoordinatorProtocol : Coordinating {
-    var window: UIWindow { get }
-    func performVersionCheck(resultHandler: @escaping ((F4SNetworkResult<F4SVersionValidity>)->Void))
-}
-
 class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
 
     var window: UIWindow
@@ -51,6 +41,8 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     var user: F4SUser { return injected.userRepository.load() }
     var userService: F4SUserServiceProtocol { return injected.userService}
     var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol { return injected.databaseDownloadManager }
+    var userNotificationService: UNService!
+    var log: F4SAnalyticsAndDebugging { return injected.log }
     
     public init(
                 registrar: RemoteNotificationsRegistrarProtocol,
@@ -103,14 +95,14 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         window.makeKeyAndVisible()
 
         super.init(parent:nil, navigationRouter: navigationRouter)
-        
+        self.injected.appCoordinator = self
         versionCheckCoordinator.parentCoordinator = self
+        userNotificationService = UNService(appCoordinator: self)
     }
     
     override func start() {
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
-        _ = UNService.shared // ensure user notification service is wired up early
         if launchOptions?[.remoteNotification] == nil {
             performVersionCheck(resultHandler: onVersionCheckResult)
         } else {
@@ -258,19 +250,30 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
             guard let strongSelf = self else { return }
             switch result {
             case .error(_):
-                globalLog.info("Couldn't register user, offering retry")
                 strongSelf.presentNoNetworkMustRetry(retryOperation: {
                     strongSelf.ensureDeviceIsRegistered(completion: completion)
                 })
             case .success(let result):
                 guard let anonymousUserUuid = result.uuid else {
                     let error = NSError(domain: "F4S", code: 1, userInfo: [NSLocalizedDescriptionKey: "No uuid returned when registering device"])
-                    f4sLog.notifyError(error, functionName: #function, fileName: #file, lineNumber: #line)
+                    strongSelf.log.error(error, functionName: #function, fileName: #file, lineNumber: #line)
                     fatalError("registering device failed to obtain uuid")
                 }
                 completion(anonymousUserUuid)
             }
         }
+    }
+    
+    func showSearch() { tabBarCoordinator.showSearch() }
+    
+    func showMessages() { tabBarCoordinator.showMessages() }
+
+    func showRecommendations() { tabBarCoordinator?.showRecommendations() }
+    
+    func updateBadges() { tabBarCoordinator.updateBadges() }
+    
+    func handleRemoteNotification(userInfo: [AnyHashable : Any]) {
+        userNotificationService.handleRemoteNotification(userInfo: userInfo)
     }
 }
 

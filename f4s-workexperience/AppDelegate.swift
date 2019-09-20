@@ -1,23 +1,7 @@
-//
-//  AppDelegate.swift
-//  f4s-workexperience
-//
-//  Created by Andreea Rusu on 26/04/16.
-//  Copyright © 2016 Chelsea Apps Factory. All rights reserved.
-//
 
 import UIKit
 import CoreData
-import XCGLogger
 import WorkfinderCommon
-import WorkfinderNetworking
-import WorkfinderServices
-import WorkfinderCoordinators
-import WorkfinderAppLogic
-import WorkfinderUserDetailsUseCase
-
-let globalLog = XCGLogger.default
-public var f4sLog: F4SAnalyticsAndDebugging!
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,7 +10,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var deviceToken: String?
     var masterBuilder: MasterBuilder!
     var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol!
+    var appCoordinator: AppCoordinatorProtocol!
+    
     lazy var userService: F4SUserServiceProtocol = { return self.masterBuilder.userService }()
+    
+    var log: F4SAnalyticsAndDebugging { return appCoordinator.log }
     
     // MARK:- Application events
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -37,8 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DataFixes().run()
         masterBuilder = MasterBuilder(registrar: application, launchOptions: launchOptions)
         databaseDownloadManager = masterBuilder.databaseDownloadManager
-        f4sLog = masterBuilder.log
-        let appCoordinator = masterBuilder.buildAppCoordinator()
+        appCoordinator = masterBuilder.buildAppCoordinator()
         window = appCoordinator.window
         appCoordinator.start()
         return true
@@ -71,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
-        f4sLog.updateHistory()
+        log.updateHistory()
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -84,25 +71,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return String(format: "%02.2hhx", data)
         }
         let token = tokenParts.joined()
-        userService.enablePushNotificationForUser(installationUuid: appInstallationUuid, withDeviceToken: token) { (result) in
+        userService.enablePushNotificationForUser(installationUuid: appInstallationUuid, withDeviceToken: token) { [weak self] (result) in
             switch result {
             case .error(let error):
-                globalLog.error(error)
+                self?.log.error(error, functionName: #function, fileName: #file, lineNumber: #line)
             case .success(_):
-                globalLog.debug("Notifications enabled on server with token \(token)")
+                self?.log.debug("Notifications enabled on server with token \(token)", functionName: #function, fileName: #file, lineNumber: #line)
             }
         }
     }
     
     func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        globalLog.error("Failed to register with error \(error)")
+        log.error(error, functionName: #function, fileName: #file, lineNumber: #line)
     }
     
     // This method handles notifications arriving whether the app was running already or the notification opened the app
     func application(_: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        DispatchQueue.main.async {
-            globalLog.debug("Received remote notification")
-            UNService.shared.handleRemoteNotification(userInfo: userInfo)
+        DispatchQueue.main.async { [ weak self] in
+            self?.appCoordinator.handleRemoteNotification(userInfo: userInfo)
             completionHandler(UIBackgroundFetchResult.newData)
         }
     }
@@ -120,7 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let container = NSPersistentContainer(name: "f4s-workexperience")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let nserror = error as NSError? {
-                globalLog.severe(nserror)
+                self.log.error(nserror, functionName: #function, fileName: #file, lineNumber: #line)
                 assertionFailure("error loading coredata persistent store \(nserror)")
                 fatalError("Unrecoverable error \(nserror), \(nserror.userInfo)")
             }
@@ -135,7 +121,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 try context.save()
             } catch {
                 let nserror = error as NSError
-                globalLog.error(nserror)
+                log.error(nserror, functionName: #function, fileName: #file, lineNumber: #line)
                 assertionFailure("error saving to coredata context \(nserror)")
             }
         }
@@ -146,11 +132,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     
     func setInvokingUrl(_ url: URL) {
-        globalLog.debug("Invoked from url: \(url.absoluteString)")
         guard let universalLink = UniversalLink(url: url) else { return }
         switch universalLink {
         case .recommendCompany(_):
-            TabBarCoordinator.sharedInstance.navigateToRecommendations()
+            appCoordinator.showRecommendations()
 
         case .passwordless( _):
             let userInfo: [AnyHashable: Any] = ["url" : url]

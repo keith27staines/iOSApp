@@ -214,11 +214,6 @@ class MapViewController: UIViewController {
     override var canBecomeFirstResponder: Bool {
         return true
     }
-    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        if motion == .motionShake && (f4sLog.userCanAccessDebugMenu()) {
-            TabBarCoordinator.sharedInstance.presentHiddenDebugController(parentCtrl: self)
-        }
-    }
     
     func companiesFromMarker(_ marker: GMSMarker) -> [Company] {
         guard let mapModel = filteredMapModel else { return [Company]() }

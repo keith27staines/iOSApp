@@ -883,13 +883,6 @@
 			path = "Home Tab";
 			sourceTree = "<group>";
 		};
-		FC24D232226AED3B00FA04A1 /* Timeline Tab */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Timeline Tab";
-			sourceTree = "<group>";
-		};
 		FC24D235226AED5E00FA04A1 /* Search Tab */ = {
 			isa = PBXGroup;
 			children = (
@@ -1072,7 +1065,6 @@
 			isa = PBXGroup;
 			children = (
 				FC24D231226AED2B00FA04A1 /* Home Tab */,
-				FC24D232226AED3B00FA04A1 /* Timeline Tab */,
 				FC24D235226AED5E00FA04A1 /* Search Tab */,
 			);
 			path = "Main tabs ";

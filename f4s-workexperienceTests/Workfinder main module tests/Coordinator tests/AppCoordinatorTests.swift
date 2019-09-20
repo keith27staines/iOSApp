@@ -42,7 +42,7 @@ class AppCoordinatorTests: XCTestCase {
             userStatusService: mockUserStatusService,
             userRepository: MockUserRepository(user: mockUnregisteredUser),
             databaseDownloadManager: mockDatabaseDownloadManager,
-            f4sLog: mockAnalytics
+            log: mockAnalytics
         )
         sut = makeSUTAppCoordinator(router: mockRouter, injecting: injection)
         mockOnboardingCoordinator = MockOnboardingCoordinator(parent: sut)

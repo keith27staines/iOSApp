@@ -191,7 +191,7 @@ extension F4SDatabaseDownloadManager : F4SDownloadServiceDelegate {
             })
             
         } catch {
-            globalLog.error(error)
+            // do nothing
         }
     }
     

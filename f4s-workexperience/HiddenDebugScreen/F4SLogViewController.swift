@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import WorkfinderCommon
 
 class F4SLogViewController: UIViewController {
 
     @IBOutlet weak var logTextView: UITextView!
+    var log: F4SAnalyticsAndDebugging?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +21,7 @@ class F4SLogViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        logTextView.text = f4sLog.textCombiningHistoryAndSessionLog() ?? "Log unavailable because of a configuration error"
+        logTextView.text = log?.textCombiningHistoryAndSessionLog() ?? "Log unavailable because of a configuration error"
     }
 
     @IBAction func shareButtonPressed(_ sender: Any) {

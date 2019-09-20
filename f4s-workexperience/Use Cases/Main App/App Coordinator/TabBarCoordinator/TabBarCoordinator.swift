@@ -10,7 +10,7 @@ import WorkfinderOnboardingUseCase
 
 class TabBarCoordinator : TabBarCoordinatorProtocol {
     
-    static var sharedInstance: TabBarCoordinator!
+    //static var sharedInstance: TabBarCoordinator!
     
     let injected: CoreInjectionProtocol
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
@@ -211,7 +211,7 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
         let icon = UIImage(named: "messageOutline")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         navigationController.tabBarItem = UITabBarItem(title: "Messages", image: icon, selectedImage: nil)
         let router = NavigationRouter(navigationController: navigationController)
-        let coordinator = TimelineCoordinator(parent: nil,
+        let coordinator = TimelineCoordinator(parent: self,
                                               navigationRouter: router,
                                               inject: injected,
                                               messageServiceFactory: messageServiceFactory,
@@ -322,6 +322,10 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
     
     func showSearch() {
         navigateToMap()
+    }
+    
+    func showRecommendations() {
+        navigateToRecommendations()
     }
     
     func updateUnreadMessagesCount(_ count: Int) {

@@ -5,6 +5,7 @@ import WorkfinderAppLogic
 
 public class CoreInjection : CoreInjectionProtocol {
     
+    public weak var appCoordinator: AppCoordinatorProtocol?
     public var launchOptions: LaunchOptions? = nil
     public var user: F4SUser
     public var userService: F4SUserServiceProtocol
@@ -23,7 +24,7 @@ public class CoreInjection : CoreInjectionProtocol {
                 userRepository: F4SUserRepositoryProtocol,
                 databaseDownloadManager: F4SDatabaseDownloadManagerProtocol,
                 contentService: F4SContentServiceProtocol,
-                f4sLog: F4SAnalyticsAndDebugging) {
+                log: F4SAnalyticsAndDebugging) {
         
         self.launchOptions = launchOptions
         self.appInstallationUuidLogic = appInstallationUuidLogic
@@ -33,6 +34,6 @@ public class CoreInjection : CoreInjectionProtocol {
         self.userRepository = userRepository
         self.databaseDownloadManager = databaseDownloadManager
         self.contentService = contentService
-        self.log = f4sLog
+        self.log = log
     }
 }

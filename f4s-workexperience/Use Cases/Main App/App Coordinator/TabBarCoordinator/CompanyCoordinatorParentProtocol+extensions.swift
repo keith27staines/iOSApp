@@ -6,10 +6,10 @@ import WorkfinderCompanyDetailsUseCase
 
 extension CoreInjectionNavigationCoordinator: CompanyCoordinatorParentProtocol {
     public func showMessages() {
-        TabBarCoordinator.sharedInstance.navigateToTimeline()
+        injected.appCoordinator?.showMessages()
     }
     
     public func showSearch() {
-        TabBarCoordinator.sharedInstance.navigateToMap()
+        injected.appCoordinator?.showSearch()
     }
 }

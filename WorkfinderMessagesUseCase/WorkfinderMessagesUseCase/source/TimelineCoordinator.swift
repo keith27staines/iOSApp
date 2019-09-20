@@ -61,6 +61,7 @@ public class TimelineCoordinator : CoreInjectionNavigationCoordinator, CompanyCo
         self.placementService = placementService
         self.companyService = companyService
         self.roleService = roleService
+        self.tabBarCoordinator = parent
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     

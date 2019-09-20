@@ -55,11 +55,11 @@ class MasterBuilder {
             userRepository: userRepo,
             databaseDownloadManager: databaseDownloadManager,
             contentService: contentService,
-            f4sLog: log)
+            log: log)
         let versionCheckCoordinator = VersionCheckCoordinator(parent: nil, navigationRouter: navigationRouter)
         versionCheckCoordinator.versionCheckService = versionCheckService
         
-        return AppCoordinator(registrar: registrar,
+        return  AppCoordinator(registrar: registrar,
                               navigationRouter: navigationRouter,
                               inject: injection,
                               companyCoordinatorFactory: companyCoordinatorFactory,
