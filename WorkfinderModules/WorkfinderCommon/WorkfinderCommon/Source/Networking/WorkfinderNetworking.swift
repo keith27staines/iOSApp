@@ -18,6 +18,8 @@ public struct NetworkConfig {
     
     public let endpoints: WorkfinderEndpoint!
     
+    public let userRepository: F4SUserRepositoryProtocol
+    
     /// Initialise a new instance
     ///
     /// - Parameters:
@@ -27,11 +29,13 @@ public struct NetworkConfig {
         workfinderApiKey: String,
         logger: NetworkCallLoggerProtocol,
         sessionManager: F4SNetworkSessionManagerProtocol,
-        endpoints: WorkfinderEndpoint) {
+        endpoints: WorkfinderEndpoint,
+        userRepository: F4SUserRepositoryProtocol) {
         self.logger = logger
         self.wexApiKey = workfinderApiKey
         self.sessionManager = sessionManager
         self.endpoints = endpoints
+        self.userRepository = userRepository
     }
 }
 

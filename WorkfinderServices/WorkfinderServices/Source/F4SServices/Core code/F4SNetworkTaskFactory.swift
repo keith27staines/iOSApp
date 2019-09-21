@@ -18,22 +18,13 @@ public protocol F4SNetworkTaskFactoryProtocol {
 
 public class F4SNetworkTaskFactory : F4SNetworkTaskFactoryProtocol {
     
-    var userUuid: F4SUUID?
     let configuration: NetworkConfig
     
     /// Initalises a new instance of the factory
     ///
-    /// - Parameter userUuid:  the user uuid to be used by the factory. If omitted, the factory uses the uuid from the user in the default local store
     /// - parameter configuration: An instance of `NetworkConfig`
-    public init(userUuid: F4SUUID? = nil,
-                configuration: NetworkConfig) {
+    public init(configuration: NetworkConfig) {
         self.configuration = configuration
-        guard let userUuid = userUuid else {
-            let userRepo = F4SUserRepository(localStore: LocalStore())
-            self.userUuid = userRepo.load().uuid
-            return
-        }
-        self.userUuid = userUuid
     }
     
     public func urlRequest(verb: F4SHttpRequestVerb, url: URL, dataToSend: Data?) -> URLRequest {
@@ -62,7 +53,9 @@ public class F4SNetworkTaskFactory : F4SNetworkTaskFactoryProtocol {
                      attempting: String,
                      completion: @escaping (F4SNetworkDataResult) -> () ) -> F4SNetworkTask {
         var modifiedRequest = request
-        modifiedRequest.setValue(userUuid, forHTTPHeaderField: "wex.user.uuid")
+        if let userUuid = configuration.userRepository.load().uuid  {
+            modifiedRequest.setValue(userUuid, forHTTPHeaderField: "wex.user.uuid")
+        }
         let logger = configuration.logger
         let task = session.networkTask(with: modifiedRequest, completionHandler: {data, response, error -> Void in
             if let error = error as NSError? {

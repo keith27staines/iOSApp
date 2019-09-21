@@ -35,8 +35,6 @@ open class F4SDataTaskService {
         return baseUrl.absoluteString + "/" + apiName
     }
     
-    var userRepo: F4SUserRepositoryProtocol = F4SUserRepository(localStore: LocalStore())
-    
     var networkTaskfactory: F4SNetworkTaskFactoryProtocol
     
     /// Initialize a new instance

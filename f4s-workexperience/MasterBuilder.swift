@@ -33,7 +33,8 @@ class MasterBuilder {
         let networkConfig = NetworkConfig(workfinderApiKey: wexApiKey,
                                           logger: networkCallLogger,
                                           sessionManager: sessionManager,
-                                          endpoints: endpoints)
+                                          endpoints: endpoints,
+                                          userRepository: self.userRepo)
         return networkConfig
     }()
     
