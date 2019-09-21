@@ -16,7 +16,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     var injected: CoreInjectionProtocol
     var registrar: RemoteNotificationsRegistrarProtocol
     var launchOptions: [UIApplication.LaunchOptionsKey: Any]? { return injected.launchOptions }
-    
+    var shouldAskOperatingSystemToAllowLocation: Bool = false
     var tabBarCoordinator: TabBarCoordinatorProtocol!
     var onboardingCoordinator: OnboardingCoordinatorProtocol?
     var versionCheckCoordinator: (NavigationCoordinator & VersionChecking)?
@@ -239,6 +239,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
             messageCannedResponsesServiceFactory: messageCannedResponsesServiceFactory,
             recommendationsService: recommendationsService,
             roleService: roleService)
+        tabBarCoordinator.shouldAskOperatingSystemToAllowLocation = shouldAskOperatingSystemToAllowLocation
         addChildCoordinator(tabBarCoordinator)
         tabBarCoordinator.start()
         performVersionCheck { (result) in }
@@ -330,6 +331,6 @@ extension AppCoordinator {
 
 extension AppCoordinator : OnboardingCoordinatorDelegate {
     func shouldEnableLocation(_ enable: Bool) {
-        tabBarCoordinator.shouldAskOperatingSystemToAllowLocation = enable
+        shouldAskOperatingSystemToAllowLocation = enable
     }
 }
