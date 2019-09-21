@@ -10,16 +10,16 @@ import WorkfinderOnboardingUseCase
 
 class TabBarCoordinator : TabBarCoordinatorProtocol {
     
-    //static var sharedInstance: TabBarCoordinator!
-    
     let injected: CoreInjectionProtocol
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     let companyDocumentsService: F4SCompanyDocumentServiceProtocol
     let companyRepository: F4SCompanyRepositoryProtocol
     let companyService: F4SCompanyServiceProtocol
     let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
+    let favouritesRepository: F4SFavouritesRepositoryProtocol
     let offerProcessingService: F4SOfferProcessingServiceProtocol
     let partnersModel: F4SPartnersModel
+    let placementsRepository: F4SPlacementRepositoryProtocol
     let placementService: F4SPlacementServiceProtocol
     let placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol
     let messageServiceFactory: F4SMessageServiceFactoryProtocol
@@ -51,9 +51,11 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
                   companyDocumentsService: F4SCompanyDocumentServiceProtocol,
                   companyRepository: F4SCompanyRepositoryProtocol,
                   companyService: F4SCompanyServiceProtocol,
+                  favouritesRepository: F4SFavouritesRepositoryProtocol,
                   documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
                   offerProcessingService: F4SOfferProcessingServiceProtocol,
                   partnersModel: F4SPartnersModel,
+                  placementsRepository: F4SPlacementRepositoryProtocol,
                   placementService: F4SPlacementServiceProtocol,
                   placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
                   messageServiceFactory: F4SMessageServiceFactoryProtocol,
@@ -71,15 +73,18 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
         self.companyService = companyService
         self.documentUploaderFactory = documentUploaderFactory
         
+        self.favouritesRepository = favouritesRepository
         self.offerProcessingService = offerProcessingService
         self.partnersModel = partnersModel
+        self.placementsRepository = placementsRepository
         self.placementService = placementService
+        
         self.placementDocumentsServiceFactory = placementDocumentsServiceFactory
         self.messageServiceFactory = messageServiceFactory
-        
         self.messageActionServiceFactory = messageActionServiceFactory
         self.messageCannedResponsesServiceFactory = messageCannedResponsesServiceFactory
         self.recommendationsService = recommendationsService
+        
         self.roleService = roleService
     }
     
@@ -252,14 +257,11 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
         let icon = UIImage(named: "heartOutline")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         navigationController.tabBarItem = UITabBarItem(title: "Favourites", image: icon, selectedImage: nil)
         let router = NavigationRouter(navigationController: navigationController)
-        let placementRepository = F4SPlacementRepository()
-        let favouritesRepository = F4SFavouritesRepository()
-        let companyRepository = F4SCompanyRepository()
         let coordinator = FavouritesCoordinator(parent: self,
                                                 navigationRouter: router,
                                                 inject: injected,
                                                 companyCoordinatorFactory: companyCoordinatorFactory,
-                                                placementsRepository: placementRepository,
+                                                placementsRepository: placementsRepository,
                                                 favouritesRepository: favouritesRepository,
                                                 companyRepository: companyRepository)
         addChildCoordinator(coordinator)

@@ -70,9 +70,11 @@ class MasterBuilder {
                               companyService: companyService,
                               documentUploaderFactory: documentUploaderFactory,
                               emailVerificationModel: emailVerificationModel,
+                              favouritesRepository: favouritesRepository,
                               offerProcessingService: offerProcessingService,
                               onboardingCoordinatorFactory: onboardingCoordinatorFactory,
                               partnersModel: partnersModel,
+                              placementsRepository: placementsRepository,
                               placementService: placementService,
                               placementDocumentsServiceFactory: placementDocumentsServiceFactory,
                               messageServiceFactory: messageServiceFactory,
@@ -94,7 +96,7 @@ class MasterBuilder {
                                          environment: environment,
                                          getAllPlacementsService: placementService,
                                          interestsRepository: interestsRepository,
-                                         placementRepository: placementRepository,
+                                         placementRepository: placementsRepository,
                                          shareTemplateProvider: shareTemplateProvider,
                                          templateService: templateService)
     }()
@@ -170,6 +172,10 @@ class MasterBuilder {
         return EmailVerificationServiceFactory(configuration: self.networkConfiguration)
     }()
     
+    lazy var favouritesRepository: F4SFavouritesRepositoryProtocol = {
+        return F4SFavouritesRepository()
+    }()
+    
     lazy var interestsRepository: F4SInterestsRepositoryProtocol = {
         return F4SInterestsRepository()
     }()
@@ -202,7 +208,7 @@ class MasterBuilder {
         return F4SPartnerService(configuration: self.networkConfiguration)
     }()
     
-    lazy var placementRepository: F4SPlacementRepositoryProtocol = {
+    lazy var placementsRepository: F4SPlacementRepositoryProtocol = {
         return F4SPlacementRepository()
     }()
     

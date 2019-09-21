@@ -27,9 +27,11 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     let companyService: F4SCompanyServiceProtocol
     let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
     let emailVerificationModel: F4SEmailVerificationModel
+    let favouritesRepository: F4SFavouritesRepositoryProtocol
     let onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol
     let offerProcessingService: F4SOfferProcessingServiceProtocol
     let partnersModel: F4SPartnersModel
+    let placementsRepository: F4SPlacementRepositoryProtocol
     let placementService: F4SPlacementServiceProtocol
     let placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol
     let messageServiceFactory: F4SMessageServiceFactoryProtocol
@@ -54,9 +56,11 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                 companyService: F4SCompanyServiceProtocol,
                 documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
                 emailVerificationModel: F4SEmailVerificationModel,
+                favouritesRepository: F4SFavouritesRepositoryProtocol,
                 offerProcessingService: F4SOfferProcessingServiceProtocol,
                 onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol,
                 partnersModel: F4SPartnersModel,
+                placementsRepository: F4SPlacementRepositoryProtocol,
                 placementService: F4SPlacementServiceProtocol,
                 placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
                 messageServiceFactory: F4SMessageServiceFactoryProtocol,
@@ -76,16 +80,18 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         self.documentUploaderFactory = documentUploaderFactory
         
         self.emailVerificationModel = emailVerificationModel
+        self.favouritesRepository = favouritesRepository
         self.offerProcessingService = offerProcessingService
         self.partnersModel = partnersModel
+        self.placementsRepository = placementsRepository
+        
         self.placementService = placementService
         self.placementDocumentsServiceFactory = placementDocumentsServiceFactory
-        
         self.messageServiceFactory = messageServiceFactory
         self.messageActionServiceFactory = messageActionServiceFactory
         self.messageCannedResponsesServiceFactory = messageCannedResponsesServiceFactory
-        self.onboardingCoordinatorFactory = onboardingCoordinatorFactory
         
+        self.onboardingCoordinatorFactory = onboardingCoordinatorFactory
         self.recommendationsService = recommendationsService
         self.roleService = roleService
         self.versionCheckCoordinator = versionCheckCoordinator
@@ -110,35 +116,20 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         }
     }
     
-    func makeTabBarCoordinator(
-        parent: Coordinating?,
-        navigationRouter: NavigationRoutingProtocol,
-        inject: CoreInjectionProtocol,
-        companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
-        companyDocumentsService: F4SCompanyDocumentServiceProtocol,
-        companyRepository: F4SCompanyRepositoryProtocol,
-        companyService: F4SCompanyServiceProtocol,
-        documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
-        offerProcessingService: F4SOfferProcessingServiceProtocol,
-        partnersModel: F4SPartnersModel,
-        placementService: F4SPlacementServiceProtocol,
-        placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
-        messageServiceFactory: F4SMessageServiceFactoryProtocol,
-        messageActionServiceFactory: F4SMessageActionServiceFactoryProtocol,
-        messageCannedResponsesServiceFactory: F4SCannedMessageResponsesServiceFactoryProtocol,
-        recommendationsService: F4SRecommendationServiceProtocol,
-        roleService: F4SRoleServiceProtocol) -> TabBarCoordinatorProtocol {
+    func makeTabBarCoordinator() -> TabBarCoordinatorProtocol {
         return TabBarCoordinator(
-            parent: parent,
+            parent: self,
             navigationRouter: navigationRouter,
-            inject: inject,
+            inject: injected,
             companyCoordinatorFactory: companyCoordinatorFactory,
             companyDocumentsService: companyDocumentsService,
             companyRepository: companyRepository,
             companyService: companyService,
+            favouritesRepository: favouritesRepository,
             documentUploaderFactory: documentUploaderFactory,
             offerProcessingService: offerProcessingService,
             partnersModel: partnersModel,
+            placementsRepository: placementsRepository,
             placementService: placementService,
             placementDocumentsServiceFactory: placementDocumentsServiceFactory,
             messageServiceFactory: messageServiceFactory,
@@ -221,24 +212,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     }
     
     private func startTabBarCoordinator() {
-        tabBarCoordinator = makeTabBarCoordinator(
-            parent: self,
-            navigationRouter: navigationRouter,
-            inject: injected,
-            companyCoordinatorFactory: companyCoordinatorFactory,
-            companyDocumentsService: companyDocumentsService,
-            companyRepository: companyRepository,
-            companyService: companyService,
-            documentUploaderFactory: documentUploaderFactory,
-            offerProcessingService: offerProcessingService,
-            partnersModel: partnersModel,
-            placementService: placementService,
-            placementDocumentsServiceFactory: placementDocumentsServiceFactory,
-            messageServiceFactory: messageServiceFactory,
-            messageActionServiceFactory: messageActionServiceFactory,
-            messageCannedResponsesServiceFactory: messageCannedResponsesServiceFactory,
-            recommendationsService: recommendationsService,
-            roleService: roleService)
+        tabBarCoordinator = makeTabBarCoordinator()
         tabBarCoordinator.shouldAskOperatingSystemToAllowLocation = shouldAskOperatingSystemToAllowLocation
         addChildCoordinator(tabBarCoordinator)
         tabBarCoordinator.start()

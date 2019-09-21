@@ -190,7 +190,7 @@ class MapViewController: UIViewController {
         super.viewWillAppear(animated)
         adjustNavigationBar()
         displayRefineSearchLabelAnimated()
-        favouriteList = ShortlistDBOperations.sharedInstance.getShortlistForCurrentUser()
+        favouriteList = ShortlistDBOperations.sharedInstance.getShortlist()
     }
     
     var hasMovedToBestPosition: Bool = false
@@ -988,7 +988,7 @@ extension MapViewController {
     ///
     /// - parameter completion: Call back when the reload is complete
     func reloadMapFromDatabase(completion: @escaping () -> Void ) {
-        self.favouriteList = ShortlistDBOperations.sharedInstance.getShortlistForCurrentUser()
+        self.favouriteList = ShortlistDBOperations.sharedInstance.getShortlist()
         self.createUnfilteredMapModelFromDatabase { [weak self] unfilteredMapModel in
             guard let strongSelf = self else { return }
             strongSelf.unfilteredMapModel = unfilteredMapModel
