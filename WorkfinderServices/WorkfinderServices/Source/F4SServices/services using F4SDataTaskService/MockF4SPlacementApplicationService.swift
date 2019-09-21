@@ -1,7 +1,6 @@
 import Foundation
 import WorkfinderCommon
 
-
 public class MockF4SPlacementApplicationService : F4SPlacementApplicationServiceProtocol {
     
     public var resultForCreate: F4SNetworkResult<F4SPlacementJson>?

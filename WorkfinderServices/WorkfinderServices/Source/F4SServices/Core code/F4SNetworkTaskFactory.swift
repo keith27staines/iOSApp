@@ -1,14 +1,5 @@
-//
-//  F4SNetworkTaskFactory.swift
-//  WorkfinderServices
-//
-//  Created by Keith Dev on 22/08/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
-
 import Foundation
 import WorkfinderCommon
-import WorkfinderNetworking
 
 public protocol F4SNetworkTaskFactoryProtocol {
     func urlRequest(verb: F4SHttpRequestVerb, url: URL, dataToSend: Data?) -> URLRequest
@@ -27,18 +18,13 @@ public protocol F4SNetworkTaskFactoryProtocol {
 
 public class F4SNetworkTaskFactory : F4SNetworkTaskFactoryProtocol {
     
-    var userUuid: F4SUUID?
+    let configuration: NetworkConfig
     
     /// Initalises a new instance of the factory
     ///
-    /// - Parameter userUuid:  the user uuid to be used by the factory. If omitted, the factory uses the uuid from the user in the default local store
-    public init(userUuid: F4SUUID? = nil) {
-        guard let userUuid = userUuid else {
-            let userRepo = F4SUserRepository(localStore: LocalStore())
-            self.userUuid = userRepo.load().uuid
-            return
-        }
-        self.userUuid = userUuid
+    /// - parameter configuration: An instance of `NetworkConfig`
+    public init(configuration: NetworkConfig) {
+        self.configuration = configuration
     }
     
     public func urlRequest(verb: F4SHttpRequestVerb, url: URL, dataToSend: Data?) -> URLRequest {
@@ -67,7 +53,10 @@ public class F4SNetworkTaskFactory : F4SNetworkTaskFactoryProtocol {
                      attempting: String,
                      completion: @escaping (F4SNetworkDataResult) -> () ) -> F4SNetworkTask {
         var modifiedRequest = request
-        modifiedRequest.setValue(userUuid, forHTTPHeaderField: "wex.user.uuid")
+        if let userUuid = configuration.userRepository.load().uuid  {
+            modifiedRequest.setValue(userUuid, forHTTPHeaderField: "wex.user.uuid")
+        }
+        let logger = configuration.logger
         let task = session.networkTask(with: modifiedRequest, completionHandler: {data, response, error -> Void in
             if let error = error as NSError? {
                 if error.domain == "NSURLErrorDomain" && error.code == -999 {
@@ -75,18 +64,18 @@ public class F4SNetworkTaskFactory : F4SNetworkTaskFactoryProtocol {
                     return
                 }
                 let result = F4SNetworkDataResult.error(F4SNetworkError(error: error, attempting: attempting))
-                logger?.logDataTaskFailure(attempting: attempting, error: error, request: modifiedRequest, response: nil, responseData: nil)
+                logger.logDataTaskFailure(attempting: attempting, error: error, request: modifiedRequest, response: nil, responseData: nil)
                 completion(result)
                 return
             }
             let httpResponse = response as! HTTPURLResponse
             if let error = F4SNetworkError(response: httpResponse, attempting: attempting) {
-                logger?.logDataTaskFailure(attempting: attempting, error: error, request: modifiedRequest, response: httpResponse, responseData: data)
+                logger.logDataTaskFailure(attempting: attempting, error: error, request: modifiedRequest, response: httpResponse, responseData: data)
                 let result = F4SNetworkDataResult.error(error)
                 completion(result)
                 return
             }
-            logger?.logDataTaskSuccess(request: request, response: httpResponse, responseData: data!)
+            logger.logDataTaskSuccess(request: request, response: httpResponse, responseData: data!)
             completion(F4SNetworkDataResult.success(data))
         })
         return task

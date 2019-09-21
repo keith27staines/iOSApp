@@ -1,14 +1,6 @@
-//
-//  ShortlistModel.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 29/01/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
 
 import Foundation
 import WorkfinderCommon
-import WorkfinderServices
 
 public protocol CompanyFavouritesModelDelegate : class {
     func companyFavouritesModelDidUpate(_ model: CompanyFavouritesModel, company: Company, isFavourite: Bool)

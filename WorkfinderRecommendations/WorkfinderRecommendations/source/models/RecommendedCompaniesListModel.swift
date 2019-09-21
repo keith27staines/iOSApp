@@ -1,6 +1,6 @@
+
 import Foundation
 import WorkfinderCommon
-import WorkfinderServices
 
 public protocol RecommendedCompaniesListModelProtocol : class {
     func fetch(completion: @escaping ([F4SRecommendation]?) -> Void)
@@ -25,7 +25,7 @@ public class RecommendedCompaniesListModel : RecommendedCompaniesListModelProtoc
         }
     }
     
-    public init(recommendationsService: F4SRecommendationServiceProtocol = F4SRecommendationService()) {
+    public init(recommendationsService: F4SRecommendationServiceProtocol) {
         self.recommendationService = recommendationsService
     }
 }

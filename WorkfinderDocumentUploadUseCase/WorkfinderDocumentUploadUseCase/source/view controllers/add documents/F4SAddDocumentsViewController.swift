@@ -21,16 +21,7 @@ class F4SAddDocumentsViewController: UIViewController {
     
     weak var coordinator: DocumentUploadCoordinator?
     
-    lazy var documentModel: F4SDocumentUploadModelBase = {
-        switch uploadScenario {
-        case .applyWorkflow:
-            return F4SDocumentUploadWhileApplyingModel(delegate: self, placementUuid: placementUuid)
-        case .businessLeaderRequest(let requestModel):
-            let placementUuid = requestModel.placementUuid
-            let documents = requestModel.documents
-            return F4SDocumentUploadAtBLRequestModel(delegate: self, placementUuid: placementUuid, documents: documents)
-        }
-    }()
+    var documentModel: F4SDocumentUploadModelBase!
     
     lazy var popupCellMenu: F4SDCPopupMenuView = {
         let frame = CGRect(x: 0, y: 0, width: 150, height: 120)

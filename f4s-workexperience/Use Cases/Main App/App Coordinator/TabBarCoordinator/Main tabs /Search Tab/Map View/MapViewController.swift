@@ -177,7 +177,6 @@ class MapViewController: UIViewController {
         
         adjustAppeareance()
         setupMap()
-        setupLogos()
         setupReachability(nil, useClosures: true)
         startNotifier()
         if !(UIApplication.shared.delegate as! AppDelegate).databaseDownloadManager!.isLocalDatabaseAvailable() {
@@ -191,7 +190,7 @@ class MapViewController: UIViewController {
         super.viewWillAppear(animated)
         adjustNavigationBar()
         displayRefineSearchLabelAnimated()
-        favouriteList = ShortlistDBOperations.sharedInstance.getShortlistForCurrentUser()
+        favouriteList = ShortlistDBOperations.sharedInstance.getShortlist()
     }
     
     var hasMovedToBestPosition: Bool = false
@@ -214,11 +213,6 @@ class MapViewController: UIViewController {
     
     override var canBecomeFirstResponder: Bool {
         return true
-    }
-    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        if motion == .motionShake && (f4sLog.userCanAccessDebugMenu()) {
-            TabBarCoordinator.sharedInstance.presentHiddenDebugController(parentCtrl: self)
-        }
     }
     
     func companiesFromMarker(_ marker: GMSMarker) -> [Company] {
@@ -309,18 +303,6 @@ extension MapViewController {
         filtersButton.setImage(UIImage(named: "filtersIcon"), for: .normal)
         filtersButton.setImage(UIImage(named: "filtersIcon"), for: .highlighted)
         myLocationButton.tintColor = splashColor
-    }
-    
-    fileprivate func setupLogos() {
-        guard let partnerLogo = F4SPartnersModel.sharedInstance.selectedPartner?.image else {
-            logoStack.isHidden = true
-            return
-        }
-        logoStack.isHidden = false
-        workfinderLogoImageView.image = UIImage(named: "logo2")?.withRenderingMode(.alwaysTemplate)
-        workfinderLogoImageView.tintColor = UIColor.gray
-        partnerLogoImageView.image = partnerLogo.withRenderingMode(.alwaysTemplate)
-        partnerLogoImageView.tintColor = UIColor.gray
     }
     
     fileprivate func setupLabels() {
@@ -1006,7 +988,7 @@ extension MapViewController {
     ///
     /// - parameter completion: Call back when the reload is complete
     func reloadMapFromDatabase(completion: @escaping () -> Void ) {
-        self.favouriteList = ShortlistDBOperations.sharedInstance.getShortlistForCurrentUser()
+        self.favouriteList = ShortlistDBOperations.sharedInstance.getShortlist()
         self.createUnfilteredMapModelFromDatabase { [weak self] unfilteredMapModel in
             guard let strongSelf = self else { return }
             strongSelf.unfilteredMapModel = unfilteredMapModel

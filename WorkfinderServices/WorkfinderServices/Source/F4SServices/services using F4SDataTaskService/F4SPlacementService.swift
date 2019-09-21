@@ -1,29 +1,24 @@
 // F4SPlacementService
 import Foundation
 import WorkfinderCommon
-import WorkfinderNetworking
-
-public protocol F4SOfferProcessingServiceProtocol {
-    func confirmPlacement(placement: F4STimelinePlacement, completion: @escaping (F4SNetworkResult<Bool>) -> ())
-    func cancelPlacement(_ uuid: F4SUUID, completion: @escaping (F4SNetworkResult<Bool>) -> ())
-    func declinePlacement(_ uuid: F4SUUID, completion: @escaping (F4SNetworkResult<Bool>) -> ())
-}
 
 public class F4SPlacementService : F4SPlacementServiceProtocol, F4SOfferProcessingServiceProtocol {
     
     var dataTask: F4SNetworkTask?
     var sessionManager: F4SNetworkSessionManagerProtocol
     var networkTaskFactory: F4SNetworkTaskFactoryProtocol
+    let configuration: NetworkConfig
     
-    public init(sessionManager: F4SNetworkSessionManagerProtocol = F4SNetworkSessionManager.shared) {
-        self.networkTaskFactory = F4SNetworkTaskFactory()
-        self.sessionManager = sessionManager
+    public init(configuration: NetworkConfig) {
+        self.configuration = configuration
+        self.networkTaskFactory = F4SNetworkTaskFactory(configuration: configuration)
+        self.sessionManager = configuration.sessionManager
     }
     
     public func getPlacementOffer(uuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4STimelinePlacement>) -> ()) {
         let attempting = "Get placement"
         let verb = F4SHttpRequestVerb.get
-        var url = URL(string: WorkfinderEndpoint.offerUrl)!
+        var url = URL(string: configuration.endpoints.offerUrl)!
         url.appendPathComponent(uuid)
         let session = sessionManager.interactiveSession
         dataTask?.cancel()
@@ -43,7 +38,7 @@ public class F4SPlacementService : F4SPlacementServiceProtocol, F4SOfferProcessi
     public func getAllPlacementsForUser(completion: @escaping (F4SNetworkResult<[F4STimelinePlacement]>) -> ()) {
         let attempting = "Get all placements"
         let verb = F4SHttpRequestVerb.get
-        let url = URL(string: WorkfinderEndpoint.allPlacementsUrl)!
+        let url = URL(string: configuration.endpoints.allPlacementsUrl)!
         let session = sessionManager.interactiveSession
         dataTask?.cancel()
         dataTask = networkTaskFactory.networkTask(verb: verb, url: url, dataToSend: nil, attempting: attempting, session: session) { (result) in
@@ -92,7 +87,7 @@ public class F4SPlacementService : F4SPlacementServiceProtocol, F4SOfferProcessi
     
     internal func patchPlacement<T:Encodable>(_ uuid: F4SUUID, json: T, attempting: String, completion: @escaping (F4SNetworkResult<Bool>) -> ()) {
         do {
-            let urlString = WorkfinderEndpoint.patchPlacementUrl + "/\(uuid)"
+            let urlString = configuration.endpoints.patchPlacementUrl + "/\(uuid)"
             let url = URL(string: urlString)!
             let session = sessionManager.interactiveSession
             let encoder = JSONEncoder()

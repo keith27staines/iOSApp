@@ -44,7 +44,16 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
     let normalCellHeight: CGFloat = 60
     let welcomeCellHeight: CGFloat = 100
     var secondLoad = false
-
+    weak var tabBarCoordinator: TabBarCoordinator!
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
@@ -129,8 +138,7 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
                     return UITableViewCell()
                 }
                 let workfinderLogo = UIImage(named: "logo2")
-                let partnerLogo = F4SPartnersModel.sharedInstance.selectedPartner?.image
-                let logos: [UIImage?] = [workfinderLogo, partnerLogo]
+                let logos: [UIImage?] = [workfinderLogo]
                 logoCell.setLogos(logos)
                 logoCell.isUserInteractionEnabled = false
                 logoCell.lineImageView.isHidden = true
@@ -246,15 +254,15 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
                 guard let navigationRow = NavigationSectionRow(rawValue: indexPath.row) else {
                     return
                 }
-                let navigationHelper = TabBarCoordinator.sharedInstance
+
                 switch navigationRow
                 {
                 case .about:
-                    navigationHelper!.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.about)
+                    tabBarCoordinator.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.about)
                 case .faq:
-                    navigationHelper!.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.faq)
+                    tabBarCoordinator.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.faq)
                 case .terms:
-                    navigationHelper!.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.terms)
+                    tabBarCoordinator.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.terms)
                 }
             }
         case .BusinessLeadersSection:

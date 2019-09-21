@@ -1,14 +1,6 @@
-//
-//  RequestBLProvideDocuments.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 26/07/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
-//
 
 import UIKit
 import WorkfinderCommon
-import WorkfinderServices
 import WorkfinderUI
 import WorkfinderAppLogic
 
@@ -49,9 +41,11 @@ class RequestBLProvideDocuments: UIViewController {
     
     var userMessageHandler = UserMessageHandler()
     var offerConfirmer: F4SOfferConfirmer?
+    var placementService: F4SOfferProcessingServiceProtocol!
+    
     func confirmOffer() {
         let offerConfirmer = F4SOfferConfirmer(messageHandler: userMessageHandler,
-                                               placementService: F4SPlacementService(),
+                                               placementService: placementService,
                                                placement: accept.placement,
                                                sender: self)
         offerConfirmer.confirmOffer() { [weak self] in

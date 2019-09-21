@@ -1,14 +1,6 @@
-//
-//  SuccessExtraInfoViewController.swift
-//  f4s-workexperience
-//
-//  Created by Sergiu Simon on 10/01/17.
-//  Copyright © 2017 freshbyte. All rights reserved.
-//
 
 import UIKit
 import WorkfinderCommon
-import WorkfinderServices
 import WorkfinderUI
 
 public class SuccessExtraInfoViewController: UIViewController {
@@ -26,10 +18,6 @@ public class SuccessExtraInfoViewController: UIViewController {
         centerView.layer.cornerRadius = 8
         centerView.layer.masksToBounds = true
         applyStyle()
-    }
-    
-    override public func viewWillAppear(_ animated: Bool) {
-        F4SUserStatusService.shared.beginStatusUpdate()
     }
     
     public var timelineButtonWasTapped: (() -> Void)?

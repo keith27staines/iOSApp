@@ -1,55 +1,6 @@
-//
-//  F4SEmailVerificationError.swift
-//  AuthTest
-//
-//  Created by Keith Dev on 28/12/2017.
-//  Copyright © 2017 F4S. All rights reserved.
-//
 
 import Foundation
-import WorkfinderNetworking
-import WorkfinderServices
-
-public enum F4SEmailVerificationError : Error {
-    case networkNotAvailable
-    case networkErrorSubmittingEmailForVerification
-    case cientsideEmailFormatCheckFailed
-    case serversideEmailFormatCheckFailed
-    case networkErrorProcessingLink
-    case codeEmailCombinationNotValid
-    case unknownError
-    
-    public static func f4sError(for error: Error) -> F4SEmailVerificationError {
-        if let f4s = error as? F4SEmailVerificationError { return f4s }
-        
-        switch error {
-        case let error as EmailVerificationService.EmailSubmissionError:
-            switch error {
-            case .client:
-                return F4SEmailVerificationError.networkNotAvailable
-            case .cientsideEmailFormatCheckFailed:
-                return F4SEmailVerificationError.cientsideEmailFormatCheckFailed
-            case .serversideEmailFormatCheckFailed:
-                return F4SEmailVerificationError.serversideEmailFormatCheckFailed
-            case .networkError(_):
-                return F4SEmailVerificationError.networkErrorSubmittingEmailForVerification
-            }
-        
-        case let error as EmailVerificationService.CodeValidationError:
-            switch error {
-            case .client:
-                return F4SEmailVerificationError.networkNotAvailable
-            case .codeEmailCombinationNotValid:
-                return F4SEmailVerificationError.codeEmailCombinationNotValid
-            case .emailNotTheSame:
-                return F4SEmailVerificationError.codeEmailCombinationNotValid
-            case .networkError(_):
-                return F4SEmailVerificationError.networkErrorProcessingLink
-            }
-        default: return .unknownError
-        }
-    }
-}
+import WorkfinderCommon
 
 // MARK:- titles for buttons and visibility
 public extension F4SEmailVerificationError {

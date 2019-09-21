@@ -1,28 +1,15 @@
-//
-//  AllowedToApplyLogic.swift
-//  WorkfinderAppLogic
-//
-//  Created by Keith Dev on 01/08/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
 
 import Foundation
 import WorkfinderCommon
-import WorkfinderNetworking
-import WorkfinderServices
 
 public class AllowedToApplyLogic {
     
     var placements: [F4STimelinePlacement] = []
     
-    public lazy var placementService: F4SGetAllPlacementsServiceProtocol = {
-        return F4SPlacementService()
-    }()
+    public let placementService: F4SGetAllPlacementsServiceProtocol
     
-    public init(service: F4SGetAllPlacementsServiceProtocol? = nil) {
-        if let injectedPlacementService = service {
-            self.placementService = injectedPlacementService
-        }
+    public init(service: F4SGetAllPlacementsServiceProtocol) {
+        self.placementService = service
     }
     
     public var draftTimelinePlacement: F4STimelinePlacement?

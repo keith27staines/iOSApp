@@ -34,7 +34,6 @@
 		FCEF2256232A9F41004914F7 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2252232A9F41004914F7 /* WorkfinderCommon.framework */; };
 		FCEF2258232A9F41004914F7 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2253232A9F41004914F7 /* WorkfinderCompanyDetailsUseCase.framework */; };
 		FCEF225A232A9F41004914F7 /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2254232A9F41004914F7 /* WorkfinderCoordinators.framework */; };
-		FCEF225C232A9F41004914F7 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2255232A9F41004914F7 /* WorkfinderServices.framework */; };
 		FCF4B605232BBE46001340DF /* TimelineView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC0C6FE1232B8F8600816332 /* TimelineView.storyboard */; };
 		FCF4B65D232BCEA4001340DF /* MessagesModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF4B65C232BCEA4001340DF /* MessagesModelTests.swift */; };
 /* End PBXBuildFile section */
@@ -94,7 +93,6 @@
 				FCEF225A232A9F41004914F7 /* WorkfinderCoordinators.framework in Frameworks */,
 				FCEF2256232A9F41004914F7 /* WorkfinderCommon.framework in Frameworks */,
 				FC0C710B232BA41300816332 /* WorkfinderUI.framework in Frameworks */,
-				FCEF225C232A9F41004914F7 /* WorkfinderServices.framework in Frameworks */,
 				FC0C704F232B91B900816332 /* WorkfinderAcceptUseCase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

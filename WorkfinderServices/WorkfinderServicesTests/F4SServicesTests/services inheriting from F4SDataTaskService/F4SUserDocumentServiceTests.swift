@@ -1,16 +1,15 @@
 import XCTest
 import WorkfinderCommon
-import WorkfinderNetworking
 @testable import WorkfinderServices
 
 class F4SUserDocumentServiceTests : XCTestCase {
     
     func test_initialise() {
-        let sut = F4SUserDocumentsService()
+        let sut = F4SUserDocumentsService(configuration: makeTestConfiguration())
         XCTAssertEqual(sut.apiName, "documents")
     }
     func test_getDocuments() {
-        let sut = F4SUserDocumentsService()
+        let sut = F4SUserDocumentsService(configuration: makeTestConfiguration())
         let expectedValue = F4SGetDocumentJson(uuid: "uuid", documents: [F4SDocument(uuid: "documentUuid", urlString: "url/url", type: F4SUploadableDocumentType.cv, name: "my cv")])
         let requiredResult = F4SNetworkResult.success(expectedValue)
         sut.networkTaskfactory = MockF4SNetworkTaskFactory(requiredSuccessResult: requiredResult)

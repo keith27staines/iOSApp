@@ -1,36 +1,20 @@
 import Foundation
 import WorkfinderCommon
 
-/// Defines the methods required to log detailed information about network calls
-public protocol NetworkCallLogger {
-    /// Logs failures and writes the failure details to an external notification
-    /// service
-    func logDataTaskFailure(attempting: String?,
-                            error: Error,
-                            request: URLRequest,
-                            response: HTTPURLResponse?,
-                            responseData: Data?)
-    
-    /// Logs successes locally
-    func logDataTaskSuccess(request: URLRequest,
-                            response: HTTPURLResponse,
-                            responseData: Data)
-}
-
 /// The concrete implementation of NetworkCallLogger used in this app. The main
 /// work done by this implementation is to transform the success or failure info
 /// into a very complete yet easily readable form.
 /// The implementation uses an instance of `F4SAnalyticsAndDebugging` to write
 /// data
-class Logger : NetworkCallLogger {
+public class NetworkCallLogger : NetworkCallLoggerProtocol {
     
     let log: F4SAnalyticsAndDebugging
     
-    init(log: F4SAnalyticsAndDebugging) {
+    public init(log: F4SAnalyticsAndDebugging) {
         self.log = log
     }
     
-    func logDataTaskFailure(attempting: String? = nil,
+    public func logDataTaskFailure(attempting: String? = nil,
                             error: Error,
                             request: URLRequest,
                             response: HTTPURLResponse?,
@@ -69,7 +53,7 @@ class Logger : NetworkCallLogger {
         return NSError(domain: "iOS Workfinder Networking", code: code, userInfo: ["reason": text])
     }
     
-    func logDataTaskSuccess(request: URLRequest,
+    public func logDataTaskSuccess(request: URLRequest,
                             response: HTTPURLResponse,
                             responseData: Data) {
         let separator = "-----------------------------------------------------------------------"

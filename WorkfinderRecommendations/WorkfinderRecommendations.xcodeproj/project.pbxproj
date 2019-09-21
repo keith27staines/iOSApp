@@ -23,7 +23,6 @@
 		FCEF2297232AA04B004914F7 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2293232AA04B004914F7 /* WorkfinderCommon.framework */; };
 		FCEF2299232AA04B004914F7 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2294232AA04B004914F7 /* WorkfinderCompanyDetailsUseCase.framework */; };
 		FCEF229B232AA04B004914F7 /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2295232AA04B004914F7 /* WorkfinderCoordinators.framework */; };
-		FCEF229D232AA04B004914F7 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEF2296232AA04B004914F7 /* WorkfinderServices.framework */; };
 		FCF4B65B232BCE58001340DF /* F4SRecommendedCompaniesMergerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF4B65A232BCE58001340DF /* F4SRecommendedCompaniesMergerTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,7 +68,6 @@
 				FCEF2299232AA04B004914F7 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */,
 				FCEF229B232AA04B004914F7 /* WorkfinderCoordinators.framework in Frameworks */,
 				FCEF2297232AA04B004914F7 /* WorkfinderCommon.framework in Frameworks */,
-				FCEF229D232AA04B004914F7 /* WorkfinderServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

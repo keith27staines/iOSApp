@@ -5,12 +5,12 @@ import WorkfinderCommon
 class F4SPlacementApplicationServiceTests: XCTestCase {
 
     func test_initialise() {
-        let sut = F4SPlacementApplicationService()
+        let sut = F4SPlacementApplicationService(configuration: makeTestConfiguration())
         XCTAssertEqual(sut.apiName, "placement")
     }
     
     func test_apply() {
-        let sut = F4SPlacementApplicationService()
+        let sut = F4SPlacementApplicationService(configuration: makeTestConfiguration())
         let requiredValue = F4SPlacementJson(uuid: "uuid", user: "userUuid", company: "companyUuid", vendor: "vendorUuid", interests: nil)
         let requiredResult = F4SNetworkResult.success(requiredValue)
         let expectation  = XCTestExpectation(description: "")
@@ -30,7 +30,7 @@ class F4SPlacementApplicationServiceTests: XCTestCase {
     }
     
     func test_update() {
-        let sut = F4SPlacementApplicationService()
+        let sut = F4SPlacementApplicationService(configuration: makeTestConfiguration())
         let requiredValue = F4SPlacementJson(uuid: "uuid", user: "userUuid", company: "companyUuid", vendor: "vendorUuid", interests: nil)
         let requiredResult = F4SNetworkResult.success(requiredValue)
         let expectation  = XCTestExpectation(description: "")

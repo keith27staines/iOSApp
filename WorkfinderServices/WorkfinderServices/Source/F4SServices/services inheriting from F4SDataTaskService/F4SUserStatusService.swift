@@ -1,21 +1,20 @@
 import Foundation
 import WorkfinderCommon
-import WorkfinderNetworking
 
 public extension Notification.Name {
     static let f4sUserStatusUpdated = Notification.Name(
         rawValue: "f4sUserStatusUpdated")
 }
 
-public class F4SUserStatusService : F4SDataTaskService {
-    
-    public static let shared: F4SUserStatusService = F4SUserStatusService()
+public class F4SUserStatusService : F4SDataTaskService, F4SUserStatusServiceProtocol {
     
     public var userStatus: F4SUserStatus?
     
-    public init() {
+    public init(configuration: NetworkConfig) {
         let apiName = "user/status"
-        super.init(baseURLString: NetworkConfig.workfinderApiV2, apiName: apiName)
+        super.init(baseURLString: configuration.workfinderApiV2,
+                   apiName: apiName,
+                   configuration: configuration)
     }
     
     public func beginStatusUpdate() {
@@ -33,10 +32,7 @@ public class F4SUserStatusService : F4SDataTaskService {
             }
         }
     }
-}
 
-// MARK:- F4SDocumentServiceProtocol conformance
-extension F4SUserStatusService : F4SUserStatusServiceProtocol {
     public func getUserStatus(completion: @escaping (F4SNetworkResult<F4SUserStatus>) -> ()) {
         beginGetRequest(attempting: "Get status for current user", completion: completion)
     }

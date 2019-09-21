@@ -18,9 +18,9 @@ public class FavouritesCoordinator : CoreInjectionNavigationCoordinator {
     
     var company: Company?
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
-    let placementsRepository: F4SPlacementRepositoryProtocol!
-    let favouritesRepository: F4SFavouritesRepositoryProtocol!
-    let companyRepository: F4SCompanyRepositoryProtocol!
+    let placementsRepository: F4SPlacementRepositoryProtocol
+    let favouritesRepository: F4SFavouritesRepositoryProtocol
+    let companyRepository: F4SCompanyRepositoryProtocol
     
     lazy var rootViewController: FavouriteViewController = {
         let storyboard = UIStoryboard(name: "Favourite", bundle: __bundle)

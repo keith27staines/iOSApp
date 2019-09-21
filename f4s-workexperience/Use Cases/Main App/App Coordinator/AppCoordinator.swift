@@ -10,62 +10,105 @@ import GooglePlaces
 
 extension UIApplication : RemoteNotificationsRegistrarProtocol {}
 
-/// UIApplication conforms to this protocol
-public protocol RemoteNotificationsRegistrarProtocol {
-    func registerForRemoteNotifications()
-}
-
-public protocol AppCoordinatorProtocol : Coordinating {
-    var window: UIWindow { get }
-    func performVersionCheck(resultHandler: @escaping ((F4SNetworkResult<F4SVersionValidity>)->Void))
-}
-
 class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
 
     var window: UIWindow
     var injected: CoreInjectionProtocol
     var registrar: RemoteNotificationsRegistrarProtocol
     var launchOptions: [UIApplication.LaunchOptionsKey: Any]? { return injected.launchOptions }
+    var shouldAskOperatingSystemToAllowLocation: Bool = false
+    var tabBarCoordinator: TabBarCoordinatorProtocol!
+    var onboardingCoordinator: OnboardingCoordinatorProtocol?
+    var versionCheckCoordinator: (NavigationCoordinator & VersionChecking)?
+    
+    let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
+    let companyDocumentsService: F4SCompanyDocumentServiceProtocol
+    let companyRepository: F4SCompanyRepositoryProtocol
+    let companyService: F4SCompanyServiceProtocol
+    let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
+    let emailVerificationModel: F4SEmailVerificationModel
+    let favouritesRepository: F4SFavouritesRepositoryProtocol
+    let onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol
+    let offerProcessingService: F4SOfferProcessingServiceProtocol
+    let partnersModel: F4SPartnersModel
+    let placementsRepository: F4SPlacementRepositoryProtocol
+    let placementService: F4SPlacementServiceProtocol
+    let placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol
+    let messageServiceFactory: F4SMessageServiceFactoryProtocol
+    let messageActionServiceFactory: F4SMessageActionServiceFactoryProtocol
+    let messageCannedResponsesServiceFactory: F4SCannedMessageResponsesServiceFactoryProtocol
+    let recommendationsService: F4SRecommendationServiceProtocol
+    let roleService: F4SRoleServiceProtocol
+    
     var user: F4SUser { return injected.userRepository.load() }
     var userService: F4SUserServiceProtocol { return injected.userService}
     var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol { return injected.databaseDownloadManager }
-    var versionCheckCoordinator: NavigationCoordinator & VersionChecking
+    var userNotificationService: UNService!
+    var log: F4SAnalyticsAndDebugging { return injected.log }
     
-    lazy var onboardingCoordinatorFactory: (_ parent: Coordinating?, _ router: NavigationRoutingProtocol) -> OnboardingCoordinatorProtocol = { [unowned self] _,_ in
-        return OnboardingCoordinator(parent: self, navigationRouter: self.navigationRouter)
-    }
-    
-    lazy var tabBarCoordinator: TabBarCoordinatorProtocol = {
-        return tabBarCoordinatorFactory(self, navigationRouter, injected)
-    }()
-    
-    lazy var tabBarCoordinatorFactory: (_ parent: Coordinating?, _ router: NavigationRoutingProtocol, _ inject: CoreInjectionProtocol) -> TabBarCoordinatorProtocol = {parent, router, inject in
-        let tabBarCoordinator = TabBarCoordinator(parent: parent, navigationRouter: router, inject: inject)
-        TabBarCoordinator.sharedInstance = tabBarCoordinator
-        return tabBarCoordinator
-    }
-    
-    public init(versionCheckCoordinator: NavigationCoordinator & VersionChecking,
+    public init(
                 registrar: RemoteNotificationsRegistrarProtocol,
                 navigationRouter: NavigationRoutingProtocol,
-                inject: CoreInjectionProtocol) {
-        self.versionCheckCoordinator = versionCheckCoordinator
+                inject: CoreInjectionProtocol,
+                companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
+                companyDocumentsService: F4SCompanyDocumentServiceProtocol,
+                companyRepository: F4SCompanyRepositoryProtocol,
+                companyService: F4SCompanyServiceProtocol,
+                documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
+                emailVerificationModel: F4SEmailVerificationModel,
+                favouritesRepository: F4SFavouritesRepositoryProtocol,
+                offerProcessingService: F4SOfferProcessingServiceProtocol,
+                onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol,
+                partnersModel: F4SPartnersModel,
+                placementsRepository: F4SPlacementRepositoryProtocol,
+                placementService: F4SPlacementServiceProtocol,
+                placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
+                messageServiceFactory: F4SMessageServiceFactoryProtocol,
+                messageActionServiceFactory: F4SMessageActionServiceFactoryProtocol,
+                messageCannedResponsesServiceFactory: F4SCannedMessageResponsesServiceFactoryProtocol,
+                recommendationsService: F4SRecommendationServiceProtocol,
+                roleService: F4SRoleServiceProtocol,
+                versionCheckCoordinator: NavigationCoordinator & VersionChecking) {
+        
         self.registrar = registrar
         self.injected = inject
+        
+        self.companyCoordinatorFactory = companyCoordinatorFactory
+        self.companyDocumentsService = companyDocumentsService
+        self.companyRepository = companyRepository
+        self.companyService = companyService
+        self.documentUploaderFactory = documentUploaderFactory
+        
+        self.emailVerificationModel = emailVerificationModel
+        self.favouritesRepository = favouritesRepository
+        self.offerProcessingService = offerProcessingService
+        self.partnersModel = partnersModel
+        self.placementsRepository = placementsRepository
+        
+        self.placementService = placementService
+        self.placementDocumentsServiceFactory = placementDocumentsServiceFactory
+        self.messageServiceFactory = messageServiceFactory
+        self.messageActionServiceFactory = messageActionServiceFactory
+        self.messageCannedResponsesServiceFactory = messageCannedResponsesServiceFactory
+        
+        self.onboardingCoordinatorFactory = onboardingCoordinatorFactory
+        self.recommendationsService = recommendationsService
+        self.roleService = roleService
+        self.versionCheckCoordinator = versionCheckCoordinator
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = navigationRouter.rootViewController
-        super.init(parent:nil, navigationRouter: navigationRouter)
-        versionCheckCoordinator.parentCoordinator = self
         window.makeKeyAndVisible()
+
+        super.init(parent:nil, navigationRouter: navigationRouter)
+        self.injected.appCoordinator = self
+        versionCheckCoordinator.parentCoordinator = self
+        userNotificationService = UNService(appCoordinator: self)
     }
-    
-    var onboardingCoordinator: OnboardingCoordinatorProtocol?
     
     override func start() {
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
-        _ = UNService.shared // ensure user notification service is wired up early
-        _ = F4SEmailVerificationModel.shared
         if launchOptions?[.remoteNotification] == nil {
             performVersionCheck(resultHandler: onVersionCheckResult)
         } else {
@@ -73,7 +116,31 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         }
     }
     
+    func makeTabBarCoordinator() -> TabBarCoordinatorProtocol {
+        return TabBarCoordinator(
+            parent: self,
+            navigationRouter: navigationRouter,
+            inject: injected,
+            companyCoordinatorFactory: companyCoordinatorFactory,
+            companyDocumentsService: companyDocumentsService,
+            companyRepository: companyRepository,
+            companyService: companyService,
+            favouritesRepository: favouritesRepository,
+            documentUploaderFactory: documentUploaderFactory,
+            offerProcessingService: offerProcessingService,
+            partnersModel: partnersModel,
+            placementsRepository: placementsRepository,
+            placementService: placementService,
+            placementDocumentsServiceFactory: placementDocumentsServiceFactory,
+            messageServiceFactory: messageServiceFactory,
+            messageActionServiceFactory: messageActionServiceFactory,
+            messageCannedResponsesServiceFactory: messageCannedResponsesServiceFactory,
+            recommendationsService: recommendationsService,
+            roleService: roleService)
+    }
+    
     func performVersionCheck(resultHandler: @escaping (F4SNetworkResult<F4SVersionValidity>)->Void) {
+        guard let versionCheckCoordinator = versionCheckCoordinator else { return }
         if !childCoordinators.contains(where: { (key, coordinating) -> Bool in
             coordinating.uuid == versionCheckCoordinator.uuid
         }) {
@@ -87,16 +154,17 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         switch result {
         case .error(_):
             self.presentNoNetworkMustRetry(retryOperation: { [weak self] in
-                self?.versionCheckCoordinator.start()
+                self?.versionCheckCoordinator?.start()
             })
         case .success(let isValid):
             guard isValid else { return }
             startOnboarding()
+            versionCheckCoordinator = nil
         }
     }
     
     func startOnboarding() {
-        let onboardingCoordinator = onboardingCoordinatorFactory(self, navigationRouter)
+        let onboardingCoordinator = onboardingCoordinatorFactory.makeOnboardingCoordinator(parent: self, navigationRouter: navigationRouter)
         self.onboardingCoordinator = onboardingCoordinator
         onboardingCoordinator.parentCoordinator = self
         onboardingCoordinator.delegate = self
@@ -126,7 +194,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         injected.userRepository.save(user: injected.user)
         logStartupInformation(userId: userUuid)
         injected.log.identity(userId: userUuid)
-        _ = F4SNetworkSessionManager.shared
         registrar.registerForRemoteNotifications()
         injected.userStatusService.beginStatusUpdate()
         databaseDownloadManager.start()
@@ -145,6 +212,8 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     }
     
     private func startTabBarCoordinator() {
+        tabBarCoordinator = makeTabBarCoordinator()
+        tabBarCoordinator.shouldAskOperatingSystemToAllowLocation = shouldAskOperatingSystemToAllowLocation
         addChildCoordinator(tabBarCoordinator)
         tabBarCoordinator.start()
         performVersionCheck { (result) in }
@@ -156,19 +225,30 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
             guard let strongSelf = self else { return }
             switch result {
             case .error(_):
-                globalLog.info("Couldn't register user, offering retry")
                 strongSelf.presentNoNetworkMustRetry(retryOperation: {
                     strongSelf.ensureDeviceIsRegistered(completion: completion)
                 })
             case .success(let result):
                 guard let anonymousUserUuid = result.uuid else {
                     let error = NSError(domain: "F4S", code: 1, userInfo: [NSLocalizedDescriptionKey: "No uuid returned when registering device"])
-                    f4sLog.notifyError(error, functionName: #function, fileName: #file, lineNumber: #line)
+                    strongSelf.log.error(error, functionName: #function, fileName: #file, lineNumber: #line)
                     fatalError("registering device failed to obtain uuid")
                 }
                 completion(anonymousUserUuid)
             }
         }
+    }
+    
+    func showSearch() { tabBarCoordinator.showSearch() }
+    
+    func showMessages() { tabBarCoordinator.showMessages() }
+
+    func showRecommendations() { tabBarCoordinator?.showRecommendations() }
+    
+    func updateBadges() { tabBarCoordinator.updateBadges() }
+    
+    func handleRemoteNotification(userInfo: [AnyHashable : Any]) {
+        userNotificationService.handleRemoteNotification(userInfo: userInfo)
     }
 }
 
@@ -215,8 +295,7 @@ extension AppCoordinator {
         Environment name = \(Config.environmentName)
         Installation UUID = \(injected.appInstallationUuidLogic.registeredInstallationUuid!)
         User UUID = \(userId)
-        Base api url = \(NetworkConfig.workfinderApi)
-        v2 api url = \(NetworkConfig.workfinderApiV2)
+        Base api url = \(Config.workfinderApiBase)
         ****************************************************************
         
         """
@@ -226,6 +305,6 @@ extension AppCoordinator {
 
 extension AppCoordinator : OnboardingCoordinatorDelegate {
     func shouldEnableLocation(_ enable: Bool) {
-        tabBarCoordinator.shouldAskOperatingSystemToAllowLocation = enable
+        shouldAskOperatingSystemToAllowLocation = enable
     }
 }

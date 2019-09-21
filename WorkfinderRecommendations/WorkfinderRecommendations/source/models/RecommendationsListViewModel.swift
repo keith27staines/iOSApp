@@ -125,7 +125,7 @@ public class RecommendationsViewModel : RecommendationsViewModelProtocol {
     let companyRepository: F4SCompanyRepositoryProtocol
     
     init(coordinator: RecommendationsCoordinator,
-         model: RecommendedCompaniesListModelProtocol = RecommendedCompaniesListModel(),
+         model: RecommendedCompaniesListModelProtocol,
          view: RecommendationsListViewProtocol,
          companyRepository: F4SCompanyRepositoryProtocol) {
         self.coordinator = coordinator

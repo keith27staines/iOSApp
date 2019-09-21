@@ -12,14 +12,40 @@ public class DocumentUploadCoordinator : CoreInjectionNavigationCoordinator {
     public var didFinish: ((DocumentUploadCoordinator)->Void)?
     
     let placementUuid: F4SUUID
+    let documentService: F4SPlacementDocumentsServiceProtocol
+    let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
     
-    public init(parent: Coordinating?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol, mode: UploadScenario, placementUuid: F4SUUID) {
+    public init(parent: Coordinating?,
+                navigationRouter: NavigationRoutingProtocol,
+                inject: CoreInjectionProtocol,
+                mode: UploadScenario,
+                placementUuid: F4SUUID,
+                documentService: F4SPlacementDocumentsServiceProtocol,
+                documentUploaderFactory: F4SDocumentUploaderFactoryProtocol) {
         self.placementUuid = placementUuid
+        self.documentService = documentService
         self.mode = mode
+        self.documentUploaderFactory = documentUploaderFactory
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     public override func start() {
         let addDocumentsController = UIStoryboard(name: "DocumentCapture", bundle: __bundle).instantiateInitialViewController() as! F4SAddDocumentsViewController
+        switch mode {
+        case .applyWorkflow:
+            addDocumentsController.documentModel = F4SDocumentUploadWhileApplyingModel(
+                delegate: addDocumentsController,
+                placementUuid: placementUuid,
+                documentService: documentService,
+                documents: [])
+        case .businessLeaderRequest(let requestModel):
+            let placementUuid = requestModel.placementUuid
+            let documents = requestModel.documents
+            addDocumentsController.documentModel = F4SDocumentUploadAtBLRequestModel(
+                delegate: addDocumentsController,
+                placementUuid: placementUuid,
+                documentService: documentService,
+                documents: documents)
+        }
         addDocumentsController.placementUuid = placementUuid
         addDocumentsController.uploadScenario = mode
         addDocumentsController.coordinator = self
@@ -69,7 +95,7 @@ public class DocumentUploadCoordinator : CoreInjectionNavigationCoordinator {
     }
     
     func postDocuments(documentModel: F4SDocumentUploadModelBase) {
-        let postDocumentsController = PostDocumentsWithDataViewController()
+        let postDocumentsController = PostDocumentsWithDataViewController(uploaderFactory: documentUploaderFactory)
         postDocumentsController.delegate = self
         postDocumentsController.documentModel = documentModel
         navigationRouter.push(viewController: postDocumentsController, animated: true)

@@ -13,7 +13,6 @@
 		FC93DBC4231F8C7F00F1CE23 /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DBC1231F8C7E00F1CE23 /* NavigationCoordinator.swift */; };
 		FC93DBC7231F8CFF00F1CE23 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DBC6231F8CFF00F1CE23 /* WorkfinderAppLogic.framework */; };
 		FC93DBC9231F8CFF00F1CE23 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DBC8231F8CFF00F1CE23 /* WorkfinderCommon.framework */; };
-		FC93DBCB231F8CFF00F1CE23 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DBCA231F8CFF00F1CE23 /* WorkfinderServices.framework */; };
 		FC93DBCD231F8CFF00F1CE23 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DBCC231F8CFF00F1CE23 /* WorkfinderUI.framework */; };
 		FC93DBD1231F8D7E00F1CE23 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DBCE231F8D7E00F1CE23 /* NavigationRouter.swift */; };
 		FC93DBD9231F94B600F1CE23 /* Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DBD8231F94B600F1CE23 /* Injection.swift */; };
@@ -54,7 +53,6 @@
 			files = (
 				FC93DBC7231F8CFF00F1CE23 /* WorkfinderAppLogic.framework in Frameworks */,
 				FC93DBC9231F8CFF00F1CE23 /* WorkfinderCommon.framework in Frameworks */,
-				FC93DBCB231F8CFF00F1CE23 /* WorkfinderServices.framework in Frameworks */,
 				FC93DBCD231F8CFF00F1CE23 /* WorkfinderUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

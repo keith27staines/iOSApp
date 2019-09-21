@@ -5,12 +5,12 @@ import WorkfinderCommon
 class F4SCompanyServiceTests: XCTestCase {
 
     func test_initialise() {
-        let sut = F4SCompanyService()
+        let sut = F4SCompanyService(configuration: makeTestConfiguration())
         XCTAssertEqual(sut.apiName, "company")
     }
     
     func test_getCompany() {
-        let sut = F4SCompanyService()
+        let sut = F4SCompanyService(configuration: makeTestConfiguration())
         let requiredValue = F4SCompanyJson()
         let requiredResult = F4SNetworkResult.success(requiredValue)
         sut.networkTaskfactory = MockF4SNetworkTaskFactory(requiredSuccessResult:

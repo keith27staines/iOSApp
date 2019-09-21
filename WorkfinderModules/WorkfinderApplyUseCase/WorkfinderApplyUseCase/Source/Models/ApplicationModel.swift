@@ -1,14 +1,6 @@
-//
-//  ApplicationModel.swift
-//  WorkfinderApplyUseCase
-//
-//  Created by Keith Dev on 29/03/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
 
 import Foundation
 import WorkfinderCommon
-import WorkfinderServices
 import WorkfinderAppLogic
 
 protocol ApplicationModelProtocol : class {
@@ -148,35 +140,6 @@ class ApplicationModel : ApplicationModelProtocol {
         applicationLetterViewModel.modelBusyState(applicationLetterModel, isBusy: true)
         placementService.update(uuid: uuid, with: patch) { [weak self] (result) in
             guard let strongSelf = self else { return }
-            strongSelf.handleResult(
-                result,
-                completion: completion,
-                onStepSuccess: strongSelf.associateVoucherWithPlacement,
-                onStepRetry: strongSelf.updatePlacementWithCoverLetterChoices)
-        }
-    }
-    
-    var voucherLogic: F4SVoucherLogic?
-    func associateVoucherWithPlacement(completion: @escaping ((Error?) -> Void)) {
-        guard let voucherCode = self.voucherCode else {
-            updatePlacementAsReviewed(completion: completion)
-            return
-        }
-        let placementUuid = (placementJson?.uuid)!
-        voucherLogic = F4SVoucherLogic(placement: placementUuid, code: voucherCode)
-        voucherLogic!.validateOnServer { [weak self] (codeValidationError) in
-            guard let strongSelf = self else { return }
-            var result: F4SNetworkResult<F4SPlacementJson> = F4SNetworkResult.success(strongSelf.placementJson!)
-            if let codeValidationError = codeValidationError {
-                switch codeValidationError {
-                case .networkError:
-                    let networkError = F4SNetworkError(localizedDescription: "network error", attempting: "associate voucher with placement", retry: true)
-                    result = F4SNetworkResult<F4SPlacementJson>.error(networkError)
-                default:
-                    let networkError = F4SNetworkError(localizedDescription: "Invalid code", attempting: "associate voucher with placement", retry: false)
-                    result = F4SNetworkResult<F4SPlacementJson>.error(networkError)
-                }
-            }
             strongSelf.handleResult(
                 result,
                 completion: completion,

@@ -1,11 +1,11 @@
+
 import Foundation
 import WorkfinderCommon
-import WorkfinderServices
 import WorkfinderAppLogic
 import WorkfinderUI
 import WorkfinderCoordinators
-import WorkfinderUserDetailsUseCase
 import WorkfinderDocumentUploadUseCase
+import WorkfinderUserDetailsUseCase
 
 let __bundle = Bundle(identifier: "com.f4s.WorkfinderApplyUseCase")!
 
@@ -21,14 +21,18 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         case search
         case none
     }
-    
+    let environment: EnvironmentType
     var applicationContext: F4SApplicationContext
     var createPlacementJson: F4SCreatePlacementJson?
     var placementService: F4SPlacementApplicationServiceProtocol
     var templateService: F4STemplateServiceProtocol
     var placementRepository: F4SPlacementRepositoryProtocol
     var interestsRepository: F4SInterestsRepositoryProtocol
+    let getAllPlacementsService: F4SGetAllPlacementsServiceProtocol
+    let emailVerificationModel: F4SEmailVerificationModelProtocol
     let startingViewController: UIViewController!
+    let documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol
+    let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
     weak var applyCoordinatorDelegate: ApplyCoordinatorDelegate?
     lazy var userInterests: [F4SInterest] = {
         return interestsRepository.loadUserInterests()
@@ -43,14 +47,20 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     }()
     
     public init(applyCoordinatorDelegate: ApplyCoordinatorDelegate? = nil,
-         company: Company,
-         parent: CoreInjectionNavigationCoordinator?,
-         navigationRouter: NavigationRoutingProtocol,
-         inject: CoreInjectionProtocol,
-         placementService: F4SPlacementApplicationServiceProtocol,
-         templateService: F4STemplateServiceProtocol,
-         placementRepository: F4SPlacementRepositoryProtocol,
-         interestsRepository: F4SInterestsRepositoryProtocol) {
+                company: Company,
+                parent: CoreInjectionNavigationCoordinator?,
+                navigationRouter: NavigationRoutingProtocol,
+                inject: CoreInjectionProtocol,
+                environment: EnvironmentType,
+                placementService: F4SPlacementApplicationServiceProtocol,
+                templateService: F4STemplateServiceProtocol,
+                placementRepository: F4SPlacementRepositoryProtocol,
+                interestsRepository: F4SInterestsRepositoryProtocol,
+                getAllPlacementsService: F4SGetAllPlacementsServiceProtocol,
+                emailVerificationModel: F4SEmailVerificationModelProtocol,
+                documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
+                documentUploaderFactory: F4SDocumentUploaderFactoryProtocol) {
+        self.environment = environment
         self.applyCoordinatorDelegate = applyCoordinatorDelegate
         self.applicationContext = F4SApplicationContext(user: F4SUser(), company: company, placement: nil)
         self.placementService = placementService
@@ -58,6 +68,10 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         self.startingViewController = navigationRouter.navigationController.topViewController
         self.placementRepository = placementRepository
         self.interestsRepository = interestsRepository
+        self.getAllPlacementsService = getAllPlacementsService
+        self.emailVerificationModel = emailVerificationModel
+        self.documentServiceFactory = documentServiceFactory
+        self.documentUploaderFactory = documentUploaderFactory
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
@@ -69,7 +83,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     var rootViewController: UIViewController?
     
     lazy var canApplyLogic: AllowedToApplyLogic = {
-        return AllowedToApplyLogic()
+        return AllowedToApplyLogic(service: self.getAllPlacementsService)
     }()
     
     func showApplicationLetterViewController() {
@@ -113,7 +127,12 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
     
     func showUserDetails() {
         
-        let userDetailsCoordinator = UserDetailsCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected)
+        let userDetailsCoordinator = UserDetailsCoordinator(
+            parent: self,
+            navigationRouter: navigationRouter,
+            inject: injected,
+            emailVerificationModel: emailVerificationModel,
+            environment: environment)
         
         userDetailsCoordinator.didFinish = { [weak self] coordinator in
             self?.userDetailsDidFinish()
@@ -188,7 +207,15 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
     
     func showAddDocuments() {
         let placementuuid = applicationContext.placement!.placementUuid!
-        let coordinator = DocumentUploadCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, mode: .applyWorkflow, placementUuid: placementuuid)
+        let documentService = documentServiceFactory.makePlacementDocumentsService(placementUuid: placementuuid)
+        let coordinator = DocumentUploadCoordinator(
+            parent: self,
+            navigationRouter: navigationRouter,
+            inject: injected,
+            mode: .applyWorkflow,
+            placementUuid: placementuuid,
+            documentService: documentService,
+            documentUploaderFactory: documentUploaderFactory)
         coordinator.didFinish = { [weak self] coordinator in
             guard let strongSelf = self else { return }
             strongSelf.navigationRouter.pop(animated: false)

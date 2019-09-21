@@ -1,6 +1,5 @@
 import UIKit
 import WorkfinderCommon
-import WorkfinderServices
 
 public class ContentViewController: UIViewController {
 
@@ -14,11 +13,7 @@ public class ContentViewController: UIViewController {
     var contentType: F4SContentType?
     var url: String?
     var dismissByPopping: Bool = false
-    
-    lazy var contentService: F4SContentServiceProtocol = {
-        let service = F4SContentService()
-        return service
-    }()
+    var contentService: F4SContentServiceProtocol!
 
     override public func viewDidLoad() {
         super.viewDidLoad()

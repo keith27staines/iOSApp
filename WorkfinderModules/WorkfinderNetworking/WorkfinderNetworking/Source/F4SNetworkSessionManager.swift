@@ -1,12 +1,6 @@
 import Foundation
 import WorkfinderCommon
 
-public protocol F4SNetworkSessionManagerProtocol {
-    /// `interactiveSession` is designed for services that connect to Workfinder
-    /// which includes majority of services used in the app
-    var interactiveSession: URLSession { get }
-}
-
 /// `F4SNetworkSessionManager` manages almost all network sessions for the app.
 /// Only three services are currently not directed through these sessions. They
 /// use the now deprecated `WEXSessionManager` which was introduced only to
@@ -20,9 +14,6 @@ public class F4SNetworkSessionManager: F4SNetworkSessionManagerProtocol {
     
     /// The api key used in all Workfinder services
     public let wexApiKey: String
-    
-    /// A singleton that manages all sessions
-    public static var shared: F4SNetworkSessionManager!
     
     /// `interactiveSession` is designed for services that connect to Workfinder
     /// which includes majority of services used in the app
@@ -42,7 +33,7 @@ public class F4SNetworkSessionManager: F4SNetworkSessionManagerProtocol {
     }
     
     /// Creates a new instance and configures it with the specified api key
-    public init(wexApiKey: String = NetworkConfig.wexApiKey) {
+    public init(wexApiKey: String) {
         self.wexApiKey = wexApiKey
     }
     

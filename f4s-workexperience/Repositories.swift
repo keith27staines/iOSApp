@@ -1,7 +1,7 @@
 import Foundation
 import WorkfinderCommon
 
-public class F4SPlacementRespository : F4SPlacementRepositoryProtocol {
+public class F4SPlacementRepository : F4SPlacementRepositoryProtocol {
     
     public func save(placement: F4SPlacement) {
         PlacementDBOperations.sharedInstance.savePlacement(placement: placement)
@@ -15,7 +15,7 @@ public class F4SPlacementRespository : F4SPlacementRepositoryProtocol {
 
 public class F4SFavouritesRepository: F4SFavouritesRepositoryProtocol {
     public func loadFavourites() -> [Shortlist] {
-        return ShortlistDBOperations.sharedInstance.getShortlistForCurrentUser()
+        return ShortlistDBOperations.sharedInstance.getShortlist()
     }
     
     public func removeFavourite(uuid: F4SUUID) {

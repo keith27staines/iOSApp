@@ -1,26 +1,17 @@
 import Foundation
 import WorkfinderCommon
-import WorkfinderNetworking
 
-public protocol F4SMessageServiceProtocol {
-    var apiName: String { get }
-    var threadUuid: String { get }
-    func getMessages(completion: @escaping (F4SNetworkResult<F4SMessagesList>) -> ())
-    func sendMessage(responseUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SMessagesList>) -> Void)
-}
-
-public class F4SMessageService : F4SDataTaskService {
+public class F4SMessageService : F4SDataTaskService, F4SMessageServiceProtocol {
     
     public let threadUuid: String
     
-    public init(threadUuid: F4SUUID) {
+    public init(threadUuid: F4SUUID, configuration: NetworkConfig) {
         self.threadUuid = threadUuid
         let apiName = "messaging/\(threadUuid)"
-        super.init(baseURLString: NetworkConfig.workfinderApiV2, apiName: apiName)
+        super.init(baseURLString: configuration.workfinderApiV2,
+                   apiName: apiName,
+                   configuration: configuration)
     }
-}
-
-extension F4SMessageService : F4SMessageServiceProtocol {
     
     public func getMessages(completion: @escaping (F4SNetworkResult<F4SMessagesList>) -> ()) {
         beginGetRequest(attempting: "Get messages for thread", completion: completion)

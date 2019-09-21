@@ -1,39 +1,30 @@
-//
-//  F4SMessagesModel.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 30/05/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
-//
 
 import Foundation
 import WorkfinderCommon
-import WorkfinderServices
 
 public typealias F4SMessagesModelResult = F4SNetworkResult<F4SMessagesModel>
 
 public class F4SMessageModelBuilder {
     
-    private let threadUuid: F4SUUID
+    let threadUuid: F4SUUID
     
-    private lazy var messageService = {
-        return F4SMessageService(threadUuid: threadUuid)
-    }()
+    let messageService: F4SMessageServiceProtocol
+    let messageActionService: F4SMessageActionServiceProtocol
+    let messageCannedResponseService: F4SCannedMessageResponsesServiceProtocol
     
-    private lazy var messageActionService = {
-        return F4SMessageActionService(threadUuid: threadUuid)
-    }()
-    
-    private lazy var messageCannedResponseService = {
-        return F4SCannedMessageResponsesService(threadUuid: threadUuid)
-    }()
-    
-    public init(threadUuid: F4SUUID) {
+    public init(threadUuid: F4SUUID,
+                messageService: F4SMessageServiceProtocol,
+                messageActionService: F4SMessageActionServiceProtocol,
+                messageCannedResponseService: F4SCannedMessageResponsesServiceProtocol) {
         self.threadUuid = threadUuid
+        self.messageService = messageService
+        self.messageActionService = messageActionService
+        self.messageCannedResponseService = messageCannedResponseService
     }
     
+    var messagesModel: F4SMessagesModel!
     public func build(threadUuid: F4SUUID, completion: @escaping (F4SMessagesModelResult) -> Void) {
-        let messagesModel = F4SMessagesModel(threadUuid: threadUuid)
+        messagesModel = F4SMessagesModel(threadUuid: threadUuid)
         let result = F4SMessagesModelResult.success(messagesModel)
         addMessages(threadUuid: threadUuid, messagesResult: result) { [weak self] (result) in
             guard let strongSelf = self else { return }

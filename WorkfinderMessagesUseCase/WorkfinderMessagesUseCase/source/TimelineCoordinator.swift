@@ -1,13 +1,7 @@
-//
-//  TimelineCoordinator.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 02/03/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderAppLogic
 import WorkfinderCoordinators
 import WorkfinderAcceptUseCase
 import WorkfinderDocumentUploadUseCase
@@ -19,12 +13,57 @@ public class TimelineCoordinator : CoreInjectionNavigationCoordinator, CompanyCo
     var company: Company?
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     let companyRepository: F4SCompanyRepositoryProtocol
+    let messageServiceFactory: F4SMessageServiceFactoryProtocol
+    let messageActionServiceFactory: F4SMessageActionServiceFactoryProtocol
+    let messageCannedResponsesServiceFactory: F4SCannedMessageResponsesServiceFactoryProtocol
+    let offerProcessingService: F4SOfferProcessingServiceProtocol
+    let companyDocumentsService: F4SCompanyDocumentServiceProtocol
+    let placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol
+    let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
+    let placementService: F4SPlacementServiceProtocol
+    let companyService: F4SCompanyServiceProtocol
+    let roleService: F4SRoleServiceProtocol
+    
     weak var tabBarCoordinator: TabBarCoordinatorProtocol?
     
     lazy var rootViewController: TimelineViewController = {
         let storyboard = UIStoryboard(name: "TimelineView", bundle: __bundle)
-        return storyboard.instantiateViewController(withIdentifier: "timelineViewCtrl") as! TimelineViewController
+        let controller = storyboard.instantiateViewController(withIdentifier: "timelineViewCtrl") as! TimelineViewController
+        controller.userStatusService = self.injected.userStatusService
+        controller.placementService = self.placementService
+        return controller
     }()
+    
+    public init(parent: TabBarCoordinatorProtocol?,
+                navigationRouter: NavigationRoutingProtocol,
+                inject: CoreInjectionProtocol,
+                messageServiceFactory: F4SMessageServiceFactoryProtocol,
+                messageActionServiceFactory: F4SMessageActionServiceFactoryProtocol,
+                messageCannedResponsesServiceFactory: F4SCannedMessageResponsesServiceFactoryProtocol,
+                offerProcessingService: F4SOfferProcessingServiceProtocol,
+                companyDocumentsService: F4SCompanyDocumentServiceProtocol,
+                placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
+                documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
+                companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
+                companyRepository: F4SCompanyRepositoryProtocol,
+                placementService: F4SPlacementServiceProtocol,
+                companyService: F4SCompanyServiceProtocol,
+                roleService: F4SRoleServiceProtocol) {
+        self.messageServiceFactory = messageServiceFactory
+        self.messageActionServiceFactory = messageActionServiceFactory
+        self.messageCannedResponsesServiceFactory = messageCannedResponsesServiceFactory
+        self.offerProcessingService = offerProcessingService
+        self.companyDocumentsService = companyDocumentsService
+        self.placementDocumentsServiceFactory = placementDocumentsServiceFactory
+        self.documentUploaderFactory = documentUploaderFactory
+        self.companyCoordinatorFactory = companyCoordinatorFactory
+        self.companyRepository = companyRepository
+        self.placementService = placementService
+        self.companyService = companyService
+        self.roleService = roleService
+        self.tabBarCoordinator = parent
+        super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
+    }
     
     public override func start() {
         rootViewController.coordinator = self
@@ -53,12 +92,36 @@ public class TimelineCoordinator : CoreInjectionNavigationCoordinator, CompanyCo
         messageController.companies = companies
         messageController.placements = placements
         messageController.coordinator = self
+        messageController.offerProcessor = offerProcessingService
+        messageController.companyService = companyService
+        messageController.roleService = roleService
+        messageController.messageServiceFactory = messageServiceFactory
         parentCtrl.navigationController?.pushViewController(messageController, animated: true)
+    }
+    
+    func makeMessageModelBuilder(threadUuid: F4SUUID) -> F4SMessageModelBuilder {
+        let messageService = messageServiceFactory.makeMessageService(threadUuid: threadUuid)
+        let actionService = messageActionServiceFactory.makeMessageActionService(threadUuid: threadUuid)
+        let cannedService = messageCannedResponsesServiceFactory.makeCannedMessageResponsesService(threadUuid: threadUuid)
+        return F4SMessageModelBuilder(threadUuid: threadUuid,
+                                      messageService: messageService,
+                                      messageActionService: actionService,
+                                      messageCannedResponseService: cannedService)
     }
     
     func showAcceptOffer(acceptContext: AcceptOfferContext?) {
         guard let acceptContext = acceptContext else { return }
-        let acceptCoordinator = AcceptOfferCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, acceptContext: acceptContext, companyCoordinatorFactory: companyCoordinatorFactory)
+        let companyUuid = acceptContext.company.uuid
+        let documentsModel = F4SCompanyDocumentsModel(companyUuid: companyUuid,
+                                                      documentsService: companyDocumentsService)
+        let acceptCoordinator = AcceptOfferCoordinator(
+            parent: self,
+            navigationRouter: navigationRouter,
+            inject: injected,
+            acceptContext: acceptContext,
+            companyCoordinatorFactory: companyCoordinatorFactory,
+            offerProcessor: offerProcessingService,
+            companyDocumentsModel: documentsModel)
         addChildCoordinator(acceptCoordinator)
         acceptCoordinator.start()
     }
@@ -70,7 +133,15 @@ public class TimelineCoordinator : CoreInjectionNavigationCoordinator, CompanyCo
             let company = company,
             let requestModel = F4SBusinessLeadersRequestModel(action: action, placement: placement, company: company) else { return }
         let mode = UploadScenario.businessLeaderRequest(requestModel)
-        let coordinator = DocumentUploadCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, mode: mode, placementUuid: placementUuid)
+        let placementDocumentsService = placementDocumentsServiceFactory.makePlacementDocumentsService(placementUuid: placementUuid)
+        let coordinator = DocumentUploadCoordinator(
+            parent: self,
+            navigationRouter: navigationRouter,
+            inject: injected,
+            mode: mode,
+            placementUuid: placementUuid,
+            documentService: placementDocumentsService,
+            documentUploaderFactory: documentUploaderFactory)
         coordinator.didFinish = { [weak self] _ in
             guard let strongSelf = self else { return }
             strongSelf.navigationRouter.popToViewController(strongSelf.rootViewController, animated: true)
@@ -94,17 +165,6 @@ public class TimelineCoordinator : CoreInjectionNavigationCoordinator, CompanyCo
             event.addProperty(name: "company_name", value: acceptContext.company.companyName)
             event.track()
         }
-    }
-    
-    public init(parent: TabBarCoordinatorProtocol?,
-                navigationRouter: NavigationRoutingProtocol,
-                inject: CoreInjectionProtocol,
-                companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
-                companyRepository: F4SCompanyRepositoryProtocol) {
-        self.tabBarCoordinator = parent
-        self.companyCoordinatorFactory = companyCoordinatorFactory
-        self.companyRepository = companyRepository
-        super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
     public func updateUnreadCount(_ count: Int) {

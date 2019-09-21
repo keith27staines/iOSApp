@@ -1,4 +1,5 @@
 import XCTest
+import WorkfinderCommon
 @testable import WorkfinderNetworking
 
 class F4SHttpRequestVerbTests: XCTestCase {

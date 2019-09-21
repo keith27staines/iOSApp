@@ -1,10 +1,3 @@
-//
-//  Skin.swift
-//  Skins
-//
-//  Created by Keith Dev on 10/08/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
-//
 
 import UIKit
 

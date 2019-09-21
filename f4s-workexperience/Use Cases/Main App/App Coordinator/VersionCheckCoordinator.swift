@@ -9,7 +9,7 @@
 import WorkfinderCommon
 import WorkfinderCoordinators
 
-protocol VersionChecking {
+protocol VersionChecking : class {
     var versionCheckCompletion: ((F4SNetworkResult<F4SVersionValidity>) -> Void)? { get set }
 }
 
@@ -42,7 +42,8 @@ class VersionCheckCoordinator: NavigationCoordinator, VersionChecking {
     /// `versionCheckCompletion` callback returns a positive result or an error
     /// but should not be called again if the callback returns a negative result
     override func start() {
-        versionCheckService?.getIsVersionValid(completion: { (result) in
+        let version = WorkfinderVersionReporter().releaseVersionNumber ?? "unknown"
+        versionCheckService?.getIsVersionValid(version: version, completion: { (result) in
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else { return }
                 switch result {

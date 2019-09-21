@@ -13,7 +13,7 @@ open class CoreInjectionNavigationCoordinator : NavigationCoordinator {
     }
     
     public func presentContent(_ contentType: F4SContentType) {
-        let contentViewController = WorkfinderUI().makeWebContentViewController(contentType: contentType, dismissByPopping: true)
+        let contentViewController = WorkfinderUI().makeWebContentViewController(contentType: contentType, dismissByPopping: true, contentService: injected.contentService)
         navigationRouter.navigationController.pushViewController(contentViewController, animated: true)
     }
 }

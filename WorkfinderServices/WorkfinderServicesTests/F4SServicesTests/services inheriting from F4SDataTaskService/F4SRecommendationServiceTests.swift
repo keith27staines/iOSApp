@@ -1,17 +1,16 @@
 import XCTest
 import WorkfinderCommon
-import WorkfinderNetworking
 @testable import WorkfinderServices
 
 class F4SRecommendationServiceTests : XCTestCase {
     
     func test_initialise() {
-        let sut = F4SRecommendationService()
+        let sut = F4SRecommendationService(configuration: makeTestConfiguration())
         XCTAssertEqual(sut.apiName, "recommend")
     }
     
     func test_fetch() {
-        let sut = F4SRecommendationService()
+        let sut = F4SRecommendationService(configuration: makeTestConfiguration())
         let expectedRecommendation = F4SRecommendation(companyUUID: "companyUuid", sortIndex: 0)
         let requiredResult = F4SNetworkResult.success([expectedRecommendation])
         sut.networkTaskfactory = MockF4SNetworkTaskFactory(requiredSuccessResult: requiredResult)

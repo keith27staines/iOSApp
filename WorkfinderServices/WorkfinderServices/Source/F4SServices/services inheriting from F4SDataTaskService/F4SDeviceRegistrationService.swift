@@ -1,16 +1,13 @@
 import Foundation
 import WorkfinderCommon
-import WorkfinderNetworking
 
-public protocol F4SDeviceRegistrationServiceProtocol {
-    func registerDeviceWithServer(installationUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRegisterDeviceResult>) -> ())
-}
-
-public class F4SDeviceRegistrationService : F4SDataTaskService {
+public class F4SDeviceRegistrationService : F4SDataTaskService, F4SDeviceRegistrationServiceProtocol {
     
-    public init() {
+    public init(configuration: NetworkConfig) {
         let apiName = "register"
-        super.init(baseURLString: WorkfinderEndpoint.baseUrl2, apiName: apiName)
+        super.init(baseURLString: configuration.endpoints.baseUrl2,
+                   apiName: apiName,
+                   configuration: configuration)
     }
     
     public func registerDevice(anonymousUser: F4SAnonymousUser, completion: @escaping ((F4SNetworkResult<F4SRegisterDeviceResult>) -> ())) {

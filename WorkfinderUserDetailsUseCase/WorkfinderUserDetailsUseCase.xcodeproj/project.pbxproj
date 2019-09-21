@@ -11,11 +11,9 @@
 		FC4066E423277668002B425E /* MagicLinkInterpreterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066E223277668002B425E /* MagicLinkInterpreterTests.swift */; };
 		FC93DBFB231FB92D00F1CE23 /* WorkfinderUserDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DBF1231FB92D00F1CE23 /* WorkfinderUserDetailsUseCase.framework */; };
 		FC93DC02231FB92D00F1CE23 /* WorkfinderUserDetailsUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = FC93DBF4231FB92D00F1CE23 /* WorkfinderUserDetailsUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FC93DC19231FB9C200F1CE23 /* WorkfinderUserDetailsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC18231FB9C200F1CE23 /* WorkfinderUserDetailsUseCase.swift */; };
 		FC93DC1E231FBA4400F1CE23 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DC1D231FBA4400F1CE23 /* WorkfinderAppLogic.framework */; };
 		FC93DC20231FBA4400F1CE23 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DC1F231FBA4400F1CE23 /* WorkfinderCommon.framework */; };
 		FC93DC22231FBA4400F1CE23 /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DC21231FBA4400F1CE23 /* WorkfinderCoordinators.framework */; };
-		FC93DC24231FBA4400F1CE23 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DC23231FBA4400F1CE23 /* WorkfinderServices.framework */; };
 		FC93DC26231FBA4400F1CE23 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DC25231FBA4400F1CE23 /* WorkfinderUI.framework */; };
 		FC93DC3123200B2700F1CE23 /* InformationLabelStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC2C23200B2600F1CE23 /* InformationLabelStrings.swift */; };
 		FC93DC3223200B2700F1CE23 /* PushNotificationAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC3023200B2700F1CE23 /* PushNotificationAuthorization.swift */; };
@@ -28,9 +26,9 @@
 		FC93DC3C23200CA200F1CE23 /* String+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC3B23200CA200F1CE23 /* String+extensions.swift */; };
 		FC93DC4523201D9000F1CE23 /* F4SEmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC4423201D9000F1CE23 /* F4SEmailVerificationViewController.swift */; };
 		FC93DC4D23201F6900F1CE23 /* F4SEmailVerificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC4B23201F6900F1CE23 /* F4SEmailVerificationModel.swift */; };
-		FC93DC4E23201F6900F1CE23 /* F4SEmailVerificationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC4923201F6800F1CE23 /* F4SEmailVerificationState.swift */; };
+		FC93DC4E23201F6900F1CE23 /* F4SEmailVerificationState+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC4923201F6800F1CE23 /* F4SEmailVerificationState+extensions.swift */; };
 		FC93DC4F23201F6900F1CE23 /* LocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC4A23201F6800F1CE23 /* LocalizedStrings.swift */; };
-		FC93DC5023201F6900F1CE23 /* F4SEmailVerificationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC4C23201F6900F1CE23 /* F4SEmailVerificationError.swift */; };
+		FC93DC5023201F6900F1CE23 /* F4SEmailVerificationError+etensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC4C23201F6900F1CE23 /* F4SEmailVerificationError+etensions.swift */; };
 		FC93DC52232020A600F1CE23 /* F4SAuth0MagicLinkInterpreterer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC51232020A500F1CE23 /* F4SAuth0MagicLinkInterpreterer.swift */; };
 		FC93DC5B2320357B00F1CE23 /* UserDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC93DC4723201DD100F1CE23 /* UserDetails.storyboard */; };
 		FC93DC5C2320358100F1CE23 /* F4SEmailVerification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC93DC4323201D4E00F1CE23 /* F4SEmailVerification.storyboard */; };
@@ -55,7 +53,6 @@
 		FC93DBF5231FB92D00F1CE23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC93DBFA231FB92D00F1CE23 /* WorkfinderUserDetailsUseCaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderUserDetailsUseCaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC93DC01231FB92D00F1CE23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FC93DC18231FB9C200F1CE23 /* WorkfinderUserDetailsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderUserDetailsUseCase.swift; sourceTree = "<group>"; };
 		FC93DC1B231FBA4400F1CE23 /* WorkfinderAcceptUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAcceptUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC93DC1D231FBA4400F1CE23 /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC93DC1F231FBA4400F1CE23 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,10 +71,10 @@
 		FC93DC4323201D4E00F1CE23 /* F4SEmailVerification.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SEmailVerification.storyboard; sourceTree = "<group>"; };
 		FC93DC4423201D9000F1CE23 /* F4SEmailVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SEmailVerificationViewController.swift; sourceTree = "<group>"; };
 		FC93DC4723201DD100F1CE23 /* UserDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserDetails.storyboard; sourceTree = "<group>"; };
-		FC93DC4923201F6800F1CE23 /* F4SEmailVerificationState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SEmailVerificationState.swift; sourceTree = "<group>"; };
+		FC93DC4923201F6800F1CE23 /* F4SEmailVerificationState+extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "F4SEmailVerificationState+extensions.swift"; sourceTree = "<group>"; };
 		FC93DC4A23201F6800F1CE23 /* LocalizedStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedStrings.swift; sourceTree = "<group>"; };
 		FC93DC4B23201F6900F1CE23 /* F4SEmailVerificationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SEmailVerificationModel.swift; sourceTree = "<group>"; };
-		FC93DC4C23201F6900F1CE23 /* F4SEmailVerificationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SEmailVerificationError.swift; sourceTree = "<group>"; };
+		FC93DC4C23201F6900F1CE23 /* F4SEmailVerificationError+etensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "F4SEmailVerificationError+etensions.swift"; sourceTree = "<group>"; };
 		FC93DC51232020A500F1CE23 /* F4SAuth0MagicLinkInterpreterer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SAuth0MagicLinkInterpreterer.swift; sourceTree = "<group>"; };
 		FCE8DA8D2320DB5300934E2F /* UserDetails.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = UserDetails.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,7 +87,6 @@
 				FC93DC1E231FBA4400F1CE23 /* WorkfinderAppLogic.framework in Frameworks */,
 				FC93DC20231FBA4400F1CE23 /* WorkfinderCommon.framework in Frameworks */,
 				FC93DC22231FBA4400F1CE23 /* WorkfinderCoordinators.framework in Frameworks */,
-				FC93DC24231FBA4400F1CE23 /* WorkfinderServices.framework in Frameworks */,
 				FC93DC26231FBA4400F1CE23 /* WorkfinderUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -149,7 +145,6 @@
 		FC93DC17231FB9A500F1CE23 /* source */ = {
 			isa = PBXGroup;
 			children = (
-				FC93DC18231FB9C200F1CE23 /* WorkfinderUserDetailsUseCase.swift */,
 				FC93DC4823201E1600F1CE23 /* UserDetails */,
 				FC93DC3023200B2700F1CE23 /* PushNotificationAuthorization.swift */,
 				FC93DC3B23200CA200F1CE23 /* String+extensions.swift */,
@@ -178,9 +173,9 @@
 				FC93DC51232020A500F1CE23 /* F4SAuth0MagicLinkInterpreterer.swift */,
 				FC93DC4423201D9000F1CE23 /* F4SEmailVerificationViewController.swift */,
 				FC93DC4A23201F6800F1CE23 /* LocalizedStrings.swift */,
-				FC93DC4923201F6800F1CE23 /* F4SEmailVerificationState.swift */,
+				FC93DC4923201F6800F1CE23 /* F4SEmailVerificationState+extensions.swift */,
 				FC93DC4B23201F6900F1CE23 /* F4SEmailVerificationModel.swift */,
-				FC93DC4C23201F6900F1CE23 /* F4SEmailVerificationError.swift */,
+				FC93DC4C23201F6900F1CE23 /* F4SEmailVerificationError+etensions.swift */,
 			);
 			path = "Email verification";
 			sourceTree = "<group>";
@@ -317,7 +312,7 @@
 				FC93DC4523201D9000F1CE23 /* F4SEmailVerificationViewController.swift in Sources */,
 				FC93DC3223200B2700F1CE23 /* PushNotificationAuthorization.swift in Sources */,
 				FC93DC3823200B2700F1CE23 /* DateOfBirthPickerViewModel.swift in Sources */,
-				FC93DC5023201F6900F1CE23 /* F4SEmailVerificationError.swift in Sources */,
+				FC93DC5023201F6900F1CE23 /* F4SEmailVerificationError+etensions.swift in Sources */,
 				FC93DC4F23201F6900F1CE23 /* LocalizedStrings.swift in Sources */,
 				FC93DC3523200B2700F1CE23 /* UserDetailsCoordinator.swift in Sources */,
 				FC93DC3C23200CA200F1CE23 /* String+extensions.swift in Sources */,
@@ -326,8 +321,7 @@
 				FC93DC3623200B2700F1CE23 /* UserDetailsViewModel.swift in Sources */,
 				FC93DC3123200B2700F1CE23 /* InformationLabelStrings.swift in Sources */,
 				FC93DC3723200B2700F1CE23 /* UserDetailsViewController.swift in Sources */,
-				FC93DC19231FB9C200F1CE23 /* WorkfinderUserDetailsUseCase.swift in Sources */,
-				FC93DC4E23201F6900F1CE23 /* F4SEmailVerificationState.swift in Sources */,
+				FC93DC4E23201F6900F1CE23 /* F4SEmailVerificationState+extensions.swift in Sources */,
 				FC93DC4D23201F6900F1CE23 /* F4SEmailVerificationModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

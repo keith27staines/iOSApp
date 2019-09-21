@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		FC0B6B332323CDC800A1867D /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0B6B322323CDC800A1867D /* WorkfinderCoordinators.framework */; };
-		FC0B6B352323CDC800A1867D /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0B6B342323CDC800A1867D /* WorkfinderNetworking.framework */; };
 		FC0E5CF9224E19BF00615B4F /* ApplicationLetterTemplateBlanksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E5CF8224E19BF00615B4F /* ApplicationLetterTemplateBlanksModel.swift */; };
 		FC0E5CFD224E62E400615B4F /* ApplicationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E5CFC224E62E400615B4F /* ApplicationModel.swift */; };
 		FC1EBEBD2248E0A500416D70 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */; };
@@ -43,7 +42,6 @@
 		FC7A4394224A3AB200B2D693 /* F4SGrammarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4393224A3AB100B2D693 /* F4SGrammarTests.swift */; };
 		FC7A4398224A497800B2D693 /* ApplicationLetterTemplateBlanksCleanser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4397224A497800B2D693 /* ApplicationLetterTemplateBlanksCleanser.swift */; };
 		FC7C219523215E9300721D1D /* ApplyCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7C219423215E9200721D1D /* ApplyCoordinatorTests.swift */; };
-		FC85D9F022F204140035C724 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC85D9EF22F204140035C724 /* WorkfinderServices.framework */; };
 		FC85D9F222F205610035C724 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC85D9F122F205610035C724 /* WorkfinderAppLogic.framework */; };
 		FC9626372248C1A900D5F850 /* ApplicationLetterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626312248C1A900D5F850 /* ApplicationLetterModel.swift */; };
 		FC9626392248C1A900D5F850 /* EditApplicationLetterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626332248C1A900D5F850 /* EditApplicationLetterButton.swift */; };
@@ -166,11 +164,9 @@
 			files = (
 				FC4066FB23277C16002B425E /* WorkfinderDocumentUploadUseCase.framework in Frameworks */,
 				FC0B6B332323CDC800A1867D /* WorkfinderCoordinators.framework in Frameworks */,
-				FC0B6B352323CDC800A1867D /* WorkfinderNetworking.framework in Frameworks */,
 				FCE8DA9C2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework in Frameworks */,
 				FC22DBFB22F97F330068C61C /* WorkfinderUI.framework in Frameworks */,
 				FC85D9F222F205610035C724 /* WorkfinderAppLogic.framework in Frameworks */,
-				FC85D9F022F204140035C724 /* WorkfinderServices.framework in Frameworks */,
 				FCE5190C2249388200B550C9 /* Mustache.framework in Frameworks */,
 				FC1EBEBD2248E0A500416D70 /* WorkfinderCommon.framework in Frameworks */,
 			);

@@ -133,8 +133,7 @@ class LocationHelper {
         let geoCoder = CLGeocoder()
         geoCoder.reverseGeocodeLocation(location, completionHandler: { placemarks, error in
             if let err = error {
-                globalLog.debug("Error Reverse Geocoding Location: \(err.localizedDescription)")
-                completion(nil, error as NSError?)
+                completion(nil, err as NSError?)
                 return
             }
             completion(placemarks?[0], nil)

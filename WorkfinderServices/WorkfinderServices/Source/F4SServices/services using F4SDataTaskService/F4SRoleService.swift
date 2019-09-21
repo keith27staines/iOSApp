@@ -1,22 +1,23 @@
 import Foundation
 import WorkfinderCommon
-import WorkfinderNetworking
 
-public class F4SRoleService {
+public class F4SRoleService: F4SRoleServiceProtocol {
     
     private var dataTask: F4SNetworkTask?
     
-    var networkTaskFactory: F4SNetworkTaskFactoryProtocol = F4SNetworkTaskFactory()
-    var sessionManager: F4SNetworkSessionManagerProtocol
-    var session: F4SNetworkSession { return sessionManager.interactiveSession}
+    var networkTaskFactory: F4SNetworkTaskFactoryProtocol
+    var session: F4SNetworkSession
+    let configuration: NetworkConfig
     
-    public init(sessionManager: F4SNetworkSessionManagerProtocol = F4SNetworkSessionManager.shared) {
-        self.sessionManager = sessionManager
+    public init(configuration: NetworkConfig) {
+        self.configuration = configuration
+        self.session = configuration.sessionManager.interactiveSession
+        self.networkTaskFactory = F4SNetworkTaskFactory(configuration: configuration)
     }
     
     public func getRoleForCompany(companyUuid: F4SUUID, roleUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRoleJson>) -> ()) {
         let attempting = "Get role"
-        var url = URL(string: WorkfinderEndpoint.roleUrl)!
+        var url = URL(string: configuration.endpoints.roleUrl)!
         url.appendPathComponent(companyUuid)
         url.appendPathComponent("roles")
         url.appendPathComponent(roleUuid)

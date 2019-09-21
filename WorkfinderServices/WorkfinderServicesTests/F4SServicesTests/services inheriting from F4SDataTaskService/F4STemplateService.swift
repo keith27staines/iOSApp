@@ -2,15 +2,18 @@ import XCTest
 import WorkfinderCommon
 @testable import WorkfinderServices
 
+
+
+
 class F4STemplateServiceTests: XCTestCase {
     
     func test_initialise() {
-        let sut = F4STemplateService()
+        let sut = F4STemplateService(configuration: makeTestConfiguration())
         XCTAssertEqual(sut.apiName, "cover-template")
     }
     
     func test_getTemplate() {
-        let sut = F4STemplateService()
+        let sut = F4STemplateService(configuration: makeTestConfiguration())
         let requiredValue = [F4STemplate(uuid: "uuid", template: "template", blanks: [])]
         let requiredResult = F4SNetworkResult.success(requiredValue)
         let expectation  = XCTestExpectation(description: "")
@@ -27,5 +30,4 @@ class F4STemplateServiceTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 1)
     }
-    
 }

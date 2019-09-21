@@ -1,80 +1,45 @@
-//
-//  EmailVerificationService.swift
-//  WorkfinderNetworking
-//
-//  Created by Keith Dev on 07/06/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
-
 import Foundation
 import WorkfinderCommon
-import WorkfinderNetworking
 
-public typealias URLDataTaskCompletion = ((Data?, URLResponse?, Error?) -> Void)
+typealias URLDataTaskCompletion = ((Data?, URLResponse?, Error?) -> Void)
 
-public class EmailVerificationService {
+public class EmailVerificationService : EmailVerificationServiceProtocol {
     
-    public let email: String
-    
+    let configuration: NetworkConfig
     let startUrlString = "https://founders4schools.eu.auth0.com/passwordless/start"
     let verifyUrlString = "https://founders4schools.eu.auth0.com/oauth/ro"
-    let startClientId: String
     var task: F4SNetworkTask?
     var taskfactory: ((URLRequest, @escaping URLDataTaskCompletion) -> F4SNetworkTask) = { request, result in
         return URLSession.shared.dataTask(with: request, completionHandler: result)
     }
     
-    public init(email: String, clientId: String) {
-        self.email = email
-        self.startClientId = clientId
-    }
-    
-    public enum EmailSubmissionError : Error {
-        case client
-        case cientsideEmailFormatCheckFailed
-        case serversideEmailFormatCheckFailed
-        case networkError(Int)
-        
-        static func emailSubmissionError(from httpStatusCode: Int) -> EmailSubmissionError? {
-            guard httpStatusCode != 200 else { return nil }
-            switch httpStatusCode {
-            case 400: return EmailSubmissionError.serversideEmailFormatCheckFailed
-            default: return networkError(httpStatusCode)
-            }
-        }
-    }
-    
-    public enum CodeValidationError : Error {
-        case client
-        case codeEmailCombinationNotValid
-        case emailNotTheSame
-        case networkError(Int)
-        
-        static func codeValidationError(from httpStatusCode: Int) -> CodeValidationError? {
-            guard httpStatusCode != 200 else { return nil }
-            switch httpStatusCode {
-            case 401: return CodeValidationError.codeEmailCombinationNotValid
-            default: return CodeValidationError.networkError(httpStatusCode)
-            }
-        }
+    public init(configuration: NetworkConfig) {
+        self.configuration = configuration
     }
     
     public func cancel() {
         task?.cancel()
     }
     
-    public func start(onSuccess: @escaping (_ email:String) -> Void, onFailure: @escaping (_ email:String, _ error:EmailSubmissionError) -> Void) {
-        let email = self.email
-        let payload = StartPayload(email: email, client_id: startClientId)
+    public func start(email: String,
+                      clientId: String,
+                      onSuccess: @escaping (_ email:String) -> Void,
+                      onFailure: @escaping (_ email:String, _ clientId:String, _ error:EmailSubmissionError) -> Void) {
+        
+        let payload = StartPayload(email: email, client_id: clientId)
         let payloadData = try! JSONEncoder().encode(payload)
         let request = prepareRequest(urlString: startUrlString, method: "POST", bodyData: payloadData)
         let taskCompletion: URLDataTaskCompletion = { (data, response, error) in
             DispatchQueue.main.async { [ weak self] in
-                self?.logResult(attempting: "Start email verification", request: request, data: data, response: response, error: error)
-                if let _ = error { onFailure(email, EmailSubmissionError.client) ; return }
+                self?.logResult(attempting: "Start email verification",
+                                request: request,
+                                data: data,
+                                response: response,
+                                error: error)
+                if let _ = error { onFailure(email, clientId, EmailSubmissionError.client) ; return }
                 let statusCode = (response as! HTTPURLResponse).statusCode
                 let submissionError = EmailSubmissionError.emailSubmissionError(from: statusCode)
-                guard submissionError == nil else {onFailure(email, submissionError!) ;  return }
+                guard submissionError == nil else {onFailure(email, clientId, submissionError!) ;  return }
                 onSuccess(email)
             }
         }
@@ -83,22 +48,22 @@ public class EmailVerificationService {
         task?.resume()
     }
     
-    func logResult(attempting: String, request: URLRequest, data: Data?, response: URLResponse?, error: Error?, logger: NetworkCallLogger? = WorkfinderNetworking.networkCallLogger) {
+    func logResult(attempting: String, request: URLRequest, data: Data?, response: URLResponse?, error: Error?) {
         let httpResponse = response as? HTTPURLResponse
+        let logger = configuration.logger
         if let error = error {
-            logger?.logDataTaskFailure(attempting: attempting, error: error, request: request, response: httpResponse, responseData: data)
+            logger.logDataTaskFailure(attempting: attempting, error: error, request: request, response: httpResponse, responseData: data)
             return
         }
         if data == nil {
             let networkError = F4SNetworkError(response: httpResponse!, attempting: attempting)!
-            logger?.logDataTaskFailure(attempting: attempting, error: networkError, request: request, response: httpResponse, responseData: data)
+            logger.logDataTaskFailure(attempting: attempting, error: networkError, request: request, response: httpResponse, responseData: data)
             return
         }
-        logger?.logDataTaskSuccess(request: request, response: httpResponse!, responseData: data!)
+        logger.logDataTaskSuccess(request: request, response: httpResponse!, responseData: data!)
     }
     
     public func verifyWithCode(email: String, code: String, onSuccess: @escaping  ( _ email:String) -> Void, onFailure: @escaping (_ email:String, _ error:CodeValidationError) -> Void) {
-        guard email == self.email else { onFailure(email, CodeValidationError.emailNotTheSame) ; return }
         let payload = VerifyPayload(username: email, password: code)
         let payloadData = try! JSONEncoder().encode(payload)
         let request = prepareRequest(urlString: verifyUrlString, method: "POST", bodyData: payloadData)

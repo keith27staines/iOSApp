@@ -1,15 +1,7 @@
-//
-//  CompanyViewViewModel.swift
-//  F4SPrototypes
-//
-//  Created by Keith Staines on 21/12/2018.
-//  Copyright © 2018 Keith Staines. All rights reserved.
-//
 
 import UIKit
 import CoreLocation
 import WorkfinderCommon
-import WorkfinderServices
 import WorkfinderAppLogic
 
 protocol CompanyViewModelCoordinatingDelegate : class {
@@ -34,7 +26,6 @@ class CompanyViewModel : NSObject {
     enum PageIndex : Int, CaseIterable {
         case summary
         case data
-        // TODO: enable peopple tab:  add case people
         func previous() -> PageIndex? { return PageIndex(rawValue: self.rawValue - 1) }
         func next() -> PageIndex? { return PageIndex(rawValue: self.rawValue + 1) }
     }
@@ -89,13 +80,10 @@ class CompanyViewModel : NSObject {
     var companyViewData: CompanyViewData
     let people: [PersonViewData]
     let companyService: F4SCompanyServiceProtocol
-    //var appliedState: AppliedState { return companyViewData.appliedState }
+    let companyDocumentsModel: F4SCompanyDocumentsModel
+    let canApplyLogic: AllowedToApplyLogic
     private var viewControllers = [UIViewController]()
     var currentPageIndex: PageIndex = .summary
-    
-    lazy var companyDocumentsModel: F4SCompanyDocumentsModel = {
-        return F4SCompanyDocumentsModel(companyUuid: company.uuid)
-    }()
     
     var companyJson: F4SCompanyJson? = nil {
         didSet {
@@ -120,14 +108,14 @@ class CompanyViewModel : NSObject {
         return self.people[index]
     }
     
-    init(
-        coordinatingDelegate: CompanyViewModelCoordinatingDelegate,
-        viewModelDelegate: CompanyViewModelDelegate? = nil,
-        company: Company,
-        people: [PersonViewData],
-        companyService: F4SCompanyServiceProtocol = F4SCompanyService(),
-        favouritingModel: CompanyFavouritesModel
-        ) {
+    init(coordinatingDelegate: CompanyViewModelCoordinatingDelegate,
+         viewModelDelegate: CompanyViewModelDelegate? = nil,
+         company: Company,
+         people: [PersonViewData],
+         companyService: F4SCompanyServiceProtocol,
+         favouritingModel: CompanyFavouritesModel,
+         allowedToApplyLogic: AllowedToApplyLogic,
+         companyDocumentsModel: F4SCompanyDocumentsModel) {
         self.companyService = companyService
         self.company = company
         self.companyViewData = CompanyViewData(company: company)
@@ -136,8 +124,9 @@ class CompanyViewModel : NSObject {
         self.viewModelDelegate = viewModelDelegate
         self.favouritingModel = favouritingModel
         self.companyViewData.isFavourited = self.favouritingModel.isFavourite(company: company)
+        self.canApplyLogic = allowedToApplyLogic
+        self.companyDocumentsModel = companyDocumentsModel
         super.init()
-        // TODO: enable peopple tab:  viewControllers = [descriptionViewController, dataViewController, peopleViewController]
         viewControllers = [summaryViewController, dataViewController]
         loadCompany()
         loadDocuments()
@@ -190,10 +179,6 @@ class CompanyViewModel : NSObject {
     func didTapApply(completion: @escaping (InitiateApplicationResult) -> Void) {
         applyIfStateAllows(completion: completion)
     }
-    
-    lazy var canApplyLogic: AllowedToApplyLogic = {
-        return AllowedToApplyLogic()
-    }()
     
     func applyIfStateAllows(completion: @escaping (InitiateApplicationResult) -> Void) {
         viewModelDelegate?.companyViewModelDidBeginNetworkTask(self)
@@ -259,22 +244,17 @@ class CompanyViewModel : NSObject {
             return summaryViewController
         case .data:
             return dataViewController
-        // TODO: enable peopple tab: uncomment .people case
-        // case .people:
-        // return peopleViewController
         }
     }
     
     var currentViewController: CompanySubViewController {
         return controller(for: currentPageIndex)!
     }
-    // TODO: enable peopple tab: Uncomment `peopleViewController` property
-    // lazy private var peopleViewController: CompanyPeopleViewController = {
-    //     return CompanyPeopleViewController(viewModel: self, pageIndex: .people)
-    // }()
     
     lazy private var summaryViewController: CompanySummaryViewController = {
-        return CompanySummaryViewController(viewModel: self, pageIndex: .summary)
+        return CompanySummaryViewController(viewModel: self,
+                                            pageIndex: .summary,
+                                            documentsModel: companyDocumentsModel)
     }()
     
     lazy private var dataViewController: CompanyDataViewController = {

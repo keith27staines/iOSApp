@@ -46,7 +46,7 @@ class ApplyCoordinatorTests: XCTestCase {
             userService: mockUserService,
             userRepository: MockUserRepository(user: mockRegisteredUser),
             databaseDownloadManager: mockDatabaseDownloadManager,
-            f4sLog: mockAnalytics
+            log: mockAnalytics
         )
         return injection
     }()

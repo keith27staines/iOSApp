@@ -1,13 +1,14 @@
+
 import UIKit
 import WorkfinderCommon
-import WorkfinderNetworking
-import WorkfinderServices
 import WorkfinderCoordinators
+import WorkfinderAppLogic
 import WorkfinderApplyUseCase
 
 public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoordinatorProtocol {
     
-    lazy var applyService: F4SPlacementApplicationServiceProtocol = { return F4SPlacementApplicationService() }()
+    let environment: EnvironmentType
+    let applyService: F4SPlacementApplicationServiceProtocol
     var companyViewController: CompanyViewController!
     var companyViewModel: CompanyViewModel!
     var favouritesModel: CompanyFavouritesModel
@@ -15,6 +16,14 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
     var placementsRepository: F4SPlacementRepositoryProtocol
     var interestsRepository: F4SInterestsRepositoryProtocol
     let socialShareItemSource: SocialShareItemSource
+    let getAllPlacementsService: F4SGetAllPlacementsServiceProtocol
+    let emailVerificationModel: F4SEmailVerificationModelProtocol
+    let documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol
+    let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
+    let templateService: F4STemplateServiceProtocol
+    let companyService: F4SCompanyServiceProtocol
+    let companyDocumentService: F4SCompanyDocumentServiceProtocol
+
     weak var finishDespatcher: CompanyCoordinatorParentProtocol?
     
     public init(
@@ -22,24 +31,49 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
         navigationRouter: NavigationRoutingProtocol,
         company: Company,
         inject: CoreInjectionProtocol,
+        environment: EnvironmentType,
         placementsRepository: F4SPlacementRepositoryProtocol,
         interestsRepository: F4SInterestsRepositoryProtocol,
         socialShareItemSource: SocialShareItemSource,
-        favouritesModel: CompanyFavouritesModel) {
+        favouritesModel: CompanyFavouritesModel,
+        templateService: F4STemplateServiceProtocol,
+        getAllPlacementsService: F4SGetAllPlacementsServiceProtocol,
+        emailVerificationModel: F4SEmailVerificationModelProtocol,
+        documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
+        documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
+        applyService: F4SPlacementApplicationServiceProtocol,
+        companyService: F4SCompanyServiceProtocol,
+        companyDocumentService: F4SCompanyDocumentServiceProtocol) {
+        self.environment = environment
         self.socialShareItemSource = socialShareItemSource
         self.interestsRepository = interestsRepository
         self.placementsRepository = placementsRepository
         self.company = company
         self.favouritesModel = favouritesModel
+        self.templateService = templateService
+        self.applyService = applyService
         self.finishDespatcher = parent
+        self.getAllPlacementsService = getAllPlacementsService
+        self.emailVerificationModel = emailVerificationModel
+        self.documentServiceFactory = documentServiceFactory
+        self.documentUploaderFactory = documentUploaderFactory
+        self.companyService = companyService
+        self.companyDocumentService = companyDocumentService
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
-    lazy var templateService: F4STemplateServiceProtocol = { return F4STemplateService() }()
-    
     public override func start() {
         super.start()
-        companyViewModel = CompanyViewModel(coordinatingDelegate: self, company: company, people: [], favouritingModel: favouritesModel)
+        let allowedToApplyLogic = AllowedToApplyLogic(service: getAllPlacementsService)
+        let companyDocumentsModel = F4SCompanyDocumentsModel(companyUuid: company.uuid,
+                                                             documentsService: companyDocumentService)
+        companyViewModel = CompanyViewModel(coordinatingDelegate: self,
+                                            company: company,
+                                            people: [],
+                                            companyService: companyService,
+                                            favouritingModel: favouritesModel,
+                                            allowedToApplyLogic: allowedToApplyLogic,
+                                            companyDocumentsModel: companyDocumentsModel)
         companyViewController = CompanyViewController(viewModel: companyViewModel)
         navigationRouter.push(viewController: companyViewController, animated: true)
     }
@@ -99,10 +133,15 @@ extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
             parent: self,
             navigationRouter: navigationRouter,
             inject: injected,
+            environment: environment,
             placementService: applyService,
             templateService: templateService,
             placementRepository: placementsRepository,
-            interestsRepository: interestsRepository)
+            interestsRepository: interestsRepository,
+            getAllPlacementsService: getAllPlacementsService,
+            emailVerificationModel: emailVerificationModel,
+            documentServiceFactory: documentServiceFactory,
+            documentUploaderFactory: documentUploaderFactory)
         addChildCoordinator(applyCoordinator)
         applyCoordinator.start()
     }

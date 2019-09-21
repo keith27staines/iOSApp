@@ -1,7 +1,7 @@
+
 import UIKit
 import WorkfinderCommon
 import WorkfinderAppLogic
-import WorkfinderServices
 
 public class AcceptOfferContext {
     public var companyJson: F4SCompanyJson
@@ -9,16 +9,14 @@ public class AcceptOfferContext {
     public var placement: F4STimelinePlacement
     public var user: F4SUser
     public var companyLogo: UIImage?
-    public var voucherLogic: F4SVoucherLogic?
     public var role: F4SRoleJson?
     public var offerImage: UIImage?
     
-    public init(user: F4SUser, company: CompanyViewDataProtocol, companyJson: F4SCompanyJson, logo: UIImage?, placement: F4STimelinePlacement, role: F4SRoleJson? = nil, voucher: F4SVoucherLogic? = nil) {
+    public init(user: F4SUser, company: CompanyViewDataProtocol, companyJson: F4SCompanyJson, logo: UIImage?, placement: F4STimelinePlacement, role: F4SRoleJson? = nil) {
         self.user = user
         self.company = company
         self.placement = placement
         self.companyLogo = logo
-        self.voucherLogic = voucher
         self.role = role
         self.companyJson = companyJson
     }

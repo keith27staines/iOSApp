@@ -1,19 +1,18 @@
 import XCTest
 import WorkfinderCommon
-import WorkfinderNetworking
 @testable import WorkfinderServices
 
 class F4SMessageServiceTests: XCTestCase {
 
     func test_initialise() {
         let threadUuid = "threadUuid"
-        let sut = F4SMessageService(threadUuid: threadUuid)
+        let sut = F4SMessageService(threadUuid: threadUuid, configuration: makeTestConfiguration())
         XCTAssertEqual(sut.apiName, "messaging/\(threadUuid)")
     }
     
     func test_getMessages() {
         let threadUuid = "threadUuid"
-        let sut = F4SMessageService(threadUuid: threadUuid)
+        let sut = F4SMessageService(threadUuid: threadUuid, configuration: makeTestConfiguration())
         var messageList = F4SMessagesList()
         let date = Date()
         messageList.count = 1
@@ -38,7 +37,7 @@ class F4SMessageServiceTests: XCTestCase {
     
     func test_sendMessage() {
         let threadUuid = "threadUuid"
-        let sut = F4SMessageService(threadUuid: threadUuid)
+        let sut = F4SMessageService(threadUuid: threadUuid, configuration: makeTestConfiguration())
         var messageList = F4SMessagesList()
         let date = Date()
         messageList.count = 1

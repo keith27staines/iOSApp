@@ -1,17 +1,16 @@
 import XCTest
 import WorkfinderCommon
-import WorkfinderNetworking
 @testable import WorkfinderServices
 
 class F4SUserStatusServiceTests: XCTestCase {
 
     func test_initialise() {
-        let sut = F4SUserStatusService()
+        let sut = F4SUserStatusService(configuration: makeTestConfiguration())
         XCTAssertEqual(sut.apiName, "user/status")
     }
     
     func test_getUserStatus_with_success_result() {
-        let sut = F4SUserStatusService()
+        let sut = F4SUserStatusService(configuration: makeTestConfiguration())
         let returnObject = F4SUserStatus(unreadMessageCount: 9, unratedPlacements: ["uuid1", "uuid2"])
         let requiredResult = F4SNetworkResult.success(returnObject)
         sut.networkTaskfactory = MockF4SNetworkTaskFactory(requiredSuccessResult: requiredResult)
@@ -31,7 +30,7 @@ class F4SUserStatusServiceTests: XCTestCase {
     
     func test_beginStatusUpdate() {
         let expectation = XCTestExpectation(description: "notification arrived")
-        let sut = F4SUserStatusService()
+        let sut = F4SUserStatusService(configuration: makeTestConfiguration())
         let returnObject = F4SUserStatus(unreadMessageCount: 9, unratedPlacements: ["uuid1", "uuid2"])
         let requiredResult = F4SNetworkResult.success(returnObject)
         sut.networkTaskfactory = MockF4SNetworkTaskFactory(requiredSuccessResult: requiredResult)

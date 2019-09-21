@@ -1,5 +1,26 @@
 import Foundation
 
+public struct F4SGetCompanyDocuments: Codable {
+    public var companyUuid: F4SUUID?
+    public var documents: F4SCompanyDocuments?
+    public var possibleDocumentTypes: [String]?
+    public init(companyUuid: String?,
+                documents: F4SCompanyDocuments?,
+                possibleDocumentTypes: [String]?) {
+        self.companyUuid = companyUuid
+        self.documents = documents
+        self.possibleDocumentTypes = possibleDocumentTypes
+    }
+}
+
+extension F4SGetCompanyDocuments {
+    private enum CodingKeys: String, CodingKey {
+        case companyUuid = "uuid"
+        case documents = "requested_documents"
+        case possibleDocumentTypes = "possible_doc_types"
+    }
+}
+
 public typealias F4SCompanyDocuments = [F4SCompanyDocument]
 
 public struct F4SCompanyDocument : Codable {
