@@ -1014,7 +1014,8 @@ extension MapViewController : UIViewControllerTransitioningDelegate {
         popupAnimator.popupAnimatorDidDismiss = { [weak self] _ in
             self?.pressedPinOrCluster?.removeFromSuperview()
         }
-        popupAnimator.originFrame = pressedPinOrCluster!.superview!.convert(pressedPinOrCluster!.frame, to: nil)
+
+        popupAnimator.originFrame = pressedPinOrCluster!.frame
         
         popupAnimator.presenting = true
         return popupAnimator

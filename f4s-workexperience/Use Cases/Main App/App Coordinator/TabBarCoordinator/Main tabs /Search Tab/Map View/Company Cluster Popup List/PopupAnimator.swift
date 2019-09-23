@@ -30,11 +30,10 @@ class PopupAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
         let containerView = transitionContext.containerView
-        guard let toView = transitionContext.view(forKey: .to) else { return }
-        let popupFrame = presenting ? toView : transitionContext.view(forKey: .from)!
-        
-        let initialFrame = presenting ? originFrame : popupFrame.frame
-        let finalFrame = presenting ? popupFrame.frame : originFrame
+        let toView: UIView? = transitionContext.view(forKey: .to)
+        let finalView: UIView = presenting ? transitionContext.view(forKey: .to)! : transitionContext.view(forKey: .from)!
+        let initialFrame = presenting ? originFrame : finalView.frame
+        let finalFrame = presenting ? finalView.frame : originFrame
         
         let xScaleFactor = presenting
             ? initialFrame.width / finalFrame.width
@@ -47,12 +46,12 @@ class PopupAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         let scaleFactor = CGAffineTransform(scaleX: xScaleFactor, y: yScaleFactor)
         
         if presenting {
-            popupFrame.transform = scaleFactor
-            popupFrame.center = CGPoint(x: initialFrame.midX, y: initialFrame.midY)
+            finalView.transform = scaleFactor
+            finalView.center = CGPoint(x: initialFrame.midX, y: initialFrame.midY)
         }
         
-        containerView.addSubview(toView)
-        containerView.bringSubviewToFront(popupFrame)
+        if let toView = toView { containerView.addSubview(toView) }
+        containerView.bringSubviewToFront(finalView)
         
         UIView.animate(
             withDuration: duration,
@@ -60,8 +59,8 @@ class PopupAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             usingSpringWithDamping: damping,
             initialSpringVelocity: 0.0,
             animations: {
-                popupFrame.transform = self.presenting ? .identity : scaleFactor
-                popupFrame.center = CGPoint(x: finalFrame.midX, y: finalFrame.midY)
+                finalView.transform = self.presenting ? .identity : scaleFactor
+                finalView.center = CGPoint(x: finalFrame.midX, y: finalFrame.midY)
         },
             completion: { [weak self] didFinish in
                 transitionContext.completeTransition(true)
