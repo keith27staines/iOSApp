@@ -87,6 +87,7 @@ public class F4SDocumentUploader : NSObject, F4SDocumentUploaderProtocol {
     public func resume() {
         switch state {
         case .waiting, .paused(_):
+            if task == nil { task = makeTask() }
             task?.resume()
         default: return
         }
