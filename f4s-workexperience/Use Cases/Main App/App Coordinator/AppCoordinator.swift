@@ -101,9 +101,18 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         window.makeKeyAndVisible()
 
         super.init(parent:nil, navigationRouter: navigationRouter)
+        darkModeOptOut(window: window)
         self.injected.appCoordinator = self
         versionCheckCoordinator.parentCoordinator = self
         userNotificationService = UNService(appCoordinator: self)
+    }
+    
+    func darkModeOptOut(window: UIWindow) {
+        if #available(iOS 13.0, *) {
+            if window.responds(to: #selector(getter: UIView.overrideUserInterfaceStyle)) {
+                window.setValue(UIUserInterfaceStyle.light.rawValue, forKey: "overrideUserInterfaceStyle")
+            }
+        }
     }
     
     override func start() {
