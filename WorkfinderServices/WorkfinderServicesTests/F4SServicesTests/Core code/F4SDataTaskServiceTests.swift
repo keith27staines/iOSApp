@@ -39,16 +39,13 @@ class F4SDataTaskServiceTests: XCTestCase {
     func test_request_header_fields_without_user_uuid() {
         let url = URL(string: "/v2")!
         let request = URLRequest(url: url)
-        let mockLocalStore = MockLocalStore()
-        let userRepo = F4SUserRepository(localStore: mockLocalStore)
         let sut = F4SDataTaskService(
             baseURLString: "baseUrl",
             apiName: "apiName",
             configuration: makeTestConfiguration())
-        sut.userRepo = userRepo
         let task = sut.networkTask(with: request, attempting: "test") { (dataResult) in }
-        let headers = (task as? URLSessionDataTask)!.originalRequest!.allHTTPHeaderFields!
-        XCTAssertNil(headers["wex.user.uuid"])
+        let headers = (task as? URLSessionDataTask)!.originalRequest!.allHTTPHeaderFields
+        XCTAssertNil(headers)
     }
     
     //MARK:- get request tests

@@ -212,21 +212,6 @@ class MockNavigationRouter : NavigationRoutingProtocol {
     }
 }
 
-class MockUserRepository: F4SUserRepositoryProtocol {
-    var user: F4SUser
-    init(user: F4SUser) {
-        self.user = user
-    }
-    
-    func save(user: F4SUser) {
-        self.user = user
-    }
-    
-    func load() -> F4SUser {
-        return user
-    }
-}
-
 class MockUserService: F4SUserServiceProtocol {
     func registerDeviceWithServer(installationUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRegisterDeviceResult>) -> ()) {
         registerDeviceOnServerCalled += 1

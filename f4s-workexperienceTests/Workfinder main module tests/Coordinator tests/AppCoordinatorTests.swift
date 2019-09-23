@@ -128,21 +128,6 @@ class MockVersionCheckingService: F4SWorkfinderVersioningServiceProtocol {
     }
 }
 
-class MockUserRepository: F4SUserRepositoryProtocol {
-    var user: F4SUser
-    init(user: F4SUser) {
-        self.user = user
-    }
-    
-    func save(user: F4SUser) {
-        self.user = user
-    }
-    
-    func load() -> F4SUser {
-        return user
-    }
-}
-
 class MockUserStatusService : F4SUserStatusServiceProtocol {
     var userStatus: F4SUserStatus?
     

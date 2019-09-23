@@ -16,10 +16,13 @@ class NetworkConfigTests: XCTestCase {
         let logger = NetworkCallLogger(log: MockLog())
         let endpoints = WorkfinderEndpoint(baseUrlString: "someUrl")
         let sessionManager = F4SNetworkSessionManager(wexApiKey: "someKey")
+        let user = F4SUser()
+        let userRepo = MockUserRepository(user: user)
         let config = NetworkConfig(workfinderApiKey: "someKey",
                                    logger: logger,
                                    sessionManager: sessionManager,
-                                   endpoints: endpoints)
+                                   endpoints: endpoints,
+                                   userRepository: userRepo)
         XCTAssertEqual(config.wexApiKey, "someKey")
         XCTAssertEqual(config.workfinderApi, "someUrl")
         XCTAssertEqual(config.workfinderApiV2, "someUrl/v2")

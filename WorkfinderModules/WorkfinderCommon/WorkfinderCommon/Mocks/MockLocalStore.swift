@@ -25,3 +25,19 @@ public class MockLocalStore : LocalStorageProtocol {
         store[key] = value
     }
 }
+
+
+public class MockUserRepository: F4SUserRepositoryProtocol {
+    var user: F4SUser
+    public init(user: F4SUser) {
+        self.user = user
+    }
+    
+    public func save(user: F4SUser) {
+        self.user = user
+    }
+    
+    public func load() -> F4SUser {
+        return user
+    }
+}

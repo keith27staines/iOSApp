@@ -37,7 +37,7 @@ class F4SPlacementServiceTests: XCTestCase {
     
     func test_getPlacement_with_error_result() {
         let sut = F4SPlacementService(configuration: makeTestConfiguration())
-        sut.networkTaskFactory = MockF4SNetworkTaskFactory<F4STimelinePlacement>(userUuid: "uuid", requiredNetworkError: F4SNetworkError(error: "test error", attempting: "get placement"))
+        sut.networkTaskFactory = MockF4SNetworkTaskFactory<F4STimelinePlacement>(requiredNetworkError: F4SNetworkError(error: "test error", attempting: "get placement"))
         let expectation = XCTestExpectation(description: "")
         sut.getPlacementOffer(uuid: "placementuuid") { (result) in
             switch result {
@@ -168,7 +168,7 @@ class F4SPlacementServiceTests: XCTestCase {
     func makeSUT<A:Codable>(successResult: F4SNetworkResult<A>) -> F4SPlacementService {
         let sut = F4SPlacementService(configuration: makeTestConfiguration())
         sut.dataTask = previousTask
-        sut.networkTaskFactory = MockF4SNetworkTaskFactory(userUuid: "userUuid", requiredSuccessResult: successResult)
+        sut.networkTaskFactory = MockF4SNetworkTaskFactory(requiredSuccessResult: successResult)
         return sut
     }
 }
