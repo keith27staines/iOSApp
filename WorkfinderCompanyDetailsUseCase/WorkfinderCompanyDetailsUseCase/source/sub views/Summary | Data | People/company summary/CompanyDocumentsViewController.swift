@@ -8,9 +8,9 @@ class CompanyDocumentsViewController : UIViewController {
     
     var companyDocumentsView: CompanyDocumentsView? { return view as? CompanyDocumentsView }
     
-    let model: F4SCompanyDocumentsModel
+    let model: F4SCompanyDocumentsModelProtocol
     
-    init(documentsModel: F4SCompanyDocumentsModel) {
+    init(documentsModel: F4SCompanyDocumentsModelProtocol) {
         self.model = documentsModel
         super.init(nibName: nil, bundle: nil)
         loadDocuments()

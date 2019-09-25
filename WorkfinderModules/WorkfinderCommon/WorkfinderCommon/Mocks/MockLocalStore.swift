@@ -26,7 +26,6 @@ public class MockLocalStore : LocalStorageProtocol {
     }
 }
 
-
 public class MockUserRepository: F4SUserRepositoryProtocol {
     var user: F4SUser
     public init(user: F4SUser) {

@@ -5,11 +5,11 @@ import WorkfinderAppLogic
 
 class CompanySummaryViewController: CompanySubViewController {
     
-    let documentsModel: F4SCompanyDocumentsModel
+    let documentsModel: F4SCompanyDocumentsModelProtocol
     
     init(viewModel: CompanyViewModel,
          pageIndex: CompanyViewModel.PageIndex,
-         documentsModel: F4SCompanyDocumentsModel) {
+         documentsModel: F4SCompanyDocumentsModelProtocol) {
         self.documentsModel = documentsModel
         super.init(viewModel: viewModel, pageIndex: pageIndex)
     }

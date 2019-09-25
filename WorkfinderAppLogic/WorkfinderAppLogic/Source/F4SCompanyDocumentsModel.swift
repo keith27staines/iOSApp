@@ -2,7 +2,7 @@
 import Foundation
 import WorkfinderCommon
 
-public class F4SCompanyDocumentsModel {
+public class F4SCompanyDocumentsModel: F4SCompanyDocumentsModelProtocol{
 
     public let companyUuid: F4SUUID
     public private (set) var documents: F4SCompanyDocuments = F4SCompanyDocuments()

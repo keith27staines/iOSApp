@@ -8,7 +8,6 @@
 
 import XCTest
 import WorkfinderCommon
-import WorkfinderServices
 
 @testable import WorkfinderApplyUseCase
 

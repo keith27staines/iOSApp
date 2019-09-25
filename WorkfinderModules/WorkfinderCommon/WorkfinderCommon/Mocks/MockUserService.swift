@@ -1,16 +1,5 @@
-//
-//  MockUserService.swift
-//  f4s-workexperienceTests
-//
-//  Created by Keith Dev on 01/03/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
 
 import Foundation
-import WorkfinderCommon
-import WorkfinderNetworking
-import WorkfinderServices
-@testable import f4s_workexperience
 
 class MockUserService: F4SUserServiceProtocol {
     func registerDeviceWithServer(installationUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRegisterDeviceResult>) -> ()) {

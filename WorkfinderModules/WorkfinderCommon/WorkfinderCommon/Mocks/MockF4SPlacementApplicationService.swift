@@ -1,5 +1,4 @@
 import Foundation
-import WorkfinderCommon
 
 public class MockF4SPlacementApplicationService : F4SPlacementApplicationServiceProtocol {
     

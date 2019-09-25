@@ -2,7 +2,6 @@
 import UIKit
 import CoreLocation
 import WorkfinderCommon
-import WorkfinderAppLogic
 
 protocol CompanyViewModelCoordinatingDelegate : class {
     func companyViewModelDidComplete(_ viewModel: CompanyViewModel)
@@ -80,7 +79,7 @@ class CompanyViewModel : NSObject {
     var companyViewData: CompanyViewData
     let people: [PersonViewData]
     let companyService: F4SCompanyServiceProtocol
-    let companyDocumentsModel: F4SCompanyDocumentsModel
+    let companyDocumentsModel: F4SCompanyDocumentsModelProtocol
     let canApplyLogic: AllowedToApplyLogicProtocol
     private var viewControllers = [UIViewController]()
     var currentPageIndex: PageIndex = .summary
@@ -115,7 +114,7 @@ class CompanyViewModel : NSObject {
          companyService: F4SCompanyServiceProtocol,
          favouritingModel: CompanyFavouritesModel,
          allowedToApplyLogic: AllowedToApplyLogicProtocol,
-         companyDocumentsModel: F4SCompanyDocumentsModel) {
+         companyDocumentsModel: F4SCompanyDocumentsModelProtocol) {
         self.companyService = companyService
         self.company = company
         self.companyViewData = CompanyViewData(company: company)

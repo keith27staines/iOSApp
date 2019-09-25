@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		FC02D9F222EC70FD003C8148 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC02D9E822EC70FD003C8148 /* WorkfinderServices.framework */; };
 		FC02D9F922EC70FD003C8148 /* WorkfinderServices.h in Headers */ = {isa = PBXBuildFile; fileRef = FC02D9EB22EC70FD003C8148 /* WorkfinderServices.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FC02DA0522EC7134003C8148 /* MockF4SPlacementApplicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02DA0422EC7134003C8148 /* MockF4SPlacementApplicationService.swift */; };
 		FC02DA0B22EC717B003C8148 /* EmailVerificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02DA0822EC717B003C8148 /* EmailVerificationService.swift */; };
 		FC02DA0E22EC7214003C8148 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC02DA0D22EC7214003C8148 /* WorkfinderCommon.framework */; };
 		FC02DA2122EC7851003C8148 /* F4SPlacementApplicationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02DA2022EC7850003C8148 /* F4SPlacementApplicationServiceTests.swift */; };
@@ -80,7 +79,6 @@
 		FC02D9EC22EC70FD003C8148 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC02D9F122EC70FD003C8148 /* WorkfinderServicesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderServicesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC02D9F822EC70FD003C8148 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FC02DA0422EC7134003C8148 /* MockF4SPlacementApplicationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockF4SPlacementApplicationService.swift; sourceTree = "<group>"; };
 		FC02DA0822EC717B003C8148 /* EmailVerificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationService.swift; sourceTree = "<group>"; };
 		FC02DA0D22EC7214003C8148 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC02DA0F22EC721D003C8148 /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -271,7 +269,6 @@
 			children = (
 				FC4EE703230E8F7E00B40F6B /* F4SRoleService.swift */,
 				FC12B0FA22F3280000C33410 /* F4SPlacementService.swift */,
-				FC02DA0422EC7134003C8148 /* MockF4SPlacementApplicationService.swift */,
 			);
 			path = "services using F4SDataTaskService";
 			sourceTree = "<group>";
@@ -466,7 +463,6 @@
 				FC4EE704230E8F7F00B40F6B /* F4SRoleService.swift in Sources */,
 				FC083F79230FEDEE00641F17 /* F4SPlacementDocumentsService.swift in Sources */,
 				FC426F102330CC26004F8A3E /* F4SDocumentUploader.swift in Sources */,
-				FC02DA0522EC7134003C8148 /* MockF4SPlacementApplicationService.swift in Sources */,
 				FC426F1223310308004F8A3E /* F4SServiceFactories.swift in Sources */,
 				FC083F6F230FCC0000641F17 /* F4SMessageActionService.swift in Sources */,
 				FC4EE6F5230E620600B40F6B /* F4SNetworkTaskFactory.swift in Sources */,

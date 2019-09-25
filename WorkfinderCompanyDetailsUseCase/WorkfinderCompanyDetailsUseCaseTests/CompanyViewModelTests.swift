@@ -13,7 +13,7 @@ import WorkfinderCommon
 class CompanyViewModelTests: XCTestCase {
     
     var sut: CompanyViewModel!
-    var coordinatingDelegate: CoordinatingDelegate!
+    var coordinatingDelegate: MockCoordinatingDelegate!
     var company: CompanyViewData!
     var person: PersonViewData!
     
@@ -22,17 +22,18 @@ class CompanyViewModelTests: XCTestCase {
         let company = Company(id: 1, created: Date(), modified: Date(), uuid: UUID().uuidString, name: "companyName", logoUrl: "logoUrlString", industry: "industry", latitude: 45, longitude: 45, summary: "summary", employeeCount: 1, turnover: 1, turnoverGrowth: 1, rating: 1, ratingCount: 1, sourceId: "sourceId", hashtag: "hashtag", companyUrl: "companyUrlString")
         person = PersonViewData()
         let favouritesModel = makeFavouritingModel()
-        let mockCompanyService = MockCompanyService()
+        let mockCompanyService = MockF4SCompanyService()
         let mockAllowedToApplyLogic = MockAllowedToApplyLogic()
+        let mockCompanyDocumentsModel = MockF4SCompanyDocumentsModel()
         
-        coordinatingDelegate = CoordinatingDelegate()
+        coordinatingDelegate = MockCoordinatingDelegate()
         sut = CompanyViewModel(coordinatingDelegate: coordinatingDelegate,
                                company: company,
                                people: [person],
                                companyService: mockCompanyService,
                                favouritingModel: favouritesModel,
                                allowedToApplyLogic: mockAllowedToApplyLogic,
-                               companyDocumentsModel: <#F4SCompanyDocumentsModel#>)
+                               companyDocumentsModel: mockCompanyDocumentsModel)
         self.company = sut.companyViewData
     }
 
@@ -55,71 +56,7 @@ class CompanyViewModelTests: XCTestCase {
     
 }
 
-class MockAllowedToApplyLogic: AllowedToApplyLogicProtocol {
-    var draftTimelinePlacement: F4STimelinePlacement?
-    
-    var draftPlacement: F4SPlacement?
-    
-    func checkUserCanApply(user: F4SUUID?, to company: F4SUUID, givenExistingPlacements existing: [F4STimelinePlacement], completion: @escaping (F4SNetworkResult<Bool>) -> Void) {
-        
-    }
-    
-    func checkUserCanApply(user: F4SUUID?, to company: F4SUUID, completion: @escaping (F4SNetworkResult<Bool>) -> Void) {
-        
-    }
-}
-
-
-
-class MockCompanyService: F4SCompanyServiceProtocol {
-    func getCompany(uuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SCompanyJson>) -> ()) {
-    
-    }
-}
-
-class MockFavouritingRepository: F4SFavouritesRepositoryProtocol {
-    var favourites = [F4SUUID: Shortlist]()
-    
-    func loadFavourites() -> [Shortlist] {
-        return Array(favourites.values)
-    }
-    
-    func removeFavourite(uuid: F4SUUID) {
-        favourites[uuid] = nil
-    }
-    
-    func addFavourite(_ item: Shortlist) {
-        favourites[item.uuid] = item
-    }
-}
-
-class MockFavouritingService: CompanyFavouritingServiceProtocol {
-    var apiName: String = "MockFavouritingService/api"
-    var expectedFavouriteResult: F4SNetworkResult<F4SShortlistJson>
-    var expectedUnfavouriteResult: F4SNetworkResult<F4SUUID>
-    
-    public init(expectedFavouriteResult: F4SNetworkResult<F4SShortlistJson>,
-                expectedUnfavouriteResult: F4SNetworkResult<F4SUUID>) {
-        self.expectedFavouriteResult = expectedFavouriteResult
-        self.expectedUnfavouriteResult = expectedUnfavouriteResult
-    }
-    
-    func favourite(companyUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SShortlistJson>) -> Void) {
-        DispatchQueue.main.async { [weak self] in
-            guard let strongSelf = self else { return }
-            completion(strongSelf.expectedFavouriteResult)
-        }
-    }
-    
-    func unfavourite(shortlistUuid: String, completion: @escaping (F4SNetworkResult<F4SUUID>) -> Void) {
-        DispatchQueue.main.async { [weak self] in
-            guard let strongSelf = self else { return }
-            completion(strongSelf.expectedUnfavouriteResult)
-        }
-    }
-}
-
-class CoordinatingDelegate: CompanyViewModelCoordinatingDelegate {
+class MockCoordinatingDelegate: CompanyViewModelCoordinatingDelegate {
     
     func companyViewModelDidRefresh(_ viewModel: CompanyViewModel) {
         refreshedModelCount += 1
