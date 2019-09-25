@@ -17,36 +17,18 @@ class ApplyCoordinatorTests: XCTestCase {
     let mockRouter = MockNavigationRouter()
     let mockRegisteredUser = F4SUser(uuid: "userUuid1234")
     let mockUnregisteredUser = F4SUser()
-    let mockUserService = MockUserService(registeringWillSucceedOnAttempt: 1)
-    let mockUserStatusService = MockUserStatusService()
+    let mockUserService = MockF4SUserService(registeringWillSucceedOnAttempt: 1)
+    let mockUserStatusService = MockF4SUserStatusService()
     let mockDatabaseDownloadManager = MockDatabaseDownloadManager()
     let mockAnalytics = MockF4SAnalyticsAndDebugging()
-    var mockPlacementServiceFactory = MockPlacementServiceFactory(errorResponseCode: 404)
-    
-    func makeMockAppInstallationLogic(
-        installationUuid: String?,
-        user: F4SUser,
-        isRegistered: Bool) -> AppInstallationUuidLogicProtocol {
-        let localStore = MockLocalStore()
-        let userRepo = MockUserRepository(user: user)
-        localStore.setValue("installationUuid", for: LocalStore.Key.installationUuid)
-        localStore.setValue(isRegistered, for: LocalStore.Key.isDeviceRegistered)
-        let mockRegisterDeviceService = MockF4SDeviceRegistrationServiceProtocol()
-        let logic = AppInstallationUuidLogic(
-            localStore: localStore,
-            userService: mockUserService,
-            userRepo: userRepo,
-            apnsEnvironment: "apnsEnvironment",
-            registerDeviceService: mockRegisterDeviceService)
-        return logic
-    }
+    var mockPlacementServiceFactory = MockF4SPlacementServiceFactory(errorResponseCode: 404)
     
     lazy var mockedInjection: CoreInjection = {
-        let userStatusService = MockF4SUserStatusServiceProtocol()
-        let mockContentService = MockContentService()
+        let userStatusService = MockF4SUserStatusService()
+        let mockContentService = MockF4SContentService()
         let injection = CoreInjection(
             launchOptions: nil,
-            appInstallationUuidLogic: makeMockAppInstallationLogic(installationUuid: "installationUuid", user: mockRegisteredUser, isRegistered: true),
+            appInstallationUuidLogic: MockAppInstallationUuidLogic(),
             user: mockRegisteredUser,
             userService: mockUserService,
             userStatusService: userStatusService,
@@ -79,12 +61,15 @@ extension ApplyCoordinatorTests {
     func makeSUTApplyCoordinator(company: F4SUUID, continueExistingApplication uuid: F4SUUID? = nil) -> ApplyCoordinator {
         let now = Date()
         let company = Company(id: 1, created: now, modified: now, isAvailableForSearch: true, uuid: "companyUuid", name: "Test Company", logoUrl: "logoUrl", industry: "Test Industry", latitude: 51, longitude: 0, summary: "This is a test company", employeeCount: 7, turnover: 3, turnoverGrowth: 3, rating: 0, ratingCount: 0, sourceId: "some unknown source", hashtag: "", companyUrl: "companyUrl")
-        let placementServiceFactory = MockPlacementServiceFactory(errorResponseCode: 404)
+        let placementServiceFactory = MockF4SPlacementServiceFactory(errorResponseCode: 404)
         let mockPlacementService = placementServiceFactory.makePlacementService()
-        let mockTemplateService = MockTemplateService()
+        let mockTemplateService = MockF4STemplateService()
         let mockPlacementRepository = MockPlacementsRepository()
         let mockInterestsRepository = MockInterestsRepository()
-        let mockGetAllPlacementsService = MockF4SGetAllPlacementsService()
+        let placement = F4STimelinePlacement(userUuid: "userUuid", companyUuid: "companyUuid", placementUuid: "placementUuid")
+        let requiredPlacementResult = F4SNetworkResult.success([placement])
+        let mockGetAllPlacementsService = MockF4SGetAllPlacementsService(result: requiredPlacementResult)
+        let mockEmailVerificationModel = MockF4SEmailVerificationModel()
         let sut = ApplyCoordinator(
             company: company,
             parent: nil,
@@ -95,7 +80,10 @@ extension ApplyCoordinatorTests {
             templateService: mockTemplateService,
             placementRepository: mockPlacementRepository,
             interestsRepository: mockInterestsRepository,
-            getAllPlacementsService: mockGetAllPlacementsService)
+            getAllPlacementsService: mockGetAllPlacementsService,
+            emailVerificationModel: mockEmailVerificationModel,
+            documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
+            documentUploaderFactory: <#F4SDocumentUploaderFactoryProtocol#>)
         return sut
     }
     

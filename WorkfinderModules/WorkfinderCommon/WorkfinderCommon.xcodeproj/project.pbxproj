@@ -36,7 +36,6 @@
 		FC1F592022FD8ACF007164BA /* F4SAvailabilityPeriodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F591F22FD8ACF007164BA /* F4SAvailabilityPeriodTests.swift */; };
 		FC1F592222FDCD9D007164BA /* F4SCalendarDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F592122FDCD9D007164BA /* F4SCalendarDay.swift */; };
 		FC1FA08222FAAB1B003EAE59 /* F4SUUIDDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08122FAAB1B003EAE59 /* F4SUUIDDictionary.swift */; };
-		FC1FA08522FAAC28003EAE59 /* MockAnalyticsAndDebugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08422FAAC28003EAE59 /* MockAnalyticsAndDebugging.swift */; };
 		FC1FA08822FAC0FF003EAE59 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08722FAC0FF003EAE59 /* StringExtensionsTests.swift */; };
 		FC1FA08A22FAD5D5003EAE59 /* DateExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08922FAD5D5003EAE59 /* DateExtensionTests.swift */; };
 		FC1FA08C22FB1F57003EAE59 /* WorkAvailabilityWindowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08B22FB1F57003EAE59 /* WorkAvailabilityWindowTests.swift */; };
@@ -83,6 +82,7 @@
 		FC8F957E233BA6710027BE02 /* MockUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8F9578233BA6710027BE02 /* MockUserService.swift */; };
 		FC8F957F233BA6710027BE02 /* MockNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8F9577233BA6710027BE02 /* MockNavigationRouter.swift */; };
 		FC8F9580233BA6710027BE02 /* MockDatabaseDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8F9579233BA6710027BE02 /* MockDatabaseDownload.swift */; };
+		FC8F9583233BB5580027BE02 /* FactoriesProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8F9582233BB5580027BE02 /* FactoriesProtocols.swift */; };
 		FC93768E231535750058BA75 /* F4SCompanyDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93768D231535750058BA75 /* F4SCompanyDocument.swift */; };
 		FC93DC56232026AA00F1CE23 /* CommonNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC55232026AA00F1CE23 /* CommonNotifications.swift */; };
 		FC93DC5A23202CFB00F1CE23 /* EnvironmentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC5923202CFB00F1CE23 /* EnvironmentType.swift */; };
@@ -182,7 +182,6 @@
 		FC1F591F22FD8ACF007164BA /* F4SAvailabilityPeriodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SAvailabilityPeriodTests.swift; sourceTree = "<group>"; };
 		FC1F592122FDCD9D007164BA /* F4SCalendarDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCalendarDay.swift; sourceTree = "<group>"; };
 		FC1FA08122FAAB1B003EAE59 /* F4SUUIDDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUUIDDictionary.swift; sourceTree = "<group>"; };
-		FC1FA08422FAAC28003EAE59 /* MockAnalyticsAndDebugging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsAndDebugging.swift; sourceTree = "<group>"; };
 		FC1FA08722FAC0FF003EAE59 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
 		FC1FA08922FAD5D5003EAE59 /* DateExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensionTests.swift; sourceTree = "<group>"; };
 		FC1FA08B22FB1F57003EAE59 /* WorkAvailabilityWindowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkAvailabilityWindowTests.swift; sourceTree = "<group>"; };
@@ -229,6 +228,7 @@
 		FC8F9579233BA6710027BE02 /* MockDatabaseDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDatabaseDownload.swift; sourceTree = "<group>"; };
 		FC8F957A233BA6710027BE02 /* MockAnalyticsAndDebugging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsAndDebugging.swift; sourceTree = "<group>"; };
 		FC8F957B233BA6710027BE02 /* MockCoordinators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoordinators.swift; sourceTree = "<group>"; };
+		FC8F9582233BB5580027BE02 /* FactoriesProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoriesProtocols.swift; sourceTree = "<group>"; };
 		FC93768D231535750058BA75 /* F4SCompanyDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyDocument.swift; sourceTree = "<group>"; };
 		FC93DC55232026AA00F1CE23 /* CommonNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonNotifications.swift; sourceTree = "<group>"; };
 		FC93DC5923202CFB00F1CE23 /* EnvironmentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentType.swift; sourceTree = "<group>"; };
@@ -314,7 +314,6 @@
 			isa = PBXGroup;
 			children = (
 				FC04B866233277080034A60E /* CoordinatorProtocols.swift */,
-				FC04B8682332827D0034A60E /* CoordinatorFactoryProtocols.swift */,
 			);
 			path = "Coordinator protocols";
 			sourceTree = "<group>";
@@ -402,6 +401,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FC8F9581233BB53B0027BE02 /* Factories protocols */ = {
+			isa = PBXGroup;
+			children = (
+				FC8F9582233BB5580027BE02 /* FactoriesProtocols.swift */,
+				FC04B8682332827D0034A60E /* CoordinatorFactoryProtocols.swift */,
+			);
+			path = "Factories protocols";
+			sourceTree = "<group>";
+		};
 		FC9670A2225A193700318F69 /* Repository protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -487,7 +495,6 @@
 				FC12B0FE22F33ECE00C33410 /* F4STimelinePlacementTests.swift */,
 				FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */,
 				FC2E205A22F9D1DD0094B134 /* F4SUUIDDictionarytests.swift */,
-				FC1FA08422FAAC28003EAE59 /* MockAnalyticsAndDebugging.swift */,
 				FC083F8E2310417E00641F17 /* F4SRoleJsonTests.swift */,
 				FC083F902310464400641F17 /* F4SRecommendationTests.swift */,
 				FC06605823266F2300496FE2 /* PersonViewDataTests.swift */,
@@ -507,6 +514,7 @@
 		FCA91E8622340478007ED308 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				FC8F9581233BB53B0027BE02 /* Factories protocols */,
 				FC1DBDF72335471900D68C83 /* Model protocols */,
 				FC04B865233276960034A60E /* Coordinator protocols */,
 				FC22438D232F94AA0073C9B1 /* Service protocols */,
@@ -796,6 +804,7 @@
 				FC8F957F233BA6710027BE02 /* MockNavigationRouter.swift in Sources */,
 				FC0660572326635000496FE2 /* Protocols.swift in Sources */,
 				FCF4B650232BC377001340DF /* UserDefaultKeys.swift in Sources */,
+				FC8F9583233BB5580027BE02 /* FactoriesProtocols.swift in Sources */,
 				FC93DC5A23202CFB00F1CE23 /* EnvironmentType.swift in Sources */,
 				FCDEA75322803BC000F1BE66 /* F4STimelinePlacement.swift in Sources */,
 				FC8F9576233B9B390027BE02 /* Mocks.swift in Sources */,
@@ -857,7 +866,6 @@
 				FC1FEF002301A1830039DD94 /* F4SDayOfWeekTests.swift in Sources */,
 				FC1F591C22FD75B2007164BA /* F4SAnonymousUserTests.swift in Sources */,
 				FC083F912310464400641F17 /* F4SRecommendationTests.swift in Sources */,
-				FC1FA08522FAAC28003EAE59 /* MockAnalyticsAndDebugging.swift in Sources */,
 				FC1FA08C22FB1F57003EAE59 /* WorkAvailabilityWindowTests.swift in Sources */,
 				FCFC06A9232256C0003C59C8 /* CGRect+MethodsTests.swift in Sources */,
 				FC22DC0122F996D70068C61C /* F4SChoiceTests.swift in Sources */,

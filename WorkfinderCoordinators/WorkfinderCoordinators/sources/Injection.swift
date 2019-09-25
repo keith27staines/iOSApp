@@ -17,7 +17,7 @@ public class CoreInjection : CoreInjectionProtocol {
     public let contentService: F4SContentServiceProtocol
     
     public init(launchOptions: LaunchOptions?,
-                appInstallationUuidLogic: AppInstallationUuidLogic,
+                appInstallationUuidLogic: AppInstallationUuidLogicProtocol,
                 user: F4SUser,
                 userService: F4SUserServiceProtocol,
                 userStatusService: F4SUserStatusServiceProtocol,

@@ -1,7 +1,7 @@
 
 import Foundation
 
-public protocol F4SEmailVerificationModelProtocol {
+public protocol F4SEmailVerificationModelProtocol: class {
     var lastNonErrorState: F4SEmailVerificationState { get }
     var emailVerificationState: F4SEmailVerificationState { get }
     var verifiedEmail: String? { get }
@@ -13,7 +13,6 @@ public protocol F4SEmailVerificationModelProtocol {
     func restart()
     func submitEmailForVerification(_ email: String, completion: @escaping (()->Void))
     func stagingBypassSetVerifiedEmail(email: String)
-
 }
 
 

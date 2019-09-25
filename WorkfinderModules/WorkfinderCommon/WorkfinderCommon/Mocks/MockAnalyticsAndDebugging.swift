@@ -6,6 +6,8 @@ public class MockF4SAnalyticsAndDebugging : F4SAnalyticsAndDebugging {
     var identities: [F4SUUID] = []
     var aliases: [F4SUUID] = []
     
+    public init() {}
+    
     public func identity(userId: F4SUUID) {
         identities.append(userId)
     }

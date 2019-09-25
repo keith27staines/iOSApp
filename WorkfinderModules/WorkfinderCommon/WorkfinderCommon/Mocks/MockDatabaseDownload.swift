@@ -9,6 +9,7 @@ public class MockDatabaseDownloadManager : F4SDatabaseDownloadManagerProtocol {
     var isAvailable: Bool = false
     
     // public interface
+    public init() {}
     public var backgroundSessionCompletionHandler: BackgroundSessionCompletionHandler?
     public var localDatabaseDatestamp: Date?
     

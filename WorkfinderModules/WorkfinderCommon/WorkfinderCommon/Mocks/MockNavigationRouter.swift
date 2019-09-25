@@ -3,9 +3,11 @@ import Foundation
 
 public class MockNavigationRouter : NavigationRoutingProtocol {
     
-    var pushedViewControllers = [UIViewController]()
+    public private (set) var pushedViewControllers = [UIViewController]()
     var presentedViewControllers = [UIViewController]()
     var dismissCount: Int = 0
+    
+    public init() {}
     
     public func pop(animated: Bool) {
         pushedViewControllers.removeLast()

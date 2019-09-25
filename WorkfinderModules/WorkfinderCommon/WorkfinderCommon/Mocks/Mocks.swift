@@ -1,6 +1,65 @@
 
 import Foundation
 
+
+public class MockF4SEmailVerificationModel: F4SEmailVerificationModelProtocol {
+    public var lastNonErrorState: F4SEmailVerificationState = .start
+    
+    public var emailVerificationState: F4SEmailVerificationState = .start
+    
+    public var verifiedEmail: String?
+    
+    public var emailSentForVerification: String?
+    
+    public var didChangeState: ((F4SEmailVerificationState, F4SEmailVerificationState) -> Void)?
+    
+    public init() {}
+    
+    public func basicEmailFormatValidator(email: String?) -> Bool {
+        return true
+    }
+    
+    public func isEmailAddressVerified(email: String?) -> Bool {
+        return false
+    }
+    
+    public func restart() {
+        
+    }
+    
+    public func submitEmailForVerification(_ email: String, completion: @escaping (() -> Void)) {
+        
+    }
+    
+    public func stagingBypassSetVerifiedEmail(email: String) {
+        
+    }
+}
+
+public class MockAppInstallationUuidLogic: AppInstallationUuidLogicProtocol {
+    public var registeredInstallationUuid: F4SUUID?
+    public init() {}
+    
+    public func ensureDeviceIsRegistered(completion: @escaping (F4SNetworkResult<F4SRegisterDeviceResult>) -> ()) {
+    }
+}
+
+public class MockF4SGetAllPlacementsService: F4SGetAllPlacementsServiceProtocol {
+    
+    var result: F4SNetworkResult<[F4STimelinePlacement]>
+    
+    public init(result: F4SNetworkResult<[F4STimelinePlacement]>) {
+        self.result = result
+    }
+    
+    public func getAllPlacementsForUser(completion: @escaping (F4SNetworkResult<[F4STimelinePlacement]>) -> ()) {
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            completion(strongSelf.result)
+        }
+    }
+}
+
 public class MockF4SCompanyDocumentsModel: F4SCompanyDocumentsModelProtocol {
     public var documents: F4SCompanyDocuments = []
     
@@ -105,12 +164,14 @@ public class MockFavouritingService: CompanyFavouritingServiceProtocol {
 }
 
 public class MockF4SContentService: F4SContentServiceProtocol {
+    public init() {}
     public func getContent(completion: @escaping (F4SNetworkResult<[F4SContentDescriptor]>) -> ()) {
         
     }
 }
 
 public class MockF4SDeviceRegistrationServiceProtocol : F4SDeviceRegistrationServiceProtocol {
+    public init() {}
     public func registerDevice(anonymousUser: F4SAnonymousUser, completion: @escaping ((F4SNetworkResult<F4SRegisterDeviceResult>) -> ())) {
         
     }
@@ -120,12 +181,12 @@ public class MockF4SPlacementServiceFactory : F4SPlacementApplicationServiceFact
     var successJson: F4SPlacementJson?
     let responseStatusCode: HTTPStatusCode
     
-    init(successCreatePlacementJson: F4SPlacementJson) {
+    public init(successCreatePlacementJson: F4SPlacementJson) {
         self.successJson = successCreatePlacementJson
         self.responseStatusCode = 200
     }
     
-    init(errorResponseCode: HTTPStatusCode) {
+    public init(errorResponseCode: HTTPStatusCode) {
         self.responseStatusCode = errorResponseCode
     }
     
@@ -144,18 +205,22 @@ public class MockF4SPlacementServiceFactory : F4SPlacementApplicationServiceFact
 }
 
 public class MockF4SGetAllPlacementsServiceProtocol: F4SGetAllPlacementsServiceProtocol {
+    public init() {}
     public func getAllPlacementsForUser(completion: @escaping (F4SNetworkResult<[F4STimelinePlacement]>) -> ()) {
         
     }
 }
 
 public class MockF4STemplateService : F4STemplateServiceProtocol {
+    public init() {}
     public func getTemplates(completion: @escaping (F4SNetworkResult<[F4STemplate]>) -> Void) {
         
     }
 }
 
 public class MockF4SPlacementService : F4SPlacementApplicationServiceProtocol {
+    public init() {}
+    
     public func apply(with json: F4SCreatePlacementJson, completion: @escaping (F4SNetworkResult<F4SPlacementJson>) -> Void) {
         
     }
@@ -167,6 +232,7 @@ public class MockF4SPlacementService : F4SPlacementApplicationServiceProtocol {
 
 public class MockPlacementsRepository: F4SPlacementRepositoryProtocol {
     var placements = [F4SUUID:F4SPlacement]()
+    public init() {}
     public func load() -> [F4SPlacement] {
         return Array(placements.values)
     }
@@ -179,6 +245,7 @@ public class MockInterestsRepository: F4SInterestsRepositoryProtocol {
     var allInterests = [F4SUUID: F4SInterest]()
     var userInterests = [F4SInterest]()
     
+    public init() {}
     public func loadAllInterests() -> [F4SInterest] {
         return Array(allInterests.values)
     }
@@ -207,7 +274,7 @@ public class MockF4SUserService: F4SUserServiceProtocol {
     var errorResult = F4SRegisterDeviceResult(errors: F4SJSONValue(integerLiteral: 999))
     var error = F4SNetworkError(localizedDescription: "Error handling test", attempting: "test", retry: false, logError: false)
     
-    init(registeringWillSucceedOnAttempt: Int) {
+    public init(registeringWillSucceedOnAttempt: Int) {
         self.registeringWillSucceedOnAttempt = registeringWillSucceedOnAttempt
     }
     
@@ -227,6 +294,8 @@ public class MockF4SUserService: F4SUserServiceProtocol {
 
 public class MockF4SUserStatusService : F4SUserStatusServiceProtocol {
     public var userStatus: F4SUserStatus?
+    
+    public init() {}
     
     public func beginStatusUpdate() {}
     

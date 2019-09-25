@@ -104,18 +104,4 @@ extension AllowedToApplyLogicTests {
     }
 }
 
-class MockF4SGetAllPlacementsService: F4SGetAllPlacementsServiceProtocol {
-    
-    var result: F4SNetworkResult<[F4STimelinePlacement]>
-    
-    init(result: F4SNetworkResult<[F4STimelinePlacement]>) {
-        self.result = result
-    }
-    
-    func getAllPlacementsForUser(completion: @escaping (F4SNetworkResult<[F4STimelinePlacement]>) -> ()) {
-        DispatchQueue.main.async { [weak self] in
-            guard let strongSelf = self else { return }
-            completion(strongSelf.result)
-        }
-    }
-}
+
