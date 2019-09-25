@@ -1,6 +1,7 @@
 
 import Foundation
 import UserNotifications
+import WorkfinderCommon
 
 enum NotificationType: String {
     case message
@@ -11,15 +12,16 @@ enum NotificationType: String {
 class UNService : NSObject {
     
     private let didDeclineKey: String = "didDeclineRemoteNotifications"
-    
-    static let shared: UNService = {
-        let service = UNService()
-        service.center.delegate = service
-        return service
-    }()
-    
+    weak var appCoordinator: AppCoordinatorProtocol!
     let center = UNUserNotificationCenter.current()
+    var log: F4SAnalyticsAndDebugging { return appCoordinator.log }
     
+    init(appCoordinator: AppCoordinatorProtocol) {
+        self.appCoordinator = appCoordinator
+        super.init()
+        center.delegate = self
+    }
+
     func authorize() {
         center.getNotificationSettings { [weak self] (settings) in
             guard let center = self?.center else { return }
@@ -45,7 +47,8 @@ class UNService : NSObject {
     
     func alertUserNotificationReceived(notificationData: F4SPushNotificationData) {
         guard let rootViewCtrl = UIApplication.shared.delegate?.window??.rootViewController else {
-            globalLog.debug("Can't handle notification because there is no root view controller")
+            log.debug("Can't handle notification because there is no root view controller",
+                      functionName: #function, fileName: #file, lineNumber: #line)
             return
         }
         
@@ -64,37 +67,32 @@ class UNService : NSObject {
     }
     
     func updateTabBarBadgeNumbers() {
-        TabBarCoordinator.sharedInstance?.updateBadges()
+        appCoordinator?.updateBadges()
     }
 
     func handleRemoteNotification(userInfo: [AnyHashable: Any]) {
-        globalLog.debug("Handling remote notification with user info...")
-        globalLog.debug(userInfo)
-        guard let _ = TabBarCoordinator.sharedInstance else { return /* No UI, so can't do anything */ }
         updateTabBarBadgeNumbers() // Always take the opportunity to do this if there is UI to show it
         guard let notificationData = F4SPushNotificationData(userInfo: userInfo) else {
-            globalLog.debug("Unrecognised notification")
+            log.debug("Unrecognised notification. UserInfo: \(userInfo.debugDescription)",
+                functionName: #function, fileName: #file, lineNumber: #line)
             return
         }
         let state = UIApplication.shared.applicationState
         if state == .background  || state == .inactive{
-            globalLog.debug("navigating to best destination for notification")
             dispatchToBestDestination(notificationData: notificationData)
-        }else if state == .active {
-            globalLog.debug("Push notification cannot be processed because the app is active")
+        } else if state == .active {
+            // do nothing
         }
     }
     
     func dispatchToBestDestination(notificationData: F4SPushNotificationData) {
         switch notificationData.type {
         case NotificationType.message:
-            TabBarCoordinator.sharedInstance.navigateToTimeline(threadUuid: notificationData.threadUuid)
-            
+            appCoordinator.showMessages()
+        case NotificationType.recommendation:
+            appCoordinator.showRecommendations()
         case NotificationType.rating:
             break
-            
-        case NotificationType.recommendation:
-            TabBarCoordinator.sharedInstance.navigateToRecommendations()
         }
     }
 }
@@ -138,7 +136,6 @@ extension UNService : UNUserNotificationCenterDelegate {
     // This method is called when the app is in the foreground
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
-        globalLog.debug("Notification received while in foreground with serInfo \n\(userInfo)")
         handleRemoteNotification(userInfo: userInfo)
         completionHandler([.badge, .sound])
     }

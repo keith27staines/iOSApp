@@ -8,6 +8,7 @@
 
 import XCTest
 import WorkfinderCommon
+import WorkfinderServices
 
 @testable import WorkfinderApplyUseCase
 
@@ -33,18 +34,17 @@ class ApplicationLetterModelTests: XCTestCase {
     }
 }
 
-class MockWEXPlacementService : WEXPlacementServiceProtocol {
-    func createPlacement(with json: WEXCreatePlacementJson, completion: @escaping (WEXResult<WEXPlacementJson, WEXError>) -> Void) {
+class MockF4SPlacementService : F4SPlacementApplicationServiceProtocol {
+    func apply(with json: F4SCreatePlacementJson, completion: @escaping (F4SNetworkResult<F4SPlacementJson>) -> Void) {
         
     }
     
-    func patchPlacement(uuid: F4SUUID, with json: WEXPlacementJson, completion: @escaping (WEXResult<WEXPlacementJson, WEXError>) -> Void) {
-        
+    func update(uuid: F4SUUID, with json: F4SPlacementJson, completion: @escaping (F4SNetworkResult<F4SPlacementJson>) -> Void) {
+    
     }
 }
 
 class TestLetterModelDelegate : ApplicationLetterModelDelegate{
-    
     var reportBusyStateSet: ((Bool) -> Void ) = { isBusy in }
     var reportProcessingError: ((Error) -> Void) = { error in }
     var reportRendered: ((NSAttributedString, Bool) -> Void) = { text, allFieldsFilled in }
@@ -61,7 +61,7 @@ class TestLetterModelDelegate : ApplicationLetterModelDelegate{
         reportRendered(renderedTemplateToString, allFieldsFilled)
     }
     
-    func applicationLetterModel(_ model: ApplicationLetterModelProtocol, failedToSubmitLetter error: WEXError, retry: (() -> Void)?) {
+    func applicationLetterModel(_ model: ApplicationLetterModelProtocol, failedToSubmitLetter error: F4SNetworkError, retry: (() -> Void)?) {
         
     }
 }

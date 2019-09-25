@@ -9,19 +9,20 @@
 import UIKit
 import Reachability
 import WorkfinderCommon
+import WorkfinderServices
 import WorkfinderUI
 
 class TabBarViewController: UITabBarController {
 
     var reachability: Reachability?
+    let userStatusService: F4SUserStatusServiceProtocol
     
-    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    public init(userStatusService: F4SUserStatusServiceProtocol) {
+        self.userStatusService = userStatusService
+        super.init(nibName: nil, bundle: nil)
     }
     
-    public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
+    public required init?(coder aDecoder: NSCoder) { fatalError() }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,7 @@ class TabBarViewController: UITabBarController {
                                        selector: #selector(catchUserStatusUpdatedNotification),
                                        name: .f4sUserStatusUpdated,
                                        object: nil)
-        if let status = F4SUserStatusService.shared.userStatus {
+        if let status = userStatusService.userStatus {
             processUserStatusUpdate(status)
         }
         
@@ -48,7 +49,6 @@ class TabBarViewController: UITabBarController {
     
     func processUserStatusUpdate(_ status: F4SUserStatus) {
         configureTimelineTabBarWithCount(count: status.unreadMessageCount)
-        displayRatingPopover(unratedPlacements: status.unratedPlacements)
         let shouldLoadTimeline = status.unreadMessageCount > 0
         UserDefaults.standard.set(shouldLoadTimeline, forKey: UserDefaultsKeys.shouldLoadTimeline)
     }
@@ -62,20 +62,6 @@ class TabBarViewController: UITabBarController {
             } else {
                 tabBarItem.badgeValue = nil
             }
-        }
-    }
-    
-    func displayRatingPopover(unratedPlacements: [F4SUUID]) {
-        guard let placementUuid = unratedPlacements.first, let topViewCtrl = self.topMostViewController else { return }
-
-        if topViewCtrl is TimelineViewController || topViewCtrl is MessageViewController || topViewCtrl is MessageContainerViewController || topViewCtrl is MapViewController {
-            if let centerCtrl = self.evo_drawerController?.centerViewController as? TabBarViewController {
-                if let currentTabCtrl = centerCtrl.selectedViewController {
-                    TabBarCoordinator.sharedInstance.presentRatePlacementPopover(parentCtrl: currentTabCtrl, placementUuid: placementUuid, ratePlacementProtocol: self)
-                }
-            }
-        } else {
-            TabBarCoordinator.sharedInstance.presentRatePlacementPopover(parentCtrl: topViewCtrl, placementUuid: placementUuid, ratePlacementProtocol: self)
         }
     }
 

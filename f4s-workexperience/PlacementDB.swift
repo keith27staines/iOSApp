@@ -48,12 +48,9 @@ class PlacementDB: NSManagedObject {
             return fetchResult[0]
         }
     }
-
-    class func getPlacementsForUser(_ moc: NSManagedObjectContext, userUuid: String) -> [PlacementDB] {
+    
+    class func getAllPlacements(_ moc: NSManagedObjectContext) -> [PlacementDB] {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest<NSFetchRequestResult>(entityName: "Placement")
-
-        let predicate = NSPredicate(format: "userUuid == %@", userUuid)
-        fetchRequest.predicate = predicate
 
         guard let fetchResult = (try? moc.fetch(fetchRequest)) as? [PlacementDB], !fetchResult.isEmpty else {
             return []
@@ -70,20 +67,10 @@ class PlacementDB: NSManagedObject {
         return firstPlacement
     }
 
-    class func getAllPlacements(_ moc: NSManagedObjectContext) -> [PlacementDB] {
+    class func getPlacement(_ moc: NSManagedObjectContext, placementUuid: String) -> PlacementDB? {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest<NSFetchRequestResult>(entityName: "Placement")
 
-        guard let fetchResult = (try? moc.fetch(fetchRequest)) as? [PlacementDB], !fetchResult.isEmpty else {
-            return []
-        }
-
-        return fetchResult
-    }
-
-    class func getPlacementsWithUuid(_ moc: NSManagedObjectContext, userUuid: String, placementUuid: String) -> PlacementDB? {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest<NSFetchRequestResult>(entityName: "Placement")
-
-        let predicate = NSPredicate(format: "userUuid == %@ && placementUuid == %@", userUuid, placementUuid)
+        let predicate = NSPredicate(format: "placementUuid == %@", placementUuid)
         fetchRequest.predicate = predicate
 
         guard let fetchResult = (try? moc.fetch(fetchRequest)) as? [PlacementDB], !fetchResult.isEmpty else {

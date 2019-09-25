@@ -10,13 +10,10 @@ import WorkfinderCommon
 /// the same functionality, `F4SNetworkSessionManager` will be retained and
 /// 'WEXSessionManager' will, with only a little more work, be obsolete and can
 /// then be removed from the project
-public class F4SNetworkSessionManager {
+public class F4SNetworkSessionManager: F4SNetworkSessionManagerProtocol {
     
     /// The api key used in all Workfinder services
     public let wexApiKey: String
-    
-    /// A singleton that manages all sessions
-    public static var shared: F4SNetworkSessionManager!
     
     /// `interactiveSession` is designed for services that connect to Workfinder
     /// which includes majority of services used in the app
@@ -36,7 +33,7 @@ public class F4SNetworkSessionManager {
     }
     
     /// Creates a new instance and configures it with the specified api key
-    public init(wexApiKey: String = NetworkConfig.wexApiKey) {
+    public init(wexApiKey: String) {
         self.wexApiKey = wexApiKey
     }
     

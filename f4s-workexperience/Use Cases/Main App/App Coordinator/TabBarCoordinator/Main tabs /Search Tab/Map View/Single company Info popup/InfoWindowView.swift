@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WorkfinderUI
 
 class InfoWindowView: UIView {
 
@@ -21,7 +22,7 @@ class InfoWindowView: UIView {
     @IBOutlet weak var thirdStarImageView: UIImageView!
     @IBOutlet weak var fourthStarImageView: UIImageView!
     @IBOutlet weak var fifthStarImageView: UIImageView!
-    @IBOutlet weak var logoImageView: UIImageView!
+    @IBOutlet weak var logoImageView: F4SSelfLoadingImageView!
     @IBOutlet weak var triangleView: TriangleView!
 
     @IBOutlet weak var backgroundView: UIView!

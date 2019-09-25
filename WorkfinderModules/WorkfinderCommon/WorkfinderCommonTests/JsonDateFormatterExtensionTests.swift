@@ -7,7 +7,7 @@ class JsonDateFormatterExtensionTests: XCTestCase {
     
     let sut = DateFormatter.iso8601Full
     
-    func test_dateStringFromDate() {
+    func test_dateString_from_date_time_and_timezone() {
         let date = dateComponents.date!
         let dateString = sut.string(from: date)
         XCTAssertEqual(dateString, "2019-10-30T17:18:19.012Z")

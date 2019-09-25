@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 // MARK:-
 public class F4SCompanyPin : NSObject, GMUClusterItem {

@@ -2,6 +2,33 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:WorkfinderOnboardingUseCase/WorkfinderOnboardingUseCase.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:WorkfinderRecommendations/WorkfinderRecommendations.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:WorkfinderMessagesUseCase/WorkfinderMessagesUseCase.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:WorkfinderFavouritesUseCase/WorkfinderFavouritesUseCase.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:WorkfinderDocumentUploadUseCase/WorkfinderDocumentUploadUseCase.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:WorkfinderCompanyDetailsUseCase/WorkfinderCompanyDetailsUseCase.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:WorkfinderUserDetailsUseCase/WorkfinderUserDetailsUseCase.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:WorkfinderCoordinators/WorkfinderCoordinators.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:WorkfinderAcceptUseCase/WorkfinderAcceptUseCase.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:WorkfinderServices/WorkfinderServices.xcodeproj">
    </FileRef>
    <FileRef

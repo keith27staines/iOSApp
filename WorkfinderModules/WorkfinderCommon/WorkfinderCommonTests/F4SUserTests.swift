@@ -11,113 +11,66 @@ import XCTest
 @testable import WorkfinderCommon
 
 class F4SUserTests: XCTestCase {
-
-    func testCreateUserWithDefaultStorage() {
-        XCTAssertTrue(F4SUser().localStore === UserDefaults.standard)
-    }
-    
-    func testCreateUserWithInjectedStorage() {
-        let injectedStore = makeMockLocalStore()
-        let sut = makeUser(injectingLocalStore: injectedStore)
-        XCTAssertTrue(sut.localStore === injectedStore)
-    }
     
     func testCreateUserWithNoUuid() {
-        let injectedStore = makeMockLocalStore(userUuid: nil)
-        let sut = makeUser(injectingLocalStore: injectedStore)
+        let sut = F4SUser()
         XCTAssertNil(sut.uuid)
+        XCTAssertEqual(sut.email, "")
+        XCTAssertEqual(sut.firstName, "")
+        XCTAssertNil(sut.lastName)
+        XCTAssertNil(sut.consenterEmail)
+        XCTAssertNil(sut.parentEmail)
+        XCTAssertFalse(sut.requiresConsent)
+        XCTAssertNil(sut.dateOfBirth)
+        XCTAssertNil(sut.partners)
+        XCTAssertFalse(sut.termsAgreed)
+        XCTAssertNil(sut.fullName)
     }
     
     func testCreateUserWithUuid() {
-        let injectedStore = makeMockLocalStore(userUuid: "userUuid")
-        let sut = makeUser(injectingLocalStore: injectedStore)
-        XCTAssertEqual(sut.uuid,"userUuid")
-    }
-    
-    func testAnalyticsInjection() {
-        let injectedStore = makeMockLocalStore(userUuid: "userUuid")
-        let mockAnalytics = MockF4SAnalyticsAndDebugging()
-        let sut = makeUser(injectingLocalStore: injectedStore, analytics: mockAnalytics)
-        let sutAnalytics = sut.analytics as! MockF4SAnalyticsAndDebugging
-        XCTAssertTrue(sutAnalytics === mockAnalytics)
-        XCTAssertEqual(sutAnalytics.aliases.count, 0)
-    }
-    
-    func testAnalyticsAliasCalledOnUpdatingUserUuid() {
-        let injectedStore = makeMockLocalStore(userUuid: "userUuid")
-        let mockAnalytics = MockF4SAnalyticsAndDebugging()
-        let sut = makeUser(injectingLocalStore: injectedStore, analytics: mockAnalytics)
-        sut.updateUuid(uuid: "otherUuid")
-        XCTAssertTrue(mockAnalytics.aliases.first == "otherUuid")
-        XCTAssertTrue(mockAnalytics.aliases.count == 1)
-    }
-    
-    func testNonOnboardedUser() {
-        let injectedStore = makeMockLocalStore(userUuid: "uuid", isOnboarded: false)
-        let sut = makeUser(injectingLocalStore: injectedStore)
-        XCTAssertEqual(sut.isOnboarded, false)
-    }
-    
-    func testUserWithNoDictionaryEntryForIsFirstLaunch() {
-        let injectedStore = makeMockLocalStore(userUuid: "uuid", isOnboarded: false)
-        injectedStore.setValue(nil, for: LocalStore.Key.isFirstLaunch)
-        let sut = makeUser(injectingLocalStore: injectedStore)
-        XCTAssertEqual(sut.isOnboarded, false)
-    }
-    
-    func testUserDidOnboard() {
-        let injectedStore = makeMockLocalStore(userUuid: "uuid", isOnboarded: false)
-        let sut = makeUser(injectingLocalStore: injectedStore)
-        sut.didFinishOnboarding()
-        XCTAssertEqual(sut.isOnboarded, true)
+        let date = Date()
+        let sut = F4SUser(uuid: "uuid", email: "email", firstName: "first", lastName: "last", consenterEmail: "consenter", parentEmail: "parent", requiresConsent: true, dateOfBirth: date, partners: [], termsAgreed: true)
+        XCTAssertEqual(sut.uuid, "uuid")
+        XCTAssertEqual(sut.email, "email")
+        XCTAssertEqual(sut.firstName, "first")
+        XCTAssertEqual(sut.lastName, "last")
+        XCTAssertEqual(sut.consenterEmail, "consenter")
+        XCTAssertEqual(sut.parentEmail, "parent")
+        XCTAssertEqual(sut.requiresConsent, true)
+        XCTAssertEqual(sut.dateOfBirth, date)
+        XCTAssertEqual(sut.partners!.count, 0)
+        XCTAssertEqual(sut.termsAgreed, true)
+        XCTAssertEqual(sut.fullName, "first last")
     }
     
     func test_user_fullName_with_first_and_last_names() {
-        let injectedStore = makeMockLocalStore(userUuid: "uuid", isOnboarded: false)
-        let sut = makeUser(injectingLocalStore: injectedStore)
+        var sut = F4SUser()
         sut.firstName = "first"
         sut.lastName = "last"
         XCTAssertTrue(sut.fullName == "first last")
     }
     
     func test_user_fullName_with_first_name_only() {
-        let injectedStore = makeMockLocalStore(userUuid: "uuid", isOnboarded: false)
-        let sut = makeUser(injectingLocalStore: injectedStore)
+        var sut = F4SUser()
         sut.firstName = "first"
         XCTAssertTrue(sut.fullName == "first")
     }
     
     func test_user_fullName_with_last_name_only() {
-        let injectedStore = makeMockLocalStore(userUuid: "uuid", isOnboarded: false)
-        let sut = makeUser(injectingLocalStore: injectedStore)
+        var sut = F4SUser()
         sut.lastName = "last"
         XCTAssertTrue(sut.fullName == "last")
     }
     
     func test_user_fullName_with_first_and_compound_last_name() {
-        let injectedStore = makeMockLocalStore(userUuid: "uuid", isOnboarded: false)
-        let sut = makeUser(injectingLocalStore: injectedStore)
+        var sut = F4SUser()
         sut.firstName = "first"
         sut.lastName = "middle last"
         XCTAssertTrue(sut.fullName == "first middle last")
     }
     
-    func test_user_fullName_with_no_name() {
-        let injectedStore = makeMockLocalStore(userUuid: "uuid", isOnboarded: false)
-        let sut = makeUser(injectingLocalStore: injectedStore)
-        XCTAssertNil(sut.fullName)
-    }
-    
-    func test_nullifyUuid() {
-        let injectedStore = makeMockLocalStore(userUuid: "uuid", isOnboarded: false)
-        let sut = makeUser(injectingLocalStore: injectedStore)
-        sut.nullifyUuid()
-        XCTAssertNil(sut.uuid)
-    }
-    
     func test_age_zero() {
-        let injectedStore = makeMockLocalStore(userUuid: "uuid", isOnboarded: false)
-        let sut = makeUser(injectingLocalStore: injectedStore)
+        var sut = F4SUser()
         sut.dateOfBirth = DateComponents(calendar: Calendar.current, year: 2000, month: 1, day: 1).date
         let testDate = DateComponents(calendar: Calendar.current, year: 2000, month: 1, day: 1).date
         let age = sut.age(on: testDate!)
@@ -125,8 +78,7 @@ class F4SUserTests: XCTestCase {
     }
     
     func test_age_99() {
-        let injectedStore = makeMockLocalStore(userUuid: "uuid", isOnboarded: false)
-        let sut = makeUser(injectingLocalStore: injectedStore)
+        var sut = F4SUser()
         sut.dateOfBirth = DateComponents(calendar: Calendar.current, year: 2000, month: 1, day: 1).date
         let testDate = DateComponents(calendar: Calendar.current, year: 2099, month: 1, day: 1).date
         let age = sut.age(on: testDate!)
@@ -134,8 +86,7 @@ class F4SUserTests: XCTestCase {
     }
     
     func test_age_day_before_birthday() {
-        let injectedStore = makeMockLocalStore(userUuid: "uuid", isOnboarded: false)
-        let sut = makeUser(injectingLocalStore: injectedStore)
+        var sut = F4SUser()
         sut.dateOfBirth = DateComponents(calendar: Calendar.current, year: 2000, month: 6, day: 15).date
         let testDate = DateComponents(calendar: Calendar.current, year: 2016, month: 6, day: 14).date
         let age = sut.age(on: testDate!)
@@ -143,8 +94,7 @@ class F4SUserTests: XCTestCase {
     }
     
     func test_age_on_birthday() {
-        let injectedStore = makeMockLocalStore(userUuid: "uuid", isOnboarded: false)
-        let sut = makeUser(injectingLocalStore: injectedStore)
+        var sut = F4SUser()
         sut.dateOfBirth = DateComponents(calendar: Calendar.current, year: 2000, month: 6, day: 15).date
         let testDate = DateComponents(calendar: Calendar.current, year: 2016, month: 6, day: 15).date
         let age = sut.age(on: testDate!)
@@ -152,8 +102,7 @@ class F4SUserTests: XCTestCase {
     }
     
     func test_age_one_day_after_birthday() {
-        let injectedStore = makeMockLocalStore(userUuid: "uuid", isOnboarded: false)
-        let sut = makeUser(injectingLocalStore: injectedStore)
+        var sut = F4SUser()
         sut.dateOfBirth = DateComponents(calendar: Calendar.current, year: 2000, month: 6, day: 15).date
         let testDate = DateComponents(calendar: Calendar.current, year: 2016, month: 6, day: 16).date
         let age = sut.age(on: testDate!)
@@ -161,78 +110,37 @@ class F4SUserTests: XCTestCase {
     }
     
     func test_age_before_dob_set() {
-        let injectedStore = makeMockLocalStore(userUuid: "uuid", isOnboarded: false)
-        let sut = makeUser(injectingLocalStore: injectedStore)
+        let sut = F4SUser()
         let testDate = DateComponents(calendar: Calendar.current, year: 2016, month: 6, day: 16).date
         let age = sut.age(on: testDate!)
         XCTAssertNil(age)
     }
     
-    func test_isOnboarded_when_not_onboarded() {
-        let injectedStore = makeMockLocalStore(userUuid: "uuid", isOnboarded: false)
-        injectedStore.setValue(nil, for: LocalStore.Key.isFirstLaunch)
-        let sut = makeUser(injectingLocalStore: injectedStore)
-        XCTAssertFalse(sut.isOnboarded)
-    }
-    
-    func test_isOnboarded_when_onboarded() {
-        let injectedStore = makeMockLocalStore(userUuid: "uuid", isOnboarded: false)
-        let sut = makeUser(injectingLocalStore: injectedStore)
-        sut.didFinishOnboarding()
-        XCTAssertTrue(sut.isOnboarded)
-    }
-    
-    func test_initialise_from_user_info() {
-        let dob = DateComponents(calendar: Calendar.current, year: 2000, month: 1, day: 1).date!
-        let partners = [F4SUUIDDictionary(uuid: "partnerUuid")]
-        let info1 = F4SUserInformation(uuid: "uuid", consenterEmail: "consenterEmail", parentEmail: "parentEmail", dateOfBirth: dob, email: "userEmail", firstName: "first", lastName: "last", requiresConsent: false, termsAgreed: false, vouchers: ["voucherUuid"], partners: partners, isOnboarded: false, isRegistered: false)
-        let sut = F4SUser(userInformation: info1)
-        let info2 = sut.extractUserInformation()
-        assertUserInfoEquivalent(info1: info1, info2: info2)
-    }
-    
-    func test_initialise_from_local_store() {
-        let dob = DateComponents(calendar: Calendar.current, year: 2000, month: 1, day: 1).date!
-        let partners = [F4SUUIDDictionary(uuid: "partnerUuid")]
-        let info1 = F4SUserInformation(uuid: "uuid", consenterEmail: "consenterEmail", parentEmail: "parentEmail", dateOfBirth: dob, email: "userEmail", firstName: "first", lastName: "last", requiresConsent: false, termsAgreed: false, vouchers: ["voucherUuid"], partners: partners, isOnboarded: false, isRegistered: false)
-        let userToStore = F4SUser(userInformation: info1)
-        let localStore = MockLocalStore()
-        let repo = F4SUserRepository(localStore: localStore)
-        repo.save(user: userToStore)
-        let sut = F4SUser(localStore: localStore)
-        let info2 = sut.extractUserInformation()
-        assertUserInfoEquivalent(info1: info1, info2: info2)
-    }
-    
-    func test_update_from_user_info() {
-        let dob = DateComponents(calendar: Calendar.current, year: 2000, month: 1, day: 1).date!
-        let partners = [F4SUUIDDictionary(uuid: "partnerUuid")]
-        let info = F4SUserInformation(uuid: "uuid", consenterEmail: "consenterEmail", parentEmail: "parentEmail", dateOfBirth: dob, email: "userEmail", firstName: "first", lastName: "last", requiresConsent: false, termsAgreed: false, vouchers: ["voucherUuid"], partners: partners, isOnboarded: false, isRegistered: false)
-        
-        let dob1 = DateComponents(calendar: Calendar.current, year: 2001, month: 1, day: 1).date!
-        let partners1 = [F4SUUIDDictionary(uuid: "partnerUuid1")]
-        let updateInfo = F4SUserInformation(uuid: "uuid1", consenterEmail: "consenterEmail1", parentEmail: "parentEmail1", dateOfBirth: dob1, email: "userEmail1", firstName: "first1", lastName: "last1", requiresConsent: true, termsAgreed: true, vouchers: ["voucherUuid1"], partners: partners1, isOnboarded: true, isRegistered: true)
-        
-        let sut = F4SUser(userInformation: info)
-        sut.updateFrom(updateInfo)
-        assertUserInfoEquivalent(info1: updateInfo, info2: sut.extractUserInformation())
+    func test_initialise_with_user_data() {
+        let userData = TestUserData(userUuid: "uuid", email: "email", firstName: "firstName", lastName: "lastName", consenterEmail: "consenter", requiresConsent: true, dateOfBirth: "2000-01-01")
+        let sut = F4SUser(userData: userData, localStore: MockLocalStore())
+        XCTAssertEqual(sut.uuid, "uuid")
+        XCTAssertEqual(sut.email, "email")
+        XCTAssertEqual(sut.firstName, "firstName")
+        XCTAssertEqual(sut.lastName, "lastName")
+        XCTAssertEqual(sut.consenterEmail, "consenter")
+        XCTAssertEqual(sut.requiresConsent, true)
+        XCTAssertEqual(sut.dateOfBirth, DateComponents(calendar: Calendar.current,year: 2000, month: 1, day: 1).date!)
     }
 }
 
 extension F4SUserTests {
-    func assertUserInfoEquivalent(info1: F4SUserInformation, info2: F4SUserInformation) {
+    func assertUserInfoEquivalent(info1: F4SUser, info2: F4SUser) {
         XCTAssertTrue(
             info1.consenterEmail == info1.consenterEmail &&
                 info1.dateOfBirth == info1.dateOfBirth &&
                 info1.email == info1.email &&
                 info1.firstName == info1.firstName &&
                 info1.lastName == info1.lastName &&
-                info1.isOnboarded == info1.isOnboarded &&
                 info1.parentEmail == info1.parentEmail &&
                 info1.partners!.first!.uuid == info1.partners!.first!.uuid &&
                 info1.requiresConsent == info1.requiresConsent &&
                 info1.termsAgreed == info1.termsAgreed &&
-                info1.vouchers == info1.vouchers &&
                 info1.fullName == info1.fullName
         )
     }
@@ -247,8 +155,24 @@ extension F4SUserTests {
     }
     
     func makeUser(injectingLocalStore: LocalStorageProtocol, analytics: F4SAnalytics? = nil) -> F4SUser {
-        let user = F4SUser(localStore: injectingLocalStore)
-        user.analytics = analytics ?? MockF4SAnalyticsAndDebugging()
-        return user
+        let user = injectingLocalStore.value(key: LocalStore.Key.user)
+        return user as! F4SUser
     }
+}
+
+struct TestUserData: UserData {
+    var userUuid: String?
+    
+    var email: String?
+    
+    var firstName: String?
+    
+    var lastName: String?
+    
+    var consenterEmail: String?
+    
+    var requiresConsent: Bool
+    
+    var dateOfBirth: String?
+    
 }

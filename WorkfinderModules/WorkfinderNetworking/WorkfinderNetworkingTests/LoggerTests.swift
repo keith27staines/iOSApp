@@ -17,12 +17,12 @@ class LoggerTests: XCTestCase {
     func test_injected_log_is_being_used() {
         let log = MockLog()
         log.identity(userId: "Test identity")
-        let sut = Logger(log: log)
+        let sut = NetworkCallLogger(log: log)
         XCTAssertEqual((sut.log as? MockLog)!.lastIdentity, "Test identity")
     }
     
     func test_convertTaskFailureToError() {
-        let sut = Logger(log: MockLog())
+        let sut = NetworkCallLogger(log: MockLog())
         let nsError = sut.taskFailureToError(code: 12345, text: "Bad stuff happened")
         XCTAssertEqual(nsError.domain, "iOS Workfinder Networking")
         XCTAssertEqual(nsError.userInfo["reason"] as! String, "Bad stuff happened")
@@ -30,7 +30,7 @@ class LoggerTests: XCTestCase {
     
     func test_logDataTaskSuccess_with_valid_data() {
         let log = MockLog()
-        let sut = Logger(log: log)
+        let sut = NetworkCallLogger(log: log)
         var request = URLRequest(url: testURL)
         request.httpBody = "RequestData".data(using: String.Encoding.utf8)!
         request.allHTTPHeaderFields = ["headerField1":"headerField1"]
@@ -64,7 +64,7 @@ class LoggerTests: XCTestCase {
     
     func test_logDataTaskSuccess_with_invalid_data() {
         let log = MockLog()
-        let sut = Logger(log: log)
+        let sut = NetworkCallLogger(log: log)
         var request = URLRequest(url: testURL)
         request.httpBody = Data()
         request.allHTTPHeaderFields = ["headerField1":"headerField1"]
@@ -97,7 +97,7 @@ class LoggerTests: XCTestCase {
     
     func test_logDataTaskFailure() {
         let log = MockLog()
-        let sut = Logger(log: log)
+        let sut = NetworkCallLogger(log: log)
         var request = URLRequest(url: testURL)
         request.httpBody = "RequestData".data(using: String.Encoding.utf8)!
         request.allHTTPHeaderFields = ["headerField1":"headerField1"]

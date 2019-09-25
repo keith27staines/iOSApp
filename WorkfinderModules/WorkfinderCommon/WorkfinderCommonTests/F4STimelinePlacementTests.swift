@@ -108,10 +108,9 @@ class F4STimelinePlacementTests: XCTestCase {
         decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
         return try? decoder.decode(F4STimelinePlacement.self, from: data)
     }
-
 }
 
-class F4SMessagetests : XCTestCase {
+class F4SMessageTests : XCTestCase {
     func test_initialise() {
         let date = Date()
         let sut = F4SMessage(uuid: "uuid", dateTime: date, relativeDateTime: "relative", content: "content", sender: "sender")
@@ -120,7 +119,6 @@ class F4SMessagetests : XCTestCase {
         XCTAssertEqual(sut.dateTime, date)
         XCTAssertEqual(sut.sender, "sender")
         XCTAssertNil(sut.isRead)
-        XCTAssertNil(sut.readDate)
         XCTAssertEqual(sut.receivedDate, date)
     }
     
@@ -130,4 +128,35 @@ class F4SMessagetests : XCTestCase {
         let sut2 = F4SMessage(uuid: "uuid", dateTime: date.addingTimeInterval(1000), relativeDateTime: "relative1", content: "content1", sender: "sender1")
         XCTAssertTrue(sut1.isEqual(other: sut2))
     }
+    
+    func test_receivedDate() {
+        let date = Date()
+        let sut = F4SMessage(uuid: "uuid", dateTime: date, relativeDateTime: "relative", content: "content", sender: "sender")
+        XCTAssertEqual(sut.receivedDate, date)
+    }
+    
+    func test_sentDate() {
+        let date = Date()
+        let sut = F4SMessage(uuid: "uuid", dateTime: date, relativeDateTime: "relative", content: "content", sender: "sender")
+        XCTAssertEqual(sut.sentDate, date)
+    }
+    
+    func test_text() {
+        let date = Date()
+        let sut = F4SMessage(uuid: "uuid", dateTime: date, relativeDateTime: "relative", content: "content", sender: "sender")
+        XCTAssertEqual(sut.text, "content")
+    }
+    
+    func test_senderId() {
+        let date = Date()
+        let sut = F4SMessage(uuid: "uuid", dateTime: date, relativeDateTime: "relative", content: "content", sender: "sender")
+        XCTAssertEqual(sut.senderId, "sender")
+    }
+    
+    func test_dateToOrderBy() {
+        let date = Date()
+        let sut = F4SMessage(uuid: "uuid", dateTime: date, relativeDateTime: "relative", content: "content", sender: "sender")
+        XCTAssertEqual(sut.dateToOrderBy, sut.sentDate)
+    }
+
 }

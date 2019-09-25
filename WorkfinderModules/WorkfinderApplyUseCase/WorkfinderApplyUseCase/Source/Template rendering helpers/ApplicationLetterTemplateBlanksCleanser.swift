@@ -9,15 +9,15 @@
 import Foundation
 import WorkfinderCommon
 
-public class ApplicationLetterTemplateBlanksCleanser {
+class ApplicationLetterTemplateBlanksCleanser {
     
     private var templateBlanks: [F4STemplateBlank]
     
-    public init(templateBlanks: [F4STemplateBlank]) {
+    init(templateBlanks: [F4STemplateBlank]) {
         self.templateBlanks = templateBlanks
     }
     
-    public func cleanse() -> [F4STemplateBlank] {
+    func cleanse() -> [F4STemplateBlank] {
         removeInvalidDateFields()
         return templateBlanks
     }

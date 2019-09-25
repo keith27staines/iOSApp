@@ -196,6 +196,9 @@ public struct F4SAvailabilityPeriod {
 
 public struct F4SAvailabilityPeriodsJson : Codable {
     public var availability_periods: [F4SAvailabilityPeriodJson]
+    public init(availability_periods: [F4SAvailabilityPeriodJson]) {
+        self.availability_periods = availability_periods
+    }
 }
 
 public struct F4SAvailabilityPeriodJson : Codable {

@@ -69,8 +69,8 @@ typedef NS_ENUM(NSInteger, GMSPlacesErrorCode) {
    * Operation failed due to exceeding the usage rate limit for the API key.
    * <p>
    * This status code shouldn't be returned during normal usage of the API. It relates to usage of
-   * the API that far exceeds normal request levels. See the
-   * <a href="https://developers.google.com/places/ios-sdk/usage">usage limits guide</a> for more
+   * the API that far exceeds normal request levels.
+   * See the <a href="https://developers.google.com/places/ios-sdk/usage">usage limits guide</a> for more
    * information.
    */
   kGMSPlacesRateLimitExceeded = -7,

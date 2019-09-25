@@ -1,24 +1,7 @@
-//
-//  F4SDatabaseDownloadManager.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 13/06/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
-//
 
 import Foundation
 import WorkfinderCommon
-
-public typealias BackgroundSessionCompletionHandler = () -> Void
-
-public protocol F4SDatabaseDownloadManagerProtocol : class {
-    var localDatabaseDatestamp: Date? { get }
-    func start()
-    func registerObserver(_ observer: F4SCompanyDatabaseAvailabilityObserving)
-    func removeObserver(_ observer: F4SCompanyDatabaseAvailabilityObserving)
-    func ageOfLocalDatabase() -> TimeInterval
-    func isLocalDatabaseAvailable() -> Bool
-}
+import WorkfinderServices
 
 public class F4SDatabaseDownloadManager  : NSObject, F4SDatabaseDownloadManagerProtocol {
     
@@ -50,7 +33,7 @@ public class F4SDatabaseDownloadManager  : NSObject, F4SDatabaseDownloadManagerP
     
     private var databaseAvailabilityObservers = [BoxedObserver]()
     
-    private var backgroundSessionCompletionHandler: BackgroundSessionCompletionHandler? = nil
+    public var backgroundSessionCompletionHandler: BackgroundSessionCompletionHandler? = nil
     
     public func registerObserver(_ observer: F4SCompanyDatabaseAvailabilityObserving) {
         let boxedObserver = BoxedObserver(object: observer)
@@ -84,9 +67,7 @@ public class F4SDatabaseDownloadManager  : NSObject, F4SDatabaseDownloadManagerP
         return date
     }
     
-    lazy var metadataService: F4SCompanyDatabaseMetadataServiceProtocol = {
-        return F4SCompanyDatabaseMetadataService()
-    }()
+    let metadataService: F4SCompanyDatabaseMetadataServiceProtocol
     
     public func getDatabaseMetadataFromServer(completion: @escaping (F4SNetworkResult<F4SCompanyDatabaseMetaData>)->()) {
         metadataService.getDatabaseMetadata { (result) in
@@ -96,15 +77,9 @@ public class F4SDatabaseDownloadManager  : NSObject, F4SDatabaseDownloadManagerP
     
     var workerQueue = DispatchQueue(label: "F4SDatabaseDownloadManager.worker")
     
-    public init(backgroundSessionCompletionHandler: BackgroundSessionCompletionHandler? = nil) {
+    public init(metadataService: F4SCompanyDatabaseMetadataServiceProtocol) {
+        self.metadataService = metadataService
         super.init()
-        print("initializing with background session")
-        self.backgroundSessionCompletionHandler = backgroundSessionCompletionHandler
-    }
-    
-    public override init() {
-        super.init()
-        print("initializing without background session")
         self.databaseDownloadService = F4SDownloadService(delegate: self)
     }
     
@@ -216,7 +191,7 @@ extension F4SDatabaseDownloadManager : F4SDownloadServiceDelegate {
             })
             
         } catch {
-            globalLog.error(error)
+            // do nothing
         }
     }
     
@@ -225,9 +200,4 @@ extension F4SDatabaseDownloadManager : F4SDownloadServiceDelegate {
             boxedObserver.observer?.newDatabaseIsDownloading(progress: fractionComplete)
         })
     }
-}
-
-public protocol F4SCompanyDatabaseAvailabilityObserving : class {
-    func newStagedDatabaseIsAvailable(url: URL)
-    func newDatabaseIsDownloading(progress: Double)
 }

@@ -10,6 +10,7 @@ import XCTest
 import WorkfinderCommon
 import WorkfinderServices
 import WorkfinderAppLogic
+import WorkfinderCoordinators
 
 @testable import f4s_workexperience
 
@@ -20,8 +21,8 @@ class AppCoordinatorTests: XCTestCase {
     var mockRouter = MockNavigationRouter()
     var mockUserService = MockUserService(registeringWillSucceedOnAttempt: 1)
     var mockUserStatusService = MockUserStatusService()
-    var mockRegisteredUser = MockF4SUser.makeRegisteredUser()
-    var mockUnregisteredUser = MockF4SUser.makeUnregisteredUser()
+    var mockRegisteredUser = makeRegisteredUser()
+    var mockUnregisteredUser = makeUnregisteredUser()
     var mockAnalytics = MockF4SAnalyticsAndDebugging()
     var mockDatabaseDownloadManager = MockDatabaseDownloadManager()
     var sut: AppCoordinator!
@@ -32,7 +33,7 @@ class AppCoordinatorTests: XCTestCase {
         super.setUp()
         let user = mockUnregisteredUser
         let localStore = MockLocalStore()
-        let logic = AppInstallationUuidLogic(localStore: localStore, userService: mockUserService, userRepo: MockUserRepository(user: user))
+        let logic = AppInstallationUuidLogic(localStore: localStore, userService: mockUserService, userRepo: MockUserRepository(user: user), apnsEnvironment: "apnsEnvironment")
         injection = CoreInjection(
             launchOptions: nil,
             appInstallationUuidLogic: logic,
@@ -41,7 +42,7 @@ class AppCoordinatorTests: XCTestCase {
             userStatusService: mockUserStatusService,
             userRepository: MockUserRepository(user: mockUnregisteredUser),
             databaseDownloadManager: mockDatabaseDownloadManager,
-            f4sLog: mockAnalytics
+            log: mockAnalytics
         )
         sut = makeSUTAppCoordinator(router: mockRouter, injecting: injection)
         mockOnboardingCoordinator = MockOnboardingCoordinator(parent: sut)
@@ -60,7 +61,6 @@ class AppCoordinatorTests: XCTestCase {
     }
     
     func testOnboardingStarted() {
-        mockUnregisteredUser.isOnboarded = false
         injection.user = mockUnregisteredUser
         let onboardingComplete = XCTestExpectation(description: "onboardingComplete")
         let sut = makeSUTAppCoordinator(router: mockRouter, injecting: injection)
@@ -73,6 +73,14 @@ class AppCoordinatorTests: XCTestCase {
         sut.start()
         wait(for: [onboardingComplete], timeout: 1)
     }
+}
+
+func makeRegisteredUser() -> F4SUser {
+    return F4SUser(uuid: "uuid")
+}
+
+func makeUnregisteredUser() -> F4SUser {
+    return F4SUser()
 }
 
 // MARK:- AppCoordinatorTests helpers
@@ -120,18 +128,14 @@ class MockVersionCheckingService: F4SWorkfinderVersioningServiceProtocol {
     }
 }
 
-class MockUserRepository: F4SUserRepositoryProtocol {
-    var user: F4SUser
-    init(user: F4SUserProtocol) {
-        self.user = F4SUser(userInformation: user)
-    }
+class MockUserStatusService : F4SUserStatusServiceProtocol {
+    var userStatus: F4SUserStatus?
     
-    func save(user: F4SUserProtocol) {
-        self.user = F4SUser(userInformation: user)
-    }
+    func beginStatusUpdate() {}
     
-    func load() -> F4SUserProtocol {
-        return user
+    func getUserStatus(completion: @escaping (F4SNetworkResult<F4SUserStatus>) -> ()) {
+        let status = F4SUserStatus(unreadMessageCount: 1, unratedPlacements: [])
+        let result = F4SNetworkResult.success(status)
+        completion(result)
     }
 }
-

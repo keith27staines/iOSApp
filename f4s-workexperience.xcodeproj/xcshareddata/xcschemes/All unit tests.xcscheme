@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1020"
+   LastUpgradeVersion = "1100"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -26,9 +26,24 @@
       buildConfiguration = "DebugF4S"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "NO"
       codeCoverageEnabled = "YES"
-      onlyGenerateCoverageForSpecifiedTargets = "YES"
-      shouldUseLaunchSchemeArgsEnv = "NO">
+      onlyGenerateCoverageForSpecifiedTargets = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "40E78E121DD31A86000A3776"
+            BuildableName = "f4s-workexperience.app"
+            BlueprintName = "f4s-workexperience"
+            ReferencedContainer = "container:f4s-workexperience.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "isUnitTesting"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <CodeCoverageTargets>
          <BuildableReference
             BuildableIdentifier = "primary"
@@ -78,6 +93,69 @@
             BuildableName = "WorkfinderUI.framework"
             BlueprintName = "WorkfinderUI"
             ReferencedContainer = "container:WorkfinderModules/WorkfinderUI/WorkfinderUI.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FC5CBA24231D296F00C2D3C5"
+            BuildableName = "WorkfinderAcceptUseCase.framework"
+            BlueprintName = "WorkfinderAcceptUseCase"
+            ReferencedContainer = "container:WorkfinderAcceptUseCase/WorkfinderAcceptUseCase.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FC93DB9A231F888C00F1CE23"
+            BuildableName = "WorkfinderCoordinators.framework"
+            BlueprintName = "WorkfinderCoordinators"
+            ReferencedContainer = "container:WorkfinderCoordinators/WorkfinderCoordinators.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FC93DBF0231FB92D00F1CE23"
+            BuildableName = "WorkfinderUserDetailsUseCase.framework"
+            BlueprintName = "WorkfinderUserDetailsUseCase"
+            ReferencedContainer = "container:WorkfinderUserDetailsUseCase/WorkfinderUserDetailsUseCase.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FCC1DEF3232501ED0074D5C1"
+            BuildableName = "WorkfinderCompanyDetailsUseCase.framework"
+            BlueprintName = "WorkfinderCompanyDetailsUseCase"
+            ReferencedContainer = "container:WorkfinderCompanyDetailsUseCase/WorkfinderCompanyDetailsUseCase.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FCF4B60F232BC090001340DF"
+            BuildableName = "WorkfinderOnboardingUseCase.framework"
+            BlueprintName = "WorkfinderOnboardingUseCase"
+            ReferencedContainer = "container:WorkfinderOnboardingUseCase/WorkfinderOnboardingUseCase.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FCEF222A232A9EB9004914F7"
+            BuildableName = "WorkfinderMessagesUseCase.framework"
+            BlueprintName = "WorkfinderMessagesUseCase"
+            ReferencedContainer = "container:WorkfinderMessagesUseCase/WorkfinderMessagesUseCase.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FCEF21E2232A9B83004914F7"
+            BuildableName = "WorkfinderFavouritesUseCase.framework"
+            BlueprintName = "WorkfinderFavouritesUseCase"
+            ReferencedContainer = "container:WorkfinderFavouritesUseCase/WorkfinderFavouritesUseCase.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FCEF226B232A9FC1004914F7"
+            BuildableName = "WorkfinderRecommendations.framework"
+            BlueprintName = "WorkfinderRecommendations"
+            ReferencedContainer = "container:WorkfinderRecommendations/WorkfinderRecommendations.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FC229A692326C50200F7B5CD"
+            BuildableName = "WorkfinderDocumentUploadUseCase.framework"
+            BlueprintName = "WorkfinderDocumentUploadUseCase"
+            ReferencedContainer = "container:WorkfinderDocumentUploadUseCase/WorkfinderDocumentUploadUseCase.xcodeproj">
          </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
@@ -157,23 +235,6 @@
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "40E78E121DD31A86000A3776"
-            BuildableName = "f4s-workexperience.app"
-            BlueprintName = "f4s-workexperience"
-            ReferencedContainer = "container:f4s-workexperience.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
-      <CommandLineArguments>
-         <CommandLineArgument
-            argument = "isUnitTesting"
-            isEnabled = "YES">
-         </CommandLineArgument>
-      </CommandLineArguments>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "DebugF4S"
@@ -183,7 +244,6 @@
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
-      stopOnEveryMainThreadCheckerIssue = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
       <BuildableProductRunnable
@@ -196,8 +256,6 @@
             ReferencedContainer = "container:f4s-workexperience.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <AdditionalOptions>
-      </AdditionalOptions>
       <LocationScenarioReference
          identifier = "London, England"
          referenceType = "1">

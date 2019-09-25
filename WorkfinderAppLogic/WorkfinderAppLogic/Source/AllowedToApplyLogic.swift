@@ -1,26 +1,15 @@
-//
-//  AllowedToApplyLogic.swift
-//  WorkfinderAppLogic
-//
-//  Created by Keith Dev on 01/08/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
 
 import Foundation
 import WorkfinderCommon
-import WorkfinderNetworking
-import WorkfinderServices
 
 public class AllowedToApplyLogic {
     
-    public lazy var placementService: F4SGetAllPlacementsServiceProtocol = {
-        return F4SPlacementService()
-    }()
+    var placements: [F4STimelinePlacement] = []
     
-    public init(service: F4SGetAllPlacementsServiceProtocol? = nil) {
-        if let injectedPlacementService = service {
-            self.placementService = injectedPlacementService
-        }
+    public let placementService: F4SGetAllPlacementsServiceProtocol
+    
+    public init(service: F4SGetAllPlacementsServiceProtocol) {
+        self.placementService = service
     }
     
     public var draftTimelinePlacement: F4STimelinePlacement?
@@ -33,6 +22,7 @@ public class AllowedToApplyLogic {
                                   givenExistingPlacements existing: [F4STimelinePlacement],
                                   completion: @escaping (F4SNetworkResult<Bool>) -> Void) {
         DispatchQueue.main.async {
+            self.placements = existing
             guard let match = existing.first(where: { (existing) -> Bool in
                 existing.companyUuid?.dehyphenated == company.dehyphenated
             }) else {
@@ -49,7 +39,7 @@ public class AllowedToApplyLogic {
                 return
             }
             self.draftTimelinePlacement = (workflowState == .draft) ? match : nil
-            let result = F4SNetworkResult.success(workflowState == WEXPlacementState.draft)
+            let result = F4SNetworkResult.success(workflowState == F4SPlacementState.draft)
             completion(result)
 
         }

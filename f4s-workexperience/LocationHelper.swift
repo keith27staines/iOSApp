@@ -133,8 +133,7 @@ class LocationHelper {
         let geoCoder = CLGeocoder()
         geoCoder.reverseGeocodeLocation(location, completionHandler: { placemarks, error in
             if let err = error {
-                globalLog.debug("Error Reverse Geocoding Location: \(err.localizedDescription)")
-                completion(nil, error as NSError?)
+                completion(nil, err as NSError?)
                 return
             }
             completion(placemarks?[0], nil)
@@ -144,16 +143,15 @@ class LocationHelper {
 
     class func addressFromPlacemark(_ placemark: CLPlacemark) -> String {
         var address = ""
-
-        if let name = placemark.addressDictionary?["Name"] as? String {
+        if let name = placemark.name {
             address = constructAddressString(address, newString: name)
         }
-
-        if let city = placemark.addressDictionary?["City"] as? String {
+        
+        if let city = placemark.subAdministrativeArea {
             address = constructAddressString(address, newString: city)
         }
 
-        if let state = placemark.addressDictionary?["State"] as? String {
+        if let state = placemark.administrativeArea {
             address = constructAddressString(address, newString: state)
         }
 

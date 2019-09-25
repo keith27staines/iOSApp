@@ -43,7 +43,6 @@ public extension JSONDecoder {
             let decoded = try self.decode(intoType, from: data)
             completion(F4SNetworkResult.success(decoded))
         } catch {
-            print(error)
             let deserializationError = F4SNetworkDataErrorType.deserialization(data).error(attempting: attempting)
             completion(F4SNetworkResult.error(deserializationError))
         }

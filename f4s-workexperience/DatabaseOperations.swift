@@ -143,7 +143,6 @@ extension DatabaseOperations {
     /// Get all companies from the company database
     public func getAllCompanies( completed: @escaping (_ companies: [Company]) -> Void) {
         guard let db = database else {
-            globalLog.debug("`getAllCompanies` failed because the database connection is nil")
             completed([])
             return
         }
@@ -160,8 +159,6 @@ extension DatabaseOperations {
             completed(companyList)
             return
         } catch {
-            let nsError = error as NSError
-            globalLog.debug(nsError.localizedDescription)
             completed([])
         }
     }
@@ -244,7 +241,6 @@ extension DatabaseOperations {
     /// Get all interests from the database as a dictionary keyed by id
     public func getAllInterests( completed: @escaping (_ interests: [Int64:F4SInterest]) -> Void) {
         guard let db = database else {
-            globalLog.debug("`getAllInterests` failed because the database connection is nil")
             completed([:])
             return
         }
@@ -260,8 +256,6 @@ extension DatabaseOperations {
             completed(allInterests)
             return
         } catch {
-            let nsError = error as NSError
-            globalLog.debug(nsError.localizedDescription)
             completed([:])
         }
     }
@@ -273,7 +267,6 @@ extension DatabaseOperations {
     ///   - returns: list of ids of interests of the company
     public func interestIdsFor(companyId: Int64) -> [Int64] {
         guard let db = database else {
-            globalLog.debug("Can't get interests for company because the database isn't loaded")
             return []
         }
    
@@ -293,7 +286,6 @@ extension DatabaseOperations {
     /// Returns the company with the specified id
     public func companyWithId(_ id: Int64) -> Company? {
         guard let db = database else {
-            globalLog.debug("Can't find company with specified uuid because the database isn't loaded")
             return nil
         }
         let selectString: String = "SELECT * FROM businesses_company WHERE id = \(id)"
@@ -312,7 +304,6 @@ extension DatabaseOperations {
     /// Returns the company with the specified uuid
     public func companyWithUUID(_ uuid: F4SUUID) -> Company? {
         guard let db = database else {
-            globalLog.debug("Can't find company with specified uuid because the database isn't loaded")
             return nil
         }
         let uuid = uuid.dehyphenated
@@ -336,7 +327,6 @@ extension DatabaseOperations {
     ///   - completed: return list of companies with that list
     public func getCompanies(withUuid: [String], completed: @escaping (_ companies: [Company]) -> Void) {
         guard let db = database else {
-            globalLog.debug("Can't load database")
             completed([])
             return
         }
@@ -355,8 +345,6 @@ extension DatabaseOperations {
             completed(companyList)
             return
         } catch {
-            let nsError = error as NSError
-            globalLog.debug(nsError.localizedDescription)
             completed([])
         }
     }
@@ -367,7 +355,6 @@ extension DatabaseOperations {
     /// - Returns: template string
     public func getBusinessesSocialShareTemplateOfType(type: SocialShare) -> String {
         guard let db = database else {
-            globalLog.debug("Can't load database")
             return ""
         }
         do {
@@ -380,8 +367,7 @@ extension DatabaseOperations {
                 return text
             }
         } catch {
-            let nsError = error as NSError
-            globalLog.debug(nsError.localizedDescription)
+            fatalError(error.localizedDescription)
         }
         return ""
     }
@@ -392,7 +378,6 @@ extension DatabaseOperations {
     /// - Returns: subject to share
     public func getBusinessesSocialShareSubjectTemplateOfType(type: SocialShare) -> String {
         guard let db = database else {
-            globalLog.debug("Can't load database")
             return ""
         }
         do {
@@ -405,8 +390,7 @@ extension DatabaseOperations {
                 return text
             }
         } catch {
-            let nsError = error as NSError
-            globalLog.debug(nsError.localizedDescription)
+            fatalError(error.localizedDescription)
         }
         return ""
     }
@@ -523,8 +507,7 @@ extension DatabaseOperations {
             let directoryURL: String = FileHelper.fileInDocumentsDirectory(filename: AppConstants.databaseFileName)
             _database = try Connection(directoryURL)
         } catch {
-            _database = nil
-            globalLog.debug("error connecting to db")
+            fatalError(error.localizedDescription)
         }
     }
     

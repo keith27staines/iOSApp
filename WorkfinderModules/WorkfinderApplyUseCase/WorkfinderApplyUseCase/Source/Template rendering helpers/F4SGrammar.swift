@@ -8,8 +8,8 @@
 
 import Foundation
 
-public struct F4SGrammar {
-    public static func list(_ strings: [String]) -> String? {
+struct F4SGrammar {
+    static func list(_ strings: [String]) -> String? {
         switch strings.count {
         case 0: return nil
         case 1: return strings.first

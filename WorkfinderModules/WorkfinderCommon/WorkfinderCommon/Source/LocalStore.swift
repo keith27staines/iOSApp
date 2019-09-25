@@ -18,14 +18,14 @@ extension UserDefaults : LocalStorageProtocol {
     public func value(key: LocalStore.Key) -> Any? {
         return value(forKey: key.rawValue)
     }
-    
+
     public func setValue(_ value: Any?, for key: LocalStore.Key) {
         setValue(value, forKey: key.rawValue)
     }
 }
 
 public class LocalStore : LocalStorageProtocol {
-    
+    let userDefaults: UserDefaults
     public enum Key : String{
         case invokingUrl
         case partnerID
@@ -44,14 +44,15 @@ public class LocalStore : LocalStorageProtocol {
         case emailSentForVerificationKey
     }
     
-    public init() {
+    public init(userDefaults: UserDefaults = .standard) {
+        self.userDefaults = userDefaults
     }
     
     public func value(key: Key) -> Any? {
-        return UserDefaults.standard.value(forKey: key.rawValue)
+        return userDefaults.value(forKey: key.rawValue)
     }
     
     public func setValue(_ value: Any?, for key: Key) {
-        UserDefaults.standard.setValue(value, forKey: key.rawValue)
+        userDefaults.setValue(value, forKey: key.rawValue)
     }
 }

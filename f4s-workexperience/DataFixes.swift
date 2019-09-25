@@ -10,12 +10,12 @@ import Foundation
 import CoreData
 import WorkfinderCommon
 import WorkfinderApplyUseCase
+import WorkfinderOnboardingUseCase
 
 public struct DataFixes {
     
     public func run() {
         moveUserUuidFromKeychainToUserDefaults()
-        moveSelectedTemplateChoicesToUserDefaults()
         moveUserRecordFromCoredataToLocalStore()
         nullifyPartnerIfInvalid()
     }
@@ -47,27 +47,10 @@ public struct DataFixes {
         }
         guard
             let userUuid = LocalStore().value(key: LocalStore.Key.userUuid) as? F4SUUID,
-            let user = UserInfoDBOperations.sharedInstance.getUserInfo() else { return }
-        user.updateUuid(uuid: userUuid)
+            var user = UserInfoDBOperations.sharedInstance.getUserInfo() else { return }
+        user.uuid = userUuid
         let repo = F4SUserRepository()
         repo.save(user: user)
-    }
-    
-    private func moveSelectedTemplateChoicesToUserDefaults() {
-        let populatedBlanksFromDB = TemplateChoiceDBOperations.sharedInstance.getSelectedTemplateBlanks()
-        guard !populatedBlanksFromDB.isEmpty else { return }
-        let blanksModel = ApplicationLetterTemplateBlanksModel(store: LocalStore())
-        do {
-            try blanksModel.addOrReplacePopulatedBlanks(populatedBlanksFromDB)
-            let reloadedBlanks = blanksModel.populatedBlanks()
-            try! TemplateChoiceDBOperations.sharedInstance.deleteAllTemplateChoices()
-            print("Blanks from DB")
-            print(populatedBlanksFromDB)
-            print("Blanks moved to local store")
-            print(reloadedBlanks)
-        } catch {
-            print("Error moving templates from coredata to local store \n\(error)")
-        }
     }
 }
 

@@ -10,7 +10,9 @@ import UIKit
 import GoogleMaps
 import Reachability
 import WorkfinderCommon
+import WorkfinderServices
 import WorkfinderUI
+import WorkfinderOnboardingUseCase
 
 enum CamerWillMoveAction {
     case explodeCluster(GMUCluster)
@@ -175,7 +177,6 @@ class MapViewController: UIViewController {
         
         adjustAppeareance()
         setupMap()
-        setupLogos()
         setupReachability(nil, useClosures: true)
         startNotifier()
         if !(UIApplication.shared.delegate as! AppDelegate).databaseDownloadManager!.isLocalDatabaseAvailable() {
@@ -189,7 +190,7 @@ class MapViewController: UIViewController {
         super.viewWillAppear(animated)
         adjustNavigationBar()
         displayRefineSearchLabelAnimated()
-        favouriteList = ShortlistDBOperations.sharedInstance.getShortlistForCurrentUser()
+        favouriteList = ShortlistDBOperations.sharedInstance.getShortlist()
     }
     
     var hasMovedToBestPosition: Bool = false
@@ -212,11 +213,6 @@ class MapViewController: UIViewController {
     
     override var canBecomeFirstResponder: Bool {
         return true
-    }
-    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        if motion == .motionShake && (f4sLog.userCanAccessDebugMenu()) {
-            TabBarCoordinator.sharedInstance.presentHiddenDebugController(parentCtrl: self)
-        }
     }
     
     func companiesFromMarker(_ marker: GMSMarker) -> [Company] {
@@ -309,18 +305,6 @@ extension MapViewController {
         myLocationButton.tintColor = splashColor
     }
     
-    fileprivate func setupLogos() {
-        guard let partnerLogo = F4SPartnersModel.sharedInstance.selectedPartner?.image else {
-            logoStack.isHidden = true
-            return
-        }
-        logoStack.isHidden = false
-        workfinderLogoImageView.image = UIImage(named: "logo2")?.withRenderingMode(.alwaysTemplate)
-        workfinderLogoImageView.tintColor = UIColor.gray
-        partnerLogoImageView.image = partnerLogo.withRenderingMode(.alwaysTemplate)
-        partnerLogoImageView.tintColor = UIColor.gray
-    }
-    
     fileprivate func setupLabels() {
         let refineStr = NSLocalizedString("Refine your search!", comment: "")
         
@@ -354,18 +338,7 @@ extension MapViewController {
         
         infoWindow.industryNameLabel.attributedText = NSAttributedString(
             string: company.industry, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: Style.smallerMediumTextSize, weight: UIFont.Weight.light), NSAttributedString.Key.foregroundColor: UIColor.black])
-        
-        infoWindow.logoImageView.image = UIImage(named: "DefaultLogo")
-        if !company.logoUrl.isEmpty, let url = NSURL(string: company.logoUrl) {
-            F4SImageService.sharedInstance.getImage(url: url, completion: {
-                image in
-                    if image != nil {
-                        infoWindow.logoImageView.image = image!
-                    } else {
-                        infoWindow.logoImageView.image = UIImage(named: "DefaultLogo")
-                    }
-            })
-        }
+        infoWindow.logoImageView.load(urlString: company.logoUrl, defaultImage: UIImage(named: "DefaultLogo"))
         
         if company.rating < 0.5 {
             infoWindow.ratingStackView.removeFromSuperview()
@@ -1015,7 +988,7 @@ extension MapViewController {
     ///
     /// - parameter completion: Call back when the reload is complete
     func reloadMapFromDatabase(completion: @escaping () -> Void ) {
-        self.favouriteList = ShortlistDBOperations.sharedInstance.getShortlistForCurrentUser()
+        self.favouriteList = ShortlistDBOperations.sharedInstance.getShortlist()
         self.createUnfilteredMapModelFromDatabase { [weak self] unfilteredMapModel in
             guard let strongSelf = self else { return }
             strongSelf.unfilteredMapModel = unfilteredMapModel
@@ -1041,7 +1014,8 @@ extension MapViewController : UIViewControllerTransitioningDelegate {
         popupAnimator.popupAnimatorDidDismiss = { [weak self] _ in
             self?.pressedPinOrCluster?.removeFromSuperview()
         }
-        popupAnimator.originFrame = pressedPinOrCluster!.superview!.convert(pressedPinOrCluster!.frame, to: nil)
+
+        popupAnimator.originFrame = pressedPinOrCluster!.frame
         
         popupAnimator.presenting = true
         return popupAnimator

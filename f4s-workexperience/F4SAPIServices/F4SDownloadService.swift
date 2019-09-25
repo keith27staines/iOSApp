@@ -9,6 +9,7 @@
 import Foundation
 import WorkfinderCommon
 import WorkfinderNetworking
+import WorkfinderServices
 
 public protocol F4SDownloadServiceDelegate  {
     func downloadService(_ service: F4SDownloadService, didFinishDownloadingToUrl: URL)
@@ -32,12 +33,10 @@ public class F4SDownloadService : NSObject, F4SDownloadServiceProtocol {
     
     private lazy var configuration: URLSessionConfiguration = {
         let configuration = URLSessionConfiguration.background(withIdentifier: F4SDownloadService.sessionIdentifier)
-        configuration.httpAdditionalHeaders = F4SDataTaskService.defaultHeaders
+        
         configuration.allowsCellularAccess = true
         configuration.sessionSendsLaunchEvents = true
-        if #available(iOS 11.0, *) {
-            configuration.waitsForConnectivity = true
-        }
+        configuration.waitsForConnectivity = true
         return configuration
     }()
     

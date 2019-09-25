@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 import CoreData
 
 class ShortlistCoreDataManager: CoreDataBaseManager {
@@ -17,21 +18,17 @@ class ShortlistCoreDataManager: CoreDataBaseManager {
         return Static.instance
     }
 
-    func saveShortlistToContext(_ shortlist: Shortlist, userUuid: String) {
-        ShortlistDB.createInManagedObjectContext(managedObjectContext,  shortlist: shortlist, userUuid: userUuid)
+    func saveShortlistToContext(_ shortlist: Shortlist) {
+        ShortlistDB.createInManagedObjectContext(managedObjectContext,  shortlist: shortlist)
         save()
-    }
-
-    func getShortlistForUser(userUuid: String) -> [ShortlistDB] {
-        return ShortlistDB.getShortlistForUser(managedObjectContext,  userUuid: userUuid)
     }
 
     func getAllShortlists() -> [ShortlistDB] {
         return ShortlistDB.getAllShortlists(managedObjectContext)
     }
 
-    func removeShortlistWithId(shortlistUuid: String, userUuid: String) {
-        ShortlistDB.removeInterestWithIdForUser(managedObjectContext,  uuid: shortlistUuid, userUuid: userUuid)
+    func removeShortlistWithId(shortlistUuid: String) {
+        ShortlistDB.removeInterestWithIdForUser(managedObjectContext,  uuid: shortlistUuid)
         save()
     }
 }

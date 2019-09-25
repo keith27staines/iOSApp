@@ -42,29 +42,23 @@ class AppInstallationUuidLogicTests: XCTestCase {
     }
     
     func makeSUT(localStore: LocalStorageProtocol = MockLocalStore()) -> AppInstallationUuidLogic {
-        let user = F4SUserInformation(isOnboarded: false, isRegistered: false)
+        let user = F4SUser(uuid: "uuid")
         let userRepo = MockUserRepository(user: user)
         let userService = MockUserService(registeringWillSucceedOnAttempt: 1)
+        let registrationService = MockDeviceRegistationService()
         return AppInstallationUuidLogic(
             localStore: localStore,
             userService: userService,
-            userRepo: userRepo)
+            userRepo: userRepo,
+            apnsEnvironment: "apnsEnvironment",
+            registerDeviceService: registrationService)
     }
     
 }
 
-class MockUserRepository: F4SUserRepositoryProtocol {
-    var user: F4SUser
-    init(user: F4SUserProtocol) {
-        self.user = F4SUser(userInformation: user)
-    }
-    
-    func save(user: F4SUserProtocol) {
-        self.user = F4SUser(userInformation: user)
-    }
-    
-    func load() -> F4SUserProtocol {
-        return user
+class MockDeviceRegistationService: F4SDeviceRegistrationServiceProtocol {
+    func registerDevice(anonymousUser: F4SAnonymousUser, completion: @escaping ((F4SNetworkResult<F4SRegisterDeviceResult>) -> ())) {
+        
     }
 }
 

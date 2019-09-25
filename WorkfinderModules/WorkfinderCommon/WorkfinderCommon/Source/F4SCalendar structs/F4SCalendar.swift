@@ -15,14 +15,18 @@ public class F4SCalendar {
     private var displayMonths : [F4SDisplayableMonth]
     public private (set) var selectionStates: [Date:Int]
     
-    public init() {
+    
+    /// Initialises a new instance
+    ///
+    /// - Parameter date: The first fully displayable month on the calendar will contain this date
+    public init(date: Date = Date()) {
         var calendar = Calendar(identifier: .gregorian)
         dateFormatter = DateFormatter()
         calendar.firstWeekday = F4SDayOfWeek.monday.traditionalDayNumber
         self.calendar = calendar
         displayMonths = [F4SDisplayableMonth]()
         selectionStates = [Date:Int]()
-        let displayMonth = F4SDisplayableMonth(cal: self, date: Date())
+        let displayMonth = F4SDisplayableMonth(cal: self, date: date)
         displayMonths.append(displayMonth)
         
         expand(months: 11)

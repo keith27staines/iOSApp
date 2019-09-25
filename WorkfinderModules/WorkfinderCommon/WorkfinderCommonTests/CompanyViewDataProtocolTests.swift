@@ -12,22 +12,22 @@ import XCTest
 class CompanyViewDataProtocolTests: XCTestCase {
 
     func test_duedilIsHiden_not_hidden_when_url_exists() {
-        let sut = TestCompanyViewData(uuid: "uuid", appliedState: AppliedState.draft, companyName: "company", isAvailableForSearch: true, isFavourited: false, starRating: nil, industry: nil, description: nil, revenue: nil, growth: nil, employees: nil, industryIsHidden: true, postcode: nil, duedilUrl: "/duedilUrl", linkedinUrl: "/linkedin")
+        let sut = TestCompanyViewData(logoUrlString: "url/logo", uuid: "uuid", appliedState: AppliedState.draft, companyName: "company", isAvailableForSearch: true, isFavourited: false, starRating: nil, industry: nil, description: nil, revenue: nil, growth: nil, employees: nil, industryIsHidden: true, postcode: nil, duedilUrl: "/duedilUrl", linkedinUrl: "/linkedin")
         XCTAssertFalse(sut.duedilIsHiden)
     }
     
     func test_duedilIsHiden_hidden_when_url_is_nil() {
-        let sut = TestCompanyViewData(uuid: "uuid", appliedState: AppliedState.draft, companyName: "company", isAvailableForSearch: true, isFavourited: false, starRating: nil, industry: nil, description: nil, revenue: nil, growth: nil, employees: nil, industryIsHidden: true, postcode: nil, duedilUrl: nil, linkedinUrl: nil)
+        let sut = TestCompanyViewData(logoUrlString: "url/logo", uuid: "uuid", appliedState: AppliedState.draft, companyName: "company", isAvailableForSearch: true, isFavourited: false, starRating: nil, industry: nil, description: nil, revenue: nil, growth: nil, employees: nil, industryIsHidden: true, postcode: nil, duedilUrl: nil, linkedinUrl: nil)
         XCTAssertTrue(sut.duedilIsHiden)
     }
     
     func test_linkedinIsHiden_not_hidden_when_url_exists() {
-        let sut = TestCompanyViewData(uuid: "uuid", appliedState: AppliedState.draft, companyName: "company", isAvailableForSearch: true, isFavourited: false, starRating: nil, industry: nil, description: nil, revenue: nil, growth: nil, employees: nil, industryIsHidden: true, postcode: nil, duedilUrl: nil, linkedinUrl: "/linkedinUrl")
+        let sut = TestCompanyViewData(logoUrlString: "url/logo", uuid: "uuid", appliedState: AppliedState.draft, companyName: "company", isAvailableForSearch: true, isFavourited: false, starRating: nil, industry: nil, description: nil, revenue: nil, growth: nil, employees: nil, industryIsHidden: true, postcode: nil, duedilUrl: nil, linkedinUrl: "/linkedinUrl")
         XCTAssertFalse(sut.linkedinIsHidden)
     }
     
     func test_linkedinIsHiden_hidden_when_url_is_nil() {
-        let sut = TestCompanyViewData(uuid: "uuid", appliedState: AppliedState.draft, companyName: "company", isAvailableForSearch: true, isFavourited: false, starRating: nil, industry: nil, description: nil, revenue: nil, growth: nil, employees: nil, industryIsHidden: true, postcode: nil, duedilUrl: nil, linkedinUrl: nil)
+        let sut = TestCompanyViewData(logoUrlString: "url/logo", uuid: "uuid", appliedState: AppliedState.draft, companyName: "company", isAvailableForSearch: true, isFavourited: false, starRating: nil, industry: nil, description: nil, revenue: nil, growth: nil, employees: nil, industryIsHidden: true, postcode: nil, duedilUrl: nil, linkedinUrl: nil)
         XCTAssertTrue(sut.linkedinIsHidden)
     }
 
@@ -36,6 +36,8 @@ class CompanyViewDataProtocolTests: XCTestCase {
 // A test double just to provide a concrete implementation of CompanyViewDataProtocol
 // in order to allow tests of the protocol's extensions
 struct TestCompanyViewData : CompanyViewDataProtocol {
+    var logoUrlString: String?
+    
     var uuid: F4SUUID
     var appliedState: AppliedState
     var companyName: String

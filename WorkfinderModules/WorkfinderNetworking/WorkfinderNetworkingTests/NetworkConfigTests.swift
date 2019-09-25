@@ -13,12 +13,21 @@ import WorkfinderNetworking
 class NetworkConfigTests: XCTestCase {
 
     func test_configure() {
-        let log = MockLog()
-        WorkfinderNetworking.configure(wexApiKey: "wexApi1234", workfinderBaseApi: "baseApi1234", log: log)
-        XCTAssertEqual(NetworkConfig.wexApiKey, "wexApi1234")
-        XCTAssertEqual(NetworkConfig.workfinderApi, "baseApi1234")
-        XCTAssertEqual(NetworkConfig.workfinderApiV2, "baseApi1234/v2")
-        XCTAssertNotNil(F4SNetworkSessionManager.shared)
+        let logger = NetworkCallLogger(log: MockLog())
+        let endpoints = WorkfinderEndpoint(baseUrlString: "someUrl")
+        let sessionManager = F4SNetworkSessionManager(wexApiKey: "someKey")
+        let user = F4SUser()
+        let userRepo = MockUserRepository(user: user)
+        let config = NetworkConfig(workfinderApiKey: "someKey",
+                                   logger: logger,
+                                   sessionManager: sessionManager,
+                                   endpoints: endpoints,
+                                   userRepository: userRepo)
+        XCTAssertEqual(config.wexApiKey, "someKey")
+        XCTAssertEqual(config.workfinderApi, "someUrl")
+        XCTAssertEqual(config.workfinderApiV2, "someUrl/v2")
+        XCTAssertEqual(config.endpoints.base, "someUrl")
+        XCTAssertEqual(config.endpoints.baseUrl2, "someUrl/v2")
     }
 }
 

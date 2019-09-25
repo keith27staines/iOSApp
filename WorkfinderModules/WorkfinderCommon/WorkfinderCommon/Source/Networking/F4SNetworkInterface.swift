@@ -8,11 +8,19 @@
 
 import Foundation
 
+
 public typealias HTTPStatusCode = Int
 
 public enum F4SNetworkResult<A:Decodable> {
     case error(F4SNetworkError)
     case success(A)
+}
+
+public struct F4SJSONBoolValue: Codable {
+    public var value: Bool
+    public init(value: Bool = true) {
+        self.value = value
+    }
 }
 
 public enum F4SNetworkDataResult {
@@ -58,13 +66,13 @@ public enum F4SNetworkDataErrorType {
             code = -1400
             userInfo["Type"] = "Generic error with retry"
             let description = NSLocalizedString("Unknown error", comment: "")
-            return F4SNetworkError(localizedDescription: description, attempting: attempting, retry: true)
+            return F4SNetworkError(localizedDescription: description, attempting: attempting, retry: true, code: code)
         case .badUrl(let badUrlString):
             code = -1500
             userInfo["Type"] =  "Malformed url"
             userInfo["bad url string"] = badUrlString
             let description = NSLocalizedString("The requested url is invalid", comment: "")
-            return F4SNetworkError(localizedDescription: description, attempting: attempting, retry: false)
+            return F4SNetworkError(localizedDescription: description, attempting: attempting, retry: false, code: code)
         }
         nsError = NSError(domain: F4SNetworkErrorDomainType.client.rawValue, code: code, userInfo: userInfo)
         return F4SNetworkError(error: nsError, attempting: attempting)
@@ -119,9 +127,10 @@ public struct F4SNetworkError : Error {
         }
     }
     
-    /// Initialize a generic error with optional retry 
-    public init(localizedDescription: String, attempting: String, retry: Bool, logError: Bool = true) {
-        let nsError = NSError(domain: "com.f4s", code: 0, userInfo: nil)
+    /// Initialize a generic error with optional retry
+    public init(localizedDescription: String, attempting: String, retry: Bool, logError: Bool = true, code: Int = 0) {
+        let userInfo = [NSLocalizedDescriptionKey: localizedDescription]
+        let nsError = NSError(domain: "com.f4s", code: code, userInfo: userInfo)
         self.init(error: nsError, attempting: attempting)
         self.retry = retry
     }
@@ -135,6 +144,8 @@ public struct F4SNetworkError : Error {
         switch response.statusCode {
         case 200...299:
             return nil // These are success codes
+        case 400:
+            userInfo[NSLocalizedFailureReasonErrorKey] = "Bad request"
         case 401:
             userInfo[NSLocalizedFailureReasonErrorKey] = "The user's credentials were not provided or are incorrect"
         case 403:
@@ -146,6 +157,9 @@ public struct F4SNetworkError : Error {
             retry = true
         case 500:
             userInfo[NSLocalizedFailureReasonErrorKey] = "The request was badly formed (some parameters were incorrect or missing)"
+        case 503:
+            userInfo[NSLocalizedFailureReasonErrorKey] = "The server is unavailable"
+            retry = true
         default:
             userInfo[NSLocalizedFailureReasonErrorKey] = "Unknown reason"
         }

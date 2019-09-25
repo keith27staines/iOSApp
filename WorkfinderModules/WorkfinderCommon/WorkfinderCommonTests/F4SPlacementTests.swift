@@ -22,10 +22,10 @@ class F4SPlacementTests: XCTestCase {
     }
     
     func test_initialise_with_values() {
-        let sut = F4SPlacement(userUuid: "userUuid", companyUuid: "companyUuid", interestList: [F4SInterest(id: 1, uuid: "interestUuid", name: "interestName")], status: WEXPlacementState.confirmed, placementUuid: "placementUuid")
+        let sut = F4SPlacement(userUuid: "userUuid", companyUuid: "companyUuid", interestList: [F4SInterest(id: 1, uuid: "interestUuid", name: "interestName")], status: F4SPlacementState.confirmed, placementUuid: "placementUuid")
         XCTAssertEqual(sut.companyUuid, "companyUuid")
         XCTAssertEqual(sut.placementUuid, "placementUuid")
-        XCTAssertEqual(sut.status, WEXPlacementState.confirmed)
+        XCTAssertEqual(sut.status, F4SPlacementState.confirmed)
         XCTAssertEqual(sut.interestList.first?.uuid, "interestUuid")
     }
     
@@ -50,7 +50,7 @@ class F4SPlacementTests: XCTestCase {
         XCTAssertEqual(sut.companyUuid, "companyUuid")
         XCTAssertEqual(sut.userUuid, "userUuid")
         XCTAssertEqual(sut.placementUuid, "placementUuid")
-        XCTAssertEqual(sut.status, WEXPlacementState.confirmed)
+        XCTAssertEqual(sut.status, F4SPlacementState.confirmed)
         XCTAssertEqual(sut.interestList.first?.uuid, "interestUuid")
     }
 

@@ -13,8 +13,6 @@ import Bugsnag
 import XCGLogger
 import WorkfinderCommon
 
-public var f4sLog: F4SAnalyticsAndDebugging!
-
 public class F4SLog : F4SAnalyticsAndDebugging {
     
     private var analytics: SEGAnalytics
@@ -35,7 +33,7 @@ public class F4SLog : F4SAnalyticsAndDebugging {
             config.use(bugsnagIntegrationFactory)
         }
         SEGAnalytics.setup(with: config)
-        analytics = SEGAnalytics.shared()
+        analytics = SEGAnalytics.shared()!
         
         do {
             f4sDebug = try F4SDebug()
@@ -122,15 +120,14 @@ class F4SDebug {
     init(directory: URL? = nil) throws {
         let directory = directory ?? F4SDebug.logDefaultDirectory
         guard directory.hasDirectoryPath else {
-            globalLog.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
             throw F4SDebugError.invalidDirectoryForLogfile
         }
         self.directory = directory
         do {
             try setupLogfile()
-            globalLog.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: loggerUrl.path, fileLevel: .debug)
+            XCGLogger.default.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: loggerUrl.path, fileLevel: .debug)
         } catch (let error) {
-            globalLog.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
+            XCGLogger.default.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
             throw error
         }
     }
