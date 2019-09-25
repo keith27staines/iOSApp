@@ -19,8 +19,8 @@ class AppCoordinatorTests: XCTestCase {
     var mockRegistrar = MockUIApplication()
     var injection: CoreInjection!
     var mockRouter = MockNavigationRouter()
-    var mockUserService = MockUserService(registeringWillSucceedOnAttempt: 1)
-    var mockUserStatusService = MockUserStatusService()
+    var mockUserService = MockF4SUserService(registeringWillSucceedOnAttempt: 1)
+    var mockUserStatusService = MockF4SUserStatusService()
     var mockRegisteredUser = makeRegisteredUser()
     var mockUnregisteredUser = makeUnregisteredUser()
     var mockAnalytics = MockF4SAnalyticsAndDebugging()
@@ -28,12 +28,21 @@ class AppCoordinatorTests: XCTestCase {
     var sut: AppCoordinator!
     var mockOnboardingCoordinator: MockOnboardingCoordinator!
     var versionCheckCoordinator: VersionCheckCoordinator!
+    var mockCompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol!
     
     override func setUp() {
         super.setUp()
         let user = mockUnregisteredUser
         let localStore = MockLocalStore()
-        let logic = AppInstallationUuidLogic(localStore: localStore, userService: mockUserService, userRepo: MockUserRepository(user: user), apnsEnvironment: "apnsEnvironment")
+        let mockContentService = MockF4SContentService()
+        let mockDeviceRegisterService = MockF4SDeviceRegistrationService()
+        let mockCompanyCoordinatorFactory = mockCompanyCoordinatorFactory()
+        let logic = AppInstallationUuidLogic(
+            localStore: localStore,
+            userService: mockUserService,
+            userRepo: MockUserRepository(user: user),
+            apnsEnvironment: "apnsEnvironment",
+            registerDeviceService: mockDeviceRegisterService)
         injection = CoreInjection(
             launchOptions: nil,
             appInstallationUuidLogic: logic,
@@ -42,6 +51,7 @@ class AppCoordinatorTests: XCTestCase {
             userStatusService: mockUserStatusService,
             userRepository: MockUserRepository(user: mockUnregisteredUser),
             databaseDownloadManager: mockDatabaseDownloadManager,
+            contentService: mockContentService,
             log: mockAnalytics
         )
         sut = makeSUTAppCoordinator(router: mockRouter, injecting: injection)
@@ -88,12 +98,30 @@ extension AppCoordinatorTests {
     
     func makeSUTAppCoordinator(router: NavigationRoutingProtocol, injecting: CoreInjectionProtocol) -> AppCoordinator {
         versionCheckCoordinator = VersionCheckCoordinator(parent: nil, navigationRouter: router)
-        versionCheckCoordinator.versionCheckService = MockVersionCheckingService(versionIsGood: true)
+        versionCheckCoordinator.versionCheckService = MockF4SVersionCheckingService(versionIsGood: true)
         let appCoordinator = AppCoordinator(
-            versionCheckCoordinator: versionCheckCoordinator,
-            registrar: MockUIApplication(),
-            navigationRouter: router,
-            inject: injecting)
+            registrar: mockRegistrar,
+            navigationRouter: mockRouter,
+            inject: injecting,
+            companyCoordinatorFactory: mockCompanyCoordinatorFactory,
+            companyDocumentsService: <#CompanyCoordinatorFactoryProtocol#>,
+            companyRepository: <#F4SCompanyDocumentServiceProtocol#>,
+            companyService: <#F4SCompanyRepositoryProtocol#>,
+            documentUploaderFactory: <#F4SCompanyServiceProtocol#>,
+            emailVerificationModel: <#F4SDocumentUploaderFactoryProtocol#>,
+            favouritesRepository: <#F4SEmailVerificationModel#>,
+            offerProcessingService: <#F4SFavouritesRepositoryProtocol#>,
+            onboardingCoordinatorFactory: <#F4SOfferProcessingServiceProtocol#>,
+            partnersModel: <#OnboardingCoordinatorFactoryProtocol#>,
+            placementsRepository: <#F4SPartnersModel#>,
+            placementService: <#F4SPlacementRepositoryProtocol#>,
+            placementDocumentsServiceFactory: <#F4SPlacementServiceProtocol#>,
+            messageServiceFactory: <#F4SPlacementDocumentsServiceFactoryProtocol#>,
+            messageActionServiceFactory: <#F4SMessageServiceFactoryProtocol#>,
+            messageCannedResponsesServiceFactory: <#F4SMessageActionServiceFactoryProtocol#>,
+            recommendationsService: <#F4SCannedMessageResponsesServiceFactoryProtocol#>,
+            roleService: <#F4SRecommendationServiceProtocol#>,
+            versionCheckCoordinator: versionCheckCoordinator)
         
         appCoordinator.onboardingCoordinatorFactory = {[weak self] _,_ in
             return self!.mockOnboardingCoordinator
@@ -111,31 +139,5 @@ extension AppCoordinatorTests {
     func assertOnboardingCompleteCompleteState(sut: AppCoordinator) {
         XCTAssertEqual(mockRouter.presentedViewControllers.count, 0)
         XCTAssertEqual(mockOnboardingCoordinator.startedCount, 1)
-    }
-}
-
-class MockVersionCheckingService: F4SWorkfinderVersioningServiceProtocol {
-    
-    var versionIsGood: Bool
-    
-    init(versionIsGood: Bool) {
-        self.versionIsGood = versionIsGood
-    }
-    
-    func getIsVersionValid(completion: @escaping (F4SNetworkResult<F4SVersionValidity>) -> ()) {
-        let result = F4SNetworkResult.success(versionIsGood)
-            completion(result)
-    }
-}
-
-class MockUserStatusService : F4SUserStatusServiceProtocol {
-    var userStatus: F4SUserStatus?
-    
-    func beginStatusUpdate() {}
-    
-    func getUserStatus(completion: @escaping (F4SNetworkResult<F4SUserStatus>) -> ()) {
-        let status = F4SUserStatus(unreadMessageCount: 1, unratedPlacements: [])
-        let result = F4SNetworkResult.success(status)
-        completion(result)
     }
 }

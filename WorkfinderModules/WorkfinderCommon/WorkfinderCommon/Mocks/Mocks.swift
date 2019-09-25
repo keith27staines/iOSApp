@@ -1,6 +1,103 @@
 
 import Foundation
 
+public class MockCompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
+    public func makeCompanyCoordinator(
+        parent: CompanyCoordinatorParentProtocol,
+        navigationRouter: NavigationRoutingProtocol,
+        inject: CoreInjectionProtocol,
+        companyUuid: F4SUUID) -> CompanyCoordinatorProtocol? {
+        return MockCompanyCoordinator(
+            parent: parent,
+            navigationRouter: navigationRouter,
+            inject: inject,
+            companyUuid: companyUuid)
+    }
+    
+    public func makeCompanyCoordinator(
+        parent: CompanyCoordinatorParentProtocol,
+        navigationRouter: NavigationRoutingProtocol,
+        company: Company,
+        inject: CoreInjectionProtocol) -> CompanyCoordinatorProtocol {
+        return MockCompanyCoordinator(
+            parent: parent,
+            navigationRouter: navigationRouter,
+            inject: inject,
+            company: company)
+    }
+}
+
+public class MockCompanyCoordinator: CompanyCoordinatorProtocol {
+    public let uuid = UUID()
+    public var injected: CoreInjectionProtocol
+    public var parentCoordinator: Coordinating?
+    public var childCoordinators: [UUID : Coordinating] = [:]
+    public var navigationRouter: NavigationRoutingProtocol
+    public let companyUuid: F4SUUID
+    public var company: Company?
+    
+    public func start() {
+        
+    }
+    
+    public init(parent: CompanyCoordinatorParentProtocol,
+                navigationRouter: NavigationRoutingProtocol,
+                inject: CoreInjectionProtocol,
+                company: Company) {
+        self.parentCoordinator = parent
+        self.injected = inject
+        self.navigationRouter = navigationRouter
+        self.company = company
+        self.companyUuid = company.uuid
+    }
+    
+    public init(parent: CompanyCoordinatorParentProtocol,
+                navigationRouter: NavigationRoutingProtocol,
+                inject: CoreInjectionProtocol,
+                companyUuid: F4SUUID) {
+        self.parentCoordinator = parent
+        self.injected = inject
+        self.navigationRouter = navigationRouter
+        self.companyUuid = companyUuid
+    }
+}
+
+public class MockF4SCompanyDatabaseMetadataService : F4SCompanyDatabaseMetadataServiceProtocol {
+    public func getDatabaseMetadata(completion: @escaping (F4SNetworkResult<F4SCompanyDatabaseMetaData>) -> ()) {
+    
+    }
+    
+    public init() {}
+}
+
+public class MockF4SVersionCheckingService: F4SWorkfinderVersioningServiceProtocol {
+    
+    var versionIsGood: Bool
+    
+    public func getIsVersionValid(version: String, completion: @escaping (F4SNetworkResult<F4SVersionValidity>) -> ()) {
+        let result = F4SNetworkResult.success(versionIsGood)
+        completion(result)
+    }
+    
+    public init(versionIsGood: Bool) {
+        self.versionIsGood = versionIsGood
+    }
+}
+
+public class MockUserStatusService : F4SUserStatusServiceProtocol {
+    public var userStatus: F4SUserStatus?
+    
+    public func beginStatusUpdate() {}
+    
+    public func getUserStatus(completion: @escaping (F4SNetworkResult<F4SUserStatus>) -> ()) {
+        let status = F4SUserStatus(unreadMessageCount: 1, unratedPlacements: [])
+        let result = F4SNetworkResult.success(status)
+        completion(result)
+    }
+}
+
+///
+
 public class MockF4SPartnerService: F4SPartnerServiceProtocol {
     public func getPartners(completion: @escaping (F4SNetworkResult<[F4SPartner]>) -> ()) {
         
@@ -222,7 +319,7 @@ public class MockF4SContentService: F4SContentServiceProtocol {
     }
 }
 
-public class MockF4SDeviceRegistrationServiceProtocol : F4SDeviceRegistrationServiceProtocol {
+public class MockF4SDeviceRegistrationService : F4SDeviceRegistrationServiceProtocol {
     public init() {}
     public func registerDevice(anonymousUser: F4SAnonymousUser, completion: @escaping ((F4SNetworkResult<F4SRegisterDeviceResult>) -> ())) {
         

@@ -1,10 +1,10 @@
 
-import Foundation
+import UIKit
 
 public class MockNavigationRouter : NavigationRoutingProtocol {
     
     public private (set) var pushedViewControllers = [UIViewController]()
-    var presentedViewControllers = [UIViewController]()
+    public private (set) var presentedViewControllers = [UIViewController]()
     var dismissCount: Int = 0
     
     public init() {}

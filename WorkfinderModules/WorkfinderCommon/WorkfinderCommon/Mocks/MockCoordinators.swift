@@ -39,17 +39,17 @@ public class MockTabBarCoordinator : MockCoreInjectionNavigationCoordinator, Tab
     }
 }
 
-class MockParentCoordinator: Coordinating {
+public class MockParentCoordinator: Coordinating {
     
-    var parentCoordinator: Coordinating? = nil
-    var uuid: UUID = UUID()
-    var childCoordinators = [UUID : Coordinating]()
+    public var parentCoordinator: Coordinating? = nil
+    public var uuid: UUID = UUID()
+    public var childCoordinators = [UUID : Coordinating]()
     var router: NavigationRoutingProtocol
-    init(router: NavigationRoutingProtocol) {
+    public init(router: NavigationRoutingProtocol) {
         self.router = router
     }
     
-    func start() {}
+    public func start() {}
     
 }
 
@@ -61,7 +61,7 @@ public class MockCoreInjectionNavigationCoordinator : CoreInjectionNavigationCoo
     public var injected: CoreInjectionProtocol
     var navigationRouter: NavigationRoutingProtocol
     
-    var startedCount: Int = 0
+    public private (set) var startedCount: Int = 0
     public func start() { startedCount += 1 }
     
     public required init(parent: Coordinating?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol) {
@@ -71,36 +71,36 @@ public class MockCoreInjectionNavigationCoordinator : CoreInjectionNavigationCoo
     }
 }
 
-class MockOnboardingCoordinator : OnboardingCoordinatorProtocol {
+public class MockOnboardingCoordinator : OnboardingCoordinatorProtocol {
     
-    var hideOnboardingControls: Bool = true
+    public var hideOnboardingControls: Bool = true
     
-    var delegate: OnboardingCoordinatorDelegate?
+    public var delegate: OnboardingCoordinatorDelegate?
     
-    var onboardingDidFinish: ((OnboardingCoordinatorProtocol) -> Void)?
+    public var onboardingDidFinish: ((OnboardingCoordinatorProtocol) -> Void)?
     
-    var parentCoordinator: Coordinating?
-    var uuid: UUID = UUID()
-    var childCoordinators = [UUID : Coordinating]()
+    public var parentCoordinator: Coordinating?
+    public var uuid: UUID = UUID()
+    public var childCoordinators = [UUID : Coordinating]()
     
-    var testNotifyOnStartCalled: (() -> Void)?
+    public var testNotifyOnStartCalled: (() -> Void)?
     
-    init(parent: Coordinating?) {
+    public init(parent: Coordinating?) {
         parentCoordinator = parent
     }
     
-    var startedCount: Int = 0 {
+    public private (set) var startedCount: Int = 0 {
         didSet {
             print("Started count \(startedCount)")
         }
     }
-    func start() {
+    public func start() {
         startedCount += 1
         testNotifyOnStartCalled?()
     }
     
     /// Call this method to simulate the affect of the onboarding coordinator finishing its last user interaction
-    func completeOnboarding() {
+    public func completeOnboarding() {
         onboardingDidFinish?(self)
     }
 }

@@ -7,10 +7,13 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 @testable import f4s_workexperience
 
 class MockUIApplication : RemoteNotificationsRegistrarProtocol {
+    public init() {}
+    
     func registerForRemoteNotifications() {
         
     }

@@ -18,7 +18,7 @@ class VersionCheckCoordinatorTests: XCTestCase {
     
     func test_VersionIsGood() {
         let sut = makeSUTVersionCheckCoordinator()
-        sut.versionCheckService = MockVersionCheckingService(versionIsGood: true)
+        sut.versionCheckService = MockF4SVersionCheckingService(versionIsGood: true)
         let vesionCheckComplete = XCTestExpectation(description: "version check complete")
         sut.versionCheckCompletion = { [weak self] result in
             guard let strongSelf = self else { return }
@@ -39,7 +39,7 @@ class VersionCheckCoordinatorTests: XCTestCase {
     
     func test_VersionIsBad() {
         let sut = makeSUTVersionCheckCoordinator()
-        sut.versionCheckService = MockVersionCheckingService(versionIsGood: false)
+        sut.versionCheckService = MockF4SVersionCheckingService(versionIsGood: false)
         let vesionCheckComplete = XCTestExpectation(description: "version check complete")
         sut.versionCheckCompletion = { [weak self] result in
             guard let strongSelf = self else { return }

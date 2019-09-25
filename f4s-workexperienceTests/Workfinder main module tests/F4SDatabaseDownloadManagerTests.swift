@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import WorkfinderCommon
 @testable import f4s_workexperience
 
 class F4SDatabaseDownloadManagerTests: XCTestCase {
@@ -14,7 +15,8 @@ class F4SDatabaseDownloadManagerTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        downloadManager = F4SDatabaseDownloadManager()
+        let service = MockF4SCompanyDatabaseMetadataService()
+        downloadManager = F4SDatabaseDownloadManager(metadataService: service)
     }
     
     override func tearDown() {

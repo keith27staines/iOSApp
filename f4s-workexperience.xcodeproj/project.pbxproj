@@ -169,13 +169,8 @@
 		FCF5AF2C2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF2A2248BE1A00D9B8D1 /* WorkfinderApplyUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCFB1328224930660086BE25 /* Mustache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCFB1327224930660086BE25 /* Mustache.framework */; };
 		FCFB1329224930660086BE25 /* Mustache.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCFB1327224930660086BE25 /* Mustache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FCFBD0162250D96900A9361D /* MockAnalyticsAndDebugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC14E975221EBF6600EE985F /* MockAnalyticsAndDebugging.swift */; };
-		FCFBD0182250D9A400A9361D /* MockUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3F391E222930940046F8F8 /* MockUserService.swift */; };
 		FCFBD0192250D9FF00A9361D /* AppCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A48221714B800DC335B /* AppCoordinatorTests.swift */; };
 		FCFBD01A2250DA1800A9361D /* MockUIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA90A92221D6A5600EACD8D /* MockUIApplication.swift */; };
-		FCFBD01B2250DA1800A9361D /* MockDatabaseDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA90A90221D6A1700EACD8D /* MockDatabaseDownload.swift */; };
-		FCFBD01C2250DA3A00A9361D /* MockNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA90A8C221D696400EACD8D /* MockNavigationRouter.swift */; };
-		FCFBD01D2250DA3E00A9361D /* MockCoordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA90A8E221D69B600EACD8D /* MockCoordinators.swift */; };
 		FCFBD0242250DB4D00A9361D /* F4SDatabaseDownloadManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC85B2220EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift */; };
 		FCFC06AD23225B9E003C59C8 /* LatLon+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06AC23225B9E003C59C8 /* LatLon+Extensions.swift */; };
 /* End PBXBuildFile section */
@@ -333,7 +328,6 @@
 		FC0C710F232BB1D100816332 /* F4SAuth0MagicLinkInterpreterer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = F4SAuth0MagicLinkInterpreterer.swift; path = "../../../WorkfinderUserDetailsUseCase/WorkfinderUserDetailsUseCase/source/Email verification/F4SAuth0MagicLinkInterpreterer.swift"; sourceTree = "<group>"; };
 		FC0C7110232BB31B00816332 /* WorkfinderMessagesUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderMessagesUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityExtension.swift; sourceTree = "<group>"; };
-		FC14E975221EBF6600EE985F /* MockAnalyticsAndDebugging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MockAnalyticsAndDebugging.swift; path = ../../../WorkfinderModules/WorkfinderCommon/WorkfinderCommon/Mocks/MockAnalyticsAndDebugging.swift; sourceTree = "<group>"; };
 		FC1DC06721FE13FE009ABC60 /* CompanyDetailAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CompanyDetailAssets.xcassets; sourceTree = "<group>"; };
 		FC1DC06A21FE142D009ABC60 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		FC1E6A48221714B800DC335B /* AppCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorTests.swift; sourceTree = "<group>"; };
@@ -354,7 +348,6 @@
 		FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDebugViewController.swift; sourceTree = "<group>"; };
 		FC31F096204D54E3009DD526 /* Debug.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
 		FC3CD1D9221566F200F91B50 /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
-		FC3F391E222930940046F8F8 /* MockUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MockUserService.swift; path = ../../../WorkfinderModules/WorkfinderCommon/WorkfinderCommon/Mocks/MockUserService.swift; sourceTree = "<group>"; };
 		FC4066FC23277D8F002B425E /* WorkfinderDocumentUploadUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderDocumentUploadUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModeSelectorView.swift; sourceTree = "<group>"; };
 		FC53D6DF2323C56F00A339ED /* WorkfinderUserDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUserDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -384,9 +377,6 @@
 		FCA53B911FE00CB5009F6DB0 /* VersioningService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersioningService.swift; sourceTree = "<group>"; };
 		FCA53B941FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SForceAppUpdateViewController.swift; sourceTree = "<group>"; };
 		FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = F4SForceAppUpdateViewController.xib; sourceTree = "<group>"; };
-		FCA90A8C221D696400EACD8D /* MockNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MockNavigationRouter.swift; path = ../../../WorkfinderModules/WorkfinderCommon/WorkfinderCommon/Mocks/MockNavigationRouter.swift; sourceTree = "<group>"; };
-		FCA90A8E221D69B600EACD8D /* MockCoordinators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MockCoordinators.swift; path = ../../../WorkfinderModules/WorkfinderCommon/WorkfinderCommon/Mocks/MockCoordinators.swift; sourceTree = "<group>"; };
-		FCA90A90221D6A1700EACD8D /* MockDatabaseDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MockDatabaseDownload.swift; path = ../../../WorkfinderModules/WorkfinderCommon/WorkfinderCommon/Mocks/MockDatabaseDownload.swift; sourceTree = "<group>"; };
 		FCA90A92221D6A5600EACD8D /* MockUIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUIApplication.swift; sourceTree = "<group>"; };
 		FCA91E5C22340161007ED308 /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA91E9522340577007ED308 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1051,12 +1041,7 @@
 		FCA90A8B221D693700EACD8D /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				FCA90A8E221D69B600EACD8D /* MockCoordinators.swift */,
-				FCA90A8C221D696400EACD8D /* MockNavigationRouter.swift */,
 				FCA90A92221D6A5600EACD8D /* MockUIApplication.swift */,
-				FCA90A90221D6A1700EACD8D /* MockDatabaseDownload.swift */,
-				FC3F391E222930940046F8F8 /* MockUserService.swift */,
-				FC14E975221EBF6600EE985F /* MockAnalyticsAndDebugging.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -1478,13 +1463,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC8E3F4A22D33A4C00102C37 /* VersionCheckCoordinatorTests.swift in Sources */,
-				FCFBD01C2250DA3A00A9361D /* MockNavigationRouter.swift in Sources */,
-				FCFBD0162250D96900A9361D /* MockAnalyticsAndDebugging.swift in Sources */,
 				FCFBD0242250DB4D00A9361D /* F4SDatabaseDownloadManagerTests.swift in Sources */,
 				FCFBD01A2250DA1800A9361D /* MockUIApplication.swift in Sources */,
-				FCFBD0182250D9A400A9361D /* MockUserService.swift in Sources */,
-				FCFBD01D2250DA3E00A9361D /* MockCoordinators.swift in Sources */,
-				FCFBD01B2250DA1800A9361D /* MockDatabaseDownload.swift in Sources */,
 				FCFBD0192250D9FF00A9361D /* AppCoordinatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
