@@ -1,6 +1,56 @@
 
 import Foundation
 
+public class MockF4SPartnerService: F4SPartnerServiceProtocol {
+    public func getPartners(completion: @escaping (F4SNetworkResult<[F4SPartner]>) -> ()) {
+        
+    }
+    
+    public init() {}
+    
+}
+
+public class MockF4SPlacementDocumentsServiceFactory : F4SPlacementDocumentsServiceFactoryProtocol {
+    public init() {}
+    public func makePlacementDocumentsService(placementUuid: F4SUUID) -> F4SPlacementDocumentsServiceProtocol {
+        return MockF4SPlacementDocumentsService()
+    }
+}
+
+public class MockF4SPlacementDocumentsService: F4SPlacementDocumentsServiceProtocol {
+    
+    public init() {}
+    
+    public func getDocuments(completion: @escaping (F4SNetworkResult<F4SGetDocumentJson>) -> ()) {
+        
+    }
+    
+    public func putDocuments(documents: F4SPutDocumentsJson, completion: @escaping ((F4SNetworkResult<F4SJSONBoolValue>) -> Void)) {
+    }
+}
+
+public class MockF4SDocumentUploaderFactory: F4SDocumentUploaderFactoryProtocol {
+    public func makeDocumentUploader(document: F4SDocument, placementuuid: F4SUUID) -> F4SDocumentUploaderProtocol? {
+        return MockF4SDocumentUploader()
+    }
+    
+    public init() {}
+}
+
+public class MockF4SDocumentUploader: F4SDocumentUploaderProtocol {
+    public var delegate: F4SDocumentUploaderDelegate?
+    
+    public var state: DocumentUploadState = .waiting
+    
+    public func cancel() {
+        
+    }
+    
+    public func resume() {
+        
+    }
+}
+
 
 public class MockF4SEmailVerificationModel: F4SEmailVerificationModelProtocol {
     public var lastNonErrorState: F4SEmailVerificationState = .start
@@ -38,7 +88,9 @@ public class MockF4SEmailVerificationModel: F4SEmailVerificationModelProtocol {
 
 public class MockAppInstallationUuidLogic: AppInstallationUuidLogicProtocol {
     public var registeredInstallationUuid: F4SUUID?
-    public init() {}
+    public init(registeredInstallationUuid: F4SUUID? = nil) {
+        self.registeredInstallationUuid = registeredInstallationUuid
+    }
     
     public func ensureDeviceIsRegistered(completion: @escaping (F4SNetworkResult<F4SRegisterDeviceResult>) -> ()) {
     }

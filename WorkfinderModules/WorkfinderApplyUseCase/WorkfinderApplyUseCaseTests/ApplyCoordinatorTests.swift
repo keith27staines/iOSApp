@@ -28,7 +28,7 @@ class ApplyCoordinatorTests: XCTestCase {
         let mockContentService = MockF4SContentService()
         let injection = CoreInjection(
             launchOptions: nil,
-            appInstallationUuidLogic: MockAppInstallationUuidLogic(),
+            appInstallationUuidLogic: MockAppInstallationUuidLogic(registeredInstallationUuid: "registerdeUuid"),
             user: mockRegisteredUser,
             userService: mockUserService,
             userStatusService: userStatusService,
@@ -70,6 +70,8 @@ extension ApplyCoordinatorTests {
         let requiredPlacementResult = F4SNetworkResult.success([placement])
         let mockGetAllPlacementsService = MockF4SGetAllPlacementsService(result: requiredPlacementResult)
         let mockEmailVerificationModel = MockF4SEmailVerificationModel()
+        let mockPlacementDocumentsServiceFactory = MockF4SPlacementDocumentsServiceFactory()
+        let mockUploaderFactory = MockF4SDocumentUploaderFactory()
         let sut = ApplyCoordinator(
             company: company,
             parent: nil,
@@ -82,8 +84,8 @@ extension ApplyCoordinatorTests {
             interestsRepository: mockInterestsRepository,
             getAllPlacementsService: mockGetAllPlacementsService,
             emailVerificationModel: mockEmailVerificationModel,
-            documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
-            documentUploaderFactory: <#F4SDocumentUploaderFactoryProtocol#>)
+            documentServiceFactory: mockPlacementDocumentsServiceFactory,
+            documentUploaderFactory: mockUploaderFactory)
         return sut
     }
     
