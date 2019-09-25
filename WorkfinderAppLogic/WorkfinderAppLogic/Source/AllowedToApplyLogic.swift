@@ -2,11 +2,10 @@
 import Foundation
 import WorkfinderCommon
 
-public class AllowedToApplyLogic {
+public class AllowedToApplyLogic : AllowedToApplyLogicProtocol {
     
     var placements: [F4STimelinePlacement] = []
-    
-    public let placementService: F4SGetAllPlacementsServiceProtocol
+    let placementService: F4SGetAllPlacementsServiceProtocol
     
     public init(service: F4SGetAllPlacementsServiceProtocol) {
         self.placementService = service

@@ -8,6 +8,7 @@ import WorkfinderApplyUseCase
 public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoordinatorProtocol {
     
     let environment: EnvironmentType
+    let allowedToApplyLogic: AllowedToApplyLogicProtocol
     let applyService: F4SPlacementApplicationServiceProtocol
     var companyViewController: CompanyViewController!
     var companyViewModel: CompanyViewModel!
@@ -22,7 +23,7 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
     let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
     let templateService: F4STemplateServiceProtocol
     let companyService: F4SCompanyServiceProtocol
-    let companyDocumentService: F4SCompanyDocumentServiceProtocol
+    let companyDocumentsModel: F4SCompanyDocumentsModel
 
     weak var finishDespatcher: CompanyCoordinatorParentProtocol?
     
@@ -32,6 +33,7 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
         company: Company,
         inject: CoreInjectionProtocol,
         environment: EnvironmentType,
+        allowedToApplyLogic: AllowedToApplyLogicProtocol,
         placementsRepository: F4SPlacementRepositoryProtocol,
         interestsRepository: F4SInterestsRepositoryProtocol,
         socialShareItemSource: SocialShareItemSource,
@@ -43,7 +45,8 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
         documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
         applyService: F4SPlacementApplicationServiceProtocol,
         companyService: F4SCompanyServiceProtocol,
-        companyDocumentService: F4SCompanyDocumentServiceProtocol) {
+        companyDocumentsModel: F4SCompanyDocumentsModel) {
+        self.allowedToApplyLogic = allowedToApplyLogic
         self.environment = environment
         self.socialShareItemSource = socialShareItemSource
         self.interestsRepository = interestsRepository
@@ -58,15 +61,12 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
         self.documentServiceFactory = documentServiceFactory
         self.documentUploaderFactory = documentUploaderFactory
         self.companyService = companyService
-        self.companyDocumentService = companyDocumentService
+        self.companyDocumentsModel = companyDocumentsModel
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
     public override func start() {
         super.start()
-        let allowedToApplyLogic = AllowedToApplyLogic(service: getAllPlacementsService)
-        let companyDocumentsModel = F4SCompanyDocumentsModel(companyUuid: company.uuid,
-                                                             documentsService: companyDocumentService)
         companyViewModel = CompanyViewModel(coordinatingDelegate: self,
                                             company: company,
                                             people: [],

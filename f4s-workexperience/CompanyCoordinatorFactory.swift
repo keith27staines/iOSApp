@@ -6,6 +6,7 @@ import WorkfinderNetworking
 import WorkfinderServices
 import WorkfinderCoordinators
 import WorkfinderCompanyDetailsUseCase
+import WorkfinderAppLogic
 import WorkfinderApplyUseCase
 import WorkfinderUserDetailsUseCase
 
@@ -65,12 +66,17 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
         let socialShareItemSource = SocialShareItemSource(
             company: company,
             shareTemplateProvider: shareTemplateProvider)
+        let companyDocumentsModel = F4SCompanyDocumentsModel(
+            companyUuid: company.uuid,
+            documentsService: companyDocumentService)
+        let allowedToApplyLogic = AllowedToApplyLogic(service: getAllPlacementsService)
         return CompanyCoordinator(
             parent: parent,
             navigationRouter: navigationRouter,
             company: company,
             inject: inject,
             environment: environment,
+            allowedToApplyLogic: allowedToApplyLogic,
             placementsRepository: placementRepository,
             interestsRepository: interestsRepository,
             socialShareItemSource: socialShareItemSource,
@@ -82,7 +88,7 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
             documentUploaderFactory: documentUploaderFactory,
             applyService: applyService,
             companyService: companyService,
-            companyDocumentService: companyDocumentService)
+            companyDocumentsModel: companyDocumentsModel)
     }
 }
 

@@ -81,7 +81,7 @@ class CompanyViewModel : NSObject {
     let people: [PersonViewData]
     let companyService: F4SCompanyServiceProtocol
     let companyDocumentsModel: F4SCompanyDocumentsModel
-    let canApplyLogic: AllowedToApplyLogic
+    let canApplyLogic: AllowedToApplyLogicProtocol
     private var viewControllers = [UIViewController]()
     var currentPageIndex: PageIndex = .summary
     
@@ -114,7 +114,7 @@ class CompanyViewModel : NSObject {
          people: [PersonViewData],
          companyService: F4SCompanyServiceProtocol,
          favouritingModel: CompanyFavouritesModel,
-         allowedToApplyLogic: AllowedToApplyLogic,
+         allowedToApplyLogic: AllowedToApplyLogicProtocol,
          companyDocumentsModel: F4SCompanyDocumentsModel) {
         self.companyService = companyService
         self.company = company

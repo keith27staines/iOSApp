@@ -74,6 +74,7 @@
 		FC83EC7F22FC0C55009D7A0B /* F4SJsonValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83EC7E22FC0C55009D7A0B /* F4SJsonValueTests.swift */; };
 		FC83EC8122FC0EDB009D7A0B /* F4SUserRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83EC8022FC0EDB009D7A0B /* F4SUserRepositoryTests.swift */; };
 		FC83EC8322FC1CBA009D7A0B /* CompanyViewDataProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83EC8222FC1CBA009D7A0B /* CompanyViewDataProtocolTests.swift */; };
+		FC8F9570233B82B60027BE02 /* AllowedToApplyLogicProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8F956F233B82B60027BE02 /* AllowedToApplyLogicProtocol.swift */; };
 		FC93768E231535750058BA75 /* F4SCompanyDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93768D231535750058BA75 /* F4SCompanyDocument.swift */; };
 		FC93DC56232026AA00F1CE23 /* CommonNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC55232026AA00F1CE23 /* CommonNotifications.swift */; };
 		FC93DC5A23202CFB00F1CE23 /* EnvironmentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC5923202CFB00F1CE23 /* EnvironmentType.swift */; };
@@ -211,6 +212,7 @@
 		FC83EC7E22FC0C55009D7A0B /* F4SJsonValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SJsonValueTests.swift; sourceTree = "<group>"; };
 		FC83EC8022FC0EDB009D7A0B /* F4SUserRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserRepositoryTests.swift; sourceTree = "<group>"; };
 		FC83EC8222FC1CBA009D7A0B /* CompanyViewDataProtocolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyViewDataProtocolTests.swift; sourceTree = "<group>"; };
+		FC8F956F233B82B60027BE02 /* AllowedToApplyLogicProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowedToApplyLogicProtocol.swift; sourceTree = "<group>"; };
 		FC93768D231535750058BA75 /* F4SCompanyDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyDocument.swift; sourceTree = "<group>"; };
 		FC93DC55232026AA00F1CE23 /* CommonNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonNotifications.swift; sourceTree = "<group>"; };
 		FC93DC5923202CFB00F1CE23 /* EnvironmentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentType.swift; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				FC1DBDF82335474500D68C83 /* F4SEmailVerificationModelProtocol.swift */,
+				FC8F956F233B82B60027BE02 /* AllowedToApplyLogicProtocol.swift */,
 			);
 			path = "Model protocols";
 			sourceTree = "<group>";
@@ -744,6 +747,7 @@
 				FC22438F232F9E750073C9B1 /* F4SCompanyDatabaseMetaData.swift in Sources */,
 				FCE51937224948E400B550C9 /* F4SAvailabilityPeriod.swift in Sources */,
 				FCDB07382286F6640053347F /* F4SUser.swift in Sources */,
+				FC8F9570233B82B60027BE02 /* AllowedToApplyLogicProtocol.swift in Sources */,
 				FC12B10322F3415300C33410 /* JsonDateFormatterExtension.swift in Sources */,
 				FCDFEA12223D2CF500E58649 /* WEXResult.swift in Sources */,
 				FCC1DF5D232505FF0074D5C1 /* Shortlist.swift in Sources */,

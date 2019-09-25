@@ -82,7 +82,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     
     var rootViewController: UIViewController?
     
-    lazy var canApplyLogic: AllowedToApplyLogic = {
+    lazy var canApplyLogic: AllowedToApplyLogicProtocol = {
         return AllowedToApplyLogic(service: self.getAllPlacementsService)
     }()
     

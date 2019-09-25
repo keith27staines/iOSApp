@@ -22,13 +22,16 @@ class CompanyViewModelTests: XCTestCase {
         let company = Company(id: 1, created: Date(), modified: Date(), uuid: UUID().uuidString, name: "companyName", logoUrl: "logoUrlString", industry: "industry", latitude: 45, longitude: 45, summary: "summary", employeeCount: 1, turnover: 1, turnoverGrowth: 1, rating: 1, ratingCount: 1, sourceId: "sourceId", hashtag: "hashtag", companyUrl: "companyUrlString")
         person = PersonViewData()
         let favouritesModel = makeFavouritingModel()
+        let mockCompanyService = MockCompanyService()
+        let mockAllowedToApplyLogic = MockAllowedToApplyLogic()
+        
         coordinatingDelegate = CoordinatingDelegate()
         sut = CompanyViewModel(coordinatingDelegate: coordinatingDelegate,
                                company: company,
                                people: [person],
-                               companyService: F4SCompanyServiceProtocol,
+                               companyService: mockCompanyService,
                                favouritingModel: favouritesModel,
-                               allowedToApplyLogic: <#AllowedToApplyLogic#>,
+                               allowedToApplyLogic: mockAllowedToApplyLogic,
                                companyDocumentsModel: <#F4SCompanyDocumentsModel#>)
         self.company = sut.companyViewData
     }
@@ -50,6 +53,28 @@ class CompanyViewModelTests: XCTestCase {
         return favouritesModel
     }
     
+}
+
+class MockAllowedToApplyLogic: AllowedToApplyLogicProtocol {
+    var draftTimelinePlacement: F4STimelinePlacement?
+    
+    var draftPlacement: F4SPlacement?
+    
+    func checkUserCanApply(user: F4SUUID?, to company: F4SUUID, givenExistingPlacements existing: [F4STimelinePlacement], completion: @escaping (F4SNetworkResult<Bool>) -> Void) {
+        
+    }
+    
+    func checkUserCanApply(user: F4SUUID?, to company: F4SUUID, completion: @escaping (F4SNetworkResult<Bool>) -> Void) {
+        
+    }
+}
+
+
+
+class MockCompanyService: F4SCompanyServiceProtocol {
+    func getCompany(uuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SCompanyJson>) -> ()) {
+    
+    }
 }
 
 class MockFavouritingRepository: F4SFavouritesRepositoryProtocol {
