@@ -26,7 +26,10 @@ class CompanyViewModelTests: XCTestCase {
         sut = CompanyViewModel(coordinatingDelegate: coordinatingDelegate,
                                company: company,
                                people: [person],
-                               favouritingModel: favouritesModel)
+                               companyService: F4SCompanyServiceProtocol,
+                               favouritingModel: favouritesModel,
+                               allowedToApplyLogic: <#AllowedToApplyLogic#>,
+                               companyDocumentsModel: <#F4SCompanyDocumentsModel#>)
         self.company = sut.companyViewData
     }
 
