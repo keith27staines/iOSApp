@@ -2,7 +2,7 @@
 import Foundation
 import WorkfinderCommon
 
-public class F4SPartnersModel {
+public class F4SPartnersModel: F4SPartnersModelProtocol {
     
     public static func hardCodedPartners() -> [F4SPartner] {
         let parent = F4SPartner(uuid:   "2c4a2c39-eac7-4573-aa14-51c17810e7a1", name: "Parent (includes guardian)")
@@ -12,9 +12,15 @@ public class F4SPartnersModel {
         return [parent, school, friend, villiers]
     }
     
-    let partnerService: F4SPartnerServiceProtocol
+    public internal (set) var serversidePartners: [String : F4SPartner]?
     
-    public var showWillProvidePartnerLater: Bool = false {
+    
+    var partners: [F4SUUID:F4SPartner]
+    var partnersArray: [F4SPartner]
+    var isReady: Bool = false
+    let localStore: LocalStorageProtocol
+    let partnerService: F4SPartnerServiceProtocol
+    var showWillProvidePartnerLater: Bool = false {
         didSet {
             if showWillProvidePartnerLater {
                 addOrReplacePartner(F4SPartner.partnerProvidedLater)
@@ -24,43 +30,15 @@ public class F4SPartnersModel {
         }
     }
     
-    fileprivate var partners: [F4SUUID:F4SPartner]
-    fileprivate var partnersArray: [F4SPartner]
-    public internal (set) var serversidePartners: [String : F4SPartner]?
-    private (set) var isReady: Bool = false
-    
-    public init(partnerService: F4SPartnerServiceProtocol) {
+    public init(partnerService: F4SPartnerServiceProtocol,
+                localStore: LocalStorageProtocol) {
         self.partnerService = partnerService
         self.partners = [F4SUUID:F4SPartner]()
         self.partnersArray = []
+        self.localStore = localStore
         self.getPartners { (_) in
-            //
+            // Do nothing, partners aren't implemented properly server-side
         }
-    }
-    
-    public func getPartners(completed: @escaping (_ success:Bool) -> Void) {
-        guard !isReady else {
-            completed(true)
-            return
-        }
-        getHardCodedPartners()
-        completed(true)
-    }
-    
-    public func partnerByUpdatingUUID(partner: F4SPartner) -> F4SPartner? {
-        guard let serverSidePartners = serversidePartners else {
-            return nil
-        }
-        for serverPartner in serverSidePartners.values {
-            if partner.name.lowercased() == serverPartner.name.lowercased() {
-                return F4SPartner(uuid: serverPartner.uuid,
-                               sortingIndex: serverPartner.sortingIndex,
-                               name: serverPartner.name,
-                               description: serverPartner.description,
-                               imageName: serverPartner.imageName)
-            }
-        }
-        return nil
     }
     
     public func getPartnersFromServer(completed: ((F4SNetworkResult<[F4SPartner]>) -> Void)? = nil) {
@@ -78,6 +56,61 @@ public class F4SPartnersModel {
                 completed?(result)
             }
         }
+    }
+    
+    func getPartners(completed: @escaping (_ success:Bool) -> Void) {
+        guard !isReady else {
+            completed(true)
+            return
+        }
+        getHardCodedPartners()
+        completed(true)
+    }
+    
+    func partnerByUpdatingUUID(partner: F4SPartner) -> F4SPartner? {
+        guard let serverSidePartners = serversidePartners else {
+            return nil
+        }
+        for serverPartner in serverSidePartners.values {
+            if partner.name.lowercased() == serverPartner.name.lowercased() {
+                return F4SPartner(uuid: serverPartner.uuid,
+                               sortingIndex: serverPartner.sortingIndex,
+                               name: serverPartner.name,
+                               description: serverPartner.description,
+                               imageName: serverPartner.imageName)
+            }
+        }
+        return nil
+    }
+    
+    /// Gets and sets the currently selected partner
+    public var selectedPartner: F4SPartner? {
+        get {
+            guard let selectedPartnerUUID = selectedPartnerUUID else { return nil }
+            return partnerForUuid(selectedPartnerUUID)
+        }
+        set {
+            guard let partner = newValue else {
+                localStore.setValue(nil, for: LocalStore.Key.partnerID)
+                return
+            }
+            localStore.setValue(partner.uuid, for: LocalStore.Key.partnerID)
+        }
+    }
+    
+    /// Returns the number of sections
+    public func numberOfSections() -> Int {
+        return 1
+    }
+    
+    /// Returns the number of partners in the specified section
+    public func numberOfRowsInSection(_ section: Int) -> Int {
+        return partners.count
+    }
+    
+    /// Returns the parter with the specified index path
+    public func partnerForIndexPath(_ indexPath: IndexPath) -> F4SPartner {
+        return partnersArray[indexPath.row]
     }
     
     private func getHardCodedPartners() {
@@ -111,23 +144,8 @@ public class F4SPartnersModel {
         }
     }
     
-    /// Returns the number of sections
-    func numberOfSections() -> Int {
-        return 1
-    }
-    
-    /// Returns the number of partners in the specified section
-    func numberOfRowsInSection(_ section: Int) -> Int {
-        return partners.count
-    }
-    
-    /// Returns the parter with the specified index path
-    func partnerForIndexPath(_ indexPath: IndexPath) -> F4SPartner {
-        return partnersArray[indexPath.row]
-    }
-    
     /// Returns the indexpath for the specified partner if the specified partner exists in the model, otherwise returns nil
-    func indexPathFor(_ partner: F4SPartner) -> IndexPath? {
+    private func indexPathFor(_ partner: F4SPartner) -> IndexPath? {
         for (row,p) in partnersArray.enumerated() {
             if p.uuid == partner.uuid {
                 return IndexPath(row: row, section: 0)
@@ -137,33 +155,13 @@ public class F4SPartnersModel {
     }
     
     /// Returns the partner with the specified id, if such a partner exists.
-    func partnerForUuid(_ uuid:F4SUUID) -> F4SPartner? {
+    private func partnerForUuid(_ uuid:F4SUUID) -> F4SPartner? {
         return self.partners[uuid]
     }
     
-    /// Tests whether the user has selected a partner
-    var hasSelectedPartner: Bool {
-        return selectedPartnerUUID == nil ? false : true
-    }
-    
     /// Returns the uuid of the selected partner
-    var selectedPartnerUUID: F4SUUID? {
+    private var selectedPartnerUUID: F4SUUID? {
         let key = UserDefaultsKeys.partnerID
         return UserDefaults.standard.object(forKey: key) as? F4SUUID
-    }
-    
-    /// Gets and sets the currently selected partner
-    public var selectedPartner: F4SPartner? {
-        get {
-            guard let selectedPartnerUUID = selectedPartnerUUID else { return nil }
-            return partnerForUuid(selectedPartnerUUID)
-        }
-        set {
-            guard let partner = newValue else {
-                UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.partnerID)
-                return
-            }
-            UserDefaults.standard.set(partner.uuid, forKey: UserDefaultsKeys.partnerID)
-        }
     }
 }

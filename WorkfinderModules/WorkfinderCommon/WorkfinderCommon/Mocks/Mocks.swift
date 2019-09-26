@@ -1,7 +1,221 @@
 
 import Foundation
 
+public class MockF4SRoleService: F4SRoleServiceProtocol {
+    public func getRoleForCompany(companyUuid: F4SUUID, roleUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRoleJson>) -> ()) {
+        
+    }
+    
+    public init() {}
+}
+
+public class MockF4SRecommendationService: F4SRecommendationServiceProtocol {
+    public func fetch(completion: @escaping (F4SNetworkResult<[F4SRecommendation]>) -> ()) {
+        
+    }
+    
+    public init() {}
+}
+
+public class MockF4SCannedMessageResponsesServiceFactory: F4SCannedMessageResponsesServiceFactoryProtocol {
+    public func makeCannedMessageResponsesService(threadUuid: F4SUUID) -> F4SCannedMessageResponsesServiceProtocol {
+        return MockF4SCannedMessageResponsesService()
+    }
+    
+    public init() {}
+}
+
+public class MockF4SCannedMessageResponsesService: F4SCannedMessageResponsesServiceProtocol {
+    public func getPermittedResponses(completion: @escaping (F4SNetworkResult<F4SCannedResponses>) -> ()) {
+    
+    }
+    
+    public init() {}
+}
+
+public class MockF4SMessageActionServiceFactory: F4SMessageActionServiceFactoryProtocol {
+    public func makeMessageActionService(threadUuid: F4SUUID) -> F4SMessageActionServiceProtocol {
+        return MockF4SMessageActionService()
+    }
+    
+    public init() {}
+}
+
+public class MockF4SMessageActionService: F4SMessageActionServiceProtocol {
+    public func getMessageAction(completion: @escaping (F4SNetworkResult<F4SAction?>) -> ()) {
+    }
+    
+    public init() {}
+}
+
+public class MockF4SMessageServiceFactory: F4SMessageServiceFactoryProtocol {
+    public func makeMessageService(threadUuid: F4SUUID) -> F4SMessageServiceProtocol {
+        return MockF4SMessageService()
+    }
+    
+    public init() {}
+}
+
+public class MockF4SMessageService: F4SMessageServiceProtocol {
+    public func getMessages(completion: @escaping (F4SNetworkResult<F4SMessagesList>) -> ()) {
+        
+    }
+    
+    public func sendMessage(responseUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SMessagesList>) -> Void) {
+        
+    }
+    
+    public init() {}
+}
+
+public class MockF4SPartnersModel: F4SPartnersModelProtocol {
+    
+    public var selectedPartner: F4SPartner?
+    
+    let partners: [F4SUUID: F4SPartner] = {
+        let parent = F4SPartner(uuid:   "2c4a2c39-eac7-4573-aa14-51c17810e7a1", name: "Parent (includes guardian)")
+        let school = F4SPartner(uuid:   "4b2ac792-5e2c-4ee9-b825-93d5d5411b33", name: "My School")
+        let friend = F4SPartner(uuid:   "a89feda0-4297-461d-b076-e291498dce9e", name: "My Friend")
+        let villiers = F4SPartner(uuid: "9f2a9d9c-1ccb-4a7e-9097-d43b6da8a801", name: "Villiers Park Educational Trust")
+        return [parent.uuid: parent,
+                school.uuid: school,
+                friend.uuid: friend,
+                villiers.uuid: villiers]
+    }()
+    
+    lazy var partnersArray: [F4SPartner] = {
+        return Array(self.partners.values)
+    }()
+    
+    
+    public func getPartnersFromServer(completed: ((F4SNetworkResult<[F4SPartner]>) -> Void)?) {
+        completed?(F4SNetworkResult.success(partnersArray))
+    }
+    
+    public func numberOfSections() -> Int {
+        return 1
+    }
+    
+    public func numberOfRowsInSection(_ section: Int) -> Int {
+        return partnersArray.count
+    }
+    
+    public func partnerForIndexPath(_ indexPath: IndexPath) -> F4SPartner {
+        return partnersArray[indexPath.row]
+    }
+    
+    public init() {}
+}
+
+public class MockF4SOfferProcessingService: F4SOfferProcessingServiceProtocol {
+    public func confirmPlacement(placement: F4STimelinePlacement, completion: @escaping (F4SNetworkResult<Bool>) -> ()) {
+        
+    }
+    
+    public func cancelPlacement(_ uuid: F4SUUID, completion: @escaping (F4SNetworkResult<Bool>) -> ()) {
+        
+    }
+    
+    public func declinePlacement(_ uuid: F4SUUID, completion: @escaping (F4SNetworkResult<Bool>) -> ()) {
+        
+    }
+    
+    public func getPlacementOffer(uuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4STimelinePlacement>) -> ()) {
+        
+    }
+    
+    public init() {}
+}
+
+public class MockOnboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol {
+    
+    public var onboardingCoordinators = [MockOnboardingCoordinator]()
+    
+    public func makeOnboardingCoordinator(
+        parent: Coordinating?,
+        navigationRouter: NavigationRoutingProtocol) -> OnboardingCoordinatorProtocol {
+        let coordinator = MockOnboardingCoordinator(parent: parent)
+        onboardingCoordinators.append(coordinator)
+        return coordinator
+    }
+    
+    public init() {}
+}
+
+public class MockF4SCompanyRepository: F4SCompanyRepositoryProtocol {
+    var counter: Int = 0
+    var companies = [F4SUUID: Company]()
+    
+    public func load(companyUuid: F4SUUID) -> Company? {
+        return getCompany(uuid: companyUuid)
+    }
+    
+    public func load(companyUuids: [F4SUUID], completion: @escaping (([Company]) -> Void)) {
+        let companies = companyUuids.map { (uuid) -> Company in
+            return self.getCompany(uuid: uuid)
+        }
+        completion(companies)
+    }
+    
+    private func getCompany(uuid: F4SUUID) -> Company {
+        if let company = companies[uuid] { return company }
+        let company = makeCompany(uuid: uuid)
+        companies[uuid] = company
+        return company
+    }
+    
+    func makeRandomName() -> String {
+        let length = Int.random(in: 2...100)
+        let type = Bool.random() ? " LTD" : " PLC"
+        return randomString(length: length) + type
+    }
+    
+    func randomString(length: Int) -> String {
+      let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      return String((0..<length).map{ _ in letters.randomElement()! })
+    }
+    
+    func makeCompany(uuid: F4SUUID) -> Company {
+        counter += 1
+        let date = Date()
+        return Company(id: Int64(counter),
+                       created: date,
+                       modified: date,
+                       isAvailableForSearch: true,
+                       uuid: uuid,
+                       name: makeRandomName(),
+                       logoUrl: "url/logo",
+                       industry: "Making stuff",
+                       latitude: 51.0,
+                       longitude: 0.0,
+                       summary: "We make stuff",
+                       employeeCount: 100,
+                       turnover: 100.0,
+                       turnoverGrowth: 10.0,
+                       rating: 2.5,
+                       ratingCount: 100,
+                       sourceId: "source id",
+                       hashtag: "hashtag",
+                       companyUrl: "url/company")
+    }
+    
+    public init() {}
+}
+
+public class MockF4SCompanyDocumentService: F4SCompanyDocumentServiceProtocol {
+    public func requestDocuments(companyUuid: F4SUUID, documents: F4SCompanyDocuments, completion: @escaping ((F4SNetworkResult<F4SJSONBoolValue>) -> ())) {
+        
+    }
+    
+    public func getDocuments(companyUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SGetCompanyDocuments>) -> ()) {
+        
+    }
+    
+    public init() {}
+}
+
 public class MockCompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
+    public init() {}
     public func makeCompanyCoordinator(
         parent: CompanyCoordinatorParentProtocol,
         navigationRouter: NavigationRoutingProtocol,
@@ -94,9 +308,9 @@ public class MockUserStatusService : F4SUserStatusServiceProtocol {
         let result = F4SNetworkResult.success(status)
         completion(result)
     }
+    
+    public init() {}
 }
-
-///
 
 public class MockF4SPartnerService: F4SPartnerServiceProtocol {
     public func getPartners(completion: @escaping (F4SNetworkResult<[F4SPartner]>) -> ()) {
@@ -367,7 +581,7 @@ public class MockF4STemplateService : F4STemplateServiceProtocol {
     }
 }
 
-public class MockF4SPlacementService : F4SPlacementApplicationServiceProtocol {
+public class MockF4SF4SPlacementApplicationService : F4SPlacementApplicationServiceProtocol {
     public init() {}
     
     public func apply(with json: F4SCreatePlacementJson, completion: @escaping (F4SNetworkResult<F4SPlacementJson>) -> Void) {
@@ -377,6 +591,19 @@ public class MockF4SPlacementService : F4SPlacementApplicationServiceProtocol {
     public func update(uuid: F4SUUID, with json: F4SPlacementJson, completion: @escaping (F4SNetworkResult<F4SPlacementJson>) -> Void) {
         
     }
+}
+
+public class MockF4SPlacementService: F4SPlacementServiceProtocol {
+    public func ratePlacement(placementUuid: String, rating: Int, completion: @escaping (F4SNetworkResult<Bool>) -> ()) throws {
+        
+    }
+    
+    public func getAllPlacementsForUser(completion: @escaping (F4SNetworkResult<[F4STimelinePlacement]>) -> ()) {
+        
+    }
+    
+    public init() {}
+    
 }
 
 public class MockPlacementsRepository: F4SPlacementRepositoryProtocol {

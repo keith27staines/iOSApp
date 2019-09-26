@@ -18,7 +18,7 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
     let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
     let favouritesRepository: F4SFavouritesRepositoryProtocol
     let offerProcessingService: F4SOfferProcessingServiceProtocol
-    let partnersModel: F4SPartnersModel
+    let partnersModel: F4SPartnersModelProtocol
     let placementsRepository: F4SPlacementRepositoryProtocol
     let placementService: F4SPlacementServiceProtocol
     let placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol
@@ -54,7 +54,7 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
                   favouritesRepository: F4SFavouritesRepositoryProtocol,
                   documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
                   offerProcessingService: F4SOfferProcessingServiceProtocol,
-                  partnersModel: F4SPartnersModel,
+                  partnersModel: F4SPartnersModelProtocol,
                   placementsRepository: F4SPlacementRepositoryProtocol,
                   placementService: F4SPlacementServiceProtocol,
                   placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,

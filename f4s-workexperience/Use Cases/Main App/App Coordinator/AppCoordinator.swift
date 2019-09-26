@@ -26,11 +26,11 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     let companyRepository: F4SCompanyRepositoryProtocol
     let companyService: F4SCompanyServiceProtocol
     let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
-    let emailVerificationModel: F4SEmailVerificationModel
+    let emailVerificationModel: F4SEmailVerificationModelProtocol
     let favouritesRepository: F4SFavouritesRepositoryProtocol
     let onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol
     let offerProcessingService: F4SOfferProcessingServiceProtocol
-    let partnersModel: F4SPartnersModel
+    let partnersModel: F4SPartnersModelProtocol
     let placementsRepository: F4SPlacementRepositoryProtocol
     let placementService: F4SPlacementServiceProtocol
     let placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol
@@ -55,11 +55,11 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                 companyRepository: F4SCompanyRepositoryProtocol,
                 companyService: F4SCompanyServiceProtocol,
                 documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
-                emailVerificationModel: F4SEmailVerificationModel,
+                emailVerificationModel: F4SEmailVerificationModelProtocol,
                 favouritesRepository: F4SFavouritesRepositoryProtocol,
                 offerProcessingService: F4SOfferProcessingServiceProtocol,
                 onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol,
-                partnersModel: F4SPartnersModel,
+                partnersModel: F4SPartnersModelProtocol,
                 placementsRepository: F4SPlacementRepositoryProtocol,
                 placementService: F4SPlacementServiceProtocol,
                 placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,

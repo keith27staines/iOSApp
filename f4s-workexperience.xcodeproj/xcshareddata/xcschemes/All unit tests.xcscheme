@@ -234,6 +234,96 @@
                ReferencedContainer = "container:WorkfinderServices/WorkfinderServices.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FC5CBA2D231D296F00C2D3C5"
+               BuildableName = "WorkfinderAcceptUseCaseTests.xctest"
+               BlueprintName = "WorkfinderAcceptUseCaseTests"
+               ReferencedContainer = "container:WorkfinderAcceptUseCase/WorkfinderAcceptUseCase.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FCC1DEFC232501ED0074D5C1"
+               BuildableName = "WorkfinderCompanyDetailsUseCaseTests.xctest"
+               BlueprintName = "WorkfinderCompanyDetailsUseCaseTests"
+               ReferencedContainer = "container:WorkfinderCompanyDetailsUseCase/WorkfinderCompanyDetailsUseCase.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FC93DBA3231F888C00F1CE23"
+               BuildableName = "WorkfinderCoordinatorsTests.xctest"
+               BlueprintName = "WorkfinderCoordinatorsTests"
+               ReferencedContainer = "container:WorkfinderCoordinators/WorkfinderCoordinators.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FC229A722326C50200F7B5CD"
+               BuildableName = "WorkfinderDocumentUploadUseCaseTests.xctest"
+               BlueprintName = "WorkfinderDocumentUploadUseCaseTests"
+               ReferencedContainer = "container:WorkfinderDocumentUploadUseCase/WorkfinderDocumentUploadUseCase.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FCEF21EB232A9B84004914F7"
+               BuildableName = "WorkfinderFavouritesUseCaseTests.xctest"
+               BlueprintName = "WorkfinderFavouritesUseCaseTests"
+               ReferencedContainer = "container:WorkfinderFavouritesUseCase/WorkfinderFavouritesUseCase.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FCEF2233232A9EB9004914F7"
+               BuildableName = "WorkfinderMessagesUseCaseTests.xctest"
+               BlueprintName = "WorkfinderMessagesUseCaseTests"
+               ReferencedContainer = "container:WorkfinderMessagesUseCase/WorkfinderMessagesUseCase.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FCF4B618232BC090001340DF"
+               BuildableName = "WorkfinderOnboardingUseCaseTests.xctest"
+               BlueprintName = "WorkfinderOnboardingUseCaseTests"
+               ReferencedContainer = "container:WorkfinderOnboardingUseCase/WorkfinderOnboardingUseCase.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FCEF2274232A9FC1004914F7"
+               BuildableName = "WorkfinderRecommendationsTests.xctest"
+               BlueprintName = "WorkfinderRecommendationsTests"
+               ReferencedContainer = "container:WorkfinderRecommendations/WorkfinderRecommendations.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FC93DBF9231FB92D00F1CE23"
+               BuildableName = "WorkfinderUserDetailsUseCaseTests.xctest"
+               BlueprintName = "WorkfinderUserDetailsUseCaseTests"
+               ReferencedContainer = "container:WorkfinderUserDetailsUseCase/WorkfinderUserDetailsUseCase.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

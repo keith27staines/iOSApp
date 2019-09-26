@@ -92,6 +92,7 @@
 		FC96709C2258C8B100318F69 /* F4SInterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96709B2258C8B100318F69 /* F4SInterest.swift */; };
 		FC9670A4225A195B00318F69 /* F4SPlacementRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9670A3225A195B00318F69 /* F4SPlacementRepositoryProtocol.swift */; };
 		FC9670A6225A279300318F69 /* F4SInterestsRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9670A5225A279300318F69 /* F4SInterestsRepositoryProtocol.swift */; };
+		FC96D44A233CB9D90012C4E8 /* F4SPartnersModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96D449233CB9D90012C4E8 /* F4SPartnersModelProtocol.swift */; };
 		FC9865BC229D3963006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865BB229D3963006D3E63 /* README */; };
 		FCA91E752234043D007ED308 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91E6B2234043D007ED308 /* WorkfinderCommon.framework */; };
 		FCA91E7A2234043D007ED308 /* WorkfinderCommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91E792234043D007ED308 /* WorkfinderCommonTests.swift */; };
@@ -238,6 +239,7 @@
 		FC96709B2258C8B100318F69 /* F4SInterest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInterest.swift; sourceTree = "<group>"; };
 		FC9670A3225A195B00318F69 /* F4SPlacementRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPlacementRepositoryProtocol.swift; sourceTree = "<group>"; };
 		FC9670A5225A279300318F69 /* F4SInterestsRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInterestsRepositoryProtocol.swift; sourceTree = "<group>"; };
+		FC96D449233CB9D90012C4E8 /* F4SPartnersModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPartnersModelProtocol.swift; sourceTree = "<group>"; };
 		FC9865BB229D3963006D3E63 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		FCA91E6B2234043D007ED308 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA91E6E2234043D007ED308 /* WorkfinderCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderCommon.h; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 				FC1DBDF82335474500D68C83 /* F4SEmailVerificationModelProtocol.swift */,
 				FC8F956F233B82B60027BE02 /* AllowedToApplyLogicProtocol.swift */,
 				FC8F9571233B90F30027BE02 /* F4SCompanyDocumentsModelProtocol.swift */,
+				FC96D449233CB9D90012C4E8 /* F4SPartnersModelProtocol.swift */,
 			);
 			path = "Model protocols";
 			sourceTree = "<group>";
@@ -777,6 +780,7 @@
 				FCFC069923224269003C59C8 /* Message.swift in Sources */,
 				FCDFEA0C223D1CBC00E58649 /* WEXErrorsFactory.swift in Sources */,
 				FC04B867233277080034A60E /* CoordinatorProtocols.swift in Sources */,
+				FC96D44A233CB9D90012C4E8 /* F4SPartnersModelProtocol.swift in Sources */,
 				FCDB073A2286F7870053347F /* F4SUserRepository.swift in Sources */,
 				FC32FD432265E4C800740F0C /* F4SContentType.swift in Sources */,
 				FC426EFE232FAC6C004F8A3E /* F4SNetworkSessionManagerProtocol.swift in Sources */,

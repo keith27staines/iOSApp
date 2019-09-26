@@ -19,11 +19,15 @@ public class OnboardingCoordinator : NavigationCoordinator, OnboardingCoordinato
             onboardingViewController?.hideOnboardingControls = hideOnboardingControls
         }
     }
+    
+    let localStore: LocalStorageProtocol
 
     public init(parent: Coordinating?,
                 navigationRouter: NavigationRoutingProtocol,
-                partnerService: F4SPartnerServiceProtocol) {
+                partnerService: F4SPartnerServiceProtocol,
+                localStore: LocalStorageProtocol) {
         self.partnerService = partnerService
+        self.localStore = localStore
         super.init(parent: parent, navigationRouter: navigationRouter)
     }
     
@@ -39,7 +43,7 @@ public class OnboardingCoordinator : NavigationCoordinator, OnboardingCoordinato
     }
     
     func showPartnerList() {
-        let partnersModel = F4SPartnersModel(partnerService: partnerService)
+        let partnersModel = F4SPartnersModel(partnerService: partnerService, localStore: localStore)
         let vc = UIStoryboard(name: "SelectPartner", bundle: __bundle).instantiateInitialViewController() as! PartnerSelectionViewController
         vc.partnersModel = partnersModel
         partnerSelectionViewController = vc

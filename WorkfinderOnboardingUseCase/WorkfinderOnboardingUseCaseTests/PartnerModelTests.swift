@@ -37,8 +37,9 @@ class PartnerModelTests: XCTestCase {
     }
     
     override func setUp() {
+        let localStore = MockLocalStore()
         let partnersService = MockF4SPartnerService()
-        model = F4SPartnersModel(partnerService: partnersService)
+        model = F4SPartnersModel(partnerService: partnersService, localStore: localStore)
         model.serversidePartners = createFakeServerSidePartners()
     }
     

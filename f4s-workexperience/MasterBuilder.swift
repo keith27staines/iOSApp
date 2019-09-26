@@ -198,11 +198,14 @@ class MasterBuilder {
     }()
     
     lazy var onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol = {
-         return OnboardingCoordinatorFactory(partnerService: self.partnersService)
+         return OnboardingCoordinatorFactory(
+            partnerService: self.partnersService,
+            localStore: self.localStore)
      }()
     
-    lazy var partnersModel: F4SPartnersModel = {
-        return F4SPartnersModel(partnerService: self.partnersService)
+    lazy var partnersModel: F4SPartnersModelProtocol = {
+        return F4SPartnersModel(partnerService: self.partnersService,
+                                localStore: self.localStore)
     }()
     
     lazy var partnersService: F4SPartnerServiceProtocol = {
