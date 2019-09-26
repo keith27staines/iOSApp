@@ -120,19 +120,19 @@ class AppCoordinatorTests: XCTestCase {
         XCTAssertTrue(sut.window.isKeyWindow)
     }
     
-    func testOnboardingStarted() {
-        masterBuilder = MockMasterBuilder(userIsRegistered: false)
-        let sut = masterBuilder.appCoordinator
-        let expectation = XCTestExpectation(description: "onboardingComplete")
-        let onboardingCoordinator = masterBuilder.mockOnboardingCoordinatorFactory.onboardingCoordinators.last
-        onboardingCoordinator?.testNotifyOnStartCalled = {
-            onboardingCoordinator?.completeOnboarding()
-            XCTAssertEqual(onboardingCoordinator?.startedCount,1)
-            expectation.fulfill()
-        }
-        sut.start()
-        wait(for: [expectation], timeout: 1)
-    }
+//    func testOnboardingStarted() {
+//        masterBuilder = MockMasterBuilder(userIsRegistered: false)
+//        let sut = masterBuilder.appCoordinator
+//        let expectation = XCTestExpectation(description: "onboardingComplete")
+//        let onboardingCoordinator = masterBuilder.mockOnboardingCoordinatorFactory.onboardingCoordinators.last
+//        onboardingCoordinator?.testNotifyOnStartCalled = {
+//            onboardingCoordinator?.completeOnboarding()
+//            XCTAssertEqual(onboardingCoordinator?.startedCount,1)
+//            expectation.fulfill()
+//        }
+//        sut.start()
+//        wait(for: [expectation], timeout: 1)
+//    }
     
     func makeMasterBuilder(userIsRegistered: Bool) -> MockMasterBuilder {
         return MockMasterBuilder(userIsRegistered: userIsRegistered)
