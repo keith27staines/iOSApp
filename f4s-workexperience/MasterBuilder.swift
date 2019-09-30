@@ -11,7 +11,38 @@ import WorkfinderCompanyDetailsUseCase
 import WorkfinderRecommendations
 import WorkfinderUI
 
-class MasterBuilder {
+protocol TabbarCoordinatorFactoryProtocol {
+    func makeTabBarCoordinator(parent: Coordinating,
+    router: NavigationRoutingProtocol,
+    inject: CoreInjectionProtocol) -> TabBarCoordinatorProtocol
+}
+
+class MasterBuilder: TabbarCoordinatorFactoryProtocol {
+    func makeTabBarCoordinator(parent: Coordinating,
+                               router: NavigationRoutingProtocol,
+                               inject: CoreInjectionProtocol) -> TabBarCoordinatorProtocol {
+        return TabBarCoordinator(
+            parent: parent,
+            navigationRouter: router,
+            inject: inject,
+            companyCoordinatorFactory: companyCoordinatorFactory,
+            companyDocumentsService: companyDocumentsService,
+            companyRepository: companyRepository,
+            companyService: companyService,
+            favouritesRepository: favouritesRepository,
+            documentUploaderFactory: documentUploaderFactory,
+            offerProcessingService: offerProcessingService,
+            partnersModel: partnersModel,
+            placementsRepository: placementsRepository,
+            placementService: placementService,
+            placementDocumentsServiceFactory: placementDocumentsServiceFactory,
+            messageServiceFactory: messageServiceFactory,
+            messageActionServiceFactory: messageActionServiceFactory,
+            messageCannedResponsesServiceFactory: messageCannedResponsesServiceFactory,
+            recommendationsService: recommendationsService,
+            roleService: roleService)
+    }
+    
     
     let launchOptions: [UIApplication.LaunchOptionsKey : Any]?
     let registrar: RemoteNotificationsRegistrarProtocol
@@ -40,32 +71,44 @@ class MasterBuilder {
     
     lazy var appInstallationUuidLogic: AppInstallationUuidLogic = {
         let userRepo = F4SUserRepository(localStore: localStore)
-        return AppInstallationUuidLogic(userService: userService,
+        return AppInstallationUuidLogic(localStore: self.localStore,
+                                        userService: userService,
                                         userRepo: userRepo,
                                         apnsEnvironment: apnsEnvironment,
                                         registerDeviceService: self.deviceRegistrationService)
     }()
     
-    func buildAppCoordinator() -> AppCoordinatorProtocol {
-        let navigationController = UINavigationController(rootViewController: AppCoordinatorBackgroundViewController())
-        let navigationRouter = NavigationRouter(navigationController: navigationController)
-        let injection = CoreInjection(
-            launchOptions: launchOptions,
-            appInstallationUuidLogic: appInstallationUuidLogic,
-            user: userRepo.load(),
-            userService: userService,
-            userStatusService: userStatusService,
-            userRepository: userRepo,
-            databaseDownloadManager: databaseDownloadManager,
-            contentService: contentService,
-            log: log)
-        let versionCheckCoordinator = VersionCheckCoordinator(
+    lazy var rootNavigationController: UINavigationController = {
+        return UINavigationController(rootViewController: AppCoordinatorBackgroundViewController())
+    }()
+    
+    lazy var rootNavigationRouter: NavigationRoutingProtocol = {
+        return NavigationRouter(navigationController: self.rootNavigationController)
+    }()
+    
+    lazy var injection: CoreInjectionProtocol = {
+        return CoreInjection(
+            launchOptions: self.launchOptions,
+            appInstallationUuidLogic: self.appInstallationUuidLogic,
+            user: self.userRepo.load(),
+            userService: self.userService,
+            userStatusService: self.userStatusService,
+            userRepository: self.userRepo,
+            databaseDownloadManager: self.databaseDownloadManager,
+            contentService: self.contentService,
+            log: self.log)
+    }()
+    
+    lazy var versionCheckCoordinator: VersionCheckCoordinatorProtocol = {
+        return VersionCheckCoordinator(
             parent: nil,
-            navigationRouter: navigationRouter,
-            versionCheckService: versionCheckService)
-        
+            navigationRouter: self.rootNavigationRouter,
+            versionCheckService: self.versionCheckService)
+    }()
+    
+    func buildAppCoordinator() -> AppCoordinatorProtocol {
         return  AppCoordinator(registrar: registrar,
-                              navigationRouter: navigationRouter,
+                              navigationRouter: rootNavigationRouter,
                               inject: injection,
                               companyCoordinatorFactory: companyCoordinatorFactory,
                               companyDocumentsService: companyDocumentsService,
@@ -74,6 +117,7 @@ class MasterBuilder {
                               documentUploaderFactory: documentUploaderFactory,
                               emailVerificationModel: emailVerificationModel,
                               favouritesRepository: favouritesRepository,
+                              localStore: localStore,
                               offerProcessingService: offerProcessingService,
                               onboardingCoordinatorFactory: onboardingCoordinatorFactory,
                               partnersModel: partnersModel,
@@ -85,6 +129,7 @@ class MasterBuilder {
                               messageCannedResponsesServiceFactory: messageCannedResponsesServiceFactory,
                               recommendationsService: recommendationsService,
                               roleService: roleService,
+                              tabBarCoordinatorFactory: self,
                               versionCheckCoordinator: versionCheckCoordinator)
     }
     

@@ -39,12 +39,13 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     let messageCannedResponsesServiceFactory: F4SCannedMessageResponsesServiceFactoryProtocol
     let recommendationsService: F4SRecommendationServiceProtocol
     let roleService: F4SRoleServiceProtocol
-    
+    let tabBarCoordinatorFactory: TabbarCoordinatorFactoryProtocol
     var user: F4SUser { return injected.userRepository.load() }
     var userService: F4SUserServiceProtocol { return injected.userService}
     var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol { return injected.databaseDownloadManager }
     var userNotificationService: UNService!
     var log: F4SAnalyticsAndDebugging { return injected.log }
+    let localStore: LocalStorageProtocol
     
     public init(registrar: RemoteNotificationsRegistrarProtocol,
                 navigationRouter: NavigationRoutingProtocol,
@@ -56,6 +57,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                 documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
                 emailVerificationModel: F4SEmailVerificationModelProtocol,
                 favouritesRepository: F4SFavouritesRepositoryProtocol,
+                localStore: LocalStorageProtocol,
                 offerProcessingService: F4SOfferProcessingServiceProtocol,
                 onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol,
                 partnersModel: F4SPartnersModelProtocol,
@@ -67,6 +69,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                 messageCannedResponsesServiceFactory: F4SCannedMessageResponsesServiceFactoryProtocol,
                 recommendationsService: F4SRecommendationServiceProtocol,
                 roleService: F4SRoleServiceProtocol,
+                tabBarCoordinatorFactory: TabbarCoordinatorFactoryProtocol,
                 versionCheckCoordinator: VersionCheckCoordinatorProtocol) {
         
         self.registrar = registrar
@@ -80,6 +83,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         
         self.emailVerificationModel = emailVerificationModel
         self.favouritesRepository = favouritesRepository
+        self.localStore = localStore
         self.offerProcessingService = offerProcessingService
         self.partnersModel = partnersModel
         self.placementsRepository = placementsRepository
@@ -93,6 +97,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         self.onboardingCoordinatorFactory = onboardingCoordinatorFactory
         self.recommendationsService = recommendationsService
         self.roleService = roleService
+        self.tabBarCoordinatorFactory = tabBarCoordinatorFactory
         self.versionCheckCoordinator = versionCheckCoordinator
         
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -122,29 +127,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         } else {
             startTabBarCoordinator()
         }
-    }
-    
-    func makeTabBarCoordinator() -> TabBarCoordinatorProtocol {
-        return TabBarCoordinator(
-            parent: self,
-            navigationRouter: navigationRouter,
-            inject: injected,
-            companyCoordinatorFactory: companyCoordinatorFactory,
-            companyDocumentsService: companyDocumentsService,
-            companyRepository: companyRepository,
-            companyService: companyService,
-            favouritesRepository: favouritesRepository,
-            documentUploaderFactory: documentUploaderFactory,
-            offerProcessingService: offerProcessingService,
-            partnersModel: partnersModel,
-            placementsRepository: placementsRepository,
-            placementService: placementService,
-            placementDocumentsServiceFactory: placementDocumentsServiceFactory,
-            messageServiceFactory: messageServiceFactory,
-            messageActionServiceFactory: messageActionServiceFactory,
-            messageCannedResponsesServiceFactory: messageCannedResponsesServiceFactory,
-            recommendationsService: recommendationsService,
-            roleService: roleService)
     }
     
     func performVersionCheck(resultHandler: @escaping (F4SNetworkResult<F4SVersionValidity>)->Void) {
@@ -209,7 +191,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     }
     
     func showOnboardingUIIfNecessary() {
-        let localStore = LocalStore()
         let onboardingRequired = localStore.value(key: LocalStore.Key.isFirstLaunch) as! Bool? ?? true
         
         if onboardingRequired {
@@ -220,7 +201,10 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     }
     
     private func startTabBarCoordinator() {
-        tabBarCoordinator = makeTabBarCoordinator()
+        tabBarCoordinator = tabBarCoordinatorFactory.makeTabBarCoordinator(
+            parent: self,
+            router: navigationRouter,
+            inject: injected)
         tabBarCoordinator.shouldAskOperatingSystemToAllowLocation = shouldAskOperatingSystemToAllowLocation
         addChildCoordinator(tabBarCoordinator)
         tabBarCoordinator.start()
