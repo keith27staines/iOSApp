@@ -19,7 +19,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     var shouldAskOperatingSystemToAllowLocation: Bool = false
     var tabBarCoordinator: TabBarCoordinatorProtocol!
     var onboardingCoordinator: OnboardingCoordinatorProtocol?
-    var versionCheckCoordinator: (NavigationCoordinator & VersionChecking)?
+    var versionCheckCoordinator: VersionCheckCoordinatorProtocol?
     
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     let companyDocumentsService: F4SCompanyDocumentServiceProtocol
@@ -46,8 +46,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     var userNotificationService: UNService!
     var log: F4SAnalyticsAndDebugging { return injected.log }
     
-    public init(
-                registrar: RemoteNotificationsRegistrarProtocol,
+    public init(registrar: RemoteNotificationsRegistrarProtocol,
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
                 companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
@@ -68,7 +67,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                 messageCannedResponsesServiceFactory: F4SCannedMessageResponsesServiceFactoryProtocol,
                 recommendationsService: F4SRecommendationServiceProtocol,
                 roleService: F4SRoleServiceProtocol,
-                versionCheckCoordinator: NavigationCoordinator & VersionChecking) {
+                versionCheckCoordinator: VersionCheckCoordinatorProtocol) {
         
         self.registrar = registrar
         self.injected = inject

@@ -1036,13 +1036,6 @@
 			name = "Force app update";
 			sourceTree = "<group>";
 		};
-		FCA90A8B221D693700EACD8D /* Mocks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Mocks;
-			sourceTree = "<group>";
-		};
 		FCB49304222A5CCC00B88B8B /* Main tabs  */ = {
 			isa = PBXGroup;
 			children = (
@@ -1097,7 +1090,6 @@
 		FCFE450F2250CAD600C38436 /* Workfinder main module tests */ = {
 			isa = PBXGroup;
 			children = (
-				FCA90A8B221D693700EACD8D /* Mocks */,
 				FC3F3921222931630046F8F8 /* Coordinator tests */,
 				FCC85B2220EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift */,
 			);

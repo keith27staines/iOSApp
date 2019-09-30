@@ -77,9 +77,17 @@ public protocol CoreInjectionProtocol : class {
     var log: F4SAnalyticsAndDebugging { get }
 }
 
-public protocol CoreInjectionNavigationCoordinatorProtocol : Coordinating {
+public protocol CoreInjectionNavigationCoordinatorProtocol : NavigationCoordinating {
     var injected: CoreInjectionProtocol { get }
 }
+
+public protocol VersionChecking : class {
+    var versionCheckCompletion: ((F4SNetworkResult<F4SVersionValidity>) -> Void)? { get set }
+}
+
+public protocol VersionCheckCoordinatorProtocol: NavigationCoordinating, VersionChecking {}
+
+public protocol NavigationCoordinating : Coordinating {}
 
 public protocol Coordinating : class {
     

@@ -59,8 +59,10 @@ class MasterBuilder {
             databaseDownloadManager: databaseDownloadManager,
             contentService: contentService,
             log: log)
-        let versionCheckCoordinator = VersionCheckCoordinator(parent: nil, navigationRouter: navigationRouter)
-        versionCheckCoordinator.versionCheckService = versionCheckService
+        let versionCheckCoordinator = VersionCheckCoordinator(
+            parent: nil,
+            navigationRouter: navigationRouter,
+            versionCheckService: versionCheckService)
         
         return  AppCoordinator(registrar: registrar,
                               navigationRouter: navigationRouter,

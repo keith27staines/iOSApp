@@ -26,6 +26,7 @@
 		FC12B10322F3415300C33410 /* JsonDateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B10022F3415200C33410 /* JsonDateFormatterExtension.swift */; };
 		FC12B10522F341D500C33410 /* JsonDateFormatterExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */; };
 		FC14E44C2341E36B005D7541 /* MockUIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC14E44B2341E36B005D7541 /* MockUIApplication.swift */; };
+		FC14E459234200EC005D7541 /* MockVersionCheckCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC14E458234200EC005D7541 /* MockVersionCheckCoordinator.swift */; };
 		FC177FCD2306A4010068C2F7 /* F4SHoursTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC177FCC2306A4010068C2F7 /* F4SHoursTypeTests.swift */; };
 		FC177FCF230703170068C2F7 /* F4SNetworkErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC177FCE230703170068C2F7 /* F4SNetworkErrorTests.swift */; };
 		FC1DBDF92335474500D68C83 /* F4SEmailVerificationModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1DBDF82335474500D68C83 /* F4SEmailVerificationModelProtocol.swift */; };
@@ -174,6 +175,7 @@
 		FC12B10022F3415200C33410 /* JsonDateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDateFormatterExtension.swift; sourceTree = "<group>"; };
 		FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDateFormatterExtensionTests.swift; sourceTree = "<group>"; };
 		FC14E44B2341E36B005D7541 /* MockUIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUIApplication.swift; sourceTree = "<group>"; };
+		FC14E458234200EC005D7541 /* MockVersionCheckCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockVersionCheckCoordinator.swift; sourceTree = "<group>"; };
 		FC177FCC2306A4010068C2F7 /* F4SHoursTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SHoursTypeTests.swift; sourceTree = "<group>"; };
 		FC177FCE230703170068C2F7 /* F4SNetworkErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SNetworkErrorTests.swift; sourceTree = "<group>"; };
 		FC1DBDF82335474500D68C83 /* F4SEmailVerificationModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SEmailVerificationModelProtocol.swift; sourceTree = "<group>"; };
@@ -630,6 +632,7 @@
 				FC8F9579233BA6710027BE02 /* MockDatabaseDownload.swift */,
 				FC8F9578233BA6710027BE02 /* MockUserService.swift */,
 				FC8F957A233BA6710027BE02 /* MockAnalyticsAndDebugging.swift */,
+				FC14E458234200EC005D7541 /* MockVersionCheckCoordinator.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -799,6 +802,7 @@
 				FC4EE710230EB9D700B40F6B /* F4SUserStatus.swift in Sources */,
 				FCE51938224948E400B550C9 /* F4SHoursType.swift in Sources */,
 				FC8F957D233BA6710027BE02 /* MockAnalyticsAndDebugging.swift in Sources */,
+				FC14E459234200EC005D7541 /* MockVersionCheckCoordinator.swift in Sources */,
 				FC06605D2326770B00496FE2 /* F4SShortlistJson.swift in Sources */,
 				FCE5193E22494CED00B550C9 /* F4SJsonValue.swift in Sources */,
 				FC426F1423310434004F8A3E /* F4SServiceFactoryProtocols.swift in Sources */,
