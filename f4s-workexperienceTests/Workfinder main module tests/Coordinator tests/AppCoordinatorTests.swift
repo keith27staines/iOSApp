@@ -14,7 +14,6 @@ import WorkfinderCoordinators
 
 @testable import f4s_workexperience
 
-
 struct MockMasterBuilder {
     
     let installationUuid: F4SUUID?
