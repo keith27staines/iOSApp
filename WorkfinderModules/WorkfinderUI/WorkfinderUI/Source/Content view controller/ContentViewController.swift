@@ -1,9 +1,11 @@
 import UIKit
+import WebKit
 import WorkfinderCommon
+
 
 public class ContentViewController: UIViewController {
 
-    @IBOutlet weak var webView: UIWebView!
+    @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
     @IBAction func doneTapped(_ sender: Any) {
@@ -17,6 +19,7 @@ public class ContentViewController: UIViewController {
 
     override public func viewDidLoad() {
         super.viewDidLoad()
+        webView.navigationDelegate = self
         adjustAppearance()
         getContent()
     }
@@ -43,12 +46,18 @@ public class ContentViewController: UIViewController {
     }
 }
 
+extension ContentViewController: WKNavigationDelegate {
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        sharedUserMessageHandler.hideLoadingOverlay()
+    }
+}
+
 // MARK: - adjust appearance
 extension ContentViewController {
     func loadURL(url: String) {
         if let url = URL(string: url) {
             let urlRequest = URLRequest(url: url)
-            self.webView.loadRequest(urlRequest)
+            self.webView.load(urlRequest)
         }
     }
 
@@ -61,11 +70,6 @@ extension ContentViewController {
     }
 
     func adjustAppearance() {
-        self.webView.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-        self.webView.stringByEvaluatingJavaScript(from: "window.scroll(0,0)")
-        self.webView.backgroundColor = UIColor.white
-        self.webView.scrollView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
-        self.webView.delegate = self
         self.adjustNavigationBar()
     }
 }
@@ -115,19 +119,5 @@ extension ContentViewController {
                 }
             }
         }
-    }
-}
-
-// MARK: - UIWebViewDelegate
-extension ContentViewController: UIWebViewDelegate {
-    public func webViewDidFinishLoad(_: UIWebView) {
-        self.webView.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-        self.webView.scrollView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
-        self.webView.stringByEvaluatingJavaScript(from: "window.scroll(0,0)")
-        sharedUserMessageHandler.hideLoadingOverlay()
-    }
-
-    public func webView(_: UIWebView, didFailLoadWithError error: Error) {
-        sharedUserMessageHandler.hideLoadingOverlay()
     }
 }

@@ -14,10 +14,11 @@ import WorkfinderCoordinators
 
 @testable import f4s_workexperience
 
-
-struct MockMasterBuilder {
+struct MockMasterBuilder: TabbarCoordinatorFactoryProtocol {
     
+    let versionIsOkay: Bool
     let installationUuid: F4SUUID?
+    let anonymousUserUuid = "anonymous user uuid"
     let apnsEnvironment = "STAGING"
     
     lazy var appCoordinator: AppCoordinator = {
@@ -32,6 +33,7 @@ struct MockMasterBuilder {
             documentUploaderFactory: self.mockDocumentUploaderFactory,
             emailVerificationModel: self.mockEmailVerificationModel,
             favouritesRepository: self.mockFavouritesRepository,
+            localStore: self.mockLocalStore,
             offerProcessingService: self.mockOfferProcessingService,
             onboardingCoordinatorFactory: self.mockOnboardingCoordinatorFactory,
             partnersModel: self.mockPartnersModel,
@@ -43,10 +45,13 @@ struct MockMasterBuilder {
             messageCannedResponsesServiceFactory: self.mockMessageCannedResponsesServiceFactory,
             recommendationsService: self.mockRecommendationsService,
             roleService: self.mockRoleService,
-            versionCheckCoordinator: self.versionCheckCoordinator)
+            tabBarCoordinatorFactory: self,
+            versionCheckCoordinator: self.mockVersionCheckCoordinator)
     }()
     lazy var mockAppInstallationLogic: MockAppInstallationUuidLogic = {
-        return MockAppInstallationUuidLogic(registeredInstallationUuid: self.installationUuid)
+        let logic = MockAppInstallationUuidLogic(registeredUserUuid: self.anonymousUserUuid)
+        logic.registeredInstallationUuid = self.installationUuid
+        return logic
     }()
     lazy var mockApplication = MockUIApplication()
     lazy var mockCompanyCoordinatorFactory = MockCompanyCoordinatorFactory()
@@ -71,7 +76,13 @@ struct MockMasterBuilder {
             log: self.mockLog)
     }()
     lazy var launchOptions = LaunchOptions()
-    lazy var mockLocalStore = MockLocalStore()
+    lazy var mockLocalStore: LocalStorageProtocol = {
+        let store = MockLocalStore()
+        if let installationUuid = self.installationUuid {
+            store.setValue(installationUuid, for: LocalStore.Key.installationUuid)
+        }
+        return store
+    }()
     lazy var mockLog = MockF4SAnalyticsAndDebugging()
     lazy var mockMessageServiceFactory = MockF4SMessageServiceFactory()
     lazy var mockMessageActionServiceFactory = MockF4SMessageActionServiceFactory()
@@ -88,24 +99,36 @@ struct MockMasterBuilder {
     lazy var mockPlacementDocumentsServiceFactory = MockF4SPlacementDocumentsServiceFactory()
     lazy var mockRecommendationsService = MockF4SRecommendationService()
     lazy var mockRoleService = MockF4SRoleService()
-    lazy var user = F4SUser()
+    lazy var user: F4SUser = { return F4SUser() }()
     lazy var userRepo: F4SUserRepository = {
-        let repo = F4SUserRepository(localStore: self.mockLocalStore)
-        repo.save(user: self.user)
-        return repo
+        return F4SUserRepository(localStore: self.mockLocalStore)
     }()
     lazy var mockUserService = MockF4SUserService(registeringWillSucceedOnAttempt: 1)
     lazy var mockUserStatusService = MockUserStatusService()
-    lazy var versionCheckCoordinator = {
-        return VersionCheckCoordinator(
-            parent: nil,
-            navigationRouter: self.mockNavigationRouter)
+    
+    lazy var mockVersionCheckCoordinator: VersionCheckCoordinatorProtocol = {
+        let coordinator = MockVersionCheckCoordinator(versionIsOkay: self.versionIsOkay)
+        return coordinator
     }()
     
-    init(userIsRegistered: Bool) {
-        self.installationUuid = userIsRegistered ? "installation uuid" : nil
+    init(userIsRegistered: Bool, versionIsOkay: Bool) {
+        self.installationUuid = "installation uuid" //userIsRegistered ? "installation uuid" : nil
+        self.versionIsOkay = versionIsOkay
+        var user: F4SUser = F4SUser()
+        if userIsRegistered {
+            user.uuid = "anonymous user uuid"
+        }
+        self.userRepo.save(user: user)
     }
     
+    func makeTabBarCoordinator(parent: Coordinating,
+                               router: NavigationRoutingProtocol,
+                               inject: CoreInjectionProtocol) -> TabBarCoordinatorProtocol {
+        return MockTabBarCoordinator(
+            parent: parent,
+            navigationRouter: router,
+            inject: inject)
+    }
     
 }
 
@@ -114,27 +137,69 @@ class AppCoordinatorTests: XCTestCase {
     var masterBuilder: MockMasterBuilder!
     
     func testCreateAppCoordinator() {
-        masterBuilder = MockMasterBuilder(userIsRegistered: true)
+        masterBuilder = MockMasterBuilder(userIsRegistered: true, versionIsOkay: false )
         let sut = masterBuilder.appCoordinator
         XCTAssertNotNil(sut.window)
         XCTAssertTrue(sut.window.isKeyWindow)
     }
     
-//    func testOnboardingStarted() {
-//        masterBuilder = MockMasterBuilder(userIsRegistered: false)
-//        let sut = masterBuilder.appCoordinator
-//        let expectation = XCTestExpectation(description: "onboardingComplete")
-//        let onboardingCoordinator = masterBuilder.mockOnboardingCoordinatorFactory.onboardingCoordinators.last
-//        onboardingCoordinator?.testNotifyOnStartCalled = {
-//            onboardingCoordinator?.completeOnboarding()
-//            XCTAssertEqual(onboardingCoordinator?.startedCount,1)
-//            expectation.fulfill()
-//        }
-//        sut.start()
-//        wait(for: [expectation], timeout: 1)
-//    }
-    
-    func makeMasterBuilder(userIsRegistered: Bool) -> MockMasterBuilder {
-        return MockMasterBuilder(userIsRegistered: userIsRegistered)
+    func test_versionCheck_called_and_onboarding_not_called_when_version_invalid() {
+        masterBuilder = MockMasterBuilder(userIsRegistered: false, versionIsOkay: false)
+        let sut = masterBuilder.appCoordinator
+        let expectation = XCTestExpectation(description: "")
+        let versionCheckCoordinator = masterBuilder.mockVersionCheckCoordinator as! MockVersionCheckCoordinator
+        var masterBuilder = self.masterBuilder!
+        versionCheckCoordinator.testVersionCheckWasCalled = {
+            let onboardingCoordinator = masterBuilder.mockOnboardingCoordinatorFactory.onboardingCoordinators.last
+            XCTAssertNil(onboardingCoordinator)
+            expectation.fulfill()
+        }
+        sut.start()
+        wait(for: [expectation], timeout: 1)
     }
+    
+    func test_versionCheck_called_and_onboarding_started_when_version_valid() {
+        masterBuilder = MockMasterBuilder(userIsRegistered: false, versionIsOkay: true)
+        let sut = masterBuilder.appCoordinator
+        let expectation = XCTestExpectation(description: "")
+        let versionCheckCoordinator = masterBuilder.mockVersionCheckCoordinator as! MockVersionCheckCoordinator
+        var masterBuilder = self.masterBuilder!
+        versionCheckCoordinator.testVersionCheckWasCalled = {
+            let onboardingCoordinator = masterBuilder.mockOnboardingCoordinatorFactory.onboardingCoordinators.last
+            XCTAssertTrue(onboardingCoordinator?.startedCount == 1)
+            expectation.fulfill()
+        }
+        sut.start()
+        wait(for: [expectation], timeout: 1)
+    }
+    
+    func test_ensureDeviceIsRegistered_is_called() {
+        masterBuilder = MockMasterBuilder(userIsRegistered: false, versionIsOkay: true)
+        let sut = masterBuilder.appCoordinator
+        let expectation = XCTestExpectation(description: "")
+        var masterBuilder = self.masterBuilder!
+        let appInstallationLogic = masterBuilder.mockAppInstallationLogic
+        appInstallationLogic.testDidComplete = {
+            expectation.fulfill()
+        }
+        sut.start()
+        wait(for: [expectation], timeout: 1000)
+    }
+    
+    func test_tabBar_created_when_onboardingFinishes() {
+        masterBuilder = MockMasterBuilder(userIsRegistered: true, versionIsOkay: true)
+        let sut = masterBuilder.appCoordinator
+        let expectation = XCTestExpectation(description: "")
+        let versionCheckCoordinator = masterBuilder.mockVersionCheckCoordinator as! MockVersionCheckCoordinator
+        var masterBuilder = self.masterBuilder!
+        versionCheckCoordinator.testVersionCheckWasCalled = {
+            let onboardingCoordinator = masterBuilder.mockOnboardingCoordinatorFactory.onboardingCoordinators.last
+            onboardingCoordinator?.completeOnboarding()
+            XCTAssertNotNil(sut.tabBarCoordinator)
+            expectation.fulfill()
+        }
+        sut.start()
+        wait(for: [expectation], timeout: 1)
+    }
+
 }

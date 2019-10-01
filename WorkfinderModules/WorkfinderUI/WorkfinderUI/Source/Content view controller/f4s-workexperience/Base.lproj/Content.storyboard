@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,10 +19,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XYQ-rd-Khm">
-                                <rect key="frame" x="0.0" y="20" width="375" height="599"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </webView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LEE-0d-IFa">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
@@ -36,21 +30,29 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RI3-LM-L0F">
+                                <rect key="frame" x="16" y="0.0" width="343" height="623"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="XYQ-rd-Khm" firstAttribute="top" secondItem="bfU-Yv-3uf" secondAttribute="bottom" id="Pm5-6D-FCU"/>
+                            <constraint firstItem="LEE-0d-IFa" firstAttribute="top" secondItem="RI3-LM-L0F" secondAttribute="bottom" id="IHE-Aa-Uud"/>
                             <constraint firstItem="LEE-0d-IFa" firstAttribute="leading" secondItem="oQB-rp-bFo" secondAttribute="leading" id="Qmh-MQ-qBf"/>
                             <constraint firstItem="rYR-m0-lRU" firstAttribute="top" secondItem="LEE-0d-IFa" secondAttribute="bottom" id="QzX-Ez-DD9"/>
-                            <constraint firstAttribute="trailing" secondItem="XYQ-rd-Khm" secondAttribute="trailing" id="V7a-cU-5e3"/>
-                            <constraint firstItem="LEE-0d-IFa" firstAttribute="top" secondItem="XYQ-rd-Khm" secondAttribute="bottom" constant="4" id="lIQ-1O-4aE"/>
-                            <constraint firstItem="XYQ-rd-Khm" firstAttribute="leading" secondItem="oQB-rp-bFo" secondAttribute="leading" id="mJF-pv-hl4"/>
+                            <constraint firstItem="RI3-LM-L0F" firstAttribute="leading" secondItem="oQB-rp-bFo" secondAttribute="leadingMargin" id="aYq-JE-Zgk"/>
                             <constraint firstAttribute="trailing" secondItem="LEE-0d-IFa" secondAttribute="trailing" id="nEn-Yx-xj7"/>
+                            <constraint firstItem="RI3-LM-L0F" firstAttribute="top" secondItem="bfU-Yv-3uf" secondAttribute="bottom" id="oaf-uI-xr9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="RI3-LM-L0F" secondAttribute="trailing" id="udO-Ih-hli"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="doneButton" destination="Sdd-1Y-tT2" id="u86-7r-FXZ"/>
-                        <outlet property="webView" destination="XYQ-rd-Khm" id="1bG-eQ-f3Y"/>
+                        <outlet property="webView" destination="RI3-LM-L0F" id="GRd-Yh-gBS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CbJ-tU-0rT" userLabel="First Responder" sceneMemberID="firstResponder"/>

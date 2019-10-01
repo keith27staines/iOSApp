@@ -17,7 +17,7 @@ class VersionCheckCoordinatorTests: XCTestCase {
     var router: MockNavigationRouter!
     
     func test_VersionIsGood() {
-        let sut = makeSUTVersionCheckCoordinator()
+        let sut = makeSUTVersionCheckCoordinator(versionIsGood: true)
         sut.versionCheckService = MockF4SVersionCheckingService(versionIsGood: true)
         let vesionCheckComplete = XCTestExpectation(description: "version check complete")
         sut.versionCheckCompletion = { [weak self] result in
@@ -38,7 +38,7 @@ class VersionCheckCoordinatorTests: XCTestCase {
     }
     
     func test_VersionIsBad() {
-        let sut = makeSUTVersionCheckCoordinator()
+        let sut = makeSUTVersionCheckCoordinator(versionIsGood: false)
         sut.versionCheckService = MockF4SVersionCheckingService(versionIsGood: false)
         let vesionCheckComplete = XCTestExpectation(description: "version check complete")
         sut.versionCheckCompletion = { [weak self] result in
@@ -51,18 +51,19 @@ class VersionCheckCoordinatorTests: XCTestCase {
             }
             XCTAssertEqual(strongSelf.router.pushedViewControllers.count, 0)
             XCTAssertEqual(strongSelf.router.presentedViewControllers.count, 1)
-            XCTAssertEqual(strongSelf.parentCoordinator.childCoordinators.count, 1)
             vesionCheckComplete.fulfill()
         }
         sut.start()
         wait(for: [vesionCheckComplete], timeout: 1)
     }
     
-    func makeSUTVersionCheckCoordinator() -> VersionCheckCoordinator {
+    func makeSUTVersionCheckCoordinator(versionIsGood: Bool) -> VersionCheckCoordinator {
+        let versionService = MockF4SVersionCheckingService(versionIsGood: versionIsGood)
         router = MockNavigationRouter()
         parentCoordinator = MockParentCoordinator(router: router!)
-        let sut = VersionCheckCoordinator(parent: parentCoordinator, navigationRouter: router!)
-        parentCoordinator.addChildCoordinator(sut)
+        let sut = VersionCheckCoordinator(parent: parentCoordinator,
+                                          navigationRouter: router,
+                                          versionCheckService: versionService)
         return sut
     }
 }

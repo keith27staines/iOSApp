@@ -91,9 +91,9 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
     func start() {
         createTabBar()
         rootViewController = setUpDrawerController(navigationController: tabBarViewController)
-        let window = (UIApplication.shared.delegate as? AppDelegate)?.window!
-        window!.rootViewController = rootViewController
-        window!.makeKeyAndVisible()
+        guard let window = (UIApplication.shared.delegate as? AppDelegate)?.window else { return }
+        window.rootViewController = rootViewController
+        window.makeKeyAndVisible()
         navigateToMostAppropriateInitialTab()
     }
     

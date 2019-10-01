@@ -25,6 +25,8 @@
 		FC12B0FF22F33ECE00C33410 /* F4STimelinePlacementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B0FE22F33ECE00C33410 /* F4STimelinePlacementTests.swift */; };
 		FC12B10322F3415300C33410 /* JsonDateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B10022F3415200C33410 /* JsonDateFormatterExtension.swift */; };
 		FC12B10522F341D500C33410 /* JsonDateFormatterExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */; };
+		FC14E44C2341E36B005D7541 /* MockUIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC14E44B2341E36B005D7541 /* MockUIApplication.swift */; };
+		FC14E459234200EC005D7541 /* MockVersionCheckCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC14E458234200EC005D7541 /* MockVersionCheckCoordinator.swift */; };
 		FC177FCD2306A4010068C2F7 /* F4SHoursTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC177FCC2306A4010068C2F7 /* F4SHoursTypeTests.swift */; };
 		FC177FCF230703170068C2F7 /* F4SNetworkErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC177FCE230703170068C2F7 /* F4SNetworkErrorTests.swift */; };
 		FC1DBDF92335474500D68C83 /* F4SEmailVerificationModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1DBDF82335474500D68C83 /* F4SEmailVerificationModelProtocol.swift */; };
@@ -172,6 +174,8 @@
 		FC12B0FE22F33ECE00C33410 /* F4STimelinePlacementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STimelinePlacementTests.swift; sourceTree = "<group>"; };
 		FC12B10022F3415200C33410 /* JsonDateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDateFormatterExtension.swift; sourceTree = "<group>"; };
 		FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDateFormatterExtensionTests.swift; sourceTree = "<group>"; };
+		FC14E44B2341E36B005D7541 /* MockUIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUIApplication.swift; sourceTree = "<group>"; };
+		FC14E458234200EC005D7541 /* MockVersionCheckCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockVersionCheckCoordinator.swift; sourceTree = "<group>"; };
 		FC177FCC2306A4010068C2F7 /* F4SHoursTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SHoursTypeTests.swift; sourceTree = "<group>"; };
 		FC177FCE230703170068C2F7 /* F4SNetworkErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SNetworkErrorTests.swift; sourceTree = "<group>"; };
 		FC1DBDF82335474500D68C83 /* F4SEmailVerificationModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SEmailVerificationModelProtocol.swift; sourceTree = "<group>"; };
@@ -619,6 +623,7 @@
 		FCFE450C2250BA4B00C38436 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				FC14E44B2341E36B005D7541 /* MockUIApplication.swift */,
 				FC8F9575233B9B390027BE02 /* Mocks.swift */,
 				FC8F9573233B98770027BE02 /* MockF4SPlacementApplicationService.swift */,
 				FCFE450D2250BA6700C38436 /* MockLocalStore.swift */,
@@ -627,6 +632,7 @@
 				FC8F9579233BA6710027BE02 /* MockDatabaseDownload.swift */,
 				FC8F9578233BA6710027BE02 /* MockUserService.swift */,
 				FC8F957A233BA6710027BE02 /* MockAnalyticsAndDebugging.swift */,
+				FC14E458234200EC005D7541 /* MockVersionCheckCoordinator.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -796,6 +802,7 @@
 				FC4EE710230EB9D700B40F6B /* F4SUserStatus.swift in Sources */,
 				FCE51938224948E400B550C9 /* F4SHoursType.swift in Sources */,
 				FC8F957D233BA6710027BE02 /* MockAnalyticsAndDebugging.swift in Sources */,
+				FC14E459234200EC005D7541 /* MockVersionCheckCoordinator.swift in Sources */,
 				FC06605D2326770B00496FE2 /* F4SShortlistJson.swift in Sources */,
 				FCE5193E22494CED00B550C9 /* F4SJsonValue.swift in Sources */,
 				FC426F1423310434004F8A3E /* F4SServiceFactoryProtocols.swift in Sources */,
@@ -804,6 +811,7 @@
 				FC083F7B230FF01000641F17 /* F4SDocument.swift in Sources */,
 				FC1FA08222FAAB1B003EAE59 /* F4SUUIDDictionary.swift in Sources */,
 				FCFC06A423225670003C59C8 /* F4SQuadtree.swift in Sources */,
+				FC14E44C2341E36B005D7541 /* MockUIApplication.swift in Sources */,
 				FCE5192E2249482A00B550C9 /* F4SCalendar.swift in Sources */,
 				FC8F957F233BA6710027BE02 /* MockNavigationRouter.swift in Sources */,
 				FC0660572326635000496FE2 /* Protocols.swift in Sources */,

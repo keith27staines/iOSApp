@@ -170,7 +170,6 @@
 		FCFB1328224930660086BE25 /* Mustache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCFB1327224930660086BE25 /* Mustache.framework */; };
 		FCFB1329224930660086BE25 /* Mustache.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCFB1327224930660086BE25 /* Mustache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCFBD0192250D9FF00A9361D /* AppCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A48221714B800DC335B /* AppCoordinatorTests.swift */; };
-		FCFBD01A2250DA1800A9361D /* MockUIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA90A92221D6A5600EACD8D /* MockUIApplication.swift */; };
 		FCFBD0242250DB4D00A9361D /* F4SDatabaseDownloadManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC85B2220EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift */; };
 		FCFC06AD23225B9E003C59C8 /* LatLon+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06AC23225B9E003C59C8 /* LatLon+Extensions.swift */; };
 /* End PBXBuildFile section */
@@ -377,7 +376,6 @@
 		FCA53B911FE00CB5009F6DB0 /* VersioningService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersioningService.swift; sourceTree = "<group>"; };
 		FCA53B941FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SForceAppUpdateViewController.swift; sourceTree = "<group>"; };
 		FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = F4SForceAppUpdateViewController.xib; sourceTree = "<group>"; };
-		FCA90A92221D6A5600EACD8D /* MockUIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUIApplication.swift; sourceTree = "<group>"; };
 		FCA91E5C22340161007ED308 /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA91E9522340577007ED308 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA91EC022340743007ED308 /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1038,14 +1036,6 @@
 			name = "Force app update";
 			sourceTree = "<group>";
 		};
-		FCA90A8B221D693700EACD8D /* Mocks */ = {
-			isa = PBXGroup;
-			children = (
-				FCA90A92221D6A5600EACD8D /* MockUIApplication.swift */,
-			);
-			path = Mocks;
-			sourceTree = "<group>";
-		};
 		FCB49304222A5CCC00B88B8B /* Main tabs  */ = {
 			isa = PBXGroup;
 			children = (
@@ -1100,7 +1090,6 @@
 		FCFE450F2250CAD600C38436 /* Workfinder main module tests */ = {
 			isa = PBXGroup;
 			children = (
-				FCA90A8B221D693700EACD8D /* Mocks */,
 				FC3F3921222931630046F8F8 /* Coordinator tests */,
 				FCC85B2220EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift */,
 			);
@@ -1464,7 +1453,6 @@
 			files = (
 				FC8E3F4A22D33A4C00102C37 /* VersionCheckCoordinatorTests.swift in Sources */,
 				FCFBD0242250DB4D00A9361D /* F4SDatabaseDownloadManagerTests.swift in Sources */,
-				FCFBD01A2250DA1800A9361D /* MockUIApplication.swift in Sources */,
 				FCFBD0192250D9FF00A9361D /* AppCoordinatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

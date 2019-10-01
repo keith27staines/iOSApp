@@ -34,7 +34,7 @@ public class MockTabBarCoordinator : MockCoreInjectionNavigationCoordinator, Tab
     }
     
     public var shouldAskOperatingSystemToAllowLocation: Bool = false
-    required init(parent: Coordinating?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol) {
+    public required init(parent: Coordinating?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol) {
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
 }

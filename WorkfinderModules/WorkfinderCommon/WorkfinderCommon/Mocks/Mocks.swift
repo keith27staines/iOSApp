@@ -398,12 +398,34 @@ public class MockF4SEmailVerificationModel: F4SEmailVerificationModelProtocol {
 }
 
 public class MockAppInstallationUuidLogic: AppInstallationUuidLogicProtocol {
+    public var ensureDeviceIsRegisteredWasCalled = false
+    
+    public lazy var result: F4SRegisterDeviceResult? = {
+        if let uuid = self.userUuid {
+            return F4SRegisterDeviceResult(userUuid: "\(uuid)")
+        } else {
+            return nil
+        }
+    }()
+    
+    public var testDidComplete: (() -> Void)?
+    public var userUuid: F4SUUID?
+    
     public var registeredInstallationUuid: F4SUUID?
-    public init(registeredInstallationUuid: F4SUUID? = nil) {
-        self.registeredInstallationUuid = registeredInstallationUuid
+    
+    public init(registeredUserUuid: F4SUUID?) {
+        self.userUuid = registeredUserUuid
     }
     
     public func ensureDeviceIsRegistered(completion: @escaping (F4SNetworkResult<F4SRegisterDeviceResult>) -> ()) {
+        ensureDeviceIsRegisteredWasCalled = true
+        if let result = result {
+            let networkResult = F4SNetworkResult.success(result)
+            DispatchQueue.main.async { [weak self] in
+                completion(networkResult)
+                self?.testDidComplete?()
+            }
+        }
     }
 }
 
