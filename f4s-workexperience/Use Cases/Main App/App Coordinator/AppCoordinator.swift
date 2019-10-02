@@ -134,12 +134,14 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         let error: NSError
         switch Config.environment {
         case .staging:
-            error = NSError(domain:"com.workfinder.staging", code:406, userInfo: ["env" : "Staging"])
+            error = NSError(domain:"com.workfinder.staging", code:406, userInfo: ["env" : "Test error to Staging"])
         case .production:
-            error = NSError(domain:"com.workfinder.production", code:408, userInfo: ["env" : "Production"])
+            error = NSError(domain:"com.workfinder.production", code:408, userInfo: ["env" : "Test error to Production"])
         }
         let log = injected.log
-        log.notifyError(error, functionName: #function, fileName: #file, lineNumber: #line)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
+            log.notifyError(error, functionName: #function, fileName: #file, lineNumber: #line)
+        }
     }
     
     func performVersionCheck(resultHandler: @escaping (F4SNetworkResult<F4SVersionValidity>)->Void) {
