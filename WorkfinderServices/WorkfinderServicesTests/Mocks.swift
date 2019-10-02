@@ -26,28 +26,3 @@ class MockDataTask : F4SNetworkTask {
     }
 }
 
-class MockLogger: NetworkCallLoggerProtocol {
-    var attempting: String?
-    var logDataTaskFailureWasCalled: Bool = false
-    var logDataTaskSuccessWasCalled: Bool = false
-    var request: URLRequest?
-    var response: URLResponse?
-    var responseData: Data?
-    var error: Error?
-    
-    func logDataTaskFailure(attempting: String?, error: Error, request: URLRequest, response: HTTPURLResponse?, responseData: Data?) {
-        logDataTaskFailureWasCalled = true
-        self.attempting = attempting
-        self.error = error
-        self.request = request
-        self.response = response
-        self.responseData = responseData
-    }
-    
-    func logDataTaskSuccess(request: URLRequest, response: HTTPURLResponse, responseData: Data) {
-        logDataTaskSuccessWasCalled = true
-        self.request = request
-        self.response = response
-        self.responseData = responseData
-    }
-}

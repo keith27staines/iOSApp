@@ -6,7 +6,7 @@ import WorkfinderAppLogic
 import WorkfinderApplyUseCase
 
 public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoordinatorProtocol {
-    
+    public var originScreen = ScreenName.notSpecified
     let environment: EnvironmentType
     let allowedToApplyLogic: AllowedToApplyLogicProtocol
     let applyService: F4SPlacementApplicationServiceProtocol
@@ -75,6 +75,8 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
                                             allowedToApplyLogic: allowedToApplyLogic,
                                             companyDocumentsModel: companyDocumentsModel)
         companyViewController = CompanyViewController(viewModel: companyViewModel)
+        companyViewController.log = self.injected.log
+        companyViewController.originScreen = originScreen
         navigationRouter.push(viewController: companyViewController, animated: true)
     }
     

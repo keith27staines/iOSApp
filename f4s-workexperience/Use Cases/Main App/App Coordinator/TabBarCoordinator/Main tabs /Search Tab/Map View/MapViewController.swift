@@ -21,16 +21,20 @@ enum CamerWillMoveAction {
 }
 
 class MapViewController: UIViewController {
+    
+    let screenName = ScreenName.map
     weak var coordinator: SearchCoordinator?
     
     let peopleDataSource: SearchDataSourcing = PeopleSearchDataSource()
     let companyDataSource: SearchDataSourcing = CompanySearchDataSource()
     let placesDataSource: SearchDataSourcing = PlacesSearchDataSource()
     let userMessageHandler = UserMessageHandler()
+    var log: F4SAnalyticsAndDebugging!
     
     lazy var searchView: SearchView = {
         let sideMargin: CGFloat = 20
         let searchView = SearchView(expandedWidth: view.bounds.width - 2*sideMargin, frame: CGRect.zero)
+        searchView.log = self.log
         searchView.delegate = self
         searchView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(searchView)
@@ -188,6 +192,7 @@ class MapViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        log.screen(screenName)
         adjustNavigationBar()
         displayRefineSearchLabelAnimated()
         favouriteList = ShortlistDBOperations.sharedInstance.getShortlist()
@@ -242,9 +247,11 @@ class MapViewController: UIViewController {
         mapView.addSubview(pressedPinOrCluster!)
         
         let vc = UIStoryboard(name: "PopupCompanyList", bundle: nil).instantiateViewController(withIdentifier: "PopupListViewController") as! PopupCompanyListViewController
-        vc.didSelectCompany = { [weak self] company in self?.coordinator?.showDetail(company: company) }
+        vc.didSelectCompany = { [weak self] company in
+            self?.coordinator?.showDetail(company: company, originScreen: vc.screenName)
+        }
         vc.setCompanies(companies)
-        
+        vc.log = log
         vc.transitioningDelegate = self
         present(vc, animated: true, completion: nil)
     }
@@ -663,7 +670,7 @@ extension MapViewController: GMSMapViewDelegate {
         guard let company = companyFromMarker(marker: marker) else {
             return
         }
-        coordinator?.showDetail(company: company)
+        coordinator?.showDetail(company: company, originScreen: ScreenName.companyPin)
     }
     
     func mapView(_: GMSMapView, didCloseInfoWindowOf _: GMSMarker) {
@@ -1060,7 +1067,7 @@ extension MapViewController : SearchViewDelegate {
             guard
                 let uuid = item.uuidString,
                 let company = DatabaseOperations.sharedInstance.companyWithUUID(uuid) else { return }
-            coordinator?.showDetail(company: company)
+            coordinator?.showDetail(company: company, originScreen: ScreenName.companySearch)
         }
         searchView.minimizeSearchUI()
     }

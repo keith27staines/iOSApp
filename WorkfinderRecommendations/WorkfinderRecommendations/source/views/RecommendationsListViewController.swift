@@ -2,7 +2,7 @@ import WorkfinderCommon
 import WorkfinderUI
 
 public class RecommendationsListViewController: UIViewController, RecommendationsListViewProtocol {
-    
+    let screenName = ScreenName.recommendations
     weak var coordinator: RecommendationsCoordinator?
     
     var emptyRecomendationsListText: String? = nil
@@ -13,6 +13,7 @@ public class RecommendationsListViewController: UIViewController, Recommendation
     
     @IBOutlet weak var mainView: RecommendationsListMainView!
     var tableView: UITableView { return mainView.tableView }
+    var log: F4SAnalyticsAndDebugging!
     
     func inject(viewModel: RecommendationsViewModelProtocol) {
         self.viewModel = viewModel
@@ -44,6 +45,7 @@ public class RecommendationsListViewController: UIViewController, Recommendation
     
     public override func viewDidAppear(_ animated: Bool) {
         viewModel.viewDidAppear()
+        log.screen(screenName)
     }
     
     public override func viewDidDisappear(_ animated: Bool) {

@@ -11,6 +11,8 @@ import WorkfinderCommon
 import WorkfinderUI
 
 class PopupCompanyListViewController: UIViewController {
+    let screenName = ScreenName.companyClusterList
+    var log: F4SAnalyticsAndDebugging!
     
     public func setCompanies(_ companies: [Company]) {
         self.companies = companies.sorted(by: { (company1, company2) -> Bool in
@@ -28,6 +30,7 @@ class PopupCompanyListViewController: UIViewController {
     override func viewDidLoad() {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = UITableView.automaticDimension
+        log.screen(screenName)
     }
     
     @IBAction func doneButtonPressed(_ sender: Any) {

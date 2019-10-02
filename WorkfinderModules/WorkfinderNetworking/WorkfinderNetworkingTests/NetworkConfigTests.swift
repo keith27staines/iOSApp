@@ -13,7 +13,7 @@ import WorkfinderNetworking
 class NetworkConfigTests: XCTestCase {
 
     func test_configure() {
-        let logger = NetworkCallLogger(log: MockLog())
+        let logger = NetworkCallLogger(log: MockF4SAnalyticsAndDebugging())
         let endpoints = WorkfinderEndpoint(baseUrlString: "someUrl")
         let sessionManager = F4SNetworkSessionManager(wexApiKey: "someKey")
         let user = F4SUser()

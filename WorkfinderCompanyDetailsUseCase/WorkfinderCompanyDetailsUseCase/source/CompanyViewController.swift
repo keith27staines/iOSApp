@@ -11,8 +11,10 @@ import WorkfinderCommon
 import WorkfinderUI
 
 class CompanyViewController: UIViewController {
-    
+    let screenName = ScreenName.company
+    var originScreen = ScreenName.notSpecified
     let viewModel: CompanyViewModel
+    var log: F4SAnalyticsAndDebugging!
     
     init(viewModel: CompanyViewModel) {
         self.viewModel = viewModel
@@ -52,6 +54,7 @@ class CompanyViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
         refresh()
+        log.screen(screenName, originScreen: originScreen)
     }
     
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }

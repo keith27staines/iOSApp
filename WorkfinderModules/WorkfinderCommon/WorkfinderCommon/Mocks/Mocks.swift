@@ -242,6 +242,7 @@ public class MockCompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
 }
 
 public class MockCompanyCoordinator: CompanyCoordinatorProtocol {
+    public var originScreen: ScreenName = .notSpecified
     public let uuid = UUID()
     public var injected: CoreInjectionProtocol
     public var parentCoordinator: Coordinating?
@@ -415,6 +416,9 @@ public class MockAppInstallationUuidLogic: AppInstallationUuidLogicProtocol {
     
     public init(registeredUserUuid: F4SUUID?) {
         self.userUuid = registeredUserUuid
+        if registeredUserUuid != nil {
+            registeredInstallationUuid = "installation uuid"
+        }
     }
     
     public func ensureDeviceIsRegistered(completion: @escaping (F4SNetworkResult<F4SRegisterDeviceResult>) -> ()) {

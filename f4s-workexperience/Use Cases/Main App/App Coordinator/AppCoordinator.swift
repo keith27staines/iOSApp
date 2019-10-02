@@ -124,9 +124,22 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
         if launchOptions?[.remoteNotification] == nil {
             performVersionCheck(resultHandler: onVersionCheckResult)
+            writeTestError()
         } else {
             startTabBarCoordinator()
         }
+    }
+    
+    func writeTestError() {
+        let error: NSError
+        switch Config.environment {
+        case .staging:
+            error = NSError(domain:"com.workfinder.staging", code:406, userInfo: ["env" : "Staging"])
+        case .production:
+            error = NSError(domain:"com.workfinder.production", code:408, userInfo: ["env" : "Production"])
+        }
+        let log = injected.log
+        log.notifyError(error, functionName: #function, fileName: #file, lineNumber: #line)
     }
     
     func performVersionCheck(resultHandler: @escaping (F4SNetworkResult<F4SVersionValidity>)->Void) {

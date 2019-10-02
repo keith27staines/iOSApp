@@ -8,9 +8,8 @@ public protocol F4SAnalytics {
     func track(event: String)
     func track(event: String, properties: [String : Any])
     func track(event: String, properties: [String : Any], options: [String : Any])
-    func screen(title: String)
-    func screen(title: String, properties: [String : Any])
-    func screen(title: String, properties: [String : Any], options: [String : Any])
+    func screen(_ name: ScreenName)
+    func screen(_ name: ScreenName, originScreen: ScreenName)
 }
 
 public protocol F4SDebugging {

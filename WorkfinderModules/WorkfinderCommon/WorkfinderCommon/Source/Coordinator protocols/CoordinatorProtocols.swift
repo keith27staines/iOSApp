@@ -23,7 +23,9 @@ public protocol RemoteNotificationsRegistrarProtocol {
     func registerForRemoteNotifications()
 }
 
-public protocol CompanyCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol {}
+public protocol CompanyCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol {
+    var originScreen: ScreenName { get set }
+}
 
 public protocol CompanyCoordinatorFactoryProtocol {
     func makeCompanyCoordinator(

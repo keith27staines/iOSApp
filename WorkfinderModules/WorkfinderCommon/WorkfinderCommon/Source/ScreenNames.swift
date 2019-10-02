@@ -1,0 +1,21 @@
+
+public enum ScreenName: String {
+    case map = "iOS Map Screen"
+    case companySearch = "iOS Company Search Screen"
+    case companyClusterList = "iOS Company Cluster List Screen"
+    case companyPin = "iOS Company Pin"
+    case favourites = "iOS Favourites Screen"
+    case recommendations = "iOS Recommendations Screen"
+    case messagesContainer = "iOS Messages Container Screen"
+    case company = "iOS Company Details Screen"
+    case coverLetter = "iOS Cover Letter Screen"
+    case editLetter = "iOS Edit Letter Screen"
+    case selectSkills = "iOS Select Skills Screen"
+    case selectPersonalAttributes = "iOS Select PersonalAttributes Screen"
+    case selectAvailabilityDates = "iOS Select Availability Dates Screen"
+    case selectDaysOfWeek = "iOS Select Days of Week Screen"
+    case selectJobRole = "iOS Select Job Role Screen"
+    case personalDetails = "iOS Personal Details Screen"
+    case addDocumentsScreen = "iOS Add Documents Screen"
+    case notSpecified = "iOS Screen name not specified"
+}
