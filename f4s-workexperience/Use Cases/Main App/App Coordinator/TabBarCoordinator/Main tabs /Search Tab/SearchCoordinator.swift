@@ -11,10 +11,16 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
         let storyboard = UIStoryboard(name: "MapView", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "MapViewCtrl") as! MapViewController
         vc.coordinator = self
+//        vc.companyDataSource
+//        vc.placesDataSource
+//        vc.peopleDataSource
         return vc
     }()
     
-    init(parent: Coordinating, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol, companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol) {
+    init(parent: Coordinating,
+         navigationRouter: NavigationRoutingProtocol,
+         inject: CoreInjectionProtocol,
+         companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol) {
         self.companyCoordinatorFactory = companyCoordinatorFactory
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }

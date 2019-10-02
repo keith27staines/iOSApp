@@ -44,12 +44,36 @@ public class F4SLog : F4SAnalyticsAndDebugging {
 }
 
 extension F4SLog : F4SAnalytics {
-    public func alias(userId: F4SUUID) {
-        analytics.alias(userId)
+    public func track(event: String) {
+        analytics.track(event)
+    }
+    
+    public func track(event: String, properties: [String : Any]) {
+        analytics.track(event, properties: properties)
+    }
+    
+    public func track(event: String, properties: [String : Any], options: [String : Any]) {
+        analytics.track(event, properties: properties, options: options)
+    }
+    
+    public func screen(title: String) {
+        analytics.screen(title)
+    }
+    
+    public func screen(title: String, properties: [String : Any]) {
+        analytics.screen(title, properties: properties)
+    }
+    
+    public func screen(title: String, properties: [String : Any], options: [String : Any]) {
+        analytics.screen(title, properties: properties, options: options)
     }
     
     public func identity(userId: F4SUUID) {
         analytics.identify(userId)
+    }
+    
+    public func alias(userId: F4SUUID) {
+        analytics.alias(userId)
     }
 }
 
