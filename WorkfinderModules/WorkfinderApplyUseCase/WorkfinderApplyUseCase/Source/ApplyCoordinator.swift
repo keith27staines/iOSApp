@@ -40,7 +40,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     
     lazy var applicationModel: ApplicationModelProtocol = {
         let userUuid = injected.user.uuid!
-        let installationUuid = injected.appInstallationUuidLogic.registeredInstallationUuid!
+        let installationUuid = "installation uuid"
         let companyViewData = CompanyViewData(company: applicationContext.company!)
         let placement = applicationContext.placement
         return ApplicationModel(userUuid: userUuid, installationUuid: installationUuid, userInterests: userInterests, placement: placement, placementRepository: placementRepository, companyViewData: companyViewData, placementService: placementService, templateService: templateService)

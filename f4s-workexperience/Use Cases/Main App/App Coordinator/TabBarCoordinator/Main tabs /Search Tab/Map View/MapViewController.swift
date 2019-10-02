@@ -23,9 +23,9 @@ enum CamerWillMoveAction {
 class MapViewController: UIViewController {
     weak var coordinator: SearchCoordinator?
     
-    let peopleDataSource = PeopleSearchDataSource()
-    let companyDataSource = CompanySearchDataSource()
-    let placesDataSource = PlacesSearchDataSource()
+    let peopleDataSource: SearchDataSourcing = PeopleSearchDataSource()
+    let companyDataSource: SearchDataSourcing = CompanySearchDataSource()
+    let placesDataSource: SearchDataSourcing = PlacesSearchDataSource()
     let userMessageHandler = UserMessageHandler()
     
     lazy var searchView: SearchView = {

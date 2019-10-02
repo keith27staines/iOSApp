@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		FC04B867233277080034A60E /* CoordinatorProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04B866233277080034A60E /* CoordinatorProtocols.swift */; };
-		FC04B8692332827D0034A60E /* CoordinatorFactoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04B8682332827D0034A60E /* CoordinatorFactoryProtocols.swift */; };
 		FC066050232645D800496FE2 /* F4SFavouritesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06604F232645D800496FE2 /* F4SFavouritesRepository.swift */; };
 		FC0660572326635000496FE2 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0660562326635000496FE2 /* Protocols.swift */; };
 		FC06605923266F2300496FE2 /* PersonViewDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06605823266F2300496FE2 /* PersonViewDataTests.swift */; };
@@ -157,7 +156,6 @@
 
 /* Begin PBXFileReference section */
 		FC04B866233277080034A60E /* CoordinatorProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocols.swift; sourceTree = "<group>"; };
-		FC04B8682332827D0034A60E /* CoordinatorFactoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFactoryProtocols.swift; sourceTree = "<group>"; };
 		FC06604F232645D800496FE2 /* F4SFavouritesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SFavouritesRepository.swift; sourceTree = "<group>"; };
 		FC0660562326635000496FE2 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		FC06605823266F2300496FE2 /* PersonViewDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonViewDataTests.swift; sourceTree = "<group>"; };
@@ -412,7 +410,6 @@
 			isa = PBXGroup;
 			children = (
 				FC8F9582233BB5580027BE02 /* FactoriesProtocols.swift */,
-				FC04B8682332827D0034A60E /* CoordinatorFactoryProtocols.swift */,
 			);
 			path = "Factories protocols";
 			sourceTree = "<group>";
@@ -829,7 +826,6 @@
 				FC94E53D230DB3200091E625 /* F4SError.swift in Sources */,
 				FC96709C2258C8B100318F69 /* F4SInterest.swift in Sources */,
 				FC5019652306A24500A26B53 /* F4SDayOfWeek.swift in Sources */,
-				FC04B8692332827D0034A60E /* CoordinatorFactoryProtocols.swift in Sources */,
 				FCE5192C2249482A00B550C9 /* F4SCalendarWeek.swift in Sources */,
 				FC5CBA6A231D3E4700C2D3C5 /* F4SDateHelper.swift in Sources */,
 				FC426F08232FAFF0004F8A3E /* WorkfinderNetworking.swift in Sources */,

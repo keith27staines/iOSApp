@@ -123,8 +123,8 @@ class F4SCalendarTests: XCTestCase {
     
     func test_second_tap_is_in_the_future_after_first_tap() {
         let now = Date()
-        let futureDate = now.addingTimeInterval(48*3600)
-        let furtherFutureDate = now.addingTimeInterval(64*3600)
+        let futureDate = now.addingTimeInterval(2*24*3600)
+        let furtherFutureDate = now.addingTimeInterval(4*24*3600)
         let sut = F4SCalendar()
         let day1 = F4SCalendarDay(cal: sut, date: futureDate)
         let day2 = F4SCalendarDay(cal: sut, date: furtherFutureDate)
@@ -141,8 +141,8 @@ class F4SCalendarTests: XCTestCase {
     
     func test_third_tap() {
         let now = Date()
-        let futureDate = now.addingTimeInterval(48*3600)
-        let furtherFutureDate = now.addingTimeInterval(64*3600)
+        let futureDate = now.addingTimeInterval(2*24*3600)
+        let furtherFutureDate = now.addingTimeInterval(4*24*3600)
         let sut = F4SCalendar()
         let day1 = F4SCalendarDay(cal: sut, date: futureDate)
         let day2 = F4SCalendarDay(cal: sut, date: furtherFutureDate)

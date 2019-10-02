@@ -11,12 +11,6 @@ import WorkfinderCompanyDetailsUseCase
 import WorkfinderRecommendations
 import WorkfinderUI
 
-protocol TabbarCoordinatorFactoryProtocol {
-    func makeTabBarCoordinator(parent: Coordinating,
-    router: NavigationRoutingProtocol,
-    inject: CoreInjectionProtocol) -> TabBarCoordinatorProtocol
-}
-
 class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     func makeTabBarCoordinator(parent: Coordinating,
                                router: NavigationRoutingProtocol,
@@ -42,7 +36,6 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
             recommendationsService: recommendationsService,
             roleService: roleService)
     }
-    
     
     let launchOptions: [UIApplication.LaunchOptionsKey : Any]?
     let registrar: RemoteNotificationsRegistrarProtocol

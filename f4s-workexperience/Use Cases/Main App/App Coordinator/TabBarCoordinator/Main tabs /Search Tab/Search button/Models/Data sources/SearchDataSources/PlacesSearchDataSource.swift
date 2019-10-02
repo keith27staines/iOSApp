@@ -9,8 +9,8 @@
 import UIKit
 
 class PlacesSearchDataSource : NSObject, SearchDataSourcing {
-    
-    private let dataFetcher = PlacesSearchDataGetter()
+    var userLocation: CLLocationCoordinate2D?
+    private lazy var dataFetcher = PlacesSearchDataGetter()
     private var items = [SearchItemProtocol]()
     
     func setSearchString(_ string: String?, completion: @escaping () -> Void) {

@@ -131,6 +131,8 @@
 		FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99B7E21F826D1400E2D5F0 /* LatLon.swift */; };
 		FC99BDC820CFD8E400278DDE /* F4SDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */; };
 		FC99BDCA20D170CA00278DDE /* F4SDatabaseDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */; };
+		FC9B28702343328600BB694B /* TabBarCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B286F2343328600BB694B /* TabBarCoordinatorTests.swift */; };
+		FC9B28722343331100BB694B /* TestMasterBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B28712343331100BB694B /* TestMasterBuilder.swift */; };
 		FC9BEE082015FF6000347437 /* UniversalLinkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9BEE072015FF6000347437 /* UniversalLinkParser.swift */; };
 		FCA53B921FE00CB5009F6DB0 /* VersioningService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA53B911FE00CB5009F6DB0 /* VersioningService.swift */; };
 		FCA53B961FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA53B941FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift */; };
@@ -372,6 +374,8 @@
 		FC99B7E21F826D1400E2D5F0 /* LatLon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LatLon.swift; path = ../WorkfinderModules/WorkfinderCommon/WorkfinderCommon/Source/LatLon.swift; sourceTree = "<group>"; };
 		FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDownloadService.swift; sourceTree = "<group>"; };
 		FC99BDC920D170CA00278DDE /* F4SDatabaseDownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDatabaseDownloadManager.swift; sourceTree = "<group>"; };
+		FC9B286F2343328600BB694B /* TabBarCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinatorTests.swift; sourceTree = "<group>"; };
+		FC9B28712343331100BB694B /* TestMasterBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMasterBuilder.swift; sourceTree = "<group>"; };
 		FC9BEE072015FF6000347437 /* UniversalLinkParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalLinkParser.swift; sourceTree = "<group>"; };
 		FCA53B911FE00CB5009F6DB0 /* VersioningService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersioningService.swift; sourceTree = "<group>"; };
 		FCA53B941FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SForceAppUpdateViewController.swift; sourceTree = "<group>"; };
@@ -925,8 +929,10 @@
 		FC3F3921222931630046F8F8 /* Coordinator tests */ = {
 			isa = PBXGroup;
 			children = (
+				FC9B286F2343328600BB694B /* TabBarCoordinatorTests.swift */,
 				FC1E6A48221714B800DC335B /* AppCoordinatorTests.swift */,
 				FC8E3F4922D33A4C00102C37 /* VersionCheckCoordinatorTests.swift */,
+				FC9B28712343331100BB694B /* TestMasterBuilder.swift */,
 			);
 			path = "Coordinator tests";
 			sourceTree = "<group>";
@@ -1453,7 +1459,9 @@
 			files = (
 				FC8E3F4A22D33A4C00102C37 /* VersionCheckCoordinatorTests.swift in Sources */,
 				FCFBD0242250DB4D00A9361D /* F4SDatabaseDownloadManagerTests.swift in Sources */,
+				FC9B28702343328600BB694B /* TabBarCoordinatorTests.swift in Sources */,
 				FCFBD0192250D9FF00A9361D /* AppCoordinatorTests.swift in Sources */,
+				FC9B28722343331100BB694B /* TestMasterBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
