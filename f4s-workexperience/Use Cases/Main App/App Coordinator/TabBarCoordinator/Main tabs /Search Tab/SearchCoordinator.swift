@@ -11,6 +11,7 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
         let storyboard = UIStoryboard(name: "MapView", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "MapViewCtrl") as! MapViewController
         vc.coordinator = self
+        vc.log = self.injected.log
 //        vc.companyDataSource
 //        vc.placesDataSource
 //        vc.peopleDataSource
@@ -33,11 +34,12 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
     
     var showingDetailForCompany: Company?
 
-    func showDetail(company: Company?) {
+    func showDetail(company: Company?, originScreen: ScreenName) {
         guard let company = company else { return }
         showingDetailForCompany = company
         rootViewController.dismiss(animated: true)
         let companyCoordinator = companyCoordinatorFactory.makeCompanyCoordinator(parent: self, navigationRouter: navigationRouter, company: company, inject: injected)
+        companyCoordinator.originScreen = originScreen
         addChildCoordinator(companyCoordinator)
         companyCoordinator.start()
     }

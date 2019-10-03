@@ -4,7 +4,7 @@ import WorkfinderCommon
 
 class F4SNetworkSessionManagerTests: XCTestCase {
     
-    lazy var mockLog: MockLog = { return MockLog() }()
+    lazy var mockLog: MockF4SAnalyticsAndDebugging = { return MockF4SAnalyticsAndDebugging() }()
     
     func test_interactiveSessionManager() {
         let sut = makeSut()

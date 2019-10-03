@@ -143,7 +143,9 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     }()
     
     lazy var log: F4SAnalyticsAndDebugging = {
-        return F4SLog()
+        let log = F4SLog()
+        log.debug("logging started")
+        return log
     }()
     
     lazy var localStore: LocalStorageProtocol = {

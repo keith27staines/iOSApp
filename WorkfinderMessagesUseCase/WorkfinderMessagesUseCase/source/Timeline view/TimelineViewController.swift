@@ -4,9 +4,10 @@ import WorkfinderCommon
 import WorkfinderUI
 
 class TimelineViewController: UIViewController {
-    
+    let screenName = ScreenName.messagesContainer
     weak var coordinator: TimelineCoordinator?
-
+    var log: F4SAnalyticsAndDebugging!
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noPlacementsBackgroundView: UIView!
     @IBOutlet weak var noPlacementsTitleLabel: UILabel!
@@ -58,6 +59,7 @@ class TimelineViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        log.screen(screenName)
         getAllPlacementsForUser()
     }
     

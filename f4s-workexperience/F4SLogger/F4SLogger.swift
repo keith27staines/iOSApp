@@ -27,8 +27,8 @@ public class F4SLog : F4SAnalyticsAndDebugging {
             segmentWriteKey = "G5DSK58YEvZDJx3KrnNAWvNg5xb5Uy51"
         }
         let config = SEGAnalyticsConfiguration(writeKey: segmentWriteKey)
-        config.trackApplicationLifecycleEvents = true
-        config.recordScreenViews = true
+        config.trackApplicationLifecycleEvents = false
+        config.recordScreenViews = false
         if let bugsnagIntegrationFactory = SEGBugsnagIntegrationFactory.instance() {
             config.use(bugsnagIntegrationFactory)
         }
@@ -56,16 +56,17 @@ extension F4SLog : F4SAnalytics {
         analytics.track(event, properties: properties, options: options)
     }
     
-    public func screen(title: String) {
-        analytics.screen(title)
+    public func screen(_ name: ScreenName) {
+        writeScreenToAnalytics(name)
     }
     
-    public func screen(title: String, properties: [String : Any]) {
-        analytics.screen(title, properties: properties)
+    public func screen(_ name: ScreenName, originScreen origin: ScreenName) {
+        writeScreenToAnalytics(name, originScreen: origin)
     }
     
-    public func screen(title: String, properties: [String : Any], options: [String : Any]) {
-        analytics.screen(title, properties: properties, options: options)
+    func writeScreenToAnalytics(_ name: ScreenName, originScreen origin: ScreenName = .notSpecified) {
+        analytics.screen(name.rawValue, properties: ["origin": origin.rawValue])
+        print("SCREEN DID APPEAR: \(name.rawValue) from \(origin.rawValue)")
     }
     
     public func identity(userId: F4SUUID) {
