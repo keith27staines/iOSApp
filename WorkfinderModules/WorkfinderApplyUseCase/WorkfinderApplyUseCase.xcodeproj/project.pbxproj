@@ -10,6 +10,7 @@
 		FC0B6B332323CDC800A1867D /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0B6B322323CDC800A1867D /* WorkfinderCoordinators.framework */; };
 		FC0E5CF9224E19BF00615B4F /* ApplicationLetterTemplateBlanksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E5CF8224E19BF00615B4F /* ApplicationLetterTemplateBlanksModel.swift */; };
 		FC0E5CFD224E62E400615B4F /* ApplicationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E5CFC224E62E400615B4F /* ApplicationModel.swift */; };
+		FC16F51C23460E7300D6EAC7 /* MotivationEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16F51B23460E7300D6EAC7 /* MotivationEditorViewController.swift */; };
 		FC1EBEBD2248E0A500416D70 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */; };
 		FC1EBEBE2248E0AC00416D70 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */; };
 		FC1EBEBF2248E0D600416D70 /* ApplicationLetterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626532248CDB100D5F850 /* ApplicationLetterViewModelTests.swift */; };
@@ -84,6 +85,7 @@
 		FC0B6B342323CDC800A1867D /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC0E5CF8224E19BF00615B4F /* ApplicationLetterTemplateBlanksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationLetterTemplateBlanksModel.swift; sourceTree = "<group>"; };
 		FC0E5CFC224E62E400615B4F /* ApplicationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationModel.swift; sourceTree = "<group>"; };
+		FC16F51B23460E7300D6EAC7 /* MotivationEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotivationEditorViewController.swift; sourceTree = "<group>"; };
 		FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1EBEC22248E37B00416D70 /* ApplicationLetterModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationLetterModelTests.swift; sourceTree = "<group>"; };
 		FC22DBFA22F97F330068C61C /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,6 +185,7 @@
 				FC29991E231EC1E000F83FB6 /* EditCoverLetterTableViewCell.swift */,
 				FC299940231ED0B400F83FB6 /* EditFooter.xib */,
 				FC299920231EC1E200F83FB6 /* EditFooterView.swift */,
+				FC16F51B23460E7300D6EAC7 /* MotivationEditorViewController.swift */,
 			);
 			path = "Edit cover letter";
 			sourceTree = "<group>";
@@ -544,6 +547,7 @@
 				FC7A4398224A497800B2D693 /* ApplicationLetterTemplateBlanksCleanser.swift in Sources */,
 				FCE8DA972320E0C300934E2F /* ChooseAttributesViewModel.swift in Sources */,
 				FCE8DA892320D3CB00934E2F /* SuccessExtraInfoViewController.swift in Sources */,
+				FC16F51C23460E7300D6EAC7 /* MotivationEditorViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

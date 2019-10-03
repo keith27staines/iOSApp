@@ -14,6 +14,7 @@ public enum TemplateBlankName: String {
     case employmentSkills = "skills"
     case startDate = "start_date"
     case endDate = "end_date"
+    case motivation
 }
 
 /// F4STemplateBlank instances represent blanks in a template that are to be
