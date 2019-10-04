@@ -18,7 +18,8 @@ protocol ApplicationLetterTemplateBlanksModelProtocol : class {
     func populatedBlankWithName(_ name: TemplateBlankName) -> F4STemplateBlank?
     func addOrReplacePopulatedBlanks(_ blanks: [F4STemplateBlank]) throws
     func addOrReplacePopulatedBlank(_ blank: F4STemplateBlank) throws
-    func updateBlanksFor(firstDay: F4SCalendarDay?, lastDay: F4SCalendarDay?) 
+    func updateBlanksFor(firstDay: F4SCalendarDay?, lastDay: F4SCalendarDay?)
+    func updateMotivationBlank(_ text: String)
 }
 
 class ApplicationLetterTemplateBlanksModel : ApplicationLetterTemplateBlanksModelProtocol {
@@ -92,6 +93,12 @@ class ApplicationLetterTemplateBlanksModel : ApplicationLetterTemplateBlanksMode
         lastDayblank.choices = [F4SChoice(uuid: lastDateString)]
         try! addOrReplacePopulatedBlank(firstDayblank)
         try! addOrReplacePopulatedBlank(lastDayblank)
+    }
+    
+    func updateMotivationBlank(_ text: String) {
+        let choices = [F4SChoice(uuid: "1", value: text)]
+        let blank = populatedBlankWithName(TemplateBlankName.motivation) ?? F4STemplateBlank(name: TemplateBlankName.motivation.rawValue, choices: choices)
+        try! addOrReplacePopulatedBlank(blank)
     }
     
     func save(blanks: [F4STemplateBlank]) {

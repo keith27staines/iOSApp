@@ -3,7 +3,9 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 
-protocol  MotivationEditorViewControllerDelegate {
+protocol  MotivationEditorViewControllerDelegate: class {
+    
+    func motivationEditorDidSetText(_ editor: MotivationTextModel)
     
 }
 
@@ -62,7 +64,7 @@ class MotivationTextModel {
 
 class MotivationEditorViewController: UIViewController, MotivationTextModelDelegate {
 
-    var delegate: MotivationEditorViewControllerDelegate?
+    weak var delegate: MotivationEditorViewControllerDelegate?
     
     var model: MotivationTextModel
     
@@ -129,7 +131,7 @@ class MotivationEditorViewController: UIViewController, MotivationTextModelDeleg
     }
     
     lazy var optionPicker: UISegmentedControl = {
-        let view = UISegmentedControl(items: [NSLocalizedString("Standard", comment: ""),NSLocalizedString("Custom", comment: "")])
+        let view = UISegmentedControl(items: [NSLocalizedString("Default", comment: ""),NSLocalizedString("Custom", comment: "")])
         view.translatesAutoresizingMaskIntoConstraints = false
         view.addTarget(self, action: #selector(handleOptionPickerChange), for: UIControl.Event.valueChanged)
         return view
@@ -192,6 +194,7 @@ class MotivationEditorViewController: UIViewController, MotivationTextModelDeleg
         optionPicker.selectedSegmentIndex = model.selectedIndex
         motivationText.text = model.text
         motivationText.isEditable = model.editingEnabled
+        delegate?.motivationEditorDidSetText(model)
     }
     
     init(delegate: MotivationEditorViewControllerDelegate, model: MotivationTextModel) {

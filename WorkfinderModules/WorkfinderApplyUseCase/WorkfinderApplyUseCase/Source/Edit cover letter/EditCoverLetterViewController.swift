@@ -99,6 +99,14 @@ extension EditCoverLetterViewController :  F4SCalendarCollectionViewControllerDe
     }
 }
 
+extension EditCoverLetterViewController: MotivationEditorViewControllerDelegate {
+    func motivationEditorDidSetText(_ editor: MotivationTextModel) {
+        blanksModel?.updateMotivationBlank(editor.text)
+        updateFromModel()
+        setUpdateButtonState()
+    }
+}
+
 // MARK: -UITableViewDelegate,UITableViewDataSource
 extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in _: UITableView) -> Int {
@@ -280,6 +288,7 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
 
     func pushMotivationEditor(navigationController: UINavigationController) {
         let editor = MotivationEditorViewController(delegate: self, model: motivationTextModel)
+        editor.delegate = self
         navigationController.pushViewController(editor, animated: true)
     }
     
@@ -426,8 +435,4 @@ extension EditCoverLetterViewController {
     func setUpdateButtonState() {
         updateButton.isEnabled = true
     }
-}
-
-extension EditCoverLetterViewController: MotivationEditorViewControllerDelegate {
-    
 }
