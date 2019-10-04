@@ -32,6 +32,7 @@ class CompanyViewController: UIViewController {
     lazy var pageViewController: CompanyPageViewController = {
         let pageViewController = CompanyPageViewController(viewModel: viewModel)
         pageViewController.willMove(toParent: self)
+        pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
         companyMainPageView.addPageControllerView(view: pageViewController.view)
         addChild(pageViewController)
         pageViewController.didMove(toParent: self)

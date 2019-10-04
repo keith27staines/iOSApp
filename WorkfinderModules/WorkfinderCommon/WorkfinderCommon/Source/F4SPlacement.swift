@@ -106,12 +106,18 @@ extension F4SCreatePlacementJson {
 }
 
 public struct F4SPlacementJson : Codable {
-    public init(uuid: F4SUUID? = nil, user: F4SUUID? = nil, company: F4SUUID? = nil, vendor: F4SUUID? = nil, interests: [F4SUUID]? = nil) {
+    public init(uuid: F4SUUID? = nil,
+                user: F4SUUID? = nil,
+                company: F4SUUID? = nil,
+                vendor: F4SUUID? = nil,
+                interests: [F4SUUID]? = nil,
+                motivation: String? = nil) {
         self.uuid = uuid
         self.userUuid = user
         self.companyUuid = company
         self.vendorUuid = vendor
         self.interests = interests
+        self.motivation = motivation
     }
     public var uuid: F4SUUID?
     public var vendorUuid: F4SUUID?

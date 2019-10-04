@@ -44,6 +44,7 @@ class CompanyHeaderView: UIView {
     
     lazy var doneButton : UIButton = {
         let button = UIButton(type: UIButton.ButtonType.system)
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(#imageLiteral(resourceName: "cross"), for: UIControl.State.normal)
         button.tintColor = UIColor.darkGray
         button.heightAnchor.constraint(equalToConstant: 44).isActive = true
@@ -64,6 +65,7 @@ class CompanyHeaderView: UIView {
     
     lazy var applyButton: UIButton = {
         let button = UIButton(type: UIButton.ButtonType.system)
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(handleApplyTap), for: .touchUpInside)
         button.setTitle("Apply", for: UIControl.State.normal)
         return button
@@ -82,6 +84,7 @@ class CompanyHeaderView: UIView {
     
     lazy var companyNameLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 2
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center

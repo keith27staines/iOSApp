@@ -1,14 +1,10 @@
 
 import UIKit
+import WorkfinderCommon
 import WorkfinderUI
 
 protocol  MotivationEditorViewControllerDelegate {
     
-}
-
-enum MotivationTextOption {
-    case standard
-    case custom
 }
 
 protocol MotivationTextModelDelegate: class {
@@ -17,9 +13,16 @@ protocol MotivationTextModelDelegate: class {
 
 class MotivationTextModel {
     weak var delegate: MotivationTextModelDelegate?
-    var option: MotivationTextOption
-    private let defaultText = NSLocalizedString("My motivation for applying is so that I can better prepare for the type of work offered by companies like yours", comment: "")
-    private var customText: String = ""
+    private let repo: F4SMotivationRepositoryProtocol
+    var option: MotivationTextOption {
+        get { return repo.loadMotivationType() }
+        set { repo.saveMotivationType(newValue) }
+    }
+    private var defaultText: String { return repo.loadDefaultMotivation() }
+    private var customText: String {
+        get { return repo.loadCustomMotivation() }
+        set { repo.saveCustomMotivation(newValue) }
+    }
     
     var text: String {
         get {
@@ -39,9 +42,8 @@ class MotivationTextModel {
         return option == .custom ? true : false
     }
     
-    init(option: MotivationTextOption, customText: String) {
-        self.option = option
-        self.customText = customText
+    init(repo: F4SMotivationRepositoryProtocol) {
+        self.repo = repo
     }
     
     var selectedIndex: Int {
@@ -57,8 +59,6 @@ class MotivationTextModel {
         }
     }
 }
-
-
 
 class MotivationEditorViewController: UIViewController, MotivationTextModelDelegate {
 

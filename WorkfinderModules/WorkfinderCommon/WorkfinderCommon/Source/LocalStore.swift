@@ -42,6 +42,8 @@ public class LocalStore : LocalStorageProtocol {
         case recommendedCompaniesJsonData
         case verifiedEmailKey
         case emailSentForVerificationKey
+        case motivationKey
+        case useDefaultMotivation
     }
     
     public init(userDefaults: UserDefaults = .standard) {

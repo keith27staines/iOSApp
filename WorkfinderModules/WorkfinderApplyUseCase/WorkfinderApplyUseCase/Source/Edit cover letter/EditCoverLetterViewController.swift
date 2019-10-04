@@ -18,9 +18,11 @@ class EditCoverLetterViewController: UIViewController {
     fileprivate let bigFooterSize = CGFloat(56)
     fileprivate let smallFooterSize = CGFloat(21)
     fileprivate var numberOfRowsInSection2 = 2
+    
     var dateFormatter: DateFormatter?
     var availabilityPeriodJson: F4SAvailabilityPeriodJson = F4SAvailabilityPeriodJson()
     var coordinator: EditCoverLetterViewControllerCoordinatorProtocol?
+    var motivationTextModel: MotivationTextModel!
     
     var blanksModel: ApplicationLetterTemplateBlanksModelProtocol? {
         didSet {
@@ -275,10 +277,9 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
         vc.model = availabilityPeriod.daysAndHours
         navigationController.pushViewController(vc, animated: true)
     }
-    
+
     func pushMotivationEditor(navigationController: UINavigationController) {
-        let model = MotivationTextModel(option: .standard, customText: "Hello")
-        let editor = MotivationEditorViewController(delegate: self, model: model)
+        let editor = MotivationEditorViewController(delegate: self, model: motivationTextModel)
         navigationController.pushViewController(editor, animated: true)
     }
     

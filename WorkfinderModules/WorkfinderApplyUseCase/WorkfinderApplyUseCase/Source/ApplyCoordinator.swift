@@ -98,6 +98,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         let editor = coverLetterStoryboard.instantiateViewController(withIdentifier: "EditCoverLetterCtrl") as! EditCoverLetterViewController
         editor.coordinator = self
         editor.blanksModel = applicationModel.blanksModel
+        editor.motivationTextModel = applicationModel.motivationTextModel
         editor.availabilityPeriodJson = applicationModel.availabilityPeriodJson
         navigationRouter.push(viewController: editor, animated: true)
     }

@@ -57,6 +57,7 @@ class CompanyMainView: UIView {
     lazy var segmentedControl: UISegmentedControl = {
         // TODO: enable peopple tab:  let segmentedControl = UISegmentedControl(items: ["Company","Data","People"] )
         let segmentedControl = UISegmentedControl(items: ["Company","Data"])
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.addTarget(self, action: #selector(handleSegmentChanged), for: .valueChanged)
         return segmentedControl
     }()
