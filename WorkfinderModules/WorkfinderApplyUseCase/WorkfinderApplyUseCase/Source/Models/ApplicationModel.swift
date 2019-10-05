@@ -158,6 +158,7 @@ class ApplicationModel : ApplicationModelProtocol {
         patch.attributes = self.personalAttributes
         patch.skills = self.skills
         patch.availabilityPeriods = [self.availabilityPeriodJson]
+        patch.motivation = motivation
         applicationLetterViewModel.modelBusyState(applicationLetterModel, isBusy: true)
         placementService.update(uuid: uuid, with: patch) { [weak self] (result) in
             guard let strongSelf = self else { return }
