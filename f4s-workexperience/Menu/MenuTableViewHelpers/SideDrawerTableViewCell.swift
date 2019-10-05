@@ -70,10 +70,11 @@ class SideDrawerTableViewCell: TableViewCell {
         lineImageView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(lineImageView)
         lineImageView.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        let textLabelLeft = self.textLabel?.leftAnchor ?? self.leftAnchor
-        let textLabelRight = self.textLabel?.rightAnchor ?? self.rightAnchor
-        lineImageView.leftAnchor.constraint(equalTo: textLabelLeft, constant: 0).isActive = true
-        lineImageView.rightAnchor.constraint(equalTo: textLabelRight, constant: 0).isActive = true
+        let textLabelLeft = self.leftAnchor // textLabel?.leftAnchor ?? self.leftAnchor
+        let textLabelRight = self.rightAnchor // textLabel?.rightAnchor ?? self.rightAnchor
+        let textLabelWidth = self.widthAnchor
+        lineImageView.leftAnchor.constraint(equalTo: textLabelLeft, constant: 8).isActive = true
+        lineImageView.widthAnchor.constraint(equalTo: textLabelWidth, constant: -40).isActive = true
         lineImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
         return lineImageView
     }()

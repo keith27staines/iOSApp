@@ -18,7 +18,8 @@ protocol ApplicationLetterTemplateBlanksModelProtocol : class {
     func populatedBlankWithName(_ name: TemplateBlankName) -> F4STemplateBlank?
     func addOrReplacePopulatedBlanks(_ blanks: [F4STemplateBlank]) throws
     func addOrReplacePopulatedBlank(_ blank: F4STemplateBlank) throws
-    func updateBlanksFor(firstDay: F4SCalendarDay?, lastDay: F4SCalendarDay?) 
+    func updateBlanksFor(firstDay: F4SCalendarDay?, lastDay: F4SCalendarDay?)
+    func updateMotivationBlank(_ text: String)
 }
 
 class ApplicationLetterTemplateBlanksModel : ApplicationLetterTemplateBlanksModelProtocol {
@@ -79,14 +80,25 @@ class ApplicationLetterTemplateBlanksModel : ApplicationLetterTemplateBlanksMode
         save(blanks: blanks)
     }
     
+    func updateMotivationBlank(_ text: String) {
+        let blankName = TemplateBlankName.motivation
+        var blank = populatedBlankWithName(blankName) ??
+            F4STemplateBlank(name: blankName.rawValue, choices: [])
+        blank.optionType = .text
+        blank.choices = [F4SChoice(uuid: blankName.rawValue, value: text)]
+        try! addOrReplacePopulatedBlank(blank)
+    }
+    
     func updateBlanksFor(firstDay: F4SCalendarDay?, lastDay: F4SCalendarDay?) {
         let firstDateString = firstDay == nil ? "" : firstDay!.interval.start.dateToStringRfc3339()!
         let lastDateString = lastDay == nil ? "" : lastDay!.interval.start.dateToStringRfc3339()!
         let firstDayBlankName = TemplateBlankName.startDate
         let lastDayBlankName = TemplateBlankName.endDate
         
-        var firstDayblank = populatedBlankWithName(firstDayBlankName) ?? F4STemplateBlank(name: TemplateBlankName.startDate.rawValue, choices: [F4SChoice(uuid: firstDateString)])
-        var lastDayblank = populatedBlankWithName(lastDayBlankName) ?? F4STemplateBlank(name: TemplateBlankName.endDate.rawValue, choices: [F4SChoice(uuid: lastDateString)])
+        var firstDayblank = populatedBlankWithName(firstDayBlankName)
+            ?? F4STemplateBlank(name: TemplateBlankName.startDate.rawValue, choices: [F4SChoice(uuid: firstDateString)])
+        var lastDayblank = populatedBlankWithName(lastDayBlankName)
+            ?? F4STemplateBlank(name: TemplateBlankName.endDate.rawValue, choices: [F4SChoice(uuid: lastDateString)])
         
         firstDayblank.choices = [F4SChoice(uuid: firstDateString)]
         lastDayblank.choices = [F4SChoice(uuid: lastDateString)]

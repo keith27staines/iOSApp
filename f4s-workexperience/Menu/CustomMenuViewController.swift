@@ -196,15 +196,17 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
         guard
             let cell = tableView.dequeueReusableCell(withIdentifier: "SideDrawerTableViewCell") as? SideDrawerTableViewCell,
             let section = DrawerSection(rawValue: section) else { return nil }
-        
+        cell.lineImageView.isHidden = false
         switch section {
         case .WelcomeSection:
             return nil
         case .NavigationSection:
             cell.textLabel?.text = ""
+            cell.lineImageView.isHidden = true
             return cell
         case .BusinessLeadersSection:
             cell.textLabel?.text = ""
+            cell.lineImageView.isHidden = true
             return cell
         case .EnvironmentSection:
             return nil

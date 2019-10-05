@@ -11,6 +11,7 @@ protocol ApplicationModelProtocol : class {
     var applicationLetterModel: ApplicationLetterModelProtocol { get }
     var applicationLetterViewModel: ApplicationLetterViewModelProtocol { get }
     var blanksModel: ApplicationLetterTemplateBlanksModelProtocol { get }
+    var motivationTextModel: MotivationTextModel { get }
     func resumeApplicationFromPreexistingDraft(_ draft: F4SPlacement, completion: @escaping ((Error?) -> Void))
     func createApplication(completion: @escaping (Error?) -> Void)
 }
@@ -29,6 +30,26 @@ class ApplicationModel : ApplicationModelProtocol {
     let placementRepository: F4SPlacementRepositoryProtocol
     let installationUuid: F4SUUID
     var userUuid: F4SUUID
+    
+    lazy var motivationRepository: F4SMotivationRepositoryProtocol = {
+        return F4SMotivationRepository(localStore: self.localStore)
+    }()
+    
+    lazy var motivationTextModel: MotivationTextModel = {
+        return MotivationTextModel(repo: self.motivationRepository)
+    }()
+    
+    var motivationType: MotivationTextOption {
+        guard let useDefaultMotivation = localStore.value(key: LocalStore.Key.useDefaultMotivation) as? Bool else {
+            return .standard
+        }
+        return useDefaultMotivation ? MotivationTextOption.standard : MotivationTextOption.custom
+    }
+    
+    var motivation: String? {
+        get { return motivationTextModel.text }
+        set { motivationTextModel.text = newValue ?? ""}
+    }
     
     var roleUuid: F4SUUID? {
         return applicationLetterModel.blanksModel.populatedBlankWithName(TemplateBlankName.jobRole)?.choices.first?.uuid
@@ -137,6 +158,7 @@ class ApplicationModel : ApplicationModelProtocol {
         patch.attributes = self.personalAttributes
         patch.skills = self.skills
         patch.availabilityPeriods = [self.availabilityPeriodJson]
+        patch.motivation = motivation
         applicationLetterViewModel.modelBusyState(applicationLetterModel, isBusy: true)
         placementService.update(uuid: uuid, with: patch) { [weak self] (result) in
             guard let strongSelf = self else { return }
