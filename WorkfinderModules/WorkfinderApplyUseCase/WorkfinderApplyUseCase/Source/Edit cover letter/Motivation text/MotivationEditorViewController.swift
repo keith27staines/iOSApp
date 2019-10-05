@@ -9,59 +9,6 @@ protocol  MotivationEditorViewControllerDelegate: class {
     
 }
 
-protocol MotivationTextModelDelegate: class {
-    func modelDidUpdate(_ model: MotivationTextModel)
-}
-
-class MotivationTextModel {
-    weak var delegate: MotivationTextModelDelegate?
-    private let repo: F4SMotivationRepositoryProtocol
-    var option: MotivationTextOption {
-        get { return repo.loadMotivationType() }
-        set { repo.saveMotivationType(newValue) }
-    }
-    private var defaultText: String { return repo.loadDefaultMotivation() }
-    private var customText: String {
-        get { return repo.loadCustomMotivation() }
-        set { repo.saveCustomMotivation(newValue) }
-    }
-    
-    var text: String {
-        get {
-            switch option {
-            case .standard: return defaultText
-            case .custom: return customText
-            }
-        }
-        set {
-            customText = newValue
-            self.delegate?.modelDidUpdate(self)
-        }
-    }
-    let maxCharacters = 1000
-    var characterCountText: String { return "\(text.count) of \(maxCharacters)" }
-    var editingEnabled: Bool {
-        return option == .custom ? true : false
-    }
-    
-    init(repo: F4SMotivationRepositoryProtocol) {
-        self.repo = repo
-    }
-    
-    var selectedIndex: Int {
-        get {
-            switch option {
-            case .standard: return 0
-            case .custom: return 1
-            }
-        }
-        set {
-            self.option = newValue == 0 ? .standard : .custom
-            self.delegate?.modelDidUpdate(self)
-        }
-    }
-}
-
 class MotivationEditorViewController: UIViewController, MotivationTextModelDelegate {
 
     weak var delegate: MotivationEditorViewControllerDelegate?
@@ -71,12 +18,12 @@ class MotivationEditorViewController: UIViewController, MotivationTextModelDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViews()
-        updateFromModel()
         title = NSLocalizedString("Motivation", comment: "")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateFromModel()
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleKeyboardShown),
@@ -94,12 +41,19 @@ class MotivationEditorViewController: UIViewController, MotivationTextModelDeleg
         NotificationCenter.default.removeObserver(self)
     }
     
+    func setupNavigationBar() {
+        let image = UIImage(named: "backArrow")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: UIBarButtonItem.Style.plain, target: self, action: #selector(complete))
+    }
+    
+    @objc func complete() {
+        navigationController?.popViewController(animated: true)
+    }
+    
     @objc func handleKeyboardShown(notification: Notification) {
         guard let keyboardRect = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey]
             as? NSValue else { return }
-
         let frameKeyboard = keyboardRect.cgRectValue
-
         motivationText.contentInset = UIEdgeInsets(
             top: 0.0,
             left: 0.0,
@@ -122,12 +76,15 @@ class MotivationEditorViewController: UIViewController, MotivationTextModelDeleg
         motivationText.text = model.text
         motivationText.isEditable = model.editingEnabled
         characterCountLabel.text = model.characterCountText
+        delegate?.motivationEditorDidSetText(model)
+        navigationItem.leftBarButtonItem?.isEnabled = model.text.count > 10
     }
     
     func configureViews() {
         view.backgroundColor = UIColor.white
         view.addSubview(mainStack)
         mainStack.fillSuperview(padding: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
+        setupNavigationBar()
     }
     
     lazy var optionPicker: UISegmentedControl = {
@@ -165,13 +122,10 @@ class MotivationEditorViewController: UIViewController, MotivationTextModelDeleg
     
     lazy var keyboardToolbar: UIToolbar = {
         let bar = UIToolbar()
-        let done = UIBarButtonItem(
-            barButtonSystemItem: UIBarButtonItem.SystemItem.done,
-            target: self,
-            action: #selector(hideKeyboard))
+        let hide = UIBarButtonItem(title: "Hide", style: UIBarButtonItem.Style.plain, target: self, action: #selector(hideKeyboard))
         let characters = UIBarButtonItem(customView: self.characterCountLabel)
         let space = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        bar.items = [characters, space, done]
+        bar.items = [characters, space, hide]
         bar.sizeToFit()
         self.characterCountLabel.text = self.model.characterCountText
         self.characterCountLabel.frame.size = CGSize(width: 100, height: bar.frame.height)
@@ -191,10 +145,7 @@ class MotivationEditorViewController: UIViewController, MotivationTextModelDeleg
     }()
     
     func modelDidUpdate(_ model: MotivationTextModel) {
-        optionPicker.selectedSegmentIndex = model.selectedIndex
-        motivationText.text = model.text
-        motivationText.isEditable = model.editingEnabled
-        delegate?.motivationEditorDidSetText(model)
+        updateFromModel()
     }
     
     init(delegate: MotivationEditorViewControllerDelegate, model: MotivationTextModel) {

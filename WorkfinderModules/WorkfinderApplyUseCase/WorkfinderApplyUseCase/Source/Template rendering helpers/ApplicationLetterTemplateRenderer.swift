@@ -50,30 +50,7 @@ class ApplicationLetterTemplateRenderer {
         var data: [String: Any] = [:]
         isComplete = true
         for templateBlank in currentTemplate.blanks {
-            if let matchingSelectedBlank = findSelectedBlankMatching(templateBlank: templateBlank) {
-                
-                let fillStrings = getFillStrings(selectedChoices: matchingSelectedBlank.choices, availableChoices: templateBlank.choices)
-                
-                if let grammaticalString = F4SGrammar.list(fillStrings)?.htmlDecode() {
-                    data[templateBlank.name] =
-                        TemplateCustomParse.startSelected.rawValue +
-                        grammaticalString +
-                        TemplateCustomParse.endSelected.rawValue
-                } else {
-                    isComplete = false
-                    data[templateBlank.name] =
-                        TemplateCustomParse.startPlaceholder.rawValue +
-                        templateBlank.placeholder +
-                        TemplateCustomParse.endPlaceholder.rawValue
-                }
-                
-            } else {
-                isComplete = false
-                data[templateBlank.name] =
-                    TemplateCustomParse.startPlaceholder.rawValue +
-                    templateBlank.placeholder +
-                    TemplateCustomParse.endPlaceholder.rawValue
-            }
+            data[templateBlank.name] = dataForBlank(templateBlank)
         }
         
         data["company_name"] =
@@ -89,13 +66,53 @@ class ApplicationLetterTemplateRenderer {
         }
     }
     
-    func findSelectedBlankMatching(templateBlank: F4STemplateBlank) -> F4STemplateBlank? {
+    private func dataForBlank(_ templateBlank: F4STemplateBlank) -> String {
+        let placeholder = delimitedTextFrom(templateBlank.placeholder, asPopulated: false)
+        guard let matchingSelectedBlank = findSelectedBlankMatching(templateBlank: templateBlank) else {
+            isComplete = false
+            return placeholder
+        }
+        switch matchingSelectedBlank.optionType {
+        case .text:
+            if let text = matchingSelectedBlank.choices.first?.value {
+                return delimitedTextFrom(text, asPopulated: true)
+            } else {
+                isComplete = false
+                return placeholder
+            }
+            
+        default:
+            let fillStrings = getFillStrings(selectedChoices: matchingSelectedBlank.choices, availableChoices: templateBlank.choices)
+            
+            if let grammaticalString = F4SGrammar.list(fillStrings)?.htmlDecode() {
+                return delimitedTextFrom(grammaticalString, asPopulated: true)
+            } else {
+                isComplete = false
+                return placeholder
+            }
+        }
+    }
+    
+    private func delimitedTextFrom(_ text: String, asPopulated: Bool) -> String {
+        switch asPopulated {
+        case true:
+            return TemplateCustomParse.startSelected.rawValue +
+                   text +
+                   TemplateCustomParse.endSelected.rawValue
+        case false:
+            return TemplateCustomParse.startPlaceholder.rawValue +
+                   text +
+                   TemplateCustomParse.endPlaceholder.rawValue
+        }
+    }
+    
+    private func findSelectedBlankMatching(templateBlank: F4STemplateBlank) -> F4STemplateBlank? {
         guard let indexOfSelectedBlank = selectedTemplateChoices.firstIndex(where: { (otherBlank) -> Bool in
             return templateBlank.name == otherBlank.name }) else { return nil }
         return selectedTemplateChoices[indexOfSelectedBlank]
     }
     
-    func getFillStrings(selectedChoices: [F4SChoice], availableChoices: [F4SChoice]) -> [String] {
+    private func getFillStrings(selectedChoices: [F4SChoice], availableChoices: [F4SChoice]) -> [String] {
         var fillStrings = [String]()
         for selectedChoice in selectedChoices {
             if let indexOfChoice = availableChoices.firstIndex(where: { $0.uuid == selectedChoice.uuid }) {
@@ -112,7 +129,7 @@ class ApplicationLetterTemplateRenderer {
         return fillStrings
     }
     
-    func getValueForUuid(choices: [F4SChoice], uuid: String) -> String {
+    private func getValueForUuid(choices: [F4SChoice], uuid: String) -> String {
         if let indexOfChoice = choices.firstIndex(where: { $0.uuid == uuid }) {
             return choices[indexOfChoice].value
         }

@@ -73,6 +73,14 @@ extension EditCoverLetterViewController : F4SDaysAndHoursViewControllerDelegate 
     }
 }
 
+extension EditCoverLetterViewController: MotivationEditorViewControllerDelegate {
+    func motivationEditorDidSetText(_ editor: MotivationTextModel) {
+        blanksModel?.updateMotivationBlank(editor.text)
+        updateFromModel()
+        setUpdateButtonState()
+    }
+}
+
 extension EditCoverLetterViewController :  F4SCalendarCollectionViewControllerDelegate {
     func calendarDidChangeRange(_ calendar: F4SCalendarCollectionViewController, firstDay: F4SCalendarDay?, lastDay: F4SCalendarDay?) {
         updateAvailabilityPeriod(firstDay: firstDay, lastDay: lastDay)
@@ -96,14 +104,6 @@ extension EditCoverLetterViewController :  F4SCalendarCollectionViewControllerDe
         blank.choices = [F4SChoice(uuid: value)]
         try! blanksModel.addOrReplacePopulatedBlank(blank)
         
-    }
-}
-
-extension EditCoverLetterViewController: MotivationEditorViewControllerDelegate {
-    func motivationEditorDidSetText(_ editor: MotivationTextModel) {
-        blanksModel?.updateMotivationBlank(editor.text)
-        updateFromModel()
-        setUpdateButtonState()
     }
 }
 
@@ -184,7 +184,7 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
             }
         case .motivation:
             cell.editTextLabel.text = NSLocalizedString("Motivation", comment: "")
-            let attributeValue = self.getValueForTemplateBlank(name: .motivation)
+            let attributeValue = (motivationTextModel.option == .standard) ? "Default" : "Customised"
             cell.editValueLabel.isHidden = false
             cell.editValueLabel.text = attributeValue
         }
@@ -360,8 +360,8 @@ extension EditCoverLetterViewController {
         coordinator?.editCoverLetterViewControllerDidFinish(self)
     }
 
-    @objc func cancel() {
-        coordinator?.editCoverLetterViewControllerDidCancel()
+    @objc func backToLetter() {
+         coordinator?.editCoverLetterViewControllerDidFinish(self)
     }
 }
 
@@ -370,7 +370,7 @@ extension EditCoverLetterViewController {
     func setupNavigationBar() {
         self.title = NSLocalizedString("Edit Letter", comment: "")
         let image = UIImage(named: "backArrow")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: UIBarButtonItem.Style.plain, target: self, action: #selector(cancel))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: UIBarButtonItem.Style.plain, target: self, action: #selector(backToLetter))
         styleNavigationController()
     }
 
