@@ -8,22 +8,27 @@
 
 import Foundation
 import XCGLogger
+import Bugsnag
 import WorkfinderCommon
 
 public class F4SLog : F4SAnalyticsAndDebugging {
     
-    private var analytics: SEGAnalytics
     private var f4sDebug: F4SDebug?
     
     public init() {
-
+        let bugsnagConfiguration = BugsnagConfiguration()
         switch Config.environment {
         case .staging:
-   
+            bugsnagConfiguration.releaseStage = "staging"
+            bugsnagConfiguration.apiKey = "3e5b13ff2914e5593874d37282c5f40a"
         case .production:
-
+            bugsnagConfiguration.releaseStage = "production"
+            bugsnagConfiguration.apiKey = "1b2c62d35dbf70232d3b4d4c5aca5ebe"
         }
-        
+        let userUuid = F4SUser().uuid ?? "first_use_temp_\(UUID().uuidString)"
+        bugsnagConfiguration.setUser(userUuid, withName:"", andEmail:"")
+        Bugsnag.start(with: bugsnagConfiguration)
+
         do {
             f4sDebug = try F4SDebug()
         } catch (let error) {
@@ -34,15 +39,15 @@ public class F4SLog : F4SAnalyticsAndDebugging {
 
 extension F4SLog : F4SAnalytics {
     public func track(event: String) {
-        analytics.track(event)
+
     }
     
     public func track(event: String, properties: [String : Any]) {
-        analytics.track(event, properties: properties)
+
     }
     
     public func track(event: String, properties: [String : Any], options: [String : Any]) {
-        analytics.track(event, properties: properties, options: options)
+
     }
     
     public func screen(_ name: ScreenName) {
@@ -54,16 +59,16 @@ extension F4SLog : F4SAnalytics {
     }
     
     func writeScreenToAnalytics(_ name: ScreenName, originScreen origin: ScreenName = .notSpecified) {
-        analytics.screen(name.rawValue, properties: ["origin": origin.rawValue])
+
         print("SCREEN DID APPEAR: \(name.rawValue) from \(origin.rawValue)")
     }
     
     public func identity(userId: F4SUUID) {
-        analytics.identify(userId)
+
     }
     
     public func alias(userId: F4SUUID) {
-        analytics.alias(userId)
+
     }
 }
 

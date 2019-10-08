@@ -49,6 +49,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
          launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
         self.registrar = registrar
         self.launchOptions = launchOptions
+        self.log = F4SLog()
     }
     
     lazy var networkConfiguration: NetworkConfig = {
@@ -143,11 +144,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
                                          templateService: templateService)
     }()
     
-    lazy var log: F4SAnalyticsAndDebugging = {
-        let log = F4SLog()
-        log.debug("logging started")
-        return log
-    }()
+    var log: F4SAnalyticsAndDebugging
     
     lazy var localStore: LocalStorageProtocol = {
         return LocalStore()
