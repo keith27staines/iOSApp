@@ -25,6 +25,10 @@ public struct InterestsModel {
     /// A dictionary of all interests, keyed by their id
     public let allInterests: [Int64: F4SInterest]
     
+    public init(allInterests: [Int64: F4SInterest]) {
+        self.allInterests = allInterests
+    }
+    
     /// returns a set of interests corresponding to the set of interest ids
     public func interestSetFromIdSet(_ ids: Set<Int64>) -> F4SInterestSet {
         var interestSet = F4SInterestSet()

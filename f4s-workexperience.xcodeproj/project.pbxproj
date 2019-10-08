@@ -7,10 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2037B0A31DEC2DB600A9DE3E /* InterestDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037B0A21DEC2DB600A9DE3E /* InterestDB.swift */; };
 		2037B0A51DEC3C2000A9DE3E /* CoreDataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037B0A41DEC3C2000A9DE3E /* CoreDataBaseManager.swift */; };
-		2037B0A71DEC3C3B00A9DE3E /* InterestCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037B0A61DEC3C3B00A9DE3E /* InterestCoreDataManager.swift */; };
-		2037B0A91DEC3D3400A9DE3E /* InterestDBOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037B0A81DEC3D3400A9DE3E /* InterestDBOperations.swift */; };
 		2037B0AB1DEC42F600A9DE3E /* PlacementDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037B0AA1DEC42F600A9DE3E /* PlacementDB.swift */; };
 		2037B0AD1DEC560700A9DE3E /* PlacementCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037B0AC1DEC560700A9DE3E /* PlacementCoreDataManager.swift */; };
 		2037B0AF1DEC592900A9DE3E /* PlacementDBOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037B0AE1DEC592900A9DE3E /* PlacementDBOperations.swift */; };
@@ -218,10 +215,7 @@
 /* Begin PBXFileReference section */
 		0022DD3F6308590A19CBCF7B /* Pods-f4s-workexperienceTests.releasef4slive.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperienceTests.releasef4slive.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperienceTests/Pods-f4s-workexperienceTests.releasef4slive.xcconfig"; sourceTree = "<group>"; };
 		0FB15162F0A1B8298B159D38 /* Pods_f4s_workexperienceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_f4s_workexperienceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2037B0A21DEC2DB600A9DE3E /* InterestDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestDB.swift; sourceTree = "<group>"; };
 		2037B0A41DEC3C2000A9DE3E /* CoreDataBaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataBaseManager.swift; sourceTree = "<group>"; };
-		2037B0A61DEC3C3B00A9DE3E /* InterestCoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestCoreDataManager.swift; sourceTree = "<group>"; };
-		2037B0A81DEC3D3400A9DE3E /* InterestDBOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestDBOperations.swift; sourceTree = "<group>"; };
 		2037B0AA1DEC42F600A9DE3E /* PlacementDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacementDB.swift; sourceTree = "<group>"; };
 		2037B0AC1DEC560700A9DE3E /* PlacementCoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacementCoreDataManager.swift; sourceTree = "<group>"; };
 		2037B0AE1DEC592900A9DE3E /* PlacementDBOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacementDBOperations.swift; sourceTree = "<group>"; };
@@ -584,9 +578,7 @@
 			children = (
 				40E78E491DD32862000A3776 /* f4s-workexperience.xcdatamodeld */,
 				205EB20A1DDB161D00034424 /* DatabaseOperations.swift */,
-				2037B0A21DEC2DB600A9DE3E /* InterestDB.swift */,
 				2037B0A41DEC3C2000A9DE3E /* CoreDataBaseManager.swift */,
-				2037B0A61DEC3C3B00A9DE3E /* InterestCoreDataManager.swift */,
 				2037B0AA1DEC42F600A9DE3E /* PlacementDB.swift */,
 				2037B0AC1DEC560700A9DE3E /* PlacementCoreDataManager.swift */,
 				204C89541DF5A36100D8493A /* TemplateChoiceDB.swift */,
@@ -1026,7 +1018,6 @@
 		FC99BDC620CFD2C300278DDE /* Coredata services */ = {
 			isa = PBXGroup;
 			children = (
-				2037B0A81DEC3D3400A9DE3E /* InterestDBOperations.swift */,
 				2037B0AE1DEC592900A9DE3E /* PlacementDBOperations.swift */,
 				204203ED1E4B16D7007C7409 /* ShortlistDBOperations.swift */,
 			);
@@ -1355,7 +1346,6 @@
 				40C1A5191DDF5ACE000F80AA /* GMUClusterManager.m in Sources */,
 				20D51BE41E27710C003A8358 /* UNService.swift in Sources */,
 				40C1A51B1DDF5ACE000F80AA /* GMUDefaultClusterRenderer.m in Sources */,
-				2037B0A31DEC2DB600A9DE3E /* InterestDB.swift in Sources */,
 				40C1A4E61DDB356B000F80AA /* TabBarViewController.swift in Sources */,
 				FCA53B921FE00CB5009F6DB0 /* VersioningService.swift in Sources */,
 				FC21BE37220F53EB00A0A389 /* PeopleDataSource.swift in Sources */,
@@ -1394,7 +1384,6 @@
 				FC8E3F4822D3396A00102C37 /* VersionCheckCoordinator.swift in Sources */,
 				40A5CF3C1DED6FA2000007AB /* InterestsViewController.swift in Sources */,
 				40E78E701DD32BD4000A3776 /* MenuHelper.swift in Sources */,
-				2037B0A71DEC3C3B00A9DE3E /* InterestCoreDataManager.swift in Sources */,
 				204C89551DF5A36100D8493A /* TemplateChoiceDB.swift in Sources */,
 				FC21BE3F220F53EB00A0A389 /* SearchViewProtocol.swift in Sources */,
 				FCCD6AE91FBB44CF0088D7C7 /* PopupCompanyListViewController.swift in Sources */,
@@ -1409,7 +1398,6 @@
 				40E78E171DD31A86000A3776 /* AppDelegate.swift in Sources */,
 				FC21BE3B220F53EB00A0A389 /* SearchViewStateMachine.swift in Sources */,
 				2037B0AD1DEC560700A9DE3E /* PlacementCoreDataManager.swift in Sources */,
-				2037B0A91DEC3D3400A9DE3E /* InterestDBOperations.swift in Sources */,
 				20FABFEC1DDDA63600D583E2 /* FileHelper.swift in Sources */,
 				40E78E891DD32C3C000A3776 /* ExtensionsHelper.swift in Sources */,
 				40A5CF3E1DED72E8000007AB /* InterestsCollectionViewCell.swift in Sources */,

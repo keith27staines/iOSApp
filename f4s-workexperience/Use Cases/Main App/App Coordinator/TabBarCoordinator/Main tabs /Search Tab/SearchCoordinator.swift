@@ -6,11 +6,13 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
     
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     var shouldAskOperatingSystemToAllowLocation = false
+    let interestsRepository: F4SInterestsRepositoryProtocol
     
     lazy var rootViewController: MapViewController = {
         let storyboard = UIStoryboard(name: "MapView", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "MapViewCtrl") as! MapViewController
         vc.coordinator = self
+        vc.interestsRepository = self.interestsRepository
         vc.log = self.injected.log
 //        vc.companyDataSource
 //        vc.placesDataSource
@@ -21,8 +23,10 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
     init(parent: Coordinating,
          navigationRouter: NavigationRoutingProtocol,
          inject: CoreInjectionProtocol,
-         companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol) {
+         companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
+         interestsRepository: F4SInterestsRepositoryProtocol) {
         self.companyCoordinatorFactory = companyCoordinatorFactory
+        self.interestsRepository = interestsRepository
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
@@ -50,6 +54,7 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
             let visibleMapBounds = rootViewController.visibleMapBounds else { return }
         let interestsStoryboard = UIStoryboard(name: "InterestsView", bundle: nil)
         let interestsViewController = interestsStoryboard.instantiateViewController(withIdentifier: "interestsCtrl") as! InterestsViewController
+        interestsViewController.interestsRepository = interestsRepository
         interestsViewController.visibleBounds = visibleMapBounds
         interestsViewController.mapModel = unfilteredMapModel
         interestsViewController.delegate = rootViewController

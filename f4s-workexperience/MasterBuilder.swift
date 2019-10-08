@@ -25,6 +25,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
             companyService: companyService,
             favouritesRepository: favouritesRepository,
             documentUploaderFactory: documentUploaderFactory,
+            interestsRepository: interestsRepository,
             offerProcessingService: offerProcessingService,
             partnersModel: partnersModel,
             placementsRepository: placementsRepository,
@@ -220,7 +221,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     }()
     
     lazy var interestsRepository: F4SInterestsRepositoryProtocol = {
-        return F4SInterestsRepository()
+        return F4SInterestsRepository(localStore: self.localStore)
     }()
     
     lazy var messageServiceFactory: F4SMessageServiceFactoryProtocol = {

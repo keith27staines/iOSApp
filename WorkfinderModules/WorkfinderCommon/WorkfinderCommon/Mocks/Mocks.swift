@@ -643,20 +643,6 @@ public class MockPlacementsRepository: F4SPlacementRepositoryProtocol {
     }
 }
 
-public class MockInterestsRepository: F4SInterestsRepositoryProtocol {
-    var allInterests = [F4SUUID: F4SInterest]()
-    var userInterests = [F4SInterest]()
-    
-    public init() {}
-    public func loadAllInterests() -> [F4SInterest] {
-        return Array(allInterests.values)
-    }
-    
-    public func loadUserInterests() -> [F4SInterest] {
-        return userInterests
-    }
-}
-
 public class MockF4SUserService: F4SUserServiceProtocol {
     public func registerDeviceWithServer(installationUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRegisterDeviceResult>) -> ()) {
         registerDeviceOnServerCalled += 1

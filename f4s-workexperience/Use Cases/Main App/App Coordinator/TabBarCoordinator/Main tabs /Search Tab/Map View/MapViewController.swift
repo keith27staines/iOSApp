@@ -135,6 +135,8 @@ class MapViewController: UIViewController {
     /// Map model for companies satisfying the interest filters
     var filteredMapModel: MapModel?
     
+    var interestsRepository: F4SInterestsRepositoryProtocol!
+    
     /// Used to determine whether there is internet connectivity
     var reachability: Reachability?
     
@@ -461,7 +463,8 @@ extension MapViewController {
     }
     
     func displayRefineSearchLabelAnimated() {
-        if self.refineSearchLabel.isHidden && InterestDBOperations.sharedInstance.interestsForCurrentUser().count == 0 {
+        let interestsCount = interestsRepository.loadInterestsSet().count
+        if self.refineSearchLabel.isHidden && interestsCount == 0 {
             self.refineLabelContainerView.isHidden = false
             self.setupSlideInAnimation(transitionType.slideIn, completionDelegate: self)
             self.refineSearchLabel.isHidden = false
@@ -999,7 +1002,7 @@ extension MapViewController {
         self.createUnfilteredMapModelFromDatabase { [weak self] unfilteredMapModel in
             guard let strongSelf = self else { return }
             strongSelf.unfilteredMapModel = unfilteredMapModel
-            let interestFilterSet = InterestDBOperations.sharedInstance.interestsForCurrentUser()
+            let interestFilterSet = strongSelf.interestsRepository.loadInterestsSet()
             strongSelf.createFilteredMapModel(unfilteredModel: unfilteredMapModel, interestFilterSet: interestFilterSet, completed: { (filteredMapModel) in
                 strongSelf.filteredMapModel = filteredMapModel
                 strongSelf.reloadMapFromModel(mapModel: filteredMapModel, completed: {

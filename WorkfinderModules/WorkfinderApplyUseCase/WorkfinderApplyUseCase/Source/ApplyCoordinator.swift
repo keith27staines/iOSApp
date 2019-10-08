@@ -34,9 +34,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     let documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol
     let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
     weak var applyCoordinatorDelegate: ApplyCoordinatorDelegate?
-    lazy var userInterests: [F4SInterest] = {
-        return interestsRepository.loadUserInterests()
-    }()
+    lazy var userInterests: [F4SInterest] = { return interestsRepository.loadInterestsArray() }()
     
     lazy var applicationModel: ApplicationModelProtocol = {
         let userUuid = injected.user.uuid!

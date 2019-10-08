@@ -17,6 +17,7 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
     let companyService: F4SCompanyServiceProtocol
     let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
     let favouritesRepository: F4SFavouritesRepositoryProtocol
+    let interestsRepository: F4SInterestsRepositoryProtocol
     let offerProcessingService: F4SOfferProcessingServiceProtocol
     let partnersModel: F4SPartnersModelProtocol
     let placementsRepository: F4SPlacementRepositoryProtocol
@@ -53,6 +54,7 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
                   companyService: F4SCompanyServiceProtocol,
                   favouritesRepository: F4SFavouritesRepositoryProtocol,
                   documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
+                  interestsRepository: F4SInterestsRepositoryProtocol,
                   offerProcessingService: F4SOfferProcessingServiceProtocol,
                   partnersModel: F4SPartnersModelProtocol,
                   placementsRepository: F4SPlacementRepositoryProtocol,
@@ -74,17 +76,18 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
         self.documentUploaderFactory = documentUploaderFactory
         
         self.favouritesRepository = favouritesRepository
+        self.interestsRepository = interestsRepository
         self.offerProcessingService = offerProcessingService
         self.partnersModel = partnersModel
         self.placementsRepository = placementsRepository
-        self.placementService = placementService
         
+        self.placementService = placementService
         self.placementDocumentsServiceFactory = placementDocumentsServiceFactory
         self.messageServiceFactory = messageServiceFactory
         self.messageActionServiceFactory = messageActionServiceFactory
         self.messageCannedResponsesServiceFactory = messageCannedResponsesServiceFactory
-        self.recommendationsService = recommendationsService
         
+        self.recommendationsService = recommendationsService
         self.roleService = roleService
     }
     
@@ -273,7 +276,12 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
         let searchIcon = UIImage(named: "searchIcon2")?.withRenderingMode(.alwaysTemplate)
         navigationController.tabBarItem = UITabBarItem(title: "Search", image: searchIcon, selectedImage: nil)
         let router = NavigationRouter(navigationController: navigationController)
-        let coordinator = SearchCoordinator(parent: self, navigationRouter: router, inject: injected, companyCoordinatorFactory: companyCoordinatorFactory)
+        let coordinator = SearchCoordinator(
+            parent: self,
+            navigationRouter: router,
+            inject: injected,
+            companyCoordinatorFactory: companyCoordinatorFactory,
+            interestsRepository: interestsRepository)
         coordinator.shouldAskOperatingSystemToAllowLocation = shouldAskOperatingSystemToAllowLocation
         addChildCoordinator(coordinator)
         return coordinator

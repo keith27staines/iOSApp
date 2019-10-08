@@ -1,10 +1,3 @@
-//
-//  InterestsViewController.swift
-//  f4s-workexperience
-//
-//  Created by Sergiu Simon on 28/11/16.
-//  Copyright © 2016 Chelsea Apps Factory. All rights reserved.
-//
 
 import UIKit
 import WorkfinderCommon
@@ -42,7 +35,6 @@ class InterestsViewController: UIViewController, UIScrollViewDelegate {
     /// Interests that the user originally had selected to use as filters on view load
     var originallySelectedInterests: F4SInterestSet = F4SInterestSet()
     
-    
     /// Interests that the user currently has actively selected to use as filters
     var selectedInterests: F4SInterestSet! {
         didSet {
@@ -51,6 +43,8 @@ class InterestsViewController: UIViewController, UIScrollViewDelegate {
     }
 
     let uiIndicatorBusy = UIActivityIndicatorView(style: .white)
+    
+    var interestsRepository: F4SInterestsRepositoryProtocol!
 
     var interestsModel: InterestsModel {
         return mapModel.interestsModel
@@ -63,7 +57,10 @@ class InterestsViewController: UIViewController, UIScrollViewDelegate {
         adjustNavigationBar()
         applyStyle()
         startAnimating()
-        originallySelectedInterests = InterestDBOperations.sharedInstance.interestsForCurrentUser()
+        let allInterests = interestsModel.allInterests.compactMap { keyValuePair -> F4SInterest in
+            return keyValuePair.value
+        }
+        originallySelectedInterests = interestsRepository.pruneInterests(keeping: allInterests)
         selectedInterests = originallySelectedInterests
         mapModel.getInterestsInBounds(visibleBounds) { (interestsInBounds) in
             DispatchQueue.main.async { [weak self] in
@@ -276,14 +273,7 @@ extension InterestsViewController: UICollectionViewDelegateFlowLayout {
 extension InterestsViewController {
 
     @IBAction func refineSearchButtonTouched(_: UIButton) {
-        let interestsToSave = selectedInterests.subtracting(originallySelectedInterests)
-        let interestsToRemove = originallySelectedInterests.subtracting(selectedInterests)
-        for interest in interestsToRemove {
-            InterestDBOperations.sharedInstance.removeUserInterestWithUuid(interest.uuid)
-        }
-        for interest in interestsToSave {
-            InterestDBOperations.sharedInstance.saveInterest(interest)
-        }
+        selectedInterests = interestsRepository.saveInterests(selectedInterests)
         delegate?.interestsViewController(self, didChangeSelectedInterests: selectedInterests)
         self.dismiss(animated: true, completion: nil)
     }
