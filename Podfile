@@ -13,6 +13,7 @@ target 'f4s-workexperience' do
     pod 'GoogleMaps'
     pod 'GooglePlaces'
     pod 'Bugsnag'
+    pod 'Firebase/Analytics'
 end
   
 target 'f4s-workexperienceTests' do

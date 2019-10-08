@@ -10,6 +10,7 @@ import Foundation
 import XCGLogger
 import Bugsnag
 import WorkfinderCommon
+import Firebase
 
 public class F4SLog : F4SAnalyticsAndDebugging {
     
@@ -28,7 +29,7 @@ public class F4SLog : F4SAnalyticsAndDebugging {
         let userUuid = F4SUser().uuid ?? "first_use_temp_\(UUID().uuidString)"
         bugsnagConfiguration.setUser(userUuid, withName:"", andEmail:"")
         Bugsnag.start(with: bugsnagConfiguration)
-
+        FirebaseApp.configure()
         do {
             f4sDebug = try F4SDebug()
         } catch (let error) {
@@ -59,7 +60,7 @@ extension F4SLog : F4SAnalytics {
     }
     
     func writeScreenToAnalytics(_ name: ScreenName, originScreen origin: ScreenName = .notSpecified) {
-
+        Analytics.setScreenName(name.rawValue, screenClass: "")
         print("SCREEN DID APPEAR: \(name.rawValue) from \(origin.rawValue)")
     }
     
