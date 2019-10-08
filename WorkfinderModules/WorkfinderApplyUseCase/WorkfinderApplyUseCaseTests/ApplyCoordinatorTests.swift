@@ -65,7 +65,7 @@ extension ApplyCoordinatorTests {
         let mockPlacementService = placementServiceFactory.makePlacementService()
         let mockTemplateService = MockF4STemplateService()
         let mockPlacementRepository = MockPlacementsRepository()
-        let mockInterestsRepository = MockInterestsRepository()
+        let mockInterestsRepository = MockF4SInterestsRepository()
         let placement = F4STimelinePlacement(userUuid: "userUuid", companyUuid: "companyUuid", placementUuid: "placementUuid")
         let requiredPlacementResult = F4SNetworkResult.success([placement])
         let mockGetAllPlacementsService = MockF4SGetAllPlacementsService(result: requiredPlacementResult)

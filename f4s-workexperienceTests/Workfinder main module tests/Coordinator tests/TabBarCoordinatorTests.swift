@@ -28,6 +28,7 @@ class TabBarCoordinatorTests: XCTestCase {
             companyService: builder.mockCompanyService,
             favouritesRepository: builder.mockFavouritesRepository,
             documentUploaderFactory: builder.mockDocumentUploaderFactory,
+            interestsRepository: builder.interestsRepository,
             offerProcessingService: builder.mockOfferProcessingService,
             partnersModel: builder.mockPartnersModel,
             placementsRepository: builder.mockPlacementsRepository,

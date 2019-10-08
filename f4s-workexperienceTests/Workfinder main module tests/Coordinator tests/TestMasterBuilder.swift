@@ -66,6 +66,9 @@ struct TestMasterBuilder: TabbarCoordinatorFactoryProtocol {
             contentService: self.mockContentService,
             log: self.mockLog)
     }()
+    lazy var interestsRepository: F4SInterestsRepositoryProtocol = {
+        return F4SInterestsRepository(localStore: self.mockLocalStore)
+    }()
     lazy var launchOptions = LaunchOptions()
     lazy var mockLocalStore: LocalStorageProtocol = {
         let store = MockLocalStore()

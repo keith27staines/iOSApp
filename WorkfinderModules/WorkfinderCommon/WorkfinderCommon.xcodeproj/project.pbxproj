@@ -57,6 +57,7 @@
 		FC299951231EEA2E00F83FB6 /* Placement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC299950231EEA2E00F83FB6 /* Placement.swift */; };
 		FC2E205B22F9D1DD0094B134 /* F4SUUIDDictionarytests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2E205A22F9D1DD0094B134 /* F4SUUIDDictionarytests.swift */; };
 		FC32FD432265E4C800740F0C /* F4SContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32FD422265E4C800740F0C /* F4SContentType.swift */; };
+		FC390141234C9E0A009A9F7B /* MockF4SInterestsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC390140234C9E0A009A9F7B /* MockF4SInterestsRepository.swift */; };
 		FC426EFC232FA274004F8A3E /* WorkfinderServiceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426EFB232FA274004F8A3E /* WorkfinderServiceProtocols.swift */; };
 		FC426EFE232FAC6C004F8A3E /* F4SNetworkSessionManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426EFD232FAC6C004F8A3E /* F4SNetworkSessionManagerProtocol.swift */; };
 		FC426F04232FAEA9004F8A3E /* WorkfinderEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426F03232FAEA9004F8A3E /* WorkfinderEndpoint.swift */; };
@@ -207,6 +208,7 @@
 		FC299950231EEA2E00F83FB6 /* Placement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placement.swift; sourceTree = "<group>"; };
 		FC2E205A22F9D1DD0094B134 /* F4SUUIDDictionarytests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUUIDDictionarytests.swift; sourceTree = "<group>"; };
 		FC32FD422265E4C800740F0C /* F4SContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SContentType.swift; sourceTree = "<group>"; };
+		FC390140234C9E0A009A9F7B /* MockF4SInterestsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockF4SInterestsRepository.swift; sourceTree = "<group>"; };
 		FC426EFB232FA274004F8A3E /* WorkfinderServiceProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkfinderServiceProtocols.swift; sourceTree = "<group>"; };
 		FC426EFD232FAC6C004F8A3E /* F4SNetworkSessionManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SNetworkSessionManagerProtocol.swift; sourceTree = "<group>"; };
 		FC426F03232FAEA9004F8A3E /* WorkfinderEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderEndpoint.swift; sourceTree = "<group>"; };
@@ -636,6 +638,7 @@
 				FC8F9578233BA6710027BE02 /* MockUserService.swift */,
 				FC8F957A233BA6710027BE02 /* MockAnalyticsAndDebugging.swift */,
 				FC14E458234200EC005D7541 /* MockVersionCheckCoordinator.swift */,
+				FC390140234C9E0A009A9F7B /* MockF4SInterestsRepository.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -800,6 +803,7 @@
 				FC8F9570233B82B60027BE02 /* AllowedToApplyLogicProtocol.swift in Sources */,
 				FC12B10322F3415300C33410 /* JsonDateFormatterExtension.swift in Sources */,
 				FCDFEA12223D2CF500E58649 /* WEXResult.swift in Sources */,
+				FC390141234C9E0A009A9F7B /* MockF4SInterestsRepository.swift in Sources */,
 				FCC1DF5D232505FF0074D5C1 /* Shortlist.swift in Sources */,
 				FC1243E32344AEA30007BA95 /* ScreenNames.swift in Sources */,
 				FC4EE72C230EF10400B40F6B /* F4SMessageStructs.swift in Sources */,
