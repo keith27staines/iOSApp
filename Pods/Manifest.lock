@@ -1,6 +1,4 @@
 PODS:
-  - Analytics (3.7.0)
-  - Bugsnag (5.22.6)
   - GoogleMaps (3.4.0):
     - GoogleMaps/Maps (= 3.4.0)
   - GoogleMaps/Base (3.4.0)
@@ -13,9 +11,6 @@ PODS:
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - ReachabilitySwift (4.3.1)
-  - Segment-Bugsnag (1.0.3):
-    - Analytics (~> 3.0)
-    - Bugsnag (~> 5.0)
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
   - SQLite.swift/standard (0.12.2)
@@ -25,40 +20,32 @@ PODS:
     - ObjcExceptionBridging
 
 DEPENDENCIES:
-  - Analytics
   - GoogleMaps
   - GooglePlaces
   - KeychainSwift
   - ReachabilitySwift
-  - Segment-Bugsnag
   - SQLite.swift
   - XCGLogger
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - Analytics
-    - Bugsnag
+  https://github.com/CocoaPods/Specs.git:
     - GoogleMaps
     - GooglePlaces
     - KeychainSwift
     - ObjcExceptionBridging
     - ReachabilitySwift
-    - Segment-Bugsnag
     - SQLite.swift
     - XCGLogger
 
 SPEC CHECKSUMS:
-  Analytics: 77fd5fb102a4a5eedafa2c2b0245ceb7b7c15e45
-  Bugsnag: 48bf35c605e92e8f661cb751281117bb99850b34
   GoogleMaps: 67f4a604f80dd6a22d09c2a507a3a395b9f23060
   GooglePlaces: 7547289e3fffc8980f4a027be99888e29d59b15d
   KeychainSwift: 4209611373ca4a098e09b1e547eebd87c544dcc4
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
-  Segment-Bugsnag: 9ee9635d7a5e1058a09b3e5766f69670095fbc01
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   XCGLogger: 0434f15e3909cdc450bb63faf638b8792ab782ab
 
-PODFILE CHECKSUM: a986c56441cce079b5385449f8ded5ccf219291e
+PODFILE CHECKSUM: a32376641d0f02716ef1d6975e901dc6806677f1
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.3

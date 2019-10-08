@@ -7,9 +7,6 @@
 //
 
 import Foundation
-import Analytics
-import Segment_Bugsnag
-import Bugsnag
 import XCGLogger
 import WorkfinderCommon
 
@@ -19,21 +16,13 @@ public class F4SLog : F4SAnalyticsAndDebugging {
     private var f4sDebug: F4SDebug?
     
     public init() {
-        let segmentWriteKey: String
+
         switch Config.environment {
         case .staging:
-            segmentWriteKey = "i6ZAvwf9RlqSzghak9Sg03MXyVeXo3kZ"
+   
         case .production:
-            segmentWriteKey = "G5DSK58YEvZDJx3KrnNAWvNg5xb5Uy51"
+
         }
-        let config = SEGAnalyticsConfiguration(writeKey: segmentWriteKey)
-        config.trackApplicationLifecycleEvents = false
-        config.recordScreenViews = false
-        if let bugsnagIntegrationFactory = SEGBugsnagIntegrationFactory.instance() {
-            config.use(bugsnagIntegrationFactory)
-        }
-        SEGAnalytics.setup(with: config)
-        analytics = SEGAnalytics.shared()!
         
         do {
             f4sDebug = try F4SDebug()

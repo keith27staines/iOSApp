@@ -12,9 +12,7 @@ target 'f4s-workexperience' do
     pod 'SQLite.swift'
     pod 'GoogleMaps'
     pod 'GooglePlaces'
-    pod 'Analytics'
-    pod 'Segment-Bugsnag'
-    
+
 end
   
 target 'f4s-workexperienceTests' do
