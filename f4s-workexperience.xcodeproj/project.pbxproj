@@ -577,7 +577,6 @@
 			isa = PBXGroup;
 			children = (
 				40E78E491DD32862000A3776 /* f4s-workexperience.xcdatamodeld */,
-				205EB20A1DDB161D00034424 /* DatabaseOperations.swift */,
 				2037B0A41DEC3C2000A9DE3E /* CoreDataBaseManager.swift */,
 				2037B0AA1DEC42F600A9DE3E /* PlacementDB.swift */,
 				2037B0AC1DEC560700A9DE3E /* PlacementCoreDataManager.swift */,
@@ -790,7 +789,7 @@
 				40E78E4E1DD328A4000A3776 /* Components */,
 				FC8E303620F4A5DF006059DE /* F4SLogger */,
 				40E78E4D1DD3289B000A3776 /* F4S models and services */,
-				FC62FF9620EF753A003E52C5 /* CoreData models and services */,
+				FC62FF9620EF753A003E52C5 /* Database models and services */,
 			);
 			name = "Models and services";
 			sourceTree = "<group>";
@@ -918,6 +917,14 @@
 			path = HiddenDebugScreen;
 			sourceTree = "<group>";
 		};
+		FC39013F234C9108009A9F7B /* SQLite models and services */ = {
+			isa = PBXGroup;
+			children = (
+				205EB20A1DDB161D00034424 /* DatabaseOperations.swift */,
+			);
+			name = "SQLite models and services";
+			sourceTree = "<group>";
+		};
 		FC3F3921222931630046F8F8 /* Coordinator tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -971,13 +978,14 @@
 			path = "F4SMessage models";
 			sourceTree = "<group>";
 		};
-		FC62FF9620EF753A003E52C5 /* CoreData models and services */ = {
+		FC62FF9620EF753A003E52C5 /* Database models and services */ = {
 			isa = PBXGroup;
 			children = (
+				FC39013F234C9108009A9F7B /* SQLite models and services */,
 				FC99BDC620CFD2C300278DDE /* Coredata services */,
 				40E78E471DD32840000A3776 /* CoreData models */,
 			);
-			name = "CoreData models and services";
+			name = "Database models and services";
 			sourceTree = "<group>";
 		};
 		FC67711121258448000B0870 /* Assets */ = {
