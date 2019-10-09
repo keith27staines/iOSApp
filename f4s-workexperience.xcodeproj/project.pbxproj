@@ -166,7 +166,7 @@
 		FCF4B653232BC49A001340DF /* WorkfinderOnboardingUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCF4B651232BC49A001340DF /* WorkfinderOnboardingUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCF5AF2B2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF2A2248BE1A00D9B8D1 /* WorkfinderApplyUseCase.framework */; };
 		FCF5AF2C2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF2A2248BE1A00D9B8D1 /* WorkfinderApplyUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FCF992D3234CE01B00DBC179 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCF992D2234CE01B00DBC179 /* GoogleService-Info.plist */; };
+		FCF992D3234CE01B00DBC179 /* firebase_staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCF992D2234CE01B00DBC179 /* firebase_staging.plist */; };
 		FCFB1328224930660086BE25 /* Mustache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCFB1327224930660086BE25 /* Mustache.framework */; };
 		FCFB1329224930660086BE25 /* Mustache.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCFB1327224930660086BE25 /* Mustache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCFBD0192250D9FF00A9361D /* AppCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A48221714B800DC335B /* AppCoordinatorTests.swift */; };
@@ -401,7 +401,7 @@
 		FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupAnimator.swift; sourceTree = "<group>"; };
 		FCF4B651232BC49A001340DF /* WorkfinderOnboardingUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderOnboardingUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF5AF2A2248BE1A00D9B8D1 /* WorkfinderApplyUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderApplyUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCF992D2234CE01B00DBC179 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FCF992D2234CE01B00DBC179 /* firebase_staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = firebase_staging.plist; sourceTree = "<group>"; };
 		FCFB1327224930660086BE25 /* Mustache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mustache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCFBD0062250D69700A9361D /* f4s-workexperienceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "f4s-workexperienceTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCFBD00A2250D69700A9361D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -511,7 +511,7 @@
 		40E78E0A1DD31A86000A3776 = {
 			isa = PBXGroup;
 			children = (
-				FCF992D2234CE01B00DBC179 /* GoogleService-Info.plist */,
+				FCF992D2234CE01B00DBC179 /* firebase_staging.plist */,
 				FC4066FC23277D8F002B425E /* WorkfinderDocumentUploadUseCase.framework */,
 				FC06605123264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework */,
 				FC53D6DF2323C56F00A339ED /* WorkfinderUserDetailsUseCase.framework */,
@@ -1231,7 +1231,7 @@
 				D54E0FFD1E044B0400A51560 /* InfoWindowView.xib in Resources */,
 				40A5CF3A1DED6F8D000007AB /* InterestsView.storyboard in Resources */,
 				40E78E951DD391F3000A3776 /* MapView.storyboard in Resources */,
-				FCF992D3234CE01B00DBC179 /* GoogleService-Info.plist in Resources */,
+				FCF992D3234CE01B00DBC179 /* firebase_staging.plist in Resources */,
 				FC72219F20FE248400F10953 /* Appfile in Resources */,
 				FCCD6AE71FBB42A90088D7C7 /* PopupCompanyList.storyboard in Resources */,
 				FC5D3C6E20FE1CEC00F89169 /* Gemfile in Resources */,

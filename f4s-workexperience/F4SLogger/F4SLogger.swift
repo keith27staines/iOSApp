@@ -17,11 +17,23 @@ public class F4SLog : F4SAnalyticsAndDebugging {
     private var f4sDebug: F4SDebug?
     
     public init() {
+        let environmentType = Config.environment
+        startBugsnag(environmentType: environmentType)
+        startFirebase(environmentType: environmentType)
+        do {
+            f4sDebug = try F4SDebug()
+        } catch (let error) {
+            assertionFailure("Failed to initialize logger: \(error)")
+        }
+    }
+    
+    func startBugsnag(environmentType: EnvironmentType) {
         let bugsnagConfiguration = BugsnagConfiguration()
-        switch Config.environment {
+        switch environmentType {
         case .staging:
             bugsnagConfiguration.releaseStage = "staging"
             bugsnagConfiguration.apiKey = "3e5b13ff2914e5593874d37282c5f40a"
+
         case .production:
             bugsnagConfiguration.releaseStage = "production"
             bugsnagConfiguration.apiKey = "1b2c62d35dbf70232d3b4d4c5aca5ebe"
@@ -29,26 +41,34 @@ public class F4SLog : F4SAnalyticsAndDebugging {
         let userUuid = F4SUser().uuid ?? "first_use_temp_\(UUID().uuidString)"
         bugsnagConfiguration.setUser(userUuid, withName:"", andEmail:"")
         Bugsnag.start(with: bugsnagConfiguration)
-        FirebaseApp.configure()
-        do {
-            f4sDebug = try F4SDebug()
-        } catch (let error) {
-            assertionFailure("Failed to initialize logger: \(error)")
+    }
+    
+    func startFirebase(environmentType: EnvironmentType) {
+        let plistName: String?
+        switch environmentType {
+        case .staging: plistName = "firebase_staging"
+        case .production: plistName = nil
         }
+        guard
+            let plist = plistName,
+            let path = Bundle.main.path(forResource: plist, ofType: "plist"),
+            let firebaseOptions = FirebaseOptions(contentsOfFile: path) else { return }
+        FirebaseApp.configure(options: firebaseOptions)
+        Analytics.setAnalyticsCollectionEnabled(true)
     }
 }
 
 extension F4SLog : F4SAnalytics {
     public func track(event: String) {
-
+        track(event: event, properties: [:])
     }
     
     public func track(event: String, properties: [String : Any]) {
-
+        track(event: event, properties: properties, options: [:])
     }
     
     public func track(event: String, properties: [String : Any], options: [String : Any]) {
-
+        Analytics.logEvent(event, parameters: properties)
     }
     
     public func screen(_ name: ScreenName) {
@@ -60,8 +80,14 @@ extension F4SLog : F4SAnalytics {
     }
     
     func writeScreenToAnalytics(_ name: ScreenName, originScreen origin: ScreenName = .notSpecified) {
-        Analytics.setScreenName(name.rawValue, screenClass: "")
-        print("SCREEN DID APPEAR: \(name.rawValue) from \(origin.rawValue)")
+        let screen = name.rawValue.replacingOccurrences(of: " ", with: "_")
+        let previous = origin.rawValue.replacingOccurrences(of: " ", with: "_")
+        let parameters = [
+            "name": screen,
+            "previous_screen": previous
+        ]
+        Analytics.logEvent("SCREEN", parameters: parameters)
+        print("SCREEN DID APPEAR: \(screen) from \(previous)")
     }
     
     public func identity(userId: F4SUUID) {
