@@ -17,6 +17,6 @@ target 'f4s-workexperience' do
 end
   
 target 'f4s-workexperienceTests' do
-
+    pod 'Firebase/Analytics'
 end
 
