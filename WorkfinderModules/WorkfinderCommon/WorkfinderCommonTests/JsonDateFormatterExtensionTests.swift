@@ -15,7 +15,8 @@ class JsonDateFormatterExtensionTests: XCTestCase {
     
     func test_dateFromString() {
         let date = sut.date(from: "2019-10-30T17:18:19.012Z")!
-        let cal = Calendar(identifier: Calendar.Identifier.gregorian)
+        var cal = Calendar(identifier: Calendar.Identifier.gregorian)
+        cal.timeZone = TimeZone(secondsFromGMT: 0)!
         XCTAssertEqual(cal.component(Calendar.Component.year, from: date), 2019)
         XCTAssertEqual(cal.component(Calendar.Component.month, from: date), 10)
         XCTAssertEqual(cal.component(Calendar.Component.day, from: date), 30)
