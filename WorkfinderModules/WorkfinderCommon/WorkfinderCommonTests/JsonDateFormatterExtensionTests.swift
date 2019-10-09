@@ -3,7 +3,7 @@ import XCTest
 
 class JsonDateFormatterExtensionTests: XCTestCase {
     
-    let dateComponents = DateComponents(calendar: Calendar(identifier: Calendar.Identifier.gregorian), timeZone: nil, era: nil, year: 2019, month: 10, day: 30, hour: 17, minute: 18, second: 19, nanosecond: 12000000, weekday: nil, weekdayOrdinal: nil, quarter: nil, weekOfMonth: nil, weekOfYear: nil, yearForWeekOfYear: nil)
+    let dateComponents = DateComponents(calendar: Calendar(identifier: Calendar.Identifier.gregorian), timeZone: TimeZone(secondsFromGMT: 0), era: nil, year: 2019, month: 10, day: 30, hour: 17, minute: 18, second: 19, nanosecond: 12000000, weekday: nil, weekdayOrdinal: nil, quarter: nil, weekOfMonth: nil, weekOfYear: nil, yearForWeekOfYear: nil)
     
     let sut = DateFormatter.iso8601Full
     
