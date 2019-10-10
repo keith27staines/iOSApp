@@ -10,6 +10,8 @@ import XCTest
 @testable import WorkfinderCommon
 
 class DateExtensionTests: XCTestCase {
+    
+    let calendar = Calendar.workfinderCalendar
 
     func test_date_isEqualToDate_when_true() {
         let date = Date()
@@ -51,35 +53,35 @@ class DateExtensionTests: XCTestCase {
     }
     
     func test_date_rfc3339UtcDateFormatter() {
-        let date = DateComponents(calendar: Calendar(identifier: Calendar.Identifier.gregorian), year: 2010, month: 7, day: 23).date!
+        let date = DateComponents(calendar: calendar, year: 2010, month: 7, day: 23).date!
         XCTAssertTrue(date.dateToStringRfc3339() == "2010-07-22T23:00:00Z")
     }
     
     func test_date_rfc3339UtcDateFormatter_without_subseconds() {
-        let date = DateComponents(calendar: Calendar(identifier: Calendar.Identifier.gregorian), year: 2010, month: 7, day: 23, hour: 3, minute: 9, second: 27).date!
+        let date = DateComponents(calendar: calendar, year: 2010, month: 7, day: 23, hour: 3, minute: 9, second: 27).date!
         XCTAssertTrue(date.dateToStringRfc3339() == "2010-07-23T02:09:27Z")
     }
     
     func test_date_rfc3339UtcDateFormatter_with_subseconds() {
-        let date = DateComponents(calendar: Calendar(identifier: Calendar.Identifier.gregorian), year: 2010, month: 7, day: 23, hour: 3, minute: 9, second: 27).date!.addingTimeInterval(0.1)
+        let date = DateComponents(calendar: calendar, year: 2010, month: 7, day: 23, hour: 3, minute: 9, second: 27).date!.addingTimeInterval(0.1)
         XCTAssertTrue(date.dateToStringRfc3339() == "2010-07-23T02:09:27Z")
     }
     
     func test_date_static_rfc3339UtcDateFormatter_with_subseconds() {
-        let date = DateComponents(calendar: Calendar(identifier: Calendar.Identifier.gregorian), year: 2010, month: 7, day: 23, hour: 3, minute: 9, second: 27).date!
+        let date = DateComponents(calendar: calendar, year: 2010, month: 7, day: 23, hour: 3, minute: 9, second: 27).date!
         let date2 = Date.dateFromRfc3339(string: "2010-07-23T02:09:27Z")
         XCTAssertEqual(date, date2)
     }
     
     func test_date_static_rfc3339UtcDateFormatter() {
-        let date = DateComponents(calendar: Calendar(identifier: Calendar.Identifier.gregorian), year: 2010, month: 7, day: 23, hour: 3, minute: 9, second: 27).date!
+        let date = DateComponents(calendar: calendar, year: 2010, month: 7, day: 23, hour: 3, minute: 9, second: 27).date!
         let df = Date.DateFormatters.rfc3339UtcDateFormatter
         XCTAssertTrue(df.string(from: date) == "2010-07-23")
         XCTAssertTrue(date.rfc3339UtcDate == "2010-07-23")
     }
     
     func test_date_static_rfc3339UtcDateTimeSubsecondFormatter() {
-        let date = DateComponents(calendar: Calendar(identifier: Calendar.Identifier.gregorian), year: 2010, month: 7, day: 23, hour: 3, minute: 9, second: 27).date!
+        let date = DateComponents(calendar: calendar, year: 2010, month: 7, day: 23, hour: 3, minute: 9, second: 27).date!
         let df = Date.DateFormatters.rfc3339UtcDateTimeSubsecondFormatter
         XCTAssertTrue(df.string(from: date) == "2010-07-23T02:09:27.000000Z")
         print(date.rfc3339UtcDateTime)

@@ -8,6 +8,12 @@
 
 import Foundation
 
+public extension Locale {
+    static var workfinder: Locale {
+        return Locale(identifier: "en_GB")
+    }
+}
+
 public extension TimeZone {
     static var workfinder: TimeZone {
         return TimeZone(secondsFromGMT: 0)!
@@ -74,7 +80,7 @@ extension Date {
                 _rfc3339UtcDateTimeFormatter = DateFormatter()
                 _rfc3339UtcDateTimeFormatter?.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale?
                 _rfc3339UtcDateTimeFormatter?.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ssXXXXX"
-                _rfc3339UtcDateTimeFormatter?.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone?
+                _rfc3339UtcDateTimeFormatter?.timeZone = TimeZone.workfinder
             }
             
             return _rfc3339UtcDateTimeFormatter!
@@ -85,7 +91,7 @@ extension Date {
                 _rfc3339UtcDateTimeSubsecondFormatter = DateFormatter()
                 _rfc3339UtcDateTimeSubsecondFormatter?.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale?
                 _rfc3339UtcDateTimeSubsecondFormatter?.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSSSSSXXXXX"
-                _rfc3339UtcDateTimeSubsecondFormatter?.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone?
+                _rfc3339UtcDateTimeSubsecondFormatter?.timeZone = TimeZone.workfinder
             }
             
             return _rfc3339UtcDateTimeSubsecondFormatter!
