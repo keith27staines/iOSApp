@@ -199,7 +199,7 @@ class F4SCalendarTests: XCTestCase {
         let date = DateComponents(calendar: Calendar.workfinderCalendar, year: 2019, month: 8, day: 10).date!
         let sut = F4SCalendar()
         let nextDay = sut.nextDayAfterDayContaining(date: date)
-        let dateComponents = Calendar.current.dateComponents([.year,.month,.day], from:nextDay.start)
+        let dateComponents = Calendar.workfinderCalendar.dateComponents([.year,.month,.day], from:nextDay.start)
         XCTAssertEqual(dateComponents.year, 2019)
         XCTAssertEqual(dateComponents.month, 8)
         XCTAssertEqual(dateComponents.day, 11)
@@ -209,7 +209,7 @@ class F4SCalendarTests: XCTestCase {
         let date = DateComponents(calendar: Calendar.workfinderCalendar, year: 2019, month: 8, day: 10).date!
         let sut = F4SCalendar()
         let previousDay = sut.previousDayBeforeDayContaining(date: date)
-        let dateComponents = Calendar.current.dateComponents([.year,.month,.day], from:previousDay.start)
+        let dateComponents = Calendar.workfinderCalendar.dateComponents([.year,.month,.day], from:previousDay.start)
         XCTAssertEqual(dateComponents.year, 2019)
         XCTAssertEqual(dateComponents.month, 8)
         XCTAssertEqual(dateComponents.day, 9)
