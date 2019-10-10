@@ -8,6 +8,21 @@
 
 import Foundation
 
+public extension TimeZone {
+    static var workfinder: TimeZone {
+        return TimeZone(secondsFromGMT: 0)!
+    }
+}
+
+public extension Calendar {
+    
+    static var workfinderCalendar: Calendar {
+        var calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        calendar.timeZone = TimeZone.workfinder
+        return calendar
+    }
+}
+
 public extension Date {
     /// Returns true if the current instance is greater than the specified date, otherwise false
     func isGreaterThanDate(dateToCompare: Date) -> Bool {
