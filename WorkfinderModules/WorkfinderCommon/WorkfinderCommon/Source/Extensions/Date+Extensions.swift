@@ -10,7 +10,7 @@ import Foundation
 
 public extension Locale {
     static var workfinder: Locale {
-        return Locale(identifier: "en_GB")
+        return Locale(identifier: "en_US_POSIX")
     }
 }
 

@@ -19,8 +19,8 @@ class F4SAvailabilityPeriodTests: XCTestCase {
     var daysAndHours: F4SDaysAndHoursModel!
 
     override func setUp() {
-        firstDate = DateComponents(calendar: Calendar.current, year: 2000, month: 10, day: 27).date!
-        lastDate = DateComponents(calendar: Calendar.current, year: 2000, month: 11, day: 15).date!
+        firstDate = DateComponents(calendar: Calendar.workfinderCalendar, year: 2000, month: 10, day: 27).date!
+        lastDate = DateComponents(calendar: Calendar.workfinderCalendar, year: 2000, month: 11, day: 15).date!
         firstDay  = F4SCalendarDay(cal: f4sCalendar, date: firstDate)
         lastDay  = F4SCalendarDay(cal: f4sCalendar, date: lastDate)
         daysAndHours = F4SDaysAndHoursModel()
@@ -44,12 +44,12 @@ class F4SAvailabilityPeriodTests: XCTestCase {
     func test_makeAvailabilityPeriodJson() {
         let sut = F4SAvailabilityPeriod(firstDay: firstDay, lastDay: lastDay, daysAndHours: daysAndHours)
         let json = sut.makeAvailabilityPeriodJson()
-        XCTAssertTrue(json.start_date == "2000-10-27")
-        XCTAssertTrue(json.end_date == "2000-11-15")
+        XCTAssertEqual(json.start_date, "2000-10-27")
+        XCTAssertEqual(json.end_date, "2000-11-15")
         XCTAssertTrue(json.day_time_info!.count == 5)
     }
     
-    func test_inialise_from_availabilityPeriodJson() {
+    func test_initalise_from_availabilityPeriodJson() {
         let daysAndHours = [
             F4SDayTimeInfoJson(day: F4SDayOfWeek.friday, hourType: F4SHoursType.am)
         ]
@@ -58,11 +58,11 @@ class F4SAvailabilityPeriodTests: XCTestCase {
         let s: [F4SDayAndHourSelection] = (sut.daysAndHours?.allDays.filter({ (d) -> Bool in
             d.dayIsSelected == true
         }))!
-        XCTAssertTrue(s.count == 1)
-        XCTAssertTrue(s.first!.dayOfWeek == .friday)
-        XCTAssertTrue(s.first!.hoursType == .am)
-        XCTAssertTrue(sut.firstDay?.dayOfMonth == 27)
-        XCTAssertTrue(sut.lastDay?.dayOfMonth == 15)
+        XCTAssertEqual(s.count, 1)
+        XCTAssertEqual(s.first!.dayOfWeek, .friday)
+        XCTAssertEqual(s.first!.hoursType, .am)
+        XCTAssertEqual(sut.firstDay?.dayOfMonth, 27)
+        XCTAssertEqual(sut.lastDay?.dayOfMonth, 15)
     }
     
     func test_nullify_interval_when_firstDay_in_future() {
@@ -71,8 +71,8 @@ class F4SAvailabilityPeriodTests: XCTestCase {
         lastDay.dateToday = dateToday
         let sut = F4SAvailabilityPeriod(firstDay: firstDay, lastDay: lastDay, daysAndHours: daysAndHours)
         let modifiedSut = sut.nullifyingInvalidStartOrEndDates()
-        XCTAssertTrue(modifiedSut.firstDay == firstDay)
-        XCTAssertTrue(modifiedSut.lastDay  == lastDay)
+        XCTAssertEqual(modifiedSut.firstDay, firstDay)
+        XCTAssertEqual(modifiedSut.lastDay, lastDay)
         XCTAssertNotNil(modifiedSut.daysAndHours)
     }
     
