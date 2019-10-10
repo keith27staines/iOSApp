@@ -3,7 +3,7 @@ import XCTest
 
 class JsonDateFormatterExtensionTests: XCTestCase {
     
-    let dateComponents = DateComponents(calendar: Calendar(identifier: Calendar.Identifier.gregorian), timeZone: nil, era: nil, year: 2019, month: 10, day: 30, hour: 17, minute: 18, second: 19, nanosecond: 12000000, weekday: nil, weekdayOrdinal: nil, quarter: nil, weekOfMonth: nil, weekOfYear: nil, yearForWeekOfYear: nil)
+    let dateComponents = DateComponents(calendar: Calendar(identifier: Calendar.Identifier.gregorian), timeZone: TimeZone(secondsFromGMT: 0), era: nil, year: 2019, month: 10, day: 30, hour: 17, minute: 18, second: 19, nanosecond: 12000000, weekday: nil, weekdayOrdinal: nil, quarter: nil, weekOfMonth: nil, weekOfYear: nil, yearForWeekOfYear: nil)
     
     let sut = DateFormatter.iso8601Full
     
@@ -15,7 +15,8 @@ class JsonDateFormatterExtensionTests: XCTestCase {
     
     func test_dateFromString() {
         let date = sut.date(from: "2019-10-30T17:18:19.012Z")!
-        let cal = Calendar(identifier: Calendar.Identifier.gregorian)
+        var cal = Calendar(identifier: Calendar.Identifier.gregorian)
+        cal.timeZone = TimeZone(secondsFromGMT: 0)!
         XCTAssertEqual(cal.component(Calendar.Component.year, from: date), 2019)
         XCTAssertEqual(cal.component(Calendar.Component.month, from: date), 10)
         XCTAssertEqual(cal.component(Calendar.Component.day, from: date), 30)

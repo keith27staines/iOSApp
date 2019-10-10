@@ -166,6 +166,7 @@
 		FCF4B653232BC49A001340DF /* WorkfinderOnboardingUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCF4B651232BC49A001340DF /* WorkfinderOnboardingUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCF5AF2B2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF2A2248BE1A00D9B8D1 /* WorkfinderApplyUseCase.framework */; };
 		FCF5AF2C2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF2A2248BE1A00D9B8D1 /* WorkfinderApplyUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FCF992D3234CE01B00DBC179 /* firebase_staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCF992D2234CE01B00DBC179 /* firebase_staging.plist */; };
 		FCFB1328224930660086BE25 /* Mustache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCFB1327224930660086BE25 /* Mustache.framework */; };
 		FCFB1329224930660086BE25 /* Mustache.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCFB1327224930660086BE25 /* Mustache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCFBD0192250D9FF00A9361D /* AppCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A48221714B800DC335B /* AppCoordinatorTests.swift */; };
@@ -340,6 +341,7 @@
 		FC21BE2C220F53EB00A0A389 /* FilterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
 		FC21BE2E220F53EB00A0A389 /* SearchViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewProtocol.swift; sourceTree = "<group>"; };
 		FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyPin.swift; sourceTree = "<group>"; };
+		FC2E456A234CB5EF00121496 /* Bugsnag.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bugsnag.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDebugViewController.swift; sourceTree = "<group>"; };
 		FC31F096204D54E3009DD526 /* Debug.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
 		FC3CD1D9221566F200F91B50 /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 		FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupAnimator.swift; sourceTree = "<group>"; };
 		FCF4B651232BC49A001340DF /* WorkfinderOnboardingUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderOnboardingUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF5AF2A2248BE1A00D9B8D1 /* WorkfinderApplyUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderApplyUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCF992D2234CE01B00DBC179 /* firebase_staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = firebase_staging.plist; sourceTree = "<group>"; };
 		FCFB1327224930660086BE25 /* Mustache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mustache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCFBD0062250D69700A9361D /* f4s-workexperienceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "f4s-workexperienceTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCFBD00A2250D69700A9361D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -508,6 +511,7 @@
 		40E78E0A1DD31A86000A3776 = {
 			isa = PBXGroup;
 			children = (
+				FCF992D2234CE01B00DBC179 /* firebase_staging.plist */,
 				FC4066FC23277D8F002B425E /* WorkfinderDocumentUploadUseCase.framework */,
 				FC06605123264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework */,
 				FC53D6DF2323C56F00A339ED /* WorkfinderUserDetailsUseCase.framework */,
@@ -693,6 +697,7 @@
 		74E1A74324CAFF4EF516E014 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC2E456A234CB5EF00121496 /* Bugsnag.framework */,
 				FCF4B651232BC49A001340DF /* WorkfinderOnboardingUseCase.framework */,
 				FC0C7110232BB31B00816332 /* WorkfinderMessagesUseCase.framework */,
 				FC0C6FD7232B7E5700816332 /* WorkfinderRecommendations.framework */,
@@ -1133,6 +1138,7 @@
 				FCFBD0022250D69700A9361D /* Sources */,
 				FCFBD0032250D69700A9361D /* Frameworks */,
 				FCFBD0042250D69700A9361D /* Resources */,
+				1CDB8E11A64F63A7519457F9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1226,6 +1232,7 @@
 				D54E0FFD1E044B0400A51560 /* InfoWindowView.xib in Resources */,
 				40A5CF3A1DED6F8D000007AB /* InterestsView.storyboard in Resources */,
 				40E78E951DD391F3000A3776 /* MapView.storyboard in Resources */,
+				FCF992D3234CE01B00DBC179 /* firebase_staging.plist in Resources */,
 				FC72219F20FE248400F10953 /* Appfile in Resources */,
 				FCCD6AE71FBB42A90088D7C7 /* PopupCompanyList.storyboard in Resources */,
 				FC5D3C6E20FE1CEC00F89169 /* Gemfile in Resources */,
@@ -1245,6 +1252,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1CDB8E11A64F63A7519457F9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-f4s-workexperienceTests/Pods-f4s-workexperienceTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-f4s-workexperienceTests/Pods-f4s-workexperienceTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		55F8DBD1DF6661334AF6927A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1252,25 +1279,25 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-f4s-workexperience/Pods-f4s-workexperience-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Analytics/Analytics.framework",
 				"${BUILT_PRODUCTS_DIR}/Bugsnag/Bugsnag.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
-				"${BUILT_PRODUCTS_DIR}/Segment-Bugsnag/Segment_Bugsnag.framework",
 				"${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Analytics.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bugsnag.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Segment_Bugsnag.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1605,7 +1632,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
@@ -1693,7 +1720,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
@@ -1787,7 +1814,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
@@ -1875,7 +1902,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";

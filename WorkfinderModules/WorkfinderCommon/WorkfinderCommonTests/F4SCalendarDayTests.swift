@@ -1,10 +1,3 @@
-//
-//  F4SCalendarDayTests.swift
-//  HoursPicker2Tests
-//
-//  Created by Keith Dev on 20/03/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
-//
 
 import XCTest
 @testable import WorkfinderCommon
@@ -21,7 +14,7 @@ class F4SCalendarDayTests: XCTestCase {
         dateComponents.month = 2   // February
         dateComponents.day = 1     // 1st February
         dateComponents.hour = 12   // Midday 1stFebruary
-        let calendar = Calendar(identifier: .gregorian)
+        let calendar = Calendar.workfinderCalendar
         return calendar.date(from: dateComponents)!
     }
     
@@ -93,8 +86,8 @@ class F4SCalendarDayTests: XCTestCase {
     func test_interval() {
         let sut = F4SCalendarDay(cal: f4sCalendar, date: februaryDateNonLeapYear)
         let interval = sut.interval
-        XCTAssertTrue(interval.duration == 86400.0)
-        XCTAssertTrue(interval.start.dateToStringRfc3339() == "2017-02-01T00:00:00Z")
+        XCTAssertEqual(interval.duration, 86400.0)
+        XCTAssertEqual(interval.start.dateToStringRfc3339(), "2017-02-01T00:00:00Z")
     }
     
     func test_isToday() {

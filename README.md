@@ -29,28 +29,28 @@ This readme describes what you need to know and do in order to build an iOS Work
 
 ### Product Description
 
-iOS Workfinder is a native iPhone-only app written exclusively in Swift. It is part of the Founders4Schools portfolio. iOS Workfinder's main use case is to enable students to quickly find work experience placements with businesses in their area.
+iOS Workfinder is a native iPhone-only app written exclusively in Swift 5. It is part of the Workfinder LTD portfolio. iOS Workfinder's main use case is to enable students to quickly find work experience placements with businesses in their area.
 
 ### Development Computer
 
-Development should be done on a Mac running macOS Mojave or later. 
+Development should be done on a Mac running macOS Cataline or later. 
 
 Warning: Do not use a beta version of the operating system if you intend to build a release. A build built with a beta version of macOS can be uploaded to Testflight for beta testing but cannot be released to the Appstore.
 
 ### Development Environment
 
-Xcode is the single absolutely required tool. Various other tools might be helpful in various contexts and for various purposes but none are strictly required. Xcode 10.2 is required. Later versions might incur the cost of having to eliminate build warnings.  Earlier versions will not build the code.
+Xcode is the single absolutely required tool. Various other tools might be helpful in various contexts and for various purposes but none are strictly required. Xcode 11 is required. Later versions might incur the cost of having to eliminate build warnings.  Earlier versions will not build the code.
 
 Warning: Do not use a beta version of Xcode if you intend to build a release. A build built with a beta version of Xcode can be uploaded to Testflight for beta testing but cannot be released to the Appstore.
 
 ### Language
 
-The main project which includes all in-house written code is exclusively Swift 4.2. In contrast, the external 3rd party libraries use a variety of earlier versions of Swift and Objective C. 
+The main project which includes all in-house written code is exclusively Swift 5. In contrast, the external 3rd party libraries use a variety of earlier versions of Swift and Objective C. 
 
 ### Target device and iOS version
 
 The target device is an iPhone 5s or later.
-The target version of iOS is iOS 10.0 or later
+The target version of iOS is iOS 11.0 or later
 
 ### Sourcecode Repository
 
@@ -58,7 +58,7 @@ The iOS Workfinder repo is https://github.com/workfinder/iOSApp
 
 ### Branching strategy
 
-The *master* branch can be used to build the current production release. *Master* also serves as the source branch for live patches. When active development is in progress, a *develop* branch is branched from *master*, and then feature branches are branched from *develop*.
+The *master* branch can be used to build the current production release and should be used for nothing other than that. *Master* also serves as the source branch for live patches. When active development is in progress, a *develop* branch is branched from *master*, and then feature branches are branched from *develop*. Basically, this is a GitFlow pattern (not )
 
 Typically, when a feature branch is ready for merging into *master*, it is first rebased on *master* being the merge.
 
@@ -66,15 +66,15 @@ When a feature branch is completed it is merged into *develop* and then deleted.
 
 ### Step-by-step guid to building a release
 
-1. You will need to have a paid Apple developer account which is also a member of the Founders4Schools iOS team. Alternatively, if you have been given access by F4S, you can use the already correctly configured account dev@founders4schools.org.uk.
+1. You will need to have an Apple developer account which is also a member of the Founders4Schools iOS team. Alternatively, if you have been given access by F4S, you can use the already correctly configured account dev@founders4schools.org.uk.
 
-2. Use a computer running macOS Mojave. More or less any machine will do in a pinch, from a 2013 MacBook Air up, but you will experience far less frustration if you have a machine with 8GB+ RAM and a multi-core processor.
+2. Use a computer running macOS Catalina. More or less any machine will do in a pinch, from a 2013 MacBook Air up, but you will experience far less frustration if you have a machine with 8GB+ RAM and a multi-core processor.
 
 3. Install Xcode from the Mac Appstore if not already installed.
 
 4. In the Xcode  preferences pane, add the developer's account if not already done
 
-5. In the Xcode preferences pane, add an appropriate Github account if not already done. Ensure that HTTPS is selected rather than SSH.
+5. In the Xcode preferences pane, add an appropriate Github account with access to https://github.com/workfinder/iOSApp if not already done. Ensure that HTTPS is selected rather than SSH.
 
 6. All other Xcode settings can be safely left at their default values.
 
@@ -90,12 +90,12 @@ When a feature branch is completed it is merged into *develop* and then deleted.
 
 12. Perform these sanity checks (which will help you introduce yourself to the project)
 
-1. Make sure that the scheme dropdown in Xcode has the f4s_f4s_staging scheme selected rather than f4s_f4s_live. If this is not the case, select the staging scheme. You want to build and test against the staging environment, not production.
+1. Make sure that the scheme dropdown in Xcode has the f4s_f4s_staging scheme selected rather than f4s_f4s_live. If this is not the case, select the staging scheme. You want to build and release to the staging environment first, not production.
 2. Use the Xcode control navigator to explore Xcode's current understanding of the branches. Under "Branches", You should see the local master branch. Under "Remotes", you should see "origin/master". If there are additional branches under "Branches", take this opportunity to select the one you wish to work on.
-3. Built the app "cmd + B". The build should complete successfully. There will be build warnings (yellow) but there shouldn't be any errors (red). You might wonder how this worked straight away without having to go through cocoapods to install the 3rd party libraries that the project depends on. The answer is that all the code required to build the 3rd party libraries is already included in the Git repo, so building the app from the repo is essentially trivial. The counterside to this convenience however is that more work needs to be done when the 3rd party libraries are updated, or when new libraries are added. However, if you are patching a live fault, this is unlikely to be of concern to you and you will probably welcome the convenience of a "no-brainer" first time build.
-4. At this stage it is worthwhile to examine the warnings that will have been issued by Xcode during the build. Use Xcode's issue navigator to do this. What you are likely to see is something of the order of 10 build warnings (down from 70+ in previous builds). Drill deeper and you will find that almost all of them are warnings arising from building the 3rd party libraries, and only wo are associated with the in-house code. The build warnings against the 3rd party frameworks represent technical debt incurred by them, and, while annoying, can they can usually be safely ignored. The warning from the in-house code can also, for the moment at least, be safely ignored. 
+3. Built the app "cmd + B". The build should complete successfully. There might be build warnings (yellow) but there shouldn't be any errors (red). You might wonder how this worked straight away without having to go through cocoapods to install the 3rd party libraries that the project depends on. The answer is that all the code required to build the 3rd party libraries is already included in the Git repo, so building the app from the repo is essentially trivial. The counterside to this convenience however is that more work needs to be done when the 3rd party libraries are updated, or when new libraries are added. However, if you are patching a live fault, this is unlikely to be of concern to you and you will probably welcome the convenience of a "no-brainer" first time build.
+4. At this stage it is worthwhile to examine the warnings that will have been issued by Xcode during the build. Use Xcode's issue navigator to do this. At the time of writing there are zero build warnings (down from 70+ in builds earlier in the year). If you do see a build warning, drill deeper and you will find they arise from 3rd party libraries. Our in-house code is currently clean. The build warnings against the 3rd party frameworks represent technical debt incurred by them, and, while annoying, can they can usually be safely ignored. Any warning from the in-house code can also, for the moment at least, be safely ignored. 
 5. Use Xcode's project navigator to explore the project structure. You will see that the internal name for the project is f4s-workexperience. Under this top level project you will find a number of folders that hold the in-house source code and various configuration files. You will also see a number of subprojects in the "Pods" folder. The pods represent the 3rd party frameworks that the project depends on, and typically you will not need to touch them.
-6. Now it is time to actually run the app. Immediately to the right of Xcode's scheme selector, you will see the device selector. Choose the iPhone 6s simulator from the list, then build and run (cmd+r). It is typically much quicker to develop against a simulator than a real device, but there are some limitations. For example, push notifcation will not be received, and you will need to specify your location manually. Alternatively, plug an iOS device into your computer and trust the computer. Xcode will configure your device to support debugging. This can take quite a while but only needs to be done once. Once you have your device trusted and equipped for debugging under Xcode, you can select it from the device list and run the app 
+6. Now it is time to actually run the app. Immediately to the right of Xcode's scheme selector, you will see the device selector. Choose the latest iPhone simulator from the list, then build and run (cmd+r). It is typically much quicker to develop against a simulator than a real device, but there are some limitations. For example, push notifcation will not be received, and you will need to specify your location manually. Alternatively, plug an iOS device into your computer and trust the computer. Xcode will configure your device to support debugging. This can take quite a while but only needs to be done once. Once you have your device trusted and equipped for debugging under Xcode, you can select it from the device list and run the app 
 
 13.  Use Xcode's plethora of debugging tools to reproduce, identify, and fix the fault you need to address. 
 

@@ -15,12 +15,11 @@ public class F4SCalendar {
     private var displayMonths : [F4SDisplayableMonth]
     public private (set) var selectionStates: [Date:Int]
     
-    
     /// Initialises a new instance
     ///
     /// - Parameter date: The first fully displayable month on the calendar will contain this date
     public init(date: Date = Date()) {
-        var calendar = Calendar(identifier: .gregorian)
+        var calendar = Calendar.workfinderCalendar
         dateFormatter = DateFormatter()
         calendar.firstWeekday = F4SDayOfWeek.monday.traditionalDayNumber
         self.calendar = calendar

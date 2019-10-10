@@ -142,6 +142,7 @@ public struct F4SAvailabilityPeriod {
     static func dateFromString(_ dateString: String?) -> Date? {
         guard let dateString = dateString else { return nil }
         let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone.workfinder
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let date = dateFormatter.date(from: dateString)
         return date
