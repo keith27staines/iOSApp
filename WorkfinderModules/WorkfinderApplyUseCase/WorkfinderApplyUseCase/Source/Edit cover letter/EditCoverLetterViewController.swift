@@ -346,7 +346,7 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
             bigFooterView = EditFooterView(frame: CGRect(x: 0, y: 0, width: self.coverLetterTableView.frame.size.width, height: bigFooterSize))
             return bigFooterView
         case .motivation:
-            let string = NSLocalizedString("Describe what motivated you to apply in up to 1000 characters. We strongly advise you to write this yourself rather than rely on default text we will otherwise provide for you", comment: "")
+            let string = NSLocalizedString("Describe what motivated you to apply in up to 1000 characters. We strongly advise you to write this yourself.", comment: "")
             EditFooterView.footerString = string
             bigFooterView = EditFooterView(frame: CGRect(x: 0, y: 0, width: self.coverLetterTableView.frame.size.width, height: bigFooterSize))
             return bigFooterView
