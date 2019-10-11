@@ -32,7 +32,7 @@ class MotivationTextModel {
         }
     }
     let maxCharacters = 1000
-    var characterCountText: String { return "\(text.count) of \(maxCharacters)" }
+    var characterCountText: String { return "\(text.count) of \(maxCharacters) characters" }
     var editingEnabled: Bool {
         return option == .custom ? true : false
     }
