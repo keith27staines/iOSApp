@@ -95,6 +95,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         let coverLetterStoryboard = UIStoryboard(name: "EditCoverLetter", bundle: __bundle)
         let editor = coverLetterStoryboard.instantiateViewController(withIdentifier: "EditCoverLetterCtrl") as! EditCoverLetterViewController
         editor.coordinator = self
+        editor.suppressMotivationField = (injected.user.age() ?? 0) < 18 ? true : false
         editor.blanksModel = applicationModel.blanksModel
         editor.motivationTextModel = applicationModel.motivationTextModel
         editor.availabilityPeriodJson = applicationModel.availabilityPeriodJson
