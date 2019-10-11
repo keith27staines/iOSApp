@@ -21,6 +21,8 @@ class MotivationEditorViewController: UIViewController, MotivationTextModelDeleg
         title = NSLocalizedString("Motivation", comment: "")
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateFromModel()
@@ -34,6 +36,10 @@ class MotivationEditorViewController: UIViewController, MotivationTextModelDeleg
             selector: #selector(handleKeyboardHidden),
             name: UIResponder.keyboardDidHideNotification,
             object: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        handleOptionPickerChange()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -60,14 +66,13 @@ class MotivationEditorViewController: UIViewController, MotivationTextModelDeleg
             bottom: frameKeyboard.size.height,
             right: 0.0
         )
-        characterCountLabel.isHidden = false
-        characterCountLabel.text = model.characterCountText
+        keyboardToolbar.isHidden = false
         view.layoutIfNeeded()
     }
     
     @objc func handleKeyboardHidden(notification: Notification) {
         motivationText.contentInset = .zero
-        characterCountLabel.isHidden = true
+        keyboardToolbar.isHidden = true
         view.layoutIfNeeded()
     }
     
@@ -83,12 +88,12 @@ class MotivationEditorViewController: UIViewController, MotivationTextModelDeleg
     func configureViews() {
         view.backgroundColor = UIColor.white
         view.addSubview(mainStack)
-        mainStack.fillSuperview(padding: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
+        mainStack.fillSuperview(padding: UIEdgeInsets(top: 8, left: 8, bottom: 44, right: 8))
         setupNavigationBar()
     }
     
     lazy var optionPicker: UISegmentedControl = {
-        let view = UISegmentedControl(items: [NSLocalizedString("Default", comment: ""),NSLocalizedString("Custom", comment: "")])
+        let view = UISegmentedControl(items: [NSLocalizedString("Default", comment: ""),NSLocalizedString("In your own words", comment: "")])
         view.translatesAutoresizingMaskIntoConstraints = false
         view.addTarget(self, action: #selector(handleOptionPickerChange), for: UIControl.Event.valueChanged)
         return view
@@ -96,10 +101,19 @@ class MotivationEditorViewController: UIViewController, MotivationTextModelDeleg
     
     @objc func handleOptionPickerChange() {
         model.selectedIndex = optionPicker.selectedSegmentIndex
+        switch model.selectedIndex {
+        case 0:
+            motivationText.resignFirstResponder()
+        case 1:
+            motivationText.becomeFirstResponder()
+        default:
+            break
+        }
     }
     
     @objc func handleTextChanged() {
         model.text = motivationText.text ?? ""
+        characterCountLabel.text = model.characterCountText
     }
     
     @objc func hideKeyboard() {
@@ -117,15 +131,20 @@ class MotivationEditorViewController: UIViewController, MotivationTextModelDeleg
         view.delegate = self
         view.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
         view.inputAccessoryView = self.keyboardToolbar
+        view.layer.borderColor = UIColor.darkGray.cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 16
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowRadius = 16
+        view.layer.shadowOpacity = 0.5
         return view
     }()
     
     lazy var keyboardToolbar: UIToolbar = {
         let bar = UIToolbar()
         let hide = UIBarButtonItem(title: "Hide", style: UIBarButtonItem.Style.plain, target: self, action: #selector(hideKeyboard))
-        let characters = UIBarButtonItem(customView: self.characterCountLabel)
         let space = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        bar.items = [characters, space, hide]
+        bar.items = [space, hide]
         bar.sizeToFit()
         self.characterCountLabel.text = self.model.characterCountText
         self.characterCountLabel.frame.size = CGSize(width: 100, height: bar.frame.height)
@@ -133,11 +152,36 @@ class MotivationEditorViewController: UIViewController, MotivationTextModelDeleg
     }()
     
     lazy var characterCountLabel: UILabel = {
-        return UILabel()
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption1)
+        return label
+    }()
+    
+    lazy var headingText: UILabel = {
+        let label = UILabel()
+        label.text = NSLocalizedString("Describe what motivated you to apply", comment: "")
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title2)
+        return label
+    }()
+    
+    lazy var instructionText: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption1)
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.text = NSLocalizedString("We advise you to describe your motivation in your own words rather than rely on the default text we we provide", comment: "")
+        return label
     }()
     
     lazy var mainStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [self.optionPicker, self.motivationText])
+        let views = [self.headingText,
+                     self.instructionText,
+                     self.optionPicker,
+                     self.characterCountLabel,
+                     self.motivationText]
+        let stack = UIStackView(arrangedSubviews: views)
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.spacing = 8
         stack.axis = .vertical

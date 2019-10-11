@@ -24,6 +24,8 @@ class EditCoverLetterViewController: UIViewController {
     var coordinator: EditCoverLetterViewControllerCoordinatorProtocol?
     var motivationTextModel: MotivationTextModel!
     
+    var suppressMotivationField: Bool = false
+    
     var blanksModel: ApplicationLetterTemplateBlanksModelProtocol? {
         didSet {
             updateFromModel()
@@ -38,6 +40,10 @@ class EditCoverLetterViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupNavigationBar()
+        if suppressMotivationField {
+            motivationTextModel.selectedIndex = 0
+            blanksModel?.updateMotivationBlank(motivationTextModel.text)
+        }
         updateFromModel()
     }
     
@@ -110,7 +116,7 @@ extension EditCoverLetterViewController :  F4SCalendarCollectionViewControllerDe
 // MARK: -UITableViewDelegate,UITableViewDataSource
 extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in _: UITableView) -> Int {
-        return 6
+        return suppressMotivationField ? 5 : 6
     }
 
     func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
