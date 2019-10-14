@@ -14,6 +14,7 @@ public class F4SPlacementApplicationService : F4SDataTaskService, F4SPlacementAp
     public func apply(with json: F4SCreatePlacementJson,
         completion: @escaping (F4SNetworkResult<F4SPlacementJson>) -> Void) {
         let attempting = "Apply"
+        relativeUrlString = nil
         beginSendRequest(verb: .post, objectToSend: json, attempting: "Apply") { [weak self] (result) in
             self?.processResult(result, attempting: attempting, completion: completion)
         }
