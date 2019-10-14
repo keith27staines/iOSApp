@@ -103,6 +103,7 @@
 		FC3CD1DA221566F200F91B50 /* Geocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CD1D9221566F200F91B50 /* Geocoding.swift */; };
 		FC4066FD23277D8F002B425E /* WorkfinderDocumentUploadUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4066FC23277D8F002B425E /* WorkfinderDocumentUploadUseCase.framework */; };
 		FC4066FE23277D8F002B425E /* WorkfinderDocumentUploadUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC4066FC23277D8F002B425E /* WorkfinderDocumentUploadUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FC4802C22354AD9300AF8F6D /* firebase_live.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC4802C12354AD9300AF8F6D /* firebase_live.plist */; };
 		FC50E9CE2213EF5400C9A621 /* SearchModeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */; };
 		FC53D6E12323C56F00A339ED /* WorkfinderUserDetailsUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC53D6DF2323C56F00A339ED /* WorkfinderUserDetailsUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC5CBA51231D2A4700C2D3C5 /* WorkfinderAcceptUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC5CBA50231D2A4700C2D3C5 /* WorkfinderAcceptUseCase.framework */; };
@@ -346,6 +347,7 @@
 		FC31F096204D54E3009DD526 /* Debug.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
 		FC3CD1D9221566F200F91B50 /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
 		FC4066FC23277D8F002B425E /* WorkfinderDocumentUploadUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderDocumentUploadUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC4802C12354AD9300AF8F6D /* firebase_live.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = firebase_live.plist; sourceTree = "<group>"; };
 		FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModeSelectorView.swift; sourceTree = "<group>"; };
 		FC53D6DF2323C56F00A339ED /* WorkfinderUserDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUserDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5CBA50231D2A4700C2D3C5 /* WorkfinderAcceptUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAcceptUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -511,6 +513,7 @@
 		40E78E0A1DD31A86000A3776 = {
 			isa = PBXGroup;
 			children = (
+				FC4802C12354AD9300AF8F6D /* firebase_live.plist */,
 				FCF992D2234CE01B00DBC179 /* firebase_staging.plist */,
 				FC4066FC23277D8F002B425E /* WorkfinderDocumentUploadUseCase.framework */,
 				FC06605123264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework */,
@@ -1239,6 +1242,7 @@
 				FC681C001F57473D0077BECA /* Podfile in Resources */,
 				FCA53B971FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib in Resources */,
 				FC5D3C6C20FE17F600F89169 /* config.yml in Resources */,
+				FC4802C22354AD9300AF8F6D /* firebase_live.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1632,7 +1636,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
@@ -1720,7 +1724,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
@@ -1814,7 +1818,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
@@ -1902,7 +1906,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";

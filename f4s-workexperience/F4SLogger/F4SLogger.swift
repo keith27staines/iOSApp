@@ -47,7 +47,7 @@ public class F4SLog : F4SAnalyticsAndDebugging {
         let plistName: String?
         switch environmentType {
         case .staging: plistName = "firebase_staging"
-        case .production: plistName = nil
+        case .production: plistName = "firebase_live"
         }
         guard
             let plist = plistName,
