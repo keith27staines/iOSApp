@@ -44,12 +44,15 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     let environment: EnvironmentType = Config.environment
     let wexApiKey = Config.wexApiKey
     let baseUrlString = Config.workfinderApiBase
+    let remoteConfig: RemoteConfiguration
     
     init(registrar: RemoteNotificationsRegistrarProtocol,
          launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
         self.registrar = registrar
         self.launchOptions = launchOptions
         self.log = F4SLog()
+        self.remoteConfig = RemoteConfiguration()
+        self.remoteConfig.start()
     }
     
     lazy var networkConfiguration: NetworkConfig = {

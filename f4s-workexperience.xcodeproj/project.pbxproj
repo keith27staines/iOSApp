@@ -97,6 +97,7 @@
 		FC21BE3B220F53EB00A0A389 /* SearchViewStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21BE2A220F53EB00A0A389 /* SearchViewStateMachine.swift */; };
 		FC21BE3D220F53EB00A0A389 /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21BE2C220F53EB00A0A389 /* FilterButton.swift */; };
 		FC21BE3F220F53EB00A0A389 /* SearchViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21BE2E220F53EB00A0A389 /* SearchViewProtocol.swift */; };
+		FC21C0832356E33F006DE5A4 /* RemoteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21C0822356E33F006DE5A4 /* RemoteConfiguration.swift */; };
 		FC25A05F1F850DF4002F51A9 /* F4SCompanyPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */; };
 		FC31F095204D54C6009DD526 /* F4SDebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */; };
 		FC31F097204D54E3009DD526 /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC31F096204D54E3009DD526 /* Debug.storyboard */; };
@@ -341,6 +342,7 @@
 		FC21BE2A220F53EB00A0A389 /* SearchViewStateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewStateMachine.swift; sourceTree = "<group>"; };
 		FC21BE2C220F53EB00A0A389 /* FilterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
 		FC21BE2E220F53EB00A0A389 /* SearchViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewProtocol.swift; sourceTree = "<group>"; };
+		FC21C0822356E33F006DE5A4 /* RemoteConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfiguration.swift; sourceTree = "<group>"; };
 		FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyPin.swift; sourceTree = "<group>"; };
 		FC2E456A234CB5EF00121496 /* Bugsnag.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bugsnag.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDebugViewController.swift; sourceTree = "<group>"; };
@@ -793,6 +795,7 @@
 		FC1DFD86222B9C67001951ED /* Models and services */ = {
 			isa = PBXGroup;
 			children = (
+				FC21C0812356E309006DE5A4 /* ABTesting */,
 				FC0C710F232BB1D100816332 /* F4SAuth0MagicLinkInterpreterer.swift */,
 				40E78E4E1DD328A4000A3776 /* Components */,
 				FC8E303620F4A5DF006059DE /* F4SLogger */,
@@ -864,6 +867,14 @@
 				FC21BE2C220F53EB00A0A389 /* FilterButton.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		FC21C0812356E309006DE5A4 /* ABTesting */ = {
+			isa = PBXGroup;
+			children = (
+				FC21C0822356E33F006DE5A4 /* RemoteConfiguration.swift */,
+			);
+			name = ABTesting;
 			sourceTree = "<group>";
 		};
 		FC24D231226AED2B00FA04A1 /* Home Tab */ = {
@@ -1468,6 +1479,7 @@
 				FC11006A1FB36A230055EB9A /* ReachabilityExtension.swift in Sources */,
 				FC8E303A20F4A60B006059DE /* F4SLogger.swift in Sources */,
 				FC31F095204D54C6009DD526 /* F4SDebugViewController.swift in Sources */,
+				FC21C0832356E33F006DE5A4 /* RemoteConfiguration.swift in Sources */,
 				FC860D82209C37F2007945E6 /* MessageDispatcher.swift in Sources */,
 				40E78E581DD32964000A3776 /* Constants.swift in Sources */,
 				FCC1DF5B232505640074D5C1 /* CompanyCoordinatorFactory.swift in Sources */,
