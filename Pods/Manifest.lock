@@ -7,6 +7,13 @@ PODS:
     - FirebaseAnalytics (= 6.1.2)
   - Firebase/CoreOnly (6.9.0):
     - FirebaseCore (= 6.3.0)
+  - Firebase/RemoteConfig (6.9.0):
+    - Firebase/CoreOnly
+    - FirebaseRemoteConfig (~> 4.4.1)
+  - FirebaseABTesting (3.1.2):
+    - FirebaseAnalyticsInterop (~> 1.3)
+    - FirebaseCore (~> 6.1)
+    - Protobuf (>= 3.9.2, ~> 3.9)
   - FirebaseAnalytics (6.1.2):
     - FirebaseCore (~> 6.3)
     - FirebaseInstanceID (~> 4.2)
@@ -16,6 +23,7 @@ PODS:
     - GoogleUtilities/Network (~> 6.0)
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
     - nanopb (~> 0.3)
+  - FirebaseAnalyticsInterop (1.4.0)
   - FirebaseCore (6.3.0):
     - FirebaseCoreDiagnostics (~> 1.0)
     - FirebaseCoreDiagnosticsInterop (~> 1.0)
@@ -31,6 +39,14 @@ PODS:
     - FirebaseCore (~> 6.0)
     - GoogleUtilities/Environment (~> 6.0)
     - GoogleUtilities/UserDefaults (~> 6.0)
+  - FirebaseRemoteConfig (4.4.2):
+    - FirebaseABTesting (~> 3.1)
+    - FirebaseAnalyticsInterop (~> 1.4)
+    - FirebaseCore (~> 6.2)
+    - FirebaseInstanceID (~> 4.2)
+    - GoogleUtilities/Environment (~> 6.2)
+    - "GoogleUtilities/NSData+zlib (~> 6.2)"
+    - Protobuf (>= 3.9.2, ~> 3.9)
   - GoogleAppMeasurement (6.1.2):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
@@ -75,6 +91,7 @@ PODS:
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
+  - Protobuf (3.10.0)
   - ReachabilitySwift (4.3.1)
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
@@ -87,6 +104,8 @@ PODS:
 DEPENDENCIES:
   - Bugsnag
   - Firebase/Analytics
+  - Firebase/Core
+  - Firebase/RemoteConfig
   - GoogleMaps
   - GooglePlaces
   - KeychainSwift
@@ -106,25 +125,32 @@ SPEC REPOS:
   trunk:
     - Bugsnag
     - Firebase
+    - FirebaseABTesting
     - FirebaseAnalytics
+    - FirebaseAnalyticsInterop
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseCoreDiagnosticsInterop
     - FirebaseInstanceID
+    - FirebaseRemoteConfig
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
     - GoogleUtilities
     - nanopb
+    - Protobuf
 
 SPEC CHECKSUMS:
   Bugsnag: dff6ebf7d24f945bb8f050233c2f63e66bcf5f4f
   Firebase: 2d750c54cda57d5a6ae31212cfe5cc813c6be7e4
+  FirebaseABTesting: 0d10f3cdc3fa00f3f175b5b56c1003c8e888299f
   FirebaseAnalytics: 5d9ccbf46ed25d3ec9304d263f85bddf1e93e2d2
+  FirebaseAnalyticsInterop: d48b6ab67bcf016a05e55b71fc39c61c0cb6b7f3
   FirebaseCore: 8b2765c445d40db7137989b7146a3aa3f91b5529
   FirebaseCoreDiagnostics: be4f7a09d02ab305f18de59a470412caddb64c2a
   FirebaseCoreDiagnosticsInterop: 6829da2b8d1fc795ff1bd99df751d3788035d2cb
   FirebaseInstanceID: 550df9be1f99f751d8fcde3ac342a1e21a0e6c42
+  FirebaseRemoteConfig: 03efa57106f9b6f7afe36658de4a9c67c803d3a8
   GoogleAppMeasurement: 0ae90be1cc4dad40f4a27fc767ef59fa032ec87b
   GoogleDataTransport: c8617c00e4f3eb9418e42ac0e8ac5241a9d555dd
   GoogleDataTransportCCTSupport: 9f352523e8785a71f6754f51eeff09f49ec19268
@@ -134,10 +160,11 @@ SPEC CHECKSUMS:
   KeychainSwift: 4209611373ca4a098e09b1e547eebd87c544dcc4
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
+  Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
   ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   XCGLogger: 0434f15e3909cdc450bb63faf638b8792ab782ab
 
-PODFILE CHECKSUM: 6f9ec0c47bea8d78fb26a22a8316513d55a4ee21
+PODFILE CHECKSUM: f18ff9b3f54a84ed2e0b633de013eafd77a9756a
 
 COCOAPODS: 1.8.3
