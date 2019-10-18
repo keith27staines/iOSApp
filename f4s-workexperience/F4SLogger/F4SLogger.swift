@@ -59,16 +59,9 @@ public class F4SLog : F4SAnalyticsAndDebugging {
 }
 
 extension F4SLog : F4SAnalytics {
-    public func track(event: String) {
-        track(event: event, properties: [:])
-    }
     
-    public func track(event: String, properties: [String : Any]) {
-        track(event: event, properties: properties, options: [:])
-    }
-    
-    public func track(event: String, properties: [String : Any], options: [String : Any]) {
-        Analytics.logEvent(event, parameters: properties)
+    public func track(event: TrackEvent, properties: [String : Any]?) {
+        Analytics.logEvent(event.rawValue, parameters: properties)
     }
     
     public func screen(_ name: ScreenName) {
@@ -82,11 +75,11 @@ extension F4SLog : F4SAnalytics {
     func writeScreenToAnalytics(_ name: ScreenName, originScreen origin: ScreenName = .notSpecified) {
         let screen = name.rawValue.replacingOccurrences(of: " ", with: "_")
         let previous = origin.rawValue.replacingOccurrences(of: " ", with: "_")
-        let parameters = [
-            "name": screen,
-            "previous_screen": previous
-        ]
-        Analytics.logEvent("SCREEN", parameters: parameters)
+//        let parameters = [
+//            "name": screen,
+//            "previous_screen": previous
+//        ]
+//        Analytics.logEvent("SCREEN", parameters: parameters)
         print("SCREEN DID APPEAR: \(screen) from \(previous)")
     }
     

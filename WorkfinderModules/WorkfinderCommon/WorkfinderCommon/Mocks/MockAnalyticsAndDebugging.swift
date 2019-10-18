@@ -34,8 +34,6 @@ public class MockF4SAnalyticsAndDebugging : F4SAnalyticsAndDebugging {
     
     public init() {}
     
-    // MARK: Analytics
-    
     public struct AnalyticsItem {
         enum ItemType {
             case screen
@@ -54,20 +52,14 @@ public class MockF4SAnalyticsAndDebugging : F4SAnalyticsAndDebugging {
     }
     
     public var aliases: [F4SUUID] = []
+
     public func alias(userId: F4SUUID) {
         aliases.append(userId)
     }
-    
-    public func track(event: String) {
-        analyticsItems.append(AnalyticsItem(type: .track, name: event))
-    }
-    
-    public func track(event: String, properties: [String : Any]) {
-        analyticsItems.append(AnalyticsItem(type: .track, name: event, properties: properties))
-    }
-    
-    public func track(event: String, properties: [String : Any], options: [String : Any]) {
-        analyticsItems.append(AnalyticsItem(type: .track, name: event, properties: properties, options: options))
+
+    public func track(event: TrackEvent, properties: [String : Any]?) {
+        let notNilProperties = properties ?? [:]
+        analyticsItems.append(AnalyticsItem(type: .track, name: event.rawValue, properties: notNilProperties))
     }
     
     public func screen(_ name: ScreenName) {

@@ -8,7 +8,7 @@ import WorkfinderRecommendations
 import WorkfinderMessagesUseCase
 import WorkfinderOnboardingUseCase
 
-class TabBarCoordinator : TabBarCoordinatorProtocol {
+class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     
     let injected: CoreInjectionProtocol
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
@@ -117,7 +117,7 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
     public func navigateToTimeline() {
         closeMenu { [weak self] (success) in
             guard let strongSelf = self else { return }
-            strongSelf.tabBarViewController.selectedIndex = TabIndex.timeline.rawValue
+            strongSelf.injected.log.track(event: .messagesTabTap, properties: nil)
         }
     }
 
@@ -202,6 +202,7 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
             recommendationsNavigationController,
             favouritesNavigationContoller,
             searchNavigationController]
+        tabBarViewController.delegate = self
     }
     
     lazy var homeCoordinator: HomeCoordinator = {
@@ -343,4 +344,21 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
         tabBarViewController.configureTimelineTabBarWithCount(count: count)
     }
 
+}
+
+extension TabBarCoordinator: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        switch viewController {
+        case timelineCoordinator.navigationRouter.navigationController:
+            injected.log.track(event: TrackEvent.messagesTabTap, properties: nil)
+        case recommendationsCoordinator.navigationRouter.navigationController:
+            injected.log.track(event: TrackEvent.recommendationsTabTap, properties: nil)
+        case favouritesCoordinator.navigationRouter.navigationController:
+            injected.log.track(event: TrackEvent.favouritesTabTap, properties: nil)
+        case searchCoordinator.navigationRouter.navigationController:
+            injected.log.track(event: TrackEvent.searchTabTap, properties: nil)
+        default:
+            fatalError("unknown coordinator")
+        }
+    }
 }

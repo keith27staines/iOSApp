@@ -119,7 +119,7 @@ extension CompanyViewController : CompanyMainViewDelegate {
     func companyMainViewDidTapApply(_ view: CompanyMainView) {
         viewModel.didTapApply { [weak self] (initiateApplyResult) in
             guard let strongSelf = self else { return }
-            strongSelf.log.track(event: "company_details_apply")
+            strongSelf.log.track(event: .companyDetailsApplyTap, properties: nil)
             strongSelf.processInitiateApplyResult(initiateApplyResult)
         }
     }
