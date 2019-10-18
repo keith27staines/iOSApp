@@ -1,34 +1,36 @@
 
 public enum TrackEvent: String {
     case hamburgerMenuTap
-    case sideMenuAboutWorkfinderLinkTap
-    case sideMenuFAQLinkTap
-    case sideMenuTermsAndConditionsLinkTap
+    case sideMenuAboutWorkfinderLinkTap         // checked
+    case sideMenuFAQLinkTap                     // checked
+    case sideMenuTermsAndConditionsLinkTap      // checked
     
-    case messagesTabTap                         // added
-    case messageShowThreadTap
-    case messageThreadShowCompanyTap
-    case messageThreadActionTap
+    case messagesTabTap                         // checked
+    case messageShowThreadTap                   // checked
+    case messageThreadShowCompanyTap            // checked
+    case messageThreadActionTap                 // checked
     
-    case recommendationsTabTap                  // added
-    case recommendationsShowCompanyTap
+    case recommendationsTabTap                  // checked
+    case recommendationsShowCompanyTap          // checked
     
-    case favouritesTabTap                       // added
-    case favouritesShowCompanyTap
+    case favouritesTabTap                       // checked
+    case favouritesShowCompanyTap               // checked
 
-    case searchTabTap                           // added
+    case searchTabTap                           // checked
     case mapPan
     case mapPinch
-    case mapPinButtonTap
-    case mapPinShowCompanyTap
-    case mapClusterTap
-    case mapClusterShowCompanyTap
-    case mapShowSearchTap
-    case mapSearchByNameTap
-    case mapSearchByLocationTap
-    case mapShowFiltersButtonTap
-    case mapFiltersCancelTap
-    case mapFiltersRefineSearchTap
+    case mapPinButtonTap                        // checked
+    case mapPinShowCompanyTap                   // checked
+    case mapClusterTap                          // checked
+    case mapClusterShowCompanyTap               // checked
+    case mapShowSearchTap                       // checked
+    case mapSearchByNameTap                     // checked
+    case mapSearchByLocationTap                 // checked
+    case mapSearchShowCompanyTap                // checked
+    case mapSearchGotoLocationTap               // checked
+    case mapShowFiltersButtonTap                // checked
+    case mapFiltersCancelTap                    // checked
+    case mapFiltersRefineSearchTap              // checked
     
     case companyDetailsCancelTap
     case companyDetailsApplyTap

@@ -59,6 +59,7 @@ public class RecommendationsCoordinator : CoreInjectionNavigationCoordinator {
     var company: Company?
     
     func showDetail(companyUuid: F4SUUID) {
+        injected.log.track(event: .recommendationsShowCompanyTap, properties: nil)
         company = companyFromUuid(companyUuid)
         guard let company = company else { return }
         let companyCoordinator = companyCoordinatorFactory.makeCompanyCoordinator(parent: self, navigationRouter: navigationRouter, company: company, inject: injected)

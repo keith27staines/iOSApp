@@ -14,7 +14,7 @@ class CompanyViewController: UIViewController {
     let screenName = ScreenName.company
     var originScreen = ScreenName.notSpecified
     let viewModel: CompanyViewModel
-    var log: F4SAnalyticsAndDebugging!
+    weak var log: F4SAnalyticsAndDebugging?
     
     init(viewModel: CompanyViewModel) {
         self.viewModel = viewModel
@@ -55,7 +55,7 @@ class CompanyViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
         refresh()
-        log.screen(screenName, originScreen: originScreen)
+        log?.screen(screenName, originScreen: originScreen)
     }
     
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -119,7 +119,7 @@ extension CompanyViewController : CompanyMainViewDelegate {
     func companyMainViewDidTapApply(_ view: CompanyMainView) {
         viewModel.didTapApply { [weak self] (initiateApplyResult) in
             guard let strongSelf = self else { return }
-            strongSelf.log.track(event: .companyDetailsApplyTap, properties: nil)
+            strongSelf.log?.track(event: .companyDetailsApplyTap, properties: nil)
             strongSelf.processInitiateApplyResult(initiateApplyResult)
         }
     }

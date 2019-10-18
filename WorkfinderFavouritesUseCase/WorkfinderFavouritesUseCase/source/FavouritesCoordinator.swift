@@ -55,6 +55,7 @@ public class FavouritesCoordinator : CoreInjectionNavigationCoordinator {
     }
     
     func showDetail(company: Company?) {
+        injected.log.track(event: .favouritesShowCompanyTap, properties: nil)
         self.company = company
         guard let company = company else { return }
         let originScreen = rootViewController.screenName

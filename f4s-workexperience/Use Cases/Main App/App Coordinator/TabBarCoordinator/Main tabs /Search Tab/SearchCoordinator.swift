@@ -57,6 +57,7 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
         interestsViewController.interestsRepository = interestsRepository
         interestsViewController.visibleBounds = visibleMapBounds
         interestsViewController.mapModel = unfilteredMapModel
+        interestsViewController.log = injected.log
         interestsViewController.delegate = rootViewController
         let navigationController = UINavigationController(rootViewController: interestsViewController)
         rootViewController.present(navigationController, animated: true, completion: nil)

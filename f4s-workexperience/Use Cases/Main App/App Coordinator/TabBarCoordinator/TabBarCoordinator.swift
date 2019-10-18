@@ -117,7 +117,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     public func navigateToTimeline() {
         closeMenu { [weak self] (success) in
             guard let strongSelf = self else { return }
-            strongSelf.injected.log.track(event: .messagesTabTap, properties: nil)
+            strongSelf.tabBarViewController.selectedIndex = TabIndex.timeline.rawValue
         }
     }
 
@@ -293,6 +293,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
 
         let leftSideMenuViewController = SideMenuViewController()
         leftSideMenuViewController.tabBarCoordinator = self
+        leftSideMenuViewController.log = injected.log
 
         let leftSideNavController = UINavigationController(rootViewController: leftSideMenuViewController)
         leftSideNavController.restorationIdentifier = "ExampleLeftNavigationControllerRestorationKey"

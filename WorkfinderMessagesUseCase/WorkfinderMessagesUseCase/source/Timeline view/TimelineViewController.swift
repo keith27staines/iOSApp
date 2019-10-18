@@ -6,7 +6,7 @@ import WorkfinderUI
 class TimelineViewController: UIViewController {
     let screenName = ScreenName.messagesContainer
     weak var coordinator: TimelineCoordinator?
-    var log: F4SAnalyticsAndDebugging!
+    weak var log: F4SAnalyticsAndDebugging?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noPlacementsBackgroundView: UIView!
@@ -59,7 +59,7 @@ class TimelineViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        log.screen(screenName)
+        log?.screen(screenName)
         getAllPlacementsForUser()
     }
     
@@ -215,6 +215,7 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
             alert.addAction(resumeAction)
             present(alert, animated: true, completion: nil)
         default:
+            log?.track(event: .messageShowThreadTap, properties: nil)
             coordinator?.showMessageController(parentCtrl: self, threadUuid: placement.threadUuid, company: company, placements: self.userPlacements, companies: self.companies)
         }
     }

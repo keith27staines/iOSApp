@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol F4SAnalyticsAndDebugging : F4SAnalytics & F4SDebugging {}
+public protocol F4SAnalyticsAndDebugging : class, F4SAnalytics & F4SDebugging {}
 
 public protocol F4SAnalytics {
     func identity(userId: F4SUUID)
