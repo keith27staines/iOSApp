@@ -87,6 +87,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     func showApplicationLetterViewController() {
         let applicationLetterViewModel = applicationModel.applicationLetterViewModel
         let applicationLetterViewController = ApplicationLetterViewController(coordinator: self, viewModel: applicationLetterViewModel)
+        applicationLetterViewController.log = injected.log
         rootViewController = applicationLetterViewController
         navigationRouter.push(viewController: applicationLetterViewController, animated: true)
     }
@@ -95,6 +96,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         let coverLetterStoryboard = UIStoryboard(name: "EditCoverLetter", bundle: __bundle)
         let editor = coverLetterStoryboard.instantiateViewController(withIdentifier: "EditCoverLetterCtrl") as! EditCoverLetterViewController
         editor.coordinator = self
+        editor.log = injected.log
         editor.suppressMotivationField = (injected.user.age() ?? 0) < 18 ? true : false
         editor.blanksModel = applicationModel.blanksModel
         editor.motivationTextModel = applicationModel.motivationTextModel
@@ -232,6 +234,7 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
     func showApplicationSubmittedSuccessfully() {
         navigationRouter.popToViewController(startingViewController, animated: false)
         let successViewController = UIStoryboard(name: "SuccessExtraInfo", bundle: __bundle).instantiateViewController(withIdentifier: "SuccessExtraInfoCtrl") as! SuccessExtraInfoViewController
+        successViewController.log = injected.log
         successViewController.timelineButtonWasTapped = { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: .messages)

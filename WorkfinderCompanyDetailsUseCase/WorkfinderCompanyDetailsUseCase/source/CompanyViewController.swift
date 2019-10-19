@@ -39,7 +39,11 @@ class CompanyViewController: UIViewController {
         return pageViewController
     }()
     
-    lazy var companyMainPageView: CompanyMainView = view as! CompanyMainView
+    lazy var companyMainPageView: CompanyMainView = {
+        let mainView = view as! CompanyMainView
+        mainView.log = log
+        return mainView
+    }()
     
     override func loadView() {
         view = CompanyMainView(companyViewModel: viewModel, delegate: self)
@@ -119,7 +123,6 @@ extension CompanyViewController : CompanyMainViewDelegate {
     func companyMainViewDidTapApply(_ view: CompanyMainView) {
         viewModel.didTapApply { [weak self] (initiateApplyResult) in
             guard let strongSelf = self else { return }
-            strongSelf.log?.track(event: .companyDetailsApplyTap, properties: nil)
             strongSelf.processInitiateApplyResult(initiateApplyResult)
         }
     }
@@ -135,11 +138,24 @@ extension CompanyViewController : CompanyMainViewDelegate {
     func companyToolbar(_ toolbar: CompanyToolbar, requestedAction: CompanyToolbar.ActionType) {
         switch requestedAction {
         case .showShare:
+            log?.track(event: .companyDetailsShowShareTap, properties: nil)
             viewModel.showShare()
         case .toggleHeart:
             incrementLoadingInProgressCount()
+            switch viewModel.isFavourited {
+            case true:
+                log?.track(event: .companyDetailsFavouriteSwitchOff, properties: nil)
+            case false:
+                log?.track(event: .companyDetailsFavouriteSwitchOn, properties: nil)
+            }
             viewModel.toggleFavourited()
         case .showMap:
+            switch viewModel.isShowingMap {
+            case true:
+                log?.track(event: .companyDetailsHideMapTap, properties: nil)
+            case false:
+                log?.track(event: .companyDetailsShowMapTap, properties: nil)
+            }
             viewModel.isShowingMap.toggle()
         }
     }

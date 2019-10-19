@@ -17,8 +17,8 @@ public enum TrackEvent: String {
     case favouritesShowCompanyTap               // checked
 
     case searchTabTap                           // checked
-    case mapPan
-    case mapPinch
+    case mapPan                                 // not connected
+    case mapPinch                               // not connected
     case mapPinButtonTap                        // checked
     case mapPinShowCompanyTap                   // checked
     case mapClusterTap                          // checked
@@ -32,46 +32,45 @@ public enum TrackEvent: String {
     case mapFiltersCancelTap                    // checked
     case mapFiltersRefineSearchTap              // checked
     
-    case companyDetailsCancelTap
-    case companyDetailsApplyTap
-    case companyDetailsCompanyTabTap
-    case companyDetailsDataTabTap
-    case companyDetailsPeopleTabTap
-    case companyDetailsDataDuedilLinkTap
-    case companyDetailsDataLinkedinLinkTap
+    case companyDetailsCloseTap                 // checked
+    case companyDetailsApplyTap                 // checked
+    case companyDetailsCompanyTabTap            // checked
+    case companyDetailsDataTabTap               // checked
+    case companyDetailsPeopleTabTap             // not implemented
+    case companyDetailsDataDuedilLinkTap        // checked
+    case companyDetailsDataLinkedinLinkTap      // checked
+    case companyDetailsShareCompleted           // checked
+    case companyDetailsShareCancelled           // checked
 
-    case companyDetailsShowShareTap
-    case companyDetailsFavouriteSwitchOn
-    case companyDetailsFavouriteSwitchOff
-    case companyDetailsShowMapTap
-    case companyDetailsHideMapTap
+    case companyDetailsShowShareTap             // checked
+    case companyDetailsFavouriteSwitchOn        // checked
+    case companyDetailsFavouriteSwitchOff       // checked
+    case companyDetailsShowMapTap               // checked
+    case companyDetailsHideMapTap               // checked
     
-    case letterCancelTap
-    case letterEditButtonTap
-    case letterTextTap
-    case letterApplyTap
-    case letterTermsAndConditionsLinkTap
+    case letterCancelTap                        // checked
+    case letterEditButtonTap                    // checked
+    case letterTextTap                          // not implemented, directed to EditButtonTap
+    case letterApplyTap                         // checked
+    case letterTermsAndConditionsLinkTap        // checked
+    case letterApplyButtonEnabled               // checked
+    case letterApplyButtonDisabled              // checked
     
-    case editLetterShowPersonalAttributesTap
-    case editLetterShowJobRoleTap
-    case editLetterShowAvailabilityDatesTap
-    case editLetterShowAvailabilityHoursTap
-    case editLetterShowEmploymentSkillsTap
-    case editLetterShowMotivationTextTap
-    case motivationTextDefaultSelected
-    case motivationTextCustomSelected
-    case editLetterUpdateLetterArrowTap
-    case editLetterUpdateLetterButtonTap
-    case editLetterApplyButtonEnabled
-    case editLetterApplyButtonDisabled
-    case editLetterCancelTap
-    case editLetterApplyTap
-    case editLetterTermsAndConditionsLinkTap
+    case editLetterShowPersonalAttributesTap    // checked
+    case editLetterShowJobRoleTap               // checked
+    case editLetterShowAvailabilityDatesTap     // checked
+    case editLetterShowAvailabilityHoursTap     // checked
+    case editLetterShowEmploymentSkillsTap      // checked
+    case editLetterShowMotivationTextTap        // checked
+    case motivationTextDefaultSelected          // checked
+    case motivationTextCustomSelected           // checked
+    case editLetterUpdateLetterArrowTap         // checked
+    case editLetterUpdateLetterButtonTap        // checked
     
-    case personalInformationAcceptTermsOfServiceSwitchOn
-    case personalInformationAcceptTermsOfServiceSwitchOff
-    case personalInformationShowTermsOfServiceLinkTap
-    case personalInformationCompleteInformationTap
+    case personalInformationAcceptTermsOfServiceSwitchOn    // checked
+    case personalInformationAcceptTermsOfServiceSwitchOff   // checked
+    case personalInformationShowTermsOfServiceLinkTap       // checked
+    case personalInformationCompleteInformationTap          // checked
     
     case addDocumentsSkipTap
     case addDocumentsUploadTap
@@ -86,8 +85,8 @@ public enum TrackEvent: String {
     case documentOptionsShowFileSystemTap
     case documentOptionsShowURLTap
     
-    case applyHoorayMessagesTap
-    case applyHooraySearchTap
+    case applyHoorayMessagesTap                 // checked
+    case applyHooraySearchTap                   // checked
 }
 
 

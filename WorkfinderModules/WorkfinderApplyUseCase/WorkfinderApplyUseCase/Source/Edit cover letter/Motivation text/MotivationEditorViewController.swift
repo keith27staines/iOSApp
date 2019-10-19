@@ -14,6 +14,7 @@ class MotivationEditorViewController: UIViewController, MotivationTextModelDeleg
     weak var delegate: MotivationEditorViewControllerDelegate?
     
     var model: MotivationTextModel
+    weak var log: F4SAnalyticsAndDebugging?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +40,7 @@ class MotivationEditorViewController: UIViewController, MotivationTextModelDeleg
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        handleOptionPickerChange()
+        model.selectedIndex = optionPicker.selectedSegmentIndex
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -103,8 +104,10 @@ class MotivationEditorViewController: UIViewController, MotivationTextModelDeleg
         model.selectedIndex = optionPicker.selectedSegmentIndex
         switch model.selectedIndex {
         case 0:
+            log?.track(event: .motivationTextDefaultSelected, properties: nil)
             motivationText.resignFirstResponder()
         case 1:
+            log?.track(event: .motivationTextCustomSelected, properties: nil)
             motivationText.becomeFirstResponder()
         default:
             break

@@ -11,7 +11,7 @@ import WorkfinderCommon
 import WorkfinderUI
 
 class CompanyDataViewController: CompanySubViewController {
-    
+    weak var log: F4SAnalyticsAndDebugging?
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -76,9 +76,12 @@ class CompanyDataViewController: CompanySubViewController {
     }()
     
     @objc func handleDuedilTapped() {
+        log?.track(event: .companyDetailsDataDuedilLinkTap, properties: nil)
         viewModel.didTapDuedil(for: company)
     }
+    
     @objc func handleLinkedinTapped() {
+        log?.track(event: .companyDetailsDataLinkedinLinkTap, properties: nil)
         viewModel.didTapLinkedIn(for: company)
     }
 }

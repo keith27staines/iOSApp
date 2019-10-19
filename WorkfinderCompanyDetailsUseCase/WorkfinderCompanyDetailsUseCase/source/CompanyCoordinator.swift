@@ -73,7 +73,8 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
                                             companyService: companyService,
                                             favouritingModel: favouritesModel,
                                             allowedToApplyLogic: allowedToApplyLogic,
-                                            companyDocumentsModel: companyDocumentsModel)
+                                            companyDocumentsModel: companyDocumentsModel,
+                                            log: injected.log)
         companyViewController = CompanyViewController(viewModel: companyViewModel)
         companyViewController.log = self.injected.log
         companyViewController.originScreen = originScreen
@@ -163,6 +164,15 @@ extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
     func companyViewModel(_ viewModel: CompanyViewModel, showShare company: CompanyViewData) {
         socialShareItemSource.company = self.company
         let activityViewController = UIActivityViewController(activityItems: [socialShareItemSource], applicationActivities: nil)
+        activityViewController.completionWithItemsHandler = { [weak self] activityType, completed, items, error in
+            guard let log = self?.injected.log else { return }
+            switch completed {
+            case true:
+                log.track(event: .companyDetailsShareCompleted, properties: nil)
+            case false:
+                log.track(event: .companyDetailsShareCancelled, properties: nil)
+            }
+        }
         companyViewController.present(activityViewController, animated: true, completion: nil)
     }
 }
