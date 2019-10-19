@@ -25,6 +25,7 @@ class CompanyViewModelTests: XCTestCase {
         let mockCompanyService = MockF4SCompanyService()
         let mockAllowedToApplyLogic = MockAllowedToApplyLogic()
         let mockCompanyDocumentsModel = MockF4SCompanyDocumentsModel()
+        let mockLog = MockF4SAnalyticsAndDebugging()
         
         coordinatingDelegate = MockCoordinatingDelegate()
         sut = CompanyViewModel(coordinatingDelegate: coordinatingDelegate,
@@ -33,7 +34,8 @@ class CompanyViewModelTests: XCTestCase {
                                companyService: mockCompanyService,
                                favouritingModel: favouritesModel,
                                allowedToApplyLogic: mockAllowedToApplyLogic,
-                               companyDocumentsModel: mockCompanyDocumentsModel)
+                               companyDocumentsModel: mockCompanyDocumentsModel,
+                               log: mockLog)
         self.company = sut.companyViewData
     }
 
