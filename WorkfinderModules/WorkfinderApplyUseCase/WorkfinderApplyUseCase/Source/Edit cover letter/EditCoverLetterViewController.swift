@@ -19,6 +19,7 @@ class EditCoverLetterViewController: UIViewController {
     fileprivate let smallFooterSize = CGFloat(21)
     fileprivate var numberOfRowsInSection2 = 2
     
+    weak var log: F4SAnalyticsAndDebugging?
     var dateFormatter: DateFormatter?
     var availabilityPeriodJson: F4SAvailabilityPeriodJson = F4SAvailabilityPeriodJson()
     var coordinator: EditCoverLetterViewControllerCoordinatorProtocol?
@@ -243,20 +244,26 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
         guard let navCtrl = self.navigationController, let template = blanksModel?.template else { return }
         switch editableSection {
         case .personalAttributes:
+            log?.track(event: .editLetterShowPersonalAttributesTap, properties: nil)
             coordinator?.chooseValuesForTemplateBlank(name: .personalAttributes, inTemplate: template)
             
         case .jobRole:
+            log?.track(event: .editLetterShowJobRoleTap, properties: nil)
             coordinator?.chooseValuesForTemplateBlank(name: .jobRole, inTemplate: template)
             
         case .availabilityCalendar:
+            log?.track(event: .editLetterShowAvailabilityDatesTap, properties: nil)
             pushCalendar(navigationController: navCtrl)
             
         case .availabilityHours:
+            log?.track(event: .editLetterShowAvailabilityHoursTap, properties: nil)
             pushDaysAndHours(navigationController: navCtrl)
             
         case .skills:
+            log?.track(event: .editLetterShowEmploymentSkillsTap, properties: nil)
             coordinator?.chooseValuesForTemplateBlank(name: .employmentSkills, inTemplate: template)
         case .motivation:
+            log?.track(event: .editLetterShowMotivationTextTap, properties: nil)
             pushMotivationEditor(navigationController: navCtrl)
         }
         coverLetterTableView.reloadData()
@@ -294,6 +301,7 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
 
     func pushMotivationEditor(navigationController: UINavigationController) {
         let editor = MotivationEditorViewController(delegate: self, model: motivationTextModel)
+        editor.log = log
         editor.delegate = self
         navigationController.pushViewController(editor, animated: true)
     }
@@ -363,10 +371,12 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
 // MARK:- user interraction
 extension EditCoverLetterViewController {
     @IBAction func updateButton(_: AnyObject) {
+        log?.track(event: .editLetterUpdateLetterButtonTap, properties: nil)
         coordinator?.editCoverLetterViewControllerDidFinish(self)
     }
 
     @objc func backToLetter() {
+        log?.track(event: .editLetterUpdateLetterArrowTap, properties: nil)
          coordinator?.editCoverLetterViewControllerDidFinish(self)
     }
 }

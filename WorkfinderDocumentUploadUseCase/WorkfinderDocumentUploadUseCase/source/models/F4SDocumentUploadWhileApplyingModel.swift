@@ -42,11 +42,14 @@ public class F4SDocumentUploadModelBase {
     /// Must override
     public func fetchDocumentsForPlacement() { assertionFailure("Must be overridden") }
     
-    public func putDocumentsWithRemoteUrls(completion: @escaping (Bool) -> Void ) {
-        let documentsWithRemoteUrl = self.documents.filter { (document) -> Bool in
+    public var documentsForUpload: [F4SDocument] {
+        return self.documents.filter { (document) -> Bool in
             return document.hasValidRemoteUrl
         }
-        let putJson = F4SPutDocumentsJson(documents: documentsWithRemoteUrl)
+    }
+    
+    public func putDocumentsWithRemoteUrls(completion: @escaping (Bool) -> Void ) {
+        let putJson = F4SPutDocumentsJson(documents: documentsForUpload)
         documentService.putDocuments(documents: putJson, completion: { (result) in
             switch result {
             case .success(_):

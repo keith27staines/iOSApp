@@ -27,7 +27,6 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTabBar()
-        setupReachability(nil, useClosures: true)
         startNotifier()
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self,
@@ -102,26 +101,12 @@ extension TabBarViewController {
     }
 
     func menuGestureShouldRecognizeTouch(drawerController _: DrawerController, gestureRecognizer _: UIGestureRecognizer, touch _: UITouch) -> Bool {
-//        self.evo_drawerController?.openDrawerGestureModeMask = .all
-//        if self.evo_drawerController?.openSide == .none {
-//            return false
-//        }
-//        if self.selectedIndex == 2 { // MapViewController
-//            self.evo_drawerController?.openDrawerGestureModeMask = .custom
-//        }
         return false
     }
 }
 
 // MARK: - Reachability Setup
 extension TabBarViewController {
-
-    func setupReachability(_: String?, useClosures _: Bool) {
-        let reachability = Reachability()
-        self.reachability = reachability
-
-        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(_:)), name: Notification.Name.reachabilityChanged, object: reachability)
-    }
 
     func startNotifier() {
         do {
@@ -135,15 +120,6 @@ extension TabBarViewController {
         reachability?.stopNotifier()
         NotificationCenter.default.removeObserver(self, name: Notification.Name.reachabilityChanged, object: nil)
         reachability = nil
-    }
-
-    @objc func reachabilityChanged(_ note: Notification) {
-        guard let reachability = note.object as? Reachability else {
-            return
-        }
-        if reachability.isReachableByAnyMeans {
-            //F4SUserStatusService.shared.beginStatusUpdate()
-        }
     }
 }
 

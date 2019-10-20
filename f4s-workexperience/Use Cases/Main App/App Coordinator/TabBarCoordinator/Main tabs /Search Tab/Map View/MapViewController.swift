@@ -29,7 +29,7 @@ class MapViewController: UIViewController {
     let companyDataSource: SearchDataSourcing = CompanySearchDataSource()
     let placesDataSource: SearchDataSourcing = PlacesSearchDataSource()
     let userMessageHandler = UserMessageHandler()
-    var log: F4SAnalyticsAndDebugging!
+    weak var log: F4SAnalyticsAndDebugging?
     
     lazy var searchView: SearchView = {
         let sideMargin: CGFloat = 20
@@ -194,7 +194,7 @@ class MapViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        log.screen(screenName)
+        log?.screen(screenName)
         adjustNavigationBar()
         displayRefineSearchLabelAnimated()
         favouriteList = ShortlistDBOperations.sharedInstance.getShortlist()
@@ -625,6 +625,7 @@ extension MapViewController: GMSMapViewDelegate {
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        coordinator?.injected.log.track(event: TrackEvent.mapPinButtonTap, properties: nil)
         let origin = mapView.projection.point(for: marker.position)
         let companies = companiesFromMarker(marker)
         if companies.count > 1 {
@@ -670,6 +671,7 @@ extension MapViewController: GMSMapViewDelegate {
     }
     
     func mapView(_: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+        log?.track(event: .mapPinShowCompanyTap, properties: nil)
         guard let company = companyFromMarker(marker: marker) else {
             return
         }
@@ -696,6 +698,7 @@ extension MapViewController: GMUClusterManagerDelegate {
             cameraWillMoveAction = .explodeCluster(cluster)
             moveCamera(toShow: explodedBounds)
         } else {
+            log?.track(event: TrackEvent.mapClusterTap, properties: nil)
             presentCompaniesPopup(for: cluster)
         }
     }
@@ -796,6 +799,7 @@ extension MapViewController {
     }
     
     @IBAction func filtersButtonTouched(_: UIButton) {
+        log?.track(event: TrackEvent.mapShowFiltersButtonTap, properties: nil)
         hideRefineSearchLabelAnimated()
         coordinator?.filtersButtonWasTapped()
     }
@@ -1062,6 +1066,7 @@ extension MapViewController : SearchViewDelegate {
         case .collapsed, .horizontallyExpanded:
             return
         case .searchingLocation:
+            log?.track(event: .mapSearchGotoLocationTap, properties: nil)
             setUserLocation(from: item.primaryText, placeId: item.uuidString)
             
         case .searchingPeople:
@@ -1070,6 +1075,7 @@ extension MapViewController : SearchViewDelegate {
             guard
                 let uuid = item.uuidString,
                 let company = DatabaseOperations.sharedInstance.companyWithUUID(uuid) else { return }
+            log?.track(event: .mapSearchShowCompanyTap, properties: nil)
             coordinator?.showDetail(company: company, originScreen: ScreenName.companySearch)
         }
         searchView.minimizeSearchUI()

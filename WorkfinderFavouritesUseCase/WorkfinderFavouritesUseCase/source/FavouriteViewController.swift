@@ -23,7 +23,7 @@ class FavouriteViewController: UIViewController {
     var placementsRepository: F4SPlacementRepositoryProtocol!
     var favouritesRepository: F4SFavouritesRepositoryProtocol!
     var companyRepository: F4SCompanyRepositoryProtocol!
-    var log: F4SAnalyticsAndDebugging!
+    weak var log: F4SAnalyticsAndDebugging?
     
     var favouriteList: [Shortlist] = [] {
         didSet {
@@ -54,7 +54,7 @@ class FavouriteViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        log.screen(screenName)
+        log?.screen(screenName)
         adjustNavigationBar()
         loadData()
     }

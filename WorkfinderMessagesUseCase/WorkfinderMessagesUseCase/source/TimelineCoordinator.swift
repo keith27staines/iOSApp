@@ -93,6 +93,7 @@ public class TimelineCoordinator : CoreInjectionNavigationCoordinator, CompanyCo
         messageController.companies = companies
         messageController.placements = placements
         messageController.coordinator = self
+        messageController.log = injected.log
         messageController.offerProcessor = offerProcessingService
         messageController.companyService = companyService
         messageController.roleService = roleService

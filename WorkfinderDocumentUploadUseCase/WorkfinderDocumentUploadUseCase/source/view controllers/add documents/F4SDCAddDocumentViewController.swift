@@ -47,6 +47,8 @@ class F4SDCAddDocumentViewController: UIViewController {
     
     @IBOutlet weak var nameField: UITextField!
     
+    var log: F4SAnalyticsAndDebugging? { return coordinator?.log }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         nameField.delegate = self
@@ -74,14 +76,17 @@ class F4SDCAddDocumentViewController: UIViewController {
     }()
     
     @IBAction func cameraTapped(_ sender: UIButton) {
+        log?.track(event: .addDocumentCameraTap, properties: nil)
         performSegue(withIdentifier: "showCamera", sender: self)
     }
     
     @IBAction func pickFromLibrary(_ sender: Any) {
+        log?.track(event: .addDocumentPhotoLibraryTap, properties: nil)
         present(imagePickerViewController, animated: true, completion: nil)
     }
     
     @IBAction func pickFromFilesystem(_ sender: Any) {
+        log?.track(event: .addDocumentFileSystemTap, properties: nil)
         self.present(documentPicker, animated: true, completion: nil)
     }
     
@@ -100,6 +105,7 @@ class F4SDCAddDocumentViewController: UIViewController {
         case "showCamera":
             attemptToPresentCameraFromSegue(segue)
         case "showURL":
+            log?.track(event: .addDocumentURLTap, properties: nil)
             if let vc = segue.destination as? F4SAddUrlViewController {
                 vc.delegate = self
             }
@@ -220,6 +226,7 @@ extension F4SDCAddDocumentViewController : UITextFieldDelegate {
 
 extension F4SDCAddDocumentViewController : F4SDCAddUrlViewControllerDelegate {
     func didCaptureUrl(_ url: URL) {
+        log?.track(event: .addDocumentDidCaptureUrl, properties: nil)
         document.remoteUrlString = url.absoluteString
         delegate?.didAddDocument(document)
     }
@@ -228,6 +235,7 @@ extension F4SDCAddDocumentViewController : F4SDCAddUrlViewControllerDelegate {
 extension F4SDCAddDocumentViewController : F4SCameraCaptureViewControllerDelegate {
     func didCaptureDocumentasPDFData(_ pdfData: Data) {
         dismiss(animated: true, completion: nil)
+        log?.track(event: .addDocumentDidCaptureCamera, properties: nil)
         document.data = pdfData
         delegate?.didAddDocument(document)
     }
@@ -246,6 +254,7 @@ extension F4SDCAddDocumentViewController : UIDocumentPickerDelegate {
         var error:NSError? = nil
         coordinator.coordinate(readingItemAt: url, options: [], error: &error) { (url) -> Void in
             if let fileData = try? Data(contentsOf: url) {
+                log?.track(event: .addDocumentDidCaptureFile, properties: nil)
                 document.data = fileData
                 delegate?.didAddDocument(document)
             } else {
@@ -269,6 +278,7 @@ extension F4SDCAddDocumentViewController : UINavigationControllerDelegate, UIIma
         // Local variable inserted by Swift 4.2 migrator.
         let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         if let pickedImage = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
+            log?.track(event: .addDocumentDidCaptureLibrary, properties: nil)
             let pdfData = pickedImage.generatePDF()
             document.data = pdfData
             picker.dismiss(animated: true) { [weak self] in

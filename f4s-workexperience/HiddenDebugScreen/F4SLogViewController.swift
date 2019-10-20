@@ -12,7 +12,7 @@ import WorkfinderCommon
 class F4SLogViewController: UIViewController {
 
     @IBOutlet weak var logTextView: UITextView!
-    var log: F4SAnalyticsAndDebugging?
+    weak var log: F4SAnalyticsAndDebugging?
     
     override func viewDidLoad() {
         super.viewDidLoad()

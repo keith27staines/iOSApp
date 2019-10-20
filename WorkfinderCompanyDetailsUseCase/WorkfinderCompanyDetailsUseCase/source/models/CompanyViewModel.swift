@@ -107,6 +107,8 @@ class CompanyViewModel : NSObject {
         return self.people[index]
     }
     
+    weak var log: F4SAnalyticsAndDebugging?
+    
     init(coordinatingDelegate: CompanyViewModelCoordinatingDelegate,
          viewModelDelegate: CompanyViewModelDelegate? = nil,
          company: Company,
@@ -114,7 +116,8 @@ class CompanyViewModel : NSObject {
          companyService: F4SCompanyServiceProtocol,
          favouritingModel: CompanyFavouritesModel,
          allowedToApplyLogic: AllowedToApplyLogicProtocol,
-         companyDocumentsModel: F4SCompanyDocumentsModelProtocol) {
+         companyDocumentsModel: F4SCompanyDocumentsModelProtocol,
+         log: F4SAnalyticsAndDebugging?) {
         self.companyService = companyService
         self.company = company
         self.companyViewData = CompanyViewData(company: company)
@@ -125,6 +128,7 @@ class CompanyViewModel : NSObject {
         self.companyViewData.isFavourited = self.favouritingModel.isFavourite(company: company)
         self.canApplyLogic = allowedToApplyLogic
         self.companyDocumentsModel = companyDocumentsModel
+        self.log = log
         super.init()
         viewControllers = [summaryViewController, dataViewController]
         loadCompany()
@@ -257,7 +261,9 @@ class CompanyViewModel : NSObject {
     }()
     
     lazy private var dataViewController: CompanyDataViewController = {
-        return CompanyDataViewController(viewModel: self, pageIndex: .data)
+        let vc = CompanyDataViewController(viewModel: self, pageIndex: .data)
+        vc.log = self.log
+        return vc
     }()
     
 }

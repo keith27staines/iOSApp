@@ -14,7 +14,7 @@ class CompanyViewController: UIViewController {
     let screenName = ScreenName.company
     var originScreen = ScreenName.notSpecified
     let viewModel: CompanyViewModel
-    var log: F4SAnalyticsAndDebugging!
+    weak var log: F4SAnalyticsAndDebugging?
     
     init(viewModel: CompanyViewModel) {
         self.viewModel = viewModel
@@ -39,7 +39,11 @@ class CompanyViewController: UIViewController {
         return pageViewController
     }()
     
-    lazy var companyMainPageView: CompanyMainView = view as! CompanyMainView
+    lazy var companyMainPageView: CompanyMainView = {
+        let mainView = view as! CompanyMainView
+        mainView.log = log
+        return mainView
+    }()
     
     override func loadView() {
         view = CompanyMainView(companyViewModel: viewModel, delegate: self)
@@ -55,7 +59,7 @@ class CompanyViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
         refresh()
-        log.screen(screenName, originScreen: originScreen)
+        log?.screen(screenName, originScreen: originScreen)
     }
     
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -118,7 +122,8 @@ extension CompanyViewController : CompanyViewModelDelegate {
 extension CompanyViewController : CompanyMainViewDelegate {
     func companyMainViewDidTapApply(_ view: CompanyMainView) {
         viewModel.didTapApply { [weak self] (initiateApplyResult) in
-            self?.processInitiateApplyResult(initiateApplyResult)
+            guard let strongSelf = self else { return }
+            strongSelf.processInitiateApplyResult(initiateApplyResult)
         }
     }
     
@@ -133,11 +138,24 @@ extension CompanyViewController : CompanyMainViewDelegate {
     func companyToolbar(_ toolbar: CompanyToolbar, requestedAction: CompanyToolbar.ActionType) {
         switch requestedAction {
         case .showShare:
+            log?.track(event: .companyDetailsShowShareTap, properties: nil)
             viewModel.showShare()
         case .toggleHeart:
             incrementLoadingInProgressCount()
+            switch viewModel.isFavourited {
+            case true:
+                log?.track(event: .companyDetailsFavouriteSwitchOff, properties: nil)
+            case false:
+                log?.track(event: .companyDetailsFavouriteSwitchOn, properties: nil)
+            }
             viewModel.toggleFavourited()
         case .showMap:
+            switch viewModel.isShowingMap {
+            case true:
+                log?.track(event: .companyDetailsHideMapTap, properties: nil)
+            case false:
+                log?.track(event: .companyDetailsShowMapTap, properties: nil)
+            }
             viewModel.isShowingMap.toggle()
         }
     }

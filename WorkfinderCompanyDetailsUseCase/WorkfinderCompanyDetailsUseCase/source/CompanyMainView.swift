@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import WorkfinderCommon
 
 protocol CompanyMainViewDelegate : CompanyToolbarDelegate {
     func companyMainView(_ view: CompanyMainView, didSelectPage: CompanyViewModel.PageIndex?)
@@ -18,6 +19,7 @@ protocol CompanyMainViewDelegate : CompanyToolbarDelegate {
 class CompanyMainView: UIView {
     
     private weak var delegate: CompanyMainViewDelegate?
+    weak var log: F4SAnalyticsAndDebugging?
     var companyViewModel: CompanyViewModel
     
     lazy var mapView: CompanyMapView = {
@@ -126,7 +128,13 @@ class CompanyMainView: UIView {
     }
     
     @objc func handleSegmentChanged(sender: UISegmentedControl) {
-        let page = CompanyViewModel.PageIndex(rawValue: sender.selectedSegmentIndex)
+        guard let page = CompanyViewModel.PageIndex(rawValue: sender.selectedSegmentIndex) else { return }
+        switch page {
+        case .summary:
+            log?.track(event: .companyDetailsCompanyTabTap, properties: nil)
+        case .data:
+            log?.track(event: .companyDetailsDataTabTap, properties: nil)
+        }
         delegate?.companyMainView(self, didSelectPage: page)
     }
     
@@ -142,10 +150,12 @@ extension CompanyMainView : CompanyToolbarDelegate {
 }
 extension CompanyMainView : CompanyHeaderViewDelegate {
     func didTapApply() {
+        log?.track(event: .companyDetailsApplyTap, properties: nil)
         delegate?.companyMainViewDidTapApply(self)
     }
     
     func didTapDone() {
+        log?.track(event: .companyDetailsCloseTap, properties: nil)
         delegate?.companyMainViewDidTapDone(self)
     }
     

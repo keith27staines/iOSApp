@@ -18,6 +18,7 @@ class MessageContainerViewController: UIViewController {
     }
     
     weak var coordinator: TimelineCoordinator!
+    weak var log: F4SAnalyticsAndDebugging?
     var offerProcessor: F4SOfferProcessingServiceProtocol!
     var companyService: F4SCompanyServiceProtocol!
     var roleService: F4SRoleServiceProtocol!
@@ -113,6 +114,7 @@ class MessageContainerViewController: UIViewController {
     }
     
     @IBAction func actionButtonTapped(_ sender: Any) {
+        log?.track(event: .messageThreadActionTap, properties: nil)
         guard let action = action else { return }
         do {
             try F4SActionValidator.validate(action: action)
@@ -203,12 +205,6 @@ class MessageContainerViewController: UIViewController {
             }
         }
     }
-
-//    func loadPlacementOffer(uuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4STimelinePlacement>) -> () ) {
-//        offerProcessor.getPlacementOffer(uuid: uuid) { (networkResult) in
-//            completion(networkResult)
-//        }
-//    }
     
     internal var acceptContext: AcceptOfferContext? = nil
     
@@ -319,6 +315,7 @@ extension MessageContainerViewController {
     }
     
     @objc func showCompanyDetailsView() {
+        log?.track(event: .messageThreadShowCompanyTap, properties: nil)
         guard let company = self.company else { return }
         coordinator?.showCompanyDetails(parentCtrl: self, company: company)
     }

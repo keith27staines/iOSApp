@@ -16,6 +16,8 @@ class InterestsViewController: UIViewController, UIScrollViewDelegate {
     /// The map model containing all companies, unfiltered by any interests
     var mapModel: MapModel!
     
+    weak var log: F4SAnalyticsAndDebugging?
+    
     fileprivate let reuseId = "interestsCell"
     
     /// The list of interests the user can select from, which includes interests they have selected previously plus any of the interests of companies within visibleBounds
@@ -273,12 +275,14 @@ extension InterestsViewController: UICollectionViewDelegateFlowLayout {
 extension InterestsViewController {
 
     @IBAction func refineSearchButtonTouched(_: UIButton) {
+        log?.track(event: .mapFiltersRefineSearchTap, properties: nil)
         selectedInterests = interestsRepository.saveInterests(selectedInterests)
         delegate?.interestsViewController(self, didChangeSelectedInterests: selectedInterests)
         self.dismiss(animated: true, completion: nil)
     }
 
     @objc func dismissInterestView(_: UIBarButtonItem) {
+        log?.track(event: .mapFiltersCancelTap, properties: nil)
         self.dismiss(animated: true, completion: nil)
     }
 }

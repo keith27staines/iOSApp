@@ -81,7 +81,10 @@ class UserDetailsViewController: UIViewController {
         skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: completeExtraInfoButton)
     }
     
+    var log: F4SAnalyticsAndDebugging? { return coordinator?.injected.log }
+    
     @IBAction func termsOfServiceLinkButton(_ sender: UIButton) {
+        log?.track(event: .personalInformationShowTermsOfServiceLinkTap, properties: nil)
         coordinator?.presentContent(F4SContentType.terms)
     }
     
@@ -89,6 +92,12 @@ class UserDetailsViewController: UIViewController {
         viewModel.exploreMoreCompanies()
     }
     @IBAction func termsAgreedChanged(_ sender: UISwitch) {
+        switch sender.isOn {
+        case true:
+            log?.track(event: .personalInformationAcceptTermsOfServiceSwitchOn, properties: nil)
+        case false:
+            log?.track(event: .personalInformationAcceptTermsOfServiceSwitchOff, properties: nil)
+        }
         viewModel.userInfo.termsAgreed = sender.isOn
         updateVisualState()
     }
@@ -113,6 +122,7 @@ class UserDetailsViewController: UIViewController {
     @IBAction func completeInfoButtonTouched(_: UIButton) {
         self.view.endEditing(true)
         saveUserDetailsLocally()
+        log?.track(event: .personalInformationCompleteInformationTap, properties: nil)
         pushNotificationAlertFactory.afterAction = {
             [weak self] in self?.verifyEmail()
         }

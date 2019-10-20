@@ -45,6 +45,7 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
     let welcomeCellHeight: CGFloat = 100
     var secondLoad = false
     weak var tabBarCoordinator: TabBarCoordinator!
+    weak var log: F4SAnalyticsAndDebugging?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -260,10 +261,13 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
                 switch navigationRow
                 {
                 case .about:
+                    log?.track(event: .sideMenuAboutWorkfinderLinkTap, properties: nil)
                     tabBarCoordinator.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.about)
                 case .faq:
+                    log?.track(event: .sideMenuFAQLinkTap, properties: nil)
                     tabBarCoordinator.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.faq)
                 case .terms:
+                    log?.track(event: .sideMenuTermsAndConditionsLinkTap, properties: nil)
                     tabBarCoordinator.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.terms)
                 }
             }

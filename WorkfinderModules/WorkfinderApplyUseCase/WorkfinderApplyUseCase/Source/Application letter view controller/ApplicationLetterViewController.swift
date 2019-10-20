@@ -20,6 +20,8 @@ protocol ApplicationLetterViewControllerCoordinating : class {
 class ApplicationLetterViewController : UIViewController {
     
     weak var coordinator: ApplicationLetterViewControllerCoordinating?
+    weak var log: F4SAnalyticsAndDebugging?
+    
     var mainView: ApplicationLetterViewControllerMainView { return view as! ApplicationLetterViewControllerMainView }
     let editButton: EditApplicationLetterButton = EditApplicationLetterButton()
     var termsAndConditionsButton: UIButton { return mainView.termsAndConditionsButton }
@@ -79,6 +81,12 @@ class ApplicationLetterViewController : UIViewController {
     func updateFromViewModel() {
         textView.attributedText = viewModel.attributedText
         applyButton.isEnabled = viewModel.applyButtonIsEnabled
+        switch applyButton.isEnabled {
+        case true:
+            log?.track(event: .letterApplyButtonEnabled, properties: nil)
+        case false:
+            log?.track(event: .letterApplyButtonDisabled, properties: nil)
+        }
         editButton.configureForLetterIsCompleteState(viewModel.applyButtonIsEnabled)
     }
     
@@ -109,18 +117,22 @@ class ApplicationLetterViewController : UIViewController {
     }
     
     @objc func cancelButtonTapped(sender: Any?) {
+        log?.track(event: .letterCancelTap, properties: nil)
         coordinator?.cancelButtonWasTapped(sender: sender)
     }
     
     @objc func editButtonTapped(sender: Any?) {
+        log?.track(event: .letterEditButtonTap, properties: nil)
         coordinator?.editButtonWasTapped(sender: sender)
     }
     
     @objc func applyButtonTapped(sender: Any?) {
+        log?.track(event: .letterApplyTap, properties: nil)
         viewModel.applyButtonWasTapped()
     }
     
     @objc func termsAndConditionsButtonTapped(sender: Any?) {
+        log?.track(event: .letterTermsAndConditionsLinkTap, properties: nil)
         viewModel.termsAndConditionsButtonWasTapped(sender: self)
     }
     
