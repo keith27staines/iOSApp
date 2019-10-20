@@ -1,6 +1,6 @@
 
 public enum TrackEvent: String {
-    case hamburgerMenuTap
+    case sideMenuToggle                         // checked
     case sideMenuAboutWorkfinderLinkTap         // checked
     case sideMenuFAQLinkTap                     // checked
     case sideMenuTermsAndConditionsLinkTap      // checked
@@ -72,18 +72,24 @@ public enum TrackEvent: String {
     case personalInformationShowTermsOfServiceLinkTap       // checked
     case personalInformationCompleteInformationTap          // checked
     
-    case addDocumentsSkipTap
-    case addDocumentsUploadTap
-    case addDocumentsShowDocumentMenuTap
-    case addDocumentsViewDocumentTap
-    case addDocumentsDeleteDocumentTap
-    case addDocumentsShowOptionsTap
-    case documentOptionsBackTap
-    case documentOptionsShowTypeTap
-    case documentOptionsShowCameraTap
-    case documentOptionsShowPhotoLibraryTap
-    case documentOptionsShowFileSystemTap
-    case documentOptionsShowURLTap
+    case addDocumentsSkipTap                                //  checked
+    case addDocumentsUploadTap                              //  checked
+    case addDocumentsAddDocumentTap                         //  checked
+    case addDocumentsViewDocumentTap                        //  checked
+    case addDocumentsDeleteDocumentTap                      //  checked
+    case addDocumentsShowDocumentOptionsPopupTap            //  checked
+    case addDocumentsCVInfoTap                              //  checked
+    
+    case addDocumentTypeTap
+    case addDocumentCameraTap                               // checked
+    case addDocumentDidCaptureCamera                        // checked
+    case addDocumentPhotoLibraryTap                         // checked
+    case addDocumentDidCaptureLibrary                       // checked
+    case addDocumentFileSystemTap                           // checked
+    case addDocumentDidCaptureFile                          // checked
+    case addDocumentURLTap                                  // checked
+    case addDocumentDidCaptureUrl                           // checked
+    case addDocumentBackTap
     
     case applyHoorayMessagesTap                 // checked
     case applyHooraySearchTap                   // checked

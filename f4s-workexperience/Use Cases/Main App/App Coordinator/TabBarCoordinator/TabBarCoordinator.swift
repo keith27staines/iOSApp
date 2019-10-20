@@ -156,6 +156,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     }
     
     public func toggleMenu(completion: ((Bool) -> ())? = nil) {
+        injected.log.track(event: .sideMenuToggle, properties: nil)
         drawerController?.toggleLeftDrawerSide(animated: true, completion: completion)
     }
     

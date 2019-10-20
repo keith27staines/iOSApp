@@ -26,6 +26,12 @@ extension F4SAddDocumentsViewController {
     
     func performPrimaryActionForApplyMode() {
         primaryActionButton.isEnabled = false
+        guard documentModel.documentsForUpload.count > 0 else {
+            log?.track(event: .addDocumentsSkipTap, properties: nil)
+            coordinator?.documentUploadDidFinish()
+            return
+        }
+        log?.track(event: .addDocumentsUploadTap, properties: nil)
         sharedUserMessageHandler.showLoadingOverlay(view)
         documentModel.putDocumentsWithRemoteUrls { (success) in
             DispatchQueue.main.async { [weak self] in
