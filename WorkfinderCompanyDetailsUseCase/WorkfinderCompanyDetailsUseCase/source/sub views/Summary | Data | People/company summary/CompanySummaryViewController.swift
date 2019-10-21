@@ -66,7 +66,7 @@ class CompanySummaryViewController: CompanySubViewController {
         industryLabel.text = companyViewData.industry
         industryLabel.isHidden = companyViewData.industryIsHidden
         descriptionView.text = companyViewData.description
-        moreButton.isHidden = !descriptionView.isTruncated()
+        //moreButton.isHidden = !descriptionView.isTruncated()
         if let postcode = companyViewData.postcode {
             addressView.text = "Location: \(postcode)"
             addressView.isHidden = false
@@ -91,17 +91,13 @@ class CompanySummaryViewController: CompanySubViewController {
         return ratingView
     }()
     
-    lazy var descriptionView: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
-        label.text = ""
-        label.numberOfLines = 0
-        label.textAlignment = .left
-        label.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        label.addSubview(self.moreButton)
-//        self.moreButton.rightAnchor.constraint(equalTo: label.rightAnchor, constant: -4).isActive = true
-//        self.moreButton.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: -4).isActive = true
-        return label
+    lazy var descriptionView: UITextView = {
+        let textView = UITextView()
+        textView.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
+        textView.text = ""
+        textView.textAlignment = .left
+        textView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        return textView
     }()
     
     lazy var moreButton: UIButton = {

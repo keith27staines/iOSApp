@@ -149,8 +149,9 @@ extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
         applyCoordinator.start()
     }
     
-    func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn person: F4SHost) {
-        print("Show linkedIn profile for \(person.displayName)")
+    func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn host: F4SHost) {
+        guard let _ = host.profileUrl else { return }
+        openUrl(host.profileUrl!)
     }
     
     func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn company: CompanyViewData) {

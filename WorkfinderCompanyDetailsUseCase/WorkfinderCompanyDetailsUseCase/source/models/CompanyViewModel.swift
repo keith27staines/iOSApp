@@ -78,7 +78,7 @@ class CompanyViewModel : NSObject {
     var addToshortlistService: CompanyFavouritingServiceProtocol?
     private (set) var company: Company
     var companyViewData: CompanyViewData
-    let people: [F4SHost]
+    let hosts: [F4SHost]
     let companyService: F4SCompanyServiceProtocol
     let companyDocumentsModel: F4SCompanyDocumentsModelProtocol
     let canApplyLogic: AllowedToApplyLogicProtocol
@@ -105,7 +105,7 @@ class CompanyViewModel : NSObject {
     
     var selectedHost: F4SHost? {
         guard let index = self.selectedHostIndex else { return nil }
-        return self.people[index]
+        return self.hosts[index]
     }
     
     weak var log: F4SAnalyticsAndDebugging?
@@ -122,7 +122,7 @@ class CompanyViewModel : NSObject {
         self.companyService = companyService
         self.company = company
         self.companyViewData = CompanyViewData(company: company)
-        self.people = people
+        self.hosts = people
         self.coordinatingDelegate = coordinatingDelegate
         self.viewModelDelegate = viewModelDelegate
         self.favouritingModel = favouritingModel
