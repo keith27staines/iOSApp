@@ -22,21 +22,25 @@ class CompanySummaryViewController: CompanySubViewController {
         refresh()
     }
     
+    lazy var verticalStack: UIStackView = {
+        let views: [UIView] = [
+            self.industryLabel,
+            self.ratingView,
+            self.addressView,
+            self.distanceFromYouView,
+            self.descriptionView,
+            self.moreButton,
+            self.documentsView]
+        let stack = UIStackView(arrangedSubviews: views)
+        stack.axis = .vertical
+        stack.alignment = .center
+        return stack
+    }()
+    
     func configureViews() {
         addSubControllers()
-        view.addSubview(industryLabel)
-        view.addSubview(ratingView)
-        view.addSubview(addressView)
-        view.addSubview(distanceFromYouView)
-        view.addSubview(descriptionView)
-        industryLabel.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor)
-        ratingView.anchor(top: industryLabel.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 12))
-        ratingView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        addressView.anchor(top: ratingView.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 6, left: 0, bottom: 0, right: 0))
-        distanceFromYouView.anchor(top: addressView.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0))
-        descriptionView.anchor(top: distanceFromYouView.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0))
-
-        documentsView.anchor(top: descriptionView.bottomAnchor, leading: descriptionView.leadingAnchor, bottom: view.bottomAnchor, trailing: descriptionView.trailingAnchor, padding: UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0), size: CGSize(width: 0, height: 100))
+        view.addSubview(verticalStack)
+        verticalStack.fillSuperview(padding: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
     }
     
     var documentsView: UIView!
@@ -62,6 +66,7 @@ class CompanySummaryViewController: CompanySubViewController {
         industryLabel.text = companyViewData.industry
         industryLabel.isHidden = companyViewData.industryIsHidden
         descriptionView.text = companyViewData.description
+        moreButton.isHidden = !descriptionView.isTruncated()
         if let postcode = companyViewData.postcode {
             addressView.text = "Location: \(postcode)"
             addressView.isHidden = false
@@ -75,7 +80,7 @@ class CompanySummaryViewController: CompanySubViewController {
     var industryLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.preferredFont(forTextStyle: .caption1)
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
         return label
@@ -86,19 +91,36 @@ class CompanySummaryViewController: CompanySubViewController {
         return ratingView
     }()
     
-    lazy var descriptionView: UITextView = {
-        let textView = UITextView()
-        textView.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
-        textView.isEditable = false
-        textView.text = ""
-        return textView
+    lazy var descriptionView: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
+        label.text = ""
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        label.addSubview(self.moreButton)
+//        self.moreButton.rightAnchor.constraint(equalTo: label.rightAnchor, constant: -4).isActive = true
+//        self.moreButton.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: -4).isActive = true
+        return label
+    }()
+    
+    lazy var moreButton: UIButton = {
+        let button = UIButton(type: UIButton.ButtonType.system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("more...", for: .normal)
+        button.backgroundColor = UIColor.lightGray
+        button.contentEdgeInsets = UIEdgeInsets(top: 4, left: 10, bottom: 4, right: 10)
+        button.alpha = 0.95
+        button.isHidden = true
+        button.layer.cornerRadius = 8
+        return button
     }()
     
     lazy var addressView: UILabel = {
         let label = UILabel()
         label.text = "Can't load address"
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.preferredFont(forTextStyle: .caption1)
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
         label.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: NSLayoutConstraint.Axis.vertical)
@@ -109,9 +131,24 @@ class CompanySummaryViewController: CompanySubViewController {
         let label = UILabel()
         label.text = "Distance from you: unknown"
         label.numberOfLines = 1
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.preferredFont(forTextStyle: .caption1)
         label.textAlignment = .center
         label.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: NSLayoutConstraint.Axis.vertical)
         return label
     }()
+}
+
+extension UILabel {
+    func isTruncated() -> Bool {
+        let label:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.width, height: CGFloat.greatestFiniteMagnitude))
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.font = self.font
+        label.text = self.text
+        label.sizeToFit()
+        if label.frame.height > self.frame.height {
+            return true
+        }
+        return false
+    }
 }

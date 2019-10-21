@@ -57,8 +57,7 @@ class CompanyMainView: UIView {
     }()
     
     lazy var segmentedControl: UISegmentedControl = {
-        // TODO: enable peopple tab:  let segmentedControl = UISegmentedControl(items: ["Company","Data","People"] )
-        let segmentedControl = UISegmentedControl(items: ["Company","Data"])
+        let segmentedControl = UISegmentedControl(items: ["Company","Data", "People"])
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.addTarget(self, action: #selector(handleSegmentChanged), for: .valueChanged)
         return segmentedControl
@@ -134,6 +133,8 @@ class CompanyMainView: UIView {
             log?.track(event: .companyDetailsCompanyTabTap, properties: nil)
         case .data:
             log?.track(event: .companyDetailsDataTabTap, properties: nil)
+        case .people:
+            log?.track(event: .companyDetailsPeopleTabTap, properties: nil)
         }
         delegate?.companyMainView(self, didSelectPage: page)
     }

@@ -27,18 +27,18 @@ class PersonBioView: UIView {
         return view
     }()
     
-    var showLinkedIn: ((PersonViewData)->())?
+    var showLinkedIn: ((F4SHost)->())?
     
     @objc func linkedInTapped() {
         guard let person = personData else { return }
         showLinkedIn?(person)
     }
     
-    var personData: PersonViewData? {
+    var personData: F4SHost? {
         willSet {
             guard newValue?.uuid != personData?.uuid else { return }
-            bioText.text = newValue?.bio
-            linkedInButton.isHidden = newValue?.islinkedInHidden ?? true
+            bioText.text = ""
+            linkedInButton.isHidden = newValue?.profileUrl == nil || newValue?.profileUrl == "" ? false : true
             UIView.animate(withDuration: 1) {
                 self.alpha = newValue == nil ? 0.0 : 1.0
                 self.layoutIfNeeded()

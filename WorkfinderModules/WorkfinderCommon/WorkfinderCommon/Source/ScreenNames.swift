@@ -36,7 +36,7 @@ public enum TrackEvent: String {
     case companyDetailsApplyTap                 // checked
     case companyDetailsCompanyTabTap            // checked
     case companyDetailsDataTabTap               // checked
-    case companyDetailsPeopleTabTap             // not implemented
+    case companyDetailsPeopleTabTap             // checked
     case companyDetailsDataDuedilLinkTap        // checked
     case companyDetailsDataLinkedinLinkTap      // checked
     case companyDetailsShareCompleted           // checked

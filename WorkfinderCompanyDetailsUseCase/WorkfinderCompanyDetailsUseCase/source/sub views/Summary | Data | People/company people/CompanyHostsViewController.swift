@@ -13,11 +13,11 @@ import WorkfinderUI
 fileprivate let cardAspectRatio: CGFloat = 1.3
 
 protocol CompanyPeopleViewControllerDelegate {
-    func companyPeopleViewController(_ controller: CompanyPeopleViewController, didSelectPerson: PersonViewData?)
-    func companyPeopleViewController(_ controller: CompanyPeopleViewController, showLinkedIn: PersonViewData)
+    func companyPeopleViewController(_ controller: CompanyHostsViewController, didSelectHost: F4SHost?)
+    func companyPeopleViewController(_ controller: CompanyHostsViewController, showLinkedIn: F4SHost)
 }
 
-class CompanyPeopleViewController: CompanySubViewController {
+class CompanyHostsViewController: CompanySubViewController {
     
     override init(viewModel: CompanyViewModel, pageIndex: CompanyViewModel.PageIndex) {
         super.init(viewModel: viewModel, pageIndex: pageIndex)
@@ -31,10 +31,10 @@ class CompanyPeopleViewController: CompanySubViewController {
     }
     
     override func refresh() {
-        let index = viewModel.selectedPersonIndex
-        viewModel.selectedPersonIndex = nil
+        let index = viewModel.selectedHostIndex
+        viewModel.selectedHostIndex = nil
         peopleCollectionView.reloadData()
-        viewModel.selectedPersonIndex = index
+        viewModel.selectedHostIndex = index
     }
     
     fileprivate var standardWidth: CGFloat {
@@ -162,7 +162,7 @@ class CompanyPeopleViewController: CompanySubViewController {
 
 }
 
-extension CompanyPeopleViewController : UICollectionViewDataSource {
+extension CompanyHostsViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.people.count
     }
@@ -190,18 +190,18 @@ extension CompanyPeopleViewController : UICollectionViewDataSource {
     }
 }
 
-extension CompanyPeopleViewController : UICollectionViewDelegateFlowLayout {
+extension CompanyHostsViewController : UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.selectedPersonIndex = viewModel.selectedPersonIndex == indexPath.row ? nil : indexPath.row
+        viewModel.selectedHostIndex = viewModel.selectedHostIndex == indexPath.row ? nil : indexPath.row
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return viewModel.selectedPersonIndex ==  indexPath.row ? expandedCardSize : standardCardSize
+        return viewModel.selectedHostIndex ==  indexPath.row ? expandedCardSize : standardCardSize
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        viewModel.selectedPersonIndex = nil
+        viewModel.selectedHostIndex = nil
     }
 }
 

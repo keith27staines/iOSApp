@@ -6,7 +6,7 @@ import WorkfinderCommon
 protocol CompanyViewModelCoordinatingDelegate : class {
     func companyViewModelDidComplete(_ viewModel: CompanyViewModel)
     func companyViewModel(_ viewModel: CompanyViewModel, applyTo: CompanyViewData, continueFrom: F4STimelinePlacement?)
-    func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn person: PersonViewData)
+    func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn person: F4SHost)
     func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn company: CompanyViewData)
     func companyViewModel(_ viewModel: CompanyViewModel, requestedShowDuedil company: CompanyViewData)
     func companyViewModel(_ viewModel: CompanyViewModel, showShare company: CompanyViewData)
@@ -25,6 +25,7 @@ class CompanyViewModel : NSObject {
     enum PageIndex : Int, CaseIterable {
         case summary
         case data
+        case people
         func previous() -> PageIndex? { return PageIndex(rawValue: self.rawValue - 1) }
         func next() -> PageIndex? { return PageIndex(rawValue: self.rawValue + 1) }
     }
@@ -77,7 +78,7 @@ class CompanyViewModel : NSObject {
     var addToshortlistService: CompanyFavouritingServiceProtocol?
     private (set) var company: Company
     var companyViewData: CompanyViewData
-    let people: [PersonViewData]
+    let people: [F4SHost]
     let companyService: F4SCompanyServiceProtocol
     let companyDocumentsModel: F4SCompanyDocumentsModelProtocol
     let canApplyLogic: AllowedToApplyLogicProtocol
@@ -92,18 +93,18 @@ class CompanyViewModel : NSObject {
         }
     }
     
-    var selectedPersonIndex: Int? = nil {
+    var selectedHostIndex: Int? = nil {
         didSet {
-            selectedPersonIndexDidChange?(selectedPersonIndex)
+            selectedPersonIndexDidChange?(selectedHostIndex)
         }
     }
     
-    var mustSelectPersonToApply: Bool {
-        return people.count == 0 ? false : selectedPerson == nil
+    var mustSelectHostToApply: Bool {
+        return false
     }
     
-    var selectedPerson: PersonViewData? {
-        guard let index = self.selectedPersonIndex else { return nil }
+    var selectedHost: F4SHost? {
+        guard let index = self.selectedHostIndex else { return nil }
         return self.people[index]
     }
     
@@ -112,7 +113,7 @@ class CompanyViewModel : NSObject {
     init(coordinatingDelegate: CompanyViewModelCoordinatingDelegate,
          viewModelDelegate: CompanyViewModelDelegate? = nil,
          company: Company,
-         people: [PersonViewData],
+         people: [F4SHost],
          companyService: F4SCompanyServiceProtocol,
          favouritingModel: CompanyFavouritesModel,
          allowedToApplyLogic: AllowedToApplyLogicProtocol,
@@ -167,8 +168,8 @@ class CompanyViewModel : NSObject {
         coordinatingDelegate?.companyViewModel(self, showShare: companyViewData)
     }
     
-    func didTapLinkedIn(for person: PersonViewData) {
-        coordinatingDelegate?.companyViewModel(self, requestsShowLinkedIn: person)
+    func didTapLinkedIn(for host: F4SHost) {
+        coordinatingDelegate?.companyViewModel(self, requestsShowLinkedIn: host)
     }
     
     func didTapLinkedIn(for company: CompanyViewData) {
@@ -247,6 +248,8 @@ class CompanyViewModel : NSObject {
             return summaryViewController
         case .data:
             return dataViewController
+        case .people:
+            return hostsViewController
         }
     }
     
@@ -263,6 +266,11 @@ class CompanyViewModel : NSObject {
     lazy private var dataViewController: CompanyDataViewController = {
         let vc = CompanyDataViewController(viewModel: self, pageIndex: .data)
         vc.log = self.log
+        return vc
+    }()
+    
+    lazy private var hostsViewController: CompanyHostsViewController = {
+        let vc = CompanyHostsViewController(viewModel: self, pageIndex: .people)
         return vc
     }()
     

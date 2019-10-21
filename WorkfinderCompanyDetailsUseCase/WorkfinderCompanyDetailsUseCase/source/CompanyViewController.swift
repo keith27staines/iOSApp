@@ -51,7 +51,7 @@ class CompanyViewController: UIViewController {
     
     override func viewDidLoad() {
         _ = pageViewController
-        companyMainPageView.segmentedControl.selectedSegmentIndex = viewModel.selectedPersonIndex ?? 0
+        companyMainPageView.segmentedControl.selectedSegmentIndex = viewModel.selectedHostIndex ?? 0
         viewModel.userLocation = companyMainPageView.mapView.userLocation.location
         refresh()
     }

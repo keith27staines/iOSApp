@@ -69,7 +69,7 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
         super.start()
         companyViewModel = CompanyViewModel(coordinatingDelegate: self,
                                             company: company,
-                                            people: [],
+                                            people: F4SHost.makeHosts(),
                                             companyService: companyService,
                                             favouritingModel: favouritesModel,
                                             allowedToApplyLogic: allowedToApplyLogic,
@@ -149,8 +149,8 @@ extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
         applyCoordinator.start()
     }
     
-    func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn person: PersonViewData) {
-        print("Show linkedIn profile for \(person.fullName)")
+    func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn person: F4SHost) {
+        print("Show linkedIn profile for \(person.displayName)")
     }
     
     func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn company: CompanyViewData) {

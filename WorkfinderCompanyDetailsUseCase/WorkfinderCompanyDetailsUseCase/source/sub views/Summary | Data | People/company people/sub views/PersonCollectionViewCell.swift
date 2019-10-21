@@ -66,11 +66,12 @@ class PersonCollectionViewCell: UICollectionViewCell {
         stack.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
     }
     
-    func configure(person: PersonViewData) {
-        if let imageName = person.imageName {
-            imageView.image = UIImage(named: imageName)
-        }
-        nameLabel.text = person.fullName
+    func configure(person: F4SHost) {
+        imageView.image = UIImage(named: "person")
+//        if let imageUrl = person.imageUrl {
+//            imageView.image = nil
+//        }
+        nameLabel.text = person.displayName
         positionLabel.text = person.role
     }
     
