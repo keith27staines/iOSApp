@@ -69,7 +69,6 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
         super.start()
         companyViewModel = CompanyViewModel(coordinatingDelegate: self,
                                             company: company,
-                                            people: F4SHost.makeHosts(),
                                             companyService: companyService,
                                             favouritingModel: favouritesModel,
                                             allowedToApplyLogic: allowedToApplyLogic,

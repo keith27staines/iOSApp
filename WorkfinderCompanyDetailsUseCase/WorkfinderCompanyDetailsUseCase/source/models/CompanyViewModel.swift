@@ -78,7 +78,7 @@ class CompanyViewModel : NSObject {
     var addToshortlistService: CompanyFavouritingServiceProtocol?
     private (set) var company: Company
     var companyViewData: CompanyViewData
-    let hosts: [F4SHost]
+    var hosts: [F4SHost] = []
     let companyService: F4SCompanyServiceProtocol
     let companyDocumentsModel: F4SCompanyDocumentsModelProtocol
     let canApplyLogic: AllowedToApplyLogicProtocol
@@ -113,7 +113,6 @@ class CompanyViewModel : NSObject {
     init(coordinatingDelegate: CompanyViewModelCoordinatingDelegate,
          viewModelDelegate: CompanyViewModelDelegate? = nil,
          company: Company,
-         people: [F4SHost],
          companyService: F4SCompanyServiceProtocol,
          favouritingModel: CompanyFavouritesModel,
          allowedToApplyLogic: AllowedToApplyLogicProtocol,
@@ -122,7 +121,6 @@ class CompanyViewModel : NSObject {
         self.companyService = companyService
         self.company = company
         self.companyViewData = CompanyViewData(company: company)
-        self.hosts = people
         self.coordinatingDelegate = coordinatingDelegate
         self.viewModelDelegate = viewModelDelegate
         self.favouritingModel = favouritingModel
@@ -217,7 +215,9 @@ class CompanyViewModel : NSObject {
                         })
                     }
                 case .success(let json):
+                    strongSelf.hosts = json.hosts ?? []
                     strongSelf.companyJson = json
+                    strongSelf.viewModelDelegate?.companyViewModelDidRefresh(strongSelf)
                 }
             }
         }

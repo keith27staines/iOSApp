@@ -10,7 +10,6 @@
 		FC04B867233277080034A60E /* CoordinatorProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04B866233277080034A60E /* CoordinatorProtocols.swift */; };
 		FC066050232645D800496FE2 /* F4SFavouritesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06604F232645D800496FE2 /* F4SFavouritesRepository.swift */; };
 		FC0660572326635000496FE2 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0660562326635000496FE2 /* Protocols.swift */; };
-		FC06605923266F2300496FE2 /* PersonViewDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06605823266F2300496FE2 /* PersonViewDataTests.swift */; };
 		FC06605D2326770B00496FE2 /* F4SShortlistJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06605C2326770B00496FE2 /* F4SShortlistJson.swift */; };
 		FC083F7B230FF01000641F17 /* F4SDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F7A230FF01000641F17 /* F4SDocument.swift */; };
 		FC083F852310101D00641F17 /* F4SRecommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F842310101D00641F17 /* F4SRecommendation.swift */; };
@@ -79,7 +78,6 @@
 		FC86A58F23475F7F00B20905 /* F4SMotivationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC86A58E23475F7F00B20905 /* F4SMotivationRepository.swift */; };
 		FC8F9570233B82B60027BE02 /* AllowedToApplyLogicProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8F956F233B82B60027BE02 /* AllowedToApplyLogicProtocol.swift */; };
 		FC8F9572233B90F30027BE02 /* F4SCompanyDocumentsModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8F9571233B90F30027BE02 /* F4SCompanyDocumentsModelProtocol.swift */; };
-		FC8F9574233B98770027BE02 /* MockF4SPlacementApplicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8F9573233B98770027BE02 /* MockF4SPlacementApplicationService.swift */; };
 		FC8F9576233B9B390027BE02 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8F9575233B9B390027BE02 /* Mocks.swift */; };
 		FC8F957C233BA6710027BE02 /* MockCoordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8F957B233BA6710027BE02 /* MockCoordinators.swift */; };
 		FC8F957D233BA6710027BE02 /* MockAnalyticsAndDebugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8F957A233BA6710027BE02 /* MockAnalyticsAndDebugging.swift */; };
@@ -161,7 +159,6 @@
 		FC04B866233277080034A60E /* CoordinatorProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocols.swift; sourceTree = "<group>"; };
 		FC06604F232645D800496FE2 /* F4SFavouritesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SFavouritesRepository.swift; sourceTree = "<group>"; };
 		FC0660562326635000496FE2 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
-		FC06605823266F2300496FE2 /* PersonViewDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonViewDataTests.swift; sourceTree = "<group>"; };
 		FC06605C2326770B00496FE2 /* F4SShortlistJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SShortlistJson.swift; sourceTree = "<group>"; };
 		FC083F7A230FF01000641F17 /* F4SDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDocument.swift; sourceTree = "<group>"; };
 		FC083F842310101D00641F17 /* F4SRecommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRecommendation.swift; sourceTree = "<group>"; };
@@ -230,7 +227,6 @@
 		FC86A58E23475F7F00B20905 /* F4SMotivationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SMotivationRepository.swift; sourceTree = "<group>"; };
 		FC8F956F233B82B60027BE02 /* AllowedToApplyLogicProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowedToApplyLogicProtocol.swift; sourceTree = "<group>"; };
 		FC8F9571233B90F30027BE02 /* F4SCompanyDocumentsModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyDocumentsModelProtocol.swift; sourceTree = "<group>"; };
-		FC8F9573233B98770027BE02 /* MockF4SPlacementApplicationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockF4SPlacementApplicationService.swift; sourceTree = "<group>"; };
 		FC8F9575233B9B390027BE02 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 		FC8F9577233BA6710027BE02 /* MockNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNavigationRouter.swift; sourceTree = "<group>"; };
 		FC8F9578233BA6710027BE02 /* MockUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserService.swift; sourceTree = "<group>"; };
@@ -508,7 +504,6 @@
 				FC2E205A22F9D1DD0094B134 /* F4SUUIDDictionarytests.swift */,
 				FC083F8E2310417E00641F17 /* F4SRoleJsonTests.swift */,
 				FC083F902310464400641F17 /* F4SRecommendationTests.swift */,
-				FC06605823266F2300496FE2 /* PersonViewDataTests.swift */,
 			);
 			path = WorkfinderCommonTests;
 			sourceTree = "<group>";
@@ -630,7 +625,6 @@
 			children = (
 				FC14E44B2341E36B005D7541 /* MockUIApplication.swift */,
 				FC8F9575233B9B390027BE02 /* Mocks.swift */,
-				FC8F9573233B98770027BE02 /* MockF4SPlacementApplicationService.swift */,
 				FCFE450D2250BA6700C38436 /* MockLocalStore.swift */,
 				FC8F957B233BA6710027BE02 /* MockCoordinators.swift */,
 				FC8F9577233BA6710027BE02 /* MockNavigationRouter.swift */,
@@ -843,7 +837,6 @@
 				FC426F08232FAFF0004F8A3E /* WorkfinderNetworking.swift in Sources */,
 				FC1F591622FD6D42007164BA /* F4SPushToken.swift in Sources */,
 				FC9535A5231E7E7700F4A9DA /* Company.swift in Sources */,
-				FC8F9574233B98770027BE02 /* MockF4SPlacementApplicationService.swift in Sources */,
 				FCFC06A523225670003C59C8 /* CGRect+Methods.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -890,7 +883,6 @@
 				FCFC06A9232256C0003C59C8 /* CGRect+MethodsTests.swift in Sources */,
 				FC22DC0122F996D70068C61C /* F4SChoiceTests.swift in Sources */,
 				FCFC06A123225571003C59C8 /* F4SStringExtensionTests.swift in Sources */,
-				FC06605923266F2300496FE2 /* PersonViewDataTests.swift in Sources */,
 				FCFC069323224081003C59C8 /* ScaledNumberTests.swift in Sources */,
 				FC1FEF022301BFB10039DD94 /* F4SPlacementTests.swift in Sources */,
 				FC083F8F2310417E00641F17 /* F4SRoleJsonTests.swift in Sources */,

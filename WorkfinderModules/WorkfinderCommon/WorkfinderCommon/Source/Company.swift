@@ -1,8 +1,20 @@
 import Foundation
 
 public struct F4SCompanyJson : Codable {
+    public var name: String?
+    public var industry: String?
+    public var logoUrl: String?
+    public var summary: String?
+    public var employeeCount: Int?
+    public var turnover: Double?
+    public var turnoverGrowth: Double?
+    public var hashtag: String?
+    public var publicUrl: String?
+    public var publicPage: String?
     public var linkedInUrlString: String?
     public var duedilUrlString: String?
+    public var rating: Double?
+    public var ratingCount: Int?
     public var hosts: [F4SHost]?
     public var linkedinUrl: URL? {
         return URL(string: self.linkedInUrlString ?? "")
@@ -16,6 +28,18 @@ public struct F4SCompanyJson : Codable {
 
 extension F4SCompanyJson {
     private enum CodingKeys : String, CodingKey {
+        case name
+        case industry
+        case employeeCount = "employee_count"
+        case turnover
+        case turnoverGrowth = "turnover_growth"
+        case summary
+        case hashtag
+        case publicUrl = "public_url"
+        case publicPage = "public_page"
+        case rating
+        case ratingCount = "rating_count"
+        case logoUrl = "logo_url"
         case linkedInUrlString = "linkedin_url"
         case duedilUrlString = "duedil_url"
         case hosts

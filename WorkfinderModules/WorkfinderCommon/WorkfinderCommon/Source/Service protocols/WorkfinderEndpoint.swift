@@ -33,6 +33,7 @@ public struct WorkfinderEndpoint {
     public var allPartnersUrl: String { "\(baseUrl2)/partner" }
     
     // Placement
+    public var placementUrl: String { "\(baseUrl2)/placement" }
     public var patchPlacementUrl: String { "\(baseUrl2)/placement" }
     public var allPlacementsUrl: String { "\(baseUrl2)/placement" }
     public var offerUrl: String { "\(baseUrl2)/placement" }

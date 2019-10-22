@@ -29,18 +29,17 @@ class CompanySummaryViewController: CompanySubViewController {
             self.addressView,
             self.distanceFromYouView,
             self.descriptionView,
-            self.moreButton,
             self.documentsView]
         let stack = UIStackView(arrangedSubviews: views)
         stack.axis = .vertical
-        stack.alignment = .center
+        stack.alignment = .fill
         return stack
     }()
     
     func configureViews() {
         addSubControllers()
         view.addSubview(verticalStack)
-        verticalStack.fillSuperview(padding: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
+        verticalStack.fillSuperview(padding: UIEdgeInsets(top: 20, left: 8, bottom: 20, right: 8))
     }
     
     var documentsView: UIView!

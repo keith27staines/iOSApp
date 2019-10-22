@@ -1,17 +1,20 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 
 class HostView : UIView {
     
+    static let defaultImage = UIImage(named: "noProfilePicture")
+    
     var host: F4SHost? {
         didSet {
-            image.image = UIImage(named: "person")
+            image.load(urlString: host?.imageUrl, defaultImage: HostView.defaultImage)
             nameLabel.text = host?.displayName
             roleLabel.text = host?.role
             if let _ = host?.profileUrl {
                 profileButton.isHidden = false
-                profileButton.setTitle("See more on LinkedIn", for: UIControl.State.normal)
+                profileButton.setTitle("see more on LinkedIn", for: UIControl.State.normal)
             }
             else {
                 profileButton.isHidden = true
@@ -24,7 +27,7 @@ class HostView : UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(horizontalStack)
-        horizontalStack.fillSuperview(padding: UIEdgeInsets(top: 2, left: 0, bottom: 2, right: 0))
+        horizontalStack.fillSuperview(padding: UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0))
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -58,15 +61,18 @@ class HostView : UIView {
     
     lazy var profileButton: UIButton = {
         let button = UIButton(type: .system)
-        //button.setTitleColor(UIColor.black, for: UIControl.State.normal)
         button.setTitle("Profile", for: UIControl.State.normal)
+        button.setImage(UIImage(named:"ui-linkedin-icon")!, for: UIControl.State.normal)
+        button.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0)
         return button
     }()
     
-    lazy var image: UIImageView = {
-        let view = UIImageView()
+    lazy var image: F4SSelfLoadingImageView = {
+        let view = F4SSelfLoadingImageView()
         let height = view.heightAnchor.constraint(equalToConstant: 64)
-        height.priority = UILayoutPriority.defaultLow
+        height.priority = UILayoutPriority.required
         view.contentMode = .scaleAspectFit
         view.widthAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         height.isActive = true
@@ -76,8 +82,13 @@ class HostView : UIView {
     lazy var roleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
-        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption1)
+        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.subheadline)
         return label
     }()
+    
+    @objc func profileButtonTapped() {
+        guard let host = host else { return }
+        profileLinkTap?(host)
+    }
     
 }
