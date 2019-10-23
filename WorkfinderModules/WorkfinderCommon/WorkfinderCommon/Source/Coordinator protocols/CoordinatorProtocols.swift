@@ -77,6 +77,7 @@ public protocol CoreInjectionProtocol : class {
     var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol { get }
     var contentService: F4SContentServiceProtocol { get }
     var log: F4SAnalyticsAndDebugging { get }
+    var appSettings: AppSettingProvider { get }
 }
 
 public protocol CoreInjectionNavigationCoordinatorProtocol : NavigationCoordinating {

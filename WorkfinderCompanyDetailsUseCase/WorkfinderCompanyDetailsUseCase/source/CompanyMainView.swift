@@ -21,6 +21,7 @@ class CompanyMainView: UIView {
     private weak var delegate: CompanyMainViewDelegate?
     weak var log: F4SAnalyticsAndDebugging?
     var companyViewModel: CompanyViewModel
+    var appSettings: AppSettingProvider
     
     lazy var mapView: CompanyMapView = {
         let mapView = CompanyMapView(company: companyViewModel.company)
@@ -29,9 +30,10 @@ class CompanyMainView: UIView {
         return mapView
     }()
     
-    init(companyViewModel: CompanyViewModel, delegate: CompanyMainViewDelegate) {
+    init(companyViewModel: CompanyViewModel, delegate: CompanyMainViewDelegate, appSettings: AppSettingProvider) {
         self.companyViewModel = companyViewModel
         self.delegate = delegate
+        self.appSettings = appSettings
         super.init(frame: CGRect.zero)
         backgroundColor = UIColor.white
         configureViews()
@@ -57,7 +59,15 @@ class CompanyMainView: UIView {
     }()
     
     lazy var segmentedControl: UISegmentedControl = {
-        let segmentedControl = UISegmentedControl(items: ["Company","Data", "People"])
+        let segmentedControl: UISegmentedControl
+        switch self.appSettings.currentValue(key: AppSettingKey.showHostsEnabled) {
+        case "false":
+            segmentedControl = UISegmentedControl(items: ["Company","Data"])
+        case "true":
+            segmentedControl = UISegmentedControl(items: ["Company","Data", "People"])
+        default:
+            segmentedControl = UISegmentedControl(items: ["Company","Data"])
+        }
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.addTarget(self, action: #selector(handleSegmentChanged), for: .valueChanged)
         return segmentedControl

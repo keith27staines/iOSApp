@@ -130,6 +130,8 @@
 		FCE75CC6232F631C00C2E976 /* NetworkCallLoggerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE75CC5232F631C00C2E976 /* NetworkCallLoggerProtocol.swift */; };
 		FCE8DAA62320E71300934E2F /* CompanyViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAA52320E71200934E2F /* CompanyViewData.swift */; };
 		FCE8DAA82320E80B00934E2F /* ScaledNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAA72320E80B00934E2F /* ScaledNumber.swift */; };
+		FCF0EA2D23606A1D00EE1FE2 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF0EA2C23606A1D00EE1FE2 /* AppSettings.swift */; };
+		FCF0EA2F23606A5800EE1FE2 /* MockAppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF0EA2E23606A5800EE1FE2 /* MockAppSettings.swift */; };
 		FCF4B650232BC377001340DF /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF4B64F232BC377001340DF /* UserDefaultKeys.swift */; };
 		FCFC069323224081003C59C8 /* ScaledNumberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC069223224080003C59C8 /* ScaledNumberTests.swift */; };
 		FCFC069723224156003C59C8 /* RecommendationEquatableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC069623224156003C59C8 /* RecommendationEquatableTests.swift */; };
@@ -282,6 +284,8 @@
 		FCE75CC5232F631C00C2E976 /* NetworkCallLoggerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCallLoggerProtocol.swift; sourceTree = "<group>"; };
 		FCE8DAA52320E71200934E2F /* CompanyViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyViewData.swift; sourceTree = "<group>"; };
 		FCE8DAA72320E80B00934E2F /* ScaledNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaledNumber.swift; sourceTree = "<group>"; };
+		FCF0EA2C23606A1D00EE1FE2 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		FCF0EA2E23606A5800EE1FE2 /* MockAppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAppSettings.swift; sourceTree = "<group>"; };
 		FCF4B64F232BC377001340DF /* UserDefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
 		FCFC069223224080003C59C8 /* ScaledNumberTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaledNumberTests.swift; sourceTree = "<group>"; };
 		FCFC069623224156003C59C8 /* RecommendationEquatableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationEquatableTests.swift; sourceTree = "<group>"; };
@@ -520,6 +524,7 @@
 		FCA91E8622340478007ED308 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				FCF0EA2C23606A1D00EE1FE2 /* AppSettings.swift */,
 				FC1243E22344AEA30007BA95 /* ScreenNames.swift */,
 				FC8F9581233BB53B0027BE02 /* Factories protocols */,
 				FC1DBDF72335471900D68C83 /* Model protocols */,
@@ -633,6 +638,7 @@
 				FC8F957A233BA6710027BE02 /* MockAnalyticsAndDebugging.swift */,
 				FC14E458234200EC005D7541 /* MockVersionCheckCoordinator.swift */,
 				FC390140234C9E0A009A9F7B /* MockF4SInterestsRepository.swift */,
+				FCF0EA2E23606A5800EE1FE2 /* MockAppSettings.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -817,6 +823,7 @@
 				FC14E44C2341E36B005D7541 /* MockUIApplication.swift in Sources */,
 				FCE5192E2249482A00B550C9 /* F4SCalendar.swift in Sources */,
 				FC8F957F233BA6710027BE02 /* MockNavigationRouter.swift in Sources */,
+				FCF0EA2D23606A1D00EE1FE2 /* AppSettings.swift in Sources */,
 				FC0660572326635000496FE2 /* Protocols.swift in Sources */,
 				FCF4B650232BC377001340DF /* UserDefaultKeys.swift in Sources */,
 				FC8F9583233BB5580027BE02 /* FactoriesProtocols.swift in Sources */,
@@ -830,6 +837,7 @@
 				FCE51939224948E400B550C9 /* WorkAvailabilityWindow.swift in Sources */,
 				FC22DC0422F999FD0068C61C /* F4SChoice.swift in Sources */,
 				FC94E53D230DB3200091E625 /* F4SError.swift in Sources */,
+				FCF0EA2F23606A5800EE1FE2 /* MockAppSettings.swift in Sources */,
 				FC96709C2258C8B100318F69 /* F4SInterest.swift in Sources */,
 				FC5019652306A24500A26B53 /* F4SDayOfWeek.swift in Sources */,
 				FCE5192C2249482A00B550C9 /* F4SCalendarWeek.swift in Sources */,

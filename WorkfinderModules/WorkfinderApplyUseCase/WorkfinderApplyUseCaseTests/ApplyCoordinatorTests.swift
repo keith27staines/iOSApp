@@ -21,6 +21,7 @@ class ApplyCoordinatorTests: XCTestCase {
     let mockUserStatusService = MockF4SUserStatusService()
     let mockDatabaseDownloadManager = MockDatabaseDownloadManager()
     let mockAnalytics = MockF4SAnalyticsAndDebugging()
+    let mockAppSettings = MockAppSettingProvider()
     var mockPlacementServiceFactory = MockF4SPlacementServiceFactory(errorResponseCode: 404)
     
     lazy var mockedInjection: CoreInjection = {
@@ -35,7 +36,8 @@ class ApplyCoordinatorTests: XCTestCase {
             userRepository: MockUserRepository(user: mockRegisteredUser),
             databaseDownloadManager: mockDatabaseDownloadManager,
             contentService: mockContentService,
-            log: mockAnalytics
+            log: mockAnalytics,
+            appSettings: mockAppSettings
         )
         return injection
     }()

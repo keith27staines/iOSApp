@@ -54,6 +54,7 @@ struct TestMasterBuilder: TabbarCoordinatorFactoryProtocol {
     lazy var mockDocumentUploaderFactory = MockF4SDocumentUploaderFactory()
     lazy var mockEmailVerificationModel = MockF4SEmailVerificationModel()
     lazy var mockFavouritesRepository = MockFavouritingRepository()
+    lazy var mockAppSettings = MockAppSettingProvider()
     lazy var inject: CoreInjection = {
         return CoreInjection(
             launchOptions: launchOptions,
@@ -64,7 +65,8 @@ struct TestMasterBuilder: TabbarCoordinatorFactoryProtocol {
             userRepository: self.userRepo,
             databaseDownloadManager: self.mockDatabaseDownloadManager,
             contentService: self.mockContentService,
-            log: self.mockLog)
+            log: self.mockLog,
+            appSettings: mockAppSettings)
     }()
     lazy var interestsRepository: F4SInterestsRepositoryProtocol = {
         return F4SInterestsRepository(localStore: self.mockLocalStore)

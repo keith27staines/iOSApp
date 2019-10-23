@@ -80,8 +80,8 @@ class MockCoordinatingDelegate: CompanyViewModelCoordinatingDelegate {
         applyToCompany = applyTo
     }
     
-    func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn person: F4SHost) {
-        showLinkedInForPerson = person
+    func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn host: F4SHost) {
+        showLinkedInForPerson = host
     }
     
     func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn company: CompanyViewData) {

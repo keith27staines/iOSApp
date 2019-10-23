@@ -15,9 +15,11 @@ class CompanyViewController: UIViewController {
     var originScreen = ScreenName.notSpecified
     let viewModel: CompanyViewModel
     weak var log: F4SAnalyticsAndDebugging?
+    var appSettings: AppSettingProvider
     
-    init(viewModel: CompanyViewModel) {
+    init(viewModel: CompanyViewModel, appSettings: AppSettingProvider) {
         self.viewModel = viewModel
+        self.appSettings = appSettings
         super.init(nibName: nil, bundle: nil)
         viewModel.viewModelDelegate = self
         hidesBottomBarWhenPushed = true
@@ -41,12 +43,13 @@ class CompanyViewController: UIViewController {
     
     lazy var companyMainPageView: CompanyMainView = {
         let mainView = view as! CompanyMainView
+        mainView.appSettings = self.appSettings
         mainView.log = log
         return mainView
     }()
     
     override func loadView() {
-        view = CompanyMainView(companyViewModel: viewModel, delegate: self)
+        view = CompanyMainView(companyViewModel: viewModel, delegate: self, appSettings: appSettings)
     }
     
     override func viewDidLoad() {

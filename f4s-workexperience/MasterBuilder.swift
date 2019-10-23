@@ -94,7 +94,8 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
             userRepository: self.userRepo,
             databaseDownloadManager: self.databaseDownloadManager,
             contentService: self.contentService,
-            log: self.log)
+            log: self.log,
+            appSettings: self.remoteConfig)
     }()
     
     lazy var versionCheckCoordinator: VersionCheckCoordinatorProtocol = {

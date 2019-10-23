@@ -2,46 +2,9 @@
 import Foundation
 import Firebase
 import FirebaseRemoteConfig
+import WorkfinderCommon
 
-public class MockAppSettingProvider: AppSettingProvider {
-    public static func currentValue(key: AppSettingKey) -> String {
-        return key.defaultValue
-    }
-}
-
-public protocol AppSettingProvider {
-    static func currentValue(key:AppSettingKey) -> String
-}
-
-public enum AppSettingKey: String, CaseIterable {
-    
-    case displayName
-    case showHostsEnabled = "show_hosts_enabled"
-    
-    var defaultValue: String {
-        switch self {
-        case .displayName: return "Workfinder"
-        case .showHostsEnabled: return "false"
-        }
-    }
-
-    static var defaultsDictionary: [String: String] {
-        var dictionary = [String: String]()
-        AppSettingKey.allCases.forEach { (appConstant) in
-            dictionary[appConstant.rawValue] = appConstant.defaultValue
-        }
-        return dictionary
-    }
-}
-
-extension AppSettingKey: AppSettingProvider {
-    public static func currentValue(key:AppSettingKey) -> String {
-        return RemoteConfig.remoteConfig().configValue(forKey: key.rawValue).stringValue ?? key.defaultValue
-    }
-}
-
-
-class RemoteConfiguration {
+class RemoteConfiguration: AppSettingProvider {
 
     let remoteConfig: RemoteConfig
     
@@ -52,7 +15,11 @@ class RemoteConfiguration {
     func start() {
         InstanceID.instanceID().instanceID { (result, error) in
             guard let result = result else { return }
+            print("")
+            print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
             print("Remote instance ID token: \(result.token)")
+            print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+            print("")
         }
         loadDefaultValues()
         fetchCloudValues()
@@ -63,10 +30,17 @@ class RemoteConfiguration {
     }
     
     private func fetchCloudValues() {
-        remoteConfig.fetchAndActivate { (status, error) in
+        let expiration: TimeInterval = Config.environment == .staging ? 0 : 12 * 3600
+        remoteConfig.fetch(withExpirationDuration: expiration) { (status, error) in
             guard error == nil else { return }
-            print(AppSettingKey.currentValue(key: AppSettingKey.showHostsEnabled))
+            self.remoteConfig.activate { (error) in
+                
+            }
         }
+    }
+    
+    public func currentValue(key:AppSettingKey) -> String {
+        return remoteConfig.configValue(forKey: key.rawValue).stringValue ?? key.defaultValue
     }
     
 }
