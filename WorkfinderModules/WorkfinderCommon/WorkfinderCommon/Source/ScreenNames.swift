@@ -32,6 +32,7 @@ public enum TrackEvent: String {
     case mapFiltersCancelTap                    // checked
     case mapFiltersRefineSearchTap              // checked
     
+    case companyDetailsScreenDidLoad            // checked
     case companyDetailsCloseTap                 // checked
     case companyDetailsApplyTap                 // checked
     case companyDetailsCompanyTabTap            // checked

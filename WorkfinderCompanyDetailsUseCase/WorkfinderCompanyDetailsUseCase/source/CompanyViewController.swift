@@ -56,6 +56,7 @@ class CompanyViewController: UIViewController {
         _ = pageViewController
         companyMainPageView.segmentedControl.selectedSegmentIndex = viewModel.selectedHostIndex ?? 0
         viewModel.userLocation = companyMainPageView.mapView.userLocation.location
+        log?.track(event: .companyDetailsScreenDidLoad, properties: nil)
         refresh()
     }
     
