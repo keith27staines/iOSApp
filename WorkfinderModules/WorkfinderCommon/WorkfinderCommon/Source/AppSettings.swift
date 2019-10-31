@@ -14,7 +14,7 @@ public enum AppSettingKey: String, CaseIterable {
     case ab_showHostsEnabled = "ab_show_hosts"
     
     // introduced in 2.9.1
-    case ab_CompanyDetailsFirstEmphasis = "company"
+    case ab_CompanyDetailsFirstEmphasis = "ab_CompanyDetailsFirstEmphasis"
     
     public var defaultValue: String {
         switch self {

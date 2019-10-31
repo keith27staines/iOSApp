@@ -65,6 +65,12 @@ class CompanyMainView: UIView {
             segmentedControl = UISegmentedControl(items: ["Company","Data"])
         case "true":
             segmentedControl = UISegmentedControl(items: ["Company","Data", "People"])
+            switch self.appSettings.currentValue(key: AppSettingKey.ab_CompanyDetailsFirstEmphasis) {
+            case "host":
+                segmentedControl.selectedSegmentIndex = 1
+            default:
+                segmentedControl.selectedSegmentIndex = 0
+            }
         default:
             segmentedControl = UISegmentedControl(items: ["Company","Data"])
         }

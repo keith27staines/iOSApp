@@ -19,7 +19,7 @@ protocol CompanyPeopleViewControllerDelegate {
 
 class CompanyHostsViewController: CompanySubViewController {
     
-    private var textModel = TextModel()
+    private var textModel: TextModel!
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -38,6 +38,7 @@ class CompanyHostsViewController: CompanySubViewController {
     override func viewDidLoad() {
         view.addSubview(tableView)
         tableView.fillSuperview(padding: UIEdgeInsets(top: 8, left: 4, bottom: 8, right: 4))
+        textModel = TextModel(hosts: viewModel.hosts)
         refresh()
     }
     
@@ -48,6 +49,7 @@ class CompanyHostsViewController: CompanySubViewController {
     override func refresh() {
         let index = viewModel.selectedHostIndex
         viewModel.selectedHostIndex = nil
+        
         tableView.reloadData()
         viewModel.selectedHostIndex = index
     }
@@ -85,7 +87,9 @@ extension CompanyHostsViewController: UITableViewDelegate, UITableViewDataSource
         summaryState.isExpanded.toggle()
         textModel.expandableLabelStates[indexPath.row] = summaryState
         cell.configureWithHost(host, summaryState: summaryState, profileLinkTap: profileLinkTap)
-        tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+        tableView.beginUpdates()
+        tableView.endUpdates()
+//        tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
     }
     
     func profileLinkTap(host: F4SHost) {
@@ -117,28 +121,17 @@ class HostCell: UITableViewCell {
 }
 
 class TextModel {
-        let lorem = "Sedut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sequia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
 
     var expandableLabelStates = [ExpandableLabelState]()
     
-    init() {
-        for _ in 0..<50 {
+    init(hosts: [F4SHost]) {
+        for host in hosts {
             var state = ExpandableLabelState()
-            state.text = makeRandomText()
+            state.text = host.summary ?? ""
             state.isExpanded = false
             state.isExpandable = false
             expandableLabelStates.append(state)
         }
-    }
-    
-    func makeRandomText() -> String {
-        let max = lorem.count
-        let chars = (0..<max).randomElement()!
-        return makeText(chars: chars)
-    }
-
-    func makeText(chars: Int) -> String {
-        return String(lorem.prefix(chars))
     }
 }
 

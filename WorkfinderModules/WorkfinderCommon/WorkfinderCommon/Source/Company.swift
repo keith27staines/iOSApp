@@ -57,6 +57,7 @@ public struct F4SHost : Codable {
     public var isInterestedInHosting: Bool?
     public var isCurrentEmployee: Bool?
     public var role: String?
+    public var summary: String?
     
     public init(
         uuid: F4SUUID,
@@ -68,7 +69,8 @@ public struct F4SHost : Codable {
         gender: String? = nil,
         isInterestedInHosting: Bool? = nil,
         isCurrentEmployee: Bool? = nil,
-        role: String? = nil) {
+        role: String? = nil,
+        summary: String? = nil) {
         
         self.uuid = uuid
         self.displayName = displayName
@@ -80,6 +82,7 @@ public struct F4SHost : Codable {
         self.isInterestedInHosting = isInterestedInHosting
         self.isCurrentEmployee = isCurrentEmployee
         self.role = role
+        self.summary = summary
     }
 }
 
@@ -95,6 +98,7 @@ extension F4SHost {
         case isInterestedInHosting = "is_interested_in_working"
         case isCurrentEmployee = "is_current"
         case role = "job_title"
+        case summary
     }
 }
 
