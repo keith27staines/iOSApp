@@ -19,6 +19,8 @@ protocol CompanyPeopleViewControllerDelegate {
 
 class CompanyHostsViewController: CompanySubViewController {
     
+    private var textModel = TextModel()
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
@@ -71,8 +73,19 @@ extension CompanyHostsViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HostCell") as! HostCell
         let host = viewModel.hosts[indexPath.row]
-        cell.configureWithHost(host, profileLinkTap: profileLinkTap)
+        let summaryState = textModel.expandableLabelStates[indexPath.row]
+        cell.configureWithHost(host, summaryState: summaryState ,profileLinkTap: profileLinkTap)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! HostCell
+        let host = viewModel.hosts[indexPath.row]
+        var summaryState = textModel.expandableLabelStates[indexPath.row]
+        summaryState.isExpanded.toggle()
+        textModel.expandableLabelStates[indexPath.row] = summaryState
+        cell.configureWithHost(host, summaryState: summaryState, profileLinkTap: profileLinkTap)
+        tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
     }
     
     func profileLinkTap(host: F4SHost) {
@@ -82,8 +95,9 @@ extension CompanyHostsViewController: UITableViewDelegate, UITableViewDataSource
 
 class HostCell: UITableViewCell {
     
-    func configureWithHost(_ host: F4SHost, profileLinkTap: @escaping ((F4SHost) -> Void)) {
+    func configureWithHost(_ host: F4SHost, summaryState: ExpandableLabelState ,profileLinkTap: @escaping ((F4SHost) -> Void)) {
         hostView.host = host
+        hostView.expandableLabelState = summaryState
         hostView.profileLinkTap = profileLinkTap
     }
     
@@ -102,6 +116,31 @@ class HostCell: UITableViewCell {
     }
 }
 
+class TextModel {
+        let lorem = "Sedut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sequia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+
+    var expandableLabelStates = [ExpandableLabelState]()
+    
+    init() {
+        for _ in 0..<50 {
+            var state = ExpandableLabelState()
+            state.text = makeRandomText()
+            state.isExpanded = false
+            state.isExpandable = false
+            expandableLabelStates.append(state)
+        }
+    }
+    
+    func makeRandomText() -> String {
+        let max = lorem.count
+        let chars = (0..<max).randomElement()!
+        return makeText(chars: chars)
+    }
+
+    func makeText(chars: Int) -> String {
+        return String(lorem.prefix(chars))
+    }
+}
 
 
 

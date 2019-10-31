@@ -68,9 +68,6 @@ class PersonCollectionViewCell: UICollectionViewCell {
     
     func configure(person: F4SHost) {
         imageView.image = UIImage(named: "person")
-//        if let imageUrl = person.imageUrl {
-//            imageView.image = nil
-//        }
         nameLabel.text = person.displayName
         positionLabel.text = person.role
     }

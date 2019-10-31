@@ -11,12 +11,16 @@ public enum AppSettingKey: String, CaseIterable {
     case displayName
     
     // introduced in 2.9.0
-    case showHostsEnabled = "ab_show_hosts"
+    case ab_showHostsEnabled = "ab_show_hosts"
+    
+    // introduced in 2.9.1
+    case ab_CompanyDetailsFirstEmphasis = "company"
     
     public var defaultValue: String {
         switch self {
         case .displayName: return "Workfinder"
-        case .showHostsEnabled: return "cannot be this value"
+        case .ab_showHostsEnabled: return "cannot be this value"
+        case .ab_CompanyDetailsFirstEmphasis: return "company"
         }
     }
 

@@ -209,7 +209,6 @@
 			children = (
 				FCC1DF39232503950074D5C1 /* CompanySummaryViewController.swift */,
 				FCC1DF3A232503950074D5C1 /* CompanyDocumentsViewController.swift */,
-				FCB9EE4A235D9F9500678F3F /* HostView.swift */,
 			);
 			path = "company summary";
 			sourceTree = "<group>";
@@ -218,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				FCC1DF3E232503BC0074D5C1 /* CompanyHostsViewController.swift */,
+				FCB9EE4A235D9F9500678F3F /* HostView.swift */,
 				FCC1DF47232503E50074D5C1 /* sub views */,
 			);
 			path = "company people";

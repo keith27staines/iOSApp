@@ -60,7 +60,7 @@ class CompanyMainView: UIView {
     
     lazy var segmentedControl: UISegmentedControl = {
         let segmentedControl: UISegmentedControl
-        switch self.appSettings.currentValue(key: AppSettingKey.showHostsEnabled) {
+        switch self.appSettings.currentValue(key: AppSettingKey.ab_showHostsEnabled) {
         case "false":
             segmentedControl = UISegmentedControl(items: ["Company","Data"])
         case "true":
