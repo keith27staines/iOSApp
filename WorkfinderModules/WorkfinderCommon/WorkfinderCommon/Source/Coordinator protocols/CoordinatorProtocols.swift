@@ -111,7 +111,7 @@ public protocol NavigationRoutingProtocol : RoutingProtocol {
     func popToViewController(_ viewController: UIViewController, animated: Bool)
 }
 
-public protocol RoutingProtocol {
+public protocol RoutingProtocol: class {
     var rootViewController: UIViewController { get }
     func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)?)
     func dismiss(animated: Bool, completion: (() -> Void)?)

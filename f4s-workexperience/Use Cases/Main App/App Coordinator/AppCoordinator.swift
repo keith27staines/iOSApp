@@ -46,6 +46,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     var userNotificationService: UNService!
     var log: F4SAnalyticsAndDebugging { return injected.log }
     let localStore: LocalStorageProtocol
+    var selectEnvironmentCoordinatorFactory: SelectEnvironmentCoordinatorFactoryProtocol
     
     public init(registrar: RemoteNotificationsRegistrarProtocol,
                 navigationRouter: NavigationRoutingProtocol,
@@ -70,7 +71,8 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                 recommendationsService: F4SRecommendationServiceProtocol,
                 roleService: F4SRoleServiceProtocol,
                 tabBarCoordinatorFactory: TabbarCoordinatorFactoryProtocol,
-                versionCheckCoordinator: VersionCheckCoordinatorProtocol) {
+                versionCheckCoordinator: VersionCheckCoordinatorProtocol,
+                selectEnvironmentCoordinatorFactory: SelectEnvironmentCoordinatorFactoryProtocol) {
         
         self.registrar = registrar
         self.injected = inject
@@ -99,6 +101,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         self.roleService = roleService
         self.tabBarCoordinatorFactory = tabBarCoordinatorFactory
         self.versionCheckCoordinator = versionCheckCoordinator
+        self.selectEnvironmentCoordinatorFactory = selectEnvironmentCoordinatorFactory
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = navigationRouter.rootViewController
@@ -123,10 +126,22 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
         if launchOptions?[.remoteNotification] == nil {
-            performVersionCheck(resultHandler: onVersionCheckResult)
+            selectEnvironment { [weak self] in
+                guard let self = self else { return }
+                self.performVersionCheck(resultHandler: self.onVersionCheckResult)
+            }
         } else {
-            startTabBarCoordinator()
+            self.startTabBarCoordinator()
         }
+    }
+    
+    
+    func selectEnvironment(completion: @escaping () -> Void) {
+        let selectEnvironmentCoordinator = selectEnvironmentCoordinatorFactory.create(parent: self, router: navigationRouter, onEnvironmentSelected: {
+            completion()
+        })
+        addChildCoordinator(selectEnvironmentCoordinator)
+        selectEnvironmentCoordinator.start()
     }
     
     func performVersionCheck(resultHandler: @escaping (F4SNetworkResult<F4SVersionValidity>)->Void) {

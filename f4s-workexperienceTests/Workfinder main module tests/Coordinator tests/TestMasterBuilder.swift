@@ -5,7 +5,7 @@ import WorkfinderAppLogic
 import WorkfinderCoordinators
 @testable import f4s_workexperience
 
-struct TestMasterBuilder: TabbarCoordinatorFactoryProtocol {
+class TestMasterBuilder: TabbarCoordinatorFactoryProtocol {
     
     let versionIsOkay: Bool
     let installationUuid: F4SUUID?
@@ -37,7 +37,8 @@ struct TestMasterBuilder: TabbarCoordinatorFactoryProtocol {
             recommendationsService: self.mockRecommendationsService,
             roleService: self.mockRoleService,
             tabBarCoordinatorFactory: self,
-            versionCheckCoordinator: self.mockVersionCheckCoordinator)
+            versionCheckCoordinator: self.mockVersionCheckCoordinator,
+            selectEnvironmentCoordinatorFactory: self)
     }()
     lazy var mockAppInstallationLogic: MockAppInstallationUuidLogic = {
         let logic = MockAppInstallationUuidLogic(registeredUserUuid: self.anonymousUserUuid)
@@ -107,6 +108,8 @@ struct TestMasterBuilder: TabbarCoordinatorFactoryProtocol {
         return coordinator
     }()
     
+    var mockSelectEnvironmentCoordinator: MockSelectEnvironmentCoordinator?
+    
     init(userIsRegistered: Bool, versionIsOkay: Bool) {
         self.installationUuid = "installation uuid" //userIsRegistered ? "installation uuid" : nil
         self.versionIsOkay = versionIsOkay
@@ -125,5 +128,32 @@ struct TestMasterBuilder: TabbarCoordinatorFactoryProtocol {
             navigationRouter: router,
             inject: inject)
     }
+}
+
+extension TestMasterBuilder: SelectEnvironmentCoordinatorFactoryProtocol {
+    func create(parent: Coordinating, router: NavigationRoutingProtocol, onEnvironmentSelected: @escaping (() -> Void)) -> SelectEnvironmentCoordinating {
+        mockSelectEnvironmentCoordinator = MockSelectEnvironmentCoordinator(parent: parent, router: router, onEnvironmentSelected: onEnvironmentSelected)
+        return mockSelectEnvironmentCoordinator!
+    }
+}
+
+public class MockSelectEnvironmentCoordinator: SelectEnvironmentCoordinating {
+    public var onEnvironmentSelected: (() -> Void)?
+    
+    public var parentCoordinator: Coordinating?
+    
+    public var uuid = UUID()
+    
+    public var childCoordinators = [UUID : Coordinating]()
+    
+    public func start() {
+        onEnvironmentSelected?()
+    }
+    
+    public init(parent: Coordinating, router: NavigationRoutingProtocol, onEnvironmentSelected: @escaping (() -> Void)) {
+        self.parentCoordinator = parent
+        self.onEnvironmentSelected = onEnvironmentSelected
+    }
+    
 }
 

@@ -129,7 +129,8 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
                               recommendationsService: recommendationsService,
                               roleService: roleService,
                               tabBarCoordinatorFactory: self,
-                              versionCheckCoordinator: versionCheckCoordinator)
+                              versionCheckCoordinator: versionCheckCoordinator,
+                              selectEnvironmentCoordinatorFactory: self)
     }
     
     lazy var companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol = {
@@ -300,4 +301,10 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         return F4SWorkfinderVersioningService(configuration: self.networkConfiguration)
     }()
 
+}
+
+extension MasterBuilder: SelectEnvironmentCoordinatorFactoryProtocol {
+    func create(parent: Coordinating, router: NavigationRoutingProtocol, onEnvironmentSelected: @escaping (() -> Void)) -> SelectEnvironmentCoordinating {
+        return SelectEnvironmentCoordinator(parent: parent, router: router, onEnvironmentSelected: onEnvironmentSelected)
+    }
 }

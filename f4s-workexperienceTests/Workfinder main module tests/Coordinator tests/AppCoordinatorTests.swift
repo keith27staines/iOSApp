@@ -22,7 +22,7 @@ class AppCoordinatorTests: XCTestCase {
         let sut = masterBuilder.appCoordinator
         let expectation = XCTestExpectation(description: "")
         let versionCheckCoordinator = masterBuilder.mockVersionCheckCoordinator as! MockVersionCheckCoordinator
-        var masterBuilder = self.masterBuilder!
+        let masterBuilder = self.masterBuilder!
         versionCheckCoordinator.testVersionCheckWasCalled = {
             let onboardingCoordinator = masterBuilder.mockOnboardingCoordinatorFactory.onboardingCoordinators.last
             XCTAssertNil(onboardingCoordinator)
@@ -37,7 +37,7 @@ class AppCoordinatorTests: XCTestCase {
         let sut = masterBuilder.appCoordinator
         let expectation = XCTestExpectation(description: "")
         let versionCheckCoordinator = masterBuilder.mockVersionCheckCoordinator as! MockVersionCheckCoordinator
-        var masterBuilder = self.masterBuilder!
+        let masterBuilder = self.masterBuilder!
         versionCheckCoordinator.testVersionCheckWasCalled = {
             let onboardingCoordinator = masterBuilder.mockOnboardingCoordinatorFactory.onboardingCoordinators.last
             XCTAssertTrue(onboardingCoordinator?.startedCount == 1)
@@ -51,7 +51,7 @@ class AppCoordinatorTests: XCTestCase {
         masterBuilder = TestMasterBuilder(userIsRegistered: false, versionIsOkay: true)
         let sut = masterBuilder.appCoordinator
         let expectation = XCTestExpectation(description: "")
-        var masterBuilder = self.masterBuilder!
+        let masterBuilder = self.masterBuilder!
         let appInstallationLogic = masterBuilder.mockAppInstallationLogic
         appInstallationLogic.testDidComplete = {
             expectation.fulfill()
@@ -65,7 +65,7 @@ class AppCoordinatorTests: XCTestCase {
         let sut = masterBuilder.appCoordinator
         let expectation = XCTestExpectation(description: "")
         let versionCheckCoordinator = masterBuilder.mockVersionCheckCoordinator as! MockVersionCheckCoordinator
-        var masterBuilder = self.masterBuilder!
+        let masterBuilder = self.masterBuilder!
         versionCheckCoordinator.testVersionCheckWasCalled = {
             let onboardingCoordinator = masterBuilder.mockOnboardingCoordinatorFactory.onboardingCoordinators.last
             onboardingCoordinator?.completeOnboarding()
