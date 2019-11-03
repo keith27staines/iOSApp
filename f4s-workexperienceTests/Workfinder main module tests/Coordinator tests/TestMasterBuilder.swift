@@ -138,6 +138,11 @@ extension TestMasterBuilder: SelectEnvironmentCoordinatorFactoryProtocol {
 }
 
 public class MockSelectEnvironmentCoordinator: SelectEnvironmentCoordinating {
+    
+    public func userDidSelectEnvironment() {
+        
+    }
+    
     public var onEnvironmentSelected: (() -> Void)?
     
     public var parentCoordinator: Coordinating?
