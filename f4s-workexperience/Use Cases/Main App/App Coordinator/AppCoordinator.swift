@@ -46,7 +46,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     var userNotificationService: UNService!
     var log: F4SAnalyticsAndDebugging { return injected.log }
     let localStore: LocalStorageProtocol
-    var selectEnvironmentCoordinatorFactory: SelectEnvironmentCoordinatorFactoryProtocol
     
     public init(registrar: RemoteNotificationsRegistrarProtocol,
                 navigationRouter: NavigationRoutingProtocol,
@@ -72,8 +71,9 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                 roleService: F4SRoleServiceProtocol,
                 tabBarCoordinatorFactory: TabbarCoordinatorFactoryProtocol,
                 versionCheckCoordinator: VersionCheckCoordinatorProtocol,
-                selectEnvironmentCoordinatorFactory: SelectEnvironmentCoordinatorFactoryProtocol) {
+                window: UIWindow) {
         
+        self.window = window
         self.registrar = registrar
         self.injected = inject
         
@@ -101,47 +101,21 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         self.roleService = roleService
         self.tabBarCoordinatorFactory = tabBarCoordinatorFactory
         self.versionCheckCoordinator = versionCheckCoordinator
-        self.selectEnvironmentCoordinatorFactory = selectEnvironmentCoordinatorFactory
-        
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window.rootViewController = navigationRouter.rootViewController
-        window.makeKeyAndVisible()
 
         super.init(parent:nil, navigationRouter: navigationRouter)
-        darkModeOptOut(window: window)
         self.injected.appCoordinator = self
         versionCheckCoordinator.parentCoordinator = self
         userNotificationService = UNService(appCoordinator: self)
-    }
-    
-    func darkModeOptOut(window: UIWindow) {
-        if #available(iOS 13.0, *) {
-            if window.responds(to: #selector(getter: UIView.overrideUserInterfaceStyle)) {
-                window.setValue(UIUserInterfaceStyle.light.rawValue, forKey: "overrideUserInterfaceStyle")
-            }
-        }
     }
     
     override func start() {
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
         if launchOptions?[.remoteNotification] == nil {
-            selectEnvironment { [weak self] in
-                guard let self = self else { return }
-                self.performVersionCheck(resultHandler: self.onVersionCheckResult)
-            }
+            performVersionCheck(resultHandler: self.onVersionCheckResult)
         } else {
-            self.startTabBarCoordinator()
+            startTabBarCoordinator()
         }
-    }
-    
-    
-    func selectEnvironment(completion: @escaping () -> Void) {
-        let selectEnvironmentCoordinator = selectEnvironmentCoordinatorFactory.create(parent: self, router: navigationRouter, onEnvironmentSelected: {
-            completion()
-        })
-        addChildCoordinator(selectEnvironmentCoordinator)
-        selectEnvironmentCoordinator.start()
     }
     
     func performVersionCheck(resultHandler: @escaping (F4SNetworkResult<F4SVersionValidity>)->Void) {

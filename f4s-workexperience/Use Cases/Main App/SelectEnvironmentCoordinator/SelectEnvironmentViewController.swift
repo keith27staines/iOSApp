@@ -1,81 +1,190 @@
 
 import Foundation
+import WorkfinderUI
 
 class SelectEnvironmentViewController: UIViewController {
-    let environments = [EnvironmentModel.makeStaging(), EnvironmentModel.makeCustom()]
+    var environments = [EnvironmentModel.makeStaging(), EnvironmentModel.makeCustom()]
     weak var coordinator: SelectEnvironmentCoordinating?
     
     @IBOutlet weak var segmentControl: UISegmentedControl!
-    @IBOutlet weak var ipAddressTextField: UITextField!
-    @IBOutlet weak var portTextField: UITextField!
+    @IBOutlet weak var urlAddressTextField: UITextField!
     @IBOutlet weak var testConnectionButton: UIButton!
     @IBOutlet weak var continueToWorkfinderButton: UIButton!
+    let messageHandler = UserMessageHandler()
     
     @IBAction func testConnectionTap(_ sender: UIButton) {
+        var model = selectedModel
+        guard model.urlString != "https://workfinder.com" else {
+            model.connectionState = .liveNotAllowed
+            updateSelectedModel(model)
+            presentSelectedEnvironment()
+            showConnectedAlert()
+            return
+        }
+        let urlString = model.urlString + "/api/v2/"
+        guard let url = URL(string: urlString) else {
+            model.connectionState = .badUrl
+            updateSelectedModel(model)
+            presentSelectedEnvironment()
+            showConnectedAlert()
+            return
+        }
+        let session = URLSession.shared
+        
+        messageHandler.showLoadingOverlay(view)
+        let task = session.dataTask(with: url, completionHandler: { data, response, error in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.messageHandler.hideLoadingOverlay()
+                if let error = error {
+                    model.connectionState = .error(error)
+                } else {
+                    let code = (response as! HTTPURLResponse).statusCode
+                    switch code {
+                    case 404:
+                        model.connectionState = .notFound
+                    case 401:
+                        model.connectionState = .connectable
+                    default:
+                        model.connectionState = .unexpectedStatus(code)
+                    }
+                }
+                self.updateSelectedModel(model)
+                self.presentSelectedEnvironment()
+                self.showConnectedAlert()
+            }
+        })
+        task.resume()
+    }
+    
+    func showConnectedAlert() {
+        let title: String
+        let message: String
+        switch selectedModel.connectionState {
+        case .notTested:
+            title = "Not tested"
+            message = "Please test the connection"
+        case .badUrl:
+            title = "Bad URL"
+            message = "Please correct the url or ip address"
+        case .error(let error):
+            title = "No connection"
+            message = "Connection test failed:\n\(error.localizedDescription)"
+        case .notFound:
+            title = "API not found"
+            message = "No api was found at the specified address"
+        case .unexpectedStatus(let status):
+            title = "No connection"
+            message = "A \(status) response code was received from the server"
+        case .liveNotAllowed:
+            title = "Not permitted"
+            message = "This version of the app is not permitted to connect to the Live environment"
+        case .connectable:
+            title = "Connected!"
+            message = "It looks like you can connect to this environment"
+        }
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
     }
     
     @IBAction func contineToWorkfinderTap(_ sender: UIButton) {
-        coordinator?.userDidSelectEnvironment()
+        coordinator?.userDidSelectEnvironment(environmentModel: selectedModel)
     }
     
     @IBAction func ipAddressChanged(_ sender: UITextField) {
+        var model = selectedModel
+        model.serverString = sender.text
+        updateSelectedModel(model)
     }
     
-    @IBAction func portChanged(_ sender: UITextField) {
+    var selectedModel: EnvironmentModel { return environments[segmentControl.selectedSegmentIndex] }
+    
+    func updateSelectedModel(_ model: EnvironmentModel) {
+        environments[segmentControl.selectedSegmentIndex] = model
+    }
+    
+    @IBAction func editingFinished(sender: UITextField) {
+        sender.resignFirstResponder()
     }
     
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 0:
-            presentEnvironment(environments[0])
-        default:
-            presentEnvironment(environments[1])
-        }
+        presentSelectedEnvironment()
+    }
+    
+    override func viewDidLoad() {
+        urlAddressTextField.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        presentEnvironment(environments[segmentControl.selectedSegmentIndex])
+        presentSelectedEnvironment()
     }
     
-    func presentEnvironment(_ model: EnvironmentModel) {
-
+    func presentSelectedEnvironment() {
+        let model = selectedModel
         UIView.animate(withDuration: 0.2, animations: {
-            self.ipAddressTextField.text = model.ipAddress
-            self.portTextField.text = model.port
-            self.testConnectionButton.alpha = model.isEditable ? 1 : 0.2
+            self.urlAddressTextField.text = model.serverString
             self.continueToWorkfinderButton.alpha = model.canConnect ? 1 : 0.2
         }) { (finished) in
-            self.ipAddressTextField.isEnabled = model.isEditable
-            self.portTextField.isEnabled = model.isEditable
-            self.testConnectionButton.isEnabled = model.isEditable ? true : false
+            self.urlAddressTextField.textColor = model.isEditable ? UIColor.darkText : UIColor.lightGray
+            self.urlAddressTextField.isEnabled = model.isEditable
             self.continueToWorkfinderButton.isEnabled = model.canConnect ? true : false
         }
     }
 }
 
-struct EnvironmentModel {
-    enum EnvironmentDesignator {
+extension SelectEnvironmentViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+public struct EnvironmentModel {
+    public enum EnvironmentDesignator {
         case custom
         case staging
         case production
     }
-    var environment: EnvironmentDesignator
-    var ipAddress: String?
-    var port: String?
-    var canConnect: Bool = false
-    var isEditable: Bool = false
+    
+    public enum ConnectionState {
+        case notTested
+        case badUrl
+        case error(Error)
+        case notFound
+        case unexpectedStatus(Int)
+        case liveNotAllowed
+        case connectable
+    }
+    
+    public internal (set) var environment: EnvironmentDesignator
+    public internal (set) var serverString: String?
+    public internal (set) var isEditable: Bool = false
+    public var connectionState: ConnectionState = .notTested
+    
+    public var canConnect: Bool {
+        switch connectionState {
+        case .connectable: return true
+        default: return false
+        }
+    }
+    
+    public var urlString: String {
+        return "https://" + (serverString ?? "")
+    }
     
     static func makeStaging() -> EnvironmentModel {
-        return EnvironmentModel(environment: .staging, ipAddress: "staging.workfinder.com", port: "80", canConnect: true, isEditable: false)
+        return EnvironmentModel(environment: .staging,
+                                serverString: "staging.workfinder.com",
+                                isEditable: false,
+                                connectionState: .connectable)
     }
     
     static func makeCustom() -> EnvironmentModel {
-        return EnvironmentModel(environment: .custom, ipAddress: "192.168.0.45", port: "8000", canConnect: false, isEditable: true)
+        return EnvironmentModel(environment: .custom,
+                                serverString: "staging.workfinder.com",
+                                isEditable: true,
+                                connectionState: .notTested)
     }
-    
-    static func makeProduction() -> EnvironmentModel {
-        return EnvironmentModel(environment: .production, ipAddress: nil, port: nil, canConnect: false, isEditable: false)
-    }
-    
-    
 }

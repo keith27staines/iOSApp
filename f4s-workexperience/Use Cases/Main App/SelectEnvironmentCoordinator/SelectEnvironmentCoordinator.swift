@@ -4,16 +4,15 @@ import WorkfinderCommon
 import WorkfinderCoordinators
 
 public protocol SelectEnvironmentCoordinating : Coordinating {
-    func userDidSelectEnvironment()
-    var onEnvironmentSelected: ( () -> Void )? { get set }
+    func userDidSelectEnvironment(environmentModel: EnvironmentModel)
+    var onEnvironmentSelected: ( (EnvironmentModel) -> Void )? { get set }
 }
 
 public protocol SelectEnvironmentCoordinatorFactoryProtocol {
-    func create(parent: Coordinating,
+    func create(parent: Coordinating?,
                 router: NavigationRoutingProtocol,
-                onEnvironmentSelected: @escaping (() -> Void)) -> SelectEnvironmentCoordinating
+                onEnvironmentSelected: @escaping ((EnvironmentModel) -> Void)) -> SelectEnvironmentCoordinating
 }
-
 
 public class SelectEnvironmentCoordinator : SelectEnvironmentCoordinating {
     
@@ -24,7 +23,7 @@ public class SelectEnvironmentCoordinator : SelectEnvironmentCoordinating {
     
     public var childCoordinators: [UUID : Coordinating] = [:]
     
-    public var onEnvironmentSelected: ( () -> Void )?
+    public var onEnvironmentSelected: ( (EnvironmentModel) -> Void )?
     
     public func start() {
         let vc = UIStoryboard(name: "SelectEnvironment", bundle: nil).instantiateInitialViewController() as! SelectEnvironmentViewController
@@ -32,13 +31,13 @@ public class SelectEnvironmentCoordinator : SelectEnvironmentCoordinating {
         router.present(vc, animated: true, completion: nil)
     }
     
-    public func userDidSelectEnvironment() {
-        onEnvironmentSelected?()
+    public func userDidSelectEnvironment(environmentModel: EnvironmentModel) {
+        onEnvironmentSelected?(environmentModel)
         router.dismiss(animated: true, completion: nil)
         parentCoordinator?.childCoordinatorDidFinish(self)
     }
     
-    public init(parent: Coordinating, router: NavigationRoutingProtocol, onEnvironmentSelected: @escaping () -> Void) {
+    public init(parent: Coordinating?, router: NavigationRoutingProtocol, onEnvironmentSelected: @escaping (EnvironmentModel) -> Void) {
         self.uuid = UUID()
         self.parentCoordinator = parent
         self.router = router

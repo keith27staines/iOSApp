@@ -10,6 +10,7 @@ import WorkfinderFavouritesUseCase
 import WorkfinderCompanyDetailsUseCase
 import WorkfinderRecommendations
 import WorkfinderUI
+import UIKit
 
 class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     func makeTabBarCoordinator(parent: Coordinating,
@@ -43,7 +44,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     let apnsEnvironment: String = Config.apnsEnv
     let environment: EnvironmentType = Config.environment
     let wexApiKey = Config.wexApiKey
-    let baseUrlString = Config.workfinderApiBase
+    var baseUrlString: String { return Config.workfinderApiBase }
     let remoteConfig: RemoteConfiguration
     
     init(registrar: RemoteNotificationsRegistrarProtocol,
@@ -105,6 +106,18 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
             versionCheckService: self.versionCheckService)
     }()
     
+    lazy var window: UIWindow = {
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = rootNavigationRouter.rootViewController
+        window.makeKeyAndVisible()
+        if #available(iOS 13.0, *) {
+            if window.responds(to: #selector(getter: UIView.overrideUserInterfaceStyle)) {
+                window.setValue(UIUserInterfaceStyle.light.rawValue, forKey: "overrideUserInterfaceStyle")
+            }
+        }
+        return window
+    }()
+    
     func buildAppCoordinator() -> AppCoordinatorProtocol {
         return  AppCoordinator(registrar: registrar,
                               navigationRouter: rootNavigationRouter,
@@ -130,7 +143,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
                               roleService: roleService,
                               tabBarCoordinatorFactory: self,
                               versionCheckCoordinator: versionCheckCoordinator,
-                              selectEnvironmentCoordinatorFactory: self)
+                              window: self.window)
     }
     
     lazy var companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol = {
@@ -304,7 +317,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
 }
 
 extension MasterBuilder: SelectEnvironmentCoordinatorFactoryProtocol {
-    func create(parent: Coordinating, router: NavigationRoutingProtocol, onEnvironmentSelected: @escaping (() -> Void)) -> SelectEnvironmentCoordinating {
+    func create(parent: Coordinating?, router: NavigationRoutingProtocol, onEnvironmentSelected: @escaping ((EnvironmentModel) -> Void)) -> SelectEnvironmentCoordinating {
         return SelectEnvironmentCoordinator(parent: parent, router: router, onEnvironmentSelected: onEnvironmentSelected)
     }
 }

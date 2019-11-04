@@ -45,6 +45,7 @@ public class LocalStore : LocalStorageProtocol {
         case motivationKey
         case useDefaultMotivation
         case interests
+        case workfinderBaseUrl
     }
     
     public init(userDefaults: UserDefaults = .standard) {
