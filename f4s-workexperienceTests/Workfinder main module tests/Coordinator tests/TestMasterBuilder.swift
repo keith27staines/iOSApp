@@ -38,7 +38,7 @@ class TestMasterBuilder: TabbarCoordinatorFactoryProtocol {
             roleService: self.mockRoleService,
             tabBarCoordinatorFactory: self,
             versionCheckCoordinator: self.mockVersionCheckCoordinator,
-            selectEnvironmentCoordinatorFactory: self)
+            window: UIWindow())
     }()
     lazy var mockAppInstallationLogic: MockAppInstallationUuidLogic = {
         let logic = MockAppInstallationUuidLogic(registeredUserUuid: self.anonymousUserUuid)
@@ -131,19 +131,25 @@ class TestMasterBuilder: TabbarCoordinatorFactoryProtocol {
 }
 
 extension TestMasterBuilder: SelectEnvironmentCoordinatorFactoryProtocol {
-    func create(parent: Coordinating, router: NavigationRoutingProtocol, onEnvironmentSelected: @escaping (() -> Void)) -> SelectEnvironmentCoordinating {
+    func create(parent: Coordinating?, router: NavigationRoutingProtocol, onEnvironmentSelected: @escaping ((EnvironmentModel) -> Void)) -> SelectEnvironmentCoordinating {
+        return MockSelectEnvironmentCoordinator(
+            parent: parent,
+            router: router,
+            onEnvironmentSelected: onEnvironmentSelected)
+    }
+    
+    func create(parent: Coordinating, router: NavigationRoutingProtocol, onEnvironmentSelected: @escaping ((EnvironmentModel) -> Void)) -> SelectEnvironmentCoordinating {
         mockSelectEnvironmentCoordinator = MockSelectEnvironmentCoordinator(parent: parent, router: router, onEnvironmentSelected: onEnvironmentSelected)
         return mockSelectEnvironmentCoordinator!
     }
 }
 
 public class MockSelectEnvironmentCoordinator: SelectEnvironmentCoordinating {
-    
-    public func userDidSelectEnvironment() {
+    public func userDidSelectEnvironment(environmentModel: EnvironmentModel) {
         
     }
     
-    public var onEnvironmentSelected: (() -> Void)?
+    public var onEnvironmentSelected: ((EnvironmentModel) -> Void)?
     
     public var parentCoordinator: Coordinating?
     
@@ -152,10 +158,11 @@ public class MockSelectEnvironmentCoordinator: SelectEnvironmentCoordinating {
     public var childCoordinators = [UUID : Coordinating]()
     
     public func start() {
-        onEnvironmentSelected?()
+        let environmentModel = EnvironmentModel(environment: .custom, serverString: "someserver", isEditable: true, connectionState: EnvironmentModel.ConnectionState.badUrl)
+        onEnvironmentSelected?(environmentModel)
     }
     
-    public init(parent: Coordinating, router: NavigationRoutingProtocol, onEnvironmentSelected: @escaping (() -> Void)) {
+    public init(parent: Coordinating?, router: NavigationRoutingProtocol, onEnvironmentSelected: @escaping ((EnvironmentModel) -> Void)) {
         self.parentCoordinator = parent
         self.onEnvironmentSelected = onEnvironmentSelected
     }

@@ -14,7 +14,6 @@ class AppCoordinatorTests: XCTestCase {
         masterBuilder = TestMasterBuilder(userIsRegistered: true, versionIsOkay: false )
         let sut = masterBuilder.appCoordinator
         XCTAssertNotNil(sut.window)
-        XCTAssertTrue(sut.window.isKeyWindow)
     }
     
     func test_versionCheck_called_and_onboarding_not_called_when_version_invalid() {

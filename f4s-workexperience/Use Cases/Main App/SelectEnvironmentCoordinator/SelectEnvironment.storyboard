@@ -81,12 +81,12 @@
                                     <action selector="testConnectionTap:" destination="jgk-U0-BKy" eventType="touchUpInside" id="Bk4-UN-ggF"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="staging.workfinder.com" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nJZ-Vq-NQ1">
+                            <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="staging.workfinder.com" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="nJZ-Vq-NQ1">
                                 <rect key="frame" x="59.666666666666657" y="342.33333333333331" width="314.33333333333337" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="3T0-GJ-WeM"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation"/>
                                 <connections>
                                     <action selector="ipAddressChanged:" destination="jgk-U0-BKy" eventType="editingChanged" id="E1V-u9-Ahy"/>

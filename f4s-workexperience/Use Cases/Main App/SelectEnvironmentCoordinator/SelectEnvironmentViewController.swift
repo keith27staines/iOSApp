@@ -96,7 +96,9 @@ class SelectEnvironmentViewController: UIViewController {
     @IBAction func ipAddressChanged(_ sender: UITextField) {
         var model = selectedModel
         model.serverString = sender.text
+        model.connectionState = .notTested
         updateSelectedModel(model)
+        presentSelectedEnvironment()
     }
     
     var selectedModel: EnvironmentModel { return environments[segmentControl.selectedSegmentIndex] }
@@ -115,6 +117,9 @@ class SelectEnvironmentViewController: UIViewController {
     
     override func viewDidLoad() {
         urlAddressTextField.delegate = self
+        continueToWorkfinderButton.layer.cornerRadius = 8
+        testConnectionButton.layer.cornerRadius = 8
+        urlAddressTextField.placeholder = "hostname"
     }
     
     override func viewDidAppear(_ animated: Bool) {
