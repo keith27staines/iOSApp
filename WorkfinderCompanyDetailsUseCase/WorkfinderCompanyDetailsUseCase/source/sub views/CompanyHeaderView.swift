@@ -12,7 +12,6 @@ import WorkfinderUI
 
 protocol CompanyHeaderViewDelegate : class {
     func didTapApply()
-    func didTapDone()
 }
 
 class CompanyHeaderView: UIView {
@@ -42,25 +41,10 @@ class CompanyHeaderView: UIView {
         companyIconImageView.load(urlString: companyViewData.logoUrlString, defaultImage: UIImage(named: "DefaultLogo"))
     }
     
-    lazy var doneButton : UIButton = {
-        let button = UIButton(type: UIButton.ButtonType.system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(#imageLiteral(resourceName: "cross"), for: UIControl.State.normal)
-        button.tintColor = UIColor.darkGray
-        button.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        button.widthAnchor.constraint(equalToConstant: 44).isActive = true
-        button.addTarget(self, action: #selector(handleDoneTap), for: .touchUpInside)
-        return button
-    }()
-    
     weak var delegate: CompanyHeaderViewDelegate?
     
     @objc func handleApplyTap() {
         delegate?.didTapApply()
-    }
-    
-    @objc func handleDoneTap() {
-        delegate?.didTapDone()
     }
     
     lazy var applyButton: UIButton = {
@@ -97,11 +81,8 @@ class CompanyHeaderView: UIView {
     func configureViews() {
         addSubview(companyIconImageView)
         addSubview(companyNameLabel)
-        addSubview(doneButton)
         addSubview(applyButton)
-        doneButton.anchor(top: nil, leading: leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0))
         applyButton.anchor(top: nil, leading: nil, bottom: nil, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 12), size: CGSize(width: 80, height: 44))
-        doneButton.centerYAnchor.constraint(equalTo: companyIconImageView.centerYAnchor).isActive = true
         applyButton.centerYAnchor.constraint(equalTo: companyIconImageView.centerYAnchor).isActive = true
         companyIconImageView.anchor(top: topAnchor, leading: nil, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0), size: CGSize(width: 44, height: 44))
         companyIconImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true

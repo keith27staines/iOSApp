@@ -54,19 +54,28 @@ class CompanyViewController: UIViewController {
     
     override func viewDidLoad() {
         _ = pageViewController
+        log?.track(event: .companyDetailsScreenDidLoad, properties: nil)
         companyMainPageView.segmentedControl.selectedSegmentIndex = viewModel.selectedHostIndex ?? 0
         viewModel.userLocation = companyMainPageView.mapView.userLocation.location
-        log?.track(event: .companyDetailsScreenDidLoad, properties: nil)
         refresh()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.isNavigationBarHidden = true
+        configureNavigationBar()
         refresh()
-        log?.screen(screenName, originScreen: originScreen)
     }
     
-    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    func configureNavigationBar() {
+        navigationController?.isNavigationBarHidden = false
+        styleNavigationController()
+        let image = UIImage(named: "cross")
+        let leftButton = UIBarButtonItem(image: image, style: UIBarButtonItem.Style.done, target: self, action: #selector(didTapDone))
+        navigationItem.leftBarButtonItem = leftButton
+    }
+    
+    @objc func didTapDone() {
+        viewModel.didTapDone()
+    }
     
     func incrementLoadingInProgressCount() {
         if loadingInProgressCount == 0 {
@@ -84,6 +93,8 @@ class CompanyViewController: UIViewController {
             loadingInProgressCount -= 1
         }
     }
+    
+    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
 
 extension CompanyViewController : CompanyViewModelDelegate {
@@ -129,10 +140,6 @@ extension CompanyViewController : CompanyMainViewDelegate {
             guard let strongSelf = self else { return }
             strongSelf.processInitiateApplyResult(initiateApplyResult)
         }
-    }
-    
-    func companyMainViewDidTapDone(_ view: CompanyMainView) {
-        viewModel.didTapDone()
     }
     
     func companyMainView(_ view: CompanyMainView, didSelectPage page: CompanyViewModel.PageIndex?) {

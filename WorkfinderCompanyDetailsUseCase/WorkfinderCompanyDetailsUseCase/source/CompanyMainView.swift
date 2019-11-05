@@ -13,7 +13,6 @@ import WorkfinderCommon
 protocol CompanyMainViewDelegate : CompanyToolbarDelegate {
     func companyMainView(_ view: CompanyMainView, didSelectPage: CompanyViewModel.PageIndex?)
     func companyMainViewDidTapApply(_ view: CompanyMainView)
-    func companyMainViewDidTapDone(_ view: CompanyMainView)
 }
 
 class CompanyMainView: UIView {
@@ -170,13 +169,6 @@ extension CompanyMainView : CompanyHeaderViewDelegate {
         log?.track(event: .companyDetailsApplyTap, properties: nil)
         delegate?.companyMainViewDidTapApply(self)
     }
-    
-    func didTapDone() {
-        log?.track(event: .companyDetailsCloseTap, properties: nil)
-        delegate?.companyMainViewDidTapDone(self)
-    }
-    
-    
 }
 
 extension CompanyMainView : MKMapViewDelegate {
