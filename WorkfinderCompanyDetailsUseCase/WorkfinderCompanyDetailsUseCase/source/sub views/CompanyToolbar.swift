@@ -26,7 +26,7 @@ class CompanyToolbar: UIToolbar {
     var shareButton: UIBarButtonItem = {
         let button = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action, target: self, action: #selector(handleButtonTapped))
         button.tag = ActionType.showShare.rawValue
-        button.tintColor = UIColor.gray
+        button.tintColor = UIColor.black
         return button
     }()
     
@@ -34,11 +34,11 @@ class CompanyToolbar: UIToolbar {
         let on = #imageLiteral(resourceName: "heartFilled")
         let off = UIImage(named: "heartOutline")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         heartButton.image = hearted ? on : off
-        heartButton.tintColor = hearted ? UIColor.blue : UIColor.gray
+        heartButton.tintColor = hearted ? UIColor.blue : UIColor.black
     }
     
     func mapAppearance(shown: Bool) {
-        mapButton.tintColor = shown ? UIColor.blue : UIColor.gray
+        mapButton.tintColor = shown ? UIColor.blue :UIColor.black
     }
     
     var heartButton: UIBarButtonItem = {
@@ -67,6 +67,7 @@ class CompanyToolbar: UIToolbar {
             mapButton,
             makeFlexibleSpace()
         ]
+        alpha = 0.5
     }
 
     override init(frame: CGRect) {

@@ -42,19 +42,32 @@ class CompanyMainView: UIView {
     
     func refresh() {
         toolbarView.heartAppearance(hearted: companyViewModel.isFavourited)
-        headerView.refresh()
     }
-    
-    lazy var headerView: CompanyHeaderView = {
-        let view = CompanyHeaderView(delegate: self, companyViewModel: companyViewModel)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
     
     lazy var toolbarView: CompanyToolbar = {
         let toolbar = CompanyToolbar(toolbarDelegate: self)
         toolbar.translatesAutoresizingMaskIntoConstraints = false
+        //toolbar.isTranslucent = true
+        let bgImageColor = UIColor.white.withAlphaComponent(0.99)
+        let image = onePixelImageWithColor(color: bgImageColor)
+        toolbar.setBackgroundImage(image, forToolbarPosition: .any, barMetrics: .default)
+        toolbar.setShadowImage(UIImage(), forToolbarPosition: .any)
+        toolbar.tintColor = UIColor.darkGray
         return toolbar
+    }()
+
+    func onePixelImageWithColor(color : UIColor) -> UIImage {
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
+        let context = CGContext(data: nil, width: 1, height: 1, bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo.rawValue)
+        context!.setFillColor(color.cgColor)
+        context!.fill(CGRect(x:0,y: 0, width: 1, height:1))
+        let image = UIImage(cgImage: context!.makeImage()!)
+        return image
+    }
+    
+    lazy var headerView: CompanyHeaderView = {
+        return CompanyHeaderView(companyViewModel: self.companyViewModel)
     }()
     
     lazy var segmentedControl: UISegmentedControl = {
@@ -78,13 +91,37 @@ class CompanyMainView: UIView {
         return segmentedControl
     }()
     
+    let toolbarAlpha: CGFloat = 0.9
+    
+    lazy var applyButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor  = UIColor(red: 57, green: 167, blue: 82)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.setTitleColor(UIColor.white, for: UIControl.State.normal)
+        button.setTitle("Apply", for: .normal)
+        button.layer.cornerRadius = 8
+        button.alpha = 1.0
+        button.isOpaque = true
+        return button
+    }()
+    
+    lazy var buttonContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.init(white: 1, alpha: self.toolbarAlpha)
+        view.addSubview(self.applyButton)
+        self.applyButton.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 24, left: 24, bottom: 24, right: 24), size: CGSize(width: 0, height: 44))
+        return view
+    }()
+    
     func configureViews() {
-        addSubview(segmentedControl)
         addSubview(headerView)
+        addSubview(segmentedControl)
         addSubview(toolbarView)
-        headerView.anchor(top: layoutMarginsGuide.topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 110))
-        segmentedControl.anchor(top: headerView.bottomAnchor, leading: layoutMarginsGuide.leadingAnchor, bottom: nil, trailing: layoutMarginsGuide.trailingAnchor, padding: UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0))
+        addSubview(buttonContainer)
+        headerView.anchor(top: layoutMarginsGuide.topAnchor, leading: layoutMarginsGuide.leadingAnchor, bottom: nil, trailing: layoutMarginsGuide.trailingAnchor, padding: UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 80))
+        segmentedControl.anchor(top: headerView.bottomAnchor, leading: layoutMarginsGuide.leadingAnchor, bottom: nil, trailing: layoutMarginsGuide.trailingAnchor, padding: UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0))
         toolbarView.anchor(top: nil, leading: leadingAnchor, bottom: layoutMarginsGuide.bottomAnchor, trailing: trailingAnchor)
+        buttonContainer.anchor(top: nil, leading: toolbarView.leadingAnchor, bottom: toolbarView.topAnchor, trailing: toolbarView.trailingAnchor)
     }
     
     var mapOffsetConstant: CGFloat = 2000 {
@@ -128,7 +165,7 @@ class CompanyMainView: UIView {
     func configureMapView() {
         addSubview(mapView)
         mapView.anchor(top: nil, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor)
-        mapTopConstraint = mapView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 0)
+        mapTopConstraint = mapView.topAnchor.constraint(equalTo: topAnchor, constant: 0)
         mapBottomConstraint = mapView.bottomAnchor.constraint(equalTo: toolbarView.topAnchor, constant: 0)
         mapTopConstraint?.isActive = true
         mapBottomConstraint?.isActive = true
@@ -137,7 +174,7 @@ class CompanyMainView: UIView {
     
     func addPageControllerView(view: UIView) {
         addSubview(view)
-        view.anchor(top: segmentedControl.bottomAnchor, leading: layoutMarginsGuide.leadingAnchor, bottom: toolbarView.topAnchor, trailing: layoutMarginsGuide.trailingAnchor, padding: UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0))
+        view.anchor(top: segmentedControl.bottomAnchor, leading: layoutMarginsGuide.leadingAnchor, bottom: toolbarView.bottomAnchor, trailing: layoutMarginsGuide.trailingAnchor, padding: UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0))
         self.sendSubviewToBack(view)
     }
     
@@ -154,6 +191,11 @@ class CompanyMainView: UIView {
         delegate?.companyMainView(self, didSelectPage: page)
     }
     
+    func didTapApply() {
+        log?.track(event: .companyDetailsApplyTap, properties: nil)
+        delegate?.companyMainViewDidTapApply(self)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -162,12 +204,6 @@ class CompanyMainView: UIView {
 extension CompanyMainView : CompanyToolbarDelegate {
     func companyToolbar(_: CompanyToolbar, requestedAction: CompanyToolbar.ActionType) {
         delegate?.companyToolbar(toolbarView, requestedAction: requestedAction)
-    }
-}
-extension CompanyMainView : CompanyHeaderViewDelegate {
-    func didTapApply() {
-        log?.track(event: .companyDetailsApplyTap, properties: nil)
-        delegate?.companyMainViewDidTapApply(self)
     }
 }
 

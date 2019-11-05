@@ -10,19 +10,13 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 
-protocol CompanyHeaderViewDelegate : class {
-    func didTapApply()
-}
-
 class CompanyHeaderView: UIView {
 
-    init(delegate: CompanyHeaderViewDelegate, companyViewModel: CompanyViewModel) {
+    init(companyViewModel: CompanyViewModel) {
         self.companyViewModel = companyViewModel
         super.init(frame: CGRect.zero)
         backgroundColor = UIColor.clear
-        self.delegate = delegate
         configureViews()
-        applyStyle()
         refresh()
     }
     
@@ -41,60 +35,60 @@ class CompanyHeaderView: UIView {
         companyIconImageView.load(urlString: companyViewData.logoUrlString, defaultImage: UIImage(named: "DefaultLogo"))
     }
     
-    weak var delegate: CompanyHeaderViewDelegate?
+    let iconViewRadius = CGFloat(10)
+    let iconViewSize = CGSize(width: 96, height: 96)
     
-    @objc func handleApplyTap() {
-        delegate?.didTapApply()
-    }
-    
-    lazy var applyButton: UIButton = {
-        let button = UIButton(type: UIButton.ButtonType.system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(handleApplyTap), for: .touchUpInside)
-        button.setTitle("Apply", for: UIControl.State.normal)
-        return button
+    lazy var iconContainerView: UIView = {
+        let view = UIView(frame: CGRect(origin: CGPoint.zero, size: self.iconViewSize))
+        view.clipsToBounds = false
+        view.layer.shadowColor = UIColor.darkGray.cgColor
+        view.layer.shadowOpacity = 0.3
+        view.layer.shadowOffset = CGSize.zero
+        view.layer.shadowRadius = 2
+        view.layer.shadowPath = UIBezierPath(roundedRect: view.bounds, cornerRadius: iconViewRadius).cgPath
+        view.addSubview(self.companyIconImageView)
+        self.companyIconImageView.fillSuperview()
+        return view
     }()
     
     lazy var companyIconImageView: F4SSelfLoadingImageView = {
         let imageView = F4SSelfLoadingImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.borderColor = UIColor.lightGray.cgColor
-        imageView.layer.borderWidth = 1
-        imageView.layer.cornerRadius = 22
-        imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.clipsToBounds = true
+        imageView.backgroundColor = UIColor.white
+        imageView.layer.cornerRadius = iconViewRadius
         return imageView
     }()
     
     lazy var companyNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 2
+        label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        label.textAlignment = .left
+        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.headline)
         label.minimumScaleFactor = 0.2
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
-    func configureViews() {
-        addSubview(companyIconImageView)
-        addSubview(companyNameLabel)
-        addSubview(applyButton)
-        applyButton.anchor(top: nil, leading: nil, bottom: nil, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 12), size: CGSize(width: 80, height: 44))
-        applyButton.centerYAnchor.constraint(equalTo: companyIconImageView.centerYAnchor).isActive = true
-        companyIconImageView.anchor(top: topAnchor, leading: nil, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0), size: CGSize(width: 44, height: 44))
-        companyIconImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        let bottom = companyIconImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
-        bottom.priority = .defaultLow
-        bottom.isActive = true
-        companyNameLabel.anchor(top: companyIconImageView.bottomAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: UIEdgeInsets(top: 8, left: 12, bottom: 0, right: 12), size: CGSize.zero)
-        companyNameLabel.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: 8).isActive = true
-    }
+    lazy var distanceLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption1)
+        label.text = "2.0 km away"
+        label.textColor = UIColor.init(white: 0.5, alpha: 1)
+        return label
+    }()
     
-    func applyStyle() {
-        let skinner = Skinner()
-        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: applyButton)
+    func configureViews() {
+        addSubview(iconContainerView)
+        addSubview(companyNameLabel)
+        addSubview(distanceLabel)
+        iconContainerView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 8, left: 8, bottom: 0, right: 8), size: iconViewSize)
+        companyNameLabel.anchor(top: nil, leading: companyIconImageView.trailingAnchor, bottom: nil, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16), size: CGSize.zero)
+        companyNameLabel.centerYAnchor.constraint(equalTo: iconContainerView.centerYAnchor).isActive = true
+        distanceLabel.anchor(top: companyNameLabel.bottomAnchor, leading: companyNameLabel.leadingAnchor, bottom: nil, trailing: companyNameLabel.trailingAnchor, padding: UIEdgeInsets(top: 4, left: 0, bottom: 0, right: 0))
     }
 }

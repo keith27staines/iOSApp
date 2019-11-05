@@ -89,7 +89,6 @@ extension CompanyHostsViewController: UITableViewDelegate, UITableViewDataSource
         cell.configureWithHost(host, summaryState: summaryState, profileLinkTap: profileLinkTap)
         tableView.beginUpdates()
         tableView.endUpdates()
-//        tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
     }
     
     func profileLinkTap(host: F4SHost) {

@@ -80,9 +80,12 @@ class HostView : UIView {
     
     lazy var profileButton: UIButton = {
         let button = UIButton(type: .system)
+        let tintColor = UIColor(netHex: 0x027BBB)
         button.setTitle("Profile", for: UIControl.State.normal)
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption1)
-        button.setImage(UIImage(named:"ui-linkedin-icon")!, for: UIControl.State.normal)
+        var image = UIImage(named:"ui-linkedin-icon")!.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        button.setImage(image, for: UIControl.State.normal)
+        button.tintColor = tintColor
         button.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
         return button
@@ -90,6 +93,8 @@ class HostView : UIView {
     
     lazy var image: F4SSelfLoadingImageView = {
         let view = F4SSelfLoadingImageView()
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
         let height = view.heightAnchor.constraint(equalToConstant: 64)
         height.priority = UILayoutPriority.required
         view.contentMode = .scaleAspectFit

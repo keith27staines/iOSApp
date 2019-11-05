@@ -27,6 +27,8 @@ class CompanyViewController: UIViewController {
     
     private var loadingInProgressCount: Int = 0
     
+    override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
+    
     func refresh() {
         companyMainPageView.refresh()
     }
