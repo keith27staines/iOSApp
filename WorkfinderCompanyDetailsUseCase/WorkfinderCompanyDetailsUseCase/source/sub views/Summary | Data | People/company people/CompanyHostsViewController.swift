@@ -98,6 +98,8 @@ extension CompanyHostsViewController: UITableViewDelegate, UITableViewDataSource
 
 class HostCell: UITableViewCell {
     
+    static var reuseIdentifier: String = "HostCell"
+    
     func configureWithHost(_ host: F4SHost, summaryState: ExpandableLabelState ,profileLinkTap: @escaping ((F4SHost) -> Void)) {
         hostView.host = host
         hostView.expandableLabelState = summaryState

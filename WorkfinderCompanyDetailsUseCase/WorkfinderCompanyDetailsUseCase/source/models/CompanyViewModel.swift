@@ -78,7 +78,12 @@ class CompanyViewModel : NSObject {
     var addToshortlistService: CompanyFavouritingServiceProtocol?
     private (set) var company: Company
     var companyViewData: CompanyViewData
-    var hosts: [F4SHost] = []
+    var hosts: [F4SHost] = [] {
+        didSet {
+            textModel = TextModel(hosts: hosts)
+        }
+    }
+    var textModel = TextModel(hosts: [])
     let companyService: F4SCompanyServiceProtocol
     let companyDocumentsModel: F4SCompanyDocumentsModelProtocol
     let canApplyLogic: AllowedToApplyLogicProtocol
@@ -130,10 +135,17 @@ class CompanyViewModel : NSObject {
         self.log = log
         super.init()
         viewControllers = [summaryViewController, dataViewController]
+    }
+    
+    func startLoad() {
         loadCompany()
         loadDocuments()
         company.getPostcode { [weak self] postcode in
             self?.companyViewData.postcode = postcode
+            self?.summaryViewController.refresh()
+        }
+        checkUserCanApply { [weak self] (result) in
+            self?.userCanApply = result == .allowed ? true : false
             self?.summaryViewController.refresh()
         }
     }
@@ -182,6 +194,29 @@ class CompanyViewModel : NSObject {
         applyIfStateAllows(completion: completion)
     }
     
+    var userCanApply: Bool = false
+    
+    func checkUserCanApply(completion: @escaping (InitiateApplicationResult) -> Void) {
+        viewModelDelegate?.companyViewModelDidBeginNetworkTask(self)
+        canApplyLogic.checkUserCanApply(user: "", to: company.uuid) { (networkResult) in
+            DispatchQueue.main.async { [weak self] in
+                guard let strongSelf = self else { return }
+                switch networkResult {
+                case .error(let error):
+                    strongSelf.viewModelDelegate?.companyViewModelNetworkTaskDidFail(strongSelf, error: error, retry: {
+                        strongSelf.checkUserCanApply(completion: completion)
+                    })
+                case .success(true):
+                    strongSelf.viewModelDelegate?.companyViewModelDidCompleteLoadingTask(strongSelf)
+                    completion(.allowed)
+                case .success(false):
+                    strongSelf.viewModelDelegate?.companyViewModelDidCompleteLoadingTask(strongSelf)
+                    completion(.deniedAlreadyApplied)
+                }
+            }
+        }
+    }
+    
     func applyIfStateAllows(completion: @escaping (InitiateApplicationResult) -> Void) {
         viewModelDelegate?.companyViewModelDidBeginNetworkTask(self)
         canApplyLogic.checkUserCanApply(user: "", to: company.uuid) { [weak self] (networkResult) in
@@ -197,16 +232,17 @@ class CompanyViewModel : NSObject {
                 completion(.allowed)
             case .success(false):
                 strongSelf.viewModelDelegate?.companyViewModelDidCompleteLoadingTask(strongSelf)
-                strongSelf.viewModelDelegate?.companyViewModelDidCompleteLoadingTask(strongSelf)
                 completion(.deniedAlreadyApplied)
             }
         }
     }
 
     func loadCompany() {
+        viewModelDelegate?.companyViewModelDidBeginNetworkTask(self)
         companyService.getCompany(uuid: company.uuid) { (result) in
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else { return }
+                strongSelf.viewModelDelegate?.companyViewModelDidCompleteLoadingTask(strongSelf)
                 switch result {
                 case .error(let error):
                     if error.retry {
@@ -224,9 +260,11 @@ class CompanyViewModel : NSObject {
     }
     
     func loadDocuments() {
-        companyDocumentsModel.getDocuments(age:0, completion: { [weak self] (result) in
-            guard let strongSelf = self else { return }
-            DispatchQueue.main.async {
+        viewModelDelegate?.companyViewModelDidBeginNetworkTask(self)
+        companyDocumentsModel.getDocuments(age:0, completion: {  (result) in
+            DispatchQueue.main.async { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.viewModelDelegate?.companyViewModelDidCompleteLoadingTask(strongSelf)
                 switch result {
                 case .error(let error):
                     if error.retry {

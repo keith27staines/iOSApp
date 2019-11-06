@@ -33,16 +33,6 @@ class CompanyViewController: UIViewController {
         companyMainPageView.refresh()
     }
     
-    lazy var pageViewController: CompanyPageViewController = {
-        let pageViewController = CompanyPageViewController(viewModel: viewModel)
-        pageViewController.willMove(toParent: self)
-        pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        companyMainPageView.addPageControllerView(view: pageViewController.view)
-        addChild(pageViewController)
-        pageViewController.didMove(toParent: self)
-        return pageViewController
-    }()
-    
     lazy var companyMainPageView: CompanyMainView = {
         let mainView = view as! CompanyMainView
         mainView.appSettings = self.appSettings
@@ -55,10 +45,10 @@ class CompanyViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        _ = pageViewController
         log?.track(event: .companyDetailsScreenDidLoad, properties: nil)
-        companyMainPageView.segmentedControl.selectedSegmentIndex = viewModel.selectedHostIndex ?? 0
         viewModel.userLocation = companyMainPageView.mapView.userLocation.location
+        viewModel.viewModelDelegate = self
+        viewModel.startLoad()
         refresh()
     }
     
@@ -133,6 +123,7 @@ extension CompanyViewController : CompanyViewModelDelegate {
     
     func companyViewModelDidCompleteLoadingTask(_ viewModel: CompanyViewModel) {
         decrementLoadingInProgressCount()
+        refresh()
     }
 }
 
@@ -142,10 +133,6 @@ extension CompanyViewController : CompanyMainViewDelegate {
             guard let strongSelf = self else { return }
             strongSelf.processInitiateApplyResult(initiateApplyResult)
         }
-    }
-    
-    func companyMainView(_ view: CompanyMainView, didSelectPage page: CompanyViewModel.PageIndex?) {
-        pageViewController.moveToPage(index: page)
     }
     
     func companyToolbar(_ toolbar: CompanyToolbar, requestedAction: CompanyToolbar.ActionType) {
