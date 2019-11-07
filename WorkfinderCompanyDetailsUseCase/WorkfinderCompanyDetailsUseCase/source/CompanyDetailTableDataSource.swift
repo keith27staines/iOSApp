@@ -6,13 +6,13 @@ import WorkfinderCommon
 class CompanyDetailTableDataSource: NSObject, UITableViewDataSource {
     
     unowned let companyViewModel: CompanyViewModel
-    let sectionDescriptorsModel: SectionDescriptorsModel
+    let sectionDescriptorsModel: CompanyTableSectionsModel
     var hosts: [F4SHost] { return companyViewModel.hosts }
     lazy var textModel: TextModel = {
         return TextModel(hosts: self.hosts)
     }()
     
-    public init(companyViewModel: CompanyViewModel, sectionDescriptorsModel: SectionDescriptorsModel) {
+    public init(companyViewModel: CompanyViewModel, sectionDescriptorsModel: CompanyTableSectionsModel) {
         self.companyViewModel = companyViewModel
         self.sectionDescriptorsModel = sectionDescriptorsModel
     }

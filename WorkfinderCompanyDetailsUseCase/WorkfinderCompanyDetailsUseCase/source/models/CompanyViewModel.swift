@@ -104,9 +104,9 @@ class CompanyViewModel : NSObject {
         }
     }
     
-    var mustSelectHostToApply: Bool {
-        return false
-    }
+    lazy var companyDataModel: CompanyDataViewModel = { return CompanyDataViewModel(model: self) }()
+    
+    var mustSelectHostToApply: Bool { return false }
     
     var selectedHost: F4SHost? {
         guard let index = self.selectedHostIndex else { return nil }
@@ -358,4 +358,31 @@ private extension Company {
             completion(placemarks?.first?.postalCode)
         }
     }
+}
+
+struct NameValueDescriptor {
+    var name: String = "name"
+    var value: String = ""
+    var isButton: Bool = false
+    var buttonImage: UIImage? = nil
+}
+
+class CompanyDataViewModel {
+    var numberOfRows: Int { return items.count }
+    
+    var items: [NameValueDescriptor] = [
+        NameValueDescriptor(name: "Annual Revenue", value: "£343m", isButton: false),
+        NameValueDescriptor(name: "Annual Growth", value: "27%", isButton: false),
+        NameValueDescriptor(name: "Number of employees", value: "720", isButton: false),
+        NameValueDescriptor(name: "", value: "see more on DueDil",isButton: true, buttonImage: UIImage(named: "DueDil"))
+    ]
+    
+    func nameValueForRow(_ row: Int) -> NameValueDescriptor {
+        return items[row]
+    }
+    
+    init(model: CompanyViewModel) {
+        
+    }
+    
 }

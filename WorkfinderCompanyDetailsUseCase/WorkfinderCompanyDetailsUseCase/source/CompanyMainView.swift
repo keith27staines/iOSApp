@@ -77,6 +77,7 @@ class CompanyMainView: UIView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(HostCell.self, forCellReuseIdentifier: HostCell.reuseIdentifier)
+        tableView.register(NameValueCell.self, forCellReuseIdentifier: NameValueCell.reuseIdentifier)
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 500, right: 0)
         return tableView
     }()
@@ -115,15 +116,11 @@ class CompanyMainView: UIView {
     }()
     
     // switch self.appSettings.currentValue(key: AppSettingKey.ab_CompanyDetailsFirstEmphasis)
-    
-    lazy var sectionTitles: [String] = {
-        return ["Company", "Data", "People"]
-    }()
-    
-    lazy var sectionsModel: SectionDescriptorsModel = {
-        let model = SectionDescriptorsModel()
-        for title in self.sectionTitles {
-             model.appendDescriptor(title: title, isHidden: false)
+    lazy var sectionsModel: CompanyTableSectionsModel = {
+        let model = CompanyTableSectionsModel()
+        let types: [CompanyTableSectionType] = [.companySummary, .companyData, .companyPeople]
+        for sectionType in types {
+            model.appendDescriptor(sectionType: sectionType, isHidden: false)
         }
         return model
     }()
@@ -216,18 +213,37 @@ extension CompanyMainView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return hosts.count
+        let sectionModel = sectionsModel[section]
+        switch sectionModel.sectionType {
+        case .companySummary:
+            return 0
+        case .companyData:
+            return companyViewModel.companyDataModel.numberOfRows
+        case .companyPeople:
+            return hosts.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: HostCell.reuseIdentifier) as! HostCell
         let index = indexPath.row
-        let host = hosts[index]
-        let state = hostsSummaryModel.expandableLabelStates[index]
-        cell.configureWithHost(host, summaryState: state) { (host) in
+        let sectionModel = sectionsModel[indexPath.section]
+        switch sectionModel.sectionType {
+        case .companySummary:
+            return UITableViewCell()
+        case .companyData:
+            let nameValueCell = tableView.dequeueReusableCell(withIdentifier: NameValueCell.reuseIdentifier) as! NameValueCell
+            let nameValue = companyViewModel.companyDataModel.nameValueForRow(index)
+            nameValueCell.configureWithNameValue(nameValue)
+            return nameValueCell
             
+        case .companyPeople:
+            let host = hosts[index]
+            let state = hostsSummaryModel.expandableLabelStates[index]
+            let hostCell = tableView.dequeueReusableCell(withIdentifier: HostCell.reuseIdentifier) as! HostCell
+            hostCell.configureWithHost(host, summaryState: state) { (host) in
+            }
+            return hostCell
         }
-        return cell
     }
 }
 
@@ -242,7 +258,13 @@ extension CompanyMainView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
-        if indexPath.section == 2 {
+        let sectionModel = sectionsModel[indexPath.section]
+        switch sectionModel.sectionType {
+        case .companySummary:
+            break
+        case .companyData:
+            break
+        case .companyPeople:
             let hostCell = cell as! HostCell
             let host = hosts[indexPath.row]
             var summaryState = textModel.expandableLabelStates[indexPath.row]
@@ -274,17 +296,23 @@ extension CompanyMainView : MKMapViewDelegate {
 }
 
 extension CompanyMainView: SectionSelectorViewDelegate {
-    func sectionSelectorView(_ sectionSelectorView: SectionSelectorView, didTapOnDescriptor descriptor: SectionDescriptor) {
-        switch descriptor.title.lowercased() {
-        case "company":
-            log?.track(event: .companyDetailsCompanyTabTap, properties: nil)
-        case "data":
-            log?.track(event: .companyDetailsDataTabTap, properties: nil)
-        case "people":
-            log?.track(event: .companyDetailsPeopleTabTap, properties: nil)
-        default:
-            assertionFailure("unexpected section title")
+    func sectionSelectorView(_ sectionSelectorView: SectionSelectorView, didTapOnDescriptor descriptor: CompanyTableSectionDescriptor) {
+        let event: TrackEvent
+        let numberOfRows: Int
+        switch descriptor.sectionType {
+        case .companySummary:
+            event = .companyDetailsCompanyTabTap
+            numberOfRows = 0
+        case .companyData:
+            event = .companyDetailsDataTabTap
+            numberOfRows = companyViewModel.companyDataModel.numberOfRows
+        case .companyPeople:
+            event = .companyDetailsPeopleTabTap
+            numberOfRows = hosts.count
         }
-        tableView.scrollToRow(at: IndexPath(row: 0, section: descriptor.index), at: .top, animated: true)
+        if numberOfRows > 0 {
+            log?.track(event: event, properties: nil)
+            tableView.scrollToRow(at: IndexPath(row: 0, section: descriptor.index), at: .top, animated: true)
+        }
     }
 }

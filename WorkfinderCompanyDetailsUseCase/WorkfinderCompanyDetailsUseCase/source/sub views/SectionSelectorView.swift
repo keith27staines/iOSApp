@@ -2,17 +2,17 @@
 import Foundation
 
 public protocol SectionSelectorViewDelegate: class {
-    func sectionSelectorView(_ view: SectionSelectorView, didTapOnDescriptor: SectionDescriptor)
+    func sectionSelectorView(_ view: SectionSelectorView, didTapOnDescriptor: CompanyTableSectionDescriptor)
 }
 
 public class SectionSelectorView: UIStackView {
-    let model: SectionDescriptorsModel
+    let model: CompanyTableSectionsModel
     weak var delegate: SectionSelectorViewDelegate?
     var onColor: UIColor = UIColor.green { didSet { self.updateButtonColors() } }
     var offColor: UIColor = UIColor.lightGray { didSet { self.updateButtonColors() } }
     var buttons = [UIButton]()
     
-    public init(model: SectionDescriptorsModel, delegate: SectionSelectorViewDelegate) {
+    public init(model: CompanyTableSectionsModel, delegate: SectionSelectorViewDelegate) {
         self.model = model
         self.delegate = delegate
         super.init(frame: CGRect.zero)
@@ -41,7 +41,7 @@ public class SectionSelectorView: UIStackView {
         }
     }
     
-    func makeButton(descriptor: SectionDescriptor) -> UIButton {
+    func makeButton(descriptor: CompanyTableSectionDescriptor) -> UIButton {
         let button = UIButton(type: UIButton.ButtonType.system)
         button.layer.cornerRadius = 4
         button.setTitleColor(UIColor.white, for: UIControl.State.normal)
@@ -49,7 +49,7 @@ public class SectionSelectorView: UIStackView {
         return button
     }
     
-    func configureButtonWithDescriptor(_ button: UIButton, descriptor: SectionDescriptor) {
+    func configureButtonWithDescriptor(_ button: UIButton, descriptor: CompanyTableSectionDescriptor) {
         button.setTitle(descriptor.title, for: UIControl.State.normal)
         button.backgroundColor = descriptor.isHidden ? offColor : onColor
         button.tag = descriptor.index
