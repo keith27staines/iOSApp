@@ -63,7 +63,6 @@ class CompanyMainView: UIView {
             applyButton.backgroundColor = UIColor.lightGray
         }
         toolbarView.heartAppearance(hearted: companyViewModel.isFavourited)
-
     }
     
     lazy var headerView: CompanyHeaderView = {
@@ -79,6 +78,7 @@ class CompanyMainView: UIView {
         tableView.register(HostCell.self, forCellReuseIdentifier: HostCell.reuseIdentifier)
         tableView.register(NameValueCell.self, forCellReuseIdentifier: NameValueCell.reuseIdentifier)
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 500, right: 0)
+        tableView.separatorStyle = .none
         return tableView
     }()
     
@@ -201,6 +201,10 @@ class CompanyMainView: UIView {
         companyViewModel.didTapLinkedIn(for: host)
     }
     
+    func duedilLinkTap() {
+        companyViewModel.didTapDuedil(for: companyViewModel.companyViewData)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -233,7 +237,7 @@ extension CompanyMainView: UITableViewDataSource {
         case .companyData:
             let nameValueCell = tableView.dequeueReusableCell(withIdentifier: NameValueCell.reuseIdentifier) as! NameValueCell
             let nameValue = companyViewModel.companyDataModel.nameValueForRow(index)
-            nameValueCell.configureWithNameValue(nameValue)
+            nameValueCell.configureWithNameValue(nameValue, duedilTap: duedilLinkTap)
             return nameValueCell
             
         case .companyPeople:
@@ -257,6 +261,7 @@ extension CompanyMainView: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let cell = tableView.cellForRow(at: indexPath)
         let sectionModel = sectionsModel[indexPath.section]
         switch sectionModel.sectionType {

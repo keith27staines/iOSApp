@@ -78,17 +78,17 @@ public struct CompanyViewData : CompanyViewDataProtocol {
 extension CompanyViewData {
         
     public var revenueString: String {
-        guard let revenue = revenue, revenue > 0 else { return "" }
-        return "Annual revenue: £\(ScaledNumber.formattedString(for: revenue))"
+        guard let revenue = revenue, revenue > 0 else { return "?" }
+        return "£\(ScaledNumber.formattedString(for: revenue))"
     }
-    public var growthString: String? {
-        guard let growth = growth, growth > 0 else { return "" }
-        return "Annual growth: \(Int(100.0*growth))%"
+    public var growthString: String {
+        guard let growth = growth, growth > 0 else { return "?" }
+        return "\(Int(100.0*growth))%"
     }
     
-    public var employeesString: String? {
-        guard let employees = employees, employees > 0 else { return "" }
-        return "Employees: \(ScaledNumber.formattedString(for: Double(employees)))"
+    public var employeesString: String {
+        guard let employees = employees, employees > 0 else { return "?" }
+        return "\(ScaledNumber.formattedString(for: Double(employees)))"
     }
     
     public var starRatingIsHidden: Bool {

@@ -104,7 +104,7 @@ class CompanyViewModel : NSObject {
         }
     }
     
-    lazy var companyDataModel: CompanyDataViewModel = { return CompanyDataViewModel(model: self) }()
+    lazy var companyDataModel: CompanyDataViewModel = { return CompanyDataViewModel(viewData: self.companyViewData) }()
     
     var mustSelectHostToApply: Bool { return false }
     
@@ -241,19 +241,20 @@ class CompanyViewModel : NSObject {
         viewModelDelegate?.companyViewModelDidBeginNetworkTask(self)
         companyService.getCompany(uuid: company.uuid) { (result) in
             DispatchQueue.main.async { [weak self] in
-                guard let strongSelf = self else { return }
-                strongSelf.viewModelDelegate?.companyViewModelDidCompleteLoadingTask(strongSelf)
+                guard let self = self else { return }
+                self.viewModelDelegate?.companyViewModelDidCompleteLoadingTask(self)
                 switch result {
                 case .error(let error):
                     if error.retry {
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+5, execute: {
-                            strongSelf.loadCompany()
+                            self.loadCompany()
                         })
                     }
                 case .success(let json):
-                    strongSelf.hosts = json.hosts ?? []
-                    strongSelf.companyJson = json
-                    strongSelf.viewModelDelegate?.companyViewModelDidRefresh(strongSelf)
+                    self.hosts = json.hosts ?? []
+                    self.companyJson = json
+                    self.companyDataModel = CompanyDataViewModel(viewData: self.companyViewData)
+                    self.viewModelDelegate?.companyViewModelDidRefresh(self)
                 }
             }
         }
@@ -370,19 +371,31 @@ struct NameValueDescriptor {
 class CompanyDataViewModel {
     var numberOfRows: Int { return items.count }
     
-    var items: [NameValueDescriptor] = [
-        NameValueDescriptor(name: "Annual Revenue", value: "£343m", isButton: false),
-        NameValueDescriptor(name: "Annual Growth", value: "27%", isButton: false),
-        NameValueDescriptor(name: "Number of employees", value: "720", isButton: false),
-        NameValueDescriptor(name: "", value: "see more on DueDil",isButton: true, buttonImage: UIImage(named: "DueDil"))
-    ]
+    var items: [NameValueDescriptor]
     
     func nameValueForRow(_ row: Int) -> NameValueDescriptor {
         return items[row]
     }
+    let annualRevenueName = "Annual Revenue"
+    let annualGrowthName = "Annual Growth"
+    let numberOfEmployeesName = "Number of employees"
+    let seeMoreName = "See more"
     
-    init(model: CompanyViewModel) {
-        
+    init(viewData: CompanyViewData) {
+        let revenue = viewData.revenueString
+        let growth = viewData.growthString
+        let employees = viewData.employeesString
+
+        var items = [
+            NameValueDescriptor(name: annualRevenueName, value: revenue, isButton: false),
+            NameValueDescriptor(name: annualGrowthName, value: growth, isButton: false),
+            NameValueDescriptor(name: numberOfEmployeesName, value: employees, isButton: false)]
+        if !viewData.duedilIsHiden {
+            let duedilImage = UIImage(named: "ui-duedil-icon")
+            let duedilText = "see more on DueDil"
+            items.append(NameValueDescriptor(name: seeMoreName, value: duedilText, isButton: true, buttonImage: duedilImage))
+        }
+        self.items = items
     }
     
 }
