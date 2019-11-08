@@ -6,6 +6,9 @@ import WorkfinderUI
 class HostView : UIView {
     
     static let defaultImage = UIImage(named: "noProfilePicture")
+    var textSize: CGFloat = 15
+    var lineHeight: CGFloat = 23
+    var fontWeight = UIFont.Weight.light
     
     var host: F4SHost? {
         didSet {
@@ -39,7 +42,9 @@ class HostView : UIView {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
     lazy var expandableLabel: ExpandableLabel = {
-        return ExpandableLabel()
+        let label = ExpandableLabel()
+        label.font = UIFont.systemFont(ofSize: self.textSize, weight: self.fontWeight)
+        return label
     }()
     
     lazy var fullStack: UIStackView = {
@@ -128,7 +133,7 @@ class ExpandableLabel: UILabel {
     var state = ExpandableLabelState() {
         didSet {
             self.text = state.text
-            heightConstraint.constant = state.isExpanded ? displayHeight : minHeight
+            heightConstraint.constant = state.isExpanded ? displayHeight + lineHeight: minHeight
         }
     }
     
