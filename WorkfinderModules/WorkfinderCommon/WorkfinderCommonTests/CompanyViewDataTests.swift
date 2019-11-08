@@ -24,17 +24,17 @@ class CompanyViewDataTests: XCTestCase {
     
     func testEmployeesString_999() {
         sut.employees = 999
-        XCTAssertEqual(sut.employeesString!, "Employees: 999")
+        XCTAssertEqual(sut.employeesString, "999")
     }
     
     func testEmployeesString_1001() {
         sut.employees = 1001
-        XCTAssertEqual(sut.employeesString!, "Employees: 1.0k")
+        XCTAssertEqual(sut.employeesString, "1.0k")
     }
     
     func testEmployeesString_999_999() {
         sut.employees = 999_999
-        XCTAssertEqual(sut.employeesString!, "Employees: 1.0m")
+        XCTAssertEqual(sut.employeesString, "1.0m")
     }
     
     func testRating_isHidden_NilRating() {
