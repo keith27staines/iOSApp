@@ -30,6 +30,7 @@ class CompanyViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
     
     func refresh() {
+        viewModel.userLocation = companyMainPageView.mapView.userLocation.location
         companyMainPageView.refresh()
     }
     
@@ -46,7 +47,6 @@ class CompanyViewController: UIViewController {
     
     override func viewDidLoad() {
         log?.track(event: .companyDetailsScreenDidLoad, properties: nil)
-        viewModel.userLocation = companyMainPageView.mapView.userLocation.location
         viewModel.viewModelDelegate = self
         viewModel.startLoad()
         refresh()

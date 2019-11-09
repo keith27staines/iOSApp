@@ -33,6 +33,7 @@ class CompanyHeaderView: UIView {
     func refresh() {
         companyNameLabel.text = companyViewData.companyName
         companyIconImageView.load(urlString: companyViewData.logoUrlString, defaultImage: UIImage(named: "DefaultLogo"))
+        distanceLabel.text = companyViewModel.distanceFromUserToCompany
     }
     
     let iconViewRadius = CGFloat(10)

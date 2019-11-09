@@ -54,11 +54,7 @@ class CompanyViewModel : NSObject {
         didSet { viewModelDelegate?.companyViewModelDidRefresh(self) }
     }
     
-    var userLocation: CLLocation? {
-        didSet {
-            viewModelDelegate?.companyViewModelDidRefresh(self)
-        }
-    }
+    var userLocation: CLLocation?
     
     var distanceFromUserToCompany: String? {
         guard let userLocation = userLocation else { return nil }
@@ -141,13 +137,19 @@ class CompanyViewModel : NSObject {
         loadCompany()
         loadDocuments()
         company.getPostcode { [weak self] postcode in
-            self?.companyViewData.postcode = postcode
-            self?.summaryViewController.refresh()
+            guard let self = self else { return }
+            self.companyViewData.postcode = postcode
+            self.onDidUpdate()
         }
         checkUserCanApply { [weak self] (result) in
-            self?.userCanApply = result == .allowed ? true : false
-            self?.summaryViewController.refresh()
+            guard let self = self else { return }
+            self.userCanApply = result == .allowed ? true : false
+            self.onDidUpdate()
         }
+    }
+    
+    func onDidUpdate() {
+        viewModelDelegate?.companyViewModelDidRefresh(self)
     }
     
     func transitionDirectionForPage(_ pageIndex: PageIndex) ->  UIPageViewController.NavigationDirection? {
@@ -254,7 +256,7 @@ class CompanyViewModel : NSObject {
                     self.hosts = json.hosts ?? []
                     self.companyJson = json
                     self.companyDataModel = CompanyDataViewModel(viewData: self.companyViewData)
-                    self.viewModelDelegate?.companyViewModelDidRefresh(self)
+                    self.onDidUpdate()
                 }
             }
         }
@@ -264,17 +266,17 @@ class CompanyViewModel : NSObject {
         viewModelDelegate?.companyViewModelDidBeginNetworkTask(self)
         companyDocumentsModel.getDocuments(age:0, completion: {  (result) in
             DispatchQueue.main.async { [weak self] in
-                guard let strongSelf = self else { return }
-                strongSelf.viewModelDelegate?.companyViewModelDidCompleteLoadingTask(strongSelf)
+                guard let self = self else { return }
+                self.viewModelDelegate?.companyViewModelDidCompleteLoadingTask(self)
                 switch result {
                 case .error(let error):
                     if error.retry {
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+5, execute: {
-                            strongSelf.loadDocuments()
+                            self.loadDocuments()
                         })
                     }
                 case .success(_):
-                    strongSelf.viewModelDelegate?.companyViewModelDidRefresh(strongSelf)
+                    self.onDidUpdate()
                 }
             }
         })
@@ -359,43 +361,4 @@ private extension Company {
             completion(placemarks?.first?.postalCode)
         }
     }
-}
-
-struct NameValueDescriptor {
-    var name: String = "name"
-    var value: String = ""
-    var isButton: Bool = false
-    var buttonImage: UIImage? = nil
-}
-
-class CompanyDataViewModel {
-    var numberOfRows: Int { return items.count }
-    
-    var items: [NameValueDescriptor]
-    
-    func nameValueForRow(_ row: Int) -> NameValueDescriptor {
-        return items[row]
-    }
-    let annualRevenueName = "Annual Revenue"
-    let annualGrowthName = "Annual Growth"
-    let numberOfEmployeesName = "Number of employees"
-    let seeMoreName = "See more"
-    
-    init(viewData: CompanyViewData) {
-        let revenue = viewData.revenueString
-        let growth = viewData.growthString
-        let employees = viewData.employeesString
-
-        var items = [
-            NameValueDescriptor(name: annualRevenueName, value: revenue, isButton: false),
-            NameValueDescriptor(name: annualGrowthName, value: growth, isButton: false),
-            NameValueDescriptor(name: numberOfEmployeesName, value: employees, isButton: false)]
-        if !viewData.duedilIsHiden {
-            let duedilImage = UIImage(named: "ui-duedil-icon")
-            let duedilText = "see more on DueDil"
-            items.append(NameValueDescriptor(name: seeMoreName, value: duedilText, isButton: true, buttonImage: duedilImage))
-        }
-        self.items = items
-    }
-    
 }

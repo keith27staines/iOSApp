@@ -26,6 +26,7 @@ class CompanyMainView: UIView {
     
     var hosts: [F4SHost] { return self.companyViewModel.hosts }
     var textModel: TextModel { return self.companyViewModel.textModel }
+    var summarySectionRows: CompanySummarySectionRows
     
     lazy var hostsSummaryModel: TextModel = {
         return TextModel(hosts: self.hosts)
@@ -42,6 +43,7 @@ class CompanyMainView: UIView {
         self.companyViewModel = companyViewModel
         self.delegate = delegate
         self.appSettings = appSettings
+        self.summarySectionRows = CompanySummarySectionRows(viewData: companyViewModel.companyViewData)
         super.init(frame: CGRect.zero)
         backgroundColor = UIColor.white
         configureViews()
@@ -50,6 +52,7 @@ class CompanyMainView: UIView {
     }
     
     func refresh() {
+        summarySectionRows = CompanySummarySectionRows(viewData: companyViewModel.companyViewData)
         headerView.refresh()
         tableView.reloadData()
         switch companyViewModel.userCanApply {
@@ -77,6 +80,7 @@ class CompanyMainView: UIView {
         tableView.dataSource = self
         tableView.register(HostCell.self, forCellReuseIdentifier: HostCell.reuseIdentifier)
         tableView.register(NameValueCell.self, forCellReuseIdentifier: NameValueCell.reuseIdentifier)
+        tableView.register(CompanySummaryTextCell.self, forCellReuseIdentifier: CompanySummaryTextCell.reuseIdentifier)
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 500, right: 0)
         tableView.separatorStyle = .none
         return tableView
@@ -97,6 +101,7 @@ class CompanyMainView: UIView {
         button.layer.cornerRadius = 8
         button.alpha = 1.0
         button.isOpaque = true
+        button.addTarget(self, action: #selector(didTapApply), for: .touchUpInside)
         return button
     }()
     
@@ -192,7 +197,7 @@ class CompanyMainView: UIView {
         self.sendSubviewToBack(view)
     }
     
-    func didTapApply() {
+    @objc func didTapApply() {
         log?.track(event: .companyDetailsApplyTap, properties: nil)
         delegate?.companyMainViewDidTapApply(self)
     }
@@ -220,7 +225,7 @@ extension CompanyMainView: UITableViewDataSource {
         let sectionModel = sectionsModel[section]
         switch sectionModel.sectionType {
         case .companySummary:
-            return 0
+            return summarySectionRows.numberOfRows
         case .companyData:
             return companyViewModel.companyDataModel.numberOfRows
         case .companyPeople:
@@ -233,7 +238,7 @@ extension CompanyMainView: UITableViewDataSource {
         let sectionModel = sectionsModel[indexPath.section]
         switch sectionModel.sectionType {
         case .companySummary:
-            return UITableViewCell()
+            return summarySectionRows.cellForRow(indexPath.row, in: tableView)
         case .companyData:
             let nameValueCell = tableView.dequeueReusableCell(withIdentifier: NameValueCell.reuseIdentifier) as! NameValueCell
             let nameValue = companyViewModel.companyDataModel.nameValueForRow(index)
@@ -307,7 +312,7 @@ extension CompanyMainView: SectionSelectorViewDelegate {
         switch descriptor.sectionType {
         case .companySummary:
             event = .companyDetailsCompanyTabTap
-            numberOfRows = 0
+            numberOfRows = summarySectionRows.numberOfRows
         case .companyData:
             event = .companyDetailsDataTabTap
             numberOfRows = companyViewModel.companyDataModel.numberOfRows
