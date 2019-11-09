@@ -6,23 +6,23 @@ class NameValueCell: UITableViewCell {
     static let reuseIdentifier: String = "NameValueCell"
     
     var nameValue: NameValueDescriptor = NameValueDescriptor(name: "name", value: "", isButton: false, buttonImage: nil)
-    var isLink: Bool = false
-    var duedilTap: (() -> Void)?
+    var tapAction: ((URL?) -> Void)?
     
-    public func configureWithNameValue(_ nameValue: NameValueDescriptor, duedilTap: @escaping () -> Void) {
-        self.duedilTap = duedilTap
+    public func configureWithNameValue(_ nameValue: NameValueDescriptor, tapAction: ((URL?) -> Void)? = nil) {
+        self.tapAction = tapAction ?? self.tapAction
         self.nameValue = nameValue
-        self.nameLabel.text = nameValue.name
+        nameLabel.text = nameValue.name
+        valueLabel.text = nameValue.value
+        button.setTitle(nameValue.value, for: UIControl.State.normal)
+        button.setImage(nameValue.buttonImage, for: .normal)
         stack.removeArrangedSubview(valueLabel)
         stack.removeArrangedSubview(buttonContainer)
         valueLabel.removeFromSuperview()
         buttonContainer.removeFromSuperview()
         if nameValue.isButton {
-            button.setTitle(nameValue.value, for: UIControl.State.normal)
-            button.setImage(nameValue.buttonImage, for: .normal)
             stack.addArrangedSubview(buttonContainer)
+            button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         } else {
-            valueLabel.text = nameValue.value
             stack.addArrangedSubview(valueLabel)
         }
     }
@@ -43,14 +43,15 @@ class NameValueCell: UITableViewCell {
     lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: self.textSize, weight: self.fontWeight)
-        label.heightAnchor.constraint(equalToConstant: self.lineHeight).isActive = true
+        label.numberOfLines = 0
+        label.heightAnchor.constraint(greaterThanOrEqualToConstant: self.lineHeight).isActive = true
         return label
     }()
     
     lazy var valueLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: self.textSize, weight: self.fontWeight)
-        label.heightAnchor.constraint(equalToConstant: self.lineHeight).isActive = true
         return label
     }()
     
@@ -63,18 +64,21 @@ class NameValueCell: UITableViewCell {
     
     var button: UIButton = {
         let button = UIButton(type: UIButton.ButtonType.system)
-        let image = UIImage(named: "ui-duedil-icon")
+        let image = UIImage(named: "ui-duedil-icon")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         button.setImage(image, for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
         button.setTitle("button", for: .normal)
-        button.setTitleColor(UIColor.blue, for: .normal)
+        button.tintColor = UIColor(netHex: 0x027BBB)
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption1)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        button.heightAnchor.constraint(equalToConstant: 18).isActive = true
+        button.setInsets(forContentPadding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), imageTitlePadding: 8)
         return button
     }()
     
     @objc func buttonTapped() {
-        duedilTap?()
+        tapAction?(nameValue.link)
     }
     
     
@@ -85,4 +89,24 @@ class NameValueCell: UITableViewCell {
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+}
+
+extension UIButton {
+    func setInsets(
+        forContentPadding contentPadding: UIEdgeInsets,
+        imageTitlePadding: CGFloat
+    ) {
+        self.contentEdgeInsets = UIEdgeInsets(
+            top: contentPadding.top,
+            left: contentPadding.left,
+            bottom: contentPadding.bottom,
+            right: contentPadding.right + imageTitlePadding
+        )
+        self.titleEdgeInsets = UIEdgeInsets(
+            top: 0,
+            left: imageTitlePadding,
+            bottom: 0,
+            right: -imageTitlePadding
+        )
+    }
 }

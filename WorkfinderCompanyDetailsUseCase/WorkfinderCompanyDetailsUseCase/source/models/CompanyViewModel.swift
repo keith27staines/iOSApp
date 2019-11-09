@@ -10,6 +10,7 @@ protocol CompanyViewModelCoordinatingDelegate : class {
     func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn company: CompanyViewData)
     func companyViewModel(_ viewModel: CompanyViewModel, requestedShowDuedil company: CompanyViewData)
     func companyViewModel(_ viewModel: CompanyViewModel, showShare company: CompanyViewData)
+    func companyViewModel(_ viewModel: CompanyViewModel, requestOpenLink link: URL)
 }
 
 protocol CompanyViewModelDelegate : class {
@@ -100,7 +101,9 @@ class CompanyViewModel : NSObject {
         }
     }
     
-    lazy var companyDataModel: CompanyDataViewModel = { return CompanyDataViewModel(viewData: self.companyViewData) }()
+    lazy var dataSectionRows: CompanyDataSectionRows = {
+        return CompanyDataSectionRows(viewModel: self, companyDocumentsModel: self.companyDocumentsModel)
+    }()
     
     var mustSelectHostToApply: Bool { return false }
     
@@ -149,6 +152,7 @@ class CompanyViewModel : NSObject {
     }
     
     func onDidUpdate() {
+        dataSectionRows = CompanyDataSectionRows(viewModel: self, companyDocumentsModel: companyDocumentsModel)
         viewModelDelegate?.companyViewModelDidRefresh(self)
     }
     
@@ -189,11 +193,16 @@ class CompanyViewModel : NSObject {
     }
     
     func didTapDuedil(for company: CompanyViewData) {
+        log?.track(event: .companyDetailsDataDuedilLinkTap, properties: nil)
         coordinatingDelegate?.companyViewModel(self, requestedShowDuedil: company)
     }
     
     func didTapApply(completion: @escaping (InitiateApplicationResult) -> Void) {
         applyIfStateAllows(completion: completion)
+    }
+    
+    func didTapLink(url: URL) {
+        coordinatingDelegate?.companyViewModel(self, requestOpenLink: url)
     }
     
     var userCanApply: Bool = false
@@ -255,7 +264,6 @@ class CompanyViewModel : NSObject {
                 case .success(let json):
                     self.hosts = json.hosts ?? []
                     self.companyJson = json
-                    self.companyDataModel = CompanyDataViewModel(viewData: self.companyViewData)
                     self.onDidUpdate()
                 }
             }

@@ -27,6 +27,7 @@ class CompanyMainView: UIView {
     var hosts: [F4SHost] { return self.companyViewModel.hosts }
     var textModel: TextModel { return self.companyViewModel.textModel }
     var summarySectionRows: CompanySummarySectionRows
+    var dataSectionRows: CompanyDataSectionRows { return companyViewModel.dataSectionRows}
     
     lazy var hostsSummaryModel: TextModel = {
         return TextModel(hosts: self.hosts)
@@ -206,10 +207,6 @@ class CompanyMainView: UIView {
         companyViewModel.didTapLinkedIn(for: host)
     }
     
-    func duedilLinkTap() {
-        companyViewModel.didTapDuedil(for: companyViewModel.companyViewData)
-    }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -227,7 +224,7 @@ extension CompanyMainView: UITableViewDataSource {
         case .companySummary:
             return summarySectionRows.numberOfRows
         case .companyData:
-            return companyViewModel.companyDataModel.numberOfRows
+            return companyViewModel.dataSectionRows.numberOfRows
         case .companyPeople:
             return hosts.count
         }
@@ -240,17 +237,13 @@ extension CompanyMainView: UITableViewDataSource {
         case .companySummary:
             return summarySectionRows.cellForRow(indexPath.row, in: tableView)
         case .companyData:
-            let nameValueCell = tableView.dequeueReusableCell(withIdentifier: NameValueCell.reuseIdentifier) as! NameValueCell
-            let nameValue = companyViewModel.companyDataModel.nameValueForRow(index)
-            nameValueCell.configureWithNameValue(nameValue, duedilTap: duedilLinkTap)
-            return nameValueCell
+            return dataSectionRows.cellForRow(indexPath.row, in: tableView)
             
         case .companyPeople:
             let host = hosts[index]
             let state = hostsSummaryModel.expandableLabelStates[index]
             let hostCell = tableView.dequeueReusableCell(withIdentifier: HostCell.reuseIdentifier) as! HostCell
-            hostCell.configureWithHost(host, summaryState: state) { (host) in
-            }
+            hostCell.configureWithHost(host, summaryState: state, profileLinkTap: profileLinkTap)
             return hostCell
         }
     }
@@ -315,7 +308,7 @@ extension CompanyMainView: SectionSelectorViewDelegate {
             numberOfRows = summarySectionRows.numberOfRows
         case .companyData:
             event = .companyDetailsDataTabTap
-            numberOfRows = companyViewModel.companyDataModel.numberOfRows
+            numberOfRows = companyViewModel.dataSectionRows.numberOfRows
         case .companyPeople:
             event = .companyDetailsPeopleTabTap
             numberOfRows = hosts.count

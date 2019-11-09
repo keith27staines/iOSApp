@@ -1,5 +1,5 @@
 
-public protocol F4SCompanyDocumentsModelProtocol {
+public protocol F4SCompanyDocumentsModelProtocol: class {
     var documents: F4SCompanyDocuments { get }
     var availableDocuments: F4SCompanyDocuments { get }
     var requestableDocuments: F4SCompanyDocuments { get }

@@ -162,6 +162,10 @@ extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
         openUrl(company.duedilUrl)
     }
     
+    func companyViewModel(_ viewModel: CompanyViewModel, requestOpenLink link: URL) {
+        openUrl(link)
+    }
+    
     func companyViewModel(_ viewModel: CompanyViewModel, showShare company: CompanyViewData) {
         socialShareItemSource.company = self.company
         let activityViewController = UIActivityViewController(activityItems: [socialShareItemSource], applicationActivities: nil)
