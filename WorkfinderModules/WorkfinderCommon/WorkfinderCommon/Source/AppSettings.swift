@@ -10,17 +10,13 @@ public enum AppSettingKey: String, CaseIterable {
     // introduced in 2.9.0
     case displayName
     
-    // introduced in 2.9.0
-    case ab_showHostsEnabled = "ab_show_hosts"
-    
-    // introduced in 2.9.1
-    case ab_CompanyDetailsFirstEmphasis = "ab_CompanyDetailsFirstEmphasis"
+    // ab test introduced in 2.10
+    case ab_companyDetail_presentation_mode
     
     public var defaultValue: String {
         switch self {
         case .displayName: return "Workfinder"
-        case .ab_showHostsEnabled: return "cannot be this value"
-        case .ab_CompanyDetailsFirstEmphasis: return "company"
+        case .ab_companyDetail_presentation_mode: return "showTabs == true, first == company"
         }
     }
 

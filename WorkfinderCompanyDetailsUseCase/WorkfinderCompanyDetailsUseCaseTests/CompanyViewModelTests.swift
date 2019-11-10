@@ -58,6 +58,10 @@ class CompanyViewModelTests: XCTestCase {
 }
 
 class MockCoordinatingDelegate: CompanyViewModelCoordinatingDelegate {
+    func companyViewModel(_ viewModel: CompanyViewModel, requestOpenLink link: URL) {
+        
+    }
+    
     
     func companyViewModelDidRefresh(_ viewModel: CompanyViewModel) {
         refreshedModelCount += 1

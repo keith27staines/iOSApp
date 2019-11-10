@@ -121,10 +121,9 @@ class CompanyMainView: UIView {
         return toolbar
     }()
     
-    // switch self.appSettings.currentValue(key: AppSettingKey.ab_CompanyDetailsFirstEmphasis)
     lazy var sectionsModel: CompanyTableSectionsModel = {
         let model = CompanyTableSectionsModel()
-        let types: [CompanyTableSectionType] = [.companySummary, .companyData, .companyPeople]
+        let types: [CompanyTableSectionType] = ab_section_order
         for sectionType in types {
             model.appendDescriptor(sectionType: sectionType, isHidden: false)
         }
@@ -132,16 +131,28 @@ class CompanyMainView: UIView {
     }()
     
     func configureViews() {
-        addSubview(headerView)
-        addSubview(sectionSelectorView)
-        addSubview(tableView)
-        addSubview(toolbarView)
-        addSubview(applyButtonTransparentContainer)
-        headerView.anchor(top: layoutMarginsGuide.topAnchor, leading: layoutMarginsGuide.leadingAnchor, bottom: nil, trailing: layoutMarginsGuide.trailingAnchor, padding: UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 80))
-        sectionSelectorView.anchor(top: headerView.bottomAnchor, leading: layoutMarginsGuide.leadingAnchor, bottom: nil, trailing: layoutMarginsGuide.trailingAnchor, padding: UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0))
-        toolbarView.anchor(top: nil, leading: leadingAnchor, bottom: layoutMarginsGuide.bottomAnchor, trailing: trailingAnchor)
-        applyButtonTransparentContainer.anchor(top: nil, leading: toolbarView.leadingAnchor, bottom: toolbarView.topAnchor, trailing: toolbarView.trailingAnchor)
-        tableView.anchor(top: sectionSelectorView.bottomAnchor, leading: sectionSelectorView.leadingAnchor, bottom: bottomAnchor, trailing: sectionSelectorView.trailingAnchor, padding: UIEdgeInsets(top: 4, left: 0, bottom: 0, right: 0))
+        if ab_ShowTabs {
+            addSubview(headerView)
+            addSubview(sectionSelectorView)
+            addSubview(tableView)
+            addSubview(toolbarView)
+            addSubview(applyButtonTransparentContainer)
+            headerView.anchor(top: layoutMarginsGuide.topAnchor, leading: layoutMarginsGuide.leadingAnchor, bottom: nil, trailing: layoutMarginsGuide.trailingAnchor, padding: UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 80))
+            sectionSelectorView.anchor(top: headerView.bottomAnchor, leading: layoutMarginsGuide.leadingAnchor, bottom: nil, trailing: layoutMarginsGuide.trailingAnchor, padding: UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0))
+            toolbarView.anchor(top: nil, leading: leadingAnchor, bottom: layoutMarginsGuide.bottomAnchor, trailing: trailingAnchor)
+            applyButtonTransparentContainer.anchor(top: nil, leading: toolbarView.leadingAnchor, bottom: toolbarView.topAnchor, trailing: toolbarView.trailingAnchor)
+            tableView.anchor(top: sectionSelectorView.bottomAnchor, leading: sectionSelectorView.leadingAnchor, bottom: bottomAnchor, trailing: sectionSelectorView.trailingAnchor, padding: UIEdgeInsets(top: 4, left: 0, bottom: 0, right: 0))
+        } else {
+            addSubview(headerView)
+            addSubview(tableView)
+            addSubview(toolbarView)
+            addSubview(applyButtonTransparentContainer)
+            headerView.anchor(top: layoutMarginsGuide.topAnchor, leading: layoutMarginsGuide.leadingAnchor, bottom: nil, trailing: layoutMarginsGuide.trailingAnchor, padding: UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 80))
+            toolbarView.anchor(top: nil, leading: leadingAnchor, bottom: layoutMarginsGuide.bottomAnchor, trailing: trailingAnchor)
+            applyButtonTransparentContainer.anchor(top: nil, leading: toolbarView.leadingAnchor, bottom: toolbarView.topAnchor, trailing: toolbarView.trailingAnchor)
+            tableView.anchor(top: headerView.bottomAnchor, leading: layoutMarginsGuide.leadingAnchor, bottom: bottomAnchor, trailing: layoutMarginsGuide.trailingAnchor, padding: UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0))
+        }
+
     }
     
     var mapOffsetConstant: CGFloat = 2000 {
@@ -316,6 +327,21 @@ extension CompanyMainView: SectionSelectorViewDelegate {
         if numberOfRows > 0 {
             log?.track(event: event, properties: nil)
             tableView.scrollToRow(at: IndexPath(row: 0, section: descriptor.index), at: .top, animated: true)
+        }
+    }
+}
+
+// MARK:- ab test helpers
+extension CompanyMainView {
+    var ab_ShowTabs: Bool {
+        return appSettings.currentValue(key: .ab_companyDetail_presentation_mode).hasPrefix("showTabs == true")
+    }
+    
+    var ab_section_order : [CompanyTableSectionType] {
+        if appSettings.currentValue(key: .ab_companyDetail_presentation_mode).hasSuffix("first == company") {
+            return  [.companySummary, .companyData, .companyPeople]
+        } else {
+            return  [.companyPeople, .companyData, .companySummary]
         }
     }
 }
