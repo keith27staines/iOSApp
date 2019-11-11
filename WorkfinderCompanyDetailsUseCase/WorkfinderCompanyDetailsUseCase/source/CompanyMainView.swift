@@ -67,6 +67,8 @@ class CompanyMainView: UIView {
             applyButton.backgroundColor = UIColor.lightGray
         }
         toolbarView.heartAppearance(hearted: companyViewModel.isFavourited)
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
     
     lazy var headerView: CompanyHeaderView = {
@@ -285,8 +287,6 @@ extension CompanyMainView: UITableViewDelegate {
             summaryState.isExpanded.toggle()
             textModel.expandableLabelStates[indexPath.row] = summaryState
             hostCell.configureWithHost(host, summaryState: summaryState, profileLinkTap: profileLinkTap)
-            tableView.beginUpdates()
-            tableView.endUpdates()
         }
     }
 }

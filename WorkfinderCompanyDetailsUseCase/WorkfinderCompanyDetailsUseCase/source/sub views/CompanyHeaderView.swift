@@ -74,6 +74,22 @@ class CompanyHeaderView: UIView {
         return label
     }()
     
+    let distanceLabelColor = UIColor.init(white: 0.5, alpha: 1)
+    
+    lazy var distanceStack: UIStackView = {
+        
+        let locationImage = UIImage(named: "location")?.withRenderingMode(.alwaysTemplate)
+        let locationIcon = UIImageView(image: locationImage)
+        locationIcon.contentMode = .scaleAspectFit
+        locationIcon.heightAnchor.constraint(equalToConstant: 12).isActive = true
+        locationIcon.widthAnchor.constraint(equalToConstant: 12).isActive = true
+        locationIcon.tintColor = self.distanceLabelColor
+        let stack = UIStackView(arrangedSubviews: [locationIcon, self.distanceLabel])
+        stack.axis = .horizontal
+        stack.spacing = 4
+        return stack
+    }()
+    
     lazy var distanceLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -86,10 +102,10 @@ class CompanyHeaderView: UIView {
     func configureViews() {
         addSubview(iconContainerView)
         addSubview(companyNameLabel)
-        addSubview(distanceLabel)
+        addSubview(distanceStack)
         iconContainerView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 8, left: 8, bottom: 0, right: 8), size: iconViewSize)
         companyNameLabel.anchor(top: nil, leading: companyIconImageView.trailingAnchor, bottom: nil, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16), size: CGSize.zero)
         companyNameLabel.centerYAnchor.constraint(equalTo: iconContainerView.centerYAnchor).isActive = true
-        distanceLabel.anchor(top: companyNameLabel.bottomAnchor, leading: companyNameLabel.leadingAnchor, bottom: nil, trailing: companyNameLabel.trailingAnchor, padding: UIEdgeInsets(top: 4, left: 0, bottom: 0, right: 0))
+        distanceStack.anchor(top: companyNameLabel.bottomAnchor, leading: companyNameLabel.leadingAnchor, bottom: nil, trailing: companyNameLabel.trailingAnchor, padding: UIEdgeInsets(top: 4, left: 0, bottom: 0, right: 0))
     }
 }

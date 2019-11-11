@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         masterBuilder = MasterBuilder(registrar: application, launchOptions: launchOptions)
         window = masterBuilder.window
         let localStore = masterBuilder.localStore
-        if localStore.value(key: LocalStore.Key.installationUuid) == nil {
+        if localStore.value(key: LocalStore.Key.installationUuid) == nil && Config.environment == .staging {
             let selectEnvironmentCoordinator = SelectEnvironmentCoordinator(parent: nil, router: masterBuilder.rootNavigationRouter) { environmentModel in
                 Config.workfinderApiBase = environmentModel.urlString + "/api"
                 localStore.setValue(Config.workfinderApiBase, for: LocalStore.Key.workfinderBaseUrl)

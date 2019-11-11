@@ -28,7 +28,14 @@ class HostView : UIView {
     var expandableLabelState = ExpandableLabelState() {
         didSet {
             expandableLabel.state = expandableLabelState
+            readMoreLabel.text = expandableLabelState.isExpanded ? "close" : "Read more"
+            readMoreLabelStack.isHidden = !self.expandableLabel.isExpandable
         }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        readMoreLabelStack.isHidden = !self.expandableLabel.isExpandable
     }
     
     var profileLinkTap: ((F4SHost) -> Void)?
@@ -47,8 +54,29 @@ class HostView : UIView {
         return label
     }()
     
+    lazy var readMoreLabelStack: UIStackView = {
+        let spacingView = UIView()
+        spacingView.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .horizontal)
+        let stack = UIStackView(arrangedSubviews: [UIView(), self.readMoreLabel])
+        stack.axis = .horizontal
+        stack.distribution = .fill
+        return stack
+    }()
+    
+    lazy var readMoreLabel: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        label.textColor = UIColor.black
+        label.font = UIFont.systemFont(ofSize: self.textSize, weight: .bold)
+        label.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
+        label.textAlignment = .center
+        label.layer.masksToBounds = true
+        return label
+    }()
+    
     lazy var fullStack: UIStackView = {
-        let views = [self.horizontalStack, self.expandableLabel]
+        let views = [self.horizontalStack, self.expandableLabel, self.readMoreLabelStack]
         let stack = UIStackView(arrangedSubviews: views)
         stack.spacing = 4
         stack.axis = .vertical
@@ -137,13 +165,17 @@ class ExpandableLabel: UILabel {
         }
     }
     
-    private var minHeight: CGFloat { return 3 * lineHeight }
+    private var minHeight: CGFloat { return 2 * lineHeight }
     private var requiredHeight: CGFloat { return CGFloat(lines) * lineHeight }
     private var displayHeight: CGFloat { return max(requiredHeight, minHeight) }
     private var lineHeight: CGFloat { return font.lineHeight }
     
     override func layoutMarginsDidChange() {
         heightConstraint.constant = state.isExpanded ? displayHeight : minHeight
+    }
+    
+    var isExpandable: Bool {
+        return lines > 2
     }
     
     private var lines: Int {
@@ -157,8 +189,8 @@ class ExpandableLabel: UILabel {
     
     private lazy var heightConstraint: NSLayoutConstraint = {
         let constraint = heightAnchor.constraint(equalToConstant: self.minHeight)
-        constraint.isActive = true
         constraint.priority = UILayoutPriority.defaultHigh
+        constraint.isActive = true
         return constraint
     }()
     

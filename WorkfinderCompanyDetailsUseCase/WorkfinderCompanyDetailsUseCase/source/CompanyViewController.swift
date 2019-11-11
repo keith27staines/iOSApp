@@ -57,11 +57,20 @@ class CompanyViewController: UIViewController {
         refresh()
     }
     
+    lazy var leftButton: UIBarButtonItem = {
+        let button = UIButton(type: .system)
+        let leftChevron = UIImage(named: "Back")?.withRenderingMode(.alwaysTemplate).scaledImage(with: CGSize(width: 20, height: 20))
+        button.setImage(leftChevron, for: .normal)
+        button.setTitle("Back", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        button.sizeToFit()
+        button.addTarget(self, action: #selector(didTapDone), for: .touchUpInside)
+        return UIBarButtonItem(customView: button)
+    }()
+    
     func configureNavigationBar() {
         navigationController?.isNavigationBarHidden = false
         styleNavigationController()
-        let image = UIImage(named: "cross")
-        let leftButton = UIBarButtonItem(image: image, style: UIBarButtonItem.Style.done, target: self, action: #selector(didTapDone))
         navigationItem.leftBarButtonItem = leftButton
     }
     
