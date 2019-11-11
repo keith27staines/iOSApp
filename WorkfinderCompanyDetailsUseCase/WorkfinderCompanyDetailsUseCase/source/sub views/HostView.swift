@@ -28,7 +28,7 @@ class HostView : UIView {
     var expandableLabelState = ExpandableLabelState() {
         didSet {
             expandableLabel.state = expandableLabelState
-            readMoreLabel.text = expandableLabelState.isExpanded ? "close" : "Read more"
+            readMoreLabel.text = expandableLabelState.isExpanded ? "Close" : "Read more"
             readMoreLabelStack.isHidden = !self.expandableLabel.isExpandable
         }
     }
