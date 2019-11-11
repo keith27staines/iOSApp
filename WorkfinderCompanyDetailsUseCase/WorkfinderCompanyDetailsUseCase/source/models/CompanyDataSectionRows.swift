@@ -62,7 +62,7 @@ class CompanyDataSectionRows {
     var items: [NameValueDescriptor] {
         var items = [
             makeDescriptor(rowType: .annualRevenue, value: self.viewData.revenueString, isButton: false),
-            makeDescriptor(rowType: .annualGrowth, value: self.viewData.revenueString, isButton: false),
+            makeDescriptor(rowType: .annualGrowth, value: self.viewData.growthString, isButton: false),
             makeDescriptor(rowType: .numberOfEmployees, value: self.viewData.employeesString, isButton: false)
             ]
         companyDocumentsModel.availableDocuments.forEach { (document) in

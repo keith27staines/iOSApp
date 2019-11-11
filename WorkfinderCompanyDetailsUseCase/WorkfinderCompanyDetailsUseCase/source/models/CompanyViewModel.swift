@@ -133,7 +133,6 @@ class CompanyViewModel : NSObject {
         self.companyDocumentsModel = companyDocumentsModel
         self.log = log
         super.init()
-        viewControllers = [summaryViewController, dataViewController]
     }
     
     func startLoad() {
@@ -289,40 +288,6 @@ class CompanyViewModel : NSObject {
             }
         })
     }
-    
-    private func controller(for index: PageIndex?) -> CompanySubViewController? {
-        guard let index = index else { return nil }
-        switch index {
-        case .summary:
-            return summaryViewController
-        case .data:
-            return dataViewController
-        case .people:
-            return hostsViewController
-        }
-    }
-    
-    var currentViewController: CompanySubViewController {
-        return controller(for: currentPageIndex)!
-    }
-    
-    lazy private var summaryViewController: CompanySummaryViewController = {
-        return CompanySummaryViewController(viewModel: self,
-                                            pageIndex: .summary,
-                                            documentsModel: companyDocumentsModel)
-    }()
-    
-    lazy private var dataViewController: CompanyDataViewController = {
-        let vc = CompanyDataViewController(viewModel: self, pageIndex: .data)
-        vc.log = self.log
-        return vc
-    }()
-    
-    lazy private var hostsViewController: CompanyHostsViewController = {
-        let vc = CompanyHostsViewController(viewModel: self, pageIndex: .people)
-        return vc
-    }()
-    
 }
 
 extension CompanyViewModel : CompanyFavouritesModelDelegate {
@@ -337,27 +302,6 @@ extension CompanyViewModel : CompanyFavouritesModelDelegate {
         company: Company,
         error: F4SNetworkError, retry: (()->Void)? = nil) {
         viewModelDelegate?.companyViewModelNetworkTaskDidFail(self, error: error, retry: retry)
-    }
-}
-
-extension CompanyViewModel: UIPageViewControllerDataSource {
-    public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let pageIndex = pageIndexForViewController(viewController) else { return nil }
-        let indexBefore = pageIndex.previous()
-        return controller(for: indexBefore)
-    }
-    
-    public func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let pageIndex = pageIndexForViewController(viewController) else { return nil }
-        let indexAfter = pageIndex.next()
-        return controller(for: indexAfter)
-    }
-    
-    func pageIndexForViewController(_ controller: UIViewController) -> PageIndex? {
-        guard let controller = controller as? CompanySubViewController else {
-                return nil
-        }
-        return controller.pageIndex
     }
 }
 
