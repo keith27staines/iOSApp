@@ -37,23 +37,29 @@ class CompanySummarySectionRows {
             let sectionRow = SummarySectionRow(rawValue: row),
             let cell = tableView.dequeueReusableCell(withIdentifier: sectionRow.reuseIdentifier)
         else { return UITableViewCell() }
+        
         switch sectionRow {
         case .postcode:
             let nameValueCell = cell as! NameValueCell
             nameValueCell.nameLabel.text = "Postcode"
             nameValueCell.valueLabel.text = viewData?.postcode
+            nameValueCell.nameValue.isButton = false
+            nameValueCell.nameLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
         case .industry:
             let nameValueCell = cell as! NameValueCell
             nameValueCell.nameLabel.text = "Industry"
             nameValueCell.valueLabel.text = viewData?.industry
+            nameValueCell.nameValue.isButton = false
+            nameValueCell.nameLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
         case .summary:
             let nameValueCell = cell as! NameValueCell
+            nameValueCell.nameValue.isButton = false
             nameValueCell.nameLabel.text = "Summary"
             nameValueCell.nameLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         case .summaryText:
             let summaryCell = cell as! CompanySummaryTextCell
             summaryCell.expandableLabel.text = viewData?.description
-            summaryCell.expandableLabel.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.light)
+            summaryCell.expandableLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
         }
         return cell
     }

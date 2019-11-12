@@ -13,6 +13,8 @@ class NameValueCell: UITableViewCell {
         self.nameValue = nameValue
         nameLabel.text = nameValue.name
         valueLabel.text = nameValue.value
+        nameLabel.font = UIFont.systemFont(ofSize: self.textSize, weight: self.fontWeight)
+        valueLabel.font = UIFont.systemFont(ofSize: self.textSize, weight: self.fontWeight)
         button.setTitle(nameValue.value, for: UIControl.State.normal)
         button.setImage(nameValue.buttonImage, for: .normal)
         stack.removeArrangedSubview(valueLabel)
