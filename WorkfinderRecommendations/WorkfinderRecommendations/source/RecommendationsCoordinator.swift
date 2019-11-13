@@ -30,6 +30,7 @@ public class RecommendationsCoordinator : CoreInjectionNavigationCoordinator {
         let storyboard = UIStoryboard(name: "Recommendations", bundle: __bundle)
         let controller = storyboard.instantiateViewController(withIdentifier: "RecommendationsViewController") as! RecommendationsListViewController
         controller.coordinator = self
+        controller.log = self.injected.log
         return controller
     }()
     
@@ -58,9 +59,11 @@ public class RecommendationsCoordinator : CoreInjectionNavigationCoordinator {
     var company: Company?
     
     func showDetail(companyUuid: F4SUUID) {
+        injected.log.track(event: .recommendationsShowCompanyTap, properties: nil)
         company = companyFromUuid(companyUuid)
         guard let company = company else { return }
         let companyCoordinator = companyCoordinatorFactory.makeCompanyCoordinator(parent: self, navigationRouter: navigationRouter, company: company, inject: injected)
+        companyCoordinator.originScreen = rootViewController.screenName
         addChildCoordinator(companyCoordinator)
         companyCoordinator.start()
     }

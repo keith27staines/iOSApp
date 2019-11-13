@@ -21,16 +21,20 @@ enum CamerWillMoveAction {
 }
 
 class MapViewController: UIViewController {
+    
+    let screenName = ScreenName.map
     weak var coordinator: SearchCoordinator?
     
-    let peopleDataSource = PeopleSearchDataSource()
-    let companyDataSource = CompanySearchDataSource()
-    let placesDataSource = PlacesSearchDataSource()
+    let peopleDataSource: SearchDataSourcing = PeopleSearchDataSource()
+    let companyDataSource: SearchDataSourcing = CompanySearchDataSource()
+    let placesDataSource: SearchDataSourcing = PlacesSearchDataSource()
     let userMessageHandler = UserMessageHandler()
+    weak var log: F4SAnalyticsAndDebugging?
     
     lazy var searchView: SearchView = {
         let sideMargin: CGFloat = 20
         let searchView = SearchView(expandedWidth: view.bounds.width - 2*sideMargin, frame: CGRect.zero)
+        searchView.log = self.log
         searchView.delegate = self
         searchView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(searchView)
@@ -131,6 +135,8 @@ class MapViewController: UIViewController {
     /// Map model for companies satisfying the interest filters
     var filteredMapModel: MapModel?
     
+    var interestsRepository: F4SInterestsRepositoryProtocol!
+    
     /// Used to determine whether there is internet connectivity
     var reachability: Reachability?
     
@@ -188,6 +194,7 @@ class MapViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        log?.screen(screenName)
         adjustNavigationBar()
         displayRefineSearchLabelAnimated()
         favouriteList = ShortlistDBOperations.sharedInstance.getShortlist()
@@ -242,9 +249,11 @@ class MapViewController: UIViewController {
         mapView.addSubview(pressedPinOrCluster!)
         
         let vc = UIStoryboard(name: "PopupCompanyList", bundle: nil).instantiateViewController(withIdentifier: "PopupListViewController") as! PopupCompanyListViewController
-        vc.didSelectCompany = { [weak self] company in self?.coordinator?.showDetail(company: company) }
+        vc.didSelectCompany = { [weak self] company in
+            self?.coordinator?.showDetail(company: company, originScreen: vc.screenName)
+        }
         vc.setCompanies(companies)
-        
+        vc.log = log
         vc.transitioningDelegate = self
         present(vc, animated: true, completion: nil)
     }
@@ -454,7 +463,8 @@ extension MapViewController {
     }
     
     func displayRefineSearchLabelAnimated() {
-        if self.refineSearchLabel.isHidden && InterestDBOperations.sharedInstance.interestsForCurrentUser().count == 0 {
+        let interestsCount = interestsRepository.loadInterestsSet().count
+        if self.refineSearchLabel.isHidden && interestsCount == 0 {
             self.refineLabelContainerView.isHidden = false
             self.setupSlideInAnimation(transitionType.slideIn, completionDelegate: self)
             self.refineSearchLabel.isHidden = false
@@ -615,6 +625,7 @@ extension MapViewController: GMSMapViewDelegate {
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        coordinator?.injected.log.track(event: TrackEvent.mapPinButtonTap, properties: nil)
         let origin = mapView.projection.point(for: marker.position)
         let companies = companiesFromMarker(marker)
         if companies.count > 1 {
@@ -660,10 +671,11 @@ extension MapViewController: GMSMapViewDelegate {
     }
     
     func mapView(_: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+        log?.track(event: .mapPinShowCompanyTap, properties: nil)
         guard let company = companyFromMarker(marker: marker) else {
             return
         }
-        coordinator?.showDetail(company: company)
+        coordinator?.showDetail(company: company, originScreen: ScreenName.companyPin)
     }
     
     func mapView(_: GMSMapView, didCloseInfoWindowOf _: GMSMarker) {
@@ -686,6 +698,7 @@ extension MapViewController: GMUClusterManagerDelegate {
             cameraWillMoveAction = .explodeCluster(cluster)
             moveCamera(toShow: explodedBounds)
         } else {
+            log?.track(event: TrackEvent.mapClusterTap, properties: nil)
             presentCompaniesPopup(for: cluster)
         }
     }
@@ -786,6 +799,7 @@ extension MapViewController {
     }
     
     @IBAction func filtersButtonTouched(_: UIButton) {
+        log?.track(event: TrackEvent.mapShowFiltersButtonTap, properties: nil)
         hideRefineSearchLabelAnimated()
         coordinator?.filtersButtonWasTapped()
     }
@@ -992,7 +1006,7 @@ extension MapViewController {
         self.createUnfilteredMapModelFromDatabase { [weak self] unfilteredMapModel in
             guard let strongSelf = self else { return }
             strongSelf.unfilteredMapModel = unfilteredMapModel
-            let interestFilterSet = InterestDBOperations.sharedInstance.interestsForCurrentUser()
+            let interestFilterSet = strongSelf.interestsRepository.loadInterestsSet()
             strongSelf.createFilteredMapModel(unfilteredModel: unfilteredMapModel, interestFilterSet: interestFilterSet, completed: { (filteredMapModel) in
                 strongSelf.filteredMapModel = filteredMapModel
                 strongSelf.reloadMapFromModel(mapModel: filteredMapModel, completed: {
@@ -1052,6 +1066,7 @@ extension MapViewController : SearchViewDelegate {
         case .collapsed, .horizontallyExpanded:
             return
         case .searchingLocation:
+            log?.track(event: .mapSearchGotoLocationTap, properties: nil)
             setUserLocation(from: item.primaryText, placeId: item.uuidString)
             
         case .searchingPeople:
@@ -1060,7 +1075,8 @@ extension MapViewController : SearchViewDelegate {
             guard
                 let uuid = item.uuidString,
                 let company = DatabaseOperations.sharedInstance.companyWithUUID(uuid) else { return }
-            coordinator?.showDetail(company: company)
+            log?.track(event: .mapSearchShowCompanyTap, properties: nil)
+            coordinator?.showDetail(company: company, originScreen: ScreenName.companySearch)
         }
         searchView.minimizeSearchUI()
     }

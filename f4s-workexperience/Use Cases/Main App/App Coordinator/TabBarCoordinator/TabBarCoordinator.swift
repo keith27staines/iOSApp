@@ -8,7 +8,7 @@ import WorkfinderRecommendations
 import WorkfinderMessagesUseCase
 import WorkfinderOnboardingUseCase
 
-class TabBarCoordinator : TabBarCoordinatorProtocol {
+class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     
     let injected: CoreInjectionProtocol
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
@@ -17,6 +17,7 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
     let companyService: F4SCompanyServiceProtocol
     let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
     let favouritesRepository: F4SFavouritesRepositoryProtocol
+    let interestsRepository: F4SInterestsRepositoryProtocol
     let offerProcessingService: F4SOfferProcessingServiceProtocol
     let partnersModel: F4SPartnersModelProtocol
     let placementsRepository: F4SPlacementRepositoryProtocol
@@ -53,6 +54,7 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
                   companyService: F4SCompanyServiceProtocol,
                   favouritesRepository: F4SFavouritesRepositoryProtocol,
                   documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
+                  interestsRepository: F4SInterestsRepositoryProtocol,
                   offerProcessingService: F4SOfferProcessingServiceProtocol,
                   partnersModel: F4SPartnersModelProtocol,
                   placementsRepository: F4SPlacementRepositoryProtocol,
@@ -74,26 +76,27 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
         self.documentUploaderFactory = documentUploaderFactory
         
         self.favouritesRepository = favouritesRepository
+        self.interestsRepository = interestsRepository
         self.offerProcessingService = offerProcessingService
         self.partnersModel = partnersModel
         self.placementsRepository = placementsRepository
-        self.placementService = placementService
         
+        self.placementService = placementService
         self.placementDocumentsServiceFactory = placementDocumentsServiceFactory
         self.messageServiceFactory = messageServiceFactory
         self.messageActionServiceFactory = messageActionServiceFactory
         self.messageCannedResponsesServiceFactory = messageCannedResponsesServiceFactory
-        self.recommendationsService = recommendationsService
         
+        self.recommendationsService = recommendationsService
         self.roleService = roleService
     }
     
     func start() {
         createTabBar()
         rootViewController = setUpDrawerController(navigationController: tabBarViewController)
-        let window = (UIApplication.shared.delegate as? AppDelegate)?.window!
-        window!.rootViewController = rootViewController
-        window!.makeKeyAndVisible()
+        guard let window = (UIApplication.shared.delegate as? AppDelegate)?.window else { return }
+        window.rootViewController = rootViewController
+        window.makeKeyAndVisible()
         navigateToMostAppropriateInitialTab()
     }
     
@@ -153,6 +156,7 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
     }
     
     public func toggleMenu(completion: ((Bool) -> ())? = nil) {
+        injected.log.track(event: .sideMenuToggle, properties: nil)
         drawerController?.toggleLeftDrawerSide(animated: true, completion: completion)
     }
     
@@ -199,6 +203,7 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
             recommendationsNavigationController,
             favouritesNavigationContoller,
             searchNavigationController]
+        tabBarViewController.delegate = self
     }
     
     lazy var homeCoordinator: HomeCoordinator = {
@@ -273,7 +278,12 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
         let searchIcon = UIImage(named: "searchIcon2")?.withRenderingMode(.alwaysTemplate)
         navigationController.tabBarItem = UITabBarItem(title: "Search", image: searchIcon, selectedImage: nil)
         let router = NavigationRouter(navigationController: navigationController)
-        let coordinator = SearchCoordinator(parent: self, navigationRouter: router, inject: injected, companyCoordinatorFactory: companyCoordinatorFactory)
+        let coordinator = SearchCoordinator(
+            parent: self,
+            navigationRouter: router,
+            inject: injected,
+            companyCoordinatorFactory: companyCoordinatorFactory,
+            interestsRepository: interestsRepository)
         coordinator.shouldAskOperatingSystemToAllowLocation = shouldAskOperatingSystemToAllowLocation
         addChildCoordinator(coordinator)
         return coordinator
@@ -284,6 +294,7 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
 
         let leftSideMenuViewController = SideMenuViewController()
         leftSideMenuViewController.tabBarCoordinator = self
+        leftSideMenuViewController.log = injected.log
 
         let leftSideNavController = UINavigationController(rootViewController: leftSideMenuViewController)
         leftSideNavController.restorationIdentifier = "ExampleLeftNavigationControllerRestorationKey"
@@ -335,4 +346,21 @@ class TabBarCoordinator : TabBarCoordinatorProtocol {
         tabBarViewController.configureTimelineTabBarWithCount(count: count)
     }
 
+}
+
+extension TabBarCoordinator: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        switch viewController {
+        case timelineCoordinator.navigationRouter.navigationController:
+            injected.log.track(event: TrackEvent.messagesTabTap, properties: nil)
+        case recommendationsCoordinator.navigationRouter.navigationController:
+            injected.log.track(event: TrackEvent.recommendationsTabTap, properties: nil)
+        case favouritesCoordinator.navigationRouter.navigationController:
+            injected.log.track(event: TrackEvent.favouritesTabTap, properties: nil)
+        case searchCoordinator.navigationRouter.navigationController:
+            injected.log.track(event: TrackEvent.searchTabTap, properties: nil)
+        default:
+            fatalError("unknown coordinator")
+        }
+    }
 }

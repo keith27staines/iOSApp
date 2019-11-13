@@ -12,12 +12,13 @@ target 'f4s-workexperience' do
     pod 'SQLite.swift'
     pod 'GoogleMaps'
     pod 'GooglePlaces'
-    pod 'Analytics'
-    pod 'Segment-Bugsnag'
-    
+    pod 'Bugsnag'
+    pod 'Firebase/Core'
+    pod 'Firebase/Analytics'
+    pod 'Firebase/RemoteConfig'
 end
   
 target 'f4s-workexperienceTests' do
-
+    pod 'Firebase/Analytics'
 end
 

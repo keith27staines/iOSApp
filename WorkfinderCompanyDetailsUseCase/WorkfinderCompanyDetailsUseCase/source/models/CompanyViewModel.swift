@@ -6,10 +6,11 @@ import WorkfinderCommon
 protocol CompanyViewModelCoordinatingDelegate : class {
     func companyViewModelDidComplete(_ viewModel: CompanyViewModel)
     func companyViewModel(_ viewModel: CompanyViewModel, applyTo: CompanyViewData, continueFrom: F4STimelinePlacement?)
-    func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn person: PersonViewData)
+    func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn person: F4SHost)
     func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn company: CompanyViewData)
     func companyViewModel(_ viewModel: CompanyViewModel, requestedShowDuedil company: CompanyViewData)
     func companyViewModel(_ viewModel: CompanyViewModel, showShare company: CompanyViewData)
+    func companyViewModel(_ viewModel: CompanyViewModel, requestOpenLink link: URL)
 }
 
 protocol CompanyViewModelDelegate : class {
@@ -25,6 +26,7 @@ class CompanyViewModel : NSObject {
     enum PageIndex : Int, CaseIterable {
         case summary
         case data
+        case people
         func previous() -> PageIndex? { return PageIndex(rawValue: self.rawValue - 1) }
         func next() -> PageIndex? { return PageIndex(rawValue: self.rawValue + 1) }
     }
@@ -53,11 +55,7 @@ class CompanyViewModel : NSObject {
         didSet { viewModelDelegate?.companyViewModelDidRefresh(self) }
     }
     
-    var userLocation: CLLocation? {
-        didSet {
-            viewModelDelegate?.companyViewModelDidRefresh(self)
-        }
-    }
+    var userLocation: CLLocation?
     
     var distanceFromUserToCompany: String? {
         guard let userLocation = userLocation else { return nil }
@@ -77,7 +75,12 @@ class CompanyViewModel : NSObject {
     var addToshortlistService: CompanyFavouritingServiceProtocol?
     private (set) var company: Company
     var companyViewData: CompanyViewData
-    let people: [PersonViewData]
+    var hosts: [F4SHost] = [] {
+        didSet {
+            textModel = TextModel(hosts: hosts)
+        }
+    }
+    var textModel = TextModel(hosts: [])
     let companyService: F4SCompanyServiceProtocol
     let companyDocumentsModel: F4SCompanyDocumentsModelProtocol
     let canApplyLogic: AllowedToApplyLogicProtocol
@@ -92,47 +95,64 @@ class CompanyViewModel : NSObject {
         }
     }
     
-    var selectedPersonIndex: Int? = nil {
+    var selectedHostIndex: Int? = nil {
         didSet {
-            selectedPersonIndexDidChange?(selectedPersonIndex)
+            selectedPersonIndexDidChange?(selectedHostIndex)
         }
     }
     
-    var mustSelectPersonToApply: Bool {
-        return people.count == 0 ? false : selectedPerson == nil
+    lazy var dataSectionRows: CompanyDataSectionRows = {
+        return CompanyDataSectionRows(viewModel: self, companyDocumentsModel: self.companyDocumentsModel)
+    }()
+    
+    var mustSelectHostToApply: Bool { return false }
+    
+    var selectedHost: F4SHost? {
+        guard let index = self.selectedHostIndex else { return nil }
+        return self.hosts[index]
     }
     
-    var selectedPerson: PersonViewData? {
-        guard let index = self.selectedPersonIndex else { return nil }
-        return self.people[index]
-    }
+    weak var log: F4SAnalyticsAndDebugging?
     
     init(coordinatingDelegate: CompanyViewModelCoordinatingDelegate,
          viewModelDelegate: CompanyViewModelDelegate? = nil,
          company: Company,
-         people: [PersonViewData],
          companyService: F4SCompanyServiceProtocol,
          favouritingModel: CompanyFavouritesModel,
          allowedToApplyLogic: AllowedToApplyLogicProtocol,
-         companyDocumentsModel: F4SCompanyDocumentsModelProtocol) {
+         companyDocumentsModel: F4SCompanyDocumentsModelProtocol,
+         log: F4SAnalyticsAndDebugging?) {
         self.companyService = companyService
         self.company = company
         self.companyViewData = CompanyViewData(company: company)
-        self.people = people
         self.coordinatingDelegate = coordinatingDelegate
         self.viewModelDelegate = viewModelDelegate
         self.favouritingModel = favouritingModel
         self.companyViewData.isFavourited = self.favouritingModel.isFavourite(company: company)
         self.canApplyLogic = allowedToApplyLogic
         self.companyDocumentsModel = companyDocumentsModel
+        self.log = log
         super.init()
-        viewControllers = [summaryViewController, dataViewController]
+    }
+    
+    func startLoad() {
         loadCompany()
         loadDocuments()
         company.getPostcode { [weak self] postcode in
-            self?.companyViewData.postcode = postcode
-            self?.summaryViewController.refresh()
+            guard let self = self else { return }
+            self.companyViewData.postcode = postcode
+            self.onDidUpdate()
         }
+        checkUserCanApply { [weak self] (result) in
+            guard let self = self else { return }
+            self.userCanApply = result == .allowed ? true : false
+            self.onDidUpdate()
+        }
+    }
+    
+    func onDidUpdate() {
+        dataSectionRows = CompanyDataSectionRows(viewModel: self, companyDocumentsModel: companyDocumentsModel)
+        viewModelDelegate?.companyViewModelDidRefresh(self)
     }
     
     func transitionDirectionForPage(_ pageIndex: PageIndex) ->  UIPageViewController.NavigationDirection? {
@@ -163,8 +183,8 @@ class CompanyViewModel : NSObject {
         coordinatingDelegate?.companyViewModel(self, showShare: companyViewData)
     }
     
-    func didTapLinkedIn(for person: PersonViewData) {
-        coordinatingDelegate?.companyViewModel(self, requestsShowLinkedIn: person)
+    func didTapLinkedIn(for host: F4SHost) {
+        coordinatingDelegate?.companyViewModel(self, requestsShowLinkedIn: host)
     }
     
     func didTapLinkedIn(for company: CompanyViewData) {
@@ -172,11 +192,39 @@ class CompanyViewModel : NSObject {
     }
     
     func didTapDuedil(for company: CompanyViewData) {
+        log?.track(event: .companyDetailsDataDuedilLinkTap, properties: nil)
         coordinatingDelegate?.companyViewModel(self, requestedShowDuedil: company)
     }
     
     func didTapApply(completion: @escaping (InitiateApplicationResult) -> Void) {
         applyIfStateAllows(completion: completion)
+    }
+    
+    func didTapLink(url: URL) {
+        coordinatingDelegate?.companyViewModel(self, requestOpenLink: url)
+    }
+    
+    var userCanApply: Bool = false
+    
+    func checkUserCanApply(completion: @escaping (InitiateApplicationResult) -> Void) {
+        viewModelDelegate?.companyViewModelDidBeginNetworkTask(self)
+        canApplyLogic.checkUserCanApply(user: "", to: company.uuid) { (networkResult) in
+            DispatchQueue.main.async { [weak self] in
+                guard let strongSelf = self else { return }
+                switch networkResult {
+                case .error(let error):
+                    strongSelf.viewModelDelegate?.companyViewModelNetworkTaskDidFail(strongSelf, error: error, retry: {
+                        strongSelf.checkUserCanApply(completion: completion)
+                    })
+                case .success(true):
+                    strongSelf.viewModelDelegate?.companyViewModelDidCompleteLoadingTask(strongSelf)
+                    completion(.allowed)
+                case .success(false):
+                    strongSelf.viewModelDelegate?.companyViewModelDidCompleteLoadingTask(strongSelf)
+                    completion(.deniedAlreadyApplied)
+                }
+            }
+        }
     }
     
     func applyIfStateAllows(completion: @escaping (InitiateApplicationResult) -> Void) {
@@ -194,72 +242,52 @@ class CompanyViewModel : NSObject {
                 completion(.allowed)
             case .success(false):
                 strongSelf.viewModelDelegate?.companyViewModelDidCompleteLoadingTask(strongSelf)
-                strongSelf.viewModelDelegate?.companyViewModelDidCompleteLoadingTask(strongSelf)
                 completion(.deniedAlreadyApplied)
             }
         }
     }
 
     func loadCompany() {
+        viewModelDelegate?.companyViewModelDidBeginNetworkTask(self)
         companyService.getCompany(uuid: company.uuid) { (result) in
             DispatchQueue.main.async { [weak self] in
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
+                self.viewModelDelegate?.companyViewModelDidCompleteLoadingTask(self)
                 switch result {
                 case .error(let error):
                     if error.retry {
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+5, execute: {
-                            strongSelf.loadCompany()
+                            self.loadCompany()
                         })
                     }
                 case .success(let json):
-                    strongSelf.companyJson = json
+                    self.hosts = json.hosts ?? []
+                    self.companyJson = json
+                    self.onDidUpdate()
                 }
             }
         }
     }
     
     func loadDocuments() {
-        companyDocumentsModel.getDocuments(age:0, completion: { [weak self] (result) in
-            guard let strongSelf = self else { return }
-            DispatchQueue.main.async {
+        viewModelDelegate?.companyViewModelDidBeginNetworkTask(self)
+        companyDocumentsModel.getDocuments(age:0, completion: {  (result) in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.viewModelDelegate?.companyViewModelDidCompleteLoadingTask(self)
                 switch result {
                 case .error(let error):
                     if error.retry {
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+5, execute: {
-                            strongSelf.loadDocuments()
+                            self.loadDocuments()
                         })
                     }
                 case .success(_):
-                    strongSelf.viewModelDelegate?.companyViewModelDidRefresh(strongSelf)
+                    self.onDidUpdate()
                 }
             }
         })
     }
-    
-    private func controller(for index: PageIndex?) -> CompanySubViewController? {
-        guard let index = index else { return nil }
-        switch index {
-        case .summary:
-            return summaryViewController
-        case .data:
-            return dataViewController
-        }
-    }
-    
-    var currentViewController: CompanySubViewController {
-        return controller(for: currentPageIndex)!
-    }
-    
-    lazy private var summaryViewController: CompanySummaryViewController = {
-        return CompanySummaryViewController(viewModel: self,
-                                            pageIndex: .summary,
-                                            documentsModel: companyDocumentsModel)
-    }()
-    
-    lazy private var dataViewController: CompanyDataViewController = {
-        return CompanyDataViewController(viewModel: self, pageIndex: .data)
-    }()
-    
 }
 
 extension CompanyViewModel : CompanyFavouritesModelDelegate {
@@ -274,27 +302,6 @@ extension CompanyViewModel : CompanyFavouritesModelDelegate {
         company: Company,
         error: F4SNetworkError, retry: (()->Void)? = nil) {
         viewModelDelegate?.companyViewModelNetworkTaskDidFail(self, error: error, retry: retry)
-    }
-}
-
-extension CompanyViewModel: UIPageViewControllerDataSource {
-    public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let pageIndex = pageIndexForViewController(viewController) else { return nil }
-        let indexBefore = pageIndex.previous()
-        return controller(for: indexBefore)
-    }
-    
-    public func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let pageIndex = pageIndexForViewController(viewController) else { return nil }
-        let indexAfter = pageIndex.next()
-        return controller(for: indexAfter)
-    }
-    
-    func pageIndexForViewController(_ controller: UIViewController) -> PageIndex? {
-        guard let controller = controller as? CompanySubViewController else {
-                return nil
-        }
-        return controller.pageIndex
     }
 }
 

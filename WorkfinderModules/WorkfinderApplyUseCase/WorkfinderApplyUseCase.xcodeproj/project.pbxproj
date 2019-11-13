@@ -10,6 +10,7 @@
 		FC0B6B332323CDC800A1867D /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0B6B322323CDC800A1867D /* WorkfinderCoordinators.framework */; };
 		FC0E5CF9224E19BF00615B4F /* ApplicationLetterTemplateBlanksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E5CF8224E19BF00615B4F /* ApplicationLetterTemplateBlanksModel.swift */; };
 		FC0E5CFD224E62E400615B4F /* ApplicationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E5CFC224E62E400615B4F /* ApplicationModel.swift */; };
+		FC16F51C23460E7300D6EAC7 /* MotivationEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16F51B23460E7300D6EAC7 /* MotivationEditorViewController.swift */; };
 		FC1EBEBD2248E0A500416D70 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */; };
 		FC1EBEBE2248E0AC00416D70 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */; };
 		FC1EBEBF2248E0D600416D70 /* ApplicationLetterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626532248CDB100D5F850 /* ApplicationLetterViewModelTests.swift */; };
@@ -43,6 +44,7 @@
 		FC7A4398224A497800B2D693 /* ApplicationLetterTemplateBlanksCleanser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4397224A497800B2D693 /* ApplicationLetterTemplateBlanksCleanser.swift */; };
 		FC7C219523215E9300721D1D /* ApplyCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7C219423215E9200721D1D /* ApplyCoordinatorTests.swift */; };
 		FC85D9F222F205610035C724 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC85D9F122F205610035C724 /* WorkfinderAppLogic.framework */; };
+		FC8DC8C72348969E00E629AC /* MotivationTextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8DC8C62348969E00E629AC /* MotivationTextModel.swift */; };
 		FC9626372248C1A900D5F850 /* ApplicationLetterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626312248C1A900D5F850 /* ApplicationLetterModel.swift */; };
 		FC9626392248C1A900D5F850 /* EditApplicationLetterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626332248C1A900D5F850 /* EditApplicationLetterButton.swift */; };
 		FC96263A2248C1A900D5F850 /* ApplicationLetterViewControllerMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626342248C1A900D5F850 /* ApplicationLetterViewControllerMainView.swift */; };
@@ -84,6 +86,7 @@
 		FC0B6B342323CDC800A1867D /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC0E5CF8224E19BF00615B4F /* ApplicationLetterTemplateBlanksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationLetterTemplateBlanksModel.swift; sourceTree = "<group>"; };
 		FC0E5CFC224E62E400615B4F /* ApplicationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationModel.swift; sourceTree = "<group>"; };
+		FC16F51B23460E7300D6EAC7 /* MotivationEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotivationEditorViewController.swift; sourceTree = "<group>"; };
 		FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1EBEC22248E37B00416D70 /* ApplicationLetterModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationLetterModelTests.swift; sourceTree = "<group>"; };
 		FC22DBFA22F97F330068C61C /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,6 +118,7 @@
 		FC7C219423215E9200721D1D /* ApplyCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyCoordinatorTests.swift; sourceTree = "<group>"; };
 		FC85D9EF22F204140035C724 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC85D9F122F205610035C724 /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC8DC8C62348969E00E629AC /* MotivationTextModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotivationTextModel.swift; sourceTree = "<group>"; };
 		FC9626312248C1A900D5F850 /* ApplicationLetterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLetterModel.swift; sourceTree = "<group>"; };
 		FC9626332248C1A900D5F850 /* EditApplicationLetterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditApplicationLetterButton.swift; sourceTree = "<group>"; };
 		FC9626342248C1A900D5F850 /* ApplicationLetterViewControllerMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLetterViewControllerMainView.swift; sourceTree = "<group>"; };
@@ -183,6 +187,7 @@
 				FC29991E231EC1E000F83FB6 /* EditCoverLetterTableViewCell.swift */,
 				FC299940231ED0B400F83FB6 /* EditFooter.xib */,
 				FC299920231EC1E200F83FB6 /* EditFooterView.swift */,
+				FC8DC8C8234897A300E629AC /* Motivation text */,
 			);
 			path = "Edit cover letter";
 			sourceTree = "<group>";
@@ -275,6 +280,15 @@
 				FCF5AF142248BDCC00D9B8D1 /* Info.plist */,
 			);
 			name = "Supporting files";
+			sourceTree = "<group>";
+		};
+		FC8DC8C8234897A300E629AC /* Motivation text */ = {
+			isa = PBXGroup;
+			children = (
+				FC16F51B23460E7300D6EAC7 /* MotivationEditorViewController.swift */,
+				FC8DC8C62348969E00E629AC /* MotivationTextModel.swift */,
+			);
+			path = "Motivation text";
 			sourceTree = "<group>";
 		};
 		FC9626222248C07800D5F850 /* Source */ = {
@@ -531,6 +545,7 @@
 				FC9626392248C1A900D5F850 /* EditApplicationLetterButton.swift in Sources */,
 				FC29992B231EC41A00F83FB6 /* F4SDaysAndHoursViewController.swift in Sources */,
 				FC96263A2248C1A900D5F850 /* ApplicationLetterViewControllerMainView.swift in Sources */,
+				FC8DC8C72348969E00E629AC /* MotivationTextModel.swift in Sources */,
 				FC299934231EC50300F83FB6 /* F4SCalendarContainerViewController.swift in Sources */,
 				FCE8DA952320E0C300934E2F /* ChooseAttributesTableViewCell.swift in Sources */,
 				FCE51923224940F300B550C9 /* F4SGrammar.swift in Sources */,
@@ -544,6 +559,7 @@
 				FC7A4398224A497800B2D693 /* ApplicationLetterTemplateBlanksCleanser.swift in Sources */,
 				FCE8DA972320E0C300934E2F /* ChooseAttributesViewModel.swift in Sources */,
 				FCE8DA892320D3CB00934E2F /* SuccessExtraInfoViewController.swift in Sources */,
+				FC16F51C23460E7300D6EAC7 /* MotivationEditorViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -794,6 +810,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
 			name = DebugF4SLive;
 		};
@@ -884,6 +901,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
 			name = DebugF4S;
 		};
@@ -968,6 +986,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
 			name = ReleaseF4SLive;
 		};
@@ -1052,6 +1071,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
 			name = ReleaseF4S;
 		};
@@ -1201,6 +1221,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
 			name = Debug;
 		};
@@ -1226,6 +1247,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
 			name = Release;
 		};

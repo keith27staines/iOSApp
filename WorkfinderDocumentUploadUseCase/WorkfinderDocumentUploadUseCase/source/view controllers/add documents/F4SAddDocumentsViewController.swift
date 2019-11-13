@@ -20,7 +20,7 @@ class F4SAddDocumentsViewController: UIViewController {
     @IBOutlet weak var primaryActionButton: UIButton!
     
     weak var coordinator: DocumentUploadCoordinator?
-    
+    var log: F4SAnalyticsAndDebugging? { return coordinator?.log }
     var documentModel: F4SDocumentUploadModelBase!
     
     lazy var popupCellMenu: F4SDCPopupMenuView = {
@@ -70,6 +70,7 @@ class F4SAddDocumentsViewController: UIViewController {
     }
     
     @IBAction func addDocumentButtonTapped(_ sender: Any) {
+        log?.track(event: .addDocumentsAddDocumentTap, properties: nil)
         hidePopopMenu()
         selectedIndexPath = nil
         coordinator?.showPickMethodForNewDocument(documentTypes: documentTypes, addDocumentDelegate: self)
@@ -109,6 +110,7 @@ class F4SAddDocumentsViewController: UIViewController {
     }
     
     @objc func handleInfoTap() {
+        log?.track(event: .addDocumentsCVInfoTap, properties: nil)
         let alert = UIAlertController(title: "Need help writing your CV?", message: "Barclays have produced a detailed guide", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let goAction = UIAlertAction(title: "View Guide", style: .default) { (_) in
@@ -129,7 +131,6 @@ class F4SAddDocumentsViewController: UIViewController {
             navigationBar.isTranslucent = false
             navigationBar.shadowImage = UIImage()
         }
-
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -239,6 +240,7 @@ extension F4SAddDocumentsViewController : UITableViewDataSource, UITableViewDele
         selectedIndexPath = indexPath
         guard let cell = tableView.cellForRow(at: indexPath), let selectedDocument = selectedDocument else { return }
         if shouldDisplayMenuForDocument(selectedDocument) {
+            log?.track(event: .addDocumentsShowDocumentOptionsPopupTap, properties: nil)
             let popupCenter = CGPoint(x: cell.frame.origin.x + cell.frame.size.width - popupCellMenu.frame.size.width / 2.0 - 4, y: 0)
             popupCellMenu.isHidden = true
             popupCellMenu.center = cell.convert(popupCenter, to: view)
@@ -259,6 +261,7 @@ extension F4SAddDocumentsViewController : F4SDCPopupMenuViewDelegate {
         
         switch index {
         case 0: // view document
+            log?.track(event: .addDocumentsViewDocumentTap, properties: nil)
             coordinator?.showDocument(selectedDocument)
             
         case 1: // delete
@@ -268,6 +271,7 @@ extension F4SAddDocumentsViewController : F4SDCPopupMenuViewDelegate {
             let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [unowned self] (_) in
                 switch self.uploadScenario {
                 case .applyWorkflow:
+                    self.log?.track(event: .addDocumentsDeleteDocumentTap, properties: nil)
                     self.documentModel.deleteDocument(indexPath: cellIndexPath)
                     self.tableView.deleteRows(at: [cellIndexPath], with: .automatic)
                     self.addDocumentButton.isEnabled = true

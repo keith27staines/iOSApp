@@ -21,6 +21,7 @@ class ApplyCoordinatorTests: XCTestCase {
     let mockUserStatusService = MockF4SUserStatusService()
     let mockDatabaseDownloadManager = MockDatabaseDownloadManager()
     let mockAnalytics = MockF4SAnalyticsAndDebugging()
+    let mockAppSettings = MockAppSettingProvider()
     var mockPlacementServiceFactory = MockF4SPlacementServiceFactory(errorResponseCode: 404)
     
     lazy var mockedInjection: CoreInjection = {
@@ -28,14 +29,15 @@ class ApplyCoordinatorTests: XCTestCase {
         let mockContentService = MockF4SContentService()
         let injection = CoreInjection(
             launchOptions: nil,
-            appInstallationUuidLogic: MockAppInstallationUuidLogic(registeredInstallationUuid: "registerdeUuid"),
+            appInstallationUuidLogic: MockAppInstallationUuidLogic(registeredUserUuid: "registerdeUuid"),
             user: mockRegisteredUser,
             userService: mockUserService,
             userStatusService: userStatusService,
             userRepository: MockUserRepository(user: mockRegisteredUser),
             databaseDownloadManager: mockDatabaseDownloadManager,
             contentService: mockContentService,
-            log: mockAnalytics
+            log: mockAnalytics,
+            appSettings: mockAppSettings
         )
         return injection
     }()
@@ -65,7 +67,7 @@ extension ApplyCoordinatorTests {
         let mockPlacementService = placementServiceFactory.makePlacementService()
         let mockTemplateService = MockF4STemplateService()
         let mockPlacementRepository = MockPlacementsRepository()
-        let mockInterestsRepository = MockInterestsRepository()
+        let mockInterestsRepository = MockF4SInterestsRepository()
         let placement = F4STimelinePlacement(userUuid: "userUuid", companyUuid: "companyUuid", placementUuid: "placementUuid")
         let requiredPlacementResult = F4SNetworkResult.success([placement])
         let mockGetAllPlacementsService = MockF4SGetAllPlacementsService(result: requiredPlacementResult)

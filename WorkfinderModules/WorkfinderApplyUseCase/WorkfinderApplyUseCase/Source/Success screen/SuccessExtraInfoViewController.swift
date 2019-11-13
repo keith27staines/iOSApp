@@ -12,6 +12,8 @@ public class SuccessExtraInfoViewController: UIViewController {
 
     @IBOutlet weak var centerView: UIView!
     
+    weak var log: F4SAnalyticsAndDebugging?
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         centerView.backgroundColor = UIColor.white
@@ -38,10 +40,12 @@ extension SuccessExtraInfoViewController {
 extension SuccessExtraInfoViewController {
     
     @IBAction func timelineButtonTouched(_: UIButton) {
+        log?.track(event: .applyHoorayMessagesTap, properties: nil)
         timelineButtonWasTapped?()
     }
     
     @IBAction func viewMapButtonTouched(_: UIButton) {
+        log?.track(event: .applyHooraySearchTap, properties: nil)
         searchButtonWasTapped?()
     }
 }

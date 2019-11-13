@@ -79,16 +79,16 @@ extension CompanyViewData {
         
     public var revenueString: String {
         guard let revenue = revenue, revenue > 0 else { return "" }
-        return "Annual revenue: £\(ScaledNumber.formattedString(for: revenue))"
+        return "£\(ScaledNumber.formattedString(for: revenue))"
     }
-    public var growthString: String? {
+    public var growthString: String {
         guard let growth = growth, growth > 0 else { return "" }
-        return "Annual growth: \(Int(100.0*growth))%"
+        return "\(Int(100.0*growth))%"
     }
     
-    public var employeesString: String? {
+    public var employeesString: String {
         guard let employees = employees, employees > 0 else { return "" }
-        return "Employees: \(ScaledNumber.formattedString(for: Double(employees)))"
+        return "\(ScaledNumber.formattedString(for: Double(employees)))"
     }
     
     public var starRatingIsHidden: Bool {

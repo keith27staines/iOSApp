@@ -2,27 +2,30 @@
 import Foundation
 
 public class MockTabBarCoordinator : MockCoreInjectionNavigationCoordinator, TabBarCoordinatorProtocol {
+    
+    public var shouldAskOperatingSystemToAllowLocation: Bool = false
+    
+    var showRecommendationsCallCount = 0
     public func showRecommendations() {
-        
+        showRecommendationsCallCount += 1
     }
     
+    var updateBadgesCallCount = 0
     public func updateBadges() {
-        
+        updateBadgesCallCount += 1
     }
-    
     
     var showSearchCallCount: Int = 0
-    var showMessagesCallCount: Int = 0
-    var updateUnreadMessagesCallCount: Int = 0
-    
     public func showSearch() {
         showSearchCallCount += 1
     }
     
+    var showMessagesCallCount: Int = 0
     public func showMessages() {
         showMessagesCallCount += 1
     }
     
+    var updateUnreadMessagesCallCount: Int = 0
     public func updateUnreadMessagesCount(_ count: Int) {
         updateUnreadMessagesCallCount += 1
     }
@@ -33,8 +36,7 @@ public class MockTabBarCoordinator : MockCoreInjectionNavigationCoordinator, Tab
         completion?(menuOpen)
     }
     
-    public var shouldAskOperatingSystemToAllowLocation: Bool = false
-    required init(parent: Coordinating?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol) {
+    public required init(parent: Coordinating?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol) {
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
 }

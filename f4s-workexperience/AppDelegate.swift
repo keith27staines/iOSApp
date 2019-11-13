@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var userService: F4SUserServiceProtocol = { return self.masterBuilder.userService }()
     
     var log: F4SAnalyticsAndDebugging { return appCoordinator.log }
+    var selectEnvironmentCoordinator: SelectEnvironmentCoordinating?
     
     // MARK:- Application events
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -24,11 +25,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  
         DataFixes().run()
         masterBuilder = MasterBuilder(registrar: application, launchOptions: launchOptions)
-        databaseDownloadManager = masterBuilder.databaseDownloadManager
-        appCoordinator = masterBuilder.buildAppCoordinator()
-        window = appCoordinator.window
-        appCoordinator.start()
+        window = masterBuilder.window
+        let localStore = masterBuilder.localStore
+        if localStore.value(key: LocalStore.Key.installationUuid) == nil && Config.environment == .staging {
+            let selectEnvironmentCoordinator = SelectEnvironmentCoordinator(parent: nil, router: masterBuilder.rootNavigationRouter) { environmentModel in
+                Config.workfinderApiBase = environmentModel.urlString + "/api"
+                localStore.setValue(Config.workfinderApiBase, for: LocalStore.Key.workfinderBaseUrl)
+                self.startApp()
+                self.selectEnvironmentCoordinator = nil
+            }
+            self.selectEnvironmentCoordinator = selectEnvironmentCoordinator
+            selectEnvironmentCoordinator.start()
+        } else {
+            Config.workfinderApiBase = (localStore.value(key: LocalStore.Key.workfinderBaseUrl) as? String) ?? Config.workfinderApiBase
+            self.startApp()
+        }
         return true
+    }
+    
+    func startApp() {
+        appCoordinator = self.masterBuilder.buildAppCoordinator()
+        appCoordinator.start()
+        databaseDownloadManager = self.masterBuilder.databaseDownloadManager
     }
     
     // Handle being invoked from a universal link in safari running on the current device

@@ -31,6 +31,7 @@ public class TimelineCoordinator : CoreInjectionNavigationCoordinator, CompanyCo
         let controller = storyboard.instantiateViewController(withIdentifier: "timelineViewCtrl") as! TimelineViewController
         controller.userStatusService = self.injected.userStatusService
         controller.placementService = self.placementService
+        controller.log = self.injected.log
         return controller
     }()
     
@@ -92,6 +93,7 @@ public class TimelineCoordinator : CoreInjectionNavigationCoordinator, CompanyCo
         messageController.companies = companies
         messageController.placements = placements
         messageController.coordinator = self
+        messageController.log = injected.log
         messageController.offerProcessor = offerProcessingService
         messageController.companyService = companyService
         messageController.roleService = roleService

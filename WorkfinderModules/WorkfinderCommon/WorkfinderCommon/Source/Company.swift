@@ -1,8 +1,21 @@
 import Foundation
 
 public struct F4SCompanyJson : Codable {
+    public var name: String?
+    public var industry: String?
+    public var logoUrl: String?
+    public var summary: String?
+    public var employeeCount: Int?
+    public var turnover: Double?
+    public var turnoverGrowth: Double?
+    public var hashtag: String?
+    public var publicUrl: String?
+    public var publicPage: String?
     public var linkedInUrlString: String?
     public var duedilUrlString: String?
+    public var rating: Double?
+    public var ratingCount: Int?
+    public var hosts: [F4SHost]?
     public var linkedinUrl: URL? {
         return URL(string: self.linkedInUrlString ?? "")
     }
@@ -15,8 +28,77 @@ public struct F4SCompanyJson : Codable {
 
 extension F4SCompanyJson {
     private enum CodingKeys : String, CodingKey {
+        case name
+        case industry
+        case employeeCount = "employee_count"
+        case turnover
+        case turnoverGrowth = "turnover_growth"
+        case summary
+        case hashtag
+        case publicUrl = "public_url"
+        case publicPage = "public_page"
+        case rating
+        case ratingCount = "rating_count"
+        case logoUrl = "logo_url"
         case linkedInUrlString = "linkedin_url"
         case duedilUrlString = "duedil_url"
+        case hosts
+    }
+}
+
+public struct F4SHost : Codable {
+    public var uuid: F4SUUID?
+    public var displayName: String?
+    public var firstName: String?
+    public var lastName: String?
+    public var profileUrl: String?
+    public var imageUrl: String?
+    public var gender: String?
+    public var isInterestedInHosting: Bool?
+    public var isCurrentEmployee: Bool?
+    public var role: String?
+    public var summary: String?
+    
+    public init(
+        uuid: F4SUUID,
+        displayName: String? = nil,
+        firstName: String? = nil,
+        lastName: String? =  nil,
+        profileUrl: String? = nil,
+        imageUrl: String? = nil,
+        gender: String? = nil,
+        isInterestedInHosting: Bool? = nil,
+        isCurrentEmployee: Bool? = nil,
+        role: String? = nil,
+        summary: String? = nil) {
+        
+        self.uuid = uuid
+        self.displayName = displayName
+        self.firstName = firstName
+        self.lastName = lastName
+        self.profileUrl = profileUrl
+        self.imageUrl = imageUrl
+        self.gender = gender
+        self.isInterestedInHosting = isInterestedInHosting
+        self.isCurrentEmployee = isCurrentEmployee
+        self.role = role
+        self.summary = summary
+    }
+}
+
+extension F4SHost {
+    private enum CodingKeys : String, CodingKey {
+        case uuid = "f4s_id"
+        case displayName = "formatted_name"
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case profileUrl = "profile_url"
+        case imageUrl = "picture_url"
+        case gender
+        case isInterestedInHosting = "is_interested_in_working"
+        case isCurrentEmployee = "is_current"
+        case role = "job_title"
+        case summary
     }
 }
 

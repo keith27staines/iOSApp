@@ -18,9 +18,14 @@ class EditCoverLetterViewController: UIViewController {
     fileprivate let bigFooterSize = CGFloat(56)
     fileprivate let smallFooterSize = CGFloat(21)
     fileprivate var numberOfRowsInSection2 = 2
+    
+    weak var log: F4SAnalyticsAndDebugging?
     var dateFormatter: DateFormatter?
     var availabilityPeriodJson: F4SAvailabilityPeriodJson = F4SAvailabilityPeriodJson()
     var coordinator: EditCoverLetterViewControllerCoordinatorProtocol?
+    var motivationTextModel: MotivationTextModel!
+    
+    var suppressMotivationField: Bool = false
     
     var blanksModel: ApplicationLetterTemplateBlanksModelProtocol? {
         didSet {
@@ -36,6 +41,10 @@ class EditCoverLetterViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupNavigationBar()
+        if suppressMotivationField {
+            motivationTextModel.selectedIndex = 0
+            blanksModel?.updateMotivationBlank(motivationTextModel.text)
+        }
         updateFromModel()
     }
     
@@ -71,6 +80,14 @@ extension EditCoverLetterViewController : F4SDaysAndHoursViewControllerDelegate 
     }
 }
 
+extension EditCoverLetterViewController: MotivationEditorViewControllerDelegate {
+    func motivationEditorDidSetText(_ editor: MotivationTextModel) {
+        blanksModel?.updateMotivationBlank(editor.text)
+        updateFromModel()
+        setUpdateButtonState()
+    }
+}
+
 extension EditCoverLetterViewController :  F4SCalendarCollectionViewControllerDelegate {
     func calendarDidChangeRange(_ calendar: F4SCalendarCollectionViewController, firstDay: F4SCalendarDay?, lastDay: F4SCalendarDay?) {
         updateAvailabilityPeriod(firstDay: firstDay, lastDay: lastDay)
@@ -100,7 +117,7 @@ extension EditCoverLetterViewController :  F4SCalendarCollectionViewControllerDe
 // MARK: -UITableViewDelegate,UITableViewDataSource
 extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in _: UITableView) -> Int {
-        return 5
+        return suppressMotivationField ? 5 : 6
     }
 
     func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -164,7 +181,6 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
             }
 
         case .skills:
-
             cell.editTextLabel.text = NSLocalizedString("Employment skills", comment: "")
             let attributeValue = self.getValueForTemplateBlank(name: .employmentSkills)
             if attributeValue.isEmpty {
@@ -173,6 +189,11 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
                 cell.editValueLabel.isHidden = false
                 cell.editValueLabel.text = "\(attributeValue) chosen"
             }
+        case .motivation:
+            cell.editTextLabel.text = NSLocalizedString("Motivation", comment: "")
+            let attributeValue = (motivationTextModel.option == .standard) ? "Default" : "Customised"
+            cell.editValueLabel.isHidden = false
+            cell.editValueLabel.text = attributeValue
         }
 
         cell.editValueLabel.attributedText = NSAttributedString(string: cell.editValueLabel.text!, attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.largeTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor(netHex: Colors.mediumGray)])
@@ -215,6 +236,7 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
         case availabilityCalendar = 2
         case availabilityHours = 3
         case skills = 4
+        case motivation = 5
     }
 
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -222,19 +244,27 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
         guard let navCtrl = self.navigationController, let template = blanksModel?.template else { return }
         switch editableSection {
         case .personalAttributes:
+            log?.track(event: .editLetterShowPersonalAttributesTap, properties: nil)
             coordinator?.chooseValuesForTemplateBlank(name: .personalAttributes, inTemplate: template)
             
         case .jobRole:
+            log?.track(event: .editLetterShowJobRoleTap, properties: nil)
             coordinator?.chooseValuesForTemplateBlank(name: .jobRole, inTemplate: template)
             
         case .availabilityCalendar:
+            log?.track(event: .editLetterShowAvailabilityDatesTap, properties: nil)
             pushCalendar(navigationController: navCtrl)
             
         case .availabilityHours:
+            log?.track(event: .editLetterShowAvailabilityHoursTap, properties: nil)
             pushDaysAndHours(navigationController: navCtrl)
             
         case .skills:
+            log?.track(event: .editLetterShowEmploymentSkillsTap, properties: nil)
             coordinator?.chooseValuesForTemplateBlank(name: .employmentSkills, inTemplate: template)
+        case .motivation:
+            log?.track(event: .editLetterShowMotivationTextTap, properties: nil)
+            pushMotivationEditor(navigationController: navCtrl)
         }
         coverLetterTableView.reloadData()
     }
@@ -253,6 +283,8 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
             return bigFooterSize
         case .skills:
             return bigFooterSize
+        case .motivation:
+            return bigFooterSize
         }
     }
     
@@ -265,6 +297,13 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
         let availabilityPeriod = F4SAvailabilityPeriod(availabilityPeriodJson: self.availabilityPeriodJson)
         vc.model = availabilityPeriod.daysAndHours
         navigationController.pushViewController(vc, animated: true)
+    }
+
+    func pushMotivationEditor(navigationController: UINavigationController) {
+        let editor = MotivationEditorViewController(delegate: self, model: motivationTextModel)
+        editor.log = log
+        editor.delegate = self
+        navigationController.pushViewController(editor, animated: true)
     }
     
     func pushCalendar(navigationController: UINavigationController) {
@@ -298,6 +337,9 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
             return bigFooterView
         
         case .jobRole:
+            let string = NSLocalizedString("Select the kind of role you are looking for", comment: "")
+            EditFooterView.footerString = string
+            smallFooterView = EditFooterView(frame: CGRect(x: 0, y: 0, width: self.coverLetterTableView.frame.size.width, height: smallFooterSize))
             return smallFooterView
         
         case .availabilityCalendar:
@@ -317,6 +359,11 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
             EditFooterView.footerString = string
             bigFooterView = EditFooterView(frame: CGRect(x: 0, y: 0, width: self.coverLetterTableView.frame.size.width, height: bigFooterSize))
             return bigFooterView
+        case .motivation:
+            let string = NSLocalizedString("Describe what motivated you to apply in up to 1000 characters. We strongly advise you to write this yourself.", comment: "")
+            EditFooterView.footerString = string
+            bigFooterView = EditFooterView(frame: CGRect(x: 0, y: 0, width: self.coverLetterTableView.frame.size.width, height: bigFooterSize))
+            return bigFooterView
         }
     }
 }
@@ -324,11 +371,13 @@ extension EditCoverLetterViewController: UITableViewDelegate, UITableViewDataSou
 // MARK:- user interraction
 extension EditCoverLetterViewController {
     @IBAction func updateButton(_: AnyObject) {
+        log?.track(event: .editLetterUpdateLetterButtonTap, properties: nil)
         coordinator?.editCoverLetterViewControllerDidFinish(self)
     }
 
-    @objc func cancel() {
-        coordinator?.editCoverLetterViewControllerDidCancel()
+    @objc func backToLetter() {
+        log?.track(event: .editLetterUpdateLetterArrowTap, properties: nil)
+         coordinator?.editCoverLetterViewControllerDidFinish(self)
     }
 }
 
@@ -337,7 +386,7 @@ extension EditCoverLetterViewController {
     func setupNavigationBar() {
         self.title = NSLocalizedString("Edit Letter", comment: "")
         let image = UIImage(named: "backArrow")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: UIBarButtonItem.Style.plain, target: self, action: #selector(cancel))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: UIBarButtonItem.Style.plain, target: self, action: #selector(backToLetter))
         styleNavigationController()
     }
 
@@ -368,7 +417,15 @@ extension EditCoverLetterViewController {
     }
 
     func getValueForTemplateBlank(name: TemplateBlankName) -> String {
-        guard let choices = blanksModel?.populatedBlankWithName(name)?.choices else { return "" }
+        guard let choices = blanksModel?.populatedBlankWithName(name)?.choices else {
+            switch name {
+            case .motivation:
+                return "Default"
+            default:
+                return ""
+            }
+        }
+        
         switch name {
         case .personalAttributes:
             return choices.count != 0 ? String(choices.count) : ""
@@ -382,6 +439,8 @@ extension EditCoverLetterViewController {
             return uuid
         case .employmentSkills:
             return choices.count != 0 ? String(choices.count) : ""
+        case .motivation:
+            return choices.count != 0 ? "Customised" :  "Default"
         }
     }
 

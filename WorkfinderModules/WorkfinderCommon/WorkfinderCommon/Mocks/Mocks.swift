@@ -242,6 +242,7 @@ public class MockCompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
 }
 
 public class MockCompanyCoordinator: CompanyCoordinatorProtocol {
+    public var originScreen: ScreenName = .notSpecified
     public let uuid = UUID()
     public var injected: CoreInjectionProtocol
     public var parentCoordinator: Coordinating?
@@ -398,12 +399,37 @@ public class MockF4SEmailVerificationModel: F4SEmailVerificationModelProtocol {
 }
 
 public class MockAppInstallationUuidLogic: AppInstallationUuidLogicProtocol {
+    public var ensureDeviceIsRegisteredWasCalled = false
+    
+    public lazy var result: F4SRegisterDeviceResult? = {
+        if let uuid = self.userUuid {
+            return F4SRegisterDeviceResult(userUuid: "\(uuid)")
+        } else {
+            return nil
+        }
+    }()
+    
+    public var testDidComplete: (() -> Void)?
+    public var userUuid: F4SUUID?
+    
     public var registeredInstallationUuid: F4SUUID?
-    public init(registeredInstallationUuid: F4SUUID? = nil) {
-        self.registeredInstallationUuid = registeredInstallationUuid
+    
+    public init(registeredUserUuid: F4SUUID?) {
+        self.userUuid = registeredUserUuid
+        if registeredUserUuid != nil {
+            registeredInstallationUuid = "installation uuid"
+        }
     }
     
     public func ensureDeviceIsRegistered(completion: @escaping (F4SNetworkResult<F4SRegisterDeviceResult>) -> ()) {
+        ensureDeviceIsRegisteredWasCalled = true
+        if let result = result {
+            let networkResult = F4SNetworkResult.success(result)
+            DispatchQueue.main.async { [weak self] in
+                completion(networkResult)
+                self?.testDidComplete?()
+            }
+        }
     }
 }
 
@@ -581,15 +607,33 @@ public class MockF4STemplateService : F4STemplateServiceProtocol {
     }
 }
 
-public class MockF4SF4SPlacementApplicationService : F4SPlacementApplicationServiceProtocol {
-    public init() {}
+public class MockF4SPlacementApplicationService : F4SPlacementApplicationServiceProtocol {
     
-    public func apply(with json: F4SCreatePlacementJson, completion: @escaping (F4SNetworkResult<F4SPlacementJson>) -> Void) {
+    public var resultForCreate: F4SNetworkResult<F4SPlacementJson>?
+    public var resultForPatch: F4SNetworkResult<F4SPlacementJson>?
+    public var createCount: Int = 0
+    public var patchCount: Int = 0
+    
+    public init(createResult: F4SNetworkResult<F4SPlacementJson>) {
+        self.resultForCreate = createResult
+    }
+    
+    public init(patchResult: F4SNetworkResult<F4SPlacementJson>) {
+        self.resultForPatch = patchResult
+    }
+    
+    public func getPlacement(uuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SPlacementJson>) -> ()) {
         
     }
     
+    public func apply(with json: F4SCreatePlacementJson, completion: @escaping (F4SNetworkResult<F4SPlacementJson>) -> Void) {
+        createCount += 1
+        completion(resultForCreate!)
+    }
+    
     public func update(uuid: F4SUUID, with json: F4SPlacementJson, completion: @escaping (F4SNetworkResult<F4SPlacementJson>) -> Void) {
-        
+        patchCount += 1
+        completion(resultForPatch!)
     }
 }
 
@@ -614,20 +658,6 @@ public class MockPlacementsRepository: F4SPlacementRepositoryProtocol {
     }
     public func save(placement: F4SPlacement) {
         placements[placement.placementUuid!] = placement
-    }
-}
-
-public class MockInterestsRepository: F4SInterestsRepositoryProtocol {
-    var allInterests = [F4SUUID: F4SInterest]()
-    var userInterests = [F4SInterest]()
-    
-    public init() {}
-    public func loadAllInterests() -> [F4SInterest] {
-        return Array(allInterests.values)
-    }
-    
-    public func loadUserInterests() -> [F4SInterest] {
-        return userInterests
     }
 }
 

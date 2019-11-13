@@ -45,6 +45,7 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
     let welcomeCellHeight: CGFloat = 100
     var secondLoad = false
     weak var tabBarCoordinator: TabBarCoordinator!
+    weak var log: F4SAnalyticsAndDebugging?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -196,15 +197,17 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
         guard
             let cell = tableView.dequeueReusableCell(withIdentifier: "SideDrawerTableViewCell") as? SideDrawerTableViewCell,
             let section = DrawerSection(rawValue: section) else { return nil }
-        
+        cell.lineImageView.isHidden = false
         switch section {
         case .WelcomeSection:
             return nil
         case .NavigationSection:
             cell.textLabel?.text = ""
+            cell.lineImageView.isHidden = true
             return cell
         case .BusinessLeadersSection:
             cell.textLabel?.text = ""
+            cell.lineImageView.isHidden = true
             return cell
         case .EnvironmentSection:
             return nil
@@ -258,10 +261,13 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
                 switch navigationRow
                 {
                 case .about:
+                    log?.track(event: .sideMenuAboutWorkfinderLinkTap, properties: nil)
                     tabBarCoordinator.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.about)
                 case .faq:
+                    log?.track(event: .sideMenuFAQLinkTap, properties: nil)
                     tabBarCoordinator.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.faq)
                 case .terms:
+                    log?.track(event: .sideMenuTermsAndConditionsLinkTap, properties: nil)
                     tabBarCoordinator.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.terms)
                 }
             }

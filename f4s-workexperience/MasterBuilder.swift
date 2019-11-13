@@ -10,20 +10,50 @@ import WorkfinderFavouritesUseCase
 import WorkfinderCompanyDetailsUseCase
 import WorkfinderRecommendations
 import WorkfinderUI
+import UIKit
 
-class MasterBuilder {
+class MasterBuilder: TabbarCoordinatorFactoryProtocol {
+    func makeTabBarCoordinator(parent: Coordinating,
+                               router: NavigationRoutingProtocol,
+                               inject: CoreInjectionProtocol) -> TabBarCoordinatorProtocol {
+        return TabBarCoordinator(
+            parent: parent,
+            navigationRouter: router,
+            inject: inject,
+            companyCoordinatorFactory: companyCoordinatorFactory,
+            companyDocumentsService: companyDocumentsService,
+            companyRepository: companyRepository,
+            companyService: companyService,
+            favouritesRepository: favouritesRepository,
+            documentUploaderFactory: documentUploaderFactory,
+            interestsRepository: interestsRepository,
+            offerProcessingService: offerProcessingService,
+            partnersModel: partnersModel,
+            placementsRepository: placementsRepository,
+            placementService: placementService,
+            placementDocumentsServiceFactory: placementDocumentsServiceFactory,
+            messageServiceFactory: messageServiceFactory,
+            messageActionServiceFactory: messageActionServiceFactory,
+            messageCannedResponsesServiceFactory: messageCannedResponsesServiceFactory,
+            recommendationsService: recommendationsService,
+            roleService: roleService)
+    }
     
     let launchOptions: [UIApplication.LaunchOptionsKey : Any]?
     let registrar: RemoteNotificationsRegistrarProtocol
     let apnsEnvironment: String = Config.apnsEnv
     let environment: EnvironmentType = Config.environment
     let wexApiKey = Config.wexApiKey
-    let baseUrlString = Config.workfinderApiBase
+    var baseUrlString: String { return Config.workfinderApiBase }
+    let remoteConfig: RemoteConfiguration
     
     init(registrar: RemoteNotificationsRegistrarProtocol,
          launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
         self.registrar = registrar
         self.launchOptions = launchOptions
+        self.log = F4SLog()
+        self.remoteConfig = RemoteConfiguration()
+        self.remoteConfig.start()
     }
     
     lazy var networkConfiguration: NetworkConfig = {
@@ -40,30 +70,57 @@ class MasterBuilder {
     
     lazy var appInstallationUuidLogic: AppInstallationUuidLogic = {
         let userRepo = F4SUserRepository(localStore: localStore)
-        return AppInstallationUuidLogic(userService: userService,
+        return AppInstallationUuidLogic(localStore: self.localStore,
+                                        userService: userService,
                                         userRepo: userRepo,
                                         apnsEnvironment: apnsEnvironment,
                                         registerDeviceService: self.deviceRegistrationService)
     }()
     
+    lazy var rootNavigationController: UINavigationController = {
+        return UINavigationController(rootViewController: AppCoordinatorBackgroundViewController())
+    }()
+    
+    lazy var rootNavigationRouter: NavigationRoutingProtocol = {
+        return NavigationRouter(navigationController: self.rootNavigationController)
+    }()
+    
+    lazy var injection: CoreInjectionProtocol = {
+        return CoreInjection(
+            launchOptions: self.launchOptions,
+            appInstallationUuidLogic: self.appInstallationUuidLogic,
+            user: self.userRepo.load(),
+            userService: self.userService,
+            userStatusService: self.userStatusService,
+            userRepository: self.userRepo,
+            databaseDownloadManager: self.databaseDownloadManager,
+            contentService: self.contentService,
+            log: self.log,
+            appSettings: self.remoteConfig)
+    }()
+    
+    lazy var versionCheckCoordinator: VersionCheckCoordinatorProtocol = {
+        return VersionCheckCoordinator(
+            parent: nil,
+            navigationRouter: self.rootNavigationRouter,
+            versionCheckService: self.versionCheckService)
+    }()
+    
+    lazy var window: UIWindow = {
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = rootNavigationRouter.rootViewController
+        window.makeKeyAndVisible()
+        if #available(iOS 13.0, *) {
+            if window.responds(to: #selector(getter: UIView.overrideUserInterfaceStyle)) {
+                window.setValue(UIUserInterfaceStyle.light.rawValue, forKey: "overrideUserInterfaceStyle")
+            }
+        }
+        return window
+    }()
+    
     func buildAppCoordinator() -> AppCoordinatorProtocol {
-        let navigationController = UINavigationController(rootViewController: AppCoordinatorBackgroundViewController())
-        let navigationRouter = NavigationRouter(navigationController: navigationController)
-        let injection = CoreInjection(
-            launchOptions: launchOptions,
-            appInstallationUuidLogic: appInstallationUuidLogic,
-            user: userRepo.load(),
-            userService: userService,
-            userStatusService: userStatusService,
-            userRepository: userRepo,
-            databaseDownloadManager: databaseDownloadManager,
-            contentService: contentService,
-            log: log)
-        let versionCheckCoordinator = VersionCheckCoordinator(parent: nil, navigationRouter: navigationRouter)
-        versionCheckCoordinator.versionCheckService = versionCheckService
-        
         return  AppCoordinator(registrar: registrar,
-                              navigationRouter: navigationRouter,
+                              navigationRouter: rootNavigationRouter,
                               inject: injection,
                               companyCoordinatorFactory: companyCoordinatorFactory,
                               companyDocumentsService: companyDocumentsService,
@@ -72,6 +129,7 @@ class MasterBuilder {
                               documentUploaderFactory: documentUploaderFactory,
                               emailVerificationModel: emailVerificationModel,
                               favouritesRepository: favouritesRepository,
+                              localStore: localStore,
                               offerProcessingService: offerProcessingService,
                               onboardingCoordinatorFactory: onboardingCoordinatorFactory,
                               partnersModel: partnersModel,
@@ -83,7 +141,9 @@ class MasterBuilder {
                               messageCannedResponsesServiceFactory: messageCannedResponsesServiceFactory,
                               recommendationsService: recommendationsService,
                               roleService: roleService,
-                              versionCheckCoordinator: versionCheckCoordinator)
+                              tabBarCoordinatorFactory: self,
+                              versionCheckCoordinator: versionCheckCoordinator,
+                              window: self.window)
     }
     
     lazy var companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol = {
@@ -102,9 +162,7 @@ class MasterBuilder {
                                          templateService: templateService)
     }()
     
-    lazy var log: F4SAnalyticsAndDebugging = {
-        return F4SLog()
-    }()
+    var log: F4SAnalyticsAndDebugging
     
     lazy var localStore: LocalStorageProtocol = {
         return LocalStore()
@@ -178,7 +236,7 @@ class MasterBuilder {
     }()
     
     lazy var interestsRepository: F4SInterestsRepositoryProtocol = {
-        return F4SInterestsRepository()
+        return F4SInterestsRepository(localStore: self.localStore)
     }()
     
     lazy var messageServiceFactory: F4SMessageServiceFactoryProtocol = {
@@ -256,4 +314,10 @@ class MasterBuilder {
         return F4SWorkfinderVersioningService(configuration: self.networkConfiguration)
     }()
 
+}
+
+extension MasterBuilder: SelectEnvironmentCoordinatorFactoryProtocol {
+    func create(parent: Coordinating?, router: NavigationRoutingProtocol, onEnvironmentSelected: @escaping ((EnvironmentModel) -> Void)) -> SelectEnvironmentCoordinating {
+        return SelectEnvironmentCoordinator(parent: parent, router: router, onEnvironmentSelected: onEnvironmentSelected)
+    }
 }

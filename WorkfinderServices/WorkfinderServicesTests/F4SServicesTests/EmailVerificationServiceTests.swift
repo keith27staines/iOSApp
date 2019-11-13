@@ -63,7 +63,7 @@ class EmailVerificationServiceTests: XCTestCase {
     
     func test_logResult_with_error() {
         let sut = makeSUT()
-        let mockLogger = sut.configuration.logger as! MockLogger
+        let mockLogger = sut.configuration.logger as! MockNetworkCallLogger
         let url = URL(string: "abc")!
         let request = URLRequest(url: url)
         let error = F4SError.genericError("generic error")
@@ -79,7 +79,7 @@ class EmailVerificationServiceTests: XCTestCase {
         let url = URL(string: "abc")!
         let request = URLRequest(url: url)
         let response = HTTPURLResponse(url: url, statusCode: 789, httpVersion: "http", headerFields: nil)
-        let mockLogger = sut.configuration.logger as! MockLogger
+        let mockLogger = sut.configuration.logger as! MockNetworkCallLogger
         sut.logResult(attempting: "attempting", request: request, data: nil, response: response, error: nil)
         XCTAssertTrue(mockLogger.logDataTaskFailureWasCalled)
         XCTAssertFalse(mockLogger.logDataTaskSuccessWasCalled)
@@ -93,7 +93,7 @@ class EmailVerificationServiceTests: XCTestCase {
         let request = URLRequest(url: url)
         let response = HTTPURLResponse(url: url, statusCode: 789, httpVersion: "http", headerFields: nil)
         let data = Data()
-        let mockLogger = sut.configuration.logger as! MockLogger
+        let mockLogger = sut.configuration.logger as! MockNetworkCallLogger
         sut.logResult(attempting: "attempting", request: request, data: data, response: response, error: nil)
         XCTAssertFalse(mockLogger.logDataTaskFailureWasCalled)
         XCTAssertTrue(mockLogger.logDataTaskSuccessWasCalled)

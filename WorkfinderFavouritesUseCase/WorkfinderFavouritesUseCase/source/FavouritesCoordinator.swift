@@ -24,7 +24,9 @@ public class FavouritesCoordinator : CoreInjectionNavigationCoordinator {
     
     lazy var rootViewController: FavouriteViewController = {
         let storyboard = UIStoryboard(name: "Favourite", bundle: __bundle)
-        return storyboard.instantiateViewController(withIdentifier: "FavouriteViewCtrl") as! FavouriteViewController
+        let vc = storyboard.instantiateViewController(withIdentifier: "FavouriteViewCtrl") as! FavouriteViewController
+        vc.log = self.injected.log
+        return vc
     }()
     
     weak var tabBarCoordinator: TabBarCoordinatorProtocol?
@@ -53,10 +55,13 @@ public class FavouritesCoordinator : CoreInjectionNavigationCoordinator {
     }
     
     func showDetail(company: Company?) {
+        injected.log.track(event: .favouritesShowCompanyTap, properties: nil)
         self.company = company
         guard let company = company else { return }
+        let originScreen = rootViewController.screenName
         rootViewController.dismiss(animated: true)
         let companyCoordinator = companyCoordinatorFactory.makeCompanyCoordinator(parent: self, navigationRouter: navigationRouter, company: company, inject: injected)
+        companyCoordinator.originScreen = originScreen
         addChildCoordinator(companyCoordinator)
         companyCoordinator.start()
     }

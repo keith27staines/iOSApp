@@ -5,7 +5,7 @@ jobs:
       xcode: "11.0.0"
     steps:
       - checkout
-      - run: bundle exec fastlane scan --scheme "f4s-f4s_staging"
+      - run: bundle exec fastlane scan --scheme "All unit tests"
     macos:
       xcode: "11.0.0"
   deploy:

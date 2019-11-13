@@ -13,7 +13,7 @@ public class AppInstallationUuidLogic : AppInstallationUuidLogicProtocol {
         return localStore.value(key: LocalStore.Key.installationUuid) as? F4SUUID
     }
     
-    public init(localStore: LocalStorageProtocol = LocalStore(),
+    public init(localStore: LocalStorageProtocol,
                 userService: F4SUserServiceProtocol,
                 userRepo: F4SUserRepositoryProtocol,
                 apnsEnvironment: String,

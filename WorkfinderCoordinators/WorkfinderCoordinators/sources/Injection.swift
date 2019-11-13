@@ -15,6 +15,7 @@ public class CoreInjection : CoreInjectionProtocol {
     public var log: F4SAnalyticsAndDebugging
     public let appInstallationUuidLogic: AppInstallationUuidLogicProtocol
     public let contentService: F4SContentServiceProtocol
+    public let appSettings: AppSettingProvider
     
     public init(launchOptions: LaunchOptions?,
                 appInstallationUuidLogic: AppInstallationUuidLogicProtocol,
@@ -24,7 +25,8 @@ public class CoreInjection : CoreInjectionProtocol {
                 userRepository: F4SUserRepositoryProtocol,
                 databaseDownloadManager: F4SDatabaseDownloadManagerProtocol,
                 contentService: F4SContentServiceProtocol,
-                log: F4SAnalyticsAndDebugging) {
+                log: F4SAnalyticsAndDebugging,
+                appSettings: AppSettingProvider) {
         
         self.launchOptions = launchOptions
         self.appInstallationUuidLogic = appInstallationUuidLogic
@@ -35,5 +37,6 @@ public class CoreInjection : CoreInjectionProtocol {
         self.databaseDownloadManager = databaseDownloadManager
         self.contentService = contentService
         self.log = log
+        self.appSettings = appSettings
     }
 }

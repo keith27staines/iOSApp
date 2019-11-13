@@ -1,38 +1,100 @@
 
 import Foundation
 
-public class MockF4SAnalyticsAndDebugging : F4SAnalyticsAndDebugging {
+public class MockNetworkCallLogger: NetworkCallLoggerProtocol {
+    public var attempting: String?
+    public var logDataTaskFailureWasCalled: Bool = false
+    public var logDataTaskSuccessWasCalled: Bool = false
+    public var request: URLRequest?
+    public var response: URLResponse?
+    public var responseData: Data?
+    public var error: Error?
+    
+    public func logDataTaskFailure(attempting: String?, error: Error, request: URLRequest, response: HTTPURLResponse?, responseData: Data?) {
+        logDataTaskFailureWasCalled = true
+        self.attempting = attempting
+        self.error = error
+        self.request = request
+        self.response = response
+        self.responseData = responseData
+    }
+    
+    public func logDataTaskSuccess(request: URLRequest, response: HTTPURLResponse, responseData: Data) {
+        logDataTaskSuccessWasCalled = true
+        self.request = request
+        self.response = response
+        self.responseData = responseData
+    }
+    
+    public init() {}
+}
 
-    var identities: [F4SUUID] = []
-    var aliases: [F4SUUID] = []
+
+public class MockF4SAnalyticsAndDebugging : F4SAnalyticsAndDebugging {
     
     public init() {}
     
+    public struct AnalyticsItem {
+        enum ItemType {
+            case screen
+            case track
+        }
+        var type: ItemType
+        var name: String
+        var properties: [String : Any]?
+        var options: [String :  Any]?
+    }
+    
+    public var analyticsItems = [AnalyticsItem]()
+    public var identities: [F4SUUID] = []
     public func identity(userId: F4SUUID) {
         identities.append(userId)
     }
     
+    public var aliases: [F4SUUID] = []
+
     public func alias(userId: F4SUUID) {
         aliases.append(userId)
     }
+
+    public func track(event: TrackEvent, properties: [String : Any]?) {
+        let notNilProperties = properties ?? [:]
+        analyticsItems.append(AnalyticsItem(type: .track, name: event.rawValue, properties: notNilProperties))
+    }
     
-    var notifiedErrors = [Error]()
+    public func screen(_ name: ScreenName) {
+        analyticsItems.append(AnalyticsItem(type: .screen, name: name.rawValue))
+    }
     
+    public func screen(_ name: ScreenName, originScreen: ScreenName) {
+        let item = AnalyticsItem(
+            type: .screen,
+            name: name.rawValue,
+            properties: ["origin" : originScreen.rawValue])
+        analyticsItems.append(item)
+    }
+    
+    public func screen(title: String, properties: [String : Any]) {
+        analyticsItems.append(AnalyticsItem(type: .screen, name: title, properties: properties))
+    }
+    
+    // MARK:- debuggin and error reporting
+    public var notifiedErrors = [Error]()
     public func notifyError(_ error: NSError, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
         notifiedErrors.append(error)
     }
     
-    var breadcrumbs = [String]()
+    public var breadcrumbs = [String]()
     public func leaveBreadcrumb(with message: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
         breadcrumbs.append(message)
     }
     
-    var updateHistoryCallCount: Int = 0
+    public var updateHistoryCallCount: Int = 0
     public func updateHistory() {
         updateHistoryCallCount += 1
     }
     
-    var textCombiningHistoryAndSessionLogCallCount: Int = 0
+    public var textCombiningHistoryAndSessionLogCallCount: Int = 0
     public func textCombiningHistoryAndSessionLog() -> String? {
         textCombiningHistoryAndSessionLogCallCount += 1
         return ""
@@ -43,18 +105,19 @@ public class MockF4SAnalyticsAndDebugging : F4SAnalyticsAndDebugging {
         return _userCanAccessDebugMenu
     }
     
-    var loggedErrorMessages = [String]()
+    public var loggedErrorMessages = [String]()
     public func error(message: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
         loggedErrorMessages.append(message)
     }
     
-    var loggedErrors = [Error]()
+    public var loggedErrors = [Error]()
     public func error(_ error: Error, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
         loggedErrors.append(error)
     }
     
-    var debugMessages = [String]()
+    public var debugMessages = [String]()
     public func debug(_ message: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
         debugMessages.append(message)
     }
+    
 }

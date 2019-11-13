@@ -26,7 +26,7 @@ class CompanyToolbar: UIToolbar {
     var shareButton: UIBarButtonItem = {
         let button = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action, target: self, action: #selector(handleButtonTapped))
         button.tag = ActionType.showShare.rawValue
-        button.tintColor = UIColor.gray
+        button.tintColor = UIColor.black
         return button
     }()
     
@@ -34,11 +34,11 @@ class CompanyToolbar: UIToolbar {
         let on = #imageLiteral(resourceName: "heartFilled")
         let off = UIImage(named: "heartOutline")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         heartButton.image = hearted ? on : off
-        heartButton.tintColor = hearted ? UIColor.blue : UIColor.gray
+        heartButton.tintColor = hearted ? UIColor.blue : UIColor.black
     }
     
     func mapAppearance(shown: Bool) {
-        mapButton.tintColor = shown ? UIColor.blue : UIColor.gray
+        mapButton.tintColor = shown ? UIColor.blue :UIColor.black
     }
     
     var heartButton: UIBarButtonItem = {
@@ -55,7 +55,7 @@ class CompanyToolbar: UIToolbar {
         return button
     }()
     
-    required init(toolbarDelegate: CompanyToolbarDelegate) {
+    required init(toolbarDelegate: CompanyToolbarDelegate, alpha: CGFloat) {
         self.toolbarDelegate = toolbarDelegate
         super.init(frame: CGRect.zero)
         items = [
@@ -67,6 +67,11 @@ class CompanyToolbar: UIToolbar {
             mapButton,
             makeFlexibleSpace()
         ]
+        let bgImageColor = UIColor.white.withAlphaComponent(alpha)
+        let image = UIImage.onePixelImageWithColor(color: bgImageColor)
+        setBackgroundImage(image, forToolbarPosition: .any, barMetrics: .default)
+        setShadowImage(UIImage(), forToolbarPosition: .any)
+        tintColor = UIColor.black
     }
 
     override init(frame: CGRect) {
@@ -87,4 +92,15 @@ class CompanyToolbar: UIToolbar {
         return UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
     }
     
+}
+
+fileprivate extension UIImage {
+    static func onePixelImageWithColor(color : UIColor) -> UIImage {
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
+        let context = CGContext(data: nil, width: 1, height: 1, bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo.rawValue)
+        context!.setFillColor(color.cgColor)
+        context!.fill(CGRect(x:0,y: 0, width: 1, height:1))
+        return UIImage(cgImage: context!.makeImage()!)
+    }
 }

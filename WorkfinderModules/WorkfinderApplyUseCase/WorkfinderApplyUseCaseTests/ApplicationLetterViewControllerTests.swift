@@ -176,6 +176,10 @@ class MockApplicationLetterViewModel : ApplicationLetterViewModelProtocol {
 }
 
 class MockBlanksModel : ApplicationLetterTemplateBlanksModelProtocol {
+    func updateMotivationBlank(_ text: String) {
+        
+    }
+    
     
     func updateBlanksFor(firstDay: F4SCalendarDay?, lastDay: F4SCalendarDay?) {
     }

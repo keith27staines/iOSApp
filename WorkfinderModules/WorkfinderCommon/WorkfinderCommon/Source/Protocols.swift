@@ -22,30 +22,3 @@ public protocol AppInstallationUuidLogicProtocol : class {
 }
 
 public typealias LaunchOptions = [UIApplication.LaunchOptionsKey: Any]
-
-public struct PersonViewData {
-    public var uuid: String? = nil
-    public var firstName: String? = nil
-    public var lastName: String? = nil
-    public var bio: String? = nil
-    public var role: String? = nil
-    public var imageName: String? = nil
-    
-    public var fullName: String { return "\(firstName ?? "") \(lastName ?? "")" }
-    public var fullNameAndRole: String { return "\(fullName), \(role ?? "")"}
-    public var linkedInUrl: String? = "https://www.bbc.co.uk"
-    public var islinkedInHidden: Bool {
-        return linkedInUrl == nil
-    }
-    
-    public init(
-        uuid: F4SUUID? = nil,
-        firstName: String? = nil,
-        lastName: String? = nil,
-        bio: String? = nil,
-        role: String? = nil,
-        imageName: String? = nil,
-        linkedInUrl: String? = nil) {
-        
-    }
-}

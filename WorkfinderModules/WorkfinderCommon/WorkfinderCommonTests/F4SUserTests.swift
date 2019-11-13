@@ -125,7 +125,7 @@ class F4SUserTests: XCTestCase {
         XCTAssertEqual(sut.lastName, "lastName")
         XCTAssertEqual(sut.consenterEmail, "consenter")
         XCTAssertEqual(sut.requiresConsent, true)
-        XCTAssertEqual(sut.dateOfBirth, DateComponents(calendar: Calendar.current,year: 2000, month: 1, day: 1).date!)
+        XCTAssertEqual(sut.dateOfBirth, DateComponents(calendar: Calendar.workfinderCalendar,year: 2000, month: 1, day: 1).date!)
     }
 }
 

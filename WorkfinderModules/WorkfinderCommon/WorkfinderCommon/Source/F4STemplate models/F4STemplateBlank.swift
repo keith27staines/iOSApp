@@ -5,6 +5,7 @@ public enum F4STemplateBlankOptionType : String, Codable {
     case multiselect    // The field can be populated with one or more non-date values
     case select         // the field is populated with a single non-date value
     case date           // The field represents a date
+    case text           // Just a free-form text field
 }
 
 /// Predefined names for F4STemplateBlanks
@@ -14,7 +15,17 @@ public enum TemplateBlankName: String {
     case employmentSkills = "skills"
     case startDate = "start_date"
     case endDate = "end_date"
+    case motivation
 }
+
+//{
+//  "name": "motivation",
+//  "placeholder": "motivation",
+//  "option_type": "text",
+//  "max_choice": 1,
+//  "option_choices": [],
+//  "initial": null
+//}
 
 /// F4STemplateBlank instances represent blanks in a template that are to be
 /// populated with strings chosen by the user. Each blank contains placeholder

@@ -11,11 +11,15 @@ import WorkfinderCommon
 import WorkfinderUI
 
 class CompanyViewController: UIViewController {
-    
+    let screenName = ScreenName.company
+    var originScreen = ScreenName.notSpecified
     let viewModel: CompanyViewModel
+    weak var log: F4SAnalyticsAndDebugging?
+    var appSettings: AppSettingProvider
     
-    init(viewModel: CompanyViewModel) {
+    init(viewModel: CompanyViewModel, appSettings: AppSettingProvider) {
         self.viewModel = viewModel
+        self.appSettings = appSettings
         super.init(nibName: nil, bundle: nil)
         viewModel.viewModelDelegate = self
         hidesBottomBarWhenPushed = true
@@ -23,38 +27,56 @@ class CompanyViewController: UIViewController {
     
     private var loadingInProgressCount: Int = 0
     
+    override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
+    
     func refresh() {
+        viewModel.userLocation = companyMainPageView.mapView.userLocation.location
         companyMainPageView.refresh()
     }
     
-    lazy var pageViewController: CompanyPageViewController = {
-        let pageViewController = CompanyPageViewController(viewModel: viewModel)
-        pageViewController.willMove(toParent: self)
-        companyMainPageView.addPageControllerView(view: pageViewController.view)
-        addChild(pageViewController)
-        pageViewController.didMove(toParent: self)
-        return pageViewController
+    lazy var companyMainPageView: CompanyMainView = {
+        let mainView = view as! CompanyMainView
+        mainView.appSettings = self.appSettings
+        mainView.log = log
+        return mainView
     }()
     
-    lazy var companyMainPageView: CompanyMainView = view as! CompanyMainView
-    
     override func loadView() {
-        view = CompanyMainView(companyViewModel: viewModel, delegate: self)
+        view = CompanyMainView(companyViewModel: viewModel, delegate: self, appSettings: appSettings)
     }
     
     override func viewDidLoad() {
-        _ = pageViewController
-        companyMainPageView.segmentedControl.selectedSegmentIndex = viewModel.selectedPersonIndex ?? 0
-        viewModel.userLocation = companyMainPageView.mapView.userLocation.location
+        log?.track(event: .companyDetailsScreenDidLoad, properties: nil)
+        viewModel.viewModelDelegate = self
+        viewModel.startLoad()
         refresh()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.isNavigationBarHidden = true
+        configureNavigationBar()
         refresh()
     }
     
-    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    lazy var leftButton: UIBarButtonItem = {
+        let button = UIButton(type: .system)
+        let leftChevron = UIImage(named: "Back")?.withRenderingMode(.alwaysTemplate).scaledImage(with: CGSize(width: 20, height: 20))
+        button.setImage(leftChevron, for: .normal)
+        button.setTitle("Back", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        button.sizeToFit()
+        button.addTarget(self, action: #selector(didTapDone), for: .touchUpInside)
+        return UIBarButtonItem(customView: button)
+    }()
+    
+    func configureNavigationBar() {
+        navigationController?.isNavigationBarHidden = false
+        styleNavigationController()
+        navigationItem.leftBarButtonItem = leftButton
+    }
+    
+    @objc func didTapDone() {
+        viewModel.didTapDone()
+    }
     
     func incrementLoadingInProgressCount() {
         if loadingInProgressCount == 0 {
@@ -72,6 +94,8 @@ class CompanyViewController: UIViewController {
             loadingInProgressCount -= 1
         }
     }
+    
+    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
 
 extension CompanyViewController : CompanyViewModelDelegate {
@@ -108,32 +132,39 @@ extension CompanyViewController : CompanyViewModelDelegate {
     
     func companyViewModelDidCompleteLoadingTask(_ viewModel: CompanyViewModel) {
         decrementLoadingInProgressCount()
+        refresh()
     }
 }
 
 extension CompanyViewController : CompanyMainViewDelegate {
     func companyMainViewDidTapApply(_ view: CompanyMainView) {
         viewModel.didTapApply { [weak self] (initiateApplyResult) in
-            self?.processInitiateApplyResult(initiateApplyResult)
+            guard let strongSelf = self else { return }
+            strongSelf.processInitiateApplyResult(initiateApplyResult)
         }
-    }
-    
-    func companyMainViewDidTapDone(_ view: CompanyMainView) {
-        viewModel.didTapDone()
-    }
-    
-    func companyMainView(_ view: CompanyMainView, didSelectPage page: CompanyViewModel.PageIndex?) {
-        pageViewController.moveToPage(index: page)
     }
     
     func companyToolbar(_ toolbar: CompanyToolbar, requestedAction: CompanyToolbar.ActionType) {
         switch requestedAction {
         case .showShare:
+            log?.track(event: .companyDetailsShowShareTap, properties: nil)
             viewModel.showShare()
         case .toggleHeart:
             incrementLoadingInProgressCount()
+            switch viewModel.isFavourited {
+            case true:
+                log?.track(event: .companyDetailsFavouriteSwitchOff, properties: nil)
+            case false:
+                log?.track(event: .companyDetailsFavouriteSwitchOn, properties: nil)
+            }
             viewModel.toggleFavourited()
         case .showMap:
+            switch viewModel.isShowingMap {
+            case true:
+                log?.track(event: .companyDetailsHideMapTap, properties: nil)
+            case false:
+                log?.track(event: .companyDetailsShowMapTap, properties: nil)
+            }
             viewModel.isShowingMap.toggle()
         }
     }

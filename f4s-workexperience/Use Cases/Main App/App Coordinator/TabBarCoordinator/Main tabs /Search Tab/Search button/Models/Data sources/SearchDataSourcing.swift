@@ -9,6 +9,7 @@
 import UIKit
 
 protocol SearchDataSourcing : class, UITableViewDataSource {
+    var userLocation: CLLocationCoordinate2D? { get set }
     func setSearchString(_ string: String?, completion: @escaping () -> Void)
     func itemForIndexPath(_ indexPath: IndexPath) -> SearchItemProtocol
 }

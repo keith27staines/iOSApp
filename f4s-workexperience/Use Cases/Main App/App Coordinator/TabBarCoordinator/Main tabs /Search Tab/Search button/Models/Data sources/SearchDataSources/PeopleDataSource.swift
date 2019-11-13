@@ -9,7 +9,7 @@
 import UIKit
 
 class PeopleSearchDataSource : NSObject, SearchDataSourcing {
-    
+    var userLocation: CLLocationCoordinate2D?
     private let dataFetcher = TestSearchDataGetter()
     private var items = [SearchItemProtocol]()
     

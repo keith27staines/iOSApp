@@ -6,7 +6,7 @@ import WorkfinderAppLogic
 import WorkfinderApplyUseCase
 
 public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoordinatorProtocol {
-    
+    public var originScreen = ScreenName.notSpecified
     let environment: EnvironmentType
     let allowedToApplyLogic: AllowedToApplyLogicProtocol
     let applyService: F4SPlacementApplicationServiceProtocol
@@ -69,12 +69,15 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
         super.start()
         companyViewModel = CompanyViewModel(coordinatingDelegate: self,
                                             company: company,
-                                            people: [],
                                             companyService: companyService,
                                             favouritingModel: favouritesModel,
                                             allowedToApplyLogic: allowedToApplyLogic,
-                                            companyDocumentsModel: companyDocumentsModel)
-        companyViewController = CompanyViewController(viewModel: companyViewModel)
+                                            companyDocumentsModel: companyDocumentsModel,
+                                            log: injected.log)
+        companyViewController = CompanyViewController(
+            viewModel: companyViewModel, appSettings: injected.appSettings)
+        companyViewController.log = self.injected.log
+        companyViewController.originScreen = originScreen
         navigationRouter.push(viewController: companyViewController, animated: true)
     }
     
@@ -146,8 +149,9 @@ extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
         applyCoordinator.start()
     }
     
-    func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn person: PersonViewData) {
-        print("Show linkedIn profile for \(person.fullName)")
+    func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn host: F4SHost) {
+        guard let _ = host.profileUrl else { return }
+        openUrl(host.profileUrl!)
     }
     
     func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn company: CompanyViewData) {
@@ -158,9 +162,22 @@ extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
         openUrl(company.duedilUrl)
     }
     
+    func companyViewModel(_ viewModel: CompanyViewModel, requestOpenLink link: URL) {
+        openUrl(link)
+    }
+    
     func companyViewModel(_ viewModel: CompanyViewModel, showShare company: CompanyViewData) {
         socialShareItemSource.company = self.company
         let activityViewController = UIActivityViewController(activityItems: [socialShareItemSource], applicationActivities: nil)
+        activityViewController.completionWithItemsHandler = { [weak self] activityType, completed, items, error in
+            guard let log = self?.injected.log else { return }
+            switch completed {
+            case true:
+                log.track(event: .companyDetailsShareCompleted, properties: nil)
+            case false:
+                log.track(event: .companyDetailsShareCancelled, properties: nil)
+            }
+        }
         companyViewController.present(activityViewController, animated: true, completion: nil)
     }
 }

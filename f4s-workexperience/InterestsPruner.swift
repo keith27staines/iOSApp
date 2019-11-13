@@ -1,35 +1,79 @@
-//
-//  F4SInterestsRepository.swift
-//  f4s-workexperience
-//
-//  Created by Keith Dev on 07/04/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
 
 import Foundation
 import WorkfinderCommon
 
 public class F4SInterestsRepository : F4SInterestsRepositoryProtocol {
     
-    public func loadAllInterests() -> [F4SInterest] {
-        return InterestDBOperations.sharedInstance.getAllInterests()
+    let localStore: LocalStorageProtocol
+    
+    public init(localStore: LocalStorageProtocol) {
+        self.localStore = localStore
     }
     
-    public func loadUserInterests() -> [F4SInterest] {
-        let allInterests = loadAllInterests()
-        let validInterestsSet = pruneInvalidUserInterests(validInterests: allInterests)
-        return [F4SInterest](validInterestsSet)
+    public func loadInterestsArray() -> [F4SInterest] {
+        guard let data: Data = localStore.value(key: LocalStore.Key.interests) as? Data else {
+            return []
+        }
+        let decoder = JSONDecoder()
+        return try! decoder.decode([F4SInterest].self, from: data)
     }
     
-    /// Prunes interests that no longer appear in the live database from the user's interest list
-    /// - Returns: set of good interests
-    func pruneInvalidUserInterests(validInterests: [F4SInterest]) -> F4SInterestSet {
-        let userInterestSet = InterestDBOperations.sharedInstance.interestsForCurrentUser()
-        let allInterestsSet = Set(validInterests)
-        let intersection = userInterestSet.intersection(allInterestsSet)
-        let badInterests = userInterestSet.subtracting(intersection)
-        badInterests.forEach { InterestDBOperations.sharedInstance.removeUserInterestWithUuid($0.uuid) }
-        return intersection
+    public func loadInterestsSet() -> Set<F4SInterest> {
+        let interests = loadInterestsArray()
+        return Set<F4SInterest>(interests)
+    }
+    
+    @discardableResult
+    public func saveInterests(_ interests: [F4SInterest]) -> [F4SInterest] {
+        let interestsSet = Set<F4SInterest>(interests)
+        saveInterests(interestsSet)
+        return loadInterestsArray()
+    }
+    
+    @discardableResult
+    public func saveInterests(_ interests: F4SInterestSet) -> F4SInterestSet {
+        let interestsArray: [F4SInterest] = Array(interests)
+        let encoder = JSONEncoder()
+        let data = try! encoder.encode(interestsArray)
+        localStore.setValue(data, for: LocalStore.Key.interests)
+        return loadInterestsSet()
+    }
+    
+    @discardableResult
+    public func addInterests(_ addInterests: [F4SInterest]) -> [F4SInterest] {
+        let addInterestsSet = Set<F4SInterest>(addInterests)
+        self.addInterests(addInterestsSet)
+        return loadInterestsArray()
+    }
+    
+    @discardableResult
+    public func addInterests(_ addInterests: F4SInterestSet) -> F4SInterestSet {
+        let interests = loadInterestsSet()
+        saveInterests(interests.union(addInterests))
+        return loadInterestsSet()
+    }
+    
+    @discardableResult
+    public func removeInterests(_ removeInterests: [F4SInterest]) -> [F4SInterest] {
+        let removeSet = Set<F4SInterest>(removeInterests)
+        self.removeInterests(removeSet)
+        return loadInterestsArray()
+    }
+    
+    @discardableResult
+    public func removeInterests(_ removeInterests: F4SInterestSet) -> F4SInterestSet {
+        let interests = loadInterestsSet()
+        saveInterests(interests.subtracting(removeInterests))
+        return loadInterestsSet()
+    }
+    
+    /// Prunes interests from the store that are not members of the specified list
+    /// - Returns: the remaining interests in the store
+    @discardableResult
+    public func pruneInterests(keeping: [F4SInterest]) -> F4SInterestSet {
+        let interests = loadInterestsSet()
+        let intersection = interests.intersection(keeping)
+        return saveInterests(intersection)
     }
 }
 

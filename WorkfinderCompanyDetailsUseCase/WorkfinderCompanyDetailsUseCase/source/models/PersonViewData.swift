@@ -9,55 +9,42 @@
 import Foundation
 import WorkfinderCommon
 
-extension PersonViewData {
+extension F4SHost {
 
-    static func makePeople() -> [PersonViewData] {
+    static func makeHosts() -> [F4SHost] {
         return [
-            PersonViewData(
+            F4SHost(
                 uuid: "1",
-                firstName: "Sam",
-                lastName: "AlexanderAlexanderAlexander",
-                bio: """
-            I have been at my company for two years and I love the challenges my job brings.
-            I am passionate about the need to give young people great work experience which will
-            not only give them a great start in their working life but will also help us find the great employees we need to succeed as a company
-            I have been at my company for two years and I love the challenges my job brings.
-            I am passionate about the need to give young people great work experience which will
-            not only give them a great start in their working life but will also help us find the great employees we need to succeed as a company
-            I have been at my company for two years and I love the challenges my job brings.
-            I am passionate about the need to give young people great work experience which will
-            not only give them a great start in their working life but will also help us find the great employees we need to succeed as a company
-            I have been at my company for two years and I love the challenges my job brings.
-            I am passionate about the need to give young people great work experience which will
-            not only give them a great start in their working life but will also help us find the great employees we need to succeed as a company
-            """,
-                role: "CEO",
-                imageName: "person1",
-                linkedInUrl: "https://www.bbc.co.uk"),
-            PersonViewData(
+                displayName: "Alex Farrell",
+                firstName: "Alex",
+                lastName: "Farrell",
+                profileUrl: "https://www.bbc.co.uk",
+                imageUrl: "person1",
+                role: "CEO"),
+            F4SHost(
                 uuid: "2",
-                firstName: "Robin",
-                lastName: "Beckett",
-                bio: "I have been at my company for five years and I have mentored many interns",
-                role: "Account manager",
-                imageName: "person2",
-                linkedInUrl: nil),
-            PersonViewData(
+                displayName: "Albert Einstein",
+                firstName: "Albert",
+                lastName: "Einstein",
+                profileUrl: nil,
+                imageUrl: "person2",
+                role: "Accountant"),
+            F4SHost(
                 uuid: "3",
-                firstName: "Karen",
-                lastName: "Chatsworth",
-                bio: "I have been at my company for five years and I have mentored many interns",
-                role: "Developer",
-                imageName: "person3",
-                linkedInUrl: "https://www.bbc.co.uk"),
-            PersonViewData(
+                displayName: "Marie Curie",
+                firstName: "Marie",
+                lastName: "Curie",
+                profileUrl: nil,
+                imageUrl: "person2",
+                role: "Developer"),
+            F4SHost(
                 uuid: "4",
-                firstName: "Nicky",
-                lastName: "Fox",
-                bio: "I have been at my company for five years and I have mentored many interns",
-                role: "Chief Engineer",
-                imageName: "person4",
-                linkedInUrl: nil),
+                displayName: "Mary Shelley",
+                firstName: "Mary",
+                lastName: "Shelley",
+                profileUrl: nil,
+                imageUrl: "person2",
+                role: "Human resources manager"),
         ]
     }
 }

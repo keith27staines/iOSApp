@@ -23,7 +23,9 @@ public protocol RemoteNotificationsRegistrarProtocol {
     func registerForRemoteNotifications()
 }
 
-public protocol CompanyCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol {}
+public protocol CompanyCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol {
+    var originScreen: ScreenName { get set }
+}
 
 public protocol CompanyCoordinatorFactoryProtocol {
     func makeCompanyCoordinator(
@@ -75,11 +77,20 @@ public protocol CoreInjectionProtocol : class {
     var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol { get }
     var contentService: F4SContentServiceProtocol { get }
     var log: F4SAnalyticsAndDebugging { get }
+    var appSettings: AppSettingProvider { get }
 }
 
-public protocol CoreInjectionNavigationCoordinatorProtocol : Coordinating {
+public protocol CoreInjectionNavigationCoordinatorProtocol : NavigationCoordinating {
     var injected: CoreInjectionProtocol { get }
 }
+
+public protocol VersionChecking : class {
+    var versionCheckCompletion: ((F4SNetworkResult<F4SVersionValidity>) -> Void)? { get set }
+}
+
+public protocol VersionCheckCoordinatorProtocol: NavigationCoordinating, VersionChecking {}
+
+public protocol NavigationCoordinating : Coordinating {}
 
 public protocol Coordinating : class {
     
@@ -100,7 +111,7 @@ public protocol NavigationRoutingProtocol : RoutingProtocol {
     func popToViewController(_ viewController: UIViewController, animated: Bool)
 }
 
-public protocol RoutingProtocol {
+public protocol RoutingProtocol: class {
     var rootViewController: UIViewController { get }
     func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)?)
     func dismiss(animated: Bool, completion: (() -> Void)?)

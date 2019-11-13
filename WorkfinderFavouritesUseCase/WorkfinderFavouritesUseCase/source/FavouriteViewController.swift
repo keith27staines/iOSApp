@@ -12,7 +12,7 @@ import WorkfinderCommon
 import WorkfinderUI
 
 class FavouriteViewController: UIViewController {
-    
+    let screenName = ScreenName.favourites
     weak var coordinator: FavouritesCoordinator?
     
     @IBOutlet weak var tableView: UITableView!
@@ -23,6 +23,7 @@ class FavouriteViewController: UIViewController {
     var placementsRepository: F4SPlacementRepositoryProtocol!
     var favouritesRepository: F4SFavouritesRepositoryProtocol!
     var companyRepository: F4SCompanyRepositoryProtocol!
+    weak var log: F4SAnalyticsAndDebugging?
     
     var favouriteList: [Shortlist] = [] {
         didSet {
@@ -53,6 +54,7 @@ class FavouriteViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        log?.screen(screenName)
         adjustNavigationBar()
         loadData()
     }

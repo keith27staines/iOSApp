@@ -8,7 +8,7 @@ public class DocumentUploadCoordinator : CoreInjectionNavigationCoordinator {
     let mode: UploadScenario
     var popOnCompletion: Bool = false
     var root: UIViewController!
-    
+    var log: F4SAnalyticsAndDebugging { return injected.log }
     public var didFinish: ((DocumentUploadCoordinator)->Void)?
     
     let placementUuid: F4SUUID
@@ -74,6 +74,7 @@ public class DocumentUploadCoordinator : CoreInjectionNavigationCoordinator {
     }
     
     func showPickMethodForDocument(_ document: F4SDocument?, addDocumentDelegate delegate: F4SDCAddDocumentViewControllerDelegate) {
+        
         guard let document = document else { return }
         let storyboard = UIStoryboard(name: "DocumentCapture", bundle: __bundle)
         let vc = storyboard.instantiateViewController(withIdentifier: "F4SDCAddDocumentViewController") as! F4SDCAddDocumentViewController

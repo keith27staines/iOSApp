@@ -123,8 +123,8 @@ class F4SCalendarTests: XCTestCase {
     
     func test_second_tap_is_in_the_future_after_first_tap() {
         let now = Date()
-        let futureDate = now.addingTimeInterval(48*3600)
-        let furtherFutureDate = now.addingTimeInterval(64*3600)
+        let futureDate = now.addingTimeInterval(2*24*3600)
+        let furtherFutureDate = now.addingTimeInterval(4*24*3600)
         let sut = F4SCalendar()
         let day1 = F4SCalendarDay(cal: sut, date: futureDate)
         let day2 = F4SCalendarDay(cal: sut, date: furtherFutureDate)
@@ -141,8 +141,8 @@ class F4SCalendarTests: XCTestCase {
     
     func test_third_tap() {
         let now = Date()
-        let futureDate = now.addingTimeInterval(48*3600)
-        let furtherFutureDate = now.addingTimeInterval(64*3600)
+        let futureDate = now.addingTimeInterval(2*24*3600)
+        let furtherFutureDate = now.addingTimeInterval(4*24*3600)
         let sut = F4SCalendar()
         let day1 = F4SCalendarDay(cal: sut, date: futureDate)
         let day2 = F4SCalendarDay(cal: sut, date: furtherFutureDate)
@@ -196,27 +196,27 @@ class F4SCalendarTests: XCTestCase {
     }
     
     func test_nextDayAfterDay() {
-        let date = DateComponents(calendar: Calendar.current, year: 2019, month: 8, day: 10).date!
+        let date = DateComponents(calendar: Calendar.workfinderCalendar, year: 2019, month: 8, day: 10).date!
         let sut = F4SCalendar()
         let nextDay = sut.nextDayAfterDayContaining(date: date)
-        let dateComponents = Calendar.current.dateComponents([.year,.month,.day], from:nextDay.start)
+        let dateComponents = Calendar.workfinderCalendar.dateComponents([.year,.month,.day], from:nextDay.start)
         XCTAssertEqual(dateComponents.year, 2019)
         XCTAssertEqual(dateComponents.month, 8)
         XCTAssertEqual(dateComponents.day, 11)
     }
     
     func test_previousDayBeforeDay() {
-        let date = DateComponents(calendar: Calendar.current, year: 2019, month: 8, day: 10).date!
+        let date = DateComponents(calendar: Calendar.workfinderCalendar, year: 2019, month: 8, day: 10).date!
         let sut = F4SCalendar()
         let previousDay = sut.previousDayBeforeDayContaining(date: date)
-        let dateComponents = Calendar.current.dateComponents([.year,.month,.day], from:previousDay.start)
+        let dateComponents = Calendar.workfinderCalendar.dateComponents([.year,.month,.day], from:previousDay.start)
         XCTAssertEqual(dateComponents.year, 2019)
         XCTAssertEqual(dateComponents.month, 8)
         XCTAssertEqual(dateComponents.day, 9)
     }
     
     func test_numberOfDisplayableMonths() {
-        let date = DateComponents(calendar: Calendar.current, year: 2019, month: 8, day: 10).date!
+        let date = DateComponents(calendar: Calendar.workfinderCalendar, year: 2019, month: 8, day: 10).date!
         let sut = F4SCalendar(date: date)
         let month = sut.displayableMonth(index: 0)
         XCTAssertEqual(month.firstDay.monthOfYear, 7)

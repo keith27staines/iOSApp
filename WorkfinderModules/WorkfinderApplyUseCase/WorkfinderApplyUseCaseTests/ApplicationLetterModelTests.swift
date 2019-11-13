@@ -34,6 +34,10 @@ class ApplicationLetterModelTests: XCTestCase {
 }
 
 class MockF4SPlacementService : F4SPlacementApplicationServiceProtocol {
+    func getPlacement(uuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SPlacementJson>) -> ()) {
+        
+    }
+    
     func apply(with json: F4SCreatePlacementJson, completion: @escaping (F4SNetworkResult<F4SPlacementJson>) -> Void) {
         
     }

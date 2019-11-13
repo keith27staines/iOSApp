@@ -15,21 +15,21 @@ class LoggerTests: XCTestCase {
     let testURL = URL(string: "https://someserver.com")!
     
     func test_injected_log_is_being_used() {
-        let log = MockLog()
+        let log = MockF4SAnalyticsAndDebugging()
         log.identity(userId: "Test identity")
         let sut = NetworkCallLogger(log: log)
-        XCTAssertEqual((sut.log as? MockLog)!.lastIdentity, "Test identity")
+        XCTAssertEqual((sut.log as? MockF4SAnalyticsAndDebugging)!.identities.last, "Test identity")
     }
     
     func test_convertTaskFailureToError() {
-        let sut = NetworkCallLogger(log: MockLog())
+        let sut = NetworkCallLogger(log: MockF4SAnalyticsAndDebugging())
         let nsError = sut.taskFailureToError(code: 12345, text: "Bad stuff happened")
         XCTAssertEqual(nsError.domain, "iOS Workfinder Networking")
         XCTAssertEqual(nsError.userInfo["reason"] as! String, "Bad stuff happened")
     }
     
     func test_logDataTaskSuccess_with_valid_data() {
-        let log = MockLog()
+        let log = MockF4SAnalyticsAndDebugging()
         let sut = NetworkCallLogger(log: log)
         var request = URLRequest(url: testURL)
         request.httpBody = "RequestData".data(using: String.Encoding.utf8)!
@@ -58,12 +58,12 @@ class LoggerTests: XCTestCase {
 
 
         """
-        XCTAssertEqual(log.debugText[0], expectedLogText)
-        XCTAssertEqual(log.debugText.count, 1)
+        XCTAssertEqual(log.debugMessages[0], expectedLogText)
+        XCTAssertEqual(log.debugMessages.count, 1)
     }
     
     func test_logDataTaskSuccess_with_invalid_data() {
-        let log = MockLog()
+        let log = MockF4SAnalyticsAndDebugging()
         let sut = NetworkCallLogger(log: log)
         var request = URLRequest(url: testURL)
         request.httpBody = Data()
@@ -91,19 +91,19 @@ class LoggerTests: XCTestCase {
 
 
         """
-        XCTAssertEqual(log.debugText[0], expectedLogText)
-        XCTAssertEqual(log.debugText.count, 1)
+        XCTAssertEqual(log.debugMessages[0], expectedLogText)
+        XCTAssertEqual(log.debugMessages.count, 1)
     }
     
     func test_logDataTaskFailure() {
-        let log = MockLog()
+        let log = MockF4SAnalyticsAndDebugging()
         let sut = NetworkCallLogger(log: log)
         var request = URLRequest(url: testURL)
         request.httpBody = "RequestData".data(using: String.Encoding.utf8)!
         request.allHTTPHeaderFields = ["headerField1":"headerField1"]
         let response = HTTPURLResponse(url: testURL, statusCode: 400, httpVersion: "httpVersion", headerFields: ["header1":"header1"])!
         let responseData = "ResponseData".data(using: String.Encoding.utf8)!
-        XCTAssertEqual(log.debugText.count, 0)
+        XCTAssertEqual(log.debugMessages.count, 0)
         sut.logDataTaskFailure(attempting: "Tried to do something", error: "Error!", request: request, response: response, responseData: responseData)
         let expectedLogText = """
 
@@ -128,8 +128,8 @@ class LoggerTests: XCTestCase {
 
 
         """
-        XCTAssertEqual(log.errorText[0], expectedLogText)
-        XCTAssertEqual(log.errorText.count, 1)
+        XCTAssertEqual(log.loggedErrorMessages[0], expectedLogText)
+        XCTAssertEqual(log.loggedErrorMessages.count, 1)
         XCTAssertEqual(log.notifiedErrors.count, 1)
     }
 
