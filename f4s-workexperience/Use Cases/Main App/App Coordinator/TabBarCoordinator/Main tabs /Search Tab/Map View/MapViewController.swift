@@ -55,7 +55,6 @@ class MapViewController: UIViewController {
     }()
     
     @IBOutlet weak var logoStack: UIStackView!
-    @IBOutlet weak var partnerLogoImageView: UIImageView!
     @IBOutlet weak var workfinderLogoImageView: UIImageView!
     
     var cameraWillMoveAction: CamerWillMoveAction = .none {
