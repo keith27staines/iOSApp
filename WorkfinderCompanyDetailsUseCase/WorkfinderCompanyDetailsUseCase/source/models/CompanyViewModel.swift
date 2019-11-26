@@ -71,6 +71,9 @@ class CompanyViewModel : NSObject {
     var companyViewData: CompanyViewData
     var hosts: [F4SHost] = [] {
         didSet {
+            if hosts.count == 1 {
+                hosts[0].isSelected = true
+            }
             textModel = TextModel(hosts: hosts)
         }
     }
@@ -86,7 +89,7 @@ class CompanyViewModel : NSObject {
             viewModelDelegate?.companyViewModelDidRefresh(self)
         }
     }
-    
+
     lazy var dataSectionRows: CompanyDataSectionRows = {
         return CompanyDataSectionRows(viewModel: self, companyDocumentsModel: self.companyDocumentsModel)
     }()
