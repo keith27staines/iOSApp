@@ -3,6 +3,8 @@ import UIKit
 import CoreLocation
 import WorkfinderCommon
 
+let workfinderGreen = UIColor(red: 57, green: 167, blue: 82)
+
 protocol CompanyViewModelCoordinatingDelegate : class {
     func companyViewModelDidComplete(_ viewModel: CompanyViewModel)
     func companyViewModel(_ viewModel: CompanyViewModel, applyTo: CompanyViewData, continueFrom: F4STimelinePlacement?)
@@ -22,14 +24,6 @@ protocol CompanyViewModelDelegate : class {
 }
 
 class CompanyViewModel : NSObject {
-    
-    enum PageIndex : Int, CaseIterable {
-        case summary
-        case data
-        case people
-        func previous() -> PageIndex? { return PageIndex(rawValue: self.rawValue - 1) }
-        func next() -> PageIndex? { return PageIndex(rawValue: self.rawValue + 1) }
-    }
     
     enum InitiateApplicationResult {
         case deniedAlreadyApplied
@@ -84,8 +78,6 @@ class CompanyViewModel : NSObject {
     let companyService: F4SCompanyServiceProtocol
     let companyDocumentsModel: F4SCompanyDocumentsModelProtocol
     let canApplyLogic: AllowedToApplyLogicProtocol
-    private var viewControllers = [UIViewController]()
-    var currentPageIndex: PageIndex = .summary
     
     var companyJson: F4SCompanyJson? = nil {
         didSet {
@@ -95,22 +87,9 @@ class CompanyViewModel : NSObject {
         }
     }
     
-    var selectedHostIndex: Int? = nil {
-        didSet {
-            selectedPersonIndexDidChange?(selectedHostIndex)
-        }
-    }
-    
     lazy var dataSectionRows: CompanyDataSectionRows = {
         return CompanyDataSectionRows(viewModel: self, companyDocumentsModel: self.companyDocumentsModel)
     }()
-    
-    var mustSelectHostToApply: Bool { return false }
-    
-    var selectedHost: F4SHost? {
-        guard let index = self.selectedHostIndex else { return nil }
-        return self.hosts[index]
-    }
     
     weak var log: F4SAnalyticsAndDebugging?
     
@@ -150,15 +129,50 @@ class CompanyViewModel : NSObject {
         }
     }
     
-    func onDidUpdate() {
-        dataSectionRows = CompanyDataSectionRows(viewModel: self, companyDocumentsModel: companyDocumentsModel)
+    var applyButtonState: (String, Bool, UIColor) {
+        switch userCanApply {
+        case true:
+            if let _ = selectedHost {
+                return ("Apply", true, workfinderGreen)
+            } else {
+                return ("Choose a host", false, UIColor.lightGray)
+            }
+        case false:
+            return ("Already applied", false, UIColor.lightGray)
+        }
+    }
+    
+    var selectedHost: F4SHost? {
+        let host = hosts.first { (host) -> Bool in host.isSelected }
+        return host
+    }
+    
+    func updateHostSelectionState(from updatedHost: F4SHost) {
+        if updatedHost.isSelected {
+            for (index, host) in hosts.enumerated() {
+                if host.uuid == updatedHost.uuid {
+                    updateHost(from: updatedHost)
+                    continue
+                }
+                hosts[index].isSelected = false
+            }
+        } else {
+            updateHost(from: updatedHost)
+            viewModelDelegate?.companyViewModelDidRefresh(self)
+        }
         viewModelDelegate?.companyViewModelDidRefresh(self)
     }
     
-    func transitionDirectionForPage(_ pageIndex: PageIndex) ->  UIPageViewController.NavigationDirection? {
-        if pageIndex.rawValue > currentPageIndex.rawValue { return .forward }
-        if pageIndex.rawValue < currentPageIndex.rawValue { return .reverse }
-        return nil
+    private func updateHost(from updatedHost: F4SHost) {
+        guard let index = (hosts.firstIndex { (host) -> Bool in
+            host.uuid == updatedHost.uuid
+        }) else { return }
+        hosts[index] = updatedHost
+    }
+    
+    func onDidUpdate() {
+        dataSectionRows = CompanyDataSectionRows(viewModel: self, companyDocumentsModel: companyDocumentsModel)
+        viewModelDelegate?.companyViewModelDidRefresh(self)
     }
     
     func didTapDone() {

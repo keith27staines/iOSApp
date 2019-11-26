@@ -41,11 +41,13 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         let installationUuid = injected.appInstallationUuidLogic.registeredInstallationUuid!
         let companyViewData = CompanyViewData(company: applicationContext.company!)
         let placement = applicationContext.placement
-        return ApplicationModel(userUuid: userUuid, installationUuid: installationUuid, userInterests: userInterests, placement: placement, placementRepository: placementRepository, companyViewData: companyViewData, placementService: placementService, templateService: templateService)
+        let host = applicationContext.host
+        return ApplicationModel(userUuid: userUuid, installationUuid: installationUuid, userInterests: userInterests, placement: placement, placementRepository: placementRepository, companyViewData: companyViewData, host: host, placementService: placementService, templateService: templateService)
     }()
     
     public init(applyCoordinatorDelegate: ApplyCoordinatorDelegate? = nil,
                 company: Company,
+                host: F4SHost? = nil,
                 parent: CoreInjectionNavigationCoordinator?,
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
@@ -60,7 +62,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
                 documentUploaderFactory: F4SDocumentUploaderFactoryProtocol) {
         self.environment = environment
         self.applyCoordinatorDelegate = applyCoordinatorDelegate
-        self.applicationContext = F4SApplicationContext(user: F4SUser(), company: company, placement: nil)
+        self.applicationContext = F4SApplicationContext(user: F4SUser(), company: company, host: host, placement: nil)
         self.placementService = placementService
         self.templateService = templateService
         self.startingViewController = navigationRouter.navigationController.topViewController

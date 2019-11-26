@@ -18,10 +18,10 @@ class HostView : UIView {
             if let _ = host?.profileUrl {
                 profileButton.isHidden = false
                 profileButton.setTitle("see more on LinkedIn", for: UIControl.State.normal)
-            }
-            else {
+            } else {
                 profileButton.isHidden = true
             }
+            hostSelectionView.isSelected = host?.isSelected ?? false
         }
     }
     
@@ -85,8 +85,20 @@ class HostView : UIView {
         return stack
     }()
     
+    var selectAction: (((HostSelectionView) -> Void))? {
+        didSet {
+            self.hostSelectionView.tapAction = selectAction
+        }
+    }
+    
+    lazy var hostSelectionView: HostSelectionView = {
+        let view = HostSelectionView(selectAction: self.selectAction)
+        view.backgroundColor = UIColor.clear
+        return view
+    }()
+    
     lazy var horizontalStack: UIStackView = {
-        let views = [self.image, self.verticalStack]
+        let views = [self.hostSelectionView ,self.image, self.verticalStack]
         let stack = UIStackView(arrangedSubviews: views)
         stack.axis = .horizontal
         stack.alignment = .top
@@ -204,3 +216,89 @@ class ExpandableLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+
+class HostSelectionView: UIView {
+    
+    lazy var circleImageView: UIImageView = {
+        let diameter = CGFloat(32)
+        let frame = CGRect(origin: CGPoint.zero, size: CGSize(width: diameter, height: diameter))
+        let view = UIImageView(frame: frame)
+        view.layer.borderWidth = 1
+        view.layer.masksToBounds = false
+        view.layer.borderColor = UIColor.darkGray.cgColor
+        view.layer.cornerRadius = frame.height/2
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isUserInteractionEnabled = true
+        view.heightAnchor.constraint(equalToConstant: diameter).isActive = true
+        view.widthAnchor.constraint(equalToConstant: diameter).isActive = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(buttonTap))
+        view.addGestureRecognizer(tap)
+        view.addSubview(self.buttonCenterView)
+        self.buttonCenterView.translatesAutoresizingMaskIntoConstraints = false
+        self.buttonCenterView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        self.buttonCenterView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        return view
+    }()
+    
+    lazy var buttonCenterView: UIImageView = {
+        let diameter = CGFloat(24)
+        let frame = CGRect(origin: CGPoint.zero, size: CGSize(width: diameter, height: diameter))
+        let view = UIImageView(frame: frame)
+        view.layer.borderWidth = 0
+        view.layer.masksToBounds = false
+        view.layer.borderColor = UIColor.white.cgColor
+        view.layer.cornerRadius = frame.height/2
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.heightAnchor.constraint(equalToConstant: diameter).isActive = true
+        view.widthAnchor.constraint(equalToConstant: diameter).isActive = true
+        return view
+    }()
+    
+    var tapAction: ((HostSelectionView) -> Void)?
+    
+    var isSelected: Bool = false {
+        didSet {
+            switch isSelected {
+            case true:
+                buttonCenterView.layer.backgroundColor = workfinderGreen.cgColor
+            case false:
+                buttonCenterView.layer.backgroundColor = UIColor.white.cgColor
+            }
+        }
+    }
+    
+    override var intrinsicContentSize: CGSize { return CGSize(width: 36, height: 64)}
+    
+    @objc func buttonTap() {
+        tapAction?(self)
+    }
+    
+    init(selectAction: ((HostSelectionView) -> Void)?) {
+        super.init(frame: CGRect.zero)
+        self.tapAction = selectAction
+        addSubview(circleImageView)
+        circleImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        circleImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        isUserInteractionEnabled = true
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func contentHuggingPriority(for axis: NSLayoutConstraint.Axis) -> UILayoutPriority {
+        switch axis {
+        case .horizontal:
+            return .defaultHigh
+        case .vertical:
+            return UILayoutPriority.init(rawValue: 0)
+        @unknown default:
+            return .defaultHigh
+        }
+    }
+    
+}
+

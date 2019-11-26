@@ -80,10 +80,11 @@ public protocol F4SCreatePlacementJsonProtocol : Codable {
 }
 
 public struct F4SCreatePlacementJson : F4SCreatePlacementJsonProtocol, Codable {
-    public init(user: F4SUUID, roleUuid: F4SUUID, company: F4SUUID, vendor: F4SUUID, interests: [F4SUUID]) {
+    public init(user: F4SUUID, roleUuid: F4SUUID, company: F4SUUID, hostUuid: F4SUUID?, vendor: F4SUUID, interests: [F4SUUID]) {
         self.userUuid = user
         self.roleUuid = roleUuid
         self.companyUuid = company
+        self.hostUuid = hostUuid
         self.vendorUuid = vendor
         self.interests = interests
     }
@@ -91,6 +92,7 @@ public struct F4SCreatePlacementJson : F4SCreatePlacementJsonProtocol, Codable {
     public internal (set) var roleUuid: F4SUUID
     public internal (set) var userUuid: F4SUUID
     public internal (set) var companyUuid: F4SUUID
+    public internal (set) var hostUuid: F4SUUID?
     public internal (set) var vendorUuid: F4SUUID
     public internal (set) var interests: [F4SUUID]
 }
@@ -102,6 +104,7 @@ extension F4SCreatePlacementJson {
         case companyUuid = "company_uuid"
         case vendorUuid = "vendor_uuid"
         case interests
+        case hostUuid = "host_f4s_id"
     }
 }
 

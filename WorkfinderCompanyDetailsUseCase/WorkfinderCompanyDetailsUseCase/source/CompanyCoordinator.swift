@@ -125,14 +125,17 @@ extension CompanyCoordinator : CompanyViewModelCoordinatingDelegate {
     
     func companyViewModel(_ viewModel: CompanyViewModel, applyTo companyViewData: CompanyViewData, continueFrom placement: F4STimelinePlacement?) {
         let viewData = CompanyViewData(company: company)
-        startApplyCoordinator(companyViewData: viewData, continueFrom: placement)
+        let host = viewModel.selectedHost
+        startApplyCoordinator(companyViewData: viewData, host: host, continueFrom: placement)
     }
     
     func startApplyCoordinator(companyViewData: CompanyViewData,
+                               host: F4SHost?,
                                continueFrom: F4STimelinePlacement?) {
         let applyCoordinator = ApplyCoordinator(
             applyCoordinatorDelegate: self,
             company: company,
+            host: host,
             parent: self,
             navigationRouter: navigationRouter,
             inject: injected,

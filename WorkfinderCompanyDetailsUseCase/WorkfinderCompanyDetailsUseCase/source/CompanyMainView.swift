@@ -56,16 +56,10 @@ class CompanyMainView: UIView {
         summarySectionRows = CompanySummarySectionRows(viewData: companyViewModel.companyViewData)
         headerView.refresh()
         tableView.reloadData()
-        switch companyViewModel.userCanApply {
-        case true:
-            applyButton.setTitle("Apply", for: .normal)
-            applyButton.isEnabled = true
-            applyButton.backgroundColor = workfinderGreen
-        case false:
-            applyButton.setTitle("Already applied", for: .normal)
-            applyButton.isEnabled = false
-            applyButton.backgroundColor = UIColor.lightGray
-        }
+        let (title,isEnabled,backgroundColor) = companyViewModel.applyButtonState
+        applyButton.setTitle(title, for: .normal)
+        applyButton.isEnabled = isEnabled
+        applyButton.backgroundColor = backgroundColor
         toolbarView.heartAppearance(hearted: companyViewModel.isFavourited)
     }
     
@@ -254,9 +248,19 @@ extension CompanyMainView: UITableViewDataSource {
             let host = hosts[index]
             let state = hostsSummaryModel.expandableLabelStates[index]
             let hostCell = tableView.dequeueReusableCell(withIdentifier: HostCell.reuseIdentifier) as! HostCell
-            hostCell.configureWithHost(host, summaryState: state, profileLinkTap: profileLinkTap)
+            hostCell.configureWithHost(host,
+                                       summaryState: state,
+                                       profileLinkTap: profileLinkTap,
+                                       selectAction: { [weak self] tappedHost in
+                                        self?.updateHostSelectionState(from: tappedHost)
+                                        
+            })
             return hostCell
         }
+    }
+    
+    func updateHostSelectionState(from host: F4SHost) {
+        companyViewModel.updateHostSelectionState(from: host)
     }
 }
 
@@ -284,7 +288,7 @@ extension CompanyMainView: UITableViewDelegate {
             var summaryState = textModel.expandableLabelStates[indexPath.row]
             summaryState.isExpanded.toggle()
             textModel.expandableLabelStates[indexPath.row] = summaryState
-            hostCell.configureWithHost(host, summaryState: summaryState, profileLinkTap: profileLinkTap)
+            hostCell.configureWithHost(host, summaryState: summaryState, profileLinkTap: profileLinkTap, selectAction: updateHostSelectionState)
             tableView.beginUpdates()
             tableView.endUpdates()
         }
