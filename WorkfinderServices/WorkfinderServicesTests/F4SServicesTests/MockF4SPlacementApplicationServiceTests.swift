@@ -19,7 +19,7 @@ class MockF4SPlacementApplicationServiceTests: XCTestCase {
     
     public func test_completion_called_in_createPlacement() {
         let expectation = XCTestExpectation(description: "completion_called")
-        let createJson = F4SCreatePlacementJson(user: "", roleUuid: "", company: "", vendor: "", interests: [])
+        let createJson = F4SCreatePlacementJson(user: "", roleUuid: "", company: "", hostUuid: "hostUuid", vendor: "", interests: [])
         let resultJson = F4SPlacementJson(uuid: "1234")
         let result = F4SNetworkResult<F4SPlacementJson>.success(resultJson)
         let sut = MockF4SPlacementApplicationService(createResult: result)
