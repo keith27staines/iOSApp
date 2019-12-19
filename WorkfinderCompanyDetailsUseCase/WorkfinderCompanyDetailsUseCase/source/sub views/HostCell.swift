@@ -7,10 +7,18 @@ class HostCell: UITableViewCell {
     
     static var reuseIdentifier: String = "HostCell"
     
-    func configureWithHost(_ host: F4SHost, summaryState: ExpandableLabelState ,profileLinkTap: @escaping ((F4SHost) -> Void)) {
+    func configureWithHost(_ host: F4SHost,
+                           summaryState: ExpandableLabelState ,
+                           profileLinkTap: @escaping ((F4SHost) -> Void),
+                           selectAction: @escaping (F4SHost) -> Void) {
         hostView.host = host
         hostView.expandableLabelState = summaryState
         hostView.profileLinkTap = profileLinkTap
+        hostView.selectAction = { isSelectedView in
+            var updatedHost = host
+            updatedHost.isSelected.toggle()
+            selectAction(updatedHost)
+        }
     }
     
     lazy var hostView: HostView = {

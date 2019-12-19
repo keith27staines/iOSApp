@@ -44,12 +44,18 @@ public class F4SDocumentUploadModelBase {
     
     public var documentsForUpload: [F4SDocument] {
         return self.documents.filter { (document) -> Bool in
+            return document.hasValidRemoteUrl || document.data != nil
+        }
+    }
+    
+    public var documentsWithRemoteUrl: [F4SDocument] {
+        return documentsForUpload.filter { (document) -> Bool in
             return document.hasValidRemoteUrl
         }
     }
     
     public func putDocumentsWithRemoteUrls(completion: @escaping (Bool) -> Void ) {
-        let putJson = F4SPutDocumentsJson(documents: documentsForUpload)
+        let putJson = F4SPutDocumentsJson(documents: documentsWithRemoteUrl)
         documentService.putDocuments(documents: putJson, completion: { (result) in
             switch result {
             case .success(_):

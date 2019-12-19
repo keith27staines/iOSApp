@@ -58,6 +58,7 @@ public struct F4SHost : Codable {
     public var isCurrentEmployee: Bool?
     public var role: String?
     public var summary: String?
+    public var isSelected: Bool = false
     
     public init(
         uuid: F4SUUID,
