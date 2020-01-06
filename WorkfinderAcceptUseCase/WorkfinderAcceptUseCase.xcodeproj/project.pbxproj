@@ -18,6 +18,7 @@
 		FC5CBA67231D3A7000C2D3C5 /* F4SPlacementDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBA65231D3A7000C2D3C5 /* F4SPlacementDetail.swift */; };
 		FC5CBA68231D3A7000C2D3C5 /* F4SAccepOfferContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBA66231D3A7000C2D3C5 /* F4SAccepOfferContext.swift */; };
 		FC6F0FA3231E97D000597991 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC6F0FA2231E97D000597991 /* WorkfinderAppLogic.framework */; };
+		FC7BD6C123BFB90500E66D27 /* AcceptOffer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DECE2324D34E0074D5C1 /* AcceptOffer.storyboard */; };
 		FC93DC28231FE47A00F1CE23 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DC27231FE47A00F1CE23 /* WorkfinderUI.framework */; };
 		FCC1DED52324D3A70074D5C1 /* F4SHoorayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DED22324D3A60074D5C1 /* F4SHoorayViewController.swift */; };
 		FCC1DED62324D3A70074D5C1 /* AcceptOfferCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DED32324D3A60074D5C1 /* AcceptOfferCoordinator.swift */; };
@@ -282,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCC1DEE42324D4BD0074D5C1 /* AcceptOffer.xcassets in Resources */,
+				FC7BD6C123BFB90500E66D27 /* AcceptOffer.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
