@@ -12,7 +12,7 @@ import XCTest
 class F4SCreatePlacementJsonTests: XCTestCase {
     
     func test_F4SCreatePlacementJson_initialise() {
-        let sut = F4SCreatePlacementJson(user: "user", roleUuid: "role", company: "company", vendor: "vendor", interests: ["interest1"])
+        let sut = F4SCreatePlacementJson(user: "user", roleUuid: "role", company: "company", hostUuid: "hostUuid", vendor: "vendor", interests: ["interest1"])
         XCTAssertTrue(sut.userUuid == "user")
         XCTAssertTrue(sut.roleUuid == "role")
         XCTAssertTrue(sut.companyUuid == "company")

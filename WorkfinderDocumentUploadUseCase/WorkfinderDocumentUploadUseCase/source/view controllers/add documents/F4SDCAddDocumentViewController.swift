@@ -91,7 +91,7 @@ class F4SDCAddDocumentViewController: UIViewController {
     }
     
     lazy var documentPicker: UIDocumentPickerViewController = {
-        let documentTypes = ["public.text", "com.adobe.pdf", "com.microsoft.word.doc"]
+        let documentTypes = ["com.adobe.pdf", "com.microsoft.word.doc"]
         let documentPicker = UIDocumentPickerViewController(documentTypes: documentTypes, in: UIDocumentPickerMode.import)
         documentPicker.delegate = self
         documentPicker.modalPresentationStyle = UIModalPresentationStyle.fullScreen

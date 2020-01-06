@@ -16,7 +16,7 @@ class F4SPlacementApplicationServiceTests: XCTestCase {
         let expectation  = XCTestExpectation(description: "")
         sut.networkTaskfactory = MockF4SNetworkTaskFactory(requiredSuccessResult:
             requiredResult)
-        let applyJson = F4SCreatePlacementJson(user: "userUuid", roleUuid: "roleUuid", company: "companyUuid", vendor: "vendorUuid", interests: [])
+        let applyJson = F4SCreatePlacementJson(user: "userUuid", roleUuid: "roleUuid", company: "companyUuid", hostUuid: "hostUuid", vendor: "vendorUuid", interests: [])
         sut.apply(with: applyJson) { (result) in
             switch result {
             case .error(_):

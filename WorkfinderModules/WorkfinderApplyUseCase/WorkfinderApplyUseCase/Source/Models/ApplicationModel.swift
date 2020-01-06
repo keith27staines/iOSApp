@@ -24,6 +24,7 @@ class ApplicationModel : ApplicationModelProtocol {
     public internal (set) var placementService: F4SPlacementApplicationServiceProtocol
     public internal (set) var templateService: F4STemplateServiceProtocol
     public internal (set) var companyViewData: CompanyViewDataProtocol
+    public internal (set) var host: F4SHost?
     public internal (set) lazy var localStore: LocalStorageProtocol = { return LocalStore() }()
     
     public internal (set) lazy var userInterests: [F4SInterest] = []
@@ -114,6 +115,7 @@ class ApplicationModel : ApplicationModelProtocol {
         placement: F4SPlacement?,
         placementRepository: F4SPlacementRepositoryProtocol,
         companyViewData: CompanyViewDataProtocol,
+        host: F4SHost? = nil,
         placementService: F4SPlacementApplicationServiceProtocol,
         templateService: F4STemplateServiceProtocol) {
         
@@ -122,6 +124,7 @@ class ApplicationModel : ApplicationModelProtocol {
         self.placement = placement
         self.placementRepository = placementRepository
         self.companyViewData = companyViewData
+        self.host = host
         self.placementService = placementService
         self.templateService = templateService
         self.userInterests = userInterests
@@ -139,6 +142,7 @@ class ApplicationModel : ApplicationModelProtocol {
             user: self.userUuid,
             roleUuid: self.roleUuid!,
             company: companyViewData.uuid,
+            hostUuid: host?.uuid,
             vendor: installationUuid,
             interests: userInterests.uuidList)
         applicationLetterViewModel.modelBusyState(applicationLetterModel, isBusy: true)
