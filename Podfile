@@ -6,19 +6,19 @@ use_frameworks!
 target 'f4s-workexperience' do
     
     # Pods for f4s-workexperience
-    pod 'ReachabilitySwift'
-    pod 'XCGLogger'
-    pod 'KeychainSwift'
-    pod 'SQLite.swift'
-    pod 'GoogleMaps'
-    pod 'GooglePlaces'
-    pod 'Bugsnag'
-    pod 'Firebase/Core'
-    pod 'Firebase/Analytics'
-    pod 'Firebase/RemoteConfig'
+#    pod 'ReachabilitySwift'
+#    pod 'XCGLogger'
+#    pod 'KeychainSwift'
+#    pod 'SQLite.swift'
+#    pod 'GoogleMaps'
+#    pod 'GooglePlaces'
+#    pod 'Bugsnag'
+#    pod 'Firebase/Core'
+#    pod 'Firebase/Analytics'
+#    pod 'Firebase/RemoteConfig'
 end
   
 target 'f4s-workexperienceTests' do
-    pod 'Firebase/Analytics'
+#    pod 'Firebase/Analytics'
 end
 
