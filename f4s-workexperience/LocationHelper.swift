@@ -71,7 +71,7 @@ class LocationHelper {
     }
     
     func googleGeocodeAddressString(_ address: String, _ placeId: String?, completion: @escaping (_ coordinates: Result<CLLocationCoordinate2D>) -> Void) {
-        if let reachability = Reachability() {
+        if let reachability = try? Reachability() {
             if !reachability.isReachableByAnyMeans {
                 completion(.error("NoConnectivity"))
                 return

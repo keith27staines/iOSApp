@@ -808,7 +808,7 @@ extension MapViewController {
 extension MapViewController {
     
     func setupReachability(_: String?, useClosures _: Bool) {
-        let reachability = Reachability()
+        guard let reachability = try? Reachability() else { return }
         self.reachability = reachability
         
         NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(_:)), name: Notification.Name.reachabilityChanged, object: reachability)

@@ -11,6 +11,6 @@ import Reachability
 
 extension Reachability {
     public var isReachableByAnyMeans: Bool {
-        return connection != .none
+        return connection != .unavailable
     }
 }
