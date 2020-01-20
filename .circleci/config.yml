@@ -5,7 +5,13 @@ jobs:
       xcode: "11.2.1"
     steps:
       - checkout
+      - run:
+          name: Install CocoaPods
+          command: pod install
+
+      # Run tests.
       - run: bundle exec fastlane scan --scheme "All unit tests"
+    
     macos:
       xcode: "11.2.1"
   deploy:
