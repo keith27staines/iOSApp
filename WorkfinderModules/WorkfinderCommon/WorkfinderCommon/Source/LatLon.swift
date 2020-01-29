@@ -21,7 +21,7 @@ public extension LatLon {
     
     // Calculates the greate circle distance between two LatLons
     static func greatCircleDistance(p1: LatLon, p2: LatLon) -> Double {
-        let degreesToRadians = Double.pi / 360.0
+        let degreesToRadians = Double.pi / 180.0
         let r = 6371e3; // metres
         let φ1 = Double(p1.latitude) * degreesToRadians
         let φ2 = Double(p2.latitude) * degreesToRadians

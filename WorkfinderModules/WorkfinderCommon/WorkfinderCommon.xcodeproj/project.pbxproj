@@ -104,6 +104,7 @@
 		FCBEA7B5228701E600CAB1F1 /* F4SUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBEA7B4228701E500CAB1F1 /* F4SUserTests.swift */; };
 		FCC1DF5D232505FF0074D5C1 /* Shortlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF5C232505FF0074D5C1 /* Shortlist.swift */; };
 		FCC1DF5F232507530074D5C1 /* SocialShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF5E232507530074D5C1 /* SocialShare.swift */; };
+		FCC66B7223E035DA006F22AD /* LatLonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC66B7123E035DA006F22AD /* LatLonTests.swift */; };
 		FCDB07382286F6640053347F /* F4SUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB07372286F6640053347F /* F4SUser.swift */; };
 		FCDB073A2286F7870053347F /* F4SUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB07392286F7870053347F /* F4SUserRepository.swift */; };
 		FCDB073C2286F8B00053347F /* Analytics and debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB073B2286F8B00053347F /* Analytics and debugging.swift */; };
@@ -258,6 +259,7 @@
 		FCBEA7B4228701E500CAB1F1 /* F4SUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserTests.swift; sourceTree = "<group>"; };
 		FCC1DF5C232505FF0074D5C1 /* Shortlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shortlist.swift; sourceTree = "<group>"; };
 		FCC1DF5E232507530074D5C1 /* SocialShare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialShare.swift; sourceTree = "<group>"; };
+		FCC66B7123E035DA006F22AD /* LatLonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatLonTests.swift; sourceTree = "<group>"; };
 		FCDB07372286F6640053347F /* F4SUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUser.swift; sourceTree = "<group>"; };
 		FCDB07392286F7870053347F /* F4SUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserRepository.swift; sourceTree = "<group>"; };
 		FCDB073B2286F8B00053347F /* Analytics and debugging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Analytics and debugging.swift"; sourceTree = "<group>"; };
@@ -466,6 +468,7 @@
 		FCA91E782234043D007ED308 /* WorkfinderCommonTests */ = {
 			isa = PBXGroup;
 			children = (
+				FCC66B7123E035DA006F22AD /* LatLonTests.swift */,
 				FCFC06A6232256C0003C59C8 /* CGRect+MethodsTests.swift */,
 				FCFC06A7232256C0003C59C8 /* F4SQuadtreeTests.swift */,
 				FCFC06A023225570003C59C8 /* F4SStringExtensionTests.swift */,
@@ -878,6 +881,7 @@
 				FCFC069723224156003C59C8 /* RecommendationEquatableTests.swift in Sources */,
 				FC177FCF230703170068C2F7 /* F4SNetworkErrorTests.swift in Sources */,
 				FCFC06A8232256C0003C59C8 /* F4SQuadtreeTests.swift in Sources */,
+				FCC66B7223E035DA006F22AD /* LatLonTests.swift in Sources */,
 				FCE519522249645C00B550C9 /* F4SCalendarWeekTests.swift in Sources */,
 				FC083F8B23102D3100641F17 /* F4SUserStatusTests.swift in Sources */,
 				FC1FA08E22FB3931003EAE59 /* F4SContentDescriptorTests.swift in Sources */,
