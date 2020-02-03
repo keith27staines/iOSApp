@@ -18,6 +18,7 @@
 		FC083F8D23102E6C00641F17 /* F4SMessageStructsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F8C23102E6C00641F17 /* F4SMessageStructsTests.swift */; };
 		FC083F8F2310417E00641F17 /* F4SRoleJsonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F8E2310417E00641F17 /* F4SRoleJsonTests.swift */; };
 		FC083F912310464400641F17 /* F4SRecommendationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F902310464400641F17 /* F4SRecommendationTests.swift */; };
+		FC0B6EB123E834C8001FCE5F /* F4SCompanyDocumentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B6EB023E834C8001FCE5F /* F4SCompanyDocumentsTests.swift */; };
 		FC0C710E232BA8A500816332 /* F4SAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C710D232BA8A500816332 /* F4SAnalyticsEvents.swift */; };
 		FC0E5CFB224E1B5700615B4F /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E5CFA224E1B5700615B4F /* LocalStore.swift */; };
 		FC1243E32344AEA30007BA95 /* ScreenNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1243E22344AEA30007BA95 /* ScreenNames.swift */; };
@@ -170,6 +171,7 @@
 		FC083F8C23102E6C00641F17 /* F4SMessageStructsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SMessageStructsTests.swift; sourceTree = "<group>"; };
 		FC083F8E2310417E00641F17 /* F4SRoleJsonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRoleJsonTests.swift; sourceTree = "<group>"; };
 		FC083F902310464400641F17 /* F4SRecommendationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRecommendationTests.swift; sourceTree = "<group>"; };
+		FC0B6EB023E834C8001FCE5F /* F4SCompanyDocumentsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyDocumentsTests.swift; sourceTree = "<group>"; };
 		FC0C710D232BA8A500816332 /* F4SAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SAnalyticsEvents.swift; sourceTree = "<group>"; };
 		FC0E5CFA224E1B5700615B4F /* LocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStore.swift; sourceTree = "<group>"; };
 		FC1243E22344AEA30007BA95 /* ScreenNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenNames.swift; sourceTree = "<group>"; };
@@ -468,6 +470,7 @@
 		FCA91E782234043D007ED308 /* WorkfinderCommonTests */ = {
 			isa = PBXGroup;
 			children = (
+				FC0B6EB023E834C8001FCE5F /* F4SCompanyDocumentsTests.swift */,
 				FCC66B7123E035DA006F22AD /* LatLonTests.swift */,
 				FCFC06A6232256C0003C59C8 /* CGRect+MethodsTests.swift */,
 				FCFC06A7232256C0003C59C8 /* F4SQuadtreeTests.swift */,
@@ -882,6 +885,7 @@
 				FC177FCF230703170068C2F7 /* F4SNetworkErrorTests.swift in Sources */,
 				FCFC06A8232256C0003C59C8 /* F4SQuadtreeTests.swift in Sources */,
 				FCC66B7223E035DA006F22AD /* LatLonTests.swift in Sources */,
+				FC0B6EB123E834C8001FCE5F /* F4SCompanyDocumentsTests.swift in Sources */,
 				FCE519522249645C00B550C9 /* F4SCalendarWeekTests.swift in Sources */,
 				FC083F8B23102D3100641F17 /* F4SUserStatusTests.swift in Sources */,
 				FC1FA08E22FB3931003EAE59 /* F4SContentDescriptorTests.swift in Sources */,
