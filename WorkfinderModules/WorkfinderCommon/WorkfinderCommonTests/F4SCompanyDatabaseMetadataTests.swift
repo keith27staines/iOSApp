@@ -11,6 +11,12 @@ import XCTest
 
 class F4SCompanyDatabaseMetadataTests: XCTestCase {
 
+    func test_initialise() {
+        let date = Date()
+        let sut = F4SCompanyDatabaseMetaData(created: date, urlString: "urlString", errors: nil)
+        XCTAssertEqual(sut.created, date)
+        XCTAssertEqual(sut.urlString, "urlString")
+    }
 
 
 }
