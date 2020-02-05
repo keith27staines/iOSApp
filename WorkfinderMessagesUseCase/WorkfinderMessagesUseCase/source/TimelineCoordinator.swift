@@ -157,15 +157,12 @@ public class TimelineCoordinator : CoreInjectionNavigationCoordinator, CompanyCo
         guard
             let urlString = urlString,
             let url = URL(string: urlString),
-            let acceptContext = acceptContext else {
+            let _ = acceptContext else {
                 injected.log.debug("acceptContext should not be nil", functionName: #function, fileName: #file, lineNumber: #line)
                 return
         }
         UIApplication.shared.open(url, options: [:]) { (success) in
-            var event = F4SAnalyticsEvent(name: .viewCompanyExternalApplication)
-            event.addProperty(name: "placement_uuid", value: acceptContext.placement.placementUuid ?? "")
-            event.addProperty(name: "company_name", value: acceptContext.company.companyName)
-            event.track()
+            // Nothing to do here yet
         }
     }
     
