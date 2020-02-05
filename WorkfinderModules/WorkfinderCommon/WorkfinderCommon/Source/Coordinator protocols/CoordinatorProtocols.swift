@@ -122,12 +122,13 @@ public extension Coordinating {
     func childCoordinatorDidFinish(_ coordinator: Coordinating) {
         removeChildCoordinator(coordinator)
     }
-    
     func addChildCoordinator(_ coordinator: Coordinating) {
         childCoordinators[coordinator.uuid] = coordinator
+        coordinator.parentCoordinator = self
     }
     func removeChildCoordinator(_ coordinator: Coordinating) {
         childCoordinators[coordinator.uuid] = nil
+        coordinator.parentCoordinator = nil
     }
 }
 

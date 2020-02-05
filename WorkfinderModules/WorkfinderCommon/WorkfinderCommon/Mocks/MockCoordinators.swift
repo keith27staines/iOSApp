@@ -106,3 +106,18 @@ public class MockOnboardingCoordinator : OnboardingCoordinatorProtocol {
         onboardingDidFinish?(self)
     }
 }
+
+public class MockCoordindator: Coordinating {
+    
+    public var startCount: Int = 0
+    
+    public var parentCoordinator: Coordinating?
+    
+    public var uuid = UUID()
+    
+    public var childCoordinators: [UUID : Coordinating] = [:]
+    
+    public func start() {
+        startCount += 1
+    }
+}
