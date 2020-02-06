@@ -10,6 +10,66 @@ import XCTest
 @testable import WorkfinderCommon
 
 class F4SQuadtreeTests: XCTestCase {
+    
+    func test_initalise() {
+        let rect = CGRect(x: 10, y: 10, width: 10, height: 10)
+        let sut = F4SPointQuadTree(bounds: rect, depth: 5, maxItems: 2, parent: nil)
+        XCTAssertEqual(sut.bounds, rect)
+        XCTAssertEqual(sut.depth, 5)
+        XCTAssertEqual(sut.maxItems, 2)
+        XCTAssertNil(sut.parent)
+    }
+    
+    func test_smallest() {
+        let rect = CGRect(x: 10, y: 10, width: 10, height: 10)
+        let sut = F4SPointQuadTree(bounds: rect, depth: 5, maxItems: 2, parent: nil)
+        let item1 = F4SQuadtreeItem(point: CGPoint(x:11,y:11), object: "item1")
+        let item2 = F4SQuadtreeItem(point: CGPoint(x:11,y:11), object: "item2")
+        let item3 = F4SQuadtreeItem(point: CGPoint(x:11,y:11), object: "item3")
+        try! sut.insert(item: item1)
+        try! sut.insert(item: item2)
+        var smallest = sut.smallestSubtreeToContain(elements: [item1,item2])
+        XCTAssertEqual(smallest!.bounds, rect)
+        try! sut.insert(item: item3)
+        smallest = sut.smallestSubtreeToContain(elements: [item1,item2, item3])
+        XCTAssertNotEqual(smallest!.bounds, rect)
+    }
+    
+    func test_build_and_clear() {
+        let rect = CGRect(x: 10, y: 10, width: 10, height: 10)
+        let sut = F4SPointQuadTree(bounds: rect, depth: 5, maxItems: 2, parent: nil)
+        let item1 = F4SQuadtreeItem(point: CGPoint(x:11,y:11), object: "item1")
+        let item2 = F4SQuadtreeItem(point: CGPoint(x:11,y:11), object: "item2")
+        let item3 = F4SQuadtreeItem(point: CGPoint(x:11,y:11), object: "item3")
+        let item4 = F4SQuadtreeItem(point: CGPoint(x:11,y:11), object: "item4")
+        try! sut.insert(item: item1)
+        try! sut.insert(item: item2)
+        // Add items up to the limit before this tree creates subtrees
+        XCTAssertEqual(sut.items.count, 2)
+        XCTAssertEqual(sut.count(), 2)
+        XCTAssertNil(sut.subtreeDictionary)
+        // Clear and ensure items and subtrees are empty
+        sut.clear()
+        XCTAssertEqual(sut.items.count,0)
+        XCTAssertNil(sut.subtreeDictionary)
+        // Add three items (one more than maxItems) to force subtrees to be created and items copied to them
+        try! sut.insert(item: item1)
+        try! sut.insert(item: item2)
+        try! sut.insert(item: item3)
+        XCTAssertEqual(sut.items.count, 0)
+        XCTAssertEqual(sut.count(), 3)
+        XCTAssertEqual(sut.subtreeDictionary!.count, 4)
+        // Add one more item to ensure it goes into the existing subtrees and not the items collection
+        try! sut.insert(item: item4)
+        XCTAssertEqual(sut.items.count, 0)
+        XCTAssertEqual(sut.count(), 4)
+        XCTAssertEqual(sut.subtreeDictionary!.count, 4)
+        // Clear and check both items and subtrees are empty
+        sut.clear()
+        XCTAssertEqual(sut.items.count,0)
+        XCTAssertNil(sut.subtreeDictionary)
+    }
+    
     func testQuadrantForItemFarOutside() {
         let qt = F4SQuadtreeTests.createEmptyTree()
         let exteriorPoint = CGPoint(x: -1, y: 0)
@@ -204,6 +264,59 @@ class F4SQuadtreeTests: XCTestCase {
         let topLeftPopulated = CGRect(x: 0.4, y: 0.4, width: 0.2, height: 0.2)
         XCTAssertEqual(qt.retrieveWithinRect(topLeftPopulated).count, qt.retrieveAll().count)
     }
+    
+    func test_equality_when_equal() {
+        let point = CGPoint(latitude: 1, longitude: 2)
+        let object = "hello"
+        let item1 = F4SQuadtreeItem(point: point, object: object)
+        let item2 = F4SQuadtreeItem(point: point, object: object)
+        XCTAssertTrue(item1 == item2)
+    }
+    
+    func test_equality_when_not_equal_points() {
+        let point1 = CGPoint(latitude: 1, longitude: 2)
+        let object = "hello"
+        let point2 = CGPoint(latitude: 2, longitude: 1)
+        let item1 = F4SQuadtreeItem(point: point1, object: object)
+        let item2 = F4SQuadtreeItem(point: point2, object: object)
+        XCTAssertFalse(item1 == item2)
+    }
+    
+    func test_equality_when_not_equal_objects() {
+        let point = CGPoint(latitude: 1, longitude: 2)
+        let object1 = "hello"
+        let object2 = "goodbye"
+        let item1 = F4SQuadtreeItem(point: point, object: object1)
+        let item2 = F4SQuadtreeItem(point: point, object: object2)
+        XCTAssertFalse(item1 == item2)
+    }
+    
+    func test_hashvalue_when_identical() {
+        let point = CGPoint(latitude: 1, longitude: 2)
+        let object = "hello"
+        let item1 = F4SQuadtreeItem(point: point, object: object)
+        let item2 = F4SQuadtreeItem(point: point, object: object)
+        XCTAssertTrue(item1.hashValue == item2.hashValue)
+    }
+    
+    func test_hashvalue_when_different_points() {
+        let point1 = CGPoint(latitude: 1, longitude: 2)
+        let point2 = CGPoint(latitude: 2, longitude: 2)
+        let object = "hello"
+        let item1 = F4SQuadtreeItem(point: point1, object: object)
+        let item2 = F4SQuadtreeItem(point: point2, object: object)
+        XCTAssertFalse(item1.hashValue == item2.hashValue)
+    }
+    
+    func test_hashvalue_when_different_objects() {
+        let point = CGPoint(latitude: 1, longitude: 2)
+        let object1 = "hello"
+        let object2 = "goodbye"
+        let item1 = F4SQuadtreeItem(point: point, object: object1)
+        let item2 = F4SQuadtreeItem(point: point, object: object2)
+        XCTAssertFalse(item1.hashValue == item2.hashValue)
+    }
+    
 }
 
 // MARK: helpers
