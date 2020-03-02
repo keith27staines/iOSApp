@@ -8,7 +8,7 @@
 
 import XCTest
 import WorkfinderCommon
-//import WorkfinderNetworking
+import WorkfinderNetworking
 
 class NetworkConfigTests: XCTestCase {
 
