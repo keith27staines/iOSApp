@@ -18,7 +18,6 @@ extension Company : SearchItemProtocol {
         return uuid
     }
     
-    
     var primaryText: String {
         return name
     }
@@ -39,14 +38,6 @@ class CompanySearchDataGetter : Searchable {
             completion(unfiltered)
             return
         }
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async { [weak self] in
-            guard let strongSelf = self else { return }
-            
-            let dbOps = DatabaseOperations.sharedInstance
-            dbOps.getAllCompanies { companies in
-                strongSelf.unfiltered = companies
-                completion(companies)
-            }
-        }
+        completion([])
     }
 }

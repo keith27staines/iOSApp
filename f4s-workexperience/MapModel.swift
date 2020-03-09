@@ -70,41 +70,7 @@ public struct MapModel {
         self.interestsModel = InterestsModel(allInterests: allInterests)
         self.quadTree = MapModel.createQuadtree(filteredCompanyPinSet)
     }
-    
-    /// Initializes a new instance
-    ///
-    /// - parameter allCompanies: All companies that might ever need to be presented on the map represented by this map model
-    public init(allCompanies:[Company],
-                allInterests: [Int64:F4SInterest],
-                selectedInterests: F4SInterestSet?,
-                clusterColor: UIColor) {
-        self.clusterColor = clusterColor
-        let companyPinsList = allCompanies.map { (company) -> F4SCompanyPin in
-            return F4SCompanyPin(company: company, tintColor: clusterColor)
-        }
         
-        let companyPinSet = F4SCompanyPinSet(companyPinsList)
-        let filteredCompanyPinList: [F4SCompanyPin]
-        var selectedInterestIdSet: F4SInterestIdSet? = nil
-        if let selectedInterests = selectedInterests, !selectedInterests.isEmpty {
-            let selectedInterestIdList = selectedInterests.map({ interest -> Int64 in
-                return Int64(interest.id)
-            })
-            selectedInterestIdSet = F4SInterestIdSet(selectedInterestIdList)
-            filteredCompanyPinList = companyPinsList.filter({ pin -> Bool in
-                let companyIds = Set(pin.interestIds)
-                let intersection = companyIds.intersection(selectedInterestIdSet!)
-                return !intersection.isEmpty
-            })
-        } else {
-            filteredCompanyPinList = companyPinsList
-        }
-        allCompanyPins = companyPinSet
-        self.filteredCompanyPinSet = F4SCompanyPinSet(filteredCompanyPinList)
-        self.interestsModel = InterestsModel(allInterests: allInterests)
-        self.quadTree = MapModel.createQuadtree(filteredCompanyPinSet)
-    }
-    
     /// Returns the company pins in a square centred on the specified point
     ///
     /// - parameter pos: the position on which the rectangle is centred

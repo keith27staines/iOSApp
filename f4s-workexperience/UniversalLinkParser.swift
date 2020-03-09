@@ -11,7 +11,7 @@ import WorkfinderCommon
 
 public enum UniversalLink  {
     
-    case recommendCompany(Company?)
+    case recommendCompany(companyUuid: F4SUUID?)
     case passwordless(String?)
     
     public init?(url: URL) {
@@ -19,8 +19,7 @@ public enum UniversalLink  {
             guard let uuid = UniversalLink.extractRecommendedCompanyUuid(from: url) else {
                 return nil
             }
-            let company = DatabaseOperations.sharedInstance.companyWithUUID(uuid)
-            self = .recommendCompany(company)
+            self = .recommendCompany(companyUuid: uuid)
             return
         }
         if UniversalLink.isPasswordless(url: url) {

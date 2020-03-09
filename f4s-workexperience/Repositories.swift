@@ -30,13 +30,11 @@ public class F4SFavouritesRepository: F4SFavouritesRepositoryProtocol {
 public class F4SCompanyRepository : F4SCompanyRepositoryProtocol {
     
     public func load(companyUuid: F4SUUID) -> Company? {
-        return DatabaseOperations.sharedInstance.companyWithUUID(companyUuid)
+        return nil
     }
     
     public func load(companyUuids: [F4SUUID], completion: @escaping (([Company]) -> Void) ) {
-        DatabaseOperations.sharedInstance.getCompanies(withUuid: companyUuids) { (companies) in
-            completion(companies)
-        }
+            completion([])
     }
     
 }

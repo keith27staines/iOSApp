@@ -15,7 +15,6 @@
 		204203EC1E4B160C007C7409 /* ShortlistCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204203EB1E4B160C007C7409 /* ShortlistCoreDataManager.swift */; };
 		204203EE1E4B16D7007C7409 /* ShortlistDBOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204203ED1E4B16D7007C7409 /* ShortlistDBOperations.swift */; };
 		204C89551DF5A36100D8493A /* TemplateChoiceDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204C89541DF5A36100D8493A /* TemplateChoiceDB.swift */; };
-		205EB20B1DDB161D00034424 /* DatabaseOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205EB20A1DDB161D00034424 /* DatabaseOperations.swift */; };
 		20D51BE41E27710C003A8358 /* UNService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D51BE31E27710C003A8358 /* UNService.swift */; };
 		20FABFEC1DDDA63600D583E2 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FABFEB1DDDA63600D583E2 /* FileHelper.swift */; };
 		40A28CB71E1F96A60077D490 /* RatePlacement.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40A28CB51E1F96A60077D490 /* RatePlacement.storyboard */; };
@@ -117,6 +116,12 @@
 		FC681C011F57473D0077BECA /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFF1F57473D0077BECA /* Podfile.lock */; };
 		FC72219F20FE248400F10953 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = FC72219B20FE248400F10953 /* Appfile */; };
 		FC7221A020FE248400F10953 /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = FC72219C20FE248400F10953 /* Fastfile */; };
+		FC771F502416294D00AD6317 /* ComanyFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771F4D2416294D00AD6317 /* ComanyFileParser.swift */; };
+		FC771F512416294D00AD6317 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771F4E2416294D00AD6317 /* Common.swift */; };
+		FC771F522416294D00AD6317 /* PinRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771F4F2416294D00AD6317 /* PinRepository.swift */; };
+		FC771F572416299B00AD6317 /* PinDownloadFileParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771F542416299A00AD6317 /* PinDownloadFileParserTests.swift */; };
+		FC771F582416299B00AD6317 /* PinRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771F552416299B00AD6317 /* PinRepositoryTests.swift */; };
+		FC771F592416299B00AD6317 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771F562416299B00AD6317 /* Common.swift */; };
 		FC860D82209C37F2007945E6 /* MessageDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC860D81209C37F2007945E6 /* MessageDispatcher.swift */; };
 		FC8E303A20F4A60B006059DE /* F4SLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8E303920F4A60B006059DE /* F4SLogger.swift */; };
 		FC8E3F4822D3396A00102C37 /* VersionCheckCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8E3F4722D3396A00102C37 /* VersionCheckCoordinator.swift */; };
@@ -156,6 +161,7 @@
 		FCCFC7CF224D2C110060F7EC /* DataFixes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCFC7CE224D2C110060F7EC /* DataFixes.swift */; };
 		FCD6F9E822E315B7003F7C34 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD6F9E722E315B7003F7C34 /* WorkfinderAppLogic.framework */; };
 		FCD6F9E922E315B7003F7C34 /* WorkfinderAppLogic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCD6F9E722E315B7003F7C34 /* WorkfinderAppLogic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FCE285C724111BF000AB9FD3 /* MapModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE285C624111BF000AB9FD3 /* MapModelManager.swift */; };
 		FCE51E402210362800DC1D50 /* PlacesSearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E3F2210362800DC1D50 /* PlacesSearchDataGetter.swift */; };
 		FCE51E422210365B00DC1D50 /* CompanySearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E412210365B00DC1D50 /* CompanySearchDataGetter.swift */; };
 		FCE51E44221039D600DC1D50 /* PersonSearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E43221039D600DC1D50 /* PersonSearchDataGetter.swift */; };
@@ -229,7 +235,6 @@
 		204203EB1E4B160C007C7409 /* ShortlistCoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortlistCoreDataManager.swift; sourceTree = "<group>"; };
 		204203ED1E4B16D7007C7409 /* ShortlistDBOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortlistDBOperations.swift; sourceTree = "<group>"; };
 		204C89541DF5A36100D8493A /* TemplateChoiceDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateChoiceDB.swift; sourceTree = "<group>"; };
-		205EB20A1DDB161D00034424 /* DatabaseOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseOperations.swift; sourceTree = "<group>"; };
 		20A2F1C11DDC8F040079DDBC /* f4s-workexperience-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "f4s-workexperience-Bridging-Header.h"; sourceTree = "<group>"; };
 		20B128141DDA1A3900CE3F1F /* F4SDevelopment.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = F4SDevelopment.entitlements; path = Config/F4SDevelopment.entitlements; sourceTree = "<group>"; };
 		20B1281F1DDA1D5B00CE3F1F /* f4s-workexperience.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "f4s-workexperience.xcconfig"; sourceTree = "<group>"; };
@@ -364,6 +369,12 @@
 		FC681BFF1F57473D0077BECA /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		FC72219B20FE248400F10953 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
 		FC72219C20FE248400F10953 /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
+		FC771F4D2416294D00AD6317 /* ComanyFileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComanyFileParser.swift; sourceTree = "<group>"; };
+		FC771F4E2416294D00AD6317 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		FC771F4F2416294D00AD6317 /* PinRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinRepository.swift; sourceTree = "<group>"; };
+		FC771F542416299A00AD6317 /* PinDownloadFileParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinDownloadFileParserTests.swift; sourceTree = "<group>"; };
+		FC771F552416299B00AD6317 /* PinRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinRepositoryTests.swift; sourceTree = "<group>"; };
+		FC771F562416299B00AD6317 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		FC79314720226D440034D201 /* F4SDistribution.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = F4SDistribution.entitlements; path = Config/F4SDistribution.entitlements; sourceTree = "<group>"; };
 		FC860D81209C37F2007945E6 /* MessageDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDispatcher.swift; sourceTree = "<group>"; };
 		FC8E303920F4A60B006059DE /* F4SLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SLogger.swift; sourceTree = "<group>"; };
@@ -401,6 +412,7 @@
 		FCCFC7CE224D2C110060F7EC /* DataFixes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFixes.swift; sourceTree = "<group>"; };
 		FCD6F9E722E315B7003F7C34 /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCDB86112321268C0047FF96 /* Mustache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mustache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCE285C624111BF000AB9FD3 /* MapModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModelManager.swift; sourceTree = "<group>"; };
 		FCE51E3F2210362800DC1D50 /* PlacesSearchDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesSearchDataGetter.swift; sourceTree = "<group>"; };
 		FCE51E412210365B00DC1D50 /* CompanySearchDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanySearchDataGetter.swift; sourceTree = "<group>"; };
 		FCE51E43221039D600DC1D50 /* PersonSearchDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonSearchDataGetter.swift; sourceTree = "<group>"; };
@@ -562,6 +574,7 @@
 		40E78E151DD31A86000A3776 /* f4s-workexperience */ = {
 			isa = PBXGroup;
 			children = (
+				FC771F4B2416292900AD6317 /* CompanyFileParser */,
 				FC67711121258448000B0870 /* Assets */,
 				FC04B860233271720034A60E /* Builders */,
 				40E78E1F1DD31A86000A3776 /* LaunchScreen.storyboard */,
@@ -920,6 +933,7 @@
 				FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */,
 				FC92567A1F8F70D100FF9841 /* InterestsModel.swift */,
 				FCFC06AC23225B9E003C59C8 /* LatLon+Extensions.swift */,
+				FCE285C624111BF000AB9FD3 /* MapModelManager.swift */,
 			);
 			name = "F4SMap models";
 			sourceTree = "<group>";
@@ -953,19 +967,11 @@
 			path = HiddenDebugScreen;
 			sourceTree = "<group>";
 		};
-		FC39013F234C9108009A9F7B /* SQLite models and services */ = {
-			isa = PBXGroup;
-			children = (
-				205EB20A1DDB161D00034424 /* DatabaseOperations.swift */,
-			);
-			name = "SQLite models and services";
-			sourceTree = "<group>";
-		};
 		FC3F3921222931630046F8F8 /* Coordinator tests */ = {
 			isa = PBXGroup;
 			children = (
-				FC9B286F2343328600BB694B /* TabBarCoordinatorTests.swift */,
 				FC1E6A48221714B800DC335B /* AppCoordinatorTests.swift */,
+				FC9B286F2343328600BB694B /* TabBarCoordinatorTests.swift */,
 				FC8E3F4922D33A4C00102C37 /* VersionCheckCoordinatorTests.swift */,
 				FC9B28712343331100BB694B /* TestMasterBuilder.swift */,
 			);
@@ -1017,7 +1023,6 @@
 		FC62FF9620EF753A003E52C5 /* Database models and services */ = {
 			isa = PBXGroup;
 			children = (
-				FC39013F234C9108009A9F7B /* SQLite models and services */,
 				FC99BDC620CFD2C300278DDE /* Coredata services */,
 				40E78E471DD32840000A3776 /* CoreData models */,
 			);
@@ -1041,6 +1046,34 @@
 				FC72219C20FE248400F10953 /* Fastfile */,
 			);
 			path = fastlane;
+			sourceTree = "<group>";
+		};
+		FC771F4B2416292900AD6317 /* CompanyFileParser */ = {
+			isa = PBXGroup;
+			children = (
+				FC771F4C2416294D00AD6317 /* Logic */,
+			);
+			name = CompanyFileParser;
+			sourceTree = "<group>";
+		};
+		FC771F4C2416294D00AD6317 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				FC771F4D2416294D00AD6317 /* ComanyFileParser.swift */,
+				FC771F4E2416294D00AD6317 /* Common.swift */,
+				FC771F4F2416294D00AD6317 /* PinRepository.swift */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		FC771F532416297900AD6317 /* CompanyFileParserTests */ = {
+			isa = PBXGroup;
+			children = (
+				FC771F542416299A00AD6317 /* PinDownloadFileParserTests.swift */,
+				FC771F552416299B00AD6317 /* PinRepositoryTests.swift */,
+				FC771F562416299B00AD6317 /* Common.swift */,
+			);
+			path = CompanyFileParserTests;
 			sourceTree = "<group>";
 		};
 		FC8E303620F4A5DF006059DE /* F4SLogger */ = {
@@ -1131,6 +1164,7 @@
 		FCFE450F2250CAD600C38436 /* Workfinder main module tests */ = {
 			isa = PBXGroup;
 			children = (
+				FC771F532416297900AD6317 /* CompanyFileParserTests */,
 				FC3F3921222931630046F8F8 /* Coordinator tests */,
 				FCC85B2220EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift */,
 			);
@@ -1378,7 +1412,6 @@
 				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
-				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -1390,7 +1423,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -1427,6 +1459,7 @@
 				FCC9D13D1FC82B010081F7B5 /* StarRatingView.swift in Sources */,
 				FC21BE3D220F53EB00A0A389 /* FilterButton.swift in Sources */,
 				40C6DDF41E03F445000F8806 /* UserInfoDB.swift in Sources */,
+				FC771F522416294D00AD6317 /* PinRepository.swift in Sources */,
 				FC3CD1DA221566F200F91B50 /* Geocoding.swift in Sources */,
 				40E78E791DD32BE7000A3776 /* DrawerVisualState.swift in Sources */,
 				40C1A5201DDF5ACE000F80AA /* GMUWrappingDictionaryKey.m in Sources */,
@@ -1437,6 +1470,7 @@
 				FCA53B961FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift in Sources */,
 				40C1A51D1DDF5ACE000F80AA /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				FCEE5E1E2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift in Sources */,
+				FC771F502416294D00AD6317 /* ComanyFileParser.swift in Sources */,
 				40C1A51F1DDF5ACE000F80AA /* GMUStaticCluster.m in Sources */,
 				FC1DC06B21FE142D009ABC60 /* AppCoordinator.swift in Sources */,
 				204203EE1E4B16D7007C7409 /* ShortlistDBOperations.swift in Sources */,
@@ -1448,7 +1482,6 @@
 				40E78EA01DD5E208000A3776 /* LocationHelper.swift in Sources */,
 				40C1A5231DDF5ACE000F80AA /* POIItem.m in Sources */,
 				40C1A52D1DE84410000F80AA /* TriangleView.swift in Sources */,
-				205EB20B1DDB161D00034424 /* DatabaseOperations.swift in Sources */,
 				FCCD6AEB1FBB4B8A0088D7C7 /* CompanyInfoTableViewCell.swift in Sources */,
 				40C1A51E1DDF5ACE000F80AA /* GMUSimpleClusterAlgorithm.m in Sources */,
 				FC8E3F4822D3396A00102C37 /* VersionCheckCoordinator.swift in Sources */,
@@ -1477,6 +1510,7 @@
 				40E78E661DD32B94000A3776 /* TabBarCoordinator.swift in Sources */,
 				40E78E591DD32964000A3776 /* Entities.swift in Sources */,
 				204203EA1E4B110A007C7409 /* ShortlistDB.swift in Sources */,
+				FC771F512416294D00AD6317 /* Common.swift in Sources */,
 				FC06605523265FC300496FE2 /* CompanyCoordinatorParentProtocol+extensions.swift in Sources */,
 				2037B0A51DEC3C2000A9DE3E /* CoreDataBaseManager.swift in Sources */,
 				40E78E6F1DD32BD4000A3776 /* CustomMenuViewController.swift in Sources */,
@@ -1486,6 +1520,7 @@
 				FC21BE32220F53EB00A0A389 /* SearchDataSourcing.swift in Sources */,
 				40E78E831DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift in Sources */,
 				FCB46F02204FD86D00F0779F /* F4SLogViewController.swift in Sources */,
+				FCE285C724111BF000AB9FD3 /* MapModelManager.swift in Sources */,
 				FC21BE34220F53EB00A0A389 /* PlacesSearchDataSource.swift in Sources */,
 				FC25A05F1F850DF4002F51A9 /* F4SCompanyPin.swift in Sources */,
 				FCF0D16C1FBC244800F2AF1D /* PopupAnimator.swift in Sources */,
@@ -1518,6 +1553,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC771F592416299B00AD6317 /* Common.swift in Sources */,
+				FC771F572416299B00AD6317 /* PinDownloadFileParserTests.swift in Sources */,
+				FC771F582416299B00AD6317 /* PinRepositoryTests.swift in Sources */,
 				FC8E3F4A22D33A4C00102C37 /* VersionCheckCoordinatorTests.swift in Sources */,
 				FCFBD0242250DB4D00A9361D /* F4SDatabaseDownloadManagerTests.swift in Sources */,
 				FC9B28702343328600BB694B /* TabBarCoordinatorTests.swift in Sources */,

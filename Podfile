@@ -9,7 +9,6 @@ target 'f4s-workexperience' do
     pod 'ReachabilitySwift'
     pod 'XCGLogger'
     pod 'KeychainSwift'
-    pod 'SQLite.swift'
     pod 'GoogleMaps'
     pod 'GooglePlaces'
     pod 'Bugsnag'

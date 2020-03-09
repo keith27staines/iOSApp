@@ -22,6 +22,7 @@ enum CamerWillMoveAction {
 
 class MapViewController: UIViewController {
     
+    var mapModelManager = MapModelManager()
     let screenName = ScreenName.map
     weak var coordinator: SearchCoordinator?
     
@@ -142,32 +143,6 @@ class MapViewController: UIViewController {
     /// The set of all pins currently added to the map
     var emplacedCompanyPins: F4SCompanyPinSet = []
     
-    /// The list of currently favourited companies
-    var favouriteList: [Shortlist] = [] {
-        didSet {
-            let companyUuids = favouriteList.map { (shortlist) -> F4SUUID in
-                return shortlist.companyUuid
-            }
-            var newFavourites = F4SCompanyPinSet()
-            for uuid in companyUuids {
-                if let pin = unfilteredMapModel?.allPinsByCompanyUuid[uuid] {
-                    newFavourites.insert(pin)
-                }
-            }
-            favouriteSet = newFavourites
-        }
-    }
-    
-    /// The favourites last known to this view
-    var previousFavouriteSet: F4SCompanyPinSet?
-    
-    /// Updated set of favourites
-    var favouriteSet: Set<F4SCompanyPin> = Set<F4SCompanyPin>() {
-        didSet {
-            self.previousFavouriteSet = favouriteSet
-        }
-    }
-    
     /// The company currently selected by the user (if any)
     var selectedCompany: Company?
     
@@ -196,7 +171,6 @@ class MapViewController: UIViewController {
         log?.screen(screenName)
         adjustNavigationBar()
         displayRefineSearchLabelAnimated()
-        favouriteList = ShortlistDBOperations.sharedInstance.getShortlist()
     }
     
     var hasMovedToBestPosition: Bool = false
@@ -288,7 +262,6 @@ extension MapViewController {
     /// 2. emplacedCompanyPins
     fileprivate func addPinToMap(pin: F4SCompanyPin) {
         if !emplacedCompanyPins.contains(pin) {
-            pin.isFavourite = favouriteSet.contains(pin)
             clusterManager.add(pin)
             emplacedCompanyPins.insert(pin)
         }
@@ -874,7 +847,7 @@ extension MapViewController {
     
     /// Returns the Company corresponding to the specified pin
     func companyFromPin(pin: F4SCompanyPin) -> Company? {
-        return DatabaseOperations.sharedInstance.companyWithId(pin.companyId)
+        return nil
     }
     
     /// Sets the userLocation by transforming a place id (or the address string if the place is not provided, or does not correspond to a google places id) into a location
@@ -1001,7 +974,6 @@ extension MapViewController {
     ///
     /// - parameter completion: Call back when the reload is complete
     func reloadMapFromDatabase(completion: @escaping () -> Void ) {
-        self.favouriteList = ShortlistDBOperations.sharedInstance.getShortlist()
         self.createUnfilteredMapModelFromDatabase { [weak self] unfilteredMapModel in
             guard let strongSelf = self else { return }
             strongSelf.unfilteredMapModel = unfilteredMapModel
@@ -1071,11 +1043,12 @@ extension MapViewController : SearchViewDelegate {
         case .searchingPeople:
             print("Display person: \(item.matchOnText)")
         case .searchingCompany:
-            guard
-                let uuid = item.uuidString,
-                let company = DatabaseOperations.sharedInstance.companyWithUUID(uuid) else { return }
-            log?.track(event: .mapSearchShowCompanyTap, properties: nil)
-            coordinator?.showDetail(company: company, originScreen: ScreenName.companySearch)
+            return
+//            guard
+//                let uuid = item.uuidString,
+//                let company = DatabaseOperations.sharedInstance.companyWithUUID(uuid) else { return }
+//            log?.track(event: .mapSearchShowCompanyTap, properties: nil)
+//            coordinator?.showDetail(company: company, originScreen: ScreenName.companySearch)
         }
         searchView.minimizeSearchUI()
     }

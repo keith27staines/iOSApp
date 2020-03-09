@@ -93,9 +93,6 @@ PODS:
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - Protobuf (3.10.0)
   - ReachabilitySwift (5.0.0)
-  - SQLite.swift (0.12.2):
-    - SQLite.swift/standard (= 0.12.2)
-  - SQLite.swift/standard (0.12.2)
   - XCGLogger (7.0.0):
     - XCGLogger/Core (= 7.0.0)
   - XCGLogger/Core (7.0.0):
@@ -110,7 +107,6 @@ DEPENDENCIES:
   - GooglePlaces
   - KeychainSwift
   - ReachabilitySwift
-  - SQLite.swift
   - XCGLogger
 
 SPEC REPOS:
@@ -136,7 +132,6 @@ SPEC REPOS:
     - ObjcExceptionBridging
     - Protobuf
     - ReachabilitySwift
-    - SQLite.swift
     - XCGLogger
 
 SPEC CHECKSUMS:
@@ -161,9 +156,8 @@ SPEC CHECKSUMS:
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
-  SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   XCGLogger: 0434f15e3909cdc450bb63faf638b8792ab782ab
 
-PODFILE CHECKSUM: f18ff9b3f54a84ed2e0b633de013eafd77a9756a
+PODFILE CHECKSUM: 9fcd2c50a57931c2f87054eca479ce239c38d79b
 
 COCOAPODS: 1.8.3
