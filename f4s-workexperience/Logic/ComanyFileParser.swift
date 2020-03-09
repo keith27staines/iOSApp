@@ -6,8 +6,6 @@
 //  Copyright © 2020 Founders4Schools. All rights reserved.
 //
 
-import Foundation
-
 
 // PinDownloadFile is company-locations-and-tags.jsonl
 

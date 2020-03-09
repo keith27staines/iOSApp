@@ -31,5 +31,9 @@ public class MapModelManager {
     public func refreshMapModel(completion: () -> WEXResult<MapModelManager, Error>) {
         
     }
+    
+    public func promoteStagedFile() {
+        
+    }
 
 }

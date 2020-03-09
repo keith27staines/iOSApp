@@ -23,6 +23,7 @@ enum CamerWillMoveAction {
 class MapViewController: UIViewController {
     
     var mapModelManager = MapModelManager()
+    var pinRepository = PinRepository(allPins: [])
     let screenName = ScreenName.map
     weak var coordinator: SearchCoordinator?
     
@@ -909,33 +910,29 @@ extension MapViewController {
                                 completed: @escaping (MapModel) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let strongSelf = self else { return }
-            let filteredModel = MapModel(allCompanyPinsSet: unfilteredModel.allCompanyPins,
-                                         allInterests: unfilteredModel.interestsModel.allInterests,
-                                         filtereredBy: interestFilterSet,
-                                         clusterColor: strongSelf.clusterColor)
+            let filteredModel = MapModel(
+                pinRepository: strongSelf.pinRepository,
+                allInterests: unfilteredModel.interestsModel.allInterests,
+                filtereredBy: interestFilterSet,
+                clusterColor: strongSelf.clusterColor)
             completed(filteredModel)
         }
     }
     
-    /// Asynchronously creates an unfiltered map model by reading directly from the databas
+    /// Asynchronously creates an unfiltered map model by reading directly from the database
     ///
     /// - parameter completion: Calls back with the newly created MapModel
     func createUnfilteredMapModelFromDatabase(completion: @escaping (MapModel) -> Void ) {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            guard let strongSelf = self else { return }
-            let dbOps = DatabaseOperations.sharedInstance
-            dbOps.getAllCompanies(completed: { companies in
-                dbOps.getAllInterests(completed: { (interests) in
-                    let mapModel = MapModel(
-                        allCompanies: companies,
-                        allInterests:interests,
-                        selectedInterests: nil,
-                        clusterColor: strongSelf.clusterColor)
-                    DispatchQueue.main.async {
-                        completion(mapModel)
-                    }
-                })
-            })
+            guard let self = self else { return }
+            let mapModel = MapModel(
+                pinRepository: self.pinRepository,
+                allInterests: [:],
+                filtereredBy: [],
+                clusterColor: self.clusterColor)
+            DispatchQueue.main.async {
+                completion(mapModel)
+            }
         }
     }
 
@@ -957,14 +954,14 @@ extension MapViewController {
     
     func reloadMap() {
         DispatchQueue.main.async { [weak self] in
-            guard let strongSelf = self else { return }
-            strongSelf.userMessageHandler.showLoadingOverlay(strongSelf.view)
-            strongSelf.userMessageHandler.updateOverlayCaption("Updating map...")
-            DatabaseOperations.sharedInstance.promoteStagedDatabase()
-            strongSelf.reloadMapFromDatabase {
+            guard let self = self else { return }
+            self.userMessageHandler.showLoadingOverlay(self.view)
+            self.userMessageHandler.updateOverlayCaption("Updating map...")
+            self.mapModelManager.promoteStagedFile()
+            self.reloadMapFromDatabase {
                 DispatchQueue.main.async {
-                    strongSelf.moveCameraToBestPosition()
-                    strongSelf.userMessageHandler.hideLoadingOverlay()
+                    self.moveCameraToBestPosition()
+                    self.userMessageHandler.hideLoadingOverlay()
                 }
             }
         }

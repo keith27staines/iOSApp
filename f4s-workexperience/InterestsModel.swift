@@ -14,26 +14,18 @@ public typealias F4SInterestCounts = [F4SInterest:Int]
 
 public struct InterestsModel {
     
-    static func interestIdSet(from interestSet: F4SInterestSet) -> F4SInterestIdSet {
-        var interestIds = F4SInterestIdSet()
-        for interest in interestSet {
-            interestIds.insert(Int64(interest.id))
-        }
-        return interestIds
-    }
+    /// A dictionary of all interests, keyed by their uuid
+    public let allInterests: [F4SUUID: F4SInterest]
     
-    /// A dictionary of all interests, keyed by their id
-    public let allInterests: [Int64: F4SInterest]
-    
-    public init(allInterests: [Int64: F4SInterest]) {
+    public init(allInterests: [F4SUUID: F4SInterest]) {
         self.allInterests = allInterests
     }
     
     /// returns a set of interests corresponding to the set of interest ids
-    public func interestSetFromIdSet(_ ids: Set<Int64>) -> F4SInterestSet {
+    public func validInterestsFrom(uncheckedInterests: F4SInterestSet) -> F4SInterestSet {
         var interestSet = F4SInterestSet()
-        for id in ids {
-            guard let interest = allInterests[id] else { continue }
+        for uncheckedInterest in uncheckedInterests {
+            guard let interest = allInterests[uncheckedInterest.uuid] else { continue }
             interestSet.insert(interest)
         }
         return interestSet
@@ -53,7 +45,7 @@ public struct InterestsModel {
         var interestCounts = [F4SInterest:Int]()
         var totalPossibilities: Int = 0
         for pin in companyPins {
-            let pinInterests = interestSetFromIdSet(pin.interestIds)
+            let pinInterests = interestSetFromIdSet(pin.interestUuids)
             if selectedInterests.isEmpty || !selectedInterests.intersection(pinInterests).isEmpty {
                 // If the user hasn't selected any interests then all companies count as possibilities.
                 // If the user has selected at least one interest then a company only counts as a possibility if it shares one of those interests

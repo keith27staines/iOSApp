@@ -1059,8 +1059,8 @@
 		FC771F4C2416294D00AD6317 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
-				FC771F4D2416294D00AD6317 /* ComanyFileParser.swift */,
 				FC771F4E2416294D00AD6317 /* Common.swift */,
+				FC771F4D2416294D00AD6317 /* ComanyFileParser.swift */,
 				FC771F4F2416294D00AD6317 /* PinRepository.swift */,
 			);
 			path = Logic;

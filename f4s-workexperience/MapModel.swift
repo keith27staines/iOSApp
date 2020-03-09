@@ -10,30 +10,20 @@ import Foundation
 import WorkfinderCommon
 
 public typealias F4SCompanyPinSet = Set<F4SCompanyPin>
-public typealias F4SInterestIdSet = Set<Int64>
+public typealias F4SUUIDSet = Set<F4SUUID>
 
 // MARK:-
 public struct MapModel {
-    
+    weak var pinRepository: PinRepository?
     var clusterColor: UIColor
     
     /// All company pins that can ever be obtained from this model
-    public let allCompanyPins: F4SCompanyPinSet
-    
-    /// Returns a dictionary of company pins keyed by company id
-    public lazy var allPinsByCompanyId: [Int64:F4SCompanyPin] = {
-        var allPins = [Int64:F4SCompanyPin]()
-        for pin in self.allCompanyPins {
-            let id = pin.companyId
-            allPins[id] = pin
-        }
-        return allPins
-    }()
+    public let allCompanyPinsSet: F4SCompanyPinSet
 
     /// Returns a dictionary of company pins keyed by company uuid
     public lazy var allPinsByCompanyUuid: [F4SUUID:F4SCompanyPin] = {
         var allPins = [F4SUUID:F4SCompanyPin]()
-        for pin in self.allCompanyPins {
+        for pin in self.allCompanyPinsSet {
             let uuid = pin.companyUuid
             allPins[uuid] = pin
         }
@@ -49,25 +39,24 @@ public struct MapModel {
     /// Underlying spatial partitioning datastructure
     fileprivate let quadTree: F4SPointQuadTree
     
-    public init(allCompanyPinsSet: F4SCompanyPinSet,
-                allInterests: [Int64: F4SInterest],
+    public init(pinRepository: PinRepository,
+                allInterests: [F4SUUID: F4SInterest],
                 filtereredBy interestsSet: F4SInterestSet,
                 clusterColor: UIColor) {
-        self.allCompanyPins = allCompanyPinsSet
+        self.pinRepository = pinRepository
+        self.interestsModel = InterestsModel(allInterests: allInterests)
+        let companyPins = pinRepository.allPins.map({ (pin) -> F4SCompanyPin in
+            return F4SCompanyPin(pin: pin, tintColor: clusterColor)
+        })
+        self.allCompanyPinsSet = F4SCompanyPinSet(companyPins)
         self.clusterColor = clusterColor
         let filteredCompanyPinList: [F4SCompanyPin]
-        let selectedInterestIdSet: F4SInterestIdSet = InterestsModel.interestIdSet(from: interestsSet)
-        if !interestsSet.isEmpty {
-            filteredCompanyPinList = allCompanyPinsSet.filter({ pin -> Bool in
-                let pinInterestIdsSet = Set(pin.interestIds)
-                let intersection = pinInterestIdsSet.intersection(selectedInterestIdSet)
-                return !intersection.isEmpty
-            })
-            filteredCompanyPinSet = F4SCompanyPinSet(filteredCompanyPinList)
-        } else {
-            filteredCompanyPinSet = allCompanyPinsSet
-        }
-        self.interestsModel = InterestsModel(allInterests: allInterests)
+        let selectedInterestsSet = interestsModel.validInterestsFrom(uncheckedInterests:interestsSet)
+        filteredCompanyPinList = self.pinRepository!.pins(interestedInAnyOf: selectedInterestsSet).map({ (pinJson) -> F4SCompanyPin in
+            return F4SCompanyPin(pin: pinJson, tintColor: clusterColor)
+        })
+        filteredCompanyPinSet = F4SCompanyPinSet(filteredCompanyPinList)
+
         self.quadTree = MapModel.createQuadtree(filteredCompanyPinSet)
     }
         
@@ -91,7 +80,7 @@ public extension MapModel {
         DispatchQueue.global(qos: .userInitiated).async {
             var interestSet = F4SInterestSet()
             for companyPin in self.companyPinSetInsideBounds(bounds) {
-                interestSet = interestSet.union(self.interests(from: companyPin.interestIds))
+                interestSet = interestSet.union(self.interests(from: companyPin.interestUuids))
             }
             completion(interestSet)
         }
@@ -232,19 +221,19 @@ extension MapModel {
         return qt
     }
     
-    /// Returns a set of interests from the specified list of interest ids
-    func interests(from ids: [Int64]) -> F4SInterestSet {
+    /// Returns a set of interests from the specified list of interest UUIDs
+    func interests(from uuids: [F4SUUID]) -> F4SInterestSet {
         var interestSet = F4SInterestSet()
-        for id in ids {
-            guard let interest = interestsModel.allInterests[id] else { continue }
+        for uuid in uuids {
+            guard let interest = interestsModel.allInterests[uuid] else { continue }
             interestSet.insert(interest)
         }
         return interestSet
     }
     /// Returns a set of interests from the specified set of interest ids
-    func interests(from ids: Set<Int64>) -> F4SInterestSet {
+    func interests(from uuids: F4SUUIDSet) -> F4SInterestSet {
         var interestSet = F4SInterestSet()
-        for id in ids {
+        for id in uuids {
             guard let interest = interestsModel.allInterests[id] else { continue }
             interestSet.insert(interest)
         }

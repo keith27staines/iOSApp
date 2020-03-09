@@ -7,9 +7,6 @@ public struct F4SInterest : Codable {
         return lhs.uuid == rhs.uuid
     }
     
-    /// Database id
-    public var id: Int
-    /// A UUID that identifies the interest (use to match YPs to companies)
     public var uuid: F4SUUID
     /// User-facing name or description of the interest
     public var name: String
@@ -20,8 +17,7 @@ public struct F4SInterest : Codable {
     ///   - id: The database id
     ///   - uuid: Identifies the interest (used in matching YPs to companies)
     ///   - name: Yser-facing name of the interest
-    public init(id: Int = 0, uuid: F4SUUID = "", name: String = "") {
-        self.id = id
+    public init(uuid: F4SUUID = "", name: String = "") {
         self.uuid = uuid
         self.name = name
     }
@@ -29,7 +25,6 @@ public struct F4SInterest : Codable {
 
 extension F4SInterest {
     private enum CodingKeys : String, CodingKey {
-        case id
         case uuid
         case name
     }

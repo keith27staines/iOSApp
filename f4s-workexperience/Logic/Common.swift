@@ -6,11 +6,11 @@
 //  Copyright © 2020 Founders4Schools. All rights reserved.
 //
 
-import Foundation
+import WorkfinderCommon
 
 public struct PinJson: Codable, Hashable {
     var companyUuid: String
     var lat: Double
     var lon: Double
-    var tags: [String]
+    var tags: [F4SUUID]
 }
