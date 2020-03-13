@@ -12,6 +12,7 @@ target 'f4s-workexperience' do
     pod 'GoogleMaps'
     pod 'GooglePlaces'
     pod 'Bugsnag'
+    pod 'DataCompression'
     pod 'Firebase/Core'
     pod 'Firebase/Analytics'
     pod 'Firebase/RemoteConfig'

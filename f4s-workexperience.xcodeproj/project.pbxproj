@@ -638,7 +638,6 @@
 			isa = PBXGroup;
 			children = (
 				FC62FF8320EF6CEF003E52C5 /* F4SAPIServices */,
-				FC25A05D1F850DAC002F51A9 /* F4SMap models */,
 				FC62FF9520EF7235003E52C5 /* F4SMessage models */,
 				FC62FF8520EF6D51003E52C5 /* F4SUser models */,
 			);
@@ -759,6 +758,7 @@
 		FC0B4074226B15C700D992AC /* Map View */ = {
 			isa = PBXGroup;
 			children = (
+				FC25A05D1F850DAC002F51A9 /* F4SMap models */,
 				FC771F4B2416292900AD6317 /* CompanyFileParser */,
 				40E78E931DD391F3000A3776 /* MapView.storyboard */,
 				40E78E971DD39275000A3776 /* MapViewController.swift */,
@@ -926,6 +926,8 @@
 		FC25A05D1F850DAC002F51A9 /* F4SMap models */ = {
 			isa = PBXGroup;
 			children = (
+				FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */,
+				FC99BDC920D170CA00278DDE /* F4SCompanyDownloadManager.swift */,
 				FCC753ED1F80F26200E9ECD6 /* MapModel.swift */,
 				FC99B7E21F826D1400E2D5F0 /* LatLon.swift */,
 				FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */,
@@ -933,6 +935,7 @@
 				FCFC06AC23225B9E003C59C8 /* LatLon+Extensions.swift */,
 			);
 			name = "F4SMap models";
+			path = ../../../../../../..;
 			sourceTree = "<group>";
 		};
 		FC2D975A22185D0C00763B06 /* Use Cases */ = {
@@ -995,8 +998,6 @@
 		FC62FF8320EF6CEF003E52C5 /* F4SAPIServices */ = {
 			isa = PBXGroup;
 			children = (
-				FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */,
-				FC99BDC920D170CA00278DDE /* F4SCompanyDownloadManager.swift */,
 			);
 			path = F4SAPIServices;
 			sourceTree = "<group>";
@@ -1405,6 +1406,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-f4s-workexperience/Pods-f4s-workexperience-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Bugsnag/Bugsnag.framework",
+				"${BUILT_PRODUCTS_DIR}/DataCompression/DataCompression.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
@@ -1416,6 +1418,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bugsnag.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DataCompression.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",

@@ -2,6 +2,7 @@
 import Foundation
 import WorkfinderCommon
 import WorkfinderServices
+import DataCompression
 
 public class F4SCompanyDownloadManager  : NSObject, F4SCompanyDownloadManagerProtocol {
     
@@ -95,10 +96,10 @@ public class F4SCompanyDownloadManager  : NSObject, F4SCompanyDownloadManagerPro
     }
     
     public func start() {
-        beginUpdateLocalCompanyDatabaseIfNecessary()
+        beginCompanyFileDownloadIfNecessary()
     }
     
-    private func beginUpdateLocalCompanyDatabaseIfNecessary() {
+    private func beginCompanyFileDownloadIfNecessary() {
         guard companyFileDownloadService?.isDownloading == false else { return }
         guard isCompanyDownloadFileStale() == true else { return }
         beginCompanyFileDownload()
@@ -106,7 +107,7 @@ public class F4SCompanyDownloadManager  : NSObject, F4SCompanyDownloadManagerPro
     
     private func scheduleNextCheckAfter(delay: TimeInterval) {
         workerQueue.asyncAfter(deadline: DispatchTime.now() + delay, execute: { [weak self] in
-            self?.beginUpdateLocalCompanyDatabaseIfNecessary()
+            self?.beginCompanyFileDownloadIfNecessary()
         })
     }
     
@@ -155,17 +156,10 @@ extension F4SCompanyDownloadManager : F4SDownloadServiceDelegate {
                 try filemanager.removeItem(at: stagedCompanyDownloadFileUrl)
             }
             
-            guard let compressedData = NSData.init(contentsOf: tempUrl) else { return }
-            if #available(iOS 13.0, *) {
-                guard let decompressedData = try? compressedData.decompressed(using: .lzma) else { return }
-                decompressedData.write(to: stagedCompanyDownloadFileUrl, atomically: true)
-            } else {
-                return
-            }
-            
-            // Move newly downloaded database from its temporary download location to the staging position
-            // try FileManager.default.moveItem(at: tempUrl, to: stagedCompanyDownloadFileUrl)
-            
+            let compressedData = try Data(contentsOf: tempUrl)
+            guard let decompressedData = compressedData.decompress(withAlgorithm: Data.CompressionAlgorithm.lzma) else { return }
+            try decompressedData.write(to: stagedCompanyDownloadFileUrl)
+
             // Write downloadedDate to user defaults
             UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.companyDatabaseCreatedDate)
             
@@ -197,4 +191,7 @@ extension F4SCompanyDownloadManager : F4SDownloadServiceDelegate {
         let workingUrl: URL = FileHelper.fileInDocumentsDirectory(filename: workingName)
         return workingUrl
     }
+    
 }
+
+

@@ -1,5 +1,6 @@
 PODS:
   - Bugsnag (5.22.7)
+  - DataCompression (3.6.0)
   - Firebase/Analytics (6.9.0):
     - Firebase/Core
   - Firebase/Core (6.9.0):
@@ -100,6 +101,7 @@ PODS:
 
 DEPENDENCIES:
   - Bugsnag
+  - DataCompression
   - Firebase/Analytics
   - Firebase/Core
   - Firebase/RemoteConfig
@@ -112,6 +114,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Bugsnag
+    - DataCompression
     - Firebase
     - FirebaseABTesting
     - FirebaseAnalytics
@@ -136,6 +139,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Bugsnag: dff6ebf7d24f945bb8f050233c2f63e66bcf5f4f
+  DataCompression: 06628f9c807b6f152e0da37635633f62fc51dc77
   Firebase: 2d750c54cda57d5a6ae31212cfe5cc813c6be7e4
   FirebaseABTesting: 0d10f3cdc3fa00f3f175b5b56c1003c8e888299f
   FirebaseAnalytics: 5d9ccbf46ed25d3ec9304d263f85bddf1e93e2d2
@@ -158,6 +162,6 @@ SPEC CHECKSUMS:
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   XCGLogger: 0434f15e3909cdc450bb63faf638b8792ab782ab
 
-PODFILE CHECKSUM: 9fcd2c50a57931c2f87054eca479ce239c38d79b
+PODFILE CHECKSUM: 6b6d94d1a26190c53b297a9f2645eef03878995b
 
 COCOAPODS: 1.8.3
