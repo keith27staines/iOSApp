@@ -94,10 +94,12 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
 
 class ShareTemplateProvider: ShareTemplateProviderProtocol {
     func getBusinessesSocialShareTemplateOfType(_ type: SocialShare) -> String {
-        return DatabaseOperations.sharedInstance.getBusinessesSocialShareTemplateOfType(type: type)
+        //return DatabaseOperations.sharedInstance.getBusinessesSocialShareTemplateOfType(type: type)
+        return "No share template available"
     }
     
     func getBusinessesSocialShareSubjectTemplateOfType(_ type: SocialShare) -> String {
-        return DatabaseOperations.sharedInstance.getBusinessesSocialShareSubjectTemplateOfType(type: type)
+        //return DatabaseOperations.sharedInstance.getBusinessesSocialShareSubjectTemplateOfType(type: type)
+        return "No share template available"
     }
 }

@@ -181,7 +181,7 @@ public struct EnvironmentModel {
     
     static func makeStaging() -> EnvironmentModel {
         return EnvironmentModel(environment: .staging,
-                                serverString: "staging.workfinder.com",
+                                serverString: "staging.deprecated.workfinder.com",
                                 isEditable: false,
                                 connectionState: .connectable)
     }

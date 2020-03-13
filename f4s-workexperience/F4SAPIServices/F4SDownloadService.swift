@@ -79,9 +79,7 @@ public class F4SDownloadService : NSObject, F4SDownloadServiceProtocol {
 extension F4SDownloadService : URLSessionDownloadDelegate {
     
     public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
-        defer {
-            self.downloadTask = nil
-        }
+        defer { self.downloadTask = nil }
         
         let attempting = "Background download"
         let successCodes = 200...299

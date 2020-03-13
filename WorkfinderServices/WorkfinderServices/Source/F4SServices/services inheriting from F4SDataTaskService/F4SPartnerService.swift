@@ -6,6 +6,7 @@ public class F4SPartnerService : F4SDataTaskService, F4SPartnerServiceProtocol {
     }
 
     public func getPartners(completion: @escaping (F4SNetworkResult<[F4SPartner]>) -> ()) {
-        beginGetRequest(attempting: "Get partners", completion: completion)
+        //beginGetRequest(attempting: "Get partners", completion: completion)
+        completion(F4SNetworkResult.success([]))
     }
 }

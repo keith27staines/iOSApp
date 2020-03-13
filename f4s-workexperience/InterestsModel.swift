@@ -44,8 +44,8 @@ public struct InterestsModel {
                         companyPins: F4SCompanyPinSet) -> (Int,[F4SInterest:Int]) {
         var interestCounts = [F4SInterest:Int]()
         var totalPossibilities: Int = 0
-        for pin in companyPins {
-            let pinInterests = interestSetFromIdSet(pin.interestUuids)
+        for companyPin in companyPins {
+            let pinInterests = interestsSetFrom(interestsUuidSet: companyPin.interestUuids)
             if selectedInterests.isEmpty || !selectedInterests.intersection(pinInterests).isEmpty {
                 // If the user hasn't selected any interests then all companies count as possibilities.
                 // If the user has selected at least one interest then a company only counts as a possibility if it shares one of those interests
@@ -62,5 +62,11 @@ public struct InterestsModel {
             }
         }
         return (total: totalPossibilities, interestCounts: interestCounts)
+    }
+    
+    func interestsSetFrom(interestsUuidSet: F4SUUIDSet) -> F4SInterestSet {
+        return F4SInterestSet(interestsUuidSet.compactMap { (uuid) -> F4SInterest? in
+            return allInterests[uuid]
+        })
     }
 }

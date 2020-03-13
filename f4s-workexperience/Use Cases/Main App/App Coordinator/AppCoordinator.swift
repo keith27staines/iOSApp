@@ -42,7 +42,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     let tabBarCoordinatorFactory: TabbarCoordinatorFactoryProtocol
     var user: F4SUser { return injected.userRepository.load() }
     var userService: F4SUserServiceProtocol { return injected.userService}
-    var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol { return injected.databaseDownloadManager }
+    var databaseDownloadManager: F4SCompanyDownloadManagerProtocol { return injected.companyDownloadFileManager }
     var userNotificationService: UNService!
     var log: F4SAnalyticsAndDebugging { return injected.log }
     let localStore: LocalStorageProtocol

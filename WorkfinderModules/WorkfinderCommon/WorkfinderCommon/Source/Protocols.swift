@@ -1,19 +1,23 @@
 
 import Foundation
+
 public typealias BackgroundSessionCompletionHandler = () -> Void
-public protocol F4SDatabaseDownloadManagerProtocol : class {
+public typealias LaunchOptions = [UIApplication.LaunchOptionsKey: Any]
+
+public protocol F4SCompanyDownloadManagerProtocol : class {
+    var stagedCompanyDownloadFileUrl: URL { get }
     var backgroundSessionCompletionHandler: BackgroundSessionCompletionHandler? { get set }
-    var localDatabaseDatestamp: Date? { get }
+    var companyDownloadFileDatestamp: Date? { get }
     func start()
-    func registerObserver(_ observer: F4SCompanyDatabaseAvailabilityObserving)
-    func removeObserver(_ observer: F4SCompanyDatabaseAvailabilityObserving)
-    func ageOfLocalDatabase() -> TimeInterval
-    func isLocalDatabaseAvailable() -> Bool
+    func registerObserver(_ observer: F4SCompanyDownloadFileAvailabilityObserving)
+    func removeObserver(_ observer: F4SCompanyDownloadFileAvailabilityObserving)
+    func ageOfCompanyDownloadFile() -> TimeInterval
+    func isCompanyDownloadFileAvailable() -> Bool
 }
 
-public protocol F4SCompanyDatabaseAvailabilityObserving : class {
-    func newStagedDatabaseIsAvailable(url: URL)
-    func newDatabaseIsDownloading(progress: Double)
+public protocol F4SCompanyDownloadFileAvailabilityObserving : class {
+    func newCompanyDownloadFileHasBeenStaged(url: URL)
+    func newCompanyDownloadFileIsDownloading(progress: Double)
 }
 
 public protocol AppInstallationUuidLogicProtocol : class {
@@ -21,4 +25,4 @@ public protocol AppInstallationUuidLogicProtocol : class {
     func ensureDeviceIsRegistered(completion: @escaping (F4SNetworkResult<F4SRegisterDeviceResult>)->())
 }
 
-public typealias LaunchOptions = [UIApplication.LaunchOptionsKey: Any]
+

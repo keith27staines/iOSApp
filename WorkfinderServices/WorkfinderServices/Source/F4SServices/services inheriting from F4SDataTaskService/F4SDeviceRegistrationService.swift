@@ -11,11 +11,12 @@ public class F4SDeviceRegistrationService : F4SDataTaskService, F4SDeviceRegistr
     }
     
     public func registerDevice(anonymousUser: F4SAnonymousUser, completion: @escaping ((F4SNetworkResult<F4SRegisterDeviceResult>) -> ())) {
-        let attempting = "Register device"
-        beginSendRequest(verb: .post, objectToSend: anonymousUser, attempting: attempting) { [weak self]
-            dataResult in
-            self?.processResult(dataResult, attempting: attempting, completion: completion)
-        }
+//        let attempting = "Register device"
+        completion(F4SNetworkResult.success(F4SRegisterDeviceResult(userUuid: "device_uuid")))
+//        beginSendRequest(verb: .post, objectToSend: anonymousUser, attempting: attempting) { [weak self]
+//            dataResult in
+//            self?.processResult(dataResult, attempting: attempting, completion: completion)
+//        }
     }
 }
 

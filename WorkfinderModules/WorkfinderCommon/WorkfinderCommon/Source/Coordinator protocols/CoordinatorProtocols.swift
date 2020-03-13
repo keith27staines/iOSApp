@@ -74,7 +74,7 @@ public protocol CoreInjectionProtocol : class {
     var userService: F4SUserServiceProtocol { get }
     var userStatusService: F4SUserStatusServiceProtocol { get }
     var userRepository: F4SUserRepositoryProtocol { get }
-    var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol { get }
+    var companyDownloadFileManager: F4SCompanyDownloadManagerProtocol { get }
     var contentService: F4SContentServiceProtocol { get }
     var log: F4SAnalyticsAndDebugging { get }
     var appSettings: AppSettingProvider { get }

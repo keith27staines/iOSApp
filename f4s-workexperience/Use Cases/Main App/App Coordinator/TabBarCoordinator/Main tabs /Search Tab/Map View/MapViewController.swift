@@ -22,7 +22,7 @@ enum CamerWillMoveAction {
 
 class MapViewController: UIViewController {
     
-    var mapModelManager = MapModelManager()
+    var companyFileDownloadManager: F4SCompanyDownloadManagerProtocol?
     var pinRepository = PinRepository(allPins: [])
     let screenName = ScreenName.map
     weak var coordinator: SearchCoordinator?
@@ -152,17 +152,15 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         _ = searchView
-        if let dbManager = (UIApplication.shared.delegate as? AppDelegate)?.databaseDownloadManager {
-            dbManager.registerObserver(self)
-        }
+        guard let companyFileDownloadManager = self.companyFileDownloadManager else { return }
+        companyFileDownloadManager.registerObserver(self)
         
         adjustAppeareance()
         setupMap()
         setupReachability(nil, useClosures: true)
         startNotifier()
-        if !(UIApplication.shared.delegate as! AppDelegate).databaseDownloadManager!.isLocalDatabaseAvailable() {
+        if companyFileDownloadManager.isCompanyDownloadFileAvailable() {
             userMessageHandler.showLoadingOverlay(self.view)
-        } else {
             reloadMap()
         }
     }
@@ -186,7 +184,7 @@ class MapViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        if let dbManager = (UIApplication.shared.delegate as? AppDelegate)?.databaseDownloadManager {
+        if let dbManager = (UIApplication.shared.delegate as? AppDelegate)?.companyFileDownloadManager {
             dbManager.removeObserver(self)
         }
         super.viewWillDisappear(animated)
@@ -805,8 +803,8 @@ extension MapViewController {
     @objc func reachabilityChanged(_ note: Notification) {
         let reachability = note.object as! Reachability
         if reachability.isReachableByAnyMeans {
-            if let appDelegate = UIApplication.shared.delegate as? AppDelegate, let dbManager = appDelegate.databaseDownloadManager {
-                if !dbManager.isLocalDatabaseAvailable() {
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate, let dbManager = appDelegate.companyFileDownloadManager {
+                if !dbManager.isCompanyDownloadFileAvailable() {
                     dbManager.start()
                     userMessageHandler.showLoadingOverlay(view)
                 }
@@ -935,7 +933,49 @@ extension MapViewController {
             }
         }
     }
-
+    
+    func reloadMap() {
+        self.userMessageHandler.showLoadingOverlay(self.view)
+        self.userMessageHandler.updateOverlayCaption("Updating map...")
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let self = self else { return }
+            self.buildMapStructuresFromCompanyFile {
+                DispatchQueue.main.async {
+                    self.moveCameraToBestPosition()
+                    self.userMessageHandler.hideLoadingOverlay()
+                }
+            }
+        }
+    }
+    
+    /// Asynchronously reloads the map from datastructures read from the database
+    ///
+    /// - parameter completion: Call back when the reload is complete
+    func buildMapStructuresFromCompanyFile(completion: @escaping () -> Void ) {
+        let pins: [PinJson]
+        guard let url = companyFileDownloadManager?.stagedCompanyDownloadFileUrl else { return }
+        do {
+            let fileString = try String(contentsOf: url)
+            let parser = try PinDownloadFileParser(fileString: fileString)
+            pins = parser.extractPins()
+            pinRepository = PinRepository(allPins: pins)
+        } catch {
+            return
+        }
+        
+        self.createUnfilteredMapModelFromDatabase { [weak self] unfilteredMapModel in
+            guard let self = self else { return }
+            self.unfilteredMapModel = unfilteredMapModel
+            let interestFilterSet = self.interestsRepository.loadInterestsSet()
+            self.createFilteredMapModel(unfilteredModel: unfilteredMapModel, interestFilterSet: interestFilterSet, completed: { (filteredMapModel) in
+                self.filteredMapModel = filteredMapModel
+                self.reloadMapFromModel(mapModel: filteredMapModel, completed: {
+                    completion()
+                })
+            })
+        }
+    }
+    
     /// Asynchronously reloads the map from the specified mapmodel
     ///
     /// - parameter completed: Calls back when the reload is complete
@@ -951,38 +991,6 @@ extension MapViewController {
             }
         }
     }
-    
-    func reloadMap() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.userMessageHandler.showLoadingOverlay(self.view)
-            self.userMessageHandler.updateOverlayCaption("Updating map...")
-            self.mapModelManager.promoteStagedFile()
-            self.reloadMapFromDatabase {
-                DispatchQueue.main.async {
-                    self.moveCameraToBestPosition()
-                    self.userMessageHandler.hideLoadingOverlay()
-                }
-            }
-        }
-    }
-    
-    /// Asynchronously reloads the map from datastructures read from the database
-    ///
-    /// - parameter completion: Call back when the reload is complete
-    func reloadMapFromDatabase(completion: @escaping () -> Void ) {
-        self.createUnfilteredMapModelFromDatabase { [weak self] unfilteredMapModel in
-            guard let strongSelf = self else { return }
-            strongSelf.unfilteredMapModel = unfilteredMapModel
-            let interestFilterSet = strongSelf.interestsRepository.loadInterestsSet()
-            strongSelf.createFilteredMapModel(unfilteredModel: unfilteredMapModel, interestFilterSet: interestFilterSet, completed: { (filteredMapModel) in
-                strongSelf.filteredMapModel = filteredMapModel
-                strongSelf.reloadMapFromModel(mapModel: filteredMapModel, completed: {
-                    completion()
-                })
-            })
-        }
-    }
 }
 
 // MARK:- Conform to UIViewControllerTransitioningDelegate
@@ -996,9 +1004,7 @@ extension MapViewController : UIViewControllerTransitioningDelegate {
         popupAnimator.popupAnimatorDidDismiss = { [weak self] _ in
             self?.pressedPinOrCluster?.removeFromSuperview()
         }
-
         popupAnimator.originFrame = pressedPinOrCluster!.frame
-        
         popupAnimator.presenting = true
         return popupAnimator
     }
@@ -1009,15 +1015,16 @@ extension MapViewController : UIViewControllerTransitioningDelegate {
     }
 }
 
-extension MapViewController : F4SCompanyDatabaseAvailabilityObserving {
-    func newStagedDatabaseIsAvailable(url: URL) {
+extension MapViewController : F4SCompanyDownloadFileAvailabilityObserving {
+    
+    func newCompanyDownloadFileHasBeenStaged(url: URL) {
         guard FileHelper.fileExists(path: url.path) else {
             return
         }
         reloadMap()
     }
     
-    func newDatabaseIsDownloading(progress: Double) {
+    func newCompanyDownloadFileIsDownloading(progress: Double) {
         DispatchQueue.main.async { [weak self] in
             let formatter = NumberFormatter()
             formatter.maximumFractionDigits = 0

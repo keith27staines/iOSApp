@@ -9,7 +9,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var deviceToken: String?
     var masterBuilder: MasterBuilder!
-    var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol!
+    var companyFileDownloadManager: F4SCompanyDownloadManagerProtocol!
     var appCoordinator: AppCoordinatorProtocol!
     
     lazy var userService: F4SUserServiceProtocol = { return self.masterBuilder.userService }()
@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func startApp() {
         appCoordinator = self.masterBuilder.buildAppCoordinator()
         appCoordinator.start()
-        databaseDownloadManager = self.masterBuilder.databaseDownloadManager
+        companyFileDownloadManager = self.masterBuilder.databaseDownloadManager
     }
     
     // Handle being invoked from a universal link in safari running on the current device
@@ -115,8 +115,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      handleEventsForBackgroundURLSession identifier: String,
                      completionHandler: @escaping () -> Void) {
-        databaseDownloadManager?.backgroundSessionCompletionHandler = completionHandler
-        databaseDownloadManager?.start()
+        companyFileDownloadManager?.backgroundSessionCompletionHandler = completionHandler
+        companyFileDownloadManager?.start()
     }
     
     // MARK: - Setup CoreData

@@ -29,7 +29,7 @@ public class PinDownloadFileParser {
         self.lineCount = lines.count
         self.lines = [Substring](lines.dropFirst())
         switch versionString {
-        case "version 1.0":
+        case "version: 1.0":
             // we have a parser for this version
             break
         default:

@@ -12,6 +12,7 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
         let storyboard = UIStoryboard(name: "MapView", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "MapViewCtrl") as! MapViewController
         vc.coordinator = self
+        vc.companyFileDownloadManager = self.injected.companyDownloadFileManager
         vc.interestsRepository = self.interestsRepository
         vc.log = self.injected.log
 //        vc.companyDataSource

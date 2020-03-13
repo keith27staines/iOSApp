@@ -176,8 +176,8 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         return F4SCompanyDatabaseMetadataService(configuration: self.networkConfiguration)
     }()
     
-    lazy var databaseDownloadManager: F4SDatabaseDownloadManagerProtocol = {
-        return F4SDatabaseDownloadManager(metadataService: self.metadataService)
+    lazy var databaseDownloadManager: F4SCompanyDownloadManagerProtocol = {
+        return F4SCompanyDownloadManager(metadataService: self.metadataService)
     }()
     
     lazy var applyService: F4SPlacementApplicationServiceProtocol = {

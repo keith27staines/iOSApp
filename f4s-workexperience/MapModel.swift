@@ -50,13 +50,15 @@ public struct MapModel {
         })
         self.allCompanyPinsSet = F4SCompanyPinSet(companyPins)
         self.clusterColor = clusterColor
-        let filteredCompanyPinList: [F4SCompanyPin]
         let selectedInterestsSet = interestsModel.validInterestsFrom(uncheckedInterests:interestsSet)
-        filteredCompanyPinList = self.pinRepository!.pins(interestedInAnyOf: selectedInterestsSet).map({ (pinJson) -> F4SCompanyPin in
-            return F4SCompanyPin(pin: pinJson, tintColor: clusterColor)
-        })
-        filteredCompanyPinSet = F4SCompanyPinSet(filteredCompanyPinList)
-
+        if selectedInterestsSet.isEmpty {
+            filteredCompanyPinSet = self.allCompanyPinsSet
+        } else {
+            let filteredCompanyPinList = self.pinRepository!.pins(interestedInAnyOf: selectedInterestsSet).map({ (pinJson) -> F4SCompanyPin in
+                return F4SCompanyPin(pin: pinJson, tintColor: clusterColor)
+            })
+            filteredCompanyPinSet = F4SCompanyPinSet(filteredCompanyPinList)
+        }
         self.quadTree = MapModel.createQuadtree(filteredCompanyPinSet)
     }
         
