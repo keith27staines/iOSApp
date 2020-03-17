@@ -39,7 +39,7 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
     
     var showingDetailForCompany: Company?
 
-    func showDetail(company: Company?, originScreen: ScreenName) {
+    func showDetail(company: CompanyWorkplace?, originScreen: ScreenName) {
         guard let company = company else { return }
         showingDetailForCompany = company
         rootViewController.dismiss(animated: true)

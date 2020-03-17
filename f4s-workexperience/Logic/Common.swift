@@ -8,9 +8,4 @@
 
 import WorkfinderCommon
 
-public struct PinJson: Codable, Hashable {
-    var companyUuid: String
-    var lat: Double
-    var lon: Double
-    var tags: [F4SUUID]
-}
+

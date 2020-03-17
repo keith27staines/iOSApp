@@ -20,7 +20,7 @@ class F4SRecommendationServiceTests : XCTestCase {
             case .error(_):
                 XCTFail("The test was designed to return a success result")
             case .success(let recommendations):
-                XCTAssertEqual(recommendations.first!.uuid, expectedRecommendation.uuid!)
+                XCTAssertEqual(recommendations.first?.uuid, expectedRecommendation.uuid!)
             }
             expectation.fulfill()
         }

@@ -37,14 +37,6 @@ public class DocumentUploadCoordinator : CoreInjectionNavigationCoordinator {
                 placementUuid: placementUuid,
                 documentService: documentService,
                 documents: [])
-        case .businessLeaderRequest(let requestModel):
-            let placementUuid = requestModel.placementUuid
-            let documents = requestModel.documents
-            addDocumentsController.documentModel = F4SDocumentUploadAtBLRequestModel(
-                delegate: addDocumentsController,
-                placementUuid: placementUuid,
-                documentService: documentService,
-                documents: documents)
         }
         addDocumentsController.placementUuid = placementUuid
         addDocumentsController.uploadScenario = mode

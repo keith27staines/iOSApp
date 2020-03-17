@@ -15,7 +15,6 @@ class F4SAddDocumentsViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     
     var placementUuid: F4SUUID!
-    var blRequestModel: F4SBusinessLeadersRequestModel? = nil
     
     @IBOutlet weak var primaryActionButton: UIButton!
     
@@ -47,7 +46,6 @@ class F4SAddDocumentsViewController: UIViewController {
     var showCancel: Bool {
         switch uploadScenario {
         case .applyWorkflow: return false
-        case .businessLeaderRequest(_): return true
         }
     }
     
@@ -80,8 +78,6 @@ class F4SAddDocumentsViewController: UIViewController {
         switch uploadScenario {
         case .applyWorkflow:
             performPrimaryActionForApplyMode()
-        case .businessLeaderRequest:
-            performPrimaryActionForBLRequestMode()
         }
     }
     
@@ -90,8 +86,6 @@ class F4SAddDocumentsViewController: UIViewController {
         case .applyWorkflow:
             sharedUserMessageHandler.showLoadingOverlay(self.view)
             documentModel.fetchDocumentsForPlacement()
-        case .businessLeaderRequest:
-            break
         }
     }
     
@@ -185,9 +179,6 @@ extension F4SAddDocumentsViewController : F4SDocumentUploadModelDelegate {
             } else {
                 primaryActionButton.setTitle("Upload", for: UIControl.State.normal)
             }
-        case .businessLeaderRequest(_):
-            primaryActionButton.setTitle("Upload", for: UIControl.State.normal)
-            primaryActionButton.isEnabled = model.numberOfRows(for: 0) == 0 ? false : true
         }
     }
     
@@ -224,10 +215,6 @@ extension F4SAddDocumentsViewController : UITableViewDataSource, UITableViewDele
         case .applyWorkflow:
             cell.textLabel?.text = document.defaultName
             accessoryImageView.image = shouldDisplayMenuForDocument(document) ? dotImage : nil
-            cell.accessoryView = accessoryImageView
-        case .businessLeaderRequest:
-            cell.textLabel?.text = document.defaultName
-            accessoryImageView.image = document.isReadyForUpload ? dotImage : addImage
             cell.accessoryView = accessoryImageView
         }
     }
@@ -275,11 +262,6 @@ extension F4SAddDocumentsViewController : F4SDCPopupMenuViewDelegate {
                     self.documentModel.deleteDocument(indexPath: cellIndexPath)
                     self.tableView.deleteRows(at: [cellIndexPath], with: .automatic)
                     self.addDocumentButton.isEnabled = true
-                case .businessLeaderRequest:
-                    let type = self.documentModel.document(cellIndexPath).type
-                    let clearedPlaceholderDocument = F4SDocument(type: type)
-                    self.documentModel.setDocument(clearedPlaceholderDocument, at: cellIndexPath)
-                    self.tableView.reloadRows(at: [cellIndexPath], with: .automatic)
                 }
             }
             alert.addAction(cancelAction)

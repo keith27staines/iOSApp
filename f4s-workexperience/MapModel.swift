@@ -9,7 +9,7 @@
 import Foundation
 import WorkfinderCommon
 
-public typealias F4SCompanyPinSet = Set<F4SCompanyPin>
+public typealias F4SCompanyPinSet = Set<F4SWorkplacePin>
 public typealias F4SUUIDSet = Set<F4SUUID>
 
 // MARK:-
@@ -21,10 +21,10 @@ public struct MapModel {
     public let allCompanyPinsSet: F4SCompanyPinSet
 
     /// Returns a dictionary of company pins keyed by company uuid
-    public lazy var allPinsByCompanyUuid: [F4SUUID:F4SCompanyPin] = {
-        var allPins = [F4SUUID:F4SCompanyPin]()
+    public lazy var allPinsByCompanyUuid: [F4SUUID:F4SWorkplacePin] = {
+        var allPins = [F4SUUID:F4SWorkplacePin]()
         for pin in self.allCompanyPinsSet {
-            let uuid = pin.companyUuid
+            let uuid = pin.workplaceUuid
             allPins[uuid] = pin
         }
         return allPins
@@ -45,8 +45,8 @@ public struct MapModel {
                 clusterColor: UIColor) {
         self.pinRepository = pinRepository
         self.interestsModel = InterestsModel(allInterests: allInterests)
-        let companyPins = pinRepository.allPins.map({ (pin) -> F4SCompanyPin in
-            return F4SCompanyPin(pin: pin, tintColor: clusterColor)
+        let companyPins = pinRepository.allPins.map({ (pin) -> F4SWorkplacePin in
+            return F4SWorkplacePin(pin: pin, tintColor: clusterColor)
         })
         self.allCompanyPinsSet = F4SCompanyPinSet(companyPins)
         self.clusterColor = clusterColor
@@ -54,8 +54,8 @@ public struct MapModel {
         if selectedInterestsSet.isEmpty {
             filteredCompanyPinSet = self.allCompanyPinsSet
         } else {
-            let filteredCompanyPinList = self.pinRepository!.pins(interestedInAnyOf: selectedInterestsSet).map({ (pinJson) -> F4SCompanyPin in
-                return F4SCompanyPin(pin: pinJson, tintColor: clusterColor)
+            let filteredCompanyPinList = self.pinRepository!.pins(interestedInAnyOf: selectedInterestsSet).map({ (pinJson) -> F4SWorkplacePin in
+                return F4SWorkplacePin(pin: pinJson, tintColor: clusterColor)
             })
             filteredCompanyPinSet = F4SCompanyPinSet(filteredCompanyPinList)
         }
@@ -179,7 +179,7 @@ extension MapModel {
     func companyPinSetInsideBounds(_ bounds: GMSCoordinateBounds) -> F4SCompanyPinSet {
         let rect = LatLonRect(bounds: bounds)
         let elements = quadTree.retrieveWithinRect(rect)
-        let companyPins = elements.map { element in return element.object as! F4SCompanyPin }
+        let companyPins = elements.map { element in return element.object as! F4SWorkplacePin }
         let companyPinSet = F4SCompanyPinSet(companyPins)
         return companyPinSet
     }
@@ -245,7 +245,7 @@ extension MapModel {
 
 // MARK:- helper extension to facilitate transforming company pins into quadtree items
 extension F4SQuadtreeItem {
-    public init(companyPin: F4SCompanyPin) {
+    public init(companyPin: F4SWorkplacePin) {
         let pt = CGPoint(location: companyPin.position)
         self.init(point: pt, object: companyPin)
     }

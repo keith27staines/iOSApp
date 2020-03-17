@@ -5,11 +5,6 @@ public enum TrackEvent: String {
     case sideMenuFAQLinkTap                     // checked
     case sideMenuTermsAndConditionsLinkTap      // checked
     
-    case messagesTabTap                         // checked
-    case messageShowThreadTap                   // checked
-    case messageThreadShowCompanyTap            // checked
-    case messageThreadActionTap                 // checked
-    
     case recommendationsTabTap                  // checked
     case recommendationsShowCompanyTap          // checked
     

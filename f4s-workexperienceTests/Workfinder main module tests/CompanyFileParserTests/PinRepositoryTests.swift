@@ -29,7 +29,7 @@ class PinRepositoryTests: XCTestCase {
         let sut = makeSUT()
         let matches = sut.pins(interestedInAnyOf: ["tagUuid1"])
         XCTAssertTrue(matches.count == 1)
-        XCTAssertTrue(matches.first?.companyUuid == "companyUuid1")
+        XCTAssertTrue(matches.first?.workplaceUuid == "workplaceUuid1")
     }
     
     func test_pins_with_two_pins_matching_interest() {

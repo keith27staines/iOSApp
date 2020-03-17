@@ -23,15 +23,10 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     }
     let environment: EnvironmentType
     var applicationContext: F4SApplicationContext
-    var createPlacementJson: F4SCreatePlacementJson?
-    var placementService: F4SPlacementApplicationServiceProtocol
     var templateService: F4STemplateServiceProtocol
-    var placementRepository: F4SPlacementRepositoryProtocol
     var interestsRepository: F4SInterestsRepositoryProtocol
-    let getAllPlacementsService: F4SGetAllPlacementsServiceProtocol
     let emailVerificationModel: F4SEmailVerificationModelProtocol
     let startingViewController: UIViewController!
-    let documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol
     let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
     weak var applyCoordinatorDelegate: ApplyCoordinatorDelegate?
     lazy var userInterests: [F4SInterest] = { return interestsRepository.loadInterestsArray() }()
@@ -40,9 +35,8 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         let userUuid = injected.user.uuid!
         let installationUuid = injected.appInstallationUuidLogic.registeredInstallationUuid!
         let companyViewData = CompanyViewData(company: applicationContext.company!)
-        let placement = applicationContext.placement
         let host = applicationContext.host
-        return ApplicationModel(userUuid: userUuid, installationUuid: installationUuid, userInterests: userInterests, placement: placement, placementRepository: placementRepository, companyViewData: companyViewData, host: host, placementService: placementService, templateService: templateService)
+        return ApplicationModel(userUuid: userUuid, installationUuid: installationUuid, userInterests: userInterests, placement: placement, companyViewData: companyViewData, host: host, templateService: templateService)
     }()
     
     public init(applyCoordinatorDelegate: ApplyCoordinatorDelegate? = nil,
@@ -52,25 +46,18 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
                 environment: EnvironmentType,
-                placementService: F4SPlacementApplicationServiceProtocol,
                 templateService: F4STemplateServiceProtocol,
-                placementRepository: F4SPlacementRepositoryProtocol,
                 interestsRepository: F4SInterestsRepositoryProtocol,
-                getAllPlacementsService: F4SGetAllPlacementsServiceProtocol,
                 emailVerificationModel: F4SEmailVerificationModelProtocol,
                 documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
                 documentUploaderFactory: F4SDocumentUploaderFactoryProtocol) {
         self.environment = environment
         self.applyCoordinatorDelegate = applyCoordinatorDelegate
         self.applicationContext = F4SApplicationContext(user: F4SUser(), company: company, host: host, placement: nil)
-        self.placementService = placementService
         self.templateService = templateService
         self.startingViewController = navigationRouter.navigationController.topViewController
-        self.placementRepository = placementRepository
         self.interestsRepository = interestsRepository
-        self.getAllPlacementsService = getAllPlacementsService
         self.emailVerificationModel = emailVerificationModel
-        self.documentServiceFactory = documentServiceFactory
         self.documentUploaderFactory = documentUploaderFactory
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
@@ -81,10 +68,6 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     }
     
     var rootViewController: UIViewController?
-    
-    lazy var canApplyLogic: AllowedToApplyLogicProtocol = {
-        return AllowedToApplyLogic(service: self.getAllPlacementsService)
-    }()
     
     func showApplicationLetterViewController() {
         let applicationLetterViewModel = applicationModel.applicationLetterViewModel
@@ -192,25 +175,17 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
     }
     
     func apply() {
-        if let draft = canApplyLogic.draftPlacement {
-            applicationModel.resumeApplicationFromPreexistingDraft(draft) { [weak self] (error) in
-                self?.applyDidComplete(error: error)
-            }
-        } else {
-            applicationModel.createApplication { [weak self] (error) in
-                self?.applyDidComplete(error: error)
-            }
+        applicationModel.createApplication { [weak self] (error) in
+            self?.applyDidComplete(error: error)
         }
     }
     
     func applyDidComplete(error: Error?) {
         guard error == nil else { return }
-        applicationContext.placement = applicationModel.placement
         showAddDocuments()
     }
     
     func showAddDocuments() {
-        let placementuuid = applicationContext.placement!.placementUuid!
         let documentService = documentServiceFactory.makePlacementDocumentsService(placementUuid: placementuuid)
         let coordinator = DocumentUploadCoordinator(
             parent: self,

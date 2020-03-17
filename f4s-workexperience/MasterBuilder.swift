@@ -213,10 +213,6 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         return F4SContentService(configuration: self.networkConfiguration)
     }()
     
-    lazy var deviceRegistrationService: F4SDeviceRegistrationServiceProtocol = {
-        return F4SDeviceRegistrationService(configuration: self.networkConfiguration)
-    }()
-    
     lazy var documentUploaderFactory: F4SDocumentUploaderFactoryProtocol = {
         return F4SDocumentUploaderFactory(configuration: self.networkConfiguration)
     }()
@@ -239,52 +235,11 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         return F4SInterestsRepository(localStore: self.localStore)
     }()
     
-    lazy var messageServiceFactory: F4SMessageServiceFactoryProtocol = {
-        return F4SMessageServiceFactory(configuration: self.networkConfiguration)
-    }()
-    
-    lazy var messageActionServiceFactory: F4SMessageActionServiceFactoryProtocol = {
-        return F4SMessageActionServiceFactory(configuration: self.networkConfiguration)
-    }()
-    
-    lazy var messageCannedResponsesServiceFactory: F4SCannedMessageResponsesServiceFactoryProtocol = {
-        return F4SCannedMessageResponsesServiceFactory(configuration: self.networkConfiguration)
-    }()
-    
-    lazy var offerProcessingService: F4SOfferProcessingServiceProtocol = {
-        return F4SPlacementService(configuration: self.networkConfiguration)
-    }()
-    
     lazy var onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol = {
          return OnboardingCoordinatorFactory(
             partnerService: self.partnersService,
             localStore: self.localStore)
      }()
-    
-    lazy var partnersModel: F4SPartnersModelProtocol = {
-        return F4SPartnersModel(partnerService: self.partnersService,
-                                localStore: self.localStore)
-    }()
-    
-    lazy var partnersService: F4SPartnerServiceProtocol = {
-        return F4SPartnerService(configuration: self.networkConfiguration)
-    }()
-    
-    lazy var placementsRepository: F4SPlacementRepositoryProtocol = {
-        return F4SPlacementRepository()
-    }()
-    
-    lazy var placementService: F4SPlacementServiceProtocol = {
-        return F4SPlacementService(configuration: self.networkConfiguration)
-    }()
-    
-    lazy var getAllPlacementsService: F4SGetAllPlacementsServiceProtocol = {
-        return self.placementService
-    }()
-    
-    lazy var placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol = {
-        return F4SPlacementDocumentsServiceFactory(configuration: self.networkConfiguration)
-    }()
     
     lazy var recommendationsService: F4SRecommendationServiceProtocol = {
         return F4SRecommendationService(configuration: self.networkConfiguration)

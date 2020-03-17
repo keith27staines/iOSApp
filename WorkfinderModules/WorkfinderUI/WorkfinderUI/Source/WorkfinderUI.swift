@@ -9,13 +9,12 @@ public class WorkfinderUI {
     
     public func makeWebContentViewController(
         contentType: F4SContentType,
-        dismissByPopping: Bool,
-        contentService: F4SContentServiceProtocol) -> ContentViewController {
+        dismissByPopping: Bool) -> ContentViewController {
         let storyboard = UIStoryboard(name: "Content", bundle: bundle)
         let contentViewController = storyboard.instantiateViewController(withIdentifier: "ContentViewCtrl") as! ContentViewController
         contentViewController.contentType = contentType
         contentViewController.dismissByPopping = true
-        contentViewController.contentService = contentService
+        //contentViewController.contentService = contentService
         return contentViewController
     }
 }

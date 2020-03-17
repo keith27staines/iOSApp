@@ -34,15 +34,15 @@ class F4SCompanyServiceTests: XCTestCase {
 class F4SCompanyJsonTests: XCTestCase {
     func test_urls_when_nil() {
         let sut = F4SCompanyJson()
-        XCTAssertNil(sut.linkedinUrl)
-        XCTAssertNil(sut.duedilUrl)
+        XCTAssertNil(sut.linkedInUrlString)
+        XCTAssertNil(sut.duedilUrlString)
     }
     
     func test_rulsWhenNotNil() {
         var sut = F4SCompanyJson()
         sut.linkedInUrlString = "linkedin"
         sut.duedilUrlString = "duedil"
-        XCTAssertNotNil(sut.linkedinUrl)
-        XCTAssertNotNil(sut.duedilUrl)
+        XCTAssertNotNil(sut.linkedInUrlString)
+        XCTAssertNotNil(sut.duedilUrlString)
     }
 }

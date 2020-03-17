@@ -5,15 +5,6 @@
       location = "group:WorkfinderOnboardingUseCase/WorkfinderOnboardingUseCase.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:WorkfinderRecommendations/WorkfinderRecommendations.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:WorkfinderMessagesUseCase/WorkfinderMessagesUseCase.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:WorkfinderFavouritesUseCase/WorkfinderFavouritesUseCase.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:WorkfinderDocumentUploadUseCase/WorkfinderDocumentUploadUseCase.xcodeproj">
    </FileRef>
    <FileRef
@@ -24,9 +15,6 @@
    </FileRef>
    <FileRef
       location = "group:WorkfinderCoordinators/WorkfinderCoordinators.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:WorkfinderAcceptUseCase/WorkfinderAcceptUseCase.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:WorkfinderServices/WorkfinderServices.xcodeproj">

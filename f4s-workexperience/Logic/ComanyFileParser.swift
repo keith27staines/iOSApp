@@ -52,7 +52,7 @@ public class PinDownloadFileParser {
     func jsonifiedString(from lineString: String) -> String {
         var jsonified: String = lineString
         jsonified = replaceTerminatingSquareBrackets(lineString: jsonified)
-        jsonified = insertCompanyUuidKey(lineString: jsonified)
+        jsonified = insertWorkplaceUuidKey(lineString: jsonified)
         jsonified = insertLatitudeLongitudeKeys(lineString: jsonified)
         return jsonified
     }
@@ -67,10 +67,10 @@ public class PinDownloadFileParser {
             .replacingCharacters(in: lastCharacterRange, with: "}")
     }
     
-    func insertCompanyUuidKey(lineString: String) -> String {
+    func insertWorkplaceUuidKey(lineString: String) -> String {
         var modifiedString = lineString
         let start = modifiedString.startIndex
-        modifiedString.insert(contentsOf: "\"companyUuid\":", at: modifiedString.index(start, offsetBy: 1))
+        modifiedString.insert(contentsOf: "\"workplaceUuid\":", at: modifiedString.index(start, offsetBy: 1))
         return modifiedString
     }
     

@@ -98,7 +98,7 @@
 		FC21BE3D220F53EB00A0A389 /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21BE2C220F53EB00A0A389 /* FilterButton.swift */; };
 		FC21BE3F220F53EB00A0A389 /* SearchViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21BE2E220F53EB00A0A389 /* SearchViewProtocol.swift */; };
 		FC21C0832356E33F006DE5A4 /* RemoteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21C0822356E33F006DE5A4 /* RemoteConfiguration.swift */; };
-		FC25A05F1F850DF4002F51A9 /* F4SCompanyPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */; };
+		FC25A05F1F850DF4002F51A9 /* F4SWorkplacePin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC25A05E1F850DF4002F51A9 /* F4SWorkplacePin.swift */; };
 		FC31F095204D54C6009DD526 /* F4SDebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */; };
 		FC31F097204D54E3009DD526 /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC31F096204D54E3009DD526 /* Debug.storyboard */; };
 		FC3CD1DA221566F200F91B50 /* Geocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CD1D9221566F200F91B50 /* Geocoding.swift */; };
@@ -180,7 +180,7 @@
 		FCFB1328224930660086BE25 /* Mustache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCFB1327224930660086BE25 /* Mustache.framework */; };
 		FCFB1329224930660086BE25 /* Mustache.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCFB1327224930660086BE25 /* Mustache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCFBD0192250D9FF00A9361D /* AppCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A48221714B800DC335B /* AppCoordinatorTests.swift */; };
-		FCFBD0242250DB4D00A9361D /* F4SDatabaseDownloadManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC85B2220EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift */; };
+		FCFBD0242250DB4D00A9361D /* F4SCompanyDownloadManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC85B2220EA05FA00A0686D /* F4SCompanyDownloadManagerTests.swift */; };
 		FCFC06AD23225B9E003C59C8 /* LatLon+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06AC23225B9E003C59C8 /* LatLon+Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -351,7 +351,7 @@
 		FC21BE2C220F53EB00A0A389 /* FilterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
 		FC21BE2E220F53EB00A0A389 /* SearchViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewProtocol.swift; sourceTree = "<group>"; };
 		FC21C0822356E33F006DE5A4 /* RemoteConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfiguration.swift; sourceTree = "<group>"; };
-		FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyPin.swift; sourceTree = "<group>"; };
+		FC25A05E1F850DF4002F51A9 /* F4SWorkplacePin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SWorkplacePin.swift; sourceTree = "<group>"; };
 		FC2E456A234CB5EF00121496 /* Bugsnag.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bugsnag.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDebugViewController.swift; sourceTree = "<group>"; };
 		FC31F096204D54E3009DD526 /* Debug.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
@@ -403,7 +403,7 @@
 		FCC1DF5A232505640074D5C1 /* CompanyCoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCoordinatorFactory.swift; sourceTree = "<group>"; };
 		FCC5EBB51F449C310085CE15 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FCC753ED1F80F26200E9ECD6 /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
-		FCC85B2220EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDatabaseDownloadManagerTests.swift; sourceTree = "<group>"; };
+		FCC85B2220EA05FA00A0686D /* F4SCompanyDownloadManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyDownloadManagerTests.swift; sourceTree = "<group>"; };
 		FCC9D13C1FC82AFF0081F7B5 /* StarRatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StarRatingView.swift; path = ../WorkfinderModules/WorkfinderUI/WorkfinderUI/Source/StarRatingView.swift; sourceTree = "<group>"; };
 		FCCD6AE61FBB42A90088D7C7 /* PopupCompanyList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PopupCompanyList.storyboard; sourceTree = "<group>"; };
 		FCCD6AE81FBB44CF0088D7C7 /* PopupCompanyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupCompanyListViewController.swift; sourceTree = "<group>"; };
@@ -930,7 +930,7 @@
 				FC99BDC920D170CA00278DDE /* F4SCompanyDownloadManager.swift */,
 				FCC753ED1F80F26200E9ECD6 /* MapModel.swift */,
 				FC99B7E21F826D1400E2D5F0 /* LatLon.swift */,
-				FC25A05E1F850DF4002F51A9 /* F4SCompanyPin.swift */,
+				FC25A05E1F850DF4002F51A9 /* F4SWorkplacePin.swift */,
 				FC92567A1F8F70D100FF9841 /* InterestsModel.swift */,
 				FCFC06AC23225B9E003C59C8 /* LatLon+Extensions.swift */,
 			);
@@ -1165,7 +1165,7 @@
 			children = (
 				FC771F532416297900AD6317 /* CompanyFileParserTests */,
 				FC3F3921222931630046F8F8 /* Coordinator tests */,
-				FCC85B2220EA05FA00A0686D /* F4SDatabaseDownloadManagerTests.swift */,
+				FCC85B2220EA05FA00A0686D /* F4SCompanyDownloadManagerTests.swift */,
 			);
 			path = "Workfinder main module tests";
 			sourceTree = "<group>";
@@ -1522,7 +1522,7 @@
 				40E78E831DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift in Sources */,
 				FCB46F02204FD86D00F0779F /* F4SLogViewController.swift in Sources */,
 				FC21BE34220F53EB00A0A389 /* PlacesSearchDataSource.swift in Sources */,
-				FC25A05F1F850DF4002F51A9 /* F4SCompanyPin.swift in Sources */,
+				FC25A05F1F850DF4002F51A9 /* F4SWorkplacePin.swift in Sources */,
 				FCF0D16C1FBC244800F2AF1D /* PopupAnimator.swift in Sources */,
 				FCE51E402210362800DC1D50 /* PlacesSearchDataGetter.swift in Sources */,
 				FCF42300236ED6D400435406 /* SelectEnvironmentViewController.swift in Sources */,
@@ -1557,7 +1557,7 @@
 				FC771F572416299B00AD6317 /* PinDownloadFileParserTests.swift in Sources */,
 				FC771F582416299B00AD6317 /* PinRepositoryTests.swift in Sources */,
 				FC8E3F4A22D33A4C00102C37 /* VersionCheckCoordinatorTests.swift in Sources */,
-				FCFBD0242250DB4D00A9361D /* F4SDatabaseDownloadManagerTests.swift in Sources */,
+				FCFBD0242250DB4D00A9361D /* F4SCompanyDownloadManagerTests.swift in Sources */,
 				FC9B28702343328600BB694B /* TabBarCoordinatorTests.swift in Sources */,
 				FCFBD0192250D9FF00A9361D /* AppCoordinatorTests.swift in Sources */,
 				FC9B28722343331100BB694B /* TestMasterBuilder.swift in Sources */,

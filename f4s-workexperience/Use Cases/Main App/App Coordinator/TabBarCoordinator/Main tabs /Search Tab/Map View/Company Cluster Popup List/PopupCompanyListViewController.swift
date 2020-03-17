@@ -10,19 +10,25 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 
+public class CompanyWorkplaceListModel {
+    var workplaceUuids: [F4SUUID]
+
+    public func getCompanayWorkplaces(completion: ([CompanyWorkplace]) -> Void ) {
+        completion([])
+    }
+    
+    public init(workplaceUuids: [F4SUUID]) {
+        self.workplaceUuids = workplaceUuids
+    }
+    
+}
+
 class PopupCompanyListViewController: UIViewController {
     let screenName = ScreenName.companyClusterList
     weak var log: F4SAnalyticsAndDebugging?
+    var didSelectCompanyWorkplace: ((CompanyWorkplace) -> Void)?
+    var companyWorkplaceListModel: CompanyWorkplaceListModel?
     
-    public func setCompanies(_ companies: [Company]) {
-        self.companies = companies.sorted(by: { (company1, company2) -> Bool in
-            return company1.rating >= company2.rating
-        })
-    }
-    
-    var didSelectCompany: ((Company) -> Void)?
-    
-    private var companies: [Company]!
 
     @IBOutlet var tableView: UITableView!
     @IBOutlet var doneButton: UIButton!
@@ -62,3 +68,5 @@ extension PopupCompanyListViewController : UITableViewDelegate, UITableViewDataS
         didSelectCompany?(company)
     }
 }
+
+

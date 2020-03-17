@@ -15,7 +15,7 @@ public class ContentViewController: UIViewController {
     var contentType: F4SContentType?
     var url: String?
     var dismissByPopping: Bool = false
-    var contentService: F4SContentServiceProtocol!
+    //var contentService: F4SContentServiceProtocol!
 
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -85,6 +85,10 @@ extension ContentViewController {
     }
 }
 
+protocol ContentService {
+
+}
+
 // MARK: - calls
 extension ContentViewController {
     func getContent() {
@@ -95,29 +99,29 @@ extension ContentViewController {
                 return
             }
         }
-        sharedUserMessageHandler.showLightLoadingOverlay(self.webView)
-        contentService.getContent { [weak self] (result) in
-            guard let strongSelf = self else { return }
-            DispatchQueue.main.async {
-                guard let contentType = strongSelf.contentType else { return }
-                switch result {
-                case .error(let error):
-                    sharedUserMessageHandler.hideLoadingOverlay()
-                    sharedUserMessageHandler.display(error, parentCtrl: strongSelf)
-                case .success(let contentDescriptors):
-                    guard let index = contentDescriptors.firstIndex(where: { (descriptor) -> Bool in descriptor.slug == contentType }) else {
-                        sharedUserMessageHandler.hideLoadingOverlay()
-                        print("No url for \(contentType)")
-                        return
-                    }
-                    guard let contentUrl = contentDescriptors[index].url else {
-                        sharedUserMessageHandler.hideLoadingOverlay()
-                        print("No url for\(contentType)")
-                        return
-                    }
-                    strongSelf.loadURL(url: contentUrl)
-                }
-            }
-        }
+//        sharedUserMessageHandler.showLightLoadingOverlay(self.webView)
+//        contentService.getContent { [weak self] (result) in
+//            guard let strongSelf = self else { return }
+//            DispatchQueue.main.async {
+//                guard let contentType = strongSelf.contentType else { return }
+//                switch result {
+//                case .error(let error):
+//                    sharedUserMessageHandler.hideLoadingOverlay()
+//                    sharedUserMessageHandler.display(error, parentCtrl: strongSelf)
+//                case .success(let contentDescriptors):
+//                    guard let index = contentDescriptors.firstIndex(where: { (descriptor) -> Bool in descriptor.slug == contentType }) else {
+//                        sharedUserMessageHandler.hideLoadingOverlay()
+//                        print("No url for \(contentType)")
+//                        return
+//                    }
+//                    guard let contentUrl = contentDescriptors[index].url else {
+//                        sharedUserMessageHandler.hideLoadingOverlay()
+//                        print("No url for\(contentType)")
+//                        return
+//                    }
+//                    strongSelf.loadURL(url: contentUrl)
+//                }
+//            }
+//        }
     }
 }

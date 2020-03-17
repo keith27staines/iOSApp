@@ -329,7 +329,7 @@ static const double kGMUAnimationDuration = 0.5;  // seconds.
 }
 
 - (UIView *)getCustomIconViewForItem:(id)userData {
-    F4SCompanyPin *pin = userData;
+    F4SWorkplacePin *pin = userData;
     return pin.customMarkerView;
 }
 

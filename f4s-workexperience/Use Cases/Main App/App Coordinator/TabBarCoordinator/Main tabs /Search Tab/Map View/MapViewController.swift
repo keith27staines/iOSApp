@@ -145,7 +145,7 @@ class MapViewController: UIViewController {
     var emplacedCompanyPins: F4SCompanyPinSet = []
     
     /// The company currently selected by the user (if any)
-    var selectedCompany: Company?
+    var selectedCompanyWorkplace: CompanyWorkplace?
     
     var infoWindowView: UIView?
     
@@ -194,23 +194,19 @@ class MapViewController: UIViewController {
         return true
     }
     
-    func companiesFromMarker(_ marker: GMSMarker) -> [Company] {
-        guard let mapModel = filteredMapModel else { return [Company]() }
-        let companySet = mapModel.pinsNear(marker.position, side: 10.0)
-        let companyPins = [F4SCompanyPin](companySet)
-        let companies = companyPins.map { pin -> Company in
-            return companyFromPin(pin: pin)!
-        }
-        return companies
+    func companiesFromMarker(_ marker: GMSMarker) -> [F4SUUID] {
+        guard let mapModel = filteredMapModel else { return [] }
+        let workplacePinSet = mapModel.pinsNear(marker.position, side: 10.0)
+        return [F4SUUID](workplacePinSet.map { (pin) -> F4SUUID in pin.workplaceUuid })
     }
     
-    func presentCompaniesPopup(for cluster: GMUCluster) {
-        let companies = companiesFromCluster(cluster)
+    func presentWorkplacesPopup(for cluster: GMUCluster) {
+        let workplaceUuids = workplaceUuidsFromCluster(cluster)
         let origin = mapView.projection.point(for: cluster.position)
-        presentCompaniesPopup(for: companies, origin: origin)
+        presentCompaniesPopup(for: workplaceUuids, origin: origin)
     }
 
-    func presentCompaniesPopup(for companies: [Company], origin: CGPoint) {
+    func presentCompaniesPopup(for workplaceUuids: [F4SUUID], origin: CGPoint) {
         let originatingRect = CGRect(x: origin.x-20, y: origin.y-20, width: 40, height: 40)
         if pressedPinOrCluster?.superview == nil {
             pressedPinOrCluster = UIView(frame: originatingRect)
@@ -221,10 +217,10 @@ class MapViewController: UIViewController {
         mapView.addSubview(pressedPinOrCluster!)
         
         let vc = UIStoryboard(name: "PopupCompanyList", bundle: nil).instantiateViewController(withIdentifier: "PopupListViewController") as! PopupCompanyListViewController
-        vc.didSelectCompany = { [weak self] company in
+        vc.didSelectCompanyWorkplace = { [weak self] company in
             self?.coordinator?.showDetail(company: company, originScreen: vc.screenName)
         }
-        vc.setCompanies(companies)
+        vc.companyWorkplaceListModel = CompanyWorkplaceListModel(workplaceUuids: workplaceUuids)
         vc.log = log
         vc.transitioningDelegate = self
         present(vc, animated: true, completion: nil)
@@ -259,7 +255,7 @@ extension MapViewController {
     /// Adds the specified pin to the map and its associated data structures:
     /// 1. clusterManager
     /// 2. emplacedCompanyPins
-    fileprivate func addPinToMap(pin: F4SCompanyPin) {
+    fileprivate func addPinToMap(pin: F4SWorkplacePin) {
         if !emplacedCompanyPins.contains(pin) {
             clusterManager.add(pin)
             emplacedCompanyPins.insert(pin)
@@ -599,27 +595,14 @@ extension MapViewController: GMSMapViewDelegate {
         coordinator?.injected.log.track(event: TrackEvent.mapPinButtonTap, properties: nil)
         let origin = mapView.projection.point(for: marker.position)
         let companies = companiesFromMarker(marker)
-        if companies.count > 1 {
-            presentCompaniesPopup(for: companies, origin: origin)
-            return true
-        } else {
-            self.selectedCompany = companyFromMarker(marker: marker)
-            self.mapView.selectedMarker = marker
-            var point: CGPoint = mapView.projection.point(for: marker.position)
-            point.y -= 50
-            let camera: GMSCameraUpdate = GMSCameraUpdate.setTarget(mapView.projection.coordinate(for: point))
-            marker.appearAnimation = GMSMarkerAnimation.pop
-            marker.tracksInfoWindowChanges = true
-            mapView.animate(with: camera)
-            return true
-        }
+        presentCompaniesPopup(for: companies, origin: origin)
     }
     
     func mapView(_: GMSMapView, idleAt pos: GMSCameraPosition) {
         switch cameraWillMoveAction {
         case .explodeCluster(let cluster):
             if oldVisibleMapBounds == visibleMapBounds {
-                presentCompaniesPopup(for: cluster)
+                presentWorkplacesPopup(for: cluster)
             }
         default:
             break
@@ -670,7 +653,7 @@ extension MapViewController: GMUClusterManagerDelegate {
             moveCamera(toShow: explodedBounds)
         } else {
             log?.track(event: TrackEvent.mapClusterTap, properties: nil)
-            presentCompaniesPopup(for: cluster)
+            presentWorkplacesPopup(for: cluster)
         }
     }
     
@@ -824,30 +807,17 @@ extension MapViewController {
 // MARK:- helpers
 extension MapViewController {
     
-    /// Returns the companies corresponding to the specified cluster
-    func companiesFromCluster(_ cluster: GMUCluster) -> [Company] {
-        let companyPins = cluster.items as! [F4SCompanyPin]
-        var companies = [Company]()
-        for pin in companyPins {
-            if let company = companyFromPin(pin: pin) {
-                companies.append(company)
-            }
-        }
-        return companies
+    /// Returns the uuids of the workplaces encapsulated by the cluster
+    func workplaceUuidsFromCluster(_ cluster: GMUCluster) -> [F4SUUID] {
+        let companyPins = cluster.items as! [F4SWorkplacePin]
+        return companyPins.map { (pin) -> F4SUUID in return pin.workplaceUuid }
     }
     
-    /// Returns the Company corresponding to the specified marker
-    func companyFromMarker(marker: GMSMarker) -> Company? {
-        guard let pin = marker.userData as? F4SCompanyPin else {
-            return nil
-        }
-        return companyFromPin(pin: pin)
+    /// Returns the Company workplace pin corresponding to the specified marker
+    func workplacePinFromMarker(marker: GMSMarker) -> F4SWorkplacePin? {
+        return marker.userData as? F4SWorkplacePin
     }
-    
-    /// Returns the Company corresponding to the specified pin
-    func companyFromPin(pin: F4SCompanyPin) -> Company? {
-        return nil
-    }
+
     
     /// Sets the userLocation by transforming a place id (or the address string if the place is not provided, or does not correspond to a google places id) into a location
     func setUserLocation(from address: String, placeId: String?) {
