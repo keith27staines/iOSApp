@@ -1,47 +1,7 @@
-//
-//  CompanyHeaderView.swift
-//  F4SPrototypes
-//
-//  Created by Keith Dev on 21/01/2019.
-//  Copyright © 2019 Keith Staines. All rights reserved.
-//
 
 import UIKit
 import WorkfinderCommon
 import WorkfinderUI
-
-protocol CompanyHeaderViewPresenterRenderable: class {
-    func refresh(from presenter: CompanyHeaderViewPresenterProtocol)
-}
-
-protocol CompanyHeaderViewPresenterProtocol: class {
-    var headerView: CompanyHeaderViewPresenterRenderable? { get set }
-    var companyName: String { get }
-    var logoUrlString: String { get }
-    var distanceFromCompany: String { get }
-    func onDidInitialise()
-}
-
-class CompanyHeaderViewPresenter: CompanyHeaderViewPresenterProtocol {
-    
-    weak var headerView: CompanyHeaderViewPresenterRenderable?
-    let model: CompanyWorkplace
-    
-    init(headerView: CompanyHeaderViewPresenterRenderable,
-         companyWorkplace: CompanyWorkplace) {
-        self.headerView = headerView
-        self.model = companyWorkplace
-    }
-    
-    var companyName: String { model.companyJson.name }
-    var logoUrlString: String { model.companyJson.logoUrlString ?? "badUrl" }
-    private (set) var distanceFromCompany: String = "unknown distance"
-    
-    func onDidInitialise() {
-        headerView?.refresh(from: self)
-    }
-     
-}
 
 class CompanyHeaderView: UIView, CompanyHeaderViewPresenterRenderable {
 

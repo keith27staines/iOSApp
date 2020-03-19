@@ -74,20 +74,8 @@ class CompanyWorkplacePresenter : NSObject {
         }
     }
 
-    var hosts: [F4SHost] = [] {
-        didSet {
-            if hosts.count == 1 {
-                hosts[0].isSelected = true
-            }
-            textModel = TextModel(hosts: hosts)
-        }
-    }
     var textModel = TextModel(hosts: [])
     let companyService: F4SCompanyServiceProtocol
-
-    lazy var dataSectionRows: CompanyDataSectionRows = {
-        return CompanyDataSectionRows(viewModel: self, companyDocumentsModel: self.companyDocumentsModel)
-    }()
     
     weak var log: F4SAnalyticsAndDebugging?
     
@@ -113,41 +101,13 @@ class CompanyWorkplacePresenter : NSObject {
     }
     
     var applyButtonState: (String, Bool, UIColor) {
-        if let _ = selectedHost {
+        if let _ =   {
             return ("Apply", true, workfinderGreen)
         } else {
             return ("Choose a host", false, UIColor.lightGray)
         }
     }
-    
-    var selectedHost: F4SHost? {
-        let host = hosts.first { (host) -> Bool in host.isSelected }
-        return host
-    }
-    
-    func updateHostSelectionState(from updatedHost: F4SHost) {
-        if updatedHost.isSelected {
-            for (index, host) in hosts.enumerated() {
-                if host.uuid == updatedHost.uuid {
-                    updateHost(from: updatedHost)
-                    continue
-                }
-                hosts[index].isSelected = false
-            }
-        } else {
-            updateHost(from: updatedHost)
-            presenterDelegate?.companyWorkplacePresenterDidRefresh(self)
-        }
-        presenterDelegate?.companyWorkplacePresenterDidRefresh(self)
-    }
-    
-    private func updateHost(from updatedHost: F4SHost) {
-        guard let index = (hosts.firstIndex { (host) -> Bool in
-            host.uuid == updatedHost.uuid
-        }) else { return }
-        hosts[index] = updatedHost
-    }
-    
+        
     func onDidUpdate() {
         dataSectionRows = CompanyDataSectionRows(presenter: self)
         presenterDelegate?.companyWorkplacePresenterDidRefresh(self)
@@ -208,7 +168,7 @@ class CompanyWorkplacePresenter : NSObject {
     }
 }
 
-private extension CompanyWorkplace {
+extension CompanyWorkplace {
     func getPostcode( completion: @escaping (String?) -> Void ) {
         let latitude = pinJson.lat
         let longitude = pinJson.lon

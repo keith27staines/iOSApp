@@ -42,7 +42,8 @@ class CompanyViewController: UIViewController {
     }()
     
     override func loadView() {
-        view = CompanyMainView(companyViewModel: presenter, delegate: self, appSettings: appSettings)
+        let mainViewPresenter = 
+        view = CompanyMainView(presenter: presenter, delegate: self, appSettings: appSettings)
     }
     
     override func viewDidLoad() {

@@ -5,6 +5,7 @@ import WorkfinderUI
 
 protocol CompanySummarySectionPresenterProtocol {
     var numberOfRows: Int { get }
+    func cellForRow(_ row: Int, in tableView: UITableView) -> UITableViewCell
 }
 
 class CompanySummarySectionPresenter {

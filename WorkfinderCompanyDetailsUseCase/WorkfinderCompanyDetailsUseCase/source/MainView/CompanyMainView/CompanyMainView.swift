@@ -1,5 +1,5 @@
 //
-//  CompanyMainPageView.swift
+//  CompanyMainView.swift
 //  F4SPrototypes
 //
 //  Created by Keith Dev on 21/01/2019.
@@ -12,45 +12,6 @@ import WorkfinderCommon
 
 protocol CompanyMainViewCoordinatingDelegate : CompanyToolbarDelegate {
     func companyMainViewDidTapApply(_ view: CompanyMainView)
-}
-
-protocol CompanyMainViewPresenterRepresentable {
-    func refresh()
-}
-
-protocol CompanyMainViewPresenterProtocol {
-    var companyName: String { get }
-    var companyLocation: LatLon { get }
-    
-    var headerViewPresenter: CompanyHeaderViewPresenterProtocol { get }
-    var summarySectionPresenter: CompanySummarySectionPresenterProtocol { get }
-    var dataSectionPresenter: CompanyDataSectionPresenterProtocol { get }
-    var hostsSectionPresenter: CompanyHostsSectionPresenterProtocol { get }
-    
-    var applyButtonState: (String, Bool, UIColor) { get }
-    
-    //var hosts: [F4SHost] { get }
-    //var textModel: TextModel { get }
-    //var dataSectionRows: CompanyDataSectionRows { get }
-}
-
-protocol CompanyHostsSectionPresenterProtocol {
-    var numberOfRows: Int { get }
-    var hostsSummaryModel: TextModel { get }
-    func onDidTapLinkedIn(for: F4SHost)
-}
-
-class CompanyHostsSectionPresenter: CompanyHostsSectionPresenterProtocol {
-    var numberOfRows: Int
-    var hostsSummaryModel: TextModel
-    private let hosts: [F4SHost]
-    func onDidTapLinkedIn(for: F4SHost) {
-        
-    }
-    
-    init(hosts: [F4SHost]) {
-        self.hosts = hosts
-    }
 }
 
 class CompanyMainView: UIView, CompanyMainViewPresenterRepresentable {
@@ -102,7 +63,7 @@ class CompanyMainView: UIView, CompanyMainViewPresenterRepresentable {
     func refresh() {
         headerView.refresh(from: headerViewPresenter)
         tableView.reloadData()
-        let (title,isEnabled,backgroundColor) = presenter.applyButtonState
+        let (title,isEnabled,backgroundColor) = mainViewPresenter.applyButtonState
         applyButton.setTitle(title, for: .normal)
         applyButton.isEnabled = isEnabled
         applyButton.backgroundColor = backgroundColor
@@ -162,7 +123,7 @@ class CompanyMainView: UIView, CompanyMainViewPresenterRepresentable {
     
     lazy var sectionsModel: CompanyTableSectionsModel = {
         let model = CompanyTableSectionsModel()
-        let types: [CompanyTableSectionType] = [.companyPeople, .companyData, .companySummary]
+        let types: [CompanyTableSectionType] = [.companyHosts, .companyData, .companySummary]
         for sectionType in types {
             model.appendDescriptor(sectionType: sectionType, isHidden: false)
         }
@@ -262,38 +223,23 @@ extension CompanyMainView: UITableViewDataSource {
         case .companySummary:
             return summarySectionPresenter.numberOfRows
         case .companyData:
-            return mainViewPresenter.dataSectionRows.numberOfRows
-        case .companyPeople:
-            return hosts.count
+            return dataSectionPresenter.numberOfRows
+        case .companyHosts:
+            return hostsSectionPresenter.numberOfRows
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let index = indexPath.row
+        let rowInSection = indexPath.row
         let sectionModel = sectionsModel[indexPath.section]
         switch sectionModel.sectionType {
         case .companySummary:
-            return summarySectionRows.cellForRow(indexPath.row, in: tableView)
+            return summarySectionPresenter.cellForRow(rowInSection, in: tableView)
         case .companyData:
-            return dataSectionRows.cellForRow(indexPath.row, in: tableView)
-            
-        case .companyPeople:
-            let host = hosts[index]
-            let state = hostsSummaryModel.expandableLabelStates[index]
-            let hostCell = tableView.dequeueReusableCell(withIdentifier: HostCell.reuseIdentifier) as! HostCell
-            hostCell.configureWithHost(host,
-                                       summaryState: state,
-                                       profileLinkTap: profileLinkTap,
-                                       selectAction: { [weak self] tappedHost in
-                                        self?.updateHostSelectionState(from: tappedHost)
-                                        
-            })
-            return hostCell
+            return dataSectionPresenter.cellForRow(rowInSection, in: tableView)
+        case .companyHosts:
+            return hostsSectionPresenter.cellforRow(rowInSection, in: tableView)
         }
-    }
-    
-    func updateHostSelectionState(from host: F4SHost) {
-        presenter.updateHostSelectionState(from: host)
     }
 }
 
@@ -315,13 +261,9 @@ extension CompanyMainView: UITableViewDelegate {
             break
         case .companyData:
             break
-        case .companyPeople:
+        case .companyHosts:
             let hostCell = cell as! HostCell
-            let host = hosts[indexPath.row]
-            var summaryState = textModel.expandableLabelStates[indexPath.row]
-            summaryState.isExpanded.toggle()
-            textModel.expandableLabelStates[indexPath.row] = summaryState
-            hostCell.configureWithHost(host, summaryState: summaryState, profileLinkTap: profileLinkTap, selectAction: updateHostSelectionState)
+            hostsSectionPresenter.onDidTapHostCell(hostCell, atIndexPath: indexPath)
             tableView.beginUpdates()
             tableView.endUpdates()
         }
@@ -353,13 +295,13 @@ extension CompanyMainView: SectionSelectorViewDelegate {
         switch descriptor.sectionType {
         case .companySummary:
             event = .companyDetailsCompanyTabTap
-            numberOfRows = summarySectionRows.numberOfRows
+            numberOfRows = summarySectionPresenter.numberOfRows
         case .companyData:
             event = .companyDetailsDataTabTap
-            numberOfRows = mainViewPresenter.dataSectionRows.numberOfRows
-        case .companyPeople:
+            numberOfRows = dataSectionPresenter.numberOfRows
+        case .companyHosts:
             event = .companyDetailsPeopleTabTap
-            numberOfRows = hosts.count
+            numberOfRows = hostsSectionPresenter.numberOfRows
         }
         if numberOfRows > 0 {
             log?.track(event: event, properties: nil)
