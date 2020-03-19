@@ -207,14 +207,13 @@ extension F4SAddDocumentsViewController : UITableViewDataSource, UITableViewDele
     
     func configureCell(_ cell: UITableViewCell, with document: F4SDocument) {
         cell.accessoryType = .none
-        let dotImage = UIImage(named: "ui-submenudots-icon")
-        let addImage = UIImage(named: "ui-photoplus-icon")
+        let submenuImage = UIImage(named: "ui-submenudots-icon")
         let accessoryImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         accessoryImageView.contentMode = .scaleAspectFit
         switch uploadScenario {
         case .applyWorkflow:
             cell.textLabel?.text = document.defaultName
-            accessoryImageView.image = shouldDisplayMenuForDocument(document) ? dotImage : nil
+            accessoryImageView.image = shouldDisplayMenuForDocument(document) ? submenuImage : nil
             cell.accessoryView = accessoryImageView
         }
     }

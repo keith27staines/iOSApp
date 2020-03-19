@@ -64,6 +64,7 @@ public class MockF4SCompanyRepository: F4SCompanyRepositoryProtocol {
     func makeCompany(uuid: F4SUUID) -> F4SCompanyJson {
         counter += 1
         return F4SCompanyJson(
+            uuid: uuid,
             name: makeRandomName(),
             industry: "Making stuff",
             logoUrlString: "url/logo",

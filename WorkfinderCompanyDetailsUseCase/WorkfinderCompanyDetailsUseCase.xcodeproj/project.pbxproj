@@ -11,8 +11,8 @@
 		FC6B77322372BD8600347875 /* SectionSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6B77312372BD8600347875 /* SectionSelectorView.swift */; };
 		FC6B77342372D24800347875 /* CompanyTableSectionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6B77332372D24800347875 /* CompanyTableSectionsModel.swift */; };
 		FC6DD8DE23748DBB0006FA3D /* NameValueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6DD8DD23748DBB0006FA3D /* NameValueCell.swift */; };
-		FC7FCDFD2376B2C100C1182B /* CompanyDataSectionRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7FCDFC2376B2C100C1182B /* CompanyDataSectionRows.swift */; };
-		FC937345237589FC00DC46E6 /* CompanySummarySectionRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC937344237589FC00DC46E6 /* CompanySummarySectionRows.swift */; };
+		FC7FCDFD2376B2C100C1182B /* CompanyDataSectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7FCDFC2376B2C100C1182B /* CompanyDataSectionPresenter.swift */; };
+		FC937345237589FC00DC46E6 /* CompanySummarySectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC937344237589FC00DC46E6 /* CompanySummarySectionPresenter.swift */; };
 		FC99485E2379CFEA009D64D0 /* TextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99485D2379CFEA009D64D0 /* TextModel.swift */; };
 		FC9948602379D03A009D64D0 /* HostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99485F2379D03A009D64D0 /* HostCell.swift */; };
 		FCB9EE4B235D9F9500678F3F /* HostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB9EE4A235D9F9500678F3F /* HostView.swift */; };
@@ -20,16 +20,13 @@
 		FCC1DF03232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF02232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCaseTests.swift */; };
 		FCC1DF05232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = FCC1DEF7232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCC1DF1C232502740074D5C1 /* CompanyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF1B232502730074D5C1 /* CompanyCoordinator.swift */; };
-		FCC1DF20232502A10074D5C1 /* PersonViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF1F232502A10074D5C1 /* PersonViewData.swift */; };
-		FCC1DF21232502A10074D5C1 /* CompanyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF1D232502A00074D5C1 /* CompanyViewModel.swift */; };
-		FCC1DF22232502A10074D5C1 /* CompanyFavouritesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF1E232502A10074D5C1 /* CompanyFavouritesModel.swift */; };
+		FCC1DF20232502A10074D5C1 /* TestHosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF1F232502A10074D5C1 /* TestHosts.swift */; };
+		FCC1DF21232502A10074D5C1 /* CompanyWorkplacePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF1D232502A00074D5C1 /* CompanyWorkplacePresenter.swift */; };
 		FCC1DF27232503030074D5C1 /* CompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF25232503030074D5C1 /* CompanyViewController.swift */; };
 		FCC1DF28232503030074D5C1 /* CompanyMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF26232503030074D5C1 /* CompanyMainView.swift */; };
 		FCC1DF2E2325031C0074D5C1 /* CompanyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF2B2325031C0074D5C1 /* CompanyHeaderView.swift */; };
-		FCC1DF2F2325031C0074D5C1 /* SocialShareItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF2D2325031C0074D5C1 /* SocialShareItemSource.swift */; };
 		FCC1DF302325031C0074D5C1 /* CompanyToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF2C2325031C0074D5C1 /* CompanyToolbar.swift */; };
 		FCC1DF312325031C0074D5C1 /* CompanyMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF2A2325031C0074D5C1 /* CompanyMapView.swift */; };
-		FCC1DF322325031C0074D5C1 /* F4SRequestCompanyDocumentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF292325031B0074D5C1 /* F4SRequestCompanyDocumentTableViewCell.swift */; };
 		FCC1DF4D232504780074D5C1 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC1DF4C232504780074D5C1 /* WorkfinderAppLogic.framework */; };
 		FCC1DF4F232504780074D5C1 /* WorkfinderApplyUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC1DF4E232504780074D5C1 /* WorkfinderApplyUseCase.framework */; };
 		FCC1DF51232504780074D5C1 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC1DF50232504780074D5C1 /* WorkfinderCommon.framework */; };
@@ -54,8 +51,8 @@
 		FC6B77312372BD8600347875 /* SectionSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionSelectorView.swift; sourceTree = "<group>"; };
 		FC6B77332372D24800347875 /* CompanyTableSectionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyTableSectionsModel.swift; sourceTree = "<group>"; };
 		FC6DD8DD23748DBB0006FA3D /* NameValueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameValueCell.swift; sourceTree = "<group>"; };
-		FC7FCDFC2376B2C100C1182B /* CompanyDataSectionRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDataSectionRows.swift; sourceTree = "<group>"; };
-		FC937344237589FC00DC46E6 /* CompanySummarySectionRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanySummarySectionRows.swift; sourceTree = "<group>"; };
+		FC7FCDFC2376B2C100C1182B /* CompanyDataSectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDataSectionPresenter.swift; sourceTree = "<group>"; };
+		FC937344237589FC00DC46E6 /* CompanySummarySectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanySummarySectionPresenter.swift; sourceTree = "<group>"; };
 		FC99485D2379CFEA009D64D0 /* TextModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModel.swift; sourceTree = "<group>"; };
 		FC99485F2379D03A009D64D0 /* HostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostCell.swift; sourceTree = "<group>"; };
 		FCB9EE4A235D9F9500678F3F /* HostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostView.swift; sourceTree = "<group>"; };
@@ -66,16 +63,13 @@
 		FCC1DF02232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderCompanyDetailsUseCaseTests.swift; sourceTree = "<group>"; };
 		FCC1DF04232501ED0074D5C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCC1DF1B232502730074D5C1 /* CompanyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyCoordinator.swift; sourceTree = "<group>"; };
-		FCC1DF1D232502A00074D5C1 /* CompanyViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyViewModel.swift; sourceTree = "<group>"; };
-		FCC1DF1E232502A10074D5C1 /* CompanyFavouritesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyFavouritesModel.swift; sourceTree = "<group>"; };
-		FCC1DF1F232502A10074D5C1 /* PersonViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonViewData.swift; sourceTree = "<group>"; };
+		FCC1DF1D232502A00074D5C1 /* CompanyWorkplacePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyWorkplacePresenter.swift; sourceTree = "<group>"; };
+		FCC1DF1F232502A10074D5C1 /* TestHosts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHosts.swift; sourceTree = "<group>"; };
 		FCC1DF25232503030074D5C1 /* CompanyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyViewController.swift; sourceTree = "<group>"; };
 		FCC1DF26232503030074D5C1 /* CompanyMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyMainView.swift; sourceTree = "<group>"; };
-		FCC1DF292325031B0074D5C1 /* F4SRequestCompanyDocumentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRequestCompanyDocumentTableViewCell.swift; sourceTree = "<group>"; };
 		FCC1DF2A2325031C0074D5C1 /* CompanyMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyMapView.swift; sourceTree = "<group>"; };
 		FCC1DF2B2325031C0074D5C1 /* CompanyHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyHeaderView.swift; sourceTree = "<group>"; };
 		FCC1DF2C2325031C0074D5C1 /* CompanyToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyToolbar.swift; sourceTree = "<group>"; };
-		FCC1DF2D2325031C0074D5C1 /* SocialShareItemSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialShareItemSource.swift; sourceTree = "<group>"; };
 		FCC1DF4C232504780074D5C1 /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCC1DF4E232504780074D5C1 /* WorkfinderApplyUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderApplyUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCC1DF50232504780074D5C1 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +107,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC84BEDF24235AE9002C02E5 /* CompnayHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				FCC1DF2B2325031C0074D5C1 /* CompanyHeaderView.swift */,
+			);
+			path = CompnayHeaderView;
+			sourceTree = "<group>";
+		};
 		FCC1DEEA232501ED0074D5C1 = {
 			isa = PBXGroup;
 			children = (
@@ -168,13 +170,11 @@
 		FCC1DF24232502C40074D5C1 /* models */ = {
 			isa = PBXGroup;
 			children = (
-				FCC1DF2D2325031C0074D5C1 /* SocialShareItemSource.swift */,
 				FC6B77332372D24800347875 /* CompanyTableSectionsModel.swift */,
-				FCC1DF1D232502A00074D5C1 /* CompanyViewModel.swift */,
-				FCC1DF1E232502A10074D5C1 /* CompanyFavouritesModel.swift */,
-				FCC1DF1F232502A10074D5C1 /* PersonViewData.swift */,
-				FC937344237589FC00DC46E6 /* CompanySummarySectionRows.swift */,
-				FC7FCDFC2376B2C100C1182B /* CompanyDataSectionRows.swift */,
+				FCC1DF1D232502A00074D5C1 /* CompanyWorkplacePresenter.swift */,
+				FCC1DF1F232502A10074D5C1 /* TestHosts.swift */,
+				FC937344237589FC00DC46E6 /* CompanySummarySectionPresenter.swift */,
+				FC7FCDFC2376B2C100C1182B /* CompanyDataSectionPresenter.swift */,
 				FC99485D2379CFEA009D64D0 /* TextModel.swift */,
 			);
 			path = models;
@@ -184,9 +184,8 @@
 			isa = PBXGroup;
 			children = (
 				FC6B77312372BD8600347875 /* SectionSelectorView.swift */,
-				FCC1DF292325031B0074D5C1 /* F4SRequestCompanyDocumentTableViewCell.swift */,
 				FCC1DF2A2325031C0074D5C1 /* CompanyMapView.swift */,
-				FCC1DF2B2325031C0074D5C1 /* CompanyHeaderView.swift */,
+				FC84BEDF24235AE9002C02E5 /* CompnayHeaderView */,
 				FCC1DF2C2325031C0074D5C1 /* CompanyToolbar.swift */,
 				FC6DD8DD23748DBB0006FA3D /* NameValueCell.swift */,
 				FCB9EE4A235D9F9500678F3F /* HostView.swift */,
@@ -321,24 +320,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC937345237589FC00DC46E6 /* CompanySummarySectionRows.swift in Sources */,
-				FCC1DF21232502A10074D5C1 /* CompanyViewModel.swift in Sources */,
+				FC937345237589FC00DC46E6 /* CompanySummarySectionPresenter.swift in Sources */,
+				FCC1DF21232502A10074D5C1 /* CompanyWorkplacePresenter.swift in Sources */,
 				FC6B77342372D24800347875 /* CompanyTableSectionsModel.swift in Sources */,
-				FCC1DF322325031C0074D5C1 /* F4SRequestCompanyDocumentTableViewCell.swift in Sources */,
 				FCC1DF312325031C0074D5C1 /* CompanyMapView.swift in Sources */,
 				FC6DD8DE23748DBB0006FA3D /* NameValueCell.swift in Sources */,
 				FC6B77322372BD8600347875 /* SectionSelectorView.swift in Sources */,
 				FCC1DF1C232502740074D5C1 /* CompanyCoordinator.swift in Sources */,
 				FCC1DF2E2325031C0074D5C1 /* CompanyHeaderView.swift in Sources */,
-				FC7FCDFD2376B2C100C1182B /* CompanyDataSectionRows.swift in Sources */,
-				FCC1DF20232502A10074D5C1 /* PersonViewData.swift in Sources */,
-				FCC1DF2F2325031C0074D5C1 /* SocialShareItemSource.swift in Sources */,
+				FC7FCDFD2376B2C100C1182B /* CompanyDataSectionPresenter.swift in Sources */,
+				FCC1DF20232502A10074D5C1 /* TestHosts.swift in Sources */,
 				FC99485E2379CFEA009D64D0 /* TextModel.swift in Sources */,
 				FCC1DF302325031C0074D5C1 /* CompanyToolbar.swift in Sources */,
 				FCB9EE4B235D9F9500678F3F /* HostView.swift in Sources */,
 				FCC1DF28232503030074D5C1 /* CompanyMainView.swift in Sources */,
 				FC9948602379D03A009D64D0 /* HostCell.swift in Sources */,
-				FCC1DF22232502A10074D5C1 /* CompanyFavouritesModel.swift in Sources */,
 				FCC1DF27232503030074D5C1 /* CompanyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

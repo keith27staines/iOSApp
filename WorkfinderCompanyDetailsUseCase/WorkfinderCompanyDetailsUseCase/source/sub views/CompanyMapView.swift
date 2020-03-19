@@ -10,17 +10,22 @@ import MapKit
 import WorkfinderCommon
 
 class CompanyMapView: MKMapView {
-    let company: Company
-    init(company: Company) {
-        self.company = company
+    let companyLatLon: LatLon
+    let companyName: String
+    init(companyName: String, companyLatLon: LatLon) {
+        self.companyName = companyName
+        self.companyLatLon = companyLatLon
         super.init(frame: CGRect.zero)
-        addAnnotation(F4SCompanyAnnotation(company: company))
+        let annotation = F4SCompanyAnnotation(companyName: companyName, latLon: companyLatLon)
+        addAnnotation(annotation)
         showsScale = true
         showsCompass = true
         showsUserLocation = true
     }
     
-    lazy var companyLoc = CLLocation(latitude: company.latitude, longitude: company.longitude)
+    var companyLoc: CLLocation {
+        CLLocation()
+    }
     
     func prepareForDisplay() {
         var minimumRegionMeters = CLLocationDistance(exactly:1000.0)!
@@ -43,9 +48,27 @@ class CompanyMapView: MKMapView {
 }
 
 class F4SCompanyAnnotation : MKPointAnnotation  {
-    init(company: Company) {
+    init(companyName: String, latLon: LatLon) {
         super.init()
-        title = company.name
-        coordinate = CLLocationCoordinate2D(latitude: company.latitude, longitude: company.longitude)
+        title = companyName
+        coordinate = CLLocationCoordinate2D(latLon: latLon)
+    }
+}
+
+extension CLLocation {
+    convenience init(pin: PinJson) {
+        self.init(latitude: pin.lat, longitude: pin.lon)
+    }
+    
+    convenience init(latlon: LatLon) {
+        self.init(
+            latitude: CLLocationDegrees(latlon.x),
+            longitude: CLLocationDegrees(latlon.y))
+    }
+}
+
+extension CLLocationCoordinate2D {
+    init(pin: PinJson) {
+        self.init(latitude: pin.lat, longitude: pin.lon)
     }
 }

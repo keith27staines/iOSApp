@@ -76,12 +76,8 @@ class MockCoordinatingDelegate: CompanyViewModelCoordinatingDelegate {
     var showLocationForCompany: CompanyViewData? = nil
     var showShareForCompany: CompanyViewData? = nil
     
-    func companyViewModelDidComplete(_ viewModel: CompanyViewModel) {
+    func companyWorkplacePresenter(_ viewModel: CompanyViewModel) {
         didComplete = true
-    }
-    
-    func companyViewModel(_ viewModel: CompanyViewModel, applyTo: CompanyViewData, continueFrom: F4STimelinePlacement?) {
-        applyToCompany = applyTo
     }
     
     func companyViewModel(_ viewModel: CompanyViewModel, requestsShowLinkedIn host: F4SHost) {

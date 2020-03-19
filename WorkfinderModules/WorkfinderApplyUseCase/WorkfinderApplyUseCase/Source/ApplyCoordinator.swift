@@ -14,6 +14,11 @@ public protocol ApplyCoordinatorDelegate : class {
     func applicationDidCancel()
 }
 
+public protocol ApplyServiceProtocol {}
+public class ApplyService: ApplyServiceProtocol {
+    
+}
+
 public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     
     public enum PreferredDestinationAfterApplication {
@@ -28,19 +33,20 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     let emailVerificationModel: F4SEmailVerificationModelProtocol
     let startingViewController: UIViewController!
     let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
+    let applyService: ApplyServiceProtocol
     weak var applyCoordinatorDelegate: ApplyCoordinatorDelegate?
     lazy var userInterests: [F4SInterest] = { return interestsRepository.loadInterestsArray() }()
     
     lazy var applicationModel: ApplicationModelProtocol = {
-        let userUuid = injected.user.uuid!
-        let installationUuid = injected.appInstallationUuidLogic.registeredInstallationUuid!
-        let companyViewData = CompanyViewData(company: applicationContext.company!)
-        let host = applicationContext.host
-        return ApplicationModel(userUuid: userUuid, installationUuid: installationUuid, userInterests: userInterests, placement: placement, companyViewData: companyViewData, host: host, templateService: templateService)
+        let applicationContext = F4SApplicationContext()
+        return ApplicationModel(
+            applicationContext: self.applicationContext,
+            templateService: templateService)
     }()
     
     public init(applyCoordinatorDelegate: ApplyCoordinatorDelegate? = nil,
-                company: Company,
+                applyService: ApplyServiceProtocol,
+                companyWorkplace: CompanyWorkplace,
                 host: F4SHost? = nil,
                 parent: CoreInjectionNavigationCoordinator?,
                 navigationRouter: NavigationRoutingProtocol,
@@ -51,9 +57,10 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
                 emailVerificationModel: F4SEmailVerificationModelProtocol,
                 documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
                 documentUploaderFactory: F4SDocumentUploaderFactoryProtocol) {
-        self.environment = environment
         self.applyCoordinatorDelegate = applyCoordinatorDelegate
-        self.applicationContext = F4SApplicationContext(user: F4SUser(), company: company, host: host, placement: nil)
+        self.applyService = applyService
+        self.applicationContext = F4SApplicationContext(user: inject.user, companyWorkplace: companyWorkplace, host: host)
+        self.environment = environment
         self.templateService = templateService
         self.startingViewController = navigationRouter.navigationController.topViewController
         self.interestsRepository = interestsRepository
@@ -143,23 +150,32 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
     }
     
     func checkApplicationCanProceed() {
-        let companyUuid = applicationContext.company!.uuid
-        canApplyLogic.checkUserCanApply(user: "", to: companyUuid) { [weak self] (networkResult) in
-            guard let strongSelf = self else { return }
-            switch networkResult {
-            case .error(let error):
-                let topViewController = strongSelf.navigationRouter.navigationController.topViewController!
-                sharedUserMessageHandler.display(error, parentCtrl: topViewController, cancelHandler: {
-                    strongSelf.cancelAfterUserDetails()
-                }, retryHandler: {
-                    strongSelf.checkApplicationCanProceed()
-                })
-            case .success(true):
-                strongSelf.apply()
-            case .success(false):
-                strongSelf.cancelAfterUserDetails()
-            }
-        }
+        // If can apply then do this...
+        apply()
+        return
+        
+        // If can't apply then do this...
+        // cancelAfterUserDetails()
+        
+        // If we need a network call to determine then do something like this
+        
+//        let companyUuid = applicationContext.company!.uuid
+//        canApplyLogic.checkUserCanApply(user: "", to: companyUuid) { [weak self] (networkResult) in
+//            guard let strongSelf = self else { return }
+//            switch networkResult {
+//            case .error(let error):
+//                let topViewController = strongSelf.navigationRouter.navigationController.topViewController!
+//                sharedUserMessageHandler.display(error, parentCtrl: topViewController, cancelHandler: {
+//                    strongSelf.cancelAfterUserDetails()
+//                }, retryHandler: {
+//                    strongSelf.checkApplicationCanProceed()
+//                })
+//            case .success(true):
+//                strongSelf.apply()
+//            case .success(false):
+//                strongSelf.cancelAfterUserDetails()
+//            }
+//        }
     }
     
     func cancelAfterUserDetails() {
@@ -186,22 +202,21 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
     }
     
     func showAddDocuments() {
-        let documentService = documentServiceFactory.makePlacementDocumentsService(placementUuid: placementuuid)
-        let coordinator = DocumentUploadCoordinator(
-            parent: self,
-            navigationRouter: navigationRouter,
-            inject: injected,
-            mode: .applyWorkflow,
-            placementUuid: placementuuid,
-            documentService: documentService,
-            documentUploaderFactory: documentUploaderFactory)
-        coordinator.didFinish = { [weak self] coordinator in
-            guard let strongSelf = self else { return }
-            strongSelf.navigationRouter.pop(animated: false)
-            strongSelf.addDocumentsDidFinish()
-        }
-        addChildCoordinator(coordinator)
-        coordinator.start()
+//        let documentService = documentServiceFactory.makePlacementDocumentsService(placementUuid: placementuuid)
+//        let coordinator = DocumentUploadCoordinator(
+//            parent: self,
+//            navigationRouter: navigationRouter,
+//            inject: injected,
+//            mode: .applyWorkflow,
+//            documentService: documentService,
+//            documentUploaderFactory: documentUploaderFactory)
+//        coordinator.didFinish = { [weak self] coordinator in
+//            guard let strongSelf = self else { return }
+//            strongSelf.navigationRouter.pop(animated: false)
+//            strongSelf.addDocumentsDidFinish()
+//        }
+//        addChildCoordinator(coordinator)
+//        coordinator.start()
     }
     
     func addDocumentsDidFinish() {

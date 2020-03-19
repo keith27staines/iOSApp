@@ -13,7 +13,8 @@ public struct CompanyWorkplace: Codable {
 }
 
 public struct F4SCompanyJson : Codable {
-    public var name: String?
+    public var uuid: F4SUUID
+    public var name: String
     public var industry: String?
     public var logoUrlString: String?
     public var summary: String?
@@ -23,17 +24,23 @@ public struct F4SCompanyJson : Codable {
     public var duedilUrlString: String?
     public var linkedInUrlString: String?
     
-    public init() {}
+    public init() {
+        uuid = ""
+        name = ""
+    }
     
-    public init(name: String,
-                industry: String?,
-                logoUrlString: String?,
-                summary: String?,
-                employeeCount: Int?,
-                turnover: Double?,
-                turnoverGrowth: Double?,
-                duedilUrlString: String?,
-                linkedInUrlString: String?) {
+    public init(
+        uuid: F4SUUID,
+        name: String,
+        industry: String?,
+        logoUrlString: String?,
+        summary: String?,
+        employeeCount: Int?,
+        turnover: Double?,
+        turnoverGrowth: Double?,
+        duedilUrlString: String?,
+        linkedInUrlString: String?) {
+        self.uuid = uuid
         self.name = name
         self.industry = industry
         self.logoUrlString = logoUrlString
@@ -48,6 +55,7 @@ public struct F4SCompanyJson : Codable {
 
 extension F4SCompanyJson {
     private enum CodingKeys : String, CodingKey {
+        case uuid
         case name
         case industry
         case logoUrlString = "logo_url"

@@ -10,41 +10,88 @@ import UIKit
 import MapKit
 import WorkfinderCommon
 
-protocol CompanyMainViewDelegate : CompanyToolbarDelegate {
+protocol CompanyMainViewCoordinatingDelegate : CompanyToolbarDelegate {
     func companyMainViewDidTapApply(_ view: CompanyMainView)
 }
 
-class CompanyMainView: UIView {
+protocol CompanyMainViewPresenterRepresentable {
+    func refresh()
+}
+
+protocol CompanyMainViewPresenterProtocol {
+    var companyName: String { get }
+    var companyLocation: LatLon { get }
     
-    private weak var delegate: CompanyMainViewDelegate?
+    var headerViewPresenter: CompanyHeaderViewPresenterProtocol { get }
+    var summarySectionPresenter: CompanySummarySectionPresenterProtocol { get }
+    var dataSectionPresenter: CompanyDataSectionPresenterProtocol { get }
+    var hostsSectionPresenter: CompanyHostsSectionPresenterProtocol { get }
+    
+    var applyButtonState: (String, Bool, UIColor) { get }
+    
+    //var hosts: [F4SHost] { get }
+    //var textModel: TextModel { get }
+    //var dataSectionRows: CompanyDataSectionRows { get }
+}
+
+protocol CompanyHostsSectionPresenterProtocol {
+    var numberOfRows: Int { get }
+    var hostsSummaryModel: TextModel { get }
+    func onDidTapLinkedIn(for: F4SHost)
+}
+
+class CompanyHostsSectionPresenter: CompanyHostsSectionPresenterProtocol {
+    var numberOfRows: Int
+    var hostsSummaryModel: TextModel
+    private let hosts: [F4SHost]
+    func onDidTapLinkedIn(for: F4SHost) {
+        
+    }
+    
+    init(hosts: [F4SHost]) {
+        self.hosts = hosts
+    }
+}
+
+class CompanyMainView: UIView, CompanyMainViewPresenterRepresentable {
+    
+    private weak var delegate: CompanyMainViewCoordinatingDelegate?
     weak var log: F4SAnalyticsAndDebugging?
-    var companyViewModel: CompanyViewModel
-    var appSettings: AppSettingProvider
     
+    var mainViewPresenter: CompanyMainViewPresenterProtocol
+    
+    var headerViewPresenter: CompanyHeaderViewPresenterProtocol {
+        return mainViewPresenter.headerViewPresenter
+    }
+    var summarySectionPresenter: CompanySummarySectionPresenterProtocol {
+        return mainViewPresenter.summarySectionPresenter
+    }
+    var dataSectionPresenter: CompanyDataSectionPresenterProtocol {
+        return mainViewPresenter.dataSectionPresenter
+    }
+    var hostsSectionPresenter: CompanyHostsSectionPresenterProtocol {
+        return mainViewPresenter.hostsSectionPresenter
+    }
+
+    var appSettings: AppSettingProvider
     let toolbarAlpha: CGFloat = 0.9
     let workfinderGreen = UIColor(red: 57, green: 167, blue: 82)
     
-    var hosts: [F4SHost] { return self.companyViewModel.hosts }
-    var textModel: TextModel { return self.companyViewModel.textModel }
-    var summarySectionRows: CompanySummarySectionRows
-    var dataSectionRows: CompanyDataSectionRows { return companyViewModel.dataSectionRows}
-    
-    lazy var hostsSummaryModel: TextModel = {
-        return TextModel(hosts: self.hosts)
-    }()
-    
     lazy var mapView: CompanyMapView = {
-        let mapView = CompanyMapView(company: companyViewModel.company)
+        let mapView = CompanyMapView(
+            companyName: self.mainViewPresenter.companyName,
+            companyLatLon: self.mainViewPresenter.companyLocation)
         mapView.translatesAutoresizingMaskIntoConstraints = false
         mapView.delegate = self
         return mapView
     }()
     
-    init(companyViewModel: CompanyViewModel, delegate: CompanyMainViewDelegate, appSettings: AppSettingProvider) {
-        self.companyViewModel = companyViewModel
+    init(presenter: CompanyMainViewPresenterProtocol,
+         delegate: CompanyMainViewCoordinatingDelegate,
+         appSettings: AppSettingProvider) {
+        self.mainViewPresenter = presenter
         self.delegate = delegate
         self.appSettings = appSettings
-        self.summarySectionRows = CompanySummarySectionRows(viewData: companyViewModel.companyViewData)
         super.init(frame: CGRect.zero)
         backgroundColor = UIColor.white
         configureViews()
@@ -53,18 +100,16 @@ class CompanyMainView: UIView {
     }
     
     func refresh() {
-        summarySectionRows = CompanySummarySectionRows(viewData: companyViewModel.companyViewData)
-        headerView.refresh()
+        headerView.refresh(from: headerViewPresenter)
         tableView.reloadData()
-        let (title,isEnabled,backgroundColor) = companyViewModel.applyButtonState
+        let (title,isEnabled,backgroundColor) = presenter.applyButtonState
         applyButton.setTitle(title, for: .normal)
         applyButton.isEnabled = isEnabled
         applyButton.backgroundColor = backgroundColor
-        toolbarView.heartAppearance(hearted: companyViewModel.isFavourited)
     }
     
     lazy var headerView: CompanyHeaderView = {
-        return CompanyHeaderView(companyViewModel: self.companyViewModel)
+        return CompanyHeaderView(presenter: self.headerViewPresenter)
     }()
     
     lazy var tableView: UITableView = {
@@ -197,7 +242,7 @@ class CompanyMainView: UIView {
     }
     
     func profileLinkTap(host: F4SHost) {
-        companyViewModel.didTapLinkedIn(for: host)
+        hostsSectionPresenter.onDidTapLinkedIn(for: host)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -215,9 +260,9 @@ extension CompanyMainView: UITableViewDataSource {
         let sectionModel = sectionsModel[section]
         switch sectionModel.sectionType {
         case .companySummary:
-            return summarySectionRows.numberOfRows
+            return summarySectionPresenter.numberOfRows
         case .companyData:
-            return companyViewModel.dataSectionRows.numberOfRows
+            return mainViewPresenter.dataSectionRows.numberOfRows
         case .companyPeople:
             return hosts.count
         }
@@ -248,7 +293,7 @@ extension CompanyMainView: UITableViewDataSource {
     }
     
     func updateHostSelectionState(from host: F4SHost) {
-        companyViewModel.updateHostSelectionState(from: host)
+        presenter.updateHostSelectionState(from: host)
     }
 }
 
@@ -311,7 +356,7 @@ extension CompanyMainView: SectionSelectorViewDelegate {
             numberOfRows = summarySectionRows.numberOfRows
         case .companyData:
             event = .companyDetailsDataTabTap
-            numberOfRows = companyViewModel.dataSectionRows.numberOfRows
+            numberOfRows = mainViewPresenter.dataSectionRows.numberOfRows
         case .companyPeople:
             event = .companyDetailsPeopleTabTap
             numberOfRows = hosts.count

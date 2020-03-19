@@ -1,10 +1,3 @@
-//
-//  Person.swift
-//  F4SPrototypes
-//
-//  Created by Keith Staines on 22/12/2018.
-//  Copyright © 2018 Keith Staines. All rights reserved.
-//
 
 import Foundation
 import WorkfinderCommon

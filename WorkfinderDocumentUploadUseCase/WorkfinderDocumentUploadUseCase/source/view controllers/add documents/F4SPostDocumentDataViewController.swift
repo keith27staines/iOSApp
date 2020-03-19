@@ -128,8 +128,9 @@ class PostDocumentsWithDataViewController : UIViewController {
             delegate?.postDocumentsControllerDidCompleteUpload(self)
             return
         }
-        guard let placementUuid = documentModel?.placementUuid,
-            let uploader = uploaderFactory.makeDocumentUploader(document: document, placementuuid: placementUuid)
+        let badUuid = "bad uuid"
+        guard
+            let uploader = uploaderFactory.makeDocumentUploader(document: document, placementuuid: badUuid)
             else { return }
         updateUploadCount()
         nameLabel.text = "Uploading \"\(document.name ?? "...")\""

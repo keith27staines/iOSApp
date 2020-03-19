@@ -12,23 +12,43 @@ struct NameValueDescriptor {
     var link: URL? = nil
 }
 
-class CompanyDataSectionRows {
+protocol CompanyDataSectionPresenterProtocol: class {
+    var numberOfRows: Int { get }
+    var revenueString: String { get }
+    var growthString: String { get }
+    var numberOfEmployees: String { get }
+    var duedilIsHidden: Bool { get }
+    func cellForRow(_ row: Int, in tableView: UITableView) -> UITableViewCell
+}
+
+class CompanyDataSectionPresenter: CompanyDataSectionPresenterProtocol {
+    
+    var numberOfRows: Int { return items.count }
+    var company: F4SCompanyJson { return self.companyWorkplace.companyJson }
+    
+    var revenueString: String {
+        return String(company.turnover ?? 0)
+    }
+    
+    var growthString: String {
+        return String(company.turnoverGrowth ?? 0)
+    }
+    
+    var numberOfEmployees: String { String(company.employeeCount ?? 0) }
+    
+    var duedilIsHidden: Bool { return false }
     
     enum DataSectionRow: Int, CaseIterable {
         case annualRevenue = 0
         case annualGrowth
         case numberOfEmployees
         case seeMore
-        case employersLiabilityCertificate
-        case safeguardingCertificate
         var identifier: String {
             switch self {
             case .annualRevenue: return "annualRevenue"
             case .annualGrowth: return "annualGrowth"
             case .numberOfEmployees: return "employees"
             case .seeMore: return "seeMore"
-            case .employersLiabilityCertificate: return "ELC"
-            case .safeguardingCertificate: return "SGC"
             }
         }
         
@@ -38,8 +58,6 @@ class CompanyDataSectionRows {
             case .annualGrowth: return "Annual Growth"
             case .numberOfEmployees: return "Employees"
             case .seeMore: return "See more"
-            case .employersLiabilityCertificate: return "ELC"
-            case .safeguardingCertificate: return "Safeguarding certificate"
             }
         }
         
@@ -49,33 +67,19 @@ class CompanyDataSectionRows {
             case "annualGrowth": self = DataSectionRow.annualGrowth
             case "employees": self = DataSectionRow.numberOfEmployees
             case "seeMore": self = DataSectionRow.seeMore
-            case "ELC": self = DataSectionRow.employersLiabilityCertificate
-            case "SGC": self = DataSectionRow.safeguardingCertificate
             default: return nil
             }
         }
     }
     
-    unowned var viewModel: CompanyViewModel
-    var viewData: CompanyViewData
-    var numberOfRows: Int { return items.count }
     var items: [NameValueDescriptor] {
         var items = [
-            makeDescriptor(rowType: .annualRevenue, value: self.viewData.revenueString, isButton: false),
-            makeDescriptor(rowType: .annualGrowth, value: self.viewData.growthString, isButton: false),
-            makeDescriptor(rowType: .numberOfEmployees, value: self.viewData.employeesString, isButton: false)
+            makeDescriptor(rowType: .annualRevenue, value: self.revenueString, isButton: false),
+            makeDescriptor(rowType: .annualGrowth, value: self.growthString, isButton: false),
+            makeDescriptor(rowType: .numberOfEmployees, value: self.numberOfEmployees, isButton: false)
             ]
-        companyDocumentsModel.availableDocuments.forEach { (document) in
-            let image = UIImage(named: "generic_document")?.scaledImage(with: CGSize(width: 18, height: 18))
-            items.append(NameValueDescriptor(identifier: document.docType,
-                                             name: document.name,
-                                             value: "view document",
-                                             isButton: true,
-                                             buttonImage: image,
-                                             link: document.url))
-        }
         
-        if !viewData.duedilIsHiden {
+        if !duedilIsHidden {
             let image = UIImage(named: "Duedil")?.scaledImage(with: CGSize(width: 18, height: 18))
             items.append(NameValueDescriptor(identifier: DataSectionRow.seeMore.identifier,
                                              name: DataSectionRow.seeMore.name,
@@ -103,13 +107,9 @@ class CompanyDataSectionRows {
                                    buttonImage: nil,
                                    link: nil)
     }
-    
-    unowned let companyDocumentsModel: F4SCompanyDocumentsModelProtocol
-    
-    init(viewModel: CompanyViewModel, companyDocumentsModel: F4SCompanyDocumentsModelProtocol) {
-        self.viewModel = viewModel
-        self.viewData = viewModel.companyViewData
-        self.companyDocumentsModel = companyDocumentsModel
+    let companyWorkplace: CompanyWorkplace
+    init(companyWorkplace: CompanyWorkplace) {
+        self.companyWorkplace = companyWorkplace
     }
     
     func cellForRow(_ row: Int, in tableView: UITableView) -> UITableViewCell {
@@ -126,10 +126,6 @@ class CompanyDataSectionRows {
     }
     
     func duedilTap(url: URL? = nil) {
-        if let url = url {
-            viewModel.didTapLink(url: url)
-        } else {
-            viewModel.didTapDuedil(for: viewData)
-        }
+    
     }
 }

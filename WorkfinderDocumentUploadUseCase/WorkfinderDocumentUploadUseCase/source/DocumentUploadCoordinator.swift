@@ -11,7 +11,6 @@ public class DocumentUploadCoordinator : CoreInjectionNavigationCoordinator {
     var log: F4SAnalyticsAndDebugging { return injected.log }
     public var didFinish: ((DocumentUploadCoordinator)->Void)?
     
-    let placementUuid: F4SUUID
     let documentService: F4SPlacementDocumentsServiceProtocol
     let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
     
@@ -19,10 +18,8 @@ public class DocumentUploadCoordinator : CoreInjectionNavigationCoordinator {
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
                 mode: UploadScenario,
-                placementUuid: F4SUUID,
                 documentService: F4SPlacementDocumentsServiceProtocol,
                 documentUploaderFactory: F4SDocumentUploaderFactoryProtocol) {
-        self.placementUuid = placementUuid
         self.documentService = documentService
         self.mode = mode
         self.documentUploaderFactory = documentUploaderFactory
@@ -34,11 +31,9 @@ public class DocumentUploadCoordinator : CoreInjectionNavigationCoordinator {
         case .applyWorkflow:
             addDocumentsController.documentModel = F4SDocumentUploadWhileApplyingModel(
                 delegate: addDocumentsController,
-                placementUuid: placementUuid,
                 documentService: documentService,
                 documents: [])
         }
-        addDocumentsController.placementUuid = placementUuid
         addDocumentsController.uploadScenario = mode
         addDocumentsController.coordinator = self
         navigationRouter.push(viewController: addDocumentsController, animated: true)

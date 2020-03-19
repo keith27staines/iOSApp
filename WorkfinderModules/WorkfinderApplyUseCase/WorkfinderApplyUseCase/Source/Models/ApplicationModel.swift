@@ -15,13 +15,11 @@ protocol ApplicationModelProtocol : class {
 class ApplicationModel : ApplicationModelProtocol {
     
     public internal (set) var templateService: F4STemplateServiceProtocol
-    public internal (set) var companyWorkplace: CompanyWorkplace
-    public internal (set) var host: F4SHost?
     public internal (set) lazy var localStore: LocalStorageProtocol = { return LocalStore() }()
-    
     public internal (set) lazy var userInterests: [F4SInterest] = []
-    let installationUuid: F4SUUID
-    var userUuid: F4SUUID
+    public var userUuid: F4SUUID? { return applicationContext.user?.uuid }
+    public var companyWorkplace: CompanyWorkplace? { return applicationContext.companyWorkplace }
+    public var host: F4SHost? {return applicationContext.host }
     
     lazy var motivationRepository: F4SMotivationRepositoryProtocol = {
         return F4SMotivationRepository(localStore: self.localStore)
@@ -79,7 +77,7 @@ class ApplicationModel : ApplicationModelProtocol {
     
     lazy var applicationLetterModel: ApplicationLetterModelProtocol = {
         return ApplicationLetterModel(
-            companyName: self.companyWorkplace.companyJson.name ?? "unnamed company",
+            companyName: self.companyWorkplace?.companyJson.name ?? "unnamed company",
             templateService: self.templateService,
             delegate: nil,
             blanksModel: blanksModel)
@@ -99,20 +97,12 @@ class ApplicationModel : ApplicationModelProtocol {
         return blanksModel
     }()
     
-    init(
-        userUuid: F4SUUID,
-        installationUuid: F4SUUID,
-        userInterests: [F4SInterest],
-        companyWorkplace: CompanyWorkplace,
-        host: F4SHost? = nil,
+    let applicationContext: F4SApplicationContext
+    
+    public init(applicationContext: F4SApplicationContext,
         templateService: F4STemplateServiceProtocol) {
-        
-        self.userUuid = userUuid
-        self.installationUuid = installationUuid
-        self.companyWorkplace = companyWorkplace
-        self.host = host
+        self.applicationContext = applicationContext
         self.templateService = templateService
-        self.userInterests = userInterests
     }
     
     func createApplication(completion: @escaping ((Error?) -> Void)) -> Void {
@@ -138,7 +128,6 @@ class ApplicationModel : ApplicationModelProtocol {
         onStepRetry: @escaping ((@escaping (Error?) -> Void)) -> Void) {
         DispatchQueue.main.async { [weak self] in
             guard
-                let strongSelf = self,
                 let applicationLetterViewModel = self?.applicationLetterViewModel,
                 let letterModel = self?.applicationLetterModel else { return }
             
@@ -148,8 +137,7 @@ class ApplicationModel : ApplicationModelProtocol {
                 applicationLetterViewModel.applicationLetterModel(letterModel, failedToSubmitLetter: error, retry: {
                     onStepRetry(completion)
                 })
-            case .success(let placementJson):
-
+            case .success( _):
                 onStepSuccess(completion)
             }
         }

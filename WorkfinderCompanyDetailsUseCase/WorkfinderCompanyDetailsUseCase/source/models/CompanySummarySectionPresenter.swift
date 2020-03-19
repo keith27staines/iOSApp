@@ -3,13 +3,17 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderUI
 
-class CompanySummarySectionRows {
-    var viewData: CompanyViewData?
-    
+protocol CompanySummarySectionPresenterProtocol {
+    var numberOfRows: Int { get }
+}
+
+class CompanySummarySectionPresenter {
+    let companyWorkplace: CompanyWorkplace
+    var company: F4SCompanyJson { companyWorkplace.companyJson }
     var numberOfRows: Int { return SummarySectionRow.allCases.count }
     
-    init(viewData: CompanyViewData) {
-        self.viewData = viewData
+    init(companyWorkplace: CompanyWorkplace) {
+        self.companyWorkplace = companyWorkplace
     }
     
     enum SummarySectionRow: Int, CaseIterable {
@@ -42,13 +46,13 @@ class CompanySummarySectionRows {
         case .postcode:
             let nameValueCell = cell as! NameValueCell
             nameValueCell.nameLabel.text = "Postcode"
-            nameValueCell.valueLabel.text = viewData?.postcode
+            nameValueCell.valueLabel.text = "no postcode"
             nameValueCell.nameValue.isButton = false
             nameValueCell.nameLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
         case .industry:
             let nameValueCell = cell as! NameValueCell
             nameValueCell.nameLabel.text = "Industry"
-            nameValueCell.valueLabel.text = viewData?.industry
+            nameValueCell.valueLabel.text = company.industry
             nameValueCell.nameValue.isButton = false
             nameValueCell.nameLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
         case .summary:
@@ -58,7 +62,7 @@ class CompanySummarySectionRows {
             nameValueCell.nameLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         case .summaryText:
             let summaryCell = cell as! CompanySummaryTextCell
-            summaryCell.expandableLabel.text = viewData?.description
+            summaryCell.expandableLabel.text = company.summary
             summaryCell.expandableLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
         }
         return cell

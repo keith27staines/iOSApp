@@ -13,15 +13,15 @@ import WorkfinderUI
 class CompanyViewController: UIViewController {
     let screenName = ScreenName.company
     var originScreen = ScreenName.notSpecified
-    let viewModel: CompanyViewModel
+    let presenter: CompanyWorkplacePresenter
     weak var log: F4SAnalyticsAndDebugging?
     var appSettings: AppSettingProvider
     
-    init(viewModel: CompanyViewModel, appSettings: AppSettingProvider) {
-        self.viewModel = viewModel
+    init(presenter: CompanyWorkplacePresenter, appSettings: AppSettingProvider) {
+        self.presenter = presenter
         self.appSettings = appSettings
         super.init(nibName: nil, bundle: nil)
-        viewModel.viewModelDelegate = self
+        presenter.presenterDelegate = self
         hidesBottomBarWhenPushed = true
     }
     
@@ -30,7 +30,7 @@ class CompanyViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
     
     func refresh() {
-        viewModel.userLocation = companyMainPageView.mapView.userLocation.location
+        presenter.userLocation = companyMainPageView.mapView.userLocation.location
         companyMainPageView.refresh()
     }
     
@@ -42,13 +42,13 @@ class CompanyViewController: UIViewController {
     }()
     
     override func loadView() {
-        view = CompanyMainView(companyViewModel: viewModel, delegate: self, appSettings: appSettings)
+        view = CompanyMainView(companyViewModel: presenter, delegate: self, appSettings: appSettings)
     }
     
     override func viewDidLoad() {
         log?.track(event: .companyDetailsScreenDidLoad, properties: nil)
-        viewModel.viewModelDelegate = self
-        viewModel.startLoad()
+        presenter.presenterDelegate = self
+        presenter.startLoad()
         refresh()
     }
     
@@ -75,7 +75,7 @@ class CompanyViewController: UIViewController {
     }
     
     @objc func didTapDone() {
-        viewModel.didTapDone()
+        presenter.didTapDone()
     }
     
     func incrementLoadingInProgressCount() {
@@ -98,9 +98,9 @@ class CompanyViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
 
-extension CompanyViewController : CompanyViewModelDelegate {
+extension CompanyViewController : CompanyWorkplacePresenterDelegate {
     
-    func companyViewModel(_ viewModel: CompanyViewModel, showMap: Bool) {
+    func companyWorkplacePresenter(_ viewModel: CompanyWorkplacePresenter, showMap: Bool) {
         switch showMap {
         case true:
             companyMainPageView.animateMapIn()
@@ -109,7 +109,7 @@ extension CompanyViewController : CompanyViewModelDelegate {
         }
     }
     
-    func companyViewModelNetworkTaskDidFail(_ viewModel: CompanyViewModel, error: F4SNetworkError, retry: (() -> Void)?) {
+    func companyWorkplacePresenterDidFailNetworkTask(_ viewModel: CompanyWorkplacePresenter, error: F4SNetworkError, retry: (() -> Void)?) {
         let alert: UIAlertController = UIAlertController(title: "Network error", message: "The operation could not be completed", preferredStyle: UIAlertController.Style.alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: { [weak self] action in
             self?.decrementLoadingInProgressCount()
@@ -122,23 +122,23 @@ extension CompanyViewController : CompanyViewModelDelegate {
         present(alert, animated: true, completion: nil)
     }
     
-    func companyViewModelDidRefresh(_ viewModel: CompanyViewModel) {
+    func companyWorkplacePresenterDidRefresh(_ viewModel: CompanyWorkplacePresenter) {
         refresh()
     }
     
-    func companyViewModelDidBeginNetworkTask(_ viewModel: CompanyViewModel) {
+    func companyWorkplacePresenterDidBeginNetworkTask(_ viewModel: CompanyWorkplacePresenter) {
         incrementLoadingInProgressCount()
     }
     
-    func companyViewModelDidCompleteLoadingTask(_ viewModel: CompanyViewModel) {
+    func companyWorkplacePresenterDidEndLoadingTask(_ viewModel: CompanyWorkplacePresenter) {
         decrementLoadingInProgressCount()
         refresh()
     }
 }
 
-extension CompanyViewController : CompanyMainViewDelegate {
+extension CompanyViewController : CompanyMainViewCoordinatingDelegate {
     func companyMainViewDidTapApply(_ view: CompanyMainView) {
-        viewModel.didTapApply { [weak self] (initiateApplyResult) in
+        presenter.didTapApply { [weak self] (initiateApplyResult) in
             guard let strongSelf = self else { return }
             strongSelf.processInitiateApplyResult(initiateApplyResult)
         }
@@ -146,30 +146,30 @@ extension CompanyViewController : CompanyMainViewDelegate {
     
     func companyToolbar(_ toolbar: CompanyToolbar, requestedAction: CompanyToolbar.ActionType) {
         switch requestedAction {
-        case .showShare:
-            log?.track(event: .companyDetailsShowShareTap, properties: nil)
-            viewModel.showShare()
-        case .toggleHeart:
-            incrementLoadingInProgressCount()
-            switch viewModel.isFavourited {
-            case true:
-                log?.track(event: .companyDetailsFavouriteSwitchOff, properties: nil)
-            case false:
-                log?.track(event: .companyDetailsFavouriteSwitchOn, properties: nil)
-            }
-            viewModel.toggleFavourited()
+//        case .showShare:
+//            log?.track(event: .companyDetailsShowShareTap, properties: nil)
+//            viewModel.showShare()
+//        case .toggleHeart:
+//            incrementLoadingInProgressCount()
+//            switch viewModel.isFavourited {
+//            case true:
+//                log?.track(event: .companyDetailsFavouriteSwitchOff, properties: nil)
+//            case false:
+//                log?.track(event: .companyDetailsFavouriteSwitchOn, properties: nil)
+//            }
+//            viewModel.toggleFavourited()
         case .showMap:
-            switch viewModel.isShowingMap {
+            switch presenter.isShowingMap {
             case true:
                 log?.track(event: .companyDetailsHideMapTap, properties: nil)
             case false:
                 log?.track(event: .companyDetailsShowMapTap, properties: nil)
             }
-            viewModel.isShowingMap.toggle()
+            presenter.isShowingMap.toggle()
         }
     }
     
-    func processInitiateApplyResult(_ applyState: CompanyViewModel.InitiateApplicationResult) {
+    func processInitiateApplyResult(_ applyState: CompanyWorkplacePresenter.InitiateApplicationResult) {
         let title = applyState.deniedReason?.title
         let message = applyState.deniedReason?.message
         let buttonTitle = applyState.deniedReason?.buttonTitle

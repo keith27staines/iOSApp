@@ -10,30 +10,57 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 
-class CompanyHeaderView: UIView {
+protocol CompanyHeaderViewPresenterRenderable: class {
+    func refresh(from presenter: CompanyHeaderViewPresenterProtocol)
+}
 
-    init(companyViewModel: CompanyViewModel) {
-        self.companyViewModel = companyViewModel
+protocol CompanyHeaderViewPresenterProtocol: class {
+    var headerView: CompanyHeaderViewPresenterRenderable? { get set }
+    var companyName: String { get }
+    var logoUrlString: String { get }
+    var distanceFromCompany: String { get }
+    func onDidInitialise()
+}
+
+class CompanyHeaderViewPresenter: CompanyHeaderViewPresenterProtocol {
+    
+    weak var headerView: CompanyHeaderViewPresenterRenderable?
+    let model: CompanyWorkplace
+    
+    init(headerView: CompanyHeaderViewPresenterRenderable,
+         companyWorkplace: CompanyWorkplace) {
+        self.headerView = headerView
+        self.model = companyWorkplace
+    }
+    
+    var companyName: String { model.companyJson.name }
+    var logoUrlString: String { model.companyJson.logoUrlString ?? "badUrl" }
+    private (set) var distanceFromCompany: String = "unknown distance"
+    
+    func onDidInitialise() {
+        headerView?.refresh(from: self)
+    }
+     
+}
+
+class CompanyHeaderView: UIView, CompanyHeaderViewPresenterRenderable {
+
+    init(presenter: CompanyHeaderViewPresenterProtocol) {
+        self.presenter = presenter
         super.init(frame: CGRect.zero)
         backgroundColor = UIColor.clear
         configureViews()
-        refresh()
+        refresh(from: presenter)
     }
     
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
-    var companyViewModel: CompanyViewModel {
-        didSet {
-            refresh()
-        }
-    }
+    let presenter: CompanyHeaderViewPresenterProtocol
     
-    var companyViewData: CompanyViewData { return companyViewModel.companyViewData }
-    
-    func refresh() {
-        companyNameLabel.text = companyViewData.companyName
-        companyIconImageView.load(urlString: companyViewData.logoUrlString, defaultImage: UIImage(named: "DefaultLogo"))
-        distanceLabel.text = companyViewModel.distanceFromUserToCompany
+    func refresh(from presenter: CompanyHeaderViewPresenterProtocol) {
+        companyNameLabel.text = presenter.companyName
+        companyIconImageView.load(urlString: presenter.logoUrlString, defaultImage: UIImage(named: "DefaultLogo"))
+        distanceLabel.text = presenter.distanceFromCompany
     }
     
     let iconViewRadius = CGFloat(10)

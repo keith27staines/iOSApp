@@ -16,37 +16,16 @@ protocol CompanyToolbarDelegate : class {
 class CompanyToolbar: UIToolbar {
     
     enum ActionType : Int {
-        case showShare
-        case toggleHeart
+//        case showShare
+//        case toggleHeart
         case showMap
     }
     
     weak var toolbarDelegate: CompanyToolbarDelegate?
     
-    var shareButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action, target: self, action: #selector(handleButtonTapped))
-        button.tag = ActionType.showShare.rawValue
-        button.tintColor = UIColor.black
-        return button
-    }()
-    
-    func heartAppearance(hearted: Bool) {
-        let on = #imageLiteral(resourceName: "heartFilled")
-        let off = UIImage(named: "heartOutline")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
-        heartButton.image = hearted ? on : off
-        heartButton.tintColor = hearted ? UIColor.blue : UIColor.black
-    }
-    
     func mapAppearance(shown: Bool) {
         mapButton.tintColor = shown ? UIColor.blue :UIColor.black
     }
-    
-    var heartButton: UIBarButtonItem = {
-        let heartImage = UIImage(named: "heartOutline")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
-        let button = UIBarButtonItem(image: heartImage, style: UIBarButtonItem.Style.plain, target: self, action: #selector(handleButtonTapped))
-        button.tag = ActionType.toggleHeart.rawValue
-        return button
-    }()
     
     var mapButton: UIBarButtonItem = {
         let image = UIImage(named: "pin_on_map")
@@ -60,10 +39,6 @@ class CompanyToolbar: UIToolbar {
         super.init(frame: CGRect.zero)
         items = [
             makeFlexibleSpace(),
-            shareButton,
-            makeFlexibleSpace(),
-            heartButton,
-            makeFlexibleSpace(),
             mapButton,
             makeFlexibleSpace()
         ]
@@ -76,7 +51,7 @@ class CompanyToolbar: UIToolbar {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        items = [shareButton,heartButton, mapButton]
+        items = [mapButton]
     }
     
     @objc private func handleButtonTapped(sender: UIBarButtonItem) {
