@@ -1,6 +1,7 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderServices
 import WorkfinderCoordinators
 import WorkfinderAppLogic
 import WorkfinderApplyUseCase
@@ -8,7 +9,7 @@ import WorkfinderApplyUseCase
 public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoordinatorProtocol {
     public var originScreen = ScreenName.notSpecified
     let environment: EnvironmentType
-    var companyViewController: CompanyViewController!
+    var companyViewController: CompanyWorkplaceViewController!
     var companyWorkplacePresenter: CompanyWorkplacePresenter!
     var companyWorkplace: CompanyWorkplace
     var interestsRepository: F4SInterestsRepositoryProtocol
@@ -50,12 +51,12 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
     public override func start() {
         super.start()
         companyWorkplacePresenter = CompanyWorkplacePresenter(
-            coordinatingDelegate: self,
+            coordinator: self,
             companyWorkplace: companyWorkplace,
             companyService: companyService,
             log: injected.log)
-        companyViewController = CompanyViewController(
-            presenter: companyWorkplacePresenter, appSettings: injected.appSettings)
+        companyViewController = CompanyWorkplaceViewController(appSettings: injected.appSettings)
+        companyWorkplacePresenter.attachView(view: companyViewController)
         companyViewController.log = self.injected.log
         companyViewController.originScreen = originScreen
         navigationRouter.push(viewController: companyViewController, animated: true)
@@ -89,7 +90,7 @@ extension CompanyCoordinator : ApplyCoordinatorDelegate {
     }
 }
 
-extension CompanyCoordinator : CompanyWorkplacePresenterCoordinatingDelegate {
+extension CompanyCoordinator : CompanyWorkplaceCoordinatorProtocol {
 
     func companyWorkplacePresenterDidFinish(_ presenter: CompanyWorkplacePresenter) {
         cleanup()
@@ -104,7 +105,7 @@ extension CompanyCoordinator : CompanyWorkplacePresenterCoordinatingDelegate {
     }
     
     func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, applyTo companyWorkplace: CompanyWorkplace) {
-        let host = presenter.selectedHost
+        let host = F4SHost(uuid: "hostUuid")
         startApplyCoordinator(companyWorkplace: companyWorkplace, host: host)
     }
     

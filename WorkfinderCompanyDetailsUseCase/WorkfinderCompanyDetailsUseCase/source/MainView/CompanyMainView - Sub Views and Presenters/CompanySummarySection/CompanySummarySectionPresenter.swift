@@ -1,4 +1,4 @@
-
+ 
 import Foundation
 import WorkfinderCommon
 import WorkfinderUI
@@ -8,7 +8,7 @@ protocol CompanySummarySectionPresenterProtocol {
     func cellForRow(_ row: Int, in tableView: UITableView) -> UITableViewCell
 }
 
-class CompanySummarySectionPresenter {
+ class CompanySummarySectionPresenter: CompanySummarySectionPresenterProtocol {
     let companyWorkplace: CompanyWorkplace
     var company: F4SCompanyJson { companyWorkplace.companyJson }
     var numberOfRows: Int { return SummarySectionRow.allCases.count }

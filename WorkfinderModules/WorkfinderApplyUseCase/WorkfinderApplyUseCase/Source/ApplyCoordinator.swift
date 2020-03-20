@@ -1,6 +1,7 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderServices
 import WorkfinderAppLogic
 import WorkfinderUI
 import WorkfinderCoordinators
@@ -12,11 +13,6 @@ let __bundle = Bundle(identifier: "com.f4s.WorkfinderApplyUseCase")!
 public protocol ApplyCoordinatorDelegate : class {
     func applicationDidFinish(preferredDestination: ApplyCoordinator.PreferredDestinationAfterApplication)
     func applicationDidCancel()
-}
-
-public protocol ApplyServiceProtocol {}
-public class ApplyService: ApplyServiceProtocol {
-    
 }
 
 public class ApplyCoordinator : CoreInjectionNavigationCoordinator {

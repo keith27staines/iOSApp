@@ -4,35 +4,31 @@ import WorkfinderCommon
 import WorkfinderAppLogic
 
 public class CoreInjection : CoreInjectionProtocol {
-    
     public weak var appCoordinator: AppCoordinatorProtocol?
     public var launchOptions: LaunchOptions? = nil
     public var user: F4SUser
-    public var userService: F4SUserServiceProtocol
-    public var userStatusService: F4SUserStatusServiceProtocol
     public var userRepository: F4SUserRepositoryProtocol
     public var companyDownloadFileManager: F4SCompanyDownloadManagerProtocol
     public var log: F4SAnalyticsAndDebugging
-    public let appInstallationUuidLogic: AppInstallationUuidLogicProtocol
+    public let appInstallationLogic: AppInstallationLogicProtocol
     public let appSettings: AppSettingProvider
+    public var userService: F4SUserServiceProtocol
     
     public init(launchOptions: LaunchOptions?,
-                appInstallationUuidLogic: AppInstallationUuidLogicProtocol,
+                appInstallationLogic: AppInstallationLogicProtocol,
                 user: F4SUser,
                 userService: F4SUserServiceProtocol,
-                userStatusService: F4SUserStatusServiceProtocol,
                 userRepository: F4SUserRepositoryProtocol,
-                databaseDownloadManager: F4SCompanyDownloadManagerProtocol,
+                companyDownloadFileManager: F4SCompanyDownloadManagerProtocol,
                 log: F4SAnalyticsAndDebugging,
                 appSettings: AppSettingProvider) {
         
         self.launchOptions = launchOptions
-        self.appInstallationUuidLogic = appInstallationUuidLogic
+        self.appInstallationLogic = appInstallationLogic
         self.user = user
         self.userService = userService
-        self.userStatusService = userStatusService
         self.userRepository = userRepository
-        self.companyDownloadFileManager = databaseDownloadManager
+        self.companyDownloadFileManager = companyDownloadFileManager
         self.log = log
         self.appSettings = appSettings
     }

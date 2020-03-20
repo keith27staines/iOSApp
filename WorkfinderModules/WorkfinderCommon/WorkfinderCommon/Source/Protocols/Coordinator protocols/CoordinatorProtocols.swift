@@ -28,16 +28,11 @@ public protocol CompanyCoordinatorProtocol : CoreInjectionNavigationCoordinatorP
 }
 
 public protocol CompanyCoordinatorFactoryProtocol {
-    func makeCompanyCoordinator(
-        parent: CompanyCoordinatorParentProtocol,
-        navigationRouter: NavigationRoutingProtocol,
-        inject: CoreInjectionProtocol,
-        companyUuid: F4SUUID) ->  CompanyCoordinatorProtocol?
     
     func makeCompanyCoordinator(
         parent: CompanyCoordinatorParentProtocol,
         navigationRouter: NavigationRoutingProtocol,
-        company: F4SCompanyJson,
+        companyWorkplace: CompanyWorkplace,
         inject: CoreInjectionProtocol) -> CompanyCoordinatorProtocol
 }
 
@@ -68,11 +63,10 @@ public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorPr
 
 public protocol CoreInjectionProtocol : class {
     var appCoordinator: AppCoordinatorProtocol? { get set }
-    var appInstallationUuidLogic: AppInstallationUuidLogicProtocol { get }
+    var appInstallationLogic: AppInstallationLogicProtocol { get }
     var launchOptions: LaunchOptions? { get set }
     var user: F4SUser { get set }
     var userService: F4SUserServiceProtocol { get }
-    var userStatusService: F4SUserStatusServiceProtocol { get }
     var userRepository: F4SUserRepositoryProtocol { get }
     var companyDownloadFileManager: F4SCompanyDownloadManagerProtocol { get }
     var log: F4SAnalyticsAndDebugging { get }
@@ -83,11 +77,9 @@ public protocol CoreInjectionNavigationCoordinatorProtocol : NavigationCoordinat
     var injected: CoreInjectionProtocol { get }
 }
 
-public protocol VersionChecking : class {
+public protocol VersionCheckCoordinatorProtocol: NavigationCoordinating {
     var versionCheckCompletion: ((F4SNetworkResult<F4SVersionValidity>) -> Void)? { get set }
 }
-
-public protocol VersionCheckCoordinatorProtocol: NavigationCoordinating, VersionChecking {}
 
 public protocol NavigationCoordinating : Coordinating {}
 

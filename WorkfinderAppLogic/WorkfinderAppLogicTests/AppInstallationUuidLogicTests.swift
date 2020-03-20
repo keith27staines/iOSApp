@@ -1,5 +1,5 @@
 //
-//  AppInstallationUuidLogicTests.swift
+//  AppInstallationLogicTests.swift
 //  f4s-workexperienceTests
 //
 //  Created by Keith Dev on 20/07/2019.
@@ -12,7 +12,7 @@ import WorkfinderNetworking
 import WorkfinderServices
 @testable import WorkfinderAppLogic
 
-class AppInstallationUuidLogicTests: XCTestCase {
+class AppInstallationLogicTests: XCTestCase {
 
     func test_ensure_SUT_uses_injected_store() {
         let localStore = MockLocalStore()
@@ -41,12 +41,12 @@ class AppInstallationUuidLogicTests: XCTestCase {
         XCTAssertNil(sut.registeredInstallationUuid)
     }
     
-    func makeSUT(localStore: LocalStorageProtocol = MockLocalStore()) -> AppInstallationUuidLogic {
+    func makeSUT(localStore: LocalStorageProtocol = MockLocalStore()) -> AppInstallationLogic {
         let user = F4SUser(uuid: "uuid")
         let userRepo = MockUserRepository(user: user)
         let userService = MockUserService(registeringWillSucceedOnAttempt: 1)
         let registrationService = MockDeviceRegistationService()
-        return AppInstallationUuidLogic(
+        return AppInstallationLogic(
             localStore: localStore,
             userService: userService,
             userRepo: userRepo,

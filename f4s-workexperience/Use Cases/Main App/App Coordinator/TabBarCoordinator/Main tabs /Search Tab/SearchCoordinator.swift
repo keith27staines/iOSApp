@@ -37,13 +37,17 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
         navigationRouter.navigationController.pushViewController(rootViewController, animated: false)
     }
     
-    var showingDetailForCompany: Company?
+    var showingDetailForCompanyWorkplace: CompanyWorkplace?
 
-    func showDetail(company: CompanyWorkplace?, originScreen: ScreenName) {
-        guard let company = company else { return }
-        showingDetailForCompany = company
+    func showDetail(companyWorkplace: CompanyWorkplace?, originScreen: ScreenName) {
+        guard let companyWorkplace = companyWorkplace else { return }
+        showingDetailForCompanyWorkplace = companyWorkplace
         rootViewController.dismiss(animated: true)
-        let companyCoordinator = companyCoordinatorFactory.makeCompanyCoordinator(parent: self, navigationRouter: navigationRouter, company: company, inject: injected)
+        let companyCoordinator = companyCoordinatorFactory.makeCompanyCoordinator(
+            parent: self,
+            navigationRouter: navigationRouter,
+            companyWorkplace: companyWorkplace,
+            inject: injected)
         companyCoordinator.originScreen = originScreen
         addChildCoordinator(companyCoordinator)
         companyCoordinator.start()

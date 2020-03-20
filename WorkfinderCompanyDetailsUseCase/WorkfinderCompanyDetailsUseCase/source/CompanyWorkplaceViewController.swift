@@ -10,18 +10,26 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 
-class CompanyViewController: UIViewController {
+protocol CompanyWorkplaceViewProtocol : class {
+    var presenter: CompanyWorkplacePresenterProtocol! { get set }
+    func companyWorkplacePresenterDidRefresh(_ presenter: CompanyWorkplacePresenter)
+    func companyWorkplacePresenterDidBeginNetworkTask(_ presenter: CompanyWorkplacePresenter)
+    func companyWorkplacePresenterDidEndLoadingTask(_ presenter: CompanyWorkplacePresenter)
+    func companyWorkplacePresenterDidFailNetworkTask(_ presenter: CompanyWorkplacePresenter, error: F4SNetworkError, retry: (() -> Void)?)
+    func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, showMap: Bool)
+}
+
+class CompanyWorkplaceViewController: UIViewController {
+    var presenter: CompanyWorkplacePresenterProtocol!
+    weak var coordinator: CompanyCoordinatorProtocol!
     let screenName = ScreenName.company
     var originScreen = ScreenName.notSpecified
-    let presenter: CompanyWorkplacePresenter
     weak var log: F4SAnalyticsAndDebugging?
     var appSettings: AppSettingProvider
     
-    init(presenter: CompanyWorkplacePresenter, appSettings: AppSettingProvider) {
-        self.presenter = presenter
+    init(appSettings: AppSettingProvider) {
         self.appSettings = appSettings
         super.init(nibName: nil, bundle: nil)
-        presenter.presenterDelegate = self
         hidesBottomBarWhenPushed = true
     }
     
@@ -30,7 +38,7 @@ class CompanyViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
     
     func refresh() {
-        presenter.userLocation = companyMainPageView.mapView.userLocation.location
+        //presenter.userLocation = companyMainPageView.mapView.userLocation.location
         companyMainPageView.refresh()
     }
     
@@ -42,15 +50,11 @@ class CompanyViewController: UIViewController {
     }()
     
     override func loadView() {
-        let mainViewPresenter = 
-        view = CompanyMainView(presenter: presenter, delegate: self, appSettings: appSettings)
+        view = CompanyMainView(appSettings: appSettings)
     }
     
     override func viewDidLoad() {
         log?.track(event: .companyDetailsScreenDidLoad, properties: nil)
-        presenter.presenterDelegate = self
-        presenter.startLoad()
-        refresh()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,7 +69,7 @@ class CompanyViewController: UIViewController {
         button.setTitle("Back", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         button.sizeToFit()
-        button.addTarget(self, action: #selector(didTapDone), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTapBack), for: .touchUpInside)
         return UIBarButtonItem(customView: button)
     }()
     
@@ -75,8 +79,8 @@ class CompanyViewController: UIViewController {
         navigationItem.leftBarButtonItem = leftButton
     }
     
-    @objc func didTapDone() {
-        presenter.didTapDone()
+    @objc func didTapBack() {
+        presenter.onTapBack()
     }
     
     func incrementLoadingInProgressCount() {
@@ -99,7 +103,7 @@ class CompanyViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
 
-extension CompanyViewController : CompanyWorkplacePresenterDelegate {
+extension CompanyWorkplaceViewController : CompanyWorkplaceViewProtocol{
     
     func companyWorkplacePresenter(_ viewModel: CompanyWorkplacePresenter, showMap: Bool) {
         switch showMap {
@@ -137,28 +141,20 @@ extension CompanyViewController : CompanyWorkplacePresenterDelegate {
     }
 }
 
-extension CompanyViewController : CompanyMainViewCoordinatingDelegate {
+extension CompanyWorkplaceViewController : CompanyMainViewCoordinatorProtocol {
     func companyMainViewDidTapApply(_ view: CompanyMainView) {
-        presenter.didTapApply { [weak self] (initiateApplyResult) in
+        presenter.onTapApply()
+        
+        /*
+        presenter.onTapApply() { [weak self] (initiateApplyResult) in
             guard let strongSelf = self else { return }
             strongSelf.processInitiateApplyResult(initiateApplyResult)
         }
+         */
     }
     
     func companyToolbar(_ toolbar: CompanyToolbar, requestedAction: CompanyToolbar.ActionType) {
         switch requestedAction {
-//        case .showShare:
-//            log?.track(event: .companyDetailsShowShareTap, properties: nil)
-//            viewModel.showShare()
-//        case .toggleHeart:
-//            incrementLoadingInProgressCount()
-//            switch viewModel.isFavourited {
-//            case true:
-//                log?.track(event: .companyDetailsFavouriteSwitchOff, properties: nil)
-//            case false:
-//                log?.track(event: .companyDetailsFavouriteSwitchOn, properties: nil)
-//            }
-//            viewModel.toggleFavourited()
         case .showMap:
             switch presenter.isShowingMap {
             case true:
@@ -170,22 +166,22 @@ extension CompanyViewController : CompanyMainViewCoordinatingDelegate {
         }
     }
     
-    func processInitiateApplyResult(_ applyState: CompanyWorkplacePresenter.InitiateApplicationResult) {
-        let title = applyState.deniedReason?.title
-        let message = applyState.deniedReason?.message
-        let buttonTitle = applyState.deniedReason?.buttonTitle
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let handler: ((UIAlertAction) -> (Void))? = nil
-        let action: UIAlertAction
-        switch applyState {
-        case .allowed:
-            return
-        case .deniedAlreadyApplied:
-            
-            break
-        }
-        action = UIAlertAction(title: buttonTitle, style: UIAlertAction.Style.cancel, handler: handler)
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
-    }
+//    func processInitiateApplyResult(_ applyState: CompanyWorkplacePresenter.InitiateApplicationResult) {
+//        let title = applyState.deniedReason?.title
+//        let message = applyState.deniedReason?.message
+//        let buttonTitle = applyState.deniedReason?.buttonTitle
+//        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//        let handler: ((UIAlertAction) -> (Void))? = nil
+//        let action: UIAlertAction
+//        switch applyState {
+//        case .allowed:
+//            return
+//        case .deniedAlreadyApplied:
+//
+//            break
+//        }
+//        action = UIAlertAction(title: buttonTitle, style: UIAlertAction.Style.cancel, handler: handler)
+//        alert.addAction(action)
+//        present(alert, animated: true, completion: nil)
+//    }
 }

@@ -7,9 +7,13 @@ public struct PinJson: Codable, Hashable {
     public var tags: [F4SUUID]
 }
 
-public struct CompanyWorkplace: Codable {
+public class CompanyWorkplace: Codable {
     public var companyJson: F4SCompanyJson
     public var pinJson: PinJson
+    public init(companyJson: F4SCompanyJson, pinJson: PinJson) {
+        self.companyJson = companyJson
+        self.pinJson = pinJson
+    }
 }
 
 public struct F4SCompanyJson : Codable {

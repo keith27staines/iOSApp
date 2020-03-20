@@ -217,10 +217,12 @@ class MapViewController: UIViewController {
         mapView.addSubview(pressedPinOrCluster!)
         
         let vc = UIStoryboard(name: "PopupCompanyList", bundle: nil).instantiateViewController(withIdentifier: "PopupListViewController") as! PopupCompanyListViewController
-        vc.didSelectCompanyWorkplace = { [weak self] company in
-            self?.coordinator?.showDetail(company: company, originScreen: vc.screenName)
+        vc.didSelectCompanyWorkplace = { [weak self] companyWorkplace in
+            self?.coordinator?.showDetail(
+                companyWorkplace: companyWorkplace,
+                originScreen: vc.screenName)
         }
-        vc.companyWorkplaceListModel = CompanyWorkplaceListModel(workplaceUuids: workplaceUuids)
+        vc.presenter = CompanyWorkplaceListPresenter(workplaceUuids: workplaceUuids)
         vc.log = log
         vc.transitioningDelegate = self
         present(vc, animated: true, completion: nil)
@@ -303,98 +305,7 @@ extension MapViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.default
     }
-    
-    func setupInfoWindow(company: Company) -> UIView {
-        guard let infoWindow = Bundle.main.loadNibNamed("InfoWindowView", owner: self, options: nil)?.first as? InfoWindowView else {
-            return UIView()
-        }
-        
-        infoWindow.companyNameLabel.attributedText = NSAttributedString(
-            string: company.name, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: Style.largeTextSize, weight: UIFont.Weight.semibold), NSAttributedString.Key.foregroundColor: UIColor.black])
-        
-        infoWindow.industryNameLabel.attributedText = NSAttributedString(
-            string: company.industry, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: Style.smallerMediumTextSize, weight: UIFont.Weight.light), NSAttributedString.Key.foregroundColor: UIColor.black])
-        infoWindow.logoImageView.load(urlString: company.logoUrl, defaultImage: UIImage(named: "DefaultLogo"))
-        
-        if company.rating < 0.5 {
-            infoWindow.ratingStackView.removeFromSuperview()
-        } else {
-            setInfoWindowStars(infoWindow: infoWindow, unroundedRating: company.rating)
             
-            infoWindow.ratingLabel.attributedText = NSAttributedString(
-                string: String(format: "%.1f", company.rating),
-                attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: Style.biggerVerySmallTextSize, weight: UIFont.Weight.semibold),
-                             NSAttributedString.Key.foregroundColor: UIColor.black])
-        }
-        
-        let height = infoWindow.backgroundView.bounds.height
-        infoWindow.frame = CGRect(x: 0,
-                                  y: 0,
-                                  width: 335,
-                                  height: height + infoWindow.triangleView.bounds.height)
-        infoWindow.backgroundView.layer.shadowColor = UIColor.black.cgColor
-        infoWindow.backgroundView.layer.shadowRadius = 1
-        infoWindow.backgroundView.layer.shadowOpacity = 0.1
-        infoWindow.backgroundView.layer.shadowOffset = CGSize(width: 2, height: -2)
-        infoWindow.backgroundView.layer.cornerRadius = 10
-        
-        return infoWindow
-    }
-    
-    func setInfoWindowStars(infoWindow: InfoWindowView, unroundedRating: Double) {
-        let roundedRating = unroundedRating.round()
-        if roundedRating == 0.5 {
-            infoWindow.firstStarImageView.image = UIImage(named: "HalfStar")
-        }
-        if roundedRating == 1 {
-            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-        }
-        if roundedRating == 1.5 {
-            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-            infoWindow.secondStarImageView.image = UIImage(named: "HalfStar")
-        }
-        if roundedRating == 2 {
-            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-            infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
-        }
-        if roundedRating == 2.5 {
-            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-            infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
-            infoWindow.thirdStarImageView.image = UIImage(named: "HalfStar")
-        }
-        if roundedRating == 3 {
-            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-            infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
-            infoWindow.thirdStarImageView.image = UIImage(named: "FilledStar")
-        }
-        if roundedRating == 3.5 {
-            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-            infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
-            infoWindow.thirdStarImageView.image = UIImage(named: "FilledStar")
-            infoWindow.fourthStarImageView.image = UIImage(named: "HalfStar")
-        }
-        if roundedRating == 4 {
-            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-            infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
-            infoWindow.thirdStarImageView.image = UIImage(named: "FilledStar")
-            infoWindow.fourthStarImageView.image = UIImage(named: "FilledStar")
-        }
-        if roundedRating == 4.5 {
-            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-            infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
-            infoWindow.thirdStarImageView.image = UIImage(named: "FilledStar")
-            infoWindow.fourthStarImageView.image = UIImage(named: "FilledStar")
-            infoWindow.fifthStarImageView.image = UIImage(named: "HalfStar")
-        }
-        if roundedRating == 5 {
-            infoWindow.firstStarImageView.image = UIImage(named: "FilledStar")
-            infoWindow.secondStarImageView.image = UIImage(named: "FilledStar")
-            infoWindow.thirdStarImageView.image = UIImage(named: "FilledStar")
-            infoWindow.fourthStarImageView.image = UIImage(named: "FilledStar")
-            infoWindow.fifthStarImageView.image = UIImage(named: "FilledStar")
-        }
-    }
-    
     enum transitionType {
         case slideIn
         case slideOut
@@ -581,8 +492,7 @@ extension MapViewController: CAAnimationDelegate {
 extension MapViewController: GMSMapViewDelegate {
     
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
-        self.selectedCompany = nil
-        self.mapView.selectedMarker = nil
+
     }
     
     func mapView(_: GMSMapView, willMove gesture: Bool) {
@@ -596,6 +506,7 @@ extension MapViewController: GMSMapViewDelegate {
         let origin = mapView.projection.point(for: marker.position)
         let companies = companiesFromMarker(marker)
         presentCompaniesPopup(for: companies, origin: origin)
+        return true
     }
     
     func mapView(_: GMSMapView, idleAt pos: GMSCameraPosition) {
@@ -611,29 +522,8 @@ extension MapViewController: GMSMapViewDelegate {
     }
     
     func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
-        guard let selectedCompany = self.selectedCompany else {
-            return nil
-        }
-        guard let company = companyFromMarker(marker: marker) else {
-            return nil
-        }
-        guard company.uuid == selectedCompany.uuid else {
-            return nil
-        }
-        self.infoWindowView = setupInfoWindow(company: company)
-        return infoWindowView
-    }
-    
-    func mapView(_: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
-        log?.track(event: .mapPinShowCompanyTap, properties: nil)
-        guard let company = companyFromMarker(marker: marker) else {
-            return
-        }
-        coordinator?.showDetail(company: company, originScreen: ScreenName.companyPin)
-    }
-    
-    func mapView(_: GMSMapView, didCloseInfoWindowOf _: GMSMarker) {
-
+        // user taps on a single pin
+        return nil
     }
 
 }
@@ -905,14 +795,16 @@ extension MapViewController {
     }
     
     func reloadMap() {
-        self.userMessageHandler.showLoadingOverlay(self.view)
-        self.userMessageHandler.updateOverlayCaption("Updating map...")
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            guard let self = self else { return }
-            self.buildMapStructuresFromCompanyFile {
-                DispatchQueue.main.async {
-                    self.moveCameraToBestPosition()
-                    self.userMessageHandler.hideLoadingOverlay()
+        DispatchQueue.main.async {
+            self.userMessageHandler.showLoadingOverlay(self.view)
+            self.userMessageHandler.updateOverlayCaption("Updating map...")
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                guard let self = self else { return }
+                self.buildMapStructuresFromCompanyFile {
+                    DispatchQueue.main.async {
+                        self.moveCameraToBestPosition()
+                        self.userMessageHandler.hideLoadingOverlay()
+                    }
                 }
             }
         }

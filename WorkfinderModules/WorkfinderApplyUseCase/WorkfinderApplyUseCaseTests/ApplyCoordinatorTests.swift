@@ -29,7 +29,7 @@ class ApplyCoordinatorTests: XCTestCase {
         let mockContentService = MockF4SContentService()
         let injection = CoreInjection(
             launchOptions: nil,
-            appInstallationUuidLogic: MockAppInstallationUuidLogic(registeredUserUuid: "registerdeUuid"),
+            appInstallationUuidLogic: MockAppInstallationLogic(registeredUserUuid: "registerdeUuid"),
             user: mockRegisteredUser,
             userService: mockUserService,
             userStatusService: userStatusService,

@@ -10,11 +10,8 @@ import WorkfinderOnboardingUseCase
 
 class OnboardingCoordinatorFactory : OnboardingCoordinatorFactoryProtocol {
     
-    let partnerService: F4SPartnerServiceProtocol
     let localStore: LocalStorageProtocol
-    public init(partnerService: F4SPartnerServiceProtocol,
-                localStore: LocalStorageProtocol) {
-        self.partnerService = partnerService
+    public init(localStore: LocalStorageProtocol) {
         self.localStore = localStore
     }
     
@@ -23,7 +20,6 @@ class OnboardingCoordinatorFactory : OnboardingCoordinatorFactoryProtocol {
         return OnboardingCoordinator(
             parent: parent,
             navigationRouter: navigationRouter,
-            partnerService: partnerService,
             localStore: localStore)
     }
 }

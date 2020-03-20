@@ -6,9 +6,7 @@ import WorkfinderCoordinators
 import WorkfinderAppLogic
 import WorkfinderUserDetailsUseCase
 import WorkfinderOnboardingUseCase
-import WorkfinderFavouritesUseCase
 import WorkfinderCompanyDetailsUseCase
-import WorkfinderRecommendations
 import WorkfinderUI
 import UIKit
 
@@ -21,21 +19,9 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
             navigationRouter: router,
             inject: inject,
             companyCoordinatorFactory: companyCoordinatorFactory,
-            companyDocumentsService: companyDocumentsService,
-            companyRepository: companyRepository,
             companyService: companyService,
-            favouritesRepository: favouritesRepository,
             documentUploaderFactory: documentUploaderFactory,
             interestsRepository: interestsRepository,
-            offerProcessingService: offerProcessingService,
-            partnersModel: partnersModel,
-            placementsRepository: placementsRepository,
-            placementService: placementService,
-            placementDocumentsServiceFactory: placementDocumentsServiceFactory,
-            messageServiceFactory: messageServiceFactory,
-            messageActionServiceFactory: messageActionServiceFactory,
-            messageCannedResponsesServiceFactory: messageCannedResponsesServiceFactory,
-            recommendationsService: recommendationsService,
             roleService: roleService)
     }
     
@@ -68,15 +54,6 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         return networkConfig
     }()
     
-    lazy var appInstallationUuidLogic: AppInstallationUuidLogic = {
-        let userRepo = F4SUserRepository(localStore: localStore)
-        return AppInstallationUuidLogic(localStore: self.localStore,
-                                        userService: userService,
-                                        userRepo: userRepo,
-                                        apnsEnvironment: apnsEnvironment,
-                                        registerDeviceService: self.deviceRegistrationService)
-    }()
-    
     lazy var rootNavigationController: UINavigationController = {
         return UINavigationController(rootViewController: AppCoordinatorBackgroundViewController())
     }()
@@ -85,16 +62,22 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         return NavigationRouter(navigationController: self.rootNavigationController)
     }()
     
+    lazy var appInstallationLogic: AppInstallationLogicProtocol = {
+        return AppInstallationLogic(localStore: self.localStore)
+    }()
+    
+    lazy var versionCheckingService: VersionCheckingServiceProtocol = {
+        return VersionCheckingService()
+    }()
+    
     lazy var injection: CoreInjectionProtocol = {
         return CoreInjection(
             launchOptions: self.launchOptions,
-            appInstallationUuidLogic: self.appInstallationUuidLogic,
+            appInstallationLogic: self.appInstallationLogic,
             user: self.userRepo.load(),
             userService: self.userService,
-            userStatusService: self.userStatusService,
             userRepository: self.userRepo,
-            databaseDownloadManager: self.databaseDownloadManager,
-            contentService: self.contentService,
+            companyDownloadFileManager: self.companyFileDownloadManager,
             log: self.log,
             appSettings: self.remoteConfig)
     }()
@@ -103,7 +86,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         return VersionCheckCoordinator(
             parent: nil,
             navigationRouter: self.rootNavigationRouter,
-            versionCheckService: self.versionCheckService)
+            versionCheckService: self.versionCheckingService)
     }()
     
     lazy var window: UIWindow = {
@@ -123,23 +106,12 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
                               navigationRouter: rootNavigationRouter,
                               inject: injection,
                               companyCoordinatorFactory: companyCoordinatorFactory,
-                              companyDocumentsService: companyDocumentsService,
-                              companyRepository: companyRepository,
                               companyService: companyService,
                               documentUploaderFactory: documentUploaderFactory,
                               emailVerificationModel: emailVerificationModel,
-                              favouritesRepository: favouritesRepository,
                               localStore: localStore,
-                              offerProcessingService: offerProcessingService,
                               onboardingCoordinatorFactory: onboardingCoordinatorFactory,
-                              partnersModel: partnersModel,
-                              placementsRepository: placementsRepository,
-                              placementService: placementService,
                               placementDocumentsServiceFactory: placementDocumentsServiceFactory,
-                              messageServiceFactory: messageServiceFactory,
-                              messageActionServiceFactory: messageActionServiceFactory,
-                              messageCannedResponsesServiceFactory: messageCannedResponsesServiceFactory,
-                              recommendationsService: recommendationsService,
                               roleService: roleService,
                               tabBarCoordinatorFactory: self,
                               versionCheckCoordinator: versionCheckCoordinator,
@@ -147,22 +119,22 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     }
     
     lazy var companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol = {
+        let applyService = ApplyService()
         return CompanyCoordinatorFactory(applyService: applyService,
-                                         companyFavouritesModel: companyFavouritesModel,
                                          companyService: companyService,
-                                         companyDocumentService: companyDocumentsService,
-                                         documentServiceFactory: placementDocumentsServiceFactory,
+                                         documentServiceFactory: self.placementDocumentsServiceFactory,
                                          documentUploaderFactory: documentUploaderFactory,
                                          emailVerificationModel: self.emailVerificationModel,
                                          environment: environment,
-                                         getAllPlacementsService: placementService,
                                          interestsRepository: interestsRepository,
-                                         placementRepository: placementsRepository,
-                                         shareTemplateProvider: shareTemplateProvider,
                                          templateService: templateService)
     }()
     
     var log: F4SAnalyticsAndDebugging
+    
+    lazy var placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol = {
+        return F4SPlacementDocumentsServiceFactory()
+    }()
     
     lazy var localStore: LocalStorageProtocol = {
         return LocalStore()
@@ -172,45 +144,12 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         return F4SUserRepository(localStore: self.localStore)
     }()
     
-    lazy var metadataService: F4SCompanyDatabaseMetadataServiceProtocol = {
-        return F4SCompanyDatabaseMetadataService(configuration: self.networkConfiguration)
-    }()
-    
-    lazy var databaseDownloadManager: F4SCompanyDownloadManagerProtocol = {
-        return F4SCompanyDownloadManager(metadataService: self.metadataService)
-    }()
-    
-    lazy var applyService: F4SPlacementApplicationServiceProtocol = {
-        return F4SPlacementApplicationService(configuration: self.networkConfiguration)
+    lazy var companyFileDownloadManager: F4SCompanyDownloadManagerProtocol = {
+        return F4SCompanyDownloadManager()
     }()
     
     lazy var companyService: F4SCompanyServiceProtocol = {
         return F4SCompanyService(configuration: self.networkConfiguration)
-    }()
-    
-    lazy var companyDocumentsService: F4SCompanyDocumentServiceProtocol = {
-        return F4SCompanyDocumentService(configuration: self.networkConfiguration)
-    }()
-    
-    lazy var companyFavouritesModel: CompanyFavouritesModel = {
-        return CompanyFavouritesModel(favouritingService: self.companyFavouritingService,
-                                      favouritesRepository: self.companyFavouritesRepository)
-    }()
-    
-    lazy var companyFavouritesRepository: F4SFavouritesRepositoryProtocol = {
-        return F4SFavouritesRepository()
-    }()
-    
-    lazy var companyFavouritingService: CompanyFavouritingServiceProtocol = {
-        return F4SCompanyFavouritingService(configuration: self.networkConfiguration)
-    }()
-    
-    lazy var companyRepository:F4SCompanyRepositoryProtocol = {
-        return F4SCompanyRepository()
-    }()
-    
-    lazy var contentService: F4SContentServiceProtocol = {
-        return F4SContentService(configuration: self.networkConfiguration)
     }()
     
     lazy var documentUploaderFactory: F4SDocumentUploaderFactoryProtocol = {
@@ -227,30 +166,16 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         return EmailVerificationServiceFactory(configuration: self.networkConfiguration)
     }()
     
-    lazy var favouritesRepository: F4SFavouritesRepositoryProtocol = {
-        return F4SFavouritesRepository()
-    }()
-    
     lazy var interestsRepository: F4SInterestsRepositoryProtocol = {
         return F4SInterestsRepository(localStore: self.localStore)
     }()
     
     lazy var onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol = {
-         return OnboardingCoordinatorFactory(
-            partnerService: self.partnersService,
-            localStore: self.localStore)
+         return OnboardingCoordinatorFactory(localStore: self.localStore)
      }()
-    
-    lazy var recommendationsService: F4SRecommendationServiceProtocol = {
-        return F4SRecommendationService(configuration: self.networkConfiguration)
-    }()
     
     lazy var roleService: F4SRoleServiceProtocol = {
         return F4SRoleService(configuration: self.networkConfiguration)
-    }()
-    
-    lazy var shareTemplateProvider: ShareTemplateProviderProtocol = {
-        return ShareTemplateProvider()
     }()
     
     lazy var templateService: F4STemplateServiceProtocol = {
@@ -260,15 +185,6 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     lazy var userService: F4SUserServiceProtocol = {
         return F4SUserService(configuration: self.networkConfiguration)
     }()
-    
-    lazy var userStatusService: F4SUserStatusServiceProtocol = {
-        return F4SUserStatusService(configuration: self.networkConfiguration)
-    }()
-    
-    lazy var versionCheckService: F4SWorkfinderVersioningService = {
-        return F4SWorkfinderVersioningService(configuration: self.networkConfiguration)
-    }()
-
 }
 
 extension MasterBuilder: SelectEnvironmentCoordinatorFactoryProtocol {

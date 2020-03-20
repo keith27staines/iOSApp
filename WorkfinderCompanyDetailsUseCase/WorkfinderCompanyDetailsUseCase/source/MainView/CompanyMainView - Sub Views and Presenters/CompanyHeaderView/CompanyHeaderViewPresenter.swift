@@ -2,26 +2,21 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 
-protocol CompanyHeaderViewPresenterRenderable: class {
-    func refresh(from presenter: CompanyHeaderViewPresenterProtocol)
-}
-
 protocol CompanyHeaderViewPresenterProtocol: class {
-    var headerView: CompanyHeaderViewPresenterRenderable? { get set }
+    
     var companyName: String { get }
     var logoUrlString: String { get }
     var distanceFromCompany: String { get }
+    func attach(view: CompanyHeaderViewProtocol)
     func onDidInitialise()
 }
 
 class CompanyHeaderViewPresenter: CompanyHeaderViewPresenterProtocol {
     
-    weak var headerView: CompanyHeaderViewPresenterRenderable?
+    weak var view: CompanyHeaderViewProtocol?
     let model: CompanyWorkplace
     
-    init(headerView: CompanyHeaderViewPresenterRenderable,
-         companyWorkplace: CompanyWorkplace) {
-        self.headerView = headerView
+    init(companyWorkplace: CompanyWorkplace) {
         self.model = companyWorkplace
     }
     
@@ -29,8 +24,13 @@ class CompanyHeaderViewPresenter: CompanyHeaderViewPresenterProtocol {
     var logoUrlString: String { model.companyJson.logoUrlString ?? "badUrl" }
     private (set) var distanceFromCompany: String = "unknown distance"
     
+    func attach(view: CompanyHeaderViewProtocol) {
+        self.view = view
+        view.presenter = self
+    }
+    
     func onDidInitialise() {
-        headerView?.refresh(from: self)
+        view?.refresh(from: self)
     }
      
 }

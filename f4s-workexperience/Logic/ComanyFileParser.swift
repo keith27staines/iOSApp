@@ -1,11 +1,4 @@
-//
-//  ComanyFileParser.swift
-//  FileParser
-//
-//  Created by Keith Dev on 06/03/2020.
-//  Copyright © 2020 Founders4Schools. All rights reserved.
-//
-
+import WorkfinderCommon
 
 // PinDownloadFile is company-locations-and-tags.jsonl
 

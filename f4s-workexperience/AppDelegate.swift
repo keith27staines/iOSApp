@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func startApp() {
         appCoordinator = self.masterBuilder.buildAppCoordinator()
         appCoordinator.start()
-        companyFileDownloadManager = self.masterBuilder.databaseDownloadManager
+        companyFileDownloadManager = self.masterBuilder.companyFileDownloadManager
     }
     
     // Handle being invoked from a universal link in safari running on the current device
@@ -84,12 +84,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        guard let appInstallationUuid = masterBuilder.appInstallationUuidLogic.registeredInstallationUuid else { return }
+        guard let userUuid = masterBuilder.localStore.value(key: LocalStore.Key.userUuid) as? F4SUUID else { return }
         let tokenParts = deviceToken.map { data -> String in
             return String(format: "%02.2hhx", data)
         }
         let token = tokenParts.joined()
-        userService.enablePushNotificationForUser(installationUuid: appInstallationUuid, withDeviceToken: token) { [weak self] (result) in
+        userService.enablePushNotificationForUser(installationUuid: userUuid, withDeviceToken: token) { [weak self] (result) in
             switch result {
             case .error(let error):
                 self?.log.error(error, functionName: #function, fileName: #file, lineNumber: #line)

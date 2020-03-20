@@ -17,7 +17,7 @@ import UIKit
     var rating = 0 {
         didSet {
             updateButtonSelectionStates()
-            delegate?.didUpdateRatingValue(ratingControll: self, rating: rating)
+            
         }
     }
 
@@ -33,7 +33,7 @@ import UIKit
         }
     }
 
-    var delegate: RatingControlDelegate?
+    //var delegate: RatingControlDelegate?
 
     // MARK: Initialization
 

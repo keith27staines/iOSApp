@@ -35,7 +35,9 @@
 		FCA91EB12234065A007ED308 /* WorkfinderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91EB02234065A007ED308 /* WorkfinderUITests.swift */; };
 		FCA91EB32234065A007ED308 /* WorkfinderUI.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA91EA52234065A007ED308 /* WorkfinderUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCA91EBF223406B4007ED308 /* WorkfinderUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91EBE223406B4007ED308 /* WorkfinderUI.swift */; };
-		FCC1DF6123250A0D0074D5C1 /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF6023250A0C0074D5C1 /* StarRatingView.swift */; };
+		FCB4EAD22424D231001D5D23 /* TriangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB4EACF2424D231001D5D23 /* TriangleView.swift */; };
+		FCB4EAD32424D231001D5D23 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB4EAD02424D231001D5D23 /* RatingControl.swift */; };
+		FCB4EADA24253F36001D5D23 /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB4EAD924253F36001D5D23 /* StarRatingView.swift */; };
 		FCC1DF6523250C5A0074D5C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DF6423250C5A0074D5C1 /* Assets.xcassets */; };
 		FCE8DB152320FCB100934E2F /* UIImage+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DB142320FCB100934E2F /* UIImage+extensions.swift */; };
 		FCEB1D25229FC6D600C6D2C2 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEB1D24229FC6D500C6D2C2 /* UIView+Extensions.swift */; };
@@ -86,7 +88,9 @@
 		FCA91EB02234065A007ED308 /* WorkfinderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderUITests.swift; sourceTree = "<group>"; };
 		FCA91EB22234065A007ED308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCA91EBE223406B4007ED308 /* WorkfinderUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderUI.swift; sourceTree = "<group>"; };
-		FCC1DF6023250A0C0074D5C1 /* StarRatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
+		FCB4EACF2424D231001D5D23 /* TriangleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriangleView.swift; sourceTree = "<group>"; };
+		FCB4EAD02424D231001D5D23 /* RatingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
+		FCB4EAD924253F36001D5D23 /* StarRatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		FCC1DF6423250C5A0074D5C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FCE8DB142320FCB100934E2F /* UIImage+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extensions.swift"; sourceTree = "<group>"; };
 		FCEB1D24229FC6D500C6D2C2 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -216,9 +220,11 @@
 		FCA91EBD22340680007ED308 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				FCB4EAD924253F36001D5D23 /* StarRatingView.swift */,
+				FCB4EAD02424D231001D5D23 /* RatingControl.swift */,
+				FCB4EACF2424D231001D5D23 /* TriangleView.swift */,
 				FC0C7108232BA38700816332 /* OptionLabel.swift */,
 				FCA91EBE223406B4007ED308 /* WorkfinderUI.swift */,
-				FCC1DF6023250A0C0074D5C1 /* StarRatingView.swift */,
 				FC93DC3923200BC100F1CE23 /* NextResponderTextField.swift */,
 				FC22DBF022F97A960068C61C /* LoadingOverlay.swift */,
 				FC22DBF222F97AAB0068C61C /* UserMessageHandler.swift */,
@@ -366,15 +372,17 @@
 				FC22DBEB22F979750068C61C /* RGBA.swift in Sources */,
 				FC93DBDF231F981D00F1CE23 /* ContentViewController.swift in Sources */,
 				FC22DBE822F979750068C61C /* FactorySkins.swift in Sources */,
-				FCC1DF6123250A0D0074D5C1 /* StarRatingView.swift in Sources */,
 				FC22DBEF22F97A330068C61C /* UIView+ConstraintsExtensions.swift in Sources */,
 				FC5CBA57231D2C7D00C2D3C5 /* F4SRoundIconView.swift in Sources */,
 				FC5CBA55231D2C4D00C2D3C5 /* F4SCompanyHeaderViewWithLogo.swift in Sources */,
 				FC0C7109232BA38700816332 /* OptionLabel.swift in Sources */,
+				FCB4EAD32424D231001D5D23 /* RatingControl.swift in Sources */,
 				FC22DB9122F9764F0068C61C /* UIButton+Extensions.swift in Sources */,
 				FC22DBF722F97CD70068C61C /* UIColor+Extensions.swift in Sources */,
 				FCEB1D27229FC6DB00C6D2C2 /* UITableView+Extensions.swift in Sources */,
 				FC22DBF922F97CEB0068C61C /* UIFont+Extensions.swift in Sources */,
+				FCB4EAD22424D231001D5D23 /* TriangleView.swift in Sources */,
+				FCB4EADA24253F36001D5D23 /* StarRatingView.swift in Sources */,
 				FC22DBF122F97A960068C61C /* LoadingOverlay.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -32,12 +32,12 @@ class VersionCheckCoordinator: NavigationCoordinator, VersionCheckCoordinatorPro
     var versionCheckCompletion: ((F4SNetworkResult<F4SVersionValidity>) -> Void)?
     
     /// Service used to determine whether the app needs to be updated
-    var versionCheckService: F4SWorkfinderVersioningServiceProtocol!
+    var versionCheckService: VersionCheckingServiceProtocol!
     
     
     public init(parent: Coordinating?,
                 navigationRouter: NavigationRoutingProtocol,
-                versionCheckService: F4SWorkfinderVersioningServiceProtocol) {
+                versionCheckService: VersionCheckingServiceProtocol) {
         self.versionCheckService = versionCheckService
         super.init(parent: parent, navigationRouter: navigationRouter)
     }

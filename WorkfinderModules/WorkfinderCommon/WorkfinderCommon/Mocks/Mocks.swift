@@ -85,24 +85,24 @@ public class MockCompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
         parent: CompanyCoordinatorParentProtocol,
         navigationRouter: NavigationRoutingProtocol,
         inject: CoreInjectionProtocol,
-        companyUuid: F4SUUID) -> CompanyCoordinatorProtocol? {
+        companyWorkplaceUuid: F4SUUID) -> CompanyCoordinatorProtocol? {
         return MockCompanyCoordinator(
             parent: parent,
             navigationRouter: navigationRouter,
             inject: inject,
-            companyUuid: companyUuid)
+            companyUuid: companyWorkplaceUuid)
     }
     
     public func makeCompanyCoordinator(
         parent: CompanyCoordinatorParentProtocol,
         navigationRouter: NavigationRoutingProtocol,
-        company: F4SCompanyJson,
+        companyWorkplace: CompanyWorkplace,
         inject: CoreInjectionProtocol) -> CompanyCoordinatorProtocol {
         return MockCompanyCoordinator(
             parent: parent,
             navigationRouter: navigationRouter,
             inject: inject,
-            company: company)
+            companyWorkplace: companyWorkplace)
     }
 }
 
@@ -113,7 +113,7 @@ public class MockCompanyCoordinator: CompanyCoordinatorProtocol {
     public var parentCoordinator: Coordinating?
     public var childCoordinators: [UUID : Coordinating] = [:]
     public var navigationRouter: NavigationRoutingProtocol
-    public var company: F4SCompanyJson?
+    public var companyWorkplace: CompanyWorkplace?
     
     public func start() {
         
@@ -122,11 +122,11 @@ public class MockCompanyCoordinator: CompanyCoordinatorProtocol {
     public init(parent: CompanyCoordinatorParentProtocol,
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
-                company: F4SCompanyJson) {
+                companyWorkplace: CompanyWorkplace) {
         self.parentCoordinator = parent
         self.injected = inject
         self.navigationRouter = navigationRouter
-        self.company = company
+        self.companyWorkplace = companyWorkplace
     }
     
     public init(parent: CompanyCoordinatorParentProtocol,

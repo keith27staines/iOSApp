@@ -40,8 +40,8 @@ class TestMasterBuilder: TabbarCoordinatorFactoryProtocol {
             versionCheckCoordinator: self.mockVersionCheckCoordinator,
             window: UIWindow())
     }()
-    lazy var mockAppInstallationLogic: MockAppInstallationUuidLogic = {
-        let logic = MockAppInstallationUuidLogic(registeredUserUuid: self.anonymousUserUuid)
+    lazy var mockAppInstallationLogic: MockAppInstallationLogic = {
+        let logic = MockAppInstallationLogic(registeredUserUuid: self.anonymousUserUuid)
         logic.registeredInstallationUuid = self.installationUuid
         return logic
     }()

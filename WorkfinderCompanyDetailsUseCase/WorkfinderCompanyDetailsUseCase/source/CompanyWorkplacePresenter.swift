@@ -5,7 +5,7 @@ import WorkfinderCommon
 
 let workfinderGreen = UIColor(red: 57, green: 167, blue: 82)
 
-protocol CompanyWorkplacePresenterCoordinatingDelegate : class {
+protocol CompanyWorkplaceCoordinatorProtocol : class {
     func companyWorkplacePresenterDidFinish(_ : CompanyWorkplacePresenter)
     func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, requestsShowLinkedInFor: F4SHost)
     func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, requestsShowLinkedInFor: CompanyWorkplace)
@@ -13,15 +13,13 @@ protocol CompanyWorkplacePresenterCoordinatingDelegate : class {
     func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, requestOpenLink link: URL)
 }
 
-protocol CompanyWorkplacePresenterDelegate : class {
-    func companyWorkplacePresenterDidRefresh(_ presenter: CompanyWorkplacePresenter)
-    func companyWorkplacePresenterDidBeginNetworkTask(_ presenter: CompanyWorkplacePresenter)
-    func companyWorkplacePresenterDidEndLoadingTask(_ presenter: CompanyWorkplacePresenter)
-    func companyWorkplacePresenterDidFailNetworkTask(_ presenter: CompanyWorkplacePresenter, error: F4SNetworkError, retry: (() -> Void)?)
-    func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, showMap: Bool)
+protocol CompanyWorkplacePresenterProtocol: class {
+    var isShowingMap: Bool { get set }
+    func onTapBack()
+    func onTapApply()
 }
 
-class CompanyWorkplacePresenter : NSObject {
+class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
     
     enum InitiateApplicationResult {
         case deniedAlreadyApplied
@@ -37,14 +35,20 @@ class CompanyWorkplacePresenter : NSObject {
         }
     }
     
+    func onTapBack() {
+    }
+    
+    func onTapApply() {
+    }
+    
     var isShowingMap: Bool = false {
         didSet {
-            presenterDelegate?.companyWorkplacePresenter(self, showMap: isShowingMap)
+            view?.companyWorkplacePresenter(self, showMap: isShowingMap)
         }
     }
     
     var companyPostcode: String? {
-        didSet { presenterDelegate?.companyWorkplacePresenterDidRefresh(self) }
+        didSet { view?.companyWorkplacePresenterDidRefresh(self) }
     }
     
     var userLocation: CLLocation?
@@ -65,32 +69,36 @@ class CompanyWorkplacePresenter : NSObject {
     }
     
     var selectedPersonIndexDidChange: ((Int?) -> ())?
-    weak var coordinatingDelegate: CompanyWorkplacePresenterCoordinatingDelegate?
-    weak var presenterDelegate: CompanyWorkplacePresenterDelegate?
+    weak var coordinator: CompanyWorkplaceCoordinatorProtocol?
+    weak var view: CompanyWorkplaceViewProtocol?
 
     var companyWorkplace: CompanyWorkplace {
         didSet {
-            presenterDelegate?.companyWorkplacePresenterDidRefresh(self)
+            view?.companyWorkplacePresenterDidRefresh(self)
         }
     }
-
-    var textModel = TextModel(hosts: [])
     let companyService: F4SCompanyServiceProtocol
     
     weak var log: F4SAnalyticsAndDebugging?
     
-    init(coordinatingDelegate: CompanyWorkplacePresenterCoordinatingDelegate,
-         viewModelDelegate: CompanyWorkplacePresenterDelegate? = nil,
+    init(coordinator: CompanyWorkplaceCoordinatorProtocol,
          companyWorkplace: CompanyWorkplace,
          companyService: F4SCompanyServiceProtocol,
          log: F4SAnalyticsAndDebugging?) {
         self.companyService = companyService
         self.companyWorkplace = companyWorkplace
-        self.coordinatingDelegate = coordinatingDelegate
-        self.presenterDelegate = viewModelDelegate
+        self.coordinator = coordinator
         self.log = log
+        self.mainViewPresenter = CompanyMainViewPresenter(companyWorkplace: companyWorkplace)
         super.init()
     }
+    
+    func attachView(view: CompanyWorkplaceViewProtocol) {
+        self.view = view
+        view.presenter = self
+    }
+    
+    var mainViewPresenter: CompanyMainViewPresenter
     
     func startLoad() {
         loadCompany()
@@ -101,7 +109,7 @@ class CompanyWorkplacePresenter : NSObject {
     }
     
     var applyButtonState: (String, Bool, UIColor) {
-        if let _ =   {
+        if true   {
             return ("Apply", true, workfinderGreen)
         } else {
             return ("Choose a host", false, UIColor.lightGray)
@@ -109,25 +117,24 @@ class CompanyWorkplacePresenter : NSObject {
     }
         
     func onDidUpdate() {
-        dataSectionRows = CompanyDataSectionRows(presenter: self)
-        presenterDelegate?.companyWorkplacePresenterDidRefresh(self)
+        view?.companyWorkplacePresenterDidRefresh(self)
     }
     
     func didTapDone() {
-        coordinatingDelegate?.companyWorkplacePresenterDidFinish(self)
+        coordinator?.companyWorkplacePresenterDidFinish(self)
     }
     
     func didTapLinkedIn(for host: F4SHost) {
-        coordinatingDelegate?.companyWorkplacePresenter(self, requestsShowLinkedInFor: host)
+        coordinator?.companyWorkplacePresenter(self, requestsShowLinkedInFor: host)
     }
     
     func didTapLinkedIn(for companyWorkplace: CompanyWorkplace) {
-        coordinatingDelegate?.companyWorkplacePresenter(self, requestsShowLinkedInFor: companyWorkplace)
+        coordinator?.companyWorkplacePresenter(self, requestsShowLinkedInFor: companyWorkplace)
     }
     
     func didTapDuedil(for companyWorkplace: CompanyWorkplace) {
         log?.track(event: .companyDetailsDataDuedilLinkTap, properties: nil)
-        coordinatingDelegate?.companyWorkplacePresenter(self, requestedShowDuedilFor: companyWorkplace)
+        coordinator?.companyWorkplacePresenter(self, requestedShowDuedilFor: companyWorkplace)
     }
     
     func didTapApply(completion: @escaping (InitiateApplicationResult) -> Void) {
@@ -135,22 +142,22 @@ class CompanyWorkplacePresenter : NSObject {
     }
     
     func didTapLink(url: URL) {
-        coordinatingDelegate?.companyWorkplacePresenter(self, requestOpenLink: url)
+        coordinator?.companyWorkplacePresenter(self, requestOpenLink: url)
     }
     
     func applyIfStateAllows(completion: @escaping (InitiateApplicationResult) -> Void) {
-        presenterDelegate?.companyWorkplacePresenterDidBeginNetworkTask(self)
-        presenterDelegate?.companyWorkplacePresenterDidEndLoadingTask(self)
+        view?.companyWorkplacePresenterDidBeginNetworkTask(self)
+        view?.companyWorkplacePresenterDidEndLoadingTask(self)
         completion(.allowed)
     }
 
     func loadCompany() {
-        presenterDelegate?.companyWorkplacePresenterDidBeginNetworkTask(self)
+        view?.companyWorkplacePresenterDidBeginNetworkTask(self)
         let companyUuid = companyWorkplace.companyJson.uuid
         companyService.getCompany(uuid: companyUuid) { (result) in
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                self.presenterDelegate?.companyWorkplacePresenterDidEndLoadingTask(self)
+                self.view?.companyWorkplacePresenterDidEndLoadingTask(self)
                 switch result {
                 case .error(let error):
                     if error.retry {
@@ -159,8 +166,6 @@ class CompanyWorkplacePresenter : NSObject {
                         })
                     }
                 case .success(let json):
-                    self.hosts = json.hosts ?? []
-                    self.companyJson = json
                     self.onDidUpdate()
                 }
             }

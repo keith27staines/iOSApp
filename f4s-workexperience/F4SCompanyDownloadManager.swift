@@ -85,12 +85,9 @@ public class F4SCompanyDownloadManager  : NSObject, F4SCompanyDownloadManagerPro
         return ageOfCompanyDownloadFile() > stalingInterval
     }
     
-    let metadataService: F4SCompanyDatabaseMetadataServiceProtocol
-    
     var workerQueue = DispatchQueue(label: "F4SDatabaseDownloadManager.worker")
     
-    public init(metadataService: F4SCompanyDatabaseMetadataServiceProtocol) {
-        self.metadataService = metadataService
+    public override init() {
         super.init()
         self.companyFileDownloadService = F4SDownloadService(delegate: self)
     }

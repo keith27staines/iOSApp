@@ -10,16 +10,22 @@ import UIKit
 import MapKit
 import WorkfinderCommon
 
-protocol CompanyMainViewCoordinatingDelegate : CompanyToolbarDelegate {
+protocol CompanyMainViewCoordinatorProtocol : CompanyToolbarDelegate {
     func companyMainViewDidTapApply(_ view: CompanyMainView)
 }
 
-class CompanyMainView: UIView, CompanyMainViewPresenterRepresentable {
+protocol CompanyMainViewProtocol: class {
+    var presenter: CompanyMainViewPresenterProtocol! { get set }
+    func refresh()
+}
+
+class CompanyMainView: UIView, CompanyMainViewProtocol {
+    var presenter: CompanyMainViewPresenterProtocol!
     
-    private weak var delegate: CompanyMainViewCoordinatingDelegate?
+    private weak var coordinator: CompanyMainViewCoordinatorProtocol?
     weak var log: F4SAnalyticsAndDebugging?
     
-    var mainViewPresenter: CompanyMainViewPresenterProtocol
+    var mainViewPresenter: CompanyMainViewPresenterProtocol!
     
     var headerViewPresenter: CompanyHeaderViewPresenterProtocol {
         return mainViewPresenter.headerViewPresenter
@@ -47,11 +53,7 @@ class CompanyMainView: UIView, CompanyMainViewPresenterRepresentable {
         return mapView
     }()
     
-    init(presenter: CompanyMainViewPresenterProtocol,
-         delegate: CompanyMainViewCoordinatingDelegate,
-         appSettings: AppSettingProvider) {
-        self.mainViewPresenter = presenter
-        self.delegate = delegate
+    init(appSettings: AppSettingProvider) {
         self.appSettings = appSettings
         super.init(frame: CGRect.zero)
         backgroundColor = UIColor.white
@@ -63,14 +65,16 @@ class CompanyMainView: UIView, CompanyMainViewPresenterRepresentable {
     func refresh() {
         headerView.refresh(from: headerViewPresenter)
         tableView.reloadData()
-        let (title,isEnabled,backgroundColor) = mainViewPresenter.applyButtonState
-        applyButton.setTitle(title, for: .normal)
-        applyButton.isEnabled = isEnabled
+        applyButton.setTitle("Apply", for: .normal)
+        applyButton.isEnabled = true
         applyButton.backgroundColor = backgroundColor
     }
     
-    lazy var headerView: CompanyHeaderView = {
-        return CompanyHeaderView(presenter: self.headerViewPresenter)
+    lazy var headerView: CompanyHeaderViewProtocol = {
+        let presenter = self.headerViewPresenter
+        let headerView = CompanyHeaderView()
+        presenter.attach(view: headerView)
+        return headerView
     }()
     
     lazy var tableView: UITableView = {
@@ -131,6 +135,7 @@ class CompanyMainView: UIView, CompanyMainViewPresenterRepresentable {
     }()
     
     func configureViews() {
+        let headerView = self.headerView as! UIView
         addSubview(headerView)
         addSubview(sectionSelectorView)
         addSubview(tableView)
@@ -199,7 +204,7 @@ class CompanyMainView: UIView, CompanyMainViewPresenterRepresentable {
     
     @objc func didTapApply() {
         log?.track(event: .companyDetailsApplyTap, properties: nil)
-        delegate?.companyMainViewDidTapApply(self)
+        coordinator?.companyMainViewDidTapApply(self)
     }
     
     func profileLinkTap(host: F4SHost) {
@@ -272,7 +277,7 @@ extension CompanyMainView: UITableViewDelegate {
 
 extension CompanyMainView : CompanyToolbarDelegate {
     func companyToolbar(_: CompanyToolbar, requestedAction: CompanyToolbar.ActionType) {
-        delegate?.companyToolbar(toolbarView, requestedAction: requestedAction)
+        coordinator?.companyToolbar(toolbarView, requestedAction: requestedAction)
     }
 }
 

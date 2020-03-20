@@ -36,6 +36,8 @@
 		FC93768A231534F20058BA75 /* F4SCompanyFavouritingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE716230EC56700B40F6B /* F4SCompanyFavouritingServiceTests.swift */; };
 		FC93769223157CEC0058BA75 /* MockF4SNetworkTaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93769123157CEC0058BA75 /* MockF4SNetworkTaskFactory.swift */; };
 		FC93DC3E23200D8100F1CE23 /* F4SUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC3D23200D8100F1CE23 /* F4SUserService.swift */; };
+		FCB4EAD624251586001D5D23 /* ApplyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB4EAD524251586001D5D23 /* ApplyService.swift */; };
+		FCB4EAD824251F76001D5D23 /* VersionCheckCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB4EAD724251F76001D5D23 /* VersionCheckCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +84,8 @@
 		FC93768723151F020058BA75 /* F4STemplateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateService.swift; sourceTree = "<group>"; };
 		FC93769123157CEC0058BA75 /* MockF4SNetworkTaskFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockF4SNetworkTaskFactory.swift; sourceTree = "<group>"; };
 		FC93DC3D23200D8100F1CE23 /* F4SUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserService.swift; sourceTree = "<group>"; };
+		FCB4EAD524251586001D5D23 /* ApplyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyService.swift; sourceTree = "<group>"; };
+		FCB4EAD724251F76001D5D23 /* VersionCheckCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheckCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,8 @@
 		FC02D9DE22EC70FD003C8148 = {
 			isa = PBXGroup;
 			children = (
+				FCB4EAD724251F76001D5D23 /* VersionCheckCoordinator.swift */,
+				FCB4EAD524251586001D5D23 /* ApplyService.swift */,
 				FC02D9EA22EC70FD003C8148 /* WorkfinderServices */,
 				FC02D9F522EC70FD003C8148 /* WorkfinderServicesTests */,
 				FC02D9E922EC70FD003C8148 /* Products */,
@@ -372,11 +378,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCB4EAD824251F76001D5D23 /* VersionCheckCoordinator.swift in Sources */,
 				FC083F7F230FFBD000641F17 /* F4SUserDocumentService.swift in Sources */,
 				FC4EE70E230EAFFF00B40F6B /* F4SCompanyFavouritingService.swift in Sources */,
 				FC02DA0B22EC717B003C8148 /* EmailVerificationService.swift in Sources */,
 				FC93768223150CC00058BA75 /* F4STemplateService.swift in Sources */,
 				FC083F8323100FB500641F17 /* F4SRecommendationService.swift in Sources */,
+				FCB4EAD624251586001D5D23 /* ApplyService.swift in Sources */,
 				FC92836B230A982600E1FB75 /* F4SDataTaskService.swift in Sources */,
 				FC93DC3E23200D8100F1CE23 /* F4SUserService.swift in Sources */,
 				FC4EE704230E8F7F00B40F6B /* F4SRoleService.swift in Sources */,

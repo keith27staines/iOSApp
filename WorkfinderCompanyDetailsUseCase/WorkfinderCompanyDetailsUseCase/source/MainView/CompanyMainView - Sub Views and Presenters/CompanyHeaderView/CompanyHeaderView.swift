@@ -3,10 +3,16 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 
-class CompanyHeaderView: UIView, CompanyHeaderViewPresenterRenderable {
+protocol CompanyHeaderViewProtocol: class {
+    var presenter: CompanyHeaderViewPresenterProtocol! { get set }
+    func refresh(from presenter: CompanyHeaderViewPresenterProtocol)
+}
 
-    init(presenter: CompanyHeaderViewPresenterProtocol) {
-        self.presenter = presenter
+class CompanyHeaderView: UIView, CompanyHeaderViewProtocol {
+    
+    var presenter: CompanyHeaderViewPresenterProtocol!
+    
+    init() {
         super.init(frame: CGRect.zero)
         backgroundColor = UIColor.clear
         configureViews()
@@ -14,8 +20,6 @@ class CompanyHeaderView: UIView, CompanyHeaderViewPresenterRenderable {
     }
     
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-    
-    let presenter: CompanyHeaderViewPresenterProtocol
     
     func refresh(from presenter: CompanyHeaderViewPresenterProtocol) {
         companyNameLabel.text = presenter.companyName

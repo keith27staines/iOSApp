@@ -26,9 +26,12 @@ public protocol F4SCompanyDownloadFileAvailabilityObserving : class {
     func newCompanyDownloadFileIsDownloading(progress: Double)
 }
 
-public protocol AppInstallationUuidLogicProtocol : class {
-    var registeredInstallationUuid: F4SUUID? { get }
-    func ensureDeviceIsRegistered(completion: @escaping (F4SNetworkResult<F4SRegisterDeviceResult>)->())
+public protocol AppInstallationLogicProtocol : class {
+
+}
+
+public protocol VersionCheckingServiceProtocol : class {
+    func getIsVersionValid(version: String, completion: @escaping (F4SNetworkResult<F4SVersionValidity>) -> ())
 }
 
 

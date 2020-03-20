@@ -15,12 +15,8 @@ import WorkfinderUI
 class TabBarViewController: UITabBarController {
 
     var reachability: Reachability?
-    let userStatusService: F4SUserStatusServiceProtocol
     
-    public init(userStatusService: F4SUserStatusServiceProtocol) {
-        self.userStatusService = userStatusService
-        super.init(nibName: nil, bundle: nil)
-    }
+    public init() { super.init(nibName: nil, bundle: nil) }
     
     public required init?(coder aDecoder: NSCoder) { fatalError() }
 
@@ -28,15 +24,6 @@ class TabBarViewController: UITabBarController {
         super.viewDidLoad()
         configureTabBar()
         startNotifier()
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self,
-                                       selector: #selector(catchUserStatusUpdatedNotification),
-                                       name: .f4sUserStatusUpdated,
-                                       object: nil)
-        if let status = userStatusService.userStatus {
-            processUserStatusUpdate(status)
-        }
-        
     }
     
     @objc func catchUserStatusUpdatedNotification(notification: Notification) {
