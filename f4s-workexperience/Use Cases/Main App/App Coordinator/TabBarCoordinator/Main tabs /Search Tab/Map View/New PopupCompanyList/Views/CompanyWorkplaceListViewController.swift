@@ -9,7 +9,7 @@ protocol CompanyWorkplaceListViewProtocol: class {
 }
 
 class CompanyWorkplaceListViewController: UIViewController {
-    
+    let messageHandler = UserMessageHandler()
     let screenName = ScreenName.companyClusterList
     weak var log: F4SAnalyticsAndDebugging?
     var didSelectCompanyWorkplace: ((CompanyWorkplace) -> Void)?
@@ -96,7 +96,16 @@ extension CompanyWorkplaceListViewController: UITableViewDelegate {
 extension CompanyWorkplaceListViewController: CompanyWorkplaceListViewProtocol {
     
     func refreshFromPresenter(_ presenter: CompanyWorkplaceListPresenterProtocol) {
+        switchLoadingOverlay(on: presenter.showLoadingIndicator)
         tableView.reloadData()
+    }
+    
+    func switchLoadingOverlay(on: Bool) {
+        if on {
+            messageHandler.showLoadingOverlay(view)
+        } else {
+            messageHandler.hideLoadingOverlay()
+        }
     }
 }
 

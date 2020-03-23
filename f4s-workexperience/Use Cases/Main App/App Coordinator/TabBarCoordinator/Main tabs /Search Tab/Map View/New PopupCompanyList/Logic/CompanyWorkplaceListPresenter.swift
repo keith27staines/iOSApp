@@ -21,7 +21,7 @@ class CompanyWorkplaceListPresenter {
     init(companyWorkplaceUuids: [F4SUUID], provider: CompanyWorkplaceListProviderProtocol) {
         self.provider = provider
         self.locationUuids = ["4764e857-51ac-4b82-a97d-6a502c2d4dad"]
-        // self.locationUuids = companyWorkplaceUuids
+        //self.locationUuids = companyWorkplaceUuids
         self.companyTiles = []
     }
     
