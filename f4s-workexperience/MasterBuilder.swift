@@ -186,9 +186,3 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         return F4SUserService(configuration: self.networkConfiguration)
     }()
 }
-
-extension MasterBuilder: SelectEnvironmentCoordinatorFactoryProtocol {
-    func create(parent: Coordinating?, router: NavigationRoutingProtocol, onEnvironmentSelected: @escaping ((EnvironmentModel) -> Void)) -> SelectEnvironmentCoordinating {
-        return SelectEnvironmentCoordinator(parent: parent, router: router, onEnvironmentSelected: onEnvironmentSelected)
-    }
-}

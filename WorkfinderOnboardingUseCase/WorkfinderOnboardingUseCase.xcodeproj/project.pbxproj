@@ -15,7 +15,6 @@
 		FCF4B640232BC1F8001340DF /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF4B63E232BC1F8001340DF /* OnboardingCoordinator.swift */; };
 		FCF4B64A232BC315001340DF /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF4B649232BC315001340DF /* WorkfinderCoordinators.framework */; };
 		FCF4B64D232BC33B001340DF /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF4B64C232BC33B001340DF /* WorkfinderUI.framework */; };
-		FCF4B654232BC900001340DF /* SelectPartner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCF4B645232BC23F001340DF /* SelectPartner.storyboard */; };
 		FCF4B655232BC905001340DF /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCF4B63C232BC1DE001340DF /* Onboarding.storyboard */; };
 		FCF4B657232BC9E5001340DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCF4B656232BC9E5001340DF /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -42,7 +41,6 @@
 		FCF4B63B232BC1DE001340DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Onboarding.storyboard; sourceTree = "<group>"; };
 		FCF4B63D232BC1F8001340DF /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		FCF4B63E232BC1F8001340DF /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
-		FCF4B645232BC23F001340DF /* SelectPartner.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectPartner.storyboard; sourceTree = "<group>"; };
 		FCF4B649232BC315001340DF /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF4B64C232BC33B001340DF /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF4B656232BC9E5001340DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -93,7 +91,6 @@
 			isa = PBXGroup;
 			children = (
 				FCF4B656232BC9E5001340DF /* Assets.xcassets */,
-				FCF4B648232BC264001340DF /* Partner selection */,
 				FCF4B63E232BC1F8001340DF /* OnboardingCoordinator.swift */,
 				FCF4B63D232BC1F8001340DF /* OnboardingViewController.swift */,
 				FCF4B63C232BC1DE001340DF /* Onboarding.storyboard */,
@@ -121,14 +118,6 @@
 				FCF4B62B232BC0BD001340DF /* WorkfinderCommon.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		FCF4B648232BC264001340DF /* Partner selection */ = {
-			isa = PBXGroup;
-			children = (
-				FCF4B645232BC23F001340DF /* SelectPartner.storyboard */,
-			);
-			path = "Partner selection";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,7 +212,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FCF4B654232BC900001340DF /* SelectPartner.storyboard in Resources */,
 				FCF4B657232BC9E5001340DF /* Assets.xcassets in Resources */,
 				FCF4B655232BC905001340DF /* Onboarding.storyboard in Resources */,
 			);
