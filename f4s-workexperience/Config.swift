@@ -5,11 +5,11 @@ public struct Config {
     #if STAGING
     // Development & testing config
     public static let environmentName = "STAGING"
-    public static var workfinderApiBase = "https://deprecated.workfinder.com/api"
+    public static var workfinderApiBase = "http://workfinder-develop.eu-west-2.elasticbeanstalk.com/v3"
     #else
     // Default to production (live) config
     public static let environmentName = "PRODUCTION"
-    public static var workfinderApiBase = "https://www.workfinder.com/api"
+    public static var workfinderApiBase = "https://workfinder-master.eu-west-2.elasticbeanstalk.com/v3"
     #endif
     
     public static var environment: EnvironmentType {

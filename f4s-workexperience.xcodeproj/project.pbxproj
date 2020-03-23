@@ -128,8 +128,6 @@
 		FCC1DF5B232505640074D5C1 /* CompanyCoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF5A232505640074D5C1 /* CompanyCoordinatorFactory.swift */; };
 		FCC5EBB61F449C310085CE15 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FCC5EBB51F449C310085CE15 /* README.md */; };
 		FCC753EE1F80F26200E9ECD6 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC753ED1F80F26200E9ECD6 /* MapModel.swift */; };
-		FCCD6AE71FBB42A90088D7C7 /* PopupCompanyList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCCD6AE61FBB42A90088D7C7 /* PopupCompanyList.storyboard */; };
-		FCCD6AE91FBB44CF0088D7C7 /* PopupCompanyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCD6AE81FBB44CF0088D7C7 /* PopupCompanyListViewController.swift */; };
 		FCCFC7CF224D2C110060F7EC /* DataFixes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCFC7CE224D2C110060F7EC /* DataFixes.swift */; };
 		FCD6F9E822E315B7003F7C34 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD6F9E722E315B7003F7C34 /* WorkfinderAppLogic.framework */; };
 		FCD6F9E922E315B7003F7C34 /* WorkfinderAppLogic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCD6F9E722E315B7003F7C34 /* WorkfinderAppLogic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -354,8 +352,6 @@
 		FCC5EBB51F449C310085CE15 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FCC753ED1F80F26200E9ECD6 /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
 		FCC85B2220EA05FA00A0686D /* F4SCompanyDownloadManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyDownloadManagerTests.swift; sourceTree = "<group>"; };
-		FCCD6AE61FBB42A90088D7C7 /* PopupCompanyList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PopupCompanyList.storyboard; sourceTree = "<group>"; };
-		FCCD6AE81FBB44CF0088D7C7 /* PopupCompanyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupCompanyListViewController.swift; sourceTree = "<group>"; };
 		FCCFC7CE224D2C110060F7EC /* DataFixes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFixes.swift; sourceTree = "<group>"; };
 		FCD6F9E722E315B7003F7C34 /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCDB86112321268C0047FF96 /* Mustache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mustache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -668,8 +664,7 @@
 		FC0B4074226B15C700D992AC /* Map View */ = {
 			isa = PBXGroup;
 			children = (
-				FCDC542724289AE0002581FF /* New PopupCompanyList */,
-				FC0B4075226B15E800D992AC /* Old Company Cluster Popup List  */,
+				FCDC542724289AE0002581FF /* Popup Company List */,
 				FC25A05D1F850DAC002F51A9 /* F4SMap models */,
 				FC771F4B2416292900AD6317 /* CompanyFileParser */,
 				40E78E931DD391F3000A3776 /* MapView.storyboard */,
@@ -677,15 +672,6 @@
 				FC0B4077226B169700D992AC /* Interests filter */,
 			);
 			path = "Map View";
-			sourceTree = "<group>";
-		};
-		FC0B4075226B15E800D992AC /* Old Company Cluster Popup List  */ = {
-			isa = PBXGroup;
-			children = (
-				FCCD6AE61FBB42A90088D7C7 /* PopupCompanyList.storyboard */,
-				FCCD6AE81FBB44CF0088D7C7 /* PopupCompanyListViewController.swift */,
-			);
-			path = "Old Company Cluster Popup List ";
 			sourceTree = "<group>";
 		};
 		FC0B4077226B169700D992AC /* Interests filter */ = {
@@ -966,13 +952,13 @@
 			path = "App Coordinator";
 			sourceTree = "<group>";
 		};
-		FCDC542724289AE0002581FF /* New PopupCompanyList */ = {
+		FCDC542724289AE0002581FF /* Popup Company List */ = {
 			isa = PBXGroup;
 			children = (
 				FCDC542824289B5B002581FF /* Views */,
 				FCDC542924289B66002581FF /* Logic */,
 			);
-			path = "New PopupCompanyList";
+			path = "Popup Company List";
 			sourceTree = "<group>";
 		};
 		FCDC542824289B5B002581FF /* Views */ = {
@@ -1162,7 +1148,6 @@
 				40E78E951DD391F3000A3776 /* MapView.storyboard in Resources */,
 				FCF992D3234CE01B00DBC179 /* firebase_staging.plist in Resources */,
 				FC72219F20FE248400F10953 /* Appfile in Resources */,
-				FCCD6AE71FBB42A90088D7C7 /* PopupCompanyList.storyboard in Resources */,
 				FC5D3C6E20FE1CEC00F89169 /* Gemfile in Resources */,
 				FC681C001F57473D0077BECA /* Podfile in Resources */,
 				FCA53B971FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib in Resources */,
@@ -1342,7 +1327,6 @@
 				40A5CF3C1DED6FA2000007AB /* InterestsViewController.swift in Sources */,
 				40E78E701DD32BD4000A3776 /* MenuHelper.swift in Sources */,
 				FC21BE3F220F53EB00A0A389 /* SearchViewProtocol.swift in Sources */,
-				FCCD6AE91FBB44CF0088D7C7 /* PopupCompanyListViewController.swift in Sources */,
 				40E78E981DD39275000A3776 /* MapViewController.swift in Sources */,
 				FC21BE38220F53EB00A0A389 /* SearchProtocols.swift in Sources */,
 				FC21BE35220F53EB00A0A389 /* CompanySearchDataSource.swift in Sources */,
