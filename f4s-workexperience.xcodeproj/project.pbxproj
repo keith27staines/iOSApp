@@ -664,11 +664,11 @@
 		FC0B4074226B15C700D992AC /* Map View */ = {
 			isa = PBXGroup;
 			children = (
+				40E78E931DD391F3000A3776 /* MapView.storyboard */,
+				40E78E971DD39275000A3776 /* MapViewController.swift */,
 				FCDC542724289AE0002581FF /* Popup Company List */,
 				FC25A05D1F850DAC002F51A9 /* F4SMap models */,
 				FC771F4B2416292900AD6317 /* CompanyFileParser */,
-				40E78E931DD391F3000A3776 /* MapView.storyboard */,
-				40E78E971DD39275000A3776 /* MapViewController.swift */,
 				FC0B4077226B169700D992AC /* Interests filter */,
 			);
 			path = "Map View";
