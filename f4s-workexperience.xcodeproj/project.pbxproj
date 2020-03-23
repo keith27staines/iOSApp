@@ -134,6 +134,12 @@
 		FCCFC7CF224D2C110060F7EC /* DataFixes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCFC7CE224D2C110060F7EC /* DataFixes.swift */; };
 		FCD6F9E822E315B7003F7C34 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD6F9E722E315B7003F7C34 /* WorkfinderAppLogic.framework */; };
 		FCD6F9E922E315B7003F7C34 /* WorkfinderAppLogic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCD6F9E722E315B7003F7C34 /* WorkfinderAppLogic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FCDC542B24289B85002581FF /* CompanyWorkplaceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC542A24289B85002581FF /* CompanyWorkplaceListViewController.swift */; };
+		FCDC543024289B9D002581FF /* CompanyWorkplaceListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC542C24289B9B002581FF /* CompanyWorkplaceListPresenter.swift */; };
+		FCDC543124289B9D002581FF /* CompanyTileViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC542D24289B9C002581FF /* CompanyTileViewData.swift */; };
+		FCDC543224289B9D002581FF /* CompanyWorkplaceListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC542E24289B9C002581FF /* CompanyWorkplaceListProvider.swift */; };
+		FCDC543324289B9D002581FF /* CompanyJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC542F24289B9D002581FF /* CompanyJson.swift */; };
+		FCDC543524289BD9002581FF /* CompanyWorkplaceTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC543424289BD9002581FF /* CompanyWorkplaceTile.swift */; };
 		FCE51E402210362800DC1D50 /* PlacesSearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E3F2210362800DC1D50 /* PlacesSearchDataGetter.swift */; };
 		FCE51E422210365B00DC1D50 /* CompanySearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E412210365B00DC1D50 /* CompanySearchDataGetter.swift */; };
 		FCE51E44221039D600DC1D50 /* PersonSearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E43221039D600DC1D50 /* PersonSearchDataGetter.swift */; };
@@ -357,6 +363,12 @@
 		FCCFC7CE224D2C110060F7EC /* DataFixes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFixes.swift; sourceTree = "<group>"; };
 		FCD6F9E722E315B7003F7C34 /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCDB86112321268C0047FF96 /* Mustache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mustache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCDC542A24289B85002581FF /* CompanyWorkplaceListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyWorkplaceListViewController.swift; sourceTree = "<group>"; };
+		FCDC542C24289B9B002581FF /* CompanyWorkplaceListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyWorkplaceListPresenter.swift; sourceTree = "<group>"; };
+		FCDC542D24289B9C002581FF /* CompanyTileViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyTileViewData.swift; sourceTree = "<group>"; };
+		FCDC542E24289B9C002581FF /* CompanyWorkplaceListProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyWorkplaceListProvider.swift; sourceTree = "<group>"; };
+		FCDC542F24289B9D002581FF /* CompanyJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyJson.swift; sourceTree = "<group>"; };
+		FCDC543424289BD9002581FF /* CompanyWorkplaceTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyWorkplaceTile.swift; sourceTree = "<group>"; };
 		FCE51E3F2210362800DC1D50 /* PlacesSearchDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesSearchDataGetter.swift; sourceTree = "<group>"; };
 		FCE51E412210365B00DC1D50 /* CompanySearchDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanySearchDataGetter.swift; sourceTree = "<group>"; };
 		FCE51E43221039D600DC1D50 /* PersonSearchDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonSearchDataGetter.swift; sourceTree = "<group>"; };
@@ -662,24 +674,24 @@
 		FC0B4074226B15C700D992AC /* Map View */ = {
 			isa = PBXGroup;
 			children = (
+				FCDC542724289AE0002581FF /* New PopupCompanyList */,
+				FC0B4075226B15E800D992AC /* Old Company Cluster Popup List  */,
 				FC25A05D1F850DAC002F51A9 /* F4SMap models */,
 				FC771F4B2416292900AD6317 /* CompanyFileParser */,
 				40E78E931DD391F3000A3776 /* MapView.storyboard */,
 				40E78E971DD39275000A3776 /* MapViewController.swift */,
 				FC0B4077226B169700D992AC /* Interests filter */,
-				FC0B4075226B15E800D992AC /* Company Cluster Popup List */,
 			);
 			path = "Map View";
 			sourceTree = "<group>";
 		};
-		FC0B4075226B15E800D992AC /* Company Cluster Popup List */ = {
+		FC0B4075226B15E800D992AC /* Old Company Cluster Popup List  */ = {
 			isa = PBXGroup;
 			children = (
 				FCCD6AE61FBB42A90088D7C7 /* PopupCompanyList.storyboard */,
 				FCCD6AE81FBB44CF0088D7C7 /* PopupCompanyListViewController.swift */,
-				FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */,
 			);
-			path = "Company Cluster Popup List";
+			path = "Old Company Cluster Popup List ";
 			sourceTree = "<group>";
 		};
 		FC0B4077226B169700D992AC /* Interests filter */ = {
@@ -969,6 +981,36 @@
 				FC313048222BC83C0043D014 /* TabBarCoordinator */,
 			);
 			path = "App Coordinator";
+			sourceTree = "<group>";
+		};
+		FCDC542724289AE0002581FF /* New PopupCompanyList */ = {
+			isa = PBXGroup;
+			children = (
+				FCDC542824289B5B002581FF /* Views */,
+				FCDC542924289B66002581FF /* Logic */,
+			);
+			path = "New PopupCompanyList";
+			sourceTree = "<group>";
+		};
+		FCDC542824289B5B002581FF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FCDC542A24289B85002581FF /* CompanyWorkplaceListViewController.swift */,
+				FCDC543424289BD9002581FF /* CompanyWorkplaceTile.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FCDC542924289B66002581FF /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				FCDC542F24289B9D002581FF /* CompanyJson.swift */,
+				FCDC542D24289B9C002581FF /* CompanyTileViewData.swift */,
+				FCDC542C24289B9B002581FF /* CompanyWorkplaceListPresenter.swift */,
+				FCDC542E24289B9C002581FF /* CompanyWorkplaceListProvider.swift */,
+				FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */,
+			);
+			path = Logic;
 			sourceTree = "<group>";
 		};
 		FCE51E3C2210144E00DC1D50 /* DataGetters */ = {
@@ -1295,6 +1337,7 @@
 				FC21BE3D220F53EB00A0A389 /* FilterButton.swift in Sources */,
 				FC771F522416294D00AD6317 /* PinRepository.swift in Sources */,
 				FC3CD1DA221566F200F91B50 /* Geocoding.swift in Sources */,
+				FCDC543024289B9D002581FF /* CompanyWorkplaceListPresenter.swift in Sources */,
 				40E78E791DD32BE7000A3776 /* DrawerVisualState.swift in Sources */,
 				40C1A5201DDF5ACE000F80AA /* GMUWrappingDictionaryKey.m in Sources */,
 				40A5CF401DED81F7000007AB /* CustomViewFlowLayout.swift in Sources */,
@@ -1307,6 +1350,7 @@
 				40C1A51F1DDF5ACE000F80AA /* GMUStaticCluster.m in Sources */,
 				FC1DC06B21FE142D009ABC60 /* AppCoordinator.swift in Sources */,
 				FCE51E422210365B00DC1D50 /* CompanySearchDataGetter.swift in Sources */,
+				FCDC542B24289B85002581FF /* CompanyWorkplaceListViewController.swift in Sources */,
 				FCCFC7CF224D2C110060F7EC /* DataFixes.swift in Sources */,
 				FC93DC5823202B8F00F1CE23 /* Config.swift in Sources */,
 				40E78EA01DD5E208000A3776 /* LocationHelper.swift in Sources */,
@@ -1323,6 +1367,7 @@
 				FCFC06AD23225B9E003C59C8 /* LatLon+Extensions.swift in Sources */,
 				40E78E761DD32BE7000A3776 /* AnimatedMenuButton.swift in Sources */,
 				FC21BE39220F53EB00A0A389 /* SearchView.swift in Sources */,
+				FCDC543224289B9D002581FF /* CompanyWorkplaceListProvider.swift in Sources */,
 				FC04B8642332751F0034A60E /* CoordinatorFactories.swift in Sources */,
 				40E78E171DD31A86000A3776 /* AppDelegate.swift in Sources */,
 				FC21BE3B220F53EB00A0A389 /* SearchViewStateMachine.swift in Sources */,
@@ -1344,6 +1389,8 @@
 				FCB46F02204FD86D00F0779F /* F4SLogViewController.swift in Sources */,
 				FC21BE34220F53EB00A0A389 /* PlacesSearchDataSource.swift in Sources */,
 				FC25A05F1F850DF4002F51A9 /* F4SWorkplacePin.swift in Sources */,
+				FCDC543324289B9D002581FF /* CompanyJson.swift in Sources */,
+				FCDC543524289BD9002581FF /* CompanyWorkplaceTile.swift in Sources */,
 				FCF0D16C1FBC244800F2AF1D /* PopupAnimator.swift in Sources */,
 				FCE51E402210362800DC1D50 /* PlacesSearchDataGetter.swift in Sources */,
 				FCF42300236ED6D400435406 /* SelectEnvironmentViewController.swift in Sources */,
@@ -1362,6 +1409,7 @@
 				FC04B862233271FE0034A60E /* MasterBuilder.swift in Sources */,
 				40C1A51C1DDF5ACE000F80AA /* GMUGridBasedClusterAlgorithm.m in Sources */,
 				FC50E9CE2213EF5400C9A621 /* SearchModeSelectorView.swift in Sources */,
+				FCDC543124289B9D002581FF /* CompanyTileViewData.swift in Sources */,
 				FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */,
 				FC99BDCA20D170CA00278DDE /* F4SCompanyDownloadManager.swift in Sources */,
 				40E78E811DD32BF4000A3776 /* TableViewCell.swift in Sources */,

@@ -19,7 +19,7 @@ public final class Box<A> {
     }
 }
 
-enum Result<A> {
+enum BoxedResult<A> {
     case error(String)
     case value(Box<A>)
 }
@@ -51,7 +51,7 @@ class LocationHelper {
         }
     }
 
-    func googleCoordinatesWithUrl(_ url: URL, completion: @escaping (_ coordinates: Result<CLLocationCoordinate2D>) -> ()) {
+    func googleCoordinatesWithUrl(_ url: URL, completion: @escaping (_ coordinates: BoxedResult<CLLocationCoordinate2D>) -> ()) {
         let dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
             DispatchQueue.main.async {
                 guard let data = data else {
@@ -70,7 +70,7 @@ class LocationHelper {
         dataTask.resume()
     }
     
-    func googleGeocodeAddressString(_ address: String, _ placeId: String?, completion: @escaping (_ coordinates: Result<CLLocationCoordinate2D>) -> Void) {
+    func googleGeocodeAddressString(_ address: String, _ placeId: String?, completion: @escaping (_ coordinates: BoxedResult<CLLocationCoordinate2D>) -> Void) {
         if let reachability = try? Reachability() {
             if !reachability.isReachableByAnyMeans {
                 completion(.error("NoConnectivity"))

@@ -77,7 +77,7 @@ class MapViewController: UIViewController {
     @IBOutlet var mapView: GMSMapView!
     
     var popupAnimator = PopupAnimator()
-    var companyListPopupViewController: PopupCompanyListViewController?
+    var companyListPopupViewController: CompanyWorkplaceListViewProtocol?
     
     var mapEdgeInsets: UIEdgeInsets {
         return UIEdgeInsets(top: 60, left: 60, bottom: 60, right: 60)
@@ -216,13 +216,16 @@ class MapViewController: UIViewController {
         pressedPinOrCluster?.backgroundColor = UIColor.clear
         mapView.addSubview(pressedPinOrCluster!)
         
-        let vc = UIStoryboard(name: "PopupCompanyList", bundle: nil).instantiateViewController(withIdentifier: "PopupListViewController") as! PopupCompanyListViewController
+        let vc = CompanyWorkplaceListViewController()
         vc.didSelectCompanyWorkplace = { [weak self] companyWorkplace in
             self?.coordinator?.showDetail(
                 companyWorkplace: companyWorkplace,
                 originScreen: vc.screenName)
         }
-        vc.presenter = CompanyWorkplaceListPresenter(workplaceUuids: workplaceUuids)
+        let provider = CompanyWorkplaceListProvider()
+        vc.presenter = CompanyWorkplaceListPresenter(
+            companyWorkplaceUuids: workplaceUuids,
+            provider: provider)
         vc.log = log
         vc.transitioningDelegate = self
         present(vc, animated: true, completion: nil)
