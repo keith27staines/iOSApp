@@ -12,9 +12,10 @@ class CompanyHeaderView: UIView, CompanyHeaderViewProtocol {
     
     var presenter: CompanyHeaderViewPresenterProtocol!
     
-    init() {
+    init(presenter: CompanyHeaderViewPresenterProtocol) {
         super.init(frame: CGRect.zero)
         backgroundColor = UIColor.clear
+        presenter.attach(view: self)
         configureViews()
         refresh(from: presenter)
     }

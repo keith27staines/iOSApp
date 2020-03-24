@@ -98,6 +98,7 @@
 		FC771F572416299B00AD6317 /* PinDownloadFileParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771F542416299A00AD6317 /* PinDownloadFileParserTests.swift */; };
 		FC771F582416299B00AD6317 /* PinRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771F552416299B00AD6317 /* PinRepositoryTests.swift */; };
 		FC771F592416299B00AD6317 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771F562416299B00AD6317 /* Common.swift */; };
+		FC888AE8242A6CDC00BAA8B1 /* Json in Resources */ = {isa = PBXBuildFile; fileRef = FC888AE7242A6CDC00BAA8B1 /* Json */; };
 		FC8E303A20F4A60B006059DE /* F4SLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8E303920F4A60B006059DE /* F4SLogger.swift */; };
 		FC8E3F4822D3396A00102C37 /* VersionCheckCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8E3F4722D3396A00102C37 /* VersionCheckCoordinator.swift */; };
 		FC8E3F4A22D33A4C00102C37 /* VersionCheckCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8E3F4922D33A4C00102C37 /* VersionCheckCoordinatorTests.swift */; };
@@ -325,6 +326,7 @@
 		FC771F552416299B00AD6317 /* PinRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinRepositoryTests.swift; sourceTree = "<group>"; };
 		FC771F562416299B00AD6317 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		FC79314720226D440034D201 /* F4SDistribution.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = F4SDistribution.entitlements; path = Config/F4SDistribution.entitlements; sourceTree = "<group>"; };
+		FC888AE7242A6CDC00BAA8B1 /* Json */ = {isa = PBXFileReference; lastKnownFileType = text; path = Json; sourceTree = "<group>"; };
 		FC8E303920F4A60B006059DE /* F4SLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SLogger.swift; sourceTree = "<group>"; };
 		FC8E3F4722D3396A00102C37 /* VersionCheckCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheckCoordinator.swift; sourceTree = "<group>"; };
 		FC8E3F4922D33A4C00102C37 /* VersionCheckCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheckCoordinatorTests.swift; sourceTree = "<group>"; };
@@ -936,6 +938,7 @@
 			children = (
 				FC24D231226AED2B00FA04A1 /* Home Tab */,
 				FC24D235226AED5E00FA04A1 /* Search Tab */,
+				FC888AE7242A6CDC00BAA8B1 /* Json */,
 			);
 			path = "Main tabs ";
 			sourceTree = "<group>";
@@ -1140,6 +1143,7 @@
 				FCB6D9361F75056100B8C268 /* Branding.plist in Resources */,
 				40E78E211DD31A86000A3776 /* LaunchScreen.storyboard in Resources */,
 				FC0B6B392323D5D600A1867D /* Uploads.xcassets in Resources */,
+				FC888AE8242A6CDC00BAA8B1 /* Json in Resources */,
 				FCC5EBB61F449C310085CE15 /* README.md in Resources */,
 				FC681C011F57473D0077BECA /* Podfile.lock in Resources */,
 				40C1A4F31DDEF2F6000F80AA /* AutoCompleteTableViewCell.xib in Resources */,

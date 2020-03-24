@@ -53,9 +53,11 @@ class CompanyMainView: UIView, CompanyMainViewProtocol {
         return mapView
     }()
     
-    init(appSettings: AppSettingProvider) {
+    init(appSettings: AppSettingProvider, presenter: CompanyMainViewPresenterProtocol) {
+        self.mainViewPresenter = presenter
         self.appSettings = appSettings
         super.init(frame: CGRect.zero)
+        presenter.view = self
         backgroundColor = UIColor.white
         configureViews()
         configureMapView()
@@ -72,8 +74,7 @@ class CompanyMainView: UIView, CompanyMainViewProtocol {
     
     lazy var headerView: CompanyHeaderViewProtocol = {
         let presenter = self.headerViewPresenter
-        let headerView = CompanyHeaderView()
-        presenter.attach(view: headerView)
+        let headerView = CompanyHeaderView(presenter: presenter)
         return headerView
     }()
     

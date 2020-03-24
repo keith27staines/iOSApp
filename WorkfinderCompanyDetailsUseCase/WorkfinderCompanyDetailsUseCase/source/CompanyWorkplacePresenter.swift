@@ -14,6 +14,7 @@ protocol CompanyWorkplaceCoordinatorProtocol : class {
 }
 
 protocol CompanyWorkplacePresenterProtocol: class {
+    var mainViewPresenter: CompanyMainViewPresenter { get }
     var isShowingMap: Bool { get set }
     func onTapBack()
     func onTapApply()
@@ -153,7 +154,7 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
 
     func loadCompany() {
         view?.companyWorkplacePresenterDidBeginNetworkTask(self)
-        let companyUuid = companyWorkplace.companyJson.uuid
+        let companyUuid = companyWorkplace.companyJson.uuid!
         companyService.getCompany(uuid: companyUuid) { (result) in
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }

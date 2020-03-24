@@ -1,5 +1,6 @@
 
 import Foundation
+import WorkfinderCommon
 
 protocol CompanyWorkplaceListPresenterProtocol {
     var showLoadingIndicator: Bool { get }
@@ -11,31 +12,47 @@ protocol CompanyWorkplaceListPresenterProtocol {
 }
 
 class CompanyWorkplaceListPresenter {
-    var numberOfTiles: Int { return self.companyTiles.count }
+    var numberOfTiles: Int { return self.companyWorkplaces.count }
     weak var view: CompanyWorkplaceListViewProtocol?
     let provider: CompanyWorkplaceListProviderProtocol
     var showLoadingIndicator: Bool = false
-    var companyTiles: [CompanyTileViewData]
     let locationUuids: [F4SUUID]
     
     init(companyWorkplaceUuids: [F4SUUID], provider: CompanyWorkplaceListProviderProtocol) {
         self.provider = provider
-        self.locationUuids = ["4764e857-51ac-4b82-a97d-6a502c2d4dad"]
+        self.locationUuids = ["1fb49cfe-98e8-46e8-be58-4ebd9e0da74e"]
         //self.locationUuids = companyWorkplaceUuids
-        self.companyTiles = []
+    }
+    
+    var companyWorkplaces = [CompanyWorkplace]() {
+        didSet {
+            self.view?.refreshFromPresenter(self)
+        }
     }
     
     var companyListJson: CompanyListJson? {
         didSet {
-            defer { view?.refreshFromPresenter(self) }
             guard let companyListJson = self.companyListJson else {
-                self.companyTiles = []
+                companyWorkplaces = []
                 return
             }
-            self.companyTiles = companyListJson.results.map({ (companyJson) -> CompanyTileViewData in
-                return CompanyTileViewData(companyJson: companyJson)
-            })
+            companyWorkplaces = locationUuids.compactMap { (locationUuid) -> CompanyWorkplace? in
+                guard let companyJson = self.mapCompanyToLocation(locationUuid: locationUuid, companyListJson: companyListJson) else {
+                    return nil
+                }
+                let pinJson = PinJson(workplaceUuid: locationUuid, latitude: 0, longitude: 0)
+                return CompanyWorkplace(companyJson: companyJson, pinJson: pinJson)
+            }
         }
+    }
+    
+    func mapCompanyToLocation(locationUuid: F4SUUID, companyListJson: CompanyListJson) -> CompanyJson? {
+        let companyJson = companyListJson.results.first { (companyJson) -> Bool in
+            companyJson.locations.contains { (companyLocationJson) -> Bool in
+                return companyLocationJson.uuid == locationUuid
+            }
+        }
+        return companyJson
     }
     
     func beginFetch() {
@@ -73,7 +90,7 @@ class CompanyWorkplaceListPresenter {
 extension CompanyWorkplaceListPresenter: CompanyWorkplaceListPresenterProtocol {
     
     func onSelectRow(_ row: Int) {
-        let company = companyTiles[row]
+        view?.didSelectCompanyWorkplace?(companyWorkplaces[row])
     }
     
     func onViewDidLoad(_ view: CompanyWorkplaceListViewProtocol) {
@@ -83,6 +100,8 @@ extension CompanyWorkplaceListPresenter: CompanyWorkplaceListPresenterProtocol {
     }
     
     func companyTileViewData(index: Int) -> CompanyTileViewData {
-        return companyTiles[index]
+        let companyWorkplace = companyWorkplaces[index]
+        let companyJson = companyWorkplace.companyJson
+        return CompanyTileViewData(companyJson: companyJson)
     }
 }

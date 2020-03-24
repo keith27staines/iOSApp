@@ -10,7 +10,7 @@ protocol CompanySummarySectionPresenterProtocol {
 
  class CompanySummarySectionPresenter: CompanySummarySectionPresenterProtocol {
     let companyWorkplace: CompanyWorkplace
-    var company: F4SCompanyJson { companyWorkplace.companyJson }
+    var company: CompanyJson { companyWorkplace.companyJson }
     var numberOfRows: Int { return SummarySectionRow.allCases.count }
     
     init(companyWorkplace: CompanyWorkplace) {
@@ -53,7 +53,7 @@ protocol CompanySummarySectionPresenterProtocol {
         case .industry:
             let nameValueCell = cell as! NameValueCell
             nameValueCell.nameLabel.text = "Industry"
-            nameValueCell.valueLabel.text = company.industry
+            nameValueCell.valueLabel.text = company.industries?.first
             nameValueCell.nameValue.isButton = false
             nameValueCell.nameLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
         case .summary:
@@ -63,7 +63,7 @@ protocol CompanySummarySectionPresenterProtocol {
             nameValueCell.nameLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         case .summaryText:
             let summaryCell = cell as! CompanySummaryTextCell
-            summaryCell.expandableLabel.text = company.summary
+            summaryCell.expandableLabel.text = company.description
             summaryCell.expandableLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
         }
         return cell

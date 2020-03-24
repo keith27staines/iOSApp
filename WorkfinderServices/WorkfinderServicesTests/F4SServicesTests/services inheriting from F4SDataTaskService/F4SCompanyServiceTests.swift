@@ -11,7 +11,7 @@ class F4SCompanyServiceTests: XCTestCase {
     
     func test_getCompany() {
         let sut = F4SCompanyService(configuration: makeTestConfiguration())
-        let requiredValue = F4SCompanyJson()
+        let requiredValue = CompanyJson()
         let requiredResult = F4SNetworkResult.success(requiredValue)
         sut.networkTaskfactory = MockF4SNetworkTaskFactory(requiredSuccessResult:
                     requiredResult)
@@ -31,15 +31,15 @@ class F4SCompanyServiceTests: XCTestCase {
 
 }
 
-class F4SCompanyJsonTests: XCTestCase {
+class CompanyJsonTests: XCTestCase {
     func test_urls_when_nil() {
-        let sut = F4SCompanyJson()
+        let sut = CompanyJson()
         XCTAssertNil(sut.linkedInUrlString)
         XCTAssertNil(sut.duedilUrlString)
     }
     
     func test_rulsWhenNotNil() {
-        var sut = F4SCompanyJson()
+        var sut = CompanyJson()
         sut.linkedInUrlString = "linkedin"
         sut.duedilUrlString = "duedil"
         XCTAssertNotNil(sut.linkedInUrlString)

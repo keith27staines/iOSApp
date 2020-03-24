@@ -217,15 +217,15 @@ class MapViewController: UIViewController {
         mapView.addSubview(pressedPinOrCluster!)
         
         let vc = CompanyWorkplaceListViewController()
+        let provider = CompanyWorkplaceListProvider()
+        vc.presenter = CompanyWorkplaceListPresenter(
+            companyWorkplaceUuids: workplaceUuids,
+            provider: provider)
         vc.didSelectCompanyWorkplace = { [weak self] companyWorkplace in
             self?.coordinator?.showDetail(
                 companyWorkplace: companyWorkplace,
                 originScreen: vc.screenName)
         }
-        let provider = CompanyWorkplaceListProvider()
-        vc.presenter = CompanyWorkplaceListPresenter(
-            companyWorkplaceUuids: workplaceUuids,
-            provider: provider)
         vc.log = log
         vc.transitioningDelegate = self
         present(vc, animated: true, completion: nil)

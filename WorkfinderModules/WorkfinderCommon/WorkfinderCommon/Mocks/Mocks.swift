@@ -34,16 +34,16 @@ public class MockOnboardingCoordinatorFactory: OnboardingCoordinatorFactoryProto
 
 public class MockF4SCompanyRepository: F4SCompanyRepositoryProtocol {
     var counter: Int = 0
-    var companies = [F4SUUID: F4SCompanyJson]()
+    var companies = [F4SUUID: CompanyJson]()
     
-    public func load(companyUuids: [F4SUUID], completion: @escaping (([F4SCompanyJson]) -> Void)) {
-        let companies = companyUuids.map { (uuid) -> F4SCompanyJson in
+    public func load(companyUuids: [F4SUUID], completion: @escaping (([CompanyJson]) -> Void)) {
+        let companies = companyUuids.map { (uuid) -> CompanyJson in
             return self.getCompany(uuid: uuid)
         }
         completion(companies)
     }
     
-    private func getCompany(uuid: F4SUUID) -> F4SCompanyJson {
+    private func getCompany(uuid: F4SUUID) -> CompanyJson {
         if let company = companies[uuid] { return company }
         let company = makeCompany(uuid: uuid)
         companies[uuid] = company
@@ -61,19 +61,21 @@ public class MockF4SCompanyRepository: F4SCompanyRepositoryProtocol {
       return String((0..<length).map{ _ in letters.randomElement()! })
     }
     
-    func makeCompany(uuid: F4SUUID) -> F4SCompanyJson {
+    func makeCompany(uuid: F4SUUID) -> CompanyJson {
         counter += 1
-        return F4SCompanyJson(
+        
+        return CompanyJson(
             uuid: uuid,
             name: makeRandomName(),
-            industry: "Making stuff",
+            industries: ["Making stuff"],
             logoUrlString: "url/logo",
-            summary: "We make stuff",
+            description: "We make stuff",
             employeeCount: 100,
             turnover: 100.0,
             turnoverGrowth: 10.0,
             duedilUrlString: "duedil/url",
-            linkedInUrlString: "linkedIn/url")
+            locations: []
+        )
     }
     
     public init() {}
@@ -199,7 +201,7 @@ public class MockF4SEmailVerificationModel: F4SEmailVerificationModelProtocol {
 public class MockF4SCompanyService: F4SCompanyServiceProtocol {
     public init() {}
     
-    public func getCompany(uuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SCompanyJson>) -> ()) {
+    public func getCompany(uuid: F4SUUID, completion: @escaping (F4SNetworkResult<CompanyJson>) -> ()) {
     
     }
 }

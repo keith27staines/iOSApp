@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 struct CompanyListJson: Codable {
     var count: Int
@@ -15,32 +16,16 @@ struct CompanyListJson: Codable {
     var results: [CompanyJson]
 }
 
-struct CompanyJson: Codable {
-    var uuid: String?
-    var name: String?
-    var description: String?
-    var logoUrlString: String?
-    var duedilUrlString: String?
-    
-    private enum codingKeys: String, CodingKey {
-        case uuid
-        case name
-        case description
-        case logo
-        case duedilUrlString = "duedil_url"
-    }
-}
-
-struct CompanyLocationJson: Codable {
-    var uuid: String?
-    var postcode: String?
-    var point: String?
-    private enum codingKeys: String, CodingKey {
-        case uuid
-        case postcode = "address_postcode"
-        case point
-    }
-}
+//public struct CompanyLocationJson: Codable {
+//    public var uuid: String?
+//    public var postcode: String?
+//    public var point: String?
+//    private enum codingKeys: String, CodingKey {
+//        case uuid
+//        case postcode = "address_postcode"
+//        case point
+//    }
+//}
 
 /* Structure returned from companies endpoint
 {

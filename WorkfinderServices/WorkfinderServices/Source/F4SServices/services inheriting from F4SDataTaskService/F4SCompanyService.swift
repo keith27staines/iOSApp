@@ -10,7 +10,7 @@ public class F4SCompanyService: F4SDataTaskService, F4SCompanyServiceProtocol {
     }
 
     public func getCompany(uuid: F4SUUID, completion: @escaping
-        (F4SNetworkResult<F4SCompanyJson>) -> ()) {
+        (F4SNetworkResult<CompanyJson>) -> ()) {
         relativeUrlString = uuid
         beginGetRequest(attempting: "Get company detail", completion: completion)
     }

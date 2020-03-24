@@ -42,15 +42,16 @@ class CompanyWorkplaceViewController: UIViewController {
         companyMainPageView.refresh()
     }
     
-    lazy var companyMainPageView: CompanyMainView = {
-        let mainView = view as! CompanyMainView
-        mainView.appSettings = self.appSettings
-        mainView.log = log
-        return mainView
-    }()
+    var companyMainPageView: CompanyMainView {
+        return view as! CompanyMainView
+    }
     
     override func loadView() {
-        view = CompanyMainView(appSettings: appSettings)
+        let view = CompanyMainView(
+            appSettings: appSettings,
+            presenter: self.presenter.mainViewPresenter)
+        view.log = log
+        self.view = view
     }
     
     override func viewDidLoad() {

@@ -24,7 +24,7 @@ protocol CompanyDataSectionPresenterProtocol: class {
 class CompanyDataSectionPresenter: CompanyDataSectionPresenterProtocol {
     
     var numberOfRows: Int { return items.count }
-    var company: F4SCompanyJson { return self.companyWorkplace.companyJson }
+    var company: CompanyJson { return self.companyWorkplace.companyJson }
     
     var revenueString: String {
         return String(company.turnover ?? 0)

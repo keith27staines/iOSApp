@@ -81,5 +81,5 @@ public protocol F4SRecommendationServiceProtocol : class {
 }
 
 public protocol F4SCompanyServiceProtocol {
-    func getCompany(uuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SCompanyJson>) -> ())
+    func getCompany(uuid: F4SUUID, completion: @escaping (F4SNetworkResult<CompanyJson>) -> ())
 }

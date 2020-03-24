@@ -1,3 +1,5 @@
+import WorkfinderCommon
+
 struct CompanyTileViewData {
     var companyName: String
     var logoUrlString: String?
@@ -6,7 +8,6 @@ struct CompanyTileViewData {
     init() {
         self.uuid = UUID().uuidString
         self.companyName = "unnamed company"
-        
     }
     
     init(companyJson: CompanyJson) {
