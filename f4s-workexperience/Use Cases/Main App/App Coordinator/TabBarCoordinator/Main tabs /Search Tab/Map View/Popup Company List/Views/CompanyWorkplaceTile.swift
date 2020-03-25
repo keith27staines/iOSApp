@@ -46,7 +46,7 @@ class CompanyWorkplaceTile: UITableViewCell {
     
     func configureWithViewData(_ viewData: CompanyTileViewData) {
         nameLabel.text = viewData.companyName
-        industryLabel.text = "which industry?"
+        industryLabel.text = viewData.industry
         logoView.load(
             urlString: viewData.logoUrlString,
             defaultImage: UIImage(named: "DefaultLogo"))
