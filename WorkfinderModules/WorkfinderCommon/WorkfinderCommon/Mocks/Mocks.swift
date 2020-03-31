@@ -72,7 +72,7 @@ public class MockF4SCompanyRepository: F4SCompanyRepositoryProtocol {
             description: "We make stuff",
             employeeCount: 100,
             turnover: 100.0,
-            turnoverGrowth: 10.0,
+            growth: 10.0,
             duedilUrlString: "duedil/url",
             locations: []
         )

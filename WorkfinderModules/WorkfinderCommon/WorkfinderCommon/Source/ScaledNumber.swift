@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct ScaledNumber {
+public struct ScaledNumber {
     
-    enum Scale : Double {
+    public enum Scale : Double {
         case base = 1
         case thousand = 1_000
         case million = 1_000_000
@@ -22,19 +22,19 @@ struct ScaledNumber {
     let scale: Scale
     let amount: Double
     
-    func formattedString() -> String {
+    public func formattedString() -> String {
         if scale.rawValue >= Scale.thousand.rawValue {
             return String(format: "%.1f%", amount / scale.rawValue) + symbol
         }
         return String(format: "%.f", amount)
     }
     
-    static func formattedString(for amount: Double) -> String {
+    public static func formattedString(for amount: Double) -> String {
         let scaledNumber = ScaledNumber(amount: amount)
         return scaledNumber.formattedString()
     }
     
-    init(amount:Double) {
+    public init(amount:Double) {
         self.amount = amount
         if ScaledNumber.inScale(amount: amount, scale: Scale.trillion) {
             symbol = "t"

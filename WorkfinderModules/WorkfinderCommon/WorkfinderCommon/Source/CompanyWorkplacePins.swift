@@ -21,6 +21,12 @@ public class CompanyWorkplace: Codable {
         self.companyJson = companyJson
         self.pinJson = pinJson
     }
+    public var postcode: String {
+        let location = companyJson.locations.first { (location) -> Bool in
+            location.uuid == self.pinJson.workplaceUuid
+        }
+        return location?.address_postcode ?? "unknown postcode"
+    }
 }
 
 public struct CompanyJson: Codable {
@@ -34,7 +40,6 @@ public struct CompanyJson: Codable {
     public var employeeCount: Int?
     public var growth: Double?
     public var turnover: Double?
-    public var turnoverGrowth: Double?
     public var linkedInUrlString: String?
     public var status: String?
     
@@ -52,7 +57,7 @@ public struct CompanyJson: Codable {
         description: String? = nil,
         employeeCount: Int? = nil,
         turnover: Double? = nil,
-        turnoverGrowth: Double? = nil,
+        growth: Double? = nil,
         duedilUrlString: String? = nil,
         locations: [CompanyLocationJson]?,
         linkedInUrlString: String? = nil,
@@ -64,7 +69,7 @@ public struct CompanyJson: Codable {
         self.description = description
         self.employeeCount = employeeCount
         self.turnover = turnover
-        self.turnoverGrowth = turnoverGrowth
+        self.growth = growth
         self.duedilUrlString = duedilUrlString
         self.locations = locations ?? []
         self.linkedInUrlString = linkedInUrlString
@@ -82,19 +87,39 @@ public struct CompanyJson: Codable {
         case employeeCount = "employee_count"
         case growth
         case turnover
-        case turnoverGrowth = "turnover_growth"
         case linkedInUrlString = "linkedin_url"
         case status
     }
 }
 
+/* location json capture
+ {
+    "uuid":"bfbb0e1b-4f4d-4d43-95ea-6a6775fb92ae",
+    "type":"registered",
+    "address_unit":"",
+    "address_building":"",
+    "address_street":"",
+    "address_city":"",
+    "address_region":"",
+    "address_country":"GB",
+    "address_postcode":"W1D5LG",
+    "point":{
+        "type":"Point",
+        "coordinates": [-0.13076,51.51275]
+     },
+    "last_geocode_attempt":null
+ }
+ */
+
 public struct CompanyLocationJson: Codable {
     public var uuid: String?
-    public var postcode: String?
+    public var address_postcode: String?
+    //public var address_postcode: String?
     public var point: PointJson?
     private enum codingKeys: String, CodingKey {
         case uuid
-        case postcode = "address_postcode"
+        //case postcode // = "address_postcode"
+        case address_postcode
         case point
     }
     

@@ -27,11 +27,13 @@ class CompanyDataSectionPresenter: CompanyDataSectionPresenterProtocol {
     var company: CompanyJson { return self.companyWorkplace.companyJson }
     
     var revenueString: String {
-        return String(company.turnover ?? 0)
+        let turnover = ScaledNumber(amount: company.turnover ?? 0).formattedString()
+        return String(turnover)
     }
     
     var growthString: String {
-        return String(company.turnoverGrowth ?? 0)
+        let growth = ScaledNumber(amount: company.growth ?? 0).formattedString()
+        return String(growth)
     }
     
     var numberOfEmployees: String { String(company.employeeCount ?? 0) }

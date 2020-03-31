@@ -16,17 +16,6 @@ struct CompanyListJson: Codable {
     var results: [CompanyJson]
 }
 
-//public struct CompanyLocationJson: Codable {
-//    public var uuid: String?
-//    public var postcode: String?
-//    public var point: String?
-//    private enum codingKeys: String, CodingKey {
-//        case uuid
-//        case postcode = "address_postcode"
-//        case point
-//    }
-//}
-
 /* Structure returned from companies endpoint
 {
   "uuid": "3fa85f64-5717-4562-b3fc-2c963f66afa6",

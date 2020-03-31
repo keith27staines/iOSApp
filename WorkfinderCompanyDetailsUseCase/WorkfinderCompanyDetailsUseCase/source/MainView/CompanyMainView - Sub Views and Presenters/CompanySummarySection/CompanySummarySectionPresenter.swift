@@ -47,7 +47,7 @@ protocol CompanySummarySectionPresenterProtocol {
         case .postcode:
             let nameValueCell = cell as! NameValueCell
             nameValueCell.nameLabel.text = "Postcode"
-            nameValueCell.valueLabel.text = "no postcode"
+            nameValueCell.valueLabel.text = companyWorkplace.postcode
             nameValueCell.nameValue.isButton = false
             nameValueCell.nameLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
         case .industry:

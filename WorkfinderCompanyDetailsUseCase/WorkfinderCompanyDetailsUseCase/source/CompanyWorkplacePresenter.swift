@@ -37,6 +37,7 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
     }
     
     func onTapBack() {
+        coordinator?.companyWorkplacePresenterDidFinish(self)
     }
     
     func onTapApply() {

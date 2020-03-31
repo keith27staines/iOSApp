@@ -38,7 +38,6 @@ class CompanyWorkplaceViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
     
     func refresh() {
-        //presenter.userLocation = companyMainPageView.mapView.userLocation.location
         companyMainPageView.refresh()
     }
     
