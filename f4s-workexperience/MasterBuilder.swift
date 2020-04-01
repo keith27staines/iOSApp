@@ -19,7 +19,6 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
             navigationRouter: router,
             inject: inject,
             companyCoordinatorFactory: companyCoordinatorFactory,
-            companyService: companyService,
             documentUploaderFactory: documentUploaderFactory,
             interestsRepository: interestsRepository,
             roleService: roleService)
@@ -106,7 +105,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
                               navigationRouter: rootNavigationRouter,
                               inject: injection,
                               companyCoordinatorFactory: companyCoordinatorFactory,
-                              companyService: companyService,
+                              hostsProvider: hostsProvider,
                               documentUploaderFactory: documentUploaderFactory,
                               emailVerificationModel: emailVerificationModel,
                               localStore: localStore,
@@ -121,7 +120,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     lazy var companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol = {
         let applyService = ApplyService()
         return CompanyCoordinatorFactory(applyService: applyService,
-                                         companyService: companyService,
+                                         hostsProvider: self.hostsProvider,
                                          documentServiceFactory: self.placementDocumentsServiceFactory,
                                          documentUploaderFactory: documentUploaderFactory,
                                          emailVerificationModel: self.emailVerificationModel,
@@ -148,8 +147,8 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         return F4SCompanyDownloadManager()
     }()
     
-    lazy var companyService: F4SCompanyServiceProtocol = {
-        return F4SCompanyService(configuration: self.networkConfiguration)
+    lazy var hostsProvider: HostsProviderProtocol = {
+        return HostsProvider(apiUrlString: self.networkConfiguration.workfinderApiV3)
     }()
     
     lazy var documentUploaderFactory: F4SDocumentUploaderFactoryProtocol = {

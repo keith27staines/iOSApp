@@ -208,7 +208,7 @@ class CompanyMainView: UIView, CompanyMainViewProtocol {
         coordinator?.companyMainViewDidTapApply(self)
     }
     
-    func profileLinkTap(host: F4SHost) {
+    func profileLinkTap(host: Host) {
         hostsSectionPresenter.onDidTapLinkedIn(for: host)
     }
     

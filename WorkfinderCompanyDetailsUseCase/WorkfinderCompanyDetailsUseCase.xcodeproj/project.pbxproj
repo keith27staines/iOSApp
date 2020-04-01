@@ -23,7 +23,6 @@
 		FCC1DF03232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF02232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCaseTests.swift */; };
 		FCC1DF05232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = FCC1DEF7232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCC1DF1C232502740074D5C1 /* CompanyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF1B232502730074D5C1 /* CompanyCoordinator.swift */; };
-		FCC1DF20232502A10074D5C1 /* TestHosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF1F232502A10074D5C1 /* TestHosts.swift */; };
 		FCC1DF21232502A10074D5C1 /* CompanyWorkplacePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF1D232502A00074D5C1 /* CompanyWorkplacePresenter.swift */; };
 		FCC1DF27232503030074D5C1 /* CompanyWorkplaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF25232503030074D5C1 /* CompanyWorkplaceViewController.swift */; };
 		FCC1DF28232503030074D5C1 /* CompanyMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF26232503030074D5C1 /* CompanyMainView.swift */; };
@@ -70,7 +69,6 @@
 		FCC1DF04232501ED0074D5C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCC1DF1B232502730074D5C1 /* CompanyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyCoordinator.swift; sourceTree = "<group>"; };
 		FCC1DF1D232502A00074D5C1 /* CompanyWorkplacePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyWorkplacePresenter.swift; sourceTree = "<group>"; };
-		FCC1DF1F232502A10074D5C1 /* TestHosts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHosts.swift; sourceTree = "<group>"; };
 		FCC1DF25232503030074D5C1 /* CompanyWorkplaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyWorkplaceViewController.swift; sourceTree = "<group>"; };
 		FCC1DF26232503030074D5C1 /* CompanyMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyMainView.swift; sourceTree = "<group>"; };
 		FCC1DF2A2325031C0074D5C1 /* CompanyMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyMapView.swift; sourceTree = "<group>"; };
@@ -156,7 +154,6 @@
 			children = (
 				FC2CDC1D2423AD8C00D183AC /* CompanyHostsSectionPresenter.swift */,
 				FC99485D2379CFEA009D64D0 /* TextModel.swift */,
-				FCC1DF1F232502A10074D5C1 /* TestHosts.swift */,
 			);
 			path = CompanyHostsSection;
 			sourceTree = "<group>";
@@ -387,7 +384,6 @@
 				FCC1DF1C232502740074D5C1 /* CompanyCoordinator.swift in Sources */,
 				FCC1DF2E2325031C0074D5C1 /* CompanyHeaderView.swift in Sources */,
 				FC7FCDFD2376B2C100C1182B /* CompanyDataSectionPresenter.swift in Sources */,
-				FCC1DF20232502A10074D5C1 /* TestHosts.swift in Sources */,
 				FC99485E2379CFEA009D64D0 /* TextModel.swift in Sources */,
 				FCC1DF302325031C0074D5C1 /* CompanyToolbar.swift in Sources */,
 				FCB9EE4B235D9F9500678F3F /* HostView.swift in Sources */,

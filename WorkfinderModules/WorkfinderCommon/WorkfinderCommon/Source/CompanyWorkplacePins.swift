@@ -189,28 +189,50 @@ public struct PointJson : Codable {
 }
 */
 
-public struct F4SHost : Codable {
+/*
+ {
+   "uuid": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+   "full_name": "string",
+   "names": [
+     null
+   ],
+   "emails": [
+     "user@example.com"
+   ],
+   "user": "string",
+   "photo": "string",
+   "phone": "string",
+   "instagram_handle": "string",
+   "twitter_handle": "string",
+   "linkedin_url": "string",
+   "description": "string",
+   "associations": [
+     "string"
+   ]
+ }
+ */
+
+public struct HostListJson : Codable {
+    public var count: Int?
+    public var next: String?
+    public var previous: String?
+    public var results: [Host]?
+}
+
+public struct Host : Codable {
+    
     public var uuid: F4SUUID?
     public var displayName: String?
-    public var firstName: String?
-    public var lastName: String?
-    public var profileUrl: String?
-    public var imageUrl: String?
-    public var gender: String?
-    public var isInterestedInHosting: Bool?
-    public var isCurrentEmployee: Bool?
-    public var role: String?
-    public var summary: String?
+    public var linkedinUrlString: String?
+    public var photoUrlString: String?
+    public var description: String?
     public var isSelected: Bool = false
     
     public init(
         uuid: F4SUUID,
         displayName: String? = nil,
-        firstName: String? = nil,
-        lastName: String? =  nil,
-        profileUrl: String? = nil,
-        imageUrl: String? = nil,
-        gender: String? = nil,
+        linkedinUrlString: String? = nil,
+        photoUrlString: String? = nil,
         isInterestedInHosting: Bool? = nil,
         isCurrentEmployee: Bool? = nil,
         role: String? = nil,
@@ -218,31 +240,19 @@ public struct F4SHost : Codable {
         
         self.uuid = uuid
         self.displayName = displayName
-        self.firstName = firstName
-        self.lastName = lastName
-        self.profileUrl = profileUrl
-        self.imageUrl = imageUrl
-        self.gender = gender
-        self.isInterestedInHosting = isInterestedInHosting
-        self.isCurrentEmployee = isCurrentEmployee
-        self.role = role
-        self.summary = summary
+        self.linkedinUrlString = linkedinUrlString
+        self.photoUrlString = photoUrlString
+        self.description = summary
     }
 }
 
-extension F4SHost {
+extension Host {
     private enum CodingKeys : String, CodingKey {
-        case uuid = "f4s_id"
-        case displayName = "formatted_name"
-        case firstName = "first_name"
-        case lastName = "last_name"
-        case profileUrl = "profile_url"
-        case imageUrl = "picture_url"
-        case gender
-        case isInterestedInHosting = "is_interested_in_working"
-        case isCurrentEmployee = "is_current"
-        case role = "job_title"
-        case summary
+        case uuid
+        case displayName = "full_name"
+        case linkedinUrlString = "linkedin_url"
+        case photoUrlString = "photo"
+        case description
     }
 }
 

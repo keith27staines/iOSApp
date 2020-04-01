@@ -18,7 +18,7 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
     let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
     let templateService: F4STemplateServiceProtocol
     let applyService: ApplyServiceProtocol
-    let companyService: F4SCompanyServiceProtocol
+    let hostsProvider: HostsProviderProtocol
 
     weak var finishDespatcher: CompanyCoordinatorParentProtocol?
     
@@ -34,7 +34,7 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
         documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
         documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
         applyService: ApplyServiceProtocol,
-        companyService: F4SCompanyServiceProtocol) {
+        hostsProvider: HostsProviderProtocol) {
         self.environment = environment
         self.interestsRepository = interestsRepository
         self.companyWorkplace = companyWorkplace
@@ -44,7 +44,7 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
         self.documentServiceFactory = documentServiceFactory
         self.documentUploaderFactory = documentUploaderFactory
         self.applyService = applyService
-        self.companyService = companyService
+        self.hostsProvider = hostsProvider
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
@@ -53,10 +53,10 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
         companyWorkplacePresenter = CompanyWorkplacePresenter(
             coordinator: self,
             companyWorkplace: companyWorkplace,
-            companyService: companyService,
+            hostsProvider: hostsProvider,
             log: injected.log)
-        companyViewController = CompanyWorkplaceViewController(appSettings: injected.appSettings)
-        companyWorkplacePresenter.attachView(view: companyViewController)
+        companyViewController = CompanyWorkplaceViewController(appSettings: injected.appSettings,
+                                                               presenter: companyWorkplacePresenter)
         companyViewController.log = self.injected.log
         companyViewController.originScreen = originScreen
         navigationRouter.push(viewController: companyViewController, animated: true)
@@ -105,12 +105,12 @@ extension CompanyCoordinator : CompanyWorkplaceCoordinatorProtocol {
     }
     
     func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, applyTo companyWorkplace: CompanyWorkplace) {
-        let host = F4SHost(uuid: "hostUuid")
+        let host = Host(uuid: "hostUuid")
         startApplyCoordinator(companyWorkplace: companyWorkplace, host: host)
     }
     
     func startApplyCoordinator(companyWorkplace: CompanyWorkplace,
-                               host: F4SHost?) {
+                               host: Host?) {
         let applyCoordinator = ApplyCoordinator(
             applyCoordinatorDelegate: self,
             applyService: applyService,
@@ -129,9 +129,9 @@ extension CompanyCoordinator : CompanyWorkplaceCoordinatorProtocol {
         applyCoordinator.start()
     }
     
-    func companyWorkplacePresenter(_ viewModel: CompanyWorkplacePresenter, requestsShowLinkedInFor host: F4SHost) {
-        guard let _ = host.profileUrl else { return }
-        openUrl(host.profileUrl!)
+    func companyWorkplacePresenter(_ viewModel: CompanyWorkplacePresenter, requestsShowLinkedInFor host: Host) {
+        guard let _ = host.linkedinUrlString else { return }
+        openUrl(host.linkedinUrlString!)
     }
     
     func companyWorkplacePresenter(_ viewModel: CompanyWorkplacePresenter, requestsShowLinkedInFor company: CompanyWorkplace) {

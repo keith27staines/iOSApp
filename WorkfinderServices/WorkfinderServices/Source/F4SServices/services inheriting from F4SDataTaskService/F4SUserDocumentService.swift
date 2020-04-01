@@ -5,7 +5,7 @@ public class F4SUserDocumentsService : F4SDataTaskService, F4SUserDocumentsServi
     
     public init(configuration: NetworkConfig) {
         let apiName = "documents"
-        super.init(baseURLString: configuration.workfinderApiV2, apiName: apiName, configuration: configuration)
+        super.init(baseURLString: configuration.workfinderApiV3, apiName: apiName, configuration: configuration)
     }
     
     public func getDocuments(completion: @escaping (F4SNetworkResult<F4SGetDocumentJson>) -> ()) {

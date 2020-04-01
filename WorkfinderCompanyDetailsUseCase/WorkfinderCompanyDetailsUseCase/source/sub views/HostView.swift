@@ -10,12 +10,12 @@ class HostView : UIView {
     var lineHeight: CGFloat = 23
     var fontWeight = UIFont.Weight.light
     
-    var host: F4SHost? {
+    var host: Host? {
         didSet {
-            image.load(urlString: host?.imageUrl, defaultImage: HostView.defaultImage)
+            image.load(urlString: host?.photoUrlString, defaultImage: HostView.defaultImage)
             nameLabel.text = host?.displayName
-            roleLabel.text = host?.role
-            if let _ = host?.profileUrl {
+            roleLabel.text = ""
+            if let _ = host?.linkedinUrlString {
                 profileButton.isHidden = false
                 profileButton.setTitle("see more on LinkedIn", for: UIControl.State.normal)
             } else {
@@ -38,7 +38,7 @@ class HostView : UIView {
         readMoreLabelStack.isHidden = !self.expandableLabel.isExpandable
     }
     
-    var profileLinkTap: ((F4SHost) -> Void)?
+    var profileLinkTap: ((Host) -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -4,11 +4,8 @@ public struct NetworkConfig {
     /// `wexApiKey` is the api key required for all calls to the Workfinder API
     public let wexApiKey: String
     
-    /// The base url for the Workfinder api, excluding the v2 postfix
-    public var workfinderApi: String { return endpoints.base }
-    
     /// The full url for the v2 api
-    public var workfinderApiV2: String { return endpoints.baseUrl2 }
+    public var workfinderApiV3: String { return endpoints.workfinderApiUrlString }
     
     /// Manages network sessions
     public let sessionManager: F4SNetworkSessionManagerProtocol

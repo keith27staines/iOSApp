@@ -4,7 +4,7 @@ public class F4SCompanyService: F4SDataTaskService, F4SCompanyServiceProtocol {
 
     public init(configuration: NetworkConfig) {
         let apiName = "company"
-        super.init(baseURLString: configuration.workfinderApiV2,
+        super.init(baseURLString: configuration.workfinderApiV3,
                    apiName: apiName,
                    configuration: configuration)
     }

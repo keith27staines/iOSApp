@@ -11,13 +11,14 @@ protocol CompanyHostsSectionPresenterProtocol {
     var numberOfRows: Int { get }
     var hostsSummaryModel: TextModel { get }
     func cellforRow(_ row: Int, in tableView: UITableView) -> UITableViewCell
-    func onDidTapLinkedIn(for: F4SHost)
+    func onDidTapLinkedIn(for: Host)
     func onDidTapHostCell(_ hostCell: HostCell, atIndexPath indexPath: IndexPath)
+    func onHostsDidLoad(_ hosts: [Host])
 }
 
 class CompanyHostsSectionPresenter: CompanyHostsSectionPresenterProtocol {
     private weak var view: CompanyHostsSectionPresenterRepresentable?
-    private var hosts: [F4SHost]
+    private var hosts: [Host]
     var numberOfRows: Int { return hosts.count }
     var hostsSummaryModel: TextModel
 
@@ -36,7 +37,7 @@ class CompanyHostsSectionPresenter: CompanyHostsSectionPresenterProtocol {
     }
     
     
-    func onDidTapLinkedIn(for: F4SHost) {
+    func onDidTapLinkedIn(for: Host) {
         
     }
     
@@ -48,12 +49,12 @@ class CompanyHostsSectionPresenter: CompanyHostsSectionPresenterProtocol {
         hostCell.configureWithHost(host, summaryState: summaryState, profileLinkTap: onDidTapLinkedIn, selectAction: updateHostSelectionState)
     }
     
-    var selectedHost: F4SHost? {
+    var selectedHost: Host? {
         let host = hosts.first { (host) -> Bool in host.isSelected }
         return host
     }
     
-    func updateHostSelectionState(from updatedHost: F4SHost) {
+    func updateHostSelectionState(from updatedHost: Host) {
         if updatedHost.isSelected {
             for (index, host) in hosts.enumerated() {
                 if host.uuid == updatedHost.uuid {
@@ -68,15 +69,22 @@ class CompanyHostsSectionPresenter: CompanyHostsSectionPresenterProtocol {
         view?.refresh(from: self)
     }
     
-    private func updateHost(from updatedHost: F4SHost) {
+    private func updateHost(from updatedHost: Host) {
         guard let index = (hosts.firstIndex { (host) -> Bool in
             host.uuid == updatedHost.uuid
         }) else { return }
         hosts[index] = updatedHost
     }
     
-    init(hosts: [F4SHost]) {
+    init() {
+        self.hosts = []
+        self.hostsSummaryModel = TextModel(hosts: [])
+        onHostsDidLoad([])
+    }
+    
+    func onHostsDidLoad(_ hosts: [Host]) {
         self.hosts = hosts
         self.hostsSummaryModel = TextModel(hosts: hosts)
+        view?.refresh(from: self)
     }
 }

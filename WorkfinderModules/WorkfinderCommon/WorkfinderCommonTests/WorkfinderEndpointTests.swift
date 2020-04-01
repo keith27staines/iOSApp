@@ -15,7 +15,7 @@ class WorkfinderEndpointTests: XCTestCase {
         let endpoint = WorkfinderEndpoint(baseUrlString: "baseUrl")
         XCTAssertEqual(endpoint.allPartnersUrl,"baseUrl/v2/partner")
         XCTAssertEqual(endpoint.allPlacementsUrl,"baseUrl/v2/placement")
-        XCTAssertEqual(endpoint.baseUrl2, "baseUrl/v2")
+        XCTAssertEqual(endpoint.workfinderApiUrlString, "baseUrl/v2")
         XCTAssertEqual(endpoint.companyDatabaseUrl,"baseUrl/v2/company/dump/full")
         XCTAssertEqual(endpoint.companyDocumentsUrl,"baseUrl/v2/company")
         XCTAssertEqual(endpoint.companyUrl,"baseUrl/v2/company")

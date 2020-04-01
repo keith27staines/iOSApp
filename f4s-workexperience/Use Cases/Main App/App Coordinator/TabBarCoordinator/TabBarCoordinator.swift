@@ -9,7 +9,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     
     let injected: CoreInjectionProtocol
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
-    let companyService: F4SCompanyServiceProtocol
+
     let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
     let interestsRepository: F4SInterestsRepositoryProtocol
     let roleService: F4SRoleServiceProtocol
@@ -30,7 +30,6 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
                   navigationRouter: NavigationRoutingProtocol,
                   inject: CoreInjectionProtocol,
                   companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
-                  companyService: F4SCompanyServiceProtocol,
                   documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
                   interestsRepository: F4SInterestsRepositoryProtocol,
                   roleService: F4SRoleServiceProtocol) {
@@ -39,7 +38,6 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         self.injected = inject
         
         self.companyCoordinatorFactory = companyCoordinatorFactory
-        self.companyService = companyService
         self.documentUploaderFactory = documentUploaderFactory
 
         self.interestsRepository = interestsRepository

@@ -8,7 +8,7 @@ public class F4SAvailabilityService : F4SDataTaskService, F4SAvailabilityService
     public init(placementUuid: F4SUUID, configuration: NetworkConfig) {
         self.placementUuid = placementUuid
         let apiName = "placement/\(placementUuid)"
-        super.init(baseURLString: configuration.workfinderApiV2, apiName: apiName, configuration: configuration)
+        super.init(baseURLString: configuration.workfinderApiV3, apiName: apiName, configuration: configuration)
     }
 
     public func getAvailabilityForPlacement(completion: @escaping (F4SNetworkResult<[F4SAvailabilityPeriodJson]>) -> ()) {

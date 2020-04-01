@@ -4,7 +4,7 @@ import WorkfinderCommon
 public class F4SCompanyFavouritingService : F4SDataTaskService, CompanyFavouritingServiceProtocol {
 
     public init(configuration: NetworkConfig) {
-        super.init(baseURLString: configuration.workfinderApiV2, apiName: "favourite", configuration: configuration)
+        super.init(baseURLString: configuration.workfinderApiV3, apiName: "favourite", configuration: configuration)
     }
     
     public func favourite(companyUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SShortlistJson>) -> ()) {

@@ -2,12 +2,13 @@
 import UIKit
 import CoreLocation
 import WorkfinderCommon
+import WorkfinderServices
 
 let workfinderGreen = UIColor(red: 57, green: 167, blue: 82)
 
 protocol CompanyWorkplaceCoordinatorProtocol : class {
     func companyWorkplacePresenterDidFinish(_ : CompanyWorkplacePresenter)
-    func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, requestsShowLinkedInFor: F4SHost)
+    func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, requestsShowLinkedInFor: Host)
     func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, requestsShowLinkedInFor: CompanyWorkplace)
     func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, requestedShowDuedilFor: CompanyWorkplace)
     func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, requestOpenLink link: URL)
@@ -18,6 +19,7 @@ protocol CompanyWorkplacePresenterProtocol: class {
     var isShowingMap: Bool { get set }
     func onTapBack()
     func onTapApply()
+    func onViewDidLoad(_ view: CompanyWorkplaceViewProtocol)
 }
 
 class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
@@ -34,6 +36,12 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
                 return nil
             }
         }
+    }
+    
+    func onViewDidLoad(_ view: CompanyWorkplaceViewProtocol) {
+        view.presenter = self
+        self.view = view
+        beginLoadHosts()
     }
     
     func onTapBack() {
@@ -79,15 +87,15 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
             view?.companyWorkplacePresenterDidRefresh(self)
         }
     }
-    let companyService: F4SCompanyServiceProtocol
+    let hostsProvider: HostsProviderProtocol
     
     weak var log: F4SAnalyticsAndDebugging?
     
     init(coordinator: CompanyWorkplaceCoordinatorProtocol,
          companyWorkplace: CompanyWorkplace,
-         companyService: F4SCompanyServiceProtocol,
+         hostsProvider: HostsProviderProtocol,
          log: F4SAnalyticsAndDebugging?) {
-        self.companyService = companyService
+        self.hostsProvider = hostsProvider
         self.companyWorkplace = companyWorkplace
         self.coordinator = coordinator
         self.log = log
@@ -95,20 +103,7 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
         super.init()
     }
     
-    func attachView(view: CompanyWorkplaceViewProtocol) {
-        self.view = view
-        view.presenter = self
-    }
-    
     var mainViewPresenter: CompanyMainViewPresenter
-    
-    func startLoad() {
-        loadCompany()
-        companyWorkplace.getPostcode { [weak self] postcode in
-            guard let self = self else { return }
-            self.onDidUpdate()
-        }
-    }
     
     var applyButtonState: (String, Bool, UIColor) {
         if true   {
@@ -126,7 +121,7 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
         coordinator?.companyWorkplacePresenterDidFinish(self)
     }
     
-    func didTapLinkedIn(for host: F4SHost) {
+    func didTapLinkedIn(for host: Host) {
         coordinator?.companyWorkplacePresenter(self, requestsShowLinkedInFor: host)
     }
     
@@ -153,36 +148,21 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
         completion(.allowed)
     }
 
-    func loadCompany() {
+    func beginLoadHosts() {
         view?.companyWorkplacePresenterDidBeginNetworkTask(self)
-        let companyUuid = companyWorkplace.companyJson.uuid!
-        companyService.getCompany(uuid: companyUuid) { (result) in
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.view?.companyWorkplacePresenterDidEndLoadingTask(self)
-                switch result {
-                case .error(let error):
-                    if error.retry {
-                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+5, execute: {
-                            self.loadCompany()
-                        })
-                    }
-                case .success(let json):
-                    self.onDidUpdate()
-                }
+        let locationUuid = companyWorkplace.pinJson.workplaceUuid
+        hostsProvider.fetchHosts(locationUuid: locationUuid) { [weak self] (result) in
+            guard let self = self else { return }
+            self.view?.companyWorkplacePresenterDidEndLoadingTask(self)
+            switch result {
+            case .failure(_):
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+5, execute: {
+                    self.beginLoadHosts()
+                })
+            case .success(let hosts):
+                self.mainViewPresenter.hostsSectionPresenter.onHostsDidLoad(hosts)
+                self.onDidUpdate()
             }
-        }
-    }
-}
-
-extension CompanyWorkplace {
-    func getPostcode( completion: @escaping (String?) -> Void ) {
-        let latitude = pinJson.lat
-        let longitude = pinJson.lon
-        let geocoder = CLGeocoder()
-        let location = CLLocation(latitude: latitude, longitude: longitude)
-        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
-            completion(placemarks?.first?.postalCode)
         }
     }
 }

@@ -25,9 +25,9 @@ class NetworkConfigTests: XCTestCase {
                                    userRepository: userRepo)
         XCTAssertEqual(config.wexApiKey, "someKey")
         XCTAssertEqual(config.workfinderApi, "someUrl")
-        XCTAssertEqual(config.workfinderApiV2, "someUrl/v2")
+        XCTAssertEqual(config.workfinderApiV3, "someUrl/v2")
         XCTAssertEqual(config.endpoints.base, "someUrl")
-        XCTAssertEqual(config.endpoints.baseUrl2, "someUrl/v2")
+        XCTAssertEqual(config.endpoints.workfinderApiUrlString, "someUrl/v2")
     }
 }
 

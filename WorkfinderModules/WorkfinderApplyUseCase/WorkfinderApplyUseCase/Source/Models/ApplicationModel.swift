@@ -19,7 +19,7 @@ class ApplicationModel : ApplicationModelProtocol {
     public internal (set) lazy var userInterests: [F4SInterest] = []
     public var userUuid: F4SUUID? { return applicationContext.user?.uuid }
     public var companyWorkplace: CompanyWorkplace? { return applicationContext.companyWorkplace }
-    public var host: F4SHost? {return applicationContext.host }
+    public var host: Host? {return applicationContext.host }
     
     lazy var motivationRepository: F4SMotivationRepositoryProtocol = {
         return F4SMotivationRepository(localStore: self.localStore)

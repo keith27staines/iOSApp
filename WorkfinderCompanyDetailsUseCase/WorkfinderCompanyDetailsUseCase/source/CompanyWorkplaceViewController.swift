@@ -27,8 +27,9 @@ class CompanyWorkplaceViewController: UIViewController {
     weak var log: F4SAnalyticsAndDebugging?
     var appSettings: AppSettingProvider
     
-    init(appSettings: AppSettingProvider) {
+    init(appSettings: AppSettingProvider, presenter: CompanyWorkplacePresenterProtocol) {
         self.appSettings = appSettings
+        self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
         hidesBottomBarWhenPushed = true
     }
@@ -41,19 +42,18 @@ class CompanyWorkplaceViewController: UIViewController {
         companyMainPageView.refresh()
     }
     
-    var companyMainPageView: CompanyMainView {
-        return view as! CompanyMainView
-    }
-    
-    override func loadView() {
+    lazy var companyMainPageView: CompanyMainView = {
         let view = CompanyMainView(
             appSettings: appSettings,
             presenter: self.presenter.mainViewPresenter)
         view.log = log
-        self.view = view
-    }
+        return view
+    }()
     
     override func viewDidLoad() {
+        presenter.onViewDidLoad(self)
+        view.addSubview(companyMainPageView)
+        companyMainPageView.fillSuperview()
         log?.track(event: .companyDetailsScreenDidLoad, properties: nil)
     }
     

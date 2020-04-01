@@ -13,7 +13,7 @@ import WorkfinderUserDetailsUseCase
 class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
     let applyService: ApplyServiceProtocol
     let environment: EnvironmentType
-    let companyService: F4SCompanyServiceProtocol
+    let hostsProvider: HostsProviderProtocol
     let documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol
     let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
     let emailVerificationModel: F4SEmailVerificationModel
@@ -21,7 +21,7 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
     let templateService: F4STemplateServiceProtocol
 
     init(applyService: ApplyServiceProtocol,
-         companyService: F4SCompanyServiceProtocol,
+         hostsProvider: HostsProviderProtocol,
          documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
          documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
          emailVerificationModel: F4SEmailVerificationModel,
@@ -29,7 +29,7 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
          interestsRepository: F4SInterestsRepositoryProtocol,
          templateService: F4STemplateServiceProtocol) {
         self.applyService = applyService
-        self.companyService = companyService
+        self.hostsProvider = hostsProvider
         self.documentServiceFactory = documentServiceFactory
         self.documentUploaderFactory = documentUploaderFactory
         self.emailVerificationModel = emailVerificationModel
@@ -55,6 +55,6 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
             documentServiceFactory: documentServiceFactory,
             documentUploaderFactory: documentUploaderFactory,
             applyService: ApplyService(),
-            companyService: companyService)
+            hostsProvider: hostsProvider)
     }
 }

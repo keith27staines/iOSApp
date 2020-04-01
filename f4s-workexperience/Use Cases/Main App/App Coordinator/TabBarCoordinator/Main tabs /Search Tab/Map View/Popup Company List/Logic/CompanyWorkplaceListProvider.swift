@@ -7,22 +7,14 @@
 //
 
 import Foundation
+import WorkfinderCommon
+import WorkfinderNetworking
+import WorkfinderServices
 
 public typealias F4SUUID = String
 
-//http://workfinder-develop.eu-west-2.elasticbeanstalk.com/v3/companies/?locations__uuid__in=4764e857-51ac-4b82-a97d-6a502c2d4dad
-///v3/job-roles/
-
-// http://workfinder-develop.eu-west-2.elasticbeanstalk.com/v3/job-roles
-public enum NetworkError: Error {
-    case clientError(Error)
-    case httpError(HTTPURLResponse)
-    case responseBodyEmpty(HTTPURLResponse)
-}
-
 public protocol CompanyWorkplaceListProviderProtocol {
-    func fetchCompanyWorkplaces(
-        locationUuids: [F4SUUID],
+    func fetchCompanyWorkplaces(locationUuids: [F4SUUID],
         completion: @escaping ((Result<Data,Error>) -> Void))
 }
 

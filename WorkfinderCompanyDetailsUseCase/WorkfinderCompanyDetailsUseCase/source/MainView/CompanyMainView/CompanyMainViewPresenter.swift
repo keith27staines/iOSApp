@@ -34,7 +34,7 @@ class CompanyMainViewPresenter: CompanyMainViewPresenterProtocol {
     }()
     
     var hostsSectionPresenter: CompanyHostsSectionPresenterProtocol = {
-        return CompanyHostsSectionPresenter(hosts: [])
+        return CompanyHostsSectionPresenter()
     }()
 
     init(companyWorkplace: CompanyWorkplace) {

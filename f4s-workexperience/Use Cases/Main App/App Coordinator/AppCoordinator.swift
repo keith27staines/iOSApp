@@ -22,7 +22,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     var versionCheckCoordinator: VersionCheckCoordinatorProtocol?
     
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
-    let companyService: F4SCompanyServiceProtocol
+    let hostsProvider: HostsProviderProtocol
     let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
     let emailVerificationModel: F4SEmailVerificationModelProtocol
     let onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol
@@ -40,7 +40,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
                 companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
-                companyService: F4SCompanyServiceProtocol,
+                hostsProvider: HostsProviderProtocol,
                 documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
                 emailVerificationModel: F4SEmailVerificationModelProtocol,
                 localStore: LocalStorageProtocol,
@@ -56,7 +56,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         self.injected = inject
         
         self.companyCoordinatorFactory = companyCoordinatorFactory
-        self.companyService = companyService
+        self.hostsProvider = hostsProvider
         self.documentUploaderFactory = documentUploaderFactory
         
         self.emailVerificationModel = emailVerificationModel

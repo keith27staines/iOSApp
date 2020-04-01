@@ -43,7 +43,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     public init(applyCoordinatorDelegate: ApplyCoordinatorDelegate? = nil,
                 applyService: ApplyServiceProtocol,
                 companyWorkplace: CompanyWorkplace,
-                host: F4SHost? = nil,
+                host: Host? = nil,
                 parent: CoreInjectionNavigationCoordinator?,
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,

@@ -5,7 +5,7 @@ public class F4STemplateService:  F4SDataTaskService, F4STemplateServiceProtocol
     
     public init(configuration: NetworkConfig) {
         let apiName = "cover-template"
-        super.init(baseURLString: configuration.workfinderApiV2, apiName: apiName, configuration: configuration)
+        super.init(baseURLString: configuration.workfinderApiV3, apiName: apiName, configuration: configuration)
     }
     
     public func getTemplates(completion: @escaping (F4SNetworkResult<[F4STemplate]>) -> Void) {
