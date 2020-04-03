@@ -23,20 +23,18 @@ class CompanyMapView: MKMapView {
         showsUserLocation = true
     }
     
-    var companyLoc: CLLocation {
-        CLLocation()
-    }
+    var companyLocation: CLLocation { CLLocation(latlon: self.companyLatLon) }
     
     func prepareForDisplay() {
         var minimumRegionMeters = CLLocationDistance(exactly:1000.0)!
         let minumumRegion: MKCoordinateRegion
         if let userLocation = userLocation.location {
             // as the user's location is known, center on their coordinate and make sure the map scale is small enough to display the company
-            minimumRegionMeters = 1.5 * max(2.0 * userLocation.distance(from: companyLoc), minimumRegionMeters)
+            minimumRegionMeters = 1.5 * max(2.0 * userLocation.distance(from: companyLocation), minimumRegionMeters)
             minumumRegion = MKCoordinateRegion.init(center: userLocation.coordinate, latitudinalMeters: minimumRegionMeters, longitudinalMeters: minimumRegionMeters)
         } else {
             // as the user's coordinate is not known, show a small area centered on the map
-            minumumRegion = MKCoordinateRegion.init(center: companyLoc.coordinate, latitudinalMeters: minimumRegionMeters, longitudinalMeters: minimumRegionMeters)
+            minumumRegion = MKCoordinateRegion.init(center: companyLocation.coordinate, latitudinalMeters: minimumRegionMeters, longitudinalMeters: minimumRegionMeters)
         }
         let adjustedRegion = regionThatFits(minumumRegion)
         setRegion(adjustedRegion, animated: false)

@@ -128,8 +128,8 @@ public struct CompanyLocationJson: Codable {
 }
 
 public struct PointJson : Codable {
-    var type: String?
-    var coordinates: [Float]
+    public var type: String?
+    public var coordinates: [Float]
 }
 
 /* point

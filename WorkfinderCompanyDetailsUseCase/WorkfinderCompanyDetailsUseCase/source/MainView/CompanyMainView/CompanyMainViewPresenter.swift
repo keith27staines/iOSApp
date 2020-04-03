@@ -23,7 +23,9 @@ class CompanyMainViewPresenter: CompanyMainViewPresenterProtocol {
     var companyWorkplace: CompanyWorkplace
     var pin: PinJson { self.companyWorkplace.pinJson }
     var companyName: String { return self.companyWorkplace.companyJson.name ?? "unnamed company" }
-    var companyLocation: LatLon { return LatLon(latitude: CGFloat(pin.lat), longitude: CGFloat(pin.lon)) }
+    var companyLocation: LatLon {
+        return LatLon(latitude: CGFloat(pin.lat), longitude: CGFloat(pin.lon))
+    }
     
     var selectedHost: Host? { return hostsSectionPresenter.selectedHost }
     var isHostSelected: Bool { return hostsSectionPresenter.isHostSelected }

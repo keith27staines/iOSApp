@@ -39,9 +39,15 @@ class CompanyWorkplaceListPresenter {
                 guard let companyJson = self.mapCompanyToLocation(locationUuid: locationUuid, companyListJson: companyListJson) else {
                     return nil
                 }
-                let pinJson = PinJson(workplaceUuid: locationUuid, latitude: 0, longitude: 0)
+                let loc = companyJson.locations.first { (companyLocationJson) -> Bool in
+                    companyLocationJson.uuid == locationUuid
+                }
+                let lat = loc?.point?.coordinates[0] ?? 0
+                let lon = loc?.point?.coordinates[1] ?? 0
+                let pinJson = PinJson(workplaceUuid: locationUuid, latitude: Double(lat), longitude: Double(lon))
                 return CompanyWorkplace(companyJson: companyJson, pinJson: pinJson)
             }
+            
         }
     }
     
