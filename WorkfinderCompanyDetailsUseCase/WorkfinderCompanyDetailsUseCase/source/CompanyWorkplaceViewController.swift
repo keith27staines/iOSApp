@@ -12,11 +12,10 @@ import WorkfinderUI
 
 protocol CompanyWorkplaceViewProtocol : CompanyHostsSectionViewProtocol {
     var presenter: CompanyWorkplacePresenterProtocol! { get set }
-    func companyWorkplacePresenterDidRefresh(_ presenter: CompanyWorkplacePresenter)
-    func companyWorkplacePresenterDidBeginNetworkTask(_ presenter: CompanyWorkplacePresenter)
-    func companyWorkplacePresenterDidEndLoadingTask(_ presenter: CompanyWorkplacePresenter)
-    func companyWorkplacePresenterDidFailNetworkTask(_ presenter: CompanyWorkplacePresenter, error: F4SNetworkError, retry: (() -> Void)?)
-    func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, showMap: Bool)
+    func refresh()
+    func showLoadingIndicator()
+    func hideLoadingIndicator(_ presenter: CompanyWorkplacePresenter)
+    func showNetworkError(_ error: F4SNetworkError, retry: (() -> Void)?)
 }
 
 class CompanyWorkplaceViewController: UIViewController {
@@ -103,18 +102,18 @@ class CompanyWorkplaceViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
 
-extension CompanyWorkplaceViewController : CompanyWorkplaceViewProtocol{
+extension CompanyWorkplaceViewController: CompanyWorkplaceViewProtocol {
     
-    func companyWorkplacePresenter(_ viewModel: CompanyWorkplacePresenter, showMap: Bool) {
-        switch showMap {
-        case true:
-            companyMainPageView.animateMapIn()
-        case false:
-            companyMainPageView.animateMapOut()
-        }
+    func showLoadingIndicator() {
+        incrementLoadingInProgressCount()
     }
     
-    func companyWorkplacePresenterDidFailNetworkTask(_ viewModel: CompanyWorkplacePresenter, error: F4SNetworkError, retry: (() -> Void)?) {
+    func hideLoadingIndicator(_ presenter: CompanyWorkplacePresenter) {
+        decrementLoadingInProgressCount()
+        refresh()
+    }
+    
+    func showNetworkError(_ error: F4SNetworkError, retry: (() -> Void)?) {
         let alert: UIAlertController = UIAlertController(title: "Network error", message: "The operation could not be completed", preferredStyle: UIAlertController.Style.alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: { [weak self] action in
             self?.decrementLoadingInProgressCount()
@@ -126,62 +125,4 @@ extension CompanyWorkplaceViewController : CompanyWorkplaceViewProtocol{
         }
         present(alert, animated: true, completion: nil)
     }
-    
-    func companyWorkplacePresenterDidRefresh(_ viewModel: CompanyWorkplacePresenter) {
-        refresh()
-    }
-    
-    func companyWorkplacePresenterDidBeginNetworkTask(_ viewModel: CompanyWorkplacePresenter) {
-        incrementLoadingInProgressCount()
-    }
-    
-    func companyWorkplacePresenterDidEndLoadingTask(_ viewModel: CompanyWorkplacePresenter) {
-        decrementLoadingInProgressCount()
-        refresh()
-    }
-}
-
-extension CompanyWorkplaceViewController : CompanyMainViewCoordinatorProtocol {
-    func companyMainViewDidTapApply(_ view: CompanyMainView) {
-        presenter.onTapApply()
-        
-        /*
-        presenter.onTapApply() { [weak self] (initiateApplyResult) in
-            guard let strongSelf = self else { return }
-            strongSelf.processInitiateApplyResult(initiateApplyResult)
-        }
-         */
-    }
-    
-    func companyToolbar(_ toolbar: CompanyToolbar, requestedAction: CompanyToolbar.ActionType) {
-        switch requestedAction {
-        case .showMap:
-            switch presenter.isShowingMap {
-            case true:
-                log?.track(event: .companyDetailsHideMapTap, properties: nil)
-            case false:
-                log?.track(event: .companyDetailsShowMapTap, properties: nil)
-            }
-            presenter.isShowingMap.toggle()
-        }
-    }
-    
-//    func processInitiateApplyResult(_ applyState: CompanyWorkplacePresenter.InitiateApplicationResult) {
-//        let title = applyState.deniedReason?.title
-//        let message = applyState.deniedReason?.message
-//        let buttonTitle = applyState.deniedReason?.buttonTitle
-//        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-//        let handler: ((UIAlertAction) -> (Void))? = nil
-//        let action: UIAlertAction
-//        switch applyState {
-//        case .allowed:
-//            return
-//        case .deniedAlreadyApplied:
-//
-//            break
-//        }
-//        action = UIAlertAction(title: buttonTitle, style: UIAlertAction.Style.cancel, handler: handler)
-//        alert.addAction(action)
-//        present(alert, animated: true, completion: nil)
-//    }
 }

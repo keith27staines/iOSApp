@@ -90,27 +90,9 @@ extension CompanyCoordinator : ApplyCoordinatorDelegate {
     }
 }
 
-extension CompanyCoordinator : CompanyWorkplaceCoordinatorProtocol {
-
-    func companyWorkplacePresenterDidFinish(_ presenter: CompanyWorkplacePresenter) {
-        cleanup()
-        navigationRouter.pop(animated: true)
-        parentCoordinator?.childCoordinatorDidFinish(self)
-    }
+extension CompanyCoordinator: CompanyWorkplaceCoordinatorProtocol {
     
-    func cleanup() {
-        companyViewController = nil
-        companyWorkplacePresenter = nil
-        childCoordinators = [:]
-    }
-    
-    func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, applyTo companyWorkplace: CompanyWorkplace) {
-        let host = Host(uuid: "hostUuid")
-        startApplyCoordinator(companyWorkplace: companyWorkplace, host: host)
-    }
-    
-    func startApplyCoordinator(companyWorkplace: CompanyWorkplace,
-                               host: Host?) {
+    func applyTo(companyWorkplace: CompanyWorkplace, host: Host) {
         let applyCoordinator = ApplyCoordinator(
             applyCoordinatorDelegate: self,
             applyService: applyService,
@@ -127,6 +109,18 @@ extension CompanyCoordinator : CompanyWorkplaceCoordinatorProtocol {
             documentUploaderFactory: documentUploaderFactory)
         addChildCoordinator(applyCoordinator)
         applyCoordinator.start()
+    }
+
+    func companyWorkplacePresenterDidFinish(_ presenter: CompanyWorkplacePresenter) {
+        cleanup()
+        navigationRouter.pop(animated: true)
+        parentCoordinator?.childCoordinatorDidFinish(self)
+    }
+    
+    func cleanup() {
+        companyViewController = nil
+        companyWorkplacePresenter = nil
+        childCoordinators = [:]
     }
     
     func companyWorkplacePresenter(_ viewModel: CompanyWorkplacePresenter, requestsShowLinkedInFor host: Host) {

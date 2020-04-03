@@ -10,10 +10,6 @@ import UIKit
 import MapKit
 import WorkfinderCommon
 
-protocol CompanyMainViewCoordinatorProtocol : CompanyToolbarDelegate {
-    func companyMainViewDidTapApply(_ view: CompanyMainView)
-}
-
 protocol CompanyMainViewProtocol: class {
     var presenter: CompanyMainViewPresenterProtocol! { get set }
     func refresh()
@@ -21,40 +17,46 @@ protocol CompanyMainViewProtocol: class {
 
 class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewProtocol {
     var presenter: CompanyMainViewPresenterProtocol!
-    
-    private weak var coordinator: CompanyMainViewCoordinatorProtocol?
     weak var log: F4SAnalyticsAndDebugging?
     
-    var mainViewPresenter: CompanyMainViewPresenterProtocol!
-    
     var headerViewPresenter: CompanyHeaderViewPresenterProtocol {
-        return mainViewPresenter.headerViewPresenter
+        return presenter.headerViewPresenter
     }
     var summarySectionPresenter: CompanySummarySectionPresenterProtocol {
-        return mainViewPresenter.summarySectionPresenter
+        return presenter.summarySectionPresenter
     }
     var dataSectionPresenter: CompanyDataSectionPresenterProtocol {
-        return mainViewPresenter.dataSectionPresenter
+        return presenter.dataSectionPresenter
     }
     var hostsSectionPresenter: CompanyHostsSectionPresenterProtocol {
-        return mainViewPresenter.hostsSectionPresenter
+        return presenter.hostsSectionPresenter
     }
 
     var appSettings: AppSettingProvider
     let toolbarAlpha: CGFloat = 0.9
     let workfinderGreen = UIColor(red: 57, green: 167, blue: 82)
+    var isShowingMap: Bool = false {
+        didSet {
+            switch isShowingMap {
+            case true:
+                animateMapIn()
+            case false:
+                animateMapOut()
+            }
+        }
+    }
     
     lazy var mapView: CompanyMapView = {
         let mapView = CompanyMapView(
-            companyName: self.mainViewPresenter.companyName,
-            companyLatLon: self.mainViewPresenter.companyLocation)
+            companyName: self.presenter.companyName,
+            companyLatLon: self.presenter.companyLocation)
         mapView.translatesAutoresizingMaskIntoConstraints = false
         mapView.delegate = self
         return mapView
     }()
     
     init(appSettings: AppSettingProvider, presenter: CompanyMainViewPresenterProtocol) {
-        self.mainViewPresenter = presenter
+        self.presenter = presenter
         self.appSettings = appSettings
         super.init(frame: CGRect.zero)
         presenter.view = self
@@ -68,8 +70,8 @@ class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewP
         headerView.refresh(from: headerViewPresenter)
         tableView.reloadData()
         applyButton.setTitle("Apply", for: .normal)
-        applyButton.isEnabled = true
-        applyButton.backgroundColor = backgroundColor
+        applyButton.isEnabled = presenter.isHostSelected
+        applyButton.backgroundColor = presenter.isHostSelected ? workfinderGreen : UIColor.init(white: 0.9, alpha: 1)
     }
     
     lazy var headerView: CompanyHeaderViewProtocol = {
@@ -205,7 +207,7 @@ class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewP
     
     @objc func didTapApply() {
         log?.track(event: .companyDetailsApplyTap, properties: nil)
-        coordinator?.companyMainViewDidTapApply(self)
+        presenter.onDidTapApply()
     }
     
     func profileLinkTap(host: Host) {
@@ -278,7 +280,7 @@ extension CompanyMainView: UITableViewDelegate {
 
 extension CompanyMainView : CompanyToolbarDelegate {
     func companyToolbar(_: CompanyToolbar, requestedAction: CompanyToolbar.ActionType) {
-        coordinator?.companyToolbar(toolbarView, requestedAction: requestedAction)
+        isShowingMap.toggle()
     }
 }
 

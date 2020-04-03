@@ -6,17 +6,17 @@ import WorkfinderServices
 
 let workfinderGreen = UIColor(red: 57, green: 167, blue: 82)
 
-protocol CompanyWorkplaceCoordinatorProtocol : class {
+protocol CompanyWorkplaceCoordinatorProtocol : CompanyMainViewCoordinatorProtocol {
     func companyWorkplacePresenterDidFinish(_ : CompanyWorkplacePresenter)
     func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, requestsShowLinkedInFor: Host)
     func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, requestsShowLinkedInFor: CompanyWorkplace)
     func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, requestedShowDuedilFor: CompanyWorkplace)
     func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, requestOpenLink link: URL)
+    func applyTo(companyWorkplace: CompanyWorkplace, host: Host)
 }
 
 protocol CompanyWorkplacePresenterProtocol: class {
     var mainViewPresenter: CompanyMainViewPresenter { get }
-    var isShowingMap: Bool { get set }
     func onTapBack()
     func onTapApply()
     func onViewDidLoad(_ view: CompanyWorkplaceViewProtocol)
@@ -50,16 +50,12 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
     }
     
     func onTapApply() {
-    }
-    
-    var isShowingMap: Bool = false {
-        didSet {
-            view?.companyWorkplacePresenter(self, showMap: isShowingMap)
-        }
+        guard let host = mainViewPresenter.hostsSectionPresenter.selectedHost else { return }
+        coordinator?.applyTo(companyWorkplace: companyWorkplace, host: host)
     }
     
     var companyPostcode: String? {
-        didSet { view?.companyWorkplacePresenterDidRefresh(self) }
+        didSet { view?.refresh() }
     }
     
     var userLocation: CLLocation?
@@ -85,7 +81,7 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
 
     var companyWorkplace: CompanyWorkplace {
         didSet {
-            view?.companyWorkplacePresenterDidRefresh(self)
+            view?.refresh()
         }
     }
     let hostsProvider: HostsProviderProtocol
@@ -100,7 +96,7 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
         self.companyWorkplace = companyWorkplace
         self.coordinator = coordinator
         self.log = log
-        self.mainViewPresenter = CompanyMainViewPresenter(companyWorkplace: companyWorkplace)
+        self.mainViewPresenter = CompanyMainViewPresenter(companyWorkplace: companyWorkplace, coordinator: coordinator)
         super.init()
     }
     
@@ -115,7 +111,7 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
     }
         
     func onDidUpdate() {
-        view?.companyWorkplacePresenterDidRefresh(self)
+        view?.refresh()
     }
     
     func didTapDone() {
@@ -144,17 +140,17 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
     }
     
     func applyIfStateAllows(completion: @escaping (InitiateApplicationResult) -> Void) {
-        view?.companyWorkplacePresenterDidBeginNetworkTask(self)
-        view?.companyWorkplacePresenterDidEndLoadingTask(self)
+        view?.showLoadingIndicator()
+        view?.hideLoadingIndicator(self)
         completion(.allowed)
     }
 
     func beginLoadHosts() {
-        view?.companyWorkplacePresenterDidBeginNetworkTask(self)
+        view?.showLoadingIndicator()
         let locationUuid = companyWorkplace.pinJson.workplaceUuid
         hostsProvider.fetchHosts(locationUuid: locationUuid) { [weak self] (result) in
             guard let self = self else { return }
-            self.view?.companyWorkplacePresenterDidEndLoadingTask(self)
+            self.view?.hideLoadingIndicator(self)
             switch result {
             case .failure(_):
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+5, execute: {

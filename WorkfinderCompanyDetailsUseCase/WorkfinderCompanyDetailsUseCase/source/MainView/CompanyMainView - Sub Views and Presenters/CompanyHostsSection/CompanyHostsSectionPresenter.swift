@@ -8,6 +8,8 @@ protocol CompanyHostsSectionViewProtocol: class {
 }
 
 protocol CompanyHostsSectionPresenterProtocol {
+    var isHostSelected: Bool { get }
+    var selectedHost: Host? { get }
     var numberOfRows: Int { get }
     var hostsSummaryModel: TextModel { get }
     func cellforRow(_ row: Int, in tableView: UITableView) -> UITableViewCell
@@ -49,6 +51,8 @@ class CompanyHostsSectionPresenter: CompanyHostsSectionPresenterProtocol {
         hostsSummaryModel.expandableLabelStates[indexPath.row] = summaryState
         hostCell.configureWithHost(host, summaryState: summaryState, profileLinkTap: onDidTapLinkedIn, selectAction: updateHostSelectionState)
     }
+    
+    var isHostSelected: Bool { selectedHost != nil }
     
     var selectedHost: Host? {
         let host = hosts.first { (host) -> Bool in host.isSelected }
