@@ -3,8 +3,8 @@ import Foundation
 import WorkfinderCommon
 import UIKit
 
-protocol CompanyHostsSectionPresenterRepresentable: class {
-    func refresh(from presenter: CompanyHostsSectionPresenterProtocol)
+protocol CompanyHostsSectionViewProtocol: class {
+    func refresh()
 }
 
 protocol CompanyHostsSectionPresenterProtocol {
@@ -14,10 +14,11 @@ protocol CompanyHostsSectionPresenterProtocol {
     func onDidTapLinkedIn(for: Host)
     func onDidTapHostCell(_ hostCell: HostCell, atIndexPath indexPath: IndexPath)
     func onHostsDidLoad(_ hosts: [Host])
+    func onViewDidLoad(_ view: CompanyHostsSectionViewProtocol)
 }
 
 class CompanyHostsSectionPresenter: CompanyHostsSectionPresenterProtocol {
-    private weak var view: CompanyHostsSectionPresenterRepresentable?
+    private weak var view: CompanyHostsSectionViewProtocol?
     private var hosts: [Host]
     var numberOfRows: Int { return hosts.count }
     var hostsSummaryModel: TextModel
@@ -66,7 +67,7 @@ class CompanyHostsSectionPresenter: CompanyHostsSectionPresenterProtocol {
         } else {
             updateHost(from: updatedHost)
         }
-        view?.refresh(from: self)
+        view?.refresh()
     }
     
     private func updateHost(from updatedHost: Host) {
@@ -82,9 +83,14 @@ class CompanyHostsSectionPresenter: CompanyHostsSectionPresenterProtocol {
         onHostsDidLoad([])
     }
     
+    func onViewDidLoad(_ view: CompanyHostsSectionViewProtocol) {
+        self.view = view
+    }
+    
     func onHostsDidLoad(_ hosts: [Host]) {
         self.hosts = hosts
+        if hosts.count == 1 { self.hosts[0].isSelected = true }
         self.hostsSummaryModel = TextModel(hosts: hosts)
-        view?.refresh(from: self)
+        view?.refresh()
     }
 }

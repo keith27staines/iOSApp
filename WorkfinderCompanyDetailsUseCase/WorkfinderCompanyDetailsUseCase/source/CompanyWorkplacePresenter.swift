@@ -41,6 +41,7 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
     func onViewDidLoad(_ view: CompanyWorkplaceViewProtocol) {
         view.presenter = self
         self.view = view
+        mainViewPresenter.hostsSectionPresenter.onViewDidLoad(view)
         beginLoadHosts()
     }
     

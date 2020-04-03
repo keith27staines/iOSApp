@@ -10,7 +10,7 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 
-protocol CompanyWorkplaceViewProtocol : class {
+protocol CompanyWorkplaceViewProtocol : CompanyHostsSectionViewProtocol {
     var presenter: CompanyWorkplacePresenterProtocol! { get set }
     func companyWorkplacePresenterDidRefresh(_ presenter: CompanyWorkplacePresenter)
     func companyWorkplacePresenterDidBeginNetworkTask(_ presenter: CompanyWorkplacePresenter)

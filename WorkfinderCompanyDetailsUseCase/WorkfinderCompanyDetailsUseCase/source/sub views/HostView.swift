@@ -217,7 +217,6 @@ class ExpandableLabel: UILabel {
     }
 }
 
-
 class HostSelectionView: UIView {
     
     lazy var circleImageView: UIImageView = {

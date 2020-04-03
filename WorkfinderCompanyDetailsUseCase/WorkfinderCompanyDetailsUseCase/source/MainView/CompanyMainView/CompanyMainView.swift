@@ -19,7 +19,7 @@ protocol CompanyMainViewProtocol: class {
     func refresh()
 }
 
-class CompanyMainView: UIView, CompanyMainViewProtocol {
+class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewProtocol {
     var presenter: CompanyMainViewPresenterProtocol!
     
     private weak var coordinator: CompanyMainViewCoordinatorProtocol?

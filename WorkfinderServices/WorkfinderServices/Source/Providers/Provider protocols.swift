@@ -12,7 +12,7 @@ public class HostsProvider: HostsProviderProtocol {
     var task: URLSessionDataTask?
     
     public init(apiUrlString: String) {
-        // /v3/hosts/?associations__location__uuid=<location-uuid>
+        // v3/hosts/?associations__location__uuid=<location-uuid>
         self.endpoint = apiUrlString + "hosts/"
     }
     
