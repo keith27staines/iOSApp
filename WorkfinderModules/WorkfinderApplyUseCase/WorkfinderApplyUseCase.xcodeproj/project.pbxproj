@@ -17,6 +17,20 @@
 		FC22DBFB22F97F330068C61C /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC22DBFA22F97F330068C61C /* WorkfinderUI.framework */; };
 		FC23BCE4243AFA730075F359 /* DateOfBirthCollectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCE3243AFA730075F359 /* DateOfBirthCollectorViewController.swift */; };
 		FC23BCE8243B30A10075F359 /* ApplicationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCE7243B30A10075F359 /* ApplicationModel.swift */; };
+		FC23BCFD243B33510075F359 /* TemplateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCEB243B33510075F359 /* TemplateProvider.swift */; };
+		FC23BCFE243B33510075F359 /* TemplateRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCED243B33510075F359 /* TemplateRenderer.swift */; };
+		FC23BCFF243B33510075F359 /* TemplateParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCEE243B33510075F359 /* TemplateParser.swift */; };
+		FC23BD00243B33510075F359 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCEF243B33510075F359 /* Common.swift */; };
+		FC23BD01243B33510075F359 /* Picklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCF0243B33510075F359 /* Picklist.swift */; };
+		FC23BD02243B33510075F359 /* Grammer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCF1243B33510075F359 /* Grammer.swift */; };
+		FC23BD03243B33510075F359 /* PicklistProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCF2243B33510075F359 /* PicklistProvider.swift */; };
+		FC23BD04243B33510075F359 /* CoverLetterViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCF3243B33510075F359 /* CoverLetterViewPresenter.swift */; };
+		FC23BD05243B33510075F359 /* PickList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCF5243B33510075F359 /* PickList.swift */; };
+		FC23BD06243B33510075F359 /* TemplateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCF6243B33510075F359 /* TemplateModel.swift */; };
+		FC23BD07243B33510075F359 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCF7243B33510075F359 /* NetworkError.swift */; };
+		FC23BD08243B33510075F359 /* LetterEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCFA243B33510075F359 /* LetterEditor.swift */; };
+		FC23BD09243B33510075F359 /* CoverLetterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCFB243B33510075F359 /* CoverLetterViewController.swift */; };
+		FC23BD0A243B33510075F359 /* CoverLetterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCFC243B33510075F359 /* CoverLetterCoordinator.swift */; };
 		FC29992A231EC41A00F83FB6 /* F4SPageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC299925231EC41700F83FB6 /* F4SPageHeaderView.swift */; };
 		FC29992B231EC41A00F83FB6 /* F4SDaysAndHoursViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC299926231EC41800F83FB6 /* F4SDaysAndHoursViewController.swift */; };
 		FC29992C231EC41A00F83FB6 /* F4SDisplayInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC299927231EC41900F83FB6 /* F4SDisplayInformationViewController.swift */; };
@@ -67,6 +81,20 @@
 		FC22DBFA22F97F330068C61C /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC23BCE3243AFA730075F359 /* DateOfBirthCollectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateOfBirthCollectorViewController.swift; sourceTree = "<group>"; };
 		FC23BCE7243B30A10075F359 /* ApplicationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationModel.swift; sourceTree = "<group>"; };
+		FC23BCEB243B33510075F359 /* TemplateProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateProvider.swift; sourceTree = "<group>"; };
+		FC23BCED243B33510075F359 /* TemplateRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateRenderer.swift; sourceTree = "<group>"; };
+		FC23BCEE243B33510075F359 /* TemplateParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateParser.swift; sourceTree = "<group>"; };
+		FC23BCEF243B33510075F359 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		FC23BCF0243B33510075F359 /* Picklist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Picklist.swift; sourceTree = "<group>"; };
+		FC23BCF1243B33510075F359 /* Grammer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grammer.swift; sourceTree = "<group>"; };
+		FC23BCF2243B33510075F359 /* PicklistProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PicklistProvider.swift; sourceTree = "<group>"; };
+		FC23BCF3243B33510075F359 /* CoverLetterViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverLetterViewPresenter.swift; sourceTree = "<group>"; };
+		FC23BCF5243B33510075F359 /* PickList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickList.swift; sourceTree = "<group>"; };
+		FC23BCF6243B33510075F359 /* TemplateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateModel.swift; sourceTree = "<group>"; };
+		FC23BCF7243B33510075F359 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		FC23BCFA243B33510075F359 /* LetterEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LetterEditor.swift; sourceTree = "<group>"; };
+		FC23BCFB243B33510075F359 /* CoverLetterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverLetterViewController.swift; sourceTree = "<group>"; };
+		FC23BCFC243B33510075F359 /* CoverLetterCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverLetterCoordinator.swift; sourceTree = "<group>"; };
 		FC299925231EC41700F83FB6 /* F4SPageHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SPageHeaderView.swift; sourceTree = "<group>"; };
 		FC299926231EC41800F83FB6 /* F4SDaysAndHoursViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDaysAndHoursViewController.swift; sourceTree = "<group>"; };
 		FC299927231EC41900F83FB6 /* F4SDisplayInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDisplayInformationViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +163,68 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC23BCE9243B33510075F359 /* Covering letter MVP */ = {
+			isa = PBXGroup;
+			children = (
+				FC23BCFC243B33510075F359 /* CoverLetterCoordinator.swift */,
+				FC23BCFB243B33510075F359 /* CoverLetterViewController.swift */,
+				FC9626332248C1A900D5F850 /* EditApplicationLetterButton.swift */,
+				FC23BCEA243B33510075F359 /* Providers */,
+				FC23BCEC243B33510075F359 /* Logic */,
+				FC23BCF3243B33510075F359 /* CoverLetterViewPresenter.swift */,
+				FC23BCF4243B33510075F359 /* Models */,
+				FC23BCF8243B33510075F359 /* Sub views */,
+			);
+			path = "Covering letter MVP";
+			sourceTree = "<group>";
+		};
+		FC23BCEA243B33510075F359 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				FC23BCEB243B33510075F359 /* TemplateProvider.swift */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
+		FC23BCEC243B33510075F359 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				FC23BCED243B33510075F359 /* TemplateRenderer.swift */,
+				FC23BCEE243B33510075F359 /* TemplateParser.swift */,
+				FC23BCEF243B33510075F359 /* Common.swift */,
+				FC23BCF0243B33510075F359 /* Picklist.swift */,
+				FC23BCF1243B33510075F359 /* Grammer.swift */,
+				FC23BCF2243B33510075F359 /* PicklistProvider.swift */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		FC23BCF4243B33510075F359 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FC23BCF5243B33510075F359 /* PickList.swift */,
+				FC23BCF6243B33510075F359 /* TemplateModel.swift */,
+				FC23BCF7243B33510075F359 /* NetworkError.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FC23BCF8243B33510075F359 /* Sub views */ = {
+			isa = PBXGroup;
+			children = (
+				FC23BCF9243B33510075F359 /* LetterEditor MVP */,
+			);
+			path = "Sub views";
+			sourceTree = "<group>";
+		};
+		FC23BCF9243B33510075F359 /* LetterEditor MVP */ = {
+			isa = PBXGroup;
+			children = (
+				FC23BCFA243B33510075F359 /* LetterEditor.swift */,
+			);
+			path = "LetterEditor MVP";
+			sourceTree = "<group>";
+		};
 		FC299924231EC38700F83FB6 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,9 +290,9 @@
 			children = (
 				FCE8DA992320E24600934E2F /* ApplyCoordinator.swift */,
 				FC23BCE3243AFA730075F359 /* DateOfBirthCollectorViewController.swift */,
+				FC23BCE9243B33510075F359 /* Covering letter MVP */,
 				FC299947231ED87600F83FB6 /* F4SDaysAndHours.storyboard */,
 				FC299946231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard */,
-				FC9626332248C1A900D5F850 /* EditApplicationLetterButton.swift */,
 				FCE8DA8A2320D42600934E2F /* Success screen */,
 				FC299924231EC38700F83FB6 /* Calendar */,
 				FCF4FACE22646502000EE4B7 /* Models */,
@@ -411,19 +501,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC23BD09243B33510075F359 /* CoverLetterViewController.swift in Sources */,
+				FC23BD01243B33510075F359 /* Picklist.swift in Sources */,
 				FC29992A231EC41A00F83FB6 /* F4SPageHeaderView.swift in Sources */,
 				FC29992D231EC41A00F83FB6 /* F4SHoursPickerViewController.swift in Sources */,
+				FC23BD03243B33510075F359 /* PicklistProvider.swift in Sources */,
 				FC29992E231EC41A00F83FB6 /* F4SSelectDayTableViewCell.swift in Sources */,
 				FC23BCE4243AFA730075F359 /* DateOfBirthCollectorViewController.swift in Sources */,
 				FC29992C231EC41A00F83FB6 /* F4SDisplayInformationViewController.swift in Sources */,
 				FC299938231EC50300F83FB6 /* F4SDayCalendarViewCell.swift in Sources */,
+				FC23BD0A243B33510075F359 /* CoverLetterCoordinator.swift in Sources */,
 				FC23BCE8243B30A10075F359 /* ApplicationModel.swift in Sources */,
 				FC9626392248C1A900D5F850 /* EditApplicationLetterButton.swift in Sources */,
+				FC23BCFD243B33510075F359 /* TemplateProvider.swift in Sources */,
+				FC23BD04243B33510075F359 /* CoverLetterViewPresenter.swift in Sources */,
+				FC23BD05243B33510075F359 /* PickList.swift in Sources */,
 				FC29992B231EC41A00F83FB6 /* F4SDaysAndHoursViewController.swift in Sources */,
+				FC23BCFE243B33510075F359 /* TemplateRenderer.swift in Sources */,
+				FC23BD08243B33510075F359 /* LetterEditor.swift in Sources */,
 				FC299934231EC50300F83FB6 /* F4SCalendarContainerViewController.swift in Sources */,
 				FC299935231EC50300F83FB6 /* F4SMonthHeaderView.swift in Sources */,
 				FC299936231EC50300F83FB6 /* F4SCalendarColors.swift in Sources */,
+				FC23BCFF243B33510075F359 /* TemplateParser.swift in Sources */,
+				FC23BD00243B33510075F359 /* Common.swift in Sources */,
+				FC23BD06243B33510075F359 /* TemplateModel.swift in Sources */,
 				FCE8DA9A2320E24600934E2F /* ApplyCoordinator.swift in Sources */,
+				FC23BD02243B33510075F359 /* Grammer.swift in Sources */,
+				FC23BD07243B33510075F359 /* NetworkError.swift in Sources */,
 				FC299937231EC50300F83FB6 /* F4SCalendarCollectionViewController.swift in Sources */,
 				FCE8DA892320D3CB00934E2F /* SuccessExtraInfoViewController.swift in Sources */,
 			);

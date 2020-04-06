@@ -70,6 +70,12 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         navigationRouter.push(viewController: dobVC, animated: true)
     }
     
+    var coverletterCoordinator: CoverletterCoordinatorProtocol?
+    func startCoverLetterCoordinator() {
+        coverletterCoordinator = CoverLetterCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected)
+        coverletterCoordinator?.start()
+    }
+    
     var rootViewController: UIViewController?
     
     deinit {
@@ -223,6 +229,6 @@ extension ApplyCoordinator: DateOfBirthCoordinatorProtocol {
     }
     
     func onDidSelectDataOfBirth(date: Date) {
-        print("Selected dob \(date)")
+        startCoverLetterCoordinator()
     }
 }
