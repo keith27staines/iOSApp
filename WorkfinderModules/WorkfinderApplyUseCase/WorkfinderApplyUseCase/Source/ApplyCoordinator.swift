@@ -23,7 +23,6 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         case none
     }
     let environment: EnvironmentType
-    var applicationContext: F4SApplicationContext
     var templateService: F4STemplateServiceProtocol
     var interestsRepository: F4SInterestsRepositoryProtocol
     let emailVerificationModel: F4SEmailVerificationModelProtocol
@@ -33,11 +32,8 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     weak var applyCoordinatorDelegate: ApplyCoordinatorDelegate?
     lazy var userInterests: [F4SInterest] = { return interestsRepository.loadInterestsArray() }()
     
-    lazy var applicationModel: ApplicationModelProtocol = {
-        let applicationContext = F4SApplicationContext()
-        return ApplicationModel(
-            applicationContext: self.applicationContext,
-            templateService: templateService)
+    lazy var applicationModel: ApplicationModel = {
+        return ApplicationModel()
     }()
     
     public init(applyCoordinatorDelegate: ApplyCoordinatorDelegate? = nil,
@@ -55,7 +51,6 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
                 documentUploaderFactory: F4SDocumentUploaderFactoryProtocol) {
         self.applyCoordinatorDelegate = applyCoordinatorDelegate
         self.applyService = applyService
-        self.applicationContext = F4SApplicationContext(user: inject.user, companyWorkplace: companyWorkplace, host: host)
         self.environment = environment
         self.templateService = templateService
         self.startingViewController = navigationRouter.navigationController.topViewController
@@ -67,53 +62,23 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     
     override public func start() {
         super.start()
-        showApplicationLetterViewController()
+        showDateOfBirth()
+    }
+    
+    func showDateOfBirth() {
+        let dobVC = DateOfBirthCollectorViewController(coordinator: self)
+        navigationRouter.push(viewController: dobVC, animated: true)
     }
     
     var rootViewController: UIViewController?
-    
-    func showApplicationLetterViewController() {
-        let applicationLetterViewModel = applicationModel.applicationLetterViewModel
-        let applicationLetterViewController = ApplicationLetterViewController(coordinator: self, viewModel: applicationLetterViewModel)
-        applicationLetterViewController.log = injected.log
-        rootViewController = applicationLetterViewController
-        navigationRouter.push(viewController: applicationLetterViewController, animated: true)
-    }
-    
-    func showApplicationLetterEditor() {
-        let coverLetterStoryboard = UIStoryboard(name: "EditCoverLetter", bundle: __bundle)
-        let editor = coverLetterStoryboard.instantiateViewController(withIdentifier: "EditCoverLetterCtrl") as! EditCoverLetterViewController
-        editor.coordinator = self
-        editor.log = injected.log
-        editor.suppressMotivationField = (injected.user.age() ?? 0) < 18 ? true : false
-        editor.blanksModel = applicationModel.blanksModel
-        editor.motivationTextModel = applicationModel.motivationTextModel
-        editor.availabilityPeriodJson = applicationModel.availabilityPeriodJson
-        navigationRouter.push(viewController: editor, animated: true)
-    }
-    
-    func showChooseValuesForBlank(name: TemplateBlankName, inTemplate template: F4STemplate) {
-        let storyboard = UIStoryboard(name: "ChooseAttributes", bundle: __bundle)
-        let vc = storyboard.instantiateViewController(withIdentifier: "ChooseAttributesCtrl") as! ChooseAttributesViewController
-        let model = applicationModel.applicationLetterModel.blanksModel
-        let viewModel = ChooseAttributesViewModel(model: model, chooseValuesFor: name)
-        viewModel.coordinator = self
-        vc.coordinator = self
-        vc.viewModel = viewModel
-        navigationRouter.push(viewController: vc, animated: true)
-    }
     
     deinit {
         print("ApplyCoordinator did deinit")
     }
 }
 
-extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
+extension ApplyCoordinator {
     
-    func continueApplicationWithCompletedLetter(sender: Any?, completion: @escaping (Error?) -> Void) {
-        showUserDetails()
-        completion(nil)
-    }
     
     func showUserDetails() {
         
@@ -140,8 +105,6 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
     }
     
     func userDetailsDidFinish() {
-        let user = injected.userRepository.load()
-        applicationContext.user = user
         checkApplicationCanProceed()
     }
     
@@ -187,9 +150,7 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
     }
     
     func apply() {
-        applicationModel.createApplication { [weak self] (error) in
-            self?.applyDidComplete(error: error)
-        }
+
     }
     
     func applyDidComplete(error: Error?) {
@@ -252,34 +213,16 @@ extension ApplyCoordinator : ApplicationLetterViewControllerCoordinating {
     func termsAndConditionsWasTapped(sender: Any?) {
         presentContent(F4SContentType.terms)
     }
-    
-    func editButtonWasTapped(sender: Any?) {
-        showApplicationLetterEditor()
-    }
+
 }
 
-extension ApplyCoordinator : EditCoverLetterViewControllerCoordinatorProtocol {
-    func editCoverLetterViewControllerDidCancel() {
-        navigationRouter.pop(animated: true)
+extension ApplyCoordinator: DateOfBirthCoordinatorProtocol {
+    
+    func onDidCancel() {
+        
     }
     
-    func editCoverLetterViewControllerDidFinish(_ viewController: EditCoverLetterViewController) {
-        self.applicationModel.availabilityPeriodJson = viewController.availabilityPeriodJson
-        navigationRouter.pop(animated: true)
-        applicationModel.applicationLetterModel.render()
-    }
-    
-    func chooseValuesForTemplateBlank(name: TemplateBlankName, inTemplate template: F4STemplate) {
-        showChooseValuesForBlank(name: name, inTemplate: template)
-    }
-}
-
-extension ApplyCoordinator : ChooseAttributesViewControllerCoordinatorProtocol {
-    func chooseAttributesViewControllerDidFinish() {
-        navigationRouter.pop(animated: true)
-    }
-    
-    func chooseAttributesViewControllerDidCancel() {
-        navigationRouter.pop(animated: true)
+    func onDidSelectDataOfBirth(date: Date) {
+        print("Selected dob \(date)")
     }
 }

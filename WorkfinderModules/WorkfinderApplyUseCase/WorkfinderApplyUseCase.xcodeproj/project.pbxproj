@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		FC0B6B332323CDC800A1867D /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0B6B322323CDC800A1867D /* WorkfinderCoordinators.framework */; };
-		FC0E5CF9224E19BF00615B4F /* ApplicationLetterTemplateBlanksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E5CF8224E19BF00615B4F /* ApplicationLetterTemplateBlanksModel.swift */; };
-		FC0E5CFD224E62E400615B4F /* ApplicationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E5CFC224E62E400615B4F /* ApplicationModel.swift */; };
-		FC16F51C23460E7300D6EAC7 /* MotivationEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16F51B23460E7300D6EAC7 /* MotivationEditorViewController.swift */; };
 		FC1EBEBD2248E0A500416D70 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */; };
 		FC1EBEBE2248E0AC00416D70 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */; };
 		FC1EBEBF2248E0D600416D70 /* ApplicationLetterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626532248CDB100D5F850 /* ApplicationLetterViewModelTests.swift */; };
@@ -18,10 +15,8 @@
 		FC1EBEC12248E0D600416D70 /* ApplicationLetterViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626522248CDB100D5F850 /* ApplicationLetterViewControllerTests.swift */; };
 		FC1EBEC32248E37C00416D70 /* ApplicationLetterModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1EBEC22248E37B00416D70 /* ApplicationLetterModelTests.swift */; };
 		FC22DBFB22F97F330068C61C /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC22DBFA22F97F330068C61C /* WorkfinderUI.framework */; };
-		FC29991B231EBFCD00F83FB6 /* EditCoverLetter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC29991A231EBFCD00F83FB6 /* EditCoverLetter.storyboard */; };
-		FC299921231EC1E200F83FB6 /* EditCoverLetterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC29991F231EC1E100F83FB6 /* EditCoverLetterViewController.swift */; };
-		FC299922231EC1E200F83FB6 /* EditFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC299920231EC1E200F83FB6 /* EditFooterView.swift */; };
-		FC299923231EC1E200F83FB6 /* EditCoverLetterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC29991E231EC1E000F83FB6 /* EditCoverLetterTableViewCell.swift */; };
+		FC23BCE4243AFA730075F359 /* DateOfBirthCollectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCE3243AFA730075F359 /* DateOfBirthCollectorViewController.swift */; };
+		FC23BCE8243B30A10075F359 /* ApplicationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCE7243B30A10075F359 /* ApplicationModel.swift */; };
 		FC29992A231EC41A00F83FB6 /* F4SPageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC299925231EC41700F83FB6 /* F4SPageHeaderView.swift */; };
 		FC29992B231EC41A00F83FB6 /* F4SDaysAndHoursViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC299926231EC41800F83FB6 /* F4SDaysAndHoursViewController.swift */; };
 		FC29992C231EC41A00F83FB6 /* F4SDisplayInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC299927231EC41900F83FB6 /* F4SDisplayInformationViewController.swift */; };
@@ -33,38 +28,21 @@
 		FC299937231EC50300F83FB6 /* F4SCalendarCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC299930231EC4FE00F83FB6 /* F4SCalendarCollectionViewController.swift */; };
 		FC299938231EC50300F83FB6 /* F4SDayCalendarViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC29992F231EC4FD00F83FB6 /* F4SDayCalendarViewCell.swift */; };
 		FC29993E231ECDEE00F83FB6 /* F4SCalendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC29993B231ECACC00F83FB6 /* F4SCalendar.storyboard */; };
-		FC299941231ED0BD00F83FB6 /* EditFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC299940231ED0B400F83FB6 /* EditFooter.xib */; };
 		FC29994A231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC299946231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard */; };
 		FC29994B231ED87600F83FB6 /* F4SDaysAndHours.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC299947231ED87600F83FB6 /* F4SDaysAndHours.storyboard */; };
 		FC29994F231EE4F800F83FB6 /* Calendar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC299944231ED35100F83FB6 /* Calendar.xcassets */; };
-		FC299953231EEB4000F83FB6 /* F4SApplicationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC299952231EEB4000F83FB6 /* F4SApplicationContext.swift */; };
 		FC4066FB23277C16002B425E /* WorkfinderDocumentUploadUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4066FA23277C16002B425E /* WorkfinderDocumentUploadUseCase.framework */; };
 		FC6E3D2D2248D74A00377736 /* WorkfinderApplyUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF102248BDCC00D9B8D1 /* WorkfinderApplyUseCase.framework */; };
 		FC7A4394224A3AB200B2D693 /* F4SGrammarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4393224A3AB100B2D693 /* F4SGrammarTests.swift */; };
-		FC7A4398224A497800B2D693 /* ApplicationLetterTemplateBlanksCleanser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4397224A497800B2D693 /* ApplicationLetterTemplateBlanksCleanser.swift */; };
 		FC7C219523215E9300721D1D /* ApplyCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7C219423215E9200721D1D /* ApplyCoordinatorTests.swift */; };
 		FC85D9F222F205610035C724 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC85D9F122F205610035C724 /* WorkfinderAppLogic.framework */; };
-		FC8DC8C72348969E00E629AC /* MotivationTextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8DC8C62348969E00E629AC /* MotivationTextModel.swift */; };
-		FC9626372248C1A900D5F850 /* ApplicationLetterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626312248C1A900D5F850 /* ApplicationLetterModel.swift */; };
 		FC9626392248C1A900D5F850 /* EditApplicationLetterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626332248C1A900D5F850 /* EditApplicationLetterButton.swift */; };
-		FC96263A2248C1A900D5F850 /* ApplicationLetterViewControllerMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626342248C1A900D5F850 /* ApplicationLetterViewControllerMainView.swift */; };
-		FC96263B2248C1A900D5F850 /* ApplicationLetterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626352248C1A900D5F850 /* ApplicationLetterViewModel.swift */; };
-		FC96263C2248C1A900D5F850 /* ApplicationLetterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626362248C1A900D5F850 /* ApplicationLetterViewController.swift */; };
 		FC9865B6229D380A006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865B5229D380A006D3E63 /* README */; };
-		FCE519092249384E00B550C9 /* ApplicationLetterTextDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE519072249384E00B550C9 /* ApplicationLetterTextDecorator.swift */; };
-		FCE5190A2249384E00B550C9 /* ApplicationLetterTemplateRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE519082249384E00B550C9 /* ApplicationLetterTemplateRenderer.swift */; };
-		FCE5190C2249388200B550C9 /* Mustache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE5190B2249388200B550C9 /* Mustache.framework */; };
-		FCE51923224940F300B550C9 /* F4SGrammar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51922224940F200B550C9 /* F4SGrammar.swift */; };
-		FCE519452249545800B550C9 /* TemplateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE519442249545800B550C9 /* TemplateHelper.swift */; };
 		FCE5194A224963DB00B550C9 /* F4SChoiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51948224963DA00B550C9 /* F4SChoiceTests.swift */; };
 		FCE5194B224963DB00B550C9 /* F4STemplateHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51949224963DA00B550C9 /* F4STemplateHelperTests.swift */; };
 		FCE8DA842320D35E00934E2F /* Success.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCE8DA832320D35E00934E2F /* Success.xcassets */; };
 		FCE8DA872320D3A700934E2F /* SuccessExtraInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCE8DA862320D39D00934E2F /* SuccessExtraInfo.storyboard */; };
 		FCE8DA892320D3CB00934E2F /* SuccessExtraInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DA882320D3CB00934E2F /* SuccessExtraInfoViewController.swift */; };
-		FCE8DA912320E0A600934E2F /* ChooseAttributes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCE8DA902320E09A00934E2F /* ChooseAttributes.storyboard */; };
-		FCE8DA952320E0C300934E2F /* ChooseAttributesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DA932320E0C200934E2F /* ChooseAttributesTableViewCell.swift */; };
-		FCE8DA962320E0C300934E2F /* ChooseAttributesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DA942320E0C200934E2F /* ChooseAttributesViewController.swift */; };
-		FCE8DA972320E0C300934E2F /* ChooseAttributesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DA922320E0C200934E2F /* ChooseAttributesViewModel.swift */; };
 		FCE8DA9A2320E24600934E2F /* ApplyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DA992320E24600934E2F /* ApplyCoordinator.swift */; };
 		FCE8DA9C2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE8DA9B2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework */; };
 		FCF5AF212248BDCC00D9B8D1 /* WorkfinderApplyUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = FCF5AF132248BDCC00D9B8D1 /* WorkfinderApplyUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -84,16 +62,11 @@
 /* Begin PBXFileReference section */
 		FC0B6B322323CDC800A1867D /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC0B6B342323CDC800A1867D /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC0E5CF8224E19BF00615B4F /* ApplicationLetterTemplateBlanksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationLetterTemplateBlanksModel.swift; sourceTree = "<group>"; };
-		FC0E5CFC224E62E400615B4F /* ApplicationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationModel.swift; sourceTree = "<group>"; };
-		FC16F51B23460E7300D6EAC7 /* MotivationEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotivationEditorViewController.swift; sourceTree = "<group>"; };
 		FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1EBEC22248E37B00416D70 /* ApplicationLetterModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationLetterModelTests.swift; sourceTree = "<group>"; };
 		FC22DBFA22F97F330068C61C /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC29991A231EBFCD00F83FB6 /* EditCoverLetter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditCoverLetter.storyboard; sourceTree = "<group>"; };
-		FC29991E231EC1E000F83FB6 /* EditCoverLetterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCoverLetterTableViewCell.swift; sourceTree = "<group>"; };
-		FC29991F231EC1E100F83FB6 /* EditCoverLetterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCoverLetterViewController.swift; sourceTree = "<group>"; };
-		FC299920231EC1E200F83FB6 /* EditFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditFooterView.swift; sourceTree = "<group>"; };
+		FC23BCE3243AFA730075F359 /* DateOfBirthCollectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateOfBirthCollectorViewController.swift; sourceTree = "<group>"; };
+		FC23BCE7243B30A10075F359 /* ApplicationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationModel.swift; sourceTree = "<group>"; };
 		FC299925231EC41700F83FB6 /* F4SPageHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SPageHeaderView.swift; sourceTree = "<group>"; };
 		FC299926231EC41800F83FB6 /* F4SDaysAndHoursViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDaysAndHoursViewController.swift; sourceTree = "<group>"; };
 		FC299927231EC41900F83FB6 /* F4SDisplayInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDisplayInformationViewController.swift; sourceTree = "<group>"; };
@@ -105,42 +78,26 @@
 		FC299932231EC50000F83FB6 /* F4SCalendarContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarContainerViewController.swift; sourceTree = "<group>"; };
 		FC299933231EC50200F83FB6 /* F4SMonthHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SMonthHeaderView.swift; sourceTree = "<group>"; };
 		FC29993B231ECACC00F83FB6 /* F4SCalendar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SCalendar.storyboard; sourceTree = "<group>"; };
-		FC29993F231ED0B400F83FB6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "f4s-workexperience/Base.lproj/EditFooter.xib"; sourceTree = "<group>"; };
 		FC299944231ED35100F83FB6 /* Calendar.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Calendar.xcassets; sourceTree = "<group>"; };
 		FC299946231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SDisplayInformationViewController.storyboard; sourceTree = "<group>"; };
 		FC299948231ED87600F83FB6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/F4SDaysAndHours.storyboard; sourceTree = "<group>"; };
-		FC299952231EEB4000F83FB6 /* F4SApplicationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SApplicationContext.swift; sourceTree = "<group>"; };
 		FC4066FA23277C16002B425E /* WorkfinderDocumentUploadUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderDocumentUploadUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC6E3D282248D74A00377736 /* WorkfinderApplyUseCaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderApplyUseCaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC6E3D2C2248D74A00377736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC7A4393224A3AB100B2D693 /* F4SGrammarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SGrammarTests.swift; sourceTree = "<group>"; };
-		FC7A4397224A497800B2D693 /* ApplicationLetterTemplateBlanksCleanser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationLetterTemplateBlanksCleanser.swift; sourceTree = "<group>"; };
 		FC7C219423215E9200721D1D /* ApplyCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyCoordinatorTests.swift; sourceTree = "<group>"; };
 		FC85D9EF22F204140035C724 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC85D9F122F205610035C724 /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC8DC8C62348969E00E629AC /* MotivationTextModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotivationTextModel.swift; sourceTree = "<group>"; };
-		FC9626312248C1A900D5F850 /* ApplicationLetterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLetterModel.swift; sourceTree = "<group>"; };
 		FC9626332248C1A900D5F850 /* EditApplicationLetterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditApplicationLetterButton.swift; sourceTree = "<group>"; };
-		FC9626342248C1A900D5F850 /* ApplicationLetterViewControllerMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLetterViewControllerMainView.swift; sourceTree = "<group>"; };
-		FC9626352248C1A900D5F850 /* ApplicationLetterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLetterViewModel.swift; sourceTree = "<group>"; };
-		FC9626362248C1A900D5F850 /* ApplicationLetterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLetterViewController.swift; sourceTree = "<group>"; };
 		FC9626522248CDB100D5F850 /* ApplicationLetterViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLetterViewControllerTests.swift; sourceTree = "<group>"; };
 		FC9626532248CDB100D5F850 /* ApplicationLetterViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLetterViewModelTests.swift; sourceTree = "<group>"; };
 		FC9865B5229D380A006D3E63 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
-		FCE519072249384E00B550C9 /* ApplicationLetterTextDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationLetterTextDecorator.swift; sourceTree = "<group>"; };
-		FCE519082249384E00B550C9 /* ApplicationLetterTemplateRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationLetterTemplateRenderer.swift; sourceTree = "<group>"; };
 		FCE5190B2249388200B550C9 /* Mustache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mustache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCE51922224940F200B550C9 /* F4SGrammar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SGrammar.swift; sourceTree = "<group>"; };
-		FCE519442249545800B550C9 /* TemplateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateHelper.swift; sourceTree = "<group>"; };
 		FCE51948224963DA00B550C9 /* F4SChoiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SChoiceTests.swift; sourceTree = "<group>"; };
 		FCE51949224963DA00B550C9 /* F4STemplateHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateHelperTests.swift; sourceTree = "<group>"; };
 		FCE8DA832320D35E00934E2F /* Success.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Success.xcassets; sourceTree = "<group>"; };
 		FCE8DA852320D39D00934E2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SuccessExtraInfo.storyboard; sourceTree = "<group>"; };
 		FCE8DA882320D3CB00934E2F /* SuccessExtraInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessExtraInfoViewController.swift; sourceTree = "<group>"; };
-		FCE8DA8F2320E09A00934E2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "f4s-workexperience/Base.lproj/ChooseAttributes.storyboard"; sourceTree = "<group>"; };
-		FCE8DA922320E0C200934E2F /* ChooseAttributesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseAttributesViewModel.swift; sourceTree = "<group>"; };
-		FCE8DA932320E0C200934E2F /* ChooseAttributesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseAttributesTableViewCell.swift; sourceTree = "<group>"; };
-		FCE8DA942320E0C200934E2F /* ChooseAttributesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseAttributesViewController.swift; sourceTree = "<group>"; };
 		FCE8DA992320E24600934E2F /* ApplyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyCoordinator.swift; sourceTree = "<group>"; };
 		FCE8DA9B2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUserDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCE8DB1623210E1500934E2F /* F4SUploadYPDocumentsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = F4SUploadYPDocumentsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,7 +128,6 @@
 				FCE8DA9C2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework in Frameworks */,
 				FC22DBFB22F97F330068C61C /* WorkfinderUI.framework in Frameworks */,
 				FC85D9F222F205610035C724 /* WorkfinderAppLogic.framework in Frameworks */,
-				FCE5190C2249388200B550C9 /* Mustache.framework in Frameworks */,
 				FC1EBEBD2248E0A500416D70 /* WorkfinderCommon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -179,19 +135,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		FC29991D231EC18300F83FB6 /* Edit cover letter */ = {
-			isa = PBXGroup;
-			children = (
-				FC29991A231EBFCD00F83FB6 /* EditCoverLetter.storyboard */,
-				FC29991F231EC1E100F83FB6 /* EditCoverLetterViewController.swift */,
-				FC29991E231EC1E000F83FB6 /* EditCoverLetterTableViewCell.swift */,
-				FC299940231ED0B400F83FB6 /* EditFooter.xib */,
-				FC299920231EC1E200F83FB6 /* EditFooterView.swift */,
-				FC8DC8C8234897A300E629AC /* Motivation text */,
-			);
-			path = "Edit cover letter";
-			sourceTree = "<group>";
-		};
 		FC299924231EC38700F83FB6 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
@@ -243,36 +186,6 @@
 			path = WorkfinderApplyUseCaseTests;
 			sourceTree = "<group>";
 		};
-		FC7A438F224A386400B2D693 /* Template rendering helpers */ = {
-			isa = PBXGroup;
-			children = (
-				FC7A4397224A497800B2D693 /* ApplicationLetterTemplateBlanksCleanser.swift */,
-				FCE519082249384E00B550C9 /* ApplicationLetterTemplateRenderer.swift */,
-				FCE519072249384E00B550C9 /* ApplicationLetterTextDecorator.swift */,
-				FCE51922224940F200B550C9 /* F4SGrammar.swift */,
-				FCE519442249545800B550C9 /* TemplateHelper.swift */,
-			);
-			path = "Template rendering helpers";
-			sourceTree = "<group>";
-		};
-		FC7A4390224A38B900B2D693 /* Application letter view controller */ = {
-			isa = PBXGroup;
-			children = (
-				FC9626362248C1A900D5F850 /* ApplicationLetterViewController.swift */,
-				FC7A4391224A38D900B2D693 /* Sub views */,
-			);
-			path = "Application letter view controller";
-			sourceTree = "<group>";
-		};
-		FC7A4391224A38D900B2D693 /* Sub views */ = {
-			isa = PBXGroup;
-			children = (
-				FC9626342248C1A900D5F850 /* ApplicationLetterViewControllerMainView.swift */,
-				FC9626332248C1A900D5F850 /* EditApplicationLetterButton.swift */,
-			);
-			path = "Sub views";
-			sourceTree = "<group>";
-		};
 		FC7A4392224A395400B2D693 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
@@ -282,29 +195,17 @@
 			name = "Supporting files";
 			sourceTree = "<group>";
 		};
-		FC8DC8C8234897A300E629AC /* Motivation text */ = {
-			isa = PBXGroup;
-			children = (
-				FC16F51B23460E7300D6EAC7 /* MotivationEditorViewController.swift */,
-				FC8DC8C62348969E00E629AC /* MotivationTextModel.swift */,
-			);
-			path = "Motivation text";
-			sourceTree = "<group>";
-		};
 		FC9626222248C07800D5F850 /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				FCE8DA992320E24600934E2F /* ApplyCoordinator.swift */,
-				FC299952231EEB4000F83FB6 /* F4SApplicationContext.swift */,
+				FC23BCE3243AFA730075F359 /* DateOfBirthCollectorViewController.swift */,
 				FC299947231ED87600F83FB6 /* F4SDaysAndHours.storyboard */,
 				FC299946231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard */,
-				FCE8DA982320E11100934E2F /* Letter choices */,
+				FC9626332248C1A900D5F850 /* EditApplicationLetterButton.swift */,
 				FCE8DA8A2320D42600934E2F /* Success screen */,
-				FC29991D231EC18300F83FB6 /* Edit cover letter */,
 				FC299924231EC38700F83FB6 /* Calendar */,
 				FCF4FACE22646502000EE4B7 /* Models */,
-				FC7A438F224A386400B2D693 /* Template rendering helpers */,
-				FC7A4390224A38B900B2D693 /* Application letter view controller */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -336,24 +237,10 @@
 			path = "Success screen";
 			sourceTree = "<group>";
 		};
-		FCE8DA982320E11100934E2F /* Letter choices */ = {
-			isa = PBXGroup;
-			children = (
-				FCE8DA902320E09A00934E2F /* ChooseAttributes.storyboard */,
-				FCE8DA942320E0C200934E2F /* ChooseAttributesViewController.swift */,
-				FCE8DA932320E0C200934E2F /* ChooseAttributesTableViewCell.swift */,
-				FCE8DA922320E0C200934E2F /* ChooseAttributesViewModel.swift */,
-			);
-			path = "Letter choices";
-			sourceTree = "<group>";
-		};
 		FCF4FACE22646502000EE4B7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FC0E5CFC224E62E400615B4F /* ApplicationModel.swift */,
-				FC9626352248C1A900D5F850 /* ApplicationLetterViewModel.swift */,
-				FC9626312248C1A900D5F850 /* ApplicationLetterModel.swift */,
-				FC0E5CF8224E19BF00615B4F /* ApplicationLetterTemplateBlanksModel.swift */,
+				FC23BCE7243B30A10075F359 /* ApplicationModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -491,13 +378,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC299941231ED0BD00F83FB6 /* EditFooter.xib in Resources */,
 				FC29994B231ED87600F83FB6 /* F4SDaysAndHours.storyboard in Resources */,
 				FC29994F231EE4F800F83FB6 /* Calendar.xcassets in Resources */,
 				FC9865B6229D380A006D3E63 /* README in Resources */,
-				FCE8DA912320E0A600934E2F /* ChooseAttributes.storyboard in Resources */,
 				FCE8DA872320D3A700934E2F /* SuccessExtraInfo.storyboard in Resources */,
-				FC29991B231EBFCD00F83FB6 /* EditCoverLetter.storyboard in Resources */,
 				FCE8DA842320D35E00934E2F /* Success.xcassets in Resources */,
 				FC29994A231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard in Resources */,
 				FC29993E231ECDEE00F83FB6 /* F4SCalendar.storyboard in Resources */,
@@ -529,37 +413,19 @@
 			files = (
 				FC29992A231EC41A00F83FB6 /* F4SPageHeaderView.swift in Sources */,
 				FC29992D231EC41A00F83FB6 /* F4SHoursPickerViewController.swift in Sources */,
-				FCE519092249384E00B550C9 /* ApplicationLetterTextDecorator.swift in Sources */,
-				FC9626372248C1A900D5F850 /* ApplicationLetterModel.swift in Sources */,
 				FC29992E231EC41A00F83FB6 /* F4SSelectDayTableViewCell.swift in Sources */,
-				FC96263C2248C1A900D5F850 /* ApplicationLetterViewController.swift in Sources */,
+				FC23BCE4243AFA730075F359 /* DateOfBirthCollectorViewController.swift in Sources */,
 				FC29992C231EC41A00F83FB6 /* F4SDisplayInformationViewController.swift in Sources */,
 				FC299938231EC50300F83FB6 /* F4SDayCalendarViewCell.swift in Sources */,
-				FC96263B2248C1A900D5F850 /* ApplicationLetterViewModel.swift in Sources */,
-				FC299923231EC1E200F83FB6 /* EditCoverLetterTableViewCell.swift in Sources */,
-				FCE5190A2249384E00B550C9 /* ApplicationLetterTemplateRenderer.swift in Sources */,
-				FCE519452249545800B550C9 /* TemplateHelper.swift in Sources */,
-				FC0E5CFD224E62E400615B4F /* ApplicationModel.swift in Sources */,
-				FC0E5CF9224E19BF00615B4F /* ApplicationLetterTemplateBlanksModel.swift in Sources */,
-				FC299953231EEB4000F83FB6 /* F4SApplicationContext.swift in Sources */,
+				FC23BCE8243B30A10075F359 /* ApplicationModel.swift in Sources */,
 				FC9626392248C1A900D5F850 /* EditApplicationLetterButton.swift in Sources */,
 				FC29992B231EC41A00F83FB6 /* F4SDaysAndHoursViewController.swift in Sources */,
-				FC96263A2248C1A900D5F850 /* ApplicationLetterViewControllerMainView.swift in Sources */,
-				FC8DC8C72348969E00E629AC /* MotivationTextModel.swift in Sources */,
 				FC299934231EC50300F83FB6 /* F4SCalendarContainerViewController.swift in Sources */,
-				FCE8DA952320E0C300934E2F /* ChooseAttributesTableViewCell.swift in Sources */,
-				FCE51923224940F300B550C9 /* F4SGrammar.swift in Sources */,
-				FC299922231EC1E200F83FB6 /* EditFooterView.swift in Sources */,
-				FC299921231EC1E200F83FB6 /* EditCoverLetterViewController.swift in Sources */,
-				FCE8DA962320E0C300934E2F /* ChooseAttributesViewController.swift in Sources */,
 				FC299935231EC50300F83FB6 /* F4SMonthHeaderView.swift in Sources */,
 				FC299936231EC50300F83FB6 /* F4SCalendarColors.swift in Sources */,
 				FCE8DA9A2320E24600934E2F /* ApplyCoordinator.swift in Sources */,
 				FC299937231EC50300F83FB6 /* F4SCalendarCollectionViewController.swift in Sources */,
-				FC7A4398224A497800B2D693 /* ApplicationLetterTemplateBlanksCleanser.swift in Sources */,
-				FCE8DA972320E0C300934E2F /* ChooseAttributesViewModel.swift in Sources */,
 				FCE8DA892320D3CB00934E2F /* SuccessExtraInfoViewController.swift in Sources */,
-				FC16F51C23460E7300D6EAC7 /* MotivationEditorViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,14 +440,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		FC299940231ED0B400F83FB6 /* EditFooter.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FC29993F231ED0B400F83FB6 /* Base */,
-			);
-			name = EditFooter.xib;
-			sourceTree = "<group>";
-		};
 		FC299947231ED87600F83FB6 /* F4SDaysAndHours.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -596,14 +454,6 @@
 				FCE8DA852320D39D00934E2F /* Base */,
 			);
 			name = SuccessExtraInfo.storyboard;
-			sourceTree = "<group>";
-		};
-		FCE8DA902320E09A00934E2F /* ChooseAttributes.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FCE8DA8F2320E09A00934E2F /* Base */,
-			);
-			name = ChooseAttributes.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

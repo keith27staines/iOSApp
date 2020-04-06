@@ -35,9 +35,6 @@
       location = "group:WorkfinderModules/WorkfinderNetworking/WorkfinderNetworking.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:WorkfinderModules/GRMustache/Xcode/Mustache.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:f4s-workexperience.xcodeproj">
    </FileRef>
    <FileRef
