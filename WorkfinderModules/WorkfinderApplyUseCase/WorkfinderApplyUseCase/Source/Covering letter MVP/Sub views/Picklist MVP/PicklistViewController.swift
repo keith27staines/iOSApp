@@ -11,6 +11,7 @@ class PicklistViewController: UITableViewController {
     let picklist: Picklist
     
     override func viewDidLoad() {
+        navigationItem.title = "Select \(picklist.title)"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         view.backgroundColor = UIColor.white
     }

@@ -189,11 +189,11 @@
 			isa = PBXGroup;
 			children = (
 				FC23BCFC243B33510075F359 /* CoverLetterCoordinator.swift */,
+				FC23BCF3243B33510075F359 /* CoverLetterViewPresenter.swift */,
 				FC23BCFB243B33510075F359 /* CoverLetterViewController.swift */,
 				FC9626332248C1A900D5F850 /* EditApplicationLetterButton.swift */,
 				FC23BCEA243B33510075F359 /* Providers */,
 				FC23BCEC243B33510075F359 /* Logic */,
-				FC23BCF3243B33510075F359 /* CoverLetterViewPresenter.swift */,
 				FC23BCF4243B33510075F359 /* Models */,
 				FC23BCF8243B33510075F359 /* Sub views */,
 			);
