@@ -1,5 +1,6 @@
 
 import UIKit
+import WorkfinderUI
 
 public protocol CoverLetterViewProtocol {
     var presenter: CoverLetterViewPresenterProtocol { get }
@@ -14,20 +15,22 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
     
     func refresh(from presenter: CoverLetterViewPresenterProtocol) {
         coverLetterTextView.attributedText = presenter.attributedDisplayString
+        nextButton.isEnabled = presenter.nextButtonIsEnabled
+        let color = presenter.nextButtonIsEnabled ? workfinderGreen : workfinderLightGrey
+        nextButton.setBackgroundColor(color: color, forUIControlState: .normal)
     }
     
     lazy var coverLetterTextView: UITextView = {
         let textView = UITextView()
-        textView.text = "hello world"
-        textView.font = UIFont.systemFont(ofSize: 20)
         textView.textAlignment = .left
-        textView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapSelectOptionsButton)))
+        textView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapShowEditor)))
         return textView
     }()
     
     lazy var pageStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [self.coverLetterTextView, self.nextButton])
         stack.axis = .vertical
+        stack.spacing = 20
         return stack
     }()
     
@@ -37,6 +40,7 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
         button.setTitleColor(UIColor.white, for: .normal)
         button.heightAnchor.constraint(equalToConstant: 64).isActive = true
         button.setBackgroundColor(color: UIColor.lightGray, forUIControlState: .normal)
+        button.addTarget(self, action: #selector(didTapNext), for: .touchUpInside)
         button.layer.cornerRadius = 12
         button.layer.masksToBounds = true
         return button
@@ -44,14 +48,15 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
     
     lazy var editButton: EditApplicationLetterButton = {
         let button = EditApplicationLetterButton()
-        button.addTarget(self, action: #selector(didTapSelectOptionsButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTapShowEditor), for: .touchUpInside)
         return button
     }()
     
     @objc func didTapShowTemplateButton() { presenter.onDidTapShowTemplateButton() }
     @objc func didTapShowCoverLetterButton() { presenter.onDidTapShowCoverLetterButton() }
-    @objc func didTapSelectOptionsButton() { presenter.onDidTapSelectOptionsButton() }
+    @objc func didTapShowEditor() { presenter.onDidTapSelectOptionsButton() }
     @objc func didCancel() { presenter.onDidDismiss() }
+    @objc func didTapNext() { presenter.onDidTapNext() }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,11 +78,14 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
     @objc func onBackTapped() {
         presenter.onDidDismiss()
     }
+    let userMessageHandler = UserMessageHandler()
     
     func showLoadingIndicator() {
+        userMessageHandler.showLightLoadingOverlay(view)
     }
     
     func hideLoadingIndicator() {
+        userMessageHandler.hideLoadingOverlay()
     }
     
     init(presenter: CoverLetterViewPresenterProtocol) {
@@ -98,7 +106,7 @@ extension CoverLetterViewController {
     }
     
     func configureNavigationController() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: EditApplicationLetterButton())
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: editButton)
     }
     
     func configurePageStack() {

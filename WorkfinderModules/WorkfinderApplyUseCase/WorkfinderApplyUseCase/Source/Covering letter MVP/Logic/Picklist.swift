@@ -45,14 +45,16 @@ public class Picklist: PicklistProtocol {
         selectedItems.remove(at: index)
     }
     
-    public init(type: PicklistType) {
+    public init(type: PicklistType, maximumPicks: Int) {
         self.type = type
         self.items = []
         self.provider = PicklistProvider(picklistType: type)
         self.selectedItems = []
+        self.maximumPicks = maximumPicks
     }
     
     public func fetchItems(completion: @escaping ((Picklist, Result<[PicklistItemJson],Error>)->Void) ) {
+        guard items.isEmpty else { return }
         provider.fetchMore { (result) in
             switch result {
             case .success(let items):

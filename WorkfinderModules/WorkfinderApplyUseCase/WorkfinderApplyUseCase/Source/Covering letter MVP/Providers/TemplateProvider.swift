@@ -1,22 +1,84 @@
 import Foundation
 
 public protocol TemplateProviderProtocol {
-    func fetchCoverLetterTemplate(dateOfBirth: Date, completion: @escaping ((Result<TemplateModel,Error>) -> Void))
+    func fetchCoverLetterTemplate(completion: @escaping ((Result<TemplateModel,Error>) -> Void))
 }
 
 public class TemplateProvider: TemplateProviderProtocol{
     
-    var templateString: String
+    let apiUrl: String
+    let templateString: String = "During my {{role}} placement I want to develop these skills {{skills}}."
+    var completionHandler: ((Result<TemplateModel,Error>) -> Void)?
+    let session: URLSession = URLSession(configuration: URLSessionConfiguration.default)
+    var task: URLSessionDataTask?
+    let candidateDateOfBirth: Date
     
-    public init(templateString: String = "During my {{role}} placement I want to develop these skills {{skills}}.") {
-        self.templateString = templateString
+    var dateOfBirthString: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-dd"
+        return dateFormatter.string(from: candidateDateOfBirth)
     }
     
-    public func fetchCoverLetterTemplate(dateOfBirth: Date, completion: @escaping ((Result<TemplateModel,Error>) -> Void)) {
+    public init(apiUrl: String = "http://workfinder-develop.eu-west-2.elasticbeanstalk.com/v3/",
+                candidateDateOfBirth: Date) {
+        self.apiUrl = apiUrl
+        self.candidateDateOfBirth = candidateDateOfBirth
+    }
+    
+    public func fetchCoverLetterTemplate(completion: @escaping ((Result<TemplateModel,Error>) -> Void)) {
+        task?.cancel()
+        self.completionHandler = completion
+        let url = URL(string: apiUrl + "coverletters/")!
+        var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+        urlComponents.queryItems = [URLQueryItem(name: "date_of_birth", value: dateOfBirthString)]
+        let urlRequest = URLRequest(url: urlComponents.url!)
+        task = session.dataTask(with: urlRequest, completionHandler: taskCompletionHandler)
+        task?.resume()
+    }
+    
+    func taskCompletionHandler(data: Data?, response: URLResponse?, error: Error?) {
+        guard let response = response as? HTTPURLResponse else {
+            if let error = error {
+                let result = Result<Data, Error>.failure(error)
+                networkResultHandler(result)
+                return
+            }
+            return
+        }
+        let code = response.statusCode
+        switch code {
+        case 200..<300:
+            guard let  data = data else {
+                let httpError = NetworkError.responseBodyEmpty(response)
+                let result = Result<Data, Error>.failure(httpError)
+                networkResultHandler(result)
+                return
+            }
+            networkResultHandler(Result<Data,Error>.success(data))
+        default:
+            let httpError = NetworkError.httpError(response)
+            let result = Result<Data, Error>.failure(httpError)
+            networkResultHandler(result)
+            return
+        }
+    }
+    
+    func networkResultHandler(_ result: Result<Data,Error>) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            let templateModel = TemplateModel(uuid: "templateUuid", templateString: self.templateString)
-            completion(Result<TemplateModel,Error>.success(templateModel))
+            switch result {
+            case .success(let data):
+                do {
+                    let responseJson = try JSONDecoder().decode(TemplateListJson.self, from: data)
+                    let templateModel = responseJson.results.first!
+                    self.completionHandler?(Result<TemplateModel,Error>.success(templateModel))
+                } catch {
+                    let deserializationError = NetworkError.deserialization(error)
+                    self.completionHandler?(Result<TemplateModel,Error>.failure(deserializationError))
+                }
+            case .failure(let error):
+                self.completionHandler?(Result<TemplateModel,Error>.failure(error))
+            }
         }
     }
 }

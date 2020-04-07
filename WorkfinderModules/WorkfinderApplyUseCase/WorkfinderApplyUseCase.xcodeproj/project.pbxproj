@@ -28,7 +28,7 @@
 		FC23BD05243B33510075F359 /* PickList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCF5243B33510075F359 /* PickList.swift */; };
 		FC23BD06243B33510075F359 /* TemplateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCF6243B33510075F359 /* TemplateModel.swift */; };
 		FC23BD07243B33510075F359 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCF7243B33510075F359 /* NetworkError.swift */; };
-		FC23BD08243B33510075F359 /* LetterEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCFA243B33510075F359 /* LetterEditor.swift */; };
+		FC23BD08243B33510075F359 /* LetterEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCFA243B33510075F359 /* LetterEditorViewController.swift */; };
 		FC23BD09243B33510075F359 /* CoverLetterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCFB243B33510075F359 /* CoverLetterViewController.swift */; };
 		FC23BD0A243B33510075F359 /* CoverLetterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCFC243B33510075F359 /* CoverLetterCoordinator.swift */; };
 		FC29992A231EC41A00F83FB6 /* F4SPageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC299925231EC41700F83FB6 /* F4SPageHeaderView.swift */; };
@@ -46,6 +46,10 @@
 		FC29994B231ED87600F83FB6 /* F4SDaysAndHours.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC299947231ED87600F83FB6 /* F4SDaysAndHours.storyboard */; };
 		FC29994F231EE4F800F83FB6 /* Calendar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC299944231ED35100F83FB6 /* Calendar.xcassets */; };
 		FC4066FB23277C16002B425E /* WorkfinderDocumentUploadUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4066FA23277C16002B425E /* WorkfinderDocumentUploadUseCase.framework */; };
+		FC42C8A3243C599000F81232 /* LetterEditorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC42C8A2243C599000F81232 /* LetterEditorPresenter.swift */; };
+		FC42C8A6243C5C9A00F81232 /* PicklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC42C8A5243C5C9A00F81232 /* PicklistViewController.swift */; };
+		FC42C8AC243C9BB300F81232 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC42C8AB243C9BB300F81232 /* WorkfinderServices.framework */; };
+		FC42C8AD243C9BB300F81232 /* WorkfinderServices.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC42C8AB243C9BB300F81232 /* WorkfinderServices.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC6E3D2D2248D74A00377736 /* WorkfinderApplyUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF102248BDCC00D9B8D1 /* WorkfinderApplyUseCase.framework */; };
 		FC7A4394224A3AB200B2D693 /* F4SGrammarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4393224A3AB100B2D693 /* F4SGrammarTests.swift */; };
 		FC7C219523215E9300721D1D /* ApplyCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7C219423215E9200721D1D /* ApplyCoordinatorTests.swift */; };
@@ -73,6 +77,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		FC42C8AE243C9BB400F81232 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FC42C8AD243C9BB300F81232 /* WorkfinderServices.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		FC0B6B322323CDC800A1867D /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC0B6B342323CDC800A1867D /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,7 +110,7 @@
 		FC23BCF5243B33510075F359 /* PickList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickList.swift; sourceTree = "<group>"; };
 		FC23BCF6243B33510075F359 /* TemplateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateModel.swift; sourceTree = "<group>"; };
 		FC23BCF7243B33510075F359 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		FC23BCFA243B33510075F359 /* LetterEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LetterEditor.swift; sourceTree = "<group>"; };
+		FC23BCFA243B33510075F359 /* LetterEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LetterEditorViewController.swift; sourceTree = "<group>"; };
 		FC23BCFB243B33510075F359 /* CoverLetterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverLetterViewController.swift; sourceTree = "<group>"; };
 		FC23BCFC243B33510075F359 /* CoverLetterCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverLetterCoordinator.swift; sourceTree = "<group>"; };
 		FC299925231EC41700F83FB6 /* F4SPageHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SPageHeaderView.swift; sourceTree = "<group>"; };
@@ -110,6 +128,9 @@
 		FC299946231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SDisplayInformationViewController.storyboard; sourceTree = "<group>"; };
 		FC299948231ED87600F83FB6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/F4SDaysAndHours.storyboard; sourceTree = "<group>"; };
 		FC4066FA23277C16002B425E /* WorkfinderDocumentUploadUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderDocumentUploadUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC42C8A2243C599000F81232 /* LetterEditorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterEditorPresenter.swift; sourceTree = "<group>"; };
+		FC42C8A5243C5C9A00F81232 /* PicklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicklistViewController.swift; sourceTree = "<group>"; };
+		FC42C8AB243C9BB300F81232 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC6E3D282248D74A00377736 /* WorkfinderApplyUseCaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderApplyUseCaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC6E3D2C2248D74A00377736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC7A4393224A3AB100B2D693 /* F4SGrammarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SGrammarTests.swift; sourceTree = "<group>"; };
@@ -151,6 +172,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC42C8AC243C9BB300F81232 /* WorkfinderServices.framework in Frameworks */,
 				FC4066FB23277C16002B425E /* WorkfinderDocumentUploadUseCase.framework in Frameworks */,
 				FC0B6B332323CDC800A1867D /* WorkfinderCoordinators.framework in Frameworks */,
 				FCE8DA9C2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework in Frameworks */,
@@ -181,6 +203,7 @@
 		FC23BCEA243B33510075F359 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				FC23BCF2243B33510075F359 /* PicklistProvider.swift */,
 				FC23BCEB243B33510075F359 /* TemplateProvider.swift */,
 			);
 			path = Providers;
@@ -194,7 +217,6 @@
 				FC23BCEF243B33510075F359 /* Common.swift */,
 				FC23BCF0243B33510075F359 /* Picklist.swift */,
 				FC23BCF1243B33510075F359 /* Grammer.swift */,
-				FC23BCF2243B33510075F359 /* PicklistProvider.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -213,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				FC23BCF9243B33510075F359 /* LetterEditor MVP */,
+				FC42C8A4243C5C7B00F81232 /* Picklist MVP */,
 			);
 			path = "Sub views";
 			sourceTree = "<group>";
@@ -220,7 +243,8 @@
 		FC23BCF9243B33510075F359 /* LetterEditor MVP */ = {
 			isa = PBXGroup;
 			children = (
-				FC23BCFA243B33510075F359 /* LetterEditor.swift */,
+				FC23BCFA243B33510075F359 /* LetterEditorViewController.swift */,
+				FC42C8A2243C599000F81232 /* LetterEditorPresenter.swift */,
 			);
 			path = "LetterEditor MVP";
 			sourceTree = "<group>";
@@ -257,6 +281,14 @@
 				FC299927231EC41900F83FB6 /* F4SDisplayInformationViewController.swift */,
 			);
 			path = F4SDaysAndHours;
+			sourceTree = "<group>";
+		};
+		FC42C8A4243C5C7B00F81232 /* Picklist MVP */ = {
+			isa = PBXGroup;
+			children = (
+				FC42C8A5243C5C9A00F81232 /* PicklistViewController.swift */,
+			);
+			path = "Picklist MVP";
 			sourceTree = "<group>";
 		};
 		FC6E3D292248D74A00377736 /* WorkfinderApplyUseCaseTests */ = {
@@ -303,6 +335,7 @@
 		FC96263D2248C20E00D5F850 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC42C8AB243C9BB300F81232 /* WorkfinderServices.framework */,
 				FC4066FA23277C16002B425E /* WorkfinderDocumentUploadUseCase.framework */,
 				FC0B6B322323CDC800A1867D /* WorkfinderCoordinators.framework */,
 				FC0B6B342323CDC800A1867D /* WorkfinderNetworking.framework */,
@@ -406,6 +439,7 @@
 				FCF5AF0C2248BDCC00D9B8D1 /* Sources */,
 				FCF5AF0D2248BDCC00D9B8D1 /* Frameworks */,
 				FCF5AF0E2248BDCC00D9B8D1 /* Resources */,
+				FC42C8AE243C9BB400F81232 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -506,6 +540,7 @@
 				FC29992A231EC41A00F83FB6 /* F4SPageHeaderView.swift in Sources */,
 				FC29992D231EC41A00F83FB6 /* F4SHoursPickerViewController.swift in Sources */,
 				FC23BD03243B33510075F359 /* PicklistProvider.swift in Sources */,
+				FC42C8A3243C599000F81232 /* LetterEditorPresenter.swift in Sources */,
 				FC29992E231EC41A00F83FB6 /* F4SSelectDayTableViewCell.swift in Sources */,
 				FC23BCE4243AFA730075F359 /* DateOfBirthCollectorViewController.swift in Sources */,
 				FC29992C231EC41A00F83FB6 /* F4SDisplayInformationViewController.swift in Sources */,
@@ -518,7 +553,7 @@
 				FC23BD05243B33510075F359 /* PickList.swift in Sources */,
 				FC29992B231EC41A00F83FB6 /* F4SDaysAndHoursViewController.swift in Sources */,
 				FC23BCFE243B33510075F359 /* TemplateRenderer.swift in Sources */,
-				FC23BD08243B33510075F359 /* LetterEditor.swift in Sources */,
+				FC23BD08243B33510075F359 /* LetterEditorViewController.swift in Sources */,
 				FC299934231EC50300F83FB6 /* F4SCalendarContainerViewController.swift in Sources */,
 				FC299935231EC50300F83FB6 /* F4SMonthHeaderView.swift in Sources */,
 				FC299936231EC50300F83FB6 /* F4SCalendarColors.swift in Sources */,
@@ -526,6 +561,7 @@
 				FC23BD00243B33510075F359 /* Common.swift in Sources */,
 				FC23BD06243B33510075F359 /* TemplateModel.swift in Sources */,
 				FCE8DA9A2320E24600934E2F /* ApplyCoordinator.swift in Sources */,
+				FC42C8A6243C5C9A00F81232 /* PicklistViewController.swift in Sources */,
 				FC23BD02243B33510075F359 /* Grammer.swift in Sources */,
 				FC23BD07243B33510075F359 /* NetworkError.swift in Sources */,
 				FC299937231EC50300F83FB6 /* F4SCalendarCollectionViewController.swift in Sources */,

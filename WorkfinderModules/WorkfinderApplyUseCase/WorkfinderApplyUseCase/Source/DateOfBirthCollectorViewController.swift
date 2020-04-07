@@ -8,7 +8,6 @@ protocol DateOfBirthCoordinatorProtocol: class {
 
 class DateOfBirthCollectorViewController: UIViewController {
     
-    let workfinderGreen = UIColor(red: 57, green: 167, blue: 82)
     weak var coordinator: DateOfBirthCoordinatorProtocol?
     
     var dateOfBirth: Date? {

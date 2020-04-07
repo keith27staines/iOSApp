@@ -4,6 +4,7 @@ import UIKit
 protocol LetterEditorCoordinatorProtocol: class {
     func start()
     func letterEditor(view: LetterEditorViewProtocol, updatedPickLists picklistsDictionary: PicklistsDictionary)
+    func showPicklist(_ picklist: Picklist)
 }
 
 protocol LetterEditorViewProtocol: class {
@@ -55,8 +56,13 @@ class LetterEditorViewController: UIViewController, LetterEditorViewProtocol {
 }
 
 extension LetterEditorViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return false
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.row.isMultiple(of: 2) {
+            let picklist = presenter.picklist(for: indexPath)
+            presenter.showPicklist(picklist)
+        }
     }
 }
 
@@ -90,54 +96,6 @@ extension LetterEditorViewController: UITableViewDataSource {
         }
     }
     
-}
-
-protocol LetterEditorPresenterProtocol {
-    func onViewDidLoad(view: LetterEditorViewProtocol)
-    func onDidDismiss()
-    func numberOfSections() -> Int
-    func numberOfRowsInSection(_ section: Int) -> Int
-    func picklist(for indexPath: IndexPath) -> Picklist
-}
-
-class LetterEditorPresenter: LetterEditorPresenterProtocol {
-    
-    func picklist(for indexPath: IndexPath) -> Picklist {
-        let type = Picklist.PicklistType(rawValue: indexPath.row/2)!
-        return picklistsDictionary[type]!
-    }
-    
-    func numberOfRowsInSection(_ section: Int) -> Int { return Picklist.PicklistType.allCases.count * 2 }
-    func numberOfSections() -> Int { return 1 }
-    
-    weak var coordinator: LetterEditorCoordinatorProtocol?
-    weak var view: LetterEditorViewProtocol?
-    
-    let picklistsDictionary: PicklistsDictionary = [
-        .attributes: Picklist(type: .attributes),
-        .roles: Picklist(type: .roles),
-        .skills: Picklist(type: .skills),
-        .universities: Picklist(type: .universities)
-    ]
-    
-    func onViewDidLoad(view: LetterEditorViewProtocol) {
-        self.view = view
-        view.refresh(self)
-        for (_, picklist) in picklistsDictionary {
-            picklist.fetchItems { (picklist, result) in
-                view.refresh(self)
-            }
-        }
-    }
-    
-    func onDidDismiss() {
-        guard let view = view else { return }
-        coordinator?.letterEditor(view: view, updatedPickLists: picklistsDictionary)
-    }
-    
-    init(coordinator: LetterEditorCoordinatorProtocol) {
-        self.coordinator = coordinator
-    }
 }
 
 class PicklistCell: UITableViewCell {

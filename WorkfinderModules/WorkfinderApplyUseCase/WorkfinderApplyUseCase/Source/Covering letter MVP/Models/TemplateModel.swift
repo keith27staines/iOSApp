@@ -12,7 +12,7 @@
   ]
 }
  */
-
+import WorkfinderCommon
 
 public struct TemplateField {
     
@@ -37,4 +37,8 @@ public struct TemplateModel : Codable {
         case uuid
         case templateString = "template_string"
     }
+}
+
+public struct TemplateListJson: Codable {
+    var results: [TemplateModel]
 }

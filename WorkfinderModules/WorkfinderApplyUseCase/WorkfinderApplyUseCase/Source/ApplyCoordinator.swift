@@ -9,6 +9,8 @@ import WorkfinderDocumentUploadUseCase
 import WorkfinderUserDetailsUseCase
 
 let __bundle = Bundle(identifier: "com.f4s.WorkfinderApplyUseCase")!
+let workfinderGreen = UIColor(red: 57, green: 167, blue: 82)
+let workfinderLightGrey = UIColor.init(white: 0.93, alpha: 1)
 
 public protocol ApplyCoordinatorDelegate : class {
     func applicationDidFinish(preferredDestination: ApplyCoordinator.PreferredDestinationAfterApplication)
@@ -71,8 +73,9 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     }
     
     var coverletterCoordinator: CoverletterCoordinatorProtocol?
-    func startCoverLetterCoordinator() {
-        coverletterCoordinator = CoverLetterCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected)
+    
+    func startCoverLetterCoordinator(candidateDateOfBirth: Date) {
+        coverletterCoordinator = CoverLetterCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, candidateDateOfBirth: candidateDateOfBirth)
         coverletterCoordinator?.start()
     }
     
@@ -84,7 +87,6 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
 }
 
 extension ApplyCoordinator {
-    
     
     func showUserDetails() {
         
@@ -229,6 +231,6 @@ extension ApplyCoordinator: DateOfBirthCoordinatorProtocol {
     }
     
     func onDidSelectDataOfBirth(date: Date) {
-        startCoverLetterCoordinator()
+        startCoverLetterCoordinator(candidateDateOfBirth: date)
     }
 }

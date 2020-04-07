@@ -3,6 +3,7 @@ import Foundation
 
 public protocol CoverLetterViewPresenterProtocol {
     var view: CoverLetterViewProtocol? { get set }
+    var nextButtonIsEnabled: Bool { get }
     var displayString: String { get }
     var attributedDisplayString: NSAttributedString { get }
     func onViewDidLoad(view: CoverLetterViewProtocol)
@@ -10,9 +11,11 @@ public protocol CoverLetterViewPresenterProtocol {
     func onDidTapShowCoverLetterButton()
     func onDidTapSelectOptionsButton()
     func onDidDismiss()
+    func onDidTapNext()
 }
 
 class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
+    
     var coordinator: CoverletterCoordinatorProtocol?
     var view: CoverLetterViewProtocol?
     var displayString: String = ""
@@ -23,6 +26,12 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     var pickListsDictionary = PicklistsDictionary()
      
     var isShowingTemplate: Bool = false
+    
+    var nextButtonIsEnabled: Bool { return renderer?.isComplete ?? false }
+    
+    func onDidTapNext() {
+        coordinator?.onDidCompleteCoverLetter()
+    }
     
     func onDidTapShowTemplateButton() {
         guard let renderer = renderer else { return }
@@ -49,10 +58,8 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
             let items = picklist.selectedItems.map { (picklistIem) -> String in
                 return picklistIem.value ?? "unnamed value"
             }
-            if !picklist.selectedItems.isEmpty {
+            if !items.isEmpty {
                 fieldValues[picklist.title] = Grammar().commaSeparatedList(strings: items)
-            } else {
-                fieldValues[picklist.title] = Grammar().commaSeparatedList(strings: ["item1","item2","item3"])
             }
         }
         _letterDisplayString = renderer.renderToPlainString(with: fieldValues)
@@ -74,7 +81,7 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
         self.view = view
         view.refresh(from: self)
         view.showLoadingIndicator()
-        templateProvider.fetchCoverLetterTemplate(dateOfBirth: Date()) { [weak self] (result) in
+        templateProvider.fetchCoverLetterTemplate() { [weak self] (result) in
             self?.view?.hideLoadingIndicator()
             switch result {
             case .success(let templateModel):
@@ -85,7 +92,10 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
         }
     }
     
+    var templateModel: TemplateModel?
+    
     func onTemplateFetched(templateModel: TemplateModel) {
+        self.templateModel = templateModel
         let parser = TemplateParser(templateModel: templateModel)
         renderer = TemplateRenderer(parser: parser)
     }

@@ -2,8 +2,9 @@
 import Foundation
 
 public class TaskCompletionHandler {
+    public init() {}
     
-    func handleResult(data: Data?, response: URLResponse?, error: Error?, completion: @escaping((Result<Data,Error>) -> Void)) {
+    public func handleResult(data: Data?, response: URLResponse?, error: Error?, completion: @escaping((Result<Data,Error>) -> Void)) {
         DispatchQueue.main.async {
             guard let response = response as? HTTPURLResponse else {
                 if let error = error {
