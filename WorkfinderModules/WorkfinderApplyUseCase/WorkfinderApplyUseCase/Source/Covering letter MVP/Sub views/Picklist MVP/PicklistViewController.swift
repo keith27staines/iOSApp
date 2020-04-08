@@ -1,13 +1,13 @@
 
 import UIKit
 
-protocol PicklistCoordinator: class {
+protocol PicklistCoordinatorProtocol: class {
     
 }
 
 class PicklistViewController: UITableViewController {
     
-    weak var coordinator: PicklistCoordinator?
+    weak var coordinator: PicklistCoordinatorProtocol?
     let picklist: Picklist
     
     override func viewDidLoad() {
@@ -16,7 +16,7 @@ class PicklistViewController: UITableViewController {
         view.backgroundColor = UIColor.white
     }
     
-    init(coordinator: PicklistCoordinator, picklist: Picklist) {
+    init(coordinator: PicklistCoordinatorProtocol, picklist: Picklist) {
         self.coordinator = coordinator
         self.picklist = picklist
         super.init(nibName: nil, bundle: nil)

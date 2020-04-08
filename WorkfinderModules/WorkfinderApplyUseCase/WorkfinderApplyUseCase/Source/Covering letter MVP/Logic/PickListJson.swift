@@ -29,6 +29,7 @@ extension Picklist.PicklistType {
         case .skills: return "employment-skills/"
         case .attributes: return "personal-attributes/"
         case .universities: return "institutions/"
+        default: return ""
         }
     }
 }
