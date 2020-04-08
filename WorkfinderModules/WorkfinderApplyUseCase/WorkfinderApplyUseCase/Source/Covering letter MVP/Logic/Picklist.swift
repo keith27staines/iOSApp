@@ -183,6 +183,7 @@ public class Picklist: PicklistProtocol {
     }()
     
     public var itemSelectedSummary: String {
+        guard selectedItems.count > 0 else { return "" }
         switch type {
         case .roles:
             return NSLocalizedString("Selected", comment: "")

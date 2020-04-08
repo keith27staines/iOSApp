@@ -8,15 +8,15 @@ protocol LetterEditorCoordinatorProtocol: class {
 }
 
 protocol LetterEditorViewProtocol: class {
-    func refresh(_ presenter: LetterEditorPresenterProtocol)
+    func refresh()
 }
 
 class LetterEditorViewController: UIViewController, LetterEditorViewProtocol {
 
     let presenter: LetterEditorPresenterProtocol
     
-    func refresh(_ presenter: LetterEditorPresenterProtocol) {
-        
+    func refresh() {
+        tableView.reloadData()
     }
     
     lazy var tableView: UITableView = {
@@ -40,6 +40,7 @@ class LetterEditorViewController: UIViewController, LetterEditorViewProtocol {
         tableView.dataSource = self
         tableView.delegate = self
         presenter.onViewDidLoad(view: self)
+        navigationItem.title = "Select values"
     }
     
     override func viewWillDisappear(_ animated: Bool) {

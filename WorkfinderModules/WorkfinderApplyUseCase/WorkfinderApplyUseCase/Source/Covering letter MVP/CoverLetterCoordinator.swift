@@ -48,6 +48,7 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
     ]
     
     var picklistsDidUpdate: ((PicklistsDictionary) -> Void)?
+    
     public func onDidTapSelectOptions(completion: @escaping ((PicklistsDictionary) -> Void)) {
         picklistsDidUpdate = completion
         let presenter = LetterEditorPresenter(coordinator: self, picklists: self.picklistsDictionary)
@@ -95,5 +96,7 @@ extension CoverLetterCoordinator: F4SCalendarCollectionViewControllerDelegate {
 }
 
 extension CoverLetterCoordinator: PicklistCoordinatorProtocol {
-    
+    func picklistIsClosing(_ picklist: Picklist) {
+        letterEditorViewController?.refresh()
+    }
 }

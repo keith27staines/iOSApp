@@ -30,10 +30,10 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
     
     func onViewDidLoad(view: LetterEditorViewProtocol) {
         self.view = view
-        view.refresh(self)
+        view.refresh()
         for (_, picklist) in picklistsDictionary {
             picklist.fetchItems { (picklist, result) in
-                view.refresh(self)
+                view.refresh()
             }
         }
     }

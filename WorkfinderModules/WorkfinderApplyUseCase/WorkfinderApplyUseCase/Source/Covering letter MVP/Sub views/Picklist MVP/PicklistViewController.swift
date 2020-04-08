@@ -2,7 +2,7 @@
 import UIKit
 
 protocol PicklistCoordinatorProtocol: class {
-    
+    func picklistIsClosing(_ picklist: Picklist)
 }
 
 class PicklistViewController: UITableViewController {
@@ -14,6 +14,10 @@ class PicklistViewController: UITableViewController {
         navigationItem.title = "Select \(picklist.title)"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         view.backgroundColor = UIColor.white
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        coordinator?.picklistIsClosing(picklist)
     }
     
     init(coordinator: PicklistCoordinatorProtocol, picklist: Picklist) {
