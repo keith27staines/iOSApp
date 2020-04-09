@@ -25,13 +25,12 @@ public class AvailabilityPeriodPicklist: ClientPicklist {
 
 public class TextblockPicklist: ClientPicklist {
     let placeholder: String
-    public init(type: PicklistType ,title: String, placeholder: String) {
+    public init(type: PicklistType, placeholder: String) {
         self.placeholder = placeholder
         super.init(type: type, maximumPicks: 1)
         items = [
             PicklistItemJson(uuid: "text", value: "")
         ]
-        self.title = title
     }
 }
 
@@ -153,11 +152,15 @@ public class Picklist: PicklistProtocol {
         case .attributes:
             return NSLocalizedString("attributes", comment: "")
         case .universities:
-            return NSLocalizedString("universities", comment: "")
+            return NSLocalizedString("university", comment: "")
         case .year:
-            return "year"
-        case .freeTextBlock1, .freeTextBlock2, .freeTextBlock3:
-            return "free text"
+            return NSLocalizedString("year", comment: "")
+        case .freeTextBlock1:
+            return NSLocalizedString("free text 1", comment: "")
+        case .freeTextBlock2:
+            return NSLocalizedString("free text 2", comment: "")
+        case .freeTextBlock3:
+            return NSLocalizedString("free text 3", comment: "")
         case .availabilityPeriod:
             return NSLocalizedString("availability", comment: "")
         }

@@ -53,6 +53,7 @@
 		FC6E3D2D2248D74A00377736 /* WorkfinderApplyUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF102248BDCC00D9B8D1 /* WorkfinderApplyUseCase.framework */; };
 		FC7A4394224A3AB200B2D693 /* F4SGrammarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4393224A3AB100B2D693 /* F4SGrammarTests.swift */; };
 		FC7C219523215E9300721D1D /* ApplyCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7C219423215E9200721D1D /* ApplyCoordinatorTests.swift */; };
+		FC84A669243EF43F00C9D158 /* FreeTextEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC84A668243EF43F00C9D158 /* FreeTextEditorViewController.swift */; };
 		FC85D9F222F205610035C724 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC85D9F122F205610035C724 /* WorkfinderAppLogic.framework */; };
 		FC9626392248C1A900D5F850 /* EditApplicationLetterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626332248C1A900D5F850 /* EditApplicationLetterButton.swift */; };
 		FC9865B6229D380A006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865B5229D380A006D3E63 /* README */; };
@@ -135,6 +136,7 @@
 		FC6E3D2C2248D74A00377736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC7A4393224A3AB100B2D693 /* F4SGrammarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SGrammarTests.swift; sourceTree = "<group>"; };
 		FC7C219423215E9200721D1D /* ApplyCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyCoordinatorTests.swift; sourceTree = "<group>"; };
+		FC84A668243EF43F00C9D158 /* FreeTextEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeTextEditorViewController.swift; sourceTree = "<group>"; };
 		FC85D9EF22F204140035C724 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC85D9F122F205610035C724 /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC9626332248C1A900D5F850 /* EditApplicationLetterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditApplicationLetterButton.swift; sourceTree = "<group>"; };
@@ -195,7 +197,7 @@
 				FC23BCEA243B33510075F359 /* Providers */,
 				FC23BCEC243B33510075F359 /* Logic */,
 				FC23BCF4243B33510075F359 /* Models */,
-				FC23BCF8243B33510075F359 /* Sub views */,
+				FC23BCF8243B33510075F359 /* Editors */,
 			);
 			path = "Covering letter MVP";
 			sourceTree = "<group>";
@@ -231,13 +233,15 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		FC23BCF8243B33510075F359 /* Sub views */ = {
+		FC23BCF8243B33510075F359 /* Editors */ = {
 			isa = PBXGroup;
 			children = (
 				FC23BCF9243B33510075F359 /* LetterEditor MVP */,
 				FC42C8A4243C5C7B00F81232 /* Picklist MVP */,
+				FC299924231EC38700F83FB6 /* Calendar */,
+				FC84A66A243EF44F00C9D158 /* FreeTextEditor */,
 			);
-			path = "Sub views";
+			path = Editors;
 			sourceTree = "<group>";
 		};
 		FC23BCF9243B33510075F359 /* LetterEditor MVP */ = {
@@ -252,6 +256,7 @@
 		FC299924231EC38700F83FB6 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				FC299946231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard */,
 				FC299939231EC54A00F83FB6 /* F4SCalendar */,
 				FC29993A231EC5B000F83FB6 /* F4SDaysAndHours */,
 			);
@@ -317,6 +322,14 @@
 			name = "Supporting files";
 			sourceTree = "<group>";
 		};
+		FC84A66A243EF44F00C9D158 /* FreeTextEditor */ = {
+			isa = PBXGroup;
+			children = (
+				FC84A668243EF43F00C9D158 /* FreeTextEditorViewController.swift */,
+			);
+			path = FreeTextEditor;
+			sourceTree = "<group>";
+		};
 		FC9626222248C07800D5F850 /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -324,9 +337,7 @@
 				FC23BCE3243AFA730075F359 /* DateOfBirthCollectorViewController.swift */,
 				FC23BCE9243B33510075F359 /* Covering letter MVP */,
 				FC299947231ED87600F83FB6 /* F4SDaysAndHours.storyboard */,
-				FC299946231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard */,
 				FCE8DA8A2320D42600934E2F /* Success screen */,
-				FC299924231EC38700F83FB6 /* Calendar */,
 				FCF4FACE22646502000EE4B7 /* Models */,
 			);
 			path = Source;
@@ -564,6 +575,7 @@
 				FC42C8A6243C5C9A00F81232 /* PicklistViewController.swift in Sources */,
 				FC23BD02243B33510075F359 /* Grammer.swift in Sources */,
 				FC23BD07243B33510075F359 /* NetworkError.swift in Sources */,
+				FC84A669243EF43F00C9D158 /* FreeTextEditorViewController.swift in Sources */,
 				FC299937231EC50300F83FB6 /* F4SCalendarCollectionViewController.swift in Sources */,
 				FCE8DA892320D3CB00934E2F /* SuccessExtraInfoViewController.swift in Sources */,
 			);

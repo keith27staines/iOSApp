@@ -4,6 +4,19 @@ public protocol TemplateProviderProtocol {
     func fetchCoverLetterTemplate(completion: @escaping ((Result<TemplateModel,Error>) -> Void))
 }
 
+fileprivate let testTemplate = TemplateModel(uuid: "", templateString:
+    """
+       Dear Sir/Madam
+       {{free text 1}}
+       I would like to apply for the {{role}} role at your company.
+       I wish to acquire the following skills: {{skills}}.
+       I consider myself to have the following personal attributes: {{attributes}}.
+       I am in year {{year}} of study at {{university}}.
+       {{free text 2}}
+       I will be available between {{availability}}
+       {{free text 3}}
+    """)
+
 public class TemplateProvider: TemplateProviderProtocol{
     
     let apiUrl: String
@@ -70,7 +83,7 @@ public class TemplateProvider: TemplateProviderProtocol{
             case .success(let data):
                 do {
                     let responseJson = try JSONDecoder().decode(TemplateListJson.self, from: data)
-                    let templateModel = responseJson.results.first!
+                    let templateModel = responseJson.results.first ?? testTemplate
                     self.completionHandler?(Result<TemplateModel,Error>.success(templateModel))
                 } catch {
                     let deserializationError = NetworkError.deserialization(error)

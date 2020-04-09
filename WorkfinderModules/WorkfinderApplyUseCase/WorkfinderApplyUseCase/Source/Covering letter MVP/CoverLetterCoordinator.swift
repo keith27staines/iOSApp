@@ -7,7 +7,7 @@ public protocol CoverletterCoordinatorProtocol: class {
     func start()
     func onCoverLetterDidDismiss()
     func onDidCompleteCoverLetter()
-    func onDidTapSelectOptions(completion: @escaping((PicklistsDictionary)->Void))
+    func onDidTapSelectOptions(referencedPicklists: PicklistsDictionary, completion: @escaping((PicklistsDictionary)->Void))
 }
 
 public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, CoverletterCoordinatorProtocol  {
@@ -21,7 +21,8 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
     lazy var presenter: CoverLetterViewPresenterProtocol = {
         let presenter = CoverLetterViewPresenter(
             coordinator: self,
-            templateProvider: self.templateProvider)
+            templateProvider: self.templateProvider,
+            allPicklistsDictionary: self.allPicklistsDictionary)
         return presenter
     }()
     
@@ -35,23 +36,23 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
         navigationRouter.push(viewController: viewController, animated: true)
     }
     
-    let picklistsDictionary: PicklistsDictionary = [
+    let allPicklistsDictionary: PicklistsDictionary = [
         .attributes: Picklist(type: .attributes, maximumPicks: 3),
         .roles: Picklist(type: .roles, maximumPicks: 1),
         .skills: Picklist(type: .skills, maximumPicks: 3),
         .universities: Picklist(type: .universities, maximumPicks: 1),
         .year: UniversityYearPicklist(),
         .availabilityPeriod: AvailabilityPeriodPicklist(),
-        .freeTextBlock1: TextblockPicklist(type: .freeTextBlock1, title: "Free text 1", placeholder: "Suggested text 1"),
-        .freeTextBlock2: TextblockPicklist(type: .freeTextBlock2, title: "Free text 2", placeholder: "Suggested text 2"),
-        .freeTextBlock3: TextblockPicklist(type: .freeTextBlock3, title: "Free text 3", placeholder: "Suggested text 3")
+        .freeTextBlock1: TextblockPicklist(type: .freeTextBlock1, placeholder: "Placeholder text 1"),
+        .freeTextBlock2: TextblockPicklist(type: .freeTextBlock2, placeholder: "Placeholder text 2"),
+        .freeTextBlock3: TextblockPicklist(type: .freeTextBlock3, placeholder: "Placeholder text 3")
     ]
     
     var picklistsDidUpdate: ((PicklistsDictionary) -> Void)?
     
-    public func onDidTapSelectOptions(completion: @escaping ((PicklistsDictionary) -> Void)) {
+    public func onDidTapSelectOptions(referencedPicklists: PicklistsDictionary, completion: @escaping ((PicklistsDictionary) -> Void)) {
         picklistsDidUpdate = completion
-        let presenter = LetterEditorPresenter(coordinator: self, picklists: self.picklistsDictionary)
+        let presenter = LetterEditorPresenter(coordinator: self, picklists: referencedPicklists)
         let letterEditorViewController = LetterEditorViewController(presenter: presenter)
         self.letterEditorViewController = letterEditorViewController
         coverLetterViewController?.navigationController?.pushViewController(letterEditorViewController, animated: true)
@@ -79,24 +80,31 @@ extension CoverLetterCoordinator: LetterEditorCoordinatorProtocol {
             navigationRouter.push(viewController: vc, animated: true)
             break
         case .freeTextBlock1, .freeTextBlock2, .freeTextBlock3:
-            break
+            let vc = FreeTextEditorViewController(coordinator: self, freeTextPicker: picklist as! TextblockPicklist)
+            navigationRouter.push(viewController: vc, animated: true)
         }
     }
     
-    func letterEditor(view: LetterEditorViewProtocol, updatedPickLists picklistsDictionary: PicklistsDictionary) {
-        picklistsDidUpdate?(picklistsDictionary)
+    func letterEditorDidComplete(view: LetterEditorViewProtocol) {
+        picklistsDidUpdate?(allPicklistsDictionary)
     }
 }
 
 extension CoverLetterCoordinator: F4SCalendarCollectionViewControllerDelegate {
     func calendarDidChangeRange(_ calendar: F4SCalendarCollectionViewController, firstDay: F4SCalendarDay?, lastDay: F4SCalendarDay?) {
-        picklistsDictionary[.availabilityPeriod]?.items[0] = PicklistItemJson(uuid: "start", value: "Start")
-        picklistsDictionary[.availabilityPeriod]?.items[1] = PicklistItemJson(uuid: "end", value: "End")
+        allPicklistsDictionary[.availabilityPeriod]?.items[0] = PicklistItemJson(uuid: "start", value: "Start")
+        allPicklistsDictionary[.availabilityPeriod]?.items[1] = PicklistItemJson(uuid: "end", value: "End")
     }
 }
 
 extension CoverLetterCoordinator: PicklistCoordinatorProtocol {
     func picklistIsClosing(_ picklist: Picklist) {
+        letterEditorViewController?.refresh()
+    }
+}
+
+extension CoverLetterCoordinator: FreeTextEditorCoordinatorProtocol {
+    func textEditorIsClosing() {
         letterEditorViewController?.refresh()
     }
 }

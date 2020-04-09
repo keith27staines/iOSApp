@@ -23,7 +23,7 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     var renderer: TemplateRendererProtocol?
     let templateProvider: TemplateProviderProtocol
     
-    var pickListsDictionary = PicklistsDictionary()
+    let allPickListsDictionary: PicklistsDictionary
      
     var isShowingTemplate: Bool = false
     
@@ -53,7 +53,7 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     func updateLetterDisplayStrings() {
         guard let renderer = renderer else { return }
         var fieldValues = [String: String]()
-        pickListsDictionary.forEach { (keyValue) in
+        allPickListsDictionary.forEach { (keyValue) in
             let (_, picklist) = keyValue
             let items = picklist.selectedItems.map { (picklistIem) -> String in
                 return picklistIem.value ?? "unnamed value"
@@ -67,12 +67,18 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     }
     
     func onDidTapSelectOptionsButton() {
-        coordinator?.onDidTapSelectOptions(completion: { [weak self] picklistsDictionary in
+        coordinator?.onDidTapSelectOptions(referencedPicklists: picklistsReferencedByTemplate(), completion: { [weak self] picklistsDictionary in
             guard let self = self else { return }
-            self.pickListsDictionary = picklistsDictionary
             self.updateLetterDisplayStrings()
             self.view?.refresh(from: self)
         })
+    }
+    
+    func picklistsReferencedByTemplate() -> PicklistsDictionary {
+        return allPickListsDictionary.filter { (element) -> Bool in
+            let picklist = element.value
+            return embeddedFieldNames.contains(picklist.title)
+        }
     }
     
     func onDidDismiss() { coordinator?.onCoverLetterDidDismiss() }
@@ -93,16 +99,20 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     }
     
     var templateModel: TemplateModel?
+    var embeddedFieldNames = [String]()
     
     func onTemplateFetched(templateModel: TemplateModel) {
         self.templateModel = templateModel
         let parser = TemplateParser(templateModel: templateModel)
+        embeddedFieldNames = parser.allFieldNames()
         renderer = TemplateRenderer(parser: parser)
     }
     
     init(coordinator: CoverletterCoordinatorProtocol?,
-         templateProvider: TemplateProviderProtocol) {
+         templateProvider: TemplateProviderProtocol,
+         allPicklistsDictionary: PicklistsDictionary) {
         self.coordinator = coordinator
         self.templateProvider = templateProvider
+        self.allPickListsDictionary = allPicklistsDictionary
     }
 }

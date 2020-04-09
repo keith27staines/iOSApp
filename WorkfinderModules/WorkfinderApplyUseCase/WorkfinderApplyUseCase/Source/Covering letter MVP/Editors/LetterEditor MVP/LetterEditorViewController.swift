@@ -3,7 +3,7 @@ import UIKit
 
 protocol LetterEditorCoordinatorProtocol: class {
     func start()
-    func letterEditor(view: LetterEditorViewProtocol, updatedPickLists picklistsDictionary: PicklistsDictionary)
+    func letterEditorDidComplete(view: LetterEditorViewProtocol)
     func showPicklist(_ picklist: Picklist)
 }
 
@@ -15,9 +15,7 @@ class LetterEditorViewController: UIViewController, LetterEditorViewProtocol {
 
     let presenter: LetterEditorPresenterProtocol
     
-    func refresh() {
-        tableView.reloadData()
-    }
+    func refresh() { tableView.reloadData() }
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
