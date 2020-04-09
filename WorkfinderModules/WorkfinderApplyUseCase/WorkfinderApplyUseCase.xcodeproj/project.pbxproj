@@ -49,7 +49,6 @@
 		FC42C8A3243C599000F81232 /* LetterEditorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC42C8A2243C599000F81232 /* LetterEditorPresenter.swift */; };
 		FC42C8A6243C5C9A00F81232 /* PicklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC42C8A5243C5C9A00F81232 /* PicklistViewController.swift */; };
 		FC42C8AC243C9BB300F81232 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC42C8AB243C9BB300F81232 /* WorkfinderServices.framework */; };
-		FC42C8AD243C9BB300F81232 /* WorkfinderServices.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC42C8AB243C9BB300F81232 /* WorkfinderServices.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC6E3D2D2248D74A00377736 /* WorkfinderApplyUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF102248BDCC00D9B8D1 /* WorkfinderApplyUseCase.framework */; };
 		FC7A4394224A3AB200B2D693 /* F4SGrammarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4393224A3AB100B2D693 /* F4SGrammarTests.swift */; };
 		FC7C219523215E9300721D1D /* ApplyCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7C219423215E9200721D1D /* ApplyCoordinatorTests.swift */; };
@@ -77,20 +76,6 @@
 			remoteInfo = WorkfinderApplyUseCase;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		FC42C8AE243C9BB400F81232 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				FC42C8AD243C9BB300F81232 /* WorkfinderServices.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		FC0B6B322323CDC800A1867D /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -450,7 +435,6 @@
 				FCF5AF0C2248BDCC00D9B8D1 /* Sources */,
 				FCF5AF0D2248BDCC00D9B8D1 /* Frameworks */,
 				FCF5AF0E2248BDCC00D9B8D1 /* Resources */,
-				FC42C8AE243C9BB400F81232 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

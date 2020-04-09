@@ -92,8 +92,23 @@ extension CoverLetterCoordinator: LetterEditorCoordinatorProtocol {
 
 extension CoverLetterCoordinator: F4SCalendarCollectionViewControllerDelegate {
     func calendarDidChangeRange(_ calendar: F4SCalendarCollectionViewController, firstDay: F4SCalendarDay?, lastDay: F4SCalendarDay?) {
-        allPicklistsDictionary[.availabilityPeriod]?.items[0] = PicklistItemJson(uuid: "start", value: "Start")
-        allPicklistsDictionary[.availabilityPeriod]?.items[1] = PicklistItemJson(uuid: "end", value: "End")
+        guard let firstDay = firstDay, let lastDay = lastDay else { return }
+        
+        let startDate = makeDate(year: firstDay.year, month: firstDay.monthOfYear, day: firstDay.dayOfMonth)
+        let endDate = makeDate(year: lastDay.year, month: lastDay.monthOfYear, day: lastDay.dayOfMonth)
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .none
+        dateFormatter.dateStyle = .medium
+        allPicklistsDictionary[.availabilityPeriod]?.selectedItems = [
+            PicklistItemJson(uuid: "first", value: dateFormatter.string(from: startDate)),
+            PicklistItemJson(uuid: "last", value: dateFormatter.string(from: endDate))
+        ]
+    }
+    
+    func makeDate(year: Int, month: Int, day: Int) -> Date {
+        let calendar = Calendar(identifier: .gregorian)
+        let components = DateComponents(year: year, month: month, day: day)
+        return calendar.date(from: components)!
     }
 }
 

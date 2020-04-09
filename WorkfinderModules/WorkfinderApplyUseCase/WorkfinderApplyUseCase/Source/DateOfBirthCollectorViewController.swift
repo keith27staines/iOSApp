@@ -30,9 +30,10 @@ class DateOfBirthCollectorViewController: UIViewController {
         super.viewDidLoad()
         configureViews()
         dateOfBirth = nil
+        textField.becomeFirstResponder()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         if isMovingFromParent {
             coordinator?.onDidCancel()
         }
@@ -43,7 +44,7 @@ class DateOfBirthCollectorViewController: UIViewController {
         view.addSubview(textfield)
         textfield.inputView = self.datePicker
         textfield.inputAccessoryView = self.toolbar
-        textfield.placeholder = "Tap to enter date of birth"
+        textfield.placeholder = "Select date of birth"
         textfield.borderStyle = .roundedRect
         textfield.backgroundColor = UIColor.white
         return textfield
@@ -55,6 +56,7 @@ class DateOfBirthCollectorViewController: UIViewController {
         button.tintColor = UIColor.white
         button.layer.cornerRadius = 8
         button.layer.masksToBounds = true
+        button.heightAnchor.constraint(equalToConstant: 48).isActive = true
         button.setContentHuggingPriority(UILayoutPriority.defaultLow, for: NSLayoutConstraint.Axis.horizontal)
         button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return button
