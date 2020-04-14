@@ -53,7 +53,7 @@ public class F4SNetworkTaskFactory : F4SNetworkTaskFactoryProtocol {
                      attempting: String,
                      completion: @escaping (F4SNetworkDataResult) -> () ) -> F4SNetworkTask {
         var modifiedRequest = request
-        if let userUuid = configuration.userRepository.load().uuid  {
+        if let userUuid = configuration.userRepository.loadCandidate().uuid  {
             modifiedRequest.setValue(userUuid, forHTTPHeaderField: "wex.user.uuid")
         }
         let logger = configuration.logger

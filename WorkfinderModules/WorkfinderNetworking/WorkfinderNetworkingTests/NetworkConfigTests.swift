@@ -16,7 +16,7 @@ class NetworkConfigTests: XCTestCase {
         let logger = NetworkCallLogger(log: MockF4SAnalyticsAndDebugging())
         let endpoints = WorkfinderEndpoint(baseUrlString: "someUrl")
         let sessionManager = F4SNetworkSessionManager(wexApiKey: "someKey")
-        let user = F4SUser()
+        let user = Candidate()
         let userRepo = MockUserRepository(user: user)
         let config = NetworkConfig(workfinderApiKey: "someKey",
                                    logger: logger,

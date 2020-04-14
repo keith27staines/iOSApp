@@ -1,8 +1,23 @@
 import Foundation
 
+public struct User: Codable {
+    public var fullname: String?
+    public var nickname: String?
+    public var email: String?
+    public var password: String?
+    
+    public init() {}
+    
+    private enum CodingKeys : String, CodingKey {
+        case fullname = "full_name"
+        case nickname
+        case email
+        case password
+    }
+}
 
 /// F4SUser represents the current user (assumed to be the only user)
-public struct F4SUser: Codable {
+public struct Candidate: Codable {
     public var uuid: F4SUUID?
     public var email: String? = ""
     public var firstName: String? = ""
@@ -74,7 +89,7 @@ public struct F4SUser: Codable {
     
 }
 
-extension F4SUser {
+extension Candidate {
     private enum CodingKeys : String, CodingKey {
         case uuid
         case firstName = "first_name"

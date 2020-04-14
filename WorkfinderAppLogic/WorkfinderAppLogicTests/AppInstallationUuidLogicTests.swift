@@ -42,7 +42,7 @@ class AppInstallationLogicTests: XCTestCase {
     }
     
     func makeSUT(localStore: LocalStorageProtocol = MockLocalStore()) -> AppInstallationLogic {
-        let user = F4SUser(uuid: "uuid")
+        let user = Candidate(uuid: "uuid")
         let userRepo = MockUserRepository(user: user)
         let userService = MockUserService(registeringWillSucceedOnAttempt: 1)
         let registrationService = MockDeviceRegistationService()
@@ -89,7 +89,7 @@ class MockUserService: F4SUserServiceProtocol {
         
     }
     
-    func updateUser(user: F4SUser, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ()) {
+    func updateUser(user: Candidate, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ()) {
         fatalError()
     }
     

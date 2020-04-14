@@ -6,7 +6,7 @@ func makeTestConfiguration(userUuid: F4SUUID? = nil) -> NetworkConfig {
     let sessionManager = MockF4SNetworkSessionManager()
     let logger = MockNetworkCallLogger()
     let endpoints = WorkfinderEndpoint(baseUrlString:baseUrlString)
-    let user = F4SUser(uuid: userUuid)
+    let user = Candidate(uuid: userUuid)
     let userRepo = MockUserRepository(user: user)
     let config = NetworkConfig(
         workfinderApiKey: apiKey,

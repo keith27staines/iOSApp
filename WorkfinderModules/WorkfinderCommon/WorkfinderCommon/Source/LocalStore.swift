@@ -23,7 +23,10 @@ public class LocalStore : LocalStorageProtocol {
     public enum Key : String{
         case appVersion
         case user
+        case candidate
         case userUuid
+        
+        case accessToken
 
         case isFirstLaunch
         case installationUuid

@@ -37,13 +37,13 @@ class UserDetailsViewController: UIViewController {
     @IBOutlet weak var contentView: UIView!
     
     var datePicker = UIDatePicker()
-    var userRepository: F4SUserRepositoryProtocol!
+    var userRepository: UserRepositoryProtocol!
     var userService: F4SUserServiceProtocol!
     var emailVerificationModel: F4SEmailVerificationModelProtocol!
     
     func inject(
         viewModel: UserDetailsViewModel,
-        userRepository: F4SUserRepositoryProtocol,
+        userRepository: UserRepositoryProtocol,
         userService: F4SUserServiceProtocol,
         emailVerificationModel: F4SEmailVerificationModelProtocol) {
         self.viewModel = viewModel
@@ -237,7 +237,7 @@ extension UserDetailsViewController {
         }
     }
     
-    func buildUserInfo() -> F4SUser {
+    func buildUserInfo() -> Candidate {
         return viewModel.buildUser()
     }
     
@@ -279,7 +279,7 @@ extension UserDetailsViewController {
     
     func saveUserDetailsLocally() {
         let updatedUser = self.buildUserInfo()
-        userRepository?.save(user: updatedUser)
+        userRepository?.save(candidate: updatedUser)
     }
 }
 
@@ -315,7 +315,7 @@ extension UserDetailsViewController {
     func verifyEmail() {
         let emailController = self.emailController
         let emailModel = emailVerificationModel!
-        let user = userRepository.load()
+        let user = userRepository.loadCandidate()
         if emailModel.isEmailAddressVerified(email: user.email) {
             afterEmailVerfied(verifiedEmail: user.email!)
         } else {
@@ -334,15 +334,15 @@ extension UserDetailsViewController {
     }
     
     func afterEmailVerfied(verifiedEmail: String) {
-        var user = userRepository.load()
+        var user = userRepository.loadCandidate()
         user.email = verifiedEmail
-        userRepository.save(user: user)
+        userRepository.save(candidate: user)
         saveUserToServer()
     }
     
     func saveUserToServer() {
         showLoadingOverlay()
-        var user = userRepository.load()
+        var user = userRepository.loadCandidate()
         userService.updateUser(user: user) { [weak self] (result) in
             guard let strongSelf = self else { return }
             DispatchQueue.main.async {
@@ -368,7 +368,7 @@ extension UserDetailsViewController {
                     strongSelf.coordinator?.injected.log.debug("PATCHED user:\nold uuid: \(oldUuid)\nnew uuid: \(newUuid)", functionName: #function, fileName: #file, lineNumber: #line)
                     
                     user.uuid = newUuid
-                    strongSelf.userRepository?.save(user: user)
+                    strongSelf.userRepository?.save(candidate: user)
                     strongSelf.afterUserSavedToServer()
                 }
             }

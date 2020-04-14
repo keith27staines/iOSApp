@@ -17,7 +17,7 @@ public class F4SUserService : F4SUserServiceProtocol {
         return df
     }()
     
-    public func updateUser(user: F4SUser, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ()) {
+    public func updateUser(user: Candidate, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ()) {
         var user = user
         user.uuid = nil
         let attempting = "Update user"

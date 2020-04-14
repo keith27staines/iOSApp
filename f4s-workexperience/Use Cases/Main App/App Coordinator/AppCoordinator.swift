@@ -29,7 +29,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     let placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol
     let roleService: F4SRoleServiceProtocol
     let tabBarCoordinatorFactory: TabbarCoordinatorFactoryProtocol
-    var user: F4SUser { return injected.userRepository.load() }
+    var user: Candidate { return injected.userRepository.loadCandidate() }
     var userService: F4SUserServiceProtocol { return injected.userService}
     var databaseDownloadManager: F4SCompanyDownloadManagerProtocol { return injected.companyDownloadFileManager }
     var userNotificationService: UNService!

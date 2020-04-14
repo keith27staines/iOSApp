@@ -12,8 +12,10 @@ public protocol CoverletterCoordinatorProtocol: class {
 
 public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, CoverletterCoordinatorProtocol  {
     let templateProvider: TemplateProviderProtocol
+    weak var applyCoordinator: ApplyCoordinator?
     
-    public init(parent: Coordinating?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol, candidateDateOfBirth: Date) {
+    public init(parent: ApplyCoordinator?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol, candidateDateOfBirth: Date) {
+        self.applyCoordinator = parent
         self.templateProvider = TemplateProvider(candidateDateOfBirth: candidateDateOfBirth)
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
@@ -69,7 +71,8 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
     }
 
     public func onDidCompleteCoverLetter() {
-        print("coordinator received: onDidCompleteCoverLetter")
+        self.applyCoordinator?.coverLetterCoordinatorDidComplete(presenter: presenter)
+        self.parentCoordinator?.childCoordinatorDidFinish(self)
     }
 }
 

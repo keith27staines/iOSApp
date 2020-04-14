@@ -102,8 +102,8 @@
 		FCC4E67223EAFD5400ED6491 /* F4SHostTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC4E67123EAFD5400ED6491 /* F4SHostTests.swift */; };
 		FCC4E67623EAFE6500ED6491 /* ShortlistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC4E67523EAFE6500ED6491 /* ShortlistTests.swift */; };
 		FCC66B7223E035DA006F22AD /* LatLonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC66B7123E035DA006F22AD /* LatLonTests.swift */; };
-		FCDB07382286F6640053347F /* F4SUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB07372286F6640053347F /* F4SUser.swift */; };
-		FCDB073A2286F7870053347F /* F4SUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB07392286F7870053347F /* F4SUserRepository.swift */; };
+		FCDB07382286F6640053347F /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB07372286F6640053347F /* Candidate.swift */; };
+		FCDB073A2286F7870053347F /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB07392286F7870053347F /* UserRepository.swift */; };
 		FCDB073C2286F8B00053347F /* Analytics and debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB073B2286F8B00053347F /* Analytics and debugging.swift */; };
 		FCDFEA0C223D1CBC00E58649 /* WEXErrorsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDFEA0B223D1CBC00E58649 /* WEXErrorsFactory.swift */; };
 		FCDFEA12223D2CF500E58649 /* WEXResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDFEA11223D2CF500E58649 /* WEXResult.swift */; };
@@ -249,8 +249,8 @@
 		FCC4E67123EAFD5400ED6491 /* F4SHostTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SHostTests.swift; sourceTree = "<group>"; };
 		FCC4E67523EAFE6500ED6491 /* ShortlistTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortlistTests.swift; sourceTree = "<group>"; };
 		FCC66B7123E035DA006F22AD /* LatLonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatLonTests.swift; sourceTree = "<group>"; };
-		FCDB07372286F6640053347F /* F4SUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUser.swift; sourceTree = "<group>"; };
-		FCDB07392286F7870053347F /* F4SUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserRepository.swift; sourceTree = "<group>"; };
+		FCDB07372286F6640053347F /* Candidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Candidate.swift; sourceTree = "<group>"; };
+		FCDB07392286F7870053347F /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		FCDB073B2286F8B00053347F /* Analytics and debugging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Analytics and debugging.swift"; sourceTree = "<group>"; };
 		FCDFEA0B223D1CBC00E58649 /* WEXErrorsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEXErrorsFactory.swift; sourceTree = "<group>"; };
 		FCDFEA11223D2CF500E58649 /* WEXResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEXResult.swift; sourceTree = "<group>"; };
@@ -338,7 +338,7 @@
 		FC1FA08322FAABDE003EAE59 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				FCDB07372286F6640053347F /* F4SUser.swift */,
+				FCDB07372286F6640053347F /* Candidate.swift */,
 				FC1FA08122FAAB1B003EAE59 /* F4SUUIDDictionary.swift */,
 				FC1F591922FD7222007164BA /* F4SAnonymousUser.swift */,
 			);
@@ -413,7 +413,7 @@
 			children = (
 				FC53D6DB2323BA4300A339ED /* F4SCompanyRepository.swift */,
 				FC9670A5225A279300318F69 /* F4SInterestsRepositoryProtocol.swift */,
-				FCDB07392286F7870053347F /* F4SUserRepository.swift */,
+				FCDB07392286F7870053347F /* UserRepository.swift */,
 				FC06604F232645D800496FE2 /* F4SFavouritesRepository.swift */,
 			);
 			path = "Repository protocols";
@@ -764,12 +764,12 @@
 				FC22DC0822F9AC710068C61C /* F4STemplate.swift in Sources */,
 				FCDFEA0C223D1CBC00E58649 /* WEXErrorsFactory.swift in Sources */,
 				FC04B867233277080034A60E /* CoordinatorProtocols.swift in Sources */,
-				FCDB073A2286F7870053347F /* F4SUserRepository.swift in Sources */,
+				FCDB073A2286F7870053347F /* UserRepository.swift in Sources */,
 				FC32FD432265E4C800740F0C /* F4SContentType.swift in Sources */,
 				FC426EFE232FAC6C004F8A3E /* F4SNetworkSessionManagerProtocol.swift in Sources */,
 				FC22438F232F9E750073C9B1 /* F4SCompanyDatabaseMetaData.swift in Sources */,
 				FCE51937224948E400B550C9 /* F4SAvailabilityPeriod.swift in Sources */,
-				FCDB07382286F6640053347F /* F4SUser.swift in Sources */,
+				FCDB07382286F6640053347F /* Candidate.swift in Sources */,
 				FC12B10322F3415300C33410 /* JsonDateFormatterExtension.swift in Sources */,
 				FCDFEA12223D2CF500E58649 /* WEXResult.swift in Sources */,
 				FC390141234C9E0A009A9F7B /* MockF4SInterestsRepository.swift in Sources */,

@@ -38,7 +38,7 @@ public class F4SLog : F4SAnalyticsAndDebugging {
             bugsnagConfiguration.releaseStage = "production"
             bugsnagConfiguration.apiKey = "1b2c62d35dbf70232d3b4d4c5aca5ebe"
         }
-        let userUuid = F4SUser().uuid ?? "first_use_temp_\(UUID().uuidString)"
+        let userUuid = Candidate().uuid ?? "first_use_temp_\(UUID().uuidString)"
         bugsnagConfiguration.setUser(userUuid, withName:"", andEmail:"")
         Bugsnag.start(with: bugsnagConfiguration)
     }

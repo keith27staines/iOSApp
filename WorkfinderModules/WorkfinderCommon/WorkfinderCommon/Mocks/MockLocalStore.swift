@@ -26,17 +26,39 @@ public class MockLocalStore : LocalStorageProtocol {
     }
 }
 
-public class MockUserRepository: F4SUserRepositoryProtocol {
-    var user: F4SUser
-    public init(user: F4SUser) {
+public class MockUserRepository: UserRepositoryProtocol {
+    
+    var accessToken: String?
+    var user: User?
+    var candidate: Candidate?
+    
+    public func save(user: User) {
         self.user = user
     }
     
-    public func save(user: F4SUser) {
-        self.user = user
+    public func save(candidate: Candidate) {
+        self.candidate = candidate
     }
     
-    public func load() -> F4SUser {
-        return user
+    public func loadUser() -> User {
+        return user ?? User()
+    }
+    
+
+    public init(user: User? = nil, candidate: Candidate? = nil) {
+        self.user = user
+        self.candidate = candidate
+    }
+    
+    public func loadCandidate() -> Candidate {
+        return candidate ?? Candidate()
+    }
+    
+    public func loadAccessToken() -> String? {
+        return accessToken
+    }
+    
+    public func saveAccessToken(_ token: String) {
+        self.accessToken = token
     }
 }

@@ -287,7 +287,7 @@ public class MockF4SUserService: F4SUserServiceProtocol {
         
     }
     
-    public func updateUser(user: F4SUser, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ()) {
+    public func updateUser(user: Candidate, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ()) {
         fatalError()
     }
     

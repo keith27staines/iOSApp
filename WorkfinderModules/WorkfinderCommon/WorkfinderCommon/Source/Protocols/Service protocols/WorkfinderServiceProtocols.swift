@@ -57,7 +57,7 @@ public protocol F4SUserStatusServiceProtocol {
 }
 
 public protocol F4SUserServiceProtocol : class {
-    func updateUser(user: F4SUser, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ())
+    func updateUser(user: Candidate, completion: @escaping (F4SNetworkResult<F4SUserModel>) -> ())
     func enablePushNotificationForUser(installationUuid: F4SUUID, withDeviceToken: String, completion: @escaping (_ result: F4SNetworkResult<F4SPushNotificationStatus>) -> ())
 }
 

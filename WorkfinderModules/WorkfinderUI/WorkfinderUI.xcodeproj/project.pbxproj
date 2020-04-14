@@ -22,6 +22,8 @@
 		FC22DBF522F97ADC0068C61C /* LoadingOverlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBF422F97ADC0068C61C /* LoadingOverlayTests.swift */; };
 		FC22DBF722F97CD70068C61C /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBF622F97CD70068C61C /* UIColor+Extensions.swift */; };
 		FC22DBF922F97CEB0068C61C /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBF822F97CEB0068C61C /* UIFont+Extensions.swift */; };
+		FC343CFE2446141700347BC2 /* UnderlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC343CFD2446141700347BC2 /* UnderlineView.swift */; };
+		FC343D0024461A6900347BC2 /* UnderlinedNextResponderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC343CFF24461A6900347BC2 /* UnderlinedNextResponderTextField.swift */; };
 		FC5CBA55231D2C4D00C2D3C5 /* F4SCompanyHeaderViewWithLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBA54231D2C4D00C2D3C5 /* F4SCompanyHeaderViewWithLogo.swift */; };
 		FC5CBA57231D2C7D00C2D3C5 /* F4SRoundIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBA56231D2C7D00C2D3C5 /* F4SRoundIconView.swift */; };
 		FC93DBDF231F981D00F1CE23 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DBDE231F981D00F1CE23 /* ContentViewController.swift */; };
@@ -71,6 +73,8 @@
 		FC22DBF422F97ADC0068C61C /* LoadingOverlayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingOverlayTests.swift; sourceTree = "<group>"; };
 		FC22DBF622F97CD70068C61C /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		FC22DBF822F97CEB0068C61C /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
+		FC343CFD2446141700347BC2 /* UnderlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineView.swift; sourceTree = "<group>"; };
+		FC343CFF24461A6900347BC2 /* UnderlinedNextResponderTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedNextResponderTextField.swift; sourceTree = "<group>"; };
 		FC5CBA54231D2C4D00C2D3C5 /* F4SCompanyHeaderViewWithLogo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCompanyHeaderViewWithLogo.swift; sourceTree = "<group>"; };
 		FC5CBA56231D2C7D00C2D3C5 /* F4SRoundIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SRoundIconView.swift; sourceTree = "<group>"; };
 		FC93DBDC231F981C00F1CE23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "f4s-workexperience/Base.lproj/Content.storyboard"; sourceTree = "<group>"; };
@@ -135,6 +139,16 @@
 				FC22DBE522F979750068C61C /* Skinner.swift */,
 			);
 			path = Skinning;
+			sourceTree = "<group>";
+		};
+		FC343D0124461F9400347BC2 /* Underline text view */ = {
+			isa = PBXGroup;
+			children = (
+				FC343CFF24461A6900347BC2 /* UnderlinedNextResponderTextField.swift */,
+				FC93DC3923200BC100F1CE23 /* NextResponderTextField.swift */,
+				FC343CFD2446141700347BC2 /* UnderlineView.swift */,
+			);
+			path = "Underline text view";
 			sourceTree = "<group>";
 		};
 		FC93DBE0231F982600F1CE23 /* Content view controller */ = {
@@ -225,7 +239,7 @@
 				FCB4EACF2424D231001D5D23 /* TriangleView.swift */,
 				FC0C7108232BA38700816332 /* OptionLabel.swift */,
 				FCA91EBE223406B4007ED308 /* WorkfinderUI.swift */,
-				FC93DC3923200BC100F1CE23 /* NextResponderTextField.swift */,
+				FC343D0124461F9400347BC2 /* Underline text view */,
 				FC22DBF022F97A960068C61C /* LoadingOverlay.swift */,
 				FC22DBF222F97AAB0068C61C /* UserMessageHandler.swift */,
 				FC9535A0231E448D00F4A9DA /* F4SSelfLoadingImageView.swift */,
@@ -362,6 +376,7 @@
 				FCEB1D25229FC6D600C6D2C2 /* UIView+Extensions.swift in Sources */,
 				FC93DC3A23200BC100F1CE23 /* NextResponderTextField.swift in Sources */,
 				FCA91EBF223406B4007ED308 /* WorkfinderUI.swift in Sources */,
+				FC343D0024461A6900347BC2 /* UnderlinedNextResponderTextField.swift in Sources */,
 				FC22DBED22F979E90068C61C /* UIViewController+Extensions.swift in Sources */,
 				FC22DBF322F97AAB0068C61C /* UserMessageHandler.swift in Sources */,
 				FC22DBEA22F979750068C61C /* Skin.swift in Sources */,
@@ -384,6 +399,7 @@
 				FCB4EAD22424D231001D5D23 /* TriangleView.swift in Sources */,
 				FCB4EADA24253F36001D5D23 /* StarRatingView.swift in Sources */,
 				FC22DBF122F97A960068C61C /* LoadingOverlay.swift in Sources */,
+				FC343CFE2446141700347BC2 /* UnderlineView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

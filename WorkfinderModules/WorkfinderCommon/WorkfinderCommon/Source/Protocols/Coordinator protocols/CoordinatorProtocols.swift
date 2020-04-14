@@ -65,9 +65,9 @@ public protocol CoreInjectionProtocol : class {
     var appCoordinator: AppCoordinatorProtocol? { get set }
     var appInstallationLogic: AppInstallationLogicProtocol { get }
     var launchOptions: LaunchOptions? { get set }
-    var user: F4SUser { get set }
+    var user: Candidate { get set }
     var userService: F4SUserServiceProtocol { get }
-    var userRepository: F4SUserRepositoryProtocol { get }
+    var userRepository: UserRepositoryProtocol { get }
     var companyDownloadFileManager: F4SCompanyDownloadManagerProtocol { get }
     var log: F4SAnalyticsAndDebugging { get }
     var appSettings: AppSettingProvider { get }

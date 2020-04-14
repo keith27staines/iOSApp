@@ -15,8 +15,8 @@ import WorkfinderCoordinators
 class ApplyCoordinatorTests: XCTestCase {
     
     let mockRouter = MockNavigationRouter()
-    let mockRegisteredUser = F4SUser(uuid: "userUuid1234")
-    let mockUnregisteredUser = F4SUser()
+    let mockRegisteredUser = Candidate(uuid: "userUuid1234")
+    let mockUnregisteredUser = Candidate()
     let mockUserService = MockF4SUserService(registeringWillSucceedOnAttempt: 1)
     let mockUserStatusService = MockF4SUserStatusService()
     let mockDatabaseDownloadManager = MockDatabaseDownloadManager()

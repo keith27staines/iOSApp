@@ -73,7 +73,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         return CoreInjection(
             launchOptions: self.launchOptions,
             appInstallationLogic: self.appInstallationLogic,
-            user: self.userRepo.load(),
+            user: self.userRepo.loadCandidate(),
             userService: self.userService,
             userRepository: self.userRepo,
             companyDownloadFileManager: self.companyFileDownloadManager,
@@ -139,8 +139,8 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         return LocalStore()
     }()
     
-    lazy var userRepo: F4SUserRepositoryProtocol = {
-        return F4SUserRepository(localStore: self.localStore)
+    lazy var userRepo: UserRepositoryProtocol = {
+        return UserRepository(localStore: self.localStore)
     }()
     
     lazy var companyFileDownloadManager: F4SCompanyDownloadManagerProtocol = {

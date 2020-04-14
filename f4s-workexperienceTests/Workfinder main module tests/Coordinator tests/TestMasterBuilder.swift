@@ -96,9 +96,9 @@ class TestMasterBuilder: TabbarCoordinatorFactoryProtocol {
     lazy var mockPlacementDocumentsServiceFactory = MockF4SPlacementDocumentsServiceFactory()
     lazy var mockRecommendationsService = MockF4SRecommendationService()
     lazy var mockRoleService = MockF4SRoleService()
-    lazy var user: F4SUser = { return F4SUser() }()
-    lazy var userRepo: F4SUserRepository = {
-        return F4SUserRepository(localStore: self.mockLocalStore)
+    lazy var user: Candidate = { return Candidate() }()
+    lazy var userRepo: UserRepository = {
+        return UserRepository(localStore: self.mockLocalStore)
     }()
     lazy var mockUserService = MockF4SUserService(registeringWillSucceedOnAttempt: 1)
     lazy var mockUserStatusService = MockUserStatusService()
@@ -113,11 +113,11 @@ class TestMasterBuilder: TabbarCoordinatorFactoryProtocol {
     init(userIsRegistered: Bool, versionIsOkay: Bool) {
         self.installationUuid = "installation uuid" //userIsRegistered ? "installation uuid" : nil
         self.versionIsOkay = versionIsOkay
-        var user: F4SUser = F4SUser()
+        var user: Candidate = Candidate()
         if userIsRegistered {
             user.uuid = "anonymous user uuid"
         }
-        self.userRepo.save(user: user)
+        self.userRepo.save(candidate: user)
     }
     
     func makeTabBarCoordinator(parent: Coordinating,

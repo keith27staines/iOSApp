@@ -28,7 +28,7 @@ public class UserDetailsCoordinator : CoreInjectionNavigationCoordinator {
     public override func start() {
         let userDetailsStoryboard = UIStoryboard(name: "UserDetails", bundle: __bundle)
         let userDetailsViewController = userDetailsStoryboard.instantiateViewController(withIdentifier: "UserDetailsViewController") as! UserDetailsViewController
-        let user = injected.userRepository.load()
+        let user = injected.userRepository.loadCandidate()
         let viewModel = UserDetailsViewModel(user: user, coordinator: self)
         userDetailsViewController.coordinator = self
         userDetailsViewController.inject(
