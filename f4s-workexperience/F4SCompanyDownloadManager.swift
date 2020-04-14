@@ -76,8 +76,7 @@ public class F4SCompanyDownloadManager  : NSObject, F4SCompanyDownloadManagerPro
     }
     
     public var companyDownloadFileDatestamp: Date? {
-        let date = UserDefaults.standard.value(forKey: UserDefaultsKeys.companyDatabaseCreatedDate) as? Date
-        return date
+        return LocalStore().value(key: LocalStore.Key.companyDatabaseCreatedDate) as? Date
     }
     
 
@@ -156,8 +155,7 @@ extension F4SCompanyDownloadManager : F4SDownloadServiceDelegate {
             guard let decompressedData = compressedData.decompress(withAlgorithm: Data.CompressionAlgorithm.lzma) else { return }
             try decompressedData.write(to: stagedCompanyDownloadFileUrl)
 
-            // Write downloadedDate to user defaults
-            UserDefaults.standard.set(Date(), forKey: UserDefaultsKeys.companyDatabaseCreatedDate)
+            LocalStore().setValue(Date(), for: LocalStore.Key.companyDatabaseCreatedDate)
             
             // Advise observers that a new database is available at the staging location
             companyDownloadFileAvailabilityObservers.forEach({ (boxedObserver) in

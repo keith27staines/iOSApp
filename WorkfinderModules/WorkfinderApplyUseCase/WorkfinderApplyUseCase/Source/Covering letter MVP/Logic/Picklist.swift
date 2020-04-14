@@ -75,16 +75,16 @@ public class Picklist: PicklistProtocol {
         case universities
         case year
         case availabilityPeriod
-        case freeTextBlock1
-        case freeTextBlock2
-        case freeTextBlock3
+        case motivation
+        case reason
+        case experience
         var providerType: ProviderType {
             switch self {
             case .roles, .skills, .attributes, .universities:
                 return .network
             case .year:
                 return .clientTextField
-            case .freeTextBlock1,.freeTextBlock2, .freeTextBlock3:
+            case .motivation,.reason, .experience:
                 return .clientTextField
             case .availabilityPeriod:
                 return .clientAvailabilityPeriod
@@ -155,12 +155,12 @@ public class Picklist: PicklistProtocol {
             return NSLocalizedString("university", comment: "")
         case .year:
             return NSLocalizedString("year", comment: "")
-        case .freeTextBlock1:
-            return NSLocalizedString("free text 1", comment: "")
-        case .freeTextBlock2:
-            return NSLocalizedString("free text 2", comment: "")
-        case .freeTextBlock3:
-            return NSLocalizedString("free text 3", comment: "")
+        case .motivation:
+            return NSLocalizedString("motivation", comment: "")
+        case .reason:
+            return NSLocalizedString("reason", comment: "")
+        case .experience:
+            return NSLocalizedString("experience", comment: "")
         case .availabilityPeriod:
             return NSLocalizedString("availability", comment: "")
         }
@@ -180,8 +180,12 @@ public class Picklist: PicklistProtocol {
             return NSLocalizedString("Select your year of study", comment: "")
         case .availabilityPeriod:
             return NSLocalizedString("Select your availability", comment: "")
-        case .freeTextBlock1, .freeTextBlock2, .freeTextBlock3:
-            return "free text"
+        case .motivation:
+            return NSLocalizedString("your motivation", comment: "")
+        case .reason:
+            return NSLocalizedString("your reason for applying", comment: "")
+        case .experience:
+            return NSLocalizedString("Your experience", comment: "")
         }
     }()
     
@@ -200,7 +204,7 @@ public class Picklist: PicklistProtocol {
             return NSLocalizedString("Selected", comment: "")
         case .availabilityPeriod:
             return NSLocalizedString("Selected", comment: "")
-        case .freeTextBlock1, .freeTextBlock2, .freeTextBlock3:
+        case .motivation, .reason, .experience:
             return NSLocalizedString("Selected", comment: "")
         }
     }

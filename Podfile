@@ -7,10 +7,12 @@ target 'f4s-workexperience' do
     
     # Pods for f4s-workexperience
     pod 'ReachabilitySwift'
-    pod 'XCGLogger'
+    
     pod 'KeychainSwift'
     pod 'GoogleMaps'
     pod 'GooglePlaces'
+    
+    pod 'XCGLogger'
     pod 'Bugsnag'
     pod 'DataCompression'
     pod 'Firebase/Core'

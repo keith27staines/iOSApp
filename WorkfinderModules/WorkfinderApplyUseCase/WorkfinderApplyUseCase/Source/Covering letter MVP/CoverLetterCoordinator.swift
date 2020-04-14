@@ -43,9 +43,15 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
         .universities: Picklist(type: .universities, maximumPicks: 1),
         .year: UniversityYearPicklist(),
         .availabilityPeriod: AvailabilityPeriodPicklist(),
-        .freeTextBlock1: TextblockPicklist(type: .freeTextBlock1, placeholder: "Placeholder text 1"),
-        .freeTextBlock2: TextblockPicklist(type: .freeTextBlock2, placeholder: "Placeholder text 2"),
-        .freeTextBlock3: TextblockPicklist(type: .freeTextBlock3, placeholder: "Placeholder text 3")
+        .motivation: TextblockPicklist(
+            type: .motivation,
+            placeholder: "My motivation for seeking work experience is..."),
+        .reason: TextblockPicklist(
+            type: .reason,
+            placeholder: "I’m particularly interested in working with you or your company because..."),
+        .experience: TextblockPicklist(
+            type: .experience,
+            placeholder: "My relevant experience is... or why you should consider me")
     ]
     
     var picklistsDidUpdate: ((PicklistsDictionary) -> Void)?
@@ -79,7 +85,7 @@ extension CoverLetterCoordinator: LetterEditorCoordinatorProtocol {
             vc.delegate = self
             navigationRouter.push(viewController: vc, animated: true)
             break
-        case .freeTextBlock1, .freeTextBlock2, .freeTextBlock3:
+        case .motivation, .reason, .experience:
             let vc = FreeTextEditorViewController(coordinator: self, freeTextPicker: picklist as! TextblockPicklist)
             navigationRouter.push(viewController: vc, animated: true)
         }

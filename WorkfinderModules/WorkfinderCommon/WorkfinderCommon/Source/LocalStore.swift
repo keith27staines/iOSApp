@@ -21,25 +21,20 @@ extension UserDefaults : LocalStorageProtocol {
 public class LocalStore : LocalStorageProtocol {
     let userDefaults: UserDefaults
     public enum Key : String{
-        case invokingUrl
-        case partnerID
-        case hasPartnerIDBeenSentToServer = "hasParnerIDBeenSentToServer"
+        case appVersion
         case user
         case userUuid
-        case companyDatabaseCreatedDate
+
         case isFirstLaunch
         case installationUuid
         case isDeviceRegistered
-        case shouldLoadTimeline
-        case userPopulatedTemplateBlanksData
-        case availabilityPeriodJsonData
-        case recommendedCompaniesJsonData
+
         case verifiedEmailKey
         case emailSentForVerificationKey
-        case motivationKey
-        case useDefaultMotivation
         case interests
-        case workfinderBaseUrl
+        
+        case companyDatabaseCreatedDate = "companyDatabaseCreatedDate"
+        case shouldLoadTimeline = "shouldLoadTimeline"
     }
     
     public init(userDefaults: UserDefaults = .standard) {

@@ -54,12 +54,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     }
     
     public func navigateToMostAppropriateInitialTab() {
-        let shouldLoadTimeline = UserDefaults.standard.value(forKey: UserDefaultsKeys.shouldLoadTimeline) as? Bool ?? false
-        if shouldLoadTimeline {
-            navigateToTimeline()
-        } else {
-            navigateToMap()
-        }
+        navigateToMap()
     }
     
     public func updateBadges() {

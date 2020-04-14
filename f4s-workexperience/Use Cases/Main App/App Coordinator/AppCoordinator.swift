@@ -128,13 +128,13 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     
     var shouldShowTimeline: Bool = false {
         didSet {
-            UserDefaults.standard.set(false, forKey: UserDefaultsKeys.shouldLoadTimeline)
+            localStore.setValue(false, for: LocalStore.Key.shouldLoadTimeline)
         }
     }
     
     private func onUserIsRegistered(userUuid: F4SUUID) {
         injected.user.uuid = userUuid
-        injected.userRepository.save(user: injected.user)
+        //injected.userRepository.save(user: injected.user)
         logStartupInformation(userId: userUuid)
         injected.log.identity(userId: userUuid)
         registrar.registerForRemoteNotifications()

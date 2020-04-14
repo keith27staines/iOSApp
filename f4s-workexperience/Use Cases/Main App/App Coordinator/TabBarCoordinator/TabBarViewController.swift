@@ -36,7 +36,7 @@ class TabBarViewController: UITabBarController {
     func processUserStatusUpdate(_ status: F4SUserStatus) {
         configureTimelineTabBarWithCount(count: status.unreadMessageCount)
         let shouldLoadTimeline = status.unreadMessageCount > 0
-        UserDefaults.standard.set(shouldLoadTimeline, forKey: UserDefaultsKeys.shouldLoadTimeline)
+        LocalStore().setValue(shouldLoadTimeline, for: LocalStore.Key.shouldLoadTimeline)
     }
     
     func configureTimelineTabBarWithCount(count: Int? = 0) {

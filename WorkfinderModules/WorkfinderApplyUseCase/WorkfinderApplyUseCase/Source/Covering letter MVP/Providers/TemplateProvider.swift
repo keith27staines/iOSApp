@@ -7,14 +7,14 @@ public protocol TemplateProviderProtocol {
 fileprivate let testTemplate = TemplateModel(uuid: "", templateString:
     """
        Dear Sir/Madam
-       {{free text 1}}
+       {{motivation}}
        I would like to apply for the {{role}} role at your company.
        I wish to acquire the following skills: {{skills}}.
        I consider myself to have the following personal attributes: {{attributes}}.
        I am in year {{year}} of study at {{university}}.
-       {{free text 2}}
+       {{reason}}
        I will be available between {{availability}}
-       {{free text 3}}
+       {{experience}}
     """)
 
 public class TemplateProvider: TemplateProviderProtocol{

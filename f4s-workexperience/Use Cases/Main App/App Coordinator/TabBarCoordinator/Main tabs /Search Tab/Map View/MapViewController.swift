@@ -685,14 +685,6 @@ extension MapViewController {
                     userMessageHandler.showLoadingOverlay(view)
                 }
             }
-        } else {
-            if UserDefaults.standard.object(forKey: UserDefaultsKeys.companyDatabaseCreatedDate) == nil {
-                DispatchQueue.main.async { [weak self] in
-                    guard let this = self else { return }
-                    this.userMessageHandler.hideLoadingOverlay()
-                    this.userMessageHandler.displayAlertFor("No Internet Connection.", parentCtrl: this)
-                }
-            }
         }
     }
 }
