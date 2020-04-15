@@ -4,6 +4,7 @@ import WorkfinderUI
 
 class RegisterUserViewController: UIViewController {
     let presenter: RegisterUserPresenterProtocol
+    let messageHandler = UserMessageHandler()
     
     init(presenter: RegisterUserPresenterProtocol) {
         self.presenter = presenter
@@ -74,9 +75,10 @@ class RegisterUserViewController: UIViewController {
         return stack
     }()
     
-    lazy var fieldsAndButtonStack: UIStackView = {
+    lazy var fieldAndButtonStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
             self.fieldStack,
+            self.alreadyHaveAccountButton,
             self.registerButton
         ])
         stack.axis = .vertical
@@ -86,9 +88,9 @@ class RegisterUserViewController: UIViewController {
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
-        view.addSubview(fieldsAndButtonStack)
-        fieldsAndButtonStack.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20), size: CGSize.zero)
-        fullname.textfield.becomeFirstResponder()
+        view.addSubview(fieldAndButtonStack)
+        fieldAndButtonStack.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20), size: CGSize.zero)
+        presenter.onViewDidLoad(self)
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -103,7 +105,12 @@ class RegisterUserViewController: UIViewController {
         return button
     }()
     
-    let messageHandler = UserMessageHandler()
+    lazy var alreadyHaveAccountButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Already have an account?", for: .normal)
+        button.addTarget(self, action: #selector(onTapAlreadyHaveAccount), for: .touchUpInside)
+        return button
+    }()
     
     @objc func onTapRegister() {
         messageHandler.showLoadingOverlay(self.view)
@@ -112,6 +119,10 @@ class RegisterUserViewController: UIViewController {
             self.messageHandler.hideLoadingOverlay()
             self.messageHandler.displayAlertFor(error.localizedDescription, parentCtrl: self)
         }
+    }
+    
+    @objc func onTapAlreadyHaveAccount() {
+        presenter.onDidTapAlreadyHaveAccount()
     }
     
     func makeTextView(fieldName: String,

@@ -14,12 +14,16 @@ protocol RegisterUserPresenterProtocol: class {
     var emailValidator: (String) -> UnderlineView.State { get }
     var isRegisterButtonEnabled: Bool { get }
     func onDidTapRegister(onFailure: @escaping ((Error) -> Void))
+    func onDidTapAlreadyHaveAccount()
+    func onViewDidLoad(_ view: RegisterUserViewController)
 }
 
 class RegisterUserPresenter: RegisterUserPresenterProtocol {
     let userRepository: UserRepositoryProtocol
     let service: RegisterUserServiceProtocol
     var user: User
+    var coordinator: RegisterAndSignInCoordinatorProtocol?
+    weak var view: RegisterUserViewController?
     
     static func validateCharacterCount(string: String, min: Int, max: Int) -> UnderlineView.State {
         switch string.trimmingCharacters(in: .whitespaces).count {
@@ -77,18 +81,26 @@ class RegisterUserPresenter: RegisterUserPresenterProtocol {
     }
     
     func onDidTapRegister(onFailure: @escaping ((Error) -> Void)) {
+        saveCredentials()
         service.registerUser(user: user) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .success(let token):
                 self.userRepository.saveAccessToken(token.key)
-                self.coordinator?.onDidRegister(user: self.user)
+                self.coordinator?.onDidRegister(user: self.user,pop: true)
             case .failure(let error):
                 onFailure(error)
             }
         }
     }
-    var coordinator: RegisterAndSignInCoordinatorProtocol?
+    
+    func onDidTapAlreadyHaveAccount() {
+        guard let view = self.view else { return }
+        view.messageHandler.displayWithTitle("Not implemented", "This feature hasn't been implemented yet", parentCtrl: view)
+    }
+    
+    func onViewDidLoad(_ view: RegisterUserViewController) { self.view = view }
+    
     init(coordinator: RegisterAndSignInCoordinatorProtocol, userRepository: UserRepositoryProtocol, service: RegisterUserServiceProtocol) {
         self.coordinator = coordinator
         self.userRepository = userRepository

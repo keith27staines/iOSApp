@@ -55,7 +55,9 @@ class LetterEditorViewController: UIViewController, LetterEditorViewProtocol {
 }
 
 extension LetterEditorViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return indexPath.row.isMultiple(of: 2)
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row.isMultiple(of: 2) {
