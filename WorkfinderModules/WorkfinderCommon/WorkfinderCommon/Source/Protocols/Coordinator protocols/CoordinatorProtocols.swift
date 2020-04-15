@@ -62,6 +62,7 @@ public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorPr
 }
 
 public protocol CoreInjectionProtocol : class {
+    var networkConfig: NetworkConfig { get set }
     var appCoordinator: AppCoordinatorProtocol? { get set }
     var appInstallationLogic: AppInstallationLogicProtocol { get }
     var launchOptions: LaunchOptions? { get set }

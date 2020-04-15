@@ -10,6 +10,16 @@ public struct NetworkConfig {
     /// Manages network sessions
     public let sessionManager: F4SNetworkSessionManagerProtocol
     
+    public func buildUrlRequest(url: URL, verb: F4SHttpRequestVerb, body: Data?) -> URLRequest {
+        var request = URLRequest(url: url)
+        request.httpBody = body
+        request.httpMethod = verb.name
+        if let token = userRepository.loadAccessToken() {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+        return request
+    }
+    
     /// A logger designed to capture full details of network errors
     public let logger: NetworkCallLoggerProtocol
     

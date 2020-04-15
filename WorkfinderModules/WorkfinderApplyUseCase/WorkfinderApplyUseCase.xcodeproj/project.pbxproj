@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		FC0B6B332323CDC800A1867D /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0B6B322323CDC800A1867D /* WorkfinderCoordinators.framework */; };
+		FC17E49B2447185F00A58AEB /* RegisterUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC17E49A2447185F00A58AEB /* RegisterUserService.swift */; };
+		FC17E49D244731F500A58AEB /* UserLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC17E49C244731F500A58AEB /* UserLoginService.swift */; };
 		FC1EBEBD2248E0A500416D70 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */; };
 		FC1EBEBE2248E0AC00416D70 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */; };
 		FC1EBEBF2248E0D600416D70 /* ApplicationLetterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626532248CDB100D5F850 /* ApplicationLetterViewModelTests.swift */; };
@@ -45,9 +47,9 @@
 		FC29994A231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC299946231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard */; };
 		FC29994B231ED87600F83FB6 /* F4SDaysAndHours.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC299947231ED87600F83FB6 /* F4SDaysAndHours.storyboard */; };
 		FC29994F231EE4F800F83FB6 /* Calendar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC299944231ED35100F83FB6 /* Calendar.xcassets */; };
-		FC343CF82445F10A00347BC2 /* UserSigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC343CF72445F10A00347BC2 /* UserSigninViewController.swift */; };
-		FC343CFA2445F17600347BC2 /* UserSignInCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC343CF92445F17600347BC2 /* UserSignInCoordinator.swift */; };
-		FC343CFC244600EF00347BC2 /* UserSigninPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC343CFB244600EF00347BC2 /* UserSigninPresenter.swift */; };
+		FC343CF82445F10A00347BC2 /* RegisterUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC343CF72445F10A00347BC2 /* RegisterUserViewController.swift */; };
+		FC343CFA2445F17600347BC2 /* RegisterAndSignInCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC343CF92445F17600347BC2 /* RegisterAndSignInCoordinator.swift */; };
+		FC343CFC244600EF00347BC2 /* RegisterUserPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC343CFB244600EF00347BC2 /* RegisterUserPresenter.swift */; };
 		FC4066FB23277C16002B425E /* WorkfinderDocumentUploadUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4066FA23277C16002B425E /* WorkfinderDocumentUploadUseCase.framework */; };
 		FC42C8A3243C599000F81232 /* LetterEditorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC42C8A2243C599000F81232 /* LetterEditorPresenter.swift */; };
 		FC42C8A6243C5C9A00F81232 /* PicklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC42C8A5243C5C9A00F81232 /* PicklistViewController.swift */; };
@@ -83,6 +85,8 @@
 /* Begin PBXFileReference section */
 		FC0B6B322323CDC800A1867D /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC0B6B342323CDC800A1867D /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC17E49A2447185F00A58AEB /* RegisterUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserService.swift; sourceTree = "<group>"; };
+		FC17E49C244731F500A58AEB /* UserLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginService.swift; sourceTree = "<group>"; };
 		FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1EBEC22248E37B00416D70 /* ApplicationLetterModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationLetterModelTests.swift; sourceTree = "<group>"; };
 		FC22DBFA22F97F330068C61C /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,9 +120,9 @@
 		FC299944231ED35100F83FB6 /* Calendar.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Calendar.xcassets; sourceTree = "<group>"; };
 		FC299946231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SDisplayInformationViewController.storyboard; sourceTree = "<group>"; };
 		FC299948231ED87600F83FB6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/F4SDaysAndHours.storyboard; sourceTree = "<group>"; };
-		FC343CF72445F10A00347BC2 /* UserSigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSigninViewController.swift; sourceTree = "<group>"; };
-		FC343CF92445F17600347BC2 /* UserSignInCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSignInCoordinator.swift; sourceTree = "<group>"; };
-		FC343CFB244600EF00347BC2 /* UserSigninPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSigninPresenter.swift; sourceTree = "<group>"; };
+		FC343CF72445F10A00347BC2 /* RegisterUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserViewController.swift; sourceTree = "<group>"; };
+		FC343CF92445F17600347BC2 /* RegisterAndSignInCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterAndSignInCoordinator.swift; sourceTree = "<group>"; };
+		FC343CFB244600EF00347BC2 /* RegisterUserPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserPresenter.swift; sourceTree = "<group>"; };
 		FC4066FA23277C16002B425E /* WorkfinderDocumentUploadUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderDocumentUploadUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC42C8A2243C599000F81232 /* LetterEditorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterEditorPresenter.swift; sourceTree = "<group>"; };
 		FC42C8A5243C5C9A00F81232 /* PicklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicklistViewController.swift; sourceTree = "<group>"; };
@@ -282,9 +286,11 @@
 		FC343CF62445F0E200347BC2 /* User sign in */ = {
 			isa = PBXGroup;
 			children = (
-				FC343CF92445F17600347BC2 /* UserSignInCoordinator.swift */,
-				FC343CF72445F10A00347BC2 /* UserSigninViewController.swift */,
-				FC343CFB244600EF00347BC2 /* UserSigninPresenter.swift */,
+				FC343CF92445F17600347BC2 /* RegisterAndSignInCoordinator.swift */,
+				FC343CF72445F10A00347BC2 /* RegisterUserViewController.swift */,
+				FC343CFB244600EF00347BC2 /* RegisterUserPresenter.swift */,
+				FC17E49A2447185F00A58AEB /* RegisterUserService.swift */,
+				FC17E49C244731F500A58AEB /* UserLoginService.swift */,
 			);
 			path = "User sign in";
 			sourceTree = "<group>";
@@ -553,7 +559,7 @@
 				FC29992D231EC41A00F83FB6 /* F4SHoursPickerViewController.swift in Sources */,
 				FC23BD03243B33510075F359 /* PicklistProvider.swift in Sources */,
 				FC42C8A3243C599000F81232 /* LetterEditorPresenter.swift in Sources */,
-				FC343CFC244600EF00347BC2 /* UserSigninPresenter.swift in Sources */,
+				FC343CFC244600EF00347BC2 /* RegisterUserPresenter.swift in Sources */,
 				FC29992E231EC41A00F83FB6 /* F4SSelectDayTableViewCell.swift in Sources */,
 				FC23BCE4243AFA730075F359 /* DateOfBirthCollectorViewController.swift in Sources */,
 				FC29992C231EC41A00F83FB6 /* F4SDisplayInformationViewController.swift in Sources */,
@@ -562,7 +568,7 @@
 				FC23BCE8243B30A10075F359 /* ApplicationModel.swift in Sources */,
 				FC9626392248C1A900D5F850 /* EditApplicationLetterButton.swift in Sources */,
 				FC23BCFD243B33510075F359 /* TemplateProvider.swift in Sources */,
-				FC343CF82445F10A00347BC2 /* UserSigninViewController.swift in Sources */,
+				FC343CF82445F10A00347BC2 /* RegisterUserViewController.swift in Sources */,
 				FC23BD04243B33510075F359 /* CoverLetterViewPresenter.swift in Sources */,
 				FC23BD05243B33510075F359 /* PickListJson.swift in Sources */,
 				FC29992B231EC41A00F83FB6 /* F4SDaysAndHoursViewController.swift in Sources */,
@@ -572,14 +578,16 @@
 				FC299935231EC50300F83FB6 /* F4SMonthHeaderView.swift in Sources */,
 				FC299936231EC50300F83FB6 /* F4SCalendarColors.swift in Sources */,
 				FC23BCFF243B33510075F359 /* TemplateParser.swift in Sources */,
+				FC17E49B2447185F00A58AEB /* RegisterUserService.swift in Sources */,
 				FC23BD00243B33510075F359 /* Common.swift in Sources */,
 				FC23BD06243B33510075F359 /* TemplateModel.swift in Sources */,
+				FC17E49D244731F500A58AEB /* UserLoginService.swift in Sources */,
 				FCE8DA9A2320E24600934E2F /* ApplyCoordinator.swift in Sources */,
 				FC42C8A6243C5C9A00F81232 /* PicklistViewController.swift in Sources */,
 				FC23BD02243B33510075F359 /* Grammer.swift in Sources */,
 				FC23BD07243B33510075F359 /* NetworkError.swift in Sources */,
 				FC84A669243EF43F00C9D158 /* FreeTextEditorViewController.swift in Sources */,
-				FC343CFA2445F17600347BC2 /* UserSignInCoordinator.swift in Sources */,
+				FC343CFA2445F17600347BC2 /* RegisterAndSignInCoordinator.swift in Sources */,
 				FC299937231EC50300F83FB6 /* F4SCalendarCollectionViewController.swift in Sources */,
 				FCE8DA892320D3CB00934E2F /* SuccessExtraInfoViewController.swift in Sources */,
 			);

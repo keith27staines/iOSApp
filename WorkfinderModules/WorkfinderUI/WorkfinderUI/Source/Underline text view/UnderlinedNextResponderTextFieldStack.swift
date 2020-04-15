@@ -1,7 +1,7 @@
 
 import UIKit
 
-public class UnderlinedNextResponderTextField: UIStackView {
+public class UnderlinedNextResponderTextFieldStack: UIStackView {
     
     lazy var label: UILabel = {
         let label = UILabel()
@@ -12,12 +12,13 @@ public class UnderlinedNextResponderTextField: UIStackView {
     
     public var textfield: NextResponderTextField = {
         let nextResponderField = NextResponderTextField()
-        nextResponderField.addTarget(self, action: #selector(_textChanged), for: .valueChanged)
+        nextResponderField.font = UIFont.systemFont(ofSize: 24)
+        nextResponderField.addTarget(self, action: #selector(_textChanged), for: .editingChanged)
         return nextResponderField
     }()
     
-    let underline: UnderlineView
-    var textChanged: ((String?) -> Void)?
+    public let underline: UnderlineView
+    public var textChanged: ((String?) -> Void)?
     
     @objc func _textChanged() {
         textChanged?(textfield.text)

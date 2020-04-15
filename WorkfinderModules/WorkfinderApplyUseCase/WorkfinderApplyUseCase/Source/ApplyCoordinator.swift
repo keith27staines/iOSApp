@@ -68,9 +68,8 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     }
     
     func showDateOfBirth() {
-        startSigninCoordinator()
-//        let dobVC = DateOfBirthCollectorViewController(coordinator: self)
-//        navigationRouter.push(viewController: dobVC, animated: true)
+        let dobVC = DateOfBirthCollectorViewController(coordinator: self)
+        navigationRouter.push(viewController: dobVC, animated: true)
     }
     
     var coverletterCoordinator: CoverletterCoordinatorProtocol?
@@ -87,13 +86,20 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     }
     
     func startSigninCoordinator() {
-        let coordinator = UserSignInCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected)
+        let coordinator = RegisterAndSignInCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected)
         addChildCoordinator(coordinator)
         coordinator.start()
     }
     
     deinit {
         print("ApplyCoordinator did deinit")
+    }
+}
+
+extension ApplyCoordinator: RegisterAndSignInCoordinatorParent {
+    func onDidRegister(user: User, pop: Bool = true) {
+        if pop { navigationRouter.pop(animated: true) }
+        
     }
 }
 

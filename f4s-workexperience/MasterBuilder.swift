@@ -72,6 +72,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     lazy var injection: CoreInjectionProtocol = {
         return CoreInjection(
             launchOptions: self.launchOptions,
+            networkConfig: self.networkConfiguration,
             appInstallationLogic: self.appInstallationLogic,
             user: self.userRepo.loadCandidate(),
             userService: self.userService,

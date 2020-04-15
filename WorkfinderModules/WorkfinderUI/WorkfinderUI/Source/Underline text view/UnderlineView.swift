@@ -21,8 +21,11 @@ public class UnderlineView: UIView {
     public var state: State = .empty {
         didSet {
             lineView.backgroundColor = color
+            let width = self.bounds.size.width
+            self.valueConstraint.constant = self.state == .empty ? 0.0 : width
             UIView.animate(withDuration: 0.3) {
-                self.valueConstraint.constant = self.state == .empty ? 0.0 : 1.0
+                self.layoutIfNeeded()
+                self.lineView.layoutIfNeeded()
             }
         }
     }
@@ -45,6 +48,8 @@ public class UnderlineView: UIView {
                         bottom: self.bottomAnchor,
                         trailing: nil)
         lineView.heightAnchor.constraint(equalToConstant: 2).isActive = true
+        valueConstraint = lineView.widthAnchor.constraint(equalToConstant: 1)
+        valueConstraint.isActive = true
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

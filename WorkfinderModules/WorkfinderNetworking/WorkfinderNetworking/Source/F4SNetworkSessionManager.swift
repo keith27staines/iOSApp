@@ -43,8 +43,11 @@ public class F4SNetworkSessionManager: F4SNetworkSessionManagerProtocol {
     internal var _smallImageSession: URLSession?
     
     internal var defaultHeaders : [String:String] {
-        let header: [String : String] = ["wex.api.key": wexApiKey]
-        return header
+        let headers: [String : String] = [
+            "accept": "application/json",
+            "Content-Type": "application/json"
+        ]
+        return headers
     }
     
     internal lazy var interactiveConfiguration: URLSessionConfiguration = {
