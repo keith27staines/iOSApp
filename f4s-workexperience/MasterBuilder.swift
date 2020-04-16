@@ -28,7 +28,6 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     let registrar: RemoteNotificationsRegistrarProtocol
     let apnsEnvironment: String = Config.apnsEnv
     let environment: EnvironmentType = Config.environment
-    let wexApiKey = Config.wexApiKey
     var baseUrlString: String { return Config.workfinderApiBase }
     let remoteConfig: RemoteConfiguration
     
