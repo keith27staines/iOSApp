@@ -42,8 +42,7 @@ public class PicklistProvider: PicklistProviderProtocol {
             case .success(let data):
                 do {
                     let responseJson = try JSONDecoder().decode(PicklistServerJson.self, from: data)
-                    //let results = responseJson.results
-                    let results = [
+                    let results = responseJson.results.count > 0 ? responseJson.results : [
                         PicklistItemJson(uuid: UUID().uuidString, value: "Hard coded value 1"),
                         PicklistItemJson(uuid: UUID().uuidString, value: "Hard coded value 2"),
                         PicklistItemJson(uuid: UUID().uuidString, value: "Hard coded value 3")
