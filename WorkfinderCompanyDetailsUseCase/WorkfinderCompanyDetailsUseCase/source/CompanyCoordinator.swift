@@ -16,7 +16,6 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
     let emailVerificationModel: F4SEmailVerificationModelProtocol
     let documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol
     let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
-    let templateService: F4STemplateServiceProtocol
     let applyService: ApplyServiceProtocol
     let hostsProvider: HostsProviderProtocol
 
@@ -29,7 +28,6 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
         inject: CoreInjectionProtocol,
         environment: EnvironmentType,
         interestsRepository: F4SInterestsRepositoryProtocol,
-        templateService: F4STemplateServiceProtocol,
         emailVerificationModel: F4SEmailVerificationModelProtocol,
         documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
         documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
@@ -38,7 +36,6 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
         self.environment = environment
         self.interestsRepository = interestsRepository
         self.companyWorkplace = companyWorkplace
-        self.templateService = templateService
         self.finishDespatcher = parent
         self.emailVerificationModel = emailVerificationModel
         self.documentServiceFactory = documentServiceFactory
@@ -102,7 +99,6 @@ extension CompanyCoordinator: CompanyWorkplaceCoordinatorProtocol {
             navigationRouter: navigationRouter,
             inject: injected,
             environment: environment,
-            templateService: templateService,
             interestsRepository: interestsRepository,
             emailVerificationModel: emailVerificationModel,
             documentServiceFactory: documentServiceFactory,

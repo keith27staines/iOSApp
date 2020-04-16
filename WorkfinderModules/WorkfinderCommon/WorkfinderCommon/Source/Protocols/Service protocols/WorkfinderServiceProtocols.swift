@@ -37,10 +37,6 @@ public protocol F4SRoleServiceProtocol {
     func getRoleForCompany(companyUuid: F4SUUID, roleUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRoleJson>) -> ())
 }
 
-public protocol F4STemplateServiceProtocol {
-    func getTemplates(completion: @escaping (F4SNetworkResult<[F4STemplate]>) -> Void)
-}
-
 public protocol F4SDeviceRegistrationServiceProtocol {
     func registerDevice(anonymousUser: F4SAnonymousUser, completion: @escaping ((F4SNetworkResult<F4SRegisterDeviceResult>) -> ()))
 }

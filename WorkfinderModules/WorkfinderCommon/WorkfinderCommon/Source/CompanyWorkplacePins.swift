@@ -233,8 +233,6 @@ public struct Host : Codable {
         displayName: String? = nil,
         linkedinUrlString: String? = nil,
         photoUrlString: String? = nil,
-        isInterestedInHosting: Bool? = nil,
-        isCurrentEmployee: Bool? = nil,
         role: String? = nil,
         summary: String? = nil) {
         

@@ -253,13 +253,6 @@ public class MockFavouritingService: CompanyFavouritingServiceProtocol {
     }
 }
 
-public class MockF4STemplateService : F4STemplateServiceProtocol {
-    public init() {}
-    public func getTemplates(completion: @escaping (F4SNetworkResult<[F4STemplate]>) -> Void) {
-        
-    }
-}
-
 public class MockF4SUserService: F4SUserServiceProtocol {
     public func registerDeviceWithServer(installationUuid: F4SUUID, completion: @escaping (F4SNetworkResult<F4SRegisterDeviceResult>) -> ()) {
         registerDeviceOnServerCalled += 1

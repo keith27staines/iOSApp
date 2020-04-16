@@ -163,7 +163,7 @@ class F4SDataTaskServiceTests: XCTestCase {
         let newTask = MockTask()
         sut.session = MockSession(task: newTask)
         let object = ["send this"]
-        sut.beginSendRequest(verb: F4SHttpRequestVerb.patch, objectToSend: object, attempting: "send json") { (result : F4SNetworkDataResult) in }
+        sut.beginSendRequest(verb: RequestVerb.patch, objectToSend: object, attempting: "send json") { (result : F4SNetworkDataResult) in }
         XCTAssertTrue(previousTask.cancelled)
     }
     
@@ -178,7 +178,7 @@ class F4SDataTaskServiceTests: XCTestCase {
         sut.session = MockSession(task: newTask)
         let expectation = XCTestExpectation(description: "beginSendRequest")
         let object = ["send this"]
-        sut.beginSendRequest(verb: F4SHttpRequestVerb.patch, objectToSend: object, attempting: "send json") { (result : F4SNetworkDataResult) in
+        sut.beginSendRequest(verb: RequestVerb.patch, objectToSend: object, attempting: "send json") { (result : F4SNetworkDataResult) in
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1)
@@ -192,7 +192,7 @@ class F4SDataTaskServiceTests: XCTestCase {
         sut.session = MockSession(task: newTask)
         let expectation = XCTestExpectation(description: "beginSendRequest")
         let object = ["send this"]
-        sut.beginSendRequest(verb: F4SHttpRequestVerb.patch, objectToSend: object, attempting: "send json") {
+        sut.beginSendRequest(verb: RequestVerb.patch, objectToSend: object, attempting: "send json") {
             (result : F4SNetworkDataResult) in
             switch result {
             case .error(let error):
@@ -213,7 +213,7 @@ class F4SDataTaskServiceTests: XCTestCase {
         sut.session = MockSession(task: newTask)
         let expectation = XCTestExpectation(description: "beginGetRequest")
         let object = ["send this"]
-        sut.beginSendRequest(verb: F4SHttpRequestVerb.patch, objectToSend: object, attempting: "send json") {
+        sut.beginSendRequest(verb: RequestVerb.patch, objectToSend: object, attempting: "send json") {
             (result : F4SNetworkDataResult) in
             switch result {
             case .error(_):

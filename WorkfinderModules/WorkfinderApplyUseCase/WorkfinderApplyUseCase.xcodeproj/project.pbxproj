@@ -12,10 +12,7 @@
 		FC17E49D244731F500A58AEB /* UserLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC17E49C244731F500A58AEB /* UserLoginService.swift */; };
 		FC1EBEBD2248E0A500416D70 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */; };
 		FC1EBEBE2248E0AC00416D70 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */; };
-		FC1EBEBF2248E0D600416D70 /* ApplicationLetterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626532248CDB100D5F850 /* ApplicationLetterViewModelTests.swift */; };
 		FC1EBEC02248E0D600416D70 /* WorkfinderApplyUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF5AF1E2248BDCC00D9B8D1 /* WorkfinderApplyUseCaseTests.swift */; };
-		FC1EBEC12248E0D600416D70 /* ApplicationLetterViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626522248CDB100D5F850 /* ApplicationLetterViewControllerTests.swift */; };
-		FC1EBEC32248E37C00416D70 /* ApplicationLetterModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1EBEC22248E37B00416D70 /* ApplicationLetterModelTests.swift */; };
 		FC22DBFB22F97F330068C61C /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC22DBFA22F97F330068C61C /* WorkfinderUI.framework */; };
 		FC23BCE4243AFA730075F359 /* DateOfBirthCollectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCE3243AFA730075F359 /* DateOfBirthCollectorViewController.swift */; };
 		FC23BCE8243B30A10075F359 /* ApplicationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCE7243B30A10075F359 /* ApplicationModel.swift */; };
@@ -55,21 +52,16 @@
 		FC42C8A6243C5C9A00F81232 /* PicklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC42C8A5243C5C9A00F81232 /* PicklistViewController.swift */; };
 		FC42C8AC243C9BB300F81232 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC42C8AB243C9BB300F81232 /* WorkfinderServices.framework */; };
 		FC6E3D2D2248D74A00377736 /* WorkfinderApplyUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF102248BDCC00D9B8D1 /* WorkfinderApplyUseCase.framework */; };
-		FC7A4394224A3AB200B2D693 /* F4SGrammarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4393224A3AB100B2D693 /* F4SGrammarTests.swift */; };
-		FC7C219523215E9300721D1D /* ApplyCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7C219423215E9200721D1D /* ApplyCoordinatorTests.swift */; };
 		FC84A669243EF43F00C9D158 /* FreeTextEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC84A668243EF43F00C9D158 /* FreeTextEditorViewController.swift */; };
 		FC85D9F222F205610035C724 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC85D9F122F205610035C724 /* WorkfinderAppLogic.framework */; };
 		FC9626392248C1A900D5F850 /* EditApplicationLetterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626332248C1A900D5F850 /* EditApplicationLetterButton.swift */; };
 		FC9865B6229D380A006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865B5229D380A006D3E63 /* README */; };
-		FCE5194A224963DB00B550C9 /* F4SChoiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51948224963DA00B550C9 /* F4SChoiceTests.swift */; };
-		FCE5194B224963DB00B550C9 /* F4STemplateHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51949224963DA00B550C9 /* F4STemplateHelperTests.swift */; };
 		FCE8DA842320D35E00934E2F /* Success.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCE8DA832320D35E00934E2F /* Success.xcassets */; };
 		FCE8DA872320D3A700934E2F /* SuccessExtraInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCE8DA862320D39D00934E2F /* SuccessExtraInfo.storyboard */; };
 		FCE8DA892320D3CB00934E2F /* SuccessExtraInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DA882320D3CB00934E2F /* SuccessExtraInfoViewController.swift */; };
 		FCE8DA9A2320E24600934E2F /* ApplyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DA992320E24600934E2F /* ApplyCoordinator.swift */; };
 		FCE8DA9C2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE8DA9B2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework */; };
 		FCF5AF212248BDCC00D9B8D1 /* WorkfinderApplyUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = FCF5AF132248BDCC00D9B8D1 /* WorkfinderApplyUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FCFBD02E2250DE3600A9361D /* F4STemplateModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFBD02D2250DE3600A9361D /* F4STemplateModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,7 +80,6 @@
 		FC17E49A2447185F00A58AEB /* RegisterUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserService.swift; sourceTree = "<group>"; };
 		FC17E49C244731F500A58AEB /* UserLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginService.swift; sourceTree = "<group>"; };
 		FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC1EBEC22248E37B00416D70 /* ApplicationLetterModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationLetterModelTests.swift; sourceTree = "<group>"; };
 		FC22DBFA22F97F330068C61C /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC23BCE3243AFA730075F359 /* DateOfBirthCollectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateOfBirthCollectorViewController.swift; sourceTree = "<group>"; };
 		FC23BCE7243B30A10075F359 /* ApplicationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationModel.swift; sourceTree = "<group>"; };
@@ -129,18 +120,12 @@
 		FC42C8AB243C9BB300F81232 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC6E3D282248D74A00377736 /* WorkfinderApplyUseCaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderApplyUseCaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC6E3D2C2248D74A00377736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FC7A4393224A3AB100B2D693 /* F4SGrammarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SGrammarTests.swift; sourceTree = "<group>"; };
-		FC7C219423215E9200721D1D /* ApplyCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyCoordinatorTests.swift; sourceTree = "<group>"; };
 		FC84A668243EF43F00C9D158 /* FreeTextEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeTextEditorViewController.swift; sourceTree = "<group>"; };
 		FC85D9EF22F204140035C724 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC85D9F122F205610035C724 /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC9626332248C1A900D5F850 /* EditApplicationLetterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditApplicationLetterButton.swift; sourceTree = "<group>"; };
-		FC9626522248CDB100D5F850 /* ApplicationLetterViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLetterViewControllerTests.swift; sourceTree = "<group>"; };
-		FC9626532248CDB100D5F850 /* ApplicationLetterViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLetterViewModelTests.swift; sourceTree = "<group>"; };
 		FC9865B5229D380A006D3E63 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		FCE5190B2249388200B550C9 /* Mustache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mustache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCE51948224963DA00B550C9 /* F4SChoiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SChoiceTests.swift; sourceTree = "<group>"; };
-		FCE51949224963DA00B550C9 /* F4STemplateHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateHelperTests.swift; sourceTree = "<group>"; };
 		FCE8DA832320D35E00934E2F /* Success.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Success.xcassets; sourceTree = "<group>"; };
 		FCE8DA852320D39D00934E2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SuccessExtraInfo.storyboard; sourceTree = "<group>"; };
 		FCE8DA882320D3CB00934E2F /* SuccessExtraInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessExtraInfoViewController.swift; sourceTree = "<group>"; };
@@ -152,7 +137,6 @@
 		FCF5AF132248BDCC00D9B8D1 /* WorkfinderApplyUseCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderApplyUseCase.h; sourceTree = "<group>"; };
 		FCF5AF142248BDCC00D9B8D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCF5AF1E2248BDCC00D9B8D1 /* WorkfinderApplyUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WorkfinderApplyUseCaseTests.swift; path = ../WorkfinderApplyUseCase/tests/WorkfinderApplyUseCaseTests.swift; sourceTree = "<group>"; };
-		FCFBD02D2250DE3600A9361D /* F4STemplateModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4STemplateModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,15 +290,7 @@
 		FC6E3D292248D74A00377736 /* WorkfinderApplyUseCaseTests */ = {
 			isa = PBXGroup;
 			children = (
-				FC7C219423215E9200721D1D /* ApplyCoordinatorTests.swift */,
-				FCFBD02D2250DE3600A9361D /* F4STemplateModelTests.swift */,
-				FC7A4393224A3AB100B2D693 /* F4SGrammarTests.swift */,
 				FCF5AF1E2248BDCC00D9B8D1 /* WorkfinderApplyUseCaseTests.swift */,
-				FC9626522248CDB100D5F850 /* ApplicationLetterViewControllerTests.swift */,
-				FC1EBEC22248E37B00416D70 /* ApplicationLetterModelTests.swift */,
-				FC9626532248CDB100D5F850 /* ApplicationLetterViewModelTests.swift */,
-				FCE51948224963DA00B550C9 /* F4SChoiceTests.swift */,
-				FCE51949224963DA00B550C9 /* F4STemplateHelperTests.swift */,
 				FC6E3D2C2248D74A00377736 /* Info.plist */,
 			);
 			path = WorkfinderApplyUseCaseTests;
@@ -537,15 +513,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC7C219523215E9300721D1D /* ApplyCoordinatorTests.swift in Sources */,
-				FC1EBEC32248E37C00416D70 /* ApplicationLetterModelTests.swift in Sources */,
 				FC1EBEC02248E0D600416D70 /* WorkfinderApplyUseCaseTests.swift in Sources */,
-				FCE5194A224963DB00B550C9 /* F4SChoiceTests.swift in Sources */,
-				FCFBD02E2250DE3600A9361D /* F4STemplateModelTests.swift in Sources */,
-				FCE5194B224963DB00B550C9 /* F4STemplateHelperTests.swift in Sources */,
-				FC1EBEBF2248E0D600416D70 /* ApplicationLetterViewModelTests.swift in Sources */,
-				FC1EBEC12248E0D600416D70 /* ApplicationLetterViewControllerTests.swift in Sources */,
-				FC7A4394224A3AB200B2D693 /* F4SGrammarTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

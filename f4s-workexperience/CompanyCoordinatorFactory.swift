@@ -18,7 +18,6 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
     let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
     let emailVerificationModel: F4SEmailVerificationModel
     let interestsRepository: F4SInterestsRepositoryProtocol
-    let templateService: F4STemplateServiceProtocol
 
     init(applyService: ApplyServiceProtocol,
          hostsProvider: HostsProviderProtocol,
@@ -26,8 +25,7 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
          documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
          emailVerificationModel: F4SEmailVerificationModel,
          environment: EnvironmentType,
-         interestsRepository: F4SInterestsRepositoryProtocol,
-         templateService: F4STemplateServiceProtocol) {
+         interestsRepository: F4SInterestsRepositoryProtocol) {
         self.applyService = applyService
         self.hostsProvider = hostsProvider
         self.documentServiceFactory = documentServiceFactory
@@ -35,7 +33,6 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
         self.emailVerificationModel = emailVerificationModel
         self.environment = environment
         self.interestsRepository = interestsRepository
-        self.templateService = templateService
     }
 
     func makeCompanyCoordinator(
@@ -50,7 +47,6 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
             inject: inject,
             environment: environment,
             interestsRepository: interestsRepository,
-            templateService: templateService,
             emailVerificationModel: emailVerificationModel,
             documentServiceFactory: documentServiceFactory,
             documentUploaderFactory: documentUploaderFactory,

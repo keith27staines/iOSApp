@@ -16,42 +16,16 @@ class AppInstallationLogicTests: XCTestCase {
 
     func test_ensure_SUT_uses_injected_store() {
         let localStore = MockLocalStore()
-        localStore.setValue("1234567890", for: LocalStore.Key.invokingUrl)
+        localStore.setValue("1234567890", for: LocalStore.Key.accessToken)
         let sut = makeSUT(localStore: localStore)
         XCTAssertEqual(
-            sut.localStore.value(key: LocalStore.Key.invokingUrl) as! String,
-            localStore.value(key: LocalStore.Key.invokingUrl)  as! String
+            sut.localStore.value(key: LocalStore.Key.accessToken) as! String,
+            localStore.value(key: LocalStore.Key.accessToken)  as! String
         )
     }
     
-    func test_installationUuid_on_first_install() {
-        let sut = makeSUT()
-        XCTAssert(sut.installationUuid == nil)
-    }
-    
-    func test_registeredUuid_on_first_install() {
-        let sut = makeSUT()
-        XCTAssert(sut.registeredInstallationUuid == nil)
-    }
-    
-    func test_makeInstallationUuid() {
-        let sut = makeSUT()
-        let uuid = sut.makeNewInstallationUuid()
-        XCTAssertEqual(sut.installationUuid, uuid)
-        XCTAssertNil(sut.registeredInstallationUuid)
-    }
-    
     func makeSUT(localStore: LocalStorageProtocol = MockLocalStore()) -> AppInstallationLogic {
-        let user = Candidate(uuid: "uuid")
-        let userRepo = MockUserRepository(user: user)
-        let userService = MockUserService(registeringWillSucceedOnAttempt: 1)
-        let registrationService = MockDeviceRegistationService()
-        return AppInstallationLogic(
-            localStore: localStore,
-            userService: userService,
-            userRepo: userRepo,
-            apnsEnvironment: "apnsEnvironment",
-            registerDeviceService: registrationService)
+        return AppInstallationLogic(localStore: localStore)
     }
     
 }

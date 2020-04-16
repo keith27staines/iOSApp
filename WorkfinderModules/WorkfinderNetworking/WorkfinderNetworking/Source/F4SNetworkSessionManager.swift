@@ -12,9 +12,6 @@ import WorkfinderCommon
 /// then be removed from the project
 public class F4SNetworkSessionManager: F4SNetworkSessionManagerProtocol {
     
-    /// The api key used in all Workfinder services
-    public let wexApiKey: String
-    
     /// `interactiveSession` is designed for services that connect to Workfinder
     /// which includes majority of services used in the app
     public var interactiveSession: URLSession {
@@ -33,9 +30,7 @@ public class F4SNetworkSessionManager: F4SNetworkSessionManagerProtocol {
     }
     
     /// Creates a new instance and configures it with the specified api key
-    public init(wexApiKey: String) {
-        self.wexApiKey = wexApiKey
-    }
+    public init() {}
     
     // MARK:- Internal implementation
     

@@ -2,8 +2,8 @@ import Foundation
 import WorkfinderCommon
 
 public protocol F4SNetworkTaskFactoryProtocol {
-    func urlRequest(verb: F4SHttpRequestVerb, url: URL, dataToSend: Data?) -> URLRequest
-    func networkTask(verb: F4SHttpRequestVerb,
+    func urlRequest(verb: RequestVerb, url: URL, dataToSend: Data?) -> URLRequest
+    func networkTask(verb: RequestVerb,
                      url: URL,
                      dataToSend: Data?,
                      attempting: String,
@@ -27,7 +27,7 @@ public class F4SNetworkTaskFactory : F4SNetworkTaskFactoryProtocol {
         self.configuration = configuration
     }
     
-    public func urlRequest(verb: F4SHttpRequestVerb, url: URL, dataToSend: Data?) -> URLRequest {
+    public func urlRequest(verb: RequestVerb, url: URL, dataToSend: Data?) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = verb.name
         request.httpBody = dataToSend
@@ -37,7 +37,7 @@ public class F4SNetworkTaskFactory : F4SNetworkTaskFactoryProtocol {
     }
     
     /// Returns a `F4SNetworkTask` that can be used independently
-    public func networkTask(verb: F4SHttpRequestVerb,
+    public func networkTask(verb: RequestVerb,
                      url: URL,
                      dataToSend: Data?,
                      attempting: String,

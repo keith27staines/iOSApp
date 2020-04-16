@@ -77,7 +77,7 @@ open class F4SDataTaskService {
     /// - parameter object: The codable (json encodable) object to be patched to the server
     /// - parameter attempting: A short high level description of the reason the operation is being performed
     /// - parameter completion: Returns a result containing either the http response data or error information
-    public func beginSendRequest<A: Codable>(verb: F4SHttpRequestVerb,
+    public func beginSendRequest<A: Codable>(verb: RequestVerb,
                                              objectToSend: A,
                                              attempting: String,
                                              completion: @escaping (F4SNetworkDataResult) -> ()
@@ -133,7 +133,7 @@ open class F4SDataTaskService {
         return encoder
     }()
     
-    func networkTask(verb: F4SHttpRequestVerb, url: URL, dataToSend: Data?, attempting: String, completion: @escaping (F4SNetworkDataResult) -> ()) -> F4SNetworkTask {
+    func networkTask(verb: RequestVerb, url: URL, dataToSend: Data?, attempting: String, completion: @escaping (F4SNetworkDataResult) -> ()) -> F4SNetworkTask {
         return networkTaskfactory.networkTask(verb: verb,
                                    url: url,
                                    dataToSend: dataToSend,

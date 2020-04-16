@@ -1,5 +1,5 @@
 /// Enumerates the Http request verbs used in the Workfinder api
-public enum F4SHttpRequestVerb {
+public enum RequestVerb {
     case get
     case put
     case patch

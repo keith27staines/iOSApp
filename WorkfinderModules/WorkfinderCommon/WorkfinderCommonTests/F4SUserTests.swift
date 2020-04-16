@@ -115,18 +115,6 @@ class F4SUserTests: XCTestCase {
         let age = sut.age(on: testDate!)
         XCTAssertNil(age)
     }
-    
-    func test_initialise_with_user_data() {
-        let userData = TestUserData(userUuid: "uuid", email: "email", firstName: "firstName", lastName: "lastName", consenterEmail: "consenter", requiresConsent: true, dateOfBirth: "2000-01-01")
-        let sut = Candidate(userData: userData, localStore: MockLocalStore())
-        XCTAssertEqual(sut.uuid, "uuid")
-        XCTAssertEqual(sut.email, "email")
-        XCTAssertEqual(sut.firstName, "firstName")
-        XCTAssertEqual(sut.lastName, "lastName")
-        XCTAssertEqual(sut.consenterEmail, "consenter")
-        XCTAssertEqual(sut.requiresConsent, true)
-        XCTAssertEqual(sut.dateOfBirth, DateComponents(calendar: Calendar.workfinderCalendar,year: 2000, month: 1, day: 1).date!)
-    }
 }
 
 extension F4SUserTests {
@@ -158,21 +146,4 @@ extension F4SUserTests {
         let user = injectingLocalStore.value(key: LocalStore.Key.user)
         return user as! Candidate
     }
-}
-
-struct TestUserData: UserData {
-    var userUuid: String?
-    
-    var email: String?
-    
-    var firstName: String?
-    
-    var lastName: String?
-    
-    var consenterEmail: String?
-    
-    var requiresConsent: Bool
-    
-    var dateOfBirth: String?
-    
 }

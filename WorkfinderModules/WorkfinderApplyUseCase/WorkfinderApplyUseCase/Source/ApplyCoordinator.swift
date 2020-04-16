@@ -25,7 +25,6 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         case none
     }
     let environment: EnvironmentType
-    var templateService: F4STemplateServiceProtocol
     var interestsRepository: F4SInterestsRepositoryProtocol
     let emailVerificationModel: F4SEmailVerificationModelProtocol
     let startingViewController: UIViewController!
@@ -46,7 +45,6 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
                 environment: EnvironmentType,
-                templateService: F4STemplateServiceProtocol,
                 interestsRepository: F4SInterestsRepositoryProtocol,
                 emailVerificationModel: F4SEmailVerificationModelProtocol,
                 documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
@@ -54,7 +52,6 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         self.applyCoordinatorDelegate = applyCoordinatorDelegate
         self.applyService = applyService
         self.environment = environment
-        self.templateService = templateService
         self.startingViewController = navigationRouter.navigationController.topViewController
         self.interestsRepository = interestsRepository
         self.emailVerificationModel = emailVerificationModel

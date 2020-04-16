@@ -19,11 +19,11 @@ class MockF4SNetworkTaskFactory<A:Codable> : F4SNetworkTaskFactoryProtocol {
         self.requiredSuccessResult = nil
     }
     
-    func urlRequest(verb: F4SHttpRequestVerb, url: URL, dataToSend: Data?) -> URLRequest {
+    func urlRequest(verb: RequestVerb, url: URL, dataToSend: Data?) -> URLRequest {
         return factory.urlRequest(verb: verb, url: url, dataToSend: dataToSend)
     }
     
-    func networkTask(verb: F4SHttpRequestVerb, url: URL, dataToSend: Data?, attempting: String, session: F4SNetworkSession, completion: @escaping (F4SNetworkDataResult) -> ()) -> F4SNetworkTask {
+    func networkTask(verb: RequestVerb, url: URL, dataToSend: Data?, attempting: String, session: F4SNetworkSession, completion: @escaping (F4SNetworkDataResult) -> ()) -> F4SNetworkTask {
         let task = MockNetworkTask<A>(verb: verb, attempting: attempting, session: session, completion: completion)
         task.url = url
         guard let requiredSuccessResult = requiredSuccessResult else {
@@ -44,21 +44,21 @@ class MockF4SNetworkTaskFactory<A:Codable> : F4SNetworkTaskFactoryProtocol {
     }
     
     func networkTask(with request: URLRequest, session: F4SNetworkSession, attempting: String, completion: @escaping (F4SNetworkDataResult) -> ()) -> F4SNetworkTask {
-        return MockNetworkTask<A>(verb: F4SHttpRequestVerb.get, attempting: attempting, session: session, completion: completion)
+        return MockNetworkTask<A>(verb: RequestVerb.get, attempting: attempting, session: session, completion: completion)
     }
 }
 
 class MockNetworkTask<A:Decodable> : F4SNetworkTask {
     var cancelWasCalled: Bool = false
     var resumeWasCalled: Bool = false
-    var verb: F4SHttpRequestVerb?
+    var verb: RequestVerb?
     var attempting: String?
     var completion: ((F4SNetworkDataResult) -> ())?
     var session: F4SNetworkSession
     var requiredDataResult: F4SNetworkDataResult!
     var url: URL?
     
-    init(verb: F4SHttpRequestVerb,
+    init(verb: RequestVerb,
          attempting: String,
          session: F4SNetworkSession,
          completion: @escaping (F4SNetworkDataResult) -> ()) {

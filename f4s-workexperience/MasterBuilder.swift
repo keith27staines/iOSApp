@@ -42,11 +42,10 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     }
     
     lazy var networkConfiguration: NetworkConfig = {
-        let sessionManager = F4SNetworkSessionManager(wexApiKey: wexApiKey)
+        let sessionManager = F4SNetworkSessionManager()
         let endpoints = WorkfinderEndpoint(baseUrlString: baseUrlString)
         let networkCallLogger = NetworkCallLogger(log: log)
-        let networkConfig = NetworkConfig(workfinderApiKey: wexApiKey,
-                                          logger: networkCallLogger,
+        let networkConfig = NetworkConfig(logger: networkCallLogger,
                                           sessionManager: sessionManager,
                                           endpoints: endpoints,
                                           userRepository: self.userRepo)
@@ -126,8 +125,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
                                          documentUploaderFactory: documentUploaderFactory,
                                          emailVerificationModel: self.emailVerificationModel,
                                          environment: environment,
-                                         interestsRepository: interestsRepository,
-                                         templateService: templateService)
+                                         interestsRepository: interestsRepository)
     }()
     
     var log: F4SAnalyticsAndDebugging
@@ -176,10 +174,6 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     
     lazy var roleService: F4SRoleServiceProtocol = {
         return F4SRoleService(configuration: self.networkConfiguration)
-    }()
-    
-    lazy var templateService: F4STemplateServiceProtocol = {
-        return F4STemplateService(configuration: self.networkConfiguration)
     }()
     
     lazy var userService: F4SUserServiceProtocol = {

@@ -5,21 +5,19 @@ import WorkfinderCommon
 class F4SNetworkSessionManagerTests: XCTestCase {
     
     lazy var mockLog: MockF4SAnalyticsAndDebugging = { return MockF4SAnalyticsAndDebugging() }()
-    
-    func test_interactiveSessionManager() {
-        let sut = makeSut()
-        let sutWexApiHeaderValue = sut.interactiveSession.configuration.httpAdditionalHeaders?.first(where: { (header) -> Bool in
-            (header.key as? String) == "wex.api.key"
-        })?.value as? String
-        XCTAssertEqual(sutWexApiHeaderValue, "wexApiKey")
+
+    func test_interactiveSession() {
+        let sut = makeSUT()
+        XCTAssertEqual(sut.interactiveSession, sut._interactiveSession)
     }
     
     func test_smallImageSession() {
-        let sut = makeSut()
+        let sut = makeSUT()
         XCTAssertEqual(sut.smallImageSession, sut._smallImageSession)
     }
     
-    func makeSut() -> F4SNetworkSessionManager {
-        return F4SNetworkSessionManager(wexApiKey: "wexApiKey")
+    func makeSUT() -> F4SNetworkSessionManager {
+        return F4SNetworkSessionManager()
     }
+    
 }
