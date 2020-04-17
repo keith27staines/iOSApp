@@ -13,9 +13,6 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
     var companyWorkplacePresenter: CompanyWorkplacePresenter!
     var companyWorkplace: CompanyWorkplace
     var interestsRepository: F4SInterestsRepositoryProtocol
-    let emailVerificationModel: F4SEmailVerificationModelProtocol
-    let documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol
-    let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
     let applyService: ApplyServiceProtocol
     let hostsProvider: HostsProviderProtocol
 
@@ -28,18 +25,12 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
         inject: CoreInjectionProtocol,
         environment: EnvironmentType,
         interestsRepository: F4SInterestsRepositoryProtocol,
-        emailVerificationModel: F4SEmailVerificationModelProtocol,
-        documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
-        documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
         applyService: ApplyServiceProtocol,
         hostsProvider: HostsProviderProtocol) {
         self.environment = environment
         self.interestsRepository = interestsRepository
         self.companyWorkplace = companyWorkplace
         self.finishDespatcher = parent
-        self.emailVerificationModel = emailVerificationModel
-        self.documentServiceFactory = documentServiceFactory
-        self.documentUploaderFactory = documentUploaderFactory
         self.applyService = applyService
         self.hostsProvider = hostsProvider
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
@@ -99,10 +90,7 @@ extension CompanyCoordinator: CompanyWorkplaceCoordinatorProtocol {
             navigationRouter: navigationRouter,
             inject: injected,
             environment: environment,
-            interestsRepository: interestsRepository,
-            emailVerificationModel: emailVerificationModel,
-            documentServiceFactory: documentServiceFactory,
-            documentUploaderFactory: documentUploaderFactory)
+            interestsRepository: interestsRepository)
         addChildCoordinator(applyCoordinator)
         applyCoordinator.start()
     }

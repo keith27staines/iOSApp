@@ -18,10 +18,8 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
             parent: parent,
             navigationRouter: router,
             inject: inject,
-            companyCoordinatorFactory: companyCoordinatorFactory,
-            documentUploaderFactory: documentUploaderFactory,
-            interestsRepository: interestsRepository,
-            roleService: roleService)
+            companyCoordinatorFactory: self.companyCoordinatorFactory,
+            interestsRepository: interestsRepository)
     }
     
     let launchOptions: [UIApplication.LaunchOptionsKey : Any]?
@@ -36,7 +34,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         self.registrar = registrar
         self.launchOptions = launchOptions
         self.log = F4SLog()
-        self.workfinderEndpoint = try! WorkfinderEndpoint(baseUrlString: baseUrlString)
+        self.workfinderEndpoint = try! WorkfinderEndpoint(baseUrlString: Config.workfinderApiBase)
         self.remoteConfig = RemoteConfiguration()
         self.remoteConfig.start()
     }
@@ -66,28 +64,16 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         return AppInstallationLogic(localStore: self.localStore)
     }()
     
-    lazy var versionCheckingService: VersionCheckingServiceProtocol = {
-        return VersionCheckingService()
-    }()
-    
     lazy var injection: CoreInjectionProtocol = {
         return CoreInjection(
             launchOptions: self.launchOptions,
             networkConfig: self.networkConfiguration,
             appInstallationLogic: self.appInstallationLogic,
             user: self.userRepo.loadCandidate(),
-            userService: self.userService,
             userRepository: self.userRepo,
             companyDownloadFileManager: self.companyFileDownloadManager,
             log: self.log,
             appSettings: self.remoteConfig)
-    }()
-    
-    lazy var versionCheckCoordinator: VersionCheckCoordinatorProtocol = {
-        return VersionCheckCoordinator(
-            parent: nil,
-            navigationRouter: self.rootNavigationRouter,
-            versionCheckService: self.versionCheckingService)
     }()
     
     lazy var window: UIWindow = {
@@ -108,14 +94,9 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
                               inject: injection,
                               companyCoordinatorFactory: companyCoordinatorFactory,
                               hostsProvider: hostsProvider,
-                              documentUploaderFactory: documentUploaderFactory,
-                              emailVerificationModel: emailVerificationModel,
                               localStore: localStore,
                               onboardingCoordinatorFactory: onboardingCoordinatorFactory,
-                              placementDocumentsServiceFactory: placementDocumentsServiceFactory,
-                              roleService: roleService,
                               tabBarCoordinatorFactory: self,
-                              versionCheckCoordinator: versionCheckCoordinator,
                               window: self.window)
     }
     
@@ -123,18 +104,11 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         let applyService = ApplyService()
         return CompanyCoordinatorFactory(applyService: applyService,
                                          hostsProvider: self.hostsProvider,
-                                         documentServiceFactory: self.placementDocumentsServiceFactory,
-                                         documentUploaderFactory: documentUploaderFactory,
-                                         emailVerificationModel: self.emailVerificationModel,
                                          environment: environment,
                                          interestsRepository: interestsRepository)
     }()
     
     var log: F4SAnalyticsAndDebugging
-    
-    lazy var placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol = {
-        return F4SPlacementDocumentsServiceFactory()
-    }()
     
     lazy var localStore: LocalStorageProtocol = {
         return LocalStore()
@@ -150,20 +124,6 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     
     lazy var hostsProvider: HostsProviderProtocol = {
         return HostsProvider(networkConfig: self.networkConfiguration)
-    }()
-    
-    lazy var documentUploaderFactory: F4SDocumentUploaderFactoryProtocol = {
-        return F4SDocumentUploaderFactory(configuration: self.networkConfiguration)
-    }()
-    
-    lazy var emailVerificationModel: F4SEmailVerificationModel = {
-        let service = self.emailVerificationServiceFactory.makeEmailVerificationService()
-        return F4SEmailVerificationModel(localStore: localStore,
-                                         emailVerificationService: service)
-    }()
-    
-    lazy var emailVerificationServiceFactory: EmailVerificationServiceFactoryProtocol = {
-        return EmailVerificationServiceFactory(configuration: self.networkConfiguration)
     }()
     
     lazy var interestsRepository: F4SInterestsRepositoryProtocol = {

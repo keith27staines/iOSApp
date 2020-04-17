@@ -93,7 +93,7 @@ class SideDrawerTableViewCell: TableViewCell {
     func commonSetup() {
         self.backgroundColor = UIColor.clear
         let selectionView = UIView()
-        selectionView.backgroundColor = UIColor(netHex: Colors.waterBlue)
+        selectionView.backgroundColor = WorkfinderColors.highlightBlue
         self.selectedBackgroundView = selectionView
         self.textLabel?.textColor = RGBA.white.uiColor
         self.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)

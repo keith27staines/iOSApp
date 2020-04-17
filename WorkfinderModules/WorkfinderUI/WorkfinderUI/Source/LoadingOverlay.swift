@@ -61,7 +61,7 @@ class LoadingOverlay: UIView {
     }
     
     func showOverlay() {
-        self.backgroundColor = UIColor(netHex: Colors.black)
+        self.backgroundColor = UIColor.black
         self.alpha = 0.75
         self.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.isHidden = false
@@ -73,7 +73,7 @@ class LoadingOverlay: UIView {
 
     func showLightOverlay() {
         showOverlay()
-        self.backgroundColor = UIColor(netHex: Colors.white)
+        self.backgroundColor = UIColor.white
         activityIndicator.color = UIColor.gray
     }
 

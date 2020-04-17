@@ -13,26 +13,6 @@
 		FC4066A323277286002B425E /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC4066A123277286002B425E /* Camera.storyboard */; };
 		FC4066A523277299002B425E /* DocumentCapture.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC4066A423277299002B425E /* DocumentCapture.storyboard */; };
 		FC4066A923277395002B425E /* DocumentUploadCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066A723277395002B425E /* DocumentUploadCoordinator.swift */; };
-		FC4066B0232773F2002B425E /* F4SMultiPageDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066AC232773F2002B425E /* F4SMultiPageDocument.swift */; };
-		FC4066B1232773F2002B425E /* F4SDCDocumentCaptureFileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066AD232773F2002B425E /* F4SDCDocumentCaptureFileHelper.swift */; };
-		FC4066B2232773F2002B425E /* F4SDocumentUploadWhileApplyingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066AE232773F2002B425E /* F4SDocumentUploadWhileApplyingModel.swift */; };
-		FC4066B523277444002B425E /* F4SDCDocumentTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066B423277444002B425E /* F4SDCDocumentTypeViewController.swift */; };
-		FC4066BF23277466002B425E /* F4SDCAddDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066B723277466002B425E /* F4SDCAddDocumentViewController.swift */; };
-		FC4066C023277466002B425E /* F4SDocumentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066B823277466002B425E /* F4SDocumentTableViewController.swift */; };
-		FC4066C123277466002B425E /* F4SAddDocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066B923277466002B425E /* F4SAddDocumentsViewController.swift */; };
-		FC4066C223277466002B425E /* F4SPostDocumentDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066BA23277466002B425E /* F4SPostDocumentDataViewController.swift */; };
-		FC4066C323277466002B425E /* UploadScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066BB23277466002B425E /* UploadScenario.swift */; };
-		FC4066C423277466002B425E /* F4SDCPopupMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066BC23277466002B425E /* F4SDCPopupMenuView.swift */; };
-		FC4066C523277466002B425E /* AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066BD23277466002B425E /* AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift */; };
-		FC4066C623277466002B425E /* AddDocumentsViewController+AddDocumentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066BE23277466002B425E /* AddDocumentsViewController+AddDocumentDelegate.swift */; };
-		FC4066C923277493002B425E /* F4SDCDocumentViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066C823277493002B425E /* F4SDCDocumentViewerController.swift */; };
-		FC4066D2232774D0002B425E /* F4SArrangeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066CC232774CF002B425E /* F4SArrangeTableViewController.swift */; };
-		FC4066D3232774D0002B425E /* F4SDisplayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066CD232774CF002B425E /* F4SDisplayTableViewCell.swift */; };
-		FC4066D4232774D0002B425E /* F4SCameraPageManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066CE232774CF002B425E /* F4SCameraPageManagerViewController.swift */; };
-		FC4066D5232774D0002B425E /* F4SArrangeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066CF232774CF002B425E /* F4SArrangeTableViewCell.swift */; };
-		FC4066D6232774D0002B425E /* F4SCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066D0232774CF002B425E /* F4SCameraViewController.swift */; };
-		FC4066D7232774D0002B425E /* F4SDisplayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066D1232774CF002B425E /* F4SDisplayTableViewController.swift */; };
-		FC4066DA232774E8002B425E /* F4SAddUrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066D9232774E8002B425E /* F4SAddUrlViewController.swift */; };
 		FC4066E6232776E9002B425E /* WorkfinderDocumentUploadUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066E5232776E9002B425E /* WorkfinderDocumentUploadUseCaseTests.swift */; };
 		FC4066F523277B80002B425E /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4066F423277B80002B425E /* WorkfinderCommon.framework */; };
 		FC4066F923277BB4002B425E /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4066F823277BB4002B425E /* WorkfinderCoordinators.framework */; };
@@ -59,26 +39,6 @@
 		FC4066A123277286002B425E /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
 		FC4066A423277299002B425E /* DocumentCapture.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DocumentCapture.storyboard; sourceTree = "<group>"; };
 		FC4066A723277395002B425E /* DocumentUploadCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentUploadCoordinator.swift; sourceTree = "<group>"; };
-		FC4066AC232773F2002B425E /* F4SMultiPageDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SMultiPageDocument.swift; sourceTree = "<group>"; };
-		FC4066AD232773F2002B425E /* F4SDCDocumentCaptureFileHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDCDocumentCaptureFileHelper.swift; sourceTree = "<group>"; };
-		FC4066AE232773F2002B425E /* F4SDocumentUploadWhileApplyingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDocumentUploadWhileApplyingModel.swift; sourceTree = "<group>"; };
-		FC4066B423277444002B425E /* F4SDCDocumentTypeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDCDocumentTypeViewController.swift; sourceTree = "<group>"; };
-		FC4066B723277466002B425E /* F4SDCAddDocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDCAddDocumentViewController.swift; sourceTree = "<group>"; };
-		FC4066B823277466002B425E /* F4SDocumentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDocumentTableViewController.swift; sourceTree = "<group>"; };
-		FC4066B923277466002B425E /* F4SAddDocumentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SAddDocumentsViewController.swift; sourceTree = "<group>"; };
-		FC4066BA23277466002B425E /* F4SPostDocumentDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SPostDocumentDataViewController.swift; sourceTree = "<group>"; };
-		FC4066BB23277466002B425E /* UploadScenario.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadScenario.swift; sourceTree = "<group>"; };
-		FC4066BC23277466002B425E /* F4SDCPopupMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDCPopupMenuView.swift; sourceTree = "<group>"; };
-		FC4066BD23277466002B425E /* AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift"; sourceTree = "<group>"; };
-		FC4066BE23277466002B425E /* AddDocumentsViewController+AddDocumentDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AddDocumentsViewController+AddDocumentDelegate.swift"; sourceTree = "<group>"; };
-		FC4066C823277493002B425E /* F4SDCDocumentViewerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDCDocumentViewerController.swift; sourceTree = "<group>"; };
-		FC4066CC232774CF002B425E /* F4SArrangeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SArrangeTableViewController.swift; sourceTree = "<group>"; };
-		FC4066CD232774CF002B425E /* F4SDisplayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDisplayTableViewCell.swift; sourceTree = "<group>"; };
-		FC4066CE232774CF002B425E /* F4SCameraPageManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCameraPageManagerViewController.swift; sourceTree = "<group>"; };
-		FC4066CF232774CF002B425E /* F4SArrangeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SArrangeTableViewCell.swift; sourceTree = "<group>"; };
-		FC4066D0232774CF002B425E /* F4SCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCameraViewController.swift; sourceTree = "<group>"; };
-		FC4066D1232774CF002B425E /* F4SDisplayTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDisplayTableViewController.swift; sourceTree = "<group>"; };
-		FC4066D9232774E8002B425E /* F4SAddUrlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SAddUrlViewController.swift; sourceTree = "<group>"; };
 		FC4066E5232776E9002B425E /* WorkfinderDocumentUploadUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderDocumentUploadUseCaseTests.swift; sourceTree = "<group>"; };
 		FC4066F423277B80002B425E /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC4066F623277B80002B425E /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,8 +111,6 @@
 			isa = PBXGroup;
 			children = (
 				FC4066A723277395002B425E /* DocumentUploadCoordinator.swift */,
-				FC4066AA232773CB002B425E /* view controllers */,
-				FC4066AB232773D9002B425E /* models */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -165,80 +123,6 @@
 				FC4066A023277286002B425E /* F4SCameraCapture.storyboard */,
 			);
 			path = storyboards;
-			sourceTree = "<group>";
-		};
-		FC4066AA232773CB002B425E /* view controllers */ = {
-			isa = PBXGroup;
-			children = (
-				FC4066CA232774AC002B425E /* document sources */,
-				FC4066C72327747F002B425E /* document viewer */,
-				FC4066B62327744E002B425E /* add documents */,
-				FC4066B423277444002B425E /* F4SDCDocumentTypeViewController.swift */,
-			);
-			path = "view controllers";
-			sourceTree = "<group>";
-		};
-		FC4066AB232773D9002B425E /* models */ = {
-			isa = PBXGroup;
-			children = (
-				FC4066AE232773F2002B425E /* F4SDocumentUploadWhileApplyingModel.swift */,
-				FC4066AD232773F2002B425E /* F4SDCDocumentCaptureFileHelper.swift */,
-				FC4066AC232773F2002B425E /* F4SMultiPageDocument.swift */,
-			);
-			path = models;
-			sourceTree = "<group>";
-		};
-		FC4066B62327744E002B425E /* add documents */ = {
-			isa = PBXGroup;
-			children = (
-				FC4066BC23277466002B425E /* F4SDCPopupMenuView.swift */,
-				FC4066B723277466002B425E /* F4SDCAddDocumentViewController.swift */,
-				FC4066B923277466002B425E /* F4SAddDocumentsViewController.swift */,
-				FC4066BE23277466002B425E /* AddDocumentsViewController+AddDocumentDelegate.swift */,
-				FC4066BD23277466002B425E /* AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift */,
-				FC4066B823277466002B425E /* F4SDocumentTableViewController.swift */,
-				FC4066BA23277466002B425E /* F4SPostDocumentDataViewController.swift */,
-				FC4066BB23277466002B425E /* UploadScenario.swift */,
-			);
-			path = "add documents";
-			sourceTree = "<group>";
-		};
-		FC4066C72327747F002B425E /* document viewer */ = {
-			isa = PBXGroup;
-			children = (
-				FC4066C823277493002B425E /* F4SDCDocumentViewerController.swift */,
-			);
-			path = "document viewer";
-			sourceTree = "<group>";
-		};
-		FC4066CA232774AC002B425E /* document sources */ = {
-			isa = PBXGroup;
-			children = (
-				FC4066D8232774DA002B425E /* from url */,
-				FC4066CB232774BC002B425E /* from camera */,
-			);
-			path = "document sources";
-			sourceTree = "<group>";
-		};
-		FC4066CB232774BC002B425E /* from camera */ = {
-			isa = PBXGroup;
-			children = (
-				FC4066CC232774CF002B425E /* F4SArrangeTableViewController.swift */,
-				FC4066D0232774CF002B425E /* F4SCameraViewController.swift */,
-				FC4066CD232774CF002B425E /* F4SDisplayTableViewCell.swift */,
-				FC4066CE232774CF002B425E /* F4SCameraPageManagerViewController.swift */,
-				FC4066D1232774CF002B425E /* F4SDisplayTableViewController.swift */,
-				FC4066CF232774CF002B425E /* F4SArrangeTableViewCell.swift */,
-			);
-			path = "from camera";
-			sourceTree = "<group>";
-		};
-		FC4066D8232774DA002B425E /* from url */ = {
-			isa = PBXGroup;
-			children = (
-				FC4066D9232774E8002B425E /* F4SAddUrlViewController.swift */,
-			);
-			path = "from url";
 			sourceTree = "<group>";
 		};
 		FC4066F323277B80002B425E /* Frameworks */ = {
@@ -366,27 +250,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC4066D5232774D0002B425E /* F4SArrangeTableViewCell.swift in Sources */,
 				FC4066A923277395002B425E /* DocumentUploadCoordinator.swift in Sources */,
-				FC4066D2232774D0002B425E /* F4SArrangeTableViewController.swift in Sources */,
-				FC4066BF23277466002B425E /* F4SDCAddDocumentViewController.swift in Sources */,
-				FC4066DA232774E8002B425E /* F4SAddUrlViewController.swift in Sources */,
-				FC4066D4232774D0002B425E /* F4SCameraPageManagerViewController.swift in Sources */,
-				FC4066C423277466002B425E /* F4SDCPopupMenuView.swift in Sources */,
-				FC4066B0232773F2002B425E /* F4SMultiPageDocument.swift in Sources */,
-				FC4066C223277466002B425E /* F4SPostDocumentDataViewController.swift in Sources */,
-				FC4066C023277466002B425E /* F4SDocumentTableViewController.swift in Sources */,
-				FC4066D7232774D0002B425E /* F4SDisplayTableViewController.swift in Sources */,
-				FC4066C123277466002B425E /* F4SAddDocumentsViewController.swift in Sources */,
-				FC4066B523277444002B425E /* F4SDCDocumentTypeViewController.swift in Sources */,
-				FC4066C323277466002B425E /* UploadScenario.swift in Sources */,
-				FC4066B2232773F2002B425E /* F4SDocumentUploadWhileApplyingModel.swift in Sources */,
-				FC4066B1232773F2002B425E /* F4SDCDocumentCaptureFileHelper.swift in Sources */,
-				FC4066C523277466002B425E /* AddDocumentsViewController+PerformPrimaryActionForApplyMode.swift in Sources */,
-				FC4066C623277466002B425E /* AddDocumentsViewController+AddDocumentDelegate.swift in Sources */,
-				FC4066D3232774D0002B425E /* F4SDisplayTableViewCell.swift in Sources */,
-				FC4066D6232774D0002B425E /* F4SCameraViewController.swift in Sources */,
-				FC4066C923277493002B425E /* F4SDCDocumentViewerController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

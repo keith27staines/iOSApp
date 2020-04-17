@@ -9,8 +9,6 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     
     let injected: CoreInjectionProtocol
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
-
-    let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
     let interestsRepository: F4SInterestsRepositoryProtocol
     
     var parentCoordinator: Coordinating?
@@ -29,15 +27,11 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
                   navigationRouter: NavigationRoutingProtocol,
                   inject: CoreInjectionProtocol,
                   companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
-                  documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
                   interestsRepository: F4SInterestsRepositoryProtocol) {
         self.parentCoordinator = parent
         self.navigationRouter = navigationRouter
         self.injected = inject
-        
         self.companyCoordinatorFactory = companyCoordinatorFactory
-        self.documentUploaderFactory = documentUploaderFactory
-
         self.interestsRepository = interestsRepository
     }
     

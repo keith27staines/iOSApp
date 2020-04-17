@@ -26,9 +26,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     }
     let environment: EnvironmentType
     var interestsRepository: F4SInterestsRepositoryProtocol
-    let emailVerificationModel: F4SEmailVerificationModelProtocol
     let startingViewController: UIViewController!
-    let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
     let applyService: ApplyServiceProtocol
     weak var applyCoordinatorDelegate: ApplyCoordinatorDelegate?
     lazy var userInterests: [F4SInterest] = { return interestsRepository.loadInterestsArray() }()
@@ -45,17 +43,12 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
                 environment: EnvironmentType,
-                interestsRepository: F4SInterestsRepositoryProtocol,
-                emailVerificationModel: F4SEmailVerificationModelProtocol,
-                documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
-                documentUploaderFactory: F4SDocumentUploaderFactoryProtocol) {
+                interestsRepository: F4SInterestsRepositoryProtocol) {
         self.applyCoordinatorDelegate = applyCoordinatorDelegate
         self.applyService = applyService
         self.environment = environment
         self.startingViewController = navigationRouter.navigationController.topViewController
         self.interestsRepository = interestsRepository
-        self.emailVerificationModel = emailVerificationModel
-        self.documentUploaderFactory = documentUploaderFactory
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
@@ -104,26 +97,6 @@ extension ApplyCoordinator {
     
     func showUserDetails() {
         
-        let userDetailsCoordinator = UserDetailsCoordinator(
-            parent: self,
-            navigationRouter: navigationRouter,
-            inject: injected,
-            emailVerificationModel: emailVerificationModel,
-            environment: environment)
-        
-        userDetailsCoordinator.didFinish = { [weak self] coordinator in
-            self?.userDetailsDidFinish()
-        }
-        
-        userDetailsCoordinator.userIsTooYoung = { [weak self] in
-            guard let strongSelf = self else { return }
-            strongSelf.cleanup()
-            strongSelf.navigationRouter.navigationController.popToRootViewController(animated: false)
-            strongSelf.parentCoordinator?.childCoordinatorDidFinish(strongSelf)
-        }
-        
-        addChildCoordinator(userDetailsCoordinator)
-        userDetailsCoordinator.start()
     }
     
     func userDetailsDidFinish() {

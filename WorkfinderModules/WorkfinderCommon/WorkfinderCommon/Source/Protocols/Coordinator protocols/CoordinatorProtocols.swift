@@ -11,7 +11,6 @@ import Foundation
 public protocol AppCoordinatorProtocol : Coordinating {
     var window: UIWindow { get }
     var log: F4SAnalyticsAndDebugging { get }
-    func performVersionCheck(resultHandler: @escaping ((F4SNetworkResult<F4SVersionValidity>)->Void))
     func showRecommendations()
     func showMessages()
     func showSearch()
@@ -67,7 +66,6 @@ public protocol CoreInjectionProtocol : class {
     var appInstallationLogic: AppInstallationLogicProtocol { get }
     var launchOptions: LaunchOptions? { get set }
     var user: Candidate { get set }
-    var userService: F4SUserServiceProtocol { get }
     var userRepository: UserRepositoryProtocol { get }
     var companyDownloadFileManager: F4SCompanyDownloadManagerProtocol { get }
     var log: F4SAnalyticsAndDebugging { get }
@@ -76,10 +74,6 @@ public protocol CoreInjectionProtocol : class {
 
 public protocol CoreInjectionNavigationCoordinatorProtocol : NavigationCoordinating {
     var injected: CoreInjectionProtocol { get }
-}
-
-public protocol VersionCheckCoordinatorProtocol: NavigationCoordinating {
-    var versionCheckCompletion: ((F4SNetworkResult<F4SVersionValidity>) -> Void)? { get set }
 }
 
 public protocol NavigationCoordinating : Coordinating {}

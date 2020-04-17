@@ -30,8 +30,4 @@ public protocol AppInstallationLogicProtocol : class {
 
 }
 
-public protocol VersionCheckingServiceProtocol : class {
-    func getIsVersionValid(version: String, completion: @escaping (F4SNetworkResult<F4SVersionValidity>) -> ())
-}
-
 

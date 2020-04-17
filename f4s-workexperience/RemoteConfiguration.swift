@@ -13,14 +13,6 @@ class RemoteConfiguration: AppSettingProvider {
     }
     
     func start() {
-        InstanceID.instanceID().instanceID { (result, error) in
-            guard let result = result else { return }
-            print("")
-            print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
-            print("Remote instance ID token: \(result.token)")
-            print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
-            print("")
-        }
         loadDefaultValues()
         fetchCloudValues()
     }

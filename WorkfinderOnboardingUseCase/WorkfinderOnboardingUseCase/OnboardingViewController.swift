@@ -67,7 +67,13 @@ extension OnboardingViewController {
 
     func setupLabels() {
         let descriptionText = NSLocalizedString("Helping you find work", comment: "")
-        descriptionLabel.attributedText = NSAttributedString(string: descriptionText, attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.hugeTextSize, weight: UIFont.Weight.thin), NSAttributedString.Key.foregroundColor: UIColor.white])
+        let font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.largeTitle)
+        descriptionLabel.attributedText = NSAttributedString(
+            string: descriptionText,
+            attributes: [
+                NSAttributedString.Key.font: font,
+                NSAttributedString.Key.foregroundColor: UIColor.white
+            ])
     }
 
     func setupAppearance() {

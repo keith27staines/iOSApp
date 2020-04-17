@@ -8,6 +8,7 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 
 class EditApplicationLetterButton: UIButton {
     
@@ -27,11 +28,11 @@ class EditApplicationLetterButton: UIButton {
     
     func configureForLetterIsCompleteState(_ isComplete: Bool) {
         if isComplete {
-            setBackgroundColor(color: UIColor(netHex: Colors.mediumGreen), forUIControlState: .normal)
-            setBackgroundColor(color: UIColor(netHex: Colors.lightGreen), forUIControlState: .highlighted)
+            setBackgroundColor(color: WorkfinderColors.greenDark, forUIControlState: .normal)
+            setBackgroundColor(color: WorkfinderColors.greenLight, forUIControlState: .highlighted)
         } else {
-            setBackgroundColor(color: UIColor(netHex: Colors.orangeNormal), forUIControlState: .normal)
-            setBackgroundColor(color: UIColor(netHex: Colors.orangeActive), forUIControlState: .highlighted)
+            setBackgroundColor(color: WorkfinderColors.badValueNormal, forUIControlState: .normal)
+            setBackgroundColor(color: WorkfinderColors.badValueActive, forUIControlState: .highlighted)
         }
     }
     

@@ -19,18 +19,13 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     var shouldAskOperatingSystemToAllowLocation: Bool = false
     var tabBarCoordinator: TabBarCoordinatorProtocol!
     var onboardingCoordinator: OnboardingCoordinatorProtocol?
-    var versionCheckCoordinator: VersionCheckCoordinatorProtocol?
     
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     let hostsProvider: HostsProviderProtocol
-    let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
-    let emailVerificationModel: F4SEmailVerificationModelProtocol
     let onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol
-    let placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol
-    let roleService: F4SRoleServiceProtocol
+
     let tabBarCoordinatorFactory: TabbarCoordinatorFactoryProtocol
     var user: Candidate { return injected.userRepository.loadCandidate() }
-    var userService: F4SUserServiceProtocol { return injected.userService}
     var databaseDownloadManager: F4SCompanyDownloadManagerProtocol { return injected.companyDownloadFileManager }
     var userNotificationService: UNService!
     var log: F4SAnalyticsAndDebugging { return injected.log }
@@ -41,14 +36,9 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                 inject: CoreInjectionProtocol,
                 companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
                 hostsProvider: HostsProviderProtocol,
-                documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
-                emailVerificationModel: F4SEmailVerificationModelProtocol,
                 localStore: LocalStorageProtocol,
                 onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol,
-                placementDocumentsServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
-                roleService: F4SRoleServiceProtocol,
                 tabBarCoordinatorFactory: TabbarCoordinatorFactoryProtocol,
-                versionCheckCoordinator: VersionCheckCoordinatorProtocol,
                 window: UIWindow) {
         
         self.window = window
@@ -57,20 +47,13 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         
         self.companyCoordinatorFactory = companyCoordinatorFactory
         self.hostsProvider = hostsProvider
-        self.documentUploaderFactory = documentUploaderFactory
-        
-        self.emailVerificationModel = emailVerificationModel
         self.localStore = localStore
-        self.placementDocumentsServiceFactory = placementDocumentsServiceFactory
         
         self.onboardingCoordinatorFactory = onboardingCoordinatorFactory
-        self.roleService = roleService
         self.tabBarCoordinatorFactory = tabBarCoordinatorFactory
-        self.versionCheckCoordinator = versionCheckCoordinator
 
         super.init(parent:nil, navigationRouter: navigationRouter)
         self.injected.appCoordinator = self
-        versionCheckCoordinator.parentCoordinator = self
         userNotificationService = UNService(appCoordinator: self)
     }
     
@@ -78,36 +61,12 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
         if launchOptions?[.remoteNotification] == nil {
-            performVersionCheck(resultHandler: self.onVersionCheckResult)
+            showOnboardingUIIfNecessary()
         } else {
             startTabBarCoordinator()
         }
     }
-    
-    func performVersionCheck(resultHandler: @escaping (F4SNetworkResult<F4SVersionValidity>)->Void) {
-        guard let versionCheckCoordinator = versionCheckCoordinator else { return }
-        if !childCoordinators.contains(where: { (key, coordinating) -> Bool in
-            coordinating.uuid == versionCheckCoordinator.uuid
-        }) {
-            addChildCoordinator(versionCheckCoordinator)
-        }
-        versionCheckCoordinator.versionCheckCompletion = resultHandler
-        versionCheckCoordinator.start()
-    }
-    
-    func onVersionCheckResult(_ result:F4SNetworkResult<F4SVersionValidity>) {
-        switch result {
-        case .error(_):
-            self.presentNoNetworkMustRetry(retryOperation: { [weak self] in
-                self?.versionCheckCoordinator?.start()
-            })
-        case .success(let isValid):
-            guard isValid else { return }
-            startOnboarding()
-            versionCheckCoordinator = nil
-        }
-    }
-    
+        
     func startOnboarding() {
         let onboardingCoordinator = onboardingCoordinatorFactory.makeOnboardingCoordinator(parent: self, navigationRouter: navigationRouter)
         self.onboardingCoordinator = onboardingCoordinator
@@ -148,7 +107,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         if onboardingRequired {
             onboardingCoordinator?.hideOnboardingControls = false
         } else {
-            onboardingDidFinish(onboardingCoordinator: onboardingCoordinator!)
+            startTabBarCoordinator()
         }
     }
     
@@ -160,7 +119,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         tabBarCoordinator.shouldAskOperatingSystemToAllowLocation = shouldAskOperatingSystemToAllowLocation
         addChildCoordinator(tabBarCoordinator)
         tabBarCoordinator.start()
-        performVersionCheck { (result) in }
     }
     
     func showSearch() { tabBarCoordinator.showSearch() }

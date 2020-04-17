@@ -295,12 +295,15 @@ extension MapViewController {
         
         self.refineSearchLabel.attributedText = NSAttributedString(
             string: refineStr,
-            attributes: [NSAttributedString.Key.font: UIFont.f4sSystemFont(size: Style.smallerMediumTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.paragraphStyle: paragraph])
+            attributes: [
+                NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption1),
+                NSAttributedString.Key.foregroundColor: UIColor.black,
+                NSAttributedString.Key.paragraphStyle: paragraph])
     }
     
     func adjustNavigationBar() {
         navigationController?.setNavigationBarHidden(true, animated: false)
-        navigationController?.navigationBar.barTintColor = UIColor(netHex: Colors.black)
+        navigationController?.navigationBar.barTintColor = UIColor.black
         navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.isTranslucent = false
         setNeedsStatusBarAppearanceUpdate()

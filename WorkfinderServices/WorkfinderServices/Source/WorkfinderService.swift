@@ -1,5 +1,6 @@
 
 import Foundation
+import WorkfinderNetworking
 import WorkfinderCommon
 
 public class WorkfinderService {

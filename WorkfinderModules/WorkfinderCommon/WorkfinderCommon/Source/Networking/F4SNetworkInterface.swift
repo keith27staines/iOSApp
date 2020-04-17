@@ -11,21 +11,12 @@ import Foundation
 
 public typealias HTTPStatusCode = Int
 
-public enum F4SNetworkResult<A:Decodable> {
-    case error(F4SNetworkError)
-    case success(A)
-}
-
-public struct F4SJSONBoolValue: Codable {
-    public var value: Bool
-    public init(value: Bool = true) {
-        self.value = value
-    }
-}
-
-public enum F4SNetworkDataResult {
-    case error(F4SNetworkError)
-    case success(Data?)
+/// Errors that may be thrown during a network request
+public enum NetworkError: Error {
+    case clientError(Error)
+    case httpError(HTTPURLResponse)
+    case responseBodyEmpty(HTTPURLResponse)
+    case deserialization(Error)
 }
 
 public enum F4SNetworkErrorDomainType : String {

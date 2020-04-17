@@ -12,14 +12,12 @@ public class CoreInjection : CoreInjectionProtocol {
     public var log: F4SAnalyticsAndDebugging
     public let appInstallationLogic: AppInstallationLogicProtocol
     public let appSettings: AppSettingProvider
-    public var userService: F4SUserServiceProtocol
     public var networkConfig: NetworkConfig
     
     public init(launchOptions: LaunchOptions?,
                 networkConfig: NetworkConfig,
                 appInstallationLogic: AppInstallationLogicProtocol,
                 user: Candidate,
-                userService: F4SUserServiceProtocol,
                 userRepository: UserRepositoryProtocol,
                 companyDownloadFileManager: F4SCompanyDownloadManagerProtocol,
                 log: F4SAnalyticsAndDebugging,
@@ -29,7 +27,6 @@ public class CoreInjection : CoreInjectionProtocol {
         self.networkConfig = networkConfig
         self.appInstallationLogic = appInstallationLogic
         self.user = user
-        self.userService = userService
         self.userRepository = userRepository
         self.companyDownloadFileManager = companyDownloadFileManager
         self.log = log

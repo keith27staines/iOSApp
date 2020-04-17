@@ -14,23 +14,14 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
     let applyService: ApplyServiceProtocol
     let environment: EnvironmentType
     let hostsProvider: HostsProviderProtocol
-    let documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol
-    let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
-    let emailVerificationModel: F4SEmailVerificationModel
     let interestsRepository: F4SInterestsRepositoryProtocol
 
     init(applyService: ApplyServiceProtocol,
          hostsProvider: HostsProviderProtocol,
-         documentServiceFactory: F4SPlacementDocumentsServiceFactoryProtocol,
-         documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
-         emailVerificationModel: F4SEmailVerificationModel,
          environment: EnvironmentType,
          interestsRepository: F4SInterestsRepositoryProtocol) {
         self.applyService = applyService
         self.hostsProvider = hostsProvider
-        self.documentServiceFactory = documentServiceFactory
-        self.documentUploaderFactory = documentUploaderFactory
-        self.emailVerificationModel = emailVerificationModel
         self.environment = environment
         self.interestsRepository = interestsRepository
     }
@@ -47,9 +38,6 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
             inject: inject,
             environment: environment,
             interestsRepository: interestsRepository,
-            emailVerificationModel: emailVerificationModel,
-            documentServiceFactory: documentServiceFactory,
-            documentUploaderFactory: documentUploaderFactory,
             applyService: ApplyService(),
             hostsProvider: hostsProvider)
     }

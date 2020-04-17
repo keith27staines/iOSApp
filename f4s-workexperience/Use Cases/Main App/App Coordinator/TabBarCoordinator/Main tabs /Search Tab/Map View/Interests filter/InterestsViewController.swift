@@ -157,7 +157,8 @@ extension InterestsViewController {
     func updateResultsLabel(count: Int) {
         let label = UILabel()
         let resultsString = count == 1 ? " Result" : " Results"
-        label.attributedText = NSAttributedString(string: "\(count)" + resultsString, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: Style.smallTextSize,weight: UIFont.Weight.regular),
+        label.attributedText = NSAttributedString(string: "\(count)" + resultsString, attributes: [
+            NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption1),
             NSAttributedString.Key.foregroundColor: UIColor.white])
         label.sizeToFit()
         let customBarBtn = UIBarButtonItem(customView: label)
@@ -173,7 +174,9 @@ extension InterestsViewController {
             let resultsString = "Results"
             label.attributedText = NSAttributedString(
                 string: resultsString,
-                attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: Style.smallTextSize, weight: UIFont.Weight.regular), NSAttributedString.Key.foregroundColor: UIColor.white])
+                attributes: [
+                    NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption1),
+                    NSAttributedString.Key.foregroundColor: UIColor.white])
             label.sizeToFit()
             let customBarBtn = UIBarButtonItem(customView: label)
 
@@ -198,9 +201,9 @@ extension InterestsViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.selectedBackgroundView = UIView()
-        cell.selectedBackgroundView!.backgroundColor = UIColor(netHex: Colors.powderBlue)
+        cell.selectedBackgroundView!.backgroundColor = WorkfinderColors.highlightBlue
         cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor(netHex: Colors.pinkishGrey).cgColor
+        cell.layer.borderColor = WorkfinderColors.lightGrey.cgColor
         cell.layer.cornerRadius = 5
         let currentInterest = interestsToDisplay[indexPath.row]
         let count = interestsCount[currentInterest] ?? 0
