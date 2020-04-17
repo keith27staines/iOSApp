@@ -53,7 +53,7 @@ protocol CompanySummarySectionPresenterProtocol {
         case .industry:
             let nameValueCell = cell as! NameValueCell
             nameValueCell.nameLabel.text = "Industry"
-            nameValueCell.valueLabel.text = company.industries?.first
+            nameValueCell.valueLabel.text = company.industries?.first?.name
             nameValueCell.nameValue.isButton = false
             nameValueCell.nameLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
         case .summary:

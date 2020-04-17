@@ -67,7 +67,7 @@ public class MockF4SCompanyRepository: F4SCompanyRepositoryProtocol {
         return CompanyJson(
             uuid: uuid,
             name: makeRandomName(),
-            industries: ["Making stuff"],
+            industries: [],
             logoUrlString: "url/logo",
             description: "We make stuff",
             employeeCount: 100,

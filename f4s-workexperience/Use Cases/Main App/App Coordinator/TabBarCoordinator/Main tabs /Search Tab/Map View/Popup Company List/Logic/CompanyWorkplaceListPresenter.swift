@@ -42,8 +42,8 @@ class CompanyWorkplaceListPresenter {
                 let loc = companyJson.locations.first { (companyLocationJson) -> Bool in
                     companyLocationJson.uuid == locationUuid
                 }
-                let lat = loc?.point?.coordinates[0] ?? 0
-                let lon = loc?.point?.coordinates[1] ?? 0
+                let lat = loc?.geometry?.coordinates[0] ?? 0
+                let lon = loc?.geometry?.coordinates[1] ?? 0
                 let pinJson = PinJson(workplaceUuid: locationUuid, latitude: Double(lat), longitude: Double(lon))
                 return CompanyWorkplace(companyJson: companyJson, pinJson: pinJson)
             }

@@ -10,7 +10,7 @@ public protocol LoginUserServiceProtocol: class {
 class LoginUserService: LoginUserServiceProtocol {
     let endpoint: String
     var completion: ((Result<String,Error>) -> Void)?
-    let taskHandler = TaskCompletionHandler()
+    let taskHandler = DataTaskCompletionHandler()
     let session = URLSession(configuration: URLSessionConfiguration.default)
     var task: URLSessionDataTask?
     var user: User!
@@ -24,7 +24,7 @@ class LoginUserService: LoginUserServiceProtocol {
         task = session.dataTask(with: request, completionHandler: { (data, response, error) in
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                self.taskHandler.handleResult(data: data, response: response, error: error, completion: self.deserialise)
+                self.taskHandler.convertToDataResult(data: data, response: response, error: error, completion: self.deserialise)
             }
         })
         task?.resume()

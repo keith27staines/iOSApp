@@ -23,7 +23,7 @@ class NetworkConfigTests: XCTestCase {
                                    endpoints: endpoints,
                                    userRepository: userRepo)
         XCTAssertEqual(config.workfinderApiV3, "someUrl")
-        XCTAssertEqual(config.endpoints.workfinderApiUrlString, "someUrl")
+        XCTAssertEqual(config.workfinderApiEndpoint.workfinderApiUrlString, "someUrl")
     }
 }
 

@@ -13,7 +13,7 @@ public protocol RegisterUserServiceProtocol: class {
 
 class RegisterUserService: RegisterUserServiceProtocol {
     
-    let taskHandler = TaskCompletionHandler()
+    let taskHandler = DataTaskCompletionHandler()
     let endpoint: String
     var session: URLSession { return networkConfig.sessionManager.interactiveSession }
     var task: URLSessionDataTask?
@@ -35,7 +35,7 @@ class RegisterUserService: RegisterUserServiceProtocol {
         task = session.dataTask(with: request, completionHandler: { (data, response, error) in
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                self.taskHandler.handleResult(
+                self.taskHandler.convertToDataResult(
                     data: data,
                     response: response,
                     error: error,

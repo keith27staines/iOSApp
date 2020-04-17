@@ -36,17 +36,20 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         self.registrar = registrar
         self.launchOptions = launchOptions
         self.log = F4SLog()
+        self.workfinderEndpoint = try! WorkfinderEndpoint(baseUrlString: baseUrlString)
         self.remoteConfig = RemoteConfiguration()
         self.remoteConfig.start()
     }
     
+    let workfinderEndpoint: WorkfinderEndpoint
+    
     lazy var networkConfiguration: NetworkConfig = {
         let sessionManager = F4SNetworkSessionManager()
-        let endpoints = WorkfinderEndpoint(baseUrlString: baseUrlString)
+        let endpoint = self.workfinderEndpoint
         let networkCallLogger = NetworkCallLogger(log: log)
         let networkConfig = NetworkConfig(logger: networkCallLogger,
                                           sessionManager: sessionManager,
-                                          endpoints: endpoints,
+                                          workfinderEndpoint: endpoint,
                                           userRepository: self.userRepo)
         return networkConfig
     }()
@@ -146,7 +149,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     }()
     
     lazy var hostsProvider: HostsProviderProtocol = {
-        return HostsProvider(apiUrlString: self.networkConfiguration.workfinderApiV3)
+        return HostsProvider(networkConfig: self.networkConfiguration)
     }()
     
     lazy var documentUploaderFactory: F4SDocumentUploaderFactoryProtocol = {
@@ -170,12 +173,5 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     lazy var onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol = {
          return OnboardingCoordinatorFactory(localStore: self.localStore)
      }()
-    
-    lazy var roleService: F4SRoleServiceProtocol = {
-        return F4SRoleService(configuration: self.networkConfiguration)
-    }()
-    
-    lazy var userService: F4SUserServiceProtocol = {
-        return F4SUserService(configuration: self.networkConfiguration)
-    }()
+
 }

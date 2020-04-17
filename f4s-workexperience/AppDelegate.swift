@@ -12,8 +12,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var companyFileDownloadManager: F4SCompanyDownloadManagerProtocol!
     var appCoordinator: AppCoordinatorProtocol!
     
-    lazy var userService: F4SUserServiceProtocol = { return self.masterBuilder.userService }()
-    
     var log: F4SAnalyticsAndDebugging { return appCoordinator.log }
     
     // MARK:- Application events
@@ -75,14 +73,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return String(format: "%02.2hhx", data)
         }
         let token = tokenParts.joined()
-        userService.enablePushNotificationForUser(installationUuid: userUuid, withDeviceToken: token) { [weak self] (result) in
-            switch result {
-            case .error(let error):
-                self?.log.error(error, functionName: #function, fileName: #file, lineNumber: #line)
-            case .success(_):
-                self?.log.debug("Notifications enabled on server with token \(token)", functionName: #function, fileName: #file, lineNumber: #line)
-            }
-        }
+//        userService.enablePushNotificationForUser(installationUuid: userUuid, withDeviceToken: token) { [weak self] (result) in
+//            switch result {
+//            case .error(let error):
+//                self?.log.error(error, functionName: #function, fileName: #file, lineNumber: #line)
+//            case .success(_):
+//                self?.log.debug("Notifications enabled on server with token \(token)", functionName: #function, fileName: #file, lineNumber: #line)
+//            }
+//        }
     }
     
     func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {

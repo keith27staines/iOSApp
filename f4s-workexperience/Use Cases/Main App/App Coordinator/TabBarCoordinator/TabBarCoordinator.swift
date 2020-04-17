@@ -12,7 +12,6 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
 
     let documentUploaderFactory: F4SDocumentUploaderFactoryProtocol
     let interestsRepository: F4SInterestsRepositoryProtocol
-    let roleService: F4SRoleServiceProtocol
     
     var parentCoordinator: Coordinating?
     let uuid: UUID = UUID()
@@ -31,8 +30,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
                   inject: CoreInjectionProtocol,
                   companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
                   documentUploaderFactory: F4SDocumentUploaderFactoryProtocol,
-                  interestsRepository: F4SInterestsRepositoryProtocol,
-                  roleService: F4SRoleServiceProtocol) {
+                  interestsRepository: F4SInterestsRepositoryProtocol) {
         self.parentCoordinator = parent
         self.navigationRouter = navigationRouter
         self.injected = inject
@@ -41,7 +39,6 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         self.documentUploaderFactory = documentUploaderFactory
 
         self.interestsRepository = interestsRepository
-        self.roleService = roleService
     }
     
     func start() {

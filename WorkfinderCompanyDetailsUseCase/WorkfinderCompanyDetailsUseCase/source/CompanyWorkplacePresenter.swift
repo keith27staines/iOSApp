@@ -156,8 +156,9 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+5, execute: {
                     self.beginLoadHosts()
                 })
-            case .success(let hosts):
-                self.mainViewPresenter.hostsSectionPresenter.onHostsDidLoad(hosts)
+            case .success(let hostListJson):
+                let hosts = hostListJson.results
+                self.mainViewPresenter.hostsSectionPresenter.onHostsDidLoad(hosts ?? [])
                 self.onDidUpdate()
             }
         }

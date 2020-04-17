@@ -38,7 +38,7 @@ public class F4SDocumentUploader : NSObject, F4SDocumentUploaderProtocol {
             let localUrl = URL(string: localUrlString),
             let documentName = document.name
             else { return nil }
-        let targetUrlString = configuration.endpoints.postDocumentsUrl + "/\(placementUuid)/documents"
+        let targetUrlString = ""
         guard let targetUrl = URL(string: targetUrlString) else { return nil }
         self.targetUrl = targetUrl
         self.placementUuid = placementUuid

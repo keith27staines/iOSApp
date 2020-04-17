@@ -140,7 +140,7 @@ class RegisterUserViewController: UIViewController {
             field.underline.state = validator(string ?? "")
         }
         field.textfield.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        field.textfield.borderStyle = .roundedRect
+        field.textfield.borderStyle = .none
         return field
     }
     

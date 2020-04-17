@@ -1,8 +1,11 @@
+
 /// `NetworkConfig` defines api keys and api endpoints
+public let invalidBaseURLError: String = ""
 public struct NetworkConfig {
     
     /// The full url for the v2 api
-    public var workfinderApiV3: String { return endpoints.workfinderApiUrlString }
+    public var workfinderApiV3: String { workfinderApiEndpoint.workfinderApiUrlString }
+    public var workfinderApiV3Url: URL
     
     /// Manages network sessions
     public let sessionManager: F4SNetworkSessionManagerProtocol
@@ -20,23 +23,25 @@ public struct NetworkConfig {
     /// A logger designed to capture full details of network errors
     public let logger: NetworkCallLoggerProtocol
     
-    public let endpoints: WorkfinderEndpoint!
+    public let workfinderApiEndpoint: WorkfinderEndpoint!
     
     public let userRepository: UserRepositoryProtocol
     
     /// Initialise a new instance
     ///
     /// - Parameters:
-    ///   - workfinderApiKey: the api key required for Workfinder api access
     ///   - logger: logs network failures
+    ///   - sessionManager: Manages network sessions
+    ///   - endpoints:
     public init(
         logger: NetworkCallLoggerProtocol,
         sessionManager: F4SNetworkSessionManagerProtocol,
-        endpoints: WorkfinderEndpoint,
+        workfinderEndpoint: WorkfinderEndpoint,
         userRepository: UserRepositoryProtocol) {
         self.logger = logger
+        self.workfinderApiV3Url = workfinderEndpoint.workfinderAPiUrl
         self.sessionManager = sessionManager
-        self.endpoints = endpoints
+        self.workfinderApiEndpoint = workfinderEndpoint
         self.userRepository = userRepository
     }
 }

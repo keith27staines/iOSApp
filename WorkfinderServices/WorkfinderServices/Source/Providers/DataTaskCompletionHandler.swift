@@ -1,10 +1,11 @@
 
 import Foundation
+import WorkfinderCommon
 
-public class TaskCompletionHandler {
+public class DataTaskCompletionHandler {
     public init() {}
     
-    public func handleResult(data: Data?, response: URLResponse?, error: Error?, completion: @escaping((Result<Data,Error>) -> Void)) {
+    public func convertToDataResult(data: Data?, response: URLResponse?, error: Error?, completion: @escaping((Result<Data,Error>) -> Void)) {
         DispatchQueue.main.async {
             guard let response = response as? HTTPURLResponse else {
                 if let error = error {

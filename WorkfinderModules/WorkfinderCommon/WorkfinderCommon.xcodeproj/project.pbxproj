@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC036BCE24497C9A008C4A69 /* WorkfinderCommonErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC036BCD24497C9A008C4A69 /* WorkfinderCommonErrors.swift */; };
 		FC04B867233277080034A60E /* CoordinatorProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04B866233277080034A60E /* CoordinatorProtocols.swift */; };
 		FC066050232645D800496FE2 /* F4SFavouritesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06604F232645D800496FE2 /* F4SFavouritesRepository.swift */; };
 		FC0660572326635000496FE2 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0660562326635000496FE2 /* Protocols.swift */; };
@@ -146,6 +147,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FC036BCD24497C9A008C4A69 /* WorkfinderCommonErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderCommonErrors.swift; sourceTree = "<group>"; };
 		FC04B866233277080034A60E /* CoordinatorProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocols.swift; sourceTree = "<group>"; };
 		FC06604F232645D800496FE2 /* F4SFavouritesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SFavouritesRepository.swift; sourceTree = "<group>"; };
 		FC0660562326635000496FE2 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
@@ -532,6 +534,7 @@
 				FC06605C2326770B00496FE2 /* F4SShortlistJson.swift */,
 				FC22438E232F9E750073C9B1 /* F4SCompanyDatabaseMetaData.swift */,
 				FC426F0D232FF8BC004F8A3E /* EmailVerification.swift */,
+				FC036BCD24497C9A008C4A69 /* WorkfinderCommonErrors.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -771,6 +774,7 @@
 				FC8F9583233BB5580027BE02 /* FactoriesProtocols.swift in Sources */,
 				FC93DC5A23202CFB00F1CE23 /* EnvironmentType.swift in Sources */,
 				FC8F9576233B9B390027BE02 /* Mocks.swift in Sources */,
+				FC036BCE24497C9A008C4A69 /* WorkfinderCommonErrors.swift in Sources */,
 				FC426F0E232FF8BC004F8A3E /* EmailVerification.swift in Sources */,
 				FC4EE714230EBC8100B40F6B /* F4SRoleJson.swift in Sources */,
 				FC9670A6225A279300318F69 /* F4SInterestsRepositoryProtocol.swift in Sources */,

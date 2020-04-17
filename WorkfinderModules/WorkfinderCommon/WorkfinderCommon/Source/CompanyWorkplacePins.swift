@@ -29,11 +29,16 @@ public class CompanyWorkplace: Codable {
     }
 }
 
+public struct CodeAndName: Codable {
+    public let code: String
+    public let name: String
+}
+
 public struct CompanyJson: Codable {
     public var uuid: String?
     public var name: String?
     public var description: String?
-    public var industries: [String]?
+    public var industries: [CodeAndName]?
     public var logoUrlString: String?
     public var duedilUrlString: String?
     public var locations: [CompanyLocationJson]
@@ -52,7 +57,7 @@ public struct CompanyJson: Codable {
     public init(
         uuid: F4SUUID,
         name: String,
-        industries: [String]? = nil,
+        industries: [CodeAndName]? = nil,
         logoUrlString: String? = nil,
         description: String? = nil,
         employeeCount: Int? = nil,
@@ -114,11 +119,9 @@ public struct CompanyJson: Codable {
 public struct CompanyLocationJson: Codable {
     public var uuid: String?
     public var address_postcode: String?
-    //public var address_postcode: String?
-    public var point: PointJson?
+    public var geometry: PointJson?
     private enum codingKeys: String, CodingKey {
         case uuid
-        //case postcode // = "address_postcode"
         case address_postcode
         case point
     }
