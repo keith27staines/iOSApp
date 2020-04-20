@@ -2,9 +2,8 @@
 import UIKit
 import CoreLocation
 import WorkfinderCommon
+import WorkfinderUI
 import WorkfinderServices
-
-let workfinderGreen = UIColor(red: 57, green: 167, blue: 82)
 
 protocol CompanyWorkplaceCoordinatorProtocol : CompanyMainViewCoordinatorProtocol {
     func companyWorkplacePresenterDidFinish(_ : CompanyWorkplacePresenter)
@@ -104,7 +103,7 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
     
     var applyButtonState: (String, Bool, UIColor) {
         if true   {
-            return ("Apply", true, workfinderGreen)
+            return ("Apply", true, WorkfinderColors.primaryGreen)
         } else {
             return ("Choose a host", false, UIColor.lightGray)
         }

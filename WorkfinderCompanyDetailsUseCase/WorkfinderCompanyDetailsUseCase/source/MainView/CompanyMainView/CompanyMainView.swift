@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import WorkfinderCommon
+import WorkfinderUI
 
 protocol CompanyMainViewProtocol: class {
     var presenter: CompanyMainViewPresenterProtocol! { get set }
@@ -34,7 +35,6 @@ class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewP
 
     var appSettings: AppSettingProvider
     let toolbarAlpha: CGFloat = 0.9
-    let workfinderGreen = UIColor(red: 57, green: 167, blue: 82)
     var isShowingMap: Bool = false {
         didSet {
             switch isShowingMap {
@@ -71,7 +71,7 @@ class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewP
         tableView.reloadData()
         applyButton.setTitle("Apply", for: .normal)
         applyButton.isEnabled = presenter.isHostSelected
-        applyButton.backgroundColor = presenter.isHostSelected ? workfinderGreen : UIColor.init(white: 0.9, alpha: 1)
+        applyButton.backgroundColor = presenter.isHostSelected ? WorkfinderColors.primaryGreen : UIColor.init(white: 0.9, alpha: 1)
     }
     
     lazy var headerView: CompanyHeaderViewProtocol = {
@@ -96,13 +96,13 @@ class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewP
     
     lazy var sectionSelectorView: SectionSelectorView = {
         let view = SectionSelectorView(model: self.sectionsModel, delegate: self)
-        view.onColor = self.workfinderGreen
+        view.onColor = WorkfinderColors.primaryGreen
         return view
     }()
     
     lazy var applyButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor  = self.workfinderGreen
+        button.backgroundColor  = WorkfinderColors.primaryGreen
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.setTitleColor(UIColor.white, for: UIControl.State.normal)
         button.setTitle("Apply", for: .normal)

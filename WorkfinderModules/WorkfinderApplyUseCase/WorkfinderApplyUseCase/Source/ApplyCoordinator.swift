@@ -9,8 +9,6 @@ import WorkfinderDocumentUploadUseCase
 import WorkfinderUserDetailsUseCase
 
 let __bundle = Bundle(identifier: "com.f4s.WorkfinderApplyUseCase")!
-let workfinderGreen = UIColor(red: 57, green: 167, blue: 82)
-let workfinderLightGrey = UIColor.init(white: 0.93, alpha: 1)
 
 public protocol ApplyCoordinatorDelegate : class {
     func applicationDidFinish(preferredDestination: ApplyCoordinator.PreferredDestinationAfterApplication)
@@ -24,6 +22,8 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         case search
         case none
     }
+    var coverletterCoordinator: CoverletterCoordinatorProtocol?
+    var rootViewController: UIViewController?
     let environment: EnvironmentType
     var interestsRepository: F4SInterestsRepositoryProtocol
     let startingViewController: UIViewController!
@@ -54,24 +54,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     
     override public func start() {
         super.start()
-        showDateOfBirth()
-    }
-    
-    func showDateOfBirth() {
-        let dobVC = DateOfBirthCollectorViewController(coordinator: self)
-        navigationRouter.push(viewController: dobVC, animated: true)
-    }
-    
-    var coverletterCoordinator: CoverletterCoordinatorProtocol?
-    
-    func startCoverLetterCoordinator(candidateDateOfBirth: Date) {
-        coverletterCoordinator = CoverLetterCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, candidateDateOfBirth: candidateDateOfBirth)
-        coverletterCoordinator?.start()
-    }
-    
-    var rootViewController: UIViewController?
-    
-    func coverLetterCoordinatorDidComplete(presenter: CoverLetterViewPresenterProtocol) {
+        //startDateOfBirth()
         startSigninCoordinator()
     }
     
@@ -81,9 +64,21 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         coordinator.start()
     }
     
-    deinit {
-        print("ApplyCoordinator did deinit")
+    func startDateOfBirth() {
+        let dobVC = DateOfBirthCollectorViewController(coordinator: self)
+        navigationRouter.push(viewController: dobVC, animated: true)
     }
+    
+    func startCoverLetterCoordinator(candidateDateOfBirth: Date) {
+        coverletterCoordinator = CoverLetterCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, candidateDateOfBirth: candidateDateOfBirth)
+        coverletterCoordinator?.start()
+    }
+    
+    func coverLetterCoordinatorDidComplete(presenter: CoverLetterViewPresenterProtocol) {
+        startSigninCoordinator()
+    }
+    
+    deinit { print("ApplyCoordinator did deinit") }
 }
 
 extension ApplyCoordinator: RegisterAndSignInCoordinatorParent {

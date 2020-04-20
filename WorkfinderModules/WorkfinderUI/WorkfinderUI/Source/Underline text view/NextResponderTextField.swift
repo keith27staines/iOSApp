@@ -33,6 +33,8 @@ open class NextResponderTextField: UITextField {
     private func setUp() {
         addTarget(self, action: #selector(actionKeyboardButtonTapped(sender:)), for: .editingDidEndOnExit)
     }
+    
+    open override var canBecomeFirstResponder: Bool { return true }
 
     @objc private func actionKeyboardButtonTapped(sender _: UITextField) {
         switch nextResponderField {
@@ -40,6 +42,7 @@ open class NextResponderTextField: UITextField {
             button.sendActions(for: .touchUpInside)
         case .some(let responder):
             responder.becomeFirstResponder()
+            
         default:
             resignFirstResponder()
         }

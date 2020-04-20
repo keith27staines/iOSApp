@@ -19,3 +19,12 @@ public class WorkfinderUI {
     }
 }
 
+public extension UIViewController {
+    func openLinkInWebView(_ remoteLink: RemoteLinks) {
+        let urlString = remoteLink.rawValue
+        let webview = F4SWebViewController(urlString: urlString, showNavigationButtons: true, delegate: nil)
+        present(webview, animated: true, completion: nil)
+    }
+
+}
+

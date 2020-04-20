@@ -1,5 +1,6 @@
 
 import UIKit
+import WorkfinderUI
 
 protocol DateOfBirthCoordinatorProtocol: class {
     func onDidCancel()
@@ -21,7 +22,7 @@ class DateOfBirthCollectorViewController: UIViewController {
             let formatter = DateFormatter()
             formatter.dateStyle = .long
             nextButton.isEnabled = true
-            nextButton.backgroundColor = workfinderGreen
+            nextButton.backgroundColor = WorkfinderColors.primaryGreen
             self.textField.text = formatter.string(from: dateOfBirth)
         }
     }

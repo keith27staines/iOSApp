@@ -336,9 +336,9 @@
 		FC9626222248C07800D5F850 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				FC343CF62445F0E200347BC2 /* User sign in */,
 				FCE8DA992320E24600934E2F /* ApplyCoordinator.swift */,
-				FC23BCE3243AFA730075F359 /* DateOfBirthCollectorViewController.swift */,
+				FCD20A84244D788800AAA5FD /* Date of birth */,
+				FC343CF62445F0E200347BC2 /* User sign in */,
 				FC23BCE9243B33510075F359 /* Covering letter MVP */,
 				FC299947231ED87600F83FB6 /* F4SDaysAndHours.storyboard */,
 				FCE8DA8A2320D42600934E2F /* Success screen */,
@@ -364,6 +364,14 @@
 				FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FCD20A84244D788800AAA5FD /* Date of birth */ = {
+			isa = PBXGroup;
+			children = (
+				FC23BCE3243AFA730075F359 /* DateOfBirthCollectorViewController.swift */,
+			);
+			path = "Date of birth";
 			sourceTree = "<group>";
 		};
 		FCE8DA8A2320D42600934E2F /* Success screen */ = {

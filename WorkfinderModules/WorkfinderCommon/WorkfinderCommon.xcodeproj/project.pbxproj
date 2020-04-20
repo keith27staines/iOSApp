@@ -61,6 +61,7 @@
 		FC5CBA6A231D3E4700C2D3C5 /* F4SDateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBA69231D3E4700C2D3C5 /* F4SDateHelper.swift */; };
 		FC73902223030856003A9253 /* LocalStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC73902123030856003A9253 /* LocalStoreTests.swift */; };
 		FC7A4396224A3C0E00B2D693 /* F4SNetworkInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4395224A3C0E00B2D693 /* F4SNetworkInterface.swift */; };
+		FC7DC9F6244D8D7300C282EF /* RemoteLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7DC9F5244D8D7300C282EF /* RemoteLinks.swift */; };
 		FC83EC7F22FC0C55009D7A0B /* F4SJsonValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83EC7E22FC0C55009D7A0B /* F4SJsonValueTests.swift */; };
 		FC83EC8122FC0EDB009D7A0B /* F4SUserRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83EC8022FC0EDB009D7A0B /* F4SUserRepositoryTests.swift */; };
 		FC85E8F323E95C2900624291 /* EmailVerificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85E8F223E95C2900624291 /* EmailVerificationTests.swift */; };
@@ -196,6 +197,7 @@
 		FC5CBA69231D3E4700C2D3C5 /* F4SDateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDateHelper.swift; sourceTree = "<group>"; };
 		FC73902123030856003A9253 /* LocalStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStoreTests.swift; sourceTree = "<group>"; };
 		FC7A4395224A3C0E00B2D693 /* F4SNetworkInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SNetworkInterface.swift; sourceTree = "<group>"; };
+		FC7DC9F5244D8D7300C282EF /* RemoteLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteLinks.swift; sourceTree = "<group>"; };
 		FC83EC7E22FC0C55009D7A0B /* F4SJsonValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SJsonValueTests.swift; sourceTree = "<group>"; };
 		FC83EC8022FC0EDB009D7A0B /* F4SUserRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserRepositoryTests.swift; sourceTree = "<group>"; };
 		FC85E8F223E95C2900624291 /* EmailVerificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationTests.swift; sourceTree = "<group>"; };
@@ -543,6 +545,7 @@
 				FC426F07232FAFF0004F8A3E /* WorkfinderNetworking.swift */,
 				FC426EFD232FAC6C004F8A3E /* F4SNetworkSessionManagerProtocol.swift */,
 				FC7A4395224A3C0E00B2D693 /* F4SNetworkInterface.swift */,
+				FC7DC9F5244D8D7300C282EF /* RemoteLinks.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -708,6 +711,7 @@
 				FC7A4396224A3C0E00B2D693 /* F4SNetworkInterface.swift in Sources */,
 				FCE519302249482A00B550C9 /* F4SDisplayableMonth.swift in Sources */,
 				FC0E5CFB224E1B5700615B4F /* LocalStore.swift in Sources */,
+				FC7DC9F6244D8D7300C282EF /* RemoteLinks.swift in Sources */,
 				FCE8DAA62320E71300934E2F /* ApplicationState.swift in Sources */,
 				FCE75CC6232F631C00C2E976 /* NetworkCallLoggerProtocol.swift in Sources */,
 				FCFC06AB23225765003C59C8 /* LatLon.swift in Sources */,

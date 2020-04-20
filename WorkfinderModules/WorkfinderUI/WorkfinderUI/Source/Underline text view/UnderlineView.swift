@@ -42,6 +42,7 @@ public class UnderlineView: UIView {
         self.goodColor = goodColor
         self.badColor = badColor
         super.init(frame: CGRect.zero)
+        self.backgroundColor = WorkfinderColors.lightGrey
         addSubview(lineView)
         lineView.anchor(top: self.topAnchor,
                         leading: self.leadingAnchor,
