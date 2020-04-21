@@ -103,7 +103,6 @@ class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewP
     lazy var applyButton: UIButton = {
         let button = WorkfinderPrimaryButton()
         button.setTitle("Apply", for: .normal)
-        button.layer.cornerRadius = 8
         button.alpha = 1.0
         button.isOpaque = true
         button.addTarget(self, action: #selector(didTapApply), for: .touchUpInside)
@@ -114,7 +113,7 @@ class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewP
         let view = UIView()
         view.backgroundColor = UIColor.init(white: 1, alpha: self.toolbarAlpha)
         view.addSubview(self.applyButton)
-        self.applyButton.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 24, left: 24, bottom: 24, right: 24), size: CGSize(width: 0, height: 44))
+        self.applyButton.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 24, left: 24, bottom: 24, right: 24), size: CGSize(width: 0, height: 55))
         return view
     }()
     
