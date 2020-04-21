@@ -101,7 +101,10 @@ class RegisterUserPresenter: RegisterUserPresenterProtocol {
     }
     var fullname: String? {
         get { user.fullname }
-        set { user.fullname = newValue }
+        set {
+            user.fullname = newValue
+            user.nickname = String(newValue?.split(separator: " ").first ?? "")
+        }
     }
     var phone: String?
         

@@ -19,10 +19,10 @@ class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, Register
     
     override func start() {
         let userRepository = injected.userRepository
-//        guard userRepository.loadAccessToken() == nil else {
-//            onDidRegister(user: userRepository.loadUser(), pop: false)
-//            return
-//        }
+        guard userRepository.loadAccessToken() == nil else {
+            onDidRegister(user: userRepository.loadUser(), pop: false)
+            return
+        }
         let service = RegisterUserService(networkConfig: injected.networkConfig)
         let presenter = RegisterUserPresenter(
             coordinator: self,

@@ -11,11 +11,12 @@ public struct WorkfinderColors {
     public static let darkGrey = UIColor(white: 0.7, alpha: 1)
     public static let warmGrey = UIColor(red: 0.8, green: 0.7, blue: 0.6, alpha: 1)
     
-    public static let warningNormal = UIColor(red: 1, green: 174/255, blue: 66/255)
-    public static let warningActive = UIColor(red: 63, green: 172, blue: 87)
+    public static let goodValueNormal = UIColor.green
     public static let goodValueActive = UIColor(red: 63, green: 172, blue: 87)
-    public static let badValueNormal = UIColor(red: 1, green: 174/255, blue: 66/255)
-    public static let badValueActive = UIColor(red: 1, green: 179/255, blue: 71/255)
+    public static let warningNormal = UIColor(red: 255, green: 174, blue: 66)
+    public static let warningActive = UIColor(red: 63, green: 172, blue: 87)
+    public static let badValueNormal = UIColor(red: 255, green: 174, blue: 66)
+    public static let badValueActive = UIColor(red: 255, green: 179, blue: 71)
 }
 
 public class WorkfinderPrimaryButton: UIButton {

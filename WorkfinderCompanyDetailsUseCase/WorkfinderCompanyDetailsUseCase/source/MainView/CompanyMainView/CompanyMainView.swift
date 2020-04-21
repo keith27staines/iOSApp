@@ -101,10 +101,7 @@ class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewP
     }()
     
     lazy var applyButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.backgroundColor  = WorkfinderColors.primaryGreen
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        button.setTitleColor(UIColor.white, for: UIControl.State.normal)
+        let button = WorkfinderPrimaryButton()
         button.setTitle("Apply", for: .normal)
         button.layer.cornerRadius = 8
         button.alpha = 1.0

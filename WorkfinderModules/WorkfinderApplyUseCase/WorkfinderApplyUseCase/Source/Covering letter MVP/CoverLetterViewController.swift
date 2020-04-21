@@ -18,6 +18,7 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
         nextButton.isEnabled = presenter.nextButtonIsEnabled
         let color = presenter.nextButtonIsEnabled ? WorkfinderColors.primaryGreen : WorkfinderColors.lightGrey
         nextButton.setBackgroundColor(color: color, forUIControlState: .normal)
+        editButton.configureForLetterIsCompleteState(presenter.nextButtonIsEnabled)
     }
     
     lazy var coverLetterTextView: UITextView = {
@@ -35,14 +36,10 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
     }()
     
     lazy var nextButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button = WorkfinderPrimaryButton()
         button.setTitle("Next", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
-        button.heightAnchor.constraint(equalToConstant: 64).isActive = true
-        button.setBackgroundColor(color: UIColor.lightGray, forUIControlState: .normal)
         button.addTarget(self, action: #selector(didTapNext), for: .touchUpInside)
-        button.layer.cornerRadius = 12
-        button.layer.masksToBounds = true
         return button
     }()
     

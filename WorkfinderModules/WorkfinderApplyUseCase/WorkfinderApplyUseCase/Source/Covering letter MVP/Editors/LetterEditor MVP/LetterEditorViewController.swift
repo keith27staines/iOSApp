@@ -1,5 +1,6 @@
 
 import UIKit
+import WorkfinderUI
 
 protocol LetterEditorCoordinatorProtocol: class {
     func start()
@@ -17,6 +18,16 @@ class LetterEditorViewController: UIViewController, LetterEditorViewProtocol {
     
     func refresh() { tableView.reloadData() }
     
+    lazy var mainStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            self.tableView,
+            self.updateLetterButton
+        ])
+        stack.axis = .vertical
+        stack.spacing = 20
+        return stack
+    }()
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -26,9 +37,19 @@ class LetterEditorViewController: UIViewController, LetterEditorViewProtocol {
         return tableView
     }()
     
+    lazy var updateLetterButton: UIButton = {
+        let button = WorkfinderPrimaryButton()
+        button.setTitle("Update letter", for: .normal)
+        button.addTarget(self, action: #selector(updateLetter), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func updateLetter() { navigationController?.popViewController(animated: true) }
+    
     func configureViews() {
-        view.addSubview(tableView)
-        tableView.fillSuperview()
+        let safeArea = view.safeAreaLayoutGuide
+        view.addSubview(mainStack)
+        mainStack.anchor(top: safeArea.topAnchor, leading: safeArea.leadingAnchor, bottom: safeArea.bottomAnchor, trailing: safeArea.trailingAnchor, padding: UIEdgeInsets(top: 8, left: 20, bottom: 8, right: 20))
     }
     
     override func viewDidLoad() {

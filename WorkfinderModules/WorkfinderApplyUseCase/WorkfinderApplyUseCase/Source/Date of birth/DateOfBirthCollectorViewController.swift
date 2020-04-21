@@ -52,12 +52,8 @@ class DateOfBirthCollectorViewController: UIViewController {
     }()
     
     lazy var nextButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button = WorkfinderPrimaryButton()
         button.setTitle("Next", for: .normal)
-        button.tintColor = UIColor.white
-        button.layer.cornerRadius = 8
-        button.layer.masksToBounds = true
-        button.heightAnchor.constraint(equalToConstant: 48).isActive = true
         button.setContentHuggingPriority(UILayoutPriority.defaultLow, for: NSLayoutConstraint.Axis.horizontal)
         button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return button

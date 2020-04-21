@@ -23,21 +23,21 @@ public class UnderlinedNextResponderTextFieldStack: UIStackView {
         self.greenTick.translatesAutoresizingMaskIntoConstraints = false
         self.greenTick.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         self.greenTick.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        view.widthAnchor.constraint(greaterThanOrEqualTo: self.greenTick.widthAnchor, multiplier: 1).isActive = true
+        view.widthAnchor.constraint(equalTo: self.greenTick.widthAnchor).isActive = true
         view.heightAnchor.constraint(greaterThanOrEqualTo: self.greenTick.heightAnchor, multiplier: 1.0).isActive = true
         view.setContentHuggingPriority(.defaultLow, for: .vertical)
-        view.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        view.setContentHuggingPriority(.required, for: .horizontal)
         return view
     }()
     
     public lazy var greenTick: UIImageView = {
-        let image = UIImage(named: "checkImage")?
+        let image = UIImage(named: "tick")?
             .scaledImage(with: CGSize(width: 24, height: 24))
             .withRenderingMode(.alwaysTemplate)
         let imageView = UIImageView(image: image)
-        imageView.tintColor = WorkfinderColors.goodValueActive
+        imageView.tintColor = self.underline.goodColor
         imageView.contentMode = .scaleAspectFit
-        imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        imageView.setContentHuggingPriority(.required, for: .horizontal)
         imageView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         return imageView
     }()

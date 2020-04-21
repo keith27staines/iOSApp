@@ -175,6 +175,9 @@ class RegisterUserViewController: UIViewController {
     }
     
     @objc func hideKeyboard() { view.endEditing(true) }
+    @objc func nextFieldAfterPassword() {
+        phone.becomeFirstResponder()
+    }
     
     @objc func showTermsAndConditions() { openLinkInWebView(.candidateTermsAndConditions) }
     
@@ -223,10 +226,15 @@ class RegisterUserViewController: UIViewController {
         email.textfield.becomeFirstResponder()
     }
     
+    override func viewDidLayoutSubviews() {
+        scrollView.contentSize = scrollableContentView.frame.size
+    }
+    
     @objc func keyboardNotification(notification: NSNotification) {
         guard let userInfo = notification.userInfo else { return }
         let endFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue ?? CGRect.zero
         keyboardTop = endFrame.origin.y
+        updatePresenter()
     }
     
     func scrollForKeyboardForInputY() {
@@ -303,19 +311,16 @@ extension RegisterUserViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         let point = CGPoint(x: 0, y: textField.frame.maxY)
         inputControlBottom = textField.convert(point, to: nil).y
+        if textField == password.textfield {
+            print("Begin editing password")
+        }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         inputControlBottom = 0
-    }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let textFieldString = textField.text, let swtRange = Range(range, in: textFieldString) else {
-            
-            return true
+        if textField == password.textfield {
+            print("End editing password")
         }
-        let fullString = textFieldString.replacingCharacters(in: swtRange, with: string)
-        return true
     }
 }
 

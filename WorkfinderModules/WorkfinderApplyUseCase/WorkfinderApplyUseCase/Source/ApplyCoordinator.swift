@@ -54,8 +54,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     
     override public func start() {
         super.start()
-        //startDateOfBirth()
-        startSigninCoordinator()
+        startDateOfBirth()
     }
     
     func startSigninCoordinator() {
