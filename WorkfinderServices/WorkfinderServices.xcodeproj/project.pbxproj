@@ -10,10 +10,26 @@
 		FC02D9F922EC70FD003C8148 /* WorkfinderServices.h in Headers */ = {isa = PBXBuildFile; fileRef = FC02D9EB22EC70FD003C8148 /* WorkfinderServices.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FC02DA0E22EC7214003C8148 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC02DA0D22EC7214003C8148 /* WorkfinderCommon.framework */; };
 		FC036BD024497FD5008C4A69 /* WorkfinderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC036BCF24497FD5008C4A69 /* WorkfinderService.swift */; };
+		FC20BD4C2450747900FC6C9A /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC20BD4B2450747900FC6C9A /* WorkfinderNetworking.framework */; };
+		FC20BD4D2450747900FC6C9A /* WorkfinderNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC20BD4B2450747900FC6C9A /* WorkfinderNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC3BCA5D2434DF0700C5A96A /* HostsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3BCA5C2434DF0700C5A96A /* HostsProvider.swift */; };
 		FC3BCA612434E04E00C5A96A /* DataTaskCompletionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3BCA602434E04E00C5A96A /* DataTaskCompletionHandler.swift */; };
 		FCB4EAD624251586001D5D23 /* ApplyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB4EAD524251586001D5D23 /* ApplyService.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FC20BD4E2450747900FC6C9A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FC20BD4D2450747900FC6C9A /* WorkfinderNetworking.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		FC02D9E822EC70FD003C8148 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,6 +38,7 @@
 		FC02DA0D22EC7214003C8148 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC02DA0F22EC721D003C8148 /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC036BCF24497FD5008C4A69 /* WorkfinderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderService.swift; sourceTree = "<group>"; };
+		FC20BD4B2450747900FC6C9A /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC3BCA5C2434DF0700C5A96A /* HostsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostsProvider.swift; sourceTree = "<group>"; };
 		FC3BCA602434E04E00C5A96A /* DataTaskCompletionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTaskCompletionHandler.swift; sourceTree = "<group>"; };
 		FCB4EAD524251586001D5D23 /* ApplyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyService.swift; sourceTree = "<group>"; };
@@ -33,6 +50,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC02DA0E22EC7214003C8148 /* WorkfinderCommon.framework in Frameworks */,
+				FC20BD4C2450747900FC6C9A /* WorkfinderNetworking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +88,7 @@
 		FC02DA0C22EC7214003C8148 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC20BD4B2450747900FC6C9A /* WorkfinderNetworking.framework */,
 				FC02DA0F22EC721D003C8148 /* WorkfinderNetworking.framework */,
 				FC02DA0D22EC7214003C8148 /* WorkfinderCommon.framework */,
 			);
@@ -108,6 +127,7 @@
 				FC02D9E422EC70FD003C8148 /* Sources */,
 				FC02D9E522EC70FD003C8148 /* Frameworks */,
 				FC02D9E622EC70FD003C8148 /* Resources */,
+				FC20BD4E2450747900FC6C9A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -304,7 +324,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
+				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -315,7 +335,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderServices;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderServices;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -330,7 +350,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
+				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -341,7 +361,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderServices;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderServices;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -420,7 +440,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
+				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -431,7 +451,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderServices;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderServices;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -510,7 +530,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
+				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -521,7 +541,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderServices;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderServices;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -594,7 +614,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
+				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -605,7 +625,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderServices;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderServices;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -678,7 +698,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 2ZEM5L3JJT;
+				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -689,7 +709,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderServices;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderServices;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;

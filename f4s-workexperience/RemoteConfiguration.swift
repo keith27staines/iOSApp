@@ -6,10 +6,11 @@ import WorkfinderCommon
 
 class RemoteConfiguration: AppSettingProvider {
 
-    let remoteConfig: RemoteConfig
+    let remoteConfig: RemoteConfig?
     
     init() {
-        remoteConfig = RemoteConfig.remoteConfig()
+        remoteConfig = nil
+        //remoteConfig = RemoteConfig.remoteConfig()
     }
     
     func start() {
@@ -18,21 +19,23 @@ class RemoteConfiguration: AppSettingProvider {
     }
     
     private func loadDefaultValues() {
-        remoteConfig.setDefaults(AppSettingKey.defaultsDictionary as [String: NSObject])
+        // remoteConfig.setDefaults(AppSettingKey.defaultsDictionary as [String: NSObject])
     }
     
     private func fetchCloudValues() {
-        let expiration: TimeInterval = Config.environment == .staging ? 0 : 12 * 3600
-        remoteConfig.fetch(withExpirationDuration: expiration) { (status, error) in
-            guard error == nil else { return }
-            self.remoteConfig.activate { (error) in
-                
-            }
-        }
+        return
+//        let expiration: TimeInterval = Config.environment == .staging ? 0 : 12 * 3600
+//        remoteConfig.fetch(withExpirationDuration: expiration) { (status, error) in
+//            guard error == nil else { return }
+//            self.remoteConfig.activate { (error) in
+//
+//            }
+//        }
     }
     
     public func currentValue(key:AppSettingKey) -> String {
-        return remoteConfig.configValue(forKey: key.rawValue).stringValue ?? key.defaultValue
+        return AppSettingKey.defaultsDictionary[key.rawValue]!
+//        return remoteConfig.configValue(forKey: key.rawValue).stringValue ?? key.defaultValue
     }
     
 }

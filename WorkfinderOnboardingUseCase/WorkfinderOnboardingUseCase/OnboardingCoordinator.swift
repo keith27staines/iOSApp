@@ -3,7 +3,7 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderCoordinators
 
-let __bundle = Bundle(identifier: "com.f4s.WorkfinderOnboardingUseCase")
+let __bundle = Bundle(identifier: "com.workfinder.WorkfinderOnboardingUseCase")
 
 public class OnboardingCoordinator : NavigationCoordinator, OnboardingCoordinatorProtocol {
     

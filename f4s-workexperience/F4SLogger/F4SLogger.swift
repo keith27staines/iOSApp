@@ -14,14 +14,15 @@ import Firebase
 
 public class F4SLog : F4SAnalyticsAndDebugging {
     
-    private var f4sDebug: F4SDebug?
+    private var f4sDebug: F4SAnalyticsAndDebugging? // F4SDebug?
     
     public init() {
         let environmentType = Config.environment
-        startBugsnag(environmentType: environmentType)
-        startFirebase(environmentType: environmentType)
+        //startBugsnag(environmentType: environmentType)
+        //startFirebase(environmentType: environmentType)
         do {
-            f4sDebug = try F4SDebug()
+            f4sDebug = MockF4SAnalyticsAndDebugging()
+            //f4sDebug = try F4SDebug()
         } catch (let error) {
             assertionFailure("Failed to initialize logger: \(error)")
         }

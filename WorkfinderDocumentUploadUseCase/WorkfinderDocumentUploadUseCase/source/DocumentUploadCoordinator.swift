@@ -2,7 +2,7 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderCoordinators
 
-let __bundle = Bundle(identifier: "com.f4s.WorkfinderDocumentUploadUseCase")
+let __bundle = Bundle(identifier: "com.workfinder.WorkfinderDocumentUploadUseCase")
 
 public class DocumentUploadCoordinator : CoreInjectionNavigationCoordinator {
 

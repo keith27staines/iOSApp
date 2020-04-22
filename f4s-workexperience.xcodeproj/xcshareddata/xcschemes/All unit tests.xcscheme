@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "40E78E121DD31A86000A3776"
-               BuildableName = "f4s-workexperience.app"
+               BuildableName = "f4s_workexperience.app"
                BlueprintName = "f4s-workexperience"
                ReferencedContainer = "container:f4s-workexperience.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "40E78E121DD31A86000A3776"
-            BuildableName = "f4s-workexperience.app"
+            BuildableName = "f4s_workexperience.app"
             BlueprintName = "f4s-workexperience"
             ReferencedContainer = "container:f4s-workexperience.xcodeproj">
          </BuildableReference>
@@ -48,7 +48,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "40E78E121DD31A86000A3776"
-            BuildableName = "f4s-workexperience.app"
+            BuildableName = "f4s_workexperience.app"
             BlueprintName = "f4s-workexperience"
             ReferencedContainer = "container:f4s-workexperience.xcodeproj">
          </BuildableReference>
@@ -225,7 +225,7 @@
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FC02D9F022EC70FD003C8148"
@@ -235,7 +235,7 @@
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FC5CBA2D231D296F00C2D3C5"
@@ -275,7 +275,7 @@
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FCEF21EB232A9B84004914F7"
@@ -285,7 +285,7 @@
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FCEF2233232A9EB9004914F7"
@@ -305,7 +305,7 @@
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FCEF2274232A9FC1004914F7"
@@ -341,7 +341,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "40E78E121DD31A86000A3776"
-            BuildableName = "f4s-workexperience.app"
+            BuildableName = "f4s_workexperience.app"
             BlueprintName = "f4s-workexperience"
             ReferencedContainer = "container:f4s-workexperience.xcodeproj">
          </BuildableReference>
@@ -362,7 +362,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "40E78E121DD31A86000A3776"
-            BuildableName = "f4s-workexperience.app"
+            BuildableName = "f4s_workexperience.app"
             BlueprintName = "f4s-workexperience"
             ReferencedContainer = "container:f4s-workexperience.xcodeproj">
          </BuildableReference>

@@ -8,7 +8,7 @@ import WorkfinderCoordinators
 import WorkfinderDocumentUploadUseCase
 import WorkfinderUserDetailsUseCase
 
-let __bundle = Bundle(identifier: "com.f4s.WorkfinderApplyUseCase")!
+let __bundle = Bundle(identifier: "com.workfinder.WorkfinderApplyUseCase")!
 
 public protocol ApplyCoordinatorDelegate : class {
     func applicationDidFinish(preferredDestination: ApplyCoordinator.PreferredDestinationAfterApplication)

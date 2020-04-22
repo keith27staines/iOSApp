@@ -56,8 +56,6 @@
 		D5E9EBE81DD60AB300BD796E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5E9EBEA1DD60AB300BD796E /* Localizable.strings */; };
 		FC04B862233271FE0034A60E /* MasterBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04B861233271FE0034A60E /* MasterBuilder.swift */; };
 		FC04B8642332751F0034A60E /* CoordinatorFactories.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04B8632332751F0034A60E /* CoordinatorFactories.swift */; };
-		FC06605223264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC06605123264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework */; };
-		FC06605323264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC06605123264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC06605523265FC300496FE2 /* CompanyCoordinatorParentProtocol+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06605423265FC300496FE2 /* CompanyCoordinatorParentProtocol+extensions.swift */; };
 		FC0B6B392323D5D600A1867D /* Uploads.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC0B6B382323D5D600A1867D /* Uploads.xcassets */; };
 		FC11006A1FB36A230055EB9A /* ReachabilityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */; };
@@ -81,11 +79,8 @@
 		FC31F095204D54C6009DD526 /* F4SDebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */; };
 		FC31F097204D54E3009DD526 /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC31F096204D54E3009DD526 /* Debug.storyboard */; };
 		FC3CD1DA221566F200F91B50 /* Geocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CD1D9221566F200F91B50 /* Geocoding.swift */; };
-		FC4066FD23277D8F002B425E /* WorkfinderDocumentUploadUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4066FC23277D8F002B425E /* WorkfinderDocumentUploadUseCase.framework */; };
-		FC4066FE23277D8F002B425E /* WorkfinderDocumentUploadUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC4066FC23277D8F002B425E /* WorkfinderDocumentUploadUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC4802C22354AD9300AF8F6D /* firebase_live.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC4802C12354AD9300AF8F6D /* firebase_live.plist */; };
 		FC50E9CE2213EF5400C9A621 /* SearchModeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */; };
-		FC53D6E12323C56F00A339ED /* WorkfinderUserDetailsUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC53D6DF2323C56F00A339ED /* WorkfinderUserDetailsUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC5D3C6C20FE17F600F89169 /* config.yml in Resources */ = {isa = PBXBuildFile; fileRef = FC5D3C6B20FE17F600F89169 /* config.yml */; };
 		FC5D3C6E20FE1CEC00F89169 /* Gemfile in Resources */ = {isa = PBXBuildFile; fileRef = FC5D3C6D20FE1CEB00F89169 /* Gemfile */; };
 		FC681C001F57473D0077BECA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFE1F57473D0077BECA /* Podfile */; };
@@ -101,9 +96,6 @@
 		FC888AE8242A6CDC00BAA8B1 /* Json in Resources */ = {isa = PBXBuildFile; fileRef = FC888AE7242A6CDC00BAA8B1 /* Json */; };
 		FC8E303A20F4A60B006059DE /* F4SLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8E303920F4A60B006059DE /* F4SLogger.swift */; };
 		FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC92567A1F8F70D100FF9841 /* InterestsModel.swift */; };
-		FC93DBD6231F8E0A00F1CE23 /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DBD5231F8E0A00F1CE23 /* WorkfinderCoordinators.framework */; };
-		FC93DBD7231F8E0A00F1CE23 /* WorkfinderCoordinators.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DBD5231F8E0A00F1CE23 /* WorkfinderCoordinators.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FC93DC4223201AA200F1CE23 /* WorkfinderUserDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DC4123201AA200F1CE23 /* WorkfinderUserDetailsUseCase.framework */; };
 		FC93DC5823202B8F00F1CE23 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC5723202B8F00F1CE23 /* Config.swift */; };
 		FC96709E2259F61600318F69 /* InterestsPruner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96709D2259F61600318F69 /* InterestsPruner.swift */; };
 		FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99B7E21F826D1400E2D5F0 /* LatLon.swift */; };
@@ -112,21 +104,35 @@
 		FC9BEE082015FF6000347437 /* UniversalLinkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9BEE072015FF6000347437 /* UniversalLinkParser.swift */; };
 		FCA53B961FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA53B941FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift */; };
 		FCA53B971FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */; };
-		FCA91E5D22340161007ED308 /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91E5C22340161007ED308 /* WorkfinderNetworking.framework */; };
-		FCA91E5E22340161007ED308 /* WorkfinderNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91E5C22340161007ED308 /* WorkfinderNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FCA91E9622340577007ED308 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91E9522340577007ED308 /* WorkfinderCommon.framework */; };
-		FCA91E9722340577007ED308 /* WorkfinderCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91E9522340577007ED308 /* WorkfinderCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FCA91EC122340743007ED308 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91EC022340743007ED308 /* WorkfinderUI.framework */; };
-		FCA91EC222340743007ED308 /* WorkfinderUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91EC022340743007ED308 /* WorkfinderUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCB46F02204FD86D00F0779F /* F4SLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46F01204FD86D00F0779F /* F4SLogViewController.swift */; };
 		FCB49301222A4B3B00B88B8B /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB49300222A4B3B00B88B8B /* SearchCoordinator.swift */; };
 		FCB6D9361F75056100B8C268 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCB6D9351F75056000B8C268 /* Branding.plist */; };
+		FCBA983124506D3E00C3D2E6 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983024506D3E00C3D2E6 /* WorkfinderCommon.framework */; };
+		FCBA983224506D3E00C3D2E6 /* WorkfinderCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983024506D3E00C3D2E6 /* WorkfinderCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FCBA983D24506D8B00C3D2E6 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983324506D8B00C3D2E6 /* WorkfinderAppLogic.framework */; };
+		FCBA983E24506D8B00C3D2E6 /* WorkfinderAppLogic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983324506D8B00C3D2E6 /* WorkfinderAppLogic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FCBA983F24506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983424506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework */; };
+		FCBA984024506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983424506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FCBA984124506D8B00C3D2E6 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983524506D8B00C3D2E6 /* WorkfinderCompanyDetailsUseCase.framework */; };
+		FCBA984224506D8B00C3D2E6 /* WorkfinderCompanyDetailsUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983524506D8B00C3D2E6 /* WorkfinderCompanyDetailsUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FCBA984324506D8B00C3D2E6 /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983624506D8B00C3D2E6 /* WorkfinderCoordinators.framework */; };
+		FCBA984424506D8B00C3D2E6 /* WorkfinderCoordinators.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983624506D8B00C3D2E6 /* WorkfinderCoordinators.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FCBA984524506D8B00C3D2E6 /* WorkfinderDocumentUploadUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983724506D8B00C3D2E6 /* WorkfinderDocumentUploadUseCase.framework */; };
+		FCBA984624506D8B00C3D2E6 /* WorkfinderDocumentUploadUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983724506D8B00C3D2E6 /* WorkfinderDocumentUploadUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FCBA984724506D8B00C3D2E6 /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983824506D8B00C3D2E6 /* WorkfinderNetworking.framework */; };
+		FCBA984824506D8C00C3D2E6 /* WorkfinderNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983824506D8B00C3D2E6 /* WorkfinderNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FCBA984924506D8C00C3D2E6 /* WorkfinderOnboardingUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983924506D8B00C3D2E6 /* WorkfinderOnboardingUseCase.framework */; };
+		FCBA984A24506D8C00C3D2E6 /* WorkfinderOnboardingUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983924506D8B00C3D2E6 /* WorkfinderOnboardingUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FCBA984B24506D8C00C3D2E6 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983A24506D8B00C3D2E6 /* WorkfinderServices.framework */; };
+		FCBA984C24506D8C00C3D2E6 /* WorkfinderServices.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983A24506D8B00C3D2E6 /* WorkfinderServices.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FCBA984D24506D8C00C3D2E6 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983B24506D8B00C3D2E6 /* WorkfinderUI.framework */; };
+		FCBA984E24506D8C00C3D2E6 /* WorkfinderUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983B24506D8B00C3D2E6 /* WorkfinderUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FCBA984F24506D8C00C3D2E6 /* WorkfinderUserDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983C24506D8B00C3D2E6 /* WorkfinderUserDetailsUseCase.framework */; };
+		FCBA985024506D8C00C3D2E6 /* WorkfinderUserDetailsUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983C24506D8B00C3D2E6 /* WorkfinderUserDetailsUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCC1DF5B232505640074D5C1 /* CompanyCoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF5A232505640074D5C1 /* CompanyCoordinatorFactory.swift */; };
 		FCC5EBB61F449C310085CE15 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FCC5EBB51F449C310085CE15 /* README.md */; };
 		FCC753EE1F80F26200E9ECD6 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC753ED1F80F26200E9ECD6 /* MapModel.swift */; };
 		FCCFC7CF224D2C110060F7EC /* DataFixes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCFC7CE224D2C110060F7EC /* DataFixes.swift */; };
-		FCD6F9E822E315B7003F7C34 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD6F9E722E315B7003F7C34 /* WorkfinderAppLogic.framework */; };
-		FCD6F9E922E315B7003F7C34 /* WorkfinderAppLogic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCD6F9E722E315B7003F7C34 /* WorkfinderAppLogic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCDC542B24289B85002581FF /* CompanyWorkplaceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC542A24289B85002581FF /* CompanyWorkplaceListViewController.swift */; };
 		FCDC543024289B9D002581FF /* CompanyWorkplaceListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC542C24289B9B002581FF /* CompanyWorkplaceListPresenter.swift */; };
 		FCDC543124289B9D002581FF /* CompanyTileViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC542D24289B9C002581FF /* CompanyTileViewData.swift */; };
@@ -136,14 +142,8 @@
 		FCE51E402210362800DC1D50 /* PlacesSearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E3F2210362800DC1D50 /* PlacesSearchDataGetter.swift */; };
 		FCE51E422210365B00DC1D50 /* CompanySearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E412210365B00DC1D50 /* CompanySearchDataGetter.swift */; };
 		FCE51E44221039D600DC1D50 /* PersonSearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E43221039D600DC1D50 /* PersonSearchDataGetter.swift */; };
-		FCEA3C6B2326AB9B006D9106 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC02DA2622EC84EF003C8148 /* WorkfinderServices.framework */; };
-		FCEA3C6C2326AB9B006D9106 /* WorkfinderServices.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC02DA2622EC84EF003C8148 /* WorkfinderServices.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCEE5E1E2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEE5E1D2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift */; };
 		FCF0D16C1FBC244800F2AF1D /* PopupAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */; };
-		FCF4B652232BC49A001340DF /* WorkfinderOnboardingUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF4B651232BC49A001340DF /* WorkfinderOnboardingUseCase.framework */; };
-		FCF4B653232BC49A001340DF /* WorkfinderOnboardingUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCF4B651232BC49A001340DF /* WorkfinderOnboardingUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FCF5AF2B2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF2A2248BE1A00D9B8D1 /* WorkfinderApplyUseCase.framework */; };
-		FCF5AF2C2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF2A2248BE1A00D9B8D1 /* WorkfinderApplyUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCF992D3234CE01B00DBC179 /* firebase_staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCF992D2234CE01B00DBC179 /* firebase_staging.plist */; };
 		FCFC06AD23225B9E003C59C8 /* LatLon+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06AC23225B9E003C59C8 /* LatLon+Extensions.swift */; };
 /* End PBXBuildFile section */
@@ -165,17 +165,17 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				FC53D6E12323C56F00A339ED /* WorkfinderUserDetailsUseCase.framework in Embed Frameworks */,
-				FC4066FE23277D8F002B425E /* WorkfinderDocumentUploadUseCase.framework in Embed Frameworks */,
-				FC06605323264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework in Embed Frameworks */,
-				FCEA3C6C2326AB9B006D9106 /* WorkfinderServices.framework in Embed Frameworks */,
-				FC93DBD7231F8E0A00F1CE23 /* WorkfinderCoordinators.framework in Embed Frameworks */,
-				FCF5AF2C2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Embed Frameworks */,
-				FCF4B653232BC49A001340DF /* WorkfinderOnboardingUseCase.framework in Embed Frameworks */,
-				FCD6F9E922E315B7003F7C34 /* WorkfinderAppLogic.framework in Embed Frameworks */,
-				FCA91EC222340743007ED308 /* WorkfinderUI.framework in Embed Frameworks */,
-				FCA91E9722340577007ED308 /* WorkfinderCommon.framework in Embed Frameworks */,
-				FCA91E5E22340161007ED308 /* WorkfinderNetworking.framework in Embed Frameworks */,
+				FCBA984A24506D8C00C3D2E6 /* WorkfinderOnboardingUseCase.framework in Embed Frameworks */,
+				FCBA985024506D8C00C3D2E6 /* WorkfinderUserDetailsUseCase.framework in Embed Frameworks */,
+				FCBA984C24506D8C00C3D2E6 /* WorkfinderServices.framework in Embed Frameworks */,
+				FCBA984024506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework in Embed Frameworks */,
+				FCBA984624506D8B00C3D2E6 /* WorkfinderDocumentUploadUseCase.framework in Embed Frameworks */,
+				FCBA984824506D8C00C3D2E6 /* WorkfinderNetworking.framework in Embed Frameworks */,
+				FCBA984E24506D8C00C3D2E6 /* WorkfinderUI.framework in Embed Frameworks */,
+				FCBA984424506D8B00C3D2E6 /* WorkfinderCoordinators.framework in Embed Frameworks */,
+				FCBA983E24506D8B00C3D2E6 /* WorkfinderAppLogic.framework in Embed Frameworks */,
+				FCBA984224506D8B00C3D2E6 /* WorkfinderCompanyDetailsUseCase.framework in Embed Frameworks */,
+				FCBA983224506D3E00C3D2E6 /* WorkfinderCommon.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -231,7 +231,7 @@
 		40C1A5171DDF5ACE000F80AA /* POIItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = POIItem.h; path = "Google-Maps-iOS-Utils/POIItem.h"; sourceTree = "<group>"; };
 		40C1A5181DDF5ACE000F80AA /* POIItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = POIItem.m; path = "Google-Maps-iOS-Utils/POIItem.m"; sourceTree = "<group>"; };
 		40C1A5261DE58EED000F80AA /* CutomClusterIconGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CutomClusterIconGenerator.swift; sourceTree = "<group>"; };
-		40E78E131DD31A86000A3776 /* f4s-workexperience.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "f4s-workexperience.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		40E78E131DD31A86000A3776 /* f4s_workexperience.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = f4s_workexperience.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40E78E161DD31A86000A3776 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40E78E1D1DD31A86000A3776 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40E78E201DD31A86000A3776 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -269,13 +269,13 @@
 		FC02DA2622EC84EF003C8148 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC04B861233271FE0034A60E /* MasterBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterBuilder.swift; sourceTree = "<group>"; };
 		FC04B8632332751F0034A60E /* CoordinatorFactories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFactories.swift; sourceTree = "<group>"; };
-		FC06605123264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCompanyDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC06605423265FC300496FE2 /* CompanyCoordinatorParentProtocol+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompanyCoordinatorParentProtocol+extensions.swift"; sourceTree = "<group>"; };
 		FC0B6B382323D5D600A1867D /* Uploads.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Uploads.xcassets; sourceTree = "<group>"; };
 		FC0C6FD7232B7E5700816332 /* WorkfinderRecommendations.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderRecommendations.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC0C710F232BB1D100816332 /* F4SAuth0MagicLinkInterpreterer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = F4SAuth0MagicLinkInterpreterer.swift; path = "../../../WorkfinderUserDetailsUseCase/WorkfinderUserDetailsUseCase/source/Email verification/F4SAuth0MagicLinkInterpreterer.swift"; sourceTree = "<group>"; };
 		FC0C7110232BB31B00816332 /* WorkfinderMessagesUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderMessagesUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityExtension.swift; sourceTree = "<group>"; };
+		FC15614C2450500E00612ED9 /* Workfinder StagingDebugF4SLive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Workfinder StagingDebugF4SLive.entitlements"; sourceTree = "<group>"; };
 		FC1DC06721FE13FE009ABC60 /* CompanyDetailAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CompanyDetailAssets.xcassets; sourceTree = "<group>"; };
 		FC1DC06A21FE142D009ABC60 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		FC1E6A4E2217476400DC335B /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
@@ -297,11 +297,8 @@
 		FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDebugViewController.swift; sourceTree = "<group>"; };
 		FC31F096204D54E3009DD526 /* Debug.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
 		FC3CD1D9221566F200F91B50 /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
-		FC4066FC23277D8F002B425E /* WorkfinderDocumentUploadUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderDocumentUploadUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC4802C12354AD9300AF8F6D /* firebase_live.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = firebase_live.plist; sourceTree = "<group>"; };
 		FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModeSelectorView.swift; sourceTree = "<group>"; };
-		FC53D6DF2323C56F00A339ED /* WorkfinderUserDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUserDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC5CBA50231D2A4700C2D3C5 /* WorkfinderAcceptUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAcceptUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5D3C6B20FE17F600F89169 /* config.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.yml; sourceTree = "<group>"; };
 		FC5D3C6D20FE1CEB00F89169 /* Gemfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Gemfile; sourceTree = "<group>"; };
 		FC681BFE1F57473D0077BECA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -318,7 +315,6 @@
 		FC888AE7242A6CDC00BAA8B1 /* Json */ = {isa = PBXFileReference; lastKnownFileType = text; path = Json; sourceTree = "<group>"; };
 		FC8E303920F4A60B006059DE /* F4SLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SLogger.swift; sourceTree = "<group>"; };
 		FC92567A1F8F70D100FF9841 /* InterestsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsModel.swift; sourceTree = "<group>"; };
-		FC93DBD5231F8E0A00F1CE23 /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC93DC4123201AA200F1CE23 /* WorkfinderUserDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUserDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC93DC5723202B8F00F1CE23 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		FC96709D2259F61600318F69 /* InterestsPruner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsPruner.swift; sourceTree = "<group>"; };
@@ -328,18 +324,24 @@
 		FC9BEE072015FF6000347437 /* UniversalLinkParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalLinkParser.swift; sourceTree = "<group>"; };
 		FCA53B941FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SForceAppUpdateViewController.swift; sourceTree = "<group>"; };
 		FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = F4SForceAppUpdateViewController.xib; sourceTree = "<group>"; };
-		FCA91E5C22340161007ED308 /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCA91E9522340577007ED308 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCA91EC022340743007ED308 /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCB46F01204FD86D00F0779F /* F4SLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SLogViewController.swift; sourceTree = "<group>"; };
 		FCB49300222A4B3B00B88B8B /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
 		FCB6D9351F75056000B8C268 /* Branding.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
+		FCBA983024506D3E00C3D2E6 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCBA983324506D8B00C3D2E6 /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCBA983424506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderApplyUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCBA983524506D8B00C3D2E6 /* WorkfinderCompanyDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCompanyDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCBA983624506D8B00C3D2E6 /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCBA983724506D8B00C3D2E6 /* WorkfinderDocumentUploadUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderDocumentUploadUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCBA983824506D8B00C3D2E6 /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCBA983924506D8B00C3D2E6 /* WorkfinderOnboardingUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderOnboardingUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCBA983A24506D8B00C3D2E6 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCBA983B24506D8B00C3D2E6 /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCBA983C24506D8B00C3D2E6 /* WorkfinderUserDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUserDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCC1DF5A232505640074D5C1 /* CompanyCoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCoordinatorFactory.swift; sourceTree = "<group>"; };
 		FCC5EBB51F449C310085CE15 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FCC753ED1F80F26200E9ECD6 /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
 		FCCFC7CE224D2C110060F7EC /* DataFixes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFixes.swift; sourceTree = "<group>"; };
-		FCD6F9E722E315B7003F7C34 /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCDB86112321268C0047FF96 /* Mustache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mustache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCDC542A24289B85002581FF /* CompanyWorkplaceListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyWorkplaceListViewController.swift; sourceTree = "<group>"; };
 		FCDC542C24289B9B002581FF /* CompanyWorkplaceListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyWorkplaceListPresenter.swift; sourceTree = "<group>"; };
 		FCDC542D24289B9C002581FF /* CompanyTileViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyTileViewData.swift; sourceTree = "<group>"; };
@@ -353,9 +355,7 @@
 		FCEF221E232A9E24004914F7 /* WorkfinderFavouritesUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderFavouritesUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupAnimator.swift; sourceTree = "<group>"; };
 		FCF4B651232BC49A001340DF /* WorkfinderOnboardingUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderOnboardingUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCF5AF2A2248BE1A00D9B8D1 /* WorkfinderApplyUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderApplyUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF992D2234CE01B00DBC179 /* firebase_staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = firebase_staging.plist; sourceTree = "<group>"; };
-		FCFB1327224930660086BE25 /* Mustache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mustache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCFBD0062250D69700A9361D /* f4s-workexperienceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "f4s-workexperienceTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCFBD00A2250D69700A9361D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCFC06AC23225B9E003C59C8 /* LatLon+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LatLon+Extensions.swift"; sourceTree = "<group>"; };
@@ -366,18 +366,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC93DC4223201AA200F1CE23 /* WorkfinderUserDetailsUseCase.framework in Frameworks */,
-				FCA91E9622340577007ED308 /* WorkfinderCommon.framework in Frameworks */,
-				FCF5AF2B2248BE1B00D9B8D1 /* WorkfinderApplyUseCase.framework in Frameworks */,
+				FCBA983F24506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework in Frameworks */,
+				FCBA984924506D8C00C3D2E6 /* WorkfinderOnboardingUseCase.framework in Frameworks */,
+				FCBA983124506D3E00C3D2E6 /* WorkfinderCommon.framework in Frameworks */,
 				C9C7302B49E1B7EF625802B5 /* Pods_f4s_workexperience.framework in Frameworks */,
-				FCA91E5D22340161007ED308 /* WorkfinderNetworking.framework in Frameworks */,
-				FC06605223264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */,
-				FCD6F9E822E315B7003F7C34 /* WorkfinderAppLogic.framework in Frameworks */,
-				FCEA3C6B2326AB9B006D9106 /* WorkfinderServices.framework in Frameworks */,
-				FC93DBD6231F8E0A00F1CE23 /* WorkfinderCoordinators.framework in Frameworks */,
-				FC4066FD23277D8F002B425E /* WorkfinderDocumentUploadUseCase.framework in Frameworks */,
-				FCA91EC122340743007ED308 /* WorkfinderUI.framework in Frameworks */,
-				FCF4B652232BC49A001340DF /* WorkfinderOnboardingUseCase.framework in Frameworks */,
+				FCBA984D24506D8C00C3D2E6 /* WorkfinderUI.framework in Frameworks */,
+				FCBA984124506D8B00C3D2E6 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */,
+				FCBA984B24506D8C00C3D2E6 /* WorkfinderServices.framework in Frameworks */,
+				FCBA984F24506D8C00C3D2E6 /* WorkfinderUserDetailsUseCase.framework in Frameworks */,
+				FCBA984324506D8B00C3D2E6 /* WorkfinderCoordinators.framework in Frameworks */,
+				FCBA984724506D8B00C3D2E6 /* WorkfinderNetworking.framework in Frameworks */,
+				FCBA983D24506D8B00C3D2E6 /* WorkfinderAppLogic.framework in Frameworks */,
+				FCBA984524506D8B00C3D2E6 /* WorkfinderDocumentUploadUseCase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,18 +449,6 @@
 			children = (
 				FC4802C12354AD9300AF8F6D /* firebase_live.plist */,
 				FCF992D2234CE01B00DBC179 /* firebase_staging.plist */,
-				FC4066FC23277D8F002B425E /* WorkfinderDocumentUploadUseCase.framework */,
-				FC06605123264B0100496FE2 /* WorkfinderCompanyDetailsUseCase.framework */,
-				FC53D6DF2323C56F00A339ED /* WorkfinderUserDetailsUseCase.framework */,
-				FCDB86112321268C0047FF96 /* Mustache.framework */,
-				FC93DBD5231F8E0A00F1CE23 /* WorkfinderCoordinators.framework */,
-				FC5CBA50231D2A4700C2D3C5 /* WorkfinderAcceptUseCase.framework */,
-				FCD6F9E722E315B7003F7C34 /* WorkfinderAppLogic.framework */,
-				FCFB1327224930660086BE25 /* Mustache.framework */,
-				FCF5AF2A2248BE1A00D9B8D1 /* WorkfinderApplyUseCase.framework */,
-				FCA91EC022340743007ED308 /* WorkfinderUI.framework */,
-				FCA91E9522340577007ED308 /* WorkfinderCommon.framework */,
-				FCA91E5C22340161007ED308 /* WorkfinderNetworking.framework */,
 				FC5D3C6D20FE1CEB00F89169 /* Gemfile */,
 				FC72219A20FE248400F10953 /* fastlane */,
 				FC5D3C6A20FE17F600F89169 /* .circleci */,
@@ -479,7 +467,7 @@
 		40E78E141DD31A86000A3776 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				40E78E131DD31A86000A3776 /* f4s-workexperience.app */,
+				40E78E131DD31A86000A3776 /* f4s_workexperience.app */,
 				FCFBD0062250D69700A9361D /* f4s-workexperienceTests.xctest */,
 			);
 			name = Products;
@@ -488,6 +476,7 @@
 		40E78E151DD31A86000A3776 /* f4s-workexperience */ = {
 			isa = PBXGroup;
 			children = (
+				FC15614C2450500E00612ED9 /* Workfinder StagingDebugF4SLive.entitlements */,
 				FC67711121258448000B0870 /* Assets */,
 				FC04B860233271720034A60E /* Builders */,
 				40E78E1F1DD31A86000A3776 /* LaunchScreen.storyboard */,
@@ -607,6 +596,17 @@
 		74E1A74324CAFF4EF516E014 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCBA983324506D8B00C3D2E6 /* WorkfinderAppLogic.framework */,
+				FCBA983424506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework */,
+				FCBA983524506D8B00C3D2E6 /* WorkfinderCompanyDetailsUseCase.framework */,
+				FCBA983624506D8B00C3D2E6 /* WorkfinderCoordinators.framework */,
+				FCBA983724506D8B00C3D2E6 /* WorkfinderDocumentUploadUseCase.framework */,
+				FCBA983824506D8B00C3D2E6 /* WorkfinderNetworking.framework */,
+				FCBA983924506D8B00C3D2E6 /* WorkfinderOnboardingUseCase.framework */,
+				FCBA983A24506D8B00C3D2E6 /* WorkfinderServices.framework */,
+				FCBA983B24506D8B00C3D2E6 /* WorkfinderUI.framework */,
+				FCBA983C24506D8B00C3D2E6 /* WorkfinderUserDetailsUseCase.framework */,
+				FCBA983024506D3E00C3D2E6 /* WorkfinderCommon.framework */,
 				FC2E456A234CB5EF00121496 /* Bugsnag.framework */,
 				FCF4B651232BC49A001340DF /* WorkfinderOnboardingUseCase.framework */,
 				FC0C7110232BB31B00816332 /* WorkfinderMessagesUseCase.framework */,
@@ -1012,8 +1012,8 @@
 				40E78E101DD31A86000A3776 /* Frameworks */,
 				40E78E111DD31A86000A3776 /* Resources */,
 				FCBC19D4222D6F0900AD0896 /* Embed Frameworks */,
-				C0DCD0DAE1A2EFD579EAA89B /* [CP] Embed Pods Frameworks */,
-				A38BC36C612287EC08250148 /* [CP] Copy Pods Resources */,
+				364311FA14FA9B6B9E53E9FB /* [CP] Embed Pods Frameworks */,
+				C70660FA2CD026A855AEDFE7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1021,7 +1021,7 @@
 			);
 			name = "f4s-workexperience";
 			productName = "f4s-workexperience";
-			productReference = 40E78E131DD31A86000A3776 /* f4s-workexperience.app */;
+			productReference = 40E78E131DD31A86000A3776 /* f4s_workexperience.app */;
 			productType = "com.apple.product-type.application";
 		};
 		FCFBD0052250D69700A9361D /* f4s-workexperienceTests */ = {
@@ -1032,7 +1032,7 @@
 				FCFBD0022250D69700A9361D /* Sources */,
 				FCFBD0032250D69700A9361D /* Frameworks */,
 				FCFBD0042250D69700A9361D /* Resources */,
-				82209C213A318F14CB03BC2E /* [CP] Embed Pods Frameworks */,
+				A104D4FEDE25EA32A844C29E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1145,87 +1145,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6D5C9687683070E52F9971AD /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-f4s-workexperienceTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		82209C213A318F14CB03BC2E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-f4s-workexperienceTests/Pods-f4s-workexperienceTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-f4s-workexperienceTests/Pods-f4s-workexperienceTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A38BC36C612287EC08250148 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-f4s-workexperience/Pods-f4s-workexperience-resources.sh",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
-				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-f4s-workexperience/Pods-f4s-workexperience-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A791AAD772B09D31BB097B5B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-f4s-workexperience-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C0DCD0DAE1A2EFD579EAA89B /* [CP] Embed Pods Frameworks */ = {
+		364311FA14FA9B6B9E53E9FB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1257,6 +1177,86 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-f4s-workexperience/Pods-f4s-workexperience-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6D5C9687683070E52F9971AD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-f4s-workexperienceTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A104D4FEDE25EA32A844C29E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-f4s-workexperienceTests/Pods-f4s-workexperienceTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-f4s-workexperienceTests/Pods-f4s-workexperienceTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A791AAD772B09D31BB097B5B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-f4s-workexperience-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C70660FA2CD026A855AEDFE7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-f4s-workexperience/Pods-f4s-workexperience-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-f4s-workexperience/Pods-f4s-workexperience-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1475,10 +1475,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				NAME_FOR_ENVIRONMENT = F4S.Staging;
+				NAME_FOR_ENVIRONMENT = Live;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s.staging;
-				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s.staging;
+				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
+				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1492,13 +1492,17 @@
 			baseConfigurationReference = 9C8235BD4A169F7DD6BA6996 /* Pods-f4s-workexperience.debugf4slive.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
-				BUNDLE_ID_SUFFIX = "";
+				CODE_SIGN_ENTITLEMENTS = "$(CODE_SIGN_ENTITLEMENTS_$(CONFIGURATION))";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
+				DEVELOPMENT_TEAM_DebugF4S = YB7C23CK6Q;
+				DEVELOPMENT_TEAM_DebugF4SLive = YB7C23CK6Q;
+				DEVELOPMENT_TEAM_ReleaseF4S = YB7C23CK6Q;
+				DEVELOPMENT_TEAM_ReleaseF4SLive = YB7C23CK6Q;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 3.0.0;
@@ -1506,7 +1510,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = f4s_workexperience;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ENABLE_BATCH_MODE = NO;
@@ -1563,10 +1567,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				NAME_FOR_ENVIRONMENT = F4S.Staging;
+				NAME_FOR_ENVIRONMENT = Live;
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s.staging;
-				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s.staging;
+				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
+				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1580,13 +1584,16 @@
 			baseConfigurationReference = 590A4AE101882A503C247BC5 /* Pods-f4s-workexperience.releasef4slive.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
-				BUNDLE_ID_SUFFIX = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
+				DEVELOPMENT_TEAM_DebugF4S = YB7C23CK6Q;
+				DEVELOPMENT_TEAM_DebugF4SLive = YB7C23CK6Q;
+				DEVELOPMENT_TEAM_ReleaseF4S = YB7C23CK6Q;
+				DEVELOPMENT_TEAM_ReleaseF4SLive = YB7C23CK6Q;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 3.0.0;
@@ -1594,7 +1601,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = f4s_workexperience;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ENABLE_BATCH_MODE = NO;
@@ -1657,10 +1664,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				NAME_FOR_ENVIRONMENT = Workfinder;
+				NAME_FOR_ENVIRONMENT = Staging;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s.staging;
-				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s.staging;
+				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
+				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1673,22 +1680,25 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C244124FAD6DA2320378A05F /* Pods-f4s-workexperience.debugf4s.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
-				BUNDLE_ID_SUFFIX = .staging;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.staging;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
+				DEVELOPMENT_TEAM_DebugF4S = YB7C23CK6Q;
+				DEVELOPMENT_TEAM_DebugF4SLive = YB7C23CK6Q;
+				DEVELOPMENT_TEAM_ReleaseF4S = YB7C23CK6Q;
+				DEVELOPMENT_TEAM_ReleaseF4SLive = YB7C23CK6Q;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 3.0.0;
-				NAME_FOR_ENVIRONMENT = F4S.Staging;
-				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderTestflight;
+				NAME_FOR_ENVIRONMENT = Staging;
+				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = f4s_workexperience;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ENABLE_BATCH_MODE = NO;
@@ -1745,10 +1755,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				NAME_FOR_ENVIRONMENT = Workfinder;
+				NAME_FOR_ENVIRONMENT = Staging;
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s.staging;
-				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s.staging;
+				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
+				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1761,22 +1771,25 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 698B16C1DEA4421DE6C2C9D6 /* Pods-f4s-workexperience.releasef4s.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
-				BUNDLE_ID_SUFFIX = .staging;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.staging;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
+				DEVELOPMENT_TEAM_DebugF4S = YB7C23CK6Q;
+				DEVELOPMENT_TEAM_DebugF4SLive = YB7C23CK6Q;
+				DEVELOPMENT_TEAM_ReleaseF4S = YB7C23CK6Q;
+				DEVELOPMENT_TEAM_ReleaseF4SLive = YB7C23CK6Q;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 3.0.0;
-				NAME_FOR_ENVIRONMENT = F4S.Staging;
-				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderTestflight;
+				NAME_FOR_ENVIRONMENT = Staging;
+				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = f4s_workexperience;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ENABLE_BATCH_MODE = NO;
@@ -1854,7 +1867,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s-workexperience.app/f4s-workexperience";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s_workexperience.app/f4s_workexperience";
 			};
 			name = DebugF4S;
 		};
@@ -1926,7 +1939,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s-workexperience.app/f4s-workexperience";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s_workexperience.app/f4s_workexperience";
 			};
 			name = DebugF4SLive;
 		};
@@ -1990,7 +2003,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s-workexperience.app/f4s-workexperience";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s_workexperience.app/f4s_workexperience";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = ReleaseF4S;
@@ -2055,7 +2068,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s-workexperience.app/f4s-workexperience";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s_workexperience.app/f4s_workexperience";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = ReleaseF4SLive;

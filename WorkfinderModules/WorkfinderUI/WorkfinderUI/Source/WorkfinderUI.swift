@@ -3,7 +3,7 @@ import WorkfinderCommon
 
 public class WorkfinderUI {
     
-    let bundle = Bundle(identifier: "com.f4s.WorkfinderUI")
+    let bundle = Bundle(identifier: "com.workfinder.WorkfinderUI")
     
     public init() {}
     

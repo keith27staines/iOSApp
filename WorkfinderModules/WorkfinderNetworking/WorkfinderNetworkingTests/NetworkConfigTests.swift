@@ -14,13 +14,13 @@ class NetworkConfigTests: XCTestCase {
 
     func test_configure() {
         let logger = NetworkCallLogger(log: MockF4SAnalyticsAndDebugging())
-        let endpoints = WorkfinderEndpoint(baseUrlString: "someUrl")
+        let endpoints = try! WorkfinderEndpoint(baseUrlString: "someUrl")
         let sessionManager = F4SNetworkSessionManager()
         let user = User()
         let userRepo = MockUserRepository(user: user)
         let config = NetworkConfig(logger: logger,
                                    sessionManager: sessionManager,
-                                   endpoints: endpoints,
+                                   workfinderEndpoint: endpoints,
                                    userRepository: userRepo)
         XCTAssertEqual(config.workfinderApiV3, "someUrl")
         XCTAssertEqual(config.workfinderApiEndpoint.workfinderApiUrlString, "someUrl")
