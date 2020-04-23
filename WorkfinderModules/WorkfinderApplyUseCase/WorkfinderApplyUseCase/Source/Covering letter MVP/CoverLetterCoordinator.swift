@@ -1,6 +1,7 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderServices
 import WorkfinderCoordinators
 
 public protocol CoverletterCoordinatorProtocol: class {

@@ -14,6 +14,17 @@ public class NetworkCallLogger : NetworkCallLoggerProtocol {
         self.log = log
     }
     
+    public func logDeserializationError<T:Decodable>(to type: T.Type, from data: Data, error: NSError) {
+        let separator = "-----------------------------------------------------------------------"
+        var text = "\n\n\(separator)\nDESERIALIZATION ERROR"
+        text = "\(text)\nDescription: Failed to deserialise to type \(type)"
+        text = "\(text)\nwith error: \(error.debugDescription)"
+        text = "\(text)\nfrom data: \(String(data: data, encoding: .utf8) ?? "not string encodable")"
+        
+        log.error(message: text, functionName: #function, fileName: #file, lineNumber: #line)
+        log.notifyError(error, functionName: #function, fileName: #file, lineNumber: #line)
+    }
+    
     public func logDataTaskFailure(attempting: String? = nil,
                             error: Error,
                             request: URLRequest,

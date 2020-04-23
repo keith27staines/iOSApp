@@ -1,5 +1,6 @@
 
 import Foundation
+import WorkfinderCommon
 
 public protocol TemplateParserProtocol {
     var templateString: String { get }

@@ -26,6 +26,11 @@ open class WorkfinderService {
                 let json = try decoder.decode(A.self, from: data)
                 completion(Result<A,Error>.success(json))
             } catch {
+                let nsError = error as NSError
+                networkConfig.logger.logDeserializationError(
+                    to: A.self,
+                    from: data,
+                    error: nsError)
                 completion(Result<A,Error>.failure(NetworkError.deserialization(error)))
             }
         case .failure(let error):

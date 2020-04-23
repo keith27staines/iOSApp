@@ -20,15 +20,12 @@
 		FC22DBFB22F97F330068C61C /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC22DBFA22F97F330068C61C /* WorkfinderUI.framework */; };
 		FC23BCE4243AFA730075F359 /* DateOfBirthCollectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCE3243AFA730075F359 /* DateOfBirthCollectorViewController.swift */; };
 		FC23BCE8243B30A10075F359 /* ApplicationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCE7243B30A10075F359 /* ApplicationModel.swift */; };
-		FC23BCFD243B33510075F359 /* TemplateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCEB243B33510075F359 /* TemplateProvider.swift */; };
 		FC23BCFE243B33510075F359 /* TemplateRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCED243B33510075F359 /* TemplateRenderer.swift */; };
 		FC23BCFF243B33510075F359 /* TemplateParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCEE243B33510075F359 /* TemplateParser.swift */; };
 		FC23BD00243B33510075F359 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCEF243B33510075F359 /* Common.swift */; };
 		FC23BD01243B33510075F359 /* Picklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCF0243B33510075F359 /* Picklist.swift */; };
 		FC23BD02243B33510075F359 /* Grammer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCF1243B33510075F359 /* Grammer.swift */; };
 		FC23BD04243B33510075F359 /* CoverLetterViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCF3243B33510075F359 /* CoverLetterViewPresenter.swift */; };
-		FC23BD06243B33510075F359 /* TemplateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCF6243B33510075F359 /* TemplateModel.swift */; };
-		FC23BD07243B33510075F359 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCF7243B33510075F359 /* NetworkError.swift */; };
 		FC23BD08243B33510075F359 /* LetterEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCFA243B33510075F359 /* LetterEditorViewController.swift */; };
 		FC23BD09243B33510075F359 /* CoverLetterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCFB243B33510075F359 /* CoverLetterViewController.swift */; };
 		FC23BD0A243B33510075F359 /* CoverLetterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCFC243B33510075F359 /* CoverLetterCoordinator.swift */; };
@@ -89,15 +86,12 @@
 		FC22DBFA22F97F330068C61C /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC23BCE3243AFA730075F359 /* DateOfBirthCollectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateOfBirthCollectorViewController.swift; sourceTree = "<group>"; };
 		FC23BCE7243B30A10075F359 /* ApplicationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationModel.swift; sourceTree = "<group>"; };
-		FC23BCEB243B33510075F359 /* TemplateProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateProvider.swift; sourceTree = "<group>"; };
 		FC23BCED243B33510075F359 /* TemplateRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateRenderer.swift; sourceTree = "<group>"; };
 		FC23BCEE243B33510075F359 /* TemplateParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateParser.swift; sourceTree = "<group>"; };
 		FC23BCEF243B33510075F359 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		FC23BCF0243B33510075F359 /* Picklist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Picklist.swift; sourceTree = "<group>"; };
 		FC23BCF1243B33510075F359 /* Grammer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grammer.swift; sourceTree = "<group>"; };
 		FC23BCF3243B33510075F359 /* CoverLetterViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverLetterViewPresenter.swift; sourceTree = "<group>"; };
-		FC23BCF6243B33510075F359 /* TemplateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateModel.swift; sourceTree = "<group>"; };
-		FC23BCF7243B33510075F359 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		FC23BCFA243B33510075F359 /* LetterEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LetterEditorViewController.swift; sourceTree = "<group>"; };
 		FC23BCFB243B33510075F359 /* CoverLetterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverLetterViewController.swift; sourceTree = "<group>"; };
 		FC23BCFC243B33510075F359 /* CoverLetterCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverLetterCoordinator.swift; sourceTree = "<group>"; };
@@ -188,20 +182,10 @@
 				FC23BCF3243B33510075F359 /* CoverLetterViewPresenter.swift */,
 				FC23BCFB243B33510075F359 /* CoverLetterViewController.swift */,
 				FC9626332248C1A900D5F850 /* EditApplicationLetterButton.swift */,
-				FC23BCEA243B33510075F359 /* Providers */,
 				FC23BCEC243B33510075F359 /* Logic */,
-				FC23BCF4243B33510075F359 /* Models */,
 				FC23BCF8243B33510075F359 /* Editors */,
 			);
 			path = "Covering letter MVP";
-			sourceTree = "<group>";
-		};
-		FC23BCEA243B33510075F359 /* Providers */ = {
-			isa = PBXGroup;
-			children = (
-				FC23BCEB243B33510075F359 /* TemplateProvider.swift */,
-			);
-			path = Providers;
 			sourceTree = "<group>";
 		};
 		FC23BCEC243B33510075F359 /* Logic */ = {
@@ -214,15 +198,6 @@
 				FC23BCF1243B33510075F359 /* Grammer.swift */,
 			);
 			path = Logic;
-			sourceTree = "<group>";
-		};
-		FC23BCF4243B33510075F359 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				FC23BCF6243B33510075F359 /* TemplateModel.swift */,
-				FC23BCF7243B33510075F359 /* NetworkError.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		FC23BCF8243B33510075F359 /* Editors */ = {
@@ -560,7 +535,6 @@
 				FC23BD0A243B33510075F359 /* CoverLetterCoordinator.swift in Sources */,
 				FC23BCE8243B30A10075F359 /* ApplicationModel.swift in Sources */,
 				FC9626392248C1A900D5F850 /* EditApplicationLetterButton.swift in Sources */,
-				FC23BCFD243B33510075F359 /* TemplateProvider.swift in Sources */,
 				FC343CF82445F10A00347BC2 /* RegisterUserViewController.swift in Sources */,
 				FC23BD04243B33510075F359 /* CoverLetterViewPresenter.swift in Sources */,
 				FC29992B231EC41A00F83FB6 /* F4SDaysAndHoursViewController.swift in Sources */,
@@ -572,12 +546,10 @@
 				FC23BCFF243B33510075F359 /* TemplateParser.swift in Sources */,
 				FC17E49B2447185F00A58AEB /* RegisterUserService.swift in Sources */,
 				FC23BD00243B33510075F359 /* Common.swift in Sources */,
-				FC23BD06243B33510075F359 /* TemplateModel.swift in Sources */,
 				FC17E49D244731F500A58AEB /* UserLoginService.swift in Sources */,
 				FCE8DA9A2320E24600934E2F /* ApplyCoordinator.swift in Sources */,
 				FC42C8A6243C5C9A00F81232 /* PicklistViewController.swift in Sources */,
 				FC23BD02243B33510075F359 /* Grammer.swift in Sources */,
-				FC23BD07243B33510075F359 /* NetworkError.swift in Sources */,
 				FC84A669243EF43F00C9D158 /* FreeTextEditorViewController.swift in Sources */,
 				FC343CFA2445F17600347BC2 /* RegisterAndSignInCoordinator.swift in Sources */,
 				FC299937231EC50300F83FB6 /* F4SCalendarCollectionViewController.swift in Sources */,

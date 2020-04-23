@@ -23,12 +23,13 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     var attributedDisplayString = NSAttributedString()
     var renderer: TemplateRendererProtocol?
     let templateProvider: TemplateProviderProtocol
-    
     let allPickListsDictionary: PicklistsDictionary
-     
     var isShowingTemplate: Bool = false
-    
     var nextButtonIsEnabled: Bool { return renderer?.isComplete ?? false }
+    var templateModel: TemplateModel
+    var embeddedFieldNames = [String]()
+    private var _letterDisplayString = ""
+    private var _attributedDisplayString = NSAttributedString()
     
     func onDidTapNext() {
         coordinator?.onDidCompleteCoverLetter()
@@ -47,9 +48,6 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
         attributedDisplayString = _attributedDisplayString
         view?.refresh(from: self)
     }
-    
-    private var _letterDisplayString = ""
-    private var _attributedDisplayString = NSAttributedString()
     
     func updateLetterDisplayStrings() {
         guard let renderer = renderer else { return }
@@ -88,22 +86,19 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
         self.view = view
         view.refresh(from: self)
         view.showLoadingIndicator()
-        templateProvider.fetchCoverLetterTemplate() { [weak self] (result) in
+        templateProvider.fetchCoverLetterTemplateListJson() { [weak self] (result) in
             self?.view?.hideLoadingIndicator()
             switch result {
-            case .success(let templateModel):
-                self?.onTemplateFetched(templateModel: templateModel)
+            case .success(let templateListJson):
+                self?.onTemplateListFetched(templateListJson: templateListJson)
             case .failure(let error):
                 print("Error fetching template: \(error)")
             }
         }
     }
     
-    var templateModel: TemplateModel?
-    var embeddedFieldNames = [String]()
-    
-    func onTemplateFetched(templateModel: TemplateModel) {
-        self.templateModel = templateModel
+    func onTemplateListFetched(templateListJson: TemplateListJson) {
+        self.templateModel = templateListJson.results.first ?? defaultTemplate
         let parser = TemplateParser(templateModel: templateModel)
         embeddedFieldNames = parser.allFieldNames()
         renderer = TemplateRenderer(parser: parser)
@@ -113,7 +108,21 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
          templateProvider: TemplateProviderProtocol,
          allPicklistsDictionary: PicklistsDictionary) {
         self.coordinator = coordinator
+        self.templateModel = defaultTemplate
         self.templateProvider = templateProvider
         self.allPickListsDictionary = allPicklistsDictionary
     }
+    
+    private let defaultTemplate = TemplateModel(uuid: "", templateString:
+    """
+       Dear Sir/Madam
+       {{motivation}}
+       I would like to apply for the {{role}} role at your company.
+       I wish to acquire the following skills: {{skills}}.
+       I consider myself to have the following personal attributes: {{attributes}}.
+       I am in year {{year}} of study at {{university}}.
+       {{reason}}
+       I will be available between {{availability}}
+       {{experience}}
+    """)
 }

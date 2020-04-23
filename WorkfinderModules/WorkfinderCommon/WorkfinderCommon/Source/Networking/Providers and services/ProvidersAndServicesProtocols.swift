@@ -1,6 +1,10 @@
 
 import Foundation
 
+public protocol TemplateProviderProtocol {
+    func fetchCoverLetterTemplateListJson(completion: @escaping ((Result<TemplateListJson,Error>) -> Void))
+}
+
 public protocol PicklistProviderProtocol: class {
     var picklistType: PicklistType { get }
     var moreToCome: Bool { get }

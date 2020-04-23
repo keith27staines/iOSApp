@@ -9,6 +9,11 @@ public protocol NetworkCallLoggerProtocol {
                             response: HTTPURLResponse?,
                             responseData: Data?)
     
+    func logDeserializationError<T:Decodable>(
+        to type: T.Type,
+        from data:
+        Data, error: NSError)
+    
     /// Logs successes locally
     func logDataTaskSuccess(request: URLRequest,
                             response: HTTPURLResponse,

@@ -2,6 +2,11 @@
 import Foundation
 
 public class MockNetworkCallLogger: NetworkCallLoggerProtocol {
+    
+    public func logDeserializationError<T>(to type: T.Type, from data: Data, error: NSError) where T : Decodable {
+        
+    }
+    
     public var attempting: String?
     public var logDataTaskFailureWasCalled: Bool = false
     public var logDataTaskSuccessWasCalled: Bool = false
