@@ -1,4 +1,5 @@
 import Foundation
+import WorkfinderCommon
 
 public protocol TemplateProviderProtocol {
     func fetchCoverLetterTemplate(completion: @escaping ((Result<TemplateModel,Error>) -> Void))
@@ -17,14 +18,15 @@ fileprivate let testTemplate = TemplateModel(uuid: "", templateString:
        {{experience}}
     """)
 
-public class TemplateProvider: TemplateProviderProtocol{
+public class TemplateProvider: TemplateProviderProtocol {
     
-    let apiUrl: String
+    let apiUrl: URL
     let templateString: String = "During my {{role}} placement I want to develop these skills {{skills}}."
     var completionHandler: ((Result<TemplateModel,Error>) -> Void)?
-    let session: URLSession = URLSession(configuration: URLSessionConfiguration.default)
+    let session: URLSession
     var task: URLSessionDataTask?
     let candidateDateOfBirth: Date
+    let networkConfig:NetworkConfig
     
     var dateOfBirthString: String {
         let dateFormatter = DateFormatter()
@@ -32,17 +34,19 @@ public class TemplateProvider: TemplateProviderProtocol{
         return dateFormatter.string(from: candidateDateOfBirth)
     }
     
-    public init(apiUrl: String = "http://workfinder-develop.eu-west-2.elasticbeanstalk.com/v3/",
+    public init(networkConfig: NetworkConfig,
                 candidateDateOfBirth: Date) {
-        self.apiUrl = apiUrl
+        self.networkConfig = networkConfig
+        self.apiUrl = networkConfig.workfinderApiV3Url
         self.candidateDateOfBirth = candidateDateOfBirth
+        self.session = networkConfig.sessionManager.interactiveSession
     }
     
     public func fetchCoverLetterTemplate(completion: @escaping ((Result<TemplateModel,Error>) -> Void)) {
         task?.cancel()
         self.completionHandler = completion
-        let url = URL(string: apiUrl + "coverletters/")!
-        var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+        let url = URL(string: "coverletters/", relativeTo: apiUrl)!
+        var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)!
         urlComponents.queryItems = [URLQueryItem(name: "date_of_birth", value: dateOfBirthString)]
         let urlRequest = URLRequest(url: urlComponents.url!)
         task = session.dataTask(with: urlRequest, completionHandler: taskCompletionHandler)

@@ -16,7 +16,9 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
     
     public init(parent: ApplyCoordinator?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol, candidateDateOfBirth: Date) {
         self.applyCoordinator = parent
-        self.templateProvider = TemplateProvider(candidateDateOfBirth: candidateDateOfBirth)
+        self.templateProvider = TemplateProvider(
+            networkConfig: inject.networkConfig,
+            candidateDateOfBirth: candidateDateOfBirth)
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
@@ -38,22 +40,24 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
         navigationRouter.push(viewController: viewController, animated: true)
     }
     
-    var allPicklistsDictionary: PicklistsDictionary = [
-        .attributes: Picklist(type: .attributes, maximumPicks: 3),
-        .roles: Picklist(type: .roles, maximumPicks: 1),
-        .skills: Picklist(type: .skills, maximumPicks: 3),
-        .universities: Picklist(type: .universities, maximumPicks: 1),
-        .year: UniversityYearPicklist(),
-        .availabilityPeriod: AvailabilityPeriodPicklist(),
+    var networkConfig: NetworkConfig { return injected.networkConfig}
+    
+    lazy var allPicklistsDictionary: PicklistsDictionary = [
+        .attributes: Picklist(type: .attributes, maximumPicks: 3, networkConfig: networkConfig),
+        .roles: Picklist(type: .roles, maximumPicks: 1, networkConfig: networkConfig),
+        .skills: Picklist(type: .skills, maximumPicks: 3, networkConfig: networkConfig),
+        .universities: Picklist(type: .universities, maximumPicks: 1, networkConfig: networkConfig),
+        .year: UniversityYearPicklist(networkConfig: networkConfig),
+        .availabilityPeriod: AvailabilityPeriodPicklist(networkConfig: networkConfig),
         .motivation: TextblockPicklist(
             type: .motivation,
-            placeholder: "My motivation for seeking work experience is..."),
+            placeholder: "My motivation for seeking work experience is...", networkConfig: networkConfig),
         .reason: TextblockPicklist(
             type: .reason,
-            placeholder: "I’m particularly interested in working with you or your company because..."),
+            placeholder: "I’m particularly interested in working with you or your company because...", networkConfig: networkConfig),
         .experience: TextblockPicklist(
             type: .experience,
-            placeholder: "My relevant experience is... or why you should consider me")
+            placeholder: "My relevant experience is... or why you should consider me", networkConfig: networkConfig)
     ]
     
     var picklistsDidUpdate: ((PicklistsDictionary) -> Void)?

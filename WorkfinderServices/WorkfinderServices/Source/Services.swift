@@ -5,18 +5,18 @@ public class PicklistProvider: PicklistProviderProtocol {
     
     public let picklistType: PicklistType
     public var moreToCome: Bool = false
-    let apiUrl: String = "http://workfinder-develop.eu-west-2.elasticbeanstalk.com/v3/"
-    let urlString: String
+    let apiUrl: URL
     let urlRequest: URLRequest
     var completionHandler: ((Result<[PicklistItemJson],Error>) -> Void)?
     let url: URL
     let session: URLSession = URLSession(configuration: URLSessionConfiguration.default)
     var task: URLSessionDataTask?
     
-    public init(picklistType: PicklistType) {
+    public init(picklistType: PicklistType, networkConfig: NetworkConfig) {
+        let apiUrl = networkConfig.workfinderApiV3Url
         self.picklistType = picklistType
-        urlString = apiUrl + picklistType.endpoint
-        url = URL(string: urlString)!
+        self.apiUrl = apiUrl
+        url = URL(string: picklistType.endpoint, relativeTo: apiUrl)!
         urlRequest = URLRequest(url: url)
     }
     
@@ -91,8 +91,9 @@ public class CompanyWorkplaceListProvider: WorkfinderService, CompanyWorkplaceLi
     }
     
     func deserializeDataResult(_ result: Result<Data,Error>) {
-        guard let completion = completion else { return }
-        deserialise(dataResult: result, completion: completion)
+        completion?(result)
+//        guard let completion = completion else { return }
+//        deserialise(dataResult: result, completion: completion)
     }
     
     func buildTask(locationUuids: [F4SUUID]) -> URLSessionDataTask {

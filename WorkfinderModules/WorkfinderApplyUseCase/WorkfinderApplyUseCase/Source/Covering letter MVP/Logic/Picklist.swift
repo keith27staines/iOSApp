@@ -4,8 +4,8 @@ import WorkfinderCommon
 import WorkfinderServices
 
 public class AvailabilityPeriodPicklist: ClientPicklist {
-    public init() {
-        super.init(type: .availabilityPeriod, maximumPicks: 2)
+    public init(networkConfig: NetworkConfig) {
+        super.init(type: .availabilityPeriod, maximumPicks: 2, networkConfig: networkConfig)
         items = [
             PicklistItemJson(uuid: "startDate", value: ""),
             PicklistItemJson(uuid: "endDate", value: "")
@@ -15,9 +15,9 @@ public class AvailabilityPeriodPicklist: ClientPicklist {
 
 public class TextblockPicklist: ClientPicklist {
     let placeholder: String
-    public init(type: PicklistType, placeholder: String) {
+    public init(type: PicklistType, placeholder: String, networkConfig: NetworkConfig) {
         self.placeholder = placeholder
-        super.init(type: type, maximumPicks: 1)
+        super.init(type: type, maximumPicks: 1, networkConfig: networkConfig)
         items = [
             PicklistItemJson(uuid: "text", value: "")
         ]
@@ -26,8 +26,8 @@ public class TextblockPicklist: ClientPicklist {
 
 public class UniversityYearPicklist: ClientPicklist {
     
-    public init() {
-        super.init(type: .year, maximumPicks: 1)
+    public init(networkConfig: NetworkConfig) {
+        super.init(type: .year, maximumPicks: 1, networkConfig: networkConfig)
         items = [
             PicklistItemJson(uuid: "1", value: "Year 1"),
             PicklistItemJson(uuid: "2", value: "Year 2"),
@@ -58,6 +58,7 @@ public class Picklist: PicklistProtocol {
     public var items: [PicklistItemJson]
     public var selectedItems: [PicklistItemJson]
     public var provider: PicklistProviderProtocol?
+    let networkConfig: NetworkConfig
     
     public func selectItem(_ item: PicklistItemJson) {
         if !selectedItems.contains(where: { (otherItem) -> Bool in
@@ -74,17 +75,18 @@ public class Picklist: PicklistProtocol {
         selectedItems.remove(at: index)
     }
     
-    public init(type: PicklistType, maximumPicks: Int) {
+    public init(type: PicklistType, maximumPicks: Int, networkConfig: NetworkConfig) {
         self.type = type
         self.items = []
         self.selectedItems = []
         self.maximumPicks = maximumPicks
+        self.networkConfig = networkConfig
         self.provider = makeProvider()
     }
     
     func makeProvider() -> PicklistProviderProtocol? {
         if self.type.providerType == .network {
-            return PicklistProvider(picklistType: self.type)
+            return PicklistProvider(picklistType: self.type, networkConfig: networkConfig)
         }
         return nil
     }
