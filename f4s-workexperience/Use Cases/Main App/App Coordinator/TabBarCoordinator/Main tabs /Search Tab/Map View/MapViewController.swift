@@ -217,7 +217,11 @@ class MapViewController: UIViewController {
         mapView.addSubview(pressedPinOrCluster!)
         
         let vc = CompanyWorkplaceListViewController()
-        let provider = CompanyWorkplaceListProvider()
+        guard let networkConfig = coordinator?.injected.networkConfig else {
+            assertionFailure("MapViewController did not receive its coordinator")
+            return
+        }
+        let provider = CompanyWorkplaceListProvider(networkConfig: networkConfig)
         vc.presenter = CompanyWorkplaceListPresenter(
             companyWorkplaceUuids: workplaceUuids,
             provider: provider)

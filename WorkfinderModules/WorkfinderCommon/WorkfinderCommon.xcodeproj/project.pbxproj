@@ -91,6 +91,10 @@
 		FCC4E67223EAFD5400ED6491 /* F4SHostTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC4E67123EAFD5400ED6491 /* F4SHostTests.swift */; };
 		FCC4E67623EAFE6500ED6491 /* ShortlistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC4E67523EAFE6500ED6491 /* ShortlistTests.swift */; };
 		FCC66B7223E035DA006F22AD /* LatLonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC66B7123E035DA006F22AD /* LatLonTests.swift */; };
+		FCC85DC324517E0A00BC600E /* ProvidersAndServicesProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC85DC224517E0A00BC600E /* ProvidersAndServicesProtocols.swift */; };
+		FCC85DC624517EA500BC600E /* HttpRequestJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC85DC524517EA500BC600E /* HttpRequestJson.swift */; };
+		FCC85DC8245180AB00BC600E /* PicklistTypeEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC85DC7245180AB00BC600E /* PicklistTypeEnums.swift */; };
+		FCC85DCB245184B700BC600E /* PicklistProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC85DCA245184B700BC600E /* PicklistProtocol.swift */; };
 		FCDB07382286F6640053347F /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB07372286F6640053347F /* Candidate.swift */; };
 		FCDB073A2286F7870053347F /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB07392286F7870053347F /* UserRepository.swift */; };
 		FCDB073C2286F8B00053347F /* Analytics and debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB073B2286F8B00053347F /* Analytics and debugging.swift */; };
@@ -226,6 +230,10 @@
 		FCC4E67123EAFD5400ED6491 /* F4SHostTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SHostTests.swift; sourceTree = "<group>"; };
 		FCC4E67523EAFE6500ED6491 /* ShortlistTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortlistTests.swift; sourceTree = "<group>"; };
 		FCC66B7123E035DA006F22AD /* LatLonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatLonTests.swift; sourceTree = "<group>"; };
+		FCC85DC224517E0A00BC600E /* ProvidersAndServicesProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersAndServicesProtocols.swift; sourceTree = "<group>"; };
+		FCC85DC524517EA500BC600E /* HttpRequestJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpRequestJson.swift; sourceTree = "<group>"; };
+		FCC85DC7245180AB00BC600E /* PicklistTypeEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicklistTypeEnums.swift; sourceTree = "<group>"; };
+		FCC85DCA245184B700BC600E /* PicklistProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicklistProtocol.swift; sourceTree = "<group>"; };
 		FCDB07372286F6640053347F /* Candidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Candidate.swift; sourceTree = "<group>"; };
 		FCDB07392286F7870053347F /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		FCDB073B2286F8B00053347F /* Analytics and debugging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Analytics and debugging.swift"; sourceTree = "<group>"; };
@@ -505,8 +513,27 @@
 				FC06605C2326770B00496FE2 /* F4SShortlistJson.swift */,
 				FC22438E232F9E750073C9B1 /* F4SCompanyDatabaseMetaData.swift */,
 				FC426F0D232FF8BC004F8A3E /* EmailVerification.swift */,
+				FCC85DC9245184A200BC600E /* Picklist */,
 			);
 			path = Source;
+			sourceTree = "<group>";
+		};
+		FCC85DC424517E8800BC600E /* Providers and services */ = {
+			isa = PBXGroup;
+			children = (
+				FCC85DC224517E0A00BC600E /* ProvidersAndServicesProtocols.swift */,
+				FCC85DC524517EA500BC600E /* HttpRequestJson.swift */,
+			);
+			path = "Providers and services";
+			sourceTree = "<group>";
+		};
+		FCC85DC9245184A200BC600E /* Picklist */ = {
+			isa = PBXGroup;
+			children = (
+				FCC85DC7245180AB00BC600E /* PicklistTypeEnums.swift */,
+				FCC85DCA245184B700BC600E /* PicklistProtocol.swift */,
+			);
+			path = Picklist;
 			sourceTree = "<group>";
 		};
 		FCDFEA14223D32D700E58649 /* Errors and Results */ = {
@@ -521,6 +548,7 @@
 		FCDFEA15223D32EA00E58649 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				FCC85DC424517E8800BC600E /* Providers and services */,
 				FC24F9122333CA88005C0A08 /* RequestVerb.swift */,
 				FC426F07232FAFF0004F8A3E /* WorkfinderNetworking.swift */,
 				FC426EFD232FAC6C004F8A3E /* F4SNetworkSessionManagerProtocol.swift */,
@@ -686,6 +714,8 @@
 				FC066050232645D800496FE2 /* F4SFavouritesRepository.swift in Sources */,
 				FC8F957C233BA6710027BE02 /* MockCoordinators.swift in Sources */,
 				FC24F9132333CA88005C0A08 /* RequestVerb.swift in Sources */,
+				FCC85DC324517E0A00BC600E /* ProvidersAndServicesProtocols.swift in Sources */,
+				FCC85DC8245180AB00BC600E /* PicklistTypeEnums.swift in Sources */,
 				FC083F852310101D00641F17 /* F4SRecommendation.swift in Sources */,
 				FCFE450E2250BA6700C38436 /* MockLocalStore.swift in Sources */,
 				FC7A4396224A3C0E00B2D693 /* F4SNetworkInterface.swift in Sources */,
@@ -700,6 +730,7 @@
 				FCB24A5F22E44AB100077DFF /* WorkfinderCommonStructs.swift in Sources */,
 				FC1F592222FDCD9D007164BA /* F4SCalendarDay.swift in Sources */,
 				FCE51936224948E400B550C9 /* F4SDaysAndHoursModel.swift in Sources */,
+				FCC85DC624517EA500BC600E /* HttpRequestJson.swift in Sources */,
 				FCDB073C2286F8B00053347F /* Analytics and debugging.swift in Sources */,
 				FC8F9580233BA6710027BE02 /* MockDatabaseDownload.swift in Sources */,
 				FCE5192122493D3300B550C9 /* Date+Extensions.swift in Sources */,
@@ -721,6 +752,7 @@
 				FC1243E32344AEA30007BA95 /* ScreenNames.swift in Sources */,
 				FCE8DAA82320E80B00934E2F /* ScaledNumber.swift in Sources */,
 				FC4EE710230EB9D700B40F6B /* F4SUserStatus.swift in Sources */,
+				FCC85DCB245184B700BC600E /* PicklistProtocol.swift in Sources */,
 				FCE51938224948E400B550C9 /* F4SHoursType.swift in Sources */,
 				FC8F957D233BA6710027BE02 /* MockAnalyticsAndDebugging.swift in Sources */,
 				FC06605D2326770B00496FE2 /* F4SShortlistJson.swift in Sources */,

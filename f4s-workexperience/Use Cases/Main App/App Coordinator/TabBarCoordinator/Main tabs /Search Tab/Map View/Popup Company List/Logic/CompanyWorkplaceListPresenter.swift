@@ -1,6 +1,7 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderServices
 
 protocol CompanyWorkplaceListPresenterProtocol {
     var showLoadingIndicator: Bool { get }

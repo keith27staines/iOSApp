@@ -1,17 +1,7 @@
 
 import Foundation
-
-public protocol PicklistProtocol {
-    var type: Picklist.PicklistType { get }
-    var items: [PicklistItemJson] { get }
-    var title: String { get }
-    var userInstruction: String { get }
-    var selectedItems: [PicklistItemJson] { get }
-    var itemSelectedSummary: String { get }
-    func selectItem(_ item: PicklistItemJson)
-    func deselectItem(_ item: PicklistItemJson)
-    func fetchItems(completion: @escaping ((Picklist, Result<[PicklistItemJson],Error>)->Void) )
-}
+import WorkfinderCommon
+import WorkfinderServices
 
 public class AvailabilityPeriodPicklist: ClientPicklist {
     public init() {
@@ -51,7 +41,7 @@ public class UniversityYearPicklist: ClientPicklist {
 }
 
 public class ClientPicklist: Picklist {
-    override public func fetchItems(completion: @escaping ((Picklist, Result<[PicklistItemJson], Error>) -> Void)) {
+    override public func fetchItems(completion: @escaping ((PicklistProtocol, Result<[PicklistItemJson], Error>) -> Void)) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             completion(self, Result<[PicklistItemJson], Error>.success(self.items))
@@ -61,44 +51,13 @@ public class ClientPicklist: Picklist {
 
 public class Picklist: PicklistProtocol {
     
-    public enum ProviderType {
-        case network
-        case clientTextField
-        case clientTextblock
-        case clientAvailabilityPeriod
-    }
-    
-    public enum PicklistType: Int, CaseIterable {
-        case roles
-        case skills
-        case attributes
-        case universities
-        case year
-        case availabilityPeriod
-        case motivation
-        case reason
-        case experience
-        var providerType: ProviderType {
-            switch self {
-            case .roles, .skills, .attributes, .universities:
-                return .network
-            case .year:
-                return .clientTextField
-            case .motivation,.reason, .experience:
-                return .clientTextField
-            case .availabilityPeriod:
-                return .clientAvailabilityPeriod
-            }
-        }
-    }
-    
     public let type: PicklistType
     public var itemsSelectedSummary: String?
     public var mimumPicks: Int = 1
     public var maximumPicks: Int = 3
     public var items: [PicklistItemJson]
     public var selectedItems: [PicklistItemJson]
-    public var provider: PicklistProvider?
+    public var provider: PicklistProviderProtocol?
     
     public func selectItem(_ item: PicklistItemJson) {
         if !selectedItems.contains(where: { (otherItem) -> Bool in
@@ -123,14 +82,14 @@ public class Picklist: PicklistProtocol {
         self.provider = makeProvider()
     }
     
-    func makeProvider() -> PicklistProvider? {
+    func makeProvider() -> PicklistProviderProtocol? {
         if self.type.providerType == .network {
             return PicklistProvider(picklistType: self.type)
         }
         return nil
     }
     
-    public func fetchItems(completion: @escaping ((Picklist, Result<[PicklistItemJson],Error>)->Void) ) {
+    public func fetchItems(completion: @escaping ((PicklistProtocol, Result<[PicklistItemJson],Error>)->Void) ) {
         guard items.isEmpty else { return }
         provider?.fetchMore { (result) in
             switch result {

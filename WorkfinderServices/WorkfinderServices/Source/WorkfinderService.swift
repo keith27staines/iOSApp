@@ -3,7 +3,7 @@ import Foundation
 import WorkfinderNetworking
 import WorkfinderCommon
 
-public class WorkfinderService {
+open class WorkfinderService {
     public let networkConfig: NetworkConfig
     public var urlComponents: URLComponents
     public let taskHandler = DataTaskCompletionHandler()
@@ -11,8 +11,8 @@ public class WorkfinderService {
     let decoder = JSONDecoder()
     let encoder = JSONEncoder()
     
-    var session: URLSession { networkConfig.sessionManager.interactiveSession }
-    var task: URLSessionDataTask?
+    public var session: URLSession { networkConfig.sessionManager.interactiveSession }
+    public var task: URLSessionDataTask?
     
     public init(networkConfig: NetworkConfig) {
         self.networkConfig = networkConfig

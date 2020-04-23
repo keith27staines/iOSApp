@@ -11,25 +11,10 @@
 		FC02DA0E22EC7214003C8148 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC02DA0D22EC7214003C8148 /* WorkfinderCommon.framework */; };
 		FC036BD024497FD5008C4A69 /* WorkfinderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC036BCF24497FD5008C4A69 /* WorkfinderService.swift */; };
 		FC20BD4C2450747900FC6C9A /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC20BD4B2450747900FC6C9A /* WorkfinderNetworking.framework */; };
-		FC20BD4D2450747900FC6C9A /* WorkfinderNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC20BD4B2450747900FC6C9A /* WorkfinderNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FC3BCA5D2434DF0700C5A96A /* HostsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3BCA5C2434DF0700C5A96A /* HostsProvider.swift */; };
+		FC3BCA5D2434DF0700C5A96A /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3BCA5C2434DF0700C5A96A /* Services.swift */; };
 		FC3BCA612434E04E00C5A96A /* DataTaskCompletionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3BCA602434E04E00C5A96A /* DataTaskCompletionHandler.swift */; };
 		FCB4EAD624251586001D5D23 /* ApplyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB4EAD524251586001D5D23 /* ApplyService.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		FC20BD4E2450747900FC6C9A /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				FC20BD4D2450747900FC6C9A /* WorkfinderNetworking.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		FC02D9E822EC70FD003C8148 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -39,7 +24,7 @@
 		FC02DA0F22EC721D003C8148 /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC036BCF24497FD5008C4A69 /* WorkfinderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderService.swift; sourceTree = "<group>"; };
 		FC20BD4B2450747900FC6C9A /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC3BCA5C2434DF0700C5A96A /* HostsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostsProvider.swift; sourceTree = "<group>"; };
+		FC3BCA5C2434DF0700C5A96A /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		FC3BCA602434E04E00C5A96A /* DataTaskCompletionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTaskCompletionHandler.swift; sourceTree = "<group>"; };
 		FCB4EAD524251586001D5D23 /* ApplyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,9 +83,9 @@
 		FC02DA1D22EC7301003C8148 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				FC3BCA602434E04E00C5A96A /* DataTaskCompletionHandler.swift */,
 				FC036BCF24497FD5008C4A69 /* WorkfinderService.swift */,
-				FC3BCA5C2434DF0700C5A96A /* HostsProvider.swift */,
+				FC3BCA5C2434DF0700C5A96A /* Services.swift */,
+				FC3BCA602434E04E00C5A96A /* DataTaskCompletionHandler.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -127,7 +112,6 @@
 				FC02D9E422EC70FD003C8148 /* Sources */,
 				FC02D9E522EC70FD003C8148 /* Frameworks */,
 				FC02D9E622EC70FD003C8148 /* Resources */,
-				FC20BD4E2450747900FC6C9A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -187,7 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC036BD024497FD5008C4A69 /* WorkfinderService.swift in Sources */,
-				FC3BCA5D2434DF0700C5A96A /* HostsProvider.swift in Sources */,
+				FC3BCA5D2434DF0700C5A96A /* Services.swift in Sources */,
 				FCB4EAD624251586001D5D23 /* ApplyService.swift in Sources */,
 				FC3BCA612434E04E00C5A96A /* DataTaskCompletionHandler.swift in Sources */,
 			);

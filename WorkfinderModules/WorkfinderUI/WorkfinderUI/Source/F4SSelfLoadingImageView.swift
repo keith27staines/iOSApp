@@ -70,7 +70,7 @@ public class F4SSelfLoadingImageView : UIImageView {
 
 public class ImageFetcher : ImageFetching {
     var cancelled: Bool = false
-    let session = URLSession.init(configuration: URLSessionConfiguration.default)
+    public let session = URLSession.init(configuration: URLSessionConfiguration.default)
     var dataTask: URLSessionDataTask?
     
     public init() {}

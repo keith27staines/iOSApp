@@ -1,14 +1,15 @@
 
 import UIKit
+import WorkfinderCommon
 
 protocol PicklistCoordinatorProtocol: class {
-    func picklistIsClosing(_ picklist: Picklist)
+    func picklistIsClosing(_ picklist: PicklistProtocol)
 }
 
 class PicklistViewController: UITableViewController {
     
     weak var coordinator: PicklistCoordinatorProtocol?
-    let picklist: Picklist
+    let picklist: PicklistProtocol
     
     override func viewDidLoad() {
         navigationItem.title = "Select \(picklist.title)"
@@ -20,7 +21,7 @@ class PicklistViewController: UITableViewController {
         coordinator?.picklistIsClosing(picklist)
     }
     
-    init(coordinator: PicklistCoordinatorProtocol, picklist: Picklist) {
+    init(coordinator: PicklistCoordinatorProtocol, picklist: PicklistProtocol) {
         self.coordinator = coordinator
         self.picklist = picklist
         super.init(nibName: nil, bundle: nil)

@@ -1,11 +1,12 @@
 
 import UIKit
+import WorkfinderCommon
 import WorkfinderUI
 
 protocol LetterEditorCoordinatorProtocol: class {
     func start()
     func letterEditorDidComplete(view: LetterEditorViewProtocol)
-    func showPicklist(_ picklist: Picklist)
+    func showPicklist(_ picklist: PicklistProtocol)
 }
 
 protocol LetterEditorViewProtocol: class {
@@ -122,7 +123,7 @@ extension LetterEditorViewController: UITableViewDataSource {
 
 class PicklistCell: UITableViewCell {
     
-    func configureWithPicklist(_ picklist: Picklist) {
+    func configureWithPicklist(_ picklist: PicklistProtocol) {
         label1.text = picklist.title.capitalizingFirstLetter()
         label2.text = picklist.itemSelectedSummary
     }
@@ -162,7 +163,7 @@ class PicklistCell: UITableViewCell {
 
 class PicklistDescriptionCell: UITableViewCell {
     
-    func configureWithPicklist(_ picklist: Picklist) {
+    func configureWithPicklist(_ picklist: PicklistProtocol) {
         label.text = picklist.userInstruction
     }
     

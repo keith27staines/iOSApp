@@ -1,5 +1,6 @@
 
 import Foundation
+import WorkfinderCommon
 
 public protocol CoverLetterViewPresenterProtocol {
     var view: CoverLetterViewProtocol? { get set }

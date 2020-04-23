@@ -38,7 +38,7 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
         navigationRouter.push(viewController: viewController, animated: true)
     }
     
-    let allPicklistsDictionary: PicklistsDictionary = [
+    var allPicklistsDictionary: PicklistsDictionary = [
         .attributes: Picklist(type: .attributes, maximumPicks: 3),
         .roles: Picklist(type: .roles, maximumPicks: 1),
         .skills: Picklist(type: .skills, maximumPicks: 3),
@@ -77,7 +77,7 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
 }
 
 extension CoverLetterCoordinator: LetterEditorCoordinatorProtocol {
-    func showPicklist(_ picklist: Picklist) {
+    func showPicklist(_ picklist: PicklistProtocol) {
         switch picklist.type {
         case .roles, .skills, .universities, .attributes, .year:
             let vc = PicklistViewController(coordinator: self, picklist: picklist)
@@ -122,7 +122,7 @@ extension CoverLetterCoordinator: F4SCalendarCollectionViewControllerDelegate {
 }
 
 extension CoverLetterCoordinator: PicklistCoordinatorProtocol {
-    func picklistIsClosing(_ picklist: Picklist) {
+    func picklistIsClosing(_ picklist: PicklistProtocol) {
         letterEditorViewController?.refresh()
     }
 }

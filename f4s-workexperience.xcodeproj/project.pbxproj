@@ -81,7 +81,6 @@
 		FC3CD1DA221566F200F91B50 /* Geocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CD1D9221566F200F91B50 /* Geocoding.swift */; };
 		FC4802C22354AD9300AF8F6D /* firebase_live.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC4802C12354AD9300AF8F6D /* firebase_live.plist */; };
 		FC50E9CE2213EF5400C9A621 /* SearchModeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */; };
-		FC5D3C6C20FE17F600F89169 /* config.yml in Resources */ = {isa = PBXBuildFile; fileRef = FC5D3C6B20FE17F600F89169 /* config.yml */; };
 		FC5D3C6E20FE1CEC00F89169 /* Gemfile in Resources */ = {isa = PBXBuildFile; fileRef = FC5D3C6D20FE1CEB00F89169 /* Gemfile */; };
 		FC681C001F57473D0077BECA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFE1F57473D0077BECA /* Podfile */; };
 		FC681C011F57473D0077BECA /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFF1F57473D0077BECA /* Podfile.lock */; };
@@ -299,7 +298,6 @@
 		FC3CD1D9221566F200F91B50 /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
 		FC4802C12354AD9300AF8F6D /* firebase_live.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = firebase_live.plist; sourceTree = "<group>"; };
 		FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModeSelectorView.swift; sourceTree = "<group>"; };
-		FC5D3C6B20FE17F600F89169 /* config.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.yml; sourceTree = "<group>"; };
 		FC5D3C6D20FE1CEB00F89169 /* Gemfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Gemfile; sourceTree = "<group>"; };
 		FC681BFE1F57473D0077BECA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		FC681BFF1F57473D0077BECA /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
@@ -447,15 +445,7 @@
 		40E78E0A1DD31A86000A3776 = {
 			isa = PBXGroup;
 			children = (
-				FC4802C12354AD9300AF8F6D /* firebase_live.plist */,
-				FCF992D2234CE01B00DBC179 /* firebase_staging.plist */,
-				FC5D3C6D20FE1CEB00F89169 /* Gemfile */,
-				FC72219A20FE248400F10953 /* fastlane */,
-				FC5D3C6A20FE17F600F89169 /* .circleci */,
-				FCB6D9351F75056000B8C268 /* Branding.plist */,
-				FC681BFE1F57473D0077BECA /* Podfile */,
-				FC681BFF1F57473D0077BECA /* Podfile.lock */,
-				FCC5EBB51F449C310085CE15 /* README.md */,
+				FCC85DC124515F2F00BC600E /* Top level files */,
 				40E78E151DD31A86000A3776 /* f4s-workexperience */,
 				FCFBD0072250D69700A9361D /* f4s-workexperienceTests */,
 				40E78E141DD31A86000A3776 /* Products */,
@@ -477,16 +467,14 @@
 			isa = PBXGroup;
 			children = (
 				FC15614C2450500E00612ED9 /* Workfinder StagingDebugF4SLive.entitlements */,
-				FC67711121258448000B0870 /* Assets */,
-				FC04B860233271720034A60E /* Builders */,
 				40E78E1F1DD31A86000A3776 /* LaunchScreen.storyboard */,
-				FC1DFD87222B9CF2001951ED /* Utilities and extensions */,
-				40E78E481DD32848000A3776 /* AppDelegate */,
-				FC2D975A22185D0C00763B06 /* Use Cases */,
-				FC1DFD86222B9C67001951ED /* Models and services */,
-				40E78E501DD328E0000A3776 /* Side menu */,
-				40E78E441DD32100000A3776 /* SupportingFiles */,
+				FC67711121258448000B0870 /* Assets */,
 				20B128121DDA1A2900CE3F1F /* Config */,
+				40E78E481DD32848000A3776 /* AppDelegate */,
+				FC04B860233271720034A60E /* Builders */,
+				FC2D975A22185D0C00763B06 /* Use Cases */,
+				FC1DFD87222B9CF2001951ED /* Utilities and extensions */,
+				40E78E441DD32100000A3776 /* SupportingFiles */,
 			);
 			path = "f4s-workexperience";
 			sourceTree = "<group>";
@@ -539,6 +527,7 @@
 				FC1DFD8A222B9EF5001951ED /* Shared */,
 			);
 			name = "Side menu";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		40E78E521DD3292F000A3776 /* Side menu */ = {
@@ -687,6 +676,7 @@
 				FC8E303620F4A5DF006059DE /* F4SLogger */,
 			);
 			name = "Models and services";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		FC1DFD87222B9CF2001951ED /* Utilities and extensions */ = {
@@ -797,6 +787,8 @@
 			isa = PBXGroup;
 			children = (
 				FC1DC06921FE1410009ABC60 /* Main App */,
+				FC1DFD86222B9C67001951ED /* Models and services */,
+				40E78E501DD328E0000A3776 /* Side menu */,
 			);
 			path = "Use Cases";
 			sourceTree = "<group>";
@@ -836,14 +828,6 @@
 				FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */,
 			);
 			path = Subviews;
-			sourceTree = "<group>";
-		};
-		FC5D3C6A20FE17F600F89169 /* .circleci */ = {
-			isa = PBXGroup;
-			children = (
-				FC5D3C6B20FE17F600F89169 /* config.yml */,
-			);
-			path = .circleci;
 			sourceTree = "<group>";
 		};
 		FC67711121258448000B0870 /* Assets */ = {
@@ -929,6 +913,21 @@
 				FC313048222BC83C0043D014 /* TabBarCoordinator */,
 			);
 			path = "App Coordinator";
+			sourceTree = "<group>";
+		};
+		FCC85DC124515F2F00BC600E /* Top level files */ = {
+			isa = PBXGroup;
+			children = (
+				FCC5EBB51F449C310085CE15 /* README.md */,
+				FC4802C12354AD9300AF8F6D /* firebase_live.plist */,
+				FCF992D2234CE01B00DBC179 /* firebase_staging.plist */,
+				FC5D3C6D20FE1CEB00F89169 /* Gemfile */,
+				FCB6D9351F75056000B8C268 /* Branding.plist */,
+				FC681BFE1F57473D0077BECA /* Podfile */,
+				FC681BFF1F57473D0077BECA /* Podfile.lock */,
+				FC72219A20FE248400F10953 /* fastlane */,
+			);
+			name = "Top level files";
 			sourceTree = "<group>";
 		};
 		FCDC542724289AE0002581FF /* Popup Company List */ = {
@@ -1130,7 +1129,6 @@
 				FC5D3C6E20FE1CEC00F89169 /* Gemfile in Resources */,
 				FC681C001F57473D0077BECA /* Podfile in Resources */,
 				FCA53B971FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib in Resources */,
-				FC5D3C6C20FE17F600F89169 /* config.yml in Resources */,
 				FC4802C22354AD9300AF8F6D /* firebase_live.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

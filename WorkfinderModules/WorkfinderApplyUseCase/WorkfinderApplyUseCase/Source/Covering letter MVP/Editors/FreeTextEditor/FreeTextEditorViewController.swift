@@ -1,5 +1,6 @@
 
 import Foundation
+import WorkfinderCommon
 
 protocol FreeTextEditorCoordinatorProtocol: class {
     func textEditorIsClosing()
