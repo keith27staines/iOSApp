@@ -93,14 +93,14 @@ public class Picklist: PicklistProtocol {
     
     public func fetchItems(completion: @escaping ((PicklistProtocol, Result<[PicklistItemJson],Error>)->Void) ) {
         guard items.isEmpty else { return }
-        provider?.fetchMore { (result) in
+        provider?.fetchPicklistItems { (result) in
             switch result {
-            case .success(let items):
-                self.items = items
-            case .failure(_):
-                break
+            case .success(let responseBody):
+                self.items = responseBody.results
+                completion(self,Result<[PicklistItemJson],Error>.success(self.items))
+            case .failure(let error):
+                completion(self,Result<[PicklistItemJson],Error>.failure(error))
             }
-            completion(self,result)
         }
     }
     

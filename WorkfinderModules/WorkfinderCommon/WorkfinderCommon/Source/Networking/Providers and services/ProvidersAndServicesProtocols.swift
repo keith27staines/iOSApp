@@ -7,13 +7,13 @@ public protocol TemplateProviderProtocol {
 
 public protocol PicklistProviderProtocol: class {
     var picklistType: PicklistType { get }
-    var moreToCome: Bool { get }
-    func fetchMore(completion: @escaping ((Result<[PicklistItemJson],Error>) -> Void))
+    func fetchPicklistItems(completion: @escaping ((Result<PicklistServerJson,Error>) -> Void))
 }
 
 public protocol CompanyWorkplaceListProviderProtocol {
-    func fetchCompanyWorkplaces(locationUuids: [F4SUUID],
-        completion: @escaping ((Result<Data,Error>) -> Void))
+    func fetchCompanyWorkplaces(
+        locationUuids: [F4SUUID],
+        completion: @escaping ((Result<CompanyListJson,Error>) -> Void))
 }
 
 public protocol HostsProviderProtocol {

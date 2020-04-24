@@ -91,10 +91,10 @@
 			children = (
 				FC473E902451D2CD004CEA17 /* HostProvider.swift */,
 				FC473E8E2451CE50004CEA17 /* TemplateProvider.swift */,
-				FC036BCF24497FD5008C4A69 /* WorkfinderService.swift */,
 				FC3BCA5C2434DF0700C5A96A /* PicklistProvider.swift */,
-				FC3BCA602434E04E00C5A96A /* DataTaskCompletionHandler.swift */,
 				FC473E922451D331004CEA17 /* CompanyWorkplaceListProvider.swift */,
+				FC036BCF24497FD5008C4A69 /* WorkfinderService.swift */,
+				FC3BCA602434E04E00C5A96A /* DataTaskCompletionHandler.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";

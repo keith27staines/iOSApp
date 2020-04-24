@@ -34,6 +34,13 @@ public struct CodeAndName: Codable {
     public let name: String
 }
 
+public struct CompanyListJson: Codable {
+    public var count: Int
+    public var next: String?
+    public var previous: String?
+    public var results: [CompanyJson]
+}
+
 public struct CompanyJson: Codable {
     public var uuid: String?
     public var name: String?

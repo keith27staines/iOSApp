@@ -3,10 +3,20 @@ import Foundation
 import WorkfinderCommon
 
 public class DataTaskCompletionHandler {
-    public init() {}
     
-    public func convertToDataResult(data: Data?, response: URLResponse?, error: Error?, completion: @escaping((Result<Data,Error>) -> Void)) {
-        DispatchQueue.main.async {
+    let logger: NetworkCallLoggerProtocol
+    
+    public init(logger: NetworkCallLoggerProtocol) {
+        self.logger = logger
+    }
+    
+    public func convertToDataResult(attempting: String,
+                                    request: URLRequest,
+                                    data: Data?,
+                                    response: URLResponse?,
+                                    error: Error?,
+                                    completion: @escaping((Result<Data,Error>) -> Void)) {
+        DispatchQueue.main.async { [weak self] in
             guard let response = response as? HTTPURLResponse else {
                 if let error = error {
                     let result = Result<Data, Error>.failure(error)
@@ -28,6 +38,12 @@ public class DataTaskCompletionHandler {
             default:
                 let httpError = NetworkError.httpError(response)
                 let result = Result<Data, Error>.failure(httpError)
+                self?.logger.logDataTaskFailure(
+                    attempting: attempting,
+                    error: httpError,
+                    request: request,
+                    response: response,
+                    responseData: data)
                 completion(result)
                 return
             }

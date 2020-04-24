@@ -72,23 +72,15 @@ class CompanyWorkplaceListPresenter {
         }
     }
     
-    func onfetchComplete(_ result: Result<Data,Error>) {
+    func onfetchComplete(_ result: Result<CompanyListJson,Error>) {
         self.showLoadingIndicator = false
         switch result {
-        case .success(let data):
-            self.decode(data)
+        case .success(let companyListJson):
+            self.companyListJson = companyListJson
             self.view?.refreshFromPresenter(self)
         case .failure(let error):
             print(error)
             break
-        }
-    }
-    
-    func decode(_ data: Data) {
-        do {
-            self.companyListJson = try JSONDecoder().decode(CompanyListJson.self, from: data)
-        } catch {
-            companyListJson = nil
         }
     }
 }

@@ -3,8 +3,12 @@ import WorkfinderCommon
 
 public class TemplateProvider: WorkfinderService, TemplateProviderProtocol {
     
-    var completion: ((Result<TemplateListJson, Error>) -> Void)?
     let candidateDateOfBirth: Date
+    lazy var dateOfBirthString: String = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-dd"
+        return dateFormatter.string(from: candidateDateOfBirth)
+    }()
     
     public init(networkConfig: NetworkConfig,
                 candidateDateOfBirth: Date) {
@@ -13,36 +17,21 @@ public class TemplateProvider: WorkfinderService, TemplateProviderProtocol {
     }
     
     public func fetchCoverLetterTemplateListJson(completion: @escaping ((Result<TemplateListJson,Error>) -> Void)) {
-        task?.cancel()
-        let request = buildRequest(ageString: dateOfBirthString)
-        self.completion = completion
-        task = session.dataTask(with: request, completionHandler: { [weak self] (data, response, error) in
-            guard let self = self else { return }
-            self.taskHandler.convertToDataResult(data: data, response: response, error: error, completion: self.deserializeDataResult)
-            
-        })
-        task?.resume()
-    }
-}
-
-extension TemplateProvider {
-    
-    var dateOfBirthString: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-dd"
-        return dateFormatter.string(from: candidateDateOfBirth)
+        do {
+            let request = try buildFetchCoverLetterRequest(ageString: dateOfBirthString)
+            performTask(
+                with: request,
+                completion: completion,
+                attempting: #function)
+        } catch {
+            completion(Result<TemplateListJson,Error>.failure(error))
+        }
     }
     
-    func buildRequest(ageString: String) -> URLRequest {
-        var components = urlComponents
-        components.path = urlComponents.path + "coverletters/"
-        components.queryItems = [URLQueryItem(name: "date_of_birth", value: dateOfBirthString)]
-        let url = components.url!
-        return networkConfig.buildUrlRequest(url: url, verb: .get, body: nil)
-    }
-    
-    func deserializeDataResult(_ result: Result<Data,Error>) {
-        guard let completion = completion else { return }
-        deserialise(dataResult: result, completion: completion)
+    func buildFetchCoverLetterRequest(ageString: String) throws -> URLRequest {
+        return try buildRequest(
+            relativePath: "coverletters/",
+            queryItems: [URLQueryItem(name: "date_of_birth", value: dateOfBirthString)],
+            verb: .get)
     }
 }

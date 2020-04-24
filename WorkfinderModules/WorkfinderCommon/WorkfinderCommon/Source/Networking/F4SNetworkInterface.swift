@@ -14,6 +14,7 @@ public typealias HTTPStatusCode = Int
 /// Errors that may be thrown during a network request
 public enum NetworkError: Error {
     case clientError(Error)
+    case malformedUrl(String)
     case httpError(HTTPURLResponse)
     case responseBodyEmpty(HTTPURLResponse)
     case deserialization(Error)
