@@ -21,8 +21,8 @@ public class HostLocationAssociationsService: WorkfinderService, HostLocationAss
     
     func buildFetchAssociationsRequest(location: F4SUUID) throws -> URLRequest {
         let queryItems = [
-            URLQueryItem(name: "location_uuid", value: location),
-            URLQueryItem(name: "expand-hosts", value: "1")
+            URLQueryItem(name: "location__uuid", value: location),
+            URLQueryItem(name: "expand-host", value: "1")
         ]
         return try buildRequest(
             relativePath: "associations/",

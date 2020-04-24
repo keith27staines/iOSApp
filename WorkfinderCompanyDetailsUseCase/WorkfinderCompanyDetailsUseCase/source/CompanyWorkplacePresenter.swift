@@ -11,7 +11,7 @@ protocol CompanyWorkplaceCoordinatorProtocol : CompanyMainViewCoordinatorProtoco
     func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, requestsShowLinkedInFor: CompanyWorkplace)
     func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, requestedShowDuedilFor: CompanyWorkplace)
     func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, requestOpenLink link: URL)
-    func applyTo(companyWorkplace: CompanyWorkplace, host: Host)
+    func applyTo(companyWorkplace: CompanyWorkplace, hostLocationAssociation: HostLocationAssociationJson)
 }
 
 protocol CompanyWorkplacePresenterProtocol: class {
@@ -22,6 +22,40 @@ protocol CompanyWorkplacePresenterProtocol: class {
 }
 
 class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
+    
+    weak var log: F4SAnalyticsAndDebugging?
+    weak var coordinator: CompanyWorkplaceCoordinatorProtocol?
+    weak var view: CompanyWorkplaceViewProtocol?
+    let associationsProvider: HostLocationAssociationsServiceProtocol
+    var mainViewPresenter: CompanyMainViewPresenter
+    var associations: HostLocationAssociationListJson?
+    var selectedPersonIndexDidChange: ((Int?) -> ())?
+    var userLocation: CLLocation?
+    
+    var companyPostcode: String? {
+        didSet { view?.refresh() }
+    }
+
+    var companyWorkplace: CompanyWorkplace {
+        didSet {
+            view?.refresh()
+        }
+    }
+    
+    var companyLocation: CLLocation {
+        let pin = companyWorkplace.pinJson
+        return CLLocation(latitude: pin.lat, longitude: pin.lon)
+    }
+    
+    var distanceFromUserToCompany: String? {
+        guard let userLocation = userLocation else { return nil }
+        let numberFormatter = NumberFormatter()
+        numberFormatter.maximumFractionDigits = 2
+        numberFormatter.minimumIntegerDigits = 1
+        let distance = NSNumber(value: userLocation.distance(from: companyLocation) / 1000.0)
+        guard let formattedDistance = numberFormatter.string(from: distance) else { return nil }
+        return "Distance from you: \(formattedDistance) km"
+    }
     
     enum InitiateApplicationResult {
         case deniedAlreadyApplied
@@ -49,57 +83,21 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
     }
     
     func onTapApply() {
-        guard let host = mainViewPresenter.hostsSectionPresenter.selectedHost else { return }
-        coordinator?.applyTo(companyWorkplace: companyWorkplace, host: host)
+        guard let host = mainViewPresenter.hostsSectionPresenter.selectedAssociation else { return }
+        coordinator?.applyTo(companyWorkplace: companyWorkplace, hostLocationAssociation: host)
     }
-    
-    var companyPostcode: String? {
-        didSet { view?.refresh() }
-    }
-    
-    var userLocation: CLLocation?
-    
-    var distanceFromUserToCompany: String? {
-        guard let userLocation = userLocation else { return nil }
-        let numberFormatter = NumberFormatter()
-        numberFormatter.maximumFractionDigits = 2
-        numberFormatter.minimumIntegerDigits = 1
-        let distance = NSNumber(value: userLocation.distance(from: companyLocation) / 1000.0)
-        guard let formattedDistance = numberFormatter.string(from: distance) else { return nil }
-        return "Distance from you: \(formattedDistance) km"
-    }
-    
-    var companyLocation: CLLocation {
-        let pin = companyWorkplace.pinJson
-        return CLLocation(latitude: pin.lat, longitude: pin.lon)
-    }
-    
-    var selectedPersonIndexDidChange: ((Int?) -> ())?
-    weak var coordinator: CompanyWorkplaceCoordinatorProtocol?
-    weak var view: CompanyWorkplaceViewProtocol?
-
-    var companyWorkplace: CompanyWorkplace {
-        didSet {
-            view?.refresh()
-        }
-    }
-    let hostsProvider: HostsProviderProtocol
-    
-    weak var log: F4SAnalyticsAndDebugging?
     
     init(coordinator: CompanyWorkplaceCoordinatorProtocol,
          companyWorkplace: CompanyWorkplace,
-         hostsProvider: HostsProviderProtocol,
+         associationsProvider: HostLocationAssociationsServiceProtocol,
          log: F4SAnalyticsAndDebugging?) {
-        self.hostsProvider = hostsProvider
+        self.associationsProvider = associationsProvider
         self.companyWorkplace = companyWorkplace
         self.coordinator = coordinator
         self.log = log
         self.mainViewPresenter = CompanyMainViewPresenter(companyWorkplace: companyWorkplace, coordinator: coordinator)
         super.init()
     }
-    
-    var mainViewPresenter: CompanyMainViewPresenter
     
     var applyButtonState: (String, Bool, UIColor) {
         if true   {
@@ -143,21 +141,19 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
         view?.hideLoadingIndicator(self)
         completion(.allowed)
     }
-
+    
     func beginLoadHosts() {
         view?.showLoadingIndicator()
         let locationUuid = companyWorkplace.pinJson.workplaceUuid
-        hostsProvider.fetchHosts(locationUuid: locationUuid) { [weak self] (result) in
+        associationsProvider.fetchAssociations(for: locationUuid) { [weak self] (result) in
             guard let self = self else { return }
             self.view?.hideLoadingIndicator(self)
             switch result {
             case .failure(_):
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+5, execute: {
-                    self.beginLoadHosts()
-                })
-            case .success(let hostListJson):
-                let hosts = hostListJson.results
-                self.mainViewPresenter.hostsSectionPresenter.onHostsDidLoad(hosts ?? [])
+                break
+            case .success(let associationsJson):
+                self.associations = associationsJson
+                self.mainViewPresenter.hostsSectionPresenter.onHostsDidLoad(associationsJson.results)
                 self.onDidUpdate()
             }
         }

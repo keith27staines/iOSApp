@@ -14,7 +14,7 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
     var companyWorkplace: CompanyWorkplace
     var interestsRepository: F4SInterestsRepositoryProtocol
     let applyService: ApplyServiceProtocol
-    let hostsProvider: HostsProviderProtocol
+    let associationsProvider: HostLocationAssociationsServiceProtocol
 
     weak var finishDespatcher: CompanyCoordinatorParentProtocol?
     
@@ -26,13 +26,13 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
         environment: EnvironmentType,
         interestsRepository: F4SInterestsRepositoryProtocol,
         applyService: ApplyServiceProtocol,
-        hostsProvider: HostsProviderProtocol) {
+        associationsProvider: HostLocationAssociationsServiceProtocol) {
         self.environment = environment
         self.interestsRepository = interestsRepository
         self.companyWorkplace = companyWorkplace
         self.finishDespatcher = parent
         self.applyService = applyService
-        self.hostsProvider = hostsProvider
+        self.associationsProvider = associationsProvider
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
@@ -41,7 +41,7 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
         companyWorkplacePresenter = CompanyWorkplacePresenter(
             coordinator: self,
             companyWorkplace: companyWorkplace,
-            hostsProvider: hostsProvider,
+            associationsProvider: associationsProvider,
             log: injected.log)
         companyViewController = CompanyWorkplaceViewController(appSettings: injected.appSettings,
                                                                presenter: companyWorkplacePresenter)
@@ -80,12 +80,12 @@ extension CompanyCoordinator : ApplyCoordinatorDelegate {
 
 extension CompanyCoordinator: CompanyWorkplaceCoordinatorProtocol {
     
-    func applyTo(companyWorkplace: CompanyWorkplace, host: Host) {
+    func applyTo(companyWorkplace: CompanyWorkplace, hostLocationAssociation: HostLocationAssociationJson) {
         let applyCoordinator = ApplyCoordinator(
             applyCoordinatorDelegate: self,
             applyService: applyService,
             companyWorkplace: companyWorkplace,
-            host: host,
+            association: hostLocationAssociation,
             parent: self,
             navigationRouter: navigationRouter,
             inject: injected,

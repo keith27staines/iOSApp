@@ -86,7 +86,7 @@ class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewP
         tableView.rowHeight = UITableView.automaticDimension
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(HostCell.self, forCellReuseIdentifier: HostCell.reuseIdentifier)
+        tableView.register(HostLocationAssociationCell.self, forCellReuseIdentifier: HostLocationAssociationCell.reuseIdentifier)
         tableView.register(NameValueCell.self, forCellReuseIdentifier: NameValueCell.reuseIdentifier)
         tableView.register(CompanySummaryTextCell.self, forCellReuseIdentifier: CompanySummaryTextCell.reuseIdentifier)
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 500, right: 0)
@@ -207,8 +207,8 @@ class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewP
         presenter.onDidTapApply()
     }
     
-    func profileLinkTap(host: Host) {
-        hostsSectionPresenter.onDidTapLinkedIn(for: host)
+    func profileLinkTap(association: HostLocationAssociationJson) {
+        hostsSectionPresenter.onDidTapLinkedIn(for: association)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -267,7 +267,7 @@ extension CompanyMainView: UITableViewDelegate {
         case .companyData:
             break
         case .companyHosts:
-            let hostCell = cell as! HostCell
+            let hostCell = cell as! HostLocationAssociationCell
             hostsSectionPresenter.onDidTapHostCell(hostCell, atIndexPath: indexPath)
             tableView.beginUpdates()
             tableView.endUpdates()

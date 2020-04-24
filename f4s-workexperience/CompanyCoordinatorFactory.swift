@@ -13,15 +13,15 @@ import WorkfinderUserDetailsUseCase
 class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
     let applyService: ApplyServiceProtocol
     let environment: EnvironmentType
-    let hostsProvider: HostsProviderProtocol
+    let associationsProvider: HostLocationAssociationsServiceProtocol
     let interestsRepository: F4SInterestsRepositoryProtocol
 
     init(applyService: ApplyServiceProtocol,
-         hostsProvider: HostsProviderProtocol,
+         associationsProvider: HostLocationAssociationsServiceProtocol,
          environment: EnvironmentType,
          interestsRepository: F4SInterestsRepositoryProtocol) {
         self.applyService = applyService
-        self.hostsProvider = hostsProvider
+        self.associationsProvider = associationsProvider
         self.environment = environment
         self.interestsRepository = interestsRepository
     }
@@ -39,6 +39,6 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
             environment: environment,
             interestsRepository: interestsRepository,
             applyService: ApplyService(networkConfig: inject.networkConfig),
-            hostsProvider: hostsProvider)
+            associationsProvider: associationsProvider)
     }
 }

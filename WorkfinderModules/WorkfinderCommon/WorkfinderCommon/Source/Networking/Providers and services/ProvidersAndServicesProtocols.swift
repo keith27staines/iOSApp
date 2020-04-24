@@ -5,36 +5,6 @@ public protocol HostLocationAssociationsServiceProtocol {
     func fetchAssociations(for locationUuid: F4SUUID, completion:  @escaping((Result<HostLocationAssociationListJson,Error>) -> Void))
 }
 
-/*
- {
-     "uuid": "ebcc26fe-f9d6-455e-8dcf-35e97686f12d",
-     "host": {
-         "uuid": "389efb7e-daa9-413f-a3cb-c9dc5c520fef",
-         "full_name": "Steven Gee",
-         "names": [
-             "Steven Gee"
-         ],
-         "emails": [],
-         "user": null,
-         "photo": "https://api-workfinder-com-develop.s3.amazonaws.com/develop/media/hosts/derived/389efb7e-daa9-413f-a3cb-c9dc5c520fef.jpg",
-         "phone": "",
-         "instagram_handle": "",
-         "twitter_handle": "",
-         "linkedin_url": "https://www.linkedin.com/in/steven-gee-8259681",
-         "description": "",
-         "associations": [
-             "ebcc26fe-f9d6-455e-8dcf-35e97686f12d"
-         ]
-     },
-     "location": "4e60e978-de84-452a-b1a6-a5a02b02d30a",
-     "title": "Owner",
-     "started": "2000-01-01",
-     "stopped": null,
-     "description": ""
- }
- 
- */
-
 public struct ServerListJson<A:Decodable>: Decodable {
     public var count: Int?
     public var next: String?
@@ -48,12 +18,13 @@ public struct HostLocationAssociationJson: Codable {
     public let host: Host
     public let title: String?
     public let description: String?
-    public let started: Date?
-    public let stopped: Date?
+    public let started: String?
+    public let stopped: String?
+    public var isSelected: Bool = false
     
     private enum CodingKeys: String, CodingKey {
         case uuid
-        case locationUuid = "location_uuid"
+        case locationUuid = "location"
         case host
         case title
         case description

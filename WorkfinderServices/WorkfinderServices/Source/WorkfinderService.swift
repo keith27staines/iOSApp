@@ -8,10 +8,17 @@ open class WorkfinderService {
     
     private var urlComponents: URLComponents
     private let taskHandler: DataTaskCompletionHandler
-    private let decoder = JSONDecoder()
-    private let encoder = JSONEncoder()
     private var session: URLSession { networkConfig.sessionManager.interactiveSession }
     private var task: URLSessionDataTask?
+    lazy private var decoder: JSONDecoder = {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return decoder
+    }()
+    
+    lazy private var encoder: JSONEncoder = {
+        return JSONEncoder()
+    }()
     
     public init(networkConfig: NetworkConfig) {
         self.networkConfig = networkConfig

@@ -17,8 +17,8 @@
 		FC7FCDFD2376B2C100C1182B /* CompanyDataSectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7FCDFC2376B2C100C1182B /* CompanyDataSectionPresenter.swift */; };
 		FC937345237589FC00DC46E6 /* CompanySummarySectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC937344237589FC00DC46E6 /* CompanySummarySectionPresenter.swift */; };
 		FC99485E2379CFEA009D64D0 /* TextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99485D2379CFEA009D64D0 /* TextModel.swift */; };
-		FC9948602379D03A009D64D0 /* HostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99485F2379D03A009D64D0 /* HostCell.swift */; };
-		FCB9EE4B235D9F9500678F3F /* HostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB9EE4A235D9F9500678F3F /* HostView.swift */; };
+		FC9948602379D03A009D64D0 /* HostLocationAssociationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99485F2379D03A009D64D0 /* HostLocationAssociationCell.swift */; };
+		FCB9EE4B235D9F9500678F3F /* HostLocationAssociationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB9EE4A235D9F9500678F3F /* HostLocationAssociationView.swift */; };
 		FCC1DEFE232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC1DEF4232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCase.framework */; };
 		FCC1DF03232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF02232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCaseTests.swift */; };
 		FCC1DF05232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = FCC1DEF7232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -59,8 +59,8 @@
 		FC7FCDFC2376B2C100C1182B /* CompanyDataSectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDataSectionPresenter.swift; sourceTree = "<group>"; };
 		FC937344237589FC00DC46E6 /* CompanySummarySectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanySummarySectionPresenter.swift; sourceTree = "<group>"; };
 		FC99485D2379CFEA009D64D0 /* TextModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModel.swift; sourceTree = "<group>"; };
-		FC99485F2379D03A009D64D0 /* HostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostCell.swift; sourceTree = "<group>"; };
-		FCB9EE4A235D9F9500678F3F /* HostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostView.swift; sourceTree = "<group>"; };
+		FC99485F2379D03A009D64D0 /* HostLocationAssociationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostLocationAssociationCell.swift; sourceTree = "<group>"; };
+		FCB9EE4A235D9F9500678F3F /* HostLocationAssociationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostLocationAssociationView.swift; sourceTree = "<group>"; };
 		FCC1DEF4232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderCompanyDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCC1DEF7232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderCompanyDetailsUseCase.h; sourceTree = "<group>"; };
 		FCC1DEF8232501ED0074D5C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -242,8 +242,8 @@
 				FCC1DF2A2325031C0074D5C1 /* CompanyMapView.swift */,
 				FCC1DF2C2325031C0074D5C1 /* CompanyToolbar.swift */,
 				FC6DD8DD23748DBB0006FA3D /* NameValueCell.swift */,
-				FCB9EE4A235D9F9500678F3F /* HostView.swift */,
-				FC99485F2379D03A009D64D0 /* HostCell.swift */,
+				FCB9EE4A235D9F9500678F3F /* HostLocationAssociationView.swift */,
+				FC99485F2379D03A009D64D0 /* HostLocationAssociationCell.swift */,
 			);
 			path = "sub views";
 			sourceTree = "<group>";
@@ -386,11 +386,11 @@
 				FC7FCDFD2376B2C100C1182B /* CompanyDataSectionPresenter.swift in Sources */,
 				FC99485E2379CFEA009D64D0 /* TextModel.swift in Sources */,
 				FCC1DF302325031C0074D5C1 /* CompanyToolbar.swift in Sources */,
-				FCB9EE4B235D9F9500678F3F /* HostView.swift in Sources */,
+				FCB9EE4B235D9F9500678F3F /* HostLocationAssociationView.swift in Sources */,
 				FC2CDC1E2423AD8C00D183AC /* CompanyHostsSectionPresenter.swift in Sources */,
 				FC2CDC242423B55600D183AC /* CompanyMainViewPresenter.swift in Sources */,
 				FCC1DF28232503030074D5C1 /* CompanyMainView.swift in Sources */,
-				FC9948602379D03A009D64D0 /* HostCell.swift in Sources */,
+				FC9948602379D03A009D64D0 /* HostLocationAssociationCell.swift in Sources */,
 				FC340B0924530C9B0003B521 /* HostLocationAssociationsService.swift in Sources */,
 				FCC1DF27232503030074D5C1 /* CompanyWorkplaceViewController.swift in Sources */,
 			);

@@ -2,7 +2,7 @@ import WorkfinderCommon
 import UIKit
 
 protocol CompanyMainViewCoordinatorProtocol: class {
-    func applyTo(companyWorkplace: CompanyWorkplace, host: Host)
+    func applyTo(companyWorkplace: CompanyWorkplace, hostLocationAssociation: HostLocationAssociationJson)
 }
 
 protocol CompanyMainViewPresenterProtocol: class {
@@ -27,8 +27,8 @@ class CompanyMainViewPresenter: CompanyMainViewPresenterProtocol {
         return LatLon(latitude: CGFloat(pin.lat), longitude: CGFloat(pin.lon))
     }
     
-    var selectedHost: Host? { return hostsSectionPresenter.selectedHost }
-    var isHostSelected: Bool { return hostsSectionPresenter.isHostSelected }
+    var selectedAssociation: HostLocationAssociationJson? { return hostsSectionPresenter.selectedAssociation }
+    var isHostSelected: Bool { return hostsSectionPresenter.isAssociationSelected }
 
     lazy var headerViewPresenter: CompanyHeaderViewPresenterProtocol = {
         return CompanyHeaderViewPresenter(companyWorkplace: self.companyWorkplace)
@@ -52,8 +52,8 @@ class CompanyMainViewPresenter: CompanyMainViewPresenterProtocol {
     }
     
     func onDidTapApply() {
-        guard let host = selectedHost else { return }
-        coordinator?.applyTo(companyWorkplace: companyWorkplace, host: host)
+        guard let association = selectedAssociation else { return }
+        coordinator?.applyTo(companyWorkplace: companyWorkplace, hostLocationAssociation: association)
     }
 }
 

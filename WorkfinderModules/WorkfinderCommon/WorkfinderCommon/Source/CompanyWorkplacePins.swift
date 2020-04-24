@@ -220,7 +220,6 @@ public struct Host : Codable {
     public var linkedinUrlString: String?
     public var photoUrlString: String?
     public var description: String?
-    public var isSelected: Bool = false
     
     public init(
         uuid: F4SUUID,

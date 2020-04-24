@@ -103,7 +103,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     lazy var companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol = {
         let applyService = ApplyService(networkConfig: self.networkConfiguration)
         return CompanyCoordinatorFactory(applyService: applyService,
-                                         hostsProvider: self.hostsProvider,
+                                         associationsProvider: self.associationsProvider,
                                          environment: environment,
                                          interestsRepository: interestsRepository)
     }()
@@ -124,6 +124,10 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     
     lazy var hostsProvider: HostsProviderProtocol = {
         return HostsProvider(networkConfig: self.networkConfiguration)
+    }()
+    
+    lazy var associationsProvider: HostLocationAssociationsServiceProtocol = {
+        return HostLocationAssociationsService(networkConfig: self.networkConfiguration)
     }()
     
     lazy var interestsRepository: F4SInterestsRepositoryProtocol = {

@@ -8,82 +8,81 @@ protocol CompanyHostsSectionViewProtocol: class {
 }
 
 protocol CompanyHostsSectionPresenterProtocol {
-    var isHostSelected: Bool { get }
-    var selectedHost: Host? { get }
+    var isAssociationSelected: Bool { get }
+    var selectedAssociation: HostLocationAssociationJson? { get }
     var numberOfRows: Int { get }
-    var hostsSummaryModel: TextModel { get }
+    var associationsTextModel: TextModel { get }
     func cellforRow(_ row: Int, in tableView: UITableView) -> UITableViewCell
-    func onDidTapLinkedIn(for: Host)
-    func onDidTapHostCell(_ hostCell: HostCell, atIndexPath indexPath: IndexPath)
-    func onHostsDidLoad(_ hosts: [Host])
+    func onDidTapLinkedIn(for: HostLocationAssociationJson)
+    func onDidTapHostCell(_ hostCell: HostLocationAssociationCell, atIndexPath indexPath: IndexPath)
+    func onHostsDidLoad(_ hosts: [HostLocationAssociationJson])
     func onViewDidLoad(_ view: CompanyHostsSectionViewProtocol)
 }
 
 class CompanyHostsSectionPresenter: CompanyHostsSectionPresenterProtocol {
+    
     private weak var view: CompanyHostsSectionViewProtocol?
-    private var hosts: [Host]
-    var numberOfRows: Int { return hosts.count }
-    var hostsSummaryModel: TextModel
+    var numberOfRows: Int { return associations.count }
+    var associationsTextModel: TextModel
 
     func cellforRow(_ row: Int, in tableView: UITableView) -> UITableViewCell {
-        let host = hosts[row]
-        let state = hostsSummaryModel.expandableLabelStates[row]
-        let hostCell = tableView.dequeueReusableCell(withIdentifier: HostCell.reuseIdentifier) as! HostCell
-        hostCell.configureWithHost(
-            host,
+        let association = associations[row]
+        let state = associationsTextModel.expandableLabelStates[row]
+        let hostCell = tableView.dequeueReusableCell(withIdentifier: HostLocationAssociationCell.reuseIdentifier) as! HostLocationAssociationCell
+        hostCell.configureWithAssociation(
+            association,
             summaryState: state,
             profileLinkTap: onDidTapLinkedIn,
             selectAction: { [weak self] tappedHost in
-                self?.updateHostSelectionState(from: tappedHost)
+                self?.updateAssociationSelectionState(from: tappedHost)
             })
         return hostCell
     }
     
     
-    func onDidTapLinkedIn(for: Host) {
+    func onDidTapLinkedIn(for: HostLocationAssociationJson) {
         
     }
     
-    func onDidTapHostCell(_ hostCell: HostCell, atIndexPath indexPath: IndexPath) {
-        let host = hosts[indexPath.row]
-        var summaryState = hostsSummaryModel.expandableLabelStates[indexPath.row]
+    func onDidTapHostCell(_ hostCell: HostLocationAssociationCell, atIndexPath indexPath: IndexPath) {
+        let association = associations[indexPath.row]
+        var summaryState = associationsTextModel.expandableLabelStates[indexPath.row]
         summaryState.isExpanded.toggle()
-        hostsSummaryModel.expandableLabelStates[indexPath.row] = summaryState
-        hostCell.configureWithHost(host, summaryState: summaryState, profileLinkTap: onDidTapLinkedIn, selectAction: updateHostSelectionState)
+        associationsTextModel.expandableLabelStates[indexPath.row] = summaryState
+        hostCell.configureWithAssociation(association, summaryState: summaryState, profileLinkTap: onDidTapLinkedIn, selectAction: updateAssociationSelectionState)
     }
     
-    var isHostSelected: Bool { selectedHost != nil }
+    var isAssociationSelected: Bool { selectedAssociation != nil }
     
-    var selectedHost: Host? {
-        let host = hosts.first { (host) -> Bool in host.isSelected }
-        return host
+    var selectedAssociation: HostLocationAssociationJson? {
+        return associations.first { (association) -> Bool in association.isSelected }
     }
     
-    func updateHostSelectionState(from updatedHost: Host) {
-        if updatedHost.isSelected {
-            for (index, host) in hosts.enumerated() {
-                if host.uuid == updatedHost.uuid {
-                    updateHost(from: updatedHost)
+    func updateAssociationSelectionState(from updatedAssociation: HostLocationAssociationJson) {
+        if updatedAssociation.isSelected {
+            for (index, association) in associations.enumerated() {
+                if association.uuid == updatedAssociation.uuid {
+                    updateAssociation(from: updatedAssociation)
                     continue
                 }
-                hosts[index].isSelected = false
+                associations[index].isSelected = false
             }
         } else {
-            updateHost(from: updatedHost)
+            updateAssociation(from: updatedAssociation)
         }
         view?.refresh()
     }
     
-    private func updateHost(from updatedHost: Host) {
-        guard let index = (hosts.firstIndex { (host) -> Bool in
-            host.uuid == updatedHost.uuid
+    private func updateAssociation(from updatedAssociation: HostLocationAssociationJson) {
+        guard let index = (associations.firstIndex { (association) -> Bool in
+            association.uuid == updatedAssociation.uuid
         }) else { return }
-        hosts[index] = updatedHost
+        associations[index] = updatedAssociation
     }
     
     init() {
-        self.hosts = []
-        self.hostsSummaryModel = TextModel(hosts: [])
+        self.associations = []
+        self.associationsTextModel = TextModel(associations: associations)
         onHostsDidLoad([])
     }
     
@@ -91,10 +90,12 @@ class CompanyHostsSectionPresenter: CompanyHostsSectionPresenterProtocol {
         self.view = view
     }
     
-    func onHostsDidLoad(_ hosts: [Host]) {
-        self.hosts = hosts
-        if hosts.count == 1 { self.hosts[0].isSelected = true }
-        self.hostsSummaryModel = TextModel(hosts: hosts)
+    var associations: [HostLocationAssociationJson] = []
+    
+    func onHostsDidLoad(_ associations: [HostLocationAssociationJson]) {
+        self.associations = associations
+        if associations.count == 1 { self.associations[0].isSelected = true }
+        self.associationsTextModel = TextModel(associations: associations)
         view?.refresh()
     }
 }

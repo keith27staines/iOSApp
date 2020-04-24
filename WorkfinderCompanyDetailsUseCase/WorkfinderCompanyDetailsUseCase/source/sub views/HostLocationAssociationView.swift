@@ -3,25 +3,25 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 
-class HostView : UIView {
+class HostLocationAssociationView : UIView {
     
     static let defaultImage = UIImage(named: "noProfilePicture")
     var textSize: CGFloat = 15
     var lineHeight: CGFloat = 23
     var fontWeight = UIFont.Weight.light
     
-    var host: Host? {
+    var association: HostLocationAssociationJson? {
         didSet {
-            image.load(urlString: host?.photoUrlString, defaultImage: HostView.defaultImage)
-            nameLabel.text = host?.displayName
+            image.load(urlString: association?.host.photoUrlString, defaultImage: HostLocationAssociationView.defaultImage)
+            nameLabel.text = association?.host.displayName
             roleLabel.text = ""
-            if let _ = host?.linkedinUrlString {
+            if let _ = association?.host.linkedinUrlString {
                 profileButton.isHidden = false
                 profileButton.setTitle("see more on LinkedIn", for: UIControl.State.normal)
             } else {
                 profileButton.isHidden = true
             }
-            hostSelectionView.isSelected = host?.isSelected ?? false
+            associationSelectionView.isSelected = association?.isSelected ?? false
         }
     }
     
@@ -38,7 +38,7 @@ class HostView : UIView {
         readMoreLabelStack.isHidden = !self.expandableLabel.isExpandable
     }
     
-    var profileLinkTap: ((Host) -> Void)?
+    var profileLinkTap: ((HostLocationAssociationJson) -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -87,18 +87,18 @@ class HostView : UIView {
     
     var selectAction: (((HostSelectionView) -> Void))? {
         didSet {
-            self.hostSelectionView.tapAction = selectAction
+            self.associationSelectionView.tapAction = selectAction
         }
     }
     
-    lazy var hostSelectionView: HostSelectionView = {
+    lazy var associationSelectionView: HostSelectionView = {
         let view = HostSelectionView(selectAction: self.selectAction)
         view.backgroundColor = UIColor.clear
         return view
     }()
     
     lazy var horizontalStack: UIStackView = {
-        let views = [self.hostSelectionView ,self.image, self.verticalStack]
+        let views = [self.associationSelectionView ,self.image, self.verticalStack]
         let stack = UIStackView(arrangedSubviews: views)
         stack.axis = .horizontal
         stack.alignment = .top
@@ -156,8 +156,8 @@ class HostView : UIView {
     }()
     
     @objc func profileButtonTapped() {
-        guard let host = host else { return }
-        profileLinkTap?(host)
+        guard let association = association else { return }
+        profileLinkTap?(association)
     }
     
 }

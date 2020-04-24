@@ -38,7 +38,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     public init(applyCoordinatorDelegate: ApplyCoordinatorDelegate? = nil,
                 applyService: ApplyServiceProtocol,
                 companyWorkplace: CompanyWorkplace,
-                host: Host? = nil,
+                association: HostLocationAssociationJson? = nil,
                 parent: CoreInjectionNavigationCoordinator?,
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,

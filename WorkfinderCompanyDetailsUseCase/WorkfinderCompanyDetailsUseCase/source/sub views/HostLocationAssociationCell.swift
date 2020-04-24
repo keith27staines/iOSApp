@@ -3,26 +3,26 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 
-class HostCell: UITableViewCell {
+class HostLocationAssociationCell: UITableViewCell {
     
-    static var reuseIdentifier: String = "HostCell"
+    static var reuseIdentifier: String = "HostLocationAssociationCell"
     
-    func configureWithHost(_ host: Host,
+    func configureWithAssociation(_ association: HostLocationAssociationJson,
                            summaryState: ExpandableLabelState ,
-                           profileLinkTap: @escaping ((Host) -> Void),
-                           selectAction: @escaping (Host) -> Void) {
-        hostView.host = host
+                           profileLinkTap: @escaping ((HostLocationAssociationJson) -> Void),
+                           selectAction: @escaping (HostLocationAssociationJson) -> Void) {
+        hostView.association = association
         hostView.expandableLabelState = summaryState
         hostView.profileLinkTap = profileLinkTap
         hostView.selectAction = { isSelectedView in
-            var updatedHost = host
-            updatedHost.isSelected.toggle()
-            selectAction(updatedHost)
+            var updatedAssociation = association
+            updatedAssociation.isSelected.toggle()
+            selectAction(updatedAssociation)
         }
     }
     
-    lazy var hostView: HostView = {
-        return HostView()
+    lazy var hostView: HostLocationAssociationView = {
+        return HostLocationAssociationView()
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
