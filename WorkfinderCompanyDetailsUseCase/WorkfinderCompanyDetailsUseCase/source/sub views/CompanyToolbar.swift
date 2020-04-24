@@ -36,12 +36,12 @@ class CompanyToolbar: UIToolbar {
     
     required init(toolbarDelegate: CompanyToolbarDelegate, alpha: CGFloat) {
         self.toolbarDelegate = toolbarDelegate
-        super.init(frame: CGRect.zero)
+        super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         items = [
             makeFlexibleSpace(),
             mapButton,
             makeFlexibleSpace()
-        ]
+        ]                           
         let bgImageColor = UIColor.white.withAlphaComponent(alpha)
         let image = UIImage.onePixelImageWithColor(color: bgImageColor)
         setBackgroundImage(image, forToolbarPosition: .any, barMetrics: .default)

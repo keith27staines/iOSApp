@@ -111,9 +111,10 @@ class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewP
     
     lazy var applyButtonTransparentContainer: UIView = {
         let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor.init(white: 1, alpha: self.toolbarAlpha)
         view.addSubview(self.applyButton)
-        self.applyButton.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 24, left: 24, bottom: 24, right: 24), size: CGSize(width: 0, height: 55))
+        self.applyButton.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 24, left: 24, bottom: 24, right: 24))
         return view
     }()
     
