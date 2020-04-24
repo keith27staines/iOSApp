@@ -34,13 +34,6 @@ public struct CodeAndName: Codable {
     public let name: String
 }
 
-public struct CompanyListJson: Codable {
-    public var count: Int
-    public var next: String?
-    public var previous: String?
-    public var results: [CompanyJson]
-}
-
 public struct CompanyJson: Codable {
     public var uuid: String?
     public var name: String?
@@ -199,36 +192,27 @@ public struct PointJson : Codable {
 }
 */
 
-/*
+
+/* Example host
  {
-   "uuid": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-   "full_name": "string",
-   "names": [
-     null
-   ],
-   "emails": [
-     "user@example.com"
-   ],
-   "user": "string",
-   "photo": "string",
-   "phone": "string",
-   "instagram_handle": "string",
-   "twitter_handle": "string",
-   "linkedin_url": "string",
-   "description": "string",
-   "associations": [
-     "string"
-   ]
+     "uuid": "389efb7e-daa9-413f-a3cb-c9dc5c520fef",
+     "full_name": "Steven Gee",
+     "names": [
+         "Steven Gee"
+     ],
+     "emails": [],
+     "user": null,
+     "photo": "https://api-workfinder-com-develop.s3.amazonaws.com/develop/media/hosts/derived/389efb7e-daa9-413f-a3cb-c9dc5c520fef.jpg",
+     "phone": "",
+     "instagram_handle": "",
+     "twitter_handle": "",
+     "linkedin_url": "https://www.linkedin.com/in/steven-gee-8259681",
+     "description": "",
+     "associations": [
+         "ebcc26fe-f9d6-455e-8dcf-35e97686f12d"
+     ]
  }
  */
-
-public struct HostListJson : Codable {
-    public var count: Int?
-    public var next: String?
-    public var previous: String?
-    public var results: [Host]?
-}
-
 public struct Host : Codable {
     
     public var uuid: F4SUUID?
@@ -252,9 +236,7 @@ public struct Host : Codable {
         self.photoUrlString = photoUrlString
         self.description = summary
     }
-}
 
-extension Host {
     private enum CodingKeys : String, CodingKey {
         case uuid
         case displayName = "full_name"

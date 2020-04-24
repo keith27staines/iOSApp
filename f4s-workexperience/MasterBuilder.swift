@@ -101,7 +101,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     }
     
     lazy var companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol = {
-        let applyService = ApplyService()
+        let applyService = ApplyService(networkConfig: self.networkConfiguration)
         return CompanyCoordinatorFactory(applyService: applyService,
                                          hostsProvider: self.hostsProvider,
                                          environment: environment,

@@ -38,7 +38,7 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
             inject: inject,
             environment: environment,
             interestsRepository: interestsRepository,
-            applyService: ApplyService(),
+            applyService: ApplyService(networkConfig: inject.networkConfig),
             hostsProvider: hostsProvider)
     }
 }

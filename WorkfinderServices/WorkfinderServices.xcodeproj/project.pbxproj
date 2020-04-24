@@ -51,7 +51,6 @@
 		FC02D9DE22EC70FD003C8148 = {
 			isa = PBXGroup;
 			children = (
-				FCB4EAD524251586001D5D23 /* ApplyService.swift */,
 				FC02D9EA22EC70FD003C8148 /* WorkfinderServices */,
 				FC02D9E922EC70FD003C8148 /* Products */,
 				FC02DA0C22EC7214003C8148 /* Frameworks */,
@@ -89,6 +88,7 @@
 		FC02DA1D22EC7301003C8148 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				FCB4EAD524251586001D5D23 /* ApplyService.swift */,
 				FC473E902451D2CD004CEA17 /* HostProvider.swift */,
 				FC473E8E2451CE50004CEA17 /* TemplateProvider.swift */,
 				FC3BCA5C2434DF0700C5A96A /* PicklistProvider.swift */,

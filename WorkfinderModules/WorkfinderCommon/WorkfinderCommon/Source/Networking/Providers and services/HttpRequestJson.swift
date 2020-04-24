@@ -1,12 +1,6 @@
 
 import Foundation
 
-public struct PicklistServerJson: Codable {
-    public var next: String?
-    public var previous: String?
-    public var results: [PicklistItemJson]
-}
-
 public struct PicklistItemJson: Codable {
     public var uuid: String?
     public var value: String?

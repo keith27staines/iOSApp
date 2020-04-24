@@ -1,10 +1,4 @@
-public struct TemplateListJson: Codable {
-    public var results: [TemplateModel]
-    public init(results: [TemplateModel]) {
-        self.results = results
-    }
-    
-}
+
 
 public struct TemplateModel : Codable {
     public var uuid: String

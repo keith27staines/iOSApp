@@ -19,7 +19,7 @@ open class WorkfinderService {
         self.urlComponents = URLComponents(url: networkConfig.workfinderApiV3Url, resolvingAgainstBaseURL: true)!
     }
     
-    public func performTask<A:Codable>(
+    public func performTask<A:Decodable>(
         with request: URLRequest,
         completion: @escaping (Result<A,Error>) -> Void,
         attempting: String) {
@@ -47,7 +47,7 @@ open class WorkfinderService {
         return networkConfig.buildUrlRequest(url: url, verb: verb, body: nil)
     }
 
-    private func buildTask<ResponseJson:Codable>(
+    private func buildTask<ResponseJson:Decodable>(
         request: URLRequest,
         completion: @escaping ((Result<ResponseJson,Error>) -> Void),
         attempting: String) -> URLSessionDataTask {
