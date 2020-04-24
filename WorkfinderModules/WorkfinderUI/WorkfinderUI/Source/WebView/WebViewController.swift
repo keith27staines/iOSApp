@@ -26,7 +26,7 @@ public class F4SWebViewController: UIViewController, WKNavigationDelegate {
     }()
     
     lazy var toolBar: UIToolbar = {
-        let toolbar = UIToolbar()
+        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         toolbar.translatesAutoresizingMaskIntoConstraints = false
         toolbar.barTintColor = UIColor.white
         toolbar.tintColor = UIColor.darkGray

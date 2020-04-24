@@ -33,9 +33,6 @@ public class UniversityYearPicklist: ClientPicklist {
             PicklistItemJson(uuid: "2", value: "Year 2"),
             PicklistItemJson(uuid: "3", value: "Year 3"),
             PicklistItemJson(uuid: "4", value: "Year 4"),
-            PicklistItemJson(uuid: "5", value: "Year 5"),
-            PicklistItemJson(uuid: "6", value: "Year 6"),
-            PicklistItemJson(uuid: "7", value: "Year 7"),
         ]
     }
 }
@@ -97,6 +94,13 @@ public class Picklist: PicklistProtocol {
             switch result {
             case .success(let responseBody):
                 self.items = responseBody.results
+                if self.items.count == 0 {
+                    self.items = [
+                        PicklistItemJson(uuid: UUID().uuidString, value: "Server failed to return pick list items again :("),
+                        PicklistItemJson(uuid: UUID().uuidString, value: "I'm a smart iphone!"),
+                        PicklistItemJson(uuid: UUID().uuidString, value: "I made this up")
+                    ]
+                }
                 completion(self,Result<[PicklistItemJson],Error>.success(self.items))
             case .failure(let error):
                 completion(self,Result<[PicklistItemJson],Error>.failure(error))

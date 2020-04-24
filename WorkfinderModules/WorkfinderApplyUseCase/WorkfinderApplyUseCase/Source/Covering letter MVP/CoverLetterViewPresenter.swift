@@ -116,6 +116,10 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     private let defaultTemplate = TemplateModel(uuid: "", templateString:
     """
        Dear Sir/Madam
+
+       Oh dear, the server failed to return any templates again!
+       But I am a clever iPhone so I can just make one up!
+
        {{motivation}}
        I would like to apply for the {{role}} role at your company.
        I wish to acquire the following skills: {{skills}}.

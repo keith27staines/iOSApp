@@ -73,7 +73,7 @@ class DateOfBirthCollectorViewController: UIViewController {
     }()
     
     lazy var toolbar: UIToolbar = {
-        let toolBar = UIToolbar()
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         toolBar.barStyle = UIBarStyle.default
         toolBar.isTranslucent = true
         toolBar.tintColor = UIColor.black

@@ -165,7 +165,7 @@ class RegisterUserViewController: UIViewController {
     }()
     
     func makeKeyboardInputAccessoryView() -> UIView {
-        let view = UIToolbar()
+        let view = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         view.barStyle = UIBarStyle.default
         view.items = [
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
