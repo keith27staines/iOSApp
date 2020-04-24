@@ -38,7 +38,8 @@ class CompanyWorkplaceTile: UITableViewCell {
     func buildView() {
         contentView.addSubview(labelStack)
         contentView.addSubview(logoView)
-        logoView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 0))
+        logoView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 4, left: 4, bottom: 0, right: 0))
+        logoView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -4).isActive = true
         labelStack.anchor(top: contentView.topAnchor, leading: logoView.trailingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 4))
         logoView.widthAnchor.constraint(equalToConstant: 64).isActive = true
         logoView.heightAnchor.constraint(equalToConstant: 64).isActive = true
