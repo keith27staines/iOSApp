@@ -89,16 +89,17 @@ class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewP
         tableView.register(HostLocationAssociationCell.self, forCellReuseIdentifier: HostLocationAssociationCell.reuseIdentifier)
         tableView.register(NameValueCell.self, forCellReuseIdentifier: NameValueCell.reuseIdentifier)
         tableView.register(CompanySummaryTextCell.self, forCellReuseIdentifier: CompanySummaryTextCell.reuseIdentifier)
+        tableView.register(SectionHeaderView.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 500, right: 0)
         tableView.separatorStyle = .none
         return tableView
     }()
     
-    lazy var sectionSelectorView: SectionSelectorView = {
-        let view = SectionSelectorView(model: self.sectionsModel, delegate: self)
-        view.onColor = WorkfinderColors.primaryGreen
-        return view
-    }()
+//    lazy var sectionSelectorView: SectionSelectorView = {
+//        let view = SectionSelectorView(model: self.sectionsModel, delegate: self)
+//        view.onColor = WorkfinderColors.primaryGreen
+//        return view
+//    }()
     
     lazy var applyButton: UIButton = {
         let button = WorkfinderPrimaryButton()
@@ -127,9 +128,13 @@ class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewP
     
     lazy var sectionsModel: CompanyTableSectionsModel = {
         let model = CompanyTableSectionsModel()
-        let types: [CompanyTableSectionType] = [.companyHosts, .companyData, .companySummary]
-        for sectionType in types {
-            model.appendDescriptor(sectionType: sectionType, isHidden: false)
+        let sectionsList: [CompanyTableSectionType] = [
+            .companySummary,
+            .companyData,
+            .companyHosts
+        ]
+        for section in sectionsList {
+            model.appendDescriptor(sectionType: section, isHidden: false)
         }
         return model
     }()
@@ -137,15 +142,15 @@ class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewP
     func configureViews() {
         let headerView = self.headerView as! UIView
         addSubview(headerView)
-        addSubview(sectionSelectorView)
+        //addSubview(sectionSelectorView)
         addSubview(tableView)
         addSubview(toolbarView)
         addSubview(applyButtonTransparentContainer)
         headerView.anchor(top: layoutMarginsGuide.topAnchor, leading: layoutMarginsGuide.leadingAnchor, bottom: nil, trailing: layoutMarginsGuide.trailingAnchor, padding: UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 80))
-        sectionSelectorView.anchor(top: headerView.bottomAnchor, leading: layoutMarginsGuide.leadingAnchor, bottom: nil, trailing: layoutMarginsGuide.trailingAnchor, padding: UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0))
+        //sectionSelectorView.anchor(top: headerView.bottomAnchor, leading: layoutMarginsGuide.leadingAnchor, bottom: nil, trailing: layoutMarginsGuide.trailingAnchor, padding: UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0))
         toolbarView.anchor(top: nil, leading: leadingAnchor, bottom: layoutMarginsGuide.bottomAnchor, trailing: trailingAnchor)
         applyButtonTransparentContainer.anchor(top: nil, leading: toolbarView.leadingAnchor, bottom: toolbarView.topAnchor, trailing: toolbarView.trailingAnchor)
-        tableView.anchor(top: sectionSelectorView.bottomAnchor, leading: sectionSelectorView.leadingAnchor, bottom: bottomAnchor, trailing: sectionSelectorView.trailingAnchor, padding: UIEdgeInsets(top: 4, left: 0, bottom: 0, right: 0))
+        tableView.anchor(top: headerView.bottomAnchor, leading: layoutMarginsGuide.leadingAnchor, bottom: bottomAnchor, trailing: layoutMarginsGuide.trailingAnchor, padding: UIEdgeInsets(top: 40, left: 20, bottom: 0, right: 20))
     }
     
     var mapOffsetConstant: CGFloat = 2000 {
@@ -194,12 +199,6 @@ class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewP
         mapTopConstraint?.isActive = true
         mapBottomConstraint?.isActive = true
         mapOffsetConstant = 1000
-    }
-    
-    func addPageControllerView(view: UIView) {
-        addSubview(view)
-        view.anchor(top: sectionSelectorView.bottomAnchor, leading: layoutMarginsGuide.leadingAnchor, bottom: toolbarView.bottomAnchor, trailing: layoutMarginsGuide.trailingAnchor, padding: UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0))
-        self.sendSubviewToBack(view)
     }
     
     @objc func didTapApply() {
@@ -253,8 +252,12 @@ extension CompanyMainView: UITableViewDelegate {
         return UIView()
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionsModel[section].title
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let sectionHeader = tableView.dequeueReusableHeaderFooterView(withIdentifier: "sectionHeader") as? SectionHeaderView
+            else { return UIView() }
+        let sectionTitle = sectionsModel[section].title
+        sectionHeader.setSectionTitle(sectionTitle)
+        return sectionHeader
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -313,4 +316,21 @@ extension CompanyMainView: SectionSelectorViewDelegate {
             tableView.scrollToRow(at: IndexPath(row: 0, section: descriptor.index), at: .top, animated: true)
         }
     }
+}
+
+class SectionHeaderView: UITableViewHeaderFooterView {
+    let label = UILabel()
+    
+    func setSectionTitle(_ string: String?) { label.text = string }
+    
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        tintColor = UIColor.white
+        addSubview(label)
+        label.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
+        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        label.textColor = UIColor.gray
+    }
+    
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }

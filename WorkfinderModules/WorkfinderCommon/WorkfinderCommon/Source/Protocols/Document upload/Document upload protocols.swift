@@ -11,6 +11,10 @@ public enum DocumentUploadState {
 
 public typealias F4SVersionValidity = Bool
 
+public protocol F4SDocumentUploaderFactoryProtocol {
+    func makeDocumentUploader(document: F4SDocument, placementuuid: F4SUUID) -> F4SDocumentUploaderProtocol?
+}
+
 public protocol F4SDocumentUploaderDelegate : class {
     func documentUploader(_ uploader: F4SDocumentUploaderProtocol, didChangeState state: DocumentUploadState)
 }
