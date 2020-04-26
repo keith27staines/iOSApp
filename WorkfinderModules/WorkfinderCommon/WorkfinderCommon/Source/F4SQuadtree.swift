@@ -32,19 +32,31 @@ public protocol F4SQuadtreeElement {
     var object: AnyHashable { get }
 }
 
-public struct F4SQuadtreeItem : F4SQuadtreeElement {
-    public static func ==(lhs: F4SQuadtreeItem, rhs: F4SQuadtreeItem) -> Bool {
-        return lhs.position == rhs.position && lhs.object == rhs.object
+public struct F4SQuadtreeItem : F4SQuadtreeElement, Equatable, Hashable {
+    
+    public var position: CGPoint
+    public var object: AnyHashable
+    
+    public init(latlon: LatLon, object: AnyHashable) {
+        let point = CGPoint(x: latlon.longitude, y: latlon.latitude)
+        self.init(point: point, object: object)
     }
     
-    public var hashValue: Int { return
-        self.position.x.hashValue ^ self.position.y.hashValue ^ object.hashValue
-    }
-    public var position: LatLon
-    public var object: AnyHashable
     public init(point: CGPoint, object: AnyHashable) {
         self.position = point
         self.object = object
+    }
+    
+    public static func ==(lhs: F4SQuadtreeItem, rhs: F4SQuadtreeItem) -> Bool {
+        return lhs.position == rhs.position && lhs.object == rhs.object
+    }
+}
+
+extension CGPoint: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(x)
+        hasher.combine(y)
+        _ = hasher.finalize()
     }
 }
 

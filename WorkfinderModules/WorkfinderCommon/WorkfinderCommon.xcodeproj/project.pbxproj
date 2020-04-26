@@ -1024,7 +1024,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderCommonTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCommonTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1043,7 +1043,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderCommonTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCommonTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1154,7 +1154,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderCommonTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCommonTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1265,7 +1265,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderCommonTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCommonTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1369,7 +1369,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderCommonTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCommonTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1473,7 +1473,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderCommonTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCommonTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

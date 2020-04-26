@@ -164,8 +164,8 @@ extension MapModel {
         near location: CLLocationCoordinate2D,
         maxScalings: Int = 60,
         factor: Double = 1.2) -> GMSCoordinateBounds? {
-        let pt = LatLon(location: location)
-        let element = F4SQuadtreeItem(point: pt, object: 0)
+        let latlon = WorkfinderCommon.LatLon(location: location)
+        let element = F4SQuadtreeItem(latlon: latlon, object: 0)
         guard let tree = quadTree.smallestSubtreeToContain(element: element) else {
             return nil
         }
@@ -216,8 +216,8 @@ extension MapModel {
         let worldBounds = CGRect(x: -180.0, y: -90.0, width: 360.0, height: 180.0)
         let qt = F4SPointQuadTree(bounds: worldBounds)
         for company in companies {
-            let p = CGPoint(location: company.position)
-            let item = F4SQuadtreeItem(point: p, object: company)
+            let latlon = WorkfinderCommon.LatLon(location: company.position)
+            let item = F4SQuadtreeItem(latlon: latlon, object: company)
             try! qt.insert(item: item)
         }
         return qt
@@ -246,7 +246,7 @@ extension MapModel {
 // MARK:- helper extension to facilitate transforming company pins into quadtree items
 extension F4SQuadtreeItem {
     public init(companyPin: F4SWorkplacePin) {
-        let pt = CGPoint(location: companyPin.position)
-        self.init(point: pt, object: companyPin)
+        let latlon = WorkfinderCommon.LatLon(location: companyPin.position)
+        self.init(latlon: latlon, object: companyPin)
     }
 }

@@ -1,5 +1,6 @@
 
 import XCTest
+import WorkfinderCommon
 @testable import WorkfinderApplyUseCase
 
 class TemplateParserTests: XCTestCase {

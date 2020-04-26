@@ -60,8 +60,8 @@ extension CLLocation {
     
     convenience init(latlon: LatLon) {
         self.init(
-            latitude: CLLocationDegrees(latlon.x),
-            longitude: CLLocationDegrees(latlon.y))
+            latitude: CLLocationDegrees(latlon.latitude),
+            longitude: CLLocationDegrees(latlon.longitude))
     }
 }
 

@@ -10,7 +10,20 @@ import Foundation
 import CoreLocation
 
 /// A point containing a latitude and a longitude in decimal degrees
-public typealias LatLon = CGPoint
+public struct LatLon: Equatable {
+    public var latitude: CGFloat
+    public var longitude: CGFloat
+    
+    public init(latitude: CGFloat, longitude: CGFloat) {
+        self.latitude = latitude
+        self.longitude = longitude
+    }
+    
+    /// Initialize a new LatLon from a CoreLocation 2D location
+    public init(location: CLLocationCoordinate2D) {
+        self.init(latitude: CGFloat(location.latitude), longitude: CGFloat(location.longitude))
+    }
+}
 
 public extension LatLon {
     
@@ -68,7 +81,7 @@ public extension LatLonRect {
     
     /// Returns the south west point of the rectangle
     var southWest: LatLon {
-        return origin
+        return LatLon(latitude: minY, longitude: minX)
     }
     
     /// Returns the north east point of the rectangle
@@ -83,7 +96,7 @@ public extension LatLonRect {
     
     /// Initializes a new instance from the southwest and north east latitudes and longitudes
     init(southWest: LatLon, northEast: LatLon) {
-        let origin = southWest
+        let origin = CGPoint(x: southWest.longitude, y: southWest.latitude)
         let width = northEast.longitude - southWest.longitude
         let height = northEast.latitude - southWest.latitude
         let size = CGSize(width: width, height: height)
@@ -100,40 +113,5 @@ public extension LatLonRect {
         let northEast = LatLon(latitude: southWest.latitude+height,
                                longitude: southWest.longitude+width)
         return LatLonRect(southWest: southWest, northEast: northEast)
-    }
-}
-
-extension LatLon {
-    /// Latitude is a read-only synonym for the y value of a CGPoint
-    var latitude: CGFloat {
-        get {
-            return y
-        }
-        set {
-            y = newValue
-        }
-    }
-    
-    /// Longitude is a read-only synonym for the x value of a CGPoint
-    var longitude: CGFloat {
-        get {
-            return x
-        }
-        set {
-            x = newValue
-        }
-    }
-    
-    /// Initialize a new LatLon from a latitude and longitude expressed in decimal degrees
-    public init(latitude: CGFloat, longitude: CGFloat) {
-        self.init()
-        x = longitude
-        y = latitude
-    }
-    
-    /// Initialize a new LatLon from a CoreLocation 2D location
-    public init(location: CLLocationCoordinate2D) {
-        self.init(latitude: CGFloat(location.latitude),
-                  longitude: CGFloat(location.longitude))
     }
 }

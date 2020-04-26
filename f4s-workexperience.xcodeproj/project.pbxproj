@@ -81,6 +81,8 @@
 		FC3CD1DA221566F200F91B50 /* Geocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CD1D9221566F200F91B50 /* Geocoding.swift */; };
 		FC4802C22354AD9300AF8F6D /* firebase_live.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC4802C12354AD9300AF8F6D /* firebase_live.plist */; };
 		FC50E9CE2213EF5400C9A621 /* SearchModeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */; };
+		FC56A0F02455B62B00A7EC3F /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC56A0EF2455B62B00A7EC3F /* WorkfinderCommon.framework */; };
+		FC56A0F12455B62B00A7EC3F /* WorkfinderCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC56A0EF2455B62B00A7EC3F /* WorkfinderCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC5D3C6E20FE1CEC00F89169 /* Gemfile in Resources */ = {isa = PBXBuildFile; fileRef = FC5D3C6D20FE1CEB00F89169 /* Gemfile */; };
 		FC681C001F57473D0077BECA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFE1F57473D0077BECA /* Podfile */; };
 		FC681C011F57473D0077BECA /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFF1F57473D0077BECA /* Podfile.lock */; };
@@ -106,8 +108,6 @@
 		FCB46F02204FD86D00F0779F /* F4SLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46F01204FD86D00F0779F /* F4SLogViewController.swift */; };
 		FCB49301222A4B3B00B88B8B /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB49300222A4B3B00B88B8B /* SearchCoordinator.swift */; };
 		FCB6D9361F75056100B8C268 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCB6D9351F75056000B8C268 /* Branding.plist */; };
-		FCBA983124506D3E00C3D2E6 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983024506D3E00C3D2E6 /* WorkfinderCommon.framework */; };
-		FCBA983224506D3E00C3D2E6 /* WorkfinderCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983024506D3E00C3D2E6 /* WorkfinderCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCBA983D24506D8B00C3D2E6 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983324506D8B00C3D2E6 /* WorkfinderAppLogic.framework */; };
 		FCBA983E24506D8B00C3D2E6 /* WorkfinderAppLogic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983324506D8B00C3D2E6 /* WorkfinderAppLogic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCBA983F24506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983424506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework */; };
@@ -169,11 +169,11 @@
 				FCBA984024506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework in Embed Frameworks */,
 				FCBA984624506D8B00C3D2E6 /* WorkfinderDocumentUploadUseCase.framework in Embed Frameworks */,
 				FCBA984824506D8C00C3D2E6 /* WorkfinderNetworking.framework in Embed Frameworks */,
+				FC56A0F12455B62B00A7EC3F /* WorkfinderCommon.framework in Embed Frameworks */,
 				FCBA984E24506D8C00C3D2E6 /* WorkfinderUI.framework in Embed Frameworks */,
 				FCBA984424506D8B00C3D2E6 /* WorkfinderCoordinators.framework in Embed Frameworks */,
 				FCBA983E24506D8B00C3D2E6 /* WorkfinderAppLogic.framework in Embed Frameworks */,
 				FCBA984224506D8B00C3D2E6 /* WorkfinderCompanyDetailsUseCase.framework in Embed Frameworks */,
-				FCBA983224506D3E00C3D2E6 /* WorkfinderCommon.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,6 +297,7 @@
 		FC3CD1D9221566F200F91B50 /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
 		FC4802C12354AD9300AF8F6D /* firebase_live.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = firebase_live.plist; sourceTree = "<group>"; };
 		FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModeSelectorView.swift; sourceTree = "<group>"; };
+		FC56A0EF2455B62B00A7EC3F /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5D3C6D20FE1CEB00F89169 /* Gemfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Gemfile; sourceTree = "<group>"; };
 		FC681BFE1F57473D0077BECA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		FC681BFF1F57473D0077BECA /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
@@ -364,11 +365,11 @@
 			files = (
 				FCBA983F24506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework in Frameworks */,
 				FCBA984924506D8C00C3D2E6 /* WorkfinderOnboardingUseCase.framework in Frameworks */,
-				FCBA983124506D3E00C3D2E6 /* WorkfinderCommon.framework in Frameworks */,
 				C9C7302B49E1B7EF625802B5 /* Pods_f4s_workexperience.framework in Frameworks */,
 				FCBA984D24506D8C00C3D2E6 /* WorkfinderUI.framework in Frameworks */,
 				FCBA984124506D8B00C3D2E6 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */,
 				FCBA984B24506D8C00C3D2E6 /* WorkfinderServices.framework in Frameworks */,
+				FC56A0F02455B62B00A7EC3F /* WorkfinderCommon.framework in Frameworks */,
 				FCBA984F24506D8C00C3D2E6 /* WorkfinderUserDetailsUseCase.framework in Frameworks */,
 				FCBA984324506D8B00C3D2E6 /* WorkfinderCoordinators.framework in Frameworks */,
 				FCBA984724506D8B00C3D2E6 /* WorkfinderNetworking.framework in Frameworks */,
@@ -583,6 +584,7 @@
 		74E1A74324CAFF4EF516E014 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC56A0EF2455B62B00A7EC3F /* WorkfinderCommon.framework */,
 				FCBA983324506D8B00C3D2E6 /* WorkfinderAppLogic.framework */,
 				FCBA983424506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework */,
 				FCBA983524506D8B00C3D2E6 /* WorkfinderCompanyDetailsUseCase.framework */,

@@ -133,86 +133,10 @@ public struct CompanyLocationJson: Codable {
 public struct PointJson : Codable {
     public var type: String?
     public var coordinates: [Float]
+    public var latitude: CGFloat { return CGFloat(coordinates[1]) }
+    public var longitude: CGFloat { return CGFloat(coordinates[0]) }
 }
 
-/* point
- {
-    "type": "Point",
-    "coordinates":[
-        0.1442068,
-        52.2338514
-    ]
- }
-*/
-
-
-/* Structure returned from companies endpoint
-{
-  "uuid": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-  "name": "string",
-  "names": [
-    "string"
-  ],
-  "domains": [
-    null
-  ],
-  "logo": "string",
-  "description": "string",
-  "industries": [
-    null
-  ],
-  "emails": [
-    "user@example.com"
-  ],
-  "phone_numbers": [
-    null
-  ],
-  "twitter_handles": [
-    "string"
-  ],
-  "instagram_handles": [
-    "string"
-  ],
-  "duedil_url": "string",
-  "footprint": "string",
-  "locations": [
-    {
-      "uuid": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "address_unit": "string",
-      "address_building": "string",
-      "address_street": "string",
-      "address_city": "string",
-      "address_region": "string",
-      "address_country": "string",
-      "address_postcode": "string",
-      "point": "string",
-      "last_geocode_attempt": "2020-03-22T11:53:35.140Z"
-    }
-  ]
-}
-*/
-
-
-/* Example host
- {
-     "uuid": "389efb7e-daa9-413f-a3cb-c9dc5c520fef",
-     "full_name": "Steven Gee",
-     "names": [
-         "Steven Gee"
-     ],
-     "emails": [],
-     "user": null,
-     "photo": "https://api-workfinder-com-develop.s3.amazonaws.com/develop/media/hosts/derived/389efb7e-daa9-413f-a3cb-c9dc5c520fef.jpg",
-     "phone": "",
-     "instagram_handle": "",
-     "twitter_handle": "",
-     "linkedin_url": "https://www.linkedin.com/in/steven-gee-8259681",
-     "description": "",
-     "associations": [
-         "ebcc26fe-f9d6-455e-8dcf-35e97686f12d"
-     ]
- }
- */
 public struct Host : Codable {
     
     public var uuid: F4SUUID?

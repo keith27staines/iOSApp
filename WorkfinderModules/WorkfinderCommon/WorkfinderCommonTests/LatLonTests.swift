@@ -16,8 +16,8 @@ class LatLonTests: XCTestCase {
     
     func test_get_latitude_and_longitude() {
         let pt = LatLon(latitude: 17, longitude: 27)
-        XCTAssertEqual(pt.x, pt.longitude)
-        XCTAssertEqual(pt.y, pt.latitude)
+        XCTAssertEqual(pt.longitude, pt.longitude)
+        XCTAssertEqual(pt.latitude, pt.latitude)
         XCTAssertEqual(pt.latitude, 17)
         XCTAssertEqual(pt.longitude, 27)
     }
@@ -26,25 +26,25 @@ class LatLonTests: XCTestCase {
         var pt = LatLon(latitude: 0, longitude: 0)
         pt.latitude = 17
         pt.longitude = 27
-        XCTAssertEqual(pt.x, pt.longitude)
-        XCTAssertEqual(pt.y, pt.latitude)
+        XCTAssertEqual(pt.longitude, pt.longitude)
+        XCTAssertEqual(pt.latitude, pt.latitude)
     }
     
     func testGreatCircleDistance_coincident_points() {
-        let pt1 = LatLon(x:0.0,y:0.0)
-        let pt2 = LatLon(x:0.0,y:0.0)
+        let pt1 = LatLon(latitude:0.0,longitude:0.0)
+        let pt2 = LatLon(latitude:0.0,longitude:0.0)
         XCTAssertEqual(pt1.greatCircleDistance(pt2), 0.0)
     }
     
     func testGreatCircleDistance_90_degrees_apart_in_latitude() {
-        let pt1 = LatLon(x:0.0,y:0.0)
-        let pt2 = LatLon(x:90.0,y:0.0)
+        let pt1 = LatLon(latitude:0.0,longitude:0.0)
+        let pt2 = LatLon(latitude:90.0,longitude:0.0)
         XCTAssertEqual(pt1.greatCircleDistance(pt2), 2.0 * Double.pi * r / 4.0, accuracy: 1)
     }
     
     func testGreatCircleDistance_90_degrees_apart_in_longitude() {
-        let pt1 = LatLon(x:0.0,y:0.0)
-        let pt2 = LatLon(x:0.0,y:90.0)
+        let pt1 = LatLon(latitude:0.0,longitude:0.0)
+        let pt2 = LatLon(latitude:0.0,longitude:90.0)
         XCTAssertEqual(pt1.greatCircleDistance(pt2), 2.0 * Double.pi * r / 4.0, accuracy: 1)
     }
 }
@@ -60,8 +60,8 @@ class CLLocationCoordinate2DExtensionTests: XCTestCase {
     
     
     func testGreatCircleDistance_90_degrees_apart_in_latitude() {
-        let pt1 = LatLon(x:0.0,y:0.0)
-        let pt2 = LatLon(x:90.0,y:0.0)
+        let pt1 = LatLon(latitude:0.0,longitude:0.0)
+        let pt2 = LatLon(latitude:90.0,longitude:0.0)
         let location1 = CLLocationCoordinate2D(latLon: pt1)
         let location2 = CLLocationCoordinate2D(latLon: pt2)
         XCTAssertEqual(location1.greateCircleDistance(location2), 2.0 * Double.pi * r / 4.0, accuracy: 1)

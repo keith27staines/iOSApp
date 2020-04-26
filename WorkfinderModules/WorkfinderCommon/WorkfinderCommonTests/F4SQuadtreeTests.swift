@@ -266,54 +266,54 @@ class F4SQuadtreeTests: XCTestCase {
     }
     
     func test_equality_when_equal() {
-        let point = CGPoint(latitude: 1, longitude: 2)
+        let point = LatLon(latitude: 1, longitude: 2)
         let object = "hello"
-        let item1 = F4SQuadtreeItem(point: point, object: object)
-        let item2 = F4SQuadtreeItem(point: point, object: object)
+        let item1 = F4SQuadtreeItem(latlon: point, object: object)
+        let item2 = F4SQuadtreeItem(latlon: point, object: object)
         XCTAssertTrue(item1 == item2)
     }
     
     func test_equality_when_not_equal_points() {
-        let point1 = CGPoint(latitude: 1, longitude: 2)
+        let point1 = LatLon(latitude: 1, longitude: 2)
         let object = "hello"
-        let point2 = CGPoint(latitude: 2, longitude: 1)
-        let item1 = F4SQuadtreeItem(point: point1, object: object)
-        let item2 = F4SQuadtreeItem(point: point2, object: object)
+        let point2 = LatLon(latitude: 2, longitude: 1)
+        let item1 = F4SQuadtreeItem(latlon: point1, object: object)
+        let item2 = F4SQuadtreeItem(latlon: point2, object: object)
         XCTAssertFalse(item1 == item2)
     }
     
     func test_equality_when_not_equal_objects() {
-        let point = CGPoint(latitude: 1, longitude: 2)
+        let point = LatLon(latitude: 1, longitude: 2)
         let object1 = "hello"
         let object2 = "goodbye"
-        let item1 = F4SQuadtreeItem(point: point, object: object1)
-        let item2 = F4SQuadtreeItem(point: point, object: object2)
+        let item1 = F4SQuadtreeItem(latlon: point, object: object1)
+        let item2 = F4SQuadtreeItem(latlon: point, object: object2)
         XCTAssertFalse(item1 == item2)
     }
     
     func test_hashvalue_when_identical() {
-        let point = CGPoint(latitude: 1, longitude: 2)
+        let point = LatLon(latitude: 1, longitude: 2)
         let object = "hello"
-        let item1 = F4SQuadtreeItem(point: point, object: object)
-        let item2 = F4SQuadtreeItem(point: point, object: object)
+        let item1 = F4SQuadtreeItem(latlon: point, object: object)
+        let item2 = F4SQuadtreeItem(latlon: point, object: object)
         XCTAssertTrue(item1.hashValue == item2.hashValue)
     }
     
     func test_hashvalue_when_different_points() {
-        let point1 = CGPoint(latitude: 1, longitude: 2)
-        let point2 = CGPoint(latitude: 2, longitude: 2)
+        let point1 = LatLon(latitude: 1, longitude: 2)
+        let point2 = LatLon(latitude: 2, longitude: 2)
         let object = "hello"
-        let item1 = F4SQuadtreeItem(point: point1, object: object)
-        let item2 = F4SQuadtreeItem(point: point2, object: object)
+        let item1 = F4SQuadtreeItem(latlon: point1, object: object)
+        let item2 = F4SQuadtreeItem(latlon: point2, object: object)
         XCTAssertFalse(item1.hashValue == item2.hashValue)
     }
     
     func test_hashvalue_when_different_objects() {
-        let point = CGPoint(latitude: 1, longitude: 2)
+        let point = LatLon(latitude: 1, longitude: 2)
         let object1 = "hello"
         let object2 = "goodbye"
-        let item1 = F4SQuadtreeItem(point: point, object: object1)
-        let item2 = F4SQuadtreeItem(point: point, object: object2)
+        let item1 = F4SQuadtreeItem(latlon: point, object: object1)
+        let item2 = F4SQuadtreeItem(latlon: point, object: object2)
         XCTAssertFalse(item1.hashValue == item2.hashValue)
     }
     
