@@ -7,11 +7,10 @@ import WorkfinderServices
 
 protocol CompanyWorkplaceCoordinatorProtocol : CompanyMainViewCoordinatorProtocol {
     func companyWorkplacePresenterDidFinish(_ : CompanyWorkplacePresenter)
-    func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, requestsShowLinkedInFor: Host)
-    func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, requestsShowLinkedInFor: CompanyWorkplace)
     func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, requestedShowDuedilFor: CompanyWorkplace)
-    func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, requestOpenLink link: URL)
+    func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, requestOpenLink link: String)
     func applyTo(companyWorkplace: CompanyWorkplace, hostLocationAssociation: HostLocationAssociationJson)
+    func onDidTapLinkedin(association: HostLocationAssociationJson)
 }
 
 protocol CompanyWorkplacePresenterProtocol: class {
@@ -22,7 +21,7 @@ protocol CompanyWorkplacePresenterProtocol: class {
 }
 
 class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
-    
+
     weak var log: F4SAnalyticsAndDebugging?
     weak var coordinator: CompanyWorkplaceCoordinatorProtocol?
     weak var view: CompanyWorkplaceViewProtocol?
@@ -30,7 +29,12 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
     var mainViewPresenter: CompanyMainViewPresenter
     var associations: HostLocationAssociationListJson?
     var selectedPersonIndexDidChange: ((Int?) -> ())?
-    var userLocation: CLLocation?
+    
+    var userLocation: CLLocation? {
+        didSet {
+            mainViewPresenter.headerViewPresenter.distanceFromCompany = self.distanceFromUserToCompany ?? "unknown distance from you"
+        }
+    }
     
     var companyPostcode: String? {
         didSet { view?.refresh() }
@@ -71,9 +75,16 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
         }
     }
     
+    lazy var locManager: CLLocationManager = {
+        let locationManager = CLLocationManager()
+        locationManager.delegate = self
+        return locationManager
+    }()
+    
     func onViewDidLoad(_ view: CompanyWorkplaceViewProtocol) {
         view.presenter = self
         self.view = view
+        locManager.requestWhenInUseAuthorization()
         mainViewPresenter.hostsSectionPresenter.onViewDidLoad(view)
         beginLoadHosts()
     }
@@ -115,25 +126,12 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
         coordinator?.companyWorkplacePresenterDidFinish(self)
     }
     
-    func didTapLinkedIn(for host: Host) {
-        coordinator?.companyWorkplacePresenter(self, requestsShowLinkedInFor: host)
-    }
-    
-    func didTapLinkedIn(for companyWorkplace: CompanyWorkplace) {
-        coordinator?.companyWorkplacePresenter(self, requestsShowLinkedInFor: companyWorkplace)
-    }
-    
-    func didTapDuedil(for companyWorkplace: CompanyWorkplace) {
-        log?.track(event: .companyDetailsDataDuedilLinkTap, properties: nil)
-        coordinator?.companyWorkplacePresenter(self, requestedShowDuedilFor: companyWorkplace)
-    }
-    
     func didTapApply(completion: @escaping (InitiateApplicationResult) -> Void) {
         applyIfStateAllows(completion: completion)
     }
     
-    func didTapLink(url: URL) {
-        coordinator?.companyWorkplacePresenter(self, requestOpenLink: url)
+    func didTapLink(urlString: String) {
+        coordinator?.companyWorkplacePresenter(self, requestOpenLink: urlString)
     }
     
     func applyIfStateAllows(completion: @escaping (InitiateApplicationResult) -> Void) {
@@ -156,6 +154,14 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
                 self.mainViewPresenter.hostsSectionPresenter.onHostsDidLoad(associationsJson.results)
                 self.onDidUpdate()
             }
+        }
+    }
+}
+
+extension CompanyWorkplacePresenter: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedAlways || status == .authorizedWhenInUse {
+            userLocation = locManager.location
         }
     }
 }

@@ -18,6 +18,7 @@ protocol CompanyDataSectionPresenterProtocol: class {
     var growthString: String { get }
     var numberOfEmployees: String { get }
     var duedilIsHidden: Bool { get }
+    var onDidTapDuedil: (() -> Void)? { get set }
     func cellForRow(_ row: Int, in tableView: UITableView) -> UITableViewCell
 }
 
@@ -109,7 +110,9 @@ class CompanyDataSectionPresenter: CompanyDataSectionPresenterProtocol {
                                    buttonImage: nil,
                                    link: nil)
     }
+    
     let companyWorkplace: CompanyWorkplace
+    
     init(companyWorkplace: CompanyWorkplace) {
         self.companyWorkplace = companyWorkplace
     }
@@ -127,7 +130,9 @@ class CompanyDataSectionPresenter: CompanyDataSectionPresenterProtocol {
         return nameValueCell
     }
     
-    func duedilTap(url: URL? = nil) {
+    var onDidTapDuedil: (() -> Void)?
     
+    func duedilTap(url: URL? = nil) {
+        onDidTapDuedil?()
     }
 }

@@ -6,7 +6,7 @@ protocol CompanyHeaderViewPresenterProtocol: class {
     
     var companyName: String { get }
     var logoUrlString: String { get }
-    var distanceFromCompany: String { get }
+    var distanceFromCompany: String { get set }
     func attach(view: CompanyHeaderViewProtocol)
     func onDidInitialise()
 }
@@ -22,7 +22,12 @@ class CompanyHeaderViewPresenter: CompanyHeaderViewPresenterProtocol {
     
     var companyName: String { model.companyJson.name ?? "unnamed company" }
     var logoUrlString: String { model.companyJson.logoUrlString ?? "badUrl" }
-    private (set) var distanceFromCompany: String = "unknown distance"
+    
+    var distanceFromCompany: String = "unknown distance" {
+        didSet {
+            view?.refresh(from: self)
+        }
+    }
     
     func attach(view: CompanyHeaderViewProtocol) {
         self.view = view

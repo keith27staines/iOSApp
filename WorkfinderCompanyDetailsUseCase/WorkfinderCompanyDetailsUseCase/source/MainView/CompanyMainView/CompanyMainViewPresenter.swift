@@ -2,6 +2,8 @@ import WorkfinderCommon
 import UIKit
 
 protocol CompanyMainViewCoordinatorProtocol: class {
+    func onDidTapDuedil()
+    func onDidTapLinkedin(association: HostLocationAssociationJson)
     func applyTo(companyWorkplace: CompanyWorkplace, hostLocationAssociation: HostLocationAssociationJson)
 }
 
@@ -39,11 +41,19 @@ class CompanyMainViewPresenter: CompanyMainViewPresenterProtocol {
     }()
     
     lazy var dataSectionPresenter: CompanyDataSectionPresenterProtocol = {
-        return CompanyDataSectionPresenter(companyWorkplace: self.companyWorkplace)
+        let presenter = CompanyDataSectionPresenter(companyWorkplace: self.companyWorkplace)
+        presenter.onDidTapDuedil = {
+            self.coordinator?.onDidTapDuedil()
+        }
+        return presenter
     }()
     
-    var hostsSectionPresenter: CompanyHostsSectionPresenterProtocol = {
-        return CompanyHostsSectionPresenter()
+    lazy var hostsSectionPresenter: CompanyHostsSectionPresenterProtocol = {
+        let companyHostsPresenter = CompanyHostsSectionPresenter()
+        companyHostsPresenter.tappedLinkedin = { association in
+            self.coordinator?.onDidTapLinkedin(association: association)
+        }
+        return companyHostsPresenter
     }()
 
     init(companyWorkplace: CompanyWorkplace, coordinator: CompanyMainViewCoordinatorProtocol) {

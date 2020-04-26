@@ -39,9 +39,10 @@ class CompanyHostsSectionPresenter: CompanyHostsSectionPresenterProtocol {
         return hostCell
     }
     
+    var tappedLinkedin: ((HostLocationAssociationJson) -> Void)?
     
-    func onDidTapLinkedIn(for: HostLocationAssociationJson) {
-        
+    func onDidTapLinkedIn(for association: HostLocationAssociationJson) {
+        tappedLinkedin?(association)
     }
     
     func onDidTapHostCell(_ hostCell: HostLocationAssociationCell, atIndexPath indexPath: IndexPath) {

@@ -107,16 +107,12 @@ extension CompanyCoordinator: CompanyWorkplaceCoordinatorProtocol {
         childCoordinators = [:]
     }
     
-    func companyWorkplacePresenter(_ viewModel: CompanyWorkplacePresenter, requestsShowLinkedInFor host: Host) {
-        guard let _ = host.linkedinUrlString else { return }
-        openUrl(host.linkedinUrlString!)
+    func onDidTapLinkedin(association: HostLocationAssociationJson) {
+        openUrl(association.host.linkedinUrlString)
     }
     
-    func companyWorkplacePresenter(_ viewModel: CompanyWorkplacePresenter, requestsShowLinkedInFor company: CompanyWorkplace) {
-        guard
-            let urlString = companyWorkplace.companyJson.linkedInUrlString,
-            let url = URL(string: urlString) else { return }
-        openUrl(url)
+    func onDidTapDuedil() {
+        openUrl(companyWorkplace.companyJson.duedilUrlString)
     }
     
     func companyWorkplacePresenter(_ viewModel: CompanyWorkplacePresenter, requestedShowDuedilFor companyWorkplace: CompanyWorkplace) {
@@ -126,7 +122,7 @@ extension CompanyCoordinator: CompanyWorkplaceCoordinatorProtocol {
         openUrl(url)
     }
     
-    func companyWorkplacePresenter(_ viewModel: CompanyWorkplacePresenter, requestOpenLink link: URL) {
+    func companyWorkplacePresenter(_ viewModel: CompanyWorkplacePresenter, requestOpenLink link: String) {
         openUrl(link)
     }
 }

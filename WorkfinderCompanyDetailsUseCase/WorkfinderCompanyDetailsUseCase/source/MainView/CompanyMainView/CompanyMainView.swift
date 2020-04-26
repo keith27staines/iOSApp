@@ -208,10 +208,6 @@ class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewP
         presenter.onDidTapApply()
     }
     
-    func profileLinkTap(association: HostLocationAssociationJson) {
-        hostsSectionPresenter.onDidTapLinkedIn(for: association)
-    }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -135,7 +135,6 @@
 		FCDC542B24289B85002581FF /* CompanyWorkplaceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC542A24289B85002581FF /* CompanyWorkplaceListViewController.swift */; };
 		FCDC543024289B9D002581FF /* CompanyWorkplaceListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC542C24289B9B002581FF /* CompanyWorkplaceListPresenter.swift */; };
 		FCDC543124289B9D002581FF /* CompanyTileViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC542D24289B9C002581FF /* CompanyTileViewData.swift */; };
-		FCDC543224289B9D002581FF /* CompanyWorkplaceListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC542E24289B9C002581FF /* CompanyWorkplaceListProvider.swift */; };
 		FCDC543524289BD9002581FF /* CompanyWorkplaceTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC543424289BD9002581FF /* CompanyWorkplaceTile.swift */; };
 		FCE51E402210362800DC1D50 /* PlacesSearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E3F2210362800DC1D50 /* PlacesSearchDataGetter.swift */; };
 		FCE51E422210365B00DC1D50 /* CompanySearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E412210365B00DC1D50 /* CompanySearchDataGetter.swift */; };
@@ -343,7 +342,6 @@
 		FCDC542A24289B85002581FF /* CompanyWorkplaceListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyWorkplaceListViewController.swift; sourceTree = "<group>"; };
 		FCDC542C24289B9B002581FF /* CompanyWorkplaceListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyWorkplaceListPresenter.swift; sourceTree = "<group>"; };
 		FCDC542D24289B9C002581FF /* CompanyTileViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyTileViewData.swift; sourceTree = "<group>"; };
-		FCDC542E24289B9C002581FF /* CompanyWorkplaceListProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyWorkplaceListProvider.swift; sourceTree = "<group>"; };
 		FCDC543424289BD9002581FF /* CompanyWorkplaceTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyWorkplaceTile.swift; sourceTree = "<group>"; };
 		FCE51E3F2210362800DC1D50 /* PlacesSearchDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesSearchDataGetter.swift; sourceTree = "<group>"; };
 		FCE51E412210365B00DC1D50 /* CompanySearchDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanySearchDataGetter.swift; sourceTree = "<group>"; };
@@ -953,7 +951,6 @@
 			children = (
 				FCDC542D24289B9C002581FF /* CompanyTileViewData.swift */,
 				FCDC542C24289B9B002581FF /* CompanyWorkplaceListPresenter.swift */,
-				FCDC542E24289B9C002581FF /* CompanyWorkplaceListProvider.swift */,
 				FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */,
 			);
 			path = Logic;
@@ -1307,7 +1304,6 @@
 				FCFC06AD23225B9E003C59C8 /* LatLon+Extensions.swift in Sources */,
 				40E78E761DD32BE7000A3776 /* AnimatedMenuButton.swift in Sources */,
 				FC21BE39220F53EB00A0A389 /* SearchView.swift in Sources */,
-				FCDC543224289B9D002581FF /* CompanyWorkplaceListProvider.swift in Sources */,
 				FC04B8642332751F0034A60E /* CoordinatorFactories.swift in Sources */,
 				40E78E171DD31A86000A3776 /* AppDelegate.swift in Sources */,
 				FC21BE3B220F53EB00A0A389 /* SearchViewStateMachine.swift in Sources */,
