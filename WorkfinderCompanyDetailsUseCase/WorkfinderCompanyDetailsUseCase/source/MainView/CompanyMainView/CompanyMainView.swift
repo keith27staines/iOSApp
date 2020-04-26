@@ -81,7 +81,7 @@ class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewP
     }()
     
     lazy var tableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: CGRect.zero, style: .grouped)
         tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.rowHeight = UITableView.automaticDimension
         tableView.delegate = self
@@ -90,8 +90,10 @@ class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewP
         tableView.register(NameValueCell.self, forCellReuseIdentifier: NameValueCell.reuseIdentifier)
         tableView.register(CompanySummaryTextCell.self, forCellReuseIdentifier: CompanySummaryTextCell.reuseIdentifier)
         tableView.register(SectionHeaderView.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
+        tableView.register(SectionFooterView.self, forHeaderFooterViewReuseIdentifier: "sectionFooter")
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 500, right: 0)
         tableView.separatorStyle = .none
+        tableView.backgroundColor = UIColor.white
         return tableView
     }()
     
@@ -249,12 +251,17 @@ extension CompanyMainView: UITableViewDataSource {
 
 extension CompanyMainView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
+        guard let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: "sectionFooter") as? SectionFooterView else {
+            return UIView()
+        }
+        return footer
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let sectionHeader = tableView.dequeueReusableHeaderFooterView(withIdentifier: "sectionHeader") as? SectionHeaderView
-            else { return UIView() }
+            else {
+                return UIView()
+        }
         let sectionTitle = sectionsModel[section].title
         sectionHeader.setSectionTitle(sectionTitle)
         return sectionHeader
@@ -276,6 +283,7 @@ extension CompanyMainView: UITableViewDelegate {
             tableView.endUpdates()
         }
     }
+
 }
 
 extension CompanyMainView : CompanyToolbarDelegate {
@@ -333,4 +341,17 @@ class SectionHeaderView: UITableViewHeaderFooterView {
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+}
+
+class SectionFooterView: UITableViewHeaderFooterView {
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        heightAnchor.constraint(equalToConstant: 12).isActive = true
+        self.frame.size.height = 12
+        tintColor = UIColor.white
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

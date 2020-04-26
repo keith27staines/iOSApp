@@ -22,11 +22,12 @@
 		FC22DBF322F97AAB0068C61C /* UserMessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBF222F97AAB0068C61C /* UserMessageHandler.swift */; };
 		FC22DBF522F97ADC0068C61C /* LoadingOverlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBF422F97ADC0068C61C /* LoadingOverlayTests.swift */; };
 		FC22DBF722F97CD70068C61C /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBF622F97CD70068C61C /* UIColor+Extensions.swift */; };
-		FC22DBF922F97CEB0068C61C /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBF822F97CEB0068C61C /* UIFont+Extensions.swift */; };
 		FC343CFE2446141700347BC2 /* UnderlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC343CFD2446141700347BC2 /* UnderlineView.swift */; };
 		FC343D0024461A6900347BC2 /* UnderlinedNextResponderTextFieldStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC343CFF24461A6900347BC2 /* UnderlinedNextResponderTextFieldStack.swift */; };
 		FC5CBA55231D2C4D00C2D3C5 /* F4SCompanyHeaderViewWithLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBA54231D2C4D00C2D3C5 /* F4SCompanyHeaderViewWithLogo.swift */; };
 		FC5CBA57231D2C7D00C2D3C5 /* F4SRoundIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBA56231D2C7D00C2D3C5 /* F4SRoundIconView.swift */; };
+		FC6E42DF2455855D005E0D08 /* WorkfinderColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6E42DE2455855D005E0D08 /* WorkfinderColors.swift */; };
+		FC6E42E124558591005E0D08 /* WorkfinderFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6E42E024558591005E0D08 /* WorkfinderFonts.swift */; };
 		FC93DBDF231F981D00F1CE23 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DBDE231F981D00F1CE23 /* ContentViewController.swift */; };
 		FC93DBE4231F9F4500F1CE23 /* Content.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC93DBDD231F981C00F1CE23 /* Content.storyboard */; };
 		FC93DC3A23200BC100F1CE23 /* NextResponderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC3923200BC100F1CE23 /* NextResponderTextField.swift */; };
@@ -74,11 +75,12 @@
 		FC22DBF222F97AAB0068C61C /* UserMessageHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMessageHandler.swift; sourceTree = "<group>"; };
 		FC22DBF422F97ADC0068C61C /* LoadingOverlayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingOverlayTests.swift; sourceTree = "<group>"; };
 		FC22DBF622F97CD70068C61C /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
-		FC22DBF822F97CEB0068C61C /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		FC343CFD2446141700347BC2 /* UnderlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineView.swift; sourceTree = "<group>"; };
 		FC343CFF24461A6900347BC2 /* UnderlinedNextResponderTextFieldStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedNextResponderTextFieldStack.swift; sourceTree = "<group>"; };
 		FC5CBA54231D2C4D00C2D3C5 /* F4SCompanyHeaderViewWithLogo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCompanyHeaderViewWithLogo.swift; sourceTree = "<group>"; };
 		FC5CBA56231D2C7D00C2D3C5 /* F4SRoundIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SRoundIconView.swift; sourceTree = "<group>"; };
+		FC6E42DE2455855D005E0D08 /* WorkfinderColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderColors.swift; sourceTree = "<group>"; };
+		FC6E42E024558591005E0D08 /* WorkfinderFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderFonts.swift; sourceTree = "<group>"; };
 		FC93DBDC231F981C00F1CE23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "f4s-workexperience/Base.lproj/Content.storyboard"; sourceTree = "<group>"; };
 		FC93DBDE231F981D00F1CE23 /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		FC93DBE1231F98E600F1CE23 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,6 +155,20 @@
 			path = "Underline text view";
 			sourceTree = "<group>";
 		};
+		FC6E42E2245588BA005E0D08 /* Workfinder controls */ = {
+			isa = PBXGroup;
+			children = (
+				FC17E4982446F3FC00A58AEB /* WorkfinderPrimaryButton.swift */,
+				FCB4EAD924253F36001D5D23 /* StarRatingView.swift */,
+				FCB4EAD02424D231001D5D23 /* RatingControl.swift */,
+				FCB4EACF2424D231001D5D23 /* TriangleView.swift */,
+				FC0C7108232BA38700816332 /* OptionLabel.swift */,
+				FC5CBA56231D2C7D00C2D3C5 /* F4SRoundIconView.swift */,
+				FC9535A0231E448D00F4A9DA /* F4SSelfLoadingImageView.swift */,
+			);
+			path = "Workfinder controls";
+			sourceTree = "<group>";
+		};
 		FC93DBE0231F982600F1CE23 /* Content view controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,7 +181,6 @@
 		FC93DBE3231F99F900F1CE23 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				FC22DBF822F97CEB0068C61C /* UIFont+Extensions.swift */,
 				FC22DBF622F97CD70068C61C /* UIColor+Extensions.swift */,
 				FC22DBEE22F97A320068C61C /* UIView+ConstraintsExtensions.swift */,
 				FC22DBEC22F979E90068C61C /* UIViewController+Extensions.swift */,
@@ -236,17 +251,13 @@
 		FCA91EBD22340680007ED308 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				FC17E4982446F3FC00A58AEB /* WorkfinderPrimaryButton.swift */,
-				FCB4EAD924253F36001D5D23 /* StarRatingView.swift */,
-				FCB4EAD02424D231001D5D23 /* RatingControl.swift */,
-				FCB4EACF2424D231001D5D23 /* TriangleView.swift */,
-				FC0C7108232BA38700816332 /* OptionLabel.swift */,
+				FC6E42E024558591005E0D08 /* WorkfinderFonts.swift */,
+				FC6E42DE2455855D005E0D08 /* WorkfinderColors.swift */,
+				FC6E42E2245588BA005E0D08 /* Workfinder controls */,
 				FCA91EBE223406B4007ED308 /* WorkfinderUI.swift */,
 				FC343D0124461F9400347BC2 /* Underline text view */,
 				FC22DBF022F97A960068C61C /* LoadingOverlay.swift */,
 				FC22DBF222F97AAB0068C61C /* UserMessageHandler.swift */,
-				FC9535A0231E448D00F4A9DA /* F4SSelfLoadingImageView.swift */,
-				FC5CBA56231D2C7D00C2D3C5 /* F4SRoundIconView.swift */,
 				FC5CBA54231D2C4D00C2D3C5 /* F4SCompanyHeaderViewWithLogo.swift */,
 				FC93DBE3231F99F900F1CE23 /* Extensions */,
 				FC22DBDB22F978D30068C61C /* Skinning */,
@@ -386,8 +397,10 @@
 				FC22DBE922F979750068C61C /* Skinner.swift in Sources */,
 				FC116B4E2284511E00146478 /* WebViewController.swift in Sources */,
 				FCE8DB152320FCB100934E2F /* UIImage+extensions.swift in Sources */,
+				FC6E42DF2455855D005E0D08 /* WorkfinderColors.swift in Sources */,
 				FC9535A1231E448D00F4A9DA /* F4SSelfLoadingImageView.swift in Sources */,
 				FC22DBEB22F979750068C61C /* RGBA.swift in Sources */,
+				FC6E42E124558591005E0D08 /* WorkfinderFonts.swift in Sources */,
 				FC93DBDF231F981D00F1CE23 /* ContentViewController.swift in Sources */,
 				FC22DBE822F979750068C61C /* FactorySkins.swift in Sources */,
 				FC22DBEF22F97A330068C61C /* UIView+ConstraintsExtensions.swift in Sources */,
@@ -399,7 +412,6 @@
 				FC22DB9122F9764F0068C61C /* UIButton+Extensions.swift in Sources */,
 				FC22DBF722F97CD70068C61C /* UIColor+Extensions.swift in Sources */,
 				FCEB1D27229FC6DB00C6D2C2 /* UITableView+Extensions.swift in Sources */,
-				FC22DBF922F97CEB0068C61C /* UIFont+Extensions.swift in Sources */,
 				FCB4EAD22424D231001D5D23 /* TriangleView.swift in Sources */,
 				FCB4EADA24253F36001D5D23 /* StarRatingView.swift in Sources */,
 				FC22DBF122F97A960068C61C /* LoadingOverlay.swift in Sources */,
