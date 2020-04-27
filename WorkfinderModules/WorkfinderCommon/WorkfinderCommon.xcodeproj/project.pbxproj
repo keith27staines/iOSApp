@@ -97,6 +97,7 @@
 		FCC85DC624517EA500BC600E /* PicklistItemJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC85DC524517EA500BC600E /* PicklistItemJson.swift */; };
 		FCC85DC8245180AB00BC600E /* PicklistTypeEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC85DC7245180AB00BC600E /* PicklistTypeEnums.swift */; };
 		FCC85DCB245184B700BC600E /* PicklistProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC85DCA245184B700BC600E /* PicklistProtocol.swift */; };
+		FCCA4E282456CC1500DFA696 /* AppInstallationLogicProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA4E272456CC1500DFA696 /* AppInstallationLogicProtocol.swift */; };
 		FCDB07382286F6640053347F /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB07372286F6640053347F /* Candidate.swift */; };
 		FCDB073A2286F7870053347F /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB07392286F7870053347F /* UserRepository.swift */; };
 		FCDB073C2286F8B00053347F /* Analytics and debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB073B2286F8B00053347F /* Analytics and debugging.swift */; };
@@ -117,7 +118,6 @@
 		FCE519562249645C00B550C9 /* F4SDisplayableMonthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE519502249645B00B550C9 /* F4SDisplayableMonthTests.swift */; };
 		FCE519572249645C00B550C9 /* F4SCalendarMonthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE519512249645C00B550C9 /* F4SCalendarMonthTests.swift */; };
 		FCE75CC6232F631C00C2E976 /* NetworkCallLoggerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE75CC5232F631C00C2E976 /* NetworkCallLoggerProtocol.swift */; };
-		FCE8DAA62320E71300934E2F /* ApplicationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAA52320E71200934E2F /* ApplicationState.swift */; };
 		FCE8DAA82320E80B00934E2F /* ScaledNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAA72320E80B00934E2F /* ScaledNumber.swift */; };
 		FCF0EA2D23606A1D00EE1FE2 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF0EA2C23606A1D00EE1FE2 /* AppSettings.swift */; };
 		FCF0EA2F23606A5800EE1FE2 /* MockAppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF0EA2E23606A5800EE1FE2 /* MockAppSettings.swift */; };
@@ -236,6 +236,7 @@
 		FCC85DC524517EA500BC600E /* PicklistItemJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicklistItemJson.swift; sourceTree = "<group>"; };
 		FCC85DC7245180AB00BC600E /* PicklistTypeEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicklistTypeEnums.swift; sourceTree = "<group>"; };
 		FCC85DCA245184B700BC600E /* PicklistProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicklistProtocol.swift; sourceTree = "<group>"; };
+		FCCA4E272456CC1500DFA696 /* AppInstallationLogicProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInstallationLogicProtocol.swift; sourceTree = "<group>"; };
 		FCDB07372286F6640053347F /* Candidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Candidate.swift; sourceTree = "<group>"; };
 		FCDB07392286F7870053347F /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		FCDB073B2286F8B00053347F /* Analytics and debugging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Analytics and debugging.swift"; sourceTree = "<group>"; };
@@ -256,7 +257,6 @@
 		FCE519502249645B00B550C9 /* F4SDisplayableMonthTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDisplayableMonthTests.swift; sourceTree = "<group>"; };
 		FCE519512249645C00B550C9 /* F4SCalendarMonthTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarMonthTests.swift; sourceTree = "<group>"; };
 		FCE75CC5232F631C00C2E976 /* NetworkCallLoggerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCallLoggerProtocol.swift; sourceTree = "<group>"; };
-		FCE8DAA52320E71200934E2F /* ApplicationState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationState.swift; sourceTree = "<group>"; };
 		FCE8DAA72320E80B00934E2F /* ScaledNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaledNumber.swift; sourceTree = "<group>"; };
 		FCF0EA2C23606A1D00EE1FE2 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		FCF0EA2E23606A5800EE1FE2 /* MockAppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAppSettings.swift; sourceTree = "<group>"; };
@@ -301,6 +301,7 @@
 		FC182E5F2420EDC5005E7CEA /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				FCCA4E272456CC1500DFA696 /* AppInstallationLogicProtocol.swift */,
 				FC0660562326635000496FE2 /* Protocols.swift */,
 				FC8F9581233BB53B0027BE02 /* Factories protocols */,
 				FC04B865233276960034A60E /* Coordinator protocols */,
@@ -475,7 +476,6 @@
 				FCFC06A32322566F003C59C8 /* CGRect+Methods.swift */,
 				FCFC06A22322566F003C59C8 /* F4SQuadtree.swift */,
 				FCE8DAA72320E80B00934E2F /* ScaledNumber.swift */,
-				FCE8DAA52320E71200934E2F /* ApplicationState.swift */,
 				FC9535A4231E7E7700F4A9DA /* CompanyWorkplacePins.swift */,
 				FC5CBA69231D3E4700C2D3C5 /* F4SDateHelper.swift */,
 				FC083F7A230FF01000641F17 /* F4SDocument.swift */,
@@ -707,7 +707,6 @@
 				FC0E5CFB224E1B5700615B4F /* LocalStore.swift in Sources */,
 				FC6E42DD24556B97005E0D08 /* LocalStorageProtocol.swift in Sources */,
 				FC7DC9F6244D8D7300C282EF /* RemoteLinks.swift in Sources */,
-				FCE8DAA62320E71300934E2F /* ApplicationState.swift in Sources */,
 				FCE75CC6232F631C00C2E976 /* NetworkCallLoggerProtocol.swift in Sources */,
 				FCFC06AB23225765003C59C8 /* LatLon.swift in Sources */,
 				FC93DC56232026AA00F1CE23 /* CommonNotifications.swift in Sources */,
@@ -747,6 +746,7 @@
 				FC1FA08222FAAB1B003EAE59 /* F4SUUIDDictionary.swift in Sources */,
 				FCFC06A423225670003C59C8 /* F4SQuadtree.swift in Sources */,
 				FC14E44C2341E36B005D7541 /* MockUIApplication.swift in Sources */,
+				FCCA4E282456CC1500DFA696 /* AppInstallationLogicProtocol.swift in Sources */,
 				FCE5192E2249482A00B550C9 /* F4SCalendar.swift in Sources */,
 				FC8F957F233BA6710027BE02 /* MockNavigationRouter.swift in Sources */,
 				FCF0EA2D23606A1D00EE1FE2 /* AppSettings.swift in Sources */,

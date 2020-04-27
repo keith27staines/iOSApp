@@ -22,8 +22,6 @@ public protocol F4SCompanyDownloadFileAvailabilityObserving : class {
     func newCompanyDownloadFileIsDownloading(progress: Double)
 }
 
-public protocol AppInstallationLogicProtocol : class {
 
-}
 
 
