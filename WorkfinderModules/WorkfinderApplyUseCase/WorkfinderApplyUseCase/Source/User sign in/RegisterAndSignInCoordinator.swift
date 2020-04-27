@@ -27,7 +27,7 @@ class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, Register
         
         let registerUserLogic = RegisterUserLogic(
             networkConfig: injected.networkConfig,
-            userStore: userRepository)
+            userRepository: userRepository)
         
         let presenter = RegisterUserPresenter(
             coordinator: self,

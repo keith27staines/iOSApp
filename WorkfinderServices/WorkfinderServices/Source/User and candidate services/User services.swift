@@ -33,11 +33,11 @@ public class RegisterUserService: WorkfinderService, RegisterUserServiceProtocol
         var referrer: F4SUUID?
         
         public init(user: User) {
-            self.full_name = user.fullname!
-            self.nickname = user.nickname!
-            self.email = user.email!
-            self.password1 = user.password!
-            self.password2 = user.password!
+            self.full_name = user.fullname ?? ""
+            self.nickname = user.nickname ?? ""
+            self.email = user.email ?? ""
+            self.password1 = user.password ?? ""
+            self.password2 = user.password ?? ""
         }
     }
 }

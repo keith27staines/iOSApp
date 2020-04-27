@@ -9,9 +9,13 @@ protocol RegisterUserLogicProtocol: class {
 
 class RegisterUserLogic: RegisterUserLogicProtocol {
     
-    let user: User
-    let userStore: UserRepositoryProtocol
+    let userRepository: UserRepositoryProtocol
     let networkConfig: NetworkConfig
+    
+    var isRegistered: Bool = false
+    var isUserUuidFetched:  Bool = false
+    var isCandidateCreated: Bool = false
+    var isCandidateFetched: Bool = false
     
     lazy var registerService: RegisterUserServiceProtocol = {
         return RegisterUserService(networkConfig: self.networkConfig)
@@ -30,10 +34,9 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
     }()
     
     init(networkConfig: NetworkConfig,
-         userStore: UserRepositoryProtocol) {
+         userRepository: UserRepositoryProtocol) {
         self.networkConfig = networkConfig
-        self.userStore = userStore
-        self.user = userStore.loadUser()
+        self.userRepository = userRepository
     }
     
     var completion: ((Result<Candidate,Error>) -> Void)?
@@ -44,15 +47,15 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
     }
     
     func registerIfNecessary() {
-        if let token = userStore.loadAccessToken() {
+        if let token = userRepository.loadAccessToken() {
             onIsRegistered(tokenValue: token)
             return
         }
+        let user = userRepository.loadUser()
         registerService.registerUser(user: user) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .success(let token):
-                self.userStore.saveAccessToken(token.key)
                 self.onIsRegistered(tokenValue: token.key)
             case .failure(let error):
                 self.completion?(Result<Candidate,Error>.failure(error))
@@ -61,11 +64,13 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
     }
     
     func onIsRegistered(tokenValue: String) {
+        self.isRegistered = true
+        self.userRepository.saveAccessToken(tokenValue)
         fetchUserIfNecessary()
     }
     
     func fetchUserIfNecessary() {
-        let user = userStore.loadUser()
+        let user = userRepository.loadUser()
         if user.uuid != nil {
             onUserFetched(user: user)
             return
@@ -82,13 +87,14 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
     }
     
     func onUserFetched(user: User) {
-        userStore.save(user: user)
+        isUserUuidFetched = true
+        userRepository.save(user: user)
         let userUuid = user.uuid!
         createCandidateIfNecessary(userUuid: userUuid)
     }
     
     func createCandidateIfNecessary(userUuid: F4SUUID) {
-        let candidate = userStore.loadCandidate()
+        let candidate = userRepository.loadCandidate()
         if let _ = candidate.uuid {
             fetchCandidate()
             return
@@ -117,7 +123,9 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
     }
     
     func onCandidateFetched(candidate: Candidate) {
-        userStore.save(candidate: candidate)
+        isCandidateCreated = true
+        isCandidateFetched = true
+        userRepository.save(candidate: candidate)
         completion?(Result<Candidate,Error>.success(candidate))
     }
     
