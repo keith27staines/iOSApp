@@ -1,14 +1,15 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderServices
 import WorkfinderCoordinators
 
 protocol RegisterAndSignInCoordinatorProtocol {
-    func onDidRegister(user: User, pop: Bool)
+    func onDidRegister(pop: Bool)
 }
 
 protocol RegisterAndSignInCoordinatorParent: Coordinating {
-    func onDidRegister(user: User, pop: Bool)
+    func onDidRegister(pop: Bool)
 }
 
 class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, RegisterAndSignInCoordinatorProtocol {
@@ -20,20 +21,25 @@ class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, Register
     override func start() {
         let userRepository = injected.userRepository
         guard userRepository.loadAccessToken() == nil else {
-            onDidRegister(user: userRepository.loadUser(), pop: false)
+            onDidRegister(pop: false)
             return
         }
-        let service = RegisterUserService(networkConfig: injected.networkConfig)
+        
+        let registerUserLogic = RegisterUserLogic(
+            networkConfig: injected.networkConfig,
+            userStore: userRepository)
+        
         let presenter = RegisterUserPresenter(
             coordinator: self,
             userRepository: userRepository,
-            service: service)
+            registerUserLogic: registerUserLogic)
+        
         let vc = RegisterUserViewController(presenter: presenter)
         navigationRouter.push(viewController: vc, animated: true)
     }
     
-    func onDidRegister(user: User, pop: Bool = true) {
-        (parentCoordinator as? RegisterAndSignInCoordinatorParent)?.onDidRegister(user: user, pop: pop)
+    func onDidRegister(pop: Bool = true) {
+        (parentCoordinator as? RegisterAndSignInCoordinatorParent)?.onDidRegister(pop: pop)
         parentCoordinator?.childCoordinatorDidFinish(self)
     }
 }

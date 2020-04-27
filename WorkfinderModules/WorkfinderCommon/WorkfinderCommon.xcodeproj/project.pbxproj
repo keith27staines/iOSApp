@@ -28,12 +28,9 @@
 		FC177FCF230703170068C2F7 /* F4SNetworkErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC177FCE230703170068C2F7 /* F4SNetworkErrorTests.swift */; };
 		FC1F591622FD6D42007164BA /* F4SPushToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F591522FD6D42007164BA /* F4SPushToken.swift */; };
 		FC1F591822FD6DAB007164BA /* F4SPushTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F591722FD6DAB007164BA /* F4SPushTokenTests.swift */; };
-		FC1F591A22FD7222007164BA /* F4SAnonymousUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F591922FD7222007164BA /* F4SAnonymousUser.swift */; };
-		FC1F591C22FD75B2007164BA /* F4SAnonymousUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F591B22FD75B2007164BA /* F4SAnonymousUserTests.swift */; };
 		FC1F591E22FD78D6007164BA /* WorkfinderCommonStructsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F591D22FD78D6007164BA /* WorkfinderCommonStructsTests.swift */; };
 		FC1F592022FD8ACF007164BA /* F4SAvailabilityPeriodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F591F22FD8ACF007164BA /* F4SAvailabilityPeriodTests.swift */; };
 		FC1F592222FDCD9D007164BA /* F4SCalendarDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F592122FDCD9D007164BA /* F4SCalendarDay.swift */; };
-		FC1FA08222FAAB1B003EAE59 /* F4SUUIDDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08122FAAB1B003EAE59 /* F4SUUIDDictionary.swift */; };
 		FC1FA08822FAC0FF003EAE59 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08722FAC0FF003EAE59 /* StringExtensionsTests.swift */; };
 		FC1FA08A22FAD5D5003EAE59 /* DateExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08922FAD5D5003EAE59 /* DateExtensionTests.swift */; };
 		FC1FA08C22FB1F57003EAE59 /* WorkAvailabilityWindowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08B22FB1F57003EAE59 /* WorkAvailabilityWindowTests.swift */; };
@@ -42,7 +39,6 @@
 		FC22438F232F9E750073C9B1 /* F4SCompanyDatabaseMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22438E232F9E750073C9B1 /* F4SCompanyDatabaseMetaData.swift */; };
 		FC22DBFD22F989D60068C61C /* F4SInterestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBFC22F989D60068C61C /* F4SInterestTests.swift */; };
 		FC24F9132333CA88005C0A08 /* RequestVerb.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC24F9122333CA88005C0A08 /* RequestVerb.swift */; };
-		FC2E205B22F9D1DD0094B134 /* F4SUUIDDictionarytests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2E205A22F9D1DD0094B134 /* F4SUUIDDictionarytests.swift */; };
 		FC32FD432265E4C800740F0C /* F4SContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32FD422265E4C800740F0C /* F4SContentType.swift */; };
 		FC340B0B24531C590003B521 /* ServerListTypealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC340B0A24531C590003B521 /* ServerListTypealiases.swift */; };
 		FC390141234C9E0A009A9F7B /* MockF4SInterestsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC390140234C9E0A009A9F7B /* MockF4SInterestsRepository.swift */; };
@@ -98,7 +94,8 @@
 		FCC85DC8245180AB00BC600E /* PicklistTypeEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC85DC7245180AB00BC600E /* PicklistTypeEnums.swift */; };
 		FCC85DCB245184B700BC600E /* PicklistProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC85DCA245184B700BC600E /* PicklistProtocol.swift */; };
 		FCCA4E282456CC1500DFA696 /* AppInstallationLogicProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA4E272456CC1500DFA696 /* AppInstallationLogicProtocol.swift */; };
-		FCDB07382286F6640053347F /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB07372286F6640053347F /* Candidate.swift */; };
+		FCCA4E2B2456DADD00DFA696 /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA4E2A2456DADD00DFA696 /* Candidate.swift */; };
+		FCDB07382286F6640053347F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB07372286F6640053347F /* User.swift */; };
 		FCDB073A2286F7870053347F /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB07392286F7870053347F /* UserRepository.swift */; };
 		FCDB073C2286F8B00053347F /* Analytics and debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB073B2286F8B00053347F /* Analytics and debugging.swift */; };
 		FCE5191622493B4C00B550C9 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE5191522493B4C00B550C9 /* String+Extensions.swift */; };
@@ -164,12 +161,9 @@
 		FC177FCE230703170068C2F7 /* F4SNetworkErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SNetworkErrorTests.swift; sourceTree = "<group>"; };
 		FC1F591522FD6D42007164BA /* F4SPushToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPushToken.swift; sourceTree = "<group>"; };
 		FC1F591722FD6DAB007164BA /* F4SPushTokenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPushTokenTests.swift; sourceTree = "<group>"; };
-		FC1F591922FD7222007164BA /* F4SAnonymousUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SAnonymousUser.swift; sourceTree = "<group>"; };
-		FC1F591B22FD75B2007164BA /* F4SAnonymousUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SAnonymousUserTests.swift; sourceTree = "<group>"; };
 		FC1F591D22FD78D6007164BA /* WorkfinderCommonStructsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderCommonStructsTests.swift; sourceTree = "<group>"; };
 		FC1F591F22FD8ACF007164BA /* F4SAvailabilityPeriodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SAvailabilityPeriodTests.swift; sourceTree = "<group>"; };
 		FC1F592122FDCD9D007164BA /* F4SCalendarDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCalendarDay.swift; sourceTree = "<group>"; };
-		FC1FA08122FAAB1B003EAE59 /* F4SUUIDDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUUIDDictionary.swift; sourceTree = "<group>"; };
 		FC1FA08722FAC0FF003EAE59 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
 		FC1FA08922FAD5D5003EAE59 /* DateExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensionTests.swift; sourceTree = "<group>"; };
 		FC1FA08B22FB1F57003EAE59 /* WorkAvailabilityWindowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkAvailabilityWindowTests.swift; sourceTree = "<group>"; };
@@ -178,7 +172,6 @@
 		FC22438E232F9E750073C9B1 /* F4SCompanyDatabaseMetaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyDatabaseMetaData.swift; sourceTree = "<group>"; };
 		FC22DBFC22F989D60068C61C /* F4SInterestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInterestTests.swift; sourceTree = "<group>"; };
 		FC24F9122333CA88005C0A08 /* RequestVerb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestVerb.swift; sourceTree = "<group>"; };
-		FC2E205A22F9D1DD0094B134 /* F4SUUIDDictionarytests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUUIDDictionarytests.swift; sourceTree = "<group>"; };
 		FC32FD422265E4C800740F0C /* F4SContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SContentType.swift; sourceTree = "<group>"; };
 		FC340B0A24531C590003B521 /* ServerListTypealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerListTypealiases.swift; sourceTree = "<group>"; };
 		FC390140234C9E0A009A9F7B /* MockF4SInterestsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockF4SInterestsRepository.swift; sourceTree = "<group>"; };
@@ -237,7 +230,8 @@
 		FCC85DC7245180AB00BC600E /* PicklistTypeEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicklistTypeEnums.swift; sourceTree = "<group>"; };
 		FCC85DCA245184B700BC600E /* PicklistProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicklistProtocol.swift; sourceTree = "<group>"; };
 		FCCA4E272456CC1500DFA696 /* AppInstallationLogicProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInstallationLogicProtocol.swift; sourceTree = "<group>"; };
-		FCDB07372286F6640053347F /* Candidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Candidate.swift; sourceTree = "<group>"; };
+		FCCA4E2A2456DADD00DFA696 /* Candidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Candidate.swift; sourceTree = "<group>"; };
+		FCDB07372286F6640053347F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FCDB07392286F7870053347F /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		FCDB073B2286F8B00053347F /* Analytics and debugging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Analytics and debugging.swift"; sourceTree = "<group>"; };
 		FCE5191522493B4C00B550C9 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -312,14 +306,13 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		FC1FA08322FAABDE003EAE59 /* User */ = {
+		FC1FA08322FAABDE003EAE59 /* User and candidate */ = {
 			isa = PBXGroup;
 			children = (
-				FCDB07372286F6640053347F /* Candidate.swift */,
-				FC1FA08122FAAB1B003EAE59 /* F4SUUIDDictionary.swift */,
-				FC1F591922FD7222007164BA /* F4SAnonymousUser.swift */,
+				FCDB07372286F6640053347F /* User.swift */,
+				FCCA4E2A2456DADD00DFA696 /* Candidate.swift */,
 			);
-			path = User;
+			path = "User and candidate";
 			sourceTree = "<group>";
 		};
 		FC1FA08622FAC0D9003EAE59 /* Extention tests */ = {
@@ -434,7 +427,6 @@
 				FCE519502249645B00B550C9 /* F4SDisplayableMonthTests.swift */,
 				FC1F591F22FD8ACF007164BA /* F4SAvailabilityPeriodTests.swift */,
 				FC1F591D22FD78D6007164BA /* WorkfinderCommonStructsTests.swift */,
-				FC1F591B22FD75B2007164BA /* F4SAnonymousUserTests.swift */,
 				FC1F591722FD6DAB007164BA /* F4SPushTokenTests.swift */,
 				FC83EC8022FC0EDB009D7A0B /* F4SUserRepositoryTests.swift */,
 				FC83EC7E22FC0C55009D7A0B /* F4SJsonValueTests.swift */,
@@ -448,7 +440,6 @@
 				FCE5194C2249645A00B550C9 /* F4SCalendarWeekTests.swift */,
 				FCE5194F2249645B00B550C9 /* F4SCalendarDayTests.swift */,
 				FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */,
-				FC2E205A22F9D1DD0094B134 /* F4SUUIDDictionarytests.swift */,
 				FC083F8E2310417E00641F17 /* F4SRoleJsonTests.swift */,
 				FC083F902310464400641F17 /* F4SRecommendationTests.swift */,
 			);
@@ -470,6 +461,7 @@
 				FC036BCD24497C9A008C4A69 /* WorkfinderCommonErrors.swift */,
 				FCF0EA2C23606A1D00EE1FE2 /* AppSettings.swift */,
 				FC1243E22344AEA30007BA95 /* ScreenNames.swift */,
+				FC1FA08322FAABDE003EAE59 /* User and candidate */,
 				FC182E5F2420EDC5005E7CEA /* Protocols */,
 				FCDFEA15223D32EA00E58649 /* Networking */,
 				FCFC06AA23225764003C59C8 /* LatLon.swift */,
@@ -487,7 +479,6 @@
 				FCF5AEFD2248B2A300D9B8D1 /* Extensions */,
 				FC96709B2258C8B100318F69 /* F4SInterest.swift */,
 				FC32FD422265E4C800740F0C /* F4SContentType.swift */,
-				FC1FA08322FAABDE003EAE59 /* User */,
 				FCDB073B2286F8B00053347F /* Analytics and debugging.swift */,
 				FCB24A5E22E44AB100077DFF /* WorkfinderCommonStructs.swift */,
 				FC1F591522FD6D42007164BA /* F4SPushToken.swift */,
@@ -710,7 +701,6 @@
 				FCE75CC6232F631C00C2E976 /* NetworkCallLoggerProtocol.swift in Sources */,
 				FCFC06AB23225765003C59C8 /* LatLon.swift in Sources */,
 				FC93DC56232026AA00F1CE23 /* CommonNotifications.swift in Sources */,
-				FC1F591A22FD7222007164BA /* F4SAnonymousUser.swift in Sources */,
 				FCB24A5F22E44AB100077DFF /* WorkfinderCommonStructs.swift in Sources */,
 				FC1F592222FDCD9D007164BA /* F4SCalendarDay.swift in Sources */,
 				FCE51936224948E400B550C9 /* F4SDaysAndHoursModel.swift in Sources */,
@@ -728,7 +718,7 @@
 				FC22438F232F9E750073C9B1 /* F4SCompanyDatabaseMetaData.swift in Sources */,
 				FC340B0B24531C590003B521 /* ServerListTypealiases.swift in Sources */,
 				FCE51937224948E400B550C9 /* F4SAvailabilityPeriod.swift in Sources */,
-				FCDB07382286F6640053347F /* Candidate.swift in Sources */,
+				FCDB07382286F6640053347F /* User.swift in Sources */,
 				FC12B10322F3415300C33410 /* JsonDateFormatterExtension.swift in Sources */,
 				FC390141234C9E0A009A9F7B /* MockF4SInterestsRepository.swift in Sources */,
 				FCC1DF5D232505FF0074D5C1 /* Shortlist.swift in Sources */,
@@ -743,10 +733,10 @@
 				FCE5192F2249482A00B550C9 /* F4SCalendarMonth.swift in Sources */,
 				FC426EFC232FA274004F8A3E /* Document upload protocols.swift in Sources */,
 				FC083F7B230FF01000641F17 /* F4SDocument.swift in Sources */,
-				FC1FA08222FAAB1B003EAE59 /* F4SUUIDDictionary.swift in Sources */,
 				FCFC06A423225670003C59C8 /* F4SQuadtree.swift in Sources */,
 				FC14E44C2341E36B005D7541 /* MockUIApplication.swift in Sources */,
 				FCCA4E282456CC1500DFA696 /* AppInstallationLogicProtocol.swift in Sources */,
+				FCCA4E2B2456DADD00DFA696 /* Candidate.swift in Sources */,
 				FCE5192E2249482A00B550C9 /* F4SCalendar.swift in Sources */,
 				FC8F957F233BA6710027BE02 /* MockNavigationRouter.swift in Sources */,
 				FCF0EA2D23606A1D00EE1FE2 /* AppSettings.swift in Sources */,
@@ -780,7 +770,6 @@
 				FCE519562249645C00B550C9 /* F4SDisplayableMonthTests.swift in Sources */,
 				FCE519552249645C00B550C9 /* F4SCalendarDayTests.swift in Sources */,
 				FC73902223030856003A9253 /* LocalStoreTests.swift in Sources */,
-				FC2E205B22F9D1DD0094B134 /* F4SUUIDDictionarytests.swift in Sources */,
 				FC12B10522F341D500C33410 /* JsonDateFormatterExtensionTests.swift in Sources */,
 				FC1F591822FD6DAB007164BA /* F4SPushTokenTests.swift in Sources */,
 				FC1FA08822FAC0FF003EAE59 /* StringExtensionsTests.swift in Sources */,
@@ -810,7 +799,6 @@
 				FCC4E66223EAB01100ED6491 /* CoordinatingTests.swift in Sources */,
 				FCC4E66C23EAE58300ED6491 /* F4SDateHelperTests.swift in Sources */,
 				FC1FEF002301A1830039DD94 /* F4SDayOfWeekTests.swift in Sources */,
-				FC1F591C22FD75B2007164BA /* F4SAnonymousUserTests.swift in Sources */,
 				FC083F912310464400641F17 /* F4SRecommendationTests.swift in Sources */,
 				FC1FA08C22FB1F57003EAE59 /* WorkAvailabilityWindowTests.swift in Sources */,
 				FCFC06A9232256C0003C59C8 /* CGRect+MethodsTests.swift in Sources */,

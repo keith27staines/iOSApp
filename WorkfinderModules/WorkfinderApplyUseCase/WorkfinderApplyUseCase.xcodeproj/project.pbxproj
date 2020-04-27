@@ -12,8 +12,6 @@
 		FC036BCB244973A8008C4A69 /* CoverLetterTestsCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC036BC7244973A7008C4A69 /* CoverLetterTestsCommon.swift */; };
 		FC036BCC244973A8008C4A69 /* TemplateParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC036BC8244973A7008C4A69 /* TemplateParserTests.swift */; };
 		FC0B6B332323CDC800A1867D /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0B6B322323CDC800A1867D /* WorkfinderCoordinators.framework */; };
-		FC17E49B2447185F00A58AEB /* RegisterUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC17E49A2447185F00A58AEB /* RegisterUserService.swift */; };
-		FC17E49D244731F500A58AEB /* UserLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC17E49C244731F500A58AEB /* UserLoginService.swift */; };
 		FC1EBEBD2248E0A500416D70 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */; };
 		FC1EBEBE2248E0AC00416D70 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */; };
 		FC1EBEC02248E0D600416D70 /* WorkfinderApplyUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF5AF1E2248BDCC00D9B8D1 /* WorkfinderApplyUseCaseTests.swift */; };
@@ -55,6 +53,7 @@
 		FC85D9F222F205610035C724 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC85D9F122F205610035C724 /* WorkfinderAppLogic.framework */; };
 		FC9626392248C1A900D5F850 /* EditApplicationLetterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626332248C1A900D5F850 /* EditApplicationLetterButton.swift */; };
 		FC9865B6229D380A006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865B5229D380A006D3E63 /* README */; };
+		FCCA4E3224570CE900DFA696 /* RegisterUserLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA4E3124570CE900DFA696 /* RegisterUserLogic.swift */; };
 		FCE8DA842320D35E00934E2F /* Success.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCE8DA832320D35E00934E2F /* Success.xcassets */; };
 		FCE8DA872320D3A700934E2F /* SuccessExtraInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCE8DA862320D39D00934E2F /* SuccessExtraInfo.storyboard */; };
 		FCE8DA892320D3CB00934E2F /* SuccessExtraInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DA882320D3CB00934E2F /* SuccessExtraInfoViewController.swift */; };
@@ -80,8 +79,6 @@
 		FC036BC8244973A7008C4A69 /* TemplateParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateParserTests.swift; sourceTree = "<group>"; };
 		FC0B6B322323CDC800A1867D /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC0B6B342323CDC800A1867D /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC17E49A2447185F00A58AEB /* RegisterUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserService.swift; sourceTree = "<group>"; };
-		FC17E49C244731F500A58AEB /* UserLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginService.swift; sourceTree = "<group>"; };
 		FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC22DBFA22F97F330068C61C /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC23BCE3243AFA730075F359 /* DateOfBirthCollectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateOfBirthCollectorViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +120,7 @@
 		FC85D9F122F205610035C724 /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC9626332248C1A900D5F850 /* EditApplicationLetterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditApplicationLetterButton.swift; sourceTree = "<group>"; };
 		FC9865B5229D380A006D3E63 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		FCCA4E3124570CE900DFA696 /* RegisterUserLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserLogic.swift; sourceTree = "<group>"; };
 		FCE5190B2249388200B550C9 /* Mustache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mustache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCE8DA832320D35E00934E2F /* Success.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Success.xcassets; sourceTree = "<group>"; };
 		FCE8DA852320D39D00934E2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SuccessExtraInfo.storyboard; sourceTree = "<group>"; };
@@ -261,8 +259,7 @@
 				FC343CF92445F17600347BC2 /* RegisterAndSignInCoordinator.swift */,
 				FC343CF72445F10A00347BC2 /* RegisterUserViewController.swift */,
 				FC343CFB244600EF00347BC2 /* RegisterUserPresenter.swift */,
-				FC17E49A2447185F00A58AEB /* RegisterUserService.swift */,
-				FC17E49C244731F500A58AEB /* UserLoginService.swift */,
+				FCCA4E3124570CE900DFA696 /* RegisterUserLogic.swift */,
 			);
 			path = "User sign in";
 			sourceTree = "<group>";
@@ -526,6 +523,7 @@
 				FC23BD01243B33510075F359 /* Picklist.swift in Sources */,
 				FC29992A231EC41A00F83FB6 /* F4SPageHeaderView.swift in Sources */,
 				FC29992D231EC41A00F83FB6 /* F4SHoursPickerViewController.swift in Sources */,
+				FCCA4E3224570CE900DFA696 /* RegisterUserLogic.swift in Sources */,
 				FC42C8A3243C599000F81232 /* LetterEditorPresenter.swift in Sources */,
 				FC343CFC244600EF00347BC2 /* RegisterUserPresenter.swift in Sources */,
 				FC29992E231EC41A00F83FB6 /* F4SSelectDayTableViewCell.swift in Sources */,
@@ -544,9 +542,7 @@
 				FC299935231EC50300F83FB6 /* F4SMonthHeaderView.swift in Sources */,
 				FC299936231EC50300F83FB6 /* F4SCalendarColors.swift in Sources */,
 				FC23BCFF243B33510075F359 /* TemplateParser.swift in Sources */,
-				FC17E49B2447185F00A58AEB /* RegisterUserService.swift in Sources */,
 				FC23BD00243B33510075F359 /* Common.swift in Sources */,
-				FC17E49D244731F500A58AEB /* UserLoginService.swift in Sources */,
 				FCE8DA9A2320E24600934E2F /* ApplyCoordinator.swift in Sources */,
 				FC42C8A6243C5C9A00F81232 /* PicklistViewController.swift in Sources */,
 				FC23BD02243B33510075F359 /* Grammer.swift in Sources */,

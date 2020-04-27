@@ -1,17 +1,12 @@
 
 import Foundation
 import WorkfinderCommon
-import WorkfinderServices
-
-public struct UserRegistrationToken: Codable {
-    public let key: String
-}
 
 public protocol RegisterUserServiceProtocol: class {
     func registerUser(user: User, completion: @escaping((Result<UserRegistrationToken,Error>) -> Void) )
 }
 
-class RegisterUserService: WorkfinderService, RegisterUserServiceProtocol {
+public class RegisterUserService: WorkfinderService, RegisterUserServiceProtocol {
     
     public func registerUser(user: User, completion: @escaping((Result<UserRegistrationToken,Error>) -> Void) ) {
         do {
@@ -43,6 +38,22 @@ class RegisterUserService: WorkfinderService, RegisterUserServiceProtocol {
             self.email = user.email!
             self.password1 = user.password!
             self.password2 = user.password!
+        }
+    }
+}
+
+public protocol FetchMeProtocol {
+    func fetch(completion: @escaping((Result<User,Error>) -> Void) )
+}
+
+public class FetchMeService: WorkfinderService, FetchMeProtocol {
+    
+    public func fetch(completion: @escaping((Result<User,Error>) -> Void) ) {
+        do {
+            let request = try buildRequest(relativePath: "user/me", queryItems: [], verb: .get)
+            performTask(with: request, completion: completion, attempting: #function)
+        } catch {
+            completion(Result<User,Error>.failure(error))
         }
     }
 }

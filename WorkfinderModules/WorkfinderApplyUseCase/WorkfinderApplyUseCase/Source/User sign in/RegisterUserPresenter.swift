@@ -3,6 +3,8 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderUI
 
+import WorkfinderServices
+
 protocol RegisterUserPresenterProtocol: class {
     var fullname: String? { get set }
     var nickname: String? { get set }
@@ -24,10 +26,10 @@ protocol RegisterUserPresenterProtocol: class {
 
 class RegisterUserPresenter: RegisterUserPresenterProtocol {
     let userRepository: UserRepositoryProtocol
-    let service: RegisterUserServiceProtocol
     var user: User
     var coordinator: RegisterAndSignInCoordinatorProtocol?
     weak var view: RegisterUserViewController?
+    let registerLogic: RegisterUserLogicProtocol
     
     static func validateCharacterCount(string: String, min: Int, max: Int) -> UnderlineView.State {
         switch string.trimmingCharacters(in: .whitespaces).count {
@@ -130,12 +132,11 @@ class RegisterUserPresenter: RegisterUserPresenterProtocol {
     
     func onDidTapRegister(onFailure: @escaping ((Error) -> Void)) {
         saveCredentials()
-        service.registerUser(user: user) { [weak self] (result) in
+        registerLogic.start { [weak self] (result) in
             guard let self = self else { return }
             switch result {
-            case .success(let token):
-                self.userRepository.saveAccessToken(token.key)
-                self.coordinator?.onDidRegister(user: self.user,pop: true)
+            case .success(_):
+                self.coordinator?.onDidRegister(pop: true)
             case .failure(let error):
                 onFailure(error)
             }
@@ -149,10 +150,12 @@ class RegisterUserPresenter: RegisterUserPresenterProtocol {
     
     func onViewDidLoad(_ view: RegisterUserViewController) { self.view = view }
     
-    init(coordinator: RegisterAndSignInCoordinatorProtocol, userRepository: UserRepositoryProtocol, service: RegisterUserServiceProtocol) {
+    init(coordinator: RegisterAndSignInCoordinatorProtocol,
+         userRepository: UserRepositoryProtocol,
+         registerUserLogic: RegisterUserLogicProtocol) {
         self.coordinator = coordinator
         self.userRepository = userRepository
-        self.service = service
+        self.registerLogic = registerUserLogic
         self.user = userRepository.loadUser()
     }
     

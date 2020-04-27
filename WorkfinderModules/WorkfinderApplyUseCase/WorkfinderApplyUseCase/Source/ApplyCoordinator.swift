@@ -81,7 +81,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
 }
 
 extension ApplyCoordinator: RegisterAndSignInCoordinatorParent {
-    func onDidRegister(user: User, pop: Bool = true) {
+    func onDidRegister(pop: Bool = true) {
         if pop { navigationRouter.pop(animated: true) }
         
     }
