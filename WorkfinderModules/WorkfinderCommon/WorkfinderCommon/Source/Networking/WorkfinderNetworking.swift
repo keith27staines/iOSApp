@@ -15,7 +15,7 @@ public struct NetworkConfig {
         request.httpBody = body
         request.httpMethod = verb.name
         if let token = userRepository.loadAccessToken() {
-            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            request.addValue("Token \(token)", forHTTPHeaderField: "Authorization")
         }
         return request
     }
