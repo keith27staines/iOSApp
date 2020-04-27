@@ -50,7 +50,7 @@ public class FetchMeService: WorkfinderService, FetchMeProtocol {
     
     public func fetch(completion: @escaping((Result<User,Error>) -> Void) ) {
         do {
-            let request = try buildRequest(relativePath: "user/me", queryItems: [], verb: .get)
+            let request = try buildRequest(relativePath: "users/me", queryItems: [], verb: .get)
             performTask(with: request, completion: completion, attempting: #function)
         } catch {
             completion(Result<User,Error>.failure(error))

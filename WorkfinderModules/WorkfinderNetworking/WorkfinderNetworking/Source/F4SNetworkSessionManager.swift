@@ -39,7 +39,7 @@ public class F4SNetworkSessionManager: F4SNetworkSessionManagerProtocol {
     
     internal var defaultHeaders : [String:String] {
         let headers: [String : String] = [
-            "accept": "application/json",
+            "Accept": "application/json",
             "Content-Type": "application/json"
         ]
         return headers

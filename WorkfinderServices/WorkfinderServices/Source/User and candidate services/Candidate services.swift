@@ -18,7 +18,7 @@ public class CreateCandidateService: WorkfinderService, CreateCandidateServicePr
     public func createCandidate(userUuid: F4SUUID, completion: @escaping ((Result<Candidate, Error>) -> Void)) {
         
         do {
-            let relativePath = "candidate/"
+            let relativePath = "candidates/"
             let jsonBody = ["user": userUuid]
             let request = try buildRequest(relativePath: relativePath, verb: .post, body: jsonBody)
             performTask(with: request, completion: completion, attempting: #function)

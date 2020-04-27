@@ -30,9 +30,7 @@ open class WorkfinderService {
         with request: URLRequest,
         completion: @escaping (Result<A,Error>) -> Void,
         attempting: String) {
-        var request = request
         task?.cancel()
-        request.httpMethod = RequestVerb.get.name
         task = buildTask(
             request: request,
             completion: completion,

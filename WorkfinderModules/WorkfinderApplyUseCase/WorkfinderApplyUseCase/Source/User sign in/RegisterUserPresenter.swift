@@ -105,14 +105,18 @@ class RegisterUserPresenter: RegisterUserPresenterProtocol {
         get { user.fullname }
         set {
             user.fullname = newValue
-            user.nickname = String(newValue?.split(separator: " ").first ?? "")
         }
     }
     var phone: String?
         
     var nickname: String? {
-        get { user.nickname }
-        set { user.nickname = newValue }
+        get {
+            /*return user.nickname*/
+            guard let firstname = fullname?.split(separator: " ").first
+                else { return nil }
+            return String(firstname)
+        }
+        set { /* return user.nickname = newValue */ }
     }
     var password: String?  {
         get { user.password }
@@ -131,7 +135,7 @@ class RegisterUserPresenter: RegisterUserPresenterProtocol {
     }
     
     func onDidTapRegister(onFailure: @escaping ((Error) -> Void)) {
-        saveCredentials()
+        userRepository.save(user: user)
         registerLogic.start { [weak self] (result) in
             guard let self = self else { return }
             switch result {
@@ -157,9 +161,5 @@ class RegisterUserPresenter: RegisterUserPresenterProtocol {
         self.userRepository = userRepository
         self.registerLogic = registerUserLogic
         self.user = userRepository.loadUser()
-    }
-    
-    func saveCredentials() {
-        userRepository.save(user: user)
     }
 }
