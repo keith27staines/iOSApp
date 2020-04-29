@@ -34,8 +34,10 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     
     lazy var successPopup: SuccessPopupView = {
         return SuccessPopupView(leftButtonTapped: { [weak self] in
+            self?.removeApplicationSubmittedSuccessfully()
             self?.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: .messages)
         }) { [weak self] in
+            self?.removeApplicationSubmittedSuccessfully()
             self?.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: .search)
         }
     }()
@@ -138,12 +140,17 @@ extension ApplyCoordinator {
     }
     
     func showApplicationSubmittedSuccessfully() {
-        guard let view = navigationRouter.navigationController.topViewController?.view,
-            let rect = UIApplication.shared.keyWindow?.bounds else {
-            return
-        }
-        view.addSubview(successPopup)
-        successPopup.frame = rect
+        guard let window = UIApplication.shared.keyWindow else { return }
+        window.addSubview(successPopup)
+        let navigationController = navigationRouter.navigationController
+        navigationController.navigationBar.layer.zPosition = -1
+        successPopup.frame = window.bounds
+    }
+    
+    func removeApplicationSubmittedSuccessfully() {
+        successPopup.removeFromSuperview()
+        let navigationController = navigationRouter.navigationController
+        navigationController.navigationBar.layer.zPosition = 0
     }
     
     func cancelButtonWasTapped(sender: Any?) {

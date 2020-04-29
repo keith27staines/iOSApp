@@ -24,6 +24,7 @@ class SuccessPopupView: UIView {
         label.textAlignment = .center
         label.numberOfLines = 2
         label.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        label.textColor = UIColor.darkText
         return label
     }()
     
@@ -36,6 +37,7 @@ class SuccessPopupView: UIView {
         label.numberOfLines = 2
         label.setContentHuggingPriority(.defaultHigh, for: .vertical)
         label.adjustsFontSizeToFitWidth = true
+        label.textColor = UIColor.darkText
         return label
     }()
     
