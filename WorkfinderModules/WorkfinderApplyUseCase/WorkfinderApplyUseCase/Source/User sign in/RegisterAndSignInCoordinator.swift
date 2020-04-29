@@ -5,7 +5,7 @@ import WorkfinderServices
 import WorkfinderCoordinators
 
 protocol RegisterAndSignInCoordinatorProtocol {
-    func onDidRegister(pop: Bool)
+    func onUserRegisteredAndCandidateCreated(pop: Bool)
 }
 
 protocol RegisterAndSignInCoordinatorParent: Coordinating {
@@ -20,7 +20,11 @@ class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, Register
     
     override func start() {
         let userRepository = injected.userRepository
-        
+        let candidate = userRepository.loadCandidate()
+        guard candidate.uuid == nil else {
+            onUserRegisteredAndCandidateCreated(pop: false)
+            return
+        }
         let registerUserLogic = RegisterUserLogic(
             networkConfig: injected.networkConfig,
             userRepository: userRepository)
@@ -34,7 +38,7 @@ class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, Register
         navigationRouter.push(viewController: vc, animated: true)
     }
     
-    func onDidRegister(pop: Bool = true) {
+    func onUserRegisteredAndCandidateCreated(pop: Bool = true) {
         (parentCoordinator as? RegisterAndSignInCoordinatorParent)?.onDidRegister(pop: pop)
         parentCoordinator?.childCoordinatorDidFinish(self)
     }

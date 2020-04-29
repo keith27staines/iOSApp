@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 public protocol AppCoordinatorProtocol : Coordinating {
     var window: UIWindow { get }
     var log: F4SAnalyticsAndDebugging { get }
@@ -32,7 +33,9 @@ public protocol CompanyCoordinatorFactoryProtocol {
         parent: CompanyCoordinatorParentProtocol,
         navigationRouter: NavigationRoutingProtocol,
         companyWorkplace: CompanyWorkplace,
-        inject: CoreInjectionProtocol) -> CompanyCoordinatorProtocol
+        inject: CoreInjectionProtocol,
+        applicationFinished: @escaping ((PreferredDestination) -> Void)
+    ) -> CompanyCoordinatorProtocol
 }
 
 public protocol OnboardingCoordinatorDelegate : class {

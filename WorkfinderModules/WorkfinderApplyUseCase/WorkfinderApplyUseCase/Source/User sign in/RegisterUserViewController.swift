@@ -265,6 +265,7 @@ class RegisterUserViewController: UIViewController {
     }()
     
     @objc func onTapRegister() {
+        updatePresenter()
         messageHandler.showLoadingOverlay(self.view)
         presenter.onDidTapRegister { [weak self] (error) in
             guard let self = self else { return }
@@ -305,6 +306,7 @@ class RegisterUserViewController: UIViewController {
         fullname.state = presenter.fullnameValidityState
         password.state = presenter.passwordValidityState
         phone.state = presenter.phoneValidityState
+        presenter.nickname = String(presenter.fullname?.split(separator: " ").first ?? "")
     }
 }
 

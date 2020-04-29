@@ -13,10 +13,10 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
     var companyWorkplacePresenter: CompanyWorkplacePresenter!
     var companyWorkplace: CompanyWorkplace
     var interestsRepository: F4SInterestsRepositoryProtocol
-    let applyService: ApplyServiceProtocol
+    let applyService: PostPlacementServiceProtocol
     let associationsProvider: HostLocationAssociationsServiceProtocol
 
-    weak var finishDespatcher: CompanyCoordinatorParentProtocol?
+    var applicationFinishedWithPreferredDestination: ((PreferredDestination) -> Void)
     
     public init(
         parent: CompanyCoordinatorParentProtocol?,
@@ -25,14 +25,15 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
         inject: CoreInjectionProtocol,
         environment: EnvironmentType,
         interestsRepository: F4SInterestsRepositoryProtocol,
-        applyService: ApplyServiceProtocol,
-        associationsProvider: HostLocationAssociationsServiceProtocol) {
+        applyService: PostPlacementServiceProtocol,
+        associationsProvider: HostLocationAssociationsServiceProtocol,
+        applicationFinished: @escaping ((PreferredDestination) -> Void)) {
         self.environment = environment
         self.interestsRepository = interestsRepository
         self.companyWorkplace = companyWorkplace
-        self.finishDespatcher = parent
         self.applyService = applyService
         self.associationsProvider = associationsProvider
+        self.applicationFinishedWithPreferredDestination = applicationFinished
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
@@ -56,21 +57,11 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
 }
 
 extension CompanyCoordinator : ApplyCoordinatorDelegate {
-    public func applicationDidFinish(preferredDestination: ApplyCoordinator.PreferredDestinationAfterApplication) {
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
-            guard let strongSelf = self else { return }
-            switch preferredDestination {
-            case .messages:
-                self?.finishDespatcher?.showMessages()
-            case .search:
-                self?.finishDespatcher?.showSearch()
-            case .none:
-                break
-            }
-            strongSelf.cleanup()
-            strongSelf.navigationRouter.pop(animated: true)
-            strongSelf.parentCoordinator?.childCoordinatorDidFinish(strongSelf)
-        }
+    public func applicationDidFinish(preferredDestination: PreferredDestination) {
+        applicationFinishedWithPreferredDestination(preferredDestination)
+        cleanup()
+        navigationRouter.pop(animated: true)
+        parentCoordinator?.childCoordinatorDidFinish(self)
     }
     public func applicationDidCancel() {
         cleanup()

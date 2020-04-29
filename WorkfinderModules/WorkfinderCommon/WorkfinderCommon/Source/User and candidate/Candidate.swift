@@ -5,7 +5,10 @@ public struct Candidate: Codable {
     public var employmentSkills: [F4SUUID]?
     public var motivation: String?
     public var experience: String?
+    public var currentLevelOfStudy: String?
+    public var placementType: String?
     public var fullName: String { self.userSummary.full_name }
+    
     var userSummary: UserSummary
     
     public init() {
@@ -16,6 +19,8 @@ public struct Candidate: Codable {
         case uuid
         case dateOfBirth = "date_of_birth"
         case userSummary = "user"
+        case placementType = "placement_type"
+        case currentLevelOfStudy = "current_level_of_study"
     }
     
     struct UserSummary: Codable {

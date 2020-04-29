@@ -47,7 +47,11 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
             parent: self,
             navigationRouter: navigationRouter,
             companyWorkplace: companyWorkplace,
-            inject: injected)
+            inject: injected, applicationFinished: { [weak self] preferredDestination in
+                guard let self = self else { return }
+                self.show(destination: preferredDestination)
+                self.navigationRouter.popToViewController(self.rootViewController, animated: true)
+        })
         companyCoordinator.originScreen = originScreen
         addChildCoordinator(companyCoordinator)
         companyCoordinator.start()

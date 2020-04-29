@@ -94,12 +94,16 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
     }
     
     func createCandidateIfNecessary(userUuid: F4SUUID) {
-        let candidate = userRepository.loadCandidate()
+        var candidate = userRepository.loadCandidate()
         if let _ = candidate.uuid {
-            fetchCandidate()
+            fetchCandidateFromServer()
             return
         }
-        createCandidateService.createCandidate(userUuid: userUuid) { [weak self] (result) in
+        candidate.placementType = "internship"
+        candidate.currentLevelOfStudy = "undergraduate"
+        userRepository.save(candidate: candidate)
+        createCandidateService.createCandidate(candidate: candidate, userUuid: userUuid) {
+            [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .success(let candidate):
@@ -110,7 +114,7 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
         }
     }
     
-    func fetchCandidate() {
+    func fetchCandidateFromServer() {
         fetchCandidateService.fetchCandidate { [weak self] (result) in
             guard let self = self else { return }
             switch result {

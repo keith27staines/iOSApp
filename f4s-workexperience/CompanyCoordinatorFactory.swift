@@ -11,12 +11,12 @@ import WorkfinderApplyUseCase
 import WorkfinderUserDetailsUseCase
 
 class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
-    let applyService: ApplyServiceProtocol
+    let applyService: PostPlacementServiceProtocol
     let environment: EnvironmentType
     let associationsProvider: HostLocationAssociationsServiceProtocol
     let interestsRepository: F4SInterestsRepositoryProtocol
 
-    init(applyService: ApplyServiceProtocol,
+    init(applyService: PostPlacementServiceProtocol,
          associationsProvider: HostLocationAssociationsServiceProtocol,
          environment: EnvironmentType,
          interestsRepository: F4SInterestsRepositoryProtocol) {
@@ -30,7 +30,9 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
         parent: CompanyCoordinatorParentProtocol,
         navigationRouter: NavigationRoutingProtocol,
         companyWorkplace: CompanyWorkplace,
-        inject: CoreInjectionProtocol) -> CompanyCoordinatorProtocol {
+        inject: CoreInjectionProtocol,
+        applicationFinished: @escaping ((PreferredDestination) -> Void)
+        ) -> CompanyCoordinatorProtocol {
         return CompanyCoordinator(
             parent: parent,
             navigationRouter: navigationRouter,
@@ -38,7 +40,8 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
             inject: inject,
             environment: environment,
             interestsRepository: interestsRepository,
-            applyService: ApplyService(networkConfig: inject.networkConfig),
-            associationsProvider: associationsProvider)
+            applyService: applyService,
+            associationsProvider: associationsProvider,
+            applicationFinished: applicationFinished)
     }
 }

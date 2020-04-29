@@ -342,7 +342,7 @@ class SectionHeaderView: UITableViewHeaderFooterView {
 class SectionFooterView: UITableViewHeaderFooterView {
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        heightAnchor.constraint(equalToConstant: 12).isActive = true
+        heightAnchor.constraint(greaterThanOrEqualToConstant: 12).isActive = true
         self.frame.size.height = 12
         tintColor = UIColor.white
     }

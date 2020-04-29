@@ -2,7 +2,7 @@ import Foundation
 import WorkfinderCommon
 
 public protocol CreateCandidateServiceProtocol {
-    func createCandidate(userUuid: F4SUUID, completion: @escaping ((Result<Candidate, Error>) -> Void))
+    func createCandidate(candidate: Candidate, userUuid: F4SUUID, completion: @escaping ((Result<Candidate, Error>) -> Void))
 }
 
 public protocol FetchCandidateServiceProtocol {
@@ -15,11 +15,16 @@ public protocol UpdateCandidateServiceProtocol {
 
 public class CreateCandidateService: WorkfinderService, CreateCandidateServiceProtocol {
     
-    public func createCandidate(userUuid: F4SUUID, completion: @escaping ((Result<Candidate, Error>) -> Void)) {
+    public func createCandidate(candidate: Candidate, userUuid: F4SUUID, completion: @escaping ((Result<Candidate, Error>) -> Void)) {
         
         do {
             let relativePath = "candidates/"
-            let jsonBody = ["user": userUuid]
+            let jsonBody = [
+                "date_of_birth": candidate.dateOfBirth,
+                "current_level_of_study": candidate.currentLevelOfStudy,
+                "placement_type": candidate.placementType,
+                "user": userUuid
+            ]
             let request = try buildRequest(relativePath: relativePath, verb: .post, body: jsonBody)
             performTask(with: request, completion: completion, attempting: #function)
         } catch {

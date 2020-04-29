@@ -103,20 +103,13 @@ class RegisterUserPresenter: RegisterUserPresenterProtocol {
     }
     var fullname: String? {
         get { user.fullname }
-        set {
-            user.fullname = newValue
-        }
+        set { user.fullname = newValue }
     }
     var phone: String?
         
     var nickname: String? {
-        get {
-            /*return user.nickname*/
-            guard let firstname = fullname?.split(separator: " ").first
-                else { return nil }
-            return String(firstname)
-        }
-        set { /* return user.nickname = newValue */ }
+        get { user.nickname }
+        set { user.nickname = newValue }
     }
     var password: String?  {
         get { user.password }
@@ -140,7 +133,7 @@ class RegisterUserPresenter: RegisterUserPresenterProtocol {
             guard let self = self else { return }
             switch result {
             case .success(_):
-                self.coordinator?.onDidRegister(pop: true)
+                self.coordinator?.onUserRegisteredAndCandidateCreated(pop: true)
             case .failure(let error):
                 onFailure(error)
             }

@@ -126,6 +126,7 @@
 		FCFC06A8232256C0003C59C8 /* F4SQuadtreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06A7232256C0003C59C8 /* F4SQuadtreeTests.swift */; };
 		FCFC06A9232256C0003C59C8 /* CGRect+MethodsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06A6232256C0003C59C8 /* CGRect+MethodsTests.swift */; };
 		FCFC06AB23225765003C59C8 /* LatLon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06AA23225764003C59C8 /* LatLon.swift */; };
+		FCFDCE5824599278006BA3AC /* PreferredDestinations.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFDCE5724599278006BA3AC /* PreferredDestinations.swift */; };
 		FCFE450E2250BA6700C38436 /* MockLocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE450D2250BA6700C38436 /* MockLocalStore.swift */; };
 /* End PBXBuildFile section */
 
@@ -262,6 +263,7 @@
 		FCFC06A6232256C0003C59C8 /* CGRect+MethodsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+MethodsTests.swift"; sourceTree = "<group>"; };
 		FCFC06A7232256C0003C59C8 /* F4SQuadtreeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SQuadtreeTests.swift; sourceTree = "<group>"; };
 		FCFC06AA23225764003C59C8 /* LatLon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatLon.swift; sourceTree = "<group>"; };
+		FCFDCE5724599278006BA3AC /* PreferredDestinations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferredDestinations.swift; sourceTree = "<group>"; };
 		FCFE450D2250BA6700C38436 /* MockLocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocalStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -495,6 +497,7 @@
 				FC426F0D232FF8BC004F8A3E /* EmailVerification.swift */,
 				FCC85DC9245184A200BC600E /* Picklist */,
 				FC473E8C2451CCF1004CEA17 /* TemplateModel.swift */,
+				FCFDCE5724599278006BA3AC /* PreferredDestinations.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -731,6 +734,7 @@
 				FC06605D2326770B00496FE2 /* F4SShortlistJson.swift in Sources */,
 				FCE5193E22494CED00B550C9 /* F4SJsonValue.swift in Sources */,
 				FCE5192F2249482A00B550C9 /* F4SCalendarMonth.swift in Sources */,
+				FCFDCE5824599278006BA3AC /* PreferredDestinations.swift in Sources */,
 				FC426EFC232FA274004F8A3E /* Document upload protocols.swift in Sources */,
 				FC083F7B230FF01000641F17 /* F4SDocument.swift in Sources */,
 				FCFC06A423225670003C59C8 /* F4SQuadtree.swift in Sources */,

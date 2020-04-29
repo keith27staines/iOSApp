@@ -33,10 +33,6 @@ public struct HostLocationAssociationJson: Codable {
     }
 }
 
-public protocol ApplyServiceProtocol: class {
-    
-}
-
 public protocol TemplateProviderProtocol: class {
     func fetchCoverLetterTemplateListJson(completion: @escaping ((Result<TemplateListJson,Error>) -> Void))
 }

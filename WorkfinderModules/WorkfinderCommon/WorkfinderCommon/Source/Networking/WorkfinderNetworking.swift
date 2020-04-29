@@ -1,6 +1,5 @@
 
-/// `NetworkConfig` defines api keys and api endpoints
-public let invalidBaseURLError: String = ""
+
 public struct NetworkConfig {
     
     /// The full url for the v2 api
