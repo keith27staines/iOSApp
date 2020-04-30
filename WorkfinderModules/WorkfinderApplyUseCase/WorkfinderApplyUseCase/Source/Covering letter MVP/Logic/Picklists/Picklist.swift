@@ -3,49 +3,6 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderServices
 
-public class AvailabilityPeriodPicklist: ClientPicklist {
-    public init(networkConfig: NetworkConfig) {
-        super.init(type: .availabilityPeriod, maximumPicks: 2, networkConfig: networkConfig)
-        items = [
-            PicklistItemJson(uuid: "startDate", value: ""),
-            PicklistItemJson(uuid: "endDate", value: "")
-        ]
-    }
-}
-
-public class TextblockPicklist: ClientPicklist {
-    let placeholder: String
-    public init(type: PicklistType, placeholder: String, networkConfig: NetworkConfig) {
-        self.placeholder = placeholder
-        super.init(type: type, maximumPicks: 1, networkConfig: networkConfig)
-        items = [
-            PicklistItemJson(uuid: "text", value: "")
-        ]
-    }
-}
-
-public class UniversityYearPicklist: ClientPicklist {
-    
-    public init(networkConfig: NetworkConfig) {
-        super.init(type: .year, maximumPicks: 1, networkConfig: networkConfig)
-        items = [
-            PicklistItemJson(uuid: "1", value: "Year 1"),
-            PicklistItemJson(uuid: "2", value: "Year 2"),
-            PicklistItemJson(uuid: "3", value: "Year 3"),
-            PicklistItemJson(uuid: "4", value: "Year 4"),
-        ]
-    }
-}
-
-public class ClientPicklist: Picklist {
-    override public func fetchItems(completion: @escaping ((PicklistProtocol, Result<[PicklistItemJson], Error>) -> Void)) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            completion(self, Result<[PicklistItemJson], Error>.success(self.items))
-        }
-    }
-}
-
 public class Picklist: PicklistProtocol {
     
     public let type: PicklistType
@@ -56,6 +13,7 @@ public class Picklist: PicklistProtocol {
     public var selectedItems: [PicklistItemJson]
     public var provider: PicklistProviderProtocol?
     let networkConfig: NetworkConfig
+    var filters = [URLQueryItem]()
     
     public func selectItem(_ item: PicklistItemJson) {
         if !selectedItems.contains(where: { (otherItem) -> Bool in
@@ -117,7 +75,7 @@ public class Picklist: PicklistProtocol {
         case .attributes:
             return NSLocalizedString("attributes", comment: "")
         case .universities:
-            return NSLocalizedString("university", comment: "")
+            return NSLocalizedString("educational institution", comment: "")
         case .year:
             return NSLocalizedString("year", comment: "")
         case .motivation:

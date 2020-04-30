@@ -4,6 +4,7 @@ import WorkfinderCommon
 public class PicklistProvider: WorkfinderService, PicklistProviderProtocol {
     
     public let picklistType: PicklistType
+    public var filters: [URLQueryItem] = []
     
     public init(picklistType: PicklistType, networkConfig: NetworkConfig) {
         self.picklistType = picklistType
@@ -22,7 +23,7 @@ public class PicklistProvider: WorkfinderService, PicklistProviderProtocol {
     func buildFetchPicklistRequest(picklistType: PicklistType) throws -> URLRequest {
         return try buildRequest(
             relativePath: picklistType.endpoint,
-            queryItems: nil,
+            queryItems: filters,
             verb: .get)
     }
 }

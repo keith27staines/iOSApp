@@ -47,7 +47,7 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
         .attributes: Picklist(type: .attributes, maximumPicks: 3, networkConfig: networkConfig),
         .roles: Picklist(type: .roles, maximumPicks: 1, networkConfig: networkConfig),
         .skills: Picklist(type: .skills, maximumPicks: 3, networkConfig: networkConfig),
-        .universities: Picklist(type: .universities, maximumPicks: 1, networkConfig: networkConfig),
+        .universities: TextSearchPicklist(type: .universities, networkConfig: networkConfig),
         .year: UniversityYearPicklist(networkConfig: networkConfig),
         .availabilityPeriod: AvailabilityPeriodPicklist(networkConfig: networkConfig),
         .motivation: TextblockPicklist(
@@ -84,15 +84,23 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
 extension CoverLetterCoordinator: LetterEditorCoordinatorProtocol {
     func showPicklist(_ picklist: PicklistProtocol) {
         switch picklist.type {
-        case .roles, .skills, .universities, .attributes, .year:
+        case .roles, .skills, .attributes, .year:
             let vc = PicklistViewController(coordinator: self, picklist: picklist)
             navigationRouter.push(viewController: vc, animated: true)
+            
+        case .universities:
+            guard let picklist = picklist as? TextSearchPicklistProtocol else {
+                return
+            }
+            let vc = SearchlistViewController<String>(coordinator: self, picklist: picklist)
+            navigationRouter.push(viewController: vc, animated: true)
+            
         case .availabilityPeriod:
             let storyboard = UIStoryboard(name: "F4SCalendar", bundle: __bundle)
             let vc = storyboard.instantiateInitialViewController() as! F4SCalendarContainerViewController
             vc.delegate = self
             navigationRouter.push(viewController: vc, animated: true)
-            break
+            
         case .motivation, .reason, .experience:
             let vc = FreeTextEditorViewController(coordinator: self, freeTextPicker: picklist as! TextblockPicklist)
             navigationRouter.push(viewController: vc, animated: true)

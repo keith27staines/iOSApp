@@ -115,18 +115,17 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     
     private let defaultTemplate = TemplateModel(uuid: "", templateString:
     """
-       Dear Sir/Madam
+    Dear Sir/Madam
 
-       Oh dear, the server failed to return any templates again!
-       But I am a clever iPhone so I can just make one up!
+    Oh dear, the server failed to return any templates again! But I am a clever iPhone so I can just make one up!
 
-       {{motivation}}
-       I would like to apply for the {{role}} role at your company.
-       I wish to acquire the following skills: {{skills}}.
-       I consider myself to have the following personal attributes: {{attributes}}.
-       I am in year {{year}} of study at {{university}}.
-       {{reason}}
-       I will be available between {{availability}}
-       {{experience}}
+    {{motivation}}
+    I would like to apply for the {{role}} role at your company.
+    I wish to acquire the following skills: {{skills}}.
+    I consider myself to have the following personal attributes: {{attributes}}.
+    I am in year {{year}} of study at {{educational institution}}.
+    I will be available between {{availability}}
+    My experience is:
+    {{experience}}
     """)
 }

@@ -39,6 +39,7 @@ public protocol TemplateProviderProtocol: class {
 
 public protocol PicklistProviderProtocol: class {
     var picklistType: PicklistType { get }
+    var filters: [URLQueryItem] { get set }
     func fetchPicklistItems(completion: @escaping ((Result<PicklistServerJson,Error>) -> Void))
 }
 

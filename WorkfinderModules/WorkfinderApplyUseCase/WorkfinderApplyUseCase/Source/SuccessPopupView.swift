@@ -99,7 +99,7 @@ class SuccessPopupView: UIView {
     @objc func onRightButtonTapped() { self.rightButtonTapped?() }
     
     func configure() {
-        backgroundColor = UIColor.init(white: 0.5, alpha: 0.5)
+        backgroundColor = UIColor.init(white: 0.1, alpha: 0.3)
         addSubview(contentView)
         contentView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         contentView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
