@@ -19,7 +19,7 @@ public class F4SWorkplacePin : NSObject, GMUClusterItem {
     /// The uuid of the workplace
     public let workplaceUuid: F4SUUID
     /// Interests of the company having this workplace
-    public var interestUuids = F4SUUIDSet()
+    public var interests = F4SInterestSet()
     
     /// Returns a view for use as the pin on the map
     @objc func customMarkerView() -> UIView {
@@ -45,5 +45,6 @@ public class F4SWorkplacePin : NSObject, GMUClusterItem {
         self.tintColor = tintColor
         self.workplaceUuid = pin.workplaceUuid
         self.shouldShowView = true
+        self.interests = Set(pin.tags)
     }
 }

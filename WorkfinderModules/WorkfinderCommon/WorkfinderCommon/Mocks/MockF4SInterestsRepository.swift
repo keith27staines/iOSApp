@@ -3,6 +3,7 @@ import Foundation
 
 public class MockF4SInterestsRepository: F4SInterestsRepositoryProtocol {
     
+    public var allInterestsSet = F4SInterestSet()
     var interests = F4SInterestSet()
     
     public init() {}
@@ -45,7 +46,7 @@ public class MockF4SInterestsRepository: F4SInterestsRepositoryProtocol {
         return self.interests
     }
     
-    public func pruneInterests(keeping: [F4SInterest]) -> F4SInterestSet {
+    public func pruneInterests(keeping: F4SInterestSet) -> F4SInterestSet {
         self.interests = self.interests.intersection(keeping)
         return self.interests
     }

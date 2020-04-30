@@ -15,9 +15,9 @@ public typealias F4SInterestCounts = [F4SInterest:Int]
 public struct InterestsModel {
     
     /// A dictionary of all interests, keyed by their uuid
-    public let allInterests: [F4SUUID: F4SInterest]
+    public let allInterests: F4SInterestSet
     
-    public init(allInterests: [F4SUUID: F4SInterest]) {
+    public init(allInterests: F4SInterestSet) {
         self.allInterests = allInterests
     }
     
@@ -25,8 +25,8 @@ public struct InterestsModel {
     public func validInterestsFrom(uncheckedInterests: F4SInterestSet) -> F4SInterestSet {
         var interestSet = F4SInterestSet()
         for uncheckedInterest in uncheckedInterests {
-            guard let interest = allInterests[uncheckedInterest.uuid] else { continue }
-            interestSet.insert(interest)
+            guard allInterests.contains(uncheckedInterest) else { continue }
+            interestSet.insert(uncheckedInterest)
         }
         return interestSet
     }
@@ -45,7 +45,7 @@ public struct InterestsModel {
         var interestCounts = [F4SInterest:Int]()
         var totalPossibilities: Int = 0
         for companyPin in companyPins {
-            let pinInterests = interestsSetFrom(interestsUuidSet: companyPin.interestUuids)
+            let pinInterests = companyPin.interests
             if selectedInterests.isEmpty || !selectedInterests.intersection(pinInterests).isEmpty {
                 // If the user hasn't selected any interests then all companies count as possibilities.
                 // If the user has selected at least one interest then a company only counts as a possibility if it shares one of those interests
@@ -62,11 +62,5 @@ public struct InterestsModel {
             }
         }
         return (total: totalPossibilities, interestCounts: interestCounts)
-    }
-    
-    func interestsSetFrom(interestsUuidSet: F4SUUIDSet) -> F4SInterestSet {
-        return F4SInterestSet(interestsUuidSet.compactMap { (uuid) -> F4SInterest? in
-            return allInterests[uuid]
-        })
     }
 }

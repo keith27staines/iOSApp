@@ -47,6 +47,7 @@ class InterestsViewController: UIViewController, UIScrollViewDelegate {
     let uiIndicatorBusy = UIActivityIndicatorView(style: .white)
     
     var interestsRepository: F4SInterestsRepositoryProtocol!
+    var allInterestsSet: F4SInterestSet = F4SInterestSet()
 
     var interestsModel: InterestsModel {
         return mapModel.interestsModel
@@ -59,9 +60,8 @@ class InterestsViewController: UIViewController, UIScrollViewDelegate {
         adjustNavigationBar()
         applyStyle()
         startAnimating()
-        let allInterests = interestsModel.allInterests.compactMap { keyValuePair -> F4SInterest in
-            return keyValuePair.value
-        }
+        let allInterests = interestsModel.allInterests
+    
         originallySelectedInterests = interestsRepository.pruneInterests(keeping: allInterests)
         selectedInterests = originallySelectedInterests
         mapModel.getInterestsInBounds(visibleBounds) { (interestsInBounds) in
@@ -126,7 +126,7 @@ class InterestsViewController: UIViewController, UIScrollViewDelegate {
                 if count1 < count2 {
                     return false
                 }
-                return interest1.name.lowercased() < interest2.name.lowercased()
+                return interest1.lowercased() < interest2.lowercased()
             })
             strongSelf.collectionView.reloadData()
             completion?()
@@ -201,16 +201,16 @@ extension InterestsViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.selectedBackgroundView = UIView()
-        cell.selectedBackgroundView!.backgroundColor = WorkfinderColors.highlightBlue
+        cell.selectedBackgroundView!.backgroundColor = WorkfinderColors.oceanBlue
         cell.layer.borderWidth = 1
         cell.layer.borderColor = WorkfinderColors.lightGrey.cgColor
         cell.layer.cornerRadius = 5
         let currentInterest = interestsToDisplay[indexPath.row]
         let count = interestsCount[currentInterest] ?? 0
-        cell.interestNameLabel.text = currentInterest.name
+        cell.interestNameLabel.text = currentInterest
         cell.interestFrequencyLabel.text = " (\(String(count)))"
 
-        if !cell.isSelected && self.selectedInterests.contains(where: { $0.uuid == currentInterest.uuid }) {
+        if !cell.isSelected && self.selectedInterests.contains(where: { $0 == currentInterest }) {
             cell.isSelected = true
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: UICollectionView.ScrollPosition())
         }
@@ -259,7 +259,7 @@ extension InterestsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let interest = interestsToDisplay[indexPath.row]
         let count = interestsCount[interest] ?? 0
-        let interestStr = interest.name + " (\(count))"
+        let interestStr = interest + " (\(count))"
         var sizeForText = getTextSize(interestStr, font: UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.regular), maxWidth: collectionView.bounds.width)
         sizeForText.height = 40
         return sizeForText

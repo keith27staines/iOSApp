@@ -69,7 +69,6 @@
 		FC93DC5A23202CFB00F1CE23 /* EnvironmentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC5923202CFB00F1CE23 /* EnvironmentType.swift */; };
 		FC94E53D230DB3200091E625 /* F4SError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC94E53C230DB3200091E625 /* F4SError.swift */; };
 		FC9535A5231E7E7700F4A9DA /* CompanyWorkplacePins.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9535A4231E7E7700F4A9DA /* CompanyWorkplacePins.swift */; };
-		FC96709C2258C8B100318F69 /* F4SInterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96709B2258C8B100318F69 /* F4SInterest.swift */; };
 		FC9670A6225A279300318F69 /* F4SInterestsRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9670A5225A279300318F69 /* F4SInterestsRepositoryProtocol.swift */; };
 		FC9865BC229D3963006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865BB229D3963006D3E63 /* README */; };
 		FCA91E752234043D007ED308 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91E6B2234043D007ED308 /* WorkfinderCommon.framework */; };
@@ -203,7 +202,6 @@
 		FC93DC5923202CFB00F1CE23 /* EnvironmentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentType.swift; sourceTree = "<group>"; };
 		FC94E53C230DB3200091E625 /* F4SError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SError.swift; sourceTree = "<group>"; };
 		FC9535A4231E7E7700F4A9DA /* CompanyWorkplacePins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyWorkplacePins.swift; sourceTree = "<group>"; };
-		FC96709B2258C8B100318F69 /* F4SInterest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInterest.swift; sourceTree = "<group>"; };
 		FC9670A5225A279300318F69 /* F4SInterestsRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInterestsRepositoryProtocol.swift; sourceTree = "<group>"; };
 		FC9865BB229D3963006D3E63 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		FCA91E6B2234043D007ED308 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -479,7 +477,6 @@
 				FCE519312249483D00B550C9 /* F4SCalendar structs */,
 				FCA91E87223404AF007ED308 /* WorkfinderCommon.swift */,
 				FCF5AEFD2248B2A300D9B8D1 /* Extensions */,
-				FC96709B2258C8B100318F69 /* F4SInterest.swift */,
 				FC32FD422265E4C800740F0C /* F4SContentType.swift */,
 				FCDB073B2286F8B00053347F /* Analytics and debugging.swift */,
 				FCB24A5E22E44AB100077DFF /* WorkfinderCommonStructs.swift */,
@@ -756,7 +753,6 @@
 				FCE51939224948E400B550C9 /* WorkAvailabilityWindow.swift in Sources */,
 				FC94E53D230DB3200091E625 /* F4SError.swift in Sources */,
 				FCF0EA2F23606A5800EE1FE2 /* MockAppSettings.swift in Sources */,
-				FC96709C2258C8B100318F69 /* F4SInterest.swift in Sources */,
 				FC5019652306A24500A26B53 /* F4SDayOfWeek.swift in Sources */,
 				FCE5192C2249482A00B550C9 /* F4SCalendarWeek.swift in Sources */,
 				FC5CBA6A231D3E4700C2D3C5 /* F4SDateHelper.swift in Sources */,

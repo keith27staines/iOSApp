@@ -4,7 +4,7 @@ public struct PinJson: Codable, Hashable {
     public var workplaceUuid: String
     public var lat: Double
     public var lon: Double
-    public var tags: [F4SUUID]
+    public var tags: [String]
     
     public init(workplaceUuid: F4SUUID, latitude: Double, longitude: Double) {
         self.workplaceUuid = workplaceUuid

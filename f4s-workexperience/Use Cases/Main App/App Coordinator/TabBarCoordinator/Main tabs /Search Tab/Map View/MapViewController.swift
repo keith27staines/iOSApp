@@ -21,6 +21,9 @@ enum CamerWillMoveAction {
 }
 
 class MapViewController: UIViewController {
+    typealias InterestSet = Set<String>
+    var interestSet: InterestSet = []
+    var interestsRepository: F4SInterestsRepositoryProtocol!
     
     var companyFileDownloadManager: F4SCompanyDownloadManagerProtocol?
     var pinRepository = PinRepository(allPins: [])
@@ -135,8 +138,6 @@ class MapViewController: UIViewController {
     
     /// Map model for companies satisfying the interest filters
     var filteredMapModel: MapModel?
-    
-    var interestsRepository: F4SInterestsRepositoryProtocol!
     
     /// Used to determine whether there is internet connectivity
     var reachability: Reachability?
@@ -351,7 +352,7 @@ extension MapViewController {
     }
     
     func displayRefineSearchLabelAnimated() {
-        let interestsCount = interestsRepository.loadInterestsSet().count
+        let interestsCount = interestSet.count
         if self.refineSearchLabel.isHidden && interestsCount == 0 {
             self.refineLabelContainerView.isHidden = false
             self.setupSlideInAnimation(transitionType.slideIn, completionDelegate: self)
@@ -787,7 +788,7 @@ extension MapViewController {
             guard let self = self else { return }
             let mapModel = MapModel(
                 pinRepository: self.pinRepository,
-                allInterests: [:],
+                allInterests: self.interestSet,
                 filtereredBy: [],
                 clusterColor: self.clusterColor)
             DispatchQueue.main.async {
@@ -822,6 +823,7 @@ extension MapViewController {
             let fileString = try String(contentsOf: url)
             let parser = try PinDownloadFileParser(fileString: fileString)
             pins = parser.extractPins()
+            buildInterestsSet(pins: pins)
             pinRepository = PinRepository(allPins: pins)
         } catch {
             return
@@ -830,14 +832,22 @@ extension MapViewController {
         self.createUnfilteredMapModelFromDatabase { [weak self] unfilteredMapModel in
             guard let self = self else { return }
             self.unfilteredMapModel = unfilteredMapModel
-            let interestFilterSet = self.interestsRepository.loadInterestsSet()
-            self.createFilteredMapModel(unfilteredModel: unfilteredMapModel, interestFilterSet: interestFilterSet, completed: { (filteredMapModel) in
+            self.createFilteredMapModel(unfilteredModel: unfilteredMapModel, interestFilterSet: self.interestSet, completed: { (filteredMapModel) in
                 self.filteredMapModel = filteredMapModel
                 self.reloadMapFromModel(mapModel: filteredMapModel, completed: {
                     completion()
                 })
             })
         }
+    }
+    
+    func buildInterestsSet(pins: [PinJson]) {
+        pins.forEach { (pin) in
+            pin.tags.forEach { tag in
+                interestSet.insert(tag)
+            }
+        }
+        interestsRepository.allInterestsSet = interestSet
     }
     
     /// Asynchronously reloads the map from the specified mapmodel

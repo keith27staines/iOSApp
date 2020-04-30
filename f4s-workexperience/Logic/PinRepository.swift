@@ -15,17 +15,10 @@ public class PinRepository {
         self.allPins = [PinJson](allPins)
     }
     
-    public func pins(interestedInAnyOf interests: Set<F4SUUID>) -> [PinJson] {
+    public func pins(interestedInAnyOf interests: Set<F4SInterest>) -> [PinJson] {
         return allPins.filter { (pin) -> Bool in
             let tagSet = Set<String>(pin.tags)
             return !tagSet.isDisjoint(with: interests)
         }
-    }
-    
-    public func pins(interestedInAnyOf interests: F4SInterestSet) -> [PinJson] {
-        let uuidSet = interests.map { (interest) -> F4SUUID in
-            interest.uuid
-        }
-        return pins(interestedInAnyOf: Set<F4SUUID>(uuidSet))
     }
 }

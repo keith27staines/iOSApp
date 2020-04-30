@@ -4,6 +4,7 @@ import WorkfinderCommon
 
 public class F4SInterestsRepository : F4SInterestsRepositoryProtocol {
     
+    public var allInterestsSet = F4SInterestSet()
     let localStore: LocalStorageProtocol
     
     public init(localStore: LocalStorageProtocol) {
@@ -70,7 +71,7 @@ public class F4SInterestsRepository : F4SInterestsRepositoryProtocol {
     /// Prunes interests from the store that are not members of the specified list
     /// - Returns: the remaining interests in the store
     @discardableResult
-    public func pruneInterests(keeping: [F4SInterest]) -> F4SInterestSet {
+    public func pruneInterests(keeping: F4SInterestSet) -> F4SInterestSet {
         let interests = loadInterestsSet()
         let intersection = interests.intersection(keeping)
         return saveInterests(intersection)

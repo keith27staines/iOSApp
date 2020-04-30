@@ -40,7 +40,7 @@ public struct MapModel {
     fileprivate let quadTree: F4SPointQuadTree
     
     public init(pinRepository: PinRepository,
-                allInterests: [F4SUUID: F4SInterest],
+                allInterests: F4SInterestSet,
                 filtereredBy interestsSet: F4SInterestSet,
                 clusterColor: UIColor) {
         self.pinRepository = pinRepository
@@ -82,7 +82,7 @@ public extension MapModel {
         DispatchQueue.global(qos: .userInitiated).async {
             var interestSet = F4SInterestSet()
             for companyPin in self.companyPinSetInsideBounds(bounds) {
-                interestSet = interestSet.union(self.interests(from: companyPin.interestUuids))
+                interestSet = interestSet.union(companyPin.interests)
             }
             completion(interestSet)
         }
@@ -223,24 +223,6 @@ extension MapModel {
         return qt
     }
     
-    /// Returns a set of interests from the specified list of interest UUIDs
-    func interests(from uuids: [F4SUUID]) -> F4SInterestSet {
-        var interestSet = F4SInterestSet()
-        for uuid in uuids {
-            guard let interest = interestsModel.allInterests[uuid] else { continue }
-            interestSet.insert(interest)
-        }
-        return interestSet
-    }
-    /// Returns a set of interests from the specified set of interest ids
-    func interests(from uuids: F4SUUIDSet) -> F4SInterestSet {
-        var interestSet = F4SInterestSet()
-        for id in uuids {
-            guard let interest = interestsModel.allInterests[id] else { continue }
-            interestSet.insert(interest)
-        }
-        return interestSet
-    }
 }
 
 // MARK:- helper extension to facilitate transforming company pins into quadtree items

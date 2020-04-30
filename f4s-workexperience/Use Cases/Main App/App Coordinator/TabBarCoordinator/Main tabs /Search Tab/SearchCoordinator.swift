@@ -15,9 +15,6 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
         vc.companyFileDownloadManager = self.injected.companyDownloadFileManager
         vc.interestsRepository = self.interestsRepository
         vc.log = self.injected.log
-//        vc.companyDataSource
-//        vc.placesDataSource
-//        vc.peopleDataSource
         return vc
     }()
     
@@ -64,6 +61,7 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
         let interestsStoryboard = UIStoryboard(name: "InterestsView", bundle: nil)
         let interestsViewController = interestsStoryboard.instantiateViewController(withIdentifier: "interestsCtrl") as! InterestsViewController
         interestsViewController.interestsRepository = interestsRepository
+        interestsViewController.allInterestsSet = interestsRepository.allInterestsSet
         interestsViewController.visibleBounds = visibleMapBounds
         interestsViewController.mapModel = unfilteredMapModel
         interestsViewController.log = injected.log
