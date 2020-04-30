@@ -72,7 +72,7 @@ class RegisterUserPresenter: RegisterUserPresenterProtocol {
         let numbersSet = CharacterSet(charactersIn: "0123456789")
         guard numbersSet.isSuperset(of: CharacterSet(charactersIn: string))
             else { return .bad }
-        return RegisterUserPresenter.validateCharacterCount(string: string, min: 10, max: 11)
+        return RegisterUserPresenter.validateCharacterCount(string: string, min: 11, max: 11)
     }
     
     let _passwordValidator: (String) -> UnderlineView.State = { password in
