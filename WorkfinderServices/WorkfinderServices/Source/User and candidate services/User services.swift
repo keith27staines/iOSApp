@@ -6,6 +6,25 @@ public protocol RegisterUserServiceProtocol: class {
     func registerUser(user: User, completion: @escaping((Result<UserRegistrationToken,Error>) -> Void) )
 }
 
+public protocol SignInUserServiceProtocol: class {
+    func signIn(user: User, completion: @escaping((Result<String,Error>) -> Void))
+}
+
+public class SignInUserService: WorkfinderService, SignInUserServiceProtocol {
+    public func signIn(user: User, completion: @escaping((Result<String,Error>) -> Void)) {
+        do {
+            let body = [
+                "email": user.email,
+                "password": user.password
+            ]
+            let request = try buildRequest(relativePath: "auth/login/", verb: .post, body: body)
+            performTask(with: request, completion: completion, attempting: #function)
+        } catch {
+            completion(Result<String,Error>.failure(error))
+        }
+    }
+}
+
 public class RegisterUserService: WorkfinderService, RegisterUserServiceProtocol {
     
     public func registerUser(user: User, completion: @escaping((Result<UserRegistrationToken,Error>) -> Void) ) {

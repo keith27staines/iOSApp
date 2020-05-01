@@ -11,6 +11,7 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
     
     let userRepository: UserRepositoryProtocol
     let networkConfig: NetworkConfig
+    let mode: RegisterAndSignInMode
     
     var isRegistered: Bool = false
     var isUserUuidFetched:  Bool = false
@@ -19,6 +20,10 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
     
     lazy var registerService: RegisterUserServiceProtocol = {
         return RegisterUserService(networkConfig: self.networkConfig)
+    }()
+    
+    lazy var signInService: SignInUserServiceProtocol = {
+        return SignInUserService(networkConfig: self.networkConfig)
     }()
     
     lazy var fetchMeService: FetchMeService = {
@@ -34,16 +39,36 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
     }()
     
     init(networkConfig: NetworkConfig,
-         userRepository: UserRepositoryProtocol) {
+         userRepository: UserRepositoryProtocol,
+         mode: RegisterAndSignInMode) {
         self.networkConfig = networkConfig
         self.userRepository = userRepository
+        self.mode = mode
     }
     
     var completion: ((Result<Candidate,Error>) -> Void)?
     
     func start(completion: @escaping ((Result<Candidate,Error>) -> Void)) {
         self.completion = completion
-        registerIfNecessary()
+        switch mode {
+        case .register:
+            registerIfNecessary()
+        case .signIn:
+            signInIfNecessary()
+        }
+    }
+    
+    func signInIfNecessary() {
+        let user = userRepository.loadUser()
+        signInService.signIn(user: user) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let token):
+                self.onIsRegistered(tokenValue: token)
+            case .failure(let error):
+                self.completion?(Result<Candidate,Error>.failure(error))
+            }
+        }
     }
     
     func registerIfNecessary() {

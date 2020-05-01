@@ -59,6 +59,9 @@
 		FC84A669243EF43F00C9D158 /* FreeTextEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC84A668243EF43F00C9D158 /* FreeTextEditorViewController.swift */; };
 		FC85D9F222F205610035C724 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC85D9F122F205610035C724 /* WorkfinderAppLogic.framework */; };
 		FC9626392248C1A900D5F850 /* EditApplicationLetterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626332248C1A900D5F850 /* EditApplicationLetterButton.swift */; };
+		FC96DE37245C1EDD0074011B /* RegisterAndSignInBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96DE36245C1EDD0074011B /* RegisterAndSignInBaseViewController.swift */; };
+		FC96DE39245C2F930074011B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96DE38245C2F930074011B /* SignInViewController.swift */; };
+		FC96DE3B245C37C20074011B /* RegisterAndSignInMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96DE3A245C37C20074011B /* RegisterAndSignInMode.swift */; };
 		FC9865B6229D380A006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865B5229D380A006D3E63 /* README */; };
 		FCCA4E3224570CE900DFA696 /* RegisterUserLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA4E3124570CE900DFA696 /* RegisterUserLogic.swift */; };
 		FCE8DA872320D3A700934E2F /* SuccessExtraInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCE8DA862320D39D00934E2F /* SuccessExtraInfo.storyboard */; };
@@ -133,6 +136,9 @@
 		FC85D9EF22F204140035C724 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC85D9F122F205610035C724 /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC9626332248C1A900D5F850 /* EditApplicationLetterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditApplicationLetterButton.swift; sourceTree = "<group>"; };
+		FC96DE36245C1EDD0074011B /* RegisterAndSignInBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterAndSignInBaseViewController.swift; sourceTree = "<group>"; };
+		FC96DE38245C2F930074011B /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		FC96DE3A245C37C20074011B /* RegisterAndSignInMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterAndSignInMode.swift; sourceTree = "<group>"; };
 		FC9865B5229D380A006D3E63 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		FCCA4E3124570CE900DFA696 /* RegisterUserLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserLogic.swift; sourceTree = "<group>"; };
 		FCE5190B2249388200B550C9 /* Mustache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mustache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -271,9 +277,12 @@
 			isa = PBXGroup;
 			children = (
 				FC343CF92445F17600347BC2 /* RegisterAndSignInCoordinator.swift */,
+				FC96DE38245C2F930074011B /* SignInViewController.swift */,
 				FC343CF72445F10A00347BC2 /* RegisterUserViewController.swift */,
+				FC96DE36245C1EDD0074011B /* RegisterAndSignInBaseViewController.swift */,
 				FC343CFB244600EF00347BC2 /* RegisterUserPresenter.swift */,
 				FCCA4E3124570CE900DFA696 /* RegisterUserLogic.swift */,
+				FC96DE3A245C37C20074011B /* RegisterAndSignInMode.swift */,
 			);
 			path = "User sign in";
 			sourceTree = "<group>";
@@ -580,11 +589,14 @@
 				FCE8DA9A2320E24600934E2F /* ApplyCoordinator.swift in Sources */,
 				FC1053712458784200024706 /* SuccessPopupView.swift in Sources */,
 				FC42C8A6243C5C9A00F81232 /* PicklistViewController.swift in Sources */,
+				FC96DE3B245C37C20074011B /* RegisterAndSignInMode.swift in Sources */,
 				FC23BD02243B33510075F359 /* Grammer.swift in Sources */,
 				FC84A669243EF43F00C9D158 /* FreeTextEditorViewController.swift in Sources */,
 				FCFDCE5A2459DE12006BA3AC /* SearchlistViewController.swift in Sources */,
+				FC96DE39245C2F930074011B /* SignInViewController.swift in Sources */,
 				FC343CFA2445F17600347BC2 /* RegisterAndSignInCoordinator.swift in Sources */,
 				FC299937231EC50300F83FB6 /* F4SCalendarCollectionViewController.swift in Sources */,
+				FC96DE37245C1EDD0074011B /* RegisterAndSignInBaseViewController.swift in Sources */,
 				FCE8DA892320D3CB00934E2F /* SuccessExtraInfoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
