@@ -64,7 +64,7 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
             guard let self = self else { return }
             switch result {
             case .success(let token):
-                self.onIsRegistered(tokenValue: token)
+                self.onIsRegistered(tokenValue: token.key)
             case .failure(let error):
                 self.completion?(Result<Candidate,Error>.failure(error))
             }
