@@ -12,20 +12,50 @@ class DateOfBirthCollectorViewController: UIViewController {
     
     weak var coordinator: DateOfBirthCoordinatorProtocol?
     
+    let under18Text = "We're updating the Workfinder App. Currently, applications are only open to candidates who are aged over 18. The App will be reopen for younger candidates with the next update in a few weeks' time. Thanks in advance for your patience while we make some improvements."
+    
+    lazy var under18Label: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.alpha = 0
+        label.text = self.under18Text
+        return label
+    }()
+    
     var dateOfBirth: Date? {
         didSet {
             guard let dateOfBirth = dateOfBirth else {
                 textField.text = nil
-                nextButton.backgroundColor = UIColor.lightGray
-                nextButton.isEnabled = false
+                setPrimaryButtonEnabledState(false)
                 return
             }
             let formatter = DateFormatter()
             formatter.dateStyle = .long
+            textField.text = formatter.string(from: dateOfBirth)
+            let isOver18 = ageNow(dob: dateOfBirth) >= 18
+            setPrimaryButtonEnabledState(isOver18)
+            UIView.animate(withDuration: 0.2) {
+                if isOver18 {
+                    self.under18Label.alpha = 0
+                } else {
+                    self.under18Label.alpha = 1
+                }
+            }
+        }
+    }
+    
+    func setPrimaryButtonEnabledState(_ enabled: Bool) {
+        if enabled {
             nextButton.isEnabled = true
             nextButton.backgroundColor = WorkfinderColors.primaryGreen
-            self.textField.text = formatter.string(from: dateOfBirth)
+        } else {
+            nextButton.backgroundColor = UIColor.lightGray
+            nextButton.isEnabled = false
         }
+    }
+    
+    func ageNow(dob: Date, now: Date = Date()) -> Int {
+        return Calendar.current.dateComponents([.year], from: dob, to: now).year!
     }
 
     override func viewDidLoad() {
@@ -33,6 +63,10 @@ class DateOfBirthCollectorViewController: UIViewController {
         configureViews()
         dateOfBirth = nil
         textField.becomeFirstResponder()
+        let now = Date()
+        datePicker.date = Calendar.current.date(byAdding: .year, value: -18, to: now) ?? now
+        datePicker.minimumDate = Calendar.current.date(byAdding: .year, value: -150, to: now) ?? now
+        datePicker.maximumDate = now
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -103,11 +137,16 @@ class DateOfBirthCollectorViewController: UIViewController {
     @objc func onDateChosen() { updateStateFromPicker() }
     
     lazy var stack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [self.label, self.textField, UIView(), self.nextButton])
+        let stack = UIStackView(arrangedSubviews: [
+            self.label,
+            self.textField,
+            self.nextButton
+            ]
+        )
         stack.axis = .vertical
         stack.alignment = .fill
         stack.distribution = .fillEqually
-        stack.spacing = 8
+        stack.spacing = 20
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -115,9 +154,13 @@ class DateOfBirthCollectorViewController: UIViewController {
     func configureViews() {
         view.backgroundColor = UIColor.white
         view.addSubview(stack)
+        view.addSubview(under18Label)
+        let guide = view.safeAreaLayoutGuide
         stack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         stack.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
-        stack.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 20).isActive = true
+        stack.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 20).isActive = true
+        under18Label.anchor(top: stack.bottomAnchor, leading: stack.leadingAnchor, bottom: nil, trailing: stack.trailingAnchor, padding: UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0))
+        
     }
     
     init(coordinator: DateOfBirthCoordinatorProtocol) {
