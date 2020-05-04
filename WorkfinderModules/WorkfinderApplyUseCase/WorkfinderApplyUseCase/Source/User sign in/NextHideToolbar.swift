@@ -1,17 +1,18 @@
 import UIKit
+import WorkfinderUI
 
 class NextHideToolbar: UIToolbar {
-    weak var responder: UIResponder?
+    weak var textField: NextResponderTextField?
     var hideKeyboard: () -> Void
     
     @objc func nextTapped() {
-        responder?.next?.becomeFirstResponder()
+        textField?.nextResponderField?.becomeFirstResponder()
     }
     @objc func hideKeyboardTapped() { hideKeyboard() }
     
-    init(responder: UIResponder, hideKeyboard: @escaping () -> Void) {
+    init(textField: NextResponderTextField, hideKeyboard: @escaping () -> Void) {
         self.hideKeyboard = hideKeyboard
-        self.responder = responder
+        self.textField = textField
         super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         barStyle = UIBarStyle.default
         items = [

@@ -21,9 +21,10 @@ class RegisterUserViewController: RegisterAndSignInBaseViewController {
         fullname.textChanged?(self.presenter.fullname)
         phone.textChanged?(self.presenter.phone)
         password.textChanged?(self.presenter.password)
-        email.textfield.nextResponderField = fullname
-        fullname.textfield.nextResponderField = phone
-        phone.textfield.nextResponderField = password
+        email.textfield.nextResponderField = fullname.textfield
+        fullname.textfield.nextResponderField = phone.textfield
+        phone.textfield.nextResponderField = password.textfield
+        password.textfield.nextResponderField = nil //email.textfield
         bottomStack.addArrangedSubview(termsAgreedStack)
         bottomStack.addArrangedSubview(switchModeStack)
         bottomStack.addArrangedSubview(primaryButton)

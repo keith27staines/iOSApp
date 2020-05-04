@@ -77,7 +77,7 @@ class RegisterAndSignInBaseViewController: UIViewController {
         textField.textContentType = .username
         textField.placeholder = fieldName
         textField.autocapitalizationType = .none
-        textField.inputAccessoryView = makeKeyboardInputAccessoryView(responder: textField)
+        textField.inputAccessoryView = makeKeyboardInputAccessoryView(textField: textField)
         return stack
     }()
     
@@ -89,7 +89,7 @@ class RegisterAndSignInBaseViewController: UIViewController {
         textField.keyboardType = .alphabet
         textField.autocapitalizationType = .words
         textField.placeholder = fieldName
-        textField.inputAccessoryView = makeKeyboardInputAccessoryView(responder: textField)
+        textField.inputAccessoryView = makeKeyboardInputAccessoryView(textField: textField)
         return stack
     }()
     
@@ -102,7 +102,7 @@ class RegisterAndSignInBaseViewController: UIViewController {
         textField.autocapitalizationType = .words
         textField.textContentType = .nickname
         textField.placeholder = fieldName
-        textField.inputAccessoryView = makeKeyboardInputAccessoryView(responder: textField)
+        textField.inputAccessoryView = makeKeyboardInputAccessoryView(textField: textField)
         return stack
     }()
     
@@ -115,7 +115,7 @@ class RegisterAndSignInBaseViewController: UIViewController {
         textField.autocapitalizationType = .none
         textField.textContentType = .telephoneNumber
         textField.placeholder = fieldName
-        textField.inputAccessoryView = makeKeyboardInputAccessoryView(responder: textField)
+        textField.inputAccessoryView = makeKeyboardInputAccessoryView(textField: textField)
         return stack
     }()
     
@@ -138,7 +138,7 @@ class RegisterAndSignInBaseViewController: UIViewController {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont.preferredFont(forTextStyle: .caption2)
-        label.text = "Passwords must be at least 8 characters, mixture of lower and upper case and numbers"
+        label.text = "Passwords must be at least 8 characters and contain a mixture of lower and upper case characters and numbers"
         label.textColor = UIColor.gray
         return label
     }()
@@ -337,8 +337,8 @@ class RegisterAndSignInBaseViewController: UIViewController {
         return field
     }
     
-    func makeKeyboardInputAccessoryView(responder: UIResponder) -> UIView {
-        return NextHideToolbar(responder: responder) { self.hideKeyboard() }
+    func makeKeyboardInputAccessoryView(textField: NextResponderTextField) -> UIView {
+        return NextHideToolbar(textField: textField) { self.hideKeyboard() }
     }
     
     override func viewDidLayoutSubviews() {
