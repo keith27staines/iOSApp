@@ -28,6 +28,7 @@ class SignInViewController: RegisterAndSignInBaseViewController {
         presenter.password = password.textfield.text
         primaryButton.isEnabled = presenter.isPrimaryButtonEnabled
         email.state = presenter.emailValidityState
+        password.state = presenter.passwordValidityState
     }
 }
 

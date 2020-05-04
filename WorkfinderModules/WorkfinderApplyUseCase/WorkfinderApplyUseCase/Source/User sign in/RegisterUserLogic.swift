@@ -54,11 +54,11 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
         case .register:
             registerIfNecessary()
         case .signIn:
-            signInIfNecessary()
+            signIn()
         }
     }
     
-    func signInIfNecessary() {
+    func signIn() {
         let user = userRepository.loadUser()
         signInService.signIn(user: user) { [weak self] result in
             guard let self = self else { return }
@@ -114,14 +114,50 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
     func onUserFetched(user: User) {
         isUserUuidFetched = true
         userRepository.save(user: user)
-        let userUuid = user.uuid!
-        createCandidateIfNecessary(userUuid: userUuid)
+        if let candidateUuid = user.candidateUuid {
+            fetchCandidateFromServer(candidateUuid: candidateUuid)
+        } else {
+            createCandidateIfNecessary()
+        }
+        
     }
     
-    func createCandidateIfNecessary(userUuid: F4SUUID) {
+    func fetchCandidateFromServer(candidateUuid: F4SUUID) {
+        fetchCandidateService.fetchCandidate(uuid: candidateUuid) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let candidate):
+                self.onCandidateFetched(candidate: candidate)
+            case .failure(let error):
+                if let networkError = error as? NetworkError {
+                    switch networkError {
+                    case .httpError(let x):
+                        if x.statusCode == 404 {
+                            self.createCandidateIfNecessary()
+                            return
+                        }
+                    default:
+                        break
+                    }
+                }
+                self.completion?(Result<Candidate,Error>.failure(error))
+            }
+        }
+    }
+    
+    func onCandidateFetched(candidate: Candidate) {
+        isCandidateCreated = true
+        isCandidateFetched = true
+        userRepository.save(candidate: candidate)
+        completion?(Result<Candidate,Error>.success(candidate))
+    }
+    
+    func createCandidateIfNecessary() {
+        let user = userRepository.loadUser()
+        let userUuid = user.uuid!
         var candidate = userRepository.loadCandidate()
-        if let _ = candidate.uuid {
-            fetchCandidateFromServer()
+        if let candidateUuid = candidate.uuid {
+            fetchCandidateFromServer(candidateUuid: candidateUuid)
             return
         }
         candidate.placementType = "internship"
@@ -137,25 +173,6 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
                 self.completion?(Result<Candidate,Error>.failure(error))
             }
         }
-    }
-    
-    func fetchCandidateFromServer() {
-        fetchCandidateService.fetchCandidate { [weak self] (result) in
-            guard let self = self else { return }
-            switch result {
-            case .success(let candidate):
-                self.onCandidateFetched(candidate: candidate)
-            case .failure(let error):
-                self.completion?(Result<Candidate,Error>.failure(error))
-            }
-        }
-    }
-    
-    func onCandidateFetched(candidate: Candidate) {
-        isCandidateCreated = true
-        isCandidateFetched = true
-        userRepository.save(candidate: candidate)
-        completion?(Result<Candidate,Error>.success(candidate))
     }
     
 }

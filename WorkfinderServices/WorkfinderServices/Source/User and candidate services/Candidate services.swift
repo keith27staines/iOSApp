@@ -6,7 +6,7 @@ public protocol CreateCandidateServiceProtocol {
 }
 
 public protocol FetchCandidateServiceProtocol {
-    func fetchCandidate(completion: @escaping ((Result<Candidate, Error>) -> Void))
+    func fetchCandidate(uuid: F4SUUID, completion: @escaping ((Result<Candidate, Error>) -> Void))
 }
 
 public protocol UpdateCandidateServiceProtocol {
@@ -35,10 +35,10 @@ public class CreateCandidateService: WorkfinderService, CreateCandidateServicePr
 
 public class FetchCandidateService: WorkfinderService, FetchCandidateServiceProtocol {
     
-    public func fetchCandidate(completion: @escaping ((Result<Candidate, Error>) -> Void)) {
+    public func fetchCandidate(uuid: F4SUUID, completion: @escaping ((Result<Candidate, Error>) -> Void)) {
         
         do {
-            let relativePath = "candidate/"
+            let relativePath = "candidates/\(uuid)/"
             let request = try buildRequest(relativePath: relativePath, queryItems: nil, verb: .get)
             performTask(with: request, completion: completion, attempting: #function)
         } catch {

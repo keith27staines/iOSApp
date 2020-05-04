@@ -1,11 +1,12 @@
 import UIKit
 import WorkfinderCommon
 import WorkfinderUI
+import MessageUI
 
 class RegisterAndSignInBaseViewController: UIViewController {
     let presenter: RegisterAndSignInPresenterProtocol
     let messageHandler = UserMessageHandler()
-    let linkFont = UIFont.systemFont(ofSize: 13)
+    let linkFont = UIFont.systemFont(ofSize: 14)
     var inputControlBottom: CGFloat = 0.0
     let mode: RegisterAndSignInMode
     var keyboardTop: CGFloat = 0.0 { didSet { scrollForKeyboardForInputY() } }
@@ -129,18 +130,57 @@ class RegisterAndSignInBaseViewController: UIViewController {
         return stack
     }()
     
-    lazy var termsAndConditionsLabel: UILabel = {
-        let linkLabel = UILabel()
-        linkLabel.text = NSLocalizedString("I accept Workfinder's", comment: "I accept Workfinder's terms of service")
-        linkLabel.font = self.linkFont
-        linkLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        return linkLabel
+    lazy var forgotPasswordStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            self.forgotPasswordLabel,
+            self.forgottenPasswordButton,
+            UIView()
+        ])
+        stack.axis = .horizontal
+        stack.alignment = .firstBaseline
+        stack.spacing = 4
+        return stack
     }()
+    
+    lazy var forgotPasswordLabel: UILabel = {
+        let label = UILabel()
+        label.text = NSLocalizedString("Forgotten password?", comment: "")
+        label.font = self.linkFont
+        label.textAlignment = .right
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        return label
+    }()
+    
+    lazy var forgottenPasswordButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle(NSLocalizedString("Reset here", comment: "reset your password here"), for: .normal)
+        button.titleLabel?.font = self.linkFont
+        button.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
+        button.addTarget(self, action: #selector(forgotPassword), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func forgotPassword() {
+        guard MFMailComposeViewController.canSendMail() else {
+            messageHandler.displayAlertFor("Email isn't available on this device", parentCtrl: self)
+            return
+        }
+        let composer = MFMailComposeViewController()
+        composer.setToRecipients(["support@workfinder.com"])
+        let email = self.email.textfield.text ?? ""
+        let emailString = email.isEmpty ? "???@?????.???" : email
+        composer.setPreferredSendingEmailAddress(emailString)
+        composer.setMessageBody("Hi support@Workfinder.com,\n\nPlease reset the password for the user with email: \(emailString)\n\nThis email was generated from an iOS client\n", isHTML: false)
+        composer.setSubject("Password reset request")
+        composer.mailComposeDelegate = self
+        present(composer, animated: true, completion: nil)
+    }
     
     lazy var termsAgreedStack: UIStackView = {
         let textStack = UIStackView(arrangedSubviews: [
             self.termsAndConditionsLabel,
-            self.termsAndConditionsButton
+            self.termsAndConditionsButton,
+            UIView()
         ])
         textStack.axis = .horizontal
         textStack.alignment = .firstBaseline
@@ -152,6 +192,14 @@ class RegisterAndSignInBaseViewController: UIViewController {
         stack.alignment = .center
         stack.axis = .horizontal
         return stack
+    }()
+    
+    lazy var termsAndConditionsLabel: UILabel = {
+        let linkLabel = UILabel()
+        linkLabel.text = NSLocalizedString("I accept Workfinder's", comment: "I accept Workfinder's terms of service")
+        linkLabel.font = self.linkFont
+        linkLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        return linkLabel
     }()
     
     lazy var termsAgreedSwitch: UISwitch = {
@@ -174,11 +222,13 @@ class RegisterAndSignInBaseViewController: UIViewController {
     lazy var switchModeStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
             self.switchModeLabel,
-            self.switchModeButton
+            self.switchModeButton,
+            UIView()
         ])
         stack.axis = .horizontal
         stack.alignment = .firstBaseline
         stack.spacing = 4
+        stack.setContentHuggingPriority(.required, for: .horizontal)
         return stack
     }()
     
@@ -210,33 +260,11 @@ class RegisterAndSignInBaseViewController: UIViewController {
         return stack
     }()
     
-    lazy var forgotPasswordStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [
-            self.forgotPasswordLabel,
-            self.forgottenPasswordButton
-        ])
-        stack.axis = .horizontal
-        stack.alignment = .firstBaseline
-        stack.spacing = 4
-        return stack
-    }()
-    
-    lazy var forgotPasswordLabel: UILabel = {
-        let label = UILabel()
-        label.text = NSLocalizedString("Forgotten password?", comment: "")
-        label.font = self.linkFont
-        label.textAlignment = .right
-        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        return label
-    }()
-    
-    lazy var forgottenPasswordButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle(NSLocalizedString("Reset here", comment: "reset your password here"), for: .normal)
-        button.titleLabel?.font = self.linkFont
-        button.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
-        button.addTarget(self, action: #selector(getter: switchMode), for: .touchUpInside)
-        return button
+    lazy var bottomStack: UIStackView = {
+        let bottomStack = UIStackView(arrangedSubviews: [])
+        bottomStack.axis = .vertical
+        bottomStack.spacing = 20
+        return bottomStack
     }()
     
     lazy var primaryButton: WorkfinderPrimaryButton = {
@@ -247,13 +275,6 @@ class RegisterAndSignInBaseViewController: UIViewController {
         button.setTitle(registerTitle, for: .disabled)
         button.isEnabled = false
         return button
-    }()
-    
-    lazy var bottomStack: UIStackView = {
-        let bottomStack = UIStackView(arrangedSubviews: [])
-        bottomStack.axis = .vertical
-        bottomStack.spacing = 20
-        return bottomStack
     }()
     
     lazy var scrollableContentView: UIView = {
@@ -315,7 +336,7 @@ class RegisterAndSignInBaseViewController: UIViewController {
     }
     
     func scrollForKeyboardForInputY() {
-        let overlap = (inputControlBottom + 40) - keyboardTop
+        let overlap = (inputControlBottom + 80) - keyboardTop
         let scrollAmount: CGFloat = (overlap > 0) ? overlap : 0
         scrollView.setContentOffset(CGPoint(x: 0, y: scrollAmount), animated: true)
     }
@@ -333,5 +354,26 @@ extension RegisterAndSignInBaseViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         inputControlBottom = 0
+    }
+}
+
+extension RegisterAndSignInBaseViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        dismiss(animated: true, completion: { [weak self] in
+            guard let self = self else { return }
+            let messageHandler = self.messageHandler
+            switch result {
+            case .sent:
+                messageHandler.displayWithTitle("Sent", "Your password reset request has been sent", parentCtrl: self)
+            case .failed:
+                messageHandler.displayWithTitle("Failed", "Unable to send password reset email", parentCtrl: self)
+            case .cancelled:
+                break
+            case .saved:
+                messageHandler.displayWithTitle("Saved", "Your password reset request email has been saved in to drafts", parentCtrl: self)
+            @unknown default:
+                break
+            }
+        })
     }
 }

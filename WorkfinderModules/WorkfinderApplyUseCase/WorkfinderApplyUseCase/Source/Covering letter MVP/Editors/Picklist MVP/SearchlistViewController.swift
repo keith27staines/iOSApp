@@ -5,7 +5,7 @@ import WorkfinderUI
 class SearchlistViewController<A: Codable>: UIViewController, UISearchBarDelegate {
     
     weak var coordinator: PicklistCoordinatorProtocol?
-    let picklist: TextSearchPicklistProtocol
+    var picklist: TextSearchPicklistProtocol
     var dataSource: PicklistDataSourceAndDelegate!
     
     lazy var searchBar: UISearchBar = {
@@ -26,6 +26,7 @@ class SearchlistViewController<A: Codable>: UIViewController, UISearchBarDelegat
     override func viewDidLoad() {
         navigationItem.title = "Select \(picklist.title)"
         configureViews()
+        picklist.selectedItems = [PicklistItemJson(uuid: "text", value: "workaround for no data from server")]
     }
     
     override func viewDidDisappear(_ animated: Bool) {

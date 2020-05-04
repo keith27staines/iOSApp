@@ -277,8 +277,8 @@
 			isa = PBXGroup;
 			children = (
 				FC343CF92445F17600347BC2 /* RegisterAndSignInCoordinator.swift */,
-				FC96DE38245C2F930074011B /* SignInViewController.swift */,
 				FC343CF72445F10A00347BC2 /* RegisterUserViewController.swift */,
+				FC96DE38245C2F930074011B /* SignInViewController.swift */,
 				FC96DE36245C1EDD0074011B /* RegisterAndSignInBaseViewController.swift */,
 				FC343CFB244600EF00347BC2 /* RegisterUserPresenter.swift */,
 				FCCA4E3124570CE900DFA696 /* RegisterUserLogic.swift */,

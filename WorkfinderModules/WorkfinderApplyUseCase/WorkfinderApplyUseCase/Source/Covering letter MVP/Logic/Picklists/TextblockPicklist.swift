@@ -7,7 +7,7 @@ public class TextblockPicklist: HardCodedPicklist {
         self.placeholder = placeholder
         super.init(type: type, maximumPicks: 1, networkConfig: networkConfig)
         items = [
-            PicklistItemJson(uuid: "text", value: "")
+            PicklistItemJson(uuid: "text", value: "text")
         ]
     }
 }
