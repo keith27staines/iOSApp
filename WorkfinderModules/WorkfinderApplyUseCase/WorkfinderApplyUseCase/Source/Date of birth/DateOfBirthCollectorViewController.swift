@@ -12,7 +12,7 @@ class DateOfBirthCollectorViewController: UIViewController {
     
     weak var coordinator: DateOfBirthCoordinatorProtocol?
     
-    let under18Text = "We're updating the Workfinder App. Currently, applications are only open to candidates who are aged over 18. The App will be reopen for younger candidates with the next update in a few weeks' time. Thanks in advance for your patience while we make some improvements."
+    let under18Text = "We're updating the Workfinder App. Currently, applications are only open to candidates who are aged over 18. The App will reopen for younger candidates with the next update in a few weeks' time. Thanks in advance for your patience while we make some improvements."
     
     lazy var under18Label: UILabel = {
         let label = UILabel()
@@ -34,7 +34,7 @@ class DateOfBirthCollectorViewController: UIViewController {
             textField.text = formatter.string(from: dateOfBirth)
             let isOver18 = ageNow(dob: dateOfBirth) >= 18
             setPrimaryButtonEnabledState(isOver18)
-            UIView.animate(withDuration: 0.2) {
+            UIView.animate(withDuration: 0.3) {
                 if isOver18 {
                     self.under18Label.alpha = 0
                 } else {

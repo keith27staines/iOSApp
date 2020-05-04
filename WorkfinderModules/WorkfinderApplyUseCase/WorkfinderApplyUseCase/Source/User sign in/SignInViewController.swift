@@ -14,7 +14,7 @@ class SignInViewController: RegisterAndSignInBaseViewController {
     
     override func configureViews() {
         fieldStack.addArrangedSubview(email)
-        fieldStack.addArrangedSubview(password)
+        fieldStack.addArrangedSubview(passwordStack)
         email.textChanged?(self.presenter.email)
         password.textChanged?(self.presenter.password)
         email.textfield.nextResponderField = password

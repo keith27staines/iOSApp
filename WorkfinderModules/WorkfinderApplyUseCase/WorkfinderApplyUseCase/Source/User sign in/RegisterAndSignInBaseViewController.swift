@@ -71,47 +71,51 @@ class RegisterAndSignInBaseViewController: UIViewController {
     lazy var email: UnderlinedNextResponderTextFieldStack = {
         let fieldName = NSLocalizedString("Email address", comment: "")
         let stack = self.makeTextView(fieldName: fieldName)
-        stack.textfield.returnKeyType = .next
-        stack.textfield.keyboardType = .emailAddress
-        stack.textfield.textContentType = .username
-        stack.textfield.placeholder = fieldName
-        stack.textfield.autocapitalizationType = .none
-        stack.textfield.inputAccessoryView = makeKeyboardInputAccessoryView()
+        let textField = stack.textfield
+        textField.returnKeyType = .next
+        textField.keyboardType = .emailAddress
+        textField.textContentType = .username
+        textField.placeholder = fieldName
+        textField.autocapitalizationType = .none
+        textField.inputAccessoryView = makeKeyboardInputAccessoryView(responder: textField)
         return stack
     }()
     
     lazy var fullname: UnderlinedNextResponderTextFieldStack = {
         let fieldName = NSLocalizedString("First and last name", comment: "")
         let stack = self.makeTextView(fieldName: fieldName)
-        stack.textfield.returnKeyType = .next
-        stack.textfield.keyboardType = .alphabet
-        stack.textfield.autocapitalizationType = .words
-        stack.textfield.placeholder = fieldName
-        stack.textfield.inputAccessoryView = makeKeyboardInputAccessoryView()
+        let textField = stack.textfield
+        textField.returnKeyType = .next
+        textField.keyboardType = .alphabet
+        textField.autocapitalizationType = .words
+        textField.placeholder = fieldName
+        textField.inputAccessoryView = makeKeyboardInputAccessoryView(responder: textField)
         return stack
     }()
     
     lazy var nickname: UnderlinedNextResponderTextFieldStack = {
         let fieldName = NSLocalizedString("nickname", comment: "The user's preferred short name for themself")
         let stack = self.makeTextView(fieldName: fieldName)
-        stack.textfield.returnKeyType = .next
-        stack.textfield.keyboardType = .alphabet
-        stack.textfield.autocapitalizationType = .words
-        stack.textfield.textContentType = .nickname
-        stack.textfield.placeholder = fieldName
-        stack.textfield.inputAccessoryView = makeKeyboardInputAccessoryView()
+        let textField = stack.textfield
+        textField.returnKeyType = .next
+        textField.keyboardType = .alphabet
+        textField.autocapitalizationType = .words
+        textField.textContentType = .nickname
+        textField.placeholder = fieldName
+        textField.inputAccessoryView = makeKeyboardInputAccessoryView(responder: textField)
         return stack
     }()
     
     lazy var phone: UnderlinedNextResponderTextFieldStack = {
         let fieldName = NSLocalizedString("Phone number", comment: "")
         let stack = self.makeTextView(fieldName: fieldName)
-        stack.textfield.returnKeyType = .next
-        stack.textfield.keyboardType = .phonePad
-        stack.textfield.autocapitalizationType = .none
-        stack.textfield.textContentType = .telephoneNumber
-        stack.textfield.placeholder = fieldName
-        stack.textfield.inputAccessoryView = makeKeyboardInputAccessoryView()
+        let textField = stack.textfield
+        textField.returnKeyType = .next
+        textField.keyboardType = .phonePad
+        textField.autocapitalizationType = .none
+        textField.textContentType = .telephoneNumber
+        textField.placeholder = fieldName
+        textField.inputAccessoryView = makeKeyboardInputAccessoryView(responder: textField)
         return stack
     }()
     
@@ -127,6 +131,25 @@ class RegisterAndSignInBaseViewController: UIViewController {
         stack.textfield.returnKeyType = .next
         stack.textfield.isSecureTextEntry = true
         stack.textfield.placeholder = NSLocalizedString("enter new password", comment: "prompt user to enter password")
+        return stack
+    }()
+    
+    lazy var passwordInstructionLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont.preferredFont(forTextStyle: .caption2)
+        label.text = "Passwords must be at least 8 characters, mixture of lower and upper case and numbers"
+        label.textColor = UIColor.gray
+        return label
+    }()
+    
+    lazy var passwordStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            self.password,
+            self.passwordInstructionLabel
+        ])
+        stack.axis = .vertical
+        stack.spacing = 2
         return stack
     }()
     
@@ -170,7 +193,7 @@ class RegisterAndSignInBaseViewController: UIViewController {
         let email = self.email.textfield.text ?? ""
         let emailString = email.isEmpty ? "???@?????.???" : email
         composer.setPreferredSendingEmailAddress(emailString)
-        composer.setMessageBody("Hi support@Workfinder.com,\n\nPlease reset the password for the user with email: \(emailString)\n\nThis email was generated from an iOS client\n", isHTML: false)
+        composer.setMessageBody("Hi support@Workfinder.com,\n\nPlease reset the password for the user with email: \(emailString)\n\nThis email was generated from Workfinder iOS client\n", isHTML: false)
         composer.setSubject("Password reset request")
         composer.mailComposeDelegate = self
         present(composer, animated: true, completion: nil)
@@ -314,14 +337,8 @@ class RegisterAndSignInBaseViewController: UIViewController {
         return field
     }
     
-    func makeKeyboardInputAccessoryView() -> UIView {
-        let view = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        view.barStyle = UIBarStyle.default
-        view.items = [
-            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(title: "Hide keyboard", style: UIBarButtonItem.Style.plain, target: self, action: #selector(hideKeyboard))]
-        view.sizeToFit()
-        return view
+    func makeKeyboardInputAccessoryView(responder: UIResponder) -> UIView {
+        return NextHideToolbar(responder: responder) { self.hideKeyboard() }
     }
     
     override func viewDidLayoutSubviews() {
@@ -377,3 +394,4 @@ extension RegisterAndSignInBaseViewController: MFMailComposeViewControllerDelega
         })
     }
 }
+

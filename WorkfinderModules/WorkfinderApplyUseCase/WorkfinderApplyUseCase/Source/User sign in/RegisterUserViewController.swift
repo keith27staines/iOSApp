@@ -12,22 +12,18 @@ class RegisterUserViewController: RegisterAndSignInBaseViewController {
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
-    @objc func nextFieldAfterPassword() {
-        phone.becomeFirstResponder()
-    }
-    
     override func configureViews() {
         fieldStack.addArrangedSubview(email)
         fieldStack.addArrangedSubview(fullname)
-        fieldStack.addArrangedSubview(password)
         fieldStack.addArrangedSubview(phone)
+        fieldStack.addArrangedSubview(passwordStack)
         email.textChanged?(self.presenter.email)
         fullname.textChanged?(self.presenter.fullname)
-        password.textChanged?(self.presenter.password)
         phone.textChanged?(self.presenter.phone)
+        password.textChanged?(self.presenter.password)
         email.textfield.nextResponderField = fullname
-        fullname.textfield.nextResponderField = password
-        password.textfield.nextResponderField = phone
+        fullname.textfield.nextResponderField = phone
+        phone.textfield.nextResponderField = password
         bottomStack.addArrangedSubview(termsAgreedStack)
         bottomStack.addArrangedSubview(switchModeStack)
         bottomStack.addArrangedSubview(primaryButton)

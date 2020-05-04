@@ -17,6 +17,10 @@ public class UnderlinedNextResponderTextFieldStack: UIStackView {
         return nextResponderField
     }()
     
+    override public func becomeFirstResponder() -> Bool {
+        textfield.becomeFirstResponder()
+    }
+    
     public lazy var greenTickContainer: UIView = {
         let view = UIView()
         view.addSubview(self.greenTick)
