@@ -195,7 +195,7 @@
 			path = "cover letter tests";
 			sourceTree = "<group>";
 		};
-		FC23BCE9243B33510075F359 /* Covering letter MVP */ = {
+		FC23BCE9243B33510075F359 /* Covering letter */ = {
 			isa = PBXGroup;
 			children = (
 				FC23BCFC243B33510075F359 /* CoverLetterCoordinator.swift */,
@@ -205,7 +205,7 @@
 				FC23BCEC243B33510075F359 /* Logic */,
 				FC23BCF8243B33510075F359 /* Editors */,
 			);
-			path = "Covering letter MVP";
+			path = "Covering letter";
 			sourceTree = "<group>";
 		};
 		FC23BCEC243B33510075F359 /* Logic */ = {
@@ -347,7 +347,7 @@
 				FC1053702458784200024706 /* SuccessPopupView.swift */,
 				FCD20A84244D788800AAA5FD /* Date of birth */,
 				FC343CF62445F0E200347BC2 /* User sign in */,
-				FC23BCE9243B33510075F359 /* Covering letter MVP */,
+				FC23BCE9243B33510075F359 /* Covering letter */,
 				FC299947231ED87600F83FB6 /* F4SDaysAndHours.storyboard */,
 				FCE8DA8A2320D42600934E2F /* Success screen */,
 				FCF4FACE22646502000EE4B7 /* Models */,

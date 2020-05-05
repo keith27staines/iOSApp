@@ -31,9 +31,19 @@ public class DataTaskCompletionHandler {
                 guard let  data = data else {
                     let httpError = NetworkError.responseBodyEmpty(response)
                     let result = Result<Data, Error>.failure(httpError)
+                    self?.logger.logDataTaskFailure(
+                        attempting: attempting,
+                        error: httpError,
+                        request: request,
+                        response: response,
+                        responseData: nil)
                     completion(result)
                     return
                 }
+                self?.logger.logDataTaskSuccess(
+                    request: request,
+                    response: response,
+                    responseData: data)
                 completion(Result<Data,Error>.success(data))
             default:
                 let httpError = NetworkError.httpError(response)
