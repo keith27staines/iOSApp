@@ -125,6 +125,7 @@ extension CoverLetterCoordinator: F4SCalendarCollectionViewControllerDelegate {
             PicklistItemJson(uuid: "first", value: dateFormatter.string(from: startDate)),
             PicklistItemJson(uuid: "last", value: dateFormatter.string(from: endDate))
         ]
+        letterEditorViewController?.refresh()
     }
     
     func makeDate(year: Int, month: Int, day: Int) -> Date {
