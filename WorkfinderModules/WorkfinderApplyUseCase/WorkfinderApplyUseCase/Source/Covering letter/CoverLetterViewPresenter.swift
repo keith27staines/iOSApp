@@ -55,7 +55,7 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
         allPickListsDictionary.forEach { (keyValue) in
             let (_, picklist) = keyValue
             let items = picklist.selectedItems.map { (picklistIem) -> String in
-                return picklistIem.value ?? "unnamed value"
+                return picklistIem.value ?? (picklistIem.name ?? "unnamed value")
             }
             if !items.isEmpty {
                 fieldValues[picklist.title] = Grammar().commaSeparatedList(strings: items)

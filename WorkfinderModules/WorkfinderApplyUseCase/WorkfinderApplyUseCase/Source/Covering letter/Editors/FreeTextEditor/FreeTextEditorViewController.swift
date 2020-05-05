@@ -25,7 +25,11 @@ class FreeTextEditorViewController: UIViewController {
         let view = UIView()
         view.addSubview(self.textView)
         view.addSubview(self.placeholderTextView)
-        self.textView.fillSuperview()
+        textView.fillSuperview(padding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+        textView.layer.borderWidth = 2
+        textView.layer.backgroundColor = UIColor.darkGray.cgColor
+        textView.layer.cornerRadius = 8
+        textView.layer.masksToBounds = true
         self.placeholderTextView.fillSuperview()
         return view
     }()

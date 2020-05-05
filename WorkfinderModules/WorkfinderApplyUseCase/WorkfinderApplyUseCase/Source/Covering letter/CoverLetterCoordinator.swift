@@ -42,13 +42,13 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
     }
     
     var networkConfig: NetworkConfig { return injected.networkConfig}
-    
+    let otherItem = PicklistItemJson(uuid: "other", value: "Other")
     lazy var allPicklistsDictionary: PicklistsDictionary = [
-        .attributes: Picklist(type: .attributes, maximumPicks: 3, networkConfig: networkConfig),
-        .roles: Picklist(type: .roles, maximumPicks: 1, networkConfig: networkConfig),
-        .skills: Picklist(type: .skills, maximumPicks: 3, networkConfig: networkConfig),
-        .universities: TextSearchPicklist(type: .universities, networkConfig: networkConfig),
-        .year: UniversityYearPicklist(networkConfig: networkConfig),
+        .attributes: Picklist(type: .attributes, otherItem: nil, maximumPicks: 3, networkConfig: networkConfig),
+        .roles: Picklist(type: .roles, otherItem: nil, maximumPicks: 1, networkConfig: networkConfig),
+        .skills: Picklist(type: .skills, otherItem: nil, maximumPicks: 3, networkConfig: networkConfig),
+        .universities: TextSearchPicklist(type: .universities, otherItem: self.otherItem, networkConfig: networkConfig),
+        .year: UniversityYearPicklist(otherItem: otherItem, networkConfig: networkConfig),
         .availabilityPeriod: AvailabilityPeriodPicklist(networkConfig: networkConfig),
         .motivation: TextblockPicklist(
             type: .motivation,

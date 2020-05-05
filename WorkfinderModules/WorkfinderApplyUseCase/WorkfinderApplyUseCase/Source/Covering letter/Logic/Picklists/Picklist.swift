@@ -10,6 +10,7 @@ public class Picklist: PicklistProtocol {
     public var mimumPicks: Int = 1
     public var maximumPicks: Int = 3
     public var items: [PicklistItemJson]
+    public var otherItem: PicklistItemJson?
     public var selectedItems: [PicklistItemJson]
     public var provider: PicklistProviderProtocol?
     let networkConfig: NetworkConfig
@@ -17,7 +18,7 @@ public class Picklist: PicklistProtocol {
     
     public func selectItem(_ item: PicklistItemJson) {
         if !selectedItems.contains(where: { (otherItem) -> Bool in
-            otherItem.uuid == item.uuid
+            otherItem.guaranteedUuid == item.guaranteedUuid
         }) {
             selectedItems.append(item)
         }
@@ -25,12 +26,13 @@ public class Picklist: PicklistProtocol {
     
     public func deselectItem(_ item: PicklistItemJson) {
         guard let index = selectedItems.firstIndex(where: { (otherItem) -> Bool in
-            return otherItem.uuid == item.uuid
+            return otherItem.guaranteedUuid == item.guaranteedUuid
         })  else { return }
         selectedItems.remove(at: index)
     }
     
-    public init(type: PicklistType, maximumPicks: Int, networkConfig: NetworkConfig) {
+    public init(type: PicklistType, otherItem: PicklistItemJson?, maximumPicks: Int, networkConfig: NetworkConfig) {
+        self.otherItem = otherItem
         self.type = type
         self.items = []
         self.selectedItems = []
@@ -59,6 +61,10 @@ public class Picklist: PicklistProtocol {
                         PicklistItemJson(uuid: UUID().uuidString, value: "I made this up")
                     ]
                 }
+                self.items.sort { (item1, item2) -> Bool in
+                    (item1.guarenteedName < item2.guarenteedName)
+                }
+                if let otherItem = self.otherItem { self.items.append(otherItem) }
                 completion(self,Result<[PicklistItemJson],Error>.success(self.items))
             case .failure(let error):
                 completion(self,Result<[PicklistItemJson],Error>.failure(error))

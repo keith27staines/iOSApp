@@ -26,7 +26,6 @@ class SearchlistViewController<A: Codable>: UIViewController, UISearchBarDelegat
     override func viewDidLoad() {
         navigationItem.title = "Select \(picklist.title)"
         configureViews()
-        picklist.selectedItems = [PicklistItemJson(uuid: "text", value: "workaround for no data from server")]
     }
     
     override func viewDidDisappear(_ animated: Bool) {

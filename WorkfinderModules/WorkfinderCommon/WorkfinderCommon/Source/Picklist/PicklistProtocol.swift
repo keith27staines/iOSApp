@@ -2,6 +2,7 @@
 public typealias PicklistsDictionary = [PicklistType: PicklistProtocol]
 
 public protocol PicklistProtocol {
+    var otherItem: PicklistItemJson? { get set }
     var type: PicklistType { get }
     var items: [PicklistItemJson] { get }
     var title: String { get }
