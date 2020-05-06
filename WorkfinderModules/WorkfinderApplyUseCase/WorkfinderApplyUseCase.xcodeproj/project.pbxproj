@@ -28,6 +28,7 @@
 		FC23BD08243B33510075F359 /* LetterEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCFA243B33510075F359 /* LetterEditorViewController.swift */; };
 		FC23BD09243B33510075F359 /* CoverLetterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCFB243B33510075F359 /* CoverLetterViewController.swift */; };
 		FC23BD0A243B33510075F359 /* CoverLetterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCFC243B33510075F359 /* CoverLetterCoordinator.swift */; };
+		FC2917F42461C2660011EFCD /* PicklistTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2917F32461C2660011EFCD /* PicklistTableViewCells.swift */; };
 		FC29992A231EC41A00F83FB6 /* F4SPageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC299925231EC41700F83FB6 /* F4SPageHeaderView.swift */; };
 		FC29992B231EC41A00F83FB6 /* F4SDaysAndHoursViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC299926231EC41800F83FB6 /* F4SDaysAndHoursViewController.swift */; };
 		FC29992C231EC41A00F83FB6 /* F4SDisplayInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC299927231EC41900F83FB6 /* F4SDisplayInformationViewController.swift */; };
@@ -57,7 +58,9 @@
 		FC6A50D6245ABAD500EF5C92 /* HardCodedPicklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6A50D5245ABAD500EF5C92 /* HardCodedPicklist.swift */; };
 		FC6A50D8245AD59800EF5C92 /* PicklistDataSourceAndDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6A50D7245AD59800EF5C92 /* PicklistDataSourceAndDelegate.swift */; };
 		FC6E3D2D2248D74A00377736 /* WorkfinderApplyUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF102248BDCC00D9B8D1 /* WorkfinderApplyUseCase.framework */; };
-		FC84A669243EF43F00C9D158 /* FreeTextEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC84A668243EF43F00C9D158 /* FreeTextEditorViewController.swift */; };
+		FC70249324629FFF007A7667 /* FreeTextEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC70249224629FFF007A7667 /* FreeTextEditorViewController.swift */; };
+		FC7024952462A070007A7667 /* OtherPicklistItemEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7024942462A070007A7667 /* OtherPicklistItemEditorViewController.swift */; };
+		FC84A669243EF43F00C9D158 /* TextEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC84A668243EF43F00C9D158 /* TextEditorViewController.swift */; };
 		FC85D9F222F205610035C724 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC85D9F122F205610035C724 /* WorkfinderAppLogic.framework */; };
 		FC9626392248C1A900D5F850 /* EditApplicationLetterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9626332248C1A900D5F850 /* EditApplicationLetterButton.swift */; };
 		FC96DE37245C1EDD0074011B /* RegisterAndSignInBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96DE36245C1EDD0074011B /* RegisterAndSignInBaseViewController.swift */; };
@@ -104,6 +107,7 @@
 		FC23BCFA243B33510075F359 /* LetterEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LetterEditorViewController.swift; sourceTree = "<group>"; };
 		FC23BCFB243B33510075F359 /* CoverLetterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverLetterViewController.swift; sourceTree = "<group>"; };
 		FC23BCFC243B33510075F359 /* CoverLetterCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverLetterCoordinator.swift; sourceTree = "<group>"; };
+		FC2917F32461C2660011EFCD /* PicklistTableViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicklistTableViewCells.swift; sourceTree = "<group>"; };
 		FC299925231EC41700F83FB6 /* F4SPageHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SPageHeaderView.swift; sourceTree = "<group>"; };
 		FC299926231EC41800F83FB6 /* F4SDaysAndHoursViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDaysAndHoursViewController.swift; sourceTree = "<group>"; };
 		FC299927231EC41900F83FB6 /* F4SDisplayInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDisplayInformationViewController.swift; sourceTree = "<group>"; };
@@ -134,7 +138,9 @@
 		FC6A50D7245AD59800EF5C92 /* PicklistDataSourceAndDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicklistDataSourceAndDelegate.swift; sourceTree = "<group>"; };
 		FC6E3D282248D74A00377736 /* WorkfinderApplyUseCaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderApplyUseCaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC6E3D2C2248D74A00377736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FC84A668243EF43F00C9D158 /* FreeTextEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeTextEditorViewController.swift; sourceTree = "<group>"; };
+		FC70249224629FFF007A7667 /* FreeTextEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeTextEditorViewController.swift; sourceTree = "<group>"; };
+		FC7024942462A070007A7667 /* OtherPicklistItemEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherPicklistItemEditorViewController.swift; sourceTree = "<group>"; };
+		FC84A668243EF43F00C9D158 /* TextEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorViewController.swift; sourceTree = "<group>"; };
 		FC85D9EF22F204140035C724 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC85D9F122F205610035C724 /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC9626332248C1A900D5F850 /* EditApplicationLetterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditApplicationLetterButton.swift; sourceTree = "<group>"; };
@@ -226,7 +232,7 @@
 				FC23BCF9243B33510075F359 /* LetterEditor MVP */,
 				FC42C8A4243C5C7B00F81232 /* Picklist MVP */,
 				FC299924231EC38700F83FB6 /* Calendar */,
-				FC84A66A243EF44F00C9D158 /* FreeTextEditor */,
+				FC84A66A243EF44F00C9D158 /* Text editors */,
 			);
 			path = Editors;
 			sourceTree = "<group>";
@@ -296,6 +302,7 @@
 				FC42C8A5243C5C9A00F81232 /* PicklistViewController.swift */,
 				FCFDCE592459DE12006BA3AC /* SearchlistViewController.swift */,
 				FC6A50D7245AD59800EF5C92 /* PicklistDataSourceAndDelegate.swift */,
+				FC2917F32461C2660011EFCD /* PicklistTableViewCells.swift */,
 			);
 			path = "Picklist MVP";
 			sourceTree = "<group>";
@@ -332,12 +339,14 @@
 			name = "Supporting files";
 			sourceTree = "<group>";
 		};
-		FC84A66A243EF44F00C9D158 /* FreeTextEditor */ = {
+		FC84A66A243EF44F00C9D158 /* Text editors */ = {
 			isa = PBXGroup;
 			children = (
-				FC84A668243EF43F00C9D158 /* FreeTextEditorViewController.swift */,
+				FC84A668243EF43F00C9D158 /* TextEditorViewController.swift */,
+				FC70249224629FFF007A7667 /* FreeTextEditorViewController.swift */,
+				FC7024942462A070007A7667 /* OtherPicklistItemEditorViewController.swift */,
 			);
-			path = FreeTextEditor;
+			path = "Text editors";
 			sourceTree = "<group>";
 		};
 		FC9626222248C07800D5F850 /* Source */ = {
@@ -587,15 +596,18 @@
 				FC299934231EC50300F83FB6 /* F4SCalendarContainerViewController.swift in Sources */,
 				FC299935231EC50300F83FB6 /* F4SMonthHeaderView.swift in Sources */,
 				FC6A50D4245ABA8100EF5C92 /* UniversityYearPicklist.swift in Sources */,
+				FC2917F42461C2660011EFCD /* PicklistTableViewCells.swift in Sources */,
 				FC299936231EC50300F83FB6 /* F4SCalendarColors.swift in Sources */,
 				FC23BCFF243B33510075F359 /* TemplateParser.swift in Sources */,
 				FC23BD00243B33510075F359 /* Common.swift in Sources */,
 				FCE8DA9A2320E24600934E2F /* ApplyCoordinator.swift in Sources */,
 				FC1053712458784200024706 /* SuccessPopupView.swift in Sources */,
 				FC42C8A6243C5C9A00F81232 /* PicklistViewController.swift in Sources */,
+				FC70249324629FFF007A7667 /* FreeTextEditorViewController.swift in Sources */,
 				FC96DE3B245C37C20074011B /* RegisterAndSignInMode.swift in Sources */,
 				FC23BD02243B33510075F359 /* Grammer.swift in Sources */,
-				FC84A669243EF43F00C9D158 /* FreeTextEditorViewController.swift in Sources */,
+				FC7024952462A070007A7667 /* OtherPicklistItemEditorViewController.swift in Sources */,
+				FC84A669243EF43F00C9D158 /* TextEditorViewController.swift in Sources */,
 				FCFDCE5A2459DE12006BA3AC /* SearchlistViewController.swift in Sources */,
 				FC96DE39245C2F930074011B /* SignInViewController.swift in Sources */,
 				FC343CFA2445F17600347BC2 /* RegisterAndSignInCoordinator.swift in Sources */,

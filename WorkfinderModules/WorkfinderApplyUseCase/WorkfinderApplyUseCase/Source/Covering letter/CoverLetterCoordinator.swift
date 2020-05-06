@@ -52,13 +52,13 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
         .availabilityPeriod: AvailabilityPeriodPicklist(networkConfig: networkConfig),
         .motivation: TextblockPicklist(
             type: .motivation,
-            placeholder: "My motivation for seeking work experience is...", networkConfig: networkConfig),
+            networkConfig: networkConfig),
         .reason: TextblockPicklist(
             type: .reason,
-            placeholder: "I’m particularly interested in working with you or your company because...", networkConfig: networkConfig),
+            networkConfig: networkConfig),
         .experience: TextblockPicklist(
             type: .experience,
-            placeholder: "My relevant experience is... or why you should consider me", networkConfig: networkConfig)
+            networkConfig: networkConfig)
     ]
     
     var picklistsDidUpdate: ((PicklistsDictionary) -> Void)?
@@ -136,13 +136,14 @@ extension CoverLetterCoordinator: F4SCalendarCollectionViewControllerDelegate {
 }
 
 extension CoverLetterCoordinator: PicklistCoordinatorProtocol {
+    
     func picklistIsClosing(_ picklist: PicklistProtocol) {
         letterEditorViewController?.refresh()
     }
 }
 
-extension CoverLetterCoordinator: FreeTextEditorCoordinatorProtocol {
-    func textEditorIsClosing() {
+extension CoverLetterCoordinator: TextEditorCoordinatorProtocol {
+    func textEditorIsClosing(text: String) {
         letterEditorViewController?.refresh()
     }
 }

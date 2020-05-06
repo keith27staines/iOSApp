@@ -124,7 +124,7 @@ extension LetterEditorViewController: UITableViewDataSource {
 class PicklistCell: UITableViewCell {
     
     func configureWithPicklist(_ picklist: PicklistProtocol) {
-        label1.text = picklist.title.capitalizingFirstLetter()
+        label1.text = picklist.type.title.capitalizingFirstLetter()
         label2.text = picklist.itemSelectedSummary
     }
     
@@ -164,7 +164,7 @@ class PicklistCell: UITableViewCell {
 class PicklistDescriptionCell: UITableViewCell {
     
     func configureWithPicklist(_ picklist: PicklistProtocol) {
-        label.text = picklist.userInstruction
+        label.text = picklist.type.userInstruction
     }
     
     lazy var label: UILabel = {

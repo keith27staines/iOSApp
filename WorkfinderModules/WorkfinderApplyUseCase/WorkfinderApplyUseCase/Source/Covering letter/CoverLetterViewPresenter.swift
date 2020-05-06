@@ -58,7 +58,7 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
                 return picklistIem.value ?? (picklistIem.name ?? "unnamed value")
             }
             if !items.isEmpty {
-                fieldValues[picklist.title] = Grammar().commaSeparatedList(strings: items)
+                fieldValues[picklist.type.title] = Grammar().commaSeparatedList(strings: items)
             }
         }
         _letterDisplayString = renderer.renderToPlainString(with: fieldValues)
@@ -76,7 +76,7 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     func picklistsReferencedByTemplate() -> PicklistsDictionary {
         return allPickListsDictionary.filter { (element) -> Bool in
             let picklist = element.value
-            return embeddedFieldNames.contains(picklist.title)
+            return embeddedFieldNames.contains(picklist.type.title)
         }
     }
     

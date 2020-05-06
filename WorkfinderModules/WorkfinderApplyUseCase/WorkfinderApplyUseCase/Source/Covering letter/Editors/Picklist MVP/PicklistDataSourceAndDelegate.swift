@@ -1,12 +1,19 @@
 import UIKit
 import WorkfinderCommon
 
+protocol OtherItemEditorProtocol: AnyObject {
+    func edit(_ : PicklistItemJson)
+}
+
 class PicklistDataSourceAndDelegate: NSObject, UITableViewDataSource, UITableViewDelegate {
     let picklist: PicklistProtocol
+    weak var otherItemEditor: OtherItemEditorProtocol?
     
-    init(picklist: PicklistProtocol, tableView: UITableView) {
+    init(picklist: PicklistProtocol, tableView: UITableView, otherItemEditor: OtherItemEditorProtocol) {
         self.picklist = picklist
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.otherItemEditor = otherItemEditor
+        tableView.register(StandardPicklistItemTableViewCell.self, forCellReuseIdentifier: "standard")
+        tableView.register(OtherPicklistItemTableViewCell.self, forCellReuseIdentifier: "other")
         super.init()
         tableView.dataSource = self
         tableView.delegate = self
@@ -21,17 +28,16 @@ class PicklistDataSourceAndDelegate: NSObject, UITableViewDataSource, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
         let item = picklist.items[indexPath.row]
-        cell.textLabel?.text = item.value ?? item.name
-        if picklist.selectedItems.contains(where: { (otherItem) -> Bool in
-            otherItem.guaranteedUuid == item.guaranteedUuid
-        }) {
-            cell.accessoryType = .checkmark
+        if item.uuid == "other" {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "other") as? OtherPicklistItemTableViewCell else { return UITableViewCell() }
+            cell.configureWith(item, picklist: picklist)
+            return cell
         } else {
-            cell.accessoryType = .none
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "standard") as? StandardPicklistItemTableViewCell else {return UITableViewCell() }
+            cell.configureWith(item, picklist: picklist)
+            return cell
         }
-        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -61,6 +67,15 @@ class PicklistDataSourceAndDelegate: NSObject, UITableViewDataSource, UITableVie
             }
         }
         tableView.reloadRows(at: [indexPath], with: .automatic)
+        editItemIfNecessary(item)
+    }
+    
+    func editItemIfNecessary(_ item: PicklistItemJson) {
+        switch item.guaranteedUuid {
+        case "other":
+            self.otherItemEditor?.edit(item)
+        default: return
+        }
     }
 }
 

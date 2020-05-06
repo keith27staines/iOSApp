@@ -72,52 +72,6 @@ public class Picklist: PicklistProtocol {
         }
     }
     
-    lazy public var title: String = {
-        switch type {
-        case .roles:
-            return NSLocalizedString("role", comment: "")
-        case .skills:
-            return NSLocalizedString("skills", comment: "")
-        case .attributes:
-            return NSLocalizedString("attributes", comment: "")
-        case .universities:
-            return NSLocalizedString("educational institution", comment: "")
-        case .year:
-            return NSLocalizedString("year", comment: "")
-        case .motivation:
-            return NSLocalizedString("motivation", comment: "")
-        case .reason:
-            return NSLocalizedString("reason", comment: "")
-        case .experience:
-            return NSLocalizedString("experience", comment: "")
-        case .availabilityPeriod:
-            return NSLocalizedString("availability", comment: "")
-        }
-    }()
-    
-    lazy public var userInstruction: String = {
-        switch type {
-        case .roles:
-            return NSLocalizedString("Select the kind of role you are looking for", comment: "")
-        case .skills:
-            return NSLocalizedString("Choose up to three employment skills you are hoping to acquire through this Work Experience placement", comment: "")
-        case .attributes:
-            return NSLocalizedString("Select up to three personal attributes that describe you", comment: "")
-        case .universities:
-            return NSLocalizedString("Select the university you are currently attending", comment: "")
-        case .year:
-            return NSLocalizedString("Select your year of study", comment: "")
-        case .availabilityPeriod:
-            return NSLocalizedString("Select your availability", comment: "")
-        case .motivation:
-            return NSLocalizedString("your motivation", comment: "")
-        case .reason:
-            return NSLocalizedString("your reason for applying", comment: "")
-        case .experience:
-            return NSLocalizedString("Your experience", comment: "")
-        }
-    }()
-    
     public var itemSelectedSummary: String {
         guard selectedItems.count > 0 else { return "" }
         switch type {

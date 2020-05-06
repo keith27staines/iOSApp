@@ -111,11 +111,7 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
     }
     
     var applyButtonState: (String, Bool, UIColor) {
-        if true   {
-            return ("Apply", true, WorkfinderColors.primaryGreen)
-        } else {
-            return ("Choose a host", false, UIColor.lightGray)
-        }
+        return ("Apply", true, WorkfinderColors.primaryGreen)
     }
         
     func onDidUpdate() {

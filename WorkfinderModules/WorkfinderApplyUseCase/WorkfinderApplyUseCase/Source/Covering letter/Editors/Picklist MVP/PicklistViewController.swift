@@ -1,9 +1,10 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderCoordinators
 import WorkfinderUI
 
-protocol PicklistCoordinatorProtocol: class {
+protocol PicklistCoordinatorProtocol: CoreInjectionNavigationCoordinatorProtocol {
     func picklistIsClosing(_ picklist: PicklistProtocol)
 }
 
@@ -14,13 +15,13 @@ class PicklistViewController: UITableViewController {
     var dataSource: PicklistDataSourceAndDelegate!
     
     override func viewDidLoad() {
-        navigationItem.title = "Select \(picklist.title)"
+        navigationItem.title = "Select \(picklist.type.title)"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         view.backgroundColor = UIColor.white
         navigationItem.largeTitleDisplayMode = .automatic
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         coordinator?.picklistIsClosing(picklist)
     }
     
@@ -30,8 +31,25 @@ class PicklistViewController: UITableViewController {
         super.init(nibName: nil, bundle: nil)
         self.dataSource = PicklistDataSourceAndDelegate(
             picklist: self.picklist,
-            tableView: self.tableView)
+            tableView: self.tableView,
+            otherItemEditor: self)
     }
         
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+}
+
+extension PicklistViewController: OtherItemEditorProtocol {
+    func edit(_ item: PicklistItemJson) {
+        let vc = OtherPicklistItemEditorViewController(
+            coordinator: self,
+            picklistItem: item,
+            type: picklist.type)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension PicklistViewController: TextEditorCoordinatorProtocol {
+    func textEditorIsClosing(text: String) {
+        picklist.otherItem?.otherValue = text
+    }
 }

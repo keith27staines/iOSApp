@@ -24,7 +24,7 @@ class SearchlistViewController<A: Codable>: UIViewController, UISearchBarDelegat
     }()
     
     override func viewDidLoad() {
-        navigationItem.title = "Select \(picklist.title)"
+        navigationItem.title = "Select \(picklist.type.title)"
         configureViews()
     }
     
@@ -53,7 +53,8 @@ class SearchlistViewController<A: Codable>: UIViewController, UISearchBarDelegat
         super.init(nibName: nil, bundle: nil)
         self.dataSource = PicklistDataSourceAndDelegate(
             picklist: self.picklist,
-            tableView: self.tableView)
+            tableView: self.tableView,
+            otherItemEditor: self)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -65,4 +66,9 @@ class SearchlistViewController<A: Codable>: UIViewController, UISearchBarDelegat
     }
     
     required init?(coder: NSCoder)  { fatalError("init(coder:) has not been implemented") }
+}
+
+extension SearchlistViewController: OtherItemEditorProtocol {
+    func edit(_: PicklistItemJson) {
+    }
 }

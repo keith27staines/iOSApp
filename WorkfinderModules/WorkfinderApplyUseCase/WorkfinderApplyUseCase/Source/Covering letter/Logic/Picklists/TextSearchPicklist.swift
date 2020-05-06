@@ -1,7 +1,7 @@
 import WorkfinderCommon
 import WorkfinderServices
 
-public protocol TextSearchPicklistProtocol: class, PicklistProtocol {
+public protocol TextSearchPicklistProtocol: PicklistProtocol {
     func clearResults()
     func fetchMatches(matchingString: String, completion: @escaping ((Result<PicklistServerJson, Error>) -> Void))
 }
