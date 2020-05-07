@@ -228,7 +228,7 @@ class RegisterAndSignInBaseViewController: UIViewController {
     lazy var termsAgreedSwitch: UISwitch = {
         let agreeSwitch = UISwitch()
         agreeSwitch.isOn = false
-        agreeSwitch.thumbTintColor = WorkfinderColors.primaryGreen
+        agreeSwitch.thumbTintColor = WorkfinderColors.primaryColor
         agreeSwitch.addTarget(self, action: #selector(agreedTermsAndConditionsChanged), for: .valueChanged)
         return agreeSwitch
     }()

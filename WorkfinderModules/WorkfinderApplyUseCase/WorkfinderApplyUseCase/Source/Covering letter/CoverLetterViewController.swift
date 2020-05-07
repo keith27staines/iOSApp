@@ -16,7 +16,7 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
     func refresh(from presenter: CoverLetterViewPresenterProtocol) {
         coverLetterTextView.attributedText = presenter.attributedDisplayString
         nextButton.isEnabled = presenter.nextButtonIsEnabled
-        let color = presenter.nextButtonIsEnabled ? WorkfinderColors.primaryGreen : WorkfinderColors.lightGrey
+        let color = presenter.nextButtonIsEnabled ? WorkfinderColors.primaryColor : WorkfinderColors.lightGrey
         nextButton.setBackgroundColor(color: color, forUIControlState: .normal)
         editButton.configureForLetterIsCompleteState(presenter.nextButtonIsEnabled)
     }

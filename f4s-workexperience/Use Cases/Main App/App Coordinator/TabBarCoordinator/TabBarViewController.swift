@@ -63,8 +63,8 @@ class TabBarViewController: UITabBarController {
     // MARK: - UI Setup
     fileprivate func configureTabBar() {
         Skinner().apply(tabBarSkin: skin?.tabBarSkin, to: self)
-        tabBar.unselectedItemTintColor = UIColor.darkGray
-        tabBar.tintColor = UIColor.init(red: 0.0, green: 0, blue: 0.7, alpha: 1)
+        tabBar.unselectedItemTintColor = UIColor.lightGray
+        tabBar.tintColor = WorkfinderColors.primaryColor
     }
 
     override func viewWillAppear(_ animation: Bool) {

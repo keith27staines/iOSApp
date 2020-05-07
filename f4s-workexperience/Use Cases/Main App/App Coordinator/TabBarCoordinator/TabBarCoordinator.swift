@@ -4,6 +4,7 @@ import WorkfinderServices
 import WorkfinderUI
 import WorkfinderCoordinators
 import WorkfinderOnboardingUseCase
+import WorkfinderApplications
 
 class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     
@@ -122,14 +123,25 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         searchCoordinator = makeSearchCoordinator()
         
         let searchNavigationController = searchCoordinator.navigationRouter.navigationController
-
+        let applicationsNavigationController = applicationsCoordinator.navigationRouter.navigationController
         searchCoordinator.start()
-        
+        applicationsCoordinator.start()
         tabBarViewController = TabBarViewController()
         tabBarViewController.viewControllers = [
+            applicationsNavigationController,
             searchNavigationController]
         tabBarViewController.delegate = self
     }
+    
+    lazy var applicationsCoordinator: ApplicationsCoordinator = {
+        let navigationController = UINavigationController()
+        let icon = UIImage(named: "home")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        navigationController.tabBarItem = UITabBarItem(title: "Applications", image: icon, selectedImage: nil)
+        let router = NavigationRouter(navigationController: navigationController)
+        let coordinator = ApplicationsCoordinator(parent: nil, navigationRouter: router, inject: injected)
+        addChildCoordinator(coordinator)
+        return coordinator
+    }()
     
     lazy var homeCoordinator: HomeCoordinator = {
         let navigationController = UINavigationController()
@@ -221,6 +233,8 @@ extension TabBarCoordinator: UITabBarControllerDelegate {
         switch viewController {
         case searchCoordinator.navigationRouter.navigationController:
             injected.log.track(event: TrackEvent.searchTabTap, properties: nil)
+        case applicationsCoordinator.navigationRouter.navigationController:
+            injected.log.track(event: TrackEvent.applicationsTabTap, properties: nil)
         default:
             fatalError("unknown coordinator")
         }

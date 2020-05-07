@@ -111,7 +111,7 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
     }
     
     var applyButtonState: (String, Bool, UIColor) {
-        return ("Apply", true, WorkfinderColors.primaryGreen)
+        return ("Apply", true, WorkfinderColors.primaryColor)
     }
         
     func onDidUpdate() {

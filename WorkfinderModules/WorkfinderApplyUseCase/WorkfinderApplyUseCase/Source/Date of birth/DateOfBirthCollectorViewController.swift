@@ -47,7 +47,7 @@ class DateOfBirthCollectorViewController: UIViewController {
     func setPrimaryButtonEnabledState(_ enabled: Bool) {
         if enabled {
             nextButton.isEnabled = true
-            nextButton.backgroundColor = WorkfinderColors.primaryGreen
+            nextButton.backgroundColor = WorkfinderColors.primaryColor
         } else {
             nextButton.backgroundColor = UIColor.lightGray
             nextButton.isEnabled = false

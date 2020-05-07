@@ -63,7 +63,7 @@ extension ContentViewController {
 
     func adjustNavigationBar() {
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissPage))
-        doneButton.tintColor = WorkfinderColors.primaryGreen
+        doneButton.tintColor = WorkfinderColors.primaryColor
         doneButton.title = NSLocalizedString("Done", comment: "")
         self.navigationItem.leftBarButtonItem = doneButton
         self.navigationController?.navigationBar.barTintColor = UIColor.white

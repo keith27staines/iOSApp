@@ -262,7 +262,7 @@ class HostSelectionView: UIView {
         didSet {
             switch isSelected {
             case true:
-                buttonCenterView.layer.backgroundColor = WorkfinderColors.primaryGreen.cgColor
+                buttonCenterView.layer.backgroundColor = WorkfinderColors.primaryColor.cgColor
             case false:
                 buttonCenterView.layer.backgroundColor = UIColor.white.cgColor
             }

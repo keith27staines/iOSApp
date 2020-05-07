@@ -71,7 +71,7 @@ class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewP
         tableView.reloadData()
         applyButton.setTitle("Apply", for: .normal)
         applyButton.isEnabled = presenter.isHostSelected
-        applyButton.backgroundColor = presenter.isHostSelected ? WorkfinderColors.primaryGreen : UIColor.init(white: 0.9, alpha: 1)
+        applyButton.backgroundColor = presenter.isHostSelected ? WorkfinderColors.primaryColor : UIColor.init(white: 0.9, alpha: 1)
     }
     
     lazy var headerView: CompanyHeaderViewProtocol = {

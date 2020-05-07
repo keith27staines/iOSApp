@@ -1,5 +1,6 @@
 
 public enum TrackEvent: String {
+    case applicationsTabTap
     case sideMenuToggle                         // checked
     case sideMenuAboutWorkfinderLinkTap         // checked
     case sideMenuFAQLinkTap                     // checked
@@ -93,6 +94,7 @@ public enum TrackEvent: String {
 
 
 public enum ScreenName: String {
+    case applications = "APPLICATIONS TAB"
     case map = "Map TAB"
     case companySearch = "Company Search POP"
     case companyClusterList = "Company Cluster List POP"
