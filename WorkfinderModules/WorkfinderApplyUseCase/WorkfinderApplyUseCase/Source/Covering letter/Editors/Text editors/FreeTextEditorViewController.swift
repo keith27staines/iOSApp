@@ -20,11 +20,13 @@ class FreeTextEditorViewController: TextEditorViewController {
         super.viewWillDisappear(animated)
     }
     
-    init(coordinator: TextEditorCoordinatorProtocol,freeTextPicker: TextblockPicklist) {
+    init(coordinator: TextEditorCoordinatorProtocol,
+         freeTextPicker: TextblockPicklist) {
         self.freeTextPicker = freeTextPicker
         super.init(coordinator: coordinator,
-                   guidanceText: freeTextPicker.type.userInstruction,
-                   placeholderText: freeTextPicker.type.userInstruction)
+                   editorTitle: freeTextPicker.type.textBlockEditorTitle,
+                   guidanceText: freeTextPicker.type.textblockGuidance,
+                   placeholderText: freeTextPicker.type.textblockPlaceholder)
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

@@ -15,9 +15,12 @@ class OtherPicklistItemEditorViewController: TextEditorViewController {
         super.viewWillDisappear(animated)
     }
     
-    init(coordinator: TextEditorCoordinatorProtocol,picklistItem: PicklistItemJson, type: PicklistType) {
+    init(coordinator: TextEditorCoordinatorProtocol,
+         picklistItem: PicklistItemJson,
+         type: PicklistType) {
         self.picklistItem = picklistItem
         super.init(coordinator: coordinator,
+                   editorTitle: type.otherEditorTitle,
                    guidanceText: type.otherFieldGuidanceText,
                    placeholderText: type.otherFieldPlaceholderText)
     }

@@ -80,39 +80,92 @@ public enum PicklistType: Int, CaseIterable {
         case .availabilityPeriod:
             return NSLocalizedString("Select your availability", comment: "")
         case .motivation:
-            return NSLocalizedString("your motivation", comment: "")
+            return NSLocalizedString("Your motivation", comment: "")
         case .reason:
-            return NSLocalizedString("your reason for applying", comment: "")
+            return NSLocalizedString("Your reason for applying", comment: "")
         case .experience:
             return NSLocalizedString("Your experience", comment: "")
         }
     }
     
     public var otherFieldGuidanceText: String {
+        let things: String
         switch self {
-        case .roles: return "Guidance for 'other' roles"
-        case .skills: return "Guidance for 'other' skills"
-        case .attributes: return "Guidance for 'other' attributes"
-        case .universities: return "Guidance for 'other' universities"
-        case .year: return "Guidance for 'other' year"
-        case .availabilityPeriod: return "Guidance for 'other' availability"
-        case .motivation: return "Guidance for 'other' motivation"
-        case .reason: return "Guidance for 'other' reason"
-        case .experience: return "Guidance for 'other' experience"
+        case .roles: things = "roles"
+        case .skills: things = "skills"
+        case .attributes: things = "attributes"
+        case .universities: things = "universities"
+        case .year: things = "study years"
+        case .availabilityPeriod: things = ""
+        case .motivation: things = ""
+        case .reason: things = ""
+        case .experience: things = ""
+        }
+        return "You selected 'Other' from our list of \(things). Please give more details below."
+    }
+    
+    public var textBlockEditorTitle: String {
+        switch self {
+        case .roles: return ""
+        case .skills: return ""
+        case .attributes: return ""
+        case .universities: return ""
+        case .year: return ""
+        case .availabilityPeriod: return ""
+        case .motivation: return "Motivation"
+        case .reason: return "Motivation"
+        case .experience: return "Experience"
+        }
+    }
+    
+    public var otherEditorTitle: String {
+        switch self {
+        case .roles: return ""
+        case .skills: return ""
+        case .attributes: return ""
+        case .universities: return ""
+        case .year: return "Other year"
+        case .availabilityPeriod: return ""
+        case .motivation: return "Motivation"
+        case .reason: return "Motivation"
+        case .experience: return "Experience"
         }
     }
     
     public var otherFieldPlaceholderText: String {
         switch self {
-        case .roles: return "Placeholder text for 'other' roles"
-        case .skills: return "Placeholder text for 'other' skills"
-        case .attributes: return "Placeholder text for 'other' attributes"
-        case .universities: return "Placeholder text for 'other' universities"
-        case .year: return "Placeholder text for 'other' year"
-        case .availabilityPeriod: return "Placeholder text for 'other' availability"
-        case .motivation: return "Placeholder text for 'other' motivation"
-        case .reason: return "Placeholder text for 'other' reason"
-        case .experience: return "Placeholder text for 'other' experience"
+        case .roles: return ""
+        case .skills: return ""
+        case .attributes: return ""
+        case .universities: return ""
+        case .year: return ""
+        case .availabilityPeriod: return ""
+        case .motivation: return ""
+        case .reason: return ""
+        case .experience: return ""
+        }
+    }
+    
+    public var textblockGuidance: String {
+        switch self {
+        case .roles:
+            return ""
+        case .skills:
+            return ""
+        case .attributes:
+            return ""
+        case .universities:
+            return ""
+        case .year:
+            return ""
+        case .availabilityPeriod:
+            return ""
+        case .motivation:
+            return "Please describe what is motivating you to apply for this position"
+        case .reason:
+            return ""
+        case .experience:
+            return "Please describe what experience you have that is relevant to this position"
         }
     }
     
@@ -126,11 +179,11 @@ public enum PicklistType: Int, CaseIterable {
         case .year: return ""
         case .availabilityPeriod: return ""
         case .motivation:
-            return "My motivation for seeking work experience is..."
+            return "Tip: I’m particularly interested in working with you or your company because..."
         case .reason:
-            return "I’m particularly interested in working with you or your company because..."
+            return "Tip: I’m particularly interested in working with you or your company because..."
         case .experience:
-            return "My relevant experience is... or why you should consider me"
+            return "Tip: My relevant experience is.. or why you should employ me"
         }
     }
 }

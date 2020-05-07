@@ -82,11 +82,15 @@ class TextEditorViewController: UIViewController {
         if isMovingFromParent { coordinator?.textEditorIsClosing(text: text) }
     }
     
-    init(coordinator: TextEditorCoordinatorProtocol, guidanceText: String, placeholderText: String) {
+    init(coordinator: TextEditorCoordinatorProtocol,
+         editorTitle: String,
+         guidanceText: String,
+         placeholderText: String) {
         self.coordinator = coordinator
         self.guidanceText = guidanceText
         self.placeholderText = placeholderText
         super.init(nibName: nil, bundle: nil)
+        self.title = editorTitle
     }
     
     required init?(coder: NSCoder) {
