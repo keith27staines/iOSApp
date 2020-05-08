@@ -34,15 +34,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // Handle being invoked from a universal link in safari running on the current device
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        guard let url = userActivity.webpageURL else {
+//    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+//        guard let url = userActivity.webpageURL else {
+//            return false
+//        }
+//        setInvokingUrl(url)
+//        return true
+//    }
+    
+    func application(_ application: UIApplication,
+                     continue userActivity: NSUserActivity,
+                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool
+    {
+        // Get URL components from the incoming user activity
+        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+            let incomingURL = userActivity.webpageURL,
+            let components = NSURLComponents(url: incomingURL, resolvingAgainstBaseURL: true) else {
             return false
         }
-        setInvokingUrl(url)
-        return true
+
+        // Check for specific URL components that you need
+        guard let path = components.path,
+        let params = components.queryItems else { return false }
+        
+        print("receive universal link with path = \(path)")
+        setInvokingUrl(incomingURL)
+        return true  // If can't handle, return false
     }
     
-    // Handle being invoked from a smart banner somewhere out there on the web
+    // Handle being invoked from deep links or a smart banner somewhere out there on the web
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
         setInvokingUrl(url)

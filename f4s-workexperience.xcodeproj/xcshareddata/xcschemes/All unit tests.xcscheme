@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "40E78E121DD31A86000A3776"
-               BuildableName = "f4s_workexperience.app"
+               BuildableName = "Workfinder.app"
                BlueprintName = "f4s-workexperience"
                ReferencedContainer = "container:f4s-workexperience.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "40E78E121DD31A86000A3776"
-            BuildableName = "f4s_workexperience.app"
+            BuildableName = "Workfinder.app"
             BlueprintName = "f4s-workexperience"
             ReferencedContainer = "container:f4s-workexperience.xcodeproj">
          </BuildableReference>
@@ -48,7 +48,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "40E78E121DD31A86000A3776"
-            BuildableName = "f4s_workexperience.app"
+            BuildableName = "Workfinder.app"
             BlueprintName = "f4s-workexperience"
             ReferencedContainer = "container:f4s-workexperience.xcodeproj">
          </BuildableReference>
@@ -341,7 +341,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "40E78E121DD31A86000A3776"
-            BuildableName = "f4s_workexperience.app"
+            BuildableName = "Workfinder.app"
             BlueprintName = "f4s-workexperience"
             ReferencedContainer = "container:f4s-workexperience.xcodeproj">
          </BuildableReference>
@@ -362,7 +362,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "40E78E121DD31A86000A3776"
-            BuildableName = "f4s_workexperience.app"
+            BuildableName = "Workfinder.app"
             BlueprintName = "f4s-workexperience"
             ReferencedContainer = "container:f4s-workexperience.xcodeproj">
          </BuildableReference>
