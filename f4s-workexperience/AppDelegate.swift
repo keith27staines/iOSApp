@@ -13,13 +13,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var appCoordinator: AppCoordinatorProtocol!
     
     var log: F4SAnalyticsAndDebugging { return appCoordinator.log }
-    
     // MARK:- Application events
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
         // Prevent the entire application being built if we are just running unit tests
         if ProcessInfo.processInfo.arguments.contains("isUnitTesting") { return true }
- 
         DataFixes().run()
         masterBuilder = MasterBuilder(registrar: application, launchOptions: launchOptions)
         window = masterBuilder.window
@@ -32,15 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appCoordinator.start()
         companyFileDownloadManager = self.masterBuilder.companyFileDownloadManager
     }
-    
-    // Handle being invoked from a universal link in safari running on the current device
-//    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-//        guard let url = userActivity.webpageURL else {
-//            return false
-//        }
-//        setInvokingUrl(url)
-//        return true
-//    }
     
     func application(_ application: UIApplication,
                      continue userActivity: NSUserActivity,
@@ -56,15 +44,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Check for specific URL components that you need
         guard let path = components.path,
         let params = components.queryItems else { return false }
-        
-        print("receive universal link with path = \(path)")
         setInvokingUrl(incomingURL)
         return true  // If can't handle, return false
     }
     
     // Handle being invoked from deep links or a smart banner somewhere out there on the web
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        
         setInvokingUrl(url)
         return true
     }

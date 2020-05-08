@@ -96,6 +96,8 @@
 		FC771F572416299B00AD6317 /* PinDownloadFileParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771F542416299A00AD6317 /* PinDownloadFileParserTests.swift */; };
 		FC771F582416299B00AD6317 /* PinRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771F552416299B00AD6317 /* PinRepositoryTests.swift */; };
 		FC771F592416299B00AD6317 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771F562416299B00AD6317 /* Common.swift */; };
+		FC7B63E12465257D006AC0C6 /* Example apple-app-site-association in Resources */ = {isa = PBXBuildFile; fileRef = FC7B63E02465257D006AC0C6 /* Example apple-app-site-association */; };
+		FC7B63E424652FD2006AC0C6 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC7B63E324652FD2006AC0C6 /* AuthenticationServices.framework */; };
 		FC888AE8242A6CDC00BAA8B1 /* Json in Resources */ = {isa = PBXBuildFile; fileRef = FC888AE7242A6CDC00BAA8B1 /* Json */; };
 		FC8E303A20F4A60B006059DE /* F4SLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8E303920F4A60B006059DE /* F4SLogger.swift */; };
 		FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC92567A1F8F70D100FF9841 /* InterestsModel.swift */; };
@@ -143,6 +145,7 @@
 		FCE51E44221039D600DC1D50 /* PersonSearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E43221039D600DC1D50 /* PersonSearchDataGetter.swift */; };
 		FCEE5E1E2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEE5E1D2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift */; };
 		FCF0D16C1FBC244800F2AF1D /* PopupAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */; };
+		FCF6B6522465559600D40FCE /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF6B6512465559600D40FCE /* Icon-Small@2x.png */; };
 		FCF992D3234CE01B00DBC179 /* firebase_staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCF992D2234CE01B00DBC179 /* firebase_staging.plist */; };
 		FCFC06AD23225B9E003C59C8 /* LatLon+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06AC23225B9E003C59C8 /* LatLon+Extensions.swift */; };
 /* End PBXBuildFile section */
@@ -231,7 +234,7 @@
 		40C1A5171DDF5ACE000F80AA /* POIItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = POIItem.h; path = "Google-Maps-iOS-Utils/POIItem.h"; sourceTree = "<group>"; };
 		40C1A5181DDF5ACE000F80AA /* POIItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = POIItem.m; path = "Google-Maps-iOS-Utils/POIItem.m"; sourceTree = "<group>"; };
 		40C1A5261DE58EED000F80AA /* CutomClusterIconGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CutomClusterIconGenerator.swift; sourceTree = "<group>"; };
-		40E78E131DD31A86000A3776 /* f4s_workexperience.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = f4s_workexperience.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		40E78E131DD31A86000A3776 /* Workfinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workfinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40E78E161DD31A86000A3776 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40E78E1D1DD31A86000A3776 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40E78E201DD31A86000A3776 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -313,6 +316,9 @@
 		FC771F552416299B00AD6317 /* PinRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinRepositoryTests.swift; sourceTree = "<group>"; };
 		FC771F562416299B00AD6317 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		FC79314720226D440034D201 /* F4SDistribution.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = F4SDistribution.entitlements; path = Config/F4SDistribution.entitlements; sourceTree = "<group>"; };
+		FC7B63E02465257D006AC0C6 /* Example apple-app-site-association */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Example apple-app-site-association"; sourceTree = "<group>"; };
+		FC7B63E224652FD2006AC0C6 /* f4s_workexperienceReleaseF4SLive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = f4s_workexperienceReleaseF4SLive.entitlements; sourceTree = "<group>"; };
+		FC7B63E324652FD2006AC0C6 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		FC888AE7242A6CDC00BAA8B1 /* Json */ = {isa = PBXFileReference; lastKnownFileType = text; path = Json; sourceTree = "<group>"; };
 		FC8E303920F4A60B006059DE /* F4SLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SLogger.swift; sourceTree = "<group>"; };
 		FC92567A1F8F70D100FF9841 /* InterestsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsModel.swift; sourceTree = "<group>"; };
@@ -354,6 +360,7 @@
 		FCEF221E232A9E24004914F7 /* WorkfinderFavouritesUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderFavouritesUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupAnimator.swift; sourceTree = "<group>"; };
 		FCF4B651232BC49A001340DF /* WorkfinderOnboardingUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderOnboardingUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCF6B6512465559600D40FCE /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small@2x.png"; path = "../../../Desktop/Icon-Small@2x.png"; sourceTree = "<group>"; };
 		FCF992D2234CE01B00DBC179 /* firebase_staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = firebase_staging.plist; sourceTree = "<group>"; };
 		FCFBD0062250D69700A9361D /* f4s-workexperienceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "f4s-workexperienceTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCFBD00A2250D69700A9361D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -373,6 +380,7 @@
 				FCBA984124506D8B00C3D2E6 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */,
 				FCBA984B24506D8C00C3D2E6 /* WorkfinderServices.framework in Frameworks */,
 				FC56A0F02455B62B00A7EC3F /* WorkfinderCommon.framework in Frameworks */,
+				FC7B63E424652FD2006AC0C6 /* AuthenticationServices.framework in Frameworks */,
 				FCBA984F24506D8C00C3D2E6 /* WorkfinderUserDetailsUseCase.framework in Frameworks */,
 				FCBA984324506D8B00C3D2E6 /* WorkfinderCoordinators.framework in Frameworks */,
 				FCBA984724506D8B00C3D2E6 /* WorkfinderNetworking.framework in Frameworks */,
@@ -447,6 +455,8 @@
 		40E78E0A1DD31A86000A3776 = {
 			isa = PBXGroup;
 			children = (
+				FCF6B6512465559600D40FCE /* Icon-Small@2x.png */,
+				FC7B63E02465257D006AC0C6 /* Example apple-app-site-association */,
 				FCC85DC124515F2F00BC600E /* Top level files */,
 				40E78E151DD31A86000A3776 /* f4s-workexperience */,
 				FCFBD0072250D69700A9361D /* f4s-workexperienceTests */,
@@ -459,7 +469,7 @@
 		40E78E141DD31A86000A3776 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				40E78E131DD31A86000A3776 /* f4s_workexperience.app */,
+				40E78E131DD31A86000A3776 /* Workfinder.app */,
 				FCFBD0062250D69700A9361D /* f4s-workexperienceTests.xctest */,
 			);
 			name = Products;
@@ -468,6 +478,8 @@
 		40E78E151DD31A86000A3776 /* f4s-workexperience */ = {
 			isa = PBXGroup;
 			children = (
+				40E78E221DD31A86000A3776 /* Info.plist */,
+				FC7B63E224652FD2006AC0C6 /* f4s_workexperienceReleaseF4SLive.entitlements */,
 				FC15614C2450500E00612ED9 /* Workfinder StagingDebugF4SLive.entitlements */,
 				40E78E1F1DD31A86000A3776 /* LaunchScreen.storyboard */,
 				FC67711121258448000B0870 /* Assets */,
@@ -485,7 +497,6 @@
 			isa = PBXGroup;
 			children = (
 				D5E9EBEA1DD60AB300BD796E /* Localizable.strings */,
-				40E78E221DD31A86000A3776 /* Info.plist */,
 				40E78E8E1DD32C4E000A3776 /* Settings.bundle */,
 				20A2F1C11DDC8F040079DDBC /* f4s-workexperience-Bridging-Header.h */,
 			);
@@ -587,6 +598,7 @@
 		74E1A74324CAFF4EF516E014 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC7B63E324652FD2006AC0C6 /* AuthenticationServices.framework */,
 				FC06A19C24641C930023DE99 /* WorkfinderApplications.framework */,
 				FC56A0EF2455B62B00A7EC3F /* WorkfinderCommon.framework */,
 				FCBA983324506D8B00C3D2E6 /* WorkfinderAppLogic.framework */,
@@ -1022,7 +1034,7 @@
 			);
 			name = "f4s-workexperience";
 			productName = "f4s-workexperience";
-			productReference = 40E78E131DD31A86000A3776 /* f4s_workexperience.app */;
+			productReference = 40E78E131DD31A86000A3776 /* Workfinder.app */;
 			productType = "com.apple.product-type.application";
 		};
 		FCFBD0052250D69700A9361D /* f4s-workexperienceTests */ = {
@@ -1121,6 +1133,7 @@
 				FC0B6B392323D5D600A1867D /* Uploads.xcassets in Resources */,
 				FC888AE8242A6CDC00BAA8B1 /* Json in Resources */,
 				FCC5EBB61F449C310085CE15 /* README.md in Resources */,
+				FC7B63E12465257D006AC0C6 /* Example apple-app-site-association in Resources */,
 				FC681C011F57473D0077BECA /* Podfile.lock in Resources */,
 				40C1A4F31DDEF2F6000F80AA /* AutoCompleteTableViewCell.xib in Resources */,
 				40E78E1E1DD31A86000A3776 /* Assets.xcassets in Resources */,
@@ -1130,6 +1143,7 @@
 				FC72219F20FE248400F10953 /* Appfile in Resources */,
 				FC5D3C6E20FE1CEC00F89169 /* Gemfile in Resources */,
 				FC681C001F57473D0077BECA /* Podfile in Resources */,
+				FCF6B6522465559600D40FCE /* Icon-Small@2x.png in Resources */,
 				FCA53B971FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib in Resources */,
 				FC4802C22354AD9300AF8F6D /* firebase_live.plist in Resources */,
 			);
@@ -1508,7 +1522,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s;
-				PRODUCT_NAME = f4s_workexperience;
+				PRODUCT_NAME = Workfinder;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ENABLE_BATCH_MODE = NO;
@@ -1582,6 +1596,7 @@
 			baseConfigurationReference = 590A4AE101882A503C247BC5 /* Pods-f4s-workexperience.releasef4slive.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
+				CODE_SIGN_ENTITLEMENTS = "f4s-workexperience/f4s_workexperienceReleaseF4SLive.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -1599,7 +1614,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s;
-				PRODUCT_NAME = f4s_workexperience;
+				PRODUCT_NAME = Workfinder;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ENABLE_BATCH_MODE = NO;
@@ -1696,7 +1711,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s;
-				PRODUCT_NAME = f4s_workexperience;
+				PRODUCT_NAME = Workfinder;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ENABLE_BATCH_MODE = NO;
@@ -1787,7 +1802,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s;
-				PRODUCT_NAME = f4s_workexperience;
+				PRODUCT_NAME = Workfinder;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ENABLE_BATCH_MODE = NO;
