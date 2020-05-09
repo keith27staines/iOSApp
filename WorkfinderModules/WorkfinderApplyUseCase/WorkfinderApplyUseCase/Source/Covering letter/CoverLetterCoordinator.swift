@@ -162,8 +162,18 @@ extension CoverLetterCoordinator: LetterEditorCoordinatorProtocol {
             
         case .availabilityPeriod:
             let storyboard = UIStoryboard(name: "F4SCalendar", bundle: __bundle)
-            let vc = storyboard.instantiateInitialViewController() as! F4SCalendarContainerViewController
+            guard let vc = storyboard.instantiateInitialViewController() as? F4SCalendarContainerViewController else { return }
             vc.delegate = self
+            if picklist.selectedItems.count > 0 {
+                if let startDateString = picklist.selectedItems[0].value {
+                    vc.firstDate = Date.workfinderDateStringToDate(startDateString)
+                }
+            }
+            if picklist.selectedItems.count > 1 {
+                if let endDateString = picklist.selectedItems[1].value {
+                    vc.lastDate = Date.workfinderDateStringToDate(endDateString)
+                }
+            }
             navigationRouter.push(viewController: vc, animated: true)
             
         case .motivation, .reason, .experience:
@@ -183,13 +193,15 @@ extension CoverLetterCoordinator: F4SCalendarCollectionViewControllerDelegate {
         
         let startDate = makeDate(year: firstDay.year, month: firstDay.monthOfYear, day: firstDay.dayOfMonth)
         let endDate = makeDate(year: lastDay.year, month: lastDay.monthOfYear, day: lastDay.dayOfMonth)
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeStyle = .none
-        dateFormatter.dateStyle = .medium
+        
         let datePicklist = picklistsStore.allPicklistsDictionary[.availabilityPeriod]
+        var startDateItem = PicklistItemJson(uuid: "first", value: startDate.workfinderDateString)
+        var endDateItem = PicklistItemJson(uuid: "last", value: endDate.workfinderDateString)
+        startDateItem.isDateString = true
+        endDateItem.isDateString = true
         datePicklist?.selectedItems = [
-            PicklistItemJson(uuid: "first", value: dateFormatter.string(from: startDate)),
-            PicklistItemJson(uuid: "last", value: dateFormatter.string(from: endDate))
+            startDateItem,
+            endDateItem
         ]
         picklistDidClose()
     }

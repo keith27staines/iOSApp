@@ -56,7 +56,18 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
         allPickListsDictionary.forEach { (keyValue) in
             let (_, picklist) = keyValue
             let items = picklist.selectedItems.map { (picklistIem) -> String in
-                return picklistIem.value ?? (picklistIem.name ?? "unnamed value")
+                if picklistIem.isDateString == true {
+                    if let date = Date.workfinderDateStringToDate(picklistIem.value ?? "") {
+                        let df = DateFormatter()
+                        df.timeStyle = .none
+                        df.dateStyle = .long
+                        return df.string(from: date)
+                    } else {
+                        return picklistIem.value ?? (picklistIem.name ?? "unnamed value")
+                    }
+                } else {
+                    return picklistIem.value ?? (picklistIem.name ?? "unnamed value")
+                }
             }
             if !items.isEmpty {
                 fieldValues[picklist.type.title] = Grammar().commaSeparatedList(strings: items)
@@ -88,7 +99,7 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
         self.view = view
         view.refresh(from: self)
         view.showLoadingIndicator()
-        self.allPickListsDictionary = picklistsStore.load()
+        self.allPickListsDictionary = loadPicklists()
         templateProvider.fetchCoverLetterTemplateListJson() { [weak self] (result) in
             self?.view?.hideLoadingIndicator()
             switch result {
@@ -97,6 +108,24 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
             case .failure(let error):
                 print("Error fetching template: \(error)")
             }
+        }
+    }
+    
+    func loadPicklists() -> PicklistsDictionary {
+        let picklists = picklistsStore.load()
+        nullifyOutofDateAvailability(picklists: picklists)
+        return picklists
+    }
+    
+    func nullifyOutofDateAvailability(picklists: PicklistsDictionary) {
+        guard
+            let availabilityPicklist = picklists[.availabilityPeriod],
+            let availabilityItem = availabilityPicklist.selectedItems.first,
+            let startDateString = availabilityItem.value,
+            let startDate = Date.workfinderDateStringToDate(startDateString)
+            else { return }
+        if startDate < Date() {
+            availabilityPicklist.selectedItems = []
         }
     }
     

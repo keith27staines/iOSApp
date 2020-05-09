@@ -37,6 +37,7 @@ public class OnboardingCoordinator : NavigationCoordinator, OnboardingCoordinato
             LocalStore().setValue(false, for: LocalStore.Key.isFirstLaunch)
             self.onboardingDidFinish?(self)
         }
+        onboardingViewController.modalPresentationStyle = .fullScreen
         navigationRouter.present(onboardingViewController, animated: false, completion: nil)
     }
     

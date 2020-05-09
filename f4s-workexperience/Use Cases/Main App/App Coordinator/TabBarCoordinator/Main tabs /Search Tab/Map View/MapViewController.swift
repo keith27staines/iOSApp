@@ -823,8 +823,14 @@ extension MapViewController {
             let fileString = try String(contentsOf: url)
             let parser = try PinDownloadFileParser(fileString: fileString)
             pins = parser.extractPins()
-            buildInterestsSet(pins: pins)
-            pinRepository = PinRepository(allPins: pins)
+            let interestsSet = buildInterestsSet(pins: pins)
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.interestSet = interestsSet
+                self.interestsRepository.allInterestsSet = interestsSet
+                self.pinRepository = PinRepository(allPins: pins)
+                completion()
+            }
         } catch {
             return
         }
@@ -841,13 +847,14 @@ extension MapViewController {
         }
     }
     
-    func buildInterestsSet(pins: [PinJson]) {
+    func buildInterestsSet(pins: [PinJson]) -> InterestSet {
+        var interestSet = InterestSet()
         pins.forEach { (pin) in
             pin.tags.forEach { tag in
                 interestSet.insert(tag)
             }
         }
-        interestsRepository.allInterestsSet = interestSet
+        return interestSet
     }
     
     /// Asynchronously reloads the map from the specified mapmodel

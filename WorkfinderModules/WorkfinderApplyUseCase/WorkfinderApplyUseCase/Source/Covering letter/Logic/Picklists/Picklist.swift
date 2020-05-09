@@ -56,9 +56,9 @@ public class Picklist: PicklistProtocol {
                 self.items = responseBody.results
                 if self.items.count == 0 {
                     self.items = [
-                        PicklistItemJson(uuid: UUID().uuidString, value: "Server failed to return pick list items again :("),
-                        PicklistItemJson(uuid: UUID().uuidString, value: "I'm a smart iphone!"),
-                        PicklistItemJson(uuid: UUID().uuidString, value: "I made this up")
+                        PicklistItemJson(uuid: "hcv1", value: "Server failed to return pick list items again :("),
+                        PicklistItemJson(uuid: "hcv2", value: "I'm a smart iphone!"),
+                        PicklistItemJson(uuid: "hcv3", value: "I made this up")
                     ]
                 }
                 self.items.sort { (item1, item2) -> Bool in

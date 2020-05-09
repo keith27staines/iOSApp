@@ -40,37 +40,57 @@ class PicklistDataSourceAndDelegate: NSObject, UITableViewDataSource, UITableVie
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let item = picklist.items[indexPath.row]
-        if picklist.maximumPicks == 1 {
-            if let previousSelection = picklist.selectedItems.first {
-                picklist.deselectItem(previousSelection)
-                let row = picklist.items.firstIndex { (otherItem) -> Bool in
-                    otherItem.guaranteedUuid == previousSelection.uuid
-                }
-                let indexPath = IndexPath(row: row!, section: 0)
-                tableView.reloadRows(at: [indexPath], with: .automatic)
-                if item.guaranteedUuid != previousSelection.guaranteedUuid {
-                    picklist.selectItem(item)
-                }
-            } else {
-                picklist.selectItem(item)
-            }
-        } else {
-            if picklist.selectedItems.contains(where: { (otherItem) -> Bool in
-                otherItem.guaranteedUuid == item.guaranteedUuid
-            }) {
-                picklist.deselectItem(item)
-            } else {
-                if picklist.selectedItems.count < picklist.maximumPicks { picklist.selectItem(item) }
-            }
-        }
-        tableView.reloadRows(at: [indexPath], with: .automatic)
-        editItemIfNecessary(item)
+    func performSelectionLogic(picklist: PicklistProtocol, tableView: UITableView, indexPath: IndexPath) {
+        maxEquals1PicklistSelectionLogic(picklist: picklist, tableView: tableView,indexPath: indexPath)
+        maxGreaterThan1PicklistSelectionLogic(picklist: picklist, indexPath: indexPath)
     }
     
-    func editItemIfNecessary(_ item: PicklistItemJson) {
+    func maxEquals1PicklistSelectionLogic(
+        picklist: PicklistProtocol,
+        tableView: UITableView,
+        indexPath: IndexPath) {
+        guard picklist.maximumPicks == 1 else { return }
+        let item = picklist.items[indexPath.row]
+        guard let previousSelection = picklist.selectedItems.first
+            else {
+            picklist.selectItem(item)
+            return
+        }
+        picklist.deselectItem(previousSelection)
+        guard let row = (picklist.items.firstIndex { (otherItem) -> Bool in
+            otherItem.guaranteedUuid == previousSelection.guaranteedUuid
+        }) else { return }
+        let indexPath = IndexPath(row: row, section: 0)
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+        if item.guaranteedUuid != previousSelection.guaranteedUuid {
+            picklist.selectItem(item)
+        }
+    }
+    
+    func maxGreaterThan1PicklistSelectionLogic(
+        picklist: PicklistProtocol,
+        indexPath: IndexPath) {
+        guard picklist.maximumPicks > 1 else
+        { return }
+        let item = picklist.items[indexPath.row]
+        if picklist.selectedItems.contains(where: { (otherItem) -> Bool in
+            otherItem.guaranteedUuid == item.guaranteedUuid
+        }) {
+            picklist.deselectItem(item)
+        } else {
+            if picklist.selectedItems.count < picklist.maximumPicks { picklist.selectItem(item) }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSelectionLogic(picklist: picklist, tableView: tableView, indexPath: indexPath)
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+        editItemAtIndexPath(indexPath)
+    }
+    
+    func editItemAtIndexPath(_ indexPath: IndexPath) {
+        let item = picklist.items[indexPath.row]
         switch item.guaranteedUuid {
         case "other":
             self.otherItemEditor?.edit(item)

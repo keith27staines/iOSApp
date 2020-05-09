@@ -2,6 +2,7 @@
 import Foundation
 
 public struct PicklistItemJson: Codable {
+    public var isDateString: Bool? = false
     public var uuid: String?
     public var value: String?
     public var name: String?
