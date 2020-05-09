@@ -121,9 +121,9 @@ protocol RatePlacementProtocol: class {
 }
 
 enum TabIndex : Int {
-    //case home
-    case timeline
-    case recommendations
-    case favourites
+//    case timeline
+//    case recommendations
+//    case favourites
+    case applications
     case map
 }

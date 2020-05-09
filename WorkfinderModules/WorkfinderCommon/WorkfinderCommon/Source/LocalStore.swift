@@ -25,6 +25,7 @@ public class LocalStore : LocalStorageProtocol {
         case user
         case candidate
         case userUuid
+        case picklistsSelectedValuesData
         
         case accessToken
 

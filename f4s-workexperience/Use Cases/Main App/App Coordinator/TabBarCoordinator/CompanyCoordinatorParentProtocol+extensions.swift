@@ -18,7 +18,7 @@ extension CoreInjectionNavigationCoordinator: CompanyCoordinatorParentProtocol {
         }
     }
     public func showMessages() {
-        injected.appCoordinator?.showMessages()
+        //injected.appCoordinator?.showMessages()
     }
     
     public func showSearch() {

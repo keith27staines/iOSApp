@@ -9,7 +9,8 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
     
     lazy var rootViewController: UIViewController = {
         let vc = UIViewController()
-        vc.view.backgroundColor = UIColor.red
+        vc.view.backgroundColor = UIColor.white
+        vc.title = "Applications"
         return vc
     }()
     

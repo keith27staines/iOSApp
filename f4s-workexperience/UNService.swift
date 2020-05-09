@@ -88,7 +88,7 @@ class UNService : NSObject {
     func dispatchToBestDestination(notificationData: F4SPushNotificationData) {
         switch notificationData.type {
         case NotificationType.message:
-            appCoordinator.showMessages()
+            break
         case NotificationType.recommendation:
             appCoordinator.showRecommendations()
         case NotificationType.rating:

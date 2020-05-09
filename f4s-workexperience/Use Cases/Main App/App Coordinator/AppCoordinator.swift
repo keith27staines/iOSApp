@@ -123,8 +123,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     }
     
     func showSearch() { tabBarCoordinator.showSearch() }
-    
-    func showMessages() { tabBarCoordinator.showMessages() }
 
     func showRecommendations() { tabBarCoordinator?.showRecommendations() }
     

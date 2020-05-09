@@ -23,7 +23,8 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     var attributedDisplayString = NSAttributedString()
     var renderer: TemplateRendererProtocol?
     let templateProvider: TemplateProviderProtocol
-    let allPickListsDictionary: PicklistsDictionary
+    let picklistsStore: PicklistsStoreProtocol
+    var allPickListsDictionary: PicklistsDictionary
     var isShowingTemplate: Bool = false
     var nextButtonIsEnabled: Bool { return renderer?.isComplete ?? false }
     var templateModel: TemplateModel
@@ -68,6 +69,7 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     func onDidTapSelectOptionsButton() {
         coordinator?.onDidTapSelectOptions(referencedPicklists: picklistsReferencedByTemplate(), completion: { [weak self] picklistsDictionary in
             guard let self = self else { return }
+            self.picklistsStore.save()
             self.updateLetterDisplayStrings()
             self.view?.refresh(from: self)
         })
@@ -86,6 +88,7 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
         self.view = view
         view.refresh(from: self)
         view.showLoadingIndicator()
+        self.allPickListsDictionary = picklistsStore.load()
         templateProvider.fetchCoverLetterTemplateListJson() { [weak self] (result) in
             self?.view?.hideLoadingIndicator()
             switch result {
@@ -106,11 +109,12 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     
     init(coordinator: CoverletterCoordinatorProtocol?,
          templateProvider: TemplateProviderProtocol,
-         allPicklistsDictionary: PicklistsDictionary) {
+         picklistsStore: PicklistsStoreProtocol) {
         self.coordinator = coordinator
         self.templateModel = defaultTemplate
         self.templateProvider = templateProvider
-        self.allPickListsDictionary = allPicklistsDictionary
+        self.picklistsStore = picklistsStore
+        self.allPickListsDictionary = [:]
     }
     
     private let defaultTemplate = TemplateModel(uuid: "", templateString:

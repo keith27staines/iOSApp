@@ -8,7 +8,7 @@ public enum ProviderType {
     case clientAvailabilityPeriod
 }
 
-public enum PicklistType: Int, CaseIterable {
+public enum PicklistType: Int, CaseIterable, Codable {
     case roles
     case skills
     case attributes

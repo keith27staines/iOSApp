@@ -11,9 +11,86 @@ public protocol CoverletterCoordinatorProtocol: class {
     func onDidTapSelectOptions(referencedPicklists: PicklistsDictionary, completion: @escaping((PicklistsDictionary)->Void))
 }
 
+public protocol PicklistsStoreProtocol {
+    var allPicklistsDictionary: PicklistsDictionary { get }
+    func load() -> PicklistsDictionary
+    func save()
+}
+public class PicklistsStore: PicklistsStoreProtocol {
+    let networkConfig: NetworkConfig
+    let localStore:LocalStorageProtocol
+    let otherItem = PicklistItemJson(uuid: "other", value: "Other")
+    
+    public init(networkConfig: NetworkConfig, localStore:LocalStorageProtocol) {
+        self.networkConfig = networkConfig
+        self.localStore = localStore
+    }
+    
+    public var allPicklistsDictionary: PicklistsDictionary = [:]
+    
+    public func load() -> PicklistsDictionary {
+        let picklists = buildPicklists()
+        let selectedItems = loadSelectedItems()
+        assignSelectedValues(picklists: picklists, selectedItems: selectedItems)
+        allPicklistsDictionary = picklists
+        return picklists
+    }
+    
+    func loadSelectedItems() -> [PicklistType: [PicklistItemJson]] {
+        typealias ItemsDictionary = [PicklistType: [PicklistItemJson]]
+        guard
+            let data = localStore.value(key: LocalStore.Key.picklistsSelectedValuesData) as? Data,
+            let items = try? JSONDecoder().decode(ItemsDictionary.self, from: data)
+            else {
+            return [:]
+        }
+        return items
+    }
+    
+    public func save() {
+        var items = [PicklistType:[PicklistItemJson]]()
+        allPicklistsDictionary.forEach { (key, picklist) in
+            items[key] = picklist.selectedItems
+        }
+        let data = try? JSONEncoder().encode(items)
+        localStore.setValue(data, for: LocalStore.Key.picklistsSelectedValuesData)
+    }
+    
+    func assignSelectedValues(picklists: PicklistsDictionary,
+                              selectedItems: [PicklistType: [PicklistItemJson]]) {
+        picklists.forEach { (key, picklist) in
+            picklist.selectedItems = selectedItems[key] ?? []
+        }
+    }
+    
+    func buildPicklists() -> PicklistsDictionary {
+        return [
+            .attributes: Picklist(type: .attributes, otherItem: nil, maximumPicks: 3, networkConfig: networkConfig),
+            .roles: Picklist(type: .roles, otherItem: nil, maximumPicks: 1, networkConfig: networkConfig),
+            .skills: Picklist(type: .skills, otherItem: nil, maximumPicks: 3, networkConfig: networkConfig),
+            .universities: TextSearchPicklist(type: .universities, otherItem: self.otherItem, networkConfig: networkConfig),
+            .year: UniversityYearPicklist(otherItem: otherItem, networkConfig: networkConfig),
+            .availabilityPeriod: AvailabilityPeriodPicklist(networkConfig: networkConfig),
+            .motivation: TextblockPicklist(
+                type: .motivation,
+                networkConfig: networkConfig),
+            .reason: TextblockPicklist(
+                type: .reason,
+                networkConfig: networkConfig),
+            .experience: TextblockPicklist(
+                type: .experience,
+                networkConfig: networkConfig)
+        ]
+    }
+}
+
 public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, CoverletterCoordinatorProtocol  {
     let templateProvider: TemplateProviderProtocol
     weak var applyCoordinator: ApplyCoordinator?
+    weak var coverLetterViewController: CoverLetterViewController?
+    weak var letterEditorViewController: LetterEditorViewProtocol?
+    var networkConfig: NetworkConfig { return injected.networkConfig}
+    var picklistsDidUpdate: ((PicklistsDictionary) -> Void)?
     
     public init(parent: ApplyCoordinator?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol, candidateDateOfBirth: Date) {
         self.applyCoordinator = parent
@@ -27,12 +104,16 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
         let presenter = CoverLetterViewPresenter(
             coordinator: self,
             templateProvider: self.templateProvider,
-            allPicklistsDictionary: self.allPicklistsDictionary)
+            picklistsStore: self.picklistsStore)
         return presenter
     }()
     
-    weak var coverLetterViewController: CoverLetterViewController?
-    weak var letterEditorViewController: LetterEditorViewProtocol?
+    lazy var picklistsStore: PicklistsStoreProtocol = {
+        let localStore = LocalStore()
+        return PicklistsStore(
+            networkConfig: self.injected.networkConfig,
+            localStore: localStore)
+    }()
     
     override public func start() {
         super.start()
@@ -40,28 +121,6 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
         self.coverLetterViewController = viewController
         navigationRouter.push(viewController: viewController, animated: true)
     }
-    
-    var networkConfig: NetworkConfig { return injected.networkConfig}
-    let otherItem = PicklistItemJson(uuid: "other", value: "Other")
-    lazy var allPicklistsDictionary: PicklistsDictionary = [
-        .attributes: Picklist(type: .attributes, otherItem: nil, maximumPicks: 3, networkConfig: networkConfig),
-        .roles: Picklist(type: .roles, otherItem: nil, maximumPicks: 1, networkConfig: networkConfig),
-        .skills: Picklist(type: .skills, otherItem: nil, maximumPicks: 3, networkConfig: networkConfig),
-        .universities: TextSearchPicklist(type: .universities, otherItem: self.otherItem, networkConfig: networkConfig),
-        .year: UniversityYearPicklist(otherItem: otherItem, networkConfig: networkConfig),
-        .availabilityPeriod: AvailabilityPeriodPicklist(networkConfig: networkConfig),
-        .motivation: TextblockPicklist(
-            type: .motivation,
-            networkConfig: networkConfig),
-        .reason: TextblockPicklist(
-            type: .reason,
-            networkConfig: networkConfig),
-        .experience: TextblockPicklist(
-            type: .experience,
-            networkConfig: networkConfig)
-    ]
-    
-    var picklistsDidUpdate: ((PicklistsDictionary) -> Void)?
     
     public func onDidTapSelectOptions(referencedPicklists: PicklistsDictionary, completion: @escaping ((PicklistsDictionary) -> Void)) {
         picklistsDidUpdate = completion
@@ -72,12 +131,18 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
     }
     
     public func onCoverLetterDidDismiss() {
+        picklistsStore.save()
         print("coordinator received: onDidCancelCoverLetter")
     }
 
     public func onDidCompleteCoverLetter() {
+        picklistsStore.save()
         self.applyCoordinator?.coverLetterCoordinatorDidComplete(presenter: presenter)
         self.parentCoordinator?.childCoordinatorDidFinish(self)
+    }
+    
+    func picklistDidClose() {
+        picklistsDidUpdate?(picklistsStore.allPicklistsDictionary)
     }
 }
 
@@ -108,7 +173,7 @@ extension CoverLetterCoordinator: LetterEditorCoordinatorProtocol {
     }
     
     func letterEditorDidComplete(view: LetterEditorViewProtocol) {
-        picklistsDidUpdate?(allPicklistsDictionary)
+        //picklistsDidUpdate?(picklistsStore.allPicklistsDictionary)
     }
 }
 
@@ -121,11 +186,12 @@ extension CoverLetterCoordinator: F4SCalendarCollectionViewControllerDelegate {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .none
         dateFormatter.dateStyle = .medium
-        allPicklistsDictionary[.availabilityPeriod]?.selectedItems = [
+        let datePicklist = picklistsStore.allPicklistsDictionary[.availabilityPeriod]
+        datePicklist?.selectedItems = [
             PicklistItemJson(uuid: "first", value: dateFormatter.string(from: startDate)),
             PicklistItemJson(uuid: "last", value: dateFormatter.string(from: endDate))
         ]
-        letterEditorViewController?.refresh()
+        picklistDidClose()
     }
     
     func makeDate(year: Int, month: Int, day: Int) -> Date {
@@ -138,12 +204,12 @@ extension CoverLetterCoordinator: F4SCalendarCollectionViewControllerDelegate {
 extension CoverLetterCoordinator: PicklistCoordinatorProtocol {
     
     func picklistIsClosing(_ picklist: PicklistProtocol) {
-        letterEditorViewController?.refresh()
+        picklistDidClose()
     }
 }
 
 extension CoverLetterCoordinator: TextEditorCoordinatorProtocol {
     func textEditorIsClosing(text: String) {
-        letterEditorViewController?.refresh()
+        picklistDidClose()
     }
 }

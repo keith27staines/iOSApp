@@ -52,26 +52,19 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     public func updateBadges() {
 
     }
-    
-    public func navigateToTimeline() {
-        closeMenu { [weak self] (success) in
-            guard let strongSelf = self else { return }
-            strongSelf.tabBarViewController.selectedIndex = TabIndex.timeline.rawValue
-        }
-    }
 
     public func navigateToRecommendations() {
-        closeMenu { [weak self] (success) in
-            guard let strongSelf = self else { return }
-            strongSelf.tabBarViewController.selectedIndex = TabIndex.recommendations.rawValue
-        }
+//        closeMenu { [weak self] (success) in
+//            guard let strongSelf = self else { return }
+//            strongSelf.tabBarViewController.selectedIndex = TabIndex.recommendations.rawValue
+//        }
     }
     
     public func navigateToFavourites() {
-        closeMenu { [weak self] (success) in
-            guard let strongSelf = self else { return }
-            strongSelf.tabBarViewController.selectedIndex = TabIndex.favourites.rawValue
-        }
+//        closeMenu { [weak self] (success) in
+//            guard let strongSelf = self else { return }
+//            strongSelf.tabBarViewController.selectedIndex = TabIndex.favourites.rawValue
+//        }
     }
     
     public func navigateToMap() {
@@ -208,10 +201,6 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
             contentType: contentType,
             dismissByPopping: true)
         navCtrl.present(content, animated: true, completion: nil)
-    }
-    
-    func showMessages() {
-        navigateToTimeline()
     }
     
     func showSearch() {
