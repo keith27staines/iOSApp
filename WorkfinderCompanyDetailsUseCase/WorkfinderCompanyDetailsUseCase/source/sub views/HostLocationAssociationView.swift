@@ -14,7 +14,9 @@ class HostLocationAssociationView : UIView {
         didSet {
             image.load(urlString: association?.host.photoUrlString, defaultImage: HostLocationAssociationView.defaultImage)
             nameLabel.text = association?.host.displayName
-            roleLabel.text = ""
+            roleLabel.text = association?.title
+            expandableLabel.text = association?.host.description ?? "Description text"
+            
             if let _ = association?.host.linkedinUrlString {
                 profileButton.isHidden = false
                 profileButton.setTitle("see more on LinkedIn", for: UIControl.State.normal)
@@ -171,9 +173,18 @@ struct ExpandableLabelState {
 class ExpandableLabel: UILabel {
     
     override var text: String? {
-        didSet {
+        set {
+            super.text = newValue
             updateHeight()
         }
+        get {
+            return super.text
+        }
+    }
+    
+    func expand() {
+        state.isExpanded = true
+        updateHeight()
     }
     
     var state = ExpandableLabelState() {
@@ -181,27 +192,27 @@ class ExpandableLabel: UILabel {
             self.updateHeight()
         }
     }
-    
+
     func updateHeight() {
         guard let text = self.text, text.isEmpty == false else {
+            self.numberOfLines = 1
             self.heightConstraint.constant = 0
-            self.numberOfLines = 0
             return
         }
-        heightConstraint.constant = state.isExpanded ? displayHeight + lineHeight: displayHeight
+        numberOfLines = lines
+        heightConstraint.constant = state.isExpanded ? expandedHeight: collapsedHeight
     }
     
-    private var minHeight: CGFloat { return 2 * lineHeight }
-    private var requiredHeight: CGFloat { return CGFloat(lines) * lineHeight }
-    private var displayHeight: CGFloat { return max(requiredHeight, minHeight) }
+    private var expandedHeight: CGFloat { return CGFloat(lines) * lineHeight }
+    private var collapsedHeight: CGFloat { return lineHeight }
     private var lineHeight: CGFloat { return font.lineHeight }
     
     override func layoutMarginsDidChange() {
-        heightConstraint.constant = state.isExpanded ? displayHeight : minHeight
+        updateHeight()
     }
     
     var isExpandable: Bool {
-        return lines > 2
+        return lines > 1
     }
     
     private var lines: Int {
@@ -209,7 +220,7 @@ class ExpandableLabel: UILabel {
         let maxSize = CGSize(width: bounds.size.width, height: CGFloat(Float.infinity))
         let charSize = font.lineHeight
         let nsText = text as NSString
-        let textSize = nsText.boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font!], context: nil)
+        let textSize = nsText.boundingRect(with: maxSize, options: [.usesLineFragmentOrigin], attributes: [NSAttributedString.Key.font: font!], context: nil)
         let linesRoundedUp = Int(ceil(textSize.height/charSize))
         return linesRoundedUp
     }
@@ -224,6 +235,7 @@ class ExpandableLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
         numberOfLines = 0
+        lineBreakMode = .byWordWrapping
         font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption1)
     }
     

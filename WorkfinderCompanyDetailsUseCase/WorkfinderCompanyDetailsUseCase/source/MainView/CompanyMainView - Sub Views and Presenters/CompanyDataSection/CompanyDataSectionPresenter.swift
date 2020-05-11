@@ -76,11 +76,16 @@ class CompanyDataSectionPresenter: CompanyDataSectionPresenterProtocol {
     }
     
     var items: [NameValueDescriptor] {
-        var items = [
-            makeDescriptor(rowType: .annualRevenue, value: self.revenueString, isButton: false),
-            makeDescriptor(rowType: .annualGrowth, value: self.growthString, isButton: false),
-            makeDescriptor(rowType: .numberOfEmployees, value: self.numberOfEmployees, isButton: false)
-            ]
+        var items  = [NameValueDescriptor]()
+        if self.revenueString != "0" {
+            items.append(makeDescriptor(rowType: .annualRevenue, value: self.revenueString, isButton: false))
+        }
+        if self.growthString != "0" {
+            items.append(makeDescriptor(rowType: .annualGrowth, value: self.growthString, isButton: false))
+        }
+        if self.numberOfEmployees != "0" {
+            items.append(makeDescriptor(rowType: .numberOfEmployees, value: self.numberOfEmployees, isButton: false))
+        }
         
         if !duedilIsHidden {
             let image = UIImage(named: "Duedil")?.scaledImage(with: CGSize(width: 18, height: 18))

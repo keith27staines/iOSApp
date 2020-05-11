@@ -11,10 +11,24 @@ protocol CompanySummarySectionPresenterProtocol {
  class CompanySummarySectionPresenter: CompanySummarySectionPresenterProtocol {
     let companyWorkplace: CompanyWorkplace
     var company: CompanyJson { companyWorkplace.companyJson }
-    var numberOfRows: Int { return SummarySectionRow.allCases.count }
+    var numberOfRows: Int { return summarySectionRowModel.count }
     
     init(companyWorkplace: CompanyWorkplace) {
         self.companyWorkplace = companyWorkplace
+        buildSummarySectionRowModel()
+    }
+    
+    var summarySectionRowModel = [SummarySectionRow]()
+    
+    func buildSummarySectionRowModel() {
+        summarySectionRowModel = [SummarySectionRow]()
+        if (company.description?.count ?? 0) > 0 {
+            summarySectionRowModel.append(SummarySectionRow.summaryText)
+        }
+        if company.industries?.count ?? 0 > 0 {
+            summarySectionRowModel.append(SummarySectionRow.industry)
+        }
+        summarySectionRowModel.append(SummarySectionRow.postcode)
     }
     
     enum SummarySectionRow: Int, CaseIterable {
@@ -35,17 +49,18 @@ protocol CompanySummarySectionPresenterProtocol {
     }
     
     func cellForRow(_ row: Int, in tableView: UITableView) -> UITableViewCell {
+        let sectionRow = summarySectionRowModel[row]
         guard
-            let sectionRow = SummarySectionRow(rawValue: row),
             let cell = tableView.dequeueReusableCell(withIdentifier: sectionRow.reuseIdentifier)
             else { return UITableViewCell() }
         
         switch sectionRow {
         case .summaryText:
             guard let summaryCell = cell as? CompanySummaryTextCell else { break }
+            summaryCell.label.font = UIFont.systemFont(ofSize: 15, weight: .light)
             let description = company.description ?? ""
-            summaryCell.expandableLabel.text = description
-            summaryCell.expandableLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
+            summaryCell.label.text = description
+            
         case .postcode:
             guard let nameValueCell = cell as? NameValueCell else { break }
             nameValueCell.nameLabel.text = "Postcode"
@@ -61,16 +76,22 @@ protocol CompanySummarySectionPresenterProtocol {
         }
         return cell
     }
+    
 }
 
 class CompanySummaryTextCell: UITableViewCell {
     static var reuseIdentifier = "CompanySummaryTextCell"
     
-    let expandableLabel = ExpandableLabel()
+    lazy var label: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        return label
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(expandableLabel)
-        expandableLabel.fillSuperview()
+        contentView.addSubview(label)
+        label.fillSuperview()
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
