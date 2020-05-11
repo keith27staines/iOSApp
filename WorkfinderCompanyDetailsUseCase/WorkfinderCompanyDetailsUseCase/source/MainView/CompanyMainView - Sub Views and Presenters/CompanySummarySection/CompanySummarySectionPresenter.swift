@@ -18,18 +18,15 @@ protocol CompanySummarySectionPresenterProtocol {
     }
     
     enum SummarySectionRow: Int, CaseIterable {
-        case industry = 0
-        case postcode
-        case summary
         case summaryText
+        case industry
+        case postcode
         
         var reuseIdentifier: String {
             switch self {
             case .industry:
                 return NameValueCell.reuseIdentifier
             case .postcode:
-                return NameValueCell.reuseIdentifier
-            case .summary:
                 return NameValueCell.reuseIdentifier
             case .summaryText:
                 return CompanySummaryTextCell.reuseIdentifier
@@ -41,30 +38,26 @@ protocol CompanySummarySectionPresenterProtocol {
         guard
             let sectionRow = SummarySectionRow(rawValue: row),
             let cell = tableView.dequeueReusableCell(withIdentifier: sectionRow.reuseIdentifier)
-        else { return UITableViewCell() }
+            else { return UITableViewCell() }
         
         switch sectionRow {
+        case .summaryText:
+            guard let summaryCell = cell as? CompanySummaryTextCell else { break }
+            let description = company.description ?? ""
+            summaryCell.expandableLabel.text = description
+            summaryCell.expandableLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
         case .postcode:
-            let nameValueCell = cell as! NameValueCell
+            guard let nameValueCell = cell as? NameValueCell else { break }
             nameValueCell.nameLabel.text = "Postcode"
             nameValueCell.valueLabel.text = companyWorkplace.postcode
             nameValueCell.nameValue.isButton = false
             nameValueCell.nameLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
         case .industry:
-            let nameValueCell = cell as! NameValueCell
+            guard let nameValueCell = cell as? NameValueCell else { break }
             nameValueCell.nameLabel.text = "Industry"
             nameValueCell.valueLabel.text = company.industries?.first?.name
             nameValueCell.nameValue.isButton = false
             nameValueCell.nameLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
-        case .summary:
-            let nameValueCell = cell as! NameValueCell
-            nameValueCell.nameValue.isButton = false
-            nameValueCell.nameLabel.text = "Summary"
-            nameValueCell.nameLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-        case .summaryText:
-            let summaryCell = cell as! CompanySummaryTextCell
-            summaryCell.expandableLabel.text = company.description
-            summaryCell.expandableLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
         }
         return cell
     }

@@ -14,7 +14,7 @@ public struct CompanyTableSectionDescriptor {
 }
 
 public enum CompanyTableSectionType: String {
-    case companySummary = "Company"
+    case companySummary = "About"
     case companyData = "Data"
     case companyHosts = "Choose a host"
 }

@@ -170,11 +170,25 @@ struct ExpandableLabelState {
 
 class ExpandableLabel: UILabel {
     
+    override var text: String? {
+        didSet {
+            updateHeight()
+        }
+    }
+    
     var state = ExpandableLabelState() {
         didSet {
-            self.text = state.text
-            heightConstraint.constant = state.isExpanded ? displayHeight + lineHeight: minHeight
+            self.updateHeight()
         }
+    }
+    
+    func updateHeight() {
+        guard let text = self.text, text.isEmpty == false else {
+            self.heightConstraint.constant = 0
+            self.numberOfLines = 0
+            return
+        }
+        heightConstraint.constant = state.isExpanded ? displayHeight + lineHeight: displayHeight
     }
     
     private var minHeight: CGFloat { return 2 * lineHeight }
@@ -191,16 +205,17 @@ class ExpandableLabel: UILabel {
     }
     
     private var lines: Int {
+        guard let text = self.text, text.isEmpty == false else { return 0 }
         let maxSize = CGSize(width: bounds.size.width, height: CGFloat(Float.infinity))
         let charSize = font.lineHeight
-        let text = (self.text ?? "Summary") as NSString
-        let textSize = text.boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font!], context: nil)
+        let nsText = text as NSString
+        let textSize = nsText.boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font!], context: nil)
         let linesRoundedUp = Int(ceil(textSize.height/charSize))
         return linesRoundedUp
     }
     
     private lazy var heightConstraint: NSLayoutConstraint = {
-        let constraint = heightAnchor.constraint(equalToConstant: self.minHeight)
+        let constraint = heightAnchor.constraint(equalToConstant: 0)
         constraint.priority = UILayoutPriority.defaultHigh
         constraint.isActive = true
         return constraint

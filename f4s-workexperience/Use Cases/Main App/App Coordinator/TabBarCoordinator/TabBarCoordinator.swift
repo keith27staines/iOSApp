@@ -128,7 +128,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     
     lazy var applicationsCoordinator: ApplicationsCoordinator = {
         let navigationController = UINavigationController()
-        let icon = UIImage(named: "home")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        let icon = UIImage(named: "applications")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         navigationController.tabBarItem = UITabBarItem(title: "Applications", image: icon, selectedImage: nil)
         let router = NavigationRouter(navigationController: navigationController)
         let coordinator = ApplicationsCoordinator(parent: nil, navigationRouter: router, inject: injected)
@@ -148,7 +148,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     
     func makeSearchCoordinator() -> SearchCoordinator {
         let navigationController = UINavigationController()
-        let searchIcon = UIImage(named: "searchIcon2")?.withRenderingMode(.alwaysTemplate)
+        let searchIcon = UIImage(named: "searchIcon")?.withRenderingMode(.alwaysTemplate)
         navigationController.tabBarItem = UITabBarItem(title: "Search", image: searchIcon, selectedImage: nil)
         let router = NavigationRouter(navigationController: navigationController)
         let coordinator = SearchCoordinator(
