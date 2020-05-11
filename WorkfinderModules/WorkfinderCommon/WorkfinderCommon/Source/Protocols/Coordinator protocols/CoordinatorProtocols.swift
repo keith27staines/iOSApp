@@ -42,7 +42,7 @@ public protocol OnboardingCoordinatorDelegate : class {
 }
 
 public protocol OnboardingCoordinatorProtocol : Coordinating {
-    var hideOnboardingControls: Bool { get set }
+    var isFirstLaunch: Bool { get set }
     var delegate: OnboardingCoordinatorDelegate? { get set }
     var onboardingDidFinish: ((OnboardingCoordinatorProtocol) -> Void)? { get set }
 }

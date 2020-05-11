@@ -75,7 +75,7 @@ public class MockCoreInjectionNavigationCoordinator : CoreInjectionNavigationCoo
 
 public class MockOnboardingCoordinator : OnboardingCoordinatorProtocol {
     
-    public var hideOnboardingControls: Bool = true
+    public var isFirstLaunch: Bool = true
     
     public var delegate: OnboardingCoordinatorDelegate?
     

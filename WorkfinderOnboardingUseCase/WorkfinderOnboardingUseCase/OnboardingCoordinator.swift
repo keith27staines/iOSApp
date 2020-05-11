@@ -12,9 +12,9 @@ public class OnboardingCoordinator : NavigationCoordinator, OnboardingCoordinato
     
     public var onboardingDidFinish: ((OnboardingCoordinatorProtocol) -> Void)?
     
-    public var hideOnboardingControls: Bool = true {
+    public var isFirstLaunch: Bool = true {
         didSet {
-            onboardingViewController?.hideOnboardingControls = hideOnboardingControls
+            onboardingViewController?.hideOnboardingControls = !isFirstLaunch
         }
     }
     
@@ -28,9 +28,14 @@ public class OnboardingCoordinator : NavigationCoordinator, OnboardingCoordinato
     }
     
     public override func start() {
+        guard isFirstLaunch else {
+            self.onboardingDidFinish?(self)
+            return
+        }
+        
         let onboardingViewController = UIStoryboard(name: "Onboarding", bundle: __bundle).instantiateViewController(withIdentifier: "OnboardingViewController") as! OnboardingViewController
         self.onboardingViewController = onboardingViewController
-        onboardingViewController.hideOnboardingControls = hideOnboardingControls
+        onboardingViewController.hideOnboardingControls = !isFirstLaunch
         onboardingViewController.shouldEnableLocation = { [weak self] enable in
             guard let self = self else { return }
             self.delegate?.shouldEnableLocation(enable)

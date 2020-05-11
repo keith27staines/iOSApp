@@ -169,18 +169,19 @@ class PicklistDescriptionCell: UITableViewCell {
     
     lazy var label: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 4
+        label.numberOfLines = 0
         label.font = UIFont.preferredFont(forTextStyle: .caption2)
         label.textColor = UIColor.darkGray
         label.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         label.backgroundColor = UIColor.init(white: 0.93, alpha: 1)
-        label.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        label.heightAnchor.constraint(lessThanOrEqualToConstant: 48).isActive = true
         return label
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(label)
+        contentView.backgroundColor = label.backgroundColor
         label.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
     }
     

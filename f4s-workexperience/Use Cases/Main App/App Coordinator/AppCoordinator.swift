@@ -61,9 +61,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
         GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
         startOnboarding()
-        if launchOptions?[.remoteNotification] == nil {
-            showOnboardingUIIfNecessary()
-        } else {
+        if launchOptions?[.remoteNotification] != nil {
             startTabBarCoordinator()
         }
     }
@@ -73,24 +71,15 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         self.onboardingCoordinator = onboardingCoordinator
         onboardingCoordinator.parentCoordinator = self
         onboardingCoordinator.delegate = self
-        onboardingCoordinator.hideOnboardingControls = true
+        onboardingCoordinator.isFirstLaunch = localStore.value(key: LocalStore.Key.isFirstLaunch) as? Bool ?? true
         onboardingCoordinator.onboardingDidFinish = onboardingDidFinish
         addChildCoordinator(onboardingCoordinator)
         onboardingCoordinator.start()
         onUserIsRegistered(userUuid: "")
     }
     
-    func showOnboardingUIIfNecessary() {
-        let onboardingRequired = localStore.value(key: LocalStore.Key.isFirstLaunch) as! Bool? ?? true
-        
-        if onboardingRequired {
-            onboardingCoordinator?.hideOnboardingControls = false
-        } else {
-            startTabBarCoordinator()
-        }
-    }
-    
     private func onboardingDidFinish(onboardingCoordinator: OnboardingCoordinatorProtocol) {
+        localStore.setValue(false, for: LocalStore.Key.isFirstLaunch)
         navigationRouter.dismiss(animated: false, completion: nil)
         removeChildCoordinator(onboardingCoordinator)
         startTabBarCoordinator()
@@ -109,7 +98,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         injected.log.identity(userId: userUuid)
         registrar.registerForRemoteNotifications()
         databaseDownloadManager.start()
-        showOnboardingUIIfNecessary()
     }
     
     private func startTabBarCoordinator() {
