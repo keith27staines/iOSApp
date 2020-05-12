@@ -87,7 +87,7 @@ class ApplicationTile: UITableViewCell {
         mainStack.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 8, left: 4, bottom: 8, right: 0))
     }
     
-    func configureWithApplication(_ application: ApplicationsModel.Application) {
+    func configureWithApplication(_ application: ApplicationsPresenter.ApplicationPresenter) {
         companyName.text = application.companyName
         industry.text = application.industry
         hostInformation.text = application.hostInformation

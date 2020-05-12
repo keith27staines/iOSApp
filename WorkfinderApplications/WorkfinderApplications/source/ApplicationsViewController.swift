@@ -1,9 +1,13 @@
 import UIKit
 
 class ApplicationsViewController: UIViewController {
-    let model = ApplicationsModel()
+
+    weak var coordinator: ApplicationsCoordinatorProtocol?
+    let presenter: ApplicationsPresenter
     
-    init() {
+    init(coordinator: ApplicationsCoordinatorProtocol, presenter: ApplicationsPresenter) {
+        self.coordinator = coordinator
+        self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -33,12 +37,12 @@ extension ApplicationsViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int { 1 }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.numberOfRows(section: section)
+        return presenter.numberOfRows(section: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ApplicationTile.reuseIdentifier) as? ApplicationTile else { return UITableViewCell() }
-        let application = model.applicationForIndexPath(indexPath)
+        let application = presenter.applicationForIndexPath(indexPath)
         cell.configureWithApplication(application)
         return cell
     }

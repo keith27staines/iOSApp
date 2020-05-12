@@ -1,7 +1,7 @@
 import Foundation
 
-class ApplicationsModel {
-    class Application {
+class ApplicationsPresenter {
+    class ApplicationPresenter {
         let companyName: String
         let hostInformation: String
         let appliedDateString = "15-Mar-2020"
@@ -13,9 +13,9 @@ class ApplicationsModel {
     }
     
     private let applications = [
-        Application(companyName: "Company 1", hostName: "Host 1 | role 1"),
-        Application(companyName: "Company 2", hostName: "Host 2 | role 2"),
-        Application(companyName: "Company 3", hostName: "Host 3 | role 3")
+        ApplicationPresenter(companyName: "Company 1", hostName: "Host 1 | role 1"),
+        ApplicationPresenter(companyName: "Company 2", hostName: "Host 2 | role 2"),
+        ApplicationPresenter(companyName: "Company 3", hostName: "Host 3 | role 3")
     ]
     
     let numberOfSections: Int = 1
@@ -24,7 +24,7 @@ class ApplicationsModel {
         return applications.count
     }
     
-    func applicationForIndexPath(_ indexPath: IndexPath) -> Application {
+    func applicationForIndexPath(_ indexPath: IndexPath) -> ApplicationPresenter {
         return applications[indexPath.row]
     }
 }

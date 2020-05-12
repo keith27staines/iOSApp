@@ -2,20 +2,24 @@ import WorkfinderCommon
 import WorkfinderCoordinators
 import WorkfinderUI
 
-public protocol ApplicationsCoordinatorProtocol {
-    
+protocol ApplicationsCoordinatorProtocol: AnyObject {
+    func presentApplicationDetail(for application: ApplicationsPresenter.ApplicationPresenter)
 }
 
-public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, ApplicationsCoordinatorProtocol {
-    
+class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, ApplicationsCoordinatorProtocol {
     
     
     lazy var applicationsViewController: UIViewController = {
-        let vc = ApplicationsViewController()
+        let presenter = ApplicationsPresenter()
+        let vc = ApplicationsViewController(coordinator: self, presenter: presenter)
         return vc
     }()
     
-    public override func start() {
+    override func start() {
         navigationRouter.push(viewController: applicationsViewController, animated: true)
+    }
+    
+    func presentApplicationDetail(for application: ApplicationsPresenter.ApplicationPresenter) {
+        <#code#>
     }
 }
