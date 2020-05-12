@@ -15,6 +15,11 @@
 		FC06A1A924641D150023DE99 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC06A1A824641D150023DE99 /* WorkfinderUI.framework */; };
 		FC06A1AC24641D210023DE99 /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC06A1AB24641D210023DE99 /* WorkfinderCoordinators.framework */; };
 		FC06A1BC24641EC40023DE99 /* ApplicationsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06A1BB24641EC40023DE99 /* ApplicationsCoordinator.swift */; };
+		FC403609246AE35900F03A5B /* ApplicationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC403608246AE35900F03A5B /* ApplicationState.swift */; };
+		FC40360B246AE37C00F03A5B /* ApplicationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC40360A246AE37C00F03A5B /* ApplicationsModel.swift */; };
+		FC40360D246AE3D100F03A5B /* ApplicationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC40360C246AE3D100F03A5B /* ApplicationsViewController.swift */; };
+		FC40360F246AE42700F03A5B /* ApplicationTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC40360E246AE42700F03A5B /* ApplicationTile.swift */; };
+		FC403611246AE46700F03A5B /* ApplicationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC403610246AE46700F03A5B /* ApplicationDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +44,11 @@
 		FC06A1A824641D150023DE99 /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC06A1AB24641D210023DE99 /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC06A1BB24641EC40023DE99 /* ApplicationsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationsCoordinator.swift; sourceTree = "<group>"; };
+		FC403608246AE35900F03A5B /* ApplicationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationState.swift; sourceTree = "<group>"; };
+		FC40360A246AE37C00F03A5B /* ApplicationsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationsModel.swift; sourceTree = "<group>"; };
+		FC40360C246AE3D100F03A5B /* ApplicationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationsViewController.swift; sourceTree = "<group>"; };
+		FC40360E246AE42700F03A5B /* ApplicationTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationTile.swift; sourceTree = "<group>"; };
+		FC403610246AE46700F03A5B /* ApplicationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +127,11 @@
 			isa = PBXGroup;
 			children = (
 				FC06A1BB24641EC40023DE99 /* ApplicationsCoordinator.swift */,
+				FC403608246AE35900F03A5B /* ApplicationState.swift */,
+				FC40360A246AE37C00F03A5B /* ApplicationsModel.swift */,
+				FC40360C246AE3D100F03A5B /* ApplicationsViewController.swift */,
+				FC40360E246AE42700F03A5B /* ApplicationTile.swift */,
+				FC403610246AE46700F03A5B /* ApplicationDetailViewController.swift */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -231,6 +246,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC403609246AE35900F03A5B /* ApplicationState.swift in Sources */,
+				FC40360B246AE37C00F03A5B /* ApplicationsModel.swift in Sources */,
+				FC403611246AE46700F03A5B /* ApplicationDetailViewController.swift in Sources */,
+				FC40360D246AE3D100F03A5B /* ApplicationsViewController.swift in Sources */,
+				FC40360F246AE42700F03A5B /* ApplicationTile.swift in Sources */,
 				FC06A1BC24641EC40023DE99 /* ApplicationsCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
