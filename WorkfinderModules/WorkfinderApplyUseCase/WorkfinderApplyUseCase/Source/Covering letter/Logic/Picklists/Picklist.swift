@@ -5,31 +5,47 @@ import WorkfinderServices
 
 public class Picklist: PicklistProtocol {
     
+    public func updateSelectedTextValue(_ text: String) {
+        if isOtherSelected {
+            otherItem?.otherValue = text
+            if text.isEmpty { deselectAll() }
+        } else if selectedItems.count > 0 {
+            selectedItems[0].value = text
+        }
+    }
+    
+    public static let otherItemUuid = "otherUuid"
     public let type: PicklistType
     public var itemsSelectedSummary: String?
     public var mimumPicks: Int = 1
     public var maximumPicks: Int = 3
     public var items: [PicklistItemJson]
-    public var otherItem: PicklistItemJson?
-    public var selectedItems: [PicklistItemJson]
+    public private (set) var otherItem: PicklistItemJson?
+    public private (set) var selectedItems: [PicklistItemJson]
     public var provider: PicklistProviderProtocol?
     let networkConfig: NetworkConfig
     var filters = [URLQueryItem]()
+
+    public func selectItems(_ items: [PicklistItemJson]) {
+        items.forEach { (item) in selectItem(item) }
+    }
     
     public func selectItem(_ item: PicklistItemJson) {
-        if !selectedItems.contains(where: { (otherItem) -> Bool in
-            otherItem.guaranteedUuid == item.guaranteedUuid
+        if !selectedItems.contains(where: { (selectedItem) -> Bool in
+            selectedItem.guaranteedUuid == item.guaranteedUuid
         }) {
             selectedItems.append(item)
         }
     }
     
     public func deselectItem(_ item: PicklistItemJson) {
-        guard let index = selectedItems.firstIndex(where: { (otherItem) -> Bool in
-            return otherItem.guaranteedUuid == item.guaranteedUuid
+        guard let index = selectedItems.firstIndex(where: { (selectedItem) -> Bool in
+            return selectedItem.guaranteedUuid == item.guaranteedUuid
         })  else { return }
         selectedItems.remove(at: index)
     }
+    
+    public func deselectAll() { selectedItems = [] }
     
     public init(type: PicklistType, otherItem: PicklistItemJson?, maximumPicks: Int, networkConfig: NetworkConfig) {
         self.otherItem = otherItem
@@ -46,6 +62,10 @@ public class Picklist: PicklistProtocol {
             return PicklistProvider(picklistType: self.type, networkConfig: networkConfig)
         }
         return nil
+    }
+    public var isOtherSelected: Bool {
+        guard let firstUuid = selectedItems.first?.guaranteedUuid else { return false }
+        return firstUuid == Picklist.otherItemUuid
     }
     
     public func fetchItems(completion: @escaping ((PicklistProtocol, Result<[PicklistItemJson],Error>)->Void) ) {
@@ -73,7 +93,7 @@ public class Picklist: PicklistProtocol {
     }
     
     public var itemSelectedSummary: String {
-        guard selectedItems.count > 0 else { return "" }
+        guard selectedItems.count > 0 else { return "Choose" }
         switch type {
         case .roles:
             return NSLocalizedString("Selected", comment: "")

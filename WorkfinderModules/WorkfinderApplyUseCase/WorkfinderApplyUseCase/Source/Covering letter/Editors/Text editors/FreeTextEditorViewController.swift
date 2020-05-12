@@ -16,7 +16,8 @@ class FreeTextEditorViewController: TextEditorViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        freeTextPicker.selectedItems = [PicklistItemJson(uuid: "text", value: text)]
+        freeTextPicker.deselectAll()
+        freeTextPicker.selectItem(PicklistItemJson(uuid: "text", value: text))
         super.viewWillDisappear(animated)
     }
     

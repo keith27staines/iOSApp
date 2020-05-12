@@ -19,7 +19,7 @@ public protocol PicklistsStoreProtocol {
 public class PicklistsStore: PicklistsStoreProtocol {
     let networkConfig: NetworkConfig
     let localStore:LocalStorageProtocol
-    let otherItem = PicklistItemJson(uuid: "other", value: "Other")
+    let otherItem = PicklistItemJson(uuid: Picklist.otherItemUuid, value: "Other")
     
     public init(networkConfig: NetworkConfig, localStore:LocalStorageProtocol) {
         self.networkConfig = networkConfig
@@ -59,7 +59,8 @@ public class PicklistsStore: PicklistsStoreProtocol {
     func assignSelectedValues(picklists: PicklistsDictionary,
                               selectedItems: [PicklistType: [PicklistItemJson]]) {
         picklists.forEach { (key, picklist) in
-            picklist.selectedItems = selectedItems[key] ?? []
+            picklist.deselectAll()
+            picklist.selectItems(selectedItems[key] ?? [])
         }
     }
     
@@ -143,6 +144,7 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
     
     func picklistDidClose() {
         picklistsDidUpdate?(picklistsStore.allPicklistsDictionary)
+        letterEditorViewController?.refresh()
     }
 }
 
@@ -199,10 +201,11 @@ extension CoverLetterCoordinator: F4SCalendarCollectionViewControllerDelegate {
         var endDateItem = PicklistItemJson(uuid: "last", value: endDate.workfinderDateString)
         startDateItem.isDateString = true
         endDateItem.isDateString = true
-        datePicklist?.selectedItems = [
+        datePicklist?.deselectAll()
+        datePicklist?.selectItems([
             startDateItem,
             endDateItem
-        ]
+        ])
         picklistDidClose()
     }
     

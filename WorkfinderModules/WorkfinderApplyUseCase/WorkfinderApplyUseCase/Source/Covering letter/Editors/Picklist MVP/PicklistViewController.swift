@@ -50,6 +50,7 @@ extension PicklistViewController: OtherItemEditorProtocol {
 
 extension PicklistViewController: TextEditorCoordinatorProtocol {
     func textEditorIsClosing(text: String) {
-        picklist.otherItem?.otherValue = text
+        picklist.updateSelectedTextValue(text)
+        tableView.reloadData()
     }
 }

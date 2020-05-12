@@ -66,7 +66,11 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
                         return picklistIem.value ?? (picklistIem.name ?? "unnamed value")
                     }
                 } else {
-                    return picklistIem.value ?? (picklistIem.name ?? "unnamed value")
+                    if picklistIem.uuid == Picklist.otherItemUuid {
+                        return picklistIem.value ?? ""
+                    } else {
+                        return picklistIem.value ?? (picklistIem.name ?? "unnamed value")
+                    }
                 }
             }
             if !items.isEmpty {
@@ -125,7 +129,7 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
             let startDate = Date.workfinderDateStringToDate(startDateString)
             else { return }
         if startDate < Date() {
-            availabilityPicklist.selectedItems = []
+            availabilityPicklist.deselectAll()
         }
     }
     

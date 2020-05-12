@@ -31,7 +31,7 @@ class PicklistDataSourceAndDelegate: NSObject, UITableViewDataSource, UITableVie
         let item = picklist.items[indexPath.row]
         if item.uuid == "other" {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "other") as? OtherPicklistItemTableViewCell else { return UITableViewCell() }
-            cell.configureWith(item, picklist: picklist)
+            cell.configureWith(picklist.otherItem ?? item, picklist: picklist)
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "standard") as? StandardPicklistItemTableViewCell else {return UITableViewCell() }
@@ -54,6 +54,11 @@ class PicklistDataSourceAndDelegate: NSObject, UITableViewDataSource, UITableVie
         guard let previousSelection = picklist.selectedItems.first
             else {
             picklist.selectItem(item)
+            return
+        }
+        if picklist.isOtherSelected && item.uuid == Picklist.otherItemUuid {
+            // tapped on other when other was already selected, so we are
+            // intending to edit, not change selection
             return
         }
         picklist.deselectItem(previousSelection)
@@ -92,8 +97,8 @@ class PicklistDataSourceAndDelegate: NSObject, UITableViewDataSource, UITableVie
     func editItemAtIndexPath(_ indexPath: IndexPath) {
         let item = picklist.items[indexPath.row]
         switch item.guaranteedUuid {
-        case "other":
-            self.otherItemEditor?.edit(item)
+        case Picklist.otherItemUuid:
+            self.otherItemEditor?.edit(picklist.otherItem ?? item)
         default: return
         }
     }

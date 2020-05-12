@@ -9,7 +9,7 @@ public protocol TextSearchPicklistProtocol: PicklistProtocol {
 public class TextSearchPicklist: Picklist, TextSearchPicklistProtocol {
     
     public func clearResults() {
-        selectedItems = []
+        deselectAll()
         items.removeAll()
     }
     

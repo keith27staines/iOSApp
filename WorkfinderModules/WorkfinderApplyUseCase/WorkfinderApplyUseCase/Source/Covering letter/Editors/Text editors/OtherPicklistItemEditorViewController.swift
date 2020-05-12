@@ -23,6 +23,7 @@ class OtherPicklistItemEditorViewController: TextEditorViewController {
                    editorTitle: type.otherEditorTitle,
                    guidanceText: type.otherFieldGuidanceText,
                    placeholderText: type.otherFieldPlaceholderText)
+        textView.text = picklistItem.otherValue
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
