@@ -22,7 +22,9 @@ class PicklistViewController: UITableViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        coordinator?.picklistIsClosing(picklist)
+        if isMovingFromParent {
+            coordinator?.picklistIsClosing(picklist)
+        }
     }
     
     init(coordinator: PicklistCoordinatorProtocol, picklist: PicklistProtocol) {
@@ -50,7 +52,7 @@ extension PicklistViewController: OtherItemEditorProtocol {
 
 extension PicklistViewController: TextEditorCoordinatorProtocol {
     func textEditorIsClosing(text: String) {
-        picklist.updateSelectedTextValue(text)
+        picklist.updateSelectedTextValue(text.trimmingCharacters(in: .whitespacesAndNewlines))
         tableView.reloadData()
     }
 }

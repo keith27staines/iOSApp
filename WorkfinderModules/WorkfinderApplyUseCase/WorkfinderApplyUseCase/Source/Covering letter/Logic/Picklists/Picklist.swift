@@ -7,14 +7,17 @@ public class Picklist: PicklistProtocol {
     
     public func updateSelectedTextValue(_ text: String) {
         if isOtherSelected {
-            otherItem?.otherValue = text
+            guard var otherItem = self.otherItem else { return }
+            otherItem.otherValue = text
+            self.otherItem = otherItem
+            deselectAll()
+            selectItem(otherItem)
             if text.isEmpty { deselectAll() }
         } else if selectedItems.count > 0 {
             selectedItems[0].value = text
         }
     }
     
-    public static let otherItemUuid = "otherUuid"
     public let type: PicklistType
     public var itemsSelectedSummary: String?
     public var mimumPicks: Int = 1
@@ -27,7 +30,10 @@ public class Picklist: PicklistProtocol {
     var filters = [URLQueryItem]()
 
     public func selectItems(_ items: [PicklistItemJson]) {
-        items.forEach { (item) in selectItem(item) }
+        items.forEach { (item) in
+            if item.isOther { self.otherItem = item }
+            selectItem(item)
+        }
     }
     
     public func selectItem(_ item: PicklistItemJson) {
@@ -64,8 +70,8 @@ public class Picklist: PicklistProtocol {
         return nil
     }
     public var isOtherSelected: Bool {
-        guard let firstUuid = selectedItems.first?.guaranteedUuid else { return false }
-        return firstUuid == Picklist.otherItemUuid
+        guard let first = selectedItems.first else { return false }
+        return first.isOther
     }
     
     public func fetchItems(completion: @escaping ((PicklistProtocol, Result<[PicklistItemJson],Error>)->Void) ) {

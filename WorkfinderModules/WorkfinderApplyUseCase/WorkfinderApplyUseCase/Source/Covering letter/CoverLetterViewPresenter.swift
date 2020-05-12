@@ -66,8 +66,8 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
                         return picklistIem.value ?? (picklistIem.name ?? "unnamed value")
                     }
                 } else {
-                    if picklistIem.uuid == Picklist.otherItemUuid {
-                        return picklistIem.value ?? ""
+                    if picklistIem.isOther {
+                        return picklistIem.otherValue ?? ""
                     } else {
                         return picklistIem.value ?? (picklistIem.name ?? "unnamed value")
                     }

@@ -19,7 +19,7 @@ public protocol PicklistsStoreProtocol {
 public class PicklistsStore: PicklistsStoreProtocol {
     let networkConfig: NetworkConfig
     let localStore:LocalStorageProtocol
-    let otherItem = PicklistItemJson(uuid: Picklist.otherItemUuid, value: "Other")
+    let otherItem = PicklistItemJson(uuid: PicklistItemJson.otherItemUuid, value: "Other")
     
     public init(networkConfig: NetworkConfig, localStore:LocalStorageProtocol) {
         self.networkConfig = networkConfig
