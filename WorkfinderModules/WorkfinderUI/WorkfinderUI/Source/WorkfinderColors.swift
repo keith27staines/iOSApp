@@ -17,6 +17,10 @@ public struct WorkfinderColors {
     public static let warningActive = UIColor(red: 63, green: 172, blue: 87)
     public static let badValueNormal = UIColor(red: 255, green: 174, blue: 66)
     public static let badValueActive = UIColor(red: 255, green: 179, blue: 71)
+    
+    public static let textLight = UIColor.lightGray
+    public static let textMedium = UIColor.gray
+    public static let textDark = UIColor.darkGray
 }
 
 
