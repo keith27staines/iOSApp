@@ -21,8 +21,8 @@ public class CompanyLogoView: UIView {
         addSubview(logoView)
         logoView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor).isActive = true
         logoView.topAnchor.constraint(greaterThanOrEqualTo: topAnchor).isActive = true
-        logoView.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor).isActive = true
-        logoView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor).isActive = true
+        logoView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        logoView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         logoView.widthAnchor.constraint(equalTo: logoView.heightAnchor).isActive = true
         logoView.widthAnchor.constraint(equalToConstant: widthPoints).isActive = true
         logoView.defaultImage = UIImage(named: "DefaultLogo")
