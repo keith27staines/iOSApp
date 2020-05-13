@@ -103,7 +103,6 @@
 		FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC92567A1F8F70D100FF9841 /* InterestsModel.swift */; };
 		FC93DC5823202B8F00F1CE23 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC5723202B8F00F1CE23 /* Config.swift */; };
 		FC96709E2259F61600318F69 /* InterestsPruner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96709D2259F61600318F69 /* InterestsPruner.swift */; };
-		FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99B7E21F826D1400E2D5F0 /* LatLon.swift */; };
 		FC99BDC820CFD8E400278DDE /* F4SDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */; };
 		FC99BDCA20D170CA00278DDE /* F4SCompanyDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99BDC920D170CA00278DDE /* F4SCompanyDownloadManager.swift */; };
 		FC9BEE082015FF6000347437 /* UniversalLinkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9BEE072015FF6000347437 /* UniversalLinkParser.swift */; };
@@ -1363,7 +1362,6 @@
 				40C1A51C1DDF5ACE000F80AA /* GMUGridBasedClusterAlgorithm.m in Sources */,
 				FC50E9CE2213EF5400C9A621 /* SearchModeSelectorView.swift in Sources */,
 				FCDC543124289B9D002581FF /* CompanyTileViewData.swift in Sources */,
-				FC99B7E31F826D1400E2D5F0 /* LatLon.swift in Sources */,
 				FC99BDCA20D170CA00278DDE /* F4SCompanyDownloadManager.swift in Sources */,
 				40E78E811DD32BF4000A3776 /* TableViewCell.swift in Sources */,
 				40C1A5221DDF5ACE000F80AA /* GQTPointQuadTreeChild.m in Sources */,
