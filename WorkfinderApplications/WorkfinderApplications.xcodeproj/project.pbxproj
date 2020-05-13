@@ -26,7 +26,8 @@
 		FC751762246BBFAF00ECBA84 /* ApplicationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC751761246BBFAF00ECBA84 /* ApplicationsService.swift */; };
 		FC751764246BDC9500ECBA84 /* ApplicationDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC751763246BDC9500ECBA84 /* ApplicationDetailService.swift */; };
 		FC751766246BDCED00ECBA84 /* ApplicationDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC751765246BDCED00ECBA84 /* ApplicationDetailPresenter.swift */; };
-		FC9C0AC1246BA6DE00CF7A48 /* ApplicationOfferMadeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C0AC0246BA6DE00CF7A48 /* ApplicationOfferMadeViewController.swift */; };
+		FC751769246C175900ECBA84 /* OfferPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC751768246C175900ECBA84 /* OfferPresenter.swift */; };
+		FC9C0AC1246BA6DE00CF7A48 /* ViewOfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C0AC0246BA6DE00CF7A48 /* ViewOfferViewController.swift */; };
 		FC9C0AC3246BA72F00CF7A48 /* ApplicationOfferDeclinedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C0AC2246BA72F00CF7A48 /* ApplicationOfferDeclinedViewController.swift */; };
 		FC9C0AC8246BAAF000CF7A48 /* ApplicationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C0AC7246BAAF000CF7A48 /* ApplicationActions.swift */; };
 /* End PBXBuildFile section */
@@ -64,7 +65,8 @@
 		FC751761246BBFAF00ECBA84 /* ApplicationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationsService.swift; sourceTree = "<group>"; };
 		FC751763246BDC9500ECBA84 /* ApplicationDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDetailService.swift; sourceTree = "<group>"; };
 		FC751765246BDCED00ECBA84 /* ApplicationDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDetailPresenter.swift; sourceTree = "<group>"; };
-		FC9C0AC0246BA6DE00CF7A48 /* ApplicationOfferMadeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationOfferMadeViewController.swift; sourceTree = "<group>"; };
+		FC751768246C175900ECBA84 /* OfferPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferPresenter.swift; sourceTree = "<group>"; };
+		FC9C0AC0246BA6DE00CF7A48 /* ViewOfferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOfferViewController.swift; sourceTree = "<group>"; };
 		FC9C0AC2246BA72F00CF7A48 /* ApplicationOfferDeclinedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationOfferDeclinedViewController.swift; sourceTree = "<group>"; };
 		FC9C0AC7246BAAF000CF7A48 /* ApplicationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationActions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,6 +158,15 @@
 			path = source;
 			sourceTree = "<group>";
 		};
+		FC751767246C170D00ECBA84 /* View offer */ = {
+			isa = PBXGroup;
+			children = (
+				FC9C0AC0246BA6DE00CF7A48 /* ViewOfferViewController.swift */,
+				FC751768246C175900ECBA84 /* OfferPresenter.swift */,
+			);
+			path = "View offer";
+			sourceTree = "<group>";
+		};
 		FC9C0AC4246BAA1200CF7A48 /* Decline */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,10 +190,10 @@
 		FC9C0AC6246BAA5200CF7A48 /* View application */ = {
 			isa = PBXGroup;
 			children = (
-				FC403610246AE46700F03A5B /* ApplicationDetailViewController.swift */,
-				FC9C0AC0246BA6DE00CF7A48 /* ApplicationOfferMadeViewController.swift */,
 				FC751763246BDC9500ECBA84 /* ApplicationDetailService.swift */,
+				FC403610246AE46700F03A5B /* ApplicationDetailViewController.swift */,
 				FC751765246BDCED00ECBA84 /* ApplicationDetailPresenter.swift */,
+				FC751767246C170D00ECBA84 /* View offer */,
 			);
 			path = "View application";
 			sourceTree = "<group>";
@@ -301,11 +312,12 @@
 				FC403609246AE35900F03A5B /* ApplicationState.swift in Sources */,
 				FC40360B246AE37C00F03A5B /* ApplicationsPresenter.swift in Sources */,
 				FC9C0AC3246BA72F00CF7A48 /* ApplicationOfferDeclinedViewController.swift in Sources */,
-				FC9C0AC1246BA6DE00CF7A48 /* ApplicationOfferMadeViewController.swift in Sources */,
+				FC9C0AC1246BA6DE00CF7A48 /* ViewOfferViewController.swift in Sources */,
 				FC9C0AC8246BAAF000CF7A48 /* ApplicationActions.swift in Sources */,
 				FC75175E246BB6E900ECBA84 /* ApplicationTilePresenter.swift in Sources */,
 				FC403611246AE46700F03A5B /* ApplicationDetailViewController.swift in Sources */,
 				FC40360D246AE3D100F03A5B /* ApplicationsViewController.swift in Sources */,
+				FC751769246C175900ECBA84 /* OfferPresenter.swift in Sources */,
 				FC751764246BDC9500ECBA84 /* ApplicationDetailService.swift in Sources */,
 				FC40360F246AE42700F03A5B /* ApplicationTile.swift in Sources */,
 				FC03C88E246AEA9E0075258C /* CoverLetterText.swift in Sources */,

@@ -36,7 +36,7 @@ public enum PicklistType: Int, CaseIterable, Codable {
         switch self {
         case .roles: return "job-roles/"
         case .skills: return "employment-skills/"
-        case .attributes: return "personal-attributes/"
+        case .attributes: return "placement-attributes/"
         case .universities: return "institutions/"
         default: return ""
         }

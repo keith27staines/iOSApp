@@ -41,7 +41,7 @@ enum ApplicationState: String {
         case .viewedByHost:
             return NSLocalizedString("The host has viewed your application", comment: "")
         case .applicationDeclined:
-            return NSLocalizedString("The host has declined your application", comment: "")
+            return NSLocalizedString("The host has rejected your application", comment: "")
         case .offerMade:
             return NSLocalizedString("Congratulations you have been offered a placement", comment: "")
         case .offerAccepted:

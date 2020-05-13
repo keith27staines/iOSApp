@@ -30,10 +30,17 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
         guard let action = action else { return }
         switch action {
         case .viewApplication: showApplicationDetailViewer(for: application)
-        case .viewOffer: break
+        case .viewOffer: showOfferViewer(for: application)
         case .acceptOffer: break
         case .declineOffer: break
         }
+    }
+    
+    func showOfferViewer(for application: Application) {
+        let service = OfferService()
+        let presenter = OfferPresenter(coordinator: self, application: application, service: service)
+        let vc = OfferViewController(coordinator: self, presenter: presenter)
+        navigationRouter.push(viewController: vc, animated: true)
     }
     
     func showApplicationDetailViewer(for application: Application) {
