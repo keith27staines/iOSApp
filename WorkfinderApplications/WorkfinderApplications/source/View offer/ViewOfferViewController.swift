@@ -1,8 +1,11 @@
+
 import UIKit
+import WorkfinderCommon
 import WorkfinderUI
 
-class ApplicationDetailViewController: UIViewController {
-    let presenter: ApplicationDetailPresenterProtocol
+class OfferViewController: UIViewController {
+    weak var coordinator: ApplicationsCoordinator?
+    let presenter: OfferPresenterProtocol
     let messageHandler = UserMessageHandler()
     
     lazy var mainStack: UIStackView = {
@@ -10,29 +13,21 @@ class ApplicationDetailViewController: UIViewController {
             self.logo,
             self.messageLabel,
             self.tableView,
-            self.coverLetterTextView
+            UIView()
         ])
         stack.axis = .vertical
         stack.spacing = 20
-        stack.distribution = .fill
         return stack
-    }()
-    
-    lazy var coverLetterTextView: UITextView = {
-        let text = UITextView()
-        text.isEditable = false
-        text.font = WorkfinderFonts.body
-        return text
     }()
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.heightAnchor.constraint(equalToConstant: 180).isActive = true
+        tableView.heightAnchor.constraint(equalToConstant: 360).isActive = true
         tableView.setContentCompressionResistancePriority(.required, for: .vertical)
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.register(ApplicationDetailCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(OfferDetailCell.self, forCellReuseIdentifier: "cell")
         tableView.separatorStyle = .none
         return tableView
     }()
@@ -51,30 +46,29 @@ class ApplicationDetailViewController: UIViewController {
     }()
     
     init(coordinator: ApplicationsCoordinatorProtocol,
-         presenter: ApplicationDetailPresenterProtocol) {
+         presenter: OfferPresenterProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
     
     override func viewDidLoad() {
-        self.title = presenter.screenTitle
         configureViews()
         refreshFromPresenter()
     }
     
     func refreshFromPresenter() {
         messageHandler.showLoadingOverlay(view)
-        presenter.load { [weak self] (error) in
+        presenter.load() { [weak self] (error) in
             guard let self = self else { return}
             self.messageHandler.hideLoadingOverlay()
             self.tableView.reloadData()
             self.messageLabel.text = self.presenter.stateDescription
-            self.coverLetterTextView.text = self.presenter.coverLetterText
             self.logo.load(
                 urlString: self.presenter.logoUrl,
                 defaultImage: nil,
                 fetcher: nil,
                 completion: nil)
+            self.title = self.presenter.screenTitle
         }
     }
     
@@ -88,7 +82,7 @@ class ApplicationDetailViewController: UIViewController {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
 
-extension ApplicationDetailViewController: UITableViewDataSource {
+extension OfferViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return presenter.numberOfSections()
     }
@@ -97,17 +91,16 @@ extension ApplicationDetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? ApplicationDetailCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? OfferDetailCell else {
             return UITableViewCell()
         }
         let info = presenter.cellInfoForIndexPath(indexPath)
         cell.configure(info: info)
-        cell.accessoryType = .disclosureIndicator
         return cell
     }
 }
 
-extension ApplicationDetailViewController: UITableViewDelegate {
+extension OfferViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let alert = UIAlertController(title: "Not available", message: "We are working on this. Please bear with us while we improve Workfinder", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -124,39 +117,44 @@ extension ApplicationDetailViewController: UITableViewDelegate {
 
 }
 
-class ApplicationDetailCell: UITableViewCell {
-    
-    lazy var heading: UILabel = {
-        let label = UILabel()
-        label.font = WorkfinderFonts.heading
-        label.textColor = UIColor.black
-        label.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
-        return label
-    }()
-    lazy var subHeading: UILabel = {
+struct OfferDetailCellInfo {
+    var firstLine: String?
+    var secondLine: String?
+}
+
+class OfferDetailCell: UITableViewCell {
+    lazy var firstLine: UILabel = {
         let label = UILabel()
         label.font = WorkfinderFonts.subHeading
         label.textColor = WorkfinderColors.textMedium
         label.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         return label
     }()
+    lazy var secondLine: UILabel = {
+        let label = UILabel()
+        label.font = WorkfinderFonts.heading
+        label.textColor = UIColor.black
+        label.numberOfLines = 0
+        label.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        return label
+    }()
     lazy var stack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [heading, subHeading])
+        let stack = UIStackView(arrangedSubviews: [firstLine, secondLine, UIView()])
         stack.spacing = 8
         stack.axis = .vertical
         return stack
     }()
     
-    func configure(info: ApplicationDetailCellInfo) {
-        heading.text = info.heading
-        subHeading.text = info.subheading
+    func configure(info: OfferDetailCellInfo) {
+        firstLine.text = info.firstLine
+        secondLine.text = info.secondLine
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(stack)
-        stack.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 0))
-        
+        stack.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 4, left: 4, bottom: 0, right: 0))
+        stack.heightAnchor.constraint(equalToConstant: 60).isActive = true
     }
     
     required init?(coder: NSCoder) {

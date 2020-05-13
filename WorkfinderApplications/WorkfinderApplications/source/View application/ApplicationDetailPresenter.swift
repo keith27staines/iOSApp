@@ -37,7 +37,6 @@ class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol{
             return ApplicationDetailCellInfo(heading: "Documents", subheading: "0 files")
         default: return ApplicationDetailCellInfo()
         }
-        
     }
     
     var companyCaption: String? { applicationDetail?.industry}

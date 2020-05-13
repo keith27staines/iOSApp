@@ -13,6 +13,7 @@ class ApplicationsViewController: UIViewController {
     }
     let messageHandler =  UserMessageHandler()
     override func viewDidLoad() {
+        configureNavigationBar()
         configureViews()
         title = NSLocalizedString("Applications", comment: "")
         messageHandler.showLoadingOverlay(view)
@@ -24,6 +25,11 @@ class ApplicationsViewController: UIViewController {
             }
             self.tableView.reloadData()
         }
+    }
+    
+    func configureNavigationBar() {
+        navigationController?.isNavigationBarHidden = false
+        styleNavigationController()
     }
     
     func configureViews() {
