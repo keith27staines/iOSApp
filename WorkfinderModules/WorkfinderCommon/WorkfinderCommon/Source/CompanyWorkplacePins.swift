@@ -126,7 +126,8 @@ public struct CompanyLocationJson: Codable {
         case point
     }
     
-    public init() {
+    public init(postcode: String?) {
+        self.address_postcode = postcode
     }
 }
 

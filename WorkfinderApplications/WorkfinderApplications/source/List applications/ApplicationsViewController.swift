@@ -1,4 +1,5 @@
 import UIKit
+import WorkfinderUI
 
 class ApplicationsViewController: UIViewController {
 
@@ -10,10 +11,19 @@ class ApplicationsViewController: UIViewController {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
-    
+    let messageHandler =  UserMessageHandler()
     override func viewDidLoad() {
         configureViews()
         title = NSLocalizedString("Applications", comment: "")
+        messageHandler.showLoadingOverlay(view)
+        presenter.onViewDidLoad() { [weak self] error in
+            guard let self = self else { return }
+            self.messageHandler.hideLoadingOverlay()
+            if let error = error {
+                self.messageHandler.displayAlertFor(error.localizedDescription, parentCtrl: self)
+            }
+            self.tableView.reloadData()
+        }
     }
     
     func configureViews() {
@@ -42,7 +52,7 @@ extension ApplicationsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ApplicationTile.reuseIdentifier) as? ApplicationTile else { return UITableViewCell() }
-        let application = presenter.applicationForIndexPath(indexPath)
+        let application = presenter.applicationTilePresenterForIndexPath(indexPath)
         cell.configureWithApplication(application)
         return cell
     }
@@ -54,5 +64,7 @@ extension ApplicationsViewController: UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let application = presenter.applicationTilePresenterForIndexPath(indexPath)
+        presenter.onTapApplication(at: indexPath)
     }
 }

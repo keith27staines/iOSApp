@@ -21,6 +21,14 @@
 		FC40360D246AE3D100F03A5B /* ApplicationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC40360C246AE3D100F03A5B /* ApplicationsViewController.swift */; };
 		FC40360F246AE42700F03A5B /* ApplicationTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC40360E246AE42700F03A5B /* ApplicationTile.swift */; };
 		FC403611246AE46700F03A5B /* ApplicationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC403610246AE46700F03A5B /* ApplicationDetailViewController.swift */; };
+		FC75175E246BB6E900ECBA84 /* ApplicationTilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75175D246BB6E900ECBA84 /* ApplicationTilePresenter.swift */; };
+		FC751760246BB89000ECBA84 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75175F246BB89000ECBA84 /* Application.swift */; };
+		FC751762246BBFAF00ECBA84 /* ApplicationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC751761246BBFAF00ECBA84 /* ApplicationsService.swift */; };
+		FC751764246BDC9500ECBA84 /* ApplicationDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC751763246BDC9500ECBA84 /* ApplicationDetailService.swift */; };
+		FC751766246BDCED00ECBA84 /* ApplicationDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC751765246BDCED00ECBA84 /* ApplicationDetailPresenter.swift */; };
+		FC9C0AC1246BA6DE00CF7A48 /* ApplicationOfferMadeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C0AC0246BA6DE00CF7A48 /* ApplicationOfferMadeViewController.swift */; };
+		FC9C0AC3246BA72F00CF7A48 /* ApplicationOfferDeclinedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C0AC2246BA72F00CF7A48 /* ApplicationOfferDeclinedViewController.swift */; };
+		FC9C0AC8246BAAF000CF7A48 /* ApplicationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C0AC7246BAAF000CF7A48 /* ApplicationActions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +59,14 @@
 		FC40360C246AE3D100F03A5B /* ApplicationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationsViewController.swift; sourceTree = "<group>"; };
 		FC40360E246AE42700F03A5B /* ApplicationTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationTile.swift; sourceTree = "<group>"; };
 		FC403610246AE46700F03A5B /* ApplicationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDetailViewController.swift; sourceTree = "<group>"; };
+		FC75175D246BB6E900ECBA84 /* ApplicationTilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationTilePresenter.swift; sourceTree = "<group>"; };
+		FC75175F246BB89000ECBA84 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
+		FC751761246BBFAF00ECBA84 /* ApplicationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationsService.swift; sourceTree = "<group>"; };
+		FC751763246BDC9500ECBA84 /* ApplicationDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDetailService.swift; sourceTree = "<group>"; };
+		FC751765246BDCED00ECBA84 /* ApplicationDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDetailPresenter.swift; sourceTree = "<group>"; };
+		FC9C0AC0246BA6DE00CF7A48 /* ApplicationOfferMadeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationOfferMadeViewController.swift; sourceTree = "<group>"; };
+		FC9C0AC2246BA72F00CF7A48 /* ApplicationOfferDeclinedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationOfferDeclinedViewController.swift; sourceTree = "<group>"; };
+		FC9C0AC7246BAAF000CF7A48 /* ApplicationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationActions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,15 +144,47 @@
 		FC06A1BA24641EAE0023DE99 /* source */ = {
 			isa = PBXGroup;
 			children = (
+				FC03C88D246AEA9E0075258C /* CoverLetterText.swift */,
 				FC06A1BB24641EC40023DE99 /* ApplicationsCoordinator.swift */,
 				FC403608246AE35900F03A5B /* ApplicationState.swift */,
-				FC40360A246AE37C00F03A5B /* ApplicationsPresenter.swift */,
-				FC40360C246AE3D100F03A5B /* ApplicationsViewController.swift */,
-				FC40360E246AE42700F03A5B /* ApplicationTile.swift */,
-				FC403610246AE46700F03A5B /* ApplicationDetailViewController.swift */,
-				FC03C88D246AEA9E0075258C /* CoverLetterText.swift */,
+				FC9C0AC7246BAAF000CF7A48 /* ApplicationActions.swift */,
+				FC9C0AC5246BAA3800CF7A48 /* List applications */,
+				FC9C0AC6246BAA5200CF7A48 /* View application */,
+				FC9C0AC4246BAA1200CF7A48 /* Decline */,
+				FC75175F246BB89000ECBA84 /* Application.swift */,
 			);
 			path = source;
+			sourceTree = "<group>";
+		};
+		FC9C0AC4246BAA1200CF7A48 /* Decline */ = {
+			isa = PBXGroup;
+			children = (
+				FC9C0AC2246BA72F00CF7A48 /* ApplicationOfferDeclinedViewController.swift */,
+			);
+			path = Decline;
+			sourceTree = "<group>";
+		};
+		FC9C0AC5246BAA3800CF7A48 /* List applications */ = {
+			isa = PBXGroup;
+			children = (
+				FC40360A246AE37C00F03A5B /* ApplicationsPresenter.swift */,
+				FC75175D246BB6E900ECBA84 /* ApplicationTilePresenter.swift */,
+				FC40360E246AE42700F03A5B /* ApplicationTile.swift */,
+				FC40360C246AE3D100F03A5B /* ApplicationsViewController.swift */,
+				FC751761246BBFAF00ECBA84 /* ApplicationsService.swift */,
+			);
+			path = "List applications";
+			sourceTree = "<group>";
+		};
+		FC9C0AC6246BAA5200CF7A48 /* View application */ = {
+			isa = PBXGroup;
+			children = (
+				FC403610246AE46700F03A5B /* ApplicationDetailViewController.swift */,
+				FC9C0AC0246BA6DE00CF7A48 /* ApplicationOfferMadeViewController.swift */,
+				FC751763246BDC9500ECBA84 /* ApplicationDetailService.swift */,
+				FC751765246BDCED00ECBA84 /* ApplicationDetailPresenter.swift */,
+			);
+			path = "View application";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,13 +297,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC751760246BB89000ECBA84 /* Application.swift in Sources */,
 				FC403609246AE35900F03A5B /* ApplicationState.swift in Sources */,
 				FC40360B246AE37C00F03A5B /* ApplicationsPresenter.swift in Sources */,
+				FC9C0AC3246BA72F00CF7A48 /* ApplicationOfferDeclinedViewController.swift in Sources */,
+				FC9C0AC1246BA6DE00CF7A48 /* ApplicationOfferMadeViewController.swift in Sources */,
+				FC9C0AC8246BAAF000CF7A48 /* ApplicationActions.swift in Sources */,
+				FC75175E246BB6E900ECBA84 /* ApplicationTilePresenter.swift in Sources */,
 				FC403611246AE46700F03A5B /* ApplicationDetailViewController.swift in Sources */,
 				FC40360D246AE3D100F03A5B /* ApplicationsViewController.swift in Sources */,
+				FC751764246BDC9500ECBA84 /* ApplicationDetailService.swift in Sources */,
 				FC40360F246AE42700F03A5B /* ApplicationTile.swift in Sources */,
 				FC03C88E246AEA9E0075258C /* CoverLetterText.swift in Sources */,
+				FC751762246BBFAF00ECBA84 /* ApplicationsService.swift in Sources */,
 				FC06A1BC24641EC40023DE99 /* ApplicationsCoordinator.swift in Sources */,
+				FC751766246BDCED00ECBA84 /* ApplicationDetailPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

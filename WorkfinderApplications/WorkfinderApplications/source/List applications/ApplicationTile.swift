@@ -18,7 +18,7 @@ class ApplicationTile: UITableViewCell {
         label.layer.cornerRadius = 15
         label.layer.masksToBounds = true
         label.backgroundColor = WorkfinderColors.primaryColor
-        label.text = "viewed"
+        label.text = ""
         label.textColor = UIColor.white
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
@@ -87,9 +87,10 @@ class ApplicationTile: UITableViewCell {
         mainStack.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 8, left: 4, bottom: 8, right: 0))
     }
     
-    func configureWithApplication(_ application: ApplicationsPresenter.ApplicationPresenter) {
+    func configureWithApplication(_ application: ApplicationTilePresenter) {
         companyName.text = application.companyName
         industry.text = application.industry
+        statusView.text = application.state.rawValue
         hostInformation.text = application.hostInformation
         dateString.text = application.appliedDateString
     }
