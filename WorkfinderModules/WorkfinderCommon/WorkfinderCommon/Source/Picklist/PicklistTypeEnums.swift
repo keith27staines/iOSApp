@@ -94,17 +94,17 @@ public enum PicklistType: Int, CaseIterable, Codable {
     
     public var title: String {
         switch self {
-        case .skills: return NSLocalizedString("skills", comment: "")
-        case .attributes: return NSLocalizedString("attributes", comment: "")
-        case .institutions: return NSLocalizedString("university", comment: "")
-        case .year: return NSLocalizedString("year of study", comment: "")
-        case .motivation: return NSLocalizedString("Motivation", comment: "")
-        case .experience: return NSLocalizedString("Experience", comment: "")
-        case .availabilityPeriod: return NSLocalizedString("availability period", comment: "")
-        case .subject: return NSLocalizedString("subject", comment: "")
-        case .placementType: return NSLocalizedString("placement type", comment: "")
-        case .project: return NSLocalizedString("project", comment: "")
-        case .duration: return NSLocalizedString("duration", comment: "")
+        case .skills: return "skills"
+        case .attributes: return "attributes"
+        case .institutions: return "university"
+        case .year: return "year of study"
+        case .motivation: return "Motivation"
+        case .experience: return "Experience"
+        case .availabilityPeriod: return "availability period"
+        case .subject: return "subject"
+        case .placementType: return "placement type"
+        case .project: return "project"
+        case .duration: return "duration"
         }
     }
     
