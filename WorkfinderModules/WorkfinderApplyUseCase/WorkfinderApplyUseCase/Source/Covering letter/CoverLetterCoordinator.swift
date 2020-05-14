@@ -82,7 +82,7 @@ public class PicklistsStore: PicklistsStoreProtocol {
     func buildPicklists() -> PicklistsDictionary {
         return [
             .year: Picklist(type: .year, otherItem: otherItem, maximumPicks: 1, networkConfig: networkConfig),
-            .subject: Picklist(type: .year, otherItem: otherItem, maximumPicks: 1, networkConfig: networkConfig),
+            .subject: Picklist(type: .subject, otherItem: otherItem, maximumPicks: 1, networkConfig: networkConfig),
             .institutions: TextSearchPicklist(type: .institutions, otherItem: otherItem, networkConfig: networkConfig),
             .placementType: Picklist(type: .placementType, otherItem: nil, maximumPicks: 1, networkConfig: networkConfig),
             .project: Picklist(type: .project, otherItem: otherItem, maximumPicks: 1, networkConfig: networkConfig),

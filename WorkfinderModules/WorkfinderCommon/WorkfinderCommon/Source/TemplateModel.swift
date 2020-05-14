@@ -11,7 +11,7 @@ public struct TemplateModel : Codable {
     
     private enum CodingKeys: String, CodingKey {
         case uuid
-        case templateString = "template_string"
+        case templateString = "template"
     }
 }
 

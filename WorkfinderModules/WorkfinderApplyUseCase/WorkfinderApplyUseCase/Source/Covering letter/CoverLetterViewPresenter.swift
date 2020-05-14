@@ -134,7 +134,7 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     }
     
     func onTemplateListFetched(templateListJson: TemplateListJson) {
-        self.templateModel = templateListJson.results.first ?? defaultTemplate
+        self.templateModel = templateListJson.results.first ?? CoverLetterViewPresenter.defaultTemplate
         let parser = TemplateParser(templateModel: templateModel)
         embeddedFieldNames = parser.allFieldNames()
         renderer = TemplateRenderer(parser: parser)
@@ -144,25 +144,17 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
          templateProvider: TemplateProviderProtocol,
          picklistsStore: PicklistsStoreProtocol) {
         self.coordinator = coordinator
-        self.templateModel = defaultTemplate
+        self.templateModel = CoverLetterViewPresenter.defaultTemplate
         self.templateProvider = templateProvider
         self.picklistsStore = picklistsStore
         self.allPickListsDictionary = [:]
     }
     
-    private let defaultTemplate = TemplateModel(uuid: "", templateString:
-    """
-    Dear Sir/Madam
-
-    Oh dear, the server failed to return any templates again! But I am a clever iPhone so I can just make one up!
-
-    {{motivation}}
-    I would like to apply for the {{role}} role at your company.
-    I wish to acquire the following skills: {{skills}}.
-    I consider myself to have the following personal attributes: {{attributes}}.
-    I am in year {{year}} of study at {{educational institution}}.
-    I will be available between {{availability}}
-    My experience is:
-    {{experience}}
-    """)
+    private static var defaultTemplate: TemplateModel {
+        let template = PicklistType.allCases.reduce("") { (result, picklistType) -> String in
+            return "\(result)\n\(picklistType.title): {{\(picklistType.title)}}"
+        }
+        return TemplateModel(uuid: "", templateString:template)
+    }
+   
 }
