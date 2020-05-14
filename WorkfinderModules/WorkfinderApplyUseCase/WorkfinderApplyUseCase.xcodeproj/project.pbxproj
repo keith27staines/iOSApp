@@ -54,7 +54,6 @@
 		FC6A50CE245AB9C400EF5C92 /* TextSearchPicklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6A50CD245AB9C400EF5C92 /* TextSearchPicklist.swift */; };
 		FC6A50D0245AB9F100EF5C92 /* AvailabilityPeriodPicklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6A50CF245AB9F100EF5C92 /* AvailabilityPeriodPicklist.swift */; };
 		FC6A50D2245ABA4300EF5C92 /* TextblockPicklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6A50D1245ABA4300EF5C92 /* TextblockPicklist.swift */; };
-		FC6A50D4245ABA8100EF5C92 /* UniversityYearPicklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6A50D3245ABA8100EF5C92 /* UniversityYearPicklist.swift */; };
 		FC6A50D6245ABAD500EF5C92 /* HardCodedPicklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6A50D5245ABAD500EF5C92 /* HardCodedPicklist.swift */; };
 		FC6A50D8245AD59800EF5C92 /* PicklistDataSourceAndDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6A50D7245AD59800EF5C92 /* PicklistDataSourceAndDelegate.swift */; };
 		FC6E3D2D2248D74A00377736 /* WorkfinderApplyUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF102248BDCC00D9B8D1 /* WorkfinderApplyUseCase.framework */; };
@@ -133,7 +132,6 @@
 		FC6A50CD245AB9C400EF5C92 /* TextSearchPicklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSearchPicklist.swift; sourceTree = "<group>"; };
 		FC6A50CF245AB9F100EF5C92 /* AvailabilityPeriodPicklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityPeriodPicklist.swift; sourceTree = "<group>"; };
 		FC6A50D1245ABA4300EF5C92 /* TextblockPicklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextblockPicklist.swift; sourceTree = "<group>"; };
-		FC6A50D3245ABA8100EF5C92 /* UniversityYearPicklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityYearPicklist.swift; sourceTree = "<group>"; };
 		FC6A50D5245ABAD500EF5C92 /* HardCodedPicklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardCodedPicklist.swift; sourceTree = "<group>"; };
 		FC6A50D7245AD59800EF5C92 /* PicklistDataSourceAndDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicklistDataSourceAndDelegate.swift; sourceTree = "<group>"; };
 		FC6E3D282248D74A00377736 /* WorkfinderApplyUseCaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderApplyUseCaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -315,7 +313,6 @@
 				FC6A50CD245AB9C400EF5C92 /* TextSearchPicklist.swift */,
 				FC6A50CF245AB9F100EF5C92 /* AvailabilityPeriodPicklist.swift */,
 				FC6A50D1245ABA4300EF5C92 /* TextblockPicklist.swift */,
-				FC6A50D3245ABA8100EF5C92 /* UniversityYearPicklist.swift */,
 			);
 			path = Picklists;
 			sourceTree = "<group>";
@@ -595,7 +592,6 @@
 				FC6A50D0245AB9F100EF5C92 /* AvailabilityPeriodPicklist.swift in Sources */,
 				FC299934231EC50300F83FB6 /* F4SCalendarContainerViewController.swift in Sources */,
 				FC299935231EC50300F83FB6 /* F4SMonthHeaderView.swift in Sources */,
-				FC6A50D4245ABA8100EF5C92 /* UniversityYearPicklist.swift in Sources */,
 				FC2917F42461C2660011EFCD /* PicklistTableViewCells.swift in Sources */,
 				FC299936231EC50300F83FB6 /* F4SCalendarColors.swift in Sources */,
 				FC23BCFF243B33510075F359 /* TemplateParser.swift in Sources */,

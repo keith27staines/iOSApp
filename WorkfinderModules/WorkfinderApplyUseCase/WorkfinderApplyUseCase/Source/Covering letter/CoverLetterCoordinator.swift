@@ -64,23 +64,34 @@ public class PicklistsStore: PicklistsStoreProtocol {
         }
     }
     
+    /*
+     Final Fields are:
+     (FE type, number to choose)
+     *         Year (pick list & 'other', 1)
+     *         Subject (pick list & 'other', 1)
+     *         Institution (Typeahead & 'other', 1)
+     *         Placement Type (pick list, 1)
+     *         Project (pick list & 'other', 1)
+     *         Motivation (free text)
+     *         Availability (date picker)
+     *         Duration (pick list, 1)
+     *         Experience (free text)
+     *         Attributes (pick list, 1-3)
+     *         Skills (pick list, 1-3)
+     */
     func buildPicklists() -> PicklistsDictionary {
         return [
-            .attributes: Picklist(type: .attributes, otherItem: nil, maximumPicks: 3, networkConfig: networkConfig),
-            .roles: Picklist(type: .roles, otherItem: nil, maximumPicks: 1, networkConfig: networkConfig),
-            .skills: Picklist(type: .skills, otherItem: nil, maximumPicks: 3, networkConfig: networkConfig),
-            .universities: TextSearchPicklist(type: .universities, otherItem: self.otherItem, networkConfig: networkConfig),
-            .year: UniversityYearPicklist(otherItem: otherItem, networkConfig: networkConfig),
+            .year: Picklist(type: .year, otherItem: otherItem, maximumPicks: 1, networkConfig: networkConfig),
+            .subject: Picklist(type: .year, otherItem: otherItem, maximumPicks: 1, networkConfig: networkConfig),
+            .institutions: TextSearchPicklist(type: .institutions, otherItem: otherItem, networkConfig: networkConfig),
+            .placementType: Picklist(type: .placementType, otherItem: nil, maximumPicks: 1, networkConfig: networkConfig),
+            .project: Picklist(type: .project, otherItem: otherItem, maximumPicks: 1, networkConfig: networkConfig),
+            .motivation: TextblockPicklist(type: .motivation, networkConfig: networkConfig),
             .availabilityPeriod: AvailabilityPeriodPicklist(networkConfig: networkConfig),
-            .motivation: TextblockPicklist(
-                type: .motivation,
-                networkConfig: networkConfig),
-            .reason: TextblockPicklist(
-                type: .reason,
-                networkConfig: networkConfig),
-            .experience: TextblockPicklist(
-                type: .experience,
-                networkConfig: networkConfig)
+            .duration: Picklist(type: .duration, otherItem: nil, maximumPicks: 1, networkConfig: networkConfig),
+            .experience: TextblockPicklist(type: .experience, networkConfig: networkConfig),
+            .attributes: Picklist(type: .attributes, otherItem: nil, maximumPicks: 3, networkConfig: networkConfig),
+            .skills: Picklist(type: .skills, otherItem: nil, maximumPicks: 3, networkConfig: networkConfig),
         ]
     }
 }
@@ -151,14 +162,18 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
 extension CoverLetterCoordinator: LetterEditorCoordinatorProtocol {
     func showPicklist(_ picklist: PicklistProtocol) {
         switch picklist.type {
-        case .roles, .skills, .attributes, .year:
+        case .skills,
+             .attributes,
+             .year,
+             .subject,
+             .placementType,
+             .project,
+             .duration:
             let vc = PicklistViewController(coordinator: self, picklist: picklist)
             navigationRouter.push(viewController: vc, animated: true)
             
-        case .universities:
-            guard let picklist = picklist as? TextSearchPicklistProtocol else {
-                return
-            }
+        case .institutions:
+            guard let picklist = picklist as? TextSearchPicklistProtocol else { return }
             let vc = SearchlistViewController<String>(coordinator: self, picklist: picklist)
             navigationRouter.push(viewController: vc, animated: true)
             
@@ -178,7 +193,7 @@ extension CoverLetterCoordinator: LetterEditorCoordinatorProtocol {
             }
             navigationRouter.push(viewController: vc, animated: true)
             
-        case .motivation, .reason, .experience:
+        case .motivation, .experience:
             let vc = FreeTextEditorViewController(coordinator: self, freeTextPicker: picklist as! TextblockPicklist)
             navigationRouter.push(viewController: vc, animated: true)
         }

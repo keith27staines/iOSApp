@@ -99,22 +99,10 @@ public class Picklist: PicklistProtocol {
     }
     
     public var itemSelectedSummary: String {
-        guard selectedItems.count > 0 else { return "Choose" }
-        switch type {
-        case .roles:
-            return NSLocalizedString("Selected", comment: "")
-        case .skills:
-            return NSLocalizedString("\(selectedItems.count) selected", comment: "")
-        case .attributes:
-            return NSLocalizedString("\(selectedItems.count) selected", comment: "")
-        case .universities:
-            return NSLocalizedString("\(selectedItems.count) selected", comment: "")
-        case .year:
-            return NSLocalizedString("Selected", comment: "")
-        case .availabilityPeriod:
-            return NSLocalizedString("Selected", comment: "")
-        case .motivation, .reason, .experience:
-            return NSLocalizedString("Selected", comment: "")
+        guard selectedItems.count > 0 else { return NSLocalizedString("Choose", comment: "") }
+        switch maximumPicks {
+        case 1: return NSLocalizedString("Selected", comment: "")
+        default: return NSLocalizedString("\(selectedItems.count) selected", comment: "")
         }
     }
 }
