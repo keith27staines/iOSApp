@@ -49,7 +49,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     }
     
     let association: HostLocationAssociationJson
-    
+    let companyWorkplace: CompanyWorkplace
     public init(applyCoordinatorDelegate: ApplyCoordinatorDelegate? = nil,
                 applyService: PostPlacementServiceProtocol,
                 companyWorkplace: CompanyWorkplace,
@@ -64,6 +64,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         self.environment = environment
         self.startingViewController = navigationRouter.navigationController.topViewController
         self.interestsRepository = interestsRepository
+        self.companyWorkplace = companyWorkplace
         self.association = association
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
         self.draftPlacement.associationUuid = association.uuid
@@ -87,7 +88,16 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     }
     
     func startCoverLetterCoordinator(candidateDateOfBirth: Date) {
-        coverletterCoordinator = CoverLetterCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, candidateDateOfBirth: candidateDateOfBirth)
+        guard let hostName = association.host.displayName else { return }
+        let candidateName = injected.user.fullName
+        let companyName = companyWorkplace.companyJson.name ?? "Unknown company"
+        coverletterCoordinator = CoverLetterCoordinator(parent: self,
+                                                        navigationRouter: navigationRouter,
+                                                        inject: injected,
+                                                        candidateDateOfBirth: candidateDateOfBirth,
+                                                        candidateName: candidateName,
+                                                        companyName: companyName,
+                                                        hostName: hostName)
         coverletterCoordinator?.start()
     }
     

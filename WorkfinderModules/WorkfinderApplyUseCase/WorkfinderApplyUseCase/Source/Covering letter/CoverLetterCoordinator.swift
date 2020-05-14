@@ -103,12 +103,23 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
     weak var letterEditorViewController: LetterEditorViewProtocol?
     var networkConfig: NetworkConfig { return injected.networkConfig}
     var picklistsDidUpdate: ((PicklistsDictionary) -> Void)?
-    
-    public init(parent: ApplyCoordinator?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol, candidateDateOfBirth: Date) {
+    let candidateName: String?
+    let companyName: String
+    let hostName: String
+    public init(parent: ApplyCoordinator?,
+                navigationRouter: NavigationRoutingProtocol,
+                inject: CoreInjectionProtocol,
+                candidateDateOfBirth: Date,
+                candidateName: String?,
+                companyName:String,
+                hostName: String) {
         self.applyCoordinator = parent
         self.templateProvider = TemplateProvider(
             networkConfig: inject.networkConfig,
             candidateDateOfBirth: candidateDateOfBirth)
+        self.candidateName = candidateName
+        self.companyName = companyName
+        self.hostName = hostName
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
@@ -116,7 +127,10 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
         let presenter = CoverLetterViewPresenter(
             coordinator: self,
             templateProvider: self.templateProvider,
-            picklistsStore: self.picklistsStore)
+            picklistsStore: self.picklistsStore,
+            companyName: companyName,
+            hostName: hostName,
+            candidateName: candidateName)
         return presenter
     }()
     

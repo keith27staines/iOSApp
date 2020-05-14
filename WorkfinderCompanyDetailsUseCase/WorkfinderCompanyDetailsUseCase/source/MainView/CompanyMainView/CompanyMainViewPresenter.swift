@@ -31,7 +31,6 @@ class CompanyMainViewPresenter: CompanyMainViewPresenterProtocol {
     
     var selectedAssociation: HostLocationAssociationJson? { return hostsSectionPresenter.selectedAssociation }
     var isHostSelected: Bool { return hostsSectionPresenter.isAssociationSelected }
-
     lazy var headerViewPresenter: CompanyHeaderViewPresenterProtocol = {
         return CompanyHeaderViewPresenter(companyWorkplace: self.companyWorkplace)
     }()

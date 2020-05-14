@@ -38,8 +38,8 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     
     func onDidTapShowTemplateButton() {
         guard let renderer = renderer else { return }
-        displayString = renderer.renderToPlainString(with: [:])
-        attributedDisplayString = renderer.renderToAttributedString(with: [:])
+        displayString = renderer.renderToPlainString(with: fixedFieldValues)
+        attributedDisplayString = renderer.renderToAttributedString(with: fixedFieldValues)
         view?.refresh(from: self)
     }
     
@@ -49,6 +49,8 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
         attributedDisplayString = _attributedDisplayString
         view?.refresh(from: self)
     }
+    
+    let fixedFieldValues: [String:String?]
     
     func updateLetterDisplayStrings() {
         guard let renderer = renderer else { return }
@@ -77,8 +79,17 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
                 fieldValues[picklist.type.title] = Grammar().commaSeparatedList(strings: items)
             }
         }
-        _letterDisplayString = renderer.renderToPlainString(with: fieldValues)
-        _attributedDisplayString = renderer.renderToAttributedString(with: fieldValues)
+        let fieldAndFixedFields = addStandardFieldValues(fieldValues: fieldValues)
+        _letterDisplayString = renderer.renderToPlainString(with: fieldAndFixedFields)
+        _attributedDisplayString = renderer.renderToAttributedString(with: fieldAndFixedFields)
+    }
+    
+    func addStandardFieldValues(fieldValues: [String: String?]) -> [String: String?] {
+        var updatedFields = fieldValues
+        fixedFieldValues.forEach { (field) in
+            updatedFields[field.key] = field.value
+        }
+        return updatedFields
     }
     
     func onDidTapSelectOptionsButton() {
@@ -142,12 +153,20 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     
     init(coordinator: CoverletterCoordinatorProtocol?,
          templateProvider: TemplateProviderProtocol,
-         picklistsStore: PicklistsStoreProtocol) {
+         picklistsStore: PicklistsStoreProtocol,
+         companyName: String,
+         hostName: String,
+         candidateName: String?) {
         self.coordinator = coordinator
         self.templateModel = CoverLetterViewPresenter.defaultTemplate
         self.templateProvider = templateProvider
         self.picklistsStore = picklistsStore
         self.allPickListsDictionary = [:]
+        self.fixedFieldValues = [
+            "host": hostName,
+            "company" : companyName,
+            "candidate": candidateName
+        ]
     }
     
     private static var defaultTemplate: TemplateModel {

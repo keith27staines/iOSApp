@@ -14,6 +14,7 @@ protocol CompanyWorkplaceCoordinatorProtocol : CompanyMainViewCoordinatorProtoco
 }
 
 protocol CompanyWorkplacePresenterProtocol: class {
+    var selectedHost: Host? { get }
     var mainViewPresenter: CompanyMainViewPresenter { get }
     func onTapBack()
     func onTapApply()
@@ -35,6 +36,8 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
             mainViewPresenter.headerViewPresenter.distanceFromCompany = self.distanceFromUserToCompany ?? "unknown distance from you"
         }
     }
+    
+    var selectedHost: Host? { mainViewPresenter.hostsSectionPresenter.selectedAssociation?.host }
     
     var companyPostcode: String? {
         didSet { view?.refresh() }
