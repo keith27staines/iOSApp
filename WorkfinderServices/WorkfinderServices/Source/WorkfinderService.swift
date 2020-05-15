@@ -64,7 +64,8 @@ open class WorkfinderService {
                 responseData: data,
                 httpResponse: httpResponse,
                 error: error) { [weak self] (result) in
-                self?.deserialise(dataResult: result, completion: completion)
+                    self?.deserialise(dataResult: result, completion: completion)
+                
             }
         })
         return task

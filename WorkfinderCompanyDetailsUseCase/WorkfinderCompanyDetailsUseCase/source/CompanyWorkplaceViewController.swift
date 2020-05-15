@@ -15,7 +15,7 @@ protocol CompanyWorkplaceViewProtocol : CompanyHostsSectionViewProtocol {
     func refresh()
     func showLoadingIndicator()
     func hideLoadingIndicator(_ presenter: CompanyWorkplacePresenter)
-    func showNetworkError(_ error: F4SNetworkError, retry: (() -> Void)?)
+    func showNetworkError(_ error: Error, retry: (() -> Void)?)
 }
 
 class CompanyWorkplaceViewController: UIViewController {
@@ -25,6 +25,7 @@ class CompanyWorkplaceViewController: UIViewController {
     var originScreen = ScreenName.notSpecified
     weak var log: F4SAnalyticsAndDebugging?
     var appSettings: AppSettingProvider
+    let messageHandler = UserMessageHandler()
     
     init(appSettings: AppSettingProvider, presenter: CompanyWorkplacePresenterProtocol) {
         self.appSettings = appSettings
@@ -113,16 +114,11 @@ extension CompanyWorkplaceViewController: CompanyWorkplaceViewProtocol {
         refresh()
     }
     
-    func showNetworkError(_ error: F4SNetworkError, retry: (() -> Void)?) {
-        let alert: UIAlertController = UIAlertController(title: "Network error", message: "The operation could not be completed", preferredStyle: UIAlertController.Style.alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: { [weak self] action in
-            self?.decrementLoadingInProgressCount()
-        })
-        alert.addAction(cancelAction)
-        if error.retry {
-            let retryAction = UIAlertAction(title: "Retry", style: .default) { (action) in retry?() }
-            alert.addAction(retryAction)
-        }
-        present(alert, animated: true, completion: nil)
+    func showNetworkError(_ error: Error, retry: (() -> Void)?) {
+        messageHandler.displayOptionalErrorIfNotNil(
+            error,
+            parentCtrl: self,
+            cancelHandler: { self.decrementLoadingInProgressCount() },
+            retryHandler: { retry?() } )
     }
 }

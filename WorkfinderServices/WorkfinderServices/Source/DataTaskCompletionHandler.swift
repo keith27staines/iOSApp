@@ -47,9 +47,8 @@ public class DataTaskCompletionHandler {
                 return
             }
             
-            let workfinderError = WorkfinderError(errorType: .noData, attempting: attempting, retryHandler: nil)
-            let result = Result<Data, Error>.failure(workfinderError)
-            self?.logger.logDataTaskFailure(error: workfinderError)
+            let result = Result<Data,Error>.success(data)
+            self?.logger.logDataTaskSuccess(request: request, response: response, responseData: data)
             completion(result)
         }
     }

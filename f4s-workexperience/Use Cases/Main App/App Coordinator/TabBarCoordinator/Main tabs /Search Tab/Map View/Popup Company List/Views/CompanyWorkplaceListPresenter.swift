@@ -10,6 +10,7 @@ protocol CompanyWorkplaceListPresenterProtocol {
     func onViewDidLoad(_ view: CompanyWorkplaceListViewProtocol)
     func companyTileViewData(index: Int) -> CompanyTileViewData
     func onSelectRow(_ row: Int)
+    func loadData(completion: @escaping (Error?) -> Void)
 }
 
 class CompanyWorkplaceListPresenter {
@@ -61,26 +62,24 @@ class CompanyWorkplaceListPresenter {
         return companyJson
     }
     
-    func beginFetch() {
+    func beginFetch(completion: @escaping (Error?) -> Void) {
         showLoadingIndicator = true
         view?.refreshFromPresenter(self)
         provider.fetchCompanyWorkplaces(locationUuids: locationUuids) { [weak self] (result) in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                self.onfetchComplete(result)
+                self.onfetchComplete(result,completion: completion)
             }
         }
     }
     
-    func onfetchComplete(_ result: Result<CompanyListJson,Error>) {
+    func onfetchComplete(_ result: Result<CompanyListJson,Error>, completion: (Error?) -> Void) {
         self.showLoadingIndicator = false
         switch result {
         case .success(let companyListJson):
             self.companyListJson = companyListJson
             self.view?.refreshFromPresenter(self)
-        case .failure(let error):
-            print(error)
-            break
+        case .failure(let error): completion(error)
         }
     }
 }
@@ -94,7 +93,10 @@ extension CompanyWorkplaceListPresenter: CompanyWorkplaceListPresenterProtocol {
     func onViewDidLoad(_ view: CompanyWorkplaceListViewProtocol) {
         view.presenter = self
         self.view = view
-        beginFetch()
+    }
+    
+    func loadData(completion: @escaping (Error?) -> Void) {
+        beginFetch(completion: completion)
     }
     
     func companyTileViewData(index: Int) -> CompanyTileViewData {

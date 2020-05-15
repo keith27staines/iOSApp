@@ -67,8 +67,6 @@
 		FC96DE3B245C37C20074011B /* RegisterAndSignInMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96DE3A245C37C20074011B /* RegisterAndSignInMode.swift */; };
 		FC9865B6229D380A006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865B5229D380A006D3E63 /* README */; };
 		FCCA4E3224570CE900DFA696 /* RegisterUserLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA4E3124570CE900DFA696 /* RegisterUserLogic.swift */; };
-		FCE8DA872320D3A700934E2F /* SuccessExtraInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCE8DA862320D39D00934E2F /* SuccessExtraInfo.storyboard */; };
-		FCE8DA892320D3CB00934E2F /* SuccessExtraInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DA882320D3CB00934E2F /* SuccessExtraInfoViewController.swift */; };
 		FCE8DA9A2320E24600934E2F /* ApplyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DA992320E24600934E2F /* ApplyCoordinator.swift */; };
 		FCE8DA9C2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE8DA9B2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework */; };
 		FCF5AF212248BDCC00D9B8D1 /* WorkfinderApplyUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = FCF5AF132248BDCC00D9B8D1 /* WorkfinderApplyUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -148,8 +146,6 @@
 		FC9865B5229D380A006D3E63 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		FCCA4E3124570CE900DFA696 /* RegisterUserLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserLogic.swift; sourceTree = "<group>"; };
 		FCE5190B2249388200B550C9 /* Mustache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mustache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCE8DA852320D39D00934E2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SuccessExtraInfo.storyboard; sourceTree = "<group>"; };
-		FCE8DA882320D3CB00934E2F /* SuccessExtraInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessExtraInfoViewController.swift; sourceTree = "<group>"; };
 		FCE8DA992320E24600934E2F /* ApplyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyCoordinator.swift; sourceTree = "<group>"; };
 		FCE8DA9B2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUserDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCE8DB1623210E1500934E2F /* F4SUploadYPDocumentsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = F4SUploadYPDocumentsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -350,7 +346,6 @@
 			isa = PBXGroup;
 			children = (
 				FCE8DA992320E24600934E2F /* ApplyCoordinator.swift */,
-				FC1053702458784200024706 /* SuccessPopupView.swift */,
 				FCD20A84244D788800AAA5FD /* Date of birth */,
 				FC343CF62445F0E200347BC2 /* User sign in */,
 				FC23BCE9243B33510075F359 /* Covering letter */,
@@ -391,8 +386,7 @@
 		FCE8DA8A2320D42600934E2F /* Success screen */ = {
 			isa = PBXGroup;
 			children = (
-				FCE8DA862320D39D00934E2F /* SuccessExtraInfo.storyboard */,
-				FCE8DA882320D3CB00934E2F /* SuccessExtraInfoViewController.swift */,
+				FC1053702458784200024706 /* SuccessPopupView.swift */,
 			);
 			path = "Success screen";
 			sourceTree = "<group>";
@@ -540,7 +534,6 @@
 				FC29994B231ED87600F83FB6 /* F4SDaysAndHours.storyboard in Resources */,
 				FC29994F231EE4F800F83FB6 /* Calendar.xcassets in Resources */,
 				FC9865B6229D380A006D3E63 /* README in Resources */,
-				FCE8DA872320D3A700934E2F /* SuccessExtraInfo.storyboard in Resources */,
 				FC29994A231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard in Resources */,
 				FC29993E231ECDEE00F83FB6 /* F4SCalendar.storyboard in Resources */,
 			);
@@ -609,7 +602,6 @@
 				FC343CFA2445F17600347BC2 /* RegisterAndSignInCoordinator.swift in Sources */,
 				FC299937231EC50300F83FB6 /* F4SCalendarCollectionViewController.swift in Sources */,
 				FC96DE37245C1EDD0074011B /* RegisterAndSignInBaseViewController.swift in Sources */,
-				FCE8DA892320D3CB00934E2F /* SuccessExtraInfoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,14 +622,6 @@
 				FC299948231ED87600F83FB6 /* Base */,
 			);
 			name = F4SDaysAndHours.storyboard;
-			sourceTree = "<group>";
-		};
-		FCE8DA862320D39D00934E2F /* SuccessExtraInfo.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FCE8DA852320D39D00934E2F /* Base */,
-			);
-			name = SuccessExtraInfo.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

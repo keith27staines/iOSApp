@@ -14,7 +14,7 @@ public enum WorkfinderErrorType {
     case invalidUrl(String)
     case deserialization(Error)
     case noData
-    case http(request:URLRequest, response:HTTPURLResponse?, data: Data?)
+    case http(request:URLRequest?, response:HTTPURLResponse?, data: Data?)
     case networkConnectivity
     case custom(title: String, description: String)
     
@@ -138,5 +138,14 @@ public class WorkfinderError: Error {
         self.urlRequest = request
         self.httpResponse = response
         self.responseData = data
+    }
+    
+    public convenience init?(response: HTTPURLResponse, retryHandler: (() -> Void)?) {
+        guard !(200...299).contains(response.statusCode) else { return nil }
+        self.init(
+            errorType: WorkfinderErrorType.http(request: nil,response: response, data: nil),
+            attempting: nil,
+            retryHandler: retryHandler)
+        self.httpResponse = response
     }
 }

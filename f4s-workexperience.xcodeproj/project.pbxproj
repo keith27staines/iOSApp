@@ -949,7 +949,6 @@
 			isa = PBXGroup;
 			children = (
 				FCDC542824289B5B002581FF /* Views */,
-				FCDC542924289B66002581FF /* Logic */,
 			);
 			path = "Popup Company List";
 			sourceTree = "<group>";
@@ -958,19 +957,12 @@
 			isa = PBXGroup;
 			children = (
 				FCDC542A24289B85002581FF /* CompanyWorkplaceListViewController.swift */,
-				FCDC543424289BD9002581FF /* CompanyWorkplaceTile.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		FCDC542924289B66002581FF /* Logic */ = {
-			isa = PBXGroup;
-			children = (
-				FCDC542D24289B9C002581FF /* CompanyTileViewData.swift */,
 				FCDC542C24289B9B002581FF /* CompanyWorkplaceListPresenter.swift */,
+				FCDC543424289BD9002581FF /* CompanyWorkplaceTile.swift */,
+				FCDC542D24289B9C002581FF /* CompanyTileViewData.swift */,
 				FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */,
 			);
-			path = Logic;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		FCE51E3C2210144E00DC1D50 /* DataGetters */ = {

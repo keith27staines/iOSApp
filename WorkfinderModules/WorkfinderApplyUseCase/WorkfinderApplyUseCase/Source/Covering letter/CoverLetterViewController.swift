@@ -4,16 +4,14 @@ import WorkfinderUI
 
 public protocol CoverLetterViewProtocol {
     var presenter: CoverLetterViewPresenterProtocol { get }
-    func refresh(from presenter: CoverLetterViewPresenterProtocol)
-    func showLoadingIndicator()
-    func hideLoadingIndicator()
+    func refreshFromPresenter()
 }
 
 class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
     
     let presenter: CoverLetterViewPresenterProtocol
     
-    func refresh(from presenter: CoverLetterViewPresenterProtocol) {
+    func refreshFromPresenter() {
         coverLetterTextView.attributedText = presenter.attributedDisplayString
         nextButton.isEnabled = presenter.nextButtonIsEnabled
         let color = presenter.nextButtonIsEnabled ? WorkfinderColors.primaryColor : WorkfinderColors.lightGrey
@@ -61,6 +59,21 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
         configureSubViews()
         configureNavigationController()
         presenter.onViewDidLoad(view: self)
+        refreshFromPresenter()
+        loadData()
+    }
+    
+    func loadData() {
+        showLoadingIndicator()
+        presenter.loadData() { [weak self] optionalError in
+            guard let self = self else { return }
+            self.refreshFromPresenter()
+            self.hideLoadingIndicator()
+            self.messageHandler.displayOptionalErrorIfNotNil(
+                optionalError,
+                parentCtrl: self,
+                retryHandler: self.loadData)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -75,14 +88,14 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
     @objc func onBackTapped() {
         presenter.onDidDismiss()
     }
-    let userMessageHandler = UserMessageHandler()
+    let messageHandler = UserMessageHandler()
     
     func showLoadingIndicator() {
-        userMessageHandler.showLightLoadingOverlay(view)
+        messageHandler.showLightLoadingOverlay(view)
     }
     
     func hideLoadingIndicator() {
-        userMessageHandler.hideLoadingOverlay()
+        messageHandler.hideLoadingOverlay()
     }
     
     init(presenter: CoverLetterViewPresenterProtocol) {

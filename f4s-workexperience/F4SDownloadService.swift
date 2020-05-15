@@ -87,12 +87,10 @@ extension F4SDownloadService : URLSessionDownloadDelegate {
             delegate.downloadService(self, didFailToDownloadWithError: error)
             return
         }
-        
-        if let error = WorkfinderError(response: httpResponse, attempting: attempting, retryHandler: nil) {
+        if let error = WorkfinderError(response: httpResponse, retryHandler: nil) {
             delegate.downloadService(self, didFailToDownloadWithError: error)
             return
         }
-        
         delegate.downloadService(self, didFinishDownloadingToUrl: location)
     }
     

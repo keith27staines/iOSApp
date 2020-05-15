@@ -132,7 +132,7 @@ extension F4SCompanyDownloadManager : F4SDownloadServiceDelegate {
     }
     
     
-    public func downloadService(_ service: F4SDownloadService, didFailToDownloadWithError error: F4SNetworkError) {
+    public func downloadService(_ service: F4SDownloadService, didFailToDownloadWithError error: WorkfinderError) {
         print("company database download failed! \(error)")
         scheduleNextCheckAfter(delay: failedInterval())
     }

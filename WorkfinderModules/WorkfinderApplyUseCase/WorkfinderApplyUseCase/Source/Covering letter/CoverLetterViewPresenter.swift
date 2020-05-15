@@ -8,6 +8,7 @@ public protocol CoverLetterViewPresenterProtocol {
     var displayString: String { get }
     var attributedDisplayString: NSAttributedString { get }
     func onViewDidLoad(view: CoverLetterViewProtocol)
+    func loadData(completion: @escaping (Error?) -> Void)
     func onDidTapShowTemplateButton()
     func onDidTapShowCoverLetterButton()
     func onDidTapSelectOptionsButton()
@@ -40,14 +41,14 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
         guard let renderer = renderer else { return }
         displayString = renderer.renderToPlainString(with: fixedFieldValues)
         attributedDisplayString = renderer.renderToAttributedString(with: fixedFieldValues)
-        view?.refresh(from: self)
+        view?.refreshFromPresenter()
     }
     
     func onDidTapShowCoverLetterButton() {
         updateLetterDisplayStrings()
         displayString = _letterDisplayString
         attributedDisplayString = _attributedDisplayString
-        view?.refresh(from: self)
+        view?.refreshFromPresenter()
     }
     
     let fixedFieldValues: [String:String?]
@@ -97,7 +98,7 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
             guard let self = self else { return }
             self.picklistsStore.save()
             self.updateLetterDisplayStrings()
-            self.view?.refresh(from: self)
+            self.view?.refreshFromPresenter()
         })
     }
     
@@ -112,16 +113,18 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     
     func onViewDidLoad(view: CoverLetterViewProtocol) {
         self.view = view
-        view.refresh(from: self)
-        view.showLoadingIndicator()
         self.allPickListsDictionary = loadPicklists()
+        view.refreshFromPresenter()
+    }
+    
+    func loadData(completion: @escaping (Error?) -> Void) {
         templateProvider.fetchCoverLetterTemplateListJson() { [weak self] (result) in
-            self?.view?.hideLoadingIndicator()
             switch result {
             case .success(let templateListJson):
                 self?.onTemplateListFetched(templateListJson: templateListJson)
+                completion(nil)
             case .failure(let error):
-                print("Error fetching template: \(error)")
+                completion(error)
             }
         }
     }

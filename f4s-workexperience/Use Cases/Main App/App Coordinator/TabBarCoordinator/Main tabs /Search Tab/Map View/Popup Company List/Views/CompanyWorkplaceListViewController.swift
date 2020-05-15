@@ -20,6 +20,22 @@ class CompanyWorkplaceListViewController: UIViewController {
         view.backgroundColor = UIColor.white
         configureViews()
         presenter?.onViewDidLoad(self)
+        loadData()
+    }
+    
+    func loadData() {
+        messageHandler.showLoadingOverlay(self.view)
+        presenter?.loadData() { [weak self] optionalError in
+            guard let self = self else { return }
+            self.messageHandler.hideLoadingOverlay()
+            self.refreshFromPresenter(self.presenter)
+            self.messageHandler.displayOptionalErrorIfNotNil(
+                optionalError,
+                parentCtrl: self,
+                cancelHandler: {},
+                retryHandler: self.loadData)
+        }
+        
     }
     
     func configureViews() {
