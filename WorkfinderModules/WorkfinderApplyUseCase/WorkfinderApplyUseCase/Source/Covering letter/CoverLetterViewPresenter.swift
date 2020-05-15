@@ -77,7 +77,11 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
                 }
             }
             if !items.isEmpty {
-                fieldValues[picklist.type.title] = Grammar().commaSeparatedList(strings: items)
+                if picklist.type == .availabilityPeriod {
+                    fieldValues[picklist.type.title] = "\(items[0]) to \(items[1])"
+                } else {
+                    fieldValues[picklist.type.title] = Grammar().commaSeparatedList(strings: items)
+                }
             }
         }
         let fieldAndFixedFields = addStandardFieldValues(fieldValues: fieldValues)
