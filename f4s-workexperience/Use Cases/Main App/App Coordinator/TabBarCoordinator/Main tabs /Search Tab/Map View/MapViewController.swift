@@ -731,11 +731,11 @@ extension MapViewController {
                         let title = NSLocalizedString("No data connectivity", comment: "")
                         let errorMsg = NSLocalizedString("You appear to be offline at the moment. Please try again later when you have a working internet connection.",
                                                          comment: "")
-                        this.userMessageHandler.displayWithTitle(title, errorMsg, parentCtrl: this)
+                        this.userMessageHandler.displayMessage(title, errorMsg, parentCtrl: this)
                     } else {
                         let title = NSLocalizedString("Location Not Found", comment: "")
                         let errorMsg = NSLocalizedString("We cannot find the location you entered. Please try again", comment: "")
-                        this.userMessageHandler.displayWithTitle(title, errorMsg, parentCtrl: this)
+                        this.userMessageHandler.displayMessage(title, errorMsg, parentCtrl: this)
                     }
                 }
             }

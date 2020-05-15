@@ -1,4 +1,5 @@
 import Foundation
+import WorkfinderUI
 
 class ApplicationsPresenter {
     weak var coordinator: ApplicationsCoordinatorProtocol?
@@ -6,6 +7,7 @@ class ApplicationsPresenter {
     let service: ApplicationsServiceProtocol
     var applications = [Application]()
     var applicationTilePresenters = [ApplicationTilePresenter]()
+    weak var view: WorkfinderViewControllerProtocol?
     
     init(coordinator: ApplicationsCoordinatorProtocol, service: ApplicationsService) {
         self.service = service
@@ -24,7 +26,11 @@ class ApplicationsPresenter {
         return applications[indexPath.row]
     }
     
-    func onViewDidLoad(completion: @escaping (Error?) -> Void) {
+    func onViewDidLoad(view: WorkfinderViewControllerProtocol) {
+        self.view = view
+    }
+    
+    func loadData(completion: @escaping (Error?) -> Void) {
         service.fetchApplications { result in
             self.applicationTilePresenters = []
             switch result {

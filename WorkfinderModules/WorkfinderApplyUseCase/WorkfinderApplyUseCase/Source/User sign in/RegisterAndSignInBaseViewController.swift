@@ -381,13 +381,13 @@ extension RegisterAndSignInBaseViewController: MFMailComposeViewControllerDelega
             let messageHandler = self.messageHandler
             switch result {
             case .sent:
-                messageHandler.displayWithTitle("Sent", "Your password reset request has been sent", parentCtrl: self)
+                messageHandler.displayMessage("Sent", "Your password reset request has been sent", parentCtrl: self)
             case .failed:
-                messageHandler.displayWithTitle("Failed", "Unable to send password reset email", parentCtrl: self)
+                messageHandler.displayMessage("Failed", "Unable to send password reset email", parentCtrl: self)
             case .cancelled:
                 break
             case .saved:
-                messageHandler.displayWithTitle("Saved", "Your password reset request email has been saved in to drafts", parentCtrl: self)
+                messageHandler.displayMessage("Saved", "Your password reset request email has been saved in to drafts", parentCtrl: self)
             @unknown default:
                 break
             }

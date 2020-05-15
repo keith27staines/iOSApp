@@ -1,8 +1,10 @@
 import UIKit
+import WorkfinderCommon
 import WorkfinderUI
 
-class ApplicationsViewController: UIViewController {
+class ApplicationsViewController: UIViewController, WorkfinderViewControllerProtocol {
 
+    let messageHandler =  UserMessageHandler()
     weak var coordinator: ApplicationsCoordinatorProtocol?
     let presenter: ApplicationsPresenter
     
@@ -11,21 +13,31 @@ class ApplicationsViewController: UIViewController {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
-    let messageHandler =  UserMessageHandler()
+    
     override func viewDidLoad() {
         configureNavigationBar()
         configureViews()
+        presenter.onViewDidLoad(view: self)
         title = NSLocalizedString("Applications", comment: "")
+    }
+    
+    func loadData() {
         messageHandler.showLoadingOverlay(view)
-        presenter.onViewDidLoad() { [weak self] error in
+        presenter.loadData { [weak self] error in
             guard let self = self else { return }
             self.messageHandler.hideLoadingOverlay()
-            if let error = error {
-                self.messageHandler.displayAlertFor(error.localizedDescription, parentCtrl: self)
+            if let error = error as? WorkfinderError {
+                self.messageHandler.displayWorkfinderError(
+                    error,
+                    parentCtrl: self,
+                    cancelHandler: nil,
+                    retryHandler: self.loadData)
             }
-            self.tableView.reloadData()
+            self.refreshFromPresenter()
         }
     }
+    
+    func refreshFromPresenter() { tableView.reloadData() }
     
     func configureNavigationBar() {
         navigationController?.isNavigationBarHidden = false

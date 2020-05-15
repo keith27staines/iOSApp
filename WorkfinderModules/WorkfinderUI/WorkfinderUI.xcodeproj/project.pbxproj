@@ -27,6 +27,7 @@
 		FC403607246ABBC600F03A5B /* CompanyLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC403606246ABBC600F03A5B /* CompanyLogoView.swift */; };
 		FC5CBA55231D2C4D00C2D3C5 /* F4SCompanyHeaderViewWithLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBA54231D2C4D00C2D3C5 /* F4SCompanyHeaderViewWithLogo.swift */; };
 		FC5CBA57231D2C7D00C2D3C5 /* F4SRoundIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBA56231D2C7D00C2D3C5 /* F4SRoundIconView.swift */; };
+		FC5DAAE1246EAC8700031AEA /* WorkfinderPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5DAAE0246EAC8700031AEA /* WorkfinderPresenterProtocol.swift */; };
 		FC6E42DF2455855D005E0D08 /* WorkfinderColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6E42DE2455855D005E0D08 /* WorkfinderColors.swift */; };
 		FC6E42E124558591005E0D08 /* WorkfinderFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6E42E024558591005E0D08 /* WorkfinderFonts.swift */; };
 		FC93DBDF231F981D00F1CE23 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DBDE231F981D00F1CE23 /* ContentViewController.swift */; };
@@ -81,6 +82,7 @@
 		FC403606246ABBC600F03A5B /* CompanyLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyLogoView.swift; sourceTree = "<group>"; };
 		FC5CBA54231D2C4D00C2D3C5 /* F4SCompanyHeaderViewWithLogo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCompanyHeaderViewWithLogo.swift; sourceTree = "<group>"; };
 		FC5CBA56231D2C7D00C2D3C5 /* F4SRoundIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SRoundIconView.swift; sourceTree = "<group>"; };
+		FC5DAAE0246EAC8700031AEA /* WorkfinderPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderPresenterProtocol.swift; sourceTree = "<group>"; };
 		FC6E42DE2455855D005E0D08 /* WorkfinderColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderColors.swift; sourceTree = "<group>"; };
 		FC6E42E024558591005E0D08 /* WorkfinderFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderFonts.swift; sourceTree = "<group>"; };
 		FC93DBDC231F981C00F1CE23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "f4s-workexperience/Base.lproj/Content.storyboard"; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				FC5CBA56231D2C7D00C2D3C5 /* F4SRoundIconView.swift */,
 				FC9535A0231E448D00F4A9DA /* F4SSelfLoadingImageView.swift */,
 				FC403606246ABBC600F03A5B /* CompanyLogoView.swift */,
+				FC5DAAE0246EAC8700031AEA /* WorkfinderPresenterProtocol.swift */,
 			);
 			path = "Workfinder controls";
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 				FC6E42DF2455855D005E0D08 /* WorkfinderColors.swift in Sources */,
 				FC9535A1231E448D00F4A9DA /* F4SSelfLoadingImageView.swift in Sources */,
 				FC22DBEB22F979750068C61C /* RGBA.swift in Sources */,
+				FC5DAAE1246EAC8700031AEA /* WorkfinderPresenterProtocol.swift in Sources */,
 				FC6E42E124558591005E0D08 /* WorkfinderFonts.swift in Sources */,
 				FC93DBDF231F981D00F1CE23 /* ContentViewController.swift in Sources */,
 				FC22DBE822F979750068C61C /* FactorySkins.swift in Sources */,

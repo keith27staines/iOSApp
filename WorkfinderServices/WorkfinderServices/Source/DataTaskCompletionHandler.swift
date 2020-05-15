@@ -12,51 +12,45 @@ public class DataTaskCompletionHandler {
     
     public func convertToDataResult(attempting: String,
                                     request: URLRequest,
-                                    data: Data?,
-                                    response: URLResponse?,
+                                    responseData: Data?,
+                                    httpResponse: HTTPURLResponse?,
                                     error: Error?,
                                     completion: @escaping((Result<Data,Error>) -> Void)) {
         DispatchQueue.main.async { [weak self] in
-            guard let response = response as? HTTPURLResponse else {
+            guard let response = httpResponse, let data = responseData else {
+                var workfinderError: WorkfinderError?
+                if responseData == nil {
+                    workfinderError = WorkfinderError(errorType: .noData, attempting: attempting, retryHandler: nil)
+                }
                 if let error = error {
-                    let result = Result<Data, Error>.failure(error)
-                    completion(result)
+                    workfinderError = WorkfinderError.init(from: error as NSError, retryHandler: nil)
+                }
+                if httpResponse == nil {
+                    workfinderError = WorkfinderError(
+                        title: "Consistency error",
+                        description: "A data task returned an inconsistent response")
+                }
+                guard let nonNilError = workfinderError else {
+                    assertionFailure("Error should not be nil now")
                     return
                 }
-                return
-            }
-            let code = response.statusCode
-            switch code {
-            case 200..<300:
-                guard let  data = data else {
-                    let httpError = NetworkError.responseBodyEmpty(response)
-                    let result = Result<Data, Error>.failure(httpError)
-                    self?.logger.logDataTaskFailure(
-                        attempting: attempting,
-                        error: httpError,
-                        request: request,
-                        response: response,
-                        responseData: nil)
-                    completion(result)
-                    return
-                }
-                self?.logger.logDataTaskSuccess(
-                    request: request,
-                    response: response,
-                    responseData: data)
-                completion(Result<Data,Error>.success(data))
-            default:
-                let httpError = NetworkError.httpError(response)
-                let result = Result<Data, Error>.failure(httpError)
-                self?.logger.logDataTaskFailure(
-                    attempting: attempting,
-                    error: httpError,
-                    request: request,
-                    response: response,
-                    responseData: data)
+                self?.logger.logDataTaskFailure(error: nonNilError)
+                let result = Result<Data,Error>.failure(nonNilError)
                 completion(result)
                 return
             }
+            
+            if let httpError = WorkfinderError(request: request, response: response, data: data, retryHandler: nil) {
+                self?.logger.logDataTaskFailure(error: httpError)
+                let result = Result<Data,Error>.failure(httpError)
+                completion(result)
+                return
+            }
+            
+            let workfinderError = WorkfinderError(errorType: .noData, attempting: attempting, retryHandler: nil)
+            let result = Result<Data, Error>.failure(workfinderError)
+            self?.logger.logDataTaskFailure(error: workfinderError)
+            completion(result)
         }
     }
 }

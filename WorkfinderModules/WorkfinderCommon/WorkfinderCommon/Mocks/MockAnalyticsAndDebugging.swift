@@ -15,13 +15,13 @@ public class MockNetworkCallLogger: NetworkCallLoggerProtocol {
     public var responseData: Data?
     public var error: Error?
     
-    public func logDataTaskFailure(attempting: String?, error: Error, request: URLRequest, response: HTTPURLResponse?, responseData: Data?) {
+    public func logDataTaskFailure(error: WorkfinderError) {
         logDataTaskFailureWasCalled = true
-        self.attempting = attempting
+        self.attempting = error.attempting
         self.error = error
-        self.request = request
-        self.response = response
-        self.responseData = responseData
+        self.request = error.urlRequest
+        self.response = error.httpResponse
+        self.responseData = error.responseData
     }
     
     public func logDataTaskSuccess(request: URLRequest, response: HTTPURLResponse, responseData: Data) {

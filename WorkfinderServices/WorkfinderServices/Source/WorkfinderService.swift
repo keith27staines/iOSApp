@@ -48,7 +48,7 @@ open class WorkfinderService {
         var components = urlComponents
         components.path += relativePath ?? ""
         components.queryItems = queryItems
-        guard let url = components.url else { throw NetworkError.malformedUrl(components.path)}
+        guard let url = components.url else { throw WorkfinderError(errorType: .invalidUrl(components.path), attempting: #function, retryHandler: nil) }
         return networkConfig.buildUrlRequest(url: url, verb: verb, body: nil)
     }
 
@@ -57,12 +57,12 @@ open class WorkfinderService {
         completion: @escaping ((Result<ResponseJson,Error>) -> Void),
         attempting: String) -> URLSessionDataTask {
         let task = session.dataTask(with: request, completionHandler: { [weak self] (data, response, error) in
-            guard let self = self else { return }
+            guard let self = self, let httpResponse = response as? HTTPURLResponse else { return }
             self.taskHandler.convertToDataResult(
                 attempting: attempting,
                 request: request,
-                data: data,
-                response: response,
+                responseData: data,
+                httpResponse: httpResponse,
                 error: error) { [weak self] (result) in
                 self?.deserialise(dataResult: result, completion: completion)
             }
@@ -78,11 +78,12 @@ open class WorkfinderService {
                 completion(Result<ResponseJson,Error>.success(json))
             } catch {
                 let nsError = error as NSError
+                let workfinderError = WorkfinderError(errorType: .deserialization(error), attempting: #function, retryHandler: nil)
                 networkConfig.logger.logDeserializationError(
                     to: ResponseJson.self,
                     from: data,
                     error: nsError)
-                completion(Result<ResponseJson,Error>.failure(NetworkError.deserialization(error)))
+                completion(Result<ResponseJson,Error>.failure(workfinderError))
             }
         case .failure(let error):
             completion(Result<ResponseJson,Error>.failure(error))

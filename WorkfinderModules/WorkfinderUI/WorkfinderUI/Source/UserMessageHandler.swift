@@ -14,98 +14,24 @@ public class UserMessageHandler {
         }
         alert.addAction(action)
     }
-
-    public func displayAlertFor(_ errorMessage: String, parentCtrl: UIViewController) {
-        switch errorMessage
-        {
-
-        case "Deserialization error":
-            alert.title = ""
-            alert.message = NSLocalizedString("An error has occurred. Please try again", comment: "")
-            parentCtrl.present(alert, animated: true) {}
-            break
-
-        case "No Internet Connection.":
-            alert.title = NSLocalizedString("No Data Connectivity", comment: "")
-            alert.message = NSLocalizedString("You appear to be offline at the moment. Please try again later when you have a working internet connection.", comment: "")
-            parentCtrl.present(alert, animated: true) {}
-            break
-        default:
-            alert.title = ""
-            alert.message = errorMessage
-            parentCtrl.present(alert, animated: true) {}
-            break
-        }
-    }
-    
-    fileprivate func presentCancelRetryAlert(
-        title: String,
-        message: String,
-        cancelHandler: (() -> Void)?,
-        retryHandler: (() -> Void)?,
-        parentCtrl: UIViewController) {
-        let alert = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .alert)
         
-        if let cancelHandler = cancelHandler {
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
-                cancelHandler()
-            }
-            alert.addAction(cancelAction)
-        }
-        if let retryHandler = retryHandler {
-            let retryAction = UIAlertAction(title: "Retry", style: .default) { (_) in
-                retryHandler()
-            }
-            alert.addAction(retryAction)
-        } else {
-            let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
-            }
-            alert.addAction(okAction)
-        }
-        
-        parentCtrl.present(alert, animated: true) {}
-    }
-    
-    public func display(_ networkError: F4SNetworkError,
+    public func displayWorkfinderError(_ error: WorkfinderError,
                         parentCtrl: UIViewController,
-                        cancelHandler: (() -> Void)? = nil,
-                        retryHandler: (() -> Void)? = nil) {
+                        cancelHandler: (() -> Void)?,
+                        retryHandler: (() -> Void)?) {
         
-        let title: String
-        let message: String
-        
-        if networkError.retry {
-            if networkError.httpStatusCode == 429 {
-                title =  "The server is busy"
-                message = "Please wait a minute or so and try again"
-            } else {
-                title =  "Workfinder needs a network connection"
-                message = "Please make sure you have a good network connection and try again"
-            }
-        } else {
-            title = "Workfinder could not complete an operation"
-            message = "\(networkError.code): \(networkError.localizedDescription) attempting \(networkError.attempting ?? "the last action")"
-        }
-
         presentCancelRetryAlert(
-            title: title,
-            message: message,
+            title: error.title,
+            message: error.description,
             cancelHandler: cancelHandler,
             retryHandler: retryHandler,
             parentCtrl: parentCtrl)
     }
 
-    public func displayWithTitle(_ title: String, _ errorMessage: String, parentCtrl: UIViewController) {
-        switch errorMessage
-        {
-        default:
-            alert.message = errorMessage
-            alert.title = title
-            parentCtrl.present(alert, animated: true) {}
-        }
+    public func displayMessage(title: String, message: String, parentCtrl: UIViewController) {
+        alert.title = title
+        alert.message = message
+        parentCtrl.present(alert, animated: true) {}
     }
 
     public func presentEnableLocationInfo(parentCtrl: UIViewController) {
@@ -157,4 +83,36 @@ public class UserMessageHandler {
             self?.loadingOverlay.caption = text
         }
     }
+    
+    fileprivate func presentCancelRetryAlert(
+        title: String,
+        message: String,
+        cancelHandler: (() -> Void)?,
+        retryHandler: (() -> Void)?,
+        parentCtrl: UIViewController) {
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert)
+        
+        if let cancelHandler = cancelHandler {
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+                cancelHandler()
+            }
+            alert.addAction(cancelAction)
+        }
+        if let retryHandler = retryHandler {
+            let retryAction = UIAlertAction(title: "Retry", style: .default) { (_) in
+                retryHandler()
+            }
+            alert.addAction(retryAction)
+        } else {
+            let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
+            }
+            alert.addAction(okAction)
+        }
+        
+        parentCtrl.present(alert, animated: true) {}
+    }
+
 }

@@ -13,7 +13,7 @@ import WorkfinderServices
 
 public protocol F4SDownloadServiceDelegate  {
     func downloadService(_ service: F4SDownloadService, didFinishDownloadingToUrl: URL)
-    func downloadService(_ service: F4SDownloadService, didFailToDownloadWithError: F4SNetworkError)
+    func downloadService(_ service: F4SDownloadService, didFailToDownloadWithError: WorkfinderError)
     func downloadServiceProgressed(_ service: F4SDownloadService, fractionComplete: Double)
     func downloadServiceFinishedBackgroundSession(_ service: F4SDownloadService)
 }
@@ -79,19 +79,16 @@ public class F4SDownloadService : NSObject, F4SDownloadServiceProtocol {
 extension F4SDownloadService : URLSessionDownloadDelegate {
     
     public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        let attempting = "Background download"
         defer { self.downloadTask = nil }
         
-        let attempting = "Background download"
-        let successCodes = 200...299
-        
-        guard let httpResponse = downloadTask.response as? HTTPURLResponse else {
-            let error = F4SNetworkDataErrorType.noData.error(attempting: attempting)
+        guard let httpResponse = downloadTask.response as? HTTPURLResponse  else {
+            let error = WorkfinderError(errorType: .noData, attempting: attempting, retryHandler: nil)
             delegate.downloadService(self, didFailToDownloadWithError: error)
             return
         }
         
-        guard successCodes.contains(httpResponse.statusCode) else {
-            let error = F4SNetworkError(response: httpResponse, attempting: attempting) ?? F4SNetworkDataErrorType.unknownError(nil).error(attempting: attempting)
+        if let error = WorkfinderError(response: httpResponse, attempting: attempting, retryHandler: nil) {
             delegate.downloadService(self, didFailToDownloadWithError: error)
             return
         }

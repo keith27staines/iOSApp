@@ -8,7 +8,9 @@ public struct WorkfinderEndpoint {
     
     public init(baseUrlString: String) throws {
         guard let url = URL(string: baseUrlString) else {
-            throw WorkfinderCommonErrors.initialisedWithInvalidApiURLString(baseUrlString)
+            throw WorkfinderError(errorType: .invalidUrl(baseUrlString),
+                                  attempting: "Initialising base Url",
+                                  retryHandler: nil)
         }
         self.workfinderApiUrlString = baseUrlString
         self.workfinderAPiUrl = url
