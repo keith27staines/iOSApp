@@ -20,18 +20,17 @@ protocol RegisterAndSignInPresenterProtocol: class {
     var isPrimaryButtonEnabled: Bool { get }
     func onDidTapPrimaryButton(onFailure: @escaping ((Error) -> Void))
     func onDidTapSwitchMode()
-    func onViewDidLoad(_ view: RegisterAndSignInBaseViewController)
+    func onViewDidLoad(_ view: WorkfinderViewControllerProtocol)
     var isTermsAndConditionsAgreed: Bool { get set }
 }
 
 class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
-    
+    weak var view: WorkfinderViewControllerProtocol?
     let userRepository: UserRepositoryProtocol
     let registerLogic: RegisterUserLogicProtocol
     let mode: RegisterAndSignInMode
     var user: User
     var coordinator: RegisterAndSignInCoordinatorProtocol?
-    weak var view: RegisterAndSignInBaseViewController?
     
     var isPrimaryButtonEnabled: Bool {
         return false
@@ -48,7 +47,7 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
         self.user = userRepository.loadUser()
     }
     
-    func onViewDidLoad(_ view: RegisterAndSignInBaseViewController) { self.view = view }
+    func onViewDidLoad(_ view: WorkfinderViewControllerProtocol) { self.view = view }
     
     func onDidTapPrimaryButton(onFailure: @escaping ((Error) -> Void)) {
         userRepository.save(user: user)

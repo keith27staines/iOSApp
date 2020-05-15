@@ -3,7 +3,8 @@ import WorkfinderCommon
 import WorkfinderUI
 import MessageUI
 
-class RegisterAndSignInBaseViewController: UIViewController {
+class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewControllerProtocol {
+    
     let presenter: RegisterAndSignInPresenterProtocol
     let messageHandler = UserMessageHandler()
     let linkFont = UIFont.systemFont(ofSize: 14)
@@ -28,10 +29,13 @@ class RegisterAndSignInBaseViewController: UIViewController {
     @objc func onPrimaryButtonTap() {
         updatePresenter()
         messageHandler.showLoadingOverlay(self.view)
-        presenter.onDidTapPrimaryButton { [weak self] (error) in
+        presenter.onDidTapPrimaryButton { [weak self] (optionalError) in
             guard let self = self else { return }
             self.messageHandler.hideLoadingOverlay()
-            self.messageHandler.displayAlertFor(error.localizedDescription, parentCtrl: self)
+            self.messageHandler.displayOptionalErrorIfNotNil(
+                optionalError,
+                parentCtrl: self,
+                retryHandler: self.onPrimaryButtonTap)
         }
     }
     
@@ -50,6 +54,11 @@ class RegisterAndSignInBaseViewController: UIViewController {
         scrollableContentView.frame = scrollView.frame
         configureViews()
         presenter.onViewDidLoad(self)
+        refreshFromPresenter()
+    }
+    
+    func refreshFromPresenter() {
+    
     }
     
     lazy var questionMarkImage: UIImageView = {
@@ -185,7 +194,9 @@ class RegisterAndSignInBaseViewController: UIViewController {
     
     @objc func forgotPassword() {
         guard MFMailComposeViewController.canSendMail() else {
-            messageHandler.displayAlertFor("Email isn't available on this device", parentCtrl: self)
+            messageHandler.displayMessage(
+                title: "Email is unavailable",
+                message: "Your device isn't configured for email", parentCtrl: self)
             return
         }
         let composer = MFMailComposeViewController()
@@ -381,13 +392,13 @@ extension RegisterAndSignInBaseViewController: MFMailComposeViewControllerDelega
             let messageHandler = self.messageHandler
             switch result {
             case .sent:
-                messageHandler.displayMessage("Sent", "Your password reset request has been sent", parentCtrl: self)
+                messageHandler.displayMessage(title: "Sent", message: "Your password reset request has been sent", parentCtrl: self)
             case .failed:
-                messageHandler.displayMessage("Failed", "Unable to send password reset email", parentCtrl: self)
+                messageHandler.displayMessage(title: "Failed", message: "Unable to send password reset email", parentCtrl: self)
             case .cancelled:
                 break
             case .saved:
-                messageHandler.displayMessage("Saved", "Your password reset request email has been saved in to drafts", parentCtrl: self)
+                messageHandler.displayMessage(title: "Saved", message: "Your password reset request email has been saved in to drafts", parentCtrl: self)
             @unknown default:
                 break
             }

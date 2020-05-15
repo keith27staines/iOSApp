@@ -80,10 +80,8 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
         registerService.registerUser(user: user) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
-            case .success(let token):
-                self.onIsRegistered(tokenValue: token.key)
-            case .failure(let error):
-                self.completion?(Result<Candidate,Error>.failure(error))
+            case .success(let token): self.onIsRegistered(tokenValue: token.key)
+            case .failure(let error): self.completion?(Result<Candidate,Error>.failure(error))
             }
         }
     }
@@ -126,21 +124,15 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
         fetchCandidateService.fetchCandidate(uuid: candidateUuid) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
-            case .success(let candidate):
-                self.onCandidateFetched(candidate: candidate)
+            case .success(let candidate): self.onCandidateFetched(candidate: candidate)
             case .failure(let error):
-                if let networkError = error as? NetworkError {
-                    switch networkError {
-                    case .httpError(let x):
-                        if x.statusCode == 404 {
-                            self.createCandidateIfNecessary()
-                            return
-                        }
-                    default:
-                        break
+                if let error = error as? WorkfinderError {
+                    switch error.code {
+                    case 44: self.createCandidateIfNecessary()
+                        self.completion?(Result<Candidate,Error>.failure(error))
+                    default: break
                     }
                 }
-                self.completion?(Result<Candidate,Error>.failure(error))
             }
         }
     }

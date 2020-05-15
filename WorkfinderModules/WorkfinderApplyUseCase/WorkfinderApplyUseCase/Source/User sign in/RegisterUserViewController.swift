@@ -36,8 +36,7 @@ class RegisterUserViewController: RegisterAndSignInBaseViewController {
         presenter.onDidTapPrimaryButton { [weak self] (error) in
             guard let self = self else { return }
             self.messageHandler.hideLoadingOverlay()
-            let error = error as! WorkfinderError
-            self.messageHandler.displayWorkfinderError(
+            self.messageHandler.displayOptionalErrorIfNotNil(
                 error,
                 parentCtrl: self,
                 cancelHandler: nil,
