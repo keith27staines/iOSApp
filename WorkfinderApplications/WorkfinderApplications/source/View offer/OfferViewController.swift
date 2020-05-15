@@ -3,7 +3,7 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 
-class OfferViewController: UIViewController {
+class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
     weak var coordinator: ApplicationsCoordinator?
     let presenter: OfferPresenterProtocol
     let messageHandler = UserMessageHandler()
@@ -53,23 +53,32 @@ class OfferViewController: UIViewController {
     
     override func viewDidLoad() {
         configureViews()
+        presenter.onViewDidLoad(view: self)
         refreshFromPresenter()
+        loadData()
+    }
+    
+    func loadData() {
+        messageHandler.showLoadingOverlay(self.view)
+        presenter.loadData() { [weak self] (optionalError) in
+            guard let self = self else { return}
+            self.messageHandler.hideLoadingOverlay()
+            self.messageHandler.displayOptionalErrorIfNotNil(
+                optionalError,
+                parentCtrl: self,
+                retryHandler: self.loadData)
+        }
     }
     
     func refreshFromPresenter() {
-        messageHandler.showLoadingOverlay(view)
-        presenter.load() { [weak self] (error) in
-            guard let self = self else { return}
-            self.messageHandler.hideLoadingOverlay()
-            self.tableView.reloadData()
-            self.messageLabel.text = self.presenter.stateDescription
-            self.logo.load(
-                urlString: self.presenter.logoUrl,
-                defaultImage: nil,
-                fetcher: nil,
-                completion: nil)
-            self.title = self.presenter.screenTitle
-        }
+        self.tableView.reloadData()
+        self.messageLabel.text = self.presenter.stateDescription
+        self.logo.load(
+            urlString: self.presenter.logoUrl,
+            defaultImage: nil,
+            fetcher: nil,
+            completion: nil)
+        self.title = self.presenter.screenTitle
     }
     
     func configureViews() {

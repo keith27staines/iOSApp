@@ -14,8 +14,24 @@ public class UserMessageHandler {
         }
         alert.addAction(action)
     }
+    
+    public func displayOptionalErrorIfNotNil(
+        _ optionalError: Error?,
+        parentCtrl: UIViewController,
+        cancelHandler: (() -> Void)? = {},
+        retryHandler: (() -> Void)?) {
+        guard let error = optionalError else { return }
+        guard let workfinderError = error as? WorkfinderError else {
+            assertionFailure("Cannot convert error to WorkfinderError")
+            return
+        }
+        displayWorkfinderError(workfinderError,
+                               parentCtrl: parentCtrl,
+                               cancelHandler: cancelHandler,
+                               retryHandler: retryHandler)
+    }
         
-    public func displayWorkfinderError(_ error: WorkfinderError,
+    func displayWorkfinderError(_ error: WorkfinderError,
                         parentCtrl: UIViewController,
                         cancelHandler: (() -> Void)?,
                         retryHandler: (() -> Void)?) {

@@ -18,22 +18,22 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
         configureNavigationBar()
         configureViews()
         presenter.onViewDidLoad(view: self)
+        refreshFromPresenter()
+        loadData()
         title = NSLocalizedString("Applications", comment: "")
     }
     
     func loadData() {
         messageHandler.showLoadingOverlay(view)
-        presenter.loadData { [weak self] error in
+        presenter.loadData { [weak self] optionalError in
             guard let self = self else { return }
             self.messageHandler.hideLoadingOverlay()
-            if let error = error as? WorkfinderError {
-                self.messageHandler.displayWorkfinderError(
-                    error,
+            self.refreshFromPresenter()
+            self.messageHandler.displayOptionalErrorIfNotNil(
+                    optionalError,
                     parentCtrl: self,
                     cancelHandler: nil,
                     retryHandler: self.loadData)
-            }
-            self.refreshFromPresenter()
         }
     }
     

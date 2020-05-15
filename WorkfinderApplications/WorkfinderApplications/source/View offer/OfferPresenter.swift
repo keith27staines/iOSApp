@@ -1,10 +1,11 @@
-
+import WorkfinderUI
 
 protocol OfferPresenterProtocol {
     var screenTitle: String { get }
     var stateDescription: String? { get }
     var logoUrl: String? { get }
-    func load(completion: @escaping (Error?) -> Void)
+    func onViewDidLoad(view: WorkfinderViewControllerProtocol)
+    func loadData(completion: @escaping (Error?) -> Void)
     func numberOfSections() -> Int
     func numberOfRowsInSection(_ section: Int) -> Int
     func cellInfoForIndexPath(_ indexPath: IndexPath) -> OfferDetailCellInfo
@@ -13,6 +14,7 @@ protocol OfferPresenterProtocol {
 class OfferPresenter: OfferPresenterProtocol {
     
     weak var coordinator: ApplicationsCoordinator?
+    weak var view: WorkfinderViewControllerProtocol?
     private let application: Application
     let service: OfferServiceProtocol
     private var offer: Offer?
@@ -36,7 +38,11 @@ class OfferPresenter: OfferPresenterProtocol {
         self.service = service
     }
     
-    func load(completion: @escaping (Error?) -> Void) {
+    func onViewDidLoad(view: WorkfinderViewControllerProtocol) {
+        self.view = view
+    }
+    
+    func loadData(completion: @escaping (Error?) -> Void) {
         service.fetchOffer(application: application) {  [weak self] (result) in
             self?.resultHandler(result: result, completion: completion)
         }

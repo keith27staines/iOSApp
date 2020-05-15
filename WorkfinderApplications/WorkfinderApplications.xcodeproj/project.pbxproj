@@ -30,7 +30,7 @@
 		FC751764246BDC9500ECBA84 /* ApplicationDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC751763246BDC9500ECBA84 /* ApplicationDetailService.swift */; };
 		FC751766246BDCED00ECBA84 /* ApplicationDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC751765246BDCED00ECBA84 /* ApplicationDetailPresenter.swift */; };
 		FC751769246C175900ECBA84 /* OfferPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC751768246C175900ECBA84 /* OfferPresenter.swift */; };
-		FC9C0AC1246BA6DE00CF7A48 /* ViewOfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C0AC0246BA6DE00CF7A48 /* ViewOfferViewController.swift */; };
+		FC9C0AC1246BA6DE00CF7A48 /* OfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C0AC0246BA6DE00CF7A48 /* OfferViewController.swift */; };
 		FC9C0AC3246BA72F00CF7A48 /* ApplicationOfferDeclinedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C0AC2246BA72F00CF7A48 /* ApplicationOfferDeclinedViewController.swift */; };
 		FC9C0AC8246BAAF000CF7A48 /* ApplicationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C0AC7246BAAF000CF7A48 /* ApplicationActions.swift */; };
 /* End PBXBuildFile section */
@@ -72,7 +72,7 @@
 		FC751763246BDC9500ECBA84 /* ApplicationDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDetailService.swift; sourceTree = "<group>"; };
 		FC751765246BDCED00ECBA84 /* ApplicationDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDetailPresenter.swift; sourceTree = "<group>"; };
 		FC751768246C175900ECBA84 /* OfferPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferPresenter.swift; sourceTree = "<group>"; };
-		FC9C0AC0246BA6DE00CF7A48 /* ViewOfferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOfferViewController.swift; sourceTree = "<group>"; };
+		FC9C0AC0246BA6DE00CF7A48 /* OfferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferViewController.swift; sourceTree = "<group>"; };
 		FC9C0AC2246BA72F00CF7A48 /* ApplicationOfferDeclinedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationOfferDeclinedViewController.swift; sourceTree = "<group>"; };
 		FC9C0AC7246BAAF000CF7A48 /* ApplicationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationActions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -170,7 +170,7 @@
 		FC751767246C170D00ECBA84 /* View offer */ = {
 			isa = PBXGroup;
 			children = (
-				FC9C0AC0246BA6DE00CF7A48 /* ViewOfferViewController.swift */,
+				FC9C0AC0246BA6DE00CF7A48 /* OfferViewController.swift */,
 				FC751768246C175900ECBA84 /* OfferPresenter.swift */,
 				FC6AA522246C4EB4002CC1C7 /* OfferService.swift */,
 			);
@@ -189,9 +189,9 @@
 			isa = PBXGroup;
 			children = (
 				FC40360A246AE37C00F03A5B /* ApplicationsPresenter.swift */,
+				FC40360C246AE3D100F03A5B /* ApplicationsViewController.swift */,
 				FC75175D246BB6E900ECBA84 /* ApplicationTilePresenter.swift */,
 				FC40360E246AE42700F03A5B /* ApplicationTile.swift */,
-				FC40360C246AE3D100F03A5B /* ApplicationsViewController.swift */,
 				FC751761246BBFAF00ECBA84 /* ApplicationsService.swift */,
 			);
 			path = "List applications";
@@ -321,7 +321,7 @@
 				FC403609246AE35900F03A5B /* ApplicationState.swift in Sources */,
 				FC40360B246AE37C00F03A5B /* ApplicationsPresenter.swift in Sources */,
 				FC9C0AC3246BA72F00CF7A48 /* ApplicationOfferDeclinedViewController.swift in Sources */,
-				FC9C0AC1246BA6DE00CF7A48 /* ViewOfferViewController.swift in Sources */,
+				FC9C0AC1246BA6DE00CF7A48 /* OfferViewController.swift in Sources */,
 				FC6AA523246C4EB4002CC1C7 /* OfferService.swift in Sources */,
 				FC9C0AC8246BAAF000CF7A48 /* ApplicationActions.swift in Sources */,
 				FC6AA527246C4F9D002CC1C7 /* Offer.swift in Sources */,

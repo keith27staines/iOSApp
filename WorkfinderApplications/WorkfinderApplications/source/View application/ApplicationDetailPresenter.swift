@@ -1,4 +1,5 @@
 import WorkfinderCommon
+import WorkfinderUI
 
 typealias ApplicationDetail = Application
 
@@ -11,7 +12,7 @@ protocol ApplicationDetailPresenterProtocol {
     var companyCaption: String? { get }
     var hostName: String? { get }
     var hostCaption: String? { get }
-    func onViewDidLoad(completion: @escaping (Error?) -> Void)
+    func onViewDidLoad(view: WorkfinderViewControllerProtocol)
     func load(completion: @escaping (Error?) -> Void)
     func numberOfSections() -> Int
     func numberOfRowsInSection(_ section: Int) -> Int
@@ -24,6 +25,7 @@ struct ApplicationDetailCellInfo {
 }
 
 class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol{
+    weak var view: WorkfinderViewControllerProtocol?
     
     func numberOfSections() -> Int { 1 }
     func numberOfRowsInSection(_ section: Int) -> Int { 3 }
@@ -62,8 +64,8 @@ class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol{
         self.application = application
     }
     
-    func onViewDidLoad(completion: @escaping (Error?) -> Void) {
-        load(completion: completion)
+    func onViewDidLoad(view: WorkfinderViewControllerProtocol) {
+        self.view = view
     }
     
     func load(completion: @escaping (Error?) -> Void) {

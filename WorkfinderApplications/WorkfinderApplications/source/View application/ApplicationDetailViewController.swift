@@ -1,7 +1,7 @@
 import UIKit
 import WorkfinderUI
 
-class ApplicationDetailViewController: UIViewController {
+class ApplicationDetailViewController: UIViewController, WorkfinderViewControllerProtocol {
     let presenter: ApplicationDetailPresenterProtocol
     let messageHandler = UserMessageHandler()
     
@@ -59,7 +59,22 @@ class ApplicationDetailViewController: UIViewController {
     override func viewDidLoad() {
         self.title = presenter.screenTitle
         configureViews()
+        presenter.onViewDidLoad(view: self)
         refreshFromPresenter()
+        loadData()
+    }
+    
+    func loadData() {
+        messageHandler.showLoadingOverlay(self.view)
+        presenter.load() { [weak self] optionalError in
+            guard let self = self else { return }
+            self.messageHandler.hideLoadingOverlay()
+            self.messageHandler.displayOptionalErrorIfNotNil(
+                optionalError,
+                parentCtrl: self,
+                retryHandler: self.loadData)
+            self.refreshFromPresenter()
+        }
     }
     
     func refreshFromPresenter() {
