@@ -35,7 +35,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     lazy var successPopup: SuccessPopupView = {
         return SuccessPopupView(leftButtonTapped: { [weak self] in
             self?.removeApplicationSubmittedSuccessfully()
-            self?.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: .messages)
+            self?.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: .applications)
         }) { [weak self] in
             self?.removeApplicationSubmittedSuccessfully()
             self?.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: .search)

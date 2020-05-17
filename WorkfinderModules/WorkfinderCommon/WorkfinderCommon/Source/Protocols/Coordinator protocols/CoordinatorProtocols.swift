@@ -13,6 +13,7 @@ public protocol AppCoordinatorProtocol : Coordinating {
     var window: UIWindow { get }
     var log: F4SAnalyticsAndDebugging { get }
     func showRecommendations()
+    func showApplications()
     func showSearch()
     func updateBadges()
     func handleRemoteNotification(userInfo: [AnyHashable: Any])
@@ -53,6 +54,7 @@ public protocol CompanyCoordinatorParentProtocol : CoreInjectionNavigationCoordi
 }
 
 public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol {
+    func showApplications()
     func showSearch()
     func showRecommendations()
     func updateBadges()

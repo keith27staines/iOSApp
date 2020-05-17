@@ -67,6 +67,13 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
 //        }
     }
     
+    public func navigateToApplications() {
+        closeMenu() { [ weak self]  (success) in
+            guard let strongSelf = self else { return }
+            strongSelf.tabBarViewController.selectedIndex = TabIndex.applications.rawValue
+        }
+    }
+    
     public func navigateToMap() {
         closeMenu { [weak self] (success) in
             guard let strongSelf = self else { return }
@@ -201,6 +208,10 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
             contentType: contentType,
             dismissByPopping: true)
         navCtrl.present(content, animated: true, completion: nil)
+    }
+    
+    func showApplications() {
+        navigateToApplications()
     }
     
     func showSearch() {
