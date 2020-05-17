@@ -13,20 +13,68 @@ class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
             self.logo,
             self.messageLabel,
             self.tableView,
-            UIView()
+            UIView(),
+            self.acceptDeclineStack
         ])
         stack.axis = .vertical
         stack.spacing = 20
         return stack
     }()
     
+    let declineButton = WorkfinderSecondaryButton()
+    let acceptButton = WorkfinderPrimaryButton()
+    
+    lazy var acceptDeclineStack: UIStackView = {
+        declineButton.addTarget(self, action: #selector(handleTapDecline), for: .touchUpInside)
+        acceptButton.addTarget(self, action: #selector(handleTapAccept), for: .touchUpInside)
+        declineButton.setTitle(NSLocalizedString("Decline", comment: ""), for: .normal)
+        acceptButton.setTitle(NSLocalizedString("Accept", comment: ""), for: .normal)
+        let stack = UIStackView(arrangedSubviews: [declineButton,acceptButton])
+        stack.axis = .horizontal
+        stack.distribution = .fillEqually
+        stack.spacing = 20
+        return stack
+    }()
+    
+    lazy var declineReasonsActionSheetFactory: DeclineReasonsActionSheetFactory  = {
+        return DeclineReasonsActionSheetFactory { (reason) in
+            self.handleDeclineWithReason(reason)
+        }
+    }()
+    
+    @objc func handleTapDecline() {
+        let actionSheet = declineReasonsActionSheetFactory.makeDeclineOptionsAlert()
+        self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    @objc func handleTapAccept() {
+        messageHandler.showLoadingOverlay(self.view)
+        presenter.onTapAccept { [weak self] (optionalError) in
+            guard let self = self else { return }
+            self.messageHandler.hideLoadingOverlay()
+            self.messageHandler.displayOptionalErrorIfNotNil(optionalError, parentCtrl: self) {
+                self.handleTapAccept()
+            }
+            self.refreshFromPresenter()
+        }
+    }
+    
+    func handleDeclineWithReason(_ reason: DeclineReason) {
+        presenter.onTapDeclineWithReason(reason) { [weak self] (optionalError) in
+            guard let self = self else { return }
+            self.messageHandler.hideLoadingOverlay()
+            self.messageHandler.displayOptionalErrorIfNotNil(optionalError, parentCtrl: self) {
+                self.handleDeclineWithReason(reason)
+            }
+            self.refreshFromPresenter()
+        }
+    }
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.heightAnchor.constraint(equalToConstant: 360).isActive = true
         tableView.setContentCompressionResistancePriority(.required, for: .vertical)
-        tableView.rowHeight = UITableView.automaticDimension
         tableView.register(OfferDetailCell.self, forCellReuseIdentifier: "cell")
         tableView.separatorStyle = .none
         return tableView
@@ -63,6 +111,7 @@ class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
         presenter.loadData() { [weak self] (optionalError) in
             guard let self = self else { return}
             self.messageHandler.hideLoadingOverlay()
+            self.refreshFromPresenter()
             self.messageHandler.displayOptionalErrorIfNotNil(
                 optionalError,
                 parentCtrl: self,
@@ -79,9 +128,23 @@ class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
             fetcher: nil,
             completion: nil)
         self.title = self.presenter.screenTitle
+        acceptButton.isHidden = presenter.hideAcceptDeclineButtons
+        declineButton.isHidden = presenter.hideAcceptDeclineButtons
+    }
+    
+    @objc func share() {
+        let snapshot = view.snapShot
+        let items: [Any] = [
+            "I have been offered a placement!",
+            URL(string: "https://workfinder.com")!,
+            snapshot
+        ]
+        let share = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        present(share, animated: true, completion: nil)
     }
     
     func configureViews() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share))
         view.backgroundColor = UIColor.white
         view.addSubview(mainStack)
         let guide = view.safeAreaLayoutGuide
@@ -119,10 +182,6 @@ extension OfferViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
-    }
 
 }
 
@@ -136,20 +195,23 @@ class OfferDetailCell: UITableViewCell {
         let label = UILabel()
         label.font = WorkfinderFonts.subHeading
         label.textColor = WorkfinderColors.textMedium
-        label.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        label.setContentHuggingPriority(.required, for: .vertical)
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }()
     lazy var secondLine: UILabel = {
         let label = UILabel()
         label.font = WorkfinderFonts.heading
         label.textColor = UIColor.black
+        label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
-        label.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
+        label.setContentHuggingPriority(.defaultLow, for: .vertical)
         return label
     }()
     lazy var stack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [firstLine, secondLine, UIView()])
-        stack.spacing = 8
+        stack.spacing = 4
         stack.axis = .vertical
         return stack
     }()
@@ -162,11 +224,12 @@ class OfferDetailCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(stack)
-        stack.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 4, left: 4, bottom: 0, right: 0))
-        stack.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        stack.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+

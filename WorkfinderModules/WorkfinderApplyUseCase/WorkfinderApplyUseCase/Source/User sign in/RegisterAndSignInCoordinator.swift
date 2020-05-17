@@ -10,10 +10,12 @@ protocol RegisterAndSignInCoordinatorProtocol {
 }
 
 protocol RegisterAndSignInCoordinatorParent: Coordinating {
-    func onDidRegister(pop: Bool)
+    func onCandidateIsSignedIn()
 }
 
 class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, RegisterAndSignInCoordinatorProtocol {
+    
+    var firstViewController:UIViewController?
     
     init(parent: RegisterAndSignInCoordinatorParent?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol) {
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
@@ -24,7 +26,12 @@ class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, Register
     }
     
     func onUserRegisteredAndCandidateCreated(pop: Bool = true) {
-        (parentCoordinator as? RegisterAndSignInCoordinatorParent)?.onDidRegister(pop: pop)
+        if let parent = firstViewController?.parent {
+            navigationRouter.popToViewController(parent, animated: true)
+        } else {
+            firstViewController?.dismiss(animated: true, completion: nil)
+        }
+        (parentCoordinator as? RegisterAndSignInCoordinatorParent)?.onCandidateIsSignedIn()
         parentCoordinator?.childCoordinatorDidFinish(self)
     }
     
@@ -56,6 +63,7 @@ class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, Register
             registerUserLogic: registerUserLogic)
         
         let vc = RegisterUserViewController(presenter: presenter)
+        firstViewController = vc
         navigationRouter.push(viewController: vc, animated: true)
     }
     

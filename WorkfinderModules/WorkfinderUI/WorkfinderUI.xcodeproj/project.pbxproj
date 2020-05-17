@@ -25,6 +25,7 @@
 		FC343CFE2446141700347BC2 /* UnderlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC343CFD2446141700347BC2 /* UnderlineView.swift */; };
 		FC343D0024461A6900347BC2 /* UnderlinedNextResponderTextFieldStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC343CFF24461A6900347BC2 /* UnderlinedNextResponderTextFieldStack.swift */; };
 		FC403607246ABBC600F03A5B /* CompanyLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC403606246ABBC600F03A5B /* CompanyLogoView.swift */; };
+		FC4BC36124710A8C00299993 /* UIView+snapShot.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BC36024710A8C00299993 /* UIView+snapShot.swift */; };
 		FC5CBA55231D2C4D00C2D3C5 /* F4SCompanyHeaderViewWithLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBA54231D2C4D00C2D3C5 /* F4SCompanyHeaderViewWithLogo.swift */; };
 		FC5CBA57231D2C7D00C2D3C5 /* F4SRoundIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBA56231D2C7D00C2D3C5 /* F4SRoundIconView.swift */; };
 		FC5DAAE1246EAC8700031AEA /* WorkfinderPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5DAAE0246EAC8700031AEA /* WorkfinderPresenterProtocol.swift */; };
@@ -80,6 +81,7 @@
 		FC343CFD2446141700347BC2 /* UnderlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineView.swift; sourceTree = "<group>"; };
 		FC343CFF24461A6900347BC2 /* UnderlinedNextResponderTextFieldStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedNextResponderTextFieldStack.swift; sourceTree = "<group>"; };
 		FC403606246ABBC600F03A5B /* CompanyLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyLogoView.swift; sourceTree = "<group>"; };
+		FC4BC36024710A8C00299993 /* UIView+snapShot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+snapShot.swift"; sourceTree = "<group>"; };
 		FC5CBA54231D2C4D00C2D3C5 /* F4SCompanyHeaderViewWithLogo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCompanyHeaderViewWithLogo.swift; sourceTree = "<group>"; };
 		FC5CBA56231D2C7D00C2D3C5 /* F4SRoundIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SRoundIconView.swift; sourceTree = "<group>"; };
 		FC5DAAE0246EAC8700031AEA /* WorkfinderPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderPresenterProtocol.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				FC22DBF622F97CD70068C61C /* UIColor+Extensions.swift */,
 				FC22DBEE22F97A320068C61C /* UIView+ConstraintsExtensions.swift */,
 				FC22DBEC22F979E90068C61C /* UIViewController+Extensions.swift */,
+				FC4BC36024710A8C00299993 /* UIView+snapShot.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -413,6 +416,7 @@
 				FC22DBEF22F97A330068C61C /* UIView+ConstraintsExtensions.swift in Sources */,
 				FC5CBA57231D2C7D00C2D3C5 /* F4SRoundIconView.swift in Sources */,
 				FC5CBA55231D2C4D00C2D3C5 /* F4SCompanyHeaderViewWithLogo.swift in Sources */,
+				FC4BC36124710A8C00299993 /* UIView+snapShot.swift in Sources */,
 				FC0C7109232BA38700816332 /* OptionLabel.swift in Sources */,
 				FC17E4992446F3FC00A58AEB /* WorkfinderPrimaryButton.swift in Sources */,
 				FCB4EAD32424D231001D5D23 /* RatingControl.swift in Sources */,

@@ -104,7 +104,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     func startSigninCoordinatorIfNecessary() {
         guard isUserRegistrationWorkflowRequired
             else {
-            onDidRegister()
+            onCandidateIsSignedIn()
             return
         }
         let coordinator = RegisterAndSignInCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected)
@@ -122,14 +122,14 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
 
 extension ApplyCoordinator: RegisterAndSignInCoordinatorParent {
     
-    func onDidRegister(pop: Bool = true) {
+    func onCandidateIsSignedIn() {
         draftPlacement.candidateUuid = userRepository.loadCandidate().uuid!
         applyService.postPlacement(draftPlacement: draftPlacement) {
             [weak self] (result) in
             switch result {
-            case .success(let placement):
+            case .success(_):
                 self?.showApplicationSubmittedSuccessfully()
-            case .failure(let error):
+            case .failure(_):
                 break
             }
         }

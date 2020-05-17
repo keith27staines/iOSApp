@@ -1,10 +1,13 @@
 import WorkfinderUI
 
 protocol OfferPresenterProtocol {
+    var hideAcceptDeclineButtons: Bool { get }
     var screenTitle: String { get }
     var stateDescription: String? { get }
     var logoUrl: String? { get }
     func onViewDidLoad(view: WorkfinderViewControllerProtocol)
+    func onTapAccept(completion: @escaping (Error?) -> Void)
+    func onTapDeclineWithReason(_ declineReason: DeclineReason, completion: @escaping (Error?) -> Void)
     func loadData(completion: @escaping (Error?) -> Void)
     func numberOfSections() -> Int
     func numberOfRowsInSection(_ section: Int) -> Int
@@ -12,7 +15,6 @@ protocol OfferPresenterProtocol {
 }
 
 class OfferPresenter: OfferPresenterProtocol {
-    
     weak var coordinator: ApplicationsCoordinator?
     weak var view: WorkfinderViewControllerProtocol?
     private let application: Application
@@ -29,6 +31,10 @@ class OfferPresenter: OfferPresenterProtocol {
     var screenTitle: String { offerState?.screenTitle ?? "Offer"}
     var stateDescription: String? { return offerState?.description }
     var logoUrl: String? { offer?.logoUrl}
+    var hideAcceptDeclineButtons: Bool {
+        guard let state = offerState, state == .open else { return true }
+        return false
+    }
     
     init(coordinator: ApplicationsCoordinator,
          application: Application,
@@ -48,14 +54,18 @@ class OfferPresenter: OfferPresenterProtocol {
         }
     }
     
-    func accept(offer: Offer, completion: @escaping (Error?) -> Void) {
+    func onTapAccept(completion: @escaping (Error?) -> Void) {
+        guard let offer = offer else { return }
         service.accept(offer: offer) {  [weak self] (result) in
             self?.resultHandler(result: result, completion: completion)
         }
     }
     
-    func decline(offer: Offer, completion: @escaping (Error?) -> Void) {
+    func onTapDeclineWithReason(_ reason: DeclineReason, completion: @escaping (Error?) -> Void) {
+        guard var offer = offer else { return }
+        offer.declineReason = reason
         service.decline(offer: offer) { [weak self] (result) in
+            offer.declineReason = reason
             self?.resultHandler(result: result, completion: completion)
         }
     }

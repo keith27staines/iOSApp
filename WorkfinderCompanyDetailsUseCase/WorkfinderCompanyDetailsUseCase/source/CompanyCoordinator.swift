@@ -71,7 +71,7 @@ extension CompanyCoordinator : ApplyCoordinatorDelegate {
 
 extension CompanyCoordinator: CompanyWorkplaceCoordinatorProtocol {
     func applyTo(companyWorkplace: CompanyWorkplace, hostLocationAssociation: HostLocationAssociationJson) {
-        guard let host = companyWorkplacePresenter.selectedHost else { return }
+        guard let _ = companyWorkplacePresenter.selectedHost else { return }
         let applyCoordinator = ApplyCoordinator(
             applyCoordinatorDelegate: self,
             applyService: applyService,

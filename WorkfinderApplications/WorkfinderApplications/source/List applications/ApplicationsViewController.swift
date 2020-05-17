@@ -82,7 +82,6 @@ extension ApplicationsViewController: UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let application = presenter.applicationTilePresenterForIndexPath(indexPath)
         presenter.onTapApplication(at: indexPath)
     }
 }

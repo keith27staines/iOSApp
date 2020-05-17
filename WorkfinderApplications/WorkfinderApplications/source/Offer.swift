@@ -8,4 +8,5 @@ struct Offer {
     var email: String?
     var location: String?
     var logoUrl: String?
+    var declineReason: DeclineReason?
 }
