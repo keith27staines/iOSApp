@@ -26,9 +26,11 @@ class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, Register
     }
     
     func onUserRegisteredAndCandidateCreated(pop: Bool = true) {
-        if let parent = firstViewController?.parent {
-            navigationRouter.popToViewController(parent, animated: true)
+        if let previous = firstViewController?.previousViewController {
+            // for pushed vcs
+            navigationRouter.popToViewController(previous, animated: true)
         } else {
+            // for presented vcs
             firstViewController?.dismiss(animated: true, completion: nil)
         }
         (parentCoordinator as? RegisterAndSignInCoordinatorParent)?.onCandidateIsSignedIn()
