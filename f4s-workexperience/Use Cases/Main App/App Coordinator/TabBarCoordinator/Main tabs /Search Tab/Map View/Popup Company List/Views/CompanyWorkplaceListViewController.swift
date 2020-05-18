@@ -9,7 +9,7 @@ protocol CompanyWorkplaceListViewProtocol: class {
 }
 
 class CompanyWorkplaceListViewController: UIViewController {
-    let messageHandler = UserMessageHandler()
+    lazy var messageHandler = UserMessageHandler(presenter: self)
     let screenName = ScreenName.companyClusterList
     weak var log: F4SAnalyticsAndDebugging?
     var didSelectCompanyWorkplace: ((CompanyWorkplace) -> Void)?
@@ -31,7 +31,6 @@ class CompanyWorkplaceListViewController: UIViewController {
             self.refreshFromPresenter(self.presenter)
             self.messageHandler.displayOptionalErrorIfNotNil(
                 optionalError,
-                parentCtrl: self,
                 cancelHandler: {},
                 retryHandler: self.loadData)
         }

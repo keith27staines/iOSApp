@@ -3,6 +3,7 @@ import UIKit
 import WorkfinderUI
 
 public protocol CoverLetterViewProtocol {
+    var messageHandler: UserMessageHandler { get }
     var presenter: CoverLetterViewPresenterProtocol { get }
     func refreshFromPresenter()
 }
@@ -71,7 +72,6 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
             self.hideLoadingIndicator()
             self.messageHandler.displayOptionalErrorIfNotNil(
                 optionalError,
-                parentCtrl: self,
                 retryHandler: self.loadData)
         }
     }
@@ -88,7 +88,7 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
     @objc func onBackTapped() {
         presenter.onDidDismiss()
     }
-    let messageHandler = UserMessageHandler()
+    lazy var messageHandler = UserMessageHandler(presenter: self)
     
     func showLoadingIndicator() {
         messageHandler.showLightLoadingOverlay(view)

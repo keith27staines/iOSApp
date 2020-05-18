@@ -1,15 +1,22 @@
 import WorkfinderCommon
 import UIKit
 
-public let sharedUserMessageHandler = UserMessageHandler()
+//public let sharedUserMessageHandler = UserMessageHandler()
+
+public protocol UserMessagePresenting: AnyObject {
+    var messageHandler: UserMessageHandler { get }
+    func present(_ viewControllerToPresent: UIViewController, animated: Bool, completion: (() -> Void)?)
+}
 
 public class UserMessageHandler {
-    
     private var count: Int = 0
+    weak private var messagePresenter: UIViewController?
+    
     let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
     var loadingOverlay: LoadingOverlay = LoadingOverlay()
 
-    public init() {
+    public init(presenter: UIViewController) {
+        self.messagePresenter = presenter
         let action = UIAlertAction(title: "OK", style: .default) { _ in
         }
         alert.addAction(action)
@@ -17,7 +24,6 @@ public class UserMessageHandler {
     
     public func displayOptionalErrorIfNotNil(
         _ optionalError: Error?,
-        parentCtrl: UIViewController,
         cancelHandler: (() -> Void)? = {},
         retryHandler: (() -> Void)?) {
         guard let error = optionalError else { return }
@@ -26,13 +32,11 @@ public class UserMessageHandler {
             return
         }
         displayWorkfinderError(workfinderError,
-                               parentCtrl: parentCtrl,
                                cancelHandler: cancelHandler,
                                retryHandler: retryHandler)
     }
         
     func displayWorkfinderError(_ error: WorkfinderError,
-                        parentCtrl: UIViewController,
                         cancelHandler: (() -> Void)?,
                         retryHandler: (() -> Void)?) {
         
@@ -40,17 +44,16 @@ public class UserMessageHandler {
             title: error.title,
             message: error.description,
             cancelHandler: cancelHandler,
-            retryHandler: retryHandler,
-            parentCtrl: parentCtrl)
+            retryHandler: retryHandler)
     }
 
-    public func displayMessage(title: String, message: String, parentCtrl: UIViewController) {
+    public func displayMessage(title: String, message: String) {
         alert.title = title
         alert.message = message
-        parentCtrl.present(alert, animated: true) {}
+        messagePresenter?.present(alert, animated: true) {}
     }
 
-    public func presentEnableLocationInfo(parentCtrl: UIViewController) {
+    public func presentEnableLocationInfo() {
         let alert = UIAlertController(
             title: "", message: NSLocalizedString("Please enable location services.", comment: ""),
             preferredStyle: UIAlertController.Style.alert)
@@ -64,7 +67,7 @@ public class UserMessageHandler {
         })
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.cancel) { _ in
         })
-        parentCtrl.present(alert, animated: true, completion: nil)
+        messagePresenter?.present(alert, animated: true, completion: nil)
     }
 
     public func showLoadingOverlay(_ view: UIView, useLightOverlay: Bool = false) {
@@ -104,8 +107,7 @@ public class UserMessageHandler {
         title: String,
         message: String,
         cancelHandler: (() -> Void)?,
-        retryHandler: (() -> Void)?,
-        parentCtrl: UIViewController) {
+        retryHandler: (() -> Void)?) {
         let alert = UIAlertController(
             title: title,
             message: message,
@@ -128,7 +130,7 @@ public class UserMessageHandler {
             alert.addAction(okAction)
         }
         
-        parentCtrl.present(alert, animated: true) {}
+        messagePresenter?.present(alert, animated: true) {}
     }
 
 }

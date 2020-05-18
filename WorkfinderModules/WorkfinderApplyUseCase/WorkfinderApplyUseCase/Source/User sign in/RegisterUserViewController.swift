@@ -38,7 +38,6 @@ class RegisterUserViewController: RegisterAndSignInBaseViewController {
             self.messageHandler.hideLoadingOverlay()
             self.messageHandler.displayOptionalErrorIfNotNil(
                 error,
-                parentCtrl: self,
                 cancelHandler: nil,
                 retryHandler: self.register)
         }

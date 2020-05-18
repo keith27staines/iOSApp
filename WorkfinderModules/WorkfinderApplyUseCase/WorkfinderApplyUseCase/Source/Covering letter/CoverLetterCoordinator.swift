@@ -1,10 +1,12 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 import WorkfinderServices
 import WorkfinderCoordinators
 
 public protocol CoverletterCoordinatorProtocol: class {
+    var messageHandler: UserMessageHandler? { get }
     func start()
     func onCoverLetterDidDismiss()
     func onDidCompleteCoverLetter()
@@ -100,6 +102,7 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
     let templateProvider: TemplateProviderProtocol
     weak var applyCoordinator: ApplyCoordinator?
     weak var coverLetterViewController: CoverLetterViewController?
+    public var messageHandler: UserMessageHandler? { coverLetterViewController?.messageHandler }
     weak var letterEditorViewController: LetterEditorViewProtocol?
     var networkConfig: NetworkConfig { return injected.networkConfig}
     var picklistsDidUpdate: ((PicklistsDictionary) -> Void)?

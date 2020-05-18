@@ -16,7 +16,7 @@ public protocol ApplyCoordinatorDelegate : class {
 }
 
 public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
-    
+    var applicationSubmitter: ApplicationSubmitter?
     var userRepository: UserRepositoryProtocol { injected.userRepository }
     var coverletterCoordinator: CoverletterCoordinatorProtocol?
     var rootViewController: UIViewController?
@@ -41,6 +41,21 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
             self?.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: .search)
         }
     }()
+    
+    private func showApplicationSubmittedSuccessfully() {
+        guard let window = UIApplication.shared.keyWindow
+            else { return }
+        let navigationController = navigationRouter.navigationController
+        window.addSubview(successPopup)
+        navigationController.navigationBar.layer.zPosition = -1
+        successPopup.frame = window.bounds
+    }
+    
+    private func removeApplicationSubmittedSuccessfully() {
+        successPopup.removeFromSuperview()
+        let navigationController = navigationRouter.navigationController
+        navigationController.navigationBar.layer.zPosition = 0
+    }
     
     var isUserRegistrationWorkflowRequired: Bool {
         let userRepository = injected.userRepository
@@ -73,7 +88,6 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     override public func start() {
         super.start()
         startDateOfBirthIfNecessary()
-        //startSigninCoordinatorIfNecessary()
     }
     
     func startDateOfBirthIfNecessary() {
@@ -123,14 +137,66 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
 extension ApplyCoordinator: RegisterAndSignInCoordinatorParent {
     
     func onCandidateIsSignedIn() {
+        submitApplication()
+    }
+    
+    func submitApplication() {
+        let navigationController = navigationRouter.navigationController
+        guard let messageHandler = coverletterCoordinator?.messageHandler
+            else { return }
+        let draft = prepareDraftPlacement()
+        applicationSubmitter = ApplicationSubmitter(
+            applyService: applyService,
+            draft: draft,
+            navigationController: navigationController,
+            messageHandler: messageHandler,
+            onSuccess: self.showApplicationSubmittedSuccessfully,
+            onCancel: { self.cancelButtonWasTapped(sender: self) })
+        applicationSubmitter?.submitApplication()
+    }
+    
+    func prepareDraftPlacement() -> Placement {
         draftPlacement.candidateUuid = userRepository.loadCandidate().uuid!
-        applyService.postPlacement(draftPlacement: draftPlacement) {
-            [weak self] (result) in
+        return draftPlacement
+    }
+}
+
+public class ApplicationSubmitter {
+    private var draft: Placement
+    private let applyService: PostPlacementServiceProtocol
+    private weak var navigationController: UINavigationController?
+    private var onSuccess: () -> Void
+    private var onCancel: () -> Void
+    private weak var messageHandler: UserMessageHandler?
+    
+    init(
+        applyService: PostPlacementServiceProtocol,
+        draft: Placement,
+        navigationController: UINavigationController,
+        messageHandler: UserMessageHandler,
+        onSuccess: @escaping () -> Void,
+        onCancel: @escaping () -> Void) {
+        self.applyService = applyService
+        self.draft = draft
+        self.navigationController = navigationController
+        self.messageHandler = messageHandler
+        self.onSuccess = onSuccess
+        self.onCancel = onCancel
+    }
+    
+    public func submitApplication() {
+        applyService.postPlacement(draftPlacement: draft) { [weak self] (result) in
+            guard
+                let self = self,
+                let messageHandler =  self.messageHandler
+                else { return }
             switch result {
-            case .success(_):
-                self?.showApplicationSubmittedSuccessfully()
-            case .failure(_):
-                break
+            case .success(_): self.onSuccess()
+            case .failure(let error):
+                messageHandler.displayOptionalErrorIfNotNil(
+                    error,
+                    cancelHandler: self.onCancel,
+                    retryHandler: self.submitApplication)
             }
         }
     }
@@ -148,20 +214,6 @@ extension ApplyCoordinator {
         }
         alert.addAction(okAction)
         navigationRouter.present(alert, animated: true, completion: nil)
-    }
-    
-    func showApplicationSubmittedSuccessfully() {
-        guard let window = UIApplication.shared.keyWindow else { return }
-        window.addSubview(successPopup)
-        let navigationController = navigationRouter.navigationController
-        navigationController.navigationBar.layer.zPosition = -1
-        successPopup.frame = window.bounds
-    }
-    
-    func removeApplicationSubmittedSuccessfully() {
-        successPopup.removeFromSuperview()
-        let navigationController = navigationRouter.navigationController
-        navigationController.navigationBar.layer.zPosition = 0
     }
     
     func cancelButtonWasTapped(sender: Any?) {

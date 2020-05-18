@@ -19,13 +19,11 @@ public class DataTaskCompletionHandler {
         DispatchQueue.main.async { [weak self] in
             guard let response = httpResponse, let data = responseData else {
                 var workfinderError: WorkfinderError?
-                if responseData == nil {
-                    workfinderError = WorkfinderError(errorType: .noData, attempting: attempting, retryHandler: nil)
-                }
                 if let error = error {
                     workfinderError = WorkfinderError.init(from: error as NSError, retryHandler: nil)
-                }
-                if httpResponse == nil {
+                } else if responseData == nil {
+                    workfinderError = WorkfinderError(errorType: .noData, attempting: attempting, retryHandler: nil)
+                } else if httpResponse == nil {
                     workfinderError = WorkfinderError(
                         title: "Consistency error",
                         description: "A data task returned an inconsistent response")

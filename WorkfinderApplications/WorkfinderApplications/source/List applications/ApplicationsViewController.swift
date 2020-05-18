@@ -4,7 +4,7 @@ import WorkfinderUI
 
 class ApplicationsViewController: UIViewController, WorkfinderViewControllerProtocol {
 
-    let messageHandler =  UserMessageHandler()
+    lazy var messageHandler = UserMessageHandler(presenter: self)
     weak var coordinator: ApplicationsCoordinatorProtocol?
     let presenter: ApplicationsPresenter
     
@@ -31,7 +31,6 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
             self.refreshFromPresenter()
             self.messageHandler.displayOptionalErrorIfNotNil(
                     optionalError,
-                    parentCtrl: self,
                     cancelHandler: nil,
                     retryHandler: self.loadData)
         }

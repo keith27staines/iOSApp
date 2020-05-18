@@ -25,7 +25,7 @@ class CompanyWorkplaceViewController: UIViewController {
     var originScreen = ScreenName.notSpecified
     weak var log: F4SAnalyticsAndDebugging?
     var appSettings: AppSettingProvider
-    let messageHandler = UserMessageHandler()
+    lazy var messageHandler = UserMessageHandler(presenter: self)
     
     init(appSettings: AppSettingProvider, presenter: CompanyWorkplacePresenterProtocol) {
         self.appSettings = appSettings
@@ -85,14 +85,14 @@ class CompanyWorkplaceViewController: UIViewController {
     
     func incrementLoadingInProgressCount() {
         if loadingInProgressCount == 0 {
-            sharedUserMessageHandler.showLightLoadingOverlay(view)
+            messageHandler.showLightLoadingOverlay(view)
         }
         loadingInProgressCount += 1
     }
     
     func decrementLoadingInProgressCount() {
         if loadingInProgressCount == 1 {
-            sharedUserMessageHandler.hideLoadingOverlay()
+            messageHandler.hideLoadingOverlay()
             refresh()
         }
         if loadingInProgressCount > 0 {
@@ -117,7 +117,6 @@ extension CompanyWorkplaceViewController: CompanyWorkplaceViewProtocol {
     func showNetworkError(_ error: Error, retry: (() -> Void)?) {
         messageHandler.displayOptionalErrorIfNotNil(
             error,
-            parentCtrl: self,
             cancelHandler: { self.decrementLoadingInProgressCount() },
             retryHandler: { retry?() } )
     }

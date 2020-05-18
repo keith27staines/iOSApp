@@ -33,7 +33,7 @@ class MapViewController: UIViewController {
     let peopleDataSource: SearchDataSourcing = PeopleSearchDataSource()
     let companyDataSource: SearchDataSourcing = CompanySearchDataSource()
     let placesDataSource: SearchDataSourcing = PlacesSearchDataSource()
-    let userMessageHandler = UserMessageHandler()
+    lazy var messageHandler = UserMessageHandler(presenter: self)
     weak var log: F4SAnalyticsAndDebugging?
     
     lazy var searchView: SearchView = {
@@ -161,7 +161,7 @@ class MapViewController: UIViewController {
         setupReachability(nil, useClosures: true)
         startNotifier()
         if companyFileDownloadManager.isCompanyDownloadFileAvailable() {
-            userMessageHandler.showLoadingOverlay(self.view)
+            messageHandler.showLoadingOverlay(self.view)
             reloadMap()
         }
     }
@@ -646,7 +646,7 @@ extension MapViewController {
             moveAndZoomCamera(to: location)
         } else {
             if CLLocationManager.authorizationStatus() == .denied || CLLocationManager.authorizationStatus() == .restricted {
-                userMessageHandler.presentEnableLocationInfo(parentCtrl: self)
+                messageHandler.presentEnableLocationInfo()
             } else if CLLocationManager.authorizationStatus() == .notDetermined {
                 self.locationManager?.requestWhenInUseAuthorization()
             }
@@ -690,7 +690,7 @@ extension MapViewController {
             if let appDelegate = UIApplication.shared.delegate as? AppDelegate, let dbManager = appDelegate.companyFileDownloadManager {
                 if !dbManager.isCompanyDownloadFileAvailable() {
                     dbManager.start()
-                    userMessageHandler.showLoadingOverlay(view)
+                    messageHandler.showLoadingOverlay(view)
                 }
             }
         }
@@ -722,24 +722,24 @@ extension MapViewController {
             }
         } else {
             LocationHelper.sharedInstance.googleGeocodeAddressString(address, placeId) { [weak self] coordinates in
-                guard let this = self else { return }
+                guard let self = self else { return }
                 switch coordinates {
                 case .value(let coordinates):
-                    this.userLocation = CLLocation(latitude: coordinates.value.latitude, longitude: coordinates.value.longitude)
+                    self.userLocation = CLLocation(latitude: coordinates.value.latitude, longitude: coordinates.value.longitude)
                 case .error(let err):
                     if err == "NoConnectivity" {
                         let title = NSLocalizedString("No data connectivity", comment: "")
                         let errorMsg = NSLocalizedString("You appear to be offline at the moment. Please try again later when you have a working internet connection.",
                                                          comment: "")
-                        this.userMessageHandler.displayMessage(
+                        self.messageHandler.displayMessage(
                             title: title,
-                            message: errorMsg, parentCtrl: this)
+                            message: errorMsg)
                     } else {
                         let title = NSLocalizedString("Location Not Found", comment: "")
                         let errorMsg = NSLocalizedString("We cannot find the location you entered. Please try again", comment: "")
-                        this.userMessageHandler.displayMessage(
+                        self.messageHandler.displayMessage(
                             title: title,
-                            message: errorMsg, parentCtrl: this)
+                            message: errorMsg)
                     }
                 }
             }
@@ -803,14 +803,14 @@ extension MapViewController {
     
     func reloadMap() {
         DispatchQueue.main.async {
-            self.userMessageHandler.showLoadingOverlay(self.view)
-            self.userMessageHandler.updateOverlayCaption("Updating map...")
+            self.messageHandler.showLoadingOverlay(self.view)
+            self.messageHandler.updateOverlayCaption("Updating map...")
             DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                 guard let self = self else { return }
                 self.buildMapStructuresFromCompanyFile {
                     DispatchQueue.main.async {
                         self.moveCameraToBestPosition()
-                        self.userMessageHandler.hideLoadingOverlay()
+                        self.messageHandler.hideLoadingOverlay()
                     }
                 }
             }
@@ -914,7 +914,7 @@ extension MapViewController : F4SCompanyDownloadFileAvailabilityObserving {
             let formatter = NumberFormatter()
             formatter.maximumFractionDigits = 0
             let text = formatter.string(for: progress * 100.0)! + "%"
-            self?.userMessageHandler.updateOverlayCaption("loading..." + text)
+            self?.messageHandler.updateOverlayCaption("loading..." + text)
         }
     }
 }

@@ -3,7 +3,7 @@ import WorkfinderUI
 
 class ApplicationDetailViewController: UIViewController, WorkfinderViewControllerProtocol {
     let presenter: ApplicationDetailPresenterProtocol
-    let messageHandler = UserMessageHandler()
+    lazy var messageHandler = UserMessageHandler(presenter: self)
     
     lazy var mainStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
@@ -71,7 +71,6 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
             self.messageHandler.hideLoadingOverlay()
             self.messageHandler.displayOptionalErrorIfNotNil(
                 optionalError,
-                parentCtrl: self,
                 retryHandler: self.loadData)
             self.refreshFromPresenter()
         }

@@ -1,5 +1,7 @@
-import WorkfinderCommon
+
 import UIKit
+import WorkfinderCommon
+import WorkfinderUI
 
 protocol CompanyMainViewCoordinatorProtocol: class {
     func onDidTapDuedil()

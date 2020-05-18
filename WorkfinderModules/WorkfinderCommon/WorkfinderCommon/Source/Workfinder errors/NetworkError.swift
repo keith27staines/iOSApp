@@ -7,7 +7,7 @@
 //
 
 import Foundation
-public let unexpectedErrorCode = 9999
+public let unexpectedErrorCode = 1202
 public enum WorkfinderErrorType {
     case error(NSError)
     case notImplementedYet
@@ -30,13 +30,13 @@ public enum WorkfinderErrorType {
         case .deserialization(_): return 1003
         case .noData: return 1004
         case .networkConnectivity: return 1005
-        case .custom(_,_): return 9998
+        case .custom(_,_): return unexpectedErrorCode - 1
         }
     }
     
     var title: String {
         switch self {
-        case .error: return "Unexpected error"
+        case .error: return "1202 Unexpected error"
         case .notImplementedYet: return "Not implemented"
         case .invalidUrl(_): return "Invalid Url"
         case .deserialization(_): return "Deserialization error"
@@ -111,11 +111,44 @@ public class WorkfinderError: Error {
         self.retryHandler = retryHandler
     }
     
+    /*
+     NSURLErrorCannotFindHost = -1003,
+
+     NSURLErrorCannotConnectToHost = -1004,
+
+     NSURLErrorNetworkConnectionLost = -1005,
+
+     NSURLErrorDNSLookupFailed = -1006,
+
+     NSURLErrorHTTPTooManyRedirects = -1007,
+
+     NSURLErrorResourceUnavailable = -1008,
+
+     NSURLErrorNotConnectedToInternet = -1009,
+
+     NSURLErrorRedirectToNonExistentLocation = -1010,
+
+     NSURLErrorInternationalRoamingOff = -1018,
+
+     NSURLErrorCallIsActive = -1019,
+
+     NSURLErrorDataNotAllowed = -1020,
+
+     NSURLErrorSecureConnectionFailed = -1200,
+
+     NSURLErrorCannotLoadFromNetwork = -2000,
+     */
+    
     public init(from nsError: NSError,
                 attempting: String? = nil,
                 retryHandler: (() -> Void)?) {
         let errorCode = nsError.code
-        let networkConnectionErrors = [NSURLErrorNotConnectedToInternet,NSURLErrorNetworkConnectionLost]
+        let networkConnectionErrors = [
+            NSURLErrorNotConnectedToInternet,
+            NSURLErrorNetworkConnectionLost,
+            NSURLErrorCannotConnectToHost,
+            NSURLErrorTimedOut
+        ]
         let isNetworkConnectivityProblem = networkConnectionErrors.contains(errorCode)
         self.errorType = isNetworkConnectivityProblem ? .networkConnectivity : .error(nsError)
         self.underlyingError = nsError

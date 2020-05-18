@@ -146,8 +146,8 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
             guard let self = self else { return }
             self.view?.hideLoadingIndicator(self)
             switch result {
-            case .failure(_):
-                break
+            case .failure(let error):
+                self.view?.showNetworkError(error, retry: self.beginLoadHosts)
             case .success(let associationsJson):
                 self.associations = associationsJson
                 self.mainViewPresenter.hostsSectionPresenter.onHostsDidLoad(associationsJson.results)

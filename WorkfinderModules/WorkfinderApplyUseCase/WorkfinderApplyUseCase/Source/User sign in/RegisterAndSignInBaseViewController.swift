@@ -6,7 +6,7 @@ import MessageUI
 class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewControllerProtocol {
     
     let presenter: RegisterAndSignInPresenterProtocol
-    let messageHandler = UserMessageHandler()
+    lazy var messageHandler = UserMessageHandler(presenter: self)
     let linkFont = UIFont.systemFont(ofSize: 14)
     var inputControlBottom: CGFloat = 0.0
     let mode: RegisterAndSignInMode
@@ -34,7 +34,6 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
             self.messageHandler.hideLoadingOverlay()
             self.messageHandler.displayOptionalErrorIfNotNil(
                 optionalError,
-                parentCtrl: self,
                 retryHandler: self.onPrimaryButtonTap)
         }
     }
@@ -196,7 +195,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         guard MFMailComposeViewController.canSendMail() else {
             messageHandler.displayMessage(
                 title: "Email is unavailable",
-                message: "Your device isn't configured for email", parentCtrl: self)
+                message: "Your device isn't configured for email")
             return
         }
         let composer = MFMailComposeViewController()
@@ -392,13 +391,13 @@ extension RegisterAndSignInBaseViewController: MFMailComposeViewControllerDelega
             let messageHandler = self.messageHandler
             switch result {
             case .sent:
-                messageHandler.displayMessage(title: "Sent", message: "Your password reset request has been sent", parentCtrl: self)
+                messageHandler.displayMessage(title: "Sent", message: "Your password reset request has been sent")
             case .failed:
-                messageHandler.displayMessage(title: "Failed", message: "Unable to send password reset email", parentCtrl: self)
+                messageHandler.displayMessage(title: "Failed", message: "Unable to send password reset email")
             case .cancelled:
                 break
             case .saved:
-                messageHandler.displayMessage(title: "Saved", message: "Your password reset request email has been saved in to drafts", parentCtrl: self)
+                messageHandler.displayMessage(title: "Saved", message: "Your password reset request email has been saved in to drafts")
             @unknown default:
                 break
             }

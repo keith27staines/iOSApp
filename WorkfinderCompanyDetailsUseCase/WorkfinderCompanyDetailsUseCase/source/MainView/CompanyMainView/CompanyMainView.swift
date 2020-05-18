@@ -97,12 +97,6 @@ class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewP
         return tableView
     }()
     
-//    lazy var sectionSelectorView: SectionSelectorView = {
-//        let view = SectionSelectorView(model: self.sectionsModel, delegate: self)
-//        view.onColor = WorkfinderColors.primaryGreen
-//        return view
-//    }()
-    
     lazy var applyButton: UIButton = {
         let button = WorkfinderPrimaryButton()
         button.setTitle("Apply", for: .normal)
@@ -144,12 +138,10 @@ class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewP
     func configureViews() {
         let headerView = self.headerView as! UIView
         addSubview(headerView)
-        //addSubview(sectionSelectorView)
         addSubview(tableView)
         addSubview(toolbarView)
         addSubview(applyButtonTransparentContainer)
         headerView.anchor(top: layoutMarginsGuide.topAnchor, leading: layoutMarginsGuide.leadingAnchor, bottom: nil, trailing: layoutMarginsGuide.trailingAnchor, padding: UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 80))
-        //sectionSelectorView.anchor(top: headerView.bottomAnchor, leading: layoutMarginsGuide.leadingAnchor, bottom: nil, trailing: layoutMarginsGuide.trailingAnchor, padding: UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0))
         toolbarView.anchor(top: nil, leading: leadingAnchor, bottom: layoutMarginsGuide.bottomAnchor, trailing: trailingAnchor)
         applyButtonTransparentContainer.anchor(top: nil, leading: toolbarView.leadingAnchor, bottom: toolbarView.topAnchor, trailing: toolbarView.trailingAnchor)
         tableView.anchor(top: headerView.bottomAnchor, leading: layoutMarginsGuide.leadingAnchor, bottom: bottomAnchor, trailing: layoutMarginsGuide.trailingAnchor, padding: UIEdgeInsets(top: 40, left: 20, bottom: 0, right: 20))

@@ -6,7 +6,7 @@ import WorkfinderUI
 class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
     weak var coordinator: ApplicationsCoordinator?
     let presenter: OfferPresenterProtocol
-    let messageHandler = UserMessageHandler()
+    lazy var messageHandler = UserMessageHandler(presenter: self)
     
     lazy var mainStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
@@ -52,7 +52,7 @@ class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
         presenter.onTapAccept { [weak self] (optionalError) in
             guard let self = self else { return }
             self.messageHandler.hideLoadingOverlay()
-            self.messageHandler.displayOptionalErrorIfNotNil(optionalError, parentCtrl: self) {
+            self.messageHandler.displayOptionalErrorIfNotNil(optionalError) {
                 self.handleTapAccept()
             }
             self.refreshFromPresenter()
@@ -63,7 +63,7 @@ class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
         presenter.onTapDeclineWithReason(reason) { [weak self] (optionalError) in
             guard let self = self else { return }
             self.messageHandler.hideLoadingOverlay()
-            self.messageHandler.displayOptionalErrorIfNotNil(optionalError, parentCtrl: self) {
+            self.messageHandler.displayOptionalErrorIfNotNil(optionalError) {
                 self.handleDeclineWithReason(reason)
             }
             self.refreshFromPresenter()
@@ -114,7 +114,6 @@ class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
             self.refreshFromPresenter()
             self.messageHandler.displayOptionalErrorIfNotNil(
                 optionalError,
-                parentCtrl: self,
                 retryHandler: self.loadData)
         }
     }

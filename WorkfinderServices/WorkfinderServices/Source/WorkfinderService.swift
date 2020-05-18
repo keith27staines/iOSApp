@@ -57,12 +57,12 @@ open class WorkfinderService {
         completion: @escaping ((Result<ResponseJson,Error>) -> Void),
         attempting: String) -> URLSessionDataTask {
         let task = session.dataTask(with: request, completionHandler: { [weak self] (data, response, error) in
-            guard let self = self, let httpResponse = response as? HTTPURLResponse else { return }
+            guard let self = self else { return }
             self.taskHandler.convertToDataResult(
                 attempting: attempting,
                 request: request,
                 responseData: data,
-                httpResponse: httpResponse,
+                httpResponse: response as? HTTPURLResponse,
                 error: error) { [weak self] (result) in
                     self?.deserialise(dataResult: result, completion: completion)
                 
