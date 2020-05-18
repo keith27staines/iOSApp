@@ -1,22 +1,15 @@
-//
-//  WebViewController.swift
-//  WebView
-//
-//  Created by Keith Dev on 08/05/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
 
 import WebKit
 
-public protocol F4SWebViewControllerDelegate : class {
-    func webViewControllerDidFinish(_ vc: F4SWebViewController)
+public protocol WebViewControllerDelegate : class {
+    func webViewControllerDidFinish(_ vc: WebViewController)
 }
 
-public class F4SWebViewController: UIViewController, WKNavigationDelegate {
-    var webView: WKWebView!
-    let urlString: String
+public class WebViewController: UIViewController, WKNavigationDelegate {
+
+    let url: URL?
     let isNavigationAllowed: Bool
-    weak var delegate: F4SWebViewControllerDelegate?
+    weak var delegate: WebViewControllerDelegate?
     
     lazy var activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
@@ -41,27 +34,31 @@ public class F4SWebViewController: UIViewController, WKNavigationDelegate {
     }()
     
     lazy var goBackButton: UIBarButtonItem = {
-        let item = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: #selector(handleBack))
+        let item = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.done, target: self, action: #selector(handleBack))
         item.image = UIImage(named: "goBack")
+        item.tintColor = WorkfinderColors.primaryColor
         return item
     }()
     
     lazy var goForwardButton: UIBarButtonItem = {
-        let item = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: #selector(handleForward))
+        let item = UIBarButtonItem(title: "Forward", style: UIBarButtonItem.Style.done, target: self, action: #selector(handleForward))
         item.image = UIImage(named: "goForward")
+        item.tintColor = WorkfinderColors.primaryColor
         return item
     }()
     
     lazy var doneButton: UIBarButtonItem = {
-        return UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(handleDone))
+        let button = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(handleDone))
+        button.tintColor = WorkfinderColors.primaryColor
+        return button
     }()
     
-    public override func loadView() {
-        webView = WKWebView()
+    lazy var webView: WKWebView = {
+        let webView = WKWebView()
         webView.navigationDelegate = self
         webView.allowsBackForwardNavigationGestures = true
-        view = webView
-    }
+        return webView
+    }()
 
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,26 +67,24 @@ public class F4SWebViewController: UIViewController, WKNavigationDelegate {
         goForwardButton.isEnabled = false
     }
     
-    public override func viewDidAppear(_ animated: Bool) {
-        loadUrl()
-    }
+    public override func viewDidAppear(_ animated: Bool) { loadUrl() }
     
     func configureSubViews() {
+        let guide = view.safeAreaLayoutGuide
+        view.addSubview(webView)
+        view.addSubview(toolBar)
+        webView.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: toolBar.topAnchor, trailing: guide.trailingAnchor)
+        toolBar.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        toolBar.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        toolBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+
         webView.addSubview(activityIndicator)
         activityIndicator.centerXAnchor.constraint(equalTo: webView.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: webView.centerYAnchor).isActive = true
-        view.addSubview(toolBar)
-        toolBar.leftAnchor.constraint(equalTo: webView.leftAnchor).isActive = true
-        toolBar.rightAnchor.constraint(equalTo: webView.rightAnchor).isActive = true
-        if #available(iOS 11.0, *) {
-            toolBar.bottomAnchor.constraint(equalTo: webView.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        } else {
-            toolBar.bottomAnchor.constraint(equalTo: webView.bottomAnchor).isActive = true
-        }
     }
     
     func loadUrl() {
-        guard let url = URL(string: urlString) else { return }
+        guard let url = url else { return }
         let request = URLRequest(url: url)
         activityIndicator.isHidden = false
         activityIndicator.color = UIColor.blue
@@ -99,9 +94,18 @@ public class F4SWebViewController: UIViewController, WKNavigationDelegate {
         webView.load(request)
     }
     
-    public init(urlString: String, showNavigationButtons: Bool, delegate: F4SWebViewControllerDelegate?) {
+    public convenience init(urlString: String,
+                showNavigationButtons: Bool,
+                delegate: WebViewControllerDelegate?) {
+        
+        self.init(url: URL(string: urlString),
+                  showNavigationButtons: showNavigationButtons,
+                  delegate: delegate)
+    }
+    
+    public init(url: URL?, showNavigationButtons: Bool, delegate: WebViewControllerDelegate?) {
         self.delegate = delegate
-        self.urlString = urlString
+        self.url = url
         self.isNavigationAllowed = showNavigationButtons
         super.init(nibName: nil, bundle: nil)
     }

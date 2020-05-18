@@ -203,12 +203,12 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         parentCtrl.present(navigationController, animated: true, completion: nil)
     }
     
-    func presentContentViewController(navCtrl: UINavigationController, contentType: F4SContentType) {
-        let content = WorkfinderUI().makeWebContentViewController(
-            contentType: contentType,
-            dismissByPopping: true)
-        navCtrl.present(content, animated: true, completion: nil)
-    }
+//    func presentContentViewController(navCtrl: UINavigationController, contentType: WorkfinderContentType) {
+//        let content = WorkfinderUI().makeWebContentViewController(
+//            contentType: contentType,
+//            dismissByPopping: true)
+//        navCtrl.present(content, animated: true, completion: nil)
+//    }
     
     func showApplications() {
         navigateToApplications()

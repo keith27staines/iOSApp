@@ -253,30 +253,40 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
         case DrawerSection.WelcomeSection:
             break
         case DrawerSection.NavigationSection:
-            if let navigCtrl = self.navigationController {
-                guard let navigationRow = NavigationSectionRow(rawValue: indexPath.row) else {
-                    return
-                }
-
-                switch navigationRow
-                {
-                case .about:
-                    log?.track(event: .sideMenuAboutWorkfinderLinkTap, properties: nil)
-                    tabBarCoordinator.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.about)
-                case .faq:
-                    log?.track(event: .sideMenuFAQLinkTap, properties: nil)
-                    tabBarCoordinator.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.faq)
-                case .terms:
-                    log?.track(event: .sideMenuTermsAndConditionsLinkTap, properties: nil)
-                    tabBarCoordinator.presentContentViewController(navCtrl: navigCtrl, contentType: F4SContentType.terms)
-                }
+            guard
+                let navigCtrl = self.navigationController,
+                let navigationRow = NavigationSectionRow(rawValue: indexPath.row)
+                else { return }
+            let contentType: WorkfinderContentType
+            switch navigationRow
+            {
+            case .about:
+                log?.track(event: .sideMenuAboutWorkfinderLinkTap, properties: nil)
+                contentType = .about
+            case .faq:
+                log?.track(event: .sideMenuFAQLinkTap, properties: nil)
+                contentType = .faqs
+            case .terms:
+                log?.track(event: .sideMenuTermsAndConditionsLinkTap, properties: nil)
+                contentType = .terms
             }
+            switch contentType.openingMode {
+            case .inWorkfinder:
+                let vc = WebViewController(
+                    url: contentType.url,
+                    showNavigationButtons: true,
+                    delegate: self)
+                present(vc, animated: true, completion: nil)
+            case .inBrowser:
+                UIApplication.shared.open(contentType.url, options: [:], completionHandler: nil)
+            }
+            
         case .BusinessLeadersSection:
             let alert = UIAlertController(title: "Intending to offer work experience?", message: "If you are looking for work experience, please cancel. You can do everything you need to do right here in this app. If you want to offer to host work experience, you should continue to founders4schools.org.uk website", preferredStyle: .alert)
             let cancel = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil)
             let go = UIAlertAction(title: "Continue", style: UIAlertAction.Style.default) { [weak self] (action) in
                 let urlString = "https://www.founders4schools.org.uk/login/?next=/signup/business-leaders/"
-                let webView = F4SWebViewController(urlString: urlString, showNavigationButtons: true, delegate: nil)
+                let webView = WebViewController(urlString: urlString, showNavigationButtons: true, delegate: nil)
                 self?.present(webView, animated: true, completion: nil)
             }
             alert.addAction(cancel)
@@ -326,4 +336,12 @@ extension UINavigationController {
     override open var childForStatusBarStyle: UIViewController? {
         return topViewController
     }
+}
+
+extension CustomMenuViewController: WebViewControllerDelegate {
+    func webViewControllerDidFinish(_ vc: WebViewController) {
+        vc.dismiss(animated: true, completion: nil)
+    }
+    
+    
 }

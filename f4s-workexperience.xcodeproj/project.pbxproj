@@ -31,7 +31,6 @@
 		40E78E1E1DD31A86000A3776 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E1D1DD31A86000A3776 /* Assets.xcassets */; };
 		40E78E211DD31A86000A3776 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E1F1DD31A86000A3776 /* LaunchScreen.storyboard */; };
 		40E78E581DD32964000A3776 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E541DD32964000A3776 /* Constants.swift */; };
-		40E78E591DD32964000A3776 /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E551DD32964000A3776 /* Entities.swift */; };
 		40E78E661DD32B94000A3776 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E651DD32B94000A3776 /* TabBarCoordinator.swift */; };
 		40E78E6E1DD32BD4000A3776 /* BaseMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E6A1DD32BD4000A3776 /* BaseMenuViewController.swift */; };
 		40E78E6F1DD32BD4000A3776 /* CustomMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E6B1DD32BD4000A3776 /* CustomMenuViewController.swift */; };
@@ -239,7 +238,6 @@
 		40E78E201DD31A86000A3776 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40E78E221DD31A86000A3776 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40E78E541DD32964000A3776 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		40E78E551DD32964000A3776 /* Entities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
 		40E78E651DD32B94000A3776 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 		40E78E6A1DD32BD4000A3776 /* BaseMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseMenuViewController.swift; path = Menu/BaseMenuViewController.swift; sourceTree = "<group>"; };
 		40E78E6B1DD32BD4000A3776 /* CustomMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomMenuViewController.swift; path = Menu/CustomMenuViewController.swift; sourceTree = "<group>"; };
@@ -527,7 +525,6 @@
 			isa = PBXGroup;
 			children = (
 				40E78E541DD32964000A3776 /* Constants.swift */,
-				40E78E551DD32964000A3776 /* Entities.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -1324,7 +1321,6 @@
 				40C1A51A1DDF5ACE000F80AA /* GMUDefaultClusterIconGenerator.m in Sources */,
 				FCB49301222A4B3B00B88B8B /* SearchCoordinator.swift in Sources */,
 				40E78E661DD32B94000A3776 /* TabBarCoordinator.swift in Sources */,
-				40E78E591DD32964000A3776 /* Entities.swift in Sources */,
 				FC771F512416294D00AD6317 /* Common.swift in Sources */,
 				FC06605523265FC300496FE2 /* CompanyCoordinatorParentProtocol+extensions.swift in Sources */,
 				40E78E6F1DD32BD4000A3776 /* CustomMenuViewController.swift in Sources */,
