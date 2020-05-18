@@ -21,8 +21,9 @@ fileprivate enum NavigationSectionRow : Int {
     case about
     case faq
     case terms
+    case privacyPolicy
     static var allRows: [NavigationSectionRow] {
-        return [.about, .faq, .terms]
+        return [.about, .faq, .terms, .privacyPolicy]
     }
     
     var title: String {
@@ -33,7 +34,9 @@ fileprivate enum NavigationSectionRow : Int {
         case .faq:
             return NSLocalizedString("FAQs", comment: "Menu item providing access to frequently asked questions")
         case .terms:
-            return NSLocalizedString("T&Cs + Privacy Policy", comment: "Menu item providing access to terms and conditions")
+            return NSLocalizedString("T&Cs", comment: "Menu item providing access to terms and conditions")
+        case .privacyPolicy:
+            return NSLocalizedString("Privacy policy", comment: "Menu item providing access to the privacy policy")
         }
     }
 }
@@ -247,6 +250,9 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
             case .terms:
                 log?.track(event: .sideMenuTermsAndConditionsLinkTap, properties: nil)
                 contentType = .terms
+            case .privacyPolicy:
+                log?.track(event: .sideMenuTermsAndConditionsLinkTap, properties: nil)
+                contentType = .privacyPolicy
             }
             switch contentType.openingMode {
             case .inWorkfinder:
