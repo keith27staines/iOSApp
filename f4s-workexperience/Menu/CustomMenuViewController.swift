@@ -14,7 +14,6 @@ import WorkfinderOnboardingUseCase
 fileprivate enum DrawerSection: Int {
     case WelcomeSection
     case NavigationSection
-    case BusinessLeadersSection
     case EnvironmentSection
 }
 
@@ -120,8 +119,6 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
             return 1
         case .NavigationSection:
             return NavigationSectionRow.allRows.count
-        case .BusinessLeadersSection:
-            return 1
         case .EnvironmentSection:
             return 1
         }
@@ -155,13 +152,6 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
             cell.textLabel?.text = row.title
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 17)
             return cell
-        case .BusinessLeadersSection:
-            guard let _ = NavigationSectionRow(rawValue: indexPath.row), let cell = tableView.dequeueReusableCell(withIdentifier: "SideDrawerTableViewCell") as? SideDrawerTableViewCell else {
-                return UITableViewCell()
-            }
-            cell.textLabel?.text = "Looking to offer work experience?"
-            cell.textLabel?.font = UIFont.italicSystemFont(ofSize: UIFont.smallSystemFontSize)
-            return cell
         case .EnvironmentSection:
             guard let _ = NavigationSectionRow(rawValue: indexPath.row), let cell = tableView.dequeueReusableCell(withIdentifier: "SideDrawerTableViewCell") as? SideDrawerTableViewCell else {
                 return UITableViewCell()
@@ -184,10 +174,6 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
             return nil
         case .NavigationSection:
             return nil
-        case .BusinessLeadersSection:
-            cell.textLabel?.text = ""
-            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize)
-            return cell
         case .EnvironmentSection:
             return nil
         }
@@ -205,10 +191,6 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
             cell.textLabel?.text = ""
             cell.lineImageView.isHidden = true
             return cell
-        case .BusinessLeadersSection:
-            cell.textLabel?.text = ""
-            cell.lineImageView.isHidden = true
-            return cell
         case .EnvironmentSection:
             return nil
         }
@@ -221,7 +203,6 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
         switch section {
         case .WelcomeSection: return 0
         case .NavigationSection: return 0
-        case .BusinessLeadersSection: return 30
         case .EnvironmentSection: return 0
         }
     }
@@ -232,7 +213,6 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
         switch section {
         case .WelcomeSection: return 0
         case .NavigationSection: return 70
-        case .BusinessLeadersSection: return 70
         case .EnvironmentSection: return 0
         }
     }
@@ -242,7 +222,6 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
         switch section {
         case .WelcomeSection: return welcomeCellHeight
         case .NavigationSection: return normalCellHeight
-        case .BusinessLeadersSection: return normalCellHeight
         case .EnvironmentSection: return normalCellHeight
         }
     }
@@ -254,7 +233,6 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
             break
         case DrawerSection.NavigationSection:
             guard
-                let navigCtrl = self.navigationController,
                 let navigationRow = NavigationSectionRow(rawValue: indexPath.row)
                 else { return }
             let contentType: WorkfinderContentType
@@ -280,18 +258,6 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
             case .inBrowser:
                 UIApplication.shared.open(contentType.url, options: [:], completionHandler: nil)
             }
-            
-        case .BusinessLeadersSection:
-            let alert = UIAlertController(title: "Intending to offer work experience?", message: "If you are looking for work experience, please cancel. You can do everything you need to do right here in this app. If you want to offer to host work experience, you should continue to founders4schools.org.uk website", preferredStyle: .alert)
-            let cancel = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil)
-            let go = UIAlertAction(title: "Continue", style: UIAlertAction.Style.default) { [weak self] (action) in
-                let urlString = "https://www.founders4schools.org.uk/login/?next=/signup/business-leaders/"
-                let webView = WebViewController(urlString: urlString, showNavigationButtons: true, delegate: nil)
-                self?.present(webView, animated: true, completion: nil)
-            }
-            alert.addAction(cancel)
-            alert.addAction(go)
-            present(alert, animated: true, completion: nil)
 
         case .EnvironmentSection:
             break
