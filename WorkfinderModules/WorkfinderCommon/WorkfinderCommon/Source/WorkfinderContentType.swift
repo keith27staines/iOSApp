@@ -20,7 +20,6 @@ public enum WorkfinderContentType: String, Codable {
         case .faqs:  return URL(string: "https://workfinder.com/faqs")!
         case .terms: return URL(string: "https://workfinder.com/terms-and-conditions")!
         case .privacyPolicy: return URL(string: "https://workfinder.com/privacy")!
-            
         case .offerWorkExperience: return URL(string: "https://workfinder.com/employers")!
         }
     }

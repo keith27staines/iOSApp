@@ -53,12 +53,12 @@ public class Picklist: PicklistProtocol {
     
     public func deselectAll() { selectedItems = [] }
     
-    public init(type: PicklistType, otherItem: PicklistItemJson?, maximumPicks: Int, networkConfig: NetworkConfig) {
-        self.otherItem = otherItem
+    public init(type: PicklistType, networkConfig: NetworkConfig) {
+        self.otherItem = type.isOtherable ? PicklistItemJson(uuid: PicklistItemJson.otherItemUuid, value: "Other") : nil
         self.type = type
         self.items = []
         self.selectedItems = []
-        self.maximumPicks = maximumPicks
+        self.maximumPicks = type.maxItems
         self.networkConfig = networkConfig
         self.provider = makeProvider()
     }

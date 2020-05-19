@@ -94,6 +94,7 @@
 		FCDB07382286F6640053347F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB07372286F6640053347F /* User.swift */; };
 		FCDB073A2286F7870053347F /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB07392286F7870053347F /* UserRepository.swift */; };
 		FCDB073C2286F8B00053347F /* Analytics and debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB073B2286F8B00053347F /* Analytics and debugging.swift */; };
+		FCE4F4E124740D11005ED80D /* Placement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE4F4E024740D11005ED80D /* Placement.swift */; };
 		FCE5191622493B4C00B550C9 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE5191522493B4C00B550C9 /* String+Extensions.swift */; };
 		FCE5192122493D3300B550C9 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE5192022493D3300B550C9 /* Date+Extensions.swift */; };
 		FCE5192C2249482A00B550C9 /* F4SCalendarWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE519272249482800B550C9 /* F4SCalendarWeek.swift */; };
@@ -227,6 +228,7 @@
 		FCDB07372286F6640053347F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FCDB07392286F7870053347F /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		FCDB073B2286F8B00053347F /* Analytics and debugging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Analytics and debugging.swift"; sourceTree = "<group>"; };
+		FCE4F4E024740D11005ED80D /* Placement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placement.swift; sourceTree = "<group>"; };
 		FCE5191522493B4C00B550C9 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		FCE5192022493D3300B550C9 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		FCE519272249482800B550C9 /* F4SCalendarWeek.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarWeek.swift; sourceTree = "<group>"; };
@@ -392,6 +394,7 @@
 		FCA91E6D2234043D007ED308 /* WorkfinderCommon */ = {
 			isa = PBXGroup;
 			children = (
+				FCE4F4DF24740CF9005ED80D /* Placement */,
 				FCFE450C2250BA4B00C38436 /* Mocks */,
 				FCA91E8622340478007ED308 /* Source */,
 				FCA91E852234044C007ED308 /* Supporting files */,
@@ -530,6 +533,14 @@
 				FC7DC9F5244D8D7300C282EF /* RemoteLinks.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		FCE4F4DF24740CF9005ED80D /* Placement */ = {
+			isa = PBXGroup;
+			children = (
+				FCE4F4E024740D11005ED80D /* Placement.swift */,
+			);
+			path = Placement;
 			sourceTree = "<group>";
 		};
 		FCE519312249483D00B550C9 /* F4SCalendar structs */ = {
@@ -689,6 +700,7 @@
 				FC8F957C233BA6710027BE02 /* MockCoordinators.swift in Sources */,
 				FC24F9132333CA88005C0A08 /* RequestVerb.swift in Sources */,
 				FCC85DC324517E0A00BC600E /* ProvidersAndServicesProtocols.swift in Sources */,
+				FCE4F4E124740D11005ED80D /* Placement.swift in Sources */,
 				FCC85DC8245180AB00BC600E /* PicklistTypeEnums.swift in Sources */,
 				FC083F852310101D00641F17 /* F4SRecommendation.swift in Sources */,
 				FCFE450E2250BA6700C38436 /* MockLocalStore.swift in Sources */,

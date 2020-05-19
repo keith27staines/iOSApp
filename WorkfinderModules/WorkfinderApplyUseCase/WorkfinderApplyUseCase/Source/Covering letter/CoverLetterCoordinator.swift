@@ -21,7 +21,6 @@ public protocol PicklistsStoreProtocol {
 public class PicklistsStore: PicklistsStoreProtocol {
     let networkConfig: NetworkConfig
     let localStore:LocalStorageProtocol
-    let otherItem = PicklistItemJson(uuid: PicklistItemJson.otherItemUuid, value: "Other")
     
     public init(networkConfig: NetworkConfig, localStore:LocalStorageProtocol) {
         self.networkConfig = networkConfig
@@ -66,35 +65,28 @@ public class PicklistsStore: PicklistsStoreProtocol {
         }
     }
     
-    /*
-     Final Fields are:
-     (FE type, number to choose)
-     *         Year (pick list & 'other', 1)
-     *         Subject (pick list & 'other', 1)
-     *         Institution (Typeahead & 'other', 1)
-     *         Placement Type (pick list, 1)
-     *         Project (pick list & 'other', 1)
-     *         Motivation (free text)
-     *         Availability (date picker)
-     *         Duration (pick list, 1)
-     *         Experience (free text)
-     *         Attributes (pick list, 1-3)
-     *         Skills (pick list, 1-3)
-     */
     func buildPicklists() -> PicklistsDictionary {
-        return [
-            .year: Picklist(type: .year, otherItem: otherItem, maximumPicks: 1, networkConfig: networkConfig),
-            .subject: Picklist(type: .subject, otherItem: otherItem, maximumPicks: 1, networkConfig: networkConfig),
-            .institutions: TextSearchPicklist(type: .institutions, otherItem: otherItem, networkConfig: networkConfig),
-            .placementType: Picklist(type: .placementType, otherItem: nil, maximumPicks: 1, networkConfig: networkConfig),
-            .project: Picklist(type: .project, otherItem: otherItem, maximumPicks: 1, networkConfig: networkConfig),
-            .motivation: TextblockPicklist(type: .motivation, networkConfig: networkConfig),
-            .availabilityPeriod: AvailabilityPeriodPicklist(networkConfig: networkConfig),
-            .duration: Picklist(type: .duration, otherItem: nil, maximumPicks: 1, networkConfig: networkConfig),
-            .experience: TextblockPicklist(type: .experience, networkConfig: networkConfig),
-            .attributes: Picklist(type: .attributes, otherItem: nil, maximumPicks: 3, networkConfig: networkConfig),
-            .skills: Picklist(type: .skills, otherItem: nil, maximumPicks: 3, networkConfig: networkConfig),
-        ]
+        var lists = PicklistsDictionary()
+        PicklistType.allCases.forEach { (type) in
+            switch type {
+            case .year,
+                 .subject,
+                 .placementType,
+                 .project,
+                 .duration,
+                 .skills,
+                 .attributes:
+                lists[type] = Picklist(type: type, networkConfig: networkConfig)
+            case .institutions:
+                lists[type] = TextSearchPicklist(type: type, networkConfig: networkConfig)
+            case .motivation,
+                 .experience:
+                lists[type] = TextblockPicklist(type: type, networkConfig: networkConfig)
+            case .availabilityPeriod:
+                lists[type] = AvailabilityPeriodPicklist(networkConfig: networkConfig)
+            }
+        }
+        return lists
     }
 }
 
@@ -166,7 +158,8 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
 
     public func onDidCompleteCoverLetter() {
         picklistsStore.save()
-        self.applyCoordinator?.coverLetterCoordinatorDidComplete(presenter: presenter)
+        let picklists = picklistsStore.allPicklistsDictionary
+        self.applyCoordinator?.coverLetterCoordinatorDidComplete(presenter: presenter, picklistsDictionary: picklists)
         self.parentCoordinator?.childCoordinatorDidFinish(self)
     }
     

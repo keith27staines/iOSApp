@@ -26,7 +26,11 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     let applyService: PostPlacementServiceProtocol
     weak var applyCoordinatorDelegate: ApplyCoordinatorDelegate?
     lazy var userInterests: [F4SInterest] = { return interestsRepository.loadInterestsArray() }()
-    var draftPlacement = Placement()
+    lazy var draftPlacementLogic: DraftPlacementPreparationLogic = {
+        return DraftPlacementPreparationLogic()
+    }()
+
+    var picklistsDictionary: PicklistsDictionary?
     
     lazy var applicationModel: ApplicationModel = {
         return ApplicationModel()
@@ -82,7 +86,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         self.companyWorkplace = companyWorkplace
         self.association = association
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
-        self.draftPlacement.associationUuid = association.uuid
+        draftPlacementLogic.update(associationUuid: association.uuid)
     }
     
     override public func start() {
@@ -126,8 +130,13 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         coordinator.start()
     }
     
-    func coverLetterCoordinatorDidComplete(presenter: CoverLetterViewPresenterProtocol) {
-        draftPlacement.coverLetterString = presenter.displayString
+    func coverLetterCoordinatorDidComplete(
+        presenter: CoverLetterViewPresenterProtocol,
+        picklistsDictionary: PicklistsDictionary) {
+        self.picklistsDictionary = picklistsDictionary
+        let coverLetter = presenter.displayString
+        draftPlacementLogic.update(coverletter: coverLetter)
+        draftPlacementLogic.update(picklists: picklistsDictionary)
         startSigninCoordinatorIfNecessary()
     }
     
@@ -137,6 +146,8 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
 extension ApplyCoordinator: RegisterAndSignInCoordinatorParent {
     
     func onCandidateIsSignedIn() {
+        let uuid = userRepository.loadCandidate().uuid!
+        draftPlacementLogic.update(candidateUuid: uuid)
         submitApplication()
     }
     
@@ -144,7 +155,7 @@ extension ApplyCoordinator: RegisterAndSignInCoordinatorParent {
         let navigationController = navigationRouter.navigationController
         guard let messageHandler = coverletterCoordinator?.messageHandler
             else { return }
-        let draft = prepareDraftPlacement()
+        let draft = draftPlacementLogic.draft
         applicationSubmitter = ApplicationSubmitter(
             applyService: applyService,
             draft: draft,
@@ -153,11 +164,6 @@ extension ApplyCoordinator: RegisterAndSignInCoordinatorParent {
             onSuccess: self.showApplicationSubmittedSuccessfully,
             onCancel: { self.cancelButtonWasTapped(sender: self) })
         applicationSubmitter?.submitApplication()
-    }
-    
-    func prepareDraftPlacement() -> Placement {
-        draftPlacement.candidateUuid = userRepository.loadCandidate().uuid!
-        return draftPlacement
     }
 }
 

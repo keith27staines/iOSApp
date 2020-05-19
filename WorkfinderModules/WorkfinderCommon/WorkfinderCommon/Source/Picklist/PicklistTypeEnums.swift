@@ -52,30 +52,7 @@ public enum PicklistType: Int, CaseIterable, Codable {
         case .availabilityPeriod: return .clientAvailabilityPeriod
         }
     }
-    
-    /*
-     {
-         "companies": "http://develop.workfinder.com/v3/companies/",
-         "locations": "http://develop.workfinder.com/v3/locations/",
-         "hosts": "http://develop.workfinder.com/v3/hosts/",
-         "associations": "http://develop.workfinder.com/v3/associations/",
-         "placements": "http://develop.workfinder.com/v3/placements/",
-         "candidates": "http://develop.workfinder.com/v3/candidates/",
-         "pings": "http://develop.workfinder.com/v3/pings/",
-         "coverletters": "http://develop.workfinder.com/v3/coverletters/",
-         "institutions": "http://develop.workfinder.com/v3/institutions/",
-         "placement-years-of-study": "http://develop.workfinder.com/v3/placement-years-of-study/",
-         "placement-types": "http://develop.workfinder.com/v3/placement-types/",
-         "placement-projects": "http://develop.workfinder.com/v3/placement-projects/",
-         "placement-durations": "http://develop.workfinder.com/v3/placement-durations/",
-         "placement-skills": "http://develop.workfinder.com/v3/placement-skills/",
-         "placement-attributes": "http://develop.workfinder.com/v3/placement-attributes/",
-         "subjects": "http://develop.workfinder.com/v3/subjects/",
-         "projects": "http://develop.workfinder.com/v3/projects/",
-         "project-types": "http://develop.workfinder.com/v3/project-types/"
-     }
-     */
-    
+        
     public var endpoint: String {
         switch self {
         case .year: return "placement-years-of-study/"
@@ -105,6 +82,21 @@ public enum PicklistType: Int, CaseIterable, Codable {
         case .placementType: return "placement type"
         case .project: return "project"
         case .duration: return "duration"
+        }
+    }
+    
+    public var maxItems: Int {
+        switch self {
+        case .skills, .attributes: return 3
+        case .availabilityPeriod: return 2
+        default: return 1
+        }
+    }
+    
+    public var isOtherable: Bool {
+        switch self {
+        case .year, .subject, .project: return true
+        default: return false
         }
     }
     

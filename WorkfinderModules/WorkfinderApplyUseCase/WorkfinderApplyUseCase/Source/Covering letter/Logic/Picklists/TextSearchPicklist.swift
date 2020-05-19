@@ -32,7 +32,4 @@ public class TextSearchPicklist: Picklist, TextSearchPicklistProtocol {
         })
     }
 
-    public init(type: PicklistType, otherItem: PicklistItemJson?, networkConfig: NetworkConfig) {
-        super.init(type: type, otherItem: otherItem, maximumPicks: 1, networkConfig: networkConfig)
-    }
 }

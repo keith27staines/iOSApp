@@ -67,6 +67,7 @@
 		FC96DE3B245C37C20074011B /* RegisterAndSignInMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96DE3A245C37C20074011B /* RegisterAndSignInMode.swift */; };
 		FC9865B6229D380A006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865B5229D380A006D3E63 /* README */; };
 		FCCA4E3224570CE900DFA696 /* RegisterUserLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA4E3124570CE900DFA696 /* RegisterUserLogic.swift */; };
+		FCE4F4DE24740C37005ED80D /* DraftUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE4F4DD24740C37005ED80D /* DraftUpdater.swift */; };
 		FCE8DA9A2320E24600934E2F /* ApplyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DA992320E24600934E2F /* ApplyCoordinator.swift */; };
 		FCE8DA9C2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE8DA9B2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework */; };
 		FCF5AF212248BDCC00D9B8D1 /* WorkfinderApplyUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = FCF5AF132248BDCC00D9B8D1 /* WorkfinderApplyUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -145,6 +146,7 @@
 		FC96DE3A245C37C20074011B /* RegisterAndSignInMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterAndSignInMode.swift; sourceTree = "<group>"; };
 		FC9865B5229D380A006D3E63 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		FCCA4E3124570CE900DFA696 /* RegisterUserLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserLogic.swift; sourceTree = "<group>"; };
+		FCE4F4DD24740C37005ED80D /* DraftUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftUpdater.swift; sourceTree = "<group>"; };
 		FCE5190B2249388200B550C9 /* Mustache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mustache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCE8DA992320E24600934E2F /* ApplyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyCoordinator.swift; sourceTree = "<group>"; };
 		FCE8DA9B2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUserDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -211,6 +213,7 @@
 		FC23BCEC243B33510075F359 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				FCE4F4DD24740C37005ED80D /* DraftUpdater.swift */,
 				FC23BCF1243B33510075F359 /* Grammer.swift */,
 				FC23BCED243B33510075F359 /* TemplateRenderer.swift */,
 				FC23BCEE243B33510075F359 /* TemplateParser.swift */,
@@ -566,6 +569,7 @@
 				FC6A50D6245ABAD500EF5C92 /* HardCodedPicklist.swift in Sources */,
 				FC5ABD0224607AE000AA22BD /* NextHideToolbar.swift in Sources */,
 				FC42C8A3243C599000F81232 /* LetterEditorPresenter.swift in Sources */,
+				FCE4F4DE24740C37005ED80D /* DraftUpdater.swift in Sources */,
 				FC343CFC244600EF00347BC2 /* RegisterUserPresenter.swift in Sources */,
 				FC29992E231EC41A00F83FB6 /* F4SSelectDayTableViewCell.swift in Sources */,
 				FC23BCE4243AFA730075F359 /* DateOfBirthCollectorViewController.swift in Sources */,
