@@ -176,7 +176,7 @@ class SearchView: UIView {
     lazy var horizontalStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
             personSelectorView,
-            companySelectorView,
+            // companySelectorView,
             mapSelectorView
             ])
         personSelectorView.isHidden = true

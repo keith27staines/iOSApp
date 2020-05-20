@@ -115,7 +115,7 @@ extension SearchViewStateMachine {
         switch value {
         case .collapsed:
             value = .horizontallyExpanded
-            companyTapped()
+            locationTapped()
         default:
             value = .collapsed
         }
