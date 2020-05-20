@@ -8,22 +8,6 @@ public enum ProviderType {
     case clientAvailabilityPeriod
 }
 
-/*
- Final Fields are:
- (FE type, number to choose)
- *         Year (pick list & 'other', 1)
- *         Subject (pick list & 'other', 1)
- *         Institution (Typeahead & 'other', 1)
- *         Placement Type (pick list, 1)
- *         Project (pick list & 'other', 1)
- *         Motivation (free text)
- *         Availability (date picker)
- *         Duration (pick list, 1)
- *         Experience (free text)
- *         Attributes (pick list, 1-3)
- *         Skills (pick list, 1-3)
- */
-
 public enum PicklistType: Int, CaseIterable, Codable {
     case year
     case subject
