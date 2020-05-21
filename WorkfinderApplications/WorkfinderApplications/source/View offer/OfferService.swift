@@ -17,13 +17,13 @@ class OfferService: OfferServiceProtocol{
     
     func accept(offer: Offer, completion: @escaping (Result<Offer, Error>) -> Void) {
         var updatedOffer = offer
-        updatedOffer.offerState = .accepted
+        updatedOffer.offerState = .candidateAccepted
         completion(Result<Offer,Error>.success(updatedOffer))
     }
     
     func decline(offer: Offer, completion: @escaping (Result<Offer, Error>) -> Void) {
         var updatedOffer = offer
-        updatedOffer.offerState = .declined
+        updatedOffer.offerState = .candidateDeclined
         completion(Result<Offer,Error>.success(updatedOffer))
     }
     

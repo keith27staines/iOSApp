@@ -46,6 +46,7 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
     lazy var messageLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
         return label
     }()
@@ -66,7 +67,7 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
     
     func loadData() {
         messageHandler.showLoadingOverlay(self.view)
-        presenter.load() { [weak self] optionalError in
+        presenter.loadData() { [weak self] optionalError in
             guard let self = self else { return }
             self.messageHandler.hideLoadingOverlay()
             self.messageHandler.displayOptionalErrorIfNotNil(
@@ -78,7 +79,7 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
     
     func refreshFromPresenter() {
         messageHandler.showLoadingOverlay(view)
-        presenter.load { [weak self] (error) in
+        presenter.loadData { [weak self] (error) in
             guard let self = self else { return}
             self.messageHandler.hideLoadingOverlay()
             self.tableView.reloadData()

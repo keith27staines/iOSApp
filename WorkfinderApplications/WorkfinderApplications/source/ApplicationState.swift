@@ -12,32 +12,36 @@ WITHDRAWN = "withdrawn"
 
 enum ApplicationState: String, Codable {
     case applied
-    case pending
+    case expired
     case viewedByHost = "viewed"
+    case savedByHost = "saved"
     case applicationDeclined = "application declined"
     case offerMade = "offered"
     case offerAccepted = "accepted"
-    case offerDeclined = "offer declined"
+    case candidateWithdrew = "offer declined"
     case unknown
     
     var screenTitle: String {
         switch self {
         case .applied: return NSLocalizedString("Application submitted", comment: "")
+        case .expired: return NSLocalizedString("Application expired", comment: "")
         case .viewedByHost: return NSLocalizedString("Application viewed", comment: "")
+        case .savedByHost: return NSLocalizedString("Application viewed", comment: "")
         case .offerMade: return NSLocalizedString("Offer made", comment: "")
         case .offerAccepted: return NSLocalizedString("Offer accepted", comment: "")
         case .applicationDeclined: return NSLocalizedString("Application declined", comment: "")
-        case .offerDeclined: return NSLocalizedString("Offer declined", comment: "")
-        case .pending: return NSLocalizedString("Application submitted", comment: "")
+        case .candidateWithdrew: return NSLocalizedString("Withdrawn", comment: "")
         case .unknown: return NSLocalizedString("Status unknown", comment: "")
         }
     }
     
     var allowedActions: [ApplicationAction] {
         switch self {
-        case .applied, .pending, .unknown:
+        case .applied, .unknown:
             return [.viewApplication]
-        case .viewedByHost:
+        case .expired:
+            return [.viewApplication]
+        case .viewedByHost, .savedByHost:
             return [.viewApplication]
         case .applicationDeclined:
             return [.viewApplication]
@@ -45,16 +49,18 @@ enum ApplicationState: String, Codable {
             return [.viewApplication, .viewOffer, .acceptOffer, .declineOffer]
         case .offerAccepted:
             return [.viewApplication, .viewOffer]
-        case .offerDeclined:
+        case .candidateWithdrew:
             return [.viewApplication, .viewOffer]
         }
     }
     
     var description: String {
         switch self {
-        case .applied, .pending:
+        case .applied:
             return NSLocalizedString("You have submitted your application", comment: "")
-        case .viewedByHost:
+        case .expired:
+            return NSLocalizedString("This application has expired", comment: "")
+        case .viewedByHost, .savedByHost:
             return NSLocalizedString("The host has viewed your application", comment: "")
         case .applicationDeclined:
             return NSLocalizedString("The host has rejected your application", comment: "")
@@ -62,7 +68,7 @@ enum ApplicationState: String, Codable {
             return NSLocalizedString("Congratulations you have been offered a placement", comment: "")
         case .offerAccepted:
             return NSLocalizedString("Congratulations you accepted this offer", comment: "")
-        case .offerDeclined:
+        case .candidateWithdrew:
             return NSLocalizedString("You declined the offer of a placement", comment: "")
         case .unknown:
             return NSLocalizedString("Unable to obtain the status of this application", comment: "")

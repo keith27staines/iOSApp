@@ -1,33 +1,33 @@
 
 enum OfferState {
-    case open
-    case accepted
-    case declined
+    case hostOfferOpen
+    case candidateAccepted
+    case candidateDeclined
     case unknown
     
     init(applicationState: ApplicationState) {
         switch applicationState {
-        case .offerMade: self = .open
-        case .offerAccepted: self = .accepted
-        case .offerDeclined: self = .declined
+        case .offerMade: self = .hostOfferOpen
+        case .offerAccepted: self = .candidateAccepted
+        case .candidateWithdrew: self = .candidateDeclined
         default: self = .unknown
         }
     }
     
     var screenTitle: String {
         switch self {
-        case .open: return "Offer made"
-        case .accepted: return "Offer accepted"
-        case .declined: return "Offer declined"
+        case .hostOfferOpen: return "Offer made"
+        case .candidateAccepted: return "Offer accepted"
+        case .candidateDeclined: return "Offer declined"
         case .unknown: return "Offer"
         }
     }
     
     var description: String {
         switch self {
-        case .open: return "Congratulation you have been offered a placement"
-        case .accepted: return "Congratulations you have accepted this placement"
-        case .declined: return "You declined this offer"
+        case .hostOfferOpen: return "Congratulation you have been offered a placement"
+        case .candidateAccepted: return "Congratulations you have accepted this placement"
+        case .candidateDeclined: return "You declined this offer"
         case .unknown: return "Offer"
         }
     }

@@ -13,7 +13,7 @@ protocol ApplicationDetailPresenterProtocol {
     var hostName: String? { get }
     var hostCaption: String? { get }
     func onViewDidLoad(view: WorkfinderViewControllerProtocol)
-    func load(completion: @escaping (Error?) -> Void)
+    func loadData(completion: @escaping (Error?) -> Void)
     func numberOfSections() -> Int
     func numberOfRowsInSection(_ section: Int) -> Int
     func cellInfoForIndexPath(_ indexPath: IndexPath) -> ApplicationDetailCellInfo
@@ -68,7 +68,7 @@ class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol{
         self.view = view
     }
     
-    func load(completion: @escaping (Error?) -> Void) {
+    func loadData(completion: @escaping (Error?) -> Void) {
         service.fetchApplicationDetail(application: application) { [weak self] (result) in
             guard let self = self else { return }
             switch result {

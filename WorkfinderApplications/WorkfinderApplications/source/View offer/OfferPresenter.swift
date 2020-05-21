@@ -32,7 +32,7 @@ class OfferPresenter: OfferPresenterProtocol {
     var stateDescription: String? { return offerState?.description }
     var logoUrl: String? { offer?.logoUrl}
     var hideAcceptDeclineButtons: Bool {
-        guard let state = offerState, state == .open else { return true }
+        guard let state = offerState, state == .hostOfferOpen else { return true }
         return false
     }
     

@@ -61,7 +61,16 @@ extension Application {
         
     }
 }
-
+/*
+ PENDING = "pending"
+ EXPIRED = "expired"
+ VIEWED = "viewed"
+ DECLINED = "declined"
+ SAVED = "saved"
+ OFFERED = "offered"
+ ACCEPTED = "accepted"
+ WITHDRAWN = "withdrawn"
+ */
 extension ApplicationState {
     init(string: String?) {
         guard let string = string else {
@@ -69,11 +78,14 @@ extension ApplicationState {
             return
         }
         switch string {
-        case "Declined": self = .offerDeclined
-        case "Offered": self = .offerMade
-        case "Viewed": self = .viewedByHost
-        case "Accepted": self = .offerAccepted
-        case "": self = .applicationDeclined
+        case "pending": self = .applied
+        case "expired": self = .expired
+        case "viewed": self = .viewedByHost
+        case "declined": self = .applicationDeclined
+        case "saved": self = .savedByHost
+        case "offered": self = .offerMade
+        case "accepted": self = .offerAccepted
+        case "withdrawn": self = .candidateWithdrew
         default: self = .unknown
         }
     }

@@ -51,13 +51,15 @@ class ApplicationsPresenter {
         let application = applicationForIndexPath(indexPath)
         let action: ApplicationAction
         switch application.state {
-        case .applied, .pending: action = .viewApplication
+        case .applied: action = .viewApplication
         case .viewedByHost: action = .viewApplication
+        case .savedByHost: action = .viewApplication
         case .applicationDeclined: action = .viewApplication
         case .offerMade: action = .viewOffer
         case .offerAccepted: action = .viewOffer
-        case .offerDeclined: action = .viewOffer
-        case .unknown: action = .viewOffer
+        case .candidateWithdrew: action = .viewOffer
+        case .expired: action = .viewApplication
+        case .unknown: action = .viewApplication
         }
         coordinator?.performAction(action, for: application)
     }

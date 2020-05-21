@@ -49,6 +49,7 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
     
     func refreshFromPresenter() {
         tableView.reloadData()
+        noApplicationsYet.removeFromSuperview()
         if presenter.numberOfRows(section: 0) == 0 {
             view.addSubview(noApplicationsYet)
             noApplicationsYet.translatesAutoresizingMaskIntoConstraints = false
