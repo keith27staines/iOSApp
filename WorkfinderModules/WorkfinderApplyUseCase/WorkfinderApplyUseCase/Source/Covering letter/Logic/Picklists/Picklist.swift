@@ -87,9 +87,9 @@ public class Picklist: PicklistProtocol {
                         PicklistItemJson(uuid: "hcv3", value: "I made this up")
                     ]
                 }
-                self.items.sort { (item1, item2) -> Bool in
-                    (item1.guarenteedName < item2.guarenteedName)
-                }
+//                self.items.sort { (item1, item2) -> Bool in
+//                    (item1.guarenteedName < item2.guarenteedName)
+//                }
                 if let otherItem = self.otherItem { self.items.append(otherItem) }
                 completion(self,Result<[PicklistItemJson],Error>.success(self.items))
             case .failure(let error):

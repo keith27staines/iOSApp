@@ -3,6 +3,7 @@ import Foundation
 import WorkfinderCommon
 
 public protocol CoverLetterViewPresenterProtocol {
+    var allPicklistsDictionary: PicklistsDictionary { get }
     var view: CoverLetterViewProtocol? { get set }
     var nextButtonIsEnabled: Bool { get }
     var displayString: String { get }
@@ -14,6 +15,7 @@ public protocol CoverLetterViewPresenterProtocol {
     func onDidTapSelectOptionsButton()
     func onDidDismiss()
     func onDidTapNext()
+    func picklistsReferencedByTemplate() -> PicklistsDictionary
 }
 
 class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
@@ -25,7 +27,7 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     var renderer: TemplateRendererProtocol?
     let templateProvider: TemplateProviderProtocol
     let picklistsStore: PicklistsStoreProtocol
-    var allPickListsDictionary: PicklistsDictionary
+    var allPicklistsDictionary: PicklistsDictionary
     var isShowingTemplate: Bool = false
     var nextButtonIsEnabled: Bool { return renderer?.isComplete ?? false }
     var templateModel: TemplateModel
@@ -56,7 +58,7 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     func updateLetterDisplayStrings() {
         guard let renderer = renderer else { return }
         var fieldValues = [String: String]()
-        allPickListsDictionary.forEach { (keyValue) in
+        allPicklistsDictionary.forEach { (keyValue) in
             let (_, picklist) = keyValue
             let items = picklist.selectedItems.map { (picklistIem) -> String in
                 if picklistIem.isDateString == true {
@@ -98,7 +100,10 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     }
     
     func onDidTapSelectOptionsButton() {
-        coordinator?.onDidTapSelectOptions(referencedPicklists: picklistsReferencedByTemplate(), completion: { [weak self] picklistsDictionary in
+        coordinator?.onDidTapSelectOptions(
+            allPicklistsDictionary: allPicklistsDictionary,
+            referencedPicklists: picklistsReferencedByTemplate(),
+            completion: { [weak self] picklistsDictionary in
             guard let self = self else { return }
             self.picklistsStore.save()
             self.updateLetterDisplayStrings()
@@ -107,7 +112,7 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     }
     
     func picklistsReferencedByTemplate() -> PicklistsDictionary {
-        return allPickListsDictionary.filter { (element) -> Bool in
+        return allPicklistsDictionary.filter { (element) -> Bool in
             let picklist = element.value
             return embeddedFieldNames.contains(picklist.type.title)
         }
@@ -117,7 +122,7 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     
     func onViewDidLoad(view: CoverLetterViewProtocol) {
         self.view = view
-        self.allPickListsDictionary = loadPicklists()
+        self.allPicklistsDictionary = loadPicklists()
         view.refreshFromPresenter()
     }
     
@@ -168,7 +173,7 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
         self.templateModel = CoverLetterViewPresenter.defaultTemplate
         self.templateProvider = templateProvider
         self.picklistsStore = picklistsStore
-        self.allPickListsDictionary = [:]
+        self.allPicklistsDictionary = [:]
         self.fixedFieldValues = [
             "host": hostName,
             "company" : companyName,

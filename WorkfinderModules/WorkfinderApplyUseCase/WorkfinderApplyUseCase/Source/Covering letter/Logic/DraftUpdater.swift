@@ -35,7 +35,7 @@ public class DraftPlacementPreparationLogic {
             case .availabilityPeriod:
                 let lower = selectedItems?[0].value
                 let upper = selectedItems?[1].value
-                draft.availability = nil // PlacementAvailability(lower: lower, upper: upper)
+                draft.availability = PlacementAvailability(lower: lower, upper: upper)
             }
         }
     }

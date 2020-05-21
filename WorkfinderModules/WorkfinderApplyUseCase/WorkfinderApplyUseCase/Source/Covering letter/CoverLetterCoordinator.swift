@@ -10,7 +10,10 @@ public protocol CoverletterCoordinatorProtocol: class {
     func start()
     func onCoverLetterDidDismiss()
     func onDidCompleteCoverLetter()
-    func onDidTapSelectOptions(referencedPicklists: PicklistsDictionary, completion: @escaping((PicklistsDictionary)->Void))
+    func onDidTapSelectOptions(
+        allPicklistsDictionary: PicklistsDictionary,
+        referencedPicklists: PicklistsDictionary,
+        completion: @escaping((PicklistsDictionary)->Void))
 }
 
 public protocol PicklistsStoreProtocol {
@@ -143,9 +146,15 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
         navigationRouter.push(viewController: viewController, animated: true)
     }
     
-    public func onDidTapSelectOptions(referencedPicklists: PicklistsDictionary, completion: @escaping ((PicklistsDictionary) -> Void)) {
+    public func onDidTapSelectOptions(
+        allPicklistsDictionary: PicklistsDictionary,
+        referencedPicklists: PicklistsDictionary,
+        completion: @escaping ((PicklistsDictionary) -> Void)) {
         picklistsDidUpdate = completion
-        let presenter = LetterEditorPresenter(coordinator: self, picklists: referencedPicklists)
+        let presenter = LetterEditorPresenter(
+            coordinator: self,
+            coverLetterpicklists: referencedPicklists,
+            allPicklists: allPicklistsDictionary)
         let letterEditorViewController = LetterEditorViewController(presenter: presenter)
         self.letterEditorViewController = letterEditorViewController
         coverLetterViewController?.navigationController?.pushViewController(letterEditorViewController, animated: true)

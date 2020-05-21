@@ -35,6 +35,8 @@ class LetterEditorViewController: UIViewController, LetterEditorViewProtocol {
         tableView.separatorStyle = .none
         tableView.register(PicklistCell.self, forCellReuseIdentifier: "evencell")
         tableView.register(PicklistDescriptionCell.self, forCellReuseIdentifier: "oddcell")
+        tableView.register(SectionHeaderCell.self, forHeaderFooterViewReuseIdentifier: "header")
+        tableView.register(SectionFooterCell.self, forHeaderFooterViewReuseIdentifier: "footer")
         return tableView
     }()
     
@@ -119,6 +121,70 @@ extension LetterEditorViewController: UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? SectionHeaderCell else { return UITableViewHeaderFooterView() }
+        let headerStrings = presenter.titleForSection(section)
+        cell.configure(headline: headerStrings.0, subheadline: headerStrings.1)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return SectionFooterCell(reuseIdentifier: "footer")
+    }
+}
+
+class SectionFooterCell: UITableViewHeaderFooterView {
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        contentView.heightAnchor.constraint(equalToConstant: 8).isActive = true
+        backgroundColor = UIColor.white
+        contentView.backgroundColor = UIColor.white
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class SectionHeaderCell: UITableViewHeaderFooterView {
+    func configure(headline: String, subheadline: String) {
+        label1.text = headline
+        label2.text = subheadline
+    }
+    
+    lazy var label1: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .headline)
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    lazy var label2: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .body)
+        label.textColor = UIColor.darkGray
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    lazy var stack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [label1, label2])
+        stack.axis = .vertical
+        stack.alignment = .fill
+        stack.distribution = .fill
+        return stack
+    }()
+    
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        contentView.addSubview(stack)
+        contentView.backgroundColor = UIColor.init(white: 0.93, alpha: 1)
+        stack.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 8, left: 8, bottom: 4, right: 8))
+    }
+    
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
 
 class PicklistCell: UITableViewCell {
