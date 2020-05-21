@@ -5,6 +5,9 @@ public struct WorkfinderColors {
     public static let greenColorBright = UIColor(red: 63, green: 172, blue: 87)
     public static let greenColorDark = UIColor(red: 52, green: 162, blue: 77)
     
+    public static let white = UIColor.white
+    public static let black = UIColor.black
+    
     public static let highlightBlue = UIColor.blue
     public static let oceanBlue = UIColor(red: 0, green: 200, blue: 255)
     public static let lightGrey = UIColor(white: 0.93, alpha: 1)

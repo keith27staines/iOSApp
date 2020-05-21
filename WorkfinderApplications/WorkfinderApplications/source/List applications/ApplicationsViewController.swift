@@ -36,7 +36,28 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
         }
     }
     
-    func refreshFromPresenter() { tableView.reloadData() }
+    lazy var noApplicationsYet:UILabel = {
+        let label = UILabel()
+        label.text = "You haven't made an application yet.\n\nWhy not search for companies and make an application now?"
+        label.font = WorkfinderFonts.title2
+        label.textColor = WorkfinderColors.textLight
+        label.backgroundColor = WorkfinderColors.white
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    func refreshFromPresenter() {
+        tableView.reloadData()
+        if presenter.numberOfRows(section: 0) == 0 {
+            view.addSubview(noApplicationsYet)
+            noApplicationsYet.translatesAutoresizingMaskIntoConstraints = false
+            noApplicationsYet.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+            noApplicationsYet.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            noApplicationsYet.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 30).isActive = true
+            noApplicationsYet.topAnchor.constraint(equalTo: view.topAnchor, constant: 30).isActive = true
+        }
+    }
     
     func configureNavigationBar() {
         navigationController?.isNavigationBarHidden = false
