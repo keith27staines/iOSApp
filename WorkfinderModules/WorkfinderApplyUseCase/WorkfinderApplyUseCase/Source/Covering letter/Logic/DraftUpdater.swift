@@ -3,7 +3,6 @@ import WorkfinderCommon
 
 public class DraftPlacementPreparationLogic {
     var draft = Placement()
-    
     func update(associationUuid: F4SUUID) { draft.associationUuid = associationUuid}
     func update(candidateUuid: F4SUUID) { draft.candidateUuid = candidateUuid }
     func update(coverletter: String) {
@@ -16,8 +15,7 @@ public class DraftPlacementPreparationLogic {
             let firstItem = selectedItems?.first
             switch type {
             case .year: draft.yearOfStudy = PlacementOtherableFact(item: firstItem)
-            case .subject:
-                draft.subject = PlacementOtherableFact(item: firstItem)
+            case .subject: draft.subject = PlacementOtherableFact(item: firstItem)
             case .project: draft.project = PlacementOtherableFact(item: firstItem)
             case .institutions: draft.institution = firstItem?.uuid
             case .placementType: draft.placementType = firstItem?.uuid
