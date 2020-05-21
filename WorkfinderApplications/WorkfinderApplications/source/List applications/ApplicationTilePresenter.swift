@@ -12,7 +12,7 @@ class ApplicationTilePresenter {
         self.companyName = application.companyName
         self.hostInformation = application.hostName + " | " + application.hostRole
         self.appliedDateString = application.appliedDate
-        self.industry = application.industry
+        self.industry = application.industry ?? ""
         self.state = application.state
         self.logoUrl = application.logoUrl
     }

@@ -1,10 +1,24 @@
-enum ApplicationState: String {
+
+/*
+PENDING = "pending"
+EXPIRED = "expired"
+VIEWED = "viewed"
+DECLINED = "declined"
+SAVED = "saved"
+OFFERED = "offered"
+ACCEPTED = "accepted"
+WITHDRAWN = "withdrawn"
+*/
+
+enum ApplicationState: String, Codable {
     case applied
+    case pending
     case viewedByHost = "viewed"
     case applicationDeclined = "application declined"
     case offerMade = "offered"
     case offerAccepted = "accepted"
     case offerDeclined = "offer declined"
+    case unknown
     
     var screenTitle: String {
         switch self {
@@ -14,12 +28,14 @@ enum ApplicationState: String {
         case .offerAccepted: return NSLocalizedString("Offer accepted", comment: "")
         case .applicationDeclined: return NSLocalizedString("Application declined", comment: "")
         case .offerDeclined: return NSLocalizedString("Offer declined", comment: "")
+        case .pending: return NSLocalizedString("Application submitted", comment: "")
+        case .unknown: return NSLocalizedString("Status unknown", comment: "")
         }
     }
     
     var allowedActions: [ApplicationAction] {
         switch self {
-        case .applied:
+        case .applied, .pending, .unknown:
             return [.viewApplication]
         case .viewedByHost:
             return [.viewApplication]
@@ -36,7 +52,7 @@ enum ApplicationState: String {
     
     var description: String {
         switch self {
-        case .applied:
+        case .applied, .pending:
             return NSLocalizedString("You have submitted your application", comment: "")
         case .viewedByHost:
             return NSLocalizedString("The host has viewed your application", comment: "")
@@ -48,6 +64,8 @@ enum ApplicationState: String {
             return NSLocalizedString("Congratulations you accepted this offer", comment: "")
         case .offerDeclined:
             return NSLocalizedString("You declined the offer of a placement", comment: "")
+        case .unknown:
+            return NSLocalizedString("Unable to obtain the status of this application", comment: "")
         }
     }
 }

@@ -1,18 +1,138 @@
+import WorkfinderCommon
+import WorkfinderServices
 
 protocol ApplicationsServiceProtocol: AnyObject {
     func fetchApplications(completion: @escaping (Result<[Application],Error>) -> Void)
 }
 
-class ApplicationsService: ApplicationsServiceProtocol {
+class ApplicationsService: WorkfinderService, ApplicationsServiceProtocol {
     func fetchApplications(completion: @escaping (Result<[Application],Error>) -> Void) {
-        let applications: [Application] = [
-//            Application(state: .applicationDeclined, hostName: "Host 1", hostRole: "Role 1", companyName: "Company 1", industry: "Industry 1", logoUrl: nil, appliedDate: "08-Mar-2020", coverLetterString: coverLetterText),
-//            Application(state: .applied, hostName: "Host 2", hostRole: "Role 2", companyName: "Company 2", industry: "Industry 2", logoUrl: nil, appliedDate: "08-Mar-2020", coverLetterString: coverLetterText),
-//            Application(state: .offerAccepted, hostName: "Host 3", hostRole: "Role 3", companyName: "Company 3", industry: "Industry 3", logoUrl: nil, appliedDate: "08-Mar-2020", coverLetterString: coverLetterText),
-//            Application(state: .offerDeclined, hostName: "Host 4", hostRole: "Role 4", companyName: "Company 4", industry: "Industry 4", logoUrl: nil, appliedDate: "08-Mar-2020", coverLetterString: coverLetterText),
-//            Application(state: .offerMade, hostName: "Host 5", hostRole: "Role 5", companyName: "Company 5", industry: "Industry 5", logoUrl: nil, appliedDate: "08-Mar-2020", coverLetterString: coverLetterText),
-//            Application(state: .viewedByHost, hostName: "Host 6", hostRole: "Role 6", companyName: "Company 6", industry: "Industry 6", logoUrl: nil, appliedDate: "08-Mar-2020", coverLetterString: coverLetterText),
-        ]
-        completion(Result<[Application],Error>.success(applications))
+        performNetworkRequest { [weak self] (networkResult) in
+            guard let self = self else { return }
+            let applicationsResult = self.buildApplicationsResult(networkResult: networkResult)
+            completion(applicationsResult)
+        }
+    }
+    typealias ExpandedList = ServerListJson<ExpandedAssociationPlacementJson>
+    func performNetworkRequest(completion: @escaping (Result<ExpandedList,Error>) -> Void) {
+        do {
+            let relativePath = "placements/"
+            let queryItems = [URLQueryItem(name: "expand-association", value: "1")]
+            let request = try buildRequest(relativePath: relativePath, queryItems: queryItems, verb: .get)
+            performTask(
+                with: request,
+                completion: completion,
+                attempting: #function)
+        } catch {
+            completion(Result<ExpandedList,Error>.failure(error))
+        }
+    }
+    
+    func buildApplicationsResult(networkResult: Result<ExpandedList,Error>)
+        -> Result<[Application], Error> {
+            switch networkResult {
+            case .success(let serverList):
+                var applications = [Application]()
+                let expandedPlacements = serverList.results
+                expandedPlacements.forEach { (placement) in
+                    applications.append(Application(json: placement))
+                }
+                return Result<[Application],Error>.success(applications)
+            case .failure(let error):
+                return Result<[Application],Error>.failure(error)
+            }
+    }
+}
+
+extension Application {
+    init(json: ExpandedAssociationPlacementJson) {
+        self.placementUuid = json.uuid
+        self.companyUuid = json.association?.location?.company?.uuid
+        self.hostUuid = json.association?.host?.uuid
+        self.associationUuid = json.association?.uuid
+        self.state = ApplicationState(string: json.status)
+        self.hostName = json.association?.host?.full_name ?? "unknown name"
+        self.hostRole = json.association?.title ?? "unknown role"
+        self.companyName = json.association?.location?.company?.name ?? "unknown company"
+        self.industry = json.association?.location?.company?.industry?.first?.name
+        self.logoUrl = json.association?.location?.company?.logo
+        self.appliedDate = json.created_at ?? "1700-01-01"
+        self.coverLetterString = ""
+        
+    }
+}
+
+extension ApplicationState {
+    init(string: String?) {
+        guard let string = string else {
+            self = .unknown
+            return
+        }
+        switch string {
+        case "Declined": self = .offerDeclined
+        case "Offered": self = .offerMade
+        case "Viewed": self = .viewedByHost
+        case "Accepted": self = .offerAccepted
+        case "": self = .applicationDeclined
+        default: self = .unknown
+        }
+    }
+}
+
+/*
+ {
+     "uuid": "d5ec2fea-8222-4bb3-a65b-7c0ac8eac5f7",
+     "association": {
+         "uuid": "33dcfe67-1368-433f-ae9c-160fb890b0fe",
+         "host": {
+             "uuid": "4803ecb1-705c-4990-81a0-cb945f7a0f71",
+             "full_name": "DerivedHost"
+         },
+         "location": {
+             "uuid": "8a9623e6-e29a-4cac-8622-20819a2d8f0e",
+             "company": {
+                 "uuid": "2acea251-b6d6-4f53-ad98-564142a929d8",
+                 "name": "DerivedCompany",
+                 "logo": null,
+                 "industries": []
+             }
+         },
+         "title": "DerivedAssociation"
+     },
+     "status": "pending",
+     "created_at": "2020-05-21T08:22:31.368585Z"
+ }
+ */
+struct ExpandedAssociationPlacementJson: Codable {
+    var uuid: F4SUUID?
+    var status: String?
+    var created_at: String?
+    var association: Association?
+    
+    struct Association: Codable
+    {
+        var uuid: F4SUUID?
+        var title: String?
+        var host: Host?
+        var location: Location?
+        struct Host: Codable {
+            var uuid: F4SUUID?
+            var full_name: String?
+        }
+        struct Location: Codable {
+            var uuid: F4SUUID?
+            var company: Company?
+            
+            struct Company: Codable {
+                var uuid: String?
+                var name: String?
+                var logo: String?
+                var industry: [Industry]?
+                struct Industry: Codable {
+                    var uuid: F4SUUID?
+                    var name: String?
+                }
+            }
+        }
     }
 }

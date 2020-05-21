@@ -12,7 +12,8 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
     var applications = [Application]()
     
     lazy var applicationsViewController: UIViewController = {
-        let service = ApplicationsService()
+        let networkConfig = self.injected.networkConfig
+        let service = ApplicationsService(networkConfig: networkConfig)
         let presenter = ApplicationsPresenter(coordinator: self, service: service)
         let vc = ApplicationsViewController(coordinator: self, presenter: presenter)
         return vc
