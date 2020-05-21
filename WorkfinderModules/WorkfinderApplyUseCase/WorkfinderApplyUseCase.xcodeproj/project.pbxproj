@@ -226,21 +226,21 @@
 		FC23BCF8243B33510075F359 /* Editors */ = {
 			isa = PBXGroup;
 			children = (
-				FC23BCF9243B33510075F359 /* LetterEditor MVP */,
-				FC42C8A4243C5C7B00F81232 /* Picklist MVP */,
+				FC23BCF9243B33510075F359 /* LetterEditor */,
+				FC42C8A4243C5C7B00F81232 /* Picklist */,
 				FC299924231EC38700F83FB6 /* Calendar */,
 				FC84A66A243EF44F00C9D158 /* Text editors */,
 			);
 			path = Editors;
 			sourceTree = "<group>";
 		};
-		FC23BCF9243B33510075F359 /* LetterEditor MVP */ = {
+		FC23BCF9243B33510075F359 /* LetterEditor */ = {
 			isa = PBXGroup;
 			children = (
 				FC23BCFA243B33510075F359 /* LetterEditorViewController.swift */,
 				FC42C8A2243C599000F81232 /* LetterEditorPresenter.swift */,
 			);
-			path = "LetterEditor MVP";
+			path = LetterEditor;
 			sourceTree = "<group>";
 		};
 		FC299924231EC38700F83FB6 /* Calendar */ = {
@@ -293,7 +293,7 @@
 			path = "User sign in";
 			sourceTree = "<group>";
 		};
-		FC42C8A4243C5C7B00F81232 /* Picklist MVP */ = {
+		FC42C8A4243C5C7B00F81232 /* Picklist */ = {
 			isa = PBXGroup;
 			children = (
 				FC42C8A5243C5C9A00F81232 /* PicklistViewController.swift */,
@@ -301,7 +301,7 @@
 				FC6A50D7245AD59800EF5C92 /* PicklistDataSourceAndDelegate.swift */,
 				FC2917F32461C2660011EFCD /* PicklistTableViewCells.swift */,
 			);
-			path = "Picklist MVP";
+			path = Picklist;
 			sourceTree = "<group>";
 		};
 		FC6A50CC245AB22500EF5C92 /* Picklists */ = {
