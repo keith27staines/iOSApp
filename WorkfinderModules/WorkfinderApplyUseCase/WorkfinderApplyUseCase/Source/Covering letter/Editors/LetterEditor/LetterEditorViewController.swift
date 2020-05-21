@@ -14,7 +14,7 @@ protocol LetterEditorViewProtocol: class {
 }
 
 class LetterEditorViewController: UIViewController, LetterEditorViewProtocol {
-
+    lazy var messageHandler = UserMessageHandler(presenter: self)
     let presenter: LetterEditorPresenterProtocol
     
     func refresh() { tableView.reloadData() }
@@ -37,6 +37,7 @@ class LetterEditorViewController: UIViewController, LetterEditorViewProtocol {
         tableView.register(PicklistDescriptionCell.self, forCellReuseIdentifier: "oddcell")
         tableView.register(SectionHeaderCell.self, forHeaderFooterViewReuseIdentifier: "header")
         tableView.register(SectionFooterCell.self, forHeaderFooterViewReuseIdentifier: "footer")
+        tableView.sectionFooterHeight = UITableView.automaticDimension
         return tableView
     }()
     
@@ -63,6 +64,20 @@ class LetterEditorViewController: UIViewController, LetterEditorViewProtocol {
         tableView.delegate = self
         presenter.onViewDidLoad(view: self)
         navigationItem.title = "Select values"
+        self.loadData()
+    }
+    
+    func loadData() {
+        messageHandler.showLoadingOverlay(self.view)
+        presenter.loadData { [weak self] (optionalError) in
+            guard let self = self else { return }
+            self.messageHandler.hideLoadingOverlay()
+            self.messageHandler.displayOptionalErrorIfNotNil(optionalError, cancelHandler: {
+                self.refresh()
+            }) {
+                self.loadData()
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -123,7 +138,7 @@ extension LetterEditorViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? SectionHeaderCell else { return UITableViewHeaderFooterView() }
-        let headerStrings = presenter.titleForSection(section)
+        let headerStrings = presenter.headingsForSection(section)
         cell.configure(headline: headerStrings.0, subheadline: headerStrings.1)
         return cell
     }
@@ -136,7 +151,7 @@ extension LetterEditorViewController: UITableViewDataSource {
 class SectionFooterCell: UITableViewHeaderFooterView {
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        contentView.heightAnchor.constraint(equalToConstant: 8).isActive = true
+        //contentView.heightAnchor.constraint(equalToConstant: 8).isActive = true
         backgroundColor = UIColor.white
         contentView.backgroundColor = UIColor.white
     }

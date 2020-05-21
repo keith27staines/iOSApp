@@ -28,8 +28,8 @@ class EditApplicationLetterButton: UIButton {
     
     func configureForLetterIsCompleteState(_ isComplete: Bool) {
         if isComplete {
-            setBackgroundColor(color: WorkfinderColors.goodValueActive, forUIControlState: .normal)
-            setBackgroundColor(color: WorkfinderColors.goodValueActive, forUIControlState: .highlighted)
+            setBackgroundColor(color: WorkfinderColors.primaryColor, forUIControlState: .normal)
+            setBackgroundColor(color: WorkfinderColors.primaryColor, forUIControlState: .highlighted)
         } else {
             setBackgroundColor(color: WorkfinderColors.warningNormal, forUIControlState: .normal)
             setBackgroundColor(color: WorkfinderColors.warningActive, forUIControlState: .highlighted)

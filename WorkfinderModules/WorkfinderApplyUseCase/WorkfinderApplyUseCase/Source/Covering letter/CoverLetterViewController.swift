@@ -56,6 +56,7 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = NSLocalizedString("Cover letter", comment: "")
         view.backgroundColor = UIColor.white
         configureSubViews()
         configureNavigationController()

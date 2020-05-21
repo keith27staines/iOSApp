@@ -51,6 +51,7 @@ class CompanyWorkplaceViewController: UIViewController {
     }()
     
     override func viewDidLoad() {
+        title = NSLocalizedString("Company", comment: "")
         presenter.onViewDidLoad(self)
         view.addSubview(companyMainPageView)
         companyMainPageView.fillSuperview()

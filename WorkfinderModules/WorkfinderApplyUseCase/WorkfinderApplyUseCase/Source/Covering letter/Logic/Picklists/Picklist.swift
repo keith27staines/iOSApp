@@ -17,7 +17,7 @@ public class Picklist: PicklistProtocol {
             selectedItems[0].value = text
         }
     }
-    
+    public var isLoaded: Bool = false
     public let type: PicklistType
     public var itemsSelectedSummary: String?
     public var mimumPicks: Int = 1
@@ -79,6 +79,7 @@ public class Picklist: PicklistProtocol {
         provider?.fetchPicklistItems { (result) in
             switch result {
             case .success(let responseBody):
+                self.isLoaded = true
                 self.items = responseBody.results
                 if self.items.count == 0 {
                     self.items = [
@@ -87,12 +88,15 @@ public class Picklist: PicklistProtocol {
                         PicklistItemJson(uuid: "hcv3", value: "I made this up")
                     ]
                 }
-//                self.items.sort { (item1, item2) -> Bool in
-//                    (item1.guarenteedName < item2.guarenteedName)
-//                }
+                if self.type == .institutions {
+                    self.items.sort { (item1, item2) -> Bool in
+                        (item1.guarenteedName < item2.guarenteedName)
+                    }
+                }
                 if let otherItem = self.otherItem { self.items.append(otherItem) }
                 completion(self,Result<[PicklistItemJson],Error>.success(self.items))
             case .failure(let error):
+                self.isLoaded = false
                 completion(self,Result<[PicklistItemJson],Error>.failure(error))
             }
         }

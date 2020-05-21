@@ -4,18 +4,19 @@ import WorkfinderCommon
 
 protocol LetterEditorPresenterProtocol {
     func onViewDidLoad(view: LetterEditorViewProtocol)
+    func loadData(completion: @escaping (Error?) -> Void )
     func onDidDismiss()
     func numberOfSections() -> Int
     func numberOfRowsInSection(_ section: Int) -> Int
     func picklist(for indexPath: IndexPath) -> PicklistProtocol
     func showPicklist(_ picklist: PicklistProtocol)
-    func titleForSection(_ section: Int) -> (String, String)
+    func headingsForSection(_ section: Int) -> (String, String)
 }
 
 class LetterEditorPresenter: LetterEditorPresenterProtocol {
     weak var coordinator: LetterEditorCoordinatorProtocol?
     weak var view: LetterEditorViewProtocol?
-    let picklists: [PicklistProtocol]
+    let coverLetterPicklists: [PicklistProtocol]
     let additionalInformation: AdditionalInformationPresenter
     func showPicklist(_ picklist: PicklistProtocol) {
         coordinator?.showPicklist(picklist)
@@ -25,7 +26,7 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
         let picklistIndex = indexPath.row / 2
         switch indexPath.section {
         case 0:
-            return picklists[picklistIndex]
+            return coverLetterPicklists[picklistIndex]
         default:
             return additionalInformation.picklistForRow(picklistIndex)
         }
@@ -34,7 +35,7 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
     func numberOfRowsInSection(_ section: Int) -> Int {
         switch section {
         case 0:
-            return picklists.count * 2
+            return coverLetterPicklists.count * 2
         default:
             return additionalInformation.numberOfRows() * 2
         }
@@ -44,7 +45,7 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
         return additionalInformation.numberOfRows() == 0 ? 1 : 2
     }
     
-    func titleForSection(_ section: Int) -> (String, String) {
+    func headingsForSection(_ section: Int) -> (String, String) {
         switch section {
         case 0:
             return ("Information required to complete your cover letter", "(fields in this section are required)")
@@ -56,9 +57,20 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
     func onViewDidLoad(view: LetterEditorViewProtocol) {
         self.view = view
         view.refresh()
-        for picklist in picklists {
+    }
+    
+    func loadData(completion: @escaping (Error?) -> Void ) {
+        var allNeededPicklists = coverLetterPicklists
+        allNeededPicklists.append(contentsOf: additionalInformation.extraPicklists)
+        for picklist in allNeededPicklists {
+            guard !picklist.isLoaded else { continue }
             picklist.fetchItems { (picklist, result) in
-                view.refresh()
+                switch result {
+                case .success(_):
+                    completion(nil)
+                case .failure(let error):
+                    completion(error)
+                }
             }
         }
     }
@@ -72,7 +84,7 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
          coverLetterpicklists: PicklistsDictionary,
          allPicklists: PicklistsDictionary) {
         self.coordinator = coordinator
-        self.picklists = ([PicklistProtocol](coverLetterpicklists.values)).sorted(by: { (p1, p2) -> Bool in
+        self.coverLetterPicklists = ([PicklistProtocol](coverLetterpicklists.values)).sorted(by: { (p1, p2) -> Bool in
             p1.type.rawValue < p2.type.rawValue
         })
         self.additionalInformation = AdditionalInformationPresenter(
