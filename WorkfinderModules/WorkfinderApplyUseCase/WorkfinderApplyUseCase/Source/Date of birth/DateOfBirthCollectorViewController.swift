@@ -12,9 +12,11 @@ class DateOfBirthCollectorViewController: UIViewController {
     
     weak var coordinator: DateOfBirthCoordinatorProtocol?
     
+    let under13Text = "We’re very sorry, you need to be over 13 years old. We suggest you ask your teacher or parent to invite a business person to give a talk in your school class by visiting founders4schools.org.uk"
+    
     let under18Text = "We're updating the Workfinder App. Currently, applications are only open to candidates who are aged over 18. The App will reopen for younger candidates with the next update in a few weeks' time. Thanks in advance for your patience while we make some improvements."
     
-    lazy var under18Label: UILabel = {
+    lazy var underAgeLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.alpha = 0
@@ -32,13 +34,16 @@ class DateOfBirthCollectorViewController: UIViewController {
             let formatter = DateFormatter()
             formatter.dateStyle = .long
             textField.text = formatter.string(from: dateOfBirth)
-            let isOver18 = ageNow(dob: dateOfBirth) >= 18
+            let age = ageNow(dob: dateOfBirth)
+            let isUnder13 = age < 13
+            let isOver18 = age >= 18
+            self.underAgeLabel.text = isUnder13 ? under13Text : under18Text
             setPrimaryButtonEnabledState(isOver18)
             UIView.animate(withDuration: 0.3) {
                 if isOver18 {
-                    self.under18Label.alpha = 0
+                    self.underAgeLabel.alpha = 0
                 } else {
-                    self.under18Label.alpha = 1
+                    self.underAgeLabel.alpha = 1
                 }
             }
         }
@@ -154,12 +159,12 @@ class DateOfBirthCollectorViewController: UIViewController {
     func configureViews() {
         view.backgroundColor = UIColor.white
         view.addSubview(stack)
-        view.addSubview(under18Label)
+        view.addSubview(underAgeLabel)
         let guide = view.safeAreaLayoutGuide
         stack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         stack.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
         stack.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 20).isActive = true
-        under18Label.anchor(top: stack.bottomAnchor, leading: stack.leadingAnchor, bottom: nil, trailing: stack.trailingAnchor, padding: UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0))
+        underAgeLabel.anchor(top: stack.bottomAnchor, leading: stack.leadingAnchor, bottom: nil, trailing: stack.trailingAnchor, padding: UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0))
         
     }
     
