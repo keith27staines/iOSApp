@@ -18,7 +18,7 @@ public class F4SLog : F4SAnalyticsAndDebugging {
     
     public init() {
         let environmentType = Config.environment
-        //startBugsnag(environmentType: environmentType)
+        startBugsnag(environmentType: environmentType)
         //startFirebase(environmentType: environmentType)
         do {
             f4sDebug = MockF4SAnalyticsAndDebugging()

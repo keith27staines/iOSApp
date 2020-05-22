@@ -4,7 +4,7 @@ import WorkfinderServices
 protocol OfferServiceProtocol: AnyObject {
     func fetchOffer(application: Application, completion: @escaping (Result<Offer,Error>) -> Void)
     func accept(offer: Offer, completion: @escaping (Result<Offer, Error>) -> Void)
-    func decline(offer: Offer, completion: @escaping (Result<Offer, Error>) -> Void)
+    func decline(offer: Offer, declineReason: DeclineReason, otherText: String?, completion: @escaping (Result<Offer, Error>) -> Void)
 }
 
 class OfferService: OfferServiceProtocol{
@@ -34,7 +34,7 @@ class OfferService: OfferServiceProtocol{
                     duration: json.offered_duration,
                     hostCompany: json.association?.location?.company?.name,
                     hostContact: json.association?.host?.displayName,
-                    email: json.association?.host?.displayName,
+                    email: json.association?.host?.emails?.first,
                     location: self.addressStringFromOfferJson(json),
                     logoUrl: json.association?.location?.company?.logoUrlString,
                     declineReason: nil)
@@ -47,7 +47,19 @@ class OfferService: OfferServiceProtocol{
     
     func addressStringFromOfferJson(_ json: ExpandedAssociationPlacementJson) -> String {
         let loc = json.association?.location
-        return "\(loc?.address_unit ?? ""), \(loc?.address_building ?? ""), \(loc?.address_street ?? ""), \(loc?.address_city ?? ""), \(loc?.address_region ?? ""), \(loc?.address_country?.name ?? ""), \(loc?.address_postcode ?? "")"
+        var addressElements = [String]()
+        if let element = loc?.address_unit { addressElements.append(element) }
+        if let element = loc?.address_building { addressElements.append(element) }
+        if let element = loc?.address_street { addressElements.append(element) }
+        if let element = loc?.address_city { addressElements.append(element) }
+        if let element = loc?.address_region { addressElements.append(element) }
+        if let element = loc?.address_country?.name { addressElements.append(element) }
+        if let element = loc?.address_postcode { addressElements.append(element) }
+        var commaList = addressElements.reduce("") { (result, element) -> String in
+            element.isEmpty ? result : result + ", \(element)"
+        }
+        if commaList.prefix(2) == ", " { commaList = String(commaList.dropFirst(2))}
+        return String(commaList)
     }
     
     func accept(offer: Offer, completion: @escaping (Result<Offer, Error>) -> Void) {
@@ -64,8 +76,13 @@ class OfferService: OfferServiceProtocol{
         }
     }
     
-    func decline(offer: Offer, completion: @escaping (Result<Offer, Error>) -> Void) {
-        declineOfferService.decline(offer: offer) { (result) in
+    func decline(offer: Offer,
+                 declineReason: DeclineReason,
+                 otherText: String?,
+                 completion: @escaping (Result<Offer, Error>) -> Void) {
+        declineOfferService.decline(offer: offer,
+                                    declineReason: declineReason,
+                                    otherText: otherText) { (result) in
             switch result {
             case .success(let placement):
                 var declinedOffer = offer
@@ -80,7 +97,10 @@ class OfferService: OfferServiceProtocol{
 }
 
 fileprivate class DeclineOfferService: WorkfinderService {
-    func decline(offer: Offer, completion: @escaping (Result<Placement,Error>) -> Void) {
+    func decline(offer: Offer,
+                 declineReason: DeclineReason,
+                 otherText: String?,
+                 completion: @escaping (Result<Placement,Error>) -> Void) {
         let relativePath = "placement/\(offer.placementUuid)/"
         let patch = ["status": OfferState.candidateDeclined.serverState]
         do {

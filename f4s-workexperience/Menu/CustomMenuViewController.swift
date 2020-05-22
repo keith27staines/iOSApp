@@ -168,10 +168,7 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SideDrawerTableViewCell") as? SideDrawerTableViewCell,
-            let section = DrawerSection(rawValue: section) else { return nil }
-
+        guard let section = DrawerSection(rawValue: section) else { return nil }
         switch section {
         case .WelcomeSection:
             return nil

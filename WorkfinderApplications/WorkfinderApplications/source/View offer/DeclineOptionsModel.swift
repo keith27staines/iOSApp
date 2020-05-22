@@ -12,8 +12,8 @@ enum DeclineReason: Int, CaseIterable {
         switch self {
         case .haveAnotherOffer: return NSLocalizedString("I have another offer", comment: "")
         case .datesUnsuitable: return NSLocalizedString("Cannot make those dates", comment: "")
-        case .locationTooFar: return "Location is too far"
-        case .other: return "Other"
+        case .locationTooFar: return NSLocalizedString("Location is too far", comment: "")
+        case .other: return NSLocalizedString("Other", comment: "")
         }
     }
 }
@@ -31,19 +31,25 @@ class DeclineReasonsActionSheetFactory {
             title: "You're about to decline this placement. This action cannot be undone.",
             message: "What is your reason for declining?",
             preferredStyle: .actionSheet)
-        declineActions.forEach { (declineAction) in
-            alert.addAction(declineAction.value)
-        }
+        sortedDeclineActions.forEach { action in alert.addAction(action) }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         return alert
+    }
+    var sortedDeclineActions: [UIAlertAction] {
+        var actions = [UIAlertAction]()
+        let sortedReasons = DeclineReason.allCases.sorted { (reason1, reason2) -> Bool in
+            reason1.rawValue < reason2.rawValue
+        }
+        for reason in sortedReasons {
+            guard let action = declineActions[reason] else { continue }
+            actions.append(action)
+        }
+        return actions
     }
     
     lazy var declineActions: [DeclineReason: UIAlertAction] = {
         var declineActions = [DeclineReason: UIAlertAction]()
-        let sortedReasons =  DeclineReason.allCases.sorted { (reason1, reason2) -> Bool in
-            reason1.rawValue > reason2.rawValue
-        }
-        sortedReasons.forEach { (reason) in
+        DeclineReason.allCases.forEach { (reason) in
             let alertAction = UIAlertAction(
                 title: reason.buttonTitle, style: .destructive,
                 handler: self.handleAction)

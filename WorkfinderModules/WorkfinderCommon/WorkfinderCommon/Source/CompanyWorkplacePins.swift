@@ -145,6 +145,7 @@ public struct Host : Codable {
     public var linkedinUrlString: String?
     public var photoUrlString: String?
     public var description: String?
+    public var emails: [String]?
     
     public init(
         uuid: F4SUUID,

@@ -6,12 +6,14 @@ protocol OfferPresenterProtocol {
     var stateDescription: String? { get }
     var logoUrl: String? { get }
     func onViewDidLoad(view: WorkfinderViewControllerProtocol)
-    func onTapAccept(completion: @escaping (Error?) -> Void)
-    func onTapDeclineWithReason(_ declineReason: DeclineReason, completion: @escaping (Error?) -> Void)
     func loadData(completion: @escaping (Error?) -> Void)
     func numberOfSections() -> Int
     func numberOfRowsInSection(_ section: Int) -> Int
     func cellInfoForIndexPath(_ indexPath: IndexPath) -> OfferDetailCellInfo
+    func onTapAccept(completion: @escaping (Error?) -> Void)
+    func onTapDeclineWithReason(_ declineReason: DeclineReason,
+                                otherText: String?,
+                                completion: @escaping (Error?) -> Void)
 }
 
 class OfferPresenter: OfferPresenterProtocol {
@@ -61,10 +63,9 @@ class OfferPresenter: OfferPresenterProtocol {
         }
     }
     
-    func onTapDeclineWithReason(_ reason: DeclineReason, completion: @escaping (Error?) -> Void) {
+    func onTapDeclineWithReason(_ reason: DeclineReason, otherText: String?, completion: @escaping (Error?) -> Void) {
         guard var offer = offer else { return }
-        offer.declineReason = reason
-        service.decline(offer: offer) { [weak self] (result) in
+        service.decline(offer: offer, declineReason: reason, otherText: otherText) { [weak self] (result) in
             offer.declineReason = reason
             self?.resultHandler(result: result, completion: completion)
         }

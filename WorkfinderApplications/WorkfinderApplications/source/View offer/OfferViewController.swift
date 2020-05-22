@@ -36,14 +36,9 @@ class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
         return stack
     }()
     
-    lazy var declineReasonsActionSheetFactory: DeclineReasonsActionSheetFactory  = {
-        return DeclineReasonsActionSheetFactory { (reason) in
-            self.handleDeclineWithReason(reason)
-        }
-    }()
-    
     @objc func handleTapDecline() {
-        let actionSheet = declineReasonsActionSheetFactory.makeDeclineOptionsAlert()
+        let factory = DeclineReasonsActionSheetFactory(onDecline: self.handleDeclineWithReason)
+        let actionSheet = factory.makeDeclineOptionsAlert()
         self.present(actionSheet, animated: true, completion: nil)
     }
     
@@ -60,11 +55,39 @@ class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
     }
     
     func handleDeclineWithReason(_ reason: DeclineReason) {
-        presenter.onTapDeclineWithReason(reason) { [weak self] (optionalError) in
+        switch reason {
+        case .other:
+            collectOtherReason(otherReason: reason)
+        default:
+            declineWithReason(reason)
+        }
+    }
+    
+    func collectOtherReason(otherReason: DeclineReason) {
+        let alert = UIAlertController(title: "Decline Reason", message: "In a few words, please tell us your reason for declining this offer", preferredStyle: .alert)
+        alert.addTextField { textField in
+            textField.placeholder = "Your reason"
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let declineAction = UIAlertAction(title: "Decline offer", style: .destructive) { [weak alert] (action) in
+            guard let alert = alert else { return }
+            guard let text = (alert.textFields?.first?.text?.trimmingCharacters(in: .whitespacesAndNewlines)),
+            text.isEmpty == false else { self.collectOtherReason(otherReason: otherReason)
+                return
+            }
+            self.declineWithReason(otherReason, otherText: text)
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(declineAction)
+        present(alert, animated: true)
+    }
+    
+    func declineWithReason(_ reason: DeclineReason, otherText: String? = nil) {
+        presenter.onTapDeclineWithReason(reason, otherText: otherText) { [weak self] (optionalError) in
             guard let self = self else { return }
             self.messageHandler.hideLoadingOverlay()
             self.messageHandler.displayOptionalErrorIfNotNil(optionalError) {
-                self.handleDeclineWithReason(reason)
+                self.declineWithReason(reason)
             }
             self.refreshFromPresenter()
         }
