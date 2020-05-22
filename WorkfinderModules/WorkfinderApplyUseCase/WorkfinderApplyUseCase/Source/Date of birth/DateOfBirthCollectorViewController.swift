@@ -16,12 +16,18 @@ class DateOfBirthCollectorViewController: UIViewController {
     
     let under18Text = "We're updating the Workfinder App. Currently, applications are only open to candidates who are aged over 18. The App will reopen for younger candidates with the next update in a few weeks' time. Thanks in advance for your patience while we make some improvements."
     
-    lazy var underAgeLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.alpha = 0
-        label.text = self.under18Text
-        return label
+    lazy var underAgeWarning: UITextView = {
+        let textView = UITextView()
+        textView.alpha = 0
+        textView.text = self.under18Text
+        textView.font = WorkfinderFonts.body
+        textView.textColor = WorkfinderColors.textMedium
+        textView.dataDetectorTypes = .link
+        textView.isEditable = false
+        let height = textView.heightAnchor.constraint(equalToConstant: 200)
+        height.priority = .defaultHigh
+        height.isActive = true
+        return textView
     }()
     
     var dateOfBirth: Date? {
@@ -37,13 +43,13 @@ class DateOfBirthCollectorViewController: UIViewController {
             let age = ageNow(dob: dateOfBirth)
             let isUnder13 = age < 13
             let isOver18 = age >= 18
-            self.underAgeLabel.text = isUnder13 ? under13Text : under18Text
+            self.underAgeWarning.text = isUnder13 ? under13Text : under18Text
             setPrimaryButtonEnabledState(isOver18)
             UIView.animate(withDuration: 0.3) {
                 if isOver18 {
-                    self.underAgeLabel.alpha = 0
+                    self.underAgeWarning.alpha = 0
                 } else {
-                    self.underAgeLabel.alpha = 1
+                    self.underAgeWarning.alpha = 1
                 }
             }
         }
@@ -159,12 +165,12 @@ class DateOfBirthCollectorViewController: UIViewController {
     func configureViews() {
         view.backgroundColor = UIColor.white
         view.addSubview(stack)
-        view.addSubview(underAgeLabel)
+        view.addSubview(underAgeWarning)
         let guide = view.safeAreaLayoutGuide
         stack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         stack.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
         stack.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 20).isActive = true
-        underAgeLabel.anchor(top: stack.bottomAnchor, leading: stack.leadingAnchor, bottom: nil, trailing: stack.trailingAnchor, padding: UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0))
+        underAgeWarning.anchor(top: stack.bottomAnchor, leading: stack.leadingAnchor, bottom: nil, trailing: stack.trailingAnchor, padding: UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0))
         
     }
     
