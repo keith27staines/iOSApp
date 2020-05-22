@@ -3,7 +3,7 @@ import WorkfinderCommon
 
 
 struct Application : Codable {
-    let placementUuid: String?
+    let placementUuid: String
     let companyUuid: String?
     let hostUuid: String?
     let associationUuid: String?

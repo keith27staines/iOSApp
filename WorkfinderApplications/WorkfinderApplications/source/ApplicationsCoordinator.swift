@@ -10,14 +10,21 @@ protocol ApplicationsCoordinatorProtocol: AnyObject {
 public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, ApplicationsCoordinatorProtocol {
     
     var applications = [Application]()
+    var networkConfig: NetworkConfig { injected.networkConfig }
     
     lazy var applicationsViewController: UIViewController = {
-        let networkConfig = self.injected.networkConfig
         let service = ApplicationsService(networkConfig: networkConfig)
-        let presenter = ApplicationsPresenter(coordinator: self, service: service)
+        let presenter = ApplicationsPresenter(
+            coordinator: self,
+            service: service,
+            isCandidateSignedIn: self.isCandidateSignedIn)
         let vc = ApplicationsViewController(coordinator: self, presenter: presenter)
         return vc
     }()
+    
+    func isCandidateSignedIn() -> Bool {
+        return injected.userRepository.loadAccessToken() != nil
+    }
     
     public override func start() {
         navigationRouter.push(viewController: applicationsViewController, animated: true)
@@ -38,14 +45,14 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
     }
     
     func showOfferViewer(for application: Application) {
-        let service = OfferService()
+        let service = OfferService(networkConfig: networkConfig)
         let presenter = OfferPresenter(coordinator: self, application: application, service: service)
         let vc = OfferViewController(coordinator: self, presenter: presenter)
         navigationRouter.push(viewController: vc, animated: true)
     }
     
     func showApplicationDetailViewer(for application: Application) {
-        let service = ApplicationDetailService()
+        let service = ApplicationDetailService(networkConfig: networkConfig)
         let presenter = ApplicationDetailPresenter(
             coordinator: self,
             service: service,

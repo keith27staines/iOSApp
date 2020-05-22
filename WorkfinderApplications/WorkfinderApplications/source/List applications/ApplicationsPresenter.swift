@@ -8,10 +8,14 @@ class ApplicationsPresenter {
     var applications = [Application]()
     var applicationTilePresenters = [ApplicationTilePresenter]()
     weak var view: WorkfinderViewControllerProtocol?
+    var isCandidateSignedIn: () -> Bool
     
-    init(coordinator: ApplicationsCoordinatorProtocol, service: ApplicationsService) {
+    init(coordinator: ApplicationsCoordinatorProtocol,
+         service: ApplicationsService,
+         isCandidateSignedIn: @escaping () -> Bool) {
         self.service = service
         self.coordinator = coordinator
+        self.isCandidateSignedIn = isCandidateSignedIn
     }
     
     func numberOfRows(section: Int) -> Int {
@@ -31,6 +35,10 @@ class ApplicationsPresenter {
     }
     
     func loadData(completion: @escaping (Error?) -> Void) {
+        guard isCandidateSignedIn() else {
+            completion(nil)
+            return
+        }
         service.fetchApplications { result in
             self.applicationTilePresenters = []
             switch result {

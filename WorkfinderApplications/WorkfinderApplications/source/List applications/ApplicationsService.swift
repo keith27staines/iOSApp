@@ -46,19 +46,18 @@ class ApplicationsService: WorkfinderService, ApplicationsServiceProtocol {
 
 extension Application {
     init(json: ExpandedAssociationPlacementJson) {
-        self.placementUuid = json.uuid
+        self.placementUuid = json.uuid ?? "unknown uuid"
         self.companyUuid = json.association?.location?.company?.uuid
         self.hostUuid = json.association?.host?.uuid
         self.associationUuid = json.association?.uuid
         self.state = ApplicationState(string: json.status)
-        self.hostName = json.association?.host?.full_name ?? "unknown name"
+        self.hostName = json.association?.host?.displayName ?? "unknown name"
         self.hostRole = json.association?.title ?? "unknown role"
         self.companyName = json.association?.location?.company?.name ?? "unknown company"
-        self.industry = json.association?.location?.company?.industry?.first?.name
-        self.logoUrl = json.association?.location?.company?.logo
+        self.industry = json.association?.location?.company?.industries?.first?.name
+        self.logoUrl = json.association?.location?.company?.logoUrlString
         self.appliedDate = json.created_at ?? "1700-01-01"
-        self.coverLetterString = ""
-        
+        self.coverLetterString = json.cover_letter ?? ""
     }
 }
 /*
@@ -119,7 +118,10 @@ struct ExpandedAssociationPlacementJson: Codable {
     var uuid: F4SUUID?
     var status: String?
     var created_at: String?
+    var cover_letter: String?
     var association: Association?
+    var start_date: String?
+    var offered_duration: String?
     
     struct Association: Codable
     {
@@ -127,23 +129,19 @@ struct ExpandedAssociationPlacementJson: Codable {
         var title: String?
         var host: Host?
         var location: Location?
-        struct Host: Codable {
-            var uuid: F4SUUID?
-            var full_name: String?
-        }
         struct Location: Codable {
             var uuid: F4SUUID?
-            var company: Company?
-            
-            struct Company: Codable {
-                var uuid: String?
-                var name: String?
-                var logo: String?
-                var industry: [Industry]?
-                struct Industry: Codable {
-                    var uuid: F4SUUID?
-                    var name: String?
-                }
+            var company: CompanyJson?
+            var address_unit: String?
+            var address_building: String?
+            var address_street: String?
+            var address_city: String?
+            var address_region: String?
+            var address_postcode: String?
+            var address_country: CodeAndName?
+            struct CodeAndName: Codable {
+                var code: String
+                var name: String
             }
         }
     }

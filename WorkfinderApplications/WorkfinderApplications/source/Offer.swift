@@ -1,5 +1,7 @@
+import WorkfinderCommon
 
 struct Offer {
+    var placementUuid: F4SUUID
     var offerState: OfferState?
     var startingDateString: String?
     var duration: String?

@@ -18,9 +18,12 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
         configureNavigationBar()
         configureViews()
         presenter.onViewDidLoad(view: self)
+        title = NSLocalizedString("Applications", comment: "")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         refreshFromPresenter()
         loadData()
-        title = NSLocalizedString("Applications", comment: "")
     }
     
     func loadData() {

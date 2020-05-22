@@ -22,7 +22,7 @@ public class CompanyWorkplace: Codable {
         self.pinJson = pinJson
     }
     public var postcode: String {
-        let location = companyJson.locations.first { (location) -> Bool in
+        let location = companyJson.locations?.first { (location) -> Bool in
             location.uuid == self.pinJson.workplaceUuid
         }
         return location?.address_postcode ?? "unknown postcode"
@@ -41,7 +41,7 @@ public struct CompanyJson: Codable {
     public var industries: [CodeAndName]?
     public var logoUrlString: String?
     public var duedilUrlString: String?
-    public var locations: [CompanyLocationJson]
+    public var locations: [CompanyLocationJson]?
     public var employeeCount: Int?
     public var growth: Double?
     public var turnover: Double?

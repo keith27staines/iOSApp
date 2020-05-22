@@ -17,6 +17,7 @@ protocol ApplicationDetailPresenterProtocol {
     func numberOfSections() -> Int
     func numberOfRowsInSection(_ section: Int) -> Int
     func cellInfoForIndexPath(_ indexPath: IndexPath) -> ApplicationDetailCellInfo
+    func showDisclosureIndicatorForIndexPath(_ indexPath: IndexPath) -> Bool
 }
 
 struct ApplicationDetailCellInfo {
@@ -79,5 +80,9 @@ class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol{
                 completion(error)
             }
         }
+    }
+    
+    func showDisclosureIndicatorForIndexPath(_ indexPath: IndexPath) -> Bool {
+        return indexPath.row != 0
     }
 }

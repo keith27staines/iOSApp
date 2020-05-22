@@ -5,6 +5,15 @@ enum OfferState {
     case candidateDeclined
     case unknown
     
+    var serverState: String {
+        switch self {
+        case .hostOfferOpen: return "offered"
+        case .candidateAccepted: return "accepted"
+        case .candidateDeclined: return "withdrawn"
+        case .unknown: return "unknown"
+        }
+    }
+    
     init(applicationState: ApplicationState) {
         switch applicationState {
         case .offerMade: self = .hostOfferOpen

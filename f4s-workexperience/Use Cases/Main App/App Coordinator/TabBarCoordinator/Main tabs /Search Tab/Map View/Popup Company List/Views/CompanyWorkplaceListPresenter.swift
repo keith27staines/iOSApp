@@ -41,7 +41,7 @@ class CompanyWorkplaceListPresenter {
                 guard let companyJson = self.mapCompanyToLocation(locationUuid: locationUuid, companyListJson: companyListJson) else {
                     return nil
                 }
-                let loc = companyJson.locations.first { (companyLocationJson) -> Bool in
+                let loc = companyJson.locations?.first { (companyLocationJson) -> Bool in
                     companyLocationJson.uuid == locationUuid
                 }
                 let lat = loc?.geometry?.coordinates[1] ?? 0
@@ -55,7 +55,8 @@ class CompanyWorkplaceListPresenter {
     
     func mapCompanyToLocation(locationUuid: F4SUUID, companyListJson: CompanyListJson) -> CompanyJson? {
         let companyJson = companyListJson.results.first { (companyJson) -> Bool in
-            companyJson.locations.contains { (companyLocationJson) -> Bool in
+            let locations = companyJson.locations ?? [CompanyLocationJson]()
+            return locations.contains { (companyLocationJson) -> Bool in
                 return companyLocationJson.uuid == locationUuid
             }
         }

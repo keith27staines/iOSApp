@@ -78,19 +78,15 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
     }
     
     func refreshFromPresenter() {
-        messageHandler.showLoadingOverlay(view)
-        presenter.loadData { [weak self] (error) in
-            guard let self = self else { return}
-            self.messageHandler.hideLoadingOverlay()
-            self.tableView.reloadData()
-            self.messageLabel.text = self.presenter.stateDescription
-            self.coverLetterTextView.text = self.presenter.coverLetterText
-            self.logo.load(
-                urlString: self.presenter.logoUrl,
-                defaultImage: nil,
-                fetcher: nil,
-                completion: nil)
-        }
+        messageHandler.hideLoadingOverlay()
+        tableView.reloadData()
+        messageLabel.text = self.presenter.stateDescription
+        coverLetterTextView.text = self.presenter.coverLetterText
+        logo.load(
+            urlString: self.presenter.logoUrl,
+            defaultImage: nil,
+            fetcher: nil,
+            completion: nil)
     }
     
     func configureViews() {
@@ -117,8 +113,14 @@ extension ApplicationDetailViewController: UITableViewDataSource {
         }
         let info = presenter.cellInfoForIndexPath(indexPath)
         cell.configure(info: info)
-        cell.accessoryType = .disclosureIndicator
+        cell.accessoryType =  presenter.showDisclosureIndicatorForIndexPath(indexPath) ? .disclosureIndicator : .none
         return cell
+    }
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return indexPath.row != 0
     }
 }
 
@@ -143,6 +145,7 @@ class ApplicationDetailCell: UITableViewCell {
     
     lazy var heading: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
         label.font = WorkfinderFonts.heading
         label.textColor = UIColor.black
         label.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
@@ -150,6 +153,7 @@ class ApplicationDetailCell: UITableViewCell {
     }()
     lazy var subHeading: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
         label.font = WorkfinderFonts.subHeading
         label.textColor = WorkfinderColors.textMedium
         label.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
@@ -170,7 +174,7 @@ class ApplicationDetailCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(stack)
-        stack.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 0))
+        stack.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
         
     }
     
