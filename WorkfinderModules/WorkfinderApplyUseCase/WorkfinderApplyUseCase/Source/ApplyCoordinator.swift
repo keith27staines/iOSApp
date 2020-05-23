@@ -91,6 +91,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     
     override public func start() {
         super.start()
+        //startSigninCoordinatorIfNecessary()
         startDateOfBirthIfNecessary()
     }
     

@@ -114,20 +114,24 @@ public class UserMessageHandler {
             preferredStyle: .alert)
         
         if let cancelHandler = cancelHandler {
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
-                cancelHandler()
+            if let _ = retryHandler {
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+                    cancelHandler()
+                }
+                alert.addAction(cancelAction)
+            } else {
+                let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
+                    cancelHandler()
+                }
+                alert.addAction(okAction)
             }
-            alert.addAction(cancelAction)
+
         }
         if let retryHandler = retryHandler {
             let retryAction = UIAlertAction(title: "Retry", style: .default) { (_) in
                 retryHandler()
             }
             alert.addAction(retryAction)
-        } else {
-            let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
-            }
-            alert.addAction(okAction)
         }
         
         messagePresenter?.present(alert, animated: true) {}

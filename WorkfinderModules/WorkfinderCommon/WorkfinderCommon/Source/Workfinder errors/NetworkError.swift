@@ -105,7 +105,7 @@ public class WorkfinderError: Error {
     
     public init(errorType: WorkfinderErrorType,
                 attempting: String?,
-                retryHandler: (() -> Void)?) {
+                retryHandler: (() -> Void)? = nil) {
         self.errorType = errorType
         self.attempting = attempting
         self.retryHandler = retryHandler

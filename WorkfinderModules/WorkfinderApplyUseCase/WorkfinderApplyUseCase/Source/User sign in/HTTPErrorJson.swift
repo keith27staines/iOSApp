@@ -1,0 +1,3 @@
+
+typealias HTTPErrorJson = [String: [String]]
+

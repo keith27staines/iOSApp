@@ -10,7 +10,6 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     let linkFont = UIFont.systemFont(ofSize: 14)
     var inputControlBottom: CGFloat = 0.0
     let mode: RegisterAndSignInMode
-    var keyboardTop: CGFloat = 0.0 { didSet { scrollForKeyboardForInputY() } }
     @objc var switchMode: (() -> Void)?
     @objc var onTapPrimaryButton: (() -> Void)?
     
@@ -32,17 +31,14 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         presenter.onDidTapPrimaryButton { [weak self] (optionalError) in
             guard let self = self else { return }
             self.messageHandler.hideLoadingOverlay()
-            self.messageHandler.displayOptionalErrorIfNotNil(
-                optionalError,
-                retryHandler: self.onPrimaryButtonTap)
+            self.handleError(optionalError: optionalError)
         }
     }
-    
+        
     override func viewDidLoad() {
-        NotificationCenter.default.addObserver(self,
-            selector: #selector(self.keyboardNotification(notification:)),
-            name: UIResponder.keyboardWillChangeFrameNotification,
-            object: nil)
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         let safeArea = view.safeAreaLayoutGuide
         view.backgroundColor = UIColor.white
         view.addSubview(scrollView)
@@ -83,6 +79,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         textField.returnKeyType = .next
         textField.keyboardType = .emailAddress
         textField.textContentType = .username
+        textField.autocorrectionType = .no
         textField.placeholder = fieldName
         textField.autocapitalizationType = .none
         textField.inputAccessoryView = makeKeyboardInputAccessoryView(textField: textField)
@@ -96,6 +93,8 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         textField.returnKeyType = .next
         textField.keyboardType = .alphabet
         textField.autocapitalizationType = .words
+        textField.autocorrectionType = .no
+        textField.textContentType = .name
         textField.placeholder = fieldName
         textField.inputAccessoryView = makeKeyboardInputAccessoryView(textField: textField)
         return stack
@@ -108,6 +107,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         textField.returnKeyType = .next
         textField.keyboardType = .alphabet
         textField.autocapitalizationType = .words
+        textField.autocorrectionType = .no
         textField.textContentType = .nickname
         textField.placeholder = fieldName
         textField.inputAccessoryView = makeKeyboardInputAccessoryView(textField: textField)
@@ -118,12 +118,12 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         let fieldName = NSLocalizedString("Phone number", comment: "")
         let stack = self.makeTextView(fieldName: fieldName)
         let textField = stack.textfield
-        textField.returnKeyType = .next
         textField.keyboardType = .phonePad
         textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
         textField.textContentType = .telephoneNumber
         textField.placeholder = fieldName
-        textField.inputAccessoryView = makeKeyboardInputAccessoryView(textField: textField)
+        textField.inputAccessoryView = makeKeyboardInputAccessoryView(textField: textField, showNextButton: true)
         return stack
     }()
     
@@ -136,7 +136,8 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
             stack.textfield.textContentType = .password
         }
         stack.textfield.autocapitalizationType = .none
-        stack.textfield.returnKeyType = .next
+        stack.textfield.autocorrectionType = .no
+        stack.textfield.returnKeyType = .done
         stack.textfield.isSecureTextEntry = true
         stack.textfield.placeholder = NSLocalizedString("enter new password", comment: "prompt user to enter password")
         return stack
@@ -347,27 +348,30 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         return field
     }
     
-    func makeKeyboardInputAccessoryView(textField: NextResponderTextField) -> UIView {
-        return NextHideToolbar(textField: textField) { self.hideKeyboard() }
+    func makeKeyboardInputAccessoryView(
+        textField: NextResponderTextField,
+        showNextButton: Bool = false) -> UIView {
+        return NextHideToolbar(textField: textField, showNextButton: showNextButton)
     }
     
     override func viewDidLayoutSubviews() {
         scrollView.contentSize = scrollableContentView.frame.size
     }
     
-    @objc func keyboardNotification(notification: NSNotification) {
-        guard let userInfo = notification.userInfo else { return }
-        let endFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue ?? CGRect.zero
-        keyboardTop = endFrame.origin.y
+    @objc func adjustForKeyboard(notification: Notification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+        
+        if notification.name == UIResponder.keyboardWillHideNotification {
+            scrollView.contentInset = .zero
+        } else {
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom, right: 0)
+        }
+        scrollView.scrollIndicatorInsets = scrollView.contentInset
         updatePresenter()
     }
-    
-    func scrollForKeyboardForInputY() {
-        let overlap = (inputControlBottom + 80) - keyboardTop
-        let scrollAmount: CGFloat = (overlap > 0) ? overlap : 0
-        scrollView.setContentOffset(CGPoint(x: 0, y: scrollAmount), animated: true)
-    }
-    
     
     deinit { NotificationCenter.default.removeObserver(self) }
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -376,11 +380,18 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
 extension RegisterAndSignInBaseViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         let point = CGPoint(x: 0, y: textField.frame.maxY)
-        inputControlBottom = textField.convert(point, to: nil).y
+        inputControlBottom = textField.superview!.convert(point, to: nil).y
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         inputControlBottom = 0
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField === password.textfield {
+            textField.resignFirstResponder()
+        }
+        return true
     }
 }
 
@@ -405,3 +416,77 @@ extension RegisterAndSignInBaseViewController: MFMailComposeViewControllerDelega
     }
 }
 
+extension RegisterAndSignInBaseViewController {
+    
+    func handleError(optionalError: Error?) {
+        let attempting  = "register/sign-in"
+        func handleCentrally(_ error: Error?, allowRetry: Bool) {
+            self.messageHandler.displayOptionalErrorIfNotNil(
+                error,
+                retryHandler: allowRetry ? self.onPrimaryButtonTap : nil)
+        }
+
+        guard var workfinderError = (optionalError as? WorkfinderError), workfinderError.code == 400 else {
+            handleCentrally(optionalError, allowRetry: true)
+            return
+        }
+
+        guard let data = workfinderError.responseData else {
+            handleCentrally(workfinderError, allowRetry: true)
+            return
+        }
+        
+        do {
+            let serverErrors = try JSONDecoder().decode(HTTPErrorJson.self, from: data)
+            serverErrors.forEach { (error) in
+                guard let firstErrorDescription = error.value.first else {
+                    handleCentrally(workfinderError, allowRetry: true)
+                    return
+                }
+                switch error.key {
+                case "non_field_errors":
+                    switch firstErrorDescription {
+                    case "Unable to log in with provided credentials.":
+                        workfinderError = WorkfinderError(
+                            errorType: .custom(
+                                title: "Unable to log in",
+                                description: "Please check your email and password"),
+                            attempting: attempting)
+                    default:
+                        workfinderError = WorkfinderError(
+                            errorType: .custom(
+                                title: "Unable to sign you in",
+                                description: firstErrorDescription),
+                            attempting: attempting)
+                    }
+                case "email":
+                    switch firstErrorDescription {
+                    case "A user is already registered with this e-mail address.":
+                        workfinderError = WorkfinderError(
+                            errorType: .custom(
+                                title: "We already have an account with your email address",
+                                description: "You cannot register with this email address. Please sign-in instead"),
+                            attempting: attempting)
+                    default:
+                        workfinderError = WorkfinderError(
+                            errorType: .custom(
+                                title: "Please check your email",
+                                description: "Are you sure your email address is correct?"),
+                            attempting: attempting)
+                    }
+                default:
+                    workfinderError = WorkfinderError(
+                        errorType: .custom(
+                            title: error.key,
+                            description: firstErrorDescription),
+                        attempting: attempting)
+                }
+                handleCentrally(workfinderError, allowRetry: false)
+                
+            }
+        } catch {
+            handleCentrally(workfinderError, allowRetry: true)
+        }
+    }
+
+}

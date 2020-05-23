@@ -143,10 +143,10 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
     }
     
     let _phoneValidator: (String) -> UnderlineView.State = { string in
-        let numbersSet = CharacterSet(charactersIn: "0123456789")
+        let numbersSet = CharacterSet(charactersIn: "+*# 0123456789")
         guard numbersSet.isSuperset(of: CharacterSet(charactersIn: string))
             else { return .bad }
-        return RegisterUserPresenter.validateCharacterCount(string: string, min: 11, max: 11)
+        return RegisterUserPresenter.validateCharacterCount(string: string, min: 11, max: 14)
     }
     
     static func validateCharacterCount(string: String, min: Int, max: Int) -> UnderlineView.State {
