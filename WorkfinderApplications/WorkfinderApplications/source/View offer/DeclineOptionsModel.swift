@@ -2,7 +2,7 @@
 import UIKit
 import WorkfinderUI
 
-enum DeclineReason: Int, CaseIterable {
+enum WithdrawReason: Int, CaseIterable {
     case haveAnotherOffer
     case datesUnsuitable
     case locationTooFar
@@ -20,9 +20,9 @@ enum DeclineReason: Int, CaseIterable {
 
 class DeclineReasonsActionSheetFactory {
     
-    var onDecline: (DeclineReason) -> Void
+    var onDecline: (WithdrawReason) -> Void
 
-    init(onDecline: @escaping (DeclineReason) -> Void) {
+    init(onDecline: @escaping (WithdrawReason) -> Void) {
         self.onDecline = onDecline
     }
     
@@ -37,7 +37,7 @@ class DeclineReasonsActionSheetFactory {
     }
     var sortedDeclineActions: [UIAlertAction] {
         var actions = [UIAlertAction]()
-        let sortedReasons = DeclineReason.allCases.sorted { (reason1, reason2) -> Bool in
+        let sortedReasons = WithdrawReason.allCases.sorted { (reason1, reason2) -> Bool in
             reason1.rawValue < reason2.rawValue
         }
         for reason in sortedReasons {
@@ -47,9 +47,9 @@ class DeclineReasonsActionSheetFactory {
         return actions
     }
     
-    lazy var declineActions: [DeclineReason: UIAlertAction] = {
-        var declineActions = [DeclineReason: UIAlertAction]()
-        DeclineReason.allCases.forEach { (reason) in
+    lazy var declineActions: [WithdrawReason: UIAlertAction] = {
+        var declineActions = [WithdrawReason: UIAlertAction]()
+        WithdrawReason.allCases.forEach { (reason) in
             let alertAction = UIAlertAction(
                 title: reason.buttonTitle, style: .destructive,
                 handler: self.handleAction)

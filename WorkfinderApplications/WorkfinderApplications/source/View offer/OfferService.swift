@@ -4,19 +4,19 @@ import WorkfinderServices
 protocol OfferServiceProtocol: AnyObject {
     func fetchOffer(application: Application, completion: @escaping (Result<Offer,Error>) -> Void)
     func accept(offer: Offer, completion: @escaping (Result<Offer, Error>) -> Void)
-    func decline(offer: Offer, declineReason: DeclineReason, otherText: String?, completion: @escaping (Result<Offer, Error>) -> Void)
+    func withdraw(declining offer: Offer, reason: WithdrawReason, otherText: String?, completion: @escaping (Result<Offer, Error>) -> Void)
 }
 
 class OfferService: OfferServiceProtocol{
     
     private let fetchOfferService: FetchOfferService
     private let acceptOfferService: AcceptOfferService
-    private let declineOfferService: DeclineOfferService
+    private let withdrawService: WithdrawService
     
     init(networkConfig: NetworkConfig) {
         fetchOfferService = FetchOfferService(networkConfig: networkConfig)
         acceptOfferService = AcceptOfferService(networkConfig: networkConfig)
-        declineOfferService = DeclineOfferService(networkConfig: networkConfig)
+        withdrawService = WithdrawService(networkConfig: networkConfig)
     }
     
     func fetchOffer(application: Application, completion: @escaping (Result<Offer,Error>) -> Void) {
@@ -37,7 +37,7 @@ class OfferService: OfferServiceProtocol{
                     email: json.association?.host?.emails?.first,
                     location: self.addressStringFromOfferJson(json),
                     logoUrl: json.association?.location?.company?.logoUrlString,
-                    declineReason: nil)
+                    reasonWithdrawn: nil)
                 completion(Result<Offer,Error>.success(offer))
             case .failure(let error):
                 completion(Result<Offer,Error>.failure(error))
@@ -76,13 +76,13 @@ class OfferService: OfferServiceProtocol{
         }
     }
     
-    func decline(offer: Offer,
-                 declineReason: DeclineReason,
-                 otherText: String?,
-                 completion: @escaping (Result<Offer, Error>) -> Void) {
-        declineOfferService.decline(offer: offer,
-                                    declineReason: declineReason,
-                                    otherText: otherText) { (result) in
+    func withdraw(declining offer: Offer,
+                  reason: WithdrawReason,
+                  otherText: String?,
+                  completion: @escaping (Result<Offer, Error>) -> Void) {
+        withdrawService.withdraw(declining: offer,
+                                 reason: reason,
+                                 otherReason: otherText) { (result) in
             switch result {
             case .success(let placement):
                 var declinedOffer = offer
@@ -96,13 +96,18 @@ class OfferService: OfferServiceProtocol{
     }
 }
 
-fileprivate class DeclineOfferService: WorkfinderService {
-    func decline(offer: Offer,
-                 declineReason: DeclineReason,
-                 otherText: String?,
+fileprivate class WithdrawService: WorkfinderService {
+    func withdraw(declining offer: Offer,
+                 reason: WithdrawReason,
+                 otherReason: String?,
                  completion: @escaping (Result<Placement,Error>) -> Void) {
         let relativePath = "placement/\(offer.placementUuid)/"
-        let patch = ["status": OfferState.candidateDeclined.serverState]
+        var patch: [String: String] = ["status": OfferState.candidateWithdrew.serverState]
+        if let otherReason = otherReason {
+            patch["reason_withdrawn_other"] = otherReason
+        } else {
+            patch["reason_withdrawn"] = reason.buttonTitle
+        }
         do {
             let request = try buildRequest(relativePath: relativePath, verb: .patch, body: patch)
             performTask(with: request, completion: completion, attempting: #function)

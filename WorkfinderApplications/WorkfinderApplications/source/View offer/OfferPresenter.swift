@@ -11,7 +11,7 @@ protocol OfferPresenterProtocol {
     func numberOfRowsInSection(_ section: Int) -> Int
     func cellInfoForIndexPath(_ indexPath: IndexPath) -> OfferDetailCellInfo
     func onTapAccept(completion: @escaping (Error?) -> Void)
-    func onTapDeclineWithReason(_ declineReason: DeclineReason,
+    func onTapDeclineWithReason(_ declineReason: WithdrawReason,
                                 otherText: String?,
                                 completion: @escaping (Error?) -> Void)
 }
@@ -63,10 +63,10 @@ class OfferPresenter: OfferPresenterProtocol {
         }
     }
     
-    func onTapDeclineWithReason(_ reason: DeclineReason, otherText: String?, completion: @escaping (Error?) -> Void) {
+    func onTapDeclineWithReason(_ reason: WithdrawReason, otherText: String?, completion: @escaping (Error?) -> Void) {
         guard var offer = offer else { return }
-        service.decline(offer: offer, declineReason: reason, otherText: otherText) { [weak self] (result) in
-            offer.declineReason = reason
+        service.withdraw(declining: offer, reason: reason, otherText: otherText) { [weak self] (result) in
+            offer.reasonWithdrawn = reason
             self?.resultHandler(result: result, completion: completion)
         }
     }

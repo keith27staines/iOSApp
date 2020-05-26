@@ -54,7 +54,7 @@ class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
         }
     }
     
-    func handleDeclineWithReason(_ reason: DeclineReason) {
+    func handleDeclineWithReason(_ reason: WithdrawReason) {
         switch reason {
         case .other:
             collectOtherReason(otherReason: reason)
@@ -63,7 +63,7 @@ class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
         }
     }
     
-    func collectOtherReason(otherReason: DeclineReason) {
+    func collectOtherReason(otherReason: WithdrawReason) {
         let alert = UIAlertController(title: "Decline Reason", message: "In a few words, please tell us your reason for declining this offer", preferredStyle: .alert)
         alert.addTextField { textField in
             textField.placeholder = "Your reason"
@@ -82,7 +82,7 @@ class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
         present(alert, animated: true)
     }
     
-    func declineWithReason(_ reason: DeclineReason, otherText: String? = nil) {
+    func declineWithReason(_ reason: WithdrawReason, otherText: String? = nil) {
         presenter.onTapDeclineWithReason(reason, otherText: otherText) { [weak self] (optionalError) in
             guard let self = self else { return }
             self.messageHandler.hideLoadingOverlay()
