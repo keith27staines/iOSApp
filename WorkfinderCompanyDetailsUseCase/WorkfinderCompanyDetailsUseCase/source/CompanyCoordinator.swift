@@ -12,7 +12,7 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
     var companyViewController: CompanyWorkplaceViewController!
     var companyWorkplacePresenter: CompanyWorkplacePresenter!
     var companyWorkplace: CompanyWorkplace
-    var interestsRepository: F4SInterestsRepositoryProtocol
+    var interestsRepository: F4SSelectedInterestsRepositoryProtocol
     let applyService: PostPlacementServiceProtocol
     let associationsProvider: HostLocationAssociationsServiceProtocol
 
@@ -24,7 +24,7 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
         companyWorkplace: CompanyWorkplace,
         inject: CoreInjectionProtocol,
         environment: EnvironmentType,
-        interestsRepository: F4SInterestsRepositoryProtocol,
+        interestsRepository: F4SSelectedInterestsRepositoryProtocol,
         applyService: PostPlacementServiceProtocol,
         associationsProvider: HostLocationAssociationsServiceProtocol,
         applicationFinished: @escaping ((PreferredDestination) -> Void)) {

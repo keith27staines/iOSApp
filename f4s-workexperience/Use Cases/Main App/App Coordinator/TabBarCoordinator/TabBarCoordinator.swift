@@ -10,7 +10,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     
     let injected: CoreInjectionProtocol
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
-    let interestsRepository: F4SInterestsRepositoryProtocol
+    let interestsRepository: F4SSelectedInterestsRepositoryProtocol
     
     var parentCoordinator: Coordinating?
     let uuid: UUID = UUID()
@@ -28,7 +28,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
                   navigationRouter: NavigationRoutingProtocol,
                   inject: CoreInjectionProtocol,
                   companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
-                  interestsRepository: F4SInterestsRepositoryProtocol) {
+                  interestsRepository: F4SSelectedInterestsRepositoryProtocol) {
         self.parentCoordinator = parent
         self.navigationRouter = navigationRouter
         self.injected = inject

@@ -21,11 +21,11 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     var coverletterCoordinator: CoverletterCoordinatorProtocol?
     var rootViewController: UIViewController?
     let environment: EnvironmentType
-    var interestsRepository: F4SInterestsRepositoryProtocol
+    var interestsRepository: F4SSelectedInterestsRepositoryProtocol
     let startingViewController: UIViewController!
     let applyService: PostPlacementServiceProtocol
     weak var applyCoordinatorDelegate: ApplyCoordinatorDelegate?
-    lazy var userInterests: [F4SInterest] = { return interestsRepository.loadInterestsArray() }()
+    lazy var userInterests: [F4SInterest] = { return interestsRepository.loadSelectedInterestsArray() }()
     lazy var draftPlacementLogic: DraftPlacementPreparationLogic = {
         return DraftPlacementPreparationLogic()
     }()
@@ -77,7 +77,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
                 environment: EnvironmentType,
-                interestsRepository: F4SInterestsRepositoryProtocol) {
+                interestsRepository: F4SSelectedInterestsRepositoryProtocol) {
         self.applyCoordinatorDelegate = applyCoordinatorDelegate
         self.applyService = applyService
         self.environment = environment

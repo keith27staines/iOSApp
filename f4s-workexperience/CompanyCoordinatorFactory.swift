@@ -14,12 +14,12 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
     let applyService: PostPlacementServiceProtocol
     let environment: EnvironmentType
     let associationsProvider: HostLocationAssociationsServiceProtocol
-    let interestsRepository: F4SInterestsRepositoryProtocol
+    let interestsRepository: F4SSelectedInterestsRepositoryProtocol
 
     init(applyService: PostPlacementServiceProtocol,
          associationsProvider: HostLocationAssociationsServiceProtocol,
          environment: EnvironmentType,
-         interestsRepository: F4SInterestsRepositoryProtocol) {
+         interestsRepository: F4SSelectedInterestsRepositoryProtocol) {
         self.applyService = applyService
         self.associationsProvider = associationsProvider
         self.environment = environment

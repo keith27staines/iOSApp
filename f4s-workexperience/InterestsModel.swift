@@ -44,11 +44,13 @@ public struct InterestsModel {
                         companyPins: F4SCompanyPinSet) -> (Int,[F4SInterest:Int]) {
         var interestCounts = [F4SInterest:Int]()
         var totalPossibilities: Int = 0
+        var pinsMatchingInterests = Set<F4SWorkplacePin>()
         for companyPin in companyPins {
             let pinInterests = companyPin.interests
             if selectedInterests.isEmpty || !selectedInterests.intersection(pinInterests).isEmpty {
                 // If the user hasn't selected any interests then all companies count as possibilities.
                 // If the user has selected at least one interest then a company only counts as a possibility if it shares one of those interests
+                pinsMatchingInterests.insert(companyPin)
                 totalPossibilities += 1
             }
             guard !pinInterests.intersection(displayedInterests).isEmpty else {
@@ -61,6 +63,6 @@ public struct InterestsModel {
                 interestCounts[interest] = count + 1
             }
         }
-        return (total: totalPossibilities, interestCounts: interestCounts)
+        return (total: pinsMatchingInterests.count, interestCounts: interestCounts)
     }
 }

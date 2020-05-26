@@ -21,9 +21,9 @@ enum CamerWillMoveAction {
 }
 
 class MapViewController: UIViewController {
-    typealias InterestSet = Set<String>
-    var interestSet: InterestSet = []
-    var interestsRepository: F4SInterestsRepositoryProtocol!
+    typealias AllInterestsSet = Set<String>
+    var allInterestsSet: AllInterestsSet = []
+    var interestsRepository: F4SSelectedInterestsRepositoryProtocol!
     
     var companyFileDownloadManager: F4SCompanyDownloadManagerProtocol?
     var pinRepository = PinRepository(allPins: [])
@@ -352,7 +352,7 @@ extension MapViewController {
     }
     
     func displayRefineSearchLabelAnimated() {
-        let interestsCount = interestSet.count
+        let interestsCount = allInterestsSet.count
         if self.refineSearchLabel.isHidden && interestsCount == 0 {
             self.refineLabelContainerView.isHidden = false
             self.setupSlideInAnimation(transitionType.slideIn, completionDelegate: self)
@@ -792,7 +792,7 @@ extension MapViewController {
             guard let self = self else { return }
             let mapModel = MapModel(
                 pinRepository: self.pinRepository,
-                allInterests: self.interestSet,
+                allInterests: self.allInterestsSet,
                 filtereredBy: [],
                 clusterColor: self.clusterColor)
             DispatchQueue.main.async {
@@ -827,32 +827,36 @@ extension MapViewController {
             let fileString = try String(contentsOf: url)
             let parser = try PinDownloadFileParser(fileString: fileString)
             pins = parser.extractPins()
-            let interestsSet = buildInterestsSet(pins: pins)
+            let allInterestsSet = buildInterestsSet(pins: pins)
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                self.interestSet = interestsSet
-                self.interestsRepository.allInterestsSet = interestsSet
+                let selectedInterestsSet = self.interestsRepository.loadSelectedInterestsSet()
+                self.allInterestsSet = allInterestsSet
+                self.interestsRepository.allInterestsSet = allInterestsSet
                 self.pinRepository = PinRepository(allPins: pins)
+                self.createUnfilteredMapModelFromDatabase { [weak self] unfilteredMapModel in
+                    guard let self = self else { return }
+                    self.unfilteredMapModel = unfilteredMapModel
+                    self.createFilteredMapModel(
+                        unfilteredModel: unfilteredMapModel,
+                        interestFilterSet: selectedInterestsSet,
+                        completed: { (filteredMapModel) in
+                        self.filteredMapModel = filteredMapModel
+                        self.reloadMapFromModel(mapModel: filteredMapModel, completed: {
+                            completion()
+                        })
+                    })
+                }
                 completion()
             }
         } catch {
+            print("error building map structures \(error)")
             return
-        }
-        
-        self.createUnfilteredMapModelFromDatabase { [weak self] unfilteredMapModel in
-            guard let self = self else { return }
-            self.unfilteredMapModel = unfilteredMapModel
-            self.createFilteredMapModel(unfilteredModel: unfilteredMapModel, interestFilterSet: self.interestSet, completed: { (filteredMapModel) in
-                self.filteredMapModel = filteredMapModel
-                self.reloadMapFromModel(mapModel: filteredMapModel, completed: {
-                    completion()
-                })
-            })
         }
     }
     
-    func buildInterestsSet(pins: [PinJson]) -> InterestSet {
-        var interestSet = InterestSet()
+    func buildInterestsSet(pins: [PinJson]) -> AllInterestsSet {
+        var interestSet = AllInterestsSet()
         pins.forEach { (pin) in
             pin.tags.forEach { tag in
                 interestSet.insert(tag)

@@ -66,7 +66,7 @@
 		FC93DC56232026AA00F1CE23 /* CommonNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC55232026AA00F1CE23 /* CommonNotifications.swift */; };
 		FC93DC5A23202CFB00F1CE23 /* EnvironmentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC5923202CFB00F1CE23 /* EnvironmentType.swift */; };
 		FC9535A5231E7E7700F4A9DA /* CompanyWorkplacePins.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9535A4231E7E7700F4A9DA /* CompanyWorkplacePins.swift */; };
-		FC9670A6225A279300318F69 /* F4SInterestsRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9670A5225A279300318F69 /* F4SInterestsRepositoryProtocol.swift */; };
+		FC9670A6225A279300318F69 /* F4SSelectedInterestsRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9670A5225A279300318F69 /* F4SSelectedInterestsRepositoryProtocol.swift */; };
 		FC9865BC229D3963006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865BB229D3963006D3E63 /* README */; };
 		FCA91E752234043D007ED308 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91E6B2234043D007ED308 /* WorkfinderCommon.framework */; };
 		FCA91E7A2234043D007ED308 /* WorkfinderCommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91E792234043D007ED308 /* WorkfinderCommonTests.swift */; };
@@ -197,7 +197,7 @@
 		FC93DC55232026AA00F1CE23 /* CommonNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonNotifications.swift; sourceTree = "<group>"; };
 		FC93DC5923202CFB00F1CE23 /* EnvironmentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentType.swift; sourceTree = "<group>"; };
 		FC9535A4231E7E7700F4A9DA /* CompanyWorkplacePins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyWorkplacePins.swift; sourceTree = "<group>"; };
-		FC9670A5225A279300318F69 /* F4SInterestsRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInterestsRepositoryProtocol.swift; sourceTree = "<group>"; };
+		FC9670A5225A279300318F69 /* F4SSelectedInterestsRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SSelectedInterestsRepositoryProtocol.swift; sourceTree = "<group>"; };
 		FC9865BB229D3963006D3E63 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		FCA91E6B2234043D007ED308 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA91E6E2234043D007ED308 /* WorkfinderCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderCommon.h; sourceTree = "<group>"; };
@@ -364,7 +364,7 @@
 			isa = PBXGroup;
 			children = (
 				FC53D6DB2323BA4300A339ED /* F4SCompanyRepository.swift */,
-				FC9670A5225A279300318F69 /* F4SInterestsRepositoryProtocol.swift */,
+				FC9670A5225A279300318F69 /* F4SSelectedInterestsRepositoryProtocol.swift */,
 				FCDB07392286F7870053347F /* UserRepository.swift */,
 				FC06604F232645D800496FE2 /* F4SFavouritesRepository.swift */,
 			);
@@ -758,7 +758,7 @@
 				FC426F0E232FF8BC004F8A3E /* EmailVerification.swift in Sources */,
 				FC4EE714230EBC8100B40F6B /* F4SRoleJson.swift in Sources */,
 				FC473E8D2451CCF1004CEA17 /* TemplateModel.swift in Sources */,
-				FC9670A6225A279300318F69 /* F4SInterestsRepositoryProtocol.swift in Sources */,
+				FC9670A6225A279300318F69 /* F4SSelectedInterestsRepositoryProtocol.swift in Sources */,
 				FCA91E88223404AF007ED308 /* WorkfinderCommon.swift in Sources */,
 				FCE51939224948E400B550C9 /* WorkAvailabilityWindow.swift in Sources */,
 				FCF0EA2F23606A5800EE1FE2 /* MockAppSettings.swift in Sources */,

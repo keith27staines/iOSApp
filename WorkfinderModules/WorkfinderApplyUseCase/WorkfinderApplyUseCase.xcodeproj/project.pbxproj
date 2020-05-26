@@ -41,7 +41,6 @@
 		FC299938231EC50300F83FB6 /* F4SDayCalendarViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC29992F231EC4FD00F83FB6 /* F4SDayCalendarViewCell.swift */; };
 		FC29993E231ECDEE00F83FB6 /* F4SCalendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC29993B231ECACC00F83FB6 /* F4SCalendar.storyboard */; };
 		FC29994A231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC299946231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard */; };
-		FC29994B231ED87600F83FB6 /* F4SDaysAndHours.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC299947231ED87600F83FB6 /* F4SDaysAndHours.storyboard */; };
 		FC29994F231EE4F800F83FB6 /* Calendar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC299944231ED35100F83FB6 /* Calendar.xcassets */; };
 		FC343CF82445F10A00347BC2 /* RegisterUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC343CF72445F10A00347BC2 /* RegisterUserViewController.swift */; };
 		FC343CFA2445F17600347BC2 /* RegisterAndSignInCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC343CF92445F17600347BC2 /* RegisterAndSignInCoordinator.swift */; };
@@ -120,7 +119,6 @@
 		FC29993B231ECACC00F83FB6 /* F4SCalendar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SCalendar.storyboard; sourceTree = "<group>"; };
 		FC299944231ED35100F83FB6 /* Calendar.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Calendar.xcassets; sourceTree = "<group>"; };
 		FC299946231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SDisplayInformationViewController.storyboard; sourceTree = "<group>"; };
-		FC299948231ED87600F83FB6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/F4SDaysAndHours.storyboard; sourceTree = "<group>"; };
 		FC343CF72445F10A00347BC2 /* RegisterUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserViewController.swift; sourceTree = "<group>"; };
 		FC343CF92445F17600347BC2 /* RegisterAndSignInCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterAndSignInCoordinator.swift; sourceTree = "<group>"; };
 		FC343CFB244600EF00347BC2 /* RegisterUserPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserPresenter.swift; sourceTree = "<group>"; };
@@ -355,7 +353,6 @@
 				FCD20A84244D788800AAA5FD /* Date of birth */,
 				FC343CF62445F0E200347BC2 /* User sign in */,
 				FC23BCE9243B33510075F359 /* Covering letter */,
-				FC299947231ED87600F83FB6 /* F4SDaysAndHours.storyboard */,
 				FCE8DA8A2320D42600934E2F /* Success screen */,
 				FCF4FACE22646502000EE4B7 /* Models */,
 			);
@@ -537,7 +534,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC29994B231ED87600F83FB6 /* F4SDaysAndHours.storyboard in Resources */,
 				FC29994F231EE4F800F83FB6 /* Calendar.xcassets in Resources */,
 				FC9865B6229D380A006D3E63 /* README in Resources */,
 				FC29994A231ED87600F83FB6 /* F4SDisplayInformationViewController.storyboard in Resources */,
@@ -622,17 +618,6 @@
 			targetProxy = FC6E3D2E2248D74A00377736 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		FC299947231ED87600F83FB6 /* F4SDaysAndHours.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FC299948231ED87600F83FB6 /* Base */,
-			);
-			name = F4SDaysAndHours.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		FC6E3D312248D74A00377736 /* Debug */ = {

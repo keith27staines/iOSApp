@@ -189,3 +189,23 @@ class RegisterUserPresenter: RegisterAndSignInUserBasePresenter {
     }
     
 }
+
+class PhoneNumberValidator {
+    
+    init() {}
+    
+    func validate(number: String) -> Bool {
+        do {
+            let detector = try NSDataDetector(types: NSTextCheckingResult.CheckingType.phoneNumber.rawValue)
+            let matches = detector.matches(in: number, options: [], range: NSMakeRange(0, number.count))
+            if let res = matches.first {
+                return res.resultType == .phoneNumber &&
+                       res.range.location == 0 &&
+                       res.range.length == number.count
+            }
+            else {
+                return false
+            }
+        } catch { return false }
+    }
+}

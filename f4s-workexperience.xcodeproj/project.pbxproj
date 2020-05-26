@@ -143,7 +143,6 @@
 		FCE51E44221039D600DC1D50 /* PersonSearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E43221039D600DC1D50 /* PersonSearchDataGetter.swift */; };
 		FCEE5E1E2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEE5E1D2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift */; };
 		FCF0D16C1FBC244800F2AF1D /* PopupAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */; };
-		FCF6B6522465559600D40FCE /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF6B6512465559600D40FCE /* Icon-Small@2x.png */; };
 		FCF992D3234CE01B00DBC179 /* firebase_staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCF992D2234CE01B00DBC179 /* firebase_staging.plist */; };
 		FCFC06AD23225B9E003C59C8 /* LatLon+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06AC23225B9E003C59C8 /* LatLon+Extensions.swift */; };
 /* End PBXBuildFile section */
@@ -1131,7 +1130,6 @@
 				FC72219F20FE248400F10953 /* Appfile in Resources */,
 				FC5D3C6E20FE1CEC00F89169 /* Gemfile in Resources */,
 				FC681C001F57473D0077BECA /* Podfile in Resources */,
-				FCF6B6522465559600D40FCE /* Icon-Small@2x.png in Resources */,
 				FCA53B971FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib in Resources */,
 				FC4802C22354AD9300AF8F6D /* firebase_live.plist in Resources */,
 			);
@@ -1494,7 +1492,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 36;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				DEVELOPMENT_TEAM_DebugF4S = YB7C23CK6Q;
@@ -1586,7 +1584,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 36;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				DEVELOPMENT_TEAM_DebugF4S = YB7C23CK6Q;
@@ -1683,7 +1681,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 36;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				DEVELOPMENT_TEAM_DebugF4S = YB7C23CK6Q;
@@ -1774,7 +1772,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 36;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				DEVELOPMENT_TEAM_DebugF4S = YB7C23CK6Q;

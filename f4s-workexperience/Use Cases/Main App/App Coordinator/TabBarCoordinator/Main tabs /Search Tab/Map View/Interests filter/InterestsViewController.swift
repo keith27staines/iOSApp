@@ -46,7 +46,7 @@ class InterestsViewController: UIViewController, UIScrollViewDelegate {
 
     let uiIndicatorBusy = UIActivityIndicatorView(style: .white)
     
-    var interestsRepository: F4SInterestsRepositoryProtocol!
+    var interestsRepository: F4SSelectedInterestsRepositoryProtocol!
     var allInterestsSet: F4SInterestSet = F4SInterestSet()
 
     var interestsModel: InterestsModel {
@@ -62,7 +62,7 @@ class InterestsViewController: UIViewController, UIScrollViewDelegate {
         startAnimating()
         let allInterests = interestsModel.allInterests
     
-        originallySelectedInterests = interestsRepository.pruneInterests(keeping: allInterests)
+        originallySelectedInterests = interestsRepository.pruneSelectedInterests(keeping: allInterests)
         selectedInterests = originallySelectedInterests
         mapModel.getInterestsInBounds(visibleBounds) { (interestsInBounds) in
             DispatchQueue.main.async { [weak self] in
@@ -279,7 +279,7 @@ extension InterestsViewController {
 
     @IBAction func refineSearchButtonTouched(_: UIButton) {
         log?.track(event: .mapFiltersRefineSearchTap, properties: nil)
-        selectedInterests = interestsRepository.saveInterests(selectedInterests)
+        selectedInterests = interestsRepository.saveSelectedInterests(selectedInterests)
         delegate?.interestsViewController(self, didChangeSelectedInterests: selectedInterests)
         self.dismiss(animated: true, completion: nil)
     }

@@ -6,7 +6,7 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
     
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     var shouldAskOperatingSystemToAllowLocation = false
-    let interestsRepository: F4SInterestsRepositoryProtocol
+    let interestsRepository: F4SSelectedInterestsRepositoryProtocol
     
     lazy var rootViewController: MapViewController = {
         let storyboard = UIStoryboard(name: "MapView", bundle: nil)
@@ -22,7 +22,7 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
          navigationRouter: NavigationRoutingProtocol,
          inject: CoreInjectionProtocol,
          companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
-         interestsRepository: F4SInterestsRepositoryProtocol) {
+         interestsRepository: F4SSelectedInterestsRepositoryProtocol) {
         self.companyCoordinatorFactory = companyCoordinatorFactory
         self.interestsRepository = interestsRepository
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)

@@ -2,7 +2,7 @@
 import Foundation
 import WorkfinderCommon
 
-public class F4SInterestsRepository : F4SInterestsRepositoryProtocol {
+public class F4SSelectedInterestsRepository : F4SSelectedInterestsRepositoryProtocol {
     
     public var allInterestsSet = F4SInterestSet()
     let localStore: LocalStorageProtocol
@@ -11,7 +11,7 @@ public class F4SInterestsRepository : F4SInterestsRepositoryProtocol {
         self.localStore = localStore
     }
     
-    public func loadInterestsArray() -> [F4SInterest] {
+    public func loadSelectedInterestsArray() -> [F4SInterest] {
         guard let data: Data = localStore.value(key: LocalStore.Key.interests) as? Data else {
             return []
         }
@@ -19,62 +19,61 @@ public class F4SInterestsRepository : F4SInterestsRepositoryProtocol {
         return try! decoder.decode([F4SInterest].self, from: data)
     }
     
-    public func loadInterestsSet() -> Set<F4SInterest> {
-        let interests = loadInterestsArray()
+    public func loadSelectedInterestsSet() -> Set<F4SInterest> {
+        let interests = loadSelectedInterestsArray()
         return Set<F4SInterest>(interests)
     }
     
     @discardableResult
-    public func saveInterests(_ interests: [F4SInterest]) -> [F4SInterest] {
-        let interestsSet = Set<F4SInterest>(interests)
-        saveInterests(interestsSet)
-        return loadInterestsArray()
-    }
-    
-    @discardableResult
-    public func saveInterests(_ interests: F4SInterestSet) -> F4SInterestSet {
-        let interestsArray: [F4SInterest] = Array(interests)
+    public func saveSelectedInterests(_ interests: [F4SInterest]) -> [F4SInterest] {
         let encoder = JSONEncoder()
-        let data = try! encoder.encode(interestsArray)
+        let data = try! encoder.encode(interests)
         localStore.setValue(data, for: LocalStore.Key.interests)
-        return loadInterestsSet()
+        return interests
     }
     
     @discardableResult
-    public func addInterests(_ addInterests: [F4SInterest]) -> [F4SInterest] {
+    public func saveSelectedInterests(_ interests: F4SInterestSet) -> F4SInterestSet {
+        let interestsArray: [F4SInterest] = Array(interests)
+        saveSelectedInterests(interestsArray)
+        return interests
+    }
+    
+    @discardableResult
+    public func addSelectedInterests(_ addInterests: [F4SInterest]) -> [F4SInterest] {
         let addInterestsSet = Set<F4SInterest>(addInterests)
-        self.addInterests(addInterestsSet)
-        return loadInterestsArray()
+        self.addSelectedInterests(addInterestsSet)
+        return loadSelectedInterestsArray()
     }
     
     @discardableResult
-    public func addInterests(_ addInterests: F4SInterestSet) -> F4SInterestSet {
-        let interests = loadInterestsSet()
-        saveInterests(interests.union(addInterests))
-        return loadInterestsSet()
+    public func addSelectedInterests(_ addInterests: F4SInterestSet) -> F4SInterestSet {
+        let interests = loadSelectedInterestsSet()
+        saveSelectedInterests(interests.union(addInterests))
+        return loadSelectedInterestsSet()
     }
     
     @discardableResult
-    public func removeInterests(_ removeInterests: [F4SInterest]) -> [F4SInterest] {
+    public func removeSelectedInterests(_ removeInterests: [F4SInterest]) -> [F4SInterest] {
         let removeSet = Set<F4SInterest>(removeInterests)
-        self.removeInterests(removeSet)
-        return loadInterestsArray()
+        self.removeSelectedInterests(removeSet)
+        return loadSelectedInterestsArray()
     }
     
     @discardableResult
-    public func removeInterests(_ removeInterests: F4SInterestSet) -> F4SInterestSet {
-        let interests = loadInterestsSet()
-        saveInterests(interests.subtracting(removeInterests))
-        return loadInterestsSet()
+    public func removeSelectedInterests(_ removeInterests: F4SInterestSet) -> F4SInterestSet {
+        let interests = loadSelectedInterestsSet()
+        saveSelectedInterests(interests.subtracting(removeInterests))
+        return loadSelectedInterestsSet()
     }
     
     /// Prunes interests from the store that are not members of the specified list
     /// - Returns: the remaining interests in the store
     @discardableResult
-    public func pruneInterests(keeping: F4SInterestSet) -> F4SInterestSet {
-        let interests = loadInterestsSet()
+    public func pruneSelectedInterests(keeping: F4SInterestSet) -> F4SInterestSet {
+        let interests = loadSelectedInterestsSet()
         let intersection = interests.intersection(keeping)
-        return saveInterests(intersection)
+        return saveSelectedInterests(intersection)
     }
 }
 

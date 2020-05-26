@@ -130,8 +130,8 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         return HostLocationAssociationsService(networkConfig: self.networkConfiguration)
     }()
     
-    lazy var interestsRepository: F4SInterestsRepositoryProtocol = {
-        return F4SInterestsRepository(localStore: self.localStore)
+    lazy var interestsRepository: F4SSelectedInterestsRepositoryProtocol = {
+        return F4SSelectedInterestsRepository(localStore: self.localStore)
     }()
     
     lazy var onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol = {
