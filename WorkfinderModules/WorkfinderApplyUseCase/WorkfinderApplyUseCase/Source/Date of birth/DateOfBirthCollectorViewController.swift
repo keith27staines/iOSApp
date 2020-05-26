@@ -14,12 +14,12 @@ class DateOfBirthCollectorViewController: UIViewController {
     
     let under13Text = "We’re very sorry, you need to be over 13 years old. We suggest you ask your teacher or parent to invite a business person to give a talk in your school class by visiting founders4schools.org.uk"
     
-    let under18Text = "We're updating the Workfinder App. Currently, applications are only open to candidates who are aged over 18. The App will reopen for younger candidates with the next update in a few weeks' time. Thanks in advance for your patience while we make some improvements."
+//    let under18Text = "We're updating the Workfinder App. Currently, applications are only open to candidates who are aged over 18. The App will reopen for younger candidates with the next update in a few weeks' time. Thanks in advance for your patience while we make some improvements."
     
     lazy var underAgeWarning: UITextView = {
         let textView = UITextView()
         textView.alpha = 0
-        textView.text = self.under18Text
+        textView.text = self.under13Text
         textView.font = WorkfinderFonts.body
         textView.textColor = WorkfinderColors.textMedium
         textView.dataDetectorTypes = .link
@@ -41,16 +41,10 @@ class DateOfBirthCollectorViewController: UIViewController {
             formatter.dateStyle = .long
             textField.text = formatter.string(from: dateOfBirth)
             let age = ageNow(dob: dateOfBirth)
-            let isUnder13 = age < 13
-            let isOver18 = age >= 18
-            self.underAgeWarning.text = isUnder13 ? under13Text : under18Text
-            setPrimaryButtonEnabledState(isOver18)
+            let isOldEnough = age >= 13
+            setPrimaryButtonEnabledState(isOldEnough)
             UIView.animate(withDuration: 0.3) {
-                if isOver18 {
-                    self.underAgeWarning.alpha = 0
-                } else {
-                    self.underAgeWarning.alpha = 1
-                }
+                self.underAgeWarning.alpha = isOldEnough ? 0 : 1
             }
         }
     }
