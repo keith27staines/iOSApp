@@ -79,7 +79,6 @@
 		FC31F095204D54C6009DD526 /* F4SDebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */; };
 		FC31F097204D54E3009DD526 /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC31F096204D54E3009DD526 /* Debug.storyboard */; };
 		FC3CD1DA221566F200F91B50 /* Geocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CD1D9221566F200F91B50 /* Geocoding.swift */; };
-		FC4802C22354AD9300AF8F6D /* firebase_live.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC4802C12354AD9300AF8F6D /* firebase_live.plist */; };
 		FC50E9CE2213EF5400C9A621 /* SearchModeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */; };
 		FC56A0F02455B62B00A7EC3F /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC56A0EF2455B62B00A7EC3F /* WorkfinderCommon.framework */; };
 		FC56A0F12455B62B00A7EC3F /* WorkfinderCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC56A0EF2455B62B00A7EC3F /* WorkfinderCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -141,7 +140,6 @@
 		FCE51E44221039D600DC1D50 /* PersonSearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E43221039D600DC1D50 /* PersonSearchDataGetter.swift */; };
 		FCEE5E1E2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEE5E1D2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift */; };
 		FCF0D16C1FBC244800F2AF1D /* PopupAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */; };
-		FCF992D3234CE01B00DBC179 /* firebase_staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCF992D2234CE01B00DBC179 /* firebase_staging.plist */; };
 		FCFC06AD23225B9E003C59C8 /* LatLon+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06AC23225B9E003C59C8 /* LatLon+Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -293,7 +291,6 @@
 		FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDebugViewController.swift; sourceTree = "<group>"; };
 		FC31F096204D54E3009DD526 /* Debug.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
 		FC3CD1D9221566F200F91B50 /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
-		FC4802C12354AD9300AF8F6D /* firebase_live.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = firebase_live.plist; sourceTree = "<group>"; };
 		FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModeSelectorView.swift; sourceTree = "<group>"; };
 		FC56A0EF2455B62B00A7EC3F /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5D3C6D20FE1CEB00F89169 /* Gemfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Gemfile; sourceTree = "<group>"; };
@@ -351,7 +348,6 @@
 		FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupAnimator.swift; sourceTree = "<group>"; };
 		FCF4B651232BC49A001340DF /* WorkfinderOnboardingUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderOnboardingUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF6B6512465559600D40FCE /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small@2x.png"; path = "../../../Desktop/Icon-Small@2x.png"; sourceTree = "<group>"; };
-		FCF992D2234CE01B00DBC179 /* firebase_staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = firebase_staging.plist; sourceTree = "<group>"; };
 		FCFBD0062250D69700A9361D /* f4s-workexperienceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "f4s-workexperienceTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCFBD00A2250D69700A9361D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCFC06AC23225B9E003C59C8 /* LatLon+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LatLon+Extensions.swift"; sourceTree = "<group>"; };
@@ -912,8 +908,6 @@
 			isa = PBXGroup;
 			children = (
 				FCC5EBB51F449C310085CE15 /* README.md */,
-				FC4802C12354AD9300AF8F6D /* firebase_live.plist */,
-				FCF992D2234CE01B00DBC179 /* firebase_staging.plist */,
 				FC5D3C6D20FE1CEB00F89169 /* Gemfile */,
 				FCB6D9351F75056000B8C268 /* Branding.plist */,
 				FC681BFE1F57473D0077BECA /* Podfile */,
@@ -1106,12 +1100,10 @@
 				40E78E1E1DD31A86000A3776 /* Assets.xcassets in Resources */,
 				40A5CF3A1DED6F8D000007AB /* InterestsView.storyboard in Resources */,
 				40E78E951DD391F3000A3776 /* MapView.storyboard in Resources */,
-				FCF992D3234CE01B00DBC179 /* firebase_staging.plist in Resources */,
 				FC72219F20FE248400F10953 /* Appfile in Resources */,
 				FC5D3C6E20FE1CEC00F89169 /* Gemfile in Resources */,
 				FC681C001F57473D0077BECA /* Podfile in Resources */,
 				FCA53B971FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib in Resources */,
-				FC4802C22354AD9300AF8F6D /* firebase_live.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
