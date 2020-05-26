@@ -15,12 +15,9 @@ target 'f4s-workexperience' do
     pod 'XCGLogger'
     pod 'Bugsnag'
     pod 'DataCompression'
-    pod 'Firebase/Core'
-    pod 'Firebase/Analytics'
-    pod 'Firebase/RemoteConfig'
 end
   
 target 'f4s-workexperienceTests' do
-    pod 'Firebase/Analytics'
+
 end
 
