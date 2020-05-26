@@ -151,7 +151,7 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
             let startDateString = availabilityItem.value,
             let startDate = Date.workfinderDateStringToDate(startDateString)
             else { return }
-        if startDate < Date() {
+        if startDate.startOfDay < Date().startOfDay {
             availabilityPicklist.deselectAll()
         }
     }
