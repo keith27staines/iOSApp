@@ -86,6 +86,20 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         return stack
     }()
     
+    lazy var guardianEmail: UnderlinedNextResponderTextFieldStack = {
+        let fieldName = NSLocalizedString("Parent or guardian email", comment: "")
+        let stack = self.makeTextView(fieldName: fieldName)
+        let textField = stack.textfield
+        textField.returnKeyType = .next
+        textField.keyboardType = .emailAddress
+        textField.textContentType = .emailAddress
+        textField.autocorrectionType = .no
+        textField.placeholder = fieldName
+        textField.autocapitalizationType = .none
+        textField.inputAccessoryView = makeKeyboardInputAccessoryView(textField: textField)
+        return stack
+    }()
+    
     lazy var fullname: UnderlinedNextResponderTextFieldStack = {
         let fieldName = NSLocalizedString("First and last name", comment: "")
         let stack = self.makeTextView(fieldName: fieldName)

@@ -8,6 +8,14 @@ public struct Candidate: Codable {
     public var currentLevelOfStudy: String?
     public var placementType: String?
     public var fullName: String { self.userSummary.full_name }
+    public var guardianEmail: String?
+    
+    public func age(on date: Date = Date()) -> Int? {
+        guard let dobString = dateOfBirth, let dob = Date.workfinderDateStringToDate(dobString) else {
+            return nil
+        }
+        return Calendar.current.dateComponents([.year], from: dob, to: date).year!
+    }
     
     var userSummary: UserSummary
     
@@ -21,6 +29,7 @@ public struct Candidate: Codable {
         case userSummary = "user"
         case placementType = "placement_type"
         case currentLevelOfStudy = "current_level_of_study"
+        case guardianEmail = "guardian_email"
     }
     
     struct UserSummary: Codable {

@@ -16,7 +16,6 @@ protocol RegisterAndSignInCoordinatorParent: Coordinating {
 class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, RegisterAndSignInCoordinatorProtocol {
     
     var firstViewController:UIViewController?
-    
     init(parent: RegisterAndSignInCoordinatorParent?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol) {
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }

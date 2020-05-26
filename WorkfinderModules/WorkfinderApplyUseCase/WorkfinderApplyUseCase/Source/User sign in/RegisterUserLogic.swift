@@ -147,13 +147,11 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
     func createCandidateIfNecessary() {
         let user = userRepository.loadUser()
         let userUuid = user.uuid!
-        var candidate = userRepository.loadCandidate()
+        let candidate = userRepository.loadCandidate()
         if let candidateUuid = candidate.uuid {
             fetchCandidateFromServer(candidateUuid: candidateUuid)
             return
         }
-        candidate.placementType = "internship"
-        candidate.currentLevelOfStudy = "undergraduate"
         userRepository.save(candidate: candidate)
         createCandidateService.createCandidate(candidate: candidate, userUuid: userUuid) {
             [weak self] (result) in

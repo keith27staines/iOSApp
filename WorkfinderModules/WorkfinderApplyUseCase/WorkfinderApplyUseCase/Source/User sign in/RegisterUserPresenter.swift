@@ -9,14 +9,16 @@ protocol RegisterAndSignInPresenterProtocol: class {
     var fullname: String? { get set }
     var nickname: String? { get set }
     var email: String? { get set }
+    var guardianEmail: String? { get set }
     var password: String? { get set }
     var phone: String? { get set }
     var fullnameValidityState: UnderlineView.State { get }
     var emailValidityState: UnderlineView.State { get }
+    var guardianValidityState: UnderlineView.State { get }
     var passwordValidityState: UnderlineView.State { get }
     var phoneValidityState: UnderlineView.State { get }
     var nicknameValidityState: UnderlineView.State { get }
-
+    var isGuardianEmailRequired: Bool { get }
     var isPrimaryButtonEnabled: Bool { get }
     func onDidTapPrimaryButton(onFailure: @escaping ((Error) -> Void))
     func onDidTapSwitchMode()
@@ -25,6 +27,7 @@ protocol RegisterAndSignInPresenterProtocol: class {
 }
 
 class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
+
     weak var view: WorkfinderViewControllerProtocol?
     let userRepository: UserRepositoryProtocol
     let registerLogic: RegisterUserLogicProtocol
@@ -34,6 +37,11 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
     
     var isPrimaryButtonEnabled: Bool {
         return false
+    }
+    
+    var isGuardianEmailRequired: Bool {
+        guard let age = self.userRepository.loadCandidate().age() else { return false }
+        return age < 18
     }
     
     init(coordinator: RegisterAndSignInCoordinatorProtocol,
@@ -72,6 +80,15 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
         set { user.email = newValue }
     }
     
+    var guardianEmail: String? {
+        get { userRepository.loadCandidate().guardianEmail }
+        set {
+            var candidate = userRepository.loadCandidate()
+            candidate.guardianEmail = newValue
+            userRepository.save(candidate: candidate)
+        }
+    }
+    
     var fullname: String? {
         get { user.fullname }
         set { user.fullname = newValue }
@@ -91,6 +108,10 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
     
     var emailValidityState: UnderlineView.State {
         return _emailValidator(email ?? "")
+    }
+    
+    var guardianValidityState: UnderlineView.State {
+        return _emailValidator(guardianEmail ?? "")
     }
     
     var passwordValidityState: UnderlineView.State {
@@ -181,6 +202,14 @@ class RegisterUserPresenter: RegisterAndSignInUserBasePresenter {
     
     override var isPrimaryButtonEnabled: Bool {
         let isValid = UnderlineView.State.good
+        if self.isGuardianEmailRequired {
+            return self.isTermsAndConditionsAgreed &&
+                isValid == fullnameValidityState &&
+                isValid == emailValidityState &&
+                isValid == guardianValidityState &&
+                isValid == passwordValidityState &&
+                isValid == phoneValidityState
+        }
         return self.isTermsAndConditionsAgreed &&
             isValid == fullnameValidityState &&
             isValid == emailValidityState &&
