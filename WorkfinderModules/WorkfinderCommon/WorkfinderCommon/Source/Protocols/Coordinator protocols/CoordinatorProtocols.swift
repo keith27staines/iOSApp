@@ -72,7 +72,6 @@ public protocol CoreInjectionProtocol : class {
     var userRepository: UserRepositoryProtocol { get }
     var companyDownloadFileManager: F4SCompanyDownloadManagerProtocol { get }
     var log: F4SAnalyticsAndDebugging { get }
-    var appSettings: AppSettingProvider { get }
 }
 
 public protocol CoreInjectionNavigationCoordinatorProtocol : NavigationCoordinating {

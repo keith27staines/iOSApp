@@ -10,11 +10,10 @@ import Foundation
 import XCGLogger
 import Bugsnag
 import WorkfinderCommon
-import Firebase
 
 public class F4SLog : F4SAnalyticsAndDebugging {
     
-    private var f4sDebug: F4SAnalyticsAndDebugging? // F4SDebug?
+    private var f4sDebug: F4SAnalyticsAndDebugging?
     
     public init() {
         let environmentType = Config.environment
@@ -43,26 +42,12 @@ public class F4SLog : F4SAnalyticsAndDebugging {
         bugsnagConfiguration.setUser(userUuid, withName:"", andEmail:"")
         Bugsnag.start(with: bugsnagConfiguration)
     }
-    
-    func startFirebase(environmentType: EnvironmentType) {
-        let plistName: String?
-        switch environmentType {
-        case .staging: plistName = "firebase_staging"
-        case .production: plistName = "firebase_live"
-        }
-        guard
-            let plist = plistName,
-            let path = Bundle.main.path(forResource: plist, ofType: "plist"),
-            let firebaseOptions = FirebaseOptions(contentsOfFile: path) else { return }
-        FirebaseApp.configure(options: firebaseOptions)
-        Analytics.setAnalyticsCollectionEnabled(true)
-    }
 }
 
 extension F4SLog : F4SAnalytics {
     
     public func track(event: TrackEvent, properties: [String : Any]?) {
-        Analytics.logEvent(event.rawValue, parameters: properties)
+
     }
     
     public func screen(_ name: ScreenName) {

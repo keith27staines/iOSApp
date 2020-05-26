@@ -45,7 +45,6 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
             associationsProvider: associationsProvider,
             log: injected.log)
         companyViewController = CompanyWorkplaceViewController(
-            appSettings: injected.appSettings,
             presenter: companyWorkplacePresenter)
         companyViewController.log = self.injected.log
         companyViewController.originScreen = originScreen

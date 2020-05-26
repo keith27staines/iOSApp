@@ -113,8 +113,6 @@
 		FCE519572249645C00B550C9 /* F4SCalendarMonthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE519512249645C00B550C9 /* F4SCalendarMonthTests.swift */; };
 		FCE75CC6232F631C00C2E976 /* NetworkCallLoggerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE75CC5232F631C00C2E976 /* NetworkCallLoggerProtocol.swift */; };
 		FCE8DAA82320E80B00934E2F /* ScaledNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAA72320E80B00934E2F /* ScaledNumber.swift */; };
-		FCF0EA2D23606A1D00EE1FE2 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF0EA2C23606A1D00EE1FE2 /* AppSettings.swift */; };
-		FCF0EA2F23606A5800EE1FE2 /* MockAppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF0EA2E23606A5800EE1FE2 /* MockAppSettings.swift */; };
 		FCFC069323224081003C59C8 /* ScaledNumberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC069223224080003C59C8 /* ScaledNumberTests.swift */; };
 		FCFC069723224156003C59C8 /* RecommendationEquatableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC069623224156003C59C8 /* RecommendationEquatableTests.swift */; };
 		FCFC06A123225571003C59C8 /* F4SStringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06A023225570003C59C8 /* F4SStringExtensionTests.swift */; };
@@ -247,8 +245,6 @@
 		FCE519512249645C00B550C9 /* F4SCalendarMonthTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarMonthTests.swift; sourceTree = "<group>"; };
 		FCE75CC5232F631C00C2E976 /* NetworkCallLoggerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCallLoggerProtocol.swift; sourceTree = "<group>"; };
 		FCE8DAA72320E80B00934E2F /* ScaledNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaledNumber.swift; sourceTree = "<group>"; };
-		FCF0EA2C23606A1D00EE1FE2 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
-		FCF0EA2E23606A5800EE1FE2 /* MockAppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAppSettings.swift; sourceTree = "<group>"; };
 		FCFC069223224080003C59C8 /* ScaledNumberTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaledNumberTests.swift; sourceTree = "<group>"; };
 		FCFC069623224156003C59C8 /* RecommendationEquatableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationEquatableTests.swift; sourceTree = "<group>"; };
 		FCFC06A023225570003C59C8 /* F4SStringExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SStringExtensionTests.swift; sourceTree = "<group>"; };
@@ -462,7 +458,6 @@
 		FCA91E8622340478007ED308 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				FCF0EA2C23606A1D00EE1FE2 /* AppSettings.swift */,
 				FC1243E22344AEA30007BA95 /* ScreenNames.swift */,
 				FC5DAADF246E4EA600031AEA /* Workfinder errors */,
 				FC1FA08322FAABDE003EAE59 /* User and candidate */,
@@ -578,7 +573,6 @@
 				FC8F9579233BA6710027BE02 /* MockDatabaseDownload.swift */,
 				FC8F957A233BA6710027BE02 /* MockAnalyticsAndDebugging.swift */,
 				FC390140234C9E0A009A9F7B /* MockF4SInterestsRepository.swift */,
-				FCF0EA2E23606A5800EE1FE2 /* MockAppSettings.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -751,7 +745,6 @@
 				FCCA4E2B2456DADD00DFA696 /* Candidate.swift in Sources */,
 				FCE5192E2249482A00B550C9 /* F4SCalendar.swift in Sources */,
 				FC8F957F233BA6710027BE02 /* MockNavigationRouter.swift in Sources */,
-				FCF0EA2D23606A1D00EE1FE2 /* AppSettings.swift in Sources */,
 				FC0660572326635000496FE2 /* Protocols.swift in Sources */,
 				FC8F9583233BB5580027BE02 /* FactoriesProtocols.swift in Sources */,
 				FC93DC5A23202CFB00F1CE23 /* EnvironmentType.swift in Sources */,
@@ -761,7 +754,6 @@
 				FC9670A6225A279300318F69 /* F4SSelectedInterestsRepositoryProtocol.swift in Sources */,
 				FCA91E88223404AF007ED308 /* WorkfinderCommon.swift in Sources */,
 				FCE51939224948E400B550C9 /* WorkAvailabilityWindow.swift in Sources */,
-				FCF0EA2F23606A5800EE1FE2 /* MockAppSettings.swift in Sources */,
 				FC5019652306A24500A26B53 /* F4SDayOfWeek.swift in Sources */,
 				FCE5192C2249482A00B550C9 /* F4SCalendarWeek.swift in Sources */,
 				FC5CBA6A231D3E4700C2D3C5 /* F4SDateHelper.swift in Sources */,

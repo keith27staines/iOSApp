@@ -33,7 +33,6 @@ class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewP
         return presenter.hostsSectionPresenter
     }
 
-    var appSettings: AppSettingProvider
     let toolbarAlpha: CGFloat = 0.9
     var isShowingMap: Bool = false {
         didSet {
@@ -55,9 +54,8 @@ class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewP
         return mapView
     }()
     
-    init(appSettings: AppSettingProvider, presenter: CompanyMainViewPresenterProtocol) {
+    init(presenter: CompanyMainViewPresenterProtocol) {
         self.presenter = presenter
-        self.appSettings = appSettings
         super.init(frame: CGRect.zero)
         presenter.view = self
         backgroundColor = UIColor.white

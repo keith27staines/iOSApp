@@ -27,7 +27,6 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     let apnsEnvironment: String = Config.apnsEnv
     let environment: EnvironmentType = Config.environment
     var baseUrlString: String { return Config.workfinderApiBase }
-    let remoteConfig: RemoteConfiguration
     
     init(registrar: RemoteNotificationsRegistrarProtocol,
          launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
@@ -35,8 +34,6 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         self.launchOptions = launchOptions
         self.log = F4SLog()
         self.workfinderEndpoint = try! WorkfinderEndpoint(baseUrlString: Config.workfinderApiBase)
-        self.remoteConfig = RemoteConfiguration()
-        self.remoteConfig.start()
     }
     
     let workfinderEndpoint: WorkfinderEndpoint
@@ -72,8 +69,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
             user: self.userRepo.loadCandidate(),
             userRepository: self.userRepo,
             companyDownloadFileManager: self.companyFileDownloadManager,
-            log: self.log,
-            appSettings: self.remoteConfig)
+            log: self.log)
     }()
     
     lazy var window: UIWindow = {

@@ -24,11 +24,9 @@ class CompanyWorkplaceViewController: UIViewController {
     let screenName = ScreenName.company
     var originScreen = ScreenName.notSpecified
     weak var log: F4SAnalyticsAndDebugging?
-    var appSettings: AppSettingProvider
     lazy var messageHandler = UserMessageHandler(presenter: self)
     
-    init(appSettings: AppSettingProvider, presenter: CompanyWorkplacePresenterProtocol) {
-        self.appSettings = appSettings
+    init(presenter: CompanyWorkplacePresenterProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
         hidesBottomBarWhenPushed = true
@@ -43,9 +41,7 @@ class CompanyWorkplaceViewController: UIViewController {
     }
     
     lazy var companyMainPageView: CompanyMainView = {
-        let view = CompanyMainView(
-            appSettings: appSettings,
-            presenter: self.presenter.mainViewPresenter)
+        let view = CompanyMainView(presenter: self.presenter.mainViewPresenter)
         view.log = log
         return view
     }()
