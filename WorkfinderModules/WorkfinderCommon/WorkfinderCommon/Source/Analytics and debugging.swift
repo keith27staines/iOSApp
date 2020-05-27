@@ -13,9 +13,6 @@ public protocol F4SAnalytics {
 public protocol F4SDebugging {
     func notifyError(_ error: NSError, functionName: StaticString, fileName: StaticString, lineNumber: Int)
     func leaveBreadcrumb(with message: String, functionName: StaticString, fileName: StaticString, lineNumber: Int)
-    func updateHistory()
-    func textCombiningHistoryAndSessionLog() -> String?
-    func userCanAccessDebugMenu() -> Bool
     func error(message: String, functionName: StaticString, fileName: StaticString, lineNumber: Int)
     func error(_ error: Error, functionName: StaticString, fileName: StaticString, lineNumber: Int)
     func debug(_ message: String, functionName: StaticString, fileName: StaticString, lineNumber: Int)

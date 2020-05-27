@@ -21,7 +21,7 @@ class F4SLogViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        logTextView.text = log?.textCombiningHistoryAndSessionLog() ?? "Log unavailable because of a configuration error"
+
     }
 
     @IBAction func shareButtonPressed(_ sender: Any) {

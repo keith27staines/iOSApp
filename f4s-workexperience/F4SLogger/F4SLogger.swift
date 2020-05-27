@@ -13,18 +13,9 @@ import WorkfinderCommon
 
 public class F4SLog : F4SAnalyticsAndDebugging {
     
-    private var f4sDebug: F4SAnalyticsAndDebugging?
-    
     public init() {
         let environmentType = Config.environment
         startBugsnag(environmentType: environmentType)
-        //startFirebase(environmentType: environmentType)
-        do {
-            f4sDebug = MockF4SAnalyticsAndDebugging()
-            //f4sDebug = try F4SDebug()
-        } catch (let error) {
-            assertionFailure("Failed to initialize logger: \(error)")
-        }
     }
     
     func startBugsnag(environmentType: EnvironmentType) {
@@ -32,14 +23,14 @@ public class F4SLog : F4SAnalyticsAndDebugging {
         switch environmentType {
         case .staging:
             bugsnagConfiguration.releaseStage = "staging"
-            bugsnagConfiguration.apiKey = "3e5b13ff2914e5593874d37282c5f40a"
+            bugsnagConfiguration.apiKey = "e965364f05c37d903a6aa3f34498cc3f"
 
         case .production:
             bugsnagConfiguration.releaseStage = "production"
-            bugsnagConfiguration.apiKey = "1b2c62d35dbf70232d3b4d4c5aca5ebe"
+            bugsnagConfiguration.apiKey = "e965364f05c37d903a6aa3f34498cc3f"
         }
-        let userUuid = Candidate().uuid ?? "first_use_temp_\(UUID().uuidString)"
-        bugsnagConfiguration.setUser(userUuid, withName:"", andEmail:"")
+        let user = UserRepository().loadUser()
+        bugsnagConfiguration.setUser(user.uuid ?? "unregistered user", withName:user.nickname, andEmail:user.email)
         Bugsnag.start(with: bugsnagConfiguration)
     }
 }
@@ -101,117 +92,6 @@ extension F4SLog : F4SDebugging {
     public func leaveBreadcrumb(with message: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
         XCGLogger.default.debug(message)
         Bugsnag.leaveBreadcrumb(withMessage: message)
-    }
-    
-    public func updateHistory() {
-        f4sDebug?.updateHistory()
-    }
-    public func textCombiningHistoryAndSessionLog() -> String? {
-        return f4sDebug?.textCombiningHistoryAndSessionLog()
-    }
-    
-    public func userCanAccessDebugMenu() -> Bool {
-        return f4sDebug?.userCanAccessDebugMenu() ?? false
-    }
-}
-
-class F4SDebug {
-    
-    static let logDefaultDirectory : URL = FileHelper.getDocumentsURL()
-    static let historyFileName: String = "workfinder_debug_history"
-    static let loggerFileName: String = "logger_session"
-    static let historyFileExtension: String = "log"
-    static let loggerFileExtension: String = "log"
-    
-    let directory: URL
-    
-    var debugHistoryUrl: URL {
-        return directory
-            .appendingPathComponent(F4SDebug.historyFileName)
-            .appendingPathExtension(F4SDebug.historyFileExtension)
-    }
-    
-    var loggerUrl: URL {
-        return directory
-            .appendingPathComponent(F4SDebug.loggerFileName)
-            .appendingPathExtension(F4SDebug.loggerFileExtension)
-    }
-    
-    enum F4SDebugError : Error {
-        case invalidDirectoryForLogfile
-        case initializationError
-    }
-    
-    init(directory: URL? = nil) throws {
-        let directory = directory ?? F4SDebug.logDefaultDirectory
-        guard directory.hasDirectoryPath else {
-            throw F4SDebugError.invalidDirectoryForLogfile
-        }
-        self.directory = directory
-        do {
-            try setupLogfile()
-            XCGLogger.default.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: loggerUrl.path, fileLevel: .debug)
-        } catch (let error) {
-            XCGLogger.default.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
-            throw error
-        }
-    }
-    
-    func updateHistory() {
-        // Copy content of logger file to history file
-        let text = textCombiningHistoryAndSessionLog()
-        guard let fileHandle = FileHandle(forWritingAtPath: debugHistoryUrl.path) else {
-            print("cannot open log file for writing")
-            return
-        }
-        fileHandle.seekToEndOfFile()
-        fileHandle.write(text.data(using: .utf8)!)
-    }
-    
-    func textCombiningHistoryAndSessionLog() -> String {
-        do {
-            let history = try String(contentsOf: debugHistoryUrl)
-            let logged =  try String(contentsOf: loggerUrl)
-            return history + "\n\n\nBegin logger file\n\n" + logged
-        } catch (let error) {
-            return "Log unavailable \n\(error)"
-        }
-    }
-    
-    lazy var historyHeader: String = {
-        return "History from: \(Date())"
-    }()
-    
-    func userCanAccessDebugMenu() -> Bool {
-        #if DEBUG
-        return true
-        #else
-        return false
-        #endif
-        
-    }
-    
-    private func setupLogfile() throws {
-        let fileManager = FileManager.default
-        try deleteHistoryFileIfExistsAndNotCreatedToday(fileManager: fileManager, logfile: debugHistoryUrl)
-        createFileIfNotExists(fileManager: fileManager, url: debugHistoryUrl, initialContent: historyHeader)
-    }
-    
-    private func deleteHistoryFileIfExistsAndNotCreatedToday(fileManager: FileManager, logfile: URL) throws {
-        if fileManager.fileExists(atPath: logfile.path) {
-            let attributes = try! fileManager.attributesOfItem(atPath: logfile.path)
-            let createdDate: Date = (attributes[FileAttributeKey.creationDate] as! NSDate) as Date
-            if !NSCalendar.current.isDateInToday(createdDate) {
-                try fileManager.removeItem(at: logfile)
-            }
-        }
-    }
-    
-    private func createFileIfNotExists(fileManager: FileManager, url: URL, initialContent: String? = nil) {
-        if !fileManager.fileExists(atPath: url.path) {
-            let data = initialContent?.data(using: .utf8)
-            fileManager.createFile(atPath: url.path, contents: data, attributes: nil)
-        }
     }
 }
 

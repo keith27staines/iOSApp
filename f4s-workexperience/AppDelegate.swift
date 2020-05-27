@@ -64,12 +64,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        self.saveContext()
-        log.updateHistory()
+
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        self.saveContext()
+
     }
     
     func application(_: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -107,32 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         companyFileDownloadManager?.backgroundSessionCompletionHandler = completionHandler
         companyFileDownloadManager?.start()
     }
-    
-    // MARK: - Setup CoreData
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "f4s-workexperience")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let nserror = error as NSError? {
-                self.log.error(nserror, functionName: #function, fileName: #file, lineNumber: #line)
-                assertionFailure("error loading coredata persistent store \(nserror)")
-                fatalError("Unrecoverable error \(nserror), \(nserror.userInfo)")
-            }
-        })
-        return container
-    }()
-    
-    func saveContext () {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                log.error(nserror, functionName: #function, fileName: #file, lineNumber: #line)
-                assertionFailure("error saving to coredata context \(nserror)")
-            }
-        }
-    }
+
 }
 
 // MARK: helpers
