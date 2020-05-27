@@ -15,6 +15,7 @@ target 'f4s-workexperience' do
     pod 'XCGLogger'
     pod 'Bugsnag'
     pod 'DataCompression'
+    pod 'Mixpanel-swift'
 end
   
 target 'f4s-workexperienceTests' do
