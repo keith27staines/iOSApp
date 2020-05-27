@@ -95,7 +95,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         injected.user.uuid = userUuid
         //injected.userRepository.save(user: injected.user)
         logStartupInformation(userId: userUuid)
-        injected.log.identity(userId: userUuid)
         registrar.registerForRemoteNotifications()
         databaseDownloadManager.start()
     }

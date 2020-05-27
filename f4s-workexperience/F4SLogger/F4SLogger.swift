@@ -9,18 +9,45 @@
 import Foundation
 import XCGLogger
 import Bugsnag
+import Mixpanel
 import WorkfinderCommon
+import UIKit
 
 public class F4SLog : F4SAnalyticsAndDebugging {
     
+    var mixPanel: MixpanelInstance { return Mixpanel.mainInstance() }
+    
     public init() {
-        let environmentType = Config.environment
-        startBugsnag(environmentType: environmentType)
+        let environment = Config.environment
+        let user = UserRepository().loadUser()
+        let uuid = user.uuid ?? "unregistered"
+        let name = user.fullname
+        let email = user.email
+        startBugsnag(for: environment, uuid: uuid, name: name, email: email)
+        startMixpanel(for: environment, uuid: uuid, name: name, email: email)
     }
     
-    func startBugsnag(environmentType: EnvironmentType) {
+    func startMixpanel(for environment: EnvironmentType,
+                       uuid: F4SUUID,
+                       name: String?,
+                       email: String?) {
+        switch environment {
+        case .production:
+            Mixpanel.initialize(token: "611e14d8691f7e2dfbb7d5313b212b29")
+        case .staging:
+            Mixpanel.initialize(token: "611e14d8691f7e2dfbb7d5313b212b29")
+        }
+        mixPanel.identify(distinctId: uuid)
+        guard let email = email else { return }
+        mixPanel.people.set(properties: [ "$email": email])
+    }
+    
+    func startBugsnag(for environment: EnvironmentType,
+                      uuid: F4SUUID,
+                      name: String?,
+                      email: String?) {
         let bugsnagConfiguration = BugsnagConfiguration()
-        switch environmentType {
+        switch environment {
         case .staging:
             bugsnagConfiguration.releaseStage = "staging"
             bugsnagConfiguration.apiKey = "e965364f05c37d903a6aa3f34498cc3f"
@@ -29,16 +56,25 @@ public class F4SLog : F4SAnalyticsAndDebugging {
             bugsnagConfiguration.releaseStage = "production"
             bugsnagConfiguration.apiKey = "e965364f05c37d903a6aa3f34498cc3f"
         }
-        let user = UserRepository().loadUser()
-        bugsnagConfiguration.setUser(user.uuid ?? "unregistered user", withName:user.nickname, andEmail:user.email)
+        bugsnagConfiguration.setUser(uuid, withName:name, andEmail:email)
         Bugsnag.start(with: bugsnagConfiguration)
     }
 }
 
 extension F4SLog : F4SAnalytics {
     
-    public func track(event: TrackEvent, properties: [String : Any]?) {
+    public func track(event: TrackEvent) {
+        var mixpanelProperties = event.additionalProperties?.compactMapValues({ (value) -> MixpanelType? in
+            value as? MixpanelType
+        }) ?? [:]
 
+        if let userUuid = UserRepository().loadUser().uuid {
+            mixpanelProperties["with_user_id"] = userUuid
+        }
+        if let vendorUuid = UIDevice.current.identifierForVendor?.uuidString {
+            mixpanelProperties["device_id"] = vendorUuid
+        }
+        mixPanel.track(event: event.name, properties: mixpanelProperties)
     }
     
     public func screen(_ name: ScreenName) {

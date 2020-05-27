@@ -152,7 +152,6 @@ class SearchView: UIView {
     
     @objc func handleSearchTapped(_ sender: Any?) {
         endEditing(false)
-        log?.track(event: TrackEvent.mapShowSearchTap, properties: nil)
         stateMachine.searchTapped()
     }
     
@@ -162,13 +161,11 @@ class SearchView: UIView {
     }
     
     @objc func handleCompanyTapped(_ sender: Any?) {
-        log?.track(event: .mapSearchByNameTap, properties: nil)
         endEditing(false)
         stateMachine.companyTapped()
     }
     
     @objc func handleLocationTapped(_ sender: Any?) {
-        log?.track(event: .mapSearchByLocationTap, properties: nil)
         endEditing(false)
         stateMachine.locationTapped()
     }
@@ -251,7 +248,6 @@ class SearchView: UIView {
         heightConstraint?.priority = .defaultHigh
         heightConstraint?.isActive = true
         widthConstraint?.isActive = true
-        log?.screen(screenName)
     }
     
     func addSearchBar() {

@@ -3,11 +3,7 @@ import Foundation
 public protocol F4SAnalyticsAndDebugging : class, F4SAnalytics & F4SDebugging {}
 
 public protocol F4SAnalytics {
-    func identity(userId: F4SUUID)
-    func alias(userId: F4SUUID)
-    func track(event: TrackEvent, properties: [String: Any]?)
-    func screen(_ name: ScreenName)
-    func screen(_ name: ScreenName, originScreen: ScreenName)
+    func track(event: TrackEvent)
 }
 
 public protocol F4SDebugging {

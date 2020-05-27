@@ -8,6 +8,7 @@ protocol CompanyHostsSectionViewProtocol: class {
 }
 
 protocol CompanyHostsSectionPresenterProtocol {
+    var selectedHostRow: Int? { get }
     var isAssociationSelected: Bool { get }
     var selectedAssociation: HostLocationAssociationJson? { get }
     var numberOfRows: Int { get }
@@ -44,8 +45,9 @@ class CompanyHostsSectionPresenter: CompanyHostsSectionPresenterProtocol {
     func onDidTapLinkedIn(for association: HostLocationAssociationJson) {
         tappedLinkedin?(association)
     }
-    
+    var selectedHostRow: Int?
     func onDidTapHostCell(_ hostCell: HostLocationAssociationCell, atIndexPath indexPath: IndexPath) {
+        selectedHostRow = indexPath.row
         let association = associations[indexPath.row]
         var summaryState = associationsTextModel.expandableLabelStates[indexPath.row]
         summaryState.isExpanded.toggle()

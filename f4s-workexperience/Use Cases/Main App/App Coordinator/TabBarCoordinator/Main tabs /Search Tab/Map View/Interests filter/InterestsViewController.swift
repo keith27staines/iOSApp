@@ -278,14 +278,12 @@ extension InterestsViewController: UICollectionViewDelegateFlowLayout {
 extension InterestsViewController {
 
     @IBAction func refineSearchButtonTouched(_: UIButton) {
-        log?.track(event: .mapFiltersRefineSearchTap, properties: nil)
         selectedInterests = interestsRepository.saveSelectedInterests(selectedInterests)
         delegate?.interestsViewController(self, didChangeSelectedInterests: selectedInterests)
         self.dismiss(animated: true, completion: nil)
     }
 
     @objc func dismissInterestView(_: UIBarButtonItem) {
-        log?.track(event: .mapFiltersCancelTap, properties: nil)
         self.dismiss(animated: true, completion: nil)
     }
 }

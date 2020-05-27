@@ -239,16 +239,12 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
             switch navigationRow
             {
             case .about:
-                log?.track(event: .sideMenuAboutWorkfinderLinkTap, properties: nil)
                 contentType = .about
             case .faq:
-                log?.track(event: .sideMenuFAQLinkTap, properties: nil)
                 contentType = .faqs
             case .terms:
-                log?.track(event: .sideMenuTermsAndConditionsLinkTap, properties: nil)
                 contentType = .terms
             case .privacyPolicy:
-                log?.track(event: .sideMenuTermsAndConditionsLinkTap, properties: nil)
                 contentType = .privacyPolicy
             }
             switch contentType.openingMode {

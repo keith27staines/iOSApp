@@ -62,9 +62,9 @@ public class MockF4SAnalyticsAndDebugging : F4SAnalyticsAndDebugging {
         aliases.append(userId)
     }
 
-    public func track(event: TrackEvent, properties: [String : Any]?) {
-        let notNilProperties = properties ?? [:]
-        analyticsItems.append(AnalyticsItem(type: .track, name: event.rawValue, properties: notNilProperties))
+    public func track(event: TrackEvent) {
+        let notNilProperties = event.additionalProperties ?? [:]
+        analyticsItems.append(AnalyticsItem(type: .track, name: event.name, properties: notNilProperties))
     }
     
     public func screen(_ name: ScreenName) {

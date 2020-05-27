@@ -194,7 +194,6 @@ class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewP
     }
     
     @objc func didTapApply() {
-        log?.track(event: .companyDetailsApplyTap, properties: nil)
         presenter.onDidTapApply()
     }
     
@@ -292,21 +291,13 @@ extension CompanyMainView : MKMapViewDelegate {
 
 extension CompanyMainView: SectionSelectorViewDelegate {
     func sectionSelectorView(_ sectionSelectorView: SectionSelectorView, didTapOnDescriptor descriptor: CompanyTableSectionDescriptor) {
-        let event: TrackEvent
         let numberOfRows: Int
         switch descriptor.sectionType {
-        case .companySummary:
-            event = .companyDetailsCompanyTabTap
-            numberOfRows = summarySectionPresenter.numberOfRows
-        case .companyData:
-            event = .companyDetailsDataTabTap
-            numberOfRows = dataSectionPresenter.numberOfRows
-        case .companyHosts:
-            event = .companyDetailsPeopleTabTap
-            numberOfRows = hostsSectionPresenter.numberOfRows
+        case .companySummary: numberOfRows = summarySectionPresenter.numberOfRows
+        case .companyData: numberOfRows = dataSectionPresenter.numberOfRows
+        case .companyHosts: numberOfRows = hostsSectionPresenter.numberOfRows
         }
         if numberOfRows > 0 {
-            log?.track(event: event, properties: nil)
             tableView.scrollToRow(at: IndexPath(row: 0, section: descriptor.index), at: .top, animated: true)
         }
     }

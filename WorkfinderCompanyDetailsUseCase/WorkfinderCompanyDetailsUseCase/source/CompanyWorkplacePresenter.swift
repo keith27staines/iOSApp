@@ -109,7 +109,7 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
         self.companyWorkplace = companyWorkplace
         self.coordinator = coordinator
         self.log = log
-        self.mainViewPresenter = CompanyMainViewPresenter(companyWorkplace: companyWorkplace, coordinator: coordinator)
+        self.mainViewPresenter = CompanyMainViewPresenter(companyWorkplace: companyWorkplace, coordinator: coordinator, log: log)
         super.init()
     }
     

@@ -49,6 +49,8 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     private func showApplicationSubmittedSuccessfully() {
         guard let window = UIApplication.shared.keyWindow
             else { return }
+        let log = injected.log
+        log.track(event: TrackEventFactory.makeApplyComplete())
         let navigationController = navigationRouter.navigationController
         window.addSubview(successPopup)
         navigationController.navigationBar.layer.zPosition = -1

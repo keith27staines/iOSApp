@@ -168,7 +168,6 @@ class MapViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        log?.screen(screenName)
         adjustNavigationBar()
         displayRefineSearchLabelAnimated()
     }
@@ -513,7 +512,6 @@ extension MapViewController: GMSMapViewDelegate {
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        coordinator?.injected.log.track(event: TrackEvent.mapPinButtonTap, properties: nil)
         let origin = mapView.projection.point(for: marker.position)
         let companies = companiesFromMarker(marker)
         presentCompaniesPopup(for: companies, origin: origin)
@@ -553,7 +551,6 @@ extension MapViewController: GMUClusterManagerDelegate {
             cameraWillMoveAction = .explodeCluster(cluster)
             moveCamera(toShow: explodedBounds)
         } else {
-            log?.track(event: TrackEvent.mapClusterTap, properties: nil)
             presentWorkplacesPopup(for: cluster)
         }
     }
@@ -654,7 +651,6 @@ extension MapViewController {
     }
     
     @IBAction func filtersButtonTouched(_: UIButton) {
-        log?.track(event: TrackEvent.mapShowFiltersButtonTap, properties: nil)
         hideRefineSearchLabelAnimated()
         coordinator?.filtersButtonWasTapped()
     }
@@ -930,9 +926,7 @@ extension MapViewController : SearchViewDelegate {
         case .collapsed, .horizontallyExpanded:
             return
         case .searchingLocation:
-            log?.track(event: .mapSearchGotoLocationTap, properties: nil)
             setUserLocation(from: item.primaryText, placeId: item.uuidString)
-            
         case .searchingPeople:
             print("Display person: \(item.matchOnText)")
         case .searchingCompany:

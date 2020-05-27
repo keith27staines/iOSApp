@@ -22,6 +22,7 @@ protocol CompanyMainViewPresenterProtocol: class {
 }
 
 class CompanyMainViewPresenter: CompanyMainViewPresenterProtocol {
+    var log: F4SAnalyticsAndDebugging?
     weak var coordinator: CompanyMainViewCoordinatorProtocol?
     weak var view: CompanyMainViewProtocol?
     var companyWorkplace: CompanyWorkplace
@@ -30,7 +31,6 @@ class CompanyMainViewPresenter: CompanyMainViewPresenterProtocol {
     var companyLocation: LatLon {
         return LatLon(latitude: CGFloat(pin.lat), longitude: CGFloat(pin.lon))
     }
-    
     var selectedAssociation: HostLocationAssociationJson? { return hostsSectionPresenter.selectedAssociation }
     var isHostSelected: Bool { return hostsSectionPresenter.isAssociationSelected }
     lazy var headerViewPresenter: CompanyHeaderViewPresenterProtocol = {
@@ -57,13 +57,25 @@ class CompanyMainViewPresenter: CompanyMainViewPresenterProtocol {
         return companyHostsPresenter
     }()
 
-    init(companyWorkplace: CompanyWorkplace, coordinator: CompanyMainViewCoordinatorProtocol) {
+    init(companyWorkplace: CompanyWorkplace,
+         coordinator: CompanyMainViewCoordinatorProtocol,
+         log: F4SAnalyticsAndDebugging?) {
+        self.log = log
         self.coordinator = coordinator
         self.companyWorkplace = companyWorkplace
     }
     
     func onDidTapApply() {
         guard let association = selectedAssociation else { return }
+        let hostRowIndex = hostsSectionPresenter.selectedHostRow  ?? 0
+        let host = hostsSectionPresenter.selectedAssociation?.host.uuid ?? ""
+        let company = companyWorkplace.companyJson.uuid ?? ""
+        let event = TrackEventFactory.makeApplyStart(
+            hostRowIndex: hostRowIndex,
+            host: host,
+            company: company)
+        
+        log?.track(event: event)
         coordinator?.applyTo(companyWorkplace: companyWorkplace, hostLocationAssociation: association)
     }
 }

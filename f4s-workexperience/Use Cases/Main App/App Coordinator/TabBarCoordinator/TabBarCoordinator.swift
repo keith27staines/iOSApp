@@ -95,7 +95,6 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     }
     
     public func toggleMenu(completion: ((Bool) -> ())? = nil) {
-        injected.log.track(event: .sideMenuToggle, properties: nil)
         drawerController?.toggleLeftDrawerSide(animated: true, completion: completion)
     }
     
@@ -230,11 +229,12 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
 
 extension TabBarCoordinator: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        let log = injected.log
         switch viewController {
         case searchCoordinator.navigationRouter.navigationController:
-            injected.log.track(event: TrackEvent.searchTabTap, properties: nil)
+            log.track(event: TrackEventFactory.makeTabTap(tab: .search))
         case applicationsCoordinator.navigationRouter.navigationController:
-            injected.log.track(event: TrackEvent.applicationsTabTap, properties: nil)
+            log.track(event: TrackEventFactory.makeTabTap(tab: .applications))
         default:
             fatalError("unknown coordinator")
         }
