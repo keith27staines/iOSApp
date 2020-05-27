@@ -25,6 +25,15 @@ public class F4SLog : F4SAnalyticsAndDebugging {
         let email = user.email
         startBugsnag(for: environment, uuid: uuid, name: name, email: email)
         startMixpanel(for: environment, uuid: uuid, name: name, email: email)
+        trackAppOpenedEvent()
+    }
+    
+    func trackAppOpenedEvent() {
+        let localStore = LocalStore()
+        let isFirstLaunch = localStore.value(key: .isFirstLaunch) as? Bool ?? true
+        let openEvent: TrackEvent
+        openEvent = isFirstLaunch ? TrackEventFactory.makeFirstUse() : TrackEventFactory.makeAppOpen()
+        self.track(event: openEvent)
     }
     
     func startMixpanel(for environment: EnvironmentType,
@@ -32,10 +41,8 @@ public class F4SLog : F4SAnalyticsAndDebugging {
                        name: String?,
                        email: String?) {
         switch environment {
-        case .production:
-            Mixpanel.initialize(token: "611e14d8691f7e2dfbb7d5313b212b29")
-        case .staging:
-            Mixpanel.initialize(token: "611e14d8691f7e2dfbb7d5313b212b29")
+        case .production: Mixpanel.initialize(token: "611e14d8691f7e2dfbb7d5313b212b29")
+        case .staging: Mixpanel.initialize(token: "611e14d8691f7e2dfbb7d5313b212b29")
         }
         mixPanel.identify(distinctId: uuid)
         guard let email = email else { return }

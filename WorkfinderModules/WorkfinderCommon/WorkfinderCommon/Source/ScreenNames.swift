@@ -9,6 +9,7 @@ public enum ScreenName: String {
 }
 
 public enum TrackEventType: String {
+    case firstUse
     case appOpen
     case tabTap
     case companyView
@@ -36,6 +37,7 @@ public class TrackEventFactory {
     public static func makeAppOpen() -> TrackEvent { TrackEvent(type: .appOpen) }
     public static func makeCompanyView() -> TrackEvent { TrackEvent(type: .companyView) }
     public static func makeApplyComplete() -> TrackEvent { TrackEvent(type: .applyComplete) }
+    public static func makeFirstUse() -> TrackEvent { TrackEvent(type: .firstUse) }
     
     public static func makeTabTap(tab: TabName) -> TrackEvent {
         TrackEvent(
