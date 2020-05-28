@@ -8,7 +8,6 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     let presenter: RegisterAndSignInPresenterProtocol
     lazy var messageHandler = UserMessageHandler(presenter: self)
     let linkFont = UIFont.systemFont(ofSize: 14)
-    var inputControlBottom: CGFloat = 0.0
     let mode: RegisterAndSignInMode
     @objc var switchMode: (() -> Void)?
     @objc var onTapPrimaryButton: (() -> Void)?
@@ -74,7 +73,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     
     lazy var email: UnderlinedNextResponderTextFieldStack = {
         let fieldName = NSLocalizedString("Email address", comment: "")
-        let stack = self.makeTextView(fieldName: fieldName)
+        let stack = self.makeTextStack(fieldName: fieldName)
         let textField = stack.textfield
         textField.returnKeyType = .next
         textField.keyboardType = .emailAddress
@@ -88,7 +87,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     
     lazy var guardianEmail: UnderlinedNextResponderTextFieldStack = {
         let fieldName = NSLocalizedString("Parent or guardian email", comment: "")
-        let stack = self.makeTextView(fieldName: fieldName)
+        let stack = self.makeTextStack(fieldName: fieldName)
         let textField = stack.textfield
         textField.returnKeyType = .next
         textField.keyboardType = .emailAddress
@@ -102,7 +101,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     
     lazy var fullname: UnderlinedNextResponderTextFieldStack = {
         let fieldName = NSLocalizedString("First and last name", comment: "")
-        let stack = self.makeTextView(fieldName: fieldName)
+        let stack = self.makeTextStack(fieldName: fieldName)
         let textField = stack.textfield
         textField.returnKeyType = .next
         textField.keyboardType = .alphabet
@@ -116,7 +115,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     
     lazy var nickname: UnderlinedNextResponderTextFieldStack = {
         let fieldName = NSLocalizedString("nickname", comment: "The user's preferred short name for themself")
-        let stack = self.makeTextView(fieldName: fieldName)
+        let stack = self.makeTextStack(fieldName: fieldName)
         let textField = stack.textfield
         textField.returnKeyType = .next
         textField.keyboardType = .alphabet
@@ -130,7 +129,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     
     lazy var phone: UnderlinedNextResponderTextFieldStack = {
         let fieldName = NSLocalizedString("Phone number", comment: "")
-        let stack = self.makeTextView(fieldName: fieldName)
+        let stack = self.makeTextStack(fieldName: fieldName)
         let textField = stack.textfield
         textField.keyboardType = .phonePad
         textField.autocapitalizationType = .none
@@ -143,7 +142,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     
     lazy var password: UnderlinedNextResponderTextFieldStack = {
         let fieldName = NSLocalizedString("password", comment: "")
-        let stack = self.makeTextView(fieldName: fieldName, nextResponder: self.phone.textfield)
+        let stack = self.makeTextStack(fieldName: fieldName, nextResponder: self.phone.textfield)
         if #available(iOS 12.0, *)  {
             stack.textfield.textContentType = (mode == .register) ? .newPassword : .password
         } else {
@@ -346,7 +345,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         return view
     }()
     
-    func makeTextView(fieldName: String,
+    func makeTextStack(fieldName: String,
                       nextResponder: UIResponder? = nil) -> UnderlinedNextResponderTextFieldStack {
         let field =  UnderlinedNextResponderTextFieldStack(
             fieldName: fieldName,
@@ -393,18 +392,15 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
 
 extension RegisterAndSignInBaseViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        let point = CGPoint(x: 0, y: textField.frame.maxY)
-        inputControlBottom = textField.superview!.convert(point, to: nil).y
+
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        inputControlBottom = 0
+
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField === password.textfield {
-            textField.resignFirstResponder()
-        }
+        if textField === password.textfield { textField.resignFirstResponder() }
         return true
     }
 }

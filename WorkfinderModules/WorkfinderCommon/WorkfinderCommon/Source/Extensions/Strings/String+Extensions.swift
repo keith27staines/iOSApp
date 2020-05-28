@@ -30,6 +30,8 @@ extension String {
     }
 }
 
+
+
 //MARK:- Stripping LTD etc postfixes
 extension String {
     /// Removes common company suffixes including ltd, plc etc, whether

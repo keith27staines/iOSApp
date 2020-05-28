@@ -66,6 +66,9 @@
 		FC96DE39245C2F930074011B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96DE38245C2F930074011B /* SignInViewController.swift */; };
 		FC96DE3B245C37C20074011B /* RegisterAndSignInMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96DE3A245C37C20074011B /* RegisterAndSignInMode.swift */; };
 		FC9865B6229D380A006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865B5229D380A006D3E63 /* README */; };
+		FCA2901E247F653500588F6E /* RegisterAndSignInUserBasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA2901D247F653500588F6E /* RegisterAndSignInUserBasePresenter.swift */; };
+		FCA29020247F65D900588F6E /* SignInUserPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA2901F247F65D900588F6E /* SignInUserPresenter.swift */; };
+		FCA29022247F67EA00588F6E /* PhoneNumberValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA29021247F67EA00588F6E /* PhoneNumberValidator.swift */; };
 		FCCA4E3224570CE900DFA696 /* RegisterUserLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA4E3124570CE900DFA696 /* RegisterUserLogic.swift */; };
 		FCE4F4DE24740C37005ED80D /* DraftUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE4F4DD24740C37005ED80D /* DraftUpdater.swift */; };
 		FCE8DA9A2320E24600934E2F /* ApplyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DA992320E24600934E2F /* ApplyCoordinator.swift */; };
@@ -145,6 +148,9 @@
 		FC96DE38245C2F930074011B /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		FC96DE3A245C37C20074011B /* RegisterAndSignInMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterAndSignInMode.swift; sourceTree = "<group>"; };
 		FC9865B5229D380A006D3E63 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		FCA2901D247F653500588F6E /* RegisterAndSignInUserBasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterAndSignInUserBasePresenter.swift; sourceTree = "<group>"; };
+		FCA2901F247F65D900588F6E /* SignInUserPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUserPresenter.swift; sourceTree = "<group>"; };
+		FCA29021247F67EA00588F6E /* PhoneNumberValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberValidator.swift; sourceTree = "<group>"; };
 		FCCA4E3124570CE900DFA696 /* RegisterUserLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserLogic.swift; sourceTree = "<group>"; };
 		FCE4F4DD24740C37005ED80D /* DraftUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftUpdater.swift; sourceTree = "<group>"; };
 		FCE5190B2249388200B550C9 /* Mustache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mustache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -282,14 +288,17 @@
 			isa = PBXGroup;
 			children = (
 				FC343CF92445F17600347BC2 /* RegisterAndSignInCoordinator.swift */,
+				FCA2901D247F653500588F6E /* RegisterAndSignInUserBasePresenter.swift */,
+				FC96DE36245C1EDD0074011B /* RegisterAndSignInBaseViewController.swift */,
 				FC343CF72445F10A00347BC2 /* RegisterUserViewController.swift */,
 				FC343CFB244600EF00347BC2 /* RegisterUserPresenter.swift */,
-				FCCA4E3124570CE900DFA696 /* RegisterUserLogic.swift */,
 				FC96DE38245C2F930074011B /* SignInViewController.swift */,
-				FC96DE36245C1EDD0074011B /* RegisterAndSignInBaseViewController.swift */,
+				FCA2901F247F65D900588F6E /* SignInUserPresenter.swift */,
+				FCCA4E3124570CE900DFA696 /* RegisterUserLogic.swift */,
 				FC96DE3A245C37C20074011B /* RegisterAndSignInMode.swift */,
 				FC5ABD0124607AE000AA22BD /* NextHideToolbar.swift */,
 				FC4A940F2478BFB70066B8E3 /* HTTPErrorJson.swift */,
+				FCA29021247F67EA00588F6E /* PhoneNumberValidator.swift */,
 			);
 			path = "User sign in";
 			sourceTree = "<group>";
@@ -575,6 +584,7 @@
 				FC23BCE4243AFA730075F359 /* DateOfBirthCollectorViewController.swift in Sources */,
 				FC29992C231EC41A00F83FB6 /* F4SDisplayInformationViewController.swift in Sources */,
 				FC299938231EC50300F83FB6 /* F4SDayCalendarViewCell.swift in Sources */,
+				FCA29022247F67EA00588F6E /* PhoneNumberValidator.swift in Sources */,
 				FC23BD0A243B33510075F359 /* CoverLetterCoordinator.swift in Sources */,
 				FC23BCE8243B30A10075F359 /* ApplicationModel.swift in Sources */,
 				FC6A50D2245ABA4300EF5C92 /* TextblockPicklist.swift in Sources */,
@@ -587,6 +597,7 @@
 				FC6A50CE245AB9C400EF5C92 /* TextSearchPicklist.swift in Sources */,
 				FC6A50D8245AD59800EF5C92 /* PicklistDataSourceAndDelegate.swift in Sources */,
 				FC6A50D0245AB9F100EF5C92 /* AvailabilityPeriodPicklist.swift in Sources */,
+				FCA2901E247F653500588F6E /* RegisterAndSignInUserBasePresenter.swift in Sources */,
 				FC299934231EC50300F83FB6 /* F4SCalendarContainerViewController.swift in Sources */,
 				FC299935231EC50300F83FB6 /* F4SMonthHeaderView.swift in Sources */,
 				FC2917F42461C2660011EFCD /* PicklistTableViewCells.swift in Sources */,
@@ -594,6 +605,7 @@
 				FC23BCFF243B33510075F359 /* TemplateParser.swift in Sources */,
 				FC23BD00243B33510075F359 /* Common.swift in Sources */,
 				FCE8DA9A2320E24600934E2F /* ApplyCoordinator.swift in Sources */,
+				FCA29020247F65D900588F6E /* SignInUserPresenter.swift in Sources */,
 				FC1053712458784200024706 /* SuccessPopupView.swift in Sources */,
 				FC42C8A6243C5C9A00F81232 /* PicklistViewController.swift in Sources */,
 				FC70249324629FFF007A7667 /* FreeTextEditorViewController.swift in Sources */,

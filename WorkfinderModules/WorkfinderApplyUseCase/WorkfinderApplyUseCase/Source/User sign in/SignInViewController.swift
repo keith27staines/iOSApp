@@ -25,11 +25,16 @@ class SignInViewController: RegisterAndSignInBaseViewController {
     }
     
     override func updatePresenter()  {
-        presenter.email = email.textfield.text
-        presenter.password = password.textfield.text
+        presenter.email = trim(email.textfield.text)
+        presenter.password = trim(password.textfield.text)
         primaryButton.isEnabled = presenter.isPrimaryButtonEnabled
         email.state = presenter.emailValidityState
         password.state = presenter.passwordValidityState
+    }
+    
+    private func trim(_ string:  String?) -> String? {
+        guard let string = string else { return nil }
+        return string.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
 

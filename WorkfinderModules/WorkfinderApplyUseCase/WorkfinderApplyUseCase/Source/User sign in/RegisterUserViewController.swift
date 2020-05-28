@@ -28,7 +28,7 @@ class RegisterUserViewController: RegisterAndSignInBaseViewController {
         password.textChanged?(self.presenter.password)
         if showGuardianEmail {
             email.textfield.nextResponderField = guardianEmail.textfield
-            guardianEmail.textfield = fullname.textfield
+            guardianEmail.textfield.nextResponderField = fullname.textfield
         } else {
             email.textfield.nextResponderField = fullname.textfield
         }
@@ -54,12 +54,12 @@ class RegisterUserViewController: RegisterAndSignInBaseViewController {
     }
     
     override func updatePresenter()  {
-        presenter.fullname = fullname.textfield.text
-        presenter.nickname = nickname.textfield.text
-        presenter.email = email.textfield.text
-        presenter.guardianEmail = guardianEmail.textfield.text
-        presenter.password = password.textfield.text
-        presenter.phone = phone.textfield.text
+        presenter.fullname = trim(fullname.textfield.text)
+        presenter.nickname = trim(nickname.textfield.text)
+        presenter.email = trim(email.textfield.text)
+        presenter.guardianEmail = trim(guardianEmail.textfield.text)
+        presenter.password = trim(password.textfield.text)
+        presenter.phone = trim(phone.textfield.text)
         presenter.isTermsAndConditionsAgreed = termsAgreedSwitch.isOn
         primaryButton.isEnabled = presenter.isPrimaryButtonEnabled
         email.state = presenter.emailValidityState
@@ -68,6 +68,11 @@ class RegisterUserViewController: RegisterAndSignInBaseViewController {
         password.state = presenter.passwordValidityState
         phone.state = presenter.phoneValidityState
         presenter.nickname = String(presenter.fullname?.split(separator: " ").first ?? "")
+    }
+    
+    private func trim(_ string:  String?) -> String? {
+        guard let string = string else { return nil }
+        return string.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
 

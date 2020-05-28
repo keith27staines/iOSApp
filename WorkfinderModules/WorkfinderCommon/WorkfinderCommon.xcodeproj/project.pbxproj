@@ -68,6 +68,7 @@
 		FC9535A5231E7E7700F4A9DA /* CompanyWorkplacePins.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9535A4231E7E7700F4A9DA /* CompanyWorkplacePins.swift */; };
 		FC9670A6225A279300318F69 /* F4SSelectedInterestsRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9670A5225A279300318F69 /* F4SSelectedInterestsRepositoryProtocol.swift */; };
 		FC9865BC229D3963006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865BB229D3963006D3E63 /* README */; };
+		FCA2901B247F636100588F6E /* String+isEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA2901A247F636100588F6E /* String+isEmail.swift */; };
 		FCA91E752234043D007ED308 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91E6B2234043D007ED308 /* WorkfinderCommon.framework */; };
 		FCA91E7A2234043D007ED308 /* WorkfinderCommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91E792234043D007ED308 /* WorkfinderCommonTests.swift */; };
 		FCA91E7C2234043D007ED308 /* WorkfinderCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA91E6E2234043D007ED308 /* WorkfinderCommon.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -197,6 +198,7 @@
 		FC9535A4231E7E7700F4A9DA /* CompanyWorkplacePins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyWorkplacePins.swift; sourceTree = "<group>"; };
 		FC9670A5225A279300318F69 /* F4SSelectedInterestsRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SSelectedInterestsRepositoryProtocol.swift; sourceTree = "<group>"; };
 		FC9865BB229D3963006D3E63 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		FCA2901A247F636100588F6E /* String+isEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+isEmail.swift"; sourceTree = "<group>"; };
 		FCA91E6B2234043D007ED308 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA91E6E2234043D007ED308 /* WorkfinderCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderCommon.h; sourceTree = "<group>"; };
 		FCA91E6F2234043D007ED308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -365,6 +367,15 @@
 				FC06604F232645D800496FE2 /* F4SFavouritesRepository.swift */,
 			);
 			path = "Repository protocols";
+			sourceTree = "<group>";
+		};
+		FCA2901C247F642600588F6E /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				FCE5191522493B4C00B550C9 /* String+Extensions.swift */,
+				FCA2901A247F636100588F6E /* String+isEmail.swift */,
+			);
+			path = Strings;
 			sourceTree = "<group>";
 		};
 		FCA91E612234043D007ED308 = {
@@ -556,7 +567,7 @@
 		FCF5AEFD2248B2A300D9B8D1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				FCE5191522493B4C00B550C9 /* String+Extensions.swift */,
+				FCA2901C247F642600588F6E /* Strings */,
 				FCE5192022493D3300B550C9 /* Date+Extensions.swift */,
 				FC12B10022F3415200C33410 /* JsonDateFormatterExtension.swift */,
 			);
@@ -713,6 +724,7 @@
 				FCDB073C2286F8B00053347F /* Analytics and debugging.swift in Sources */,
 				FC8F9580233BA6710027BE02 /* MockDatabaseDownload.swift in Sources */,
 				FCE5192122493D3300B550C9 /* Date+Extensions.swift in Sources */,
+				FCA2901B247F636100588F6E /* String+isEmail.swift in Sources */,
 				FCC1DF5F232507530074D5C1 /* SocialShare.swift in Sources */,
 				FC426F04232FAEA9004F8A3E /* WorkfinderEndpoint.swift in Sources */,
 				FC53D6DC2323BA4300A339ED /* F4SCompanyRepository.swift in Sources */,

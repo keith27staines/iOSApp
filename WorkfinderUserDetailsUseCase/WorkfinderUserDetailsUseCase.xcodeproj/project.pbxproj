@@ -14,7 +14,6 @@
 		FC93DC22231FBA4400F1CE23 /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DC21231FBA4400F1CE23 /* WorkfinderCoordinators.framework */; };
 		FC93DC26231FBA4400F1CE23 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DC25231FBA4400F1CE23 /* WorkfinderUI.framework */; };
 		FC93DC3223200B2700F1CE23 /* PushNotificationAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC3023200B2700F1CE23 /* PushNotificationAuthorization.swift */; };
-		FC93DC3C23200CA200F1CE23 /* String+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC3B23200CA200F1CE23 /* String+extensions.swift */; };
 		FCE8DA8E2320DB5300934E2F /* UserDetails.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCE8DA8D2320DB5300934E2F /* UserDetails.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -41,7 +40,6 @@
 		FC93DC23231FBA4400F1CE23 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC93DC25231FBA4400F1CE23 /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC93DC3023200B2700F1CE23 /* PushNotificationAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationAuthorization.swift; sourceTree = "<group>"; };
-		FC93DC3B23200CA200F1CE23 /* String+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extensions.swift"; sourceTree = "<group>"; };
 		FCE8DA8D2320DB5300934E2F /* UserDetails.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = UserDetails.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,7 +108,6 @@
 			isa = PBXGroup;
 			children = (
 				FC93DC3023200B2700F1CE23 /* PushNotificationAuthorization.swift */,
-				FC93DC3B23200CA200F1CE23 /* String+extensions.swift */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -240,7 +237,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC93DC3223200B2700F1CE23 /* PushNotificationAuthorization.swift in Sources */,
-				FC93DC3C23200CA200F1CE23 /* String+extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

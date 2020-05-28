@@ -11,10 +11,10 @@ public class UnderlinedNextResponderTextFieldStack: UIStackView {
     }()
     
     public var textfield: NextResponderTextField = {
-        let nextResponderField = NextResponderTextField()
-        nextResponderField.font = UIFont.systemFont(ofSize: 24)
-        nextResponderField.addTarget(self, action: #selector(_textChanged), for: .editingChanged)
-        return nextResponderField
+        let textField = NextResponderTextField()
+        textField.font = UIFont.systemFont(ofSize: 24)
+        textField.addTarget(self, action: #selector(_textChanged), for: .editingChanged)
+        return textField
     }()
     
     override public func becomeFirstResponder() -> Bool {
