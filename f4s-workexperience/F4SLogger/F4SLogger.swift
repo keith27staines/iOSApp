@@ -14,17 +14,23 @@ import WorkfinderCommon
 import UIKit
 
 public class F4SLog : F4SAnalyticsAndDebugging {
-    
+
     var mixPanel: MixpanelInstance { return Mixpanel.mainInstance() }
+    
+    public func updateIdentity() {
+        let user = UserRepository().loadUser()
+        guard let userId = user.uuid else { return }
+        if let email = user.email {
+            mixPanel.people.set(properties: ["$email": email])
+        }
+        mixPanel.identify(distinctId: userId)
+    }
     
     public init() {
         let environment = Config.environment
-        let user = UserRepository().loadUser()
-        let uuid = user.uuid ?? "unregistered"
-        let name = user.fullname
-        let email = user.email
-        startBugsnag(for: environment, uuid: uuid, name: name, email: email)
-        startMixpanel(for: environment, uuid: uuid, name: name, email: email)
+        startBugsnag(for: environment)
+        startMixpanel(for: environment)
+        updateIdentity()
         trackAppOpenedEvent()
     }
     
@@ -36,23 +42,14 @@ public class F4SLog : F4SAnalyticsAndDebugging {
         self.track(event: openEvent)
     }
     
-    func startMixpanel(for environment: EnvironmentType,
-                       uuid: F4SUUID,
-                       name: String?,
-                       email: String?) {
+    func startMixpanel(for environment: EnvironmentType) {
         switch environment {
         case .production: Mixpanel.initialize(token: "611e14d8691f7e2dfbb7d5313b212b29")
         case .staging: Mixpanel.initialize(token: "611e14d8691f7e2dfbb7d5313b212b29")
         }
-        mixPanel.identify(distinctId: uuid)
-        guard let email = email else { return }
-        mixPanel.people.set(properties: [ "$email": email])
     }
     
-    func startBugsnag(for environment: EnvironmentType,
-                      uuid: F4SUUID,
-                      name: String?,
-                      email: String?) {
+    func startBugsnag(for environment: EnvironmentType) {
         let bugsnagConfiguration = BugsnagConfiguration()
         switch environment {
         case .staging:
@@ -63,7 +60,8 @@ public class F4SLog : F4SAnalyticsAndDebugging {
             bugsnagConfiguration.releaseStage = "production"
             bugsnagConfiguration.apiKey = "e965364f05c37d903a6aa3f34498cc3f"
         }
-        bugsnagConfiguration.setUser(uuid, withName:name, andEmail:email)
+        let user = UserRepository().loadUser()
+        bugsnagConfiguration.setUser(user.uuid, withName:user.fullname, andEmail:user.email)
         Bugsnag.start(with: bugsnagConfiguration)
     }
 }
@@ -101,14 +99,6 @@ extension F4SLog : F4SAnalytics {
 //        ]
 //        Analytics.logEvent("SCREEN", parameters: parameters)
         print("SCREEN DID APPEAR: \(screen) from \(previous)")
-    }
-    
-    public func identity(userId: F4SUUID) {
-
-    }
-    
-    public func alias(userId: F4SUUID) {
-
     }
 }
 

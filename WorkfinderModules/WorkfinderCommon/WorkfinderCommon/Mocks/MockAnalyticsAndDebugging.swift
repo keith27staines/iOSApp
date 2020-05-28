@@ -52,8 +52,9 @@ public class MockF4SAnalyticsAndDebugging : F4SAnalyticsAndDebugging {
     
     public var analyticsItems = [AnalyticsItem]()
     public var identities: [F4SUUID] = []
-    public func identity(userId: F4SUUID) {
-        identities.append(userId)
+    
+    public func updateIdentity() {
+        identities.append(UUID().uuidString)
     }
     
     public var aliases: [F4SUUID] = []

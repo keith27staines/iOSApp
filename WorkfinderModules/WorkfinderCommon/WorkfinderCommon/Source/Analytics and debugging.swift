@@ -1,6 +1,8 @@
 import Foundation
 
-public protocol F4SAnalyticsAndDebugging : class, F4SAnalytics & F4SDebugging {}
+public protocol F4SAnalyticsAndDebugging : class, F4SAnalytics & F4SDebugging {
+    func updateIdentity()
+}
 
 public protocol F4SAnalytics {
     func track(event: TrackEvent)

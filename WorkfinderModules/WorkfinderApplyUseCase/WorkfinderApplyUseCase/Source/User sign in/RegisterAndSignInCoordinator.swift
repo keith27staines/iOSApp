@@ -25,6 +25,7 @@ class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, Register
     }
     
     func onUserRegisteredAndCandidateCreated(pop: Bool = true) {
+        injected.log.updateIdentity()
         if let previous = firstViewController?.previousViewController {
             // for pushed vcs
             navigationRouter.popToViewController(previous, animated: true)
