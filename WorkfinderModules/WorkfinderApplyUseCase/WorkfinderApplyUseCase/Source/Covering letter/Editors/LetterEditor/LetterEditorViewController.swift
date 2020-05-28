@@ -17,7 +17,21 @@ class LetterEditorViewController: UIViewController, LetterEditorViewProtocol {
     lazy var messageHandler = UserMessageHandler(presenter: self)
     let presenter: LetterEditorPresenterProtocol
     
-    func refresh() { tableView.reloadData() }
+    func refresh() {
+        tableView.reloadData()
+        if let error = presenter.consistencyError {
+            switch error.errorType {
+            case .custom(let title, description: let description):
+                let alert = UIAlertController(title: title, message: description, preferredStyle: .alert)
+                let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(ok)
+                present(alert, animated: true, completion: nil)
+            default:
+                messageHandler.displayOptionalErrorIfNotNil(error, cancelHandler: nil, retryHandler: nil)
+            }
+            
+        }
+    }
     
     lazy var mainStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
@@ -65,6 +79,11 @@ class LetterEditorViewController: UIViewController, LetterEditorViewProtocol {
         presenter.onViewDidLoad(view: self)
         navigationItem.title = "Select values"
         self.loadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        presenter.onViewDidAppear()
+        refresh()
     }
     
     func loadData() {
@@ -151,7 +170,6 @@ extension LetterEditorViewController: UITableViewDataSource {
 class SectionFooterCell: UITableViewHeaderFooterView {
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        //contentView.heightAnchor.constraint(equalToConstant: 8).isActive = true
         backgroundColor = UIColor.white
         contentView.backgroundColor = UIColor.white
     }

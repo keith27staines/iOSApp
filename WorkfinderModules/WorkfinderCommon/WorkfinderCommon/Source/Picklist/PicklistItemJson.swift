@@ -1,6 +1,11 @@
 
 import Foundation
 
+public struct PicklistItemRange: Codable {
+    public var lower: Int?
+    public var upper: Int?
+}
+
 public struct PicklistItemJson: Codable {
     public static let otherItemUuid = "otherUuid"
     public static let freeTextUuid = "textUuid"
@@ -13,6 +18,8 @@ public struct PicklistItemJson: Codable {
     public var otherValue: String?
     public var isOther: Bool { return uuid == PicklistItemJson.otherItemUuid }
     public var isFreeText: Bool { return uuid == PicklistItemJson.freeTextUuid }
+    public var range: PicklistItemRange?
+    
     public init(uuid: String, value: String) {
         self.uuid = uuid
         self.value = value

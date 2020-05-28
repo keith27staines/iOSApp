@@ -3,7 +3,9 @@ import Foundation
 import WorkfinderCommon
 
 protocol LetterEditorPresenterProtocol {
+    var consistencyError: WorkfinderError? { get }
     func onViewDidLoad(view: LetterEditorViewProtocol)
+    func onViewDidAppear()
     func loadData(completion: @escaping (Error?) -> Void )
     func onDidDismiss()
     func numberOfSections() -> Int
@@ -18,6 +20,8 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
     weak var view: LetterEditorViewProtocol?
     let coverLetterPicklists: [PicklistProtocol]
     let additionalInformation: AdditionalInformationPresenter
+    var consistencyError: WorkfinderError?
+    
     func showPicklist(_ picklist: PicklistProtocol) {
         coordinator?.showPicklist(picklist)
     }
@@ -59,6 +63,10 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
         view.refresh()
     }
     
+    func onViewDidAppear() {
+        consistencyCheck()
+    }
+    
     func loadData(completion: @escaping (Error?) -> Void ) {
         var allNeededPicklists = coverLetterPicklists
         allNeededPicklists.append(contentsOf: additionalInformation.extraPicklists)
@@ -67,11 +75,43 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
             picklist.fetchItems { (picklist, result) in
                 switch result {
                 case .success(_):
+                    self.consistencyCheck()
                     completion(nil)
                 case .failure(let error):
                     completion(error)
                 }
             }
+        }
+    }
+    
+    func consistencyCheck() {
+        consistencyError = nil
+        guard
+            let availabilityPicklist = coverLetterPicklists.first(where: { (picklist) -> Bool in
+                picklist.type == .availabilityPeriod
+            }),
+            let availabilityStart = availabilityPicklist.selectedItems.first?.value,
+            let availabilityEnd = availabilityPicklist.selectedItems.last?.value,
+            let durationPicklist = coverLetterPicklists.first(where: { (picklist) -> Bool in
+                picklist.type == .duration
+            }),
+            let duration = durationPicklist.selectedItems.first,
+            let startDate = Date.workfinderDateStringToDate(availabilityStart)?.startOfDay,
+            let endDate = Date.workfinderDateStringToDate(availabilityEnd)?.endOfDay
+            else { return }
+        
+        let availabilityInterval = endDate.timeIntervalSince(startDate)
+        let durationInterval: TimeInterval
+        if let upper = duration.range?.upper {
+            durationInterval = Double(upper) * 7.0 * 24.0 * 3600.0
+        } else if let lower = duration.range?.lower {
+            durationInterval = Double(lower) * 7.0 * 24.0 * 3600.0
+        } else {
+            durationInterval = 0.0
+        }
+        if durationInterval >= availabilityInterval {
+            consistencyError = WorkfinderError(errorType: .custom(title: "Inconsistent duration and availability", description: "Please choose a duration that fits within your availability"), attempting: "Consistency check")
+            durationPicklist.deselectAll()
         }
     }
     
