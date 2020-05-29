@@ -85,6 +85,8 @@
 		FC5D3C6E20FE1CEC00F89169 /* Gemfile in Resources */ = {isa = PBXBuildFile; fileRef = FC5D3C6D20FE1CEB00F89169 /* Gemfile */; };
 		FC681C001F57473D0077BECA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFE1F57473D0077BECA /* Podfile */; };
 		FC681C011F57473D0077BECA /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFF1F57473D0077BECA /* Podfile.lock */; };
+		FC69EBE924813FF300901A2B /* WorkfinderVersionCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC69EBE824813FF300901A2B /* WorkfinderVersionCheck.framework */; };
+		FC69EBEA24813FF300901A2B /* WorkfinderVersionCheck.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC69EBE824813FF300901A2B /* WorkfinderVersionCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC72219F20FE248400F10953 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = FC72219B20FE248400F10953 /* Appfile */; };
 		FC7221A020FE248400F10953 /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = FC72219C20FE248400F10953 /* Fastfile */; };
 		FC771F502416294D00AD6317 /* ComanyFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771F4D2416294D00AD6317 /* ComanyFileParser.swift */; };
@@ -160,6 +162,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				FC69EBEA24813FF300901A2B /* WorkfinderVersionCheck.framework in Embed Frameworks */,
 				FCBA984A24506D8C00C3D2E6 /* WorkfinderOnboardingUseCase.framework in Embed Frameworks */,
 				FCBA985024506D8C00C3D2E6 /* WorkfinderUserDetailsUseCase.framework in Embed Frameworks */,
 				FCBA984C24506D8C00C3D2E6 /* WorkfinderServices.framework in Embed Frameworks */,
@@ -296,6 +299,8 @@
 		FC5D3C6D20FE1CEB00F89169 /* Gemfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Gemfile; sourceTree = "<group>"; };
 		FC681BFE1F57473D0077BECA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		FC681BFF1F57473D0077BECA /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
+		FC69EBA724810F2D00901A2B /* WorkfinderDebugF4SLive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WorkfinderDebugF4SLive.entitlements; sourceTree = "<group>"; };
+		FC69EBE824813FF300901A2B /* WorkfinderVersionCheck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderVersionCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC72219B20FE248400F10953 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
 		FC72219C20FE248400F10953 /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
 		FC771F4D2416294D00AD6317 /* ComanyFileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComanyFileParser.swift; sourceTree = "<group>"; };
@@ -369,6 +374,7 @@
 				FC7B63E424652FD2006AC0C6 /* AuthenticationServices.framework in Frameworks */,
 				FCBA984F24506D8C00C3D2E6 /* WorkfinderUserDetailsUseCase.framework in Frameworks */,
 				FCBA984324506D8B00C3D2E6 /* WorkfinderCoordinators.framework in Frameworks */,
+				FC69EBE924813FF300901A2B /* WorkfinderVersionCheck.framework in Frameworks */,
 				FCBA984724506D8B00C3D2E6 /* WorkfinderNetworking.framework in Frameworks */,
 				FCBA983D24506D8B00C3D2E6 /* WorkfinderAppLogic.framework in Frameworks */,
 				FCBA984524506D8B00C3D2E6 /* WorkfinderDocumentUploadUseCase.framework in Frameworks */,
@@ -465,6 +471,7 @@
 			isa = PBXGroup;
 			children = (
 				40E78E221DD31A86000A3776 /* Info.plist */,
+				FC69EBA724810F2D00901A2B /* WorkfinderDebugF4SLive.entitlements */,
 				FC7B63E224652FD2006AC0C6 /* f4s_workexperienceReleaseF4SLive.entitlements */,
 				FC15614C2450500E00612ED9 /* Workfinder StagingDebugF4SLive.entitlements */,
 				40E78E1F1DD31A86000A3776 /* LaunchScreen.storyboard */,
@@ -492,9 +499,9 @@
 		40E78E481DD32848000A3776 /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
+				40E78E161DD31A86000A3776 /* AppDelegate.swift */,
 				FC93DC5723202B8F00F1CE23 /* Config.swift */,
 				FCCFC7CE224D2C110060F7EC /* DataFixes.swift */,
-				40E78E161DD31A86000A3776 /* AppDelegate.swift */,
 				FC9BEE072015FF6000347437 /* UniversalLinkParser.swift */,
 			);
 			name = AppDelegate;
@@ -582,6 +589,7 @@
 		74E1A74324CAFF4EF516E014 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC69EBE824813FF300901A2B /* WorkfinderVersionCheck.framework */,
 				FC7B63E324652FD2006AC0C6 /* AuthenticationServices.framework */,
 				FC06A19C24641C930023DE99 /* WorkfinderApplications.framework */,
 				FC56A0EF2455B62B00A7EC3F /* WorkfinderCommon.framework */,
@@ -1435,7 +1443,7 @@
 			baseConfigurationReference = 9C8235BD4A169F7DD6BA6996 /* Pods-f4s-workexperience.debugf4slive.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
-				CODE_SIGN_ENTITLEMENTS = "$(CODE_SIGN_ENTITLEMENTS_$(CONFIGURATION))";
+				CODE_SIGN_ENTITLEMENTS = "f4s-workexperience/WorkfinderDebugF4SLive.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;

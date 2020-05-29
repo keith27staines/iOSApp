@@ -51,6 +51,7 @@
 		FC5019652306A24500A26B53 /* F4SDayOfWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5019642306A24500A26B53 /* F4SDayOfWeek.swift */; };
 		FC53D6DC2323BA4300A339ED /* F4SCompanyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC53D6DB2323BA4300A339ED /* F4SCompanyRepository.swift */; };
 		FC5CBA6A231D3E4700C2D3C5 /* F4SDateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBA69231D3E4700C2D3C5 /* F4SDateHelper.swift */; };
+		FC69EBA92481371C00901A2B /* GlobalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC69EBA82481371C00901A2B /* GlobalNotifications.swift */; };
 		FC6E42DD24556B97005E0D08 /* LocalStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6E42DC24556B97005E0D08 /* LocalStorageProtocol.swift */; };
 		FC73902223030856003A9253 /* LocalStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC73902123030856003A9253 /* LocalStoreTests.swift */; };
 		FC7A4396224A3C0E00B2D693 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4395224A3C0E00B2D693 /* NetworkError.swift */; };
@@ -181,6 +182,7 @@
 		FC5019642306A24500A26B53 /* F4SDayOfWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDayOfWeek.swift; sourceTree = "<group>"; };
 		FC53D6DB2323BA4300A339ED /* F4SCompanyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyRepository.swift; sourceTree = "<group>"; };
 		FC5CBA69231D3E4700C2D3C5 /* F4SDateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDateHelper.swift; sourceTree = "<group>"; };
+		FC69EBA82481371C00901A2B /* GlobalNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalNotifications.swift; sourceTree = "<group>"; };
 		FC6E42DC24556B97005E0D08 /* LocalStorageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageProtocol.swift; sourceTree = "<group>"; };
 		FC73902123030856003A9253 /* LocalStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStoreTests.swift; sourceTree = "<group>"; };
 		FC7A4395224A3C0E00B2D693 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 				FCFE450C2250BA4B00C38436 /* Mocks */,
 				FCA91E8622340478007ED308 /* Source */,
 				FCA91E852234044C007ED308 /* Supporting files */,
+				FC69EBA82481371C00901A2B /* GlobalNotifications.swift */,
 			);
 			path = WorkfinderCommon;
 			sourceTree = "<group>";
@@ -742,6 +745,7 @@
 				FC1243E32344AEA30007BA95 /* ScreenNames.swift in Sources */,
 				FCE8DAA82320E80B00934E2F /* ScaledNumber.swift in Sources */,
 				FC4EE710230EB9D700B40F6B /* F4SUserStatus.swift in Sources */,
+				FC69EBA92481371C00901A2B /* GlobalNotifications.swift in Sources */,
 				FCC85DCB245184B700BC600E /* PicklistProtocol.swift in Sources */,
 				FCE51938224948E400B550C9 /* F4SHoursType.swift in Sources */,
 				FC8F957D233BA6710027BE02 /* MockAnalyticsAndDebugging.swift in Sources */,

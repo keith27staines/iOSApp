@@ -1,7 +1,7 @@
 
 import UIKit
-import CoreData
 import WorkfinderCommon
+import WorkfinderVersionCheck
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -11,12 +11,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var masterBuilder: MasterBuilder!
     var companyFileDownloadManager: F4SCompanyDownloadManagerProtocol!
     var appCoordinator: AppCoordinatorProtocol!
+    var versionChecker: WorkfinderVersionChecker!
     
     var log: F4SAnalyticsAndDebugging { return appCoordinator.log }
     // MARK:- Application events
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Prevent the entire application being built if we are just running unit tests
         if ProcessInfo.processInfo.arguments.contains("isUnitTesting") { return true }
+        self.versionChecker = WorkfinderVersionChecker()
         DataFixes().run()
         masterBuilder = MasterBuilder(registrar: application, launchOptions: launchOptions)
         window = masterBuilder.window
