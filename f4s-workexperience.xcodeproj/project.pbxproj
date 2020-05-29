@@ -93,7 +93,7 @@
 		FC771F572416299B00AD6317 /* PinDownloadFileParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771F542416299A00AD6317 /* PinDownloadFileParserTests.swift */; };
 		FC771F582416299B00AD6317 /* PinRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771F552416299B00AD6317 /* PinRepositoryTests.swift */; };
 		FC771F592416299B00AD6317 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771F562416299B00AD6317 /* Common.swift */; };
-		FC7B63E12465257D006AC0C6 /* Example apple-app-site-association in Resources */ = {isa = PBXBuildFile; fileRef = FC7B63E02465257D006AC0C6 /* Example apple-app-site-association */; };
+		FC7B63E12465257D006AC0C6 /* apple-app-site-association in Resources */ = {isa = PBXBuildFile; fileRef = FC7B63E02465257D006AC0C6 /* apple-app-site-association */; };
 		FC7B63E424652FD2006AC0C6 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC7B63E324652FD2006AC0C6 /* AuthenticationServices.framework */; };
 		FC8E303A20F4A60B006059DE /* F4SLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8E303920F4A60B006059DE /* F4SLogger.swift */; };
 		FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC92567A1F8F70D100FF9841 /* InterestsModel.swift */; };
@@ -305,7 +305,7 @@
 		FC771F552416299B00AD6317 /* PinRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinRepositoryTests.swift; sourceTree = "<group>"; };
 		FC771F562416299B00AD6317 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		FC79314720226D440034D201 /* F4SDistribution.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = F4SDistribution.entitlements; path = Config/F4SDistribution.entitlements; sourceTree = "<group>"; };
-		FC7B63E02465257D006AC0C6 /* Example apple-app-site-association */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Example apple-app-site-association"; sourceTree = "<group>"; };
+		FC7B63E02465257D006AC0C6 /* apple-app-site-association */ = {isa = PBXFileReference; lastKnownFileType = text; path = "apple-app-site-association"; sourceTree = "<group>"; };
 		FC7B63E224652FD2006AC0C6 /* f4s_workexperienceReleaseF4SLive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = f4s_workexperienceReleaseF4SLive.entitlements; sourceTree = "<group>"; };
 		FC7B63E324652FD2006AC0C6 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		FC8E303920F4A60B006059DE /* F4SLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SLogger.swift; sourceTree = "<group>"; };
@@ -442,7 +442,7 @@
 			isa = PBXGroup;
 			children = (
 				FCF6B6512465559600D40FCE /* Icon-Small@2x.png */,
-				FC7B63E02465257D006AC0C6 /* Example apple-app-site-association */,
+				FC7B63E02465257D006AC0C6 /* apple-app-site-association */,
 				FCC85DC124515F2F00BC600E /* Top level files */,
 				40E78E151DD31A86000A3776 /* f4s-workexperience */,
 				FCFBD0072250D69700A9361D /* f4s-workexperienceTests */,
@@ -1094,7 +1094,7 @@
 				40E78E211DD31A86000A3776 /* LaunchScreen.storyboard in Resources */,
 				FC0B6B392323D5D600A1867D /* Uploads.xcassets in Resources */,
 				FCC5EBB61F449C310085CE15 /* README.md in Resources */,
-				FC7B63E12465257D006AC0C6 /* Example apple-app-site-association in Resources */,
+				FC7B63E12465257D006AC0C6 /* apple-app-site-association in Resources */,
 				FC681C011F57473D0077BECA /* Podfile.lock in Resources */,
 				40C1A4F31DDEF2F6000F80AA /* AutoCompleteTableViewCell.xib in Resources */,
 				40E78E1E1DD31A86000A3776 /* Assets.xcassets in Resources */,

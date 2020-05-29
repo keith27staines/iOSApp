@@ -17,7 +17,7 @@
                     {
                         "/": "/recommendations/*",
                         "?": { "association_uuid": "????????????????????????????????????"},
-                        "comment": "Matches any URL whose path starts with /recommendations/ and which has a query item with name 'articleNumber' and a value of exactly 36 characters"
+                        "comment": "Matches any URL whose path starts with /recommendations/ and which has a query item with name 'association_uuid' and a value of exactly 36 characters"
                     }
                 ]
             }
