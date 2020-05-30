@@ -8,6 +8,7 @@ import WorkfinderUserDetailsUseCase
 import WorkfinderOnboardingUseCase
 import WorkfinderCompanyDetailsUseCase
 import WorkfinderUI
+import WorkfinderVersionCheck
 import UIKit
 
 class MasterBuilder: TabbarCoordinatorFactoryProtocol {
@@ -38,6 +39,16 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     
     let workfinderEndpoint: WorkfinderEndpoint
     
+    lazy var versionChecker: WorkfinderVersionChecker = {
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+        let versionChecker = WorkfinderVersionChecker(
+            serverEnvironmentType: Config.environment,
+            currentVersion: appVersion,
+            networkConfig: self.networkConfiguration,
+            log: self.log)
+        return versionChecker
+    }()
+    
     lazy var networkConfiguration: NetworkConfig = {
         let sessionManager = F4SNetworkSessionManager()
         let endpoint = self.workfinderEndpoint
@@ -65,6 +76,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         return CoreInjection(
             launchOptions: self.launchOptions,
             networkConfig: self.networkConfiguration,
+            versionChecker: self.versionChecker,
             appInstallationLogic: self.appInstallationLogic,
             user: self.userRepo.loadCandidate(),
             userRepository: self.userRepo,

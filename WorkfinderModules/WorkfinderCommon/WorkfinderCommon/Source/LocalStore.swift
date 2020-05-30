@@ -21,6 +21,7 @@ extension UserDefaults : LocalStorageProtocol {
 public class LocalStore : LocalStorageProtocol {
     let userDefaults: UserDefaults
     public enum Key : String{
+        case environment
         case appVersion
         case user
         case candidate

@@ -58,11 +58,14 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     }
     
     override func start() {
-        GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
-        GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
-        startOnboarding()
-        if launchOptions?[.remoteNotification] != nil {
-            startTabBarCoordinator()
+        injected.versionChecker.performChecksWithHardStop { [weak self] (optionalError) in
+            guard let self = self else { return }
+            GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
+            GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
+            self.startOnboarding()
+            if self.launchOptions?[.remoteNotification] != nil {
+                self.startTabBarCoordinator()
+            }
         }
     }
         
@@ -93,7 +96,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     
     private func onUserIsRegistered(userUuid: F4SUUID) {
         injected.user.uuid = userUuid
-        //injected.userRepository.save(user: injected.user)
         logStartupInformation(userId: userUuid)
         registrar.registerForRemoteNotifications()
         databaseDownloadManager.start()
