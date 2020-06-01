@@ -24,7 +24,10 @@ class CompanyHeaderView: UIView, CompanyHeaderViewProtocol {
     
     func refresh(from presenter: CompanyHeaderViewPresenterProtocol) {
         companyNameLabel.text = presenter.companyName
-        companyIconImageView.load(urlString: presenter.logoUrlString, defaultImage: UIImage(named: "DefaultLogo"))
+        companyIconImageView.load(
+            companyName: presenter.companyName,
+            urlString: presenter.logoUrlString,
+            fetcher: nil, completion: nil)
         distanceLabel.text = presenter.distanceFromCompany
     }
     
@@ -44,13 +47,11 @@ class CompanyHeaderView: UIView, CompanyHeaderViewProtocol {
         return view
     }()
     
-    lazy var companyIconImageView: F4SSelfLoadingImageView = {
-        let imageView = F4SSelfLoadingImageView()
+    lazy var companyIconImageView: CompanyLogoView = {
+        let imageView = CompanyLogoView(widthPoints: 96)
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
-        imageView.backgroundColor = UIColor.white
-        imageView.layer.cornerRadius = iconViewRadius
         return imageView
     }()
     

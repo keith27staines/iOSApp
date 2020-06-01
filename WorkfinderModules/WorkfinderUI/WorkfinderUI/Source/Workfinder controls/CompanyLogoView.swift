@@ -3,6 +3,8 @@ import UIKit
 
 public class CompanyLogoView: UIView {
     
+    let widthPoints: CGFloat
+    
     private lazy var logoView: F4SSelfLoadingImageView = {
         let logoView = F4SSelfLoadingImageView()
         logoView.layer.cornerRadius = 8
@@ -17,6 +19,7 @@ public class CompanyLogoView: UIView {
     }()
     
     public init(widthPoints: CGFloat = 64) {
+        self.widthPoints = widthPoints
         super.init(frame: CGRect.zero)
         addSubview(logoView)
         logoView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor).isActive = true
@@ -29,10 +32,17 @@ public class CompanyLogoView: UIView {
         logoView.contentMode = .scaleAspectFit
     }
     
-    public func load(urlString: String?,
-              defaultImage: UIImage?,
-              fetcher: ImageFetching?,
-              completion: (() -> Void)?) {
+    public func load(
+        companyName: String,
+        urlString: String?,
+        fetcher: ImageFetching?,
+        completion: (() -> Void)?) {
+        let backgroundColor = WorkfinderColors.primaryColor
+        let firstCharacter: Character = companyName.first ?? "?"
+        let defaultImage: UIImage = UIImage.from(
+            size: CGSize(width: widthPoints, height: widthPoints),
+            string: String(firstCharacter),
+            backgroundColor: backgroundColor)
         logoView.load(urlString: urlString,
                       defaultImage: defaultImage,
                       fetcher: fetcher,

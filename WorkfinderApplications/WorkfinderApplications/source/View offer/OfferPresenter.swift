@@ -1,6 +1,7 @@
 import WorkfinderUI
 
 protocol OfferPresenterProtocol {
+    var companyName: String { get }
     var hideAcceptDeclineButtons: Bool { get }
     var screenTitle: String { get }
     var stateDescription: String? { get }
@@ -22,7 +23,7 @@ class OfferPresenter: OfferPresenterProtocol {
     private let application: Application
     let service: OfferServiceProtocol
     private var offer: Offer?
-    
+    var companyName: String { application.companyName }
     var offerState: OfferState? { offer?.offerState }
     var startingDateString: String? { offer?.startingDateString }
     var duration: String? { offer?.duration }

@@ -23,8 +23,8 @@ class CompanyWorkplaceTile: UITableViewCell {
         return stack
     }()
     
-    lazy var logoView: F4SSelfLoadingImageView = {
-        let logoView = F4SSelfLoadingImageView()
+    lazy var logoView: CompanyLogoView = {
+        let logoView = CompanyLogoView(widthPoints: 64)
         logoView.layer.cornerRadius = 8
         logoView.layer.borderWidth = 2
         logoView.layer.masksToBounds = true
@@ -48,9 +48,10 @@ class CompanyWorkplaceTile: UITableViewCell {
     func configureWithViewData(_ viewData: CompanyTileViewData) {
         nameLabel.text = viewData.companyName
         industryLabel.text = viewData.industry
-        logoView.load(
-            urlString: viewData.logoUrlString,
-            defaultImage: UIImage(named: "DefaultLogo"))
+        logoView.load(companyName: viewData.companyName,
+                      urlString: viewData.logoUrlString,
+                      fetcher: nil,
+                      completion: nil)
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

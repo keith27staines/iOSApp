@@ -145,8 +145,8 @@ class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
         self.tableView.reloadData()
         self.messageLabel.text = self.presenter.stateDescription
         self.logo.load(
+            companyName: presenter.companyName,
             urlString: self.presenter.logoUrl,
-            defaultImage: nil,
             fetcher: nil,
             completion: nil)
         self.title = self.presenter.screenTitle

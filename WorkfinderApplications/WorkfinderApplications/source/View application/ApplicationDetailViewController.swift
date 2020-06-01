@@ -83,8 +83,8 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
         messageLabel.text = self.presenter.stateDescription
         coverLetterTextView.text = self.presenter.coverLetterText
         logo.load(
+            companyName: presenter.companyName ?? "?",
             urlString: self.presenter.logoUrl,
-            defaultImage: nil,
             fetcher: nil,
             completion: nil)
     }
