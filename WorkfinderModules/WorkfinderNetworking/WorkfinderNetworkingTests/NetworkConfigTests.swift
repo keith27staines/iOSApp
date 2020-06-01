@@ -15,7 +15,7 @@ class NetworkConfigTests: XCTestCase {
     func test_configure() {
         let logger = NetworkCallLogger(log: MockF4SAnalyticsAndDebugging())
         let endpoints = try! WorkfinderEndpoint(baseUrlString: "someUrl")
-        let sessionManager = F4SNetworkSessionManager()
+        let sessionManager = F4SNetworkSessionManager(appVersion: "")
         let user = User()
         let userRepo = MockUserRepository(user: user)
         let config = NetworkConfig(logger: logger,

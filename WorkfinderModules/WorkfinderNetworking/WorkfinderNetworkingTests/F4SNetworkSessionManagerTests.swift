@@ -17,7 +17,7 @@ class F4SNetworkSessionManagerTests: XCTestCase {
     }
     
     func makeSUT() -> F4SNetworkSessionManager {
-        return F4SNetworkSessionManager()
+        return F4SNetworkSessionManager(appVersion: "")
     }
     
 }

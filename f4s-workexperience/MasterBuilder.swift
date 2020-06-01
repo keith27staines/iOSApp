@@ -39,8 +39,12 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     
     let workfinderEndpoint: WorkfinderEndpoint
     
+    lazy var appVersion: String = {
+        Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+    }()
+    
     lazy var versionChecker: WorkfinderVersionChecker = {
-        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+        
         let versionChecker = WorkfinderVersionChecker(
             serverEnvironmentType: Config.environment,
             currentVersion: appVersion,
@@ -50,7 +54,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     }()
     
     lazy var networkConfiguration: NetworkConfig = {
-        let sessionManager = F4SNetworkSessionManager()
+        let sessionManager = F4SNetworkSessionManager(appVersion: appVersion)
         let endpoint = self.workfinderEndpoint
         let networkCallLogger = NetworkCallLogger(log: log)
         let networkConfig = NetworkConfig(logger: networkCallLogger,

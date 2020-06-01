@@ -12,6 +12,8 @@ import WorkfinderCommon
 /// then be removed from the project
 public class F4SNetworkSessionManager: F4SNetworkSessionManagerProtocol {
     
+    let appVersion: String
+    
     /// `interactiveSession` is designed for services that connect to Workfinder
     /// which includes majority of services used in the app
     public var interactiveSession: URLSession {
@@ -30,7 +32,7 @@ public class F4SNetworkSessionManager: F4SNetworkSessionManagerProtocol {
     }
     
     /// Creates a new instance and configures it with the specified api key
-    public init() {}
+    public init(appVersion: String) { self.appVersion = appVersion }
     
     // MARK:- Internal implementation
     
@@ -40,7 +42,9 @@ public class F4SNetworkSessionManager: F4SNetworkSessionManagerProtocol {
     internal var defaultHeaders : [String:String] {
         let headers: [String : String] = [
             "Accept": "application/json",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Platform": "iOS",
+            "App-Version": appVersion
         ]
         return headers
     }
