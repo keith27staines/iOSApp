@@ -104,6 +104,7 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
     let candidateName: String?
     let companyName: String
     let hostName: String
+    
     public init(parent: ApplyCoordinator?,
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
@@ -128,7 +129,8 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
             picklistsStore: self.picklistsStore,
             companyName: companyName,
             hostName: hostName,
-            candidateName: candidateName)
+            candidateName: candidateName,
+            primaryButtonTitle: self.applyCoordinator?.coverLetterPrimaryButtonText ?? "Next")
         return presenter
     }()
     

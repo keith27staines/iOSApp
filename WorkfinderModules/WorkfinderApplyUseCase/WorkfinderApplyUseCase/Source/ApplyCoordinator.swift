@@ -32,6 +32,14 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
 
     var picklistsDictionary: PicklistsDictionary?
     
+    var coverLetterPrimaryButtonText: String {
+        let candidate = injected.userRepository.loadCandidate()
+        guard let candidateUuid = candidate.uuid, !candidateUuid.isEmpty else {
+            return NSLocalizedString("Next", comment: "")
+        }
+        return NSLocalizedString("Submit application", comment: "")
+    }
+    
     lazy var applicationModel: ApplicationModel = {
         return ApplicationModel()
     }()

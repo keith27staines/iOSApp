@@ -8,6 +8,7 @@ public protocol CoverLetterViewPresenterProtocol {
     var nextButtonIsEnabled: Bool { get }
     var displayString: String { get }
     var attributedDisplayString: NSAttributedString { get }
+    var primaryButtonTitle: String { get }
     func onViewDidLoad(view: CoverLetterViewProtocol)
     func loadData(completion: @escaping (Error?) -> Void)
     func onDidTapShowTemplateButton()
@@ -32,6 +33,7 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     var nextButtonIsEnabled: Bool { return renderer?.isComplete ?? false }
     var templateModel: TemplateModel
     var embeddedFieldNames = [String]()
+    let primaryButtonTitle: String
     private var _letterDisplayString = ""
     private var _attributedDisplayString = NSAttributedString()
     
@@ -168,7 +170,8 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
          picklistsStore: PicklistsStoreProtocol,
          companyName: String,
          hostName: String,
-         candidateName: String?) {
+         candidateName: String?,
+         primaryButtonTitle: String) {
         self.coordinator = coordinator
         self.templateModel = CoverLetterViewPresenter.defaultTemplate
         self.templateProvider = templateProvider
@@ -179,6 +182,7 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
             "company" : companyName,
             "candidate": candidateName
         ]
+        self.primaryButtonTitle = primaryButtonTitle
     }
     
     private static var defaultTemplate: TemplateModel {
