@@ -52,7 +52,14 @@ public class TemplateRenderer: TemplateRendererProtocol {
             let nsRange = NSRange(range, in: parser.templateString)
             guard let value = keyValues[name] else {
                 let color = UIColor.systemOrange
-                renderedString.setAttributes([NSAttributedString.Key.foregroundColor : color, NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)], range: nsRange)
+                let attributes = [NSAttributedString.Key.foregroundColor : color, NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)]
+                renderedString.setAttributes(attributes, range: nsRange)
+                let suffixRange = NSRange(location: nsRange.location + nsRange.length-2, length: 2)
+                let prefixRange = NSRange(location: nsRange.location, length: 2)
+                let suffix = NSAttributedString(string: "]", attributes: attributes)
+                let prefix = NSAttributedString(string: "[", attributes: attributes)
+                renderedString.replaceCharacters(in: suffixRange, with: suffix)
+                renderedString.replaceCharacters(in: prefixRange, with: prefix)
                 continue
             }
             guard let replacementText = value else { continue }
@@ -60,6 +67,7 @@ public class TemplateRenderer: TemplateRendererProtocol {
             let color = UIColor.systemGreen
             renderedString.setAttributes([NSAttributedString.Key.foregroundColor : color, NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)], range: nsRange)
             renderedString.replaceCharacters(in: nsRange, with: replacementAttributedText)
+
         }
         return renderedString
     }

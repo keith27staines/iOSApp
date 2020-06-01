@@ -35,8 +35,7 @@ class LetterEditorViewController: UIViewController, LetterEditorViewProtocol {
     
     lazy var mainStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
-            self.tableView,
-            self.updateLetterButton
+            self.tableView
         ])
         stack.axis = .vertical
         stack.spacing = 20
@@ -67,7 +66,9 @@ class LetterEditorViewController: UIViewController, LetterEditorViewProtocol {
     func configureViews() {
         let safeArea = view.safeAreaLayoutGuide
         view.addSubview(mainStack)
-        mainStack.anchor(top: safeArea.topAnchor, leading: safeArea.leadingAnchor, bottom: safeArea.bottomAnchor, trailing: safeArea.trailingAnchor, padding: UIEdgeInsets(top: 8, left: 20, bottom: 8, right: 20))
+        view.addSubview(updateLetterButton)
+        mainStack.anchor(top: safeArea.topAnchor, leading: safeArea.leadingAnchor, bottom: nil, trailing: safeArea.trailingAnchor, padding: UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0))
+        updateLetterButton.anchor(top: mainStack.bottomAnchor, leading: safeArea.leadingAnchor, bottom: safeArea.bottomAnchor, trailing: safeArea.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 8, right: 20))
     }
     
     override func viewDidLoad() {
