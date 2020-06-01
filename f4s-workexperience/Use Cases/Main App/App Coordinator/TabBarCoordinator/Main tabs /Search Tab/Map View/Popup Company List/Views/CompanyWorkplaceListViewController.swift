@@ -18,6 +18,8 @@ class CompanyWorkplaceListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
+        navigationItem.backBarButtonItem?.title = "Back"
+        navigationItem.title = nil
         configureViews()
         presenter?.onViewDidLoad(self)
         loadData()
@@ -34,7 +36,6 @@ class CompanyWorkplaceListViewController: UIViewController {
                 cancelHandler: {},
                 retryHandler: self.loadData)
         }
-        
     }
     
     func configureViews() {

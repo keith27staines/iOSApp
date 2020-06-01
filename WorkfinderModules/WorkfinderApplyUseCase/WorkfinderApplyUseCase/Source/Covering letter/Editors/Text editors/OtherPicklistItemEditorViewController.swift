@@ -3,6 +3,7 @@ import UIKit
 import WorkfinderCommon
 
 class OtherPicklistItemEditorViewController: TextEditorViewController {
+    
     var picklistItem: PicklistItemJson
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +23,8 @@ class OtherPicklistItemEditorViewController: TextEditorViewController {
         super.init(coordinator: coordinator,
                    editorTitle: type.otherEditorTitle,
                    guidanceText: type.otherFieldGuidanceText,
-                   placeholderText: type.otherFieldPlaceholderText)
+                   placeholderText: type.otherFieldPlaceholderText,
+                   maxWordCount: 20)
         textView.text = picklistItem.otherValue
     }
     

@@ -60,10 +60,19 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
         title = NSLocalizedString("Cover letter", comment: "")
         view.backgroundColor = UIColor.white
         configureSubViews()
-        configureNavigationController()
         presenter.onViewDidLoad(view: self)
         refreshFromPresenter()
         loadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        configureNavigationBar()
+        presenter.onDidTapShowCoverLetterButton()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if self.isMovingFromParent { presenter.onDidDismiss() }
     }
     
     func loadData() {
@@ -76,15 +85,6 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
                 optionalError,
                 retryHandler: self.loadData)
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        presenter.onDidTapShowCoverLetterButton()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        if self.isMovingFromParent { presenter.onDidDismiss() }
     }
 
     @objc func onBackTapped() {
@@ -113,11 +113,11 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
 // MARK:- configure subviews
 extension CoverLetterViewController {
     func configureSubViews() {
-        configureNavigationController()
         configurePageStack()
     }
     
-    func configureNavigationController() {
+    func configureNavigationBar() {
+        navigationItem.backBarButtonItem?.title = "Back"
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: editButton)
     }
     

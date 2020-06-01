@@ -19,6 +19,7 @@ class PicklistViewController: UITableViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         view.backgroundColor = UIColor.white
         navigationItem.largeTitleDisplayMode = .automatic
+        navigationItem.backBarButtonItem?.title = "Back"
     }
     
     override func viewWillDisappear(_ animated: Bool) {

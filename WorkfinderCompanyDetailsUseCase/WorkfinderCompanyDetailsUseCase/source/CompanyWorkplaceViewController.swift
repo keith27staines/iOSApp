@@ -59,25 +59,15 @@ class CompanyWorkplaceViewController: UIViewController {
         refresh()
     }
     
-    lazy var leftButton: UIBarButtonItem = {
-        let button = UIButton(type: .system)
-        let leftChevron = UIImage(named: "Back")?.withRenderingMode(.alwaysTemplate).scaledImage(with: CGSize(width: 20, height: 20))
-        button.setImage(leftChevron, for: .normal)
-        button.setTitle("Back", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-        button.sizeToFit()
-        button.addTarget(self, action: #selector(didTapBack), for: .touchUpInside)
-        return UIBarButtonItem(customView: button)
-    }()
+    override func viewWillDisappear(_ animated: Bool) {
+        if isMovingFromParent {
+            presenter.onTapBack()
+        }
+    }
     
     func configureNavigationBar() {
         navigationController?.isNavigationBarHidden = false
         styleNavigationController()
-        navigationItem.leftBarButtonItem = leftButton
-    }
-    
-    @objc func didTapBack() {
-        presenter.onTapBack()
     }
     
     func incrementLoadingInProgressCount() {
