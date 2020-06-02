@@ -6,6 +6,7 @@ protocol LetterEditorPresenterProtocol {
     var consistencyError: WorkfinderError? { get }
     func onViewDidLoad(view: LetterEditorViewProtocol)
     func onViewDidAppear()
+    func onViewWillRefresh()
     func loadData(completion: @escaping (Error?) -> Void )
     func onDidDismiss()
     func numberOfSections() -> Int
@@ -24,6 +25,10 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
     
     func showPicklist(_ picklist: PicklistProtocol) {
         coordinator?.showPicklist(picklist)
+    }
+    
+    func onViewWillRefresh() {
+        consistencyCheck()
     }
 
     func picklist(for indexPath: IndexPath) -> PicklistProtocol {
@@ -109,7 +114,7 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
         } else {
             durationInterval = 0.0
         }
-        if durationInterval >= availabilityInterval {
+        if durationInterval > availabilityInterval + 1 {
             consistencyError = WorkfinderError(errorType: .custom(title: "Inconsistent duration and availability", description: "Please choose a duration that fits within your availability"), attempting: "Consistency check")
             durationPicklist.deselectAll()
         }

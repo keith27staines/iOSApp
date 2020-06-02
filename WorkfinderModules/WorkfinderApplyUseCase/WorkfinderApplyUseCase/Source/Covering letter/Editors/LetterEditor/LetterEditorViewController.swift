@@ -18,6 +18,7 @@ class LetterEditorViewController: UIViewController, LetterEditorViewProtocol {
     let presenter: LetterEditorPresenterProtocol
     
     func refresh() {
+        presenter.onViewWillRefresh()
         tableView.reloadData()
         if let error = presenter.consistencyError {
             switch error.errorType {

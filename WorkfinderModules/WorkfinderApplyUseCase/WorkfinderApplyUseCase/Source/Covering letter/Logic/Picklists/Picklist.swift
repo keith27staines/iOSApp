@@ -51,7 +51,9 @@ public class Picklist: PicklistProtocol {
         selectedItems.remove(at: index)
     }
     
-    public func deselectAll() { selectedItems = [] }
+    public func deselectAll() {
+        selectedItems = []
+    }
     
     public init(type: PicklistType, networkConfig: NetworkConfig) {
         self.otherItem = type.isOtherable ? PicklistItemJson(uuid: PicklistItemJson.otherItemUuid, value: "Other") : nil
@@ -106,7 +108,14 @@ public class Picklist: PicklistProtocol {
         guard selectedItems.count > 0 else { return NSLocalizedString("Choose", comment: "") }
         switch maximumPicks {
         case 1: return NSLocalizedString("Selected", comment: "")
-        default: return NSLocalizedString("\(selectedItems.count) selected", comment: "")
+        default:
+            switch type {
+            case .availabilityPeriod:
+                return NSLocalizedString("Selected", comment: "")
+            default:
+                return NSLocalizedString("\(selectedItems.count) selected", comment: "")
+            }
+            
         }
     }
 }

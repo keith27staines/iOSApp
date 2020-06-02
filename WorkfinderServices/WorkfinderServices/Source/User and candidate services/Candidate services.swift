@@ -23,6 +23,7 @@ public class CreateCandidateService: WorkfinderService, CreateCandidateServicePr
                 "date_of_birth": candidate.dateOfBirth,
                 "current_level_of_study": candidate.currentLevelOfStudy,
                 "placement_type": candidate.placementType,
+                "guardian_email": candidate.guardianEmail,
                 "user": userUuid
             ]
             let request = try buildRequest(relativePath: relativePath, verb: .post, body: jsonBody)
