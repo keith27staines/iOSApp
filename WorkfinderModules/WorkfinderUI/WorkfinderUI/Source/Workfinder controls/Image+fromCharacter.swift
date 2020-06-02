@@ -7,7 +7,7 @@ public extension UIImage {
         string: String,
         backgroundColor: UIColor) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        let fontHeightRatio: CGFloat = 7.0/8.0
+        let fontHeightRatio: CGFloat = 56.0/67.0
         let font = UIFont.systemFont(ofSize: fontHeightRatio * size.height, weight: .thin)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center

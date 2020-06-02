@@ -10,7 +10,7 @@ class ApplicationTile: UITableViewCell {
     }
     
     lazy var logo: CompanyLogoView = {
-        return CompanyLogoView()
+        return CompanyLogoView(widthPoints: 67)
     }()
     
     lazy var statusView: UILabel = {
@@ -20,9 +20,9 @@ class ApplicationTile: UITableViewCell {
         label.backgroundColor = WorkfinderColors.primaryColor
         label.text = ""
         label.textColor = UIColor.white
-        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont.systemFont(ofSize: 14)
         label.textAlignment = .center
-        label.widthAnchor.constraint(equalToConstant: 64).isActive = true
+        label.widthAnchor.constraint(equalToConstant: 67).isActive = true
         label.heightAnchor.constraint(equalToConstant: 30).isActive = true
         return label
     }()
