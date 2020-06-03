@@ -168,6 +168,7 @@ public struct Host : Codable {
         case linkedinUrlString = "linkedin_url"
         case photoUrlString = "photo"
         case description
+        case emails
     } 
 }
 

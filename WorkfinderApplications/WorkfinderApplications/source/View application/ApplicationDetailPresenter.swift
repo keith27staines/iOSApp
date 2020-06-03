@@ -1,3 +1,4 @@
+
 import WorkfinderCommon
 import WorkfinderUI
 
@@ -18,6 +19,7 @@ protocol ApplicationDetailPresenterProtocol {
     func numberOfRowsInSection(_ section: Int) -> Int
     func cellInfoForIndexPath(_ indexPath: IndexPath) -> ApplicationDetailCellInfo
     func showDisclosureIndicatorForIndexPath(_ indexPath: IndexPath) -> Bool
+    func onTapDetail(indexPath: IndexPath)
 }
 
 struct ApplicationDetailCellInfo {
@@ -25,7 +27,7 @@ struct ApplicationDetailCellInfo {
     var subheading: String?
 }
 
-class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol{
+class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol {
     weak var view: WorkfinderViewControllerProtocol?
     
     func numberOfSections() -> Int { 1 }
@@ -48,7 +50,7 @@ class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol{
     var coverLetterText: String? { applicationDetail?.coverLetterString }
     var companyName: String? { applicationDetail?.companyName }
     
-    let service: ApplicationDetailServiceProtocol
+    let applicationService: ApplicationDetailServiceProtocol
     let coordinator: ApplicationsCoordinatorProtocol
     let application: Application
     var applicationDetail: ApplicationDetail?
@@ -58,9 +60,9 @@ class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol{
     var logoUrl: String? { application.logoUrl }
     
     init(coordinator: ApplicationsCoordinatorProtocol,
-         service: ApplicationDetailService,
+         applicationService: ApplicationDetailService,
          application: Application) {
-        self.service = service
+        self.applicationService = applicationService
         self.coordinator = coordinator
         self.application = application
     }
@@ -70,7 +72,7 @@ class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol{
     }
     
     func loadData(completion: @escaping (Error?) -> Void) {
-        service.fetchApplicationDetail(application: application) { [weak self] (result) in
+        applicationService.fetchApplicationDetail(application: application) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .success(let applicationDetail):
@@ -80,6 +82,10 @@ class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol{
                 completion(error)
             }
         }
+    }
+    
+    func onTapDetail(indexPath: IndexPath) {
+        coordinator.showCompanyHost(application: application)
     }
     
     func showDisclosureIndicatorForIndexPath(_ indexPath: IndexPath) -> Bool {

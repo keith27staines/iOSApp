@@ -22,6 +22,7 @@
 		FC40360F246AE42700F03A5B /* ApplicationTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC40360E246AE42700F03A5B /* ApplicationTile.swift */; };
 		FC403611246AE46700F03A5B /* ApplicationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC403610246AE46700F03A5B /* ApplicationDetailViewController.swift */; };
 		FC4BC35F2470F8DA00299993 /* DeclineOptionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4BC35E2470F8DA00299993 /* DeclineOptionsModel.swift */; };
+		FC612B562487D05600C498ED /* HostViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC612B552487D05600C498ED /* HostViewPresenter.swift */; };
 		FC6AA523246C4EB4002CC1C7 /* OfferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6AA522246C4EB4002CC1C7 /* OfferService.swift */; };
 		FC6AA525246C4F1A002CC1C7 /* OfferState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6AA524246C4F1A002CC1C7 /* OfferState.swift */; };
 		FC6AA527246C4F9D002CC1C7 /* Offer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6AA526246C4F9D002CC1C7 /* Offer.swift */; };
@@ -33,7 +34,7 @@
 		FC751769246C175900ECBA84 /* OfferPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC751768246C175900ECBA84 /* OfferPresenter.swift */; };
 		FC9C0AC1246BA6DE00CF7A48 /* OfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C0AC0246BA6DE00CF7A48 /* OfferViewController.swift */; };
 		FC9C0AC8246BAAF000CF7A48 /* ApplicationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C0AC7246BAAF000CF7A48 /* ApplicationActions.swift */; };
-		FCD4DCB3248762FF005CB380 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD4DCB2248762FF005CB380 /* WorkfinderCompanyDetailsUseCase.framework */; };
+		FCD4DCBC24877F1D005CB380 /* HostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD4DCBB24877F1D005CB380 /* HostViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		FC40360E246AE42700F03A5B /* ApplicationTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationTile.swift; sourceTree = "<group>"; };
 		FC403610246AE46700F03A5B /* ApplicationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDetailViewController.swift; sourceTree = "<group>"; };
 		FC4BC35E2470F8DA00299993 /* DeclineOptionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeclineOptionsModel.swift; sourceTree = "<group>"; };
+		FC612B552487D05600C498ED /* HostViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostViewPresenter.swift; sourceTree = "<group>"; };
 		FC6AA522246C4EB4002CC1C7 /* OfferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferService.swift; sourceTree = "<group>"; };
 		FC6AA524246C4F1A002CC1C7 /* OfferState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferState.swift; sourceTree = "<group>"; };
 		FC6AA526246C4F9D002CC1C7 /* Offer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Offer.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 		FC9C0AC0246BA6DE00CF7A48 /* OfferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferViewController.swift; sourceTree = "<group>"; };
 		FC9C0AC7246BAAF000CF7A48 /* ApplicationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationActions.swift; sourceTree = "<group>"; };
 		FCD4DCB2248762FF005CB380 /* WorkfinderCompanyDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCompanyDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCD4DCBB24877F1D005CB380 /* HostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +90,6 @@
 				FC06A1AC24641D210023DE99 /* WorkfinderCoordinators.framework in Frameworks */,
 				FC06A1A924641D150023DE99 /* WorkfinderUI.framework in Frameworks */,
 				FC06A1A124641CEB0023DE99 /* WorkfinderCommon.framework in Frameworks */,
-				FCD4DCB3248762FF005CB380 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */,
 				FC06A1A524641D080023DE99 /* WorkfinderServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,6 +168,7 @@
 				FC9C0AC5246BAA3800CF7A48 /* List applications */,
 				FC9C0AC6246BAA5200CF7A48 /* View application */,
 				FC751767246C170D00ECBA84 /* View offer */,
+				FCD4DCBD24877FF5005CB380 /* Host view */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -201,6 +204,15 @@
 				FC751765246BDCED00ECBA84 /* ApplicationDetailPresenter.swift */,
 			);
 			path = "View application";
+			sourceTree = "<group>";
+		};
+		FCD4DCBD24877FF5005CB380 /* Host view */ = {
+			isa = PBXGroup;
+			children = (
+				FCD4DCBB24877F1D005CB380 /* HostViewController.swift */,
+				FC612B552487D05600C498ED /* HostViewPresenter.swift */,
+			);
+			path = "Host view";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -315,6 +327,7 @@
 			files = (
 				FC751760246BB89000ECBA84 /* Application.swift in Sources */,
 				FC403609246AE35900F03A5B /* ApplicationState.swift in Sources */,
+				FCD4DCBC24877F1D005CB380 /* HostViewController.swift in Sources */,
 				FC40360B246AE37C00F03A5B /* ApplicationsPresenter.swift in Sources */,
 				FC9C0AC1246BA6DE00CF7A48 /* OfferViewController.swift in Sources */,
 				FC6AA523246C4EB4002CC1C7 /* OfferService.swift in Sources */,
@@ -326,6 +339,7 @@
 				FC751769246C175900ECBA84 /* OfferPresenter.swift in Sources */,
 				FC751764246BDC9500ECBA84 /* ApplicationDetailService.swift in Sources */,
 				FC40360F246AE42700F03A5B /* ApplicationTile.swift in Sources */,
+				FC612B562487D05600C498ED /* HostViewPresenter.swift in Sources */,
 				FC03C88E246AEA9E0075258C /* CoverLetterText.swift in Sources */,
 				FC6AA525246C4F1A002CC1C7 /* OfferState.swift in Sources */,
 				FC4BC35F2470F8DA00299993 /* DeclineOptionsModel.swift in Sources */,

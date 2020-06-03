@@ -1,6 +1,7 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderUI
 
 class TextModel {
 

@@ -12,6 +12,7 @@ import WorkfinderCommon
 class CompanyMapView: MKMapView {
     let companyLatLon: LatLon
     let companyName: String
+    
     init(companyName: String, companyLatLon: LatLon) {
         self.companyName = companyName
         self.companyLatLon = companyLatLon

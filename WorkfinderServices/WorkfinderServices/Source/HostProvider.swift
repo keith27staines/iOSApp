@@ -1,6 +1,17 @@
 import WorkfinderCommon
 
 public class HostsProvider: WorkfinderService, HostsProviderProtocol {
+    
+    public func fetchHost(
+        uuid: String,
+        completion: @escaping (Result<Host,Error>) -> Void) {
+        do {
+            let request = try buildRequest(relativePath: "hosts/\(uuid)", queryItems: nil, verb: .get)
+            performTask(with: request, completion: completion, attempting: #function)
+        } catch {
+            completion(Result<Host,Error>.failure(error))
+        }
+    }
         
     public func fetchHosts(
         locationUuid: F4SUUID,

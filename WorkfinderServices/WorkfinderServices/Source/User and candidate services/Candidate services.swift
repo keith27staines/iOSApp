@@ -21,8 +21,6 @@ public class CreateCandidateService: WorkfinderService, CreateCandidateServicePr
             let relativePath = "candidates/"
             let jsonBody = [
                 "date_of_birth": candidate.dateOfBirth,
-                "current_level_of_study": candidate.currentLevelOfStudy,
-                "placement_type": candidate.placementType,
                 "guardian_email": candidate.guardianEmail,
                 "user": userUuid
             ]

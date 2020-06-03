@@ -1,22 +1,20 @@
 
-import UIKit
 import WorkfinderCommon
-import WorkfinderUI
 
-class HostLocationAssociationView : UIView {
+public class HostLocationAssociationView : UIView {
     
     static let defaultImage = UIImage(named: "noProfilePicture")
     var textSize: CGFloat = 15
     var lineHeight: CGFloat = 23
     var fontWeight = UIFont.Weight.light
     
-    var association: HostLocationAssociationJson? {
+    public var association: HostLocationAssociationJson? {
         didSet {
             image.load(urlString: association?.host.photoUrlString, defaultImage: HostLocationAssociationView.defaultImage)
             nameLabel.text = association?.host.displayName
             roleLabel.text = association?.title
             expandableLabel.text = association?.host.description ?? "Description text"
-            
+            textView.text = association?.host.description ?? "Description text"
             if let _ = association?.host.linkedinUrlString {
                 profileButton.isHidden = false
                 profileButton.setTitle("see more on LinkedIn", for: UIControl.State.normal)
@@ -27,7 +25,7 @@ class HostLocationAssociationView : UIView {
         }
     }
     
-    var expandableLabelState = ExpandableLabelState() {
+    public var expandableLabelState = ExpandableLabelState() {
         didSet {
             expandableLabel.state = expandableLabelState
             readMoreLabel.text = expandableLabelState.isExpanded ? "Close" : "Read more"
@@ -35,17 +33,26 @@ class HostLocationAssociationView : UIView {
         }
     }
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         readMoreLabelStack.isHidden = !self.expandableLabel.isExpandable
     }
     
-    var profileLinkTap: ((HostLocationAssociationJson) -> Void)?
+    public var profileLinkTap: ((HostLocationAssociationJson) -> Void)?
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    public init(showSelectionButton: Bool = true) {
+        self.showSelectionButton = showSelectionButton
+        super.init(frame: CGRect.zero)
         addSubview(fullStack)
-        fullStack.fillSuperview(padding: UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0))
+        if showSelectionButton {
+            fullStack.fillSuperview(padding: UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0))
+        } else {
+            fullStack.anchor(top: self.topAnchor, leading: self.leadingAnchor, bottom: nil, trailing: self.trailingAnchor)
+            addSubview(textView)
+            fullStack.heightAnchor.constraint(equalToConstant: 80).isActive = true
+            textView.anchor(top: fullStack.bottomAnchor, leading: fullStack.leadingAnchor, bottom: self.bottomAnchor, trailing: self.trailingAnchor)
+        }
+        
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -78,7 +85,12 @@ class HostLocationAssociationView : UIView {
     }()
     
     lazy var fullStack: UIStackView = {
-        let views = [self.horizontalStack, self.expandableLabel, self.readMoreLabelStack]
+        let views: [UIView]
+        if showSelectionButton {
+            views = [self.horizontalStack, self.expandableLabel, self.readMoreLabelStack]
+        } else {
+            views = [self.horizontalStack, self.textView]
+        }
         let stack = UIStackView(arrangedSubviews: views)
         stack.spacing = 4
         stack.axis = .vertical
@@ -87,7 +99,7 @@ class HostLocationAssociationView : UIView {
         return stack
     }()
     
-    var selectAction: (((HostSelectionView) -> Void))? {
+    public var selectAction: (((HostSelectionView) -> Void))? {
         didSet {
             self.associationSelectionView.tapAction = selectAction
         }
@@ -99,8 +111,17 @@ class HostLocationAssociationView : UIView {
         return view
     }()
     
+    lazy var textView: UITextView = {
+        let textView = UITextView()
+        textView.font = UIFont.systemFont(ofSize: self.textSize, weight: self.fontWeight)
+        textView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        return textView
+    }()
+    
+    var showSelectionButton: Bool
+    
     lazy var horizontalStack: UIStackView = {
-        let views = [self.associationSelectionView ,self.image, self.verticalStack]
+        let views = showSelectionButton ? [self.associationSelectionView, self.image, self.verticalStack] : [self.image, self.verticalStack]
         let stack = UIStackView(arrangedSubviews: views)
         stack.axis = .horizontal
         stack.alignment = .top
@@ -164,15 +185,16 @@ class HostLocationAssociationView : UIView {
     
 }
 
-struct ExpandableLabelState {
-    var text: String = ""
-    var isExpanded: Bool = false
-    var isExpandable: Bool =  false
+public struct ExpandableLabelState {
+    public var text: String = ""
+    public var isExpanded: Bool = false
+    public var isExpandable: Bool =  false
+    public init() {}
 }
 
-class ExpandableLabel: UILabel {
+public class ExpandableLabel: UILabel {
     
-    override var text: String? {
+    public override var text: String? {
         set {
             super.text = newValue
             updateHeight()
@@ -207,7 +229,7 @@ class ExpandableLabel: UILabel {
     private var collapsedHeight: CGFloat { return lineHeight }
     private var lineHeight: CGFloat { return font.lineHeight }
     
-    override func layoutMarginsDidChange() {
+    public override func layoutMarginsDidChange() {
         updateHeight()
     }
     
@@ -244,7 +266,7 @@ class ExpandableLabel: UILabel {
     }
 }
 
-class HostSelectionView: UIView {
+public class HostSelectionView: UIView {
     
     lazy var circleImageView: UIImageView = {
         let diameter = CGFloat(32)
@@ -296,7 +318,7 @@ class HostSelectionView: UIView {
         }
     }
     
-    override var intrinsicContentSize: CGSize { return CGSize(width: 36, height: 64)}
+    public override var intrinsicContentSize: CGSize { return CGSize(width: 36, height: 64)}
     
     @objc func buttonTap() {
         tapAction?(self)
@@ -315,7 +337,7 @@ class HostSelectionView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func contentHuggingPriority(for axis: NSLayoutConstraint.Axis) -> UILayoutPriority {
+    public override func contentHuggingPriority(for axis: NSLayoutConstraint.Axis) -> UILayoutPriority {
         switch axis {
         case .horizontal:
             return .defaultHigh
@@ -327,4 +349,3 @@ class HostSelectionView: UIView {
     }
     
 }
-

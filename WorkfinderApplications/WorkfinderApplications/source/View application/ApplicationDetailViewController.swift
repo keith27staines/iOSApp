@@ -116,19 +116,12 @@ extension ApplicationDetailViewController: UITableViewDataSource {
         cell.accessoryType =  presenter.showDisclosureIndicatorForIndexPath(indexPath) ? .disclosureIndicator : .none
         return cell
     }
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
 }
 
 extension ApplicationDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let alert = UIAlertController(title: "Not available", message: "We are working on this. Please bear with us while we improve Workfinder", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        present(alert, animated: true, completion: nil)
+        tableView.deselectRow(at: indexPath, animated: true)
+        presenter.onTapDetail(indexPath: indexPath)
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

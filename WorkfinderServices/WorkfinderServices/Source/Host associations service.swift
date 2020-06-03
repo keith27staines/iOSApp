@@ -1,9 +1,23 @@
 
 import Foundation
 import WorkfinderCommon
-import WorkfinderServices
 
 public class HostLocationAssociationsService: WorkfinderService, HostLocationAssociationsServiceProtocol {
+    
+    let relativePath = "associations/"
+    
+    public func fetchAssociation(
+        uuid: F4SUUID,
+        completion:  @escaping((Result<HostUuidLocationAssociationJson,Error>) -> Void)) {
+        do {
+            let path = "\(relativePath)\(uuid)"
+            let request = try buildRequest(relativePath: path, queryItems: nil, verb: .get)
+            performTask(with: request, completion: completion,
+            attempting: #function)
+        } catch {
+            completion(Result<HostUuidLocationAssociationJson,Error>.failure(error))
+        }
+    }
     
     public func fetchAssociations(
         for locationUuid: F4SUUID,
@@ -25,7 +39,7 @@ public class HostLocationAssociationsService: WorkfinderService, HostLocationAss
             URLQueryItem(name: "expand-host", value: "1")
         ]
         return try buildRequest(
-            relativePath: "associations/",
+            relativePath: relativePath,
             queryItems: queryItems,
             verb: .get)
     }

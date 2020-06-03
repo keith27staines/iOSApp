@@ -2,6 +2,7 @@
 import Foundation
 
 public protocol HostLocationAssociationsServiceProtocol {
+    func fetchAssociation(uuid: F4SUUID, completion:  @escaping((Result<HostUuidLocationAssociationJson,Error>) -> Void))
     func fetchAssociations(for locationUuid: F4SUUID, completion:  @escaping((Result<HostLocationAssociationListJson,Error>) -> Void))
 }
 
@@ -10,6 +11,33 @@ public struct ServerListJson<A:Decodable>: Decodable {
     public var next: String?
     public var previous: String?
     public let results: [A]
+}
+
+public struct HostUuidLocationAssociationJson: Codable {
+    public let uuid: F4SUUID
+    public let locationUuid: F4SUUID
+    public let host: F4SUUID
+    public let title: String? = nil
+    public let description: String? = nil
+    public let started: String? = nil
+    public let stopped: String? = nil
+    public var isSelected: Bool = false
+    
+    public init(uuid: F4SUUID,locationUuid: F4SUUID, hostUuid: F4SUUID) {
+        self.uuid = uuid
+        self.locationUuid = locationUuid
+        self.host = hostUuid
+    }
+    
+    private enum CodingKeys: String, CodingKey {
+        case uuid
+        case locationUuid = "location"
+        case host
+        case title
+        case description
+        case started
+        case stopped
+    }
 }
 
 public struct HostLocationAssociationJson: Codable {
@@ -21,6 +49,17 @@ public struct HostLocationAssociationJson: Codable {
     public let started: String?
     public let stopped: String?
     public var isSelected: Bool = false
+    
+    public init(uuidAssociation: HostUuidLocationAssociationJson, host:Host) {
+        self.uuid = uuidAssociation.uuid
+        self.locationUuid = uuidAssociation.locationUuid
+        self.host = host
+        self.title = uuidAssociation.title
+        self.description = uuidAssociation.description
+        self.started = uuidAssociation.started
+        self.stopped = uuidAssociation.stopped
+        self.isSelected = uuidAssociation.isSelected
+    }
     
     private enum CodingKeys: String, CodingKey {
         case uuid
@@ -50,5 +89,6 @@ public protocol CompanyWorkplaceListProviderProtocol: class {
 }
 
 public protocol HostsProviderProtocol: class {
+    func fetchHost(uuid: String, completion: @escaping (Result<Host,Error>) -> Void)
     func fetchHosts(locationUuid: F4SUUID, completion: @escaping((Result<HostListJson,Error>) -> Void) )
 }

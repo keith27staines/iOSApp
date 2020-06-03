@@ -6,6 +6,7 @@ protocol ApplicationDetailServiceProtocol: AnyObject {
 }
 
 class ApplicationDetailService: WorkfinderService, ApplicationDetailServiceProtocol {
+    
     func fetchApplicationDetail(application: Application, completion: @escaping (Result<ApplicationDetail,Error>)-> Void) {
         
         performNetworkRequest(placementUuid: application.placementUuid) { (result) in
