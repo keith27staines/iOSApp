@@ -34,7 +34,6 @@
 		FC9C0AC1246BA6DE00CF7A48 /* OfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C0AC0246BA6DE00CF7A48 /* OfferViewController.swift */; };
 		FC9C0AC8246BAAF000CF7A48 /* ApplicationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C0AC7246BAAF000CF7A48 /* ApplicationActions.swift */; };
 		FCD4DCB3248762FF005CB380 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD4DCB2248762FF005CB380 /* WorkfinderCompanyDetailsUseCase.framework */; };
-		FCD4DCB4248762FF005CB380 /* WorkfinderCompanyDetailsUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCD4DCB2248762FF005CB380 /* WorkfinderCompanyDetailsUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,20 +45,6 @@
 			remoteInfo = WorkfinderApplications;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		FCD4DCB5248762FF005CB380 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				FCD4DCB4248762FF005CB380 /* WorkfinderCompanyDetailsUseCase.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		FC03C88D246AEA9E0075258C /* CoverLetterText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverLetterText.swift; sourceTree = "<group>"; };
@@ -240,7 +225,6 @@
 				FC06A17E24641ACA0023DE99 /* Sources */,
 				FC06A17F24641ACA0023DE99 /* Frameworks */,
 				FC06A18024641ACA0023DE99 /* Resources */,
-				FCD4DCB5248762FF005CB380 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
