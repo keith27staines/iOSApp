@@ -29,15 +29,15 @@ class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol{
     weak var view: WorkfinderViewControllerProtocol?
     
     func numberOfSections() -> Int { 1 }
-    func numberOfRowsInSection(_ section: Int) -> Int { 3 }
+    func numberOfRowsInSection(_ section: Int) -> Int { 2 }
     func cellInfoForIndexPath(_ indexPath: IndexPath) -> ApplicationDetailCellInfo {
         switch indexPath.row {
         case 0:
             return ApplicationDetailCellInfo(heading: self.companyName, subheading: self.companyCaption)
         case 1:
             return ApplicationDetailCellInfo(heading: self.hostName, subheading: self.hostCaption)
-        case 2:
-            return ApplicationDetailCellInfo(heading: "Documents", subheading: "0 files")
+//        case 2:
+//            return ApplicationDetailCellInfo(heading: "Documents", subheading: "0 files")
         default: return ApplicationDetailCellInfo()
         }
     }
@@ -83,6 +83,6 @@ class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol{
     }
     
     func showDisclosureIndicatorForIndexPath(_ indexPath: IndexPath) -> Bool {
-        return indexPath.row != 0
+        return true
     }
 }

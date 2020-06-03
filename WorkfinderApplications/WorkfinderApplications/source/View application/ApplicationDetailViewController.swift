@@ -29,7 +29,6 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
         let tableView = UITableView()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.heightAnchor.constraint(equalToConstant: 180).isActive = true
         tableView.setContentCompressionResistancePriority(.required, for: .vertical)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(ApplicationDetailCell.self, forCellReuseIdentifier: "cell")
@@ -94,6 +93,7 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
         view.addSubview(mainStack)
         let guide = view.safeAreaLayoutGuide
         mainStack.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+        tableView.heightAnchor.constraint(equalToConstant: 2 * 60).isActive = true
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -120,7 +120,7 @@ extension ApplicationDetailViewController: UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return indexPath.row != 0
+        return true
     }
 }
 
