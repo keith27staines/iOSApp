@@ -35,7 +35,7 @@ class LocalStoreMigrationsRunner {
             localStore.setValue(latestStoreVersion.rawValue, for: .localStoreVersion)
         }
         updateAppVersionInLocalStore()
-        localStore.setValue(latestStoreVersion, for: .localStoreVersion)
+        localStore.setValue(latestStoreVersion.rawValue, for: .localStoreVersion)
     }
     
     func updateAppVersionInLocalStore() {
