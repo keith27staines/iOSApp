@@ -166,7 +166,7 @@ class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
     }
     
     func configureViews() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share))
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share))
         view.backgroundColor = UIColor.white
         view.addSubview(mainStack)
         let guide = view.safeAreaLayoutGuide
