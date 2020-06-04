@@ -8,6 +8,7 @@ protocol ApplicationsCoordinatorProtocol: AnyObject {
     func applicationsDidLoad(_ applications: [Application])
     func performAction(_ action: ApplicationAction?, for application: Application)
     func showCompanyHost(application: Application)
+    func showCompany(application: Application)
 }
 
 public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, ApplicationsCoordinatorProtocol {
@@ -63,6 +64,13 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
         let vc = ApplicationDetailViewController(
             coordinator: self,
             presenter: presenter)
+        navigationRouter.push(viewController: vc, animated: true)
+    }
+    
+    func showCompany(application: Application) {
+        let service = CompanyService()
+        let presenter = CompanyViewPresenter(application: application, service: service)
+        let vc = CompanyViewController(presenter: presenter)
         navigationRouter.push(viewController: vc, animated: true)
     }
     

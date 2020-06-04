@@ -85,7 +85,11 @@ class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol {
     }
     
     func onTapDetail(indexPath: IndexPath) {
-        coordinator.showCompanyHost(application: application)
+        switch indexPath.row {
+        case 0: coordinator.showCompany(application: application)
+        case 1: coordinator.showCompanyHost(application: application)
+        default: break
+        }
     }
     
     func showDisclosureIndicatorForIndexPath(_ indexPath: IndexPath) -> Bool {

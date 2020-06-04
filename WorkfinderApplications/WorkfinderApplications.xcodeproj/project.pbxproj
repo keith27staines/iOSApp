@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FC03C88E246AEA9E0075258C /* CoverLetterText.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC03C88D246AEA9E0075258C /* CoverLetterText.swift */; };
 		FC06A18C24641ACA0023DE99 /* WorkfinderApplications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC06A18224641ACA0023DE99 /* WorkfinderApplications.framework */; };
 		FC06A19124641ACA0023DE99 /* WorkfinderApplicationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06A19024641ACA0023DE99 /* WorkfinderApplicationsTests.swift */; };
 		FC06A19324641ACA0023DE99 /* WorkfinderApplications.h in Headers */ = {isa = PBXBuildFile; fileRef = FC06A18524641ACA0023DE99 /* WorkfinderApplications.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -34,6 +33,9 @@
 		FC751769246C175900ECBA84 /* OfferPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC751768246C175900ECBA84 /* OfferPresenter.swift */; };
 		FC9C0AC1246BA6DE00CF7A48 /* OfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C0AC0246BA6DE00CF7A48 /* OfferViewController.swift */; };
 		FC9C0AC8246BAAF000CF7A48 /* ApplicationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C0AC7246BAAF000CF7A48 /* ApplicationActions.swift */; };
+		FCC5CDA924891FAE0095F2A5 /* CompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CDA824891FAE0095F2A5 /* CompanyViewController.swift */; };
+		FCC5CDAB24891FE80095F2A5 /* CompanyViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CDAA24891FE80095F2A5 /* CompanyViewPresenter.swift */; };
+		FCC5CDAD2489229F0095F2A5 /* CompanyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CDAC2489229F0095F2A5 /* CompanyService.swift */; };
 		FCD4DCBC24877F1D005CB380 /* HostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD4DCBB24877F1D005CB380 /* HostViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -48,7 +50,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		FC03C88D246AEA9E0075258C /* CoverLetterText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverLetterText.swift; sourceTree = "<group>"; };
 		FC06A18224641ACA0023DE99 /* WorkfinderApplications.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderApplications.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC06A18524641ACA0023DE99 /* WorkfinderApplications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderApplications.h; sourceTree = "<group>"; };
 		FC06A18624641ACA0023DE99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -78,6 +79,9 @@
 		FC751768246C175900ECBA84 /* OfferPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferPresenter.swift; sourceTree = "<group>"; };
 		FC9C0AC0246BA6DE00CF7A48 /* OfferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferViewController.swift; sourceTree = "<group>"; };
 		FC9C0AC7246BAAF000CF7A48 /* ApplicationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationActions.swift; sourceTree = "<group>"; };
+		FCC5CDA824891FAE0095F2A5 /* CompanyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyViewController.swift; sourceTree = "<group>"; };
+		FCC5CDAA24891FE80095F2A5 /* CompanyViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyViewPresenter.swift; sourceTree = "<group>"; };
+		FCC5CDAC2489229F0095F2A5 /* CompanyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyService.swift; sourceTree = "<group>"; };
 		FCD4DCB2248762FF005CB380 /* WorkfinderCompanyDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCompanyDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD4DCBB24877F1D005CB380 /* HostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -159,16 +163,12 @@
 			isa = PBXGroup;
 			children = (
 				FC06A1BB24641EC40023DE99 /* ApplicationsCoordinator.swift */,
-				FC03C88D246AEA9E0075258C /* CoverLetterText.swift */,
-				FC75175F246BB89000ECBA84 /* Application.swift */,
-				FC403608246AE35900F03A5B /* ApplicationState.swift */,
-				FC9C0AC7246BAAF000CF7A48 /* ApplicationActions.swift */,
-				FC6AA526246C4F9D002CC1C7 /* Offer.swift */,
-				FC6AA524246C4F1A002CC1C7 /* OfferState.swift */,
 				FC9C0AC5246BAA3800CF7A48 /* List applications */,
 				FC9C0AC6246BAA5200CF7A48 /* View application */,
 				FC751767246C170D00ECBA84 /* View offer */,
 				FCD4DCBD24877FF5005CB380 /* Host view */,
+				FCC5CDA624891DFF0095F2A5 /* Company view */,
+				FCC5CDA724891EC00095F2A5 /* Models */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -204,6 +204,28 @@
 				FC751765246BDCED00ECBA84 /* ApplicationDetailPresenter.swift */,
 			);
 			path = "View application";
+			sourceTree = "<group>";
+		};
+		FCC5CDA624891DFF0095F2A5 /* Company view */ = {
+			isa = PBXGroup;
+			children = (
+				FCC5CDA824891FAE0095F2A5 /* CompanyViewController.swift */,
+				FCC5CDAA24891FE80095F2A5 /* CompanyViewPresenter.swift */,
+				FCC5CDAC2489229F0095F2A5 /* CompanyService.swift */,
+			);
+			path = "Company view";
+			sourceTree = "<group>";
+		};
+		FCC5CDA724891EC00095F2A5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FC75175F246BB89000ECBA84 /* Application.swift */,
+				FC403608246AE35900F03A5B /* ApplicationState.swift */,
+				FC9C0AC7246BAAF000CF7A48 /* ApplicationActions.swift */,
+				FC6AA526246C4F9D002CC1C7 /* Offer.swift */,
+				FC6AA524246C4F1A002CC1C7 /* OfferState.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		FCD4DCBD24877FF5005CB380 /* Host view */ = {
@@ -328,8 +350,10 @@
 				FC751760246BB89000ECBA84 /* Application.swift in Sources */,
 				FC403609246AE35900F03A5B /* ApplicationState.swift in Sources */,
 				FCD4DCBC24877F1D005CB380 /* HostViewController.swift in Sources */,
+				FCC5CDAB24891FE80095F2A5 /* CompanyViewPresenter.swift in Sources */,
 				FC40360B246AE37C00F03A5B /* ApplicationsPresenter.swift in Sources */,
 				FC9C0AC1246BA6DE00CF7A48 /* OfferViewController.swift in Sources */,
+				FCC5CDA924891FAE0095F2A5 /* CompanyViewController.swift in Sources */,
 				FC6AA523246C4EB4002CC1C7 /* OfferService.swift in Sources */,
 				FC9C0AC8246BAAF000CF7A48 /* ApplicationActions.swift in Sources */,
 				FC6AA527246C4F9D002CC1C7 /* Offer.swift in Sources */,
@@ -340,9 +364,9 @@
 				FC751764246BDC9500ECBA84 /* ApplicationDetailService.swift in Sources */,
 				FC40360F246AE42700F03A5B /* ApplicationTile.swift in Sources */,
 				FC612B562487D05600C498ED /* HostViewPresenter.swift in Sources */,
-				FC03C88E246AEA9E0075258C /* CoverLetterText.swift in Sources */,
 				FC6AA525246C4F1A002CC1C7 /* OfferState.swift in Sources */,
 				FC4BC35F2470F8DA00299993 /* DeclineOptionsModel.swift in Sources */,
+				FCC5CDAD2489229F0095F2A5 /* CompanyService.swift in Sources */,
 				FC751762246BBFAF00ECBA84 /* ApplicationsService.swift in Sources */,
 				FC06A1BC24641EC40023DE99 /* ApplicationsCoordinator.swift in Sources */,
 				FC751766246BDCED00ECBA84 /* ApplicationDetailPresenter.swift in Sources */,
