@@ -14,9 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var log: F4SAnalyticsAndDebugging { return appCoordinator.log }
     // MARK:- Application events
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Prevent the entire application being built if we are just running unit tests
         if ProcessInfo.processInfo.arguments.contains("isUnitTesting") { return true }
-        DataFixes().run()
+        LocalStoreMigrationsRunner().run()
         masterBuilder = MasterBuilder(registrar: application, launchOptions: launchOptions)
         window = masterBuilder.window
         startApp()

@@ -80,6 +80,10 @@
 		FC31F097204D54E3009DD526 /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC31F096204D54E3009DD526 /* Debug.storyboard */; };
 		FC3CD1DA221566F200F91B50 /* Geocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CD1D9221566F200F91B50 /* Geocoding.swift */; };
 		FC50E9CE2213EF5400C9A621 /* SearchModeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */; };
+		FC5336782488CD0200DA3033 /* MigratorBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5336772488CD0200DA3033 /* MigratorBase.swift */; };
+		FC53367A2488CD5000DA3033 /* Migrate_v2_to_v3.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5336792488CD5000DA3033 /* Migrate_v2_to_v3.swift */; };
+		FC5336EE2488D33500DA3033 /* WorkfinderVersionCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC5336ED2488D33500DA3033 /* WorkfinderVersionCheck.framework */; };
+		FC5336EF2488D33500DA3033 /* WorkfinderVersionCheck.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC5336ED2488D33500DA3033 /* WorkfinderVersionCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC56A0F02455B62B00A7EC3F /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC56A0EF2455B62B00A7EC3F /* WorkfinderCommon.framework */; };
 		FC56A0F12455B62B00A7EC3F /* WorkfinderCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC56A0EF2455B62B00A7EC3F /* WorkfinderCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC5D3C6E20FE1CEC00F89169 /* Gemfile in Resources */ = {isa = PBXBuildFile; fileRef = FC5D3C6D20FE1CEB00F89169 /* Gemfile */; };
@@ -132,7 +136,7 @@
 		FCC1DF5B232505640074D5C1 /* CompanyCoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF5A232505640074D5C1 /* CompanyCoordinatorFactory.swift */; };
 		FCC5EBB61F449C310085CE15 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FCC5EBB51F449C310085CE15 /* README.md */; };
 		FCC753EE1F80F26200E9ECD6 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC753ED1F80F26200E9ECD6 /* MapModel.swift */; };
-		FCCFC7CF224D2C110060F7EC /* DataFixes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCFC7CE224D2C110060F7EC /* DataFixes.swift */; };
+		FCCFC7CF224D2C110060F7EC /* LocalStoreMigrationsRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCFC7CE224D2C110060F7EC /* LocalStoreMigrationsRunner.swift */; };
 		FCDC542B24289B85002581FF /* CompanyWorkplaceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC542A24289B85002581FF /* CompanyWorkplaceListViewController.swift */; };
 		FCDC543024289B9D002581FF /* CompanyWorkplaceListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC542C24289B9B002581FF /* CompanyWorkplaceListPresenter.swift */; };
 		FCDC543124289B9D002581FF /* CompanyTileViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC542D24289B9C002581FF /* CompanyTileViewData.swift */; };
@@ -172,6 +176,7 @@
 				FC56A0F12455B62B00A7EC3F /* WorkfinderCommon.framework in Embed Frameworks */,
 				FCBA984E24506D8C00C3D2E6 /* WorkfinderUI.framework in Embed Frameworks */,
 				FC06A19E24641C930023DE99 /* WorkfinderApplications.framework in Embed Frameworks */,
+				FC5336EF2488D33500DA3033 /* WorkfinderVersionCheck.framework in Embed Frameworks */,
 				FCBA984424506D8B00C3D2E6 /* WorkfinderCoordinators.framework in Embed Frameworks */,
 				FCBA983E24506D8B00C3D2E6 /* WorkfinderAppLogic.framework in Embed Frameworks */,
 				FCBA984224506D8B00C3D2E6 /* WorkfinderCompanyDetailsUseCase.framework in Embed Frameworks */,
@@ -295,6 +300,9 @@
 		FC31F096204D54E3009DD526 /* Debug.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
 		FC3CD1D9221566F200F91B50 /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
 		FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModeSelectorView.swift; sourceTree = "<group>"; };
+		FC5336772488CD0200DA3033 /* MigratorBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigratorBase.swift; sourceTree = "<group>"; };
+		FC5336792488CD5000DA3033 /* Migrate_v2_to_v3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Migrate_v2_to_v3.swift; sourceTree = "<group>"; };
+		FC5336ED2488D33500DA3033 /* WorkfinderVersionCheck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderVersionCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC56A0EF2455B62B00A7EC3F /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5D3C6D20FE1CEB00F89169 /* Gemfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Gemfile; sourceTree = "<group>"; };
 		FC681BFE1F57473D0077BECA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -340,7 +348,7 @@
 		FCC1DF5A232505640074D5C1 /* CompanyCoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCoordinatorFactory.swift; sourceTree = "<group>"; };
 		FCC5EBB51F449C310085CE15 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FCC753ED1F80F26200E9ECD6 /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
-		FCCFC7CE224D2C110060F7EC /* DataFixes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFixes.swift; sourceTree = "<group>"; };
+		FCCFC7CE224D2C110060F7EC /* LocalStoreMigrationsRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStoreMigrationsRunner.swift; sourceTree = "<group>"; };
 		FCDC542A24289B85002581FF /* CompanyWorkplaceListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyWorkplaceListViewController.swift; sourceTree = "<group>"; };
 		FCDC542C24289B9B002581FF /* CompanyWorkplaceListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyWorkplaceListPresenter.swift; sourceTree = "<group>"; };
 		FCDC542D24289B9C002581FF /* CompanyTileViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyTileViewData.swift; sourceTree = "<group>"; };
@@ -369,6 +377,7 @@
 				FCBA984D24506D8C00C3D2E6 /* WorkfinderUI.framework in Frameworks */,
 				FC06A19D24641C930023DE99 /* WorkfinderApplications.framework in Frameworks */,
 				FCBA984124506D8B00C3D2E6 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */,
+				FC5336EE2488D33500DA3033 /* WorkfinderVersionCheck.framework in Frameworks */,
 				FCBA984B24506D8C00C3D2E6 /* WorkfinderServices.framework in Frameworks */,
 				FC56A0F02455B62B00A7EC3F /* WorkfinderCommon.framework in Frameworks */,
 				FC7B63E424652FD2006AC0C6 /* AuthenticationServices.framework in Frameworks */,
@@ -501,7 +510,7 @@
 			children = (
 				40E78E161DD31A86000A3776 /* AppDelegate.swift */,
 				FC93DC5723202B8F00F1CE23 /* Config.swift */,
-				FCCFC7CE224D2C110060F7EC /* DataFixes.swift */,
+				FC5336762488CCD700DA3033 /* Local store migrations */,
 				FC9BEE072015FF6000347437 /* UniversalLinkParser.swift */,
 			);
 			name = AppDelegate;
@@ -589,6 +598,7 @@
 		74E1A74324CAFF4EF516E014 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC5336ED2488D33500DA3033 /* WorkfinderVersionCheck.framework */,
 				FC69EBE824813FF300901A2B /* WorkfinderVersionCheck.framework */,
 				FC7B63E324652FD2006AC0C6 /* AuthenticationServices.framework */,
 				FC06A19C24641C930023DE99 /* WorkfinderApplications.framework */,
@@ -826,6 +836,16 @@
 				FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */,
 			);
 			path = Subviews;
+			sourceTree = "<group>";
+		};
+		FC5336762488CCD700DA3033 /* Local store migrations */ = {
+			isa = PBXGroup;
+			children = (
+				FCCFC7CE224D2C110060F7EC /* LocalStoreMigrationsRunner.swift */,
+				FC5336772488CD0200DA3033 /* MigratorBase.swift */,
+				FC5336792488CD5000DA3033 /* Migrate_v2_to_v3.swift */,
+			);
+			name = "Local store migrations";
 			sourceTree = "<group>";
 		};
 		FC67711121258448000B0870 /* Assets */ = {
@@ -1224,6 +1244,7 @@
 			files = (
 				FC1E6A4F2217476400DC335B /* HomeCoordinator.swift in Sources */,
 				FC9BEE082015FF6000347437 /* UniversalLinkParser.swift in Sources */,
+				FC5336782488CD0200DA3033 /* MigratorBase.swift in Sources */,
 				FC99BDC820CFD8E400278DDE /* F4SDownloadService.swift in Sources */,
 				FC21BE3A220F53EB00A0A389 /* SearchViewFooterView.swift in Sources */,
 				FCC753EE1F80F26200E9ECD6 /* MapModel.swift in Sources */,
@@ -1252,12 +1273,13 @@
 				FC1DC06B21FE142D009ABC60 /* AppCoordinator.swift in Sources */,
 				FCE51E422210365B00DC1D50 /* CompanySearchDataGetter.swift in Sources */,
 				FCDC542B24289B85002581FF /* CompanyWorkplaceListViewController.swift in Sources */,
-				FCCFC7CF224D2C110060F7EC /* DataFixes.swift in Sources */,
+				FCCFC7CF224D2C110060F7EC /* LocalStoreMigrationsRunner.swift in Sources */,
 				FC93DC5823202B8F00F1CE23 /* Config.swift in Sources */,
 				40E78EA01DD5E208000A3776 /* LocationHelper.swift in Sources */,
 				40C1A5231DDF5ACE000F80AA /* POIItem.m in Sources */,
 				40C1A51E1DDF5ACE000F80AA /* GMUSimpleClusterAlgorithm.m in Sources */,
 				40A5CF3C1DED6FA2000007AB /* InterestsViewController.swift in Sources */,
+				FC53367A2488CD5000DA3033 /* Migrate_v2_to_v3.swift in Sources */,
 				40E78E701DD32BD4000A3776 /* MenuHelper.swift in Sources */,
 				FC21BE3F220F53EB00A0A389 /* SearchViewProtocol.swift in Sources */,
 				40E78E981DD39275000A3776 /* MapViewController.swift in Sources */,

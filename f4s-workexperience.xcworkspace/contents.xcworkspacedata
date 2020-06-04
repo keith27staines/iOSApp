@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../../../Desktop/WorkfinderVersionCheck/WorkfinderVersionCheck.xcodeproj">
+      location = "group:WorkfinderVersionCheck/WorkfinderVersionCheck.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:WorkfinderApplications/WorkfinderApplications.xcodeproj">
