@@ -78,7 +78,7 @@ public struct Placement: Codable {
         case startDate = "start_date"
         case endDate = "end_date"
         case duration
-        case personalAttributes = "personal_attributes"
-        case skills = "skills"
+        case personalAttributes = "attributes"
+        case skills = "employment_skills"
     }
 }
