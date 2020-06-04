@@ -2,7 +2,7 @@
 import UIKit
 import WorkfinderCommon
 import WorkfinderUI
-//
+
 class ForceAppUpdateViewController: UIViewController {
     
     let presenter: ForceUpdatePresenter
