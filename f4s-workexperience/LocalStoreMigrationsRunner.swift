@@ -9,10 +9,9 @@ enum LocalStoreVersion: String {
     /*
      Need to add a new migration?
      1. Add a new LocalStoreVersion to this enum
-     2. Write a migrator (conforming to `Migrator` and preferably inheriting from `MigratorBase` (which guarentees conformance). The new migrator should perform all the operations reuired to upgrade the local store to whatever new data models you are introducing, or old models you are modifying.
+     2. Write a migrator (conforming to `Migrator` and preferably inheriting from `MigratorBase` (which guarentees conformance). The new migrator should perform all the operations required to upgrade the local store to whatever new data models you are introducing, or old models you are modifying.
      3. Append the new migrator to the `migrations` array in `LocalStoreMigrationsRunner`
      */
-    
 }
 
 class LocalStoreMigrationsRunner {
