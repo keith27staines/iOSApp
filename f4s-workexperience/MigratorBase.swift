@@ -1,27 +1,33 @@
 
+import Foundation
 import WorkfinderCommon
 
-protocol Migrator {
-    var updatesFromStoreVersion: String { get }
-    var updatesToStoreVersion: String { get }
-    func performMigration()
+protocol Migrator: CustomStringConvertible {
+    var updatesFromStoreVersion: LocalStoreVersion { get }
+    var updatesToStoreVersion: LocalStoreVersion { get }
+    func performMigration(localStore: LocalStorageProtocol) -> MigrationResult
+}
+
+enum MigrationResult {
+    case notNeeded(LocalStoreVersion)
+    case performed(LocalStoreVersion)
+    case error(LocalStoreVersion, Error)
 }
 
 class MigratorBase: Migrator {
+
+    let updatesFromStoreVersion: LocalStoreVersion
+    let updatesToStoreVersion: LocalStoreVersion
+    var description: String {
+        "migrate from \(updatesFromStoreVersion) to \(updatesToStoreVersion)"
+    }
     
-    let store = UserDefaults.standard
-    let updatesFromStoreVersion: String
-    let updatesToStoreVersion: String
-    
-    init(updatesFromStoreVersion: String, updatesToStoreVersion: String) {
+    init(updatesFromStoreVersion: LocalStoreVersion,
+         updatesToStoreVersion: LocalStoreVersion){
         self.updatesFromStoreVersion = updatesFromStoreVersion
         self.updatesToStoreVersion = updatesToStoreVersion
     }
     
-    func performMigration() { }
-    
-    func updateLocalStoreVersion(string: String) {
-        store.setValue(updatesToStoreVersion, for: .localStoreVersion)
-    }
-    
+    func performMigration(localStore: LocalStorageProtocol) -> MigrationResult {fatalError("Must override")}
+
 }
