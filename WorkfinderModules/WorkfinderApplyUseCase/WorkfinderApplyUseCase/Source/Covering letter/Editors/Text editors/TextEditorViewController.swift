@@ -137,7 +137,6 @@ class TextEditorViewController: UIViewController {
         self.guidanceText = guidanceText
         self.placeholderText = placeholderText
         super.init(nibName: nil, bundle: nil)
-        self.title = editorTitle
     }
     
     func updateWordCount() {

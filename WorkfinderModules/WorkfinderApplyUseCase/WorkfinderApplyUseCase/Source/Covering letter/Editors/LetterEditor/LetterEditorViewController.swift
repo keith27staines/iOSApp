@@ -30,7 +30,6 @@ class LetterEditorViewController: UIViewController, LetterEditorViewProtocol {
             default:
                 messageHandler.displayOptionalErrorIfNotNil(error, cancelHandler: nil, retryHandler: nil)
             }
-            
         }
     }
     
@@ -79,7 +78,6 @@ class LetterEditorViewController: UIViewController, LetterEditorViewProtocol {
         tableView.dataSource = self
         tableView.delegate = self
         presenter.onViewDidLoad(view: self)
-        navigationItem.title = "Select values"
         self.loadData()
     }
     

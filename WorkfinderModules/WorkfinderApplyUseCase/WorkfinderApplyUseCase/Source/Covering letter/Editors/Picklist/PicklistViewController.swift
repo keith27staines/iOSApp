@@ -15,7 +15,7 @@ class PicklistViewController: UITableViewController {
     var dataSource: PicklistDataSourceAndDelegate!
     
     override func viewDidLoad() {
-        navigationItem.title = "Select \(picklist.type.title)"
+        // navigationItem.title = "Select \(picklist.type.title)"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         view.backgroundColor = UIColor.white
         navigationItem.largeTitleDisplayMode = .automatic

@@ -24,7 +24,6 @@ class SearchlistViewController<A: Codable>: UIViewController, UISearchBarDelegat
     }()
     
     override func viewDidLoad() {
-        navigationItem.title = "Select \(picklist.type.title)"
         configureViews()
     }
     

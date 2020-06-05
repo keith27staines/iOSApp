@@ -57,7 +57,6 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
     }
     
     override func viewDidLoad() {
-        self.title = presenter.screenTitle
         configureViews()
         presenter.onViewDidLoad(view: self)
         refreshFromPresenter()
