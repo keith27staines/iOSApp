@@ -19,9 +19,7 @@
 		FC5336D42488D1B600DA3033 /* WorkfinderVersionCheckerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5336D22488D1B600DA3033 /* WorkfinderVersionCheckerTests.swift */; };
 		FC5336D72488D22A00DA3033 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC5336D62488D22A00DA3033 /* WorkfinderCommon.framework */; };
 		FC5336DC2488D24200DA3033 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC5336DA2488D24200DA3033 /* WorkfinderServices.framework */; };
-		FC5336DD2488D24200DA3033 /* WorkfinderServices.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC5336DA2488D24200DA3033 /* WorkfinderServices.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC5336DE2488D24200DA3033 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC5336DB2488D24200DA3033 /* WorkfinderUI.framework */; };
-		FC5336DF2488D24200DA3033 /* WorkfinderUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC5336DB2488D24200DA3033 /* WorkfinderUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,21 +31,6 @@
 			remoteInfo = WorkfinderVersionCheck;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		FC5336E02488D24200DA3033 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				FC5336DD2488D24200DA3033 /* WorkfinderServices.framework in Embed Frameworks */,
-				FC5336DF2488D24200DA3033 /* WorkfinderUI.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		FC5336A92488D0C900DA3033 /* WorkfinderVersionCheck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderVersionCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,7 +159,6 @@
 				FC5336A52488D0C900DA3033 /* Sources */,
 				FC5336A62488D0C900DA3033 /* Frameworks */,
 				FC5336A72488D0C900DA3033 /* Resources */,
-				FC5336E02488D24200DA3033 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
