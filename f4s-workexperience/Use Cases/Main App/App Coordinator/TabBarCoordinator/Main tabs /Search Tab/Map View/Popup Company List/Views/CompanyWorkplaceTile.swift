@@ -50,7 +50,6 @@ class CompanyWorkplaceTile: UITableViewCell {
         industryLabel.text = viewData.industry
         logoView.load(companyName: viewData.companyName,
                       urlString: viewData.logoUrlString,
-                      fetcher: nil,
                       completion: nil)
     }
     

@@ -36,7 +36,7 @@ class OfferService: OfferServiceProtocol{
                     hostContact: json.association?.host?.displayName,
                     email: json.association?.host?.emails?.first,
                     location: self.addressStringFromOfferJson(json),
-                    logoUrl: json.association?.location?.company?.logoUrlString,
+                    logoUrl: json.association?.location?.company?.logo,
                     reasonWithdrawn: nil)
                 completion(Result<Offer,Error>.success(offer))
             case .failure(let error):

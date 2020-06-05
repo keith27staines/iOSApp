@@ -93,7 +93,7 @@ class ApplicationTile: UITableViewCell {
         statusView.text = application.state.rawValue
         hostInformation.text = application.hostInformation
         dateString.text = application.appliedDateString
-        logo.load(companyName: application.companyName, urlString: application.logoUrl, fetcher: nil, completion: nil)
+        logo.load(companyName: application.companyName, urlString: application.logoUrl, completion: nil)
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

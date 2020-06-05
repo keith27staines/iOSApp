@@ -147,7 +147,6 @@ class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
         self.logo.load(
             companyName: presenter.companyName,
             urlString: self.presenter.logoUrl,
-            fetcher: nil,
             completion: nil)
         self.title = self.presenter.screenTitle
         acceptButton.isHidden = presenter.hideAcceptDeclineButtons

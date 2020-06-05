@@ -22,7 +22,7 @@ public class F4SSelfLoadingImageView : UIImageView {
     
     public func load(urlString: String?,
               defaultImage: UIImage?,
-              fetcher: ImageFetching? = ImageFetcher(),
+              fetcher: ImageFetching = ImageFetcher(),
               completion: ( () -> Void )? = nil ) {
         self.fetcher?.cancel()
         self.fetcher = fetcher

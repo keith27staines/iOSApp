@@ -21,7 +21,7 @@ class CompanyHeaderViewPresenter: CompanyHeaderViewPresenterProtocol {
     }
     
     var companyName: String { model.companyJson.name ?? "unnamed company" }
-    var logoUrlString: String? { model.companyJson.logoUrlString }
+    var logoUrlString: String? { model.companyJson.logo }
     
     var distanceFromCompany: String = "unknown distance" {
         didSet {

@@ -39,7 +39,7 @@ public struct CompanyJson: Codable {
     public var name: String?
     public var description: String?
     public var industries: [CodeAndName]?
-    public var logoUrlString: String?
+    public var logo: String?
     public var duedilUrlString: String?
     public var locations: [CompanyLocationJson]?
     public var employeeCount: Int?
@@ -70,7 +70,7 @@ public struct CompanyJson: Codable {
         self.uuid = uuid
         self.name = name
         self.industries = industries
-        self.logoUrlString = logoUrlString
+        self.logo = logoUrlString
         self.description = description
         self.employeeCount = employeeCount
         self.turnover = turnover

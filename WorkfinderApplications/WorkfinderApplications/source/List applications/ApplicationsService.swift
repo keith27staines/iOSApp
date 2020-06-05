@@ -55,7 +55,7 @@ extension Application {
         self.hostRole = json.association?.title ?? "unknown role"
         self.companyName = json.association?.location?.company?.name ?? "unknown company"
         self.industry = json.association?.location?.company?.industries?.first?.name
-        self.logoUrl = json.association?.location?.company?.logoUrlString
+        self.logoUrl = json.association?.location?.company?.logo
         self.appliedDate = json.created_at ?? "1700-01-01"
         self.coverLetterString = json.cover_letter ?? ""
     }

@@ -197,8 +197,7 @@ class CompanyViewController: UIViewController {
         companyNameLabel.text = presenter.companyName
         companyIconImageView.load(
             companyName: presenter.companyName ?? "?",
-            urlString: presenter.logoUrlString,
-            fetcher: nil, completion: nil)
+            urlString: presenter.logoUrlString, completion: nil)
         distanceLabel.text = presenter.distanceFromUserToCompany
         self.tableView.reloadData()
     }

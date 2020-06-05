@@ -84,7 +84,6 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
         logo.load(
             companyName: presenter.companyName ?? "?",
             urlString: self.presenter.logoUrl,
-            fetcher: nil,
             completion: nil)
     }
     

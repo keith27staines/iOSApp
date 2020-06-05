@@ -35,7 +35,7 @@ public class CompanyLogoView: UIView {
     public func load(
         companyName: String,
         urlString: String?,
-        fetcher: ImageFetching?,
+        fetcher: ImageFetching = ImageFetcher(),
         completion: (() -> Void)?) {
         let backgroundColor = WorkfinderColors.primaryColor
         let firstCharacter: Character = companyName.first ?? "?"

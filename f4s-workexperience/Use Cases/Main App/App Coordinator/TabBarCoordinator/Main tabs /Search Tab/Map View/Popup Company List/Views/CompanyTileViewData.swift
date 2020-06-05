@@ -14,7 +14,7 @@ struct CompanyTileViewData {
     init(companyJson: CompanyJson) {
         self.uuid = companyJson.uuid!
         self.companyName = companyJson.name ?? "unnamed company"
-        self.logoUrlString = companyJson.logoUrlString
+        self.logoUrlString = companyJson.logo
         self.industry = companyJson.industries?.first?.name
     }
 }
