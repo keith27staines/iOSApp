@@ -68,8 +68,13 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
     }
     
     func showCompany(application: Application) {
-        let service = CompanyService()
-        let presenter = CompanyViewPresenter(application: application, service: service)
+        let companyService = CompanyService(networkConfig: networkConfig)
+        let associationsService = HostLocationAssociationsService(networkConfig: networkConfig)
+        let presenter = CompanyViewPresenter(
+            coordinator: self,
+            application: application,
+            companyService: companyService,
+            associationsService: associationsService)
         let vc = CompanyViewController(presenter: presenter)
         navigationRouter.push(viewController: vc, animated: true)
     }

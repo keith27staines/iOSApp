@@ -46,7 +46,6 @@ class CompanyViewController: UIViewController {
     let distanceLabelColor = UIColor.init(white: 0.5, alpha: 1)
     
     lazy var distanceStack: UIStackView = {
-        
         let locationImage = UIImage(named: "location")?.withRenderingMode(.alwaysTemplate)
         let locationIcon = UIImageView(image: locationImage)
         locationIcon.contentMode = .scaleAspectFit
@@ -68,6 +67,18 @@ class CompanyViewController: UIViewController {
         return label
     }()
     
+    lazy var headerView: UIView = {
+        let view = UIView()
+        view.addSubview(iconContainerView)
+        view.addSubview(companyNameLabel)
+        view.addSubview(distanceStack)
+        iconContainerView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: nil, size: iconViewSize)
+        companyNameLabel.anchor(top: nil, leading: companyIconImageView.trailingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0))
+        companyNameLabel.centerYAnchor.constraint(equalTo: iconContainerView.centerYAnchor).isActive = true
+        distanceStack.anchor(top: companyNameLabel.bottomAnchor, leading: companyNameLabel.leadingAnchor, bottom: nil, trailing: companyNameLabel.trailingAnchor, padding: UIEdgeInsets(top: 4, left: 0, bottom: 0, right: 0))
+        return view
+    }()
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: CGRect.zero, style: .grouped)
         tableView.estimatedRowHeight = UITableView.automaticDimension
@@ -86,25 +97,21 @@ class CompanyViewController: UIViewController {
     
     func configureViews() {
         view.backgroundColor = WorkfinderColors.white
-        view.addSubview(iconContainerView)
-        view.addSubview(companyNameLabel)
-        view.addSubview(distanceStack)
+        view.addSubview(headerView)
         view.addSubview(tableView)
         let guide = view.safeAreaLayoutGuide
-        iconContainerView.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 8, left: 8, bottom: 0, right: 8), size: iconViewSize)
-        companyNameLabel.anchor(top: nil, leading: companyIconImageView.trailingAnchor, bottom: nil, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16), size: CGSize.zero)
-        companyNameLabel.centerYAnchor.constraint(equalTo: iconContainerView.centerYAnchor).isActive = true
-        distanceStack.anchor(top: companyNameLabel.bottomAnchor, leading: companyNameLabel.leadingAnchor, bottom: nil, trailing: companyNameLabel.trailingAnchor, padding: UIEdgeInsets(top: 4, left: 0, bottom: 0, right: 0))
-        tableView.anchor(top: distanceLabel.bottomAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor)
+        headerView.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: nil, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))
+        tableView.anchor(top: headerView.bottomAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
     }
     
     override func viewDidLoad() {
         configureViews()
         presenter.onViewDidLoad(view: self)
-        refreshFromPresenter()
+        loadData()
     }
     
     func loadData() {
+        refreshFromPresenter()
         userMessageHandler.showLoadingOverlay(self.view)
         presenter.loadData { [weak self] (optionalError) in
             guard let self = self else { return }
@@ -120,7 +127,8 @@ class CompanyViewController: UIViewController {
             companyName: presenter.companyName ?? "?",
             urlString: presenter.logoUrlString,
             fetcher: nil, completion: nil)
-        distanceLabel.text = presenter.distanceFromCompany
+        distanceLabel.text = presenter.distanceFromUserToCompany
+        self.tableView.reloadData()
     }
     
     init(presenter: CompanyViewPresenter) {

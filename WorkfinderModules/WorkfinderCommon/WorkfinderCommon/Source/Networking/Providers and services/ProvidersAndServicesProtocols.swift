@@ -2,7 +2,7 @@
 import Foundation
 
 public protocol HostLocationAssociationsServiceProtocol {
-    func fetchAssociation(uuid: F4SUUID, completion:  @escaping((Result<HostUuidLocationAssociationJson,Error>) -> Void))
+    func fetchAssociation(uuid: F4SUUID, completion:  @escaping((Result<HostWorkplaceAssociationJson,Error>) -> Void))
     func fetchAssociations(for locationUuid: F4SUUID, completion:  @escaping((Result<HostLocationAssociationListJson,Error>) -> Void))
 }
 
@@ -13,7 +13,7 @@ public struct ServerListJson<A:Decodable>: Decodable {
     public let results: [A]
 }
 
-public struct HostUuidLocationAssociationJson: Codable {
+public struct HostWorkplaceAssociationJson: Codable {
     public let uuid: F4SUUID
     public let locationUuid: F4SUUID
     public let host: F4SUUID
@@ -50,7 +50,7 @@ public struct HostLocationAssociationJson: Codable {
     public let stopped: String?
     public var isSelected: Bool = false
     
-    public init(uuidAssociation: HostUuidLocationAssociationJson, host:Host) {
+    public init(uuidAssociation: HostWorkplaceAssociationJson, host:Host) {
         self.uuid = uuidAssociation.uuid
         self.locationUuid = uuidAssociation.locationUuid
         self.host = host

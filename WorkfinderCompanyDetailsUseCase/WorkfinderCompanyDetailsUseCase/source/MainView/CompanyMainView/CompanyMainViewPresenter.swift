@@ -26,8 +26,8 @@ class CompanyMainViewPresenter: CompanyMainViewPresenterProtocol {
     weak var coordinator: CompanyMainViewCoordinatorProtocol?
     weak var view: CompanyMainViewProtocol?
     var companyWorkplace: CompanyWorkplace
-    var pin: PinJson { self.companyWorkplace.pinJson }
     var companyName: String { return self.companyWorkplace.companyJson.name ?? "unnamed company" }
+    var pin: PinJson { self.companyWorkplace.pinJson }
     var companyLocation: LatLon {
         return LatLon(latitude: CGFloat(pin.lat), longitude: CGFloat(pin.lon))
     }

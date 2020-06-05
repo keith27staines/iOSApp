@@ -35,7 +35,6 @@
 		FC9C0AC8246BAAF000CF7A48 /* ApplicationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C0AC7246BAAF000CF7A48 /* ApplicationActions.swift */; };
 		FCC5CDA924891FAE0095F2A5 /* CompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CDA824891FAE0095F2A5 /* CompanyViewController.swift */; };
 		FCC5CDAB24891FE80095F2A5 /* CompanyViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CDAA24891FE80095F2A5 /* CompanyViewPresenter.swift */; };
-		FCC5CDAD2489229F0095F2A5 /* CompanyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CDAC2489229F0095F2A5 /* CompanyService.swift */; };
 		FCC5CDAF2489418B0095F2A5 /* CompanyTableSectionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CDAE2489418B0095F2A5 /* CompanyTableSectionsModel.swift */; };
 		FCC5CDB12489422F0095F2A5 /* NameValueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CDB02489422F0095F2A5 /* NameValueCell.swift */; };
 		FCC5CDB3248942930095F2A5 /* CompanySummaryTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC5CDB2248942930095F2A5 /* CompanySummaryTextCell.swift */; };
@@ -87,7 +86,6 @@
 		FC9C0AC7246BAAF000CF7A48 /* ApplicationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationActions.swift; sourceTree = "<group>"; };
 		FCC5CDA824891FAE0095F2A5 /* CompanyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyViewController.swift; sourceTree = "<group>"; };
 		FCC5CDAA24891FE80095F2A5 /* CompanyViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyViewPresenter.swift; sourceTree = "<group>"; };
-		FCC5CDAC2489229F0095F2A5 /* CompanyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyService.swift; sourceTree = "<group>"; };
 		FCC5CDAE2489418B0095F2A5 /* CompanyTableSectionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyTableSectionsModel.swift; sourceTree = "<group>"; };
 		FCC5CDB02489422F0095F2A5 /* NameValueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameValueCell.swift; sourceTree = "<group>"; };
 		FCC5CDB2248942930095F2A5 /* CompanySummaryTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanySummaryTextCell.swift; sourceTree = "<group>"; };
@@ -223,7 +221,6 @@
 			children = (
 				FCC5CDA824891FAE0095F2A5 /* CompanyViewController.swift */,
 				FCC5CDAA24891FE80095F2A5 /* CompanyViewPresenter.swift */,
-				FCC5CDAC2489229F0095F2A5 /* CompanyService.swift */,
 				FCC5CDB02489422F0095F2A5 /* NameValueCell.swift */,
 				FCC5CDB2248942930095F2A5 /* CompanySummaryTextCell.swift */,
 				FCC5CDB4248942F00095F2A5 /* SectionHeadersAndFooters.swift */,
@@ -389,7 +386,6 @@
 				FC6AA525246C4F1A002CC1C7 /* OfferState.swift in Sources */,
 				FCC5CDAF2489418B0095F2A5 /* CompanyTableSectionsModel.swift in Sources */,
 				FC4BC35F2470F8DA00299993 /* DeclineOptionsModel.swift in Sources */,
-				FCC5CDAD2489229F0095F2A5 /* CompanyService.swift in Sources */,
 				FC751762246BBFAF00ECBA84 /* ApplicationsService.swift in Sources */,
 				FCC5CDB7248945840095F2A5 /* CompanySummarySectionPresenter.swift in Sources */,
 				FC06A1BC24641EC40023DE99 /* ApplicationsCoordinator.swift in Sources */,

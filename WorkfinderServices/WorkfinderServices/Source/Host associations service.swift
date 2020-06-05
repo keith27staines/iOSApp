@@ -8,14 +8,14 @@ public class HostLocationAssociationsService: WorkfinderService, HostLocationAss
     
     public func fetchAssociation(
         uuid: F4SUUID,
-        completion:  @escaping((Result<HostUuidLocationAssociationJson,Error>) -> Void)) {
+        completion:  @escaping((Result<HostWorkplaceAssociationJson,Error>) -> Void)) {
         do {
             let path = "\(relativePath)\(uuid)"
             let request = try buildRequest(relativePath: path, queryItems: nil, verb: .get)
             performTask(with: request, completion: completion,
             attempting: #function)
         } catch {
-            completion(Result<HostUuidLocationAssociationJson,Error>.failure(error))
+            completion(Result<HostWorkplaceAssociationJson,Error>.failure(error))
         }
     }
     

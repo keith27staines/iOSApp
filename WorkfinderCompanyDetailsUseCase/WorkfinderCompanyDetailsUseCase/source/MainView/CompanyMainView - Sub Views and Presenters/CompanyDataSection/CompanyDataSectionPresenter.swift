@@ -24,20 +24,21 @@ protocol CompanyDataSectionPresenterProtocol: class {
 
 class CompanyDataSectionPresenter: CompanyDataSectionPresenterProtocol {
     
+    var companyWorkplace: CompanyWorkplace?
     var numberOfRows: Int { return items.count }
-    var company: CompanyJson { return self.companyWorkplace.companyJson }
+    var company: CompanyJson? { return self.companyWorkplace?.companyJson }
     
     var revenueString: String {
-        let turnover = ScaledNumber(amount: company.turnover ?? 0).formattedString()
+        let turnover = ScaledNumber(amount: company?.turnover ?? 0).formattedString()
         return String(turnover)
     }
     
     var growthString: String {
-        let growth = ScaledNumber(amount: company.growth ?? 0).formattedString()
+        let growth = ScaledNumber(amount: company?.growth ?? 0).formattedString()
         return String(growth)
     }
     
-    var numberOfEmployees: String { String(company.employeeCount ?? 0) }
+    var numberOfEmployees: String { String(company?.employeeCount ?? 0) }
     
     var duedilIsHidden: Bool { return false }
     
@@ -115,8 +116,6 @@ class CompanyDataSectionPresenter: CompanyDataSectionPresenterProtocol {
                                    buttonImage: nil,
                                    link: nil)
     }
-    
-    let companyWorkplace: CompanyWorkplace
     
     init(companyWorkplace: CompanyWorkplace) {
         self.companyWorkplace = companyWorkplace
