@@ -75,12 +75,10 @@ class CompanyViewPresenter: NSObject {
                         completion(error)
                     }
                 }
-                completion(nil)
             case .failure(let error):
                 completion(error)
             }
         }
-        completion(nil)
     }
     
     func rebuild(companyJson: CompanyJson, association: HostWorkplaceAssociationJson) {
@@ -157,6 +155,7 @@ class CompanyViewPresenter: NSObject {
             return UITableViewCell()
         }
     }
+    
 }
 
 extension CompanyViewPresenter: CLLocationManagerDelegate {

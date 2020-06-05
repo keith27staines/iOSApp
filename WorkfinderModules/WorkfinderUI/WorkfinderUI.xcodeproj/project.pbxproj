@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC0100B8248A33B1007D8020 /* CompanyMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0100B7248A33B0007D8020 /* CompanyMapView.swift */; };
 		FC0C7109232BA38700816332 /* OptionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C7108232BA38700816332 /* OptionLabel.swift */; };
 		FC116B4C2284510E00146478 /* WebViewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC116B4B2284510E00146478 /* WebViewAssets.xcassets */; };
 		FC116B4E2284511E00146478 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC116B4D2284511E00146478 /* WebViewController.swift */; };
@@ -62,6 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FC0100B7248A33B0007D8020 /* CompanyMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyMapView.swift; sourceTree = "<group>"; };
 		FC0B6B362323D22400A1867D /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC0C7108232BA38700816332 /* OptionLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionLabel.swift; sourceTree = "<group>"; };
 		FC116B4B2284510E00146478 /* WebViewAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WebViewAssets.xcassets; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				FCEB1D24229FC6D500C6D2C2 /* UIView+Extensions.swift */,
 				FC116B4F2284515F00146478 /* WebView */,
 				FCE8DB142320FCB100934E2F /* UIImage+extensions.swift */,
+				FC0100B7248A33B0007D8020 /* CompanyMapView.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				FC22DBF322F97AAB0068C61C /* UserMessageHandler.swift in Sources */,
 				FC22DBEA22F979750068C61C /* Skin.swift in Sources */,
 				FC22DBE922F979750068C61C /* Skinner.swift in Sources */,
+				FC0100B8248A33B1007D8020 /* CompanyMapView.swift in Sources */,
 				FC116B4E2284511E00146478 /* WebViewController.swift in Sources */,
 				FCE8DB152320FCB100934E2F /* UIImage+extensions.swift in Sources */,
 				FC6E42DF2455855D005E0D08 /* WorkfinderColors.swift in Sources */,

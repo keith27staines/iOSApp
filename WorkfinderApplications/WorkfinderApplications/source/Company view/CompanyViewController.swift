@@ -2,6 +2,7 @@
 import UIKit
 import WorkfinderCommon
 import WorkfinderUI
+import MapKit
 
 class CompanyViewController: UIViewController {
     
@@ -64,8 +65,19 @@ class CompanyViewController: UIViewController {
         label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption1)
         label.text = "2.0 km away"
         label.textColor = UIColor.init(white: 0.5, alpha: 1)
+        label.isUserInteractionEnabled = true
+        let touch = UITapGestureRecognizer(target: self, action: #selector(showMap))
+        label.addGestureRecognizer(touch)
         return label
     }()
+    
+    @objc func showMap() {
+        if mapOffsetConstant == mapInConstant {
+            animateMapOut()
+        } else {
+            animateMapIn()
+        }
+    }
     
     lazy var headerView: UIView = {
         let view = UIView()
@@ -95,13 +107,72 @@ class CompanyViewController: UIViewController {
         return tableView
     }()
     
+    var mapTopConstraint: NSLayoutConstraint?
+    var mapBottomConstraint: NSLayoutConstraint?
+    
+    lazy var mapView: CompanyMapView = {
+        let mapView = CompanyMapView(
+            companyName: self.presenter.companyName ?? "unknown company",
+            companyLatLon: self.presenter.companyLocation)
+        mapView.translatesAutoresizingMaskIntoConstraints = false
+        mapView.delegate = self
+        return mapView
+    }()
+    
+    var mapOutContstant: CGFloat = 2000
+    var mapInConstant: CGFloat = 0
+    var mapOffsetConstant: CGFloat = 2000 {
+        didSet {
+            mapTopConstraint?.constant = mapOffsetConstant
+            mapBottomConstraint?.constant = mapOffsetConstant
+        }
+    }
+    
+    func animateMapIn() {
+        mapOffsetConstant = mapInConstant
+        mapView.prepareForDisplay()
+        UIView.animate(
+            withDuration: 0.6,
+            delay: 0,
+            usingSpringWithDamping: 0.7,
+            initialSpringVelocity: 2,
+            options: [],
+            animations: { [weak self] in
+                self?.view.layoutSubviews()
+        }, completion: nil)
+    }
+    
+    @objc func animateMapOut() {
+        mapOffsetConstant = mapOutContstant
+        UIView.animate(
+            withDuration: 0.3,
+            delay: 0,
+            options: [UIView.AnimationOptions.curveEaseIn],
+            animations: { [weak self] in
+                self?.view.layoutSubviews()
+        })
+    }
+    
     func configureViews() {
         view.backgroundColor = WorkfinderColors.white
         view.addSubview(headerView)
         view.addSubview(tableView)
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animateMapOut)))
         let guide = view.safeAreaLayoutGuide
         headerView.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: nil, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))
         tableView.anchor(top: headerView.bottomAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+    }
+    
+    func configureMapView() {
+        view.addSubview(mapView)
+        mapView.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor)
+        mapTopConstraint = mapView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0)
+        mapBottomConstraint = mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+        mapTopConstraint?.isActive = true
+        mapBottomConstraint?.isActive = true
+        mapInConstant = 100.0
+        mapOutContstant = view.frame.height
+        mapOffsetConstant = view.frame.height
     }
     
     override func viewDidLoad() {
@@ -118,6 +189,7 @@ class CompanyViewController: UIViewController {
             self.userMessageHandler.hideLoadingOverlay()
             self.userMessageHandler.displayOptionalErrorIfNotNil(optionalError, retryHandler: self.loadData)
             self.refreshFromPresenter()
+            self.configureMapView()
         }
     }
     
@@ -157,3 +229,17 @@ extension CompanyViewController: UITableViewDataSource {
 extension CompanyViewController: UITableViewDelegate {
     
 }
+
+extension CompanyViewController : MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let view = MKAnnotationView()
+        if annotation is F4SCompanyAnnotation {
+            view.canShowCallout = true
+            view.image = #imageLiteral(resourceName: "markerFavouriteIcon")
+            return view
+        }
+        return nil
+    }
+}
+
+
