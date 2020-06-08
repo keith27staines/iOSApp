@@ -25,8 +25,6 @@ class HostViewController: UIViewController, UITableViewDataSource {
     }()
     
     override func viewDidLoad() {
-        self.title = "Host"
-        navigationItem.backBarButtonItem?.title = "Back"
         configureViews()
         presenter.onViewDidLoad(view: self)
         loadData()

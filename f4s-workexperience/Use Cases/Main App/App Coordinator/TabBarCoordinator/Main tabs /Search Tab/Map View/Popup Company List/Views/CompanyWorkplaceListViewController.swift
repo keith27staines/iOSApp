@@ -39,12 +39,13 @@ class CompanyWorkplaceListViewController: UIViewController {
     }
     
     func configureViews() {
+        let guide = view.safeAreaLayoutGuide
+        view.addSubview(pageStack)
+        pageStack.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
         configureTableView()
     }
     
     func configureTableView() {
-        view.addSubview(pageStack)
-        pageStack.fillSuperview()
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(CompanyWorkplaceTile.self, forCellReuseIdentifier: "CompanyWorkplaceTile")

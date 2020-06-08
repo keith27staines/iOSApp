@@ -57,11 +57,13 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
                         return picklistIem.value ?? (picklistIem.name ?? "unnamed value")
                     }
                 } else {
+                    var returnValue: String
                     if picklistIem.isOther {
-                        return picklistIem.otherValue ?? ""
+                        returnValue = picklistIem.otherValue ?? ""
                     } else {
-                        return picklistIem.value ?? (picklistIem.name ?? "unnamed value")
+                        returnValue = (picklistIem.value ?? (picklistIem.name ?? "unnamed value"))
                     }
+                    return picklist.type.presentationValueShouldBeLowercased ? returnValue.lowercased() : returnValue
                 }
             }
             if !items.isEmpty {

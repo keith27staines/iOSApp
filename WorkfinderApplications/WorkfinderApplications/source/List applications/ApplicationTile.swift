@@ -42,6 +42,7 @@ class ApplicationTile: UITableViewCell {
         let stack = UIStackView(arrangedSubviews: [logo, UIView()])
         stack.axis = .vertical
         stack.spacing = 8
+        stack.widthAnchor.constraint(equalToConstant: companyLogoWidth).isActive = true
         return stack
     }()
     
@@ -49,6 +50,7 @@ class ApplicationTile: UITableViewCell {
         let label = UILabel()
         label.font = WorkfinderFonts.heading
         label.textColor = UIColor.black
+        label.numberOfLines = 1
         return label
     }()
     
@@ -56,6 +58,7 @@ class ApplicationTile: UITableViewCell {
         let label = UILabel()
         label.font = WorkfinderFonts.subHeading
         label.textColor = WorkfinderColors.textMedium
+        label.numberOfLines = 1
         return label
     }()
     
@@ -63,6 +66,7 @@ class ApplicationTile: UITableViewCell {
         let label = UILabel()
         label.font = WorkfinderFonts.heading
         label.textColor = WorkfinderColors.textMedium
+        label.numberOfLines = 1
         return label
     }()
     
@@ -95,7 +99,7 @@ class ApplicationTile: UITableViewCell {
     
     func configureViews() {
         self.contentView.addSubview(mainStack)
-        mainStack.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 8, left: 4, bottom: 0, right: 0))
+        mainStack.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: nil, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 8, left: 4, bottom: 0, right: 4))
         self.contentView.addSubview(statusViewContainer)
         statusViewContainer.anchor(top: mainStack.bottomAnchor, leading: logo.leadingAnchor, bottom: contentView.bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 11, left: 0, bottom: 8, right: 0))
     }
