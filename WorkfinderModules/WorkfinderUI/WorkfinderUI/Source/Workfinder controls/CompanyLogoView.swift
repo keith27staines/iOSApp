@@ -7,13 +7,10 @@ public class CompanyLogoView: UIView {
     
     private lazy var logoView: F4SSelfLoadingImageView = {
         let logoView = F4SSelfLoadingImageView()
-        logoView.layer.cornerRadius = 8
-        logoView.layer.borderWidth = 2
         logoView.layer.masksToBounds = true
-        logoView.layer.borderColor = UIColor.lightGray.cgColor
+        logoView.layer.borderColor = UIColor.init(netHex: 0xE5E5E5).cgColor
+        logoView.layer.borderWidth = 1
         logoView.contentMode = .scaleAspectFit
-        logoView.layer.shadowRadius = 5
-        logoView.layer.shadowColor = UIColor.black.cgColor
         logoView.translatesAutoresizingMaskIntoConstraints = false
         return logoView
     }()
