@@ -12,11 +12,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var appCoordinator: AppCoordinatorProtocol!
     
     var log: F4SAnalyticsAndDebugging { return appCoordinator.log }
-    // MARK:- Application events
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         if ProcessInfo.processInfo.arguments.contains("isUnitTesting") { return true }
         let localStore = LocalStore()
         LocalStoreMigrationsRunner().run(localStore: localStore)
+        UIApplication.shared.applicationIconBadgeNumber = 0
         masterBuilder = MasterBuilder(registrar: application, launchOptions: launchOptions)
         window = masterBuilder.window
         startApp()
