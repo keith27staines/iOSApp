@@ -49,8 +49,8 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
         return button
     }()
     
-    @objc func didTapShowTemplateButton() { presenter.onDidTapShowTemplateButton() }
-    @objc func didTapShowCoverLetterButton() { presenter.onDidTapShowCoverLetterButton() }
+//    @objc func didTapShowTemplateButton() { presenter.onDidTapShowTemplateButton() }
+//    @objc func didTapShowCoverLetterButton() { presenter.onDidTapShowCoverLetterButton() }
     @objc func didTapShowEditor() { presenter.onDidTapSelectOptionsButton() }
     @objc func didCancel() { presenter.onDidDismiss() }
     @objc func didTapNext() { presenter.onDidTapNext() }
@@ -60,13 +60,11 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
         view.backgroundColor = UIColor.white
         configureSubViews()
         presenter.onViewDidLoad(view: self)
-        refreshFromPresenter()
         loadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         configureNavigationBar()
-        presenter.onDidTapShowCoverLetterButton()
     }
 
     override func viewWillDisappear(_ animated: Bool) {

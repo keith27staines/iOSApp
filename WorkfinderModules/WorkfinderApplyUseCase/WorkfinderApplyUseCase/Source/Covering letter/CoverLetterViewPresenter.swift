@@ -11,8 +11,8 @@ public protocol CoverLetterViewPresenterProtocol {
     var primaryButtonTitle: String { get }
     func onViewDidLoad(view: CoverLetterViewProtocol)
     func loadData(completion: @escaping (Error?) -> Void)
-    func onDidTapShowTemplateButton()
-    func onDidTapShowCoverLetterButton()
+//    func onDidTapShowTemplateButton()
+//    func onDidTapShowCoverLetterButton()
     func onDidTapSelectOptionsButton()
     func onDidDismiss()
     func onDidTapNext()
@@ -41,19 +41,11 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
         coordinator?.onDidCompleteCoverLetter()
     }
     
-    func onDidTapShowTemplateButton() {
-        guard let renderer = renderer else { return }
-        displayString = renderer.renderToPlainString(with: fixedFieldValues)
-        attributedDisplayString = renderer.renderToAttributedString(with: fixedFieldValues)
-        view?.refreshFromPresenter()
-    }
-    
-    func onDidTapShowCoverLetterButton() {
-        updateLetterDisplayStrings()
-        displayString = _letterDisplayString
-        attributedDisplayString = _attributedDisplayString
-        view?.refreshFromPresenter()
-    }
+//    func onDidTapShowTemplateButton() {
+//        guard let renderer = renderer else { return }
+//        displayString = renderer.renderToPlainString(with: fixedFieldValues)
+//        attributedDisplayString = renderer.renderToAttributedString(with: fixedFieldValues)
+//    }
     
     let fixedFieldValues: [String:String?]
     
@@ -91,6 +83,8 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
         let fieldAndFixedFields = addStandardFieldValues(fieldValues: fieldValues)
         _letterDisplayString = renderer.renderToPlainString(with: fieldAndFixedFields)
         _attributedDisplayString = renderer.renderToAttributedString(with: fieldAndFixedFields)
+        displayString = _letterDisplayString
+        attributedDisplayString = _attributedDisplayString
     }
     
     func addStandardFieldValues(fieldValues: [String: String?]) -> [String: String?] {
@@ -125,6 +119,7 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     func onViewDidLoad(view: CoverLetterViewProtocol) {
         self.view = view
         self.allPicklistsDictionary = loadPicklists()
+        updateLetterDisplayStrings()
         view.refreshFromPresenter()
     }
     
@@ -163,6 +158,7 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
         let parser = TemplateParser(templateModel: templateModel)
         embeddedFieldNames = parser.allFieldNames()
         renderer = TemplateRenderer(parser: parser)
+        updateLetterDisplayStrings()
     }
     
     init(coordinator: CoverletterCoordinatorProtocol?,
