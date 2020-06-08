@@ -1,7 +1,7 @@
 import UIKit
 
 public struct WorkfinderColors {
-    public static let primaryColor = UIColor(red: 57, green: 167, blue: 82)
+    public static let primaryColor = UIColor(red: 26, green: 168, blue: 76)
     public static let greenColorBright = UIColor(red: 63, green: 172, blue: 87)
     public static let greenColorDark = UIColor(red: 52, green: 162, blue: 77)
     
