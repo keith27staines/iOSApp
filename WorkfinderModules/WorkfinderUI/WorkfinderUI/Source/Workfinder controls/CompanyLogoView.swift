@@ -10,6 +10,7 @@ public class CompanyLogoView: UIView {
         logoView.layer.masksToBounds = true
         logoView.layer.borderColor = UIColor.init(netHex: 0xE5E5E5).cgColor
         logoView.layer.borderWidth = 1
+        logoView.layer.cornerRadius = 10
         logoView.contentMode = .scaleAspectFit
         logoView.translatesAutoresizingMaskIntoConstraints = false
         return logoView

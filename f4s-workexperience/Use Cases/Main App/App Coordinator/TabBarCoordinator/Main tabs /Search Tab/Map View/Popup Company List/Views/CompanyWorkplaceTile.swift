@@ -25,13 +25,6 @@ class CompanyWorkplaceTile: UITableViewCell {
     
     lazy var logoView: CompanyLogoView = {
         let logoView = CompanyLogoView(widthPoints: 64)
-        logoView.layer.cornerRadius = 8
-        logoView.layer.borderWidth = 2
-        logoView.layer.masksToBounds = true
-        logoView.layer.borderColor = UIColor.lightGray.cgColor
-        logoView.contentMode = .scaleAspectFit
-        logoView.layer.shadowRadius = 5
-        logoView.layer.shadowColor = UIColor.black.cgColor
         return logoView
     }()
     

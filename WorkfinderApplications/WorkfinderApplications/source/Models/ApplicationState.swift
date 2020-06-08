@@ -10,16 +10,33 @@ ACCEPTED = "accepted"
 WITHDRAWN = "withdrawn"
 */
 
+import UIKit
+import WorkfinderUI
+
 enum ApplicationState: String, Codable {
     case applied
     case expired
     case viewedByHost = "viewed"
+    case applicationDeclined = "declined"
     case savedByHost = "saved"
-    case applicationDeclined = "application declined"
     case offerMade = "offered"
     case offerAccepted = "accepted"
-    case candidateWithdrew = "offer declined"
+    case candidateWithdrew = "withdrawn"
     case unknown
+    
+    var capsuleColor: UIColor {
+        switch self {
+        case .applied: return UIColor(red: 66, green: 191, blue: 235)
+        case .expired: return UIColor(red: 72, green: 39, blue: 128)
+        case .viewedByHost: return UIColor(red: 66, green: 191, blue: 235)
+        case .savedByHost: return UIColor(red: 255, green: 198, blue: 44)
+        case .applicationDeclined: return UIColor(red: 72, green: 39, blue: 128)
+        case .offerMade: return WorkfinderColors.primaryColor
+        case .offerAccepted: return WorkfinderColors.primaryColor
+        case .candidateWithdrew: return UIColor(red: 72, green: 39, blue: 128)
+        case .unknown: return UIColor(red: 255, green: 0, blue: 0, alpha: 0.8)
+        }
+    }
     
     var screenTitle: String {
         switch self {
