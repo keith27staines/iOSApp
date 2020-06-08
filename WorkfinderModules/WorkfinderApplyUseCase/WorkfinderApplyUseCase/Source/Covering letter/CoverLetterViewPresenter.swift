@@ -11,8 +11,6 @@ public protocol CoverLetterViewPresenterProtocol {
     var primaryButtonTitle: String { get }
     func onViewDidLoad(view: CoverLetterViewProtocol)
     func loadData(completion: @escaping (Error?) -> Void)
-//    func onDidTapShowTemplateButton()
-//    func onDidTapShowCoverLetterButton()
     func onDidTapSelectOptionsButton()
     func onDidDismiss()
     func onDidTapNext()
@@ -40,12 +38,6 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     func onDidTapNext() {
         coordinator?.onDidCompleteCoverLetter()
     }
-    
-//    func onDidTapShowTemplateButton() {
-//        guard let renderer = renderer else { return }
-//        displayString = renderer.renderToPlainString(with: fixedFieldValues)
-//        attributedDisplayString = renderer.renderToAttributedString(with: fixedFieldValues)
-//    }
     
     let fixedFieldValues: [String:String?]
     

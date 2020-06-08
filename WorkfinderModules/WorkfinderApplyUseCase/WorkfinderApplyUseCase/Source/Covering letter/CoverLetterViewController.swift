@@ -49,8 +49,6 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
         return button
     }()
     
-//    @objc func didTapShowTemplateButton() { presenter.onDidTapShowTemplateButton() }
-//    @objc func didTapShowCoverLetterButton() { presenter.onDidTapShowCoverLetterButton() }
     @objc func didTapShowEditor() { presenter.onDidTapSelectOptionsButton() }
     @objc func didCancel() { presenter.onDidDismiss() }
     @objc func didTapNext() { presenter.onDidTapNext() }
@@ -107,7 +105,6 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
     }
 }
 
-// MARK:- configure subviews
 extension CoverLetterViewController {
     func configureSubViews() {
         configurePageStack()
