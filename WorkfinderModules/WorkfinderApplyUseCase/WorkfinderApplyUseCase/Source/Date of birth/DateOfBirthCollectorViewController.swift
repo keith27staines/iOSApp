@@ -14,6 +14,10 @@ class DateOfBirthCollectorViewController: UIViewController {
     
     let under13Text = "Thank you for using Workfinder. Unfortunately we can only accept candidates who are over 13 years old."
     
+    lazy var icon: UIImageView = {
+        
+    }()
+    
     lazy var underAgeWarning: UITextView = {
         let textView = UITextView()
         textView.alpha = 0
