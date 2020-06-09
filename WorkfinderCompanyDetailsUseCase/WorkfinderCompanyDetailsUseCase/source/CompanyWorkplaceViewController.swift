@@ -47,6 +47,7 @@ class CompanyWorkplaceViewController: UIViewController {
     }()
     
     override func viewDidLoad() {
+        configureNavigationBar()
         presenter.onViewDidLoad(self)
         view.addSubview(companyMainPageView)
         companyMainPageView.fillSuperview()
@@ -54,7 +55,6 @@ class CompanyWorkplaceViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        configureNavigationBar()
         refresh()
     }
     
@@ -66,6 +66,9 @@ class CompanyWorkplaceViewController: UIViewController {
     
     func configureNavigationBar() {
         navigationController?.isNavigationBarHidden = false
+        navigationItem.title = "Company details"
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backButton
         styleNavigationController()
     }
     
