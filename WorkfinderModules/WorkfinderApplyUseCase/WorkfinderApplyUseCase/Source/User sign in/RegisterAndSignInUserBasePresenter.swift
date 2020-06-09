@@ -88,6 +88,15 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
         }
     }
     
+    var phone: String? {
+        get { userRepository.loadCandidate().phone }
+        set {
+            var candidate = userRepository.loadCandidate()
+            candidate.phone = newValue
+            userRepository.save(candidate: candidate)
+        }
+    }
+    
     var fullname: String? {
         get { user.fullname }
         set { user.fullname = newValue }
@@ -97,8 +106,6 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
         get { user.password }
         set { user.password = newValue }
     }
-    
-    var phone: String?
         
     var nickname: String? {
         get { user.nickname }

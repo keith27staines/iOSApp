@@ -7,6 +7,7 @@ public struct Candidate: Codable {
     public var experience: String?
     public var fullName: String { self.userSummary.full_name }
     public var guardianEmail: String?
+    public var phone: String?
     
     public func age(on date: Date = Date()) -> Int? {
         guard let dobString = dateOfBirth, let dob = Date.workfinderDateStringToDate(dobString) else {
@@ -26,6 +27,7 @@ public struct Candidate: Codable {
         case dateOfBirth = "date_of_birth"
         case userSummary = "user"
         case guardianEmail = "guardian_email"
+        case phone
     }
     
     struct UserSummary: Codable {

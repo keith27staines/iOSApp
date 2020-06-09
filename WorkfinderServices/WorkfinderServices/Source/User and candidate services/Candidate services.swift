@@ -22,7 +22,8 @@ public class CreateCandidateService: WorkfinderService, CreateCandidateServicePr
             let jsonBody = [
                 "date_of_birth": candidate.dateOfBirth,
                 "guardian_email": candidate.guardianEmail,
-                "user": userUuid
+                "user": userUuid,
+                "phone": candidate.phone
             ]
             let request = try buildRequest(relativePath: relativePath, verb: .post, body: jsonBody)
             performTask(with: request, completion: completion, attempting: #function)
