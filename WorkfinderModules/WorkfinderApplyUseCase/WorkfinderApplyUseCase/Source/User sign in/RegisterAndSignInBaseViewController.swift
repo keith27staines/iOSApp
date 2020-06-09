@@ -357,8 +357,8 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
                       nextResponder: UIResponder? = nil) -> UnderlinedNextResponderTextFieldStack {
         let field =  UnderlinedNextResponderTextFieldStack(
             fieldName: fieldName,
-            goodUnderlineColor: UIColor.green,
-            badUnderlineColor: UIColor.orange,
+            goodUnderlineColor: WorkfinderColors.primaryColor,
+            badUnderlineColor: WorkfinderColors.badValueNormal,
             state: .empty,
             nextResponderField: nextResponder)
         field.textChanged = { string in self.updatePresenter() }

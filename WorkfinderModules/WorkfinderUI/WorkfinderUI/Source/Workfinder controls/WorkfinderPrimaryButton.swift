@@ -12,10 +12,10 @@ public class WorkfinderPrimaryButton: UIButton {
         layer.cornerRadius = primaryButtonCornerRadius
         layer.masksToBounds = true
         setBackgroundColor(color: WorkfinderColors.primaryColor, forUIControlState: .normal)
-        setBackgroundColor(color: WorkfinderColors.lightGrey, forUIControlState: .disabled)
+        setBackgroundColor(color: UIColor(red: 229, green: 229, blue: 229), forUIControlState: .disabled)
         setBackgroundColor(color: WorkfinderColors.greenColorBright, forUIControlState: .highlighted)
         setTitleColor(UIColor.white, for: UIControl.State.normal)
-        setTitleColor(WorkfinderColors.darkGrey, for: .disabled)
+        setTitleColor(UIColor(red: 74, green: 74, blue: 74), for: .disabled)
         titleLabel?.font = primaryButtonFont
         heightAnchor.constraint(equalToConstant: primaryButtonHeight).isActive = true
     }

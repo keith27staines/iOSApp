@@ -14,26 +14,18 @@ class DateOfBirthCollectorViewController: UIViewController {
     
     let under13Text = "Thank you for using Workfinder. Unfortunately we can only accept candidates who are over 13 years old."
     
-    lazy var icon: UIImageView = {
-        
+    lazy var screenIcon: UIImageView = {
+        let image = UIImage(named: "dob")
+        let view = UIImageView(image: image)
+        view.heightAnchor.constraint(equalToConstant: 81).isActive = true
+        view.contentMode = .scaleAspectFit
+        return view
     }()
     
-    lazy var underAgeWarning: UITextView = {
-        let textView = UITextView()
-        textView.alpha = 0
-        textView.text = self.under13Text
-        textView.font = WorkfinderFonts.body
-        textView.textColor = WorkfinderColors.textMedium
-        textView.dataDetectorTypes = .link
-        textView.isEditable = false
-        let height = textView.heightAnchor.constraint(equalToConstant: 200)
-        height.priority = .defaultHigh
-        height.isActive = true
-        return textView
-    }()
-    
+    let minimumAge = 13
     var dateOfBirth: Date? {
         didSet {
+            
             guard let dateOfBirth = dateOfBirth else {
                 textField.text = nil
                 setPrimaryButtonEnabledState(false)
@@ -43,10 +35,17 @@ class DateOfBirthCollectorViewController: UIViewController {
             formatter.dateStyle = .long
             textField.text = formatter.string(from: dateOfBirth)
             let age = ageNow(dob: dateOfBirth)
-            let isOldEnough = age >= 13
+            let isOldEnough = age >= minimumAge
             setPrimaryButtonEnabledState(isOldEnough)
-            UIView.animate(withDuration: 0.3) {
-                self.underAgeWarning.alpha = isOldEnough ? 0 : 1
+            dateFieldStack.state = isOldEnough ? .good : .bad
+            if !isOldEnough {
+                let alert = UIAlertController(
+                    title: "Under \(minimumAge)",
+                    message: under13Text,
+                    preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(action)
+                present(alert, animated: true, completion: nil)
             }
         }
     }
@@ -75,6 +74,7 @@ class DateOfBirthCollectorViewController: UIViewController {
         datePicker.date = Calendar.current.date(byAdding: .year, value: -18, to: now) ?? now
         datePicker.minimumDate = Calendar.current.date(byAdding: .year, value: -150, to: now) ?? now
         datePicker.maximumDate = now
+        dateFieldStack.state = .bad
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -83,16 +83,22 @@ class DateOfBirthCollectorViewController: UIViewController {
         }
     }
     
-    lazy var textField: UITextField = {
-        let textfield = UITextField()
-        view.addSubview(textfield)
-        textfield.inputView = self.datePicker
-        textfield.inputAccessoryView = self.toolbar
-        textfield.placeholder = "Select date of birth"
-        textfield.borderStyle = .roundedRect
-        textfield.backgroundColor = UIColor.white
-        return textfield
+    lazy var dateFieldStack: UnderlinedNextResponderTextFieldStack = {
+        let stack = UnderlinedNextResponderTextFieldStack(
+            fieldName: "Select date of birth",
+            goodUnderlineColor: WorkfinderColors.primaryColor,
+            badUnderlineColor: WorkfinderColors.badValueNormal,
+            state: .empty,
+            nextResponderField: nil)
+        let textField = stack.textfield
+        textField.placeholder = "Tap here"
+        textField.inputView = self.datePicker
+        textField.font = WorkfinderFonts.body
+        textField.inputAccessoryView = self.toolbar
+        return stack
     }()
+    
+    var textField: UITextField { return dateFieldStack.textfield }
     
     lazy var nextButton: UIButton = {
         let button = WorkfinderPrimaryButton()
@@ -102,9 +108,21 @@ class DateOfBirthCollectorViewController: UIViewController {
         return button
     }()
     
-    lazy var label: UILabel = {
+    lazy var headingLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 17)
         label.text = NSLocalizedString("Please set your date of birth", comment: "")
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        return label
+    }()
+    
+    lazy var reasonLabel: UILabel = {
+        let label = UILabel()
+        label.text = NSLocalizedString("We tailor your application process\ndepending on your age", comment: "")
+        label.numberOfLines = 0
+        label.font = WorkfinderFonts.body2
+        label.textAlignment = .center
         return label
     }()
     
@@ -144,21 +162,6 @@ class DateOfBirthCollectorViewController: UIViewController {
     
     @objc func onDateChosen() { updateStateFromPicker() }
     
-    lazy var stack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [
-            self.label,
-            self.textField,
-            self.nextButton
-            ]
-        )
-        stack.axis = .vertical
-        stack.alignment = .fill
-        stack.distribution = .fillEqually
-        stack.spacing = 20
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    
     func configureNavigationBar() {
         title = "Date of Birth"
         let backButton = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
@@ -167,13 +170,37 @@ class DateOfBirthCollectorViewController: UIViewController {
     
     func configureViews() {
         view.backgroundColor = UIColor.white
-        view.addSubview(stack)
-        view.addSubview(underAgeWarning)
+        view.addSubview(screenIcon)
+        view.addSubview(headingLabel)
+        view.addSubview(reasonLabel)
+        view.addSubview(dateFieldStack)
+        view.addSubview(nextButton)
+
         let guide = view.safeAreaLayoutGuide
-        stack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        stack.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
-        stack.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 20).isActive = true
-        underAgeWarning.anchor(top: stack.bottomAnchor, leading: stack.leadingAnchor, bottom: nil, trailing: stack.trailingAnchor, padding: UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0))
+        
+        screenIcon.translatesAutoresizingMaskIntoConstraints = false
+        headingLabel.translatesAutoresizingMaskIntoConstraints = false
+        reasonLabel.translatesAutoresizingMaskIntoConstraints = false
+        dateFieldStack.translatesAutoresizingMaskIntoConstraints = false
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        screenIcon.topAnchor.constraint(equalTo: guide.topAnchor, constant: 34).isActive = true
+        headingLabel.topAnchor.constraint(equalTo: screenIcon.bottomAnchor, constant: 45).isActive = true
+        reasonLabel.topAnchor.constraint(equalTo: headingLabel.bottomAnchor, constant: 10).isActive = true
+        dateFieldStack.topAnchor.constraint(equalTo: headingLabel.bottomAnchor, constant: 60).isActive = true
+        nextButton.topAnchor.constraint(equalTo: dateFieldStack.bottomAnchor, constant: 41).isActive = true
+        
+        screenIcon.centerXAnchor.constraint(equalTo: guide.centerXAnchor).isActive = true
+        headingLabel.centerXAnchor.constraint(equalTo: guide.centerXAnchor).isActive = true
+        reasonLabel.centerXAnchor.constraint(equalTo: guide.centerXAnchor).isActive = true
+        dateFieldStack.centerXAnchor.constraint(equalTo: guide.centerXAnchor).isActive = true
+        nextButton.centerXAnchor.constraint(equalTo: guide.centerXAnchor).isActive = true
+        
+        screenIcon.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
+        headingLabel.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
+        reasonLabel.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 37).isActive = true
+        dateFieldStack.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 20).isActive = true
+        nextButton.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 20).isActive = true
         
     }
     

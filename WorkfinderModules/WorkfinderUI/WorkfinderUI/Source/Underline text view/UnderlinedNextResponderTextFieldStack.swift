@@ -5,15 +5,16 @@ public class UnderlinedNextResponderTextFieldStack: UIStackView {
     
     lazy var label: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = UIColor.gray
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = UIColor(red: 117, green: 117, blue: 117)
         return label
     }()
     
     public var textfield: NextResponderTextField = {
         let textField = NextResponderTextField()
-        textField.font = UIFont.systemFont(ofSize: 24)
+        textField.font = UIFont.systemFont(ofSize: 17)
         textField.addTarget(self, action: #selector(_textChanged), for: .editingChanged)
+        textField.heightAnchor.constraint(equalToConstant: 20).isActive = true
         return textField
     }()
     
@@ -36,7 +37,7 @@ public class UnderlinedNextResponderTextFieldStack: UIStackView {
     
     public lazy var greenTick: UIImageView = {
         let image = UIImage(named: "tick")?
-            .scaledImage(with: CGSize(width: 24, height: 24))
+            .scaledImage(with: CGSize(width: 12, height: 12))
             .withRenderingMode(.alwaysTemplate)
         let imageView = UIImageView(image: image)
         imageView.tintColor = self.underline.goodColor
@@ -83,6 +84,7 @@ public class UnderlinedNextResponderTextFieldStack: UIStackView {
         addArrangedSubview(label)
         addArrangedSubview(textImageStack)
         addArrangedSubview(underline)
+        spacing = 8
         axis = .vertical
     }
     
