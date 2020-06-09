@@ -93,7 +93,7 @@ public class WorkfinderVersionChecker: WorkfinderVersionCheckerProtocol {
             print(self.isTimeSinceLastCheckGreaterThanMinimum)
             switch result {
             case .success(let versionJson):
-                let minimumVersion = Version(string: versionJson.version)
+                let minimumVersion = Version(string: versionJson.min_version)
                 switch self.checkVersion(self.thisVersion, minimumVersion: minimumVersion) {
                 case .good: completion(nil)
                 case .bad: self.forceUpdate()

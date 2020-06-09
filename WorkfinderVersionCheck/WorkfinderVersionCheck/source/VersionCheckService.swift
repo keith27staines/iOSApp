@@ -4,7 +4,7 @@ import WorkfinderServices
 
 public struct VersionJson: Codable {
     var platform: String?
-    var version: String?
+    var min_version: String?
 }
 
 public protocol VersionCheckServiceProtocol: AnyObject {
