@@ -11,7 +11,6 @@ public extension UIViewController {
         return skin?.navigationBarSkin.barTintColor.uiColor ?? UIColor.white
     }
     
-    /// Style the navigation bar
     func styleNavigationController() {
         Skinner().apply(navigationBarSkin: skin?.navigationBarSkin, to: self)
         setNeedsStatusBarAppearanceUpdate()

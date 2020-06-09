@@ -13,7 +13,7 @@ import WorkfinderUI
 class EditApplicationLetterButton: UIButton {
     
     init() {
-        super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
+        super.init(frame: CGRect(x: 0, y: 0, width: 80, height: 35))
         let title = NSLocalizedString("Edit", comment: "")
         setTitle(title, for: UIControl.State.normal)
         layer.cornerRadius = 10

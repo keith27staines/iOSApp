@@ -14,8 +14,6 @@ class DateOfBirthCollectorViewController: UIViewController {
     
     let under13Text = "Thank you for using Workfinder. Unfortunately we can only accept candidates who are over 13 years old."
     
-//    let under18Text = "We're updating the Workfinder App. Currently, applications are only open to candidates who are aged over 18. The App will reopen for younger candidates with the next update in a few weeks' time. Thanks in advance for your patience while we make some improvements."
-    
     lazy var underAgeWarning: UITextView = {
         let textView = UITextView()
         textView.alpha = 0
@@ -65,6 +63,7 @@ class DateOfBirthCollectorViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavigationBar()
         configureViews()
         dateOfBirth = nil
         textField.becomeFirstResponder()
@@ -155,6 +154,12 @@ class DateOfBirthCollectorViewController: UIViewController {
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
+    
+    func configureNavigationBar() {
+        title = "Date of Birth"
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backButton
+    }
     
     func configureViews() {
         view.backgroundColor = UIColor.white

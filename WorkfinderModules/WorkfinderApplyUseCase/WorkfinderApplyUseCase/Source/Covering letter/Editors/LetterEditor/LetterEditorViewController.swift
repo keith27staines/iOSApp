@@ -63,6 +63,13 @@ class LetterEditorViewController: UIViewController, LetterEditorViewProtocol {
     
     @objc func updateLetter() { navigationController?.popViewController(animated: true) }
     
+    func configureNavigationBar() {
+        navigationItem.title = "Edit Letter"
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backButton
+        styleNavigationController()
+    }
+    
     func configureViews() {
         let safeArea = view.safeAreaLayoutGuide
         view.addSubview(mainStack)
@@ -74,6 +81,7 @@ class LetterEditorViewController: UIViewController, LetterEditorViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
+        configureNavigationBar()
         configureViews()
         tableView.dataSource = self
         tableView.delegate = self
@@ -223,7 +231,7 @@ class SectionHeaderCell: UITableViewHeaderFooterView {
 class PicklistCell: UITableViewCell {
     
     func configureWithPicklist(_ picklist: PicklistProtocol) {
-        label1.text = picklist.type.title.capitalizingFirstLetter()
+        label1.text = picklist.type.title.capitalized
         label2.text = picklist.itemSelectedSummary
     }
     

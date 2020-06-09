@@ -95,6 +95,17 @@ class TextEditorViewController: UIViewController {
     
     var bottomConstraint: NSLayoutConstraint!
     override func viewDidLoad() {
+        configureNavigationBar()
+        configureViews()
+    }
+    
+    func configureNavigationBar() {
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backButton
+        styleNavigationController()
+    }
+    
+    func configureViews() {
         view.backgroundColor = UIColor.white
         view.addSubview(stack)
         let guide = view.safeAreaLayoutGuide

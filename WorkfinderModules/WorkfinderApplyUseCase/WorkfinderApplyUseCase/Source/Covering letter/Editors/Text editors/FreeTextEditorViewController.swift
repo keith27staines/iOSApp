@@ -8,6 +8,7 @@ class FreeTextEditorViewController: TextEditorViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Edit \(freeTextPicker.type.title.capitalized)"
         placeholderTextView.text = freeTextPicker.type.textblockPlaceholder
         if freeTextPicker.selectedItems.count > 0 {
             textView.text = freeTextPicker.selectedItems[0].value ?? ""

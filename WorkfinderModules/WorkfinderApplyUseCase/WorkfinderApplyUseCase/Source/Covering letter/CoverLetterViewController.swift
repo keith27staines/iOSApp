@@ -56,13 +56,10 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
+        configureNavigationBar()
         configureSubViews()
         presenter.onViewDidLoad(view: self)
         loadData()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        configureNavigationBar()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -111,8 +108,11 @@ extension CoverLetterViewController {
     }
     
     func configureNavigationBar() {
-        navigationItem.backBarButtonItem?.title = "Back"
+        navigationItem.title = "Cover Letter"
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backButton
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: editButton)
+        styleNavigationController()
     }
     
     func configurePageStack() {

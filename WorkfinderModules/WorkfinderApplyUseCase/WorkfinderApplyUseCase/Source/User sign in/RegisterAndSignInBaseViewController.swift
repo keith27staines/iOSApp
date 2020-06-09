@@ -15,6 +15,13 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     func updatePresenter() { fatalError("Must override") }
     func configureViews() { fatalError("Must override")}
     
+    func configureNavigationBar() {
+        navigationItem.title = mode.screenTitle
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backButton
+        styleNavigationController()
+    }
+    
     init(mode: RegisterAndSignInMode, presenter: RegisterAndSignInPresenterProtocol) {
         self.mode = mode
         self.presenter = presenter
@@ -46,6 +53,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         scrollableContentView.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -40).isActive = true
         bottomStack.anchor(top: nil, leading: scrollView.leadingAnchor, bottom: safeArea.bottomAnchor, trailing: scrollView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0))
         scrollableContentView.frame = scrollView.frame
+        configureNavigationBar()
         configureViews()
         presenter.onViewDidLoad(self)
         refreshFromPresenter()

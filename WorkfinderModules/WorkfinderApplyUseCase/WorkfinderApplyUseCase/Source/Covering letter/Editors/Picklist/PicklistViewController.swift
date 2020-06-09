@@ -15,17 +15,23 @@ class PicklistViewController: UITableViewController {
     var dataSource: PicklistDataSourceAndDelegate!
     
     override func viewDidLoad() {
-        // navigationItem.title = "Select \(picklist.type.title)"
+        configureNavigationBar()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         view.backgroundColor = UIColor.white
-        navigationItem.largeTitleDisplayMode = .automatic
-        navigationItem.backBarButtonItem?.title = "Back"
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         if isMovingFromParent {
             coordinator?.picklistIsClosing(picklist)
         }
+    }
+    
+    func configureNavigationBar() {
+        let objectType = picklist.type.title.capitalized
+        navigationItem.title = "Select \(objectType)"
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backButton
+        styleNavigationController()
     }
     
     init(coordinator: PicklistCoordinatorProtocol, picklist: PicklistProtocol) {

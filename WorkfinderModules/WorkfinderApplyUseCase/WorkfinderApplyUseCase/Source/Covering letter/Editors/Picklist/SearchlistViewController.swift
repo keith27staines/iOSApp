@@ -24,12 +24,21 @@ class SearchlistViewController<A: Codable>: UIViewController, UISearchBarDelegat
     }()
     
     override func viewDidLoad() {
+        configureNavigationBar()
         configureViews()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         coordinator?.picklistIsClosing(picklist)
     }
+    
+    func configureNavigationBar() {
+        navigationItem.title = "Select \(picklist.type.title.capitalized)"
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backButton
+        styleNavigationController()
+    }
+    
     
     func configureViews() {
         view.backgroundColor = UIColor.white

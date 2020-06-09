@@ -7,6 +7,7 @@ class OtherPicklistItemEditorViewController: TextEditorViewController {
     var picklistItem: PicklistItemJson
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Edit \(picklistItem.name ?? "")"
         placeholderTextView.text = "Other"
         textView.text = picklistItem.otherValue
         placeholderTextView.isHidden = !textView.text.isEmpty
