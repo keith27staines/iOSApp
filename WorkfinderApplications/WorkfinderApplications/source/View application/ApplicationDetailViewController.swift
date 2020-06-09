@@ -57,6 +57,7 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
     }
     
     override func viewDidLoad() {
+        configureNavigationBar()
         configureViews()
         presenter.onViewDidLoad(view: self)
         refreshFromPresenter()
@@ -84,6 +85,13 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
             companyName: presenter.companyName ?? "?",
             urlString: self.presenter.logoUrl,
             completion: nil)
+    }
+    
+    func configureNavigationBar() {
+        navigationItem.title = "Application"
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backButton
+        styleNavigationController()
     }
     
     func configureViews() {

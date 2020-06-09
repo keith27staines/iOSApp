@@ -25,6 +25,7 @@ class HostViewController: UIViewController, UITableViewDataSource {
     }()
     
     override func viewDidLoad() {
+        configureNavigationBar()
         configureViews()
         presenter.onViewDidLoad(view: self)
         loadData()
@@ -41,6 +42,13 @@ class HostViewController: UIViewController, UITableViewDataSource {
             self.hostView.association = self.presenter.association
             self.hostView.expandableLabelState.isExpanded = true
         }
+    }
+    
+    func configureNavigationBar() {
+        navigationItem.title = "Host"
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backButton
+        styleNavigationController()
     }
     
     func configureViews() {

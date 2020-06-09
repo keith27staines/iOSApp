@@ -153,6 +153,13 @@ class CompanyViewController: UIViewController {
         })
     }
     
+    func configureNavigationBar() {
+        navigationItem.title = "Company"
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backButton
+        styleNavigationController()
+    }
+    
     func configureViews() {
         view.backgroundColor = WorkfinderColors.white
         view.addSubview(headerView)
@@ -176,6 +183,7 @@ class CompanyViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        configureNavigationBar()
         configureViews()
         presenter.onViewDidLoad(view: self)
         loadData()

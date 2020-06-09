@@ -123,6 +123,7 @@ class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
     }
     
     override func viewDidLoad() {
+        configureNavigationBar()
         configureViews()
         presenter.onViewDidLoad(view: self)
         refreshFromPresenter()
@@ -163,8 +164,14 @@ class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
         present(share, animated: true, completion: nil)
     }
     
+    func configureNavigationBar() {
+        navigationItem.title = "Offer"
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backButton
+        styleNavigationController()
+    }
+    
     func configureViews() {
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share))
         view.backgroundColor = UIColor.white
         view.addSubview(mainStack)
         let guide = view.safeAreaLayoutGuide
@@ -194,9 +201,7 @@ extension OfferViewController: UITableViewDataSource {
 
 extension OfferViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let alert = UIAlertController(title: "Not available", message: "We are working on this. Please bear with us while we improve Workfinder", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        present(alert, animated: true, completion: nil)
+
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
