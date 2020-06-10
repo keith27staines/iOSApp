@@ -14,10 +14,19 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     
     @objc func hideKeyboard() { view.endEditing(true) }
     @objc func showTermsAndConditions() { openLinkInWebView(.candidateTermsAndConditions) }
-    @objc func showFindOutMore() { openLinkInWebView(.aboutShareInfoWithInstitution)}
     @objc func agreedTermsAndConditionsChanged(switch: UISwitch) { updatePresenter() }
     @objc func shareProfileChanged(switch: UISwitch) { updatePresenter() }
     @objc func shareInformationChanged(switch: UISwitch) { updatePresenter() }
+    @objc func onDidTapSwitchMode() { presenter.onDidTapSwitchMode() }
+    @objc func onPrimaryButtonTap() {
+        updatePresenter()
+        messageHandler.showLoadingOverlay(self.view)
+        presenter.onDidTapPrimaryButton { [weak self] (optionalError) in
+            guard let self = self else { return }
+            self.messageHandler.hideLoadingOverlay()
+            self.handleError(optionalError: optionalError)
+        }
+    }
     
     func updatePresenter() { fatalError("Must override") }
     func configureViews() { fatalError("Must override")}
@@ -33,16 +42,6 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         self.mode = mode
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
-    }
-    
-    @objc func onPrimaryButtonTap() {
-        updatePresenter()
-        messageHandler.showLoadingOverlay(self.view)
-        presenter.onDidTapPrimaryButton { [weak self] (optionalError) in
-            guard let self = self else { return }
-            self.messageHandler.hideLoadingOverlay()
-            self.handleError(optionalError: optionalError)
-        }
     }
         
     override func viewDidLoad() {
@@ -122,12 +121,11 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         let button = UIButton(type: .system)
         button.setTitle(mode.switchModeActionText, for: .normal)
         button.titleLabel?.font = self.linkFont
+        button.tintColor = WorkfinderColors.primaryColor
         button.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
         button.addTarget(self, action: #selector(onDidTapSwitchMode), for: .touchUpInside)
         return button
     }()
-    
-    @objc func onDidTapSwitchMode() { presenter.onDidTapSwitchMode() }
     
     // MARK:- Registration fields
     lazy var email: UnderlinedNextResponderTextFieldStack = {
@@ -358,12 +356,23 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     lazy var shareInformationLabel: UILabel = {
         let title = "I agree to share my information with my educational institution"
         let link = "Find out more"
-        let selector = #selector(showFindOutMore)
+        let selector = #selector(showFindOutMoreAlert)
         return makeSwitchLinkLabel(text: title, linkText: link, selector: selector)
     }()
 }
 
 extension RegisterAndSignInBaseViewController {
+    
+    @objc func showFindOutMoreAlert() {
+        let message = "Workfinder partners with schools and universities so that they can provide additional support to their students.\n\nBy opting in, you are agreeing to your educational institution being informed about your profile, applications, recommendations and how they are progressing."
+        let alert = UIAlertController(
+            title: "Opt-in information",
+            message: message,
+            preferredStyle: .alert)
+        let action = UIAlertAction(title: "Close", style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
     
     func makeTextStack(fieldName: String,
                       nextResponder: UIResponder? = nil) -> UnderlinedNextResponderTextFieldStack {

@@ -11,5 +11,4 @@ import Foundation
 
 public enum RemoteLinks: String {
     case candidateTermsAndConditions = "https://www.workfinder.com/terms-and-conditions/"
-    case aboutShareInfoWithInstitution = ""
 }
