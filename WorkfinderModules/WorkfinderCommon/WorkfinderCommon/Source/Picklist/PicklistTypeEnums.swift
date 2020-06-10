@@ -39,7 +39,7 @@ public enum PicklistType: Int, CaseIterable, Codable {
     
     public var presentationValueShouldBeLowercased: Bool {
         switch self {
-        case .year: return false
+        case .year: return true
         case .subject: return false
         case .institutions: return false
         case .placementType: return true
