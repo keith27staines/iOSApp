@@ -20,7 +20,6 @@ class SignInViewController: RegisterAndSignInBaseViewController {
         email.textfield.nextResponderField = password.textfield
         password.textfield.nextResponderField = email.textfield
         bottomStack.addArrangedSubview(forgotPasswordStack)
-        bottomStack.addArrangedSubview(switchModeStack)
         bottomStack.addArrangedSubview(primaryButton)
     }
     

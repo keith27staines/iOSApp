@@ -7,10 +7,17 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     
     let presenter: RegisterAndSignInPresenterProtocol
     lazy var messageHandler = UserMessageHandler(presenter: self)
-    let linkFont = UIFont.systemFont(ofSize: 14)
+    let linkFont = WorkfinderFonts.body2
     let mode: RegisterAndSignInMode
     @objc var switchMode: (() -> Void)?
     @objc var onTapPrimaryButton: (() -> Void)?
+    
+    @objc func hideKeyboard() { view.endEditing(true) }
+    @objc func showTermsAndConditions() { openLinkInWebView(.candidateTermsAndConditions) }
+    @objc func showFindOutMore() { openLinkInWebView(.aboutShareInfoWithInstitution)}
+    @objc func agreedTermsAndConditionsChanged(switch: UISwitch) { updatePresenter() }
+    @objc func shareProfileChanged(switch: UISwitch) { updatePresenter() }
+    @objc func shareInformationChanged(switch: UISwitch) { updatePresenter() }
     
     func updatePresenter() { fatalError("Must override") }
     func configureViews() { fatalError("Must override")}
@@ -28,9 +35,6 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         super.init(nibName: nil, bundle: nil)
     }
     
-    @objc func hideKeyboard() { view.endEditing(true) }
-    @objc func showTermsAndConditions() { openLinkInWebView(.candidateTermsAndConditions) }
-    @objc func agreedTermsAndConditionsChanged(switchButton: UISwitch) { updatePresenter() }
     @objc func onPrimaryButtonTap() {
         updatePresenter()
         messageHandler.showLoadingOverlay(self.view)
@@ -45,13 +49,11 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        let safeArea = view.safeAreaLayoutGuide
+        let guide = view.safeAreaLayoutGuide
         view.backgroundColor = UIColor.white
         view.addSubview(scrollView)
-        view.addSubview(bottomStack)
-        scrollView.anchor(top: safeArea.topAnchor, leading: safeArea.leadingAnchor, bottom: bottomStack.topAnchor, trailing: safeArea.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+        scrollView.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
         scrollableContentView.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -40).isActive = true
-        bottomStack.anchor(top: nil, leading: scrollView.leadingAnchor, bottom: safeArea.bottomAnchor, trailing: scrollView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0))
         scrollableContentView.frame = scrollView.frame
         configureNavigationBar()
         configureViews()
@@ -72,13 +74,62 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         return imageView
     }()
     
+    // MARK:- Title stack
+    lazy var titleStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            self.titleLabel,
+            self.switchModeStack
+        ])
+        stack.axis = .vertical
+        stack.spacing = 8
+        stack.alignment = .center
+        return stack
+    }()
+    
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 17)
         label.text = NSLocalizedString(mode.screenHeadingText, comment: "")
         return label
     }()
     
+    lazy var switchModeStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            UIView(),
+            self.switchModeLabel,
+            self.switchModeButton,
+            UIView()
+        ])
+        stack.axis = .horizontal
+        stack.alignment = .firstBaseline
+        stack.spacing = 4
+        stack.setContentHuggingPriority(.required, for: .horizontal)
+        return stack
+    }()
+    
+    lazy var switchModeLabel: UILabel = {
+        let label = UILabel()
+        label.text = mode.switchModeLabelText
+        label.textAlignment = .right
+        label.font = self.linkFont
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        label.textAlignment = .right
+        return label
+    }()
+    
+    lazy var switchModeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle(mode.switchModeActionText, for: .normal)
+        button.titleLabel?.font = self.linkFont
+        button.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
+        button.addTarget(self, action: #selector(onDidTapSwitchMode), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func onDidTapSwitchMode() { presenter.onDidTapSwitchMode() }
+    
+    // MARK:- Registration fields
     lazy var email: UnderlinedNextResponderTextFieldStack = {
         let fieldName = NSLocalizedString("Email address", comment: "")
         let stack = self.makeTextStack(fieldName: fieldName)
@@ -122,7 +173,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     }()
     
     lazy var nickname: UnderlinedNextResponderTextFieldStack = {
-        let fieldName = NSLocalizedString("nickname", comment: "The user's preferred short name for themself")
+        let fieldName = NSLocalizedString("nickname", comment: "The user's preferred short name")
         let stack = self.makeTextStack(fieldName: fieldName)
         let textField = stack.textfield
         textField.returnKeyType = .next
@@ -169,7 +220,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         label.numberOfLines = 0
         label.font = UIFont.preferredFont(forTextStyle: .caption2)
         label.text = "Passwords must be at least 8 characters and contain a mixture of lower and upper case characters and numbers"
-        label.textColor = UIColor.gray
+        label.textColor = UIColor(red: 33, green: 33, blue: 33)
         return label
     }()
     
@@ -179,7 +230,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
             self.passwordInstructionLabel
         ])
         stack.axis = .vertical
-        stack.spacing = 2
+        stack.spacing = 8
         return stack
     }()
     
@@ -213,101 +264,6 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         return button
     }()
     
-    @objc func forgotPassword() {
-        guard MFMailComposeViewController.canSendMail() else {
-            messageHandler.displayMessage(
-                title: "Email is unavailable",
-                message: "Your device isn't configured for email")
-            return
-        }
-        let composer = MFMailComposeViewController()
-        composer.setToRecipients(["support@workfinder.com"])
-        let email = self.email.textfield.text ?? ""
-        let emailString = email.isEmpty ? "???@?????.???" : email
-        composer.setPreferredSendingEmailAddress(emailString)
-        composer.setMessageBody("Hi support@Workfinder.com,\n\nPlease reset the password for the user with email: \(emailString)\n\nThis email was generated from Workfinder iOS client\n", isHTML: false)
-        composer.setSubject("Password reset request")
-        composer.mailComposeDelegate = self
-        present(composer, animated: true, completion: nil)
-    }
-    
-    lazy var termsAgreedStack: UIStackView = {
-        let textStack = UIStackView(arrangedSubviews: [
-            self.termsAndConditionsLabel,
-            self.termsAndConditionsButton,
-            UIView()
-        ])
-        textStack.axis = .horizontal
-        textStack.alignment = .firstBaseline
-        textStack.spacing = 4
-        let stack = UIStackView(arrangedSubviews: [
-            self.termsAgreedSwitch, textStack, UIView()
-        ])
-        stack.spacing = 20
-        stack.alignment = .center
-        stack.axis = .horizontal
-        return stack
-    }()
-    
-    lazy var termsAndConditionsLabel: UILabel = {
-        let linkLabel = UILabel()
-        linkLabel.text = NSLocalizedString("I accept Workfinder's", comment: "I accept Workfinder's terms of service")
-        linkLabel.font = self.linkFont
-        linkLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        return linkLabel
-    }()
-    
-    lazy var termsAgreedSwitch: UISwitch = {
-        let agreeSwitch = UISwitch()
-        agreeSwitch.isOn = false
-        agreeSwitch.thumbTintColor = WorkfinderColors.primaryColor
-        agreeSwitch.addTarget(self, action: #selector(agreedTermsAndConditionsChanged), for: .valueChanged)
-        return agreeSwitch
-    }()
-    
-    lazy var termsAndConditionsButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle(NSLocalizedString("Terms of service", comment: ""), for: .normal)
-        button.titleLabel?.font = self.linkFont
-        button.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
-        button.addTarget(self, action: #selector(showTermsAndConditions), for: .touchUpInside)
-        return button
-    }()
-    
-    lazy var switchModeStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [
-            self.switchModeLabel,
-            self.switchModeButton,
-            UIView()
-        ])
-        stack.axis = .horizontal
-        stack.alignment = .firstBaseline
-        stack.spacing = 4
-        stack.setContentHuggingPriority(.required, for: .horizontal)
-        return stack
-    }()
-    
-    lazy var switchModeLabel: UILabel = {
-        let label = UILabel()
-        label.text = mode.switchModeLabelText
-        label.textAlignment = .right
-        label.font = self.linkFont
-        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        label.textAlignment = .right
-        return label
-    }()
-    
-    lazy var switchModeButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle(mode.switchModeActionText, for: .normal)
-        button.titleLabel?.font = self.linkFont
-        button.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
-        button.addTarget(self, action: #selector(onDidTapSwitchMode), for: .touchUpInside)
-        return button
-    }()
-    
-    @objc func onDidTapSwitchMode() { presenter.onDidTapSwitchMode() }
-    
     lazy var fieldStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [])
         stack.axis = .vertical
@@ -335,12 +291,14 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     lazy var scrollableContentView: UIView = {
         let view = UIView()
         view.addSubview(self.screenIcon)
-        view.addSubview(self.titleLabel)
+        view.addSubview(self.titleStack)
         view.addSubview(self.fieldStack)
-        self.screenIcon.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0))
+        view.addSubview(self.bottomStack)
+        self.screenIcon.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         screenIcon.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        self.titleLabel.anchor(top: screenIcon.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0))
-        fieldStack.anchor(top: titleLabel.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0), size: CGSize.zero)
+        self.titleStack.anchor(top: screenIcon.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0))
+        fieldStack.anchor(top: titleStack.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 13, left: 0, bottom: 0, right: 0), size: CGSize.zero)
+        bottomStack.anchor(top: fieldStack.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 27, left: 0, bottom: 20, right: 0))
         return view
     }()
     
@@ -352,6 +310,60 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         content.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    override func viewDidLayoutSubviews() {
+        scrollView.contentSize = scrollableContentView.frame.size
+    }
+    
+    deinit { NotificationCenter.default.removeObserver(self) }
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    
+    // MARK:- switches stack
+    lazy var switchesStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            self.termsAndConditionsStack,
+            self.shareProfileStack,
+            self.shareInformationStack
+        ])
+        stack.axis = .vertical
+        stack.spacing = 28
+        return stack
+    }()
+    
+    lazy var termsAndConditionsStack: UIStackView = {
+        makeSwitchStack(theSwitch: termsAgreedSwitch, label: termsAndConditionsActiveLabel)
+    }()
+    lazy var termsAgreedSwitch: UISwitch = { makeSwitch(selector: #selector(agreedTermsAndConditionsChanged)) }()
+
+    lazy var termsAndConditionsActiveLabel: UILabel = {
+        let title = NSLocalizedString("I accept Workfinder's", comment: "I accept Workfinder's [e.g. terms of service]")
+        let link = NSLocalizedString("Terms of service", comment: "")
+        let selector = #selector(showTermsAndConditions)
+        return makeSwitchLinkLabel(text: title, linkText: link, selector: selector)
+    }()
+    
+    lazy var shareProfileStack: UIStackView = {
+        let text = "I agree for Workfinder to share my profile with other relevant employers"
+        let label = makeSwitchLabel(text: text)
+        return makeSwitchStack(theSwitch: shareProfileSwitch, label: label)
+    }()
+    
+    lazy var shareProfileSwitch: UISwitch = { makeSwitch(selector: #selector(shareProfileChanged)) }()
+    
+    lazy var shareInformationStack: UIStackView = {
+        makeSwitchStack(theSwitch: shareInformationSwitch, label: shareInformationLabel)
+    }()
+    lazy var shareInformationSwitch: UISwitch = { makeSwitch(selector: #selector(shareInformationChanged)) }()
+
+    lazy var shareInformationLabel: UILabel = {
+        let title = "I agree to share my information with my educational institution"
+        let link = "Find out more"
+        let selector = #selector(showFindOutMore)
+        return makeSwitchLinkLabel(text: title, linkText: link, selector: selector)
+    }()
+}
+
+extension RegisterAndSignInBaseViewController {
     
     func makeTextStack(fieldName: String,
                       nextResponder: UIResponder? = nil) -> UnderlinedNextResponderTextFieldStack {
@@ -375,8 +387,50 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         return NextHideToolbar(textField: textField, showNextButton: showNextButton)
     }
     
-    override func viewDidLayoutSubviews() {
-        scrollView.contentSize = scrollableContentView.frame.size
+    func makeSwitchStack(theSwitch: UISwitch, label: UILabel) -> UIStackView {
+        let stack = UIStackView(arrangedSubviews: [
+            theSwitch,
+            label
+        ])
+        stack.spacing = 34
+        stack.alignment = .center
+        stack.axis = .horizontal
+        return stack
+    }
+    
+    func makeSwitch(selector: Selector) -> UISwitch {
+        let control = UISwitch()
+        control.isOn = false
+        control.thumbTintColor = WorkfinderColors.primaryColor
+        control.addTarget(self, action: selector, for: .valueChanged)
+        control.setContentHuggingPriority(.required, for: .horizontal)
+        return control
+    }
+
+    func makeSwitchLabel(text: String) -> UILabel {
+        let label = UILabel()
+        label.numberOfLines = 2
+        label.attributedText = makeAttributedText(text: text, linkText: nil)
+        return label
+    }
+    
+    func makeSwitchLinkLabel(text: String, linkText: String, selector: Selector) -> UILabel {
+        let label = UILabel()
+        label.isUserInteractionEnabled = true
+        label.numberOfLines = 2
+        label.attributedText = makeAttributedText(text: text, linkText: linkText)
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: selector))
+        return label
+    }
+    
+    func makeAttributedText(text: String, linkText link: String?) -> NSAttributedString {
+        let font = UIFont.systemFont(ofSize: 13)
+        let string1 = NSAttributedString(string: "\(text) ", attributes: [.font : font])
+        guard let link = link else { return string1 }
+        let string2 = NSAttributedString(string: link, attributes: [.font : font, .foregroundColor: WorkfinderColors.primaryColor])
+        let concatenated = NSMutableAttributedString(attributedString: string1)
+        concatenated.append(string2)
+        return concatenated
     }
     
     @objc func adjustForKeyboard(notification: Notification) {
@@ -394,8 +448,23 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         updatePresenter()
     }
     
-    deinit { NotificationCenter.default.removeObserver(self) }
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    @objc func forgotPassword() {
+        guard MFMailComposeViewController.canSendMail() else {
+            messageHandler.displayMessage(
+                title: "Email is unavailable",
+                message: "Your device isn't configured for email")
+            return
+        }
+        let composer = MFMailComposeViewController()
+        composer.setToRecipients(["support@workfinder.com"])
+        let email = self.email.textfield.text ?? ""
+        let emailString = email.isEmpty ? "???@?????.???" : email
+        composer.setPreferredSendingEmailAddress(emailString)
+        composer.setMessageBody("Hi support@Workfinder.com,\n\nPlease reset the password for the user with email: \(emailString)\n\nThis email was generated from Workfinder iOS client\n", isHTML: false)
+        composer.setSubject("Password reset request")
+        composer.mailComposeDelegate = self
+        present(composer, animated: true, completion: nil)
+    }
 }
 
 extension RegisterAndSignInBaseViewController: UITextFieldDelegate {

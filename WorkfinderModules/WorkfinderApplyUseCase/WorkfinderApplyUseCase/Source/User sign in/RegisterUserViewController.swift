@@ -35,8 +35,7 @@ class RegisterUserViewController: RegisterAndSignInBaseViewController {
         fullname.textfield.nextResponderField = phone.textfield
         phone.textfield.nextResponderField = password.textfield
         password.textfield.nextResponderField = nil
-        bottomStack.addArrangedSubview(termsAgreedStack)
-        bottomStack.addArrangedSubview(switchModeStack)
+        bottomStack.addArrangedSubview(switchesStack)
         bottomStack.addArrangedSubview(primaryButton)
     }
     
