@@ -194,6 +194,7 @@ extension OfferViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         let info = presenter.cellInfoForIndexPath(indexPath)
+        cell.accessoryType = presenter.accessoryTypeForIndexPath(indexPath)
         cell.configure(info: info)
         return cell
     }
@@ -201,7 +202,8 @@ extension OfferViewController: UITableViewDataSource {
 
 extension OfferViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        tableView.deselectRow(at: indexPath, animated: true)
+        presenter.didSelectRowAtIndexPath(indexPath)
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

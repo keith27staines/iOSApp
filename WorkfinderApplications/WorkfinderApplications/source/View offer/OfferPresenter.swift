@@ -15,6 +15,8 @@ protocol OfferPresenterProtocol {
     func onTapDeclineWithReason(_ declineReason: WithdrawReason,
                                 otherText: String?,
                                 completion: @escaping (Error?) -> Void)
+    func didSelectRowAtIndexPath(_ indexPath: IndexPath)
+    func accessoryTypeForIndexPath(_ indexPath: IndexPath) -> UITableViewCell.AccessoryType
 }
 
 class OfferPresenter: OfferPresenterProtocol {
@@ -83,24 +85,62 @@ class OfferPresenter: OfferPresenterProtocol {
     }
     
     func numberOfSections() -> Int { 1 }
-    func numberOfRowsInSection(_ section: Int) -> Int { 6 }
+    func numberOfRowsInSection(_ section: Int) -> Int { OfferTableRowType.allCases.count }
     func cellInfoForIndexPath(_ indexPath: IndexPath) -> OfferDetailCellInfo {
-        switch indexPath.row {
-        case 0:
-            return OfferDetailCellInfo(firstLine: "Starting date", secondLine: offer?.startingDateString)
-        case 1:
-            return OfferDetailCellInfo(firstLine: "Duration", secondLine: offer?.duration)
-        case 2:
+        let rowType = OfferTableRowType(rawValue: indexPath.row)!
+        switch rowType {
+        case .startDate:
+            return OfferDetailCellInfo(firstLine: "Start date", secondLine: offer?.startingDateString)
+        case .endDate:
+            return OfferDetailCellInfo(firstLine: "End date", secondLine: offer?.duration)
+        case .company:
             return OfferDetailCellInfo(firstLine: "Host company", secondLine: offer?.hostCompany)
-        case 3:
+        case .host:
             return OfferDetailCellInfo(firstLine: "Host contact", secondLine: offer?.hostContact)
-        case 4:
+        case .email:
             return OfferDetailCellInfo(firstLine: "Email", secondLine: offer?.email)
-        case 5:
+        case .location:
             return OfferDetailCellInfo(firstLine: "Location", secondLine: offer?.location)
-        default: return OfferDetailCellInfo(firstLine: nil, secondLine: nil)
+        case .notes:
+            return OfferDetailCellInfo(firstLine: "Notes", secondLine: "Some random notes until the time this functionality is wired into the server. This can expand to many lines of text if necessary. If a million monkeys are given a million typewriters, how likely is it that one of them would write iOS Workfinder app?. Philosophy is pointless, we live in a simulation and everything is controlled by chance and the great coder in the sky. I'm quite hungry, I haven't had breakfast")
+        }
+    }
+    
+    func didSelectRowAtIndexPath(_ indexPath: IndexPath) {
+        let rowType = OfferTableRowType(rawValue: indexPath.row)!
+        switch rowType {
+        case .startDate: break
+        case .endDate: break
+        case .company: coordinator?.showCompany(application: application)
+        case .host: coordinator?.showCompanyHost(application: application)
+        case .email: break
+        case .location: break
+        case .notes: break
+        }
+    }
+    
+    
+    func accessoryTypeForIndexPath(_ indexPath: IndexPath) -> UITableViewCell.AccessoryType {
+        guard let rowType = OfferTableRowType(rawValue: indexPath.row) else { return .none }
+        switch rowType {
+        case .startDate: return .none
+        case .endDate: return .none
+        case .company: return .disclosureIndicator
+        case .host: return .disclosureIndicator
+        case .email: return .none
+        case .location: return .none
+        case .notes: return .none
         }
     }
 }
 
+fileprivate enum OfferTableRowType: Int, CaseIterable {
+    case startDate
+    case endDate
+    case company
+    case host
+    case email
+    case location
+    case notes
+}
 
