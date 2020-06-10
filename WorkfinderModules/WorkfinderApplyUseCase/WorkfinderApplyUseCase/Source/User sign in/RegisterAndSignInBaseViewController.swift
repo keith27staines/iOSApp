@@ -63,8 +63,8 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     
     }
     
-    lazy var questionMarkImage: UIImageView = {
-        let image = UIImage(named: "questionMark")?.scaledImage(with: CGSize(width: 81, height: 81))
+    lazy var screenIcon: UIImageView = {
+        let image = UIImage(named: "register")?.scaledImage(with: CGSize(width: 81, height: 81))
         let imageView = UIImageView(image: image)
         imageView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
@@ -334,12 +334,12 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     
     lazy var scrollableContentView: UIView = {
         let view = UIView()
-        view.addSubview(self.questionMarkImage)
+        view.addSubview(self.screenIcon)
         view.addSubview(self.titleLabel)
         view.addSubview(self.fieldStack)
-        self.questionMarkImage.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0))
-        questionMarkImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        self.titleLabel.anchor(top: questionMarkImage.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0))
+        self.screenIcon.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0))
+        screenIcon.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        self.titleLabel.anchor(top: screenIcon.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0))
         fieldStack.anchor(top: titleLabel.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0), size: CGSize.zero)
         return view
     }()
