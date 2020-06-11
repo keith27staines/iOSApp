@@ -17,6 +17,7 @@ protocol OfferPresenterProtocol {
                                 completion: @escaping (Error?) -> Void)
     func didSelectRowAtIndexPath(_ indexPath: IndexPath)
     func accessoryTypeForIndexPath(_ indexPath: IndexPath) -> UITableViewCell.AccessoryType
+    func isNotesField(_ indexPath: IndexPath) -> Bool
 }
 
 class OfferPresenter: OfferPresenterProtocol {
@@ -27,8 +28,8 @@ class OfferPresenter: OfferPresenterProtocol {
     private var offer: Offer?
     var companyName: String { application.companyName }
     var offerState: OfferState? { offer?.offerState }
-    var startingDateString: String? { offer?.startingDateString }
-    var duration: String? { offer?.duration }
+    var startDateString: String? { offer?.startDateString }
+    var endDateString: String? { offer?.endDateString }
     var hostCompany: String? { offer?.hostCompany }
     var hostContact: String? { offer?.hostContact }
     var email: String? { offer?.email }
@@ -47,6 +48,11 @@ class OfferPresenter: OfferPresenterProtocol {
         self.coordinator = coordinator
         self.application = application
         self.service = service
+    }
+    
+    func isNotesField(_ indexPath: IndexPath) -> Bool {
+        let rowType = OfferTableRowType(rawValue: indexPath.row)
+        return rowType == OfferTableRowType.notes
     }
     
     func onViewDidLoad(view: WorkfinderViewControllerProtocol) {
@@ -85,14 +91,18 @@ class OfferPresenter: OfferPresenterProtocol {
     }
     
     func numberOfSections() -> Int { 1 }
-    func numberOfRowsInSection(_ section: Int) -> Int { OfferTableRowType.allCases.count }
+    func numberOfRowsInSection(_ section: Int) -> Int {
+        guard section == 0 else { return 0 }
+        return OfferTableRowType.allCases.count
+    }
     func cellInfoForIndexPath(_ indexPath: IndexPath) -> OfferDetailCellInfo {
+        
         let rowType = OfferTableRowType(rawValue: indexPath.row)!
         switch rowType {
         case .startDate:
-            return OfferDetailCellInfo(firstLine: "Start date", secondLine: offer?.startingDateString)
+            return OfferDetailCellInfo(firstLine: "Start date", secondLine: offer?.startDateString)
         case .endDate:
-            return OfferDetailCellInfo(firstLine: "End date", secondLine: offer?.duration)
+            return OfferDetailCellInfo(firstLine: "End date", secondLine: offer?.endDateString)
         case .company:
             return OfferDetailCellInfo(firstLine: "Host company", secondLine: offer?.hostCompany)
         case .host:
@@ -102,7 +112,7 @@ class OfferPresenter: OfferPresenterProtocol {
         case .location:
             return OfferDetailCellInfo(firstLine: "Location", secondLine: offer?.location)
         case .notes:
-            return OfferDetailCellInfo(firstLine: "Notes", secondLine: "Some random notes until the time this functionality is wired into the server. This can expand to many lines of text if necessary. If a million monkeys are given a million typewriters, how likely is it that one of them would write iOS Workfinder app?. Philosophy is pointless, we live in a simulation and everything is controlled by chance and the great coder in the sky. I'm quite hungry, I haven't had breakfast")
+            return OfferDetailCellInfo(firstLine: "Notes", secondLine: offer?.offerNotes)
         }
     }
     
@@ -118,7 +128,6 @@ class OfferPresenter: OfferPresenterProtocol {
         case .notes: break
         }
     }
-    
     
     func accessoryTypeForIndexPath(_ indexPath: IndexPath) -> UITableViewCell.AccessoryType {
         guard let rowType = OfferTableRowType(rawValue: indexPath.row) else { return .none }

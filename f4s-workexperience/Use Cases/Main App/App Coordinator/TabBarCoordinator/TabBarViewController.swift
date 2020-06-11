@@ -126,4 +126,5 @@ enum TabIndex : Int {
 //    case favourites
     case applications
     case map
+    case notifications
 }

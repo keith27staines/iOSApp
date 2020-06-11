@@ -19,7 +19,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     var shouldAskOperatingSystemToAllowLocation: Bool = false
     var tabBarCoordinator: TabBarCoordinatorProtocol!
     var onboardingCoordinator: OnboardingCoordinatorProtocol?
-    
+    let deepLinkDispatcher: DeepLinkDispatcher
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     let hostsProvider: HostsProviderProtocol
     let onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol
@@ -44,7 +44,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         self.window = window
         self.registrar = registrar
         self.injected = inject
-        
+        self.deepLinkDispatcher = DeepLinkDispatcher()
         self.companyCoordinatorFactory = companyCoordinatorFactory
         self.hostsProvider = hostsProvider
         self.localStore = localStore
@@ -115,7 +115,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     
     func showSearch() { tabBarCoordinator.showSearch() }
 
-    func showRecommendations() { tabBarCoordinator?.showRecommendations() }
+    func showRecommendations(uuid: F4SUUID?) { tabBarCoordinator?.showRecommendations(uuid: uuid) }
     
     func updateBadges() { tabBarCoordinator.updateBadges() }
     
@@ -176,5 +176,36 @@ extension AppCoordinator {
 extension AppCoordinator : OnboardingCoordinatorDelegate {
     func shouldEnableLocation(_ enable: Bool) {
         shouldAskOperatingSystemToAllowLocation = enable
+    }
+}
+
+extension AppCoordinator {
+    func handleDeepLinkUrl(url: URL) -> Bool {
+        deepLinkDispatcher.dispatchDeepLink(url, with: self)
+        return true
+    }
+}
+
+class DeepLinkDispatcher {
+    
+    init() {
+    }
+    
+    func dispatchDeepLink(_ url: URL, with coordinator: AppCoordinatorProtocol) {
+        DispatchQueue.main.async {
+            guard
+                let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
+                let host = components.host
+                else { return }
+            let path = components.path.split(separator: "/")
+            let lastPathComponent = String(path.last ?? "")
+            switch host {
+            case "recommendations":
+                print("Processing deeplink \(path)")
+                coordinator.showRecommendations(uuid: lastPathComponent)
+            default:
+                break
+            }
+        }
     }
 }

@@ -32,26 +32,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication,
                      continue userActivity: NSUserActivity,
-                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool
-    {
+                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         // Get URL components from the incoming user activity
         guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
-            let incomingURL = userActivity.webpageURL,
-            let components = NSURLComponents(url: incomingURL, resolvingAgainstBaseURL: true) else {
-            return false
-        }
-
-        // Check for specific URL components that you need
-        guard let path = components.path,
-        let params = components.queryItems else { return false }
-        setInvokingUrl(incomingURL)
-        return true  // If can't handle, return false
+            let incomingURL = userActivity.webpageURL
+            else { return false }
+        return appCoordinator.handleDeepLinkUrl(url: incomingURL)
     }
     
     // Handle being invoked from deep links or a smart banner somewhere out there on the web
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        setInvokingUrl(url)
-        return true
+        return appCoordinator.handleDeepLinkUrl(url: url)
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -109,25 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
-// MARK: helpers
-extension AppDelegate {
-    
-    func setInvokingUrl(_ url: URL) {
-        guard let universalLink = UniversalLink(url: url) else { return }
-        switch universalLink {
-        case .recommendCompany(_):
-            appCoordinator.showRecommendations()
 
-        case .passwordless( _):
-            let userInfo: [AnyHashable: Any] = ["url" : url]
-            let notification = Notification(
-                name: .verificationCodeRecieved,
-                object: self,
-                userInfo: userInfo)
-            NotificationCenter.default.post(notification)
-        }
-    }
-}
 
 
 

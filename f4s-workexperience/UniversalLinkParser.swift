@@ -9,27 +9,19 @@
 import Foundation
 import WorkfinderCommon
 
-public enum UniversalLink  {
+public class DeepLink  {
     
-    case recommendCompany(companyUuid: F4SUUID?)
-    case passwordless(String?)
+    enum DeepLinkType {
+    case recommendAssociation
+    }
     
-    public init?(url: URL) {
-        if UniversalLink.isRecommendation(url: url) {
-            guard let uuid = UniversalLink.extractRecommendedCompanyUuid(from: url) else {
-                return nil
-            }
-            self = .recommendCompany(companyUuid: uuid)
-            return
-        }
-        if UniversalLink.isPasswordless(url: url) {
-            guard let passcode = UniversalLink.extractPasscode(from: url) else {
-                return nil
-            }
-            self = .passwordless(passcode)
-            return
-        }
-        return nil
+    public init() {
+    }
+    
+    public func handleUrl(url: URL) -> Bool {
+        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return false }
+        
+        return false
     }
     
     public static func isRecommendation(url: URL) -> Bool {
@@ -55,37 +47,5 @@ public enum UniversalLink  {
         }
         return companyUuidComponent
     }
-    
-    public static func isPasswordless(url: URL) -> Bool {
-        if let bundleId = bundleIdentifier() {
-            if !doesPathOfURL(url, contain: bundleId) { return false }
-        }
-        guard let _ = extractPasscode(from: url) else { return false }
-        return true
-    }
-    
-    public static func extractPasscode(from url: URL) -> String? {
-        guard let components = self.components(from: url) else { return nil }
-        guard let items = components.queryItems else { return nil }
-        guard let key = items.filter({ $0.name == "code" }).first, let passcode = key.value, Int(passcode) != nil else { return nil }
-        return passcode
-    }
 }
 
-// MARK:- helpers for passwordless
-extension UniversalLink {
-    
-    static func doesPathOfURL(_ url: URL, contain string: String) -> Bool {
-        guard let components = components(from: url) else { return false }
-        let path = components.path.lowercased()
-        return path.contains(string.lowercased())
-    }
-    
-    static func components(from url: URL) -> URLComponents? {
-        return URLComponents(url: url, resolvingAgainstBaseURL: true)
-    }
-    
-    static func bundleIdentifier() -> String? {
-        return Bundle.main.bundleIdentifier
-    }
-}

@@ -90,30 +90,6 @@ extension ApplicationState {
     }
 }
 
-/*
- {
-     "uuid": "d5ec2fea-8222-4bb3-a65b-7c0ac8eac5f7",
-     "association": {
-         "uuid": "33dcfe67-1368-433f-ae9c-160fb890b0fe",
-         "host": {
-             "uuid": "4803ecb1-705c-4990-81a0-cb945f7a0f71",
-             "full_name": "DerivedHost"
-         },
-         "location": {
-             "uuid": "8a9623e6-e29a-4cac-8622-20819a2d8f0e",
-             "company": {
-                 "uuid": "2acea251-b6d6-4f53-ad98-564142a929d8",
-                 "name": "DerivedCompany",
-                 "logo": null,
-                 "industries": []
-             }
-         },
-         "title": "DerivedAssociation"
-     },
-     "status": "pending",
-     "created_at": "2020-05-21T08:22:31.368585Z"
- }
- */
 struct ExpandedAssociationPlacementJson: Codable {
     var uuid: F4SUUID?
     var status: String?
@@ -121,7 +97,8 @@ struct ExpandedAssociationPlacementJson: Codable {
     var cover_letter: String?
     var association: Association?
     var start_date: String?
-    var offered_duration: String?
+    var end_date: String?
+    var offer_notes: String?
     
     struct Association: Codable
     {

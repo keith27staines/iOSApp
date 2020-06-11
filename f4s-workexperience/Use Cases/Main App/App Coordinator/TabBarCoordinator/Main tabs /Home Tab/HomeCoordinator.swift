@@ -24,3 +24,19 @@ class HomeCoordinator : CoreInjectionNavigationCoordinator, HomeCoordinatorProto
         navigationRouter.navigationController.pushViewController(rootViewController, animated: false)
     }
 }
+
+protocol NotificationsCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol {}
+
+class NotificationsCoordinator : CoreInjectionNavigationCoordinator, HomeCoordinatorProtocol {
+
+    lazy var rootViewController: UIViewController = {
+        let vc = UIViewController()
+        vc.view.backgroundColor = UIColor.white
+        vc.title = "Notifications"
+        return vc
+    }()
+    
+    override func start() {
+        navigationRouter.navigationController.pushViewController(rootViewController, animated: false)
+    }
+}

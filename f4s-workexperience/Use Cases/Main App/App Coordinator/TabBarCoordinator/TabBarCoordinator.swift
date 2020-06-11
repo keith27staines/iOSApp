@@ -53,31 +53,34 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
 
     }
 
-    public func navigateToRecommendations() {
-//        closeMenu { [weak self] (success) in
-//            guard let strongSelf = self else { return }
-//            strongSelf.tabBarViewController.selectedIndex = TabIndex.recommendations.rawValue
-//        }
+    public func navigateToRecommendations(uuid: F4SUUID?) {
+        closeMenu { [weak self] (success) in
+            guard let self = self else { return }
+            //self.tabBarViewController.selectedIndex = TabIndex.notifications.rawValue
+            let router = self.notificationsCoordinator.navigationRouter
+            let vc = DeepLinkViewController(uuid: uuid)
+            self.navigationRouter?.present(vc, animated: true, completion: nil)
+        }
     }
     
     public func navigateToFavourites() {
 //        closeMenu { [weak self] (success) in
-//            guard let strongSelf = self else { return }
-//            strongSelf.tabBarViewController.selectedIndex = TabIndex.favourites.rawValue
+//            guard let self = self else { return }
+//            self.tabBarViewController.selectedIndex = TabIndex.favourites.rawValue
 //        }
     }
     
     public func navigateToApplications() {
         closeMenu() { [ weak self]  (success) in
-            guard let strongSelf = self else { return }
-            strongSelf.tabBarViewController.selectedIndex = TabIndex.applications.rawValue
+            guard let self = self else { return }
+            self.tabBarViewController.selectedIndex = TabIndex.applications.rawValue
         }
     }
     
     public func navigateToMap() {
         closeMenu { [weak self] (success) in
-            guard let strongSelf = self else { return }
-            strongSelf.tabBarViewController.selectedIndex = TabIndex.map.rawValue
+            guard let self = self else { return }
+            self.tabBarViewController.selectedIndex = TabIndex.map.rawValue
         }
     }
     
@@ -122,12 +125,15 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         searchCoordinator = makeSearchCoordinator()
         
         let searchNavigationController = searchCoordinator.navigationRouter.navigationController
+        let notificationsNavigationController = notificationsCoordinator.navigationRouter.navigationController
         let applicationsNavigationController = applicationsCoordinator.navigationRouter.navigationController
         searchCoordinator.start()
         applicationsCoordinator.start()
+        notificationsCoordinator.start()
         tabBarViewController = TabBarViewController()
         tabBarViewController.viewControllers = [
             applicationsNavigationController,
+            notificationsNavigationController,
             searchNavigationController]
         tabBarViewController.delegate = self
     }
@@ -141,6 +147,17 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         addChildCoordinator(coordinator)
         return coordinator
     }()
+    
+    lazy var notificationsCoordinator: NotificationsCoordinator = {
+        let navigationController = UINavigationController()
+        //let icon = UIImage(named: "home")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        navigationController.tabBarItem = UITabBarItem(title: "Home", image: nil, selectedImage: nil)
+        let router = NavigationRouter(navigationController: navigationController)
+        let coordinator = NotificationsCoordinator(parent: nil, navigationRouter: router, inject: injected)
+        addChildCoordinator(coordinator)
+        return coordinator
+    }()
+
     
     lazy var homeCoordinator: HomeCoordinator = {
         let navigationController = UINavigationController()
@@ -202,13 +219,6 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         parentCtrl.present(navigationController, animated: true, completion: nil)
     }
     
-//    func presentContentViewController(navCtrl: UINavigationController, contentType: WorkfinderContentType) {
-//        let content = WorkfinderUI().makeWebContentViewController(
-//            contentType: contentType,
-//            dismissByPopping: true)
-//        navCtrl.present(content, animated: true, completion: nil)
-//    }
-    
     func showApplications() {
         navigateToApplications()
     }
@@ -217,8 +227,8 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         navigateToMap()
     }
     
-    func showRecommendations() {
-        navigateToRecommendations()
+    func showRecommendations(uuid: F4SUUID?) {
+        navigateToRecommendations(uuid: uuid)
     }
     
     func updateUnreadMessagesCount(_ count: Int) {

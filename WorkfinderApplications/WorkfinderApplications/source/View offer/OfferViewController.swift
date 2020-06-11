@@ -194,8 +194,9 @@ extension OfferViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         let info = presenter.cellInfoForIndexPath(indexPath)
+        let isNotesField = presenter.isNotesField(indexPath)
         cell.accessoryType = presenter.accessoryTypeForIndexPath(indexPath)
-        cell.configure(info: info)
+        cell.configure(info: info, isNoteField: isNotesField)
         return cell
     }
 }
@@ -220,16 +221,12 @@ struct OfferDetailCellInfo {
 class OfferDetailCell: UITableViewCell {
     lazy var firstLine: UILabel = {
         let label = UILabel()
-        label.font = WorkfinderFonts.subHeading
-        label.textColor = WorkfinderColors.textMedium
         label.setContentHuggingPriority(.required, for: .vertical)
         label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }()
     lazy var secondLine: UILabel = {
         let label = UILabel()
-        label.font = WorkfinderFonts.heading
-        label.textColor = UIColor.black
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
         label.setContentCompressionResistancePriority(.required, for: .vertical)
@@ -243,9 +240,21 @@ class OfferDetailCell: UITableViewCell {
         return stack
     }()
     
-    func configure(info: OfferDetailCellInfo) {
+    func configure(info: OfferDetailCellInfo, isNoteField: Bool) {
         firstLine.text = info.firstLine
         secondLine.text = info.secondLine
+        switch isNoteField {
+        case false:
+            firstLine.font = WorkfinderFonts.subHeading
+            secondLine.font = WorkfinderFonts.heading
+            firstLine.textColor = WorkfinderColors.textMedium
+            secondLine.textColor = UIColor.black
+        case true:
+            firstLine.font = WorkfinderFonts.subHeading
+            secondLine.font = WorkfinderFonts.body2
+            firstLine.textColor = WorkfinderColors.textMedium
+            secondLine.textColor = WorkfinderColors.textMedium
+        }
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

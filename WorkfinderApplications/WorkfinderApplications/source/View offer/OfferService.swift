@@ -30,14 +30,15 @@ class OfferService: OfferServiceProtocol{
                 let offer = Offer(
                     placementUuid: application.placementUuid,
                     offerState: offerState,
-                    startingDateString: json.start_date,
-                    duration: json.offered_duration,
+                    startDateString: json.start_date,
+                    endDateString: json.end_date,
                     hostCompany: json.association?.location?.company?.name,
                     hostContact: json.association?.host?.displayName,
                     email: json.association?.host?.emails?.first,
                     location: self.addressStringFromOfferJson(json),
                     logoUrl: json.association?.location?.company?.logo,
-                    reasonWithdrawn: nil)
+                    reasonWithdrawn: nil,
+                    offerNotes: json.offer_notes)
                 completion(Result<Offer,Error>.success(offer))
             case .failure(let error):
                 completion(Result<Offer,Error>.failure(error))
