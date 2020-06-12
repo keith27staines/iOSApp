@@ -13,10 +13,11 @@ public protocol UpdateCandidateServiceProtocol {
     func update(candidate: Candidate, completion: @escaping ((Result<Candidate, Error>) -> Void))
 }
 
+/// This struct is required because the Candidate isn't of the right shape for creating a candidate. Due to an oddity of the api, candidate's user field is sometimes a uuid and sometimes a json. Use this struct for the json when POSTing to /v3/candidates
 struct CreatableCandidate: Codable {
     var date_of_birth: String?
     var guardian_email: String?
-    var user: F4SUUID
+    var user: F4SUUID // NB Candidate.user is a json object, not a uuid
     var phone: String?
     var has_allowed_sharing_with_educational_institution: Bool?
     var has_allowed_sharing_with_employers: Bool?
