@@ -40,7 +40,6 @@ public class LocalStore : LocalStorageProtocol {
         case interests
         
         case companyDatabaseCreatedDate = "companyDatabaseCreatedDate"
-        case shouldLoadTimeline = "shouldLoadTimeline"
     }
     
     public init(userDefaults: UserDefaults = .standard) {

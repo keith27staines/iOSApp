@@ -7,6 +7,7 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     var shouldAskOperatingSystemToAllowLocation = false
     let interestsRepository: F4SSelectedInterestsRepositoryProtocol
+    weak var interestsViewController: InterestsViewController?
     
     lazy var rootViewController: MapViewController = {
         let storyboard = UIStoryboard(name: "MapView", bundle: nil)
@@ -32,6 +33,23 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
         rootViewController.coordinator = self
         rootViewController.shouldRequestAuthorization = shouldAskOperatingSystemToAllowLocation
         navigationRouter.navigationController.pushViewController(rootViewController, animated: false)
+    }
+    
+    func processRecommendation(uuid: F4SUUID?) {
+        print("process recommendation")
+        guard let uuid = uuid else { return }
+        rootViewController.dismiss(animated: true, completion: nil)
+        if childCoordinators.count > 0 {
+            let alert = UIAlertController(title: "Show recommendation?", message: "You have an application in progress. You might want to finish this before opening the recommendation", preferredStyle: .alert)
+            let recommendationAction = UIAlertAction(title: "View recommendation", style: .destructive) { (_) in
+                self.navigationRouter.popToViewController(self.rootViewController, animated: true)
+                self.childCoordinators.removeAll()
+            }
+            let continueAction = UIAlertAction(title: "Continue with application", style: .default, handler: nil)
+            alert.addAction(recommendationAction)
+            alert.addAction(continueAction)
+            navigationRouter.present(alert, animated: true, completion: nil)
+        }
     }
     
     var showingDetailForCompanyWorkplace: CompanyWorkplace?
@@ -67,6 +85,7 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
         interestsViewController.log = injected.log
         interestsViewController.delegate = rootViewController
         let navigationController = UINavigationController(rootViewController: interestsViewController)
+        self.interestsViewController = interestsViewController
         rootViewController.present(navigationController, animated: true, completion: nil)
    }
 }

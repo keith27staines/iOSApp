@@ -99,7 +99,7 @@
 		FC771F572416299B00AD6317 /* PinDownloadFileParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771F542416299A00AD6317 /* PinDownloadFileParserTests.swift */; };
 		FC771F582416299B00AD6317 /* PinRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771F552416299B00AD6317 /* PinRepositoryTests.swift */; };
 		FC771F592416299B00AD6317 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771F562416299B00AD6317 /* Common.swift */; };
-		FC7B63E12465257D006AC0C6 /* apple-app-site-association in Resources */ = {isa = PBXBuildFile; fileRef = FC7B63E02465257D006AC0C6 /* apple-app-site-association */; };
+		FC7B63E12465257D006AC0C6 /* apple-app-site-association-full in Resources */ = {isa = PBXBuildFile; fileRef = FC7B63E02465257D006AC0C6 /* apple-app-site-association-full */; };
 		FC7B63E424652FD2006AC0C6 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC7B63E324652FD2006AC0C6 /* AuthenticationServices.framework */; };
 		FC8E303A20F4A60B006059DE /* F4SLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8E303920F4A60B006059DE /* F4SLogger.swift */; };
 		FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC92567A1F8F70D100FF9841 /* InterestsModel.swift */; };
@@ -108,7 +108,7 @@
 		FC99BDC820CFD8E400278DDE /* F4SDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */; };
 		FC99BDCA20D170CA00278DDE /* F4SCompanyDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99BDC920D170CA00278DDE /* F4SCompanyDownloadManager.swift */; };
 		FC9BEE082015FF6000347437 /* UniversalLinkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9BEE072015FF6000347437 /* UniversalLinkParser.swift */; };
-		FCA4E2A8249211B500BE87FC /* DeepLinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA4E2A7249211B500BE87FC /* DeepLinkViewController.swift */; };
+		FCA4E2AA2492438200BE87FC /* apple-app-site-association in Resources */ = {isa = PBXBuildFile; fileRef = FCA4E2A92492438200BE87FC /* apple-app-site-association */; };
 		FCA53B961FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA53B941FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift */; };
 		FCA53B971FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */; };
 		FCB46F02204FD86D00F0779F /* F4SLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46F01204FD86D00F0779F /* F4SLogViewController.swift */; };
@@ -319,7 +319,7 @@
 		FC771F552416299B00AD6317 /* PinRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinRepositoryTests.swift; sourceTree = "<group>"; };
 		FC771F562416299B00AD6317 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		FC79314720226D440034D201 /* F4SDistribution.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = F4SDistribution.entitlements; path = Config/F4SDistribution.entitlements; sourceTree = "<group>"; };
-		FC7B63E02465257D006AC0C6 /* apple-app-site-association */ = {isa = PBXFileReference; lastKnownFileType = text; path = "apple-app-site-association"; sourceTree = "<group>"; };
+		FC7B63E02465257D006AC0C6 /* apple-app-site-association-full */ = {isa = PBXFileReference; lastKnownFileType = text; path = "apple-app-site-association-full"; sourceTree = "<group>"; };
 		FC7B63E224652FD2006AC0C6 /* f4s_workexperienceReleaseF4SLive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = f4s_workexperienceReleaseF4SLive.entitlements; sourceTree = "<group>"; };
 		FC7B63E324652FD2006AC0C6 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		FC8E303920F4A60B006059DE /* F4SLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SLogger.swift; sourceTree = "<group>"; };
@@ -330,7 +330,7 @@
 		FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDownloadService.swift; sourceTree = "<group>"; };
 		FC99BDC920D170CA00278DDE /* F4SCompanyDownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyDownloadManager.swift; sourceTree = "<group>"; };
 		FC9BEE072015FF6000347437 /* UniversalLinkParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalLinkParser.swift; sourceTree = "<group>"; };
-		FCA4E2A7249211B500BE87FC /* DeepLinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkViewController.swift; sourceTree = "<group>"; };
+		FCA4E2A92492438200BE87FC /* apple-app-site-association */ = {isa = PBXFileReference; lastKnownFileType = text; path = "apple-app-site-association"; sourceTree = "<group>"; };
 		FCA53B941FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SForceAppUpdateViewController.swift; sourceTree = "<group>"; };
 		FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = F4SForceAppUpdateViewController.xib; sourceTree = "<group>"; };
 		FCB46F01204FD86D00F0779F /* F4SLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SLogViewController.swift; sourceTree = "<group>"; };
@@ -458,8 +458,9 @@
 		40E78E0A1DD31A86000A3776 = {
 			isa = PBXGroup;
 			children = (
+				FCA4E2A92492438200BE87FC /* apple-app-site-association */,
 				FCF6B6512465559600D40FCE /* Icon-Small@2x.png */,
-				FC7B63E02465257D006AC0C6 /* apple-app-site-association */,
+				FC7B63E02465257D006AC0C6 /* apple-app-site-association-full */,
 				FCC85DC124515F2F00BC600E /* Top level files */,
 				40E78E151DD31A86000A3776 /* f4s-workexperience */,
 				FCFBD0072250D69700A9361D /* f4s-workexperienceTests */,
@@ -930,7 +931,6 @@
 				FC1DC06A21FE142D009ABC60 /* AppCoordinator.swift */,
 				FCEE5E1D2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift */,
 				FC313048222BC83C0043D014 /* TabBarCoordinator */,
-				FCA4E2A7249211B500BE87FC /* DeepLinkViewController.swift */,
 			);
 			path = "App Coordinator";
 			sourceTree = "<group>";
@@ -1116,6 +1116,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC1DC06821FE13FE009ABC60 /* CompanyDetailAssets.xcassets in Resources */,
+				FCA4E2AA2492438200BE87FC /* apple-app-site-association in Resources */,
 				FC21BE33220F53EB00A0A389 /* RandomNames.csv in Resources */,
 				40E78E8F1DD32C4E000A3776 /* Settings.bundle in Resources */,
 				FC7221A020FE248400F10953 /* Fastfile in Resources */,
@@ -1125,7 +1126,7 @@
 				40E78E211DD31A86000A3776 /* LaunchScreen.storyboard in Resources */,
 				FC0B6B392323D5D600A1867D /* Uploads.xcassets in Resources */,
 				FCC5EBB61F449C310085CE15 /* README.md in Resources */,
-				FC7B63E12465257D006AC0C6 /* apple-app-site-association in Resources */,
+				FC7B63E12465257D006AC0C6 /* apple-app-site-association-full in Resources */,
 				FC681C011F57473D0077BECA /* Podfile.lock in Resources */,
 				40C1A4F31DDEF2F6000F80AA /* AutoCompleteTableViewCell.xib in Resources */,
 				40E78E1E1DD31A86000A3776 /* Assets.xcassets in Resources */,
@@ -1314,7 +1315,6 @@
 				FCF0D16C1FBC244800F2AF1D /* PopupAnimator.swift in Sources */,
 				FCE51E402210362800DC1D50 /* PlacesSearchDataGetter.swift in Sources */,
 				FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */,
-				FCA4E2A8249211B500BE87FC /* DeepLinkViewController.swift in Sources */,
 				40E78E781DD32BE7000A3776 /* DrawerController.swift in Sources */,
 				40E78E7E1DD32BF4000A3776 /* CenterTableViewCell.swift in Sources */,
 				40E78E6E1DD32BD4000A3776 /* BaseMenuViewController.swift in Sources */,

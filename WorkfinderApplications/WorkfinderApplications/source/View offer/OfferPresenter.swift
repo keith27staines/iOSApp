@@ -29,7 +29,7 @@ class OfferPresenter: OfferPresenterProtocol {
     var companyName: String { application.companyName }
     var offerState: OfferState? { offer?.offerState }
     var startDateString: String? { offer?.startDateString }
-    var endDateString: String? { offer?.endDateString }
+    var duration: String? { offer?.duration }
     var hostCompany: String? { offer?.hostCompany }
     var hostContact: String? { offer?.hostContact }
     var email: String? { offer?.email }
@@ -91,18 +91,20 @@ class OfferPresenter: OfferPresenterProtocol {
     }
     
     func numberOfSections() -> Int { 1 }
+    
     func numberOfRowsInSection(_ section: Int) -> Int {
         guard section == 0 else { return 0 }
         return OfferTableRowType.allCases.count
     }
+    
     func cellInfoForIndexPath(_ indexPath: IndexPath) -> OfferDetailCellInfo {
         
         let rowType = OfferTableRowType(rawValue: indexPath.row)!
         switch rowType {
         case .startDate:
             return OfferDetailCellInfo(firstLine: "Start date", secondLine: offer?.startDateString)
-        case .endDate:
-            return OfferDetailCellInfo(firstLine: "End date", secondLine: offer?.endDateString)
+        case .duration:
+            return OfferDetailCellInfo(firstLine: "Duration", secondLine: offer?.duration)
         case .company:
             return OfferDetailCellInfo(firstLine: "Host company", secondLine: offer?.hostCompany)
         case .host:
@@ -120,7 +122,7 @@ class OfferPresenter: OfferPresenterProtocol {
         let rowType = OfferTableRowType(rawValue: indexPath.row)!
         switch rowType {
         case .startDate: break
-        case .endDate: break
+        case .duration: break
         case .company: coordinator?.showCompany(application: application)
         case .host: coordinator?.showCompanyHost(application: application)
         case .email: break
@@ -133,7 +135,7 @@ class OfferPresenter: OfferPresenterProtocol {
         guard let rowType = OfferTableRowType(rawValue: indexPath.row) else { return .none }
         switch rowType {
         case .startDate: return .none
-        case .endDate: return .none
+        case .duration: return .none
         case .company: return .disclosureIndicator
         case .host: return .disclosureIndicator
         case .email: return .none
@@ -145,7 +147,7 @@ class OfferPresenter: OfferPresenterProtocol {
 
 fileprivate enum OfferTableRowType: Int, CaseIterable {
     case startDate
-    case endDate
+    case duration
     case company
     case host
     case email

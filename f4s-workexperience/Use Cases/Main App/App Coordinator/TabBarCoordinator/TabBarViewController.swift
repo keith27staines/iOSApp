@@ -35,8 +35,6 @@ class TabBarViewController: UITabBarController {
     
     func processUserStatusUpdate(_ status: F4SUserStatus) {
         configureTimelineTabBarWithCount(count: status.unreadMessageCount)
-        let shouldLoadTimeline = status.unreadMessageCount > 0
-        LocalStore().setValue(shouldLoadTimeline, for: LocalStore.Key.shouldLoadTimeline)
     }
     
     func configureTimelineTabBarWithCount(count: Int? = 0) {
@@ -121,10 +119,6 @@ protocol RatePlacementProtocol: class {
 }
 
 enum TabIndex : Int {
-//    case timeline
-//    case recommendations
-//    case favourites
     case applications
     case map
-    case notifications
 }

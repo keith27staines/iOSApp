@@ -88,12 +88,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         startTabBarCoordinator()
     }
     
-    var shouldShowTimeline: Bool = false {
-        didSet {
-            localStore.setValue(false, for: LocalStore.Key.shouldLoadTimeline)
-        }
-    }
-    
     private func onUserIsRegistered(userUuid: F4SUUID) {
         injected.user.uuid = userUuid
         logStartupInformation(userId: userUuid)
@@ -192,16 +186,16 @@ class DeepLinkDispatcher {
     }
     
     func dispatchDeepLink(_ url: URL, with coordinator: AppCoordinatorProtocol) {
+        guard
+            let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
+            else { return }
+        let path = components.path.split(separator: "/")
+        guard let firstPathComponent = path.first else { return }
         DispatchQueue.main.async {
-            guard
-                let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
-                let host = components.host
-                else { return }
-            let path = components.path.split(separator: "/")
             let lastPathComponent = String(path.last ?? "")
-            switch host {
+            switch firstPathComponent {
             case "recommendations":
-                print("Processing deeplink \(path)")
+                print("Received recommendation deeplink \(path)")
                 coordinator.showRecommendations(uuid: lastPathComponent)
             default:
                 break

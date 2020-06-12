@@ -55,19 +55,9 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
 
     public func navigateToRecommendations(uuid: F4SUUID?) {
         closeMenu { [weak self] (success) in
-            guard let self = self else { return }
-            //self.tabBarViewController.selectedIndex = TabIndex.notifications.rawValue
-            let router = self.notificationsCoordinator.navigationRouter
-            let vc = DeepLinkViewController(uuid: uuid)
-            self.navigationRouter?.present(vc, animated: true, completion: nil)
+            self?.navigateToMap()
+            self?.searchCoordinator.processRecommendation(uuid: uuid)
         }
-    }
-    
-    public func navigateToFavourites() {
-//        closeMenu { [weak self] (success) in
-//            guard let self = self else { return }
-//            self.tabBarViewController.selectedIndex = TabIndex.favourites.rawValue
-//        }
     }
     
     public func navigateToApplications() {
@@ -117,7 +107,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     }
     
     var topNavigationController: UINavigationController {
-        return (UIApplication.shared.delegate?.window!!.rootViewController?.topMostViewController?.navigationController)!
+        return (UIApplication.shared.delegate!.window!!.rootViewController?.topMostViewController?.navigationController)!
     }
     
     private func createTabBar() {
@@ -125,15 +115,12 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         searchCoordinator = makeSearchCoordinator()
         
         let searchNavigationController = searchCoordinator.navigationRouter.navigationController
-        let notificationsNavigationController = notificationsCoordinator.navigationRouter.navigationController
         let applicationsNavigationController = applicationsCoordinator.navigationRouter.navigationController
         searchCoordinator.start()
         applicationsCoordinator.start()
-        notificationsCoordinator.start()
         tabBarViewController = TabBarViewController()
         tabBarViewController.viewControllers = [
             applicationsNavigationController,
-            notificationsNavigationController,
             searchNavigationController]
         tabBarViewController.delegate = self
     }
@@ -147,17 +134,6 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         addChildCoordinator(coordinator)
         return coordinator
     }()
-    
-    lazy var notificationsCoordinator: NotificationsCoordinator = {
-        let navigationController = UINavigationController()
-        //let icon = UIImage(named: "home")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
-        navigationController.tabBarItem = UITabBarItem(title: "Home", image: nil, selectedImage: nil)
-        let router = NavigationRouter(navigationController: navigationController)
-        let coordinator = NotificationsCoordinator(parent: nil, navigationRouter: router, inject: injected)
-        addChildCoordinator(coordinator)
-        return coordinator
-    }()
-
     
     lazy var homeCoordinator: HomeCoordinator = {
         let navigationController = UINavigationController()
