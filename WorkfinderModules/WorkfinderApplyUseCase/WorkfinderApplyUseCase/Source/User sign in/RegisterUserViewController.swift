@@ -57,6 +57,8 @@ class RegisterUserViewController: RegisterAndSignInBaseViewController {
         presenter.nickname = trim(nickname.textfield.text)
         presenter.email = trim(email.textfield.text)
         presenter.guardianEmail = trim(guardianEmail.textfield.text)
+        presenter.allowedSharingWithEducationInstitution = shareWithEducationalInstitutionSwitch.isOn
+        presenter.allowedSharingWithEmployers = shareWithEmployersSwitch.isOn
         presenter.password = trim(password.textfield.text)
         presenter.phone = trim(phone.textfield.text)
         presenter.isTermsAndConditionsAgreed = termsAgreedSwitch.isOn

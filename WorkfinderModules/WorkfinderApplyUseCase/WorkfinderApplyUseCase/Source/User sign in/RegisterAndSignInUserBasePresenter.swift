@@ -9,6 +9,8 @@ protocol RegisterAndSignInPresenterProtocol: class {
     var nickname: String? { get set }
     var email: String? { get set }
     var guardianEmail: String? { get set }
+    var allowedSharingWithEmployers: Bool? { get set }
+    var allowedSharingWithEducationInstitution: Bool? { get set }
     var password: String? { get set }
     var phone: String? { get set }
     var fullnameValidityState: UnderlineView.State { get }
@@ -84,6 +86,24 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
         set {
             var candidate = userRepository.loadCandidate()
             candidate.guardianEmail = newValue
+            userRepository.save(candidate: candidate)
+        }
+    }
+    
+    var allowedSharingWithEmployers: Bool? {
+        get { userRepository.loadCandidate().allowedSharingWithEmployers }
+        set {
+            var candidate = userRepository.loadCandidate()
+            candidate.allowedSharingWithEmployers = newValue
+            userRepository.save(candidate: candidate)
+        }
+    }
+    
+    var allowedSharingWithEducationInstitution: Bool? {
+        get { userRepository.loadCandidate().allowedSharingWithEducationInstitution }
+        set {
+            var candidate = userRepository.loadCandidate()
+            candidate.allowedSharingWithEducationInstitution = newValue
             userRepository.save(candidate: candidate)
         }
     }

@@ -15,8 +15,8 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     @objc func hideKeyboard() { view.endEditing(true) }
     @objc func showTermsAndConditions() { openLinkInWebView(.candidateTermsAndConditions) }
     @objc func agreedTermsAndConditionsChanged(switch: UISwitch) { updatePresenter() }
-    @objc func shareProfileChanged(switch: UISwitch) { updatePresenter() }
-    @objc func shareInformationChanged(switch: UISwitch) { updatePresenter() }
+    @objc func shareWithEmployersChanged(switch: UISwitch) { updatePresenter() }
+    @objc func shareWithEducationalInstitutionChanged(switch: UISwitch) { updatePresenter() }
     @objc func onDidTapSwitchMode() { presenter.onDidTapSwitchMode() }
     @objc func onPrimaryButtonTap() {
         updatePresenter()
@@ -320,8 +320,8 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     lazy var switchesStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
             self.termsAndConditionsStack,
-            self.shareProfileStack,
-            self.shareInformationStack
+            self.shareWithEmployers,
+            self.shareWithEducationalInstitutionStack
         ])
         stack.axis = .vertical
         stack.spacing = 28
@@ -340,20 +340,20 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         return makeSwitchLinkLabel(text: title, linkText: link, selector: selector)
     }()
     
-    lazy var shareProfileStack: UIStackView = {
+    lazy var shareWithEmployers: UIStackView = {
         let text = "I agree for Workfinder to share my profile with other relevant employers"
         let label = makeSwitchLabel(text: text)
-        return makeSwitchStack(theSwitch: shareProfileSwitch, label: label)
+        return makeSwitchStack(theSwitch: shareWithEmployersSwitch, label: label)
     }()
     
-    lazy var shareProfileSwitch: UISwitch = { makeSwitch(selector: #selector(shareProfileChanged)) }()
+    lazy var shareWithEmployersSwitch: UISwitch = { makeSwitch(selector: #selector(shareWithEmployersChanged)) }()
     
-    lazy var shareInformationStack: UIStackView = {
-        makeSwitchStack(theSwitch: shareInformationSwitch, label: shareInformationLabel)
+    lazy var shareWithEducationalInstitutionStack: UIStackView = {
+        makeSwitchStack(theSwitch: shareWithEducationalInstitutionSwitch, label: shareWithEducationalInstitutionLabel)
     }()
-    lazy var shareInformationSwitch: UISwitch = { makeSwitch(selector: #selector(shareInformationChanged)) }()
+    lazy var shareWithEducationalInstitutionSwitch: UISwitch = { makeSwitch(selector: #selector(shareWithEducationalInstitutionChanged)) }()
 
-    lazy var shareInformationLabel: UILabel = {
+    lazy var shareWithEducationalInstitutionLabel: UILabel = {
         let title = "I agree to share my information with my educational institution"
         let link = "Find out more"
         let selector = #selector(showFindOutMoreAlert)

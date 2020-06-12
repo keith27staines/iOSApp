@@ -8,6 +8,8 @@ public struct Candidate: Codable {
     public var fullName: String { self.userSummary.full_name }
     public var guardianEmail: String?
     public var phone: String?
+    public var allowedSharingWithEducationInstitution: Bool?
+    public var allowedSharingWithEmployers: Bool?
     
     public func age(on date: Date = Date()) -> Int? {
         guard let dobString = dateOfBirth, let dob = Date.workfinderDateStringToDate(dobString) else {
@@ -28,6 +30,8 @@ public struct Candidate: Codable {
         case userSummary = "user"
         case guardianEmail = "guardian_email"
         case phone
+        case allowedSharingWithEducationInstitution = "has_allowed_sharing_with_educational_institution"
+        case allowedSharingWithEmployers = "has_allowed_sharing_with_employers"
     }
     
     struct UserSummary: Codable {
