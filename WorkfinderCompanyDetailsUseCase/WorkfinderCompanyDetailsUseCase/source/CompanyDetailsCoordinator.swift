@@ -6,6 +6,26 @@ import WorkfinderCoordinators
 import WorkfinderAppLogic
 import WorkfinderApplyUseCase
 
+public protocol CompanyCoordinatorFactoryProtocol {
+    
+    func buildCoordinator(
+        parent: CompanyCoordinatorParentProtocol,
+        navigationRouter: NavigationRoutingProtocol,
+        workplace: Workplace,
+        inject: CoreInjectionProtocol,
+        applicationFinished: @escaping ((PreferredDestination) -> Void)
+    ) -> CoreInjectionNavigationCoordinatorProtocol
+}
+
+protocol CompanyDetailsCoordinatorProtocol: CoreInjectionNavigationCoordinatorProtocol {
+    var originScreen: ScreenName { get set }
+    func companyDetailsPresenterDidFinish(_ presenter: CompanyDetailsPresenterProtocol)
+    func companyDetailsPresenter(_ presenter: CompanyDetailsPresenterProtocol, requestedShowDuedilFor: Workplace)
+    func companyDetailsPresenter(_ presenter: CompanyDetailsPresenterProtocol, requestOpenLink link: String)
+    func applyTo(workplace: Workplace, hostLocationAssociation: HostAssociationJson)
+    func onDidTapLinkedin(association: HostAssociationJson)
+}
+
 public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, CompanyDetailsCoordinatorProtocol, CompanyMainViewCoordinatorProtocol {
     public var originScreen = ScreenName.notSpecified
     let environment: EnvironmentType
