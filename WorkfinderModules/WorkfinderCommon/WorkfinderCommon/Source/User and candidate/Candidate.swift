@@ -3,7 +3,7 @@
 public struct CreatableCandidate: Codable {
     public var date_of_birth: String?
     public var guardian_email: String?
-    public var user: F4SUUID // NB Candidate.user is a json object, not a uuid
+    public var user: F4SUUID // NB in Candidate, user is a json object, not a uuid
     public var phone: String?
     public var has_allowed_sharing_with_educational_institution: Bool?
     public var has_allowed_sharing_with_employers: Bool?
