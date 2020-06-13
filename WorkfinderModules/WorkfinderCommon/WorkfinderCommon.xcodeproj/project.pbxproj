@@ -54,6 +54,7 @@
 		FC69EBA92481371C00901A2B /* GlobalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC69EBA82481371C00901A2B /* GlobalNotifications.swift */; };
 		FC6E42DD24556B97005E0D08 /* LocalStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6E42DC24556B97005E0D08 /* LocalStorageProtocol.swift */; };
 		FC73902223030856003A9253 /* LocalStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC73902123030856003A9253 /* LocalStoreTests.swift */; };
+		FC75B3582494841D008B4FBB /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75B3572494841D008B4FBB /* Recommendation.swift */; };
 		FC7A4396224A3C0E00B2D693 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4395224A3C0E00B2D693 /* NetworkError.swift */; };
 		FC7DC9F6244D8D7300C282EF /* RemoteLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7DC9F5244D8D7300C282EF /* RemoteLinks.swift */; };
 		FC83EC7F22FC0C55009D7A0B /* F4SJsonValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83EC7E22FC0C55009D7A0B /* F4SJsonValueTests.swift */; };
@@ -186,6 +187,7 @@
 		FC69EBA82481371C00901A2B /* GlobalNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalNotifications.swift; sourceTree = "<group>"; };
 		FC6E42DC24556B97005E0D08 /* LocalStorageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageProtocol.swift; sourceTree = "<group>"; };
 		FC73902123030856003A9253 /* LocalStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStoreTests.swift; sourceTree = "<group>"; };
+		FC75B3572494841D008B4FBB /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
 		FC7A4395224A3C0E00B2D693 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		FC7DC9F5244D8D7300C282EF /* RemoteLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteLinks.swift; sourceTree = "<group>"; };
 		FC83EC7E22FC0C55009D7A0B /* F4SJsonValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SJsonValueTests.swift; sourceTree = "<group>"; };
@@ -355,6 +357,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FC75B356249483EF008B4FBB /* Recommendation */ = {
+			isa = PBXGroup;
+			children = (
+				FC75B3572494841D008B4FBB /* Recommendation.swift */,
+			);
+			path = Recommendation;
+			sourceTree = "<group>";
+		};
 		FC8F9581233BB53B0027BE02 /* Factories protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -476,6 +486,7 @@
 			isa = PBXGroup;
 			children = (
 				FC1243E22344AEA30007BA95 /* ScreenNames.swift */,
+				FC75B356249483EF008B4FBB /* Recommendation */,
 				FC5DAADF246E4EA600031AEA /* Workfinder errors */,
 				FC1FA08322FAABDE003EAE59 /* User and candidate */,
 				FC182E5F2420EDC5005E7CEA /* Protocols */,
@@ -754,6 +765,7 @@
 				FC8F957D233BA6710027BE02 /* MockAnalyticsAndDebugging.swift in Sources */,
 				FC06605D2326770B00496FE2 /* F4SShortlistJson.swift in Sources */,
 				FCE5193E22494CED00B550C9 /* F4SJsonValue.swift in Sources */,
+				FC75B3582494841D008B4FBB /* Recommendation.swift in Sources */,
 				FCE5192F2249482A00B550C9 /* F4SCalendarMonth.swift in Sources */,
 				FC9EE07F2482264D00CCE8CC /* WorkfinderVersionCheckerProtocol.swift in Sources */,
 				FCFDCE5824599278006BA3AC /* PreferredDestinations.swift in Sources */,

@@ -15,5 +15,4 @@ public class WorkplaceService: WorkfinderService, WorkplaceServiceProtocol {
             completion(Result<CompanyWorkplace,Error>.failure(error))
         }
     }
-
 }

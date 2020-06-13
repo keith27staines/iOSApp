@@ -153,7 +153,8 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
             return
         }
         userRepository.save(candidate: candidate)
-        createCandidateService.createCandidate(candidate: candidate, userUuid: userUuid) {
+        let creatableCandidate = CreatableCandidate(candidate: candidate, userUuid: userUuid)
+        createCandidateService.createCandidate(candidate: creatableCandidate) {
             [weak self] (result) in
             guard let self = self else { return }
             switch result {
