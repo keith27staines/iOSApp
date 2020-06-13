@@ -6,7 +6,7 @@ import CoreLocation
 class CompanyViewPresenter: NSObject {
     let coordinator: ApplicationsCoordinator
     let companyService: CompanyServiceProtocol
-    let associationsService: HostLocationAssociationsServiceProtocol
+    let associationsService: AssociationsServiceProtocol
     let application: Application
     var view: CompanyViewController?
     var companyJson: CompanyJson?
@@ -81,7 +81,7 @@ class CompanyViewPresenter: NSObject {
         }
     }
     
-    func rebuild(companyJson: CompanyJson, association: HostWorkplaceAssociationJson) {
+    func rebuild(companyJson: CompanyJson, association: AssociationJson) {
         let location = companyJson.locations?.first(where: { (location) -> Bool in
             location.uuid == association.locationUuid
         })
@@ -108,7 +108,7 @@ class CompanyViewPresenter: NSObject {
     init(coordinator: ApplicationsCoordinator,
          application: Application,
          companyService: CompanyServiceProtocol,
-         associationsService: HostLocationAssociationsServiceProtocol) {
+         associationsService: AssociationsServiceProtocol) {
         self.coordinator = coordinator
         self.application = application
         self.companyService = companyService

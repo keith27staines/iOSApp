@@ -138,7 +138,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         return HostsProvider(networkConfig: self.networkConfiguration)
     }()
     
-    lazy var associationsProvider: HostLocationAssociationsServiceProtocol = {
+    lazy var associationsProvider: AssociationsServiceProtocol = {
         return HostLocationAssociationsService(networkConfig: self.networkConfiguration)
     }()
     

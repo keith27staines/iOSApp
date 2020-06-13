@@ -13,11 +13,11 @@ import WorkfinderUserDetailsUseCase
 class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
     let applyService: PostPlacementServiceProtocol
     let environment: EnvironmentType
-    let associationsProvider: HostLocationAssociationsServiceProtocol
+    let associationsProvider: AssociationsServiceProtocol
     let interestsRepository: F4SSelectedInterestsRepositoryProtocol
 
     init(applyService: PostPlacementServiceProtocol,
-         associationsProvider: HostLocationAssociationsServiceProtocol,
+         associationsProvider: AssociationsServiceProtocol,
          environment: EnvironmentType,
          interestsRepository: F4SSelectedInterestsRepositoryProtocol) {
         self.applyService = applyService

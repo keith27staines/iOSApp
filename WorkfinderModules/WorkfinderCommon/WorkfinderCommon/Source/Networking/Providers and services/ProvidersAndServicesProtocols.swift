@@ -1,9 +1,9 @@
 
 import Foundation
 
-public protocol HostLocationAssociationsServiceProtocol {
-    func fetchAssociation(uuid: F4SUUID, completion:  @escaping((Result<HostWorkplaceAssociationJson,Error>) -> Void))
-    func fetchAssociations(for locationUuid: F4SUUID, completion:  @escaping((Result<HostLocationAssociationListJson,Error>) -> Void))
+public protocol AssociationsServiceProtocol {
+    func fetchAssociation(uuid: F4SUUID, completion:  @escaping((Result<AssociationJson,Error>) -> Void))
+    func fetchAssociations(for locationUuid: F4SUUID, completion:  @escaping((Result<HostAssociationListJson,Error>) -> Void))
 }
 
 public struct ServerListJson<A:Decodable>: Decodable {
@@ -13,7 +13,7 @@ public struct ServerListJson<A:Decodable>: Decodable {
     public let results: [A]
 }
 
-public struct HostWorkplaceAssociationJson: Codable {
+public struct AssociationJson: Codable {
     public let uuid: F4SUUID
     public let locationUuid: F4SUUID
     public let host: F4SUUID
@@ -40,7 +40,8 @@ public struct HostWorkplaceAssociationJson: Codable {
     }
 }
 
-public struct HostLocationAssociationJson: Codable {
+/// Like an AssociationJson but with a full host object rather than a uuid
+public struct HostAssociationJson: Codable {
     public let uuid: F4SUUID
     public let locationUuid: F4SUUID
     public let host: Host
@@ -50,7 +51,7 @@ public struct HostLocationAssociationJson: Codable {
     public let stopped: String?
     public var isSelected: Bool = false
     
-    public init(uuidAssociation: HostWorkplaceAssociationJson, host:Host) {
+    public init(uuidAssociation: AssociationJson, host:Host) {
         self.uuid = uuidAssociation.uuid
         self.locationUuid = uuidAssociation.locationUuid
         self.host = host

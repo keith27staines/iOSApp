@@ -3,16 +3,16 @@ import WorkfinderCommon
 
 class HostViewPresenter {
     let coordinator: ApplicationsCoordinator
-    let hostLocationService: HostLocationAssociationsServiceProtocol
+    let hostLocationService: AssociationsServiceProtocol
     let hostService: HostsProviderProtocol
     let associationUuid: F4SUUID
-    var association: HostLocationAssociationJson?
+    var association: HostAssociationJson?
     var view: HostViewController?
     var host: Host?
     
     init(coordinator: ApplicationsCoordinator,
          hostService: HostsProviderProtocol,
-         hostLocationService: HostLocationAssociationsServiceProtocol,
+         hostLocationService: AssociationsServiceProtocol,
          associationUuid: F4SUUID) {
         self.coordinator = coordinator
         self.hostService = hostService
@@ -37,7 +37,7 @@ class HostViewPresenter {
                     switch hostResult {
                     case .success(let host):
                         self.host = host
-                        self.association = HostLocationAssociationJson(uuidAssociation: model, host: host)
+                        self.association = HostAssociationJson(uuidAssociation: model, host: host)
                         completion(nil)
                     case .failure(let error):
                         completion(error)

@@ -77,12 +77,12 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         return candidate.uuid == nil
     }
     
-    let association: HostLocationAssociationJson
+    let association: HostAssociationJson
     let companyWorkplace: CompanyWorkplace
     public init(applyCoordinatorDelegate: ApplyCoordinatorDelegate? = nil,
                 applyService: PostPlacementServiceProtocol,
                 companyWorkplace: CompanyWorkplace,
-                association: HostLocationAssociationJson,
+                association: HostAssociationJson,
                 parent: CoreInjectionNavigationCoordinator?,
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,

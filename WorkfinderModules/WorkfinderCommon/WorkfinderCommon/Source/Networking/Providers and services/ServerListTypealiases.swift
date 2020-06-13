@@ -12,4 +12,4 @@ public typealias PicklistServerJson = ServerListJson<PicklistItemJson>
 public typealias CompanyListJson = ServerListJson<CompanyJson>
 
 /// Standard server paged array `[HostLocationAssociationJson]`
-public typealias HostLocationAssociationListJson = ServerListJson<HostLocationAssociationJson>
+public typealias HostAssociationListJson = ServerListJson<HostAssociationJson>

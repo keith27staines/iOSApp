@@ -9,8 +9,8 @@ protocol CompanyWorkplaceCoordinatorProtocol : CompanyMainViewCoordinatorProtoco
     func companyWorkplacePresenterDidFinish(_ : CompanyWorkplacePresenter)
     func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, requestedShowDuedilFor: CompanyWorkplace)
     func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, requestOpenLink link: String)
-    func applyTo(companyWorkplace: CompanyWorkplace, hostLocationAssociation: HostLocationAssociationJson)
-    func onDidTapLinkedin(association: HostLocationAssociationJson)
+    func applyTo(companyWorkplace: CompanyWorkplace, hostLocationAssociation: HostAssociationJson)
+    func onDidTapLinkedin(association: HostAssociationJson)
 }
 
 protocol CompanyWorkplacePresenterProtocol: class {
@@ -26,9 +26,9 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
     weak var log: F4SAnalyticsAndDebugging?
     weak var coordinator: CompanyWorkplaceCoordinatorProtocol?
     weak var view: CompanyWorkplaceViewProtocol?
-    let associationsProvider: HostLocationAssociationsServiceProtocol
+    let associationsProvider: AssociationsServiceProtocol
     var mainViewPresenter: CompanyMainViewPresenter
-    var associations: HostLocationAssociationListJson?
+    var associations: HostAssociationListJson?
     var selectedPersonIndexDidChange: ((Int?) -> ())?
     
     var userLocation: CLLocation? {
@@ -103,7 +103,7 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
     
     init(coordinator: CompanyWorkplaceCoordinatorProtocol,
          companyWorkplace: CompanyWorkplace,
-         associationsProvider: HostLocationAssociationsServiceProtocol,
+         associationsProvider: AssociationsServiceProtocol,
          log: F4SAnalyticsAndDebugging?) {
         self.associationsProvider = associationsProvider
         self.companyWorkplace = companyWorkplace

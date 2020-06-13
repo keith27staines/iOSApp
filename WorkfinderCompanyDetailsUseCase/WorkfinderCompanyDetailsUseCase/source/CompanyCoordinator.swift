@@ -14,7 +14,7 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
     var companyWorkplace: CompanyWorkplace
     var interestsRepository: F4SSelectedInterestsRepositoryProtocol
     let applyService: PostPlacementServiceProtocol
-    let associationsProvider: HostLocationAssociationsServiceProtocol
+    let associationsProvider: AssociationsServiceProtocol
 
     var applicationFinishedWithPreferredDestination: ((PreferredDestination) -> Void)
     
@@ -26,7 +26,7 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
         environment: EnvironmentType,
         interestsRepository: F4SSelectedInterestsRepositoryProtocol,
         applyService: PostPlacementServiceProtocol,
-        associationsProvider: HostLocationAssociationsServiceProtocol,
+        associationsProvider: AssociationsServiceProtocol,
         applicationFinished: @escaping ((PreferredDestination) -> Void)) {
         self.environment = environment
         self.interestsRepository = interestsRepository
@@ -70,7 +70,7 @@ extension CompanyCoordinator : ApplyCoordinatorDelegate {
 }
 
 extension CompanyCoordinator: CompanyWorkplaceCoordinatorProtocol {
-    func applyTo(companyWorkplace: CompanyWorkplace, hostLocationAssociation: HostLocationAssociationJson) {
+    func applyTo(companyWorkplace: CompanyWorkplace, hostLocationAssociation: HostAssociationJson) {
         guard let _ = companyWorkplacePresenter.selectedHost else { return }
         let applyCoordinator = ApplyCoordinator(
             applyCoordinatorDelegate: self,
@@ -98,7 +98,7 @@ extension CompanyCoordinator: CompanyWorkplaceCoordinatorProtocol {
         childCoordinators = [:]
     }
     
-    func onDidTapLinkedin(association: HostLocationAssociationJson) {
+    func onDidTapLinkedin(association: HostAssociationJson) {
         openUrl(association.host.linkedinUrlString)
     }
     

@@ -8,7 +8,7 @@ public class HostLocationAssociationView : UIView {
     var lineHeight: CGFloat = 23
     var fontWeight = UIFont.Weight.light
     
-    public var association: HostLocationAssociationJson? {
+    public var association: HostAssociationJson? {
         didSet {
             image.load(urlString: association?.host.photoUrlString, defaultImage: HostLocationAssociationView.defaultImage)
             nameLabel.text = association?.host.displayName
@@ -38,7 +38,7 @@ public class HostLocationAssociationView : UIView {
         readMoreLabelStack.isHidden = !self.expandableLabel.isExpandable
     }
     
-    public var profileLinkTap: ((HostLocationAssociationJson) -> Void)?
+    public var profileLinkTap: ((HostAssociationJson) -> Void)?
     
     public init(showSelectionButton: Bool = true) {
         self.showSelectionButton = showSelectionButton
