@@ -83,8 +83,8 @@ public protocol PicklistProviderProtocol: class {
     func fetchPicklistItems(completion: @escaping ((Result<PicklistServerJson,Error>) -> Void))
 }
 
-public protocol CompanyWorkplaceListProviderProtocol: class {
-    func fetchCompanyWorkplaces(
+public protocol WorkplaceListProviderProtocol: class {
+    func fetchWorkplaces(
         locationUuids: [F4SUUID],
         completion: @escaping ((Result<CompanyListJson,Error>) -> Void))
 }

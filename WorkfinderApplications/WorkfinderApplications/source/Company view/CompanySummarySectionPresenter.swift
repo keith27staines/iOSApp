@@ -9,12 +9,12 @@ protocol CompanySummarySectionPresenterProtocol {
 }
 
  class CompanySummarySectionPresenter: CompanySummarySectionPresenterProtocol {
-    let companyWorkplace: CompanyWorkplace?
-    var company: CompanyJson? { companyWorkplace?.companyJson }
+    let workplace: Workplace?
+    var company: CompanyJson? { workplace?.companyJson }
     var numberOfRows: Int { return summarySectionRowModel.count }
     
-    init(companyWorkplace: CompanyWorkplace?) {
-        self.companyWorkplace = companyWorkplace
+    init(workplace: Workplace?) {
+        self.workplace = workplace
         buildSummarySectionRowModel()
     }
     
@@ -64,7 +64,7 @@ protocol CompanySummarySectionPresenterProtocol {
         case .postcode:
             guard let nameValueCell = cell as? NameValueCell else { break }
             nameValueCell.nameLabel.text = "Postcode"
-            nameValueCell.valueLabel.text = companyWorkplace?.postcode
+            nameValueCell.valueLabel.text = workplace?.postcode
             nameValueCell.nameValue.isButton = false
             nameValueCell.nameLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
         case .industry:

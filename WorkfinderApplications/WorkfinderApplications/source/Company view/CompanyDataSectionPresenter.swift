@@ -13,9 +13,9 @@ protocol CompanyDataSectionPresenterProtocol: class {
 
 class CompanyDataSectionPresenter: CompanyDataSectionPresenterProtocol {
     
-    var companyWorkplace: CompanyWorkplace?
+    var workplace: Workplace?
     var numberOfRows: Int { return items.count }
-    var company: CompanyJson? { return self.companyWorkplace?.companyJson }
+    var company: CompanyJson? { return self.workplace?.companyJson }
     
     var revenueString: String {
         let turnover = ScaledNumber(amount: company?.turnover ?? 0).formattedString()
@@ -106,8 +106,8 @@ class CompanyDataSectionPresenter: CompanyDataSectionPresenterProtocol {
                                    link: nil)
     }
     
-    init(companyWorkplace: CompanyWorkplace?) {
-        self.companyWorkplace = companyWorkplace
+    init(workplace: Workplace?) {
+        self.workplace = workplace
     }
     
     func cellForRow(_ row: Int, in tableView: UITableView) -> UITableViewCell {

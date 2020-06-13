@@ -23,21 +23,6 @@ public protocol RemoteNotificationsRegistrarProtocol {
     func registerForRemoteNotifications()
 }
 
-public protocol CompanyCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol {
-    var originScreen: ScreenName { get set }
-}
-
-public protocol CompanyCoordinatorFactoryProtocol {
-    
-    func makeCompanyCoordinator(
-        parent: CompanyCoordinatorParentProtocol,
-        navigationRouter: NavigationRoutingProtocol,
-        companyWorkplace: CompanyWorkplace,
-        inject: CoreInjectionProtocol,
-        applicationFinished: @escaping ((PreferredDestination) -> Void)
-    ) -> CompanyCoordinatorProtocol
-}
-
 public protocol OnboardingCoordinatorDelegate : class {
     func shouldEnableLocation(_ :Bool)
 }

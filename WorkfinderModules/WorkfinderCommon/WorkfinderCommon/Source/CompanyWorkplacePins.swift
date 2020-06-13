@@ -14,7 +14,7 @@ public struct PinJson: Codable, Hashable {
     }
 }
 
-public class CompanyWorkplace: Codable {
+public class Workplace: Codable {
     public var companyJson: CompanyJson
     public var pinJson: PinJson
     public init(companyJson: CompanyJson, pinJson: PinJson) {

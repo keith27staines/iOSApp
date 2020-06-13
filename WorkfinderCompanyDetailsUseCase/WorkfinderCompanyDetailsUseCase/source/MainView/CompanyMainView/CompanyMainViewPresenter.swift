@@ -6,7 +6,7 @@ import WorkfinderUI
 protocol CompanyMainViewCoordinatorProtocol: class {
     func onDidTapDuedil()
     func onDidTapLinkedin(association: HostAssociationJson)
-    func applyTo(companyWorkplace: CompanyWorkplace, hostLocationAssociation: HostAssociationJson)
+    func applyTo(workplace: Workplace, hostLocationAssociation: HostAssociationJson)
 }
 
 protocol CompanyMainViewPresenterProtocol: class {
@@ -25,24 +25,24 @@ class CompanyMainViewPresenter: CompanyMainViewPresenterProtocol {
     var log: F4SAnalyticsAndDebugging?
     weak var coordinator: CompanyMainViewCoordinatorProtocol?
     weak var view: CompanyMainViewProtocol?
-    var companyWorkplace: CompanyWorkplace
-    var companyName: String { return self.companyWorkplace.companyJson.name ?? "unnamed company" }
-    var pin: PinJson { self.companyWorkplace.pinJson }
+    var workplace: Workplace
+    var companyName: String { return self.workplace.companyJson.name ?? "unnamed company" }
+    var pin: PinJson { self.workplace.pinJson }
     var companyLocation: LatLon {
         return LatLon(latitude: CGFloat(pin.lat), longitude: CGFloat(pin.lon))
     }
     var selectedAssociation: HostAssociationJson? { return hostsSectionPresenter.selectedAssociation }
     var isHostSelected: Bool { return hostsSectionPresenter.isAssociationSelected }
     lazy var headerViewPresenter: CompanyHeaderViewPresenterProtocol = {
-        return CompanyHeaderViewPresenter(companyWorkplace: self.companyWorkplace)
+        return CompanyHeaderViewPresenter(workplace: self.workplace)
     }()
     
     lazy var summarySectionPresenter: CompanySummarySectionPresenterProtocol = {
-        return CompanySummarySectionPresenter(companyWorkplace: self.companyWorkplace)
+        return CompanySummarySectionPresenter(workplace: self.workplace)
     }()
     
     lazy var dataSectionPresenter: CompanyDataSectionPresenterProtocol = {
-        let presenter = CompanyDataSectionPresenter(companyWorkplace: self.companyWorkplace)
+        let presenter = CompanyDataSectionPresenter(workplace: self.workplace)
         presenter.onDidTapDuedil = {
             self.coordinator?.onDidTapDuedil()
         }
@@ -57,26 +57,26 @@ class CompanyMainViewPresenter: CompanyMainViewPresenterProtocol {
         return companyHostsPresenter
     }()
 
-    init(companyWorkplace: CompanyWorkplace,
+    init(workplace: Workplace,
          coordinator: CompanyMainViewCoordinatorProtocol,
          log: F4SAnalyticsAndDebugging?) {
         self.log = log
         self.coordinator = coordinator
-        self.companyWorkplace = companyWorkplace
+        self.workplace = workplace
     }
     
     func onDidTapApply() {
         guard let association = selectedAssociation else { return }
         let hostRowIndex = hostsSectionPresenter.selectedHostRow  ?? 0
         let host = hostsSectionPresenter.selectedAssociation?.host.uuid ?? ""
-        let company = companyWorkplace.companyJson.uuid ?? ""
+        let company = workplace.companyJson.uuid ?? ""
         let event = TrackEventFactory.makeApplyStart(
             hostRowIndex: hostRowIndex,
             host: host,
             company: company)
         
         log?.track(event: event)
-        coordinator?.applyTo(companyWorkplace: companyWorkplace, hostLocationAssociation: association)
+        coordinator?.applyTo(workplace: workplace, hostLocationAssociation: association)
     }
 }
 

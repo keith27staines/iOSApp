@@ -80,7 +80,7 @@ class MapViewController: UIViewController {
     @IBOutlet var mapView: GMSMapView!
     
     var popupAnimator = PopupAnimator()
-    var companyListPopupViewController: CompanyWorkplaceListViewProtocol?
+    var companyListPopupViewController: WorkplaceListViewProtocol?
     
     var mapEdgeInsets: UIEdgeInsets {
         return UIEdgeInsets(top: 60, left: 60, bottom: 60, right: 60)
@@ -146,7 +146,7 @@ class MapViewController: UIViewController {
     var emplacedCompanyPins: F4SCompanyPinSet = []
     
     /// The company currently selected by the user (if any)
-    var selectedCompanyWorkplace: CompanyWorkplace?
+    var selectedworkplace: Workplace?
     
     var infoWindowView: UIView?
     
@@ -216,18 +216,18 @@ class MapViewController: UIViewController {
         pressedPinOrCluster?.backgroundColor = UIColor.clear
         mapView.addSubview(pressedPinOrCluster!)
         
-        let vc = CompanyWorkplaceListViewController()
+        let vc = WorkplaceListViewController()
         guard let networkConfig = coordinator?.injected.networkConfig else {
             assertionFailure("MapViewController did not receive its coordinator")
             return
         }
-        let provider = CompanyWorkplaceListProvider(networkConfig: networkConfig)
-        vc.presenter = CompanyWorkplaceListPresenter(
-            companyWorkplaceUuids: workplaceUuids,
+        let provider = WorkplaceListService(networkConfig: networkConfig)
+        vc.presenter = WorkplaceListPresenter(
+            WorkplaceUuids: workplaceUuids,
             provider: provider)
-        vc.didSelectCompanyWorkplace = { [weak self] companyWorkplace in
+        vc.didSelectWorkplace = { [weak self] Workplace in
             self?.coordinator?.showDetail(
-                companyWorkplace: companyWorkplace,
+                workplace: Workplace,
                 originScreen: vc.screenName)
         }
         vc.log = log

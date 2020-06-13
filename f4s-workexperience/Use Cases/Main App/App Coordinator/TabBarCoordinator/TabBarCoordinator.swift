@@ -5,6 +5,7 @@ import WorkfinderUI
 import WorkfinderCoordinators
 import WorkfinderOnboardingUseCase
 import WorkfinderApplications
+import WorkfinderCompanyDetailsUseCase
 
 class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     

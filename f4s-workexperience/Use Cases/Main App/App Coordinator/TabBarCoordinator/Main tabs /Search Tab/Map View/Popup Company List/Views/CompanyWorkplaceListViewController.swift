@@ -2,18 +2,18 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 
-protocol CompanyWorkplaceListViewProtocol: class {
-    var didSelectCompanyWorkplace: ((CompanyWorkplace) -> Void)? { get set }
-    var presenter: CompanyWorkplaceListPresenterProtocol! { get set }
-    func refreshFromPresenter(_ presenter: CompanyWorkplaceListPresenterProtocol)
+protocol WorkplaceListViewProtocol: class {
+    var didSelectWorkplace: ((Workplace) -> Void)? { get set }
+    var presenter: WorkplaceListPresenterProtocol! { get set }
+    func refreshFromPresenter(_ presenter: WorkplaceListPresenterProtocol)
 }
 
-class CompanyWorkplaceListViewController: UIViewController {
+class WorkplaceListViewController: UIViewController {
     lazy var messageHandler = UserMessageHandler(presenter: self)
     let screenName = ScreenName.companyClusterList
     weak var log: F4SAnalyticsAndDebugging?
-    var didSelectCompanyWorkplace: ((CompanyWorkplace) -> Void)?
-    var presenter: CompanyWorkplaceListPresenterProtocol!
+    var didSelectWorkplace: ((Workplace) -> Void)?
+    var presenter: WorkplaceListPresenterProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +48,7 @@ class CompanyWorkplaceListViewController: UIViewController {
     func configureTableView() {
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(CompanyWorkplaceTile.self, forCellReuseIdentifier: "CompanyWorkplaceTile")
+        tableView.register(WorkplaceTile.self, forCellReuseIdentifier: "WorkplaceTile")
     }
     lazy var headerView: UIView = {
         let spacer =  UIButton(type: UIButton.ButtonType.system)
@@ -86,7 +86,7 @@ class CompanyWorkplaceListViewController: UIViewController {
     }()
 }
 
-extension CompanyWorkplaceListViewController: UITableViewDataSource {
+extension WorkplaceListViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -96,23 +96,23 @@ extension CompanyWorkplaceListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CompanyWorkplaceTile", for: indexPath) as! CompanyWorkplaceTile
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WorkplaceTile", for: indexPath) as! WorkplaceTile
         let viewData = presenter.companyTileViewData(index: indexPath.row)
         cell.configureWithViewData(viewData)
         return cell
     }
 }
 
-extension CompanyWorkplaceListViewController: UITableViewDelegate {
+extension WorkplaceListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.onSelectRow(indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
-extension CompanyWorkplaceListViewController: CompanyWorkplaceListViewProtocol {
+extension WorkplaceListViewController: WorkplaceListViewProtocol {
     
-    func refreshFromPresenter(_ presenter: CompanyWorkplaceListPresenterProtocol) {
+    func refreshFromPresenter(_ presenter: WorkplaceListPresenterProtocol) {
         switchLoadingOverlay(on: presenter.showLoadingIndicator)
         tableView.reloadData()
     }

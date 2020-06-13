@@ -3,29 +3,29 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderServices
 
-protocol CompanyWorkplaceListPresenterProtocol {
+protocol WorkplaceListPresenterProtocol {
     var showLoadingIndicator: Bool { get }
     var numberOfTiles: Int { get }
-    var view: CompanyWorkplaceListViewProtocol? { get set }
-    func onViewDidLoad(_ view: CompanyWorkplaceListViewProtocol)
+    var view: WorkplaceListViewProtocol? { get set }
+    func onViewDidLoad(_ view: WorkplaceListViewProtocol)
     func companyTileViewData(index: Int) -> CompanyTileViewData
     func onSelectRow(_ row: Int)
     func loadData(completion: @escaping (Error?) -> Void)
 }
 
-class CompanyWorkplaceListPresenter {
-    var numberOfTiles: Int { return self.companyWorkplaces.count }
-    weak var view: CompanyWorkplaceListViewProtocol?
-    let provider: CompanyWorkplaceListProviderProtocol
+class WorkplaceListPresenter {
+    var numberOfTiles: Int { return self.Workplaces.count }
+    weak var view: WorkplaceListViewProtocol?
+    let provider: WorkplaceListProviderProtocol
     var showLoadingIndicator: Bool = false
     let locationUuids: [F4SUUID]
     
-    init(companyWorkplaceUuids: [F4SUUID], provider: CompanyWorkplaceListProviderProtocol) {
+    init(WorkplaceUuids: [F4SUUID], provider: WorkplaceListProviderProtocol) {
         self.provider = provider
-        self.locationUuids = companyWorkplaceUuids
+        self.locationUuids = WorkplaceUuids
     }
     
-    var companyWorkplaces = [CompanyWorkplace]() {
+    var Workplaces = [Workplace]() {
         didSet {
             self.view?.refreshFromPresenter(self)
         }
@@ -34,10 +34,10 @@ class CompanyWorkplaceListPresenter {
     var companyListJson: CompanyListJson? {
         didSet {
             guard let companyListJson = self.companyListJson else {
-                companyWorkplaces = []
+                Workplaces = []
                 return
             }
-            companyWorkplaces = locationUuids.compactMap { (locationUuid) -> CompanyWorkplace? in
+            Workplaces = locationUuids.compactMap { (locationUuid) -> Workplace? in
                 guard let companyJson = self.mapCompanyToLocation(locationUuid: locationUuid, companyListJson: companyListJson) else {
                     return nil
                 }
@@ -47,7 +47,7 @@ class CompanyWorkplaceListPresenter {
                 let lat = loc?.geometry?.coordinates[1] ?? 0
                 let lon = loc?.geometry?.coordinates[0] ?? 0
                 let pinJson = PinJson(workplaceUuid: locationUuid, latitude: Double(lat), longitude: Double(lon))
-                return CompanyWorkplace(companyJson: companyJson, pinJson: pinJson)
+                return Workplace(companyJson: companyJson, pinJson: pinJson)
             }
             
         }
@@ -66,7 +66,7 @@ class CompanyWorkplaceListPresenter {
     func beginFetch(completion: @escaping (Error?) -> Void) {
         showLoadingIndicator = true
         view?.refreshFromPresenter(self)
-        provider.fetchCompanyWorkplaces(locationUuids: locationUuids) { [weak self] (result) in
+        provider.fetchWorkplaces(locationUuids: locationUuids) { [weak self] (result) in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.onfetchComplete(result,completion: completion)
@@ -85,13 +85,13 @@ class CompanyWorkplaceListPresenter {
     }
 }
 
-extension CompanyWorkplaceListPresenter: CompanyWorkplaceListPresenterProtocol {
+extension WorkplaceListPresenter: WorkplaceListPresenterProtocol {
     
     func onSelectRow(_ row: Int) {
-        view?.didSelectCompanyWorkplace?(companyWorkplaces[row])
+        view?.didSelectWorkplace?(Workplaces[row])
     }
     
-    func onViewDidLoad(_ view: CompanyWorkplaceListViewProtocol) {
+    func onViewDidLoad(_ view: WorkplaceListViewProtocol) {
         view.presenter = self
         self.view = view
     }
@@ -101,8 +101,8 @@ extension CompanyWorkplaceListPresenter: CompanyWorkplaceListPresenterProtocol {
     }
     
     func companyTileViewData(index: Int) -> CompanyTileViewData {
-        let companyWorkplace = companyWorkplaces[index]
-        let companyJson = companyWorkplace.companyJson
+        let Workplace = Workplaces[index]
+        let companyJson = Workplace.companyJson
         return CompanyTileViewData(companyJson: companyJson)
     }
 }

@@ -10,23 +10,23 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 
-protocol CompanyWorkplaceViewProtocol : CompanyHostsSectionViewProtocol {
-    var presenter: CompanyWorkplacePresenterProtocol! { get set }
+protocol CompanyDetailsViewProtocol : CompanyHostsSectionViewProtocol {
+    var presenter: CompanyDetailsPresenterProtocol! { get set }
     func refresh()
     func showLoadingIndicator()
-    func hideLoadingIndicator(_ presenter: CompanyWorkplacePresenter)
+    func hideLoadingIndicator(_ presenter: WorkplacePresenter)
     func showNetworkError(_ error: Error, retry: (() -> Void)?)
 }
 
-class CompanyWorkplaceViewController: UIViewController {
-    var presenter: CompanyWorkplacePresenterProtocol!
-    weak var coordinator: CompanyCoordinatorProtocol!
-    let screenName = ScreenName.companyWorkplaceViewController
+class CompanyDetailsViewController: UIViewController {
+    var presenter: CompanyDetailsPresenterProtocol!
+    weak var coordinator: CompanyDetailsCoordinatorProtocol!
+    let screenName = ScreenName.WorkplaceViewController
     var originScreen = ScreenName.notSpecified
     weak var log: F4SAnalyticsAndDebugging?
     lazy var messageHandler = UserMessageHandler(presenter: self)
     
-    init(presenter: CompanyWorkplacePresenterProtocol) {
+    init(presenter: CompanyDetailsPresenterProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
         hidesBottomBarWhenPushed = true
@@ -92,13 +92,13 @@ class CompanyWorkplaceViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
 
-extension CompanyWorkplaceViewController: CompanyWorkplaceViewProtocol {
+extension CompanyDetailsViewController: CompanyDetailsViewProtocol {
     
     func showLoadingIndicator() {
         incrementLoadingInProgressCount()
     }
     
-    func hideLoadingIndicator(_ presenter: CompanyWorkplacePresenter) {
+    func hideLoadingIndicator(_ presenter: WorkplacePresenter) {
         decrementLoadingInProgressCount()
         refresh()
     }

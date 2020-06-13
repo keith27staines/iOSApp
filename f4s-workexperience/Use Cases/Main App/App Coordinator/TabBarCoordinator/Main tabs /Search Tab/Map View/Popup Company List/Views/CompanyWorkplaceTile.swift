@@ -2,7 +2,7 @@
 import UIKit
 import WorkfinderUI
 
-class CompanyWorkplaceTile: UITableViewCell {
+class WorkplaceTile: UITableViewCell {
     
     lazy var nameLabel: UILabel = {
         let label = UILabel()

@@ -4,6 +4,7 @@ import WorkfinderNetworking
 import WorkfinderServices
 import WorkfinderCoordinators
 import WorkfinderUserDetailsUseCase
+import WorkfinderCompanyDetailsUseCase
 import WorkfinderOnboardingUseCase
 import GoogleMaps
 import GooglePlaces

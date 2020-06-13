@@ -14,10 +14,10 @@ protocol CompanyHeaderViewPresenterProtocol: class {
 class CompanyHeaderViewPresenter: CompanyHeaderViewPresenterProtocol {
     
     weak var view: CompanyHeaderViewProtocol?
-    let model: CompanyWorkplace
+    let model: Workplace
     
-    init(companyWorkplace: CompanyWorkplace) {
-        self.model = companyWorkplace
+    init(workplace: Workplace) {
+        self.model = workplace
     }
     
     var companyName: String { model.companyJson.name ?? "unnamed company" }

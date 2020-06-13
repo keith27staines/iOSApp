@@ -26,17 +26,17 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
         self.interestsRepository = interestsRepository
     }
 
-    func makeCompanyCoordinator(
+    func buildCoordinator(
         parent: CompanyCoordinatorParentProtocol,
         navigationRouter: NavigationRoutingProtocol,
-        companyWorkplace: CompanyWorkplace,
+        workplace: Workplace,
         inject: CoreInjectionProtocol,
         applicationFinished: @escaping ((PreferredDestination) -> Void)
-        ) -> CompanyCoordinatorProtocol {
-        return CompanyCoordinator(
+        ) -> CoreInjectionNavigationCoordinatorProtocol {
+        return CompanyDetailsCoordinator(
             parent: parent,
             navigationRouter: navigationRouter,
-            companyWorkplace: companyWorkplace,
+            workplace: workplace,
             inject: inject,
             environment: environment,
             interestsRepository: interestsRepository,

@@ -1,5 +1,6 @@
 import Foundation
 import WorkfinderCommon
+import WorkfinderCompanyDetailsUseCase
 import WorkfinderCoordinators
 
 class SearchCoordinator : CoreInjectionNavigationCoordinator {
@@ -52,22 +53,21 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
         }
     }
     
-    var showingDetailForCompanyWorkplace: CompanyWorkplace?
+    var showingDetailForWorkplace: Workplace?
 
-    func showDetail(companyWorkplace: CompanyWorkplace?, originScreen: ScreenName) {
-        guard let companyWorkplace = companyWorkplace else { return }
-        showingDetailForCompanyWorkplace = companyWorkplace
+    func showDetail(workplace: Workplace?, originScreen: ScreenName) {
+        guard let Workplace = workplace else { return }
+        showingDetailForWorkplace = workplace
         rootViewController.dismiss(animated: true)
-        let companyCoordinator = companyCoordinatorFactory.makeCompanyCoordinator(
+        let companyCoordinator = companyCoordinatorFactory.buildCoordinator(
             parent: self,
             navigationRouter: navigationRouter,
-            companyWorkplace: companyWorkplace,
+            workplace: Workplace,
             inject: injected, applicationFinished: { [weak self] preferredDestination in
                 guard let self = self else { return }
                 self.show(destination: preferredDestination)
                 self.navigationRouter.popToViewController(self.rootViewController, animated: true)
         })
-        companyCoordinator.originScreen = originScreen
         addChildCoordinator(companyCoordinator)
         companyCoordinator.start()
     }

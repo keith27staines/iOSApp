@@ -3,7 +3,7 @@ public typealias TrackEventProperty = [String: Any]
 public enum ScreenName: String {
     case notSpecified
     case companyClusterList
-    case companyWorkplaceViewController
+    case WorkplaceViewController
     case companySearch
     case map
 }

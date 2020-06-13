@@ -63,11 +63,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        guard let userUuid = masterBuilder.localStore.value(key: LocalStore.Key.userUuid) as? F4SUUID else { return }
-        let tokenParts = deviceToken.map { data -> String in
-            return String(format: "%02.2hhx", data)
-        }
-        let token = tokenParts.joined()
+//        guard let userUuid = masterBuilder.localStore.value(key: LocalStore.Key.userUuid) as? F4SUUID else { return }
+//        let tokenParts = deviceToken.map { data -> String in
+//            return String(format: "%02.2hhx", data)
+//        }
+//        let token = tokenParts.joined()
 //        userService.enablePushNotificationForUser(installationUuid: userUuid, withDeviceToken: token) { [weak self] (result) in
 //            switch result {
 //            case .error(let error):

@@ -20,9 +20,9 @@
 		FCC1DEFE232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC1DEF4232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCase.framework */; };
 		FCC1DF03232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF02232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCaseTests.swift */; };
 		FCC1DF05232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = FCC1DEF7232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FCC1DF1C232502740074D5C1 /* CompanyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF1B232502730074D5C1 /* CompanyCoordinator.swift */; };
+		FCC1DF1C232502740074D5C1 /* CompanyDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF1B232502730074D5C1 /* CompanyDetailsCoordinator.swift */; };
 		FCC1DF21232502A10074D5C1 /* CompanyWorkplacePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF1D232502A00074D5C1 /* CompanyWorkplacePresenter.swift */; };
-		FCC1DF27232503030074D5C1 /* CompanyWorkplaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF25232503030074D5C1 /* CompanyWorkplaceViewController.swift */; };
+		FCC1DF27232503030074D5C1 /* CompanyDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF25232503030074D5C1 /* CompanyDetailsViewController.swift */; };
 		FCC1DF28232503030074D5C1 /* CompanyMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF26232503030074D5C1 /* CompanyMainView.swift */; };
 		FCC1DF2E2325031C0074D5C1 /* CompanyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF2B2325031C0074D5C1 /* CompanyHeaderView.swift */; };
 		FCC1DF302325031C0074D5C1 /* CompanyToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF2C2325031C0074D5C1 /* CompanyToolbar.swift */; };
@@ -63,9 +63,9 @@
 		FCC1DEFD232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderCompanyDetailsUseCaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCC1DF02232501ED0074D5C1 /* WorkfinderCompanyDetailsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderCompanyDetailsUseCaseTests.swift; sourceTree = "<group>"; };
 		FCC1DF04232501ED0074D5C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FCC1DF1B232502730074D5C1 /* CompanyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyCoordinator.swift; sourceTree = "<group>"; };
+		FCC1DF1B232502730074D5C1 /* CompanyDetailsCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyDetailsCoordinator.swift; sourceTree = "<group>"; };
 		FCC1DF1D232502A00074D5C1 /* CompanyWorkplacePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyWorkplacePresenter.swift; sourceTree = "<group>"; };
-		FCC1DF25232503030074D5C1 /* CompanyWorkplaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyWorkplaceViewController.swift; sourceTree = "<group>"; };
+		FCC1DF25232503030074D5C1 /* CompanyDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyDetailsViewController.swift; sourceTree = "<group>"; };
 		FCC1DF26232503030074D5C1 /* CompanyMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyMainView.swift; sourceTree = "<group>"; };
 		FCC1DF2A2325031C0074D5C1 /* CompanyMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyMapView.swift; sourceTree = "<group>"; };
 		FCC1DF2B2325031C0074D5C1 /* CompanyHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyHeaderView.swift; sourceTree = "<group>"; };
@@ -212,8 +212,8 @@
 		FCC1DF1A232502410074D5C1 /* source */ = {
 			isa = PBXGroup;
 			children = (
-				FCC1DF1B232502730074D5C1 /* CompanyCoordinator.swift */,
-				FCC1DF25232503030074D5C1 /* CompanyWorkplaceViewController.swift */,
+				FCC1DF1B232502730074D5C1 /* CompanyDetailsCoordinator.swift */,
+				FCC1DF25232503030074D5C1 /* CompanyDetailsViewController.swift */,
 				FCC1DF1D232502A00074D5C1 /* CompanyWorkplacePresenter.swift */,
 				FC2CDC1A2423ACC400D183AC /* MainView */,
 				FCC1DF33232503270074D5C1 /* sub views */,
@@ -375,7 +375,7 @@
 				FC6DD8DE23748DBB0006FA3D /* NameValueCell.swift in Sources */,
 				FC6B77322372BD8600347875 /* SectionSelectorView.swift in Sources */,
 				FC2CDC212423B47200D183AC /* CompanyHeaderViewPresenter.swift in Sources */,
-				FCC1DF1C232502740074D5C1 /* CompanyCoordinator.swift in Sources */,
+				FCC1DF1C232502740074D5C1 /* CompanyDetailsCoordinator.swift in Sources */,
 				FCC1DF2E2325031C0074D5C1 /* CompanyHeaderView.swift in Sources */,
 				FC7FCDFD2376B2C100C1182B /* CompanyDataSectionPresenter.swift in Sources */,
 				FC99485E2379CFEA009D64D0 /* TextModel.swift in Sources */,
@@ -384,7 +384,7 @@
 				FC2CDC242423B55600D183AC /* CompanyMainViewPresenter.swift in Sources */,
 				FCC1DF28232503030074D5C1 /* CompanyMainView.swift in Sources */,
 				FC9948602379D03A009D64D0 /* HostLocationAssociationCell.swift in Sources */,
-				FCC1DF27232503030074D5C1 /* CompanyWorkplaceViewController.swift in Sources */,
+				FCC1DF27232503030074D5C1 /* CompanyDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

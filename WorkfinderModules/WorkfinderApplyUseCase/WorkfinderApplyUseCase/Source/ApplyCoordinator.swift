@@ -78,10 +78,10 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     }
     
     let association: HostAssociationJson
-    let companyWorkplace: CompanyWorkplace
+    let workplace: Workplace
     public init(applyCoordinatorDelegate: ApplyCoordinatorDelegate? = nil,
                 applyService: PostPlacementServiceProtocol,
-                companyWorkplace: CompanyWorkplace,
+                workplace: Workplace,
                 association: HostAssociationJson,
                 parent: CoreInjectionNavigationCoordinator?,
                 navigationRouter: NavigationRoutingProtocol,
@@ -93,7 +93,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         self.environment = environment
         self.startingViewController = navigationRouter.navigationController.topViewController
         self.interestsRepository = interestsRepository
-        self.companyWorkplace = companyWorkplace
+        self.workplace = workplace
         self.association = association
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
         draftPlacementLogic.update(associationUuid: association.uuid)
@@ -118,7 +118,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
     func startCoverLetterCoordinator(candidateDateOfBirth: Date) {
         guard let hostName = association.host.displayName else { return }
         let candidateName = injected.user.fullName
-        let companyName = companyWorkplace.companyJson.name ?? "Unknown company"
+        let companyName = workplace.companyJson.name ?? "Unknown company"
         coverletterCoordinator = CoverLetterCoordinator(parent: self,
                                                         navigationRouter: navigationRouter,
                                                         inject: injected,

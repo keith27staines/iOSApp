@@ -3,29 +3,42 @@ import UIKit
 import CoreLocation
 import WorkfinderCommon
 import WorkfinderUI
+import WorkfinderCoordinators
 import WorkfinderServices
 
-protocol CompanyWorkplaceCoordinatorProtocol : CompanyMainViewCoordinatorProtocol {
-    func companyWorkplacePresenterDidFinish(_ : CompanyWorkplacePresenter)
-    func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, requestedShowDuedilFor: CompanyWorkplace)
-    func companyWorkplacePresenter(_ presenter: CompanyWorkplacePresenter, requestOpenLink link: String)
-    func applyTo(companyWorkplace: CompanyWorkplace, hostLocationAssociation: HostAssociationJson)
+public protocol CompanyCoordinatorFactoryProtocol {
+    
+    func buildCoordinator(
+        parent: CompanyCoordinatorParentProtocol,
+        navigationRouter: NavigationRoutingProtocol,
+        workplace: Workplace,
+        inject: CoreInjectionProtocol,
+        applicationFinished: @escaping ((PreferredDestination) -> Void)
+    ) -> CoreInjectionNavigationCoordinatorProtocol
+}
+
+protocol CompanyDetailsCoordinatorProtocol: CoreInjectionNavigationCoordinatorProtocol {
+    var originScreen: ScreenName { get set }
+    func companyDetailsPresenterDidFinish(_ presenter: CompanyDetailsPresenterProtocol)
+    func companyDetailsPresenter(_ presenter: CompanyDetailsPresenterProtocol, requestedShowDuedilFor: Workplace)
+    func companyDetailsPresenter(_ presenter: CompanyDetailsPresenterProtocol, requestOpenLink link: String)
+    func applyTo(workplace: Workplace, hostLocationAssociation: HostAssociationJson)
     func onDidTapLinkedin(association: HostAssociationJson)
 }
 
-protocol CompanyWorkplacePresenterProtocol: class {
+protocol CompanyDetailsPresenterProtocol: class {
     var selectedHost: Host? { get }
     var mainViewPresenter: CompanyMainViewPresenter { get }
     func onTapBack()
     func onTapApply()
-    func onViewDidLoad(_ view: CompanyWorkplaceViewProtocol)
+    func onViewDidLoad(_ view: CompanyDetailsViewProtocol)
 }
 
-class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
+class WorkplacePresenter : NSObject, CompanyDetailsPresenterProtocol {
 
     weak var log: F4SAnalyticsAndDebugging?
-    weak var coordinator: CompanyWorkplaceCoordinatorProtocol?
-    weak var view: CompanyWorkplaceViewProtocol?
+    weak var coordinator: CompanyDetailsCoordinator?
+    weak var view: CompanyDetailsViewProtocol?
     let associationsProvider: AssociationsServiceProtocol
     var mainViewPresenter: CompanyMainViewPresenter
     var associations: HostAssociationListJson?
@@ -43,14 +56,14 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
         didSet { view?.refresh() }
     }
 
-    var companyWorkplace: CompanyWorkplace {
+    var workplace: Workplace {
         didSet {
             view?.refresh()
         }
     }
     
     var companyLocation: CLLocation {
-        let pin = companyWorkplace.pinJson
+        let pin = workplace.pinJson
         return CLLocation(latitude: pin.lat, longitude: pin.lon)
     }
     
@@ -84,7 +97,7 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
         return locationManager
     }()
     
-    func onViewDidLoad(_ view: CompanyWorkplaceViewProtocol) {
+    func onViewDidLoad(_ view: CompanyDetailsViewProtocol) {
         view.presenter = self
         self.view = view
         locManager.requestWhenInUseAuthorization()
@@ -93,23 +106,23 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
     }
     
     func onTapBack() {
-        coordinator?.companyWorkplacePresenterDidFinish(self)
+        coordinator?.companyDetailsPresenterDidFinish(self)
     }
     
     func onTapApply() {
         guard let host = mainViewPresenter.hostsSectionPresenter.selectedAssociation else { return }
-        coordinator?.applyTo(companyWorkplace: companyWorkplace, hostLocationAssociation: host)
+        coordinator?.applyTo(workplace: workplace, hostLocationAssociation: host)
     }
     
-    init(coordinator: CompanyWorkplaceCoordinatorProtocol,
-         companyWorkplace: CompanyWorkplace,
+    init(coordinator: CompanyDetailsCoordinator,
+         workplace: Workplace,
          associationsProvider: AssociationsServiceProtocol,
          log: F4SAnalyticsAndDebugging?) {
         self.associationsProvider = associationsProvider
-        self.companyWorkplace = companyWorkplace
+        self.workplace = workplace
         self.coordinator = coordinator
         self.log = log
-        self.mainViewPresenter = CompanyMainViewPresenter(companyWorkplace: companyWorkplace, coordinator: coordinator, log: log)
+        self.mainViewPresenter = CompanyMainViewPresenter(workplace: workplace, coordinator: coordinator, log: log)
         super.init()
     }
     
@@ -122,7 +135,7 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
     }
     
     func didTapDone() {
-        coordinator?.companyWorkplacePresenterDidFinish(self)
+        coordinator?.companyDetailsPresenterDidFinish(self)
     }
     
     func didTapApply(completion: @escaping (InitiateApplicationResult) -> Void) {
@@ -130,7 +143,7 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
     }
     
     func didTapLink(urlString: String) {
-        coordinator?.companyWorkplacePresenter(self, requestOpenLink: urlString)
+        coordinator?.companyDetailsPresenter(self, requestOpenLink: urlString)
     }
     
     func applyIfStateAllows(completion: @escaping (InitiateApplicationResult) -> Void) {
@@ -141,7 +154,7 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
     
     func beginLoadHosts() {
         view?.showLoadingIndicator()
-        let locationUuid = companyWorkplace.pinJson.workplaceUuid
+        let locationUuid = workplace.pinJson.workplaceUuid
         associationsProvider.fetchAssociations(for: locationUuid) { [weak self] (result) in
             guard let self = self else { return }
             self.view?.hideLoadingIndicator(self)
@@ -157,7 +170,7 @@ class CompanyWorkplacePresenter : NSObject, CompanyWorkplacePresenterProtocol {
     }
 }
 
-extension CompanyWorkplacePresenter: CLLocationManagerDelegate {
+extension WorkplacePresenter: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedAlways || status == .authorizedWhenInUse {
             userLocation = locManager.location

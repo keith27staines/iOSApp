@@ -11,7 +11,7 @@ class CompanyViewPresenter: NSObject {
     var view: CompanyViewController?
     var companyJson: CompanyJson?
     
-    var workplace: CompanyWorkplace?
+    var workplace: Workplace?
     var companyName: String? { application.companyName }
     var logoUrlString: String? { application.logoUrl }
     var pin: PinJson? { self.workplace?.pinJson }
@@ -89,20 +89,20 @@ class CompanyViewPresenter: NSObject {
             workplaceUuid: location?.uuid ?? "",
             latitude: Double(location?.geometry?.latitude ?? 0),
             longitude: Double(location?.geometry?.longitude ?? 0))
-        workplace = CompanyWorkplace(companyJson: companyJson, pinJson: pinJson)
-        summarySectionPresenter = CompanySummarySectionPresenter(companyWorkplace: workplace)
-        dataSectionPresenter = CompanyDataSectionPresenter(companyWorkplace: workplace)
+        workplace = Workplace(companyJson: companyJson, pinJson: pinJson)
+        summarySectionPresenter = CompanySummarySectionPresenter(workplace: workplace)
+        dataSectionPresenter = CompanyDataSectionPresenter(workplace: workplace)
         dataSectionPresenter.onDidTapDuedil = {
             self.coordinator.openUrl(companyJson.duedilUrlString)
         }
     }
     
     lazy var summarySectionPresenter: CompanySummarySectionPresenterProtocol = {
-        return CompanySummarySectionPresenter(companyWorkplace: self.workplace)
+        return CompanySummarySectionPresenter(workplace: self.workplace)
     }()
     
     lazy var dataSectionPresenter: CompanyDataSectionPresenterProtocol = {
-        return CompanyDataSectionPresenter(companyWorkplace: self.workplace)
+        return CompanyDataSectionPresenter(workplace: self.workplace)
     }()
     
     init(coordinator: ApplicationsCoordinator,

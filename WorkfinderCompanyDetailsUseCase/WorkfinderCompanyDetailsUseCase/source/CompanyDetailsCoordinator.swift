@@ -6,12 +6,12 @@ import WorkfinderCoordinators
 import WorkfinderAppLogic
 import WorkfinderApplyUseCase
 
-public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoordinatorProtocol {
+public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, CompanyDetailsCoordinatorProtocol, CompanyMainViewCoordinatorProtocol {
     public var originScreen = ScreenName.notSpecified
     let environment: EnvironmentType
-    var companyViewController: CompanyWorkplaceViewController!
-    var companyWorkplacePresenter: CompanyWorkplacePresenter!
-    var companyWorkplace: CompanyWorkplace
+    var companyViewController: CompanyDetailsViewController!
+    var workplacePresenter: WorkplacePresenter!
+    var workplace: Workplace
     var interestsRepository: F4SSelectedInterestsRepositoryProtocol
     let applyService: PostPlacementServiceProtocol
     let associationsProvider: AssociationsServiceProtocol
@@ -21,7 +21,7 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
     public init(
         parent: CompanyCoordinatorParentProtocol?,
         navigationRouter: NavigationRoutingProtocol,
-        companyWorkplace: CompanyWorkplace,
+        workplace: Workplace,
         inject: CoreInjectionProtocol,
         environment: EnvironmentType,
         interestsRepository: F4SSelectedInterestsRepositoryProtocol,
@@ -30,7 +30,7 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
         applicationFinished: @escaping ((PreferredDestination) -> Void)) {
         self.environment = environment
         self.interestsRepository = interestsRepository
-        self.companyWorkplace = companyWorkplace
+        self.workplace = workplace
         self.applyService = applyService
         self.associationsProvider = associationsProvider
         self.applicationFinishedWithPreferredDestination = applicationFinished
@@ -39,13 +39,13 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
     
     public override func start() {
         super.start()
-        companyWorkplacePresenter = CompanyWorkplacePresenter(
+        workplacePresenter = WorkplacePresenter(
             coordinator: self,
-            companyWorkplace: companyWorkplace,
+            workplace: workplace,
             associationsProvider: associationsProvider,
             log: injected.log)
-        companyViewController = CompanyWorkplaceViewController(
-            presenter: companyWorkplacePresenter)
+        companyViewController = CompanyDetailsViewController(
+            presenter: workplacePresenter)
         companyViewController.log = self.injected.log
         companyViewController.originScreen = originScreen
         navigationRouter.push(viewController: companyViewController, animated: true)
@@ -56,7 +56,7 @@ public class CompanyCoordinator : CoreInjectionNavigationCoordinator, CompanyCoo
     }
 }
 
-extension CompanyCoordinator : ApplyCoordinatorDelegate {
+extension CompanyDetailsCoordinator : ApplyCoordinatorDelegate {
     public func applicationDidFinish(preferredDestination: PreferredDestination) {
         applicationFinishedWithPreferredDestination(preferredDestination)
         cleanup()
@@ -69,13 +69,14 @@ extension CompanyCoordinator : ApplyCoordinatorDelegate {
     }
 }
 
-extension CompanyCoordinator: CompanyWorkplaceCoordinatorProtocol {
-    func applyTo(companyWorkplace: CompanyWorkplace, hostLocationAssociation: HostAssociationJson) {
-        guard let _ = companyWorkplacePresenter.selectedHost else { return }
+extension CompanyDetailsCoordinator {
+    
+    func applyTo(workplace: Workplace, hostLocationAssociation: HostAssociationJson) {
+        guard let _ = workplacePresenter.selectedHost else { return }
         let applyCoordinator = ApplyCoordinator(
             applyCoordinatorDelegate: self,
             applyService: applyService,
-            companyWorkplace: companyWorkplace,
+            workplace: workplace,
             association: hostLocationAssociation,
             parent: self,
             navigationRouter: navigationRouter,
@@ -86,7 +87,7 @@ extension CompanyCoordinator: CompanyWorkplaceCoordinatorProtocol {
         applyCoordinator.start()
     }
 
-    func companyWorkplacePresenterDidFinish(_ presenter: CompanyWorkplacePresenter) {
+    func companyDetailsPresenterDidFinish(_ presenter: CompanyDetailsPresenterProtocol) {
         cleanup()
         navigationRouter.pop(animated: true)
         parentCoordinator?.childCoordinatorDidFinish(self)
@@ -94,7 +95,7 @@ extension CompanyCoordinator: CompanyWorkplaceCoordinatorProtocol {
     
     func cleanup() {
         companyViewController = nil
-        companyWorkplacePresenter = nil
+        workplacePresenter = nil
         childCoordinators = [:]
     }
     
@@ -103,17 +104,17 @@ extension CompanyCoordinator: CompanyWorkplaceCoordinatorProtocol {
     }
     
     func onDidTapDuedil() {
-        openUrl(companyWorkplace.companyJson.duedilUrlString)
+        openUrl(workplace.companyJson.duedilUrlString)
     }
     
-    func companyWorkplacePresenter(_ viewModel: CompanyWorkplacePresenter, requestedShowDuedilFor companyWorkplace: CompanyWorkplace) {
+    func companyDetailsPresenter(_ presenter: CompanyDetailsPresenterProtocol, requestedShowDuedilFor workplace: Workplace) {
         guard
-            let urlString = companyWorkplace.companyJson.duedilUrlString,
+            let urlString = workplace.companyJson.duedilUrlString,
             let url = URL(string: urlString) else { return }
         openUrl(url)
     }
     
-    func companyWorkplacePresenter(_ viewModel: CompanyWorkplacePresenter, requestOpenLink link: String) {
+    func companyDetailsPresenter(_ presenter: CompanyDetailsPresenterProtocol, requestOpenLink link: String) {
         openUrl(link)
     }
 }

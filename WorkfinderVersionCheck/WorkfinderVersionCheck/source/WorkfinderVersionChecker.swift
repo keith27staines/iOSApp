@@ -61,7 +61,11 @@ public class WorkfinderVersionChecker: WorkfinderVersionCheckerProtocol {
         }
         environmentConsistencyCheckRequired = false
         let localStore = LocalStore()
-        guard let isFirstLaunchValue = localStore.value(key: .isFirstLaunch) as? Bool else {
+        let isFirstLaunchValue = localStore.value(key: .isFirstLaunch) as? Bool
+        guard isFirstLaunchValue != nil else {
+            // first launch flag hasn't been set yet so this is the first launch,
+            // hence there is no previous environment to conflict with,
+            // and so no hard stop required
             localStore.setValue(true, for: .isFirstLaunch)
             localStore.setValue(serverEnvironmentType.rawValue, for: .environment)
             completion()

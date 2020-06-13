@@ -1,8 +1,8 @@
 import WorkfinderCommon
 
-public class CompanyWorkplaceListProvider: WorkfinderService, CompanyWorkplaceListProviderProtocol {
+public class WorkplaceListService: WorkfinderService, WorkplaceListProviderProtocol {
     
-    public func fetchCompanyWorkplaces(
+    public func fetchWorkplaces(
         locationUuids: [F4SUUID],
         completion: @escaping ((Result<CompanyListJson,Error>) -> Void)) {
         
