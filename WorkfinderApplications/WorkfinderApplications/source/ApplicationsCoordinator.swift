@@ -69,7 +69,7 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
     
     func showCompany(application: Application) {
         let companyService = CompanyService(networkConfig: networkConfig)
-        let associationsService = HostLocationAssociationsService(networkConfig: networkConfig)
+        let associationsService = AssociationsService(networkConfig: networkConfig)
         let presenter = CompanyViewPresenter(
             coordinator: self,
             application: application,
@@ -82,7 +82,7 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
     func showCompanyHost(application: Application) {
         guard let associationUuid = application.associationUuid else { return }
         let hostService = HostsProvider(networkConfig: networkConfig)
-        let hostLocationService = HostLocationAssociationsService(networkConfig: networkConfig)
+        let hostLocationService = AssociationsService(networkConfig: networkConfig)
         let presenter = HostViewPresenter(
             coordinator: self,
             hostService: hostService,

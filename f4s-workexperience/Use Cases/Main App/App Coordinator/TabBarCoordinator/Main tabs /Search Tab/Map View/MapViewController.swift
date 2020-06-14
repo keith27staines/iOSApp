@@ -228,6 +228,7 @@ class MapViewController: UIViewController {
         vc.didSelectWorkplace = { [weak self] Workplace in
             self?.coordinator?.showDetail(
                 workplace: Workplace,
+                hostUuid: nil,
                 originScreen: vc.screenName)
         }
         vc.log = log

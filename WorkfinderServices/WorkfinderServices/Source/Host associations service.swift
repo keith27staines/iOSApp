@@ -2,7 +2,7 @@
 import Foundation
 import WorkfinderCommon
 
-public class HostLocationAssociationsService: WorkfinderService, AssociationsServiceProtocol {
+public class AssociationsService: WorkfinderService, AssociationsServiceProtocol {
     
     let relativePath = "associations/"
     

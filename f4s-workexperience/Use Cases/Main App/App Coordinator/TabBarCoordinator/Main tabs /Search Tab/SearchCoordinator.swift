@@ -1,6 +1,7 @@
 import Foundation
 import WorkfinderCommon
 import WorkfinderCompanyDetailsUseCase
+import WorkfinderViewRecommendation
 import WorkfinderCoordinators
 
 class SearchCoordinator : CoreInjectionNavigationCoordinator {
@@ -40,22 +41,45 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
         print("process recommendation")
         guard let uuid = uuid else { return }
         rootViewController.dismiss(animated: true, completion: nil)
-        if childCoordinators.count > 0 {
+        if childCoordinators.count == 0 {
+            startViewRecommendationCoordinator(recommendationUuid: uuid)
+        } else {
             let alert = UIAlertController(title: "Show recommendation?", message: "You have an application in progress. You might want to finish this before opening the recommendation", preferredStyle: .alert)
             let recommendationAction = UIAlertAction(title: "View recommendation", style: .destructive) { (_) in
                 self.navigationRouter.popToViewController(self.rootViewController, animated: true)
                 self.childCoordinators.removeAll()
+                self.startViewRecommendationCoordinator(recommendationUuid: uuid)
             }
-            let continueAction = UIAlertAction(title: "Continue with application", style: .default, handler: nil)
+            let continueAction = UIAlertAction(title: "Continue with application", style: .default) { (_) in
+                return
+            }
             alert.addAction(recommendationAction)
             alert.addAction(continueAction)
             navigationRouter.present(alert, animated: true, completion: nil)
         }
     }
     
+    func startViewRecommendationCoordinator(recommendationUuid: F4SUUID) {
+        let coordinator = ViewRecommendationCoordinator(
+            recommendationUuid: recommendationUuid,
+            parent: self,
+            navigationRouter: navigationRouter,
+            inject: injected,
+            onSuccess: { [weak self] (coordinator,workplace,hostuuid) in
+                self?.childCoordinatorDidFinish(coordinator)
+                self?.showDetail(workplace: workplace,
+                                 hostUuid: hostuuid,
+                                 originScreen: .notSpecified)
+            }, onCancel: { [weak self] coordinator in
+                self?.childCoordinatorDidFinish(coordinator)
+        })
+        addChildCoordinator(coordinator)
+        coordinator.start()
+    }
+    
     var showingDetailForWorkplace: Workplace?
 
-    func showDetail(workplace: Workplace?, originScreen: ScreenName) {
+    func showDetail(workplace: Workplace?, hostUuid: F4SUUID?, originScreen: ScreenName) {
         guard let Workplace = workplace else { return }
         showingDetailForWorkplace = workplace
         rootViewController.dismiss(animated: true)

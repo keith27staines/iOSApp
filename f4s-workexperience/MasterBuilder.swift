@@ -139,7 +139,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     }()
     
     lazy var associationsProvider: AssociationsServiceProtocol = {
-        return HostLocationAssociationsService(networkConfig: self.networkConfiguration)
+        return AssociationsService(networkConfig: self.networkConfiguration)
     }()
     
     lazy var interestsRepository: F4SSelectedInterestsRepositoryProtocol = {

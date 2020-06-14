@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:WorkfinderViewRecommendation/WorkfinderViewRecommendation.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:WorkfinderAssociationDetails/WorkfinderAssociationDetails.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:WorkfinderVersionCheck/WorkfinderVersionCheck.xcodeproj">
    </FileRef>
    <FileRef

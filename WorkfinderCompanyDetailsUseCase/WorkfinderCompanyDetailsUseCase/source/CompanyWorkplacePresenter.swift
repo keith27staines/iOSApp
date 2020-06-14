@@ -7,6 +7,7 @@ import WorkfinderCoordinators
 import WorkfinderServices
 
 protocol CompanyDetailsPresenterProtocol: class {
+    var view: CompanyDetailsViewProtocol? { get set }
     var selectedHost: Host? { get }
     var mainViewPresenter: CompanyMainViewPresenter { get }
     func onTapBack()
@@ -19,10 +20,11 @@ class WorkplacePresenter : NSObject, CompanyDetailsPresenterProtocol {
     weak var log: F4SAnalyticsAndDebugging?
     weak var coordinator: CompanyDetailsCoordinator?
     weak var view: CompanyDetailsViewProtocol?
-    let associationsProvider: AssociationsServiceProtocol
-    var mainViewPresenter: CompanyMainViewPresenter
+    let associationsService: AssociationsServiceProtocol
     var associations: HostAssociationListJson?
     var selectedPersonIndexDidChange: ((Int?) -> ())?
+    
+    var mainViewPresenter: CompanyMainViewPresenter
     
     var userLocation: CLLocation? {
         didSet {
@@ -96,9 +98,9 @@ class WorkplacePresenter : NSObject, CompanyDetailsPresenterProtocol {
     
     init(coordinator: CompanyDetailsCoordinator,
          workplace: Workplace,
-         associationsProvider: AssociationsServiceProtocol,
+         associationsService: AssociationsServiceProtocol,
          log: F4SAnalyticsAndDebugging?) {
-        self.associationsProvider = associationsProvider
+        self.associationsService = associationsService
         self.workplace = workplace
         self.coordinator = coordinator
         self.log = log
@@ -135,7 +137,7 @@ class WorkplacePresenter : NSObject, CompanyDetailsPresenterProtocol {
     func beginLoadHosts() {
         view?.showLoadingIndicator()
         let locationUuid = workplace.pinJson.workplaceUuid
-        associationsProvider.fetchAssociations(for: locationUuid) { [weak self] (result) in
+        associationsService.fetchAssociations(for: locationUuid) { [weak self] (result) in
             guard let self = self else { return }
             self.view?.hideLoadingIndicator(self)
             switch result {

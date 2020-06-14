@@ -62,7 +62,7 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
         workplacePresenter = WorkplacePresenter(
             coordinator: self,
             workplace: workplace,
-            associationsProvider: associationsProvider,
+            associationsService: associationsProvider,
             log: injected.log)
         companyViewController = CompanyDetailsViewController(
             presenter: workplacePresenter)
