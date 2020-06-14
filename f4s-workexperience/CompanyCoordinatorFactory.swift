@@ -30,6 +30,7 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
         parent: CompanyCoordinatorParentProtocol,
         navigationRouter: NavigationRoutingProtocol,
         workplace: Workplace,
+        recommendedAssociationUuid: F4SUUID?,
         inject: CoreInjectionProtocol,
         applicationFinished: @escaping ((PreferredDestination) -> Void)
         ) -> CoreInjectionNavigationCoordinatorProtocol {
@@ -37,6 +38,7 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
             parent: parent,
             navigationRouter: navigationRouter,
             workplace: workplace,
+            recommendedAssociationUuid: recommendedAssociationUuid,
             inject: inject,
             environment: environment,
             interestsRepository: interestsRepository,

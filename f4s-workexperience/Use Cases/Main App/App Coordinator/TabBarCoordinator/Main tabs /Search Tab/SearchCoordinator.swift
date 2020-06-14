@@ -64,9 +64,9 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
             parent: self,
             navigationRouter: navigationRouter,
             inject: injected,
-            onSuccess: { [weak self] (coordinator,workplace,hostuuid) in
+            onSuccess: { [weak self] (coordinator,workplace,recommendedAssociationUuid) in
                 self?.showDetail(workplace: workplace,
-                                 hostUuid: hostuuid,
+                                 recommendedAssociationUuid: recommendedAssociationUuid,
                                  originScreen: .notSpecified)
             }, onCancel: { [weak self] coordinator in
                 self?.childCoordinatorDidFinish(coordinator)
@@ -77,7 +77,7 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
     
     var showingDetailForWorkplace: Workplace?
 
-    func showDetail(workplace: Workplace?, hostUuid: F4SUUID?, originScreen: ScreenName) {
+    func showDetail(workplace: Workplace?, recommendedAssociationUuid: F4SUUID?, originScreen: ScreenName) {
         guard let Workplace = workplace else { return }
         showingDetailForWorkplace = workplace
         rootViewController.dismiss(animated: true)
@@ -85,6 +85,7 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
             parent: self,
             navigationRouter: navigationRouter,
             workplace: Workplace,
+            recommendedAssociationUuid: recommendedAssociationUuid,
             inject: injected, applicationFinished: { [weak self] preferredDestination in
                 guard let self = self else { return }
                 self.show(destination: preferredDestination)

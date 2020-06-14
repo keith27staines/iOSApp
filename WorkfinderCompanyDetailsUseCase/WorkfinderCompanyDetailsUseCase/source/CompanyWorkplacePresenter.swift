@@ -23,6 +23,7 @@ class WorkplacePresenter : NSObject, CompanyDetailsPresenterProtocol {
     let associationsService: AssociationsServiceProtocol
     var associations: HostAssociationListJson?
     var selectedPersonIndexDidChange: ((Int?) -> ())?
+    let recommendedAssociationUuid: F4SUUID?
     
     var mainViewPresenter: CompanyMainViewPresenter
     
@@ -98,10 +99,12 @@ class WorkplacePresenter : NSObject, CompanyDetailsPresenterProtocol {
     
     init(coordinator: CompanyDetailsCoordinator,
          workplace: Workplace,
+         recommendedAssociationUuid: F4SUUID?,
          associationsService: AssociationsServiceProtocol,
          log: F4SAnalyticsAndDebugging?) {
         self.associationsService = associationsService
         self.workplace = workplace
+        self.recommendedAssociationUuid = recommendedAssociationUuid
         self.coordinator = coordinator
         self.log = log
         self.mainViewPresenter = CompanyMainViewPresenter(workplace: workplace, coordinator: coordinator, log: log)
@@ -145,6 +148,14 @@ class WorkplacePresenter : NSObject, CompanyDetailsPresenterProtocol {
                 self.view?.showNetworkError(error, retry: self.beginLoadHosts)
             case .success(let associationsJson):
                 self.associations = associationsJson
+                if let recommendedAssociationUuid = self.recommendedAssociationUuid {
+                    if let recommendedAssociation = (associationsJson.results.first { (association) -> Bool in
+                        association.uuid == recommendedAssociationUuid
+                    }) {
+                        self.associations?.results = [recommendedAssociation]
+                        self.associations?.count = 1
+                    }
+                }
                 self.mainViewPresenter.hostsSectionPresenter.onHostsDidLoad(associationsJson.results)
                 self.onDidUpdate()
             }

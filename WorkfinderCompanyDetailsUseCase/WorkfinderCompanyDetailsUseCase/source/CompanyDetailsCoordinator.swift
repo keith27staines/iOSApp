@@ -12,6 +12,7 @@ public protocol CompanyCoordinatorFactoryProtocol {
         parent: CompanyCoordinatorParentProtocol,
         navigationRouter: NavigationRoutingProtocol,
         workplace: Workplace,
+        recommendedAssociationUuid: F4SUUID?,
         inject: CoreInjectionProtocol,
         applicationFinished: @escaping ((PreferredDestination) -> Void)
     ) -> CoreInjectionNavigationCoordinatorProtocol
@@ -32,6 +33,7 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
     var companyViewController: CompanyDetailsViewController!
     var workplacePresenter: WorkplacePresenter!
     var workplace: Workplace
+    var recommendedAssociationUuid: F4SUUID?
     var interestsRepository: F4SSelectedInterestsRepositoryProtocol
     let applyService: PostPlacementServiceProtocol
     let associationsProvider: AssociationsServiceProtocol
@@ -42,6 +44,7 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
         parent: CompanyCoordinatorParentProtocol?,
         navigationRouter: NavigationRoutingProtocol,
         workplace: Workplace,
+        recommendedAssociationUuid: F4SUUID?,
         inject: CoreInjectionProtocol,
         environment: EnvironmentType,
         interestsRepository: F4SSelectedInterestsRepositoryProtocol,
@@ -51,6 +54,7 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
         self.environment = environment
         self.interestsRepository = interestsRepository
         self.workplace = workplace
+        self.recommendedAssociationUuid = recommendedAssociationUuid
         self.applyService = applyService
         self.associationsProvider = associationsProvider
         self.applicationFinishedWithPreferredDestination = applicationFinished
@@ -62,6 +66,7 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
         workplacePresenter = WorkplacePresenter(
             coordinator: self,
             workplace: workplace,
+            recommendedAssociationUuid: recommendedAssociationUuid,
             associationsService: associationsProvider,
             log: injected.log)
         companyViewController = CompanyDetailsViewController(

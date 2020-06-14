@@ -7,7 +7,7 @@ public class ViewRecommendationCoordinator: CoreInjectionNavigationCoordinator {
     
     let recommendationUuid: F4SUUID
     
-    /// tuple containing this coordinator, a Workplace and a host uuid
+    /// tuple containing this coordinator, the recommended Workplace and the recommended association  uuid
     var onSuccess: (ViewRecommendationCoordinator, Workplace, F4SUUID) -> Void
     var onCancel: (ViewRecommendationCoordinator) -> Void
     
@@ -24,7 +24,7 @@ public class ViewRecommendationCoordinator: CoreInjectionNavigationCoordinator {
     }
     var vc: UIViewController?
     public override func start() {
-        let service = WorkplaceAndHostService(networkConfig: injected.networkConfig)
+        let service = WorkplaceAndAssociationService(networkConfig: injected.networkConfig)
         let presenter = LoadingViewPresenter(
             recommendationUuid: recommendationUuid,
             service: service,
@@ -34,7 +34,6 @@ public class ViewRecommendationCoordinator: CoreInjectionNavigationCoordinator {
         vc.modalTransitionStyle = .crossDissolve
         navigationRouter.present(vc, animated: true, completion: nil)
         self.vc = vc
-        //navigationRouter.push(viewController: vc, animated: true)
     }
     
     func presenterDidCancel() {
@@ -43,8 +42,7 @@ public class ViewRecommendationCoordinator: CoreInjectionNavigationCoordinator {
         onCancel(self)
     }
     
-    func onWorkplaceAndHostObtainedFromRecommendation(_ value: WorkplaceAndHostUuid) {
-        //navigationRouter.pop(animated: true)
+    func onWorkplaceAndHostObtainedFromRecommendation(_ value: WorkplaceAndAssociationUuid) {
         vc?.dismiss(animated: true, completion: nil)
         parentCoordinator?.childCoordinatorDidFinish(self)
         onSuccess(self, value.0, value.1)

@@ -1,9 +1,9 @@
 
 import WorkfinderCommon
 
-public typealias WorkplaceAndHostUuid = (Workplace,F4SUUID)
+public typealias WorkplaceAndAssociationUuid = (Workplace,F4SUUID)
 
-public class WorkplaceAndHostService {
+public class WorkplaceAndAssociationService {
     var recommendationUuid: F4SUUID?
     let recommendationService: RecommendationsServiceProtocol
     let associationService: AssociationsServiceProtocol
@@ -15,7 +15,7 @@ public class WorkplaceAndHostService {
     var companyLocationJson: CompanyLocationJson?
     var companyJson: CompanyJson?
     
-    var completion: ((Result<WorkplaceAndHostUuid,Error>) -> Void)?
+    var completion: ((Result<WorkplaceAndAssociationUuid,Error>) -> Void)?
     
     public init(networkConfig: NetworkConfig) {
         self.associationService = AssociationsService(networkConfig: networkConfig)
@@ -26,7 +26,7 @@ public class WorkplaceAndHostService {
     
     public func fetchCompanyWorkplace(
         recommendationUuid: F4SUUID,
-        completion: @escaping (Result<WorkplaceAndHostUuid,Error>) -> Void) {
+        completion: @escaping (Result<WorkplaceAndAssociationUuid,Error>) -> Void) {
         self.completion = completion
         recommendationService.fetchRecommendation(uuid: recommendationUuid) { (result) in
             switch result {
@@ -41,7 +41,7 @@ public class WorkplaceAndHostService {
     
     public func fetchCompanyWorkplace(
         associationUuid: F4SUUID,
-        completion: @escaping (Result<WorkplaceAndHostUuid,Error>) -> Void) {
+        completion: @escaping (Result<WorkplaceAndAssociationUuid,Error>) -> Void) {
         self.completion = completion
         associationService.fetchAssociation(uuid: associationUuid) { [weak self] (result) in
             guard let self = self else { return }
@@ -56,11 +56,11 @@ public class WorkplaceAndHostService {
     }
     
     func handleError(_ error: Error) {
-        completion?(Result<WorkplaceAndHostUuid,Error>.failure(error))
+        completion?(Result<WorkplaceAndAssociationUuid,Error>.failure(error))
     }
     
-    func handleSuccess(_ value: WorkplaceAndHostUuid) {
-        completion?(Result<WorkplaceAndHostUuid,Error>.success(value))
+    func handleSuccess(_ value: WorkplaceAndAssociationUuid) {
+        completion?(Result<WorkplaceAndAssociationUuid,Error>.success(value))
     }
     
     func onRecommendationFetched() {
@@ -138,9 +138,9 @@ public class WorkplaceAndHostService {
                 handleError(error)
                 return
         }
-        guard let hostUuid = associationJson?.host
+        guard let recommendedAssociationUuid = associationJson?.uuid
             else {
-                let error = WorkfinderError(title: "The host is nil", description: "The association's host is nil")
+                let error = WorkfinderError(title: "The association has no uuid", description: "The association's uuid is nil")
                 handleError(error)
                 return
         }
@@ -148,7 +148,7 @@ public class WorkplaceAndHostService {
                               latitude: Double(latitude),
                               longitude: Double(longitude))
         let workplace = Workplace(companyJson: companyJson, pinJson: pinJson)
-        handleSuccess((workplace, hostUuid))
+        handleSuccess((workplace, recommendedAssociationUuid))
     }
 }
 

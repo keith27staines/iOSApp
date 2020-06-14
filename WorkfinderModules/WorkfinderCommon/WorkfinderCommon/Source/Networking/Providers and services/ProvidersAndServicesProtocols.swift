@@ -10,7 +10,7 @@ public struct ServerListJson<A:Decodable>: Decodable {
     public var count: Int?
     public var next: String?
     public var previous: String?
-    public let results: [A]
+    public var results: [A]
 }
 
 public struct AssociationJson: Codable {

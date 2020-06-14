@@ -6,7 +6,7 @@ class LoadingViewPresenter {
     weak var view: LoadingViewController?
     weak var coordinator: ViewRecommendationCoordinator?
     let recommendationUuid: F4SUUID
-    let service: WorkplaceAndHostService
+    let service: WorkplaceAndAssociationService
     
     func onViewDidLoad(_ view: LoadingViewController) {
         self.view = view
@@ -33,7 +33,7 @@ class LoadingViewPresenter {
     }
         
     init(recommendationUuid: F4SUUID,
-         service: WorkplaceAndHostService,
+         service: WorkplaceAndAssociationService,
          coordinator: ViewRecommendationCoordinator) {
         self.recommendationUuid = recommendationUuid
         self.service = service
