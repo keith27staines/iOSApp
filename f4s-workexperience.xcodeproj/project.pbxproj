@@ -83,6 +83,7 @@
 		FC31F095204D54C6009DD526 /* F4SDebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */; };
 		FC31F097204D54E3009DD526 /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC31F096204D54E3009DD526 /* Debug.storyboard */; };
 		FC3CD1DA221566F200F91B50 /* Geocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CD1D9221566F200F91B50 /* Geocoding.swift */; };
+		FC459CEA2496161B00D6CE46 /* DeepLinkDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC459CE92496161B00D6CE46 /* DeepLinkDispatcher.swift */; };
 		FC50E9CE2213EF5400C9A621 /* SearchModeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */; };
 		FC5336782488CD0200DA3033 /* MigratorBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5336772488CD0200DA3033 /* MigratorBase.swift */; };
 		FC53367A2488CD5000DA3033 /* Migrate_v2_to_v3.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5336792488CD5000DA3033 /* Migrate_v2_to_v3.swift */; };
@@ -304,6 +305,7 @@
 		FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDebugViewController.swift; sourceTree = "<group>"; };
 		FC31F096204D54E3009DD526 /* Debug.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
 		FC3CD1D9221566F200F91B50 /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
+		FC459CE92496161B00D6CE46 /* DeepLinkDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkDispatcher.swift; sourceTree = "<group>"; };
 		FC50E9CD2213EF5400C9A621 /* SearchModeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModeSelectorView.swift; sourceTree = "<group>"; };
 		FC5336772488CD0200DA3033 /* MigratorBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigratorBase.swift; sourceTree = "<group>"; };
 		FC5336792488CD5000DA3033 /* Migrate_v2_to_v3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Migrate_v2_to_v3.swift; sourceTree = "<group>"; };
@@ -690,6 +692,7 @@
 		FC1DC06921FE1410009ABC60 /* Main App */ = {
 			isa = PBXGroup;
 			children = (
+				FC459CE8249615F900D6CE46 /* Deep link dispatch */,
 				FCB49305222A5D1B00B88B8B /* App Coordinator */,
 			);
 			path = "Main App";
@@ -837,6 +840,14 @@
 			children = (
 			);
 			path = "Coordinator tests";
+			sourceTree = "<group>";
+		};
+		FC459CE8249615F900D6CE46 /* Deep link dispatch */ = {
+			isa = PBXGroup;
+			children = (
+				FC459CE92496161B00D6CE46 /* DeepLinkDispatcher.swift */,
+			);
+			path = "Deep link dispatch";
 			sourceTree = "<group>";
 		};
 		FC50E9CA2213EF1D00C9A621 /* Subviews */ = {
@@ -1291,6 +1302,7 @@
 				40A5CF3C1DED6FA2000007AB /* InterestsViewController.swift in Sources */,
 				FC53367A2488CD5000DA3033 /* Migrate_v2_to_v3.swift in Sources */,
 				40E78E701DD32BD4000A3776 /* MenuHelper.swift in Sources */,
+				FC459CEA2496161B00D6CE46 /* DeepLinkDispatcher.swift in Sources */,
 				FC21BE3F220F53EB00A0A389 /* SearchViewProtocol.swift in Sources */,
 				40E78E981DD39275000A3776 /* MapViewController.swift in Sources */,
 				FC21BE38220F53EB00A0A389 /* SearchProtocols.swift in Sources */,
