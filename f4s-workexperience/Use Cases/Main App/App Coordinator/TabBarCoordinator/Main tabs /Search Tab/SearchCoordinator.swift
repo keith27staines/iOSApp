@@ -38,7 +38,6 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
     }
     
     func processRecommendation(uuid: F4SUUID?) {
-        print("process recommendation")
         guard let uuid = uuid else { return }
         rootViewController.dismiss(animated: true, completion: nil)
         if childCoordinators.count == 0 {
@@ -66,7 +65,6 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
             navigationRouter: navigationRouter,
             inject: injected,
             onSuccess: { [weak self] (coordinator,workplace,hostuuid) in
-                self?.childCoordinatorDidFinish(coordinator)
                 self?.showDetail(workplace: workplace,
                                  hostUuid: hostuuid,
                                  originScreen: .notSpecified)

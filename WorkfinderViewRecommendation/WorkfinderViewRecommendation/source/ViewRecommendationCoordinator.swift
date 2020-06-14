@@ -23,7 +23,7 @@ public class ViewRecommendationCoordinator: CoreInjectionNavigationCoordinator {
         self.onCancel = onCancel
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
-    
+    var vc: UIViewController?
     public override func start() {
         let service = WorkplaceAndHostService(networkConfig: injected.networkConfig)
         let presenter = LoadingViewPresenter(
@@ -31,15 +31,25 @@ public class ViewRecommendationCoordinator: CoreInjectionNavigationCoordinator {
             service: service,
             coordinator: self)
         let vc = LoadingViewController(presenter: presenter)
-        navigationRouter.push(viewController: vc, animated: true)
+        vc.modalPresentationStyle = .overFullScreen
+        vc.modalTransitionStyle = .crossDissolve
+        navigationRouter.present(vc, animated: true, completion: nil)
+        self.vc = vc
+        //navigationRouter.push(viewController: vc, animated: true)
+    }
+    
+    func presenterDidCancel() {
+        parentCoordinator?.childCoordinatorDidFinish(self)
+        vc?.dismiss(animated: true, completion: nil)
+        onCancel(self)
     }
     
     func onWorkplaceAndHostObtainedFromRecommendation(_ value: WorkplaceAndHostUuid) {
-        onSuccess(self, value.0, value.1)
-//        navigationRouter.pop(animated: true)
+        //navigationRouter.pop(animated: true)
+        vc?.dismiss(animated: true, completion: nil)
         parentCoordinator?.childCoordinatorDidFinish(self)
+        onSuccess(self, value.0, value.1)
     }
-    
 }
 
 

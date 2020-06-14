@@ -12,6 +12,10 @@ class LoadingViewPresenter {
         self.view = view
     }
     
+    func onCancel() {
+        coordinator?.presenterDidCancel()
+    }
+    
     func loadData(completion: @escaping (Error?) -> Void) {
         service.fetchCompanyWorkplace(recommendationUuid: recommendationUuid) { result in
             switch result {
