@@ -36,7 +36,7 @@ public class ViewRecommendationCoordinator: CoreInjectionNavigationCoordinator {
     
     func onWorkplaceAndHostObtainedFromRecommendation(_ value: WorkplaceAndHostUuid) {
         onSuccess(self, value.0, value.1)
-        navigationRouter.pop(animated: true)
+//        navigationRouter.pop(animated: true)
         parentCoordinator?.childCoordinatorDidFinish(self)
     }
     

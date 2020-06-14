@@ -117,13 +117,13 @@ public struct CompanyJson: Codable {
  */
 
 public struct CompanyLocationJson: Codable {
-    public var companyUuid: F4SUUID?
+    public var company: F4SUUID?
     public var uuid: String?
     public var address_postcode: String?
     public var geometry: PointJson?
     private enum codingKeys: String, CodingKey {
         case uuid
-        case companyUuid = "company"
+        case company
         case address_postcode
         case point
     }
