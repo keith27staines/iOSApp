@@ -16,7 +16,6 @@
 		FC2A64D42494D58100DA28DD /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2A64D32494D58100DA28DD /* WorkfinderServices.framework */; };
 		FC2A64D72494D5D100DA28DD /* ViewRecommendationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2A64D62494D5D100DA28DD /* ViewRecommendationCoordinator.swift */; };
 		FC2A64DC249527BA00DA28DD /* WorkfinderApplyUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2A64DB249527BA00DA28DD /* WorkfinderApplyUseCase.framework */; };
-		FC2A64DD249527BA00DA28DD /* WorkfinderApplyUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC2A64DB249527BA00DA28DD /* WorkfinderApplyUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC2A64E02495284900DA28DD /* ViewRecommendationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2A64DF2495284900DA28DD /* ViewRecommendationPresenter.swift */; };
 		FC2A64E224952A6C00DA28DD /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2A64E124952A6C00DA28DD /* LoadingViewController.swift */; };
 /* End PBXBuildFile section */
@@ -30,20 +29,6 @@
 			remoteInfo = WorkfinderViewRecommendation;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		FC2A64DE249527BB00DA28DD /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				FC2A64DD249527BA00DA28DD /* WorkfinderApplyUseCase.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		FC2A64A12494D4E600DA28DD /* WorkfinderViewRecommendation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderViewRecommendation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,7 +153,6 @@
 				FC2A649D2494D4E600DA28DD /* Sources */,
 				FC2A649E2494D4E600DA28DD /* Frameworks */,
 				FC2A649F2494D4E600DA28DD /* Resources */,
-				FC2A64DE249527BB00DA28DD /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -422,9 +406,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderViewRecommendation;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -448,8 +433,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderViewRecommendation;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -574,9 +560,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderViewRecommendation;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = DebugF4S;
 		};
@@ -682,9 +669,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderViewRecommendation;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = DebugF4SLive;
 		};
@@ -784,8 +772,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderViewRecommendation;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = ReleaseF4S;
 		};
@@ -885,8 +874,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderViewRecommendation;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = ReleaseF4SLive;
 		};

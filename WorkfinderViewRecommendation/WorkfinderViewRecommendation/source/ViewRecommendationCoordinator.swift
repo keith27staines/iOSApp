@@ -2,7 +2,6 @@ import WorkfinderCommon
 import WorkfinderServices
 import WorkfinderCoordinators
 import WorkfinderUI
-import WorkfinderCompanyDetailsUseCase
 
 public class ViewRecommendationCoordinator: CoreInjectionNavigationCoordinator {
     
