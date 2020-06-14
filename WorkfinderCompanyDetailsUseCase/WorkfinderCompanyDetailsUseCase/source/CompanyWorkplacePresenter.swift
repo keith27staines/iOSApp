@@ -154,6 +154,8 @@ class WorkplacePresenter : NSObject, CompanyDetailsPresenterProtocol {
                     }) {
                         self.associations?.results = [recommendedAssociation]
                         self.associations?.count = 1
+                        self.associations?.next = nil
+                        self.associations?.previous = nil
                     }
                 }
                 self.mainViewPresenter.hostsSectionPresenter.onHostsDidLoad(associationsJson.results)
