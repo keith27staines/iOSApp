@@ -29,7 +29,7 @@ class OfferPresenter: OfferPresenterProtocol {
     var companyName: String { application.companyName }
     var offerState: OfferState? { offer?.offerState }
     var startDateString: String? { offer?.startDateString }
-    var duration: String? { offer?.duration }
+    var duration: String? { "\(String(offer?.duration ?? 0)) days" }
     var hostCompany: String? { offer?.hostCompany }
     var hostContact: String? { offer?.hostContact }
     var email: String? { offer?.email }
@@ -104,7 +104,7 @@ class OfferPresenter: OfferPresenterProtocol {
         case .startDate:
             return OfferDetailCellInfo(firstLine: "Start date", secondLine: offer?.startDateString)
         case .duration:
-            return OfferDetailCellInfo(firstLine: "Duration", secondLine: offer?.duration)
+            return OfferDetailCellInfo(firstLine: "Duration", secondLine: "\(String(offer?.duration ?? 0)) days")
         case .company:
             return OfferDetailCellInfo(firstLine: "Host company", secondLine: offer?.hostCompany)
         case .host:

@@ -97,7 +97,7 @@ struct ExpandedAssociationPlacementJson: Codable {
     var cover_letter: String?
     var association: Association?
     var start_date: String?
-    var duration: String?
+    var offered_duration: Int?
     var offer_notes: String?
     
     struct Association: Codable

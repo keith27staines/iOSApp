@@ -31,7 +31,7 @@ class OfferService: OfferServiceProtocol{
                     placementUuid: application.placementUuid,
                     offerState: offerState,
                     startDateString: json.start_date,
-                    duration: json.duration,
+                    duration: json.offered_duration,
                     hostCompany: json.association?.location?.company?.name,
                     hostContact: json.association?.host?.displayName,
                     email: json.association?.host?.emails?.first,
