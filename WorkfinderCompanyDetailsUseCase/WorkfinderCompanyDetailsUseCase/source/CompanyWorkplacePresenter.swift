@@ -146,19 +146,20 @@ class WorkplacePresenter : NSObject, CompanyDetailsPresenterProtocol {
             switch result {
             case .failure(let error):
                 self.view?.showNetworkError(error, retry: self.beginLoadHosts)
-            case .success(let associationsJson):
-                self.associations = associationsJson
+            case .success(let unfilteredAssociationsJson):
+                var filteredAssociations = unfilteredAssociationsJson
                 if let recommendedAssociationUuid = self.recommendedAssociationUuid {
-                    if let recommendedAssociation = (associationsJson.results.first { (association) -> Bool in
+                    if let recommendedAssociation = (unfilteredAssociationsJson.results.first { (association) -> Bool in
                         association.uuid == recommendedAssociationUuid
                     }) {
-                        self.associations?.results = [recommendedAssociation]
-                        self.associations?.count = 1
-                        self.associations?.next = nil
-                        self.associations?.previous = nil
+                        filteredAssociations.results = [recommendedAssociation]
+                        filteredAssociations.count = 1
+                        filteredAssociations.next = nil
+                        filteredAssociations.previous = nil
                     }
                 }
-                self.mainViewPresenter.hostsSectionPresenter.onHostsDidLoad(associationsJson.results)
+                self.associations = filteredAssociations
+                self.mainViewPresenter.hostsSectionPresenter.onHostsDidLoad(filteredAssociations.results)
                 self.onDidUpdate()
             }
         }
