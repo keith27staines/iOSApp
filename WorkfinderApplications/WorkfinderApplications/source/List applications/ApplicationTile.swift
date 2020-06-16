@@ -48,9 +48,8 @@ class ApplicationTile: UITableViewCell {
     
     lazy var companyName: UILabel = {
         let label = UILabel()
-        label.font = WorkfinderFonts.heading
-        label.textColor = UIColor.black
-        label.numberOfLines = 1
+        label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        label.numberOfLines = 0
         return label
     }()
     
@@ -66,7 +65,7 @@ class ApplicationTile: UITableViewCell {
         let label = UILabel()
         label.font = WorkfinderFonts.heading
         label.textColor = WorkfinderColors.textMedium
-        label.numberOfLines = 1
+        label.numberOfLines = 0
         return label
     }()
     
@@ -98,10 +97,25 @@ class ApplicationTile: UITableViewCell {
     }()
     
     func configureViews() {
-        self.contentView.addSubview(mainStack)
+        contentView.addSubview(mainStack)
+        contentView.addSubview(statusViewContainer)
         mainStack.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: nil, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 8, left: 4, bottom: 0, right: 4))
-        self.contentView.addSubview(statusViewContainer)
-        statusViewContainer.anchor(top: mainStack.bottomAnchor, leading: logo.leadingAnchor, bottom: contentView.bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 11, left: 0, bottom: 8, right: 0))
+        statusViewContainer.anchor(top: logo.bottomAnchor, leading: logo.leadingAnchor, bottom: contentView.bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 11, left: 0, bottom: 8, right: 0))
+        let contentBottom1 = contentView.bottomAnchor.constraint(greaterThanOrEqualTo: statusViewContainer.bottomAnchor, constant: 8)
+        let contentBottom2 = contentView.bottomAnchor.constraint(greaterThanOrEqualTo: mainStack.bottomAnchor, constant: 8)
+        let contentBottom3 = contentView.bottomAnchor.constraint(equalTo: statusViewContainer.bottomAnchor, constant: 8)
+        let contentBottom4 = contentView.bottomAnchor.constraint(equalTo: mainStack.bottomAnchor, constant: 8)
+        contentBottom1.priority = .required
+        contentBottom1.priority = .required
+        contentBottom3.priority = .defaultHigh
+        contentBottom4.priority = .defaultHigh
+        NSLayoutConstraint.activate([
+            contentBottom1,
+            contentBottom2,
+            contentBottom3,
+            contentBottom4,
+        ])
+        
     }
     
     func configureWithApplication(_ application: ApplicationTilePresenter) {

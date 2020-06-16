@@ -6,8 +6,8 @@ class WorkplaceTile: UITableViewCell {
     
     lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title2)
-        label.numberOfLines = 1
+        label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        label.numberOfLines = 0
         return label
     }()
     
