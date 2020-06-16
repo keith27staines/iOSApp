@@ -115,7 +115,6 @@ class ApplicationTile: UITableViewCell {
             contentBottom3,
             contentBottom4,
         ])
-        
     }
     
     func configureWithApplication(_ application: ApplicationTilePresenter) {
