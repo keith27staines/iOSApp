@@ -217,6 +217,7 @@ class MapViewController: UIViewController {
         mapView.addSubview(pressedPinOrCluster!)
         
         let vc = WorkplaceListViewController()
+        vc.modalPresentationStyle = .fullScreen
         guard let networkConfig = coordinator?.injected.networkConfig else {
             assertionFailure("MapViewController did not receive its coordinator")
             return
