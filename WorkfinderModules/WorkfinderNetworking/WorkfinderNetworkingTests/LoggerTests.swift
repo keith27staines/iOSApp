@@ -16,9 +16,9 @@ class LoggerTests: XCTestCase {
     
     func test_injected_log_is_being_used() {
         let log = MockF4SAnalyticsAndDebugging()
-        log.identity(userId: "Test identity")
+        log.alias(userId: "123456789")
         let sut = NetworkCallLogger(log: log)
-        XCTAssertEqual((sut.log as? MockF4SAnalyticsAndDebugging)!.identities.last, "Test identity")
+        XCTAssertEqual((sut.log as? MockF4SAnalyticsAndDebugging)!.aliases.last, "123456789")
     }
     
     func test_convertTaskFailureToError() {

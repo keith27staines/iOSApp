@@ -10,26 +10,13 @@
 		FC04B867233277080034A60E /* CoordinatorProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04B866233277080034A60E /* CoordinatorProtocols.swift */; };
 		FC0660572326635000496FE2 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0660562326635000496FE2 /* Protocols.swift */; };
 		FC083F7B230FF01000641F17 /* F4SDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F7A230FF01000641F17 /* F4SDocument.swift */; };
-		FC083F892310165900641F17 /* F4SDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F882310165900641F17 /* F4SDocumentTests.swift */; };
-		FC083F8F2310417E00641F17 /* F4SRoleJsonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F8E2310417E00641F17 /* F4SRoleJsonTests.swift */; };
-		FC0B6EB323E86CC9001FCE5F /* RequestVerbTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B6EB223E86CC9001FCE5F /* RequestVerbTests.swift */; };
 		FC0E5CFB224E1B5700615B4F /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E5CFA224E1B5700615B4F /* LocalStore.swift */; };
 		FC1243E32344AEA30007BA95 /* ScreenNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1243E22344AEA30007BA95 /* ScreenNames.swift */; };
 		FC12B10322F3415300C33410 /* JsonDateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B10022F3415200C33410 /* JsonDateFormatterExtension.swift */; };
-		FC12B10522F341D500C33410 /* JsonDateFormatterExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */; };
 		FC14E44C2341E36B005D7541 /* MockUIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC14E44B2341E36B005D7541 /* MockUIApplication.swift */; };
-		FC177FCD2306A4010068C2F7 /* F4SHoursTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC177FCC2306A4010068C2F7 /* F4SHoursTypeTests.swift */; };
 		FC1F591622FD6D42007164BA /* F4SPushToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F591522FD6D42007164BA /* F4SPushToken.swift */; };
-		FC1F591822FD6DAB007164BA /* F4SPushTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F591722FD6DAB007164BA /* F4SPushTokenTests.swift */; };
-		FC1F591E22FD78D6007164BA /* WorkfinderCommonStructsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F591D22FD78D6007164BA /* WorkfinderCommonStructsTests.swift */; };
-		FC1F592022FD8ACF007164BA /* F4SAvailabilityPeriodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F591F22FD8ACF007164BA /* F4SAvailabilityPeriodTests.swift */; };
 		FC1F592222FDCD9D007164BA /* F4SCalendarDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F592122FDCD9D007164BA /* F4SCalendarDay.swift */; };
-		FC1FA08822FAC0FF003EAE59 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08722FAC0FF003EAE59 /* StringExtensionsTests.swift */; };
-		FC1FA08A22FAD5D5003EAE59 /* DateExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08922FAD5D5003EAE59 /* DateExtensionTests.swift */; };
-		FC1FA08C22FB1F57003EAE59 /* WorkAvailabilityWindowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08B22FB1F57003EAE59 /* WorkAvailabilityWindowTests.swift */; };
-		FC1FEF002301A1830039DD94 /* F4SDayOfWeekTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FEEFF2301A1830039DD94 /* F4SDayOfWeekTests.swift */; };
 		FC22438F232F9E750073C9B1 /* F4SCompanyDatabaseMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22438E232F9E750073C9B1 /* F4SCompanyDatabaseMetaData.swift */; };
-		FC22DBFD22F989D60068C61C /* F4SInterestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBFC22F989D60068C61C /* F4SInterestTests.swift */; };
 		FC24F9132333CA88005C0A08 /* RequestVerb.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC24F9122333CA88005C0A08 /* RequestVerb.swift */; };
 		FC32FD432265E4C800740F0C /* WorkfinderContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32FD422265E4C800740F0C /* WorkfinderContentType.swift */; };
 		FC340B0B24531C590003B521 /* ServerListTypealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC340B0A24531C590003B521 /* ServerListTypealiases.swift */; };
@@ -45,12 +32,28 @@
 		FC5CBA6A231D3E4700C2D3C5 /* F4SDateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBA69231D3E4700C2D3C5 /* F4SDateHelper.swift */; };
 		FC69EBA92481371C00901A2B /* GlobalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC69EBA82481371C00901A2B /* GlobalNotifications.swift */; };
 		FC6E42DD24556B97005E0D08 /* LocalStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6E42DC24556B97005E0D08 /* LocalStorageProtocol.swift */; };
-		FC73902223030856003A9253 /* LocalStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC73902123030856003A9253 /* LocalStoreTests.swift */; };
 		FC75B3582494841D008B4FBB /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75B3572494841D008B4FBB /* Recommendation.swift */; };
 		FC7A4396224A3C0E00B2D693 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4395224A3C0E00B2D693 /* NetworkError.swift */; };
 		FC7DC9F6244D8D7300C282EF /* RemoteLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7DC9F5244D8D7300C282EF /* RemoteLinks.swift */; };
-		FC83EC7F22FC0C55009D7A0B /* F4SJsonValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83EC7E22FC0C55009D7A0B /* F4SJsonValueTests.swift */; };
-		FC83EC8122FC0EDB009D7A0B /* F4SUserRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83EC8022FC0EDB009D7A0B /* F4SUserRepositoryTests.swift */; };
+		FC7FF7BE249A3F1B00F9093B /* HostTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC4E67123EAFD5400ED6491 /* HostTests.swift */; };
+		FC7FF7BF249A3F3A00F9093B /* F4SDateHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC4E66B23EAE58200ED6491 /* F4SDateHelperTests.swift */; };
+		FC7FF7C0249A3F4600F9093B /* CompanyJsonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC4E66923EAD04D00ED6491 /* CompanyJsonTests.swift */; };
+		FC7FF7C1249A3F5000F9093B /* CoordinatingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC4E66123EAB01100ED6491 /* CoordinatingTests.swift */; };
+		FC7FF7C2249A3F5900F9093B /* RequestVerbTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B6EB223E86CC9001FCE5F /* RequestVerbTests.swift */; };
+		FC7FF7C3249A3F6200F9093B /* LatLonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC66B7123E035DA006F22AD /* LatLonTests.swift */; };
+		FC7FF7C4249A3F6B00F9093B /* CGRect+MethodsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06A6232256C0003C59C8 /* CGRect+MethodsTests.swift */; };
+		FC7FF7C5249A3F7600F9093B /* F4SQuadtreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06A7232256C0003C59C8 /* F4SQuadtreeTests.swift */; };
+		FC7FF7C6249A3F8000F9093B /* ScaledNumberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC069223224080003C59C8 /* ScaledNumberTests.swift */; };
+		FC7FF7C7249A3F8A00F9093B /* F4SDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F882310165900641F17 /* F4SDocumentTests.swift */; };
+		FC7FF7C9249A3FD200F9093B /* JsonDateFormatterExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */; };
+		FC7FF7CB249A403E00F9093B /* LocalStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC73902123030856003A9253 /* LocalStoreTests.swift */; };
+		FC7FF7CC249A405900F9093B /* WorkfinderCommonStructsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F591D22FD78D6007164BA /* WorkfinderCommonStructsTests.swift */; };
+		FC7FF7CD249A406D00F9093B /* F4SPushTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F591722FD6DAB007164BA /* F4SPushTokenTests.swift */; };
+		FC7FF7CE249A407F00F9093B /* F4SUserRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83EC8022FC0EDB009D7A0B /* F4SUserRepositoryTests.swift */; };
+		FC7FF7CF249A409600F9093B /* F4SJsonValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC83EC7E22FC0C55009D7A0B /* F4SJsonValueTests.swift */; };
+		FC7FF7D0249A40F300F9093B /* WorkAvailabilityWindowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08B22FB1F57003EAE59 /* WorkAvailabilityWindowTests.swift */; };
+		FC7FF7D1249A410300F9093B /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08722FAC0FF003EAE59 /* StringExtensionsTests.swift */; };
+		FC7FF7D2249A410D00F9093B /* DateExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FA08922FAD5D5003EAE59 /* DateExtensionTests.swift */; };
 		FC8F957C233BA6710027BE02 /* MockCoordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8F957B233BA6710027BE02 /* MockCoordinators.swift */; };
 		FC8F957D233BA6710027BE02 /* MockAnalyticsAndDebugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8F957A233BA6710027BE02 /* MockAnalyticsAndDebugging.swift */; };
 		FC8F957F233BA6710027BE02 /* MockNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8F9577233BA6710027BE02 /* MockNavigationRouter.swift */; };
@@ -64,23 +67,24 @@
 		FC9EE07F2482264D00CCE8CC /* WorkfinderVersionCheckerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9EE07E2482264D00CCE8CC /* WorkfinderVersionCheckerProtocol.swift */; };
 		FCA2901B247F636100588F6E /* String+isEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA2901A247F636100588F6E /* String+isEmail.swift */; };
 		FCA91E752234043D007ED308 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91E6B2234043D007ED308 /* WorkfinderCommon.framework */; };
-		FCA91E7A2234043D007ED308 /* WorkfinderCommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91E792234043D007ED308 /* WorkfinderCommonTests.swift */; };
 		FCA91E7C2234043D007ED308 /* WorkfinderCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA91E6E2234043D007ED308 /* WorkfinderCommon.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCA91E88223404AF007ED308 /* WorkfinderCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91E87223404AF007ED308 /* WorkfinderCommon.swift */; };
 		FCB24A5F22E44AB100077DFF /* WorkfinderCommonStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB24A5E22E44AB100077DFF /* WorkfinderCommonStructs.swift */; };
-		FCBEA7B5228701E600CAB1F1 /* F4SUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBEA7B4228701E500CAB1F1 /* F4SUserTests.swift */; };
 		FCC1DF5F232507530074D5C1 /* SocialShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF5E232507530074D5C1 /* SocialShare.swift */; };
-		FCC4E66223EAB01100ED6491 /* CoordinatingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC4E66123EAB01100ED6491 /* CoordinatingTests.swift */; };
-		FCC4E66A23EAD04D00ED6491 /* CompanyJsonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC4E66923EAD04D00ED6491 /* CompanyJsonTests.swift */; };
-		FCC4E66C23EAE58300ED6491 /* F4SDateHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC4E66B23EAE58200ED6491 /* F4SDateHelperTests.swift */; };
-		FCC4E67223EAFD5400ED6491 /* HostTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC4E67123EAFD5400ED6491 /* HostTests.swift */; };
-		FCC66B7223E035DA006F22AD /* LatLonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC66B7123E035DA006F22AD /* LatLonTests.swift */; };
 		FCC85DC324517E0A00BC600E /* ProvidersAndServicesProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC85DC224517E0A00BC600E /* ProvidersAndServicesProtocols.swift */; };
 		FCC85DC624517EA500BC600E /* PicklistItemJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC85DC524517EA500BC600E /* PicklistItemJson.swift */; };
 		FCC85DC8245180AB00BC600E /* PicklistTypeEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC85DC7245180AB00BC600E /* PicklistTypeEnums.swift */; };
 		FCC85DCB245184B700BC600E /* PicklistProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC85DCA245184B700BC600E /* PicklistProtocol.swift */; };
 		FCCA4E282456CC1500DFA696 /* AppInstallationLogicProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA4E272456CC1500DFA696 /* AppInstallationLogicProtocol.swift */; };
 		FCCA4E2B2456DADD00DFA696 /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA4E2A2456DADD00DFA696 /* Candidate.swift */; };
+		FCCA982B249A620100427899 /* F4SCalendarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE5194D2249645A00B550C9 /* F4SCalendarTests.swift */; };
+		FCCA982C249A624200427899 /* F4SHoursTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC177FCC2306A4010068C2F7 /* F4SHoursTypeTests.swift */; };
+		FCCA982D249A628800427899 /* F4SCalendarDayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE5194F2249645B00B550C9 /* F4SCalendarDayTests.swift */; };
+		FCCA982E249A629200427899 /* F4SCalendarWeekTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE5194C2249645A00B550C9 /* F4SCalendarWeekTests.swift */; };
+		FCCA982F249A62B500427899 /* F4SDayOfWeekTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FEEFF2301A1830039DD94 /* F4SDayOfWeekTests.swift */; };
+		FCCA9830249A62B900427899 /* F4SCalendarMonthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE519512249645C00B550C9 /* F4SCalendarMonthTests.swift */; };
+		FCCA9831249A62BD00427899 /* F4SDisplayableMonthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE519502249645B00B550C9 /* F4SDisplayableMonthTests.swift */; };
+		FCCA9832249A62D400427899 /* F4SAvailabilityPeriodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F591F22FD8ACF007164BA /* F4SAvailabilityPeriodTests.swift */; };
 		FCDB07382286F6640053347F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB07372286F6640053347F /* User.swift */; };
 		FCDB073A2286F7870053347F /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB07392286F7870053347F /* UserRepository.swift */; };
 		FCDB073C2286F8B00053347F /* Analytics and debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDB073B2286F8B00053347F /* Analytics and debugging.swift */; };
@@ -96,18 +100,11 @@
 		FCE51938224948E400B550C9 /* F4SHoursType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51934224948E300B550C9 /* F4SHoursType.swift */; };
 		FCE51939224948E400B550C9 /* WorkAvailabilityWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51935224948E400B550C9 /* WorkAvailabilityWindow.swift */; };
 		FCE5193E22494CED00B550C9 /* F4SJsonValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE5193C22494CEC00B550C9 /* F4SJsonValue.swift */; };
-		FCE519522249645C00B550C9 /* F4SCalendarWeekTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE5194C2249645A00B550C9 /* F4SCalendarWeekTests.swift */; };
-		FCE519532249645C00B550C9 /* F4SCalendarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE5194D2249645A00B550C9 /* F4SCalendarTests.swift */; };
-		FCE519552249645C00B550C9 /* F4SCalendarDayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE5194F2249645B00B550C9 /* F4SCalendarDayTests.swift */; };
-		FCE519562249645C00B550C9 /* F4SDisplayableMonthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE519502249645B00B550C9 /* F4SDisplayableMonthTests.swift */; };
-		FCE519572249645C00B550C9 /* F4SCalendarMonthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE519512249645C00B550C9 /* F4SCalendarMonthTests.swift */; };
 		FCE75CC6232F631C00C2E976 /* NetworkCallLoggerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE75CC5232F631C00C2E976 /* NetworkCallLoggerProtocol.swift */; };
 		FCE8DAA82320E80B00934E2F /* ScaledNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAA72320E80B00934E2F /* ScaledNumber.swift */; };
-		FCFC069323224081003C59C8 /* ScaledNumberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC069223224080003C59C8 /* ScaledNumberTests.swift */; };
+		FCEE3EF6249A645A0034C226 /* CandidateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEE3EF5249A645A0034C226 /* CandidateTests.swift */; };
 		FCFC06A423225670003C59C8 /* F4SQuadtree.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06A22322566F003C59C8 /* F4SQuadtree.swift */; };
 		FCFC06A523225670003C59C8 /* CGRect+Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06A32322566F003C59C8 /* CGRect+Methods.swift */; };
-		FCFC06A8232256C0003C59C8 /* F4SQuadtreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06A7232256C0003C59C8 /* F4SQuadtreeTests.swift */; };
-		FCFC06A9232256C0003C59C8 /* CGRect+MethodsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06A6232256C0003C59C8 /* CGRect+MethodsTests.swift */; };
 		FCFC06AB23225765003C59C8 /* LatLon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06AA23225764003C59C8 /* LatLon.swift */; };
 		FCFDCE5824599278006BA3AC /* PreferredDestinations.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFDCE5724599278006BA3AC /* PreferredDestinations.swift */; };
 		FCFE450E2250BA6700C38436 /* MockLocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE450D2250BA6700C38436 /* MockLocalStore.swift */; };
@@ -128,7 +125,6 @@
 		FC0660562326635000496FE2 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		FC083F7A230FF01000641F17 /* F4SDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDocument.swift; sourceTree = "<group>"; };
 		FC083F882310165900641F17 /* F4SDocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDocumentTests.swift; sourceTree = "<group>"; };
-		FC083F8E2310417E00641F17 /* F4SRoleJsonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRoleJsonTests.swift; sourceTree = "<group>"; };
 		FC0B6EB223E86CC9001FCE5F /* RequestVerbTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestVerbTests.swift; sourceTree = "<group>"; };
 		FC0E5CFA224E1B5700615B4F /* LocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStore.swift; sourceTree = "<group>"; };
 		FC1243E22344AEA30007BA95 /* ScreenNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenNames.swift; sourceTree = "<group>"; };
@@ -146,7 +142,6 @@
 		FC1FA08B22FB1F57003EAE59 /* WorkAvailabilityWindowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkAvailabilityWindowTests.swift; sourceTree = "<group>"; };
 		FC1FEEFF2301A1830039DD94 /* F4SDayOfWeekTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDayOfWeekTests.swift; sourceTree = "<group>"; };
 		FC22438E232F9E750073C9B1 /* F4SCompanyDatabaseMetaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyDatabaseMetaData.swift; sourceTree = "<group>"; };
-		FC22DBFC22F989D60068C61C /* F4SInterestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SInterestTests.swift; sourceTree = "<group>"; };
 		FC24F9122333CA88005C0A08 /* RequestVerb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestVerb.swift; sourceTree = "<group>"; };
 		FC32FD422265E4C800740F0C /* WorkfinderContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderContentType.swift; sourceTree = "<group>"; };
 		FC340B0A24531C590003B521 /* ServerListTypealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerListTypealiases.swift; sourceTree = "<group>"; };
@@ -184,11 +179,9 @@
 		FCA91E6E2234043D007ED308 /* WorkfinderCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderCommon.h; sourceTree = "<group>"; };
 		FCA91E6F2234043D007ED308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCA91E742234043D007ED308 /* WorkfinderCommonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderCommonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCA91E792234043D007ED308 /* WorkfinderCommonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderCommonTests.swift; sourceTree = "<group>"; };
 		FCA91E7B2234043D007ED308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCA91E87223404AF007ED308 /* WorkfinderCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderCommon.swift; sourceTree = "<group>"; };
 		FCB24A5E22E44AB100077DFF /* WorkfinderCommonStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderCommonStructs.swift; sourceTree = "<group>"; };
-		FCBEA7B4228701E500CAB1F1 /* F4SUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SUserTests.swift; sourceTree = "<group>"; };
 		FCC1DF5E232507530074D5C1 /* SocialShare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialShare.swift; sourceTree = "<group>"; };
 		FCC4E66123EAB01100ED6491 /* CoordinatingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatingTests.swift; sourceTree = "<group>"; };
 		FCC4E66923EAD04D00ED6491 /* CompanyJsonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyJsonTests.swift; sourceTree = "<group>"; };
@@ -223,6 +216,7 @@
 		FCE519512249645C00B550C9 /* F4SCalendarMonthTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarMonthTests.swift; sourceTree = "<group>"; };
 		FCE75CC5232F631C00C2E976 /* NetworkCallLoggerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCallLoggerProtocol.swift; sourceTree = "<group>"; };
 		FCE8DAA72320E80B00934E2F /* ScaledNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaledNumber.swift; sourceTree = "<group>"; };
+		FCEE3EF5249A645A0034C226 /* CandidateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateTests.swift; sourceTree = "<group>"; };
 		FCFC069223224080003C59C8 /* ScaledNumberTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaledNumberTests.swift; sourceTree = "<group>"; };
 		FCFC06A22322566F003C59C8 /* F4SQuadtree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SQuadtree.swift; sourceTree = "<group>"; };
 		FCFC06A32322566F003C59C8 /* CGRect+Methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Methods.swift"; sourceTree = "<group>"; };
@@ -418,14 +412,11 @@
 				FC83EC7E22FC0C55009D7A0B /* F4SJsonValueTests.swift */,
 				FC1FA08B22FB1F57003EAE59 /* WorkAvailabilityWindowTests.swift */,
 				FC1FA08622FAC0D9003EAE59 /* Extention tests */,
-				FC22DBFC22F989D60068C61C /* F4SInterestTests.swift */,
 				FCA91E7B2234043D007ED308 /* Info.plist */,
-				FCBEA7B4228701E500CAB1F1 /* F4SUserTests.swift */,
-				FCA91E792234043D007ED308 /* WorkfinderCommonTests.swift */,
 				FCE5194C2249645A00B550C9 /* F4SCalendarWeekTests.swift */,
 				FCE5194F2249645B00B550C9 /* F4SCalendarDayTests.swift */,
 				FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */,
-				FC083F8E2310417E00641F17 /* F4SRoleJsonTests.swift */,
+				FCEE3EF5249A645A0034C226 /* CandidateTests.swift */,
 			);
 			path = WorkfinderCommonTests;
 			sourceTree = "<group>";
@@ -746,37 +737,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FCE519562249645C00B550C9 /* F4SDisplayableMonthTests.swift in Sources */,
-				FCE519552249645C00B550C9 /* F4SCalendarDayTests.swift in Sources */,
-				FC73902223030856003A9253 /* LocalStoreTests.swift in Sources */,
-				FC12B10522F341D500C33410 /* JsonDateFormatterExtensionTests.swift in Sources */,
-				FC1F591822FD6DAB007164BA /* F4SPushTokenTests.swift in Sources */,
-				FC1FA08822FAC0FF003EAE59 /* StringExtensionsTests.swift in Sources */,
-				FC0B6EB323E86CC9001FCE5F /* RequestVerbTests.swift in Sources */,
-				FCC4E66A23EAD04D00ED6491 /* CompanyJsonTests.swift in Sources */,
-				FCA91E7A2234043D007ED308 /* WorkfinderCommonTests.swift in Sources */,
-				FC083F892310165900641F17 /* F4SDocumentTests.swift in Sources */,
-				FCE519572249645C00B550C9 /* F4SCalendarMonthTests.swift in Sources */,
-				FC1FA08A22FAD5D5003EAE59 /* DateExtensionTests.swift in Sources */,
-				FCC4E67223EAFD5400ED6491 /* HostTests.swift in Sources */,
-				FC83EC8122FC0EDB009D7A0B /* F4SUserRepositoryTests.swift in Sources */,
-				FC83EC7F22FC0C55009D7A0B /* F4SJsonValueTests.swift in Sources */,
-				FC177FCD2306A4010068C2F7 /* F4SHoursTypeTests.swift in Sources */,
-				FC1F592022FD8ACF007164BA /* F4SAvailabilityPeriodTests.swift in Sources */,
-				FCFC06A8232256C0003C59C8 /* F4SQuadtreeTests.swift in Sources */,
-				FCC66B7223E035DA006F22AD /* LatLonTests.swift in Sources */,
-				FCE519522249645C00B550C9 /* F4SCalendarWeekTests.swift in Sources */,
-				FC1F591E22FD78D6007164BA /* WorkfinderCommonStructsTests.swift in Sources */,
-				FCC4E66223EAB01100ED6491 /* CoordinatingTests.swift in Sources */,
-				FCC4E66C23EAE58300ED6491 /* F4SDateHelperTests.swift in Sources */,
-				FC1FEF002301A1830039DD94 /* F4SDayOfWeekTests.swift in Sources */,
-				FC1FA08C22FB1F57003EAE59 /* WorkAvailabilityWindowTests.swift in Sources */,
-				FCFC06A9232256C0003C59C8 /* CGRect+MethodsTests.swift in Sources */,
-				FCFC069323224081003C59C8 /* ScaledNumberTests.swift in Sources */,
-				FC083F8F2310417E00641F17 /* F4SRoleJsonTests.swift in Sources */,
-				FCBEA7B5228701E600CAB1F1 /* F4SUserTests.swift in Sources */,
-				FCE519532249645C00B550C9 /* F4SCalendarTests.swift in Sources */,
-				FC22DBFD22F989D60068C61C /* F4SInterestTests.swift in Sources */,
+				FC7FF7D2249A410D00F9093B /* DateExtensionTests.swift in Sources */,
+				FCCA9831249A62BD00427899 /* F4SDisplayableMonthTests.swift in Sources */,
+				FC7FF7D1249A410300F9093B /* StringExtensionsTests.swift in Sources */,
+				FC7FF7C6249A3F8000F9093B /* ScaledNumberTests.swift in Sources */,
+				FC7FF7C9249A3FD200F9093B /* JsonDateFormatterExtensionTests.swift in Sources */,
+				FCCA982D249A628800427899 /* F4SCalendarDayTests.swift in Sources */,
+				FC7FF7C0249A3F4600F9093B /* CompanyJsonTests.swift in Sources */,
+				FC7FF7CB249A403E00F9093B /* LocalStoreTests.swift in Sources */,
+				FC7FF7C3249A3F6200F9093B /* LatLonTests.swift in Sources */,
+				FC7FF7BE249A3F1B00F9093B /* HostTests.swift in Sources */,
+				FCCA982F249A62B500427899 /* F4SDayOfWeekTests.swift in Sources */,
+				FC7FF7C7249A3F8A00F9093B /* F4SDocumentTests.swift in Sources */,
+				FCCA9830249A62B900427899 /* F4SCalendarMonthTests.swift in Sources */,
+				FC7FF7C1249A3F5000F9093B /* CoordinatingTests.swift in Sources */,
+				FCCA982E249A629200427899 /* F4SCalendarWeekTests.swift in Sources */,
+				FC7FF7CC249A405900F9093B /* WorkfinderCommonStructsTests.swift in Sources */,
+				FC7FF7D0249A40F300F9093B /* WorkAvailabilityWindowTests.swift in Sources */,
+				FC7FF7CF249A409600F9093B /* F4SJsonValueTests.swift in Sources */,
+				FC7FF7C5249A3F7600F9093B /* F4SQuadtreeTests.swift in Sources */,
+				FC7FF7BF249A3F3A00F9093B /* F4SDateHelperTests.swift in Sources */,
+				FC7FF7C4249A3F6B00F9093B /* CGRect+MethodsTests.swift in Sources */,
+				FC7FF7C2249A3F5900F9093B /* RequestVerbTests.swift in Sources */,
+				FC7FF7CD249A406D00F9093B /* F4SPushTokenTests.swift in Sources */,
+				FCCA982C249A624200427899 /* F4SHoursTypeTests.swift in Sources */,
+				FCEE3EF6249A645A0034C226 /* CandidateTests.swift in Sources */,
+				FCCA9832249A62D400427899 /* F4SAvailabilityPeriodTests.swift in Sources */,
+				FC7FF7CE249A407F00F9093B /* F4SUserRepositoryTests.swift in Sources */,
+				FCCA982B249A620100427899 /* F4SCalendarTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
