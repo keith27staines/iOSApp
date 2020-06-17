@@ -54,24 +54,6 @@ class StringExtensionsTests: XCTestCase {
         XCTAssertEqual((company + " LTD.").stripCompanySuffix(), company)
     }
     
-    func test_string_dehyphenated() {
-        XCTAssertEqual("ABCD-EFGH-ij1234-mNO_PQ@_".dehyphenated, "ABCDEFGHij1234mNO_PQ@_")
-    }
-    
-    func test_string_htmlDecode() {
-        XCTAssertEqual(
-            "&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;body&gt;&lt;h1&gt;My First Heading&lt;/h1&gt;&lt;p&gt;My first paragraph.&lt;/p&gt;> &lt;/body&gt;&lt;/html&gt;".htmlDecode(),
-            "<!DOCTYPE html><html><body><h1>My First Heading</h1><p>My first paragraph.</p>> </body></html>")
-    }
-    
-    func test_string_capitalizing_first_letter() {
-        var mutatingString = "a big hello"
-        mutatingString.capitalizeFirstLetter()
-        XCTAssertEqual(mutatingString, "A big hello")
-        XCTAssertEqual("again a big hello".capitalizingFirstLetter(), "Again a big hello")
-        XCTAssertEqual("Again a big hello".capitalizingFirstLetter(), "Again a big hello")
-    }
-    
     func test_string_stringByReplacingFirstOccurrenceOfString() {
         XCTAssertEqual("first first first".stringByReplacingFirstOccurrenceOfString(target: "first", withString: "xxxx"), "xxxx first first")
         XCTAssertEqual("first first first".stringByReplacingFirstOccurrenceOfString(target: "aaaa", withString: "xxxx"), "first first first")

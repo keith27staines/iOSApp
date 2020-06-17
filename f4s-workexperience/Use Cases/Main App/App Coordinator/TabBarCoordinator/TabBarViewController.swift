@@ -26,17 +26,6 @@ class TabBarViewController: UITabBarController {
         startNotifier()
     }
     
-    @objc func catchUserStatusUpdatedNotification(notification: Notification) {
-        guard let status = notification.object as? F4SUserStatus else {
-            return
-        }
-        processUserStatusUpdate(status)
-    }
-    
-    func processUserStatusUpdate(_ status: F4SUserStatus) {
-        configureTimelineTabBarWithCount(count: status.unreadMessageCount)
-    }
-    
     func configureTimelineTabBarWithCount(count: Int? = 0) {
         DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else { return }
