@@ -2,7 +2,7 @@
 import XCTest
 @testable import WorkfinderCommon
 
-class F4SHostTests: XCTestCase {
+class HostTests: XCTestCase {
     
     func test_initialise() {
         

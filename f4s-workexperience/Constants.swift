@@ -19,5 +19,4 @@ struct GoogleApiKeys {
 struct AppConstants {
     static let databaseFileName = "company_download.txt"
     static let stagedDatabaseFileName = "company_download"
-    static let maximumNumberOfShortlists = 20
 }
