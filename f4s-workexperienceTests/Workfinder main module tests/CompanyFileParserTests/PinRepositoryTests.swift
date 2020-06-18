@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import f4s_workexperience
+@testable import Workfinder
 
 class PinRepositoryTests: XCTestCase {
 

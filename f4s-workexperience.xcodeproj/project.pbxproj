@@ -1863,7 +1863,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s_workexperience.app/f4s_workexperience";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Workfinder.app/Workfinder";
 			};
 			name = DebugF4S;
 		};
@@ -1935,7 +1935,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s_workexperience.app/f4s_workexperience";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Workfinder.app/Workfinder";
 			};
 			name = DebugF4SLive;
 		};
@@ -1999,7 +1999,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s_workexperience.app/f4s_workexperience";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Workfinder.app/Workfinder";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = ReleaseF4S;
@@ -2064,7 +2064,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/f4s_workexperience.app/f4s_workexperience";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Workfinder.app/Workfinder";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = ReleaseF4SLive;

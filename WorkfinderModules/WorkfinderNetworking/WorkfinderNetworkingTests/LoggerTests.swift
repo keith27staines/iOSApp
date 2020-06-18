@@ -62,39 +62,6 @@ class LoggerTests: XCTestCase {
         XCTAssertEqual(log.debugMessages.count, 1)
     }
     
-    func test_logDataTaskSuccess_with_invalid_data() {
-        let log = MockF4SAnalyticsAndDebugging()
-        let sut = NetworkCallLogger(log: log)
-        var request = URLRequest(url: testURL)
-        request.httpBody = Data()
-        request.allHTTPHeaderFields = ["headerField1":"headerField1"]
-        let response = HTTPURLResponse(url: testURL, statusCode: 200, httpVersion: "httpVersion", headerFields: ["header1":"header1"])!
-        let responseData = "ResponseData".data(using: String.Encoding.utf8)!
-        sut.logDataTaskSuccess(request: request, response: response, responseData: responseData)
-        let expectedLogText = """
-
-
-
-        -----------------------------------------------------------------------
-        NETWORK SUCCESS
-        Request method: GET
-        On https://someserver.com
-        Code: 200
-
-        Request data: 0 bytes
-
-        Response data:
-        ResponseData
-        Request Headers:
-        headerField1:  headerField1
-        -----------------------------------------------------------------------
-
-
-        """
-        XCTAssertEqual(log.debugMessages[0], expectedLogText)
-        XCTAssertEqual(log.debugMessages.count, 1)
-    }
-    
     func test_connection_error_is_not_notified() {
         let log = MockF4SAnalyticsAndDebugging()
         let sut = NetworkCallLogger(log: log)
@@ -118,35 +85,6 @@ class LoggerTests: XCTestCase {
         error.urlRequest = request
         error.responseData = responseData
         sut.logDataTaskFailure(error: error)
-        print(">>>")
-        print(log.loggedErrorMessages[0])
-        print("<<<")
-        let expectedLogText = """
-
-
-
-        -----------------------------------------------------------------------
-        NETWORK ERROR
-        Title: Server error 400
-        Description: Bad request
-        Request method: POST
-        On https://someserver.com
-        Code: 400
-
-        Request data:
-        RequestData
-
-        Response data:
-        ResponseData
-        Request Headers:
-        headerField1:  headerField1
-        -----------------------------------------------------------------------
-
-
-        """
-        print(">>>")
-        print(expectedLogText)
-        print("<<<")
         XCTAssertEqual(log.loggedErrorMessages[0], expectedLogText)
         XCTAssertEqual(log.loggedErrorMessages.count, 1)
         XCTAssertEqual(log.notifiedErrors.count, 1)
@@ -155,3 +93,29 @@ class LoggerTests: XCTestCase {
 }
 
 extension String : Error {}
+
+
+/// This is the expected text for the network error log
+fileprivate let expectedLogText = """
+
+
+
+-----------------------------------------------------------------------
+NETWORK ERROR
+Title: Server error 400
+Description: Bad request
+Request method: POST
+On https://someserver.com
+Code: 400
+
+Request data:
+RequestData
+
+Response data:
+ResponseData
+Request Headers:
+headerField1:  headerField1
+-----------------------------------------------------------------------
+
+
+"""
