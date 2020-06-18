@@ -2,7 +2,7 @@
 
 
 
-## Founders4Schools iOS Workfinder
+## iOS Workfinder
 
 
 
@@ -29,7 +29,7 @@ This readme describes what you need to know and do in order to build an iOS Work
 
 ### Product Description
 
-iOS Workfinder is a native iPhone-only app written exclusively in Swift 5.1. It is part of the Workfinder LTD portfolio. iOS Workfinder's main use case is to enable students to quickly find work experience placements with businesses in their area.
+iOS Workfinder is a native iPhone-only app written exclusively in Swift 5.2. It is part of the Workfinder LTD portfolio. iOS Workfinder's main use case is to enable students to quickly find work experience placements with businesses in their area.
 
 ### Development Computer
 
@@ -49,7 +49,7 @@ The main project which includes all in-house written code is exclusively Swift 5
 
 ### Target device and iOS version
 
-The target device is an iPhone 5s or later.
+The target devices are iPhone 5s or later.
 The target version of iOS is iOS 11.0 or later
 
 ### Sourcecode Repository
@@ -66,7 +66,7 @@ When a feature branch is completed it is merged (typiclly with rebase) into *dev
 
 ### Step-by-step guid to building a release
 
-1. You will need to have an Apple developer account which is also a member of the Founders4Schools iOS team. Alternatively, if you have been given access by F4S, you can use the already correctly configured account dev@founders4schools.org.uk.
+1. You will need to have an Apple developer account which is also a member of the Workfinder iOS team. 
 
 2. Use a computer running macOS Catalina. More or less any machine will do in a pinch, from a 2013 MacBook Air up, but you will experience far less frustration if you have a machine with 16GB+ RAM and a multi-core processor.
 
@@ -74,7 +74,7 @@ When a feature branch is completed it is merged (typiclly with rebase) into *dev
 
 4. In the Xcode  preferences pane, add the developer's account if not already done
 
-5. In the Xcode preferences pane, add an appropriate Github account with access to https://github.com/workfinder/iOSApp if not already done. Ensure that HTTPS is selected rather than SSH.
+5. In the Xcode preferences pane, add an appropriate Gitlab account with access to https://github.com/workfinder/iOSApp if not already done. Ensure that HTTPS is selected rather than SSH.
 
 6. All other Xcode settings can be safely left at their default values.
 
