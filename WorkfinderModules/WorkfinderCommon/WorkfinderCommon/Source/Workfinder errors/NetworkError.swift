@@ -7,7 +7,9 @@
 //
 
 import Foundation
+
 public let unexpectedErrorCode = 1202
+
 public enum WorkfinderErrorType {
     case error(NSError)
     case notImplementedYet
@@ -18,12 +20,11 @@ public enum WorkfinderErrorType {
     case networkConnectivity
     case custom(title: String, description: String)
     
-    var code: Int {
+    public var code: Int {
         switch self {
         // http error responses
         case .http(_, let response, _): return response?.statusCode ?? unexpectedErrorCode
-            
-        // start from 1000 allowing space for http response codes
+        // start workfinder errors from 1000 reserving space below for http response codes
         case .error: return 1000
         case .notImplementedYet: return 1001
         case .invalidUrl(_): return 1002
@@ -34,25 +35,39 @@ public enum WorkfinderErrorType {
         }
     }
     
-    var title: String {
+    public var title: String {
+        let code = " \(self.code)"
         switch self {
-        case .error: return "1202 Unexpected error"
-        case .notImplementedYet: return "Not implemented"
-        case .invalidUrl(_): return "Invalid Url"
-        case .deserialization(_): return "Deserialization error"
-        case .noData: return "No data"
+        case .error: return "Unexpected error" + code
+        case .notImplementedYet: return "Not implemented" + code
+        case .invalidUrl(_): return "Invalid Url" + code
+        case .deserialization(_): return "Deserialization error" + code
+        case .noData: return "No data" + code
         case .http(_,let response, _):
-            guard let response = response else { return "No https response data" }
+            guard let response = response else { return "No https response data" + code }
             switch response.statusCode {
-            case 200...299: return "Error handling error"
-            default: return "Server error"
+            case 200...299: return "Error handling error" + code
+            default: return "Server error" + code
             }
-        case .networkConnectivity: return "Cannot contact server"
-        case .custom(let title,_): return title
+        case .networkConnectivity: return "Cannot contact server" + code
+        case .custom(let title,_): return title + code
         }
     }
     
-    var description: String {
+    public var shouldNotify: Bool {
+        switch self {
+        case .error(_): return true
+        case .notImplementedYet: return true
+        case .invalidUrl(_): return true
+        case .deserialization(_): return true
+        case .noData: return true
+        case .http(request: _, response: _, data: _): return true
+        case .networkConnectivity: return false
+        case .custom(title: _, description: _): return true
+        }
+    }
+    
+    public var description: String {
         switch self {
         case .error: return "An unexpected error has occurred. We are looking into it."
         case .notImplementedYet: return "Not implemented"
@@ -78,7 +93,7 @@ public enum WorkfinderErrorType {
         }
     }
     
-    var retry: Bool {
+    public var retry: Bool {
         switch self.code {
         case 501...599: return true
         default: return false
@@ -109,6 +124,15 @@ public class WorkfinderError: Error {
         self.errorType = errorType
         self.attempting = attempting
         self.retryHandler = retryHandler
+    }
+    
+    public func asNSError() -> NSError {
+        return NSError(domain: "Workfinder", code: code, userInfo: [
+            "title" : title,
+            "code" :  code,
+            "description": description
+            ]
+        )
     }
     
     /*

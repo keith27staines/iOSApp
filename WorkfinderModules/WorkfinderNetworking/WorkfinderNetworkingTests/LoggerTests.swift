@@ -95,25 +95,41 @@ class LoggerTests: XCTestCase {
         XCTAssertEqual(log.debugMessages.count, 1)
     }
     
-    func test_logDataTaskFailure() {
+    func test_connection_error_is_not_notified() {
+        let log = MockF4SAnalyticsAndDebugging()
+        let sut = NetworkCallLogger(log: log)
+        let error = WorkfinderError(errorType: .networkConnectivity, attempting: "")
+        sut.logDataTaskFailure(error: error)
+        XCTAssertEqual(log.loggedErrorMessages.count, 1)
+        XCTAssertEqual(log.notifiedErrors.count, 0)
+    }
+    
+    func test_logDataTaskFailure_format_and_is_notified() {
         let log = MockF4SAnalyticsAndDebugging()
         let sut = NetworkCallLogger(log: log)
         var request = URLRequest(url: testURL)
         request.httpBody = "RequestData".data(using: String.Encoding.utf8)!
         request.allHTTPHeaderFields = ["headerField1":"headerField1"]
+        request.httpMethod = "POST"
         let response = HTTPURLResponse(url: testURL, statusCode: 400, httpVersion: "httpVersion", headerFields: ["header1":"header1"])!
         let responseData = "ResponseData".data(using: String.Encoding.utf8)!
         XCTAssertEqual(log.debugMessages.count, 0)
-        sut.logDataTaskFailure(attempting: "Tried to do something", error: "Error!", request: request, response: response, responseData: responseData)
+        let error = WorkfinderError(response: response, retryHandler: nil)!
+        error.urlRequest = request
+        error.responseData = responseData
+        sut.logDataTaskFailure(error: error)
+        print(">>>")
+        print(log.loggedErrorMessages[0])
+        print("<<<")
         let expectedLogText = """
 
 
 
         -----------------------------------------------------------------------
         NETWORK ERROR
-        attempting: Tried to do something
-        Description: The operation couldn’t be completed. (Swift.String error 1.)
-        Request method: GET
+        Title: Server error 400
+        Description: Bad request
+        Request method: POST
         On https://someserver.com
         Code: 400
 
@@ -128,6 +144,9 @@ class LoggerTests: XCTestCase {
 
 
         """
+        print(">>>")
+        print(expectedLogText)
+        print("<<<")
         XCTAssertEqual(log.loggedErrorMessages[0], expectedLogText)
         XCTAssertEqual(log.loggedErrorMessages.count, 1)
         XCTAssertEqual(log.notifiedErrors.count, 1)

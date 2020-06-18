@@ -37,7 +37,8 @@ public class NetworkCallLogger : NetworkCallLoggerProtocol {
         if let attempting = error.attempting {
             text = "\(text)\nattempting: \(attempting)"
         }
-        text = "\(text)\nDescription: \(error.localizedDescription)"
+        text = "\(text)\nTitle: \(error.title)"
+        text = "\(text)\nDescription: \(error.description)"
         text = "\(text)\nRequest method: \(requestMethod)"
         text = "\(text)\nOn \(requestUrl)"
         text = "\(text)\nCode: \(code)"
@@ -55,6 +56,9 @@ public class NetworkCallLogger : NetworkCallLoggerProtocol {
         }
         text = "\(text)\n\(separator)\n\n"
         log.error(message: text, functionName: #function, fileName: #file, lineNumber: #line)
+        if error.errorType.shouldNotify {
+            log.notifyError(error.asNSError(), functionName: #function, fileName: #file, lineNumber: #line)
+        }
     }
     
     func taskFailureToError(code: Int, text: String) -> NSError {
