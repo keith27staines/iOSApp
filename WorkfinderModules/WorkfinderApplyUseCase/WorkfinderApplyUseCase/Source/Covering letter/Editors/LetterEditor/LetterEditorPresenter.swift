@@ -101,19 +101,14 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
                 picklist.type == .duration
             }),
             let duration = durationPicklist.selectedItems.first,
+            let lowerDuration = duration.range?.lower,
+            let upperDuration = duration.range?.upper,
             let startDate = Date.workfinderDateStringToDate(availabilityStart)?.startOfDay,
             let endDate = Date.workfinderDateStringToDate(availabilityEnd)?.endOfDay
             else { return }
         
         let availabilityInterval = endDate.timeIntervalSince(startDate)
-        let durationInterval: TimeInterval
-        if let upper = duration.range?.upper {
-            durationInterval = Double(upper) * 7.0 * 24.0 * 3600.0
-        } else if let lower = duration.range?.lower {
-            durationInterval = Double(lower) * 7.0 * 24.0 * 3600.0
-        } else {
-            durationInterval = 0.0
-        }
+        let durationInterval = Double(upperDuration - lowerDuration) * 7.0 * 24.0 * 3600.0
         if durationInterval > availabilityInterval + 1 {
             consistencyError = WorkfinderError(errorType: .custom(title: "Inconsistent duration and availability", description: "Please choose a duration that fits within your availability"), attempting: "Consistency check")
             durationPicklist.deselectAll()
