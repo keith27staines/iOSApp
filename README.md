@@ -6,7 +6,7 @@
 
 
 
-This readme describes what you need to know and do in order to build an iOS Workfinder release. 
+This readme describes what you need to know and do in order to build an iOS Workfinder 3 release. 
 
 
 
