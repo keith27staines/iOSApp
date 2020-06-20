@@ -32,10 +32,34 @@ public struct Candidate: Codable {
     public var allowedSharingWithEmployers: Bool?
     
     public func age(on date: Date = Date()) -> Int? {
-        guard let dobString = dateOfBirth, let dob = Date.workfinderDateStringToDate(dobString) else {
+        guard let dobString = dateOfBirth,
+            let dob = Date.workfinderDateStringToDate(dobString) else {
             return nil
         }
-        return Calendar.current.dateComponents([.year], from: dob, to: date).year!
+        let dobComponents = Calendar.current.dateComponents([.year, .month, .day], from: dob)
+        let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: date)
+        guard
+            let year = dateComponents.year,
+            let month = dateComponents.month,
+            let day = dateComponents.day,
+            let dobYear = dobComponents.year,
+            let dobMonth = dobComponents.month,
+            let dobDay = dobComponents.day
+            else { return nil }
+        let yearDiff = year - dobYear
+        let monthDiff = month - dobMonth
+        let dayDiff = day - dobDay
+        var age: Int = 0
+        if monthDiff > 0 {
+            age = yearDiff
+        } else if monthDiff < 0 {
+            age = yearDiff - 1
+        } else if dayDiff >= 0 {
+            age = yearDiff
+        } else {
+            age = yearDiff - 1
+        }
+        return age >= 0 ? age : nil
     }
     
     var userSummary: UserSummary

@@ -40,26 +40,33 @@ class CandidateTests: XCTestCase {
     }
 
     func test_age_day_before_18th_birthday() {
-        let sut = makeSUT()
-        let testDate = DateComponents(calendar: Calendar.current, year: 2018, month: 01, day: 1).date
+        let sut = makeSUT(dobString: "2000-06-15")
+        let testDate = DateComponents(calendar: Calendar.current, year: 2018, month: 06, day: 14).date
         XCTAssertEqual(sut.age(on: testDate!), 17)
     }
 
-    func test_age_on_birthday() {
+    func test_age_on_18th_birthday() {
         let sut = makeSUT(dobString: "2000-06-15")
-        let testDate = DateComponents(calendar: Calendar.current, year: 2016, month: 6, day: 15).date
-        XCTAssertEqual(sut.age(on: testDate!), 15)
+        let testDate = DateComponents(calendar: Calendar.current, year: 2018, month: 6, day: 15).date
+        XCTAssertEqual(sut.age(on: testDate!), 18)
     }
-
-    func test_age_one_day_after_birthday() {
+    
+    func test_age_on_day_after_18_birthday() {
         let sut = makeSUT(dobString: "2000-06-15")
-        let testDate = DateComponents(calendar: Calendar.current, year: 2016, month: 6, day: 16).date
-        XCTAssertEqual(sut.age(on: testDate!), 16)
+        let testDate = DateComponents(calendar: Calendar.current, year: 2018, month: 6, day: 16).date
+        XCTAssertEqual(sut.age(on: testDate!), 18)
     }
 
     func test_age_before_dob_set() {
         let sut = Candidate()
         let testDate = DateComponents(calendar: Calendar.current, year: 2016, month: 6, day: 16).date
+        let age = sut.age(on: testDate!)
+        XCTAssertNil(age)
+    }
+    
+    func test_age_before_birth() {
+        let sut = makeSUT(dobString: "2000-06-15")
+        let testDate = DateComponents(calendar: Calendar.current, year: 1000, month: 6, day: 16).date
         let age = sut.age(on: testDate!)
         XCTAssertNil(age)
     }
