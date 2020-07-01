@@ -109,5 +109,6 @@ protocol RatePlacementProtocol: class {
 
 enum TabIndex : Int {
     case applications
+    case recommendations
     case map
 }
