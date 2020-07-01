@@ -9,6 +9,6 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
         let service = RecommendationsService(networkConfig: injected.networkConfig)
         let presenter = RecommendationsPresenter(service: service)
         let vc = RecommendationsViewController(presenter: presenter)
-        navigationRouter.present(vc, animated: true, completion: nil)
+        navigationRouter.push(viewController: vc, animated: true)
     }
 }

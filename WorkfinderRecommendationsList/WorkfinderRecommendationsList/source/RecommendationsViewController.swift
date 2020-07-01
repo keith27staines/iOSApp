@@ -10,8 +10,20 @@ class RecommendationsViewController: UIViewController {
     lazy var tableview: UITableView = {
         let view = UITableView()
         view.dataSource = self
+        view.delegate = self
         view.register(UITableViewCell.self, forCellReuseIdentifier: "recommendation")
         return view
+    }()
+    
+    lazy var noRecommendationsYet:UILabel = {
+        let label = UILabel()
+        label.text = "No recommendations yet.\n\nRecommendations will begin appearing here after you have made your first application"
+        label.font = WorkfinderFonts.title2
+        label.textColor = WorkfinderColors.textLight
+        label.backgroundColor = WorkfinderColors.white
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
     }()
     
     init(presenter: RecommendationsPresenter) {
@@ -42,6 +54,18 @@ class RecommendationsViewController: UIViewController {
     
     func refresh() {
         tableview.reloadData()
+        updateDisplayOfNoRecommendationsYet()
+    }
+    
+    func updateDisplayOfNoRecommendationsYet() {
+        noRecommendationsYet.removeFromSuperview()
+        guard !presenter.noRecommendationsYet else { return }
+        view.addSubview(noRecommendationsYet)
+        noRecommendationsYet.translatesAutoresizingMaskIntoConstraints = false
+        noRecommendationsYet.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        noRecommendationsYet.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        noRecommendationsYet.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 30).isActive = true
+        noRecommendationsYet.topAnchor.constraint(equalTo: view.topAnchor, constant: 30).isActive = true
     }
     
     func loadData() {
@@ -57,6 +81,12 @@ class RecommendationsViewController: UIViewController {
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+}
+
+extension RecommendationsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        UIView()
+    }
 }
 
 extension RecommendationsViewController: UITableViewDataSource {

@@ -12,6 +12,10 @@ class RecommendationsPresenter {
     
     weak var view: RecommendationsViewController?
     
+    var noRecommendationsYet: Bool {
+        recommendations.count == 0 ? true : false
+    }
+    
     func onViewDidLoad(view: RecommendationsViewController) {
         self.view = view
     }
