@@ -10,6 +10,14 @@
 		FC1B0A1D24AC6A3E0008F5CF /* WorkfinderRecommendationsList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1B0A1324AC6A3E0008F5CF /* WorkfinderRecommendationsList.framework */; };
 		FC1B0A2224AC6A3E0008F5CF /* WorkfinderRecommendationsListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1B0A2124AC6A3E0008F5CF /* WorkfinderRecommendationsListTests.swift */; };
 		FC1B0A2424AC6A3E0008F5CF /* WorkfinderRecommendationsList.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1B0A1624AC6A3E0008F5CF /* WorkfinderRecommendationsList.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FC1B0A3B24AC6B3C0008F5CF /* RecommendationsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1B0A3A24AC6B3C0008F5CF /* RecommendationsCoordinator.swift */; };
+		FC1B0A4124AC6B940008F5CF /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1B0A3D24AC6B940008F5CF /* WorkfinderCommon.framework */; };
+		FC1B0A4324AC6B940008F5CF /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1B0A3E24AC6B940008F5CF /* WorkfinderCoordinators.framework */; };
+		FC1B0A4524AC6B940008F5CF /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1B0A3F24AC6B940008F5CF /* WorkfinderServices.framework */; };
+		FC1B0A4724AC6B940008F5CF /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1B0A4024AC6B940008F5CF /* WorkfinderUI.framework */; };
+		FC1B0A4B24AC6CD80008F5CF /* RecommendationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1B0A4A24AC6CD80008F5CF /* RecommendationsViewController.swift */; };
+		FC1B0A4D24AC6D350008F5CF /* RecommendationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1B0A4C24AC6D350008F5CF /* RecommendationsPresenter.swift */; };
+		FC1B0A4F24AC6D850008F5CF /* RecommendationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1B0A4E24AC6D850008F5CF /* RecommendationsService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +37,14 @@
 		FC1B0A1C24AC6A3E0008F5CF /* WorkfinderRecommendationsListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderRecommendationsListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1B0A2124AC6A3E0008F5CF /* WorkfinderRecommendationsListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderRecommendationsListTests.swift; sourceTree = "<group>"; };
 		FC1B0A2324AC6A3E0008F5CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC1B0A3A24AC6B3C0008F5CF /* RecommendationsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsCoordinator.swift; sourceTree = "<group>"; };
+		FC1B0A3D24AC6B940008F5CF /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC1B0A3E24AC6B940008F5CF /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC1B0A3F24AC6B940008F5CF /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC1B0A4024AC6B940008F5CF /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC1B0A4A24AC6CD80008F5CF /* RecommendationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsViewController.swift; sourceTree = "<group>"; };
+		FC1B0A4C24AC6D350008F5CF /* RecommendationsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsPresenter.swift; sourceTree = "<group>"; };
+		FC1B0A4E24AC6D850008F5CF /* RecommendationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +52,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC1B0A4324AC6B940008F5CF /* WorkfinderCoordinators.framework in Frameworks */,
+				FC1B0A4524AC6B940008F5CF /* WorkfinderServices.framework in Frameworks */,
+				FC1B0A4124AC6B940008F5CF /* WorkfinderCommon.framework in Frameworks */,
+				FC1B0A4724AC6B940008F5CF /* WorkfinderUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +76,7 @@
 				FC1B0A1524AC6A3E0008F5CF /* WorkfinderRecommendationsList */,
 				FC1B0A2024AC6A3E0008F5CF /* WorkfinderRecommendationsListTests */,
 				FC1B0A1424AC6A3E0008F5CF /* Products */,
+				FC1B0A3C24AC6B940008F5CF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,6 +92,7 @@
 		FC1B0A1524AC6A3E0008F5CF /* WorkfinderRecommendationsList */ = {
 			isa = PBXGroup;
 			children = (
+				FC1B0A3924AC6B030008F5CF /* source */,
 				FC1B0A1624AC6A3E0008F5CF /* WorkfinderRecommendationsList.h */,
 				FC1B0A1724AC6A3E0008F5CF /* Info.plist */,
 			);
@@ -84,6 +106,28 @@
 				FC1B0A2324AC6A3E0008F5CF /* Info.plist */,
 			);
 			path = WorkfinderRecommendationsListTests;
+			sourceTree = "<group>";
+		};
+		FC1B0A3924AC6B030008F5CF /* source */ = {
+			isa = PBXGroup;
+			children = (
+				FC1B0A3A24AC6B3C0008F5CF /* RecommendationsCoordinator.swift */,
+				FC1B0A4A24AC6CD80008F5CF /* RecommendationsViewController.swift */,
+				FC1B0A4C24AC6D350008F5CF /* RecommendationsPresenter.swift */,
+				FC1B0A4E24AC6D850008F5CF /* RecommendationsService.swift */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+		FC1B0A3C24AC6B940008F5CF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC1B0A3D24AC6B940008F5CF /* WorkfinderCommon.framework */,
+				FC1B0A3E24AC6B940008F5CF /* WorkfinderCoordinators.framework */,
+				FC1B0A3F24AC6B940008F5CF /* WorkfinderServices.framework */,
+				FC1B0A4024AC6B940008F5CF /* WorkfinderUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +192,7 @@
 				TargetAttributes = {
 					FC1B0A1224AC6A3E0008F5CF = {
 						CreatedOnToolsVersion = 11.5;
+						LastSwiftMigration = 1150;
 					};
 					FC1B0A1B24AC6A3E0008F5CF = {
 						CreatedOnToolsVersion = 11.5;
@@ -195,6 +240,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC1B0A4F24AC6D850008F5CF /* RecommendationsService.swift in Sources */,
+				FC1B0A4D24AC6D350008F5CF /* RecommendationsPresenter.swift in Sources */,
+				FC1B0A3B24AC6B3C0008F5CF /* RecommendationsCoordinator.swift in Sources */,
+				FC1B0A4B24AC6CD80008F5CF /* RecommendationsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +389,7 @@
 		FC1B0A2824AC6A3E0008F5CF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
@@ -357,6 +407,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -365,6 +416,7 @@
 		FC1B0A2924AC6A3E0008F5CF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
@@ -390,6 +442,7 @@
 		FC1B0A2B24AC6A3E0008F5CF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderRecommendationsListTests/Info.plist;
@@ -408,6 +461,7 @@
 		FC1B0A2C24AC6A3E0008F5CF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderRecommendationsListTests/Info.plist;
@@ -489,6 +543,7 @@
 		FC1B0A2E24AC6A690008F5CF /* DebugF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
@@ -506,6 +561,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -514,6 +570,7 @@
 		FC1B0A2F24AC6A690008F5CF /* DebugF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderRecommendationsListTests/Info.plist;
@@ -595,6 +652,7 @@
 		FC1B0A3124AC6A730008F5CF /* DebugF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
@@ -612,6 +670,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -620,6 +679,7 @@
 		FC1B0A3224AC6A730008F5CF /* DebugF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderRecommendationsListTests/Info.plist;
@@ -695,6 +755,7 @@
 		FC1B0A3424AC6A980008F5CF /* ReleaseF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
@@ -720,6 +781,7 @@
 		FC1B0A3524AC6A980008F5CF /* ReleaseF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderRecommendationsListTests/Info.plist;
@@ -795,6 +857,7 @@
 		FC1B0A3724AC6AA50008F5CF /* ReleaseF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
@@ -820,6 +883,7 @@
 		FC1B0A3824AC6AA50008F5CF /* ReleaseF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderRecommendationsListTests/Info.plist;
