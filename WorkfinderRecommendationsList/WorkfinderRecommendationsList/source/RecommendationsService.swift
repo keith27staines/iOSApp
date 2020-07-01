@@ -13,6 +13,4 @@ class RecommendationsService: WorkfinderService, RecommendationsServiceProtocol 
             completion(Result<[Recommendation], Error>.failure(WorkfinderError.init(title: "No data", description: "Service is not wired to server")))
         }
     }
-    
-    
 }
