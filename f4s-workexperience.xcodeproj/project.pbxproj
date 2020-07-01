@@ -90,6 +90,8 @@
 		FC56A0F02455B62B00A7EC3F /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC56A0EF2455B62B00A7EC3F /* WorkfinderCommon.framework */; };
 		FC56A0F12455B62B00A7EC3F /* WorkfinderCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC56A0EF2455B62B00A7EC3F /* WorkfinderCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC5D3C6E20FE1CEC00F89169 /* Gemfile in Resources */ = {isa = PBXBuildFile; fileRef = FC5D3C6D20FE1CEB00F89169 /* Gemfile */; };
+		FC5DF50E24ACA22E0089E839 /* WorkfinderRecommendationsList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC5DF50D24ACA22E0089E839 /* WorkfinderRecommendationsList.framework */; };
+		FC5DF50F24ACA22E0089E839 /* WorkfinderRecommendationsList.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC5DF50D24ACA22E0089E839 /* WorkfinderRecommendationsList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC62B35B2494C00500013CFF /* WorkfinderVersionCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC62B35A2494C00500013CFF /* WorkfinderVersionCheck.framework */; };
 		FC62B35C2494C27100013CFF /* WorkfinderVersionCheck.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC62B35A2494C00500013CFF /* WorkfinderVersionCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC681C001F57473D0077BECA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFE1F57473D0077BECA /* Podfile */; };
@@ -171,6 +173,7 @@
 			files = (
 				FCBA983E24506D8B00C3D2E6 /* WorkfinderAppLogic.framework in Embed Frameworks */,
 				FC06A19E24641C930023DE99 /* WorkfinderApplications.framework in Embed Frameworks */,
+				FC5DF50F24ACA22E0089E839 /* WorkfinderRecommendationsList.framework in Embed Frameworks */,
 				FCBA984024506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework in Embed Frameworks */,
 				FC2A64962494D18700DA28DD /* WorkfinderAssociationDetails.framework in Embed Frameworks */,
 				FC56A0F12455B62B00A7EC3F /* WorkfinderCommon.framework in Embed Frameworks */,
@@ -312,6 +315,7 @@
 		FC5336ED2488D33500DA3033 /* WorkfinderVersionCheck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderVersionCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC56A0EF2455B62B00A7EC3F /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5D3C6D20FE1CEB00F89169 /* Gemfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Gemfile; sourceTree = "<group>"; };
+		FC5DF50D24ACA22E0089E839 /* WorkfinderRecommendationsList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderRecommendationsList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC62B35A2494C00500013CFF /* WorkfinderVersionCheck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderVersionCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC681BFE1F57473D0077BECA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		FC681BFF1F57473D0077BECA /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
@@ -381,6 +385,7 @@
 			files = (
 				FC7B63E424652FD2006AC0C6 /* AuthenticationServices.framework in Frameworks */,
 				FC06A19D24641C930023DE99 /* WorkfinderApplications.framework in Frameworks */,
+				FC5DF50E24ACA22E0089E839 /* WorkfinderRecommendationsList.framework in Frameworks */,
 				FCBA983D24506D8B00C3D2E6 /* WorkfinderAppLogic.framework in Frameworks */,
 				FCBA983F24506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework in Frameworks */,
 				FC2A64952494D18700DA28DD /* WorkfinderAssociationDetails.framework in Frameworks */,
@@ -607,6 +612,7 @@
 		74E1A74324CAFF4EF516E014 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC5DF50D24ACA22E0089E839 /* WorkfinderRecommendationsList.framework */,
 				FC2A64D82495026300DA28DD /* WorkfinderViewRecommendation.framework */,
 				FC2A64942494D18700DA28DD /* WorkfinderAssociationDetails.framework */,
 				FC62B35A2494C00500013CFF /* WorkfinderVersionCheck.framework */,
