@@ -5,9 +5,11 @@ class RecommendationsPresenter {
     
     let service: RecommendationsServiceProtocol
     var recommendations = [Recommendation]()
+    let userRepo: UserRepositoryProtocol
     
-    init(service: RecommendationsServiceProtocol) {
+    init(service: RecommendationsServiceProtocol, userRepo:UserRepositoryProtocol) {
         self.service = service
+        self.userRepo = userRepo
     }
     
     weak var view: RecommendationsViewController?
@@ -21,6 +23,11 @@ class RecommendationsPresenter {
     }
     
     func loadData(completion: @escaping (Error?) -> Void) {
+        guard let _ = userRepo.loadAccessToken()
+            else {
+            completion(nil)
+            return
+        }
         service.fetchRecommendations(userUuid: "userUuid") { [weak self] (result) in
             guard let self = self else { return }
             switch result {
