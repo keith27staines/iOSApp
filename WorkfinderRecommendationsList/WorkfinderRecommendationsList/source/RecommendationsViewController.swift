@@ -21,17 +21,27 @@ class RecommendationsViewController: UIViewController {
     
     override func viewDidLoad() {
         presenter.onViewDidLoad(view: self)
+        configureNavigationBar()
+        configureViews()
         loadData()
     }
     
+    func configureNavigationBar() {
+        navigationItem.title = "Recommendations"
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backButton
+        styleNavigationController()
+    }
+    
     func configureViews() {
+        view.backgroundColor = UIColor.white
         let guide = view.safeAreaLayoutGuide
         view.addSubview(tableview)
         tableview.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
     }
     
     func refresh() {
-        
+        tableview.reloadData()
     }
     
     func loadData() {
