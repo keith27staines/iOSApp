@@ -17,7 +17,7 @@ class RecommendationsViewController: UIViewController {
     
     lazy var noRecommendationsYet:UILabel = {
         let label = UILabel()
-        label.text = "No recommendations yet.\n\nRecommendations will begin appearing here after you have made your first application"
+        label.text = "No recommendations yet.\n\nRecommendations will begin appearing here soon after you have made your first application"
         label.font = WorkfinderFonts.title2
         label.textColor = WorkfinderColors.textLight
         label.backgroundColor = WorkfinderColors.white
@@ -35,6 +35,9 @@ class RecommendationsViewController: UIViewController {
         presenter.onViewDidLoad(view: self)
         configureNavigationBar()
         configureViews()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         loadData()
     }
     
@@ -59,7 +62,7 @@ class RecommendationsViewController: UIViewController {
     
     func updateDisplayOfNoRecommendationsYet() {
         noRecommendationsYet.removeFromSuperview()
-        guard !presenter.noRecommendationsYet else { return }
+        guard presenter.noRecommendationsYet else { return }
         view.addSubview(noRecommendationsYet)
         noRecommendationsYet.translatesAutoresizingMaskIntoConstraints = false
         noRecommendationsYet.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
