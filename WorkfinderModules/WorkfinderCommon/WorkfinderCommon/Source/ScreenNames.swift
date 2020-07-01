@@ -31,6 +31,7 @@ public struct TrackEvent {
 public class TrackEventFactory {
     public enum TabName: String {
         case applications
+        case recommendations
         case notifications
         case search
     }

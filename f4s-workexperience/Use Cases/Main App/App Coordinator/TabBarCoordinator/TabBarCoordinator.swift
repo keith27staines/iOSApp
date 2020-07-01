@@ -5,6 +5,7 @@ import WorkfinderUI
 import WorkfinderCoordinators
 import WorkfinderOnboardingUseCase
 import WorkfinderApplications
+import WorkfinderRecommendationsList
 import WorkfinderCompanyDetailsUseCase
 
 class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
@@ -117,11 +118,14 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         
         let searchNavigationController = searchCoordinator.navigationRouter.navigationController
         let applicationsNavigationController = applicationsCoordinator.navigationRouter.navigationController
+        let recommendationsNavigationController = recommendationsCoordinator.navigationRouter.navigationController
         searchCoordinator.start()
         applicationsCoordinator.start()
+        recommendationsCoordinator.start()
         tabBarViewController = TabBarViewController()
         tabBarViewController.viewControllers = [
             applicationsNavigationController,
+            recommendationsNavigationController,
             searchNavigationController]
         tabBarViewController.delegate = self
     }
@@ -132,6 +136,16 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         navigationController.tabBarItem = UITabBarItem(title: "Applications", image: icon, selectedImage: nil)
         let router = NavigationRouter(navigationController: navigationController)
         let coordinator = ApplicationsCoordinator(parent: nil, navigationRouter: router, inject: injected)
+        addChildCoordinator(coordinator)
+        return coordinator
+    }()
+    
+    lazy var recommendationsCoordinator: RecommendationsCoordinator = {
+        let navigationController = UINavigationController()
+        let icon = UIImage(named: "recommendations")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        navigationController.tabBarItem = UITabBarItem(title: "Recommendations", image: icon, selectedImage: nil)
+        let router = NavigationRouter(navigationController: navigationController)
+        let coordinator = RecommendationsCoordinator(parent: nil, navigationRouter: router, inject: injected)
         addChildCoordinator(coordinator)
         return coordinator
     }()
@@ -222,6 +236,8 @@ extension TabBarCoordinator: UITabBarControllerDelegate {
             log.track(event: TrackEventFactory.makeTabTap(tab: .search))
         case applicationsCoordinator.navigationRouter.navigationController:
             log.track(event: TrackEventFactory.makeTabTap(tab: .applications))
+        case recommendationsCoordinator.navigationRouter.navigationController:
+            log.track(event: TrackEventFactory.makeTabTap(tab: .recommendations))
         default:
             fatalError("unknown coordinator")
         }
