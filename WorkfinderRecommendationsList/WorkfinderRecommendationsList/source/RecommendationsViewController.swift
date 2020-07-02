@@ -80,6 +80,7 @@ class RecommendationsViewController: UIViewController {
             self.messageHandler.displayOptionalErrorIfNotNil(optionalError) {
                 self.loadData()
             }
+            self.refresh()
         }
     }
     
@@ -108,6 +109,88 @@ extension RecommendationsViewController: UITableViewDataSource {
         cell.textLabel?.text = recommendation.association
         return cell
     }
+}
+
+class RecommendationTilePresenter {
+    var view: RecommendationTileView?
+    var companyName: String?
     
+}
+
+
+
+class RecommendationTileView: UITableViewCell {
     
+    var presenter: RecommendationTilePresenter? {
+        didSet {
+            presenter?.view = self
+            refreshFromPresenter()
+        }
+    }
+    
+    override func prepareForReuse() {
+        presenter?.view = nil
+        presenter = nil
+    }
+    
+    func refreshFromPresenter() {
+        
+    }
+    
+    lazy var companyNameLabel = UILabel()
+    lazy var industryLabel = UILabel()
+    lazy var hostNameLabel = UILabel()
+    lazy var hostRoleLabel = UILabel()
+    lazy var companyLogo = CompanyLogoView()
+    lazy var hostPhoto = F4SSelfLoadingImageView()
+    
+    lazy var companyStack: UIStackView = {
+        let textStack = UIStackView(arrangedSubviews: [
+            self.companyNameLabel,
+            self.industryLabel
+        ])
+        textStack.axis = .vertical
+        textStack.spacing = 8
+        let stack = UIStackView(arrangedSubviews: [
+            self.companyLogo,
+            textStack
+        ])
+        stack.axis = .horizontal
+        stack.spacing = 12
+        return stack
+    }()
+    
+    lazy var hostStack: UIStackView = {
+        let textStack = UIStackView(arrangedSubviews: [
+            self.hostNameLabel,
+            self.hostRoleLabel
+        ])
+        textStack.axis = .vertical
+        textStack.spacing = 8
+        let stack = UIStackView(arrangedSubviews: [
+            self.hostPhoto,
+            textStack
+        ])
+        stack.axis = .horizontal
+        stack.spacing = 12
+        return stack
+    }()
+    
+    lazy var fullStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            self.companyStack,
+            self.hostStack
+        ])
+        stack.axis = .vertical
+        stack.spacing = 8
+        return stack
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        contentView.addSubview(fullStack)
+        fullStack.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 4))
+    }
+    
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }

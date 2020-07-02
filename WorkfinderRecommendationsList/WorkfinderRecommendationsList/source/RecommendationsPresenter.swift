@@ -31,8 +31,8 @@ class RecommendationsPresenter {
         service.fetchRecommendations(userUuid: "userUuid") { [weak self] (result) in
             guard let self = self else { return }
             switch result {
-            case .success(let recommendations):
-                self.recommendations = recommendations
+            case .success(let serverList):
+                self.recommendations = serverList.results
                 completion(nil)
             case .failure(let error):
                 completion(error)

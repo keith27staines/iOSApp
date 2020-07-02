@@ -1,11 +1,39 @@
 
 import UIKit
 
-public class CompanyLogoView: UIView {
+public class CompanyLogoView: SelfloadingImageView {
+    
+    public func load(companyName: String,
+                     urlString: String?,
+                     fetcher: ImageFetching = ImageFetcher(),
+                     completion: (() -> Void)?) {
+        
+        logoView.load(urlString: urlString,
+                      defaultImage: makeImageFromFirstCharacter(companyName),
+                      fetcher: fetcher,
+                      completion: completion)
+    }
+}
+
+public class HostPhotoView: SelfloadingImageView {
+    
+    public func load(hostName: String,
+                     urlString: String?,
+                     fetcher: ImageFetching = ImageFetcher(),
+                     completion: (() -> Void)?) {
+        
+        logoView.load(urlString: urlString,
+                      defaultImage: makeImageFromFirstCharacter(hostName),
+                      fetcher: fetcher,
+                      completion: completion)
+    }
+}
+
+public class SelfloadingImageView: UIView {
     
     let widthPoints: CGFloat
     
-    private lazy var logoView: F4SSelfLoadingImageView = {
+    lazy var logoView: F4SSelfLoadingImageView = {
         let logoView = F4SSelfLoadingImageView()
         logoView.layer.masksToBounds = true
         logoView.layer.borderColor = UIColor.init(netHex: 0xE5E5E5).cgColor
@@ -16,8 +44,41 @@ public class CompanyLogoView: UIView {
         return logoView
     }()
     
-    public init(widthPoints: CGFloat = 64) {
+    lazy var defaultImage: UIImage = {
+        guard
+            let name = self.defaultLogoName,
+            let image = UIImage(named: name)
+            else { return makeImageFromFirstCharacter("?")
+        }
+        return image
+    }()
+    
+    func makeImageFromFirstCharacter(_ string: String) -> UIImage {
+        let backgroundColor = WorkfinderColors.primaryColor
+        let firstCharacter: Character = string.first ?? "?"
+        let image: UIImage = UIImage.from(
+            size: CGSize(width: widthPoints, height: widthPoints),
+            string: String(firstCharacter),
+            backgroundColor: backgroundColor)
+        return image
+    }
+    
+    public func load(
+        urlString: String,
+        defaultImage: UIImage,
+        fetcher: ImageFetching = ImageFetcher(),
+        completion: (() -> Void)?) {
+        logoView.load(urlString: urlString,
+                      defaultImage: defaultImage,
+                      fetcher: fetcher,
+                      completion: completion)
+    }
+    
+    let defaultLogoName: String?
+    
+    public init(widthPoints: CGFloat = 64, defaultLogoName: String? = nil) {
         self.widthPoints = widthPoints
+        self.defaultLogoName = defaultLogoName
         super.init(frame: CGRect.zero)
         addSubview(logoView)
         logoView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor).isActive = true
@@ -26,26 +87,7 @@ public class CompanyLogoView: UIView {
         logoView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         logoView.widthAnchor.constraint(equalTo: logoView.heightAnchor).isActive = true
         logoView.widthAnchor.constraint(equalToConstant: widthPoints).isActive = true
-        logoView.defaultImage = UIImage(named: "DefaultLogo")
         logoView.contentMode = .scaleAspectFit
-    }
-    
-    public func load(
-        companyName: String,
-        urlString: String?,
-        fetcher: ImageFetching = ImageFetcher(),
-        completion: (() -> Void)?) {
-        let backgroundColor = WorkfinderColors.primaryColor
-        let firstCharacter: Character = companyName.first ?? "?"
-        let defaultImage: UIImage = UIImage.from(
-            size: CGSize(width: widthPoints, height: widthPoints),
-            string: String(firstCharacter),
-            backgroundColor: backgroundColor)
-        logoView.load(urlString: urlString,
-                      defaultImage: defaultImage,
-                      fetcher: fetcher,
-                      completion: completion)
-        
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
