@@ -11,7 +11,7 @@ public class WorkplaceAndAssociationService {
     let companyService: CompanyServiceProtocol
     
     var recommendation: Recommendation?
-    var associationJson: AssociationJson?
+    public internal (set) var associationJson: AssociationJson?
     var companyLocationJson: CompanyLocationJson?
     var companyJson: CompanyJson?
     

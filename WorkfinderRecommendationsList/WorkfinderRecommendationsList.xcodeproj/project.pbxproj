@@ -18,6 +18,8 @@
 		FC1B0A4B24AC6CD80008F5CF /* RecommendationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1B0A4A24AC6CD80008F5CF /* RecommendationsViewController.swift */; };
 		FC1B0A4D24AC6D350008F5CF /* RecommendationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1B0A4C24AC6D350008F5CF /* RecommendationsPresenter.swift */; };
 		FC1B0A4F24AC6D850008F5CF /* RecommendationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1B0A4E24AC6D850008F5CF /* RecommendationsService.swift */; };
+		FC3C701624ADB621004869D0 /* RecommendationTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3C701524ADB621004869D0 /* RecommendationTileView.swift */; };
+		FC3C701824ADB661004869D0 /* RecommendationTilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3C701724ADB661004869D0 /* RecommendationTilePresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,8 @@
 		FC1B0A4A24AC6CD80008F5CF /* RecommendationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsViewController.swift; sourceTree = "<group>"; };
 		FC1B0A4C24AC6D350008F5CF /* RecommendationsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsPresenter.swift; sourceTree = "<group>"; };
 		FC1B0A4E24AC6D850008F5CF /* RecommendationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsService.swift; sourceTree = "<group>"; };
+		FC3C701524ADB621004869D0 /* RecommendationTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationTileView.swift; sourceTree = "<group>"; };
+		FC3C701724ADB661004869D0 /* RecommendationTilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationTilePresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +119,7 @@
 				FC1B0A4A24AC6CD80008F5CF /* RecommendationsViewController.swift */,
 				FC1B0A4C24AC6D350008F5CF /* RecommendationsPresenter.swift */,
 				FC1B0A4E24AC6D850008F5CF /* RecommendationsService.swift */,
+				FC3C701924ADB6D3004869D0 /* Recommendation tile */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -128,6 +133,15 @@
 				FC1B0A4024AC6B940008F5CF /* WorkfinderUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FC3C701924ADB6D3004869D0 /* Recommendation tile */ = {
+			isa = PBXGroup;
+			children = (
+				FC3C701524ADB621004869D0 /* RecommendationTileView.swift */,
+				FC3C701724ADB661004869D0 /* RecommendationTilePresenter.swift */,
+			);
+			path = "Recommendation tile";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,6 +257,8 @@
 				FC1B0A4F24AC6D850008F5CF /* RecommendationsService.swift in Sources */,
 				FC1B0A4D24AC6D350008F5CF /* RecommendationsPresenter.swift in Sources */,
 				FC1B0A3B24AC6B3C0008F5CF /* RecommendationsCoordinator.swift in Sources */,
+				FC3C701824ADB661004869D0 /* RecommendationTilePresenter.swift in Sources */,
+				FC3C701624ADB621004869D0 /* RecommendationTileView.swift in Sources */,
 				FC1B0A4B24AC6CD80008F5CF /* RecommendationsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

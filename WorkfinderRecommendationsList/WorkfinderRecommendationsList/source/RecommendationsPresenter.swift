@@ -1,15 +1,24 @@
 
 import WorkfinderCommon
+import WorkfinderServices
 
 class RecommendationsPresenter {
     
     let service: RecommendationsServiceProtocol
     var recommendations = [Recommendation]()
+    var tilePresenters = [Recommendation : RecommendationTilePresenter]()
     let userRepo: UserRepositoryProtocol
+    var workplaceServiceFactory: (() -> WorkplaceAndAssociationService)?
+    var hostServiceFactory: (() -> HostsProviderProtocol)?
     
-    init(service: RecommendationsServiceProtocol, userRepo:UserRepositoryProtocol) {
+    init(service: RecommendationsServiceProtocol,
+         userRepo:UserRepositoryProtocol,
+         workplaceServiceFactory: @escaping (() -> WorkplaceAndAssociationService),
+         hostServiceFactory: @escaping (() -> HostsProviderProtocol)) {
         self.service = service
         self.userRepo = userRepo
+        self.workplaceServiceFactory = workplaceServiceFactory
+        self.hostServiceFactory = hostServiceFactory
     }
     
     weak var view: RecommendationsViewController?
@@ -42,8 +51,20 @@ class RecommendationsPresenter {
     
     func numberOfSections() -> Int { 1 }
     func numberOfRowsForSection(_ section: Int) -> Int { recommendations.count }
-    func recommendationForIndexPath(_ indexPath: IndexPath) -> Recommendation {
-        return recommendations[indexPath.row]
+
+    func recommendationTilePresenterForIndexPath(_ indexPath: IndexPath) -> RecommendationTilePresenter {
+        let recommendation = recommendations[indexPath.row]
+        if let presenter = tilePresenters[recommendation] {
+            return presenter
+        }
+        let workplaceService = workplaceServiceFactory?()
+        let hostService = hostServiceFactory?()
+        let presenter = RecommendationTilePresenter(
+            recommendation: recommendation,
+            workplaceService: workplaceService,
+            hostService: hostService)
+        tilePresenters[recommendation] = presenter
+        return presenter
     }
     
 }

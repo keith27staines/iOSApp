@@ -1,5 +1,5 @@
 
-public struct Recommendation: Codable {
+public struct Recommendation: Codable, Hashable {
     public var uuid: F4SUUID?
     public var user: F4SUUID?
     public var association: F4SUUID?
