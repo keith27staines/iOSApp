@@ -55,7 +55,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
 
     }
 
-    public func processRecommendation(uuid: F4SUUID) {
+    public func dispatchRecommendationToSearchTab(uuid: F4SUUID) {
         closeMenu { [weak self] (success) in
             self?.navigateToMap()
             self?.searchCoordinator.processRecommendation(uuid: uuid)
@@ -147,7 +147,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         let router = NavigationRouter(navigationController: navigationController)
         let coordinator = RecommendationsCoordinator(parent: nil, navigationRouter: router, inject: injected)
         coordinator.onRecommendationSelected = { uuid in
-            self.processRecommendation(uuid: uuid)
+            self.dispatchRecommendationToSearchTab(uuid: uuid)
         }
         addChildCoordinator(coordinator)
         return coordinator
@@ -221,9 +221,9 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         navigateToMap()
     }
     
-    func processRecommendation(uuid: F4SUUID?) {
-        processRecommendation(uuid: uuid)
-    }
+//    func processRecommendationA(uuid: F4SUUID) {
+//        dispatchRecommendationToSearchTab(uuid: uuid)
+//    }
     
     func updateUnreadMessagesCount(_ count: Int) {
         tabBarViewController.configureTimelineTabBarWithCount(count: count)

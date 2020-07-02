@@ -10,9 +10,9 @@ public class MockTabBarCoordinator : MockCoreInjectionNavigationCoordinator, Tab
         
     }
     
-    var showRecommendationsCallCount = 0
-    public func processRecommendation(uuid: F4SUUID) {
-        showRecommendationsCallCount += 1
+    var dispatchRecommendationToSearchTabCount = 0
+    public func dispatchRecommendationToSearchTab(uuid: F4SUUID) {
+        dispatchRecommendationToSearchTabCount += 1
     }
     
     var updateBadgesCallCount = 0
