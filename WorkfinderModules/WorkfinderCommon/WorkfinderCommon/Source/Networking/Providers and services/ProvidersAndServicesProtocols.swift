@@ -42,13 +42,13 @@ public struct AssociationJson: Codable {
 
 /// Like an AssociationJson but with a full host object rather than a uuid
 public struct HostAssociationJson: Codable {
-    public let uuid: F4SUUID
-    public let locationUuid: F4SUUID
-    public let host: Host
-    public let title: String?
-    public let description: String?
-    public let started: String?
-    public let stopped: String?
+    public var uuid: F4SUUID
+    public var locationUuid: F4SUUID
+    public var host: Host
+    public var title: String?
+    public var description: String?
+    public var started: String?
+    public var stopped: String?
     public var isSelected: Bool = false
     
     public init(uuidAssociation: AssociationJson, host:Host) {
