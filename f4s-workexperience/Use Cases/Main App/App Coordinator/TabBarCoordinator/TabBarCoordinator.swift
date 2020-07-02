@@ -221,10 +221,6 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         navigateToMap()
     }
     
-//    func processRecommendationA(uuid: F4SUUID) {
-//        dispatchRecommendationToSearchTab(uuid: uuid)
-//    }
-    
     func updateUnreadMessagesCount(_ count: Int) {
         tabBarViewController.configureTimelineTabBarWithCount(count: count)
     }
