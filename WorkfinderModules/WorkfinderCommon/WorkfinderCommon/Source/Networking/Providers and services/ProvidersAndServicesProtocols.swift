@@ -14,13 +14,13 @@ public struct ServerListJson<A:Decodable>: Decodable {
 }
 
 public struct AssociationJson: Codable {
-    public let uuid: F4SUUID
-    public let locationUuid: F4SUUID
-    public let host: F4SUUID
-    public let title: String? = nil
-    public let description: String? = nil
-    public let started: String? = nil
-    public let stopped: String? = nil
+    public var uuid: F4SUUID
+    public var locationUuid: F4SUUID
+    public var host: F4SUUID
+    public var title: String? = nil
+    public var description: String? = nil
+    public var started: String? = nil
+    public var stopped: String? = nil
     public var isSelected: Bool = false
     
     public init(uuid: F4SUUID,locationUuid: F4SUUID, hostUuid: F4SUUID) {
