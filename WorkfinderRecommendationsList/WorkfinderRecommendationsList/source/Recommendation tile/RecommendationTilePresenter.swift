@@ -4,6 +4,7 @@ import WorkfinderServices
 
 class RecommendationTilePresenter {
     
+    weak var parentPresenter: RecommendationsPresenter?
     let recommendation: Recommendation
     let workplaceService: WorkplaceAndAssociationService?
     let hostService: HostsProviderProtocol?
@@ -82,10 +83,16 @@ class RecommendationTilePresenter {
         hostRole = self.workplaceService?.associationJson?.title
         hostPhoto = host?.photoUrlString
     }
+    
+    func onTileTapped() {
+        parentPresenter?.onTileTapped(self)
+    }
 
-    init(recommendation: Recommendation,
+    init(parent: RecommendationsPresenter,
+         recommendation: Recommendation,
          workplaceService: WorkplaceAndAssociationService?,
          hostService: HostsProviderProtocol?) {
+        self.parentPresenter = parent
         self.recommendation = recommendation
         self.workplaceService = workplaceService
         self.hostService = hostService

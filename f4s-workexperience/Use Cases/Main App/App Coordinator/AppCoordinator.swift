@@ -111,8 +111,9 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     func showSearch() { tabBarCoordinator.showSearch() }
 
     func showRecommendations(uuid: F4SUUID?) {
+        guard let uuid = uuid else { return }
         if let tabBarCoordinator = tabBarCoordinator {
-            tabBarCoordinator.showRecommendations(uuid: uuid)
+            tabBarCoordinator.processRecommendation(uuid: uuid)
         } else {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
                 self?.showRecommendations(uuid: uuid)

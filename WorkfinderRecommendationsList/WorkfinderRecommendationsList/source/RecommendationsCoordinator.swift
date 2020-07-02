@@ -9,6 +9,7 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
         let service = RecommendationsService(networkConfig: injected.networkConfig)
         let userRepo = injected.userRepository
         let presenter = RecommendationsPresenter(
+            coordinator: self,
             service: service,
             userRepo: userRepo,
             workplaceServiceFactory: workplaceServiceFactory,
@@ -24,6 +25,8 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
     func hostServiceFactory() -> HostsProviderProtocol {
         HostsProvider(networkConfig: injected.networkConfig)
     }
+    
+    public var onRecommendationSelected: ((F4SUUID) -> Void)?
     
     
 }

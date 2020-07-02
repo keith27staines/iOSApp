@@ -12,6 +12,7 @@ class RecommendationsViewController: UIViewController {
         view.dataSource = self
         view.delegate = self
         view.separatorStyle = .none
+        view.backgroundColor = UIColor.white
         view.register(RecommendationTileView.self, forCellReuseIdentifier: "recommendation")
         return view
     }()

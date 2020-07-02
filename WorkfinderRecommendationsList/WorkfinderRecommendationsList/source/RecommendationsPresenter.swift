@@ -3,7 +3,7 @@ import WorkfinderCommon
 import WorkfinderServices
 
 class RecommendationsPresenter {
-    
+    weak var coordinator: RecommendationsCoordinator?
     let service: RecommendationsServiceProtocol
     var recommendations = [Recommendation]()
     var tilePresenters = [Recommendation : RecommendationTilePresenter]()
@@ -11,10 +11,12 @@ class RecommendationsPresenter {
     var workplaceServiceFactory: (() -> WorkplaceAndAssociationService)?
     var hostServiceFactory: (() -> HostsProviderProtocol)?
     
-    init(service: RecommendationsServiceProtocol,
+    init(coordinator: RecommendationsCoordinator,
+         service: RecommendationsServiceProtocol,
          userRepo:UserRepositoryProtocol,
          workplaceServiceFactory: @escaping (() -> WorkplaceAndAssociationService),
          hostServiceFactory: @escaping (() -> HostsProviderProtocol)) {
+        self.coordinator = coordinator
         self.service = service
         self.userRepo = userRepo
         self.workplaceServiceFactory = workplaceServiceFactory
@@ -60,11 +62,17 @@ class RecommendationsPresenter {
         let workplaceService = workplaceServiceFactory?()
         let hostService = hostServiceFactory?()
         let presenter = RecommendationTilePresenter(
+            parent: self,
             recommendation: recommendation,
             workplaceService: workplaceService,
             hostService: hostService)
         tilePresenters[recommendation] = presenter
         return presenter
+    }
+    
+    func onTileTapped(_ tile: RecommendationTilePresenter) {
+        guard let uuid = tile.recommendation.uuid else { return }
+        coordinator?.onRecommendationSelected?(uuid)
     }
     
 }

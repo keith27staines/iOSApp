@@ -41,7 +41,7 @@ public protocol CompanyCoordinatorParentProtocol : CoreInjectionNavigationCoordi
 public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol {
     func showApplications()
     func showSearch()
-    func showRecommendations(uuid: F4SUUID?)
+    func processRecommendation(uuid: F4SUUID)
     func updateBadges()
     func toggleMenu(completion: ((Bool) -> ())?)
     func updateUnreadMessagesCount(_ count: Int)

@@ -20,16 +20,17 @@ class RecommendationTileView: UITableViewCell {
     lazy var industryLabel = UILabel()
     lazy var hostNameLabel = UILabel()
     lazy var hostRoleLabel = UILabel()
-    lazy var companyLogo = CompanyLogoView()
-    lazy var hostPhoto = HostPhotoView()
+    lazy var companyLogo = CompanyLogoView(widthPoints: 55, defaultLogoName: nil)
+    lazy var hostPhoto = HostPhotoView(widthPoints: 55, defaultLogoName: nil)
     
     lazy var companyStack: UIStackView = {
         let textStack = UIStackView(arrangedSubviews: [
             self.companyNameLabel,
-            self.industryLabel
+            self.industryLabel,
+            UIView()
         ])
         textStack.axis = .vertical
-        textStack.spacing = 8
+        textStack.spacing = 4
         let stack = UIStackView(arrangedSubviews: [
             self.companyLogo,
             textStack
@@ -42,10 +43,11 @@ class RecommendationTileView: UITableViewCell {
     lazy var hostStack: UIStackView = {
         let textStack = UIStackView(arrangedSubviews: [
             self.hostNameLabel,
-            self.hostRoleLabel
+            self.hostRoleLabel,
+            UIView()
         ])
         textStack.axis = .vertical
-        textStack.spacing = 8
+        textStack.spacing = 4
         let stack = UIStackView(arrangedSubviews: [
             self.hostPhoto,
             textStack
@@ -80,19 +82,28 @@ class RecommendationTileView: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        isUserInteractionEnabled = true
         configureViews()
     }
     
     func configureViews() {
         contentView.addSubview(tileView)
+        contentView.backgroundColor = UIColor.white
         tileView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 4, left: 0, bottom: 8, right: 4))
         hostNameLabel.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        hostNameLabel.numberOfLines = 0
         hostRoleLabel.font = WorkfinderFonts.subHeading
+        hostRoleLabel.numberOfLines = 0
         hostRoleLabel.textColor = WorkfinderColors.textMedium
         companyNameLabel.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        companyNameLabel.numberOfLines = 0
         industryLabel.font = WorkfinderFonts.subHeading
+        industryLabel.numberOfLines = 0
         industryLabel.textColor = WorkfinderColors.textMedium
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
     }
+    
+    @objc func handleTap() { presenter?.onTileTapped() }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }

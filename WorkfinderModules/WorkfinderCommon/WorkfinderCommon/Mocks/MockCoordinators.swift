@@ -11,7 +11,7 @@ public class MockTabBarCoordinator : MockCoreInjectionNavigationCoordinator, Tab
     }
     
     var showRecommendationsCallCount = 0
-    public func showRecommendations(uuid: F4SUUID? = nil) {
+    public func processRecommendation(uuid: F4SUUID) {
         showRecommendationsCallCount += 1
     }
     
