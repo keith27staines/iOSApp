@@ -6,14 +6,15 @@ class WorkplaceTile: UITableViewCell {
     
     lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        label.font = WorkfinderFonts.body
         label.numberOfLines = 0
         return label
     }()
     
     lazy var industryLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption1)
+        label.font = WorkfinderFonts.body2
+        label.textColor = UIColor.init(white: 33/255, alpha: 1)
         return label
     }()
     

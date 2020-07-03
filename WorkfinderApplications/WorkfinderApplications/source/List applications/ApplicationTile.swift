@@ -9,7 +9,7 @@ class ApplicationTile: UITableViewCell {
         configureViews()
     }
     
-    let companyLogoWidth: CGFloat = 67
+    let companyLogoWidth: CGFloat = 70
     
     lazy var logo: CompanyLogoView = {
         return CompanyLogoView(widthPoints: companyLogoWidth)
@@ -30,7 +30,7 @@ class ApplicationTile: UITableViewCell {
        let label = UILabel()
         label.text = ""
         label.textColor = UIColor.white
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 12)
         label.textAlignment = .center
         label.heightAnchor.constraint(equalToConstant: 30).isActive = true
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
@@ -55,25 +55,32 @@ class ApplicationTile: UITableViewCell {
     
     lazy var industry: UILabel = {
         let label = UILabel()
-        label.font = WorkfinderFonts.subHeading
-        label.textColor = WorkfinderColors.textMedium
+        label.font = WorkfinderFonts.body2
+        label.textColor = UIColor.init(white: 33/255, alpha: 1)
         label.numberOfLines = 1
         return label
     }()
     
     lazy var hostInformation: UILabel = {
         let label = UILabel()
-        label.font = WorkfinderFonts.heading
-        label.textColor = WorkfinderColors.textMedium
+        label.font = WorkfinderFonts.body2
+        label.textColor = UIColor.init(white: 33/255, alpha: 1)
         label.numberOfLines = 0
         return label
     }()
     
     lazy var dateString: UILabel = {
         let label = UILabel()
-        label.font = WorkfinderFonts.subHeading
-        label.textColor = WorkfinderColors.textMedium
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.textColor = UIColor.init(white: 33/255, alpha: 1)
         return label
+    }()
+    
+    lazy var line: UIView = {
+        let view = UIView()
+        view.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        view.backgroundColor = UIColor.init(white: 216/255, alpha: 0.5)
+        return view
     }()
     
     lazy var textStack: UIStackView = {
@@ -81,7 +88,7 @@ class ApplicationTile: UITableViewCell {
             companyName,
             industry,
             hostInformation,
-            dateString,
+            line,
             UIView()
         ])
         stack.axis = .vertical
@@ -89,32 +96,38 @@ class ApplicationTile: UITableViewCell {
         return stack
     }()
     
-    lazy var mainStack: UIStackView = {
+    lazy var topStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [logoStack, textStack])
         stack.axis = .horizontal
         stack.spacing = 20
         return stack
     }()
     
+    lazy var bottomStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            statusViewContainer,
+            dateString,
+            UIView()
+        ])
+        stack.axis = .horizontal
+        stack.spacing = 20
+        return stack
+    }()
+    
+    lazy var mainStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            topStack,
+            bottomStack
+        ])
+        stack.axis = .vertical
+        stack.alignment = .leading
+        stack.spacing = 10
+        return stack
+    }()
+    
     func configureViews() {
         contentView.addSubview(mainStack)
-        contentView.addSubview(statusViewContainer)
-        mainStack.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: nil, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 8, left: 4, bottom: 0, right: 4))
-        statusViewContainer.anchor(top: logo.bottomAnchor, leading: logo.leadingAnchor, bottom: contentView.bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 11, left: 0, bottom: 8, right: 0))
-        let contentBottom1 = contentView.bottomAnchor.constraint(greaterThanOrEqualTo: statusViewContainer.bottomAnchor, constant: 8)
-        let contentBottom2 = contentView.bottomAnchor.constraint(greaterThanOrEqualTo: mainStack.bottomAnchor, constant: 8)
-        let contentBottom3 = contentView.bottomAnchor.constraint(equalTo: statusViewContainer.bottomAnchor, constant: 8)
-        let contentBottom4 = contentView.bottomAnchor.constraint(equalTo: mainStack.bottomAnchor, constant: 8)
-        contentBottom1.priority = .required
-        contentBottom1.priority = .required
-        contentBottom3.priority = .defaultHigh
-        contentBottom4.priority = .defaultHigh
-        NSLayoutConstraint.activate([
-            contentBottom1,
-            contentBottom2,
-            contentBottom3,
-            contentBottom4,
-        ])
+        mainStack.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 8, left: 4, bottom: 4, right: 4))
     }
     
     func configureWithApplication(_ application: ApplicationTilePresenter) {
@@ -123,7 +136,7 @@ class ApplicationTile: UITableViewCell {
         statusView.text = application.state.rawValue
         statusViewContainer.backgroundColor = application.state.capsuleColor
         hostInformation.text = application.hostInformation
-        dateString.text = application.appliedDateString
+        dateString.text = "Application date: \(application.appliedDateString)"
         logo.load(companyName: application.companyName, urlString: application.logoUrl, completion: nil)
     }
     
