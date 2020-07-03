@@ -86,7 +86,11 @@ public class MockF4SAnalyticsAndDebugging : F4SAnalyticsAndDebugging {
     
     // MARK:- debuggin and error reporting
     public var notifiedErrors = [Error]()
-    public func notifyError(_ error: NSError, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
+    public func notifyError(_ error: NSError,
+                            functionName: StaticString = #function,
+                            fileName: StaticString = #file,
+                            lineNumber: Int = #line,
+                            callDetails: String) {
         notifiedErrors.append(error)
     }
     

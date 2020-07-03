@@ -103,6 +103,7 @@ extension F4SLog : F4SAnalytics {
 }
 
 extension F4SLog : F4SDebugging {
+    
     public func error(message: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
         XCGLogger.default.error(message, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
@@ -115,10 +116,10 @@ extension F4SLog : F4SDebugging {
         XCGLogger.default.debug(message, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
     
-    public func notifyError(_ error: NSError, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
+    public func notifyError(_ error: NSError, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line, callDetails: String = "No detail provided") {
         Bugsnag.notifyError(error) { report in
             report.depth += 2
-            report.addMetadata(error.userInfo, toTabWithName: "UserInfo")
+            report.addMetadata(["callDetails":callDetails], toTabWithName: "Call Details")
         }
     }
     

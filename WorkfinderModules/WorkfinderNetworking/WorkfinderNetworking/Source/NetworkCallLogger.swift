@@ -20,8 +20,9 @@ public class NetworkCallLogger : NetworkCallLoggerProtocol {
         text = "\(text)\nDescription: Failed to deserialise to type \(type)"
         text = "\(text)\nwith error: \(error.debugDescription)"
         text = "\(text)\nfrom data: \(String(data: data, encoding: .utf8) ?? "not string encodable")"
+        text = "\(text)\n\(separator)\n\n"
         log.error(message: text, functionName: #function, fileName: #file, lineNumber: #line)
-        log.notifyError(error, functionName: #function, fileName: #file, lineNumber: #line)
+        log.notifyError(error, functionName: #function, fileName: #file, lineNumber: #line, callDetails: text)
         assertionFailure()
     }
     
@@ -57,7 +58,11 @@ public class NetworkCallLogger : NetworkCallLoggerProtocol {
         text = "\(text)\n\(separator)\n\n"
         log.error(message: text, functionName: #function, fileName: #file, lineNumber: #line)
         if error.errorType.shouldNotify {
-            log.notifyError(error.asNSError(), functionName: #function, fileName: #file, lineNumber: #line)
+            log.notifyError(error.asNSError(),
+                            functionName: #function,
+                            fileName: #file,
+                            lineNumber: #line,
+                            callDetails: text)
         }
     }
     
