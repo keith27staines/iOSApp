@@ -98,6 +98,16 @@ class MapViewController: UIViewController {
     /// Manages clustering of the pins on the map
     fileprivate var clusterManager: GMUClusterManager!
     
+    lazy var ksClusterManager: KSGMClusterManager = {
+        KSGMClusterManager(mapView: self.mapView,
+                           mapDelegate: self,
+                           clusterTapped: clusterTapped)
+    }()
+    
+    lazy var ksClusterRenderer: KSGMClusterRenderer = {
+        KSGMClusterRenderer(mapView: self.mapView)
+    }()
+    
     /// Manages location updates from the device
     fileprivate var locationManager: CLLocationManager?
     
@@ -269,6 +279,10 @@ extension MapViewController {
     /// 2. emplacedCompanyPins
     fileprivate func addPinToMap(pin: F4SWorkplacePin) {
         if !emplacedCompanyPins.contains(pin) {
+            let x = pin.position.longitude
+            let y = pin.position.latitude
+            let ksPin = KSPin(id: pin.workplaceUuid, point: KSPoint(x: x, y: y))
+            try? ksClusterManager.insertPin(ksPin)
             clusterManager.add(pin)
             emplacedCompanyPins.insert(pin)
         }
@@ -374,8 +388,6 @@ extension MapViewController {
 extension MapViewController {
     
     fileprivate func setupMap() {
-        mapView.delegate = self
-        
         // cluster algorithm setup
         let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
         let iconGenerator = self.iconGeneratorWithImages()
@@ -396,7 +408,7 @@ extension MapViewController {
     }
     
     fileprivate func iconGeneratorWithImages() -> GMUClusterIconGenerator {
-        return CustomClusterIconGenerator(color: clusterColor)
+        return ClusterIconGenerator(color: clusterColor)
     }
     
     fileprivate func makeLocationManager() -> CLLocationManager {
@@ -542,6 +554,10 @@ extension MapViewController: GMSMapViewDelegate {
 
 // MARK: - GMUClusterManager Delegate
 extension MapViewController: GMUClusterManagerDelegate {
+    
+    func clusterTapped(_: KSCluster) {
+        
+    }
     
     func clusterManager(_: GMUClusterManager, didTap cluster: GMUCluster) {
         guard let explodedBounds = boundsForExplodedClusterContent(cluster) else {

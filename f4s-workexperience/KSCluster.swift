@@ -1,11 +1,11 @@
 
-public class KSCluster: XYLocatable, Hashable, Equatable {
-    
+public class KSCluster: KSQuadTreeItem, Hashable, Equatable {
+    public var point: KSPoint { centerPin.point }
     public let id: String
     public let centerPin: KSPin
     public private (set) var pins: Set<KSPin>
-    public var x: Float { return centerPin.x }
-    public var y: Float { return centerPin.y }
+    public var x: Double { return centerPin.x }
+    public var y: Double { return centerPin.y }
     public var count: Int { return pins.count }
     
     public func hash(into hasher: inout Hasher) {

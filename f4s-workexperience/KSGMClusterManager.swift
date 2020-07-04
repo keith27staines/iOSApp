@@ -1,14 +1,26 @@
 
-public class KSClusterManager {
-    public let bounds: KSRect
+import GoogleMaps
+
+public class KSGMClusterManager: NSObject {
+    
+    public let bounds = KSRect(x: -180, y: -90, width: 360, height: 90)
     public var pinsQuadTree: KSQuadTree
     public var clustersQuadTree: KSQuadTree
     public private (set) var pins: [KSPin] = []
+    weak var mapDelegate: GMSMapViewDelegate?
+    var clusterTapped: ((KSCluster) -> Void)?
+    weak var mapView: GMSMapView?
     
-    public init(bounds: KSRect) {
-        self.bounds = bounds
+    public init(mapView: GMSMapView,
+                mapDelegate: GMSMapViewDelegate,
+                clusterTapped: @escaping (KSCluster) -> Void) {
+        self.mapView = mapView
+        self.mapDelegate = mapDelegate
+        self.clusterTapped = clusterTapped
         pinsQuadTree = KSQuadTree(bounds: bounds)
         clustersQuadTree = KSQuadTree(bounds: bounds)
+        super.init()
+        mapView.delegate = self
     }
     
     public func insert(_ pins: [KSPin]) {
@@ -18,8 +30,7 @@ public class KSClusterManager {
     }
     
     func insertPin(_ pin: KSPin) throws {
-        let item = KSQuadTreeItem(point: pin.point, object: pin)
-        try pinsQuadTree.insert(item: item)
+        try pinsQuadTree.insert(item: pin)
         pins.append(pin)
     }
     
@@ -30,13 +41,13 @@ public class KSClusterManager {
     }
     
     public func getClusters() -> [KSCluster] {
-        clustersQuadTree.retrieveAll().compactMap { ($0.object as? KSCluster) }
+        clustersQuadTree.retrieveAll().compactMap { ($0 as? KSCluster) }
     }
     
     public func rebuildClusters(catchementSize: KSSize, in rect: KSRect) {
         clustersQuadTree = KSQuadTree(bounds: bounds)
         let pins = pinsQuadTree.retrieveWithinRect(rect).compactMap { (item) -> KSPin? in
-            item.object as? KSPin
+            item as? KSPin
         }
         for pin in pins {
             let catchement = KSRect(center: pin.point, size: catchementSize)
@@ -45,19 +56,19 @@ public class KSClusterManager {
     }
     
     func addPinToNearestClusterInCatchementRect(pin: KSPin, rect: KSRect) {
-        let nearby = clustersQuadTree.retrieveWithinRect(rect)
-        guard let nearestCluster = findNearest(to: pin, from: nearby)?.object as? KSCluster
+        guard
+            let nearby = clustersQuadTree.retrieveWithinRect(rect) as? [KSCluster],
+            let nearestCluster = findNearest(to: pin, from: nearby)
             else {
                 let newCluster = KSCluster(id: "", centerPin: pin)
-                let item = KSQuadTreeItem(point: newCluster.centerPin.point, object: newCluster)
-                try? clustersQuadTree.insert(item: item)
+                try? clustersQuadTree.insert(item: newCluster)
                 return
         }
         nearestCluster.addPin(pin)
     }
     
     func findNearest<A:XYLocatable, B:XYLocatable>(to object: A, from others: [B] ) -> B? {
-        var leastDistance = Float.greatestFiniteMagnitude
+        var leastDistance = Double.greatestFiniteMagnitude
         var closest: B?
         for other in others {
             let aDistance = object.distance2From(other)
@@ -67,5 +78,18 @@ public class KSClusterManager {
             }
         }
         return closest
+    }
+}
+
+extension KSGMClusterManager: GMSMapViewDelegate {
+    public func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        guard
+            let cluster = marker.userData as? KSCluster,
+            let clusterTapped = clusterTapped
+            else {
+            return self.mapDelegate?.mapView?(mapView, didTap: marker) ?? false
+        }
+        clusterTapped(cluster)
+        return false
     }
 }

@@ -1,15 +1,8 @@
-//
-//  CutomClusterIconGenerator.swift
-//  f4s-workexperience
-//
-//  Created by Sergiu Simon on 23/11/16.
-//  Copyright © 2016 Chelsea Apps Factory. All rights reserved.
-//
 
 import Foundation
 import CoreGraphics
 
-class ClusterIconGenerator: NSObject, GMUClusterIconGenerator {
+class KSClusterImageFactory {
     
     var color: UIColor = UIColor.red
     
@@ -18,11 +11,10 @@ class ClusterIconGenerator: NSObject, GMUClusterIconGenerator {
         self.color = color
     }
 
-    func icon(forSize size: UInt) -> UIImage! {
+    func clusterImageForCount(_ count: UInt) -> UIImage! {
 
         let font = UIFont.boldSystemFont(ofSize: 17)
-
-        let text = String(size)
+        let text = String(count)
         let attributedString = NSAttributedString(string: text, attributes: [
             NSAttributedString.Key.font: font,
             NSAttributedString.Key.foregroundColor: UIColor.white,
@@ -33,11 +25,9 @@ class ClusterIconGenerator: NSObject, GMUClusterIconGenerator {
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
         let ctx = UIGraphicsGetCurrentContext()
         ctx?.saveGState()
-//        let clusterColor = UIColor(netHex: 0x40AF50)
         ctx?.setFillColor(color.cgColor)
         ctx?.fillEllipse(in: rect)
         ctx?.restoreGState()
-
         let textRect = rect.insetBy(dx: (rect.size.width - textSize.width) / 2,
                                     dy: (rect.size.height - textSize.height) / 2)
         attributedString.draw(in: textRect)
@@ -45,3 +35,4 @@ class ClusterIconGenerator: NSObject, GMUClusterIconGenerator {
         return clusterIcon
     }
 }
+

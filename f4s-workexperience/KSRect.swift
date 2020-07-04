@@ -11,12 +11,12 @@ public struct KSRect: Hashable, Equatable {
     
     public var origin: KSPoint
     public var size: KSSize
-    public var minX: Float { origin.x }
-    public var maxX: Float { origin.x + size.width }
-    public var midX: Float { (minX + maxX) / 2.0 }
-    public var midY: Float { (minY + maxY) / 2.0 }
-    public var minY: Float { origin.y }
-    public var maxY: Float { origin.y + size.height }
+    public var minX: Double { origin.x }
+    public var maxX: Double { origin.x + size.width }
+    public var midX: Double { (minX + maxX) / 2.0 }
+    public var midY: Double { (minY + maxY) / 2.0 }
+    public var minY: Double { origin.y }
+    public var maxY: Double { origin.y + size.height }
     public var center: KSPoint { KSPoint(x: midX, y: midY) }
     public var midXPoint: KSPoint { return KSPoint(x: midX, y: minY) }
     public var midYPoint: KSPoint { return KSPoint(x: minX, y: midY) }
@@ -56,7 +56,7 @@ public struct KSRect: Hashable, Equatable {
         return true
     }
 
-    public init(origin: KSPoint, width: Float, height: Float) {
+    public init(origin: KSPoint, width: Double, height: Double) {
         self.origin = origin
         self.size = KSSize(width: width, height: height)
     }
@@ -71,13 +71,13 @@ public struct KSRect: Hashable, Equatable {
         self.size = size
     }
     
-    public init(x: Float, y: Float, width: Float, height: Float) {
+    public init(x: Double, y: Double, width: Double, height: Double) {
         self.init(origin: KSPoint(x: x, y: y), size: KSSize(width: width, height: height))
     }
 }
 
 public extension KSRect {
-    func scaled(on anchor: KSPoint, by f: Float) -> KSRect {
+    func scaled(on anchor: KSPoint, by f: Double) -> KSRect {
         let newOriginX = anchor.x + (origin.x - anchor.x)*f
         let newOriginY = anchor.y + (origin.y - anchor.y)*f
         let newOrigin = KSPoint(x: newOriginX, y: newOriginY)

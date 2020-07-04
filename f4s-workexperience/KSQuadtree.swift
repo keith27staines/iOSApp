@@ -18,22 +18,10 @@ public enum KSQuadrantAssignment {
     case none
 }
 
-public struct KSQuadTreeItem : Equatable, Hashable, XYLocatable {
-    
-    public var x: Float { point.x }
-    public var y: Float { point.y }
-    
-    public var point: KSPoint
-    public var object: AnyHashable?
-    
-    public init(point: KSPoint, object: AnyHashable?) {
-        self.point = point
-        self.object = object
-    }
-    
-    public static func ==(lhs: KSQuadTreeItem, rhs: KSQuadTreeItem) -> Bool {
-        return lhs.point == rhs.point && lhs.object == rhs.object
-    }
+public protocol KSQuadTreeItem : XYLocatable {
+    var x: Double { get }
+    var y: Double { get }
+    var point: KSPoint { get }
 }
 
 public class KSQuadTree {
