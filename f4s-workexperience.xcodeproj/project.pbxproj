@@ -465,6 +465,7 @@
 				40C1A5261DE58EED000F80AA /* CutomClusterIconGenerator.swift */,
 			);
 			name = GoogleMapsUtils;
+			path = ../../../../../../..;
 			sourceTree = "<group>";
 		};
 		40E78E0A1DD31A86000A3776 = {
@@ -673,6 +674,7 @@
 		FC0B4074226B15C700D992AC /* Map View */ = {
 			isa = PBXGroup;
 			children = (
+				40C1A4F61DDF5A65000F80AA /* GoogleMapsUtils */,
 				40E78E931DD391F3000A3776 /* MapView.storyboard */,
 				40E78E971DD39275000A3776 /* MapViewController.swift */,
 				FCDC542724289AE0002581FF /* Popup Company List */,
@@ -729,7 +731,6 @@
 				20FABFEB1DDDA63600D583E2 /* FileHelper.swift */,
 				20D51BE31E27710C003A8358 /* UNService.swift */,
 				FC3CD1D9221566F200F91B50 /* Geocoding.swift */,
-				40C1A4F61DDF5A65000F80AA /* GoogleMapsUtils */,
 				FCA53B931FE115E1009F6DB0 /* Force app update */,
 				FC31F093204D547E009DD526 /* HiddenDebugScreen */,
 			);
@@ -1051,6 +1052,8 @@
 			dependencies = (
 			);
 			name = "f4s-workexperience";
+			packageProductDependencies = (
+			);
 			productName = "f4s-workexperience";
 			productReference = 40E78E131DD31A86000A3776 /* Workfinder.app */;
 			productType = "com.apple.product-type.application";
@@ -1124,6 +1127,8 @@
 				Base,
 			);
 			mainGroup = 40E78E0A1DD31A86000A3776;
+			packageReferences = (
+			);
 			productRefGroup = 40E78E141DD31A86000A3776 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
