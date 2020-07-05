@@ -11,6 +11,9 @@ public class KSGMClusterManager: NSObject {
     private let algorithm = KSClusteringAlgorithm()
     private let renderer: KSGMClusterRenderer
     private var _nextPinId: Int = 0
+    private var oldClusterWidth: Double = 0
+    public var clusterSize: KSSize { KSSize(width: clusterWidth, height: clusterWidth) }
+    private var clusterWidth: Double { visibleWidth / 10.0 }
     
     private func nextPinId() -> Int {
         _nextPinId += 1
@@ -43,8 +46,6 @@ public class KSGMClusterManager: NSObject {
         clustersQuadTree.retrieveAll().compactMap { ($0 as? KSCluster) }
     }
     
-    private var oldClusterWidth: Double = 0
-    
     public func cameraDidChange() {
         guard
             clusterWidth != .zero,
@@ -68,10 +69,6 @@ public class KSGMClusterManager: NSObject {
         guard oldClusterWidth != .zero else { return true }
         return (0.9...1.1).contains(newWidth/oldClusterWidth) ? false :  true
     }
-    
-    public var clusterSize: KSSize { KSSize(width: clusterWidth, height: clusterWidth) }
-    
-    private var clusterWidth: Double { visibleWidth / 10.0 }
     
     private var visibleWidth: Double {
         guard let visibleRegion = mapView?.projection.visibleRegion()
