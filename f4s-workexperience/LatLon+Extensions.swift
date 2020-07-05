@@ -1,5 +1,6 @@
 import Foundation
 import WorkfinderCommon
+import GoogleMaps
 
 public extension GMSCoordinateBounds {
     convenience init(rect: LatLonRect) {

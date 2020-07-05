@@ -8,9 +8,11 @@
 
 import Foundation
 import WorkfinderCommon
+import CoreLocation
+import GoogleMaps
 
 // MARK:-
-public class F4SWorkplacePin : NSObject, GMUClusterItem {
+public class F4SWorkplacePin : NSObject {
 
     // Position of the pin
     public let position: CLLocationCoordinate2D

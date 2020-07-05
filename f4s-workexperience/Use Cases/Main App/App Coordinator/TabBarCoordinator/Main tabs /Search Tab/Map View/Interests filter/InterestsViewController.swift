@@ -2,6 +2,8 @@
 import UIKit
 import WorkfinderCommon
 import WorkfinderUI
+import CoreLocation
+import GoogleMaps
 
 protocol InterestsViewControllerDelegate {
     func interestsViewController(_ vc: InterestsViewController, didChangeSelectedInterests: F4SInterestSet)

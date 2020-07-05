@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 protocol SearchDataSourcing : class, UITableViewDataSource {
     var userLocation: CLLocationCoordinate2D? { get set }

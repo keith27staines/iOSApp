@@ -11,7 +11,7 @@ class KSClusterImageFactory {
         self.color = color
     }
 
-    func clusterImageForCount(_ count: UInt) -> UIImage! {
+    func clusterImageForCount(_ count: Int) -> UIImage! {
 
         let font = UIFont.boldSystemFont(ofSize: 17)
         let text = String(count)

@@ -15,17 +15,7 @@
 		40A5CF401DED81F7000007AB /* CustomViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A5CF3F1DED81F7000007AB /* CustomViewFlowLayout.swift */; };
 		40C1A4E61DDB356B000F80AA /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C1A4E51DDB356B000F80AA /* TabBarViewController.swift */; };
 		40C1A4F31DDEF2F6000F80AA /* AutoCompleteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40C1A4F11DDEF2F6000F80AA /* AutoCompleteTableViewCell.xib */; };
-		40C1A5191DDF5ACE000F80AA /* GMUClusterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C1A4FC1DDF5ACE000F80AA /* GMUClusterManager.m */; };
-		40C1A51A1DDF5ACE000F80AA /* GMUDefaultClusterIconGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C1A5001DDF5ACE000F80AA /* GMUDefaultClusterIconGenerator.m */; };
 		40C1A51B1DDF5ACE000F80AA /* GMUDefaultClusterRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C1A5031DDF5ACE000F80AA /* GMUDefaultClusterRenderer.m */; };
-		40C1A51C1DDF5ACE000F80AA /* GMUGridBasedClusterAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C1A5061DDF5ACE000F80AA /* GMUGridBasedClusterAlgorithm.m */; };
-		40C1A51D1DDF5ACE000F80AA /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C1A5091DDF5ACE000F80AA /* GMUNonHierarchicalDistanceBasedAlgorithm.m */; };
-		40C1A51E1DDF5ACE000F80AA /* GMUSimpleClusterAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C1A50B1DDF5ACE000F80AA /* GMUSimpleClusterAlgorithm.m */; };
-		40C1A51F1DDF5ACE000F80AA /* GMUStaticCluster.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C1A50D1DDF5ACE000F80AA /* GMUStaticCluster.m */; };
-		40C1A5201DDF5ACE000F80AA /* GMUWrappingDictionaryKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C1A50F1DDF5ACE000F80AA /* GMUWrappingDictionaryKey.m */; };
-		40C1A5211DDF5ACE000F80AA /* GQTPointQuadTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C1A5131DDF5ACE000F80AA /* GQTPointQuadTree.m */; };
-		40C1A5221DDF5ACE000F80AA /* GQTPointQuadTreeChild.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C1A5151DDF5ACE000F80AA /* GQTPointQuadTreeChild.m */; };
-		40C1A5231DDF5ACE000F80AA /* POIItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C1A5181DDF5ACE000F80AA /* POIItem.m */; };
 		40C1A5271DE58EED000F80AA /* CutomClusterIconGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C1A5261DE58EED000F80AA /* CutomClusterIconGenerator.swift */; };
 		40E78E171DD31A86000A3776 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E161DD31A86000A3776 /* AppDelegate.swift */; };
 		40E78E1E1DD31A86000A3776 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E1D1DD31A86000A3776 /* Assets.xcassets */; };
@@ -219,40 +209,9 @@
 		40A5CF3F1DED81F7000007AB /* CustomViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViewFlowLayout.swift; sourceTree = "<group>"; };
 		40C1A4E51DDB356B000F80AA /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		40C1A4F21DDEF2F6000F80AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AutoCompleteTableViewCell.xib; sourceTree = "<group>"; };
-		40C1A4F71DDF5ACE000F80AA /* GMUCluster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMUCluster.h; path = "Google-Maps-iOS-Utils/GMUCluster.h"; sourceTree = "<group>"; };
-		40C1A4F81DDF5ACE000F80AA /* GMUClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMUClusterAlgorithm.h; path = "Google-Maps-iOS-Utils/GMUClusterAlgorithm.h"; sourceTree = "<group>"; };
-		40C1A4F91DDF5ACE000F80AA /* GMUClusterIconGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMUClusterIconGenerator.h; path = "Google-Maps-iOS-Utils/GMUClusterIconGenerator.h"; sourceTree = "<group>"; };
-		40C1A4FA1DDF5ACE000F80AA /* GMUClusterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMUClusterItem.h; path = "Google-Maps-iOS-Utils/GMUClusterItem.h"; sourceTree = "<group>"; };
-		40C1A4FB1DDF5ACE000F80AA /* GMUClusterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMUClusterManager.h; path = "Google-Maps-iOS-Utils/GMUClusterManager.h"; sourceTree = "<group>"; };
-		40C1A4FC1DDF5ACE000F80AA /* GMUClusterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMUClusterManager.m; path = "Google-Maps-iOS-Utils/GMUClusterManager.m"; sourceTree = "<group>"; };
-		40C1A4FD1DDF5ACE000F80AA /* GMUClusterManager+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "GMUClusterManager+Testing.h"; path = "Google-Maps-iOS-Utils/GMUClusterManager+Testing.h"; sourceTree = "<group>"; };
-		40C1A4FE1DDF5ACE000F80AA /* GMUClusterRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMUClusterRenderer.h; path = "Google-Maps-iOS-Utils/GMUClusterRenderer.h"; sourceTree = "<group>"; };
-		40C1A4FF1DDF5ACE000F80AA /* GMUDefaultClusterIconGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMUDefaultClusterIconGenerator.h; path = "Google-Maps-iOS-Utils/GMUDefaultClusterIconGenerator.h"; sourceTree = "<group>"; };
-		40C1A5001DDF5ACE000F80AA /* GMUDefaultClusterIconGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMUDefaultClusterIconGenerator.m; path = "Google-Maps-iOS-Utils/GMUDefaultClusterIconGenerator.m"; sourceTree = "<group>"; };
-		40C1A5011DDF5ACE000F80AA /* GMUDefaultClusterIconGenerator+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "GMUDefaultClusterIconGenerator+Testing.h"; path = "Google-Maps-iOS-Utils/GMUDefaultClusterIconGenerator+Testing.h"; sourceTree = "<group>"; };
 		40C1A5021DDF5ACE000F80AA /* GMUDefaultClusterRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMUDefaultClusterRenderer.h; path = "Google-Maps-iOS-Utils/GMUDefaultClusterRenderer.h"; sourceTree = "<group>"; };
 		40C1A5031DDF5ACE000F80AA /* GMUDefaultClusterRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMUDefaultClusterRenderer.m; path = "Google-Maps-iOS-Utils/GMUDefaultClusterRenderer.m"; sourceTree = "<group>"; };
 		40C1A5041DDF5ACE000F80AA /* GMUDefaultClusterRenderer+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "GMUDefaultClusterRenderer+Testing.h"; path = "Google-Maps-iOS-Utils/GMUDefaultClusterRenderer+Testing.h"; sourceTree = "<group>"; };
-		40C1A5051DDF5ACE000F80AA /* GMUGridBasedClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMUGridBasedClusterAlgorithm.h; path = "Google-Maps-iOS-Utils/GMUGridBasedClusterAlgorithm.h"; sourceTree = "<group>"; };
-		40C1A5061DDF5ACE000F80AA /* GMUGridBasedClusterAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMUGridBasedClusterAlgorithm.m; path = "Google-Maps-iOS-Utils/GMUGridBasedClusterAlgorithm.m"; sourceTree = "<group>"; };
-		40C1A5071DDF5ACE000F80AA /* GMUMarkerClustering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMUMarkerClustering.h; path = "Google-Maps-iOS-Utils/GMUMarkerClustering.h"; sourceTree = "<group>"; };
-		40C1A5081DDF5ACE000F80AA /* GMUNonHierarchicalDistanceBasedAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMUNonHierarchicalDistanceBasedAlgorithm.h; path = "Google-Maps-iOS-Utils/GMUNonHierarchicalDistanceBasedAlgorithm.h"; sourceTree = "<group>"; };
-		40C1A5091DDF5ACE000F80AA /* GMUNonHierarchicalDistanceBasedAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMUNonHierarchicalDistanceBasedAlgorithm.m; path = "Google-Maps-iOS-Utils/GMUNonHierarchicalDistanceBasedAlgorithm.m"; sourceTree = "<group>"; };
-		40C1A50A1DDF5ACE000F80AA /* GMUSimpleClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMUSimpleClusterAlgorithm.h; path = "Google-Maps-iOS-Utils/GMUSimpleClusterAlgorithm.h"; sourceTree = "<group>"; };
-		40C1A50B1DDF5ACE000F80AA /* GMUSimpleClusterAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMUSimpleClusterAlgorithm.m; path = "Google-Maps-iOS-Utils/GMUSimpleClusterAlgorithm.m"; sourceTree = "<group>"; };
-		40C1A50C1DDF5ACE000F80AA /* GMUStaticCluster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMUStaticCluster.h; path = "Google-Maps-iOS-Utils/GMUStaticCluster.h"; sourceTree = "<group>"; };
-		40C1A50D1DDF5ACE000F80AA /* GMUStaticCluster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMUStaticCluster.m; path = "Google-Maps-iOS-Utils/GMUStaticCluster.m"; sourceTree = "<group>"; };
-		40C1A50E1DDF5ACE000F80AA /* GMUWrappingDictionaryKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMUWrappingDictionaryKey.h; path = "Google-Maps-iOS-Utils/GMUWrappingDictionaryKey.h"; sourceTree = "<group>"; };
-		40C1A50F1DDF5ACE000F80AA /* GMUWrappingDictionaryKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMUWrappingDictionaryKey.m; path = "Google-Maps-iOS-Utils/GMUWrappingDictionaryKey.m"; sourceTree = "<group>"; };
-		40C1A5101DDF5ACE000F80AA /* GQTBounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GQTBounds.h; path = "Google-Maps-iOS-Utils/GQTBounds.h"; sourceTree = "<group>"; };
-		40C1A5111DDF5ACE000F80AA /* GQTPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GQTPoint.h; path = "Google-Maps-iOS-Utils/GQTPoint.h"; sourceTree = "<group>"; };
-		40C1A5121DDF5ACE000F80AA /* GQTPointQuadTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GQTPointQuadTree.h; path = "Google-Maps-iOS-Utils/GQTPointQuadTree.h"; sourceTree = "<group>"; };
-		40C1A5131DDF5ACE000F80AA /* GQTPointQuadTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GQTPointQuadTree.m; path = "Google-Maps-iOS-Utils/GQTPointQuadTree.m"; sourceTree = "<group>"; };
-		40C1A5141DDF5ACE000F80AA /* GQTPointQuadTreeChild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GQTPointQuadTreeChild.h; path = "Google-Maps-iOS-Utils/GQTPointQuadTreeChild.h"; sourceTree = "<group>"; };
-		40C1A5151DDF5ACE000F80AA /* GQTPointQuadTreeChild.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GQTPointQuadTreeChild.m; path = "Google-Maps-iOS-Utils/GQTPointQuadTreeChild.m"; sourceTree = "<group>"; };
-		40C1A5161DDF5ACE000F80AA /* GQTPointQuadTreeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GQTPointQuadTreeItem.h; path = "Google-Maps-iOS-Utils/GQTPointQuadTreeItem.h"; sourceTree = "<group>"; };
-		40C1A5171DDF5ACE000F80AA /* POIItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = POIItem.h; path = "Google-Maps-iOS-Utils/POIItem.h"; sourceTree = "<group>"; };
-		40C1A5181DDF5ACE000F80AA /* POIItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = POIItem.m; path = "Google-Maps-iOS-Utils/POIItem.m"; sourceTree = "<group>"; };
 		40C1A5261DE58EED000F80AA /* CutomClusterIconGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CutomClusterIconGenerator.swift; sourceTree = "<group>"; };
 		40E78E131DD31A86000A3776 /* Workfinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workfinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40E78E161DD31A86000A3776 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -452,40 +411,9 @@
 		40C1A4F61DDF5A65000F80AA /* GoogleMapsUtils */ = {
 			isa = PBXGroup;
 			children = (
-				40C1A4F71DDF5ACE000F80AA /* GMUCluster.h */,
-				40C1A4F81DDF5ACE000F80AA /* GMUClusterAlgorithm.h */,
-				40C1A4F91DDF5ACE000F80AA /* GMUClusterIconGenerator.h */,
-				40C1A4FA1DDF5ACE000F80AA /* GMUClusterItem.h */,
-				40C1A4FB1DDF5ACE000F80AA /* GMUClusterManager.h */,
-				40C1A4FC1DDF5ACE000F80AA /* GMUClusterManager.m */,
-				40C1A4FD1DDF5ACE000F80AA /* GMUClusterManager+Testing.h */,
-				40C1A4FE1DDF5ACE000F80AA /* GMUClusterRenderer.h */,
-				40C1A4FF1DDF5ACE000F80AA /* GMUDefaultClusterIconGenerator.h */,
-				40C1A5001DDF5ACE000F80AA /* GMUDefaultClusterIconGenerator.m */,
-				40C1A5011DDF5ACE000F80AA /* GMUDefaultClusterIconGenerator+Testing.h */,
 				40C1A5021DDF5ACE000F80AA /* GMUDefaultClusterRenderer.h */,
 				40C1A5031DDF5ACE000F80AA /* GMUDefaultClusterRenderer.m */,
 				40C1A5041DDF5ACE000F80AA /* GMUDefaultClusterRenderer+Testing.h */,
-				40C1A5051DDF5ACE000F80AA /* GMUGridBasedClusterAlgorithm.h */,
-				40C1A5061DDF5ACE000F80AA /* GMUGridBasedClusterAlgorithm.m */,
-				40C1A5071DDF5ACE000F80AA /* GMUMarkerClustering.h */,
-				40C1A5081DDF5ACE000F80AA /* GMUNonHierarchicalDistanceBasedAlgorithm.h */,
-				40C1A5091DDF5ACE000F80AA /* GMUNonHierarchicalDistanceBasedAlgorithm.m */,
-				40C1A50A1DDF5ACE000F80AA /* GMUSimpleClusterAlgorithm.h */,
-				40C1A50B1DDF5ACE000F80AA /* GMUSimpleClusterAlgorithm.m */,
-				40C1A50C1DDF5ACE000F80AA /* GMUStaticCluster.h */,
-				40C1A50D1DDF5ACE000F80AA /* GMUStaticCluster.m */,
-				40C1A50E1DDF5ACE000F80AA /* GMUWrappingDictionaryKey.h */,
-				40C1A50F1DDF5ACE000F80AA /* GMUWrappingDictionaryKey.m */,
-				40C1A5101DDF5ACE000F80AA /* GQTBounds.h */,
-				40C1A5111DDF5ACE000F80AA /* GQTPoint.h */,
-				40C1A5121DDF5ACE000F80AA /* GQTPointQuadTree.h */,
-				40C1A5131DDF5ACE000F80AA /* GQTPointQuadTree.m */,
-				40C1A5141DDF5ACE000F80AA /* GQTPointQuadTreeChild.h */,
-				40C1A5151DDF5ACE000F80AA /* GQTPointQuadTreeChild.m */,
-				40C1A5161DDF5ACE000F80AA /* GQTPointQuadTreeItem.h */,
-				40C1A5171DDF5ACE000F80AA /* POIItem.h */,
-				40C1A5181DDF5ACE000F80AA /* POIItem.m */,
 				40C1A5261DE58EED000F80AA /* CutomClusterIconGenerator.swift */,
 			);
 			name = GoogleMapsUtils;
@@ -1349,13 +1277,11 @@
 				FC21BE3A220F53EB00A0A389 /* SearchViewFooterView.swift in Sources */,
 				53BA73D624B071DF00B06421 /* KSCluster.swift in Sources */,
 				FCC753EE1F80F26200E9ECD6 /* MapModel.swift in Sources */,
-				40C1A5191DDF5ACE000F80AA /* GMUClusterManager.m in Sources */,
 				20D51BE41E27710C003A8358 /* UNService.swift in Sources */,
 				40C1A51B1DDF5ACE000F80AA /* GMUDefaultClusterRenderer.m in Sources */,
 				40C1A4E61DDB356B000F80AA /* TabBarViewController.swift in Sources */,
 				FC21BE37220F53EB00A0A389 /* PeopleDataSource.swift in Sources */,
 				53BA73D724B071E400B06421 /* KSPin.swift in Sources */,
-				40C1A5211DDF5ACE000F80AA /* GQTPointQuadTree.m in Sources */,
 				40E78E801DD32BF4000A3776 /* SideDrawerTableViewCell.swift in Sources */,
 				40C1A5271DE58EED000F80AA /* CutomClusterIconGenerator.swift in Sources */,
 				FC21BE3D220F53EB00A0A389 /* FilterButton.swift in Sources */,
@@ -1363,16 +1289,13 @@
 				FC3CD1DA221566F200F91B50 /* Geocoding.swift in Sources */,
 				FCDC543024289B9D002581FF /* CompanyWorkplaceListPresenter.swift in Sources */,
 				40E78E791DD32BE7000A3776 /* DrawerVisualState.swift in Sources */,
-				40C1A5201DDF5ACE000F80AA /* GMUWrappingDictionaryKey.m in Sources */,
 				40A5CF401DED81F7000007AB /* CustomViewFlowLayout.swift in Sources */,
 				40E78E771DD32BE7000A3776 /* DrawerBarButtonItem.swift in Sources */,
 				FC21BE36220F53EB00A0A389 /* TestSearchDataGetter.swift in Sources */,
 				FCA53B961FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift in Sources */,
-				40C1A51D1DDF5ACE000F80AA /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				53BA73C924B060CF00B06421 /* KSSize.swift in Sources */,
 				FCEE5E1E2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift in Sources */,
 				FC771F502416294D00AD6317 /* ComanyFileParser.swift in Sources */,
-				40C1A51F1DDF5ACE000F80AA /* GMUStaticCluster.m in Sources */,
 				FC1DC06B21FE142D009ABC60 /* AppCoordinator.swift in Sources */,
 				53BA73D524B071DB00B06421 /* KSGMClusterManager.swift in Sources */,
 				FCE51E422210365B00DC1D50 /* CompanySearchDataGetter.swift in Sources */,
@@ -1380,9 +1303,7 @@
 				FCCFC7CF224D2C110060F7EC /* LocalStoreMigrationsRunner.swift in Sources */,
 				FC93DC5823202B8F00F1CE23 /* Config.swift in Sources */,
 				40E78EA01DD5E208000A3776 /* LocationHelper.swift in Sources */,
-				40C1A5231DDF5ACE000F80AA /* POIItem.m in Sources */,
 				53BA73C824B060CF00B06421 /* KSPoint.swift in Sources */,
-				40C1A51E1DDF5ACE000F80AA /* GMUSimpleClusterAlgorithm.m in Sources */,
 				40A5CF3C1DED6FA2000007AB /* InterestsViewController.swift in Sources */,
 				FC53367A2488CD5000DA3033 /* Migrate_v2_to_v3.swift in Sources */,
 				40E78E701DD32BD4000A3776 /* MenuHelper.swift in Sources */,
@@ -1400,7 +1321,6 @@
 				20FABFEC1DDDA63600D583E2 /* FileHelper.swift in Sources */,
 				40E78E891DD32C3C000A3776 /* ExtensionsHelper.swift in Sources */,
 				40A5CF3E1DED72E8000007AB /* InterestsCollectionViewCell.swift in Sources */,
-				40C1A51A1DDF5ACE000F80AA /* GMUDefaultClusterIconGenerator.m in Sources */,
 				FCB49301222A4B3B00B88B8B /* SearchCoordinator.swift in Sources */,
 				40E78E661DD32B94000A3776 /* TabBarCoordinator.swift in Sources */,
 				53BA73DF24B1F3D200B06421 /* KSClusteringAlgorithm.swift in Sources */,
@@ -1435,12 +1355,10 @@
 				FCC1DF5B232505640074D5C1 /* CompanyCoordinatorFactory.swift in Sources */,
 				FCE51E44221039D600DC1D50 /* PersonSearchDataGetter.swift in Sources */,
 				FC04B862233271FE0034A60E /* MasterBuilder.swift in Sources */,
-				40C1A51C1DDF5ACE000F80AA /* GMUGridBasedClusterAlgorithm.m in Sources */,
 				FC50E9CE2213EF5400C9A621 /* SearchModeSelectorView.swift in Sources */,
 				FCDC543124289B9D002581FF /* CompanyTileViewData.swift in Sources */,
 				FC99BDCA20D170CA00278DDE /* F4SCompanyDownloadManager.swift in Sources */,
 				40E78E811DD32BF4000A3776 /* TableViewCell.swift in Sources */,
-				40C1A5221DDF5ACE000F80AA /* GQTPointQuadTreeChild.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class PeopleSearchDataSource : NSObject, SearchDataSourcing {
     var userLocation: CLLocationCoordinate2D?

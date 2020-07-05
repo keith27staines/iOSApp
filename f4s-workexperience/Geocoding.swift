@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 func convertLocationToAddress(latitude:Double,longitude:Double){
     

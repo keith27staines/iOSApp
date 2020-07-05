@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import UIKit
 import CoreGraphics
 
-class ClusterIconGenerator: NSObject, GMUClusterIconGenerator {
+class ClusterIconGenerator {
     
     var color: UIColor = UIColor.red
     

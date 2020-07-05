@@ -16,7 +16,7 @@ import WorkfinderOnboardingUseCase
 
 
 enum CamerWillMoveAction {
-    case explodeCluster(GMUCluster)
+    case explodeCluster(KSCluster)
     case other
     case none
 }
@@ -94,9 +94,6 @@ class MapViewController: UIViewController {
     @IBOutlet weak var refineLabelContainerView: UIView!
     @IBOutlet weak var filtersButton: UIButton!
     @IBOutlet weak var refineSearchLabel: UILabel!
-    
-    /// Manages clustering of the pins on the map
-    fileprivate var clusterManager: GMUClusterManager!
     
     lazy var ksClusterManager: KSGMClusterManager = {
         KSGMClusterManager(mapView: self.mapView)
@@ -209,9 +206,10 @@ class MapViewController: UIViewController {
         return [F4SUUID](workplacePinSet.map { (pin) -> F4SUUID in pin.workplaceUuid })
     }
     
-    func presentWorkplacesPopup(for cluster: GMUCluster) {
+    func presentWorkplacesPopup(for cluster: KSCluster) {
         let workplaceUuids = workplaceUuidsFromCluster(cluster)
-        let origin = mapView.projection.point(for: cluster.position)
+        let position = CLLocationCoordinate2D(latitude: cluster.point.y, longitude: cluster.point.x)
+        let origin = mapView.projection.point(for: position)
         presentCompaniesPopup(for: workplaceUuids, origin: origin)
     }
 
@@ -385,27 +383,16 @@ extension MapViewController {
 extension MapViewController {
     
     fileprivate func setupMap() {
+        mapView.settings.myLocationButton = false
+        mapView.setMinZoom(6.0, maxZoom: 16.0)
+        mapView.settings.tiltGestures = false
+        mapView.settings.rotateGestures = false
         mapView.delegate = self
-        let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
-        let iconGenerator = self.iconGeneratorWithImages()
-        let renderer = GMUDefaultClusterRenderer(mapView: mapView, clusterIconGenerator: iconGenerator)
-        clusterManager = GMUClusterManager(map: mapView, algorithm: algorithm, renderer: renderer)
-        clusterManager.setDelegate(self, mapDelegate: self)
-        
         locationManager = makeLocationManager()
         if shouldRequestAuthorization {
             locationManager?.requestWhenInUseAuthorization()
             allowLocationUpdate = true
         }
-        
-        mapView.settings.myLocationButton = false
-        mapView.setMinZoom(6.0, maxZoom: 16.0)
-        mapView.settings.tiltGestures = false
-        mapView.settings.rotateGestures = false
-    }
-    
-    fileprivate func iconGeneratorWithImages() -> GMUClusterIconGenerator {
-        return ClusterIconGenerator(color: clusterColor)
     }
     
     fileprivate func makeLocationManager() -> CLLocationManager {
@@ -549,14 +536,9 @@ extension MapViewController: GMSMapViewDelegate {
 
 }
 
-// MARK: - GMUClusterManager Delegate
-extension MapViewController: GMUClusterManagerDelegate {
+extension MapViewController {
     
-    func clusterTapped(_: KSCluster) {
-        
-    }
-    
-    func clusterManager(_: GMUClusterManager, didTap cluster: GMUCluster) {
+    func clusterTapped(_ cluster: KSCluster) {
         guard let explodedBounds = boundsForExplodedClusterContent(cluster) else {
             let newCamera = GMSCameraPosition.camera(withTarget: cluster.position, zoom: mapView.camera.zoom + 1)
             let update = GMSCameraUpdate.setCamera(newCamera)
@@ -579,14 +561,14 @@ extension MapViewController: GMUClusterManagerDelegate {
         return mapView.camera.zoom > mapView.minZoom
     }
     
-    func shouldExplodeCluster(_ cluster: GMUCluster) -> Bool {
+    func shouldExplodeCluster(_ cluster: KSCluster) -> Bool {
         if !canZoomIn() {
             return false
         }
         guard let explodedBounds = boundsForExplodedClusterContent(cluster), let _ = self.visibleMapBounds else {
             return false
         }
-        if cluster.items.count < 11 || explodedBounds.diagonalDistance() < 200 {
+        if cluster.count < 11 || explodedBounds.diagonalDistance() < 200 {
             return false
         }
         return true
@@ -596,7 +578,7 @@ extension MapViewController: GMUClusterManagerDelegate {
 // MARK:- Clusters helpers
 extension MapViewController {
     
-    func boundsForExplodedClusterContent(_ cluster: GMUCluster) -> GMSCoordinateBounds? {
+    func boundsForExplodedClusterContent(_ cluster: KSCluster) -> GMSCoordinateBounds? {
         guard let firstPosition = cluster.items.first?.position else {
             return nil
         }
