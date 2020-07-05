@@ -281,8 +281,7 @@ extension MapViewController {
         if !emplacedCompanyPins.contains(pin) {
             let x = pin.position.longitude
             let y = pin.position.latitude
-            let ksPin = KSPin(id: pin.workplaceUuid, point: KSPoint(x: x, y: y))
-            try? ksClusterManager.insertPin(ksPin)
+            ksClusterManager.insertObject(x: x, y: y, object: pin)
             clusterManager.add(pin)
             emplacedCompanyPins.insert(pin)
         }

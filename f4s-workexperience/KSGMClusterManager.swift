@@ -10,6 +10,8 @@ public class KSGMClusterManager: NSObject {
     weak var mapDelegate: GMSMapViewDelegate?
     var clusterTapped: ((KSCluster) -> Void)?
     weak var mapView: GMSMapView?
+    private var nextPinId: Int = 0
+    private var nextClusterId: Int = 0
     
     public init(mapView: GMSMapView,
                 mapDelegate: GMSMapViewDelegate,
@@ -23,13 +25,20 @@ public class KSGMClusterManager: NSObject {
         mapView.delegate = self
     }
     
-    public func insert(_ pins: [KSPin]) {
+    public func insertObject(x: Double, y: Double, object: Any) {
+        nextPinId += 1
+        var pin = KSPin(id: nextPinId, point: KSPoint(x: x, y: y))
+        pin.object = object
+        try? insertPin(pin)
+    }
+    
+    private func insert(_ pins: [KSPin]) {
         for pin in pins {
             try? insertPin(pin)
         }
     }
     
-    func insertPin(_ pin: KSPin) throws {
+    private func insertPin(_ pin: KSPin) throws {
         try pinsQuadTree.insert(item: pin)
         pins.append(pin)
     }
@@ -44,27 +53,24 @@ public class KSGMClusterManager: NSObject {
         clustersQuadTree.retrieveAll().compactMap { ($0 as? KSCluster) }
     }
     
-    public func rebuildClusters(catchementSize: KSSize, in rect: KSRect) {
+    public func rebuildClusters(catchementSize: KSSize) {
+        let items = pinsQuadTree.retrieveAll()
         clustersQuadTree = KSQuadTree(bounds: bounds)
-        let pins = pinsQuadTree.retrieveWithinRect(rect).compactMap { (item) -> KSPin? in
-            item as? KSPin
+        var clusteredPins = Set<KSPin>()
+        var unclusteredPins = Set<KSPin>(pinsQuadTree.retrieveAll() as? [KSPin] ?? [])
+        for item in items {
+            guard let pin = item as? KSPin,
+                unclusteredPins.contains(pin) else { continue }
+            let cluster = KSCluster(id: nextClusterId, centerPin: pin)
+            do {
+                try clustersQuadTree.insert(item: cluster)
+                unclusteredPins.remove(pin)
+                clusteredPins.insert(pin)
+            } catch {
+                continue
+            }
+
         }
-        for pin in pins {
-            let catchement = KSRect(center: pin.point, size: catchementSize)
-            addPinToNearestClusterInCatchementRect(pin: pin, rect: catchement)
-        }
-    }
-    
-    func addPinToNearestClusterInCatchementRect(pin: KSPin, rect: KSRect) {
-        guard
-            let nearby = clustersQuadTree.retrieveWithinRect(rect) as? [KSCluster],
-            let nearestCluster = findNearest(to: pin, from: nearby)
-            else {
-                let newCluster = KSCluster(id: "", centerPin: pin)
-                try? clustersQuadTree.insert(item: newCluster)
-                return
-        }
-        nearestCluster.addPin(pin)
     }
     
     func findNearest<A:XYLocatable, B:XYLocatable>(to object: A, from others: [B] ) -> B? {

@@ -1,7 +1,7 @@
 
 public class KSCluster: KSQuadTreeItem, Hashable, Equatable {
     public var point: KSPoint { centerPin.point }
-    public let id: String
+    public let id: Int
     public let centerPin: KSPin
     public private (set) var pins: Set<KSPin>
     public var x: Double { return centerPin.x }
@@ -9,19 +9,18 @@ public class KSCluster: KSQuadTreeItem, Hashable, Equatable {
     public var count: Int { return pins.count }
     
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(centerPin)
         hasher.combine(id)
     }
     
     public static func == (lhs: KSCluster, rhs: KSCluster) -> Bool {
-        lhs.centerPin == rhs.centerPin && lhs.id == rhs.id
+        lhs.id == rhs.id
     }
     
     public func addPin(_ pin: KSPin) {
         pins.insert(pin)
     }
     
-    public init(id: String, centerPin: KSPin) {
+    public init(id: Int, centerPin: KSPin) {
         self.id = id
         self.centerPin = centerPin
         self.pins = Set<KSPin>([centerPin])
