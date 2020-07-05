@@ -10,5 +10,13 @@ class KSGMClusterRenderer {
         self.mapView = mapView
     }
     
+    func update() {
+        
+    }
+    
+    func renderClusters(_ clusters: [KSCluster]) {
+        
+    }
+    
     
 }

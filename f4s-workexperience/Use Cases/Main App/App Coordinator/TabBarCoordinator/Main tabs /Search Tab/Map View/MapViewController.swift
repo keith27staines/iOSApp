@@ -99,9 +99,7 @@ class MapViewController: UIViewController {
     fileprivate var clusterManager: GMUClusterManager!
     
     lazy var ksClusterManager: KSGMClusterManager = {
-        KSGMClusterManager(mapView: self.mapView,
-                           mapDelegate: self,
-                           clusterTapped: clusterTapped)
+        KSGMClusterManager(mapView: self.mapView)
     }()
     
     lazy var ksClusterRenderer: KSGMClusterRenderer = {
@@ -387,7 +385,7 @@ extension MapViewController {
 extension MapViewController {
     
     fileprivate func setupMap() {
-        // cluster algorithm setup
+        mapView.delegate = self
         let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
         let iconGenerator = self.iconGeneratorWithImages()
         let renderer = GMUDefaultClusterRenderer(mapView: mapView, clusterIconGenerator: iconGenerator)

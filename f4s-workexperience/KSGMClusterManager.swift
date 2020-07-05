@@ -3,44 +3,34 @@ import GoogleMaps
 
 public class KSGMClusterManager: NSObject {
     
-    public let bounds = KSRect(x: -180, y: -90, width: 360, height: 90)
-    public var pinsQuadTree: KSQuadTree
-    public var clustersQuadTree: KSQuadTree
-    public private (set) var pins: [KSPin] = []
-    weak var mapDelegate: GMSMapViewDelegate?
-    var clusterTapped: ((KSCluster) -> Void)?
     weak var mapView: GMSMapView?
-    private var nextPinId: Int = 0
-    private var nextClusterId: Int = 0
+    public let bounds = KSRect(x: -180, y: -90, width: 360, height: 90)
+    private var pins: Set<KSPin> = []
+    private var pinsQuadTree: KSQuadTree
+    private var clustersQuadTree: KSQuadTree
+    private let algorithm = KSClusteringAlgorithm()
+    private let renderer: KSGMClusterRenderer
+    private var _nextPinId: Int = 0
     
-    public init(mapView: GMSMapView,
-                mapDelegate: GMSMapViewDelegate,
-                clusterTapped: @escaping (KSCluster) -> Void) {
+    private func nextPinId() -> Int {
+        _nextPinId += 1
+        return _nextPinId
+    }
+    
+    public init(mapView: GMSMapView) {
         self.mapView = mapView
-        self.mapDelegate = mapDelegate
-        self.clusterTapped = clusterTapped
         pinsQuadTree = KSQuadTree(bounds: bounds)
         clustersQuadTree = KSQuadTree(bounds: bounds)
+        renderer = KSGMClusterRenderer(mapView: mapView)
         super.init()
-        mapView.delegate = self
+        mapView.addObserver(self, forKeyPath: "camera", options: .new, context: nil)
     }
     
     public func insertObject(x: Double, y: Double, object: Any) {
-        nextPinId += 1
-        var pin = KSPin(id: nextPinId, point: KSPoint(x: x, y: y))
+        var pin = KSPin(id: nextPinId(), point: KSPoint(x: x, y: y))
         pin.object = object
-        try? insertPin(pin)
-    }
-    
-    private func insert(_ pins: [KSPin]) {
-        for pin in pins {
-            try? insertPin(pin)
-        }
-    }
-    
-    private func insertPin(_ pin: KSPin) throws {
-        try pinsQuadTree.insert(item: pin)
-        pins.append(pin)
+        pins.insert(pin)
+        try? pinsQuadTree.insert(item: pin)
     }
     
     public func clear() {
@@ -49,53 +39,51 @@ public class KSGMClusterManager: NSObject {
         clustersQuadTree = KSQuadTree(bounds: bounds)
     }
     
-    public func getClusters() -> [KSCluster] {
+    public func clusters() -> [KSCluster] {
         clustersQuadTree.retrieveAll().compactMap { ($0 as? KSCluster) }
     }
     
-    public func rebuildClusters(catchementSize: KSSize) {
-        let items = pinsQuadTree.retrieveAll()
-        clustersQuadTree = KSQuadTree(bounds: bounds)
-        var clusteredPins = Set<KSPin>()
-        var unclusteredPins = Set<KSPin>(pinsQuadTree.retrieveAll() as? [KSPin] ?? [])
-        for item in items {
-            guard let pin = item as? KSPin,
-                unclusteredPins.contains(pin) else { continue }
-            let cluster = KSCluster(id: nextClusterId, centerPin: pin)
-            do {
-                try clustersQuadTree.insert(item: cluster)
-                unclusteredPins.remove(pin)
-                clusteredPins.insert(pin)
-            } catch {
-                continue
-            }
-
+    private var oldClusterWidth: Double = 0
+    
+    public func cameraDidChange() {
+        guard
+            clusterWidth != .zero,
+            isNewVisibleWidthSignificantlyDifferent(clusterWidth)
+            else {
+                renderer.update()
+                return
+        }
+        algorithm.requestRebuildClusters(
+            bounds: bounds,
+            pins: pins,
+            catchementSize: clusterSize) { [weak self] (clustersQuadTree) in
+            guard let self = self else { return }
+            self.clustersQuadTree = clustersQuadTree
+            self.oldClusterWidth = self.clusterWidth
         }
     }
     
-    func findNearest<A:XYLocatable, B:XYLocatable>(to object: A, from others: [B] ) -> B? {
-        var leastDistance = Double.greatestFiniteMagnitude
-        var closest: B?
-        for other in others {
-            let aDistance = object.distance2From(other)
-            if aDistance < leastDistance {
-                leastDistance = aDistance
-                closest = other
-            }
-        }
-        return closest
+    private func isNewVisibleWidthSignificantlyDifferent(_ newWidth: Double) -> Bool {
+        guard newWidth != oldClusterWidth else { return false }
+        guard oldClusterWidth != .zero else { return true }
+        return (0.9...1.1).contains(newWidth/oldClusterWidth) ? false :  true
     }
+    
+    public var clusterSize: KSSize { KSSize(width: clusterWidth, height: clusterWidth) }
+    
+    private var clusterWidth: Double { visibleWidth / 10.0 }
+    
+    private var visibleWidth: Double {
+        guard let visibleRegion = mapView?.projection.visibleRegion()
+            else {
+                return 0.0
+        }
+        return abs(visibleRegion.farLeft.longitude - visibleRegion.farRight.longitude)
+    }    
 }
 
-extension KSGMClusterManager: GMSMapViewDelegate {
-    public func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        guard
-            let cluster = marker.userData as? KSCluster,
-            let clusterTapped = clusterTapped
-            else {
-            return self.mapDelegate?.mapView?(mapView, didTap: marker) ?? false
-        }
-        clusterTapped(cluster)
-        return false
+public extension KSGMClusterManager {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        cameraDidChange()
     }
 }
