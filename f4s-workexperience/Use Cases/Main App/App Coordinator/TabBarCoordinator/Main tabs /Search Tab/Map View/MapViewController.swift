@@ -498,9 +498,8 @@ extension MapViewController: GMSMapViewDelegate {
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        let origin = mapView.projection.point(for: marker.position)
-        let companies = companiesFromMarker(marker)
-        presentCompaniesPopup(for: companies, origin: origin)
+        guard let cluster = marker.userData as? KSCluster else { return false }
+        processTappedCluster(cluster)
         return true
     }
     
@@ -515,17 +514,12 @@ extension MapViewController: GMSMapViewDelegate {
         }
         cameraWillMoveAction = .none
     }
-    
-    func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
-        // user taps on a single pin
-        return nil
-    }
 
 }
 
 extension MapViewController {
     
-    func clusterTapped(_ cluster: KSCluster) {
+    func processTappedCluster(_ cluster: KSCluster) {
         
         guard let explodedBounds = boundsForExplodedClusterContent(cluster) else {
             let newCamera = GMSCameraPosition.camera(withTarget: cluster.location, zoom: mapView.camera.zoom + 1)
@@ -541,14 +535,6 @@ extension MapViewController {
         }
     }
     
-    func canZoomIn() -> Bool {
-        return mapView.camera.zoom < mapView.maxZoom
-    }
-    
-    func canZoomOut() -> Bool {
-        return mapView.camera.zoom > mapView.minZoom
-    }
-    
     func shouldExplodeCluster(_ cluster: KSCluster) -> Bool {
         if !canZoomIn() {
             return false
@@ -561,6 +547,15 @@ extension MapViewController {
         }
         return true
     }
+    
+    func canZoomIn() -> Bool {
+        return mapView.camera.zoom < mapView.maxZoom
+    }
+    
+    func canZoomOut() -> Bool {
+        return mapView.camera.zoom > mapView.minZoom
+    }
+    
 }
 
 // MARK:- Clusters helpers

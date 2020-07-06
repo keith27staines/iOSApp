@@ -13,7 +13,7 @@ public class KSGMClusterManager: NSObject {
     private var _nextPinId: Int = 0
     private var oldClusterWidth: Double = 0
     public var clusterSize: KSSize { KSSize(width: clusterWidth, height: clusterWidth) }
-    private var clusterWidth: Double { visibleWidth / 10.0 }
+    private var clusterWidth: Double { visibleWidth / 4.0 }
     
     private func nextPinId() -> Int {
         _nextPinId += 1
@@ -63,7 +63,8 @@ public class KSGMClusterManager: NSObject {
         algorithm.requestRebuildClusters(
             bounds: bounds,
             pins: pins,
-            catchementSize: clusterSize) { [weak self] (clustersQuadTree, clusters) in
+            catchementSize: clusterSize,
+            pinsQuadTree: pinsQuadTree) { [weak self] (clustersQuadTree, clusters) in
             guard let self = self else { return }
             self.clustersQuadTree = clustersQuadTree
             self.oldClusterWidth = self.clusterWidth

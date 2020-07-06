@@ -20,10 +20,16 @@ class KSClusteringAlgorithm {
         bounds: KSRect,
         pins: Set<KSPin>,
         catchementSize: KSSize,
+        pinsQuadTree: KSQuadTree,
         completion: @escaping (KSQuadTree, [KSCluster]) -> Void) {
         rebuildWorkItem?.cancel()
-        let workItem = makeRebuildClustersWorkItem(bounds: bounds, pins: pins) { clustersQuadTree, clusters in
-            completion(clustersQuadTree, clusters)
+        let workItem = makeRebuildClustersWorkItem(
+            bounds: bounds,
+            pins: pins,
+            catchementSize: catchementSize,
+            pinQuadTree: pinsQuadTree) {
+                clustersQuadTree, clusters in
+                completion(clustersQuadTree, clusters)
         }
         rebuildWorkItem = workItem
         rebuildQueue.asyncAfter(deadline: .now() + 0.2, execute: workItem)
@@ -32,12 +38,13 @@ class KSClusteringAlgorithm {
     private func makeRebuildClustersWorkItem(
         bounds: KSRect,
         pins: Set<KSPin>,
+        catchementSize: KSSize,
+        pinQuadTree: KSQuadTree,
         completion: @escaping (KSQuadTree, [KSCluster]) -> Void) -> DispatchWorkItem {
         
         return DispatchWorkItem(qos: .userInteractive) { [weak self] in
             guard let self = self else { return }
             let clustersQuadTree = KSQuadTree(bounds: bounds)
-            var clusteredPins = Set<KSPin>()
             var unclusteredPins = pins
             var clusters = [KSCluster]()
             for pin in pins {
@@ -47,8 +54,15 @@ class KSClusteringAlgorithm {
                     try clustersQuadTree.insert(item: cluster)
                     clusters.append(cluster)
                     unclusteredPins.remove(pin)
-                    clusteredPins.insert(pin)
-                    let nearyby = 
+                    let catchementRect = KSRect(center: pin.point, size: catchementSize)
+                    let nearyItems = pinQuadTree.retrieveWithinRect(catchementRect)
+                    for item in nearyItems {
+                        guard
+                            let nearbyPin = item as? KSPin,
+                            unclusteredPins.contains(nearbyPin) else { continue}
+                        cluster.addPin(nearbyPin)
+                        unclusteredPins.remove(nearbyPin)
+                    }
                 } catch {
                     continue
                 }

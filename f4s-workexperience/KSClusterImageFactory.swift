@@ -11,8 +11,13 @@ class KSClusterImageFactory {
         self.init()
         self.color = color
     }
+    
+    lazy var pinImage: UIImage! = {
+        UIImage(named: "markerIcon")?.tinted(with: self.color)
+    }()
 
     func clusterImageForCount(_ count: Int) -> UIImage! {
+        guard count > 1 else { return pinImage }
 
         let font = UIFont.boldSystemFont(ofSize: 17)
         let text = String(count)
@@ -35,5 +40,17 @@ class KSClusterImageFactory {
         let clusterIcon = UIGraphicsGetImageFromCurrentImageContext()
         return clusterIcon
     }
+    
+
 }
 
+extension UIImage {
+    func tinted(with color: UIColor, isOpaque: Bool = false) -> UIImage? {
+        let format = imageRendererFormat
+        format.opaque = isOpaque
+        return UIGraphicsImageRenderer(size: size, format: format).image { _ in
+            color.set()
+            withRenderingMode(.alwaysTemplate).draw(at: .zero)
+        }
+    }
+}

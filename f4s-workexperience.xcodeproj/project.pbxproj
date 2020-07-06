@@ -16,7 +16,6 @@
 		40C1A4E61DDB356B000F80AA /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C1A4E51DDB356B000F80AA /* TabBarViewController.swift */; };
 		40C1A4F31DDEF2F6000F80AA /* AutoCompleteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40C1A4F11DDEF2F6000F80AA /* AutoCompleteTableViewCell.xib */; };
 		40C1A51B1DDF5ACE000F80AA /* GMUDefaultClusterRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C1A5031DDF5ACE000F80AA /* GMUDefaultClusterRenderer.m */; };
-		40C1A5271DE58EED000F80AA /* CutomClusterIconGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C1A5261DE58EED000F80AA /* CutomClusterIconGenerator.swift */; };
 		40E78E171DD31A86000A3776 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E161DD31A86000A3776 /* AppDelegate.swift */; };
 		40E78E1E1DD31A86000A3776 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E1D1DD31A86000A3776 /* Assets.xcassets */; };
 		40E78E211DD31A86000A3776 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E1F1DD31A86000A3776 /* LaunchScreen.storyboard */; };
@@ -212,7 +211,6 @@
 		40C1A4F21DDEF2F6000F80AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AutoCompleteTableViewCell.xib; sourceTree = "<group>"; };
 		40C1A5021DDF5ACE000F80AA /* GMUDefaultClusterRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMUDefaultClusterRenderer.h; path = "Google-Maps-iOS-Utils/GMUDefaultClusterRenderer.h"; sourceTree = "<group>"; };
 		40C1A5031DDF5ACE000F80AA /* GMUDefaultClusterRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMUDefaultClusterRenderer.m; path = "Google-Maps-iOS-Utils/GMUDefaultClusterRenderer.m"; sourceTree = "<group>"; };
-		40C1A5261DE58EED000F80AA /* CutomClusterIconGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CutomClusterIconGenerator.swift; sourceTree = "<group>"; };
 		40E78E131DD31A86000A3776 /* Workfinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workfinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40E78E161DD31A86000A3776 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40E78E1D1DD31A86000A3776 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -414,7 +412,6 @@
 			children = (
 				40C1A5021DDF5ACE000F80AA /* GMUDefaultClusterRenderer.h */,
 				40C1A5031DDF5ACE000F80AA /* GMUDefaultClusterRenderer.m */,
-				40C1A5261DE58EED000F80AA /* CutomClusterIconGenerator.swift */,
 				537613F824B2F9AC0001F84C /* XYLocatable+Extensions.swift */,
 			);
 			name = "Clustering helpers";
@@ -1284,7 +1281,6 @@
 				FC21BE37220F53EB00A0A389 /* PeopleDataSource.swift in Sources */,
 				53BA73D724B071E400B06421 /* KSPin.swift in Sources */,
 				40E78E801DD32BF4000A3776 /* SideDrawerTableViewCell.swift in Sources */,
-				40C1A5271DE58EED000F80AA /* CutomClusterIconGenerator.swift in Sources */,
 				FC21BE3D220F53EB00A0A389 /* FilterButton.swift in Sources */,
 				FC771F522416294D00AD6317 /* PinRepository.swift in Sources */,
 				FC3CD1DA221566F200F91B50 /* Geocoding.swift in Sources */,
