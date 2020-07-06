@@ -108,6 +108,8 @@
 		FC771F592416299B00AD6317 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771F562416299B00AD6317 /* Common.swift */; };
 		FC7B63E12465257D006AC0C6 /* apple-app-site-association-full in Resources */ = {isa = PBXBuildFile; fileRef = FC7B63E02465257D006AC0C6 /* apple-app-site-association-full */; };
 		FC7B63E424652FD2006AC0C6 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC7B63E324652FD2006AC0C6 /* AuthenticationServices.framework */; };
+		FC86FDB224B340080081132A /* KSGMStaticClusterRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC86FDB124B340080081132A /* KSGMStaticClusterRenderer.swift */; };
+		FC86FDB524B340760081132A /* KSClusterRendererProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC86FDB424B340760081132A /* KSClusterRendererProtocol.swift */; };
 		FC8E303A20F4A60B006059DE /* F4SLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8E303920F4A60B006059DE /* F4SLogger.swift */; };
 		FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC92567A1F8F70D100FF9841 /* InterestsModel.swift */; };
 		FC93DC5823202B8F00F1CE23 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC5723202B8F00F1CE23 /* Config.swift */; };
@@ -315,6 +317,8 @@
 		FC7B63E02465257D006AC0C6 /* apple-app-site-association-full */ = {isa = PBXFileReference; lastKnownFileType = text; path = "apple-app-site-association-full"; sourceTree = "<group>"; };
 		FC7B63E224652FD2006AC0C6 /* f4s_workexperienceReleaseF4SLive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = f4s_workexperienceReleaseF4SLive.entitlements; sourceTree = "<group>"; };
 		FC7B63E324652FD2006AC0C6 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
+		FC86FDB124B340080081132A /* KSGMStaticClusterRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSGMStaticClusterRenderer.swift; sourceTree = "<group>"; };
+		FC86FDB424B340760081132A /* KSClusterRendererProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSClusterRendererProtocol.swift; sourceTree = "<group>"; };
 		FC8E303920F4A60B006059DE /* F4SLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SLogger.swift; sourceTree = "<group>"; };
 		FC92567A1F8F70D100FF9841 /* InterestsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsModel.swift; sourceTree = "<group>"; };
 		FC93DC4123201AA200F1CE23 /* WorkfinderUserDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUserDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -594,8 +598,7 @@
 		53BA73D424B0617E00B06421 /* KSClusterManager */ = {
 			isa = PBXGroup;
 			children = (
-				53BA73D824B0946300B06421 /* KSClusterRenderer.swift */,
-				53BA73D124B0616E00B06421 /* KSGMClusterManager.swift */,
+				FC86FDB324B3403E0081132A /* Cluster rendering */,
 				53BA73D224B0616E00B06421 /* KSCluster.swift */,
 				53BA73D324B0616E00B06421 /* KSPin.swift */,
 				53BA73DA24B0961D00B06421 /* KSClusterImageFactory.swift */,
@@ -916,6 +919,17 @@
 				FC771F562416299B00AD6317 /* Common.swift */,
 			);
 			path = CompanyFileParserTests;
+			sourceTree = "<group>";
+		};
+		FC86FDB324B3403E0081132A /* Cluster rendering */ = {
+			isa = PBXGroup;
+			children = (
+				53BA73D824B0946300B06421 /* KSClusterRenderer.swift */,
+				53BA73D124B0616E00B06421 /* KSGMClusterManager.swift */,
+				FC86FDB124B340080081132A /* KSGMStaticClusterRenderer.swift */,
+				FC86FDB424B340760081132A /* KSClusterRendererProtocol.swift */,
+			);
+			name = "Cluster rendering";
 			sourceTree = "<group>";
 		};
 		FC8E303620F4A5DF006059DE /* F4SLogger */ = {
@@ -1321,6 +1335,7 @@
 				FCB49301222A4B3B00B88B8B /* SearchCoordinator.swift in Sources */,
 				40E78E661DD32B94000A3776 /* TabBarCoordinator.swift in Sources */,
 				53BA73DF24B1F3D200B06421 /* KSClusteringAlgorithm.swift in Sources */,
+				FC86FDB224B340080081132A /* KSGMStaticClusterRenderer.swift in Sources */,
 				53BA73CF24B0614000B06421 /* KSQuadtree.swift in Sources */,
 				FC771F512416294D00AD6317 /* Common.swift in Sources */,
 				FC06605523265FC300496FE2 /* CompanyCoordinatorParentProtocol+extensions.swift in Sources */,
@@ -1331,6 +1346,7 @@
 				40E78E831DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift in Sources */,
 				FCB46F02204FD86D00F0779F /* F4SLogViewController.swift in Sources */,
 				FC21BE34220F53EB00A0A389 /* PlacesSearchDataSource.swift in Sources */,
+				FC86FDB524B340760081132A /* KSClusterRendererProtocol.swift in Sources */,
 				FC25A05F1F850DF4002F51A9 /* F4SWorkplacePin.swift in Sources */,
 				FCDC543524289BD9002581FF /* CompanyWorkplaceTile.swift in Sources */,
 				FCF0D16C1FBC244800F2AF1D /* PopupAnimator.swift in Sources */,

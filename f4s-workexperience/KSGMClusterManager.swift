@@ -9,7 +9,7 @@ public class KSGMClusterManager: NSObject {
     private var pinsQuadTree: KSQuadTree
     private var clustersQuadTree: KSQuadTree
     private let algorithm = KSClusteringAlgorithm()
-    private let renderer: KSGMClusterRenderer
+    private let renderer: KSGMStaticClusterRenderer
     private var _nextPinId: Int = 0
     private var oldClusterWidth: Double = 0
     public var clusterSize: KSSize { KSSize(width: clusterWidth, height: clusterWidth) }
@@ -24,7 +24,7 @@ public class KSGMClusterManager: NSObject {
         self.mapView = mapView
         pinsQuadTree = KSQuadTree(bounds: bounds)
         clustersQuadTree = KSQuadTree(bounds: bounds)
-        renderer = KSGMClusterRenderer(mapView: mapView)
+        renderer = KSGMStaticClusterRenderer(mapView: mapView)
         super.init()
         mapView.addObserver(self, forKeyPath: "camera", options: .new, context: nil)
     }

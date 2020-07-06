@@ -99,8 +99,8 @@ class MapViewController: UIViewController {
         KSGMClusterManager(mapView: self.mapView)
     }()
     
-    lazy var clusterRenderer: KSGMClusterRenderer = {
-        KSGMClusterRenderer(mapView: self.mapView)
+    lazy var clusterRenderer: KSGMStaticClusterRenderer = {
+        KSGMStaticClusterRenderer(mapView: self.mapView)
     }()
     
     /// Manages location updates from the device
