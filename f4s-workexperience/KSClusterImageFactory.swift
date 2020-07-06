@@ -1,11 +1,12 @@
 
 import Foundation
 import UIKit
+import WorkfinderUI
 import CoreGraphics
 
 class KSClusterImageFactory {
     
-    var color: UIColor = UIColor.red
+    var color: UIColor = WorkfinderColors.workfinderPurple
     
     convenience init(color: UIColor) {
         self.init()

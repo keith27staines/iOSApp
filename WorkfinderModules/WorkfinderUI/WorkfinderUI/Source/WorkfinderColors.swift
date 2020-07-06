@@ -13,6 +13,7 @@ public struct WorkfinderColors {
     public static let lightGrey = UIColor(white: 0.93, alpha: 1)
     public static let darkGrey = UIColor(white: 0.7, alpha: 1)
     public static let warmGrey = UIColor(red: 0.8, green: 0.7, blue: 0.6, alpha: 1)
+    public static let workfinderPurple = UIColor(red: 55, green: 21, blue: 106)
     
     public static var goodValueNormal: UIColor { return WorkfinderColors.primaryColor }
     public static var goodValueActive: UIColor { return WorkfinderColors.greenColorBright }
