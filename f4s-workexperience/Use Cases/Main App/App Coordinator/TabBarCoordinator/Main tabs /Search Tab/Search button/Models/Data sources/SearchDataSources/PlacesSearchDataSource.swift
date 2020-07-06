@@ -1,12 +1,6 @@
-//
-//  LocationSearchDataSource.swift
-//  F4SPrototypes
-//
-//  Created by Keith Dev on 08/02/2019.
-//  Copyright © 2019 Keith Staines. All rights reserved.
-//
 
 import UIKit
+import CoreLocation
 
 class PlacesSearchDataSource : NSObject, SearchDataSourcing {
     var userLocation: CLLocationCoordinate2D?

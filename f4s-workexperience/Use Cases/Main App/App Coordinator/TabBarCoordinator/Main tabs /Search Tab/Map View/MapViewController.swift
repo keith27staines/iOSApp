@@ -95,11 +95,11 @@ class MapViewController: UIViewController {
     @IBOutlet weak var filtersButton: UIButton!
     @IBOutlet weak var refineSearchLabel: UILabel!
     
-    lazy var ksClusterManager: KSGMClusterManager = {
+    lazy var clusterManager: KSGMClusterManager = {
         KSGMClusterManager(mapView: self.mapView)
     }()
     
-    lazy var ksClusterRenderer: KSGMClusterRenderer = {
+    lazy var clusterRenderer: KSGMClusterRenderer = {
         KSGMClusterRenderer(mapView: self.mapView)
     }()
     
@@ -277,8 +277,7 @@ extension MapViewController {
         if !emplacedCompanyPins.contains(pin) {
             let x = pin.position.longitude
             let y = pin.position.latitude
-            ksClusterManager.insertObject(x: x, y: y, object: pin)
-            clusterManager.add(pin)
+            clusterManager.insertObject(x: x, y: y, object: pin)
             emplacedCompanyPins.insert(pin)
         }
     }
@@ -471,19 +470,7 @@ extension MapViewController  {
     
     /// Returns the bounds of the visible portion of the map
     func getVisibleRegion() -> GMSVisibleRegion {
-        let topLeftPoint = CGPoint(x: mapView.bounds.minX, y: mapView.bounds.minY)
-        let bottomRightPoint = CGPoint(x: mapView.bounds.maxX, y: mapView.bounds.maxY)
-        let topRightPoint = CGPoint(x: mapView.bounds.maxX, y: mapView.bounds.minY)
-        let bottomLeftPoint = CGPoint(x: mapView.bounds.minX, y: mapView.bounds.maxY)
-
-        let topLeftLocation = mapView.projection.coordinate(for: topLeftPoint)
-        let bottomRightLocation = mapView.projection.coordinate(for: bottomRightPoint)
-        let topRightLocation = mapView.projection.coordinate(for: topRightPoint)
-        let bottomLeftLocation = mapView.projection.coordinate(for: bottomLeftPoint)
-
-        let visibleRegionForPoints = GMSVisibleRegion(nearLeft: bottomLeftLocation, nearRight: bottomRightLocation, farLeft: topLeftLocation, farRight: topRightLocation)
-
-        return visibleRegionForPoints
+        mapView.projection.visibleRegion()
     }
 }
 
@@ -539,8 +526,9 @@ extension MapViewController: GMSMapViewDelegate {
 extension MapViewController {
     
     func clusterTapped(_ cluster: KSCluster) {
+        
         guard let explodedBounds = boundsForExplodedClusterContent(cluster) else {
-            let newCamera = GMSCameraPosition.camera(withTarget: cluster.position, zoom: mapView.camera.zoom + 1)
+            let newCamera = GMSCameraPosition.camera(withTarget: cluster.location, zoom: mapView.camera.zoom + 1)
             let update = GMSCameraUpdate.setCamera(newCamera)
             mapView.animate(with: update)
             return
@@ -579,12 +567,10 @@ extension MapViewController {
 extension MapViewController {
     
     func boundsForExplodedClusterContent(_ cluster: KSCluster) -> GMSCoordinateBounds? {
-        guard let firstPosition = cluster.items.first?.position else {
-            return nil
-        }
+        guard let firstPosition = cluster.pins.first?.location else { return nil }
         var bounds = GMSCoordinateBounds(coordinate: firstPosition, coordinate: firstPosition)
-        for item in cluster.items {
-            bounds = bounds.includingCoordinate(item.position)
+        for pin in cluster.pins {
+            bounds = bounds.includingCoordinate(pin.location)
         }
         return bounds
     }
@@ -695,9 +681,10 @@ extension MapViewController {
 extension MapViewController {
     
     /// Returns the uuids of the workplaces encapsulated by the cluster
-    func workplaceUuidsFromCluster(_ cluster: GMUCluster) -> [F4SUUID] {
-        let companyPins = cluster.items as! [F4SWorkplacePin]
-        return companyPins.map { (pin) -> F4SUUID in return pin.workplaceUuid }
+    func workplaceUuidsFromCluster(_ cluster: KSCluster) -> [F4SUUID] {
+        return cluster.pins.compactMap { (pin) -> F4SUUID? in
+            (pin.object as? F4SWorkplacePin)?.workplaceUuid
+        }
     }
     
     /// Returns the Company workplace pin corresponding to the specified marker
@@ -754,7 +741,7 @@ extension MapViewController {
             guard let strongSelf = self else { return }
             strongSelf.mapView.clear()
             strongSelf.emplacedCompanyPins.removeAll()
-            strongSelf.clusterManager.clearItems()
+            strongSelf.clusterManager.clear()
             completed()
         }
     }

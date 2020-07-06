@@ -1,4 +1,6 @@
 
+import Foundation
+
 class KSClusteringAlgorithm {
     
     let rebuildQueue = DispatchQueue(label: "rebuildClusters", qos: .userInteractive)

@@ -17,11 +17,16 @@ public class KSGMClusterRenderer {
         addOrUpdateClusters()
     }
     
-    public func renderClusters(_ clusters: [KSCluster]) {
-        self.clusters = clusters
+    public func clear() {
         clearMarkers(markers)
         markers.removeAll()
+        clusters.removeAll()
         renderedClusters.removeAll()
+    }
+    
+    public func renderClusters(_ clusters: [KSCluster]) {
+        clear()
+        self.clusters = clusters
         addOrUpdateClusters()
     }
     

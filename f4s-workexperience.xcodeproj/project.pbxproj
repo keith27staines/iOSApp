@@ -40,6 +40,7 @@
 		40E78E951DD391F3000A3776 /* MapView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E931DD391F3000A3776 /* MapView.storyboard */; };
 		40E78E981DD39275000A3776 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E971DD39275000A3776 /* MapViewController.swift */; };
 		40E78EA01DD5E208000A3776 /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E9F1DD5E208000A3776 /* LocationHelper.swift */; };
+		537613F924B2F9AC0001F84C /* XYLocatable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537613F824B2F9AC0001F84C /* XYLocatable+Extensions.swift */; };
 		53BA73C824B060CF00B06421 /* KSPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BA73C424B060CF00B06421 /* KSPoint.swift */; };
 		53BA73C924B060CF00B06421 /* KSSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BA73C524B060CF00B06421 /* KSSize.swift */; };
 		53BA73CA24B060CF00B06421 /* KSRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BA73C624B060CF00B06421 /* KSRect.swift */; };
@@ -211,7 +212,6 @@
 		40C1A4F21DDEF2F6000F80AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AutoCompleteTableViewCell.xib; sourceTree = "<group>"; };
 		40C1A5021DDF5ACE000F80AA /* GMUDefaultClusterRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMUDefaultClusterRenderer.h; path = "Google-Maps-iOS-Utils/GMUDefaultClusterRenderer.h"; sourceTree = "<group>"; };
 		40C1A5031DDF5ACE000F80AA /* GMUDefaultClusterRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMUDefaultClusterRenderer.m; path = "Google-Maps-iOS-Utils/GMUDefaultClusterRenderer.m"; sourceTree = "<group>"; };
-		40C1A5041DDF5ACE000F80AA /* GMUDefaultClusterRenderer+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "GMUDefaultClusterRenderer+Testing.h"; path = "Google-Maps-iOS-Utils/GMUDefaultClusterRenderer+Testing.h"; sourceTree = "<group>"; };
 		40C1A5261DE58EED000F80AA /* CutomClusterIconGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CutomClusterIconGenerator.swift; sourceTree = "<group>"; };
 		40E78E131DD31A86000A3776 /* Workfinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workfinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40E78E161DD31A86000A3776 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -238,6 +238,7 @@
 		40E78E941DD391F3000A3776 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MapView.storyboard; sourceTree = "<group>"; };
 		40E78E971DD39275000A3776 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		40E78E9F1DD5E208000A3776 /* LocationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationHelper.swift; sourceTree = "<group>"; };
+		537613F824B2F9AC0001F84C /* XYLocatable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XYLocatable+Extensions.swift"; sourceTree = "<group>"; };
 		53BA73C424B060CF00B06421 /* KSPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSPoint.swift; sourceTree = "<group>"; };
 		53BA73C524B060CF00B06421 /* KSSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSSize.swift; sourceTree = "<group>"; };
 		53BA73C624B060CF00B06421 /* KSRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSRect.swift; sourceTree = "<group>"; };
@@ -408,15 +409,15 @@
 			name = Config;
 			sourceTree = "<group>";
 		};
-		40C1A4F61DDF5A65000F80AA /* GoogleMapsUtils */ = {
+		40C1A4F61DDF5A65000F80AA /* Clustering helpers */ = {
 			isa = PBXGroup;
 			children = (
 				40C1A5021DDF5ACE000F80AA /* GMUDefaultClusterRenderer.h */,
 				40C1A5031DDF5ACE000F80AA /* GMUDefaultClusterRenderer.m */,
-				40C1A5041DDF5ACE000F80AA /* GMUDefaultClusterRenderer+Testing.h */,
 				40C1A5261DE58EED000F80AA /* CutomClusterIconGenerator.swift */,
+				537613F824B2F9AC0001F84C /* XYLocatable+Extensions.swift */,
 			);
-			name = GoogleMapsUtils;
+			name = "Clustering helpers";
 			path = ../../../../../../..;
 			sourceTree = "<group>";
 		};
@@ -672,7 +673,7 @@
 			children = (
 				40E78E931DD391F3000A3776 /* MapView.storyboard */,
 				40E78E971DD39275000A3776 /* MapViewController.swift */,
-				40C1A4F61DDF5A65000F80AA /* GoogleMapsUtils */,
+				40C1A4F61DDF5A65000F80AA /* Clustering helpers */,
 				FCDC542724289AE0002581FF /* Popup Company List */,
 				FC25A05D1F850DAC002F51A9 /* F4SMap models */,
 				FC771F4B2416292900AD6317 /* CompanyFileParser */,
@@ -1343,6 +1344,7 @@
 				FCE51E402210362800DC1D50 /* PlacesSearchDataGetter.swift in Sources */,
 				FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */,
 				53BA73D024B0614000B06421 /* KSRect+Extensions.swift in Sources */,
+				537613F924B2F9AC0001F84C /* XYLocatable+Extensions.swift in Sources */,
 				40E78E781DD32BE7000A3776 /* DrawerController.swift in Sources */,
 				40E78E7E1DD32BF4000A3776 /* CenterTableViewCell.swift in Sources */,
 				40E78E6E1DD32BD4000A3776 /* BaseMenuViewController.swift in Sources */,

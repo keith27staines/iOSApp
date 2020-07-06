@@ -23,6 +23,20 @@ public struct KSRect: Hashable, Equatable {
     public var maxXPoint: KSPoint { return KSPoint(x: maxX, y: minY) }
     public var maxYPoint: KSPoint { return KSPoint(x: minX, y: maxY) }
     
+    public func expandedToInclude(_ point: KSPoint) -> KSRect {
+        var newOriginX = point.x < origin.x ? point.x : origin.x
+        var newOriginY = point.y < origin.y ? point.y : origin.y
+        let newDistalX = point.x > distalPoint.x ? point.x : distalPoint.x
+        let newDistalY = point.y > distalPoint.y ? point.y : distalPoint.y
+        let padding = Double.leastNormalMagnitude // smallest padding required to ensure point is inside rect rather than on the boundary of the rect
+        newOriginX -= padding
+        newOriginY -= padding
+        let newWidth = 2 * padding + newDistalX - newOriginX
+        let newHeight = 2 * padding + newDistalY - newOriginY
+        let newSize = KSSize(width:newWidth, height:newHeight)
+        return KSRect(origin: origin, size: newSize)
+    }
+    
     public var distalPoint: KSPoint {
         return KSPoint(x: origin.x + size.width, y: origin.y + size.height)
     }

@@ -40,6 +40,7 @@ public class KSGMClusterManager: NSObject {
         pins = []
         pinsQuadTree = KSQuadTree(bounds: bounds)
         clustersQuadTree = KSQuadTree(bounds: bounds)
+        renderer.clear()
     }
     
     public func clusters() -> [KSCluster] {

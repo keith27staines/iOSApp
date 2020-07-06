@@ -26,6 +26,12 @@ public class KSCluster: KSQuadTreeItem, Hashable, Equatable {
         self.pins = Set<KSPin>([centerPin])
     }
     
+    public func smallestBoundingRect() -> KSRect {
+        pins.reduce(KSRect.zero) { (rect, pin) -> KSRect in
+            rect.expandedToInclude(pin.point)
+        }
+    }
+    
     public func catchementRectangle(size: KSSize) -> KSRect {
         KSRect(center: centerPin.point, size: size)
     }
