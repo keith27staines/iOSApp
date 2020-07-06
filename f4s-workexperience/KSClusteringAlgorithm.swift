@@ -48,6 +48,7 @@ class KSClusteringAlgorithm {
                     clusters.append(cluster)
                     unclusteredPins.remove(pin)
                     clusteredPins.insert(pin)
+                    let nearyby = 
                 } catch {
                     continue
                 }
