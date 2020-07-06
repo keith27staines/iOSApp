@@ -15,7 +15,6 @@
 		40A5CF401DED81F7000007AB /* CustomViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A5CF3F1DED81F7000007AB /* CustomViewFlowLayout.swift */; };
 		40C1A4E61DDB356B000F80AA /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C1A4E51DDB356B000F80AA /* TabBarViewController.swift */; };
 		40C1A4F31DDEF2F6000F80AA /* AutoCompleteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40C1A4F11DDEF2F6000F80AA /* AutoCompleteTableViewCell.xib */; };
-		40C1A51B1DDF5ACE000F80AA /* GMUDefaultClusterRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C1A5031DDF5ACE000F80AA /* GMUDefaultClusterRenderer.m */; };
 		40E78E171DD31A86000A3776 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E161DD31A86000A3776 /* AppDelegate.swift */; };
 		40E78E1E1DD31A86000A3776 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E1D1DD31A86000A3776 /* Assets.xcassets */; };
 		40E78E211DD31A86000A3776 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E1F1DD31A86000A3776 /* LaunchScreen.storyboard */; };
@@ -49,7 +48,7 @@
 		53BA73D524B071DB00B06421 /* KSGMClusterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BA73D124B0616E00B06421 /* KSGMClusterManager.swift */; };
 		53BA73D624B071DF00B06421 /* KSCluster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BA73D224B0616E00B06421 /* KSCluster.swift */; };
 		53BA73D724B071E400B06421 /* KSPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BA73D324B0616E00B06421 /* KSPin.swift */; };
-		53BA73D924B0946300B06421 /* KSClusterRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BA73D824B0946300B06421 /* KSClusterRenderer.swift */; };
+		53BA73D924B0946300B06421 /* KSGMAnimatedClusterRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BA73D824B0946300B06421 /* KSGMAnimatedClusterRenderer.swift */; };
 		53BA73DB24B0961D00B06421 /* KSClusterImageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BA73DA24B0961D00B06421 /* KSClusterImageFactory.swift */; };
 		53BA73DF24B1F3D200B06421 /* KSClusteringAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BA73DE24B1F3D200B06421 /* KSClusteringAlgorithm.swift */; };
 		799C96B7E6F564EADBEF1AFB /* Pods_f4s_workexperienceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FB15162F0A1B8298B159D38 /* Pods_f4s_workexperienceTests.framework */; };
@@ -211,8 +210,8 @@
 		40A5CF3F1DED81F7000007AB /* CustomViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViewFlowLayout.swift; sourceTree = "<group>"; };
 		40C1A4E51DDB356B000F80AA /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		40C1A4F21DDEF2F6000F80AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AutoCompleteTableViewCell.xib; sourceTree = "<group>"; };
-		40C1A5021DDF5ACE000F80AA /* GMUDefaultClusterRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMUDefaultClusterRenderer.h; path = "Google-Maps-iOS-Utils/GMUDefaultClusterRenderer.h"; sourceTree = "<group>"; };
-		40C1A5031DDF5ACE000F80AA /* GMUDefaultClusterRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMUDefaultClusterRenderer.m; path = "Google-Maps-iOS-Utils/GMUDefaultClusterRenderer.m"; sourceTree = "<group>"; };
+		40C1A5021DDF5ACE000F80AA /* GMUDefaultClusterRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUDefaultClusterRenderer.h; sourceTree = "<group>"; };
+		40C1A5031DDF5ACE000F80AA /* GMUDefaultClusterRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUDefaultClusterRenderer.m; sourceTree = "<group>"; };
 		40E78E131DD31A86000A3776 /* Workfinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workfinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40E78E161DD31A86000A3776 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40E78E1D1DD31A86000A3776 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -248,7 +247,7 @@
 		53BA73D124B0616E00B06421 /* KSGMClusterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSGMClusterManager.swift; sourceTree = "<group>"; };
 		53BA73D224B0616E00B06421 /* KSCluster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSCluster.swift; sourceTree = "<group>"; };
 		53BA73D324B0616E00B06421 /* KSPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSPin.swift; sourceTree = "<group>"; };
-		53BA73D824B0946300B06421 /* KSClusterRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSClusterRenderer.swift; sourceTree = "<group>"; };
+		53BA73D824B0946300B06421 /* KSGMAnimatedClusterRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSGMAnimatedClusterRenderer.swift; sourceTree = "<group>"; };
 		53BA73DA24B0961D00B06421 /* KSClusterImageFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSClusterImageFactory.swift; sourceTree = "<group>"; };
 		53BA73DE24B1F3D200B06421 /* KSClusteringAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSClusteringAlgorithm.swift; sourceTree = "<group>"; };
 		590A4AE101882A503C247BC5 /* Pods-f4s-workexperience.releasef4slive.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperience.releasef4slive.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperience/Pods-f4s-workexperience.releasef4slive.xcconfig"; sourceTree = "<group>"; };
@@ -409,17 +408,6 @@
 				20B128141DDA1A3900CE3F1F /* F4SDevelopment.entitlements */,
 			);
 			name = Config;
-			sourceTree = "<group>";
-		};
-		40C1A4F61DDF5A65000F80AA /* Clustering helpers */ = {
-			isa = PBXGroup;
-			children = (
-				40C1A5021DDF5ACE000F80AA /* GMUDefaultClusterRenderer.h */,
-				40C1A5031DDF5ACE000F80AA /* GMUDefaultClusterRenderer.m */,
-				537613F824B2F9AC0001F84C /* XYLocatable+Extensions.swift */,
-			);
-			name = "Clustering helpers";
-			path = ../../../../../../..;
 			sourceTree = "<group>";
 		};
 		40E78E0A1DD31A86000A3776 = {
@@ -598,6 +586,7 @@
 		53BA73D424B0617E00B06421 /* KSClusterManager */ = {
 			isa = PBXGroup;
 			children = (
+				53BA73D124B0616E00B06421 /* KSGMClusterManager.swift */,
 				FC86FDB324B3403E0081132A /* Cluster rendering */,
 				53BA73D224B0616E00B06421 /* KSCluster.swift */,
 				53BA73D324B0616E00B06421 /* KSPin.swift */,
@@ -673,7 +662,7 @@
 			children = (
 				40E78E931DD391F3000A3776 /* MapView.storyboard */,
 				40E78E971DD39275000A3776 /* MapViewController.swift */,
-				40C1A4F61DDF5A65000F80AA /* Clustering helpers */,
+				537613F824B2F9AC0001F84C /* XYLocatable+Extensions.swift */,
 				FCDC542724289AE0002581FF /* Popup Company List */,
 				FC25A05D1F850DAC002F51A9 /* F4SMap models */,
 				FC771F4B2416292900AD6317 /* CompanyFileParser */,
@@ -924,10 +913,11 @@
 		FC86FDB324B3403E0081132A /* Cluster rendering */ = {
 			isa = PBXGroup;
 			children = (
-				53BA73D824B0946300B06421 /* KSClusterRenderer.swift */,
-				53BA73D124B0616E00B06421 /* KSGMClusterManager.swift */,
-				FC86FDB124B340080081132A /* KSGMStaticClusterRenderer.swift */,
 				FC86FDB424B340760081132A /* KSClusterRendererProtocol.swift */,
+				53BA73D824B0946300B06421 /* KSGMAnimatedClusterRenderer.swift */,
+				FC86FDB124B340080081132A /* KSGMStaticClusterRenderer.swift */,
+				40C1A5021DDF5ACE000F80AA /* GMUDefaultClusterRenderer.h */,
+				40C1A5031DDF5ACE000F80AA /* GMUDefaultClusterRenderer.m */,
 			);
 			name = "Cluster rendering";
 			sourceTree = "<group>";
@@ -1290,7 +1280,6 @@
 				53BA73D624B071DF00B06421 /* KSCluster.swift in Sources */,
 				FCC753EE1F80F26200E9ECD6 /* MapModel.swift in Sources */,
 				20D51BE41E27710C003A8358 /* UNService.swift in Sources */,
-				40C1A51B1DDF5ACE000F80AA /* GMUDefaultClusterRenderer.m in Sources */,
 				40C1A4E61DDB356B000F80AA /* TabBarViewController.swift in Sources */,
 				FC21BE37220F53EB00A0A389 /* PeopleDataSource.swift in Sources */,
 				53BA73D724B071E400B06421 /* KSPin.swift in Sources */,
@@ -1350,7 +1339,7 @@
 				FC25A05F1F850DF4002F51A9 /* F4SWorkplacePin.swift in Sources */,
 				FCDC543524289BD9002581FF /* CompanyWorkplaceTile.swift in Sources */,
 				FCF0D16C1FBC244800F2AF1D /* PopupAnimator.swift in Sources */,
-				53BA73D924B0946300B06421 /* KSClusterRenderer.swift in Sources */,
+				53BA73D924B0946300B06421 /* KSGMAnimatedClusterRenderer.swift in Sources */,
 				53BA73CA24B060CF00B06421 /* KSRect.swift in Sources */,
 				53BA73DB24B0961D00B06421 /* KSClusterImageFactory.swift in Sources */,
 				FCE51E402210362800DC1D50 /* PlacesSearchDataGetter.swift in Sources */,

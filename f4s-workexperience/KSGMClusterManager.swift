@@ -9,7 +9,7 @@ public class KSGMClusterManager: NSObject {
     private var pinsQuadTree: KSQuadTree
     private var clustersQuadTree: KSQuadTree
     private let algorithm = KSClusteringAlgorithm()
-    private let renderer: KSGMStaticClusterRenderer
+    private let renderer: KSClusterRendererProtocol
     private var _nextPinId: Int = 0
     private var oldClusterWidth: Double = 0
     public var clusterSize: KSSize { KSSize(width: clusterWidth, height: clusterWidth) }

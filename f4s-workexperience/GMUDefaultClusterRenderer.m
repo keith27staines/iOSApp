@@ -79,6 +79,17 @@
 //  return self;
 //}
 //
+//// Removes all existing markers from the attached map.
+//- (void)clear {
+//  [self clearMarkers:_markers];
+//  [_markers removeAllObjects];
+//  [_renderedClusters removeAllObjects];
+//  [_renderedClusterItems removeAllObjects];
+//  [_itemToNewClusterMap removeAllObjects];
+//  [_itemToOldClusterMap removeAllObjects];
+//  _clusters = nil;
+//}
+//
 //- (void)dealloc {
 //  [self clear];
 //}

@@ -562,8 +562,8 @@ extension MapViewController {
 extension MapViewController {
     
     func boundsForExplodedClusterContent(_ cluster: KSCluster) -> GMSCoordinateBounds? {
-        guard let firstPosition = cluster.pins.first?.location else { return nil }
-        var bounds = GMSCoordinateBounds(coordinate: firstPosition, coordinate: firstPosition)
+        let clusterLocation = cluster.location
+        var bounds = GMSCoordinateBounds(coordinate: clusterLocation, coordinate: clusterLocation)
         for pin in cluster.pins {
             bounds = bounds.includingCoordinate(pin.location)
         }
@@ -823,7 +823,6 @@ extension MapViewController {
                         })
                     })
                 }
-                //completion()
             }
         } catch {
             print("error building map structures \(error)")
