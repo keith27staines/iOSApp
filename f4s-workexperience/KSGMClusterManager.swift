@@ -4,7 +4,7 @@ import GoogleMaps
 public class KSGMClusterManager: NSObject {
     
     weak var mapView: GMSMapView?
-    public let bounds = KSRect(x: -180, y: -90, width: 360, height: 90)
+    public let bounds = KSRect(x: -180, y: -90, width: 360, height: 180)
     private var pins: Set<KSPin> = []
     private var pinsQuadTree: KSQuadTree
     private var clustersQuadTree: KSQuadTree
@@ -36,6 +36,11 @@ public class KSGMClusterManager: NSObject {
         try? pinsQuadTree.insert(item: pin)
     }
     
+    public func pinLoadCompleted() {
+        oldClusterWidth = 0
+        cameraDidChange()
+    }
+    
     public func clear() {
         pins = []
         pinsQuadTree = KSQuadTree(bounds: bounds)
@@ -58,10 +63,11 @@ public class KSGMClusterManager: NSObject {
         algorithm.requestRebuildClusters(
             bounds: bounds,
             pins: pins,
-            catchementSize: clusterSize) { [weak self] (clustersQuadTree) in
+            catchementSize: clusterSize) { [weak self] (clustersQuadTree, clusters) in
             guard let self = self else { return }
             self.clustersQuadTree = clustersQuadTree
             self.oldClusterWidth = self.clusterWidth
+            self.renderer.renderClusters(clusters)
         }
     }
     

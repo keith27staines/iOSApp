@@ -828,7 +828,7 @@ extension MapViewController {
                         })
                     })
                 }
-                completion()
+                //completion()
             }
         } catch {
             print("error building map structures \(error)")
@@ -853,10 +853,11 @@ extension MapViewController {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.clearMap() { [weak self] in
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
                 for pin in mapModel.filteredCompanyPinSet {
-                    strongSelf.addPinToMap(pin: pin)
+                    self.addPinToMap(pin: pin)
                 }
+                self.clusterManager.pinLoadCompleted()
                 completed()
             }
         }

@@ -20,10 +20,10 @@ class KSClusteringAlgorithm {
         bounds: KSRect,
         pins: Set<KSPin>,
         catchementSize: KSSize,
-        completion: @escaping (KSQuadTree) -> Void) {
+        completion: @escaping (KSQuadTree, [KSCluster]) -> Void) {
         rebuildWorkItem?.cancel()
-        let workItem = makeRebuildClustersWorkItem(bounds: bounds, pins: pins) { clustersQuadTree in
-            completion(clustersQuadTree)
+        let workItem = makeRebuildClustersWorkItem(bounds: bounds, pins: pins) { clustersQuadTree, clusters in
+            completion(clustersQuadTree, clusters)
         }
         rebuildWorkItem = workItem
         rebuildQueue.asyncAfter(deadline: .now() + 0.2, execute: workItem)
@@ -32,18 +32,20 @@ class KSClusteringAlgorithm {
     private func makeRebuildClustersWorkItem(
         bounds: KSRect,
         pins: Set<KSPin>,
-        completion: @escaping (KSQuadTree) -> Void) -> DispatchWorkItem {
+        completion: @escaping (KSQuadTree, [KSCluster]) -> Void) -> DispatchWorkItem {
         
         return DispatchWorkItem(qos: .userInteractive) { [weak self] in
             guard let self = self else { return }
             let clustersQuadTree = KSQuadTree(bounds: bounds)
             var clusteredPins = Set<KSPin>()
             var unclusteredPins = pins
+            var clusters = [KSCluster]()
             for pin in pins {
                 guard unclusteredPins.contains(pin) else { continue }
                 let cluster = KSCluster(id: self.nextClusterId(), centerPin: pin)
                 do {
                     try clustersQuadTree.insert(item: cluster)
+                    clusters.append(cluster)
                     unclusteredPins.remove(pin)
                     clusteredPins.insert(pin)
                 } catch {
@@ -51,7 +53,7 @@ class KSClusteringAlgorithm {
                 }
             }
             DispatchQueue.main.async {
-                completion(clustersQuadTree)
+                completion(clustersQuadTree, clusters)
             }
         }
     }
