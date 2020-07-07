@@ -30,7 +30,7 @@ class KSClusterTestCase: XCTestCase {
     func test_addPin_not_same() {
         let sut = makeSUT(id: clusterID)
         sut.addPin(KSPin(id: pinID, x: 0, y: 0))
-        XCTAssertEqual(sut.count, 2)
+        XCTAssertEqual(sut.count, 1)
     }
     
     func test_addPin_same() {
