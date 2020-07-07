@@ -260,8 +260,6 @@
 		FC06605423265FC300496FE2 /* CompanyCoordinatorParentProtocol+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompanyCoordinatorParentProtocol+extensions.swift"; sourceTree = "<group>"; };
 		FC06A19C24641C930023DE99 /* WorkfinderApplications.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderApplications.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC0B6B382323D5D600A1867D /* Uploads.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Uploads.xcassets; sourceTree = "<group>"; };
-		FC0C6FD7232B7E5700816332 /* WorkfinderRecommendations.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderRecommendations.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC0C7110232BB31B00816332 /* WorkfinderMessagesUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderMessagesUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityExtension.swift; sourceTree = "<group>"; };
 		FC15614C2450500E00612ED9 /* Workfinder StagingDebugF4SLive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Workfinder StagingDebugF4SLive.entitlements"; sourceTree = "<group>"; };
 		FC1DC06721FE13FE009ABC60 /* CompanyDetailAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CompanyDetailAssets.xcassets; sourceTree = "<group>"; };
@@ -354,7 +352,6 @@
 		FCE7664E24B4B78B007C4D4C /* KSClusterManagerTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSClusterManagerTestCase.swift; sourceTree = "<group>"; };
 		FCE7664F24B4B78C007C4D4C /* KSPinTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSPinTestCase.swift; sourceTree = "<group>"; };
 		FCEE5E1D2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorBackgroundViewController.swift; sourceTree = "<group>"; };
-		FCEF221E232A9E24004914F7 /* WorkfinderFavouritesUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderFavouritesUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupAnimator.swift; sourceTree = "<group>"; };
 		FCF4B651232BC49A001340DF /* WorkfinderOnboardingUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderOnboardingUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF6B6512465559600D40FCE /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small@2x.png"; path = "../../../Desktop/Icon-Small@2x.png"; sourceTree = "<group>"; };
@@ -602,9 +599,6 @@
 				FCBA983024506D3E00C3D2E6 /* WorkfinderCommon.framework */,
 				FC2E456A234CB5EF00121496 /* Bugsnag.framework */,
 				FCF4B651232BC49A001340DF /* WorkfinderOnboardingUseCase.framework */,
-				FC0C7110232BB31B00816332 /* WorkfinderMessagesUseCase.framework */,
-				FC0C6FD7232B7E5700816332 /* WorkfinderRecommendations.framework */,
-				FCEF221E232A9E24004914F7 /* WorkfinderFavouritesUseCase.framework */,
 				FC93DC4123201AA200F1CE23 /* WorkfinderUserDetailsUseCase.framework */,
 				FC02DA2622EC84EF003C8148 /* WorkfinderServices.framework */,
 				6DBDC6E5F710813F9107483D /* Pods_f4s_workexperience.framework */,

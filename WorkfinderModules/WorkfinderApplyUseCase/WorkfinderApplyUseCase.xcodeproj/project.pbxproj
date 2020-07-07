@@ -153,11 +153,8 @@
 		FCA29021247F67EA00588F6E /* PhoneNumberValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberValidator.swift; sourceTree = "<group>"; };
 		FCCA4E3124570CE900DFA696 /* RegisterUserLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserLogic.swift; sourceTree = "<group>"; };
 		FCE4F4DD24740C37005ED80D /* DraftUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftUpdater.swift; sourceTree = "<group>"; };
-		FCE5190B2249388200B550C9 /* Mustache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mustache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCE8DA992320E24600934E2F /* ApplyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyCoordinator.swift; sourceTree = "<group>"; };
 		FCE8DA9B2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUserDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCE8DB1623210E1500934E2F /* F4SUploadYPDocumentsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = F4SUploadYPDocumentsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCE8DB1823210EB600934E2F /* WorkfinderUploadYPDocumentsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUploadYPDocumentsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF5AF102248BDCC00D9B8D1 /* WorkfinderApplyUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderApplyUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF5AF132248BDCC00D9B8D1 /* WorkfinderApplyUseCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderApplyUseCase.h; sourceTree = "<group>"; };
 		FCF5AF142248BDCC00D9B8D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -375,13 +372,10 @@
 				FC4066FA23277C16002B425E /* WorkfinderDocumentUploadUseCase.framework */,
 				FC0B6B322323CDC800A1867D /* WorkfinderCoordinators.framework */,
 				FC0B6B342323CDC800A1867D /* WorkfinderNetworking.framework */,
-				FCE8DB1823210EB600934E2F /* WorkfinderUploadYPDocumentsUseCase.framework */,
-				FCE8DB1623210E1500934E2F /* F4SUploadYPDocumentsUseCase.framework */,
 				FCE8DA9B2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework */,
 				FC22DBFA22F97F330068C61C /* WorkfinderUI.framework */,
 				FC85D9F122F205610035C724 /* WorkfinderAppLogic.framework */,
 				FC85D9EF22F204140035C724 /* WorkfinderServices.framework */,
-				FCE5190B2249388200B550C9 /* Mustache.framework */,
 				FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */,
 			);
 			name = Frameworks;
