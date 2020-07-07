@@ -24,7 +24,8 @@ public class KSGMClusterManager: NSObject {
         self.mapView = mapView
         pinsQuadTree = KSQuadTree(bounds: bounds)
         clustersQuadTree = KSQuadTree(bounds: bounds)
-        renderer = KSGMStaticClusterRenderer(mapView: mapView)
+        //renderer = KSGMStaticClusterRenderer(mapView: mapView)
+        renderer = KSGMAnimatedClusterRenderer(mapView: mapView)
         super.init()
         mapView.addObserver(self, forKeyPath: "camera", options: .new, context: nil)
     }

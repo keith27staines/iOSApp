@@ -54,14 +54,10 @@ public class KSGMAnimatedClusterRenderer : KSClusterRendererProtocol {
             for pin in cluster.pins {
                 switch zoomIsIncreasing {
                 case true: pinToOldClusterMap[pin] = cluster
-                case false: pinToOldClusterMap[pin] = cluster
+                case false: pinToNewClusterMap[pin] = cluster
                 }
             }
         }
-    }
-    
-    func addOrUpdateClustersAnimated(_ clusters: [KSCluster]) {
-
     }
     
     public func update() {
@@ -73,7 +69,7 @@ public class KSGMAnimatedClusterRenderer : KSClusterRendererProtocol {
         let visibleBounds = GMSCoordinateBounds(region: visibleRegion)
         for marker in markers {
             guard
-                !visibleBounds.contains(marker.position),
+                visibleBounds.contains(marker.position),
                 let cluster = marker.userData as? KSCluster,
                 let targetCluster = findFirstCluster(in: pinToNewClusterMap, withPinInCommonWith: cluster)
             else { continue }
@@ -100,14 +96,65 @@ public class KSGMAnimatedClusterRenderer : KSClusterRendererProtocol {
         return nil
     }
     
-
+    func addOrUpdateClustersAnimated(_ clusters: [KSCluster]) {
+        let visibleRegion = mapView.projection.visibleRegion()
+        let visibleBounds = GMSCoordinateBounds(region: visibleRegion)
+        for cluster in clusters {
+            guard !renderedClusters.contains(cluster) else { continue }
+            var shouldShowCluster = visibleBounds.contains(cluster.location)
+            if !shouldShowCluster {
+                for pin in cluster.pins {
+                    guard
+                        let oldCluster = pinToOldClusterMap[pin],
+                        visibleBounds.contains(oldCluster.location)
+                        else {
+                            continue
+                    }
+                    shouldShowCluster = true
+                    break
+                }
+            }
+            if shouldShowCluster {
+                let oldCluster = findFirstCluster(in: pinToOldClusterMap, withPinInCommonWith: cluster)
+                if let oldCluster = oldCluster {
+                    renderClusterAnimated(cluster, fromLocation: oldCluster.location)
+                } else {
+                    renderCluster(cluster)
+                }
+            }
+        }
+    }
+    
+    func renderClusterAnimated(_ cluster: KSCluster, fromLocation: CLLocationCoordinate2D) {
+        let toLocation = cluster.location
+        let marker = addMarkerFor(cluster, location: fromLocation)
+        CATransaction.begin()
+        marker.layer.latitude = toLocation.latitude
+        marker.layer.longitude = toLocation.longitude
+        CATransaction.commit()
+    }
+    
+    private func renderCluster(_ cluster: KSCluster) {
+        _ = addMarkerFor(cluster, location: cluster.location)
+    }
+    
+    func addMarkerFor(_ cluster: KSCluster, location: CLLocationCoordinate2D) -> GMSMarker {
+        let marker = GMSMarker(position: location)
+        marker.userData = cluster
+        marker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
+        marker.icon = imageFactory.clusterImageForCount(cluster.count)
+        marker.zIndex = Int32(zIndex)
+        marker.map = mapView
+        markers.insert(marker)
+        renderedClusters.insert(cluster)
+        return marker
+    }
 }
-
 /*
-
  
  
 
+ 
 */
 
 extension KSGMAnimatedClusterRenderer {
@@ -123,17 +170,6 @@ extension KSGMAnimatedClusterRenderer {
                 renderCluster(cluster)
             }
         }
-    }
-    
-    private func renderCluster(_ cluster: KSCluster) {
-        let location = cluster.location
-        let marker = GMSMarker(position: location)
-        marker.userData = cluster
-        marker.icon = imageFactory.clusterImageForCount(cluster.count)
-        marker.map = mapView
-        marker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
-        markers.insert(marker)
-        renderedClusters.insert(cluster)
     }
     
     private func clearMarkers(_ markers: Set<GMSMarker>) {

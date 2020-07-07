@@ -587,11 +587,10 @@
 			isa = PBXGroup;
 			children = (
 				53BA73D124B0616E00B06421 /* KSGMClusterManager.swift */,
-				FC86FDB324B3403E0081132A /* Cluster rendering */,
 				53BA73D224B0616E00B06421 /* KSCluster.swift */,
 				53BA73D324B0616E00B06421 /* KSPin.swift */,
-				53BA73DA24B0961D00B06421 /* KSClusterImageFactory.swift */,
 				53BA73DE24B1F3D200B06421 /* KSClusteringAlgorithm.swift */,
+				FC86FDB324B3403E0081132A /* Cluster rendering */,
 			);
 			name = KSClusterManager;
 			sourceTree = "<group>";
@@ -913,6 +912,7 @@
 		FC86FDB324B3403E0081132A /* Cluster rendering */ = {
 			isa = PBXGroup;
 			children = (
+				53BA73DA24B0961D00B06421 /* KSClusterImageFactory.swift */,
 				FC86FDB424B340760081132A /* KSClusterRendererProtocol.swift */,
 				53BA73D824B0946300B06421 /* KSGMAnimatedClusterRenderer.swift */,
 				FC86FDB124B340080081132A /* KSGMStaticClusterRenderer.swift */,

@@ -44,8 +44,7 @@ public class KSGMStaticClusterRenderer : KSClusterRendererProtocol {
     }
     
     private func renderCluster(_ cluster: KSCluster) {
-        let location = cluster.location
-        let marker = GMSMarker(position: location)
+        let marker = GMSMarker(position: cluster.location)
         marker.userData = cluster
         marker.icon = imageFactory.clusterImageForCount(cluster.count)
         marker.map = mapView
