@@ -92,10 +92,10 @@
 		FC5DF50F24ACA22E0089E839 /* WorkfinderRecommendationsList.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC5DF50D24ACA22E0089E839 /* WorkfinderRecommendationsList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC62B35B2494C00500013CFF /* WorkfinderVersionCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC62B35A2494C00500013CFF /* WorkfinderVersionCheck.framework */; };
 		FC62B35C2494C27100013CFF /* WorkfinderVersionCheck.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC62B35A2494C00500013CFF /* WorkfinderVersionCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FC632FE024B47B7000C1499B /* KSGeometry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC632FDF24B47B7000C1499B /* KSGeometry.framework */; };
-		FC632FE124B47B7000C1499B /* KSGeometry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC632FDF24B47B7000C1499B /* KSGeometry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC63302024B4845300C1499B /* KSQuadTree.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC63301F24B4845300C1499B /* KSQuadTree.framework */; };
 		FC63302124B4845300C1499B /* KSQuadTree.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC63301F24B4845300C1499B /* KSQuadTree.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FC63302224B4847D00C1499B /* KSGeometry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC632FDF24B47B7000C1499B /* KSGeometry.framework */; };
+		FC63302324B4847E00C1499B /* KSGeometry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC632FDF24B47B7000C1499B /* KSGeometry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC681C001F57473D0077BECA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFE1F57473D0077BECA /* Podfile */; };
 		FC681C011F57473D0077BECA /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFF1F57473D0077BECA /* Podfile.lock */; };
 		FC72219F20FE248400F10953 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = FC72219B20FE248400F10953 /* Appfile */; };
@@ -178,7 +178,6 @@
 				FCBA983E24506D8B00C3D2E6 /* WorkfinderAppLogic.framework in Embed Frameworks */,
 				FC06A19E24641C930023DE99 /* WorkfinderApplications.framework in Embed Frameworks */,
 				FC5DF50F24ACA22E0089E839 /* WorkfinderRecommendationsList.framework in Embed Frameworks */,
-				FC632FE124B47B7000C1499B /* KSGeometry.framework in Embed Frameworks */,
 				FCBA984024506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework in Embed Frameworks */,
 				FC63302124B4845300C1499B /* KSQuadTree.framework in Embed Frameworks */,
 				FC2A64962494D18700DA28DD /* WorkfinderAssociationDetails.framework in Embed Frameworks */,
@@ -192,6 +191,7 @@
 				FCBA984E24506D8C00C3D2E6 /* WorkfinderUI.framework in Embed Frameworks */,
 				FCBA985024506D8C00C3D2E6 /* WorkfinderUserDetailsUseCase.framework in Embed Frameworks */,
 				FC62B35C2494C27100013CFF /* WorkfinderVersionCheck.framework in Embed Frameworks */,
+				FC63302324B4847E00C1499B /* KSGeometry.framework in Embed Frameworks */,
 				FC2A64DA2495026300DA28DD /* WorkfinderViewRecommendation.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -374,6 +374,7 @@
 				FCBA983D24506D8B00C3D2E6 /* WorkfinderAppLogic.framework in Frameworks */,
 				FCBA983F24506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework in Frameworks */,
 				FC63302024B4845300C1499B /* KSQuadTree.framework in Frameworks */,
+				FC63302224B4847D00C1499B /* KSGeometry.framework in Frameworks */,
 				FC2A64952494D18700DA28DD /* WorkfinderAssociationDetails.framework in Frameworks */,
 				FC56A0F02455B62B00A7EC3F /* WorkfinderCommon.framework in Frameworks */,
 				FCBA984124506D8B00C3D2E6 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */,
@@ -382,7 +383,6 @@
 				FCBA984724506D8B00C3D2E6 /* WorkfinderNetworking.framework in Frameworks */,
 				FCBA984924506D8C00C3D2E6 /* WorkfinderOnboardingUseCase.framework in Frameworks */,
 				FCBA984B24506D8C00C3D2E6 /* WorkfinderServices.framework in Frameworks */,
-				FC632FE024B47B7000C1499B /* KSGeometry.framework in Frameworks */,
 				FCBA984D24506D8C00C3D2E6 /* WorkfinderUI.framework in Frameworks */,
 				FCBA984F24506D8C00C3D2E6 /* WorkfinderUserDetailsUseCase.framework in Frameworks */,
 				FC62B35B2494C00500013CFF /* WorkfinderVersionCheck.framework in Frameworks */,
