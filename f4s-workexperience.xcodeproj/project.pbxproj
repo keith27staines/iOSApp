@@ -89,10 +89,6 @@
 		FC5DF50F24ACA22E0089E839 /* WorkfinderRecommendationsList.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC5DF50D24ACA22E0089E839 /* WorkfinderRecommendationsList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC62B35B2494C00500013CFF /* WorkfinderVersionCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC62B35A2494C00500013CFF /* WorkfinderVersionCheck.framework */; };
 		FC62B35C2494C27100013CFF /* WorkfinderVersionCheck.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC62B35A2494C00500013CFF /* WorkfinderVersionCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FC63302024B4845300C1499B /* KSQuadTree.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC63301F24B4845300C1499B /* KSQuadTree.framework */; };
-		FC63302124B4845300C1499B /* KSQuadTree.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC63301F24B4845300C1499B /* KSQuadTree.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FC63302224B4847D00C1499B /* KSGeometry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC632FDF24B47B7000C1499B /* KSGeometry.framework */; };
-		FC63302324B4847E00C1499B /* KSGeometry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC632FDF24B47B7000C1499B /* KSGeometry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC681C001F57473D0077BECA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFE1F57473D0077BECA /* Podfile */; };
 		FC681C011F57473D0077BECA /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFF1F57473D0077BECA /* Podfile.lock */; };
 		FC72219F20FE248400F10953 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = FC72219B20FE248400F10953 /* Appfile */; };
@@ -153,6 +149,10 @@
 		FCE7665024B4B78C007C4D4C /* KSClusterTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE7664D24B4B78B007C4D4C /* KSClusterTestCase.swift */; };
 		FCE7665124B4B78C007C4D4C /* KSClusterManagerTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE7664E24B4B78B007C4D4C /* KSClusterManagerTestCase.swift */; };
 		FCE7665224B4B78C007C4D4C /* KSPinTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE7664F24B4B78C007C4D4C /* KSPinTestCase.swift */; };
+		FCE7665924B4CE07007C4D4C /* KSGeometry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE7665724B4CE07007C4D4C /* KSGeometry.framework */; };
+		FCE7665A24B4CE07007C4D4C /* KSGeometry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCE7665724B4CE07007C4D4C /* KSGeometry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FCE7665B24B4CE07007C4D4C /* KSQuadTree.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE7665824B4CE07007C4D4C /* KSQuadTree.framework */; };
+		FCE7665C24B4CE07007C4D4C /* KSQuadTree.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCE7665824B4CE07007C4D4C /* KSQuadTree.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCEE5E1E2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEE5E1D2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift */; };
 		FCF0D16C1FBC244800F2AF1D /* PopupAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */; };
 		FCFC06AD23225B9E003C59C8 /* LatLon+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06AC23225B9E003C59C8 /* LatLon+Extensions.swift */; };
@@ -178,8 +178,9 @@
 				FCBA983E24506D8B00C3D2E6 /* WorkfinderAppLogic.framework in Embed Frameworks */,
 				FC06A19E24641C930023DE99 /* WorkfinderApplications.framework in Embed Frameworks */,
 				FC5DF50F24ACA22E0089E839 /* WorkfinderRecommendationsList.framework in Embed Frameworks */,
+				FCE7665A24B4CE07007C4D4C /* KSGeometry.framework in Embed Frameworks */,
 				FCBA984024506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework in Embed Frameworks */,
-				FC63302124B4845300C1499B /* KSQuadTree.framework in Embed Frameworks */,
+				FCE7665C24B4CE07007C4D4C /* KSQuadTree.framework in Embed Frameworks */,
 				FC2A64962494D18700DA28DD /* WorkfinderAssociationDetails.framework in Embed Frameworks */,
 				FC56A0F12455B62B00A7EC3F /* WorkfinderCommon.framework in Embed Frameworks */,
 				FCBA984424506D8B00C3D2E6 /* WorkfinderCoordinators.framework in Embed Frameworks */,
@@ -191,7 +192,6 @@
 				FCBA984E24506D8C00C3D2E6 /* WorkfinderUI.framework in Embed Frameworks */,
 				FCBA985024506D8C00C3D2E6 /* WorkfinderUserDetailsUseCase.framework in Embed Frameworks */,
 				FC62B35C2494C27100013CFF /* WorkfinderVersionCheck.framework in Embed Frameworks */,
-				FC63302324B4847E00C1499B /* KSGeometry.framework in Embed Frameworks */,
 				FC2A64DA2495026300DA28DD /* WorkfinderViewRecommendation.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -353,6 +353,8 @@
 		FCE7664D24B4B78B007C4D4C /* KSClusterTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSClusterTestCase.swift; sourceTree = "<group>"; };
 		FCE7664E24B4B78B007C4D4C /* KSClusterManagerTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSClusterManagerTestCase.swift; sourceTree = "<group>"; };
 		FCE7664F24B4B78C007C4D4C /* KSPinTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSPinTestCase.swift; sourceTree = "<group>"; };
+		FCE7665724B4CE07007C4D4C /* KSGeometry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KSGeometry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCE7665824B4CE07007C4D4C /* KSQuadTree.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KSQuadTree.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCEE5E1D2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorBackgroundViewController.swift; sourceTree = "<group>"; };
 		FCEF221E232A9E24004914F7 /* WorkfinderFavouritesUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderFavouritesUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupAnimator.swift; sourceTree = "<group>"; };
@@ -373,8 +375,7 @@
 				FC5DF50E24ACA22E0089E839 /* WorkfinderRecommendationsList.framework in Frameworks */,
 				FCBA983D24506D8B00C3D2E6 /* WorkfinderAppLogic.framework in Frameworks */,
 				FCBA983F24506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework in Frameworks */,
-				FC63302024B4845300C1499B /* KSQuadTree.framework in Frameworks */,
-				FC63302224B4847D00C1499B /* KSGeometry.framework in Frameworks */,
+				FCE7665B24B4CE07007C4D4C /* KSQuadTree.framework in Frameworks */,
 				FC2A64952494D18700DA28DD /* WorkfinderAssociationDetails.framework in Frameworks */,
 				FC56A0F02455B62B00A7EC3F /* WorkfinderCommon.framework in Frameworks */,
 				FCBA984124506D8B00C3D2E6 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */,
@@ -383,6 +384,7 @@
 				FCBA984724506D8B00C3D2E6 /* WorkfinderNetworking.framework in Frameworks */,
 				FCBA984924506D8C00C3D2E6 /* WorkfinderOnboardingUseCase.framework in Frameworks */,
 				FCBA984B24506D8C00C3D2E6 /* WorkfinderServices.framework in Frameworks */,
+				FCE7665924B4CE07007C4D4C /* KSGeometry.framework in Frameworks */,
 				FCBA984D24506D8C00C3D2E6 /* WorkfinderUI.framework in Frameworks */,
 				FCBA984F24506D8C00C3D2E6 /* WorkfinderUserDetailsUseCase.framework in Frameworks */,
 				FC62B35B2494C00500013CFF /* WorkfinderVersionCheck.framework in Frameworks */,
@@ -578,6 +580,8 @@
 		74E1A74324CAFF4EF516E014 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCE7665724B4CE07007C4D4C /* KSGeometry.framework */,
+				FCE7665824B4CE07007C4D4C /* KSQuadTree.framework */,
 				FC63301F24B4845300C1499B /* KSQuadTree.framework */,
 				FC632FDF24B47B7000C1499B /* KSGeometry.framework */,
 				FC5DF50D24ACA22E0089E839 /* WorkfinderRecommendationsList.framework */,

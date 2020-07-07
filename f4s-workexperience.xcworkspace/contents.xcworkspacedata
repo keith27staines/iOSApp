@@ -2,10 +2,10 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../workfinderApp/KSQuadTree/KSQuadTree.xcodeproj">
+      location = "group:KSQuadTree/KSQuadTree.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:../workfinderApp/KSGeometry/KSGeometry.xcodeproj">
+      location = "group:KSGeometry/KSGeometry.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:WorkfinderRecommendationsList/WorkfinderRecommendationsList.xcodeproj">
