@@ -10,6 +10,8 @@ import Foundation
 import WorkfinderCommon
 import CoreLocation
 import GoogleMaps
+import KSGeometry
+import KSQuadTree
 
 public typealias F4SCompanyPinSet = Set<F4SWorkplacePin>
 public typealias F4SUUIDSet = Set<F4SUUID>

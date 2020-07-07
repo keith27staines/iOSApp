@@ -1,6 +1,7 @@
 import Foundation
 import WorkfinderCommon
 import GoogleMaps
+import KSGeometry
 
 public extension GMSCoordinateBounds {
     

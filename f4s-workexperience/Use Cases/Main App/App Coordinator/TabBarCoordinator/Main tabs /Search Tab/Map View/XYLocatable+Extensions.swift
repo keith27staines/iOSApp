@@ -1,7 +1,8 @@
 
+import KSGeometry
 import CoreLocation
 
-extension XYLocatable {
+extension KSXYLocatable {
     var location: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: y, longitude: x)
     }

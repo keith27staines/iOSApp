@@ -1,4 +1,7 @@
 
+import KSGeometry
+import KSQuadTree
+
 public struct KSPin: KSQuadTreeItem, Equatable, Hashable {
     
     public var object: Any?

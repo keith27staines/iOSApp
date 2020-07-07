@@ -39,9 +39,6 @@
 		40E78E981DD39275000A3776 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E971DD39275000A3776 /* MapViewController.swift */; };
 		40E78EA01DD5E208000A3776 /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E9F1DD5E208000A3776 /* LocationHelper.swift */; };
 		537613F924B2F9AC0001F84C /* XYLocatable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537613F824B2F9AC0001F84C /* XYLocatable+Extensions.swift */; };
-		537613FB24B4669E0001F84C /* KSPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537613FA24B4669E0001F84C /* KSPoint+Extensions.swift */; };
-		53BA73CF24B0614000B06421 /* KSQuadtree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BA73CD24B0614000B06421 /* KSQuadtree.swift */; };
-		53BA73D024B0614000B06421 /* KSRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BA73CE24B0614000B06421 /* KSRect+Extensions.swift */; };
 		53BA73D524B071DB00B06421 /* KSGMClusterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BA73D124B0616E00B06421 /* KSGMClusterManager.swift */; };
 		53BA73D624B071DF00B06421 /* KSCluster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BA73D224B0616E00B06421 /* KSCluster.swift */; };
 		53BA73D724B071E400B06421 /* KSPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BA73D324B0616E00B06421 /* KSPin.swift */; };
@@ -239,9 +236,6 @@
 		40E78E971DD39275000A3776 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		40E78E9F1DD5E208000A3776 /* LocationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationHelper.swift; sourceTree = "<group>"; };
 		537613F824B2F9AC0001F84C /* XYLocatable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XYLocatable+Extensions.swift"; sourceTree = "<group>"; };
-		537613FA24B4669E0001F84C /* KSPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KSPoint+Extensions.swift"; sourceTree = "<group>"; };
-		53BA73CD24B0614000B06421 /* KSQuadtree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSQuadtree.swift; sourceTree = "<group>"; };
-		53BA73CE24B0614000B06421 /* KSRect+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KSRect+Extensions.swift"; sourceTree = "<group>"; };
 		53BA73D124B0616E00B06421 /* KSGMClusterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSGMClusterManager.swift; sourceTree = "<group>"; };
 		53BA73D224B0616E00B06421 /* KSCluster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSCluster.swift; sourceTree = "<group>"; };
 		53BA73D324B0616E00B06421 /* KSPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSPin.swift; sourceTree = "<group>"; };
@@ -559,19 +553,8 @@
 			isa = PBXGroup;
 			children = (
 				53BA73D424B0617E00B06421 /* KSClusterManager */,
-				53BA73CC24B0610000B06421 /* KSQuadTreee */,
 			);
 			name = KSMap;
-			sourceTree = "<group>";
-		};
-		53BA73CC24B0610000B06421 /* KSQuadTreee */ = {
-			isa = PBXGroup;
-			children = (
-				53BA73CD24B0614000B06421 /* KSQuadtree.swift */,
-				53BA73CE24B0614000B06421 /* KSRect+Extensions.swift */,
-				537613FA24B4669E0001F84C /* KSPoint+Extensions.swift */,
-			);
-			name = KSQuadTreee;
 			sourceTree = "<group>";
 		};
 		53BA73D424B0617E00B06421 /* KSClusterManager */ = {
@@ -1310,12 +1293,10 @@
 				20FABFEC1DDDA63600D583E2 /* FileHelper.swift in Sources */,
 				40E78E891DD32C3C000A3776 /* ExtensionsHelper.swift in Sources */,
 				40A5CF3E1DED72E8000007AB /* InterestsCollectionViewCell.swift in Sources */,
-				537613FB24B4669E0001F84C /* KSPoint+Extensions.swift in Sources */,
 				FCB49301222A4B3B00B88B8B /* SearchCoordinator.swift in Sources */,
 				40E78E661DD32B94000A3776 /* TabBarCoordinator.swift in Sources */,
 				53BA73DF24B1F3D200B06421 /* KSClusteringAlgorithm.swift in Sources */,
 				FC86FDB224B340080081132A /* KSGMStaticClusterRenderer.swift in Sources */,
-				53BA73CF24B0614000B06421 /* KSQuadtree.swift in Sources */,
 				FC771F512416294D00AD6317 /* Common.swift in Sources */,
 				FC06605523265FC300496FE2 /* CompanyCoordinatorParentProtocol+extensions.swift in Sources */,
 				40E78E6F1DD32BD4000A3776 /* CustomMenuViewController.swift in Sources */,
@@ -1333,7 +1314,6 @@
 				53BA73DB24B0961D00B06421 /* KSClusterImageFactory.swift in Sources */,
 				FCE51E402210362800DC1D50 /* PlacesSearchDataGetter.swift in Sources */,
 				FC92567B1F8F70D200FF9841 /* InterestsModel.swift in Sources */,
-				53BA73D024B0614000B06421 /* KSRect+Extensions.swift in Sources */,
 				537613F924B2F9AC0001F84C /* XYLocatable+Extensions.swift in Sources */,
 				40E78E781DD32BE7000A3776 /* DrawerController.swift in Sources */,
 				40E78E7E1DD32BF4000A3776 /* CenterTableViewCell.swift in Sources */,

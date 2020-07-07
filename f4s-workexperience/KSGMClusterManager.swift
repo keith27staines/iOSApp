@@ -1,5 +1,7 @@
 
 import GoogleMaps
+import KSGeometry
+import KSQuadTree
 
 public class KSGMClusterManager: NSObject {
     
@@ -93,3 +95,4 @@ public extension KSGMClusterManager {
         cameraDidChange()
     }
 }
+

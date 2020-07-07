@@ -1,4 +1,7 @@
 
+import KSGeometry
+import KSQuadTree
+
 public class KSCluster: KSQuadTreeItem, Hashable, Equatable {
     public var point: KSPoint { centerPin.point }
     public let id: Int

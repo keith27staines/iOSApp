@@ -1,5 +1,7 @@
 
 import Foundation
+import KSGeometry
+import KSQuadTree
 
 class KSClusteringAlgorithm {
     
