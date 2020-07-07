@@ -33,7 +33,12 @@ public class KSGMAnimatedClusterRenderer : KSClusterRendererProtocol {
         let zoom = mapView.camera.zoom
         let zoomIsIncreasing = zoom > previousZoom ? true : false
         previousZoom = zoom
-        prepareClustersForAnimation(clusters, zoomIsIncreasing: zoomIsIncreasing)
+        if zoomIsIncreasing {
+            prepareClustersForAnimation(self.clusters, zoomIsIncreasing: zoomIsIncreasing)
+        } else {
+            prepareClustersForAnimation(clusters, zoomIsIncreasing: zoomIsIncreasing)
+        }
+        
         self.clusters = clusters
         let existingMarkers = markers
         markers = []
@@ -72,26 +77,23 @@ public class KSGMAnimatedClusterRenderer : KSClusterRendererProtocol {
                 visibleBounds.contains(marker.position),
                 let cluster = marker.userData as? KSCluster,
                 let targetCluster = findFirstCluster(in: pinToNewClusterMap, withPinInCommonWith: cluster)
-            else { continue }
+                else { continue }
             
             CATransaction.begin()
-            CATransaction.setCompletionBlock {
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    self.clearMarkers(markers)
-                }
-            }
-            CATransaction.setAnimationDuration(0.2)
+            CATransaction.setAnimationDuration(0.5)
             marker.layer.latitude = targetCluster.location.latitude
             marker.layer.longitude = targetCluster.location.longitude
             CATransaction.commit()
-            
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.6) { [weak self] in
+            guard let self = self else { return }
+            self.clearMarkers(markers)
         }
     }
     
-    func findFirstCluster(in pinCluserMap: [KSPin: KSCluster], withPinInCommonWith cluster: KSCluster) -> KSCluster? {
+    func findFirstCluster(in pinClusterMap: [KSPin: KSCluster], withPinInCommonWith cluster: KSCluster) -> KSCluster? {
         for pin in cluster.pins {
-            if let matchingCluster = pinCluserMap[pin] { return matchingCluster }
+            if let matchingCluster = pinClusterMap[pin] { return matchingCluster }
         }
         return nil
     }
@@ -115,8 +117,7 @@ public class KSGMAnimatedClusterRenderer : KSClusterRendererProtocol {
                 }
             }
             if shouldShowCluster {
-                let oldCluster = findFirstCluster(in: pinToOldClusterMap, withPinInCommonWith: cluster)
-                if let oldCluster = oldCluster {
+                if let oldCluster = findFirstCluster(in: pinToOldClusterMap, withPinInCommonWith: cluster) {
                     renderClusterAnimated(cluster, fromLocation: oldCluster.location)
                 } else {
                     renderCluster(cluster)
@@ -129,6 +130,7 @@ public class KSGMAnimatedClusterRenderer : KSClusterRendererProtocol {
         let toLocation = cluster.location
         let marker = addMarkerFor(cluster, location: fromLocation)
         CATransaction.begin()
+        CATransaction.setAnimationDuration(0.5)
         marker.layer.latitude = toLocation.latitude
         marker.layer.longitude = toLocation.longitude
         CATransaction.commit()

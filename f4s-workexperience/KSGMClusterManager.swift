@@ -25,7 +25,7 @@ public class KSGMClusterManager: NSObject, KSClusterManagerProtocol {
     let renderer: KSClusterRendererProtocol
     var _nextPinId: Int = 0
     var oldClusterWidth: Double = 0
-    private var clusterWidth: Double { visibleWidth / 4.0 }
+    private var clusterWidth: Double { visibleWidth / 3.5 }
     
     func nextPinId() -> Int {
         _nextPinId += 1
