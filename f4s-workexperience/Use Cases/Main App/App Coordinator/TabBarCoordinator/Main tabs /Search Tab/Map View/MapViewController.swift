@@ -95,12 +95,8 @@ class MapViewController: UIViewController {
     @IBOutlet weak var filtersButton: UIButton!
     @IBOutlet weak var refineSearchLabel: UILabel!
     
-    lazy var clusterManager: KSGMClusterManager = {
+    lazy var clusterManager: KSClusterManagerProtocol = {
         KSGMClusterManager(mapView: self.mapView)
-    }()
-    
-    lazy var clusterRenderer: KSGMStaticClusterRenderer = {
-        KSGMStaticClusterRenderer(mapView: self.mapView)
     }()
     
     /// Manages location updates from the device

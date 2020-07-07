@@ -3,21 +3,31 @@ import GoogleMaps
 import KSGeometry
 import KSQuadTree
 
-public class KSGMClusterManager: NSObject {
+public protocol KSClusterManagerProtocol {
+    var bounds: KSRect { get }
+    var clusterSize: KSSize { get }
+    func insertObject(x: Double, y: Double, object: Any)
+    func pinLoadCompleted()
+    func clear()
+    func clusters() -> [KSCluster]
+    func cameraDidChange()
+}
+
+public class KSGMClusterManager: NSObject, KSClusterManagerProtocol {
     
     weak var mapView: GMSMapView?
     public let bounds = KSRect(x: -180, y: -90, width: 360, height: 180)
-    private var pins: Set<KSPin> = []
-    private var pinsQuadTree: KSQuadTree
-    private var clustersQuadTree: KSQuadTree
-    private let algorithm = KSClusteringAlgorithm()
-    private let renderer: KSClusterRendererProtocol
-    private var _nextPinId: Int = 0
-    private var oldClusterWidth: Double = 0
     public var clusterSize: KSSize { KSSize(width: clusterWidth, height: clusterWidth) }
+    var pins: Set<KSPin> = []
+    var pinsQuadTree: KSQuadTree
+    var clustersQuadTree: KSQuadTree
+    let algorithm = KSClusteringAlgorithm()
+    let renderer: KSClusterRendererProtocol
+    var _nextPinId: Int = 0
+    var oldClusterWidth: Double = 0
     private var clusterWidth: Double { visibleWidth / 4.0 }
     
-    private func nextPinId() -> Int {
+    func nextPinId() -> Int {
         _nextPinId += 1
         return _nextPinId
     }
@@ -75,13 +85,13 @@ public class KSGMClusterManager: NSObject {
         }
     }
     
-    private func isNewVisibleWidthSignificantlyDifferent(_ newWidth: Double) -> Bool {
+    func isNewVisibleWidthSignificantlyDifferent(_ newWidth: Double) -> Bool {
         guard newWidth != oldClusterWidth else { return false }
         guard oldClusterWidth != .zero else { return true }
         return (0.9...1.1).contains(newWidth/oldClusterWidth) ? false :  true
     }
     
-    private var visibleWidth: Double {
+    var visibleWidth: Double {
         guard let visibleRegion = mapView?.projection.visibleRegion()
             else {
                 return 0.0

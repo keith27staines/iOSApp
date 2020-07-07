@@ -150,6 +150,9 @@
 		FCE51E402210362800DC1D50 /* PlacesSearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E3F2210362800DC1D50 /* PlacesSearchDataGetter.swift */; };
 		FCE51E422210365B00DC1D50 /* CompanySearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E412210365B00DC1D50 /* CompanySearchDataGetter.swift */; };
 		FCE51E44221039D600DC1D50 /* PersonSearchDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE51E43221039D600DC1D50 /* PersonSearchDataGetter.swift */; };
+		FCE7665024B4B78C007C4D4C /* KSClusterTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE7664D24B4B78B007C4D4C /* KSClusterTestCase.swift */; };
+		FCE7665124B4B78C007C4D4C /* KSClusterManagerTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE7664E24B4B78B007C4D4C /* KSClusterManagerTestCase.swift */; };
+		FCE7665224B4B78C007C4D4C /* KSPinTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE7664F24B4B78C007C4D4C /* KSPinTestCase.swift */; };
 		FCEE5E1E2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEE5E1D2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift */; };
 		FCF0D16C1FBC244800F2AF1D /* PopupAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */; };
 		FCFC06AD23225B9E003C59C8 /* LatLon+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06AC23225B9E003C59C8 /* LatLon+Extensions.swift */; };
@@ -347,6 +350,9 @@
 		FCE51E3F2210362800DC1D50 /* PlacesSearchDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesSearchDataGetter.swift; sourceTree = "<group>"; };
 		FCE51E412210365B00DC1D50 /* CompanySearchDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanySearchDataGetter.swift; sourceTree = "<group>"; };
 		FCE51E43221039D600DC1D50 /* PersonSearchDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonSearchDataGetter.swift; sourceTree = "<group>"; };
+		FCE7664D24B4B78B007C4D4C /* KSClusterTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSClusterTestCase.swift; sourceTree = "<group>"; };
+		FCE7664E24B4B78B007C4D4C /* KSClusterManagerTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSClusterManagerTestCase.swift; sourceTree = "<group>"; };
+		FCE7664F24B4B78C007C4D4C /* KSPinTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSPinTestCase.swift; sourceTree = "<group>"; };
 		FCEE5E1D2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorBackgroundViewController.swift; sourceTree = "<group>"; };
 		FCEF221E232A9E24004914F7 /* WorkfinderFavouritesUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderFavouritesUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF0D16B1FBC244800F2AF1D /* PopupAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupAnimator.swift; sourceTree = "<group>"; };
@@ -986,6 +992,16 @@
 			path = SearchDataSources;
 			sourceTree = "<group>";
 		};
+		FCE7664C24B4B76C007C4D4C /* KSClusterManagerTests */ = {
+			isa = PBXGroup;
+			children = (
+				FCE7664E24B4B78B007C4D4C /* KSClusterManagerTestCase.swift */,
+				FCE7664D24B4B78B007C4D4C /* KSClusterTestCase.swift */,
+				FCE7664F24B4B78C007C4D4C /* KSPinTestCase.swift */,
+			);
+			path = KSClusterManagerTests;
+			sourceTree = "<group>";
+		};
 		FCFBD0072250D69700A9361D /* f4s-workexperienceTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -998,6 +1014,7 @@
 		FCFE450F2250CAD600C38436 /* Workfinder main module tests */ = {
 			isa = PBXGroup;
 			children = (
+				FCE7664C24B4B76C007C4D4C /* KSClusterManagerTests */,
 				FC771F532416297900AD6317 /* CompanyFileParserTests */,
 				FC3F3921222931630046F8F8 /* Coordinator tests */,
 			);
@@ -1339,7 +1356,10 @@
 			files = (
 				FC771F592416299B00AD6317 /* Common.swift in Sources */,
 				FC771F572416299B00AD6317 /* PinDownloadFileParserTests.swift in Sources */,
+				FCE7665024B4B78C007C4D4C /* KSClusterTestCase.swift in Sources */,
+				FCE7665224B4B78C007C4D4C /* KSPinTestCase.swift in Sources */,
 				FC771F582416299B00AD6317 /* PinRepositoryTests.swift in Sources */,
+				FCE7665124B4B78C007C4D4C /* KSClusterManagerTestCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

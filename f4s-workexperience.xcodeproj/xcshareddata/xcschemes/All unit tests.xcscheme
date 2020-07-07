@@ -295,6 +295,26 @@
                ReferencedContainer = "container:WorkfinderUserDetailsUseCase/WorkfinderUserDetailsUseCase.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FC632FBE24B4792A00C1499B"
+               BuildableName = "KSGeometryTests.xctest"
+               BlueprintName = "KSGeometryTests"
+               ReferencedContainer = "container:../workfinderApp/KSGeometry/KSGeometry.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FC632FFC24B482AD00C1499B"
+               BuildableName = "KSQuadTreeTests.xctest"
+               BlueprintName = "KSQuadTreeTests"
+               ReferencedContainer = "container:../workfinderApp/KSQuadTree/KSQuadTree.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
