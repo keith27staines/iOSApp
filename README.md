@@ -33,19 +33,19 @@ iOS Workfinder is a native iPhone-only app written exclusively in Swift 5.2. It 
 
 ### Development Computer
 
-Development should be done on a Mac running macOS Cataline or later. 
+Development should be done on a Mac running macOS Catalina or later. 
 
 Warning: Do not use a beta version of the operating system if you intend to build a release. A build built with a beta version of macOS can be uploaded to Testflight for beta testing but cannot be released to the Appstore.
 
 ### Development Environment
 
-Xcode is the single absolutely required tool. Various other tools might be helpful in various contexts and for various purposes but none are strictly required. Xcode 11.2.1 or later is required. Later versions might incur the cost of having to eliminate build warnings.  Earlier versions will not build the code.
+Xcode is the single absolutely required tool. Various other tools might be helpful in various contexts and for various purposes but none are strictly required. Xcode 11.5 or later is required. Later versions might incur the cost of having to eliminate build warnings.  Earlier versions will not build the code.
 
 Warning: Do not use a beta version of Xcode if you intend to build a release. A build built with a beta version of Xcode can be uploaded to Testflight for beta testing but cannot be released to the Appstore.
 
 ### Language
 
-The main project which includes all in-house written code is exclusively Swift 5.1. In contrast, the external 3rd party libraries use a variety of earlier versions of Swift and Objective C. 
+The main project which includes all in-house written code is exclusively Swift 5.1. In contrast, the external 3rd party libraries use a variety of versions of Swift and Objective C. 
 
 ### Target device and iOS version
 
@@ -54,15 +54,16 @@ The target version of iOS is iOS 11.0 or later
 
 ### Sourcecode Repository
 
-The iOS Workfinder repo is https://github.com/workfinder/iOSApp
+The iOS Workfinder repo is https://gitlab.com/workfinder/iOSApp/
 
 ### Branching strategy
 
-Standard Gitflow is used with two ever-present branches: a *master* branch representing production and a *develop* branch. 
+Standard Gitflow is used with three ever-present branches: a *master* branch representing the LIVE environment, a *staging* branch that is used for UAT, and a *develop* branch for development. 
 
 The *master* branch can be used to build the current production release. *Master* also serves as the source branch for live patches. The *develop* branch is the main working branch from which feature branches are taken.
 
-When a feature branch is completed it is merged (typiclly with rebase) into *develop* and then deleted. When a development phase comes to an end, the *develop* branch is merged into *master* but is not deleted.
+When a feature branch is completed it is merged (typiclly with rebase) into *develop* and then deleted. When a development phase comes to an end, the *develop* branch is merged via merge request into *staging* but is not deleted.
+When a LIVE release is to be prepared, create a release branch from staging and perform a merge request into production.
 
 ### Step-by-step guid to building a release
 
@@ -74,11 +75,11 @@ When a feature branch is completed it is merged (typiclly with rebase) into *dev
 
 4. In the Xcode  preferences pane, add the developer's account if not already done
 
-5. In the Xcode preferences pane, add an appropriate Gitlab account with access to https://github.com/workfinder/iOSApp if not already done. Ensure that HTTPS is selected rather than SSH.
+5. In the Xcode preferences pane, add an appropriate Gitlab account with access to https://gitlab.com/workfinder/iOSApp/ if not already done. Ensure that HTTPS is selected rather than SSH.
 
 6. All other Xcode settings can be safely left at their default values.
 
-7. Switch to a browser and go to  https://github.com/workfinder/iOSApp
+7. Switch to a browser and go to  https://gitlab.com/workfinder/iOSApp/
 
 8. Click on the green "clone or download" button, and then "Open in Xcode", 
 
