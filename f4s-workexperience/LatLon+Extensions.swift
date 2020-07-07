@@ -3,6 +3,22 @@ import WorkfinderCommon
 import GoogleMaps
 
 public extension GMSCoordinateBounds {
+    
+    var ksRect: KSRect {
+        let origin = KSPoint(x: southWest.longitude, y: southWest.latitude)
+        let width = northEast.longitude - southWest.longitude
+        let height = northEast.latitude - southWest.latitude
+        return KSRect(origin: origin, width: width, height: height)
+    }
+    
+    convenience init(rect: KSRect) {
+        let southWestPoint = rect.origin
+        let northEastPoint = rect.distalPoint
+        let southWest = CLLocationCoordinate2D(latitude: southWestPoint.y, longitude: southWestPoint.x)
+        let northEast = CLLocationCoordinate2D(latitude: northEastPoint.y, longitude: northEastPoint.x)
+        self.init(coordinate: southWest, coordinate: northEast)
+    }
+    
     convenience init(rect: LatLonRect) {
         let soutWest = CLLocationCoordinate2D(latLon: rect.southWest)
         let northEast = CLLocationCoordinate2D(latLon: rect.northEast)

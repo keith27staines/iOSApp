@@ -39,7 +39,7 @@ public struct MapModel {
     public let interestsModel: InterestsModel
 
     /// Underlying spatial partitioning datastructure
-    fileprivate let quadTree: F4SPointQuadTree
+    fileprivate let quadTree: KSQuadTree
     
     public init(pinRepository: PinRepository,
                 allInterests: F4SInterestSet,
@@ -166,11 +166,8 @@ extension MapModel {
         near location: CLLocationCoordinate2D,
         maxScalings: Int = 60,
         factor: Double = 1.2) -> GMSCoordinateBounds? {
-        let latlon = LatLon(location: location)
-        let element = F4SQuadtreeItem(latlon: latlon, object: 0)
-        guard let tree = quadTree.smallestSubtreeToContain(element: element) else {
-            return nil
-        }
+        let point = KSPoint(x: location.longitude, y: location.latitude)
+        guard let tree = quadTree.smallestSubtreeToContain(element: point) else { return nil }
         let smallestBounds = GMSCoordinateBounds(rect: tree.bounds)
         let grownBounds = growBoundsToContainSpecifiedNumberOfCompanyPins(bounds: smallestBounds, target: count, maxScalings: maxScalings, factor: factor)
         return grownBounds
@@ -179,9 +176,14 @@ extension MapModel {
     /// Returns the set of company pins within the specified bounds
     /// - note: This method is the synchrononous worker for `getCompaniesInsideBounds`
     func companyPinSetInsideBounds(_ bounds: GMSCoordinateBounds) -> F4SCompanyPinSet {
-        let rect = LatLonRect(bounds: bounds)
-        let elements = quadTree.retrieveWithinRect(rect)
-        let companyPins = elements.map { element in return element.object as! F4SWorkplacePin }
+        let elements = quadTree.retrieveWithinRect(bounds.ksRect)
+        let companyPins = elements.compactMap { (item) -> F4SWorkplacePin? in
+            guard
+                let ksPin = item as? KSPin,
+                let workplacePin = ksPin.object as? F4SWorkplacePin
+             else { return nil }
+            return workplacePin
+        }
         let companyPinSet = F4SCompanyPinSet(companyPins)
         return companyPinSet
     }
@@ -214,23 +216,17 @@ extension MapModel {
     }
 
     /// Creates a quadtree populated from the collection of companies
-    static func createQuadtree(_ companies: F4SCompanyPinSet) -> F4SPointQuadTree {
-        let worldBounds = CGRect(x: -180.0, y: -90.0, width: 360.0, height: 180.0)
-        let qt = F4SPointQuadTree(bounds: worldBounds)
+    static func createQuadtree(_ companies: F4SCompanyPinSet) -> KSQuadTree {
+        let worldBounds = KSRect(x: -180.0, y: -90.0, width: 360.0, height: 180.0)
+        let qt = KSQuadTree(bounds: worldBounds)
+        var id = 0
         for company in companies {
-            let latlon = LatLon(location: company.position)
-            let item = F4SQuadtreeItem(latlon: latlon, object: company)
-            try! qt.insert(item: item)
+            var pin = KSPin(id: id, x: company.position.longitude, y: company.position.latitude)
+            pin.object = company
+            try! qt.insert(item: pin)
+            id += 1
         }
         return qt
     }
     
-}
-
-// MARK:- helper extension to facilitate transforming company pins into quadtree items
-extension F4SQuadtreeItem {
-    public init(companyPin: F4SWorkplacePin) {
-        let latlon = LatLon(location: companyPin.position)
-        self.init(latlon: latlon, object: companyPin)
-    }
 }

@@ -39,6 +39,7 @@
 		40E78E981DD39275000A3776 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E971DD39275000A3776 /* MapViewController.swift */; };
 		40E78EA01DD5E208000A3776 /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E9F1DD5E208000A3776 /* LocationHelper.swift */; };
 		537613F924B2F9AC0001F84C /* XYLocatable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537613F824B2F9AC0001F84C /* XYLocatable+Extensions.swift */; };
+		537613FB24B4669E0001F84C /* KSPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537613FA24B4669E0001F84C /* KSPoint+Extensions.swift */; };
 		53BA73C824B060CF00B06421 /* KSPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BA73C424B060CF00B06421 /* KSPoint.swift */; };
 		53BA73C924B060CF00B06421 /* KSSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BA73C524B060CF00B06421 /* KSSize.swift */; };
 		53BA73CA24B060CF00B06421 /* KSRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BA73C624B060CF00B06421 /* KSRect.swift */; };
@@ -236,6 +237,7 @@
 		40E78E971DD39275000A3776 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		40E78E9F1DD5E208000A3776 /* LocationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationHelper.swift; sourceTree = "<group>"; };
 		537613F824B2F9AC0001F84C /* XYLocatable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XYLocatable+Extensions.swift"; sourceTree = "<group>"; };
+		537613FA24B4669E0001F84C /* KSPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KSPoint+Extensions.swift"; sourceTree = "<group>"; };
 		53BA73C424B060CF00B06421 /* KSPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSPoint.swift; sourceTree = "<group>"; };
 		53BA73C524B060CF00B06421 /* KSSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSSize.swift; sourceTree = "<group>"; };
 		53BA73C624B060CF00B06421 /* KSRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSRect.swift; sourceTree = "<group>"; };
@@ -577,6 +579,7 @@
 			children = (
 				53BA73CD24B0614000B06421 /* KSQuadtree.swift */,
 				53BA73CE24B0614000B06421 /* KSRect+Extensions.swift */,
+				537613FA24B4669E0001F84C /* KSPoint+Extensions.swift */,
 			);
 			name = KSQuadTreee;
 			sourceTree = "<group>";
@@ -1317,6 +1320,7 @@
 				20FABFEC1DDDA63600D583E2 /* FileHelper.swift in Sources */,
 				40E78E891DD32C3C000A3776 /* ExtensionsHelper.swift in Sources */,
 				40A5CF3E1DED72E8000007AB /* InterestsCollectionViewCell.swift in Sources */,
+				537613FB24B4669E0001F84C /* KSPoint+Extensions.swift in Sources */,
 				FCB49301222A4B3B00B88B8B /* SearchCoordinator.swift in Sources */,
 				40E78E661DD32B94000A3776 /* TabBarCoordinator.swift in Sources */,
 				53BA73DF24B1F3D200B06421 /* KSClusteringAlgorithm.swift in Sources */,
