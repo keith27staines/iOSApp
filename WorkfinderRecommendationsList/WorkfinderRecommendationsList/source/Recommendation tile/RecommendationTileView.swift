@@ -16,67 +16,92 @@ class RecommendationTileView: UITableViewCell {
         presenter = nil
     }
     
-    lazy var companyNameLabel = UILabel()
-    lazy var industryLabel = UILabel()
-    lazy var hostNameLabel = UILabel()
-    lazy var hostRoleLabel = UILabel()
-    lazy var companyLogo = CompanyLogoView(widthPoints: 55, defaultLogoName: nil)
+    lazy var companyLogo = CompanyLogoView(widthPoints: 70, defaultLogoName: nil)
     lazy var hostPhoto = HostPhotoView(widthPoints: 55, defaultLogoName: nil)
     
-    lazy var companyStack: UIStackView = {
-        let textStack = UIStackView(arrangedSubviews: [
-            self.companyNameLabel,
-            self.industryLabel,
-            UIView()
-        ])
-        textStack.axis = .vertical
-        textStack.spacing = 4
+    lazy var companyLogoStack: UIStackView = {
+        let padding = UIView()
+        //padding.heightAnchor.constraint(greaterThanOrEqualToConstant: 10).isActive = true
         let stack = UIStackView(arrangedSubviews: [
-            self.companyLogo,
-            textStack
+            companyLogo,
+            padding
         ])
-        stack.axis = .horizontal
-        stack.spacing = 12
+        stack.axis = .vertical
         return stack
     }()
     
-    lazy var hostStack: UIStackView = {
+    lazy var companyNameLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        label.numberOfLines = 0
+        label.lineBreakMode = .byTruncatingTail
+        label.constrainToMaxlinesOrFewer(maxLines: 2)
+        return label
+    }()
+    
+    lazy var hostNameLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        label.textColor = UIColor.init(white: 33/255, alpha: 1)
+        label.numberOfLines = 1
+        return label
+    }()
+    lazy var hostRoleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        label.textColor = UIColor.init(white: 184/255, alpha: 1)
+        label.numberOfLines = 1
+        return label
+    }()
+    
+    lazy var companyTextStack: UIStackView = {
         let textStack = UIStackView(arrangedSubviews: [
-            self.hostNameLabel,
-            self.hostRoleLabel,
+            self.companyNameLabel,
             UIView()
         ])
         textStack.axis = .vertical
         textStack.spacing = 4
-        let stack = UIStackView(arrangedSubviews: [
-            self.hostPhoto,
-            textStack
+        return textStack
+    }()
+    
+    lazy var hostTextStack: UIStackView = {
+        let textStack = UIStackView(arrangedSubviews: [
+            self.hostNameLabel,
+            self.hostRoleLabel,
         ])
-        stack.axis = .horizontal
-        stack.spacing = 12
+        textStack.axis = .vertical
+        textStack.spacing = 0
+        return textStack
+    }()
+    
+    lazy var allTextStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            self.companyTextStack,
+            self.hostTextStack,
+            UIView()
+        ])
+        stack.axis = .vertical
+        stack.spacing = 4
+        stack.alignment = .leading
         return stack
     }()
     
     lazy var fullStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
-            self.companyStack,
-            self.hostStack
+            companyLogoStack,
+            allTextStack,
+            UIView()
         ])
-        stack.axis = .vertical
-        stack.spacing = 8
+        stack.spacing = 20
         stack.alignment = .leading
+        stack.axis = .horizontal
         return stack
     }()
     
     lazy var tileView: UIView = {
         let view = UIView()
         view.addSubview(fullStack)
-        fullStack.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
-        view.layer.cornerRadius = 12
-        view.layer.borderColor = UIColor.lightGray.cgColor
-        view.layer.borderWidth = 0.5
-        view.layer.shadowColor = UIColor.init(white: 0.0, alpha: 1).cgColor
-        view.layer.shadowRadius = 10
+        fullStack.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         return view
     }()
     
@@ -89,17 +114,7 @@ class RecommendationTileView: UITableViewCell {
     func configureViews() {
         contentView.addSubview(tileView)
         contentView.backgroundColor = UIColor.white
-        tileView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 4, left: 0, bottom: 8, right: 4))
-        hostNameLabel.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-        hostNameLabel.numberOfLines = 0
-        hostRoleLabel.font = WorkfinderFonts.subHeading
-        hostRoleLabel.numberOfLines = 0
-        hostRoleLabel.textColor = WorkfinderColors.textMedium
-        companyNameLabel.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-        companyNameLabel.numberOfLines = 0
-        industryLabel.font = WorkfinderFonts.subHeading
-        industryLabel.numberOfLines = 0
-        industryLabel.textColor = WorkfinderColors.textMedium
+        tileView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 20))
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
     }
     
@@ -107,4 +122,6 @@ class RecommendationTileView: UITableViewCell {
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
+
+
 

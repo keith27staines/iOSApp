@@ -10,7 +10,7 @@ class RecommendationTilePresenter {
     let hostService: HostsProviderProtocol?
     var view: RecommendationTileView?
     var companyName: String? { didSet { view?.companyNameLabel.text = companyName } }
-    var industry: String? { didSet { view?.industryLabel.text = industry } }
+    var industry: String? { didSet {  } }
     var hostName: String? { didSet { view?.hostNameLabel.text = hostName } }
     var hostRole: String? { didSet { view?.hostRoleLabel.text = hostRole } }
     var workplace: Workplace?

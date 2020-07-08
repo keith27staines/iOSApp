@@ -23,6 +23,7 @@
 		FC22DBF322F97AAB0068C61C /* UserMessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBF222F97AAB0068C61C /* UserMessageHandler.swift */; };
 		FC22DBF522F97ADC0068C61C /* LoadingOverlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBF422F97ADC0068C61C /* LoadingOverlayTests.swift */; };
 		FC22DBF722F97CD70068C61C /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBF622F97CD70068C61C /* UIColor+Extensions.swift */; };
+		FC22F4F524B5E4290030924B /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22F4F424B5E4290030924B /* UILabel+Extensions.swift */; };
 		FC343CFE2446141700347BC2 /* UnderlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC343CFD2446141700347BC2 /* UnderlineView.swift */; };
 		FC343D0024461A6900347BC2 /* UnderlinedNextResponderTextFieldStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC343CFF24461A6900347BC2 /* UnderlinedNextResponderTextFieldStack.swift */; };
 		FC403607246ABBC600F03A5B /* CompanyLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC403606246ABBC600F03A5B /* CompanyLogoView.swift */; };
@@ -80,6 +81,7 @@
 		FC22DBF222F97AAB0068C61C /* UserMessageHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMessageHandler.swift; sourceTree = "<group>"; };
 		FC22DBF422F97ADC0068C61C /* LoadingOverlayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingOverlayTests.swift; sourceTree = "<group>"; };
 		FC22DBF622F97CD70068C61C /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		FC22F4F424B5E4290030924B /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
 		FC343CFD2446141700347BC2 /* UnderlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineView.swift; sourceTree = "<group>"; };
 		FC343CFF24461A6900347BC2 /* UnderlinedNextResponderTextFieldStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedNextResponderTextFieldStack.swift; sourceTree = "<group>"; };
 		FC403606246ABBC600F03A5B /* CompanyLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyLogoView.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				FC116B4F2284515F00146478 /* WebView */,
 				FCE8DB142320FCB100934E2F /* UIImage+extensions.swift */,
 				FC0100B7248A33B0007D8020 /* CompanyMapView.swift */,
+				FC22F4F424B5E4290030924B /* UILabel+Extensions.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				FCA91EBF223406B4007ED308 /* WorkfinderUI.swift in Sources */,
 				FC343D0024461A6900347BC2 /* UnderlinedNextResponderTextFieldStack.swift in Sources */,
 				FC22DBED22F979E90068C61C /* UIViewController+Extensions.swift in Sources */,
+				FC22F4F524B5E4290030924B /* UILabel+Extensions.swift in Sources */,
 				FC22DBF322F97AAB0068C61C /* UserMessageHandler.swift in Sources */,
 				FC22DBEA22F979750068C61C /* Skin.swift in Sources */,
 				FC22DBE922F979750068C61C /* Skinner.swift in Sources */,

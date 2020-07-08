@@ -70,6 +70,7 @@
 		FC21BE3B220F53EB00A0A389 /* SearchViewStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21BE2A220F53EB00A0A389 /* SearchViewStateMachine.swift */; };
 		FC21BE3D220F53EB00A0A389 /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21BE2C220F53EB00A0A389 /* FilterButton.swift */; };
 		FC21BE3F220F53EB00A0A389 /* SearchViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21BE2E220F53EB00A0A389 /* SearchViewProtocol.swift */; };
+		FC22F4F324B5CF020030924B /* TabIndexEnumeration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22F4F224B5CF020030924B /* TabIndexEnumeration.swift */; };
 		FC25A05F1F850DF4002F51A9 /* F4SWorkplacePin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC25A05E1F850DF4002F51A9 /* F4SWorkplacePin.swift */; };
 		FC2A64952494D18700DA28DD /* WorkfinderAssociationDetails.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2A64942494D18700DA28DD /* WorkfinderAssociationDetails.framework */; };
 		FC2A64962494D18700DA28DD /* WorkfinderAssociationDetails.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC2A64942494D18700DA28DD /* WorkfinderAssociationDetails.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -277,6 +278,7 @@
 		FC21BE2A220F53EB00A0A389 /* SearchViewStateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewStateMachine.swift; sourceTree = "<group>"; };
 		FC21BE2C220F53EB00A0A389 /* FilterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
 		FC21BE2E220F53EB00A0A389 /* SearchViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewProtocol.swift; sourceTree = "<group>"; };
+		FC22F4F224B5CF020030924B /* TabIndexEnumeration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabIndexEnumeration.swift; sourceTree = "<group>"; };
 		FC25A05E1F850DF4002F51A9 /* F4SWorkplacePin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SWorkplacePin.swift; sourceTree = "<group>"; };
 		FC2A64942494D18700DA28DD /* WorkfinderAssociationDetails.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAssociationDetails.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC2A64D82495026300DA28DD /* WorkfinderViewRecommendation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderViewRecommendation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -436,7 +438,6 @@
 		40E78E151DD31A86000A3776 /* f4s-workexperience */ = {
 			isa = PBXGroup;
 			children = (
-				53BA73C224B0607100B06421 /* KSMap */,
 				40E78E221DD31A86000A3776 /* Info.plist */,
 				FC69EBA724810F2D00901A2B /* WorkfinderDebugF4SLive.entitlements */,
 				FC7B63E224652FD2006AC0C6 /* f4s_workexperienceReleaseF4SLive.entitlements */,
@@ -552,14 +553,6 @@
 			name = DrawerController;
 			sourceTree = "<group>";
 		};
-		53BA73C224B0607100B06421 /* KSMap */ = {
-			isa = PBXGroup;
-			children = (
-				53BA73D424B0617E00B06421 /* KSClusterManager */,
-			);
-			name = KSMap;
-			sourceTree = "<group>";
-		};
 		53BA73D424B0617E00B06421 /* KSClusterManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -570,6 +563,7 @@
 				FC86FDB324B3403E0081132A /* Cluster rendering */,
 			);
 			name = KSClusterManager;
+			path = ../../../../../../..;
 			sourceTree = "<group>";
 		};
 		74E1A74324CAFF4EF516E014 /* Frameworks */ = {
@@ -638,6 +632,7 @@
 				40E78E931DD391F3000A3776 /* MapView.storyboard */,
 				40E78E971DD39275000A3776 /* MapViewController.swift */,
 				537613F824B2F9AC0001F84C /* XYLocatable+Extensions.swift */,
+				53BA73D424B0617E00B06421 /* KSClusterManager */,
 				FCDC542724289AE0002581FF /* Popup Company List */,
 				FC25A05D1F850DAC002F51A9 /* F4SMap models */,
 				FC771F4B2416292900AD6317 /* CompanyFileParser */,
@@ -785,6 +780,7 @@
 		FC313048222BC83C0043D014 /* TabBarCoordinator */ = {
 			isa = PBXGroup;
 			children = (
+				FC22F4F224B5CF020030924B /* TabIndexEnumeration.swift */,
 				40E78E651DD32B94000A3776 /* TabBarCoordinator.swift */,
 				40C1A4E51DDB356B000F80AA /* TabBarViewController.swift */,
 				FC06605423265FC300496FE2 /* CompanyCoordinatorParentProtocol+extensions.swift */,
@@ -1340,6 +1336,7 @@
 				FC50E9CE2213EF5400C9A621 /* SearchModeSelectorView.swift in Sources */,
 				FCDC543124289B9D002581FF /* CompanyTileViewData.swift in Sources */,
 				FC99BDCA20D170CA00278DDE /* F4SCompanyDownloadManager.swift in Sources */,
+				FC22F4F324B5CF020030924B /* TabIndexEnumeration.swift in Sources */,
 				40E78E811DD32BF4000A3776 /* TableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

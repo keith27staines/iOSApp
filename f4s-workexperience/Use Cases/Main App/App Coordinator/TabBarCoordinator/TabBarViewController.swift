@@ -106,9 +106,3 @@ extension TabBarViewController: RatePlacementProtocol {
 protocol RatePlacementProtocol: class {
     func dismissRateController()
 }
-
-enum TabIndex : Int {
-    case applications
-    case recommendations
-    case map
-}
