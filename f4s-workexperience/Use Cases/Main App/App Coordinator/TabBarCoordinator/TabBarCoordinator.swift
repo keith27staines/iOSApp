@@ -24,7 +24,6 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     var tabBarViewController: TabBarViewController!
     var drawerController: DrawerController?
     var shouldAskOperatingSystemToAllowLocation = false
-    var searchCoordinator: SearchCoordinator!
     
     required init(parent: Coordinating?,
                   navigationRouter: NavigationRoutingProtocol,
@@ -113,38 +112,40 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     }
     
     private func createTabBar() {
-        
-        searchCoordinator = makeSearchCoordinator()
-        
-        let searchNavigationController = searchCoordinator.navigationRouter.navigationController
-        let applicationsNavigationController = applicationsCoordinator.navigationRouter.navigationController
-        let recommendationsNavigationController = recommendationsCoordinator.navigationRouter.navigationController
-        searchCoordinator.start()
-        applicationsCoordinator.start()
-        recommendationsCoordinator.start()
         tabBarViewController = TabBarViewController()
-        tabBarViewController.viewControllers = [
-            applicationsNavigationController,
-            recommendationsNavigationController,
-            searchNavigationController]
+        var tabViewControllers = [UIViewController]()
+        for tab in TabIndex.allCases {
+            let coordinator = tab.tabCoordinator(from: self)
+            let controller = coordinator.navigationRouter.navigationController
+            coordinator.start()
+            tabViewControllers.append(controller)
+        }
+        tabBarViewController.viewControllers = tabViewControllers
         tabBarViewController.delegate = self
     }
     
     lazy var applicationsCoordinator: ApplicationsCoordinator = {
-        let navigationController = UINavigationController()
-        let icon = UIImage(named: "applications")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
-        navigationController.tabBarItem = UITabBarItem(title: "Applications", image: icon, selectedImage: nil)
-        let router = NavigationRouter(navigationController: navigationController)
+        let router = TabIndex.applications.makeRouter()
         let coordinator = ApplicationsCoordinator(parent: nil, navigationRouter: router, inject: injected)
         addChildCoordinator(coordinator)
         return coordinator
     }()
     
+    lazy var searchCoordinator: SearchCoordinator = {
+        let router = TabIndex.map.makeRouter()
+        let coordinator = SearchCoordinator(
+            parent: self,
+            navigationRouter: router,
+            inject: injected,
+            companyCoordinatorFactory: companyCoordinatorFactory,
+            interestsRepository: interestsRepository)
+        coordinator.shouldAskOperatingSystemToAllowLocation = shouldAskOperatingSystemToAllowLocation
+        addChildCoordinator(coordinator)
+        return coordinator
+    }()
+    
     lazy var recommendationsCoordinator: RecommendationsCoordinator = {
-        let navigationController = UINavigationController()
-        let icon = UIImage(named: "recommendations")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
-        navigationController.tabBarItem = UITabBarItem(title: "Recommendations", image: icon, selectedImage: nil)
-        let router = NavigationRouter(navigationController: navigationController)
+        let router = TabIndex.recommendations.makeRouter()
         let coordinator = RecommendationsCoordinator(parent: nil, navigationRouter: router, inject: injected)
         coordinator.onRecommendationSelected = { uuid in
             self.dispatchRecommendationToSearchTab(uuid: uuid)
@@ -162,22 +163,6 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         addChildCoordinator(coordinator)
         return coordinator
     }()
-    
-    func makeSearchCoordinator() -> SearchCoordinator {
-        let navigationController = UINavigationController()
-        let searchIcon = UIImage(named: "searchIcon")?.withRenderingMode(.alwaysTemplate)
-        navigationController.tabBarItem = UITabBarItem(title: "Search", image: searchIcon, selectedImage: nil)
-        let router = NavigationRouter(navigationController: navigationController)
-        let coordinator = SearchCoordinator(
-            parent: self,
-            navigationRouter: router,
-            inject: injected,
-            companyCoordinatorFactory: companyCoordinatorFactory,
-            interestsRepository: interestsRepository)
-        coordinator.shouldAskOperatingSystemToAllowLocation = shouldAskOperatingSystemToAllowLocation
-        addChildCoordinator(coordinator)
-        return coordinator
-    }
 
     private func setUpDrawerController(navigationController: UIViewController) -> DrawerController {
         navigationController.restorationIdentifier = "ExampleCenterNavigationControllerRestorationKey"

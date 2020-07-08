@@ -11,7 +11,7 @@ class RecommendationsViewController: UIViewController {
         let view = UITableView()
         view.dataSource = self
         view.delegate = self
-        view.separatorStyle = .none
+        view.separatorStyle = .singleLine
         view.backgroundColor = UIColor.white
         view.register(RecommendationTileView.self, forCellReuseIdentifier: "recommendation")
         return view
@@ -19,9 +19,8 @@ class RecommendationsViewController: UIViewController {
     
     lazy var noRecommendationsYet:UILabel = {
         let label = UILabel()
-        label.text = "No recommendations yet.\n\nRecommendations will begin appearing here soon after you have made your first application"
-        label.font = WorkfinderFonts.title2
-        label.textColor = WorkfinderColors.textLight
+        label.text = "Please make your first application to start receiving recommendations"
+        label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         label.backgroundColor = WorkfinderColors.white
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -54,7 +53,7 @@ class RecommendationsViewController: UIViewController {
         view.backgroundColor = UIColor.white
         let guide = view.safeAreaLayoutGuide
         view.addSubview(tableview)
-        tableview.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+        tableview.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0))
     }
     
     func refresh() {
@@ -69,8 +68,7 @@ class RecommendationsViewController: UIViewController {
         noRecommendationsYet.translatesAutoresizingMaskIntoConstraints = false
         noRecommendationsYet.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         noRecommendationsYet.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        noRecommendationsYet.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 30).isActive = true
-        noRecommendationsYet.topAnchor.constraint(equalTo: view.topAnchor, constant: 30).isActive = true
+        noRecommendationsYet.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 20).isActive = true
     }
     
     func loadData() {
