@@ -114,8 +114,13 @@ class RecommendationTileView: UITableViewCell {
     func configureViews() {
         contentView.addSubview(tileView)
         contentView.backgroundColor = UIColor.white
-        tileView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 20))
+        tileView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 15, left: 0, bottom: 15, right: 0))
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+        let underline = UIView()
+        underline.backgroundColor = UIColor.init(white: 200/255, alpha: 1)
+        underline.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        contentView.addSubview(underline)
+        underline.anchor(top: nil, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor)
     }
     
     @objc func handleTap() { presenter?.onTileTapped() }

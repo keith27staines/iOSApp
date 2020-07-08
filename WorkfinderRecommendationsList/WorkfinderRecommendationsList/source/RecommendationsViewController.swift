@@ -7,11 +7,29 @@ class RecommendationsViewController: UIViewController {
     lazy var messageHandler = UserMessageHandler(presenter: self)
     let presenter: RecommendationsPresenter
     
+
+    
+    lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        label.textColor = UIColor.black
+        label.heightAnchor.constraint(equalToConstant: 72).isActive = true
+        label.textAlignment = .center
+        label.text = "These roles are a perfect match for you!"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        let underline = UIView()
+        underline.backgroundColor = UIColor.init(white: 200/255, alpha: 1)
+        underline.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        label.addSubview(underline)
+        underline.anchor(top: nil, leading: label.leadingAnchor, bottom: label.bottomAnchor, trailing: label.trailingAnchor)
+        return label
+    }()
+    
     lazy var tableview: UITableView = {
         let view = UITableView()
         view.dataSource = self
         view.delegate = self
-        view.separatorStyle = .singleLine
+        view.separatorStyle = .none
         view.backgroundColor = UIColor.white
         view.register(RecommendationTileView.self, forCellReuseIdentifier: "recommendation")
         return view
@@ -52,8 +70,10 @@ class RecommendationsViewController: UIViewController {
     func configureViews() {
         view.backgroundColor = UIColor.white
         let guide = view.safeAreaLayoutGuide
+        view.addSubview(titleLabel)
         view.addSubview(tableview)
-        tableview.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0))
+        titleLabel.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: nil, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20))
+        tableview.anchor(top: titleLabel.bottomAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 20, bottom: 20, right: 20))
     }
     
     func refresh() {
@@ -62,6 +82,7 @@ class RecommendationsViewController: UIViewController {
     }
     
     func updateDisplayOfNoRecommendationsYet() {
+        titleLabel.isHidden = presenter.noRecommendationsYet
         noRecommendationsYet.removeFromSuperview()
         guard presenter.noRecommendationsYet else { return }
         view.addSubview(noRecommendationsYet)

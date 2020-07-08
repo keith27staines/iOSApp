@@ -30,6 +30,12 @@ class RecommendationTilePresenter {
     }
     
     func loadData() {
+        guard isLoaded == false else {
+            view?.companyNameLabel.text = companyName
+            view?.hostNameLabel.text = hostName
+            view?.hostRoleLabel.text = hostRole
+            return
+        }
         guard let uuid = recommendation.uuid else { return }
         guard workplace == nil else {
             updateCompanyAndAssociationData()
@@ -51,6 +57,8 @@ class RecommendationTilePresenter {
         })
     }
     
+    var isLoaded: Bool = false
+    
     func onAssociationLoaded(_ association: AssociationJson?) {
         guard host == nil else {
             updateHostData()
@@ -63,6 +71,7 @@ class RecommendationTilePresenter {
             case .success(let host):
                 self.host = host
                 self.updateHostData()
+                self.isLoaded = true
             case .failure(_):
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+2) {
                     self.onAssociationLoaded(association)
