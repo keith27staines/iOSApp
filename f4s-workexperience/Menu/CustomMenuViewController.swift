@@ -41,7 +41,7 @@ fileprivate enum NavigationSectionRow : Int {
     }
 }
 
-class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CustomMenuViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var tableView: UITableView!
     let normalCellHeight: CGFloat = 60
     let welcomeCellHeight: CGFloat = 100
@@ -104,10 +104,6 @@ class CustomMenuViewController: BaseMenuViewController, UITableViewDataSource, U
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
-    }
-
-    override func contentSizeDidChange(size _: String) {
-        self.tableView.reloadData()
     }
 
     // MARK: - UITableViewDataSource

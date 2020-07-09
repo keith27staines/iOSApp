@@ -41,7 +41,6 @@ class ApplicationTile: UITableViewCell {
     lazy var logoStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [logo, UIView()])
         stack.axis = .vertical
-        stack.spacing = 8
         stack.widthAnchor.constraint(equalToConstant: companyLogoWidth).isActive = true
         return stack
     }()
@@ -50,22 +49,15 @@ class ApplicationTile: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         label.numberOfLines = 0
-        return label
-    }()
-    
-    lazy var industry: UILabel = {
-        let label = UILabel()
-        label.font = WorkfinderFonts.body2
-        label.textColor = UIColor.init(white: 33/255, alpha: 1)
-        label.numberOfLines = 1
+        label.constrainToMaxlinesOrFewer(maxLines: 2)
         return label
     }()
     
     lazy var hostInformation: UILabel = {
         let label = UILabel()
-        label.font = WorkfinderFonts.body2
+        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         label.textColor = UIColor.init(white: 33/255, alpha: 1)
-        label.numberOfLines = 0
+        label.numberOfLines = 1
         return label
     }()
     
@@ -76,23 +68,24 @@ class ApplicationTile: UITableViewCell {
         return label
     }()
     
-    lazy var line: UIView = {
+    func makeSeparatorView() -> UIView {
         let view = UIView()
         view.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        view.backgroundColor = UIColor.init(white: 216/255, alpha: 0.5)
+        view.backgroundColor = UIColor.init(white: 216/255, alpha: 1)
         return view
-    }()
+    }
     
     lazy var textStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
             companyName,
-            industry,
             hostInformation,
-            line,
             UIView()
         ])
         stack.axis = .vertical
-        stack.spacing = 4
+        stack.spacing = 5
+        let separator = makeSeparatorView()
+        stack.addSubview(separator)
+        separator.anchor(top: nil, leading: stack.leadingAnchor, bottom: stack.bottomAnchor, trailing: stack.trailingAnchor)
         return stack
     }()
     
@@ -127,12 +120,14 @@ class ApplicationTile: UITableViewCell {
     
     func configureViews() {
         contentView.addSubview(mainStack)
-        mainStack.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 8, left: 4, bottom: 4, right: 4))
+        mainStack.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 33, left: 0, bottom: 19, right: 0))
+        let separator = makeSeparatorView()
+        contentView.addSubview(separator)
+        separator.anchor(top: nil, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor)
     }
     
     func configureWithApplication(_ application: ApplicationTilePresenter) {
         companyName.text = application.companyName
-        industry.text = application.industry
         statusView.text = application.state.rawValue
         statusViewContainer.backgroundColor = application.state.capsuleColor
         hostInformation.text = application.hostInformation

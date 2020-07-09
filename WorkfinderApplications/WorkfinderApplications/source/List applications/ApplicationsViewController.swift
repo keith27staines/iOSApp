@@ -73,12 +73,13 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
         view.backgroundColor = UIColor.white
         view.addSubview(tableView)
         let guide = view.safeAreaLayoutGuide
-        tableView.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+        tableView.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 20, bottom: 20, right: 20))
     }
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(ApplicationTile.self, forCellReuseIdentifier: ApplicationTile.reuseIdentifier)
+        tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
         return tableView
