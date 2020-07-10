@@ -49,7 +49,8 @@ class RecommendationTilePresenter {
                 self.workplace = workplace
                 self.updateCompanyAndAssociationData()
                 self.onAssociationLoaded(self.workplaceService?.associationJson)
-            case .failure(_):
+            case .failure(let error):
+                guard let error = error as? WorkfinderError, error.retry == true else { return }
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+2) {
                     self.loadData()
                 }
@@ -72,7 +73,9 @@ class RecommendationTilePresenter {
                 self.host = host
                 self.updateHostData()
                 self.isLoaded = true
-            case .failure(_):
+            case .failure(let error):
+                guard let error = error as? WorkfinderError else { return }
+                guard error.retry == true else { return }
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+2) {
                     self.onAssociationLoaded(association)
                 }
