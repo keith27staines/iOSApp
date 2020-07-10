@@ -19,7 +19,7 @@ public enum WorkfinderErrorType {
     case http(request:URLRequest?, response:HTTPURLResponse?, data: Data?)
     case networkConnectivity
     case custom(title: String, description: String)
-    
+
     public var code: Int {
         switch self {
         // http error responses
