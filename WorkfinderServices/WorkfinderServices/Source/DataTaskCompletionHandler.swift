@@ -20,7 +20,7 @@ public class DataTaskCompletionHandler {
             guard let response = httpResponse, let data = responseData else {
                 var workfinderError: WorkfinderError?
                 if let error = error {
-                    workfinderError = WorkfinderError.init(from: error as NSError, retryHandler: nil)
+                    workfinderError = WorkfinderError.init(from: error as NSError, attempting: attempting, retryHandler: nil)
                 } else if responseData == nil {
                     workfinderError = WorkfinderError(errorType: .noData, attempting: attempting, retryHandler: nil)
                 } else if httpResponse == nil {
