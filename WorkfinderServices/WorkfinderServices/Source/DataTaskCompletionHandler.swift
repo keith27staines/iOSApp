@@ -16,6 +16,9 @@ public class DataTaskCompletionHandler {
                                     httpResponse: HTTPURLResponse?,
                                     error: Error?,
                                     completion: @escaping((Result<Data,Error>) -> Void)) {
+        if let error = error as NSError?, error.code == -999 {
+            return // request was cancelled
+        }
         DispatchQueue.main.async { [weak self] in
             guard let response = httpResponse, let data = responseData else {
                 var workfinderError: WorkfinderError?
