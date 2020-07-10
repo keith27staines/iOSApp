@@ -19,7 +19,7 @@ public enum WorkfinderErrorType {
     case http(request:URLRequest?, response:HTTPURLResponse?, data: Data?)
     case networkConnectivity
     case custom(title: String, description: String)
-    
+
     public var code: Int {
         switch self {
         // http error responses
@@ -53,7 +53,7 @@ public enum WorkfinderErrorType {
         case .custom(let title,_): return title + code
         }
     }
-    //
+    
     public var shouldNotify: Bool {
         switch self {
         case .error(_): return true
