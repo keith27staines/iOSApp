@@ -58,16 +58,15 @@ public class NetworkCallLogger : NetworkCallLoggerProtocol {
         text = "\(text)\n\(separator)\n\n"
         log.error(message: text, functionName: #function, fileName: #file, lineNumber: #line)
         if error.errorType.shouldNotify {
+            let nsError = error.asNSError()
+            var userInfo = nsError.userInfo
+            userInfo["underlying error"] = error.underlyingError
             log.notifyError(error.asNSError(),
                             functionName: #function,
                             fileName: #file,
                             lineNumber: #line,
                             callDetails: text)
         }
-    }
-    
-    func taskFailureToError(code: Int, text: String) -> NSError {
-        return NSError(domain: "iOS Workfinder Networking", code: code, userInfo: ["reason": text])
     }
     
     public func logDataTaskSuccess(request: URLRequest,

@@ -94,9 +94,13 @@ public enum WorkfinderErrorType {
     }
     
     public var retry: Bool {
-        switch self.code {
-        case 501...599: return true
-        default: return false
+        switch self {
+        case .networkConnectivity: return true
+        default:
+            switch self.code {
+            case 501...599: return true
+            default: return false
+            }
         }
     }
 }
@@ -106,7 +110,7 @@ public typealias HTTPStatusCode = Int
 public class WorkfinderError: Error {
 
     public let errorType: WorkfinderErrorType
-    public var retry =  false
+    public var retry: Bool { errorType.retry }
     public var retryHandler: (() -> Void)?
 
     public var underlyingError: NSError?
@@ -176,6 +180,7 @@ public class WorkfinderError: Error {
         let isNetworkConnectivityProblem = networkConnectionErrors.contains(errorCode)
         self.errorType = isNetworkConnectivityProblem ? .networkConnectivity : .error(nsError)
         self.underlyingError = nsError
+        self.attempting = attempting
         self.retryHandler = retryHandler
     }
     

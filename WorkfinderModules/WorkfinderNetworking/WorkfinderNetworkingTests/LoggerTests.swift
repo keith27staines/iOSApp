@@ -21,13 +21,6 @@ class LoggerTests: XCTestCase {
         XCTAssertEqual((sut.log as? MockF4SAnalyticsAndDebugging)!.aliases.last, "123456789")
     }
     
-    func test_convertTaskFailureToError() {
-        let sut = NetworkCallLogger(log: MockF4SAnalyticsAndDebugging())
-        let nsError = sut.taskFailureToError(code: 12345, text: "Bad stuff happened")
-        XCTAssertEqual(nsError.domain, "iOS Workfinder Networking")
-        XCTAssertEqual(nsError.userInfo["reason"] as! String, "Bad stuff happened")
-    }
-    
     func test_logDataTaskSuccess_with_valid_data() {
         let log = MockF4SAnalyticsAndDebugging()
         let sut = NetworkCallLogger(log: log)

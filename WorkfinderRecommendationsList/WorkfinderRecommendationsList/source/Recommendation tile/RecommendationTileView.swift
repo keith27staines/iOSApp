@@ -21,7 +21,6 @@ class RecommendationTileView: UITableViewCell {
     
     lazy var companyLogoStack: UIStackView = {
         let padding = UIView()
-        //padding.heightAnchor.constraint(greaterThanOrEqualToConstant: 10).isActive = true
         let stack = UIStackView(arrangedSubviews: [
             companyLogo,
             padding
