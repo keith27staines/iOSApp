@@ -5,6 +5,7 @@ import WorkfinderServices
 protocol RecommendationTilePresenterProtocol {
     var view: RecommendationTileViewProtocol? { get set }
     var companyName: String? { get }
+    var companyLogo: String? { get }
     var hostName: String? { get }
     var hostRole: String? { get }
     func onTileTapped()
@@ -25,6 +26,7 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
     var host: Host?
     var association: AssociationJson?
     var companyLogo: String?
+    var companyImage: UIImage?
     
     var view: RecommendationTileViewProtocol?
     
@@ -89,7 +91,6 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
         industry = company?.industries?.first?.name
         companyLogo = company?.logo
         parentPresenter?.refreshRow(row)
-        //self.view?.refreshFromPresenter(presenter: self)
     }
     
     private func updateHostData() {

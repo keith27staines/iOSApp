@@ -22,6 +22,7 @@ class RecommendationTileView: UITableViewCell, RecommendationTileViewProtocol {
     
     func refreshFromPresenter(presenter: RecommendationTilePresenterProtocol) {
         companyNameLabel.text = presenter.companyName
+        companyLogo.load(companyName: presenter.companyName ?? " ", urlString: presenter.companyName, completion: nil)
         hostNameLabel.text = presenter.hostName
         hostRoleLabel.text = presenter.hostRole
     }
