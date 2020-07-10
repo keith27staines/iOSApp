@@ -53,7 +53,7 @@ public enum WorkfinderErrorType {
         case .custom(let title,_): return title + code
         }
     }
-    
+    //
     public var shouldNotify: Bool {
         switch self {
         case .error(_): return true
