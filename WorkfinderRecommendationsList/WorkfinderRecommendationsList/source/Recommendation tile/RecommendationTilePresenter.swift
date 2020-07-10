@@ -29,9 +29,12 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
     var view: RecommendationTileViewProtocol?
     
     var isLoaded: Bool = false
+    var isLoading: Bool = false
     
     func loadData() {
         view?.refreshFromPresenter(presenter: self)
+        guard isLoading == false else { return }
+        isLoading = true
         guard isLoaded == false else { return }
         guard let uuid = recommendation.uuid else { return }
         guard workplace == nil else {
@@ -70,7 +73,9 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
                 self.isLoaded = true
             case .failure(let error):
                 guard let error = error as? WorkfinderError else { return }
-                guard error.retry == true else { return }
+                guard error.retry == true else {
+                    return
+                }
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+2) {
                     self.onAssociationLoaded(association)
                 }
@@ -83,7 +88,8 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
         companyName = company?.name
         industry = company?.industries?.first?.name
         companyLogo = company?.logo
-        self.view?.refreshFromPresenter(presenter: self)
+        parentPresenter?.refreshRow(row)
+        //self.view?.refreshFromPresenter(presenter: self)
     }
     
     private func updateHostData() {

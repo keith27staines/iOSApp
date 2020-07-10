@@ -40,8 +40,8 @@ class RecommendationsPresenter {
     func loadData(completion: @escaping (Error?) -> Void) {
         guard let _ = userRepo.loadAccessToken()
             else {
-            completion(nil)
-            return
+                completion(nil)
+                return
         }
         service.fetchRecommendations(userUuid: "userUuid") { [weak self] (result) in
             guard let self = self else { return }
