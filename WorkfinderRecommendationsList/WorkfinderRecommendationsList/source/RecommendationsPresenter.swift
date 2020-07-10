@@ -6,7 +6,7 @@ class RecommendationsPresenter {
     weak var coordinator: RecommendationsCoordinator?
     let service: RecommendationsServiceProtocol
     var recommendations = [Recommendation]()
-    var tilePresenters = [Recommendation : RecommendationTilePresenter]()
+    var tilePresenters = [RecommendationTilePresenter]()
     let userRepo: UserRepositoryProtocol
     var workplaceServiceFactory: (() -> WorkplaceAndAssociationService)?
     var hostServiceFactory: (() -> HostsProviderProtocol)?
@@ -33,6 +33,10 @@ class RecommendationsPresenter {
         self.view = view
     }
     
+    func refreshRow(_ row: Int) {
+        view?.reloadRow([IndexPath(row: row, section: 0)])
+    }
+    
     func loadData(completion: @escaping (Error?) -> Void) {
         guard let _ = userRepo.loadAccessToken()
             else {
@@ -55,9 +59,10 @@ class RecommendationsPresenter {
     func numberOfRowsForSection(_ section: Int) -> Int { recommendations.count }
 
     func recommendationTilePresenterForIndexPath(_ indexPath: IndexPath) -> RecommendationTilePresenter {
-        let recommendation = recommendations[indexPath.row]
-        if let presenter = tilePresenters[recommendation] {
-            return presenter
+        let row = indexPath.row
+        let recommendation = recommendations[row]
+        if indexPath.row < tilePresenters.count {
+            return tilePresenters[row]
         }
         let workplaceService = workplaceServiceFactory?()
         let hostService = hostServiceFactory?()
@@ -65,8 +70,9 @@ class RecommendationsPresenter {
             parent: self,
             recommendation: recommendation,
             workplaceService: workplaceService,
-            hostService: hostService)
-        tilePresenters[recommendation] = presenter
+            hostService: hostService,
+            row: row)
+        tilePresenters.append(presenter)
         return presenter
     }
     

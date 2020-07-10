@@ -2,40 +2,37 @@
 import WorkfinderCommon
 import WorkfinderServices
 
-class RecommendationTilePresenter {
+protocol RecommendationTilePresenterProtocol {
+    var view: RecommendationTileViewProtocol? { get set }
+    var companyName: String? { get }
+    var hostName: String? { get }
+    var hostRole: String? { get }
+    func onTileTapped()
+    func loadData()
+}
+
+class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
     
     weak var parentPresenter: RecommendationsPresenter?
     let recommendation: Recommendation
     let workplaceService: WorkplaceAndAssociationService?
     let hostService: HostsProviderProtocol?
-    var view: RecommendationTileView?
-    var companyName: String? { didSet { view?.companyNameLabel.text = companyName } }
-    var industry: String? { didSet {  } }
-    var hostName: String? { didSet { view?.hostNameLabel.text = hostName } }
-    var hostRole: String? { didSet { view?.hostRoleLabel.text = hostRole } }
+    var companyName: String?
+    var industry: String?
+    var hostName: String?
+    var hostRole: String?
     var workplace: Workplace?
     var host: Host?
     var association: AssociationJson?
+    var companyLogo: String?
     
-    var companyLogo: String? {
-        didSet {
-            view?.companyLogo.load(companyName: self.companyName ?? "?", urlString: companyLogo, completion: nil)
-        }
-    }
+    var view: RecommendationTileViewProtocol?
     
-    var hostPhoto: String? {
-        didSet {
-            view?.hostPhoto.load(hostName: self.hostName ?? "?", urlString: hostPhoto, completion: nil)
-        }
-    }
+    var isLoaded: Bool = false
     
     func loadData() {
-        guard isLoaded == false else {
-            view?.companyNameLabel.text = companyName
-            view?.hostNameLabel.text = hostName
-            view?.hostRoleLabel.text = hostRole
-            return
-        }
+        view?.refreshFromPresenter(presenter: self)
+        guard isLoaded == false else { return }
         guard let uuid = recommendation.uuid else { return }
         guard workplace == nil else {
             updateCompanyAndAssociationData()
@@ -57,8 +54,6 @@ class RecommendationTilePresenter {
             }
         })
     }
-    
-    var isLoaded: Bool = false
     
     func onAssociationLoaded(_ association: AssociationJson?) {
         guard host == nil else {
@@ -88,25 +83,30 @@ class RecommendationTilePresenter {
         companyName = company?.name
         industry = company?.industries?.first?.name
         companyLogo = company?.logo
+        self.view?.refreshFromPresenter(presenter: self)
     }
     
     private func updateHostData() {
         hostName = host?.displayName
         hostRole = self.workplaceService?.associationJson?.title
-        hostPhoto = host?.photoUrlString
+        parentPresenter?.refreshRow(row)
     }
     
     func onTileTapped() {
         parentPresenter?.onTileTapped(self)
     }
+    
+    let row: Int
 
     init(parent: RecommendationsPresenter,
          recommendation: Recommendation,
          workplaceService: WorkplaceAndAssociationService?,
-         hostService: HostsProviderProtocol?) {
+         hostService: HostsProviderProtocol?,
+         row: Int) {
         self.parentPresenter = parent
         self.recommendation = recommendation
         self.workplaceService = workplaceService
         self.hostService = hostService
+        self.row = row
     }
 }

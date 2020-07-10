@@ -7,8 +7,6 @@ class RecommendationsViewController: UIViewController {
     lazy var messageHandler = UserMessageHandler(presenter: self)
     let presenter: RecommendationsPresenter
     
-
-    
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
@@ -48,6 +46,10 @@ class RecommendationsViewController: UIViewController {
     init(presenter: RecommendationsPresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
+    }
+    
+    func reloadRow(_ indexPaths: [IndexPath]) {
+        tableview.reloadRows(at: indexPaths, with: .automatic)
     }
     
     override func viewDidLoad() {
