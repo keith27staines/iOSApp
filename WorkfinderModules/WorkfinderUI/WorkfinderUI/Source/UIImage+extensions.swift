@@ -2,6 +2,17 @@ import Foundation
 
 public extension UIImage {
     
+    static func imageWithFirstLetter(string: String?, backgroundColor: UIColor, width: CGFloat) -> UIImage {
+        let backgroundColor = WorkfinderColors.primaryColor
+        let firstCharacter: Character = string?.first ?? "?"
+        let image: UIImage = UIImage.from(
+            size: CGSize(width: width, height: width),
+            string: String(firstCharacter),
+            backgroundColor: backgroundColor)
+        return image
+    }
+    
+    
     /// returns an image scaled to the specified size
     ///
     /// - parameter size: The size to scale the image to (not preserving aspect ratio)

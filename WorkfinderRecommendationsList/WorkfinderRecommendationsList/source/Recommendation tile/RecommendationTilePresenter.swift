@@ -1,10 +1,12 @@
 
 import WorkfinderCommon
 import WorkfinderServices
+import WorkfinderUI
 
 protocol RecommendationTilePresenterProtocol {
+    var view: RecommendationTileViewProtocol? { get set }
     var companyName: String? { get }
-    var companyLogo: String? { get }
+    var companyImage: UIImage? { get }
     var hostName: String? { get }
     var hostRole: String? { get }
     var isLoading: Bool { get }
@@ -13,7 +15,7 @@ protocol RecommendationTilePresenterProtocol {
 }
 
 class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
-    
+    weak var view: RecommendationTileViewProtocol?
     let row: Int
     weak var parentPresenter: RecommendationsPresenter?
     let recommendation: Recommendation
@@ -28,8 +30,26 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
     var company: CompanyJson? { workplace?.companyJson }
     var host: Host?
     var association: AssociationJson?
-    var companyLogo: String? { company?.logo }
-    var companyImage: UIImage?
+    var defaultImage: UIImage? {
+        UIImage.imageWithFirstLetter(
+            string: companyName,
+            backgroundColor: WorkfinderColors.primaryColor,
+            width: 70)
+    }
+    var companyLogo: String? {
+        didSet {
+            imageService.fetchImage(
+                urlString: companyLogo,
+                defaultImage: defaultImage) { [weak self] (image) in
+                    guard let self = self else { return }
+                    self.downloadedImage = image
+                    self.onDataLoadFinished()
+            }
+        }
+    }
+    var downloadedImage: UIImage?
+    var companyImage: UIImage? { downloadedImage ?? defaultImage }
+    var imageService: SmallImageServiceProtocol = SmallImageService()
     
     var isLoaded: Bool {
         workplace != nil && host != nil
@@ -43,7 +63,6 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
         guard let uuid = recommendation.uuid else { return }
         guard isLoading == false else { return }
         guard isLoaded == false else {
-            onDataLoadFinished()
             return
         }
         isLoading = true

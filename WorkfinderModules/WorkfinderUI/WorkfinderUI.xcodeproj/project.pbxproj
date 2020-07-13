@@ -38,6 +38,7 @@
 		FC9535A1231E448D00F4A9DA /* F4SSelfLoadingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9535A0231E448D00F4A9DA /* F4SSelfLoadingImageView.swift */; };
 		FC9535A3231E52E600F4A9DA /* F4SSelfLoadingImageViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9535A2231E52E600F4A9DA /* F4SSelfLoadingImageViewTests.swift */; };
 		FC9865BA229D3901006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865B9229D3901006D3E63 /* README */; };
+		FCA13FBD24BC469A0009C30F /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA13FBC24BC469A0009C30F /* UIImageView+Extensions.swift */; };
 		FCA636AB22A3E57E004B3050 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA636AA22A3E57E004B3050 /* WorkfinderCommon.framework */; };
 		FCA91EAC2234065A007ED308 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91EA22234065A007ED308 /* WorkfinderUI.framework */; };
 		FCA91EB12234065A007ED308 /* WorkfinderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91EB02234065A007ED308 /* WorkfinderUITests.swift */; };
@@ -97,6 +98,7 @@
 		FC9535A0231E448D00F4A9DA /* F4SSelfLoadingImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SSelfLoadingImageView.swift; sourceTree = "<group>"; };
 		FC9535A2231E52E600F4A9DA /* F4SSelfLoadingImageViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SSelfLoadingImageViewTests.swift; sourceTree = "<group>"; };
 		FC9865B9229D3901006D3E63 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		FCA13FBC24BC469A0009C30F /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		FCA636AA22A3E57E004B3050 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA91EA22234065A007ED308 /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA91EA52234065A007ED308 /* WorkfinderUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderUI.h; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			children = (
 				FC116B4B2284510E00146478 /* WebViewAssets.xcassets */,
 				FC116B4D2284511E00146478 /* WebViewController.swift */,
+				FCA13FBC24BC469A0009C30F /* UIImageView+Extensions.swift */,
 			);
 			path = WebView;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				FC22DB9122F9764F0068C61C /* UIButton+Extensions.swift in Sources */,
 				FC403607246ABBC600F03A5B /* CompanyLogoView.swift in Sources */,
 				FC22DBF722F97CD70068C61C /* UIColor+Extensions.swift in Sources */,
+				FCA13FBD24BC469A0009C30F /* UIImageView+Extensions.swift in Sources */,
 				FCEB1D27229FC6DB00C6D2C2 /* UITableView+Extensions.swift in Sources */,
 				FCB4EAD22424D231001D5D23 /* TriangleView.swift in Sources */,
 				FCB4EADA24253F36001D5D23 /* StarRatingView.swift in Sources */,

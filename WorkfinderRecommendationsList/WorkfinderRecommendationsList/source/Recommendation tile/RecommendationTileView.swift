@@ -2,7 +2,7 @@
 import UIKit
 import WorkfinderUI
 
-protocol RecommendationTileViewProtocol {
+protocol RecommendationTileViewProtocol: AnyObject {
     func refreshFromPresenter(presenter: RecommendationTilePresenterProtocol?)
 }
 
@@ -15,13 +15,9 @@ class RecommendationTileView: UITableViewCell, RecommendationTileViewProtocol {
         }
     }
     
-    override func prepareForReuse() {
-        presenter = nil
-    }
-    
     func refreshFromPresenter(presenter: RecommendationTilePresenterProtocol?) {
         companyNameLabel.text = presenter?.companyName
-        companyLogo.load(companyName: presenter?.companyName ?? " ", urlString: presenter?.companyName, completion: nil)
+        companyLogo.image = presenter?.companyImage
         hostNameLabel.text = presenter?.hostName
         hostRoleLabel.text = presenter?.hostRole
         if presenter?.isLoading == true {
@@ -31,9 +27,10 @@ class RecommendationTileView: UITableViewCell, RecommendationTileViewProtocol {
             activityIndicator.stopAnimating()
         }
     }
-    
-    lazy var companyLogo = CompanyLogoView(widthPoints: 70, defaultLogoName: nil)
+
     lazy var hostPhoto = HostPhotoView(widthPoints: 55, defaultLogoName: nil)
+    
+    lazy var companyLogo: UIImageView = UIImageView.companyLogoImageView(width: 70)
     
     lazy var companyLogoStack: UIStackView = {
         let padding = UIView()
