@@ -109,6 +109,8 @@
 		FC96709E2259F61600318F69 /* F4SSelectedInterestsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96709D2259F61600318F69 /* F4SSelectedInterestsRepository.swift */; };
 		FC99BDC820CFD8E400278DDE /* F4SDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */; };
 		FC99BDCA20D170CA00278DDE /* F4SCompanyDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99BDC920D170CA00278DDE /* F4SCompanyDownloadManager.swift */; };
+		FCA1400124BC81C50009C30F /* WorkfinderProjectApply.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA1400024BC81C50009C30F /* WorkfinderProjectApply.framework */; };
+		FCA1400224BC81C50009C30F /* WorkfinderProjectApply.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCA1400024BC81C50009C30F /* WorkfinderProjectApply.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCA4E2AA2492438200BE87FC /* apple-app-site-association in Resources */ = {isa = PBXBuildFile; fileRef = FCA4E2A92492438200BE87FC /* apple-app-site-association */; };
 		FCA53B961FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA53B941FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift */; };
 		FCA53B971FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */; };
@@ -184,6 +186,7 @@
 				FC2A64962494D18700DA28DD /* WorkfinderAssociationDetails.framework in Embed Frameworks */,
 				FC56A0F12455B62B00A7EC3F /* WorkfinderCommon.framework in Embed Frameworks */,
 				FCBA984424506D8B00C3D2E6 /* WorkfinderCoordinators.framework in Embed Frameworks */,
+				FCA1400224BC81C50009C30F /* WorkfinderProjectApply.framework in Embed Frameworks */,
 				FCBA984224506D8B00C3D2E6 /* WorkfinderCompanyDetailsUseCase.framework in Embed Frameworks */,
 				FCBA984624506D8B00C3D2E6 /* WorkfinderDocumentUploadUseCase.framework in Embed Frameworks */,
 				FCBA984824506D8C00C3D2E6 /* WorkfinderNetworking.framework in Embed Frameworks */,
@@ -318,6 +321,7 @@
 		FC96709D2259F61600318F69 /* F4SSelectedInterestsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SSelectedInterestsRepository.swift; sourceTree = "<group>"; };
 		FC99BDC720CFD8E400278DDE /* F4SDownloadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDownloadService.swift; sourceTree = "<group>"; };
 		FC99BDC920D170CA00278DDE /* F4SCompanyDownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyDownloadManager.swift; sourceTree = "<group>"; };
+		FCA1400024BC81C50009C30F /* WorkfinderProjectApply.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderProjectApply.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA4E2A92492438200BE87FC /* apple-app-site-association */ = {isa = PBXFileReference; lastKnownFileType = text; path = "apple-app-site-association"; sourceTree = "<group>"; };
 		FCA53B941FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SForceAppUpdateViewController.swift; sourceTree = "<group>"; };
 		FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = F4SForceAppUpdateViewController.xib; sourceTree = "<group>"; };
@@ -385,6 +389,7 @@
 				FC62B35B2494C00500013CFF /* WorkfinderVersionCheck.framework in Frameworks */,
 				C9C7302B49E1B7EF625802B5 /* Pods_f4s_workexperience.framework in Frameworks */,
 				FC2A64D92495026300DA28DD /* WorkfinderViewRecommendation.framework in Frameworks */,
+				FCA1400124BC81C50009C30F /* WorkfinderProjectApply.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -566,6 +571,7 @@
 		74E1A74324CAFF4EF516E014 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCA1400024BC81C50009C30F /* WorkfinderProjectApply.framework */,
 				FCB4604024B53AA4001DAE2C /* KSGeometry.framework */,
 				FCB4604124B53AA4001DAE2C /* KSQuadTree.framework */,
 				FC5DF50D24ACA22E0089E839 /* WorkfinderRecommendationsList.framework */,
