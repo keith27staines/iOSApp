@@ -2,33 +2,35 @@
 import UIKit
 import WorkfinderUI
 
-protocol RecommendationTileViewProtocol {
-    func refreshFromPresenter(presenter: RecommendationTilePresenterProtocol)
+protocol RecommendationTileViewProtocol: AnyObject {
+    func refreshFromPresenter(presenter: RecommendationTilePresenterProtocol?)
 }
 
 class RecommendationTileView: UITableViewCell, RecommendationTileViewProtocol {
     
     var presenter: RecommendationTilePresenterProtocol? {
         didSet {
-            presenter?.view = self
             presenter?.loadData()
+            refreshFromPresenter(presenter: presenter)
         }
     }
     
-    override func prepareForReuse() {
-        presenter?.view = nil
-        presenter = nil
+    func refreshFromPresenter(presenter: RecommendationTilePresenterProtocol?) {
+        companyNameLabel.text = presenter?.companyName
+        companyLogo.image = presenter?.companyImage
+        hostNameLabel.text = presenter?.hostName
+        hostRoleLabel.text = presenter?.hostRole
+        if presenter?.isLoading == true {
+            activityIndicator.isHidden = false
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
     }
-    
-    func refreshFromPresenter(presenter: RecommendationTilePresenterProtocol) {
-        companyNameLabel.text = presenter.companyName
-        companyLogo.load(companyName: presenter.companyName ?? " ", urlString: presenter.companyName, completion: nil)
-        hostNameLabel.text = presenter.hostName
-        hostRoleLabel.text = presenter.hostRole
-    }
-    
-    lazy var companyLogo = CompanyLogoView(widthPoints: 70, defaultLogoName: nil)
+
     lazy var hostPhoto = HostPhotoView(widthPoints: 55, defaultLogoName: nil)
+    
+    lazy var companyLogo: UIImageView = UIImageView.companyLogoImageView(width: 70)
     
     lazy var companyLogoStack: UIStackView = {
         let padding = UIView()
@@ -108,6 +110,13 @@ class RecommendationTileView: UITableViewCell, RecommendationTileViewProtocol {
         return stack
     }()
     
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(style: .gray)
+        spinner.hidesWhenStopped = true
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        return spinner
+    }()
+    
     lazy var tileView: UIView = {
         let view = UIView()
         view.addSubview(fullStack)
@@ -131,6 +140,9 @@ class RecommendationTileView: UITableViewCell, RecommendationTileViewProtocol {
         underline.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         contentView.addSubview(underline)
         underline.anchor(top: nil, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor)
+        contentView.addSubview(activityIndicator)
+        activityIndicator.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     }
     
     @objc func handleTap() { presenter?.onTileTapped() }
