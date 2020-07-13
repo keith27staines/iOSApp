@@ -31,7 +31,7 @@ class FreeTextEditorViewController: TextEditorViewController {
                    editorTitle: freeTextPicker.type.textBlockEditorTitle,
                    guidanceText: freeTextPicker.type.textblockGuidance,
                    placeholderText: freeTextPicker.type.textblockPlaceholder,
-                   maxWordCount: 200)
+                   maxWordCount: 300)
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
