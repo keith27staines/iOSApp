@@ -3,6 +3,11 @@ import Foundation
 
 public class MockTabBarCoordinator : MockCoreInjectionNavigationCoordinator, TabBarCoordinatorProtocol {
     
+    public func dispatchProjectViewRequestToRecommendationsTab(_ projectUuid: F4SUUID) {
+        
+    }
+    
+    
     public var shouldAskOperatingSystemToAllowLocation: Bool = false
     
     var showApplicationsCallCount: Int = 0

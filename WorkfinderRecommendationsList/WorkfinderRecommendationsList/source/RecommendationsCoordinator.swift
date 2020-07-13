@@ -26,6 +26,10 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
         HostsProvider(networkConfig: injected.networkConfig)
     }
     
+    public func processProjectViewRequest(_ projectUuid: F4SUUID) {
+        
+    }
+    
     public var onRecommendationSelected: ((F4SUUID) -> Void)?
     
     

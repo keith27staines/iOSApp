@@ -109,10 +109,34 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     func showApplications() { tabBarCoordinator.showApplications() }
     
     func showSearch() { tabBarCoordinator.showSearch() }
+    
+    lazy var recommendationService: RecommendationsServiceProtocol = {
+        let service = RecommendationsService(networkConfig: injected.networkConfig)
+        return service
+    }()
 
     func showRecommendations(uuid: F4SUUID?) {
         guard let uuid = uuid else { return }
         if let tabBarCoordinator = tabBarCoordinator {
+            recommendationService.fetchRecommendation(uuid: uuid) { [weak self] (result) in
+                guard let self = self else { return }
+                switch result {
+                case .success(let recommendation):
+                    if let projectUuid = recommendation.project {
+                        self.tabBarCoordinator.dispatchProjectViewRequestToRecommendationsTab(projectUuid)
+                    } else {
+                        self.tabBarCoordinator.dispatchRecommendationToSearchTab(uuid: uuid)
+                    }
+                case .failure(let error):
+                    guard
+                        let workfinderError = error as? WorkfinderError,
+                        workfinderError.retry == true else { return }
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5) {
+                        self.showRecommendations(uuid: uuid)
+                    }
+                    
+                }
+            }
             tabBarCoordinator.dispatchRecommendationToSearchTab(uuid: uuid)
         } else {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
