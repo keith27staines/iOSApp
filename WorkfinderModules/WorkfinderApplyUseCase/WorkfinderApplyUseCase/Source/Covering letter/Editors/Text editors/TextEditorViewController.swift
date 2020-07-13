@@ -142,7 +142,8 @@ class TextEditorViewController: UIViewController {
     init(coordinator: TextEditorCoordinatorProtocol,
          editorTitle: String,
          guidanceText: String,
-         placeholderText: String, maxWordCount: Int) {
+         placeholderText: String,
+         maxWordCount: Int) {
         self.maxWordCount = maxWordCount
         self.coordinator = coordinator
         self.guidanceText = guidanceText
