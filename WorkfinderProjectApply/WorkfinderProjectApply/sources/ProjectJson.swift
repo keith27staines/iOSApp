@@ -3,13 +3,13 @@ import Foundation
 import WorkfinderCommon
 
 public struct ProjectJson: Codable, Equatable {
-    var uuid: F4SUUID?
-    var type: F4SUUID?
-    var association: F4SUUID?
-    var isPaid: Bool?
-    var candidateQuantity: String?
-    var isRemote: Bool?
-    var duration: String
+    public var uuid: F4SUUID?
+    public var type: F4SUUID?
+    public var association: F4SUUID?
+    public var isPaid: Bool?
+    public var candidateQuantity: String?
+    public var isRemote: Bool?
+    public var duration: String
     
     enum CodingKeys: String, CodingKey {
         case uuid

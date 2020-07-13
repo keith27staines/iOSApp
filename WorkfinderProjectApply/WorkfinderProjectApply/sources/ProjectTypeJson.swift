@@ -1,14 +1,14 @@
 
 import WorkfinderCommon
 
-struct ProjectTypeJson: Codable, Equatable {
-    var uuid: String?
-    var name: String?
-    var readMoreUrl: String?
-    var icon: String?
-    var activities: [UUIDAndNameJson]?
-    var skillsAcquired: [String]?
-    var aboutCandidate: String?
+public struct ProjectTypeJson: Codable, Equatable {
+    public var uuid: String?
+    public var name: String?
+    public var readMoreUrl: String?
+    public var icon: String?
+    public var activities: [UUIDAndNameJson]?
+    public var skillsAcquired: [String]?
+    public var aboutCandidate: String?
 
     enum CodingKeys: String, CodingKey {
         case uuid
@@ -21,7 +21,7 @@ struct ProjectTypeJson: Codable, Equatable {
     }
 }
 
-struct UUIDAndNameJson: Codable, Equatable {
-    var uuid: String?
-    var name: String?
+public struct UUIDAndNameJson: Codable, Equatable {
+    public var uuid: String?
+    public var name: String?
 }

@@ -315,6 +315,16 @@
                ReferencedContainer = "container:../workfinderApp/KSQuadTree/KSQuadTree.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FCA13FD024BC7F060009C30F"
+               BuildableName = "WorkfinderProjectApplyTests.xctest"
+               BlueprintName = "WorkfinderProjectApplyTests"
+               ReferencedContainer = "container:WorkfinderProjectApply/WorkfinderProjectApply.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

@@ -13,6 +13,7 @@
 		FC0A7CEE24BC92D000E02199 /* ProjectJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A7CED24BC92D000E02199 /* ProjectJson.swift */; };
 		FC0A7CF024BC9B8200E02199 /* ProjectTypeJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A7CEF24BC9B8200E02199 /* ProjectTypeJson.swift */; };
 		FC0A7CF224BC9DB600E02199 /* ProjectTypeJsonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A7CF124BC9DB600E02199 /* ProjectTypeJsonTests.swift */; };
+		FC0A7CF424BCB1C900E02199 /* ProjectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A7CF324BCB1C900E02199 /* ProjectService.swift */; };
 		FCA13FD224BC7F060009C30F /* WorkfinderProjectApply.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA13FC824BC7F060009C30F /* WorkfinderProjectApply.framework */; };
 		FCA13FD724BC7F060009C30F /* ProjectJsonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA13FD624BC7F060009C30F /* ProjectJsonTests.swift */; };
 		FCA13FD924BC7F060009C30F /* WorkfinderProjectApply.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA13FCB24BC7F060009C30F /* WorkfinderProjectApply.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -40,6 +41,7 @@
 		FC0A7CED24BC92D000E02199 /* ProjectJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectJson.swift; sourceTree = "<group>"; };
 		FC0A7CEF24BC9B8200E02199 /* ProjectTypeJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTypeJson.swift; sourceTree = "<group>"; };
 		FC0A7CF124BC9DB600E02199 /* ProjectTypeJsonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTypeJsonTests.swift; sourceTree = "<group>"; };
+		FC0A7CF324BCB1C900E02199 /* ProjectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectService.swift; sourceTree = "<group>"; };
 		FCA13FC824BC7F060009C30F /* WorkfinderProjectApply.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderProjectApply.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA13FCB24BC7F060009C30F /* WorkfinderProjectApply.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderProjectApply.h; sourceTree = "<group>"; };
 		FCA13FCC24BC7F060009C30F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				FC0A7CEB24BC8EFC00E02199 /* ProjectPresenter.swift */,
 				FC0A7CED24BC92D000E02199 /* ProjectJson.swift */,
 				FC0A7CEF24BC9B8200E02199 /* ProjectTypeJson.swift */,
+				FC0A7CF324BCB1C900E02199 /* ProjectService.swift */,
 			);
 			path = sources;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				FC0A7CEE24BC92D000E02199 /* ProjectJson.swift in Sources */,
 				FC0A7CEC24BC8EFC00E02199 /* ProjectPresenter.swift in Sources */,
 				FC0A7CEA24BC8E8500E02199 /* ProjectApplyCoordinator.swift in Sources */,
+				FC0A7CF424BCB1C900E02199 /* ProjectService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
