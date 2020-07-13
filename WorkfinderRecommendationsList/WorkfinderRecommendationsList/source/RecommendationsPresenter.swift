@@ -58,7 +58,7 @@ class RecommendationsPresenter {
     func numberOfSections() -> Int { 1 }
     func numberOfRowsForSection(_ section: Int) -> Int { recommendations.count }
 
-    func recommendationTilePresenterForIndexPath(_ indexPath: IndexPath) -> RecommendationTilePresenter {
+    func recommendationTilePresenterForIndexPath(_ indexPath: IndexPath) -> RecommendationTilePresenterProtocol {
         let row = indexPath.row
         let recommendation = recommendations[row]
         if indexPath.row < tilePresenters.count {

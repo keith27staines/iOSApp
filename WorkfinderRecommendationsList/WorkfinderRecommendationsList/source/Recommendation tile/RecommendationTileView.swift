@@ -3,28 +3,33 @@ import UIKit
 import WorkfinderUI
 
 protocol RecommendationTileViewProtocol {
-    func refreshFromPresenter(presenter: RecommendationTilePresenterProtocol)
+    func refreshFromPresenter(presenter: RecommendationTilePresenterProtocol?)
 }
 
 class RecommendationTileView: UITableViewCell, RecommendationTileViewProtocol {
     
     var presenter: RecommendationTilePresenterProtocol? {
         didSet {
-            presenter?.view = self
             presenter?.loadData()
+            refreshFromPresenter(presenter: presenter)
         }
     }
     
     override func prepareForReuse() {
-        presenter?.view = nil
         presenter = nil
     }
     
-    func refreshFromPresenter(presenter: RecommendationTilePresenterProtocol) {
-        companyNameLabel.text = presenter.companyName
-        companyLogo.load(companyName: presenter.companyName ?? " ", urlString: presenter.companyName, completion: nil)
-        hostNameLabel.text = presenter.hostName
-        hostRoleLabel.text = presenter.hostRole
+    func refreshFromPresenter(presenter: RecommendationTilePresenterProtocol?) {
+        companyNameLabel.text = presenter?.companyName
+        companyLogo.load(companyName: presenter?.companyName ?? " ", urlString: presenter?.companyName, completion: nil)
+        hostNameLabel.text = presenter?.hostName
+        hostRoleLabel.text = presenter?.hostRole
+        if presenter?.isLoading == true {
+            activityIndicator.isHidden = false
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
     }
     
     lazy var companyLogo = CompanyLogoView(widthPoints: 70, defaultLogoName: nil)
@@ -108,6 +113,13 @@ class RecommendationTileView: UITableViewCell, RecommendationTileViewProtocol {
         return stack
     }()
     
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(style: .gray)
+        spinner.hidesWhenStopped = true
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        return spinner
+    }()
+    
     lazy var tileView: UIView = {
         let view = UIView()
         view.addSubview(fullStack)
@@ -131,6 +143,9 @@ class RecommendationTileView: UITableViewCell, RecommendationTileViewProtocol {
         underline.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         contentView.addSubview(underline)
         underline.anchor(top: nil, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor)
+        contentView.addSubview(activityIndicator)
+        activityIndicator.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     }
     
     @objc func handleTap() { presenter?.onTileTapped() }

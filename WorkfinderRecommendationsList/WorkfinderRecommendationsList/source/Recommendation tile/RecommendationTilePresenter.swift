@@ -3,56 +3,66 @@ import WorkfinderCommon
 import WorkfinderServices
 
 protocol RecommendationTilePresenterProtocol {
-    var view: RecommendationTileViewProtocol? { get set }
     var companyName: String? { get }
     var companyLogo: String? { get }
     var hostName: String? { get }
     var hostRole: String? { get }
+    var isLoading: Bool { get }
     func onTileTapped()
     func loadData()
 }
 
 class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
     
+    let row: Int
     weak var parentPresenter: RecommendationsPresenter?
     let recommendation: Recommendation
     let workplaceService: WorkplaceAndAssociationService?
+    var associationJson: AssociationJson?
     let hostService: HostsProviderProtocol?
-    var companyName: String?
-    var industry: String?
-    var hostName: String?
-    var hostRole: String?
+    var companyName: String? { workplace?.companyJson.name }
+    var industry: String? { company?.industries?.first?.name }
+    var hostName: String? { host?.displayName }
+    var hostRole: String? { association?.title }
     var workplace: Workplace?
+    var company: CompanyJson? { workplace?.companyJson }
     var host: Host?
     var association: AssociationJson?
-    var companyLogo: String?
+    var companyLogo: String? { company?.logo }
     var companyImage: UIImage?
     
-    var view: RecommendationTileViewProtocol?
+    var isLoaded: Bool {
+        workplace != nil && host != nil
+    }
     
-    var isLoaded: Bool = false
-    var isLoading: Bool = false
+    var isLoading: Bool = false {
+        didSet { if !isLoading { onDataLoadFinished() } }
+    }
     
     func loadData() {
-        view?.refreshFromPresenter(presenter: self)
-        guard isLoading == false else { return }
-        isLoading = true
-        guard isLoaded == false else { return }
         guard let uuid = recommendation.uuid else { return }
-        guard workplace == nil else {
-            updateCompanyAndAssociationData()
-            onAssociationLoaded(workplaceService?.associationJson)
+        guard isLoading == false else { return }
+        guard isLoaded == false else {
+            onDataLoadFinished()
+            return
+        }
+        isLoading = true
+
+        guard workplace == nil || association == nil else {
+            onCompanyAndAssociationLoaded(workplace: workplace, association: associationJson)
             return
         }
         workplaceService?.fetchCompanyWorkplace(recommendationUuid: uuid, completion: { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .success((let workplace, _)):
-                self.workplace = workplace
-                self.updateCompanyAndAssociationData()
-                self.onAssociationLoaded(self.workplaceService?.associationJson)
+                let association = self.workplaceService?.associationJson
+                self.onCompanyAndAssociationLoaded(workplace: workplace, association: association)
             case .failure(let error):
-                guard let error = error as? WorkfinderError, error.retry == true else { return }
+                guard let error = error as? WorkfinderError, error.retry == true else {
+                    self.isLoading = false
+                    return
+                }
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+2) {
                     self.loadData()
                 }
@@ -60,9 +70,11 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
         })
     }
     
-    func onAssociationLoaded(_ association: AssociationJson?) {
-        guard host == nil else {
-            updateHostData()
+    func onCompanyAndAssociationLoaded(workplace: Workplace?, association: AssociationJson?) {
+        self.workplace = workplace
+        self.association = association
+        if let host = host {
+            onHostLoaded(host: host)
             return
         }
         guard let hostUuid = association?.host else { return }
@@ -70,40 +82,32 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
             guard let self = self else { return }
             switch result {
             case .success(let host):
-                self.host = host
-                self.updateHostData()
-                self.isLoaded = true
+                self.onHostLoaded(host: host)
             case .failure(let error):
                 guard let error = error as? WorkfinderError else { return }
                 guard error.retry == true else {
+                    self.isLoading = false
                     return
                 }
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+2) {
-                    self.onAssociationLoaded(association)
+                    self.onCompanyAndAssociationLoaded(workplace: workplace, association: association)
                 }
             }
         })
     }
     
-    private func updateCompanyAndAssociationData() {
-        let company = workplace?.companyJson
-        companyName = company?.name
-        industry = company?.industries?.first?.name
-        companyLogo = company?.logo
-        parentPresenter?.refreshRow(row)
+    func onHostLoaded(host: Host?) {
+        self.host = host
+        isLoading = false
     }
     
-    private func updateHostData() {
-        hostName = host?.displayName
-        hostRole = self.workplaceService?.associationJson?.title
+    func onDataLoadFinished() {
         parentPresenter?.refreshRow(row)
     }
     
     func onTileTapped() {
         parentPresenter?.onTileTapped(self)
     }
-    
-    let row: Int
 
     init(parent: RecommendationsPresenter,
          recommendation: Recommendation,
