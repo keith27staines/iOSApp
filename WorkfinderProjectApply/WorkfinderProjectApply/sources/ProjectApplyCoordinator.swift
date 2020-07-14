@@ -22,12 +22,11 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
     }
     
     public override func start() {
-        let networkConfig = injected.networkConfig
         let presenter = ProjectPresenter(
             coordinator: self,
             projectUuid: projectUuid,
-            projectService: ProjectService(networkConfig: networkConfig),
-            associationDetailService: AssociationDetailService(networkConfig: networkConfig))
+            projectService: ProjectAndAssociationDetailsService(networkConfig: injected.networkConfig)
+        )
         let vc = ProjectViewController(coordinator: self, presenter: presenter)
         let newNav = UINavigationController(rootViewController: vc)
         navigationRouter.present(newNav, animated: true, completion: nil)
