@@ -20,6 +20,7 @@
 		FC1B0A4F24AC6D850008F5CF /* RecommendationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1B0A4E24AC6D850008F5CF /* RecommendationsService.swift */; };
 		FC3C701624ADB621004869D0 /* RecommendationTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3C701524ADB621004869D0 /* RecommendationTileView.swift */; };
 		FC3C701824ADB661004869D0 /* RecommendationTilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3C701724ADB661004869D0 /* RecommendationTilePresenter.swift */; };
+		FCADF0ED24BDFCE30040F79D /* WorkfinderProjectApply.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCADF0EC24BDFCE30040F79D /* WorkfinderProjectApply.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		FC1B0A4E24AC6D850008F5CF /* RecommendationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsService.swift; sourceTree = "<group>"; };
 		FC3C701524ADB621004869D0 /* RecommendationTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationTileView.swift; sourceTree = "<group>"; };
 		FC3C701724ADB661004869D0 /* RecommendationTilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationTilePresenter.swift; sourceTree = "<group>"; };
+		FCADF0EC24BDFCE30040F79D /* WorkfinderProjectApply.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderProjectApply.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCADF0ED24BDFCE30040F79D /* WorkfinderProjectApply.framework in Frameworks */,
 				FC1B0A4324AC6B940008F5CF /* WorkfinderCoordinators.framework in Frameworks */,
 				FC1B0A4524AC6B940008F5CF /* WorkfinderServices.framework in Frameworks */,
 				FC1B0A4124AC6B940008F5CF /* WorkfinderCommon.framework in Frameworks */,
@@ -127,6 +130,7 @@
 		FC1B0A3C24AC6B940008F5CF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCADF0EC24BDFCE30040F79D /* WorkfinderProjectApply.framework */,
 				FC1B0A3D24AC6B940008F5CF /* WorkfinderCommon.framework */,
 				FC1B0A3E24AC6B940008F5CF /* WorkfinderCoordinators.framework */,
 				FC1B0A3F24AC6B940008F5CF /* WorkfinderServices.framework */,
