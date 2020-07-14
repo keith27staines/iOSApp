@@ -20,7 +20,7 @@ public class ProjectService: WorkfinderService, ProjectServiceProtocol {
     
     public func fetchProjectType(uuid: String, completion: @escaping (Result<ProjectTypeJson, Error>) -> Void) {
         do {
-            let request = try buildRequest(relativePath: "project_types/\(uuid)", queryItems: nil, verb: .get)
+            let request = try buildRequest(relativePath: "project-types/\(uuid)", queryItems: nil, verb: .get)
             performTask(with: request, completion: completion, attempting: #function)
         } catch {
             completion(Result<ProjectTypeJson,Error>.failure(error))

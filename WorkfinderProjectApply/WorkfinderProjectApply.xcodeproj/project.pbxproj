@@ -22,6 +22,8 @@
 		FCA13FF724BC805D0009C30F /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA13FF624BC805D0009C30F /* WorkfinderUI.framework */; };
 		FCA13FFA24BC80920009C30F /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA13FF924BC80920009C30F /* WorkfinderCoordinators.framework */; };
 		FCA13FFE24BC80990009C30F /* WorkfinderUserDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA13FFD24BC80990009C30F /* WorkfinderUserDetailsUseCase.framework */; };
+		FCADF0E524BDD9EC0040F79D /* AssociationDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCADF0E424BDD9EC0040F79D /* AssociationDetail.swift */; };
+		FCADF0E724BDDA2A0040F79D /* AssociationFullDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCADF0E624BDDA2A0040F79D /* AssociationFullDetailService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		FCA13FF624BC805D0009C30F /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA13FF924BC80920009C30F /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA13FFD24BC80990009C30F /* WorkfinderUserDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUserDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCADF0E424BDD9EC0040F79D /* AssociationDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationDetail.swift; sourceTree = "<group>"; };
+		FCADF0E624BDDA2A0040F79D /* AssociationFullDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationFullDetailService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,11 +87,13 @@
 			isa = PBXGroup;
 			children = (
 				FC0A7CE924BC8E8500E02199 /* ProjectApplyCoordinator.swift */,
-				FC0A7CE724BC8E5300E02199 /* ProjectViewController.swift */,
 				FC0A7CEB24BC8EFC00E02199 /* ProjectPresenter.swift */,
+				FC0A7CE724BC8E5300E02199 /* ProjectViewController.swift */,
 				FC0A7CED24BC92D000E02199 /* ProjectJson.swift */,
 				FC0A7CEF24BC9B8200E02199 /* ProjectTypeJson.swift */,
 				FC0A7CF324BCB1C900E02199 /* ProjectService.swift */,
+				FCADF0E424BDD9EC0040F79D /* AssociationDetail.swift */,
+				FCADF0E624BDDA2A0040F79D /* AssociationFullDetailService.swift */,
 			);
 			path = sources;
 			sourceTree = "<group>";
@@ -256,7 +262,9 @@
 				FC0A7CF024BC9B8200E02199 /* ProjectTypeJson.swift in Sources */,
 				FC0A7CE824BC8E5300E02199 /* ProjectViewController.swift in Sources */,
 				FC0A7CEE24BC92D000E02199 /* ProjectJson.swift in Sources */,
+				FCADF0E524BDD9EC0040F79D /* AssociationDetail.swift in Sources */,
 				FC0A7CEC24BC8EFC00E02199 /* ProjectPresenter.swift in Sources */,
+				FCADF0E724BDDA2A0040F79D /* AssociationFullDetailService.swift in Sources */,
 				FC0A7CEA24BC8E8500E02199 /* ProjectApplyCoordinator.swift in Sources */,
 				FC0A7CF424BCB1C900E02199 /* ProjectService.swift in Sources */,
 			);
