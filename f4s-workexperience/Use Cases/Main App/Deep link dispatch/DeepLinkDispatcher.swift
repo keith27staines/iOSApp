@@ -16,8 +16,9 @@ class DeepLinkDispatcher {
             let lastPathComponent = String(path.last ?? "")
             switch firstPathComponent {
             case "recommendations":
-                print("Received recommendation deeplink \(path)")
-                coordinator.showRecommendations(uuid: lastPathComponent)
+                coordinator.showRecommendation(uuid: lastPathComponent)
+            case "projects":
+                coordinator.showProject(uuid: lastPathComponent)
             default:
                 break
             }

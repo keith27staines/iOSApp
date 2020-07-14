@@ -90,7 +90,7 @@ class UNService : NSObject {
         case NotificationType.message:
             break
         case NotificationType.recommendation:
-            appCoordinator.showRecommendations(uuid: nil)
+            appCoordinator.showRecommendation(uuid: nil)
         case NotificationType.rating:
             break
         }

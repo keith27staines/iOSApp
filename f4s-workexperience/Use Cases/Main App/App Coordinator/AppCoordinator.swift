@@ -114,8 +114,13 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         let service = RecommendationsService(networkConfig: injected.networkConfig)
         return service
     }()
+    
+    func showProject(uuid: F4SUUID?) {
+        guard let uuid = uuid else { return }
+        self.tabBarCoordinator.dispatchRecommendationToSearchTab(uuid: uuid)
+    }
 
-    func showRecommendations(uuid: F4SUUID?) {
+    func showRecommendation(uuid: F4SUUID?) {
         guard let uuid = uuid else { return }
         if let tabBarCoordinator = tabBarCoordinator {
             recommendationService.fetchRecommendation(uuid: uuid) { [weak self] (result) in
@@ -132,7 +137,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                         let workfinderError = error as? WorkfinderError,
                         workfinderError.retry == true else { return }
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5) {
-                        self.showRecommendations(uuid: uuid)
+                        self.showRecommendation(uuid: uuid)
                     }
                     
                 }
@@ -140,7 +145,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
             tabBarCoordinator.dispatchRecommendationToSearchTab(uuid: uuid)
         } else {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
-                self?.showRecommendations(uuid: uuid)
+                self?.showRecommendation(uuid: uuid)
             }
         }
     }
