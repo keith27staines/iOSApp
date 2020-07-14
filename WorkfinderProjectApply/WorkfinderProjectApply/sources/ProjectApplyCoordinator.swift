@@ -19,11 +19,17 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
     
     public override func start() {
         let presenter = ProjectPresenter(
+            coordinator: self,
             projectUuid: projectUuid,
             projectService: ProjectService(networkConfig: injected.networkConfig))
-        let vc = ProjectViewController(presenter: presenter)
+        let vc = ProjectViewController(coordinator: self, presenter: presenter)
         let newNav = UINavigationController(rootViewController: vc)
         navigationRouter.present(newNav, animated: true, completion: nil)
         firstVC = vc
+    }
+    
+    func onFinished() {
+        navigationRouter.dismiss(animated: true, completion: nil)
+        parentCoordinator?.childCoordinatorDidFinish(self)
     }
 }

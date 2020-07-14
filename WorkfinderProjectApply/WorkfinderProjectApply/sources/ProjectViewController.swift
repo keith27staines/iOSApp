@@ -4,6 +4,7 @@ import WorkfinderUI
 
 class ProjectViewController: UIViewController {
     
+    weak var coordinator: ProjectApplyCoordinator?
     let presenter: ProjectPresenter
     
     lazy var applyNowButton: UIButton = {
@@ -22,6 +23,7 @@ class ProjectViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated: false)
+        coordinator?.onFinished()
     }
     
     func configureViews() {
@@ -31,7 +33,8 @@ class ProjectViewController: UIViewController {
         applyNowButton.anchor(top: nil, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 20, bottom: 20, right: 20))
     }
     
-    init(presenter: ProjectPresenter) {
+    init(coordinator: ProjectApplyCoordinator, presenter: ProjectPresenter) {
+        self.coordinator = coordinator
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }

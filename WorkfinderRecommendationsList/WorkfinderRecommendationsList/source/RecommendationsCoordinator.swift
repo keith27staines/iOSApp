@@ -33,6 +33,7 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
             navigationRouter: navigationRouter,
             inject: injected,
             projectUuid: projectUuid)
+        addChildCoordinator(projectApply)
         projectApply.start()
     }
     
