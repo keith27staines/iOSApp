@@ -77,7 +77,8 @@ class ProjectAndAssociationDetailsService: ProjectAndAssociationDetailsServicePr
                 self.onProjectTypeLoaded(projectType)
             case .failure(let error):
                 guard (error as? WorkfinderError)?.retry == true else {
-                    self.completion?(Result<ProjectAndAssociationDetail, Error>.failure(error))
+                    self.completion?(Result<ProjectAndAssociationDetail, Error>.success(self.projectAndAssociationDetail))
+                    //self.completion?(Result<ProjectAndAssociationDetail, Error>.failure(error))
                     return
                 }
                 self.loadProjectType(uuid: uuid)

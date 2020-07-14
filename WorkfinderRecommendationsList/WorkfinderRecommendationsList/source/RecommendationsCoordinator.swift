@@ -27,14 +27,20 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
         HostsProvider(networkConfig: injected.networkConfig)
     }
     
+    weak var projectApplyCoordinator: ProjectApplyCoordinator?
+    
     public func processProjectViewRequest(_ projectUuid: F4SUUID) {
-        let projectApply = ProjectApplyCoordinator(
+        guard projectApplyCoordinator == nil else {
+            return
+        }
+        let projectApplyCoordinator = ProjectApplyCoordinator(
             parent: self,
             navigationRouter: navigationRouter,
             inject: injected,
             projectUuid: projectUuid)
-        addChildCoordinator(projectApply)
-        projectApply.start()
+        addChildCoordinator(projectApplyCoordinator)
+        self.projectApplyCoordinator = projectApplyCoordinator
+        projectApplyCoordinator.start()
     }
     
     public var onRecommendationSelected: ((F4SUUID) -> Void)?

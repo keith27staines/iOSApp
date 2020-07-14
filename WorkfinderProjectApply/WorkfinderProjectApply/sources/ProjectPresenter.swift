@@ -42,6 +42,7 @@ class ProjectPresenter: ProjectPresenterProtocol {
             switch result {
             case .success(let detail):
                 self.detail = detail
+                completion(nil)
             case .failure(let error):
                 completion(error)
             }
