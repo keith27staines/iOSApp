@@ -69,6 +69,7 @@
 		FCA2901E247F653500588F6E /* RegisterAndSignInUserBasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA2901D247F653500588F6E /* RegisterAndSignInUserBasePresenter.swift */; };
 		FCA29020247F65D900588F6E /* SignInUserPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA2901F247F65D900588F6E /* SignInUserPresenter.swift */; };
 		FCA29022247F67EA00588F6E /* PhoneNumberValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA29021247F67EA00588F6E /* PhoneNumberValidator.swift */; };
+		FCADF0F124BE152B0040F79D /* PicklistsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCADF0F024BE152B0040F79D /* PicklistsStore.swift */; };
 		FCCA4E3224570CE900DFA696 /* RegisterUserLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA4E3124570CE900DFA696 /* RegisterUserLogic.swift */; };
 		FCE4F4DE24740C37005ED80D /* DraftUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE4F4DD24740C37005ED80D /* DraftUpdater.swift */; };
 		FCE8DA9A2320E24600934E2F /* ApplyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DA992320E24600934E2F /* ApplyCoordinator.swift */; };
@@ -151,6 +152,7 @@
 		FCA2901D247F653500588F6E /* RegisterAndSignInUserBasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterAndSignInUserBasePresenter.swift; sourceTree = "<group>"; };
 		FCA2901F247F65D900588F6E /* SignInUserPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUserPresenter.swift; sourceTree = "<group>"; };
 		FCA29021247F67EA00588F6E /* PhoneNumberValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberValidator.swift; sourceTree = "<group>"; };
+		FCADF0F024BE152B0040F79D /* PicklistsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicklistsStore.swift; sourceTree = "<group>"; };
 		FCCA4E3124570CE900DFA696 /* RegisterUserLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserLogic.swift; sourceTree = "<group>"; };
 		FCE4F4DD24740C37005ED80D /* DraftUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftUpdater.swift; sourceTree = "<group>"; };
 		FCE8DA992320E24600934E2F /* ApplyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyCoordinator.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				FC23BCF3243B33510075F359 /* CoverLetterViewPresenter.swift */,
 				FC23BCFB243B33510075F359 /* CoverLetterViewController.swift */,
 				FC9626332248C1A900D5F850 /* EditApplicationLetterButton.swift */,
+				FCADF0F024BE152B0040F79D /* PicklistsStore.swift */,
 				FC23BCEC243B33510075F359 /* Logic */,
 				FC23BCF8243B33510075F359 /* Editors */,
 			);
@@ -567,6 +570,7 @@
 				FC23BD01243B33510075F359 /* Picklist.swift in Sources */,
 				FC4A94102478BFB70066B8E3 /* HTTPErrorJson.swift in Sources */,
 				FC29992A231EC41A00F83FB6 /* F4SPageHeaderView.swift in Sources */,
+				FCADF0F124BE152B0040F79D /* PicklistsStore.swift in Sources */,
 				FC29992D231EC41A00F83FB6 /* F4SHoursPickerViewController.swift in Sources */,
 				FCCA4E3224570CE900DFA696 /* RegisterUserLogic.swift in Sources */,
 				FC6A50D6245ABAD500EF5C92 /* HardCodedPicklist.swift in Sources */,
