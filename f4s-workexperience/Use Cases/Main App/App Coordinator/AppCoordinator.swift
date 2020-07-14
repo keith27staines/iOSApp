@@ -117,7 +117,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     
     func showProject(uuid: F4SUUID?) {
         guard let uuid = uuid else { return }
-        self.tabBarCoordinator.dispatchRecommendationToSearchTab(uuid: uuid)
+        self.tabBarCoordinator.dispatchProjectViewRequest(uuid)
     }
 
     func showRecommendation(uuid: F4SUUID?) {
@@ -128,7 +128,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                 switch result {
                 case .success(let recommendation):
                     if let projectUuid = recommendation.project {
-                        self.tabBarCoordinator.dispatchProjectViewRequestToRecommendationsTab(projectUuid)
+                        self.tabBarCoordinator.dispatchProjectViewRequest(projectUuid)
                     } else {
                         self.tabBarCoordinator.dispatchRecommendationToSearchTab(uuid: uuid)
                     }

@@ -61,7 +61,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         }
     }
     
-    public func dispatchProjectViewRequestToRecommendationsTab(_ projectUuid: F4SUUID) {
+    public func dispatchProjectViewRequest(_ projectUuid: F4SUUID) {
         closeMenu { [weak self] (success) in
             self?.navigateToRecommendations()
             self?.recommendationsCoordinator.processProjectViewRequest(projectUuid)

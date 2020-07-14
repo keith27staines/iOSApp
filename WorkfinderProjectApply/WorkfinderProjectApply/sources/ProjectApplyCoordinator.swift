@@ -2,11 +2,11 @@
 import WorkfinderCommon
 import WorkfinderCoordinators
 
-class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
+public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
     
     let projectUuid: F4SUUID
     
-    init(
+    public init(
         parent: Coordinating?,
         navigationRouter: NavigationRoutingProtocol,
         inject: CoreInjectionProtocol,
@@ -17,12 +17,13 @@ class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
     
     weak var firstVC: UIViewController?
     
-    override func start() {
+    public override func start() {
         let presenter = ProjectPresenter(
             projectUuid: projectUuid,
             projectService: ProjectService(networkConfig: injected.networkConfig))
         let vc = ProjectViewController(presenter: presenter)
-        navigationRouter.push(viewController: vc, animated: true)
+        let newNav = UINavigationController(rootViewController: vc)
+        navigationRouter.present(newNav, animated: true, completion: nil)
         firstVC = vc
     }
 }

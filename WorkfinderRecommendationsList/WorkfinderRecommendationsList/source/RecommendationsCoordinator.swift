@@ -2,6 +2,7 @@
 import WorkfinderCommon
 import WorkfinderServices
 import WorkfinderCoordinators
+import WorkfinderProjectApply
 
 public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
     
@@ -27,7 +28,12 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
     }
     
     public func processProjectViewRequest(_ projectUuid: F4SUUID) {
-        
+        let projectApply = ProjectApplyCoordinator(
+            parent: self,
+            navigationRouter: navigationRouter,
+            inject: injected,
+            projectUuid: projectUuid)
+        projectApply.start()
     }
     
     public var onRecommendationSelected: ((F4SUUID) -> Void)?

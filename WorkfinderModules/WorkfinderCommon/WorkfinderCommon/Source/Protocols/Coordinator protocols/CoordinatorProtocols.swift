@@ -43,7 +43,7 @@ public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorPr
     func showApplications()
     func showSearch()
     func dispatchRecommendationToSearchTab(uuid: F4SUUID)
-    func dispatchProjectViewRequestToRecommendationsTab(_ projectUuid: F4SUUID)
+    func dispatchProjectViewRequest(_ projectUuid: F4SUUID)
     func updateBadges()
     func toggleMenu(completion: ((Bool) -> ())?)
     func updateUnreadMessagesCount(_ count: Int)
