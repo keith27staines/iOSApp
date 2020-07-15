@@ -1,6 +1,6 @@
 
 import XCTest
-@testable import WorkfinderApplyUseCase
+@testable import WorkfinderCoverLetter
 
 class GrammarTests: XCTestCase {
 

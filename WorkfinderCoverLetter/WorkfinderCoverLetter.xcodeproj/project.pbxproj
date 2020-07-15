@@ -8,13 +8,56 @@
 
 /* Begin PBXBuildFile section */
 		FC9B332324BEB47100C075CE /* WorkfinderCoverLetter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC9B331924BEB47100C075CE /* WorkfinderCoverLetter.framework */; };
-		FC9B332824BEB47100C075CE /* WorkfinderCoverLetterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B332724BEB47100C075CE /* WorkfinderCoverLetterTests.swift */; };
 		FC9B332A24BEB47100C075CE /* WorkfinderCoverLetter.h in Headers */ = {isa = PBXBuildFile; fileRef = FC9B331C24BEB47100C075CE /* WorkfinderCoverLetter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FC9B334124BEB4D500C075CE /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC9B334024BEB4D500C075CE /* WorkfinderCommon.framework */; };
 		FC9B334524BEB4E600C075CE /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC9B334424BEB4E600C075CE /* WorkfinderServices.framework */; };
 		FC9B334824BEB4F800C075CE /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC9B334724BEB4F800C075CE /* WorkfinderUI.framework */; };
 		FC9B334B24BEB51400C075CE /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC9B334A24BEB51400C075CE /* WorkfinderCoordinators.framework */; };
 		FC9B334C24BEB51400C075CE /* WorkfinderCoordinators.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC9B334A24BEB51400C075CE /* WorkfinderCoordinators.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FC9B335424BEB5A600C075CE /* CoverLetterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B334F24BEB5A500C075CE /* CoverLetterViewController.swift */; };
+		FC9B335524BEB5A600C075CE /* CoverLetterViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335024BEB5A600C075CE /* CoverLetterViewPresenter.swift */; };
+		FC9B335624BEB5A600C075CE /* EditApplicationLetterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335124BEB5A600C075CE /* EditApplicationLetterButton.swift */; };
+		FC9B335724BEB5A600C075CE /* PicklistsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335224BEB5A600C075CE /* PicklistsStore.swift */; };
+		FC9B335824BEB5A600C075CE /* CoverLetterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335324BEB5A600C075CE /* CoverLetterCoordinator.swift */; };
+		FC9B335F24BEB5DF00C075CE /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335A24BEB5DF00C075CE /* Common.swift */; };
+		FC9B336024BEB5DF00C075CE /* DraftUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335B24BEB5DF00C075CE /* DraftUpdater.swift */; };
+		FC9B336124BEB5DF00C075CE /* Grammer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335C24BEB5DF00C075CE /* Grammer.swift */; };
+		FC9B336224BEB5DF00C075CE /* TemplateParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335D24BEB5DF00C075CE /* TemplateParser.swift */; };
+		FC9B336324BEB5DF00C075CE /* TemplateRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335E24BEB5DF00C075CE /* TemplateRenderer.swift */; };
+		FC9B336A24BEB62A00C075CE /* Picklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B336524BEB62A00C075CE /* Picklist.swift */; };
+		FC9B336B24BEB62A00C075CE /* TextSearchPicklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B336624BEB62A00C075CE /* TextSearchPicklist.swift */; };
+		FC9B336C24BEB62A00C075CE /* AvailabilityPeriodPicklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B336724BEB62A00C075CE /* AvailabilityPeriodPicklist.swift */; };
+		FC9B336D24BEB62A00C075CE /* TextblockPicklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B336824BEB62A00C075CE /* TextblockPicklist.swift */; };
+		FC9B336E24BEB62A00C075CE /* HardCodedPicklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B336924BEB62A00C075CE /* HardCodedPicklist.swift */; };
+		FC9B337224BEB71600C075CE /* LetterEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B337024BEB71600C075CE /* LetterEditorViewController.swift */; };
+		FC9B337324BEB71600C075CE /* LetterEditorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B337124BEB71600C075CE /* LetterEditorPresenter.swift */; };
+		FC9B337824BEB75000C075CE /* PicklistDataSourceAndDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B337524BEB75000C075CE /* PicklistDataSourceAndDelegate.swift */; };
+		FC9B337924BEB75000C075CE /* PicklistTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B337424BEB75000C075CE /* PicklistTableViewCells.swift */; };
+		FC9B337E24BEB88D00C075CE /* F4SDisplayInformationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC9B337D24BEB88D00C075CE /* F4SDisplayInformationViewController.storyboard */; };
+		FC9B339024BEB94500C075CE /* TextEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B338D24BEB94500C075CE /* TextEditorViewController.swift */; };
+		FC9B339124BEB94500C075CE /* OtherPicklistItemEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B338E24BEB94500C075CE /* OtherPicklistItemEditorViewController.swift */; };
+		FC9B339224BEB94500C075CE /* FreeTextEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B338F24BEB94500C075CE /* FreeTextEditorViewController.swift */; };
+		FC9B339724BEBD2700C075CE /* PicklistTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B339324BEBD2700C075CE /* PicklistTableViewCells.swift */; };
+		FC9B339824BEBD2700C075CE /* PicklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B339424BEBD2700C075CE /* PicklistViewController.swift */; };
+		FC9B339924BEBD2700C075CE /* PicklistDataSourceAndDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B339524BEBD2700C075CE /* PicklistDataSourceAndDelegate.swift */; };
+		FC9B339A24BEBD2700C075CE /* SearchlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B339624BEBD2700C075CE /* SearchlistViewController.swift */; };
+		FC9B33A324BEBE4400C075CE /* F4SCalendarColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B339D24BEBE4300C075CE /* F4SCalendarColors.swift */; };
+		FC9B33A424BEBE4400C075CE /* F4SDayCalendarViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B339E24BEBE4300C075CE /* F4SDayCalendarViewCell.swift */; };
+		FC9B33A524BEBE4400C075CE /* F4SCalendarContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B339F24BEBE4300C075CE /* F4SCalendarContainerViewController.swift */; };
+		FC9B33A624BEBE4400C075CE /* F4SMonthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B33A024BEBE4400C075CE /* F4SMonthHeaderView.swift */; };
+		FC9B33A724BEBE4400C075CE /* F4SCalendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC9B33A124BEBE4400C075CE /* F4SCalendar.storyboard */; };
+		FC9B33A824BEBE4400C075CE /* F4SCalendarCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B33A224BEBE4400C075CE /* F4SCalendarCollectionViewController.swift */; };
+		FC9B33AF24BEBFA500C075CE /* F4SDaysAndHoursViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B33AA24BEBFA400C075CE /* F4SDaysAndHoursViewController.swift */; };
+		FC9B33B024BEBFA500C075CE /* F4SPageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B33AB24BEBFA400C075CE /* F4SPageHeaderView.swift */; };
+		FC9B33B124BEBFA500C075CE /* F4SSelectDayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B33AC24BEBFA400C075CE /* F4SSelectDayTableViewCell.swift */; };
+		FC9B33B224BEBFA500C075CE /* F4SHoursPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B33AD24BEBFA400C075CE /* F4SHoursPickerViewController.swift */; };
+		FC9B33B324BEBFA500C075CE /* F4SDisplayInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B33AE24BEBFA400C075CE /* F4SDisplayInformationViewController.swift */; };
+		FC9B33B524BEC03700C075CE /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B33B424BEC03700C075CE /* constants.swift */; };
+		FC9B33BC24BEC17D00C075CE /* Calendar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC9B33BB24BEC17D00C075CE /* Calendar.xcassets */; };
+		FC9B33C124BEC29600C075CE /* TemplateRendererTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B33BF24BEC29500C075CE /* TemplateRendererTests.swift */; };
+		FC9B33C224BEC29600C075CE /* CoverLetterTestsCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B33BD24BEC29500C075CE /* CoverLetterTestsCommon.swift */; };
+		FC9B33C324BEC29600C075CE /* GrammarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B33C024BEC29500C075CE /* GrammarTests.swift */; };
+		FC9B33C424BEC29600C075CE /* TemplateParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B33BE24BEC29500C075CE /* TemplateParserTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,12 +89,55 @@
 		FC9B331C24BEB47100C075CE /* WorkfinderCoverLetter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderCoverLetter.h; sourceTree = "<group>"; };
 		FC9B331D24BEB47100C075CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC9B332224BEB47100C075CE /* WorkfinderCoverLetterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderCoverLetterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC9B332724BEB47100C075CE /* WorkfinderCoverLetterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderCoverLetterTests.swift; sourceTree = "<group>"; };
 		FC9B332924BEB47100C075CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC9B334024BEB4D500C075CE /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC9B334424BEB4E600C075CE /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC9B334724BEB4F800C075CE /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC9B334A24BEB51400C075CE /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC9B334F24BEB5A500C075CE /* CoverLetterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverLetterViewController.swift; sourceTree = "<group>"; };
+		FC9B335024BEB5A600C075CE /* CoverLetterViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverLetterViewPresenter.swift; sourceTree = "<group>"; };
+		FC9B335124BEB5A600C075CE /* EditApplicationLetterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditApplicationLetterButton.swift; sourceTree = "<group>"; };
+		FC9B335224BEB5A600C075CE /* PicklistsStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PicklistsStore.swift; sourceTree = "<group>"; };
+		FC9B335324BEB5A600C075CE /* CoverLetterCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverLetterCoordinator.swift; sourceTree = "<group>"; };
+		FC9B335A24BEB5DF00C075CE /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		FC9B335B24BEB5DF00C075CE /* DraftUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftUpdater.swift; sourceTree = "<group>"; };
+		FC9B335C24BEB5DF00C075CE /* Grammer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grammer.swift; sourceTree = "<group>"; };
+		FC9B335D24BEB5DF00C075CE /* TemplateParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateParser.swift; sourceTree = "<group>"; };
+		FC9B335E24BEB5DF00C075CE /* TemplateRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateRenderer.swift; sourceTree = "<group>"; };
+		FC9B336524BEB62A00C075CE /* Picklist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Picklist.swift; sourceTree = "<group>"; };
+		FC9B336624BEB62A00C075CE /* TextSearchPicklist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextSearchPicklist.swift; sourceTree = "<group>"; };
+		FC9B336724BEB62A00C075CE /* AvailabilityPeriodPicklist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailabilityPeriodPicklist.swift; sourceTree = "<group>"; };
+		FC9B336824BEB62A00C075CE /* TextblockPicklist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextblockPicklist.swift; sourceTree = "<group>"; };
+		FC9B336924BEB62A00C075CE /* HardCodedPicklist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HardCodedPicklist.swift; sourceTree = "<group>"; };
+		FC9B337024BEB71600C075CE /* LetterEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LetterEditorViewController.swift; sourceTree = "<group>"; };
+		FC9B337124BEB71600C075CE /* LetterEditorPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LetterEditorPresenter.swift; sourceTree = "<group>"; };
+		FC9B337424BEB75000C075CE /* PicklistTableViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicklistTableViewCells.swift; sourceTree = "<group>"; };
+		FC9B337524BEB75000C075CE /* PicklistDataSourceAndDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicklistDataSourceAndDelegate.swift; sourceTree = "<group>"; };
+		FC9B337D24BEB88D00C075CE /* F4SDisplayInformationViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SDisplayInformationViewController.storyboard; sourceTree = "<group>"; };
+		FC9B338D24BEB94500C075CE /* TextEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEditorViewController.swift; sourceTree = "<group>"; };
+		FC9B338E24BEB94500C075CE /* OtherPicklistItemEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherPicklistItemEditorViewController.swift; sourceTree = "<group>"; };
+		FC9B338F24BEB94500C075CE /* FreeTextEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreeTextEditorViewController.swift; sourceTree = "<group>"; };
+		FC9B339324BEBD2700C075CE /* PicklistTableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PicklistTableViewCells.swift; sourceTree = "<group>"; };
+		FC9B339424BEBD2700C075CE /* PicklistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PicklistViewController.swift; sourceTree = "<group>"; };
+		FC9B339524BEBD2700C075CE /* PicklistDataSourceAndDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PicklistDataSourceAndDelegate.swift; sourceTree = "<group>"; };
+		FC9B339624BEBD2700C075CE /* SearchlistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchlistViewController.swift; sourceTree = "<group>"; };
+		FC9B339D24BEBE4300C075CE /* F4SCalendarColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarColors.swift; sourceTree = "<group>"; };
+		FC9B339E24BEBE4300C075CE /* F4SDayCalendarViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDayCalendarViewCell.swift; sourceTree = "<group>"; };
+		FC9B339F24BEBE4300C075CE /* F4SCalendarContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarContainerViewController.swift; sourceTree = "<group>"; };
+		FC9B33A024BEBE4400C075CE /* F4SMonthHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SMonthHeaderView.swift; sourceTree = "<group>"; };
+		FC9B33A124BEBE4400C075CE /* F4SCalendar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SCalendar.storyboard; sourceTree = "<group>"; };
+		FC9B33A224BEBE4400C075CE /* F4SCalendarCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarCollectionViewController.swift; sourceTree = "<group>"; };
+		FC9B33AA24BEBFA400C075CE /* F4SDaysAndHoursViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDaysAndHoursViewController.swift; sourceTree = "<group>"; };
+		FC9B33AB24BEBFA400C075CE /* F4SPageHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SPageHeaderView.swift; sourceTree = "<group>"; };
+		FC9B33AC24BEBFA400C075CE /* F4SSelectDayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SSelectDayTableViewCell.swift; sourceTree = "<group>"; };
+		FC9B33AD24BEBFA400C075CE /* F4SHoursPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SHoursPickerViewController.swift; sourceTree = "<group>"; };
+		FC9B33AE24BEBFA400C075CE /* F4SDisplayInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SDisplayInformationViewController.swift; sourceTree = "<group>"; };
+		FC9B33B424BEC03700C075CE /* constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
+		FC9B33BB24BEC17D00C075CE /* Calendar.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Calendar.xcassets; sourceTree = "<group>"; };
+		FC9B33BD24BEC29500C075CE /* CoverLetterTestsCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverLetterTestsCommon.swift; sourceTree = "<group>"; };
+		FC9B33BE24BEC29500C075CE /* TemplateParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateParserTests.swift; sourceTree = "<group>"; };
+		FC9B33BF24BEC29500C075CE /* TemplateRendererTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateRendererTests.swift; sourceTree = "<group>"; };
+		FC9B33C024BEC29500C075CE /* GrammarTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrammarTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +185,8 @@
 		FC9B331B24BEB47100C075CE /* WorkfinderCoverLetter */ = {
 			isa = PBXGroup;
 			children = (
+				FC9B33BB24BEC17D00C075CE /* Calendar.xcassets */,
+				FC9B334E24BEB58D00C075CE /* source */,
 				FC9B331C24BEB47100C075CE /* WorkfinderCoverLetter.h */,
 				FC9B331D24BEB47100C075CE /* Info.plist */,
 			);
@@ -108,7 +196,10 @@
 		FC9B332624BEB47100C075CE /* WorkfinderCoverLetterTests */ = {
 			isa = PBXGroup;
 			children = (
-				FC9B332724BEB47100C075CE /* WorkfinderCoverLetterTests.swift */,
+				FC9B33BD24BEC29500C075CE /* CoverLetterTestsCommon.swift */,
+				FC9B33C024BEC29500C075CE /* GrammarTests.swift */,
+				FC9B33BE24BEC29500C075CE /* TemplateParserTests.swift */,
+				FC9B33BF24BEC29500C075CE /* TemplateRendererTests.swift */,
 				FC9B332924BEB47100C075CE /* Info.plist */,
 			);
 			path = WorkfinderCoverLetterTests;
@@ -123,6 +214,100 @@
 				FC9B334024BEB4D500C075CE /* WorkfinderCommon.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FC9B334E24BEB58D00C075CE /* source */ = {
+			isa = PBXGroup;
+			children = (
+				FC9B335324BEB5A600C075CE /* CoverLetterCoordinator.swift */,
+				FC9B335024BEB5A600C075CE /* CoverLetterViewPresenter.swift */,
+				FC9B334F24BEB5A500C075CE /* CoverLetterViewController.swift */,
+				FC9B335124BEB5A600C075CE /* EditApplicationLetterButton.swift */,
+				FC9B336F24BEB6D100C075CE /* Letter editor */,
+				FC9B336424BEB5F600C075CE /* Picklists */,
+				FC9B338C24BEB8E200C075CE /* TextEditor */,
+				FC9B337C24BEB86100C075CE /* Calendar */,
+				FC9B33A924BEBF8500C075CE /* Days and hours */,
+				FC9B335924BEB5BF00C075CE /* Logic */,
+				FC9B33B424BEC03700C075CE /* constants.swift */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+		FC9B335924BEB5BF00C075CE /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				FC9B335B24BEB5DF00C075CE /* DraftUpdater.swift */,
+				FC9B335C24BEB5DF00C075CE /* Grammer.swift */,
+				FC9B335E24BEB5DF00C075CE /* TemplateRenderer.swift */,
+				FC9B335D24BEB5DF00C075CE /* TemplateParser.swift */,
+				FC9B335A24BEB5DF00C075CE /* Common.swift */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		FC9B336424BEB5F600C075CE /* Picklists */ = {
+			isa = PBXGroup;
+			children = (
+				FC9B337524BEB75000C075CE /* PicklistDataSourceAndDelegate.swift */,
+				FC9B339524BEBD2700C075CE /* PicklistDataSourceAndDelegate.swift */,
+				FC9B337424BEB75000C075CE /* PicklistTableViewCells.swift */,
+				FC9B339324BEBD2700C075CE /* PicklistTableViewCells.swift */,
+				FC9B339424BEBD2700C075CE /* PicklistViewController.swift */,
+				FC9B339624BEBD2700C075CE /* SearchlistViewController.swift */,
+				FC9B336524BEB62A00C075CE /* Picklist.swift */,
+				FC9B335224BEB5A600C075CE /* PicklistsStore.swift */,
+				FC9B336924BEB62A00C075CE /* HardCodedPicklist.swift */,
+				FC9B336624BEB62A00C075CE /* TextSearchPicklist.swift */,
+				FC9B336724BEB62A00C075CE /* AvailabilityPeriodPicklist.swift */,
+				FC9B336824BEB62A00C075CE /* TextblockPicklist.swift */,
+			);
+			path = Picklists;
+			sourceTree = "<group>";
+		};
+		FC9B336F24BEB6D100C075CE /* Letter editor */ = {
+			isa = PBXGroup;
+			children = (
+				FC9B337024BEB71600C075CE /* LetterEditorViewController.swift */,
+				FC9B337124BEB71600C075CE /* LetterEditorPresenter.swift */,
+			);
+			path = "Letter editor";
+			sourceTree = "<group>";
+		};
+		FC9B337C24BEB86100C075CE /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				FC9B337D24BEB88D00C075CE /* F4SDisplayInformationViewController.storyboard */,
+				FC9B33A124BEBE4400C075CE /* F4SCalendar.storyboard */,
+				FC9B339F24BEBE4300C075CE /* F4SCalendarContainerViewController.swift */,
+				FC9B33A224BEBE4400C075CE /* F4SCalendarCollectionViewController.swift */,
+				FC9B339D24BEBE4300C075CE /* F4SCalendarColors.swift */,
+				FC9B339E24BEBE4300C075CE /* F4SDayCalendarViewCell.swift */,
+				FC9B33A024BEBE4400C075CE /* F4SMonthHeaderView.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		FC9B338C24BEB8E200C075CE /* TextEditor */ = {
+			isa = PBXGroup;
+			children = (
+				FC9B338D24BEB94500C075CE /* TextEditorViewController.swift */,
+				FC9B338F24BEB94500C075CE /* FreeTextEditorViewController.swift */,
+				FC9B338E24BEB94500C075CE /* OtherPicklistItemEditorViewController.swift */,
+			);
+			path = TextEditor;
+			sourceTree = "<group>";
+		};
+		FC9B33A924BEBF8500C075CE /* Days and hours */ = {
+			isa = PBXGroup;
+			children = (
+				FC9B33AC24BEBFA400C075CE /* F4SSelectDayTableViewCell.swift */,
+				FC9B33AB24BEBFA400C075CE /* F4SPageHeaderView.swift */,
+				FC9B33AA24BEBFA400C075CE /* F4SDaysAndHoursViewController.swift */,
+				FC9B33AD24BEBFA400C075CE /* F4SHoursPickerViewController.swift */,
+				FC9B33AE24BEBFA400C075CE /* F4SDisplayInformationViewController.swift */,
+			);
+			path = "Days and hours";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,6 +403,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC9B33BC24BEC17D00C075CE /* Calendar.xcassets in Resources */,
+				FC9B33A724BEBE4400C075CE /* F4SCalendar.storyboard in Resources */,
+				FC9B337E24BEB88D00C075CE /* F4SDisplayInformationViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +423,43 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC9B335424BEB5A600C075CE /* CoverLetterViewController.swift in Sources */,
+				FC9B335524BEB5A600C075CE /* CoverLetterViewPresenter.swift in Sources */,
+				FC9B337224BEB71600C075CE /* LetterEditorViewController.swift in Sources */,
+				FC9B337924BEB75000C075CE /* PicklistTableViewCells.swift in Sources */,
+				FC9B33B324BEBFA500C075CE /* F4SDisplayInformationViewController.swift in Sources */,
+				FC9B33A524BEBE4400C075CE /* F4SCalendarContainerViewController.swift in Sources */,
+				FC9B33A424BEBE4400C075CE /* F4SDayCalendarViewCell.swift in Sources */,
+				FC9B335724BEB5A600C075CE /* PicklistsStore.swift in Sources */,
+				FC9B339724BEBD2700C075CE /* PicklistTableViewCells.swift in Sources */,
+				FC9B337824BEB75000C075CE /* PicklistDataSourceAndDelegate.swift in Sources */,
+				FC9B336E24BEB62A00C075CE /* HardCodedPicklist.swift in Sources */,
+				FC9B33A824BEBE4400C075CE /* F4SCalendarCollectionViewController.swift in Sources */,
+				FC9B339224BEB94500C075CE /* FreeTextEditorViewController.swift in Sources */,
+				FC9B339024BEB94500C075CE /* TextEditorViewController.swift in Sources */,
+				FC9B33B024BEBFA500C075CE /* F4SPageHeaderView.swift in Sources */,
+				FC9B339A24BEBD2700C075CE /* SearchlistViewController.swift in Sources */,
+				FC9B33A324BEBE4400C075CE /* F4SCalendarColors.swift in Sources */,
+				FC9B337324BEB71600C075CE /* LetterEditorPresenter.swift in Sources */,
+				FC9B336D24BEB62A00C075CE /* TextblockPicklist.swift in Sources */,
+				FC9B339924BEBD2700C075CE /* PicklistDataSourceAndDelegate.swift in Sources */,
+				FC9B336124BEB5DF00C075CE /* Grammer.swift in Sources */,
+				FC9B336C24BEB62A00C075CE /* AvailabilityPeriodPicklist.swift in Sources */,
+				FC9B336324BEB5DF00C075CE /* TemplateRenderer.swift in Sources */,
+				FC9B339824BEBD2700C075CE /* PicklistViewController.swift in Sources */,
+				FC9B339124BEB94500C075CE /* OtherPicklistItemEditorViewController.swift in Sources */,
+				FC9B33AF24BEBFA500C075CE /* F4SDaysAndHoursViewController.swift in Sources */,
+				FC9B335824BEB5A600C075CE /* CoverLetterCoordinator.swift in Sources */,
+				FC9B336A24BEB62A00C075CE /* Picklist.swift in Sources */,
+				FC9B33A624BEBE4400C075CE /* F4SMonthHeaderView.swift in Sources */,
+				FC9B33B124BEBFA500C075CE /* F4SSelectDayTableViewCell.swift in Sources */,
+				FC9B336224BEB5DF00C075CE /* TemplateParser.swift in Sources */,
+				FC9B33B524BEC03700C075CE /* constants.swift in Sources */,
+				FC9B336024BEB5DF00C075CE /* DraftUpdater.swift in Sources */,
+				FC9B336B24BEB62A00C075CE /* TextSearchPicklist.swift in Sources */,
+				FC9B33B224BEBFA500C075CE /* F4SHoursPickerViewController.swift in Sources */,
+				FC9B335F24BEB5DF00C075CE /* Common.swift in Sources */,
+				FC9B335624BEB5A600C075CE /* EditApplicationLetterButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,7 +467,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC9B332824BEB47100C075CE /* WorkfinderCoverLetterTests.swift in Sources */,
+				FC9B33C124BEC29600C075CE /* TemplateRendererTests.swift in Sources */,
+				FC9B33C224BEC29600C075CE /* CoverLetterTestsCommon.swift in Sources */,
+				FC9B33C424BEC29600C075CE /* TemplateParserTests.swift in Sources */,
+				FC9B33C324BEC29600C075CE /* GrammarTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,6 +658,7 @@
 		FC9B333124BEB47100C075CE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderCoverLetterTests/Info.plist;
@@ -448,6 +677,7 @@
 		FC9B333224BEB47100C075CE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderCoverLetterTests/Info.plist;
@@ -554,6 +784,7 @@
 		FC9B333524BEB48700C075CE /* DebugF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderCoverLetterTests/Info.plist;
@@ -660,6 +891,7 @@
 		FC9B333824BEB49500C075CE /* DebugF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderCoverLetterTests/Info.plist;
@@ -760,6 +992,7 @@
 		FC9B333B24BEB4A200C075CE /* ReleaseF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderCoverLetterTests/Info.plist;
@@ -860,6 +1093,7 @@
 		FC9B333E24BEB4AF00C075CE /* ReleaseF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderCoverLetterTests/Info.plist;

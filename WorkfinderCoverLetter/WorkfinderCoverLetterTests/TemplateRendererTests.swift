@@ -1,7 +1,7 @@
 
 import XCTest
 import WorkfinderCommon
-@testable import WorkfinderApplyUseCase
+@testable import WorkfinderCoverLetter
 
 class TemplateRendererTests: XCTestCase {
 

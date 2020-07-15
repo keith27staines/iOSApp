@@ -5,7 +5,12 @@ import WorkfinderUI
 import WorkfinderServices
 import WorkfinderCoordinators
 
-public protocol CoverletterCoordinatorProtocol: class {
+public protocol CoverLetterParentCoordinatorProtocol: Coordinating {
+    var coverLetterPrimaryButtonText: String { get }
+    func coverLetterCoordinatorDidComplete(presenter: CoverLetterViewPresenterProtocol, picklistsDictionary: PicklistsDictionary)
+}
+
+public protocol CoverletterCoordinatorProtocol: AnyObject {
     var messageHandler: UserMessageHandler? { get }
     func start()
     func onCoverLetterDidDismiss()
@@ -18,7 +23,7 @@ public protocol CoverletterCoordinatorProtocol: class {
 
 public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, CoverletterCoordinatorProtocol  {
     let templateProvider: TemplateProviderProtocol
-    weak var applyCoordinator: ApplyCoordinator?
+    weak var applyCoordinator: CoverLetterParentCoordinatorProtocol?
     weak var coverLetterViewController: CoverLetterViewController?
     public var messageHandler: UserMessageHandler? { coverLetterViewController?.messageHandler }
     weak var letterEditorViewController: LetterEditorViewProtocol?
@@ -28,7 +33,7 @@ public class CoverLetterCoordinator: CoreInjectionNavigationCoordinator, Coverle
     let companyName: String
     let hostName: String
     
-    public init(parent: ApplyCoordinator?,
+    public init(parent: CoverLetterParentCoordinatorProtocol?,
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
                 candidateDateOfBirth: Date,
