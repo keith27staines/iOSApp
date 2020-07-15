@@ -30,8 +30,6 @@
 		FC9B336E24BEB62A00C075CE /* HardCodedPicklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B336924BEB62A00C075CE /* HardCodedPicklist.swift */; };
 		FC9B337224BEB71600C075CE /* LetterEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B337024BEB71600C075CE /* LetterEditorViewController.swift */; };
 		FC9B337324BEB71600C075CE /* LetterEditorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B337124BEB71600C075CE /* LetterEditorPresenter.swift */; };
-		FC9B337824BEB75000C075CE /* PicklistDataSourceAndDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B337524BEB75000C075CE /* PicklistDataSourceAndDelegate.swift */; };
-		FC9B337924BEB75000C075CE /* PicklistTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B337424BEB75000C075CE /* PicklistTableViewCells.swift */; };
 		FC9B337E24BEB88D00C075CE /* F4SDisplayInformationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC9B337D24BEB88D00C075CE /* F4SDisplayInformationViewController.storyboard */; };
 		FC9B339024BEB94500C075CE /* TextEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B338D24BEB94500C075CE /* TextEditorViewController.swift */; };
 		FC9B339124BEB94500C075CE /* OtherPicklistItemEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B338E24BEB94500C075CE /* OtherPicklistItemEditorViewController.swift */; };
@@ -109,8 +107,6 @@
 		FC9B336924BEB62A00C075CE /* HardCodedPicklist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HardCodedPicklist.swift; sourceTree = "<group>"; };
 		FC9B337024BEB71600C075CE /* LetterEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LetterEditorViewController.swift; sourceTree = "<group>"; };
 		FC9B337124BEB71600C075CE /* LetterEditorPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LetterEditorPresenter.swift; sourceTree = "<group>"; };
-		FC9B337424BEB75000C075CE /* PicklistTableViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicklistTableViewCells.swift; sourceTree = "<group>"; };
-		FC9B337524BEB75000C075CE /* PicklistDataSourceAndDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicklistDataSourceAndDelegate.swift; sourceTree = "<group>"; };
 		FC9B337D24BEB88D00C075CE /* F4SDisplayInformationViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SDisplayInformationViewController.storyboard; sourceTree = "<group>"; };
 		FC9B338D24BEB94500C075CE /* TextEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEditorViewController.swift; sourceTree = "<group>"; };
 		FC9B338E24BEB94500C075CE /* OtherPicklistItemEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherPicklistItemEditorViewController.swift; sourceTree = "<group>"; };
@@ -246,9 +242,7 @@
 		FC9B336424BEB5F600C075CE /* Picklists */ = {
 			isa = PBXGroup;
 			children = (
-				FC9B337524BEB75000C075CE /* PicklistDataSourceAndDelegate.swift */,
 				FC9B339524BEBD2700C075CE /* PicklistDataSourceAndDelegate.swift */,
-				FC9B337424BEB75000C075CE /* PicklistTableViewCells.swift */,
 				FC9B339324BEBD2700C075CE /* PicklistTableViewCells.swift */,
 				FC9B339424BEBD2700C075CE /* PicklistViewController.swift */,
 				FC9B339624BEBD2700C075CE /* SearchlistViewController.swift */,
@@ -274,13 +268,13 @@
 		FC9B337C24BEB86100C075CE /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				FC9B337D24BEB88D00C075CE /* F4SDisplayInformationViewController.storyboard */,
 				FC9B33A124BEBE4400C075CE /* F4SCalendar.storyboard */,
+				FC9B337D24BEB88D00C075CE /* F4SDisplayInformationViewController.storyboard */,
 				FC9B339F24BEBE4300C075CE /* F4SCalendarContainerViewController.swift */,
 				FC9B33A224BEBE4400C075CE /* F4SCalendarCollectionViewController.swift */,
-				FC9B339D24BEBE4300C075CE /* F4SCalendarColors.swift */,
-				FC9B339E24BEBE4300C075CE /* F4SDayCalendarViewCell.swift */,
 				FC9B33A024BEBE4400C075CE /* F4SMonthHeaderView.swift */,
+				FC9B339E24BEBE4300C075CE /* F4SDayCalendarViewCell.swift */,
+				FC9B339D24BEBE4300C075CE /* F4SCalendarColors.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -423,13 +417,11 @@
 				FC9B335424BEB5A600C075CE /* CoverLetterViewController.swift in Sources */,
 				FC9B335524BEB5A600C075CE /* CoverLetterViewPresenter.swift in Sources */,
 				FC9B337224BEB71600C075CE /* LetterEditorViewController.swift in Sources */,
-				FC9B337924BEB75000C075CE /* PicklistTableViewCells.swift in Sources */,
 				FC9B33B324BEBFA500C075CE /* F4SDisplayInformationViewController.swift in Sources */,
 				FC9B33A524BEBE4400C075CE /* F4SCalendarContainerViewController.swift in Sources */,
 				FC9B33A424BEBE4400C075CE /* F4SDayCalendarViewCell.swift in Sources */,
 				FC9B335724BEB5A600C075CE /* PicklistsStore.swift in Sources */,
 				FC9B339724BEBD2700C075CE /* PicklistTableViewCells.swift in Sources */,
-				FC9B337824BEB75000C075CE /* PicklistDataSourceAndDelegate.swift in Sources */,
 				FC9B336E24BEB62A00C075CE /* HardCodedPicklist.swift in Sources */,
 				FC9B33A824BEBE4400C075CE /* F4SCalendarCollectionViewController.swift in Sources */,
 				FC9B339224BEB94500C075CE /* FreeTextEditorViewController.swift in Sources */,
