@@ -7,6 +7,7 @@ import WorkfinderUI
 import WorkfinderCoordinators
 import WorkfinderDocumentUploadUseCase
 import WorkfinderUserDetailsUseCase
+import WorkfinderCoverLetter
 
 let __bundle = Bundle(identifier: "com.workfinder.WorkfinderApplyUseCase")!
 
@@ -15,7 +16,7 @@ public protocol ApplyCoordinatorDelegate : class {
     func applicationDidCancel()
 }
 
-public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
+public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterParentCoordinatorProtocol {
     var applicationSubmitter: ApplicationSubmitter?
     var userRepository: UserRepositoryProtocol { injected.userRepository }
     var coverletterCoordinator: CoverletterCoordinatorProtocol?
@@ -32,7 +33,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
 
     var picklistsDictionary: PicklistsDictionary?
     
-    var coverLetterPrimaryButtonText: String {
+    public var coverLetterPrimaryButtonText: String {
         let candidate = injected.userRepository.loadCandidate()
         guard let candidateUuid = candidate.uuid, !candidateUuid.isEmpty else {
             return NSLocalizedString("Next", comment: "")
@@ -140,7 +141,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator {
         coordinator.start()
     }
     
-    func coverLetterCoordinatorDidComplete(
+    public func coverLetterCoordinatorDidComplete(
         presenter: CoverLetterViewPresenterProtocol,
         picklistsDictionary: PicklistsDictionary) {
         self.picklistsDictionary = picklistsDictionary

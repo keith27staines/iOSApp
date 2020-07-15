@@ -20,7 +20,6 @@
 		FC9B335724BEB5A600C075CE /* PicklistsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335224BEB5A600C075CE /* PicklistsStore.swift */; };
 		FC9B335824BEB5A600C075CE /* CoverLetterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335324BEB5A600C075CE /* CoverLetterCoordinator.swift */; };
 		FC9B335F24BEB5DF00C075CE /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335A24BEB5DF00C075CE /* Common.swift */; };
-		FC9B336024BEB5DF00C075CE /* DraftUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335B24BEB5DF00C075CE /* DraftUpdater.swift */; };
 		FC9B336124BEB5DF00C075CE /* Grammer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335C24BEB5DF00C075CE /* Grammer.swift */; };
 		FC9B336224BEB5DF00C075CE /* TemplateParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335D24BEB5DF00C075CE /* TemplateParser.swift */; };
 		FC9B336324BEB5DF00C075CE /* TemplateRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335E24BEB5DF00C075CE /* TemplateRenderer.swift */; };
@@ -100,7 +99,6 @@
 		FC9B335224BEB5A600C075CE /* PicklistsStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PicklistsStore.swift; sourceTree = "<group>"; };
 		FC9B335324BEB5A600C075CE /* CoverLetterCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverLetterCoordinator.swift; sourceTree = "<group>"; };
 		FC9B335A24BEB5DF00C075CE /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
-		FC9B335B24BEB5DF00C075CE /* DraftUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftUpdater.swift; sourceTree = "<group>"; };
 		FC9B335C24BEB5DF00C075CE /* Grammer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grammer.swift; sourceTree = "<group>"; };
 		FC9B335D24BEB5DF00C075CE /* TemplateParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateParser.swift; sourceTree = "<group>"; };
 		FC9B335E24BEB5DF00C075CE /* TemplateRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateRenderer.swift; sourceTree = "<group>"; };
@@ -237,7 +235,6 @@
 		FC9B335924BEB5BF00C075CE /* Logic */ = {
 			isa = PBXGroup;
 			children = (
-				FC9B335B24BEB5DF00C075CE /* DraftUpdater.swift */,
 				FC9B335C24BEB5DF00C075CE /* Grammer.swift */,
 				FC9B335E24BEB5DF00C075CE /* TemplateRenderer.swift */,
 				FC9B335D24BEB5DF00C075CE /* TemplateParser.swift */,
@@ -455,7 +452,6 @@
 				FC9B33B124BEBFA500C075CE /* F4SSelectDayTableViewCell.swift in Sources */,
 				FC9B336224BEB5DF00C075CE /* TemplateParser.swift in Sources */,
 				FC9B33B524BEC03700C075CE /* constants.swift in Sources */,
-				FC9B336024BEB5DF00C075CE /* DraftUpdater.swift in Sources */,
 				FC9B336B24BEB62A00C075CE /* TextSearchPicklist.swift in Sources */,
 				FC9B33B224BEBFA500C075CE /* F4SHoursPickerViewController.swift in Sources */,
 				FC9B335F24BEB5DF00C075CE /* Common.swift in Sources */,
