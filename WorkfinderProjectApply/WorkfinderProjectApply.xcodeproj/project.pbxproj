@@ -10,7 +10,6 @@
 		FC0A7CE824BC8E5300E02199 /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A7CE724BC8E5300E02199 /* ProjectViewController.swift */; };
 		FC0A7CEA24BC8E8500E02199 /* ProjectApplyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A7CE924BC8E8500E02199 /* ProjectApplyCoordinator.swift */; };
 		FC0A7CEC24BC8EFC00E02199 /* ProjectPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A7CEB24BC8EFC00E02199 /* ProjectPresenter.swift */; };
-		FC0A7CF424BCB1C900E02199 /* ProjectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A7CF324BCB1C900E02199 /* ProjectService.swift */; };
 		FC15D77A24C41AAA00543E6F /* ProjectHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC15D77924C41AAA00543E6F /* ProjectHeaderCell.swift */; };
 		FC15D77F24C41B8F00543E6F /* ProjectHeaderPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC15D77E24C41B8F00543E6F /* ProjectHeaderPresenter.swift */; };
 		FC15D78124C41CDB00543E6F /* PresentableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC15D78024C41CDB00543E6F /* PresentableCell.swift */; };
@@ -60,7 +59,6 @@
 		FC0A7CE724BC8E5300E02199 /* ProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
 		FC0A7CE924BC8E8500E02199 /* ProjectApplyCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectApplyCoordinator.swift; sourceTree = "<group>"; };
 		FC0A7CEB24BC8EFC00E02199 /* ProjectPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectPresenter.swift; sourceTree = "<group>"; };
-		FC0A7CF324BCB1C900E02199 /* ProjectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectService.swift; sourceTree = "<group>"; };
 		FC15D77924C41AAA00543E6F /* ProjectHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectHeaderCell.swift; sourceTree = "<group>"; };
 		FC15D77E24C41B8F00543E6F /* ProjectHeaderPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectHeaderPresenter.swift; sourceTree = "<group>"; };
 		FC15D78024C41CDB00543E6F /* PresentableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableCell.swift; sourceTree = "<group>"; };
@@ -169,7 +167,6 @@
 		FC15D78324C459AB00543E6F /* Logic */ = {
 			isa = PBXGroup;
 			children = (
-				FC0A7CF324BCB1C900E02199 /* ProjectService.swift */,
 				FCADF0E424BDD9EC0040F79D /* AssociationDetail.swift */,
 				FCADF0E624BDDA2A0040F79D /* AssociationFullDetailService.swift */,
 				FCADF0E824BDEB880040F79D /* ProjectAndAssociationDetailsService.swift */,
@@ -435,7 +432,6 @@
 				FC15D77F24C41B8F00543E6F /* ProjectHeaderPresenter.swift in Sources */,
 				FCADF0E924BDEB880040F79D /* ProjectAndAssociationDetailsService.swift in Sources */,
 				FCAA887824C59B6F008E1527 /* SimpleTextLabelCell.swift in Sources */,
-				FC0A7CF424BCB1C900E02199 /* ProjectService.swift in Sources */,
 				FC9B677024C464630091A556 /* KeyActivityPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

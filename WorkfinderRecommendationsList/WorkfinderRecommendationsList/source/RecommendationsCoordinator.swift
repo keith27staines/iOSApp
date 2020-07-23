@@ -14,6 +14,7 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
             service: service,
             userRepo: userRepo,
             workplaceServiceFactory: workplaceServiceFactory,
+            projectServiceFactory: projectServiceFactory,
             hostServiceFactory: hostServiceFactory)
         let vc = RecommendationsViewController(presenter: presenter)
         navigationRouter.push(viewController: vc, animated: true)
@@ -21,6 +22,10 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
     
     func workplaceServiceFactory() -> WorkplaceAndAssociationService {
         WorkplaceAndAssociationService(networkConfig: injected.networkConfig)
+    }
+    
+    func projectServiceFactory() -> ProjectServiceProtocol {
+        ProjectService(networkConfig: injected.networkConfig)
     }
     
     func hostServiceFactory() -> HostsProviderProtocol {
