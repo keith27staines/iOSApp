@@ -1,6 +1,5 @@
 
 import WorkfinderCommon
-import WorkfinderServices
 
 public protocol ProjectServiceProtocol {
     func fetchProject(uuid: String, completion: @escaping (Result<ProjectJson,Error>) -> Void)

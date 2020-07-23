@@ -14,6 +14,7 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
             service: service,
             userRepo: userRepo,
             workplaceServiceFactory: workplaceServiceFactory,
+            projectServiceFactory: projectServiceFactory,
             hostServiceFactory: hostServiceFactory)
         let vc = RecommendationsViewController(presenter: presenter)
         navigationRouter.push(viewController: vc, animated: true)
@@ -23,14 +24,18 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
         WorkplaceAndAssociationService(networkConfig: injected.networkConfig)
     }
     
+    func projectServiceFactory() -> ProjectServiceProtocol {
+        ProjectService(networkConfig: injected.networkConfig)
+    }
+    
     func hostServiceFactory() -> HostsProviderProtocol {
         HostsProvider(networkConfig: injected.networkConfig)
     }
     
     weak var projectApplyCoordinator: ProjectApplyCoordinator?
     
-    public func processProjectViewRequest(_ projectUuid: F4SUUID) {
-        guard projectApplyCoordinator == nil else {
+    public func processProjectViewRequest(_ projectUuid: F4SUUID?) {
+        guard let projectUuid = projectUuid, projectApplyCoordinator == nil else {
             return
         }
         let projectApplyCoordinator = ProjectApplyCoordinator(

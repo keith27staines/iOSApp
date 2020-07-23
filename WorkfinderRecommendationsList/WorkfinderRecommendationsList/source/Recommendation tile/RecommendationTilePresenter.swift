@@ -10,6 +10,9 @@ protocol RecommendationTilePresenterProtocol {
     var hostName: String? { get }
     var hostRole: String? { get }
     var isLoading: Bool { get }
+    var isProject: Bool { get }
+    var projectHeader: String? { get }
+    var projectTitle: String? { get }
     func onTileTapped()
     func loadData()
 }
@@ -20,6 +23,7 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
     weak var parentPresenter: RecommendationsPresenter?
     let recommendation: Recommendation
     let workplaceService: WorkplaceAndAssociationService?
+    let projectService: ProjectServiceProtocol?
     var associationJson: AssociationJson?
     let hostService: HostsProviderProtocol?
     var companyName: String? { workplace?.companyJson.name }
@@ -29,6 +33,7 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
     var workplace: Workplace?
     var company: CompanyJson? { workplace?.companyJson }
     var host: Host?
+    var projectType: ProjectTypeJson?
     var association: AssociationJson?
     var defaultImage: UIImage? {
         UIImage.imageWithFirstLetter(
@@ -54,6 +59,10 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
     var isLoaded: Bool {
         workplace != nil && host != nil
     }
+    
+    var isProject: Bool { recommendation.project != nil }
+    var projectHeader: String? { isProject ? "WORK PLACEMENT" : nil }
+    var projectTitle: String?  { isProject ? projectType?.name : nil }
     
     var isLoading: Bool = false {
         didSet { if !isLoading { onDataLoadFinished() } }
@@ -117,6 +126,34 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
     
     func onHostLoaded(host: Host?) {
         self.host = host
+        loadProjectTypeIfNecessary()
+    }
+    
+    func loadProjectTypeIfNecessary() {
+        guard let projectTypeUuid = recommendation.project?.type else {
+            isLoading = false
+            return
+        }
+        projectService?.fetchProjectType(uuid: projectTypeUuid) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let projectType):
+                self.onProjectTypeLoaded(projectType: projectType)
+            case .failure(let error):
+                guard let error = error as? WorkfinderError else { return }
+                guard error.retry == true else {
+                    self.isLoading = false
+                    return
+                }
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+2) {
+                    self.loadProjectTypeIfNecessary()
+                }
+            }
+        }
+    }
+    
+    func onProjectTypeLoaded(projectType: ProjectTypeJson) {
+        self.projectType = projectType
         isLoading = false
     }
     
@@ -131,11 +168,13 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
     init(parent: RecommendationsPresenter,
          recommendation: Recommendation,
          workplaceService: WorkplaceAndAssociationService?,
+         projectService: ProjectServiceProtocol?,
          hostService: HostsProviderProtocol?,
          row: Int) {
         self.parentPresenter = parent
         self.recommendation = recommendation
         self.workplaceService = workplaceService
+        self.projectService = projectService
         self.hostService = hostService
         self.row = row
     }

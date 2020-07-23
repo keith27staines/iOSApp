@@ -10,16 +10,19 @@ class RecommendationsPresenter {
     let userRepo: UserRepositoryProtocol
     var workplaceServiceFactory: (() -> WorkplaceAndAssociationService)?
     var hostServiceFactory: (() -> HostsProviderProtocol)?
+    var projectServiceFactory: (() -> ProjectServiceProtocol)?
     
     init(coordinator: RecommendationsCoordinator,
          service: RecommendationsServiceProtocol,
          userRepo:UserRepositoryProtocol,
          workplaceServiceFactory: @escaping (() -> WorkplaceAndAssociationService),
+         projectServiceFactory: @escaping (() -> ProjectServiceProtocol),
          hostServiceFactory: @escaping (() -> HostsProviderProtocol)) {
         self.coordinator = coordinator
         self.service = service
         self.userRepo = userRepo
         self.workplaceServiceFactory = workplaceServiceFactory
+        self.projectServiceFactory = projectServiceFactory
         self.hostServiceFactory = hostServiceFactory
     }
     
@@ -65,11 +68,13 @@ class RecommendationsPresenter {
             return tilePresenters[row]
         }
         let workplaceService = workplaceServiceFactory?()
+        let projectService = projectServiceFactory?()
         let hostService = hostServiceFactory?()
         let presenter = RecommendationTilePresenter(
             parent: self,
             recommendation: recommendation,
             workplaceService: workplaceService,
+            projectService: projectService,
             hostService: hostService,
             row: row)
         tilePresenters.append(presenter)
@@ -78,7 +83,11 @@ class RecommendationsPresenter {
     
     func onTileTapped(_ tile: RecommendationTilePresenter) {
         guard let uuid = tile.recommendation.uuid else { return }
-        coordinator?.onRecommendationSelected?(uuid)
+        if tile.isProject {
+            coordinator?.processProjectViewRequest(tile.recommendation.project?.uuid)
+        } else {
+            coordinator?.onRecommendationSelected?(uuid)
+        }
     }
     
 }

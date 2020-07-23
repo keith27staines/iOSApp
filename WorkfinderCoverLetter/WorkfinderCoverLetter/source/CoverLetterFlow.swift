@@ -36,6 +36,7 @@ public class CoverLetterFlow: CoreInjectionNavigationCoordinator, UserMessageHan
         if let originViewController = originViewController {
             navigationRouter.popToViewController(originViewController, animated: true)
         }
+        parentCoordinator?.childCoordinatorDidFinish(self)
         if cancelled {
             applyCoordinator?.coverLetterDidCancel()
         } else {
@@ -44,7 +45,7 @@ public class CoverLetterFlow: CoreInjectionNavigationCoordinator, UserMessageHan
                 picklistsDictionary: logic.allPicklistsDictionary
             )
         }
-        parentCoordinator?.childCoordinatorDidFinish(self)
+        
     }
 
     func showPicklist(_ picklist: PicklistProtocol) {
