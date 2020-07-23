@@ -10,6 +10,9 @@ protocol RecommendationTilePresenterProtocol {
     var hostName: String? { get }
     var hostRole: String? { get }
     var isLoading: Bool { get }
+    var isProject: Bool { get }
+    var projectHeader: String? { get }
+    var projectTitle: String? { get }
     func onTileTapped()
     func loadData()
 }
@@ -54,6 +57,10 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
     var isLoaded: Bool {
         workplace != nil && host != nil
     }
+    
+    var isProject: Bool { recommendation.project != nil }
+    var projectHeader: String? { isProject ? "WORK PLACEMENT" : nil }
+    var projectTitle: String?  { isProject ? "Project title" : nil }
     
     var isLoading: Bool = false {
         didSet { if !isLoading { onDataLoadFinished() } }

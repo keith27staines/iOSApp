@@ -29,8 +29,8 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
     
     weak var projectApplyCoordinator: ProjectApplyCoordinator?
     
-    public func processProjectViewRequest(_ projectUuid: F4SUUID) {
-        guard projectApplyCoordinator == nil else {
+    public func processProjectViewRequest(_ projectUuid: F4SUUID?) {
+        guard let projectUuid = projectUuid, projectApplyCoordinator == nil else {
             return
         }
         let projectApplyCoordinator = ProjectApplyCoordinator(

@@ -20,6 +20,9 @@ class RecommendationTileView: UITableViewCell, RecommendationTileViewProtocol {
         companyLogo.image = presenter?.companyImage
         hostNameLabel.text = presenter?.hostName
         hostRoleLabel.text = presenter?.hostRole
+        projectHeaderLabel.text = presenter?.projectHeader
+        projectTitle.text = presenter?.projectTitle
+        allTextStack.arrangedSubviews[0].isHidden = !(presenter?.isProject ?? false)
         if presenter?.isLoading == true {
             activityIndicator.isHidden = false
             activityIndicator.startAnimating()
@@ -40,6 +43,32 @@ class RecommendationTileView: UITableViewCell, RecommendationTileViewProtocol {
         ])
         stack.axis = .vertical
         return stack
+    }()
+    
+    lazy var projectStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            projectHeaderLabel,
+            projectTitle,
+        ])
+        stack.axis = .vertical
+        stack.spacing = 10
+        return stack
+    }()
+    
+    lazy var projectHeaderLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        label.textColor = UIColor(red: 72, green: 39, blue: 128)
+        label.text = "PROJECT HEADER"
+        return label
+    }()
+    
+    lazy var projectTitle: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        label.textColor = UIColor.black
+        label.text = "Project Title"
+        return label
     }()
     
     lazy var companyNameLabel: UILabel = {
@@ -87,11 +116,8 @@ class RecommendationTileView: UITableViewCell, RecommendationTileViewProtocol {
     }()
     
     lazy var allTextStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [
-            self.companyTextStack,
-            self.hostTextStack,
-            UIView()
-        ])
+        var views = [projectStack, companyTextStack, hostTextStack, UIView()]
+        let stack = UIStackView(arrangedSubviews: views)
         stack.axis = .vertical
         stack.spacing = 4
         stack.alignment = .leading
