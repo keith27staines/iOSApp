@@ -3,22 +3,20 @@ import WorkfinderCommon
 
 public class TemplateProvider: WorkfinderService, TemplateProviderProtocol {
     
-    let candidateDateOfBirth: Date
-    lazy var dateOfBirthString: String = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-dd"
-        return dateFormatter.string(from: candidateDateOfBirth)
-    }()
+    let candidateAge: Int
+    let isProjectString: String
     
     public init(networkConfig: NetworkConfig,
-                candidateDateOfBirth: Date) {
-        self.candidateDateOfBirth = candidateDateOfBirth
+                candidateAge: Int,
+                isProject: Bool) {
+        self.candidateAge = candidateAge
+        self.isProjectString = String(isProject)
         super.init(networkConfig: networkConfig)
     }
     
     public func fetchCoverLetterTemplateListJson(completion: @escaping ((Result<TemplateListJson,Error>) -> Void)) {
         do {
-            let request = try buildFetchCoverLetterRequest(ageString: dateOfBirthString)
+            let request = try buildFetchCoverLetterRequest()
             performTask(
                 with: request,
                 completion: completion,
@@ -28,10 +26,15 @@ public class TemplateProvider: WorkfinderService, TemplateProviderProtocol {
         }
     }
     
-    func buildFetchCoverLetterRequest(ageString: String) throws -> URLRequest {
+    func buildFetchCoverLetterRequest() throws -> URLRequest {
+        let minimumAgeString = candidateAge < 18 ? "13" : "18"
         return try buildRequest(
             relativePath: "coverletters/",
-            queryItems: [URLQueryItem(name: "date_of_birth", value: dateOfBirthString)],
+            queryItems: [
+                URLQueryItem(name: "minimum_age__exact", value: minimumAgeString),
+                URLQueryItem(name: "is_project", value: isProjectString)
+            ],
             verb: .get)
     }
 }
+

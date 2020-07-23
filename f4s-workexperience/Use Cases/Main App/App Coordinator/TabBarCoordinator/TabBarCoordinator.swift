@@ -160,7 +160,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     
     lazy var recommendationsCoordinator: RecommendationsCoordinator = {
         let router = TabIndex.recommendations.makeRouter()
-        let coordinator = RecommendationsCoordinator(parent: nil, navigationRouter: router, inject: injected)
+        let coordinator = RecommendationsCoordinator(parent: nil, navigationRouter: router, inject: injected, navigateToSearch: self.navigateToMap, navigateToApplications: self.navigateToApplications)
         coordinator.onRecommendationSelected = { uuid in
             self.dispatchRecommendationToSearchTab(uuid: uuid)
         }
