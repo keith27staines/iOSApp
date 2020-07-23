@@ -14,6 +14,10 @@
 		FC1243E32344AEA30007BA95 /* ScreenNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1243E22344AEA30007BA95 /* ScreenNames.swift */; };
 		FC12B10322F3415300C33410 /* JsonDateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B10022F3415200C33410 /* JsonDateFormatterExtension.swift */; };
 		FC14E44C2341E36B005D7541 /* MockUIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC14E44B2341E36B005D7541 /* MockUIApplication.swift */; };
+		FC18C5B824C18E9A006D017D /* ProjectJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18C5B724C18E99006D017D /* ProjectJson.swift */; };
+		FC18C5BA24C18EBB006D017D /* ProjectTypeJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18C5B924C18EBB006D017D /* ProjectTypeJson.swift */; };
+		FC18C5BC24C18ED1006D017D /* ProjectJsonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18C5BB24C18ED1006D017D /* ProjectJsonTests.swift */; };
+		FC18C5BE24C18ED7006D017D /* ProjectTypeJsonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18C5BD24C18ED6006D017D /* ProjectTypeJsonTests.swift */; };
 		FC1F591622FD6D42007164BA /* F4SPushToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F591522FD6D42007164BA /* F4SPushToken.swift */; };
 		FC1F592222FDCD9D007164BA /* F4SCalendarDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F592122FDCD9D007164BA /* F4SCalendarDay.swift */; };
 		FC22438F232F9E750073C9B1 /* F4SCompanyDatabaseMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22438E232F9E750073C9B1 /* F4SCompanyDatabaseMetaData.swift */; };
@@ -129,6 +133,10 @@
 		FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDateFormatterExtensionTests.swift; sourceTree = "<group>"; };
 		FC14E44B2341E36B005D7541 /* MockUIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUIApplication.swift; sourceTree = "<group>"; };
 		FC177FCC2306A4010068C2F7 /* F4SHoursTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SHoursTypeTests.swift; sourceTree = "<group>"; };
+		FC18C5B724C18E99006D017D /* ProjectJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectJson.swift; sourceTree = "<group>"; };
+		FC18C5B924C18EBB006D017D /* ProjectTypeJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTypeJson.swift; sourceTree = "<group>"; };
+		FC18C5BB24C18ED1006D017D /* ProjectJsonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectJsonTests.swift; sourceTree = "<group>"; };
+		FC18C5BD24C18ED6006D017D /* ProjectTypeJsonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTypeJsonTests.swift; sourceTree = "<group>"; };
 		FC1F591522FD6D42007164BA /* F4SPushToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPushToken.swift; sourceTree = "<group>"; };
 		FC1F591722FD6DAB007164BA /* F4SPushTokenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SPushTokenTests.swift; sourceTree = "<group>"; };
 		FC1F591D22FD78D6007164BA /* WorkfinderCommonStructsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderCommonStructsTests.swift; sourceTree = "<group>"; };
@@ -371,6 +379,8 @@
 		FCA91E6D2234043D007ED308 /* WorkfinderCommon */ = {
 			isa = PBXGroup;
 			children = (
+				FC18C5B724C18E99006D017D /* ProjectJson.swift */,
+				FC18C5B924C18EBB006D017D /* ProjectTypeJson.swift */,
 				FCE4F4DF24740CF9005ED80D /* Placement */,
 				FCFE450C2250BA4B00C38436 /* Mocks */,
 				FCA91E8622340478007ED308 /* Source */,
@@ -383,6 +393,8 @@
 		FCA91E782234043D007ED308 /* WorkfinderCommonTests */ = {
 			isa = PBXGroup;
 			children = (
+				FC18C5BB24C18ED1006D017D /* ProjectJsonTests.swift */,
+				FC18C5BD24C18ED6006D017D /* ProjectTypeJsonTests.swift */,
 				FCC4E67123EAFD5400ED6491 /* HostTests.swift */,
 				FCC4E66B23EAE58200ED6491 /* F4SDateHelperTests.swift */,
 				FCC4E66923EAD04D00ED6491 /* CompanyJsonTests.swift */,
@@ -666,6 +678,7 @@
 				FCE75CC6232F631C00C2E976 /* NetworkCallLoggerProtocol.swift in Sources */,
 				FCFC06AB23225765003C59C8 /* LatLon.swift in Sources */,
 				FC93DC56232026AA00F1CE23 /* CommonNotifications.swift in Sources */,
+				FC18C5B824C18E9A006D017D /* ProjectJson.swift in Sources */,
 				FCB24A5F22E44AB100077DFF /* WorkfinderCommonStructs.swift in Sources */,
 				FC1F592222FDCD9D007164BA /* F4SCalendarDay.swift in Sources */,
 				FCE51936224948E400B550C9 /* F4SDaysAndHoursModel.swift in Sources */,
@@ -675,6 +688,7 @@
 				FCE5192122493D3300B550C9 /* Date+Extensions.swift in Sources */,
 				FCA2901B247F636100588F6E /* String+isEmail.swift in Sources */,
 				FCC1DF5F232507530074D5C1 /* SocialShare.swift in Sources */,
+				FC18C5BA24C18EBB006D017D /* ProjectTypeJson.swift in Sources */,
 				FC426F04232FAEA9004F8A3E /* WorkfinderEndpoint.swift in Sources */,
 				FC53D6DC2323BA4300A339ED /* F4SCompanyRepository.swift in Sources */,
 				FC04B867233277080034A60E /* CoordinatorProtocols.swift in Sources */,
@@ -731,6 +745,7 @@
 				FC7FF7D1249A410300F9093B /* StringExtensionsTests.swift in Sources */,
 				FC7FF7C6249A3F8000F9093B /* ScaledNumberTests.swift in Sources */,
 				FC7FF7C9249A3FD200F9093B /* JsonDateFormatterExtensionTests.swift in Sources */,
+				FC18C5BC24C18ED1006D017D /* ProjectJsonTests.swift in Sources */,
 				FCCA982D249A628800427899 /* F4SCalendarDayTests.swift in Sources */,
 				FC7FF7C0249A3F4600F9093B /* CompanyJsonTests.swift in Sources */,
 				FC7FF7CB249A403E00F9093B /* LocalStoreTests.swift in Sources */,
@@ -741,6 +756,7 @@
 				FCCA9830249A62B900427899 /* F4SCalendarMonthTests.swift in Sources */,
 				FC7FF7C1249A3F5000F9093B /* CoordinatingTests.swift in Sources */,
 				FCCA982E249A629200427899 /* F4SCalendarWeekTests.swift in Sources */,
+				FC18C5BE24C18ED7006D017D /* ProjectTypeJsonTests.swift in Sources */,
 				FC7FF7CC249A405900F9093B /* WorkfinderCommonStructsTests.swift in Sources */,
 				FC7FF7D0249A40F300F9093B /* WorkAvailabilityWindowTests.swift in Sources */,
 				FC7FF7CF249A409600F9093B /* F4SJsonValueTests.swift in Sources */,

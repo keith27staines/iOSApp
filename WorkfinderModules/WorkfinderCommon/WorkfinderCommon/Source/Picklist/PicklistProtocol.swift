@@ -3,6 +3,7 @@ public typealias PicklistsDictionary = [PicklistType: PicklistProtocol]
 
 public protocol PicklistProtocol: AnyObject {
     var isLoaded: Bool { get }
+    var isPopulated: Bool { get }
     var otherItem: PicklistItemJson? { get }
     var type: PicklistType { get }
     var items: [PicklistItemJson] { get }
@@ -16,4 +17,10 @@ public protocol PicklistProtocol: AnyObject {
     func deselectItem(_ item: PicklistItemJson)
     func deselectAll()
     func fetchItems(completion: @escaping ((PicklistProtocol, Result<[PicklistItemJson],Error>)->Void) )
+}
+
+public extension PicklistProtocol {
+    var isPopulated: Bool {
+        selectedItems.count > 0
+    }
 }

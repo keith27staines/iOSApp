@@ -9,15 +9,15 @@ public enum ProviderType {
 }
 
 public enum PicklistType: Int, CaseIterable, Codable {
+    case motivation
+    case experience
     case year
     case subject
     case institutions
     case placementType
     case project
-    case motivation
     case availabilityPeriod
     case duration
-    case experience
     case attributes
     case skills
     
@@ -34,6 +34,14 @@ public enum PicklistType: Int, CaseIterable, Codable {
         case .motivation,
              .experience: return .clientTextField
         case .availabilityPeriod: return .clientAvailabilityPeriod
+        }
+    }
+    
+    public var isPresentationOptionalWhenPopulated: Bool {
+        switch self {
+        case .motivation: return false
+        case .experience: return false
+        default: return true
         }
     }
     
@@ -85,6 +93,22 @@ public enum PicklistType: Int, CaseIterable, Codable {
         }
     }
     
+    public var questionTitle: String {
+        switch self {
+        case .skills:               return "What are your three best skills?"
+        case .attributes:           return "What are your three best attributes?"
+        case .institutions:         return "What university did you attend?"
+        case .year:                 return "What is your year of study?"
+        case .motivation:           return "What is your motivation?"
+        case .experience:           return "What is your relevant experience?"
+        case .availabilityPeriod:   return "What is your availability?"
+        case .subject:              return "What is your subject of study?"
+        case .placementType:        return "What type of placement?"
+        case .project:              return "What kind of project?"
+        case .duration:             return "How long should the placement be?"
+        }
+    }
+    
     public var maxItems: Int {
         switch self {
         case .skills, .attributes: return 3
@@ -123,7 +147,7 @@ public enum PicklistType: Int, CaseIterable, Codable {
         case .project:
             return NSLocalizedString("Select the kind of project you would prefer to work on", comment: "")
         case .duration:
-            return NSLocalizedString("Select the duration of placement that you would prefer", comment: "")
+            return NSLocalizedString("Select your preferred duration of placement", comment: "")
         }
     }
     
@@ -219,7 +243,7 @@ public enum PicklistType: Int, CaseIterable, Codable {
         case .motivation:
             return "Tip: I’m particularly interested in working with you or your company because..."
         case .experience:
-            return "Tip: My relevant experience is.. or why you should employ me"
+            return "Tip: My relevant experience is... or why you should employ me"
         case .subject: return ""
         case .placementType: return ""
         case .project: return ""

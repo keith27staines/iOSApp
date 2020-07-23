@@ -10,14 +10,12 @@ public class CoreInjection : CoreInjectionProtocol {
     public var userRepository: UserRepositoryProtocol
     public var companyDownloadFileManager: F4SCompanyDownloadManagerProtocol
     public var log: F4SAnalyticsAndDebugging
-    public let appInstallationLogic: AppInstallationLogicProtocol
     public var networkConfig: NetworkConfig
     public var versionChecker: WorkfinderVersionCheckerProtocol
     
     public init(launchOptions: LaunchOptions?,
                 networkConfig: NetworkConfig,
                 versionChecker: WorkfinderVersionCheckerProtocol,
-                appInstallationLogic: AppInstallationLogicProtocol,
                 user: Candidate,
                 userRepository: UserRepositoryProtocol,
                 companyDownloadFileManager: F4SCompanyDownloadManagerProtocol,
@@ -26,7 +24,6 @@ public class CoreInjection : CoreInjectionProtocol {
         self.launchOptions = launchOptions
         self.networkConfig = networkConfig
         self.versionChecker = versionChecker
-        self.appInstallationLogic = appInstallationLogic
         self.user = user
         self.userRepository = userRepository
         self.companyDownloadFileManager = companyDownloadFileManager

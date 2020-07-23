@@ -37,13 +37,28 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
             parent: self,
             navigationRouter: navigationRouter,
             inject: injected,
-            projectUuid: projectUuid)
+            projectUuid: projectUuid,
+            navigateToSearch: navigateToSearch,
+            navigateToApplications: navigateToApplications)
         addChildCoordinator(projectApplyCoordinator)
         self.projectApplyCoordinator = projectApplyCoordinator
         projectApplyCoordinator.start()
     }
     
+    var navigateToSearch: (() -> Void)?
+    var navigateToApplications: (() -> Void)?
+    
     public var onRecommendationSelected: ((F4SUUID) -> Void)?
     
+    public init(
+        parent: Coordinating?,
+        navigationRouter: NavigationRoutingProtocol,
+        inject: CoreInjectionProtocol,
+        navigateToSearch: (() -> Void)?,
+        navigateToApplications: (() -> Void)?) {
+        self.navigateToSearch = navigateToSearch
+        self.navigateToApplications = navigateToApplications
+        super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
+    }
     
 }

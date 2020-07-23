@@ -72,16 +72,11 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         return NavigationRouter(navigationController: self.rootNavigationController)
     }()
     
-    lazy var appInstallationLogic: AppInstallationLogicProtocol = {
-        return AppInstallationLogic(localStore: self.localStore)
-    }()
-    
     lazy var injection: CoreInjectionProtocol = {
         return CoreInjection(
             launchOptions: self.launchOptions,
             networkConfig: self.networkConfiguration,
             versionChecker: self.versionChecker,
-            appInstallationLogic: self.appInstallationLogic,
             user: self.userRepo.loadCandidate(),
             userRepository: self.userRepo,
             companyDownloadFileManager: self.companyFileDownloadManager,

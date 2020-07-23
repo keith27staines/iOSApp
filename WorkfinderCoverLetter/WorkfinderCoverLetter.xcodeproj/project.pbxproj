@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC04D06924BEE4C000FF44E6 /* CoverLetterLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04D06824BEE4C000FF44E6 /* CoverLetterLogic.swift */; };
+		FC04D06F24BF17BC00FF44E6 /* EditorThenLetterFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04D06E24BF17BC00FF44E6 /* EditorThenLetterFlow.swift */; };
+		FC04D07324BF17FD00FF44E6 /* LetterEditorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04D07224BF17FD00FF44E6 /* LetterEditorPresenter.swift */; };
+		FC4B187624C2E282005318F7 /* PicklistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B187524C2E282005318F7 /* PicklistCell.swift */; };
 		FC9B332324BEB47100C075CE /* WorkfinderCoverLetter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC9B331924BEB47100C075CE /* WorkfinderCoverLetter.framework */; };
 		FC9B332A24BEB47100C075CE /* WorkfinderCoverLetter.h in Headers */ = {isa = PBXBuildFile; fileRef = FC9B331C24BEB47100C075CE /* WorkfinderCoverLetter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FC9B334124BEB4D500C075CE /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC9B334024BEB4D500C075CE /* WorkfinderCommon.framework */; };
@@ -18,7 +22,7 @@
 		FC9B335524BEB5A600C075CE /* CoverLetterViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335024BEB5A600C075CE /* CoverLetterViewPresenter.swift */; };
 		FC9B335624BEB5A600C075CE /* EditApplicationLetterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335124BEB5A600C075CE /* EditApplicationLetterButton.swift */; };
 		FC9B335724BEB5A600C075CE /* PicklistsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335224BEB5A600C075CE /* PicklistsStore.swift */; };
-		FC9B335824BEB5A600C075CE /* CoverLetterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335324BEB5A600C075CE /* CoverLetterCoordinator.swift */; };
+		FC9B335824BEB5A600C075CE /* LetterThenEditorFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335324BEB5A600C075CE /* LetterThenEditorFlow.swift */; };
 		FC9B335F24BEB5DF00C075CE /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335A24BEB5DF00C075CE /* Common.swift */; };
 		FC9B336124BEB5DF00C075CE /* Grammer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335C24BEB5DF00C075CE /* Grammer.swift */; };
 		FC9B336224BEB5DF00C075CE /* TemplateParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335D24BEB5DF00C075CE /* TemplateParser.swift */; };
@@ -29,7 +33,6 @@
 		FC9B336D24BEB62A00C075CE /* TextblockPicklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B336824BEB62A00C075CE /* TextblockPicklist.swift */; };
 		FC9B336E24BEB62A00C075CE /* HardCodedPicklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B336924BEB62A00C075CE /* HardCodedPicklist.swift */; };
 		FC9B337224BEB71600C075CE /* LetterEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B337024BEB71600C075CE /* LetterEditorViewController.swift */; };
-		FC9B337324BEB71600C075CE /* LetterEditorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B337124BEB71600C075CE /* LetterEditorPresenter.swift */; };
 		FC9B337E24BEB88D00C075CE /* F4SDisplayInformationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC9B337D24BEB88D00C075CE /* F4SDisplayInformationViewController.storyboard */; };
 		FC9B339024BEB94500C075CE /* TextEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B338D24BEB94500C075CE /* TextEditorViewController.swift */; };
 		FC9B339124BEB94500C075CE /* OtherPicklistItemEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B338E24BEB94500C075CE /* OtherPicklistItemEditorViewController.swift */; };
@@ -55,6 +58,15 @@
 		FC9B33C224BEC29600C075CE /* CoverLetterTestsCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B33BD24BEC29500C075CE /* CoverLetterTestsCommon.swift */; };
 		FC9B33C324BEC29600C075CE /* GrammarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B33C024BEC29500C075CE /* GrammarTests.swift */; };
 		FC9B33C424BEC29600C075CE /* TemplateParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B33BE24BEC29500C075CE /* TemplateParserTests.swift */; };
+		FCD1B62B24C00312005A65BB /* LetterEditorCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD1B62A24C00312005A65BB /* LetterEditorCoordinatorProtocol.swift */; };
+		FCD1B62D24C0033E005A65BB /* CoverLetterViewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD1B62C24C0033E005A65BB /* CoverLetterViewPresenterProtocol.swift */; };
+		FCD1B62F24C00368005A65BB /* LetterEditorPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD1B62E24C00368005A65BB /* LetterEditorPresenterProtocol.swift */; };
+		FCD1B63124C003CD005A65BB /* CoverLetterParentCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD1B63024C003CD005A65BB /* CoverLetterParentCoordinatorProtocol.swift */; };
+		FCD1B63324C00433005A65BB /* CoverletterCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD1B63224C00433005A65BB /* CoverletterCoordinatorProtocol.swift */; };
+		FCD1B63524C00A0D005A65BB /* UserMessageHandlingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD1B63424C00A0D005A65BB /* UserMessageHandlingProtocol.swift */; };
+		FCD1B63724C0113D005A65BB /* CoverLetterFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD1B63624C0113D005A65BB /* CoverLetterFlow.swift */; };
+		FCDF63D424C028170008EFB0 /* CoverLetterFlowFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDF63D324C028170008EFB0 /* CoverLetterFlowFactory.swift */; };
+		FCDF63D624C028790008EFB0 /* CoverLetterFlowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDF63D524C028790008EFB0 /* CoverLetterFlowType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +94,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		FC04D06824BEE4C000FF44E6 /* CoverLetterLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverLetterLogic.swift; sourceTree = "<group>"; };
+		FC04D06E24BF17BC00FF44E6 /* EditorThenLetterFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorThenLetterFlow.swift; sourceTree = "<group>"; };
+		FC04D07224BF17FD00FF44E6 /* LetterEditorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterEditorPresenter.swift; sourceTree = "<group>"; };
+		FC4B187524C2E282005318F7 /* PicklistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicklistCell.swift; sourceTree = "<group>"; };
 		FC9B331924BEB47100C075CE /* WorkfinderCoverLetter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderCoverLetter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC9B331C24BEB47100C075CE /* WorkfinderCoverLetter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderCoverLetter.h; sourceTree = "<group>"; };
 		FC9B331D24BEB47100C075CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -95,7 +111,7 @@
 		FC9B335024BEB5A600C075CE /* CoverLetterViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverLetterViewPresenter.swift; sourceTree = "<group>"; };
 		FC9B335124BEB5A600C075CE /* EditApplicationLetterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditApplicationLetterButton.swift; sourceTree = "<group>"; };
 		FC9B335224BEB5A600C075CE /* PicklistsStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PicklistsStore.swift; sourceTree = "<group>"; };
-		FC9B335324BEB5A600C075CE /* CoverLetterCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverLetterCoordinator.swift; sourceTree = "<group>"; };
+		FC9B335324BEB5A600C075CE /* LetterThenEditorFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LetterThenEditorFlow.swift; sourceTree = "<group>"; };
 		FC9B335A24BEB5DF00C075CE /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		FC9B335C24BEB5DF00C075CE /* Grammer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grammer.swift; sourceTree = "<group>"; };
 		FC9B335D24BEB5DF00C075CE /* TemplateParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateParser.swift; sourceTree = "<group>"; };
@@ -106,7 +122,6 @@
 		FC9B336824BEB62A00C075CE /* TextblockPicklist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextblockPicklist.swift; sourceTree = "<group>"; };
 		FC9B336924BEB62A00C075CE /* HardCodedPicklist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HardCodedPicklist.swift; sourceTree = "<group>"; };
 		FC9B337024BEB71600C075CE /* LetterEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LetterEditorViewController.swift; sourceTree = "<group>"; };
-		FC9B337124BEB71600C075CE /* LetterEditorPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LetterEditorPresenter.swift; sourceTree = "<group>"; };
 		FC9B337D24BEB88D00C075CE /* F4SDisplayInformationViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SDisplayInformationViewController.storyboard; sourceTree = "<group>"; };
 		FC9B338D24BEB94500C075CE /* TextEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEditorViewController.swift; sourceTree = "<group>"; };
 		FC9B338E24BEB94500C075CE /* OtherPicklistItemEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherPicklistItemEditorViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +147,15 @@
 		FC9B33BE24BEC29500C075CE /* TemplateParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateParserTests.swift; sourceTree = "<group>"; };
 		FC9B33BF24BEC29500C075CE /* TemplateRendererTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateRendererTests.swift; sourceTree = "<group>"; };
 		FC9B33C024BEC29500C075CE /* GrammarTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrammarTests.swift; sourceTree = "<group>"; };
+		FCD1B62A24C00312005A65BB /* LetterEditorCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterEditorCoordinatorProtocol.swift; sourceTree = "<group>"; };
+		FCD1B62C24C0033E005A65BB /* CoverLetterViewPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverLetterViewPresenterProtocol.swift; sourceTree = "<group>"; };
+		FCD1B62E24C00368005A65BB /* LetterEditorPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterEditorPresenterProtocol.swift; sourceTree = "<group>"; };
+		FCD1B63024C003CD005A65BB /* CoverLetterParentCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverLetterParentCoordinatorProtocol.swift; sourceTree = "<group>"; };
+		FCD1B63224C00433005A65BB /* CoverletterCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverletterCoordinatorProtocol.swift; sourceTree = "<group>"; };
+		FCD1B63424C00A0D005A65BB /* UserMessageHandlingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMessageHandlingProtocol.swift; sourceTree = "<group>"; };
+		FCD1B63624C0113D005A65BB /* CoverLetterFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverLetterFlow.swift; sourceTree = "<group>"; };
+		FCDF63D324C028170008EFB0 /* CoverLetterFlowFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverLetterFlowFactory.swift; sourceTree = "<group>"; };
+		FCDF63D524C028790008EFB0 /* CoverLetterFlowType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverLetterFlowType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +181,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC04D06B24BF16FA00FF44E6 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				FCD1B62924C002E0005A65BB /* Protocols */,
+				FC9B33B424BEC03700C075CE /* constants.swift */,
+				FC04D06C24BF172100FF44E6 /* Custom UI */,
+				FC9B336424BEB5F600C075CE /* Picklists */,
+				FC9B338C24BEB8E200C075CE /* TextEditor */,
+				FC9B337C24BEB86100C075CE /* Calendar */,
+				FC9B33A924BEBF8500C075CE /* Days and hours */,
+				FC9B335924BEB5BF00C075CE /* Logic */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		FC04D06C24BF172100FF44E6 /* Custom UI */ = {
+			isa = PBXGroup;
+			children = (
+				FC9B335124BEB5A600C075CE /* EditApplicationLetterButton.swift */,
+			);
+			path = "Custom UI";
+			sourceTree = "<group>";
+		};
 		FC9B330F24BEB47100C075CE = {
 			isa = PBXGroup;
 			children = (
@@ -213,17 +260,14 @@
 		FC9B334E24BEB58D00C075CE /* source */ = {
 			isa = PBXGroup;
 			children = (
-				FC9B335324BEB5A600C075CE /* CoverLetterCoordinator.swift */,
-				FC9B335024BEB5A600C075CE /* CoverLetterViewPresenter.swift */,
-				FC9B334F24BEB5A500C075CE /* CoverLetterViewController.swift */,
-				FC9B335124BEB5A600C075CE /* EditApplicationLetterButton.swift */,
-				FC9B336F24BEB6D100C075CE /* Letter editor */,
-				FC9B336424BEB5F600C075CE /* Picklists */,
-				FC9B338C24BEB8E200C075CE /* TextEditor */,
-				FC9B337C24BEB86100C075CE /* Calendar */,
-				FC9B33A924BEBF8500C075CE /* Days and hours */,
-				FC9B335924BEB5BF00C075CE /* Logic */,
-				FC9B33B424BEC03700C075CE /* constants.swift */,
+				FCDF63D324C028170008EFB0 /* CoverLetterFlowFactory.swift */,
+				FCDF63D524C028790008EFB0 /* CoverLetterFlowType.swift */,
+				FCD1B63624C0113D005A65BB /* CoverLetterFlow.swift */,
+				FC04D06E24BF17BC00FF44E6 /* EditorThenLetterFlow.swift */,
+				FC9B335324BEB5A600C075CE /* LetterThenEditorFlow.swift */,
+				FCCB055D24C0458C002C85A4 /* Cover letter view and presenter */,
+				FCCB055E24C0459D002C85A4 /* Letter editor view and presenter */,
+				FC04D06B24BF16FA00FF44E6 /* Common */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -231,6 +275,7 @@
 		FC9B335924BEB5BF00C075CE /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				FC04D06824BEE4C000FF44E6 /* CoverLetterLogic.swift */,
 				FC9B335C24BEB5DF00C075CE /* Grammer.swift */,
 				FC9B335E24BEB5DF00C075CE /* TemplateRenderer.swift */,
 				FC9B335D24BEB5DF00C075CE /* TemplateParser.swift */,
@@ -247,6 +292,7 @@
 				FC9B339424BEBD2700C075CE /* PicklistViewController.swift */,
 				FC9B339624BEBD2700C075CE /* SearchlistViewController.swift */,
 				FC9B336524BEB62A00C075CE /* Picklist.swift */,
+				FC4B187524C2E282005318F7 /* PicklistCell.swift */,
 				FC9B335224BEB5A600C075CE /* PicklistsStore.swift */,
 				FC9B336924BEB62A00C075CE /* HardCodedPicklist.swift */,
 				FC9B336624BEB62A00C075CE /* TextSearchPicklist.swift */,
@@ -254,15 +300,6 @@
 				FC9B336824BEB62A00C075CE /* TextblockPicklist.swift */,
 			);
 			path = Picklists;
-			sourceTree = "<group>";
-		};
-		FC9B336F24BEB6D100C075CE /* Letter editor */ = {
-			isa = PBXGroup;
-			children = (
-				FC9B337024BEB71600C075CE /* LetterEditorViewController.swift */,
-				FC9B337124BEB71600C075CE /* LetterEditorPresenter.swift */,
-			);
-			path = "Letter editor";
 			sourceTree = "<group>";
 		};
 		FC9B337C24BEB86100C075CE /* Calendar */ = {
@@ -299,6 +336,37 @@
 				FC9B33AE24BEBFA400C075CE /* F4SDisplayInformationViewController.swift */,
 			);
 			path = "Days and hours";
+			sourceTree = "<group>";
+		};
+		FCCB055D24C0458C002C85A4 /* Cover letter view and presenter */ = {
+			isa = PBXGroup;
+			children = (
+				FC9B334F24BEB5A500C075CE /* CoverLetterViewController.swift */,
+				FC9B335024BEB5A600C075CE /* CoverLetterViewPresenter.swift */,
+			);
+			path = "Cover letter view and presenter";
+			sourceTree = "<group>";
+		};
+		FCCB055E24C0459D002C85A4 /* Letter editor view and presenter */ = {
+			isa = PBXGroup;
+			children = (
+				FC04D07224BF17FD00FF44E6 /* LetterEditorPresenter.swift */,
+				FC9B337024BEB71600C075CE /* LetterEditorViewController.swift */,
+			);
+			path = "Letter editor view and presenter";
+			sourceTree = "<group>";
+		};
+		FCD1B62924C002E0005A65BB /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				FCD1B62A24C00312005A65BB /* LetterEditorCoordinatorProtocol.swift */,
+				FCD1B62C24C0033E005A65BB /* CoverLetterViewPresenterProtocol.swift */,
+				FCD1B62E24C00368005A65BB /* LetterEditorPresenterProtocol.swift */,
+				FCD1B63024C003CD005A65BB /* CoverLetterParentCoordinatorProtocol.swift */,
+				FCD1B63224C00433005A65BB /* CoverletterCoordinatorProtocol.swift */,
+				FCD1B63424C00A0D005A65BB /* UserMessageHandlingProtocol.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -416,10 +484,14 @@
 			files = (
 				FC9B335424BEB5A600C075CE /* CoverLetterViewController.swift in Sources */,
 				FC9B335524BEB5A600C075CE /* CoverLetterViewPresenter.swift in Sources */,
+				FCD1B63124C003CD005A65BB /* CoverLetterParentCoordinatorProtocol.swift in Sources */,
+				FCD1B62B24C00312005A65BB /* LetterEditorCoordinatorProtocol.swift in Sources */,
 				FC9B337224BEB71600C075CE /* LetterEditorViewController.swift in Sources */,
 				FC9B33B324BEBFA500C075CE /* F4SDisplayInformationViewController.swift in Sources */,
 				FC9B33A524BEBE4400C075CE /* F4SCalendarContainerViewController.swift in Sources */,
+				FCDF63D424C028170008EFB0 /* CoverLetterFlowFactory.swift in Sources */,
 				FC9B33A424BEBE4400C075CE /* F4SDayCalendarViewCell.swift in Sources */,
+				FC4B187624C2E282005318F7 /* PicklistCell.swift in Sources */,
 				FC9B335724BEB5A600C075CE /* PicklistsStore.swift in Sources */,
 				FC9B339724BEBD2700C075CE /* PicklistTableViewCells.swift in Sources */,
 				FC9B336E24BEB62A00C075CE /* HardCodedPicklist.swift in Sources */,
@@ -429,21 +501,29 @@
 				FC9B33B024BEBFA500C075CE /* F4SPageHeaderView.swift in Sources */,
 				FC9B339A24BEBD2700C075CE /* SearchlistViewController.swift in Sources */,
 				FC9B33A324BEBE4400C075CE /* F4SCalendarColors.swift in Sources */,
-				FC9B337324BEB71600C075CE /* LetterEditorPresenter.swift in Sources */,
+				FCD1B63724C0113D005A65BB /* CoverLetterFlow.swift in Sources */,
+				FCD1B63524C00A0D005A65BB /* UserMessageHandlingProtocol.swift in Sources */,
 				FC9B336D24BEB62A00C075CE /* TextblockPicklist.swift in Sources */,
+				FC04D06F24BF17BC00FF44E6 /* EditorThenLetterFlow.swift in Sources */,
+				FC04D07324BF17FD00FF44E6 /* LetterEditorPresenter.swift in Sources */,
 				FC9B339924BEBD2700C075CE /* PicklistDataSourceAndDelegate.swift in Sources */,
 				FC9B336124BEB5DF00C075CE /* Grammer.swift in Sources */,
+				FC04D06924BEE4C000FF44E6 /* CoverLetterLogic.swift in Sources */,
 				FC9B336C24BEB62A00C075CE /* AvailabilityPeriodPicklist.swift in Sources */,
+				FCDF63D624C028790008EFB0 /* CoverLetterFlowType.swift in Sources */,
 				FC9B336324BEB5DF00C075CE /* TemplateRenderer.swift in Sources */,
 				FC9B339824BEBD2700C075CE /* PicklistViewController.swift in Sources */,
 				FC9B339124BEB94500C075CE /* OtherPicklistItemEditorViewController.swift in Sources */,
+				FCD1B62D24C0033E005A65BB /* CoverLetterViewPresenterProtocol.swift in Sources */,
 				FC9B33AF24BEBFA500C075CE /* F4SDaysAndHoursViewController.swift in Sources */,
-				FC9B335824BEB5A600C075CE /* CoverLetterCoordinator.swift in Sources */,
+				FCD1B63324C00433005A65BB /* CoverletterCoordinatorProtocol.swift in Sources */,
+				FC9B335824BEB5A600C075CE /* LetterThenEditorFlow.swift in Sources */,
 				FC9B336A24BEB62A00C075CE /* Picklist.swift in Sources */,
 				FC9B33A624BEBE4400C075CE /* F4SMonthHeaderView.swift in Sources */,
 				FC9B33B124BEBFA500C075CE /* F4SSelectDayTableViewCell.swift in Sources */,
 				FC9B336224BEB5DF00C075CE /* TemplateParser.swift in Sources */,
 				FC9B33B524BEC03700C075CE /* constants.swift in Sources */,
+				FCD1B62F24C00368005A65BB /* LetterEditorPresenterProtocol.swift in Sources */,
 				FC9B336B24BEB62A00C075CE /* TextSearchPicklist.swift in Sources */,
 				FC9B33B224BEBFA500C075CE /* F4SHoursPickerViewController.swift in Sources */,
 				FC9B335F24BEB5DF00C075CE /* Common.swift in Sources */,

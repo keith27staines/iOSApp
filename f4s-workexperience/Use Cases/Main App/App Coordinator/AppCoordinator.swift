@@ -133,7 +133,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                 guard let self = self else { return }
                 switch result {
                 case .success(let recommendation):
-                    if let projectUuid = recommendation.project {
+                    if let projectUuid = recommendation.project?.uuid {
                         self.tabBarCoordinator.dispatchProjectViewRequest(projectUuid)
                     } else {
                         self.tabBarCoordinator.dispatchRecommendationToSearchTab(uuid: uuid)

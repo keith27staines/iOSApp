@@ -19,7 +19,7 @@ public protocol ApplyCoordinatorDelegate : class {
 public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterParentCoordinatorProtocol {
     var applicationSubmitter: ApplicationSubmitter?
     var userRepository: UserRepositoryProtocol { injected.userRepository }
-    var coverletterCoordinator: CoverletterCoordinatorProtocol?
+    var coverletterCoordinator: CoverLetterFlow?
     var rootViewController: UIViewController?
     let environment: EnvironmentType
     var interestsRepository: F4SSelectedInterestsRepositoryProtocol
@@ -27,8 +27,8 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     let applyService: PostPlacementServiceProtocol
     weak var applyCoordinatorDelegate: ApplyCoordinatorDelegate?
     lazy var userInterests: [F4SInterest] = { return interestsRepository.loadSelectedInterestsArray() }()
-    lazy var draftPlacementLogic: DraftPlacementPreparationLogic = {
-        return DraftPlacementPreparationLogic()
+    lazy var draftPlacementLogic: DraftPlacementPreparer = {
+        return DraftPlacementPreparer()
     }()
 
     var picklistsDictionary: PicklistsDictionary?
@@ -40,11 +40,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         }
         return NSLocalizedString("Submit application", comment: "")
     }
-    
-    lazy var applicationModel: ApplicationModel = {
-        return ApplicationModel()
-    }()
-    
+
     lazy var successPopup: SuccessPopupView = {
         return SuccessPopupView(leftButtonTapped: { [weak self] in
             self?.removeApplicationSubmittedSuccessfully()
@@ -116,17 +112,21 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         onDidSelectDataOfBirth(date: dateString)
     }
     
-    func startCoverLetterCoordinator(candidateDateOfBirth: Date) {
+    func startCoverLetterCoordinator(candidateAge: Int) {
         guard let hostName = association.host.displayName else { return }
         let candidateName = injected.user.fullName
         let companyName = workplace.companyJson.name ?? "Unknown company"
-        coverletterCoordinator = CoverLetterCoordinator(parent: self,
-                                                        navigationRouter: navigationRouter,
-                                                        inject: injected,
-                                                        candidateDateOfBirth: candidateDateOfBirth,
-                                                        candidateName: candidateName,
-                                                        companyName: companyName,
-                                                        hostName: hostName)
+        coverletterCoordinator = CoverLetterFlowFactory.makeFlow(
+            type: .passiveApplication,
+            parent: self,
+            navigationRouter: navigationRouter,
+            inject: injected,
+            candidateAge: candidateAge,
+            candidateName: candidateName,
+            isProject: false,
+            projectTitle: nil,
+            companyName: companyName,
+            hostName: hostName)
         coverletterCoordinator?.start()
     }
     
@@ -140,13 +140,14 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         addChildCoordinator(coordinator)
         coordinator.start()
     }
-    
+    public func coverLetterDidCancel() {
+        // Nothing to do
+    }
     public func coverLetterCoordinatorDidComplete(
-        presenter: CoverLetterViewPresenterProtocol,
+        coverLetterText: String,
         picklistsDictionary: PicklistsDictionary) {
         self.picklistsDictionary = picklistsDictionary
-        let coverLetter = presenter.displayString
-        draftPlacementLogic.update(coverletter: coverLetter)
+        draftPlacementLogic.update(coverletter: coverLetterText)
         draftPlacementLogic.update(picklists: picklistsDictionary)
         startSigninCoordinatorIfNecessary()
     }
@@ -254,6 +255,6 @@ extension ApplyCoordinator: DateOfBirthCoordinatorProtocol {
         var candidate = userRepository.loadCandidate()
         candidate.dateOfBirth = date.workfinderDateString
         userRepository.save(candidate: candidate)
-        startCoverLetterCoordinator(candidateDateOfBirth: date)
+        startCoverLetterCoordinator(candidateAge: candidate.age() ?? 0)
     }
 }

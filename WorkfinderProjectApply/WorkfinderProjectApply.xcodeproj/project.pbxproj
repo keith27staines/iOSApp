@@ -10,18 +10,36 @@
 		FC0A7CE824BC8E5300E02199 /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A7CE724BC8E5300E02199 /* ProjectViewController.swift */; };
 		FC0A7CEA24BC8E8500E02199 /* ProjectApplyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A7CE924BC8E8500E02199 /* ProjectApplyCoordinator.swift */; };
 		FC0A7CEC24BC8EFC00E02199 /* ProjectPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A7CEB24BC8EFC00E02199 /* ProjectPresenter.swift */; };
-		FC0A7CEE24BC92D000E02199 /* ProjectJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A7CED24BC92D000E02199 /* ProjectJson.swift */; };
-		FC0A7CF024BC9B8200E02199 /* ProjectTypeJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A7CEF24BC9B8200E02199 /* ProjectTypeJson.swift */; };
-		FC0A7CF224BC9DB600E02199 /* ProjectTypeJsonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A7CF124BC9DB600E02199 /* ProjectTypeJsonTests.swift */; };
 		FC0A7CF424BCB1C900E02199 /* ProjectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A7CF324BCB1C900E02199 /* ProjectService.swift */; };
+		FC15D77A24C41AAA00543E6F /* ProjectHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC15D77924C41AAA00543E6F /* ProjectHeaderCell.swift */; };
+		FC15D77F24C41B8F00543E6F /* ProjectHeaderPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC15D77E24C41B8F00543E6F /* ProjectHeaderPresenter.swift */; };
+		FC15D78124C41CDB00543E6F /* PresentableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC15D78024C41CDB00543E6F /* PresentableCell.swift */; };
+		FC15D78524C459DD00543E6F /* CellPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC15D78424C459DD00543E6F /* CellPresenterProtocol.swift */; };
+		FC15D78D24C45C1800543E6F /* ProjectBulletPointCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC15D78C24C45C1800543E6F /* ProjectBulletPointCell.swift */; };
+		FC15D78F24C45C2A00543E6F /* ProjectBulletPointPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC15D78E24C45C2A00543E6F /* ProjectBulletPointPresenter.swift */; };
+		FC15D79124C45C9300543E6F /* AboutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC15D79024C45C9300543E6F /* AboutCell.swift */; };
+		FC15D79324C45CA300543E6F /* AboutPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC15D79224C45CA300543E6F /* AboutPresenter.swift */; };
+		FC184B2924C8721100CB733B /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC184B2824C8721100CB733B /* WorkfinderAppLogic.framework */; };
+		FC18C5B124C16A4C006D017D /* WorkfinderCoverLetter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC18C5B024C16A4C006D017D /* WorkfinderCoverLetter.framework */; };
+		FC42486D24C608CB00831D9F /* Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC42486C24C608CB00831D9F /* Styling.swift */; };
+		FC48066B24C8094200018C10 /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48066A24C8094200018C10 /* SuccessViewController.swift */; };
+		FC9B676A24C464170091A556 /* CapsuleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B676924C464170091A556 /* CapsuleCell.swift */; };
+		FC9B676C24C464260091A556 /* CapsulePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B676B24C464260091A556 /* CapsulePresenter.swift */; };
+		FC9B676E24C464540091A556 /* KeyActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B676D24C464540091A556 /* KeyActivityCell.swift */; };
+		FC9B677024C464630091A556 /* KeyActivityPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B676F24C464630091A556 /* KeyActivityPresenter.swift */; };
+		FC9B677224C4648E0091A556 /* ProjectContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B677124C4648E0091A556 /* ProjectContactCell.swift */; };
+		FC9B677424C464AE0091A556 /* ProjectContactPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B677324C464AE0091A556 /* ProjectContactPresenter.swift */; };
+		FC9B677624C478ED0091A556 /* SectionHeadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B677524C478ED0091A556 /* SectionHeadingCell.swift */; };
+		FC9B677824C4790F0091A556 /* SectionHeadingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B677724C4790F0091A556 /* SectionHeadingPresenter.swift */; };
+		FC9B677B24C47CE80091A556 /* SkillsSectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B677A24C47CE80091A556 /* SkillsSectionHeaderCell.swift */; };
 		FCA13FD224BC7F060009C30F /* WorkfinderProjectApply.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA13FC824BC7F060009C30F /* WorkfinderProjectApply.framework */; };
-		FCA13FD724BC7F060009C30F /* ProjectJsonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA13FD624BC7F060009C30F /* ProjectJsonTests.swift */; };
 		FCA13FD924BC7F060009C30F /* WorkfinderProjectApply.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA13FCB24BC7F060009C30F /* WorkfinderProjectApply.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCA13FF024BC80470009C30F /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA13FEF24BC80470009C30F /* WorkfinderServices.framework */; };
 		FCA13FF424BC80500009C30F /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA13FF324BC80500009C30F /* WorkfinderCommon.framework */; };
 		FCA13FF724BC805D0009C30F /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA13FF624BC805D0009C30F /* WorkfinderUI.framework */; };
 		FCA13FFA24BC80920009C30F /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA13FF924BC80920009C30F /* WorkfinderCoordinators.framework */; };
 		FCA13FFE24BC80990009C30F /* WorkfinderUserDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA13FFD24BC80990009C30F /* WorkfinderUserDetailsUseCase.framework */; };
+		FCAA887824C59B6F008E1527 /* SimpleTextLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAA887724C59B6F008E1527 /* SimpleTextLabelCell.swift */; };
 		FCADF0E524BDD9EC0040F79D /* AssociationDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCADF0E424BDD9EC0040F79D /* AssociationDetail.swift */; };
 		FCADF0E724BDDA2A0040F79D /* AssociationFullDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCADF0E624BDDA2A0040F79D /* AssociationFullDetailService.swift */; };
 		FCADF0E924BDEB880040F79D /* ProjectAndAssociationDetailsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCADF0E824BDEB880040F79D /* ProjectAndAssociationDetailsService.swift */; };
@@ -42,21 +60,39 @@
 		FC0A7CE724BC8E5300E02199 /* ProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
 		FC0A7CE924BC8E8500E02199 /* ProjectApplyCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectApplyCoordinator.swift; sourceTree = "<group>"; };
 		FC0A7CEB24BC8EFC00E02199 /* ProjectPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectPresenter.swift; sourceTree = "<group>"; };
-		FC0A7CED24BC92D000E02199 /* ProjectJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectJson.swift; sourceTree = "<group>"; };
-		FC0A7CEF24BC9B8200E02199 /* ProjectTypeJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTypeJson.swift; sourceTree = "<group>"; };
-		FC0A7CF124BC9DB600E02199 /* ProjectTypeJsonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTypeJsonTests.swift; sourceTree = "<group>"; };
 		FC0A7CF324BCB1C900E02199 /* ProjectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectService.swift; sourceTree = "<group>"; };
+		FC15D77924C41AAA00543E6F /* ProjectHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectHeaderCell.swift; sourceTree = "<group>"; };
+		FC15D77E24C41B8F00543E6F /* ProjectHeaderPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectHeaderPresenter.swift; sourceTree = "<group>"; };
+		FC15D78024C41CDB00543E6F /* PresentableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableCell.swift; sourceTree = "<group>"; };
+		FC15D78424C459DD00543E6F /* CellPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellPresenterProtocol.swift; sourceTree = "<group>"; };
+		FC15D78C24C45C1800543E6F /* ProjectBulletPointCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectBulletPointCell.swift; sourceTree = "<group>"; };
+		FC15D78E24C45C2A00543E6F /* ProjectBulletPointPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectBulletPointPresenter.swift; sourceTree = "<group>"; };
+		FC15D79024C45C9300543E6F /* AboutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutCell.swift; sourceTree = "<group>"; };
+		FC15D79224C45CA300543E6F /* AboutPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPresenter.swift; sourceTree = "<group>"; };
+		FC184B2824C8721100CB733B /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC18C5B024C16A4C006D017D /* WorkfinderCoverLetter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoverLetter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC42486C24C608CB00831D9F /* Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styling.swift; sourceTree = "<group>"; };
+		FC48066A24C8094200018C10 /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
+		FC9B676924C464170091A556 /* CapsuleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleCell.swift; sourceTree = "<group>"; };
+		FC9B676B24C464260091A556 /* CapsulePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsulePresenter.swift; sourceTree = "<group>"; };
+		FC9B676D24C464540091A556 /* KeyActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyActivityCell.swift; sourceTree = "<group>"; };
+		FC9B676F24C464630091A556 /* KeyActivityPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyActivityPresenter.swift; sourceTree = "<group>"; };
+		FC9B677124C4648E0091A556 /* ProjectContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectContactCell.swift; sourceTree = "<group>"; };
+		FC9B677324C464AE0091A556 /* ProjectContactPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectContactPresenter.swift; sourceTree = "<group>"; };
+		FC9B677524C478ED0091A556 /* SectionHeadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeadingCell.swift; sourceTree = "<group>"; };
+		FC9B677724C4790F0091A556 /* SectionHeadingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeadingPresenter.swift; sourceTree = "<group>"; };
+		FC9B677A24C47CE80091A556 /* SkillsSectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillsSectionHeaderCell.swift; sourceTree = "<group>"; };
 		FCA13FC824BC7F060009C30F /* WorkfinderProjectApply.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderProjectApply.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA13FCB24BC7F060009C30F /* WorkfinderProjectApply.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderProjectApply.h; sourceTree = "<group>"; };
 		FCA13FCC24BC7F060009C30F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCA13FD124BC7F060009C30F /* WorkfinderProjectApplyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderProjectApplyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCA13FD624BC7F060009C30F /* ProjectJsonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectJsonTests.swift; sourceTree = "<group>"; };
 		FCA13FD824BC7F060009C30F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCA13FEF24BC80470009C30F /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA13FF324BC80500009C30F /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA13FF624BC805D0009C30F /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA13FF924BC80920009C30F /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA13FFD24BC80990009C30F /* WorkfinderUserDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUserDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCAA887724C59B6F008E1527 /* SimpleTextLabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTextLabelCell.swift; sourceTree = "<group>"; };
 		FCADF0E424BDD9EC0040F79D /* AssociationDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationDetail.swift; sourceTree = "<group>"; };
 		FCADF0E624BDDA2A0040F79D /* AssociationFullDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationFullDetailService.swift; sourceTree = "<group>"; };
 		FCADF0E824BDEB880040F79D /* ProjectAndAssociationDetailsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectAndAssociationDetailsService.swift; sourceTree = "<group>"; };
@@ -71,6 +107,8 @@
 				FCA13FFA24BC80920009C30F /* WorkfinderCoordinators.framework in Frameworks */,
 				FCA13FFE24BC80990009C30F /* WorkfinderUserDetailsUseCase.framework in Frameworks */,
 				FCA13FF724BC805D0009C30F /* WorkfinderUI.framework in Frameworks */,
+				FC18C5B124C16A4C006D017D /* WorkfinderCoverLetter.framework in Frameworks */,
+				FC184B2924C8721100CB733B /* WorkfinderAppLogic.framework in Frameworks */,
 				FCA13FF424BC80500009C30F /* WorkfinderCommon.framework in Frameworks */,
 				FCA13FF024BC80470009C30F /* WorkfinderServices.framework in Frameworks */,
 			);
@@ -93,15 +131,121 @@
 				FC0A7CE924BC8E8500E02199 /* ProjectApplyCoordinator.swift */,
 				FC0A7CEB24BC8EFC00E02199 /* ProjectPresenter.swift */,
 				FC0A7CE724BC8E5300E02199 /* ProjectViewController.swift */,
-				FC0A7CED24BC92D000E02199 /* ProjectJson.swift */,
-				FC0A7CEF24BC9B8200E02199 /* ProjectTypeJson.swift */,
+				FC42486C24C608CB00831D9F /* Styling.swift */,
+				FC15D78224C4597000543E6F /* Cells and cell presenters */,
+				FC48066924C8091000018C10 /* success screen */,
+				FC15D78324C459AB00543E6F /* Logic */,
+			);
+			path = sources;
+			sourceTree = "<group>";
+		};
+		FC15D77D24C41B7700543E6F /* projectHeader */ = {
+			isa = PBXGroup;
+			children = (
+				FC15D77924C41AAA00543E6F /* ProjectHeaderCell.swift */,
+				FC15D77E24C41B8F00543E6F /* ProjectHeaderPresenter.swift */,
+			);
+			path = projectHeader;
+			sourceTree = "<group>";
+		};
+		FC15D78224C4597000543E6F /* Cells and cell presenters */ = {
+			isa = PBXGroup;
+			children = (
+				FC15D78024C41CDB00543E6F /* PresentableCell.swift */,
+				FC15D78424C459DD00543E6F /* CellPresenterProtocol.swift */,
+				FCAA887724C59B6F008E1527 /* SimpleTextLabelCell.swift */,
+				FC15D77D24C41B7700543E6F /* projectHeader */,
+				FC9B677924C4791C0091A556 /* sectionHeading */,
+				FC15D78624C45AED00543E6F /* projectBulletPoints */,
+				FC15D78724C45AFC00543E6F /* aboutCompanyAndPlacement */,
+				FC15D78824C45B1C00543E6F /* skillsYouWillGain */,
+				FC15D78924C45B2D00543E6F /* keyActivities */,
+				FC15D78A24C45B3C00543E6F /* aboutYou */,
+				FC15D78B24C45B4B00543E6F /* projectContact */,
+			);
+			path = "Cells and cell presenters";
+			sourceTree = "<group>";
+		};
+		FC15D78324C459AB00543E6F /* Logic */ = {
+			isa = PBXGroup;
+			children = (
 				FC0A7CF324BCB1C900E02199 /* ProjectService.swift */,
 				FCADF0E424BDD9EC0040F79D /* AssociationDetail.swift */,
 				FCADF0E624BDDA2A0040F79D /* AssociationFullDetailService.swift */,
 				FCADF0E824BDEB880040F79D /* ProjectAndAssociationDetailsService.swift */,
 				FCADF0EA24BDEBE10040F79D /* ProjectAndAssociationDetail.swift */,
 			);
-			path = sources;
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		FC15D78624C45AED00543E6F /* projectBulletPoints */ = {
+			isa = PBXGroup;
+			children = (
+				FC15D78C24C45C1800543E6F /* ProjectBulletPointCell.swift */,
+				FC15D78E24C45C2A00543E6F /* ProjectBulletPointPresenter.swift */,
+			);
+			path = projectBulletPoints;
+			sourceTree = "<group>";
+		};
+		FC15D78724C45AFC00543E6F /* aboutCompanyAndPlacement */ = {
+			isa = PBXGroup;
+			children = (
+				FC15D79024C45C9300543E6F /* AboutCell.swift */,
+				FC15D79224C45CA300543E6F /* AboutPresenter.swift */,
+			);
+			path = aboutCompanyAndPlacement;
+			sourceTree = "<group>";
+		};
+		FC15D78824C45B1C00543E6F /* skillsYouWillGain */ = {
+			isa = PBXGroup;
+			children = (
+				FC9B677A24C47CE80091A556 /* SkillsSectionHeaderCell.swift */,
+				FC9B676924C464170091A556 /* CapsuleCell.swift */,
+				FC9B676B24C464260091A556 /* CapsulePresenter.swift */,
+			);
+			path = skillsYouWillGain;
+			sourceTree = "<group>";
+		};
+		FC15D78924C45B2D00543E6F /* keyActivities */ = {
+			isa = PBXGroup;
+			children = (
+				FC9B676D24C464540091A556 /* KeyActivityCell.swift */,
+				FC9B676F24C464630091A556 /* KeyActivityPresenter.swift */,
+			);
+			path = keyActivities;
+			sourceTree = "<group>";
+		};
+		FC15D78A24C45B3C00543E6F /* aboutYou */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = aboutYou;
+			sourceTree = "<group>";
+		};
+		FC15D78B24C45B4B00543E6F /* projectContact */ = {
+			isa = PBXGroup;
+			children = (
+				FC9B677124C4648E0091A556 /* ProjectContactCell.swift */,
+				FC9B677324C464AE0091A556 /* ProjectContactPresenter.swift */,
+			);
+			path = projectContact;
+			sourceTree = "<group>";
+		};
+		FC48066924C8091000018C10 /* success screen */ = {
+			isa = PBXGroup;
+			children = (
+				FC48066A24C8094200018C10 /* SuccessViewController.swift */,
+			);
+			path = "success screen";
+			sourceTree = "<group>";
+		};
+		FC9B677924C4791C0091A556 /* sectionHeading */ = {
+			isa = PBXGroup;
+			children = (
+				FC9B677524C478ED0091A556 /* SectionHeadingCell.swift */,
+				FC9B677724C4790F0091A556 /* SectionHeadingPresenter.swift */,
+			);
+			path = sectionHeading;
 			sourceTree = "<group>";
 		};
 		FCA13FBE24BC7F060009C30F = {
@@ -137,8 +281,6 @@
 			isa = PBXGroup;
 			children = (
 				FCA13FD824BC7F060009C30F /* Info.plist */,
-				FCA13FD624BC7F060009C30F /* ProjectJsonTests.swift */,
-				FC0A7CF124BC9DB600E02199 /* ProjectTypeJsonTests.swift */,
 			);
 			path = WorkfinderProjectApplyTests;
 			sourceTree = "<group>";
@@ -146,6 +288,8 @@
 		FCA13FEE24BC80470009C30F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC184B2824C8721100CB733B /* WorkfinderAppLogic.framework */,
+				FC18C5B024C16A4C006D017D /* WorkfinderCoverLetter.framework */,
 				FCA13FFD24BC80990009C30F /* WorkfinderUserDetailsUseCase.framework */,
 				FCA13FF924BC80920009C30F /* WorkfinderCoordinators.framework */,
 				FCA13FF624BC805D0009C30F /* WorkfinderUI.framework */,
@@ -265,16 +409,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC0A7CF024BC9B8200E02199 /* ProjectTypeJson.swift in Sources */,
 				FC0A7CE824BC8E5300E02199 /* ProjectViewController.swift in Sources */,
+				FC9B677224C4648E0091A556 /* ProjectContactCell.swift in Sources */,
+				FC15D79324C45CA300543E6F /* AboutPresenter.swift in Sources */,
 				FCADF0EB24BDEBE10040F79D /* ProjectAndAssociationDetail.swift in Sources */,
-				FC0A7CEE24BC92D000E02199 /* ProjectJson.swift in Sources */,
 				FCADF0E524BDD9EC0040F79D /* AssociationDetail.swift in Sources */,
+				FC15D78F24C45C2A00543E6F /* ProjectBulletPointPresenter.swift in Sources */,
+				FC15D77A24C41AAA00543E6F /* ProjectHeaderCell.swift in Sources */,
+				FC15D78524C459DD00543E6F /* CellPresenterProtocol.swift in Sources */,
 				FC0A7CEC24BC8EFC00E02199 /* ProjectPresenter.swift in Sources */,
+				FC9B676C24C464260091A556 /* CapsulePresenter.swift in Sources */,
+				FC15D78124C41CDB00543E6F /* PresentableCell.swift in Sources */,
+				FC9B677824C4790F0091A556 /* SectionHeadingPresenter.swift in Sources */,
+				FC15D78D24C45C1800543E6F /* ProjectBulletPointCell.swift in Sources */,
+				FC9B677624C478ED0091A556 /* SectionHeadingCell.swift in Sources */,
+				FC9B677B24C47CE80091A556 /* SkillsSectionHeaderCell.swift in Sources */,
+				FC9B676A24C464170091A556 /* CapsuleCell.swift in Sources */,
+				FC9B677424C464AE0091A556 /* ProjectContactPresenter.swift in Sources */,
 				FCADF0E724BDDA2A0040F79D /* AssociationFullDetailService.swift in Sources */,
+				FC42486D24C608CB00831D9F /* Styling.swift in Sources */,
+				FC15D79124C45C9300543E6F /* AboutCell.swift in Sources */,
 				FC0A7CEA24BC8E8500E02199 /* ProjectApplyCoordinator.swift in Sources */,
+				FC9B676E24C464540091A556 /* KeyActivityCell.swift in Sources */,
+				FC48066B24C8094200018C10 /* SuccessViewController.swift in Sources */,
+				FC15D77F24C41B8F00543E6F /* ProjectHeaderPresenter.swift in Sources */,
 				FCADF0E924BDEB880040F79D /* ProjectAndAssociationDetailsService.swift in Sources */,
+				FCAA887824C59B6F008E1527 /* SimpleTextLabelCell.swift in Sources */,
 				FC0A7CF424BCB1C900E02199 /* ProjectService.swift in Sources */,
+				FC9B677024C464630091A556 /* KeyActivityPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,8 +444,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FCA13FD724BC7F060009C30F /* ProjectJsonTests.swift in Sources */,
-				FC0A7CF224BC9DB600E02199 /* ProjectTypeJsonTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

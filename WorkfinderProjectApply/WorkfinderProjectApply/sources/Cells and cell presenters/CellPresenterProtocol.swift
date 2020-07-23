@@ -1,0 +1,4 @@
+
+protocol CellPresenterProtocol: AnyObject {
+    
+}
