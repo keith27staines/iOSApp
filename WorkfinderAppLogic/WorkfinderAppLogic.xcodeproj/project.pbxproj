@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		FC184B2424C86FB700CB733B /* DraftPlacementPreparer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC184B2324C86FB700CB733B /* DraftPlacementPreparer.swift */; };
 		FC184B2E24C87B5A00CB733B /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC02DA2822EC8554003C8148 /* WorkfinderServices.framework */; };
-		FC184B2F24C87B5A00CB733B /* WorkfinderServices.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC02DA2822EC8554003C8148 /* WorkfinderServices.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCD6F9D722E31591003F7C34 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD6F9CD22E31591003F7C34 /* WorkfinderAppLogic.framework */; };
 		FCD6F9DE22E31591003F7C34 /* WorkfinderAppLogic.h in Headers */ = {isa = PBXBuildFile; fileRef = FCD6F9D022E31591003F7C34 /* WorkfinderAppLogic.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCD6F9F122E31777003F7C34 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD6F9F022E31777003F7C34 /* WorkfinderCommon.framework */; };
@@ -24,20 +23,6 @@
 			remoteInfo = WorkfinderAppLogic;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		FC184B3024C87B5A00CB733B /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				FC184B2F24C87B5A00CB733B /* WorkfinderServices.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		FC02DA2822EC8554003C8148 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,7 +134,6 @@
 				FCD6F9C922E31591003F7C34 /* Sources */,
 				FCD6F9CA22E31591003F7C34 /* Frameworks */,
 				FCD6F9CB22E31591003F7C34 /* Resources */,
-				FC184B3024C87B5A00CB733B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

@@ -17,7 +17,6 @@
 		FC9B334524BEB4E600C075CE /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC9B334424BEB4E600C075CE /* WorkfinderServices.framework */; };
 		FC9B334824BEB4F800C075CE /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC9B334724BEB4F800C075CE /* WorkfinderUI.framework */; };
 		FC9B334B24BEB51400C075CE /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC9B334A24BEB51400C075CE /* WorkfinderCoordinators.framework */; };
-		FC9B334C24BEB51400C075CE /* WorkfinderCoordinators.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC9B334A24BEB51400C075CE /* WorkfinderCoordinators.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC9B335424BEB5A600C075CE /* CoverLetterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B334F24BEB5A500C075CE /* CoverLetterViewController.swift */; };
 		FC9B335524BEB5A600C075CE /* CoverLetterViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335024BEB5A600C075CE /* CoverLetterViewPresenter.swift */; };
 		FC9B335624BEB5A600C075CE /* EditApplicationLetterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B335124BEB5A600C075CE /* EditApplicationLetterButton.swift */; };
@@ -78,20 +77,6 @@
 			remoteInfo = WorkfinderCoverLetter;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		FC9B334D24BEB51400C075CE /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				FC9B334C24BEB51400C075CE /* WorkfinderCoordinators.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		FC04D06824BEE4C000FF44E6 /* CoverLetterLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverLetterLogic.swift; sourceTree = "<group>"; };
@@ -391,7 +376,6 @@
 				FC9B331524BEB47100C075CE /* Sources */,
 				FC9B331624BEB47100C075CE /* Frameworks */,
 				FC9B331724BEB47100C075CE /* Resources */,
-				FC9B334D24BEB51400C075CE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
