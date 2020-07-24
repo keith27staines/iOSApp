@@ -3,6 +3,7 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderServices
 import WorkfinderCoordinators
+import WorkfinderUI
 
 protocol RegisterAndSignInCoordinatorProtocol {
     func switchMode(_ mode: RegisterAndSignInMode)

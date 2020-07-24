@@ -457,23 +457,7 @@ extension RegisterAndSignInBaseViewController {
         updatePresenter()
     }
     
-    @objc func forgotPassword() {
-        guard MFMailComposeViewController.canSendMail() else {
-            messageHandler.displayMessage(
-                title: "Email is unavailable",
-                message: "Your device isn't configured for email")
-            return
-        }
-        let composer = MFMailComposeViewController()
-        composer.setToRecipients(["support@workfinder.com"])
-        let email = self.email.textfield.text ?? ""
-        let emailString = email.isEmpty ? "???@?????.???" : email
-        composer.setPreferredSendingEmailAddress(emailString)
-        composer.setMessageBody("Hi support@Workfinder.com,\n\nPlease reset the password for the user with email: \(emailString)\n\nThis email was generated from Workfinder iOS client\n", isHTML: false)
-        composer.setSubject("Password reset request")
-        composer.mailComposeDelegate = self
-        present(composer, animated: true, completion: nil)
-    }
+    @objc func forgotPassword() { openLinkInWebView(.resetPassword) }
 }
 
 extension RegisterAndSignInBaseViewController: UITextFieldDelegate {
