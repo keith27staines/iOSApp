@@ -10,5 +10,6 @@ import Foundation
 
 
 public enum RemoteLinks: String {
+    case resetPassword = "https://www.workfinder.com/auth/password/reset/"
     case candidateTermsAndConditions = "https://www.workfinder.com/terms-and-conditions/"
 }
