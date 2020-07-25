@@ -8,6 +8,7 @@ import WorkfinderCoordinators
 import WorkfinderDocumentUploadUseCase
 import WorkfinderUserDetailsUseCase
 import WorkfinderCoverLetter
+import WorkfinderRegisterCandidate
 
 let __bundle = Bundle(identifier: "com.workfinder.WorkfinderApplyUseCase")!
 
@@ -160,7 +161,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
 
 extension ApplyCoordinator: RegisterAndSignInCoordinatorParent {
     
-    func onCandidateIsSignedIn() {
+    public func onCandidateIsSignedIn() {
         let uuid = userRepository.loadCandidate().uuid!
         draftPlacementLogic.update(candidateUuid: uuid)
         submitApplication()
