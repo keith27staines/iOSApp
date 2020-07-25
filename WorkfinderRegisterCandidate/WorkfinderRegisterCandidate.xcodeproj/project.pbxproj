@@ -13,6 +13,19 @@
 		FC0E563424CBF474004FDDFF /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0E563324CBF474004FDDFF /* WorkfinderCommon.framework */; };
 		FC0E563824CBF480004FDDFF /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0E563724CBF480004FDDFF /* WorkfinderServices.framework */; };
 		FC0E563B24CBF492004FDDFF /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0E563A24CBF492004FDDFF /* WorkfinderUI.framework */; };
+		FC0E564E24CBF59C004FDDFF /* RegisterAndSignInCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E564D24CBF59C004FDDFF /* RegisterAndSignInCoordinator.swift */; };
+		FC0E565024CBF5CA004FDDFF /* RegisterAndSignInUserBasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E564F24CBF5CA004FDDFF /* RegisterAndSignInUserBasePresenter.swift */; };
+		FC0E565224CBF5D3004FDDFF /* RegisterAndSignInBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E565124CBF5D3004FDDFF /* RegisterAndSignInBaseViewController.swift */; };
+		FC0E565424CBF5D8004FDDFF /* RegisterUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E565324CBF5D8004FDDFF /* RegisterUserViewController.swift */; };
+		FC0E565624CBF5E4004FDDFF /* RegisterUserPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E565524CBF5E4004FDDFF /* RegisterUserPresenter.swift */; };
+		FC0E565824CBF5EB004FDDFF /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E565724CBF5EB004FDDFF /* SignInViewController.swift */; };
+		FC0E565A24CBF5F2004FDDFF /* SignInUserPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E565924CBF5F2004FDDFF /* SignInUserPresenter.swift */; };
+		FC0E565C24CBF5FB004FDDFF /* RegisterUserLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E565B24CBF5FB004FDDFF /* RegisterUserLogic.swift */; };
+		FC0E565E24CBF602004FDDFF /* RegisterAndSignInMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E565D24CBF602004FDDFF /* RegisterAndSignInMode.swift */; };
+		FC0E566024CBF60C004FDDFF /* NextHideToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E565F24CBF60C004FDDFF /* NextHideToolbar.swift */; };
+		FC0E566224CBF615004FDDFF /* HTTPErrorJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E566124CBF615004FDDFF /* HTTPErrorJson.swift */; };
+		FC0E566424CBF61F004FDDFF /* PhoneNumberValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E566324CBF61F004FDDFF /* PhoneNumberValidator.swift */; };
+		FC0E566624CBF6D6004FDDFF /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0E566524CBF6D6004FDDFF /* WorkfinderCoordinators.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +48,19 @@
 		FC0E563324CBF474004FDDFF /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC0E563724CBF480004FDDFF /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC0E563A24CBF492004FDDFF /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC0E564D24CBF59C004FDDFF /* RegisterAndSignInCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterAndSignInCoordinator.swift; sourceTree = "<group>"; };
+		FC0E564F24CBF5CA004FDDFF /* RegisterAndSignInUserBasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterAndSignInUserBasePresenter.swift; sourceTree = "<group>"; };
+		FC0E565124CBF5D3004FDDFF /* RegisterAndSignInBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterAndSignInBaseViewController.swift; sourceTree = "<group>"; };
+		FC0E565324CBF5D8004FDDFF /* RegisterUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserViewController.swift; sourceTree = "<group>"; };
+		FC0E565524CBF5E4004FDDFF /* RegisterUserPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserPresenter.swift; sourceTree = "<group>"; };
+		FC0E565724CBF5EB004FDDFF /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		FC0E565924CBF5F2004FDDFF /* SignInUserPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUserPresenter.swift; sourceTree = "<group>"; };
+		FC0E565B24CBF5FB004FDDFF /* RegisterUserLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserLogic.swift; sourceTree = "<group>"; };
+		FC0E565D24CBF602004FDDFF /* RegisterAndSignInMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterAndSignInMode.swift; sourceTree = "<group>"; };
+		FC0E565F24CBF60C004FDDFF /* NextHideToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextHideToolbar.swift; sourceTree = "<group>"; };
+		FC0E566124CBF615004FDDFF /* HTTPErrorJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPErrorJson.swift; sourceTree = "<group>"; };
+		FC0E566324CBF61F004FDDFF /* PhoneNumberValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberValidator.swift; sourceTree = "<group>"; };
+		FC0E566524CBF6D6004FDDFF /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC0E566624CBF6D6004FDDFF /* WorkfinderCoordinators.framework in Frameworks */,
 				FC0E563B24CBF492004FDDFF /* WorkfinderUI.framework in Frameworks */,
 				FC0E563424CBF474004FDDFF /* WorkfinderCommon.framework in Frameworks */,
 				FC0E563824CBF480004FDDFF /* WorkfinderServices.framework in Frameworks */,
@@ -100,6 +127,7 @@
 		FC0E563224CBF474004FDDFF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC0E566524CBF6D6004FDDFF /* WorkfinderCoordinators.framework */,
 				FC0E563A24CBF492004FDDFF /* WorkfinderUI.framework */,
 				FC0E563724CBF480004FDDFF /* WorkfinderServices.framework */,
 				FC0E563324CBF474004FDDFF /* WorkfinderCommon.framework */,
@@ -110,6 +138,18 @@
 		FC0E564C24CBF517004FDDFF /* source */ = {
 			isa = PBXGroup;
 			children = (
+				FC0E564D24CBF59C004FDDFF /* RegisterAndSignInCoordinator.swift */,
+				FC0E564F24CBF5CA004FDDFF /* RegisterAndSignInUserBasePresenter.swift */,
+				FC0E565124CBF5D3004FDDFF /* RegisterAndSignInBaseViewController.swift */,
+				FC0E565324CBF5D8004FDDFF /* RegisterUserViewController.swift */,
+				FC0E565524CBF5E4004FDDFF /* RegisterUserPresenter.swift */,
+				FC0E565724CBF5EB004FDDFF /* SignInViewController.swift */,
+				FC0E565924CBF5F2004FDDFF /* SignInUserPresenter.swift */,
+				FC0E565B24CBF5FB004FDDFF /* RegisterUserLogic.swift */,
+				FC0E565D24CBF602004FDDFF /* RegisterAndSignInMode.swift */,
+				FC0E565F24CBF60C004FDDFF /* NextHideToolbar.swift */,
+				FC0E566124CBF615004FDDFF /* HTTPErrorJson.swift */,
+				FC0E566324CBF61F004FDDFF /* PhoneNumberValidator.swift */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -223,6 +263,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC0E565424CBF5D8004FDDFF /* RegisterUserViewController.swift in Sources */,
+				FC0E565A24CBF5F2004FDDFF /* SignInUserPresenter.swift in Sources */,
+				FC0E565624CBF5E4004FDDFF /* RegisterUserPresenter.swift in Sources */,
+				FC0E565E24CBF602004FDDFF /* RegisterAndSignInMode.swift in Sources */,
+				FC0E565824CBF5EB004FDDFF /* SignInViewController.swift in Sources */,
+				FC0E565C24CBF5FB004FDDFF /* RegisterUserLogic.swift in Sources */,
+				FC0E566424CBF61F004FDDFF /* PhoneNumberValidator.swift in Sources */,
+				FC0E566024CBF60C004FDDFF /* NextHideToolbar.swift in Sources */,
+				FC0E564E24CBF59C004FDDFF /* RegisterAndSignInCoordinator.swift in Sources */,
+				FC0E565024CBF5CA004FDDFF /* RegisterAndSignInUserBasePresenter.swift in Sources */,
+				FC0E566224CBF615004FDDFF /* HTTPErrorJson.swift in Sources */,
+				FC0E565224CBF5D3004FDDFF /* RegisterAndSignInBaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,6 +470,7 @@
 		FC0E563024CBF43E004FDDFF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderRegisterCandidateTests/Info.plist;
@@ -436,6 +489,7 @@
 		FC0E563124CBF43E004FDDFF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderRegisterCandidateTests/Info.plist;
@@ -542,6 +596,7 @@
 		FC0E563F24CBF49D004FDDFF /* DebugF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderRegisterCandidateTests/Info.plist;
@@ -648,6 +703,7 @@
 		FC0E564524CBF4B6004FDDFF /* DebugF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderRegisterCandidateTests/Info.plist;
@@ -748,6 +804,7 @@
 		FC0E564824CBF4C1004FDDFF /* ReleaseF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderRegisterCandidateTests/Info.plist;
@@ -848,6 +905,7 @@
 		FC0E564B24CBF4D0004FDDFF /* ReleaseF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderRegisterCandidateTests/Info.plist;
