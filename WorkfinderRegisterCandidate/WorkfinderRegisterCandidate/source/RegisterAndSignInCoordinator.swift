@@ -10,18 +10,18 @@ protocol RegisterAndSignInCoordinatorProtocol {
     func onUserRegisteredAndCandidateCreated(pop: Bool)
 }
 
-protocol RegisterAndSignInCoordinatorParent: Coordinating {
+public protocol RegisterAndSignInCoordinatorParent: Coordinating {
     func onCandidateIsSignedIn()
 }
 
-class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, RegisterAndSignInCoordinatorProtocol {
+public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, RegisterAndSignInCoordinatorProtocol {
     
     var firstViewController:UIViewController?
-    init(parent: RegisterAndSignInCoordinatorParent?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol) {
+    public init(parent: RegisterAndSignInCoordinatorParent?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol) {
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
-    override func start() {
+    public override func start() {
         presentRegisterUserViewController()
     }
     

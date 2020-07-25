@@ -12,6 +12,7 @@
 		FC036BCB244973A8008C4A69 /* CoverLetterTestsCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC036BC7244973A7008C4A69 /* CoverLetterTestsCommon.swift */; };
 		FC036BCC244973A8008C4A69 /* TemplateParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC036BC8244973A7008C4A69 /* TemplateParserTests.swift */; };
 		FC0B6B332323CDC800A1867D /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0B6B322323CDC800A1867D /* WorkfinderCoordinators.framework */; };
+		FC0E566A24CBF79D004FDDFF /* WorkfinderRegisterCandidate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0E566924CBF79D004FDDFF /* WorkfinderRegisterCandidate.framework */; };
 		FC1053712458784200024706 /* SuccessPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1053702458784200024706 /* SuccessPopupView.swift */; };
 		FC184B2524C871F700CB733B /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC85D9F122F205610035C724 /* WorkfinderAppLogic.framework */; };
 		FC1EBEBD2248E0A500416D70 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */; };
@@ -19,24 +20,12 @@
 		FC1EBEC02248E0D600416D70 /* WorkfinderApplyUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF5AF1E2248BDCC00D9B8D1 /* WorkfinderApplyUseCaseTests.swift */; };
 		FC22DBFB22F97F330068C61C /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC22DBFA22F97F330068C61C /* WorkfinderUI.framework */; };
 		FC23BCE4243AFA730075F359 /* DateOfBirthCollectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23BCE3243AFA730075F359 /* DateOfBirthCollectorViewController.swift */; };
-		FC343CF82445F10A00347BC2 /* RegisterUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC343CF72445F10A00347BC2 /* RegisterUserViewController.swift */; };
-		FC343CFA2445F17600347BC2 /* RegisterAndSignInCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC343CF92445F17600347BC2 /* RegisterAndSignInCoordinator.swift */; };
-		FC343CFC244600EF00347BC2 /* RegisterUserPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC343CFB244600EF00347BC2 /* RegisterUserPresenter.swift */; };
 		FC4066FB23277C16002B425E /* WorkfinderDocumentUploadUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4066FA23277C16002B425E /* WorkfinderDocumentUploadUseCase.framework */; };
 		FC42C8AC243C9BB300F81232 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC42C8AB243C9BB300F81232 /* WorkfinderServices.framework */; };
-		FC4A94102478BFB70066B8E3 /* HTTPErrorJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4A940F2478BFB70066B8E3 /* HTTPErrorJson.swift */; };
-		FC5ABD0224607AE000AA22BD /* NextHideToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ABD0124607AE000AA22BD /* NextHideToolbar.swift */; };
 		FC6E3D2D2248D74A00377736 /* WorkfinderApplyUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF5AF102248BDCC00D9B8D1 /* WorkfinderApplyUseCase.framework */; };
 		FC85D9F222F205610035C724 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC85D9F122F205610035C724 /* WorkfinderAppLogic.framework */; };
-		FC96DE37245C1EDD0074011B /* RegisterAndSignInBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96DE36245C1EDD0074011B /* RegisterAndSignInBaseViewController.swift */; };
-		FC96DE39245C2F930074011B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96DE38245C2F930074011B /* SignInViewController.swift */; };
-		FC96DE3B245C37C20074011B /* RegisterAndSignInMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96DE3A245C37C20074011B /* RegisterAndSignInMode.swift */; };
 		FC9865B6229D380A006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865B5229D380A006D3E63 /* README */; };
 		FC9B33B724BEC0FB00C075CE /* WorkfinderCoverLetter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC9B33B624BEC0FB00C075CE /* WorkfinderCoverLetter.framework */; };
-		FCA2901E247F653500588F6E /* RegisterAndSignInUserBasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA2901D247F653500588F6E /* RegisterAndSignInUserBasePresenter.swift */; };
-		FCA29020247F65D900588F6E /* SignInUserPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA2901F247F65D900588F6E /* SignInUserPresenter.swift */; };
-		FCA29022247F67EA00588F6E /* PhoneNumberValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA29021247F67EA00588F6E /* PhoneNumberValidator.swift */; };
-		FCCA4E3224570CE900DFA696 /* RegisterUserLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA4E3124570CE900DFA696 /* RegisterUserLogic.swift */; };
 		FCE8DA9A2320E24600934E2F /* ApplyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DA992320E24600934E2F /* ApplyCoordinator.swift */; };
 		FCE8DA9C2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE8DA9B2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework */; };
 		FCF5AF212248BDCC00D9B8D1 /* WorkfinderApplyUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = FCF5AF132248BDCC00D9B8D1 /* WorkfinderApplyUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -59,30 +48,19 @@
 		FC036BC8244973A7008C4A69 /* TemplateParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TemplateParserTests.swift; path = ../../../../WorkfinderCoverLetter/WorkfinderCoverLetterTests/TemplateParserTests.swift; sourceTree = "<group>"; };
 		FC0B6B322323CDC800A1867D /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC0B6B342323CDC800A1867D /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC0E566924CBF79D004FDDFF /* WorkfinderRegisterCandidate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderRegisterCandidate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1053702458784200024706 /* SuccessPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessPopupView.swift; sourceTree = "<group>"; };
 		FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC22DBFA22F97F330068C61C /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC23BCE3243AFA730075F359 /* DateOfBirthCollectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateOfBirthCollectorViewController.swift; sourceTree = "<group>"; };
-		FC343CF72445F10A00347BC2 /* RegisterUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserViewController.swift; sourceTree = "<group>"; };
-		FC343CF92445F17600347BC2 /* RegisterAndSignInCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterAndSignInCoordinator.swift; sourceTree = "<group>"; };
-		FC343CFB244600EF00347BC2 /* RegisterUserPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserPresenter.swift; sourceTree = "<group>"; };
 		FC4066FA23277C16002B425E /* WorkfinderDocumentUploadUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderDocumentUploadUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC42C8AB243C9BB300F81232 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC4A940F2478BFB70066B8E3 /* HTTPErrorJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPErrorJson.swift; sourceTree = "<group>"; };
-		FC5ABD0124607AE000AA22BD /* NextHideToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextHideToolbar.swift; sourceTree = "<group>"; };
 		FC6E3D282248D74A00377736 /* WorkfinderApplyUseCaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderApplyUseCaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC6E3D2C2248D74A00377736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC85D9EF22F204140035C724 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC85D9F122F205610035C724 /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC96DE36245C1EDD0074011B /* RegisterAndSignInBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterAndSignInBaseViewController.swift; sourceTree = "<group>"; };
-		FC96DE38245C2F930074011B /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		FC96DE3A245C37C20074011B /* RegisterAndSignInMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterAndSignInMode.swift; sourceTree = "<group>"; };
 		FC9865B5229D380A006D3E63 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		FC9B33B624BEC0FB00C075CE /* WorkfinderCoverLetter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoverLetter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCA2901D247F653500588F6E /* RegisterAndSignInUserBasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterAndSignInUserBasePresenter.swift; sourceTree = "<group>"; };
-		FCA2901F247F65D900588F6E /* SignInUserPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUserPresenter.swift; sourceTree = "<group>"; };
-		FCA29021247F67EA00588F6E /* PhoneNumberValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberValidator.swift; sourceTree = "<group>"; };
-		FCCA4E3124570CE900DFA696 /* RegisterUserLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserLogic.swift; sourceTree = "<group>"; };
 		FCE8DA992320E24600934E2F /* ApplyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyCoordinator.swift; sourceTree = "<group>"; };
 		FCE8DA9B2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUserDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF5AF102248BDCC00D9B8D1 /* WorkfinderApplyUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderApplyUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,6 +85,7 @@
 			files = (
 				FC42C8AC243C9BB300F81232 /* WorkfinderServices.framework in Frameworks */,
 				FC4066FB23277C16002B425E /* WorkfinderDocumentUploadUseCase.framework in Frameworks */,
+				FC0E566A24CBF79D004FDDFF /* WorkfinderRegisterCandidate.framework in Frameworks */,
 				FC0B6B332323CDC800A1867D /* WorkfinderCoordinators.framework in Frameworks */,
 				FCE8DA9C2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework in Frameworks */,
 				FC22DBFB22F97F330068C61C /* WorkfinderUI.framework in Frameworks */,
@@ -129,25 +108,6 @@
 				FC036BC6244973A7008C4A69 /* TemplateRendererTests.swift */,
 			);
 			path = "cover letter tests";
-			sourceTree = "<group>";
-		};
-		FC343CF62445F0E200347BC2 /* User sign in */ = {
-			isa = PBXGroup;
-			children = (
-				FC343CF92445F17600347BC2 /* RegisterAndSignInCoordinator.swift */,
-				FCA2901D247F653500588F6E /* RegisterAndSignInUserBasePresenter.swift */,
-				FC96DE36245C1EDD0074011B /* RegisterAndSignInBaseViewController.swift */,
-				FC343CF72445F10A00347BC2 /* RegisterUserViewController.swift */,
-				FC343CFB244600EF00347BC2 /* RegisterUserPresenter.swift */,
-				FC96DE38245C2F930074011B /* SignInViewController.swift */,
-				FCA2901F247F65D900588F6E /* SignInUserPresenter.swift */,
-				FCCA4E3124570CE900DFA696 /* RegisterUserLogic.swift */,
-				FC96DE3A245C37C20074011B /* RegisterAndSignInMode.swift */,
-				FC5ABD0124607AE000AA22BD /* NextHideToolbar.swift */,
-				FC4A940F2478BFB70066B8E3 /* HTTPErrorJson.swift */,
-				FCA29021247F67EA00588F6E /* PhoneNumberValidator.swift */,
-			);
-			path = "User sign in";
 			sourceTree = "<group>";
 		};
 		FC6E3D292248D74A00377736 /* WorkfinderApplyUseCaseTests */ = {
@@ -174,7 +134,6 @@
 			children = (
 				FCE8DA992320E24600934E2F /* ApplyCoordinator.swift */,
 				FCD20A84244D788800AAA5FD /* Date of birth */,
-				FC343CF62445F0E200347BC2 /* User sign in */,
 				FCE8DA8A2320D42600934E2F /* Success screen */,
 			);
 			path = Source;
@@ -183,6 +142,7 @@
 		FC96263D2248C20E00D5F850 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC0E566924CBF79D004FDDFF /* WorkfinderRegisterCandidate.framework */,
 				FC9B33B624BEC0FB00C075CE /* WorkfinderCoverLetter.framework */,
 				FC42C8AB243C9BB300F81232 /* WorkfinderServices.framework */,
 				FC4066FA23277C16002B425E /* WorkfinderDocumentUploadUseCase.framework */,
@@ -367,21 +327,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC4A94102478BFB70066B8E3 /* HTTPErrorJson.swift in Sources */,
-				FCCA4E3224570CE900DFA696 /* RegisterUserLogic.swift in Sources */,
-				FC5ABD0224607AE000AA22BD /* NextHideToolbar.swift in Sources */,
-				FC343CFC244600EF00347BC2 /* RegisterUserPresenter.swift in Sources */,
 				FC23BCE4243AFA730075F359 /* DateOfBirthCollectorViewController.swift in Sources */,
-				FCA29022247F67EA00588F6E /* PhoneNumberValidator.swift in Sources */,
-				FC343CF82445F10A00347BC2 /* RegisterUserViewController.swift in Sources */,
-				FCA2901E247F653500588F6E /* RegisterAndSignInUserBasePresenter.swift in Sources */,
 				FCE8DA9A2320E24600934E2F /* ApplyCoordinator.swift in Sources */,
-				FCA29020247F65D900588F6E /* SignInUserPresenter.swift in Sources */,
 				FC1053712458784200024706 /* SuccessPopupView.swift in Sources */,
-				FC96DE3B245C37C20074011B /* RegisterAndSignInMode.swift in Sources */,
-				FC96DE39245C2F930074011B /* SignInViewController.swift in Sources */,
-				FC343CFA2445F17600347BC2 /* RegisterAndSignInCoordinator.swift in Sources */,
-				FC96DE37245C1EDD0074011B /* RegisterAndSignInBaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
