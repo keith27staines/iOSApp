@@ -147,13 +147,10 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     public func coverLetterCoordinatorDidComplete(
         coverLetterText: String,
         picklistsDictionary: PicklistsDictionary) {
-        // Before we start the signin workflow, we need to wait half a second while the cover letter pops animated off the stack
-        DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
-            self.picklistsDictionary = picklistsDictionary
-            self.draftPlacementLogic.update(coverletter: coverLetterText)
-            self.draftPlacementLogic.update(picklists: picklistsDictionary)
-            self.startSigninCoordinatorIfNecessary()
-        }
+        self.picklistsDictionary = picklistsDictionary
+        self.draftPlacementLogic.update(coverletter: coverLetterText)
+        self.draftPlacementLogic.update(picklists: picklistsDictionary)
+        self.startSigninCoordinatorIfNecessary()
     }
     
     deinit { print("ApplyCoordinator did deinit") }
