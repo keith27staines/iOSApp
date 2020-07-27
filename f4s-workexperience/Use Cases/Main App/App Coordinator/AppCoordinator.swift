@@ -164,40 +164,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
 }
 
 extension AppCoordinator {
-    
-    func presentNoNetworkMustRetry(retryOperation: @escaping () -> ()) {
-        let rootVC = window.rootViewController?.topMostViewController
-        let alert = UIAlertController(
-            title: NSLocalizedString("No Network", comment: ""),
-            message: NSLocalizedString("Please ensure you have a good network connection while we set things up for you", comment: ""),
-            preferredStyle: .alert)
-        let retry = UIAlertAction(
-            title: NSLocalizedString("Retry", comment: ""),
-            style: .default) { (_) in
-                alert.dismiss(animated: false, completion: nil)
-                retryOperation()
-        }
-        alert.addAction(retry)
-        rootVC?.present(alert, animated: true, completion: nil)
-    }
-    
-    func presentFatalError(error: Error) {
-        let rootVC = window.rootViewController
-        let alert = UIAlertController(
-            title: NSLocalizedString("Workfinder cannot continue", comment: ""),
-            message: NSLocalizedString("We are very sorry, this should not have happened. Workfinder has encountered an error it cannot recover from", comment: ""),
-            preferredStyle: .alert)
-        let retry = UIAlertAction(
-            title: NSLocalizedString("Close Workfinder", comment: ""),
-            style: .default) { (_) in
-                fatalError()
-        }
-        alert.addAction(retry)
-        rootVC?.present(alert, animated: true, completion: nil)
-    }
-}
-
-extension AppCoordinator {
     func logStartupInformation(userId: F4SUUID) {
         let info = """
 
