@@ -74,7 +74,7 @@ public struct HostAssociationJson: Codable {
 }
 
 public protocol TemplateProviderProtocol: class {
-    func fetchCoverLetterTemplateListJson(completion: @escaping ((Result<TemplateListJson,Error>) -> Void))
+    func fetchCoverLetterTemplateListJson(completion: @escaping ((Result<[TemplateModel],Error>) -> Void))
 }
 
 public protocol PicklistProviderProtocol: class {

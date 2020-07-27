@@ -16,6 +16,12 @@ public class DraftPlacementPreparer {
     }
     
     @discardableResult
+    public func update(associatedProject: F4SUUID?) -> Placement {
+        draft.associatedProject = associatedProject
+        return draft
+    }
+    
+    @discardableResult
     public func update(candidateUuid: F4SUUID?) -> Placement {
         draft.candidateUuid = candidateUuid
         return draft

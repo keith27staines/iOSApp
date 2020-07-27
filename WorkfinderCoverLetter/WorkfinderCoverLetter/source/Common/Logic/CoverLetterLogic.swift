@@ -5,7 +5,7 @@ import WorkfinderServices
 
 class CoverLetterLogic {
     let flowType: CoverLetterFlowType
-    var defaultTemplate = TemplateModel(uuid: "empty", templateString: "")
+    var defaultTemplate = TemplateModel(uuid: "empty", templateString: "", isProject: false, minimumAge: 13)
     lazy var templateModel: TemplateModel = self.defaultTemplate
     let picklistsStore: PicklistsStoreProtocol
     var letterDisplayString = ""
@@ -54,8 +54,8 @@ class CoverLetterLogic {
     func load(completion: @escaping (Error?) -> Void) {
         templateService.fetchCoverLetterTemplateListJson() { [weak self] (result) in
             switch result {
-            case .success(let templateListJson):
-                self?.onTemplateListFetched(templateListJson: templateListJson)
+            case .success(let templates):
+                self?.onTemplateListFetched(templates: templates)
                 completion(nil)
             case .failure(let error):
                 completion(error)
@@ -63,8 +63,8 @@ class CoverLetterLogic {
         }
     }
     
-    func onTemplateListFetched(templateListJson: TemplateListJson) {
-        let templateModel = templateListJson.results.first ?? defaultTemplate
+    func onTemplateListFetched(templates: [TemplateModel]) {
+        let templateModel = templates.first ?? defaultTemplate
         let preprocessor = TemplateModelPreprocessor()
         self.templateModel = preprocessor.preprocess(templateModel: templateModel)
         let parser = TemplateParser(templateModel: self.templateModel)
