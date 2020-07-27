@@ -123,6 +123,7 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
         builder.update(candidateUuid: UserRepository().loadCandidate().uuid)
         builder.update(picklists: picklistsDictionary)
         builder.update(associationUuid: projectPresenter?.detail.project?.association)
+        builder.update(associatedProject: projectPresenter?.detail.project?.uuid)
         builder.update(coverletter: coverLetterText)
         placementService = PostPlacementService(networkConfig: injected.networkConfig)
         placementService?.postPlacement(draftPlacement: builder.draft) { [weak self] (result) in

@@ -44,6 +44,7 @@ public struct Placement: Codable {
     public var yearOfStudy: PlacementOtherableFact?
     public var subject: PlacementOtherableFact?
     public var project: PlacementOtherableFact?
+    public var associatedProject: F4SUUID?
     
     public var institution: F4SUUID?
     public var placementType: F4SUUID?
@@ -72,6 +73,7 @@ public struct Placement: Codable {
         case institution
         case placementType = "placement_type"
         case project
+        case associatedProject = "associated_project"
         case motivation
         case experience
         case availability
