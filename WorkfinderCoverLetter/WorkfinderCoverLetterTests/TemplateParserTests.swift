@@ -66,7 +66,7 @@ class TemplateParserTests: XCTestCase {
     }
     
     func makeSUT(with templateString: String = sherlockTemplateString) -> TemplateParser {
-        let templateModel = TemplateModel(uuid: "", templateString: templateString)
+        let templateModel = TemplateModel(uuid: "", templateString: templateString, isProject: true, minimumAge: 0)
         let sut = TemplateParser(templateModel: templateModel)
         return sut
     }

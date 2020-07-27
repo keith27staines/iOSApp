@@ -6,7 +6,7 @@ import WorkfinderCommon
 class TemplateRendererTests: XCTestCase {
 
     lazy var parser: TemplateParser = {
-        let model = TemplateModel(uuid: "", templateString: sherlockTemplateString)
+        let model = TemplateModel(uuid: "", templateString: sherlockTemplateString, isProject: true, minimumAge: 0)
         return TemplateParser(templateModel: model)
     }()
     
