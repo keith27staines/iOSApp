@@ -36,11 +36,6 @@ class CompanyHeaderView: UIView, CompanyHeaderViewProtocol {
     lazy var iconContainerView: UIView = {
         let view = UIView(frame: CGRect(origin: CGPoint.zero, size: self.iconViewSize))
         view.clipsToBounds = false
-        view.layer.shadowColor = UIColor.darkGray.cgColor
-        view.layer.shadowOpacity = 0.3
-        view.layer.shadowOffset = CGSize.zero
-        view.layer.shadowRadius = 2
-        view.layer.shadowPath = UIBezierPath(roundedRect: view.bounds, cornerRadius: iconViewRadius).cgPath
         view.addSubview(self.companyIconImageView)
         self.companyIconImageView.fillSuperview()
         return view
