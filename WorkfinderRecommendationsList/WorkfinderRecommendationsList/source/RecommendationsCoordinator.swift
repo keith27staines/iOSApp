@@ -31,7 +31,7 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
     func hostServiceFactory() -> HostsProviderProtocol {
         HostsProvider(networkConfig: injected.networkConfig)
     }
-    
+        
     weak var projectApplyCoordinator: ProjectApplyCoordinator?
     
     public func processProjectViewRequest(_ projectUuid: F4SUUID?) {
@@ -67,3 +67,10 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
     }
     
 }
+
+extension RecommendationsCoordinator: ProjectApplyCoordinatorDelegate {
+    public func onProjectApplyDidFinish() {
+        self.projectApplyCoordinator = nil
+    }
+}
+

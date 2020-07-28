@@ -11,6 +11,10 @@ protocol ProjectApplyCoordinatorProtocol: AnyObject {
     func onTapApply()
 }
 
+public protocol ProjectApplyCoordinatorDelegate: Coordinating {
+    func onProjectApplyDidFinish()
+}
+
 public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
     
     let projectUuid: F4SUUID
@@ -22,14 +26,16 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
     var navigateToApplications: (() -> Void)?
     weak var successViewController: UIViewController?
     var placementService: PostPlacementServiceProtocol?
+    var delegate: ProjectApplyCoordinatorDelegate?
     
     public init(
-        parent: Coordinating?,
+        parent: ProjectApplyCoordinatorDelegate?,
         navigationRouter: NavigationRoutingProtocol,
         inject: CoreInjectionProtocol,
         projectUuid: F4SUUID,
         navigateToSearch: (() -> Void)?,
         navigateToApplications: (() -> Void)?) {
+        self.delegate = parent
         self.navigateToSearch = navigateToSearch
         self.navigateToApplications = navigateToApplications
         self.projectUuid = projectUuid
@@ -107,6 +113,7 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
     
     func onModalFinished() {
         originalVC?.dismiss(animated: true, completion: nil)
+        delegate?.onProjectApplyDidFinish()
         parentCoordinator?.childCoordinatorDidFinish(self)
     }
     
