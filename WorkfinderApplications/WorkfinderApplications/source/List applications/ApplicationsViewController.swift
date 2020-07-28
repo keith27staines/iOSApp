@@ -33,7 +33,6 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
             self.refreshFromPresenter()
             self.messageHandler.displayOptionalErrorIfNotNil(
                     optionalError,
-                    cancelHandler: nil,
                     retryHandler: self.loadData)
         }
     }

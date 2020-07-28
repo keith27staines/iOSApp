@@ -66,7 +66,7 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
         presenter.loadData { [weak self] (optionalError) in
             guard let self = self else { return }
             self.messageHandler.hideLoadingOverlay()
-            self.messageHandler.displayOptionalErrorIfNotNil(optionalError, cancelHandler: nil) {
+            self.messageHandler.displayOptionalErrorIfNotNil(optionalError) {
                 self.loadData()
             }
             self.refreshFromPresenter()

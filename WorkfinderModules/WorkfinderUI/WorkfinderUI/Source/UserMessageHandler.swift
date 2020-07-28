@@ -24,7 +24,7 @@ public class UserMessageHandler {
     
     public func displayOptionalErrorIfNotNil(
         _ optionalError: Error?,
-        cancelHandler: (() -> Void)? = {},
+        cancelHandler: @escaping (() -> Void) = {},
         retryHandler: (() -> Void)?) {
         guard let error = optionalError else { return }
         guard let workfinderError = error as? WorkfinderError else {
@@ -37,7 +37,7 @@ public class UserMessageHandler {
     }
         
     func displayWorkfinderError(_ error: WorkfinderError,
-                        cancelHandler: (() -> Void)?,
+                        cancelHandler: @escaping (() -> Void),
                         retryHandler: (() -> Void)?) {
         
         presentCancelRetryAlert(
@@ -106,27 +106,18 @@ public class UserMessageHandler {
     fileprivate func presentCancelRetryAlert(
         title: String,
         message: String,
-        cancelHandler: (() -> Void)?,
+        cancelHandler: @escaping (() -> Void),
         retryHandler: (() -> Void)?) {
         let alert = UIAlertController(
             title: title,
             message: message,
             preferredStyle: .alert)
         
-        if let cancelHandler = cancelHandler {
-            if let _ = retryHandler {
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
-                    cancelHandler()
-                }
-                alert.addAction(cancelAction)
-            } else {
-                let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
-                    cancelHandler()
-                }
-                alert.addAction(okAction)
-            }
-
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+            cancelHandler()
         }
+        alert.addAction(cancelAction)
+        
         if let retryHandler = retryHandler {
             let retryAction = UIAlertAction(title: "Retry", style: .default) { (_) in
                 retryHandler()

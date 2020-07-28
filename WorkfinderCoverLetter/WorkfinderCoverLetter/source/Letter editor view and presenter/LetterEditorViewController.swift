@@ -23,7 +23,7 @@ class LetterEditorViewController: UIViewController {
                 alert.addAction(ok)
                 present(alert, animated: true, completion: nil)
             default:
-                messageHandler.displayOptionalErrorIfNotNil(error, cancelHandler: nil, retryHandler: nil)
+                messageHandler.displayOptionalErrorIfNotNil(error, retryHandler: nil)
             }
         }
     }
