@@ -25,7 +25,7 @@ public class SmallImageService: SmallImageServiceProtocol {
             completion(defaultImage)
             return
         }
-        session.dataTask(with: url) { (data, response, error) in
+        let task = session.dataTask(with: url) { (data, response, error) in
             DispatchQueue.main.async {
                             guard
                     let data = data,
@@ -37,6 +37,7 @@ public class SmallImageService: SmallImageServiceProtocol {
                 completion(image)
             }
         }
+        task.resume()
     }
     
 }

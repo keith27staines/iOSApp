@@ -100,6 +100,7 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
     
     func onCompanyAndAssociationLoaded(workplace: Workplace?, association: AssociationJson?) {
         self.workplace = workplace
+        self.companyLogo = workplace?.companyJson.logo
         self.association = association
         if let host = host {
             onHostLoaded(host: host)
