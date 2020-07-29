@@ -8,8 +8,9 @@ public protocol SmallImageServiceProtocol {
 
 public class SmallImageService: SmallImageServiceProtocol {
     
-    static var session: URLSession = {
-        let config = URLSessionConfiguration.default
+    public static var session: URLSession = {
+        var config = URLSessionConfiguration.default
+        config.urlCache = URLCache(memoryCapacity: 4 * 1024 * 1024, diskCapacity: 20 * 1024 * 1024, diskPath: nil)
         let session = URLSession(configuration: config)
         return session
     }()

@@ -1,12 +1,6 @@
-//
-//  SelfLoadingImageView.swift
-//  WorkfinderUI
-//
-//  Created by Keith Dev on 03/09/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
-//
 
 import Foundation
+import WorkfinderServices
 
 public protocol ImageFetching: class {
     func getImage(url: URL, completion: @escaping ((UIImage?) -> Void))
@@ -70,7 +64,7 @@ public class F4SSelfLoadingImageView : UIImageView {
 
 public class ImageFetcher : ImageFetching {
     var cancelled: Bool = false
-    public let session = URLSession.init(configuration: URLSessionConfiguration.default)
+    public let session = SmallImageService.session
     var dataTask: URLSessionDataTask?
     
     public init() {}

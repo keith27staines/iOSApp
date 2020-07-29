@@ -30,7 +30,7 @@ class PicklistCell: UITableViewCell {
             label2.font = UIFont.systemFont(ofSize: 12, weight: .regular)
             label2.textColor = WorkfinderColors.primaryColor
         case false:
-            label2.font = UIFont.systemFont(ofSize: 8, weight: .semibold)
+            label2.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
             label2.textColor = UIColor.gray
         }
     }
