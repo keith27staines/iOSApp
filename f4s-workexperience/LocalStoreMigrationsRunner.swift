@@ -5,6 +5,7 @@ enum LocalStoreVersion: String {
     case unrecognised
     case v2_all     // any v2 (or v1) version migrates to v3_0_1
     case v3_0_1     // first v3 release to go live on appstore
+    case v3_1_0     // The "apply to project" release
     
     /*
      Need to add a new migration?

@@ -15,6 +15,10 @@ enum MigrationResult {
 }
 
 class MigratorBase: Migrator {
+    
+    enum MigrationError: Error {
+        case storeAtUnexpectedVersion
+    }
 
     let updatesFromStoreVersion: LocalStoreVersion
     let updatesToStoreVersion: LocalStoreVersion

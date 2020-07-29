@@ -95,6 +95,7 @@
 		FC62B35C2494C27100013CFF /* WorkfinderVersionCheck.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC62B35A2494C00500013CFF /* WorkfinderVersionCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC681C001F57473D0077BECA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFE1F57473D0077BECA /* Podfile */; };
 		FC681C011F57473D0077BECA /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFF1F57473D0077BECA /* Podfile.lock */; };
+		FC6C1CD824D1B359005E1936 /* Migrate_v303_to_v310.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6C1CD724D1B359005E1936 /* Migrate_v303_to_v310.swift */; };
 		FC72219F20FE248400F10953 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = FC72219B20FE248400F10953 /* Appfile */; };
 		FC7221A020FE248400F10953 /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = FC72219C20FE248400F10953 /* Fastfile */; };
 		FC771F502416294D00AD6317 /* ComanyFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771F4D2416294D00AD6317 /* ComanyFileParser.swift */; };
@@ -307,6 +308,7 @@
 		FC681BFF1F57473D0077BECA /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		FC69EBA724810F2D00901A2B /* WorkfinderDebugF4SLive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WorkfinderDebugF4SLive.entitlements; sourceTree = "<group>"; };
 		FC69EBE824813FF300901A2B /* WorkfinderVersionCheck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderVersionCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC6C1CD724D1B359005E1936 /* Migrate_v303_to_v310.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Migrate_v303_to_v310.swift; sourceTree = "<group>"; };
 		FC72219B20FE248400F10953 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
 		FC72219C20FE248400F10953 /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
 		FC771F4D2416294D00AD6317 /* ComanyFileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComanyFileParser.swift; sourceTree = "<group>"; };
@@ -841,6 +843,7 @@
 				FCCFC7CE224D2C110060F7EC /* LocalStoreMigrationsRunner.swift */,
 				FC5336772488CD0200DA3033 /* MigratorBase.swift */,
 				FC5336792488CD5000DA3033 /* Migrate_v2_to_v3.swift */,
+				FC6C1CD724D1B359005E1936 /* Migrate_v303_to_v310.swift */,
 			);
 			name = "Local store migrations";
 			sourceTree = "<group>";
@@ -1341,6 +1344,7 @@
 				FC31F095204D54C6009DD526 /* F4SDebugViewController.swift in Sources */,
 				40E78E581DD32964000A3776 /* Constants.swift in Sources */,
 				FCC1DF5B232505640074D5C1 /* CompanyCoordinatorFactory.swift in Sources */,
+				FC6C1CD824D1B359005E1936 /* Migrate_v303_to_v310.swift in Sources */,
 				FCE51E44221039D600DC1D50 /* PersonSearchDataGetter.swift in Sources */,
 				FC04B862233271FE0034A60E /* MasterBuilder.swift in Sources */,
 				FC50E9CE2213EF5400C9A621 /* SearchModeSelectorView.swift in Sources */,

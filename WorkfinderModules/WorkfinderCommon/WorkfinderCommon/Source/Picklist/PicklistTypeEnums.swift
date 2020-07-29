@@ -11,17 +11,17 @@ public enum ProviderType {
 public enum PicklistType: Int, CaseIterable, Codable {
     
     /* This is the order from current production release 3.0.3
-     case year
-     case subject
-     case institutions
-     case placementType
-     case project
-     case motivation
-     case availabilityPeriod
-     case duration
-     case experience
-     case attributes
-     case skills
+     0: case year
+     1: case subject
+     2: case institutions
+     3: case placementType
+     4: case project
+     5: case motivation
+     6: case availabilityPeriod
+     7: case duration
+     8: case experience
+     9: case attributes
+     10: case skills
      */
     
     case year
