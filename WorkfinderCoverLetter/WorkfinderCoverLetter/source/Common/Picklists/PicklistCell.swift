@@ -66,13 +66,13 @@ class PicklistCell: UITableViewCell {
     lazy var label1: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17)
-        label.numberOfLines = 1
+        label.numberOfLines = 0
         return label
     }()
     
     lazy var label2: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 1
+        label.numberOfLines = 0
         return label
     }()
     

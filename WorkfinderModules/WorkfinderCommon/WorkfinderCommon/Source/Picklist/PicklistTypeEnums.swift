@@ -110,14 +110,14 @@ public enum PicklistType: Int, CaseIterable, Codable {
     
     public var questionTitle: String {
         switch self {
-        case .skills:               return "What are your three best skills?"
+        case .skills:               return "What three skills would you like to develop?"
         case .attributes:           return "What are your three best attributes?"
-        case .institutions:         return "What university did you attend?"
+        case .institutions:         return "What is the name of your university?"
         case .year:                 return "What is your year of study?"
         case .motivation:           return "What is your motivation?"
         case .experience:           return "What is your relevant experience?"
         case .availabilityPeriod:   return "What is your availability?"
-        case .subject:              return "What is your subject of study?"
+        case .subject:              return "What is your discipline?"
         case .placementType:        return "What type of placement?"
         case .project:              return "What kind of project?"
         case .duration:             return "How long should the placement be?"
