@@ -29,6 +29,7 @@ public class LetterThenEditorFlow: CoverLetterFlow  {
     override func onCoverLetterTapEdit() {
         let presenter = LetterEditorPresenter(coordinator: self, logic: logic)
         let vc = LetterEditorViewController(presenter: presenter)
+        letterEditorViewController = vc
         navigationRouter.push(viewController: vc, animated: true)
     }
 
@@ -47,6 +48,7 @@ public class LetterThenEditorFlow: CoverLetterFlow  {
     
     override func onLetterEditorDidUpdate() {
         logic.picklistsDidUpdate()
+        letterEditorViewController?.refresh()
         coverLetterViewController?.refreshFromPresenter()
     }
     

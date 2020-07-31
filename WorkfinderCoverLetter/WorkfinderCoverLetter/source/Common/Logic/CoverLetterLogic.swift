@@ -169,18 +169,23 @@ class CoverLetterLogic {
             }),
             let availabilityStart = availabilityPicklist.selectedItems.first?.value,
             let availabilityEnd = availabilityPicklist.selectedItems.last?.value,
+            let startDate = Date.workfinderDateStringToDate(availabilityStart)?.startOfDay,
+            let endDate = Date.workfinderDateStringToDate(availabilityEnd)?.endOfDay,
             let durationPicklist = picklists.first(where: { (picklist) -> Bool in
                 picklist.type == .duration
             }),
             let duration = durationPicklist.selectedItems.first,
-            let lowerDuration = duration.range?.lower,
-            let upperDuration = duration.range?.upper,
-            let startDate = Date.workfinderDateStringToDate(availabilityStart)?.startOfDay,
-            let endDate = Date.workfinderDateStringToDate(availabilityEnd)?.endOfDay
+            let minimumDuration = duration.range?.lower
             else { return nil }
         
         let availabilityInterval = endDate.timeIntervalSince(startDate)
-        let durationInterval = Double(upperDuration - lowerDuration) * 7.0 * 24.0 * 3600.0
+        let durationInterval: Double
+        if let maximumDuration = duration.range?.upper {
+            durationInterval = Double(maximumDuration - minimumDuration) * 7.0 * 24.0 * 3600.0
+        } else {
+            durationInterval = Double(minimumDuration) * 7.0 * 24.0 * 3600.0
+        }
+        
         if durationInterval > availabilityInterval + 1 {
             durationPicklist.deselectAll()
             return WorkfinderError(errorType: .custom(title: "Inconsistent duration and availability", description: "Please choose a duration that fits within your availability"), attempting: "Consistency check")
