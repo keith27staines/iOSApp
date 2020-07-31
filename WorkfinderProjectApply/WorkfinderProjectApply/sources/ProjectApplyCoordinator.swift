@@ -123,6 +123,9 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
     
     func submitApplication(coverLetterText: String, picklistsDictionary: PicklistsDictionary) {
         guard let vc = modalVC, let view = vc.view else { return }
+        var picklistsDictionary = picklistsDictionary
+        picklistsDictionary[.availabilityPeriod] = nil
+        picklistsDictionary[.duration] = nil
         let messageHandler = vc.messageHandler
         messageHandler.showLoadingOverlay(view)
         placementService = PostPlacementService(networkConfig: injected.networkConfig)
