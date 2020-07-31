@@ -130,6 +130,12 @@ class CoverLetterLogic {
         }
     }
     
+    func allPicklists() -> [PicklistProtocol] {
+        var first = sortedCoverLetterPicklists()
+        first.append(contentsOf: additionalInformationPicklists())
+        return first
+    }
+    
     func sortedCoverLetterPicklists() -> [PicklistProtocol] {
         ([PicklistProtocol](picklistsReferencedByTemplate().values)).sorted(by: { (p1, p2) -> Bool in
             p1.type.rawValue < p2.type.rawValue

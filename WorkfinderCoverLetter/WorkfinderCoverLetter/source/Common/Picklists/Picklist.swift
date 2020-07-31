@@ -85,9 +85,6 @@ public class Picklist: PicklistProtocol {
                 self.items = responseBody.results
                 if self.items.count == 0 {
                     self.items = [
-                        PicklistItemJson(uuid: "hcv1", value: "Server failed to return pick list items again :("),
-                        PicklistItemJson(uuid: "hcv2", value: "I'm a smart iphone!"),
-                        PicklistItemJson(uuid: "hcv3", value: "I made this up")
                     ]
                 }
                 if self.type == .institutions {
