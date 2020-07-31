@@ -117,20 +117,7 @@ public class Picklist: PicklistProtocol {
         case .availabilityPeriod: return "(Please select your availability)"
         case .duration: return "(Please select your preferred duration)"
         case .attributes: return "(Please select up to three from our list)"
-        case .skills: return "(Please select up to three from our list)"
+        case .skills: return "(Choose up three employment skills you are hoping to acquire through this placement)"
         }
-        
-//        guard selectedItems.count > 0 else { return NSLocalizedString("Choose", comment: "") }
-//        switch maximumPicks {
-//        case 1: return NSLocalizedString("Selected", comment: "")
-//        default:
-//            switch type {
-//            case .availabilityPeriod:
-//                return NSLocalizedString("Selected", comment: "")
-//            default:
-//                return NSLocalizedString("\(selectedItems.count) selected", comment: "")
-//            }
-//
-//        }
     }
 }
