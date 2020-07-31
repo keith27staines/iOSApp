@@ -92,7 +92,7 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
                 completion(error)
                 return
             }
-            for picklist in self.logic.sortedCoverLetterPicklists() {
+            for picklist in self.logic.allPicklists() {
                 guard !picklist.isLoaded else { continue }
                 picklist.fetchItems { (picklist, result) in
                     switch result {

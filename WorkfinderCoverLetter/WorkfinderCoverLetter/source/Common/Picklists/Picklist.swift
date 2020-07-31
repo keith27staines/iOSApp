@@ -85,9 +85,6 @@ public class Picklist: PicklistProtocol {
                 self.items = responseBody.results
                 if self.items.count == 0 {
                     self.items = [
-                        PicklistItemJson(uuid: "hcv1", value: "Server failed to return pick list items again :("),
-                        PicklistItemJson(uuid: "hcv2", value: "I'm a smart iphone!"),
-                        PicklistItemJson(uuid: "hcv3", value: "I made this up")
                     ]
                 }
                 if self.type == .institutions {
@@ -117,20 +114,7 @@ public class Picklist: PicklistProtocol {
         case .availabilityPeriod: return "(Please select your availability)"
         case .duration: return "(Please select your preferred duration)"
         case .attributes: return "(Please select up to three from our list)"
-        case .skills: return "(Please select up to three from our list)"
+        case .skills: return "(Choose up three employment skills you are hoping to acquire through this placement)"
         }
-        
-//        guard selectedItems.count > 0 else { return NSLocalizedString("Choose", comment: "") }
-//        switch maximumPicks {
-//        case 1: return NSLocalizedString("Selected", comment: "")
-//        default:
-//            switch type {
-//            case .availabilityPeriod:
-//                return NSLocalizedString("Selected", comment: "")
-//            default:
-//                return NSLocalizedString("\(selectedItems.count) selected", comment: "")
-//            }
-//
-//        }
     }
 }
