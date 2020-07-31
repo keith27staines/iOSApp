@@ -180,10 +180,11 @@ class CoverLetterLogic {
         
         let availabilityInterval = endDate.timeIntervalSince(startDate)
         let durationInterval: Double
+        let secondsPerWeek = 7.0 * 24.0 * 3600.0
         if let maximumDuration = duration.range?.upper {
-            durationInterval = Double(maximumDuration - minimumDuration) * 7.0 * 24.0 * 3600.0
+            durationInterval = Double(maximumDuration - minimumDuration) * secondsPerWeek
         } else {
-            durationInterval = Double(minimumDuration) * 7.0 * 24.0 * 3600.0
+            durationInterval = Double(minimumDuration) * secondsPerWeek
         }
         
         if durationInterval > availabilityInterval + 1 {
