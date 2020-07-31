@@ -74,6 +74,7 @@ class CoverLetterLogic {
     }
     
     func updateLetterDisplayStrings() {
+        let _ = consistencyCheck()
         guard let renderer = renderer else { return }
         var fieldValues = [String: String]()
         allPicklistsDictionary.forEach { (keyValue) in
@@ -175,8 +176,8 @@ class CoverLetterLogic {
         let availabilityInterval = endDate.timeIntervalSince(startDate)
         let durationInterval = Double(upperDuration - lowerDuration) * 7.0 * 24.0 * 3600.0
         if durationInterval > availabilityInterval + 1 {
-            return WorkfinderError(errorType: .custom(title: "Inconsistent duration and availability", description: "Please choose a duration that fits within your availability"), attempting: "Consistency check")
             durationPicklist.deselectAll()
+            return WorkfinderError(errorType: .custom(title: "Inconsistent duration and availability", description: "Please choose a duration that fits within your availability"), attempting: "Consistency check")
         }
         return nil
     }
