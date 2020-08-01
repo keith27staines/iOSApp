@@ -1,23 +1,24 @@
 
 import WorkfinderCommon
 
-public protocol PicklistsStoreProtocol {
+protocol PicklistsStoreProtocol {
     var allPicklistsDictionary: PicklistsDictionary { get }
     func load() -> PicklistsDictionary
     func save()
 }
-public class PicklistsStore: PicklistsStoreProtocol {
+
+class PicklistsStore: PicklistsStoreProtocol {
     let networkConfig: NetworkConfig
     let localStore:LocalStorageProtocol
     
-    public init(networkConfig: NetworkConfig, localStore:LocalStorageProtocol) {
+    init(networkConfig: NetworkConfig, localStore:LocalStorageProtocol) {
         self.networkConfig = networkConfig
         self.localStore = localStore
     }
     
-    public var allPicklistsDictionary: PicklistsDictionary = [:]
+    var allPicklistsDictionary: PicklistsDictionary = [:]
     
-    public func load() -> PicklistsDictionary {
+    func load() -> PicklistsDictionary {
         let picklists = buildPicklists()
         let selectedItems = loadSelectedItems()
         assignSelectedValues(picklists: picklists, selectedItems: selectedItems)
@@ -36,7 +37,7 @@ public class PicklistsStore: PicklistsStoreProtocol {
         return items
     }
     
-    public func save() {
+    func save() {
         var items = [PicklistType:[PicklistItemJson]]()
         allPicklistsDictionary.forEach { (key, picklist) in
             items[key] = picklist.selectedItems

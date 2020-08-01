@@ -144,11 +144,19 @@ class ProjectPresenter: ProjectPresenterProtocol {
                 projectName: projectName ?? "project title unavailable"
             )
         case .projectBulletPoints:
+            var locationString: String = "n/a"
             switch indexPath.row {
             case 0:
+                if detail.project?.isRemote == true {
+                    locationString = "This is a remote project"
+                } else {
+                    if let city = detail.associationDetail?.location?.address_city {
+                        locationString = "The company is based in \(city)"
+                    }
+                }
                 return ProjectBulletPointsPresenter(
-                    title: "Location",
-                    text: "Where do I get this from?Where do I get this from?")
+                title: "Location",
+                text: locationString)
             case 1:
                 let isPaid = detail.project?.isPaid ?? false
                 let text = isPaid ? "This is a paid work placement at £6-8 p/h depending on age" : "This is an unpaid project"

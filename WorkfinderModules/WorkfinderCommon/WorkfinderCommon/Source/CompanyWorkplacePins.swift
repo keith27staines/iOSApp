@@ -120,11 +120,13 @@ public struct CompanyLocationJson: Codable {
     public var company: F4SUUID?
     public var uuid: String?
     public var address_postcode: String?
+    public var address_city: String?
     public var geometry: PointJson?
     private enum codingKeys: String, CodingKey {
         case uuid
         case company
         case address_postcode
+        case address_city
         case point
     }
     
