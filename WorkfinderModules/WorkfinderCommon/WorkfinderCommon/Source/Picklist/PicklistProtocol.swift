@@ -9,6 +9,7 @@ public protocol PicklistProtocol: AnyObject {
     var items: [PicklistItemJson] { get }
     var maximumPicks: Int { get }
     var selectedItems: [PicklistItemJson] { get }
+    var previousSelectedItemsBeforeDeselectAll: [PicklistItemJson] { get }
     var itemSelectedSummary: String { get }
     var isOtherSelected: Bool { get }
     func updateSelectedTextValue(_ text: String)

@@ -25,6 +25,7 @@ public class Picklist: PicklistProtocol {
     public var items: [PicklistItemJson]
     public private (set) var otherItem: PicklistItemJson?
     public private (set) var selectedItems: [PicklistItemJson]
+    public private (set) var previousSelectedItemsBeforeDeselectAll: [PicklistItemJson]
     public var provider: PicklistProviderProtocol?
     let networkConfig: NetworkConfig
     var filters = [URLQueryItem]()
@@ -52,6 +53,7 @@ public class Picklist: PicklistProtocol {
     }
     
     public func deselectAll() {
+        previousSelectedItemsBeforeDeselectAll = selectedItems
         selectedItems = []
     }
     
@@ -60,6 +62,7 @@ public class Picklist: PicklistProtocol {
         self.type = type
         self.items = []
         self.selectedItems = []
+        previousSelectedItemsBeforeDeselectAll = []
         self.maximumPicks = type.maxItems
         self.networkConfig = networkConfig
         self.provider = makeProvider()

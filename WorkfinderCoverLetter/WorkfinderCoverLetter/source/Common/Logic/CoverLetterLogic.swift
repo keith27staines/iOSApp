@@ -20,6 +20,7 @@ class CoverLetterLogic {
     lazy var allPicklistsDictionary: PicklistsDictionary = {
         let picklists = picklistsStore.load()
         nullifyOutofDateAvailability(picklists: picklists)
+        nullifyOutMotivationAndExperience(picklists: picklists)
         return picklists
     }()
     
@@ -194,10 +195,9 @@ class CoverLetterLogic {
         return nil
     }
     
-    private func loadPicklists() -> PicklistsDictionary {
-        let picklists = picklistsStore.load()
-        nullifyOutofDateAvailability(picklists: picklists)
-        return picklists
+    func nullifyOutMotivationAndExperience(picklists: PicklistsDictionary) {
+        picklists[.motivation]?.deselectAll()
+        picklists[.experience]?.deselectAll()
     }
     
     func nullifyOutofDateAvailability(picklists: PicklistsDictionary) {
