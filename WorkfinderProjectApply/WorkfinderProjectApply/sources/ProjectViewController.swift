@@ -48,7 +48,7 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
     }()
     
     lazy var applyNowButton: UIButton = {
-        let button = WorkfinderPrimaryButton()
+        let button = WorkfinderControls.makePrimaryButton()
         button.setTitle("APPLY NOW", for: .normal)
         button.addTarget(self, action: #selector(onTapApply), for: .touchUpInside)
         return button

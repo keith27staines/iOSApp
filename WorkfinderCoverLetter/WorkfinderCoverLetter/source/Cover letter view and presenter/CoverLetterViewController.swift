@@ -36,7 +36,7 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
     }()
     
     lazy var nextButton: UIButton = {
-        let button = WorkfinderPrimaryButton()
+        let button = WorkfinderControls.makePrimaryButton()
         button.setTitle("Next", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.addTarget(self, action: #selector(didTapPrimaryButton), for: .touchUpInside)

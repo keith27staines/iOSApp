@@ -28,7 +28,7 @@ class ForceAppUpdateViewController: UIViewController {
     }()
     
     lazy var updateButton: UIButton = {
-        let button = WorkfinderPrimaryButton()
+        let button = WorkfinderControls.makePrimaryButton()
         button.setTitle(NSLocalizedString("Update from the Appstore", comment: ""), for: .normal)
         button.addTarget(self, action: #selector(appStore), for: .touchUpInside)
         return button

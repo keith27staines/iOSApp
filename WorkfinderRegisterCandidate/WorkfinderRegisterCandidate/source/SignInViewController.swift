@@ -17,6 +17,7 @@ class SignInViewController: RegisterAndSignInBaseViewController {
         fieldStack.addArrangedSubview(passwordStack)
         email.textChanged?(self.presenter.email)
         password.textChanged?(self.presenter.password)
+        password.textfield.placeholder = "enter password"
         email.textfield.nextResponderField = password.textfield
         password.textfield.nextResponderField = email.textfield
         bottomStack.addArrangedSubview(forgotPasswordStack)

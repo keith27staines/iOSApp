@@ -277,7 +277,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     }()
     
     lazy var primaryButton: WorkfinderPrimaryButton = {
-        let button = WorkfinderPrimaryButton()
+        let button = WorkfinderControls.makePrimaryButton()
         button.addTarget(self, action: #selector(onPrimaryButtonTap), for: .touchUpInside)
         let registerTitle = self.mode.primaryActionButtonText
         button.setTitle(registerTitle, for: .normal)
@@ -408,7 +408,7 @@ extension RegisterAndSignInBaseViewController {
     }
     
     func makeSwitch(selector: Selector) -> UISwitch {
-        let control = UISwitch()
+        let control = WorkfinderControls.makeSwitch()
         control.isOn = false
         control.thumbTintColor = WorkfinderColors.primaryColor
         control.addTarget(self, action: selector, for: .valueChanged)

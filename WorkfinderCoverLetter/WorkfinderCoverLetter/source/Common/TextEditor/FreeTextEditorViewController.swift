@@ -12,8 +12,10 @@ class FreeTextEditorViewController: TextEditorViewController {
         placeholderTextView.text = freeTextPicker.type.textblockPlaceholder
         if freeTextPicker.selectedItems.count > 0 {
             textView.text = freeTextPicker.selectedItems[0].value ?? ""
-        } else {
+        } else if freeTextPicker.previousSelectedItemsBeforeDeselectAll.count > 0 {
             textView.text = freeTextPicker.previousSelectedItemsBeforeDeselectAll[0].value ?? ""
+        } else {
+            textView.text = ""
         }
         placeholderTextView.isHidden = !textView.text.isEmpty
     }

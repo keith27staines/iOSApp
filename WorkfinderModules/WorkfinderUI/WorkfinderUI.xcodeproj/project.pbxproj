@@ -45,6 +45,8 @@
 		FCA91EB12234065A007ED308 /* WorkfinderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91EB02234065A007ED308 /* WorkfinderUITests.swift */; };
 		FCA91EB32234065A007ED308 /* WorkfinderUI.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA91EA52234065A007ED308 /* WorkfinderUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCA91EBF223406B4007ED308 /* WorkfinderUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91EBE223406B4007ED308 /* WorkfinderUI.swift */; };
+		FCB307B324D6A0FF00C9E516 /* WorkfinderSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB307B224D6A0FF00C9E516 /* WorkfinderSwitch.swift */; };
+		FCB307B524D6A12E00C9E516 /* WorkfinderControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB307B424D6A12E00C9E516 /* WorkfinderControls.swift */; };
 		FCB4EAD22424D231001D5D23 /* TriangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB4EACF2424D231001D5D23 /* TriangleView.swift */; };
 		FCB4EAD32424D231001D5D23 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB4EAD02424D231001D5D23 /* RatingControl.swift */; };
 		FCB4EADA24253F36001D5D23 /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB4EAD924253F36001D5D23 /* StarRatingView.swift */; };
@@ -109,6 +111,8 @@
 		FCA91EB02234065A007ED308 /* WorkfinderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderUITests.swift; sourceTree = "<group>"; };
 		FCA91EB22234065A007ED308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCA91EBE223406B4007ED308 /* WorkfinderUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderUI.swift; sourceTree = "<group>"; };
+		FCB307B224D6A0FF00C9E516 /* WorkfinderSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderSwitch.swift; sourceTree = "<group>"; };
+		FCB307B424D6A12E00C9E516 /* WorkfinderControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderControls.swift; sourceTree = "<group>"; };
 		FCB4EACF2424D231001D5D23 /* TriangleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriangleView.swift; sourceTree = "<group>"; };
 		FCB4EAD02424D231001D5D23 /* RatingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		FCB4EAD924253F36001D5D23 /* StarRatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
@@ -174,6 +178,8 @@
 		FC6E42E2245588BA005E0D08 /* Workfinder controls */ = {
 			isa = PBXGroup;
 			children = (
+				FCB307B424D6A12E00C9E516 /* WorkfinderControls.swift */,
+				FCB307B224D6A0FF00C9E516 /* WorkfinderSwitch.swift */,
 				FC17E4982446F3FC00A58AEB /* WorkfinderPrimaryButton.swift */,
 				FCB4EAD924253F36001D5D23 /* StarRatingView.swift */,
 				FCB4EAD02424D231001D5D23 /* RatingControl.swift */,
@@ -412,6 +418,7 @@
 				FCEB1D25229FC6D600C6D2C2 /* UIView+Extensions.swift in Sources */,
 				FC93DC3A23200BC100F1CE23 /* NextResponderTextField.swift in Sources */,
 				FCA91EBF223406B4007ED308 /* WorkfinderUI.swift in Sources */,
+				FCB307B524D6A12E00C9E516 /* WorkfinderControls.swift in Sources */,
 				FC343D0024461A6900347BC2 /* UnderlinedNextResponderTextFieldStack.swift in Sources */,
 				FC22DBED22F979E90068C61C /* UIViewController+Extensions.swift in Sources */,
 				FC22F4F524B5E4290030924B /* UILabel+Extensions.swift in Sources */,
@@ -437,6 +444,7 @@
 				FCB4EAD32424D231001D5D23 /* RatingControl.swift in Sources */,
 				FC22DB9122F9764F0068C61C /* UIButton+Extensions.swift in Sources */,
 				FC403607246ABBC600F03A5B /* CompanyLogoView.swift in Sources */,
+				FCB307B324D6A0FF00C9E516 /* WorkfinderSwitch.swift in Sources */,
 				FC22DBF722F97CD70068C61C /* UIColor+Extensions.swift in Sources */,
 				FCA13FBD24BC469A0009C30F /* UIImageView+Extensions.swift in Sources */,
 				FCEB1D27229FC6DB00C6D2C2 /* UITableView+Extensions.swift in Sources */,
