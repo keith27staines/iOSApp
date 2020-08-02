@@ -21,8 +21,8 @@ class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
         return stack
     }()
     
-    let declineButton = WorkfinderSecondaryButton()
-    let acceptButton = WorkfinderPrimaryButton()
+    let declineButton = WorkfinderControls.makeSecondaryButton()
+    let acceptButton = WorkfinderControls.makePrimaryButton()
     
     lazy var acceptDeclineStack: UIStackView = {
         declineButton.addTarget(self, action: #selector(handleTapDecline), for: .touchUpInside)

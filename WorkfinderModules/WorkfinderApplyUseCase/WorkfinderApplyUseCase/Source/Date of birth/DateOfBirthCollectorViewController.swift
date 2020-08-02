@@ -101,7 +101,7 @@ class DateOfBirthCollectorViewController: UIViewController {
     var textField: UITextField { return dateFieldStack.textfield }
     
     lazy var nextButton: UIButton = {
-        let button = WorkfinderPrimaryButton()
+        let button = WorkfinderControls.makePrimaryButton()
         button.setTitle("Next", for: .normal)
         button.setContentHuggingPriority(UILayoutPriority.defaultLow, for: NSLayoutConstraint.Axis.horizontal)
         button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)

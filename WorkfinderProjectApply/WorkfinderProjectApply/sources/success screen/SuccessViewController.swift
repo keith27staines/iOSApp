@@ -74,7 +74,7 @@ class SuccessView: UIView {
     }()
     
     lazy var applicationsButton: UIButton = {
-        let button = WorkfinderPrimaryButton()
+        let button = WorkfinderControls.makePrimaryButton()
         button.setTitle(NSLocalizedString("Applications", comment: ""), for: .normal)
         button.addTarget(self, action: #selector(onLeftButtonTapped), for: .touchUpInside)
         button.setContentHuggingPriority(.defaultLow, for: .horizontal)
@@ -83,7 +83,7 @@ class SuccessView: UIView {
     }()
     
     lazy var searchButton: UIButton = {
-        let button = WorkfinderPrimaryButton()
+        let button = WorkfinderControls.makePrimaryButton()
         button.setTitle(NSLocalizedString("Search", comment: ""), for: .normal)
         button.addTarget(self, action: #selector(onRightButtonTapped), for: .touchUpInside)
         button.setContentHuggingPriority(.defaultLow, for: .horizontal)

@@ -57,7 +57,7 @@ class LoadingViewController: UIViewController {
     }()
     
     lazy var closeButton: UIView = {
-        let button = WorkfinderSecondaryButton()
+        let button = WorkfinderControls.makeSecondaryButton()
         button.setTitle("Cancel", for: .normal)
         button.addTarget(self, action: #selector(onCancel), for: .touchUpInside)
         return button

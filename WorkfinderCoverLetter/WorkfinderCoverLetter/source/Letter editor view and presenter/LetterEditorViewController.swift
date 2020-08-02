@@ -49,7 +49,7 @@ class LetterEditorViewController: UIViewController {
     }()
     
     lazy var updateLetterButton: UIButton = {
-        let button = WorkfinderPrimaryButton()
+        let button = WorkfinderControls.makePrimaryButton()
         button.setTitle("Update letter", for: .normal)
         button.addTarget(self, action: #selector(onTapPrimaryButton), for: .touchUpInside)
         return button

@@ -96,7 +96,7 @@ class CompanyMainView: UIView, CompanyMainViewProtocol, CompanyHostsSectionViewP
     }()
     
     lazy var applyButton: UIButton = {
-        let button = WorkfinderPrimaryButton()
+        let button = WorkfinderControls.makePrimaryButton()
         button.setTitle("Apply", for: .normal)
         button.alpha = 1.0
         button.isOpaque = true
