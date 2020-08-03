@@ -164,9 +164,12 @@ class ProjectPresenter: ProjectPresenterProtocol {
                     title: "Paid or unpaid?",
                     text: text)
             case 2:
+                let defaultText = "2 weeks"
+                var text = detail.project?.duration ?? defaultText
+                if text.isEmpty { text = defaultText }
                 return ProjectBulletPointsPresenter(
                     title: "Duration",
-                    text: detail.project?.duration ?? "not specified")
+                    text: text)
             default:
                 return nil
             }
