@@ -1,5 +1,7 @@
+
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 
 protocol OtherItemEditorProtocol: AnyObject {
     func edit(_ : PicklistItemJson)
@@ -32,10 +34,12 @@ class PicklistDataSourceAndDelegate: NSObject, UITableViewDataSource, UITableVie
         if item.uuid == "other" {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "other") as? OtherPicklistItemTableViewCell else { return UITableViewCell() }
             cell.configureWith(picklist.otherItem ?? item, picklist: picklist)
+            cell.tintColor = WorkfinderColors.primaryColor
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "standard") as? StandardPicklistItemTableViewCell else {return UITableViewCell() }
             cell.configureWith(item, picklist: picklist)
+            cell.tintColor = WorkfinderColors.primaryColor
             return cell
         }
     }

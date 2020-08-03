@@ -410,7 +410,6 @@ extension RegisterAndSignInBaseViewController {
     func makeSwitch(selector: Selector) -> UISwitch {
         let control = WorkfinderControls.makeSwitch()
         control.isOn = false
-        control.thumbTintColor = WorkfinderColors.primaryColor
         control.addTarget(self, action: selector, for: .valueChanged)
         control.setContentHuggingPriority(.required, for: .horizontal)
         return control
