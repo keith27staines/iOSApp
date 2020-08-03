@@ -33,11 +33,21 @@ public class SelfloadingImageView: UIView {
     
     let widthPoints: CGFloat
     
+    lazy var logoContainer: UIView = {
+        let view = UIView()
+        view.layer.masksToBounds = true
+        view.layer.backgroundColor = UIColor.white.cgColor
+        view.layer.borderColor = UIColor.init(netHex: 0xE5E5E5).cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 20
+        view.addSubview(logoView)
+        logoView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
+        return view
+    }()
+    
     lazy var logoView: F4SSelfLoadingImageView = {
         let logoView = F4SSelfLoadingImageView()
         logoView.layer.masksToBounds = true
-        logoView.layer.borderColor = UIColor.init(netHex: 0xE5E5E5).cgColor
-        logoView.layer.borderWidth = 1
         logoView.layer.cornerRadius = 10
         logoView.contentMode = .scaleAspectFit
         logoView.translatesAutoresizingMaskIntoConstraints = false
@@ -80,14 +90,14 @@ public class SelfloadingImageView: UIView {
         self.widthPoints = widthPoints
         self.defaultLogoName = defaultLogoName
         super.init(frame: CGRect.zero)
-        addSubview(logoView)
-        logoView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor).isActive = true
-        logoView.topAnchor.constraint(greaterThanOrEqualTo: topAnchor).isActive = true
-        logoView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        logoView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        logoView.widthAnchor.constraint(equalTo: logoView.heightAnchor).isActive = true
-        logoView.widthAnchor.constraint(equalToConstant: widthPoints).isActive = true
-        logoView.contentMode = .scaleAspectFit
+        logoContainer.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(logoContainer)
+        logoContainer.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor).isActive = true
+        logoContainer.topAnchor.constraint(greaterThanOrEqualTo: topAnchor).isActive = true
+        logoContainer.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        logoContainer.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        logoContainer.widthAnchor.constraint(equalTo: logoContainer.heightAnchor).isActive = true
+        logoContainer.widthAnchor.constraint(equalToConstant: widthPoints).isActive = true
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
