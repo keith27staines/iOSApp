@@ -92,7 +92,7 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
     @objc func onTapApply() { coordinator?.onTapApply() }
     
     lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
+        let layout = LeftAlignedFlowLayout() //UICollectionViewFlowLayout()
         let frame = CGRect(x: 0, y: 0, width: 360, height: 100)
         let view = UICollectionView(frame: frame, collectionViewLayout: layout)
         view.backgroundColor = UIColor.white
