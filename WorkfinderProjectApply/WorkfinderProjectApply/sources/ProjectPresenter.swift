@@ -73,12 +73,7 @@ class ProjectPresenter: ProjectPresenterProtocol {
     var companyName: String? { company?.name }
     var companyLogoUrl: String? { company?.logo }
     var skills: [String] { projectType?.skillsAcquired ?? [] }
-    private var activities: [String] {
-        guard let activities = projectType?.activities else { return [] }
-        return activities.compactMap { (uuidAndName) -> String? in
-            uuidAndName.name
-        }
-    }
+    private var activities: [String] { projectType?.candidateActivities ?? [] }
     
     init(coordinator: ProjectApplyCoordinator,
          projectUuid: F4SUUID,
@@ -141,7 +136,7 @@ class ProjectPresenter: ProjectPresenterProtocol {
         case .projectHeader:
             return ProjectHeaderPresenter(
                 companyName: companyName,
-                projectName: projectName ?? "project title unavailable"
+                projectName: projectName ?? ""
             )
         case .projectBulletPoints:
             var locationString: String = "n/a"

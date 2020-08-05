@@ -5,7 +5,8 @@ public struct ProjectTypeJson: Codable, Equatable {
     public var description: String?
     public var readMoreUrl: String?
     public var icon: String?
-    public var activities: [UUIDAndNameJson]?
+    //public var activities: [UUIDAndNameJson]?
+    public var candidateActivities: [String]?
     public var skillsAcquired: [String]?
     public var aboutCandidate: String?
 
@@ -15,7 +16,8 @@ public struct ProjectTypeJson: Codable, Equatable {
         case description
         case readMoreUrl = "read_more_url"
         case icon
-        case activities
+        //case activities
+        case candidateActivities = "candidate_activities"
         case skillsAcquired = "skills_acquired"
         case aboutCandidate = "about_candidate"
     }
