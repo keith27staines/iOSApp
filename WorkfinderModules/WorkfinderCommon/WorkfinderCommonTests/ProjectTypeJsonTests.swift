@@ -7,15 +7,9 @@ fileprivate let jsonString =
     \"description\": \"description\",
     \"read_more_url\": \"readMoreUrl\",
     \"icon\": \"icon\",
-    \"activities\": [
-        {
-            \"uuid\": \"activityUuid1\",
-            \"name\": \"activity1\"
-        },
-        {
-            \"uuid\": \"activityUuid2\",
-            \"name\": \"activity2\"
-        }
+    \"candidate_activities\": [
+        \"activity1\",
+        \"activity2\"
     ],
     \"skills_acquired\": [
         \"skill1\",
@@ -50,7 +44,7 @@ class ProjectTypeJsonTests: XCTestCase {
             description: "description",
             readMoreUrl: "readMoreUrl",
             icon: "icon",
-            activities: [UUIDAndNameJson(uuid: "activityUuid1", name: "activity1"),UUIDAndNameJson(uuid: "activityUuid2", name: "activity2")],
+            candidateActivities: ["activity1", "activity2"],
             skillsAcquired: ["skill1", "skill2"],
             aboutCandidate: "aboutCandidate")
     }
