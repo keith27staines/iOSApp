@@ -61,7 +61,7 @@ enum Style {
             return TextStyle(
                 size: 22,
                 weight: .light,
-                color: UIColor.init(white: 25/255, alpha: 1)
+                color: UIColor.init(white: 33/255, alpha: 1)
             )
         case .skillsSectionHeading:
             return TextStyle(
@@ -79,7 +79,7 @@ enum Style {
             return TextStyle(
                 size: 15,
                 weight: .regular,
-                color: UIColor.init(white: 0/255, alpha: 1)
+                color: UIColor.init(white: 33/255, alpha: 1)
             )
         case .hostRole:
             return TextStyle(
