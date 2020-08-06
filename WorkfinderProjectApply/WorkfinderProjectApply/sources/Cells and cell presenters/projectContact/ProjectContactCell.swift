@@ -11,6 +11,7 @@ class ProjectContactCell: PresentableCell {
         name.text = presenter.name
         title.text = presenter.title
         hostInformation.text = presenter.information
+        hostInformation.isHidden = hostInformation.text == nil || hostInformation.text?.isEmpty == true
         linkedInLink = presenter.linkedIn
         photo.load(hostName: presenter.name ?? "", urlString: presenter.photo, completion: nil)
     }
@@ -52,12 +53,19 @@ class ProjectContactCell: PresentableCell {
     }()
     
     lazy var nameAndTitleStack: UIStackView =  {
+        let spacer1 = UIView()
+        let spacer2 = UIView()
+        spacer1.translatesAutoresizingMaskIntoConstraints = false
+        spacer2.translatesAutoresizingMaskIntoConstraints = false
         let stack = UIStackView(arrangedSubviews: [
+            spacer1,
             name,
-            title
+            title,
+            spacer2
         ])
         stack.spacing = 4
-        stack.distribution = .fillEqually
+        spacer1.heightAnchor.constraint(equalTo: spacer2.heightAnchor).isActive = true
+        //stack.distribution = .fillEqually
         stack.axis = .vertical
         return stack
     }()
@@ -94,7 +102,7 @@ class ProjectContactCell: PresentableCell {
             linkedinStack
         ])
         stack.axis = .vertical
-        stack.spacing = 20
+        stack.spacing = 15
         stack.alignment = .leading
         return stack
     }()

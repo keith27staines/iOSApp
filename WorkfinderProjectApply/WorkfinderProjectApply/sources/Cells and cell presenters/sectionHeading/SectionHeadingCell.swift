@@ -18,6 +18,6 @@ class SectionHeadingCell: PresentableCell {
         super.configureViews()
         label.font = UIFont.systemFont(ofSize: 20, weight: .thin)
         contentView.addSubview(label)
-        label.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 30, left: 0, bottom: 10, right: 0))
+        label.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 0, bottom: 10, right: 0))
     }
 }
