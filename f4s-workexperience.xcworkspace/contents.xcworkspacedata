@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:WorkfinderDocumentUpload/WorkfinderDocumentUpload.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:WorkfinderRegisterCandidate/WorkfinderRegisterCandidate.xcodeproj">
    </FileRef>
    <FileRef

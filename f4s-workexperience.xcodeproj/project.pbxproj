@@ -96,6 +96,8 @@
 		FC681C001F57473D0077BECA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFE1F57473D0077BECA /* Podfile */; };
 		FC681C011F57473D0077BECA /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = FC681BFF1F57473D0077BECA /* Podfile.lock */; };
 		FC6C1CD824D1B359005E1936 /* Migrate_v303_to_v310.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6C1CD724D1B359005E1936 /* Migrate_v303_to_v310.swift */; };
+		FC70C9D624DC2A4A007DF84D /* WorkfinderDocumentUpload.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC70C9D524DC2A4A007DF84D /* WorkfinderDocumentUpload.framework */; };
+		FC70C9D724DC2A4A007DF84D /* WorkfinderDocumentUpload.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC70C9D524DC2A4A007DF84D /* WorkfinderDocumentUpload.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC72219F20FE248400F10953 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = FC72219B20FE248400F10953 /* Appfile */; };
 		FC7221A020FE248400F10953 /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = FC72219C20FE248400F10953 /* Fastfile */; };
 		FC771F502416294D00AD6317 /* ComanyFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771F4D2416294D00AD6317 /* ComanyFileParser.swift */; };
@@ -184,6 +186,7 @@
 				FCBA983E24506D8B00C3D2E6 /* WorkfinderAppLogic.framework in Embed Frameworks */,
 				FC06A19E24641C930023DE99 /* WorkfinderApplications.framework in Embed Frameworks */,
 				FC5DF50F24ACA22E0089E839 /* WorkfinderRecommendationsList.framework in Embed Frameworks */,
+				FC70C9D724DC2A4A007DF84D /* WorkfinderDocumentUpload.framework in Embed Frameworks */,
 				FCB4604324B53AA4001DAE2C /* KSGeometry.framework in Embed Frameworks */,
 				FCBA984024506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework in Embed Frameworks */,
 				FCB4604524B53AA4001DAE2C /* KSQuadTree.framework in Embed Frameworks */,
@@ -309,6 +312,7 @@
 		FC69EBA724810F2D00901A2B /* WorkfinderDebugF4SLive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WorkfinderDebugF4SLive.entitlements; sourceTree = "<group>"; };
 		FC69EBE824813FF300901A2B /* WorkfinderVersionCheck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderVersionCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC6C1CD724D1B359005E1936 /* Migrate_v303_to_v310.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Migrate_v303_to_v310.swift; sourceTree = "<group>"; };
+		FC70C9D524DC2A4A007DF84D /* WorkfinderDocumentUpload.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderDocumentUpload.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC72219B20FE248400F10953 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
 		FC72219C20FE248400F10953 /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
 		FC771F4D2416294D00AD6317 /* ComanyFileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComanyFileParser.swift; sourceTree = "<group>"; };
@@ -378,6 +382,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC7B63E424652FD2006AC0C6 /* AuthenticationServices.framework in Frameworks */,
+				FC70C9D624DC2A4A007DF84D /* WorkfinderDocumentUpload.framework in Frameworks */,
 				FC06A19D24641C930023DE99 /* WorkfinderApplications.framework in Frameworks */,
 				FC5DF50E24ACA22E0089E839 /* WorkfinderRecommendationsList.framework in Frameworks */,
 				FCBA983D24506D8B00C3D2E6 /* WorkfinderAppLogic.framework in Frameworks */,
@@ -580,6 +585,7 @@
 		74E1A74324CAFF4EF516E014 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC70C9D524DC2A4A007DF84D /* WorkfinderDocumentUpload.framework */,
 				FC15BD0524CBF96900339A35 /* WorkfinderRegisterCandidate.framework */,
 				FC18C5B424C1870B006D017D /* WorkfinderCoverLetter.framework */,
 				FCA1400024BC81C50009C30F /* WorkfinderProjectApply.framework */,
