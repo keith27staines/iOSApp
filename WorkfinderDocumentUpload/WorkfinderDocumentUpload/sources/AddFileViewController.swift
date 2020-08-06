@@ -41,6 +41,7 @@ class AddFileViewController: UIViewController, AddFileViewControllerProtocol {
         label.textColor = UIColor.init(white: 0.33, alpha: 1)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.setContentHuggingPriority(.required, for: .vertical)
         return label
     }()
     
@@ -49,6 +50,8 @@ class AddFileViewController: UIViewController, AddFileViewControllerProtocol {
         label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         label.textColor = UIColor.init(white: 0.33, alpha: 1)
         label.textAlignment = .center
+        label.numberOfLines = 0
+        label.setContentHuggingPriority(.required, for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -58,13 +61,16 @@ class AddFileViewController: UIViewController, AddFileViewControllerProtocol {
         label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         label.textColor = UIColor.init(white: 0.33, alpha: 1)
         label.textAlignment = .center
+        label.numberOfLines = 0
+        label.setContentHuggingPriority(.required, for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     lazy var addFileButton: UIButton = {
-        let button = WorkfinderControls.makePrimaryButton()
+        let button = WorkfinderControls.makeSecondaryButton()
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(addFileTapped), for: .touchUpInside)
         return button
     }()
     
@@ -73,11 +79,15 @@ class AddFileViewController: UIViewController, AddFileViewControllerProtocol {
         view.addSubview(self.progressView)
         progressView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         progressView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        progressView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        view.setContentHuggingPriority(.defaultLow, for: .vertical)
+        view.setContentHuggingPriority(.defaultLow, for: .horizontal)
         return view
     }()
     
     lazy var progressView: UILabel = {
         let progressView = UILabel()
+        progressView.translatesAutoresizingMaskIntoConstraints = false
         progressView.textAlignment = .center
         return progressView
     }()
@@ -85,12 +95,14 @@ class AddFileViewController: UIViewController, AddFileViewControllerProtocol {
     lazy var primaryButton: UIButton = {
         let button = WorkfinderControls.makePrimaryButton()
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(primaryTapped), for: .touchUpInside)
         return button
     }()
     
     lazy var secondaryButton: UIButton = {
         let button = WorkfinderControls.makeSecondaryButton()
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(secondaryTapped), for: .touchUpInside)
         return button
     }()
     
@@ -101,13 +113,21 @@ class AddFileViewController: UIViewController, AddFileViewControllerProtocol {
             self.primaryButton,
             self.secondaryButton
         ])
+        stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
-        stack.alignment = .center
+        stack.alignment = .fill
         stack.spacing = 16
         return stack
     }()
     
+    @objc func addFileTapped() { presenter.onAddTapped() }
+    
+    @objc func primaryTapped() { presenter.onPrimaryTapped() }
+    
+    @objc func secondaryTapped() { presenter.onSecondaryTapped() }
+    
     override func viewDidLoad() {
+        view.backgroundColor = UIColor.white
         configureViews()
         presenter.onViewDidLoad(view: self)
     }
@@ -121,7 +141,7 @@ class AddFileViewController: UIViewController, AddFileViewControllerProtocol {
         view.addSubview(lowerStack)
         imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         heading.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        heading.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 40).isActive = true
+        heading.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 35).isActive = true
         subheading1.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         subheading1.leadingAnchor.constraint(equalTo: heading.leadingAnchor).isActive = true
         subheading2.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -132,7 +152,7 @@ class AddFileViewController: UIViewController, AddFileViewControllerProtocol {
         subheading1.topAnchor.constraint(equalTo: heading.bottomAnchor, constant: 10).isActive = true
         subheading2.topAnchor.constraint(equalTo: subheading1.bottomAnchor, constant: 20).isActive = true
         lowerStack.topAnchor.constraint(equalTo: subheading2.bottomAnchor, constant: 30).isActive = true
-        lowerStack.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: 20).isActive = true
+        lowerStack.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -20).isActive = true
         lowerStack.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 20).isActive = true
     }
     

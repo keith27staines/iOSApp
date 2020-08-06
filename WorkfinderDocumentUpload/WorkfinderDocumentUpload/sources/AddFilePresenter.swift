@@ -20,13 +20,12 @@ class AddFilePresenter: AddFilePresenterProtocol {
         case uploadSucceeded
         case uploadFailed
 
-        var addButtonTitle: String { "UPLOAD (10MB LIMIT)" }
+        var addButtonTitle: String { "SELECT DOCUMENT (10MB LIMIT)  +" }
         
         var primaryButtonTitle: String {
             switch self {
-            case .selectionGood: return "SUBMIT"
-            case .uploadFailed: return "RETRY"
-            default: return "SUBMIT"
+            case .uploadFailed: return "RETRY UPLOAD"
+            default: return "UPLOAD"
             }
         }
         
@@ -72,7 +71,7 @@ class AddFilePresenter: AddFilePresenterProtocol {
     var view: AddFileViewControllerProtocol?
     let screenTitle: String = "Supporting documents"
     let heading: String = "Stand out from the crowd!"
-    let subheading1: String = "Add your CV or any supporting document to\nmake it easier for companies to choose you."
+    let subheading1: String = "Add your CV or any supporting document to make it easier for companies to choose you."
     let subheading2: String = "We accept one PDF or Word document only"
     var errorText: String = ""
     var percentage: Int?
@@ -85,7 +84,7 @@ class AddFilePresenter: AddFilePresenterProtocol {
             case .uploadSucceeded:
                 self.percentage = 100
             default:
-                self.percentage = 0
+                self.percentage = 50
             }
             view?.refresh()
         }

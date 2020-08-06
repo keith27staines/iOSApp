@@ -4,6 +4,7 @@ import WorkfinderCoordinators
 import WorkfinderServices
 import WorkfinderCoverLetter
 import WorkfinderAppLogic
+import WorkfinderDocumentUpload
 
 protocol ProjectApplyCoordinatorProtocol: AnyObject {
     func onCoverLetterWorkflowCancelled()
@@ -153,6 +154,12 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
     }
     
     func onApplicationSubmitted() {
+        let coordinator = DocumentUploadCoordinator(parent: self, navigationRouter: newNavigationRouter, inject: injected, delegate: self)
+        addChildCoordinator(coordinator)
+        coordinator.start()
+    }
+    
+    func showSuccess() {
         let vc = SuccessViewController(
             applicationsButtonTap: { [weak self] in
                 guard let self = self else { return }
@@ -180,5 +187,15 @@ extension ProjectApplyCoordinator: CoverLetterParentCoordinatorProtocol {
     }
     public func coverLetterCoordinatorDidComplete(coverLetterText: String, picklistsDictionary: PicklistsDictionary) {
         submitApplication(coverLetterText: coverLetterText, picklistsDictionary: picklistsDictionary)
+    }
+}
+
+extension ProjectApplyCoordinator: DocumentUploadCoordinatorParentProtocol {
+    public func onSkipDocumentUpload() {
+        showSuccess()
+    }
+    
+    public func onUploadComplete() {
+        showSuccess()
     }
 }
