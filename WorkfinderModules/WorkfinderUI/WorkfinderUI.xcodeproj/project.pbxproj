@@ -53,6 +53,7 @@
 		FCB4EAD32424D231001D5D23 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB4EAD02424D231001D5D23 /* RatingControl.swift */; };
 		FCB4EADA24253F36001D5D23 /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB4EAD924253F36001D5D23 /* StarRatingView.swift */; };
 		FCC1DF6523250C5A0074D5C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DF6423250C5A0074D5C1 /* Assets.xcassets */; };
+		FCCA71B624DD465A00614103 /* WorkfinderProgressMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA71B524DD465A00614103 /* WorkfinderProgressMeter.swift */; };
 		FCD4DCBA24877D62005CB380 /* HostLocationAssociationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD4DCB924877D62005CB380 /* HostLocationAssociationView.swift */; };
 		FCE8DB152320FCB100934E2F /* UIImage+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DB142320FCB100934E2F /* UIImage+extensions.swift */; };
 		FCEB1D25229FC6D600C6D2C2 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEB1D24229FC6D500C6D2C2 /* UIView+Extensions.swift */; };
@@ -121,6 +122,7 @@
 		FCB4EAD02424D231001D5D23 /* RatingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		FCB4EAD924253F36001D5D23 /* StarRatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		FCC1DF6423250C5A0074D5C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FCCA71B524DD465A00614103 /* WorkfinderProgressMeter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkfinderProgressMeter.swift; sourceTree = "<group>"; };
 		FCD4DCB924877D62005CB380 /* HostLocationAssociationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostLocationAssociationView.swift; sourceTree = "<group>"; };
 		FCE8DB142320FCB100934E2F /* UIImage+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extensions.swift"; sourceTree = "<group>"; };
 		FCEB1D24229FC6D500C6D2C2 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 		FC6E42E2245588BA005E0D08 /* Workfinder controls */ = {
 			isa = PBXGroup;
 			children = (
+				FCCA71B524DD465A00614103 /* WorkfinderProgressMeter.swift */,
 				FCB307B424D6A12E00C9E516 /* WorkfinderControls.swift */,
 				FCB307B224D6A0FF00C9E516 /* WorkfinderSwitch.swift */,
 				FC17E4982446F3FC00A58AEB /* WorkfinderPrimaryButton.swift */,
@@ -444,6 +447,7 @@
 				FC116B4E2284511E00146478 /* WebViewController.swift in Sources */,
 				FCE8DB152320FCB100934E2F /* UIImage+extensions.swift in Sources */,
 				FC6E42DF2455855D005E0D08 /* WorkfinderColors.swift in Sources */,
+				FCCA71B624DD465A00614103 /* WorkfinderProgressMeter.swift in Sources */,
 				FC9535A1231E448D00F4A9DA /* F4SSelfLoadingImageView.swift in Sources */,
 				FC22DBEB22F979750068C61C /* RGBA.swift in Sources */,
 				FC5DAAE1246EAC8700031AEA /* WorkfinderPresenterProtocol.swift in Sources */,

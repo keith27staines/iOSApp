@@ -22,8 +22,6 @@ class AddFileViewController: UIViewController, AddFileViewControllerProtocol {
         addFileButton.isEnabled = presenter.state.addButtonIsEnabled
         primaryButton.isEnabled = presenter.state.primaryButtonIsEnabled
         secondaryButton.isEnabled = presenter.state.secondaryButtonIsEnabled
-        progressView.isHidden = presenter.percentage == nil
-        progressView.text = String(presenter.percentage ?? 0)
     }
     
     lazy var imageView: UIImageView = {
@@ -76,20 +74,9 @@ class AddFileViewController: UIViewController, AddFileViewControllerProtocol {
     
     lazy var progressContainerView: UIView = {
         let view = UIView()
-        view.addSubview(self.progressView)
-        progressView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        progressView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        progressView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         view.setContentHuggingPriority(.defaultLow, for: .vertical)
         view.setContentHuggingPriority(.defaultLow, for: .horizontal)
         return view
-    }()
-    
-    lazy var progressView: UILabel = {
-        let progressView = UILabel()
-        progressView.translatesAutoresizingMaskIntoConstraints = false
-        progressView.textAlignment = .center
-        return progressView
     }()
     
     lazy var primaryButton: UIButton = {
@@ -120,7 +107,18 @@ class AddFileViewController: UIViewController, AddFileViewControllerProtocol {
         return stack
     }()
     
-    @objc func addFileTapped() { presenter.onAddTapped() }
+    @objc func addFileTapped() {
+        presenter.onAddTapped()
+        let picker = UIDocumentPickerViewController(
+            documentTypes: [
+                "com.adobe.pdf",
+                "com.microsoft.word.doc",
+                "org.openxmlformats.wordprocessingml.document"
+        ], in: .import)
+        picker.allowsMultipleSelection = false
+        picker.delegate = self
+        present(picker, animated: true)
+    }
     
     @objc func primaryTapped() { presenter.onPrimaryTapped() }
     
@@ -165,4 +163,19 @@ class AddFileViewController: UIViewController, AddFileViewControllerProtocol {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented")
     }
     
+}
+
+
+extension AddFileViewController: UIDocumentPickerDelegate {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        guard let url = urls.first else {
+            presenter.onAddCancelled()
+            return
+        }
+        presenter.onFileSelected(fileUrl: url)
+    }
+    
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        presenter.onAddCancelled()
+    }
 }

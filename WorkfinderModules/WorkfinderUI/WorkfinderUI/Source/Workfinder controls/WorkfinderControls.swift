@@ -18,4 +18,8 @@ public struct WorkfinderControls {
         switchControl.backgroundColor = UIColor.white
         return switchControl
     }
+    
+    public static func makeCircularProgressMeter() -> WorkfinderProgressMeter {
+        WorkfinderProgressMeter()
+    }
 }

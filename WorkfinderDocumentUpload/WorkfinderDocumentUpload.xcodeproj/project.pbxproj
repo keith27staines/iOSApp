@@ -15,10 +15,10 @@
 		FC70C9C624DC1769007DF84D /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC70C9C124DC1769007DF84D /* WorkfinderUI.framework */; };
 		FC70C9CC24DC17EC007DF84D /* DocumentUploadCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC70C9CB24DC17EC007DF84D /* DocumentUploadCoordinator.swift */; };
 		FC70C9CE24DC21FF007DF84D /* AddFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC70C9CD24DC21FF007DF84D /* AddFileViewController.swift */; };
-		FC70C9D024DC225E007DF84D /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC70C9CF24DC225E007DF84D /* ProgressViewController.swift */; };
-		FC70C9D224DC2543007DF84D /* ProgressMeterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC70C9D124DC2543007DF84D /* ProgressMeterView.swift */; };
+		FC70C9D024DC225E007DF84D /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC70C9CF24DC225E007DF84D /* UploadViewController.swift */; };
 		FC70C9D424DC281D007DF84D /* AddFilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC70C9D324DC281D007DF84D /* AddFilePresenter.swift */; };
 		FC70C9D924DC4884007DF84D /* DocumentUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC70C9D824DC4884007DF84D /* DocumentUploader.swift */; };
+		FCCA71B824DD759500614103 /* UploadPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA71B724DD759500614103 /* UploadPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,10 +43,10 @@
 		FC70C9C124DC1769007DF84D /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC70C9CB24DC17EC007DF84D /* DocumentUploadCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentUploadCoordinator.swift; sourceTree = "<group>"; };
 		FC70C9CD24DC21FF007DF84D /* AddFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFileViewController.swift; sourceTree = "<group>"; };
-		FC70C9CF24DC225E007DF84D /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
-		FC70C9D124DC2543007DF84D /* ProgressMeterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressMeterView.swift; sourceTree = "<group>"; };
+		FC70C9CF24DC225E007DF84D /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		FC70C9D324DC281D007DF84D /* AddFilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFilePresenter.swift; sourceTree = "<group>"; };
 		FC70C9D824DC4884007DF84D /* DocumentUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentUploader.swift; sourceTree = "<group>"; };
+		FCCA71B724DD759500614103 /* UploadPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,10 +123,10 @@
 			isa = PBXGroup;
 			children = (
 				FC70C9CB24DC17EC007DF84D /* DocumentUploadCoordinator.swift */,
+				FCCA71B724DD759500614103 /* UploadPresenter.swift */,
 				FC70C9CD24DC21FF007DF84D /* AddFileViewController.swift */,
 				FC70C9D324DC281D007DF84D /* AddFilePresenter.swift */,
-				FC70C9CF24DC225E007DF84D /* ProgressViewController.swift */,
-				FC70C9D124DC2543007DF84D /* ProgressMeterView.swift */,
+				FC70C9CF24DC225E007DF84D /* UploadViewController.swift */,
 				FC70C9D824DC4884007DF84D /* DocumentUploader.swift */,
 			);
 			path = sources;
@@ -250,12 +250,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC70C9D024DC225E007DF84D /* ProgressViewController.swift in Sources */,
+				FC70C9D024DC225E007DF84D /* UploadViewController.swift in Sources */,
 				FC70C9CE24DC21FF007DF84D /* AddFileViewController.swift in Sources */,
 				FC70C9D924DC4884007DF84D /* DocumentUploader.swift in Sources */,
+				FCCA71B824DD759500614103 /* UploadPresenter.swift in Sources */,
 				FC70C9CC24DC17EC007DF84D /* DocumentUploadCoordinator.swift in Sources */,
 				FC70C9D424DC281D007DF84D /* AddFilePresenter.swift in Sources */,
-				FC70C9D224DC2543007DF84D /* ProgressMeterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

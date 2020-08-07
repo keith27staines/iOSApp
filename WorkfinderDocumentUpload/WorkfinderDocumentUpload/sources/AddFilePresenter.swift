@@ -9,6 +9,8 @@ protocol AddFilePresenterProtocol {
 class AddFilePresenter: AddFilePresenterProtocol {
     
     var documentUploader = DocumentUploader()
+    var uploadBytes: Data?
+    var filename: String?
     
     enum State {
         case noSelection
@@ -16,7 +18,7 @@ class AddFilePresenter: AddFilePresenterProtocol {
         case selectionGood
         case selectionTooBig
         case selectionWrongType
-        case uploading(Int)
+        case uploading(Float)
         case uploadSucceeded
         case uploadFailed
 
@@ -24,7 +26,6 @@ class AddFilePresenter: AddFilePresenterProtocol {
         
         var primaryButtonTitle: String {
             switch self {
-            case .uploadFailed: return "RETRY UPLOAD"
             default: return "UPLOAD"
             }
         }
@@ -74,17 +75,17 @@ class AddFilePresenter: AddFilePresenterProtocol {
     let subheading1: String = "Add your CV or any supporting document to make it easier for companies to choose you."
     let subheading2: String = "We accept one PDF or Word document only"
     var errorText: String = ""
-    var percentage: Int?
+    var fractionComplete: Float?
     
     var state: State = .noSelection {
         didSet {
             switch state {
-            case .uploading(let percentage):
-                self.percentage = percentage
+            case .uploading(let fractionComplete):
+                self.fractionComplete = fractionComplete
             case .uploadSucceeded:
-                self.percentage = 100
+                self.fractionComplete = 1
             default:
-                self.percentage = 50
+                self.fractionComplete = 0
             }
             view?.refresh()
         }
@@ -99,6 +100,10 @@ class AddFilePresenter: AddFilePresenterProtocol {
         view.refresh()
     }
     
+    func onAddCancelled() {
+        state = .noSelection
+    }
+    
     func onAddTapped() {
         switch state {
         case .uploading, .uploadSucceeded:
@@ -111,25 +116,8 @@ class AddFilePresenter: AddFilePresenterProtocol {
     func onPrimaryTapped() {
         switch state {
         case .selectionGood, .uploadFailed:
-            documentUploader.uploadDocumentToURL(
-                "url",
-                progress: { [weak self] (result) in
-                    guard let self = self else { return }
-                    switch result {
-                    case .success(let percentage):
-                        self.state = .uploading(percentage)
-                    case .failure(_):
-                        self.state = .uploadFailed
-                    }
-                },
-                completion: { (optionalError) in
-                    if let _ = optionalError {
-                        self.errorText = "An error has occurred. Please retry."
-                    } else {
-                        self.state = .uploadFailed
-                    }
-                }
-            )
+            guard let filename = filename, let data = uploadBytes else { return }
+            coordinator?.upload(filename: filename, data: data)
         default:
             return
         }
@@ -139,7 +127,18 @@ class AddFilePresenter: AddFilePresenterProtocol {
         coordinator?.onSkip()
     }
     
-    func onGoodFileSelected(fileUrl: String) {
-        state = .selectionGood
+    func onFileSelected(fileUrl: URL) {
+        do {
+            filename = fileUrl.lastPathComponent
+            let data = try Data(contentsOf: fileUrl, options: .uncached)
+            if data.count > 10 * 1024 * 1024 {
+                state = .selectionTooBig
+                return
+            }
+            uploadBytes = data
+            state = .selectionGood
+        } catch {
+            state = .selectionWrongType
+        }
     }
 }

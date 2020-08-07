@@ -9,6 +9,8 @@ public protocol DocumentUploadCoordinatorParentProtocol: class {
 
 public class DocumentUploadCoordinator: CoreInjectionNavigationCoordinator {
     var delegate: DocumentUploadCoordinatorParentProtocol?
+    weak var addFileViewController: AddFileViewController?
+    weak var uploadViewController: UploadViewController?
     
     func onSkip() {
         delegate?.onSkipDocumentUpload()
@@ -16,6 +18,11 @@ public class DocumentUploadCoordinator: CoreInjectionNavigationCoordinator {
     
     func onUploadComplete() {
         delegate?.onUploadComplete()
+    }
+    
+    func onUploadCancelled() {
+        guard let addFileViewController = addFileViewController else { return }
+        navigationRouter.popToViewController(addFileViewController, animated: true)
     }
     
     public init(
@@ -31,6 +38,14 @@ public class DocumentUploadCoordinator: CoreInjectionNavigationCoordinator {
         let presenter = AddFilePresenter(coordinator: self)
         let vc = AddFileViewController(coordinator: self, presenter: presenter)
         navigationRouter.push(viewController: vc, animated: true)
+        addFileViewController = vc
+    }
+    
+    func upload(filename: String, data: Data) {
+        let presenter = UploadPresenter(coordinator: self, filename: filename, data: data)
+        let vc = UploadViewController(coordinator: self, presenter: presenter)
+        navigationRouter.present(vc, animated: true, completion: nil)
+        uploadViewController = vc
     }
     
     
