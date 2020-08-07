@@ -21,6 +21,10 @@ class UploadPresenter {
         self.view = view
     }
     
+    func onViewWillDisappear() {
+        uploader.cancel()
+    }
+    
     func upload(errorHandler: @escaping (Error) -> Void) {
         uploader.uploadDocument(
             to: "",

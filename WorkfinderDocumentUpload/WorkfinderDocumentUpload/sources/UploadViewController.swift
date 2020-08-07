@@ -16,8 +16,12 @@ class UploadViewController: UIViewController {
     }()
     
     override func viewDidAppear(_ animated: Bool) {
-        presenter.view = self
+        presenter.onViewDidAppear(view: self)
         upload()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        presenter.onViewWillDisappear()
     }
     
     func upload() {
@@ -40,6 +44,7 @@ class UploadViewController: UIViewController {
     }
     
     func configureViews() {
+        view.backgroundColor = UIColor.white
         view.addSubview(progressView)
         progressView.translatesAutoresizingMaskIntoConstraints = false
         progressView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
