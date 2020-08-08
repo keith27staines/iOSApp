@@ -17,6 +17,7 @@ public class DocumentUploadCoordinator: CoreInjectionNavigationCoordinator {
     }
     
     func onUploadComplete() {
+        navigationRouter.dismiss(animated: true, completion: nil)
         delegate?.onUploadComplete()
     }
     

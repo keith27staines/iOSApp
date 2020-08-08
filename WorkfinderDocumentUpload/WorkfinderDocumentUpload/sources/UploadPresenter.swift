@@ -6,6 +6,8 @@ class UploadPresenter {
     let data: Data
     weak var view: UploadViewController?
     var fractionComplete: CGFloat = 0
+    let actionLabelText = "Uploading file"
+    let adviceLabelText = "Please don’t close the app to avoid losing your upload and potentially your application"
     let uploader: DocumentUploader
     var error: Error?
     var coordinator: DocumentUploadCoordinator?
@@ -26,7 +28,7 @@ class UploadPresenter {
     }
     
     func upload(errorHandler: @escaping (Error) -> Void) {
-        uploader.uploadDocument(
+        uploader.upload(
             to: "",
             progress: { [weak self] (result) in
                 guard let self = self else { return }

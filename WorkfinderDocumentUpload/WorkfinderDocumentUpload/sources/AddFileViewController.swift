@@ -10,18 +10,24 @@ class AddFileViewController: UIViewController, AddFileViewControllerProtocol {
     
     let presenter: AddFilePresenter
     var coordinator: DocumentUploadCoordinator?
+    let warningColor = UIColor(red: 226, green: 16, blue: 79)
     
     func refresh() {
         title = presenter.screenTitle
         heading.text = presenter.heading
         subheading1.text = presenter.subheading1
         subheading2.text = presenter.subheading2
-        addFileButton.setTitle(presenter.state.addButtonTitle, for: .normal)
-        primaryButton.setTitle(presenter.state.primaryButtonTitle, for: .normal)
-        secondaryButton.setTitle(presenter.state.secondaryButtonTitle, for: .normal)
-        addFileButton.isEnabled = presenter.state.addButtonIsEnabled
-        primaryButton.isEnabled = presenter.state.primaryButtonIsEnabled
-        secondaryButton.isEnabled = presenter.state.secondaryButtonIsEnabled
+        let state = presenter.state
+        addFileButton.setTitle(state.addButtonTitle, for: .normal)
+        primaryButton.setTitle(state.primaryButtonTitle, for: .normal)
+        secondaryButton.setTitle(state.secondaryButtonTitle, for: .normal)
+        addFileButton.isEnabled = state.addButtonIsEnabled
+        primaryButton.isEnabled = state.primaryButtonIsEnabled
+        secondaryButton.isEnabled = state.secondaryButtonIsEnabled
+        warningLabel.text = state.errorText
+        let showWarning = !state.errorText.isEmpty
+        addFileButton.layer.borderColor = showWarning ? warningColor.cgColor : WorkfinderColors.primaryColor.cgColor
+        warningLabel.isHidden = !showWarning
     }
     
     lazy var imageView: UIImageView = {
@@ -65,11 +71,33 @@ class AddFileViewController: UIViewController, AddFileViewControllerProtocol {
         return label
     }()
     
+    lazy var addFileButtonStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+                addFileButton,
+                warningLabel
+            ]
+        )
+        stack.axis = .vertical
+        stack.spacing = 10
+        return stack
+    }()
+    
     lazy var addFileButton: UIButton = {
         let button = WorkfinderControls.makeSecondaryButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(addFileTapped), for: .touchUpInside)
         return button
+    }()
+    
+    lazy var warningLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        label.textColor = warningColor
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        label.setContentHuggingPriority(.required, for: .vertical)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     lazy var progressContainerView: UIView = {
@@ -95,7 +123,7 @@ class AddFileViewController: UIViewController, AddFileViewControllerProtocol {
     
     lazy var lowerStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
-            self.addFileButton,
+            self.addFileButtonStack,
             self.progressContainerView,
             self.primaryButton,
             self.secondaryButton
@@ -114,7 +142,9 @@ class AddFileViewController: UIViewController, AddFileViewControllerProtocol {
                 "com.adobe.pdf",
                 "com.microsoft.word.doc",
                 "org.openxmlformats.wordprocessingml.document"
-        ], in: .import)
+            ],
+            in: .import
+        )
         picker.allowsMultipleSelection = false
         picker.delegate = self
         present(picker, animated: true)

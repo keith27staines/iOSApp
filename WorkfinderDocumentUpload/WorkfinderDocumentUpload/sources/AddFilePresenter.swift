@@ -11,7 +11,7 @@ class AddFilePresenter: AddFilePresenterProtocol {
     var documentUploader = DocumentUploader()
     var uploadBytes: Data?
     var filename: String?
-    
+    let maxBytes = 10 * 1024 * 1024
     enum State {
         case noSelection
         case selecting
@@ -41,9 +41,8 @@ class AddFilePresenter: AddFilePresenterProtocol {
         
         var errorText: String {
             switch self {
-            case .selectionTooBig: return "The file is larger than 10MB, please select a smaller file."
-            case .selectionWrongType: return "The file must be a PDF or a Word document.\nPlease choose again."
-            case .uploadFailed: return "An error occurred. Please try again."
+            case .selectionTooBig: return "The file is larger than 10MB. Please select a smaller file."
+            case .selectionWrongType: return "Please choose a PDF or a Word document"
             default: return ""
             }
         }
@@ -74,7 +73,6 @@ class AddFilePresenter: AddFilePresenterProtocol {
     let heading: String = "Stand out from the crowd!"
     let subheading1: String = "Add your CV or any supporting document to make it easier for companies to choose you."
     let subheading2: String = "We accept one PDF or Word document only"
-    var errorText: String = ""
     var fractionComplete: Float?
     
     var state: State = .noSelection {
@@ -131,7 +129,7 @@ class AddFilePresenter: AddFilePresenterProtocol {
         do {
             filename = fileUrl.lastPathComponent
             let data = try Data(contentsOf: fileUrl, options: .uncached)
-            if data.count > 10 * 1024 * 1024 {
+            if data.count > maxBytes {
                 state = .selectionTooBig
                 return
             }
