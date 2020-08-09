@@ -3,15 +3,21 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderNetworking
 
-public protocol MutlipartFormUploadServiceDelegate {
-    func documentUploader(_ : MutlipartFormUploadService, didChangeState: DocumentUploadState)
+public protocol DocumentUploadServiceDelegate {
+    func documentUploader(_ : DocumentUploadService, didChangeState: DocumentUploadState)
 }
 
-public class MutlipartFormUploadService : NSObject {
+public protocol DocumentUploadServiceProtocol {
+    var delegate: DocumentUploadServiceDelegate? { get set }
+    var state: DocumentUploadState { get }
+    func beginUpload(name: String, fields: [String: String], fileBytes: Data, to url: URL)
+    func cancel()
+}
+
+public class DocumentUploadService : NSObject, DocumentUploadServiceProtocol {
     
-    public var delegate : MutlipartFormUploadServiceDelegate?
-    public static let sessionIdentifier = "MutlipartFormUploadService"
-    public let networkConfig: NetworkConfig
+    public var delegate : DocumentUploadServiceDelegate?
+    let networkConfig: NetworkConfig
     var task: URLSessionDataTask?
     
     public internal (set) var state: DocumentUploadState {
@@ -35,19 +41,20 @@ public class MutlipartFormUploadService : NSObject {
         super.init()
     }
     
-    func upload(name: String, fields: [String: String], fileBytes: Data, to url: URL) {
+    public func beginUpload(name: String, fields: [String: String], fileBytes: Data, to url: URL) {
         task?.cancel()
         buildTask(name: name, fields: fields, fileBytes: fileBytes, to: url)
         task?.resume()
     }
     
     func buildTask(name: String, fields: [String: String], fileBytes: Data, to url: URL) {
-        let form = MultipartForm(name: name, fields: fields, fileBytes: fileBytes)
+        let form = DocumentForm(name: name, fields: fields, fileBytes: fileBytes)
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.allHTTPHeaderFields = form.headers
         request.httpBody = form.data
-        task = session.dataTask(with: networkConfig.signedRequest(request))
+        let signedRequest = networkConfig.signedRequest(request)
+        task = session.dataTask(with: signedRequest)
     }
     
     public func cancel() {
@@ -56,7 +63,7 @@ public class MutlipartFormUploadService : NSObject {
     
 }
 
-extension MutlipartFormUploadService : URLSessionTaskDelegate, URLSessionDataDelegate {
+extension DocumentUploadService : URLSessionTaskDelegate, URLSessionDataDelegate {
     
     public func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
         state = .uploading(fraction: Float(totalBytesSent)/Float(totalBytesExpectedToSend))
@@ -77,18 +84,9 @@ extension MutlipartFormUploadService : URLSessionTaskDelegate, URLSessionDataDel
             state = .failed(error: error)
         }
     }
-    
-    public func urlSession(_ session: URLSession, taskIsWaitingForConnectivity task: URLSessionTask) {
-        
-    }
-    
-    public func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
-        
-    }
-
 }
 
-struct MultipartForm {
+struct DocumentForm {
     
     internal private (set) var data = Data()
     var boundary: String { return "Boundary-\(NSUUID().uuidString)" }
