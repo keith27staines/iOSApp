@@ -5,7 +5,6 @@ import WorkfinderServices
 import WorkfinderAppLogic
 import WorkfinderUI
 import WorkfinderCoordinators
-import WorkfinderDocumentUploadUseCase
 import WorkfinderUserDetailsUseCase
 import WorkfinderCoverLetter
 import WorkfinderRegisterCandidate

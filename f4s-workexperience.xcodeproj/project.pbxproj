@@ -135,8 +135,6 @@
 		FCBA984224506D8B00C3D2E6 /* WorkfinderCompanyDetailsUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983524506D8B00C3D2E6 /* WorkfinderCompanyDetailsUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCBA984324506D8B00C3D2E6 /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983624506D8B00C3D2E6 /* WorkfinderCoordinators.framework */; };
 		FCBA984424506D8B00C3D2E6 /* WorkfinderCoordinators.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983624506D8B00C3D2E6 /* WorkfinderCoordinators.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FCBA984524506D8B00C3D2E6 /* WorkfinderDocumentUploadUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983724506D8B00C3D2E6 /* WorkfinderDocumentUploadUseCase.framework */; };
-		FCBA984624506D8B00C3D2E6 /* WorkfinderDocumentUploadUseCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983724506D8B00C3D2E6 /* WorkfinderDocumentUploadUseCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCBA984724506D8B00C3D2E6 /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983824506D8B00C3D2E6 /* WorkfinderNetworking.framework */; };
 		FCBA984824506D8C00C3D2E6 /* WorkfinderNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983824506D8B00C3D2E6 /* WorkfinderNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCBA984924506D8C00C3D2E6 /* WorkfinderOnboardingUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983924506D8B00C3D2E6 /* WorkfinderOnboardingUseCase.framework */; };
@@ -196,7 +194,6 @@
 				FCA1400224BC81C50009C30F /* WorkfinderProjectApply.framework in Embed Frameworks */,
 				FCBA984224506D8B00C3D2E6 /* WorkfinderCompanyDetailsUseCase.framework in Embed Frameworks */,
 				FC15BD0724CBF96900339A35 /* WorkfinderRegisterCandidate.framework in Embed Frameworks */,
-				FCBA984624506D8B00C3D2E6 /* WorkfinderDocumentUploadUseCase.framework in Embed Frameworks */,
 				FCBA984824506D8C00C3D2E6 /* WorkfinderNetworking.framework in Embed Frameworks */,
 				FCBA984A24506D8C00C3D2E6 /* WorkfinderOnboardingUseCase.framework in Embed Frameworks */,
 				FCBA984C24506D8C00C3D2E6 /* WorkfinderServices.framework in Embed Frameworks */,
@@ -393,7 +390,6 @@
 				FC56A0F02455B62B00A7EC3F /* WorkfinderCommon.framework in Frameworks */,
 				FCBA984124506D8B00C3D2E6 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */,
 				FCBA984324506D8B00C3D2E6 /* WorkfinderCoordinators.framework in Frameworks */,
-				FCBA984524506D8B00C3D2E6 /* WorkfinderDocumentUploadUseCase.framework in Frameworks */,
 				FCBA984724506D8B00C3D2E6 /* WorkfinderNetworking.framework in Frameworks */,
 				FCBA984924506D8C00C3D2E6 /* WorkfinderOnboardingUseCase.framework in Frameworks */,
 				FCBA984B24506D8C00C3D2E6 /* WorkfinderServices.framework in Frameworks */,
