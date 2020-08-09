@@ -1,11 +1,10 @@
 import Foundation
 
 public enum DocumentUploadState {
-    case waiting
+    case preparing
     case uploading(fraction: Float)
     case completed
     case cancelled
-    case paused(fraction: Float)
     case failed(error: Error)
 }
 
