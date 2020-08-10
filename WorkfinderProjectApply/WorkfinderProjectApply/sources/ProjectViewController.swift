@@ -1,5 +1,6 @@
 
 import UIKit
+import WorkfinderCommon
 import WorkfinderUI
 
 protocol ProjectViewProtocol: AnyObject {
@@ -65,10 +66,15 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
         messageHandler.showLoadingOverlay(self.view)
         presenter.loadData { [weak self] (optionalError) in
             guard let self = self else { return }
-            self.messageHandler.hideLoadingOverlay()
-            self.messageHandler.displayOptionalErrorIfNotNil(optionalError) {
-                self.loadData()
-            }
+            self.coordinator?.handleOptionalError(
+                optionalError,
+                messageHandler: self.messageHandler,
+                cancel: {
+                    return
+                },
+                retry: {
+                    self.loadData()
+            })
             self.refreshFromPresenter()
         }
     }

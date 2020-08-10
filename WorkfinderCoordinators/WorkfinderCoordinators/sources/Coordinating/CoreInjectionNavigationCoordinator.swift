@@ -2,7 +2,6 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderUI
 
-/// A suitable base class for coordinators representing tabs on a tabbar
 open class CoreInjectionNavigationCoordinator : NavigationCoordinator {
     public let injected: CoreInjectionProtocol
     var log: F4SAnalyticsAndDebugging { return injected.log }
@@ -24,7 +23,6 @@ open class CoreInjectionNavigationCoordinator : NavigationCoordinator {
         case .inBrowser:
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
-
     }
 }
 

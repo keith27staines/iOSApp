@@ -44,6 +44,7 @@
 		FCADF0E724BDDA2A0040F79D /* AssociationFullDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCADF0E624BDDA2A0040F79D /* AssociationFullDetailService.swift */; };
 		FCADF0E924BDEB880040F79D /* ProjectAndAssociationDetailsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCADF0E824BDEB880040F79D /* ProjectAndAssociationDetailsService.swift */; };
 		FCADF0EB24BDEBE10040F79D /* ProjectAndAssociationDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCADF0EA24BDEBE10040F79D /* ProjectAndAssociationDetail.swift */; };
+		FCAEEBBC24E17F9800D6B579 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAEEBBB24E17F9800D6B579 /* ErrorHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,7 @@
 		FCADF0E624BDDA2A0040F79D /* AssociationFullDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationFullDetailService.swift; sourceTree = "<group>"; };
 		FCADF0E824BDEB880040F79D /* ProjectAndAssociationDetailsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectAndAssociationDetailsService.swift; sourceTree = "<group>"; };
 		FCADF0EA24BDEBE10040F79D /* ProjectAndAssociationDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectAndAssociationDetail.swift; sourceTree = "<group>"; };
+		FCAEEBBB24E17F9800D6B579 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 				FC15D78224C4597000543E6F /* Cells and cell presenters */,
 				FC48066924C8091000018C10 /* success screen */,
 				FC15D78324C459AB00543E6F /* Logic */,
+				FCAEEBBB24E17F9800D6B579 /* ErrorHandler.swift */,
 			);
 			path = sources;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC0A7CE824BC8E5300E02199 /* ProjectViewController.swift in Sources */,
+				FCAEEBBC24E17F9800D6B579 /* ErrorHandler.swift in Sources */,
 				FC9B677224C4648E0091A556 /* ProjectContactCell.swift in Sources */,
 				FC15D79324C45CA300543E6F /* AboutPresenter.swift in Sources */,
 				FCADF0EB24BDEBE10040F79D /* ProjectAndAssociationDetail.swift in Sources */,
