@@ -13,6 +13,8 @@
 		FCAEEBE324E18AE900D6B579 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCAEEBE224E18AE900D6B579 /* WorkfinderCommon.framework */; };
 		FCAEEBE724E18AF300D6B579 /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCAEEBE624E18AF300D6B579 /* WorkfinderCoordinators.framework */; };
 		FCAEEBEA24E18AFF00D6B579 /* WorkfinderRegisterCandidate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCAEEBE924E18AFF00D6B579 /* WorkfinderRegisterCandidate.framework */; };
+		FCAEEBFD24E18BCD00D6B579 /* ErrorHandlingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAEEBFC24E18BCD00D6B579 /* ErrorHandlingCoordinator.swift */; };
+		FCAEEC0324E1902500D6B579 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCAEEC0224E1902400D6B579 /* WorkfinderUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +37,9 @@
 		FCAEEBE224E18AE900D6B579 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCAEEBE624E18AF300D6B579 /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCAEEBE924E18AFF00D6B579 /* WorkfinderRegisterCandidate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderRegisterCandidate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCAEEBFC24E18BCD00D6B579 /* ErrorHandlingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandlingCoordinator.swift; sourceTree = "<group>"; };
+		FCAEEBFE24E18FD300D6B579 /* WorkfinderRegisterCandidate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderRegisterCandidate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCAEEC0224E1902400D6B579 /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCAEEC0324E1902500D6B579 /* WorkfinderUI.framework in Frameworks */,
 				FCAEEBE724E18AF300D6B579 /* WorkfinderCoordinators.framework in Frameworks */,
 				FCAEEBE324E18AE900D6B579 /* WorkfinderCommon.framework in Frameworks */,
 				FCAEEBEA24E18AFF00D6B579 /* WorkfinderRegisterCandidate.framework in Frameworks */,
@@ -83,6 +89,7 @@
 			children = (
 				FCAEEBCA24E18AC200D6B579 /* ErrorHandlingUI.h */,
 				FCAEEBCB24E18AC200D6B579 /* Info.plist */,
+				FCAEEBFC24E18BCD00D6B579 /* ErrorHandlingCoordinator.swift */,
 			);
 			path = ErrorHandlingUI;
 			sourceTree = "<group>";
@@ -99,6 +106,8 @@
 		FCAEEBE124E18AE800D6B579 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCAEEC0224E1902400D6B579 /* WorkfinderUI.framework */,
+				FCAEEBFE24E18FD300D6B579 /* WorkfinderRegisterCandidate.framework */,
 				FCAEEBE924E18AFF00D6B579 /* WorkfinderRegisterCandidate.framework */,
 				FCAEEBE624E18AF300D6B579 /* WorkfinderCoordinators.framework */,
 				FCAEEBE224E18AE900D6B579 /* WorkfinderCommon.framework */,
@@ -168,6 +177,7 @@
 				TargetAttributes = {
 					FCAEEBC624E18AC200D6B579 = {
 						CreatedOnToolsVersion = 11.6;
+						LastSwiftMigration = 1160;
 					};
 					FCAEEBCF24E18AC200D6B579 = {
 						CreatedOnToolsVersion = 11.6;
@@ -215,6 +225,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCAEEBFD24E18BCD00D6B579 /* ErrorHandlingCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,6 +371,7 @@
 		FCAEEBDC24E18AC200D6B579 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
@@ -377,6 +389,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -385,6 +398,7 @@
 		FCAEEBDD24E18AC200D6B579 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
@@ -410,6 +424,7 @@
 		FCAEEBDF24E18AC200D6B579 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = ErrorHandlingUITests/Info.plist;
@@ -428,6 +443,7 @@
 		FCAEEBE024E18AC200D6B579 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = ErrorHandlingUITests/Info.plist;
@@ -509,6 +525,7 @@
 		FCAEEBED24E18B1000D6B579 /* DebugF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
@@ -526,6 +543,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -534,6 +552,7 @@
 		FCAEEBEE24E18B1000D6B579 /* DebugF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = ErrorHandlingUITests/Info.plist;
@@ -615,6 +634,7 @@
 		FCAEEBF024E18B1D00D6B579 /* DebugF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
@@ -632,6 +652,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -640,6 +661,7 @@
 		FCAEEBF124E18B1D00D6B579 /* DebugF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = ErrorHandlingUITests/Info.plist;
@@ -715,6 +737,7 @@
 		FCAEEBF324E18B2500D6B579 /* ReleaseF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
@@ -740,6 +763,7 @@
 		FCAEEBF424E18B2500D6B579 /* ReleaseF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = ErrorHandlingUITests/Info.plist;
@@ -815,6 +839,7 @@
 		FCAEEBF624E18B2D00D6B579 /* ReleaseF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
@@ -840,6 +865,7 @@
 		FCAEEBF724E18B2D00D6B579 /* ReleaseF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = ErrorHandlingUITests/Info.plist;

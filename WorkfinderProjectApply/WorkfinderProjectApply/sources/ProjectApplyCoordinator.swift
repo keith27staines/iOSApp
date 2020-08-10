@@ -5,8 +5,10 @@ import WorkfinderServices
 import WorkfinderCoverLetter
 import WorkfinderAppLogic
 import WorkfinderDocumentUpload
+import WorkfinderUI
+import ErrorHandlingUI
 
-protocol ProjectApplyCoordinatorProtocol: AnyObject {
+protocol ProjectApplyCoordinatorProtocol: ErrorHandlerProtocol {
     func onCoverLetterWorkflowCancelled()
     func onModalFinished()
     func onTapApply()
@@ -28,6 +30,7 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
     weak var successViewController: UIViewController?
     var placementService: PostPlacementServiceProtocol?
     var delegate: ProjectApplyCoordinatorDelegate?
+    var errorHandler: ErrorHandlerProtocol?
     
     public init(
         parent: ProjectApplyCoordinatorDelegate?,
@@ -107,6 +110,13 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
 }
 
 extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
+    
+    public func handle(_ error: Error?, userRepository: UserRepositoryProtocol, messageHandler: UserMessageHandler, cancel: @escaping (() -> Void), retry: @escaping (() -> Void)) {
+        errorHandler = ErrorHandler()
+        errorHandler?.handle(error, userRepository: <#T##UserRepositoryProtocol#>, messageHandler: <#T##UserMessageHandler#>, cancel: <#T##(() -> Void)##(() -> Void)##() -> Void#>, retry: <#T##(() -> Void)##(() -> Void)##() -> Void#>)
+        
+    }
+    
     
     func onTapApply() {
         startCoverLetterFlow()

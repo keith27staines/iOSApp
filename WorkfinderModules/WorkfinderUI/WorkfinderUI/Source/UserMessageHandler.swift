@@ -1,8 +1,6 @@
 import WorkfinderCommon
 import UIKit
 
-//public let sharedUserMessageHandler = UserMessageHandler()
-
 public protocol UserMessagePresenting: AnyObject {
     var messageHandler: UserMessageHandler { get }
     func present(_ viewControllerToPresent: UIViewController, animated: Bool, completion: (() -> Void)?)
