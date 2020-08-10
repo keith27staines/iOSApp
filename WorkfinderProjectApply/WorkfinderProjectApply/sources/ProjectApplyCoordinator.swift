@@ -71,23 +71,12 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
             let hostName = associationDetail?.host?.displayName
             else { return }
         
-        guard
-            let dobString = candidate.dateOfBirth,
-            let _ = Date.workfinderDateStringToDate(dobString)
-            else {
-            showAlert(
-                title: "Cannot Apply",
-                message: "We need to know your name and other details before you can apply",
-                buttonTitle: "Cancel"
-            )
-            return
-        }
         let coordinator = CoverLetterFlowFactory.makeFlow(
             type: .projectApplication,
             parent: self,
             navigationRouter: newNavigationRouter,
             inject: injected,
-            candidateAge: candidate.age() ?? 0,
+            candidateAge: candidate.age() ?? 18,
             candidateName: candidate.fullName,
             isProject: true,
             projectTitle: projectTitle,
