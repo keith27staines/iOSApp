@@ -116,7 +116,7 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
     }
     
     lazy var collectionView: UICollectionView = {
-        let layout = LeftAlignedFlowLayout() //UICollectionViewFlowLayout()
+        let layout = LeftAlignedFlowLayout()
         let frame = CGRect(x: 0, y: 0, width: 360, height: 100)
         let view = UICollectionView(frame: frame, collectionViewLayout: layout)
         view.backgroundColor = UIColor.white
