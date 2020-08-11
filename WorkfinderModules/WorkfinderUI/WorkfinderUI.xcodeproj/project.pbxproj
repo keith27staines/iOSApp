@@ -24,6 +24,7 @@
 		FC22DBF522F97ADC0068C61C /* LoadingOverlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBF422F97ADC0068C61C /* LoadingOverlayTests.swift */; };
 		FC22DBF722F97CD70068C61C /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22DBF622F97CD70068C61C /* UIColor+Extensions.swift */; };
 		FC22F4F524B5E4290030924B /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC22F4F424B5E4290030924B /* UILabel+Extensions.swift */; };
+		FC2E24F324E2880300B71DDA /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2E24F224E2880300B71DDA /* NavigationRouter.swift */; };
 		FC343CFE2446141700347BC2 /* UnderlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC343CFD2446141700347BC2 /* UnderlineView.swift */; };
 		FC343D0024461A6900347BC2 /* UnderlinedNextResponderTextFieldStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC343CFF24461A6900347BC2 /* UnderlinedNextResponderTextFieldStack.swift */; };
 		FC403607246ABBC600F03A5B /* CompanyLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC403606246ABBC600F03A5B /* CompanyLogoView.swift */; };
@@ -47,12 +48,14 @@
 		FCA91EB12234065A007ED308 /* WorkfinderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91EB02234065A007ED308 /* WorkfinderUITests.swift */; };
 		FCA91EB32234065A007ED308 /* WorkfinderUI.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA91EA52234065A007ED308 /* WorkfinderUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCA91EBF223406B4007ED308 /* WorkfinderUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA91EBE223406B4007ED308 /* WorkfinderUI.swift */; };
+		FCAEEC0924E195AA00D6B579 /* ErrorHandlingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAEEC0824E195AA00D6B579 /* ErrorHandlingProtocol.swift */; };
 		FCB307B324D6A0FF00C9E516 /* WorkfinderSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB307B224D6A0FF00C9E516 /* WorkfinderSwitch.swift */; };
 		FCB307B524D6A12E00C9E516 /* WorkfinderControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB307B424D6A12E00C9E516 /* WorkfinderControls.swift */; };
 		FCB4EAD22424D231001D5D23 /* TriangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB4EACF2424D231001D5D23 /* TriangleView.swift */; };
 		FCB4EAD32424D231001D5D23 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB4EAD02424D231001D5D23 /* RatingControl.swift */; };
 		FCB4EADA24253F36001D5D23 /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB4EAD924253F36001D5D23 /* StarRatingView.swift */; };
 		FCC1DF6523250C5A0074D5C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DF6423250C5A0074D5C1 /* Assets.xcassets */; };
+		FCCA71B624DD465A00614103 /* WorkfinderProgressMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA71B524DD465A00614103 /* WorkfinderProgressMeter.swift */; };
 		FCD4DCBA24877D62005CB380 /* HostLocationAssociationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD4DCB924877D62005CB380 /* HostLocationAssociationView.swift */; };
 		FCE8DB152320FCB100934E2F /* UIImage+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DB142320FCB100934E2F /* UIImage+extensions.swift */; };
 		FCEB1D25229FC6D600C6D2C2 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEB1D24229FC6D500C6D2C2 /* UIView+Extensions.swift */; };
@@ -88,6 +91,7 @@
 		FC22DBF422F97ADC0068C61C /* LoadingOverlayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingOverlayTests.swift; sourceTree = "<group>"; };
 		FC22DBF622F97CD70068C61C /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		FC22F4F424B5E4290030924B /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
+		FC2E24F224E2880300B71DDA /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		FC343CFD2446141700347BC2 /* UnderlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineView.swift; sourceTree = "<group>"; };
 		FC343CFF24461A6900347BC2 /* UnderlinedNextResponderTextFieldStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedNextResponderTextFieldStack.swift; sourceTree = "<group>"; };
 		FC403606246ABBC600F03A5B /* CompanyLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyLogoView.swift; sourceTree = "<group>"; };
@@ -115,12 +119,14 @@
 		FCA91EB02234065A007ED308 /* WorkfinderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderUITests.swift; sourceTree = "<group>"; };
 		FCA91EB22234065A007ED308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCA91EBE223406B4007ED308 /* WorkfinderUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderUI.swift; sourceTree = "<group>"; };
+		FCAEEC0824E195AA00D6B579 /* ErrorHandlingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandlingProtocol.swift; sourceTree = "<group>"; };
 		FCB307B224D6A0FF00C9E516 /* WorkfinderSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderSwitch.swift; sourceTree = "<group>"; };
 		FCB307B424D6A12E00C9E516 /* WorkfinderControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderControls.swift; sourceTree = "<group>"; };
 		FCB4EACF2424D231001D5D23 /* TriangleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriangleView.swift; sourceTree = "<group>"; };
 		FCB4EAD02424D231001D5D23 /* RatingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		FCB4EAD924253F36001D5D23 /* StarRatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		FCC1DF6423250C5A0074D5C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FCCA71B524DD465A00614103 /* WorkfinderProgressMeter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkfinderProgressMeter.swift; sourceTree = "<group>"; };
 		FCD4DCB924877D62005CB380 /* HostLocationAssociationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostLocationAssociationView.swift; sourceTree = "<group>"; };
 		FCE8DB142320FCB100934E2F /* UIImage+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extensions.swift"; sourceTree = "<group>"; };
 		FCEB1D24229FC6D500C6D2C2 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -182,6 +188,7 @@
 		FC6E42E2245588BA005E0D08 /* Workfinder controls */ = {
 			isa = PBXGroup;
 			children = (
+				FCCA71B524DD465A00614103 /* WorkfinderProgressMeter.swift */,
 				FCB307B424D6A12E00C9E516 /* WorkfinderControls.swift */,
 				FCB307B224D6A0FF00C9E516 /* WorkfinderSwitch.swift */,
 				FC17E4982446F3FC00A58AEB /* WorkfinderPrimaryButton.swift */,
@@ -283,6 +290,7 @@
 		FCA91EBD22340680007ED308 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				FC2E24F224E2880300B71DDA /* NavigationRouter.swift */,
 				FC86928724D922F600783A6C /* Flow layouts */,
 				FCD4DCB824877C0F005CB380 /* Host view components */,
 				FC6E42E024558591005E0D08 /* WorkfinderFonts.swift */,
@@ -301,6 +309,7 @@
 				FCE8DB142320FCB100934E2F /* UIImage+extensions.swift */,
 				FC0100B7248A33B0007D8020 /* CompanyMapView.swift */,
 				FC22F4F424B5E4290030924B /* UILabel+Extensions.swift */,
+				FCAEEC0824E195AA00D6B579 /* ErrorHandlingProtocol.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -433,6 +442,7 @@
 				FC93DC3A23200BC100F1CE23 /* NextResponderTextField.swift in Sources */,
 				FCA91EBF223406B4007ED308 /* WorkfinderUI.swift in Sources */,
 				FCB307B524D6A12E00C9E516 /* WorkfinderControls.swift in Sources */,
+				FCAEEC0924E195AA00D6B579 /* ErrorHandlingProtocol.swift in Sources */,
 				FC343D0024461A6900347BC2 /* UnderlinedNextResponderTextFieldStack.swift in Sources */,
 				FC86928924D9231700783A6C /* LeftAlignedFlowLayout.swift in Sources */,
 				FC22DBED22F979E90068C61C /* UIViewController+Extensions.swift in Sources */,
@@ -444,6 +454,7 @@
 				FC116B4E2284511E00146478 /* WebViewController.swift in Sources */,
 				FCE8DB152320FCB100934E2F /* UIImage+extensions.swift in Sources */,
 				FC6E42DF2455855D005E0D08 /* WorkfinderColors.swift in Sources */,
+				FCCA71B624DD465A00614103 /* WorkfinderProgressMeter.swift in Sources */,
 				FC9535A1231E448D00F4A9DA /* F4SSelfLoadingImageView.swift in Sources */,
 				FC22DBEB22F979750068C61C /* RGBA.swift in Sources */,
 				FC5DAAE1246EAC8700031AEA /* WorkfinderPresenterProtocol.swift in Sources */,
@@ -454,6 +465,7 @@
 				FCD4DCBA24877D62005CB380 /* HostLocationAssociationView.swift in Sources */,
 				FC5CBA55231D2C4D00C2D3C5 /* F4SCompanyHeaderViewWithLogo.swift in Sources */,
 				FC4BC36124710A8C00299993 /* UIView+snapShot.swift in Sources */,
+				FC2E24F324E2880300B71DDA /* NavigationRouter.swift in Sources */,
 				FC0C7109232BA38700816332 /* OptionLabel.swift in Sources */,
 				FC86928B24D95CAF00783A6C /* SelfLoadingImageView.swift in Sources */,
 				FC17E4992446F3FC00A58AEB /* WorkfinderPrimaryButton.swift in Sources */,

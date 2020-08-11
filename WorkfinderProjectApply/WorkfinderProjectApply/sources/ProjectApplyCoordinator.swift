@@ -4,8 +4,11 @@ import WorkfinderCoordinators
 import WorkfinderServices
 import WorkfinderCoverLetter
 import WorkfinderAppLogic
+import WorkfinderDocumentUpload
+import WorkfinderUI
+import ErrorHandlingUI
 
-protocol ProjectApplyCoordinatorProtocol: AnyObject {
+protocol ProjectApplyCoordinatorProtocol: AnyObject, ErrorHandlerProviderProtocol {
     func onCoverLetterWorkflowCancelled()
     func onModalFinished()
     func onTapApply()
@@ -27,6 +30,13 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
     weak var successViewController: UIViewController?
     var placementService: PostPlacementServiceProtocol?
     var delegate: ProjectApplyCoordinatorDelegate?
+    
+    lazy public var errorHandler: ErrorHandlerProtocol = {
+        ErrorHandler(
+            navigationRouter: self.newNavigationRouter,
+            coreInjection: self.injected,
+            parentCoordinator: self)
+    }()
     
     public init(
         parent: ProjectApplyCoordinatorDelegate?,
@@ -67,23 +77,12 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
             let hostName = associationDetail?.host?.displayName
             else { return }
         
-        guard
-            let dobString = candidate.dateOfBirth,
-            let _ = Date.workfinderDateStringToDate(dobString)
-            else {
-            showAlert(
-                title: "Cannot Apply",
-                message: "We need to know your name and other details before you can apply",
-                buttonTitle: "Cancel"
-            )
-            return
-        }
         let coordinator = CoverLetterFlowFactory.makeFlow(
             type: .projectApplication,
             parent: self,
             navigationRouter: newNavigationRouter,
             inject: injected,
-            candidateAge: candidate.age() ?? 0,
+            candidateAge: candidate.age() ?? 18,
             candidateName: candidate.fullName,
             isProject: true,
             projectTitle: projectTitle,
@@ -153,6 +152,12 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
     }
     
     func onApplicationSubmitted() {
+        let coordinator = DocumentUploadCoordinator(parent: self, navigationRouter: newNavigationRouter, inject: injected, delegate: self)
+        addChildCoordinator(coordinator)
+        coordinator.start()
+    }
+    
+    func showSuccess() {
         let vc = SuccessViewController(
             applicationsButtonTap: { [weak self] in
                 guard let self = self else { return }
@@ -180,5 +185,15 @@ extension ProjectApplyCoordinator: CoverLetterParentCoordinatorProtocol {
     }
     public func coverLetterCoordinatorDidComplete(coverLetterText: String, picklistsDictionary: PicklistsDictionary) {
         submitApplication(coverLetterText: coverLetterText, picklistsDictionary: picklistsDictionary)
+    }
+}
+
+extension ProjectApplyCoordinator: DocumentUploadCoordinatorParentProtocol {
+    public func onSkipDocumentUpload() {
+        showSuccess()
+    }
+    
+    public func onUploadComplete() {
+        showSuccess()
     }
 }

@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:ErrorHandlingUI/ErrorHandlingUI.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:WorkfinderDocumentUpload/WorkfinderDocumentUpload.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:WorkfinderRegisterCandidate/WorkfinderRegisterCandidate.xcodeproj">
    </FileRef>
    <FileRef
@@ -33,9 +39,6 @@
    </FileRef>
    <FileRef
       location = "group:WorkfinderOnboardingUseCase/WorkfinderOnboardingUseCase.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:WorkfinderDocumentUploadUseCase/WorkfinderDocumentUploadUseCase.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:WorkfinderCompanyDetailsUseCase/WorkfinderCompanyDetailsUseCase.xcodeproj">

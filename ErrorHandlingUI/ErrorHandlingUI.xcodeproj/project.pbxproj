@@ -7,130 +7,116 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FC229A742326C50200F7B5CD /* WorkfinderDocumentUploadUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC229A6A2326C50200F7B5CD /* WorkfinderDocumentUploadUseCase.framework */; };
-		FC229A7B2326C50200F7B5CD /* WorkfinderDocumentUploadUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = FC229A6D2326C50200F7B5CD /* WorkfinderDocumentUploadUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FC4066A223277286002B425E /* F4SCameraCapture.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC4066A023277286002B425E /* F4SCameraCapture.storyboard */; };
-		FC4066A323277286002B425E /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC4066A123277286002B425E /* Camera.storyboard */; };
-		FC4066A523277299002B425E /* DocumentCapture.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC4066A423277299002B425E /* DocumentCapture.storyboard */; };
-		FC4066A923277395002B425E /* DocumentUploadCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066A723277395002B425E /* DocumentUploadCoordinator.swift */; };
-		FC4066E6232776E9002B425E /* WorkfinderDocumentUploadUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4066E5232776E9002B425E /* WorkfinderDocumentUploadUseCaseTests.swift */; };
-		FC4066F523277B80002B425E /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4066F423277B80002B425E /* WorkfinderCommon.framework */; };
-		FC4066F923277BB4002B425E /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4066F823277BB4002B425E /* WorkfinderCoordinators.framework */; };
-		FC40670023278160002B425E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC4066FF23278160002B425E /* Assets.xcassets */; };
+		FCAEEBD124E18AC200D6B579 /* ErrorHandlingUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCAEEBC724E18AC200D6B579 /* ErrorHandlingUI.framework */; };
+		FCAEEBD624E18AC200D6B579 /* ErrorHandlingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAEEBD524E18AC200D6B579 /* ErrorHandlingUITests.swift */; };
+		FCAEEBD824E18AC200D6B579 /* ErrorHandlingUI.h in Headers */ = {isa = PBXBuildFile; fileRef = FCAEEBCA24E18AC200D6B579 /* ErrorHandlingUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FCAEEBE324E18AE900D6B579 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCAEEBE224E18AE900D6B579 /* WorkfinderCommon.framework */; };
+		FCAEEBFD24E18BCD00D6B579 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAEEBFC24E18BCD00D6B579 /* ErrorHandler.swift */; };
+		FCAEEC0324E1902500D6B579 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCAEEC0224E1902400D6B579 /* WorkfinderUI.framework */; };
+		FCF87F5D24E2730C00E1FD3E /* WorkfinderRegisterCandidate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCAEEBE924E18AFF00D6B579 /* WorkfinderRegisterCandidate.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		FC229A752326C50200F7B5CD /* PBXContainerItemProxy */ = {
+		FCAEEBD224E18AC200D6B579 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = FC229A612326C50200F7B5CD /* Project object */;
+			containerPortal = FCAEEBBE24E18AC200D6B579 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = FC229A692326C50200F7B5CD;
-			remoteInfo = WorkfinderDocumentUploadUseCase;
+			remoteGlobalIDString = FCAEEBC624E18AC200D6B579;
+			remoteInfo = ErrorHandlingUI;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		FC229A6A2326C50200F7B5CD /* WorkfinderDocumentUploadUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderDocumentUploadUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC229A6D2326C50200F7B5CD /* WorkfinderDocumentUploadUseCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderDocumentUploadUseCase.h; sourceTree = "<group>"; };
-		FC229A6E2326C50200F7B5CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FC229A732326C50200F7B5CD /* WorkfinderDocumentUploadUseCaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderDocumentUploadUseCaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC229A7A2326C50200F7B5CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FC4066A023277286002B425E /* F4SCameraCapture.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = F4SCameraCapture.storyboard; sourceTree = "<group>"; };
-		FC4066A123277286002B425E /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
-		FC4066A423277299002B425E /* DocumentCapture.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DocumentCapture.storyboard; sourceTree = "<group>"; };
-		FC4066A723277395002B425E /* DocumentUploadCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentUploadCoordinator.swift; sourceTree = "<group>"; };
-		FC4066E5232776E9002B425E /* WorkfinderDocumentUploadUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderDocumentUploadUseCaseTests.swift; sourceTree = "<group>"; };
-		FC4066F423277B80002B425E /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC4066F623277B80002B425E /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC4066F823277BB4002B425E /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC4066FF23278160002B425E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FCAEEBC724E18AC200D6B579 /* ErrorHandlingUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ErrorHandlingUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCAEEBCA24E18AC200D6B579 /* ErrorHandlingUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ErrorHandlingUI.h; sourceTree = "<group>"; };
+		FCAEEBCB24E18AC200D6B579 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCAEEBD024E18AC200D6B579 /* ErrorHandlingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ErrorHandlingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCAEEBD524E18AC200D6B579 /* ErrorHandlingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandlingUITests.swift; sourceTree = "<group>"; };
+		FCAEEBD724E18AC200D6B579 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCAEEBE224E18AE900D6B579 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCAEEBE624E18AF300D6B579 /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCAEEBE924E18AFF00D6B579 /* WorkfinderRegisterCandidate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderRegisterCandidate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCAEEBFC24E18BCD00D6B579 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
+		FCAEEBFE24E18FD300D6B579 /* WorkfinderRegisterCandidate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderRegisterCandidate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCAEEC0224E1902400D6B579 /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		FC229A672326C50200F7B5CD /* Frameworks */ = {
+		FCAEEBC424E18AC200D6B579 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC4066F923277BB4002B425E /* WorkfinderCoordinators.framework in Frameworks */,
-				FC4066F523277B80002B425E /* WorkfinderCommon.framework in Frameworks */,
+				FCAEEC0324E1902500D6B579 /* WorkfinderUI.framework in Frameworks */,
+				FCAEEBE324E18AE900D6B579 /* WorkfinderCommon.framework in Frameworks */,
+				FCF87F5D24E2730C00E1FD3E /* WorkfinderRegisterCandidate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FC229A702326C50200F7B5CD /* Frameworks */ = {
+		FCAEEBCD24E18AC200D6B579 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC229A742326C50200F7B5CD /* WorkfinderDocumentUploadUseCase.framework in Frameworks */,
+				FCAEEBD124E18AC200D6B579 /* ErrorHandlingUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		FC229A602326C50200F7B5CD = {
+		FC2E24F424E2B88200B71DDA /* source */ = {
 			isa = PBXGroup;
 			children = (
-				FC229A6C2326C50200F7B5CD /* WorkfinderDocumentUploadUseCase */,
-				FC229A772326C50200F7B5CD /* WorkfinderDocumentUploadUseCaseTests */,
-				FC229A6B2326C50200F7B5CD /* Products */,
-				FC4066F323277B80002B425E /* Frameworks */,
-			);
-			sourceTree = "<group>";
-		};
-		FC229A6B2326C50200F7B5CD /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				FC229A6A2326C50200F7B5CD /* WorkfinderDocumentUploadUseCase.framework */,
-				FC229A732326C50200F7B5CD /* WorkfinderDocumentUploadUseCaseTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		FC229A6C2326C50200F7B5CD /* WorkfinderDocumentUploadUseCase */ = {
-			isa = PBXGroup;
-			children = (
-				FC4066FF23278160002B425E /* Assets.xcassets */,
-				FC229A852326C64E00F7B5CD /* storyboards */,
-				FC229A842326C5AB00F7B5CD /* source */,
-				FC229A6D2326C50200F7B5CD /* WorkfinderDocumentUploadUseCase.h */,
-				FC229A6E2326C50200F7B5CD /* Info.plist */,
-			);
-			path = WorkfinderDocumentUploadUseCase;
-			sourceTree = "<group>";
-		};
-		FC229A772326C50200F7B5CD /* WorkfinderDocumentUploadUseCaseTests */ = {
-			isa = PBXGroup;
-			children = (
-				FC229A7A2326C50200F7B5CD /* Info.plist */,
-				FC4066E5232776E9002B425E /* WorkfinderDocumentUploadUseCaseTests.swift */,
-			);
-			path = WorkfinderDocumentUploadUseCaseTests;
-			sourceTree = "<group>";
-		};
-		FC229A842326C5AB00F7B5CD /* source */ = {
-			isa = PBXGroup;
-			children = (
-				FC4066A723277395002B425E /* DocumentUploadCoordinator.swift */,
+				FCAEEBFC24E18BCD00D6B579 /* ErrorHandler.swift */,
 			);
 			path = source;
 			sourceTree = "<group>";
 		};
-		FC229A852326C64E00F7B5CD /* storyboards */ = {
+		FCAEEBBD24E18AC200D6B579 = {
 			isa = PBXGroup;
 			children = (
-				FC4066A423277299002B425E /* DocumentCapture.storyboard */,
-				FC4066A123277286002B425E /* Camera.storyboard */,
-				FC4066A023277286002B425E /* F4SCameraCapture.storyboard */,
+				FCAEEBC924E18AC200D6B579 /* ErrorHandlingUI */,
+				FCAEEBD424E18AC200D6B579 /* ErrorHandlingUITests */,
+				FCAEEBC824E18AC200D6B579 /* Products */,
+				FCAEEBE124E18AE800D6B579 /* Frameworks */,
 			);
-			path = storyboards;
 			sourceTree = "<group>";
 		};
-		FC4066F323277B80002B425E /* Frameworks */ = {
+		FCAEEBC824E18AC200D6B579 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FC4066F823277BB4002B425E /* WorkfinderCoordinators.framework */,
-				FC4066F423277B80002B425E /* WorkfinderCommon.framework */,
-				FC4066F623277B80002B425E /* WorkfinderServices.framework */,
+				FCAEEBC724E18AC200D6B579 /* ErrorHandlingUI.framework */,
+				FCAEEBD024E18AC200D6B579 /* ErrorHandlingUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FCAEEBC924E18AC200D6B579 /* ErrorHandlingUI */ = {
+			isa = PBXGroup;
+			children = (
+				FC2E24F424E2B88200B71DDA /* source */,
+				FCAEEBCA24E18AC200D6B579 /* ErrorHandlingUI.h */,
+				FCAEEBCB24E18AC200D6B579 /* Info.plist */,
+			);
+			path = ErrorHandlingUI;
+			sourceTree = "<group>";
+		};
+		FCAEEBD424E18AC200D6B579 /* ErrorHandlingUITests */ = {
+			isa = PBXGroup;
+			children = (
+				FCAEEBD524E18AC200D6B579 /* ErrorHandlingUITests.swift */,
+				FCAEEBD724E18AC200D6B579 /* Info.plist */,
+			);
+			path = ErrorHandlingUITests;
+			sourceTree = "<group>";
+		};
+		FCAEEBE124E18AE800D6B579 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FCAEEC0224E1902400D6B579 /* WorkfinderUI.framework */,
+				FCAEEBFE24E18FD300D6B579 /* WorkfinderRegisterCandidate.framework */,
+				FCAEEBE924E18AFF00D6B579 /* WorkfinderRegisterCandidate.framework */,
+				FCAEEBE624E18AF300D6B579 /* WorkfinderCoordinators.framework */,
+				FCAEEBE224E18AE900D6B579 /* WorkfinderCommon.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -138,105 +124,100 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		FC229A652326C50200F7B5CD /* Headers */ = {
+		FCAEEBC224E18AC200D6B579 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC229A7B2326C50200F7B5CD /* WorkfinderDocumentUploadUseCase.h in Headers */,
+				FCAEEBD824E18AC200D6B579 /* ErrorHandlingUI.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		FC229A692326C50200F7B5CD /* WorkfinderDocumentUploadUseCase */ = {
+		FCAEEBC624E18AC200D6B579 /* ErrorHandlingUI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FC229A7E2326C50200F7B5CD /* Build configuration list for PBXNativeTarget "WorkfinderDocumentUploadUseCase" */;
+			buildConfigurationList = FCAEEBDB24E18AC200D6B579 /* Build configuration list for PBXNativeTarget "ErrorHandlingUI" */;
 			buildPhases = (
-				FC229A652326C50200F7B5CD /* Headers */,
-				FC229A662326C50200F7B5CD /* Sources */,
-				FC229A672326C50200F7B5CD /* Frameworks */,
-				FC229A682326C50200F7B5CD /* Resources */,
+				FCAEEBC224E18AC200D6B579 /* Headers */,
+				FCAEEBC324E18AC200D6B579 /* Sources */,
+				FCAEEBC424E18AC200D6B579 /* Frameworks */,
+				FCAEEBC524E18AC200D6B579 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = WorkfinderDocumentUploadUseCase;
-			productName = WorkfinderDocumentUploadUseCase;
-			productReference = FC229A6A2326C50200F7B5CD /* WorkfinderDocumentUploadUseCase.framework */;
+			name = ErrorHandlingUI;
+			productName = ErrorHandlingUI;
+			productReference = FCAEEBC724E18AC200D6B579 /* ErrorHandlingUI.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		FC229A722326C50200F7B5CD /* WorkfinderDocumentUploadUseCaseTests */ = {
+		FCAEEBCF24E18AC200D6B579 /* ErrorHandlingUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FC229A812326C50200F7B5CD /* Build configuration list for PBXNativeTarget "WorkfinderDocumentUploadUseCaseTests" */;
+			buildConfigurationList = FCAEEBDE24E18AC200D6B579 /* Build configuration list for PBXNativeTarget "ErrorHandlingUITests" */;
 			buildPhases = (
-				FC229A6F2326C50200F7B5CD /* Sources */,
-				FC229A702326C50200F7B5CD /* Frameworks */,
-				FC229A712326C50200F7B5CD /* Resources */,
+				FCAEEBCC24E18AC200D6B579 /* Sources */,
+				FCAEEBCD24E18AC200D6B579 /* Frameworks */,
+				FCAEEBCE24E18AC200D6B579 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				FC229A762326C50200F7B5CD /* PBXTargetDependency */,
+				FCAEEBD324E18AC200D6B579 /* PBXTargetDependency */,
 			);
-			name = WorkfinderDocumentUploadUseCaseTests;
-			productName = WorkfinderDocumentUploadUseCaseTests;
-			productReference = FC229A732326C50200F7B5CD /* WorkfinderDocumentUploadUseCaseTests.xctest */;
+			name = ErrorHandlingUITests;
+			productName = ErrorHandlingUITests;
+			productReference = FCAEEBD024E18AC200D6B579 /* ErrorHandlingUITests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		FC229A612326C50200F7B5CD /* Project object */ = {
+		FCAEEBBE24E18AC200D6B579 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1020;
-				LastUpgradeCheck = 1100;
-				ORGANIZATIONNAME = Founders4Schools;
+				LastSwiftUpdateCheck = 1160;
+				LastUpgradeCheck = 1160;
+				ORGANIZATIONNAME = Workfinder;
 				TargetAttributes = {
-					FC229A692326C50200F7B5CD = {
-						CreatedOnToolsVersion = 10.2;
+					FCAEEBC624E18AC200D6B579 = {
+						CreatedOnToolsVersion = 11.6;
+						LastSwiftMigration = 1160;
 					};
-					FC229A722326C50200F7B5CD = {
-						CreatedOnToolsVersion = 10.2;
-						LastSwiftMigration = 1020;
+					FCAEEBCF24E18AC200D6B579 = {
+						CreatedOnToolsVersion = 11.6;
 					};
 				};
 			};
-			buildConfigurationList = FC229A642326C50200F7B5CD /* Build configuration list for PBXProject "WorkfinderDocumentUploadUseCase" */;
+			buildConfigurationList = FCAEEBC124E18AC200D6B579 /* Build configuration list for PBXProject "ErrorHandlingUI" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
-				global,
 			);
-			mainGroup = FC229A602326C50200F7B5CD;
-			productRefGroup = FC229A6B2326C50200F7B5CD /* Products */;
+			mainGroup = FCAEEBBD24E18AC200D6B579;
+			productRefGroup = FCAEEBC824E18AC200D6B579 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FC229A692326C50200F7B5CD /* WorkfinderDocumentUploadUseCase */,
-				FC229A722326C50200F7B5CD /* WorkfinderDocumentUploadUseCaseTests */,
+				FCAEEBC624E18AC200D6B579 /* ErrorHandlingUI */,
+				FCAEEBCF24E18AC200D6B579 /* ErrorHandlingUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		FC229A682326C50200F7B5CD /* Resources */ = {
+		FCAEEBC524E18AC200D6B579 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC4066A523277299002B425E /* DocumentCapture.storyboard in Resources */,
-				FC4066A223277286002B425E /* F4SCameraCapture.storyboard in Resources */,
-				FC40670023278160002B425E /* Assets.xcassets in Resources */,
-				FC4066A323277286002B425E /* Camera.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FC229A712326C50200F7B5CD /* Resources */ = {
+		FCAEEBCE24E18AC200D6B579 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -246,38 +227,37 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		FC229A662326C50200F7B5CD /* Sources */ = {
+		FCAEEBC324E18AC200D6B579 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC4066A923277395002B425E /* DocumentUploadCoordinator.swift in Sources */,
+				FCAEEBFD24E18BCD00D6B579 /* ErrorHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FC229A6F2326C50200F7B5CD /* Sources */ = {
+		FCAEEBCC24E18AC200D6B579 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC4066E6232776E9002B425E /* WorkfinderDocumentUploadUseCaseTests.swift in Sources */,
+				FCAEEBD624E18AC200D6B579 /* ErrorHandlingUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		FC229A762326C50200F7B5CD /* PBXTargetDependency */ = {
+		FCAEEBD324E18AC200D6B579 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = FC229A692326C50200F7B5CD /* WorkfinderDocumentUploadUseCase */;
-			targetProxy = FC229A752326C50200F7B5CD /* PBXContainerItemProxy */;
+			target = FCAEEBC624E18AC200D6B579 /* ErrorHandlingUI */;
+			targetProxy = FCAEEBD224E18AC200D6B579 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		FC229A7C2326C50200F7B5CD /* Debug */ = {
+		FCAEEBD924E18AC200D6B579 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -306,7 +286,6 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -338,11 +317,10 @@
 			};
 			name = Debug;
 		};
-		FC229A7D2326C50200F7B5CD /* Release */ = {
+		FCAEEBDA24E18AC200D6B579 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -371,7 +349,6 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -397,106 +374,101 @@
 			};
 			name = Release;
 		};
-		FC229A7F2326C50200F7B5CD /* Debug */ = {
+		FCAEEBDC24E18AC200D6B579 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = YB7C23CK6Q;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = WorkfinderDocumentUploadUseCase/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderDocumentUploadUseCase;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "$(ARCHS_STANDARD)";
-			};
-			name = Debug;
-		};
-		FC229A802326C50200F7B5CD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = YB7C23CK6Q;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = WorkfinderDocumentUploadUseCase/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderDocumentUploadUseCase;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "$(ARCHS_STANDARD)";
-			};
-			name = Release;
-		};
-		FC229A822326C50200F7B5CD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
-				INFOPLIST_FILE = WorkfinderDocumentUploadUseCaseTests/Info.plist;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = ErrorHandlingUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderDocumentUploadUseCaseTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.ErrorHandlingUI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
-		FC229A832326C50200F7B5CD /* Release */ = {
+		FCAEEBDD24E18AC200D6B579 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
-				INFOPLIST_FILE = WorkfinderDocumentUploadUseCaseTests/Info.plist;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = ErrorHandlingUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderDocumentUploadUseCaseTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.ErrorHandlingUI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		FCAEEBDF24E18AC200D6B579 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YB7C23CK6Q;
+				INFOPLIST_FILE = ErrorHandlingUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.ErrorHandlingUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FCAEEBE024E18AC200D6B579 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YB7C23CK6Q;
+				INFOPLIST_FILE = ErrorHandlingUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.ErrorHandlingUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
-		FC4066E723277A15002B425E /* DebugF4S */ = {
+		FCAEEBEC24E18B1000D6B579 /* DebugF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -525,7 +497,6 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -557,59 +528,56 @@
 			};
 			name = DebugF4S;
 		};
-		FC4066E823277A15002B425E /* DebugF4S */ = {
+		FCAEEBED24E18B1000D6B579 /* DebugF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = WorkfinderDocumentUploadUseCase/Info.plist;
+				INFOPLIST_FILE = ErrorHandlingUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderDocumentUploadUseCase;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.ErrorHandlingUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
 			name = DebugF4S;
 		};
-		FC4066E923277A15002B425E /* DebugF4S */ = {
+		FCAEEBEE24E18B1000D6B579 /* DebugF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
-				INFOPLIST_FILE = WorkfinderDocumentUploadUseCaseTests/Info.plist;
+				INFOPLIST_FILE = ErrorHandlingUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderDocumentUploadUseCaseTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.ErrorHandlingUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = DebugF4S;
 		};
-		FC4066EA23277A23002B425E /* DebugF4SLive */ = {
+		FCAEEBEF24E18B1D00D6B579 /* DebugF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -638,7 +606,6 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -670,59 +637,56 @@
 			};
 			name = DebugF4SLive;
 		};
-		FC4066EB23277A23002B425E /* DebugF4SLive */ = {
+		FCAEEBF024E18B1D00D6B579 /* DebugF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = WorkfinderDocumentUploadUseCase/Info.plist;
+				INFOPLIST_FILE = ErrorHandlingUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderDocumentUploadUseCase;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.ErrorHandlingUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
 			name = DebugF4SLive;
 		};
-		FC4066EC23277A23002B425E /* DebugF4SLive */ = {
+		FCAEEBF124E18B1D00D6B579 /* DebugF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
-				INFOPLIST_FILE = WorkfinderDocumentUploadUseCaseTests/Info.plist;
+				INFOPLIST_FILE = ErrorHandlingUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderDocumentUploadUseCaseTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.ErrorHandlingUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = DebugF4SLive;
 		};
-		FC4066ED23277A2F002B425E /* ReleaseF4S */ = {
+		FCAEEBF224E18B2500D6B579 /* ReleaseF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -751,7 +715,6 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -777,58 +740,55 @@
 			};
 			name = ReleaseF4S;
 		};
-		FC4066EE23277A2F002B425E /* ReleaseF4S */ = {
+		FCAEEBF324E18B2500D6B579 /* ReleaseF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = WorkfinderDocumentUploadUseCase/Info.plist;
+				INFOPLIST_FILE = ErrorHandlingUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderDocumentUploadUseCase;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.ErrorHandlingUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
 			name = ReleaseF4S;
 		};
-		FC4066EF23277A2F002B425E /* ReleaseF4S */ = {
+		FCAEEBF424E18B2500D6B579 /* ReleaseF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
-				INFOPLIST_FILE = WorkfinderDocumentUploadUseCaseTests/Info.plist;
+				INFOPLIST_FILE = ErrorHandlingUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderDocumentUploadUseCaseTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.ErrorHandlingUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = ReleaseF4S;
 		};
-		FC4066F023277A39002B425E /* ReleaseF4SLive */ = {
+		FCAEEBF524E18B2D00D6B579 /* ReleaseF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -857,7 +817,6 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -883,47 +842,45 @@
 			};
 			name = ReleaseF4SLive;
 		};
-		FC4066F123277A39002B425E /* ReleaseF4SLive */ = {
+		FCAEEBF624E18B2D00D6B579 /* ReleaseF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = WorkfinderDocumentUploadUseCase/Info.plist;
+				INFOPLIST_FILE = ErrorHandlingUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderDocumentUploadUseCase;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.ErrorHandlingUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
 			name = ReleaseF4SLive;
 		};
-		FC4066F223277A39002B425E /* ReleaseF4SLive */ = {
+		FCAEEBF724E18B2D00D6B579 /* ReleaseF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
-				INFOPLIST_FILE = WorkfinderDocumentUploadUseCaseTests/Info.plist;
+				INFOPLIST_FILE = ErrorHandlingUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.WorkfinderDocumentUploadUseCaseTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.ErrorHandlingUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -933,46 +890,46 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FC229A642326C50200F7B5CD /* Build configuration list for PBXProject "WorkfinderDocumentUploadUseCase" */ = {
+		FCAEEBC124E18AC200D6B579 /* Build configuration list for PBXProject "ErrorHandlingUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FC229A7C2326C50200F7B5CD /* Debug */,
-				FC4066E723277A15002B425E /* DebugF4S */,
-				FC4066EA23277A23002B425E /* DebugF4SLive */,
-				FC229A7D2326C50200F7B5CD /* Release */,
-				FC4066ED23277A2F002B425E /* ReleaseF4S */,
-				FC4066F023277A39002B425E /* ReleaseF4SLive */,
+				FCAEEBD924E18AC200D6B579 /* Debug */,
+				FCAEEBEC24E18B1000D6B579 /* DebugF4S */,
+				FCAEEBEF24E18B1D00D6B579 /* DebugF4SLive */,
+				FCAEEBDA24E18AC200D6B579 /* Release */,
+				FCAEEBF224E18B2500D6B579 /* ReleaseF4S */,
+				FCAEEBF524E18B2D00D6B579 /* ReleaseF4SLive */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FC229A7E2326C50200F7B5CD /* Build configuration list for PBXNativeTarget "WorkfinderDocumentUploadUseCase" */ = {
+		FCAEEBDB24E18AC200D6B579 /* Build configuration list for PBXNativeTarget "ErrorHandlingUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FC229A7F2326C50200F7B5CD /* Debug */,
-				FC4066E823277A15002B425E /* DebugF4S */,
-				FC4066EB23277A23002B425E /* DebugF4SLive */,
-				FC229A802326C50200F7B5CD /* Release */,
-				FC4066EE23277A2F002B425E /* ReleaseF4S */,
-				FC4066F123277A39002B425E /* ReleaseF4SLive */,
+				FCAEEBDC24E18AC200D6B579 /* Debug */,
+				FCAEEBED24E18B1000D6B579 /* DebugF4S */,
+				FCAEEBF024E18B1D00D6B579 /* DebugF4SLive */,
+				FCAEEBDD24E18AC200D6B579 /* Release */,
+				FCAEEBF324E18B2500D6B579 /* ReleaseF4S */,
+				FCAEEBF624E18B2D00D6B579 /* ReleaseF4SLive */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FC229A812326C50200F7B5CD /* Build configuration list for PBXNativeTarget "WorkfinderDocumentUploadUseCaseTests" */ = {
+		FCAEEBDE24E18AC200D6B579 /* Build configuration list for PBXNativeTarget "ErrorHandlingUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FC229A822326C50200F7B5CD /* Debug */,
-				FC4066E923277A15002B425E /* DebugF4S */,
-				FC4066EC23277A23002B425E /* DebugF4SLive */,
-				FC229A832326C50200F7B5CD /* Release */,
-				FC4066EF23277A2F002B425E /* ReleaseF4S */,
-				FC4066F223277A39002B425E /* ReleaseF4SLive */,
+				FCAEEBDF24E18AC200D6B579 /* Debug */,
+				FCAEEBEE24E18B1000D6B579 /* DebugF4S */,
+				FCAEEBF124E18B1D00D6B579 /* DebugF4SLive */,
+				FCAEEBE024E18AC200D6B579 /* Release */,
+				FCAEEBF424E18B2500D6B579 /* ReleaseF4S */,
+				FCAEEBF724E18B2D00D6B579 /* ReleaseF4SLive */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = FC229A612326C50200F7B5CD /* Project object */;
+	rootObject = FCAEEBBE24E18AC200D6B579 /* Project object */;
 }

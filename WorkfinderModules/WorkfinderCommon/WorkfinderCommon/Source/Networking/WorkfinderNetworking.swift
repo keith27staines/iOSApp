@@ -13,6 +13,11 @@ public struct NetworkConfig {
         var request = URLRequest(url: url)
         request.httpBody = body
         request.httpMethod = verb.name
+        return signedRequest(request)
+    }
+    
+    public func signedRequest(_ request: URLRequest) -> URLRequest {
+        var request = request
         if let token = userRepository.loadAccessToken() {
             request.addValue("Token \(token)", forHTTPHeaderField: "Authorization")
         }

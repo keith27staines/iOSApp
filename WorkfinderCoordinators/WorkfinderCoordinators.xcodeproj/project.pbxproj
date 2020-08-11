@@ -14,7 +14,6 @@
 		FC93DBC7231F8CFF00F1CE23 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DBC6231F8CFF00F1CE23 /* WorkfinderAppLogic.framework */; };
 		FC93DBC9231F8CFF00F1CE23 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DBC8231F8CFF00F1CE23 /* WorkfinderCommon.framework */; };
 		FC93DBCD231F8CFF00F1CE23 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DBCC231F8CFF00F1CE23 /* WorkfinderUI.framework */; };
-		FC93DBD1231F8D7E00F1CE23 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DBCE231F8D7E00F1CE23 /* NavigationRouter.swift */; };
 		FC93DBD9231F94B600F1CE23 /* Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DBD8231F94B600F1CE23 /* Injection.swift */; };
 		FC93DBE6231FA62900F1CE23 /* CoreInjectionNavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DBE5231FA62900F1CE23 /* CoreInjectionNavigationCoordinator.swift */; };
 /* End PBXBuildFile section */
@@ -41,7 +40,6 @@
 		FC93DBC8231F8CFF00F1CE23 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC93DBCA231F8CFF00F1CE23 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC93DBCC231F8CFF00F1CE23 /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC93DBCE231F8D7E00F1CE23 /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		FC93DBD8231F94B600F1CE23 /* Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injection.swift; sourceTree = "<group>"; };
 		FC93DBE5231FA62900F1CE23 /* CoreInjectionNavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreInjectionNavigationCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,7 +118,6 @@
 		FC93DBD2231F8D9700F1CE23 /* Routing */ = {
 			isa = PBXGroup;
 			children = (
-				FC93DBCE231F8D7E00F1CE23 /* NavigationRouter.swift */,
 			);
 			path = Routing;
 			sourceTree = "<group>";
@@ -256,7 +253,6 @@
 				FC93DBD9231F94B600F1CE23 /* Injection.swift in Sources */,
 				FC93DBC4231F8C7F00F1CE23 /* NavigationCoordinator.swift in Sources */,
 				FC93DBE6231FA62900F1CE23 /* CoreInjectionNavigationCoordinator.swift in Sources */,
-				FC93DBD1231F8D7E00F1CE23 /* NavigationRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

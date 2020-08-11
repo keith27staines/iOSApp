@@ -5,7 +5,6 @@ import WorkfinderServices
 import WorkfinderAppLogic
 import WorkfinderUI
 import WorkfinderCoordinators
-import WorkfinderDocumentUploadUseCase
 import WorkfinderUserDetailsUseCase
 import WorkfinderCoverLetter
 import WorkfinderRegisterCandidate
@@ -157,6 +156,12 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
 }
 
 extension ApplyCoordinator: RegisterAndSignInCoordinatorParent {
+    
+    public func onRegisterAndSignInCancelled() {
+        // Nothing to do, the register screens
+        // have been poppped and that is all there is to it
+    }
+    
     
     public func onCandidateIsSignedIn() {
         let uuid = userRepository.loadCandidate().uuid!

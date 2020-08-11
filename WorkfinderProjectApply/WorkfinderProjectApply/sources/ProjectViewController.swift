@@ -1,5 +1,6 @@
 
 import UIKit
+import WorkfinderCommon
 import WorkfinderUI
 
 protocol ProjectViewProtocol: AnyObject {
@@ -12,6 +13,13 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
     weak var coordinator: ProjectApplyCoordinatorProtocol?
     let presenter: ProjectPresenterProtocol
     let companyLogoSide = CGFloat(80)
+    
+    var lastError: Error? {
+        didSet {
+            let title = lastError == nil ? "APPLY NOW" : "PLEASE SIGN IN"
+            applyNowButton.setTitle(title, for: .normal)
+        }
+    }
     
     lazy var banner: UIImageView = {
         let image = UIImage(named: "projectPageBanner")
@@ -49,27 +57,36 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
     
     lazy var applyNowButton: UIButton = {
         let button = WorkfinderControls.makePrimaryButton()
-        button.setTitle("APPLY NOW", for: .normal)
         button.addTarget(self, action: #selector(onTapApply), for: .touchUpInside)
         return button
     }()
     
     override func viewDidLoad() {
         configureViews()
+        lastError = nil
         presenter.onViewDidLoad(view: self)
         loadData()
     }
     
     func loadData() {
         self.refreshFromPresenter()
+        self.lastError = nil
         messageHandler.showLoadingOverlay(self.view)
         presenter.loadData { [weak self] (optionalError) in
-            guard let self = self else { return }
-            self.messageHandler.hideLoadingOverlay()
-            self.messageHandler.displayOptionalErrorIfNotNil(optionalError) {
-                self.loadData()
-            }
-            self.refreshFromPresenter()
+            guard let self = self, let errorHandler = self.coordinator?.errorHandler else { return }
+            self.lastError = optionalError
+            errorHandler.startHandleError(
+                optionalError,
+                presentingViewController: self,
+                messageHandler: self.messageHandler,
+                cancel: {
+                    self.refreshFromPresenter()
+                    return
+                },
+                retry: {
+                    self.loadData()
+                }
+            )
         }
     }
     
@@ -89,10 +106,17 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
-    @objc func onTapApply() { coordinator?.onTapApply() }
+    @objc func onTapApply() {
+        if lastError != nil {
+            loadData()
+            return
+        }
+        coordinator?.onTapApply()
+        
+    }
     
     lazy var collectionView: UICollectionView = {
-        let layout = LeftAlignedFlowLayout() //UICollectionViewFlowLayout()
+        let layout = LeftAlignedFlowLayout()
         let frame = CGRect(x: 0, y: 0, width: 360, height: 100)
         let view = UICollectionView(frame: frame, collectionViewLayout: layout)
         view.backgroundColor = UIColor.white
