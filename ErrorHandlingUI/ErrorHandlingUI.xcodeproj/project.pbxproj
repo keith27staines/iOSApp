@@ -11,10 +11,9 @@
 		FCAEEBD624E18AC200D6B579 /* ErrorHandlingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAEEBD524E18AC200D6B579 /* ErrorHandlingUITests.swift */; };
 		FCAEEBD824E18AC200D6B579 /* ErrorHandlingUI.h in Headers */ = {isa = PBXBuildFile; fileRef = FCAEEBCA24E18AC200D6B579 /* ErrorHandlingUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCAEEBE324E18AE900D6B579 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCAEEBE224E18AE900D6B579 /* WorkfinderCommon.framework */; };
-		FCAEEBE724E18AF300D6B579 /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCAEEBE624E18AF300D6B579 /* WorkfinderCoordinators.framework */; };
-		FCAEEBEA24E18AFF00D6B579 /* WorkfinderRegisterCandidate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCAEEBE924E18AFF00D6B579 /* WorkfinderRegisterCandidate.framework */; };
-		FCAEEBFD24E18BCD00D6B579 /* ErrorHandlingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAEEBFC24E18BCD00D6B579 /* ErrorHandlingCoordinator.swift */; };
+		FCAEEBFD24E18BCD00D6B579 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAEEBFC24E18BCD00D6B579 /* ErrorHandler.swift */; };
 		FCAEEC0324E1902500D6B579 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCAEEC0224E1902400D6B579 /* WorkfinderUI.framework */; };
+		FCF87F5D24E2730C00E1FD3E /* WorkfinderRegisterCandidate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCAEEBE924E18AFF00D6B579 /* WorkfinderRegisterCandidate.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +36,7 @@
 		FCAEEBE224E18AE900D6B579 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCAEEBE624E18AF300D6B579 /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCAEEBE924E18AFF00D6B579 /* WorkfinderRegisterCandidate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderRegisterCandidate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCAEEBFC24E18BCD00D6B579 /* ErrorHandlingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandlingCoordinator.swift; sourceTree = "<group>"; };
+		FCAEEBFC24E18BCD00D6B579 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		FCAEEBFE24E18FD300D6B579 /* WorkfinderRegisterCandidate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderRegisterCandidate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCAEEC0224E1902400D6B579 /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -48,9 +47,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCAEEC0324E1902500D6B579 /* WorkfinderUI.framework in Frameworks */,
-				FCAEEBE724E18AF300D6B579 /* WorkfinderCoordinators.framework in Frameworks */,
 				FCAEEBE324E18AE900D6B579 /* WorkfinderCommon.framework in Frameworks */,
-				FCAEEBEA24E18AFF00D6B579 /* WorkfinderRegisterCandidate.framework in Frameworks */,
+				FCF87F5D24E2730C00E1FD3E /* WorkfinderRegisterCandidate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +63,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC2E24F424E2B88200B71DDA /* source */ = {
+			isa = PBXGroup;
+			children = (
+				FCAEEBFC24E18BCD00D6B579 /* ErrorHandler.swift */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
 		FCAEEBBD24E18AC200D6B579 = {
 			isa = PBXGroup;
 			children = (
@@ -87,9 +93,9 @@
 		FCAEEBC924E18AC200D6B579 /* ErrorHandlingUI */ = {
 			isa = PBXGroup;
 			children = (
+				FC2E24F424E2B88200B71DDA /* source */,
 				FCAEEBCA24E18AC200D6B579 /* ErrorHandlingUI.h */,
 				FCAEEBCB24E18AC200D6B579 /* Info.plist */,
-				FCAEEBFC24E18BCD00D6B579 /* ErrorHandlingCoordinator.swift */,
 			);
 			path = ErrorHandlingUI;
 			sourceTree = "<group>";
@@ -225,7 +231,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FCAEEBFD24E18BCD00D6B579 /* ErrorHandlingCoordinator.swift in Sources */,
+				FCAEEBFD24E18BCD00D6B579 /* ErrorHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

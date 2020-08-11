@@ -8,10 +8,12 @@ import WorkfinderUI
 protocol RegisterAndSignInCoordinatorProtocol {
     func switchMode(_ mode: RegisterAndSignInMode)
     func onUserRegisteredAndCandidateCreated(pop: Bool)
+    func onRegisterAndSignInCancelled()
 }
 
 public protocol RegisterAndSignInCoordinatorParent: Coordinating {
     func onCandidateIsSignedIn()
+    func onRegisterAndSignInCancelled()
 }
 
 public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, RegisterAndSignInCoordinatorProtocol {
@@ -38,6 +40,11 @@ public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, R
         parentCoordinator?.childCoordinatorDidFinish(self)
     }
     
+    func onRegisterAndSignInCancelled() {
+        (parentCoordinator as? RegisterAndSignInCoordinatorParent)?.onRegisterAndSignInCancelled()
+        parentCoordinator?.childCoordinatorDidFinish(self)
+    }
+    
     func switchMode(_ mode: RegisterAndSignInMode) {
         switch mode {
         case .register:
@@ -48,7 +55,7 @@ public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, R
         }
     }
     
-    func presentRegisterUserViewController() {
+    func presentRegisterUserViewController(allowCancel: Bool = true) {
         let userRepository = injected.userRepository
         let candidate = userRepository.loadCandidate()
         guard candidate.uuid == nil else {

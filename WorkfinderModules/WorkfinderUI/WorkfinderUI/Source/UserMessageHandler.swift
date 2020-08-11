@@ -8,7 +8,7 @@ public protocol UserMessagePresenting: AnyObject {
 
 public class UserMessageHandler {
     private var count: Int = 0
-    weak private var messagePresenter: UIViewController?
+    weak public private (set) var messagePresenter: UIViewController?
     
     let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
     var loadingOverlay: LoadingOverlay = LoadingOverlay()
