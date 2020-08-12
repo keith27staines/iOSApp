@@ -4,6 +4,7 @@ struct Offer {
     var placementUuid: F4SUUID
     var offerState: OfferState?
     var startDateString: String?
+    var endDateString: String?
     var duration: Int?
     var hostCompany: String?
     var hostContact: String?

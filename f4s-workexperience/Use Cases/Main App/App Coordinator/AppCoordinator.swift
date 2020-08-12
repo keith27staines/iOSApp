@@ -171,6 +171,8 @@ extension AppCoordinator {
         ****************************************************************
         Environment name = \(Config.environmentName)
         Base api url = \(Config.workfinderApiBase)
+        Candidate email = \(UserRepository().loadUser().email ?? "not set")
+        Candidate password = \(UserRepository().loadUser().password ?? "not set")
         ****************************************************************
         
         """

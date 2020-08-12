@@ -8,10 +8,11 @@ protocol AddFilePresenterProtocol {
 
 class AddFilePresenter: AddFilePresenterProtocol {
     
-    var documentUploader = DocumentUploader()
+    let placementUuid: F4SUUID
     var uploadBytes: Data?
     var filename: String?
     let maxBytes = 10 * 1024 * 1024
+    
     enum State {
         case noSelection
         case selecting
@@ -89,8 +90,13 @@ class AddFilePresenter: AddFilePresenterProtocol {
         }
     }
     
-    init(coordinator: DocumentUploadCoordinator) {
+    init(coordinator: DocumentUploadCoordinator, placementUuid: F4SUUID) {
         self.coordinator = coordinator
+        self.placementUuid = placementUuid
+    }
+    
+    var uploadRelativePath: String {
+        "placements/\(placementUuid)"
     }
     
     func onViewDidLoad(view: AddFileViewControllerProtocol) {
@@ -115,7 +121,13 @@ class AddFilePresenter: AddFilePresenterProtocol {
         switch state {
         case .selectionGood, .uploadFailed:
             guard let filename = filename, let data = uploadBytes else { return }
-            coordinator?.upload(filename: filename, data: data)
+            coordinator?.upload(
+                filename: filename,
+                data: data,
+                metadata: [:],
+                to: "",
+                method: .post
+            )
         default:
             return
         }

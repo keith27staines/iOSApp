@@ -1,5 +1,6 @@
 
 import WorkfinderCommon
+import WorkfinderServices
 import WorkfinderCoordinators
 
 public protocol DocumentUploadCoordinatorParentProtocol: class {
@@ -36,14 +37,30 @@ public class DocumentUploadCoordinator: CoreInjectionNavigationCoordinator {
     }
     
     public override func start() {
-        let presenter = AddFilePresenter(coordinator: self)
+        delegate?.onSkipDocumentUpload()
+        let presenter = AddFilePresenter(coordinator: self, placementUuid: "")
         let vc = AddFileViewController(coordinator: self, presenter: presenter)
         navigationRouter.push(viewController: vc, animated: true)
         addFileViewController = vc
     }
     
-    func upload(filename: String, data: Data) {
-        let presenter = UploadPresenter(coordinator: self, filename: filename, data: data)
+    func upload(filename: String,
+                data: Data,
+                metadata: [String:String],
+                to urlString: String,
+                method: RequestVerb
+    ) {
+        let service = DocumentUploadService(networkConfig: injected.networkConfig)
+        let uploader = DocumentUploader(service: service)
+        let presenter = UploadPresenter(
+            coordinator: self,
+            filename: filename,
+            fileBytes: data,
+            metadata: metadata,
+            to: urlString,
+            method: method,
+            uploader: uploader
+        )
         let vc = UploadViewController(coordinator: self, presenter: presenter)
         navigationRouter.present(vc, animated: true, completion: nil)
         uploadViewController = vc
