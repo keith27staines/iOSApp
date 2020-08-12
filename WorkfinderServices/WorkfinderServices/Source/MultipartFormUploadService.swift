@@ -4,13 +4,13 @@ import WorkfinderCommon
 import WorkfinderNetworking
 
 public protocol DocumentUploadServiceDelegate {
-    func documentUploader(_ : DocumentUploadService, didChangeState: DocumentUploadState)
+    func documentUploader(_ service: DocumentUploadService, didChangeState state: DocumentUploadState)
 }
 
-public protocol DocumentUploadServiceProtocol {
+public protocol DocumentUploadServiceProtocol: AnyObject {
     var delegate: DocumentUploadServiceDelegate? { get set }
     var state: DocumentUploadState { get }
-    func beginUpload(name: String, fields: [String: String], fileBytes: Data, to url: URL)
+    func beginUpload(name: String, fields: [String: String], fileBytes: Data, to url: URL, method: RequestVerb)
     func cancel()
 }
 
@@ -41,16 +41,21 @@ public class DocumentUploadService : NSObject, DocumentUploadServiceProtocol {
         super.init()
     }
     
-    public func beginUpload(name: String, fields: [String: String], fileBytes: Data, to url: URL) {
+    public func beginUpload(
+        name: String,
+        fields: [String: String],
+        fileBytes: Data,
+        to url: URL,
+        method:RequestVerb) {
         task?.cancel()
-        buildTask(name: name, fields: fields, fileBytes: fileBytes, to: url)
+        buildTask(name: name, fields: fields, fileBytes: fileBytes, to: url, method: method)
         task?.resume()
     }
     
-    func buildTask(name: String, fields: [String: String], fileBytes: Data, to url: URL) {
+    func buildTask(name: String, fields: [String: String], fileBytes: Data, to url: URL, method: RequestVerb) {
         let form = DocumentForm(name: name, fields: fields, fileBytes: fileBytes)
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
+        request.httpMethod = method.name
         request.allHTTPHeaderFields = form.headers
         request.httpBody = form.data
         let signedRequest = networkConfig.signedRequest(request)
