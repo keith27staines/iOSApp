@@ -29,11 +29,13 @@ class OfferPresenter: OfferPresenterProtocol {
     var companyName: String { application.companyName }
     var offerState: OfferState? { offer?.offerState }
     var startDateString: String? { offer?.startDateString }
+    var endDateString: String? { offer?.endDateString }
     var duration: String? { "\(String(offer?.duration ?? 0)) days" }
     var hostCompany: String? { offer?.hostCompany }
     var hostContact: String? { offer?.hostContact }
     var email: String? { offer?.email }
     var location: String? { offer?.location }
+    var notes: String?  { offer?.offerNotes }
     var screenTitle: String { offerState?.screenTitle ?? "Offer"}
     var stateDescription: String? { return offerState?.description }
     var logoUrl: String? { offer?.logoUrl}
@@ -102,19 +104,19 @@ class OfferPresenter: OfferPresenterProtocol {
         let rowType = OfferTableRowType(rawValue: indexPath.row)!
         switch rowType {
         case .startDate:
-            return OfferDetailCellInfo(firstLine: "Start date", secondLine: offer?.startDateString)
-        case .duration:
-            return OfferDetailCellInfo(firstLine: "Duration", secondLine: "\(String(offer?.duration ?? 0)) days")
+            return OfferDetailCellInfo(firstLine: "Start date", secondLine: startDateString)
+        case .endDate:
+            return OfferDetailCellInfo(firstLine: "End date", secondLine: endDateString)
         case .company:
-            return OfferDetailCellInfo(firstLine: "Host company", secondLine: offer?.hostCompany)
+            return OfferDetailCellInfo(firstLine: "Host company", secondLine: hostCompany)
         case .host:
-            return OfferDetailCellInfo(firstLine: "Host contact", secondLine: offer?.hostContact)
+            return OfferDetailCellInfo(firstLine: "Host contact", secondLine: hostContact)
         case .email:
-            return OfferDetailCellInfo(firstLine: "Email", secondLine: offer?.email)
+            return OfferDetailCellInfo(firstLine: "Email", secondLine: email)
         case .location:
-            return OfferDetailCellInfo(firstLine: "Location", secondLine: offer?.location)
+            return OfferDetailCellInfo(firstLine: "Location", secondLine: location)
         case .notes:
-            return OfferDetailCellInfo(firstLine: "Notes", secondLine: offer?.offerNotes)
+            return OfferDetailCellInfo(firstLine: "Notes", secondLine: notes)
         }
     }
     
@@ -122,7 +124,7 @@ class OfferPresenter: OfferPresenterProtocol {
         let rowType = OfferTableRowType(rawValue: indexPath.row)!
         switch rowType {
         case .startDate: break
-        case .duration: break
+        case .endDate: break
         case .company: coordinator?.showCompany(application: application)
         case .host: coordinator?.showCompanyHost(application: application)
         case .email: break
@@ -135,7 +137,7 @@ class OfferPresenter: OfferPresenterProtocol {
         guard let rowType = OfferTableRowType(rawValue: indexPath.row) else { return .none }
         switch rowType {
         case .startDate: return .none
-        case .duration: return .none
+        case .endDate: return .none
         case .company: return .disclosureIndicator
         case .host: return .disclosureIndicator
         case .email: return .none
@@ -147,7 +149,7 @@ class OfferPresenter: OfferPresenterProtocol {
 
 fileprivate enum OfferTableRowType: Int, CaseIterable {
     case startDate
-    case duration
+    case endDate
     case company
     case host
     case email
