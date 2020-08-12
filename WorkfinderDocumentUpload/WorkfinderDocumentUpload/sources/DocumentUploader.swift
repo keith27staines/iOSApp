@@ -86,7 +86,10 @@ public class DocumentUploader: DocumentUploaderProtocol {
         self.completion = completion
         prepareForUpload()
         let now = DispatchTime.now()
-        service?.beginUpload(name: "", fields: metadata, fileBytes: fileBytes, to: url, method: method)
+        #warning("uncomment this line and delete the next two when service is ready")
+        //service?.beginUpload(name: "", fields: metadata, fileBytes: fileBytes, to: url, method: method)
+        bytesFraction = 1
+        uploadCompleted = true
         DispatchQueue.global(qos: .background).async {
             for percentage in 0...100 {
                 guard !self.cancelled else { break }

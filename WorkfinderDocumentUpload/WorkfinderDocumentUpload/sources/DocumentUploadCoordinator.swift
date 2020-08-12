@@ -37,6 +37,7 @@ public class DocumentUploadCoordinator: CoreInjectionNavigationCoordinator {
     }
     
     public override func start() {
+        delegate?.onSkipDocumentUpload()
         let presenter = AddFilePresenter(coordinator: self, placementUuid: "")
         let vc = AddFileViewController(coordinator: self, presenter: presenter)
         navigationRouter.push(viewController: vc, animated: true)
