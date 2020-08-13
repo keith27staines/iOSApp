@@ -8,7 +8,7 @@ public class EditorThenLetterFlow: CoverLetterFlow {
     public override var messageHandler: UserMessageHandler? { letterEditorViewController?.messageHandler }
     
     lazy var presenter: LetterEditorPresenter = {
-        LetterEditorPresenter(coordinator: self, logic: logic)
+        LetterEditorPresenter(coordinator: self, logic: logic, log: self.injected.log)
     }()
     
     override public func start() {
@@ -22,7 +22,9 @@ public class EditorThenLetterFlow: CoverLetterFlow {
         let presenter = CoverLetterViewPresenter(
             coordinator: self,
             primaryButtonTitle: "Submit application",
-            logic: logic)
+            logic: logic,
+            log: self.injected.log
+        )
         let vc = CoverLetterViewController(presenter: presenter)
         self.coverLetterViewController = vc
         navigationRouter.push(viewController: vc, animated: true)

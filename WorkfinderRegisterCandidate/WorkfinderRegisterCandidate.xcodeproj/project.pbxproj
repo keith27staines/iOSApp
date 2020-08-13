@@ -26,6 +26,7 @@
 		FC0E566224CBF615004FDDFF /* HTTPErrorJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E566124CBF615004FDDFF /* HTTPErrorJson.swift */; };
 		FC0E566424CBF61F004FDDFF /* PhoneNumberValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E566324CBF61F004FDDFF /* PhoneNumberValidator.swift */; };
 		FC0E566624CBF6D6004FDDFF /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0E566524CBF6D6004FDDFF /* WorkfinderCoordinators.framework */; };
+		FCFE646D24E57712005E1FD0 /* TrackEvent+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE646C24E57712005E1FD0 /* TrackEvent+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		FC0E566124CBF615004FDDFF /* HTTPErrorJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPErrorJson.swift; sourceTree = "<group>"; };
 		FC0E566324CBF61F004FDDFF /* PhoneNumberValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberValidator.swift; sourceTree = "<group>"; };
 		FC0E566524CBF6D6004FDDFF /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCFE646C24E57712005E1FD0 /* TrackEvent+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TrackEvent+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 				FC0E565F24CBF60C004FDDFF /* NextHideToolbar.swift */,
 				FC0E566124CBF615004FDDFF /* HTTPErrorJson.swift */,
 				FC0E566324CBF61F004FDDFF /* PhoneNumberValidator.swift */,
+				FCFE646C24E57712005E1FD0 /* TrackEvent+Extensions.swift */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCFE646D24E57712005E1FD0 /* TrackEvent+Extensions.swift in Sources */,
 				FC0E565424CBF5D8004FDDFF /* RegisterUserViewController.swift in Sources */,
 				FC0E565A24CBF5F2004FDDFF /* SignInUserPresenter.swift in Sources */,
 				FC0E565624CBF5E4004FDDFF /* RegisterUserPresenter.swift in Sources */,

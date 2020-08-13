@@ -67,6 +67,10 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
         if self.isMovingFromParent { presenter.onDidCancel() }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        presenter.onViewDidAppear()
+    }
+    
     func loadData() {
         showLoadingIndicator()
         presenter.loadData() { [weak self] optionalError in

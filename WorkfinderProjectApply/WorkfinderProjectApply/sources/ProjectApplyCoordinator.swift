@@ -30,6 +30,8 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
     weak var successViewController: UIViewController?
     var placementService: PostPlacementServiceProtocol?
     var delegate: ProjectApplyCoordinatorDelegate?
+    var projectType: String = ""
+    var log: F4SAnalytics { injected.log }
     
     lazy public var errorHandler: ErrorHandlerProtocol = {
         ErrorHandler(
@@ -107,11 +109,16 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
 extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
     
     func onTapApply() {
+        projectType = projectPresenter?.projectName ?? ""
+        let properties: [String:String] = ["application_type" : "project", "project_type" : projectType]
+        log.track(TrackingEvent(type: .projectApplyStart, additionalProperties: properties))
         startCoverLetterFlow()
     }
     
     func onModalFinished() {
         originalVC?.dismiss(animated: true, completion: nil)
+        let properties: [String:String] = ["application_type" : "project", "project_type" : projectType]
+        log.track(TrackingEvent(type: .projectApplySubmit, additionalProperties: properties))
         delegate?.onProjectApplyDidFinish()
         parentCoordinator?.childCoordinatorDidFinish(self)
     }

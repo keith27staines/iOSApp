@@ -8,6 +8,8 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
     var consistencyError: WorkfinderError?
     var appearanceCount: Int = 0
     let logic: CoverLetterLogic
+    let log: F4SAnalytics
+    var showingPicklist: PicklistProtocol?
     
     var additionalInformationPicklists: [PicklistProtocol] {
         switch logic.flowType {
@@ -36,6 +38,8 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
     }
     
     func showPicklist(_ picklist: PicklistProtocol) {
+        showingPicklist = picklist
+        log.track(TrackingEvent.event(type: .questionOpened(picklist.type), flow: logic.flowType))
         appearanceCount -= 1
         coordinator?.showPicklist(picklist)
     }
@@ -80,6 +84,11 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
     }
 
     func onViewDidAppear() {
+        if let picklist = showingPicklist {
+            log.track(TrackingEvent.event(type: .questionClosed(picklist.type), flow: logic.flowType))
+            showingPicklist = nil
+        }
+        log.track(TrackingEvent.event(type: .letterEditor, flow: logic.flowType))
         appearanceCount += 1
         consistencyCheck()
         coordinator?.onLetterEditorDidUpdate()
@@ -120,9 +129,11 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
     }
     
     init(coordinator: LetterEditorCoordinatorProtocol,
-         logic: CoverLetterLogic) {
+         logic: CoverLetterLogic,
+         log: F4SAnalytics) {
         self.coordinator = coordinator
         self.logic = logic
+        self.log = log
     }
 }
 

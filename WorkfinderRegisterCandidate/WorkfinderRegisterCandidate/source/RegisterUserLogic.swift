@@ -17,6 +17,7 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
     var isUserUuidFetched:  Bool = false
     var isCandidateCreated: Bool = false
     var isCandidateFetched: Bool = false
+    let log: F4SAnalytics
     
     lazy var registerService: RegisterUserServiceProtocol = {
         return RegisterUserService(networkConfig: self.networkConfig)
@@ -40,10 +41,12 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
     
     init(networkConfig: NetworkConfig,
          userRepository: UserRepositoryProtocol,
-         mode: RegisterAndSignInMode) {
+         mode: RegisterAndSignInMode,
+         log: F4SAnalytics) {
         self.networkConfig = networkConfig
         self.userRepository = userRepository
         self.mode = mode
+        self.log = log
     }
     
     var completion: ((Result<Candidate,Error>) -> Void)?
@@ -59,6 +62,7 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
     }
     
     func signIn() {
+        log.track(TrackingEvent.signInUser())
         let user = userRepository.loadUser()
         signInService.signIn(user: user) { [weak self] result in
             guard let self = self else { return }
@@ -77,10 +81,12 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
             return
         }
         let user = userRepository.loadUser()
+        log.track(TrackingEvent.registerUser())
         registerService.registerUser(user: user) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
-            case .success(let token): self.onIsRegistered(tokenValue: token.key)
+            case .success(let token):
+                self.onIsRegistered(tokenValue: token.key)
             case .failure(let error): self.completion?(Result<Candidate,Error>.failure(error))
             }
         }

@@ -70,13 +70,29 @@ class CompanyMainViewPresenter: CompanyMainViewPresenterProtocol {
         let hostRowIndex = hostsSectionPresenter.selectedHostRow  ?? 0
         let host = hostsSectionPresenter.selectedAssociation?.host.uuid ?? ""
         let company = workplace.companyJson.uuid ?? ""
-        let event = TrackEventFactory.makeApplyStart(
+        let event = TrackingEvent.makeApplyStart(
             hostRowIndex: hostRowIndex,
             host: host,
             company: company)
         
-        log?.track(event: event)
+        log?.track(event)
         coordinator?.applyTo(workplace: workplace, hostLocationAssociation: association)
+    }
+}
+
+private extension TrackingEvent {
+    static func makeApplyStart(
+        hostRowIndex: Int,
+        host: F4SUUID,
+        company: F4SUUID) -> TrackingEvent {
+        TrackingEvent(
+            type: .applyStart,
+            additionalProperties: [
+                "host_chosen_position": hostRowIndex,
+                "host_id": host,
+                "company_id": company
+            ]
+        )
     }
 }
 

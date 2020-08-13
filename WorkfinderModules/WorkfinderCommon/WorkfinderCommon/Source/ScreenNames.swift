@@ -15,50 +15,30 @@ public enum TrackEventType: String {
     case companyView
     case applyStart
     case applyComplete
+    
+    case registerUser
+    case signInUser
+    
+    case projectApplyStart
+    case projectApplyNext
+    case projectApplyEdit
+    case projectApplyBack
+    case projectApplyPreview
+    case projectApplySubmit
 }
 
-
-public struct TrackEvent {
-    public let type: TrackEventType
+public struct TrackingEvent {
+    public let name: String
     public let additionalProperties: [String: Any]?
-    public var name: String { return type.rawValue }
-    init(type: TrackEventType, additionalProperties: [String:Any]? = nil) {
-        self.type = type
+
+    public init(type: TrackEventType, additionalProperties: [String:Any]? = nil) {
+        self.name = type.rawValue
         self.additionalProperties = additionalProperties
     }
-}
-
-public class TrackEventFactory {
-    public enum TabName: String {
-        case applications
-        case recommendations
-        case notifications
-        case search
+    
+    public init(name: String, additionalProperties: [String:Any]? = nil) {
+        self.name = name
+        self.additionalProperties = additionalProperties
     }
     
-    public static func makeAppOpen() -> TrackEvent { TrackEvent(type: .appOpen) }
-    public static func makeCompanyView() -> TrackEvent { TrackEvent(type: .companyView) }
-    public static func makeApplyComplete() -> TrackEvent { TrackEvent(type: .applyComplete) }
-    public static func makeFirstUse() -> TrackEvent { TrackEvent(type: .firstUse) }
-    
-    public static func makeTabTap(tab: TabName) -> TrackEvent {
-        TrackEvent(
-            type: .tabTap,
-            additionalProperties: ["navigation_item": tab.rawValue]
-        )
-    }
-    
-    public static func makeApplyStart(
-        hostRowIndex: Int,
-        host: F4SUUID,
-        company: F4SUUID) -> TrackEvent {
-        TrackEvent(
-            type: .applyStart,
-            additionalProperties: [
-                "host_chosen_position": hostRowIndex,
-                "host_id": host,
-                "company_id": company
-            ]
-        )
-    }
 }
