@@ -9,6 +9,7 @@ protocol CoverLetterViewPresenterProtocol {
     var attributedDisplayString: NSAttributedString { get }
     var primaryButtonTitle: String { get }
     func onViewDidLoad(view: CoverLetterViewProtocol)
+    func onViewDidAppear()
     func loadData(completion: @escaping (Error?) -> Void)
     func onDidTapSelectOptionsButton()
     func onDidCancel()

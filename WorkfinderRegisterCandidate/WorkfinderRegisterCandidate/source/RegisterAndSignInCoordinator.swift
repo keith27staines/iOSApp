@@ -65,7 +65,8 @@ public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, R
         let registerUserLogic = RegisterUserLogic(
             networkConfig: injected.networkConfig,
             userRepository: userRepository,
-            mode: .register)
+            mode: .register,
+            log: injected.log)
         
         let presenter = RegisterUserPresenter(
             coordinator: self,
@@ -82,7 +83,8 @@ public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, R
         let registerUserLogic = RegisterUserLogic(
             networkConfig: injected.networkConfig,
             userRepository: userRepository,
-            mode: .signIn)
+            mode: .signIn,
+            log: injected.log)
         
         let presenter = SignInUserPresenter(
             coordinator: self,

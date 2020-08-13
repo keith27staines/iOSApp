@@ -231,13 +231,28 @@ extension TabBarCoordinator: UITabBarControllerDelegate {
         let log = injected.log
         switch viewController {
         case searchCoordinator.navigationRouter.navigationController:
-            log.track(event: TrackEventFactory.makeTabTap(tab: .search))
+            log.track(TrackingEvent.makeTabTap(tab: .search))
         case applicationsCoordinator.navigationRouter.navigationController:
-            log.track(event: TrackEventFactory.makeTabTap(tab: .applications))
+            log.track(TrackingEvent.makeTabTap(tab: .applications))
         case recommendationsCoordinator.navigationRouter.navigationController:
-            log.track(event: TrackEventFactory.makeTabTap(tab: .recommendations))
+            log.track(TrackingEvent.makeTabTap(tab: .recommendations))
         default:
             fatalError("unknown coordinator")
         }
+    }
+}
+
+fileprivate extension TrackingEvent {
+    enum TabName: String {
+        case applications
+        case recommendations
+        case notifications
+        case search
+    }
+    static func makeTabTap(tab: TabName) -> TrackingEvent {
+        TrackingEvent(
+            type: .tabTap,
+            additionalProperties: ["navigation_item": tab.rawValue]
+        )
     }
 }

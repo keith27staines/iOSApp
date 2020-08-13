@@ -55,7 +55,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         guard let window = UIApplication.shared.keyWindow
             else { return }
         let log = injected.log
-        log.track(event: TrackEventFactory.makeApplyComplete())
+        log.track(TrackingEvent(type: .applyComplete))
         let navigationController = navigationRouter.navigationController
         window.addSubview(successPopup)
         navigationController.navigationBar.layer.zPosition = -1

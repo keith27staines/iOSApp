@@ -38,7 +38,6 @@ public class  CoverLetterFlowFactory {
             return LetterThenEditorFlow(parent: parent, navigationRouter: navigationRouter, inject: inject, logic: logic)
         case .projectApplication:
             return LetterThenEditorFlow(parent: parent, navigationRouter: navigationRouter, inject: inject, logic: logic)
-//            return EditorThenLetterFlow(parent: parent, navigationRouter: navigationRouter, inject: inject, logic: logic)
         }
     }
 }

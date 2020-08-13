@@ -37,9 +37,9 @@ public class F4SLog : F4SAnalyticsAndDebugging {
     func trackAppOpenedEvent() {
         let localStore = LocalStore()
         let isFirstLaunch = localStore.value(key: .isFirstLaunch) as? Bool ?? true
-        let openEvent: TrackEvent
-        openEvent = isFirstLaunch ? TrackEventFactory.makeFirstUse() : TrackEventFactory.makeAppOpen()
-        self.track(event: openEvent)
+        let openEvent: TrackingEvent
+        openEvent = isFirstLaunch ? TrackingEvent(type: .firstUse) : TrackingEvent(type: .appOpen)
+        self.track(openEvent)
     }
     
     func startMixpanel(for environment: EnvironmentType) {
@@ -68,7 +68,7 @@ public class F4SLog : F4SAnalyticsAndDebugging {
 
 extension F4SLog : F4SAnalytics {
     
-    public func track(event: TrackEvent) {
+    public func track(_ event: TrackingEvent) {
         var mixpanelProperties = event.additionalProperties?.compactMapValues({ (value) -> MixpanelType? in
             value as? MixpanelType
         }) ?? [:]
@@ -80,6 +80,9 @@ extension F4SLog : F4SAnalytics {
             mixpanelProperties["device_id"] = vendorUuid
         }
         mixPanel.track(event: event.name, properties: mixpanelProperties)
+        print("###############################################################")
+        print("track \(event.name) with properties \(mixpanelProperties)")
+        print("###############################################################")
     }
     
     public func screen(_ name: ScreenName) {

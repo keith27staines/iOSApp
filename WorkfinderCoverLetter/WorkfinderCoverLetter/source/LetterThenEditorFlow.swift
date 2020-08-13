@@ -11,7 +11,9 @@ public class LetterThenEditorFlow: CoverLetterFlow  {
         let presenter = CoverLetterViewPresenter(
             coordinator: self,
             primaryButtonTitle: self.applyCoordinator?.coverLetterPrimaryButtonText ?? "Next",
-            logic: logic)
+            logic: logic,
+            log: self.injected.log
+        )
         return presenter
     }()
     
@@ -27,7 +29,7 @@ public class LetterThenEditorFlow: CoverLetterFlow  {
     }
     
     override func onCoverLetterTapEdit() {
-        let presenter = LetterEditorPresenter(coordinator: self, logic: logic)
+        let presenter = LetterEditorPresenter(coordinator: self, logic: logic, log: self.injected.log)
         let vc = LetterEditorViewController(presenter: presenter)
         letterEditorViewController = vc
         navigationRouter.push(viewController: vc, animated: true)
