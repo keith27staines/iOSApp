@@ -80,9 +80,11 @@ extension F4SLog : F4SAnalytics {
             mixpanelProperties["device_id"] = vendorUuid
         }
         mixPanel.track(event: event.name, properties: mixpanelProperties)
+        print()
         print("###############################################################")
         print("track \(event.name) with properties \(mixpanelProperties)")
         print("###############################################################")
+        print()
     }
     
     public func screen(_ name: ScreenName) {
