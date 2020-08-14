@@ -1512,6 +1512,7 @@
 				DEVELOPMENT_TEAM_ReleaseF4S = YB7C23CK6Q;
 				DEVELOPMENT_TEAM_ReleaseF4SLive = YB7C23CK6Q;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 3.1.4;
 				NAME_FOR_ENVIRONMENT = Workfinder;
@@ -1604,6 +1605,7 @@
 				DEVELOPMENT_TEAM_ReleaseF4S = YB7C23CK6Q;
 				DEVELOPMENT_TEAM_ReleaseF4SLive = YB7C23CK6Q;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 3.1.4;
 				NAME_FOR_ENVIRONMENT = Workfinder;
@@ -1701,6 +1703,7 @@
 				DEVELOPMENT_TEAM_ReleaseF4S = YB7C23CK6Q;
 				DEVELOPMENT_TEAM_ReleaseF4SLive = YB7C23CK6Q;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 3.1.4;
 				NAME_FOR_ENVIRONMENT = Staging;
@@ -1792,6 +1795,7 @@
 				DEVELOPMENT_TEAM_ReleaseF4S = YB7C23CK6Q;
 				DEVELOPMENT_TEAM_ReleaseF4SLive = YB7C23CK6Q;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 3.1.4;
 				NAME_FOR_ENVIRONMENT = Staging;
