@@ -265,29 +265,20 @@ public enum PicklistType: Int, CaseIterable, Codable {
         case .duration: return ""
         }
     }
-    /*
-     '01' - University,
-     '02' - Year Of Study,
-     '03' - Discipline,
-     '04' - Motivation,
-     '05' Experience,
-     '06' - Skills,
-     '07' - Attributes
-     */
-    public var trackingNumber: String {
+
+    public var trackingCode: String {
         switch self {
-            
-        case .year:                 return "02"
-        case .subject:              return "03"
-        case .institutions:         return "01"
-        case .placementType:        return ""
-        case .project:              return ""
-        case .motivation:           return "04"
-        case .availabilityPeriod:   return ""
-        case .duration:             return ""
-        case .experience:           return "05"
-        case .attributes:           return "07"
-        case .skills:               return "06"
+        case .year:                 return "yearOfStudy"
+        case .subject:              return "subject"
+        case .institutions:         return "university"
+        case .placementType:        return "placementType"
+        case .project:              return "project"
+        case .motivation:           return "motivation"
+        case .availabilityPeriod:   return "availabilityPeriod"
+        case .duration:             return "duration"
+        case .experience:           return "experience"
+        case .attributes:           return "attribute"
+        case .skills:               return "skill"
         }
     }
 }
