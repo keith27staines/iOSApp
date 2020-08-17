@@ -4,11 +4,6 @@ import WorkfinderServices
 
 public protocol DocumentUploaderProtocol {
     func upload(
-        fileNamed: String,
-        fileBytes: Data,
-        metadata: [String: String],
-        to url: URL,
-        method: RequestVerb,
         progress: @escaping (Result<Float,Error>) -> Void,
         completion: @escaping (Error?)->Void )
     func cancel()
@@ -17,6 +12,12 @@ public protocol DocumentUploaderProtocol {
 public class DocumentUploader: DocumentUploaderProtocol {
     
     private var cancelled: Bool = false
+    let filename: String
+    let mime: String
+    let filedata: Data
+    let metadata: [String:String]
+    let url: URL
+    let method: RequestVerb
     
     let service: DocumentUploadServiceProtocol?
     var progress: ((Result<Float,Error>) -> Void)?
@@ -57,8 +58,20 @@ public class DocumentUploader: DocumentUploaderProtocol {
         completion?(nil)
     }
     
-    public init(service: DocumentUploadServiceProtocol) {
+    public init(service: DocumentUploadServiceProtocol,
+                filename: String,
+                mime: String,
+                filedata: Data,
+                metadata: [String:String],
+                to url: URL,
+                method: RequestVerb) {
         self.service = service
+        self.filename = filename
+        self.mime = mime
+        self.filedata = filedata
+        self.metadata = metadata
+        self.url = url
+        self.method = method
     }
     
     public func cancel() {
@@ -75,21 +88,21 @@ public class DocumentUploader: DocumentUploaderProtocol {
     }
     
     public func upload(
-        fileNamed: String,
-        fileBytes: Data,
-        metadata: [String: String],
-        to url: URL,
-        method: RequestVerb,
         progress: @escaping (Result<Float,Error>) -> Void,
-        completion: @escaping (Error?)->Void ) {
+        completion: @escaping (Error?)->Void
+    ) {
         self.progress = progress
         self.completion = completion
         prepareForUpload()
         let now = DispatchTime.now()
-        #warning("uncomment this line and delete the next two when service is ready")
-        //service?.beginUpload(name: "", fields: metadata, fileBytes: fileBytes, to: url, method: method)
-        bytesFraction = 1
-        uploadCompleted = true
+        service?.beginUpload(
+            name: filename,
+            mime: mime,
+            fields: metadata,
+            fileBytes: filedata,
+            to: url,
+            method: method
+        )
         DispatchQueue.global(qos: .background).async {
             for percentage in 0...100 {
                 guard !self.cancelled else { break }

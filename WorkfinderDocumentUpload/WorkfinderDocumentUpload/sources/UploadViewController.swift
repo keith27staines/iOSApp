@@ -51,7 +51,7 @@ class UploadViewController: UIViewController {
                     self.coordinator?.onUploadComplete()
                 },
                 retryHandler: {
-                    
+                    self.upload()
                 }
             )
         }

@@ -8,9 +8,9 @@ protocol AddFilePresenterProtocol {
 
 class AddFilePresenter: AddFilePresenterProtocol {
     
-    let placementUuid: F4SUUID
     var uploadBytes: Data?
     var filename: String?
+    var mime: String?
     let maxBytes = 10 * 1024 * 1024
     
     enum State {
@@ -90,13 +90,8 @@ class AddFilePresenter: AddFilePresenterProtocol {
         }
     }
     
-    init(coordinator: DocumentUploadCoordinator, placementUuid: F4SUUID) {
+    init(coordinator: DocumentUploadCoordinator) {
         self.coordinator = coordinator
-        self.placementUuid = placementUuid
-    }
-    
-    var uploadRelativePath: String {
-        "placements/\(placementUuid)"
     }
     
     func onViewDidLoad(view: AddFileViewControllerProtocol) {
@@ -120,13 +115,11 @@ class AddFilePresenter: AddFilePresenterProtocol {
     func onPrimaryTapped() {
         switch state {
         case .selectionGood, .uploadFailed:
-            guard let filename = filename, let data = uploadBytes else { return }
+            guard let filename = filename, let data = uploadBytes, let mime = mime else { return }
             coordinator?.upload(
                 filename: filename,
-                data: data,
-                metadata: [:],
-                to: "",
-                method: .post
+                data: data, mime: mime,
+                metadata: [:]
             )
         default:
             return
@@ -141,11 +134,16 @@ class AddFilePresenter: AddFilePresenterProtocol {
         do {
             filename = fileUrl.lastPathComponent
             let data = try Data(contentsOf: fileUrl, options: .uncached)
-            if data.count > maxBytes {
+            guard let mime = MimeType(fileExtension: fileUrl.pathExtension) else {
+                state = .selectionWrongType
+                return
+            }
+            guard data.count <= maxBytes else {
                 state = .selectionTooBig
                 return
             }
             uploadBytes = data
+            self.mime = mime.rawValue
             state = .selectionGood
         } catch {
             state = .selectionWrongType
