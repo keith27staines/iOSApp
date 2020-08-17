@@ -14,7 +14,6 @@
 		FC036BD024497FD5008C4A69 /* WorkfinderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC036BCF24497FD5008C4A69 /* WorkfinderService.swift */; };
 		FC105373245897AB00024706 /* Placement services.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC105372245897AB00024706 /* Placement services.swift */; };
 		FC20BD4C2450747900FC6C9A /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC20BD4B2450747900FC6C9A /* WorkfinderNetworking.framework */; };
-		FC2C701724EB1D96001317C2 /* MultipartRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2C701624EB1D96001317C2 /* MultipartRequest.swift */; };
 		FC3BCA5D2434DF0700C5A96A /* PicklistProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3BCA5C2434DF0700C5A96A /* PicklistProvider.swift */; };
 		FC3BCA612434E04E00C5A96A /* DataTaskCompletionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3BCA602434E04E00C5A96A /* DataTaskCompletionHandler.swift */; };
 		FC459CE724960EF000D6CE46 /* WorkplaceAndAssociationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC459CE624960EF000D6CE46 /* WorkplaceAndAssociationService.swift */; };
@@ -53,7 +52,6 @@
 		FC036BCF24497FD5008C4A69 /* WorkfinderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderService.swift; sourceTree = "<group>"; };
 		FC105372245897AB00024706 /* Placement services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Placement services.swift"; sourceTree = "<group>"; };
 		FC20BD4B2450747900FC6C9A /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC2C701624EB1D96001317C2 /* MultipartRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartRequest.swift; sourceTree = "<group>"; };
 		FC3BCA5C2434DF0700C5A96A /* PicklistProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicklistProvider.swift; sourceTree = "<group>"; };
 		FC3BCA602434E04E00C5A96A /* DataTaskCompletionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTaskCompletionHandler.swift; sourceTree = "<group>"; };
 		FC459CE624960EF000D6CE46 /* WorkplaceAndAssociationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkplaceAndAssociationService.swift; sourceTree = "<group>"; };
@@ -158,7 +156,6 @@
 				FC612B53248794B700C498ED /* Associations service.swift */,
 				FCA13FBA24BC3C5D0009C30F /* SmallImageService.swift */,
 				FCEF9CF924DFD5D00015F989 /* DocumentUploadService.swift */,
-				FC2C701624EB1D96001317C2 /* MultipartRequest.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -321,7 +318,6 @@
 				FC3BCA5D2434DF0700C5A96A /* PicklistProvider.swift in Sources */,
 				FC105373245897AB00024706 /* Placement services.swift in Sources */,
 				FC75B35524948169008B4FBB /* RecommendationsService.swift in Sources */,
-				FC2C701724EB1D96001317C2 /* MultipartRequest.swift in Sources */,
 				FC3BCA612434E04E00C5A96A /* DataTaskCompletionHandler.swift in Sources */,
 				FC0100B6248A15B9007D8020 /* LocationService.swift in Sources */,
 				FC473E8F2451CE50004CEA17 /* TemplateProvider.swift in Sources */,
