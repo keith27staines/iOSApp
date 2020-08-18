@@ -37,7 +37,7 @@ public class UnderlinedNextResponderTextFieldStack: UIStackView {
     
     public lazy var greenTick: UIImageView = {
         let image = UIImage(named: "tick")?
-            .scaledImage(with: CGSize(width: 12, height: 12))
+            .scaledImage(with: CGSize(width: 15, height: 12))
             .withRenderingMode(.alwaysTemplate)
         let imageView = UIImageView(image: image)
         imageView.tintColor = self.underline.goodColor
