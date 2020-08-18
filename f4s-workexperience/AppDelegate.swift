@@ -30,26 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         companyFileDownloadManager = self.masterBuilder.companyFileDownloadManager
     }
     
-    /*
-     if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
-         guard let encodedURL = userActivity.webpageURL else {
-             print("Unable to handle user activity: No URL provided")
-             return false
-         }
-         let task = URLSession.shared.dataTask(with: encodedURL, completionHandler: { (data, response, error) in
-             guard let resolvedURL = response?.url else {
-                 print("Unable to handle URL: \(encodedURL.absoluteString)")
-                 return
-             }
-             // Now you have the resolved URL that you can
-             // use to navigate somewhere in the app.
-             print(resolvedURL)
-         })
-         task.resume()
-     }
-     return true
-     */
-    
     func application(_ application: UIApplication,
                      continue userActivity: NSUserActivity,
                      restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
@@ -60,10 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Incoming URL: \(incomingURL)")
         let task = URLSession.shared.dataTask(with: incomingURL, completionHandler: { [weak self] (data, response, error) in
             guard let resolvedURL = response?.url else { return }
-            // Now you have the resolved URL that you can
-            // use to navigate somewhere in the app.
-            print("Resolved URL: \(resolvedURL)")
-            _ = self?.appCoordinator.handleDeepLinkUrl(url: incomingURL)
+            // use the fully resolved link to navigate somewhere in the app.
+            _ = self?.appCoordinator.handleDeepLinkUrl(url: resolvedURL)
         })
         task.resume()
         return true
