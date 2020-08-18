@@ -10,7 +10,7 @@ public protocol DocumentUploadServiceDelegate {
 public protocol DocumentUploadServiceProtocol: AnyObject {
     var delegate: DocumentUploadServiceDelegate? { get set }
     var state: DocumentUploadState { get }
-    func beginUpload(name: String, fields: [String: String], fileBytes: Data, to url: URL, method: RequestVerb)
+    func beginUpload(name: String, mime: String, fields: [String: String], fileBytes: Data, to url: URL, method: RequestVerb)
     func cancel()
 }
 
@@ -43,17 +43,18 @@ public class DocumentUploadService : NSObject, DocumentUploadServiceProtocol {
     
     public func beginUpload(
         name: String,
+        mime: String,
         fields: [String: String],
         fileBytes: Data,
         to url: URL,
         method:RequestVerb) {
         task?.cancel()
-        buildTask(name: name, fields: fields, fileBytes: fileBytes, to: url, method: method)
+        buildTask(name: name, mime: mime, fields: fields, fileBytes: fileBytes, to: url, method: method)
         task?.resume()
     }
     
-    func buildTask(name: String, fields: [String: String], fileBytes: Data, to url: URL, method: RequestVerb) {
-        let form = DocumentForm(name: name, fields: fields, fileBytes: fileBytes)
+    func buildTask(name: String, mime: String, fields: [String: String], fileBytes: Data, to url: URL, method: RequestVerb) {
+        let form = DocumentForm(name: name, fields: fields, fileBytes: fileBytes, mime: mime)
         var request = URLRequest(url: url)
         request.httpMethod = method.name
         request.allHTTPHeaderFields = form.headers
@@ -94,17 +95,22 @@ extension DocumentUploadService : URLSessionTaskDelegate, URLSessionDataDelegate
 struct DocumentForm {
     
     internal private (set) var data = Data()
-    var boundary: String { return "Boundary-\(NSUUID().uuidString)" }
-    
+    let boundary: String = "Boundary-\(NSUUID().uuidString)"
+    let mime: String
     var headers: [String: String] {
         var headers = [String:String]()
+        //headers["Content-Length"] = String(data.count)
         headers["Content-Type"] = "multipart/form-data; boundary=\(boundary)"
-        headers["Content-Length"] = String(data.count)
         return headers
     }
     
-    init(name: String, fields: [String: String], fileBytes: Data) {
-        data = createMultipartData(name: name, dictionary: fields, fileData: data)
+    init(name: String,
+         fields: [String: String],
+         fileBytes: Data,
+         mime: String
+    ) {
+        self.mime = mime
+        data = createMultipartData(name: name, dictionary: fields, fileData: fileBytes)
     }
     
     private func createMultipartData(name: String, dictionary: [String: String], fileData: Data) -> Data {
@@ -127,11 +133,11 @@ struct DocumentForm {
     private func appendDocument(name: String, fileData: Data, to data: Data) -> Data {
         var data = data
         data.append("--\(boundary)\r\n")
-        data.append("Content-Disposition: form-data; name=\"document\"; filename=\"\(name)\"\r\n")
-        data.append("Content-Type: application/pdf\r\n\r\n")
+        data.append("Content-Disposition: form-data; name=\"file\"; filename=\"\(name)\"\r\n")
+        data.append("Content-Type: \(mime)\r\n\r\n")
         data.append(fileData)
         data.append("\r\n")
-        data.append("--\(boundary)--")
+        data.append("--\(boundary)--\r\n")
         return data
     }
     

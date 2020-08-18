@@ -28,7 +28,7 @@
 		FCCA4E30245700F100DFA696 /* Candidate services.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA4E2F245700F100DFA696 /* Candidate services.swift */; };
 		FCCAAEBF249B41F500EA13BD /* WorkfinderServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCAAEBE249B41F500EA13BD /* WorkfinderServicesTests.swift */; };
 		FCCAAEC1249B41F500EA13BD /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC02D9E822EC70FD003C8148 /* WorkfinderServices.framework */; platformFilter = ios; };
-		FCEF9CFA24DFD5D00015F989 /* MultipartFormUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF9CF924DFD5D00015F989 /* MultipartFormUploadService.swift */; };
+		FCEF9CFA24DFD5D00015F989 /* DocumentUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF9CF924DFD5D00015F989 /* DocumentUploadService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,7 +67,7 @@
 		FCCAAEBC249B41F500EA13BD /* WorkfinderServicesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderServicesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCCAAEBE249B41F500EA13BD /* WorkfinderServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderServicesTests.swift; sourceTree = "<group>"; };
 		FCCAAEC0249B41F500EA13BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FCEF9CF924DFD5D00015F989 /* MultipartFormUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartFormUploadService.swift; sourceTree = "<group>"; };
+		FCEF9CF924DFD5D00015F989 /* DocumentUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentUploadService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,7 +155,7 @@
 				FC3BCA602434E04E00C5A96A /* DataTaskCompletionHandler.swift */,
 				FC612B53248794B700C498ED /* Associations service.swift */,
 				FCA13FBA24BC3C5D0009C30F /* SmallImageService.swift */,
-				FCEF9CF924DFD5D00015F989 /* MultipartFormUploadService.swift */,
+				FCEF9CF924DFD5D00015F989 /* DocumentUploadService.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -309,7 +309,7 @@
 				FCCA4E2D2456E77500DFA696 /* User services.swift in Sources */,
 				FC473E932451D331004CEA17 /* WorkplaceListService.swift in Sources */,
 				FC612B54248794B700C498ED /* Associations service.swift in Sources */,
-				FCEF9CFA24DFD5D00015F989 /* MultipartFormUploadService.swift in Sources */,
+				FCEF9CFA24DFD5D00015F989 /* DocumentUploadService.swift in Sources */,
 				FC036BD024497FD5008C4A69 /* WorkfinderService.swift in Sources */,
 				FCCA4E30245700F100DFA696 /* Candidate services.swift in Sources */,
 				FC64E54924C9D6DD008698F8 /* ProjectService.swift in Sources */,

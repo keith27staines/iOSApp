@@ -146,8 +146,8 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
             guard let self = self else { return }
             messageHandler.hideLoadingOverlay()
             switch result {
-            case .success(_):
-                self.onApplicationSubmitted()
+            case .success(let placement):
+                self.onApplicationSubmitted(placement: placement)
             case .failure(let error):
                 messageHandler.displayOptionalErrorIfNotNil(error, cancelHandler: {
                     // just dismiss
@@ -158,8 +158,15 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
         }
     }
     
-    func onApplicationSubmitted() {
-        let coordinator = DocumentUploadCoordinator(parent: self, navigationRouter: newNavigationRouter, inject: injected, delegate: self)
+    func onApplicationSubmitted(placement: Placement) {
+        guard let placementUuid = placement.uuid else { return }
+        let coordinator = DocumentUploadCoordinator(
+            parent: self,
+            navigationRouter: newNavigationRouter,
+            inject: injected, delegate: self,
+            appModel: .placement,
+            objectUuid: placementUuid
+        )
         addChildCoordinator(coordinator)
         coordinator.start()
     }
