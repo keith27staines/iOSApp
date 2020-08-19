@@ -105,6 +105,8 @@
 		FCE5193E22494CED00B550C9 /* F4SJsonValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE5193C22494CEC00B550C9 /* F4SJsonValue.swift */; };
 		FCE75CC6232F631C00C2E976 /* NetworkCallLoggerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE75CC5232F631C00C2E976 /* NetworkCallLoggerProtocol.swift */; };
 		FCE8DAA82320E80B00934E2F /* ScaledNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE8DAA72320E80B00934E2F /* ScaledNumber.swift */; };
+		FCEA245524EBF0A10075A68B /* ProjectAndAssociationDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEA245424EBF0A10075A68B /* ProjectAndAssociationDetail.swift */; };
+		FCEA245724EBF0DC0075A68B /* AssociationDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEA245624EBF0DC0075A68B /* AssociationDetail.swift */; };
 		FCEE3EF6249A645A0034C226 /* CandidateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEE3EF5249A645A0034C226 /* CandidateTests.swift */; };
 		FCFC06AB23225765003C59C8 /* LatLon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06AA23225764003C59C8 /* LatLon.swift */; };
 		FCFDCE5824599278006BA3AC /* PreferredDestinations.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFDCE5724599278006BA3AC /* PreferredDestinations.swift */; };
@@ -222,6 +224,8 @@
 		FCE519512249645C00B550C9 /* F4SCalendarMonthTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = F4SCalendarMonthTests.swift; sourceTree = "<group>"; };
 		FCE75CC5232F631C00C2E976 /* NetworkCallLoggerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCallLoggerProtocol.swift; sourceTree = "<group>"; };
 		FCE8DAA72320E80B00934E2F /* ScaledNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaledNumber.swift; sourceTree = "<group>"; };
+		FCEA245424EBF0A10075A68B /* ProjectAndAssociationDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectAndAssociationDetail.swift; sourceTree = "<group>"; };
+		FCEA245624EBF0DC0075A68B /* AssociationDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationDetail.swift; sourceTree = "<group>"; };
 		FCEE3EF5249A645A0034C226 /* CandidateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateTests.swift; sourceTree = "<group>"; };
 		FCFC069223224080003C59C8 /* ScaledNumberTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaledNumberTests.swift; sourceTree = "<group>"; };
 		FCFC06AA23225764003C59C8 /* LatLon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatLon.swift; sourceTree = "<group>"; };
@@ -379,6 +383,8 @@
 		FCA91E6D2234043D007ED308 /* WorkfinderCommon */ = {
 			isa = PBXGroup;
 			children = (
+				FCEA245624EBF0DC0075A68B /* AssociationDetail.swift */,
+				FCEA245424EBF0A10075A68B /* ProjectAndAssociationDetail.swift */,
 				FC18C5B724C18E99006D017D /* ProjectJson.swift */,
 				FC18C5B924C18EBB006D017D /* ProjectTypeJson.swift */,
 				FCE4F4DF24740CF9005ED80D /* Placement */,
@@ -667,6 +673,7 @@
 				FC8F957C233BA6710027BE02 /* MockCoordinators.swift in Sources */,
 				FC24F9132333CA88005C0A08 /* RequestVerb.swift in Sources */,
 				FCC85DC324517E0A00BC600E /* ProvidersAndServicesProtocols.swift in Sources */,
+				FCEA245524EBF0A10075A68B /* ProjectAndAssociationDetail.swift in Sources */,
 				FCE4F4E124740D11005ED80D /* Placement.swift in Sources */,
 				FCC85DC8245180AB00BC600E /* PicklistTypeEnums.swift in Sources */,
 				FCFE450E2250BA6700C38436 /* MockLocalStore.swift in Sources */,
@@ -704,6 +711,7 @@
 				FC1243E32344AEA30007BA95 /* ScreenNames.swift in Sources */,
 				FCE8DAA82320E80B00934E2F /* ScaledNumber.swift in Sources */,
 				FC69EBA92481371C00901A2B /* GlobalNotifications.swift in Sources */,
+				FCEA245724EBF0DC0075A68B /* AssociationDetail.swift in Sources */,
 				FCC85DCB245184B700BC600E /* PicklistProtocol.swift in Sources */,
 				FCE51938224948E400B550C9 /* F4SHoursType.swift in Sources */,
 				FC8F957D233BA6710027BE02 /* MockAnalyticsAndDebugging.swift in Sources */,

@@ -61,7 +61,7 @@ class ProjectPresenter: ProjectPresenterProtocol {
     let projectUuid: F4SUUID
     let service: ProjectAndAssociationDetailsServiceProtocol
     
-    var detail = ProjectAndAssociationDetail() {
+    var detail: ProjectAndAssociationDetail = ProjectAndAssociationDetail() {
         didSet { view?.refreshFromPresenter() }
     }
     

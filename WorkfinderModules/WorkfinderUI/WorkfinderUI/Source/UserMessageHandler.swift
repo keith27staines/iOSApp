@@ -68,7 +68,8 @@ public class UserMessageHandler {
         messagePresenter?.present(alert, animated: true, completion: nil)
     }
 
-    public func showLoadingOverlay(_ view: UIView, useLightOverlay: Bool = false) {
+    public func showLoadingOverlay(_ view: UIView? = nil, useLightOverlay: Bool = false) {
+        guard let view = view ?? messagePresenter?.view else { return }
         DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else { return }
             let loadingOverlay = strongSelf.loadingOverlay
@@ -84,7 +85,7 @@ public class UserMessageHandler {
         }
     }
 
-    public func showLightLoadingOverlay(_ view: UIView) {
+    public func showLightLoadingOverlay(_ view: UIView? = nil) {
         showLoadingOverlay(view, useLightOverlay: true)
     }
 

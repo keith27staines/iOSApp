@@ -49,8 +49,9 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
     }
     
     func showOfferViewer(for application: Application) {
-        let service = OfferService(networkConfig: networkConfig)
-        let presenter = OfferPresenter(coordinator: self, application: application, service: service)
+        let offerService = OfferService(networkConfig: networkConfig)
+        let projectService = ProjectService(networkConfig: networkConfig)
+        let presenter = OfferPresenter(coordinator: self, application: application, offerService: offerService, projectService: projectService)
         let vc = OfferViewController(coordinator: self, presenter: presenter)
         navigationRouter.push(viewController: vc, animated: true)
     }

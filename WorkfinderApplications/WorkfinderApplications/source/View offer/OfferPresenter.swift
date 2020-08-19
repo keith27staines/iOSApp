@@ -1,3 +1,6 @@
+
+import WorkfinderCommon
+import WorkfinderServices
 import WorkfinderUI
 
 protocol OfferPresenterProtocol {
@@ -24,7 +27,8 @@ class OfferPresenter: OfferPresenterProtocol {
     weak var coordinator: ApplicationsCoordinator?
     weak var view: WorkfinderViewControllerProtocol?
     private let application: Application
-    let service: OfferServiceProtocol
+    let offerService: OfferServiceProtocol
+    let projectService: ProjectServiceProtocol
     private var offer: Offer?
     var companyName: String { application.companyName }
     var offerState: OfferState? { offer?.offerState }
@@ -34,7 +38,11 @@ class OfferPresenter: OfferPresenterProtocol {
     var hostCompany: String? { offer?.hostCompany }
     var hostContact: String? { offer?.hostContact }
     var email: String? { offer?.email }
-    var location: String? { offer?.location }
+    var location: String? {
+        
+        offer?.location
+        
+    }
     var notes: String?  { offer?.offerNotes }
     var screenTitle: String { offerState?.screenTitle ?? "Offer"}
     var stateDescription: String? { return offerState?.description }
@@ -46,10 +54,12 @@ class OfferPresenter: OfferPresenterProtocol {
     
     init(coordinator: ApplicationsCoordinator,
          application: Application,
-         service: OfferServiceProtocol) {
+         offerService: OfferServiceProtocol,
+         projectService: ProjectServiceProtocol) {
         self.coordinator = coordinator
         self.application = application
-        self.service = service
+        self.offerService = offerService
+        self.projectService = projectService
     }
     
     func isNotesField(_ indexPath: IndexPath) -> Bool {
@@ -62,27 +72,35 @@ class OfferPresenter: OfferPresenterProtocol {
     }
     
     func loadData(completion: @escaping (Error?) -> Void) {
-        service.fetchOffer(application: application) {  [weak self] (result) in
-            self?.resultHandler(result: result, completion: completion)
+        offerService.fetchOffer(application: application) {  [weak self] (offerResult) in
+            self?.projectService.fetchProject(uuid: "", completion: { (projectResult) in
+                switch projectResult {
+                case .success(let project):
+                    break
+                case .failure(_):
+                    break
+                }
+            })
+            self?.offerResultHandler(result: offerResult, completion: completion)
         }
     }
     
     func onTapAccept(completion: @escaping (Error?) -> Void) {
         guard let offer = offer else { return }
-        service.accept(offer: offer) {  [weak self] (result) in
-            self?.resultHandler(result: result, completion: completion)
+        offerService.accept(offer: offer) {  [weak self] (result) in
+            self?.offerResultHandler(result: result, completion: completion)
         }
     }
     
     func onTapDeclineWithReason(_ reason: WithdrawReason, otherText: String?, completion: @escaping (Error?) -> Void) {
         guard var offer = offer else { return }
-        service.withdraw(declining: offer, reason: reason, otherText: otherText) { [weak self] (result) in
+        offerService.withdraw(declining: offer, reason: reason, otherText: otherText) { [weak self] (result) in
             offer.reasonWithdrawn = reason
-            self?.resultHandler(result: result, completion: completion)
+            self?.offerResultHandler(result: result, completion: completion)
         }
     }
     
-    func resultHandler(result: Result<Offer,Error>, completion: @escaping (Error?) -> Void) {
+    func offerResultHandler(result: Result<Offer,Error>, completion: @escaping (Error?) -> Void) {
         switch result {
         case .success(let offer):
             self.offer = offer

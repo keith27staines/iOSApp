@@ -33,10 +33,6 @@ public class CoverLetterFlow: CoreInjectionNavigationCoordinator, UserMessageHan
     
     func finishWorkflow(cancelled: Bool) {
         logic.save()
-//        if let originViewController = originViewController {
-//            navigationRouter.popToViewController(originViewController, animated: true)
-//        }
-//        parentCoordinator?.childCoordinatorDidFinish(self)
         if cancelled {
             applyCoordinator?.coverLetterDidCancel()
         } else {

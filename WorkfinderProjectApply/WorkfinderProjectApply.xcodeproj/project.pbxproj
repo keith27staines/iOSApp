@@ -40,10 +40,8 @@
 		FCA13FFA24BC80920009C30F /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA13FF924BC80920009C30F /* WorkfinderCoordinators.framework */; };
 		FCA13FFE24BC80990009C30F /* WorkfinderUserDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA13FFD24BC80990009C30F /* WorkfinderUserDetailsUseCase.framework */; };
 		FCAA887824C59B6F008E1527 /* SimpleTextLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAA887724C59B6F008E1527 /* SimpleTextLabelCell.swift */; };
-		FCADF0E524BDD9EC0040F79D /* AssociationDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCADF0E424BDD9EC0040F79D /* AssociationDetail.swift */; };
 		FCADF0E724BDDA2A0040F79D /* AssociationFullDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCADF0E624BDDA2A0040F79D /* AssociationFullDetailService.swift */; };
 		FCADF0E924BDEB880040F79D /* ProjectAndAssociationDetailsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCADF0E824BDEB880040F79D /* ProjectAndAssociationDetailsService.swift */; };
-		FCADF0EB24BDEBE10040F79D /* ProjectAndAssociationDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCADF0EA24BDEBE10040F79D /* ProjectAndAssociationDetail.swift */; };
 		FCAEEBF924E18BA500D6B579 /* ErrorHandlingUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCAEEBF824E18BA500D6B579 /* ErrorHandlingUI.framework */; };
 /* End PBXBuildFile section */
 
@@ -94,10 +92,8 @@
 		FCA13FF924BC80920009C30F /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA13FFD24BC80990009C30F /* WorkfinderUserDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUserDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCAA887724C59B6F008E1527 /* SimpleTextLabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTextLabelCell.swift; sourceTree = "<group>"; };
-		FCADF0E424BDD9EC0040F79D /* AssociationDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationDetail.swift; sourceTree = "<group>"; };
 		FCADF0E624BDDA2A0040F79D /* AssociationFullDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationFullDetailService.swift; sourceTree = "<group>"; };
 		FCADF0E824BDEB880040F79D /* ProjectAndAssociationDetailsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectAndAssociationDetailsService.swift; sourceTree = "<group>"; };
-		FCADF0EA24BDEBE10040F79D /* ProjectAndAssociationDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectAndAssociationDetail.swift; sourceTree = "<group>"; };
 		FCAEEBF824E18BA500D6B579 /* ErrorHandlingUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ErrorHandlingUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -173,10 +169,8 @@
 		FC15D78324C459AB00543E6F /* Logic */ = {
 			isa = PBXGroup;
 			children = (
-				FCADF0E424BDD9EC0040F79D /* AssociationDetail.swift */,
 				FCADF0E624BDDA2A0040F79D /* AssociationFullDetailService.swift */,
 				FCADF0E824BDEB880040F79D /* ProjectAndAssociationDetailsService.swift */,
-				FCADF0EA24BDEBE10040F79D /* ProjectAndAssociationDetail.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -417,8 +411,6 @@
 				FC0A7CE824BC8E5300E02199 /* ProjectViewController.swift in Sources */,
 				FC9B677224C4648E0091A556 /* ProjectContactCell.swift in Sources */,
 				FC15D79324C45CA300543E6F /* AboutPresenter.swift in Sources */,
-				FCADF0EB24BDEBE10040F79D /* ProjectAndAssociationDetail.swift in Sources */,
-				FCADF0E524BDD9EC0040F79D /* AssociationDetail.swift in Sources */,
 				FC15D78F24C45C2A00543E6F /* ProjectBulletPointPresenter.swift in Sources */,
 				FC15D77A24C41AAA00543E6F /* ProjectHeaderCell.swift in Sources */,
 				FC15D78524C459DD00543E6F /* CellPresenterProtocol.swift in Sources */,

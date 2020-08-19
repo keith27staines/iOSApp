@@ -209,6 +209,7 @@ public class ApplicationSubmitter {
     }
     
     public func submitApplication() {
+        messageHandler?.showLightLoadingOverlay()
         applyService.postPlacement(draftPlacement: draft) { [weak self] (result) in
             guard
                 let self = self,
