@@ -169,6 +169,10 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     }
     
     func addSupportingDocument(_ placementUuid: F4SUUID) {
+        guard userRepository.loadCandidate().age() ?? 0 >= 18 else {
+            showApplicationSubmittedSuccessfully()
+            return
+        }
         let documentCoordinator = DocumentUploadCoordinator(
             parent: self,
             navigationRouter: navigationRouter,
@@ -176,7 +180,8 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
             delegate: self,
             appModel: AppModel.placement,
             objectUuid: placementUuid,
-            showBackButton: false)
+            showBackButton: false
+        )
         addChildCoordinator(documentCoordinator)
         documentCoordinator.start()
     }
