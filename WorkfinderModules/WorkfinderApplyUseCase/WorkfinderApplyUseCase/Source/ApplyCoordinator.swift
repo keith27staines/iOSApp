@@ -168,14 +168,15 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         applicationSubmitter?.submitApplication()
     }
     
-    func addSupportingDocument() {
+    func addSupportingDocument(_ placementUuid: F4SUUID) {
         let documentCoordinator = DocumentUploadCoordinator(
             parent: self,
             navigationRouter: navigationRouter,
             inject: injected,
             delegate: self,
             appModel: AppModel.placement,
-            objectUuid: "")
+            objectUuid: placementUuid,
+            showBackButton: false)
         addChildCoordinator(documentCoordinator)
         documentCoordinator.start()
     }
@@ -212,7 +213,7 @@ public class ApplicationSubmitter {
     private var draft: Placement
     private let applyService: PostPlacementServiceProtocol
     private weak var navigationController: UINavigationController?
-    private var onSuccess: () -> Void
+    private var onSuccess: (F4SUUID) -> Void
     private var onCancel: () -> Void
     private weak var messageHandler: UserMessageHandler?
     
@@ -221,7 +222,7 @@ public class ApplicationSubmitter {
         draft: Placement,
         navigationController: UINavigationController,
         messageHandler: UserMessageHandler,
-        onSuccess: @escaping () -> Void,
+        onSuccess: @escaping (F4SUUID) -> Void,
         onCancel: @escaping () -> Void) {
         self.applyService = applyService
         self.draft = draft
@@ -239,8 +240,11 @@ public class ApplicationSubmitter {
                 let messageHandler =  self.messageHandler
                 else { return }
             switch result {
-            case .success(_):
-                self.onSuccess()
+            case .success(let placement):
+                guard let placementUuid = placement.uuid else {
+                    return
+                }
+                self.onSuccess(placementUuid)
             case .failure(let error):
                 messageHandler.displayOptionalErrorIfNotNil(
                     error,

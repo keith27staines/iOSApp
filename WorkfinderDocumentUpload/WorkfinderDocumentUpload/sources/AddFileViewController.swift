@@ -11,6 +11,7 @@ class AddFileViewController: UIViewController, AddFileViewControllerProtocol {
     let presenter: AddFilePresenter
     var coordinator: DocumentUploadCoordinator?
     let warningColor = UIColor(red: 226, green: 16, blue: 79)
+    let showBackButton: Bool
     
     func refresh() {
         title = presenter.screenTitle
@@ -160,6 +161,10 @@ class AddFileViewController: UIViewController, AddFileViewControllerProtocol {
         presenter.onViewDidLoad(view: self)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        navigationItem.hidesBackButton = !showBackButton
+    }
+    
     func configureViews() {
         let guide = view.safeAreaLayoutGuide
         view.addSubview(imageView)
@@ -184,9 +189,12 @@ class AddFileViewController: UIViewController, AddFileViewControllerProtocol {
         lowerStack.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 20).isActive = true
     }
     
-    init(coordinator: DocumentUploadCoordinator, presenter: AddFilePresenter) {
+    init(coordinator: DocumentUploadCoordinator,
+         presenter: AddFilePresenter,
+         showBackButton: Bool) {
         self.coordinator = coordinator
         self.presenter = presenter
+        self.showBackButton = showBackButton
         super.init(nibName: nil, bundle: nil)
     }
     

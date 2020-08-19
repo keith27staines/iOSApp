@@ -165,7 +165,8 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
             navigationRouter: newNavigationRouter,
             inject: injected, delegate: self,
             appModel: .placement,
-            objectUuid: placementUuid
+            objectUuid: placementUuid,
+            showBackButton: false
         )
         addChildCoordinator(coordinator)
         coordinator.start()

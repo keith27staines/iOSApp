@@ -51,7 +51,10 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
     
     @objc func didTapShowEditor() { presenter.onDidTapSelectOptionsButton() }
     @objc func didCancel() { presenter.onDidCancel() }
-    @objc func didTapPrimaryButton() { presenter.onDidTapPrimaryButton() }
+    @objc func didTapPrimaryButton() {
+        messageHandler.showLightLoadingOverlay(view)
+        presenter.onDidTapPrimaryButton()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -44,7 +44,7 @@ public class DocumentUploadCoordinator: CoreInjectionNavigationCoordinator {
     weak var uploadViewController: UploadViewController?
     let appModel: AppModel
     let objectUuid: F4SUUID
-    
+    let showBackButton: Bool
     func onSkip() {
         delegate?.onSkipDocumentUpload()
     }
@@ -65,16 +65,22 @@ public class DocumentUploadCoordinator: CoreInjectionNavigationCoordinator {
         inject: CoreInjectionProtocol,
         delegate: DocumentUploadCoordinatorParentProtocol,
         appModel: AppModel,
-        objectUuid: F4SUUID) {
+        objectUuid: F4SUUID,
+        showBackButton: Bool) {
         self.delegate = delegate
         self.appModel = appModel
         self.objectUuid = objectUuid
+        self.showBackButton = showBackButton
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
     public override func start() {
         let presenter = AddFilePresenter(coordinator: self)
-        let vc = AddFileViewController(coordinator: self, presenter: presenter)
+        let vc = AddFileViewController(
+            coordinator: self,
+            presenter: presenter,
+            showBackButton: showBackButton
+        )
         navigationRouter.push(viewController: vc, animated: true)
         addFileViewController = vc
     }
