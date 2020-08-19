@@ -15,6 +15,7 @@
 		FC0E566A24CBF79D004FDDFF /* WorkfinderRegisterCandidate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0E566924CBF79D004FDDFF /* WorkfinderRegisterCandidate.framework */; };
 		FC1053712458784200024706 /* SuccessPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1053702458784200024706 /* SuccessPopupView.swift */; };
 		FC184B2524C871F700CB733B /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC85D9F122F205610035C724 /* WorkfinderAppLogic.framework */; };
+		FC1DB37624ED1088006BFE8B /* WorkfinderDocumentUpload.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1DB37524ED1088006BFE8B /* WorkfinderDocumentUpload.framework */; };
 		FC1EBEBD2248E0A500416D70 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */; };
 		FC1EBEBE2248E0AC00416D70 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */; };
 		FC1EBEC02248E0D600416D70 /* WorkfinderApplyUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF5AF1E2248BDCC00D9B8D1 /* WorkfinderApplyUseCaseTests.swift */; };
@@ -49,6 +50,7 @@
 		FC0B6B342323CDC800A1867D /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC0E566924CBF79D004FDDFF /* WorkfinderRegisterCandidate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderRegisterCandidate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1053702458784200024706 /* SuccessPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessPopupView.swift; sourceTree = "<group>"; };
+		FC1DB37524ED1088006BFE8B /* WorkfinderDocumentUpload.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderDocumentUpload.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC22DBFA22F97F330068C61C /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC23BCE3243AFA730075F359 /* DateOfBirthCollectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateOfBirthCollectorViewController.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				FC22DBFB22F97F330068C61C /* WorkfinderUI.framework in Frameworks */,
 				FC9B33B724BEC0FB00C075CE /* WorkfinderCoverLetter.framework in Frameworks */,
 				FC85D9F222F205610035C724 /* WorkfinderAppLogic.framework in Frameworks */,
+				FC1DB37624ED1088006BFE8B /* WorkfinderDocumentUpload.framework in Frameworks */,
 				FC1EBEBD2248E0A500416D70 /* WorkfinderCommon.framework in Frameworks */,
 				FC184B2524C871F700CB733B /* WorkfinderAppLogic.framework in Frameworks */,
 			);
@@ -140,6 +143,7 @@
 		FC96263D2248C20E00D5F850 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC1DB37524ED1088006BFE8B /* WorkfinderDocumentUpload.framework */,
 				FC0E566924CBF79D004FDDFF /* WorkfinderRegisterCandidate.framework */,
 				FC9B33B624BEC0FB00C075CE /* WorkfinderCoverLetter.framework */,
 				FC42C8AB243C9BB300F81232 /* WorkfinderServices.framework */,
