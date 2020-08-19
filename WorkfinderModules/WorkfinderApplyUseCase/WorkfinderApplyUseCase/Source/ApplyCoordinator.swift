@@ -8,6 +8,7 @@ import WorkfinderCoordinators
 import WorkfinderUserDetailsUseCase
 import WorkfinderCoverLetter
 import WorkfinderRegisterCandidate
+import WorkfinderDocumentUpload
 
 let __bundle = Bundle(identifier: "com.workfinder.WorkfinderApplyUseCase")!
 
@@ -152,7 +153,44 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         self.startSigninCoordinatorIfNecessary()
     }
     
+    func submitApplication() {
+        let navigationController = navigationRouter.navigationController
+        guard let messageHandler = coverletterCoordinator?.messageHandler
+            else { return }
+        let draft = draftPlacementLogic.draft
+        applicationSubmitter = ApplicationSubmitter(
+            applyService: applyService,
+            draft: draft,
+            navigationController: navigationController,
+            messageHandler: messageHandler,
+            onSuccess: self.addSupportingDocument,
+            onCancel: { self.cancelButtonWasTapped(sender: self) })
+        applicationSubmitter?.submitApplication()
+    }
+    
+    func addSupportingDocument() {
+        let documentCoordinator = DocumentUploadCoordinator(
+            parent: self,
+            navigationRouter: navigationRouter,
+            inject: injected,
+            delegate: self,
+            appModel: AppModel.placement,
+            objectUuid: "")
+        addChildCoordinator(documentCoordinator)
+        documentCoordinator.start()
+    }
+    
     deinit { print("ApplyCoordinator did deinit") }
+}
+
+extension ApplyCoordinator: DocumentUploadCoordinatorParentProtocol {
+    public func onSkipDocumentUpload() {
+        showApplicationSubmittedSuccessfully()
+    }
+    
+    public func onUploadComplete() {
+        showApplicationSubmittedSuccessfully()
+    }
 }
 
 extension ApplyCoordinator: RegisterAndSignInCoordinatorParent {
@@ -167,21 +205,6 @@ extension ApplyCoordinator: RegisterAndSignInCoordinatorParent {
         let uuid = userRepository.loadCandidate().uuid!
         draftPlacementLogic.update(candidateUuid: uuid)
         submitApplication()
-    }
-    
-    func submitApplication() {
-        let navigationController = navigationRouter.navigationController
-        guard let messageHandler = coverletterCoordinator?.messageHandler
-            else { return }
-        let draft = draftPlacementLogic.draft
-        applicationSubmitter = ApplicationSubmitter(
-            applyService: applyService,
-            draft: draft,
-            navigationController: navigationController,
-            messageHandler: messageHandler,
-            onSuccess: self.showApplicationSubmittedSuccessfully,
-            onCancel: { self.cancelButtonWasTapped(sender: self) })
-        applicationSubmitter?.submitApplication()
     }
 }
 
@@ -216,7 +239,8 @@ public class ApplicationSubmitter {
                 let messageHandler =  self.messageHandler
                 else { return }
             switch result {
-            case .success(_): self.onSuccess()
+            case .success(_):
+                self.onSuccess()
             case .failure(let error):
                 messageHandler.displayOptionalErrorIfNotNil(
                     error,
