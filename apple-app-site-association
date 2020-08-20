@@ -5,11 +5,11 @@
             {
                 "appID": "YB7C23CK6Q.com.f4s.workexperience.f4s",
                 "paths": [
-                    "/uni/*"
+                    "*.workfinder.com"
                 ],
                 "components": [
                     {
-                        "/": "/uni/*"
+                        "/": "*.workfinder.com"
                     }
                 ]
             }
