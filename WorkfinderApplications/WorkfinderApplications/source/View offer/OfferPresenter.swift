@@ -39,8 +39,7 @@ class OfferPresenter: OfferPresenterProtocol {
     var email: String? { offer?.email }
     
     var location: String? {
-        return offer?.location
-        //offer?.isRemote == true ? "This is a remote project" : offer?.location
+        offer?.isRemote == true ? "This is a remote project" : offer?.location
     }
     
     var notes: String?  { offer?.offerNotes }
