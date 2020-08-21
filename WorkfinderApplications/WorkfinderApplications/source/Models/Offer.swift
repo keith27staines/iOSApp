@@ -13,4 +13,5 @@ struct Offer {
     var logoUrl: String?
     var reasonWithdrawn: WithdrawReason?
     var offerNotes: String?
+    var isRemote: Bool?
 }
