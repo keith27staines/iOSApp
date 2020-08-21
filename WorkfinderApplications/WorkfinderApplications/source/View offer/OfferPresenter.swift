@@ -28,7 +28,6 @@ class OfferPresenter: OfferPresenterProtocol {
     weak var view: WorkfinderViewControllerProtocol?
     private let application: Application
     let offerService: OfferServiceProtocol
-    let projectService: ProjectServiceProtocol
     private var offer: Offer?
     var companyName: String { application.companyName }
     var offerState: OfferState? { offer?.offerState }
@@ -38,11 +37,11 @@ class OfferPresenter: OfferPresenterProtocol {
     var hostCompany: String? { offer?.hostCompany }
     var hostContact: String? { offer?.hostContact }
     var email: String? { offer?.email }
+    
     var location: String? {
-        
-        offer?.location
-        
+        offer?.isRemote == true ? "This is a remote project" : offer?.location
     }
+    
     var notes: String?  { offer?.offerNotes }
     var screenTitle: String { offerState?.screenTitle ?? "Offer"}
     var stateDescription: String? { return offerState?.description }
@@ -54,12 +53,10 @@ class OfferPresenter: OfferPresenterProtocol {
     
     init(coordinator: ApplicationsCoordinator,
          application: Application,
-         offerService: OfferServiceProtocol,
-         projectService: ProjectServiceProtocol) {
+         offerService: OfferServiceProtocol) {
         self.coordinator = coordinator
         self.application = application
         self.offerService = offerService
-        self.projectService = projectService
     }
     
     func isNotesField(_ indexPath: IndexPath) -> Bool {
@@ -73,14 +70,6 @@ class OfferPresenter: OfferPresenterProtocol {
     
     func loadData(completion: @escaping (Error?) -> Void) {
         offerService.fetchOffer(application: application) {  [weak self] (offerResult) in
-            self?.projectService.fetchProject(uuid: "", completion: { (projectResult) in
-                switch projectResult {
-                case .success(let project):
-                    break
-                case .failure(_):
-                    break
-                }
-            })
             self?.offerResultHandler(result: offerResult, completion: completion)
         }
     }

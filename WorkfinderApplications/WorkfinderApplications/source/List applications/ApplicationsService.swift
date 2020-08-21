@@ -100,6 +100,7 @@ struct ExpandedAssociationPlacementJson: Codable {
     var end_date: String?
     var offered_duration: Int?
     var offer_notes: String?
+    var is_remote: Bool?
     
     struct Association: Codable {
         var uuid: F4SUUID?

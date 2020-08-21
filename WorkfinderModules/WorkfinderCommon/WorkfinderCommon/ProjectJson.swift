@@ -6,7 +6,7 @@ public struct ProjectJson: Codable, Equatable, Hashable {
     public var isPaid: Bool?
     public var candidateQuantity: String?
     public var isRemote: Bool?
-    public var duration: String
+    public var duration: String?
     
     enum CodingKeys: String, CodingKey {
         case uuid
