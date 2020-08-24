@@ -25,7 +25,7 @@ class OtherPicklistItemEditorViewController: TextEditorViewController {
                    editorTitle: type.otherEditorTitle,
                    guidanceText: type.otherFieldGuidanceText,
                    placeholderText: type.otherFieldPlaceholderText,
-                   maxWordCount: 20)
+                   maxCharacterCount: 180)
         textView.text = picklistItem.otherValue
     }
     

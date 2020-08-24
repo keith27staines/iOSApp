@@ -9,7 +9,7 @@ protocol TextEditorCoordinatorProtocol: class {
 
 class TextEditorViewController: UIViewController {
     
-    let maxWordCount: Int
+    let maxCharacterCount: Int
     
     let fontSize: CGFloat = 17
     var text: String { return self.textView.text }
@@ -36,10 +36,10 @@ class TextEditorViewController: UIViewController {
         return label
     }()
     
-    lazy var wordCountLabel: UILabel = {
+    lazy var characterCountLabel: UILabel = {
         let label = UILabel()
-        label.text = "200/ \(self.maxWordCount)"
         label.backgroundColor = UIColor.init(white: 0.8, alpha: 1)
+        label.text = "0/ \(self.maxCharacterCount)"
         label.font = WorkfinderFonts.caption1
         label.textColor = WorkfinderColors.white
         label.textAlignment = .center
@@ -47,7 +47,6 @@ class TextEditorViewController: UIViewController {
         label.sizeToFit()
         let fitSize = label.frame.width * 1.2
         label.widthAnchor.constraint(equalToConstant: fitSize).isActive = true
-        label.text = "0/ \(self.maxWordCount)"
         return label
     }()
     
@@ -62,8 +61,8 @@ class TextEditorViewController: UIViewController {
         view.layer.borderWidth = 1
         textView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 8, left: 0, bottom: 40, right: 0))
         placeholder.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 8, left: 0, bottom: 40, right: 0))
-        view.addSubview(self.wordCountLabel)
-        self.wordCountLabel.anchor(top: nil, leading: nil, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 4, right: 8))
+        view.addSubview(self.characterCountLabel)
+        self.characterCountLabel.anchor(top: nil, leading: nil, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 4, right: 8))
         return view
     }()
     
@@ -111,18 +110,18 @@ class TextEditorViewController: UIViewController {
         let guide = view.safeAreaLayoutGuide
         stack.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: nil, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))
         bottomConstraint = stack.bottomAnchor.constraint(equalTo: guide.bottomAnchor)
-        bottomConstraint.constant = maxWordCount > 20 ? -20 : -view.frame.height/2 - 60
+        bottomConstraint.constant = maxCharacterCount > 20 ? -20 : -view.frame.height/2 - 60
         bottomConstraint.isActive = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        updateWordCount()
+        updateCharacterCount()
         NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
     @objc func adjustForKeyboard(notification: Notification) {
-        guard maxWordCount > 20 else { return }
+        guard maxCharacterCount > 180 else { return }
         let userInfo = notification.userInfo ?? [:]
         guard let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
         let height = (keyboardFrame.height + 20)
@@ -143,21 +142,16 @@ class TextEditorViewController: UIViewController {
          editorTitle: String,
          guidanceText: String,
          placeholderText: String,
-         maxWordCount: Int) {
-        self.maxWordCount = maxWordCount
+         maxCharacterCount: Int) {
+        self.maxCharacterCount = maxCharacterCount
         self.coordinator = coordinator
         self.guidanceText = guidanceText
         self.placeholderText = placeholderText
         super.init(nibName: nil, bundle: nil)
     }
     
-    func updateWordCount() {
-        let words = wordCount(text: textView.text)
-        wordCountLabel.text = "\(words)/ \(self.maxWordCount)"
-    }
-    
-    func wordCount(text: String) -> Int {
-        return text.split(separator: " ").count
+    func updateCharacterCount() {
+        characterCountLabel.text = "\(textView.text.count)/ \(self.maxCharacterCount)"
     }
     
     func scrollTextViewToBottom(textView: UITextView) {
@@ -176,7 +170,7 @@ class TextEditorViewController: UIViewController {
 extension TextEditorViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         placeholderTextView.isHidden = !textView.text.isEmpty
-        updateWordCount()
+        updateCharacterCount()
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -193,7 +187,7 @@ extension TextEditorViewController: UITextViewDelegate {
         // add their new text to the existing text
         let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
 
-        return wordCount(text: updatedText) <= maxWordCount ? true : false
+        return updatedText.count <= maxCharacterCount ? true : false
     }
 }
 
