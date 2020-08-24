@@ -62,9 +62,12 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     }
     
     public func dispatchProjectViewRequest(_ projectUuid: F4SUUID) {
-        closeMenu { [weak self] (success) in
-            self?.navigateToRecommendations()
-            self?.recommendationsCoordinator.processProjectViewRequest(projectUuid)
+        closeMenu() { [ weak self]  (success) in
+            guard let self = self else { return }
+            self.tabBarViewController.selectedIndex = TabIndex.recommendations.rawValue
+            DispatchQueue.main.async {
+                self.recommendationsCoordinator.processProjectViewRequest(projectUuid)
+            }
         }
     }
     

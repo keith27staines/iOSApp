@@ -128,30 +128,29 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
 
     func showRecommendation(uuid: F4SUUID?) {
         guard let uuid = uuid else { return }
-        if let tabBarCoordinator = tabBarCoordinator {
-            recommendationService.fetchRecommendation(uuid: uuid) { [weak self] (result) in
-                guard let self = self else { return }
-                switch result {
-                case .success(let recommendation):
-                    if let projectUuid = recommendation.project?.uuid {
-                        self.tabBarCoordinator.dispatchProjectViewRequest(projectUuid)
-                    } else {
-                        self.tabBarCoordinator.dispatchRecommendationToSearchTab(uuid: uuid)
-                    }
-                case .failure(let error):
-                    guard
-                        let workfinderError = error as? WorkfinderError,
-                        workfinderError.retry == true else { return }
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5) {
-                        self.showRecommendation(uuid: uuid)
-                    }
-                    
-                }
-            }
-            tabBarCoordinator.dispatchRecommendationToSearchTab(uuid: uuid)
-        } else {
+        guard let tabBarCoordinator = tabBarCoordinator else {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
                 self?.showRecommendation(uuid: uuid)
+            }
+            return
+        }
+        recommendationService.fetchRecommendation(uuid: uuid) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let recommendation):
+                if let projectUuid = recommendation.project?.uuid {
+                    self.showProject(uuid: projectUuid)
+                } else {
+                    tabBarCoordinator.dispatchRecommendationToSearchTab(uuid: uuid)
+                }
+            case .failure(let error):
+                guard
+                    let workfinderError = error as? WorkfinderError,
+                    workfinderError.retry == true else { return }
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5) {
+                    self.showRecommendation(uuid: uuid)
+                }
+                
             }
         }
     }
