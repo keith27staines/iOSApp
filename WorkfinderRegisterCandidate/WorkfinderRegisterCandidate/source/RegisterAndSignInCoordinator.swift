@@ -17,14 +17,19 @@ public protocol RegisterAndSignInCoordinatorParent: Coordinating {
 }
 
 public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, RegisterAndSignInCoordinatorProtocol {
-    
+    let hideBackButton: Bool
     var firstViewController:UIViewController?
-    public init(parent: RegisterAndSignInCoordinatorParent?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol) {
+    
+    public init(parent: RegisterAndSignInCoordinatorParent?,
+                navigationRouter: NavigationRoutingProtocol,
+                inject: CoreInjectionProtocol,
+                hideBackButton: Bool) {
+        self.hideBackButton = hideBackButton
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
     public override func start() {
-        presentRegisterUserViewController()
+        presentRegisterUserViewController(hideBackButton)
     }
     
     func onUserRegisteredAndCandidateCreated(pop: Bool = true) {
@@ -55,7 +60,7 @@ public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, R
         }
     }
     
-    func presentRegisterUserViewController(allowCancel: Bool = true) {
+    func presentRegisterUserViewController(_ hideBackButton: Bool) {
         let userRepository = injected.userRepository
         let candidate = userRepository.loadCandidate()
         guard candidate.uuid == nil else {
@@ -73,7 +78,7 @@ public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, R
             userRepository: userRepository,
             registerUserLogic: registerUserLogic)
         
-        let vc = RegisterUserViewController(presenter: presenter)
+        let vc = RegisterUserViewController(presenter: presenter, hidesBackButton: hideBackButton)
         firstViewController = vc
         navigationRouter.push(viewController: vc, animated: true)
     }

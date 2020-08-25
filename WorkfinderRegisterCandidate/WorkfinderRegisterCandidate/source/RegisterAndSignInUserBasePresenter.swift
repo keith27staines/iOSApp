@@ -25,6 +25,7 @@ protocol RegisterAndSignInPresenterProtocol: class {
     func onDidTapSwitchMode()
     func onViewDidLoad(_ view: WorkfinderViewControllerProtocol)
     var isTermsAndConditionsAgreed: Bool { get set }
+    func cancelWorkflow()
 }
 
 class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
@@ -74,6 +75,10 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
     func onDidTapSwitchMode() {
         let newMode: RegisterAndSignInMode = (mode == .register) ? .signIn : .register
         coordinator?.switchMode(newMode)
+    }
+    
+    func cancelWorkflow() {
+        coordinator?.onRegisterAndSignInCancelled()
     }
 
     var email: String? {

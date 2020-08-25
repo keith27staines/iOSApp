@@ -144,14 +144,48 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                     tabBarCoordinator.dispatchRecommendationToSearchTab(uuid: uuid)
                 }
             case .failure(let error):
-                guard
-                    let workfinderError = error as? WorkfinderError,
-                    workfinderError.retry == true else { return }
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5) {
-                    self.showRecommendation(uuid: uuid)
+                guard let workfinderError = error as? WorkfinderError else { return }
+                switch workfinderError.code {
+                case 401:
+                    self.signIn() { loggedIn in
+                        switch loggedIn {
+                        case true:
+                            self.showRecommendation(uuid: uuid)
+                        case false:
+                            return
+                        }
+                    }
+                default:
+                    guard workfinderError.retry else { return }
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5) {
+                        self.showRecommendation(uuid: uuid)
+                    }
                 }
-                
             }
+        }
+    }
+    
+    lazy var loginHandler: LoginHandler = {
+        return LoginHandler(
+            parentCoordinator: self,
+            navigationRouter: self.navigationRouter,
+            mainWindow: UIApplication.shared.windows.first,
+            coreInjection: self.injected
+        )
+    }()
+    
+    func signIn(completion: @escaping (Bool) -> Void) {
+        let loginCoordinator = LoginHandler(
+            parentCoordinator: self,
+            navigationRouter: self.navigationRouter,
+            mainWindow: UIApplication.shared.windows.first,
+            coreInjection: self.injected
+        )
+        addChildCoordinator(loginCoordinator)
+        loginHandler.startLoginWorkflow { [weak self] (loggedIn) in
+            guard let self = self else { return }
+            self.removeChildCoordinator(loginCoordinator)
+            completion(loggedIn)
         }
     }
     

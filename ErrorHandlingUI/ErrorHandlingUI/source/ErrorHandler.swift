@@ -51,7 +51,8 @@ public class ErrorHandler: ErrorHandlerProtocol, Coordinating {
         let register = RegisterAndSignInCoordinator(
             parent: self,
             navigationRouter: navigationRouter,
-            inject: coreInjection)
+            inject: coreInjection,
+            hideBackButton: false)
         addChildCoordinator(register)
         register.start()
     }

@@ -39,7 +39,7 @@ class TextEditorViewController: UIViewController {
     lazy var characterCountLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = UIColor.init(white: 0.8, alpha: 1)
-        label.text = "0/ \(self.maxCharacterCount)"
+        label.text = "0000/ \(self.maxCharacterCount)"
         label.font = WorkfinderFonts.caption1
         label.textColor = WorkfinderColors.white
         label.textAlignment = .center
