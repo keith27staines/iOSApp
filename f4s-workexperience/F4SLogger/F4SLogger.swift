@@ -50,18 +50,20 @@ public class F4SLog : F4SAnalyticsAndDebugging {
     }
     
     func startBugsnag(for environment: EnvironmentType) {
-        let bugsnagConfiguration = BugsnagConfiguration()
+        let bugsnagConfiguration: BugsnagConfiguration
         switch environment {
         case .staging:
+            bugsnagConfiguration = BugsnagConfiguration("e965364f05c37d903a6aa3f34498cc3f")
             bugsnagConfiguration.releaseStage = "staging"
-            bugsnagConfiguration.apiKey = "e965364f05c37d903a6aa3f34498cc3f"
-
+            assert(bugsnagConfiguration.apiKey == "e965364f05c37d903a6aa3f34498cc3f", "Wrong api key")
+            
         case .production:
+            bugsnagConfiguration = BugsnagConfiguration("e965364f05c37d903a6aa3f34498cc3f")
             bugsnagConfiguration.releaseStage = "production"
-            bugsnagConfiguration.apiKey = "e965364f05c37d903a6aa3f34498cc3f"
+            assert(bugsnagConfiguration.apiKey == "e965364f05c37d903a6aa3f34498cc3f", "Wrong api key")
         }
         let user = UserRepository().loadUser()
-        bugsnagConfiguration.setUser(user.uuid, withName:user.fullname, andEmail:user.email)
+        bugsnagConfiguration.setUser(user.uuid, withEmail: user.email, andName: user.fullname)
         Bugsnag.start(with: bugsnagConfiguration)
     }
 }
@@ -122,9 +124,9 @@ extension F4SLog : F4SDebugging {
     }
     
     public func notifyError(_ error: NSError, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line, callDetails: String = "No detail provided") {
-        Bugsnag.notifyError(error) { report in
-            report.depth += 2
-            report.addMetadata(["callDetails":callDetails], toTabWithName: "Call Details")
+        Bugsnag.notifyError(error) { (event) -> Bool in
+            event.addMetadata(["callDetails":callDetails], section: "Call Details")
+            return true
         }
     }
     
