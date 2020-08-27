@@ -14,7 +14,6 @@
 		FC0B6B332323CDC800A1867D /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0B6B322323CDC800A1867D /* WorkfinderCoordinators.framework */; };
 		FC0E566A24CBF79D004FDDFF /* WorkfinderRegisterCandidate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0E566924CBF79D004FDDFF /* WorkfinderRegisterCandidate.framework */; };
 		FC1053712458784200024706 /* SuccessPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1053702458784200024706 /* SuccessPopupView.swift */; };
-		FC184B2524C871F700CB733B /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC85D9F122F205610035C724 /* WorkfinderAppLogic.framework */; };
 		FC1DB37624ED1088006BFE8B /* WorkfinderDocumentUpload.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1DB37524ED1088006BFE8B /* WorkfinderDocumentUpload.framework */; };
 		FC1EBEBD2248E0A500416D70 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */; };
 		FC1EBEBE2248E0AC00416D70 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1EBEBC2248E0A500416D70 /* WorkfinderCommon.framework */; };
@@ -93,7 +92,6 @@
 				FC85D9F222F205610035C724 /* WorkfinderAppLogic.framework in Frameworks */,
 				FC1DB37624ED1088006BFE8B /* WorkfinderDocumentUpload.framework in Frameworks */,
 				FC1EBEBD2248E0A500416D70 /* WorkfinderCommon.framework in Frameworks */,
-				FC184B2524C871F700CB733B /* WorkfinderAppLogic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,7 +259,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1160;
 				ORGANIZATIONNAME = Founders4Schools;
 				TargetAttributes = {
 					FC6E3D272248D74A00377736 = {
