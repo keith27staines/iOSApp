@@ -10,7 +10,6 @@ class RecommendationTileView: UITableViewCell, RecommendationTileViewProtocol {
     
     var presenter: RecommendationTilePresenterProtocol? {
         didSet {
-            presenter?.loadData()
             refreshFromPresenter(presenter: presenter)
         }
     }
@@ -23,12 +22,6 @@ class RecommendationTileView: UITableViewCell, RecommendationTileViewProtocol {
         projectHeaderLabel.text = presenter?.projectHeader
         projectTitle.text = presenter?.projectTitle
         allTextStack.arrangedSubviews[0].isHidden = !(presenter?.isProject ?? false)
-        if presenter?.isLoading == true {
-            activityIndicator.isHidden = false
-            activityIndicator.startAnimating()
-        } else {
-            activityIndicator.stopAnimating()
-        }
     }
 
     lazy var hostPhoto = HostPhotoView(widthPoints: 55, defaultLogoName: nil)

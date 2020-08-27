@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		FC1B0A1D24AC6A3E0008F5CF /* WorkfinderRecommendationsList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1B0A1324AC6A3E0008F5CF /* WorkfinderRecommendationsList.framework */; };
-		FC1B0A2224AC6A3E0008F5CF /* WorkfinderRecommendationsListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1B0A2124AC6A3E0008F5CF /* WorkfinderRecommendationsListTests.swift */; };
 		FC1B0A2424AC6A3E0008F5CF /* WorkfinderRecommendationsList.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1B0A1624AC6A3E0008F5CF /* WorkfinderRecommendationsList.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FC1B0A3B24AC6B3C0008F5CF /* RecommendationsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1B0A3A24AC6B3C0008F5CF /* RecommendationsCoordinator.swift */; };
 		FC1B0A4124AC6B940008F5CF /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1B0A3D24AC6B940008F5CF /* WorkfinderCommon.framework */; };
@@ -17,7 +16,6 @@
 		FC1B0A4724AC6B940008F5CF /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1B0A4024AC6B940008F5CF /* WorkfinderUI.framework */; };
 		FC1B0A4B24AC6CD80008F5CF /* RecommendationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1B0A4A24AC6CD80008F5CF /* RecommendationsViewController.swift */; };
 		FC1B0A4D24AC6D350008F5CF /* RecommendationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1B0A4C24AC6D350008F5CF /* RecommendationsPresenter.swift */; };
-		FC1B0A4F24AC6D850008F5CF /* RecommendationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1B0A4E24AC6D850008F5CF /* RecommendationsService.swift */; };
 		FC3C701624ADB621004869D0 /* RecommendationTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3C701524ADB621004869D0 /* RecommendationTileView.swift */; };
 		FC3C701824ADB661004869D0 /* RecommendationTilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3C701724ADB661004869D0 /* RecommendationTilePresenter.swift */; };
 		FCADF0ED24BDFCE30040F79D /* WorkfinderProjectApply.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCADF0EC24BDFCE30040F79D /* WorkfinderProjectApply.framework */; };
@@ -38,7 +36,6 @@
 		FC1B0A1624AC6A3E0008F5CF /* WorkfinderRecommendationsList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderRecommendationsList.h; sourceTree = "<group>"; };
 		FC1B0A1724AC6A3E0008F5CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC1B0A1C24AC6A3E0008F5CF /* WorkfinderRecommendationsListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderRecommendationsListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC1B0A2124AC6A3E0008F5CF /* WorkfinderRecommendationsListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderRecommendationsListTests.swift; sourceTree = "<group>"; };
 		FC1B0A2324AC6A3E0008F5CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC1B0A3A24AC6B3C0008F5CF /* RecommendationsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsCoordinator.swift; sourceTree = "<group>"; };
 		FC1B0A3D24AC6B940008F5CF /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,7 +44,6 @@
 		FC1B0A4024AC6B940008F5CF /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1B0A4A24AC6CD80008F5CF /* RecommendationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsViewController.swift; sourceTree = "<group>"; };
 		FC1B0A4C24AC6D350008F5CF /* RecommendationsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsPresenter.swift; sourceTree = "<group>"; };
-		FC1B0A4E24AC6D850008F5CF /* RecommendationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsService.swift; sourceTree = "<group>"; };
 		FC3C701524ADB621004869D0 /* RecommendationTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationTileView.swift; sourceTree = "<group>"; };
 		FC3C701724ADB661004869D0 /* RecommendationTilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationTilePresenter.swift; sourceTree = "<group>"; };
 		FCADF0EC24BDFCE30040F79D /* WorkfinderProjectApply.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderProjectApply.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,7 +105,6 @@
 		FC1B0A2024AC6A3E0008F5CF /* WorkfinderRecommendationsListTests */ = {
 			isa = PBXGroup;
 			children = (
-				FC1B0A2124AC6A3E0008F5CF /* WorkfinderRecommendationsListTests.swift */,
 				FC1B0A2324AC6A3E0008F5CF /* Info.plist */,
 			);
 			path = WorkfinderRecommendationsListTests;
@@ -121,7 +116,6 @@
 				FC1B0A3A24AC6B3C0008F5CF /* RecommendationsCoordinator.swift */,
 				FC1B0A4A24AC6CD80008F5CF /* RecommendationsViewController.swift */,
 				FC1B0A4C24AC6D350008F5CF /* RecommendationsPresenter.swift */,
-				FC1B0A4E24AC6D850008F5CF /* RecommendationsService.swift */,
 				FC3C701924ADB6D3004869D0 /* Recommendation tile */,
 			);
 			path = source;
@@ -258,7 +252,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC1B0A4F24AC6D850008F5CF /* RecommendationsService.swift in Sources */,
 				FC1B0A4D24AC6D350008F5CF /* RecommendationsPresenter.swift in Sources */,
 				FC1B0A3B24AC6B3C0008F5CF /* RecommendationsCoordinator.swift in Sources */,
 				FC3C701824ADB661004869D0 /* RecommendationTilePresenter.swift in Sources */,
@@ -271,7 +264,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC1B0A2224AC6A3E0008F5CF /* WorkfinderRecommendationsListTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

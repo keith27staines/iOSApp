@@ -26,7 +26,6 @@
 		FCA13FBB24BC3C5D0009C30F /* SmallImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA13FBA24BC3C5D0009C30F /* SmallImageService.swift */; };
 		FCCA4E2D2456E77500DFA696 /* User services.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA4E2C2456E77500DFA696 /* User services.swift */; };
 		FCCA4E30245700F100DFA696 /* Candidate services.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA4E2F245700F100DFA696 /* Candidate services.swift */; };
-		FCCAAEBF249B41F500EA13BD /* WorkfinderServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCAAEBE249B41F500EA13BD /* WorkfinderServicesTests.swift */; };
 		FCCAAEC1249B41F500EA13BD /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC02D9E822EC70FD003C8148 /* WorkfinderServices.framework */; platformFilter = ios; };
 		FCEF9CFA24DFD5D00015F989 /* DocumentUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF9CF924DFD5D00015F989 /* DocumentUploadService.swift */; };
 /* End PBXBuildFile section */
@@ -65,7 +64,6 @@
 		FCCA4E2C2456E77500DFA696 /* User services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User services.swift"; sourceTree = "<group>"; };
 		FCCA4E2F245700F100DFA696 /* Candidate services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Candidate services.swift"; sourceTree = "<group>"; };
 		FCCAAEBC249B41F500EA13BD /* WorkfinderServicesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderServicesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCCAAEBE249B41F500EA13BD /* WorkfinderServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderServicesTests.swift; sourceTree = "<group>"; };
 		FCCAAEC0249B41F500EA13BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCEF9CF924DFD5D00015F989 /* DocumentUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentUploadService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -189,7 +187,6 @@
 		FCCAAEBD249B41F500EA13BD /* WorkfinderServicesTests */ = {
 			isa = PBXGroup;
 			children = (
-				FCCAAEBE249B41F500EA13BD /* WorkfinderServicesTests.swift */,
 				FCCAAEC0249B41F500EA13BD /* Info.plist */,
 			);
 			path = WorkfinderServicesTests;
@@ -328,7 +325,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FCCAAEBF249B41F500EA13BD /* WorkfinderServicesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

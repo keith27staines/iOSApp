@@ -36,6 +36,8 @@
 		FC53D6DC2323BA4300A339ED /* F4SCompanyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC53D6DB2323BA4300A339ED /* F4SCompanyRepository.swift */; };
 		FC5CBA6A231D3E4700C2D3C5 /* F4SDateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBA69231D3E4700C2D3C5 /* F4SDateHelper.swift */; };
 		FC69EBA92481371C00901A2B /* GlobalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC69EBA82481371C00901A2B /* GlobalNotifications.swift */; };
+		FC6A0B2924F7800400053DF7 /* RecommendationsListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6A0B2824F7800400053DF7 /* RecommendationsListItem.swift */; };
+		FC6A0B2B24F7C6E600053DF7 /* WorkfinderRecommendationsListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6A0B2A24F7C6E500053DF7 /* WorkfinderRecommendationsListTests.swift */; };
 		FC6E42DD24556B97005E0D08 /* LocalStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6E42DC24556B97005E0D08 /* LocalStorageProtocol.swift */; };
 		FC75B3582494841D008B4FBB /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75B3572494841D008B4FBB /* Recommendation.swift */; };
 		FC7A4396224A3C0E00B2D693 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4395224A3C0E00B2D693 /* NetworkError.swift */; };
@@ -164,6 +166,8 @@
 		FC53D6DB2323BA4300A339ED /* F4SCompanyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SCompanyRepository.swift; sourceTree = "<group>"; };
 		FC5CBA69231D3E4700C2D3C5 /* F4SDateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDateHelper.swift; sourceTree = "<group>"; };
 		FC69EBA82481371C00901A2B /* GlobalNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalNotifications.swift; sourceTree = "<group>"; };
+		FC6A0B2824F7800400053DF7 /* RecommendationsListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsListItem.swift; sourceTree = "<group>"; };
+		FC6A0B2A24F7C6E500053DF7 /* WorkfinderRecommendationsListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderRecommendationsListTests.swift; sourceTree = "<group>"; };
 		FC6E42DC24556B97005E0D08 /* LocalStorageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageProtocol.swift; sourceTree = "<group>"; };
 		FC73902123030856003A9253 /* LocalStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStoreTests.swift; sourceTree = "<group>"; };
 		FC75B3572494841D008B4FBB /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
@@ -325,12 +329,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		FC75B356249483EF008B4FBB /* Recommendation */ = {
+		FC75B356249483EF008B4FBB /* Recommendations */ = {
 			isa = PBXGroup;
 			children = (
 				FC75B3572494841D008B4FBB /* Recommendation.swift */,
+				FC6A0B2824F7800400053DF7 /* RecommendationsListItem.swift */,
 			);
-			path = Recommendation;
+			path = Recommendations;
 			sourceTree = "<group>";
 		};
 		FC8F9581233BB53B0027BE02 /* Factories protocols */ = {
@@ -399,6 +404,7 @@
 		FCA91E782234043D007ED308 /* WorkfinderCommonTests */ = {
 			isa = PBXGroup;
 			children = (
+				FC6A0B2A24F7C6E500053DF7 /* WorkfinderRecommendationsListTests.swift */,
 				FC18C5BB24C18ED1006D017D /* ProjectJsonTests.swift */,
 				FC18C5BD24C18ED6006D017D /* ProjectTypeJsonTests.swift */,
 				FCC4E67123EAFD5400ED6491 /* HostTests.swift */,
@@ -445,7 +451,7 @@
 			isa = PBXGroup;
 			children = (
 				FC1243E22344AEA30007BA95 /* ScreenNames.swift */,
-				FC75B356249483EF008B4FBB /* Recommendation */,
+				FC75B356249483EF008B4FBB /* Recommendations */,
 				FC5DAADF246E4EA600031AEA /* Workfinder errors */,
 				FC1FA08322FAABDE003EAE59 /* User and candidate */,
 				FC182E5F2420EDC5005E7CEA /* Protocols */,
@@ -697,6 +703,7 @@
 				FCC1DF5F232507530074D5C1 /* SocialShare.swift in Sources */,
 				FC18C5BA24C18EBB006D017D /* ProjectTypeJson.swift in Sources */,
 				FC426F04232FAEA9004F8A3E /* WorkfinderEndpoint.swift in Sources */,
+				FC6A0B2924F7800400053DF7 /* RecommendationsListItem.swift in Sources */,
 				FC53D6DC2323BA4300A339ED /* F4SCompanyRepository.swift in Sources */,
 				FC04B867233277080034A60E /* CoordinatorProtocols.swift in Sources */,
 				FCDB073A2286F7870053347F /* UserRepository.swift in Sources */,
@@ -763,6 +770,7 @@
 				FC7FF7C7249A3F8A00F9093B /* F4SDocumentTests.swift in Sources */,
 				FCCA9830249A62B900427899 /* F4SCalendarMonthTests.swift in Sources */,
 				FC7FF7C1249A3F5000F9093B /* CoordinatingTests.swift in Sources */,
+				FC6A0B2B24F7C6E600053DF7 /* WorkfinderRecommendationsListTests.swift in Sources */,
 				FCCA982E249A629200427899 /* F4SCalendarWeekTests.swift in Sources */,
 				FC18C5BE24C18ED7006D017D /* ProjectTypeJsonTests.swift in Sources */,
 				FC7FF7CC249A405900F9093B /* WorkfinderCommonStructsTests.swift in Sources */,

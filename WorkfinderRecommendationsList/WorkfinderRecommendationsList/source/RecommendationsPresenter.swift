@@ -5,7 +5,7 @@ import WorkfinderServices
 class RecommendationsPresenter {
     weak var coordinator: RecommendationsCoordinator?
     let service: RecommendationsServiceProtocol
-    var recommendations = [Recommendation]()
+    var recommendations = [RecommendationsListItem]()
     var tilePresenters = [RecommendationTilePresenter]()
     let userRepo: UserRepositoryProtocol
     var workplaceServiceFactory: (() -> WorkplaceAndAssociationService)?
@@ -46,7 +46,7 @@ class RecommendationsPresenter {
                 completion(nil)
                 return
         }
-        service.fetchRecommendations(userUuid: "userUuid") { [weak self] (result) in
+        service.fetchRecommendations() { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .success(let serverList):
