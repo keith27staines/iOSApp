@@ -39,7 +39,6 @@
 		FC6A0B2924F7800400053DF7 /* RecommendationsListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6A0B2824F7800400053DF7 /* RecommendationsListItem.swift */; };
 		FC6A0B2B24F7C6E600053DF7 /* WorkfinderRecommendationsListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6A0B2A24F7C6E500053DF7 /* WorkfinderRecommendationsListTests.swift */; };
 		FC6E42DD24556B97005E0D08 /* LocalStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6E42DC24556B97005E0D08 /* LocalStorageProtocol.swift */; };
-		FC75B3582494841D008B4FBB /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75B3572494841D008B4FBB /* Recommendation.swift */; };
 		FC7A4396224A3C0E00B2D693 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A4395224A3C0E00B2D693 /* NetworkError.swift */; };
 		FC7DC9F6244D8D7300C282EF /* RemoteLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7DC9F5244D8D7300C282EF /* RemoteLinks.swift */; };
 		FC7FF7BE249A3F1B00F9093B /* HostTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC4E67123EAFD5400ED6491 /* HostTests.swift */; };
@@ -170,7 +169,6 @@
 		FC6A0B2A24F7C6E500053DF7 /* WorkfinderRecommendationsListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderRecommendationsListTests.swift; sourceTree = "<group>"; };
 		FC6E42DC24556B97005E0D08 /* LocalStorageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageProtocol.swift; sourceTree = "<group>"; };
 		FC73902123030856003A9253 /* LocalStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStoreTests.swift; sourceTree = "<group>"; };
-		FC75B3572494841D008B4FBB /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
 		FC7A4395224A3C0E00B2D693 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		FC7DC9F5244D8D7300C282EF /* RemoteLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteLinks.swift; sourceTree = "<group>"; };
 		FC83EC7E22FC0C55009D7A0B /* F4SJsonValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SJsonValueTests.swift; sourceTree = "<group>"; };
@@ -332,7 +330,6 @@
 		FC75B356249483EF008B4FBB /* Recommendations */ = {
 			isa = PBXGroup;
 			children = (
-				FC75B3572494841D008B4FBB /* Recommendation.swift */,
 				FC6A0B2824F7800400053DF7 /* RecommendationsListItem.swift */,
 			);
 			path = Recommendations;
@@ -723,7 +720,6 @@
 				FCE51938224948E400B550C9 /* F4SHoursType.swift in Sources */,
 				FC8F957D233BA6710027BE02 /* MockAnalyticsAndDebugging.swift in Sources */,
 				FCE5193E22494CED00B550C9 /* F4SJsonValue.swift in Sources */,
-				FC75B3582494841D008B4FBB /* Recommendation.swift in Sources */,
 				FCE5192F2249482A00B550C9 /* F4SCalendarMonth.swift in Sources */,
 				FC9EE07F2482264D00CCE8CC /* WorkfinderVersionCheckerProtocol.swift in Sources */,
 				FCFDCE5824599278006BA3AC /* PreferredDestinations.swift in Sources */,
