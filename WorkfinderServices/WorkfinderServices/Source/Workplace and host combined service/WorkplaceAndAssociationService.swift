@@ -10,7 +10,7 @@ public class WorkplaceAndAssociationService {
     let locationService: LocationServiceProtocol
     let companyService: CompanyServiceProtocol
     
-    var recommendation: Recommendation?
+    var recommendation: RecommendationsListItem?
     public internal (set) var associationJson: AssociationJson?
     var companyLocationJson: CompanyLocationJson?
     var companyJson: CompanyJson?
@@ -66,7 +66,7 @@ public class WorkplaceAndAssociationService {
     func onRecommendationFetched() {
         guard
             let recommendation = recommendation,
-            let associationUuid = recommendation.association else {
+            let associationUuid = recommendation.project?.association?.uuid else {
             let error = WorkfinderError(title: "Invalid recommendation", description: "The recommendation is nil or its association is nil")
             handleError(error)
             return
