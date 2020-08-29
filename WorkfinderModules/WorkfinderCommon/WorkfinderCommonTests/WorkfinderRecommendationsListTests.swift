@@ -2,7 +2,7 @@
 import XCTest
 import WorkfinderCommon
 
-@testable import WorkfinderServices
+@testable import WorkfinderCommon
 
 class WorkfinderRecommendationsListTests: XCTestCase {
     var recommendationItemString: String!
