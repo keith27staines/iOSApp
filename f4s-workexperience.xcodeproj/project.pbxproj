@@ -470,7 +470,7 @@
 				FC04B860233271720034A60E /* Builders */,
 				FCA53B931FE115E1009F6DB0 /* Force app update */,
 				FC2D975A22185D0C00763B06 /* Use Cases */,
-				FC1DFD87222B9CF2001951ED /* Utilities and extensions */,
+				FC1DFD87222B9CF2001951ED /* Utilities */,
 				40E78E441DD32100000A3776 /* SupportingFiles */,
 			);
 			path = "f4s-workexperience";
@@ -689,7 +689,7 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		FC1DFD87222B9CF2001951ED /* Utilities and extensions */ = {
+		FC1DFD87222B9CF2001951ED /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				FC3CD1D9221566F200F91B50 /* Geocoding.swift */,
@@ -698,7 +698,7 @@
 				40E78E9F1DD5E208000A3776 /* LocationHelper.swift */,
 				FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */,
 			);
-			name = "Utilities and extensions";
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 		FC21BE1B220F53EB00A0A389 /* Search button */ = {
