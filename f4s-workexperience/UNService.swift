@@ -23,25 +23,11 @@ class UNService : NSObject {
     }
 
     func authorize() {
-        center.getNotificationSettings { [weak self] (settings) in
-            guard let center = self?.center else { return }
-            switch settings.authorizationStatus {
-            case .notDetermined:
-                center.requestAuthorization(options: [.alert,.badge, .sound]) {_,_ in }
-            case .denied:
-                let settings = URL(string: UIApplication.openSettingsURLString)!
-                UIApplication.shared.open(settings, options: [:], completionHandler: nil)
-            case .authorized, .provisional:
-                break
-            @unknown default:
-                assert(true, "Unexpected authorizations status")
+        center.requestAuthorization(options: [.alert,.badge, .sound]) { isAuthorized, _ in
+            guard isAuthorized else { return }
+            DispatchQueue.main.async {
+                UIApplication.shared.registerForRemoteNotifications()
             }
-        }
-    }
-    
-    func getNotificationSettings(completion: @escaping (UNNotificationSettings) -> Void) {
-        center.getNotificationSettings { settings in
-            completion(settings)
         }
     }
     
@@ -128,6 +114,7 @@ extension UNService : UNUserNotificationCenterDelegate {
     // 1. The application was not previously running but has been instantiated by the user tapping a notification
     // 2. The application was running in the background and the user tapped a notification
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("Remote notification received with app in BACKGROUND: \(#function)")
         let userInfo = response.notification.request.content.userInfo
         handleRemoteNotification(userInfo: userInfo)
         completionHandler()
@@ -135,6 +122,7 @@ extension UNService : UNUserNotificationCenterDelegate {
     
     // This method is called when the app is in the foreground
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        print("Remote notification received with app in FOREGROUND: \(#function)")
         let userInfo = notification.request.content.userInfo
         handleRemoteNotification(userInfo: userInfo)
         completionHandler([.badge, .sound])

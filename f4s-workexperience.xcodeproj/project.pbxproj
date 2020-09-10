@@ -466,7 +466,9 @@
 				FC67711121258448000B0870 /* Assets */,
 				20B128121DDA1A2900CE3F1F /* Config */,
 				40E78E481DD32848000A3776 /* AppDelegate */,
+				FC31F093204D547E009DD526 /* HiddenDebugScreen */,
 				FC04B860233271720034A60E /* Builders */,
+				FCA53B931FE115E1009F6DB0 /* Force app update */,
 				FC2D975A22185D0C00763B06 /* Use Cases */,
 				FC1DFD87222B9CF2001951ED /* Utilities and extensions */,
 				40E78E441DD32100000A3776 /* SupportingFiles */,
@@ -488,19 +490,11 @@
 			isa = PBXGroup;
 			children = (
 				40E78E161DD31A86000A3776 /* AppDelegate.swift */,
+				20D51BE31E27710C003A8358 /* UNService.swift */,
 				FC93DC5723202B8F00F1CE23 /* Config.swift */,
 				FC5336762488CCD700DA3033 /* Local store migrations */,
 			);
 			name = AppDelegate;
-			sourceTree = "<group>";
-		};
-		40E78E4C1DD32893000A3776 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				40E78E9F1DD5E208000A3776 /* LocationHelper.swift */,
-				FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */,
-			);
-			name = Utilities;
 			sourceTree = "<group>";
 		};
 		40E78E4E1DD328A4000A3776 /* Components */ = {
@@ -515,7 +509,6 @@
 			isa = PBXGroup;
 			children = (
 				40E78E521DD3292F000A3776 /* Side menu */,
-				FC1DFD8A222B9EF5001951ED /* Shared */,
 			);
 			name = "Side menu";
 			path = ..;
@@ -699,22 +692,13 @@
 		FC1DFD87222B9CF2001951ED /* Utilities and extensions */ = {
 			isa = PBXGroup;
 			children = (
-				40E78E4C1DD32893000A3776 /* Utilities */,
+				FC3CD1D9221566F200F91B50 /* Geocoding.swift */,
+				20FABFEB1DDDA63600D583E2 /* FileHelper.swift */,
+				40E78E841DD32C3C000A3776 /* ExtensionsHelper.swift */,
+				40E78E9F1DD5E208000A3776 /* LocationHelper.swift */,
+				FC1100691FB36A230055EB9A /* ReachabilityExtension.swift */,
 			);
 			name = "Utilities and extensions";
-			sourceTree = "<group>";
-		};
-		FC1DFD8A222B9EF5001951ED /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				40E78E841DD32C3C000A3776 /* ExtensionsHelper.swift */,
-				20FABFEB1DDDA63600D583E2 /* FileHelper.swift */,
-				20D51BE31E27710C003A8358 /* UNService.swift */,
-				FC3CD1D9221566F200F91B50 /* Geocoding.swift */,
-				FCA53B931FE115E1009F6DB0 /* Force app update */,
-				FC31F093204D547E009DD526 /* HiddenDebugScreen */,
-			);
-			name = Shared;
 			sourceTree = "<group>";
 		};
 		FC21BE1B220F53EB00A0A389 /* Search button */ = {

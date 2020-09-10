@@ -18,7 +18,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     var registrar: RemoteNotificationsRegistrarProtocol
     var launchOptions: [UIApplication.LaunchOptionsKey: Any]? { return injected.launchOptions }
     var shouldAskOperatingSystemToAllowLocation: Bool = false
-    var tabBarCoordinator: TabBarCoordinatorProtocol!
+    var tabBarCoordinator: TabBarCoordinatorProtocol?
     var onboardingCoordinator: OnboardingCoordinatorProtocol?
     let deepLinkDispatcher: DeepLinkDispatcher
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
@@ -66,6 +66,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
             self.startOnboarding()
             if self.launchOptions?[.remoteNotification] != nil {
                 self.startTabBarCoordinator()
+                self.userNotificationService.authorize()
             }
         }
     }
@@ -87,6 +88,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         navigationRouter.dismiss(animated: false, completion: nil)
         removeChildCoordinator(onboardingCoordinator)
         startTabBarCoordinator()
+        userNotificationService.authorize()
     }
     
     private func onUserIsRegistered(userUuid: F4SUUID) {
@@ -97,18 +99,19 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     }
     
     private func startTabBarCoordinator() {
-        tabBarCoordinator = tabBarCoordinatorFactory.makeTabBarCoordinator(
+        let tabBarCoordinator = tabBarCoordinatorFactory.makeTabBarCoordinator(
             parent: self,
             router: navigationRouter,
             inject: injected)
         tabBarCoordinator.shouldAskOperatingSystemToAllowLocation = shouldAskOperatingSystemToAllowLocation
         addChildCoordinator(tabBarCoordinator)
+        self.tabBarCoordinator = tabBarCoordinator
         tabBarCoordinator.start()
     }
     
-    func showApplications() { tabBarCoordinator.showApplications() }
+    func showApplications() { tabBarCoordinator?.showApplications() }
     
-    func showSearch() { tabBarCoordinator.showSearch() }
+    func showSearch() { tabBarCoordinator?.showSearch() }
     
     lazy var recommendationService: RecommendationsServiceProtocol = {
         let service = RecommendationsService(networkConfig: injected.networkConfig)
@@ -189,7 +192,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         }
     }
     
-    func updateBadges() { tabBarCoordinator.updateBadges() }
+    func updateBadges() { tabBarCoordinator?.updateBadges() }
     
     func handleRemoteNotification(userInfo: [AnyHashable : Any]) {
         userNotificationService.handleRemoteNotification(userInfo: userInfo)
