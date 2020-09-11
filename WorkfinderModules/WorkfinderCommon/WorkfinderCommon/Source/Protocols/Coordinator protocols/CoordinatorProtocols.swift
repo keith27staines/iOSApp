@@ -43,6 +43,7 @@ public protocol CompanyCoordinatorParentProtocol : CoreInjectionNavigationCoordi
 public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol {
     func showApplications()
     func showSearch()
+    func navigateToRecommendations()
     func dispatchRecommendationToSearchTab(uuid: F4SUUID)
     func dispatchProjectViewRequest(_ projectUuid: F4SUUID)
     func updateBadges()

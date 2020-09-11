@@ -71,9 +71,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         appCoordinator?.registerDeviceToken(deviceToken)
-        let deviceTokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
-        // deviceTokenString is needed for debugging/testing with push notification app, so it is a good idea to print it out here
-        print("Device token string = \(deviceTokenString)")
     }
     
     func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {

@@ -4,8 +4,7 @@ import UserNotifications
 import WorkfinderCommon
 
 enum NotificationType: String {
-    case message
-    case rating
+    case other
     case recommendation
 }
 
@@ -31,27 +30,6 @@ class UNService : NSObject {
         }
     }
     
-    func alertUserNotificationReceived(notificationData: F4SPushNotificationData) {
-        guard let rootViewCtrl = UIApplication.shared.delegate?.window??.rootViewController else {
-            log.debug("Can't handle notification because there is no root view controller",
-                      functionName: #function, fileName: #file, lineNumber: #line)
-            return
-        }
-        
-        let title: String = notificationData.alertTitle
-        let body: String = notificationData.alertBody
-        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
-        let viewAction: UIAlertAction
-        viewAction = UIAlertAction(title: NSLocalizedString("View", comment: ""), style: .default) { [weak self] (action) in
-            self?.dispatchToBestDestination(notificationData: notificationData)
-        }
-        let alertController = UIAlertController(title: title, message: body, preferredStyle: .alert)
-        alertController.addAction(cancelAction)
-        alertController.addAction(viewAction)
-        let presenter = rootViewCtrl.topMostViewController ?? rootViewCtrl
-        presenter.present(alertController, animated: true) {}
-    }
-    
     func updateTabBarBadgeNumbers() {
         appCoordinator?.updateBadges()
     }
@@ -73,31 +51,22 @@ class UNService : NSObject {
     
     func dispatchToBestDestination(notificationData: F4SPushNotificationData) {
         switch notificationData.type {
-        case NotificationType.message:
-            break
         case NotificationType.recommendation:
             appCoordinator.showRecommendation(uuid: nil)
-        case NotificationType.rating:
-            break
+        case NotificationType.other:
+            appCoordinator.showRecommendation(uuid: nil)
         }
     }
 }
 
 struct F4SPushNotificationData {
-    var alertTitle: String
-    var alertBody: String
     var type: NotificationType
-    var threadUuid: F4SUUID?
     
     init?(userInfo: [AnyHashable:Any]) {
-        guard let aps = userInfo["aps"] as? [AnyHashable: Any] else { return nil }
-        guard let typeString = userInfo["type"] as? String else { return nil }
-        guard let alert = aps["alert"] as? [AnyHashable: Any] else { return nil }
+        guard let _ = userInfo["aps"] as? [AnyHashable: Any] else { return nil }
+        let typeString = userInfo["type"] as? String ?? "other"
         guard let notificationType = NotificationType(rawValue: typeString) else { return nil }
-        self.alertTitle = (alert["title"] as? String) ?? ""
-        self.alertBody = (alert["body"] as? String) ?? ""
         self.type = notificationType
-        self.threadUuid = userInfo["thread_uuid"] as? F4SUUID
     }
     
     func extractNotificationType(userInfo:[AnyHashable: Any]) -> NotificationType? {

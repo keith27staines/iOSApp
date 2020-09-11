@@ -70,6 +70,13 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
             }
         }
     }
+    
+    func registerDeviceToken(_ token: Data) {
+        // deviceTokenString is needed for debugging/testing with push notification app,
+        // so it is a good idea to print it out here
+        let deviceTokenString = token.map { String(format: "%02x", $0) }.joined()
+        print("Device token string = \(deviceTokenString)") 
+    }
         
     func startOnboarding() {
         let onboardingCoordinator = onboardingCoordinatorFactory.makeOnboardingCoordinator(parent: self, navigationRouter: navigationRouter)
@@ -130,11 +137,14 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     }
 
     func showRecommendation(uuid: F4SUUID?) {
-        guard let uuid = uuid else { return }
         guard let tabBarCoordinator = tabBarCoordinator else {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
                 self?.showRecommendation(uuid: uuid)
             }
+            return
+        }
+        guard let uuid = uuid else {
+            tabBarCoordinator.navigateToRecommendations()
             return
         }
         recommendationService.fetchRecommendation(uuid: uuid) { [weak self] (result) in
