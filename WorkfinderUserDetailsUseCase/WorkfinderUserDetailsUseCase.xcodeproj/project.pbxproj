@@ -13,7 +13,6 @@
 		FC93DC20231FBA4400F1CE23 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DC1F231FBA4400F1CE23 /* WorkfinderCommon.framework */; };
 		FC93DC22231FBA4400F1CE23 /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DC21231FBA4400F1CE23 /* WorkfinderCoordinators.framework */; };
 		FC93DC26231FBA4400F1CE23 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DC25231FBA4400F1CE23 /* WorkfinderUI.framework */; };
-		FC93DC3223200B2700F1CE23 /* PushNotificationAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC3023200B2700F1CE23 /* PushNotificationAuthorization.swift */; };
 		FCE8DA8E2320DB5300934E2F /* UserDetails.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCE8DA8D2320DB5300934E2F /* UserDetails.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -39,7 +38,6 @@
 		FC93DC21231FBA4400F1CE23 /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC93DC23231FBA4400F1CE23 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC93DC25231FBA4400F1CE23 /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC93DC3023200B2700F1CE23 /* PushNotificationAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationAuthorization.swift; sourceTree = "<group>"; };
 		FCE8DA8D2320DB5300934E2F /* UserDetails.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = UserDetails.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,7 +105,6 @@
 		FC93DC17231FB9A500F1CE23 /* source */ = {
 			isa = PBXGroup;
 			children = (
-				FC93DC3023200B2700F1CE23 /* PushNotificationAuthorization.swift */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -236,7 +233,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC93DC3223200B2700F1CE23 /* PushNotificationAuthorization.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,7 +436,6 @@
 		FC93DC09231FB92D00F1CE23 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderUserDetailsUseCaseTests/Info.plist;
@@ -459,7 +454,6 @@
 		FC93DC0A231FB92D00F1CE23 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderUserDetailsUseCaseTests/Info.plist;
@@ -571,7 +565,6 @@
 		FC93DC0D231FB94600F1CE23 /* DebugF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderUserDetailsUseCaseTests/Info.plist;
@@ -683,7 +676,6 @@
 		FC93DC10231FB95100F1CE23 /* DebugF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderUserDetailsUseCaseTests/Info.plist;
@@ -788,7 +780,6 @@
 		FC93DC13231FB98A00F1CE23 /* ReleaseF4S */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderUserDetailsUseCaseTests/Info.plist;
@@ -893,7 +884,6 @@
 		FC93DC16231FB99500F1CE23 /* ReleaseF4SLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderUserDetailsUseCaseTests/Info.plist;

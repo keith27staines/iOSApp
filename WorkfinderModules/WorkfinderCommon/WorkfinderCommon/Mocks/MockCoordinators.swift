@@ -7,6 +7,8 @@ public class MockTabBarCoordinator : MockCoreInjectionNavigationCoordinator, Tab
         
     }
     
+    public func navigateToRecommendations() {}
+    
     
     public var shouldAskOperatingSystemToAllowLocation: Bool = false
     

@@ -70,19 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-//        guard let userUuid = masterBuilder.localStore.value(key: LocalStore.Key.userUuid) as? F4SUUID else { return }
-//        let tokenParts = deviceToken.map { data -> String in
-//            return String(format: "%02.2hhx", data)
-//        }
-//        let token = tokenParts.joined()
-//        userService.enablePushNotificationForUser(installationUuid: userUuid, withDeviceToken: token) { [weak self] (result) in
-//            switch result {
-//            case .error(let error):
-//                self?.log.error(error, functionName: #function, fileName: #file, lineNumber: #line)
-//            case .success(_):
-//                self?.log.debug("Notifications enabled on server with token \(token)", functionName: #function, fileName: #file, lineNumber: #line)
-//            }
-//        }
+        appCoordinator?.registerDeviceToken(deviceToken)
     }
     
     func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
@@ -91,6 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // This method handles notifications arriving whether the app was running already or the notification opened the app
     func application(_: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print("Remote notification called: \(#function)")
         DispatchQueue.main.async { [ weak self] in
             self?.appCoordinator.handleRemoteNotification(userInfo: userInfo)
             completionHandler(UIBackgroundFetchResult.newData)
