@@ -36,20 +36,20 @@ class UNService : NSObject {
 
     func handleRemoteNotification(userInfo: [AnyHashable: Any]) {
         updateTabBarBadgeNumbers() // Always take the opportunity to do this if there is UI to show it
-        guard let notificationData = F4SPushNotificationData(userInfo: userInfo) else {
+        guard let notification = PushNotification(userInfo: userInfo) else {
             log.debug("Unrecognised notification. UserInfo: \(userInfo.debugDescription)",
                 functionName: #function, fileName: #file, lineNumber: #line)
             return
         }
         let state = UIApplication.shared.applicationState
         if state == .background  || state == .inactive{
-            dispatchToBestDestination(notificationData: notificationData)
+            dispatchToBestDestination(notificationData: notification)
         } else if state == .active {
             // do nothing
         }
     }
     
-    func dispatchToBestDestination(notificationData: F4SPushNotificationData) {
+    func dispatchToBestDestination(notificationData: PushNotification) {
         switch notificationData.type {
         case NotificationType.recommendation:
             appCoordinator.showRecommendation(uuid: nil)
@@ -59,7 +59,7 @@ class UNService : NSObject {
     }
 }
 
-struct F4SPushNotificationData {
+struct PushNotification {
     var type: NotificationType
     
     init?(userInfo: [AnyHashable:Any]) {
