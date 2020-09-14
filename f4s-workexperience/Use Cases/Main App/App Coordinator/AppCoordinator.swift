@@ -24,6 +24,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     let hostsProvider: HostsProviderProtocol
     let onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol
+    let deviceRegistrar: DeviceRegisteringProtocol
 
     let tabBarCoordinatorFactory: TabbarCoordinatorFactoryProtocol
     var user: Candidate { return injected.userRepository.loadCandidate() }
@@ -35,6 +36,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     public init(registrar: RemoteNotificationsRegistrarProtocol,
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
+                deviceRegistrar: DeviceRegisteringProtocol,
                 companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
                 hostsProvider: HostsProviderProtocol,
                 localStore: LocalStorageProtocol,
@@ -49,7 +51,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         self.companyCoordinatorFactory = companyCoordinatorFactory
         self.hostsProvider = hostsProvider
         self.localStore = localStore
-        
+        self.deviceRegistrar = deviceRegistrar
         self.onboardingCoordinatorFactory = onboardingCoordinatorFactory
         self.tabBarCoordinatorFactory = tabBarCoordinatorFactory
 
@@ -71,13 +73,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         }
     }
     
-    func registerDeviceToken(_ token: Data) {
-        // deviceTokenString is needed for debugging/testing with push notification app,
-        // so it is a good idea to print it out here
-        let deviceTokenString = token.map { String(format: "%02x", $0) }.joined()
-        print("Device token string = \(deviceTokenString)") 
-    }
-        
     func startOnboarding() {
         let onboardingCoordinator = onboardingCoordinatorFactory.makeOnboardingCoordinator(parent: self, navigationRouter: navigationRouter)
         self.onboardingCoordinator = onboardingCoordinator
@@ -206,6 +201,12 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     
     func handleRemoteNotification(userInfo: [AnyHashable : Any]) {
         userNotificationService.handleRemoteNotification(userInfo: userInfo)
+    }
+}
+
+extension AppCoordinator : DeviceRegisteringProtocol {
+    func registerDevice(token: Data) {
+        deviceRegistrar.registerDevice(token: token)
     }
 }
 

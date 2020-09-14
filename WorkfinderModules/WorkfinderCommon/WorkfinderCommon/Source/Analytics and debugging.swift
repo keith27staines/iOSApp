@@ -1,5 +1,9 @@
 import Foundation
 
+public protocol DeviceRegisteringProtocol {
+    func registerDevice(token: Data)
+}
+
 public protocol F4SAnalyticsAndDebugging : class, F4SAnalytics & F4SDebugging {
     func updateIdentity()
 }

@@ -99,6 +99,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         return  AppCoordinator(registrar: registrar,
                               navigationRouter: rootNavigationRouter,
                               inject: injection,
+                              deviceRegistrar: log,
                               companyCoordinatorFactory: companyCoordinatorFactory,
                               hostsProvider: hostsProvider,
                               localStore: localStore,
@@ -115,7 +116,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
                                          interestsRepository: interestsRepository)
     }()
     
-    var log: F4SAnalyticsAndDebugging
+    var log: F4SLog
     
     lazy var localStore: LocalStorageProtocol = {
         return LocalStore()

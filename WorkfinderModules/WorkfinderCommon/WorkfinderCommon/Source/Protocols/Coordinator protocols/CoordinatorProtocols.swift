@@ -18,7 +18,7 @@ public protocol AppCoordinatorProtocol : Coordinating {
     func updateBadges()
     func handleRemoteNotification(userInfo: [AnyHashable: Any])
     func handleDeepLinkUrl(url: URL) -> Bool
-    func registerDeviceToken(_ token: Data)
+    func registerDevice(token: Data)
 }
 
 public protocol RemoteNotificationsRegistrarProtocol {

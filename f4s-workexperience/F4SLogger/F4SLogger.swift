@@ -68,6 +68,17 @@ public class F4SLog : F4SAnalyticsAndDebugging {
     }
 }
 
+extension F4SLog : DeviceRegisteringProtocol  {
+    public func registerDevice(token: Data) {
+        // Mixpanel is currently the origin of push notifications
+        mixPanel.people.addPushDeviceToken(token)
+        
+        // deviceTokenString is needed for debugging/testing with push notification app,
+        // so it is a good idea to print it out here
+        print("Device token string = \(token.map { String(format: "%02x", $0) }.joined())")
+    }
+}
+
 extension F4SLog : F4SAnalytics {
     
     public func track(_ event: TrackingEvent) {
