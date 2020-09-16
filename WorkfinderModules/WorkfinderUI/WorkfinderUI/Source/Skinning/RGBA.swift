@@ -30,7 +30,7 @@ public struct RGBA : Codable {
         return UIColor(red: red, green: green, blue: blue, alpha: alpha)
     }
 
-    public let alphaForDisabledState: CGFloat = 0.6
+    public var alphaForDisabledState: CGFloat = 0.6
     
     public var disabledColor: RGBA {
         return RGBA.lightGray
