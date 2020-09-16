@@ -50,10 +50,19 @@ class PlacesSearchDataGetter : Searchable {
             completion([])
             return
         }
-        placesClient.autocompleteQuery(searchString, bounds: nil, filter: autoCompleteFilter, callback: { [weak self]  results, error in
+        placesClient.findAutocompletePredictions(
+            fromQuery: searchString,
+            filter: autoCompleteFilter,
+            sessionToken: nil
+        ) { [weak self]  results, error in
             guard let strongSelf = self else { return }
             strongSelf.predictions = results ?? []
             completion(strongSelf.predictions)
-        })
+        }
+//        placesClient.autocompleteQuery(searchString, bounds: nil, filter: autoCompleteFilter, callback: { [weak self]  results, error in
+//            guard let strongSelf = self else { return }
+//            strongSelf.predictions = results ?? []
+//            completion(strongSelf.predictions)
+//        })
     }
 }
